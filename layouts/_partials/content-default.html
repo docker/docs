@@ -12,6 +12,9 @@
   {{ partialCached "pagemeta.html" . . }}
   <hr />
 </div>
+{{ if site.Params.apiPrototype }}
+  {{ partial "api-prototype/manual-link.html" . }}
+{{ end }}
 {{ .Content }}
 {{- if and (eq .Type "guides") (not .IsSection) (ne .CurrentSection .FirstSection) -}}
   {{- with .PrevInSection -}}

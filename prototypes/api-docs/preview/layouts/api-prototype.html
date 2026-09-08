@@ -1,0 +1,359 @@
+{{ define "left" }}
+  {{ partial "sidebar/mainnav.html" . }}
+  {{ partial "api-prototype/navigation.html" . }}
+{{ end }}
+{{ define "main" }}
+  {{ $style := resources.Get "api-prototype/prototype.css" | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+  <script src="/api-prototype/prototype.js" defer></script>
+  <article class="api-preview" data-api-view="{{ .Params.view }}">
+    <div class="api-draft">
+      <span class="api-draft-label">Prototype</span>
+      <span
+        >Converted specifications contain assumptions pending product
+        review.</span
+      >
+    </div>
+    {{ $data := index hugo.Data "api-prototype" }}
+    {{ $api := dict }}{{ range $data.apis }}
+      {{ if eq .id $.Params.apiID }}{{ $api = . }}{{ end }}
+    {{ end }}
+    {{ if eq .Params.view "catalog" }}
+      <p class="api-eyebrow">Developer reference</p>
+      <h1>Docker APIs</h1>
+      <p class="api-lead">
+        Build with Docker, from your local daemon to hosted services.
+      </p>
+      <p>
+        Choose an API to find connection guidance, operations, and data models.
+      </p>
+      <div class="api-cards">
+        {{ range $data.apis }}
+          <a class="api-card" href="{{ .url }}"
+            ><span class="api-label"
+              >{{ if eq .connection "unix" }}
+                Your daemon
+              {{ else }}
+                Hosted service
+              {{ end }}</span
+            >
+            <h2>{{ .title }}</h2>
+            <p>API {{ .version }} · {{ len .operations }} operations</p>
+            <span>Explore reference →</span></a
+          >
+        {{ end }}
+      </div>
+    {{ else }}
+      <nav class="api-crumbs" aria-label="API breadcrumb">
+        <a href="/api-prototype/">APIs</a> /
+        <a href="{{ $api.url }}">{{ $api.title }}</a> /
+        <span>API {{ $api.version }}</span>
+      </nav>
+      <div class="api-tools">
+        <label
+          >API version
+          <select data-api-version>
+            {{ range $data.apis }}
+              {{ if eq .product $api.product }}
+                <option
+                  value="{{ .url }}"
+                  {{ if eq .id $api.id }}selected{{ end }}
+                >
+                  {{ .version }}
+                </option>
+              {{ end }}
+            {{ end }}
+          </select></label
+        ><a href="{{ ref . $api.manual }}">Product manual</a
+        ><a href="/api-prototype/sources/{{ $api.id }}/source.zip"
+          >Download source package</a
+        ><a href="{{ partial "utils/markdown-url.html" . }}">Markdown</a>
+      </div>
+      <meta
+        data-pagefind-meta="title:{{ .Title }} — {{ $api.title }} API {{ $api.version }}"
+      />
+      {{ if eq .Params.view "overview" }}
+        <p class="api-eyebrow">
+          {{ if eq $api.connection "unix" }}
+            User-operated API
+          {{ else }}
+            Hosted API
+          {{ end }}
+        </p>
+        <h1>{{ $api.title }} API</h1>
+        <p class="api-lead">
+          API {{ $api.version }} · {{ len $api.operations }} operations ·
+          {{ len $api.schemas }} named schemas
+        </p>
+        <section class="api-connection">
+          <h2>Connect and authenticate</h2>
+          <p>{{ $api.auth }}</p>
+          {{ if eq $api.connection "unix" }}
+            <pre><code>curl --unix-socket /var/run/docker.sock http://localhost/v{{ $api.version }}/version</code></pre>
+          {{ else }}
+            {{ range $api.servers }}<code>{{ .url }}</code>{{ end }}
+          {{ end }}{{ range $api.guides }}
+            <p><a href="{{ ref $ . }}">Related setup guidance ↗</a></p>
+          {{ end }}
+        </section>
+        <details>
+          <summary>API overview and workflows</summary>
+          <div class="prose dark:prose-invert">
+            {{ partial "api-prototype/description.html" (dict "text" $api.description "api" $api) | markdownify }}
+          </div>
+          {{ range $api.tags }}
+            <section id="tag-{{ .name | urlize }}">
+              <h3>{{ .summary }}</h3>
+              <div class="prose dark:prose-invert">
+                {{ partial "api-prototype/description.html" (dict "text" .description "api" $api) | markdownify }}
+              </div>
+            </section>
+          {{ end }}
+        </details>
+        <h2>Operations</h2>
+        <label class="api-filter-label"
+          >Filter operations
+          <input
+            type="search"
+            placeholder="Method, path, or operation name"
+            data-api-filter
+        /></label>
+        <div class="api-operation-list">
+          {{ range $api.operations }}
+            <a class="api-operation-row" href="{{ .url }}" data-api-filter-item
+              ><span class="api-method" data-method="{{ .method }}"
+                >{{ .method }}</span
+              ><code>{{ partial "api-prototype/path.html" .path }}</code
+              ><span>{{ .summary }}</span></a
+            >
+          {{ end }}
+        </div>
+        <h2>Schemas</h2>
+        <div class="api-schema-links">
+          {{ range $api.schemas }}<a href="{{ .url }}">{{ .name }}</a>{{ end }}
+        </div>
+        <details class="api-review">
+          <summary>
+            Source review status ·
+            {{ len ($api.diagnostics | default slice) }}
+            recorded exceptions
+          </summary>
+          <p>
+            Spec digest: <code>{{ $api.digest }}</code>. Owner:
+            {{ $api.owner }}.
+          </p>
+          <p>
+            <a href="/api-prototype/sources/{{ $api.id }}/migration.json"
+              >Complete migration ledger</a
+            >
+            ·
+            <a href="/api-prototype/sources/{{ $api.id }}/exceptions.json"
+              >Exact validation exceptions</a
+            >
+          </p>
+          {{ range $api.assumptions }}
+            <p><code>{{ .pointer }}</code>: {{ .rationale }}</p>
+          {{ end }}
+        </details>
+      {{ else if eq .Params.view "operation" }}
+        {{ range $api.operations }}
+          {{ if eq .id $.Params.operationID }}
+            <h1>{{ .summary }}</h1>
+            <div class="api-signature">
+              <span class="api-method" data-method="{{ .method }}"
+                >{{ .method }}</span
+              ><code>{{ partial "api-prototype/path.html" .path }}</code
+              >{{ if .deprecated }}
+                <span>Deprecated</span>
+              {{ end }}
+            </div>
+            <div class="api-operation-grid">
+              <div class="api-reading">
+                <div class="api-description prose dark:prose-invert">
+                  {{ partial "api-prototype/description.html" (dict "text" .description "api" $api) | markdownify }}
+                </div>
+                <h2>Connection and access</h2>
+                <p>{{ $api.auth }}</p>
+                {{ range .servers }}
+                  <p>
+                    <code>{{ .url }}</code>{{ with .description }}
+                      —
+                      {{ . }}
+                    {{ end }}
+                  </p>
+                {{ end }}
+                {{ if not .security }}
+                  <p>
+                    No HTTP authentication requirement is declared for this
+                    operation. Transport access controls can still apply.
+                  </p>
+                {{ else }}
+                  <p>
+                    Use one of these alternatives. Requirements within an
+                    alternative apply together.
+                  </p>
+                  <ul>
+                    {{ range .security }}
+                      <li>
+                        {{ $first := true }}{{ range $name, $scopes := . }}
+                          {{ if not $first }}
+                            AND
+                          {{ end }}{{ $first = false }}<code>{{ $name }}</code>{{ with $scopes }}
+                            ({{ delimit . ", " }})
+                          {{ end }}
+                        {{ end }}{{ if $first }}Anonymous access{{ end }}
+                      </li>
+                    {{ end }}
+                  </ul>
+                {{ end }}
+                <h2>Parameters</h2>
+                {{ if not .parameters }}
+                  <p>No parameters are declared.</p>
+                {{ end }}
+                {{ range .parameters }}
+                  <section class="api-field" data-api-parameter="{{ .name }}">
+                    <h3>
+                      <code>{{ .name }}</code>
+                      <small>{{ .in }}</small>
+                      {{ if .required }}
+                        <small class="api-required">Required</small>
+                      {{ end }}
+                    </h3>
+                    <div class="prose dark:prose-invert">
+                      {{ partial "api-prototype/description.html" (dict "text" .description "api" $api) | markdownify }}
+                    </div>
+                    {{ if isset . "schema" }}
+                      {{ partial "api-prototype/schema.html" (dict "schema" .schema "api" $api "depth" 0) }}
+                    {{ end }}{{ with .content }}
+                      <pre><code>{{ . | jsonify (dict "indent" "  ") }}</code></pre>
+                    {{ end }}{{ with .style }}
+                      <p>Serialization: <code>{{ . }}</code></p>
+                    {{ end }}
+                  </section>
+                {{ end }}
+                <h2>Request and responses</h2>
+                <label
+                  >Media type
+                  <select data-api-media-select>
+                    <option value="">All media types</option>
+                    {{ $media := slice }}{{ range .variants }}
+                      {{ if .media }}
+                        {{ $media = $media | append .media }}
+                      {{ end }}
+                    {{ end }}{{ range ($media | uniq | sort) }}
+                      <option value="{{ . }}">{{ . }}</option>
+                    {{ end }}
+                  </select></label
+                >
+                {{ range $i, $v := .variants }}
+                  <section
+                    class="api-variant"
+                    data-api-variant="{{ $v.pointer }}"
+                    data-api-media="{{ $v.media }}"
+                  >
+                    <h3>
+                      <span>{{ $v.direction | humanize }}</span>
+                      {{ with $v.status }}
+                        <code class="api-status">{{ . }}</code>
+                      {{ end }}
+                    </h3>
+                    <div class="prose dark:prose-invert">
+                      {{ partial "api-prototype/description.html" (dict "text" $v.description "api" $api) | markdownify }}
+                    </div>
+                    {{ if $v.media }}
+                      <p class="api-media"><code>{{ $v.media }}</code></p>
+                    {{ else }}
+                      <p>No response content is declared.</p>
+                    {{ end }}
+                    {{ with $v.headers }}
+                      <h4>Headers</h4>
+                      {{ range $name,$header := . }}
+                        <div class="api-field">
+                          <code>{{ $name }}</code>
+                          <p>{{ $header.description }}</p>
+                          <pre><code>{{ $header | jsonify (dict "indent" "  ") }}</code></pre>
+                        </div>
+                      {{ end }}
+                    {{ end }}
+                    {{ if isset $v "schema" }}
+                      {{ partial "api-prototype/schema.html" (dict "schema" $v.schema "api" $api "depth" 0) }}
+                    {{ end }}
+                    {{ if isset $v "itemSchema" }}
+                      <h4>Stream item</h4>
+                      {{ partial "api-prototype/schema.html" (dict "schema" $v.itemSchema "api" $api "depth" 0) }}
+                    {{ end }}
+                    {{ if $v.examples }}
+                      <div data-api-examples>
+                        {{ if gt (len $v.examples) 1 }}
+                          <label
+                            >Example
+                            <select data-api-example-select>
+                              {{ range $j,$ex := $v.examples }}
+                                <option value="{{ $j }}">{{ $ex.name }}</option>
+                              {{ end }}
+                            </select></label
+                          >
+                        {{ end }}{{ range $j,$ex := $v.examples }}
+                          <div data-api-example="{{ $j }}">
+                            <h4>{{ $ex.name }}</h4>
+                            {{ if eq $ex.valid false }}
+                              <p>
+                                Source example does not satisfy its schema;
+                                owner review is required.
+                              </p>
+                            {{ end }}
+                            <pre><code>{{ $ex.value | jsonify (dict "indent" "  ") }}</code></pre>
+                          </div>
+                        {{ end }}
+                      </div>
+                    {{ end }}
+                  </section>
+                {{ end }}
+                <h2>Referenced schemas</h2>
+                {{ range .references }}
+                  {{ if .url }}
+                    <p><a href="{{ .url }}">{{ .ref }}</a></p>
+                  {{ end }}
+                {{ end }}
+                <details>
+                  <summary>Complete operation contract</summary>
+                  <pre><code>{{ .raw | jsonify (dict "indent" "  ") }}</code></pre>
+                </details>
+              </div>
+              <aside class="api-request">
+                <div class="api-request-heading">
+                  <h2>Example request</h2>
+                  <span>Shell</span>
+                </div>
+                <p>
+                  Replace placeholders and supply the required credentials or
+                  request body.
+                </p>
+                <pre><code data-api-copy-source>{{ .curl }}</code></pre>
+                <button type="button" data-api-copy>Copy request</button
+                >{{ range .curlNotes }}<p>{{ . }}</p>{{ end }}
+                <p>
+                  <a href="/api-prototype/sources/{{ $api.id }}/openapi.yaml"
+                    >View source specification</a
+                  >
+                </p>
+                <details class="api-source-details">
+                  <summary>Source location</summary>
+                  <p>Line {{ .line }}<br /><code>{{ .pointer }}</code></p>
+                </details>
+              </aside>
+            </div>
+          {{ end }}
+        {{ end }}
+      {{ else if eq .Params.view "schema" }}
+        {{ range $api.schemas }}
+          {{ if eq .name $.Params.schemaName }}
+            <p class="api-eyebrow">Schema</p>
+            <h1>{{ .name }}</h1>
+            {{ partial "api-prototype/schema.html" (dict "schema" .schema "api" $api "depth" 0) }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </article>
+{{ end }}

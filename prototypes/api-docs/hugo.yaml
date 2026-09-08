@@ -1,0 +1,31 @@
+enableGitInfo: false
+params:
+  apiPrototype: true
+module:
+  mounts:
+    - source: content
+      target: content
+    - source: layouts
+      target: layouts
+    - source: static
+      target: static
+    - source: data
+      target: data
+    - source: assets
+      target: assets
+    - source: node_modules/heroicons/24/solid
+      target: assets/icons
+    - source: node_modules/highlight.js/styles/github-dark.css
+      target: assets/css/highlight-github-dark.css
+    - source: prototypes/api-docs/preview/content
+      target: content
+    - source: prototypes/api-docs/preview/layouts
+      target: layouts
+    - source: prototypes/api-docs/preview/static
+      target: static
+    - source: prototypes/api-docs/preview/assets
+      target: assets
+    - source: tmp/api-prototype/data
+      target: data
+    - source: tmp/api-prototype/static
+      target: static

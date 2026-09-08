@@ -1,0 +1,29 @@
+{{ $data := index hugo.Data "api-prototype" }}
+<nav class="api-nav" aria-label="API navigation">
+  <a class="api-nav-back" href="/api-prototype/">← API catalog</a
+  >{{ range $data.apis }}
+    {{ if eq .id $.Params.apiID }}
+      <h2>{{ .title }}</h2>
+      <p class="api-nav-version">API {{ .version }}</p>
+      <a href="{{ .url }}">Overview and access</a>{{ range .tags }}
+        {{ if eq .kind "nav" }}
+          {{ $tag := .name }}
+          <h3>{{ .summary }}</h3>
+          {{ range (index (where $data.apis "id" $.Params.apiID) 0).operations }}
+            {{ if eq (index .tags 0) $tag }}
+              <a
+                class="api-nav-operation"
+                href="{{ .url }}"
+                {{ if eq .id $.Params.operationID }}
+                  aria-current="page" id="sidebar-current-page"
+                {{ end }}
+                ><small data-method="{{ .method }}">{{ .method }}</small
+                ><span>{{ .summary }}</span></a
+              >
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+</nav>

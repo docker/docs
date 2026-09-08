@@ -1,0 +1,12 @@
+{{- $data := index hugo.Data "api-prototype" -}}
+{{- if ne (int $data.modelVersion) 1 }}{{ errorf "Unsupported API presentation model version" }}{{ end -}}
+{{- .AddPage (dict "path" "." "kind" "section" "title" "Docker APIs" "description" "Explore Docker HTTP APIs, connection requirements, and versioned references." "layout" "api-prototype" "params" (dict "view" "catalog" "keywords" (slice "API" "HTTP" "OpenAPI"))) -}}
+{{- range $api := $data.apis -}}
+  {{- $.AddPage (dict "path" $api.id "kind" "section" "title" (printf "%s API %v" $api.title $api.version) "description" (printf "%s HTTP API reference, version %v." $api.title $api.version) "layout" "api-prototype" "params" (dict "view" "overview" "apiID" $api.id "keywords" (slice "API" $api.product))) -}}
+  {{- range $op := $api.operations -}}
+    {{- $.AddPage (dict "path" (printf "%s/operations/%s" $api.id (crypto.SHA256 $op.id)) "url" $op.url "title" $op.summary "description" (printf "%s %s — %s API %v." $op.method $op.path $api.title $api.version) "layout" "api-prototype" "params" (dict "view" "operation" "apiID" $api.id "operationID" $op.id "keywords" (slice $op.method $op.path $op.id))) -}}
+  {{- end -}}
+  {{- range $schema := $api.schemas -}}
+    {{- $.AddPage (dict "path" (printf "%s/schemas/%s" $api.id (crypto.SHA256 $schema.name)) "url" $schema.url "title" $schema.name "description" (printf "%s schema in %s API %v." $schema.name $api.title $api.version) "layout" "api-prototype" "params" (dict "view" "schema" "apiID" $api.id "schemaName" $schema.name "keywords" (slice "schema" $schema.name))) -}}
+  {{- end -}}
+{{- end -}}

@@ -173,3 +173,29 @@ EOT
 FROM scratch AS release
 COPY --from=build /project/public /
 COPY --from=pagefind /pagefind /pagefind
+
+# The published musl search binary assumes 4 KB pages. This opt-in rebuild
+# supports the 16 KB and 64 KB Linux hosts used for local prototypes as well.
+FROM rust:1.94-alpine3.23 AS api-prototype-search
+RUN apk add --no-cache build-base
+ENV JEMALLOC_SYS_WITH_LG_PAGE=16
+RUN cargo install pagefind --version 1.5.2 --locked --root /out
+
+# api-prototype-build is opt-in and never feeds the production release target.
+FROM build-base AS api-prototype-build
+RUN apk add --no-cache bash diffutils
+ENV GOWORK=off
+COPY --from=api-prototype-search /out/bin/pagefind /usr/local/bin/prototype-pagefind
+ENV PAGEFIND_BIN=/usr/local/bin/prototype-pagefind
+ARG API_PROTOTYPE_URL="http://localhost:1314"
+ENV API_PROTOTYPE_URL=${API_PROTOTYPE_URL}
+RUN --mount=type=cache,target=/root/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    --mount=type=cache,target=/root/.npm \
+    ./hack/api-docs/run.sh build
+
+FROM scratch AS api-prototype
+COPY --from=api-prototype-build /project/tmp/api-prototype/site /site
+COPY --from=api-prototype-build /project/tmp/api-prototype/reports /reports
+COPY --from=api-prototype-build /project/tmp/api-prototype/validation.json /validation.json
+COPY --from=api-prototype-build /project/tmp/api-prototype/timing.json /timing.json

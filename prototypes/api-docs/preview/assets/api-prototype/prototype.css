@@ -1,0 +1,595 @@
+/* Scoped reference tokens inherit Docker's palette and installed typefaces. */
+.api-preview,
+.api-nav {
+  --api-text: var(--color-gray-800, #2c333f);
+  --api-muted: var(--color-gray-600, #566581);
+  --api-line: var(--color-gray-100, #e7eaef);
+  --api-surface: var(--color-background-light, #f9f9fa);
+  --api-paper: #fff;
+  --api-link: var(--color-blue-600, #0d4df2);
+  --api-selected: var(--color-blue-50, #f6f8fe);
+  --api-mono: "Roboto Mono", ui-monospace, monospace;
+  color: var(--api-text);
+}
+.dark .api-preview,
+.dark .api-nav {
+  --api-text: var(--color-gray-100, #e7eaef);
+  --api-muted: var(--color-gray-300, #a9b4c6);
+  --api-line: var(--color-gray-800, #2c333f);
+  --api-surface: var(--color-gray-900, #1e2129);
+  --api-paper: var(--color-background-dark, #10151b);
+  --api-link: var(--color-blue-300, #7ba4f4);
+  --api-selected: #17243b;
+  color-scheme: dark;
+}
+.api-preview {
+  max-width: 1440px;
+  margin: auto;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.api-preview h1 {
+  font-size: 32px;
+  font-weight: 550;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin: 28px 0 20px;
+  text-wrap: balance;
+}
+.api-preview h2 {
+  font-size: 20px;
+  font-weight: 550;
+  letter-spacing: -0.015em;
+  line-height: 1.4;
+  margin: 36px 0 14px;
+}
+.api-preview h3,
+.api-preview h4 {
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 1.5;
+  margin: 20px 0 8px;
+}
+.api-preview p {
+  margin: 10px 0;
+  max-width: 72ch;
+}
+.api-preview .prose {
+  color: var(--api-text);
+  font-size: inherit;
+  line-height: inherit;
+  max-width: 72ch;
+}
+.api-preview .prose > :first-child {
+  margin-top: 0;
+}
+.api-preview .prose > :last-child {
+  margin-bottom: 0;
+}
+.api-preview .prose li > p {
+  margin: 6px 0;
+}
+.api-preview a,
+.api-nav a {
+  color: var(--api-link);
+  text-underline-offset: 3px;
+}
+.api-preview a:hover {
+  text-decoration: underline;
+}
+.api-preview :is(a, button, input, select, summary):focus-visible,
+.api-nav a:focus-visible {
+  outline: 2px solid var(--api-link);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+.api-preview code {
+  font-family: var(--api-mono);
+  font-size: 13px;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+.api-preview .prose code::before,
+.api-preview .prose code::after {
+  content: none;
+}
+.api-preview pre {
+  background: var(--api-surface);
+  color: var(--api-text);
+  border: 1px solid var(--api-line);
+  padding: 18px 20px;
+  border-radius: 6px;
+  overflow: auto;
+  font-family: var(--api-mono);
+  font-size: 13px;
+  line-height: 1.75;
+  max-height: 34rem;
+  margin: 14px 0;
+  tab-size: 2;
+}
+.api-preview pre code {
+  font: inherit;
+  padding: 0;
+  background: none;
+  color: inherit;
+}
+.api-preview summary {
+  cursor: pointer;
+  padding: 6px 0;
+  font-size: 13px;
+  color: var(--api-muted);
+}
+.api-preview summary::marker {
+  color: var(--api-muted);
+  font-size: 10px;
+}
+.api-preview summary:hover {
+  color: var(--api-link);
+}
+.api-draft {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  color: var(--api-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--api-line);
+}
+.api-draft-label {
+  flex: none;
+  font-weight: 550;
+  color: var(--api-text);
+}
+.api-eyebrow,
+.api-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--api-muted);
+}
+.api-preview .api-eyebrow {
+  margin-top: 28px;
+  margin-bottom: -16px;
+}
+.api-lead {
+  font-size: 17px;
+  color: var(--api-muted);
+}
+.api-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 32px 0;
+}
+.api-card {
+  display: block;
+  border: 1px solid var(--api-line);
+  border-radius: 10px;
+  padding: 26px;
+}
+.api-card:hover {
+  background: var(--api-selected);
+  border-color: var(--api-link);
+  text-decoration: none !important;
+}
+.api-card h2 {
+  margin: 12px 0;
+  color: var(--api-text);
+}
+.api-card p {
+  color: var(--api-muted);
+}
+.api-card > span:last-child {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.api-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  color: var(--api-muted);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.api-crumbs a {
+  color: var(--api-muted);
+}
+.api-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: center;
+  font-size: 13px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--api-line);
+}
+.api-tools > label {
+  margin-right: auto;
+}
+.api-preview label {
+  font-size: 13px;
+  color: var(--api-muted);
+}
+.api-preview select,
+.api-preview input {
+  border: 1px solid var(--api-line);
+  border-radius: 6px;
+  background: var(--api-paper);
+  padding: 8px 10px;
+  color: var(--api-text);
+  font: inherit;
+  font-size: 14px;
+  max-width: 100%;
+}
+.api-preview select {
+  margin-left: 8px;
+}
+.api-preview input::placeholder {
+  color: var(--api-muted);
+}
+.api-connection {
+  padding: 4px 24px 18px;
+  background: var(--api-surface);
+  border-radius: 6px;
+  margin: 28px 0;
+}
+.api-connection h2 {
+  margin-top: 18px;
+}
+.api-filter-label {
+  display: block;
+  margin: 16px 0 24px;
+}
+.api-filter-label input {
+  display: block;
+  width: 100%;
+  max-width: 36rem;
+  margin: 8px 0;
+}
+.api-operation-row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+  padding: 16px 8px;
+  border-bottom: 1px solid var(--api-line);
+  font-size: 14px;
+}
+.api-operation-row > span:last-child {
+  color: var(--api-muted);
+}
+.api-operation-row:hover {
+  background: var(--api-selected);
+  text-decoration: none !important;
+}
+.api-method {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 650;
+  background: var(--api-selected);
+  color: var(--api-link);
+  border-radius: 4px;
+  padding: 4px 8px;
+  line-height: 1.5;
+  white-space: nowrap;
+  width: fit-content;
+  flex-shrink: 0;
+}
+.api-method[data-method="POST"] {
+  background: #ebf9ee;
+  color: #216e4b;
+}
+.api-method[data-method="DELETE"] {
+  background: #fff0ef;
+  color: #ad3039;
+}
+.api-method[data-method="PATCH"],
+.api-method[data-method="PUT"] {
+  background: #fff5e0;
+  color: #865514;
+}
+.dark .api-method[data-method="POST"] {
+  background: #173728;
+  color: #a9e5bd;
+}
+.dark .api-method[data-method="DELETE"] {
+  background: #3d2229;
+  color: #f5b6b6;
+}
+.dark .api-method[data-method="PATCH"],
+.dark .api-method[data-method="PUT"] {
+  background: #392e1c;
+  color: #edcd96;
+}
+.api-signature {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  background: var(--api-surface);
+  border: 1px solid var(--api-line);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 0 0 28px;
+}
+.api-signature code {
+  font-size: 14px;
+}
+.api-operation-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+.api-reading {
+  min-width: 0;
+}
+.api-description {
+  margin-bottom: 32px;
+}
+.api-description:empty {
+  display: none;
+}
+.api-request {
+  position: sticky;
+  top: 88px;
+  max-height: calc(100dvh - 112px);
+  overflow: auto;
+  min-width: 0;
+  border: 1px solid var(--api-line);
+  border-radius: 8px;
+  padding: 20px;
+  background: var(--api-surface);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.api-request-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.api-request-heading h2 {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: 0;
+}
+.api-request-heading > span {
+  color: var(--api-muted);
+  font-size: 12px;
+}
+.api-request > p {
+  color: var(--api-muted);
+  margin: 12px 0;
+}
+.api-request pre {
+  background: var(--api-paper);
+  padding: 16px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.api-request pre code {
+  word-break: break-all;
+}
+.api-request button {
+  border: 1px solid var(--api-line);
+  background: var(--api-paper);
+  color: var(--api-text);
+  padding: 7px 12px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.api-request button:hover {
+  border-color: var(--api-link);
+  color: var(--api-link);
+}
+.api-source-details {
+  border-top: 1px solid var(--api-line);
+  margin-top: 16px;
+  padding-top: 8px;
+}
+.api-field {
+  border-top: 1px solid var(--api-line);
+  padding: 16px 0;
+  margin: 0;
+}
+.api-field h3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: baseline;
+  margin: 0 0 10px;
+}
+.api-field h3 code,
+.api-field > summary code {
+  color: var(--api-text);
+  font-weight: 500;
+}
+.api-field small {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--api-muted);
+}
+.api-field .api-required {
+  color: var(--api-text);
+  font-size: 12px;
+}
+.api-field .api-field {
+  border-top: 0;
+  border-left: 1px solid var(--api-line);
+  margin: 12px 0 0 4px;
+  padding: 0 0 0 16px;
+}
+.api-type,
+.api-ref,
+.api-constraints {
+  font-size: 13px;
+  color: var(--api-muted);
+}
+.api-variant {
+  border-top: 1px solid var(--api-line);
+  margin-top: 24px;
+  padding-top: 20px;
+}
+.api-variant > h3 {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-top: 0;
+}
+.api-status {
+  border: 1px solid var(--api-line);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.api-media {
+  color: var(--api-muted);
+}
+.api-schema-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  font-size: 14px;
+}
+.api-review {
+  font-size: 13px;
+  background: var(--api-surface);
+  padding: 16px 20px;
+  margin: 32px 0;
+  border-radius: 6px;
+}
+.api-nav {
+  padding: 20px 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.api-nav a {
+  display: block;
+  padding: 7px 10px;
+  margin: 2px 0;
+  color: var(--api-muted);
+}
+.api-nav a:hover {
+  color: var(--api-link);
+  background: var(--api-selected);
+}
+.api-nav a[aria-current="page"] {
+  background: var(--api-selected);
+  color: var(--api-link);
+  font-weight: 500;
+  box-shadow: inset 2px 0 var(--api-link);
+}
+.api-nav h2 {
+  font-size: 16px;
+  font-weight: 550;
+  margin: 24px 10px 4px;
+}
+.api-nav .api-nav-version {
+  color: var(--api-muted);
+  font-size: 13px;
+  margin: 0 10px 16px;
+}
+.api-nav h3 {
+  font-size: 13px;
+  font-weight: 550;
+  margin: 26px 10px 8px;
+}
+.api-nav .api-nav-operation {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 8px;
+  align-items: baseline;
+}
+.api-nav small {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--api-link);
+}
+.api-nav small[data-method="POST"] {
+  color: #216e4b;
+}
+.api-nav small[data-method="DELETE"] {
+  color: #ad3039;
+}
+.api-nav small[data-method="PATCH"],
+.api-nav small[data-method="PUT"] {
+  color: #865514;
+}
+.dark .api-nav small[data-method="POST"] {
+  color: #a9e5bd;
+}
+.dark .api-nav small[data-method="DELETE"] {
+  color: #f5b6b6;
+}
+.dark .api-nav small[data-method="PATCH"],
+.dark .api-nav small[data-method="PUT"] {
+  color: #edcd96;
+}
+.api-nav .api-nav-back {
+  font-size: 13px;
+  color: var(--api-link);
+}
+.api-preview [hidden] {
+  display: none !important;
+}
+.api-preview[data-api-view="schema"] > .prose {
+  margin-bottom: 24px;
+}
+.api-preview[data-api-view="schema"] > .api-field {
+  max-width: 80ch;
+}
+@media (max-width: 1199px) {
+  .api-operation-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .api-request {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    grid-row: 1;
+  }
+}
+@media (max-width: 767px) {
+  main > div:has(> .api-preview) {
+    padding: 24px 20px;
+  }
+  .api-cards {
+    grid-template-columns: 1fr;
+  }
+  .api-preview h1 {
+    font-size: 28px;
+  }
+  .api-operation-row {
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 6px 12px;
+  }
+  .api-operation-row > span:last-child {
+    grid-column: 2;
+  }
+  .api-tools {
+    gap: 14px 20px;
+  }
+  .api-tools > label {
+    flex-basis: 100%;
+  }
+  .api-draft {
+    align-items: start;
+    font-size: 12px;
+  }
+  .api-signature {
+    padding: 12px;
+    gap: 10px;
+  }
+  .api-signature code {
+    font-size: 13px;
+  }
+  .api-request {
+    padding: 16px;
+  }
+}

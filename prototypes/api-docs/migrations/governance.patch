@@ -1,0 +1,929 @@
+--- original/governance.yaml
++++ converted/governance.yaml
+@@ -1,5 +1,4 @@
+-openapi: "3.1.0"
+-
++openapi: 3.2.0
+ info:
+   title: Docker AI Governance Policy API
+   version: "1"
+@@ -30,30 +29,30 @@
+   contact:
+     name: Docker
+     url: https://www.docker.com/products/ai-governance/
+-
+ tags:
+   - name: policies
+     description: Policy lifecycle management
++    summary: policies
++    kind: nav
+   - name: rules
+     description: Rule management within an allowlist policy
+-
++    summary: rules
++    kind: nav
+ servers:
+   - url: https://hub.docker.com/v2
+-
+ security:
+   - bearerAuth: []
+-
+ paths:
+   /orgs/{org_name}/governance/policies:
+     parameters:
+       - $ref: "#/components/parameters/OrgName"
+     get:
+       operationId: listPolicies
+-      tags: [policies]
++      tags:
++        - policies
+       summary: List policies
+-      description: >
+-        Returns a shallow summary of all policies for the org.
+-        The rule set is not included; use GetPolicy to fetch the full object.
++      description: |
++        Returns a shallow summary of all policies for the org. The rule set is not included; use GetPolicy to fetch the full object.
+       responses:
+         "200":
+           description: Object wrapping an array of policy summaries under `data`. Rule sets are not included; use GetPolicy to fetch a full policy.
+@@ -61,7 +60,8 @@
+             application/json:
+               schema:
+                 type: object
+-                required: [data]
++                required:
++                  - data
+                 properties:
+                   data:
+                     type: array
+@@ -72,12 +72,13 @@
+                   value:
+                     data:
+                       - id: pol_06evsmp24r1pg71cm8500546pkbn
+-                        name: "Security Research — hardened"
++                        name: Security Research — hardened
+                         org: my-org
+                         scope:
+-                          teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
+-                        created_at: "2026-04-22T00:00:00Z"
+-                        updated_at: "2026-04-22T00:00:00Z"
++                          teams:
++                            - d290f1ee-6c54-4b01-90e6-d701748f0851
++                        created_at: 2026-04-22T00:00:00Z
++                        updated_at: 2026-04-22T00:00:00Z
+                         type: allowlist_v0
+         "401":
+           $ref: "#/components/responses/Unauthenticated"
+@@ -87,14 +88,13 @@
+           $ref: "#/components/responses/NotFound"
+         "500":
+           $ref: "#/components/responses/InternalError"
+-
+     post:
+       operationId: createPolicy
+-      tags: [policies]
++      tags:
++        - policies
+       summary: Create policy
+-      description: >
+-        Creates a new policy with an empty rule set. Rules are added separately
+-        via the rules sub-resource.
++      description: |
++        Creates a new policy with an empty rule set. Rules are added separately via the rules sub-resource.
+       requestBody:
+         description: Policy name and optional scope.
+         required: true
+@@ -105,9 +105,10 @@
+             examples:
+               default:
+                 value:
+-                  name: "Security Research — hardened"
++                  name: Security Research — hardened
+                   scope:
+-                    teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
++                    teams:
++                      - d290f1ee-6c54-4b01-90e6-d701748f0851
+       responses:
+         "201":
+           description: Policy created. Returns the new policy without its rule set.
+@@ -119,12 +120,13 @@
+                 default:
+                   value:
+                     id: pol_06evsmp24r1pg71cm8500546pkbn
+-                    name: "Security Research — hardened"
++                    name: Security Research — hardened
+                     org: my-org
+                     scope:
+-                      teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
+-                    created_at: "2026-04-22T00:00:00Z"
+-                    updated_at: "2026-04-22T00:00:00Z"
++                      teams:
++                        - d290f1ee-6c54-4b01-90e6-d701748f0851
++                    created_at: 2026-04-22T00:00:00Z
++                    updated_at: 2026-04-22T00:00:00Z
+         "400":
+           $ref: "#/components/responses/InvalidArgument"
+         "401":
+@@ -137,14 +139,14 @@
+           $ref: "#/components/responses/Conflict"
+         "500":
+           $ref: "#/components/responses/InternalError"
+-
+   /orgs/{org_name}/governance/policies/{policy_id}:
+     parameters:
+       - $ref: "#/components/parameters/OrgName"
+       - $ref: "#/components/parameters/PolicyID"
+     get:
+       operationId: getPolicy
+-      tags: [policies]
++      tags:
++        - policies
+       summary: Get policy
+       description: Returns the full policy including its `allowlist_v0` rule set.
+       responses:
+@@ -158,19 +160,24 @@
+                 default:
+                   value:
+                     id: pol_06evsmp24r1pg71cm8500546pkbn
+-                    name: "Security Research — hardened"
++                    name: Security Research — hardened
+                     org: my-org
+                     scope:
+-                      teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
+-                    created_at: "2026-04-22T00:00:00Z"
+-                    updated_at: "2026-04-22T00:00:00Z"
++                      teams:
++                        - d290f1ee-6c54-4b01-90e6-d701748f0851
++                    created_at: 2026-04-22T00:00:00Z
++                    updated_at: 2026-04-22T00:00:00Z
+                     allowlist_v0:
+                       domain: network
+                       rules:
+                         - id: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+                           name: allow research mirrors
+-                          actions: [connect:tcp, connect:udp]
+-                          resources: [research.mitre.org, cve.mitre.org]
++                          actions:
++                            - connect:tcp
++                            - connect:udp
++                          resources:
++                            - research.mitre.org
++                            - cve.mitre.org
+                           decision: allow
+         "401":
+           $ref: "#/components/responses/Unauthenticated"
+@@ -182,7 +189,8 @@
+           $ref: "#/components/responses/InternalError"
+     patch:
+       operationId: updatePolicy
+-      tags: [policies]
++      tags:
++        - policies
+       summary: Update policy
+       description: |
+         Partially updates a policy's metadata. Only fields present in the
+@@ -211,7 +219,8 @@
+                 summary: Restrict to a team
+                 value:
+                   scope:
+-                    teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
++                    teams:
++                      - d290f1ee-6c54-4b01-90e6-d701748f0851
+       responses:
+         "200":
+           description: Policy updated, returns old and new states.
+@@ -224,35 +233,45 @@
+                   value:
+                     old:
+                       id: pol_06evsmp24r1pg71cm8500546pkbn
+-                      name: "Security Research — hardened"
++                      name: Security Research — hardened
+                       org: my-org
+                       scope:
+-                        teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
+-                      created_at: "2026-04-22T00:00:00Z"
+-                      updated_at: "2026-04-22T00:00:00Z"
++                        teams:
++                          - d290f1ee-6c54-4b01-90e6-d701748f0851
++                      created_at: 2026-04-22T00:00:00Z
++                      updated_at: 2026-04-22T00:00:00Z
+                       allowlist_v0:
+                         domain: network
+                         rules:
+                           - id: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+                             name: allow research mirrors
+-                            actions: [connect:tcp, connect:udp]
+-                            resources: [research.mitre.org, cve.mitre.org]
++                            actions:
++                              - connect:tcp
++                              - connect:udp
++                            resources:
++                              - research.mitre.org
++                              - cve.mitre.org
+                             decision: allow
+                     new:
+                       id: pol_06evsmp24r1pg71cm8500546pkbn
+                       name: Security Research
+                       org: my-org
+                       scope:
+-                        teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
+-                      created_at: "2026-04-22T00:00:00Z"
+-                      updated_at: "2026-04-22T10:00:00Z"
++                        teams:
++                          - d290f1ee-6c54-4b01-90e6-d701748f0851
++                      created_at: 2026-04-22T00:00:00Z
++                      updated_at: 2026-04-22T10:00:00Z
+                       allowlist_v0:
+                         domain: network
+                         rules:
+                           - id: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+                             name: allow research mirrors
+-                            actions: [connect:tcp, connect:udp]
+-                            resources: [research.mitre.org, cve.mitre.org]
++                            actions:
++                              - connect:tcp
++                              - connect:udp
++                            resources:
++                              - research.mitre.org
++                              - cve.mitre.org
+                             decision: allow
+         "400":
+           $ref: "#/components/responses/InvalidArgument"
+@@ -268,7 +287,8 @@
+           $ref: "#/components/responses/InternalError"
+     delete:
+       operationId: deletePolicy
+-      tags: [policies]
++      tags:
++        - policies
+       summary: Delete policy
+       description: |
+         Permanently deletes the policy and its rule set. Returns the deleted
+@@ -286,19 +306,24 @@
+                   value:
+                     deleted:
+                       id: pol_06evsmp24r1pg71cm8500546pkbn
+-                      name: "Security Research — hardened"
++                      name: Security Research — hardened
+                       org: my-org
+                       scope:
+-                        teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
+-                      created_at: "2026-04-22T00:00:00Z"
+-                      updated_at: "2026-04-22T00:00:00Z"
++                        teams:
++                          - d290f1ee-6c54-4b01-90e6-d701748f0851
++                      created_at: 2026-04-22T00:00:00Z
++                      updated_at: 2026-04-22T00:00:00Z
+                       allowlist_v0:
+                         domain: network
+                         rules:
+                           - id: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+                             name: allow research mirrors
+-                            actions: [connect:tcp, connect:udp]
+-                            resources: [research.mitre.org, cve.mitre.org]
++                            actions:
++                              - connect:tcp
++                              - connect:udp
++                            resources:
++                              - research.mitre.org
++                              - cve.mitre.org
+                             decision: allow
+         "401":
+           $ref: "#/components/responses/Unauthenticated"
+@@ -308,14 +333,14 @@
+           $ref: "#/components/responses/NotFound"
+         "500":
+           $ref: "#/components/responses/InternalError"
+-
+   /orgs/{org_name}/governance/policies/{policy_id}/rules:
+     parameters:
+       - $ref: "#/components/parameters/OrgName"
+       - $ref: "#/components/parameters/PolicyID"
+     post:
+       operationId: createRule
+-      tags: [rules]
++      tags:
++        - rules
+       summary: Create rule
+       description: |
+         Adds a rule to the policy's rule set. All rules in a policy must share
+@@ -344,15 +369,22 @@
+                 summary: Network rule
+                 value:
+                   name: allow research mirrors
+-                  actions: [connect:tcp, connect:udp]
+-                  resources: [research.mitre.org, cve.mitre.org]
++                  actions:
++                    - connect:tcp
++                    - connect:udp
++                  resources:
++                    - research.mitre.org
++                    - cve.mitre.org
+                   decision: allow
+               filesystem:
+                 summary: Filesystem rule
+                 value:
+                   name: allow data directory
+-                  actions: [read, write]
+-                  resources: [/data]
++                  actions:
++                    - read
++                    - write
++                  resources:
++                    - /data
+                   decision: allow
+       responses:
+         "201":
+@@ -367,16 +399,23 @@
+                   value:
+                     id: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+                     name: allow research mirrors
+-                    actions: [connect:tcp, connect:udp]
+-                    resources: [research.mitre.org, cve.mitre.org]
++                    actions:
++                      - connect:tcp
++                      - connect:udp
++                    resources:
++                      - research.mitre.org
++                      - cve.mitre.org
+                     decision: allow
+                 filesystem:
+                   summary: Filesystem rule
+                   value:
+                     id: rule_07fwtnr0kn2qetl1b9olfbyz8kob
+                     name: allow data directory
+-                    actions: [read, write]
+-                    resources: [/data]
++                    actions:
++                      - read
++                      - write
++                    resources:
++                      - /data
+                     decision: allow
+         "400":
+           $ref: "#/components/responses/InvalidArgument"
+@@ -390,7 +429,6 @@
+           $ref: "#/components/responses/Conflict"
+         "500":
+           $ref: "#/components/responses/InternalError"
+-
+   /orgs/{org_name}/governance/policies/{policy_id}/rules/{rule_id}:
+     parameters:
+       - $ref: "#/components/parameters/OrgName"
+@@ -398,7 +436,8 @@
+       - $ref: "#/components/parameters/RuleID"
+     patch:
+       operationId: updateRule
+-      tags: [rules]
++      tags:
++        - rules
+       summary: Update rule
+       description: |
+         Partially updates a rule. Only fields present in the request body are
+@@ -418,7 +457,8 @@
+             examples:
+               default:
+                 value:
+-                  resources: ["research.mitre.org"]
++                  resources:
++                    - research.mitre.org
+       responses:
+         "200":
+           description: Rule updated, returns old and new states.
+@@ -432,14 +472,21 @@
+                     old:
+                       id: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+                       name: allow research mirrors
+-                      actions: [connect:tcp, connect:udp]
+-                      resources: [research.mitre.org, cve.mitre.org]
++                      actions:
++                        - connect:tcp
++                        - connect:udp
++                      resources:
++                        - research.mitre.org
++                        - cve.mitre.org
+                       decision: allow
+                     new:
+                       id: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+                       name: allow research mirrors
+-                      actions: [connect:tcp, connect:udp]
+-                      resources: [research.mitre.org]
++                      actions:
++                        - connect:tcp
++                        - connect:udp
++                      resources:
++                        - research.mitre.org
+                       decision: allow
+         "400":
+           $ref: "#/components/responses/InvalidArgument"
+@@ -453,10 +500,10 @@
+           $ref: "#/components/responses/Conflict"
+         "500":
+           $ref: "#/components/responses/InternalError"
+-
+     delete:
+       operationId: deleteRule
+-      tags: [rules]
++      tags:
++        - rules
+       summary: Delete rule
+       description: |
+         Deletes a rule from the policy. Returns the deleted rule. Changes may
+@@ -474,8 +521,12 @@
+                     deleted:
+                       id: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+                       name: allow research mirrors
+-                      actions: [connect:tcp, connect:udp]
+-                      resources: [research.mitre.org, cve.mitre.org]
++                      actions:
++                        - connect:tcp
++                        - connect:udp
++                      resources:
++                        - research.mitre.org
++                        - cve.mitre.org
+                       decision: allow
+         "401":
+           $ref: "#/components/responses/Unauthenticated"
+@@ -485,7 +536,6 @@
+           $ref: "#/components/responses/NotFound"
+         "500":
+           $ref: "#/components/responses/InternalError"
+-
+ components:
+   securitySchemes:
+     bearerAuth:
+@@ -498,7 +548,7 @@
+         `Authorization: Bearer <token>` header. Tokens expire after a short
+         period; request a fresh one when you receive a `401`.
+ 
+-        The `password` field of the token request accepts any of the following
++        The `secret` field of the token request accepts any of the following
+         credential types:
+ 
+         | Type | Format | Notes |
+@@ -512,7 +562,6 @@
+ 
+         See [Docker Hub authentication](https://docs.docker.com/reference/api/hub/latest/#tag/authentication-api/operation/AuthCreateAccessToken)
+         for full details.
+-
+   parameters:
+     OrgName:
+       name: org_name
+@@ -524,7 +573,6 @@
+       examples:
+         default:
+           value: my-org
+-
+     PolicyID:
+       name: policy_id
+       in: path
+@@ -535,7 +583,6 @@
+       examples:
+         default:
+           value: pol_06evsmp24r1pg71cm8500546pkbn
+-
+     RuleID:
+       name: rule_id
+       in: path
+@@ -546,12 +593,18 @@
+       examples:
+         default:
+           value: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+-
+   schemas:
+     PolicySummary:
+       type: object
+       description: Shallow policy representation returned by ListPolicies. Excludes the rule set.
+-      required: [id, name, org, scope, created_at, updated_at, type]
++      required:
++        - id
++        - name
++        - org
++        - scope
++        - created_at
++        - updated_at
++        - type
+       properties:
+         id:
+           type: string
+@@ -561,7 +614,7 @@
+           type: string
+           description: Human-readable label, unique within the organization.
+           examples:
+-            - "Security Research — hardened"
++            - Security Research — hardened
+         org:
+           type: string
+           examples:
+@@ -572,24 +625,28 @@
+           type: string
+           format: date-time
+           examples:
+-            - "2026-04-22T00:00:00Z"
++            - 2026-04-22T00:00:00Z
+         updated_at:
+           type: string
+           format: date-time
+           examples:
+-            - "2026-04-22T00:00:00Z"
++            - 2026-04-22T00:00:00Z
+         type:
+           type: string
+-          description: >
+-            Identifies the rule-set format. Always `allowlist_v0`, corresponding
+-            to the `allowlist_v0` property on the full Policy object.
++          description: |
++            Identifies the rule-set format. Always `allowlist_v0`, corresponding to the `allowlist_v0` property on the full Policy object.
+           examples:
+             - allowlist_v0
+-
+     Policy:
+       type: object
+       description: Full policy representation including the allowlist rule set.
+-      required: [id, name, org, scope, created_at, updated_at]
++      required:
++        - id
++        - name
++        - org
++        - scope
++        - created_at
++        - updated_at
+       properties:
+         id:
+           type: string
+@@ -599,7 +656,7 @@
+           type: string
+           description: Human-readable label, unique within the organization.
+           examples:
+-            - "Security Research — hardened"
++            - Security Research — hardened
+         org:
+           type: string
+           examples:
+@@ -610,15 +667,14 @@
+           type: string
+           format: date-time
+           examples:
+-            - "2026-04-22T00:00:00Z"
++            - 2026-04-22T00:00:00Z
+         updated_at:
+           type: string
+           format: date-time
+           examples:
+-            - "2026-04-22T00:00:00Z"
++            - 2026-04-22T00:00:00Z
+         allowlist_v0:
+           $ref: "#/components/schemas/AllowlistV0"
+-
+     Scope:
+       type: object
+       description: Restricts the policy to specific teams. An empty or absent list means the policy applies org-wide.
+@@ -629,8 +685,7 @@
+             type: string
+           description: Team UUIDs the policy applies to. Each must be a valid team in the org.
+           examples:
+-            - ["d290f1ee-6c54-4b01-90e6-d701748f0851"]
+-
++            - - d290f1ee-6c54-4b01-90e6-d701748f0851
+     AllowlistV0:
+       type: object
+       description: |
+@@ -638,28 +693,31 @@
+         Policy when `PolicySummary.type` is `allowlist_v0`; omitted when the
+         policy has no rules yet. All rules in an allowlist share the same domain.
+         All rules are evaluated on every request: `deny` always wins over `allow`.
+-      required: [rules]
++      required:
++        - rules
+       properties:
+         domain:
+           type: string
+-          description: >
+-            The access-control domain shared by all rules in this allowlist.
+-            Derived from rule actions: network actions (`connect:tcp`,
+-            `connect:udp`) produce `network`; filesystem actions (`read`,
+-            `write`) produce `filesystem`. Present when `rules` is non-empty;
+-            absent when the allowlist has no rules.
+-          enum: [network, filesystem]
++          description: |
++            The access-control domain shared by all rules in this allowlist. Derived from rule actions: network actions (`connect:tcp`, `connect:udp`) produce `network`; filesystem actions (`read`, `write`) produce `filesystem`. Present when `rules` is non-empty; absent when the allowlist has no rules.
++          enum:
++            - network
++            - filesystem
+           examples:
+             - network
+         rules:
+           type: array
+           items:
+             $ref: "#/components/schemas/Rule"
+-
+     Rule:
+       type: object
+       description: A single allow or deny rule within an allowlist policy.
+-      required: [id, name, actions, resources, decision]
++      required:
++        - id
++        - name
++        - actions
++        - resources
++        - decision
+       properties:
+         id:
+           type: string
+@@ -676,24 +734,27 @@
+           $ref: "#/components/schemas/RuleResources"
+         decision:
+           $ref: "#/components/schemas/RuleDecision"
+-
+     CreatePolicyRequest:
+       type: object
+       description: Fields required to create a new policy.
+-      required: [name]
++      required:
++        - name
+       properties:
+         name:
+           type: string
+           description: Policy name, unique within the organization.
+           examples:
+-            - "Security Research — hardened"
++            - Security Research — hardened
+         scope:
+           $ref: "#/components/schemas/Scope"
+-
+     CreateRuleRequest:
+       type: object
+       description: Fields required to create a new rule within a policy's rule set.
+-      required: [name, actions, resources, decision]
++      required:
++        - name
++        - actions
++        - resources
++        - decision
+       properties:
+         name:
+           type: string
+@@ -706,7 +767,6 @@
+           $ref: "#/components/schemas/RuleResources"
+         decision:
+           $ref: "#/components/schemas/RuleDecision"
+-
+     UpdateRuleRequest:
+       type: object
+       description: Partial update. Only fields present in the body are updated; absent fields are left unchanged.
+@@ -722,31 +782,29 @@
+           $ref: "#/components/schemas/RuleResources"
+         decision:
+           $ref: "#/components/schemas/RuleDecision"
+-
+     UpdateRuleResponse:
+       type: object
+       description: The rule state before and after the update.
+-      required: [old, new]
++      required:
++        - old
++        - new
+       properties:
+         old:
+           $ref: "#/components/schemas/Rule"
+         new:
+           $ref: "#/components/schemas/Rule"
+-
+     DeleteRuleResponse:
+       type: object
+       description: The deleted rule.
+-      required: [deleted]
++      required:
++        - deleted
+       properties:
+         deleted:
+           $ref: "#/components/schemas/Rule"
+-
+     UpdatePolicyRequest:
+       type: object
+-      description: >
+-        Partial update of a policy's metadata. Only fields present in the body
+-        are updated; the rule set is not modified here. At least one field must
+-        be present.
++      description: |
++        Partial update of a policy's metadata. Only fields present in the body are updated; the rule set is not modified here. At least one field must be present.
+       properties:
+         name:
+           type: string
+@@ -756,105 +814,90 @@
+             - Security Research
+         scope:
+           $ref: "#/components/schemas/ScopePatch"
+-
+     ScopePatch:
+       type: object
+-      description: >
+-        Per-sub-field patch of a policy's scope. An omitted sub-field is left
+-        unchanged; a present list replaces that dimension, and an empty list
+-        clears it (making the policy org-wide for that dimension).
++      description: |
++        Per-sub-field patch of a policy's scope. An omitted sub-field is left unchanged; a present list replaces that dimension, and an empty list clears it (making the policy org-wide for that dimension).
+       properties:
+         teams:
+           type: array
+           items:
+             type: string
+           examples:
+-            - ["d290f1ee-6c54-4b01-90e6-d701748f0851"]
+-
++            - - d290f1ee-6c54-4b01-90e6-d701748f0851
+     UpdatePolicyResponse:
+       type: object
+       description: The full policy before and after the update.
+-      required: [old, new]
++      required:
++        - old
++        - new
+       properties:
+         old:
+           $ref: "#/components/schemas/Policy"
+         new:
+           $ref: "#/components/schemas/Policy"
+-
+     DeletePolicyResponse:
+       type: object
+       description: The full deleted policy.
+-      required: [deleted]
++      required:
++        - deleted
+       properties:
+         deleted:
+           $ref: "#/components/schemas/Policy"
+-
+     RuleActions:
+       type: array
+       items:
+         type: string
+-        enum: [connect:tcp, connect:udp, read, write]
++        enum:
++          - connect:tcp
++          - connect:udp
++          - read
++          - write
+       minItems: 1
+-      description: >
+-        Network actions: `connect:tcp`, `connect:udp`.
+-        Filesystem actions: `read`, `write`.
+-        All actions in a rule must belong to the same domain; mixing network
+-        and filesystem actions in one rule is rejected.
++      description: |
++        Network actions: `connect:tcp`, `connect:udp`. Filesystem actions: `read`, `write`. All actions in a rule must belong to the same domain; mixing network and filesystem actions in one rule is rejected.
+       examples:
+-        - ["connect:tcp", "connect:udp"]
+-
++        - - connect:tcp
++          - connect:udp
+     RuleResources:
+       type: array
+       items:
+         type: string
+       minItems: 1
+-      description: >
+-        Network domain: hostnames (for example, `example.com`), wildcard
+-        subdomains (`*.example.com` or `**.example.com`), hostnames with port
+-        (for example, `example.com:443`), or CIDRs in IPv4 or IPv6 notation
+-        (for example, `10.0.0.0/8` or `2001:db8::/32`). Filesystem domain:
+-        paths (for example, `/data`); `*` matches within one path segment,
+-        `**` matches recursively (for example, `/data/**`).
++      description: |
++        Network domain: hostnames (for example, `example.com`), wildcard subdomains (`*.example.com` or `**.example.com`), hostnames with port (for example, `example.com:443`), or CIDRs in IPv4 or IPv6 notation (for example, `10.0.0.0/8` or `2001:db8::/32`). Filesystem domain: paths (for example, `/data`); `*` matches within one path segment, `**` matches recursively (for example, `/data/**`).
+       examples:
+-        - ["research.mitre.org", "cve.mitre.org"]
+-
++        - - research.mitre.org
++          - cve.mitre.org
+     RuleDecision:
+       type: string
+-      enum: [allow, deny]
+-      description: >
+-        Outcome applied when this rule matches a request. `deny` always
+-        wins: if any rule in the policy matches with `decision: deny`, the
+-        request is denied even if other rules match with `decision: allow`.
++      enum:
++        - allow
++        - deny
++      description: |
++        Outcome applied when this rule matches a request. `deny` always wins: if any rule in the policy matches with `decision: deny`, the request is denied even if other rules match with `decision: allow`.
+       examples:
+         - allow
+-
+     Error:
+       type: object
+       description: Error envelope returned on all non-2xx responses.
+-      required: [error]
++      required:
++        - error
+       properties:
+         error:
+           type: object
+           description: Error detail.
+-          required: [code, message]
++          required:
++            - code
++            - message
+           examples:
+             - code: not_found
+               message: policy not found
+           properties:
+             code:
+               type: string
+-              description: >
+-                Machine-readable error code. `not_found`: the requested resource
+-                does not exist, the org does not exist, or the caller is not a
+-                member of the org (the org's existence is not revealed to callers
+-                who cannot access it). `conflict`: a resource with the same name
+-                already exists. `invalid_argument`: the request body is malformed
+-                or fails validation. `unauthenticated`: missing or invalid
+-                credentials. `permission_denied`: the org is not entitled to use
+-                governance. `limit_exceeded`: the org has reached its maximum
+-                number of policies, or the policy has reached its maximum number
+-                of rules. `unimplemented`: the endpoint or feature is not yet
+-                available. `internal`: unexpected server error.
++              description: |
++                Machine-readable error code. `not_found`: the requested resource does not exist, the org does not exist, or the caller is not a member of the org (the org's existence is not revealed to callers who cannot access it). `conflict`: a resource with the same name already exists. `invalid_argument`: the request body is malformed or fails validation. `unauthenticated`: missing or invalid credentials. `permission_denied`: the org is not entitled to use governance. `limit_exceeded`: the org has reached its maximum number of policies, or the policy has reached its maximum number of rules. `unimplemented`: the endpoint or feature is not yet available. `internal`: unexpected server error.
+               enum:
+                 - not_found
+                 - conflict
+@@ -866,7 +909,6 @@
+                 - internal
+             message:
+               type: string
+-
+   responses:
+     NotFound:
+       description: Not found
+@@ -880,7 +922,6 @@
+                 error:
+                   code: not_found
+                   message: policy not found
+-
+     Conflict:
+       description: Conflict
+       content:
+@@ -893,7 +934,6 @@
+                 error:
+                   code: conflict
+                   message: policy name already in use
+-
+     InvalidArgument:
+       description: Bad request
+       content:
+@@ -905,8 +945,7 @@
+               value:
+                 error:
+                   code: invalid_argument
+-                  message: "name is required"
+-
++                  message: name is required
+     Unauthenticated:
+       description: Missing or invalid credentials
+       content:
+@@ -919,11 +958,9 @@
+                 error:
+                   code: unauthenticated
+                   message: unauthenticated
+-
+     PermissionDenied:
+-      description: >
+-        Caller lacks the required permission for this org, or the org is not
+-        entitled to use governance.
++      description: |
++        Caller lacks the required permission for this org, or the org is not entitled to use governance.
+       content:
+         application/json:
+           schema:
+@@ -934,14 +971,9 @@
+                 error:
+                   code: permission_denied
+                   message: permission denied
+-
+     Forbidden:
+-      description: >
+-        Caller lacks the required permission for this org, the org is not
+-        entitled to use governance (`permission_denied`), or a creation limit
+-        has been reached (`limit_exceeded`): the org already has the maximum
+-        number of policies, or the policy already has the maximum number of
+-        rules.
++      description: |
++        Caller lacks the required permission for this org, the org is not entitled to use governance (`permission_denied`), or a creation limit has been reached (`limit_exceeded`): the org already has the maximum number of policies, or the policy already has the maximum number of rules.
+       content:
+         application/json:
+           schema:
+@@ -957,7 +989,6 @@
+                 error:
+                   code: limit_exceeded
+                   message: organization has reached the maximum of 100 policies
+-
+     InternalError:
+       description: Internal server error
+       content:
+@@ -970,3 +1001,4 @@
+                 error:
+                   code: internal
+                   message: internal error
++jsonSchemaDialect: https://spec.openapis.org/oas/3.1/dialect/base

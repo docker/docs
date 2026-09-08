@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-08",
+  "result": "pass",
+  "browserChecks": 13,
+  "layoutChecks": {
+    "pages": [
+      "hub/operations/VerifyRepositoryImmutableTags/",
+      "engine-1.56/operations/ContainerCreate/",
+      "engine-1.56/schemas/EndpointSettings/",
+      "registry/",
+      "dvp/"
+    ],
+    "widths": [390, 768, 1024, 1280, 1440],
+    "themes": ["light", "dark"],
+    "combinations": 50,
+    "horizontalPageOverflow": false,
+    "minimumCodeFontPixels": 13
+  },
+  "keyboardFocus": "pass",
+  "sourceDisclosure": "pass",
+  "shortViewportRequestPanelFocus": "pass"
+}
