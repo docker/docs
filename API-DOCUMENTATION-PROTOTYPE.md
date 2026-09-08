@@ -238,9 +238,10 @@ The preview replaces only the latest reference page for each API:
 
 The catalog occupies `/reference/api/`. Operation and schema pages sit below
 these reference URLs. The Reference sidebar retains its other groups, API
-supporting guides, SDK pages, and Engine version history. API branches use the
-method-colored operation navigation instead of listing schema pages among
-operations.
+supporting guides, SDK pages, and Engine version history. The catalog uses the normal Reference sidebar. Inside an API, a local sidebar
+shows a back link to the catalog, API identity, overview, and method-colored
+operations grouped by topic. The global header, breadcrumbs, version selector,
+and product manual link remain available.
 
 Engine v1.55–v1.40 retain their original pages and ReDoc renderer. The version
 selector links to those references. The converted 1.55 comparison fixture remains
@@ -259,13 +260,14 @@ external inbound links and host-specific redirect behavior.
 
 The preview configuration excludes only the replaced Markdown pages from its
 content mount. Authoritative specifications and historical files remain unchanged.
-A preview-only sidebar template selects the tailored operation navigation. Its
+A preview-only sidebar template treats generated API overviews as navigation
+endpoints instead of expanding their operation and schema pages. Its
 shared navigation logic must stay aligned with the site template until production
 integration replaces this overlay.
 
 Verification for this integration passed: 746 HTML/Markdown pairs, all 16 legacy
 Engine pages retaining ReDoc, prototype page aliases, Go tests, snapshot replay,
-and 14 browser checks. A default build retained the existing latest references
+and 16 browser checks. A default build retained the existing latest references
 and excluded the prototype catalog.
 
 ![Reference sidebar integration](prototypes/api-docs/evidence/reference-sidebar.png)

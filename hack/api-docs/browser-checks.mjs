@@ -22,6 +22,21 @@ export default async function verify(page, base = "http://localhost:1314") {
     "Latest alias preserves the operation fragment",
   );
   await page.goto(base + "/reference/api/engine/version/v1.56/");
+  assert(
+    (await page.locator(".api-nav").count()) === 1 &&
+      (await page.locator("nav.navbar-font").count()) === 0,
+    "API references use local operation navigation",
+  );
+  const back = page.getByRole("link", { name: "← API catalog", exact: true });
+  await back.focus();
+  await page.keyboard.press("Enter");
+  await page.waitForURL("**/reference/api/");
+  assert(
+    (await page.locator("nav.navbar-font").count()) === 1 &&
+      (await page.locator(".api-nav").count()) === 0,
+    "Back link returns to the catalog and Reference navigation",
+  );
+  await page.goto(base + "/reference/api/engine/version/v1.56/");
   await page.locator("[data-api-filter]").fill("archive");
   const visible = page.locator("[data-api-filter-item]:visible");
   assert(

@@ -6,7 +6,11 @@
 {{ end }}
 {{ define "left" }}
   {{ partial "sidebar/mainnav.html" . }}
-  {{ partial "sidebar/sections.html" . }}
+  {{ if eq .Params.view "catalog" }}
+    {{ partial "sidebar/sections.html" . }}
+  {{ else }}
+    {{ partial "api-prototype/navigation.html" . }}
+  {{ end }}
 {{ end }}
 {{ define "main" }}
   <article class="api-preview" data-api-view="{{ .Params.view }}">

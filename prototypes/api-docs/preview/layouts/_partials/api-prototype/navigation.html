@@ -1,8 +1,18 @@
 {{ $data := index hugo.Data "api-prototype" }}
 <nav class="api-nav" aria-label="API navigation">
+  <a class="api-nav-back" href="/reference/api/">← API catalog</a>
   {{ range $data.apis }}
     {{ if eq .id $.Params.apiID }}
-      <a href="{{ .url }}">Overview and access</a>{{ range .tags }}
+      <h2>{{ .title }}</h2>
+      <p class="api-nav-version">API {{ .version }}</p>
+      <a
+        href="{{ .url }}"
+        {{ if eq $.Params.view "overview" }}
+          aria-current="page" id="sidebar-current-page"
+        {{ end }}
+        >Overview</a
+      >
+      {{ range .tags }}
         {{ if eq .kind "nav" }}
           {{ $tag := .name }}
           <h3>{{ .summary }}</h3>
