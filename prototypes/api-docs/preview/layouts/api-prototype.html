@@ -87,6 +87,26 @@
           API {{ $api.version }} · {{ len $api.operations }} operations ·
           {{ len $api.schemas }} named schemas
         </p>
+        <section class="api-overview" aria-labelledby="api-overview-title">
+          <h2 id="api-overview-title">Overview</h2>
+          <div class="prose dark:prose-invert">
+            {{ partial "api-prototype/description.html" (dict "text" $api.description "api" $api) | markdownify }}
+          </div>
+          {{ $overviewTags := partial "api-prototype/overview-tags.html" $api }}
+          {{ range $api.tags }}
+            {{ if not (in $overviewTags .) }}
+              <span id="tag-{{ .name | urlize }}"></span>
+            {{ end }}
+          {{ end }}
+          {{ range $overviewTags }}
+            <section id="tag-{{ .name | urlize }}">
+              <h3>{{ .summary }}</h3>
+              <div class="prose dark:prose-invert">
+                {{ partial "api-prototype/description.html" (dict "text" .description "api" $api) | markdownify }}
+              </div>
+            </section>
+          {{ end }}
+        </section>
         <section class="api-connection">
           <h2>Connect and authenticate</h2>
           <p>{{ $api.auth }}</p>
@@ -98,20 +118,6 @@
             <p><a href="{{ ref $ . }}">Related setup guidance ↗</a></p>
           {{ end }}
         </section>
-        <details>
-          <summary>API overview and workflows</summary>
-          <div class="prose dark:prose-invert">
-            {{ partial "api-prototype/description.html" (dict "text" $api.description "api" $api) | markdownify }}
-          </div>
-          {{ range $api.tags }}
-            <section id="tag-{{ .name | urlize }}">
-              <h3>{{ .summary }}</h3>
-              <div class="prose dark:prose-invert">
-                {{ partial "api-prototype/description.html" (dict "text" .description "api" $api) | markdownify }}
-              </div>
-            </section>
-          {{ end }}
-        </details>
         <h2>Operations</h2>
         <label class="api-filter-label"
           >Filter operations

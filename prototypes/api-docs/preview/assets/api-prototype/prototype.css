@@ -70,6 +70,23 @@
 .api-preview .prose li > p {
   margin: 6px 0;
 }
+.api-preview .prose :is(h1, h2, h3, h4, h5, h6) > a {
+  color: inherit;
+  text-decoration: none;
+}
+.api-preview .prose :is(h1, h2, h3, h4, h5, h6) > a:hover {
+  text-decoration: underline;
+}
+.api-overview {
+  max-width: 72ch;
+  margin: 32px 0;
+}
+.api-preview .api-overview .prose :is(h3, h4) {
+  font-size: 17px;
+  font-weight: 550;
+  line-height: 1.4;
+  margin: 28px 0 12px;
+}
 .api-preview a,
 .api-nav a {
   color: var(--api-link);

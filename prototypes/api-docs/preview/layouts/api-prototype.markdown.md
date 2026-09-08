@@ -15,6 +15,14 @@ Choose a Docker HTTP API:
 API version: {{ $api.version }}
 
 {{ if eq .Params.view "overview" }}
+## Overview
+
+{{ partial "api-prototype/description.html" (dict "text" $api.description "api" $api) }}
+{{ range (partial "api-prototype/overview-tags.html" $api) }}
+### {{ .summary }}
+
+{{ partial "api-prototype/description.html" (dict "text" .description "api" $api) }}
+{{ end }}
 ## Connection and authentication
 
 {{ $api.auth }}
@@ -25,14 +33,6 @@ Server: `{{ .url }}`
 ```console
 curl --unix-socket /var/run/docker.sock http://localhost/v{{ $api.version }}/version
 ```
-{{ end }}
-## Overview
-
-{{ partial "api-prototype/description.html" (dict "text" $api.description "api" $api) }}
-{{ range $api.tags }}
-### {{ .summary }}
-
-{{ partial "api-prototype/description.html" (dict "text" .description "api" $api) }}
 {{ end }}
 ## Operations
 {{ range $api.operations }}
