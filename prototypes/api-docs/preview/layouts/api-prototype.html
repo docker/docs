@@ -1,11 +1,13 @@
+{{ define "head-extra" }}
+  {{ $style := resources.Get "api-prototype/prototype.css" | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+  <script src="/api-prototype/prototype.js" defer></script>
+{{ end }}
 {{ define "left" }}
   {{ partial "sidebar/mainnav.html" . }}
   {{ partial "api-prototype/navigation.html" . }}
 {{ end }}
 {{ define "main" }}
-  {{ $style := resources.Get "api-prototype/prototype.css" | fingerprint }}
-  <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
-  <script src="/api-prototype/prototype.js" defer></script>
   <article class="api-preview" data-api-view="{{ .Params.view }}">
     <div class="api-draft">
       <span class="api-draft-label">Prototype</span>
