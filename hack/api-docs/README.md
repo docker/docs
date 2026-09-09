@@ -49,10 +49,10 @@ manifest fields.
 5. Run the shared site flattening script, then check generated operation,
    parameter, media, schema, and link coverage.
 
-Generated API Markdown includes `<!-- link-rewriting: off -->`. The shared
-`hack/flatten-and-resolve.js` script moves these files to their flattened paths
-without rewriting their content. Their links already use published URLs.
-Handwritten pages retain the existing link processing.
+The shared `hack/flatten-and-resolve.js` script resolves Markdown link destinations
+relative to each original file, then moves `index.md` files to flattened paths.
+It preserves code examples and other text. API pages use the same processing as
+other pages; links that already use published URLs remain unchanged.
 
 The published YAML URLs still serve the source files directly. There is no
 conversion step, snapshot dependency, Node migration package, or source archive

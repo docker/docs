@@ -1,7 +1,5 @@
 {{- $data := index hugo.Data "api-reference" -}}
 {{- $api := dict -}}{{- range $data.apis -}}{{- if eq .id $.Params.apiID -}}{{- $api = . -}}{{- end -}}{{- end -}}
-<!-- link-rewriting: off -->
-
 # {{ .Title }}
 
 {{ if eq .Params.view "catalog" }}
