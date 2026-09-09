@@ -321,13 +321,7 @@
                         {{ end }}{{ range $j,$ex := $v.examples }}
                           <div data-api-example="{{ $j }}">
                             <h4>{{ $ex.name }}</h4>
-                            {{ if eq $ex.valid false }}
-                              <p>
-                                Source example does not satisfy its schema;
-                                owner review is required.
-                              </p>
-                            {{ end }}
-                            <pre><code>{{ $ex.value | jsonify (dict "indent" "  ") }}</code></pre>
+                            <pre><code>{{ $ex.text }}</code></pre>
                           </div>
                         {{ end }}
                       </div>

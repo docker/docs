@@ -95,12 +95,9 @@ func writeJSON(p string, v any) error {
 }
 
 type Diagnostic struct {
-	Rule     string `json:"rule"`
-	Pointer  string `json:"pointer"`
-	Message  string `json:"message"`
-	Waivable bool   `json:"waivable"`
-	Excepted bool   `json:"excepted"`
-	Reason   string `json:"reason,omitempty"`
+	Rule    string `json:"rule"`
+	Pointer string `json:"pointer"`
+	Message string `json:"message"`
 }
 type Source struct {
 	ID         string   `json:"id"`
@@ -136,8 +133,8 @@ type Document struct {
 	ExampleCount int
 }
 
-func (d *Document) issue(rule, p, msg string, waivable bool) {
-	d.Diagnostics = append(d.Diagnostics, Diagnostic{Rule: rule, Pointer: p, Message: strings.ReplaceAll(msg, d.URI, "source:"+d.Source.ID), Waivable: waivable})
+func (d *Document) issue(rule, p, msg string) {
+	d.Diagnostics = append(d.Diagnostics, Diagnostic{Rule: rule, Pointer: p, Message: strings.ReplaceAll(msg, d.URI, "source:"+d.Source.ID)})
 }
 func walk(v any, p string, fn func(Object, string)) {
 	switch n := v.(type) {
@@ -410,23 +407,23 @@ func (d *Document) schemaRoots(v any, p string) {
 }
 func (d *Document) validate(metaDir string) {
 	if d.Root["openapi"] != "3.2.0" {
-		d.issue("S1", "/openapi", "Expected OpenAPI 3.2.0", false)
+		d.issue("S1", "/openapi", "Expected OpenAPI 3.2.0")
 	}
 	if d.Root["jsonSchemaDialect"] != dialect {
-		d.issue("S1", "/jsonSchemaDialect", "Expected the selected OAS dialect", false)
+		d.issue("S1", "/jsonSchemaDialect", "Expected the selected OAS dialect")
 	}
 	documentSchema, e := d.Compiler.Compile("https://spec.openapis.org/oas/3.2/schema/2025-09-17")
 	if e != nil {
-		d.issue("structure", "", e.Error(), false)
+		d.issue("structure", "", e.Error())
 	} else if e = documentSchema.Validate(d.Root); e != nil {
-		d.issue("structure", "", e.Error(), false)
+		d.issue("structure", "", e.Error())
 	}
 	// OAS Reference Objects also need explicit validation: a document schema cannot prove their target exists.
 	walk(d.Root, "", func(n Object, p string) {
 		if r := str(n["$ref"]); r != "" {
 			u, er := url.Parse(r)
 			if er != nil {
-				d.issue("reference", p, er.Error(), false)
+				d.issue("reference", p, er.Error())
 				return
 			}
 			base, _ := url.Parse(d.URI)
@@ -435,38 +432,38 @@ func (d *Document) validate(metaDir string) {
 			u.Fragment = ""
 			v, ok := d.Registry.resources[u.String()]
 			if !ok {
-				d.issue("reference", p, "Unregistered resource "+r, false)
+				d.issue("reference", p, "Unregistered resource "+r)
 			} else if strings.HasPrefix(frag, "/") {
 				if _, er = pointer(v, frag); er != nil {
-					d.issue("reference", p, er.Error(), false)
+					d.issue("reference", p, er.Error())
 				}
 			}
 		}
 	})
 	if len(obj(d.Root["webhooks"])) > 0 {
-		d.issue("capability", "/webhooks", "Webhook navigation is not supported by the reference renderer", false)
+		d.issue("capability", "/webhooks", "Webhook navigation is not supported by the reference renderer")
 	}
 	walk(d.Root, "", func(n Object, p string) {
 		if len(obj(n["callbacks"])) > 0 {
-			d.issue("capability", p+"/callbacks", "Callback navigation is not supported by the reference renderer", false)
+			d.issue("capability", p+"/callbacks", "Callback navigation is not supported by the reference renderer")
 		}
 	})
 	d.schemaRoots(d.Root, "")
 	schemaMeta, e := d.Compiler.Compile(dialect)
 	if e != nil {
-		d.issue("dialect", "", e.Error(), false)
+		d.issue("dialect", "", e.Error())
 		return
 	}
 	for _, p := range keys(d.Schemas) {
 		s := d.Schemas[p]
 		d.SchemaCount++
 		if e = schemaMeta.Validate(s); e != nil {
-			d.issue("schema", p, e.Error(), false)
+			d.issue("schema", p, e.Error())
 			continue
 		}
 		compiled, e := d.Compiler.Compile(d.URI + "#" + p)
 		if e != nil {
-			d.issue("schema", p, e.Error(), false)
+			d.issue("schema", p, e.Error())
 			continue
 		}
 		d.Compiled[p] = compiled
@@ -491,7 +488,7 @@ func (d *Document) validate(metaDir string) {
 				d.example(c, v, p+"/examples/"+esc(name)+"/value")
 			}
 			if _, ok := ex["externalValue"]; ok {
-				d.issue("example-external", p+"/examples/"+esc(name), "External example requires a locked media fixture", true)
+				d.issue("example-external", p+"/examples/"+esc(name), "External example requires a locked media fixture")
 			}
 		}
 	})
@@ -505,34 +502,40 @@ func (d *Document) validate(metaDir string) {
 		id := str(op["id"])
 		p := str(op["pointer"])
 		if id == "" || ids[id] {
-			d.issue("S4", p, "Operation ID must be present and unique", false)
+			d.issue("S4", p, "Operation ID must be present and unique")
 		}
 		ids[id] = true
 		opTags := arr(op["tags"])
 		if len(opTags) == 0 || tags[str(opTags[0])] != "nav" {
-			d.issue("S5", p+"/tags", "The first operation tag must identify a declared navigation group", false)
+			d.issue("S5", p+"/tags", "The first operation tag must identify a declared navigation group")
 		}
 		for _, tag := range opTags {
 			if _, ok := tags[str(tag)]; !ok {
-				d.issue("S5", p+"/tags", "Operation tag is undeclared: "+str(tag), false)
+				d.issue("S5", p+"/tags", "Operation tag is undeclared: "+str(tag))
 			}
 		}
 		if len(arr(op["servers"])) == 0 && d.Source.Connection != "unix" {
-			d.issue("S6", p, "Operation needs effective servers or a local connection profile", false)
+			d.issue("S6", p, "Operation needs effective servers or a local connection profile")
 		}
 		if strings.TrimSpace(str(op["description"])) == "" {
-			d.issue("S4", p+"/description", "Operation description required", true)
+			d.issue("S4", p+"/description", "Operation description required")
 		}
 		for _, pr := range arr(op["parameters"]) {
 			param := obj(pr)
+			if param["in"] == "header" {
+				switch strings.ToLower(str(param["name"])) {
+				case "authorization", "accept", "content-type":
+					d.issue("S8", str(param["pointer"]), "OpenAPI ignores this header parameter; use security or media types")
+				}
+			}
 			if str(param["description"]) == "" {
-				d.issue("S8", str(param["pointer"])+"/description", "Parameter description requires editorial review", true)
+				d.issue("S8", str(param["pointer"])+"/description", "Parameter description requires editorial review")
 			}
 		}
 		for _, variant := range arr(op["variants"]) {
 			v := obj(variant)
 			if str(v["media"]) != "" && len(arr(v["examples"])) == 0 {
-				d.issue("S11", str(v["pointer"]), "Media variant needs a reviewed example or transfer fixture", true)
+				d.issue("S11", str(v["pointer"]), "Media variant needs a reviewed example or transfer fixture")
 			}
 		}
 	}
@@ -543,7 +546,7 @@ func (d *Document) schemaExamples(s any, p string) {
 		return
 	}
 	if _, ok := n["$schema"]; ok && n["$schema"] != dialect {
-		d.issue("S1", p+"/$schema", "Schema dialect override is outside the profile", false)
+		d.issue("S1", p+"/$schema", "Schema dialect override is outside the profile")
 	}
 	c, e := d.Compiler.Compile(d.URI + "#" + p)
 	if e == nil {
@@ -572,7 +575,7 @@ func (d *Document) schemaExamples(s any, p string) {
 func (d *Document) example(c *js.Schema, v any, p string) {
 	d.ExampleCount++
 	if e := c.Validate(v); e != nil {
-		d.issue("example", p, e.Error(), true)
+		d.issue("example", p, e.Error())
 	}
 }
 func (d *Document) effective(root, item, op Object, k string) any {
@@ -688,13 +691,13 @@ func main() {
 }
 func run() error {
 	if len(os.Args) < 3 {
-		return errors.New("usage: api-docs check|generate|inspect|sources ROOT [--allow-known-issues]")
+		return errors.New("usage: api-docs check|generate|inspect|sources ROOT")
 	}
 	command := os.Args[1]
 	if command != "check" && command != "generate" && command != "inspect" && command != "sources" {
 		return fmt.Errorf("unknown command: %s", command)
 	}
-	if len(os.Args) > 4 || (len(os.Args) == 4 && os.Args[3] != "--allow-known-issues") {
+	if len(os.Args) > 3 {
 		return errors.New("unexpected arguments")
 	}
 	root, _ := filepath.Abs(os.Args[2])
@@ -717,11 +720,6 @@ func run() error {
 		}
 		return nil
 	}
-	allowKnown := len(os.Args) > 3 && os.Args[3] == "--allow-known-issues"
-	exceptions, e := readJSON(filepath.Join(dir, "validation", "known-issues.json"))
-	if e != nil {
-		return e
-	}
 	reports := []any{}
 	models := []any{}
 	blocking := 0
@@ -732,20 +730,7 @@ func run() error {
 		}
 		d.Source = src
 		d.validate(meta)
-		for i := range d.Diagnostics {
-			diag := &d.Diagnostics[i]
-			for _, raw := range arr(exceptions) {
-				x := obj(raw)
-				if diag.Waivable && x["api"] == src.ID && x["sha256"] == d.Digest && x["rule"] == diag.Rule && x["pointer"] == diag.Pointer && x["messageSha256"] == hash([]byte(diag.Message)) && str(x["reason"]) != "" {
-					diag.Excepted = true
-					diag.Reason = str(x["reason"])
-					break
-				}
-			}
-			if !diag.Excepted || !allowKnown {
-				blocking++
-			}
-		}
+		blocking += len(d.Diagnostics)
 		reports = append(reports, Object{"api": src.ID, "sha256": d.Digest, "schemas": d.SchemaCount, "examples": d.ExampleCount, "operations": len(d.operations()), "diagnostics": d.Diagnostics})
 		models = append(models, d.model())
 		fmt.Printf("%s: %d operations, %d schema roots, %d examples, %d diagnostics\n", src.ID, len(d.operations()), d.SchemaCount, d.ExampleCount, len(d.Diagnostics))

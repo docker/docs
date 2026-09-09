@@ -32,7 +32,7 @@ relationships. Both generation and the validation wrapper use this manifest.
 Hugo reads the generated presentation data, rather than this file. Authentication
 descriptions come from the specifications and linked guides.
 
-`validation/` contains the Vacuum rules, known-issue baseline, and locked official
+`validation/` contains the Vacuum rules and locked official
 schema resources. `testdata/` contains validation fixtures. The presentation model
 version and supported dialect are defined by the processor, not configurable
 manifest fields.
@@ -58,7 +58,7 @@ The published YAML URLs still serve the source files directly. There is no
 conversion step, snapshot dependency, Node migration package, or source archive
 in the build.
 
-## Validation baseline
+## Validation
 
 `check` is strict and reports every documentation profile failure:
 
@@ -66,21 +66,15 @@ in the build.
 $ ./hack/api-docs/run.sh check
 ```
 
-Generation uses `--allow-known-issues`. The checked-in
-`validation/known-issues.json` records explicit exceptions for unresolved Hub
-diagnostics. Entries match the source digest, diagnostic digest, rule, and source
-pointer. Parse failures, unresolved references, and unsupported features cannot
-be waived. Unrecorded diagnostics fail the build.
-
-Strict validation reports all diagnostics, including recorded exceptions.
-Reports are written to `tmp/api-reference/validation.json`. The build never
-refreshes the baseline automatically.
+Generation runs the same strict validation. Any diagnostic fails the build;
+there is no exception baseline. Reports are written to
+`tmp/api-reference/validation.json`.
 
 ## Tests and scope
 
 Go fixtures cover dialects, references, recursion, boolean schemas, examples,
 security overrides, server and parameter precedence, and request generation.
-`verify-output.mjs` checks all 181 generated HTML/Markdown pairs and retention of
+`verify-output.mjs` checks all generated HTML/Markdown pairs and retention of
 Engine v1.40–v1.56 in ReDoc, unchanged Governance rendering, and byte-identical
 published specifications. `browser-checks.mjs` exports a Playwright check for
 navigation, page aliases, filtering, requests, and narrow screens.

@@ -24,7 +24,7 @@ policy() {
 generate() {
   bootstrap
   policy
-  "$BIN/api-docs" generate "$ROOT" --allow-known-issues
+  "$BIN/api-docs" generate "$ROOT"
 }
 case "${1:-build}" in
   bootstrap) bootstrap ;;

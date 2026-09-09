@@ -256,6 +256,13 @@ paths:
         The manifest contains metadata about the image, including configuration and layer digests. It is required for pulling images from the registry.
 
         This endpoint requires authentication. Use the `Authorization: Bearer <token>` header.
+
+        Use the `Accept` header to select the manifest representation. Supported media types:
+
+        - `application/vnd.docker.distribution.manifest.v2+json`
+        - `application/vnd.docker.distribution.manifest.list.v2+json`
+        - `application/vnd.oci.image.manifest.v1+json`
+        - `application/vnd.oci.image.index.v1+json`
       x-codeSamples:
         - lang: Bash
           label: cURL
@@ -283,25 +290,6 @@ paths:
             by-digest:
               summary: Digest
               value: sha256:abc123def456...
-          schema:
-            type: string
-        - name: Authorization
-          in: header
-          required: true
-          description: RFC7235-compliant authorization header (e.g., `Bearer <token>`).
-          schema:
-            type: string
-        - name: Accept
-          in: header
-          required: false
-          description: |
-            Media type(s) the client supports for the manifest.
-
-            The registry supports the following media types:
-            - application/vnd.docker.distribution.manifest.v2+json
-            - application/vnd.docker.distribution.manifest.list.v2+json
-            - application/vnd.oci.image.manifest.v1+json
-            - application/vnd.oci.image.index.v1+json
           schema:
             type: string
       responses:
@@ -430,19 +418,6 @@ paths:
               value: sha256:abc123def456...
           schema:
             type: string
-        - name: Authorization
-          in: header
-          required: true
-          description: RFC7235-compliant authorization header (e.g., `Bearer <token>`).
-          schema:
-            type: string
-        - name: Content-Type
-          in: header
-          required: true
-          description: Media type of the manifest being uploaded.
-          schema:
-            type: string
-            example: application/vnd.docker.distribution.manifest.v2+json
       requestBody:
         required: true
         content:
@@ -553,6 +528,13 @@ paths:
         - Determining the digest or size of a manifest before downloading or deleting
 
         This endpoint requires authentication with pull scope.
+
+        Use the `Accept` header to select the manifest representation. Supported media types:
+
+        - `application/vnd.docker.distribution.manifest.v2+json`
+        - `application/vnd.docker.distribution.manifest.list.v2+json`
+        - `application/vnd.oci.image.manifest.v1+json`
+        - `application/vnd.oci.image.index.v1+json`
       parameters:
         - name: name
           in: path
@@ -574,20 +556,6 @@ paths:
               value: sha256:abc123def456...
           schema:
             type: string
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer token for authentication
-        - name: Accept
-          in: header
-          required: false
-          schema:
-            type: string
-            example: application/vnd.docker.distribution.manifest.v2+json
-          description: |
-            Media type of the manifest to check. The response will match one of the accepted types.
       x-codeSamples:
         - lang: Bash
           label: cURL
@@ -652,12 +620,6 @@ paths:
           required: true
           description: Digest of the manifest to delete (e.g., `sha256:...`)
           example: sha256:abc123def456...
-          schema:
-            type: string
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer token with `delete` access
           schema:
             type: string
       x-codeSamples:
@@ -736,12 +698,6 @@ paths:
           schema:
             type: string
           example: library/busybox
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer token for authentication with `push` scope
       responses:
         "201":
           description: Blob successfully mounted from another repository.
@@ -829,13 +785,6 @@ paths:
           schema:
             type: string
           example: sha256:abc123def4567890...
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer token with pull or push scope
-          schema:
-            type: string
-          example: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6...
       responses:
         "200":
           description: Blob exists
@@ -900,13 +849,6 @@ paths:
           schema:
             type: string
           example: sha256:abc123def456...
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer token with pull scope
-          example: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6...
       responses:
         "200":
           description: Blob content returned directly
@@ -971,7 +913,7 @@ paths:
           label: cURL
           source: |
             # GET upload status
-            curl -I \
+            curl --include --request GET \
               -H "Authorization: Bearer $TOKEN" \
               https://registry-1.docker.io/v2/library/ubuntu/blobs/uploads/abc123
       parameters:
@@ -989,13 +931,6 @@ paths:
           schema:
             type: string
           example: abc123
-        - description: Bearer token for registry authentication.
-          name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          example: Bearer eyJhbGciOi...
       responses:
         "204":
           description: Upload in progress. No body is returned.
@@ -1068,13 +1003,6 @@ paths:
           schema:
             type: string
           example: sha256:abcd1234...
-        - description: Bearer token for registry authentication.
-          name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          example: Bearer eyJhbGciOi...
       requestBody:
         required: false
         content:
@@ -1158,13 +1086,6 @@ paths:
           schema:
             type: string
           example: abc123
-        - description: Bearer token for registry authentication.
-          name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          example: Bearer eyJhbGciOi...
         - name: Content-Range
           in: header
           required: false
@@ -1252,13 +1173,6 @@ paths:
           schema:
             type: string
           example: abc123
-        - description: Bearer token for registry authentication.
-          name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          example: Bearer eyJhbGciOi...
       responses:
         "204":
           description: Upload session cancelled successfully. No body is returned.
@@ -1294,6 +1208,6 @@ components:
     registryToken:
       type: http
       scheme: bearer
-      description: Follow the WWW-Authenticate challenge and obtain a repository-scoped registry token. This is separate from the Hub API token exchange.
+      description: Follow the WWW-Authenticate challenge and obtain a repository-scoped registry bearer token. Public image pulls can obtain a token without account credentials; the registry request still sends that token. This token exchange is separate from Hub API authentication.
 security:
   - registryToken: []
