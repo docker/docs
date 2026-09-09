@@ -989,7 +989,8 @@ paths:
           schema:
             type: string
           example: abc123
-        - name: Authorization
+        - description: Bearer token for registry authentication.
+          name: Authorization
           in: header
           required: true
           schema:
@@ -1067,7 +1068,8 @@ paths:
           schema:
             type: string
           example: sha256:abcd1234...
-        - name: Authorization
+        - description: Bearer token for registry authentication.
+          name: Authorization
           in: header
           required: true
           schema:
@@ -1156,7 +1158,8 @@ paths:
           schema:
             type: string
           example: abc123
-        - name: Authorization
+        - description: Bearer token for registry authentication.
+          name: Authorization
           in: header
           required: true
           schema:
@@ -1249,7 +1252,8 @@ paths:
           schema:
             type: string
           example: abc123
-        - name: Authorization
+        - description: Bearer token for registry authentication.
+          name: Authorization
           in: header
           required: true
           schema:
