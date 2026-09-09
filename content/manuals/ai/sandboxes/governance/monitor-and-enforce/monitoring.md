@@ -69,6 +69,14 @@ stale timestamp, the daemon may not have the most recent org policy. Run
 `sbx policy reset` to force a fresh pull. `Hidden` reports how many inactive
 rules are suppressed and how to reveal them.
 
+If Docker can't determine which organization governs your account, policy
+output shows `Governance: Unresolved`, and the dashboard shows the same
+unresolved state. For example, this happens when your account belongs to
+multiple organizations with governance enabled. Policy enforcement fails closed
+until the conflict is resolved, so local allow rules can't grant access. Contact
+an administrator for the affected organizations to resolve the conflicting
+governance configuration.
+
 ### Showing inactive rules
 
 When organization governance is active, local and kit-defined allow rules are
