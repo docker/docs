@@ -56,8 +56,7 @@ other pages; links that already use published URLs remain unchanged.
 
 The published YAML URLs still serve the source files directly. There is no
 conversion step, snapshot dependency, Node migration package, or source archive
-in the build. The source diff and
-[prototype PR](https://github.com/docker/docs/pull/26043) provide migration context.
+in the build.
 
 ## Validation baseline
 
@@ -67,55 +66,15 @@ in the build. The source diff and
 $ ./hack/api-docs/run.sh check
 ```
 
-Generation explicitly uses `--allow-known-issues`. The checked-in
-`validation/known-issues.json` records 168 remaining issues: 160 for Hub and eight
-for DVP. Registry has no remaining baseline entries. Entries match the entire source digest, diagnostic digest,
-rule, and source pointer. Parse failures, unresolved references, and unsupported
-features cannot be waived. Unrecorded diagnostics fail the build.
+Generation uses `--allow-known-issues`. The checked-in
+`validation/known-issues.json` records explicit exceptions for unresolved Hub
+diagnostics. Entries match the source digest, diagnostic digest, rule, and source
+pointer. Parse failures, unresolved references, and unsupported features cannot
+be waived. Unrecorded diagnostics fail the build.
 
-This baseline is review debt, not approval of API behavior. Strict validation
-fails until the issues are resolved. Any source edit requires deliberate review
-of the affected baseline entries; the build never refreshes them automatically.
-Resolve the baseline before merging the implementation PR, then remove the
-exception file and the generation override. A passing documentation check does
-not settle the separate product decisions about authentication and response
-contracts.
-
-### Issue triage
-
-The first pass resolved 121 of the original 289 entries:
-
-| Straightforward fix | Entries resolved |
-| --- | ---: |
-| Parameter descriptions derived from endpoint context and existing documentation | 43 |
-| Quote the Hub and DVP 2FA examples to match their string schemas | 2 |
-| Complete request and response examples using documented fields and values | 76 |
-
-Shared parameters and responses account for multiple entries. Examples use
-existing field annotations where available; team requests and DVP namespace/year
-responses use illustrative values. SCIM error examples contain the declared
-schema identifier and status, without inventing service error messages. These
-are documentation examples, not captured service responses. Example lookup also
-needed a fix to retain annotations on intermediate schema references.
-
-The remaining entries need investigation before selecting a correction:
-
-| Area | Entries | Evidence or decision needed |
-| --- | ---: | --- |
-| Hub error responses | 128 | Review payloads for `Error`, `error`, `ValueError`, and `rpcStatus`, plus two responses without schemas. Establish which fields each error returns. Object schemas using `items` leave error-map values unconstrained. |
-| Hub pagination | 10 | Resolve six null/string conflicts and supply four list examples. Confirm page-boundary values and keep counts, links, and result arrays consistent. |
-| Hub repositories and tags | 8 | Confirm the immutable-tag regex contract and two repository examples missing required `user` and `permissions` fields. Complete five media examples after resolving those contracts. |
-| Hub teams, members, and invitations | 8 | Check four team responses, the member response and list wrapper, the bulk-invitation wrapper, and CSV export. The export requires `Role` but defines `Permission`; its array schema also needs a representation suitable for CSV. |
-| Hub personal token update | 1 | Confirm whether the update response returns or redacts the token. The shared schema has a token value, while the retrieval endpoint documents an empty string. |
-| Hub SCIM | 5 | Verify list-envelope casing, service-provider capabilities, and update semantics before completing examples. The source uses `resources` in list responses and `enabled` in updates, while user objects use `active`. |
-| DVP analytics | 8 | Obtain representative metadata, pull, and export-download payloads. Resolve overlapping month/week `oneOf` branches: neither branch requires its distinguishing property. |
-
-Counts include both missing examples and example/schema mismatches. The exact
-locations remain in `validation/known-issues.json`; `check` writes diagnostics to
-`tmp/api-reference/validation.json`. Repeated error responses are the largest
-group, so investigate their shared schemas first. After each group is resolved,
-validate its examples and remove its baseline entries. Do not replace a
-conflicting example merely to make it pass, or loosen a schema without evidence.
+Strict validation reports all diagnostics, including recorded exceptions.
+Reports are written to `tmp/api-reference/validation.json`. The build never
+refreshes the baseline automatically.
 
 ## Tests and scope
 
@@ -127,5 +86,4 @@ published specifications. `browser-checks.mjs` exports a Playwright check for
 navigation, page aliases, filtering, requests, and narrow screens.
 
 Callbacks and webhook navigation are unsupported and fail validation. Request
-examples are POSIX shell templates; they do not make service calls. Specification
-conversion and source-owner adoption remain separate from page rendering.
+examples are POSIX shell templates; they do not make service calls.
