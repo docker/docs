@@ -47,6 +47,17 @@ $ sbx policy inspect Balanced
 Use `--source` to filter by origin (`local`, `org`, or `kit`) and `--decision`
 to filter by outcome (`allow` or `deny`).
 
+Use `--created-via` to filter by how a rule was created. Pass `default` for
+preset rules, `added` for rules you added yourself, `provisioned` for rules a
+kit or application added, or `approval` for rules recorded when you approved a
+destination. A wide listing shows the same information per rule:
+
+```console
+$ sbx policy ls --wide --created-via approval
+```
+
+See [Approval-required access](../access-controls/network.md#approval-required-access).
+
 A `STATUS` column also appears when you pass `--include-inactive`; see
 [Showing inactive rules](#showing-inactive-rules).
 
@@ -100,10 +111,10 @@ while organization governance is active. Local and kit-defined deny rules stay
 active and aren't hidden, because a deny still applies on top of the
 organization policy. See [Precedence](../concepts.md#precedence).
 
-Use `--type network` or `--type filesystem` to show only policies of that type.
-Without a sandbox argument, `sbx policy ls` shows every policy across all
-sandboxes. Pass a sandbox name to filter to global policies and those scoped to
-that sandbox:
+Use `--type network`, `--type filesystem`, or `--type http` to show only
+policies of that type. Without a sandbox argument, `sbx policy ls` shows every
+policy across all sandboxes. Pass a sandbox name to filter to global policies
+and those scoped to that sandbox:
 
 ```console
 $ sbx policy ls my-sandbox
@@ -126,6 +137,22 @@ A writable workspace mount must be allowed by both a `filesystem:read` and a
 default local policy allows read and write access to all paths, shown as the
 two `default-fs-*` rules above. For the rule syntax and path patterns, see
 [Policy concepts](../concepts.md#filesystem-rules).
+
+### HTTP rules
+
+Rules that match an HTTP method and path are listed as type `http`. Pass
+`--type http` to show only them, or `--wide` to see the `METHOD` and `PATH`
+columns alongside network rules:
+
+```console
+$ sbx policy ls --wide --type http
+TYPE   METHOD   PATH
+http   GET      /repos/org/project/**
+http   POST     /admin/**
+```
+
+Rules that match a whole host show `-` in both columns. For the rule syntax,
+see [HTTP rules](../concepts.md#http-method-and-path).
 
 ## Monitoring traffic
 
