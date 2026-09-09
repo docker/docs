@@ -227,6 +227,7 @@ func (d *Document) mediaExamples(v Object) []any {
 	}
 	s := v["schema"]
 	seen := map[string]bool{}
+	base, _ := url.Parse(d.URI)
 	for s != nil {
 		n := obj(s)
 		if x, ok := n["example"]; ok {
@@ -239,11 +240,26 @@ func (d *Document) mediaExamples(v Object) []any {
 			return out
 		}
 		ref := str(n["$ref"])
-		if ref == "" || seen[ref] {
+		if ref == "" {
 			break
 		}
-		seen[ref] = true
-		s = d.resolve(n)
+		u, err := url.Parse(ref)
+		if err != nil {
+			break
+		}
+		u = base.ResolveReference(u)
+		if seen[u.String()] {
+			break
+		}
+		seen[u.String()] = true
+		fragment := u.Fragment
+		u.Fragment = ""
+		// Follow one reference at a time so intermediate schema annotations survive.
+		s, err = pointer(d.Registry.resources[u.String()], fragment)
+		if err != nil {
+			break
+		}
+		base = u
 	}
 	return out
 }
