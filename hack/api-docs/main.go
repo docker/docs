@@ -110,7 +110,6 @@ type Source struct {
 	Owner      string   `json:"owner"`
 	Manual     string   `json:"manual"`
 	Connection string   `json:"connection"`
-	Auth       string   `json:"auth"`
 	Guides     []string `json:"guides"`
 }
 type Registry struct{ resources map[string]any }
@@ -689,10 +688,10 @@ func main() {
 }
 func run() error {
 	if len(os.Args) < 3 {
-		return errors.New("usage: api-docs check|generate|inspect ROOT [--allow-known-issues]")
+		return errors.New("usage: api-docs check|generate|inspect|sources ROOT [--allow-known-issues]")
 	}
 	command := os.Args[1]
-	if command != "check" && command != "generate" && command != "inspect" {
+	if command != "check" && command != "generate" && command != "inspect" && command != "sources" {
 		return fmt.Errorf("unknown command: %s", command)
 	}
 	if len(os.Args) > 4 || (len(os.Args) == 4 && os.Args[3] != "--allow-known-issues") {
@@ -700,27 +699,33 @@ func run() error {
 	}
 	root, _ := filepath.Abs(os.Args[2])
 	dir := filepath.Join(root, "hack/api-docs")
-	meta := filepath.Join(dir, "dialects")
-	catalogRaw, e := os.ReadFile(filepath.Join(dir, "catalog.json"))
+	meta := filepath.Join(dir, "validation", "dialects")
+	manifestRaw, e := os.ReadFile(filepath.Join(dir, "sources.json"))
 	if e != nil {
 		return e
 	}
-	var catalog struct {
+	var manifest struct {
 		APIs       []Source `json:"apis"`
 		LegacyAPIs []Object `json:"legacyAPIs"`
 	}
-	if e = json.Unmarshal(catalogRaw, &catalog); e != nil {
+	if e = json.Unmarshal(manifestRaw, &manifest); e != nil {
 		return e
 	}
+	if command == "sources" {
+		for _, src := range manifest.APIs {
+			fmt.Printf("%s\t%s\n", src.ID, src.Source)
+		}
+		return nil
+	}
 	allowKnown := len(os.Args) > 3 && os.Args[3] == "--allow-known-issues"
-	exceptions, e := readJSON(filepath.Join(dir, "known-issues.json"))
+	exceptions, e := readJSON(filepath.Join(dir, "validation", "known-issues.json"))
 	if e != nil {
 		return e
 	}
 	reports := []any{}
 	models := []any{}
 	blocking := 0
-	for _, src := range catalog.APIs {
+	for _, src := range manifest.APIs {
 		d, e := loadDocument(filepath.Join(root, src.Source), meta)
 		if e != nil {
 			return fmt.Errorf("%s: %w", src.ID, e)
@@ -756,7 +761,7 @@ func run() error {
 		return fmt.Errorf("%d blocking diagnostics; see tmp/api-reference/validation.json", blocking)
 	}
 	if command == "generate" {
-		if e = writeJSON(filepath.Join(out, "data/api-reference.json"), Object{"modelVersion": 1, "apis": models, "legacyAPIs": catalog.LegacyAPIs}); e != nil {
+		if e = writeJSON(filepath.Join(out, "data/api-reference.json"), Object{"modelVersion": 1, "apis": models, "legacyAPIs": manifest.LegacyAPIs}); e != nil {
 			return e
 		}
 	}

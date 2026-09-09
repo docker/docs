@@ -19,11 +19,23 @@ $ hugo server
 For a static build with HTML/Markdown checks, run
 `./hack/api-docs/run.sh build`. To serve that build on port 1314, run
 `./hack/api-docs/run.sh serve`. Set `DOCS_URL` and `DOCS_PORT` when using another
-address. Run generation again after changing a specification or catalog entry.
+address. Run generation again after changing a specification or source manifest entry.
 
 Docker builds and Netlify deploy previews run generation before Hugo. Generated
 data, validation reports, binaries, and local builds go under `tmp/api-reference/`.
 Hugo reports an error if the generated data is absent.
+
+## Processor inputs
+
+`sources.json` registers input specifications and their product/manual
+relationships. Both generation and the validation wrapper use this manifest.
+Hugo reads the generated presentation data, rather than this file. Authentication
+descriptions come from the specifications and linked guides.
+
+`validation/` contains the Vacuum rules, known-issue baseline, and locked official
+schema resources. `testdata/` contains validation fixtures. The presentation model
+version and supported dialect are defined by the processor, not configurable
+manifest fields.
 
 ## Pipeline
 
@@ -51,7 +63,7 @@ $ ./hack/api-docs/run.sh check
 ```
 
 Generation explicitly uses `--allow-known-issues`. The checked-in
-`known-issues.json` records 289 inherited issues: 268 for Hub, 17 for DVP, and
+`validation/known-issues.json` records 289 inherited issues: 268 for Hub, 17 for DVP, and
 four for Registry. Entries match the entire source digest, diagnostic digest,
 rule, and source pointer. Parse failures, unresolved references, and unsupported
 features cannot be waived. Unrecorded diagnostics fail the build.

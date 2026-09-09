@@ -39,7 +39,7 @@ func (d *Document) model() Object {
 		op["references"] = refs(op["raw"], schemaURLs)
 		op["requestSchema"] = firstRequestSchema(op)
 	}
-	return Object{"id": d.Source.ID, "product": d.Source.Product, "title": d.Source.Title, "version": obj(d.Root["info"])["version"], "description": obj(d.Root["info"])["description"], "url": route(d.Source.ID), "manual": d.Source.Manual, "guides": d.Source.Guides, "connection": d.Source.Connection, "auth": d.Source.Auth, "servers": d.Root["servers"], "securitySchemes": obj(d.Root["components"])["securitySchemes"], "tags": d.Root["tags"], "operations": ops, "schemas": schemas, "schemaURLs": schemaURLs, "digest": d.Digest, "owner": d.Source.Owner, "source": d.Source.Source, "sourceURL": "/" + strings.TrimPrefix(d.Source.Source, "content/"), "diagnostics": d.Diagnostics, "schemaCount": d.SchemaCount, "exampleCount": d.ExampleCount}
+	return Object{"id": d.Source.ID, "product": d.Source.Product, "title": d.Source.Title, "version": obj(d.Root["info"])["version"], "description": obj(d.Root["info"])["description"], "url": route(d.Source.ID), "manual": d.Source.Manual, "guides": d.Source.Guides, "connection": d.Source.Connection, "servers": d.Root["servers"], "securitySchemes": obj(d.Root["components"])["securitySchemes"], "tags": d.Root["tags"], "operations": ops, "schemas": schemas, "schemaURLs": schemaURLs, "digest": d.Digest, "owner": d.Source.Owner, "source": d.Source.Source, "sourceURL": "/" + strings.TrimPrefix(d.Source.Source, "content/"), "diagnostics": d.Diagnostics, "schemaCount": d.SchemaCount, "exampleCount": d.ExampleCount}
 }
 func refs(v any, urls Object) []any {
 	found := map[string]bool{}
