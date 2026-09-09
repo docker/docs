@@ -30,7 +30,7 @@
   {{- end }}
   {{- $ungrouped := where $pages "Params.sidebar.group" "==" nil }}
   {{- range $ungrouped }}
-    {{- if .IsSection }}
+    {{- if and .IsSection (not .Params.apiID) }}
       {{- template "renderList" (dict "section" . "revealHidden" $revealHidden) }}
     {{- else }}
       {{- template "renderSingle" . }}
@@ -43,7 +43,7 @@
         {{ . }}
       </li>
       {{- range where $pages "Params.sidebar.group" . }}
-        {{- if .IsSection }}
+        {{- if and .IsSection (not .Params.apiID) }}
           {{- template "renderList" (dict "section" . "revealHidden" $revealHidden) }}
         {{- else }}
           {{- template "renderSingle" . }}

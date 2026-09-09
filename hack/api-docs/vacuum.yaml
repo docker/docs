@@ -1,0 +1,24 @@
+# Structural and dialect validation run against locked OAI schemas in the Go command.
+# Vacuum supplies independently named Docker policy rules with source locations.
+rules:
+  docker-operation-id:
+    description: Every operation needs a stable operation ID.
+    severity: error
+    given: $.paths[*][get,put,post,delete,options,head,patch,trace,query]
+    then:
+      field: operationId
+      function: truthy
+  docker-info-description:
+    description: Every API needs an overview.
+    severity: error
+    given: $.info
+    then:
+      field: description
+      function: truthy
+  docker-info-version:
+    description: Every API needs a version identity.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
