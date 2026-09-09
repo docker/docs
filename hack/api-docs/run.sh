@@ -13,11 +13,13 @@ bootstrap() {
   fi
 }
 policy() {
-  for api in hub dvp registry; do
-    "$BIN/vacuum-v0.30.3" lint --no-update-check --remote=false --ruleset hack/api-docs/vacuum.yaml --fail-severity error --min-score 0 --no-banner --no-style --details "content/reference/api/$api/latest.yaml" > "tmp/api-reference/reports/$api-vacuum.txt" 2>&1 || {
+  local sources
+  sources=$("$BIN/api-docs" sources "$ROOT")
+  while IFS=$'\t' read -r api source; do
+    "$BIN/vacuum-v0.30.3" lint --no-update-check --remote=false --ruleset hack/api-docs/validation/rules.yaml --fail-severity error --min-score 0 --no-banner --no-style --details "$source" > "tmp/api-reference/reports/$api-vacuum.txt" 2>&1 || {
       cat "tmp/api-reference/reports/$api-vacuum.txt"; return 1;
     }
-  done
+  done <<< "$sources"
 }
 generate() {
   bootstrap

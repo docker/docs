@@ -113,7 +113,12 @@
               Connecting to the {{ $api.title }} API
             {{ end }}
           </h2>
-          <p>{{ $api.auth }}</p>
+          {{ range $name, $scheme := $api.securitySchemes }}
+            {{ with $scheme.description }}
+              <h3>{{ index $scheme "x-displayName" | default $name }}</h3>
+              <div class="prose dark:prose-invert">{{ . | markdownify }}</div>
+            {{ end }}
+          {{ end }}
           {{ if eq $api.connection "unix" }}
             <pre><code>curl --unix-socket /var/run/docker.sock http://localhost/v{{ $api.version }}/version</code></pre>
           {{ else }}
@@ -183,7 +188,11 @@
                   {{ partial "api-reference/description.html" (dict "text" .description "api" $api) | markdownify }}
                 </div>
                 <h2>Connection and access</h2>
-                <p>{{ $api.auth }}</p>
+                <p>
+                  <a href="{{ $api.url }}#authentication"
+                    >API connection and authentication guidance</a
+                  >
+                </p>
                 {{ if and (eq $api.product "engine") (where .parameters "name" "X-Registry-Auth") }}
                   <p>
                     <code>X-Registry-Auth</code> delegates registry credentials

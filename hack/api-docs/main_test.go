@@ -11,7 +11,7 @@ import (
 
 func fixture(t *testing.T, name string) *Document {
 	t.Helper()
-	d, e := loadDocument(filepath.Join("testdata", name), "dialects")
+	d, e := loadDocument(filepath.Join("testdata", name), "validation/dialects")
 	if e != nil {
 		t.Fatal(e)
 	}
@@ -72,7 +72,7 @@ func TestNegativeFixtures(t *testing.T) {
 	}
 	for _, name := range []string{"duplicate-key.yaml", "invalid-stream-ref.yaml"} {
 		t.Run(name, func(t *testing.T) {
-			d, e := loadDocument(filepath.Join("testdata", name), "dialects")
+			d, e := loadDocument(filepath.Join("testdata", name), "validation/dialects")
 			if e == nil {
 				d.validate("")
 				for _, x := range d.Diagnostics {
@@ -157,7 +157,7 @@ func TestFalseSchemaAndExamplePreserved(t *testing.T) {
 	}
 	event, _ := os.ReadFile("testdata/schemas/event.yaml")
 	os.WriteFile(filepath.Join(tmp, "schemas/event.yaml"), event, 0600)
-	d, e := loadDocument(filepath.Join(tmp, "spec.yaml"), "dialects")
+	d, e := loadDocument(filepath.Join(tmp, "spec.yaml"), "validation/dialects")
 	if e != nil {
 		t.Fatal(e)
 	}

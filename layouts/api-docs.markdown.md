@@ -21,7 +21,11 @@ API version: {{ $api.version }}
 {{ partial "api-reference/description.html" (dict "text" $api.description "api" $api) }}
 ## {{ if eq $api.connection "unix" }}Connecting to {{ $api.title }}{{ else }}Connecting to the {{ $api.title }} API{{ end }}
 
-{{ $api.auth }}
+{{ range $name, $scheme := $api.securitySchemes }}{{ with $scheme.description }}
+### {{ index $scheme "x-displayName" | default $name }}
+
+{{ . }}
+{{ end }}{{ end }}
 {{ range $api.servers }}
 Server: `{{ .url }}`
 {{ end }}
@@ -58,7 +62,7 @@ Deprecated operation.
 {{ end }}
 ## Connection and access
 
-{{ $api.auth }}
+[API connection and authentication guidance]({{ $api.url }}#authentication)
 {{ if and (eq $api.product "engine") (where .parameters "name" "X-Registry-Auth") }}
 `X-Registry-Auth` delegates registry credentials and does not authenticate the daemon caller.
 {{ end }}
