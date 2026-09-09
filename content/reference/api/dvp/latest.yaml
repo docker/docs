@@ -196,6 +196,25 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/NamespaceMetadata"
+              examples:
+                publishers:
+                  summary: Namespace metadata
+                  value:
+                    - datasets:
+                        - name: pulls
+                          timespans:
+                            - months
+                            - weeks
+                          views:
+                            - raw
+                            - summary
+                            - repo-summary
+                            - namespace-summary
+                            - geo-repo-summary
+                      extraRepos: null
+                      namespace: org1
+                      publisherType: DVP
+                      extensionPublisher: false
         "401":
           description: Authentication failed or second factor required
   /namespaces/{namespace}:
@@ -447,6 +466,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseData"
+              examples:
+                download:
+                  summary: Illustrative download location
+                  description: Use the signed URL returned by the API. The URL and file size in this example are illustrative.
+                  value:
+                    data:
+                      - url: https://example.invalid/exports/pulls.csv.gz?X-Amz-Expires=21600&X-Amz-Signature=EXAMPLE
+                        size: 1024
   /repos/pulls:
     get:
       tags:
@@ -571,17 +598,22 @@ components:
       properties:
         data:
           type: array
-          description: |
-            List of urls to download the data. When the data is large, the data will be split into multiple files.
+          description: Download URLs and file sizes for the export.
           items:
             $ref: "#/components/schemas/ResponseDataFile"
+      type: object
+      description: Download locations for the selected export. Large exports can span multiple files.
     ResponseDataFile:
       properties:
         url:
           type: string
+          format: uri
+          description: Signed download URL. URLs expire six hours after generation.
         size:
           type: integer
           format: int64
+          description: Size of the file in bytes.
+      type: object
     NamespaceData:
       examples:
         - namespaces:
@@ -591,18 +623,63 @@ components:
           type: array
           items:
             type: string
+      type: object
     NamespaceMetadata:
       properties:
         namespace:
           type: string
         extraRepos:
-          type: array
+          type:
+            - array
+            - "null"
           items:
             type: string
+          description: Additional repositories associated with the namespace. Null when none are configured.
         datasets:
           type: array
           items:
             $ref: "#/components/schemas/DatasetModel"
+        publisherType:
+          type: string
+          description: Publisher program associated with the namespace.
+        extensionPublisher:
+          type: boolean
+          description: Whether the namespace is an extension publisher.
+      type: object
+      examples:
+        - datasets:
+            - name: pulls
+              timespans:
+                - months
+                - weeks
+              views:
+                - raw
+                - summary
+                - repo-summary
+                - namespace-summary
+                - geo-repo-summary
+          extraRepos: null
+          namespace: org1
+          publisherType: DVP
+          extensionPublisher: false
+        - datasets:
+            - name: pulls
+              timespans:
+                - months
+                - weeks
+              views:
+                - repo-summary
+                - namespace-summary
+            - name: extensions
+              timespans:
+                - months
+                - weeks
+              views:
+                - ext-summary
+          extraRepos: null
+          namespace: org4
+          publisherType: DVP
+          extensionPublisher: true
     DatasetModel:
       properties:
         name:
@@ -615,34 +692,88 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/TimespanType"
+      type: object
+      description: Datasets and views available to the publisher, based on its entitlements.
     PullData:
       properties:
         pulls:
-          type: array
+          type:
+            - array
+            - "null"
           items:
             $ref: "#/components/schemas/PullModel"
+          description: Pull statistics for the selected interval. Null when no records are returned.
+      type: object
+      examples:
+        - pulls:
+            - end: "2022-08-07T00:00:00Z"
+              pullCount: 11
+              repo: neo4j-admin
+              start: "2022-08-01T00:00:00Z"
+              ipCount: 10
+            - end: "2022-08-14T00:00:00Z"
+              pullCount: 11
+              repo: neo4j-admin
+              start: "2022-08-08T00:00:00Z"
+              ipCount: 10
+        - pulls: null
     ReposPullData:
       properties:
         repos:
           type: object
           additionalProperties:
             $ref: "#/components/schemas/PullData"
+      type: object
+      examples:
+        - repos:
+            org2/neo4j-admin:
+              pulls:
+                - end: "2022-08-07T00:00:00Z"
+                  pullCount: 11
+                  repo: neo4j-admin
+                  start: "2022-08-01T00:00:00Z"
+                  ipCount: 10
+                - end: "2022-08-14T00:00:00Z"
+                  pullCount: 11
+                  repo: neo4j-admin
+                  start: "2022-08-08T00:00:00Z"
+                  ipCount: 10
+            org2/neo4j:
+              pulls:
+                - end: "2022-08-07T00:00:00Z"
+                  pullCount: 272407
+                  repo: neo4j
+                  start: "2022-08-01T00:00:00Z"
+                  ipCount: 41490
+                - end: "2022-08-14T00:00:00Z"
+                  pullCount: 272407
+                  repo: neo4j
+                  start: "2022-08-08T00:00:00Z"
+                  ipCount: 41490
     PullModel:
       properties:
         start:
           type: string
+          format: date-time
+          description: Start of the reporting interval in RFC 3339 format.
         end:
           type: string
+          format: date-time
+          description: End of the reporting interval in RFC 3339 format.
         repo:
           type: string
+          description: Repository name. Present for results grouped by repository.
         namespace:
           type: string
+          description: Namespace name. Present for results grouped by namespace.
         pullCount:
           type: integer
         ipCount:
           type: integer
         country:
           type: string
+          description: Country. Present for results grouped by geography and repository.
+      type: object
     YearData:
       examples:
         - years:
@@ -652,30 +783,56 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/YearModel"
+      type: object
     YearModel:
       properties:
         year:
           type: integer
+      type: object
     MonthData:
       properties:
         months:
           type: array
           items:
             $ref: "#/components/schemas/MonthModel"
+      type: object
+      required:
+        - months
+      examples:
+        - months:
+            - month: 5
+            - month: 7
     MonthModel:
       properties:
         month:
           type: integer
+      type: object
+      required:
+        - month
+      examples:
+        - month: 7
     WeekData:
       properties:
         weeks:
           type: array
           items:
             $ref: "#/components/schemas/WeekModel"
+      type: object
+      required:
+        - weeks
+      examples:
+        - weeks:
+            - week: 31
+            - week: 32
     WeekModel:
       properties:
         week:
           type: integer
+      type: object
+      required:
+        - week
+      examples:
+        - week: 31
     TimespanType:
       type: string
       enum:
@@ -695,18 +852,33 @@ components:
         - summary
         - repo-summary
         - namespace-summary
+        - geo-repo-summary
+        - ext-summary
+        - ext-premium-summary
+        - ext-premium-geo
     DatasetType:
       type: string
       enum:
         - pulls
+        - extensions
     TimespanModel:
       oneOf:
         - $ref: "#/components/schemas/MonthModel"
         - $ref: "#/components/schemas/WeekModel"
+      examples:
+        - month: 7
+        - week: 31
     TimespanData:
       oneOf:
         - $ref: "#/components/schemas/MonthData"
         - $ref: "#/components/schemas/WeekData"
+      examples:
+        - months:
+            - month: 5
+            - month: 7
+        - weeks:
+            - week: 31
+            - week: 32
     GroupType:
       type: string
       enum:

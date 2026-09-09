@@ -209,6 +209,52 @@ func TestMediaExamplesFollowReferenceAnnotations(t *testing.T) {
 	}
 }
 
+func TestDVPResponseContracts(t *testing.T) {
+	d, err := loadDocument(filepath.Join("..", "..", "content", "reference", "api", "dvp", "latest.yaml"), "validation/dialects")
+	if err != nil {
+		t.Fatal(err)
+	}
+	d.Source = Source{ID: "dvp"}
+	d.validate("")
+	if len(d.Diagnostics) != 0 {
+		t.Fatalf("DVP must pass without exceptions: %+v", d.Diagnostics)
+	}
+	for _, tc := range []struct {
+		schema string
+		value  string
+		valid  bool
+	}{
+		{"TimespanModel", `{"month":7}`, true},
+		{"TimespanModel", `{"week":31}`, true},
+		{"TimespanModel", `{}`, false},
+		{"TimespanModel", `{"month":7,"week":31}`, false},
+		{"TimespanModel", `{"month":{"month":7}}`, false},
+		{"TimespanModel", `7`, false},
+		{"TimespanData", `{"months":[{"month":5},{"month":7}]}`, true},
+		{"TimespanData", `{"weeks":[]}`, true},
+		{"TimespanData", `{"months":[],"weeks":[]}`, false},
+		{"TimespanData", `{"months":[{}]}`, false},
+		{"TimespanData", `{"weeks":null}`, false},
+		{"NamespaceMetadata", `{"namespace":"org1","extraRepos":null,"extensionPublisher":false}`, true},
+		{"PullData", `{"pulls":null}`, true},
+		{"PullData", `{"pulls":[{"start":"2022-08-01T00:00:00Z","pullCount":0}]}`, true},
+	} {
+		t.Run(tc.schema+"/"+tc.value, func(t *testing.T) {
+			s, err := d.Compiler.Compile(d.URI + "#/components/schemas/" + tc.schema)
+			if err != nil {
+				t.Fatal(err)
+			}
+			value, err := js.UnmarshalJSON(strings.NewReader(tc.value))
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := s.Validate(value); (err == nil) != tc.valid {
+				t.Fatalf("valid = %t, want %t: %v", err == nil, tc.valid, err)
+			}
+		})
+	}
+}
+
 func TestTimestampStringsRetainSpelling(t *testing.T) {
 	p := filepath.Join(t.TempDir(), "schema.yaml")
 	if e := os.WriteFile(p, []byte("type: string\nexample: 2021-01-05T21:06:53.506400Z\n"), 0600); e != nil {
