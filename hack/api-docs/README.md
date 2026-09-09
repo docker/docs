@@ -39,7 +39,8 @@ Hugo reports an error if the generated data is absent.
 
 The published YAML URLs still serve the source files directly. There is no
 conversion step, snapshot dependency, Node migration package, or source archive
-in the build. Historical conversion evidence lives in [adoption](adoption/README.md).
+in the build. The source diff and
+[prototype PR](https://github.com/docker/docs/pull/26043) provide migration context.
 
 ## Validation baseline
 
@@ -58,8 +59,8 @@ features cannot be waived. Unrecorded diagnostics fail the build.
 This baseline is review debt, not approval of API behavior. Strict validation
 fails until the issues are resolved. Any source edit requires deliberate review
 of the affected baseline entries; the build never refreshes them automatically.
-Product decisions listed in the adoption record remain merge blockers for this
-draft implementation.
+The implementation PR tracks the product decisions that require confirmation
+before merge.
 
 ## Tests and scope
 
