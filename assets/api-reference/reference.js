@@ -47,19 +47,3 @@ document.querySelectorAll("[data-api-media-select]").forEach((select) =>
     });
   }),
 );
-
-// Resolve historical single-page fragments using generated, same-origin links.
-function resolveLegacyFragment() {
-  let fragment;
-  try {
-    fragment = decodeURIComponent(location.hash.slice(1));
-  } catch {
-    return;
-  }
-  const target = document.getElementById(fragment);
-  if (target?.hasAttribute("data-api-legacy-fragment")) {
-    location.replace(target.href);
-  }
-}
-resolveLegacyFragment();
-window.addEventListener("hashchange", resolveLegacyFragment);
