@@ -7,9 +7,7 @@ description: |
 keywords: docker sandboxes, github copilot, ai agent, github token, sbx
 ---
 
-The following instructions apply to local sandboxes. For cloud authentication
-and usage, see [Authenticate cloud agents](../cloud/credentials.md) and
-[Use cloud sandboxes](../cloud/usage.md).
+{{% include "sandboxes-local-scope.md" %}}
 
 This guide covers authentication, configuration, and usage of GitHub Copilot
 in a sandboxed environment.

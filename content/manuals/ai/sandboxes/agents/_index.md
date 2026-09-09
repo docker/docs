@@ -6,11 +6,7 @@ description: AI coding agents supported by Docker Sandboxes.
 keywords: docker sandboxes, ai agents, claude code, codex, cursor, devin, gemini
 ---
 
-The following instructions apply to local sandboxes. For cloud authentication
-and usage, see [Authenticate cloud agents](../cloud/credentials.md) and
-[Use cloud sandboxes](../cloud/usage.md).
-
-Docker Sandboxes runs the following agents out of the box:
+Docker Sandboxes runs the following agents in local sandboxes:
 
 - [Claude Code](claude-code/)
 - [Codex](codex/)

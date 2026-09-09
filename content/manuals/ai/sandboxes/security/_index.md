@@ -6,8 +6,7 @@ description: Trust boundaries, isolation layers, and security properties of Dock
 keywords: docker sandboxes, security model, isolation, trust boundaries, microVM
 ---
 
-This page describes local sandboxes and their host integrations. For the cloud
-operating model, see [Compare local and cloud sandboxes](../cloud/local-vs-cloud.md).
+{{% include "sandboxes-local-scope.md" %}}
 
 Docker Sandboxes run AI agents in microVMs so they can execute code, install
 packages, and use tools without accessing host resources beyond those you

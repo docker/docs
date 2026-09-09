@@ -6,9 +6,7 @@ description: |
 keywords: docker sandboxes, droid, factory, ai agent, sbx
 ---
 
-The following instructions apply to local sandboxes. For cloud authentication
-and usage, see [Authenticate cloud agents](../cloud/credentials.md) and
-[Use cloud sandboxes](../cloud/usage.md).
+{{% include "sandboxes-local-scope.md" %}}
 
 This guide covers authentication, configuration, and usage of Droid, an AI
 coding agent by Factory, in a sandboxed environment.

@@ -7,11 +7,8 @@ keywords: docker sandboxes, sbx, workflows, agent skills, shared skills, clone m
 toc_max: 2
 ---
 
-These workflows use local sandboxes. For cloud workflows, see
-[Use cloud sandboxes](../cloud/usage.md).
-
 Choose a workflow based on how you want to develop, authenticate tools, or run
-sandboxes in automation. For command syntax and lifecycle basics, see
+local sandboxes in automation. For command syntax and lifecycle basics, see
 [Usage](../usage.md).
 
 ## Choose how code moves

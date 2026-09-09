@@ -7,9 +7,7 @@ description: |
 keywords: docker sandboxes, kiro, ai agent, authentication, sbx
 ---
 
-The following instructions apply to local sandboxes. For cloud authentication
-and usage, see [Authenticate cloud agents](../cloud/credentials.md) and
-[Use cloud sandboxes](../cloud/usage.md).
+{{% include "sandboxes-local-scope.md" %}}
 
 This guide covers authentication, configuration, and usage of Kiro in a
 sandboxed environment.

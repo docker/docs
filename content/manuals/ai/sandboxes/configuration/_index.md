@@ -6,10 +6,7 @@ description: Configure credentials, project environments, GPU passthrough, regis
 keywords: docker sandboxes, sbx, configuration, credentials, environment files, gpu passthrough, registry mirror, upstream proxy
 ---
 
-These guides configure local sandboxes. For cloud-specific settings and
-limitations, see [Compare local and cloud sandboxes](../cloud/local-vs-cloud.md).
-
-Configure credentials and how Docker Sandboxes run for a project, host, or
+Configure credentials and how local sandboxes run for a project, host, or
 network environment. These settings control sandbox creation, authentication,
 and connectivity. To change the tools and agent configuration inside a
 sandbox, see [Customize](../customize/).

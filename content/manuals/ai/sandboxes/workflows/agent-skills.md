@@ -6,14 +6,10 @@ description: Add skills from Git repositories or import them from supported host
 keywords: docker sandboxes, sbx, agent skills, shared skills, git repository, claude code, codex, copilot, cursor, devin, droid
 ---
 
-The shared skills store applies to local sandboxes. Cloud sandboxes do not
-mount this host store. See
-[Local and cloud differences](../cloud/local-vs-cloud.md).
-
 Shared agent skills let you install skills from Git repositories or import
-skills from supported agents on your host. `sbx` keeps installed skills in a
-persistent store that survives sandbox deletion and is shared by default with
-new sandboxes that run a supported agent.
+skills from supported agents on your host for use in local sandboxes. `sbx`
+keeps installed skills in a persistent store that survives sandbox deletion
+and is shared by default with new sandboxes that run a supported agent.
 
 > [!NOTE]
 > Shared agent skills are experimental.
