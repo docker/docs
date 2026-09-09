@@ -327,6 +327,10 @@ module:
     extended: false
     min: "0.156.0"
   mounts:
+    - source: data
+      target: data
+    - source: tmp/api-reference/data
+      target: data
     # Mount the assets directory so it doesn't get overwritten
     - source: assets
       target: assets

@@ -3,6 +3,7 @@ publish = "public"
 
 [context.deploy-preview.environment]
 NODE_VERSION = "24"
+GO_VERSION = "1.26.5"
 NODE_ENV = "production"
 HUGO_VERSION = "0.163.0"
 HUGO_ENABLEGITINFO = "true"
@@ -10,4 +11,4 @@ HUGO_ENVIRONMENT = "preview"
 SECRETS_SCAN_OMIT_PATHS = "public/contribute/file-conventions/index.html"
 
 [context.deploy-preview]
-command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && ./hack/flatten-and-resolve.js && npx pagefind@v1.5.2"
+command = "./hack/api-docs/run.sh generate && hugo --gc --minify -b $DEPLOY_PRIME_URL && node hack/api-docs/flatten.mjs && node hack/api-docs/verify-output.mjs && npx pagefind@v1.5.2"

@@ -1,0 +1,2892 @@
+[
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "example",
+    "pointer": "/components/schemas/Users2FALoginRequest/properties/code/example",
+    "messageSha256": "f524c4289cac4e74fc655a117925b19d205e8cf4a84d0e4eb580376857270d11",
+    "reason": "Retain the original example and its schema for review; the owner must resolve the reported mismatch without weakening the contract.",
+    "diagnostic": "jsonschema validation failed with 'source:hub#/components/schemas/Users2FALoginRequest/properties/code'\n- at '': got number, want string",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "example",
+    "pointer": "/components/schemas/getAccessTokensResponse/properties/next/example",
+    "messageSha256": "24b1ae1c7680ae4c77e6a2324f37604bae76ac9ec0005c305c53d25bf07d1de1",
+    "reason": "Retain the original example and its schema for review; the owner must resolve the reported mismatch without weakening the contract.",
+    "diagnostic": "jsonschema validation failed with 'source:hub#/components/schemas/getAccessTokensResponse/properties/next'\n- at '': got null, want string",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "example",
+    "pointer": "/components/schemas/getAccessTokensResponse/properties/previous/example",
+    "messageSha256": "70abcbf84044398b484ca7b512025a5f8e827352875dfc8e04071e76c195e4b0",
+    "reason": "Retain the original example and its schema for review; the owner must resolve the reported mismatch without weakening the contract.",
+    "diagnostic": "jsonschema validation failed with 'source:hub#/components/schemas/getAccessTokensResponse/properties/previous'\n- at '': got null, want string",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "example",
+    "pointer": "/components/schemas/immutable_tags_verify_request/properties/regex/example",
+    "messageSha256": "c5e7204226bdc3c0252c721ed6ef8bcdd36f4f6f2e5a10c8a7da220e9fc8fa8c",
+    "reason": "Retain the original example and its schema for review; the owner must resolve the reported mismatch without weakening the contract.",
+    "diagnostic": "jsonschema validation failed with 'source:hub#/components/schemas/immutable_tags_verify_request/properties/regex'\n- at '': 'v.*' does not match pattern '^[a-z0-9]+((\\\\\\\\.|_|__|-+)[a-z0-9]+)*(\\\\\\\\/[a-z0-9]+((\\\\\\\\.|_|__|-+)[a-z0-9]+)*)*$'",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "example",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/responses/200/content/application~1json/schema/properties/next/example",
+    "messageSha256": "c38485c83b9ebe4bca6b5ce33378e8b8fb1b8ec3d6c5edf1d0023bd44e4e2fd8",
+    "reason": "Retain the original example and its schema for review; the owner must resolve the reported mismatch without weakening the contract.",
+    "diagnostic": "jsonschema validation failed with 'source:hub#/paths/~1v2~1orgs~1%7Borg_name%7D~1groups/get/responses/200/content/application~1json/schema/properties/next'\n- at '': got null, want string",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "example",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/responses/200/content/application~1json/schema/properties/previous/example",
+    "messageSha256": "b3f9ac6897f3b48d85c63dae690b86569e284aeed8ade6390c34f511496a93c1",
+    "reason": "Retain the original example and its schema for review; the owner must resolve the reported mismatch without weakening the contract.",
+    "diagnostic": "jsonschema validation failed with 'source:hub#/paths/~1v2~1orgs~1%7Borg_name%7D~1groups/get/responses/200/content/application~1json/schema/properties/previous'\n- at '': got null, want string",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "example",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/get/responses/200/content/application~1json/schema/properties/next/example",
+    "messageSha256": "5a161ce722f225c2468a5db8c0c3b9a7794e7847d24645bc11e219b182cd9996",
+    "reason": "Retain the original example and its schema for review; the owner must resolve the reported mismatch without weakening the contract.",
+    "diagnostic": "jsonschema validation failed with 'source:hub#/paths/~1v2~1orgs~1%7Borg_name%7D~1groups~1%7Bgroup_name%7D~1members/get/responses/200/content/application~1json/schema/properties/next'\n- at '': got null, want string",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "example",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/get/responses/200/content/application~1json/schema/properties/previous/example",
+    "messageSha256": "0afb130b19f561c0c4587e8d27ffbdce7c2c56b516dd609f9dad68c697ae68dd",
+    "reason": "Retain the original example and its schema for review; the owner must resolve the reported mismatch without weakening the contract.",
+    "diagnostic": "jsonschema validation failed with 'source:hub#/paths/~1v2~1orgs~1%7Borg_name%7D~1groups~1%7Bgroup_name%7D~1members/get/responses/200/content/application~1json/schema/properties/previous'\n- at '': got null, want string",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "example",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/post/responses/201/content/application~1json/example",
+    "messageSha256": "1a244af81ade4ef2616b9ee5bf28edeed2bac6f56a35a4a58210ab73bf0ca6d7",
+    "reason": "Retain the original example and its schema for review; the owner must resolve the reported mismatch without weakening the contract.",
+    "diagnostic": "jsonschema validation failed with 'source:hub#/paths/~1v2~1namespaces~1%7Bnamespace%7D~1repositories/post/responses/201/content/application~1json/schema'\n- at '': missing properties 'user', 'permissions'",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "example",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/get/responses/200/content/application~1json/example",
+    "messageSha256": "e1b27ea692b2fda83285b9884f9f852d6c64f77f153e06138d27be7d958ffa16",
+    "reason": "Retain the original example and its schema for review; the owner must resolve the reported mismatch without weakening the contract.",
+    "diagnostic": "jsonschema validation failed with 'source:hub#/paths/~1v2~1namespaces~1%7Bnamespace%7D~1repositories~1%7Brepository%7D/get/responses/200/content/application~1json/schema'\n- at '': missing properties 'user', 'permissions'",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1access-tokens/get/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1access-tokens/get/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens/get/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens/post/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens/post/responses/201/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens/post/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/delete/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/delete/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/patch/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/patch/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/patch/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1access-tokens~1{uuid}/patch/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1auditlogs~1{account}/get/responses/500/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1auditlogs~1{account}/get/responses/default/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1auditlogs~1{account}~1actions/get/responses/500/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1auditlogs~1{account}~1actions/get/responses/default/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1auth~1token/post/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1auth~1token/post/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1auth~1token/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1invites~1bulk/post/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1invites~1bulk/post/responses/202/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1invites~1bulk/post/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1invites~1bulk/post/responses/409/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1invites~1{id}/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1invites~1{id}/delete/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1invites~1{id}/delete/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1invites~1{id}/delete/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1invites~1{id}~1resend/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1invites~1{id}~1resend/patch/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1invites~1{id}~1resend/patch/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1invites~1{id}~1resend/patch/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/post/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/post/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/post/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/post/responses/500/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/get/responses/500/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/head/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/head/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/head/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/head/responses/500/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags/patch/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags/patch/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags/patch/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags/patch/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags/patch/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags/patch/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags~1verify/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags~1verify/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags~1verify/post/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags~1verify/post/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags~1verify/post/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags~1verify/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags~1verify/post/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags~1verify/post/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/head/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/head/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/parameters/2/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/parameters/2/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/head/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/head/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/get/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/get/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/post/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/post/responses/201/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/post/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/post/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/post/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1settings/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1settings/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1settings/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1settings/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1settings/put/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1settings/put/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1settings/put/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1settings/put/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{name}~1settings/put/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/delete/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/delete/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/delete/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/patch/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/patch/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/patch/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/patch/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/patch/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/post/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/post/responses/201/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/post/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/post/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/delete/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/delete/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/delete/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/responses/500/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members~1{username}/delete/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members~1{username}/delete/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members~1{username}/delete/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1invites/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1invites/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1invites/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1invites/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members/parameters/5/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members/parameters/6/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members/get/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1export/get/responses/200/content/text~1csv",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1export/get/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1export/get/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1export/get/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1export/get/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/put/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/put/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/put/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/put/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/put/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/put/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/delete/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/delete/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/delete/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/delete/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1repositories~1{namespace}~1{repository}~1groups/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1repositories~1{namespace}~1{repository}~1groups/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1repositories~1{namespace}~1{repository}~1groups/post/responses/400/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1repositories~1{namespace}~1{repository}~1groups/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1repositories~1{namespace}~1{repository}~1groups/post/responses/403/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1repositories~1{namespace}~1{repository}~1groups/post/responses/404/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes/get/responses/200/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes/get/responses/401/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes/get/responses/500/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes~1{name}/get/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes~1{name}/get/responses/200/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes~1{name}/get/responses/401/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes~1{name}/get/responses/404/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes~1{name}/get/responses/500/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Schemas/get/responses/200/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Schemas/get/responses/401/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Schemas/get/responses/500/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1scim~12.0~1Schemas~1{id}/get/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Schemas~1{id}/get/responses/200/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Schemas~1{id}/get/responses/401/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Schemas~1{id}/get/responses/404/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Schemas~1{id}/get/responses/500/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1ServiceProviderConfig/get/responses/200/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1ServiceProviderConfig/get/responses/401/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1ServiceProviderConfig/get/responses/500/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/get/parameters/0/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/get/parameters/1/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/get/parameters/2/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/get/parameters/4/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/get/responses/200/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/get/responses/400/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/get/responses/401/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/get/responses/403/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/get/responses/404/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/get/responses/500/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/post/requestBody/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/post/responses/201/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/post/responses/400/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/post/responses/401/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/post/responses/403/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/post/responses/404/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/post/responses/409/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users/post/responses/500/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/get/responses/200/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/get/responses/400/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/get/responses/401/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/get/responses/403/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/get/responses/404/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/get/responses/500/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/requestBody/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/responses/200/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/responses/400/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/responses/401/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/responses/403/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/responses/404/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/responses/409/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/responses/500/content/application~1scim+json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~12fa-login/post/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~12fa-login/post/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~12fa-login/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~1login/post/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~1login/post/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "hub",
+    "sha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~1login/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "example",
+    "pointer": "/components/schemas/Users2FALoginRequest/properties/code/example",
+    "messageSha256": "d216ebf62163620dd035cbcdc4bca82e17f62bd9e4e722a533dc171fd4eb7253",
+    "reason": "Retain the original example and its schema for review; the owner must resolve the reported mismatch without weakening the contract.",
+    "diagnostic": "jsonschema validation failed with 'source:dvp#/components/schemas/Users2FALoginRequest/properties/code'\n- at '': got number, want string",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1namespaces/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1namespaces~1{namespace}/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1namespaces~1{namespace}~1pulls/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1namespaces~1{namespace}~1pulls~1exports~1years/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1namespaces~1{namespace}~1pulls~1exports~1years~1{year}~1{timespantype}/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1namespaces~1{namespace}~1pulls~1exports~1years~1{year}~1{timespantype}~1{timespan}/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1namespaces~1{namespace}~1pulls~1exports~1years~1{year}~1{timespantype}~1{timespan}~1{dataview}/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1namespaces~1{namespace}~1repos~1{repo}~1pulls/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1repos~1pulls/get/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~12fa-login/post/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~12fa-login/post/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~12fa-login/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~1login/post/requestBody/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~1login/post/responses/200/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "dvp",
+    "sha256": "73858f23826bf049e375df4b5670c1815b517d96c339a3c7c75b1c79a2787010",
+    "rule": "S11",
+    "pointer": "/paths/~1v2~1users~1login/post/responses/401/content/application~1json",
+    "messageSha256": "8a826fb6e84b59ba3811a6e54c377b89a5c7c39a2bf8ca3427729604ba518ed1",
+    "reason": "Retain the documented media variant; product owner must supply a verified example or transfer fixture.",
+    "diagnostic": "Media variant needs a reviewed example or transfer fixture",
+    "ownerReview": "required"
+  },
+  {
+    "api": "registry",
+    "sha256": "3257829998629249bd9bd27a79996f922169e0c98677b67fb1dc87f565391a01",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1{name}~1blobs~1uploads~1{uuid}/get/parameters/2/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "registry",
+    "sha256": "3257829998629249bd9bd27a79996f922169e0c98677b67fb1dc87f565391a01",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1{name}~1blobs~1uploads~1{uuid}/put/parameters/3/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "registry",
+    "sha256": "3257829998629249bd9bd27a79996f922169e0c98677b67fb1dc87f565391a01",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1{name}~1blobs~1uploads~1{uuid}/delete/parameters/2/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  },
+  {
+    "api": "registry",
+    "sha256": "3257829998629249bd9bd27a79996f922169e0c98677b67fb1dc87f565391a01",
+    "rule": "S8",
+    "pointer": "/paths/~1v2~1{name}~1blobs~1uploads~1{uuid}/patch/parameters/2/description",
+    "messageSha256": "4abc2b8c171a9f58475a0ee6f4a461b61b8acb5af0657064f5b4714cfa0516e7",
+    "reason": "Retain the source parameter definition; product documentation owner must add a meaningful description.",
+    "diagnostic": "Parameter description requires editorial review",
+    "ownerReview": "required"
+  }
+]

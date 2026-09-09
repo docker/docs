@@ -1,0 +1,31 @@
+{{ if eq .Page.Params.apiID "dvp" }}
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <title>Redirecting</title>
+      <link rel="canonical" href="{{ .Permalink }}" />
+    <script>
+      const destination = new URL({{ .Permalink }});
+      if (location.hash) destination.hash = location.hash;
+      location.replace(destination.href);
+    </script>
+      <noscript
+        ><meta http-equiv="refresh" content="0; url={{ .Permalink }}"
+      /></noscript>
+    </head>
+    <body>
+      <a href="{{ .Permalink }}">Continue to the documentation</a>
+    </body>
+  </html>
+{{ else }}
+  <!doctype html>
+  <html>
+    <head>
+      <title>{{ .Permalink }}</title>
+      <link rel="canonical" href="{{ .Permalink }}" />
+      <meta name="robots" content="noindex" />
+      <meta http-equiv="refresh" content="0; url={{ .Permalink }}" />
+    </head>
+  </html>
+{{ end }}

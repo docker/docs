@@ -1,0 +1,11 @@
+{{ $data := index hugo.Data "api-reference" }}
+{{ range $data.apis }}
+  {{ $manual := site.GetPage .manual }}
+  {{ if and $manual (eq $manual.RelPermalink $.RelPermalink) }}
+    <p
+      class="my-4 rounded border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900"
+    >
+      <a href="{{ .url }}">Explore the {{ .title }} API {{ .version }} →</a>
+    </p>
+  {{ end }}
+{{ end }}

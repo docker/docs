@@ -12,6 +12,7 @@ ARG PAGEFIND_VERSION=1.5.2
 # base defines the generic base stage
 FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS base
 RUN apk add --no-cache \
+    bash \
     git \
     nodejs \
     npm \
@@ -41,6 +42,9 @@ WORKDIR /project
 COPY --from=hugo /out/hugo /bin/hugo
 COPY --from=npm /out/node_modules node_modules
 COPY . .
+RUN --mount=type=cache,target=/root/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    ./hack/api-docs/run.sh test && ./hack/api-docs/run.sh generate
 
 # build creates production builds with Hugo
 FROM build-base AS build
@@ -58,7 +62,8 @@ RUN --mount=type=cache,target=/tmp/hugo_cache \
       --printUnusedTemplates \
       -b $DOCS_URL \
       -e $HUGO_ENV
-RUN ./hack/flatten-and-resolve.js public
+RUN node hack/api-docs/flatten.mjs public
+RUN node hack/api-docs/verify-output.mjs public
 
 # lint lints markdown files
 FROM ghcr.io/rvben/rumdl:0.2.49-alpine AS lint
