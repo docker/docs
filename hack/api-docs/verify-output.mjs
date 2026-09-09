@@ -45,12 +45,20 @@ for (const api of data.apis) {
 
   for (const op of api.operations) {
     const [html, md] = check(op.url);
-    for (const variant of op.variants)
+    for (const variant of op.variants) {
       if (
         !attributes(html, "data-api-variant").includes(variant.pointer) ||
         !md.includes(`### ${variant.direction} ${variant.status}`)
       )
         problems.push(`Missing variant: ${op.url} ${variant.pointer}`);
+      for (const example of variant.examples) {
+        if (
+          !html.includes(example.text.trim()) ||
+          !md.includes("```" + example.language + "\n" + example.text)
+        )
+          problems.push(`Example mismatch: ${op.url} ${variant.pointer}`);
+      }
+    }
     for (const p of op.parameters)
       if (
         !attributes(html, "data-api-parameter").includes(p.name) ||

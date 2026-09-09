@@ -127,11 +127,8 @@ Headers:
 {{ end }}
 {{ range .examples }}
 {{ .name }}:
-{{ if eq .valid false }}
-Source example does not satisfy its schema; owner review is required.
-{{ end }}
-```json
-{{ .value | jsonify (dict "indent" "  ") }}
+```{{ .language }}
+{{ .text }}
 ```
 {{ end }}
 {{ end }}

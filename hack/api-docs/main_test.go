@@ -22,9 +22,7 @@ func TestActualDialectAndReferences(t *testing.T) {
 	d := fixture(t, "valid.yaml")
 	d.validate("")
 	for _, x := range d.Diagnostics {
-		if !x.Waivable {
-			t.Errorf("%s: %s", x.Rule, x.Message)
-		}
+		t.Errorf("%s: %s", x.Rule, x.Message)
 	}
 	if len(d.operations()) != 4 {
 		t.Fatal("operation omitted")
@@ -76,7 +74,7 @@ func TestNegativeFixtures(t *testing.T) {
 			if e == nil {
 				d.validate("")
 				for _, x := range d.Diagnostics {
-					if !x.Waivable {
+					if x.Rule == "reference" || x.Rule == "schema" {
 						return
 					}
 				}

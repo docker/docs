@@ -414,7 +414,7 @@ paths:
                     last_used: null
                     generated_by: manual
                     is_active: true
-                    token: ""
+                    token: "***"
                     token_label: My read only token
                     scopes:
                       - repo:read
@@ -425,7 +425,7 @@ paths:
                     properties:
                       token:
                         type: string
-                        example: ""
+                        example: "***"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "404":
@@ -725,13 +725,26 @@ paths:
           description: ""
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: "#/components/schemas/error"
+              examples:
+                error:
+                  summary: Example error response
+                  value:
+                    message: internal error
+                    errinfo: null
         default:
           description: An unexpected error response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/rpcStatus"
+                $ref: "#/components/schemas/error"
+              examples:
+                error:
+                  summary: Example error response
+                  value:
+                    message: internal error
+                    errinfo: null
       parameters:
         - name: account
           description: Namespace to query audit log actions for.
@@ -799,13 +812,26 @@ paths:
           description: ""
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: "#/components/schemas/error"
+              examples:
+                error:
+                  summary: Example error response
+                  value:
+                    message: internal error
+                    errinfo: null
         default:
           description: An unexpected error response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/rpcStatus"
+                $ref: "#/components/schemas/error"
+              examples:
+                error:
+                  summary: Example error response
+                  value:
+                    message: internal error
+                    errinfo: null
       parameters:
         - name: account
           description: Namespace to query audit logs for.
@@ -1283,6 +1309,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
+              examples:
+                error:
+                  summary: Example error response
+                  value:
+                    message: bad request
+                    errinfo: null
         "401":
           $ref: "#/components/responses/unauthorized"
         "403":
@@ -1439,6 +1471,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
+              examples:
+                error:
+                  summary: Example error response
+                  value:
+                    message: not found
+                    errinfo: null
     post:
       summary: Create a new repository
       description: |+
@@ -1482,8 +1520,8 @@ paths:
                 is_automated: false
                 star_count: 0
                 pull_count: 0
-                last_updated: 2025-01-20T10:30:00Z
-                date_registered: 2025-01-20T10:30:00Z
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
                 collaborator_count: 0
                 hub_user: myorganization
                 has_starred: false
@@ -1496,6 +1534,11 @@ paths:
                   rules: []
                 storage_size: null
                 source: null
+                user: myorganization
+                permissions:
+                  read: true
+                  write: true
+                  admin: true
         "400":
           $ref: "#/components/responses/bad_request"
         "401":
@@ -1541,8 +1584,8 @@ paths:
                 is_automated: false
                 star_count: 0
                 pull_count: 0
-                last_updated: 2025-01-20T10:30:00Z
-                date_registered: 2025-01-20T10:30:00Z
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
                 collaborator_count: 0
                 hub_user: myorganization
                 has_starred: false
@@ -1555,6 +1598,11 @@ paths:
                   rules: []
                 storage_size: null
                 source: null
+                user: myorganization
+                permissions:
+                  read: true
+                  write: true
+                  admin: true
         "401":
           $ref: "#/components/responses/unauthorized"
         "403":
@@ -1620,9 +1668,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/org_member_paginated"
+                $ref: "#/components/schemas/org_member_paginated"
         "400":
           $ref: "#/components/responses/bad_request"
         "401":
@@ -1651,46 +1697,11 @@ paths:
           content:
             text/csv:
               schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - Name
-                    - Username
-                    - Email
-                    - Type
-                    - Role
-                    - Date Joined
-                  properties:
-                    Name:
-                      type: string
-                      description: First and last name of the member
-                    Username:
-                      type: string
-                      description: Username of the member
-                    Email:
-                      type: string
-                      description: Email address of the member
-                    Type:
-                      type: string
-                      description: Type of the member
-                      enum:
-                        - Invitee
-                        - User
-                    Permission:
-                      type: string
-                      description: Permission of the member
-                      enum:
-                        - Owner
-                        - Member
-                    Teams:
-                      type: string
-                      description: Comma-separated list of teams the member is part of
-                      example: team-1, team-2
-                    Date Joined:
-                      type: string
-                      description: Date the member joined the organization
-                      example: 2020-01-01 15:00:51.193355 +0000 UTC
+                type: string
+                description: "CSV columns: Name, Username, Email, Type, Role, Teams, and Date Joined. The Role column contains the assigned role label. When administrative insights are available, the export also includes Last Logged-in Date, Docker Desktop Version, Last Seen Date, and Opted Out Analytics."
+              example: |
+                Name,Username,Email,Type,Role,Teams,Date Joined
+                Jon Snow,dockeruser,example@docker.com,User,Owner,owners,2021-01-05 21:06:53.5064 +0000 UTC
           headers:
             Content-Disposition:
               schema:
@@ -1853,15 +1864,31 @@ paths:
                     type: number
                     example: 1
                   next:
-                    type: string
+                    type:
+                      - string
+                      - "null"
                     example: null
                   previous:
-                    type: string
+                    type:
+                      - string
+                      - "null"
                     example: null
                   results:
                     type: array
                     items:
                       $ref: "#/components/schemas/org_group"
+                type: object
+                examples:
+                  - count: 1
+                    next: null
+                    previous: null
+                    results:
+                      - id: 10
+                        uuid: e36eca69-4cc8-4f17-9845-ae8c2b832691
+                        name: developers
+                        description: Development team
+                        member_count: 1
+                        role: member
         "401":
           $ref: "#/components/responses/unauthorized"
         "403":
@@ -2059,15 +2086,31 @@ paths:
                     type: number
                     example: 1
                   next:
-                    type: string
+                    type:
+                      - string
+                      - "null"
                     example: null
                   previous:
-                    type: string
+                    type:
+                      - string
+                      - "null"
                     example: null
                   results:
                     type: array
                     items:
                       $ref: "#/components/schemas/group_member"
+                type: object
+                examples:
+                  - count: 1
+                    next: null
+                    previous: null
+                    results:
+                      - id: 0ab70deb065a43fcacd55d48caa945d8
+                        username: dockeruser
+                        full_name: Jon Snow
+                        type: User
+                        date_joined: "2021-01-05T21:06:53.506400Z"
+                        email: example@docker.com
         "401":
           $ref: "#/components/responses/unauthorized"
         "403":
@@ -2202,10 +2245,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  invitees:
-                    $ref: "#/components/schemas/bulk_invite"
+                $ref: "#/components/schemas/bulk_invite"
         "400":
           $ref: "#/components/responses/bad_request"
         "409":
@@ -2488,25 +2528,49 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ValueError"
+            $ref: "#/components/schemas/error"
+          examples:
+            error:
+              summary: Example error response
+              value:
+                message: bad request
+                errinfo: null
     Unauthorized:
       description: Unauthorized
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: "#/components/schemas/error"
+          examples:
+            error:
+              summary: Example error response
+              value:
+                message: unauthorized
+                errinfo: null
     Forbidden:
       description: Forbidden
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: "#/components/schemas/error"
+          examples:
+            error:
+              summary: Example error response
+              value:
+                message: permission denied
+                errinfo: null
     NotFound:
       description: Not Found
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: "#/components/schemas/error"
+          examples:
+            error:
+              summary: Example error response
+              value:
+                message: not found
+                errinfo: null
     list_tags:
       description: list repository tags
       content:
@@ -2525,36 +2589,72 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/error"
+          examples:
+            error:
+              summary: Example error response
+              value:
+                message: bad request
+                errinfo: null
     unauthorized:
       description: Unauthorized
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/error"
+          examples:
+            error:
+              summary: Example error response
+              value:
+                message: unauthorized
+                errinfo: null
     forbidden:
       description: Forbidden
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/error"
+          examples:
+            error:
+              summary: Example error response
+              value:
+                message: permission denied
+                errinfo: null
     not_found:
       description: Not Found
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/error"
+          examples:
+            error:
+              summary: Example error response
+              value:
+                message: not found
+                errinfo: null
     conflict:
       description: Conflict
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/error"
+          examples:
+            error:
+              summary: Example error response
+              value:
+                message: conflict
+                errinfo: null
     internal_error:
       description: Internal
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/error"
+          examples:
+            error:
+              summary: Example error response
+              value:
+                message: internal error
+                errinfo: null
     scim_bad_request:
       description: Bad Request
       content:
@@ -2681,10 +2781,22 @@ components:
               totalResults:
                 type: integer
                 example: 1
-              resources:
+              Resources:
                 type: array
                 items:
                   $ref: "#/components/schemas/scim_resource_type"
+            examples:
+              - schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:ListResponse
+                totalResults: 1
+                Resources:
+                  - schemas:
+                      - urn:ietf:params:scim:schemas:core:2.0:ResourceType
+                    id: User
+                    name: User
+                    description: User
+                    endpoint: /Users
+                    schema: urn:ietf:params:scim:schemas:core:2.0:User
     scim_get_resource_type_resp:
       description: ""
       content:
@@ -2706,10 +2818,21 @@ components:
               totalResults:
                 type: integer
                 example: 1
-              resources:
+              Resources:
                 type: array
                 items:
                   $ref: "#/components/schemas/scim_schema"
+            examples:
+              - schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:ListResponse
+                totalResults: 1
+                Resources:
+                  - schemas:
+                      - urn:ietf:params:scim:schemas:core:2.0:Schema
+                    id: urn:ietf:params:scim:schemas:core:2.0:User
+                    name: User
+                    description: User Account
+                    attributes: []
     scim_get_schema_resp:
       description: ""
       content:
@@ -2738,10 +2861,38 @@ components:
               itemsPerPage:
                 type: integer
                 example: 10
-              resources:
+              Resources:
                 type: array
                 items:
                   $ref: "#/components/schemas/scim_user"
+            examples:
+              - schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:ListResponse
+                totalResults: 1
+                Resources:
+                  - schemas:
+                      - urn:ietf:params:scim:schemas:core:2.0:User
+                    id: d80f7c79-7730-49d8-9a41-7c42fb622d9c
+                    userName: jon.snow@docker.com
+                    name:
+                      givenName: Jon
+                      familyName: Snow
+                    displayName: jonsnow
+                    active: true
+                    emails:
+                      - value: jon.snow@docker.com
+                        display: jon.snow@docker.com
+                        primary: true
+                    groups:
+                      - value: nightswatch
+                        display: nightswatch
+                    meta:
+                      resourceType: User
+                      location: https://hub.docker.com/v2/scim/2.0/Users/d80f7c79-7730-49d8-9a41-7c42fb622d9c
+                      created: "2022-05-20T00:54:18Z"
+                      lastModified: "2022-05-20T00:54:18Z"
+                startIndex: 1
+                itemsPerPage: 1
     scim_create_user_resp:
       description: ""
       content:
@@ -2790,6 +2941,11 @@ components:
       required:
         - immutable_tags
         - immutable_tags_rules
+      examples:
+        - immutable_tags: true
+          immutable_tags_rules:
+            - v.*
+            - .*-RELEASE
     repo_creation_request:
       type: object
       required:
@@ -2915,19 +3071,19 @@ components:
         last_updated:
           type: string
           format: date-time
-          example: 2021-01-05T21:06:53.506400Z
+          example: "2021-01-05T21:06:53.506400Z"
           description: ISO 8601 timestamp of when repository was last updated
         last_modified:
           type:
             - string
             - "null"
           format: date-time
-          example: 2021-01-05T21:06:53.506400Z
+          example: "2021-01-05T21:06:53.506400Z"
           description: ISO 8601 timestamp of when repository was last modified
         date_registered:
           type: string
           format: date-time
-          example: 2021-01-05T21:06:53.506400Z
+          example: "2021-01-05T21:06:53.506400Z"
           description: ISO 8601 timestamp of when repository was created
         collaborator_count:
           type: integer
@@ -3003,6 +3159,36 @@ components:
         - content_types
         - categories
         - immutable_tags_settings
+      examples:
+        - name: my-app
+          namespace: myorganization
+          repository_type: image
+          status: 1
+          status_description: Active
+          description: A sample application repository
+          is_private: false
+          is_automated: false
+          star_count: 0
+          pull_count: 0
+          last_updated: "2025-01-20T10:30:00Z"
+          date_registered: "2025-01-20T10:30:00Z"
+          collaborator_count: 0
+          hub_user: myorganization
+          has_starred: false
+          full_description: This is a comprehensive description of my application repository that contains additional details about the project.
+          media_types: []
+          content_types: []
+          categories: []
+          immutable_tags_settings:
+            enabled: false
+            rules: []
+          storage_size: null
+          source: null
+          user: myorganization
+          permissions:
+            read: true
+            write: true
+            admin: true
     repo_permissions:
       type: object
       properties:
@@ -3038,11 +3224,13 @@ components:
       properties:
         regex:
           type: string
-          pattern: ^[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*$
-          description: "Immutable tags rule regex pattern. Must match format: [a-z0-9]+((\\\\.|_|__|-+)[a-z0-9]+)*(\\\\/[a-z0-9]+((\\\\.|_|__|-+)[a-z0-9]+)*)*"
+          pattern: ^[^,]*$
+          description: Regular expression using Go regular expression syntax. Commas are not permitted.
           example: v.*
       required:
         - regex
+      examples:
+        - regex: v.*
     immutable_tags_verify_response:
       examples:
         - tags:
@@ -3278,26 +3466,6 @@ components:
           description: Description of the error.
           type: string
           example: Incorrect authentication credentials
-    protobufAny:
-      type: object
-      properties:
-        type_url:
-          type: string
-        value:
-          type: string
-          format: byte
-    rpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: "#/components/schemas/protobufAny"
     AuditLogAction:
       type: object
       properties:
@@ -3361,23 +3529,6 @@ components:
         action_description:
           type: string
       description: Audit log event.
-    ValueError:
-      type: object
-      description: Used to error if input validation fails.
-      properties:
-        fields:
-          type: object
-          items:
-            type: string
-        text:
-          type: string
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        message:
-          type: string
     accessToken:
       type: object
       properties:
@@ -3395,7 +3546,7 @@ components:
           example: some user agent
         created_at:
           type: string
-          example: 2021-07-20T12:00:00.000000Z
+          example: "2021-07-20T12:00:00.000000Z"
         last_used:
           type:
             - string
@@ -3410,6 +3561,7 @@ components:
         token:
           type: string
           example: a7a5ef25-8889-43a0-8cc7-f2a94268e861
+          description: Token value returned on creation. Later responses redact the value as ***.
         token_label:
           type: string
           example: My read only token
@@ -3420,9 +3572,11 @@ components:
           items:
             type: string
         expires_at:
-          type: string
+          type:
+            - string
+            - "null"
           format: date-time
-          example: 2021-10-28T18:30:19.520861Z
+          example: "2021-10-28T18:30:19.520861Z"
     createAccessTokenRequest:
       examples:
         - token_label: My read only token
@@ -3477,10 +3631,14 @@ components:
           type: number
           example: 1
         next:
-          type: string
+          type:
+            - string
+            - "null"
           example: null
         previous:
-          type: string
+          type:
+            - string
+            - "null"
           example: null
         active_count:
           type: number
@@ -3494,7 +3652,26 @@ components:
                 properties:
                   token:
                     type: string
-                    example: ""
+                    example: "***"
+      examples:
+        - count: 1
+          active_count: 1
+          next: null
+          previous: null
+          results:
+            - uuid: b30bbf97-506c-4ecd-aabc-842f3cb484fb
+              client_id: HUB
+              creator_ip: 127.0.0.1
+              creator_ua: some user agent
+              created_at: "2021-07-20T12:00:00.000000Z"
+              last_used: null
+              generated_by: manual
+              is_active: true
+              token: "***"
+              token_label: My read only token
+              scopes:
+                - repo:read
+              expires_at: "2021-10-28T18:30:19.520861Z"
     patchAccessTokenRequest:
       examples:
         - token_label: My read only token
@@ -3511,6 +3688,20 @@ components:
           example: false
     patchAccessTokenResponse:
       $ref: "#/components/schemas/accessToken"
+      examples:
+        - uuid: b30bbf97-506c-4ecd-aabc-842f3cb484fb
+          client_id: HUB
+          creator_ip: 127.0.0.1
+          creator_ua: some user agent
+          created_at: "2021-07-20T12:00:00.000000Z"
+          last_used: null
+          generated_by: manual
+          is_active: true
+          token: "***"
+          token_label: My read only token
+          scopes:
+            - repo:read
+          expires_at: "2021-10-28T18:30:19.520861Z"
     orgSettings:
       examples:
         - restricted_images:
@@ -3557,10 +3748,14 @@ components:
           type: string
           description: CPU architecture
         features:
-          type: string
+          type:
+            - string
+            - "null"
           description: CPU features
         variant:
-          type: string
+          type:
+            - string
+            - "null"
           description: CPU variant
         digest:
           type:
@@ -3575,10 +3770,14 @@ components:
           type: string
           description: operating system
         os_features:
-          type: string
+          type:
+            - string
+            - "null"
           description: OS features
         os_version:
-          type: string
+          type:
+            - string
+            - "null"
           description: OS version
         size:
           type: integer
@@ -3593,13 +3792,13 @@ components:
           type:
             - string
             - "null"
-          example: 2021-01-05T21:06:53.506400Z
+          example: "2021-01-05T21:06:53.506400Z"
           description: datetime of last pull
         last_pushed:
           type:
             - string
             - "null"
-          example: 2021-01-05T21:06:53.506400Z
+          example: "2021-01-05T21:06:53.506400Z"
           description: datetime of last push
     tag:
       type: object
@@ -3608,8 +3807,11 @@ components:
           type: integer
           description: tag ID
         images:
-          type: object
-          $ref: "#/components/schemas/image"
+          type:
+            - array
+            - "null"
+          items:
+            $ref: "#/components/schemas/image"
         creator:
           type: integer
           description: ID of the user that pushed the tag
@@ -3617,7 +3819,7 @@ components:
           type:
             - string
             - "null"
-          example: 2021-01-05T21:06:53.506400Z
+          example: "2021-01-05T21:06:53.506400Z"
           description: datetime of last update
         last_updater:
           type: integer
@@ -3635,26 +3837,50 @@ components:
           type: integer
           description: compressed size (sum of all layers) of the tagged image
         v2:
-          type: string
-          description: repository API version
-        status:
-          type: string
-          enum:
-            - active
-            - inactive
-          description: whether a tag has been pushed to or pulled in the past month
+          type: boolean
+          description: Whether the tag uses the Registry V2 format.
         tag_last_pulled:
           type:
             - string
             - "null"
-          example: 2021-01-05T21:06:53.506400Z
+          example: "2021-01-05T21:06:53.506400Z"
           description: datetime of last pull
         tag_last_pushed:
           type:
             - string
             - "null"
-          example: 2021-01-05T21:06:53.506400Z
+          example: "2021-01-05T21:06:53.506400Z"
           description: datetime of last push
+        tag_status:
+          type: string
+          enum:
+            - active
+            - inactive
+          description: whether a tag has been pushed to or pulled in the past month
+      examples:
+        - id: 12345
+          name: latest
+          last_updated: "2021-01-05T21:06:53.506400Z"
+          full_size: 123456
+          v2: true
+          images:
+            - architecture: amd64
+              features: null
+              variant: null
+              os: linux
+              os_features: null
+              os_version: null
+              size: 123456
+              status: active
+              last_pulled: null
+              last_pushed: "2021-01-05T21:06:53.506400Z"
+          creator: 1234
+          last_updater: 1234
+          last_updater_username: dockeruser
+          repository: 5678
+          tag_status: active
+          tag_last_pulled: null
+          tag_last_pushed: "2021-01-05T21:06:53.506400Z"
     paginated_tags:
       allOf:
         - $ref: "#/components/schemas/page"
@@ -3664,6 +3890,34 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/tag"
+      examples:
+        - count: 1
+          next: null
+          previous: null
+          results:
+            - id: 12345
+              name: latest
+              last_updated: "2021-01-05T21:06:53.506400Z"
+              full_size: 123456
+              v2: true
+              images:
+                - architecture: amd64
+                  features: null
+                  variant: null
+                  os: linux
+                  os_features: null
+                  os_version: null
+                  size: 123456
+                  status: active
+                  last_pulled: null
+                  last_pushed: "2021-01-05T21:06:53.506400Z"
+              creator: 1234
+              last_updater: 1234
+              last_updater_username: dockeruser
+              repository: 5678
+              tag_status: active
+              tag_last_pulled: null
+              tag_last_pushed: "2021-01-05T21:06:53.506400Z"
     page:
       type: object
       properties:
@@ -3785,13 +4039,16 @@ components:
       type: object
       properties:
         errinfo:
-          type: object
-          items:
-            type: string
+          type:
+            - object
+            - "null"
+          additionalProperties: true
+          description: Additional error context, when available.
         detail:
           type: string
         message:
           type: string
+      description: Error details vary by endpoint. The message describes the failure; errinfo can contain additional context.
     scim_error:
       type: object
       properties:
@@ -3876,25 +4133,40 @@ components:
           example: example@docker.com
           deprecated: true
         last_logged_in_at:
-          type: string
+          type:
+            - string
+            - "null"
           format: date-time
           description: |
-            Last time the user logged in. To access this field, you must have insights visible for your organization. See 
+            Last time the user logged in. To access this field, you must have insights visible for your organization. See
             [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
-          example: 2021-01-05T21:06:53.506400Z
+          example: "2021-01-05T21:06:53.506400Z"
         last_seen_at:
-          type: string
+          type:
+            - string
+            - "null"
           format: date-time
           description: |
-            Last time the user was seen. To access this field, you must have insights visible for your organization. See 
+            Last time the user was seen. To access this field, you must have insights visible for your organization. See
             [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
-          example: 2021-01-05T21:06:53.506400Z
+          example: "2021-01-05T21:06:53.506400Z"
         last_desktop_version:
           type: string
           description: |
-            Last desktop version the user used. To access this field, you must have insights visible for your organization. See 
+            Last desktop version the user used. To access this field, you must have insights visible for your organization. See
             [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
           example: 4.29.0
+      examples:
+        - id: 0ab70deb065a43fcacd55d48caa945d8
+          username: dockeruser
+          full_name: Jon Snow
+          type: User
+          date_joined: "2021-01-05T21:06:53.506400Z"
+          email: example@docker.com
+          role: Owner
+          groups:
+            - owners
+          is_guest: false
     org_member_paginated:
       type: object
       properties:
@@ -3903,18 +4175,37 @@ components:
           description: The total number of items that match with the search.
           example: 120
         previous:
-          type: string
+          type:
+            - string
+            - "null"
           description: The URL or link for the previous page of items.
-          example: https://hub.docker.com/v2/some/resources/items?page=1&page_size=20
+          example: null
         next:
-          type: string
+          type:
+            - string
+            - "null"
           description: The URL or link for the next page of items.
-          example: https://hub.docker.com/v2/some/resources/items?page=3&page_size=20
+          example: null
         results:
           type: array
           description: List of accounts.
           items:
             $ref: "#/components/schemas/org_member"
+      examples:
+        - count: 1
+          next: null
+          previous: null
+          results:
+            - id: 0ab70deb065a43fcacd55d48caa945d8
+              username: dockeruser
+              full_name: Jon Snow
+              type: User
+              date_joined: "2021-01-05T21:06:53.506400Z"
+              email: example@docker.com
+              role: Owner
+              groups:
+                - owners
+              is_guest: false
     org_group:
       type: object
       properties:
@@ -3938,10 +4229,19 @@ components:
           example: 10
           description: Member count of the group
         role:
-          type: string
+          type:
+            - string
+            - "null"
           description: |
             Role assigned to the team. A core role (`owner`, `editor`, or `member`)
             or the name of a custom role (not the label or UUID).
+      examples:
+        - id: 10
+          uuid: e36eca69-4cc8-4f17-9845-ae8c2b832691
+          name: developers
+          description: Development team
+          member_count: 1
+          role: member
     group_member:
       type: object
       properties:
@@ -4025,7 +4325,8 @@ components:
           properties:
             supported:
               type: boolean
-              example: false
+              example: true
+          type: object
         bulk:
           type: object
           properties:
@@ -4044,7 +4345,7 @@ components:
               example: true
             maxResults:
               type: integer
-              example: 99999
+              example: 200
         changePassword:
           type: object
           properties:
@@ -4064,20 +4365,44 @@ components:
               type: boolean
               example: false
         authenticationSchemes:
-          type: object
-          properties:
-            name:
-              type: string
-              example: OAuth 2.0 Bearer Token
-            description:
-              type: string
-              example: The OAuth 2.0 Bearer Token Authentication scheme. OAuth enables clients to access protected resources by obtaining an access token, which is defined in RFC 6750 as "a string representing an access authorization issued to the client", rather than using the resource owner's credentials directly.
-            specUri:
-              type: string
-              example: http://tools.ietf.org/html/rfc6750
-            type:
-              type: string
-              example: oauthbearertoken
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: OAuth 2.0 Bearer Token
+              description:
+                type: string
+                example: The OAuth 2.0 Bearer Token Authentication scheme. OAuth enables clients to access protected resources by obtaining an access token, which is defined in RFC 6750 as "a string representing an access authorization issued to the client", rather than using the resource owner's credentials directly.
+              specUri:
+                type: string
+                example: http://tools.ietf.org/html/rfc6750
+              type:
+                type: string
+                example: oauthbearertoken
+      examples:
+        - schemas:
+            - urn:ietf:params:scim:schemas:core:2.0:ServiceProviderConfig
+          patch:
+            supported: true
+          bulk:
+            supported: false
+            maxOperations: 0
+            maxPayloadSize: 0
+          filter:
+            supported: true
+            maxResults: 200
+          changePassword:
+            supported: false
+          sort:
+            supported: true
+          etag:
+            supported: false
+          authenticationSchemes:
+            - name: OAuth 2.0 Bearer Token
+              specUri: http://tools.ietf.org/html/rfc6750
+              type: oauthbearertoken
     scim_resource_type:
       examples:
         - schemas:
@@ -4321,15 +4646,31 @@ components:
           type: number
           example: 10
         next:
-          type: string
-          example: https://hub.docker.com/v2/orgs/docker/access-tokens?page=2&page_size=10
+          type:
+            - string
+            - "null"
+          example: null
         previous:
-          type: string
-          example: https://hub.docker.com/v2/orgs/docker/access-tokens?page=1&page_size=10
+          type:
+            - string
+            - "null"
+          example: null
         results:
           type: array
           items:
             $ref: "#/components/schemas/orgAccessToken"
+      examples:
+        - total: 1
+          next: null
+          previous: null
+          results:
+            - id: a7a5ef25-8889-43a0-8cc7-f2a94268e861
+              label: My organization token
+              created_by: johndoe
+              is_active: true
+              created_at: "2022-05-20T00:54:18Z"
+              expires_at: "2023-05-20T00:54:18Z"
+              last_used_at: "2022-06-15T12:30:45Z"
     getOrgAccessTokenResponse:
       examples:
         - id: a7a5ef25-8889-43a0-8cc7-f2a94268e861
@@ -4492,20 +4833,6 @@ components:
               description: Resources this token has access to
               items:
                 $ref: "#/components/schemas/orgAccessTokenResource"
-    team_repo:
-      allOf:
-        - $ref: "#/components/schemas/repository_info"
-      properties:
-        group_name:
-          type: string
-          description: Name of the group
-        permission:
-          type: string
-          description: Repo access permission
-          enum:
-            - read
-            - write
-            - admin
   parameters:
     namespace:
       description: Namespace of the repository, such as a user or organization name.
@@ -4696,17 +5023,26 @@ components:
             type: object
             required:
               - schemas
+              - userName
             properties:
               schemas:
                 $ref: "#/components/schemas/scim_user_schemas"
               name:
-                allOf:
-                  - $ref: "#/components/schemas/scim_user_name"
-                  - description: If this is omitted from the request, the update will skip the update on it. We will only ever change the name, but not clear it.
-              enabled:
+                $ref: "#/components/schemas/scim_user_name"
+              userName:
+                $ref: "#/components/schemas/scim_user_username"
+              active:
                 type: boolean
                 default: false
-                description: If this is omitted from the request, it will default to false resulting in a deactivated user.
+                description: Whether the user is active. Defaults to false when omitted.
+            examples:
+              - schemas:
+                  - urn:ietf:params:scim:schemas:core:2.0:User
+                userName: jon.snow@docker.com
+                name:
+                  givenName: Jon
+                  familyName: Snow
+                active: true
     add_member_to_org_group:
       required: true
       content:

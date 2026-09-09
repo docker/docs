@@ -23,18 +23,25 @@ func (d *Document) model() Object {
 	for _, op := range ops {
 		for _, raw := range arr(op["variants"]) {
 			v := obj(raw)
-			c := d.Compiled[str(v["pointer"])+"/schema"]
-			if c != nil {
-				for _, rawEx := range arr(v["examples"]) {
-					ex := obj(rawEx)
-					ex["valid"] = c.Validate(ex["value"]) == nil
-				}
+			for _, rawEx := range arr(v["examples"]) {
+				ex := obj(rawEx)
+				ex["text"], ex["language"] = exampleText(str(v["media"]), ex["value"])
 			}
 		}
 	}
 	for _, op := range ops {
 		op["url"] = route(d.Source.ID) + "operations/" + slug(str(op["id"])) + "/"
 		op["securitySchemes"] = obj(d.Root["components"])["securitySchemes"]
+		op["acceptMedia"] = responseMedia(op)
+		// HEAD negotiates the GET representation but has no response body.
+		if op["method"] == "HEAD" && op["acceptMedia"] == "" {
+			for _, get := range ops {
+				if get["method"] == "GET" && get["path"] == op["path"] {
+					op["acceptMedia"] = responseMedia(get)
+					break
+				}
+			}
+		}
 		op["curl"], op["curlNotes"] = curlExample(d.Source, op)
 		op["references"] = refs(op["raw"], schemaURLs)
 		op["requestSchema"] = firstRequestSchema(op)
@@ -88,6 +95,24 @@ func parameterValue(p Object) (any, bool) {
 	}
 	return nil, false
 }
+
+func exampleText(media string, value any) (string, string) {
+	if s, ok := value.(string); ok && !strings.Contains(media, "json") {
+		return s, "text"
+	}
+	return strings.TrimSpace(string(encoded(value))), "json"
+}
+
+func responseMedia(op Object) string {
+	for _, raw := range arr(op["variants"]) {
+		v := obj(raw)
+		if v["direction"] == "Response" && strings.HasPrefix(str(v["status"]), "2") && str(v["media"]) != "" {
+			return str(v["media"])
+		}
+	}
+	return ""
+}
+
 func curlExample(src Source, op Object) (string, []string) {
 	notes := []string{}
 	args := []string{"curl"}
@@ -196,6 +221,9 @@ func curlExample(src Source, op Object) (string, []string) {
 			notes = append(notes, "This example uses the first authentication alternative. Review the complete requirements.")
 		}
 	}
+	if media := str(op["acceptMedia"]); media != "" {
+		args = append(args, "--header "+shell("Accept: "+media))
+	}
 	for _, raw := range arr(op["variants"]) {
 		v := obj(raw)
 		if v["direction"] != "Request" {
@@ -207,7 +235,7 @@ func curlExample(src Source, op Object) (string, []string) {
 		}
 		args = append(args, "--header "+shell("Content-Type: "+media))
 		examples := arr(v["examples"])
-		if len(examples) > 0 && obj(examples[0])["valid"] != false && strings.Contains(media, "json") {
+		if len(examples) > 0 && strings.Contains(media, "json") {
 			args = append(args, "--data-raw "+shell(strings.TrimSpace(string(encoded(obj(examples[0])["value"])))))
 		} else {
 			args = append(args, "--data-binary @request-body")
