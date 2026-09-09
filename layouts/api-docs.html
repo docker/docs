@@ -165,7 +165,6 @@
             </li>
           {{ end }}
         </ul>
-        {{ partial "api-reference/legacy-fragments.html" $api }}
       {{ else if eq .Params.view "operation" }}
         {{ range $api.operations }}
           {{ if eq .id $.Params.operationID }}

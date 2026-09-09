@@ -69,7 +69,7 @@ security overrides, server and parameter precedence, and request generation.
 `verify-output.mjs` checks all 181 generated HTML/Markdown pairs and retention of
 Engine v1.40–v1.56 in ReDoc, unchanged Governance rendering, and byte-identical
 published specifications. `browser-checks.mjs` exports a Playwright check for
-navigation, legacy fragments, filtering, requests, and narrow screens.
+navigation, page aliases, filtering, requests, and narrow screens.
 
 Callbacks and webhook navigation are unsupported and fail validation. Request
 examples are POSIX shell templates; they do not make service calls. Specification

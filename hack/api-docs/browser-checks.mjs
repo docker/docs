@@ -23,13 +23,13 @@ export default async function verify(page, base = "http://localhost:1314") {
   );
   const first = page.locator("[data-api-filter-item]").first();
   const operationURL = await first.getAttribute("href");
-  const operationID = operationURL.split("/").filter(Boolean).at(-1);
-  await page.goto(base + "/reference/api/hub/dvp/#operation/" + operationID);
-  await page.waitForURL("**" + operationURL);
+  await page.goto(base + "/reference/api/hub/dvp/");
+  await page.waitForURL("**/reference/api/dvp/latest/");
   assert(
-    page.url().endsWith(operationURL),
-    "DVP alias preserves legacy operation fragment",
+    page.url().endsWith("/reference/api/dvp/latest/"),
+    "DVP alias reaches overview",
   );
+  await page.goto(base + operationURL);
   await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
   const copy = page.locator("[data-api-copy]");
   await copy.focus();

@@ -129,17 +129,6 @@ for (let minor = 40; minor <= 56; minor++) {
   if (!html.includes("<redoc") || html.includes("data-api-view="))
     problems.push(`Legacy Engine renderer changed: ${url}`);
 }
-for (const api of data.apis.filter((api) => api.id !== "engine-1.55")) {
-  const overview = decode(
-    fs.readFileSync(path.join(base, api.url, "index.html"), "utf8"),
-  );
-  for (const op of api.operations) {
-    if (!attributes(overview, "id").includes(`operation/${op.id}`))
-      problems.push(
-        `Missing historical operation fragment: ${api.id} ${op.id}`,
-      );
-  }
-}
 if (problems.length)
   throw Error(
     problems.slice(0, 25).join("\n") + `\n${problems.length} output failures`,
