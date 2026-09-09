@@ -269,6 +269,9 @@ paths:
         content:
           application/json:
             schema:
+              examples:
+                - identifier: myusername
+                  secret: dckr_pat_124509ugsdjga93
               description: Request to create access token
               type: object
               required:
@@ -331,12 +334,14 @@ paths:
       security:
         - bearerAuth: []
       parameters:
-        - in: query
+        - description: Page number to return.
+          in: query
           name: page
           schema:
             type: number
             default: 1
-        - in: query
+        - description: Number of results per page.
+          in: query
           name: page_size
           schema:
             type: number
@@ -355,7 +360,8 @@ paths:
       operationId: getV2AccessTokens
   /v2/access-tokens/{uuid}:
     parameters:
-      - in: path
+      - description: UUID of the personal access token.
+        in: path
         name: uuid
         required: true
         schema:
@@ -399,6 +405,20 @@ paths:
           content:
             application/json:
               schema:
+                examples:
+                  - uuid: b30bbf97-506c-4ecd-aabc-842f3cb484fb
+                    client_id: HUB
+                    creator_ip: 127.0.0.1
+                    creator_ua: some user agent
+                    created_at: "2021-07-20T12:00:00.000000Z"
+                    last_used: null
+                    generated_by: manual
+                    is_active: true
+                    token: ""
+                    token_label: My read only token
+                    scopes:
+                      - repo:read
+                    expires_at: "2021-10-28T18:30:19.520861Z"
                 allOf:
                   - $ref: "#/components/schemas/accessToken"
                   - type: object
@@ -893,6 +913,11 @@ paths:
         content:
           application/json:
             schema:
+              examples:
+                - restricted_images:
+                    enabled: true
+                    allow_official_images: true
+                    allow_verified_publishers: true
               required:
                 - restricted_images
               properties:
@@ -959,12 +984,14 @@ paths:
       security:
         - bearerAuth: []
       parameters:
-        - in: query
+        - description: Page number to return.
+          in: query
           name: page
           schema:
             type: number
             default: 1
-        - in: query
+        - description: Number of results per page.
+          in: query
           name: page_size
           schema:
             type: number
@@ -1699,6 +1726,8 @@ paths:
         content:
           application/json:
             schema:
+              examples:
+                - role: owner
               required:
                 - role
               properties:
@@ -1768,6 +1797,14 @@ paths:
           content:
             application/json:
               schema:
+                examples:
+                  - data:
+                      - id: e36eca69-4cc8-4f17-9845-ae8c2b832691
+                        inviter_username: moby
+                        invitee: invitee@docker.com
+                        org: docker
+                        team: owners
+                        created_at: "2021-10-28T18:30:19.520861Z"
                 type: object
                 properties:
                   data:
@@ -1846,6 +1883,9 @@ paths:
         content:
           application/json:
             schema:
+              examples:
+                - name: developers
+                  description: Development team
               required:
                 - name
               properties:
@@ -1904,6 +1944,9 @@ paths:
         content:
           application/json:
             schema:
+              examples:
+                - name: developers
+                  description: Development team
               required:
                 - name
               properties:
@@ -1936,6 +1979,9 @@ paths:
         content:
           application/json:
             schema:
+              examples:
+                - description: Development team
+                  role: member
               properties:
                 name:
                   type: string
@@ -2079,7 +2125,8 @@ paths:
   /v2/invites/{id}:
     x-audience: public
     parameters:
-      - in: path
+      - description: ID of the invitation.
+        in: path
         name: id
         required: true
         schema:
@@ -2107,7 +2154,8 @@ paths:
   /v2/invites/{id}/resend:
     x-audience: public
     parameters:
-      - in: path
+      - description: ID of the invitation.
+        in: path
         name: id
         schema:
           type: string
@@ -2208,7 +2256,8 @@ paths:
       tags:
         - scim
       parameters:
-        - name: name
+        - description: Name of the SCIM resource type.
+          name: name
           in: path
           schema:
             type: string
@@ -2253,7 +2302,8 @@ paths:
       tags:
         - scim
       parameters:
-        - name: id
+        - description: URN identifying the SCIM schema.
+          name: id
           in: path
           schema:
             type: string
@@ -2308,7 +2358,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: ""
+          description: "One-based index of the first result to return."
           example: 1
         - name: count
           in: query
@@ -2316,16 +2366,17 @@ paths:
             type: integer
             minimum: 1
             maximum: 200
-          description: ""
+          description: "Maximum number of results to return."
           example: 10
         - name: filter
           in: query
           schema:
             type: string
-          description: ""
+          description: "SCIM filter expression used to select users."
           example: userName eq "jon.snow@docker.com"
         - $ref: "#/components/parameters/scim_attributes"
-        - name: sortOrder
+        - description: Sort direction applied to the attribute specified by sortBy.
+          name: sortOrder
           in: query
           schema:
             type: string
@@ -2508,6 +2559,13 @@ components:
       description: Bad Request
       content:
         application/scim+json:
+          examples:
+            error:
+              summary: Example error envelope
+              value:
+                schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:Error
+                status: "400"
           schema:
             allOf:
               - $ref: "#/components/schemas/scim_error"
@@ -2521,6 +2579,13 @@ components:
       description: Unauthorized
       content:
         application/scim+json:
+          examples:
+            error:
+              summary: Example error envelope
+              value:
+                schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:Error
+                status: "401"
           schema:
             allOf:
               - $ref: "#/components/schemas/scim_error"
@@ -2531,6 +2596,13 @@ components:
       description: Forbidden
       content:
         application/scim+json:
+          examples:
+            error:
+              summary: Example error envelope
+              value:
+                schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:Error
+                status: "403"
           schema:
             allOf:
               - $ref: "#/components/schemas/scim_error"
@@ -2541,6 +2613,13 @@ components:
       description: Not Found
       content:
         application/scim+json:
+          examples:
+            error:
+              summary: Example error envelope
+              value:
+                schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:Error
+                status: "404"
           schema:
             allOf:
               - $ref: "#/components/schemas/scim_error"
@@ -2551,6 +2630,13 @@ components:
       description: Conflict
       content:
         application/scim+json:
+          examples:
+            error:
+              summary: Example error envelope
+              value:
+                schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:Error
+                status: "409"
           schema:
             allOf:
               - $ref: "#/components/schemas/scim_error"
@@ -2561,6 +2647,13 @@ components:
       description: Internal Error
       content:
         application/scim+json:
+          examples:
+            error:
+              summary: Example error envelope
+              value:
+                schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:Error
+                status: "500"
           schema:
             allOf:
               - $ref: "#/components/schemas/scim_error"
@@ -2951,6 +3044,11 @@ components:
       required:
         - regex
     immutable_tags_verify_response:
+      examples:
+        - tags:
+            - v1.0.0
+            - v2.1.3
+            - latest
       type: object
       properties:
         tags:
@@ -3092,6 +3190,9 @@ components:
               items:
                 $ref: "#/components/schemas/repository_list_entry"
     UsersLoginRequest:
+      examples:
+        - username: myusername
+          password: p@ssw0rd
       description: User login details
       type: object
       required:
@@ -3108,6 +3209,8 @@ components:
           type: string
           example: p@ssw0rd
     AuthCreateTokenResponse:
+      examples:
+        - access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
       description: successful access token response
       type: object
       properties:
@@ -3116,6 +3219,8 @@ components:
           type: string
           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
     PostUsersLoginSuccessResponse:
+      examples:
+        - token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
       description: successful user login response
       type: object
       properties:
@@ -3126,6 +3231,8 @@ components:
           type: string
           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
     PostUsersLoginErrorResponse:
+      examples:
+        - detail: Incorrect authentication credentials
       description: failed user login response or second factor required
       type: object
       required:
@@ -3143,6 +3250,9 @@ components:
             - "null"
           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
     Users2FALoginRequest:
+      examples:
+        - login_2fa_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          code: "123456"
       description: Second factor user login details
       type: object
       required:
@@ -3157,8 +3267,10 @@ components:
           description: |
             The Time-based One-Time Password of the Docker Hub account to authenticate with.
           type: string
-          example: 123456
+          example: "123456"
     PostUsers2FALoginErrorResponse:
+      examples:
+        - detail: Incorrect authentication credentials
       description: failed second factor login response.
       type: object
       properties:
@@ -3312,6 +3424,10 @@ components:
           format: date-time
           example: 2021-10-28T18:30:19.520861Z
     createAccessTokenRequest:
+      examples:
+        - token_label: My read only token
+          scopes:
+            - repo:read
       type: object
       required:
         - token_label
@@ -3339,6 +3455,20 @@ components:
           format: date-time
           example: 2021-10-28T18:30:19.520861Z
     createAccessTokensResponse:
+      examples:
+        - uuid: b30bbf97-506c-4ecd-aabc-842f3cb484fb
+          client_id: HUB
+          creator_ip: 127.0.0.1
+          creator_ua: some user agent
+          created_at: "2021-07-20T12:00:00.000000Z"
+          last_used: null
+          generated_by: manual
+          is_active: true
+          token: a7a5ef25-8889-43a0-8cc7-f2a94268e861
+          token_label: My read only token
+          scopes:
+            - repo:read
+          expires_at: "2021-10-28T18:30:19.520861Z"
       $ref: "#/components/schemas/accessToken"
     getAccessTokensResponse:
       type: object
@@ -3366,6 +3496,9 @@ components:
                     type: string
                     example: ""
     patchAccessTokenRequest:
+      examples:
+        - token_label: My read only token
+          is_active: false
       type: object
       properties:
         token_label:
@@ -3379,6 +3512,11 @@ components:
     patchAccessTokenResponse:
       $ref: "#/components/schemas/accessToken"
     orgSettings:
+      examples:
+        - restricted_images:
+            enabled: true
+            allow_official_images: true
+            allow_verified_publishers: true
       type: object
       properties:
         restricted_images:
@@ -3941,6 +4079,14 @@ components:
               type: string
               example: oauthbearertoken
     scim_resource_type:
+      examples:
+        - schemas:
+            - urn:ietf:params:scim:schemas:core:2.0:ResourceType
+          id: User
+          name: User
+          description: User
+          endpoint: /Users
+          schema: urn:ietf:params:scim:schemas:core:2.0:User
       type: object
       properties:
         schemas:
@@ -3965,6 +4111,13 @@ components:
           type: string
           example: urn:ietf:params:scim:schemas:core:2.0:User
     scim_schema:
+      examples:
+        - schemas:
+            - urn:ietf:params:scim:schemas:core:2.0:Schema
+          id: urn:ietf:params:scim:schemas:core:2.0:User
+          name: User
+          description: User Account
+          attributes: []
       type: object
       properties:
         schemas:
@@ -4036,6 +4189,28 @@ components:
       example: d80f7c79-7730-49d8-9a41-7c42fb622d9c
       description: The unique identifier for the user. A v4 UUID.
     scim_user:
+      examples:
+        - schemas:
+            - urn:ietf:params:scim:schemas:core:2.0:User
+          id: d80f7c79-7730-49d8-9a41-7c42fb622d9c
+          userName: jon.snow@docker.com
+          name:
+            givenName: Jon
+            familyName: Snow
+          displayName: jonsnow
+          active: true
+          emails:
+            - value: jon.snow@docker.com
+              display: jon.snow@docker.com
+              primary: true
+          groups:
+            - value: nightswatch
+              display: nightswatch
+          meta:
+            resourceType: User
+            location: https://hub.docker.com/v2/scim/2.0/Users/d80f7c79-7730-49d8-9a41-7c42fb622d9c
+            created: "2022-05-20T00:54:18Z"
+            lastModified: "2022-05-20T00:54:18Z"
       type: object
       properties:
         schemas:
@@ -4156,6 +4331,19 @@ components:
           items:
             $ref: "#/components/schemas/orgAccessToken"
     getOrgAccessTokenResponse:
+      examples:
+        - id: a7a5ef25-8889-43a0-8cc7-f2a94268e861
+          label: My organization token
+          created_by: johndoe
+          is_active: true
+          created_at: "2022-05-20T00:54:18Z"
+          expires_at: "2023-05-20T00:54:18Z"
+          last_used_at: "2022-06-15T12:30:45Z"
+          resources:
+            - type: TYPE_REPO
+              path: myorg/myrepo
+              scopes:
+                - scope-image-pull
       allOf:
         - $ref: "#/components/schemas/orgAccessToken"
         - type: object
@@ -4166,6 +4354,14 @@ components:
               items:
                 $ref: "#/components/schemas/orgAccessTokenResource"
     createOrgAccessTokenRequest:
+      examples:
+        - label: My organization token
+          description: Token for CI/CD pipeline
+          resources:
+            - type: TYPE_REPO
+              path: myorg/myrepo
+              scopes:
+                - scope-image-pull
       type: object
       properties:
         label:
@@ -4191,6 +4387,19 @@ components:
       required:
         - label
     createOrgAccessTokenResponse:
+      examples:
+        - id: a7a5ef25-8889-43a0-8cc7-f2a94268e861
+          label: My organization token
+          is_active: true
+          created_at: "2022-05-20T00:54:18Z"
+          expires_at: "2023-05-20T00:54:18Z"
+          last_used_at: "2022-06-15T12:30:45Z"
+          token: dckr_oat_7awgM4jG5SQvxcvmNzhKj8PQjxo
+          resources:
+            - type: TYPE_REPO
+              path: myorg/myrepo
+              scopes:
+                - scope-image-pull
       type: object
       allOf:
         - type: object
@@ -4231,6 +4440,15 @@ components:
               items:
                 $ref: "#/components/schemas/orgAccessTokenResource"
     updateOrgAccessTokenRequest:
+      examples:
+        - label: My organization token
+          description: Token for CI/CD pipeline
+          resources:
+            - type: TYPE_REPO
+              path: myorg/myrepo
+              scopes:
+                - scope-image-pull
+          is_active: true
       type: object
       properties:
         label:
@@ -4251,6 +4469,19 @@ components:
           description: Whether the token is active
           example: true
     updateOrgAccessTokenResponse:
+      examples:
+        - id: a7a5ef25-8889-43a0-8cc7-f2a94268e861
+          label: My organization token
+          created_by: johndoe
+          is_active: true
+          created_at: "2022-05-20T00:54:18Z"
+          expires_at: "2023-05-20T00:54:18Z"
+          last_used_at: "2022-06-15T12:30:45Z"
+          resources:
+            - type: TYPE_REPO
+              path: myorg/myrepo
+              scopes:
+                - scope-image-pull
       type: object
       allOf:
         - $ref: "#/components/schemas/orgAccessToken"
@@ -4277,18 +4508,21 @@ components:
             - admin
   parameters:
     namespace:
+      description: Namespace of the repository, such as a user or organization name.
       in: path
       name: namespace
       required: true
       schema:
         type: string
     repository:
+      description: Name of the repository within the namespace.
       in: path
       name: repository
       required: true
       schema:
         type: string
     tag:
+      description: Name of the image tag.
       in: path
       name: tag
       required: true
@@ -4358,6 +4592,7 @@ components:
       example: d80f7c79-7730-49d8-9a41-7c42fb622d9c
       required: true
     type:
+      description: Filter members by membership type.
       in: query
       name: type
       schema:
@@ -4368,6 +4603,7 @@ components:
           - member
       example: all
     role:
+      description: Filter members by their organization role.
       in: query
       name: role
       schema:
@@ -4389,6 +4625,15 @@ components:
       content:
         application/json:
           schema:
+            examples:
+              - org: docker
+                team: owners
+                role: member
+                invitees:
+                  - invitee1DockerId
+                  - invitee2@docker.com
+                  - invitee3@docker.com
+                dry_run: true
             type: object
             required:
               - org
@@ -4425,6 +4670,13 @@ components:
       content:
         application/scim+json:
           schema:
+            examples:
+              - schemas:
+                  - urn:ietf:params:scim:schemas:core:2.0:User
+                userName: jon.snow@docker.com
+                name:
+                  givenName: Jon
+                  familyName: Snow
             type: object
             required:
               - schemas
@@ -4460,6 +4712,8 @@ components:
       content:
         application/json:
           schema:
+            examples:
+              - member: jonsnow
             type: object
             required:
               - member

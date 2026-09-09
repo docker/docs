@@ -491,6 +491,9 @@ paths:
 components:
   schemas:
     UsersLoginRequest:
+      examples:
+        - username: myusername
+          password: hunter2
       description: User login details
       type: object
       required:
@@ -506,6 +509,8 @@ components:
           type: string
           example: hunter2
     PostUsersLoginSuccessResponse:
+      examples:
+        - token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
       description: successful user login response
       type: object
       properties:
@@ -517,6 +522,8 @@ components:
           type: string
           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
     PostUsersLoginErrorResponse:
+      examples:
+        - detail: Incorrect authentication credentials
       description: failed user login response or second factor required
       type: object
       required:
@@ -533,6 +540,9 @@ components:
             - "null"
           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
     Users2FALoginRequest:
+      examples:
+        - login_2fa_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          code: "123456"
       description: Second factor user login details
       type: object
       required:
@@ -546,8 +556,10 @@ components:
         code:
           description: The Time-based One-Time Password of the Docker Hub account to authenticate with.
           type: string
-          example: 123456
+          example: "123456"
     PostUsers2FALoginErrorResponse:
+      examples:
+        - detail: Incorrect authentication credentials
       description: failed second factor login response.
       type: object
       properties:
@@ -571,6 +583,9 @@ components:
           type: integer
           format: int64
     NamespaceData:
+      examples:
+        - namespaces:
+            - myorganization
       properties:
         namespaces:
           type: array
@@ -629,6 +644,9 @@ components:
         country:
           type: string
     YearData:
+      examples:
+        - years:
+            - year: 2025
       properties:
         years:
           type: array
