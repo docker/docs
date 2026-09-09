@@ -26,8 +26,10 @@ cloud sandbox.
 
 ## Choose an authentication method
 
-For Claude Code in cloud sandboxes, use an Anthropic API key. Configure your
-agent with the corresponding command:
+Claude Code in cloud sandboxes requires an Anthropic API key. Anthropic OAuth
+and Claude subscription sign-in are not supported for cloud sandboxes.
+
+Configure your agent with the corresponding command:
 
 | Agent or provider | Recommended command | Authentication |
 | --- | --- | --- |
