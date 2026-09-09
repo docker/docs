@@ -46,8 +46,13 @@ manifest fields.
 3. Generate presentation model version 1: operations, effective security and
    servers, parameters, media variants, examples, schema links, and provenance.
 4. Render HTML and Markdown through the content adapter and `api-docs` templates.
-5. Preserve API Markdown examples during site processing and check generated
-   operation, parameter, media, schema, and link coverage.
+5. Run the shared site flattening script, then check generated operation,
+   parameter, media, schema, and link coverage.
+
+Generated API Markdown includes `<!-- link-rewriting: off -->`. The shared
+`hack/flatten-and-resolve.js` script moves these files to their flattened paths
+without rewriting their content. Their links already use published URLs.
+Handwritten pages retain the existing link processing.
 
 The published YAML URLs still serve the source files directly. There is no
 conversion step, snapshot dependency, Node migration package, or source archive

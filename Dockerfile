@@ -62,7 +62,8 @@ RUN --mount=type=cache,target=/tmp/hugo_cache \
       --printUnusedTemplates \
       -b $DOCS_URL \
       -e $HUGO_ENV
-RUN node hack/api-docs/flatten.mjs public
+RUN node --test hack/test/flatten-and-resolve.mjs
+RUN node hack/flatten-and-resolve.js public
 RUN node hack/api-docs/verify-output.mjs public
 
 # lint lints markdown files
