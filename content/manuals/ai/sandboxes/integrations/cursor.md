@@ -8,6 +8,9 @@ keywords: docker sandboxes, cursor, remote ssh, remote development, sbx
 
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
+These connection instructions use a local sandbox. For cloud SSH setup, see
+[Connect with SSH](../cloud/usage.md#connect-with-ssh).
+
 Cursor is built on VS Code, so it connects to a sandbox the same way, using
 Remote - SSH. Your editor stays on your host while files, terminals, and
 extensions run in the isolated sandbox.

@@ -6,6 +6,8 @@ description: Trust boundaries, isolation layers, and security properties of Dock
 keywords: docker sandboxes, security model, isolation, trust boundaries, microVM
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 Docker Sandboxes run AI agents in microVMs so they can execute code, install
 packages, and use tools without accessing host resources beyond those you
 share. Multiple isolation layers protect your host system.

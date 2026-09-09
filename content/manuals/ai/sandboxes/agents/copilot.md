@@ -7,6 +7,8 @@ description: |
 keywords: docker sandboxes, github copilot, ai agent, github token, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This guide covers authentication, configuration, and usage of GitHub Copilot
 in a sandboxed environment.
 

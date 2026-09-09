@@ -7,6 +7,8 @@ description: |
 keywords: docker sandboxes, opencode, ai agent, authentication, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This guide covers authentication, configuration, and usage of OpenCode in a
 sandboxed environment.
 

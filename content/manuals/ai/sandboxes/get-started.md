@@ -1,10 +1,13 @@
 ---
-title: Get started with Docker Sandboxes
-linkTitle: Get started
+title: Get started with local Docker Sandboxes
+linkTitle: Get started locally
 weight: 20
-description: Configure agent credentials and work through your first Docker Sandboxes session.
+description: Configure agent credentials and work through your first local Docker Sandboxes session.
 keywords: sandbox, sbx, get started, credentials, clone mode, network policy
 ---
+
+This walkthrough uses local sandboxes. For cloud credentials and a first cloud
+session, see [Get started with cloud sandboxes](cloud/_index.md#get-started).
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can

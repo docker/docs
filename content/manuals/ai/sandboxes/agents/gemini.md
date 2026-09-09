@@ -7,6 +7,8 @@ description: |
 keywords: docker sandboxes, gemini, google, ai agent, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This guide covers authentication, configuration, and usage of Google Gemini in
 a sandboxed environment.
 

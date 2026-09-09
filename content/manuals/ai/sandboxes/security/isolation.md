@@ -7,6 +7,8 @@ aliases:
   - /ai/sandboxes/security/workspace/
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 AI coding agents need to execute code, install packages, and run tools on
 your behalf. Docker Sandboxes run each agent in its own microVM. Five
 isolation layers protect your host: hypervisor, network, Docker Engine,

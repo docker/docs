@@ -7,6 +7,9 @@ weight: 20
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
+The procedures on this page use local sandboxes. For cloud template and kit
+usage, see [Customize a cloud sandbox](../cloud/usage.md#customize-a-cloud-sandbox).
+
 > [!NOTE]
 > Kits are experimental. The kit file format, CLI commands, and experience
 > for creating, loading, and managing kits are subject to change as the

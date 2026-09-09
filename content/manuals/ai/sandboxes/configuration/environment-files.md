@@ -19,7 +19,7 @@ params:
       text: Experimental
 ---
 
-A sandbox environment file captures the setup for a project in a
+A sandbox environment file captures the setup for a local sandbox in a
 `sbxenv.yaml` file. Share the file with project contributors so they use the
 same agent, tools, resources, and credentials without reproducing CLI flags and
 setup steps.
