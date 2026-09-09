@@ -176,6 +176,39 @@ func TestFalseSchemaAndExamplePreserved(t *testing.T) {
 	}
 }
 
+func TestMediaExamplesFollowReferenceAnnotations(t *testing.T) {
+	d := &Document{URI: "https://example.test/api.yaml", Registry: &Registry{resources: map[string]any{
+		"https://example.test/api.yaml": Object{
+			"alias": Object{"$ref": "#/base", "examples": []any{false, jsonNumber("0")}},
+			"base":  Object{"example": "base example"},
+			"cycle": Object{"$ref": "#/cycle"},
+		},
+		"https://example.test/schemas/alias.yaml": Object{"$ref": "base.yaml"},
+		"https://example.test/schemas/base.yaml":  Object{"example": "external example"},
+	}}}
+	for _, tc := range []struct {
+		name   string
+		media  Object
+		values []any
+	}{
+		{"intermediate annotations", Object{"schema": Object{"$ref": "#/alias"}}, []any{false, jsonNumber("0")}},
+		{"nearest schema annotation", Object{"schema": Object{"$ref": "#/alias", "example": "local"}}, []any{"local"}},
+		{"media annotation", Object{"example": false, "schema": Object{"$ref": "#/alias"}}, []any{false}},
+		{"relative external reference", Object{"schema": Object{"$ref": "schemas/alias.yaml"}}, []any{"external example"}},
+		{"cycle", Object{"schema": Object{"$ref": "#/cycle"}}, []any{}},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			values := []any{}
+			for _, ex := range d.mediaExamples(tc.media) {
+				values = append(values, obj(ex)["value"])
+			}
+			if !reflect.DeepEqual(values, tc.values) {
+				t.Fatalf("examples = %#v, want %#v", values, tc.values)
+			}
+		})
+	}
+}
+
 func TestTimestampStringsRetainSpelling(t *testing.T) {
 	p := filepath.Join(t.TempDir(), "schema.yaml")
 	if e := os.WriteFile(p, []byte("type: string\nexample: 2021-01-05T21:06:53.506400Z\n"), 0600); e != nil {
