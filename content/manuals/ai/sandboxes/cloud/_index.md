@@ -42,10 +42,10 @@ configure.
 
 Credentials configured for local sandboxes aren't available to cloud
 sandboxes. Configure a cloud credential for your agent before launching it.
-For example, authenticate Claude Code with Anthropic OAuth:
+For Claude Code, store an Anthropic API key:
 
 ```console
-$ sbx --cloud secret set anthropic --oauth
+$ sbx --cloud secret set anthropic
 ```
 
 Cloud sandboxes expire after one hour by default and are deleted when they
@@ -99,7 +99,7 @@ Removal deletes files stored only in the sandbox. For your own projects, see
   environments
 - [Use cloud sandboxes](usage.md) covers creation, files, ports, and lifecycle
 - [Authenticate cloud agents](credentials.md) covers cloud-specific secrets,
-  OAuth, and safe sign-in workflows
+  API keys, and OpenAI OAuth
 - [Manage cloud network policy](network-policy.md) covers account-level and
   sandbox-level network access
 - [Move a sandbox](move.md) explains filesystem transfers between local and

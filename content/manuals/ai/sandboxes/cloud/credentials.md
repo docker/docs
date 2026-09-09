@@ -26,22 +26,19 @@ cloud sandbox.
 
 ## Choose an authentication method
 
-Use the authentication method supported by the provider:
+For Claude Code in cloud sandboxes, use an Anthropic API key. Configure your
+agent with the corresponding command:
 
 | Agent or provider | Recommended command | Authentication |
 | --- | --- | --- |
-| Claude Code with Anthropic OAuth | `sbx --cloud secret set anthropic --oauth` | Opens the Anthropic OAuth flow and stores the resulting credential at account scope |
+| Claude Code | `sbx --cloud secret set anthropic` | Prompts for an Anthropic API key |
 | Codex with OpenAI OAuth | `sbx --cloud secret set openai --oauth` | Opens the OpenAI OAuth flow and stores the resulting credential at account scope |
 | Service API key | `sbx --cloud secret set <service>` | Prompts for an API key or token |
 
-OAuth setup is available for Anthropic and OpenAI at account scope. To use an
-API key instead, omit `--oauth`:
+For Codex, you can use OpenAI OAuth at account scope or store an OpenAI API
+key with `sbx --cloud secret set openai`.
 
-```console
-$ sbx --cloud secret set anthropic
-```
-
-After configuring the credential, launch the agent:
+After storing the Anthropic API key, launch Claude Code:
 
 ```console
 $ sbx --cloud run claude --name cloud-project
@@ -49,30 +46,13 @@ $ sbx --cloud run claude --name cloud-project
 
 ## Keep credentials out of the sandbox filesystem
 
-> [!IMPORTANT]
->
-> An agent's interactive sign-in doesn't use the cloud secret store. It can
-> write credentials to the sandbox filesystem. For example, Claude Code can
-> store its credential in plain text at `~/.claude/.credentials.json`.
+Credentials configured with `sbx --cloud secret` stay in the cloud secret store,
+outside the sandbox filesystem.
 
-Files created by interactive sign-in remain part of the sandbox filesystem.
-They can persist until the sandbox is deleted and can be included in a
-filesystem snapshot created by `sbx move`.
-
-When a cloud-managed OAuth flow is available, use it instead of the agent's
-`/login` command. For Claude Code, run:
-
-```console
-$ sbx --cloud secret set anthropic --oauth
-```
-
-The actual credential remains in the cloud secret store. Agent credential files
-can contain non-secret sentinel values that direct requests through the
-credential proxy.
-
-If you already signed in from inside an agent, follow the provider's sign-out
-guidance and remove the in-sandbox credential before configuring the
-cloud-managed credential.
+An agent's interactive sign-in can write credentials inside the sandbox.
+Those files can be included in templates and `sbx move` snapshots. If you
+signed in inside an agent, follow the provider's sign-out guidance and remove
+those credentials before capturing or moving the sandbox.
 
 ## Set credential scope
 
@@ -100,7 +80,7 @@ The following table shows cloud secret support for the
 
 | Service | Cloud secret authentication |
 | --- | --- |
-| `anthropic` | API key or OAuth |
+| `anthropic` | API key |
 | `cursor` | Not supported |
 | `droid` | API key; cloud-managed OAuth is not supported |
 | `github` | Token |
@@ -113,9 +93,8 @@ The following table shows cloud secret support for the
 | `xai` | API key |
 
 To configure a supported service, run `sbx --cloud secret set <service>`.
-Cloud-managed OAuth is available only for `anthropic` and `openai`, at account
-scope. Other providers' interactive sign-in flows do not use the cloud secret
-store.
+For OpenAI OAuth, add `--oauth` and use account scope. An agent's interactive
+sign-in does not use the cloud secret store.
 
 Services declared by local kits aren't automatically supported in cloud
 sandboxes. A kit cannot add a service to the cloud secret store.

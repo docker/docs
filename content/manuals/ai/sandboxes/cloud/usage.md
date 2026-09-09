@@ -15,11 +15,8 @@ A cloud sandbox expires after one hour by default and is deleted on expiration.
 See [Configure expiration](#configure-expiration) to choose another timeout or
 action before creating it.
 
-> [!IMPORTANT]
->
-> Credentials saved for local sandboxes aren't available in cloud sandboxes.
-> [Configure a cloud credential](credentials.md) before launching an agent.
-> Signing in through the agent can store credentials in the sandbox filesystem.
+Credentials saved for local sandboxes aren't available in cloud sandboxes.
+[Configure a cloud credential](credentials.md) before launching an agent.
 
 Create a sandbox and attach to its agent:
 
