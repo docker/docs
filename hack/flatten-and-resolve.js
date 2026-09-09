@@ -9,6 +9,7 @@
  * 3. Strips /manuals/ prefix from paths (Hugo config removes this)
  * 4. Resolves all relative links to absolute HTML paths for RAG ingestion
  *
+ * Pages starting with <!-- link-rewriting: off --> are flattened without content changes.
  * Usage: node flatten-and-resolve.js [public-dir]
  */
 
@@ -16,6 +17,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PUBLIC_DIR = path.resolve(process.argv[2] || 'public');
+const SKIP_LINK_REWRITING = '<!-- link-rewriting: off -->';
 
 if (!fs.existsSync(PUBLIC_DIR)) {
   console.error(`Error: Directory ${PUBLIC_DIR} does not exist`);
@@ -62,27 +64,29 @@ function flattenIndexFiles() {
     // Read content and fix sibling links
     let content = fs.readFileSync(file, 'utf8');
 
-    // Rewrite relative links that don't start with /, ../, or http
-    // These are sibling files that will become children after flattening
-    content = content.replace(
-      /\[([^\]]+)\]\(([a-zA-Z0-9][^):]*)\)/g,
-      (match, text, link) => {
-        // Skip if it's a URL or starts with special chars
-        if (link.startsWith('http://') || link.startsWith('https://') ||
-            link.startsWith('#')) {
-          return match;
+    if (!content.startsWith(SKIP_LINK_REWRITING)) {
+      // Rewrite relative links that don't start with /, ../, or http
+      // These are sibling files that will become children after flattening
+      content = content.replace(
+        /\[([^\]]+)\]\(([a-zA-Z0-9][^):]*)\)/g,
+        (match, text, link) => {
+          // Skip if it's a URL or starts with special chars
+          if (link.startsWith('http://') || link.startsWith('https://') ||
+              link.startsWith('#')) {
+            return match;
+          }
+          return `[${text}](${dirname}/${link})`;
         }
-        return `[${text}](${dirname}/${link})`;
-      }
-    );
+      );
 
-    // Also fix reference-style links
-    content = content.replace(
-      /^\[([^\]]+)\]:\s+([a-zA-Z0-9][^: ]*\.md)$/gm,
-      (match, ref, link) => `[${ref}]: ${dirname}/${link}`
-    );
+      // Also fix reference-style links
+      content = content.replace(
+        /^\[([^\]]+)\]:\s+([a-zA-Z0-9][^: ]*\.md)$/gm,
+        (match, ref, link) => `[${ref}]: ${dirname}/${link}`
+      );
 
-    fs.writeFileSync(file, content, 'utf8');
+      fs.writeFileSync(file, content, 'utf8');
+    }
 
     // Move file up one level
     const parentDir = path.dirname(dir);
@@ -111,6 +115,7 @@ function fixIndexReferences() {
     const parentDirname = path.basename(parentDir);
 
     let content = fs.readFileSync(file, 'utf8');
+    if (content.startsWith(SKIP_LINK_REWRITING)) continue;
     const original = content;
 
     // Fix path/_index.md or path/index.md -> path.md
@@ -146,6 +151,7 @@ function resolveLinks() {
 
   for (const file of mdFiles) {
     let content = fs.readFileSync(file, 'utf8');
+    if (content.startsWith(SKIP_LINK_REWRITING)) continue;
     const original = content;
 
     // Process inline links: [text](path)

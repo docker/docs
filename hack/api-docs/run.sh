@@ -34,7 +34,7 @@ case "${1:-build}" in
   build|serve)
     generate
     hugo --destination tmp/api-reference/site --baseURL "${DOCS_URL:-http://localhost:1314}" --cleanDestinationDir
-    node hack/api-docs/flatten.mjs tmp/api-reference/site
+    node hack/flatten-and-resolve.js tmp/api-reference/site
     node hack/api-docs/verify-output.mjs tmp/api-reference/site
     if [[ "${1:-build}" == serve ]]; then
       exec python3 -m http.server "${DOCS_PORT:-1314}" --bind 127.0.0.1 --directory tmp/api-reference/site
