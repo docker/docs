@@ -450,7 +450,10 @@
 "/support/#diagnostic-data-and-privacy":
   - /go/diagnostic-data/
 
+#app.docker.com links
 
+"/security/authentication/oidc-connections/rulesets-claims/#subject-claims":
+  - /go/oidc-subject-claims/
 
 "/compose/":
   - /go/compose/
