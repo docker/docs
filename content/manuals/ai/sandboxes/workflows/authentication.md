@@ -6,9 +6,6 @@ description: Use authenticated command-line tools and dynamic secret sources ins
 keywords: docker sandboxes, sbx, authentication, github cli, registry, 1password, aws secrets manager
 ---
 
-These workflows resolve credentials on the host for local sandboxes. For
-cloud secret setup, see [Authenticate cloud agents](../cloud/credentials.md).
-
 The sandbox proxy handles API credentials for model providers automatically,
 but agents often also need credentials for tools like `gh`, `docker`, or a
 secrets manager. Configure the credential source on your host, and the proxy

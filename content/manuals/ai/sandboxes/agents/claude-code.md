@@ -7,10 +7,6 @@ description: |
 keywords: docker sandboxes, claude code, anthropic, ai agent, sbx, local models, llmman, ollama
 ---
 
-The following instructions apply to local sandboxes. For cloud authentication
-and usage, see [Authenticate cloud agents](../cloud/credentials.md) and
-[Use cloud sandboxes](../cloud/usage.md).
-
 Official documentation: [Claude Code](https://code.claude.com/docs)
 
 ## Quick start

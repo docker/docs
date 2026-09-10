@@ -47,11 +47,8 @@ sandboxes on Docker-managed cloud infrastructure. An active workload is not
 tied to your computer remaining awake or connected. You can leave the Console
 and return to the sandbox while the agent continues working.
 
-The `sbx` CLI supports both
-[local sandboxes](/manuals/ai/sandboxes/get-started.md) and
-[cloud sandboxes](/manuals/ai/sandboxes/cloud/_index.md). These pages describe
-the web Console experience. The Console and CLI use different secret names;
-see [Cloud credentials](/manuals/ai/sandboxes/cloud/credentials.md).
+For sandboxes that run on your development machine through the `sbx` CLI, see
+[Docker Sandboxes](/manuals/ai/sandboxes/_index.md).
 
 From the web Console, choose the type of sandbox to run and configure its model
 credential, network access, tools, and compute. Docker creates the sandbox and

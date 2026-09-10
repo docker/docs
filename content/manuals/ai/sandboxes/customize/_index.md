@@ -15,8 +15,8 @@ params:
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-Docker Sandboxes offers two ways to customize a local sandbox beyond the
-built-in defaults:
+Docker Sandboxes offers two ways to customize a sandbox beyond the built-in
+defaults:
 
 - [Templates](templates.md) — reusable sandbox images with tools, packages,
   and configuration baked in. Extend a base image with a Dockerfile, or

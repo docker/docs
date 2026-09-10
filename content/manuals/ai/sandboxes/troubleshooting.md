@@ -5,11 +5,6 @@ description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
 
-These diagnostics and recovery steps apply to local sandboxes. For cloud
-authentication, files, expiration, and network access, see
-[Cloud sandboxes](cloud/). Local daemon restarts and `sbx reset` do not repair
-cloud sandbox state.
-
 ## Run diagnostics
 
 Before digging into a specific issue, run

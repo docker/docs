@@ -8,10 +8,6 @@ keywords: docker sandboxes, ssh, integrations, vs code, cursor, remote developme
 
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
-These integrations use local sandbox SSH access. Cloud sandboxes use a
-different SSH configuration and address: see
-[Connect with SSH](../cloud/usage.md#connect-with-ssh).
-
 You can connect an external editor or desktop app to a running sandbox over
 SSH. This lets you use the tools you already know — VS Code, Cursor, Claude
 Desktop, and others — while your code runs, builds, and executes inside the
