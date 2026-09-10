@@ -36,21 +36,11 @@ the full release history, including pre-releases and downloads, see the
 
 ### Highlights
 
-- **Cloud sandboxes.** Docker Sandboxes 0.42.0 introduces `sbx --cloud` for running AI agents on Docker-managed cloud infrastructure. Use the `sbx` CLI to create and manage hosted sandboxes alongside your local sandboxes.
-
-  Cloud sandboxes have separate resources, credentials, and network policies from local sandboxes. Cloud compute requires an active Docker Agentic Platform plan and is billed based on usage. Model inference is billed separately by your model provider.
 - BREAKING: `sbx ports --publish` and kit-declared ports now default to `tcp4` instead of dual-stack `tcp`, so a published port no longer listens on `::1` unless you name the protocol explicitly (`--publish 8080:3000/tcp`); this makes `http://localhost:<port>/` reach a sandbox service that listens only on IPv4.
 - `sbx run` and `sbx create` now accept sandbox kit references as the agent positional: `sbx run <sandbox-kit-ref>`. The old form `sbx run <sandbox-kit-name> --kit <sandbox-kit-ref>` is deprecated; use the `--kit` flag for mixins.
 - Sandboxes can now be created without a workspace bind mount by omitting the path in `sbx create`. Note that this only affects the `create` command; `sbx run` still defaults to mounting the current directory as the primary workspace.
 
 ### What's New
-
-#### Cloud sandboxes
-
-- Run agents in the cloud with commands such as `sbx --cloud run claude --name cloud-project`.
-- Transfer files with `sbx --cloud cp`, publish services through public HTTPS URLs, and connect using SSH.
-- Configure cloud-specific credentials and outbound network policy with `sbx --cloud secret` and `sbx --cloud policy`.
-- Use `sbx move` to copy a sandbox filesystem between local and cloud environments.
 
 #### CLI
 
@@ -60,7 +50,7 @@ the full release history, including pre-releases and downloads, see the
 
 #### Environment files
 
-- `sbx env` now reads a non-hidden `sbxenv.yaml` in preference to `.sbxenv.yaml` when a directory holds both, and merges an `sbxenv.yaml` from your home directory beneath the project file as defaults shared across projects.
+- `sbx env` now reads a non-hidden `sbxenv.yaml` from a project directory and no longer falls back to a hidden `.sbxenv.yaml` there; it merges a `.sbxenv.yaml` from your home directory beneath the project file as defaults shared across projects.
 - `sbx env` now shows a plan of everything an environment file changes on the host — host `lifecycle:` commands, credentials, bindings, MCP servers, workspaces, kits, ports and the sandbox itself — asks before applying it and asks again for every run of a command on this machine unless `env.rememberHostCommands` is set, binds the environment file read-only into the sandbox it describes, and reads a directory for `sbxenv.yaml` alone with `~/.sbxenv.yaml` as the user-level base beneath it.
 - `sbx env`: an environment file that declares no `workspace:` now creates a sandbox with no workspace bind mount instead of mounting the directory holding the file; write `workspace: .` to mount the project directory.
 - Environment files can now declare their own arguments in an `args:` block, referenced as `${{ env.args.NAME }}` and supplied with `sbx env --env-arg`; `${VAR}` interpolation in `.sbxenv.yaml` is no longer expanded.
