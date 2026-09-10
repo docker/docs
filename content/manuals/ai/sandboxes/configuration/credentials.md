@@ -403,11 +403,10 @@ $ sbx secret set-custom \
 ```
 
 The command prints a generated placeholder. For an existing sandbox, set
-`NODE_AUTH_TOKEN` in the sandbox shell where you'll run npm to that placeholder:
-
-```console
-$ export NODE_AUTH_TOKEN='<GENERATED_PLACEHOLDER>'
-```
+`NODE_AUTH_TOKEN` to that placeholder using `sbx run -e` for an agent session,
+or `/etc/sandbox-persistent.sh` for future sessions. See
+[Set environment variables](../usage.md#set-environment-variables).
+Use the placeholder, not the actual GitHub token.
 
 Inside the sandbox, add the following entries to your project's `.npmrc`,
 replacing `@my-org` with the package's scope. Keep `${NODE_AUTH_TOKEN}` literal
