@@ -83,11 +83,10 @@ and a **Type** that decides what the rule matches.
     unless you add one. Enter a bare host with no scheme and no path, so
     `api.github.com` rather than `https://api.github.com/repos`. A CIDR range
     isn't accepted here. Use an **All traffic** rule for one.
-  - Under **HTTP methods**, select the methods the rule applies to from the
-    methods listed. Leave **any (\*)** selected to match every method the
-    composer lists. It doesn't cover methods the composer omits, so a request
-    using one of those doesn't match the rule. This differs from the CLI, where
-    `--method ANY` matches every HTTP method.
+  - Under **HTTP methods**, select the methods the rule applies to. Leave
+    **any (\*)** selected to match every method listed. A method the composer
+    doesn't list won't match, which differs from the CLI, where `--method ANY`
+    matches every HTTP method.
   - Under **Path patterns**, add the paths the rule covers. Leave it empty to
     match any path.
 
