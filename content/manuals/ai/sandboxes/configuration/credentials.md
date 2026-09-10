@@ -317,8 +317,15 @@ when an agent validates the environment variable format at boot, or when the
 credential lands in a request body rather than a header — use
 `sbx secret set-custom`. The secret is keyed on one or more target domains, an
 environment variable name, and an optional placeholder string, instead of a
-service identifier. Custom secrets are global by default. Pass `--sandbox` to
-scope one to a specific sandbox.
+service identifier.
+
+Prefer the [service-based flow](#stored-secrets) whenever it's an option —
+the kit handles the wiring; you only provide the value.
+
+### Set a custom secret
+
+Custom secrets are global by default. Pass `--sandbox` to scope one to a
+specific sandbox.
 
 ```console
 $ sbx secret set-custom \
@@ -326,6 +333,20 @@ $ sbx secret set-custom \
     --env API_KEY \
     --value <secret>
 ```
+
+> [!WARNING]
+> Passing the secret as `--value <secret>` records it in your shell history
+> and exposes it to other processes running as your user. Avoid pasting
+> real credentials inline — read the value from a variable that's already
+> in your environment, and clear shell history if a real secret was passed
+> on the command line.
+
+Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
+`sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
+configured hosts and the placeholder appears anywhere in the request, the
+proxy replaces it with the real value. The agent never sees the real secret.
+
+### Target multiple hosts
 
 Repeat `--host` to cover multiple domains with the same secret — useful when
 an API is split across related hostnames or when two unrelated endpoints share
@@ -344,6 +365,8 @@ A `--host` value can also use wildcards, with the same syntax as
 single label (`*.example.com` covers `api.example.com`) and `**` matches any
 number (`**.example.com` covers `api.example.com` and `v2.api.example.com`).
 
+### Resolve custom secrets dynamically
+
 Custom secrets also accept [dynamic secret sources](#use-a-dynamic-secret-source).
 Replace `--value` with either `--ref` or `--command`:
 
@@ -358,21 +381,6 @@ Dynamic custom secrets resolve on demand by default. Pass `--refresh` with a
 duration to cache the resolved value. The verification and error-output flags
 work the same as they do for service secrets. `--ref` and `--command` can't be
 combined with `--value` or `--token`.
-
-> [!WARNING]
-> Passing the secret as `--value <secret>` records it in your shell history
-> and exposes it to other processes running as your user. Avoid pasting
-> real credentials inline — read the value from a variable that's already
-> in your environment, and clear shell history if a real secret was passed
-> on the command line.
-
-Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
-`sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
-configured hosts and the placeholder appears anywhere in the request, the
-proxy replaces it with the real value. The agent never sees the real secret.
-
-Prefer the [service-based flow](#stored-secrets) whenever it's an option —
-the kit handles the wiring; you only provide the value.
 
 ### Install private npm packages
 
