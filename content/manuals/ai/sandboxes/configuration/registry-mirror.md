@@ -6,8 +6,6 @@ keywords: docker sandboxes, sbx, registry mirror, docker hub, templates, kits, i
 weight: 50
 ---
 
-{{% include "sandboxes-local-scope.md" %}}
-
 A registry mirror routes Docker Hub pulls for sandbox templates and OCI kits
 through your organization's registry infrastructure. If the mirror meets
 Docker Engine's requirements, Docker inside the sandbox uses it too.

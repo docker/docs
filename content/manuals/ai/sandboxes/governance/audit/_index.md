@@ -8,11 +8,6 @@ keywords: docker sandboxes, audit log, audit logging, AI Governance, policy deci
 
 {{< summary-bar feature_name="AI Governance Audit Logs" >}}
 
-The Docker Sandboxes coverage on this page applies to local sandboxes.
-Docker Cloud delivery stores their audit records in the cloud; it does not add
-cloud sandbox coverage. For cloud network decisions, see
-[Cloud policy logs](../../cloud/network-policy.md#inspect-network-policy).
-
 AI Governance Audit Logs record Docker AI Governance activity for your
 organization. Each record captures the principal, action, target, decision, and
 time for a governance event. Records contain metadata only. They don't contain

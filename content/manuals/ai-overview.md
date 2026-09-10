@@ -33,11 +33,10 @@ in YAML. You configure agents with specific roles, models, and tools, then
 run them from your terminal. Docker Agent is a general-purpose agent runtime,
 not specific to Docker tasks.
 
-Docker Sandboxes provides isolated environments for running coding agents
-[locally](./ai/sandboxes/get-started.md) or
-[in the cloud](./ai/sandboxes/cloud/_index.md). Sandboxes is the isolation layer;
-the agents themselves are separate tools. Agent configuration and supported
-features differ between local and cloud sandboxes.
+**Docker Sandboxes** provides isolated microVM environments for running coding
+agents. It supports multiple agents including Claude Code, Codex, Copilot,
+Devin, Gemini, and Docker Agent. Sandboxes is the isolation layer — the agents
+themselves are separate tools.
 
 **Model Runner** lets you run LLMs locally. Other tools like Docker Agent can
 use Model Runner as a model provider.

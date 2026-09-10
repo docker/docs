@@ -12,8 +12,8 @@ aliases:
 > GPU passthrough is experimental. The `--gpu` flag, the driver bundle, and the
 > setup steps on this page are subject to change.
 
-GPU passthrough in local Docker Sandboxes runs workloads on a physical NVIDIA
-GPU.
+Docker Sandboxes supports GPU passthrough, which allows running
+workloads against a physical NVIDIA GPU.
 
 GPU passthrough in Docker sandboxes works via [VFIO](https://www.kernel.org/doc/html/latest/driver-api/vfio.html), a Linux feature
 that assigns a PCI device directly to a virtual machine. The GPU is

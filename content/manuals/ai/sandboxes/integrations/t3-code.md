@@ -8,9 +8,6 @@ keywords: docker sandboxes, t3 code, remote ssh, remote development, sbx
 
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
-These connection instructions use a local sandbox. For cloud SSH setup, see
-[Connect with SSH](../cloud/usage.md#connect-with-ssh).
-
 T3 Code's SSH integration lets the desktop app drive coding agents inside a
 sandbox. T3 Code has no dedicated Docker Sandboxes integration — it treats the
 sandbox as an ordinary SSH host, connects to it, and starts a T3 server inside

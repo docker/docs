@@ -8,10 +8,6 @@ aliases:
   - /ai/sandboxes/upstream-proxy/
 ---
 
-This page describes proxy settings for local sandboxes and the local daemon.
-For cloud sandbox egress controls, see
-[Cloud network policy](../cloud/network-policy.md).
-
 > [!IMPORTANT]
 > Upstream proxy support is experimental. Everything described on this page —
 > proxy URLs, PAC files, SOCKS5, use of the OS system proxy, proxy
