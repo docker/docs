@@ -1,7 +1,7 @@
 ---
 description: Explore Docker Hub's generative AI catalogs and sandbox kits.
 keywords: Docker Hub, Hub, generative AI, catalog
-title: Docker Hub Generative AI
+title: Generative AI content
 linkTitle: Generative AI
 weight: 60
 ---
