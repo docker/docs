@@ -166,7 +166,7 @@ On macOS, users without administrator privileges cannot perform in-app upgrades 
 To upgrade Docker Desktop:
 
 - Ask an administrator to install the newer version over the existing one.
-- Use the []`--user` install flag](/manuals/desktop/setup/install/mac-install.md#security-and-access) if appropriate for your setup.
+- Use the [`--user` install flag](/manuals/desktop/setup/install/mac-install.md#security-and-access) if appropriate for your setup.
 
 ### Persistent notification telling me an application has changed my Desktop configurations
 
