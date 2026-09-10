@@ -196,11 +196,12 @@ being added to the team.
 
 ### Remove members from teams
 
-If your organization uses single sign-on (SSO) with
-[SCIM](/manuals/security/provisioning/scim/_index.md) enabled, you
-should remove members from your identity provider (IdP). This automatically
-removes members from Docker. If SCIM is disabled, follow procedures in this
-doc to remove members manually in Docker.
+To remove members from your organization when single sign-on (SSO) with
+[SCIM](/manuals/security/provisioning/scim/_index.md) is enabled, remove them
+from the Docker application in your identity provider (IdP). SCIM removes
+them from your Docker organization. If SCIM is disabled, see
+[Remove users](/manuals/security/authentication/single-sign-on/manage.md#remove-users)
+for the manual organization removal procedure.
 
 Organization owners can remove a member from a team. Removing the member from
 the team revokes their access to the permitted resources. To remove a member
