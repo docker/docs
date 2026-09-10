@@ -85,7 +85,9 @@ and a **Type** that decides what the rule matches.
     isn't accepted here. Use an **All traffic** rule for one.
   - Under **HTTP methods**, select the methods the rule applies to from the
     methods listed. Leave **any (\*)** selected to match every method the
-    composer offers.
+    composer lists. It doesn't cover methods the composer omits, so a request
+    using one of those doesn't match the rule. This differs from the CLI, where
+    `--method ANY` matches every HTTP method.
   - Under **Path patterns**, add the paths the rule covers. Leave it empty to
     match any path.
 
