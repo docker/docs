@@ -12,7 +12,9 @@ governance is not available for cloud sandboxes in this release. See
 
 Network access policies control outbound connections from sandboxes. Each
 policy contains one or more rules that allow the domains, IP ranges, and ports a
-workflow needs, or block destinations that should stay unavailable.
+workflow needs, or block destinations that should stay unavailable. Rules can
+also match the HTTP method and path of a request, so a policy can allow part of
+an API without allowing all of it.
 
 You can configure network access in two places:
 
@@ -43,6 +45,27 @@ Examples:
 
 For exact wildcard behavior and CIDR support, see
 [Network rules](../concepts.md#network-rules).
+
+## HTTP method and path rules
+
+A network rule matches a destination, so it allows or blocks everything a
+sandbox sends there. An HTTP rule narrows the match to specific HTTP methods
+and URL paths on that destination, which lets a policy allow reads from an API
+without allowing writes to it.
+
+HTTP rules and network rules layer. A network allow is the baseline for a
+destination and HTTP rules carve into it, while a network deny blocks the
+destination outright and no HTTP allow can reopen it. For the pattern syntax
+and the full matching table, see
+[HTTP rules](../concepts.md#http-method-and-path).
+
+Configure them in either place:
+
+- Organization policies, in the network rule composer in Docker Home. Set the
+  rule **Type** to **HTTP**, then choose the methods and path patterns. See
+  [Add a network rule](organization.md#add-a-network-rule).
+- Local policies, with `--method` and `--path` on `sbx policy`. See
+  [HTTP method and path rules](local.md#http-method-and-path-rules).
 
 ## Local network rules
 

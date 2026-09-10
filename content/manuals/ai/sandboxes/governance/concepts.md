@@ -109,6 +109,56 @@ need to match the root domain and its subdomains.
 Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
 `2001:db8::/32`.
 
+#### HTTP method and path
+
+A network rule matches a destination host on its own. An HTTP rule is a network
+rule that also names an HTTP method and URL path, so a policy can allow reads
+from an API without allowing writes to it.
+
+An HTTP rule names one or more methods, a destination, and one or more paths:
+
+| Part        | Accepts                                                       |
+| ----------- | ------------------------------------------------------------- |
+| Method      | One or more HTTP methods, or every method                      |
+| Destination | A host, with an optional port                                  |
+| Path        | An absolute path pattern, such as `/api/**`                   |
+
+A CIDR range isn't a valid HTTP destination. Use a network rule to cover one.
+
+A rule that names no method matches every method. The methods you can select
+individually depend on where you configure the rule, so see
+[Add a network rule](access-controls/organization.md#add-a-network-rule) for an
+organization policy and
+[HTTP method and path rules](access-controls/local.md#http-method-and-path-rules)
+for a local one.
+
+Path patterns follow the same wildcard rules as filesystem paths, where `*`
+matches within one path segment and `**` matches any depth. A pattern without a
+wildcard matches that path exactly, so `/repos` matches `/repos` and nothing
+below it. A pattern must start with `/` and can't contain a query string, a
+fragment, or a `..` segment.
+
+HTTP requests are evaluated against both layers. A network rule sets the
+baseline for a host, and HTTP rules adjust individual methods and paths within
+it:
+
+| Rules that cover the host   | Result for an HTTP request                                              |
+| --------------------------- | ----------------------------------------------------------------------- |
+| Network allow only          | Allowed at any method and path                                          |
+| HTTP allow only             | Allowed only where a rule matches the method and path. Anything else is denied |
+| Network allow and HTTP deny | The denied methods and paths are blocked. The rest stay allowed          |
+| Network deny                | Blocked. An HTTP allow can't reopen a denied host                        |
+
+A network deny is therefore a floor that HTTP rules can't raise, while a
+network allow is a ceiling that HTTP rules can carve into.
+
+Because an HTTP rule matches on request contents, the proxy has to inspect each
+request rather than deciding once per connection. When any HTTP rule covers a
+host, connections to that host are intercepted and every request on them is
+evaluated separately. Traffic that isn't HTTP, such as SSH, carries no method
+or path, so HTTP rules never match it. Control those destinations with network
+rules.
+
 For local and organization policy configuration, see
 [Network access policies](access-controls/network.md).
 

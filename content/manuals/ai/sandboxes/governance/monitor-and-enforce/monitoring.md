@@ -34,8 +34,11 @@ The columns are:
 - `APPLIES TO`: which sandboxes the policy applies to. `all` means the policy
   is global. `sandbox:<name>` scopes it to a single sandbox; a profile name
   scopes it to sandboxes using that profile.
-- `SUMMARY`: a count of rules by type and decision — for example,
-  `network: 5 allow, 1 deny`.
+- `SUMMARY`: a count of rule entries by type and decision, for example
+  `network: 5 allow, 1 deny`. A rule that names several destinations
+  contributes one entry per destination. When the listing includes rules that
+  match an HTTP method and path, the network count labels each part `(L4)` or
+  `(L7)`. See [HTTP rules](#http-rules).
 
 To see full rule-level detail including rule IDs and resources, pass `--wide`.
 To inspect a single policy or rule, use `sbx policy inspect`:
@@ -111,10 +114,10 @@ while organization governance is active. Local and kit-defined deny rules stay
 active and aren't hidden, because a deny still applies on top of the
 organization policy. See [Precedence](../concepts.md#precedence).
 
-Use `--type network` or `--type filesystem` to show only policies of that type.
-Without a sandbox argument, `sbx policy ls` shows every policy across all
-sandboxes. Pass a sandbox name to filter to global policies and those scoped to
-that sandbox:
+Use `--type network`, `--type filesystem`, or `--type http` to show only
+policies of that type. Without a sandbox argument, `sbx policy ls` shows every
+policy across all sandboxes. Pass a sandbox name to filter to global policies
+and those scoped to that sandbox:
 
 ```console
 $ sbx policy ls my-sandbox
@@ -137,6 +140,41 @@ A writable workspace mount must be allowed by both a `filesystem:read` and a
 default local policy allows read and write access to all paths, shown as the
 two `default-fs-*` rules above. For the rule syntax and path patterns, see
 [Policy concepts](../concepts.md#filesystem-rules).
+
+### HTTP rules
+
+Rules that match an HTTP method and path are listed as type `http`. Pass
+`--wide` to see the `METHOD` and `PATH` columns alongside network rules:
+
+```console
+$ sbx policy ls --wide
+TYPE      METHOD   PATH
+network   -        -
+http      GET      /repos/org/project/**
+http      POST     /admin/**
+```
+
+Rules that match a whole destination show `-` in both columns. To list only
+HTTP rules, pass `--type http`.
+
+HTTP rules are counted as network rules in the `SUMMARY` column, with each part
+labeled by the network layer it matches on. `L4` counts entries that match a
+whole destination, and `L7` counts those that also match an HTTP method and
+path:
+
+```console
+$ sbx policy ls
+POLICY         SOURCE   APPLIES TO   SUMMARY
+local-policy   local    all          network: 2 allow (L4), 1 deny (L7)
+```
+
+The labels appear when the current listing includes at least one HTTP rule.
+Because filters and hidden inactive rules change what the listing contains, a
+filtered listing with no HTTP rules shows an unlabeled count, such as
+`network: 42 allow`.
+
+For the rule syntax, see
+[HTTP method and path](../concepts.md#http-method-and-path).
 
 ## Monitoring traffic
 

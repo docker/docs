@@ -85,6 +85,11 @@ Available values are `allow-all`, `balanced`, and `deny-all`.
 
 ## Managing rules
 
+A rule covers a destination host. It can also name HTTP methods and paths to
+narrow the match to part of that host.
+
+### Network rules
+
 Use [`sbx policy allow`](/reference/cli/sbx/policy/allow/) and
 [`sbx policy deny`](/reference/cli/sbx/policy/deny/) to add or restrict access
 on top of the active preset. Changes take effect immediately. Rules apply to
@@ -133,6 +138,80 @@ To remove a sandbox-scoped rule, pass `--sandbox <name>`:
 ```console
 $ sbx policy rm network --sandbox my-sandbox --resource api.example.com
 ```
+
+### HTTP method and path rules
+
+Add `--method` to an allow or deny rule to match specific HTTP methods on a
+host, and `--path` to restrict it to part of the host's URL space:
+
+```console
+$ sbx policy allow network api.github.com --method GET --path '/repos/org/project/**'
+```
+
+Quote the path so your shell doesn't expand the wildcard. Pass several methods
+as a comma-separated list:
+
+```console
+$ sbx policy allow network api.github.com --method GET,HEAD
+```
+
+`--method ANY` matches every HTTP method, and `--path` defaults to `/**` when
+you omit it:
+
+```console
+$ sbx policy allow network api.github.com --method ANY
+```
+
+`ANY` can't be combined with specific methods, and a path without a method is
+rejected. Pass a method, or use `ANY` when you mean every method.
+
+Method names are case-insensitive. The accepted values are `GET`, `HEAD`,
+`POST`, `PUT`, `PATCH`, `DELETE`, `OPTIONS`, `CONNECT`, and `TRACE`. Paths must
+start with `/` and can't contain a query string, a fragment, or a `..` segment.
+
+Hosts follow the same patterns as network rules and can include a port. Write
+the host on its own, without a scheme, so an HTTP rule takes `api.example.com`
+rather than `https://api.example.com`.
+
+A local HTTP rule takes a hostname. To match an IP address or a CIDR range,
+add a plain network rule for that destination instead.
+
+Deny rules take the same flags, which is the usual way to carve a method or
+path out of a broader allow:
+
+```console
+$ sbx policy allow network api.example.com
+$ sbx policy deny network api.example.com --method POST --path '/admin/**'
+```
+
+For how the two layers combine, see
+[HTTP rules](../concepts.md#http-method-and-path).
+
+Remove an HTTP rule by naming the same qualifiers you added it with, or by
+rule ID:
+
+```console
+$ sbx policy rm network --resource api.github.com --method GET --path '/repos/org/project/**'
+$ sbx policy rm network --id 7f3a1c2e-4a73-4e05-bc9d-f2f9a4b50d67
+```
+
+List HTTP rules with `--type http`, or see them alongside network rules in a
+wide listing, where the `METHOD` and `PATH` columns are empty for rules that
+match a whole host:
+
+```console
+$ sbx policy ls --wide
+TYPE      METHOD   PATH
+network   -        -
+http      GET      /repos/org/project/**
+```
+
+> [!NOTE]
+> `sbx policy check network` and `sbx policy log` don't evaluate or display
+> HTTP methods and paths. A check reports the decision for the host, which can
+> differ from the decision for a specific method and path on that host.
+
+## Inspecting rules
 
 To inspect which policies are active and where they come from, use
 `sbx policy ls`. Use `--source` to filter by origin (`local`, `org`, `kit`),
@@ -218,3 +297,11 @@ Run `sbx policy approval ls` to see the pending request and respond to it with
 `sbx policy approval respond`. Approving applies to later requests, not the one
 that was blocked, so run the operation again afterward. See
 [Respond to an approval request](network.md#respond-to-an-approval-request).
+
+### An HTTP method or path is blocked on an allowed host
+
+A host that a network rule allows can still have individual methods or paths
+denied by an HTTP rule. Run `sbx policy ls --type http` to see which HTTP rules
+apply. `sbx policy check network` reports the decision for the host only, so it
+shows a host as allowed even when the specific request is denied. See
+[HTTP method and path rules](#http-method-and-path-rules).
