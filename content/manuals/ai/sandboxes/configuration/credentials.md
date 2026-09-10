@@ -382,7 +382,7 @@ duration to cache the resolved value. The verification and error-output flags
 work the same as they do for service secrets. `--ref` and `--command` can't be
 combined with `--value` or `--token`.
 
-### Install private npm packages
+### Install npm packages from GitHub Packages
 
 The built-in `github` service doesn't inject credentials into requests to
 `npm.pkg.github.com`. To install private npm packages from GitHub Packages,
