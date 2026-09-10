@@ -35,7 +35,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Engine v29.8.0](https://docs.docker.com/engine/release-notes/29/#2980)
 - [containerd v2.3.4](https://github.com/containerd/containerd/releases/tag/v2.3.4)
 - [Docker Compose v5.5.1](https://github.com/docker/compose/releases/tag/v5.5.1)
-- [Docker AI Agent v1.131.0](https://github.com/docker/docker-agent/releases/tag/v1.131.0)
+- [Docker Agent v1.136.0](https://github.com/docker/docker-agent/releases/tag/v1.131.0)
 - Docker Desktop Build `v0.38.0`
 - [Docker Buildx v0.37.0](https://github.com/docker/buildx/releases/tag/v0.37.0)
 - Docker Offload `v0.6.17`
