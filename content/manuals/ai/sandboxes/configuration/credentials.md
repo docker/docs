@@ -374,6 +374,52 @@ proxy replaces it with the real value. The agent never sees the real secret.
 Prefer the [service-based flow](#stored-secrets) whenever it's an option —
 the kit handles the wiring; you only provide the value.
 
+### Install private npm packages
+
+The built-in `github` service doesn't inject credentials into requests to
+`npm.pkg.github.com`. To install private npm packages from GitHub Packages,
+add a custom secret for that host.
+
+On the host, authenticate the GitHub CLI with a token that can read the package.
+GitHub documents a personal access token (classic) with at least `read:packages`
+scope for this use. See
+[Authenticating to GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-to-github-packages).
+Then register the token source, replacing `my-sandbox` with your sandbox's name:
+
+```console
+$ sbx secret set-custom \
+    --sandbox my-sandbox \
+    --host npm.pkg.github.com \
+    --env NODE_AUTH_TOKEN \
+    --command 'gh auth token'
+```
+
+The command prints a generated placeholder. For an existing sandbox, set
+`NODE_AUTH_TOKEN` in the sandbox shell where you'll run npm to that placeholder:
+
+```console
+$ export NODE_AUTH_TOKEN='<GENERATED_PLACEHOLDER>'
+```
+
+Inside the sandbox, add the following entries to your project's `.npmrc`,
+replacing `@my-org` with the package's scope. Keep `${NODE_AUTH_TOKEN}` literal
+so npm reads the environment variable:
+
+```ini
+@my-org:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+```
+
+Install the package inside the sandbox:
+
+```console
+$ npm install @my-org/my-package
+```
+
+Replace `@my-org/my-package` with your package name. npm sends the placeholder
+to `npm.pkg.github.com`, and the proxy replaces it with the token retrieved by
+`gh auth token` on the host.
+
 ## Credential bindings
 
 A credential bindings file records which credential mechanisms and domains
