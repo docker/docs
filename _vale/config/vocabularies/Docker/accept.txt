@@ -28,9 +28,7 @@ bootup
 Bitnami
 Btrfs
 Bugsnag
-BuildKit
 buildkitd
-BusyBox
 cagent
 CD
 CentOS
@@ -70,18 +68,10 @@ Dex
 displayName
 Django
 DMR
-Docker Build Cloud
-Docker Business
 Docker Dashboard
-Docker Desktop
-Docker Engine
 Docker Extension
-Docker Hub
-Docker Scout
-Docker Team
 Docker-Sponsored Open Source
 Docker's
-Dockerfile
 dockerignore
 Dockerize
 Dockerized
@@ -106,8 +96,6 @@ GeoNetwork
 GGUF
 Git
 Gitea
-GitHub
-GitHub Actions
 Google
 Gradle
 Grafana
@@ -129,7 +117,6 @@ IPv[46]
 IPvlan
 isort
 Jamf
-JavaScript
 JetBrains
 JFrog
 JUnit
@@ -142,7 +129,6 @@ Kubeadm
 kubectl
 kubefwd
 kubelet
-Kubernetes
 Laradock
 Laravel
 libseccomp
@@ -153,7 +139,6 @@ logback
 Loggly
 Logstash
 lookup
-macOS
 macvlan
 Mail(chimp|gun)
 mfsymlinks
@@ -164,7 +149,6 @@ misconfiguration
 [Mm]ixins?
 monorepos?
 musl
-MySQL
 nameserver
 namespaced?
 namespacing
@@ -175,12 +159,10 @@ netlabel
 netlink
 Netplan
 NFSv\d
-Nginx
 npm
 nvm
 Nutanix
 Nuxeo
-NVIDIA
 OAuth
 Okta
 Ollama
@@ -199,7 +181,6 @@ pluggable
 Postgres
 psycopg
 pytest
-PowerShell
 Python
 Qualcomm
 Quickview
@@ -243,7 +224,6 @@ sysctls
 Sysdig
 systemd
 teleop
-Testcontainers
 tmpfs
 Traefik
 Trivy
@@ -261,7 +241,6 @@ Unix
 unmarshalling
 unmanaged
 upsert
-Visual Studio Code
 VMware
 VPNKit
 vSphere
@@ -291,9 +270,7 @@ Zsh
 [Aa]utobuilds?
 [Aa]utotests?
 [Aa]utoscaling
-[Bb]uildx
 [Bb]uildpack(s)?
-[Bb]uildx
 [Cc]odenames?
 [Cc]ompose
 [Cc]onfigs
@@ -358,7 +335,6 @@ README
 [Ee]vals?
 [Ll]abspaces?
 [Uu]nsloth
-AppArmor
 [Aa]utolocking
 [Bb]oolean
 [Bb]reakpoint
@@ -442,7 +418,6 @@ oldoldstable
 parallelizable
 PHPUnit
 pnpm
-PyTorch
 Shellshock
 Spring4Shell
 superset
