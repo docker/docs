@@ -134,50 +134,72 @@ capabilities:
 
 The `capabilities` list describes what the sandbox provides at runtime:
 network access, authentication, and instructions for the agent. The credential
-entry names the service; you store the actual API key on your host. The
-following sections explain how these declarations work.
+entry names the service; you store the actual API key on your host.
 
 This example uses an existing agent image. To install an agent yourself and
 configure its version and model, see [Build an agent](build-an-agent.md).
 
 ## Run a kit
 
-Save the two files in `opencode-python`. Store an Anthropic API key on the
-host, then launch the kit from its parent directory against a Python project:
+Pass a workload kit reference to `sbx run`, followed by the project directory
+to use as the sandbox's workspace:
 
 ```console
-$ sbx secret set anthropic
-$ sbx run ./opencode-python <PROJECT_PATH>
+$ sbx run <WORKLOAD_KIT> <PROJECT_PATH>
 ```
 
-Approve the kit's credential request when prompted, then select an Anthropic
-model in OpenCode. Ask it to review a Python module or make a change. It has
-Ruff available and instructions to run it before reporting completion.
+To create a sandbox without launching the workload, use `sbx create` with
+the same arguments.
 
-`sbx` builds the kit and mounts your project as the workspace. Unchanged
-builds reuse cached results. See
-[Credential configuration](../configuration/credentials.md) for storing keys
-and approving their use.
+### Choose a kit source
 
-The workload reference is a positional argument. It can also be a published
-image or a Git URL:
+The workload reference can point to a local directory, a published image,
+or a kit in a Git repository:
+
+| Source | Example reference |
+| --- | --- |
+| Local directory | `./my-agent` |
+| Published image | `docker.io/<NAMESPACE>/my-agent:1.0.0` |
+| Git repository | `git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-agent` |
+
+For Git sources, `ref` selects a revision and `dir` selects the kit's
+subdirectory. Quote Git URLs in shell commands because they can contain `&`:
 
 ```console
-$ sbx run docker.io/<NAMESPACE>/opencode-python:1.0.0
-$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=opencode-python"
+$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-agent" <PROJECT_PATH>
 ```
 
-The same positional syntax applies to `sbx create` and to v1 and v2 sandbox
-kits. Use `--kit` to add mixins when creating a sandbox:
+`sbx` pulls published images and builds local or Git sources when creating
+the sandbox. Unchanged source builds reuse cached results. See
+[Packaging and distribution](#packaging-and-distribution) for publishing kits
+and configuring access to remote sources.
+
+### Add mixins
+
+A sandbox runs one workload kit. Add mixins with `--kit`, repeating the flag
+for each one:
 
 ```console
-$ sbx run ./opencode-python --name python-with-tools --kit ./my-tool --kit ./team-config .
+$ sbx run ./my-agent --kit ./linter --kit ./team-config <PROJECT_PATH>
 ```
 
-`sbx` combines the workload and mixins into the sandbox's environment. This
-combination is called a composition. An existing sandbox with the same name
-is reused, so choose a different `--name` when trying a different kit set.
-For complete mixins to try, see [Kit examples](kit-examples.md).
+Mixin references accept the same source types as workload references. The
+workload and its mixins form a composition: their tools, files, and runtime
+settings combine to define the sandbox's environment. See
+[Compose kits](#compose-kits) for dependency and compatibility rules, and
+[Kit examples](kit-examples.md) for complete mixins.
+
+### Name and reuse a sandbox
+
+Use `--name` to give the sandbox a name:
+
+```console
+$ sbx run ./my-agent --name my-project <PROJECT_PATH>
+```
+
+Running an existing sandbox reuses its recorded kit configuration. Kit
+selection applies when creating a sandbox. To use a different v3 workload or
+mixin set, choose another name or recreate the sandbox with the desired kits.
 
 ## Capabilities
 
@@ -235,8 +257,12 @@ required and optional requests.
 ### Authenticate to external services
 
 A credential capability names the service a kit needs and declares how to
-authenticate to it. In the OpenCode example, `service: anthropic` matches the
-key you store with `sbx secret set anthropic`.
+authenticate to it. The OpenCode example declares `service: anthropic`. Store
+its API key on the host using that service name:
+
+```console
+$ sbx secret set anthropic
+```
 
 The example sets `proxyManaged: true`. OpenCode receives a placeholder in
 `ANTHROPIC_API_KEY`, and the host proxy inserts the real key into requests to
