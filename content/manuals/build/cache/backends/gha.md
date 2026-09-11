@@ -80,6 +80,11 @@ GitHub's [cache access restrictions](https://docs.github.com/en/actions/advanced
 still apply. Only the cache for the current branch, the base branch and the
 default branch is accessible by a workflow.
 
+Cache writes also depend on the workflow's cache access. Some events receive
+read-only access in the default-branch context. See
+[Cache write restrictions](../../ci/github-actions/cache.md#cache-write-restrictions)
+for affected triggers and how to configure cache imports and exports.
+
 ## Version
 
 If you don’t set `version` explicitly, the default is v1. However, if the environment variable `$ACTIONS_CACHE_SERVICE_V2` is set to a value interpreted as `true` ( `1`, `true`, `yes`), then v2 is used automatically.
