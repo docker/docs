@@ -110,6 +110,19 @@ $ sudo machinectl shell myuser@
 ```
 Where `myuser@` is your desired username and @ signifies this machine.
 
+The same "systemd not detected" message appears when `$XDG_RUNTIME_DIR` is
+missing or is a fallback such as `~/.docker/run`. On a systemd host it must
+be `/run/user/$(id -u)` so `systemctl --user` can reach the session bus.
+Setting `XDG_RUNTIME_DIR` to the path printed by a failed install does not
+fix that. Log in with `pam_systemd` first (`ssh`, graphical console, or
+`machinectl shell`), then check:
+
+```console
+$ echo $XDG_RUNTIME_DIR
+/run/user/1000
+$ systemctl --user status
+```
+
 ### Errors when starting the Docker daemon
 
 **\[rootlesskit:parent\] error: failed to start the child: fork/exec /proc/self/exe: operation not permitted**
