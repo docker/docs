@@ -1,13 +1,28 @@
-[build]
-publish = "public"
+# Netlify build configuration
+# Ensure Hugo version is pinned and extended edition requested to avoid on-the-fly GitHub downloads
 
+[build]
+  publish = "public"
+  # default build command (will also be used when contexts don't override it)
+  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && ./hack/flatten-and-resolve.js && npx pagefind@v1.5.2"
+
+[build.environment]
+  # Node / npm environment
+  NODE_VERSION = "24"
+  NODE_ENV = "production"
+
+  # Pin the Hugo version and request the extended binary (avoid downloading from GitHub in build)
+  HUGO_VERSION = "0.163.0"
+  HUGO_EXTENDED = "true"
+  HUGO_ENABLEGITINFO = "true"
+  HUGO_ENVIRONMENT = "production"
+
+  # Exclude large public file from secrets scan (existing setting)
+  SECRETS_SCAN_OMIT_PATHS = "public/contribute/file-conventions/index.html"
+
+# Deploy preview context keeps the same command but overrides environment where needed
 [context.deploy-preview.environment]
-NODE_VERSION = "24"
-NODE_ENV = "production"
-HUGO_VERSION = "0.163.0"
-HUGO_ENABLEGITINFO = "true"
-HUGO_ENVIRONMENT = "preview"
-SECRETS_SCAN_OMIT_PATHS = "public/contribute/file-conventions/index.html"
+  HUGO_ENVIRONMENT = "preview"
 
 [context.deploy-preview]
-command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && ./hack/flatten-and-resolve.js && npx pagefind@v1.5.2"
+  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && ./hack/flatten-and-resolve.js && npx pagefind@v1.5.2"
