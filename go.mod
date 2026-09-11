@@ -8,7 +8,7 @@ go 1.26.5
 //
 // Make sure to add an entry in the "tools" section when adding a new repository.
 require (
-	github.com/docker/buildx v0.37.0
+	github.com/docker/buildx v0.37.1
 	github.com/docker/cli v29.7.2+incompatible
 	github.com/docker/compose/v5 v5.5.1
 	github.com/docker/docker-agent v1.126.0
