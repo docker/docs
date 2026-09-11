@@ -168,7 +168,7 @@ Each field does the following:
 | Field                       | Purpose                                                                                                        |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `kind: sandbox`             | Declares a sandbox agent: a complete image plus its launch configuration.                                      |
-| `name`                      | The kit's identifier, reused in the `sbx run` command.                                                         |
+| `name`                      | The kit's identifier. Pass the kit directory to `sbx run`.                                                         |
 | `sandbox.image`             | The pinned image you published in Step 3. Its `CMD` launches Vibe, so the kit doesn't set an entrypoint.       |
 | `agentInstructions.filename`| The instructions file Vibe reads in the project.                                                               |
 | `agentInstructions.content` | Markdown appended to `AGENTS.md` at creation to prime the agent about its environment.                         |
@@ -177,8 +177,8 @@ Each field does the following:
 | `credentials[].apiKey.name` | The environment variable the proxy manages. Vibe sees a sentinel value; the proxy swaps in the real key.       |
 | `credentials[].apiKey.inject`| Where and how the proxy attaches the key. `scheme: bearer` sets `Authorization: Bearer <key>` for the domain. |
 
-For the full kit format, see
-[Kits](../manuals/ai/sandboxes/customize/kits.md).
+For the v2 kit format used in this guide, see
+[Kits v2](../manuals/ai/sandboxes/customize/kits-v2/_index.md).
 
 > [!WARNING]
 > `--agent auto-approve` runs Vibe in a mode that approves every tool
@@ -197,13 +197,13 @@ $ sbx kit validate ./mistral-vibe
 Then, from your project directory, launch the agent with the kit:
 
 ```console
-$ sbx run --kit ./mistral-vibe --name mistral-vibe mistral-vibe .
+$ sbx run ./mistral-vibe --name mistral-vibe .
 ```
 
-- `--kit ./mistral-vibe` points to the folder that contains `spec.yaml`.
+- `./mistral-vibe` is the sandbox kit reference, pointing to the folder that
+  contains `spec.yaml`.
 - `--name mistral-vibe` names the sandbox. Without it, `sbx` derives a name
   from the agent and the working directory, and the commands below won't match.
-- `mistral-vibe` is the agent name from `spec.yaml`.
 - `.` is the project directory to mount in the sandbox.
 
 Vibe starts in an isolated microVM, talks to the Mistral API through the
@@ -223,7 +223,7 @@ it. Use it to spot a host missing from `permissions.network.allow`. After you
 change `spec.yaml`, recreate the sandbox for a clean start:
 
 ```console
-$ sbx rm mistral-vibe && sbx run --kit ./mistral-vibe --name mistral-vibe mistral-vibe .
+$ sbx rm mistral-vibe && sbx run ./mistral-vibe --name mistral-vibe .
 ```
 
 ## Clean up

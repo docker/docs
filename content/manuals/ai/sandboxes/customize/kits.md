@@ -38,7 +38,18 @@ access or agent instructions needs no Dockerfile. A mixin that ships a tool
 includes a build recipe. A workload always includes a build recipe because it
 supplies the sandbox's filesystem and launch configuration.
 
-For example, with a local v3 workload and two local v3 mixins:
+To run a workload kit, pass its reference as the first positional argument.
+The reference can be a local directory, an OCI image, or a Git URL:
+
+```console
+$ sbx run ./my-agent
+$ sbx run docker.io/<NAMESPACE>/my-agent:1.0.0
+$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-agent"
+```
+
+The same positional syntax applies to `sbx create` and to v1 and v2 sandbox
+kits. Use `--kit` only for mixins. For example, with a local v3 workload and
+two local v3 mixins:
 
 ```console
 $ sbx run ./my-agent --name my-project --kit ./my-tool --kit ./team-config .
