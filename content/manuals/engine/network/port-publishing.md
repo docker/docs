@@ -61,6 +61,34 @@ Ports on the host's IPv6 addresses will map to the container's IPv4 address
 if no host IP is given in a port mapping, the bridge network is IPv4-only,
 and `--userland-proxy=true` (default).
 
+### Userland proxy (`userland-proxy`)
+
+Published ports are implemented with firewall NAT rules. For some paths the
+daemon also runs a small userspace helper, `docker-proxy`, controlled by the
+daemon flag `--userland-proxy` (JSON: `"userland-proxy": true|false`, default
+`true`).
+
+| Setting | Behavior |
+| --- | --- |
+| `true` (default) | NAT rules plus a `docker-proxy` process per published port. Hairpin and host-local access to published ports (for example connecting to `127.0.0.1:<published>` from the Docker host, or a container reaching another container via the host's published port) go through the proxy when the kernel path is insufficient. |
+| `false` | Only firewall/NAT rules. No per-port `docker-proxy` processes. Slightly less CPU and fewer processes on hosts with many published ports. Host-local or hairpin access to published ports may fail or behave differently depending on kernel and firewall support; prefer publishing to a non-loopback address and connecting via that address if you disable the proxy. |
+
+Most production traffic from remote clients only needs the NAT rules, so
+disabling the userland proxy is sometimes used to reduce overhead. Keep the
+default if processes on the Docker host (or other containers using the host's
+IP) must reliably reach published ports on localhost.
+
+You can set the option in `/etc/docker/daemon.json`:
+
+```json
+{
+  "userland-proxy": false
+}
+```
+
+Restart the daemon after changing it. Existing containers keep the proxy mode
+they were created with until recreated.
+
 ## Direct routing
 
 Port mapping ensures that published ports are accessible on the host's
