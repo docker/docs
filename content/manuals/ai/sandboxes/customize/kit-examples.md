@@ -248,6 +248,71 @@ Schema v3 has no automatic `files/workspace/` or `files/home/` placement.
 The Dockerfile defines where static content lives in the image. The hook
 handles the runtime destination.
 
+## Ship a Claude Code skill
+
+Package a task your team repeats as an agent skill. This mixin adds a
+Dockerfile review skill to Claude Code's project skills directory,
+`.claude/skills/docker-review/`.
+
+Create a `docker-review` directory with a descriptor, a Dockerfile, and the
+skill's Markdown file:
+
+```markdown {title="docker-review/SKILL.md"}
+---
+name: docker-review
+description: Review a Dockerfile for best practices. Use when asked to review, audit, or improve a Dockerfile.
+---
+
+When reviewing a Dockerfile, check:
+
+1. Base image: an appropriate image with a pinned tag or digest
+2. Layer order: dependencies copied before application source
+3. Image size: multi-stage builds, `.dockerignore`, and package-manager caches
+4. Security: a non-root user and no secrets in `ARG` or `ENV`
+5. Reproducibility: pinned package versions and build inputs
+```
+
+The Dockerfile packages the skill outside the mounted workspace:
+
+```dockerfile {title="docker-review/docker-review.dockerfile"}
+FROM scratch
+COPY SKILL.md /usr/share/docker-review/SKILL.md
+```
+
+An install hook copies it into the project when the sandbox is created:
+
+```yaml {title="docker-review/docker-review.yaml"}
+# syntax=docker/runtime-kit:3
+schemaVersion: "3"
+kind: mixin
+displayName: Dockerfile review skill
+
+capabilities:
+  - type: com.docker.runtime/lifecycle@1
+    config:
+      install:
+        - command: |
+            set -eu
+            skill_dir="$WORKSPACE_DIR/.claude/skills/docker-review"
+            mkdir -p "$skill_dir"
+            if [ ! -e "$skill_dir/SKILL.md" ]; then
+              cp /usr/share/docker-review/SKILL.md "$skill_dir/SKILL.md"
+            fi
+          user: agent
+          env: [WORKSPACE_DIR]
+```
+
+Use it with the Claude Code workload from [Build an agent](build-an-agent.md):
+
+```console
+$ sbx run ./claude-team --name claude-review --kit ./docker-review <PROJECT_PATH>
+```
+
+Ask Claude Code to review the project's Dockerfile. The hook preserves an
+existing skill at the same path. With a directly mounted workspace, it also
+creates the skill files in your host project. Other agents use their own
+skill discovery paths; adapt the hook's destination for the agent you use.
+
 ## Install an internal CA certificate
 
 If your organization uses a proxy that inspects HTTPS traffic, add its root

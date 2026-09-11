@@ -20,9 +20,9 @@ kits.
 > [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
 
 Each section below shows one `spec.yaml` snippet that demonstrates a
-single kit pattern. These aren't complete, distributable kits — they're
-small, focused examples you can lift into your own kit. For the full
-spec reference, see [Kit spec reference](kit-reference.md).
+single v2 kit pattern. For v3 examples of tools, shared configuration, hooks,
+and agent skills, see [Kit examples](../kit-examples.md). For the v2 field
+definitions, see [Kit spec reference](kit-reference.md).
 
 ## Drop a shared config file
 

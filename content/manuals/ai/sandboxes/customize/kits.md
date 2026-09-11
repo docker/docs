@@ -33,9 +33,25 @@ workload:
 | `workload` | The environment and command to run, such as an agent or a shell | Pass it to `sbx run` or `sbx create` |
 | `mixin` | Additional tools, configuration, or runtime behavior | Add it with `--kit` |
 
-For example, a team might use a Claude Code workload with a mixin that adds a
+For example, a team might use an OpenCode workload with a mixin that adds a
 linter and another that supplies the team's review instructions. Each kit can
 be maintained and shared separately.
+
+## What kits can do
+
+Use kits to give agents a repeatable working environment and share it with
+your team:
+
+- Package a custom agent, or configure an existing agent for your team's
+  projects.
+- Include the tools the agent needs, such as linters, language runtimes,
+  test runners, and compilers.
+- Share linter rules, editor settings, helper scripts, and reference material.
+  Give the agent instructions and skills for using them.
+- Connect the agent to services through network rules and credentials,
+  including internal APIs and private package registries.
+- Initialize each sandbox and run supporting services when it starts, such
+  as a development server for previewing the agent's work.
 
 ## Kit files and images
 
@@ -43,9 +59,9 @@ When you author a kit, you work in a directory of source files. A typical kit
 has a YAML file and a Dockerfile:
 
 ```text
-my-shell/
-├── my-shell.yaml
-└── my-shell.dockerfile
+opencode-python/
+├── opencode-python.yaml
+└── opencode-python.dockerfile
 ```
 
 The YAML file is the kit's descriptor. It identifies the kit as a workload or
@@ -60,59 +76,102 @@ sandbox.
 
 ### Build a workload
 
-For example, these two files define a shell workload with the `jq` tool
-installed. The descriptor identifies it as a v3 workload:
+Suppose your team uses OpenCode to work on Python projects. Package it with
+Ruff and instructions to check Python changes before handing work back to you.
+Everyone using the kit gets the same linter version and review workflow.
 
-```yaml {title="my-shell/my-shell.yaml"}
-# syntax=docker/runtime-kit:3
-schemaVersion: "3"
-kind: workload
-```
+The Dockerfile starts from Docker's OpenCode template and installs Ruff:
 
-The Dockerfile starts from a sandbox template, installs `jq`, and sets Bash
-as the command to run:
-
-```dockerfile {title="my-shell/my-shell.dockerfile"}
-FROM docker/sandbox-templates:shell
-USER root
-RUN apt-get update && apt-get install -y jq \
-    && rm -rf /var/lib/apt/lists/*
+```dockerfile {title="opencode-python/opencode-python.dockerfile"}
+FROM docker/sandbox-templates:opencode
 USER agent
-ENTRYPOINT ["bash"]
+RUN uv tool install ruff==0.12.12
+ENTRYPOINT ["opencode"]
 CMD []
 ```
 
-The template supplies the sandbox's base environment, including the `agent`
-user. The installation runs as root, then the Dockerfile switches back to
-`agent` for the shell. For an agent workload, the Dockerfile would install
-and launch the agent instead. See [Build an agent](build-an-agent.md) for a
-complete walkthrough.
+The template supplies OpenCode, Python, uv, and the `agent` user. Ruff is
+installed during the build, so it is ready when the agent starts.
+
+The descriptor declares this as a workload, connects OpenCode to the
+Anthropic API, and gives it the team's review instructions:
+
+```yaml {title="opencode-python/opencode-python.yaml"}
+# syntax=docker/runtime-kit:3
+schemaVersion: "3"
+kind: workload
+
+capabilities:
+  - type: com.docker.runtime/network-policy@1
+    config:
+      runtime:
+        allow:
+          - api.anthropic.com
+          - opencode.ai
+          - models.dev
+          - registry.npmjs.org
+          - pypi.org
+          - files.pythonhosted.org
+  - type: com.docker.runtime/credential@1
+    config:
+      service: anthropic
+      phase: runtime
+      apiKey:
+        name: ANTHROPIC_API_KEY
+        proxyManaged: true
+        inject:
+          - domain: api.anthropic.com
+            header: x-api-key
+            format: "%s"
+  - type: com.docker.runtime/agent-context@1
+    config:
+      filename: AGENTS.md
+      content: |
+        Ruff is installed. Run `ruff check` on Python files you change,
+        and fix any lint errors before reporting completion.
+        Follow the project's existing configuration and test commands.
+```
+
+The `capabilities` list describes what the sandbox provides at runtime:
+network access, authentication, and instructions for the agent. The credential
+entry names the service; you store the actual API key on your host. The
+following sections explain how these declarations work.
+
+This example uses an existing agent image. To install an agent yourself and
+configure its version and model, see [Build an agent](build-an-agent.md).
 
 ## Run a kit
 
-Save the two files in `my-shell` and run this command from its parent
-directory:
+Save the two files in `opencode-python`. Store an Anthropic API key on the
+host, then launch the kit from its parent directory against a Python project:
 
 ```console
-$ sbx run ./my-shell
+$ sbx secret set anthropic
+$ sbx run ./opencode-python <PROJECT_PATH>
 ```
 
-`sbx` builds the kit and opens a sandbox shell with `jq` installed. Your current
-directory is mounted as the workspace. Unchanged builds reuse cached results.
+Approve the kit's credential request when prompted, then select an Anthropic
+model in OpenCode. Ask it to review a Python module or make a change. It has
+Ruff available and instructions to run it before reporting completion.
+
+`sbx` builds the kit and mounts your project as the workspace. Unchanged
+builds reuse cached results. See
+[Credential configuration](../configuration/credentials.md) for storing keys
+and approving their use.
 
 The workload reference is a positional argument. It can also be a published
 image or a Git URL:
 
 ```console
-$ sbx run docker.io/<NAMESPACE>/my-shell:1.0.0
-$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-shell"
+$ sbx run docker.io/<NAMESPACE>/opencode-python:1.0.0
+$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=opencode-python"
 ```
 
 The same positional syntax applies to `sbx create` and to v1 and v2 sandbox
 kits. Use `--kit` to add mixins when creating a sandbox:
 
 ```console
-$ sbx run ./my-shell --name shell-with-tools --kit ./my-tool --kit ./team-config .
+$ sbx run ./opencode-python --name python-with-tools --kit ./my-tool --kit ./team-config .
 ```
 
 `sbx` combines the workload and mixins into the sandbox's environment. This
@@ -122,10 +181,10 @@ For complete mixins to try, see [Kit examples](kit-examples.md).
 
 ## Capabilities
 
-A kit can include a tool in its image, but using that tool might also require
-network access or a credential. The descriptor tells Docker Sandboxes what to
-provide through its `capabilities` list. Capabilities also cover behavior such
-as running setup commands and supplying instructions to an agent.
+The OpenCode example uses three capabilities: network access, credentials,
+and agent instructions. Each entry in `capabilities` tells Docker Sandboxes
+what to provide when running the kit. Other capabilities cover behavior such
+as running setup commands or publishing a development server's port.
 
 Workloads and mixins use the same capability format. For example, a workload
 can declare the network access its agent needs, and a mixin can request access
@@ -152,16 +211,20 @@ The entry's `type` names the capability, and `config` contains its settings.
 Here, `runtime.allow` lists a domain the running sandbox can reach.
 
 This kit needs only its YAML file: it configures network access without adding
-software or files to the image. Run it with the shell workload:
+software or files to the image. Run it with the OpenCode workload:
 
 ```console
-$ sbx run ./my-shell --name shell-github --kit ./github-access
+$ sbx run ./opencode-python --name python-github --kit ./github-access
 ```
 
 Network rules from the selected kits combine. A kit's `deny` entries take
 precedence over kit allow entries, and the resulting rules participate in the
 sandbox's [policy precedence](../governance/concepts.md#precedence). Use
 `sbx policy log` to investigate refused connections.
+
+When organization governance is active, only organization allow rules grant
+access. Kit allow rules don't grant additional access, but kit deny rules
+still restrict it.
 
 The same pattern of `type` and `config` applies to other capabilities. Each
 type has its own settings; `@1` identifies the version of those settings.
@@ -172,25 +235,50 @@ required and optional requests.
 ### Authenticate to external services
 
 A credential capability names the service a kit needs and declares how to
-authenticate to it. Users supply the secret on the host. For example, for a
-service named `my-service`:
+authenticate to it. In the OpenCode example, `service: anthropic` matches the
+key you store with `sbx secret set anthropic`.
 
-```console
-$ sbx secret set my-service
-```
-
-On the first interactive run, `sbx` also asks the user to approve how the kit
-uses that credential. A kit can request proxy-managed authentication, where
-the host proxy inserts the secret into outbound requests and the real value
-stays outside the sandbox.
+The example sets `proxyManaged: true`. OpenCode receives a placeholder in
+`ANTHROPIC_API_KEY`, and the host proxy inserts the real key into requests to
+`api.anthropic.com`. The key stays on the host. First-run approval authorizes
+the kit to use it through that mechanism and on that domain.
 
 See [Credentials](kit-reference.md#credentials) for a descriptor example and
 API key and OAuth fields. [Credential configuration](../configuration/credentials.md)
 covers host-side storage and approval, including preparation for unattended runs.
 
+### Give the agent instructions
+
+Installing a tool makes it available. Agent instructions tell the agent when
+and how to use it, where to find shared configuration, and which checks to run
+before reporting a task complete.
+
+A mixin can contribute instructions through the agent-context capability:
+
+```yaml
+capabilities:
+  - type: com.docker.runtime/agent-context@1
+    config:
+      content: |
+        Follow the project's contribution guide when changing code.
+        Run the project's lint and test commands before reporting completion.
+        If a check fails, include the failure in your response.
+```
+
+The workload chooses the instruction filename, such as `AGENTS.md` or
+`CLAUDE.md`. Docker Sandboxes adds an index of kit instructions to that file.
+Each kit's instructions stay in a separate file that the agent can read when
+needed. Use `contentFile` to keep longer guidance in a Markdown file beside
+the descriptor. See [Contribute agent instructions](kit-examples.md#contribute-agent-instructions).
+
+You can also package an agent skill: a reusable set of instructions for a
+particular task, such as reviewing a Dockerfile. Skills are files installed
+where that agent looks for them. See
+[Ship a Claude Code skill](kit-examples.md#ship-a-claude-code-skill).
+
 ## Build content and runtime setup
 
-The shell example installs `jq` while building the kit. Every sandbox using
+The OpenCode example installs Ruff while building the kit. Every sandbox using
 that image starts with the tool available. Other setup needs information that
 exists only when a sandbox runs, such as the mounted workspace path or a
 host-provided credential.
@@ -247,6 +335,44 @@ Files destined for a mounted workspace or persistent volume need that second
 step: a mount can hide files baked into the image at its mount path. Copy from
 the staged image path after the mount is available. See
 [Copy shared configuration](kit-examples.md#copy-shared-configuration).
+
+### Customize agent settings
+
+When an agent supports additional settings files, keep team defaults in a
+separate file and point the agent to it. For example, Claude Code has a
+`--settings` launch option, and OpenCode reads the path in `OPENCODE_CONFIG`.
+
+Package fixed settings with Dockerfile `COPY`. Use lifecycle `files` for
+settings that contain kit argument values chosen when creating the sandbox.
+The workload controls its launch options; a mixin's `ENTRYPOINT` doesn't
+change how the agent starts. See
+[Write the model settings](build-an-agent.md#write-the-model-settings) for a
+complete example.
+
+### Set environment variables
+
+Use Dockerfile `ENV` for tool settings that apply to every sandbox using the
+kit. For example, make Python write output without buffering:
+
+```dockerfile
+ENV PYTHONUNBUFFERED=1
+```
+
+For values the user chooses when creating a sandbox, declare a kit argument
+with an `env` mapping. See [Pass arguments to kits](#pass-arguments-to-kits).
+Use credential capabilities for secrets.
+
+Docker Sandboxes sets `HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY`, and their
+lowercase equivalents to route traffic through its policy and credential
+proxy. Leave those variables to the sandbox. Configure a corporate proxy on
+the host using [Upstream proxy](../architecture.md#upstream-proxy).
+
+Some tools need a shell initialization script, such as a version manager's
+`init.sh`. With Docker sandbox templates, append the initialization commands
+to `/etc/sandbox-persistent.sh` in a lifecycle install hook. The templates
+source this file for interactive and non-interactive Bash commands. Append
+to it so other kits' settings remain, and keep shell completion scripts out
+of it because they can fail in non-interactive shells.
 
 ## Compose kits
 
@@ -343,7 +469,7 @@ sandbox state. Use credential capabilities for secrets. See
 
 ## Directory and build layout
 
-The shell example uses two files with matching names. Kits can also include
+The OpenCode example uses two files with matching names. Kits can also include
 configuration, scripts, and instructions that the Dockerfile copies into the
 image. A larger directory might look like this:
 
@@ -501,3 +627,26 @@ For the image annotations and file layout, see
 Running a workload with `docker run` uses its image configuration, but doesn't
 apply the kit's capability declarations or lifecycle hooks. Use `sbx` to run
 it with those behaviors.
+
+## Debug kits
+
+When a tool is missing or a request fails, inspect the running sandbox:
+
+```console
+$ sbx exec <SANDBOX> -- which <TOOL>
+$ sbx exec <SANDBOX> -- cat /home/agent/.config/<TOOL>/settings.json
+$ sbx policy log
+```
+
+The policy log shows outbound requests and the rules they matched. Use it to
+find blocked package registries or API hosts. If downloads fail after adding
+credential injection, check that the injection rule targets only the service
+hosts that need the credential.
+
+For a background service, redirect its startup command's output to a file
+inside the sandbox, then read that file with `sbx exec`. Set
+`background: true` on the hook rather than adding `&` to the shell command.
+See [Run a hook on every start](kit-examples.md#run-a-hook-on-every-start).
+
+To test changes to a v3 kit, create a sandbox with a different name. Reusing
+an existing sandbox keeps its recorded kit configuration.

@@ -1,7 +1,7 @@
 ---
 title: Kits v2
 linkTitle: Kits v2
-description: Extend a sandbox with tools, credentials, network rules, and configuration using declarative YAML artifacts.
+description: Maintain schema v2 sandbox and mixin kits with the spec.yaml format, runtime setup, built-in agent inheritance, and v2 packaging commands.
 keywords: sandboxes, sbx, kits, mixins, customization, extensions, agents
 weight: 60
 ---
@@ -19,39 +19,20 @@ kits.
 > feature evolves. Share feedback and bug reports in the
 > [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
 
-A kit packages a set of capabilities a sandbox can use, such as:
+For kit concepts and use cases, see [What kits can do](../kits.md#what-kits-can-do).
+The following sections describe the v2 fields and commands for maintaining
+existing kits.
 
-- Tools to install
-- Environment variables to set
-- Credentials to inject
-- Network rules to allow or deny domains
-- Files to drop in
-- Startup commands to run
-- Memory instructions to give the agent
+V2 kits use a `spec.yaml` file. A `kind: sandbox` kit selects the agent's image
+and launch configuration. A `kind: mixin` kit adds configuration to an agent.
+Load a kit from a directory, ZIP file, OCI artifact, or Git URL.
 
-You declare these in a single `spec.yaml` file, point the CLI at the
-directory (or a ZIP, OCI artifact, or Git URL), and the sandbox applies
-and enforces them at runtime. Credentials stay on the host and go through
-a proxy instead of entering the VM, and outbound traffic is restricted to
-the domains permitted by the kit's network rules.
-
-A kit is either a mixin or a sandbox:
-
-- Mixin kits (`kind: mixin`) extend an existing agent with extra
-  capabilities. Stack several on the same sandbox.
-- Sandbox kits (`kind: sandbox`) define a full agent from scratch: its image,
-  entrypoint, network policies, and everything else the agent needs.
-
-## What kits can do
+## V2 configuration
 
 ### Run commands
 
-A kit can run commands inside the sandbox automatically. **Install
-commands** run once at creation; **startup commands** run each time
-the sandbox starts.
-
-Install commands are the place to put anything an agent needs into the
-image, via `apt`, `pip`, `npm`, `curl | bash`, or whatever fits:
+V2 declares runtime commands under `setup`. `setup.install` runs once at
+sandbox creation and can install software:
 
 ```yaml
 setup:
@@ -59,9 +40,8 @@ setup:
     - command: "apt-get update && apt-get install -y jq"
 ```
 
-Startup commands are for work that can run alongside the agent, such as a
-background service. They must be idempotent — see the
-[`startup`](kit-reference.md#startup) spec reference:
+`setup.startup` runs on each start alongside the agent. Commands must tolerate
+repeated execution. See [`startup`](kit-reference.md#startup) for its fields:
 
 ```yaml
 setup:
@@ -72,13 +52,8 @@ setup:
 
 ### Inject files
 
-Kits can inject files into the sandbox in two ways: **static files** bundled
-with the kit, and **`setup.files`** written at startup with runtime values
-substituted in.
-
-Static files work well for content that doesn't vary between sandboxes, such
-as tool configurations, shared linter rules, helper scripts the agent can
-invoke, or reference material like a style guide or API cheatsheet.
+V2 places bundled files from `files/home/` in the agent's home directory and
+from `files/workspace/` in the workspace:
 
 ```text
 my-kit/
@@ -133,8 +108,7 @@ initialization because startup commands don't gate the agent entrypoint.
 
 ### Set environment variables
 
-Environment variables set by the kit are available to the agent at
-runtime:
+Declare environment variables under `environment.variables`:
 
 ```yaml
 environment:
@@ -147,21 +121,13 @@ For credentials, see
 Don't put secret values directly in `environment.variables` — they'd
 be visible inside the sandbox VM.
 
-> [!IMPORTANT]
-> The sandbox manages proxy settings for you. It sets `HTTP_PROXY`,
-> `HTTPS_PROXY`, `NO_PROXY`, and their lowercase equivalents automatically so
-> that traffic flows through its built-in forward proxy, which enforces
-> network policy and injects credentials. Leave these variables to the
-> sandbox — setting them in a kit points traffic away from the forward proxy,
-> so it can no longer apply network policy or inject credentials, and those
-> requests typically fail to connect. To send sandbox traffic through an
-> upstream corporate proxy, configure it on the host. See
-> [Upstream proxy](../../architecture.md#upstream-proxy).
+Leave proxy variables to the sandbox. See
+[Set environment variables](../kits.md#set-environment-variables) for shared
+environment and proxy guidance.
 
 ### Control network access
 
-Network rules define which domains the sandbox can reach or block. Kit
-network rules apply only to sandboxes that use the kit:
+V2 declares network rules under `permissions.network`:
 
 ```yaml
 permissions:
@@ -173,32 +139,14 @@ permissions:
       - telemetry.example.com
 ```
 
-Use `allow` for hosts the agent needs, such as package
-registries, install endpoints, or external APIs. Use `deny` for
-hosts the agent should not reach, such as telemetry endpoints. If a domain
-matches both an allow rule and a deny rule, the deny rule wins.
-
-> [!IMPORTANT]
-> When organization governance is active, only organization allow rules grant
-> access, so kit-defined `allow` rules are ignored — including any domains a kit
-> allows for the agent to reach. Kit-defined `deny` rules still apply, because a
-> deny can only restrict access further. For details, see
-> [Policy precedence](../../governance/concepts.md#precedence).
-
-For authenticated services, see
-[Authenticate to external services](#authenticate-to-external-services).
+Kit deny rules take precedence over kit allow rules. Organization governance
+can also override kit allow rules. See [Control network access](../kits.md#control-network-access)
+for policy behavior shared by kit versions.
 
 ### Authenticate to external services
 
-A kit can attach credentials to outbound requests through the
-host-side proxy. The agent inside the VM works with a sentinel value;
-the proxy reads the real credential on the host and overwrites the
-auth header before the request leaves the sandbox.
-
-A kit declares the service, the in-container environment variable, and how
-to inject the credential. It doesn't declare a host discovery source. The user
-provides the value through the secret store or first-run prompt, and a
-[credential binding](../../configuration/credentials.md) authorizes its use:
+V2 declares credentials in a top-level `credentials` list. The injection
+domain must also be allowed by `permissions.network`:
 
 ```yaml
 credentials:
@@ -217,23 +165,14 @@ permissions:
       - api.example.com # the domain must also be reachable
 ```
 
-The agent boots with `MY_SERVICE_API_KEY=proxy-managed`, sends a
-request with that sentinel in `Authorization`, and the proxy overwrites
-the header with the real credential before forwarding. The real
-secret never enters the VM.
-
-See [Credentials](../../configuration/credentials.md) for how to provide the
-credential value on your host, other approaches for cases the example
-above doesn't fit, and what the proxy does at request time. See
-[Credential bindings](../../configuration/credentials.md) to approve the mechanisms
-and domains declared by a third-party v2 kit.
+See [Credential configuration](../../configuration/credentials.md) for storing
+secrets and approving credential bindings. The proxy behavior is shared with
+v3; the descriptor fields differ.
 
 ### Inject agent memory
 
-A kit can append content to the agent's memory file, such as `CLAUDE.md`
-or `AGENTS.md`. The agent reads this file at startup. Use it to give
-the agent project conventions, usage tips for a tool the kit installs,
-or other guidance that should be in scope when the sandbox runs.
+V2 uses `agentInstructions` for guidance such as tool usage and project
+conventions:
 
 ```yaml
 agentInstructions:
@@ -273,31 +212,18 @@ sandbox:
   entrypoint: [my-agent, "--yolo"]
 ```
 
-See [Sandbox kits](#sandbox-kits) for use cases and an example.
+See [Sandbox kits](#sandbox-kits) for inheritance from a built-in agent.
 
 ## Mixin kits
 
-A mixin kit extends an existing agent with extra capabilities. Common use
-cases:
-
-- Pre-install tools: linters, libraries, or other custom programs
-- Grant the agent access to a new authenticated service (a database, a
-  vendor API)
-- Inject shared team config (linter rules, editor settings, dotfiles)
+A v2 `kind: mixin` kit extends a built-in agent or a v2 sandbox kit. Pass it
+with `--kit` when creating the sandbox.
 
 See [Drop a shared config file](kit-examples.md#drop-a-shared-config-file) and
 [Install a tool at sandbox creation](kit-examples.md#install-a-tool-at-sandbox-creation)
 for complete mixin examples.
 
 ## Sandbox kits
-
-A sandbox kit defines a full agent from scratch — image, entrypoint, and
-everything the agent needs. Common use cases:
-
-- Package a custom agent you've built so others can run it
-- Ship a team-internal agent with defaults baked in
-- Run a fork of an existing agent with your own config
-- Prototype a new agent integration
 
 Sandbox kits declare everything a mixin kit can, plus an
 [`sandbox:` block](kit-reference.md#sandbox-block) that tells the sandbox how to launch the
@@ -614,23 +540,7 @@ agent instructions, and the sandbox block — see [Kit spec reference](kit-refer
 
 ## Debugging
 
-When a kit doesn't behave as expected, start with the network policy log
-and direct inspection inside the sandbox:
-
-- `sbx policy log` shows every outbound request the sandbox proxy saw,
-  the rule it matched, extra context when available, and its `PROXY`
-  value, such as `forward`, `forward-bypass`, `transparent`, or
-  `browser-open`. Use it to diagnose install-time download failures,
-  blocked domains, and unexpected TLS interception. If downloads fail or
-  arrive corrupted after you add a credential's `apiKey.inject`, check
-  whether an injection domain is too broad. Inject only on the hosts that
-  need credentials.
-- `sbx exec <sandbox> -- <cmd>` runs an arbitrary command inside an
-  existing sandbox. Useful for inspecting post-install state without
-  recreating: `which mytool`, `ls /home/agent/.local/bin/`,
-  `cat /home/agent/.config/...`, and so on.
-
-Install and startup command output is only emitted during `sbx run` or
-`sbx create`; `sbx` doesn't retain it for later inspection. To repeat
-setup with fresh output, remove and recreate the sandbox:
-`sbx rm <sandbox> && sbx run ...`.
+See [Debug kits](../kits.md#debug-kits) for network policy logs, inspecting
+files and tools inside the sandbox, and capturing background-service output.
+Use `sbx kit validate` and `sbx kit inspect` to check a v2 descriptor before
+launching it.
