@@ -29,29 +29,6 @@ and v2 kits. For `schemaVersion: "2"`, see the
 Each descriptor uses one grammar. V2 fields aren't accepted in a v3
 descriptor.
 
-### Move from v2 to v3
-
-A v3 kit combines image content with a descriptor. Changing `schemaVersion`
-alone doesn't convert a v2 kit. Separate reusable build work from runtime
-initialization, then declare the runtime capabilities the kit needs.
-
-| V2 surface | V3 equivalent |
-| --- | --- |
-| `kind: sandbox` | `kind: workload` with a Dockerfile recipe |
-| `sandbox.image` | Dockerfile `FROM` |
-| `sandbox.entrypoint`, `sandbox.command`, `environment.variables` | Dockerfile `ENTRYPOINT`, `CMD`, and `ENV` |
-| `extends` | A mixin for composition, or a derived workload image with its own descriptor |
-| `setup.install` | Dockerfile `RUN` for reusable content; lifecycle `install` for sandbox initialization |
-| `setup.startup` and `setup.files` | Lifecycle capability `startup` and `files` |
-| `setup.files[].onlyIfMissing: true` | Lifecycle `files[].overwrite: false` |
-| Automatic `files/home/` and `files/workspace/` injection | Dockerfile `COPY`, with lifecycle hooks for destinations provided by runtime mounts |
-| `permissions.network` and `credentials` | Network-policy and credential capabilities |
-| `agentInstructions` | Agent-context capability |
-
-Review the [runtime support table](#runtime-capabilities) before migrating
-features such as volumes. Publish the converted kit as an image, and select
-v3 workload and mixin kits together.
-
 ## Descriptor fields
 
 A descriptor is a YAML document with `schemaVersion: "3"` and a `kind`.
@@ -632,3 +609,26 @@ no recipe has a layer containing its descriptor.
 The published descriptor has a 512 KiB limit, with a build warning above
 64 KiB. Keep substantial instruction text in `contentFile` and other content
 in image layers. For image composition and distribution, see [Kits](kits.md).
+
+## Move from v2 to v3
+
+A v3 kit combines image content with a descriptor. Changing `schemaVersion`
+alone doesn't convert a v2 kit. Separate reusable build work from runtime
+initialization, then declare the runtime capabilities the kit needs.
+
+| V2 surface | V3 equivalent |
+| --- | --- |
+| `kind: sandbox` | `kind: workload` with a Dockerfile recipe |
+| `sandbox.image` | Dockerfile `FROM` |
+| `sandbox.entrypoint`, `sandbox.command`, `environment.variables` | Dockerfile `ENTRYPOINT`, `CMD`, and `ENV` |
+| `extends` | A mixin for composition, or a derived workload image with its own descriptor |
+| `setup.install` | Dockerfile `RUN` for reusable content; lifecycle `install` for sandbox initialization |
+| `setup.startup` and `setup.files` | Lifecycle capability `startup` and `files` |
+| `setup.files[].onlyIfMissing: true` | Lifecycle `files[].overwrite: false` |
+| Automatic `files/home/` and `files/workspace/` injection | Dockerfile `COPY`, with lifecycle hooks for destinations provided by runtime mounts |
+| `permissions.network` and `credentials` | Network-policy and credential capabilities |
+| `agentInstructions` | Agent-context capability |
+
+Review the [runtime support table](#runtime-capabilities) before migrating
+features such as volumes. Publish the converted kit as an image, and select
+v3 workload and mixin kits together.

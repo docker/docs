@@ -19,8 +19,10 @@ configurable model, and an Anthropic API key held on the host. The same steps
 apply to other agents: build the software into an image, declare its runtime
 requirements, and provide instructions about the environment.
 
-This example uses API-key authentication. For the complete schema, see the
-[Kit spec reference](kit-reference.md).
+This example uses API-key authentication. If you're starting with kits, read
+[Kits](kits.md) for the file layout and the roles of a workload and a mixin.
+The walkthrough builds up one kit, adding each part of its descriptor as it is
+needed. For field definitions, see the [Kit spec reference](kit-reference.md).
 
 ## Prepare the kit directory
 
@@ -47,7 +49,11 @@ the kit frontend find the recipe.
 
 ## Build the agent into the image
 
-Create the companion Dockerfile:
+First, define what goes into the image. The Dockerfile installs Claude Code
+and launches it with a settings file. The descriptor you write next will
+supply the agent version and create that settings file in the sandbox.
+
+Save the following as `claude-team/claude-team.dockerfile`:
 
 ```dockerfile {title="claude-team/claude-team.dockerfile"}
 FROM docker/sandbox-templates:shell
@@ -83,9 +89,11 @@ same in every sandbox using this kit. BuildKit can cache that work. Reserve
 lifecycle install hooks for configuration that depends on an individual
 sandbox, such as registering a runtime endpoint.
 
-## Declare the runtime requirements
+## Describe the workload and its inputs
 
-Create the descriptor:
+Create `claude-team/claude-team.yaml`. Start by identifying the workload and
+declaring its two inputs: the agent version to build and the model to use
+when the sandbox runs.
 
 ```yaml {title="claude-team/claude-team.yaml"}
 # syntax=docker/runtime-kit:3
@@ -104,14 +112,42 @@ args:
     enum: [sonnet, opus, haiku]
 
 provides: ["claude@${{ kit.args.version }}"]
+```
 
+The `version` input maps to `CLAUDE_VERSION` in the Dockerfile. The build
+validates the value and substitutes it into `provides`, which tells other
+kits which agent version this workload supplies.
+
+The `model` input will be used in the settings file. It is chosen when creating
+a sandbox, so selecting another model doesn't require rebuilding the agent.
+
+## Allow access to the API
+
+Claude Code needs to reach the Anthropic API. Add a `capabilities` list at
+the top level of `claude-team.yaml`, after `provides`. Its first entry declares
+that network access:
+
+```yaml {title="Add to claude-team/claude-team.yaml"}
 capabilities:
   - type: com.docker.runtime/network-policy@1
     config:
       runtime:
         allow:
           - api.anthropic.com:443
+```
 
+This rule applies when the sandbox runs. Downloading Claude Code in the
+Dockerfile happens during the build and uses the builder's network.
+
+## Declare the credential
+
+The network rule permits a connection. A credential capability tells Docker
+Sandboxes how to authenticate requests on that connection using a key stored
+on the host.
+
+Append this entry to the same `capabilities` list:
+
+```yaml {title="Append under capabilities"}
   - type: com.docker.runtime/credential@1
     description: Anthropic API access
     config:
@@ -124,7 +160,22 @@ capabilities:
           - domain: api.anthropic.com
             header: x-api-key
             format: "%s"
+```
 
+The sandbox receives a placeholder in `ANTHROPIC_API_KEY`. When Claude Code
+makes a request to `api.anthropic.com`, the host proxy inserts the real API
+key into the `x-api-key` header. The key stays on the host. You will supply
+its value and approve its use when launching the kit.
+
+## Write the model settings
+
+The Dockerfile's launch command reads
+`/home/agent/.config/claude-team/settings.json`. Use the lifecycle capability
+to create that file with the model chosen for the sandbox.
+
+Append this entry to `capabilities`:
+
+```yaml {title="Append under capabilities"}
   - type: com.docker.runtime/lifecycle@1
     config:
       files:
@@ -132,40 +183,16 @@ capabilities:
           content: |
             {"model": "${{ kit.args.model }}"}
           mode: "0644"
-
-  - type: com.docker.runtime/agent-context@1
-    config:
-      filename: CLAUDE.md
-      contentFile: ./context.md
 ```
 
-The descriptor separates what the kit supplies from what it asks the runtime
-to do:
-
-- `kind: workload` makes this kit the environment and launch command for
-  the sandbox. A composition has one workload.
-- `provides` identifies the installed agent and version so other kits can
-  declare a dependency on Claude Code.
-- `capabilities` requests network access, credential injection, settings
-  file creation, and agent instructions.
-
-The arguments resolve at different times. `version` has a `buildArg`, so
-the frontend validates it, passes it to the Dockerfile as `CLAUDE_VERSION`,
-and records the installed version in `provides`. `model` resolves when you
-create a sandbox, so changing it doesn't require rebuilding the binary.
-
-The credential capability exposes a placeholder in `ANTHROPIC_API_KEY`.
-The proxy substitutes the host's key in the `x-api-key` header for requests
-to `api.anthropic.com`. The matching network allow entry permits those
-requests. Declaring a credential doesn't store or grant access to a key.
-
-The network policy describes sandbox execution. Downloading Claude Code in
-the Dockerfile is build-time work. An `install` network policy would apply
-to lifecycle install hooks, rather than to Dockerfile `RUN` instructions.
+Docker Sandboxes substitutes the `model` argument and writes the file before
+Claude Code starts. This work belongs to sandbox creation because the value
+can differ between sandboxes using the same image.
 
 ## Add agent instructions
 
-Create the context file:
+The kit can also give Claude Code instructions about the environment. Save the
+following Markdown alongside the descriptor and Dockerfile:
 
 ```markdown {title="claude-team/context.md"}
 ## Team workflow
@@ -181,10 +208,18 @@ Bash commands. Keep shell completion scripts out of that file because
 non-interactive commands also source it.
 ```
 
-The frontend includes this file in the kit image. At runtime, `sbx` adds an
-entry to `CLAUDE.md` that points Claude Code to the kit's instructions. The
-content stays in its own file, so composing more kits doesn't put all their
-instructions into the main profile.
+Append an agent-context entry to `capabilities` to include these instructions:
+
+```yaml {title="Append under capabilities"}
+  - type: com.docker.runtime/agent-context@1
+    config:
+      filename: CLAUDE.md
+      contentFile: ./context.md
+```
+
+The build includes `context.md` in the image. At runtime, `sbx` adds an entry
+to the agent's `CLAUDE.md` profile that points to this file. Each kit's
+instructions stay in their own file, so the agent can read them when needed.
 
 ## Store the key and run
 

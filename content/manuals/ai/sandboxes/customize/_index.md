@@ -28,22 +28,6 @@ Kits are experimental. The format and CLI commands are subject to change.
 Share feedback in the
 [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
 
-## Builds and runtime configuration
-
-Kits v3 include building as part of authoring a kit. Use the kit's Dockerfile
-to install packages, compile tools, and copy static content into an image.
-Use its descriptor to declare what the runtime must provide when the sandbox
-runs, such as a credential, network access, or a startup hook.
-
-A workload kit can build on a sandbox template with Dockerfile `FROM`. The
-template supplies the base environment, and the kit adds its content and
-runtime declarations. A mixin can also build and ship its own tools as an
-overlay, so adding a tool doesn't require rebuilding the workload image.
-
-Lifecycle install hooks remain available for initialization that needs a
-sandbox's runtime inputs. Build steps produce content that sandboxes reuse;
-install hooks initialize each sandbox separately.
-
 ## Choose a customization
 
 | Goal | Option |
@@ -57,3 +41,17 @@ install hooks initialize each sandbox separately.
 Use v3 for authoring kits. Docker Sandboxes also supports v1 and v2, whose
 `spec.yaml` workflow is documented in [Kits v2](kits-v2/_index.md). A single
 composition cannot combine v3 kits with v1 or v2 kits.
+
+## Builds and runtime configuration
+
+A kit starts as source files: a YAML descriptor for sandbox behavior and a
+Dockerfile for software and files to package. Building them produces an image
+you can share. Docker Sandboxes reads the descriptor when it runs the kit.
+
+For example, an agent kit can install the agent during its build, then request
+access to its API and credentials when the sandbox runs. The installed agent
+is reused across sandboxes, while each sandbox receives its own configuration.
+
+A workload kit can use a sandbox template as its base image. Mixins add tools
+or behavior to that workload. See [Kits](kits.md) for the file layout, a
+complete example, and how the parts work together.
