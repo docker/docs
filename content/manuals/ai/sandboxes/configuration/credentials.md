@@ -37,7 +37,7 @@ value for the same service, the stored secret takes precedence.
 | [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value or dynamic source in your OS keychain, keyed by service | The default for any built-in or kit-declared service                                                          |
 | [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
 | OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, Cursor, or Droid                                              |
-| [Credential bindings](#credential-bindings) (`credentials.yaml`)            | Per-service mechanism and domain approval                    | Required for third-party `schemaVersion: "2"` kits                                                               |
+| [Credential bindings](#credential-bindings) (`credentials.yaml`)            | Per-service mechanism and domain approval                    | Required for third-party kits                                                               |
 | [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits                   | Pulling templates or kits from a private registry                                                                |
 
 For multi-provider agents (OpenCode, Docker Agent), the proxy selects
@@ -211,8 +211,33 @@ it into requests to the listed API domains.
 
 ### Services declared by kits
 
-Custom kits can declare their own service identifiers in `spec.yaml`. In
-`schemaVersion: "2"`, credentials are declared under the `credentials:` list:
+Custom kits declare their service identifiers in the kit descriptor. V3 uses a
+credential capability, and v2 uses a top-level `credentials` list:
+
+{{< tabs >}}
+{{< tab name="v3" >}}
+
+```yaml
+capabilities:
+  - type: com.docker.runtime/network-policy@1
+    config:
+      runtime:
+        allow: [api.my-service.com]
+  - type: com.docker.runtime/credential@1
+    config:
+      service: my-service
+      phase: runtime
+      apiKey:
+        name: MY_SERVICE_TOKEN
+        proxyManaged: true
+        inject:
+          - domain: api.my-service.com
+            header: Authorization
+            format: "Bearer %s"
+```
+
+{{< /tab >}}
+{{< tab name="v2" >}}
 
 ```yaml
 credentials:
@@ -223,7 +248,14 @@ credentials:
       inject:
         - domain: api.my-service.com
           scheme: bearer
+
+permissions:
+  network:
+    allow: [api.my-service.com]
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 Each service declares `apiKey`, `oauth`, or both. When both resolve at runtime,
 the API key takes precedence and OAuth acts as the fallback. To provide the
@@ -434,8 +466,8 @@ you've approved for each service. It lives at
 `~/.config/sbx/credentials.yaml`, or `%APPDATA%\sbx\credentials.yaml` on
 Windows.
 
-Third-party kits that declare `schemaVersion: "2"` require an approved binding
-for each credential they use. `sbx` creates one interactively the first time you
+Third-party kits require an approved binding for each credential they use,
+regardless of schema version. `sbx` creates one interactively the first time you
 run such a kit (see [First-run approval](#first-run-approval)); you can also
 write entries by hand. Credentials declared only by embedded, built-in kits are
 authorized by provenance and don't need a binding.
@@ -478,25 +510,23 @@ both cases, you approve the domains declared by the kit. `sbx` writes the entry
 to `credentials.yaml`.
 
 In non-interactive contexts (CI or `--detached`), there's no one to answer the
-prompt. Without a binding, the sandbox starts with the credential withheld. If
-the kit marks the credential as `required: true`, `sbx` also prints a warning.
+prompt. Without a binding, the sandbox starts with the credential withheld. For a
+required credential, `sbx` also prints a warning.
 Pre-create the binding by running the kit interactively once or by writing
 `credentials.yaml` directly before running unattended.
 
-The bindings file gates whether a third-party v2 kit can use a service
+The bindings file gates whether a third-party kit can use a service
 credential. The kit's credential injection rules and network permissions still
 constrain which requests can carry the credential.
 
 ### Kits that require a binding
 
-Only third-party kits that declare `schemaVersion: "2"` require a binding.
-Built-in agents also use `schemaVersion: "2"`, but credentials declared only by
-embedded kits are authorized by provenance and inject automatically. A
-third-party kit that extends a built-in agent inherits its credentials, but not
-its built-in provenance. The inherited credentials therefore require approval.
+Third-party kits require a binding regardless of schema version. Credentials
+declared only by embedded kits are authorized by provenance and inject
+automatically. A third-party v2 kit that extends a built-in agent inherits its
+credentials, but not its built-in provenance. The inherited credentials therefore require approval.
 If a third-party kit declares the same service itself, that service also
-requires approval. Kits on `schemaVersion: "1"` inject their declared
-credentials without a binding.
+requires approval.
 
 ## Registry credentials
 
@@ -561,10 +591,11 @@ To scope the credential to a single sandbox, store it under that sandbox's name:
 $ gh auth token | sbx secret set --sandbox my-app --registry ghcr.io --password-stdin
 ```
 
-For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
+For v2 kits on Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
 `sbx login`. For other registries, both commands use these credentials. Both
 commands fall back to the Docker credential store, so credentials from
-`docker login` also work.
+`docker login` also work. V3 kits are published with Docker Buildx, which uses
+the credentials from `docker login`.
 
 ### Remove registry credentials
 

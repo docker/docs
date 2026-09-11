@@ -1,0 +1,472 @@
+---
+title: Kit v2 examples
+linkTitle: Examples
+description: Copy-and-adapt spec.yaml snippets for common mixin and sandbox kit patterns — static files, install commands, shell customization, background services, setup files, Claude Code skills, and agent forks.
+keywords: sandboxes, sbx, kits, mixins, examples, patterns, skills
+weight: 20
+---
+
+{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
+
+This page covers kits with `schemaVersion: "2"`. Use [Kits v3](../kits.md)
+for authoring kits with image builds and runtime capabilities. Docker Sandboxes
+also supports v1 and v2 kits. A composition cannot combine v3 kits with v1 or v2
+kits.
+
+> [!NOTE]
+> Kits are experimental. The kit file format, CLI commands, and experience
+> for creating, loading, and managing kits are subject to change as the
+> feature evolves. Share feedback and bug reports in the
+> [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
+
+Each section below shows one `spec.yaml` snippet that demonstrates a
+single v2 kit pattern. For v3 examples of tools, shared configuration, hooks,
+and agent skills, see [Kit examples](../kit-examples.md). For the v2 field
+definitions, see [Kit spec reference](kit-reference.md).
+
+## Drop a shared config file
+
+Use static files under `files/workspace/` when the content is the same
+across every sandbox and doesn't need any runtime values substituted
+in. Typical use cases: linter rules, editor settings, a shared
+`.editorconfig`, team dotfiles.
+
+```text
+ruff-lint/
+├── spec.yaml
+└── files/
+    └── workspace/
+        └── ruff.toml
+```
+
+```yaml {title="ruff-lint/spec.yaml"}
+schemaVersion: "2"
+kind: mixin
+name: ruff-lint
+displayName: Ruff
+description: Python linting with shared team config
+
+setup:
+  install:
+    - command: "uv tool install ruff@latest"
+      user: "1000"
+```
+
+```toml {title="ruff-lint/files/workspace/ruff.toml"}
+line-length = 80
+
+[lint]
+select = ["E", "F", "I"]
+```
+
+## Install a tool at sandbox creation
+
+`setup.install` runs once per sandbox, at creation time. It's where
+anything that needs to land in the image goes — package managers
+(`apt-get`, `pip`, `npm`), binary downloads, or vendor install scripts.
+
+> [!TIP]
+> Each new sandbox runs all `setup.install` commands. The results aren't
+> cached between sandboxes. Creating a kit avoids building and distributing an
+> image, so kits work well for smaller, composable changes. For substantial
+> build or installation steps, consider a
+> [custom template](../templates.md#build-a-custom-template). Sandboxes reuse
+> template images from the local cache.
+
+```yaml
+setup:
+  install:
+    - command: "apt-get update && apt-get install -y jq"
+    - command: "curl -fsSL https://example.com/install.sh | sh"
+```
+
+Install commands run as root by default. Set `user: "1000"` when the
+step should run as the agent user — for example, `npm install -g`
+against a user-scoped prefix, or anything that writes to
+`/home/agent/`.
+
+Install steps run under `sh`, not bash, so bash-only builtins such as
+`source` fail with `sh: source: not found`. Pipe explicitly to `bash`
+(`curl … | bash`) or wrap the step in `bash -c '…'` when you need them.
+
+Downloads are subject to the sandbox's
+[network access rules](../../governance/access-controls/network.md). A domain that
+resolves from your host can still be blocked inside the sandbox — for
+example, `get.sdkman.io` returns a 403 until you allow it with
+`sbx policy allow network get.sdkman.io`. A tool may also need base
+packages that aren't in the image: [SDKMAN!](https://sdkman.io/), for
+instance, needs `zip` and `unzip`, so add an
+`apt-get install -y zip unzip` step (as root) before installing it.
+
+> [!WARNING]
+> `curl … | bash` masks download failures. The pipe's exit status is
+> bash's, and bash exits `0` on empty input, so a blocked or failed
+> download still reports success — the sandbox is created with no error
+> even though nothing was installed. Download first, then run, so a
+> failed fetch fails the step:
+>
+> ```yaml
+> setup:
+>   install:
+>     - command: "curl -fsSL https://example.com/install.sh -o /tmp/install.sh && bash /tmp/install.sh"
+>       user: "1000"
+> ```
+
+## Customize the shell environment
+
+Some tools install into a versioned directory and expect you to source
+an init script from your shell profile so their commands land on `PATH`.
+Version managers like [nvm](https://github.com/nvm-sh/nvm) and
+[SDKMAN!](https://sdkman.io/) follow this pattern. To make the tool
+available in every shell, append the source line to
+`/etc/sandbox-persistent.sh` in an install command.
+
+`/etc/sandbox-persistent.sh` is the sandbox's persistent environment
+file. It's sourced before every bash invocation — interactive shells and
+non-interactive ones, including agents started with `sbx run` and
+commands run with `sbx exec`. Appending here makes the tool available to
+the agent regardless of how its shell is launched. Use
+[`environment.variables`](kit-reference.md#environment) for ordinary variables
+declared by a kit. To pass variables when creating a sandbox, use
+[`-e` or `--env-file`](../../usage.md#set-environment-variables).
+
+```yaml {title="nvm/spec.yaml"}
+schemaVersion: "2"
+kind: mixin
+name: nvm
+displayName: nvm
+description: Node version manager available in every shell
+
+setup:
+  install:
+    - command: "curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash"
+      user: "1000"
+      description: Install nvm
+    - command: |
+        cat >> /etc/sandbox-persistent.sh <<'EOF'
+        export NVM_DIR="$HOME/.nvm"
+        unset NPM_CONFIG_PREFIX
+        [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+        EOF
+      user: "1000"
+      description: Source nvm for every shell
+```
+
+Both install steps run as `user: "1000"`. This installs the tool under
+`/home/agent/` and can update `/etc/sandbox-persistent.sh`, which the agent user
+owns. The `$HOME` in the appended lines resolves per user at source time, so the
+agent user finds its own install. Append to the file rather than overwriting it
+— the sandbox relies on its existing contents.
+
+The base image ships its own Node and sets `NPM_CONFIG_PREFIX`, which
+nvm won't activate alongside. `unset NPM_CONFIG_PREFIX` before sourcing
+`nvm.sh` clears that conflict. Sourcing makes the `nvm` command
+available; it doesn't put a Node version on `PATH`. Run
+`nvm install --lts` to add one — wrap it in `bash -c '…'` if you script
+it as an install step, since install steps run under `sh`.
+
+Append only the init script, not the tool's tab-completion script.
+Because `/etc/sandbox-persistent.sh` is sourced before every command,
+completion scripts — which rely on variables that exist only during
+completion — can break non-interactive shells that agents rely on.
+
+## Install an internal CA certificate
+
+If your organization uses a proxy that inspects HTTPS traffic, install
+the proxy's internal root CA in the sandbox trust store. This helps
+agents and SDKs trust certificates signed by the proxy.
+
+```text
+internal-ca/
+├── spec.yaml
+└── files/
+    └── home/
+        └── internal-ca.crt
+```
+
+Use a PEM-encoded certificate with a `.crt` extension. Files under
+`files/home/` land in `/home/agent/` in the sandbox, so
+`files/home/internal-ca.crt` becomes `/home/agent/internal-ca.crt` —
+which is the path the install command reads from. If traffic can be
+signed by more than one internal proxy, include each proxy's root CA in
+the kit and install each certificate before running
+`update-ca-certificates`.
+
+```yaml {title="internal-ca/spec.yaml"}
+schemaVersion: "2"
+kind: mixin
+name: internal-ca
+
+setup:
+  install:
+    - command: "install -m 0644 /home/agent/internal-ca.crt /usr/local/share/ca-certificates/internal-ca.crt && update-ca-certificates"
+      user: "0"
+      description: Install internal CA certificate
+```
+
+`update-ca-certificates` adds the certificate to the system trust
+store, so tools and SDKs that read the system bundle trust the proxy's
+certificates without further configuration.
+
+## Run a background service
+
+`setup.startup` runs on every sandbox start. To keep a long-running
+service such as a dev server or daemon alive, set `background: true`. The
+sandbox runs the command in the background and replays startup commands on
+each start, so the service comes back after a stop/start cycle:
+
+```yaml
+setup:
+  startup:
+    - command: ["my-service", "--port", "8080"]
+      user: "1000"
+      background: true
+```
+
+A background service doesn't write to your terminal. To capture its output
+for debugging, wrap the command in a shell and redirect to a log file. Let
+`background: true` run the command in the background rather than adding a
+trailing `&` yourself:
+
+```yaml
+setup:
+  startup:
+    - command:
+        - sh
+        - -c
+        - my-service --port 8080 > /tmp/my-service.log 2>&1
+      user: "1000"
+      background: true
+```
+
+An empty log file tells you the wrapper ran; a populated one tells you why
+the service failed.
+
+## Write runtime values to a file
+
+When a config file needs a value that isn't known until sandbox start
+— most often the absolute workspace path — use `setup.files`.
+The `${WORKDIR}` placeholder expands to the primary workspace path
+when the file is written.
+
+```yaml
+setup:
+  files:
+    - path: /home/agent/.local/bin/start-code-server.sh
+      content: |
+        exec code-server --bind-addr 0.0.0.0:8080 --auth none "${WORKDIR}"
+      mode: "0755"
+  startup:
+    - command:
+        - sh
+        - -c
+        - nohup /home/agent/.local/bin/start-code-server.sh > /tmp/code-server.log 2>&1 &
+      user: "1000"
+```
+
+`mode: "0755"` makes the generated file executable so the startup
+command can invoke it directly.
+
+Use `setup.files` instead of a static file whenever the content depends
+on a runtime value. Use a static file otherwise.
+
+> [!TIP]
+> This snippet is lifted from the
+> [code-server kit](https://github.com/docker/sbx-kits-contrib/tree/main/code-server)
+> in the contrib repository, which is also a runnable sample that demonstrates
+> the full pattern.
+
+## Ship a Claude Code skill
+
+Claude Code reads project-scoped skills from
+`.claude/skills/<name>/SKILL.md` in the workspace. Drop one into
+`files/workspace/` and it's available in the sandbox.
+
+```text
+docker-review/
+├── spec.yaml
+└── files/
+    └── workspace/
+        └── .claude/
+            └── skills/
+                └── docker-review/
+                    └── SKILL.md
+```
+
+```yaml {title="docker-review/spec.yaml"}
+schemaVersion: "2"
+kind: mixin
+name: docker-review
+displayName: Dockerfile review skill
+description: Ships a Claude Code skill that reviews Dockerfiles
+```
+
+```markdown {title="docker-review/files/workspace/.claude/skills/docker-review/SKILL.md"}
+---
+name: docker-review
+description: Review a Dockerfile for best practices. Use when the user asks to review, audit, or improve a Dockerfile.
+---
+
+When reviewing a Dockerfile, check:
+
+1. Base image — pinned tag or digest, appropriate for the workload
+2. Layer order — dependencies copied before application source
+3. Image size — multi-stage builds, `.dockerignore`, package-manager cache flags
+4. Security — non-root `USER`, no secrets in `ARG`/`ENV`
+5. Reproducibility — pinned package versions, frontend directive where relevant
+```
+
+Kits have to target the workspace rather than `~/.claude/` because
+sandboxes don't pick up user-level agent configuration from the host.
+See the
+[FAQ](../../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+for details.
+
+## Customize agent settings
+
+Some agents combine settings from several files. When the agent supports it,
+place kit settings in a separate file instead of replacing
+[sandbox-managed agent configuration](_index.md#sandbox-managed-agent-configuration).
+
+Claude Code's `--settings` option loads an additional settings file. Extend the
+built-in `claude` kit to add the option without reproducing its configuration,
+and place the additional file outside the path the sandbox manages:
+
+```text
+claude-sonnet/
+├── spec.yaml
+└── files/
+    └── home/
+        └── .config/
+            └── claude/
+                └── sonnet.json
+```
+
+```yaml {title="claude-sonnet/spec.yaml"}
+schemaVersion: "2"
+kind: sandbox
+name: claude-sonnet
+extends: claude
+
+sandbox:
+  command:
+    - --dangerously-skip-permissions
+    - --settings
+    - /home/agent/.config/claude/sonnet.json
+```
+
+```json {title="claude-sonnet/files/home/.config/claude/sonnet.json"}
+{
+  "model": "sonnet"
+}
+```
+
+Claude Code merges the additional file with the sandbox-managed user settings.
+Because the file is under `files/home/`, it stays inside the sandbox instead of
+being written into a directly mounted host workspace. Launch the sandbox by
+passing the child kit directory in place of a built-in agent name:
+
+```console
+$ sbx run ./claude-sonnet
+```
+
+When you launch the kit for the first time, `sbx` prompts you to approve its
+inherited Anthropic credentials. Because this is a third-party schema v2 kit,
+`sbx` records your approval as a
+[credential binding](../../configuration/credentials.md#credential-bindings).
+
+OpenCode supports an additional config file through `OPENCODE_CONFIG`. Keep the
+kit's config separate from the sandbox-managed
+`/home/agent/.config/opencode/opencode.json`, for example at
+`/home/agent/.config/opencode/team.json`:
+
+```text
+opencode-team/
+├── spec.yaml
+└── files/
+    └── home/
+        └── .config/
+            └── opencode/
+                └── team.json
+```
+
+```yaml {title="opencode-team/spec.yaml"}
+schemaVersion: "2"
+kind: mixin
+name: opencode-team
+requires:
+  agent: opencode
+
+environment:
+  variables:
+    OPENCODE_CONFIG: /home/agent/.config/opencode/team.json
+```
+
+```json {title="opencode-team/files/home/.config/opencode/team.json"}
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false
+}
+```
+
+OpenCode merges the custom file with its global and project config files. See
+the OpenCode [config precedence](https://opencode.ai/docs/config/#precedence-order)
+for the complete order.
+
+Agent settings mechanisms differ. If an agent doesn't support an additional
+config file, launch option, or environment variable for the setting, kits can't
+replace the sandbox-managed user settings before the agent launches.
+`setup.startup` doesn't gate the agent entrypoint, so don't use it for settings
+the agent must read during initialization.
+
+## Fork an existing agent
+
+Sandbox kits (`kind: sandbox`) define a full agent from scratch. The most
+common variant is a fork of a built-in agent. Use `extends:` to inherit the
+parent's complete configuration and declare only the fields you want to change.
+This example replaces the built-in `claude` entrypoint so Claude Code uses
+manual permission mode instead of bypassing approval prompts:
+
+```yaml {title="claude-safe/spec.yaml"}
+schemaVersion: "2"
+kind: sandbox
+name: claude-safe
+displayName: Claude Code (with approval prompts)
+description: Claude Code in manual permission mode
+
+extends: claude
+
+sandbox:
+  entrypoint: [claude, "--permission-mode", "manual"]
+```
+
+The child inherits the built-in image, credentials, network permissions,
+persistent volumes, settings, MCP integration, agent instructions, setup
+entries, and environment variables. Its `sandbox.entrypoint` replaces the
+inherited entrypoint.
+
+Launch by passing the sandbox kit in place of a built-in agent name:
+
+```console
+$ sbx run ./claude-safe
+```
+
+For a walkthrough of the v3 workload format, see
+[Build an agent](../build-an-agent.md).
+
+## More examples
+
+These patterns are all drawn from working kits in the
+[sbx-kits-contrib](https://github.com/docker/sbx-kits-contrib)
+repository, which contains each example as a complete, loadable kit.
+Use it to study the full shape of a kit. Load a mixin with `--kit`:
+
+```console
+$ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=<kit>"
+```
+
+For a `kind: sandbox` kit, pass the reference in place of the agent name:
+
+```console
+$ sbx run "git+https://github.com/docker/sbx-kits-contrib.git#dir=<kit>"
+```

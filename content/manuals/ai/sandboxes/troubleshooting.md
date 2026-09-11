@@ -189,9 +189,10 @@ your organization's internal root CA inside the sandbox so the agent and its
 SDKs trust certificates signed by the proxy. Certificate errors can stop a
 request before the credential proxy can inject credentials.
 
-For repeatable setup, create a [sandbox kit](customize/kits.md) that installs
-the CA when the sandbox is created. See
-[Install an internal CA certificate](customize/kit-examples.md#install-an-internal-ca-certificate)
+For repeatable setup with a built-in agent, create a
+[v2 mixin kit](customize/kits-v2/_index.md) that installs the CA when the
+sandbox is created. See
+[Install an internal CA certificate](customize/kits-v2/kit-examples.md#install-an-internal-ca-certificate)
 for an example kit.
 
 Use a PEM-encoded certificate with a `.crt` extension. If traffic can be signed

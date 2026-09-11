@@ -1,8 +1,8 @@
 ---
 title: Kit spec reference
 linkTitle: Spec reference
-description: Field-by-field reference for a kit's spec.yaml, including arguments, credentials, network rules, environment, setup, files, agent instructions, and the sandbox block.
-keywords: sandboxes, sbx, kits, spec.yaml, reference, schema, fields
+description: Reference for the v3 kit descriptor, including capabilities, composition, arguments, build recipes, lifecycle hooks, and the published image format.
+keywords: sandboxes, sbx, kits, v3, schema, capabilities, workload, mixin
 weight: 50
 ---
 
@@ -10,573 +10,627 @@ weight: 50
 
 > [!NOTE]
 > Kits are experimental. The kit file format, CLI commands, and experience
-> for creating, loading, and managing kits are subject to change as the
-> feature evolves. Share feedback and bug reports in the
-> [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
+> for creating, loading, and managing kits are subject to change. Share
+> feedback in [docker/sbx-releases](https://github.com/docker/sbx-releases).
 
-This page documents every field in a kit's `spec.yaml`. For an overview of
-what kits are and how to use them, see [Kits](kits.md).
+This page describes the v3 kit descriptor and its capability configs. Use it
+when authoring a workload or mixin. For concepts and usage, see [Kits](kits.md).
+For complete examples, see [Kit examples](kit-examples.md).
 
-For the normative v2 grammar used by the parser and tests, see the
-[`schemaVersion: "2"` specification](https://github.com/docker/sbx-kits-contrib/blob/main/spec/SPEC-v2.md)
-in the `docker/sbx-kits-contrib` repository.
-
-A kit directory has a required `spec.yaml` and an optional `files/` tree:
-
-```text
-my-kit/
-├── spec.yaml       # required
-└── files/          # optional — static files to inject
-    ├── home/
-    └── workspace/
-```
+Some capability types describe functionality beyond the `sbx` integration.
+The [capability table](#runtime-capabilities) identifies these types.
 
 ## Schema versions
 
-Starting with Docker Sandboxes version 0.36, two schema versions are supported.
-Use `schemaVersion: "2"` for new kits. Version `"1"` remains accepted through
-the legacy path.
+Use `schemaVersion: "3"` for kit authoring. Docker Sandboxes also supports v1
+and v2 kits. For `schemaVersion: "2"`, see the
+[v2 spec reference](kits-v2/kit-reference.md), including the
+[v1-to-v2 field mapping](kits-v2/kit-reference.md#schema-versions).
+Each descriptor uses one grammar. V2 fields aren't accepted in a v3
+descriptor.
 
-The loader forks on `schemaVersion`. A v2 spec uses the v2 grammar only. Legacy
-v1 fields in a `schemaVersion: "2"` spec are rejected during decode instead of
-being folded into the v2 model. Keep each `spec.yaml` on one grammar.
+## Descriptor fields
 
-What changed in v2:
-
-| v1                                          | v2                                       |
-| ------------------------------------------- | ---------------------------------------- |
-| `credentials.sources.<id>`                  | `credentials:` list entry with `service` |
-| `network.allowedDomains` / `deniedDomains`  | `permissions.network.allow` / `deny`     |
-| `network.serviceDomains` / `serviceAuth`    | `credentials[].apiKey.inject`            |
-| `network.publishedPorts` / `publishedPorts` | top-level `ports`                        |
-| standalone `oauth:` block                   | `credentials[].oauth`                    |
-| `oauth.skipIfEnv`                           | Accepted but ignored                     |
-| `environment.proxyManaged`                  | `credentials[].apiKey.proxyManaged`      |
-| `memory` / `agentContext`                   | `agentInstructions.content`              |
-| `kind: agent` / `agent:` block              | `kind: sandbox` / `sandbox:` block       |
-| `sandbox.aiFilename`                        | `agentInstructions.filename`             |
-| `sandbox.entrypoint.run`                    | `sandbox.entrypoint`                     |
-| `sandbox.entrypoint.args`                   | `sandbox.command.default`                |
-| `sandbox.entrypoint.ttyArgs`                | `sandbox.command.interactive`            |
-| `tmpfs:`                                    | `volumes:` entries with `type: tmpfs`    |
-| `volumes:` (mapping form)                   | `volumes:` sequence (`- path: <path>`)   |
-| `commands:` / `commands.initFiles`          | `setup:` / `setup.files`                 |
-| `settings:` / `kitDir` / `persistence`      | Removed                                  |
-
-Credential discovery also moved out of the kit in v2: a kit declares which
-credentials it needs and how to inject them, but where each value comes from is
-controlled by the user through
-[credential bindings](../configuration/credentials.md#credential-bindings).
-
-> [!NOTE]
-> `mixins` and `sandbox.build` are accepted by the parser, but runtime support
-> is pending. A kit that sets `sandbox.build` must also set `sandbox.image`.
-
-## Top-level fields
+A descriptor is a YAML document with `schemaVersion: "3"` and a `kind`.
+The `# syntax` line selects the kit BuildKit frontend when you build it.
 
 ```yaml
-schemaVersion: "2"
-kind: <mixin | sandbox>
-name: <name>
-version: <version>
-displayName: <name>
-description: <text>
-sourceURL: <url>
-licenses:
-  - MIT
-locked:
-  - sandbox.image
-security:
-  privileged: false
-args:
-  channel:
-    default: stable
-    enum: [stable, beta]
+# syntax=docker/runtime-kit:3
+schemaVersion: "3"
+kind: mixin
+displayName: Team guidelines
+description: Development conventions for the team
+version: "1.0.0"
+provides: [team-guidelines]
+capabilities:
+  - type: com.docker.runtime/agent-context@1
+    config:
+      content: |
+        Run the project's tests before committing changes.
 ```
 
-| Field           | Required | Description                                                                                     |
-| --------------- | -------- | ----------------------------------------------------------------------------------------------- |
-| `schemaVersion` | Yes      | Spec schema version. Use `"2"` for this grammar.                                                |
-| `kind`          | Yes      | `mixin` for kits that extend an agent; `sandbox` for kits that define one.                      |
-| `name`          | Yes      | Unique identifier. Lowercase alphanumeric with hyphens, 1 to 64 characters.                     |
-| `version`       | No       | Kit version.                                                                                    |
-| `displayName`   | No       | Human-readable name.                                                                            |
-| `description`   | No       | Short description.                                                                              |
-| `sourceURL`     | No       | Source repository or documentation URL.                                                         |
-| `licenses`      | No       | SPDX license identifiers.                                                                       |
-| `locked`        | No       | Dotted paths child kits may not override.                                                       |
-| `security`      | No       | Container security settings. `security.privileged: true` runs the container in privileged mode. |
-| `args`          | No       | Arguments supplied when the kit is loaded. Schema v2 only.                                      |
+Only `schemaVersion` and `kind` are required at the top level. A workload also
+needs a [build recipe](#authoring-forms) to supply its filesystem and launch
+command. Unknown fields are errors, including unknown keys in the configs of
+recognized capability types.
 
-A kit also declares behavior blocks such as `agentInstructions`,
-`permissions`, `ports`, `credentials`, `environment`, `setup`, and `volumes`.
+| Field | Type | Description |
+| --- | --- | --- |
+| `schemaVersion` | String | Required. Exactly `"3"`. |
+| `kind` | String | Required. `workload` or `mixin`. |
+| `displayName` | String | Human-readable label. |
+| `description` | String | Short summary. |
+| `author` | String | Publisher display text, such as `Name <email>`. Metadata, not verified publisher identity. |
+| `sourceUrl` | String | Source repository or documentation URL. |
+| `iconUrl` | String | Absolute HTTPS URL to an image for catalogs and pickers. |
+| `version` | String | Fallback version for `provides` entries with no version. See [Versions](#versions). |
+| `licenses` | List of strings | SPDX license identifiers. |
+| `provides` | List of strings | Features this kit supplies. |
+| `requires` | List of strings | Features the composition must supply. |
+| `integrates` | List of strings | Features this kit integrates with when present. |
+| `conflicts` | List of strings | Features that must be absent from the composition. |
+| `capabilities` | List of objects | Typed requests for runtime resources and behavior. |
+| `args` | Map | Named build-time or create-time arguments. |
+| `build` | String | Inline Dockerfile. Mutually exclusive with `dockerfile`. |
+| `dockerfile` | String | Path to a companion Dockerfile, relative to the descriptor's directory. Mutually exclusive with `build`. |
+
+Field names are case-sensitive. For example, use `sourceUrl`, not the v2
+spelling `sourceURL`. A v3 descriptor has no `name`, `extends`, `sandbox`,
+`environment`, or `setup` field. Its consumed reference identifies the kit,
+the image config defines how it runs, and capabilities declare runtime
+behavior.
+
+## Composition fields
+
+Exactly one `workload` supplies the sandbox's root filesystem and launch
+command. Zero or more `mixin` kits contribute filesystem overlays and
+declarations. A mixin can contain declarations alone.
+
+The following fields describe relationships between kits. They are distinct
+from `capabilities`, which requests something from the runtime.
+
+```yaml
+provides: ["com.example/tooling@1.4.0"]
+requires: ["node >= 20.0.0"]
+integrates: ["docker-engine >= 25.0.0"]
+conflicts: [podman]
+```
+
+| Field | Entry syntax | Resolution rule |
+| --- | --- | --- |
+| `provides` | `name` or `name@version` | Advertises a feature. No feature is provided implicitly. |
+| `requires` | `name` or `name >= version` | A provider in the selected kit set must satisfy the requirement. |
+| `integrates` | `name` or `name >= version` | An absent provider is accepted. A present provider must satisfy the minimum. |
+| `conflicts` | `name` | Resolution fails if the selected set provides this name. |
+
+Requirements validate the kits you select. They don't search a registry or
+download dependencies. Providers compose before their dependents, including
+matched `integrates` entries. The dependency graph determines this order,
+rather than the order of `--kit` flags.
+
+Bare names such as `node` normalize to `com.docker.kit/node`. A qualified
+name such as `com.example/node` is a separate feature. Names use lowercase
+letters, digits, and hyphens, with an optional namespace before `/`.
+
+### Versions
+
+Versions contain dot-separated segments, starting with digits, with no `v`
+prefix. Examples include `20`, `20.0.0`, and `1.2.3-rc1`. Segments compare
+numerically when numeric, and lexically otherwise. Requirements support
+minimum versions only, with no exact pins or ranges.
+
+An explicit version in `provides`, such as `node@20.0.0`, takes precedence.
+For a provide with no version, a version-shaped consumption tag takes precedence
+over the descriptor's `version` fallback. At publication, each `provides`
+entry must have an explicit version or a descriptor `version` fallback.
+
+Build-time argument references are accepted in `provides` and `version` and
+expanded before publication. Keep `requires`, `integrates`, and `conflicts`
+literal.
 
 ## Arguments
 
-A schema v2 kit can declare arguments and reference them anywhere in
-`spec.yaml` or under `files/` as `${{ kit.args.<name> }}`. Substitution happens
-before the spec is decoded.
+Declare arguments under `args` and reference them as
+`${{ kit.args.<name> }}`. Arguments resolve in one of two phases:
+
+- An argument with `buildArg` resolves while building the kit. Its value is
+  passed to the Dockerfile and expanded into the published descriptor.
+- An argument without `buildArg` resolves when creating the sandbox. Its
+  value is substituted into the descriptor for that installation.
 
 ```yaml
 args:
   version:
-    default: latest
-    description: Tool version to install
-    pattern: '^(latest|[0-9]+\.[0-9]+\.[0-9]+)$'
-  channel:
-    default: stable
-    enum: [stable, beta, nightly]
-  target:
+    default: "2.98.0"
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+    buildArg: GH_VERSION
+  timeout:
+    default: "30000"
+    pattern: '^[0-9]+$'
+    env: BROWSER_TIMEOUT
+  team:
     required: true
-    description: Build target
-
-environment:
-  variables:
-    TOOL_VERSION: "${{ kit.args.version }}"
+    enum: [alpha, beta]
 ```
 
-Don't use kit arguments for API tokens, passwords, or other secrets. Use
-[Credentials](../configuration/credentials.md) to provide sensitive values to
-a sandbox.
+| Field | Description |
+| --- | --- |
+| Argument name | Must match `[A-Za-z_][A-Za-z0-9_]*`. Hyphens aren't accepted. |
+| `default` | String used when no value is supplied. `""` is a valid default. Mutually exclusive with `required: true`. |
+| `required` | If `true`, the caller must supply a value. Defaults to `false`. |
+| `description` | Help text for the argument. |
+| `enum` | List of accepted string values. Mutually exclusive with `pattern`. |
+| `pattern` | Go RE2 regular expression matched against the whole value. Mutually exclusive with `enum`. |
+| `env` | Exports a resolved create-time value under this environment variable name. Mutually exclusive with `buildArg`. |
+| `buildArg` | Dockerfile build argument name. Mutually exclusive with `env`. |
 
-| Field         | Description                                                                                                  |
-| ------------- | ------------------------------------------------------------------------------------------------------------ |
-| Argument name | Starts with a letter or underscore and contains only letters, digits, underscores, and hyphens.             |
-| `default`     | String to use when the caller supplies no value. Mutually exclusive with `required: true`.                   |
-| `required`    | Set to `true` when the caller must supply a value. Mutually exclusive with `default`.                        |
-| `description` | Optional help text shown when a required value is missing.                                                   |
-| `enum`        | Optional list of accepted values. Mutually exclusive with `pattern`.                                         |
-| `pattern`     | Optional Go RE2 regular expression matched against the complete value. Mutually exclusive with `enum`.       |
+`env` and `buildArg` names follow the same identifier rules as argument names.
+An optional argument without a default can be omitted only if the descriptor
+doesn't reference it. Every argument reference must have a declaration and a
+resolved value. Use `default: ""` when an empty value is valid. Missing required
+values, unknown supplied arguments, and values outside their constraints are
+errors.
 
-Each argument must declare either `default`, including an empty-string
-default, or `required: true`. A declared default must satisfy its own `enum` or
-`pattern`. Every `${{ kit.args.<name> }}` reference must have a matching
-declaration.
+Arguments aren't exported as environment variables unless you set `env`.
+Use credentials for secrets. Build arguments and published descriptor values
+are part of the kit's build and distribution process.
 
-Argument values are strings, but substitution happens before YAML decoding.
-Quote a placeholder in a string-valued field so a value such as `1.20` isn't
-decoded as a number.
+Substitution happens before decoding. Quote placeholders in string fields.
+Create-time values produce an effective descriptor that is validated again,
+including capability configs. The published descriptor remains unchanged.
+Shell expressions such as `$HOME` and `${HOME}` aren't kit argument references.
 
-Supply values with `--kit-arg` or `--kit-args-file` when loading the kit. See
-[Pass arguments to kits](kits.md#pass-arguments-to-kits) for scoping,
-precedence, and validation behavior.
+See [Pass arguments to kits](kits.md#pass-arguments-to-kits) for CLI syntax.
 
-## Kit kinds
+## Authoring forms
 
-### `kind: mixin`
+The content recipe is a Dockerfile. It builds the files that ship with the
+kit and, for a workload, sets `ENTRYPOINT`, `CMD`, `ENV`, `USER`, and
+`WORKDIR`. Choose one authoring form:
 
-A mixin layers capabilities onto an existing sandbox. It must not declare a
-`sandbox:` block, `extends:`, or `mixins:`. A mixin can declare `requires:` to
-pin the base agent it is designed for:
+| Form | Descriptor and recipe |
+| --- | --- |
+| Companion files | `<stem>.yaml` and `<stem>.dockerfile` in the same directory. Use `dockerfile: <path>` to name the recipe explicitly. |
+| Inline recipe | A YAML descriptor with Dockerfile text in `build: \|`. |
+| Comment descriptor | A Dockerfile with a `# kit:` comment block containing the descriptor. The remaining file is its recipe. |
+
+An explicitly named Dockerfile must exist and stay within the descriptor's
+directory. A missing conventional companion is accepted for a mixin with no
+content recipe. A workload must have a recipe.
+
+For the inline form, `build` contains Dockerfile text, not a map of build
+options:
 
 ```yaml
-schemaVersion: "2"
+# syntax=docker/runtime-kit:3
+schemaVersion: "3"
 kind: mixin
-name: github-tools
-requires:
-  agent: claude
+build: |
+  FROM scratch
+  COPY review-checklist.md /usr/local/share/team/review-checklist.md
 ```
 
-`requires.agent` takes one base-agent name. It is validated as a kit name and
-enforced during composition.
+The comment form starts with a descriptor comment block:
 
-### `kind: sandbox`
+```dockerfile
+# syntax=docker/runtime-kit:3
+# kit:
+#   schemaVersion: "3"
+#   kind: mixin
+FROM scratch
+COPY review-checklist.md /usr/local/share/team/review-checklist.md
+```
 
-A sandbox kit defines a full agent. A root sandbox must declare a `sandbox:`
-block. A sandbox that uses `extends:` can inherit the parent image and omit its
-own `sandbox:` block:
+A comment descriptor can't also declare `build` or `dockerfile`.
+Dockerfile semantics apply to every recipe, including multi-stage builds and
+build mounts. See [Directory and build layout](kits.md#directory-and-build-layout)
+for organizing source files, and
+[Packaging and distribution](kits.md#packaging-and-distribution) for build commands.
+
+### Base image requirements
+
+A workload must provide `bash`, `sh`, `curl`, `git`, a populated CA
+certificate store, and a non-root `agent` user with UID 1000 and home
+directory `/home/agent`. Its image must define an `ENTRYPOINT` or `CMD`.
+Install or ship any additional tools the workload needs.
+
+The workload's image config owns the launch command and working directory.
+Mixin recipes add files and additive image settings such as environment
+variables. A mixin's `ENTRYPOINT`, `CMD`, `USER`, and `WORKDIR` don't replace
+the workload's launch contract during composition.
+
+## Runtime capabilities
+
+Each `capabilities` entry names a runtime contract and its config-schema
+version. The type version is independent of `schemaVersion`.
 
 ```yaml
-schemaVersion: "2"
-kind: sandbox
-name: claude-safe
-extends: claude
+capabilities:
+  - type: com.docker.runtime/port@1
+    description: Development server
+    optional: false
+    config:
+      container: 3000
 ```
 
-`extends:` is sandbox-only. The parent must resolve to a sandbox kit. `mixins:`
-is also sandbox-only and accepted by the parser, but runtime composition support
-is pending.
+| Field | Description |
+| --- | --- |
+| `type` | Required. `<namespace>/<name>@<version>`, such as `com.docker.runtime/port@1`. Names use lowercase letters, digits, and hyphens. Namespaces can also contain dots. The version is a positive integer. |
+| `optional` | Defaults to `false`. The spec requires a runtime to refuse unavailable required capabilities and to skip unavailable optional ones. |
+| `description` | Human-readable explanation of the request. |
+| `config` | Type-specific fields. Omit for capability types with no config. |
 
-## Sandbox block
+The following table lists the standard types. Every type has the prefix
+`com.docker.runtime/`.
+
+| Type | Entries per descriptor | `sbx` support |
+| --- | --- | --- |
+| [`network-policy@1`](#network-policy) | At most one | Install and runtime network policy. |
+| [`credential@1`](#credentials) | One per service and phase | Credential bindings and proxy injection. See field limitations. |
+| [`lifecycle@1`](#lifecycle) | At most one | Install, startup, generated files, and interactive arguments. See field limitations. |
+| [`agent-context@1`](#agent-context) | At most one | Agent profile and kit instructions. |
+| [`port@1`](#ports) | One per container port and transport | Publishes ports to the host. |
+| [`resources@1`](#resources) | At most one | Workload CPU and memory settings. |
+| [`kit-registry@1`](#kit-registry) | At most one | Restricted to approved builder kits. |
+| [`volume@1`](#volumes) | One per path | Schema accepted. Runtime integration pending. |
+| [`usb-device@1`](#usb-devices) | Multiple distinct requests | Schema accepted. Runtime integration pending. |
+| [`privileged@1`](#privileged-mode) | At most one | Schema accepted. Runtime integration pending. |
+| [`agent-sessions@1`](#agent-sessions) | At most one | Schema accepted. Runtime integration pending. |
+
+Exact duplicate entries are errors. Unknown capability types can carry a
+custom config, but acceptance by the parser doesn't establish runtime support.
+`sbx` doesn't implement general rejection of unsupported required capability
+types. Don't rely on an unsupported request being enforced or blocking
+sandbox creation.
+
+The following sections describe each type's `config` fields.
+
+## Network policy
+
+`com.docker.runtime/network-policy@1` declares outbound access separately for
+install hooks and the running workload. These phases concern sandbox
+execution. They don't control Dockerfile build networking.
 
 ```yaml
-sandbox:
-  image: <image-ref>
-  build:
-    context: .
-    dockerfile: Dockerfile
-    args:
-      AGENT_VERSION: "1.0.0"
-    target: runtime
-    platforms:
-      - linux/amd64
-  entrypoint: [my-agent, "--flag"]
-  command:
-    default: ["--task-mode"]
-    interactive: []
-  resources:
-    cpu: 2
-    memory: 4g
-    gpu: "1"
+capabilities:
+  - type: com.docker.runtime/network-policy@1
+    config:
+      install:
+        allow: [registry.npmjs.org]
+      runtime:
+        allow: [api.github.com, "*.example.com"]
+        deny: [telemetry.example.com]
 ```
 
-| Field                | Required | Description                                                                                                     |
-| -------------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
-| `sandbox.image`      | When `extends:` is omitted | Docker image reference.                                                                                         |
-| `sandbox.build`      | No       | Build configuration. Runtime support is pending, so a kit with `build:` must also set `image:`.                 |
-| `sandbox.entrypoint` | No       | Fixed process prefix as a string array. The first element is the agent binary.                                  |
-| `sandbox.command`    | No       | Mode-specific argument tail. Use a list shorthand for `default`, or a mapping with `default` and `interactive`. |
-| `sandbox.resources`  | No       | Optional CPU, memory, and GPU constraints. Memory uses byte-size strings such as `4096m` or `4g`.               |
+| Field | Description |
+| --- | --- |
+| `install.allow` | Domains permitted while install hooks run. |
+| `install.deny` | Domains blocked while install hooks run. |
+| `runtime.allow` | Domains permitted during workload execution. |
+| `runtime.deny` | Domains blocked during workload execution. |
 
-The effective command is `entrypoint` plus `command.default` for non-interactive
-launches, and `entrypoint` plus `command.interactive` for TTY sessions. If
-`interactive` is omitted, it falls back to `default`.
+`sbx` makes runtime rules available during installation too, then removes the
+install-only rules before launching the workload. An omitted phase adds no
+grants for that phase. Rules from composed kits combine, and deny takes
+precedence over allow.
 
-For a kit that uses `extends:`, `sandbox.command` replaces the full inherited
-argument tail, including flags after the binary in the parent's
-`sandbox.entrypoint`. It doesn't append to that tail. Define every argument the
-child needs. For example, a child of `claude` that adds `--settings` must also
-include `--dangerously-skip-permissions` to preserve that behavior.
+Use exact hosts, hosts with ports such as `api.example.com:443`, or
+single-label wildcards such as `*.example.com`. A bare `*` or `**` permits
+all destinations. Quote wildcard strings in YAML.
 
-The agent's container image must provide:
-
-- A non-root `agent` user at UID 1000 with passwordless sudo.
-- A `/home/agent/` home directory owned by `agent`.
-- HTTP proxy environment variables (`HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY`) preserved across sudo.
-- The agent binary, either baked in or installed with [`setup.install`](#setup).
-
-Build on top of `docker/sandbox-templates:shell-docker` to get these base
-requirements.
-
-## Agent instructions
-
-```yaml
-agentInstructions:
-  filename: CLAUDE.md
-  content: |
-    Ruff is installed. Run `ruff check` before committing.
-```
-
-| Field      | Description                                                                                         |
-| ---------- | --------------------------------------------------------------------------------------------------- |
-| `filename` | AI profile filename. Meaningful for `kind: sandbox`; ignored with a warning for `kind: mixin`.      |
-| `content`  | Markdown instructions. For a sandbox, inlined into the profile. For a mixin, written to kit memory. |
-
-For mixins, the engine writes `content` to
-`<dir-of-AI-file>/kits-memory/<kit-name>.md` and adds a `## Kits` pointer
-section to the base AI file. This keeps each mixin's instructions in a separate
-file.
+Every credential injection domain must also appear in the matching phase's
+allow list. Validation ignores port suffixes for this membership check. A
+bare `*` or `**` covers all injection domains. A narrower wildcard doesn't
+replace an explicit injection-domain entry for validation.
 
 ## Credentials
 
-A kit declares the credentials it needs and how the proxy injects them into
-outbound requests. It does not declare a host discovery source. The user
-provides the value through the secret store or the first-run prompt, and a
-[credential binding](../configuration/credentials.md) authorizes its use. A kit
-can't read arbitrary host environment variables or files.
+`com.docker.runtime/credential@1` declares a service and how its credential
+is presented. The user stores the value in the secret store and approves its
+use through [credential bindings](../configuration/credentials.md#credential-bindings).
+The descriptor doesn't name a host file or environment variable to read.
 
 ```yaml
-credentials:
-  - service: <service-id>
-    description: <text> # optional
-    required: <true | false> # optional, default false
-    provider: <provider> # optional, reserved
-    apiKey:
-      name: <ENV_VAR>
-      proxyManaged: true
-      inject:
-        - domain: <domain>
-          header: <header>
-          format: <format>
-        - domain: <domain>
-          scheme: bearer
-        - domain: <domain>
-          scheme: basic
-          username: <user> # required with scheme: basic
-    oauth:
-      tokenEndpoint:
-        host: <host>
-        path: <path>
-      sentinels:
-        accessToken: <sentinel>
-        refreshToken: <sentinel>
-      credentialFile:
-        path: <path>
-        structure:
-          <key>:
-            accessToken: "{{.AccessToken}}"
-            refreshToken: "{{.RefreshToken}}"
-            expiresAt: "{{.ExpiresAt}}"
-            scopes: "{{.Scopes}}"
+capabilities:
+  - type: com.docker.runtime/network-policy@1
+    config:
+      runtime:
+        allow: [api.github.com]
+  - type: com.docker.runtime/credential@1
+    optional: true
+    description: GitHub API access
+    config:
+      service: github
+      phase: runtime
+      apiKey:
+        name: GH_TOKEN
+        proxyManaged: true
+        inject:
+          - domain: api.github.com
+            header: Authorization
+            format: "Bearer %s"
 ```
 
-`credentials` is a list; each entry names a `service` and configures one or more
-auth mechanisms.
+| Field | Description |
+| --- | --- |
+| `service` | Required. Lowercase service identifier in the host credential store. |
+| `phase` | Required. `install` or `runtime`. |
+| `apiKey` | API key presentation. Declare `apiKey`, `oauth`, or both. |
+| `oauth` | OAuth token interception and credential-file config. |
 
-| Field         | Description                                                                                                                                 |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `service`     | Credential identifier, matched against the value stored with `sbx secret set`. Lowercase kebab-case.                                        |
-| `description` | Optional. Shown to the user when approving a [binding](../configuration/credentials.md#credential-bindings).                                     |
-| `required`    | Marks the credential as essential to the agent. If it has no binding, `sbx` warns and starts with the credential withheld. Default `false`. |
-| `provider`    | Reserved for a provider registry. Accepted with a warning and no runtime effect.                                                            |
-| `apiKey`      | API-key injection (see [apiKey](#apikey)).                                                                                                  |
-| `oauth`       | OAuth interception (see [oauth](#oauth)).                                                                                                   |
+Set `optional` on the capability entry, outside `config`. In `sbx`, a missing
+binding withholds the credential instead of blocking sandbox creation, even
+for a required request. Install-only credential injection is removed after
+install hooks. When the same service is declared for both phases, `sbx` uses
+the runtime entry's presentation config.
 
-Each service must declare `apiKey`, `oauth`, or both. When both resolve at
-runtime, the API key takes precedence and OAuth acts as the fallback.
+### API keys
 
-### `apiKey`
+| Field | Description |
+| --- | --- |
+| `apiKey.name` | Required. Environment variable name in the sandbox, such as `GH_TOKEN`. |
+| `apiKey.proxyManaged` | If `true`, keeps the real credential on the host and puts a sentinel value in the sandbox. Defaults to `false`. |
+| `apiKey.inject[].domain` | Required for each rule. Domain where the proxy injects the credential. Must be allowed in the same phase's network policy. |
+| `apiKey.inject[].header` | HTTP header to set, such as `Authorization`. |
+| `apiKey.inject[].format` | Header value format, such as `"Bearer %s"`. |
+| `apiKey.inject[].scheme` | Schema field for an auth scheme, such as `basic`. Runtime mapping in `sbx` is pending. Use explicit `header` and `format` for header injection. |
+| `apiKey.inject[].username` | Username for an authentication scheme that requires one. |
 
-| Field               | Description                                                                                                                                       |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`              | Environment variable name for the credential (for example, `ANTHROPIC_API_KEY`).                                                                  |
-| `proxyManaged`      | If `true`, `sbx` sets `name` inside the container to the `proxy-managed` sentinel. Default `false`.                                               |
-| `inject[].domain`   | Domain to inject the credential into. Must also be allowed in [`permissions.network`](#network).                                                  |
-| `inject[].header`   | HTTP header the proxy sets (for example, `x-api-key`, `Authorization`).                                                                           |
-| `inject[].format`   | Header value format, with one `%s` placeholder (for example, `"%s"` or `"Bearer %s"`). Mutually exclusive with `scheme`.                          |
-| `inject[].scheme`   | Shorthand for common auth schemes. `bearer` expands to `Authorization: Bearer %s`; `basic` requires `username`. Mutually exclusive with `format`. |
-| `inject[].username` | Username for HTTP Basic auth, for example `x-access-token` for Git over HTTPS.                                                                    |
+### OAuth
 
-### `oauth`
+| Field | Description |
+| --- | --- |
+| `oauth.tokenEndpoint.host` | Required when `tokenEndpoint` is set. Host whose OAuth token response the proxy intercepts. |
+| `oauth.tokenEndpoint.path` | Token endpoint path. |
+| `oauth.resourceHosts` | API hosts where the proxy uses the token. |
+| `oauth.sentinels.accessToken` | Placeholder access token presented inside the sandbox. |
+| `oauth.sentinels.refreshToken` | Placeholder refresh token presented inside the sandbox. |
+| `oauth.credentialFile.path` | Credential-file destination. `~` expands to the agent's home. |
+| `oauth.credentialFile.structure` | Nested map rendered as JSON after placeholder substitution. |
+| `oauth.responseFields.accessToken` | Provider field to read instead of `access_token`. |
+| `oauth.responseFields.expiresIn` | Provider field to read instead of `expires_in`. |
+| `oauth.passthrough` | If `true`, returns real tokens to the sandbox instead of sentinels. Defaults to `false`. |
 
-For agents that authenticate with OAuth (for example, Claude Code), the proxy
-intercepts token responses and replaces real tokens with sentinels, then swaps
-the real token back in on outbound requests. By default, the token never enters
-the sandbox. Setting `passthrough: true` opts out of sentinel masking and sends
-the real token response into the sandbox.
+Credential-file leaf values support `{{.AccessToken}}`,
+`{{.RefreshToken}}`, `{{.ExpiresAt}}`, `{{.Scopes}}`, and
+`{{.PrimaryApiKey}}`. The last placeholder's containing key is omitted when
+no primary API key is captured. Unknown placeholders are errors.
 
-| Field                                    | Description                                                                                                                                                                                       |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokenEndpoint.host` / `path`            | The OAuth token endpoint the proxy intercepts.                                                                                                                                                    |
-| `sentinels.accessToken` / `refreshToken` | Sentinel values written into the container in place of the real tokens.                                                                                                                           |
-| `credentialFile.path`                    | Where to write the credential file inside the container (`~` expands).                                                                                                                            |
-| `credentialFile.structure`               | Declarative JSON shape. Supports `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, and `{{.Scopes}}`.                                                                                   |
-| `credentialFile.template`                | Go template. Supports `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, `{{.Scopes}}`, and `{{.ScopesJSON}}`.                                                                          |
-| `resourceHosts`                          | API hosts where the proxy attaches the token on outbound requests, distinct from the token endpoint host.                                                                                         |
-| `skipIfEnv`                              | Accepted for compatibility, but ignored for schema v2. A v2 binding is authoritative instead of host environment variables.                                                                       |
-| `responseFields`                         | Overrides the default field names the proxy reads from the token response.                                                                                                                        |
-| `passthrough`                            | If `true`, the proxy passes the token response through unchanged instead of replacing the tokens with sentinels.                                                                                  |
+The v2 fields `provider`, `skipIfEnv`, and `credentialFile.template` aren't
+part of the v3 schema.
 
-`credentialFile.structure` provides a declarative alternative to
-`credentialFile.template`. The engine renders it as well-formed JSON. If both
-fields are set, `structure` takes precedence.
+## Lifecycle
 
-## Network
-
-Network egress is declared under `permissions.network`. Credentials no longer carry
-their own domain mapping — the proxy injects a credential only into the domains
-its [`apiKey.inject`](#apikey) lists, and every domain the
-sandbox reaches must be allowed here.
+`com.docker.runtime/lifecycle@1` declares work performed inside the sandbox
+after the kit image has been built. Use a Dockerfile to install software that
+can ship in the image. Use lifecycle hooks for initialization or work that
+needs the sandbox's runtime state.
 
 ```yaml
-permissions:
-  network:
-    allow: [<domain>, ...]
-    deny: [<domain>, ...]
+capabilities:
+  - type: com.docker.runtime/lifecycle@1
+    config:
+      install:
+        - command: [sh, -c, 'printf "%s\n" "$WORKSPACE_DIR" > /home/agent/workspace-path']
+          user: "1000"
+          env: [WORKSPACE_DIR]
+      startup:
+        - command: [my-service, --foreground]
+          background: true
+      files:
+        - path: /home/agent/.config/tool/settings.json
+          content: '{"telemetry": false}'
+          mode: "0644"
+          overwrite: false
+      interactive: [--interactive]
 ```
 
-| Field                       | Description                                                                                                     |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `permissions.network.allow` | Domains the sandbox can reach.                                                                                  |
-| `permissions.network.deny`  | Domains the sandbox is blocked from reaching. Deny takes precedence over allow, including across composed kits. |
+### Install and startup hooks
 
-Allow and deny patterns:
+| Field | Description |
+| --- | --- |
+| `install[].command` | Required. Shell string passed to `sh -c`, or a list of command arguments. Runs synchronously when the sandbox is created. |
+| `install[].user` | Execution user. Defaults to root. Use a username or quoted UID. |
+| `install[].env` | Additional environment variable names the hook can read. |
+| `install[].description` | Human-readable explanation. |
+| `startup[].command` | Required. Shell string or list of command arguments. Runs on each sandbox start. |
+| `startup[].user` | Execution user. Defaults to the agent user. Use `"0"`, `"1000"`, or a login name. |
+| `startup[].background` | If `true`, lets the startup dispatcher continue without waiting for this command. Defaults to `false`. |
+| `startup[].env` | Schema field for the hook's environment inputs. Filtering in `sbx` is pending. |
+| `startup[].description` | Human-readable explanation. |
 
-| Pattern               | Example                  | Status                      |
-| --------------------- | ------------------------ | --------------------------- |
-| Exact host            | `api.example.com`        | Enforced                    |
-| Exact host and port   | `api.example.com:8080`   | Enforced                    |
-| Single-label wildcard | `*.example.com`          | Enforced                    |
-| Multi-label wildcard  | `**.example.com`         | Parsed; enforcement pending |
-| Port range            | `api.example.com:80-443` | Parsed; enforcement pending |
-| Port wildcard         | `api.example.com:*`      | Parsed; enforcement pending |
-| CIDR                  | `10.0.0.0/8`             | Parsed; enforcement pending |
+Install hooks retain basic process variables, proxy settings, and certificate
+paths. Declare other inputs in `env`, including `WORKSPACE_DIR` and any
+credential sentinel variables the hook reads. Hooks from dependency providers
+run before hooks from their dependents.
 
-In v1 this was the `network:` block (`allowedDomains` / `deniedDomains`, plus
-`serviceDomains` / `serviceAuth`). In v2, those fields are decode errors.
+Startup hooks must tolerate running again. They run without an interactive
+terminal. In `sbx`, the startup dispatcher runs alongside the workload:
+`background: false` orders startup commands but doesn't delay the workload's
+entrypoint. Use install hooks or generated files for initialization the
+workload must see before it launches.
+
+### Generated files
+
+| Field | Description |
+| --- | --- |
+| `files[].path` | Required. Absolute path inside the sandbox. |
+| `files[].content` | File body. Kit argument references expand at create time. |
+| `files[].mode` | Octal permissions as a string. Set explicitly, such as `"0644"`, for consistent file permissions. |
+| `files[].overwrite` | Defaults to `true`. Set to `false` to retain an existing file. |
+| `files[].description` | Human-readable explanation. |
+
+Files are written after install hooks, as the agent user, before the workload
+runs. An install hook can read files from the image but can't depend on
+generated files. Choose a path the agent can write. For root-owned locations,
+create the file in the image or use an install hook. For static content, use
+Dockerfile `COPY` instead.
+
+### Interactive arguments
+
+`interactive` is a list of arguments for TTY sessions. For a workload with
+image `ENTRYPOINT` and `CMD`, the launch forms are:
+
+| Mode | Command |
+| --- | --- |
+| Default | Image `ENTRYPOINT` followed by image `CMD`. |
+| Interactive | Image `ENTRYPOINT` followed by lifecycle `interactive`. |
+
+An omitted or empty `interactive` list in `sbx` falls back to the default
+command. A lifecycle capability must declare at least one hook, file, or
+nonempty interactive argument list.
+
+## Agent context
+
+`com.docker.runtime/agent-context@1` supplies instructions the agent reads.
+The workload chooses the profile filename. Mixins contribute instructions to
+that profile's kit index.
+
+```yaml
+capabilities:
+  - type: com.docker.runtime/agent-context@1
+    config:
+      filename: AGENTS.md
+      contentFile: ./agent-context.md
+```
+
+| Field | Description |
+| --- | --- |
+| `filename` | Agent profile filename, such as `AGENTS.md` or `CLAUDE.md`. Accepted only on workload kits. |
+| `contentFile` | Path to an instruction file relative to the build context. Mutually exclusive with `content`. |
+| `content` | Inline instruction text. Mutually exclusive with `contentFile`. |
+
+The frontend copies a `contentFile` into the kit image and rewrites the
+published descriptor to point to that location. The agent profile indexes
+each kit's instructions so the agent can read them when needed. A mixin omits
+`filename` and uses `contentFile` or `content`.
 
 ## Ports
 
-Use `ports` to expose sandbox services to the host:
+`com.docker.runtime/port@1` publishes an inbound port. Declare a separate
+entry for each port and transport.
 
-```yaml
-ports:
-  - container: 8080
-    name: web
-```
+| Field | Description |
+| --- | --- |
+| `container` | Required. Container port from 1 to 65535. |
+| `transport` | `tcp` or `udp`. TCP is the default. |
+| `name` | Optional label for port listings. |
 
-| Field       | Description                                                         |
-| ----------- | ------------------------------------------------------------------- |
-| `container` | Container port, 1 to 65535.                                         |
-| `protocol`  | `tcp` or `udp`. Empty publishes one family; see below.              |
-| `name`      | Optional label surfaced by tools that list published port bindings. |
+The runtime allocates the host port. To choose a host port, use
+`sbx ports <SANDBOX> --publish <HOST_PORT>:<CONTAINER_PORT>` instead of a descriptor
+field. Port publication doesn't grant outbound network access.
 
-Host ports are allocated ephemerally. Leave `protocol` empty unless the service
-listens on IPv6: an empty value publishes IPv4 only (`127.0.0.1`), which is what
-a service bound to `0.0.0.0` needs, while `tcp` publishes both `127.0.0.1` and
-`::1` — and a client arriving over `::1` is accepted and then reset if nothing
-in the sandbox is listening there. Users can pin host ports with
-`sbx ports --publish <host>:<container>`.
+## Resources
 
-## Environment
+`com.docker.runtime/resources@1` declares workload resource settings.
 
-```yaml
-environment:
-  variables:
-    <NAME>: <value>
-```
+| Field | Description |
+| --- | --- |
+| `cpu` | Non-negative number of CPU cores in the schema. `sbx` requires a whole number. |
+| `memory` | Byte-size string, such as `4096m` or `8g`. |
+| `gpu` | GPU selector interpreted by the runtime. Enforcement in `sbx` is pending. |
 
-| Field       | Description                                    |
-| ----------- | ---------------------------------------------- |
-| `variables` | Key-value pairs set directly in the container. |
+Unset fields add no resource constraint. `sbx` applies CPU and memory from the
+workload kit unless overridden at creation. Resource declarations on mixins
+aren't applied.
 
-Variable names must be valid shell identifiers (`[A-Za-z_][A-Za-z0-9_]*`).
+## Kit registry
 
-Do not set `DASH_`, `SBX_`, or `DOCKER_` variables, and avoid overriding
-`HOME`, `USER`, `SHELL`, `PATH`, `LD_PRELOAD`, and `LD_LIBRARY_PATH`. The
-runtime reserves these names and may override them.
+`com.docker.runtime/kit-registry@1` requests access to the runtime's registry
+for kit builds. It takes no `config`.
 
-## Setup
-
-```yaml
-setup:
-  install:
-    - command: <shell-string>
-      user: <uid>
-      description: <text>
-  startup:
-    - command: [<argv>, ...]
-      user: <uid>
-      background: <true | false>
-      description: <text>
-  files:
-    - path: <path>
-      content: <text>
-      mode: <octal>
-      onlyIfMissing: <true | false>
-      description: <text>
-```
-
-### Execution order
-
-When a sandbox is created, kit content is applied in this order:
-
-1. Network permissions and environment variables.
-2. Static files under `files/home/`.
-3. `setup.install` commands, in declaration order.
-4. `setup.files` entries.
-5. `setup.startup` commands are registered for each sandbox start.
-6. Static files under `files/workspace/`, after the workspace is ready. With
-   `--clone`, this means after the repository has been cloned.
-
-For stacked kits, entries in each stage are applied in `--kit` order. An install
-command can consume a bundled file from `files/home/`, but not one from
-`files/workspace/` or `setup.files`, because those files land later.
-
-`sbx kit add` recreates the sandbox rather than modifying it in place. It
-supports mixin kits limited to
-`environment.variables`, `setup.install`, and `permissions.network.allow`,
-which follow the same order as sandbox creation. It rejects a kit that declares
-static files, `setup.startup`, or `setup.files`. To use those fields, recreate
-the sandbox with the kit.
-
-### install
-
-Runs synchronously when a kit is applied, either during sandbox creation or
-through `sbx kit add`. Shell strings are passed to `sh -c`.
-
-Kit install commands start in the template image's configured `WORKDIR`.
-Docker-provided templates use `/home/agent/workspace`, which isn't necessarily
-the primary workspace in a direct-mounted or clone-mode sandbox. Don't rely on
-the current directory to locate workspace files. Use absolute paths for bundled
-assets from `files/home/`.
-
-| Field         | Default | Description                   |
-| ------------- | ------- | ----------------------------- |
-| `command`     | —       | Shell command string.         |
-| `user`        | `"0"`   | User to run as. `"0"` = root. |
-| `description` | —       | Human-readable description.   |
-
-### startup
-
-Runs at every sandbox start. String array, not interpreted by a shell.
-
-| Field         | Default  | Description                         |
-| ------------- | -------- | ----------------------------------- |
-| `command`     | —        | Command and args as a string array. |
-| `user`        | `"1000"` | User to run as. `"1000"` = agent.   |
-| `background`  | `false`  | Block later startup commands until this command finishes. Set to `true` to let later commands run without waiting. |
-| `description` | —        | Human-readable description.         |
-
-Startup commands are non-interactive. They run before the agent
-attaches, with no terminal connected, so they can't prompt the user
-(for example, an interactive `aws login` will hang or fail). They also
-don't gate the agent's entrypoint: the agent launches once startup
-commands have been dispatched, regardless of `background`. A value of
-`false` waits within the startup dispatcher before it runs the next command;
-it doesn't delay the agent entrypoint. Use startup commands
-for work that can run alongside the agent. Use `setup.files` for any value that
-needs to land on disk before the agent runs.
-
-Startup commands must be idempotent. They run on every sandbox start
-and replay on container restarts, so a command that fails or
-misbehaves on a second invocation breaks the restart path. Guard
-work with existence checks, use upserts instead of inserts, and
-prefer commands that converge to the same end state regardless of
-how many times they run.
-
-### files
-
-Files written at sandbox start, with runtime substitution.
-
-| Field           | Default  | Description                                               |
-| --------------- | -------- | --------------------------------------------------------- |
-| `path`          | —        | Absolute container path.                                  |
-| `content`       | —        | File content. `${WORKDIR}` expands to the workspace path. |
-| `mode`          | `"0644"` | File permissions in octal.                                |
-| `onlyIfMissing` | `false`  | Skip if the file already exists.                          |
-
-The runtime writes these files as the agent user with UID 1000. The target
-path must be writable by that user. To write to a root-owned path such as
-`/etc`, use an `install` command, which runs as root by default. Set ownership
-in the install command if the agent needs to modify the file later.
-
-## Static files
-
-```text
-my-kit/files/
-├── home/       → /home/agent/
-└── workspace/  → primary workspace path
-```
-
-| Kit path           | Container destination                   |
-| ------------------ | --------------------------------------- |
-| `files/home/`      | `/home/agent/` (config files, dotfiles) |
-| `files/workspace/` | The primary workspace path              |
-
-Parent directories are created automatically. Existing files are
-overwritten. Absolute paths and path-traversal sequences (`../../`) are
-rejected.
+In `sbx`, this capability is restricted to approved OCI builder kits, with
+`docker/sbx-kit-builder` approved by default. Local and Git kit sources don't
+receive this grant. Declaring it doesn't grant general network access.
 
 ## Volumes
 
-```yaml
-volumes:
-  - path: /workspace
-    size: 10g
-    mode: "0755"
-  - path: /tmp/scratch
-    type: tmpfs
-    size: 512m
-    mode: "1777"
-```
+`com.docker.runtime/volume@1` describes a storage mount. `sbx` accepts this
+schema, but doesn't apply v3 volume requests to the sandbox.
 
-| Field  | Description                                                         |
-| ------ | ------------------------------------------------------------------- |
-| `path` | Required absolute container path.                                   |
-| `type` | Empty for a block-backed volume, or `tmpfs` for RAM-backed storage. |
-| `size` | Optional byte-size string.                                          |
-| `mode` | Optional octal permissions.                                         |
+| Field | Description |
+| --- | --- |
+| `path` | Required. Absolute mount path inside the sandbox. |
+| `size` | Optional byte-size string, such as `2g`. |
+| `tmpfs` | If `true`, requests RAM-backed storage. Defaults to `false`. |
+| `mode` | Optional octal permissions, such as `"0755"`. |
 
-Volumes are applied only when a sandbox is created. `sbx kit add` cannot attach
-volumes to a running container.
+## USB devices
+
+`com.docker.runtime/usb-device@1` describes a USB device request. `sbx`
+accepts this schema, but doesn't apply v3 USB requests.
+
+| Field | Description |
+| --- | --- |
+| `vendorId` | Vendor identifier. Must be paired with `productId`. |
+| `productId` | Product identifier. Must be paired with `vendorId`. |
+| `class` | Device class. Mutually exclusive with the vendor and product pair. |
+
+Declare exactly one match form: a vendor/product pair, or a class.
+
+## Privileged mode
+
+`com.docker.runtime/privileged@1` requests elevated runtime privileges. It
+takes no `config`. `sbx` accepts this schema, but doesn't apply v3 privileged
+requests.
+
+## Agent sessions
+
+`com.docker.runtime/agent-sessions@1` describes a workload's session commands.
+`sbx` accepts this schema, but doesn't use it to drive sessions.
+
+| Field | Description |
+| --- | --- |
+| `prompt` | Argument list appended to the workload's launch command. Must contain `{{.Prompt}}`. |
+| `resume` | Argument list appended to the launch command. Must contain `{{.SessionID}}`. |
+| `continue` | Argument list to reopen the most recent session. |
+| `list` | Complete command, as a shell string or argument list, that outputs session IDs, one per line, most recent first. |
+
+At least one command is required. `prompt`, `resume`, and `continue` are
+argument tails. `list` is a complete command.
+
+## Published image format
+
+A published v3 kit is an OCI image. Its manifest annotations carry the
+descriptor, its image config carries the launch settings, and its layers
+carry content.
+
+| Annotation | Value |
+| --- | --- |
+| `vnd.docker.runtime.kit.descriptor` | Published descriptor as compact JSON. |
+| `vnd.docker.runtime.kit.schema-version` | `"3"`. |
+| `vnd.docker.runtime.kit.capabilities` | Sorted, comma-separated capability types with duplicates removed. Omitted when none are requested. |
+
+Each image stages its descriptor at
+`/usr/share/runtime/kit/<stem>/kit.yaml` and its recipe, when present, at
+`/usr/share/runtime/kit/<stem>/kit.dockerfile`. Instruction files referenced
+by `contentFile` are staged under the same kit directory. Even a mixin with
+no recipe has a layer containing its descriptor.
+
+The published descriptor has a 512 KiB limit, with a build warning above
+64 KiB. Keep substantial instruction text in `contentFile` and other content
+in image layers. See [Compose kits](kits.md#compose-kits) for combining images,
+and [Packaging and distribution](kits.md#packaging-and-distribution) for publishing them.
+
+## Move from v2 to v3
+
+A v3 kit combines image content with a descriptor. Changing `schemaVersion`
+alone doesn't convert a v2 kit. Separate reusable build work from runtime
+initialization, then declare the runtime capabilities the kit needs.
+
+| V2 surface | V3 equivalent |
+| --- | --- |
+| `kind: sandbox` | `kind: workload` with a Dockerfile recipe |
+| `sandbox.image` | Dockerfile `FROM` |
+| `sandbox.entrypoint`, `sandbox.command`, `environment.variables` | Dockerfile `ENTRYPOINT`, `CMD`, and `ENV` |
+| `extends` | A mixin for composition, or a derived workload image with its own descriptor |
+| `setup.install` | Dockerfile `RUN` for reusable content; lifecycle `install` for sandbox initialization |
+| `setup.startup` and `setup.files` | Lifecycle capability `startup` and `files` |
+| `setup.files[].onlyIfMissing: true` | Lifecycle `files[].overwrite: false` |
+| Automatic `files/home/` and `files/workspace/` injection | Dockerfile `COPY`, with lifecycle hooks for destinations provided by runtime mounts |
+| `permissions.network` and `credentials` | Network-policy and credential capabilities |
+| `agentInstructions` | Agent-context capability |
+
+Review the [runtime support table](#runtime-capabilities) before migrating
+features such as volumes. Publish the converted kit as an image, and select
+v3 workload and mixin kits together.
