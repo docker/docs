@@ -1,8 +1,8 @@
 ---
 title: Build your own agent kit
 linkTitle: Build an agent
-description: Walk through building an agent kit for Amp, from base image choice to invocation.
-keywords: sandboxes, sbx, kits, agent, tutorial, amp, ampcode
+description: Build a schema v3 Claude Code workload kit with a pinned agent binary, runtime configuration, proxy-managed credentials, and agent instructions.
+keywords: sandboxes, sbx, kits, agent, tutorial, claude, workload, build
 weight: 30
 ---
 
@@ -10,317 +10,252 @@ weight: 30
 
 > [!NOTE]
 > Kits are experimental. The kit file format, CLI commands, and experience
-> for creating, loading, and managing kits are subject to change as the
-> feature evolves. Share feedback and bug reports in the
-> [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
+> for creating, loading, and managing kits are subject to change. Share
+> feedback in the [docker/sbx-releases](https://github.com/docker/sbx-releases)
+> repository.
 
-This tutorial walks through building an agent kit for the
-[Amp](https://ampcode.com/) coding agent. Each step explains the decision
-behind a part of the spec, so you can apply the same reasoning to other agents.
+Build a schema v3 workload kit that runs Claude Code with a pinned binary,
+configurable model, and an Anthropic API key held on the host. The same steps
+apply to other agents: build the software into an image, declare its runtime
+requirements, and provide instructions about the environment.
 
-For reference on every field, see the [Kit spec reference](kit-reference.md).
-This tutorial focuses on the journey.
+This example uses API-key authentication. For the complete schema, see the
+[Kit spec reference](kit-reference.md).
 
-The finished kit is also published as a runnable sample at
-[docker/sbx-kits-contrib](https://github.com/docker/sbx-kits-contrib/tree/main/amp) —
-useful as a reference while you follow along.
+## Prepare the kit directory
 
-## Choose a base image
-
-An agent kit needs a container image that satisfies the
-[base image requirements](kit-reference.md#base-image-requirements): non-root
-`agent` user at UID 1000, passwordless sudo, `/home/agent/` home, and HTTP
-proxy environment variable forwarding.
-
-Rather than build an image from scratch, extend one of the published
-sandbox templates. Three common starting points:
-
-- `docker/sandbox-templates:shell`. Generic base with no pre-installed
-  agent.
-- `docker/sandbox-templates:shell-docker`. Same, with Docker Engine inside
-  the sandbox.
-- Agent-specific variants (`claude-code`, `codex`, etc.). Only useful if
-  you're extending that specific agent.
-
-For Amp, pick `shell-docker`:
-
-- Amp isn't pre-installed in any variant, so you need a generic base
-  (`shell`).
-- Docker support is handy since coding agents often need to run containers.
-- If you don't need Docker inside the sandbox, use the `shell` tag for a
-  lighter, non-privileged environment.
-
-## Plan authentication
-
-Amp authenticates with an API key in `AMP_API_KEY`. To keep the real key
-out of the VM, you split the work in two:
-
-- The kit's network section maps the API host to a service identifier
-  and tells the proxy which header to inject.
-- You provide your key once on the host, via sbx's secret store. The
-  real value stays on the host; only a placeholder reaches the sandbox.
-
-Inside the sandbox `AMP_API_KEY` is set to that placeholder. The proxy
-substitutes the real key on outbound requests to the API host, so the
-secret never enters the sandbox. A later section walks through the
-specific command for storing the key.
-
-## Write the sandbox block
-
-The `sandbox:` block tells the sandbox how to launch Amp when the user
-attaches.
-
-```yaml {title="amp/spec.yaml"}
-schemaVersion: "1"
-kind: sandbox
-name: amp
-displayName: Amp
-description: The frontier coding agent.
-
-sandbox:
-  image: "docker/sandbox-templates:shell-docker"
-  aiFilename: AGENTS.md
-  entrypoint:
-    run: [amp, --dangerously-allow-all]
-```
-
-- `aiFilename: AGENTS.md` tells the sandbox to create `AGENTS.md` at launch
-  and append the [`agentContext`](#prime-amp-with-memory) block to it. Amp reads
-  this file for instructions.
-- `entrypoint.run` runs `amp` in "YOLO-mode" when the sandbox starts. Adjust if
-  you want to pass different args on startup.
-
-## Install Amp
-
-Amp installs via a curl-to-bash script:
-
-```yaml
-commands:
-  install:
-    - command: "curl -fsSL https://ampcode.com/install.sh | bash"
-      user: "1000"
-      description: Install Amp
-```
-
-Note `user: "1000"`. That's the agent user. Install commands run as root
-(UID 0) by default, and Amp's installer puts the binary in the user's home
-directory. Running as root would land the binary in `/root/` where the
-agent can't reach it.
-
-## Allow network access
-
-The network block does two things: it lists the hosts the sandbox can
-reach (`allowedDomains`), and it wires the kit-side half of the auth flow
-from [Plan authentication](#plan-authentication) with `serviceDomains` and
-`serviceAuth`.
-
-```yaml
-network:
-  serviceDomains:
-    ampcode.com: amp
-  serviceAuth:
-    amp:
-      headerName: Authorization
-      valueFormat: "Bearer %s"
-  allowedDomains:
-    - "ampcode.com:443"
-    - "*.ampcode.com:443"
-```
-
-`allowedDomains` here covers the apex (`ampcode.com`) and the
-install/CDN subdomains (`*.ampcode.com`). Treat it as a starting point;
-Amp may reach other domains (model providers, analytics, updates) that
-you'll discover by watching `sbx policy log` while testing.
-
-Kits can also declare `deniedDomains` for hosts the sandbox should not
-reach, such as telemetry endpoints. Deny rules take precedence over
-allow rules and apply only to sandboxes that use the kit.
-
-For the auth wiring, when the agent makes an outbound request to
-`ampcode.com`, the proxy looks up the host in `serviceDomains` to find
-the service id `amp`, then uses `serviceAuth.amp` to inject an
-`Authorization: Bearer <key>` header. The `<key>` value comes from the
-secret you'll register in
-[Register your API key](#register-your-api-key), matched by host. The
-service id (`amp`) is just a label that ties the two blocks together —
-pick any name.
-
-> [!IMPORTANT]
-> Keep `serviceDomains` narrow. Mapping `*.ampcode.com` would push the
-> proxy into TLS-intercepting mode for every subdomain — including the
-> binary CDN the install script downloads from — which corrupts those
-> downloads. List only the host that actually needs auth.
-
-## Prime Amp with memory
-
-The `agentContext` field appends markdown to `AGENTS.md` at sandbox creation.
-Use it to tell Amp about the sandbox environment so it knows the
-conventions when it starts.
-
-```yaml
-agentContext: |
-  ## Sandbox environment
-
-  You are running inside a Docker sandbox. The workspace is mounted at
-  its absolute host path. `sudo` is passwordless; use it for package
-  installs. Docker is available inside the sandbox; containers you start
-  are isolated in the microVM.
-```
-
-Keep this short and sandbox-specific. For project instructions, put a
-regular `AGENTS.md` in the workspace.
-
-## The full spec
-
-Putting it all together:
-
-```yaml {title="amp/spec.yaml"}
-schemaVersion: "1"
-kind: sandbox
-name: amp
-displayName: Amp
-description: The frontier coding agent.
-
-sandbox:
-  image: "docker/sandbox-templates:shell-docker"
-  aiFilename: AGENTS.md
-  entrypoint:
-    run: [amp, --dangerously-allow-all]
-
-network:
-  serviceDomains:
-    ampcode.com: amp
-  serviceAuth:
-    amp:
-      headerName: Authorization
-      valueFormat: "Bearer %s"
-  allowedDomains:
-    - "ampcode.com:443"
-    - "*.ampcode.com:443"
-
-commands:
-  install:
-    - command: "curl -fsSL https://ampcode.com/install.sh | bash"
-      user: "1000"
-      description: Install Amp
-
-agentContext: |
-  ## Sandbox environment
-
-  You are running inside a Docker sandbox. The workspace is mounted at
-  its absolute host path. `sudo` is passwordless; use it for package
-  installs.
-```
-
-## Register your API key
-
-Register your Amp API key on the host with `sbx secret set-custom`. The
-value goes into the host secret store, and a placeholder is exposed
-inside every sandbox you launch from this kit.
-
-Amp validates `AMP_API_KEY`'s format at startup, so the placeholder needs
-to look like a real Amp key. Pick a placeholder shape that matches Amp's
-expected format:
+You need `sbx` with schema v3 support, Docker with Buildx, and an Anthropic
+API key. Create a directory beside the project you want the agent to work on:
 
 ```console
-$ sbx secret set-custom \
-    --host ampcode.com \
-    --env AMP_API_KEY \
-    --placeholder "sgamp-{rand}" \
-    --value "$AMP_API_KEY"
+$ mkdir claude-team
 ```
 
-`{rand}` expands to a random suffix at registration time. Inside the
-sandbox `AMP_API_KEY` is set to that placeholder; Amp accepts it as a
-syntactically valid key, and the proxy substitutes the real secret on
-outbound requests to `ampcode.com`.
+The completed directory contains three files:
 
-> [!TIP]
-> `sbx secret set-custom` is only required because Amp validates the
-> key's format. If your agent reads the env var without a local format
-> check, you can declare `environment.proxyManaged: [AMP_API_KEY]` in
-> the kit instead and skip this user-side step — the proxy uses a
-> default sentinel value (`proxy-managed`) that the agent never sees
-> rejected.
+```text
+claude-team/
+├── claude-team.yaml
+├── claude-team.dockerfile
+└── context.md
+```
 
-> [!NOTE]
-> `sbx secret set-custom` is experimental and may change in future
-> releases. This tutorial surfaces it because there's no other path to
-> register a custom-format placeholder.
+The YAML descriptor declares the kit's requirements. Its companion Dockerfile
+builds the agent and defines the launch command. The Markdown file contains
+instructions the agent can read. Matching the YAML and Dockerfile stems lets
+the kit frontend find the recipe.
 
-## Run it
+## Build the agent into the image
 
-Validate the spec:
+Create the companion Dockerfile:
+
+```dockerfile {title="claude-team/claude-team.dockerfile"}
+FROM docker/sandbox-templates:shell
+
+USER agent
+ARG CLAUDE_VERSION
+ENV PATH="/home/agent/.local/bin:${PATH}" \
+    IS_SANDBOX=1 \
+    CLAUDE_ENV_FILE=/etc/sandbox-persistent.sh
+
+RUN curl -fsSL https://claude.ai/install.sh -o /tmp/install-claude.sh \
+    && bash /tmp/install-claude.sh "${CLAUDE_VERSION}" \
+    && rm /tmp/install-claude.sh
+
+WORKDIR /home/agent/workspace
+ENTRYPOINT ["claude", "--settings", "/home/agent/.config/claude-team/settings.json"]
+CMD []
+```
+
+The `shell` template supplies the sandbox environment, including Bash, Git,
+curl, certificates, and the `agent` user at UID 1000. Installing as `agent`
+puts Claude Code under `/home/agent/`, where the launch user can access it.
+The `CLAUDE_VERSION` build argument receives its value from the descriptor in
+the next step.
+
+The Dockerfile owns the image's `ENTRYPOINT`, `CMD`, environment, user, and
+working directory. `CMD []` clears any inherited arguments. Claude Code's
+`--settings` option reads an additional settings file that the kit writes
+during sandbox creation.
+
+Installing Claude Code belongs in the build recipe because the binary is the
+same in every sandbox using this kit. BuildKit can cache that work. Reserve
+lifecycle install hooks for configuration that depends on an individual
+sandbox, such as registering a runtime endpoint.
+
+## Declare the runtime requirements
+
+Create the descriptor:
+
+```yaml {title="claude-team/claude-team.yaml"}
+# syntax=docker/runtime-kit:3
+schemaVersion: "3"
+kind: workload
+displayName: Team Claude Code
+description: Claude Code with team defaults and API-key authentication
+
+args:
+  version:
+    default: "2.1.259"
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+    buildArg: CLAUDE_VERSION
+  model:
+    default: sonnet
+    enum: [sonnet, opus, haiku]
+
+provides: ["claude@${{ kit.args.version }}"]
+
+capabilities:
+  - type: com.docker.runtime/network-policy@1
+    config:
+      runtime:
+        allow:
+          - api.anthropic.com:443
+
+  - type: com.docker.runtime/credential@1
+    description: Anthropic API access
+    config:
+      service: anthropic
+      phase: runtime
+      apiKey:
+        name: ANTHROPIC_API_KEY
+        proxyManaged: true
+        inject:
+          - domain: api.anthropic.com
+            header: x-api-key
+            format: "%s"
+
+  - type: com.docker.runtime/lifecycle@1
+    config:
+      files:
+        - path: /home/agent/.config/claude-team/settings.json
+          content: |
+            {"model": "${{ kit.args.model }}"}
+          mode: "0644"
+
+  - type: com.docker.runtime/agent-context@1
+    config:
+      filename: CLAUDE.md
+      contentFile: ./context.md
+```
+
+The descriptor separates what the kit supplies from what it asks the runtime
+to do:
+
+- `kind: workload` makes this kit the environment and launch command for
+  the sandbox. A composition has one workload.
+- `provides` identifies the installed agent and version so other kits can
+  declare a dependency on Claude Code.
+- `capabilities` requests network access, credential injection, settings
+  file creation, and agent instructions.
+
+The arguments resolve at different times. `version` has a `buildArg`, so
+the frontend validates it, passes it to the Dockerfile as `CLAUDE_VERSION`,
+and records the installed version in `provides`. `model` resolves when you
+create a sandbox, so changing it doesn't require rebuilding the binary.
+
+The credential capability exposes a placeholder in `ANTHROPIC_API_KEY`.
+The proxy substitutes the host's key in the `x-api-key` header for requests
+to `api.anthropic.com`. The matching network allow entry permits those
+requests. Declaring a credential doesn't store or grant access to a key.
+
+The network policy describes sandbox execution. Downloading Claude Code in
+the Dockerfile is build-time work. An `install` network policy would apply
+to lifecycle install hooks, rather than to Dockerfile `RUN` instructions.
+
+## Add agent instructions
+
+Create the context file:
+
+```markdown {title="claude-team/context.md"}
+## Team workflow
+
+Read the project's README before changing code. Run the project's checks
+before reporting a task complete, and report any checks you couldn't run.
+
+Claude Code is installed in this sandbox. Its additional settings are at
+`/home/agent/.config/claude-team/settings.json`.
+
+Use `/etc/sandbox-persistent.sh` for environment exports needed by later
+Bash commands. Keep shell completion scripts out of that file because
+non-interactive commands also source it.
+```
+
+The frontend includes this file in the kit image. At runtime, `sbx` adds an
+entry to `CLAUDE.md` that points Claude Code to the kit's instructions. The
+content stays in its own file, so composing more kits doesn't put all their
+instructions into the main profile.
+
+## Store the key and run
+
+Store your Anthropic API key on the host:
 
 ```console
-$ sbx kit validate ./amp/
+$ sbx secret set anthropic
 ```
 
-Launch the sandbox by passing the kit directory in place of a built-in agent
-name:
+From the directory containing `claude-team`, launch the kit against your
+project:
 
 ```console
-$ sbx run ./amp/
+$ sbx run --name claude-team ./claude-team <PROJECT_PATH>
 ```
 
-The published copy of this kit also runs directly from the contrib
-repository:
+`sbx` builds the local directory, loads the kit, and launches Claude Code.
+Approve the kit's credential request to connect the stored key to this kit,
+then follow Claude Code's first-run prompts. Without an approved credential
+binding, storing a key alone doesn't authenticate the agent. See
+[Credential bindings](../configuration/credentials.md#credential-bindings).
+
+Choose a different model when creating a sandbox:
 
 ```console
-$ sbx run "git+https://github.com/docker/sbx-kits-contrib.git#dir=amp"
+$ sbx run --name claude-team-opus ./claude-team \
+    --kit-arg claude-team.model=opus <PROJECT_PATH>
 ```
 
-## Iterate
+The argument prefix is the local kit directory's name. The model value is
+validated against the descriptor's `enum` and written to the settings file
+before Claude Code starts.
 
-As you use the kit, you'll likely hit missing domains or install quirks.
-Two loops help:
+## Iterate and publish
 
-- Watch the network policy log (`sbx policy log`) to catch blocked
-  requests, then add their domains to `allowedDomains`.
-- Add domains to `deniedDomains` when the agent should stay blocked from
-  a host even if another policy permits it.
-- Edit the spec and re-run `sbx run ./amp/` to pick up changes.
-  Remove the sandbox first (`sbx rm <name>`) for a clean start.
-
-Flesh out the `agentContext` block as you refine how Amp should behave in the
-sandbox.
-
-## Publish
-
-Once the kit works, share it by packaging as a ZIP, pushing to an OCI
-registry, or committing to a Git repository. See
-[Packaging and distribution](kits.md#packaging-and-distribution) for the
-`sbx kit` subcommands.
-
-## Adapt this to another agent
-
-Most of the specifics here are Amp's. To port the pattern, work through
-the same decisions for your agent:
-
-- **Base image**: `shell-docker` if you need Docker inside the sandbox,
-  `shell` otherwise. Or extend either with your own image if the install
-  is heavy.
-- **Install**: a `commands.install` block at runtime, or bake the agent
-  into a custom image. Pick install if it's a one-line script; bake if
-  the install is slow or you need a pinned version.
-- **Network mapping**: list only the API host in `serviceDomains`, not
-  a wildcard. Keep install/CDN paths out of TLS-intercepting mode. Use
-  `deniedDomains` for hosts the agent should not reach.
-- **Credential injection**: if the agent validates the API key's format
-  locally, register with `sbx secret set-custom` and pick a matching
-  placeholder. If it accepts the env var as-is, declare
-  `environment.proxyManaged` in the kit and skip the user-side step.
-
-The rest — agent-context block, network-policy iteration, packaging — is the
-same regardless of agent.
-
-## Remove the stored secret
-
-To remove the entry created earlier with `sbx secret set-custom`, pass
-the host to `sbx secret rm`:
+Edit the descriptor, Dockerfile, or context file and create another sandbox
+with a different name to test the changes:
 
 ```console
-$ sbx secret rm --host ampcode.com
+$ sbx run --name claude-team-test-2 ./claude-team <PROJECT_PATH>
 ```
 
-The `--host` flag is part of the experimental `set-custom` surface and doesn't appear in `sbx secret rm --help`.
+Running an existing sandbox keeps its recorded configuration. During sandbox
+creation, `sbx` caches local builds by source content: changed sources trigger
+a rebuild and unchanged sources reuse the cache. To change the installed
+agent version for local runs, update `args.version.default` in the descriptor.
+
+When the kit is ready to share, sign in to Docker Hub, then build and push it
+with Docker Buildx. Replace `<NAMESPACE>` with a Docker Hub namespace you can
+push to:
+
+```console
+$ docker login
+$ docker buildx build ./claude-team \
+    --file ./claude-team/claude-team.yaml \
+    --tag docker.io/<NAMESPACE>/claude-team:1.0.0 \
+    --push
+```
+
+Buildx reads the descriptor as the build file. Its syntax directive selects
+the kit frontend, which builds the companion Dockerfile and publishes the
+declarations with the image. To override the binary version for a published
+build, add `--build-arg version=<CLAUDE_VERSION>`. Use the kit argument name
+`version` in this flag, rather than the Dockerfile's `CLAUDE_VERSION` name.
+
+Run the published kit by its image reference:
+
+```console
+$ sbx run --name claude-team-shared docker.io/<NAMESPACE>/claude-team:1.0.0 <PROJECT_PATH>
+```
+
+For build layouts, multi-platform images, and distribution details, see
+[Kits](kits.md). To add tools or shared configuration to this workload,
+see [Kit examples](kit-examples.md).

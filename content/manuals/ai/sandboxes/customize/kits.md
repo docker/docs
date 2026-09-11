@@ -1,558 +1,470 @@
 ---
 title: Kits
-description: Extend a sandbox with tools, credentials, network rules, and configuration using declarative YAML artifacts.
-keywords: sandboxes, sbx, kits, mixins, customization, extensions, agents
+description: Build, compose, and distribute sandbox workloads and extensions with kits v3, using image content and declared runtime capabilities.
+keywords: sandboxes, sbx, kits, v3, workloads, mixins, capabilities, builds, composition
 weight: 20
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
+A kit packages a sandbox workload or an extension to one. It combines image
+content, such as an agent or a toolchain, with declarations for the runtime:
+network access, credentials, storage, lifecycle hooks, and agent instructions.
+Build the kit once and reuse its content across sandboxes, while the runtime
+applies its declarations when you create and run each sandbox.
+
+This page covers kits v3, the preferred format for authoring kits. Docker
+Sandboxes also supports v1 and v2. See [Kits v2](kits-v2/_index.md) for the
+`spec.yaml` format used by existing v2 kits. A single composition cannot combine
+v3 kits with v1 or v2 kits.
+
 > [!NOTE]
-> Kits are experimental. The kit file format, CLI commands, and experience
-> for creating, loading, and managing kits are subject to change as the
-> feature evolves. Share feedback and bug reports in the
+> Kits are experimental. The format and CLI commands are subject to change.
+> Share feedback in the
 > [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
 
-A kit packages a set of capabilities a sandbox can use, such as:
+## Workloads and mixins
 
-- Tools to install
-- Environment variables to set
-- Credentials to inject
-- Network rules to allow or deny domains
-- Files to drop in
-- Startup commands to run
-- Memory instructions to give the agent
+Every v3 sandbox composition contains exactly one workload kit and zero or more
+mixin kits:
 
-You declare these in a single `spec.yaml` file, point the CLI at the
-directory (or a ZIP, OCI artifact, or Git URL), and the sandbox applies
-and enforces them at runtime. Credentials stay on the host and go through
-a proxy instead of entering the VM, and outbound traffic is restricted to
-the domains permitted by the kit's network rules.
+| Kind | What it supplies | How you use it |
+| --- | --- | --- |
+| `workload` | A complete root filesystem and the command to run, such as an agent or a shell | Pass it as the first argument to `sbx run` or `sbx create` |
+| `mixin` | Additional files, tools, or runtime declarations | Add it with `--kit` |
 
-A kit is either a mixin or a sandbox:
+Both kinds use the same descriptor schema. A mixin that only declares network
+access or agent instructions needs no Dockerfile. A mixin that ships a tool
+includes a build recipe. A workload always includes a build recipe because it
+supplies the sandbox's filesystem and launch configuration.
 
-- Mixin kits (`kind: mixin`) extend an existing agent with extra
-  capabilities. Stack several on the same sandbox.
-- Sandbox kits (`kind: sandbox`) define a full agent from scratch: its image,
-  entrypoint, network policies, and everything else the agent needs.
+For example, with a local v3 workload and two local v3 mixins:
 
-## What kits can do
-
-### Run commands
-
-A kit can run commands inside the sandbox automatically. **Install
-commands** run once at creation; **startup commands** run each time
-the sandbox starts.
-
-Install commands are the place to put anything an agent needs into the
-image, via `apt`, `pip`, `npm`, `curl | bash`, or whatever fits:
-
-```yaml
-setup:
-  install:
-    - command: "apt-get update && apt-get install -y jq"
+```console
+$ sbx run ./my-agent --name my-project --kit ./my-tool --kit ./team-config .
 ```
 
-Startup commands are for work that can run alongside the agent, such as a
-background service. They must be idempotent — see the
-[`startup`](kit-reference.md#startup) spec reference:
+`sbx` builds the source directories, checks that the kits can work together,
+and assembles their content into the image the sandbox runs. Unchanged source
+builds and compositions reuse cached results. For complete examples, see
+[Kit examples](kit-examples.md). To build an agent workload, follow
+[Build an agent](build-an-agent.md).
 
-```yaml
-setup:
-  startup:
-    - command: ["my-daemon"]
-      background: true
+`--kit` applies when creating a sandbox. An existing sandbox with the same
+name is reused, so use a different `--name` to try a different kit set or
+source revision. Recreate the sandbox when you want to replace its composition.
+
+## Capabilities
+
+Kits declare two kinds of contract. The distinction determines who supplies
+what a kit needs.
+
+### Requests to the runtime
+
+The `capabilities` list describes what the kit needs the runtime to do. Each
+entry has a namespaced, versioned `type` and a `config` specific to that type.
+For example, this mixin requests outbound access to the GitHub API:
+
+```yaml {title="github-access/github-access.yaml"}
+# syntax=docker/runtime-kit:3
+schemaVersion: "3"
+kind: mixin
+
+capabilities:
+  - type: com.docker.runtime/network-policy@1
+    config:
+      runtime:
+        allow: [api.github.com]
 ```
 
-### Inject files
+Other capability types request credentials, volumes, ports, lifecycle hooks,
+or agent instructions. The type's `@1` identifies its config schema. A
+capability can evolve independently of the kit descriptor's `schemaVersion`.
 
-Kits can inject files into the sandbox in two ways: **static files** bundled
-with the kit, and **`setup.files`** written at startup with runtime values
-substituted in.
+The capability contract distinguishes required requests from requests marked
+`optional: true`. Mark a capability optional only when the kit can work without
+it. Optional requests still participate in permission review when granted.
 
-Static files work well for content that doesn't vary between sandboxes, such
-as tool configurations, shared linter rules, helper scripts the agent can
-invoke, or reference material like a style guide or API cheatsheet.
+Docker Sandboxes implements a subset of the capability schemas and doesn't
+reject every unsupported required request. Check the support notes in the
+reference before relying on a capability.
+
+For each type's fields and Docker Sandboxes support, see
+[Runtime capabilities](kit-reference.md#runtime-capabilities).
+
+### Contracts between kits
+
+Use `provides`, `requires`, `integrates`, and `conflicts` to describe how kits
+fit together:
+
+```yaml
+provides: ["my-tool@1.0.0"]
+requires: ["node >= 22.0.0"]
+integrates: ["docker-engine >= 25.0.0"]
+conflicts: ["incompatible-tool"]
+```
+
+This kit supplies `my-tool` version `1.0.0`, needs another selected kit to
+provide Node.js version `22.0.0` or later, and can work with Docker Engine if
+it is present at a compatible version. It rejects a composition that supplies
+`incompatible-tool`.
+
+These names are declarations by kit authors. They don't install packages or
+search a registry. You select the complete set of kits, and the runtime
+validates it. Installing Node.js in a Dockerfile doesn't automatically declare
+`provides: ["node@22.0.0"]`.
+
+See [Composition fields](kit-reference.md#composition-fields) for naming and
+version rules.
+
+## Build content and runtime setup
+
+Choose where to put a customization based on when its inputs are available
+and whether its result belongs in the reusable image or an individual sandbox.
+
+| Mechanism | When it runs | Use it for |
+| --- | --- | --- |
+| Dockerfile `RUN` and `COPY` | When the kit is built | Install tools, compile binaries, and package static content |
+| Lifecycle `install` hooks | Once per sandbox, during creation | Initialize sandbox state using credentials, mounts, or other runtime inputs |
+| Lifecycle `startup` hooks | Each sandbox start | Start a service or refresh state that must be restored after a restart |
+| Lifecycle `files` | During sandbox setup | Write configuration with kit argument values or preserve an existing file with `overwrite: false` |
+
+Building a kit is separate from running its lifecycle hooks. A package
+installed by a Dockerfile becomes reusable image content. An install hook
+runs again for each sandbox you create from the kit. Put tool installations
+and compilation in the build when they don't require sandbox-specific inputs.
+
+### Build a workload
+
+The descriptor declares `kind: workload`. Its Dockerfile sets the launch
+configuration with `ENTRYPOINT`, `CMD`, `ENV`, `USER`, and `WORKDIR`. For
+example, a shell workload can use this companion pair:
+
+```yaml {title="my-shell/my-shell.yaml"}
+# syntax=docker/runtime-kit:3
+schemaVersion: "3"
+kind: workload
+provides: ["team-shell@1.0.0"]
+```
+
+```dockerfile {title="my-shell/my-shell.dockerfile"}
+FROM docker/sandbox-templates:shell
+USER root
+RUN apt-get update && apt-get install -y jq \
+    && rm -rf /var/lib/apt/lists/*
+USER agent
+ENTRYPOINT ["bash"]
+CMD []
+```
+
+The sandbox templates provide the runtime's base requirements, including
+Bash, Git, a CA certificate store, and the `agent` user with UID 1000. See
+[Base image requirements](kit-reference.md#base-image-requirements) before
+choosing another base.
+
+### Build a mixin
+
+A mixin contributes an overlay: files added or changed by its recipe. The
+recipe's base image is a build environment, and its unchanged filesystem
+doesn't become part of the overlay. For a tool built in a separate stage,
+use a final `FROM scratch` stage and copy the tool and everything it needs
+into that stage.
+
+A copied binary must be compatible with the workload's architecture and
+libraries. Declare relevant compatibility requirements with `requires` and
+ship dependencies that the workload doesn't supply. See
+[Build a tool overlay](kit-examples.md#build-a-tool-overlay).
+
+A mixin's environment additions become part of the composed image, but its
+`ENTRYPOINT`, `CMD`, `USER`, and `WORKDIR` don't replace the workload's launch
+configuration.
+
+### Static files
+
+Static content belongs in the image. Use Dockerfile `COPY` to put a tool config,
+helper script, or reference document at its destination, or stage it at a
+kit-specific path for a lifecycle hook to copy later.
+
+Files destined for a mounted workspace or persistent volume need that second
+step: a mount can hide files baked into the image at its mount path. Copy from
+the staged image path after the mount is available. V3 doesn't automatically
+inject a source directory named `files/home/` or `files/workspace/`. See
+[Copy shared configuration](kit-examples.md#copy-shared-configuration).
+
+### Lifecycle hooks
+
+Hooks are declared through `com.docker.runtime/lifecycle@1`. For example, write
+a default config and start a service that the kit's image already contains:
+
+```yaml
+capabilities:
+  - type: com.docker.runtime/lifecycle@1
+    config:
+      files:
+        - path: /home/agent/.config/my-service/config.json
+          content: '{"port": 8080}'
+          overwrite: false
+      startup:
+        - command: [my-service, --config, /home/agent/.config/my-service/config.json]
+          user: "1000"
+          background: true
+```
+
+Startup hooks must tolerate repeated execution. In Docker Sandboxes they run
+through a background dispatcher and don't block the agent's launch. Use an
+install hook or a workload entrypoint script for setup the agent must wait for.
+String commands run through
+`sh -c`; an argument list invokes the command directly. See
+[Lifecycle](kit-reference.md#lifecycle) for command fields, file permissions,
+and runtime behavior.
+
+## Control network access
+
+Use `com.docker.runtime/network-policy@1` to declare network rules. The schema
+separates `install` rules, intended for runtime install hooks, from `runtime`
+rules for the workload. Neither block configures the Dockerfile build's network.
+
+```yaml
+capabilities:
+  - type: com.docker.runtime/network-policy@1
+    config:
+      runtime:
+        allow: [api.example.com]
+        deny: [telemetry.example.com]
+```
+
+Network declarations compose across the selected kits. A deny rule takes
+precedence over a kit allow rule. Kit rules also participate in the sandbox's
+[policy precedence](../governance/concepts.md#precedence).
+
+See [Network policy](kit-reference.md#network-policy) for phase support and
+pattern syntax. Use `sbx policy log` to investigate refused connections.
+
+## Authenticate to external services
+
+A credential capability declares the service and how the runtime presents its
+credential. The user supplies the value on the host with
+[`sbx secret set`](../configuration/credentials.md#stored-secrets).
+
+```yaml
+capabilities:
+  - type: com.docker.runtime/network-policy@1
+    config:
+      runtime:
+        allow: [api.example.com]
+  - type: com.docker.runtime/credential@1
+    config:
+      service: my-service
+      phase: runtime
+      apiKey:
+        name: MY_SERVICE_TOKEN
+        proxyManaged: true
+        inject:
+          - domain: api.example.com
+            header: Authorization
+            format: "Bearer %s"
+```
+
+With `proxyManaged: true`, the sandbox receives a sentinel value in
+`MY_SERVICE_TOKEN`. The host proxy inserts the real secret in outbound requests
+matching the injection rule. Every injection domain must also appear in the
+same phase's network allow list.
+
+Store the credential using the kit's service identifier:
+
+```console
+$ sbx secret set my-service
+```
+
+On the first interactive run, `sbx` also asks you to approve the service's
+credential mechanism and domains. Storing a secret doesn't grant that approval.
+Without a binding, the sandbox starts with the credential withheld. For
+unattended runs, prepare the binding in advance.
+
+See [Credentials](kit-reference.md#credentials) for API key and OAuth fields,
+and [Credential configuration](../configuration/credentials.md) for host-side
+storage and approval.
+
+## Compose kits
+
+Composition validates the set you selected and orders providers before the
+kits that require or integrate with them. Independent mixins are ordered by
+reference. Reordering `--kit` flags isn't an override mechanism.
+
+The workload supplies the root filesystem and launch configuration. Mixins
+contribute overlays and runtime declarations. Files contributed by more than
+one kit cause a composition error. Conflicting image environment values also
+cause an error, while `PATH` additions are combined. Give each kit its own
+paths for staged content and avoid having multiple kits manage the same config.
+
+V3 has no `extends` field. To derive a workload, build its Dockerfile from the
+base image you want and declare its runtime capabilities in its descriptor.
+Dockerfile `FROM` inherits image content and config, but it doesn't merge the
+parent kit's descriptor into the child. To extend a workload without replacing
+it, use a mixin.
+
+Select all kits when creating the sandbox. To change a v3 kit set, recreate the
+sandbox with the desired workload and mixins. `sbx kit add` doesn't apply v3
+changes to an existing sandbox.
+
+## Pass arguments to kits
+
+Kit arguments use `${{ kit.args.<name> }}` in the descriptor. They resolve in
+one of two phases:
+
+| Declaration | Phase | Supply a value with |
+| --- | --- | --- |
+| `buildArg: VERSION` | Kit build | `docker buildx build --build-arg version=...` using the kit argument's name |
+| `env: TOOL_MODE`, or neither mapping | Sandbox creation | `sbx run --kit-arg mode=...` |
+
+For example:
+
+```yaml
+args:
+  mode:
+    default: check
+    enum: [check, fix]
+    env: TOOL_MODE
+```
+
+```console
+$ sbx run ./my-agent --kit ./my-tool --kit-arg mode=fix .
+```
+
+`env` exports the resolved value to the sandbox. Without `env`, a create-time
+argument is available only through descriptor substitution. Build arguments
+are validated and expanded before the kit is published. Changing a build
+argument requires rebuilding the kit.
+
+A bare argument name applies to every kit that declares it. To target one kit,
+prefix the name with its handle and a period:
+
+```console
+$ sbx run ./my-agent --kit ./my-tool --kit-arg my-tool.mode=fix .
+```
+
+The handle is the local directory name, the Git subdirectory or repository
+name, or the last repository segment in an OCI reference. Scoped values take
+precedence over shared values. Use `--kit-args-file <FILE>` for reusable
+`name=value` entries; `--kit-arg` values take precedence over file values.
+
+Argument values are plain text and can be recorded in shell history and
+sandbox state. Use credential capabilities for secrets. See
+[Arguments](kit-reference.md#arguments) for validation and mapping fields.
+
+## Directory and build layout
+
+A companion pair keeps the YAML descriptor separate from its Dockerfile recipe:
 
 ```text
 my-kit/
-├── spec.yaml
+├── my-kit.yaml
+├── my-kit.dockerfile
+├── context.md
 └── files/
-    ├── home/
-    │   └── .config/my-tool/settings.json
-    └── workspace/
-        └── .editorconfig
+    └── settings.json
 ```
 
-`setup.files` cover content that depends on runtime values, such as an
-absolute workspace path that a tool needs to bake into its config file
-at startup:
+The descriptor's first line, `# syntax=docker/runtime-kit:3`, selects the kit
+BuildKit frontend. Pass the YAML file to `docker buildx build -f`, with its
+directory as the build context. The frontend finds the same-stem
+`my-kit.dockerfile`, builds the content, validates the declarations, and
+publishes them together.
 
-```yaml
-setup:
-  files:
-    - path: /home/agent/.my-tool/config.json
-      content: '{"workspace": "${WORKDIR}"}'
-      onlyIfMissing: true
-```
+For `sbx` to discover a local source kit, keep exactly one v3 descriptor at the
+directory root, named with the `.yaml` extension. A `.dockerfile` with a
+comment descriptor also works. Avoid `spec.yaml` and `spec.yml`: these names
+select the v1/v2 loader. Matching the descriptor stem to the directory name
+also keeps build and create argument scopes consistent.
 
-See [`setup.files`](kit-reference.md#files) in the spec reference for all
-fields.
+For a single-file kit, use `build: |` with literal Dockerfile text in the
+YAML. You can also select a differently named recipe with `dockerfile:` or
+embed a descriptor in a Dockerfile comment block. See
+[Authoring forms](kit-reference.md#authoring-forms) for syntax and discovery
+rules. The `files/` name in this example is an authoring convention, not a
+special runtime directory.
 
-#### Sandbox-managed agent configuration
+## Packaging and distribution
 
-Built-in agent kits reserve the following paths for sandbox setup. Treat these
-paths as sandbox-managed, even if a file is only needed for a particular
-feature. Don't target them with static files, `setup.files`, or install
-commands. Later setup can replace your content or depend on settings that your
-file removes. In this table, `~` is `/home/agent`.
-
-| Built-in agent kit | Managed configuration paths |
-| ------------------ | --------------------------- |
-| `claude` | `~/.claude.json`, `~/.claude/settings.json`, `~/.claude/.config.json` |
-| `codex` | `~/.codex/config.toml` |
-| `copilot` | `~/.copilot/config.json` |
-| `cursor` | `~/.cursor/cli-config.json` |
-| `devin` | `~/.config/devin/config.json`, `~/.config/devin/mcp_config.json` |
-| `gemini` | `~/.gemini/settings.json` |
-| `kiro` | `~/.kiro/settings/mcp.json` |
-| `opencode` | `~/.config/opencode/opencode.json` |
-
-Use a separate settings layer when the agent supports one. For example, Claude
-Code can load an additional settings file with `--settings`, and OpenCode can
-load one from the path in `OPENCODE_CONFIG`. See
-[Customize agent settings](kit-examples.md#customize-agent-settings) for
-examples. Don't use `setup.startup` for settings the agent must read during
-initialization because startup commands don't gate the agent entrypoint.
-
-### Set environment variables
-
-Environment variables set by the kit are available to the agent at
-runtime:
-
-```yaml
-environment:
-  variables:
-    MY_TOOL_WORKSPACE: /home/agent/my-tool
-```
-
-For credentials, see
-[Authenticate to external services](#authenticate-to-external-services).
-Don't put secret values directly in `environment.variables` — they'd
-be visible inside the sandbox VM.
-
-> [!IMPORTANT]
-> The sandbox manages proxy settings for you. It sets `HTTP_PROXY`,
-> `HTTPS_PROXY`, `NO_PROXY`, and their lowercase equivalents automatically so
-> that traffic flows through its built-in forward proxy, which enforces
-> network policy and injects credentials. Leave these variables to the
-> sandbox — setting them in a kit points traffic away from the forward proxy,
-> so it can no longer apply network policy or inject credentials, and those
-> requests typically fail to connect. To send sandbox traffic through an
-> upstream corporate proxy, configure it on the host. See
-> [Upstream proxy](../architecture.md#upstream-proxy).
-
-### Control network access
-
-Network rules define which domains the sandbox can reach or block. Kit
-network rules apply only to sandboxes that use the kit:
-
-```yaml
-permissions:
-  network:
-    allow:
-      - api.example.com
-      - "*.cdn.example.com"
-    deny:
-      - telemetry.example.com
-```
-
-Use `allow` for hosts the agent needs, such as package
-registries, install endpoints, or external APIs. Use `deny` for
-hosts the agent should not reach, such as telemetry endpoints. If a domain
-matches both an allow rule and a deny rule, the deny rule wins.
-
-> [!IMPORTANT]
-> When organization governance is active, only organization allow rules grant
-> access, so kit-defined `allow` rules are ignored — including any domains a kit
-> allows for the agent to reach. Kit-defined `deny` rules still apply, because a
-> deny can only restrict access further. For details, see
-> [Policy precedence](../governance/concepts.md#precedence).
-
-For authenticated services, see
-[Authenticate to external services](#authenticate-to-external-services).
-
-### Authenticate to external services
-
-A kit can attach credentials to outbound requests through the
-host-side proxy. The agent inside the VM works with a sentinel value;
-the proxy reads the real credential on the host and overwrites the
-auth header before the request leaves the sandbox.
-
-A kit declares the service, the in-container environment variable, and how
-to inject the credential. It doesn't declare a host discovery source. The user
-provides the value through the secret store or first-run prompt, and a
-[credential binding](../configuration/credentials.md) authorizes its use:
-
-```yaml
-credentials:
-  - service: my-service
-    apiKey:
-      name: MY_SERVICE_API_KEY # in-VM env var, set to a sentinel
-      proxyManaged: true
-      inject:
-        - domain: api.example.com # inject on requests to this domain
-          header: Authorization # overwrite this header
-          format: "Bearer %s"
-
-permissions:
-  network:
-    allow:
-      - api.example.com # the domain must also be reachable
-```
-
-The agent boots with `MY_SERVICE_API_KEY=proxy-managed`, sends a
-request with that sentinel in `Authorization`, and the proxy overwrites
-the header with the real credential before forwarding. The real
-secret never enters the VM.
-
-See [Credentials](../configuration/credentials.md) for how to provide the
-credential value on your host, other approaches for cases the example
-above doesn't fit, and what the proxy does at request time. See
-[Credential bindings](../configuration/credentials.md) to approve the mechanisms
-and domains declared by a third-party v2 kit.
-
-### Inject agent memory
-
-A kit can append content to the agent's memory file, such as `CLAUDE.md`
-or `AGENTS.md`. The agent reads this file at startup. Use it to give
-the agent project conventions, usage tips for a tool the kit installs,
-or other guidance that should be in scope when the sandbox runs.
-
-```yaml
-agentInstructions:
-  content: |
-    Ruff is installed. Run `ruff check` before committing.
-    Shared config lives at `/workspace/ruff.toml`.
-```
-
-Both mixin and sandbox kits can declare `agentInstructions.content`. The active
-sandbox kit sets `agentInstructions.filename`, which determines the memory
-file's name. The sandbox kit's content is written inline in that file. Each
-mixin's content is written to its own `<kit-name>.md` file under a sibling
-`kits-memory/` directory, and the main memory file gets a `## Kits` section that
-points to each mixin file:
-
-```text
-/Users/you/
-├── myproject/              # workspace
-├── AGENTS.md               # main memory file with a "## Kits" index
-└── kits-memory/
-    ├── ruff-lint.md
-    ├── vale.md
-    └── git-ssh-sign.md
-```
-
-See [`agentInstructions`](kit-reference.md#agent-instructions) in the spec
-reference for the full field schema.
-
-### Define an agent
-
-Sandbox kits declare a `sandbox:` block with the image the agent runs in and
-the command the user attaches to when they launch the sandbox:
-
-```yaml
-sandbox:
-  image: "my-registry/my-agent:latest"
-  entrypoint: [my-agent, "--yolo"]
-```
-
-See [Sandbox kits](#sandbox-kits) for use cases and an example.
-
-## Mixin kits
-
-A mixin kit extends an existing agent with extra capabilities. Common use
-cases:
-
-- Pre-install tools: linters, libraries, or other custom programs
-- Grant the agent access to a new authenticated service (a database, a
-  vendor API)
-- Inject shared team config (linter rules, editor settings, dotfiles)
-
-See [Drop a shared config file](kit-examples.md#drop-a-shared-config-file) and
-[Install a tool at sandbox creation](kit-examples.md#install-a-tool-at-sandbox-creation)
-for complete mixin examples.
-
-## Sandbox kits
-
-A sandbox kit defines a full agent from scratch — image, entrypoint, and
-everything the agent needs. Common use cases:
-
-- Package a custom agent you've built so others can run it
-- Ship a team-internal agent with defaults baked in
-- Run a fork of an existing agent with your own config
-- Prototype a new agent integration
-
-Sandbox kits declare everything a mixin kit can, plus an
-[`sandbox:` block](kit-reference.md#sandbox-block) that tells the sandbox how to launch the
-agent. For a step-by-step walkthrough, see
-[Build your own agent kit](build-an-agent.md).
-
-### Extend a built-in agent
-
-Use `extends:` to create a variant of a built-in agent without reproducing its
-configuration. The child kit inherits the parent's image, credentials, network
-permissions, persistent volumes, settings, MCP integration, and agent
-instructions. It also inherits the parent's environment variables and all
-`setup.install`, `setup.startup`, and `setup.files` entries. Parent setup entries
-run before child entries. If both kits set the same environment variable, the
-child's value wins. Use `extends:` for a single parent agent; use a mixin to add
-an independent capability that can work with one or more agents. See
-[Fork an existing agent](kit-examples.md#fork-an-existing-agent) for an example
-that changes Claude Code's permission mode.
-
-## Using kits
-
-Kits can be loaded from a local path (a directory or ZIP file), a Git
-repository, or an OCI registry. To launch a sandbox kit, pass its reference in
-place of a built-in agent name to `sbx run` or `sbx create`. Use `--kit` for
-mixins, and repeat the flag to apply multiple mixins to the same sandbox.
-
-Starting with Docker Sandboxes version 0.42.0, pass the sandbox kit reference
-as the first argument:
+A published v3 kit is an OCI image. Use Docker Buildx to build and push it:
 
 ```console
-$ sbx run <sandbox-kit-ref> [PATH...]
-$ sbx create <sandbox-kit-ref> [PATH...]
+$ docker login
+$ docker buildx build ./my-kit -f ./my-kit/my-kit.yaml \
+    -t docker.io/<NAMESPACE>/my-kit:1.0.0 --push
 ```
 
-The previous form, `sbx run <sandbox-kit-name> --kit <sandbox-kit-ref>`, is
-deprecated.
-
-> [!IMPORTANT]
-> A mixin passed with `--kit` only takes effect when a sandbox is created.
-> Passing it against an
-> existing sandbox name fails with
-> `--kit can only be used when creating a new sandbox`. To add a supported
-> mixin kit to a running sandbox, use [`sbx kit add`](#local) instead.
-> `sbx kit add` restarts the sandbox to apply the updated kit set.
-> VM state — installed packages, Docker images, volumes, and agent history
-> — is preserved across the restart. It supports mixin kits limited to
-> `environment.variables`, `setup.install`, and `permissions.network.allow`.
-> To use other fields, recreate the sandbox with the mixin.
-
-### Pass arguments to kits
-
-A schema v2 kit can declare inputs in a top-level `args:` block and reference
-them in `spec.yaml` or static files with `${{ kit.args.<name> }}`. Supply a
-value with `--kit-arg name=value`:
+For a workload, launch the published reference. For a mixin, pass it with
+`--kit`:
 
 ```console
-$ sbx run ./my-agent/ --kit-arg channel=beta
+$ sbx run docker.io/<NAMESPACE>/my-agent:1.0.0 \
+    --kit docker.io/<NAMESPACE>/my-kit:1.0.0 .
 ```
 
-Kit argument values are plain text. Values supplied with `--kit-arg` can remain
-in your shell history, and argument files store their values unencrypted. Don't
-use kit arguments for secrets. Use [Credentials](../configuration/credentials.md)
-instead.
-
-An argument without a kit name prefix applies to every kit that declares it.
-To target one kit, prefix the argument with the value of that kit's `name`
-field and a period:
+Build for both supported Linux architectures when distributing across machines:
 
 ```console
-$ sbx run ./my-agent/ \
-    --kit ./my-mixin/ \
-    --kit-arg version=1.2.3 \
-    --kit-arg my-mixin.version=2.0.0
+$ docker buildx build ./my-kit -f ./my-kit/my-kit.yaml \
+    --platform linux/amd64,linux/arm64 \
+    -t docker.io/<NAMESPACE>/my-kit:1.0.0 --push
 ```
 
-The kit-specific value takes precedence over the shared value for `my-mixin`.
+An image present only in the host Docker image store isn't available to the
+sandbox runtime by registry reference. Push it to a registry, or pass a local
+source directory to `sbx` for the build-and-run development loop. The
+`sbx kit pack`, `push`, and `pull` packaging commands belong to
+[Kits v2](kits-v2/_index.md#packaging-and-distribution).
 
-Use `--kit-args-file` for a reusable set of `name=value` entries. Blank lines
-and lines that start with `#` are ignored:
-
-```text {title="kit.args"}
-version=1.2.3
-my-mixin.channel=beta
-```
+You can also share source through Git. Select the kit directory with `dir` and
+pin the source with `ref`:
 
 ```console
-$ sbx create ./my-agent/ . \
-    --kit ./my-mixin/ \
-    --kit-args-file ./kit.args \
-    --kit-arg my-mixin.channel=stable
+$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-agent" .
 ```
 
-When you pass multiple argument files, a value in a later file overrides the
-same key in an earlier file. Values passed with `--kit-arg` override every
-file. For repeated `--kit-arg` entries with the same key, the last value wins.
-
-Argument validation happens before the sandbox is created. `sbx` rejects a
-missing required value, a value outside its declared `enum` or `pattern`, a
-placeholder without a declaration, and a supplied argument that no resolved
-kit declares. Pass the same argument flags to `sbx kit validate` or
-`sbx kit inspect` when the kit requires values. See
-[Kit arguments](kit-reference.md#arguments) for the declaration fields.
-
-### Local
-
-Launch a local sandbox kit by passing its directory or ZIP file in place of the
-agent name. Relative paths must start with `./` or `../` so `sbx` can
-distinguish them from agent and sandbox names:
-
-```console
-$ sbx run ./my-agent/
-$ sbx create ../my-agent-1.0.zip .
-```
-
-Pass a local mixin with `--kit`:
-
-```console
-$ sbx run claude --kit ./my-mixin/
-$ sbx run claude --kit ../my-mixin-1.0.zip
-```
-
-While iterating on a supported mixin kit, apply changes to a running sandbox
-with `sbx kit add`:
-
-```console
-$ sbx kit add my-sandbox ./my-kit/
-```
-
-`sbx kit add` restarts the sandbox to apply the updated kit set.
-VM state — installed packages, Docker images, volumes, and agent history — is
-preserved across the restart. Kits can't be removed from a running sandbox —
-remove and recreate it to start clean.
-
-### Git repository
-
-Launch a sandbox kit from a Git repository:
-
-```console
-$ sbx run "git+https://github.com/docker/sbx-kits-contrib.git#ref=v0.1.0&dir=amp"
-```
-
-Pass a Git-hosted mixin with `--kit`:
-
-```console
-$ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#ref=v0.1.0&dir=code-server"
-```
-
-- `#ref=<branch|tag|commit>` pins to a specific revision. Defaults to the
-  repository's default branch.
-- `#dir=<path>` loads a kit from a subdirectory.
-- `git+ssh://` URLs also work, using your local SSH agent, Git credential
-  helpers, and `.netrc`.
-- Quote the URL in shells where `&` starts a background job.
-
-### OCI registry
-
-Launch a sandbox kit from an OCI registry:
-
-```console
-$ sbx run docker.io/sbx/droid-kit:latest
-```
-
-Pass an OCI-hosted mixin with `--kit`:
-
-```console
-$ sbx run claude --kit ghcr.io/myorg/my-kit:1.0
-```
-
-For Docker Hub, include the full `docker.io` prefix. See
-[Packaging and distribution](#packaging-and-distribution) for publishing.
-
-> [!IMPORTANT]
-> For Docker Hub, `sbx` reuses your `sbx login` session to pull private
-> kits. For other registries, store pull credentials with
-> [`sbx secret set --registry`](../configuration/credentials.md#registry-credentials)
-> before running the sandbox. These credentials take priority over credentials
-> in the Docker credential store:
->
-> ```console
-> $ gh auth token | sbx secret set --registry ghcr.io --password-stdin
-> ```
->
-> Without credentials from either store, pulls from non-Docker Hub registries
-> are anonymous and private kits fail to pull.
+For private registries, configure
+[Registry credentials](../configuration/credentials.md#registry-credentials).
+Include `docker.io/` explicitly for Docker Hub references.
 
 ### Restrict kit sources
 
-`sbx` restricts which sources a kit can install from. A kit's install
-commands run with root privileges inside the sandbox, so limiting where kits
-come from reduces supply-chain risk. By default, only kits hosted on Docker
-Hub (`docker.io/`) are allowed. Loading a kit from any other source fails:
-
-```console
-$ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale"
-ERROR: resolve kits: kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale" cannot be installed — its source is not in your allowlist.
-```
-
-To allow another publisher, add its host or host/path prefix to the
-`kit.allowedSources` setting. The setting replaces the whole list, so include
-the entries you want to keep:
+`kit.allowedSources` controls permitted remote kit sources. Its default permits
+Docker Hub. To include a Git publisher, set the complete list of prefixes you
+want to permit:
 
 ```console
 $ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
 ```
 
-Entries match as prefixes on a path-segment boundary, so `github.com/docker/`
-allows `github.com/docker/sbx-kits-contrib` but not `github.com/docker-evil/kit`.
-To remove the restriction and allow any remote source, set the list to
-`["*"]`. This isn't recommended.
-
-Installing from a local directory or ZIP file is governed separately by the
-`kit.allowLocalKits` setting, which defaults to `true`. Set it to `false` to
-require a remote source:
+Prefixes match at path-segment boundaries. Local source directories are
+controlled separately by `kit.allowLocalKits`, which defaults to `true`:
 
 ```console
 $ sbx settings set kit.allowLocalKits false
 ```
 
-For non-interactive use, both settings have environment-variable equivalents:
-`DOCKER_SANDBOXES_KIT_ALLOWED_SOURCES` and `DOCKER_SANDBOXES_KIT_ALLOW_LOCAL`.
+For non-interactive configuration, use `DOCKER_SANDBOXES_KIT_ALLOWED_SOURCES`
+and `DOCKER_SANDBOXES_KIT_ALLOW_LOCAL`.
 
-## Sign and verify kits
+### Sign and verify a published kit
 
-Use cosign-compatible Sigstore signatures to verify who approved a kit and
-that its signed content hasn't changed. Signing is keyless by default. Verify a
-keyless signature with the certificate identity and OpenID Connect (OIDC)
-issuer:
+Sign the OCI image after pushing it:
 
 ```console
-$ sbx kit sign ./my-kit/
-$ sbx kit verify \
-    --certificate-identity user@example.com \
-    --certificate-oidc-issuer https://accounts.google.com \
-    ./my-kit/
+$ sbx kit sign docker.io/<NAMESPACE>/my-kit:1.0.0
+$ sbx kit verify docker.io/<NAMESPACE>/my-kit:1.0.0 \
+    --certificate-identity <SIGNER_IDENTITY> \
+    --certificate-oidc-issuer <ISSUER_URL>
 ```
 
-For key-based signing, use an ECDSA P-256 key pair:
+These commands use Cosign-compatible Sigstore signatures. For keyless signing,
+verification must specify the signer's certificate identity and OpenID Connect
+issuer. For key-based signing, pass `--key cosign.key` to `sign` and
+`--key cosign.pub` to `verify`.
 
-```console
-$ sbx kit sign --key cosign.key ./my-kit/
-$ sbx kit verify --key cosign.pub ./my-kit/
-```
-
-For a local directory, `sbx kit sign` writes a `kit.sig.bundle` file next to
-`spec.yaml`. Commit this file so consumers can verify a kit loaded from the Git
-repository. For an OCI kit, the signature is stored as an OCI referrer. You can
-sign an OCI kit after pushing it, or push and sign it in one step:
-
-```console
-$ sbx kit push ./my-kit/ ghcr.io/myorg/my-kit:1.0 --sign
-```
-
-ZIP kits can't carry verifiable signatures.
-
-### Require signed kits
-
-Set a trusted signer policy for the identities or keys you trust before
-requiring signatures. Otherwise, `sbx` uses the default policy, which trusts
-Docker employee identities attested by Google's OpenID Connect issuer. A
-keyless policy must specify both the certificate identity and its OpenID
-Connect issuer:
+To require trusted signatures when loading kits, configure the trusted signer
+policy, then turn on the requirement:
 
 ```console
 $ sbx settings set kit.trustedSigners \
@@ -560,71 +472,26 @@ $ sbx settings set kit.trustedSigners \
 $ sbx settings set kit.requireSignature true
 ```
 
-To trust a key-based signature, set the policy to the public key path:
+V3 source directories and Git sources don't support the source-signing
+workflow. Publish and sign an OCI image when signatures are required.
 
-```console
-$ sbx settings set kit.trustedSigners '[{"key":"/path/to/cosign.pub"}]'
-$ sbx settings set kit.requireSignature true
-```
+## Published format
 
-When `kit.requireSignature` is `true`, `sbx` rejects unsigned kits, signatures
-that don't match `kit.trustedSigners`, and ZIP kits. This policy applies when a
-kit is loaded from a local directory, Git repository, or OCI registry.
+The image layers carry the workload filesystem or mixin overlay. The image
+config carries environment and launch settings. The manifest annotation
+`vnd.docker.runtime.kit.descriptor` carries the published descriptor as compact
+JSON. Build-time argument values are resolved in this descriptor; create-time
+values are resolved for each sandbox.
 
-The signature covers `spec.yaml` and the kit's `files/` content, but not mutable
-dependencies such as image tags or content downloaded by install and startup
-commands. Pin those dependencies by digest or checksum when they must remain
-immutable.
+Every kit also includes its published descriptor at
+`/usr/share/runtime/kit/<stem>/kit.yaml` and, when it has a recipe, that recipe
+at `kit.dockerfile` in the same directory. This makes the source declarations
+available for inspection inside the sandbox. Agent guidance supplied through
+`contentFile` is staged in the image and referenced by its published path.
 
-## Packaging and distribution
+Ordinary Docker image tools can inspect and distribute the image. Running a
+workload with `docker run` uses its image configuration, but doesn't apply the
+kit's capability declarations or lifecycle hooks. Use `sbx` for those runtime
+behaviors. A mixin is intended to be composed with a workload.
 
-The `sbx kit` subcommands validate, inspect, and publish kits:
-
-- `sbx kit validate <path>` — check that a kit directory or ZIP is
-  well-formed.
-- `sbx kit inspect <path>` — display kit details. Add `--json` for
-  machine-readable output.
-- `sbx kit pack <path> -o <file.zip>` — package a directory as a ZIP file
-  for sharing.
-- `sbx kit push <path> <ref>` — publish to an OCI registry (for example,
-  `ghcr.io/myorg/my-kit:1.0`).
-- `sbx kit pull <ref>` — download a kit from a registry as a ZIP file to
-  the working directory.
-
-For Docker Hub, include the full `docker.io` prefix — `sbx` doesn't add it
-automatically.
-
-For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
-`sbx login`. For other registries, they prefer credentials stored with
-[`sbx secret set --registry`](../configuration/credentials.md#registry-credentials).
-Both commands fall back to the Docker credential store, so credentials from
-`docker login` also work.
-
-## Spec reference
-
-For a field-by-field reference of every `spec.yaml` block — top-level
-fields, arguments, credentials, network, environment, setup, static files,
-agent instructions, and the sandbox block — see [Kit spec reference](kit-reference.md).
-
-## Debugging
-
-When a kit doesn't behave as expected, start with the network policy log
-and direct inspection inside the sandbox:
-
-- `sbx policy log` shows every outbound request the sandbox proxy saw,
-  the rule it matched, extra context when available, and its `PROXY`
-  value, such as `forward`, `forward-bypass`, `transparent`, or
-  `browser-open`. Use it to diagnose install-time download failures,
-  blocked domains, and unexpected TLS interception. If downloads fail or
-  arrive corrupted after you add a credential's `apiKey.inject`, check
-  whether an injection domain is too broad. Inject only on the hosts that
-  need credentials.
-- `sbx exec <sandbox> -- <cmd>` runs an arbitrary command inside an
-  existing sandbox. Useful for inspecting post-install state without
-  recreating: `which mytool`, `ls /home/agent/.local/bin/`,
-  `cat /home/agent/.config/...`, and so on.
-
-Install and startup command output is only emitted during `sbx run` or
-`sbx create`; `sbx` doesn't retain it for later inspection. To repeat
-setup with fresh output, remove and recreate the sandbox:
-`sbx rm <sandbox> && sbx run ...`.
+See the [Kit spec reference](kit-reference.md) for the descriptor schema.

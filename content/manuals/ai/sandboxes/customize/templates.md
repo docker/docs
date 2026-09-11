@@ -12,6 +12,11 @@ configure tools as they work, and those changes persist for the sandbox's
 lifetime. Templates capture a configured environment into a reusable image
 so you don't have to set it up again every time.
 
+A [v3 workload kit](kits.md#build-a-workload) can use a template as its
+Dockerfile base and build additional content as part of the kit. Use kits when
+you also need to distribute runtime declarations such as credentials, network
+access, or lifecycle hooks with the image.
+
 ## Custom templates
 
 Custom templates are reusable sandbox images that extend one of the built-in
@@ -29,7 +34,7 @@ ask the agent to install what's needed.
 > create new agent runtimes. The agent that launches inside the sandbox is
 > determined by the base image variant you extend and the agent you specify
 > in the `sbx run` command, not by binaries installed in the template. To
-> define a new agent from scratch, see [Kits](kits.md#define-an-agent).
+> define a new agent from scratch, see [Build an agent](build-an-agent.md).
 
 ### Base images
 
