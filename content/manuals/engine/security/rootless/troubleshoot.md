@@ -297,6 +297,8 @@ network namespace. Use `docker run -p` instead.
 This was an expected behavior until Docker Engine v29.5, as the daemon was namespaced inside RootlessKit's
 network namespace. Use `docker run -p` instead, or upgrade to Docker Engine v29.5 or later.
 
+**As of Docker Engine v29.5, `--net=host` correctly listens on the host network namespace.**
+
 #### Network is slow
 
 Docker with rootless mode uses a TCP/IP stack running in user mode, such as:
