@@ -55,9 +55,33 @@ To create a policy:
    **Add rule** for each rule. For MCP policies, enter Cedar statements in the
    policy editor. For syntax and examples, use the relevant access-control page
    in [Choose a policy type](#choose-a-policy-type).
+1. For a network policy, set **Require approval before access** if developers
+   should confirm each destination before a sandbox can reach it. See
+   [Require approval for a network policy](#require-approval-for-a-network-policy).
 
 Existing policies are listed with their name, scope, rule count, and last
 update. Use the action menu (⋮) to edit or delete a policy.
+
+### Require approval for a network policy
+
+Turning on **Require approval before access** means the destinations a network
+policy allows aren't reachable until the developer confirms each one. For how
+approval behaves and what satisfies it, see
+[Approval-required access](network.md#approval-required-access).
+
+To set it on an existing policy:
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your
+   organization.
+1. In the left-hand navigation, expand **AI Platform** and select
+   **Network access**.
+1. Select the policy, then choose **Edit**.
+1. Turn on **Require approval before access**.
+1. Select **Save changes**.
+
+The policy's detail page reports approval as **Required** or **Not required**.
+Editing a policy replaces it in full, so turning the setting off removes the
+requirement from every rule in that policy.
 
 ## Configure a support message
 
@@ -143,8 +167,11 @@ propagate to developer machines. To apply changes immediately, users can run
 organization policies on the next `sbx` command.
 
 > [!WARNING]
-> `sbx policy reset` deletes all locally configured policy rules. The command
-> prompts for confirmation before proceeding.
+> `sbx policy reset` deletes all locally configured policy rules, including any
+> destinations the developer has approved under an
+> [approval-required policy](network.md#approval-required-access). Those
+> destinations are requested again the next time a sandbox reaches them. The
+> command prompts for confirmation before proceeding.
 
 #### Enforcement timing by policy type
 
@@ -154,6 +181,11 @@ developer machine:
 - Network policy is evaluated on every outbound request. Once a policy
   change has synced to the developer's machine (up to 5 minutes), it applies
   immediately to subsequent requests.
+
+- An approval requirement applies from the point the policy change syncs.
+  Destinations a developer already approved stay reachable, because the
+  approval is recorded on the developer's machine. To withdraw one, add a deny
+  rule. A deny takes precedence over a recorded approval.
 
 - Filesystem policy is only checked when a workspace is mounted — that
   is, when a sandbox is created. Once a sandbox is running, changing the

@@ -37,6 +37,12 @@ share the same domain, either `network` or `filesystem`. MCP policies use Cedar
 statements written in the `MCP` namespace instead of the network and filesystem
 rule format.
 
+An organization network policy can also require approval, which turns every
+allow in that policy into a request the developer must confirm before access is
+granted. Approval is set on the policy rather than on individual rules, so it
+applies to all of the policy's allow rules at once. See
+[Approval-required access](access-controls/network.md#approval-required-access).
+
 ### Limits
 
 Organization policies have the following limits, which help ensure fair usage
@@ -189,6 +195,13 @@ team-scoped policy, which makes org-wide deny rules useful as guardrails.
 Local and kit-defined allow rules take no part in this evaluation. Deny rules
 from those sources do still apply. See [Precedence](#precedence).
 
+A request that an approval-required policy allows produces a third outcome.
+Rather than being allowed outright, it's held back until the developer confirms
+the destination, and the confirmation governs later requests to it. This holds
+even when another policy allows the same request without requiring approval. A
+matching deny still wins, so a denied destination is blocked without asking.
+See [Approval-required access](access-controls/network.md#approval-required-access).
+
 ## Precedence
 
 What applies depends on whether your organization has governance enabled:
@@ -218,6 +231,13 @@ top of organization policy is always a network deny. `sbx policy ls` hides
 inactive rules by default. See
 [Monitoring](monitor-and-enforce/monitoring.md#showing-inactive-rules) for how
 to list them.
+
+A local deny takes precedence over an organization approval requirement as
+well, so the request is blocked and no approval is requested. Rules that a
+developer gains by approving a request are the one exception to local allow
+rules being inactive, because they record an answer to the organization's own
+approval requirement rather than granting new access. See
+[Approval-required access](access-controls/network.md#approval-required-access).
 
 When organization governance is active, a user's organization policies are
 evaluated together, as described in [Rule evaluation](#rule-evaluation).
