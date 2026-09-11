@@ -14,7 +14,7 @@ storage driver only works on file systems formatted with NTFS.
 For most use cases, no configuration of the `windowsfilter` storage driver is
 necessary.
 
-The default storage limit for Docker Engine on Windows is 127GB. To use a
+The default storage limit for Docker Engine on Windows is 127 GB. To use a
 different storage size, set the `size` option for the `windowsfilter` storage
 driver. See [windowsfilter options](/reference/cli/dockerd.md#windowsfilter-options).
 
