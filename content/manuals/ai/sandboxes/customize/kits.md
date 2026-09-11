@@ -203,19 +203,26 @@ mixin set, choose another name or recreate the sandbox with the desired kits.
 
 ## Capabilities
 
-The OpenCode example uses three capabilities: network access, credentials,
-and agent instructions. Each entry in `capabilities` tells Docker Sandboxes
-what to provide when running the kit. Other capabilities cover behavior such
-as running setup commands or publishing a development server's port.
+A capability declares a resource or behavior that a kit needs from Docker
+Sandboxes at runtime, such as network access, credentials, lifecycle hooks,
+or agent instructions. Declare these requests in the descriptor's
+`capabilities` list.
 
 Workloads and mixins use the same capability format. For example, a workload
 can declare the network access its agent needs, and a mixin can request access
 to an additional service.
 
+Each entry's `type` identifies the capability and its settings version, and
+`config` contains those settings. For a complete descriptor using network,
+credential, and instruction capabilities, see the
+[OpenCode workload example](#build-a-workload). The
+[capability reference](kit-reference.md#runtime-capabilities) lists the
+available types, their fields, and Docker Sandboxes support.
+
 ### Control network access
 
-This mixin permits requests to the GitHub API. Save it as
-`github-access/github-access.yaml`:
+Use the network-policy capability to declare which domains a sandbox can
+reach. For example, this mixin permits requests to the GitHub API:
 
 ```yaml {title="github-access/github-access.yaml"}
 # syntax=docker/runtime-kit:3
@@ -229,11 +236,14 @@ capabilities:
         allow: [api.github.com]
 ```
 
-The entry's `type` names the capability, and `config` contains its settings.
-Here, `runtime.allow` lists a domain the running sandbox can reach.
+The type `com.docker.runtime/network-policy@1` selects version 1 of the
+network-policy settings. `runtime.allow` lists domains the running sandbox
+can reach.
 
 This kit needs only its YAML file: it configures network access without adding
-software or files to the image. Run it with the OpenCode workload:
+software or files to the image. Save the descriptor in `github-access` and
+run it with a v3 workload, such as the
+[OpenCode workload example](#build-a-workload):
 
 ```console
 $ sbx run ./opencode-python --name python-github --kit ./github-access
@@ -248,17 +258,12 @@ When organization governance is active, only organization allow rules grant
 access. Kit allow rules don't grant additional access, but kit deny rules
 still restrict it.
 
-The same pattern of `type` and `config` applies to other capabilities. Each
-type has its own settings; `@1` identifies the version of those settings.
-See [Runtime capabilities](kit-reference.md#runtime-capabilities) for the
-available types and their Docker Sandboxes support, including limits on
-required and optional requests.
-
 ### Authenticate to external services
 
 A credential capability names the service a kit needs and declares how to
-authenticate to it. The OpenCode example declares `service: anthropic`. Store
-its API key on the host using that service name:
+authenticate to it. The [OpenCode workload example](#build-a-workload)
+declares `service: anthropic`. Store its API key on the host using that
+service name:
 
 ```console
 $ sbx secret set anthropic
@@ -304,10 +309,9 @@ where that agent looks for them. See
 
 ## Build content and runtime setup
 
-The OpenCode example installs Ruff while building the kit. Every sandbox using
-that image starts with the tool available. Other setup needs information that
-exists only when a sandbox runs, such as the mounted workspace path or a
-host-provided credential.
+Build tools and static content into the kit's image so sandboxes can reuse
+them. Reserve runtime setup for work that needs an individual sandbox's
+state, such as its mounted workspace path or a host-provided credential.
 
 Use lifecycle hooks for that work. A hook is a command Docker Sandboxes runs
 at a particular point in the sandbox's life. Install hooks initialize each
@@ -402,9 +406,9 @@ of it because they can fail in non-interactive shells.
 
 ## Compose kits
 
-Selecting a workload and mixins with `sbx run` is enough to combine them. When
-a kit depends on another kit's tools, its descriptor can also declare that
-relationship.
+Composition combines one workload kit with its mixins. Select the kits
+when [creating a sandbox](#add-mixins). A kit's descriptor can also declare
+relationships with other kits, such as a dependency on a tool they supply.
 
 For example, a tool kit can advertise what it supplies:
 
@@ -495,9 +499,10 @@ sandbox state. Use credential capabilities for secrets. See
 
 ## Directory and build layout
 
-The OpenCode example uses two files with matching names. Kits can also include
-configuration, scripts, and instructions that the Dockerfile copies into the
-image. A larger directory might look like this:
+Keep a kit's descriptor, Dockerfile, and supporting files in one source
+directory. Use matching filename stems for the YAML descriptor and its
+companion Dockerfile so the build can discover the recipe. For a kit with
+instructions and a configuration file, the layout could be:
 
 ```text
 my-kit/
@@ -522,7 +527,8 @@ also keeps build and create argument scopes consistent.
 
 A workload needs a Dockerfile to supply its environment and launch command.
 A mixin needs one when it adds image content. A mixin that only declares
-runtime behavior, like the GitHub network example, can omit it.
+runtime behavior, such as the [GitHub network mixin](#control-network-access),
+can omit it.
 
 For a single-file kit, use `build: |` with literal Dockerfile text in the
 YAML. You can also select a differently named recipe with `dockerfile:` or
@@ -550,7 +556,13 @@ configuration.
 
 ## Packaging and distribution
 
-A published v3 kit is an OCI image. Use Docker Buildx to build and push it:
+Share kits as published images in a container registry or as source files in
+Git. Consumers can [run a kit](#run-a-kit) using either type of reference.
+
+### Publish an image
+
+A published v3 kit is an OCI image. Use Docker Buildx to build and push it,
+passing the descriptor with `-f` and the source directory as the build context:
 
 ```console
 $ docker login
@@ -558,13 +570,10 @@ $ docker buildx build ./my-kit -f ./my-kit/my-kit.yaml \
     -t docker.io/<NAMESPACE>/my-kit:1.0.0 --push
 ```
 
-For a workload, launch the published reference. For a mixin, pass it with
-`--kit`:
-
-```console
-$ sbx run docker.io/<NAMESPACE>/my-agent:1.0.0 \
-    --kit docker.io/<NAMESPACE>/my-kit:1.0.0 .
-```
+Replace `<NAMESPACE>` with a Docker Hub namespace you can push to. Buildx
+uses your `docker login` credentials. Include `docker.io/` explicitly in
+Docker Hub references. For pulling from private registries in a sandbox,
+configure [Registry credentials](../configuration/credentials.md#registry-credentials).
 
 Build for both supported Linux architectures when distributing across machines:
 
@@ -576,20 +585,20 @@ $ docker buildx build ./my-kit -f ./my-kit/my-kit.yaml \
 
 An image present only in the host Docker image store isn't available to the
 sandbox runtime by registry reference. Push it to a registry, or pass a local
-source directory to `sbx` for the build-and-run development loop. The
-`sbx kit pack`, `push`, and `pull` packaging commands belong to
-[Kits v2](kits-v2/_index.md#packaging-and-distribution).
+source directory to `sbx` for development. The `sbx kit pack`, `push`, and
+`pull` packaging commands belong to [Kits v2](kits-v2/_index.md#packaging-and-distribution).
 
-You can also share source through Git. Select the kit directory with `dir` and
-pin the source with `ref`:
+### Share source through Git
 
-```console
-$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-agent" .
+Commit the kit's source directory to a Git repository. Share a reference that
+identifies the kit directory with `dir` and pins a revision with `ref`:
+
+```text
+git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-kit
 ```
 
-For private registries, configure
-[Registry credentials](../configuration/credentials.md#registry-credentials).
-Include `docker.io/` explicitly for Docker Hub references.
+Docker Sandboxes builds the source when a consumer creates a sandbox from
+that reference.
 
 ### Restrict kit sources
 
@@ -641,7 +650,7 @@ workflow. Publish and sign an OCI image when signatures are required.
 
 ## Published format
 
-The image you publish contains both the kit's content and its descriptor.
+A published kit image contains both the kit's content and its descriptor.
 Docker image tools can inspect and distribute it, and Docker Sandboxes reads
 the descriptor when creating the sandbox.
 

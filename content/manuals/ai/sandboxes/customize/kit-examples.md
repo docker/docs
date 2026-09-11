@@ -15,17 +15,21 @@ weight: 40
 > repository.
 
 These schema v3 examples show how to add tools, configuration, and instructions
-to a workload. Each example includes the files needed to run it locally.
-Start with [Kits](kits.md) for the concepts and source layout. The examples
-here progress from a mixin with one YAML file to files, hooks, and tool builds.
+to a workload. Each section is a separate customization with its own kit files.
+The run commands use the [sample shell workload](#create-a-workload-for-the-examples)
+unless the example names another agent. Save mixin directories beside the
+workload directory and run the commands from their parent directory.
+
+For concepts and source layout, see [Kits](kits.md).
 For schema v2 patterns, see [Schema v2 kit examples](kits-v2/kit-examples.md).
 For field definitions, see the [Kit spec reference](kit-reference.md).
 
 ## Create a workload for the examples
 
-The mixins need a workload to run with. Create a `shell-v3` directory with
-these two files. The descriptor selects a shell workload and names `AGENTS.md`
-as the profile used by the agent-instructions example:
+This shell workload gives you an environment for inspecting files and running
+tools contributed by mixins. Create a `shell-v3` directory with these two
+files. The descriptor names `AGENTS.md` as the profile used by the
+[agent-instructions example](#contribute-agent-instructions):
 
 ```yaml {title="shell-v3/shell-v3.yaml"}
 # syntax=docker/runtime-kit:3
@@ -55,9 +59,9 @@ Run it from the parent directory, using your current directory as the workspace:
 $ sbx run --name kit-shell ./shell-v3 .
 ```
 
-Use this workload with the mixins that follow. Each example uses a different
-sandbox name because adding kits requires creating a sandbox. Schema v3
-mixins need a schema v3 workload. The built-in agent names use earlier kit
+Each example uses a different sandbox name because selecting a different kit
+set requires creating a sandbox. Schema v3 mixins need a schema v3 workload.
+The built-in agent names use earlier kit
 formats and can't be combined with these mixins.
 
 ## Contribute agent instructions
@@ -82,8 +86,9 @@ capabilities:
         project checks before reporting completion.
 ```
 
-The example shell workload chooses `AGENTS.md`. When you compose this mixin,
-`sbx` adds a kit entry to that profile and puts the instructions in a separate
+The [sample shell workload](#create-a-workload-for-the-examples) chooses
+`AGENTS.md`. When you compose this mixin, `sbx` adds a kit entry to that
+profile and puts the instructions in a separate
 file for the agent to read on demand. An agent workload can choose another
 profile, such as `CLAUDE.md`, and the same mixin contributes to that profile.
 
@@ -122,8 +127,9 @@ capabilities:
           mode: "0644"
 ```
 
-Create the `workspace-config` directory, save the descriptor, and supply the
-project name when creating the sandbox:
+Create the `workspace-config` directory and save the descriptor. Run it with
+the [sample shell workload](#create-a-workload-for-the-examples), supplying
+the project name as a kit argument:
 
 ```console
 $ sbx run --name kit-project ./shell-v3 --kit ./workspace-config \
@@ -161,6 +167,8 @@ capabilities:
           env: [WORKSPACE_DIR]
           description: Record each sandbox start
 ```
+
+Run the mixin with the [sample shell workload](#create-a-workload-for-the-examples):
 
 ```console
 $ sbx run --name kit-start-log ./shell-v3 --kit ./start-log .
@@ -233,7 +241,7 @@ capabilities:
           description: Copy team defaults into the workspace and home
 ```
 
-Run it with the example workload:
+Run it with the [sample shell workload](#create-a-workload-for-the-examples):
 
 ```console
 $ sbx run --name kit-team-config ./shell-v3 --kit ./team-config .
@@ -345,6 +353,8 @@ The install hook updates the workload's system trust store after the overlay
 is applied. Tools that use that trust store can then verify certificates
 signed by the internal CA.
 
+Run the mixin with the [sample shell workload](#create-a-workload-for-the-examples):
+
 ```console
 $ sbx run --name kit-ca ./shell-v3 --kit ./internal-ca .
 ```
@@ -393,6 +403,8 @@ declare a dependency on a compatible environment.
 There is no lifecycle install hook: the compiler and module downloads run
 when the kit is built. The resulting tool is available as soon as the
 composed filesystem is ready.
+
+Run the mixin with the [sample shell workload](#create-a-workload-for-the-examples):
 
 ```console
 $ sbx run --name kit-gojq ./shell-v3 --kit ./gojq .

@@ -223,8 +223,9 @@ COPY review-checklist.md /usr/local/share/team/review-checklist.md
 
 A comment descriptor can't also declare `build` or `dockerfile`.
 Dockerfile semantics apply to every recipe, including multi-stage builds and
-build mounts. For directory layouts, build commands, and static files, see
-[Kits](kits.md).
+build mounts. See [Directory and build layout](kits.md#directory-and-build-layout)
+for organizing source files, and
+[Packaging and distribution](kits.md#packaging-and-distribution) for build commands.
 
 ### Base image requirements
 
@@ -608,7 +609,8 @@ no recipe has a layer containing its descriptor.
 
 The published descriptor has a 512 KiB limit, with a build warning above
 64 KiB. Keep substantial instruction text in `contentFile` and other content
-in image layers. For image composition and distribution, see [Kits](kits.md).
+in image layers. See [Compose kits](kits.md#compose-kits) for combining images,
+and [Packaging and distribution](kits.md#packaging-and-distribution) for publishing them.
 
 ## Move from v2 to v3
 
