@@ -1,0 +1,48 @@
+{
+  "apis": [
+    {
+      "id": "hub",
+      "product": "hub",
+      "title": "Docker Hub",
+      "source": "content/reference/api/hub/latest.yaml",
+      "owner": "docker/docs",
+      "manual": "/manuals/docker-hub/",
+      "connection": "hosted",
+      "guides": ["/manuals/security/provisioning/scim/provision-scim.md"]
+    },
+    {
+      "id": "dvp",
+      "product": "dvp",
+      "title": "Publisher analytics",
+      "source": "content/reference/api/dvp/latest.yaml",
+      "owner": "docker/docs",
+      "manual": "/manuals/docker-hub/repos/manage/trusted-content/insights-analytics.md",
+      "connection": "hosted",
+      "guides": []
+    },
+    {
+      "id": "registry",
+      "product": "registry",
+      "title": "Registry",
+      "source": "content/reference/api/registry/latest.yaml",
+      "owner": "docker/docs",
+      "manual": "/manuals/docker-hub/repos/",
+      "connection": "hosted",
+      "guides": ["/reference/api/registry/auth.md"]
+    }
+  ],
+  "legacyAPIs": [
+    {
+      "title": "AI Governance",
+      "url": "/reference/api/ai-governance/",
+      "connection": "hosted",
+      "description": "Organization policy and access controls."
+    },
+    {
+      "title": "Docker Engine",
+      "url": "/reference/api/engine/",
+      "connection": "unix",
+      "description": "Manage containers, images, networks, and volumes."
+    }
+  ]
+}

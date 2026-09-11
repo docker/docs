@@ -12,6 +12,7 @@
   {{ partialCached "pagemeta.html" . . }}
   <hr />
 </div>
+{{ partial "api-reference/manual-link.html" . }}
 {{ .Content }}
 {{- if and (eq .Type "guides") (not .IsSection) (ne .CurrentSection .FirstSection) -}}
   {{- with .PrevInSection -}}
