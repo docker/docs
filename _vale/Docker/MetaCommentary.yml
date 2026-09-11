@@ -1,8 +1,0 @@
-extends: existence
-message: "Remove meta-commentary '%s' and state the information directly."
-ignorecase: true
-level: warning
-tokens:
-  - 'worth noting(?: that)?'
-  - 'important to (?:note|understand) that'
-  - 'keep in mind(?: that)?'

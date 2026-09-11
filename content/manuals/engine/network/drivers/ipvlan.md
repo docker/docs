@@ -286,7 +286,7 @@ An example being, NetOps provides VLAN ID and the associated subnets for VLANs
 being passed on the Ethernet link to the Docker host server. Those values are
 plugged into the `docker network create` commands when provisioning the
 Docker networks. These are persistent configurations that are applied every time
-the Docker engine starts which alleviates having to manage often complex
+Docker Engine starts which alleviates having to manage often complex
 configuration files. The network interfaces can also be managed manually by
 being pre-created and Docker networking will never modify them, and use them
 as parent interfaces. Example mappings from NetOps to Docker network commands

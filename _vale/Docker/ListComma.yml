@@ -1,5 +1,0 @@
-extends: existence
-message: Don’t add commas (,) or semicolons (;) to the ends of list items.
-level: warning
-scope: list
-raw: '[,;]$'
