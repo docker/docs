@@ -288,8 +288,8 @@ Without Compose Watch, every code change requires you to stop the stack, rebuild
    ```
 
    The `watch` block defines two rules:
-   - The `sync+restart` action watches your project directory (`.`) on the host. When a file changes, Compose copies any changed files into `/code` inside the running container, then restarts the container. Because the container restarts with the updated files already in place, Flask starts up reading the new code directly — no manual rebuild or restart needed. 
-   - The `rebuild` action on `requirements.txt` triggers a full image rebuild whenever you add a new dependency, since installing packages requires rebuilding the image, not just syncing files.
+   - The `sync+restart` action watches your project directory (`.`) on the host. When a source file changes, Compose copies it into `/code` in the container and restarts that service container so Flask reloads the code. This is a container restart, not an image rebuild — you should not need `docker compose build` for ordinary `app.py` edits.
+   - The `rebuild` action on `requirements.txt` rebuilds the image when dependencies change. Rebuild is for package installs, not for routine code edits.
    
 2. Start the stack with Watch enabled:
 
@@ -309,8 +309,8 @@ Without Compose Watch, every code change requires you to stop the stack, rebuild
    Syncing service "web" after changes were detected
    ```
 
-5. Refresh `http://localhost:8000`. The updated greeting appears without any restart
-   and the counter should still be incrementing.
+5. Wait for Compose to report the sync/restart, then refresh `http://localhost:8000`.
+   The updated greeting should appear. Redis keeps the counter across the container restart.
 
 6. Stop the stack before moving on:
 
