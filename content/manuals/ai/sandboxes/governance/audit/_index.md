@@ -80,4 +80,5 @@ Policy](https://www.docker.com/legal/privacy/).
 - [Configure audit delivery](configure.md)
 - [View and export audit events](view-export.md)
 - [SIEM forwarding](siem.md)
+- [Retrieve audit events with the API](api.md)
 - [Audit record reference](record-reference.md)
