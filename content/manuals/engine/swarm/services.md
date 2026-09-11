@@ -505,7 +505,7 @@ $ docker service create \
 ```
 
 You can reach the nginx server on port 8080 of every swarm node. If you add a
-node to the swarm, a nginx task is started on it. You cannot start another
+node to the swarm, an Nginx task is started on it. You cannot start another
 service or container on any swarm node which binds to port 8080.
 
 > [!NOTE]
