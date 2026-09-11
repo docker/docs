@@ -22,6 +22,12 @@ group "default" {
   targets = ["release"]
 }
 
+target "api-prototype" {
+  target = "api-prototype"
+  output = ["type=local,dest=tmp/api-prototype"]
+  provenance = false
+}
+
 target "index" {
   # generate a new local search index
   target = "index"

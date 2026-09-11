@@ -1,0 +1,5 @@
+# Keep the prototype implementation prominent in GitHub's diff view.
+original/** linguist-vendored
+dialects/** linguist-vendored
+converted/** linguist-generated
+migrations/** linguist-generated

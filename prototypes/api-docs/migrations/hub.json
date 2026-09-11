@@ -1,0 +1,2950 @@
+{
+  "api": "hub",
+  "source": {
+    "id": "hub",
+    "product": "hub",
+    "title": "Docker Hub",
+    "source": "content/reference/api/hub/latest.yaml",
+    "owner": "docker/docs (product authority to confirm)",
+    "manual": "/manuals/docker-hub/",
+    "connection": "hosted",
+    "auth": "Use the documented Hub token exchange. SCIM operations use a separate provisioning token.",
+    "guides": [
+      "/manuals/security/provisioning/scim/provision-scim.md"
+    ],
+    "sha256": "aeefa9b62b10d70f9e28e9508d5a4c1361e0a541e209ff0af9ed2544b0cb415e"
+  },
+  "convertedSha256": "66915bfe9d67576c323ad221a0d953bff47d4bc7625722a99515c58e04937517",
+  "profile": "docker-docs-prototype-1",
+  "changes": [
+    {
+      "pointer": "/jsonSchemaDialect",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "https://spec.openapis.org/oas/3.1/dialect/base",
+      "id": "hub-03ee85af235e",
+      "stage": "oas32-header",
+      "classification": "mechanical conversion",
+      "rationale": "Adopt the common OpenAPI version and its selected schema dialect.",
+      "evidence": "API-DOCUMENTATION-ARCHITECTURE.md S1",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/jsonSchemaDialect"
+    },
+    {
+      "pointer": "/openapi",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "3.0.3",
+      "after": "3.2.0",
+      "id": "hub-71377657b6ae",
+      "stage": "oas32-header",
+      "classification": "mechanical conversion",
+      "rationale": "Adopt the common OpenAPI version and its selected schema dialect.",
+      "evidence": "API-DOCUMENTATION-ARCHITECTURE.md S1",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/openapi",
+      "destinationPointer": "/openapi"
+    },
+    {
+      "pointer": "/components/schemas/PostUsers2FALoginErrorResponse/properties/detail/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": false,
+      "id": "hub-4a84441cce53",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/PostUsers2FALoginErrorResponse/properties/detail/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/PostUsersLoginErrorResponse/properties/detail/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": false,
+      "id": "hub-209f129099a9",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/PostUsersLoginErrorResponse/properties/detail/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/PostUsersLoginErrorResponse/properties/login_2fa_token/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-74ca1738d170",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/PostUsersLoginErrorResponse/properties/login_2fa_token/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/PostUsersLoginErrorResponse/properties/login_2fa_token/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-14920c5fdaca",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/PostUsersLoginErrorResponse/properties/login_2fa_token/type",
+      "destinationPointer": "/components/schemas/PostUsersLoginErrorResponse/properties/login_2fa_token/type"
+    },
+    {
+      "pointer": "/components/schemas/PostUsersLoginSuccessResponse/properties/token/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": false,
+      "id": "hub-f4382a2a3adb",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/PostUsersLoginSuccessResponse/properties/token/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/accessToken/properties/last_used/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-419d1bfbeeec",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/accessToken/properties/last_used/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/accessToken/properties/last_used/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-03403114b7b9",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/accessToken/properties/last_used/type",
+      "destinationPointer": "/components/schemas/accessToken/properties/last_used/type"
+    },
+    {
+      "pointer": "/components/schemas/createOrgAccessTokenRequest/properties/expires_at/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-25ea10e8d019",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/createOrgAccessTokenRequest/properties/expires_at/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/createOrgAccessTokenRequest/properties/expires_at/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-4251302b3c95",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/createOrgAccessTokenRequest/properties/expires_at/type",
+      "destinationPointer": "/components/schemas/createOrgAccessTokenRequest/properties/expires_at/type"
+    },
+    {
+      "pointer": "/components/schemas/createOrgAccessTokenResponse/allOf",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "a7a5ef25-8889-43a0-8cc7-f2a94268e861"
+            },
+            "label": {
+              "type": "string",
+              "example": "My organization token"
+            },
+            "is_active": {
+              "type": "boolean",
+              "example": true
+            },
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2022-05-20T00:54:18Z"
+            },
+            "expires_at": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-05-20T00:54:18Z",
+              "nullable": true
+            },
+            "last_used_at": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2022-06-15T12:30:45Z",
+              "nullable": true
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "description": "The actual token value that can be used for authentication",
+              "example": "dckr_oat_7awgM4jG5SQvxcvmNzhKj8PQjxo"
+            },
+            "resources": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/orgAccessTokenResource"
+              }
+            }
+          }
+        }
+      ],
+      "after": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "a7a5ef25-8889-43a0-8cc7-f2a94268e861"
+            },
+            "label": {
+              "type": "string",
+              "example": "My organization token"
+            },
+            "is_active": {
+              "type": "boolean",
+              "example": true
+            },
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2022-05-20T00:54:18Z"
+            },
+            "expires_at": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time",
+              "example": "2023-05-20T00:54:18Z"
+            },
+            "last_used_at": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time",
+              "example": "2022-06-15T12:30:45Z"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "description": "The actual token value that can be used for authentication",
+              "example": "dckr_oat_7awgM4jG5SQvxcvmNzhKj8PQjxo"
+            },
+            "resources": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/orgAccessTokenResource"
+              }
+            }
+          }
+        }
+      ],
+      "id": "hub-6c45e809bb08",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/createOrgAccessTokenResponse/allOf",
+      "destinationPointer": "/components/schemas/createOrgAccessTokenResponse/allOf"
+    },
+    {
+      "pointer": "/components/schemas/image/properties/digest/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-7b78462e893b",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/image/properties/digest/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/image/properties/digest/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-549328d76dcd",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/image/properties/digest/type",
+      "destinationPointer": "/components/schemas/image/properties/digest/type"
+    },
+    {
+      "pointer": "/components/schemas/image/properties/last_pulled/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-5499989516b9",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/image/properties/last_pulled/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/image/properties/last_pulled/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-443454d8717b",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/image/properties/last_pulled/type",
+      "destinationPointer": "/components/schemas/image/properties/last_pulled/type"
+    },
+    {
+      "pointer": "/components/schemas/image/properties/last_pushed/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-d2b5e9cbe250",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/image/properties/last_pushed/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/image/properties/last_pushed/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-f68167523b21",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/image/properties/last_pushed/type",
+      "destinationPointer": "/components/schemas/image/properties/last_pushed/type"
+    },
+    {
+      "pointer": "/components/schemas/layer/properties/digest/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-983b2bb794e8",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/layer/properties/digest/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/layer/properties/digest/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-3e1807d3a49e",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/layer/properties/digest/type",
+      "destinationPointer": "/components/schemas/layer/properties/digest/type"
+    },
+    {
+      "pointer": "/components/schemas/orgAccessToken/properties/expires_at/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-1dd2703f9cc7",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/orgAccessToken/properties/expires_at/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/orgAccessToken/properties/expires_at/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-e97055a90965",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/orgAccessToken/properties/expires_at/type",
+      "destinationPointer": "/components/schemas/orgAccessToken/properties/expires_at/type"
+    },
+    {
+      "pointer": "/components/schemas/orgAccessToken/properties/last_used_at/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-4770a0e1fc68",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/orgAccessToken/properties/last_used_at/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/orgAccessToken/properties/last_used_at/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-bcb75b8a4856",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/orgAccessToken/properties/last_used_at/type",
+      "destinationPointer": "/components/schemas/orgAccessToken/properties/last_used_at/type"
+    },
+    {
+      "pointer": "/components/schemas/page/properties/next/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-5f51929ee3be",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/page/properties/next/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/page/properties/next/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-1c9303e797fd",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/page/properties/next/type",
+      "destinationPointer": "/components/schemas/page/properties/next/type"
+    },
+    {
+      "pointer": "/components/schemas/page/properties/previous/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-f55371c00ee8",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/page/properties/previous/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/page/properties/previous/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-aaf9dcecb4e7",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/page/properties/previous/type",
+      "destinationPointer": "/components/schemas/page/properties/previous/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/affiliation/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-db0ca8c6118b",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/affiliation/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/affiliation/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-53c12223e744",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/affiliation/type",
+      "destinationPointer": "/components/schemas/repository_info/properties/affiliation/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/full_description/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-693d06466546",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/full_description/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/full_description/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-f2a62661a71f",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/full_description/type",
+      "destinationPointer": "/components/schemas/repository_info/properties/full_description/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/hub_user/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-586430b24161",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/hub_user/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/hub_user/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-8b002c0c2379",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/hub_user/type",
+      "destinationPointer": "/components/schemas/repository_info/properties/hub_user/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/last_modified/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-51ed4d2375e7",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/last_modified/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/last_modified/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-e3991fed6abd",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/last_modified/type",
+      "destinationPointer": "/components/schemas/repository_info/properties/last_modified/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/media_types/items/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-e5cd63f7e46b",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/media_types/items/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/media_types/items/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-d4542159a0cb",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/media_types/items/type",
+      "destinationPointer": "/components/schemas/repository_info/properties/media_types/items/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/repository_type/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-3ed558f36655",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/repository_type/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/repository_type/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-572974596a5e",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/repository_type/type",
+      "destinationPointer": "/components/schemas/repository_info/properties/repository_type/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/source/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-e33e16e370d0",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/source/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/source/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-8e2a47ca4188",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/source/type",
+      "destinationPointer": "/components/schemas/repository_info/properties/source/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/storage_size/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-a9dd6412fb55",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/storage_size/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_info/properties/storage_size/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "integer",
+      "after": [
+        "integer",
+        "null"
+      ],
+      "id": "hub-3cb15ac31d13",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_info/properties/storage_size/type",
+      "destinationPointer": "/components/schemas/repository_info/properties/storage_size/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_list_entry/properties/description/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-3433b42e6550",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_list_entry/properties/description/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_list_entry/properties/description/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-dda7391614bd",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_list_entry/properties/description/type",
+      "destinationPointer": "/components/schemas/repository_list_entry/properties/description/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_list_entry/properties/last_modified/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-bb137761a5e2",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_list_entry/properties/last_modified/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_list_entry/properties/last_modified/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-4de50800605e",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_list_entry/properties/last_modified/type",
+      "destinationPointer": "/components/schemas/repository_list_entry/properties/last_modified/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_list_entry/properties/last_updated/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-7048a5c0fa51",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_list_entry/properties/last_updated/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_list_entry/properties/last_updated/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-17edbfb92a97",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_list_entry/properties/last_updated/type",
+      "destinationPointer": "/components/schemas/repository_list_entry/properties/last_updated/type"
+    },
+    {
+      "pointer": "/components/schemas/repository_list_entry/properties/repository_type/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-d20310dd5ae2",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_list_entry/properties/repository_type/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/repository_list_entry/properties/repository_type/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-f86e7bbc38a4",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/repository_list_entry/properties/repository_type/type",
+      "destinationPointer": "/components/schemas/repository_list_entry/properties/repository_type/type"
+    },
+    {
+      "pointer": "/components/schemas/tag/properties/last_updated/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-68b24c8c5109",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/tag/properties/last_updated/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/tag/properties/last_updated/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-a26b67fb6339",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/tag/properties/last_updated/type",
+      "destinationPointer": "/components/schemas/tag/properties/last_updated/type"
+    },
+    {
+      "pointer": "/components/schemas/tag/properties/tag_last_pulled/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-cb1f15cd0a83",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/tag/properties/tag_last_pulled/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/tag/properties/tag_last_pulled/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-3709a230a429",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/tag/properties/tag_last_pulled/type",
+      "destinationPointer": "/components/schemas/tag/properties/tag_last_pulled/type"
+    },
+    {
+      "pointer": "/components/schemas/tag/properties/tag_last_pushed/nullable",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-689c7a489f31",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/tag/properties/tag_last_pushed/nullable",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/tag/properties/tag_last_pushed/type",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "string",
+      "after": [
+        "string",
+        "null"
+      ],
+      "id": "hub-aea53f482c72",
+      "stage": "oas30-schema-semantics",
+      "classification": "mechanical conversion",
+      "rationale": "Translate OpenAPI 3.0 nullable and exclusive bounds into JSON Schema constraints; preserve sibling assertions.",
+      "evidence": "OpenAPI 3.0 Schema Object and JSON Schema 2020-12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/tag/properties/tag_last_pushed/type",
+      "destinationPointer": "/components/schemas/tag/properties/tag_last_pushed/type"
+    },
+    {
+      "pointer": "/paths/~1v2~1access-tokens/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2AccessTokens",
+      "id": "hub-f8cbd35e78df",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1access-tokens/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1access-tokens/post/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "postV2AccessTokens",
+      "id": "hub-afd4cf26e093",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1access-tokens/post/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1access-tokens~1{uuid}/delete/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "deleteV2AccessTokensByUuid",
+      "id": "hub-4c342a5a6523",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1access-tokens~1{uuid}/delete/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1access-tokens~1{uuid}/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2AccessTokensByUuid",
+      "id": "hub-4fcb33e51e3d",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1access-tokens~1{uuid}/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1access-tokens~1{uuid}/patch/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "patchV2AccessTokensByUuid",
+      "id": "hub-00969ade81fd",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1access-tokens~1{uuid}/patch/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1invites~1bulk/post/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "postV2InvitesBulk",
+      "id": "hub-d346b6e45684",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1invites~1bulk/post/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1invites~1{id}/delete/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "deleteV2InvitesById",
+      "id": "hub-c81d9b7f93da",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1invites~1{id}/delete/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1invites~1{id}~1resend/patch/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "patchV2InvitesByIdResend",
+      "id": "hub-55feefec6ccc",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1invites~1{id}~1resend/patch/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/head/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "headV2NamespacesByNamespaceRepositoriesByRepositoryTags",
+      "id": "hub-6ec409f24610",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/head/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/head/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "headV2NamespacesByNamespaceRepositoriesByRepositoryTagsByTag",
+      "id": "hub-cd3fa54d0bec",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/head/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2OrgsByNameAccessTokens",
+      "id": "hub-86bc936786d2",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/post/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "postV2OrgsByNameAccessTokens",
+      "id": "hub-36afe9a3a367",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{name}~1access-tokens/post/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{name}~1settings/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2OrgsByNameSettings",
+      "id": "hub-fd160d644a0d",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{name}~1settings/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{name}~1settings/put/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "putV2OrgsByNameSettings",
+      "id": "hub-30c79dee6ea5",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{name}~1settings/put/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/delete/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "deleteV2OrgsByOrgNameAccessTokensByAccessTokenId",
+      "id": "hub-28cba8092f0d",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/delete/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2OrgsByOrgNameAccessTokensByAccessTokenId",
+      "id": "hub-ac00804f74e2",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/patch/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "patchV2OrgsByOrgNameAccessTokensByAccessTokenId",
+      "id": "hub-0143389a74a8",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1access-tokens~1{access_token_id}/patch/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2OrgsByOrgNameGroups",
+      "id": "hub-7aede6605aad",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/post/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "postV2OrgsByOrgNameGroups",
+      "id": "hub-2c5c68daf41b",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups/post/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/delete/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "deleteV2OrgsByOrgNameGroupsByGroupName",
+      "id": "hub-421de8c8e3f8",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/delete/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2OrgsByOrgNameGroupsByGroupName",
+      "id": "hub-9d2c9cff8fea",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "patchV2OrgsByOrgNameGroupsByGroupName",
+      "id": "hub-1a150e13f5c0",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "putV2OrgsByOrgNameGroupsByGroupName",
+      "id": "hub-b88a4cb28cdf",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2OrgsByOrgNameGroupsByGroupNameMembers",
+      "id": "hub-e630bef3c6ed",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "postV2OrgsByOrgNameGroupsByGroupNameMembers",
+      "id": "hub-f6571b90ccc1",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members~1{username}/delete/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "deleteV2OrgsByOrgNameGroupsByGroupNameMembersByUsername",
+      "id": "hub-751cc2434894",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members~1{username}/delete/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1invites/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2OrgsByOrgNameInvites",
+      "id": "hub-39565bc4387b",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1invites/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1members/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2OrgsByOrgNameMembers",
+      "id": "hub-7a816176b210",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1members/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1export/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2OrgsByOrgNameMembersExport",
+      "id": "hub-53f01d4baf21",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1members~1export/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/delete/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "deleteV2OrgsByOrgNameMembersByUsername",
+      "id": "hub-4fe305418a38",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/delete/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/put/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "putV2OrgsByOrgNameMembersByUsername",
+      "id": "hub-a33b621b26f7",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/put/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2Scim20ResourceTypes",
+      "id": "hub-f6e536e43752",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1ResourceTypes/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes~1{name}/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2Scim20ResourceTypesByName",
+      "id": "hub-5e3a1826a68f",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1ResourceTypes~1{name}/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Schemas/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2Scim20Schemas",
+      "id": "hub-78d7c72f266f",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Schemas/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Schemas~1{id}/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2Scim20SchemasById",
+      "id": "hub-98da271d89fe",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Schemas~1{id}/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1ServiceProviderConfig/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2Scim20ServiceProviderConfig",
+      "id": "hub-ad9109142d86",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1ServiceProviderConfig/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Users/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2Scim20Users",
+      "id": "hub-1de3a58d007a",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Users/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Users/post/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "postV2Scim20Users",
+      "id": "hub-5899924999f5",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Users/post/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/get/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "getV2Scim20UsersById",
+      "id": "hub-b9e1e6211828",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/get/operationId"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/operationId",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "putV2Scim20UsersById",
+      "id": "hub-f4368513b4a2",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/operationId"
+    },
+    {
+      "pointer": "/tags",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "name": "changelog",
+          "x-displayName": "Changelog",
+          "description": "See the [Changelog](/reference/api/hub/changelog) for a summary of changes across Docker Hub API versions.\n"
+        },
+        {
+          "name": "resources",
+          "x-displayName": "Resources",
+          "description": "The following resources are available to interact with the documented API:\n- [Docker Hub CLI tool](https://github.com/docker/hub-tool#readme) (currently experimental)\n"
+        },
+        {
+          "name": "rate-limiting",
+          "x-displayName": "Rate Limiting",
+          "description": "The Docker Hub API is limited on the amount of requests you can perform per minute against it.\n\nIf you haven't hit the limit, each request to the API will return the following headers in the response.\n\n- `X-RateLimit-Limit` - The limit of requests per minute.\n- `X-RateLimit-Remaining` - The remaining amount of calls within the limit period.\n- `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.\n\nIf you have hit the limit, you will receive a response status of `429` and the `Retry-After` header in the response.\n\nThe [`Retry-After` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) specifies the number of seconds to wait until you can call the API again.\n\n**Note**: These rate limits are separate from anti-abuse and Docker Hub download, or pull rate limiting.\nTo learn more about Docker Hub pull rate limiting, see [Usage and limits](https://docs.docker.com/docker-hub/usage/).\n"
+        },
+        {
+          "name": "authentication",
+          "x-displayName": "Authentication",
+          "description": "Most Docker Hub API endpoints require you to authenticate using your Docker credentials before using them.\n\nAdditionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your subscription (Personal, Pro, or Team) and your account's permissions.\n\nTo learn more about the features available in each subscription and to upgrade your existing subscription, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsApiHub).\n\n# Types\n\nThe Docker Hub API supports the following authentication types.\n\nYou must use each authentication type with the [Create access token](#tag/authentication-api/operation/AuthCreateAccessToken) route to obtain a bearer token.\n\n## Password\nUsing a username and password is the most powerful, yet least secure way \nto authenticate with Docker as a user. It allows access to resources \nfor the user without scopes. \n\n_In general, it is recommended to use a personal access token (PAT) instead._\n\n_**The password authentication type is not available if your organization has SSO enforced.**_\n\n## Personal Access Token (PAT)\nUsing a username and PAT is the most secure way to authenticate with \nDocker as a user. PATs are scoped to specific resources and scopes.\n\nCurrently, a PAT is a more secure password due to limited functionality. \nIn the future, we may add fine-grained access like organization \naccess tokens for enhanced usage and security.\n\n## Organization Access Token (OAT)\nOrganization access tokens are scoped to specific resources and scopes \nin an organization. They are managed by organization owners. \n\nThese tokens are meant for automation and are not meant to be used by \nusers.\n\n# Labels\n\nThese labels will show up on routes in this reference that allow for use of bearer \ntokens issued from them.\n\n<span class=\"pat\"></span>\n<span class=\"oat\"></span>\n"
+        },
+        {
+          "name": "authentication-api",
+          "x-displayName": "Authentication",
+          "description": "The authentication endpoints allow you to authenticate with Docker Hub APIs.\n\nFor more information, see [Authentication](#tag/authentication).\n"
+        },
+        {
+          "name": "access-tokens",
+          "x-displayName": "Personal Access Tokens",
+          "description": "The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/personal-access-tokens/).\n\nYou can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.\n\n### Scopes\n\nFor each scope grouping (in this case \"repo\"), you only need to define 1 scope as any lower scopes are assumed.\nFor example: If you define `repo:write`, the API assumes the scope of both `repo:read` *and* `repo:public_read` as well.\nIf you were to define both `repo:write` *and* `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.\n\n***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after it is generated.***\n"
+        },
+        {
+          "name": "audit-logs",
+          "x-displayName": "Audit Logs",
+          "description": "The Audit Logs API endpoints allow you to query audit log events across a namespace.\n\nFor more information, see [Audit Logs](https://docs.docker.com/admin/activity-logs/).\n"
+        },
+        {
+          "name": "org-settings",
+          "x-displayName": "Org Settings",
+          "description": "The Org Settings API endpoints allow you to manage your organization's settings.\n"
+        },
+        {
+          "name": "repositories",
+          "x-displayName": "Repositories",
+          "description": "The repository endpoints allow you to access your repository's tags.\n"
+        },
+        {
+          "name": "orgs",
+          "x-displayName": "Organizations",
+          "x-audience": "public",
+          "description": "The organization endpoints allow you to interact with and manage your organizations.\n\nFor more information, see [Organization administration overview](https://docs.docker.com/admin/organization/).\n"
+        },
+        {
+          "name": "groups",
+          "x-displayName": "Groups (Teams)",
+          "x-audience": "public",
+          "description": "The groups endpoints allow you to manage your organization's teams and their members.\n\nFor more information, see [Create and manage a team](https://docs.docker.com/admin/organization/manage/manage-a-team/).\n"
+        },
+        {
+          "name": "invites",
+          "x-displayName": "Invites",
+          "x-audience": "public",
+          "description": "The invites endpoints allow you to manage invites for users to join your Docker organization.\n\nFor more information, see [Invite members](https://docs.docker.com/admin/organization/manage/members/#invite-members).\n"
+        },
+        {
+          "name": "scim",
+          "x-displayName": "SCIM",
+          "x-audience": "public",
+          "description": "SCIM is a provisioning system that lets you manage users within your identity provider (IdP).\n\nFor more information, see [System for Cross-domain Identity management](https://docs.docker.com/security/for-admins/provisioning/scim/).\n"
+        },
+        {
+          "name": "org-access-tokens",
+          "x-displayName": "Organization Access Tokens",
+          "x-audience": "public",
+          "description": "The organization access token endpoints allow you to manage organization access tokens (OATs). See [Organization access tokens](https://docs.docker.com/security/for-admins/access-tokens/) for more information.\n\nOATs only authenticate requests to the modern namespace-scoped routes under `/v2/namespaces/{namespace}/repositories/`. Legacy repository paths are OAT unsupported, regardless of the token's scopes, and reject every OAT with `403 token issued from organization access token is not allowed`:\n\n- `GET /v2/repositories/{namespace}/{repository}` — use [Get repository](#tag/repositories/operation/GetRepository) instead.\n- `GET /v2/repositories/{namespace}` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.\n- `GET /v2/users/{username}/repositories` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.\n"
+        }
+      ],
+      "after": [
+        {
+          "name": "changelog",
+          "description": "See the [Changelog](/reference/api/hub/changelog) for a summary of changes across Docker Hub API versions.\n",
+          "summary": "Changelog",
+          "kind": "info"
+        },
+        {
+          "name": "resources",
+          "description": "The following resources are available to interact with the documented API:\n- [Docker Hub CLI tool](https://github.com/docker/hub-tool#readme) (currently experimental)\n",
+          "summary": "Resources",
+          "kind": "info"
+        },
+        {
+          "name": "rate-limiting",
+          "description": "The Docker Hub API is limited on the amount of requests you can perform per minute against it.\n\nIf you haven't hit the limit, each request to the API will return the following headers in the response.\n\n- `X-RateLimit-Limit` - The limit of requests per minute.\n- `X-RateLimit-Remaining` - The remaining amount of calls within the limit period.\n- `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.\n\nIf you have hit the limit, you will receive a response status of `429` and the `Retry-After` header in the response.\n\nThe [`Retry-After` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) specifies the number of seconds to wait until you can call the API again.\n\n**Note**: These rate limits are separate from anti-abuse and Docker Hub download, or pull rate limiting.\nTo learn more about Docker Hub pull rate limiting, see [Usage and limits](https://docs.docker.com/docker-hub/usage/).\n",
+          "summary": "Rate Limiting",
+          "kind": "info"
+        },
+        {
+          "name": "authentication",
+          "description": "Most Docker Hub API endpoints require you to authenticate using your Docker credentials before using them.\n\nAdditionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your subscription (Personal, Pro, or Team) and your account's permissions.\n\nTo learn more about the features available in each subscription and to upgrade your existing subscription, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsApiHub).\n\n# Types\n\nThe Docker Hub API supports the following authentication types.\n\nYou must use each authentication type with the [Create access token](#tag/authentication-api/operation/AuthCreateAccessToken) route to obtain a bearer token.\n\n## Password\nUsing a username and password is the most powerful, yet least secure way \nto authenticate with Docker as a user. It allows access to resources \nfor the user without scopes. \n\n_In general, it is recommended to use a personal access token (PAT) instead._\n\n_**The password authentication type is not available if your organization has SSO enforced.**_\n\n## Personal Access Token (PAT)\nUsing a username and PAT is the most secure way to authenticate with \nDocker as a user. PATs are scoped to specific resources and scopes.\n\nCurrently, a PAT is a more secure password due to limited functionality. \nIn the future, we may add fine-grained access like organization \naccess tokens for enhanced usage and security.\n\n## Organization Access Token (OAT)\nOrganization access tokens are scoped to specific resources and scopes \nin an organization. They are managed by organization owners. \n\nThese tokens are meant for automation and are not meant to be used by \nusers.\n\n# Labels\n\nThese labels will show up on routes in this reference that allow for use of bearer \ntokens issued from them.\n\n\n\n",
+          "summary": "Authentication",
+          "kind": "info"
+        },
+        {
+          "name": "authentication-api",
+          "description": "The authentication endpoints allow you to authenticate with Docker Hub APIs.\n\nFor more information, see [Authentication](#tag/authentication).\n",
+          "summary": "Authentication",
+          "kind": "nav"
+        },
+        {
+          "name": "access-tokens",
+          "description": "The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/personal-access-tokens/).\n\nYou can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.\n\n### Scopes\n\nFor each scope grouping (in this case \"repo\"), you only need to define 1 scope as any lower scopes are assumed.\nFor example: If you define `repo:write`, the API assumes the scope of both `repo:read` *and* `repo:public_read` as well.\nIf you were to define both `repo:write` *and* `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.\n\n***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after it is generated.***\n",
+          "summary": "Personal Access Tokens",
+          "kind": "nav"
+        },
+        {
+          "name": "audit-logs",
+          "description": "The Audit Logs API endpoints allow you to query audit log events across a namespace.\n\nFor more information, see [Audit Logs](https://docs.docker.com/admin/activity-logs/).\n",
+          "summary": "Audit Logs",
+          "kind": "nav"
+        },
+        {
+          "name": "org-settings",
+          "description": "The Org Settings API endpoints allow you to manage your organization's settings.\n",
+          "summary": "Org Settings",
+          "kind": "nav"
+        },
+        {
+          "name": "repositories",
+          "description": "The repository endpoints allow you to access your repository's tags.\n",
+          "summary": "Repositories",
+          "kind": "nav"
+        },
+        {
+          "name": "orgs",
+          "x-audience": "public",
+          "description": "The organization endpoints allow you to interact with and manage your organizations.\n\nFor more information, see [Organization administration overview](https://docs.docker.com/admin/organization/).\n",
+          "summary": "Organizations",
+          "kind": "nav"
+        },
+        {
+          "name": "groups",
+          "x-audience": "public",
+          "description": "The groups endpoints allow you to manage your organization's teams and their members.\n\nFor more information, see [Create and manage a team](https://docs.docker.com/admin/organization/manage/manage-a-team/).\n",
+          "summary": "Groups (Teams)",
+          "kind": "nav"
+        },
+        {
+          "name": "invites",
+          "x-audience": "public",
+          "description": "The invites endpoints allow you to manage invites for users to join your Docker organization.\n\nFor more information, see [Invite members](https://docs.docker.com/admin/organization/manage/members/#invite-members).\n",
+          "summary": "Invites",
+          "kind": "nav"
+        },
+        {
+          "name": "scim",
+          "x-audience": "public",
+          "description": "SCIM is a provisioning system that lets you manage users within your identity provider (IdP).\n\nFor more information, see [System for Cross-domain Identity management](https://docs.docker.com/security/for-admins/provisioning/scim/).\n",
+          "summary": "SCIM",
+          "kind": "nav"
+        },
+        {
+          "name": "org-access-tokens",
+          "x-audience": "public",
+          "description": "The organization access token endpoints allow you to manage organization access tokens (OATs). See [Organization access tokens](https://docs.docker.com/security/for-admins/access-tokens/) for more information.\n\nOATs only authenticate requests to the modern namespace-scoped routes under `/v2/namespaces/{namespace}/repositories/`. Legacy repository paths are OAT unsupported, regardless of the token's scopes, and reject every OAT with `403 token issued from organization access token is not allowed`:\n\n- `GET /v2/repositories/{namespace}/{repository}` — use [Get repository](#tag/repositories/operation/GetRepository) instead.\n- `GET /v2/repositories/{namespace}` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.\n- `GET /v2/users/{username}/repositories` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.\n",
+          "summary": "Organization Access Tokens",
+          "kind": "nav"
+        }
+      ],
+      "id": "hub-8d93cf25f3e7",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/tags",
+      "destinationPointer": "/tags"
+    },
+    {
+      "pointer": "/components/schemas/createOrgAccessTokenRequest/properties/label/required",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-56f5267c831d",
+      "stage": "property-required-correction",
+      "classification": "evidence-backed correction",
+      "rationale": "Move misplaced boolean property required flags to the parent required array; preserve the declared requiredness.",
+      "evidence": "Original property-level required: true declarations",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/createOrgAccessTokenRequest/properties/label/required",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/createOrgAccessTokenRequest/required",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": [
+        "label"
+      ],
+      "id": "hub-8f8f2dc78a3c",
+      "stage": "property-required-correction",
+      "classification": "evidence-backed correction",
+      "rationale": "Move misplaced boolean property required flags to the parent required array; preserve the declared requiredness.",
+      "evidence": "Original property-level required: true declarations",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/components/schemas/createOrgAccessTokenRequest/required"
+    },
+    {
+      "pointer": "/components/schemas/orgAccessTokenResource/properties/path/required",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-ef566a3ef04a",
+      "stage": "property-required-correction",
+      "classification": "evidence-backed correction",
+      "rationale": "Move misplaced boolean property required flags to the parent required array; preserve the declared requiredness.",
+      "evidence": "Original property-level required: true declarations",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/orgAccessTokenResource/properties/path/required",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/orgAccessTokenResource/properties/scopes/required",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-bc0d5d30d7e9",
+      "stage": "property-required-correction",
+      "classification": "evidence-backed correction",
+      "rationale": "Move misplaced boolean property required flags to the parent required array; preserve the declared requiredness.",
+      "evidence": "Original property-level required: true declarations",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/orgAccessTokenResource/properties/scopes/required",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/orgAccessTokenResource/properties/type/required",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": true,
+      "id": "hub-ea46f67c99f8",
+      "stage": "property-required-correction",
+      "classification": "evidence-backed correction",
+      "rationale": "Move misplaced boolean property required flags to the parent required array; preserve the declared requiredness.",
+      "evidence": "Original property-level required: true declarations",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/orgAccessTokenResource/properties/type/required",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/components/schemas/orgAccessTokenResource/required",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": [
+        "type",
+        "path",
+        "scopes"
+      ],
+      "id": "hub-60b71cffddb5",
+      "stage": "property-required-correction",
+      "classification": "evidence-backed correction",
+      "rationale": "Move misplaced boolean property required flags to the parent required array; preserve the declared requiredness.",
+      "evidence": "Original property-level required: true declarations",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/components/schemas/orgAccessTokenResource/required"
+    },
+    {
+      "pointer": "/paths/~1v2~1auditlogs~1{account}/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "List audit log events for a given namespace.\n\n<span class=\"oat\"></span>\n",
+      "after": "List audit log events for a given namespace.\n\n\n",
+      "id": "hub-cf10c2a6bb54",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1auditlogs~1{account}/get/description",
+      "destinationPointer": "/paths/~1v2~1auditlogs~1{account}/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1auditlogs~1{account}~1actions/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "List audit log actions for a namespace to be used as a filter for querying audit log events.\n\n<span class=\"oat\"></span>\n",
+      "after": "List audit log actions for a namespace to be used as a filter for querying audit log events.\n\n\n",
+      "id": "hub-37ef6ed3805f",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1auditlogs~1{account}~1actions/get/description",
+      "destinationPointer": "/paths/~1v2~1auditlogs~1{account}~1actions/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1invites~1bulk/post/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Create multiple invites by emails or DockerIDs. Only a team owner can create invites.\n\n<span class=\"oat\"></span>\n",
+      "after": "Create multiple invites by emails or DockerIDs. Only a team owner can create invites.\n\n\n",
+      "id": "hub-71965f574da9",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1invites~1bulk/post/description",
+      "destinationPointer": "/paths/~1v2~1invites~1bulk/post/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1invites~1{id}/delete/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Mark the invite as cancelled so it doesn't show up on the list of pending invites\n\n<span class=\"oat\"></span>\n",
+      "after": "Mark the invite as cancelled so it doesn't show up on the list of pending invites\n\n\n",
+      "id": "hub-711cffa504e9",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1invites~1{id}/delete/description",
+      "destinationPointer": "/paths/~1v2~1invites~1{id}/delete/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1invites~1{id}~1resend/patch/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Resend a pending invite to the user, any org owner can resend an invite\n\n<span class=\"oat\"></span>\n",
+      "after": "Resend a pending invite to the user, any org owner can resend an invite\n\n\n",
+      "id": "hub-d7aacf942e38",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1invites~1{id}~1resend/patch/description",
+      "destinationPointer": "/paths/~1v2~1invites~1{id}~1resend/patch/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Returns a list of repositories within the specified namespace (organization or user).\n\nPublic repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.\n\n<span class=\"oat\"></span>\n\n**OAT listing behavior**: an OAT with the `scope-repository-list` scope sees all repositories including private ones. An OAT without that scope only sees public repositories. This filtering is silent: the response is a normal `200` with no indication that private repositories were withheld.\n",
+      "after": "Returns a list of repositories within the specified namespace (organization or user).\n\nPublic repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.\n\n\n\n**OAT listing behavior**: an OAT with the `scope-repository-list` scope sees all repositories including private ones. An OAT without that scope only sees public repositories. This filtering is silent: the response is a normal `200` with no indication that private repositories were withheld.\n",
+      "id": "hub-8bce03fbb9e7",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/get/description",
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/post/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Creates a new repository within the specified namespace. The repository will be created\nwith the provided metadata including name, description, and privacy settings.\n\n<span class=\"oat\"></span>\n",
+      "after": "Creates a new repository within the specified namespace. The repository will be created\nwith the provided metadata including name, description, and privacy settings.\n\n\n",
+      "id": "hub-df5fa500573c",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/post/description",
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories/post/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Returns a repository within the specified namespace (organization or user).\n\nPublic repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.\n\n<span class=\"oat\"></span>\n",
+      "after": "Returns a repository within the specified namespace (organization or user).\n\nPublic repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.\n\n\n",
+      "id": "hub-c814561d26d7",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/get/description",
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/head/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Check a repository within the specified namespace (organization or user).\n\nPublic repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.\n\n<span class=\"oat\"></span>\n",
+      "after": "Check a repository within the specified namespace (organization or user).\n\nPublic repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.\n\n\n",
+      "id": "hub-758e684d0c26",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/head/description",
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/head/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags/patch/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Updates the immutable tags configuration for this repository.\n\n**Only users with administrative privileges for the repository can modify these settings.**\n\n<span class=\"oat\"></span>\n",
+      "after": "Updates the immutable tags configuration for this repository.\n\n**Only users with administrative privileges for the repository can modify these settings.**\n\n\n",
+      "id": "hub-4b6236e32079",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags/patch/description",
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags/patch/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags~1verify/post/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Validates the immutable tags regex passed in the request body and returns a list of tags matching it in this repository.\n\n**Only users with administrative privileges for the repository can call this endpoint.**\n\n<span class=\"oat\"></span>\n",
+      "after": "Validates the immutable tags regex passed in the request body and returns a list of tags matching it in this repository.\n\n**Only users with administrative privileges for the repository can call this endpoint.**\n\n\n",
+      "id": "hub-cddc6551a6fe",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags~1verify/post/description",
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1immutabletags~1verify/post/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Returns the list of tags for the specified repository.\n\n<span class=\"oat\"></span>\n",
+      "after": "Returns the list of tags for the specified repository.\n\n\n",
+      "id": "hub-7c829bae5c5b",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/get/description",
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/head/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Checks whether the repository has any tags.\n\n<span class=\"oat\"></span>\n",
+      "after": "Checks whether the repository has any tags.\n\n\n",
+      "id": "hub-ae31a1fd6c15",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/head/description",
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags/head/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Returns details for a specific tag in the specified repository.\n\n<span class=\"oat\"></span>\n",
+      "after": "Returns details for a specific tag in the specified repository.\n\n\n",
+      "id": "hub-1711bdf8c01b",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/get/description",
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/head/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Checks whether the specified tag exists in the repository.\n\n<span class=\"oat\"></span>\n",
+      "after": "Checks whether the specified tag exists in the repository.\n\n\n",
+      "id": "hub-ca9f4292d078",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/head/description",
+      "destinationPointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}~1tags~1{tag}/head/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "<span class=\"oat\"></span>\n",
+      "after": "\n",
+      "id": "hub-19258b60eb71",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/post/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Create a new group within an organization.\n\n<span class=\"oat\"></span>\n",
+      "after": "Create a new group within an organization.\n\n\n",
+      "id": "hub-491d43e3b974",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups/post/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups/post/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/delete/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "<span class=\"oat\"></span>\n",
+      "after": "\n",
+      "id": "hub-483cbb8b69e9",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/delete/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/delete/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "<span class=\"oat\"></span>\n",
+      "after": "\n",
+      "id": "hub-9f8a2c14c2e4",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "<span class=\"oat\"></span>\n",
+      "after": "\n",
+      "id": "hub-5d12989466a8",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "<span class=\"oat\"></span>\n",
+      "after": "\n",
+      "id": "hub-88797cb50eee",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "List the members (users) that are in a group.\nIf user is owner of the org or has otherwise elevated permissions, they can search by email and the result will also contain emails.\n\n<span class=\"oat\"></span>\n",
+      "after": "List the members (users) that are in a group.\nIf user is owner of the org or has otherwise elevated permissions, they can search by email and the result will also contain emails.\n\n\n",
+      "id": "hub-a969dea6c391",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/get/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "<span class=\"oat\"></span>\n",
+      "after": "\n",
+      "id": "hub-2392b3255468",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members~1{username}/delete/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "<span class=\"oat\"></span>\n",
+      "after": "\n",
+      "id": "hub-fb34d26a19a7",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members~1{username}/delete/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members~1{username}/delete/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1invites/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Return all pending invites for a given org, only team owners can call this endpoint\n\n<span class=\"oat\"></span>\n",
+      "after": "Return all pending invites for a given org, only team owners can call this endpoint\n\n\n",
+      "id": "hub-9e69ed836422",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1invites/get/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1invites/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1members/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Returns a list of members for an organization.\n\n_The following fields are only visible to orgs with insights enabled._\n\n- `last_logged_in_at`\n- `last_seen_at`\n- `last_desktop_version`\n\nTo make visible, please see [View Insights for organization users](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).\n\n<span class=\"oat\"></span>\n",
+      "after": "Returns a list of members for an organization.\n\n_The following fields are only visible to orgs with insights enabled._\n\n- `last_logged_in_at`\n- `last_seen_at`\n- `last_desktop_version`\n\nTo make visible, please see [View Insights for organization users](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).\n\n\n",
+      "id": "hub-a8f046f807cc",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1members/get/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1members/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1export/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Export members of an organization as a CSV\n\n<span class=\"oat\"></span>\n",
+      "after": "Export members of an organization as a CSV\n\n\n",
+      "id": "hub-ef7a52226e0d",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1members~1export/get/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1members~1export/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/delete/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Removes the member from the org, ie. all groups in the org, unless they're the last owner\n\n<span class=\"oat\"></span>\n",
+      "after": "Removes the member from the org, ie. all groups in the org, unless they're the last owner\n\n\n",
+      "id": "hub-a63ee0d1e822",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/delete/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/delete/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/put/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Updates the role of a member in the organization.\n***Only users in the \"owners\" group of the organization can use this endpoint.***\n\n<span class=\"oat\"></span>\n",
+      "after": "Updates the role of a member in the organization.\n***Only users in the \"owners\" group of the organization can use this endpoint.***\n\n\n",
+      "id": "hub-08bc49612a6e",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/put/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1members~1{username}/put/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1repositories~1{namespace}~1{repository}~1groups/post/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Assigns an organization group (team) to a repository with a specified permission level.\n\n<span class=\"oat\"></span>\n",
+      "after": "Assigns an organization group (team) to a repository with a specified permission level.\n\n\n",
+      "id": "hub-078a1d5f4794",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1repositories~1{namespace}~1{repository}~1groups/post/description",
+      "destinationPointer": "/paths/~1v2~1repositories~1{namespace}~1{repository}~1groups/post/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1users~1login/post/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.\n\nThe returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.\n\n_**As of September 16, 2024, this route requires a personal access token (PAT) instead of a password if your organization has SSO enforced.**_\n\n<div style=\"background-color:rgb(255, 165, 0, .25); padding:5px; border-radius:4px\">\n  <strong>Deprecated</strong>: Use [<a href=\"#tag/authentication-api/operation/AuthCreateAccessToken\">Create access token</a>] instead.\n</div>\n",
+      "after": "Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.\n\nThe returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.\n\n_**As of September 16, 2024, this route requires a personal access token (PAT) instead of a password if your organization has SSO enforced.**_\n\n\n  Deprecated: Use [Create access token](#tag/authentication-api/operation/AuthCreateAccessToken) instead.\n\n",
+      "id": "hub-d071d281f6bc",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1users~1login/post/description",
+      "destinationPointer": "/paths/~1v2~1users~1login/post/description"
+    },
+    {
+      "pointer": "/tags",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "name": "changelog",
+          "description": "See the [Changelog](/reference/api/hub/changelog) for a summary of changes across Docker Hub API versions.\n",
+          "summary": "Changelog",
+          "kind": "info"
+        },
+        {
+          "name": "resources",
+          "description": "The following resources are available to interact with the documented API:\n- [Docker Hub CLI tool](https://github.com/docker/hub-tool#readme) (currently experimental)\n",
+          "summary": "Resources",
+          "kind": "info"
+        },
+        {
+          "name": "rate-limiting",
+          "description": "The Docker Hub API is limited on the amount of requests you can perform per minute against it.\n\nIf you haven't hit the limit, each request to the API will return the following headers in the response.\n\n- `X-RateLimit-Limit` - The limit of requests per minute.\n- `X-RateLimit-Remaining` - The remaining amount of calls within the limit period.\n- `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.\n\nIf you have hit the limit, you will receive a response status of `429` and the `Retry-After` header in the response.\n\nThe [`Retry-After` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) specifies the number of seconds to wait until you can call the API again.\n\n**Note**: These rate limits are separate from anti-abuse and Docker Hub download, or pull rate limiting.\nTo learn more about Docker Hub pull rate limiting, see [Usage and limits](https://docs.docker.com/docker-hub/usage/).\n",
+          "summary": "Rate Limiting",
+          "kind": "info"
+        },
+        {
+          "name": "authentication",
+          "description": "Most Docker Hub API endpoints require you to authenticate using your Docker credentials before using them.\n\nAdditionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your subscription (Personal, Pro, or Team) and your account's permissions.\n\nTo learn more about the features available in each subscription and to upgrade your existing subscription, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsApiHub).\n\n# Types\n\nThe Docker Hub API supports the following authentication types.\n\nYou must use each authentication type with the [Create access token](#tag/authentication-api/operation/AuthCreateAccessToken) route to obtain a bearer token.\n\n## Password\nUsing a username and password is the most powerful, yet least secure way \nto authenticate with Docker as a user. It allows access to resources \nfor the user without scopes. \n\n_In general, it is recommended to use a personal access token (PAT) instead._\n\n_**The password authentication type is not available if your organization has SSO enforced.**_\n\n## Personal Access Token (PAT)\nUsing a username and PAT is the most secure way to authenticate with \nDocker as a user. PATs are scoped to specific resources and scopes.\n\nCurrently, a PAT is a more secure password due to limited functionality. \nIn the future, we may add fine-grained access like organization \naccess tokens for enhanced usage and security.\n\n## Organization Access Token (OAT)\nOrganization access tokens are scoped to specific resources and scopes \nin an organization. They are managed by organization owners. \n\nThese tokens are meant for automation and are not meant to be used by \nusers.\n\n# Labels\n\nThese labels will show up on routes in this reference that allow for use of bearer \ntokens issued from them.\n\n<span class=\"pat\"></span>\n<span class=\"oat\"></span>\n",
+          "summary": "Authentication",
+          "kind": "info"
+        },
+        {
+          "name": "authentication-api",
+          "description": "The authentication endpoints allow you to authenticate with Docker Hub APIs.\n\nFor more information, see [Authentication](#tag/authentication).\n",
+          "summary": "Authentication",
+          "kind": "nav"
+        },
+        {
+          "name": "access-tokens",
+          "description": "The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/personal-access-tokens/).\n\nYou can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.\n\n### Scopes\n\nFor each scope grouping (in this case \"repo\"), you only need to define 1 scope as any lower scopes are assumed.\nFor example: If you define `repo:write`, the API assumes the scope of both `repo:read` *and* `repo:public_read` as well.\nIf you were to define both `repo:write` *and* `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.\n\n***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after it is generated.***\n",
+          "summary": "Personal Access Tokens",
+          "kind": "nav"
+        },
+        {
+          "name": "audit-logs",
+          "description": "The Audit Logs API endpoints allow you to query audit log events across a namespace.\n\nFor more information, see [Audit Logs](https://docs.docker.com/admin/activity-logs/).\n",
+          "summary": "Audit Logs",
+          "kind": "nav"
+        },
+        {
+          "name": "org-settings",
+          "description": "The Org Settings API endpoints allow you to manage your organization's settings.\n",
+          "summary": "Org Settings",
+          "kind": "nav"
+        },
+        {
+          "name": "repositories",
+          "description": "The repository endpoints allow you to access your repository's tags.\n",
+          "summary": "Repositories",
+          "kind": "nav"
+        },
+        {
+          "name": "orgs",
+          "x-audience": "public",
+          "description": "The organization endpoints allow you to interact with and manage your organizations.\n\nFor more information, see [Organization administration overview](https://docs.docker.com/admin/organization/).\n",
+          "summary": "Organizations",
+          "kind": "nav"
+        },
+        {
+          "name": "groups",
+          "x-audience": "public",
+          "description": "The groups endpoints allow you to manage your organization's teams and their members.\n\nFor more information, see [Create and manage a team](https://docs.docker.com/admin/organization/manage/manage-a-team/).\n",
+          "summary": "Groups (Teams)",
+          "kind": "nav"
+        },
+        {
+          "name": "invites",
+          "x-audience": "public",
+          "description": "The invites endpoints allow you to manage invites for users to join your Docker organization.\n\nFor more information, see [Invite members](https://docs.docker.com/admin/organization/manage/members/#invite-members).\n",
+          "summary": "Invites",
+          "kind": "nav"
+        },
+        {
+          "name": "scim",
+          "x-audience": "public",
+          "description": "SCIM is a provisioning system that lets you manage users within your identity provider (IdP).\n\nFor more information, see [System for Cross-domain Identity management](https://docs.docker.com/security/for-admins/provisioning/scim/).\n",
+          "summary": "SCIM",
+          "kind": "nav"
+        },
+        {
+          "name": "org-access-tokens",
+          "x-audience": "public",
+          "description": "The organization access token endpoints allow you to manage organization access tokens (OATs). See [Organization access tokens](https://docs.docker.com/security/for-admins/access-tokens/) for more information.\n\nOATs only authenticate requests to the modern namespace-scoped routes under `/v2/namespaces/{namespace}/repositories/`. Legacy repository paths are OAT unsupported, regardless of the token's scopes, and reject every OAT with `403 token issued from organization access token is not allowed`:\n\n- `GET /v2/repositories/{namespace}/{repository}` — use [Get repository](#tag/repositories/operation/GetRepository) instead.\n- `GET /v2/repositories/{namespace}` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.\n- `GET /v2/users/{username}/repositories` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.\n",
+          "summary": "Organization Access Tokens",
+          "kind": "nav"
+        }
+      ],
+      "after": [
+        {
+          "name": "changelog",
+          "description": "See the [Changelog](/reference/api/hub/changelog) for a summary of changes across Docker Hub API versions.\n",
+          "summary": "Changelog",
+          "kind": "info"
+        },
+        {
+          "name": "resources",
+          "description": "The following resources are available to interact with the documented API:\n- [Docker Hub CLI tool](https://github.com/docker/hub-tool#readme) (currently experimental)\n",
+          "summary": "Resources",
+          "kind": "info"
+        },
+        {
+          "name": "rate-limiting",
+          "description": "The Docker Hub API is limited on the amount of requests you can perform per minute against it.\n\nIf you haven't hit the limit, each request to the API will return the following headers in the response.\n\n- `X-RateLimit-Limit` - The limit of requests per minute.\n- `X-RateLimit-Remaining` - The remaining amount of calls within the limit period.\n- `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.\n\nIf you have hit the limit, you will receive a response status of `429` and the `Retry-After` header in the response.\n\nThe [`Retry-After` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) specifies the number of seconds to wait until you can call the API again.\n\n**Note**: These rate limits are separate from anti-abuse and Docker Hub download, or pull rate limiting.\nTo learn more about Docker Hub pull rate limiting, see [Usage and limits](https://docs.docker.com/docker-hub/usage/).\n",
+          "summary": "Rate Limiting",
+          "kind": "info"
+        },
+        {
+          "name": "authentication",
+          "description": "Most Docker Hub API endpoints require you to authenticate using your Docker credentials before using them.\n\nAdditionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your subscription (Personal, Pro, or Team) and your account's permissions.\n\nTo learn more about the features available in each subscription and to upgrade your existing subscription, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsApiHub).\n\n# Types\n\nThe Docker Hub API supports the following authentication types.\n\nYou must use each authentication type with the [Create access token](#tag/authentication-api/operation/AuthCreateAccessToken) route to obtain a bearer token.\n\n## Password\nUsing a username and password is the most powerful, yet least secure way \nto authenticate with Docker as a user. It allows access to resources \nfor the user without scopes. \n\n_In general, it is recommended to use a personal access token (PAT) instead._\n\n_**The password authentication type is not available if your organization has SSO enforced.**_\n\n## Personal Access Token (PAT)\nUsing a username and PAT is the most secure way to authenticate with \nDocker as a user. PATs are scoped to specific resources and scopes.\n\nCurrently, a PAT is a more secure password due to limited functionality. \nIn the future, we may add fine-grained access like organization \naccess tokens for enhanced usage and security.\n\n## Organization Access Token (OAT)\nOrganization access tokens are scoped to specific resources and scopes \nin an organization. They are managed by organization owners. \n\nThese tokens are meant for automation and are not meant to be used by \nusers.\n\n# Labels\n\nThese labels will show up on routes in this reference that allow for use of bearer \ntokens issued from them.\n\n\n\n",
+          "summary": "Authentication",
+          "kind": "info"
+        },
+        {
+          "name": "authentication-api",
+          "description": "The authentication endpoints allow you to authenticate with Docker Hub APIs.\n\nFor more information, see [Authentication](#tag/authentication).\n",
+          "summary": "Authentication",
+          "kind": "nav"
+        },
+        {
+          "name": "access-tokens",
+          "description": "The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/personal-access-tokens/).\n\nYou can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.\n\n### Scopes\n\nFor each scope grouping (in this case \"repo\"), you only need to define 1 scope as any lower scopes are assumed.\nFor example: If you define `repo:write`, the API assumes the scope of both `repo:read` *and* `repo:public_read` as well.\nIf you were to define both `repo:write` *and* `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.\n\n***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after it is generated.***\n",
+          "summary": "Personal Access Tokens",
+          "kind": "nav"
+        },
+        {
+          "name": "audit-logs",
+          "description": "The Audit Logs API endpoints allow you to query audit log events across a namespace.\n\nFor more information, see [Audit Logs](https://docs.docker.com/admin/activity-logs/).\n",
+          "summary": "Audit Logs",
+          "kind": "nav"
+        },
+        {
+          "name": "org-settings",
+          "description": "The Org Settings API endpoints allow you to manage your organization's settings.\n",
+          "summary": "Org Settings",
+          "kind": "nav"
+        },
+        {
+          "name": "repositories",
+          "description": "The repository endpoints allow you to access your repository's tags.\n",
+          "summary": "Repositories",
+          "kind": "nav"
+        },
+        {
+          "name": "orgs",
+          "x-audience": "public",
+          "description": "The organization endpoints allow you to interact with and manage your organizations.\n\nFor more information, see [Organization administration overview](https://docs.docker.com/admin/organization/).\n",
+          "summary": "Organizations",
+          "kind": "nav"
+        },
+        {
+          "name": "groups",
+          "x-audience": "public",
+          "description": "The groups endpoints allow you to manage your organization's teams and their members.\n\nFor more information, see [Create and manage a team](https://docs.docker.com/admin/organization/manage/manage-a-team/).\n",
+          "summary": "Groups (Teams)",
+          "kind": "nav"
+        },
+        {
+          "name": "invites",
+          "x-audience": "public",
+          "description": "The invites endpoints allow you to manage invites for users to join your Docker organization.\n\nFor more information, see [Invite members](https://docs.docker.com/admin/organization/manage/members/#invite-members).\n",
+          "summary": "Invites",
+          "kind": "nav"
+        },
+        {
+          "name": "scim",
+          "x-audience": "public",
+          "description": "SCIM is a provisioning system that lets you manage users within your identity provider (IdP).\n\nFor more information, see [System for Cross-domain Identity management](https://docs.docker.com/security/for-admins/provisioning/scim/).\n",
+          "summary": "SCIM",
+          "kind": "nav"
+        },
+        {
+          "name": "org-access-tokens",
+          "x-audience": "public",
+          "description": "The organization access token endpoints allow you to manage organization access tokens (OATs). See [Organization access tokens](https://docs.docker.com/security/for-admins/access-tokens/) for more information.\n\nOATs only authenticate requests to the modern namespace-scoped routes under `/v2/namespaces/{namespace}/repositories/`. Legacy repository paths are OAT unsupported, regardless of the token's scopes, and reject every OAT with `403 token issued from organization access token is not allowed`:\n\n- `GET /v2/repositories/{namespace}/{repository}` — use [Get repository](#tag/repositories/operation/GetRepository) instead.\n- `GET /v2/repositories/{namespace}` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.\n- `GET /v2/users/{username}/repositories` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.\n",
+          "summary": "Organization Access Tokens",
+          "kind": "nav"
+        }
+      ],
+      "id": "hub-8c67a3d8bd5a",
+      "stage": "portable-descriptions",
+      "classification": "editorial completion",
+      "rationale": "Remove renderer-only badges/HTML presentation, retaining their text and Markdown links.",
+      "evidence": "Docker profile S12",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/tags",
+      "destinationPointer": "/tags"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "\n",
+      "after": "Get groups of an organization.",
+      "id": "hub-e81c4f02da4d",
+      "stage": "empty-description-completion",
+      "classification": "editorial completion",
+      "rationale": "Replace descriptions that contained only presentation markup with the existing operation summary.",
+      "evidence": "Existing operation summary",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/delete/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "\n",
+      "after": "Delete an organization group.",
+      "id": "hub-90d2bf1f1840",
+      "stage": "empty-description-completion",
+      "classification": "editorial completion",
+      "rationale": "Replace descriptions that contained only presentation markup with the existing operation summary.",
+      "evidence": "Existing operation summary",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/delete/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/delete/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "\n",
+      "after": "Get a group of an organization.",
+      "id": "hub-3984c74c1439",
+      "stage": "empty-description-completion",
+      "classification": "editorial completion",
+      "rationale": "Replace descriptions that contained only presentation markup with the existing operation summary.",
+      "evidence": "Existing operation summary",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/get/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "\n",
+      "after": "Update some details for an organization group.",
+      "id": "hub-14585f035f98",
+      "stage": "empty-description-completion",
+      "classification": "editorial completion",
+      "rationale": "Replace descriptions that contained only presentation markup with the existing operation summary.",
+      "evidence": "Existing operation summary",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/patch/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "\n",
+      "after": "Update the details for an organization group.",
+      "id": "hub-2d209be6dab1",
+      "stage": "empty-description-completion",
+      "classification": "editorial completion",
+      "rationale": "Replace descriptions that contained only presentation markup with the existing operation summary.",
+      "evidence": "Existing operation summary",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}/put/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "\n",
+      "after": "Add a member to a group.",
+      "id": "hub-428a2404142d",
+      "stage": "empty-description-completion",
+      "classification": "editorial completion",
+      "rationale": "Replace descriptions that contained only presentation markup with the existing operation summary.",
+      "evidence": "Existing operation summary",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members/post/description"
+    },
+    {
+      "pointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members~1{username}/delete/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "\n",
+      "after": "Remove a user from a group.",
+      "id": "hub-50aea6b744b0",
+      "stage": "empty-description-completion",
+      "classification": "editorial completion",
+      "rationale": "Replace descriptions that contained only presentation markup with the existing operation summary.",
+      "evidence": "Existing operation summary",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members~1{username}/delete/description",
+      "destinationPointer": "/paths/~1v2~1orgs~1{org_name}~1groups~1{group_name}~1members~1{username}/delete/description"
+    },
+    {
+      "pointer": "/components/schemas/team_repo/allOf",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "$ref": "#/components/responses/team_repo"
+        }
+      ],
+      "after": [
+        {
+          "$ref": "#/components/schemas/repository_info"
+        }
+      ],
+      "id": "hub-f335bd60404f",
+      "stage": "hub-team-schema-assumption",
+      "classification": "provisional assumption",
+      "rationale": "Replace the missing response reference with the existing repository schema, the likely base of a team repository. Product owner must verify returned fields.",
+      "evidence": "components.schemas.team_repo and existing repository response definition",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/components/schemas/team_repo/allOf",
+      "destinationPointer": "/components/schemas/team_repo/allOf"
+    },
+    {
+      "pointer": "/components/securitySchemes/scimToken",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Use the SCIM provisioning token configured for the organization."
+      },
+      "id": "hub-9809789ee63e",
+      "stage": "scim-auth-context",
+      "classification": "evidence-backed correction",
+      "rationale": "Declare the separate provisioning token for SCIM operations instead of inheriting Hub credential exchange guidance.",
+      "evidence": "content/manuals/security/provisioning/scim/provision-scim.md",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/components/securitySchemes/scimToken"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes/get/security",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "bearerSCIMAuth": []
+        }
+      ],
+      "after": [
+        {
+          "scimToken": []
+        }
+      ],
+      "id": "hub-8f39ee63e16c",
+      "stage": "scim-auth-context",
+      "classification": "evidence-backed correction",
+      "rationale": "Declare the separate provisioning token for SCIM operations instead of inheriting Hub credential exchange guidance.",
+      "evidence": "content/manuals/security/provisioning/scim/provision-scim.md",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1scim~12.0~1ResourceTypes/get/security",
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1ResourceTypes/get/security"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1ResourceTypes~1{name}/get/security",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "bearerSCIMAuth": []
+        }
+      ],
+      "after": [
+        {
+          "scimToken": []
+        }
+      ],
+      "id": "hub-03dc3581d4c0",
+      "stage": "scim-auth-context",
+      "classification": "evidence-backed correction",
+      "rationale": "Declare the separate provisioning token for SCIM operations instead of inheriting Hub credential exchange guidance.",
+      "evidence": "content/manuals/security/provisioning/scim/provision-scim.md",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1scim~12.0~1ResourceTypes~1{name}/get/security",
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1ResourceTypes~1{name}/get/security"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Schemas/get/security",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "bearerSCIMAuth": []
+        }
+      ],
+      "after": [
+        {
+          "scimToken": []
+        }
+      ],
+      "id": "hub-5a6d51f54bbf",
+      "stage": "scim-auth-context",
+      "classification": "evidence-backed correction",
+      "rationale": "Declare the separate provisioning token for SCIM operations instead of inheriting Hub credential exchange guidance.",
+      "evidence": "content/manuals/security/provisioning/scim/provision-scim.md",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1scim~12.0~1Schemas/get/security",
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Schemas/get/security"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Schemas~1{id}/get/security",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "bearerSCIMAuth": []
+        }
+      ],
+      "after": [
+        {
+          "scimToken": []
+        }
+      ],
+      "id": "hub-e2bd8446c1d5",
+      "stage": "scim-auth-context",
+      "classification": "evidence-backed correction",
+      "rationale": "Declare the separate provisioning token for SCIM operations instead of inheriting Hub credential exchange guidance.",
+      "evidence": "content/manuals/security/provisioning/scim/provision-scim.md",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1scim~12.0~1Schemas~1{id}/get/security",
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Schemas~1{id}/get/security"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1ServiceProviderConfig/get/security",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "bearerSCIMAuth": []
+        }
+      ],
+      "after": [
+        {
+          "scimToken": []
+        }
+      ],
+      "id": "hub-4b8fdeb71056",
+      "stage": "scim-auth-context",
+      "classification": "evidence-backed correction",
+      "rationale": "Declare the separate provisioning token for SCIM operations instead of inheriting Hub credential exchange guidance.",
+      "evidence": "content/manuals/security/provisioning/scim/provision-scim.md",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1scim~12.0~1ServiceProviderConfig/get/security",
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1ServiceProviderConfig/get/security"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Users/get/security",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "bearerSCIMAuth": []
+        }
+      ],
+      "after": [
+        {
+          "scimToken": []
+        }
+      ],
+      "id": "hub-ecf88ecedb9e",
+      "stage": "scim-auth-context",
+      "classification": "evidence-backed correction",
+      "rationale": "Declare the separate provisioning token for SCIM operations instead of inheriting Hub credential exchange guidance.",
+      "evidence": "content/manuals/security/provisioning/scim/provision-scim.md",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1scim~12.0~1Users/get/security",
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Users/get/security"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Users/post/security",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "bearerSCIMAuth": []
+        }
+      ],
+      "after": [
+        {
+          "scimToken": []
+        }
+      ],
+      "id": "hub-a24fdb1bdff4",
+      "stage": "scim-auth-context",
+      "classification": "evidence-backed correction",
+      "rationale": "Declare the separate provisioning token for SCIM operations instead of inheriting Hub credential exchange guidance.",
+      "evidence": "content/manuals/security/provisioning/scim/provision-scim.md",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1scim~12.0~1Users/post/security",
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Users/post/security"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/get/security",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "bearerSCIMAuth": []
+        }
+      ],
+      "after": [
+        {
+          "scimToken": []
+        }
+      ],
+      "id": "hub-3e8afbee54cd",
+      "stage": "scim-auth-context",
+      "classification": "evidence-backed correction",
+      "rationale": "Declare the separate provisioning token for SCIM operations instead of inheriting Hub credential exchange guidance.",
+      "evidence": "content/manuals/security/provisioning/scim/provision-scim.md",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/get/security",
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/get/security"
+    },
+    {
+      "pointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/security",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "bearerSCIMAuth": []
+        }
+      ],
+      "after": [
+        {
+          "scimToken": []
+        }
+      ],
+      "id": "hub-56082273dc18",
+      "stage": "scim-auth-context",
+      "classification": "evidence-backed correction",
+      "rationale": "Declare the separate provisioning token for SCIM operations instead of inheriting Hub credential exchange guidance.",
+      "evidence": "content/manuals/security/provisioning/scim/provision-scim.md",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/security",
+      "destinationPointer": "/paths/~1v2~1scim~12.0~1Users~1{id}/put/security"
+    },
+    {
+      "pointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/head/responses/200/content",
+      "beforePresent": true,
+      "afterPresent": false,
+      "before": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/repository_info"
+          },
+          "example": {
+            "name": "my-app",
+            "namespace": "myorganization",
+            "repository_type": "image",
+            "status": 1,
+            "status_description": "Active",
+            "description": "A sample application repository",
+            "is_private": false,
+            "is_automated": false,
+            "star_count": 0,
+            "pull_count": 0,
+            "last_updated": "2025-01-20T10:30:00Z",
+            "date_registered": "2025-01-20T10:30:00Z",
+            "collaborator_count": 0,
+            "hub_user": "myorganization",
+            "has_starred": false,
+            "full_description": "This is a comprehensive description of my application repository that contains additional details about the project.",
+            "media_types": [],
+            "content_types": [],
+            "categories": [],
+            "immutable_tags_settings": {
+              "enabled": false,
+              "rules": []
+            },
+            "storage_size": null,
+            "source": null
+          }
+        }
+      },
+      "id": "hub-2284c2bd0c92",
+      "stage": "head-response-bodies",
+      "classification": "evidence-backed correction",
+      "rationale": "HEAD responses transfer headers without a response body. Preserve headers and status codes; remove declared content from HEAD responses.",
+      "evidence": "RFC 9110 section 9.3.2",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": "/paths/~1v2~1namespaces~1{namespace}~1repositories~1{repository}/head/responses/200/content",
+      "destinationPointer": null
+    },
+    {
+      "pointer": "/security",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": [],
+      "id": "hub-2b9d4937db9a",
+      "stage": "explicit-root-security",
+      "classification": "editorial completion",
+      "rationale": "Make the existing absence of inherited HTTP authentication explicit. Local socket permissions remain connection metadata.",
+      "evidence": "OpenAPI root security inheritance; existing source operation policies",
+      "owner": "docker/docs (product authority to confirm)",
+      "sourcePointer": null,
+      "destinationPointer": "/security"
+    }
+  ]
+}

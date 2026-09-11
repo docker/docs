@@ -1,0 +1,40 @@
+{
+  "result": "pass",
+  "checks": [
+    "Catalog exposes all six snapshots",
+    "Operation filter narrows Engine operations",
+    "Filter results match their label",
+    "Keyboard version selection changes the reference",
+    "Copy preserves shell-expandable credentials",
+    "Product manual links back to the same API reference",
+    "Engine exposes multiple media types",
+    "Media selection filters without removing source variants",
+    "Example selection updates displayed examples",
+    "Search finds schema properties with API version context",
+    "Operation page fits a narrow viewport",
+    "Request example remains usable on a narrow screen",
+    "Reference content is present without JavaScript"
+  ],
+  "search": [
+    {
+      "url": "/engine/network/",
+      "title": "Networking overview"
+    },
+    {
+      "url": "/api-prototype/engine-1.55/schemas/EndpointSettings/",
+      "title": "EndpointSettings — Docker Engine API 1.55"
+    },
+    {
+      "url": "/api-prototype/engine-1.56/schemas/EndpointSettings/",
+      "title": "EndpointSettings — Docker Engine API 1.56"
+    },
+    {
+      "url": "/engine/release-notes/28/",
+      "title": "Docker Engine version 28 release notes"
+    },
+    {
+      "url": "/reference/api/engine/version-history/",
+      "title": "Engine API version history"
+    }
+  ]
+}

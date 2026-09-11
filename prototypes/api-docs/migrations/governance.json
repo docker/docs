@@ -1,0 +1,103 @@
+{
+  "api": "governance",
+  "source": {
+    "id": "governance",
+    "product": "governance",
+    "title": "AI Governance",
+    "source": "content/reference/api/ai-governance/api.yaml",
+    "owner": "docker/governor-services",
+    "upstreamPath": "governor-service-api/openapi.yaml",
+    "manual": "/manuals/ai/sandboxes/governance/",
+    "connection": "hosted",
+    "auth": "Exchange supported Docker credentials for a Hub bearer token. Organization permissions still apply.",
+    "guides": [
+      "/reference/api/hub/latest/#tag/authentication"
+    ],
+    "sha256": "c133c0782991ceef45f6191e9e062d896fb4effc2d96dbd0fa15cba48a4032bc"
+  },
+  "convertedSha256": "29011886e4aa19e601b3764a5a7deec813135967abcadec27cefe12b271194ed",
+  "profile": "docker-docs-prototype-1",
+  "changes": [
+    {
+      "pointer": "/jsonSchemaDialect",
+      "beforePresent": false,
+      "afterPresent": true,
+      "after": "https://spec.openapis.org/oas/3.1/dialect/base",
+      "id": "governance-03ee85af235e",
+      "stage": "oas32-header",
+      "classification": "mechanical conversion",
+      "rationale": "Adopt the common OpenAPI version and its selected schema dialect.",
+      "evidence": "API-DOCUMENTATION-ARCHITECTURE.md S1",
+      "owner": "docker/governor-services",
+      "sourcePointer": null,
+      "destinationPointer": "/jsonSchemaDialect"
+    },
+    {
+      "pointer": "/openapi",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "3.1.0",
+      "after": "3.2.0",
+      "id": "governance-71377657b6ae",
+      "stage": "oas32-header",
+      "classification": "mechanical conversion",
+      "rationale": "Adopt the common OpenAPI version and its selected schema dialect.",
+      "evidence": "API-DOCUMENTATION-ARCHITECTURE.md S1",
+      "owner": "docker/governor-services",
+      "sourcePointer": "/openapi",
+      "destinationPointer": "/openapi"
+    },
+    {
+      "pointer": "/tags",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": [
+        {
+          "name": "policies",
+          "description": "Policy lifecycle management"
+        },
+        {
+          "name": "rules",
+          "description": "Rule management within an allowlist policy"
+        }
+      ],
+      "after": [
+        {
+          "name": "policies",
+          "description": "Policy lifecycle management",
+          "summary": "policies",
+          "kind": "nav"
+        },
+        {
+          "name": "rules",
+          "description": "Rule management within an allowlist policy",
+          "summary": "rules",
+          "kind": "nav"
+        }
+      ],
+      "id": "governance-8d93cf25f3e7",
+      "stage": "editorial-metadata",
+      "classification": "editorial completion",
+      "rationale": "Supply conservative operation descriptions and stable IDs; declare primary navigation tags without changing endpoint behavior.",
+      "evidence": "Existing operation summaries, paths, and tags",
+      "owner": "docker/governor-services",
+      "sourcePointer": "/tags",
+      "destinationPointer": "/tags"
+    },
+    {
+      "pointer": "/components/securitySchemes/bearerAuth/description",
+      "beforePresent": true,
+      "afterPresent": true,
+      "before": "Short-lived JWT obtained by exchanging Docker Hub credentials at\n`POST https://hub.docker.com/v2/auth/token`. Pass the JWT in the\n`Authorization: Bearer <token>` header. Tokens expire after a short\nperiod; request a fresh one when you receive a `401`.\n\nThe `password` field of the token request accepts any of the following\ncredential types:\n\n| Type | Format | Notes |\n|------|--------|-------|\n| Password | Plain text | Your Docker Hub account password. |\n| Personal Access Token (PAT) | `dckr_pat_*` | Recommended over passwords. Create one under Account Settings → Security. |\n| Organization Access Token (OAT) | `dckr_oat_*` | Scoped to an organization. Create one under Organization Settings → Access Tokens. |\n\nPAT and OAT strings can't be used directly as a bearer token. They must\nbe exchanged at the token endpoint first.\n\nSee [Docker Hub authentication](https://docs.docker.com/reference/api/hub/latest/#tag/authentication-api/operation/AuthCreateAccessToken)\nfor full details.\n",
+      "after": "Short-lived JWT obtained by exchanging Docker Hub credentials at\n`POST https://hub.docker.com/v2/auth/token`. Pass the JWT in the\n`Authorization: Bearer <token>` header. Tokens expire after a short\nperiod; request a fresh one when you receive a `401`.\n\nThe `secret` field of the token request accepts any of the following\ncredential types:\n\n| Type | Format | Notes |\n|------|--------|-------|\n| Password | Plain text | Your Docker Hub account password. |\n| Personal Access Token (PAT) | `dckr_pat_*` | Recommended over passwords. Create one under Account Settings → Security. |\n| Organization Access Token (OAT) | `dckr_oat_*` | Scoped to an organization. Create one under Organization Settings → Access Tokens. |\n\nPAT and OAT strings can't be used directly as a bearer token. They must\nbe exchanged at the token endpoint first.\n\nSee [Docker Hub authentication](https://docs.docker.com/reference/api/hub/latest/#tag/authentication-api/operation/AuthCreateAccessToken)\nfor full details.\n",
+      "id": "governance-52772ada440a",
+      "stage": "governance-token-prose",
+      "classification": "evidence-backed correction",
+      "rationale": "Align copied token request field names with the Hub token operation; upstream owner must confirm credential support.",
+      "evidence": "Hub POST /v2/auth/token identifier and secret fields",
+      "owner": "docker/governor-services",
+      "sourcePointer": "/components/securitySchemes/bearerAuth/description",
+      "destinationPointer": "/components/securitySchemes/bearerAuth/description"
+    }
+  ]
+}

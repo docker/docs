@@ -1,0 +1,100 @@
+{
+  "revision": "371255294cf8db2ee20206bf5cc9c165a3a1ea16",
+  "tools": {
+    "swagger2openapi": "7.0.8",
+    "yaml": "2.8.1",
+    "libopenapi": "0.38.7",
+    "vacuum": "0.30.3",
+    "jsonschema": "6.0.3",
+    "oasdiff": "1.31.0"
+  },
+  "sources": [
+    {
+      "id": "governance",
+      "product": "governance",
+      "title": "AI Governance",
+      "source": "content/reference/api/ai-governance/api.yaml",
+      "owner": "docker/governor-services",
+      "upstreamPath": "governor-service-api/openapi.yaml",
+      "manual": "/manuals/ai/sandboxes/governance/",
+      "connection": "hosted",
+      "auth": "Exchange supported Docker credentials for a Hub bearer token. Organization permissions still apply.",
+      "guides": [
+        "/reference/api/hub/latest/#tag/authentication"
+      ],
+      "sha256": "c133c0782991ceef45f6191e9e062d896fb4effc2d96dbd0fa15cba48a4032bc"
+    },
+    {
+      "id": "hub",
+      "product": "hub",
+      "title": "Docker Hub",
+      "source": "content/reference/api/hub/latest.yaml",
+      "owner": "docker/docs (product authority to confirm)",
+      "manual": "/manuals/docker-hub/",
+      "connection": "hosted",
+      "auth": "Use the documented Hub token exchange. SCIM operations use a separate provisioning token.",
+      "guides": [
+        "/manuals/security/provisioning/scim/provision-scim.md"
+      ],
+      "sha256": "aeefa9b62b10d70f9e28e9508d5a4c1361e0a541e209ff0af9ed2544b0cb415e"
+    },
+    {
+      "id": "dvp",
+      "product": "dvp",
+      "title": "Publisher analytics",
+      "source": "content/reference/api/dvp/latest.yaml",
+      "owner": "docker/docs (product authority to confirm)",
+      "manual": "/manuals/docker-hub/repos/manage/trusted-content/insights-analytics.md",
+      "connection": "hosted",
+      "auth": "Analytics calls use a bearer token. The copied source retains the legacy login flow pending product confirmation.",
+      "guides": [],
+      "sha256": "4aeacaaa1237609c3dd9cec43f9807a229ac98a0e9b837f291c02df3cf89172a"
+    },
+    {
+      "id": "registry",
+      "product": "registry",
+      "title": "Registry",
+      "source": "content/reference/api/registry/latest.yaml",
+      "owner": "docker/docs (product authority to confirm)",
+      "manual": "/manuals/docker-hub/repos/",
+      "connection": "hosted",
+      "auth": "Follow the WWW-Authenticate challenge and obtain a repository-scoped registry token. This is separate from the Hub API token exchange.",
+      "guides": [
+        "/reference/api/registry/auth.md"
+      ],
+      "sha256": "229198e078ee30400c0359311f5baaf23a1f80563a1c2e82834f17f2db0d9fd1"
+    },
+    {
+      "id": "engine-1.56",
+      "product": "engine",
+      "title": "Docker Engine",
+      "source": "_vendor/github.com/moby/moby/api/docs/v1.56.yaml",
+      "owner": "moby/moby",
+      "moduleVersion": "github.com/moby/moby/api@v1.56.0",
+      "manual": "/manuals/engine/",
+      "connection": "unix",
+      "auth": "Connect to a daemon you operate. Local socket permissions control access; remote daemons require their configured transport protection. X-Registry-Auth delegates registry credentials and does not authenticate the daemon caller.",
+      "guides": [
+        "/manuals/engine/security/protect-access.md",
+        "/manuals/engine/daemon/remote-access.md"
+      ],
+      "sha256": "f09a22ad220d551dca5d6c402052204d3e9fd1f16943cd78ba6677ea1266616f"
+    },
+    {
+      "id": "engine-1.55",
+      "product": "engine",
+      "title": "Docker Engine",
+      "source": "_vendor/github.com/moby/moby/api/docs/v1.55.yaml",
+      "owner": "moby/moby",
+      "moduleVersion": "github.com/moby/moby/api@v1.56.0",
+      "manual": "/manuals/engine/",
+      "connection": "unix",
+      "auth": "Connect to a daemon you operate. Local socket permissions control access; remote daemons require their configured transport protection. X-Registry-Auth delegates registry credentials and does not authenticate the daemon caller.",
+      "guides": [
+        "/manuals/engine/security/protect-access.md",
+        "/manuals/engine/daemon/remote-access.md"
+      ],
+      "sha256": "5464356f9e0ba0d6b01d90564b7f6438aca69d9fc627892fc4d824645ddb9710"
+    }
+  ]
+}
