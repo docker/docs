@@ -49,7 +49,7 @@ $ sbx exec <sandbox> -- sh -lc 'command -v g++ && command -v make && command -v 
 
 A manual install lasts only until the sandbox is recreated, and the first
 connection still builds `node-pty` from source. For a setup that persists,
-recreate the sandbox with the [kit](../customize/kits.md) or a custom
+recreate the sandbox with the [v2 kit](../customize/kits-v2/_index.md) or a custom
 [template](../customize/templates.md).
 
 ## Connect

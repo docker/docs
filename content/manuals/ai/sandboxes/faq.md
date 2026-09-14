@@ -114,23 +114,13 @@ inside the session. Most agents let you switch permission modes after
 startup. In Claude Code, use the `/permissions` command to change the mode
 interactively.
 
-To make approval prompts the default for every session, define a custom
-sandbox kit that overrides the agent's entrypoint to drop the
-permission-skipping flag. For example, a kit that launches Claude Code
-without `--dangerously-skip-permissions`:
+To make approval prompts the default for every session, create a v2 sandbox
+kit that extends the built-in agent and changes its launch options. See
+[Fork an existing agent](customize/kits-v2/_index.md#fork-an-existing-agent)
+for a complete example.
 
-```yaml {title="claude-safe/spec.yaml"}
-schemaVersion: "1"
-kind: sandbox
-name: claude-safe
-sandbox:
-  image: "docker/sandbox-templates:claude-code-docker"
-  entrypoint:
-    run: [claude]
-```
-
-Run it with `sbx run ./claude-safe/`. See
-[Sandbox kits](customize/kits.md#sandbox-kits) for the full pattern.
+For an environment built entirely with v3 kits, set the launch command in
+the workload's Dockerfile. See [Build a v3 agent kit](customize/build-an-agent.md).
 
 ## How do I know if my agent is running in a sandbox?
 
