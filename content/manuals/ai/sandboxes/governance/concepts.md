@@ -44,7 +44,9 @@ rule format.
 An organization network policy can also require approval, which turns every
 allow in that policy into a request the developer must confirm before access is
 granted. Approval is set on the policy rather than on individual rules, so it
-applies to all of the policy's allow rules at once. See
+applies to all of the policy's allow rules at once. Without organization
+governance, a request with no matching allow or deny rule also asks for
+approval. See
 [Approval-required access](access-controls/network.md#approval-required-access).
 
 ### Limits

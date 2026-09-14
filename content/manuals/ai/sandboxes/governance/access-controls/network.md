@@ -73,9 +73,14 @@ outright. Destinations the policy allows aren't reachable until the developer
 confirms them, which keeps an allowlist broad enough to be usable while still
 putting a person in front of each destination an agent reaches for.
 
-Approval is a property of the policy rather than of individual rules, so
-turning it on applies it to every allow rule in that policy. A destination stays
-directly reachable only when every policy that allows it is one that doesn't
+Without organization governance, a request with no matching allow or deny rule
+also asks for approval rather than being denied outright, so access opens up as
+the developer approves each destination.
+
+Under organization governance, approval is a property of the policy rather
+than of individual rules, so turning it on applies it to every allow rule in
+that policy. A destination stays directly reachable only when every policy
+that allows it is one that doesn't
 require approval. If a policy that requires approval also matches, the request
 needs approval regardless of what the other policies allow.
 
@@ -86,15 +91,14 @@ An approval also can't reach a destination the organization doesn't allow at
 all, and it can't override a deny rule. To withdraw a destination, add a deny
 rule, which takes precedence over any approval already recorded.
 
-Requiring approval on a policy is available only with organization
-governance. To turn it on, see
+To require approval on an organization policy, see
 [Organization policies](organization.md#require-approval-for-a-network-policy).
 
 ### Respond to an approval request
 
-When an organization policy requires approval, a sandbox can't reach a
-destination until you confirm it. The request is blocked and the sandbox
-receives a message naming the destination:
+When a destination needs approval, a sandbox can't reach it until you confirm
+it. The request is blocked and the sandbox receives a message naming the
+destination:
 
 ```plaintext
 Approval required for api.example.com.
@@ -112,6 +116,9 @@ and approving the destination affects later requests. Agents that retry a
 failed request pick up the new access on their next attempt. For others, run
 the operation again.
 
+Pending requests also appear in the `sbx` GUI, where you can respond to them
+instead of using the CLI.
+
 List the destinations waiting for a response:
 
 ```console
@@ -127,8 +134,10 @@ APPROVAL network:c2FuZGJveA  (sandbox: my-sandbox)
   dismiss   Dismiss
 ```
 
-Each entry names the destination, the sandbox that asked for it, and the policy
-that requires the approval. To inspect a single entry, pass its ID to
+Each entry names the destination, the sandbox that asked for it, and why it
+needs approval. Under organization governance that reason names the policy, as
+above. Without it, the reason is that no matching allow rule covers the
+destination. To inspect a single entry, pass its ID to
 `sbx policy approval inspect`.
 
 Respond by selecting one of the options the entry offers:

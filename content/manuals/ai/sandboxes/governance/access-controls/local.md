@@ -213,8 +213,12 @@ the [API](/reference/api/ai-governance/).
 
 ### A request is blocked with "Approval required"
 
-The destination is allowed by an organization policy that requires approval.
+The destination needs your confirmation. Either no allow or deny rule matches
+it and your machine isn't under organization governance, or an organization
+policy allows it but requires approval first.
+
 Run `sbx policy approval ls` to see the pending request and respond to it with
-`sbx policy approval respond`. Approving applies to later requests, not the one
-that was blocked, so run the operation again afterward. See
+`sbx policy approval respond`, or respond in the `sbx` GUI. Approving applies
+to later requests, not the one that was blocked, so run the operation again
+afterward. See
 [Respond to an approval request](network.md#respond-to-an-approval-request).
