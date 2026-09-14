@@ -1,6 +1,6 @@
 ---
 title: FAQ
-weight: 110
+weight: 140
 description: Frequently asked questions about Docker Sandboxes.
 keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste, pricing, commercial use, allowlist, firewall, domains, proxy
 ---
@@ -89,56 +89,22 @@ $ export SBX_NO_TELEMETRY=1
 
 ## How do I set custom environment variables inside a sandbox?
 
-The [`sbx secret`](/reference/cli/sbx/secret/) command only supports a fixed set
-of [services](security/credentials.md#built-in-services) (Anthropic, OpenAI,
-GitHub, and others). If your agent needs an environment variable that isn't
-tied to a supported service, such as `BRAVE_API_KEY` or a custom internal
-token, write it to `/etc/sandbox-persistent.sh` inside the sandbox. This
-file is sourced on every shell login, so the variable persists across agent
-sessions for the sandbox's lifetime.
+Starting with `sbx` version 0.39.0, use `-e`/`--env` or `--env-file` with
+`sbx run` and `sbx create`. See
+[Set environment variables](usage.md#set-environment-variables) for syntax,
+precedence rules, persistent configuration for an existing sandbox, and
+guidance for credentials.
 
-Use `sbx exec` to append the export:
-
-```console
-$ sbx exec -d <sandbox-name> bash -c "echo 'export BRAVE_API_KEY=your_key' >> /etc/sandbox-persistent.sh"
-```
-
-The `bash -c` wrapper is required so the `>>` redirect runs inside the
-sandbox instead of on your host.
-
-> [!NOTE]
-> Unlike `sbx secret`, which injects credentials through a host-side proxy
-> without exposing them to the agent, this approach stores the value inside
-> the sandbox. The agent process can read it directly. Only use this for
-> credentials where proxy-based injection isn't available.
-
-Variables in `/etc/sandbox-persistent.sh` are sourced automatically for
-interactive sessions and for agents started with `sbx run`.
-
-A variable only takes effect for sessions and agents started *after* it's
-added. If an agent is already running when you append to the file, restart
-it (or stop and start the sandbox) to pick up the new value.
-
-Running commands directly with `sbx exec <name> <command>` does not invoke
-a shell, so the persistent environment file is not sourced. Wrap the
-command in `bash -c` to load the environment:
-
-```console
-$ sbx exec <sandbox-name> bash -c "your-command"
-```
-
-To verify the variable is set, open a shell in the sandbox:
-
-```console
-$ sbx exec -it <sandbox-name> bash
-$ echo $BRAVE_API_KEY
-```
+Variables in `/etc/sandbox-persistent.sh` are available to interactive sessions
+and agents started with `sbx run`. A variable only takes effect for sessions
+and agents started after it's added. Restart a running agent, or stop and start
+the sandbox, to pick up the new value.
 
 ## Why do agents run without approval prompts?
 
 The sandbox itself is the safety boundary. Because agents run inside an
 isolated microVM with [network policies](governance/access-controls/network.md),
-[credential isolation](security/credentials.md), and no access to your host
+[credential isolation](security/isolation.md#credential-isolation), and no access to your host
 system outside explicitly shared paths, the usual reasons for approval prompts
 (preventing destructive commands, network access, file modifications) are
 handled by the sandbox isolation layers instead.
@@ -163,7 +129,7 @@ sandbox:
     run: [claude]
 ```
 
-Run it with `sbx run claude-safe --kit ./claude-safe/`. See
+Run it with `sbx run ./claude-safe/`. See
 [Sandbox kits](customize/kits.md#sandbox-kits) for the full pattern.
 
 ## How do I know if my agent is running in a sandbox?
@@ -183,10 +149,12 @@ settings, and other files under directories such as `~/.claude` remain on the
 host. Project-level configuration in the working directory remains available
 inside the sandbox.
 
-Shared agent skills are the exception. Run `sbx skills import` to copy skills
-from supported host directories into a persistent store shared with
-sandboxes. See [Share agent skills](workflows.md#share-agent-skills) for the
-supported directories, mount behavior, and per-sandbox opt-out.
+Shared agent skills are the exception. Use `sbx skills add` to install skills
+from a Git repository, or run `sbx skills import` to copy skills from supported
+host directories. `sbx` keeps the skills in a persistent store shared with
+sandboxes. See [Share agent skills](workflows/agent-skills.md) for repository
+management, supported host directories, mount behavior, and per-sandbox
+opt-out.
 
 Keep project-specific skills and other agent configuration in the project
 itself. This versions the configuration alongside the code. Don't use symlinks
@@ -245,4 +213,4 @@ storing them: install `gnome-keyring` and start `dbus-run-session`, or run the
 keyring daemon under a login session that unlocks it. Once a working Secret
 Service is available, `sbx` stores new
 secrets in the keychain again. For where each platform keeps secrets, see
-[Where secrets are stored](security/credentials.md#where-secrets-are-stored).
+[Where secrets are stored](configuration/credentials.md#where-secrets-are-stored).

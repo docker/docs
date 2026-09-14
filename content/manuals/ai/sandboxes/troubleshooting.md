@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-weight: 100
+weight: 130
 description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
@@ -40,6 +40,38 @@ sandbox data. If the issue persists or state is corrupted, use
 If you hit persistent issues or corrupted state, run
 [`sbx reset`](/reference/cli/sbx/reset/) to stop all VMs and delete all sandbox
 data. Create fresh sandboxes afterwards.
+
+## Sandbox doesn't contain my project files
+
+Starting with `sbx` version 0.42.0, the workspace path is optional for
+`sbx create`. When you omit it, the command creates a mountless sandbox. For
+example, these commands create and attach to a sandbox without mounting your
+host project files:
+
+```console
+$ sbx create --name <sandbox-name> <agent>
+$ sbx run --name <sandbox-name>
+```
+
+By contrast, `sbx run` mounts the current directory when you don't pass a
+workspace path:
+
+```console
+$ sbx run <agent>
+```
+
+A sandbox's workspace configuration is fixed when the sandbox is created. To
+reuse the name of an existing mountless sandbox, first
+[copy out any files you want to keep](usage.md#copy-files-between-host-and-sandbox),
+then remove and recreate it with a workspace path:
+
+```console
+$ sbx rm <sandbox-name>
+$ sbx run --name <sandbox-name> <agent>
+```
+
+See [Choose a workspace](usage.md#choose-a-workspace) for mountless, direct,
+and clone-mode behavior.
 
 ## Agent can't install packages or reach an API
 
@@ -121,7 +153,7 @@ $ git clone https://github.com/owner/repo.git
 
 If a request to `127.0.0.1` or a local network IP returns "connection refused"
 from inside a sandbox, the address is not reachable from within the sandbox VM.
-See [Accessing host services from a sandbox](workflows.md#accessing-host-services-from-a-sandbox).
+See [Accessing host services from a sandbox](workflows/development.md#accessing-host-services-from-a-sandbox).
 
 ## Docker authentication failure
 
@@ -136,7 +168,7 @@ If the agent can't reach its model provider or you see API key errors, the key
 is likely invalid, expired, or not configured. Verify it's set in your shell
 configuration file and that you sourced it or opened a new terminal.
 
-For agents that use the [credential proxy](security/credentials.md), make sure
+For agents that use the [credential proxy](configuration/credentials.md), make sure
 you haven't set the API key to an invalid value inside the sandbox — the proxy
 injects credentials automatically on outbound requests.
 
@@ -204,15 +236,24 @@ the egress path in the **PROXY** column:
 
 ## Sandbox runs out of disk space
 
-The sandbox root (`/`) filesystem defaults to 20 GB. To increase it, set `DOCKER_SANDBOXES_ROOT_SIZE`
-before creating the sandbox:
+The sandbox root (`/`) filesystem defaults to 20 GB. To increase it, set
+`DOCKER_SANDBOXES_ROOT_SIZE` before creating the sandbox:
 
 ```console
 $ DOCKER_SANDBOXES_ROOT_SIZE=40g sbx run claude
 ```
 
-`DOCKER_SANDBOXES_ROOT_SIZE` controls the root filesystem size. `DOCKER_SANDBOXES_DOCKER_SIZE`
-controls the Docker data disk (`/var/lib/docker`) size. The two are independent — set both if needed.
+`DOCKER_SANDBOXES_ROOT_SIZE` controls the root filesystem size. The Docker data
+disk at `/var/lib/docker` is independent and defaults to 10 GB. To change the
+Docker data disk size for a sandbox, set `DOCKER_SANDBOXES_DOCKER_SIZE` when you
+create it:
+
+```console
+$ DOCKER_SANDBOXES_DOCKER_SIZE=20g sbx run claude
+```
+
+The Docker data disk must be at least 512 MiB. The environment variable doesn't
+resize existing volumes.
 
 For a [clone-mode sandbox](usage.md#clone-mode), set
 `DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE` before creating the sandbox to
@@ -220,23 +261,22 @@ configure the cloned workspace volume capacity. The variable accepts
 human-readable size strings such as `100g`:
 
 ```console
-$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude
+$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude .
 ```
 
 ## Filesystem operations are slow in large repositories
 
 Filesystem operations such as `git status`, `git log`, or directory scans can
-be noticeably slow when the sandbox workspace is mounted in direct mode (the
-default for workspaces without `--clone`). Virtiofs caching speeds up these
-workloads. Clone-mode sandboxes always enable it, so this tuning applies only
-to direct mode.
+be noticeably slow when you pass a workspace path and use direct mode.
+Virtiofs caching speeds up these workloads. Clone-mode sandboxes always enable
+it, so this tuning applies only to direct mode.
 
 Virtiofs caching is enabled by default on all operating systems. If you
 experience Git index corruption or unexpected file content, disable caching
 with the kill switch and recreate the sandbox:
 
 ```console
-$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <agent>
 ```
 
 ## Clone mode reports "not in a Git repository" on WSL
@@ -271,7 +311,20 @@ the command again:
 ## Sandbox commits aren't signed
 
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
-For setup steps, see [Commit signing](workflows.md#commit-signing).
+For setup steps, see [Commit signing](workflows/git.md#commit-signing).
+
+Forwarding is enabled by default. Confirm that it hasn't been disabled and
+check whether a fixed socket path is configured:
+
+```console
+$ sbx settings get ssh.agentForwardingEnabled
+$ sbx settings get ssh.agentSocketPath
+```
+
+If you use each client's current `SSH_AUTH_SOCK`, reconnect from a shell where
+it points to the intended agent. If `ssh.agentSocketPath` returns a path,
+confirm that it points to an active host agent. After changing forwarding or
+the socket selection, run `sbx daemon restart`.
 
 If `ssh-add -L` prints `The agent has no identities.`, the sandbox can reach
 the forwarded agent, but the host agent doesn't have a loaded key. Load the
@@ -376,6 +429,19 @@ If you have set custom `XDG_STATE_HOME`, `XDG_CACHE_HOME`, or
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## Enable automatic diagnostics uploads
+
+To opt in to automatic diagnostics uploads after certain daemon errors, run:
+
+```console
+$ sbx settings set diagnostics.autoUpload yes
+```
+
+Automatic bundles include basic system information and client, daemon, crash,
+and MCP logs. Docker Sandboxes redacts recognized identity values and
+credential patterns, but collected logs can still contain user content. Failed
+uploads remain in a local queue for a later retry.
 
 ## Report an issue
 

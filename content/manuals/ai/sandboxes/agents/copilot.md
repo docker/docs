@@ -14,6 +14,10 @@ Official documentation: [GitHub Copilot CLI](https://docs.github.com/en/copilot/
 
 ## Quick start
 
+> [!NOTE]
+> In Docker Sandboxes v0.42, use `sbx run docker.io/sbx/copilot-kit:latest`.
+> The `copilot` shorthand is unavailable in this release.
+
 Create a sandbox and run Copilot for a project directory:
 
 ```console
@@ -30,10 +34,10 @@ $ sbx run copilot
 ## Authentication
 
 Copilot requires a GitHub token with Copilot access. Store your token using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
-$ echo "$(gh auth token)" | sbx secret set github
+$ sbx secret set github --command 'gh auth token'
 ```
 
 ## Configuration

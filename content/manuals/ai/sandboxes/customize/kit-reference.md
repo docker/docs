@@ -1,9 +1,9 @@
 ---
 title: Kit spec reference
 linkTitle: Spec reference
-description: Field-by-field reference for a kit's spec.yaml, including credentials, network rules, environment, setup, files, agent instructions, and the sandbox block.
+description: Field-by-field reference for a kit's spec.yaml, including arguments, credentials, network rules, environment, setup, files, agent instructions, and the sandbox block.
 keywords: sandboxes, sbx, kits, spec.yaml, reference, schema, fields
-weight: 22
+weight: 50
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -66,7 +66,7 @@ What changed in v2:
 Credential discovery also moved out of the kit in v2: a kit declares which
 credentials it needs and how to inject them, but where each value comes from is
 controlled by the user through
-[credential bindings](../security/credentials.md#credential-bindings).
+[credential bindings](../configuration/credentials.md#credential-bindings).
 
 > [!NOTE]
 > `mixins` and `sandbox.build` are accepted by the parser, but runtime support
@@ -88,6 +88,10 @@ locked:
   - sandbox.image
 security:
   privileged: false
+args:
+  channel:
+    default: stable
+    enum: [stable, beta]
 ```
 
 | Field           | Required | Description                                                                                     |
@@ -102,9 +106,60 @@ security:
 | `licenses`      | No       | SPDX license identifiers.                                                                       |
 | `locked`        | No       | Dotted paths child kits may not override.                                                       |
 | `security`      | No       | Container security settings. `security.privileged: true` runs the container in privileged mode. |
+| `args`          | No       | Arguments supplied when the kit is loaded. Schema v2 only.                                      |
 
 A kit also declares behavior blocks such as `agentInstructions`,
 `permissions`, `ports`, `credentials`, `environment`, `setup`, and `volumes`.
+
+## Arguments
+
+A schema v2 kit can declare arguments and reference them anywhere in
+`spec.yaml` or under `files/` as `${{ kit.args.<name> }}`. Substitution happens
+before the spec is decoded.
+
+```yaml
+args:
+  version:
+    default: latest
+    description: Tool version to install
+    pattern: '^(latest|[0-9]+\.[0-9]+\.[0-9]+)$'
+  channel:
+    default: stable
+    enum: [stable, beta, nightly]
+  target:
+    required: true
+    description: Build target
+
+environment:
+  variables:
+    TOOL_VERSION: "${{ kit.args.version }}"
+```
+
+Don't use kit arguments for API tokens, passwords, or other secrets. Use
+[Credentials](../configuration/credentials.md) to provide sensitive values to
+a sandbox.
+
+| Field         | Description                                                                                                  |
+| ------------- | ------------------------------------------------------------------------------------------------------------ |
+| Argument name | Starts with a letter or underscore and contains only letters, digits, underscores, and hyphens.             |
+| `default`     | String to use when the caller supplies no value. Mutually exclusive with `required: true`.                   |
+| `required`    | Set to `true` when the caller must supply a value. Mutually exclusive with `default`.                        |
+| `description` | Optional help text shown when a required value is missing.                                                   |
+| `enum`        | Optional list of accepted values. Mutually exclusive with `pattern`.                                         |
+| `pattern`     | Optional Go RE2 regular expression matched against the complete value. Mutually exclusive with `enum`.       |
+
+Each argument must declare either `default`, including an empty-string
+default, or `required: true`. A declared default must satisfy its own `enum` or
+`pattern`. Every `${{ kit.args.<name> }}` reference must have a matching
+declaration.
+
+Argument values are strings, but substitution happens before YAML decoding.
+Quote a placeholder in a string-valued field so a value such as `1.20` isn't
+decoded as a number.
+
+Supply values with `--kit-arg` or `--kit-args-file` when loading the kit. See
+[Pass arguments to kits](kits.md#pass-arguments-to-kits) for scoping,
+precedence, and validation behavior.
 
 ## Kit kinds
 
@@ -217,7 +272,7 @@ file.
 A kit declares the credentials it needs and how the proxy injects them into
 outbound requests. It does not declare a host discovery source. The user
 provides the value through the secret store or the first-run prompt, and a
-[credential binding](../security/credentials.md) authorizes its use. A kit
+[credential binding](../configuration/credentials.md) authorizes its use. A kit
 can't read arbitrary host environment variables or files.
 
 ```yaml
@@ -247,15 +302,12 @@ credentials:
         refreshToken: <sentinel>
       credentialFile:
         path: <path>
-        template: |
-          {
-            "<key>": {
-              "accessToken": "{{.AccessToken}}",
-              "refreshToken": "{{.RefreshToken}}",
-              "expiresAt": {{.ExpiresAt}},
-              "scopes": {{.ScopesJSON}}
-            }
-          }
+        structure:
+          <key>:
+            accessToken: "{{.AccessToken}}"
+            refreshToken: "{{.RefreshToken}}"
+            expiresAt: "{{.ExpiresAt}}"
+            scopes: "{{.Scopes}}"
 ```
 
 `credentials` is a list; each entry names a `service` and configures one or more
@@ -264,7 +316,7 @@ auth mechanisms.
 | Field         | Description                                                                                                                                 |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `service`     | Credential identifier, matched against the value stored with `sbx secret set`. Lowercase kebab-case.                                        |
-| `description` | Optional. Shown to the user when approving a [binding](../security/credentials.md#credential-bindings).                                     |
+| `description` | Optional. Shown to the user when approving a [binding](../configuration/credentials.md#credential-bindings).                                     |
 | `required`    | Marks the credential as essential to the agent. If it has no binding, `sbx` warns and starts with the credential withheld. Default `false`. |
 | `provider`    | Reserved for a provider registry. Accepted with a warning and no runtime effect.                                                            |
 | `apiKey`      | API-key injection (see [apiKey](#apikey)).                                                                                                  |
@@ -298,12 +350,16 @@ the real token response into the sandbox.
 | `tokenEndpoint.host` / `path`            | The OAuth token endpoint the proxy intercepts.                                                                                                                                                    |
 | `sentinels.accessToken` / `refreshToken` | Sentinel values written into the container in place of the real tokens.                                                                                                                           |
 | `credentialFile.path`                    | Where to write the credential file inside the container (`~` expands).                                                                                                                            |
-| `credentialFile.template`                | Go template used to render the credential file. Supports `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, `{{.Scopes}}`, and `{{.ScopesJSON}}`. Use `{{.ScopesJSON}}` for a JSON array. |
-| `credentialFile.structure`               | Declarative JSON shape defined by schema v2 but not supported by the `sbx` engine. A structure-only kit fails validation. Use `credentialFile.template`.                                          |
+| `credentialFile.structure`               | Declarative JSON shape. Supports `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, and `{{.Scopes}}`.                                                                                   |
+| `credentialFile.template`                | Go template. Supports `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, `{{.Scopes}}`, and `{{.ScopesJSON}}`.                                                                          |
 | `resourceHosts`                          | API hosts where the proxy attaches the token on outbound requests, distinct from the token endpoint host.                                                                                         |
 | `skipIfEnv`                              | Accepted for compatibility, but ignored for schema v2. A v2 binding is authoritative instead of host environment variables.                                                                       |
 | `responseFields`                         | Overrides the default field names the proxy reads from the token response.                                                                                                                        |
 | `passthrough`                            | If `true`, the proxy passes the token response through unchanged instead of replacing the tokens with sentinels.                                                                                  |
+
+`credentialFile.structure` provides a declarative alternative to
+`credentialFile.template`. The engine renders it as well-formed JSON. If both
+fields are set, `structure` takes precedence.
 
 ## Network
 
@@ -346,18 +402,21 @@ Use `ports` to expose sandbox services to the host:
 ```yaml
 ports:
   - container: 8080
-    protocol: tcp
     name: web
 ```
 
 | Field       | Description                                                         |
 | ----------- | ------------------------------------------------------------------- |
 | `container` | Container port, 1 to 65535.                                         |
-| `protocol`  | `tcp` or `udp`. Empty means `tcp`.                                  |
+| `protocol`  | `tcp` or `udp`. Empty publishes one family; see below.              |
 | `name`      | Optional label surfaced by tools that list published port bindings. |
 
-Host ports are allocated ephemerally on `127.0.0.1`. Users can pin host ports
-with `sbx ports --publish <host>:<container>`.
+Host ports are allocated ephemerally. Leave `protocol` empty unless the service
+listens on IPv6: an empty value publishes IPv4 only (`127.0.0.1`), which is what
+a service bound to `0.0.0.0` needs, while `tcp` publishes both `127.0.0.1` and
+`::1` — and a client arriving over `::1` is accepted and then reset if nothing
+in the sandbox is listening there. Users can pin host ports with
+`sbx ports --publish <host>:<container>`.
 
 ## Environment
 
@@ -426,6 +485,12 @@ the sandbox with the kit.
 Runs synchronously when a kit is applied, either during sandbox creation or
 through `sbx kit add`. Shell strings are passed to `sh -c`.
 
+Kit install commands start in the template image's configured `WORKDIR`.
+Docker-provided templates use `/home/agent/workspace`, which isn't necessarily
+the primary workspace in a direct-mounted or clone-mode sandbox. Don't rely on
+the current directory to locate workspace files. Use absolute paths for bundled
+assets from `files/home/`.
+
 | Field         | Default | Description                   |
 | ------------- | ------- | ----------------------------- |
 | `command`     | —       | Shell command string.         |
@@ -450,8 +515,7 @@ don't gate the agent's entrypoint: the agent launches once startup
 commands have been dispatched, regardless of `background`. A value of
 `false` waits within the startup dispatcher before it runs the next command;
 it doesn't delay the agent entrypoint. Use startup commands
-for non-interactive prep — launching daemons, warming caches,
-refreshing config — and use `setup.files` for any value that
+for work that can run alongside the agent. Use `setup.files` for any value that
 needs to land on disk before the agent runs.
 
 Startup commands must be idempotent. They run on every sandbox start
@@ -471,6 +535,11 @@ Files written at sandbox start, with runtime substitution.
 | `content`       | —        | File content. `${WORKDIR}` expands to the workspace path. |
 | `mode`          | `"0644"` | File permissions in octal.                                |
 | `onlyIfMissing` | `false`  | Skip if the file already exists.                          |
+
+The runtime writes these files as the agent user with UID 1000. The target
+path must be writable by that user. To write to a root-owned path such as
+`/etc`, use an `install` command, which runs as root by default. Set ownership
+in the install command if the agent needs to modify the file later.
 
 ## Static files
 

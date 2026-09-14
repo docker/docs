@@ -20,12 +20,15 @@ Create a sandbox and run Codex for a project directory:
 $ sbx run codex ~/my-project
 ```
 
-The workspace parameter is optional and defaults to the current directory:
+`sbx run` defaults the workspace to the current directory:
 
 ```console
 $ cd ~/my-project
 $ sbx run codex
 ```
+
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
 
 ## Authentication
 
@@ -46,13 +49,13 @@ in your OS keychain. The OAuth flow runs on the host, not inside the sandbox,
 so browser-based authentication works without any extra setup.
 
 **API key**: Store your OpenAI API key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set openai
 ```
 
-See [Credentials](../security/credentials.md) for more details.
+See [Credentials](../configuration/credentials.md) for more details.
 
 ## Configuration
 
@@ -75,7 +78,7 @@ itself a flag (begins with `-`). A bare word — such as a prompt — replaces t
 defaults instead, so lead with the flag to keep bypass mode:
 
 ```console
-$ sbx run codex -- --dangerously-bypass-approvals-and-sandbox "fix the build"
+$ sbx run --name <sandbox-name> -- --dangerously-bypass-approvals-and-sandbox "fix the build"
 ```
 
 ## Base image

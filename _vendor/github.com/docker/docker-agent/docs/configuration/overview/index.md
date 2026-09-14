@@ -162,6 +162,8 @@ API keys and secrets are read from environment variables — never stored in con
 | `DOCKER_AGENT_MODELS_GATEWAY`       | Route model traffic through a gateway. Equivalent to the `--models-gateway` flag.                    |
 | `DOCKER_AGENT_HIDE_TELEMETRY_BANNER`| Set to `1` to suppress the first-run telemetry notice.                                               |
 | `DOCKER_AGENT_AUTO_UPDATE`          | Set to a truthy value (`1`, `true`, `yes`, `on`) to let standalone release binaries self-update before running. See [Optional Self-Updates](../../getting-started/installation/index.md#optional-self-updates). |
+| `DOCKER_AGENT_NO_TOKEN_EXCHANGE`    | Set to `1` to stop Docker Agent from exchanging the access token stored by `docker login` for a Docker token. See [Docker authentication](../../guides/secrets/index.md#docker-authentication). |
+| `DOCKER_AGENT_HUB_LOGIN_URL`        | Point the token exchange at a Docker staging environment. Ignored unless it is an HTTPS `docker.com` URL. |
 
 > [!NOTE]
 > **Legacy `CAGENT_*` aliases**

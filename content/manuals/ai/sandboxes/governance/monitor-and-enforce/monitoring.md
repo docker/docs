@@ -69,6 +69,14 @@ stale timestamp, the daemon may not have the most recent org policy. Run
 `sbx policy reset` to force a fresh pull. `Hidden` reports how many inactive
 rules are suppressed and how to reveal them.
 
+If Docker can't determine which organization governs your account, policy
+output shows `Governance: Unresolved`, and the dashboard shows the same
+unresolved state. For example, this happens when your account belongs to
+multiple organizations with governance enabled. Policy enforcement fails closed
+until the conflict is resolved, so local allow rules can't grant access. Contact
+an administrator for the affected organizations to resolve the conflicting
+governance configuration.
+
 ### Showing inactive rules
 
 When organization governance is active, local and kit-defined allow rules are
@@ -141,7 +149,7 @@ The `PROXY` column shows how the request left the sandbox:
 
 | Value            | Description                                                                                                    |
 | ---------------- | -------------------------------------------------------------------------------------------------------------- |
-| `forward`        | Routed through the forward proxy. Supports [credential injection](../../security/credentials.md).              |
+| `forward`        | Routed through the forward proxy. Supports [credential injection](../../configuration/credentials.md).              |
 | `forward-bypass` | Routed through the forward proxy without credential injection.                                                 |
 | `transparent`    | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.            |
 | `network`        | Non-HTTP traffic (raw TCP, UDP, ICMP). TCP can be allowed with a policy rule. UDP and ICMP are always blocked. |

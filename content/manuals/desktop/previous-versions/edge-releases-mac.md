@@ -1104,7 +1104,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 - Add daemon options validation
 - Diagnose can be cancelled & Improved help information. Fixes [docker/for-mac#1134](https://github.com/docker/for-mac/issues/1134), [docker/for-mac#1474](https://github.com/docker/for-mac/issues/1474)
-- Support paging of Docker Cloud [repositories](../../docker-hub/repos/_index.md) and [organizations](../../admin/organization/setup/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
+- Support paging of Docker Cloud [repositories](../../docker-hub/repos/_index.md) and [organizations](../../accounts/organization/setup/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
 
 ### Docker Community Edition 17.06.1-ce-mac20, 2017-07-18
 

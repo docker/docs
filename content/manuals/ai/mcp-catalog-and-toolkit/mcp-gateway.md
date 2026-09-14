@@ -28,7 +28,7 @@ manually. This documentation is for users who want to understand how the Gateway
 > [!TIP]
 > E2B sandboxes now include direct access to the Docker MCP Catalog, giving developers
 > access to over 200 tools and services to seamlessly build and run AI agents. For
-> more information, see [E2B Sandboxes](sandboxes.md).
+> more information, see [E2B Sandboxes](e2b-sandboxes.md).
 
 ## How it works
 

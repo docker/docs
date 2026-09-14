@@ -3,7 +3,7 @@ title: Migrate using Gordon
 linktitle: AI-assisted migration
 description: Use Gordon to automatically migrate your Dockerfile to Docker Hardened Images
 weight: 15
-keywords: ai assistant, migrate dockerfile, docker hardened images, automated migration
+keywords: ai assistant, migrate Dockerfile, docker hardened images, automated migration
 params:
   sidebar:
     badge:

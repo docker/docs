@@ -1,7 +1,7 @@
 ---
 title: Install Docker Sandboxes
 linkTitle: Install
-weight: 5
+weight: 10
 description: Install the sbx CLI on macOS, Windows, or Linux and sign in to Docker Sandboxes.
 keywords: sandbox, sbx, install, macOS, Windows, Linux, Ubuntu
 ---
@@ -68,13 +68,42 @@ $ brew install docker/tap/sbx
 
 ## Install on Windows
 
+### Install for the current user
+
 Install `sbx` using Windows Package Manager:
 
 ```powershell
 winget install -h Docker.sbx
 ```
 
-## Install on Linux
+WinGet installs the per-user `DockerSandboxes.msi` package in
+`%LOCALAPPDATA%\DockerSandboxes` and adds its `bin` directory to your user
+`PATH`. You can install it without administrator privileges.
+
+### Install for all users
+
+For administrator-managed deployments, download
+`DockerSandboxesMachine.msi` from the
+[Docker Sandboxes releases](https://github.com/docker/sbx-releases/releases).
+From an elevated PowerShell prompt, install the package silently:
+
+```powershell
+msiexec.exe /i DockerSandboxesMachine.msi /quiet
+```
+
+The machine-wide package installs in `%ProgramFiles%\DockerSandboxes` and adds
+its `bin` directory to the system `PATH`.
+
+A machine-wide upgrade might require restarting Windows if an `sbx` daemon in
+another user's session is using the installed files.
+
+## Install on Ubuntu
+
+> [!NOTE]
+>
+> Docker does not test or support Docker Sandboxes on Ubuntu derivatives, such
+> as Linux Mint and Pop!_OS. The convenience script can configure an incorrect
+> package repository on these distributions.
 
 You can install `sbx` with Docker Engine or install only the `sbx` package.
 
@@ -94,13 +123,15 @@ repository and install the `docker-sbx` package:
 
 ```console
 $ curl -fsSL https://get.docker.com | sudo REPO_ONLY=1 sh
-$ sudo apt-get install docker-sbx
+$ sudo apt install docker-sbx
 ```
 
-## Install manually
+## Install from release artifacts
 
-To install `sbx` without a package manager, download a binary from the
-[sbx-releases repository](https://github.com/docker/sbx-releases/releases).
+To install `sbx` from a package or archive, follow the
+[manual installation instructions](https://github.com/docker/sbx-releases#manual-install-from-release-artifacts).
+The availability of a Linux release artifact does not indicate that Docker
+tests or supports the corresponding distribution.
 
 ## Sign in
 

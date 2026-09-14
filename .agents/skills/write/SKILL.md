@@ -45,11 +45,13 @@ rumdl runs automatically after each edit via the PostToolUse hook.
 Run lint manually after all edits are complete:
 
 ```bash
-scripts/lint.sh <changed-files>
+scripts/lint.sh <changed-markdown-files>
 ```
 
 The lint script runs rumdl and Vale on only the files you pass it,
-so the output is scoped to your changes. Fix any errors it reports.
+so the output is scoped to your changes. Fix errors and warnings on lines you
+added or changed, and review each suggestion. Vale can exit successfully when
+warnings or suggestions remain in its output.
 
 ## 5. Self-review
 

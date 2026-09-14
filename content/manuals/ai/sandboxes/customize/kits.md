@@ -53,9 +53,9 @@ setup:
     - command: "apt-get update && apt-get install -y jq"
 ```
 
-Startup commands cover things like launching background services,
-warming caches, or refreshing config on each start. They must be
-idempotent — see the [`startup`](kit-reference.md#startup) spec reference:
+Startup commands are for work that can run alongside the agent, such as a
+background service. They must be idempotent — see the
+[`startup`](kit-reference.md#startup) spec reference:
 
 ```yaml
 setup:
@@ -113,6 +113,7 @@ file removes. In this table, `~` is `/home/agent`.
 | `codex` | `~/.codex/config.toml` |
 | `copilot` | `~/.copilot/config.json` |
 | `cursor` | `~/.cursor/cli-config.json` |
+| `devin` | `~/.config/devin/config.json`, `~/.config/devin/mcp_config.json` |
 | `gemini` | `~/.gemini/settings.json` |
 | `kiro` | `~/.kiro/settings/mcp.json` |
 | `opencode` | `~/.config/opencode/opencode.json` |
@@ -191,7 +192,7 @@ auth header before the request leaves the sandbox.
 A kit declares the service, the in-container environment variable, and how
 to inject the credential. It doesn't declare a host discovery source. The user
 provides the value through the secret store or first-run prompt, and a
-[credential binding](../security/credentials.md) authorizes its use:
+[credential binding](../configuration/credentials.md) authorizes its use:
 
 ```yaml
 credentials:
@@ -215,10 +216,10 @@ request with that sentinel in `Authorization`, and the proxy overwrites
 the header with the real credential before forwarding. The real
 secret never enters the VM.
 
-See [Credentials](../security/credentials.md) for how to provide the
+See [Credentials](../configuration/credentials.md) for how to provide the
 credential value on your host, other approaches for cases the example
 above doesn't fit, and what the proxy does at request time. See
-[Credential bindings](../security/credentials.md) to approve the mechanisms
+[Credential bindings](../configuration/credentials.md) to approve the mechanisms
 and domains declared by a third-party v2 kit.
 
 ### Inject agent memory
@@ -302,19 +303,35 @@ agent. For a step-by-step walkthrough, see
 Use `extends:` to create a variant of a built-in agent without reproducing its
 configuration. The child kit inherits the parent's image, credentials, network
 permissions, persistent volumes, settings, MCP integration, and agent
-instructions. Use `extends:` for a single parent agent; use a mixin to add an
-independent capability that can work with one or more agents. See
+instructions. It also inherits the parent's environment variables and all
+`setup.install`, `setup.startup`, and `setup.files` entries. Parent setup entries
+run before child entries. If both kits set the same environment variable, the
+child's value wins. Use `extends:` for a single parent agent; use a mixin to add
+an independent capability that can work with one or more agents. See
 [Fork an existing agent](kit-examples.md#fork-an-existing-agent) for an example
 that changes Claude Code's permission mode.
 
 ## Using kits
 
 Kits can be loaded from a local path (a directory or ZIP file), a Git
-repository, or an OCI registry. Pass `--kit` more than once to stack
-several kits on the same sandbox.
+repository, or an OCI registry. To launch a sandbox kit, pass its reference in
+place of a built-in agent name to `sbx run` or `sbx create`. Use `--kit` for
+mixins, and repeat the flag to apply multiple mixins to the same sandbox.
+
+Starting with Docker Sandboxes version 0.42.0, pass the sandbox kit reference
+as the first argument:
+
+```console
+$ sbx run <sandbox-kit-ref> [PATH...]
+$ sbx create <sandbox-kit-ref> [PATH...]
+```
+
+The previous form, `sbx run <sandbox-kit-name> --kit <sandbox-kit-ref>`, is
+deprecated.
 
 > [!IMPORTANT]
-> `--kit` only takes effect when a sandbox is created. Passing it against an
+> A mixin passed with `--kit` only takes effect when a sandbox is created.
+> Passing it against an
 > existing sandbox name fails with
 > `--kit can only be used when creating a new sandbox`. To add a supported
 > mixin kit to a running sandbox, use [`sbx kit add`](#local) instead.
@@ -322,15 +339,78 @@ several kits on the same sandbox.
 > VM state — installed packages, Docker images, volumes, and agent history
 > — is preserved across the restart. It supports mixin kits limited to
 > `environment.variables`, `setup.install`, and `permissions.network.allow`.
-> To use other fields, recreate the sandbox with `--kit`.
+> To use other fields, recreate the sandbox with the mixin.
+
+### Pass arguments to kits
+
+A schema v2 kit can declare inputs in a top-level `args:` block and reference
+them in `spec.yaml` or static files with `${{ kit.args.<name> }}`. Supply a
+value with `--kit-arg name=value`:
+
+```console
+$ sbx run ./my-agent/ --kit-arg channel=beta
+```
+
+Kit argument values are plain text. Values supplied with `--kit-arg` can remain
+in your shell history, and argument files store their values unencrypted. Don't
+use kit arguments for secrets. Use [Credentials](../configuration/credentials.md)
+instead.
+
+An argument without a kit name prefix applies to every kit that declares it.
+To target one kit, prefix the argument with the value of that kit's `name`
+field and a period:
+
+```console
+$ sbx run ./my-agent/ \
+    --kit ./my-mixin/ \
+    --kit-arg version=1.2.3 \
+    --kit-arg my-mixin.version=2.0.0
+```
+
+The kit-specific value takes precedence over the shared value for `my-mixin`.
+
+Use `--kit-args-file` for a reusable set of `name=value` entries. Blank lines
+and lines that start with `#` are ignored:
+
+```text {title="kit.args"}
+version=1.2.3
+my-mixin.channel=beta
+```
+
+```console
+$ sbx create ./my-agent/ . \
+    --kit ./my-mixin/ \
+    --kit-args-file ./kit.args \
+    --kit-arg my-mixin.channel=stable
+```
+
+When you pass multiple argument files, a value in a later file overrides the
+same key in an earlier file. Values passed with `--kit-arg` override every
+file. For repeated `--kit-arg` entries with the same key, the last value wins.
+
+Argument validation happens before the sandbox is created. `sbx` rejects a
+missing required value, a value outside its declared `enum` or `pattern`, a
+placeholder without a declaration, and a supplied argument that no resolved
+kit declares. Pass the same argument flags to `sbx kit validate` or
+`sbx kit inspect` when the kit requires values. See
+[Kit arguments](kit-reference.md#arguments) for the declaration fields.
 
 ### Local
 
-Point `--kit` at a directory or ZIP file on disk:
+Launch a local sandbox kit by passing its directory or ZIP file in place of the
+agent name. Relative paths must start with `./` or `../` so `sbx` can
+distinguish them from agent and sandbox names:
 
 ```console
-$ sbx run claude --kit ./my-kit/
-$ sbx run claude --kit ./my-kit-1.0.zip
+$ sbx run ./my-agent/
+$ sbx create ../my-agent-1.0.zip .
+```
+
+Pass a local mixin with `--kit`:
+
+```console
+$ sbx run claude --kit ./my-mixin/
+$ sbx run claude --kit ../my-mixin-1.0.zip
 ```
 
 While iterating on a supported mixin kit, apply changes to a running sandbox
@@ -347,6 +427,14 @@ remove and recreate it to start clean.
 
 ### Git repository
 
+Launch a sandbox kit from a Git repository:
+
+```console
+$ sbx run "git+https://github.com/docker/sbx-kits-contrib.git#ref=v0.1.0&dir=amp"
+```
+
+Pass a Git-hosted mixin with `--kit`:
+
 ```console
 $ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#ref=v0.1.0&dir=code-server"
 ```
@@ -360,6 +448,14 @@ $ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#ref=v
 
 ### OCI registry
 
+Launch a sandbox kit from an OCI registry:
+
+```console
+$ sbx run docker.io/sbx/droid-kit:latest
+```
+
+Pass an OCI-hosted mixin with `--kit`:
+
 ```console
 $ sbx run claude --kit ghcr.io/myorg/my-kit:1.0
 ```
@@ -370,15 +466,16 @@ For Docker Hub, include the full `docker.io` prefix. See
 > [!IMPORTANT]
 > For Docker Hub, `sbx` reuses your `sbx login` session to pull private
 > kits. For other registries, store pull credentials with
-> [`sbx secret set --registry`](../security/credentials.md#registry-credentials)
-> before running the sandbox:
+> [`sbx secret set --registry`](../configuration/credentials.md#registry-credentials)
+> before running the sandbox. These credentials take priority over credentials
+> in the Docker credential store:
 >
 > ```console
 > $ gh auth token | sbx secret set --registry ghcr.io --password-stdin
 > ```
 >
-> Without stored credentials, pulls from non-Docker Hub registries are
-> anonymous and private kits fail to pull.
+> Without credentials from either store, pulls from non-Docker Hub registries
+> are anonymous and private kits fail to pull.
 
 ### Restrict kit sources
 
@@ -416,6 +513,69 @@ $ sbx settings set kit.allowLocalKits false
 For non-interactive use, both settings have environment-variable equivalents:
 `DOCKER_SANDBOXES_KIT_ALLOWED_SOURCES` and `DOCKER_SANDBOXES_KIT_ALLOW_LOCAL`.
 
+## Sign and verify kits
+
+Use cosign-compatible Sigstore signatures to verify who approved a kit and
+that its signed content hasn't changed. Signing is keyless by default. Verify a
+keyless signature with the certificate identity and OpenID Connect (OIDC)
+issuer:
+
+```console
+$ sbx kit sign ./my-kit/
+$ sbx kit verify \
+    --certificate-identity user@example.com \
+    --certificate-oidc-issuer https://accounts.google.com \
+    ./my-kit/
+```
+
+For key-based signing, use an ECDSA P-256 key pair:
+
+```console
+$ sbx kit sign --key cosign.key ./my-kit/
+$ sbx kit verify --key cosign.pub ./my-kit/
+```
+
+For a local directory, `sbx kit sign` writes a `kit.sig.bundle` file next to
+`spec.yaml`. Commit this file so consumers can verify a kit loaded from the Git
+repository. For an OCI kit, the signature is stored as an OCI referrer. You can
+sign an OCI kit after pushing it, or push and sign it in one step:
+
+```console
+$ sbx kit push ./my-kit/ ghcr.io/myorg/my-kit:1.0 --sign
+```
+
+ZIP kits can't carry verifiable signatures.
+
+### Require signed kits
+
+Set a trusted signer policy for the identities or keys you trust before
+requiring signatures. Otherwise, `sbx` uses the default policy, which trusts
+Docker employee identities attested by Google's OpenID Connect issuer. A
+keyless policy must specify both the certificate identity and its OpenID
+Connect issuer:
+
+```console
+$ sbx settings set kit.trustedSigners \
+    '[{"identity":"release-bot@example.com","issuer":"https://accounts.google.com"}]'
+$ sbx settings set kit.requireSignature true
+```
+
+To trust a key-based signature, set the policy to the public key path:
+
+```console
+$ sbx settings set kit.trustedSigners '[{"key":"/path/to/cosign.pub"}]'
+$ sbx settings set kit.requireSignature true
+```
+
+When `kit.requireSignature` is `true`, `sbx` rejects unsigned kits, signatures
+that don't match `kit.trustedSigners`, and ZIP kits. This policy applies when a
+kit is loaded from a local directory, Git repository, or OCI registry.
+
+The signature covers `spec.yaml` and the kit's `files/` content, but not mutable
+dependencies such as image tags or content downloaded by install and startup
+commands. Pin those dependencies by digest or checksum when they must remain
+immutable.
+
 ## Packaging and distribution
 
 The `sbx kit` subcommands validate, inspect, and publish kits:
@@ -434,16 +594,16 @@ The `sbx kit` subcommands validate, inspect, and publish kits:
 For Docker Hub, include the full `docker.io` prefix — `sbx` doesn't add it
 automatically.
 
-`sbx kit pull` prefers credentials stored with
-[`sbx secret set --registry`](../security/credentials.md#registry-credentials),
-falling back to the Docker credential store. `sbx kit push` only uses the
-Docker credential store, so pushing to a private registry requires a prior
-`docker login`.
+For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
+`sbx login`. For other registries, they prefer credentials stored with
+[`sbx secret set --registry`](../configuration/credentials.md#registry-credentials).
+Both commands fall back to the Docker credential store, so credentials from
+`docker login` also work.
 
 ## Spec reference
 
 For a field-by-field reference of every `spec.yaml` block — top-level
-fields, credentials, network, environment, setup, static files,
+fields, arguments, credentials, network, environment, setup, static files,
 agent instructions, and the sandbox block — see [Kit spec reference](kit-reference.md).
 
 ## Debugging

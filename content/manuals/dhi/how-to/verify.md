@@ -27,7 +27,7 @@ attestation infrastructure.
 > You must authenticate to the Docker Hardened Images registry (`dhi.io`) to
 > pull images. Use your Docker ID credentials (the same username and password
 > you use for Docker Hub) when signing in. If you don't have a Docker account,
-> [create one](../../accounts/create-account.md) for free.
+> [create one](../../accounts/individual/create-account.md) for free.
 >
 > Run `docker login dhi.io` to authenticate.
 
@@ -62,11 +62,11 @@ This command shows all available attestations, including SBOMs, provenance, vuln
 
 First, authenticate to both registries. This example authenticates as your
 Docker organization using an [organization access token
-(OAT)](../../enterprise/security/access-tokens.md). The OAT must have at least
+(OAT)](../../security/access-tokens/organization-access-tokens.md). The OAT must have at least
 pull access to the DHI repositories you want to verify. Only repositories in
 the token's scope are accessible. Alternatively, you can authenticate as a
 Docker Hub user with a [personal access token
-(PAT)](../../security/access-tokens.md) that has `read only` access.
+(PAT)](../../security/access-tokens/personal-access-tokens.md) that has `read only` access.
 
 > [!WARNING]
 >

@@ -1,10 +1,12 @@
 ---
 title: SIEM forwarding
 linkTitle: SIEM forwarding
-weight: 35
-description: Forward Docker AI Governance audit events to Splunk, Dynatrace, Datadog, or a custom HTTPS endpoint.
+weight: 40
+description: Forward Docker AI Governance audit events to Splunk, Dynatrace, or Datadog.
 keywords: docker sandboxes, SIEM, audit logs, Splunk, Dynatrace, Datadog, AI Governance, forwarding, NDJSON
 ---
+
+{{< summary-bar feature_name="AI Governance Audit Logs" >}}
 
 Docker can forward audit events to your security information and event
 management (SIEM) system, letting you centralize Docker governance data
@@ -16,16 +18,15 @@ with the supplied credential before saving.
 | Destination                      | Description                                                     |
 | -------------------------------- | --------------------------------------------------------------- |
 | Splunk Cloud (HEC)               | Hosted Splunk using the HTTP Event Collector                    |
-| Splunk Enterprise (self-hosted)  | Self-hosted Splunk using the HTTP Event Collector               |
 | Dynatrace                        | Dynatrace Log Management using the Log Ingest API               |
 | Datadog                          | Datadog Logs using the HTTP log intake API                      |
-| Custom HTTPS endpoint (advanced) | Any SIEM that accepts HTTPS with a custom authentication header |
-
-For any SIEM without a native integration, use the custom HTTPS endpoint
-option. Custom endpoints receive JSON Lines (NDJSON), where each line is one
-complete audit record.
 
 ## Before you begin
+
+SIEM forwarding requires Docker Sandboxes
+[0.39.0](/manuals/ai/sandboxes/release-notes.md) or later. Earlier versions
+don't deliver audit records to a SIEM destination, even when forwarding is
+configured. Update Docker Sandboxes before enabling a new destination.
 
 SIEM forwarding requires Docker Cloud delivery to be enabled for your
 organization. If you haven't already, enable it under **AI Platform** >
@@ -36,15 +37,10 @@ Gather credentials from your SIEM before configuring forwarding:
 
 - **Splunk Cloud**: HEC ingest URL and an HEC token. Optionally, a Splunk index
   name. See [Splunk documentation](https://docs.splunk.com/).
-- **Splunk Enterprise**: HEC endpoint URL (typically port 8088) and an HEC
-  token. The endpoint must present a publicly-trusted TLS certificate.
-  Optionally, a Splunk index name. See [Splunk documentation](https://docs.splunk.com/).
 - **Dynatrace**: Log Ingest API URL and an API token with the `logs.ingest`
   scope. See [Dynatrace documentation](https://docs.dynatrace.com/).
 - **Datadog**: Logs intake URL for your Datadog site and an API key. See
   [Datadog documentation](https://docs.datadoghq.com/).
-- **Custom HTTPS endpoint**: Your endpoint URL, authentication header name, and
-  full header value including any scheme (for example, `Bearer <token>`).
 
 ## Add a SIEM destination
 

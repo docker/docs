@@ -1,13 +1,13 @@
 ---
 title: Default security posture
 linkTitle: Defaults
-weight: 15
+weight: 20
 description: What a sandbox permits and blocks before you change any settings.
 keywords: docker sandboxes, security defaults, network policy, credentials, shared skills, sbx
 ---
 
-A sandbox created with `sbx run` and no additional flags has the following
-security posture.
+A sandbox created with `sbx run claude` and no additional flags has the
+following security posture.
 
 ## Network defaults
 
@@ -24,13 +24,18 @@ rules. See
 
 ## Workspace defaults
 
-Sandboxes use a direct mount by default. The agent sees and modifies your
-working tree directly, and changes appear on your host immediately.
+`sbx run` mounts the current directory when you don't pass a workspace path.
+The agent can read, write, and delete any file within that directory, including
+hidden files, configuration files, build scripts, and Git hooks.
 
-The agent can read, write, and delete any file within the workspace directory,
-including hidden files, configuration files, build scripts, and Git hooks.
-See [Workspace isolation](isolation.md#workspace-isolation) for what to
-review after an agent session.
+When you omit the workspace path from `sbx create`, the sandbox doesn't mount a
+host workspace. The agent uses the sandbox template's default working
+directory. Docker-provided agent templates use `/home/agent/workspace`. If the
+template doesn't define a usable absolute working directory, the daemon uses
+that path. Files in this directory persist across stops and restarts and are
+deleted when you remove the sandbox. See
+[Workspace isolation](isolation.md#workspace-isolation) for the available
+workspace modes and what to review after a direct-mount session.
 
 ## Shared skills defaults
 
@@ -38,7 +43,7 @@ Sandboxes for supported agents mount a persistent shared skills store
 read-write by default. Every sandbox that uses the store can change skills that
 other participating sandboxes may load. Use `--no-share-skills` when creating a
 sandbox to keep it outside this shared trust boundary. See
-[Share agent skills](../workflows.md#share-agent-skills).
+[Share agent skills](../workflows/agent-skills.md).
 
 ## Credential defaults
 
@@ -47,7 +52,7 @@ No credentials are available to the sandbox unless you provide them using
 host-side proxy injects them into outbound HTTP headers. The agent cannot
 read the raw credential values.
 
-See [Credentials](credentials.md) for setup instructions.
+See [Credentials](../configuration/credentials.md) for setup instructions.
 
 ## Agent capabilities inside the sandbox
 
@@ -59,9 +64,10 @@ The agent runs with full control inside the sandbox VM:
 - Full read and write access to the VM filesystem
 
 Everything the agent installs or creates inside the VM, including packages,
-Docker images, and configuration changes, persists across stop and restart
-cycles. When you remove the sandbox with `sbx rm`, the VM and its contents
-are deleted. Workspace files and the shared skills store remain on the host.
+Docker images, mountless workspace files, and configuration changes, persists
+across stop and restart cycles. When you remove the sandbox with `sbx rm`, the
+VM and its contents are deleted. Direct-mounted workspace files and the shared
+skills store remain on the host, as do repositories used as clone sources.
 
 ## What is blocked by default
 

@@ -72,7 +72,7 @@ Note that, if the Compose file defines many services, the SDK can only contact t
 
 > [!NOTE]
 >
-> In some cases, it is useful to also interact with the Docker engine from the backend.
+> In some cases, it is useful to also interact with Docker Engine from the backend.
 > See [How to use the Docker socket](../guides/use-docker-socket-from-backend.md) from the backend.
 
 To communicate with the backend, the Extension SDK provides [functions](../dev/api/backend.md#get) to make `GET`,

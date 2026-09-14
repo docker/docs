@@ -17,22 +17,24 @@ Launch Claude Code in a sandbox by pointing it at a project directory:
 $ sbx run claude ~/my-project
 ```
 
-The workspace parameter defaults to the current directory, so `sbx run claude`
-from inside your project works too. To start Claude with a specific prompt:
+To start Claude with a specific prompt in the current directory:
 
 ```console
-$ sbx run claude --name my-sandbox -- "Add error handling to the login function"
+$ sbx run --name my-sandbox claude -- "Add error handling to the login function"
 ```
 
 Everything after `--` is passed directly to Claude Code. You can also pipe in a
 prompt from a file with `-- "$(cat prompt.txt)"`.
+
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
 
 ## Authentication
 
 Claude Code requires either an Anthropic API key or a Claude subscription.
 
 **API key**: Store your key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set anthropic
@@ -49,6 +51,15 @@ available inside the sandbox. See
 [Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
+### Remote control
+
+To use Claude Code's `/remote-control` command inside a sandbox, turn on remote
+control:
+
+```console
+$ sbx settings set claude.remoteControl true
+```
+
 ### Default startup command
 
 Without extra args, the sandbox runs:
@@ -62,7 +73,7 @@ itself a flag (begins with `-`), so `--dangerously-skip-permissions` is
 preserved:
 
 ```console
-$ sbx run claude -- -c   # runs claude --dangerously-skip-permissions -c
+$ sbx run --name <sandbox-name> -- -c   # runs claude --dangerously-skip-permissions -c
 ```
 
 When the first argument is a bare word, such as the `agents` subcommand, it
@@ -75,11 +86,11 @@ for available options.
 
 Claude Code's [agents view](https://code.claude.com/docs/en/agent-view)
 starts background sessions that run tasks in parallel. Pair it with
-[clone mode](../workflows.md#clone-mode) to keep their changes inside the
+[clone mode](../workflows/git.md#clone-mode) to keep their changes inside the
 sandbox:
 
 ```console
-$ sbx run --clone claude -- agents
+$ sbx run --clone claude . -- agents
 ```
 
 This invocation replaces the
@@ -89,7 +100,7 @@ bypass-permissions mode inside the sandbox. To work around this, either
 use Claude Code's auto mode or pass the flag explicitly:
 
 ```console
-$ sbx run --clone claude -- --dangerously-skip-permissions agents
+$ sbx run --clone claude . -- --dangerously-skip-permissions agents
 ```
 
 Claude Code may use branches or worktrees to keep changes from its background
@@ -106,7 +117,7 @@ $ git fetch sandbox-<sandbox-name>
 $ git diff main..sandbox-<sandbox-name>/<branch>
 ```
 
-See [Git workflows](../workflows.md#git-workflows) for clone-mode details.
+See [Git workflows](../workflows/git.md) for clone-mode details.
 
 ## Base image
 
@@ -137,11 +148,10 @@ $ sbx run --model gemma4 claude
 On first use, `sbx` starts `llmman`, pulls the model, and leaves the server
 running on your host. Later sandboxes reuse the server and its model store.
 
-To use an existing Ollama installation instead, prefix the model name with
-`ollama/`:
+To use an existing Ollama installation instead, set the provider to `ollama`:
 
 ```console
-$ sbx run --model ollama/gemma4 claude
+$ sbx run --model gemma4 --provider ollama claude
 ```
 
 Ollama must already be installed and running. `sbx` connects to it but doesn't

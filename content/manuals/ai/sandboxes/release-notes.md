@@ -3,7 +3,7 @@ title: Docker Sandboxes release notes
 linkTitle: Release notes
 description: New features, bug fixes, and changes in Docker Sandboxes
 keywords: docker sandboxes, sbx, release notes, changelog
-weight: 120
+weight: 150
 toc_min: 1
 toc_max: 2
 tags:
@@ -15,6 +15,180 @@ the full release history, including pre-releases and downloads, see the
 [Docker Sandboxes releases on GitHub](https://github.com/docker/sbx-releases/releases).
 
 <!-- BEGIN GENERATED RELEASES -->
+
+## 0.42.1
+
+{{< release-date date="2026-09-07" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.42.1)
+
+### What's New
+
+#### Bug Fixes
+
+- Fix HTTP/2 upstream responses without bodies being incorrectly framed as chunked by the sandbox proxy.
+
+## 0.42.0
+
+{{< release-date date="2026-09-07" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.42.0)
+
+### Highlights
+
+- BREAKING: `sbx ports --publish` and kit-declared ports now default to `tcp4` instead of dual-stack `tcp`, so a published port no longer listens on `::1` unless you name the protocol explicitly (`--publish 8080:3000/tcp`); this makes `http://localhost:<port>/` reach a sandbox service that listens only on IPv4.
+- `sbx run` and `sbx create` now accept sandbox kit references as the agent positional: `sbx run <sandbox-kit-ref>`. The old form `sbx run <sandbox-kit-name> --kit <sandbox-kit-ref>` is deprecated; use the `--kit` flag for mixins.
+- Sandboxes can now be created without a workspace bind mount by omitting the path in `sbx create`. Note that this only affects the `create` command; `sbx run` still defaults to mounting the current directory as the primary workspace.
+
+### What's New
+
+#### CLI
+
+- Read-only `sbx` commands including `secret ls`, `version`, `mcp ls`, `skills ls`, `policy inspect` and the `kit` verification commands now accept `--json` for machine-readable output.
+- Clipboard commands inside local sandboxes can now copy text to the host clipboard.
+- Add, update, list, and remove sandbox skills directly from Git repositories with `sbx skills`.
+
+#### Environment files
+
+- `sbx env` now reads a non-hidden `sbxenv.yaml` from a project directory and no longer falls back to a hidden `.sbxenv.yaml` there; it merges a `.sbxenv.yaml` from your home directory beneath the project file as defaults shared across projects.
+- `sbx env` now shows a plan of everything an environment file changes on the host — host `lifecycle:` commands, credentials, bindings, MCP servers, workspaces, kits, ports and the sandbox itself — asks before applying it and asks again for every run of a command on this machine unless `env.rememberHostCommands` is set, binds the environment file read-only into the sandbox it describes, and reads a directory for `sbxenv.yaml` alone with `~/.sbxenv.yaml` as the user-level base beneath it.
+- `sbx env`: an environment file that declares no `workspace:` now creates a sandbox with no workspace bind mount instead of mounting the directory holding the file; write `workspace: .` to mount the project directory.
+- Environment files can now declare their own arguments in an `args:` block, referenced as `${{ env.args.NAME }}` and supplied with `sbx env --env-arg`; `${VAR}` interpolation in `.sbxenv.yaml` is no longer expanded.
+- Relative kit paths in an environment file now resolve against the file's directory instead of the directory `sbx` was run from.
+- `sbx env create` now shares imported skills by default and accepts display, GPU, and USB options in `sbxenv.yaml`.
+
+#### Daemon
+
+- Sandboxes now get a 10 GB Docker volume instead of 50 GB, which significantly reduces host disk usage; set `DOCKER_SANDBOXES_DOCKER_SIZE` to change it.
+
+#### Agents
+
+- Added Devin as a built-in agent.
+
+#### Kits
+
+- Kits can now declare their arguments in an `args:` block and receive values with `--kit-arg name=value`, or `--kit-arg kit.name=value` to target a single kit.
+- A `kits:` entry in sbxenv.yaml carries the arguments for that kit under `kits[].args`.
+
+#### Bug fixes
+
+- Docker Sandboxes no longer opens the setup wizard automatically; run `sbx setup` to launch it explicitly.
+- Fixed a vulnerability where a sandboxed process could get the daemon to open a host D-Bus transport and execute an arbitrary command on the host.
+- On macOS, sbx now accepts a workspace path whose casing differs from the spelling on disk instead of failing to create the sandbox.
+- Fixed a rare case where a spotty network right after your computer woke
+from sleep could cause an unexpected Docker Hub sign-out.
+- Agent crashes now identify the terminating signal and provide scoped recovery guidance.
+- Fixed a vulnerability where a malicious sandbox could hijack another sandbox's OAuth login by pre-claiming its callback port.
+- Removing or pruning a local sandbox now also deletes its sandbox-scoped secrets.
+- `sbx secret ls` no longer prints a stored secret unmasked when its value happens to match one of the status labels the listing displays.
+- `sbx` now warns when a stored credential is not sent to a sandbox because no binding authorizes it, instead of starting the sandbox and failing later with an authentication error.
+- Fixed several MCP-related bugs.
+- Standardized error message formatting for `sbx rm`, `sbx stop`, MCP authorization, and `sbx reset`.
+- Sandbox and agent not-found errors now use one sentence pattern and quote style across commands: sandbox '<name>' not found.
+- Docker Hub template pulls created through the TUI now use your Docker Sandboxes login credentials.
+- `sbx ports --publish` now automatically starts stopped local sandboxes before publishing ports.
+- Docker volume sizes below 512 MiB are now rejected before sandbox creation.
+- Creating a sandbox from a Docker Hardened Image template no longer results in a delay.
+- Fixed OAuth authentication for custom agent kits that declare resource hosts without a fallback API key.
+- Kits can now set a sandbox's CPU and memory limits through the `sandbox.resources` block in their spec.
+- Fixed SSH connections from editors by keeping non-interactive probes quiet and delivering their exit status before closing the channel.
+- Deleting a sandbox now reliably reclaims its disk volumes, and creating a new sandbox that reuses a deleted sandbox's name no longer inherits its files, Docker images, or agent session history.
+- Running `sbx setup` explicitly no longer causes the setup screen to appear again on the next interactive command.
+- Fixed sandbox connections to a server that sends data first — including passive FTP transfers and a serial console relayed to the host — failing with a timeout instead of receiving the server's output.
+- `sbx kit push` no longer uploads an empty payload layer for kits that ship no files.
+- `sbx kit push` now authenticates from the sbx credential store, so a single `sbx login` or `docker login` is enough for pushing, signing, and attaching provenance.
+- Kits using `extends:` now inherit the parent's setup commands, credentials, network allowlist, volumes, and environment variables instead of replacing them when the child declares its own.
+- Fixed Docker Hub credential refresh retrying without backoff after a rate limit, and a non-interactive login discarding the stored OAuth refresh token.
+- Nightly Homebrew installs no longer fail with checksum mismatches while a nightly publish is in flight: the sbx@nightly cask now downloads from immutable per-build release URLs.
+
+#### Other
+
+- Docker Sandboxes now provides a machine-wide Windows MSI for administrator-managed installations.
+- A declined `@requireApproval` prompt on a local MCP server now gets its own audit record, with policy attribution and a context digest, instead of leaving the original approval-required decision as the only trace of the exchange.
+- A registry mirror configured with `platform.images.registryMirror` is now also used by Docker running inside a sandbox, when the value is a bare host (no path prefix) that is not a loopback or wildcard address.
+- `sbx version --json` now reports a `server.state` of `running` or `unavailable`, so scripts can check whether the backend was reachable without parsing the error text.
+- SSH agent forwarding can be explicitly disabled and use either each client's current agent socket or a fixed socket path.
+- `sbx` terminal output now adapts colors for light terminal backgrounds and
+uses a distinct pink spinner glyph; CJK and combining-mark column widths in
+table output are now measured correctly; piped and JSON output is unchanged
+for ASCII-only content.
+- `sbx mcp add` now accepts `--skip-auth` (the old `--skip_auth` still works), and a `--url` on a private, loopback, or cloud-metadata address is resolved and registered with a warning instead of being rejected.
+- On Linux hosts without an available OS keychain, newly stored secrets are now read and written much faster; secrets already on disk keep their previous cost until they are next written.
+- Fixed a gateway defect where a remote MCP server's reconnect could silently wipe its tool routing, causing the server's tools to disappear from agents and be denied by organization MCP policy as unrecognized built-in tools until the daemon was restarted.
+- Docker Sandboxes can now upload a diagnostics bundle automatically when the daemon hits an error, after you opt in.
+- Governance resolution issues are now shown in sbx policy output and the dashboard.
+- `sbx mcp auth` now requests only the scopes you chose (or the set the resource itself requires, suppressible with the new `--no-scope` flag) instead of every scope a server advertises, explains which scopes a server refused along with a narrower retry command, and reports the scope sets of an existing grant in `sbx mcp auth status`: what was granted, what was requested, and what the server supports — with scopes sorted, duplicates collapsed, and differences such as unrequested or no-longer-advertised grants called out.
+- Sandbox listing and creation output now share one rendering package; on a terminal, `sbx ls` column headers are now styled bold.
+- Sandbox agent instruction files no longer include generic language-specific development guidance.
+- The sandboxd runtime state directory left behind by versions before v0.25.0 is now migrated to its current name instead of being used in place.
+
+## 0.39.0
+
+{{< release-date date="2026-08-19" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.39.0)
+
+### Highlights
+
+**Declarative sandbox environments.** Define a complete, reproducible sandbox in a `.sbxenv.yaml` file, including the agent, workspace, kits, environment variables, secrets, registry credentials, ports, and resource limits. Commit the file with your project so contributors can launch the same environment with `sbx env run`. This feature is experimental.
+
+### What's New
+
+#### Sandbox environments
+
+- Use `sbx env run` to provision an environment from `.sbxenv.yaml` and open an interactive session.
+- Use `sbx env create`, `sbx env exec`, and `sbx env rm` to manage the environment lifecycle.
+- Combine multiple environment files for shared configuration and local overrides.
+- Reference host environment variables in environment files for machine-specific paths and credentials.
+- See the [sandbox environment files documentation](https://docs.docker.com/ai/sandboxes/sandbox-environments/).
+
+#### CLI
+
+- Add an experimental `--usb` flag to `sbx create` behind the `DOCKER_SANDBOXES_FEATURE_SANDBOX_USB` environment variable to re-attach the specified USB devices. They will be available inside a sandbox via usbfs. Linux x86_64/ARM64 only.
+- sbx run --model now selects the Ollama backend via a new `--provider ollama` flag instead of an `ollama/` prefix on the model name.
+- Stopped sandboxes can now be cleaned up in bulk with `sbx prune`, which never removes a running sandbox and can filter on how long each has been stopped.
+- `sbx run` and `sbx create` now accept `-e`/`--env` and `--env-file` to set environment variables in a sandbox, following `docker run` precedence rules.
+
+#### Secrets
+
+- `sbx secret set` and `sbx secret set-custom` can now configure dynamic secrets that resolve values from a reference or command, with options to control refreshing, verification, and error output.
+- On Linux hosts without an available OS keychain, newly stored secrets are now read and written much faster; secrets already on disk keep their previous cost until they are next written.
+
+#### Daemon
+
+- Sandboxes now expose their own identity as `SANDBOX_NAME` and `SANDBOX_ID` environment variables, matching the name and id shown by `sbx ls --json`; the older `SANDBOX_VM_ID` still carries the sandbox name but is deprecated.
+
+#### Networking
+
+- Claude Code's `/remote-control` can now be used inside sandboxes by enabling `claude.remoteControl` setting: `sbx settings set claude.remoteControl true`.
+
+#### Bug Fixes
+
+- sandboxd now removes the sandbox container immediately when container startup fails, so an interrupted `sbx create`/`sbx run` is less likely to leave the sandbox name unusable.
+- Agent kits that declare a persistent volume without a size now get a 512 MB volume instead of a 50 GB one, which significantly reduces sandbox disk usage on the host.
+- `sbx` now reports a clear error for an unrecognized command, subcommand, or `sbx help` topic instead of printing help and succeeding, and reports a mistyped command without first asking an unauthenticated user to sign in.
+- Claude sandboxes now use around 3.9 GB less disk space on the host.
+- Claude sandboxes can connect to required Anthropic services when using the locked-down network policy.
+- `sbx kit inspect` now describes kits using kit-spec v2 field names and lists any deprecated fields a kit still relies on, and `sbx kit validate` now rejects OAuth credentials missing sentinels, a service, or a credential-file body.
+- DNS lookups in a sandbox now succeed for any host that network policy allows on any port, including hosts allowed only on a non-standard port such as `myhost:2222`.
+- `sbx template load` now fails with an error when an image import does not complete, instead of reporting success.
+- Correct the `sbx create --name` help text and CLI reference, which incorrectly listed plus signs as valid sandbox-name characters and omitted the leading-alphanumeric and two-character-minimum rules.
+- `sbx reset` now removes the Docker Sandboxes-managed block from `~/.ssh/config`.
+- `sbx` now reports the exit code when a sandbox container dies at startup, and rejects a template image built for a different CPU architecture with a clear message instead of failing after a 30-second wait.
+- Signing in to Claude Code with an Anthropic Console API key now succeeds on repeat logins instead of failing with a 401 error.
+- Fixed `sbx cp` failing on Windows when the local path has no directory component (e.g. `sbx cp file.txt sandbox:/tmp/`).
+- `sbx daemon restart` now starts the daemon again after a stop that reports a failure but leaves no daemon running.
+
+#### Other
+
+- `sbx diagnose` now reports free disk space on the volume holding sandbox data, and diagnostics bundles include host disk totals.
+- `sbx diagnose` now detects broken, shadowed, or stale SSH client configuration.
+- Add a `platform.images.registryMirror` setting that redirects Docker Hub-resolving sandbox template and kit images to an organization's registry mirror.
+- Filesystem policy denials now include the organization's support contact message, matching network denials.
+- sbx now reports when the host cannot provide a hypervisor — including a Windows installation running inside a virtual machine without nested virtualization — instead of a generic "failed to run sandbox container" error, and `sbx diagnose` now checks host virtualization support.
+- Kits can now be signed and verified with cosign-compatible Sigstore signatures via `sbx kit sign` / `sbx kit verify`, with optional policy enforcement at load time.
+- OAuth kits can declare their credential file with the declarative `credentialFile.structure` form, rendered to well-formed JSON, instead of a free-form Go template.
+- Ubuntu 25.10 packages are no longer published; Ubuntu 25.10 is end-of-life.
 
 ## 0.38.0
 
@@ -114,140 +288,6 @@ Run a sandbox with NVIDIA VFIO GPU passthrough on Linux using `sbx run --gpu`. E
 #### Local models
 
 Run Claude Code against a local GGUF model with `sbx run --model <name> claude`. To use a model from an existing Ollama installation, prefix the model name with `ollama/`. See [Claude Code > Use a local model](https://docs.docker.com/ai/sandboxes/agents/claude-code/#use-a-local-model).
-
-## 0.37.1
-
-{{< release-date date="2026-07-29" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.37.1)
-
-### Highlights
-
-This patch release stops SSH sessions from **forwarding credential environment variables into sandboxes by default**. Variables such as `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, and `GH_TOKEN` are no longer sent from the client to the sandbox unless explicitly allowed via the `ssh.acceptEnv` setting.
-
-### What's New
-
-#### Bug Fixes
-
-- SSH sessions no longer forward credential environment variables (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GH_TOKEN`, ...) from the client into the sandbox by default; use the `ssh.acceptEnv` setting to opt back in for specific variables
-
-## 0.37.0
-
-{{< release-date date="2026-07-24" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.37.0)
-
-### Highlights
-
-**SSH access to sandboxes (experimental).** Docker Sandboxes can now be used as SSH targets. After enabling SSH access, run `sbx setup ssh` once, then connect to an existing sandbox by name with `ssh my-sandbox.sbx`. Use the connection for interactive shells, one-shot commands, and SSH-based remote development.
-
-**Shared agent skills.** Docker Sandboxes can now import skills from supported host agents into a persistent store shared across sandboxes. Run sbx skills import to import them. New sandboxes mount the store read-write by default; use --no-share-skills to opt out.
-
-### What's New
-
-#### SSH
-
-- `sbx setup ssh` adds a managed `*.sbx` entry to your SSH config, making existing sandboxes available at `<name>.sbx`.
-- SSH connections start the local Docker Sandboxes daemon and the target sandbox automatically when needed.
-- Connect using OpenSSH-compatible clients and remote-development tools such as VS Code, Cursor, Claude Desktop, and ChatGPT.
-
-#### Shared skills
-
-- `sbx skills import` discovers and imports skills from the host and makes them available to sandboxed agents. Use `--dry-run` to preview imports and `--force` to replace existing skills.
-- Imported skills persist after sandbox deletion and are mounted into new sandboxes for supported agents.
-- Pass `--no-share-skills` to `sbx run` or `sbx create` when creating a sandbox to opt out.
-
-#### CLI
-
-- `sbx create` and `sbx run` accept `-p/--publish` to publish sandbox ports at creation time.
-
-#### Networking & Policy
-
-- `DOCKER_SANDBOXES_PROXY=system` routes sandbox egress through the host operating system's proxy configuration (macOS/Windows), including any PAC auto-config URL.
-- Governance-policy denials can now display an organization-configured support message (for example, who to contact).
-
-#### Security & Audit
-
-- Audit now emits execution-outcome records for network egress (per allowed connection) and filesystem mounts (per allowed path) — success, latency, and error class — alongside the policy-attributed decision records.
-- sandboxd excludes itself from Windows Error Reporting so daemon crash dumps cannot capture in-memory credentials.
-
-#### Performance
-
-- `sbx secret ls` and sandbox startup are faster on Linux hosts without an OS keychain — stored secrets are no longer all decrypted just to list or resolve credentials.
-
-### Bug Fixes
-
-- Fixed sandboxd failing to start on Linux hosts without an OS keychain, where the on-disk secret store's key derivation could peg a CPU during startup and the CLI would kill the still-starting daemon.
-- Fixed an intermittent "failed to fully delete sandbox" error when removing a running sandbox, caused by a network-teardown race with the engine's endpoint cleanup.
-
-## 0.35.0
-
-{{< release-date date="2026-07-10" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.35.0)
-
-### Notice
-
-There are no Linux/ARM64 builds for v0.35.x due to stability issues that were encountered during this release. We plan to bring them back for the next release.
-
-### Highlights
-
-- **Host environment variables are no longer used for authentication.** Previous versions automatically detected API keys in predefined environment variables (such as `ANTHROPIC_API_KEY`) and injected them into model provider requests. Starting with this release, sandboxes only authenticate using credentials you've explicitly stored, or OAuth for agents that support it. If you relied on environment variables, run the new `sbx secret import` command once to move your keys into the keychain. See the [credentials documentation](https://docs.docker.com/ai/sandboxes/security/credentials/) for details.
-- Policy commands are revamped with a more concise `sbx policy ls`, a new `sbx policy inspect`, and a `sbx policy check network` command for testing whether the current policy would allow an access request before you run. 
-- Networking gains a **SOCKS5 upstream-proxy transport**.  
-
-### What's New
-
-#### Networking & Proxy
-
-- The sandbox proxy can chain upstream egress through a SOCKS5 proxy (`socks5://` / `socks5h://`, with optional auth) via `DOCKER_SANDBOXES_PROXY`, `HTTP_PROXY`, or `HTTPS_PROXY`.
-- Add `DOCKER_SANDBOXES_NO_PROXY` to exclude destinations from `DOCKER_SANDBOXES_PROXY`, using standard `NO_PROXY` matching semantics.
-- Droid OAuth credentials are now proxy-managed: real tokens stay on the host and never land in the sandbox.
-- Faster sandbox startup: the TLS-proxy CA is installed by merging into the trust bundle instead of running `update-ca-certificates`, saving several hundred milliseconds.
-
-#### Policy
-
-- Simplify `sbx policy ls` and add `--wide`, `--source`, and `--decision` filters
-- Add `sbx policy check` to test whether the current policy would allow an access request
-- Balanced network preset now allows VS Code domains, Azure Blob Storage (`*.blob.core.windows.net`), and `dhi.io` over HTTP.
-
-#### Kits
-
-- `sbx kit add` now recreates the sandbox container with the augmented kit set instead of injecting at runtime. State is preserved with the re-creation.
-- `sbx kit add` applies the added kit's network allow/deny rules and composed policy on the running sandbox.
-- Re-attaching to a sandbox created from a custom `--kit` agent now works with `sbx run --name <name>` without re-passing `--kit`.
-- Kits can inject the user's Docker login token into requests to docker.com hosts via a credential with service `sbx-login`.
-
-#### CLI
-
-- `sbx rm` now won't delete an active session unless `--force` is passed.
-- `sbx inspect` now lists the sandbox's kits, injected secrets, and sandbox information.
-- Added `sbx daemon` command (`start`, `stop`, `status`, `log-level`)
-
-#### Secrets
-
-- `sbx secret import` imports credential env vars into the keychain; `sbx secret ls` flags env-only and OAuth-shadowed entries. Host env vars no longer auto-inject at runtime — use `sbx secret import` to migrate.
-
-#### Runtime & images
-
-- Enable virtiofs caching by default on all operating systems by default for faster filesystem performance (`DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0` to opt out).
-
-### Bug Fixes
-
-- Fix "container not found" errors when copying files with `sbx cp` on a sandbox that has had a kit added.
-- Enforce the one-credential-per-service rule on credential capture paths so a stale API key no longer shadows a newly captured credential.
-- Fix `sbx login` failing with "The specified item already exists in the keychain" when signing back into a previously used account; logout now clears all stored Docker credentials.
-- Restarted sandboxes keep GitHub access by rehydrating the stored `github` credential on daemon restart.
-- Fix a custom kit clearing the proxy's built-in GitHub auth header mapping for the whole daemon until a restart.
-- Tunnel plain-HTTP forward traffic (e.g. `apt`, port 80) via CONNECT when the upstream proxy only supports CONNECT.
-- Sandbox egress through an upstream proxy identifies as `sbx-proxy` on the CONNECT handshake.
-- Fix IPv6 policy allow rules using bracket notation (e.g. `[fdcb::1]:22`) not matching.
-- Fix `sbx` connecting to the wrong Docker daemon when `DOCKER_HOST` is set in the environment.
-- Serialize Docker Hub token refresh across the CLI and daemon so sign-in sessions aren't unexpectedly lost.
-
-### Platform support
-
-- Block installation on Windows versions older than Windows 11 (the only currently supported version).
 
 <!-- END GENERATED RELEASES -->
 

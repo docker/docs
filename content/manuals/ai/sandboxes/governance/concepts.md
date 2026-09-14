@@ -37,6 +37,24 @@ share the same domain, either `network` or `filesystem`. MCP policies use Cedar
 statements written in the `MCP` namespace instead of the network and filesystem
 rule format.
 
+### Limits
+
+Organization policies have the following limits, which help ensure fair usage
+and resource availability across organizations:
+
+| Limit                     | Value                                               |
+|---------------------------|-----------------------------------------------------|
+| Policies per organization | 100                                                 |
+| Rules per policy          | 250                                                 |
+| Policy size               | 400 KB total, shared across all of a policy's rules |
+
+Typical policies use only a small fraction of the policy size limit. Domain
+and file path values have no separate length limit beyond valid format.
+
+If these limits don't fit your organization's needs,
+[contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
+to discuss options.
+
 ## Policy scope
 
 Each organization policy applies either across the whole organization or only
@@ -47,7 +65,7 @@ to specific teams:
 - Team-scoped: with one or more teams assigned, the policy applies only to
   members of those teams.
 
-Teams are the same [teams](/manuals/admin/organization/manage/manage-a-team.md)
+Teams are the same [teams](/manuals/accounts/organization/manage/manage-a-team.md)
 you manage for your organization; Docker matches a policy's teams against each
 user's team membership. Because an organization can mix org-wide and team-scoped
 policies, a single user is often subject to several at once. The policies that
@@ -66,12 +84,12 @@ rules have no effect.
 
 **Hostname patterns**
 
-| Pattern               | Example           | Matches                                            |
-| --------------------- | ----------------- | -------------------------------------------------- |
-| Exact hostname        | `example.com`     | `example.com` only, not subdomains                 |
-| Single-level wildcard | `*.example.com`   | One subdomain level: `api.example.com`             |
-| Multi-level wildcard  | `**.example.com`  | Any depth: `api.example.com`, `v2.api.example.com` |
-| Hostname with port    | `example.com:443` | `example.com` on port 443 only                     |
+| Pattern               | Example           | Matches                                                      |
+| --------------------- | ----------------- | ------------------------------------------------------------- |
+| Exact hostname        | `example.com`     | `example.com` on any port, not subdomains                     |
+| Single-level wildcard | `*.example.com`   | One subdomain level, any port: `api.example.com`              |
+| Multi-level wildcard  | `**.example.com`  | Any depth, any port: `api.example.com`, `v2.api.example.com`  |
+| Hostname with port    | `example.com:443` | `example.com` on port 443 only                                |
 
 `example.com` and `*.example.com` don't cover each other. Specify both if you
 need to match the root domain and its subdomains.

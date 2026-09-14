@@ -10,8 +10,8 @@ params:
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can
-build containers, install packages, and modify files without touching your host
-system.
+build containers, install packages, and modify files without accessing host
+resources beyond those you share.
 
 > [!NOTE]
 > The `sbx` CLI is free to use, including for commercial work. Only
@@ -40,6 +40,10 @@ jump to the [usage guide](usage.md) for basic commands.
 ## Learn more
 
 - [Agents](agents/) — supported agents and per-agent configuration
+- [Workflows](workflows/) — patterns for Git, local development,
+  authentication, agent skills, and automation
+- [Configuration](configuration/) — manage credentials, declare project
+  environments, turn on GPU passthrough, and configure an upstream proxy
 - [Integrations](integrations/) — connect editors and apps like VS Code and
   Cursor to a sandbox over SSH
 - [MCP gateway](mcp-gateway.md) — register MCP servers and connect them to
@@ -48,8 +52,6 @@ jump to the [usage guide](usage.md) for basic commands.
   extending or tailoring sandboxes
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,
   networking
-- [Upstream proxy](upstream-proxy.md) — route sandbox and daemon traffic through
-  a corporate proxy, PAC file, or your OS system proxy
 - [Security](security/) — isolation model, credential handling, and
   network policies
 - [CLI reference](/reference/cli/sbx/) — full list of `sbx` commands and options

@@ -98,21 +98,22 @@ jobs:
 
 This creates workflow steps to:
 
-1. Set up Docker buildx.
+1. Set up Docker Buildx.
 2. Authenticate to the registry.
 3. Extract metadata from Git reference and GitHub events.
 4. Build and push the Docker image to the registry.
 
 > [!NOTE]
 >
-> This CI workflow runs a local analysis and evaluation of your image. To
-> evaluate the image locally, you must ensure that the image is loaded the
-> local image store of your runner.
+> The Scout compare step only runs on pull requests
+> (`if: github.event_name == 'pull_request'`). Those builds set `load: true`
+> and leave `sbom` / `provenance` off so the image can land in the runner's
+> local store.
 >
-> This comparison doesn't work if you push the image to a registry, or if you
-> build an image that can't be loaded to the runner's local image store. For
-> example, multi-platform images or images with SBOM or provenance attestation
-> can't be loaded to the local image store.
+> On push events the same job turns SBOM and provenance on and pushes to
+> the registry. Don't enable those attestations (or a multi-platform build)
+> on the PR path — those images can't be loaded locally, and compare would
+> have nothing to inspect.
 
 With this setup out of the way, you can add the following steps to run the
 image comparison:

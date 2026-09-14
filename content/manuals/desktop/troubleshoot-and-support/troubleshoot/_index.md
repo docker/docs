@@ -7,6 +7,7 @@ toc_max: 2
 title: Troubleshoot Docker Desktop
 linkTitle: Troubleshoot and diagnose
 aliases:
+  - /docker-for-windows/troubleshoot/
   - /desktop/troubleshoot/overview/
   - /desktop/troubleshoot/
 tags: [Troubleshooting]

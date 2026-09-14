@@ -126,6 +126,54 @@ Additional common fields:
 - `linkTitle:` — sidebar label (keep under 30 chars)
 - `weight:` — ordering within a section
 
+## Sidebar navigation
+
+The section sidebar is rendered by
+`layouts/_partials/sidebar/sections.html`. It starts at `.FirstSection` and
+recursively walks each section's `.Pages`. Page weight controls the default
+order. Section front matter can group entries with `sidebar.groups`, reverse
+their order with `sidebar.reverse`, override a link with `sidebar.goto`, and
+add a badge with `sidebar.badge`.
+
+The sidebar expands the current page's ancestor sections and marks the current
+page with `aria-current`. When changing the recursive templates, pass all
+navigation state through both `renderChildren` and `renderList`. Keep the page
+filter and the `$hasChildren` calculation aligned so an expand control never
+points to an empty list or disappears for a rendered list.
+
+## Hidden pages
+
+Set `sitemap: false` to hide a page from site-wide discovery. This setting:
+
+- Excludes the page from `sitemap.xml`, `metadata.json`, and `llms-full.txt`
+- Excludes the page body from the site search index
+- Adds a `noindex` robots meta tag
+
+The page is still built and remains available through direct links. This is
+not an access control mechanism.
+
+Hugo does not automatically apply `sitemap: false` from a section page to its
+descendants. To hide an entire subtree, cascade the value from the section's
+`_index.md`:
+
+```yaml
+sitemap: false
+cascade:
+  sitemap: false
+```
+
+## Hidden sections in the sidebar
+
+The sidebar uses `sitemap` as a navigation visibility filter. A hidden page is
+absent from the sidebar outside its active navigation path. The current page
+and its ancestors remain visible so direct links to hidden pages do not produce
+an empty navigation path.
+
+When the active path enters a hidden section, `revealHidden` propagates down
+that branch and renders the whole hidden subtree. This keeps the section's
+navigation available while you are in it. The state must remain scoped to that
+branch so unrelated hidden pages stay hidden.
+
 ## Hugo shortcodes
 
 Shortcodes are defined in `layouts/shortcodes/`. Syntax reference is in
@@ -137,16 +185,24 @@ produces broken HTML — always check COMPONENTS.md for correct syntax.
 ```sh
 npx --no-install rumdl fmt <file>  # Format Markdown before committing
 npx prettier --write <file>        # Format non-Markdown files
-scripts/lint.sh <file>...          # Lint specific files (rumdl + Vale)
+scripts/lint.sh <markdown-file>... # Lint specific files (rumdl + Vale)
 docker buildx bake validate        # Run all validation checks
 docker buildx bake lint            # Markdown linting only
 docker buildx bake vale            # Style guide checks only
 docker buildx bake test            # HTML and link checking
 ```
 
-For incremental work, prefer `scripts/lint.sh` over the `bake` targets —
-it runs the same checks on just the files you pass, so the output stays
-scoped to your changes instead of the whole repo.
+`npx --no-install` uses the repository-pinned rumdl binary and never downloads
+a replacement. If the binary is unavailable, run `npm ci` to install the
+repository dependencies. Install Vale separately.
+
+For incremental work, prefer `scripts/lint.sh` over the `bake` targets. Pass
+only the Markdown files you changed so the output stays scoped instead of
+including the whole repository.
+
+Vale exits successfully when it reports only warnings or suggestions. Read the
+full output: fix errors and warnings on lines you added or changed, and review
+each suggestion. Don't expand the change to unrelated alerts in existing text.
 
 ### Validation in git worktrees
 
@@ -159,10 +215,10 @@ and `validate-vendor` targets run correctly in CI.
 
 1. Make changes
 2. Format Markdown with rumdl: `npx --no-install rumdl fmt <file>`
-3. Lint the changed files: `scripts/lint.sh <file>...`
+3. Lint the changed Markdown files: `scripts/lint.sh <markdown-file>...`
 4. Run a full build with `docker buildx bake` (optional for small changes)
 
-Always lint the specific files you changed before committing. Use
+Always lint the specific Markdown files you changed before committing. Use
 `scripts/lint.sh` rather than the `bake` targets so the output is scoped
 to your changes — bake runs across the entire repo and the noise makes
 real issues easy to miss.

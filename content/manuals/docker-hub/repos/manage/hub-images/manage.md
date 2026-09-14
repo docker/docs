@@ -30,6 +30,10 @@ Use the following steps to delete one or more items via the graphical user
 interface. To delete in bulk, see the [deletion API
 endpoint](/reference/api/registry/latest/#tag/delete).
 
+> [!NOTE]
+> Images associated with [immutable tags](./immutable-tags.md) can't be
+> deleted. Only items associated with mutable tags can be deleted.
+
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **My Hub** > **Repositories**.
 3. In the list, select a repository.

@@ -45,6 +45,7 @@ CLI, and common development tools like Node.js, Python, Go, and Java.
 | `codex`               | [OpenAI Codex](https://github.com/openai/codex)                      |
 | `copilot`             | [GitHub Copilot](https://github.com/github/copilot-cli)              |
 | `cursor-agent`        | [Cursor](https://cursor.com/cli)                                     |
+| `devin`               | [Devin CLI](https://docs.devin.ai/work-with-devin/devin-cli)         |
 | `docker-agent`        | [Docker Agent](https://github.com/docker/docker-agent)               |
 | `droid`               | [Droid](https://www.factory.ai)                                      |
 | `gemini`              | [Gemini CLI](https://github.com/google-gemini/gemini-cli)            |
@@ -61,15 +62,18 @@ default.
 The agent containers created from the `-docker` templates run in privileged
 mode inside the microVM (not on your host), with a dedicated block volume at
 `/var/lib/docker`, and `dockerd` starts automatically inside the sandbox. The
-block volume defaults to 50 GB and uses a sparse file, so it only consumes
+block volume defaults to 10 GB and uses a sparse file, so it only consumes
 disk space as Docker writes to it.
 
-To override the volume size, set the `DOCKER_SANDBOXES_DOCKER_SIZE`
-environment variable to a size string before starting the sandbox:
+To change the volume size for a sandbox, set
+`DOCKER_SANDBOXES_DOCKER_SIZE` when you create it:
 
 ```console
-$ DOCKER_SANDBOXES_DOCKER_SIZE=10g sbx run claude
+$ DOCKER_SANDBOXES_DOCKER_SIZE=20g sbx run claude
 ```
+
+The volume size must be at least 512 MiB. The environment variable doesn't
+resize existing volumes.
 
 Use the non-Docker variant if you don't need to build or run containers
 inside the sandbox and want a lighter, non-privileged environment. Specify
@@ -115,13 +119,15 @@ $ docker build -t my-org/my-template:v1 --push .
 > [!NOTE]
 > The Docker daemon used by Docker Sandboxes pulls templates from a
 > registry directly; it doesn't share the image store of your local Docker
-> daemon on the host.
+> daemon on the host. To route Docker Hub image pulls through your
+> organization's registry infrastructure, configure a
+> [registry mirror](../configuration/registry-mirror.md).
 
 > [!IMPORTANT]
 > For Docker Hub, `sbx` reuses your `sbx login` session to pull private
 > images. For other registries (GitHub Container Registry, ECR, ACR, a
 > self-hosted Nexus, and so on), store pull credentials with
-> [`sbx secret set --registry`](../security/credentials.md#registry-credentials)
+> [`sbx secret set --registry`](../configuration/credentials.md#registry-credentials)
 > before running the sandbox:
 >
 > ```console
@@ -186,7 +192,7 @@ interactively and want to preserve it.
 > shared with anyone you distribute it to. To keep credentials out of
 > templates, manage them with `sbx secret set` instead — the proxy injects
 > them at runtime so they're never written to the filesystem. For more
-> information, see [Manage credentials](../security/credentials.md).
+> information, see [Manage credentials](../configuration/credentials.md).
 
 ### Save and reuse
 

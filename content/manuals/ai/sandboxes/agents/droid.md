@@ -1,6 +1,6 @@
 ---
 title: Droid
-weight: 35
+weight: 60
 description: |
   Use Droid in Docker Sandboxes with API key or OAuth authentication.
 keywords: docker sandboxes, droid, factory, ai agent, sbx
@@ -12,6 +12,10 @@ coding agent by Factory, in a sandboxed environment.
 Official documentation: [Droid](https://docs.factory.ai/)
 
 ## Quick start
+
+> [!NOTE]
+> In Docker Sandboxes v0.42, use `sbx run docker.io/sbx/droid-kit:latest`.
+> The `droid` shorthand is unavailable in this release.
 
 Create a sandbox and run Droid for a project directory:
 
@@ -34,7 +38,7 @@ where you supply a model provider key, Factory manages model access through
 your Factory account.
 
 **API key**: Store your Factory API key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set droid

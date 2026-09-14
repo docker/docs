@@ -1,7 +1,7 @@
 ---
 title: Audit record reference
 linkTitle: Record reference
-weight: 40
+weight: 50
 description: Reference fields, categories, decisions, and payload types for Docker AI Governance audit records.
 keywords: docker sandboxes, audit record, audit schema, AI Governance, policy decision, action_type, jsonl
 ---

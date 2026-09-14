@@ -1,15 +1,15 @@
 ---
 title: Get started with Docker Sandboxes
 linkTitle: Get started
-weight: 10
+weight: 20
 description: Configure agent credentials and work through your first Docker Sandboxes session.
 keywords: sandbox, sbx, get started, credentials, clone mode, network policy
 ---
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can
-build containers, install packages, and modify files without touching your host
-system.
+build containers, install packages, and modify files without accessing host
+resources beyond those you share.
 
 This page walks through your first session: run an agent in a sandbox, see how
 the sandbox isolates it, control what it can reach on the network, and clean
@@ -30,14 +30,14 @@ in with OAuth. The session token stays on your host and is never stored inside
 the sandbox.
 
 If you prefer to authenticate with an API key, see
-[Credentials](security/credentials.md) for how to store one with
+[Credentials](configuration/credentials.md) for how to store one with
 `sbx secret set`.
 
 To give the agent access to GitHub for creating pull requests or interacting
 with repositories:
 
 ```console
-$ sbx secret set github -t "$(gh auth token)"
+$ sbx secret set github --command 'gh auth token'
 ```
 
 ## Run your first sandbox
@@ -99,7 +99,8 @@ Each row shows a sandbox's name, the agent running in it, its status, any
 workspace — the host directory shared into the sandbox. That workspace is the
 one part of your machine the agent can see.
 
-By default, the workspace is shared read-write, so the agent and your host see
+When you run `sbx run` from a project directory without passing a workspace
+path, the current directory is mounted read-write. The agent and your host see
 the same files. Edits the agent makes to your project appear in your working
 tree as it writes them, and you review them as an ordinary Git diff before
 committing.
@@ -175,8 +176,10 @@ Then explore:
 
 - [Usage guide](usage.md) — basic commands, reconnecting, workspaces, and port
   publishing.
-- [Workflow patterns](workflows.md) — Git strategies, local services, CI, and
+- [Workflow patterns](workflows/) — Git strategies, local services, CI, and
   authenticated tools.
+- [Sandbox environment files](configuration/environment-files.md) — declare and share
+  repeatable local sandbox configurations with `sbxenv.yaml`.
 - [Customize with kits](customize/) — package an agent, its tools, and its
   network rules into a reusable definition you launch with a single flag.
 - [Agents](agents/) — the full list of supported agents and how to configure

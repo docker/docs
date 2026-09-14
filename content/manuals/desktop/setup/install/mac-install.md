@@ -23,8 +23,8 @@ aliases:
 
 This page provides download links, system requirements, and step-by-step installation instructions for Docker Desktop on Mac.
 
-{{< button text="Docker Desktop for Mac with Apple silicon" url="https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64" >}}
-{{< button text="Docker Desktop for Mac with Intel chip" url="https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64" >}}
+{{< button text="Docker Desktop for Mac with Apple silicon" url="https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64" marlin_label="download_dmg_click" >}}
+{{< button text="Docker Desktop for Mac with Intel chip" url="https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64" marlin_label="download_dmg_click" >}}
 
 *For checksums, see [Release notes](/manuals/desktop/release-notes.md).*
 
@@ -99,7 +99,7 @@ This page provides download links, system requirements, and step-by-step install
 
 6. From the installation window, select either: 
    - **Use recommended settings (Requires password)**. This lets Docker Desktop automatically set the necessary configuration settings. 
-   - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](/manuals/desktop/settings-and-maintenance/settings.md#advanced), for more information and how to set the location of the Docker CLI tools.
+   - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, and enable the default Docker socket. With version 4.88.0 and earlier, you can also enable privileged port mapping. See [Settings](/manuals/desktop/settings-and-maintenance/settings.md#advanced), for more information and how to set the location of the Docker CLI tools.
 7. Select **Finish**. If you have applied any of the previous configurations that require a password in step 6, enter your password to confirm your choice.  
 
 ### Install from the command line
@@ -164,7 +164,7 @@ $ sudo /Applications/Docker.app/Contents/MacOS/install --user testuser --proxy-h
 ## Where to go next
 
 - Explore [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopMacInstall) to see what Docker can offer you.
-- [Get started with Docker](/get-started/introduction/_index.md).
+- [Build and share a containerized application](/get-started/tutorials/run-an-app.md).
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
 - [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.

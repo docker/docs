@@ -25,16 +25,18 @@ If you are brand new to Docker, see [About Docker Engine](../../_index.md).
 
 To run this tutorial, you need:
 
-* [Three Linux hosts which can communicate over a network, with Docker installed](#three-networked-host-machines)
-* [The IP address of the manager machine](#the-ip-address-of-the-manager-machine)
-* [Open ports between the hosts](#open-protocols-and-ports-between-the-hosts)
+- [Set up](#set-up)
+  - [Three networked host machines](#three-networked-host-machines)
+    - [Install Docker Engine on Linux machines](#install-docker-engine-on-linux-machines)
+  - [The IP address of the manager machine](#the-ip-address-of-the-manager-machine)
+  - [Open protocols and ports between the hosts](#open-protocols-and-ports-between-the-hosts)
+- [Next steps](#next-steps)
 
 ### Three networked host machines
 
 This tutorial requires three Linux hosts which have Docker installed and can
 communicate over a network. These can be physical machines, virtual machines,
-Amazon EC2 instances, or hosted in some other way. Check out
-[Deploy to Swarm](/guides/swarm-deploy.md#prerequisites) for one possible set-up for the hosts.
+Amazon EC2 instances, or hosted in some other way.
 
 One of these machines is a manager (called `manager1`) and two of them are
 workers (`worker1` and `worker2`).

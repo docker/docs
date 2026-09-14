@@ -389,7 +389,7 @@ you want to reuse infrastructure definitions across projects.
 1. Create a new file in your project directory called `infra.yaml` and move the Redis service and volume into it:
 
    ```yaml
-    services:
+   services:
      redis:
        image: redis:alpine
        volumes:

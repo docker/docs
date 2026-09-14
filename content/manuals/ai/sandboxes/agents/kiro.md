@@ -1,6 +1,6 @@
 ---
 title: Kiro
-weight: 50
+weight: 80
 description: |
   Use Kiro in Docker Sandboxes with device flow authentication for interactive
   AI-assisted development.
@@ -13,6 +13,10 @@ sandboxed environment.
 Official documentation: [Kiro CLI](https://kiro.dev/docs/cli/)
 
 ## Quick start
+
+> [!NOTE]
+> In Docker Sandboxes v0.42, use `sbx run docker.io/sbx/kiro-kit:latest`.
+> The `kiro` shorthand is unavailable in this release.
 
 Create a sandbox and run Kiro for a project directory:
 

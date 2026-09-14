@@ -1,6 +1,6 @@
 ---
 title: Shell
-weight: 90
+weight: 100
 description: Run an agent-less sandbox with a Bash login shell for manual setup, testing custom agent implementations, or inspecting a running environment.
 keywords: sandboxes, sbx, shell, agent, manual setup, testing
 ---
@@ -14,11 +14,19 @@ environment.
 $ sbx run shell ~/my-project
 ```
 
-The workspace path defaults to the current directory. To run a one-off
+`sbx run` defaults the workspace to the current directory. To run a one-off
 command instead of an interactive shell, pass it after `--`:
 
 ```console
 $ sbx run shell -- -c "echo 'Hello from sandbox'"
+```
+
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name:
+
+```console
+$ sbx create --name scratch shell
+$ sbx run --name scratch
 ```
 
 ## Default startup command
@@ -33,7 +41,7 @@ $ sbx run shell -- -c "echo hi"   # runs bash -l -c "echo hi"
 
 When the first argument is a bare word, it replaces `-l` instead.
 
-Store credentials using [stored secrets](../security/credentials.md#stored-secrets)
+Store credentials using [stored secrets](../configuration/credentials.md#stored-secrets)
 before running the sandbox. The proxy injects them into outbound API requests;
 credentials are never stored inside the VM:
 

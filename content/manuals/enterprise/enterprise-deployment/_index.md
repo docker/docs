@@ -1,6 +1,6 @@
 ---
 title: Deploy Docker Desktop 
-weight: 10
+weight: 20
 description: If you're an IT admin, learn how to deploy Docker Desktop at scale
 keywords: msi, docker desktop, windows, installation, mac, pkg, enterprise 
 params:

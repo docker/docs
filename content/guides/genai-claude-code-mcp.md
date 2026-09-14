@@ -71,7 +71,7 @@ Make sure you have:
 1. Select the **Docker Hub**MCP server
 1. Add the MCP server, then open the **Configuration** tab
 1. Enter your Docker Hub username
-1. [Create a read-only personal access token](/security/access-tokens/#create-a-personal-access-token) and enter your access token under **Secrets**
+1. [Create a read-only personal access token](/security/access-tokens/personal-access-tokens/#create-a-personal-access-token) and enter your access token under **Secrets**
 1. Save the configuration
 
 ![Docker Hub](images/genai-claude-code-mcp-catalog-docker-hub.avif "Docker Hub")
