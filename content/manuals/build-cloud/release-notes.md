@@ -9,6 +9,60 @@ tags: [Release notes]
 This page contains information about the new features, improvements, known
 issues, and bug fixes in Docker Build Cloud releases. 
 
+## 2026-09-14
+
+### Enhancements
+
+- Cloud builders now run BuildKit v0.33.0, upgraded from v0.32.2. Notable
+  changes:
+
+  - The maximum size of an exported attestation, such as an SBOM, is raised
+    from 40 MiB to 80 MiB. Builds whose SBOM exceeded the previous limit failed
+    with an error ending in `sbom.spdx.json exceeds 41943040 bytes`.
+  - The built-in Dockerfile frontend is updated to
+    [v1.27.0](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.27.0).
+    This only affects builds that don't pin a frontend with a `# syntax=`
+    directive.
+  - Credentials embedded in HTTP source URLs and Git bundle checkouts are now
+    redacted from more places in build progress output and error messages.
+    Builds that pass credentials with
+    [build secrets](/manuals/build/building/secrets.md) weren't affected.
+  - Git advice messages, such as detached `HEAD` guidance, are no longer shown
+    in build output for Git contexts and `ADD` Git sources. To show them again,
+    set the build argument `BUILDKIT_GIT_ADVICE=1`.
+
+  For the full list of changes, see the
+  [BuildKit release notes](https://github.com/moby/buildkit/releases/tag/v0.33.0).
+
+- Docker Build Cloud is verified against Buildx v0.37.0, up from v0.36.1. Buildx
+  is distributed with Docker Desktop and Docker Engine rather than with Docker
+  Build Cloud, so your client version depends on how you installed Docker. See
+  the [Buildx release notes](https://github.com/docker/buildx/releases) for
+  client-side changes.
+
+### Bug fixes
+
+- Fixed an error containing `no active session for` that could occur when
+  running concurrent builds that use a remote cache.
+- Fixed a possible `failed to apply diffs: snapshot does not exist` error.
+- Fixed a cache link that the remote cache exporter could silently drop.
+
+## 2026-08-18
+
+### Enhancements
+
+- Cloud builders now run BuildKit v0.32.2, upgraded from v0.32.1. This release
+  reverts a v0.32.1 workaround that pushed each attestation manifest only after
+  the image manifest it refers to. BuildKit again follows the OCI distribution
+  specification, which lets a referrer be pushed before its subject. If your
+  registry rejects a manifest whose subject doesn't exist yet, build with
+  `--output type=image,oci-artifact=false`. For details, see the
+  [BuildKit release notes](https://github.com/moby/buildkit/releases/tag/v0.32.2).
+
+- Docker Build Cloud is verified against Buildx v0.36.1, up from v0.36.0. See
+  the [Buildx release notes](https://github.com/docker/buildx/releases) for
+  client-side changes.
+
 ## 2026-08-03
 
 ### Enhancements
