@@ -63,7 +63,8 @@ A sandbox can be running or paused:
 
 When you create a sandbox, set a lifecycle timer from 1 to 24 hours and choose
 what happens when it expires. **Stop** stops the sandbox, while **Delete**
-deletes the sandbox and its files.
+deletes the sandbox and its files. When a sandbox stops, all processes running
+inside it stop too, including background processes.
 
 The sandbox's authentication, tools, access policy, and compute size are fixed
 when the sandbox is created and cannot be changed while it runs.
