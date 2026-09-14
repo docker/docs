@@ -67,15 +67,16 @@ target "default" {
 For examples on how to add annotations to images built with GitHub Actions, see
 [Add image annotations with GitHub Actions](/manuals/build/ci/github-actions/annotations.md)
 
-You can also add annotations to an image created using `docker buildx
-imagetools create`. This command only supports adding annotations to an index
+You can also add annotations to an image created using
+`docker buildx imagetools create`. This command only supports adding annotations to an index
 or manifest descriptors, see
 [CLI reference](/reference/cli/docker/buildx/imagetools/create/#annotation).
 
 ## Inspect annotations
 
-To view annotations on an **image index**, use the `docker buildx imagetools
-inspect` command. This shows you any annotations for the index and descriptors
+To view annotations on an **image index**, use the
+`docker buildx imagetools inspect` command. This shows you any annotations for
+the index and descriptors
 (references to manifests) that the index contains. The following example shows
 an `org.opencontainers.image.documentation` annotation on a descriptor, and an
 `org.opencontainers.image.authors` annotation on the index.
@@ -105,8 +106,9 @@ $ docker buildx imagetools inspect <IMAGE> --raw
 }
 ```
 
-To inspect annotations on a manifest, use the `docker buildx imagetools
-inspect` command and specify `<IMAGE>@<DIGEST>`, where `<DIGEST>` is the digest
+To inspect annotations on a manifest, use the
+`docker buildx imagetools inspect` command and specify `<IMAGE>@<DIGEST>`,
+where `<DIGEST>` is the digest
 of the manifest:
 
 ```console {hl_lines="22-25"}
@@ -170,7 +172,7 @@ exporter does not produce an index:
 $ docker build --output type=docker --annotation "index:foo=bar" .
 ```
 
-Likewise, the following example also does not work, because buildx creates a
+Likewise, the following example also does not work, because Buildx creates a
 `docker` output by default under some circumstances, such as when provenance
 attestations are explicitly disabled:
 

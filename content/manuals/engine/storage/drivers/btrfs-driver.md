@@ -36,7 +36,7 @@ Btrfs Filesystem as Btrfs.
 
 `btrfs` is supported if you meet the following prerequisites:
 
-- `btrfs` is only recommended with Docker CE on Ubuntu or Debian systems.
+- `btrfs` is only recommended with Docker Engine on Ubuntu or Debian systems.
 
 - Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,

@@ -1,9 +1,0 @@
-extends: substitution
-message: "Use '%s' instead of '%s'"
-level: error
-swap:
-  kilobytes?: kB
-  gigabytes?: GB
-  megabytes?: MB
-  petabytes?: PB
-  terabytes?: TB

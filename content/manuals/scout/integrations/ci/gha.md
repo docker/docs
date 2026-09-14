@@ -98,7 +98,7 @@ jobs:
 
 This creates workflow steps to:
 
-1. Set up Docker buildx.
+1. Set up Docker Buildx.
 2. Authenticate to the registry.
 3. Extract metadata from Git reference and GitHub events.
 4. Build and push the Docker image to the registry.

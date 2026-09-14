@@ -29,7 +29,9 @@ fi
 
 echo ""
 echo "=== vale ==="
-if ! vale --no-global --config="$repo_root/.vale.ini" "$@" 2>&1; then
+if ! vale --no-global --config="$repo_root/.vale.ini" sync 2>&1; then
+  exit_code=1
+elif ! vale --no-global --config="$repo_root/.vale.ini" "$@" 2>&1; then
   exit_code=1
 fi
 

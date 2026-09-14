@@ -48,8 +48,8 @@ aliases:
 - /installation/sles/
 ---
 
-This section describes how to install Docker Engine on Linux, also known as
-Docker CE. Docker Engine is also available for Windows, macOS, and Linux,
+This section describes how to install Docker Engine on Linux. Docker Engine is
+also available for Windows, macOS, and Linux,
 through Docker Desktop. For instructions on how to install Docker Desktop,
 see: [Overview of Docker Desktop](/manuals/desktop/_index.md).
 

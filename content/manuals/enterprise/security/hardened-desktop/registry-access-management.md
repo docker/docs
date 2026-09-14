@@ -122,8 +122,8 @@ Registry Access Management has these limits and platform-specific behaviors:
 
 These scenarios aren't restricted by Registry Access Management:
 
-- Docker buildx with the Kubernetes driver
-- Docker buildx with a custom Docker-container driver
+- Docker Buildx with the Kubernetes driver
+- Docker Buildx with a custom Docker-container driver
 - Some Docker Debug and Kubernetes image pulls (even if Docker Hub is blocked)
 - Images previously cached by registry mirrors may still be blocked if the
   source registry is restricted
