@@ -242,8 +242,8 @@ certificate store, and a non-root `agent` user with UID 1000 and home
 directory `/home/agent`. Its image must define an `ENTRYPOINT` or `CMD`.
 Install or ship any additional tools the workload needs.
 
-A Docker sandbox template is optional. For a complete Dockerfile that prepares
-UBI 9 and installs an agent, see
+A Docker sandbox template is optional. For a complete example of preparing
+a base image and installing an agent, see
 [Use your own base image](build-an-agent.md#use-your-own-base-image).
 
 The workload's image config owns the launch command and working directory.
