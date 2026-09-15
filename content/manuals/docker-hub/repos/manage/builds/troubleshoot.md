@@ -61,7 +61,7 @@ system access to the repositories.
 > also do this for an individual account to limit Docker Hub's access to your
 > source repositories.
 
-1. Generate a SSH keypair that you use for builds only, and add the public key to your source code provider account.
+1. Generate an SSH keypair that you use for builds only, and add the public key to your source code provider account.
 
     This step is optional, but allows you to revoke the build-only keypair without removing other access.
 
