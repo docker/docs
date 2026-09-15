@@ -1,7 +1,7 @@
 ---
 title: Build your own agent kit
 linkTitle: Build an agent
-description: Build a schema v3 Claude Code workload kit with a pinned agent binary, runtime configuration, proxy-managed credentials, and agent instructions.
+description: Build a schema v3 agent workload from your own Linux base image, prepare its sandbox environment, and configure credentials and agent instructions.
 keywords: sandboxes, sbx, kits, agent, tutorial, claude, workload, build
 weight: 30
 ---
@@ -14,16 +14,16 @@ weight: 30
 > feedback in the [docker/sbx-releases](https://github.com/docker/sbx-releases)
 > repository.
 
-Build a schema v3 workload kit that runs Claude Code with a pinned binary,
-configurable model, and an Anthropic API key held on the host. The same steps
-apply to other agents: build the software into an image, declare its runtime
-requirements, and provide instructions about the environment. Start from Docker's
-shell template, or [use your own base image](#use-your-own-base-image).
+Build a sandbox environment from a Linux base image you choose, then package
+it as a schema v3 workload kit. You'll prepare the operating system, install
+Claude Code, and configure its model, API access, and agent instructions.
+The same approach applies to other agents and organization-maintained images.
 
-This example uses API-key authentication. If you're starting with kits, read
-[Kits v3](kits.md) for the file layout and the roles of a workload and a mixin.
-The walkthrough builds up one kit, adding each part of its descriptor as it is
-needed. For field definitions, see the [Kit spec reference](kit-reference.md).
+For a shorter example that extends an existing agent environment, see
+[Build a workload](kits.md#build-a-workload). This tutorial builds up the
+whole environment and its descriptor step by step. If you're starting with
+kits, read [Kits v3](kits.md) for the file layout and the roles of a workload
+and a mixin. For field definitions, see the [Kit spec reference](kit-reference.md).
 
 This creates an independent v3 workload. It doesn't inherit the built-in
 `claude` kit, which uses v2. Any mixins you add must also use v3. For existing
@@ -52,60 +52,18 @@ builds the agent and defines the launch command. The Markdown file contains
 instructions the agent can read. Matching the YAML and Dockerfile stems lets
 the kit frontend find the recipe.
 
-## Build the agent into the image
+## Use your own base image
 
-First, define what goes into the image. The Dockerfile installs Claude Code
-and launches it with a settings file. The descriptor you write next will
-supply the agent version and create that settings file in the sandbox.
+A Docker sandbox template is optional. Your Dockerfile can prepare a Linux
+base image with the tools, account, and certificate store that the sandbox
+needs. This tutorial uses Red Hat Universal Base Image (UBI) 9 as a concrete
+example. For another base, adapt the package installation and account creation
+to its existing contents while preserving the
+[base image requirements](kit-reference.md#base-image-requirements).
 
-Save the following as `claude-team/claude-team.dockerfile`:
+### Install the system packages
 
-```dockerfile {title="claude-team/claude-team.dockerfile"}
-FROM docker/sandbox-templates:shell
-
-USER agent
-ARG CLAUDE_VERSION
-ENV PATH="/home/agent/.local/bin:${PATH}" \
-    IS_SANDBOX=1 \
-    CLAUDE_ENV_FILE=/etc/sandbox-persistent.sh
-
-RUN curl -fsSL https://claude.ai/install.sh -o /tmp/install-claude.sh \
-    && bash /tmp/install-claude.sh "${CLAUDE_VERSION}" \
-    && rm /tmp/install-claude.sh
-
-WORKDIR /home/agent/workspace
-ENTRYPOINT ["claude", "--settings", "/home/agent/.config/claude-team/settings.json"]
-CMD []
-```
-
-The `shell` template supplies the sandbox environment, including Bash, Git,
-curl, certificates, and the `agent` user at UID 1000. Installing as `agent`
-puts Claude Code under `/home/agent/`, where the launch user can access it.
-The `CLAUDE_VERSION` build argument receives its value from the descriptor in
-the next step.
-
-The Dockerfile owns the image's `ENTRYPOINT`, `CMD`, environment, user, and
-working directory. `CMD []` clears any inherited arguments. Claude Code's
-`--settings` option reads an additional settings file that the kit writes
-during sandbox creation.
-
-Installing Claude Code belongs in the build recipe because the binary is the
-same in every sandbox using this kit. BuildKit can cache that work. Reserve
-lifecycle install hooks for configuration that depends on an individual
-sandbox, such as registering a runtime endpoint.
-
-### Use your own base image
-
-Your workload can start from a different Linux distribution or an image
-maintained by your organization. A Docker sandbox template is optional. The
-workload's Dockerfile prepares the operating system and installs the agent,
-while its v3 descriptor declares network access, credentials, and other
-runtime configuration.
-
-This example uses Red Hat Universal Base Image (UBI) 9. To use it in this
-walkthrough, replace `claude-team.dockerfile` with the following Dockerfile.
-Keep the directory layout and follow the remaining descriptor steps on this
-page.
+Create `claude-team/claude-team.dockerfile` with the base image and packages:
 
 ```dockerfile {title="claude-team/claude-team.dockerfile"}
 FROM registry.access.redhat.com/ubi9/ubi:9
@@ -113,15 +71,41 @@ FROM registry.access.redhat.com/ubi9/ubi:9
 USER root
 RUN dnf install -y bash ca-certificates curl-minimal git shadow-utils tar gzip \
     && dnf clean all
+```
 
+Bash, Git, curl, and CA certificates provide the shell, source control, and
+HTTPS tools used in the sandbox. The `shadow-utils` package provides account
+creation commands. The archive tools support agent installation. Add any
+compilers, libraries, or other tools your projects need here.
+
+### Create the agent account
+
+The sandbox needs a non-root `agent` user with UID 1000 and home directory
+`/home/agent`. Append the following to the Dockerfile to create that account
+and writable directories for its workspace, configuration, and state:
+
+```dockerfile {title="Append to claude-team/claude-team.dockerfile"}
 RUN groupadd --gid 1000 agent \
     && useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash agent \
     && mkdir -p /home/agent/workspace /home/agent/.local/bin \
         /home/agent/.local/share /home/agent/.local/state \
         /home/agent/.config/claude-team /home/agent/.docker/sandbox/locks \
     && chown -R agent:agent /home/agent
+```
 
-# Prepare the certificate bundle used by the sandbox proxy and clients.
+Creating these directories as part of the build gives them the intended
+ownership before runtime mounts are applied. This example runs the agent
+without `sudo`. Install system packages in the Dockerfile. Reserve runtime
+install hooks for configuration that depends on an individual sandbox.
+
+### Prepare certificate trust
+
+Docker Sandboxes adds its proxy CA at runtime so clients can make HTTPS
+requests through the sandbox proxy. UBI stores its public CA roots at a
+different path from the bundle used by `sbx`. Append the following to copy
+those roots to that path and direct clients to the combined bundle:
+
+```dockerfile {title="Append to claude-team/claude-team.dockerfile"}
 RUN update-ca-trust \
     && mkdir -p /usr/local/share/ca-certificates /etc/ssl/certs \
     && cp /etc/pki/tls/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt
@@ -130,8 +114,20 @@ ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
     CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
     REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
     NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+```
 
-# Give the agent a writable file for persistent shell exports.
+If you add corporate CA certificates during the build, add them to
+`/etc/pki/ca-trust/source/anchors/` before running `update-ca-trust` and
+copying the bundle. For another distribution, use its certificate management
+command and source bundle path.
+
+### Prepare the shell environment
+
+Give the agent a writable file for environment exports that need to persist
+across shell commands. Append the following to create the file, source it
+from login and interactive shells, and set `BASH_ENV` for non-interactive Bash:
+
+```dockerfile {title="Append to claude-team/claude-team.dockerfile"}
 RUN touch /etc/sandbox-persistent.sh \
     && chown agent:agent /etc/sandbox-persistent.sh \
     && chmod 0644 /etc/sandbox-persistent.sh \
@@ -141,11 +137,22 @@ RUN touch /etc/sandbox-persistent.sh \
 
 ENV HOME=/home/agent \
     PATH="/home/agent/.local/bin:${PATH}" \
-    BASH_ENV=/etc/sandbox-persistent.sh \
-    CLAUDE_ENV_FILE=/etc/sandbox-persistent.sh \
-    IS_SANDBOX=1
+    BASH_ENV=/etc/sandbox-persistent.sh
+```
 
+The agent instructions later in this tutorial explain how to use this file.
+This completes the operating system preparation. The next step installs the
+agent into that environment.
+
+## Build the agent into the image
+
+Append the following to the Dockerfile to install Claude Code as `agent` and
+set its launch command:
+
+```dockerfile {title="Append to claude-team/claude-team.dockerfile"}
 USER agent
+ENV CLAUDE_ENV_FILE=/etc/sandbox-persistent.sh \
+    IS_SANDBOX=1
 ARG CLAUDE_VERSION
 RUN curl -fsSL https://claude.ai/install.sh -o /tmp/install-claude.sh \
     && bash /tmp/install-claude.sh "${CLAUDE_VERSION}" \
@@ -156,36 +163,22 @@ ENTRYPOINT ["claude", "--settings", "/home/agent/.config/claude-team/settings.js
 CMD []
 ```
 
-The preparation covers three parts of the environment that the shell template
-would otherwise supply:
+Installing as `agent` puts Claude Code under `/home/agent/`, where the launch
+user can access it. The `CLAUDE_VERSION` build argument receives its value
+from the descriptor in the next step. `CLAUDE_ENV_FILE` points Claude Code
+to the persistent environment file you prepared above.
 
-- A non-root `agent` account with UID 1000, home directory `/home/agent`, and
-  writable directories for agent configuration and state
-- Bash, Git, curl, CA certificates, and the archive tools used during agent
-  installation
-- A persistent environment file, sourced by Bash and used by Claude Code,
-  matching the instructions added later in this walkthrough
+The Dockerfile owns the image's `ENTRYPOINT`, `CMD`, environment, user, and
+working directory. `CMD []` clears inherited arguments. This tutorial uses
+Claude Code's `--settings` option to load a model setting chosen when creating
+the sandbox. You'll declare that settings file in
+[Write the model settings](#write-the-model-settings).
 
-The certificate step copies UBI's public CA roots to the bundle path used by
-`sbx`. At sandbox startup, Docker Sandboxes adds its proxy CA to this bundle.
-The environment variables direct clients to the combined bundle so HTTPS
-requests can trust the proxy. If you add corporate CA certificates during the
-build, add them to `/etc/pki/ca-trust/source/anchors/` before running
-`update-ca-trust` and copying the bundle.
-
-For an organization-maintained image, adapt the package installation and
-account creation to its existing contents. Preserve the
-[base image requirements](kit-reference.md#base-image-requirements), and
-install the libraries and tools your agent and projects need. This example
-runs the agent without `sudo`. Install additional system packages in the
-Dockerfile, or use a runtime install hook when configuration depends on the
-individual sandbox.
-
-The base image supplies filesystem content and image settings. It doesn't
-supply a kit's runtime declarations: continue below to configure API access,
-credentials, settings, and agent instructions. Any mixins added to this
-workload must use v3 and provide tools compatible with its operating system
-and architecture.
+Installing Claude Code belongs in the build recipe because the binary is the
+same in every sandbox using this kit. BuildKit can cache that work. The image
+provides the software and launch command; the descriptor that follows declares
+its runtime needs. Any mixins added to this workload must use v3 and provide
+tools compatible with its operating system and architecture.
 
 ## Describe the workload and its inputs
 

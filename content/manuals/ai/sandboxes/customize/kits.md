@@ -178,9 +178,7 @@ CMD []
 ```
 
 The template supplies OpenCode, Python, uv, and the `agent` user. Ruff is
-installed during the build, so it is ready when the agent starts. To start
-from a different Linux distribution or an organization-maintained image, see
-[Use your own base image](build-an-agent.md#use-your-own-base-image).
+installed during the build, so it is ready when the agent starts.
 
 The descriptor declares this as a workload, connects OpenCode to the
 Anthropic API, and gives it the team's review instructions:
@@ -225,8 +223,9 @@ The `capabilities` list describes what the sandbox provides at runtime:
 network access, authentication, and instructions for the agent. The credential
 entry names the service; you store the actual API key on your host.
 
-This example uses an existing agent image. To install an agent yourself and
-configure its version and model, see [Build an agent](build-an-agent.md).
+This example extends an existing agent environment. To prepare your own Linux
+base image, install an agent, and configure its runtime needs step by step,
+see [Build an agent](build-an-agent.md).
 
 ## Capabilities
 
