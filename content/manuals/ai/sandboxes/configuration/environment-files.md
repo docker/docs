@@ -448,13 +448,15 @@ paths resolve from the directory of the first environment file.
 | `cpus`        | integer         | `0`      | Number of CPUs. `0` allocates all host CPUs            |
 | `pullPolicy`  | string          | `always` | Image pull policy: `always`, `missing`, or `never`     |
 | `profile`     | string          | None     | Governance profile name                               |
-| `shareSkills` | boolean         | `true`   | Mount the shared agent skills store                    |
+| `skills`      | string          | Daemon default | Shared agent skills store access: `off`, `readonly`, or `readwrite` |
 | `display`     | boolean         | `false`  | Provision a display socket for graphical applications |
 | `gpu`         | boolean         | `false`  | Pass the host GPU through to the sandbox               |
 | `usb`         | list of strings | None     | USB device selectors to pass through to the sandbox   |
 
-Imported [agent skills](../workflows/agent-skills.md) are shared with the
-sandbox by default. Set `shareSkills: false` to opt out.
+`skills` controls access to the shared [agent skills](../workflows/agent-skills.md)
+store. Set it to `off` to omit the mount, `readonly` to mount the store read-only,
+or `readwrite` to let the sandbox modify shared skills. If omitted, it uses the
+daemon's default, which is `readonly` unless your organization overrides it.
 
 ### `lifecycle`
 
