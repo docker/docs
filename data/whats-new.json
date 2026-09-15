@@ -15,7 +15,7 @@
       "product": "Docker Sandboxes",
       "title": "Sign and enforce trusted sandbox kits",
       "description": "Sign kits with cosign-compatible Sigstore signatures, verify keyless or key-based signatures, and reject kits outside a trusted-signer policy.",
-      "url": "/ai/sandboxes/customize/kits/#sign-and-verify-kits",
+      "url": "/ai/sandboxes/customize/kits-v2/#sign-and-verify-kits",
       "published": "2026-08-20",
       "source_prs": [25791, 25896],
       "featured": false
@@ -78,7 +78,7 @@
       "product": "Docker Sandboxes",
       "title": "Author version 2 sandbox kits",
       "description": "Define kit setup, permissions, networking, and API key or OAuth credential requirements with the version 2 kit schema.",
-      "url": "/ai/sandboxes/customize/kit-reference/#schema-versions",
+      "url": "/ai/sandboxes/customize/kits-v2/#schema-versions",
       "published": "2026-08-06",
       "source_prs": [25467, 25707],
       "featured": false

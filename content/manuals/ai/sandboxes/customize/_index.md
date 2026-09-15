@@ -1,8 +1,8 @@
 ---
 title: Customizing sandboxes
 linkTitle: Customize
-description: Build reusable sandbox images and extend or define agents using templates and kits.
-keywords: sandboxes, sbx, customize, templates, kits, mixins, custom agents
+description: Build and share sandbox environments with v3 workload and mixin kits, using Docker-provided base images or your own Linux image.
+keywords: sandboxes, sbx, customize, templates, kits, mixins, workloads, custom agents
 weight: 90
 aliases:
   - /ai/sandboxes/agents/custom-environments/
@@ -15,56 +15,37 @@ params:
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-Docker Sandboxes offers two ways to customize a sandbox beyond the built-in
-defaults:
+Use kits to package the tools, configuration, and runtime behavior your
+sandboxes need. A workload kit defines the environment and command to run.
+Mixin kits extend it with tools, configuration, or instructions.
 
-- [Templates](templates.md) — reusable sandbox images with tools, packages,
-  and configuration baked in. Extend a base image with a Dockerfile, or
-  save a running sandbox as a template.
-- [Kits](kits.md) — declarative YAML artifacts that extend an agent with
-  tools, credentials, network rules, and files at runtime, or define a new
-  agent from scratch.
+A workload's build recipe can start from a Docker-provided agent image or
+another Linux base image. Its descriptor declares network access, credentials,
+and lifecycle hooks alongside that build.
 
-Kits are experimental. The kit file format, CLI commands, and experience for
-creating, loading, and managing kits are subject to change as the feature
-evolves. Share feedback and bug reports in the
+Kits are experimental. The format and CLI commands are subject to change.
+Share feedback in the
 [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
 
-## Templates and kits, side by side
+## Choose a customization
 
-A template is a Docker image that the sandbox runs. It's built ahead
-of time with a Dockerfile (or saved from a running sandbox), pushed to a
-registry, and pulled when a sandbox is created. Use templates for things
-that belong in an image: system packages, language toolchains, large
-dependencies — anything you'd rather not reinstall on every sandbox start.
+| Goal | Option |
+| --- | --- |
+| Run a v3 workload and add mixins | [Use kits](kits.md#use-kits) |
+| Define an agent or another sandbox workload | [Build an agent](build-an-agent.md) |
+| Add tools, configuration, or instructions to a v3 workload | [Mixin examples](kit-examples.md) |
+| Choose an existing agent image or your own Linux base | [Base images](base-images.md) |
 
-A kit is a YAML artifact applied at sandbox creation. The kit can run
-install commands, drop files into the sandbox, declare network and
-credential rules, and (for sandbox kits) define which template image the
-agent runs in. Use kits for things that vary per agent or per team:
-shared linter config, project-specific install steps, credential
-injection for a service the agent talks to.
+## Start with v3 kits
 
-Templates and kits work together. A sandbox kit's `sandbox.image` field
-points at a template: the template provides the base environment, the
-kit layers config, secrets, and runtime behavior on top. A team can ship
-one heavy template and several thin kits without rebuilding the image
-each time something changes.
+V3 is the recommended format for kit development. To use it, select an
+explicit v3 workload reference and combine it with v3 mixins. Built-in agent
+shortcuts such as `claude` and `codex` select v2 kits, so they can't be used
+with v3 mixins. See [Run a kit](kits.md#run-a-kit) for the opt-in workflow.
 
-## When to use which
+V2 is deprecated but remains supported. For existing customizations, see
+[Kits v2](kits-v2/_index.md), including guidance for moving a complete
+environment to v3.
 
-| Goal                                                      | Option                                                        |
-| --------------------------------------------------------- | ------------------------------------------------------------- |
-| Pre-install tools and packages into a reusable base image | [Template](templates.md)                                      |
-| Capture a configured running sandbox for reuse            | [Saved template](templates.md#saving-a-sandbox-as-a-template) |
-| Add a tool, credential, or config to agent runs via YAML  | [Kit (mixin)](kits.md)                                        |
-| Define a new agent from scratch                           | [Kit (sandbox)](kits.md#define-an-agent)                      |
-
-Templates and kits can be used together. A template bakes heavy tools into
-the image for fast sandbox startup; a kit layered on top adds per-run
-credentials, config, or extra capabilities.
-
-## Tutorials
-
-- [Build your own agent kit](build-an-agent.md) — step-by-step walkthrough
-  for packaging [Amp](https://ampcode.com/) as a sandbox kit.
+To capture an interactively configured sandbox's container filesystem for reuse,
+see [Save a sandbox as a template](/manuals/ai/sandboxes/usage.md#saving-a-sandbox-as-a-template).
