@@ -125,8 +125,10 @@ them.
 
 The user-level file must not set `name`. Its `workspace` must use
 `${{ env.projectDir }}` as its root and stay within the project directory.
-For example, `${{ env.projectDir }}/src` is also valid, but `.` and
-`${{ env.fileDir }}` refer to your home directory and aren't accepted.
+For example, `${{ env.projectDir }}/src` is also valid. In `~/.sbxenv.yaml`,
+`.` and `${{ env.fileDir }}` point to your home directory, so neither is
+accepted as the workspace path in that file. Project environment files can
+use either value for their workspace.
 Lists such as `ports` and `mcp.servers` concatenate across the user and
 project files.
 
@@ -141,12 +143,24 @@ Environment files can reference two built-in directory values:
 
 Loading `~/.sbxenv.yaml` doesn't change `env.projectDir` to your home directory.
 
-Use `env.fileDir` to reference a directory beside a particular environment
-file, even when you merge it with files from other directories:
+Use `env.projectDir` when a shared configuration should point to each
+project. Use `env.fileDir` when a path should stay relative to a particular
+environment file.
+
+For example, in `/projects/web-app-env/sbxenv.yaml`, these two workspace
+values both mount `/projects/web-app-env/web-app`:
 
 ```yaml
 workspace: ${{ env.fileDir }}/web-app
 ```
+
+```yaml
+workspace: ./web-app
+```
+
+Both paths keep pointing to that directory when you merge this file with
+other environment files. Use the relative form for workspace paths when
+you don't need to spell out the absolute path.
 
 Directory references can appear in YAML values alongside
 [argument references](#parameterize-an-environment). They can't appear in
