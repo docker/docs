@@ -92,8 +92,17 @@ for details.
 always resolves to `sbxenv.yaml`. To use another filename, pass the file path
 explicitly. With no path, `sbx` reads `sbxenv.yaml` from the working directory.
 
-Pass the same set of paths to each `sbx env` command so they resolve the same
-sandbox.
+Every `sbx env` subcommand accepts `--name` to override the file's `name` or
+the derived sandbox name for that invocation:
+
+```console
+$ sbx env create --name web-app-test
+$ sbx env exec --name web-app-test -- npm test
+$ sbx env rm --name web-app-test
+```
+
+Pass the same set of paths and the same `--name` value to each `sbx env`
+command so they resolve the same sandbox.
 
 ### Set user defaults
 
@@ -101,9 +110,48 @@ Create `~/.sbxenv.yaml` to define defaults shared across projects. When you run
 an `sbx env` command without a path, `sbx` merges this file beneath the
 project's `sbxenv.yaml`. Passing any path skips the user-level file.
 
-The user-level file must not set `name` or `workspace`, because those fields
-identify a project. Lists such as `ports` and `mcp.servers` concatenate across
-the user and project files.
+To mount each project's own directory by default, set `workspace` to
+`${{ env.projectDir }}` in `~/.sbxenv.yaml`:
+
+```yaml
+schemaVersion: "1"
+agent: claude
+workspace: ${{ env.projectDir }}
+```
+
+You can use this file without a project `sbxenv.yaml`. Run `sbx env run` from
+the project directory to use the defaults, or add a project file to override
+them.
+
+The user-level file must not set `name`. Its `workspace` must use
+`${{ env.projectDir }}` as its root and stay within the project directory.
+For example, `${{ env.projectDir }}/src` is also valid, but `.` and
+`${{ env.fileDir }}` refer to your home directory and aren't accepted.
+Lists such as `ports` and `mcp.servers` concatenate across the user and
+project files.
+
+### Reference directories
+
+Environment files can reference two built-in directory values:
+
+| Reference | Value |
+| --- | --- |
+| `${{ env.projectDir }}` | Absolute project directory: the directory resolved from the first `PATH`, or the working directory when no path is given |
+| `${{ env.fileDir }}` | Absolute directory containing the file that declares the reference |
+
+When `PATH` names a file, its containing directory is the project directory.
+The user-level file doesn't change `env.projectDir`.
+
+Use `env.fileDir` to reference a directory beside a particular environment
+file, even when you merge it with files from other directories:
+
+```yaml
+workspace: ${{ env.fileDir }}/web-app
+```
+
+Directory references can appear in YAML values alongside
+[argument references](#parameterize-an-environment). They can't appear in
+field names or within the `args` block.
 
 ### Parameterize an environment
 
@@ -170,10 +218,10 @@ command rejects undeclared arguments, missing required values, and values that
 don't satisfy an argument's `enum` or `pattern`. Values can contain `=`, and
 values in an argument file are read literally rather than expanded by a shell.
 
-Argument references are the only variable expressions expanded in an
-environment file. Shell-style expressions such as `${VAR}` aren't expanded
-from the host environment. Other dollar signs remain literal, so a value such
-as `$PATH:/opt/bin` is passed unchanged. Use `$${{ env.args.NAME }}` to produce
+Argument references and the two directory references are the only variable
+expressions expanded in an environment file. Shell-style expressions such as
+`${VAR}` aren't expanded from the host environment. Other dollar signs remain
+literal, so a value such as `$PATH:/opt/bin` is passed unchanged. Use `$${{ env.args.NAME }}` to produce
 the literal text `${{ env.args.NAME }}`. Substituted values aren't expanded a
 second time.
 
@@ -221,8 +269,10 @@ $ sbx env run base.sbxenv.yaml local.sbxenv.yaml
 
 Nested mappings merge by key, lists concatenate, and values from later files
 replace earlier scalar values. In this example, the sandbox has four CPUs,
-12 GB of memory, and both environment variables. The first file controls the
-base directory for relative workspace paths and the default sandbox name.
+12 GB of memory, and both environment variables. Each relative workspace path
+resolves from the directory of the file that declares it. The first file
+determines `env.projectDir`, which is also used to derive the sandbox name when no
+workspace or explicit name is set.
 
 ### Work across multiple repositories
 
@@ -245,9 +295,9 @@ additionalWorkspaces:
 
 The agent starts in `web-app`, can modify `shared-components`, and can read
 `architecture-docs` without changing it. The environment file stays outside all
-three workspaces. Relative paths resolve from the directory of the first
-environment file. Additional workspaces are mounted directly even when the
-primary workspace uses clone mode.
+three workspaces. Relative paths resolve from the directory of the
+environment file that declares them. Additional workspaces are mounted directly
+even when the primary workspace uses clone mode.
 
 ### Reuse an environment in automation
 
@@ -342,7 +392,7 @@ The loader rejects unknown fields and unsupported schema versions.
 | Field                  | Type             | Required | Default                        | Description                                                                     |
 | ---------------------- | ---------------- | -------- | ------------------------------ | ------------------------------------------------------------------------------- |
 | `schemaVersion`        | string           | Yes      | None                           | Schema version. The supported value is `"1"`                                   |
-| `name`                 | string           | No       | `<agent>-<workspace-basename>` | Sandbox name                                                                    |
+| `name`                 | string           | No       | `<agent>-<workspace-basename>` | Sandbox name, overridden by `--name`                                                                    |
 | `agent`                | string           | Yes      | None                           | Built-in agent or the name of an agent kit                                      |
 | `args`                 | map              | No       | None                           | Environment arguments. See [`args`](#args)                                      |
 | `kits`                 | list             | No       | None                           | Kits to install at creation. See [`kits`](#kits)                                 |
@@ -414,16 +464,16 @@ parameter and OCI kits with an immutable tag or digest.
 
 When specified as a string, `workspace` is the path. Use the object form for
 clone mode. Omit `workspace` to create a sandbox without a host bind mount. Set
-`workspace: .` to mount the directory that contains the first environment
-file. If `workspace` is present, its path can't be empty or contain only
-whitespace.
+`workspace: .` to mount the directory that contains the environment file
+that declares it. If `workspace` is present, its path can't be empty or contain
+only whitespace.
 
 `sbx` mounts the environment file read-only inside the sandbox. Keep the file
 outside direct-mounted workspaces or directly in a workspace root.
 
 | Field   | Type    | Required | Default | Description                                                     |
 | ------- | ------- | -------- | ------- | --------------------------------------------------------------- |
-| `path`  | string  | Yes      | None    | Workspace directory. Relative paths resolve from the first file |
+| `path`  | string  | Yes      | None    | Workspace directory. Relative paths resolve from the declaring file's directory |
 | `clone` | boolean | No       | `false` | Use a private clone, equivalent to `sbx create --clone`          |
 
 You can override `workspace.clone` for one `create` or `run` invocation with
@@ -432,7 +482,7 @@ You can override `workspace.clone` for one `create` or `run` invocation with
 ### `additionalWorkspaces`
 
 Each additional workspace is mounted after the primary workspace. Relative
-paths resolve from the directory of the first environment file.
+paths resolve from the directory of the environment file that declares them.
 
 | Field      | Type    | Required | Default | Description                   |
 | ---------- | ------- | -------- | ------- | ----------------------------- |
