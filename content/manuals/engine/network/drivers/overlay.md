@@ -139,11 +139,11 @@ All examples require at least a single-node swarm. Initialize one by running
 `docker swarm init` on the host. You can run these examples on multi-node
 swarms as well.
 
-### Use the default overlay network
+### Walk through overlay networking on a multi-node swarm
 
-This example shows how the default overlay network works with swarm services.
-You'll create an `nginx` service and examine the network from the service
-containers' perspective.
+This example walks through overlay networking with swarm services on multiple
+hosts. The service is attached to a user-defined overlay (`nginx-net`), not
+the default `ingress` network.
 
 #### Prerequisites for multi-node setup
 
@@ -218,8 +218,9 @@ on a cloud provider with Docker installed.
 
 The `docker_gwbridge` connects the `ingress` network to the Docker host's
 network interface. If you create services without specifying a network, they
-connect to `ingress`. It's recommended to use separate overlay networks for each
-application or group of related applications.
+connect to `ingress`. Use a separate user-defined overlay for each application
+or group of related applications — that's what the rest of this walkthrough
+does, with `nginx-net`. Do not attach application services to `ingress`.
 
 #### Create the services
 
