@@ -210,3 +210,15 @@ a `Governance:` status line showing `Managed by <org>`, it is. Add
 `--include-inactive` to confirm your rule shows an `inactive` status. If so,
 the block can only be lifted by updating the org policy in Docker Home or via
 the [API](/reference/api/ai-governance/).
+
+### A request is blocked with "Approval required"
+
+The destination needs your confirmation. Either no allow or deny rule matches
+it and your machine isn't under organization governance, or an organization
+policy allows it but requires approval first.
+
+Run `sbx policy approval ls` to see the pending request and respond to it with
+`sbx policy approval respond`, or respond in the `sbx` GUI. Approving applies
+to later requests, not the one that was blocked, so run the operation again
+afterward. See
+[Respond to an approval request](network.md#respond-to-an-approval-request).

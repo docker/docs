@@ -47,6 +47,17 @@ $ sbx policy inspect Balanced
 Use `--source` to filter by origin (`local`, `org`, or `kit`) and `--decision`
 to filter by outcome (`allow` or `deny`).
 
+Use `--created-via` to filter by how a rule was created. Pass `default` for
+preset rules, `added` for rules you added yourself, `provisioned` for rules a
+kit or application added, or `approval` for rules recorded when you approved a
+destination. A wide listing shows the same information per rule:
+
+```console
+$ sbx policy ls --wide --created-via approval
+```
+
+See [Approval-required access](../access-controls/network.md#approval-required-access).
+
 A `STATUS` column also appears when you pass `--include-inactive`; see
 [Showing inactive rules](#showing-inactive-rules).
 
