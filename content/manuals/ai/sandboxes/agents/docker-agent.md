@@ -69,5 +69,5 @@ $ sbx run --name <sandbox-name> -- run --yolo agent.yml
 ## Base image
 
 The sandbox uses `docker/sandbox-templates:docker-agent`. See
-[Templates](../customize/templates.md) to build your own image on top of
+[Base images](../customize/base-images.md) to build your own image on top of
 this base.
