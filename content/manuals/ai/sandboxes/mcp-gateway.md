@@ -99,6 +99,43 @@ $ sbx mcp add notion --url https://mcp.notion.com/mcp
 $ sbx mcp add linear --url https://mcp.linear.app/mcp
 ```
 
+#### Custom request headers
+
+Use `--header 'Name: value'` to send custom HTTP headers to a remote MCP
+endpoint, for example to authenticate with an API key. Repeat the flag for
+each header, using each header name once:
+
+```console
+$ sbx mcp add acme --url https://mcp.acme.com/mcp \
+  --header 'Authorization: Bearer ${api-key}' \
+  --header 'Accept: application/json, text/event-stream'
+$ sbx secret set mcp:acme:api-key
+```
+
+Replace the example URL with your MCP endpoint. The `sbx secret set` command
+prompts for the API key and stores it in the encrypted host credential store.
+The `${api-key}` placeholder stays in the registration. When a sandbox
+connects, the gateway reads the secret and substitutes its value in the header.
+Use single quotes around header values so your shell preserves placeholders.
+
+Store each placeholder with `sbx secret set mcp:<server>:<placeholder>`.
+Credential headers such as `Authorization` must use a secret placeholder.
+An explicit `Authorization` header takes precedence over an OAuth access token.
+
+After storing the secret, expose the server to a sandbox:
+
+```console
+$ sbx run claude --name acme-demo --static-mcp acme
+```
+
+To check the header templates and whether their secrets are set, run
+`sbx mcp inspect acme`. The command doesn't display resolved secret values.
+
+Custom headers require a remote HTTP endpoint and can't be used with
+`--command` or `--local`. They also require the host to connect to the server.
+The hosted gateway rejects these registrations unless you supply
+`--oauth-authorization-server`, which routes the connection through the host.
+
 ### Local stdio server
 
 Some MCP servers communicate over stdio instead of exposing a remote HTTP
