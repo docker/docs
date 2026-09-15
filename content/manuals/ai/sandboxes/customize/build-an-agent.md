@@ -17,7 +17,9 @@ weight: 30
 Build a schema v3 workload kit that runs Claude Code with a pinned binary,
 configurable model, and an Anthropic API key held on the host. The same steps
 apply to other agents: build the software into an image, declare its runtime
-requirements, and provide instructions about the environment.
+requirements, and provide instructions about the environment. Start from Docker's
+shell template, or [use your own base image](#use-your-own-base-image), such as
+Red Hat Universal Base Image 9.
 
 This example uses API-key authentication. If you're starting with kits, read
 [Kits v3](kits.md) for the file layout and the roles of a workload and a mixin.
@@ -92,6 +94,98 @@ Installing Claude Code belongs in the build recipe because the binary is the
 same in every sandbox using this kit. BuildKit can cache that work. Reserve
 lifecycle install hooks for configuration that depends on an individual
 sandbox, such as registering a runtime endpoint.
+
+### Use your own base image
+
+Your workload can start from Red Hat Universal Base Image (UBI), or an image
+maintained by your organization. A Docker sandbox template is optional. The
+workload's Dockerfile prepares the operating system and installs the agent,
+while its v3 descriptor declares network access, credentials, and other
+runtime configuration.
+
+To use UBI 9 for this walkthrough, replace `claude-team.dockerfile` with the
+following. Keep the directory layout and follow the remaining descriptor
+steps on this page.
+
+```dockerfile {title="claude-team/claude-team.dockerfile"}
+FROM registry.access.redhat.com/ubi9/ubi:9
+
+USER root
+RUN dnf install -y bash ca-certificates curl-minimal git shadow-utils tar gzip \
+    && dnf clean all
+
+RUN groupadd --gid 1000 agent \
+    && useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash agent \
+    && mkdir -p /home/agent/workspace /home/agent/.local/bin \
+        /home/agent/.local/share /home/agent/.local/state \
+        /home/agent/.config/claude-team /home/agent/.docker/sandbox/locks \
+    && chown -R agent:agent /home/agent
+
+# Prepare the certificate bundle used by the sandbox proxy and clients.
+RUN update-ca-trust \
+    && mkdir -p /usr/local/share/ca-certificates /etc/ssl/certs \
+    && cp /etc/pki/tls/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt
+
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
+    CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+    REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+    NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+
+# Give the agent a writable file for persistent shell exports.
+RUN touch /etc/sandbox-persistent.sh \
+    && chown agent:agent /etc/sandbox-persistent.sh \
+    && chmod 0644 /etc/sandbox-persistent.sh \
+    && printf '%s\n' '. /etc/sandbox-persistent.sh' \
+        > /etc/profile.d/sandbox-persistent.sh \
+    && printf '%s\n' '. /etc/sandbox-persistent.sh' >> /home/agent/.bashrc
+
+ENV HOME=/home/agent \
+    PATH="/home/agent/.local/bin:${PATH}" \
+    BASH_ENV=/etc/sandbox-persistent.sh \
+    CLAUDE_ENV_FILE=/etc/sandbox-persistent.sh \
+    IS_SANDBOX=1
+
+USER agent
+ARG CLAUDE_VERSION
+RUN curl -fsSL https://claude.ai/install.sh -o /tmp/install-claude.sh \
+    && bash /tmp/install-claude.sh "${CLAUDE_VERSION}" \
+    && rm /tmp/install-claude.sh
+
+WORKDIR /home/agent/workspace
+ENTRYPOINT ["claude", "--settings", "/home/agent/.config/claude-team/settings.json"]
+CMD []
+```
+
+The preparation covers three parts of the environment that the shell template
+would otherwise supply:
+
+- A non-root `agent` account with UID 1000, home directory `/home/agent`, and
+  writable directories for agent configuration and state
+- Bash, Git, curl, CA certificates, and the archive tools used during agent
+  installation
+- A persistent environment file, sourced by Bash and used by Claude Code,
+  matching the instructions added later in this walkthrough
+
+The certificate step copies UBI's public CA roots to the bundle path used by
+`sbx`. At sandbox startup, Docker Sandboxes adds its proxy CA to this bundle.
+The environment variables direct clients to the combined bundle so HTTPS
+requests can trust the proxy. If you add corporate CA certificates during the
+build, add them to `/etc/pki/ca-trust/source/anchors/` before running
+`update-ca-trust` and copying the bundle.
+
+For an organization-maintained image, adapt the package installation and
+account creation to its existing contents. Preserve the
+[base image requirements](kit-reference.md#base-image-requirements), and
+install the libraries and tools your agent and projects need. This example
+runs the agent without `sudo`. Install additional system packages in the
+Dockerfile, or use a runtime install hook when configuration depends on the
+individual sandbox.
+
+The base image supplies filesystem content and image settings. It doesn't
+supply a kit's runtime declarations: continue below to configure API access,
+credentials, settings, and agent instructions. Any mixins added to this
+workload must use v3 and provide tools compatible with its operating system
+and architecture.
 
 ## Describe the workload and its inputs
 
