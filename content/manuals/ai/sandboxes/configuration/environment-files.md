@@ -88,12 +88,14 @@ for details.
 | [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]` | Runs a command in an existing environment without running lifecycle commands         |
 | [`sbx env rm`](/reference/cli/sbx/env/rm/) `[PATH...]`                        | Shows a destroy plan, then removes the sandbox and resources named in the plan        |
 
-`PATH` can be a directory or a direct path to an environment file. A directory
-always resolves to `sbxenv.yaml`. To use another filename, pass the file path
-explicitly. With no path, `sbx` reads `sbxenv.yaml` from the working directory.
+To use an environment file, pass its path to `sbx env`. If you pass a
+directory, `sbx` looks for `sbxenv.yaml` inside it. If you don't pass a path,
+`sbx` looks in the directory you run the command from and loads your
+[user defaults](#set-user-defaults), if present.
 
-Every `sbx env` subcommand accepts `--name` to override the file's `name` or
-the derived sandbox name for that invocation:
+Every `sbx env` subcommand accepts `--name`. This flag sets the sandbox name
+for that command, overriding the `name` field in the file or the automatically
+generated name:
 
 ```console
 $ sbx env create --name web-app-test
@@ -101,17 +103,14 @@ $ sbx env exec --name web-app-test -- npm test
 $ sbx env rm --name web-app-test
 ```
 
-Pass the same set of paths and the same `--name` value to each `sbx env`
-command so they resolve the same sandbox.
+Use the same file paths for each command. If you set `--name`, use that same
+name for every command that manages the sandbox.
 
 ### Set user defaults
 
-Create `~/.sbxenv.yaml` to define defaults shared across projects. When you run
-an `sbx env` command without a path, `sbx` merges this file beneath the
-project's `sbxenv.yaml`. Passing any path skips the user-level file.
-
-To mount each project's own directory by default, set `workspace` to
-`${{ env.projectDir }}` in `~/.sbxenv.yaml`:
+Create `~/.sbxenv.yaml` to share settings across your projects. For example,
+this file selects Claude as the agent and mounts the directory you run
+`sbx env` from:
 
 ```yaml
 schemaVersion: "1"
@@ -119,55 +118,79 @@ agent: claude
 workspace: ${{ env.projectDir }}
 ```
 
-You can use this file without a project `sbxenv.yaml`. Run `sbx env run` from
-the project directory to use the defaults, or add a project file to override
-them.
+With this file saved in your home directory, run:
 
-The user-level file must not set `name`. Its `workspace` must use
-`${{ env.projectDir }}` as its root and stay within the project directory.
-For example, `${{ env.projectDir }}/src` is also valid. In `~/.sbxenv.yaml`,
-`.` and `${{ env.fileDir }}` point to your home directory, so neither is
-accepted as the workspace path in that file. Project environment files can
-use either value for their workspace.
-Lists such as `ports` and `mcp.servers` concatenate across the user and
-project files.
+```console
+$ cd /projects/web-app
+$ sbx env run
+```
+
+The sandbox mounts `/projects/web-app` as its workspace. Run the same command
+from `/projects/api`, and it mounts `/projects/api` instead. You don't need a
+separate `sbxenv.yaml` in either project.
+
+If the project has a `sbxenv.yaml`, `sbx` combines it with your user defaults.
+Project settings override individual default values. Lists such as `ports`
+and `mcp.servers` combine entries from both files. If you pass a file or
+directory path to the command, `sbx` skips `~/.sbxenv.yaml`.
+
+In `~/.sbxenv.yaml`, you can set `workspace` to `${{ env.projectDir }}` or a
+subdirectory such as `${{ env.projectDir }}/src`. Other workspace paths
+aren't accepted in this file.
+
+The user defaults file cannot set `name`. Set the sandbox name in a project
+environment file or with `--name`.
 
 ### Reference directories
 
-Environment files can reference two built-in directory values:
+You can use `${{ env.projectDir }}` and `${{ env.fileDir }}` in environment
+files to insert absolute directory paths. They refer to directories on the
+host.
 
-| Reference | Value |
-| --- | --- |
-| `${{ env.projectDir }}` | Absolute path to the directory containing the first environment file passed on the command line, or to the directory you run `sbx env` from when no path is passed |
-| `${{ env.fileDir }}` | Absolute path to the directory containing the file that declares the reference |
+#### Project directory
 
-Loading `~/.sbxenv.yaml` doesn't change `env.projectDir` to your home directory.
+`${{ env.projectDir }}` is the absolute path to your project directory.
+`sbx` chooses this directory from the command you run:
 
-The difference matters when you load files from different directories:
+- `sbx env run`: the directory you run the command from.
+- `sbx env run /projects/web-app`: `/projects/web-app`.
+- `sbx env run /projects/web-app/custom.yaml`: `/projects/web-app`, the
+  directory containing the file.
 
-```console
-$ sbx env run /projects/web-app/sbxenv.yaml /shared/overrides.yaml
+If you pass several paths, the first one sets the project directory. Every
+file loaded by that command uses the same value for `env.projectDir`.
+
+Use this reference in shared settings that need to point to each project's
+files. For example, `workspace: ${{ env.projectDir }}/src` mounts the `src`
+directory in whichever project you select.
+
+#### File directory
+
+`${{ env.fileDir }}` is the absolute path to the directory containing the
+environment file where you write the reference. For example, inside
+`/shared/environment.yaml`, its value is `/shared`.
+
+Use this reference when an environment file needs to locate files stored
+alongside it. For example, suppose your setup script is
+`/shared/scripts/setup.sh`. Add this [lifecycle command](#lifecycle) to
+`/shared/environment.yaml` to run the script from `/shared`:
+
+```yaml
+lifecycle:
+  initialize:
+    - command: ./scripts/setup.sh
+      workdir: ${{ env.fileDir }}
 ```
 
-In this command, the references resolve as follows:
+The command runs from `/shared`, even if you use this environment file with
+a project in another directory.
 
-| In this file | `${{ env.projectDir }}` | `${{ env.fileDir }}` |
-| --- | --- | --- |
-| `/projects/web-app/sbxenv.yaml` | `/projects/web-app` | `/projects/web-app` |
-| `/shared/overrides.yaml` | `/projects/web-app` | `/shared` |
+Relative workspace paths already use the directory containing the environment
+file. For example, `workspace: ./src` in `/shared/environment.yaml` mounts
+`/shared/src`.
 
-In `overrides.yaml`, use `${{ env.projectDir }}/src` to refer to the project's
-`/projects/web-app/src` directory. Use `${{ env.fileDir }}/tools` to refer to
-`/shared/tools`, beside the overrides file. If you reuse the overrides file
-with a different project, `env.projectDir` changes to that project's directory,
-while `env.fileDir` stays `/shared`.
-
-For workspace paths, `./tools` also resolves from the file's own directory.
-You don't need `env.fileDir` unless you want to express the absolute path.
-
-Directory references can appear in YAML values alongside
-[argument references](#parameterize-an-environment). They can't appear in
-field names or within the `args` block.
+Both directory references can appear in YAML values, but not in field names
+or inside the `args` block.
 
 ### Parameterize an environment
 
@@ -237,8 +260,8 @@ values in an argument file are read literally rather than expanded by a shell.
 Argument references and the two directory references are the only variable
 expressions expanded in an environment file. Shell-style expressions such as
 `${VAR}` aren't expanded from the host environment. Other dollar signs remain
-literal, so a value such as `$PATH:/opt/bin` is passed unchanged. Use `$${{ env.args.NAME }}` to produce
-the literal text `${{ env.args.NAME }}`. Substituted values aren't expanded a
+literal, so a value such as `$PATH:/opt/bin` is passed unchanged.
+Use `$${{ env.args.NAME }}` to produce the literal text `${{ env.args.NAME }}`. Substituted values aren't expanded a
 second time.
 
 ## Common workflows
@@ -286,9 +309,7 @@ $ sbx env run base.sbxenv.yaml local.sbxenv.yaml
 Nested mappings merge by key, lists concatenate, and values from later files
 replace earlier scalar values. In this example, the sandbox has four CPUs,
 12 GB of memory, and both environment variables. Each relative workspace path
-resolves from the directory of the file that declares it. The first file
-determines `env.projectDir`, which is also used to derive the sandbox name when no
-workspace or explicit name is set.
+resolves from the directory of the file that declares it.
 
 ### Work across multiple repositories
 
