@@ -34,13 +34,16 @@ Docker Hub, Docker Desktop, and your IdP.
 
 To configure SSO in Docker, follow these steps:
 
-1. [Configure your domain](connect.md) by creating and verifying it.
-1. [Create your SSO connection](connect.md) in Docker and your IdP.
-1. Link Docker to your identity provider.
-1. Test your SSO connection.
-1. Provision users in Docker.
-1. Optional. [Enforce sign-in](../enforce-sign-in/_index.md).
-1. [Manage your SSO configuration](manage.md).
+1. [Add a domain](connect.md#step-1-add-a-domain).
+1. [Verify your domain](connect.md#step-2-verify-your-domain).
+1. [Create an SSO connection in Docker](connect.md#step-3-create-an-sso-connection-in-docker).
+1. [Create an SSO connection in your IdP](connect.md#step-4-create-an-sso-connection-in-your-idp).
+1. [Connect Docker to your IdP](connect.md#step-5-connect-docker-to-your-idp).
+1. [Test the connection](connect.md#step-6-test-the-connection).
+
+After setup, you can [provision users](/manuals/enterprise/security/provisioning/_index.md),
+[enforce sign-in](../enforce-sign-in/_index.md), and
+[manage your SSO configuration](manage.md).
 
 Once configuration is complete, users can sign in to Docker services using
 their company email address. After signing in, users are added to your company,
