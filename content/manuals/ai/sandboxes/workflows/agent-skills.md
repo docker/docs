@@ -120,10 +120,9 @@ repository, so `sbx skills update` won't refresh it.
 
 Running `sbx reset` clears the shared store.
 
-Starting with `sbx` version 0.43.0, sandboxes created for a supported agent
-mount the shared store read-only by default. These sandboxes mount the contents
-of the store each time they start, so you can install skills before or after
-creating them.
+Sandboxes created for a supported agent mount the shared store read-only by
+default. These sandboxes mount the contents of the store each time they start,
+so you can install skills before or after creating them.
 
 Use `--skills` with `sbx run` or `sbx create` to choose the access mode when
 creating a sandbox:
@@ -149,10 +148,9 @@ When no mode is specified, the daemon uses `skills.defaultMode`, whose built-in
 value is `readonly`. An explicit `--skills` value overrides that default.
 
 The mode is applied only when a sandbox is created. Upgrading `sbx` or changing
-`skills.defaultMode` leaves existing sandbox mounts unchanged, including
-read-write mounts created with earlier versions. Remove and recreate a sandbox
-to change its mode. Sandboxes created without shared skills also need to be
-recreated to mount the store.
+`skills.defaultMode` leaves existing sandbox mounts unchanged. Remove and
+recreate a sandbox to change its mode. Sandboxes created without shared skills
+also need to be recreated to mount the store.
 
 > [!WARNING]
 > A sandbox with `readwrite` access can modify skills that other sandboxes load,

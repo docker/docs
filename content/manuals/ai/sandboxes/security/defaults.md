@@ -39,10 +39,9 @@ workspace modes and what to review after a direct-mount session.
 
 ## Shared skills defaults
 
-Starting with `sbx` version 0.43.0, sandboxes created for supported agents mount
-a persistent shared skills store read-only by default. The `skills.defaultMode`
-setting can change this default, and `--skills` overrides it for a sandbox at
-creation. A sandbox with `readwrite` access can change skills that other
+Sandboxes created for supported agents mount a persistent shared skills store
+read-only by default. The `skills.defaultMode` setting can change this default,
+and `--skills` overrides it for a sandbox at creation. A sandbox with `readwrite` access can change skills that other
 participating sandboxes load, including those with `readonly` access. Use
 `--skills=off` when creating a sandbox to omit the shared store. Existing
 sandboxes retain their mounts until recreated. See

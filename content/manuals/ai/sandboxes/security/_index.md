@@ -28,9 +28,9 @@ What crosses the boundary into the VM:
   outbound HTTP requests. The raw credential values never enter the VM.
 - **Network access:** outbound TCP connections to destinations allowed by
   [network policy](defaults/) are proxied through the host.
-- Shared agent skills: starting with `sbx` version 0.43.0, sandboxes created
-  for supported agents mount a persistent host-side store read-only by default
-  at the agent's skills directory. Use `--skills` or `skills.defaultMode` to choose another mode at
+- Shared agent skills: sandboxes created for supported agents mount a
+  persistent host-side store read-only by default at the agent's skills
+  directory. Use `--skills` or `skills.defaultMode` to choose another mode at
   creation. Existing sandboxes retain their mounts until recreated.
 - **MCP gateway traffic:** supported agents connect to a host-side MCP gateway
   endpoint. The gateway brokers access to registered MCP servers.

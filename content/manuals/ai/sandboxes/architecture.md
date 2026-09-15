@@ -52,9 +52,8 @@ Each sandbox maintains its own Docker daemon state, image cache, and package
 installations. Multiple sandboxes don't share images or layers. The
 [shared agent skills store](workflows/agent-skills.md) is an exception:
 sandboxes created for supported agents mount the same host-side store read-only
-by default starting with `sbx` version 0.43.0. Use `--skills` or
-`skills.defaultMode` to choose another mode at creation. Existing sandboxes
-retain their mounts until recreated.
+by default. Use `--skills` or `skills.defaultMode` to choose another mode at
+creation. Existing sandboxes retain their mounts until recreated.
 
 Each sandbox consumes disk space for its VM image, Docker images, container
 layers, and volumes, and this grows as you build images and install packages.
