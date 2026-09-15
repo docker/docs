@@ -26,9 +26,8 @@ independently:
 
 - Sandbox traffic — network access from inside your sandboxes.
 - Daemon traffic — the `sbx` daemon's own access, including image pulls,
-  telemetry, and feature flags. Starting with Docker Sandboxes v0.43.0, supported
-  CLI requests also use this scope, including `sbx login` and
-  `sbx diagnose --upload`.
+  telemetry, and feature flags. Supported CLI requests also use this scope,
+  including `sbx login` and `sbx diagnose --upload`.
 
 ## Default behavior
 
