@@ -14,10 +14,6 @@ Official documentation: [GitHub Copilot CLI](https://docs.github.com/en/copilot/
 
 ## Quick start
 
-> [!NOTE]
-> In Docker Sandboxes v0.42, use `sbx run docker.io/sbx/copilot-kit:latest`.
-> The `copilot` shorthand is unavailable in this release.
-
 Create a sandbox and run Copilot for a project directory:
 
 ```console
