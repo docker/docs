@@ -25,8 +25,10 @@ Docker Sandboxes sends two kinds of outbound traffic, and you can proxy them
 independently:
 
 - Sandbox traffic — network access from inside your sandboxes.
-- Daemon traffic — the `sbx` daemon's own access: image pulls, telemetry,
-  sign-in, and feature flags.
+- Daemon traffic — the `sbx` daemon's own access, including image pulls,
+  telemetry, and feature flags. Starting with Docker Sandboxes v0.43.0, supported
+  CLI requests also use this scope, including `sbx login` and
+  `sbx diagnose --upload`.
 
 ## Default behavior
 
@@ -85,7 +87,8 @@ environment variables, so existing setups keep working without migration:
   only and never affect daemon traffic.
 
 The daemon reads these variables when it starts, so set them before your first
-`sbx` command, or restart the daemon for a change to take effect.
+`sbx` command, or restart the daemon for a change to affect daemon and sandbox
+traffic. Supported CLI clients read their environment on each invocation.
 
 ## Precedence
 
@@ -110,21 +113,26 @@ over the OS system proxy.
 
 ## When changes take effect
 
-The two kinds of traffic are resolved at different times:
+Proxy settings take effect at different times depending on the consumer:
 
 - Sandbox scope (`proxy.sandbox`, `no_proxy.sandbox`, and the sandbox side of
-  `proxy` and `no_proxy`) is re-resolved every time a sandbox is created or
-  restarted. A change takes effect on the next sandbox you create or restart;
-  already-running sandboxes keep the proxy they were created with.
+  `proxy` and `no_proxy`) is resolved when a sandbox network proxy is created.
+  Sandboxes you create after a change use the updated settings. Existing
+  sandboxes retain their selected upstream proxy until `sbx daemon restart`
+  rebuilds their network proxies. Restarting a sandbox alone is insufficient.
 - Daemon scope (`proxy.daemon`, `no_proxy.daemon`, and the daemon side of
-  `proxy` and `no_proxy`) is resolved once when the daemon starts. A change
-  requires a daemon restart.
+  `proxy` and `no_proxy`) is resolved once when the daemon starts. Changes to
+  the daemon's own traffic require `sbx daemon restart`.
+- Supported CLI clients read daemon-scoped settings on each invocation,
+  including `sbx login` and `sbx diagnose --upload`. Changes apply on the next
+  invocation without a daemon restart.
 
 The `DOCKER_SANDBOXES_*` environment variables are a separate case. They control
 sandbox traffic only, as described in
 [Environment variables](#environment-variables), but `sbx` reads them from the
 daemon's environment as the daemon starts, so changing one also requires a
-daemon restart.
+daemon restart. If one of these variables overrides a stored setting, unset
+the variable and restart the daemon for the stored setting to take effect.
 
 When a `system` or PAC proxy is in use, `sbx` still tracks OS-level proxy changes
 (such as switching networks, connecting a VPN, or updated PAC contents) live.
@@ -152,9 +160,10 @@ $ sbx settings set proxy.integratedAuth true
 
 The setting isn't scoped: it applies to both sandbox and daemon traffic. If the
 proxy offers several schemes, the strongest one is used, preferring Negotiate
-over NTLM. A change takes effect on the same schedule as the other proxy
-settings: on the next sandbox you create or restart for sandbox traffic, and
-after `sbx daemon restart` for daemon traffic.
+over NTLM. Changes follow the same
+[schedule as other proxy settings](#when-changes-take-effect): on the next
+invocation for supported CLI clients, when you create a sandbox, and after
+`sbx daemon restart` for daemon traffic and existing sandbox proxies.
 
 Your identity stays on the host. Authentication to the upstream proxy happens
 on the host side of the sandbox boundary, after network policy has already been
