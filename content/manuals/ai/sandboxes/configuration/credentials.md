@@ -551,7 +551,7 @@ requires approval.
 ## Registry credentials
 
 Registry credentials authenticate to private OCI registries when pulling
-[templates](../customize/templates.md) or [kits](../customize/kits.md), and can
+[templates](../usage.md#load-a-template) or [kits](../customize/kits.md), and can
 also let the agent pull and push images from inside the sandbox through the
 host-side proxy. Use `sbx secret set --registry <host>` to store them. For
 Docker Hub, `sbx` reuses your `sbx login` session — no registry secret needed.

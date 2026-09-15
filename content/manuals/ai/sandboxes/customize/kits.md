@@ -170,7 +170,8 @@ Suppose your team uses OpenCode to work on Python projects. Package it with
 Ruff and instructions to check Python changes before handing work back to you.
 Everyone using the kit gets the same linter version and review workflow.
 
-The Dockerfile starts from Docker's OpenCode template and installs Ruff:
+The Dockerfile starts from Docker's OpenCode [base image](base-images.md) and
+installs Ruff:
 
 ```dockerfile {title="opencode-python/opencode-python.dockerfile"}
 FROM docker/sandbox-templates:opencode

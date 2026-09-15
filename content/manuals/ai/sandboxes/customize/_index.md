@@ -1,7 +1,7 @@
 ---
 title: Customizing sandboxes
 linkTitle: Customize
-description: Build and share sandbox environments with v3 workload and mixin kits, or customize and save sandbox template images.
+description: Build and share sandbox environments with v3 workload and mixin kits, using Docker-provided base images or your own Linux image.
 keywords: sandboxes, sbx, customize, templates, kits, mixins, workloads, custom agents
 weight: 90
 aliases:
@@ -15,14 +15,13 @@ params:
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-Use kits and templates to package the tools, configuration, and runtime
-behavior your sandboxes need.
+Use kits to package the tools, configuration, and runtime behavior your
+sandboxes need. A workload kit defines the environment and command to run.
+Mixin kits extend it with tools, configuration, or instructions.
 
-- [Kits](kits.md) combine reusable image content with declarations for network
-  access, credentials, lifecycle hooks, and agent instructions. A workload kit
-  defines what the sandbox runs. Mixin kits extend it.
-- [Templates](templates.md) are reusable sandbox images. Extend a base image
-  with a Dockerfile, or save a configured running sandbox as a template.
+A workload's build recipe can start from a Docker-provided agent image or
+another Linux base image. Its descriptor declares network access, credentials,
+and lifecycle hooks alongside that build.
 
 Kits are experimental. The format and CLI commands are subject to change.
 Share feedback in the
@@ -35,8 +34,7 @@ Share feedback in the
 | Run a v3 workload and add mixins | [Use kits](kits.md#use-kits) |
 | Define an agent or another sandbox workload | [Build an agent](build-an-agent.md) |
 | Add tools, configuration, or instructions to a v3 workload | [Mixin examples](kit-examples.md) |
-| Customize the image used by a built-in agent | [Template](templates.md#build-a-custom-template) |
-| Capture a configured running sandbox for reuse | [Saved template](templates.md#saving-a-sandbox-as-a-template) |
+| Choose an existing agent image or your own Linux base | [Base images](base-images.md) |
 
 ## Start with v3 kits
 
@@ -48,3 +46,6 @@ with v3 mixins. See [Run a kit](kits.md#run-a-kit) for the opt-in workflow.
 V2 is deprecated but remains supported. For existing customizations, see
 [Kits v2](kits-v2/_index.md), including guidance for moving a complete
 environment to v3.
+
+To capture an interactively configured sandbox's container filesystem for reuse,
+see [Save a sandbox as a template](/manuals/ai/sandboxes/usage.md#saving-a-sandbox-as-a-template).
