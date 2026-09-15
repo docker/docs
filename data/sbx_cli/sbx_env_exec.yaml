@@ -20,10 +20,13 @@ description: |-
 
     With no PATH, an existing .sbxenv.yaml in your home directory is merged
     underneath as a base layer for defaults shared across projects; naming any
-    PATH skips the layer. It may not set "name:" or "workspace:", each of which
-    identifies a single project. Changing its "agent:" changes the derived
-    <agent>-<directory-basename> sandbox name, leaving sandboxes created under
-    the previous name for "sbx env rm" to miss.
+    PATH skips the layer. It may not set "name:", which identifies a single
+    project, and its "workspace:" must be rooted at ${{ env.projectDir }} — for
+    the base that is always the directory the invocation runs from, since naming
+    any PATH skips it — so the base mounts each project's own directory rather
+    than one directory under all of them. Changing its "agent:"
+    changes the derived <agent>-<directory-basename> sandbox name, leaving
+    sandboxes created under the previous name for "sbx env rm" to miss.
 
     A list such as "ports" or "mcp.servers" concatenates across layers rather
     than overriding, so an entry declared in both appears twice.
@@ -62,6 +65,9 @@ options:
       shorthand: i
       default_value: "false"
       usage: Keep STDIN open even if not attached
+    - name: name
+      usage: |
+        Name for the sandbox, overriding 'name:' in sbxenv.yaml and the derived <agent>-<directory> (every 'sbx env' command addressing this environment needs the same value)
     - name: privileged
       default_value: "false"
       usage: Give extended privileges to the command
