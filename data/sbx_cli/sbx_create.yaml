@@ -14,6 +14,8 @@ description: |-
     Use "sbx run --name SANDBOX" to attach to the agent after creation.
 
     Without --cpus/--memory a cloud sandbox defaults to 2 CPUs and 4 GiB.
+
+    Available agents: claude, codex, copilot, cursor, devin, docker-agent, droid, gemini, kiro, opencode, shell
 usage: sbx create [flags] AGENT|SANDBOX_KIT [PATH...]
 options:
     - name: allow-network
@@ -66,7 +68,7 @@ options:
     - name: memory
       shorthand: m
       usage: |
-        Memory limit in binary units (e.g., 1024m, 8g). Default: 50% of host memory, max 32 GiB
+        Memory limit in binary units (e.g., 512m, 8g). Minimum: 512 MiB. Default: 50% of host memory, clamped to 512 MiB–32 GiB. Maximum: max(75% of host memory, 512 MiB)
     - name: name
       usage: |
         Name for the sandbox (defaults to <agent>-<workdir>; at least two characters, starting with a letter or number, containing only letters, numbers, hyphens and periods; 'default' is reserved)
@@ -82,6 +84,9 @@ options:
       shorthand: q
       default_value: "false"
       usage: Suppress verbose output
+    - name: skills
+      usage: |
+        Shared skills store mode: off, readonly, or readwrite (mounted at the agent's skills directory, e.g. ~/.claude/skills). Default: readonly, or the configured skills.defaultMode setting.
     - name: template
       shorthand: t
       usage: |
@@ -134,12 +139,9 @@ see_also:
     - sbx - Manage AI coding agent sandboxes.
     - sbx create claude - Create a sandbox for claude
     - sbx create codex - Create a sandbox for codex
-    - sbx create copilot - Create a sandbox for copilot
     - sbx create cursor - Create a sandbox for cursor
     - sbx create devin - Create a sandbox for devin
     - sbx create docker-agent - Create a sandbox for docker-agent
-    - sbx create droid - Create a sandbox for droid
     - sbx create gemini - Create a sandbox for gemini
-    - sbx create kiro - Create a sandbox for kiro
     - sbx create opencode - Create a sandbox for opencode
     - sbx create shell - Create a sandbox for shell

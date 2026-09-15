@@ -21,21 +21,19 @@ description: |-
     Pass --scope (repeatable) to authorize a specific set of scopes for this run,
     overriding the default recorded at 'sbx mcp add' time. Precedence is --no-scope >
     an explicit --scope > the recorded default > the scope set the RESOURCE says it
-    requires (from its RFC 9728 metadata or its WWW-Authenticate challenge) > nothing.
-    With none of those, the 'scope' parameter is OMITTED and the authorization server
-    applies its own default grant. The server's advertised set is never requested
-    wholesale.
+    requires (from its RFC 9728 metadata or its WWW-Authenticate challenge) > whichever
+    of openid, email, profile, and offline_access are advertised. Other advertised
+    scopes are excluded from this fallback. If no scopes are selected, the scope
+    parameter is omitted so the authorization server can apply its own default grant.
 
     A resource that publishes a required set therefore gets it requested without any
     flag, and the consent block marks that set as derived rather than chosen. Pass
-    --no-scope to suppress it and take the server's default grant instead.
+    --no-scope to suppress all scope fallbacks and request the server's default grant.
 
-    Scopes you choose are validated only when the server advertises a supported set
-    (RFC 8414 scopes_supported); each scope must then be a member or the command
-    fails. If the server advertises no supported set, the requested scopes are
-    accepted as given. A set derived from the resource's own required list is never
-    validated: it is the server's statement about itself, and scopes_supported is
-    allowed to be non-exhaustive.
+    Scopes you choose are checked against both the authorization server's RFC 8414
+    scopes_supported and the resource's RFC 9728 metadata. A scope present in neither
+    prints a warning but is still requested. If neither document publishes scopes,
+    the request is accepted as given.
     Membership is not a promise: scopes_supported is what the server SUPPORTS, not
     what it will grant this client, so an advertised scope can still be refused at
     consent time. In local data-plane mode a refusal prints the requested set, the
@@ -67,11 +65,11 @@ options:
     - name: no-scope
       default_value: "false"
       usage: |
-        Request no scopes at all for this run, so the authorization server applies its own default grant. Suppresses both the recorded default and the resource's required set; cannot be combined with --scope
+        Request no scopes at all for this run, so the authorization server applies its own default grant. Suppresses recorded, required, and OIDC fallback scopes; cannot be combined with --scope
     - name: scope
       default_value: '[]'
       usage: |
-        OAuth scope to authorize for this run (repeatable; overrides the recorded default; must be advertised by the server's authorization metadata, which does not promise the server will grant it). With no --scope and no recorded default, the scope set the resource itself requires is requested; with none of those, no scopes are requested and the authorization server applies its own default grant
+        OAuth scope to authorize for this run (repeatable; overrides the recorded default; unrecognized scopes warn but are still requested). With no --scope and no recorded default, the scope set the resource itself requires is requested; with none of those, whichever of openid, email, profile, and offline_access are advertised are requested; other advertised scopes are excluded from this fallback
     - name: verbose
       default_value: "false"
       usage: Print authorization polling progress
