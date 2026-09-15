@@ -132,6 +132,13 @@ up to this number. If the buffer is full, the call to record logs will fail.
 The default is 1048576.
 (https://github.com/fluent/fluent-logger-golang/tree/master#bufferlimit)
 
+### `fluentd-request-ack`
+
+Require the Fluentd daemon to acknowledge received log messages.
+When enabled, each message is sent with a unique chunk ID and Docker waits
+for an acknowledgement from the server. This improves the reliability of
+message transmission at the cost of increased latency. Defaults to `false`.
+
 ### fluentd-retry-wait
 
 How long to wait between retries. Defaults to 1 second.
