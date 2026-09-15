@@ -16,6 +16,96 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.43.0
+
+{{< release-date date="2026-09-15" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.43.0)
+
+### What's New
+
+#### Breaking changes
+
+- `shareSkills` in `sbxenv.yaml` ([experimental feature](https://docs.docker.com/ai/sandboxes/configuration/environment-files/)) has been replaced with `skills`, `skills` may be set to `off|readonly|readwrite`.
+
+- MCP OAuth client secrets are renamed to `mcp:<server>:client_secret` (was `mcp:<server>.client_secret`), matching the header-secret naming; a secret stored under the old name is no longer read and must be re-set with `sbx secret set mcp:<server>:client_secret`.
+
+#### Environment files
+
+- Environment files can reference `${{ env.projectDir }}` and `${{ env.fileDir }}`, the user-level `~/.sbxenv.yaml` can mount each project's own directory by declaring `workspace: ${{ env.projectDir }}`, relative workspace paths now resolve against the file that declares them, and every `sbx env` subcommand accepts `--name` to override the sandbox name.
+- `sbx env run`, `sbx env create`, and `sbx env rm` detect name conflicts with sandboxes created outside `sbx env` and provide guidance instead of treating them as environment-managed sandboxes.
+
+#### Agents and models
+
+- Formerly built-in agents that moved to public kits (kiro, copilot, droid) can be launched by name again — `sbx run kiro` resolves the pinned replacement kit and its stored credentials work without extra approval steps.
+- `sbx run --provider` now accepts hosted models.dev providers, served through llmman.
+- `sbx run --model` gains `--overflow-provider`/`--overflow-model` to pair a local model with a hosted one for oversized requests; `--provider` now works with codex for providers lacking the Responses API; codex sandboxes no longer spend seconds retrying WebSocket connections to the local model server.
+- Claude Code sandboxes started with `sbx run --model` now use the model you selected instead of the harness's own default model.
+- A slow first launch of the bundled llmman no longer fails `sbx run --model`.
+
+#### Kits and skills
+
+- `sbx create`/`sbx run` now share skills read-only by default via a new tri-state `--skills=off|readonly|readwrite` flag; the retired `--no-share-skills` flag still works as a deprecated alias for `--skills=off`. There is also a new `skills.defaultMode` to set the desired default behaviour.
+- Commit-pinned git kits now resolve offline from a local content-addressed cache, and every cache hit verifies the checkout against a per-file manifest, so a tampered cache entry is quarantined and refetched instead of being served.
+- Signed git kits now verify on every host: a kit checkout is materialized from the commit's blobs alone, so smudge filters, line-ending conversion, LFS, hooks, and other host git configuration can no longer alter the checked-out bytes.
+- Fixed kit-argument (`${{ kit.args.* }}`) substitution silently not applying when a kit reference is a symlinked directory.
+- Kits can now be installed through registry mirrors configured with an explicit port.
+- Hardened git kit cloning against command-line config injection (`GIT_CONFIG_PARAMETERS` and its numbered counterparts) carried in the inherited environment.
+
+#### Sandbox lifecycle and workspaces
+
+- Add a last-used timestamp to `sbx ls --json` and Docker-style `until` filtering to `sbx prune`.
+- Sandboxes created with `sbx create` now stop automatically after becoming idle.
+- The minimum memory for a sandbox has been decreased to 512 MiB. Note: This is only suitable for shell use cases.
+- Sandbox names are now validated to reject names longer than 63 characters or ending in a hyphen or period.
+- `daemon inspect` and `inspect` will now show mount information.
+- Clone-mode sandboxes now support shallow Git repositories.
+- Fixed an issue where the `sbx` CLI could select the wrong repository during Git-related setup tasks, such as loading kits or configuring workspaces, when Git environment variables were set on the host.
+- Fix UNC path resolution on Windows so that the same folder is identified correctly.
+- SSH connections now remain bound to the original sandbox identity while preserving existing sandboxes during UUID migration.
+- Windows clients can now connect to `sandboxd` through filesystem `AF_UNIX` sockets.
+- The local daemon now verifies connecting operating-system users on Unix sockets and Windows named pipes.
+
+#### Authentication and credentials
+
+- Docker sign-in now explains how to recover when macOS Keychain denies access to stored credentials.
+- Fixed a bug where a single Docker Hub sign-in timeout could permanently lock the daemon out of Docker Hub, requiring a manual sign-in to recover.
+- Concurrent sandbox creates now reuse one Docker Hub authentication request.
+- Private registries can use an explicitly trusted cross-host authentication endpoint for sandbox pulls.
+- `sbx secret rm --sandbox` now immediately revokes the removed credential from the sandbox proxy.
+- Prevent `sbx exec` from synchronizing credentials that were not configured for the sandbox.
+- Credential-binding consent now defaults to decline and clearly identifies when API-key secrets will be sent to new domains.
+- Fixed the OAuth credential gate so a third-party kit re-declaring a built-in agent's OAuth service can no longer inherit that agent's trust and receive a real token without an explicit binding; sandboxes created before this fix now self-heal on the next daemon restart or kit add instead of requiring a manual recreate.
+- Unrelated credentials no longer switch Claude sandboxes into Anthropic API-key mode.
+- `sbx secret import` and `sbx secret ls` now list copilot's GitHub credential correctly.
+
+#### Networking and policy
+
+- The CLI honors configured proxy settings for host-side HTTP requests, including login, diagnostic uploads, and update checks.
+- Fix HTTP/2 upstream responses without bodies being incorrectly framed as chunked by the sandbox proxy.
+- Hardened credential handling in the sandbox egress proxy so a client-supplied credential the proxy did not issue is not forwarded to managed provider hosts.
+- Network allow rules for IP-literal targets (for example `sbx policy allow network [::1]:8080` or CIDR rules such as `10.0.0.0/8`) are enforced correctly again; the proxy no longer blocks them with a default-deny after the governance approval-callback migration.
+- Fixed: agents no longer suggest `sbx policy allow` for a host blocked by an org-governed default-deny policy — it now reads as `Blocked by org policy`, same as an explicit org deny rule.
+- The `balanced` policy preset now allows access to the NodeSource APT repository.
+- Claude sandboxes can now access the Claude Code documentation.
+
+#### MCP
+
+- `sbx mcp add` can now send custom request headers to remote MCP servers via `--header`, with header values substituted from the local secret vault.
+- MCP authorization supports private OAuth discovery with `--skip-ssrf-check`, falls back to advertised common OIDC scopes, and honors `--no-scope` for local OAuth registrations.
+
+#### CLI, diagnostics, and updates
+
+- Local `sbx` commands no longer wait on slow or unreachable update services before exiting.
+- Plain `sbx version` invocations now return embedded version information without full CLI startup.
+- `sbx diagnose` checks whether `mkfs.erofs` is usable and warns if its default block size exceeds the sandbox kernel's page size.
+- `sbx diagnose` no longer reports a missing SSH `ProxyCommand` in Git Bash when the Windows OpenSSH configuration is healthy.
+- The `tls.allowNegativeSerial` setting no longer prints an informational log line on every `sbx` command while remaining visible in daemon diagnostics.
+- Terminal output now uses default text colors when the background theme cannot be detected.
+- Fix terminal cursor flickering issue on Windows.
+- Nightly and development builds now report a version based on the latest stable release instead of a release-candidate tag.
+- `sbx@rc` brew users on macOS will be updated to the latest stable build when it is released.
+
 ## 0.42.1
 
 {{< release-date date="2026-09-07" >}}
@@ -189,105 +279,6 @@ for ASCII-only content.
 - Kits can now be signed and verified with cosign-compatible Sigstore signatures via `sbx kit sign` / `sbx kit verify`, with optional policy enforcement at load time.
 - OAuth kits can declare their credential file with the declarative `credentialFile.structure` form, rendered to well-formed JSON, instead of a free-form Go template.
 - Ubuntu 25.10 packages are no longer published; Ubuntu 25.10 is end-of-life.
-
-## 0.38.0
-
-{{< release-date date="2026-08-06" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.38.0)
-
-### Highlights
-
-**Kit spec v2.** A new schema is available for authoring kits, with a clearer structure for setup, permissions, agent instructions, networking, and credentials. Use `schemaVersion: "2"` for new kits; existing v1 kits continue to load through the legacy path. See the [kit spec reference](https://docs.docker.com/ai/sandboxes/customize/kit-reference/#schema-versions) for migration details.
-
-**MCP management is now a first-class feature.** Register remote or local MCP servers once with `sbx mcp`, then reuse them across supported agents and sandboxes through a built-in MCP gateway. OAuth credentials stay on the host, and organizations can govern server registration and tool calls with Cedar policies. See the [MCP gateway documentation](https://docs.docker.com/ai/sandboxes/mcp-gateway/).
-
-### What's new
-
-#### CLI
-
-- `sbx create` and `sbx run` show detailed structured progress during startup, including environment files loaded, resources provisioned, and each kit command's outcome; kit-install progress streams live during `sbx create --kit`.
-- Added `sbx daemon restart` to stop and restart the sandboxd daemon in the background.
-- `sbx inspect` now displays custom secrets configured for a sandbox.
-- `DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE` configures the size of the cloned workspace volume.
-- `sbx setup ssh` warns when `ssh` is missing from PATH, and on Windows when `sh` (required by Claude Desktop's SSH ProxyCommand) is missing.
-- Port publishing failures now identify the affected host port and explain when the OS requires extra daemon privileges.
-
-#### MCP
-
-- The `sbx mcp` subcommand is now available for managing MCP servers.
-- Includes dynamic MCP tools (`mcp-find`, `mcp-add`, `mcp-config-set`) for attaching registered servers to sandboxes.
-- Govern MCP servers and tools for your organization using Cedar policies.
-
-#### Networking & policy
-
-- `--deny-network HOST` on `sbx run` and `sbx create` records per-sandbox network deny rules at creation time, with layer-aware egress messages.
-- `sbx policy allow network` reports a clear "managed by your organization" error when org governance overrides the local allow, and failed rule removals now explain what went wrong using a single rule identifier.
-- Signing in refreshes organization policies in the running daemon immediately instead of waiting for the next polling interval.
-- IP-literal destinations denied by a CIDR rule fail fast with a policy message instead of timing out.
-- Blocked HTTPS proxy connections appear in `sbx policy log` even when the client aborts the TLS handshake.
-
-#### Secrets & credentials
-
-- Service and custom secrets are global by default, with `--sandbox` for sandbox scope; legacy positional and `--global` forms are deprecated with warnings.
-- Sandbox-scoped GitHub credentials added after creation now work without recreating the sandbox.
-- Pressing Ctrl+C while entering a secret cancels the command without saving it.
-
-#### Agents
-
-- Docker Agent and OpenCode sandboxes can authenticate GitHub Copilot requests with proxy-managed GitHub credentials.
-- Codex sandboxes created from the TUI prefer stored OpenAI OAuth credentials over API keys; kit environment variables now reach cloud agents, and git no longer hangs Codex startup prompting for credentials.
-- Shared agent skills: directory symlinks under the skills folder are resolved and their contents imported.
-
-#### Kits & templates
-
-- Kit specs use the new v2 grammar.
-- Kits using `extends` correctly inherit and override the base image or build source of their parent.
-- Kit install commands can consume static files from `files/home`, including binary files.
-
-#### Packaging
-
-- Homebrew installs from a stapled `.dmg` artifact rather than a `.tar.gz` archive, improving Gatekeeper compatibility on macOS.
-- Windows: the running sandboxd daemon is stopped during a WinGet/MSI upgrade so client and server end up on the same version.
-
-#### Security
-
-- Claude Desktop SSH sessions no longer expose Desktop OAuth access tokens inside sandboxes.
-- Fixed a destination-escape flaw in `sbx cp` copy-out (CVE-2026-17106).
-- The daemon's loopback egress proxy only serves the daemon's own traffic, preventing other local users on a multi-user host from reaching the configured upstream proxy through it.
-
-#### Bug fixes
-
-- Fixed a hang where sandboxd stopped answering all endpoints and could not be stopped without SIGKILL after a crash; fatal daemon tracebacks are now included in `sbx diagnose --upload` bundles.
-- Fixed intermittent sandboxd startup failures when a running daemon was slow to answer its health check.
-- Fixed `sbx daemon stop` hanging when an idle SSH session (for example, Claude Desktop) was connected to a sandbox.
-- sandboxd automatically repairs a corrupted local image cache by re-pulling the image, and otherwise reports a clear "run `sbx daemon reset`" error.
-- Fixed recreate failures ("base image not found") after daemon restarts when swapping a sandbox's container via `sbx kit add`; recreates self-heal by recomposing from the sandbox's template.
-- Fixed reverse DNS (PTR) lookups from sandboxes returning NXDOMAIN for container-resolved addresses.
-- Fixed a goroutine and network-endpoint leak from hijacked HTTP CONNECT tunnels that could eventually stall sandbox creation after many delete/recreate cycles.
-- Fixed an intermittent 500 error when deleting a sandbox while its network endpoints were being torn down.
-- The daemon restores saved sandboxes' network proxies in parallel on restart, speeding up startup with several sandboxes and fixing a potential crash during first-run policy application.
-- Fixed host `.git/config` corruption when creating a sandbox for repositories using `includeIf` directives in `~/.gitconfig`; the sandbox now writes git identity only to the container's gitconfig.
-- `sbx skills` shows a single usage form and clearer help for importing shared agent skills.
-- sbx no longer reports that a stored credential was not injected when the daemon injects it.
-
-### Experimental features
-
-#### Enterprise networking
-
-Settings-driven upstream-proxy configuration with separate sandbox and daemon scopes, integrated NTLM/Kerberos proxy authentication on Windows.
-
-- Configure separate proxy settings for sandbox and daemon traffic using `proxy`, `proxy.sandbox`, `proxy.daemon`, and the matching `no_proxy` settings. These default to the host operating system's proxy settings. The daemon's own traffic, including image pulls and telemetry, also uses the configured proxy.
-- On Windows, sbx can authenticate to upstream proxies that require integrated NTLM or Kerberos/Negotiate authentication. Enable this behavior with the `proxy.integratedAuth` setting.
-- If a TLS-inspecting proxy issues certificates with negative serial numbers, enable compatibility with `sbx settings set tls.allowNegativeSerial true`, then restart the daemon.
-
-#### GPU passthrough
-
-Run a sandbox with NVIDIA VFIO GPU passthrough on Linux using `sbx run --gpu`. Enable this feature with `sbx settings set feature.sandbox-gpu true`.
-
-#### Local models
-
-Run Claude Code against a local GGUF model with `sbx run --model <name> claude`. To use a model from an existing Ollama installation, prefix the model name with `ollama/`. See [Claude Code > Use a local model](https://docs.docker.com/ai/sandboxes/agents/claude-code/#use-a-local-model).
 
 <!-- END GENERATED RELEASES -->
 
