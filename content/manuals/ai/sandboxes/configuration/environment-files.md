@@ -139,8 +139,7 @@ Environment files can reference two built-in directory values:
 | `${{ env.projectDir }}` | Absolute path to the directory containing the first environment file passed on the command line, or to the directory you run `sbx env` from when no path is passed |
 | `${{ env.fileDir }}` | Absolute path to the directory containing the file that declares the reference |
 
-When `PATH` names a file, its containing directory is the project directory.
-The user-level file doesn't change `env.projectDir`.
+Loading `~/.sbxenv.yaml` doesn't change `env.projectDir` to your home directory.
 
 Use `env.fileDir` to reference a directory beside a particular environment
 file, even when you merge it with files from other directories:
