@@ -178,7 +178,9 @@ CMD []
 ```
 
 The template supplies OpenCode, Python, uv, and the `agent` user. Ruff is
-installed during the build, so it is ready when the agent starts.
+installed during the build, so it is ready when the agent starts. To start
+from UBI 9 or an organization-maintained image, see
+[Use your own base image](build-an-agent.md#use-your-own-base-image).
 
 The descriptor declares this as a workload, connects OpenCode to the
 Anthropic API, and gives it the team's review instructions:
