@@ -52,21 +52,54 @@ paths:
       tags: [policies]
       summary: List policies
       description: >
-        Returns a shallow summary of all policies for the org.
+        Returns a shallow summary of the org's policies, one page at a time.
         The rule set is not included; use GetPolicy to fetch the full object.
+
+
+        Results are paginated with an opaque cursor. Pass `page_size` to bound
+        the page; if more policies remain, the response includes a
+        `next_page_token` to pass as `page_token` on the next request. Iterate
+        until `next_page_token` is absent. Treat the token as opaque — do not
+        parse or construct it.
+      parameters:
+        - name: page_size
+          in: query
+          required: false
+          description: >
+            Maximum number of policies to return. Defaults to 100 if omitted or
+            zero; values above 100 are capped at 100.
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 100
+            default: 100
+        - name: page_token
+          in: query
+          required: false
+          description: >
+            Opaque cursor from a previous response's `next_page_token`. Omit to
+            fetch the first page.
+          schema:
+            type: string
       responses:
         "200":
-          description: Object wrapping an array of policy summaries under `data`. Rule sets are not included; use GetPolicy to fetch a full policy.
+          description: Object wrapping an array of policy summaries under `data`, with an optional `next_page_token`. Rule sets are not included; use GetPolicy to fetch a full policy.
           content:
             application/json:
               schema:
                 type: object
-                required: [data]
+                required: [data, next_page_token]
                 properties:
                   data:
                     type: array
                     items:
                       $ref: "#/components/schemas/PolicySummary"
+                  next_page_token:
+                    type: [string, "null"]
+                    description: >
+                      The opaque cursor for the next page, or `null` on the last page.
+                    example: AQpteyJQSyI6Im15LW9yZyIsIlNLIjoicG9saWN5I3BvbF8ifQ
               examples:
                 default:
                   value:
@@ -79,6 +112,9 @@ paths:
                         created_at: "2026-04-22T00:00:00Z"
                         updated_at: "2026-04-22T00:00:00Z"
                         type: allowlist_v0
+                    next_page_token: AQpteyJQSyI6Im15LW9yZyIsIlNLIjoicG9saWN5I3BvbF8ifQ
+        "400":
+          $ref: "#/components/responses/InvalidArgument"
         "401":
           $ref: "#/components/responses/Unauthenticated"
         "403":
@@ -581,14 +617,17 @@ components:
         type:
           type: string
           description: >
-            Identifies the rule-set format. Always `allowlist_v0`, corresponding
-            to the `allowlist_v0` property on the full Policy object.
+            Identifies the policy type. `allowlist_v0` for network/filesystem
+            allowlist policies; `cedar_v1` for Cedar language policies.
+          enum: [allowlist_v0, cedar_v1]
           examples:
             - allowlist_v0
 
     Policy:
       type: object
-      description: Full policy representation including the allowlist rule set.
+      description: >
+        Full policy representation. Exactly one of `allowlist_v0` or `cedar_v1`
+        is present, depending on the policy type.
       required: [id, name, org, scope, created_at, updated_at]
       properties:
         id:
@@ -618,6 +657,8 @@ components:
             - "2026-04-22T00:00:00Z"
         allowlist_v0:
           $ref: "#/components/schemas/AllowlistV0"
+        cedar_v1:
+          $ref: "#/components/schemas/CedarV1Policy"
 
     Scope:
       type: object
@@ -656,6 +697,33 @@ components:
           items:
             $ref: "#/components/schemas/Rule"
 
+    CedarV1Policy:
+      type: object
+      description: >
+        Cedar:V1 policy body. Present on `Policy` when `PolicySummary.type` is
+        `cedar_v1`. Cedar policies encode their rules directly in `text` rather
+        than in the rules sub-resource; the rules endpoints are not available for
+        Cedar policies.
+      required: [text, schema_url]
+      properties:
+        text:
+          type: string
+          description: >
+            One or more Cedar `permit` or `forbid` statements. Must be
+            syntactically valid Cedar and must not carry an `@id` annotation
+            (IDs are server-assigned).
+          examples:
+            - 'permit(principal, action == MCP::Action::"call_tool", resource is MCP::Tool);'
+        schema_url:
+          type: string
+          description: >
+            URL of the Cedar schema this policy was authored against. The
+            evaluator looks up the schema by this URL from its built-in
+            registry. Use `https://schemas.docker.com/policy/cedar/v1/mcp/v0`
+            for MCP policies.
+          examples:
+            - "https://schemas.docker.com/policy/cedar/v1/mcp/v0"
+
     Rule:
       type: object
       description: A single allow or deny rule within an allowlist policy.
@@ -679,7 +747,11 @@ components:
 
     CreatePolicyRequest:
       type: object
-      description: Fields required to create a new policy.
+      description: >
+        Fields required to create a new policy. Omitting `cedar_v1` creates an
+        `allowlist_v0` policy with an empty rule set. Supplying `cedar_v1` creates
+        a Cedar:V1 policy; rules are embedded in the Cedar text rather than managed
+        via the rules sub-resource.
       required: [name]
       properties:
         name:
@@ -689,6 +761,8 @@ components:
             - "Security Research — hardened"
         scope:
           $ref: "#/components/schemas/Scope"
+        cedar_v1:
+          $ref: "#/components/schemas/CedarV1Policy"
 
     CreateRuleRequest:
       type: object
@@ -744,9 +818,10 @@ components:
     UpdatePolicyRequest:
       type: object
       description: >
-        Partial update of a policy's metadata. Only fields present in the body
-        are updated; the rule set is not modified here. At least one field must
-        be present.
+        Partial update of a policy. Only fields present in the body are updated;
+        absent fields are left unchanged. At least one field must be present.
+        For `cedar_v1` policies, supply `cedar_v1` to replace the policy text;
+        `name` and `scope` may be combined freely.
       properties:
         name:
           type: string
@@ -756,6 +831,8 @@ components:
             - Security Research
         scope:
           $ref: "#/components/schemas/ScopePatch"
+        cedar_v1:
+          $ref: "#/components/schemas/CedarV1Policy"
 
     ScopePatch:
       type: object
