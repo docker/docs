@@ -41,8 +41,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Added container detail pages with tabbed **Info**, **Stats**, **Logs**, **Shell**, and **Files** views and breadcrumb navigation for containers and container stacks. The **Logs** tab streams output in real time with follow and auto-scroll, and the **Info** tab shows key properties such as name, ID, image, ports, environment variables, mounts, and networks.
-- Added a live theme preview in **Settings** so you can see system, light, and dark theme changes before selecting **Apply**. The preview reverts if you navigate away or close the window.
 - Fixed published ports staying unreachable for the life of the container when the host port was momentarily busy.
 - Fixed in-app updates repeatedly failing when the update manifest contains no installer matching the current installation.
 - Fixed Kubernetes staying on "Starting Kubernetes" indefinitely when the cluster failed to initialize. The error is now reported.
