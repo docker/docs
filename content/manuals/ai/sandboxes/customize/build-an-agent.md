@@ -18,8 +18,7 @@ Build a schema v3 workload kit that runs Claude Code with a pinned binary,
 configurable model, and an Anthropic API key held on the host. The same steps
 apply to other agents: build the software into an image, declare its runtime
 requirements, and provide instructions about the environment. Start from Docker's
-shell template, or [use your own base image](#use-your-own-base-image), such as
-Red Hat Universal Base Image 9.
+shell template, or [use your own base image](#use-your-own-base-image).
 
 This example uses API-key authentication. If you're starting with kits, read
 [Kits v3](kits.md) for the file layout and the roles of a workload and a mixin.
@@ -97,15 +96,16 @@ sandbox, such as registering a runtime endpoint.
 
 ### Use your own base image
 
-Your workload can start from Red Hat Universal Base Image (UBI), or an image
+Your workload can start from a different Linux distribution or an image
 maintained by your organization. A Docker sandbox template is optional. The
 workload's Dockerfile prepares the operating system and installs the agent,
 while its v3 descriptor declares network access, credentials, and other
 runtime configuration.
 
-To use UBI 9 for this walkthrough, replace `claude-team.dockerfile` with the
-following. Keep the directory layout and follow the remaining descriptor
-steps on this page.
+This example uses Red Hat Universal Base Image (UBI) 9. To use it in this
+walkthrough, replace `claude-team.dockerfile` with the following Dockerfile.
+Keep the directory layout and follow the remaining descriptor steps on this
+page.
 
 ```dockerfile {title="claude-team/claude-team.dockerfile"}
 FROM registry.access.redhat.com/ubi9/ubi:9
