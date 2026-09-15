@@ -1,0 +1,18 @@
+{{- $data := index hugo.Data "api-prototype" -}}
+{{- if ne (int $data.modelVersion) 1 }}{{ errorf "Unsupported API presentation model version" }}{{ end -}}
+{{- .AddPage (dict "path" "." "kind" "section" "title" "Docker APIs" "linkTitle" "API reference" "description" "Explore Docker HTTP APIs, connection requirements, and versioned references." "aliases" (slice "/api-prototype/") "layout" "api-prototype" "params" (dict "view" "catalog" "keywords" (slice "API" "HTTP" "OpenAPI"))) -}}
+{{- range $api := $data.apis -}}
+  {{- $path := strings.TrimPrefix "/reference/api/" $api.url | strings.TrimSuffix "/" -}}
+  {{- if eq $api.id "engine-1.55" }}{{ $path = "comparison-engine-1.55" }}{{ end -}}
+  {{- $aliases := slice (printf "/api-prototype/%s/" $api.id) -}}
+  {{- if eq $api.id "engine-1.55" }}{{ $aliases = slice }}{{ end -}}
+  {{- if eq $api.id "governance" }}{{ $aliases = $aliases | append "/ai/sandboxes/governance/api/" }}{{ end -}}
+  {{- if eq $api.id "engine-1.56" }}{{ $aliases = $aliases | append "/engine/api/latest/" "/reference/api/engine/latest/" }}{{ end -}}
+  {{- $.AddPage (dict "linkTitle" (cond (eq $api.id "governance") "AI Governance" (cond (eq $api.product "engine") (printf "v%v" $api.version) "Latest")) "path" $path "url" $api.url "aliases" $aliases "kind" "section" "title" (printf "%s API %v" $api.title $api.version) "description" (printf "%s HTTP API reference, version %v." $api.title $api.version) "layout" "api-prototype" "params" (dict "view" "overview" "apiID" $api.id "sitemap" (ne $api.id "engine-1.55") "keywords" (slice "API" $api.product))) -}}
+  {{- range $op := $api.operations -}}
+    {{- $.AddPage (dict "path" (printf "%s/operations/%s" $path (crypto.SHA256 $op.id)) "url" $op.url "aliases" (cond (eq $api.id "engine-1.55") slice (slice (printf "/api-prototype/%s/operations/%s/" $api.id $op.id))) "title" $op.summary "description" (printf "%s %s — %s API %v." $op.method $op.path $api.title $api.version) "layout" "api-prototype" "params" (dict "sitemap" (ne $api.id "engine-1.55") "view" "operation" "apiID" $api.id "operationID" $op.id "keywords" (slice $op.method $op.path $op.id))) -}}
+  {{- end -}}
+  {{- range $schema := $api.schemas -}}
+    {{- $.AddPage (dict "path" (printf "%s/schemas/%s" $path (crypto.SHA256 $schema.name)) "url" $schema.url "aliases" (cond (eq $api.id "engine-1.55") slice (slice (printf "/api-prototype/%s/schemas/%s/" $api.id $schema.name))) "title" $schema.name "description" (printf "%s schema in %s API %v." $schema.name $api.title $api.version) "layout" "api-prototype" "params" (dict "sitemap" (ne $api.id "engine-1.55") "view" "schema" "apiID" $api.id "schemaName" $schema.name "keywords" (slice "schema" $schema.name))) -}}
+  {{- end -}}
+{{- end -}}

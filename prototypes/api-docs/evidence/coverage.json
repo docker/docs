@@ -1,0 +1,1715 @@
+{
+  "modelVersion": 1,
+  "apis": [
+    {
+      "api": "governance",
+      "operations": 8,
+      "variants": 52,
+      "headers": 0,
+      "references": 52,
+      "namedSchemas": 18,
+      "schemaRoots": 40,
+      "examples": 50,
+      "exceptions": 0,
+      "changes": 4,
+      "classifications": {
+        "mechanical conversion": 2,
+        "editorial completion": 1,
+        "evidence-backed correction": 1
+      },
+      "coverage": "pass"
+    },
+    {
+      "api": "hub",
+      "operations": 54,
+      "variants": 241,
+      "headers": 1,
+      "references": 229,
+      "namedSchemas": 74,
+      "schemaRoots": 214,
+      "examples": 246,
+      "exceptions": 268,
+      "changes": 157,
+      "classifications": {
+        "mechanical conversion": 58,
+        "editorial completion": 81,
+        "evidence-backed correction": 17,
+        "provisional assumption": 1
+      },
+      "coverage": "pass"
+    },
+    {
+      "api": "dvp",
+      "operations": 12,
+      "variants": 20,
+      "headers": 0,
+      "references": 29,
+      "namedSchemas": 26,
+      "schemaRoots": 69,
+      "examples": 8,
+      "exceptions": 17,
+      "changes": 14,
+      "classifications": {
+        "mechanical conversion": 7,
+        "editorial completion": 2,
+        "evidence-backed correction": 5
+      },
+      "coverage": "pass"
+    },
+    {
+      "api": "registry",
+      "operations": 11,
+      "variants": 68,
+      "headers": 32,
+      "references": 0,
+      "namedSchemas": 0,
+      "schemaRoots": 76,
+      "examples": 87,
+      "exceptions": 4,
+      "changes": 7,
+      "classifications": {
+        "mechanical conversion": 2,
+        "editorial completion": 1,
+        "provisional assumption": 3,
+        "evidence-backed correction": 1
+      },
+      "coverage": "pass"
+    },
+    {
+      "api": "engine-1.56",
+      "operations": 108,
+      "variants": 434,
+      "headers": 15,
+      "references": 350,
+      "namedSchemas": 160,
+      "schemaRoots": 792,
+      "examples": 569,
+      "exceptions": 101,
+      "changes": 1521,
+      "classifications": {
+        "mechanical conversion": 1254,
+        "provisional assumption": 11,
+        "editorial completion": 79,
+        "evidence-backed correction": 177
+      },
+      "coverage": "pass"
+    },
+    {
+      "api": "engine-1.55",
+      "operations": 108,
+      "variants": 434,
+      "headers": 15,
+      "references": 350,
+      "namedSchemas": 160,
+      "schemaRoots": 792,
+      "examples": 569,
+      "exceptions": 101,
+      "changes": 1521,
+      "classifications": {
+        "mechanical conversion": 1254,
+        "provisional assumption": 11,
+        "editorial completion": 79,
+        "evidence-backed correction": 177
+      },
+      "coverage": "pass"
+    }
+  ],
+  "engineEffectiveChanges": [
+    {
+      "operation": "SystemPing",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SystemPingHead",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SystemAuth",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageBuild",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "BuildPrune",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageCommit",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ConfigList",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ConfigCreate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ConfigInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ConfigDelete",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ConfigUpdate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerCreate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerList",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerList",
+      "field": "parameters",
+      "before": [
+        {
+          "description": "Return all containers. By default, only running containers are shown.\n",
+          "in": "query",
+          "name": "all",
+          "pointer": "/paths/~1containers~1json/get/parameters/0",
+          "schema": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        {
+          "description": "Return this number of most recently created containers, including\nnon-running ones.\n",
+          "in": "query",
+          "name": "limit",
+          "pointer": "/paths/~1containers~1json/get/parameters/1",
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "description": "Return the size of container as fields `SizeRw` and `SizeRootFs`.\n",
+          "in": "query",
+          "name": "size",
+          "pointer": "/paths/~1containers~1json/get/parameters/2",
+          "schema": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        {
+          "description": "Filters to process on the container list, encoded as JSON (a\n`map[string][]string`). For example, `{\"status\": [\"paused\"]}` will\nonly return paused containers.\n\nAvailable filters:\n\n- `ancestor`=(`<image-name>[:<tag>]`, `<image id>`, or `<image@digest>`)\n- `before`=(`<container id>` or `<container name>`)\n- `expose`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)\n- `exited=<int>` containers with exit code of `<int>`\n- `health`=(`starting`|`healthy`|`unhealthy`|`none`)\n- `id=<ID>` a container's ID\n- `isolation=`(`default`|`process`|`hyperv`) (Windows daemon only)\n- `is-task=`(`true`|`false`)\n- `label=key` or `label=\"key=value\"` of a container label\n- `name=<name>` a container's name\n- `network`=(`<network id>` or `<network name>`)\n- `publish`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)\n- `since`=(`<container id>` or `<container name>`)\n- `status=`(`created`|`restarting`|`running`|`removing`|`paused`|`exited`|`dead`)\n- `volume`=(`<volume name>` or `<mount point destination>`)\n",
+          "in": "query",
+          "name": "filters",
+          "pointer": "/paths/~1containers~1json/get/parameters/3",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "after": [
+        {
+          "description": "Return all containers. By default, only running containers are shown.\n",
+          "in": "query",
+          "name": "all",
+          "pointer": "/paths/~1containers~1json/get/parameters/0",
+          "schema": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        {
+          "description": "Return this number of most recently created containers, including\nnon-running ones.\n",
+          "in": "query",
+          "name": "limit",
+          "pointer": "/paths/~1containers~1json/get/parameters/1",
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "description": "Return the size of container as fields `SizeRw` and `SizeRootFs`.\n",
+          "in": "query",
+          "name": "size",
+          "pointer": "/paths/~1containers~1json/get/parameters/2",
+          "schema": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        {
+          "description": "Filters to process on the container list, encoded as JSON (a\n`map[string][]string`). For example, `{\"status\": [\"paused\"]}` will\nonly return paused containers.\n\nAvailable filters:\n\n- `ancestor`=(`<image-name>[:<tag>]`, `<image id>`, or `<image@digest>`)\n- `annotation=key` or `annotation=\"key=value\"` of a container annotation\n- `before`=(`<container id>` or `<container name>`)\n- `expose`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)\n- `exited=<int>` containers with exit code of `<int>`\n- `health`=(`starting`|`healthy`|`unhealthy`|`none`)\n- `id=<ID>` a container's ID\n- `isolation=`(`default`|`process`|`hyperv`) (Windows daemon only)\n- `is-task=`(`true`|`false`)\n- `label=key` or `label=\"key=value\"` of a container label\n- `name=<name>` a container's name\n- `network`=(`<network id>` or `<network name>`)\n- `publish`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)\n- `since`=(`<container id>` or `<container name>`)\n- `status=`(`created`|`restarting`|`running`|`removing`|`paused`|`exited`|`dead`)\n- `volume`=(`<volume name>` or `<mount point destination>`)\n",
+          "in": "query",
+          "name": "filters",
+          "pointer": "/paths/~1containers~1json/get/parameters/3",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    {
+      "operation": "ContainerPrune",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerDelete",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerArchive",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "PutContainerArchive",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerArchiveInfo",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerAttach",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerAttachWebsocket",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerChanges",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerExec",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerExport",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerKill",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerLogs",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerPause",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerRename",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerResize",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerRestart",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerStart",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerStats",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerStop",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerTop",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerUnpause",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerUpdate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ContainerWait",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "DistributionInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SystemEvents",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ExecInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ExecResize",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ExecStart",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageCreate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageGetAll",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageList",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageLoad",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImagePrune",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageSearch",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageDelete",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageAttestations",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageGet",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageHistory",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImagePush",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ImageTag",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SystemInfo",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "NetworkList",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "NetworkCreate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "NetworkPrune",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "NetworkInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "NetworkDelete",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "NetworkConnect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "NetworkDisconnect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "NodeList",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "NodeInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "NodeDelete",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "NodeUpdate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "PluginList",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "PluginCreate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "GetPluginPrivileges",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "PluginPull",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "PluginDelete",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "PluginDisable",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "PluginEnable",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "PluginInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "PluginPush",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "PluginSet",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "PluginUpgrade",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SecretList",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SecretCreate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SecretInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SecretDelete",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SecretUpdate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ServiceList",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ServiceCreate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ServiceInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ServiceDelete",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ServiceLogs",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "ServiceUpdate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "Session",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SwarmInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SwarmInit",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SwarmJoin",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SwarmLeave",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SwarmUnlock",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SwarmUnlockkey",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SwarmUpdate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SystemDataUsage",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "TaskList",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "TaskInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "TaskLogs",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "SystemVersion",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "VolumeList",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "VolumeCreate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "VolumePrune",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "VolumeInspect",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "VolumeUpdate",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    },
+    {
+      "operation": "VolumeDelete",
+      "field": "servers",
+      "before": [
+        {
+          "url": "/v1.55"
+        }
+      ],
+      "after": [
+        {
+          "url": "/v1.56"
+        }
+      ]
+    }
+  ]
+}

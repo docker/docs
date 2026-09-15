@@ -3,11 +3,14 @@ publish = "public"
 
 [context.deploy-preview.environment]
 NODE_VERSION = "24"
+GO_VERSION = "1.26.5"
 NODE_ENV = "production"
 HUGO_VERSION = "0.163.0"
 HUGO_ENABLEGITINFO = "true"
 HUGO_ENVIRONMENT = "preview"
-SECRETS_SCAN_OMIT_PATHS = "public/contribute/file-conventions/index.html"
+SECRETS_SCAN_OMIT_PATHS = "tmp/api-prototype/site/contribute/file-conventions/index.html"
 
 [context.deploy-preview]
-command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && ./hack/flatten-and-resolve.js && npx pagefind@v1.5.2"
+# This draft publishes the opt-in prototype alongside the regular docs.
+command = "API_PROTOTYPE_URL=$DEPLOY_PRIME_URL ./hack/api-docs/run.sh build"
+publish = "tmp/api-prototype/site"
