@@ -24,6 +24,60 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.92.0
+
+{{< release-date date="2026-09-21" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.92.0" build_path="/XXXXXX/" >}}
+
+### Updates
+
+- [containerd v2.3.5](https://github.com/containerd/containerd/releases/tag/v2.3.5)
+- [Docker Agent v1.138.1](https://github.com/docker/docker-agent/releases/tag/v1.138.1)
+- [Docker Buildx v0.37.1](https://github.com/docker/buildx/releases/tag/v0.37.1)
+- Docker Offload `v0.6.27`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed published ports staying unreachable for the life of the container when the host port was momentarily busy.
+- Fixed in-app updates repeatedly failing when the update manifest contains no installer matching the current installation.
+- Fixed Kubernetes staying on "Starting Kubernetes" indefinitely when the cluster failed to initialize. The error is now reported.
+- Fixed **Send Diagnostics** hanging indefinitely, or showing an unhelpful error, when a proxy blocks the upload.
+- Fixed container start, stop, and restart failures in the Docker Desktop Dashboard reporting only a generic HTTP error instead of the reason reported by Docker Engine.
+- Fixed Docker Hub repository and tag browsing to use Docker Hub's current API, and removed the non-functional **Starred** and **Contributed** tabs from Docker Hub organization profiles.
+- Fixed an issue where users signed out before a Docker Desktop update were not prompted to sign in after the app restarted.
+- Fixed **Settings** section navigation to scroll to the selected section reliably, and added a divider between sections for easier visual parsing.
+- Improved Kubernetes cloud cluster management by hiding the kubeadm option in the cluster dialog and resetting the cluster mode to kind when the dialog closes.
+- Improved Ask Gordon so sessions start in the relevant project directory when launched from a volume or build history row, and added a banner that prompts you to select a project folder when chatting from an auto-generated scratch directory.
+- Fixed Ask Gordon file diffs: edits that share a near-identical text prefix, the summary bar overlapping your message when scrolling, and row backgrounds and column width in the edit tool-call view.
+- Fixed Ask Gordon chat: a blank command in the shell approval dialog, background job tool calls rendering as raw JSON, streamed command output jank, raw internal error details, and opening Ask Gordon from **Settings**, **Troubleshoot**, or **Support** corrupting drawer state for Ask Gordon, notifications, and the Learning Center.
+
+#### For Mac
+
+- Fixed moving the disk image to another location being slow on macOS 26.
+- Fixed a macOS update failure where validating the staged app could fail even though the app was valid, and extended that validation to catch a staged app that fails to start.
+- Fixed excessive idle CPU usage on Retina displays caused by a badge animation in the Ask Gordon interface.
+
+#### For Windows
+
+- Added support for migrating admin, per-machine installations to per-user installations when running the Docker VMM backend, in addition to WSL 2.
+- Fixed an issue where Windows 10 users with the inbox `wsl.exe` saw a raw error instead of the prompt to update WSL when Docker Desktop checked the WSL version.
+- Fixed `host.docker.internal` and `gateway.docker.internal` not being injected into Windows containers after Docker Desktop lost the container event stream.
+- The MSI installer now refuses per-user installations, which are not supported, instead of installing a copy that later updates cannot upgrade.
+- Fixed a misleading error message that claimed the WSL disk image had been deleted when WSL could not open it while registering the Docker Desktop distribution.
+- Fixed Kubernetes failing to start after a WSL distro that had been integrated was unregistered.
+- Fixed single-file bind mounts on Docker VMM. The "not shared from the host" error now points at the file's containing directory, and a file entry in the **File sharing** settings no longer prevents the engine from starting.
+- Fixed Docker Desktop retrying the WSL engine indefinitely without reporting an error when WSL was unable to load its own kernel modules.
+- Fixed disk image location moves always failing when moving to a different drive. Fixes [docker/desktop-feedback#548](https://github.com/docker/desktop-feedback/issues/548) and [docker/desktop-feedback#550](https://github.com/docker/desktop-feedback/issues/550).
+- Fixed a failed incremental update not retrying with a full installer.
+- Fixed the WSL 2 cross-distro bind-mount proxy serving stale or incomplete directory contents for host paths on slow-to-mount drives, such as Storage Pool volumes.
+
+### Security
+
+- Updated containerd to `v2.3.5`, addressing [CVE-2026-53495](https://github.com/advisories/GHSA-7jxh-36q5-gcqv).
+
 ## 4.91.0
 
 {{< release-date date="2026-09-14" >}}
