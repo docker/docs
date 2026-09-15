@@ -566,6 +566,38 @@ For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
 commands fall back to the Docker credential store, so credentials from
 `docker login` also work.
 
+### Trust a private registry authentication endpoint
+
+Starting with Docker Sandboxes v0.43.0, use `--registry-auth-endpoint` with
+`--registry` when a self-hosted registry authenticates sandbox requests through
+a separate host. For example, a self-hosted GitLab registry at
+`registry.example.com` might advertise `https://gitlab.example.com/jwt/auth`
+as the `realm` in its Registry v2 `WWW-Authenticate: Bearer` challenge.
+
+Store the credential and trust that endpoint for a specific sandbox:
+
+```console
+$ echo "$GITLAB_PAT" | sbx secret set --sandbox my-app \
+    --registry registry.example.com \
+    --username "$GITLAB_USER" \
+    --registry-auth-endpoint https://gitlab.example.com/jwt/auth \
+    --password-stdin
+```
+
+Replace the example hosts with your registry and authentication hosts, and set
+`GITLAB_USER` and `GITLAB_PAT` to your GitLab username and personal access token.
+
+This authorizes the proxy to send the stored registry credential to
+`https://gitlab.example.com/jwt/auth` to exchange it for a registry token. The
+advertised realm must use HTTPS and match the configured host and path exactly.
+Other paths on that host, including `/jwt/auth/`, aren't covered. The endpoint
+URL must contain no embedded credentials, query string, or fragment. Token
+requests can still include protocol parameters such as `service` and `scope`.
+
+Without this flag, the proxy accepts authentication endpoints on the registry's
+own host and built-in registry relationships, such as Docker Hub's authentication
+host. Other authentication hosts require explicit configuration.
+
 ### Remove registry credentials
 
 Remove both the host-only and all-sandboxes entries for a registry:
