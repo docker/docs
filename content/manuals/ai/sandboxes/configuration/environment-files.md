@@ -143,24 +143,27 @@ Environment files can reference two built-in directory values:
 
 Loading `~/.sbxenv.yaml` doesn't change `env.projectDir` to your home directory.
 
-Use `env.projectDir` when a shared configuration should point to each
-project. Use `env.fileDir` when a path should stay relative to a particular
-environment file.
+The difference matters when you load files from different directories:
 
-For example, in `/projects/web-app-env/sbxenv.yaml`, these two workspace
-values both mount `/projects/web-app-env/web-app`:
-
-```yaml
-workspace: ${{ env.fileDir }}/web-app
+```console
+$ sbx env run /projects/web-app/sbxenv.yaml /shared/overrides.yaml
 ```
 
-```yaml
-workspace: ./web-app
-```
+In this command, the references resolve as follows:
 
-Both paths keep pointing to that directory when you merge this file with
-other environment files. Use the relative form for workspace paths when
-you don't need to spell out the absolute path.
+| In this file | `${{ env.projectDir }}` | `${{ env.fileDir }}` |
+| --- | --- | --- |
+| `/projects/web-app/sbxenv.yaml` | `/projects/web-app` | `/projects/web-app` |
+| `/shared/overrides.yaml` | `/projects/web-app` | `/shared` |
+
+In `overrides.yaml`, use `${{ env.projectDir }}/src` to refer to the project's
+`/projects/web-app/src` directory. Use `${{ env.fileDir }}/tools` to refer to
+`/shared/tools`, beside the overrides file. If you reuse the overrides file
+with a different project, `env.projectDir` changes to that project's directory,
+while `env.fileDir` stays `/shared`.
+
+For workspace paths, `./tools` also resolves from the file's own directory.
+You don't need `env.fileDir` unless you want to express the absolute path.
 
 Directory references can appear in YAML values alongside
 [argument references](#parameterize-an-environment). They can't appear in
