@@ -136,8 +136,8 @@ Environment files can reference two built-in directory values:
 
 | Reference | Value |
 | --- | --- |
-| `${{ env.projectDir }}` | Absolute project directory: the directory resolved from the first `PATH`, or the working directory when no path is given |
-| `${{ env.fileDir }}` | Absolute directory containing the file that declares the reference |
+| `${{ env.projectDir }}` | Absolute path to the directory containing the first environment file passed on the command line, or to the directory you run `sbx env` from when no path is passed |
+| `${{ env.fileDir }}` | Absolute path to the directory containing the file that declares the reference |
 
 When `PATH` names a file, its containing directory is the project directory.
 The user-level file doesn't change `env.projectDir`.
