@@ -120,7 +120,7 @@ ExecStart=/usr/bin/dockerd
 ```
 
 There are other times when you might need to configure `systemd` with Docker,
-such as [configuring a HTTP or HTTPS proxy](./proxy.md).
+such as [configuring an HTTP or HTTPS proxy](./proxy.md).
 
 > [!NOTE]
 >
