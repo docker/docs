@@ -87,8 +87,12 @@ If a `--url` hostname resolves to a private, loopback, link-local, or cloud
 metadata address, `sbx` registers the server but warns you about the resolved
 address. Register only URLs you trust. Fetching a manifest from an untrusted
 URL can expose internal services or cloud metadata, and DNS rebinding can
-redirect a hostname after it has been checked. For a trusted internal server,
-pass `--skip-ssrf-check` to suppress the check and warning.
+redirect a hostname after it has been checked. OAuth metadata discovery also
+blocks private and other disallowed addresses, including redirect destinations.
+For a trusted internal server, pass `--skip-ssrf-check` to skip both the MCP
+URL check and the OAuth metadata discovery checks. This permits private OAuth
+metadata endpoints and redirects. Use the flag only when you trust the MCP
+host, OAuth provider, and all metadata redirect destinations.
 
 ### Remote endpoint URL
 
@@ -319,21 +323,26 @@ the following order:
 1. Scopes passed to `sbx mcp auth --scope`
 2. Default scopes recorded by `sbx mcp add --scope`
 3. Scopes that the protected resource says it requires
+4. Whichever of `openid`, `email`, `profile`, and `offline_access` the
+   authorization server advertises
 
 If none of these provide a scope set, `sbx` omits the OAuth `scope` parameter so
-the authorization server applies its default grant. The authorization server's
-full advertised scope set is never requested automatically.
+the authorization server applies its default grant. Other advertised scopes
+aren't included in the fallback.
 
-Pass `--no-scope` to suppress both the recorded defaults and the resource's
-required scopes for one authorization:
+Pass `--no-scope` to suppress the recorded defaults, resource-required scopes,
+and advertised scope fallback for one authorization, without changing the
+stored defaults:
 
 ```console
 $ sbx mcp auth serverx --no-scope
 ```
 
-You can't combine `--no-scope` with `--scope`. If the authorization server
-advertises supported scopes, each scope you choose must be in that set. The
-authorization server can still refuse an advertised scope for a particular
+You can't combine `--no-scope` with `--scope`. Scopes you choose are checked
+against the authorization server's advertised scopes and the resource's
+required scopes. If either source publishes scopes, a scope present in neither
+produces a warning but is still requested. The authorization server can still
+refuse an advertised scope for a particular
 client. For a local authorization flow, `sbx` lists the requested, advertised,
 and refused scopes and suggests a retry command. If the server identifies the
 refused scopes, the command removes them. Otherwise, it uses `--no-scope`.
