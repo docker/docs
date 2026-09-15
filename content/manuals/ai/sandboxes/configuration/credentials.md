@@ -568,9 +568,9 @@ commands fall back to the Docker credential store, so credentials from
 
 ### Trust a private registry authentication endpoint
 
-Starting with Docker Sandboxes v0.43.0, use `--registry-auth-endpoint` with
-`--registry` when a self-hosted registry authenticates sandbox requests through
-a separate host. For example, a self-hosted GitLab registry at
+Use `--registry-auth-endpoint` with `--registry` when a self-hosted registry
+authenticates sandbox requests through a separate host. For example, a
+self-hosted GitLab registry at
 `registry.example.com` might advertise `https://gitlab.example.com/jwt/auth`
 as the `realm` in its Registry v2 `WWW-Authenticate: Bearer` challenge.
 
