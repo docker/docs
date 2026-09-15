@@ -18,8 +18,6 @@ once, then reuse them across projects and share them with your team.
 
 This page covers v3, the recommended format for kit development. V3 brings
 image builds and runtime capabilities together in the kit format.
-V2 is deprecated but remains supported for existing customizations. See
-[Kits v2](kits-v2/_index.md) for maintenance and migration guidance.
 
 > [!NOTE]
 > Kits are experimental. The format and CLI commands are subject to change.
@@ -39,6 +37,21 @@ workload:
 For example, a team might use an OpenCode workload with a mixin that adds a
 linter and another that supplies the team's review instructions. Each kit can
 be maintained and shared separately.
+
+## Version compatibility
+
+V3 kits cannot be combined with v1 or v2 kits in the same sandbox. To use
+v3, select a v3 workload and use v3 for every mixin you add.
+
+The built-in agent names, such as `claude` and `codex`, select v2 kits.
+You can't add a v3 mixin to these built-ins. For example,
+`sbx run claude --kit ./some-v3-mixin` fails because it mixes kit versions.
+Instead, select a v3 workload by its published image, local path, or Git
+reference, as shown in [Run a kit](#run-a-kit).
+
+V2 is deprecated but remains supported, including the built-in agents and
+existing v2 customizations. See [Kits v2](kits-v2/_index.md) for maintenance
+and migration guidance.
 
 ## What kits can do
 
@@ -65,19 +78,9 @@ Sandboxes prepares the environment and applies its settings.
 
 ### Run a kit
 
-If you've run `sbx run claude` or `sbx run codex`, you've already used a
-built-in agent kit. A v3 workload serves the same purpose: it defines the
-environment and command that `sbx` runs. The built-in shortcuts select v2
-kits, so you need an explicit v3 workload reference to use this format.
-
-Choose a published workload that uses v3, or supply a local v3 workload.
-Every mixin you add must also use v3. For example,
-`sbx run claude --kit ./some-v3-mixin` fails because the built-in `claude`
-kit uses v2. Selecting a v3 workload opts that sandbox into the v3 format.
-
-To run a v3 workload, replace the built-in agent name with the kit's
-reference. Follow it with the project directory to use as the sandbox's
-workspace:
+Run a workload by passing its kit reference to `sbx run`, followed by the
+project directory to use as the sandbox's workspace. You can choose a
+published v3 workload or supply one from a local directory or Git repository:
 
 ```console
 $ sbx run <V3_WORKLOAD_KIT> <PROJECT_PATH>
