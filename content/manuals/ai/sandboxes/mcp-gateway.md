@@ -113,10 +113,13 @@ $ sbx secret set mcp:acme:api-key
 ```
 
 Replace the example URL with your MCP endpoint. The `sbx secret set` command
-prompts for the API key and stores it in the encrypted host credential store.
+prompts for the API key and stores it in the
+[host credential store](configuration/credentials.md#where-secrets-are-stored).
 The `${api-key}` placeholder stays in the registration. When a sandbox
 connects, the gateway reads the secret and substitutes its value in the header.
 Use single quotes around header values so your shell preserves placeholders.
+Placeholders name stored secrets, not environment variables: `${api-key}`
+reads `mcp:acme:api-key`, regardless of your shell environment.
 
 Store each placeholder with `sbx secret set mcp:<server>:<placeholder>`.
 Credential headers such as `Authorization` must use a secret placeholder.
@@ -128,13 +131,39 @@ After storing the secret, expose the server to a sandbox:
 $ sbx run claude --name acme-demo --static-mcp acme
 ```
 
-To check the header templates and whether their secrets are set, run
-`sbx mcp inspect acme`. The command doesn't display resolved secret values.
-
 Custom headers require a remote HTTP endpoint and can't be used with
 `--command` or `--local`. They also require the host to connect to the server.
 The hosted gateway rejects these registrations unless you supply
 `--oauth-authorization-server`, which routes the connection through the host.
+
+#### Manage header secrets
+
+Header secrets use the global scope on the host. Set them with
+`sbx secret set mcp:<server>:<placeholder>` without `--sandbox`.
+Header secrets require a stored value and don't support `--ref` or `--command`
+dynamic sources.
+To check the header templates and whether their secrets are set, run
+`sbx mcp inspect acme`. The command doesn't display resolved secret values.
+
+The secret store also contains an automatically managed `:endpoint` record,
+such as `mcp:acme:api-key:endpoint`. This metadata binds the secret to the
+registered server's URLs so the gateway can detect an endpoint change before
+sending the secret. You don't need to set this record yourself. If you change
+the server's endpoint, follow the CLI guidance to set the secret again for
+that endpoint.
+
+To rotate a header secret, run `sbx secret set` with the same name. After
+setting, changing, or removing a header secret, stop and restart the sandbox
+or restart `sandboxd` to apply the change to an existing gateway. An existing
+connection keeps its previous value, and a server skipped because its secret
+was missing isn't retried automatically.
+
+Removing a registration with `sbx mcp rm` keeps its header secrets and prints
+commands to remove them. To remove the example secret:
+
+```console
+$ sbx secret rm mcp:acme:api-key
+```
 
 ### Local stdio server
 
@@ -251,15 +280,21 @@ For a confidential OAuth client, store the client secret before registering
 the server. There is no `--client-secret` flag:
 
 ```console
-$ sbx secret set mcp:slack.client_secret
+$ sbx secret set mcp:slack:client_secret
 $ sbx mcp add slack --url https://slack.example.com/mcp \
   --client-id <CLIENT_ID>
 ```
 
-The client secret stays in the encrypted host credential store and isn't
+The client secret stays in the host credential store and isn't
 written to the MCP registration. If the server requires a confidential client
 and no secret is stored, registration succeeds but authorization is skipped.
 Store the secret, then run `sbx mcp auth <server>`.
+
+MCP OAuth client secrets use the name `mcp:<server>:client_secret`. The store
+also maintains a `mcp:<server>:client_secret:identity` record that binds the
+secret to the OAuth client. For secrets stored by a version that used
+`mcp:<server>.client_secret`, set the secret again using the colon-separated
+name.
 
 ### Set OAuth scopes
 

@@ -51,6 +51,10 @@ keychain, keyed on a service identifier. Built-in agents declare a fixed set of
 services. Custom kits can declare their own. The same `sbx secret set` flow
 works for both.
 
+Secrets whose names start with `mcp:` are reserved for the host's
+[MCP gateway](../mcp-gateway.md). See [MCP secrets](#mcp-secrets) for how
+these differ from agent and provider credentials.
+
 ### Where secrets are stored
 
 The store backing `sbx secret set` depends on your operating system:
@@ -103,6 +107,20 @@ $ sbx secret set openai --sandbox my-sandbox
 > running. A global secret only applies when a sandbox is created. If
 > you set or change a global secret while a sandbox is running, recreate the
 > sandbox for the new value to take effect.
+
+### MCP secrets
+
+The MCP gateway uses the same host credential store for OAuth client secrets
+and custom request header secrets. These records have names starting with
+`mcp:` and appear in `sbx secret ls`. They stay on the host and aren't injected
+into sandboxes. The gateway uses them to authenticate connections to MCP
+servers on behalf of sandboxed agents.
+
+For setup instructions, see
+[OAuth client secrets](../mcp-gateway.md#use-a-pre-registered-oauth-client) and
+[custom request headers](../mcp-gateway.md#custom-request-headers). Header
+secrets use the global scope and have their own
+[restart requirements](../mcp-gateway.md#manage-header-secrets).
 
 ### Use a dynamic secret source
 
