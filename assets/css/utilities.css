@@ -108,17 +108,21 @@
   }
 
   /* code in `inline code` style */
-  :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+  :where(code):not(:where(pre *, [class~="not-prose"], [class~="not-prose"] *)),
   a > code {
+    overflow-wrap: anywhere;
     font-size: 0.875em;
     font-weight: 400 !important;
     border: 1px solid !important;
     border-radius: 0.25rem;
     border: none !important;
-    padding: 4px !important;
-    background: var(--tw-prose-code-bg) !important;
+    padding: 0.1em 0.25em !important;
+    background: var(--docs-inline-code-bg, var(--tw-prose-code-bg)) !important;
     .dark & {
-      background: var(--tw-prose-code-bg-dark) !important;
+      background: var(
+        --docs-inline-code-bg,
+        var(--tw-prose-code-bg-dark)
+      ) !important;
     }
     &::before,
     &::after {
