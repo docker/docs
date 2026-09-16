@@ -194,7 +194,7 @@ from those sources do still apply. See [Precedence](#precedence).
 What applies depends on whether your organization has governance enabled:
 
 - No organization governance: local rules and any
-  [kit-defined network rules](../customize/kits.md#control-network-access)
+  [kit-defined network rules](/manuals/ai/sandboxes/customize/author/_index.md#control-network-access)
   determine what sandboxes can access.
 - Organization governance active: organization policy determines what access can
   be granted. Only organization allow rules grant access, so local and

@@ -52,7 +52,7 @@ $ sbx secret set openai
 
 Once inside the shell, you can install agents using their standard methods,
 for example `npm install -g @continuedev/cli`. For complex setups, build a
-[custom template](../customize/templates.md) instead of installing
+[workload kit](/manuals/ai/sandboxes/customize/_index.md) instead of installing
 interactively each time.
 
 ## Base image

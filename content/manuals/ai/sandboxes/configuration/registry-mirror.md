@@ -54,7 +54,7 @@ mirror URL paths differently from image repository prefixes.
 Docker Engine connects to the mirror over HTTPS, so the sandbox must trust the
 certificate that the mirror presents. For a mirror that uses an internal
 certificate authority, add the CA to the sandbox's system trust store. See
-[Install an internal CA certificate](../customize/kit-examples.md#install-an-internal-ca-certificate).
+[Install an internal CA certificate](../customize/kits-v2/_index.md#install-an-internal-ca-certificate).
 
 Template and kit pulls use the changed setting immediately. Existing sandboxes
 retain the Docker Engine mirror configuration with which they were created.

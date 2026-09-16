@@ -1,0 +1,431 @@
+---
+title: Kit examples
+linkTitle: Mixin examples
+description: Build schema v3 kits that add tools, shared files, runtime configuration, lifecycle hooks, and agent instructions to a sandbox workload.
+keywords: sandboxes, sbx, kits, mixins, examples, capabilities, build, lifecycle
+weight: 30
+aliases:
+  - /ai/sandboxes/customize/kit-examples/
+---
+
+{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
+
+> [!NOTE]
+> V3 kits are experimental. The kit file format, CLI commands, and experience
+> for creating, loading, and managing kits are subject to change. Share
+> spec feedback in [docker/sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/issues).
+
+These schema v3 examples show how to add tools, configuration, and instructions
+to a workload. Each section is a separate customization with its own kit files.
+The run commands use the [sample shell workload](#create-a-workload-for-the-examples)
+unless the example names another agent. Save mixin directories beside the
+workload directory and run the commands from their parent directory.
+
+These mixins require a v3 workload. They can't be used with the v2 built-in
+agent shortcuts, such as `claude` or `codex`. Select a v3 workload before
+adding these mixins. For v2 customizations,
+see [Kits v2](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
+
+For source layout and capability declarations, see
+[Author kits](/manuals/ai/sandboxes/customize/author/_index.md).
+For additional source kits, see the
+[specification examples](https://github.com/docker/sandbox-kit-spec/tree/main/examples).
+For field definitions, see the [Kit spec reference](/manuals/ai/sandboxes/customize/author/kit-reference.md).
+
+## Create a workload for the examples
+
+This shell workload gives you an environment for inspecting files and running
+tools contributed by mixins. Create a `shell-v3` directory with these two
+files. The descriptor names `AGENTS.md` as the profile used by the
+[agent-instructions example](#contribute-agent-instructions):
+
+```yaml {title="shell-v3/shell-v3.yaml"}
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: workload
+displayName: Example shell
+
+capabilities:
+  - type: com.docker.sandbox/agent-context@1
+    config:
+      filename: AGENTS.md
+      content: This shell is an environment for testing composed kits.
+```
+
+The Dockerfile supplies the shell environment:
+
+```dockerfile {title="shell-v3/shell-v3.dockerfile"}
+FROM docker/sandbox-templates:shell
+USER agent
+ENTRYPOINT ["bash"]
+CMD ["-l"]
+```
+
+Run it from the parent directory, using your current directory as the workspace:
+
+```console
+$ sbx run --name kit-shell ./shell-v3 .
+```
+
+Each example uses a different sandbox name because selecting a different kit
+set requires creating a sandbox.
+
+## Contribute agent instructions
+
+Use the agent-context capability to tell an agent how to use tools and
+configuration supplied by a kit. A mixin contributes instructions to the
+workload's context profile without choosing its filename:
+
+```yaml {title="team-review/team-review.yaml"}
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: mixin
+displayName: Team review instructions
+
+capabilities:
+  - type: com.docker.sandbox/agent-context@1
+    config:
+      content: |
+        When reviewing a Dockerfile, check the base image version, layer
+        ordering, cache use, and whether secrets appear in ARG or ENV.
+        Explain the effect of each suggested change and run available
+        project checks before reporting completion.
+```
+
+The [sample shell workload](#create-a-workload-for-the-examples) chooses
+`AGENTS.md`. When you compose this mixin, `sbx` adds a kit entry to that
+profile and puts the instructions in a separate
+file for the agent to read on demand. An agent workload can choose another
+profile, such as `CLAUDE.md`, and the same mixin contributes to that profile.
+
+```console
+$ sbx run --name kit-team-review ./shell-v3 --kit ./team-review .
+```
+
+This short example keeps its instructions inline. Only workload kits can set `filename`.
+
+## Write runtime configuration
+
+Use lifecycle `files` when a file contains values chosen at sandbox creation.
+This example writes a team settings file using a validated kit argument.
+It needs no Dockerfile because it contributes only declarations:
+
+```yaml {title="workspace-config/workspace-config.yaml"}
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: mixin
+displayName: Workspace settings
+
+args:
+  project:
+    default: demo
+    pattern: '^[a-z][a-z0-9-]*$'
+
+capabilities:
+  - type: com.docker.sandbox/lifecycle@1
+    config:
+      files:
+        - path: /home/agent/.config/team/project.json
+          content: |
+            {"project": "${{ kit.args.project }}"}
+          mode: "0644"
+```
+
+Create the `workspace-config` directory and save the descriptor. Run it with
+the [sample shell workload](#create-a-workload-for-the-examples), supplying
+the project name as a kit argument:
+
+```console
+$ sbx run --name kit-project ./shell-v3 --kit ./workspace-config \
+    --kit-arg workspace-config.project=payments .
+```
+
+The runtime expands `${{ kit.args.project }}` and writes the file before the
+workload starts. The argument prefix is the local kit directory's name.
+The file is written during sandbox creation. Add `overwrite: false` if it
+should only seed a default and preserve an existing file.
+
+Use absolute paths under `/home/agent/` for files the agent owns. A variable
+such as `$HOME` in `path` isn't expanded. To write to a runtime workspace
+path, use a hook with `env: [WORKSPACE_DIR]`. See
+[Copy shared configuration](#copy-shared-configuration).
+
+## Run a hook on every start
+
+Use lifecycle `startup` for work that must repeat after the sandbox stops
+and starts. This example records the time and workspace at each start:
+
+```yaml {title="start-log/start-log.yaml"}
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: mixin
+displayName: Sandbox start log
+
+capabilities:
+  - type: com.docker.sandbox/lifecycle@1
+    config:
+      startup:
+        - command: |
+            printf '%s %s\n' "$(date -u +%FT%TZ)" "$WORKSPACE_DIR" >> /home/agent/sandbox-starts.log
+          user: agent
+          env: [WORKSPACE_DIR]
+          description: Record each sandbox start
+```
+
+Run the mixin with the [sample shell workload](#create-a-workload-for-the-examples):
+
+```console
+$ sbx run --name kit-start-log ./shell-v3 --kit ./start-log .
+```
+
+Startup hooks run separately from the workload launch. Use install hooks
+or lifecycle files for configuration the agent must read when it starts.
+Design repeated setup so running it again leaves the environment usable.
+
+For a long-running service, set `background: true` on its startup hook and
+redirect output to a log file. The service binary must already be present in
+the workload or a composed tool overlay.
+
+## Copy shared configuration
+
+Ship static files in the image, then use a lifecycle install hook to copy
+them to a destination that only exists when the sandbox is created. This is
+useful for workspace defaults, because the workspace is mounted at runtime
+and its path varies between projects.
+
+Create this directory:
+
+```text
+team-config/
+├── team-config.yaml
+├── team-config.dockerfile
+└── editorconfig
+```
+
+```ini {title="team-config/editorconfig"}
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+```
+
+The Dockerfile places the file outside the workspace, where a runtime mount
+won't hide it:
+
+```dockerfile {title="team-config/team-config.dockerfile"}
+FROM scratch
+COPY editorconfig /usr/share/team-config/editorconfig
+```
+
+The descriptor copies the default into the workspace only when the project
+has no `.editorconfig`. It also keeps a copy in the agent's home directory:
+
+```yaml {title="team-config/team-config.yaml"}
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: mixin
+displayName: Team configuration
+
+capabilities:
+  - type: com.docker.sandbox/lifecycle@1
+    config:
+      install:
+        - command: |
+            set -eu
+            if [ ! -e "$WORKSPACE_DIR/.editorconfig" ]; then
+              cp /usr/share/team-config/editorconfig "$WORKSPACE_DIR/.editorconfig"
+            fi
+            mkdir -p /home/agent/.config/team
+            cp /usr/share/team-config/editorconfig /home/agent/.config/team/editorconfig
+          user: agent
+          env: [WORKSPACE_DIR]
+          description: Copy team defaults into the workspace and home
+```
+
+Run it with the [sample shell workload](#create-a-workload-for-the-examples):
+
+```console
+$ sbx run --name kit-team-config ./shell-v3 --kit ./team-config .
+```
+
+`WORKSPACE_DIR` is a runtime value. Declaring it in the hook's `env` list
+makes it available to the command. Running as `agent` keeps the copied files
+writable by the workload user. With a directly mounted workspace, creating
+`.editorconfig` also creates that file in the host project.
+
+Schema v3 has no automatic `files/workspace/` or `files/home/` placement.
+The Dockerfile defines where static content lives in the image. The hook
+handles the runtime destination.
+
+## Ship a Claude Code skill
+
+Package a task your team repeats as an agent skill. This mixin adds a
+Dockerfile review skill to Claude Code's project skills directory,
+`.claude/skills/docker-review/`.
+
+Create a `docker-review` directory with a descriptor, a Dockerfile, and the
+skill's Markdown file:
+
+```markdown {title="docker-review/SKILL.md"}
+---
+name: docker-review
+description: Review a Dockerfile for best practices. Use when asked to review, audit, or improve a Dockerfile.
+---
+
+When reviewing a Dockerfile, check:
+
+1. Base image: an appropriate image with a pinned tag or digest
+2. Layer order: dependencies copied before application source
+3. Image size: multi-stage builds, `.dockerignore`, and package-manager caches
+4. Security: a non-root user and no secrets in `ARG` or `ENV`
+5. Reproducibility: pinned package versions and build inputs
+```
+
+The Dockerfile packages the skill outside the mounted workspace:
+
+```dockerfile {title="docker-review/docker-review.dockerfile"}
+FROM scratch
+COPY SKILL.md /usr/share/docker-review/SKILL.md
+```
+
+An install hook copies it into the project when the sandbox is created:
+
+```yaml {title="docker-review/docker-review.yaml"}
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: mixin
+displayName: Dockerfile review skill
+
+capabilities:
+  - type: com.docker.sandbox/lifecycle@1
+    config:
+      install:
+        - command: |
+            set -eu
+            skill_dir="$WORKSPACE_DIR/.claude/skills/docker-review"
+            mkdir -p "$skill_dir"
+            if [ ! -e "$skill_dir/SKILL.md" ]; then
+              cp /usr/share/docker-review/SKILL.md "$skill_dir/SKILL.md"
+            fi
+          user: agent
+          env: [WORKSPACE_DIR]
+```
+
+Use it with the Claude Code workload from [Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md):
+
+```console
+$ sbx run ./claude-team --name claude-review --kit ./docker-review
+```
+
+Ask Claude Code to review the project's Dockerfile. The hook preserves an
+existing skill at the same path. With a directly mounted workspace, it also
+creates the skill files in your host project. Other agents use their own
+skill discovery paths; adapt the hook's destination for the agent you use.
+
+## Install an internal CA certificate
+
+If your organization uses a proxy that inspects HTTPS traffic, add its root
+CA certificate to the sandbox's trust store. Create an `internal-ca`
+directory and save the PEM-encoded certificate as `internal-ca.crt` beside
+these two files:
+
+```dockerfile {title="internal-ca/internal-ca.dockerfile"}
+FROM scratch
+COPY internal-ca.crt /usr/local/share/ca-certificates/team-internal-ca.crt
+```
+
+```yaml {title="internal-ca/internal-ca.yaml"}
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: mixin
+displayName: Internal CA certificate
+
+capabilities:
+  - type: com.docker.sandbox/lifecycle@1
+    config:
+      install:
+        - command: update-ca-certificates
+          user: "0"
+          description: Add the internal CA to the sandbox trust store
+```
+
+The build includes the certificate at a fixed path with a `.crt` extension.
+The install hook updates the workload's system trust store after the overlay
+is applied. Tools that use that trust store can then verify certificates
+signed by the internal CA.
+
+Run the mixin with the [sample shell workload](#create-a-workload-for-the-examples):
+
+```console
+$ sbx run --name kit-ca ./shell-v3 --kit ./internal-ca .
+```
+
+Use a distinct certificate filename for each CA. If the proxy uses several
+root certificates, copy each one into `/usr/local/share/ca-certificates/`
+before running `update-ca-certificates`.
+
+## Build a tool overlay
+
+Build tools into a mixin so each sandbox can use the same image layers.
+This example compiles [`gojq`](https://github.com/itchyny/gojq), a JSON query
+tool with `jq` syntax, and ships its binary without the Go compiler.
+
+Create a `gojq` directory with these two files:
+
+```yaml {title="gojq/gojq.yaml"}
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: mixin
+displayName: JSON query tool
+
+args:
+  version:
+    default: "0.12.17"
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+    buildArg: GOJQ_VERSION
+
+provides: ["gojq@${{ kit.args.version }}"]
+```
+
+```dockerfile {title="gojq/gojq.dockerfile"}
+FROM golang:1.25 AS build
+ARG GOJQ_VERSION
+RUN CGO_ENABLED=0 go install github.com/itchyny/gojq/cmd/gojq@v${GOJQ_VERSION}
+
+FROM scratch
+COPY --from=build /go/bin/gojq /usr/local/bin/gojq
+```
+
+The final `FROM scratch` stage contains the tool overlay. The binary is
+compiled without C dependencies, so it doesn't require shared libraries
+from the workload. For other tools, include their runtime libraries or
+declare a dependency on a compatible environment.
+
+There is no lifecycle install hook: the compiler and module downloads run
+when the kit is built. The resulting tool is available as soon as the
+composed filesystem is ready.
+
+Run the mixin with the [sample shell workload](#create-a-workload-for-the-examples):
+
+```console
+$ sbx run --name kit-gojq ./shell-v3 --kit ./gojq .
+```
+
+From another host terminal, use `sbx exec` to check the tool's output:
+
+```console
+$ sbx exec kit-gojq -- gojq --null-input '{"kit": "gojq", "ready": true} | .ready'
+true
+```
+
+Use `sbx exec` for command output in scripts and automated checks. Use
+`sbx run` for the interactive workload session.
+
+Another mixin can declare `requires: ["gojq >= 0.12.17"]`. You must include
+both mixins in the launch command: a requirement checks the supplied set
+and doesn't download a provider. See [Compose kits](/manuals/ai/sandboxes/customize/author/_index.md#compose-kits).
+
+To build an agent workload step by step, see [Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
