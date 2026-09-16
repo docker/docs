@@ -74,8 +74,15 @@ popover surface, foregrounds, accent highlights, and focus colors through its
 component variables. Search ranking and chat requests retain their existing
 behavior.
 
-This is an integration prototype. Landing-page layouts and components outside
-these mappings still need a design review. Loading tokens does not provide
+The homepage composes Gordon's question form, suggested questions, shared
+navigation cards, and release feed with the same Trident palette. The form uses
+the raised surface and a visible focus outline; suggested questions use quieter
+bordered controls. The navigation and release feed share a content width.
+The decorative background pattern and scaling interactions are omitted.
+These page-specific rules live in `assets/css/home.css`.
+
+This is an integration prototype. Components outside these mappings still need
+a design review. Loading tokens does not provide
 Trident component behavior or certify accessibility.
 
 Component checks cover cards, tab switching, code, search results, and Gordon

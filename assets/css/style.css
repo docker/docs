@@ -102,6 +102,7 @@
 @import "theme.css";
 @import "vendor/trident/tri-tokens.css";
 @import "trident.css";
+@import "home.css";
 
 @layer base {
   @import "global.css";
