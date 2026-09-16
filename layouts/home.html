@@ -85,32 +85,12 @@
               (dict "url" "/manuals/" "icon" "document-text" "title" "Manuals" "description" "Install, set up, configure, and use Docker products.")
               (dict "url" "/reference/" "icon" "command-line" "title" "Reference" "description" "Browse the CLI and API documentation.")
             }}
-              <a
-                href="{{ .url }}"
-                class="group block rounded-xl border border-gray-200 bg-white p-6 transition hover:scale-[1.02] hover:border-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-blue-500"
-              >
-                <div class="flex items-start gap-4">
-                  <div
-                    class="shrink-0 rounded-lg bg-blue-100 p-3 text-blue-500 dark:bg-gray-700 dark:text-blue-400"
-                  >
-                    <span class="icon-svg">
-                      {{ partialCached "icon" .icon .icon }}
-                    </span>
-                  </div>
-                  <div>
-                    <h3
-                      class="mb-1 text-lg font-semibold text-gray-900 transition group-hover:text-blue-500 dark:text-white dark:group-hover:text-blue-400"
-                    >
-                      {{ .title }}
-                    </h3>
-                    <p
-                      class="text-sm leading-relaxed text-gray-600 dark:text-gray-300"
-                    >
-                      {{ .description }}
-                    </p>
-                  </div>
-                </div>
-              </a>
+              {{ partial "components/card.html" (dict
+                "title" .title
+                "description" .description
+                "link" .url
+                )
+              }}
             {{ end }}
           </div>
         </div>

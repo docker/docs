@@ -300,6 +300,13 @@
     margin: 0 0 0.5rem;
   }
 
+  .docs-navigation-card .docs-card-label {
+    margin: 0 0 0.5rem;
+    color: var(--tri-muted-foreground);
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
   .docs-navigation-card .card-title {
     margin: 0;
     font-size: 1rem;
