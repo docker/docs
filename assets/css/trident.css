@@ -20,6 +20,8 @@
 @layer docs {
   :root {
     --docs-card-description: var(--tri-gray-700);
+    /* Surface material from Trident core tri-materials.css. */
+    --docs-card-shadow: 0 0 transparent;
     --docs-component-background: var(--tri-background-primary);
     --docs-code-background: var(--tri-background);
     --docs-reading-foreground: var(--tri-foreground);
@@ -37,6 +39,7 @@
 
   :root.dark {
     --docs-card-description: var(--tri-gray-300);
+    --docs-card-shadow: inset 0 1px 0 oklch(1 0 0 / 0.05);
     --docs-code-background: var(--tri-muted);
     --docs-reading-background: var(--tri-sidebar);
     color-scheme: dark;
@@ -274,7 +277,9 @@
     margin: 0;
     padding: 1.25rem;
     gap: 0;
-    background: transparent;
+    background: var(--tri-background-paper-elevation-0);
+    border: 1px solid var(--tri-border);
+    box-shadow: var(--docs-card-shadow);
     border-radius: var(--tri-radius-default);
   }
 

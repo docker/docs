@@ -44,8 +44,13 @@ through the local `--docs-reading-foreground` alias. The local
 `sidebar` in dark mode, matching the dark navigation surface. Subtle borders separate the navigation from the reading area. These are
 local layout adaptations; the separate Trident high-contrast mode stays inactive.
 
-Navigation cards use a transparent surface, compact 16-pixel titles at weight 600,
-and 14-pixel descriptions in Trident gray 700 or gray 300. Decorative icons are
+Navigation cards use `background-paper-elevation-0`, compact 16-pixel titles at
+weight 600, and 14-pixel descriptions in Trident gray 700 or gray 300.
+The border and shadow follow the surface material in Trident core's
+`tri-materials.css`: a semantic border in both themes, with a faint inset
+top-edge highlight in dark mode and no visible shadow in light mode. The local
+`--docs-card-shadow` mirrors this material because it is outside the token
+package. The elevated background is a docs-specific surface choice. Decorative icons are
 omitted; titles identify the destinations. Linked cards have a full-area target
 and accented hover or focus states. Tabs retain the component surface and
 semantic borders. Inactive sidebar
