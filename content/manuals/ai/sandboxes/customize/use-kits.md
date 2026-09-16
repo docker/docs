@@ -20,14 +20,15 @@ Sandboxes prepares the environment and applies its settings.
 
 ## Run a kit
 
-Run a workload with `sbx run`, using its published image reference:
+Run a workload by passing its kit reference to `sbx run`:
 
 ```console
 $ sbx run docker.io/my-org/agent-kit:1.0.0
 ```
 
-The `my-org` image references on this page are examples. Replace them with
-the published v3 kits you want to use.
+This example uses an image reference. Kits can also come from a local
+directory or Git repository; see [Choose a kit source](#choose-a-kit-source).
+Replace the example references with the v3 kits you want to use.
 
 The sandbox uses your current directory as its workspace. To use another
 project directory, append its path to the command. See
