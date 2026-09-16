@@ -1,0 +1,50 @@
+/* Auto-generated from tokens/ — DO NOT EDIT — run `pnpm run tokens:build` */
+
+
+@layer tri.component {
+:root {
+  --tri-border-offset: 2px;
+  --tri-button-error: oklch(0.566 0.208 23);
+  --tri-button-premium: oklch(0.548 0.275 291.4);
+  --tri-button-primary: oklch(0.546 0.219 262);
+  --tri-button-secondary: oklch(0.55 0.016 245);
+  --tri-button-success: oklch(0.481 0.077 179.4);
+  --tri-button-warning: oklch(0.443 0.125 43.7);
+  --tri-button-white: oklch(1 0 0);
+  --tri-height-app-header-default: 3.5rem;
+  --tri-height-tab-indicator-inset: 1px;
+  --tri-repo-card-hover-border: oklch(0.546 0.219 262 / 0.56);
+  --tri-shadow-glow-error: 0 0 4px 0px oklch(0.69 0.199 22.3 / 0.70), 0 0 12px 2px oklch(0.69 0.199 22.3 / 0.25);
+  --tri-shadow-glow-running: 0 0 4px 0px oklch(0.720 0.170 145 / 0.70), 0 0 12px 2px oklch(0.720 0.170 145 / 0.25);
+  --tri-shadow-glow-warning: 0 0 4px 0px oklch(0.666 0.158 55.8 / 0.65), 0 0 12px 2px oklch(0.666 0.158 55.8 / 0.20);
+  --tri-spacing-tabs-inner: 3px;
+  --tri-tooltip-tooltip: oklch(0.462 0.014 245);
+  --tri-width-context-switcher: 220px;
+  --tri-width-date-picker-md: 300px;
+  --tri-width-date-picker-sm: 280px;
+  --tri-width-sidebar-collapsed: 3rem;
+  --tri-width-sidebar-default: 16rem;
+  --tri-width-sidebar-expanded: 18rem;
+}
+
+.dark {
+  --tri-button-error: oklch(0.642 0.183 16.8);
+  --tri-button-premium: oklch(0.664 0.2 297.3);
+  --tri-button-primary: oklch(0.633 0.199 257.2);
+  --tri-button-secondary: oklch(0.661 0.014 245);
+  --tri-button-success: oklch(0.735 0.117 180.8);
+  --tri-button-warning: oklch(0.817 0.137 65.7);
+  --tri-repo-card-hover-border: oklch(0.633 0.199 257.2 / 0.56);
+  --tri-tooltip-tooltip: oklch(0.661 0.014 245);
+}
+
+.high-contrast {
+  --tri-button-error: oklch(0.952 0.021 17.5);
+  --tri-button-premium: oklch(0.957 0.028 311.3);
+  --tri-button-primary: oklch(0.954 0.019 240.7);
+  --tri-button-secondary: oklch(0.661 0.014 245);
+  --tri-button-success: oklch(0.958 0.016 187.3);
+  --tri-button-warning: oklch(0.969 0.034 86.3);
+  --tri-tooltip-tooltip: oklch(0.661 0.014 245);
+}
+}

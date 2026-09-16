@@ -5,7 +5,7 @@
   </head>
 
   <body
-    class="dark:bg-navbar-bg-dark bg-navbar-bg flex flex-col items-center text-base text-black dark:text-white"
+    class="docs-body dark:bg-navbar-bg-dark bg-navbar-bg flex flex-col items-center text-base text-black dark:text-white"
   >
     {{ partial "header.html" . }}
     {{ partial "gordon-chat.html" . }}
@@ -30,7 +30,10 @@
               }
           }
       })"
-        class="bg-background-toc dark:bg-background-toc fixed top-0 z-40 hidden h-screen w-full flex-none overflow-x-hidden overflow-y-auto{{ if ne .Type "guides" }} md:sticky md:top-16 md:z-auto md:block md:h-[calc(100vh-64px)] md:w-[320px]{{ end }}"
+        class="bg-background-toc dark:bg-background-toc overflow-y-auto{{ if ne .Type "guides" }}
+          md:sticky md:top-16 md:z-auto md:block md:h-[calc(100vh-64px)]
+          md:w-[320px]
+        {{ end }} fixed top-0 z-40 hidden h-screen w-full flex-none overflow-x-hidden"
         :class="{ 'hidden': ! $store.showSidebar }"
       >
         <!-- Gray backdrop on small screens -->
@@ -61,7 +64,7 @@
       <!-- Main content -->
       <div
         {{ if ne .Params.sitemap false }}data-pagefind-body{{- end }}
-        class="dark:bg-background-dark w-full min-w-0 bg-white p-8"
+        class="docs-content dark:bg-background-dark w-full min-w-0 bg-white p-8"
       >
         {{ partial "pagefind-meta.html" . }}
         {{ block "main" . }}

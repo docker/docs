@@ -1,0 +1,19 @@
+{
+  "package": "@docker/trident-tokens",
+  "version": "2.0.0-beta.3",
+  "repository": "https://github.com/docker/trident",
+  "revision": "bbc0746b17209071ceddabcb14b180fcb32b2fa9",
+  "license": null,
+  "files": {
+    "tri-component.css": "21d6c0ca2a19b17b3ad7e6ce9fd19e5014344fdeabbc707c7f46181a74236bd6",
+    "tri-elevation.css": "935c565c62ea6409c17cf0874ebaceab29298d363c7261eafafb6e7a0f92ab7a",
+    "tri-motion.css": "bde397fd1484793a8bb6007a69d224ac2470f1f7ff5eb1e3080a507826f2fe8f",
+    "tri-primitives.css": "ff0f3f18db01cbf26fa9d790b38e64f56bde491541f641d9423c5c50b0c057e4",
+    "tri-radius.css": "bc026830e2af72566d0c5dfaa1a68918ddfee08f7e9585f88869f831b0422a5e",
+    "tri-semantic.css": "71a19fcc11b8dd8ac9a79a2bb753e83827e3abc81b30367ea553349c923991a3",
+    "tri-spacing.css": "e2f09390c1a4523b0c6e24a30588376c6d54ffca8f8e7415438fbbfb45fb1cc5",
+    "tri-themes.css": "2365ca5871714ead9fb291a35cd6e208e0f79d2ec98b18614d5572685db925cd",
+    "tri-tokens.css": "af50705ffffed685a1e648130c2374b2d52445262451ff674072b93337112b22",
+    "tri-typography.css": "67f573500db670818e8b0e282ee9497e9fa444233cb5e2217567bd4f3501f94b"
+  }
+}
