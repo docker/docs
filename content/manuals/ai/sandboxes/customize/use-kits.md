@@ -20,12 +20,14 @@ Sandboxes prepares the environment and applies its settings.
 
 ## Run a kit
 
-Run a workload with `sbx run`. For example, to use a local kit in the
-`my-agent` directory:
+Run a workload with `sbx run`, using its published image reference:
 
 ```console
-$ sbx run ./my-agent
+$ sbx run docker.io/my-org/agent-kit:1.0.0
 ```
+
+The `my-org` image references on this page are examples. Replace them with
+the published v3 kits you want to use.
 
 The sandbox uses your current directory as its workspace. To use another
 project directory, append its path to the command. See
@@ -42,10 +44,12 @@ For a step-by-step authoring walkthrough, see [Build an agent](/manuals/ai/sandb
 ## Add mixins
 
 A sandbox runs one workload kit. Add v3 mixins with `--kit`, repeating the
-flag for each one. For example, run a local v3 workload with two v3 mixins:
+flag for each one. For example, add a Neovim mixin and shared team configuration:
 
 ```console
-$ sbx run ./my-agent --kit ./linter --kit ./team-config
+$ sbx run docker.io/my-org/agent-kit:1.0.0 \
+    --kit docker.io/my-org/neovim-kit:1.0.0 \
+    --kit docker.io/my-org/team-config-kit:1.0.0
 ```
 
 The workload and its mixins form a composition: their tools, files, and
@@ -60,7 +64,7 @@ directory, or a kit in a Git repository:
 
 | Source | Example reference |
 | --- | --- |
-| Published image | `docker.io/<NAMESPACE>/my-agent:1.0.0` |
+| Published image | `docker.io/my-org/agent-kit:1.0.0` |
 | Local directory | `./my-agent` |
 | Git repository | `git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-agent` |
 
@@ -83,7 +87,7 @@ for private image access.
 Use `--name` to give the sandbox a name:
 
 ```console
-$ sbx run ./my-agent --name my-project
+$ sbx run docker.io/my-org/agent-kit:1.0.0 --name my-project
 ```
 
 Running an existing sandbox reuses its recorded kit configuration. Kit
@@ -118,14 +122,16 @@ Kits can expose arguments for choices such as a tool's operating mode. Use
 `--kit-arg` to supply a value declared by the kit:
 
 ```console
-$ sbx run ./my-agent --kit ./my-tool --kit-arg mode=fix
+$ sbx run docker.io/my-org/agent-kit:1.0.0 \
+    --kit docker.io/my-org/linter-kit:1.0.0 --kit-arg mode=fix
 ```
 
 A bare argument name applies to every kit that declares it. To target one kit,
 prefix the name with its handle and a period:
 
 ```console
-$ sbx run ./my-agent --kit ./my-tool --kit-arg my-tool.mode=fix
+$ sbx run docker.io/my-org/agent-kit:1.0.0 \
+    --kit docker.io/my-org/linter-kit:1.0.0 --kit-arg linter-kit.mode=fix
 ```
 
 The handle is the local directory name, the Git subdirectory or repository
