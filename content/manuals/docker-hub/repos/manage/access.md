@@ -181,7 +181,7 @@ invitations are not supported for this role.
 To invite distributor members:
 
 1. Use the [authentication
-   API](https://docs.docker.com/reference/api/hub/latest/#tag/authentication-api/operation/AuthCreateAccessToken)
+   API](/reference/api/hub/latest/operations/AuthCreateAccessToken/)
    to generate a bearer token for your Docker Hub account. This token authorizes
    the API requests you use to send invites. Replace `myusername` and
    `dckr_pat_...` with your Docker ID and a [personal access
@@ -213,7 +213,7 @@ To invite distributor members:
    {{< tab name="API" >}}
 
    Use the [teams
-   API](https://docs.docker.com/reference/api/hub/latest/#tag/groups/paths/~1v2~1orgs~1%7Borg_name%7D~1groups/post):
+   API](/reference/api/hub/latest/operations/postV2OrgsByOrgNameGroups/):
 
    ```console
    $ curl -s -X POST "https://hub.docker.com/v2/orgs/example-org/groups" \
@@ -245,7 +245,7 @@ To invite distributor members:
    {{< tab name="API" >}}
 
    Use the [repository teams
-   API](https://docs.docker.com/reference/api/hub/latest/#tag/repositories/operation/CreateRepositoryGroup),
+   API](/reference/api/hub/latest/operations/CreateRepositoryGroup/),
    passing the team's `id` from the previous step as `group_id`:
 
    ```console
@@ -259,7 +259,7 @@ To invite distributor members:
    {{< /tabs >}}
 
 4. Use the [bulk create invites
-   endpoint](https://docs.docker.com/reference/api/hub/latest/#tag/invites/paths/~1v2~1invites~1bulk/post)
+   endpoint](/reference/api/hub/latest/operations/postV2InvitesBulk/)
    to send email invites. In the request body, set `role` to
    `distributor_member`, specify the `team`, and list the invitees' email
    addresses:

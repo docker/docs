@@ -249,7 +249,7 @@ func curlExample(src Source, op Object) (string, []string) {
 
 // Examples are annotations: retrieve them without flattening schema constraints.
 func (d *Document) mediaExamples(v Object) []any {
-	out := exampleList(v)
+	out := d.exampleList(v)
 	if len(out) > 0 {
 		return out
 	}

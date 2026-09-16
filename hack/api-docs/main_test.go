@@ -283,3 +283,72 @@ func TestUnlockedResourcesAndUnknownDialect(t *testing.T) {
 		t.Fatal("unknown dialect accepted")
 	}
 }
+
+func TestUndefinedSecurityRequirements(t *testing.T) {
+	for _, inherited := range []bool{false, true} {
+		d := fixture(t, "valid.yaml")
+		requirements := []any{Object{"bearerAuth": []any{}}, Object{"missingAuth": []any{}}}
+		if inherited {
+			d.Root["security"] = requirements
+		} else {
+			obj(obj(obj(d.Root["paths"])["/public"])["get"])["security"] = requirements
+		}
+		d.validate("")
+		found := false
+		for _, diagnostic := range d.Diagnostics {
+			if diagnostic.Rule == "security" && strings.Contains(diagnostic.Message, "missingAuth") {
+				found = true
+			}
+		}
+		if !found {
+			t.Fatalf("undefined security accepted (inherited=%v)", inherited)
+		}
+	}
+}
+
+func TestReferencedMediaExample(t *testing.T) {
+	d := fixture(t, "valid.yaml")
+	obj(d.Root["components"])["examples"] = Object{"Flag": Object{"value": false}}
+	media := obj(obj(obj(obj(obj(d.Root["paths"])["/public"])["get"])["responses"])["200"])
+	v := obj(obj(media["content"])["application/json"])
+	delete(v, "example")
+	v["examples"] = Object{"flag": Object{"$ref": "#/components/examples/Flag"}}
+	d.validate("")
+	if len(d.Diagnostics) != 0 {
+		t.Fatalf("referenced example rejected: %v", d.Diagnostics)
+	}
+	examples := d.mediaExamples(v)
+	if len(examples) != 1 || obj(examples[0])["value"] != false {
+		t.Fatalf("referenced false example lost: %#v", examples)
+	}
+}
+
+func TestExternalDynamicReference(t *testing.T) {
+	original, err := os.ReadFile("testdata/valid.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	dir := t.TempDir()
+	if err := os.Mkdir(filepath.Join(dir, "schemas"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	event, err := os.ReadFile("testdata/schemas/event.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, "schemas/event.yaml"), event, 0644); err != nil {
+		t.Fatal(err)
+	}
+	file := filepath.Join(dir, "api.yaml")
+	if err := os.WriteFile(file, []byte(strings.Replace(string(original), "$ref: ./schemas/event.yaml", "$dynamicRef: ./schemas/event.yaml", 1)), 0644); err != nil {
+		t.Fatal(err)
+	}
+	d, err := loadDocument(file, "validation/dialects")
+	if err != nil {
+		t.Fatal(err)
+	}
+	d.validate("")
+	if len(d.Diagnostics) != 0 {
+		t.Fatalf("external dynamic reference rejected: %v", d.Diagnostics)
+	}
+}

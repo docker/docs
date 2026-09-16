@@ -267,7 +267,7 @@ func loadDocument(file, metaDir string) (*Document, error) {
 			for _, k := range []string{"$ref", "$dynamicRef"} {
 				ref, ok := n[k].(string)
 				if !ok {
-					return
+					continue
 				}
 				u, er := url.Parse(ref)
 				if er != nil {
@@ -279,7 +279,7 @@ func loadDocument(file, metaDir string) (*Document, error) {
 				u.Fragment = ""
 				id := u.String()
 				if _, ok := d.Registry.resources[id]; ok {
-					return
+					continue
 				}
 				if u.Scheme != "file" {
 					failure = fmt.Errorf("unlocked reference %s", id)
@@ -504,6 +504,13 @@ func (d *Document) validate(metaDir string) {
 		if id == "" || ids[id] {
 			d.issue("S4", p, "Operation ID must be present and unique")
 		}
+		for i, requirement := range arr(op["security"]) {
+			for _, name := range keys(obj(requirement)) {
+				if _, ok := obj(obj(d.Root["components"])["securitySchemes"])[name]; !ok {
+					d.issue("security", fmt.Sprintf("%s/security/%d/%s", p, i, esc(name)), "Undefined security scheme: "+name)
+				}
+			}
+		}
 		ids[id] = true
 		opTags := arr(op["tags"])
 		if len(opTags) == 0 || tags[str(opTags[0])] != "nav" {
@@ -615,13 +622,13 @@ func (d *Document) parameters(item, op Object, p string) []any {
 	}
 	return a
 }
-func exampleList(v Object) []any {
+func (d *Document) exampleList(v Object) []any {
 	out := []any{}
 	if x, ok := v["example"]; ok {
 		out = append(out, Object{"name": "Example", "value": x})
 	}
 	for _, name := range keys(obj(v["examples"])) {
-		x := obj(obj(v["examples"])[name])
+		x := obj(d.resolve(obj(v["examples"])[name]))
 		if value, ok := x["value"]; ok {
 			out = append(out, Object{"name": name, "value": value})
 		}

@@ -20,6 +20,8 @@ For a static build with HTML/Markdown checks, run
 `./hack/api-docs/run.sh build`. To serve that build on port 1314, run
 `./hack/api-docs/run.sh serve`. Set `DOCS_URL` and `DOCS_PORT` when using another
 address. Run generation again after changing a specification or source manifest entry.
+With `docker compose watch`, changes to the registered specifications or
+`hack/api-docs/` rebuild the server image and regenerate the reference.
 
 Docker builds and Netlify deploy previews run generation before Hugo. Generated
 data, validation reports, binaries, and local builds go under `tmp/api-reference/`.
@@ -76,7 +78,9 @@ Go fixtures cover dialects, references, recursion, boolean schemas, examples,
 security overrides, server and parameter precedence, and request generation.
 `verify-output.mjs` checks all generated HTML/Markdown pairs and retention of
 Engine v1.40–v1.56 in ReDoc, unchanged Governance rendering, and byte-identical
-published specifications. `browser-checks.mjs` exports a Playwright check for
+published specifications. It also checks local links and fragments from API pages,
+including links to `docs.docker.com`. The site `htmltest` checks include migrated
+Hub, DVP, and Registry references. `browser-checks.mjs` exports a Playwright check for
 navigation, page aliases, filtering, requests, and narrow screens.
 
 Callbacks and webhook navigation are unsupported and fail validation. Request

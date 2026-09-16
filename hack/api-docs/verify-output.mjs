@@ -86,7 +86,7 @@ for (const api of data.apis) {
       problems.push(`Missing schema heading: ${schema.url}`);
   }
 }
-// Check API reference links in every generated preview page, including copied specification prose.
+// Check local links and fragments in generated API pages, including specification prose.
 function files(dir) {
   return fs
     .readdirSync(dir, { withFileTypes: true })
@@ -101,7 +101,14 @@ for (const file of [...files(path.join(base, "reference/api"))].filter((p) =>
 )) {
   const html = fs.readFileSync(file, "utf8");
   if (!html.includes("data-api-view=")) continue;
-  for (const href of attributes(html, "href")) {
+  const article = html.match(
+    /<article\b[^>]*class=["']?api-reference[\s\S]*?<\/article>/,
+  )?.[0];
+  if (!article) {
+    problems.push(`Missing API article: ${path.relative(base, file)}`);
+    continue;
+  }
+  for (const href of attributes(article, "href")) {
     let url;
     try {
       url = new URL(href, "http://localhost:1314/" + path.relative(base, file));
@@ -109,8 +116,8 @@ for (const file of [...files(path.join(base, "reference/api"))].filter((p) =>
       continue;
     }
     if (
-      url.hostname !== "localhost" ||
-      !url.pathname.startsWith("/reference/api/")
+      !["localhost", "docs.docker.com"].includes(url.hostname) ||
+      !["http:", "https:"].includes(url.protocol)
     )
       continue;
     const target = path.join(
@@ -118,8 +125,19 @@ for (const file of [...files(path.join(base, "reference/api"))].filter((p) =>
       decodeURIComponent(url.pathname),
       url.pathname.endsWith("/") ? "index.html" : "",
     );
-    if (!fs.existsSync(target))
+    if (!fs.existsSync(target)) {
       problems.push(`Broken API link: ${path.relative(base, file)} -> ${href}`);
+    } else if (url.hash && target.endsWith(".html")) {
+      const targetHTML = fs.readFileSync(target, "utf8");
+      const anchors = [
+        ...attributes(targetHTML, "id"),
+        ...attributes(targetHTML, "name"),
+      ];
+      if (!anchors.includes(decodeURIComponent(url.hash.slice(1))))
+        problems.push(
+          `Broken API anchor: ${path.relative(base, file)} -> ${href}`,
+        );
+    }
   }
 }
 const governance = fs.readFileSync(

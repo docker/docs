@@ -20,7 +20,7 @@ servers:
 tags:
   - name: changelog
     description: |
-      See the [Changelog](/reference/api/hub/changelog) for a summary of changes across Docker Hub API versions.
+      See the [Changelog](https://docs.docker.com/reference/api/hub/changelog) for a summary of changes across Docker Hub API versions.
     summary: Changelog
     kind: info
   - name: resources
@@ -105,7 +105,7 @@ tags:
     description: |
       The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/personal-access-tokens/).
 
-      You can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.
+      You can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/reference/cli/docker/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.
 
       ### Scopes
 
@@ -154,7 +154,7 @@ tags:
     description: |
       The invites endpoints allow you to manage invites for users to join your Docker organization.
 
-      For more information, see [Invite members](https://docs.docker.com/admin/organization/manage/members/#invite-members).
+      For more information, see [Invite members](https://docs.docker.com/accounts/organization/manage/members/#invite-members).
     summary: Invites
     kind: nav
   - name: scim
@@ -1488,7 +1488,7 @@ paths:
       tags:
         - repositories
       security:
-        - BearerAuth: []
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -1655,7 +1655,7 @@ paths:
         - `last_seen_at`
         - `last_desktop_version`
 
-        To make visible, please see [View Insights for organization users](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
+        To make visible, please see [View Insights for organization users](https://docs.docker.com/accounts/organization/insights/#view-insights-for-organization-users).
 
 
       tags:
@@ -1747,7 +1747,7 @@ paths:
                   description: |
                     Role of the member. Valid values are the core roles
                     `owner`, `editor`, and `member`, or the name of an
-                    existing [custom role](https://docs.docker.com/enterprise/security/roles-and-permissions/custom-roles/manage/).
+                    existing [custom role](https://docs.docker.com/security/roles-and-permissions/custom-roles/manage/).
                     Use the custom role's name identifier, not its label or UUID.
                   example: owner
       responses:
@@ -2019,7 +2019,7 @@ paths:
                   description: |
                     Role assigned to the team. Valid values are the core roles
                     `owner`, `editor`, and `member`, or the name of an
-                    existing [custom role](https://docs.docker.com/enterprise/security/roles-and-permissions/custom-roles/manage/).
+                    existing [custom role](https://docs.docker.com/security/roles-and-permissions/custom-roles/manage/).
                     Use the custom role's name identifier, not its label or UUID.
       responses:
         "200":
@@ -4139,7 +4139,7 @@ components:
           format: date-time
           description: |
             Last time the user logged in. To access this field, you must have insights visible for your organization. See
-            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
+            [Insights](https://docs.docker.com/accounts/organization/insights/#view-insights-for-organization-users).
           example: "2021-01-05T21:06:53.506400Z"
         last_seen_at:
           type:
@@ -4148,13 +4148,13 @@ components:
           format: date-time
           description: |
             Last time the user was seen. To access this field, you must have insights visible for your organization. See
-            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
+            [Insights](https://docs.docker.com/accounts/organization/insights/#view-insights-for-organization-users).
           example: "2021-01-05T21:06:53.506400Z"
         last_desktop_version:
           type: string
           description: |
             Last desktop version the user used. To access this field, you must have insights visible for your organization. See
-            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
+            [Insights](https://docs.docker.com/accounts/organization/insights/#view-insights-for-organization-users).
           example: 4.29.0
       examples:
         - id: 0ab70deb065a43fcacd55d48caa945d8
