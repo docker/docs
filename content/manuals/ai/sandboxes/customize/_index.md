@@ -1,51 +1,85 @@
 ---
-title: Customizing sandboxes
-linkTitle: Customize
-description: Build and share sandbox environments with v3 workload and mixin kits, using Docker-provided base images or your own Linux image.
-keywords: sandboxes, sbx, customize, templates, kits, mixins, workloads, custom agents
+title: Kits
+description: Understand sandbox workload and mixin kits, then choose how to use existing kits or author your own.
+keywords: sandboxes, sbx, kits, v3, workloads, mixins
 weight: 90
+linkTitle: Kits
 aliases:
   - /ai/sandboxes/agents/custom-environments/
-params:
-  sidebar:
-    badge:
-      color: blue
-      text: Early Access
+  - /ai/sandboxes/customize/kits/
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-Use kits to package the tools, configuration, and runtime behavior your
-sandboxes need. A workload kit defines the environment and command to run.
-Mixin kits extend it with tools, configuration, or instructions.
+Kits let you shape a sandbox around the way you work. Choose its base image,
+add the tools your project needs, and give your agent instructions for using
+them. You also control which services the sandbox can access, how it
+authenticates, and what runs when the sandbox starts.
 
-A workload's build recipe can start from a Docker-provided agent image or
-another Linux base image. Its descriptor declares network access, credentials,
-and lifecycle hooks alongside that build.
+A kit can define the whole environment or add something to an existing one,
+such as a toolchain or your team's shared configuration. Package those choices
+once, then reuse them across projects and share them with your team.
 
-V3 kits are experimental. The format and CLI commands are subject to change.
-Share feedback in the
-[docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
+This page covers v3, the recommended format for new kit development. V3 brings
+image builds and runtime capabilities together in the kit format.
 
-## Choose a customization
+> [!NOTE]
+> V3 kits are experimental. The format and CLI commands are subject to change.
+> Share feedback in the
+> [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
 
-| Goal | Option |
-| --- | --- |
-| Run a v3 workload and add mixins | [Use kits](kits.md#use-kits) |
-| Define an agent or another sandbox workload | [Build an agent](build-an-agent.md) |
-| Add tools, configuration, or instructions to a v3 workload | [Mixin examples](kit-examples.md) |
-| Choose an existing agent image or your own Linux base | [Base images](base-images.md) |
+## Workloads and mixins
 
-## Start with v3 kits
+A sandbox runs one workload kit. You can add mixin kits to customize that
+workload:
 
-V3 is the recommended format for new kit development. To use it, select an
-explicit v3 workload reference and combine it with v3 mixins. Built-in agent
-shortcuts such as `claude` and `codex` select v2 kits, so they can't be used
-with v3 mixins. See [Run a kit](kits.md#run-a-kit) for the opt-in workflow.
+| Kind | What it supplies | How you use it |
+| --- | --- | --- |
+| `workload` | The environment and command to run, such as an agent or a shell | Pass it to `sbx run` or `sbx create` |
+| `mixin` | Additional tools, configuration, or runtime behavior | Add it with `--kit` |
 
-V2 remains supported. For existing customizations, see
-[Kits v2](kits-v2/_index.md), including guidance for moving a complete
-environment to v3.
+For example, a team might use an OpenCode workload with a mixin that adds a
+linter and another that supplies the team's review instructions. Each kit can
+be maintained and shared separately.
 
+## Version compatibility
+
+V3 kits cannot be combined with v1 or v2 kits in the same sandbox. To use
+v3, select a v3 workload and use v3 for every mixin you add.
+
+The built-in agent names, such as `claude` and `codex`, select v2 kits.
+You can't add a v3 mixin to these built-ins. For example,
+`sbx run claude --kit ./some-v3-mixin` fails because it mixes kit versions.
+Instead, select a v3 workload by its published image, local path, or Git
+reference, as shown in [Run a kit](/manuals/ai/sandboxes/customize/use-kits.md#run-a-kit).
+
+V2 remains supported, including the built-in agents and
+existing v2 customizations. See [Kits v2](/manuals/ai/sandboxes/customize/kits-v2/_index.md) for maintenance
+and migration guidance.
+
+## What kits can do
+
+Use kits to give agents a repeatable working environment and share it with
+your team:
+
+- Package a custom agent, or configure an existing agent for your team's
+  projects.
+- Include the tools the agent needs, such as linters, language runtimes,
+  test runners, and compilers.
+- Share linter rules, editor settings, helper scripts, and reference material.
+  Give the agent instructions and skills for using them.
+- Connect the agent to services through network rules and credentials,
+  including internal APIs and private package registries.
+- Initialize each sandbox and run supporting services when it starts, such
+  as a development server for previewing the agent's work.
+
+## Choose your next step
+
+- [Use kits](/manuals/ai/sandboxes/customize/use-kits.md) to run a workload, add mixins, and configure a
+  sandbox from kits someone else has published.
+- [Author kits](/manuals/ai/sandboxes/customize/author/_index.md) to define a workload or mixin, build its
+  content, and declare its runtime requirements.
+
+For the earlier format used by built-in agents, see [Kits v2](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
 To capture an interactively configured sandbox's container filesystem for reuse,
 see [Save a sandbox as a template](/manuals/ai/sandboxes/usage.md#saving-a-sandbox-as-a-template).

@@ -9,7 +9,7 @@ weight: 60
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 V2 kits remain supported. This page covers v2 usage, configuration, and the
-specification. For new kit development, use [v3 kits](../kits.md), which are
+specification. For new kit development, use [v3 kits](/manuals/ai/sandboxes/customize/_index.md), which are
 experimental.
 
 Built-in shortcuts such as `claude` and `codex` select v2 kits and still work
@@ -23,9 +23,9 @@ sandbox with a different `--name`. Use the explicit workload reference in
 place of the built-in shortcut. Every selected kit must use v3.
 
 Changing `schemaVersion` alone doesn't convert a kit. See the
-[v2-to-v3 field mapping](../kit-reference.md#move-from-v2-to-v3), the
-[v3 runtime support table](../kit-reference.md#runtime-capabilities), and the
-[agent authoring tutorial](../build-an-agent.md). Running an existing sandbox
+[v2-to-v3 field mapping](/manuals/ai/sandboxes/customize/author/kit-reference.md#move-from-v2-to-v3), the
+[v3 runtime support table](/manuals/ai/sandboxes/customize/author/kit-reference.md#runtime-capabilities), and the
+[agent authoring tutorial](/manuals/ai/sandboxes/customize/author/build-an-agent.md). Running an existing sandbox
 keeps its recorded configuration; it doesn't migrate the kit set.
 
 ## Use existing kits
@@ -49,7 +49,7 @@ $ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-age
 ```
 
 `git+ssh://` URLs work with your local SSH agent and Git credentials. See
-[Restrict kit sources](../kits.md#restrict-kit-sources) for source policies;
+[Restrict kit sources](/manuals/ai/sandboxes/customize/use-kits.md#restrict-kit-sources) for source policies;
 `kit.allowLocalKits` also governs v2 ZIP files. For private registries, see
 [Registry credentials](../../configuration/credentials.md#registry-credentials).
 
@@ -65,7 +65,7 @@ Schema v2 is supported starting with Docker Sandboxes version 0.36. Use
 `schemaVersion: "2"` for the syntax on this page. Version `"1"` also remains
 accepted. V3 is a separate format for environments built entirely
 with v3 workloads and mixins. V3 kits can't compose with v1 or v2 kits.
-See [Kits v3](../kits.md) for that workflow.
+See [Kits v3](/manuals/ai/sandboxes/customize/_index.md) for that workflow.
 
 The loader forks on `schemaVersion`. A v2 spec uses the v2 grammar only. Legacy
 v1 fields in a `schemaVersion: "2"` spec are rejected during decode instead of

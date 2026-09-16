@@ -395,7 +395,7 @@ Host workspace files, including repositories used as clone sources, and the
 [shared agent skills store](workflows/agent-skills.md) remain on your host. To
 capture changes in the container filesystem, [save a template](#saving-a-sandbox-as-a-template).
 For a reproducible environment defined in source, use a
-[workload kit](customize/kits.md).
+[workload kit](/manuals/ai/sandboxes/customize/_index.md).
 
 ## Saving a sandbox as a template
 
@@ -488,7 +488,7 @@ $ sbx run --template docker.io/my-org/my-template:v1 claude
 
 Unlike Docker commands, `sbx` doesn't automatically add the Docker Hub domain
 (`docker.io`) to image references. For available images and the built-in agent
-workflow, see [Base images](customize/base-images.md).
+workflow, see [Base images](/manuals/ai/sandboxes/customize/author/base-images.md).
 
 > [!NOTE]
 > The Docker daemon used by Docker Sandboxes pulls templates from a

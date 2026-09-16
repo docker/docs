@@ -1,9 +1,11 @@
 ---
 title: Kit examples
-linkTitle: Examples
+linkTitle: Mixin examples
 description: Build schema v3 kits that add tools, shared files, runtime configuration, lifecycle hooks, and agent instructions to a sandbox workload.
 keywords: sandboxes, sbx, kits, mixins, examples, capabilities, build, lifecycle
-weight: 40
+weight: 30
+aliases:
+  - /ai/sandboxes/customize/kit-examples/
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -23,10 +25,11 @@ workload directory and run the commands from their parent directory.
 These mixins require a v3 workload. They can't be used with the v2 built-in
 agent shortcuts, such as `claude` or `codex`. Select a v3 workload before
 adding these mixins. For v2 customizations,
-see [Kits v2](kits-v2/_index.md).
+see [Kits v2](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
 
-For concepts and source layout, see [Kits v3](kits.md).
-For field definitions, see the [Kit spec reference](kit-reference.md).
+For source layout and capability declarations, see
+[Author kits](/manuals/ai/sandboxes/customize/author/_index.md).
+For field definitions, see the [Kit spec reference](/manuals/ai/sandboxes/customize/author/kit-reference.md).
 
 ## Create a workload for the examples
 
@@ -311,7 +314,7 @@ capabilities:
           env: [WORKSPACE_DIR]
 ```
 
-Use it with the Claude Code workload from [Build an agent](build-an-agent.md):
+Use it with the Claude Code workload from [Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md):
 
 ```console
 $ sbx run ./claude-team --name claude-review --kit ./docker-review <PROJECT_PATH>
@@ -423,6 +426,6 @@ Use `sbx exec` for command output in scripts and automated checks. Use
 
 Another mixin can declare `requires: ["gojq >= 0.12.17"]`. You must include
 both mixins in the launch command: a requirement checks the supplied set
-and doesn't download a provider. See [Compose kits](kits.md#compose-kits).
+and doesn't download a provider. See [Compose kits](/manuals/ai/sandboxes/customize/author/_index.md#compose-kits).
 
-To build an agent workload step by step, see [Build an agent](build-an-agent.md).
+To build an agent workload step by step, see [Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md).

@@ -122,7 +122,7 @@ See [Git workflows](../workflows/git.md) for clone-mode details.
 ## Base image
 
 The sandbox uses `docker/sandbox-templates:claude-code`. See
-[Base images](../customize/base-images.md) to build your own image on top of
+[Base images](/manuals/ai/sandboxes/customize/author/base-images.md) to build your own image on top of
 this base.
 
 ## Use a local model

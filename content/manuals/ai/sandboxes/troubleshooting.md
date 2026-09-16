@@ -135,7 +135,7 @@ $ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
 ```
 
 Then run the command again. For details, including how to allow local kits or
-any remote source, see [Restrict kit sources](customize/kits.md#restrict-kit-sources).
+any remote source, see [Restrict kit sources](/manuals/ai/sandboxes/customize/use-kits.md#restrict-kit-sources).
 
 ## SSH and other non-HTTP connections fail
 

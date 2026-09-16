@@ -1,7 +1,7 @@
 ---
 title: Base images for sandbox workloads
 linkTitle: Base images
-weight: 25
+weight: 10
 description: Choose a Docker-provided agent image or your own Linux base image for a sandbox workload kit, and use image overrides with built-in agents.
 keywords: sandboxes, sbx, kits, base images, templates, dockerfile, custom agents
 aliases:
@@ -49,7 +49,7 @@ switch back to `agent` before installing tools into the agent's home directory.
 Otherwise, user-level installers put files under `/root/`, where the agent
 can't use them.
 
-The [workload example](kits.md#build-a-workload) extends the OpenCode image
+The [workload example](/manuals/ai/sandboxes/customize/author/_index.md#build-a-workload) extends the OpenCode image
 with Python tooling and pairs it with a kit descriptor. `sbx` builds the
 image as part of the kit, so you don't need to build and distribute a separate
 template first.
@@ -58,7 +58,7 @@ The base image supplies filesystem content and image settings. It doesn't
 replace the kit's declarations for network access, credentials, storage, or
 lifecycle hooks. Using a Docker-provided template image as a build base also
 doesn't select a built-in v2 kit: the workload descriptor defines the kit
-version. See [Version compatibility](kits.md#version-compatibility).
+version. See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility).
 
 ## Use your own Linux image
 
@@ -66,9 +66,9 @@ You don't have to derive your workload from a Docker-provided image. Choose a
 Linux base image that suits your operating system and package requirements,
 and prepare it for the sandbox runtime.
 
-See [Base image requirements](kit-reference.md#base-image-requirements) for the
+See [Base image requirements](/manuals/ai/sandboxes/customize/author/kit-reference.md#base-image-requirements) for the
 required tools, user account, and launch configuration. The
-[Build an agent](build-an-agent.md) tutorial walks through preparing a base
+[Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md) tutorial walks through preparing a base
 image, installing an agent, and declaring its runtime requirements.
 
 ## Image overrides for built-in agents

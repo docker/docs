@@ -69,4 +69,4 @@ its image, tools, credentials, network rules, and startup commands.
 
 Each kit's Hub page shows the command to run it, in the form
 `sbx run <agent> --kit docker.io/<namespace>/<kit-name>`. To learn more about
-building and running kits, see [Kits](../../ai/sandboxes/customize/kits.md).
+building and running kits, see [Kits](/manuals/ai/sandboxes/customize/_index.md).

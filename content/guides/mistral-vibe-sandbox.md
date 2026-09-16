@@ -245,7 +245,7 @@ Files in your workspace are unaffected.
 ## Learn more
 
 - [Get started with Docker Sandboxes](../manuals/ai/sandboxes/get-started.md)
-- [Build your own agent kit](../manuals/ai/sandboxes/customize/build-an-agent.md)
-- [Customize sandboxes with kits](../manuals/ai/sandboxes/customize/kits.md)
+- [Build your own agent kit](/manuals/ai/sandboxes/customize/author/build-an-agent.md)
+- [Customize sandboxes with kits](/manuals/ai/sandboxes/customize/_index.md)
 - [Credentials and built-in services](../manuals/ai/sandboxes/configuration/credentials.md#built-in-services)
 - [Mistral Vibe](https://github.com/mistralai/mistral-vibe)

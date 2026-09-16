@@ -467,7 +467,7 @@ declared `enum` or `pattern`.
 `kits` accepts local directories, ZIP archives, OCI registry references, and
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
 configure the sandbox, and give the agent project-specific instructions. See
-[Kits](../customize/kits.md) for details.
+[Kits](/manuals/ai/sandboxes/customize/_index.md) for details.
 
 Explicit relative paths resolve from the directory of the environment file
 that declares them. These include `.`, `..`, paths that start with `./` or
@@ -485,7 +485,7 @@ kits:
 ```
 
 Remote kit sources must match the
-[kit source allowlist](../customize/kits.md#restrict-kit-sources). Docker Hub is
+[kit source allowlist](/manuals/ai/sandboxes/customize/use-kits.md#restrict-kit-sources). Docker Hub is
 allowed by default. To use Git kits from `docker/sbx-kits-contrib`, add its
 source:
 

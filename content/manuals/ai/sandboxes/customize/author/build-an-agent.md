@@ -3,7 +3,9 @@ title: Build your own agent kit
 linkTitle: Build an agent
 description: Build a schema v3 agent workload from your own Linux base image, prepare its sandbox environment, and configure credentials and agent instructions.
 keywords: sandboxes, sbx, kits, agent, tutorial, claude, workload, build
-weight: 30
+weight: 20
+aliases:
+  - /ai/sandboxes/customize/build-an-agent/
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -20,14 +22,13 @@ Claude Code, and configure its model, API access, and agent instructions.
 The same approach applies to other agents and organization-maintained images.
 
 For a shorter example that extends an existing agent environment, see
-[Build a workload](kits.md#build-a-workload). This tutorial builds up the
+[Build a workload](/manuals/ai/sandboxes/customize/author/_index.md#build-a-workload). This tutorial builds up the
 whole environment and its descriptor step by step. If you're starting with
-kits, read [Kits v3](kits.md) for the file layout and the roles of a workload
-and a mixin. For field definitions, see the [Kit spec reference](kit-reference.md).
+kits, read [Author kits](/manuals/ai/sandboxes/customize/author/_index.md) for the file layout and descriptor concepts. For field definitions, see the [Kit spec reference](/manuals/ai/sandboxes/customize/author/kit-reference.md).
 
 This creates an independent v3 workload. It doesn't inherit the built-in
 `claude` kit, which uses v2. Any mixins you add must also use v3. For
-v2 customizations, see [Kits v2](kits-v2/_index.md).
+v2 customizations, see [Kits v2](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
 
 ## Prepare the kit directory
 
@@ -59,7 +60,7 @@ base image with the tools, account, and certificate store that the sandbox
 needs. This tutorial uses Red Hat Universal Base Image (UBI) 9 as a concrete
 example. For another base, adapt the package installation and account creation
 to its existing contents while preserving the
-[base image requirements](kit-reference.md#base-image-requirements).
+[base image requirements](/manuals/ai/sandboxes/customize/author/kit-reference.md#base-image-requirements).
 
 ### Install the system packages
 
@@ -314,7 +315,7 @@ The build includes `context.md` in the image. At runtime, `sbx` generates a
 `CLAUDE.md` profile in the parent directory of the mounted workspace inside
 the sandbox. The profile points to the packaged `context.md` file for the
 agent to read. It doesn't replace a `CLAUDE.md` in your project. See
-[Agent instructions](kits.md#give-the-agent-instructions) for how workload
+[Agent instructions](/manuals/ai/sandboxes/customize/author/_index.md#give-the-agent-instructions) for how workload
 and mixin instructions contribute to the profile.
 
 ## Store the key and run
@@ -336,7 +337,7 @@ $ sbx run --name claude-team ./claude-team <PROJECT_PATH>
 Approve the kit's credential request to connect the stored key to this kit,
 then follow Claude Code's first-run prompts. Without an approved credential
 binding, storing a key alone doesn't authenticate the agent. See
-[Credential bindings](../configuration/credentials.md#credential-bindings).
+[Credential bindings](/manuals/ai/sandboxes/configuration/credentials.md#credential-bindings).
 
 Choose a different model when creating a sandbox:
 
@@ -389,6 +390,7 @@ Run the published kit by its image reference:
 $ sbx run --name claude-team-shared docker.io/<NAMESPACE>/claude-team:1.0.0 <PROJECT_PATH>
 ```
 
-For build layouts, multi-platform images, and distribution details, see
-[Kits v3](kits.md). To add tools or shared configuration to this workload,
-see [Kit examples](kit-examples.md).
+For multi-platform images and distribution details, see
+[Build and distribute kits](/manuals/ai/sandboxes/customize/author/distribute.md).
+To add tools or shared configuration to this workload,
+see [Kit examples](/manuals/ai/sandboxes/customize/author/kit-examples.md).

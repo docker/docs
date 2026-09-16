@@ -27,7 +27,7 @@ sees only a sentinel like `proxy-managed`.
 
 A kit can set OAuth `passthrough: true` to opt out of sentinel masking. This
 sends the real token response into the sandbox and reduces credential isolation.
-See the [`oauth` kit fields](../customize/kit-reference.md#oauth).
+See the [`oauth` kit fields](/manuals/ai/sandboxes/customize/author/kit-reference.md#oauth).
 
 There are several ways to provide that value. When more than one source has a
 value for the same service, the stored secret takes precedence.
@@ -287,7 +287,7 @@ $ sbx secret set my-service
 
 There's no separate registration step; the keychain entry is keyed on the
 identifier the kit already uses. See
-[Authenticate to external services](../customize/kits.md#authenticate-to-external-services)
+[Authenticate to external services](/manuals/ai/sandboxes/customize/author/_index.md#authenticate-to-external-services)
 for the v3 configuration. For existing v2 kits, see
 [V2 credentials](../customize/kits-v2/_index.md#credentials).
 
@@ -551,7 +551,7 @@ requires approval.
 ## Registry credentials
 
 Registry credentials authenticate to private OCI registries when pulling
-[templates](../usage.md#load-a-template) or [kits](../customize/kits.md), and can
+[templates](../usage.md#load-a-template) or [kits](/manuals/ai/sandboxes/customize/_index.md), and can
 also let the agent pull and push images from inside the sandbox through the
 host-side proxy. Use `sbx secret set --registry <host>` to store them. For
 Docker Hub, `sbx` reuses your `sbx login` session — no registry secret needed.
@@ -615,7 +615,7 @@ For v2 kits on Docker Hub, `sbx kit pull` and `sbx kit push` use the session fro
 `sbx login`. For other registries, both commands use these credentials. Both
 commands fall back to the Docker credential store, so credentials from
 `docker login` also work. V3 kits are
-[published with Docker Buildx](../customize/kits.md#publish-an-image),
+[published with Docker Buildx](/manuals/ai/sandboxes/customize/author/distribute.md#publish-an-image),
 which uses the credentials from `docker login`.
 
 ### Trust a private registry authentication endpoint

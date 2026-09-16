@@ -4,6 +4,8 @@ linkTitle: Spec reference
 description: Reference for the v3 kit descriptor, including capabilities, composition, arguments, build recipes, lifecycle hooks, and the published image format.
 keywords: sandboxes, sbx, kits, v3, schema, capabilities, workload, mixin
 weight: 50
+aliases:
+  - /ai/sandboxes/customize/kit-reference/
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -14,8 +16,10 @@ weight: 50
 > feedback in [docker/sbx-releases](https://github.com/docker/sbx-releases).
 
 This page describes the v3 kit descriptor and its capability configs. Use it
-when authoring a workload or mixin. For concepts and usage, see [Kits v3](kits.md).
-For complete examples, see [Kit examples](kit-examples.md).
+when authoring a workload or mixin. For a practical introduction, see
+[Author kits](/manuals/ai/sandboxes/customize/author/_index.md). To run existing
+workloads and mixins, see [Use kits](/manuals/ai/sandboxes/customize/use-kits.md).
+For complete examples, see [Kit examples](/manuals/ai/sandboxes/customize/author/kit-examples.md).
 
 Some capability types describe functionality beyond the `sbx` integration.
 The [capability table](#runtime-capabilities) identifies these types.
@@ -26,8 +30,8 @@ Use `schemaVersion: "3"` for the syntax on this page. V3 workloads and mixins
 must be used together: they can't compose with v1 or v2 kits. The built-in
 agents use v2. V2 remains supported. For
 `schemaVersion: "2"`, see the
-[v2 spec reference](kits-v2/_index.md), including the
-[v1-to-v2 field mapping](kits-v2/_index.md#schema-versions).
+[v2 spec reference](/manuals/ai/sandboxes/customize/kits-v2/_index.md), including the
+[v1-to-v2 field mapping](/manuals/ai/sandboxes/customize/kits-v2/_index.md#schema-versions).
 Each descriptor uses one grammar. V2 fields aren't accepted in a v3
 descriptor.
 
@@ -188,7 +192,7 @@ The resulting descriptor is validated again, including capability configs.
 The published descriptor remains unchanged. Shell expressions such as `$HOME`
 and `${HOME}` aren't kit argument references.
 
-See [Pass arguments to kits](kits.md#pass-arguments-to-kits) for CLI syntax.
+See [Pass arguments to kits](/manuals/ai/sandboxes/customize/use-kits.md#pass-arguments-to-kits) for CLI syntax.
 
 ## Authoring forms
 
@@ -231,9 +235,9 @@ COPY review-checklist.md /usr/local/share/team/review-checklist.md
 
 A comment descriptor can't also declare `build` or `dockerfile`.
 Dockerfile semantics apply to every recipe, including multi-stage builds and
-build mounts. See [Directory and build layout](kits.md#directory-and-build-layout)
+build mounts. See [Directory and build layout](/manuals/ai/sandboxes/customize/author/_index.md#directory-and-build-layout)
 for organizing source files, and
-[Packaging and distribution](kits.md#packaging-and-distribution) for build commands.
+[Packaging and distribution](/manuals/ai/sandboxes/customize/author/distribute.md) for build commands.
 
 ### Base image requirements
 
@@ -244,7 +248,7 @@ Install or ship any additional tools the workload needs.
 
 A Docker sandbox template is optional. For a complete example of preparing
 a base image and installing an agent, see
-[Use your own base image](build-an-agent.md#use-your-own-base-image).
+[Use your own base image](/manuals/ai/sandboxes/customize/author/build-an-agent.md#use-your-own-base-image).
 
 The workload's image config owns the launch command and working directory.
 Mixin recipes add files and additive image settings such as environment
@@ -339,7 +343,7 @@ replace an explicit injection-domain entry for validation.
 
 `com.docker.runtime/credential@1` declares a service and how its credential
 is presented. The user stores the value in the secret store and approves its
-use through [credential bindings](../configuration/credentials.md#credential-bindings).
+use through [credential bindings](/manuals/ai/sandboxes/configuration/credentials.md#credential-bindings).
 The descriptor doesn't name a host file or environment variable to read.
 
 ```yaml
@@ -628,8 +632,8 @@ no recipe has a layer containing its descriptor.
 The published descriptor has a 512 KiB limit, with a build warning above
 64 KiB. For kits with a build recipe, keep substantial instruction text in
 `contentFile` and other content in image layers. See
-[Compose kits](kits.md#compose-kits) for combining images, and
-[Packaging and distribution](kits.md#packaging-and-distribution) for publishing them.
+[Compose kits](/manuals/ai/sandboxes/customize/author/_index.md#compose-kits) for combining images, and
+[Packaging and distribution](/manuals/ai/sandboxes/customize/author/distribute.md) for publishing them.
 
 ## Move from v2 to v3
 

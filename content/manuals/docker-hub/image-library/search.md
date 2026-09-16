@@ -84,7 +84,7 @@ network rules, and startup commands. Sandbox kits come in two kinds:
 - Mixin: Layers tools, credentials, or configuration onto an existing agent.
 
 To learn more about building and running kits, see
-[Kits](/manuals/ai/sandboxes/customize/kits.md).
+[Kits](/manuals/ai/sandboxes/customize/_index.md).
 
 #### Helm charts
 
