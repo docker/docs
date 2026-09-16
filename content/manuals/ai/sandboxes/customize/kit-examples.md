@@ -9,7 +9,7 @@ weight: 40
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 > [!NOTE]
-> Kits are experimental. The kit file format, CLI commands, and experience
+> V3 kits are experimental. The kit file format, CLI commands, and experience
 > for creating, loading, and managing kits are subject to change. Share
 > feedback in the [docker/sbx-releases](https://github.com/docker/sbx-releases)
 > repository.
@@ -22,7 +22,7 @@ workload directory and run the commands from their parent directory.
 
 These mixins require a v3 workload. They can't be used with the v2 built-in
 agent shortcuts, such as `claude` or `codex`. Select a v3 workload before
-adding these mixins. For existing customizations in the deprecated format,
+adding these mixins. For v2 customizations,
 see [Kits v2](kits-v2/_index.md).
 
 For concepts and source layout, see [Kits v3](kits.md).

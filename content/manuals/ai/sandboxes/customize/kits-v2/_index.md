@@ -1,21 +1,16 @@
 ---
-title: Kits v2 (deprecated)
+title: Kits v2
 linkTitle: Kits v2
-description: Reference for deprecated v2 kits, including usage, schema fields, maintenance examples, signing, and migration to v3.
-keywords: sandboxes, sbx, kits, v2, deprecated, migration, spec.yaml
+description: Reference for v2 kits, including usage, schema fields, maintenance examples, signing, and migration to v3.
+keywords: sandboxes, sbx, kits, v2, migration, spec.yaml
 weight: 60
-params:
-  sidebar:
-    badge:
-      color: gray
-      text: Deprecated
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-V2 kits are deprecated but remain supported. Use [v3 kits](../kits.md) for
-further kit development. This page covers the v2 format for maintaining
-existing customizations.
+V2 kits remain supported. This page covers v2 usage, configuration, and the
+specification. For new kit development, use [v3 kits](../kits.md), which are
+experimental.
 
 Built-in shortcuts such as `claude` and `codex` select v2 kits and still work
 with v2 mixins. V3 workloads and mixins can't be combined with v1 or v2 kits.

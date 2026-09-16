@@ -177,7 +177,7 @@ Each field does the following:
 | `credentials[].apiKey.name` | The environment variable the proxy manages. Vibe sees a sentinel value; the proxy swaps in the real key.       |
 | `credentials[].apiKey.inject`| Where and how the proxy attaches the key. `scheme: bearer` sets `Authorization: Bearer <key>` for the domain. |
 
-This guide uses the deprecated v2 format. For its reference and migration
+This guide uses the v2 format. For its reference and migration
 guidance, see [Kits v2](../manuals/ai/sandboxes/customize/kits-v2/_index.md).
 
 > [!WARNING]

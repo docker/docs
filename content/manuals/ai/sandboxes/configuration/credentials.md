@@ -230,7 +230,7 @@ it into requests to the listed API domains.
 ### Services declared by kits
 
 Custom kits declare their service identifiers in the kit descriptor. V3 uses
-a credential capability. The deprecated v2 format uses a top-level
+a credential capability. The v2 format uses a top-level
 `credentials` list:
 
 {{< tabs >}}

@@ -16,11 +16,11 @@ A kit can define the whole environment or add something to an existing one,
 such as a toolchain or your team's shared configuration. Package those choices
 once, then reuse them across projects and share them with your team.
 
-This page covers v3, the recommended format for kit development. V3 brings
+This page covers v3, the recommended format for new kit development. V3 brings
 image builds and runtime capabilities together in the kit format.
 
 > [!NOTE]
-> Kits are experimental. The format and CLI commands are subject to change.
+> V3 kits are experimental. The format and CLI commands are subject to change.
 > Share feedback in the
 > [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
 
@@ -49,7 +49,7 @@ You can't add a v3 mixin to these built-ins. For example,
 Instead, select a v3 workload by its published image, local path, or Git
 reference, as shown in [Run a kit](#run-a-kit).
 
-V2 is deprecated but remains supported, including the built-in agents and
+V2 remains supported, including the built-in agents and
 existing v2 customizations. See [Kits v2](kits-v2/_index.md) for maintenance
 and migration guidance.
 

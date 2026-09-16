@@ -9,7 +9,7 @@ weight: 50
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 > [!NOTE]
-> Kits are experimental. The kit file format, CLI commands, and experience
+> V3 kits are experimental. The kit file format, CLI commands, and experience
 > for creating, loading, and managing kits are subject to change. Share
 > feedback in [docker/sbx-releases](https://github.com/docker/sbx-releases).
 
@@ -24,7 +24,7 @@ The [capability table](#runtime-capabilities) identifies these types.
 
 Use `schemaVersion: "3"` for the syntax on this page. V3 workloads and mixins
 must be used together: they can't compose with v1 or v2 kits. The built-in
-agents use v2. V2 is deprecated but remains supported. For
+agents use v2. V2 remains supported. For
 `schemaVersion: "2"`, see the
 [v2 spec reference](kits-v2/_index.md), including the
 [v1-to-v2 field mapping](kits-v2/_index.md#schema-versions).

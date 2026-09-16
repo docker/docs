@@ -9,7 +9,7 @@ weight: 30
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 > [!NOTE]
-> Kits are experimental. The kit file format, CLI commands, and experience
+> V3 kits are experimental. The kit file format, CLI commands, and experience
 > for creating, loading, and managing kits are subject to change. Share
 > feedback in the [docker/sbx-releases](https://github.com/docker/sbx-releases)
 > repository.
@@ -26,8 +26,8 @@ kits, read [Kits v3](kits.md) for the file layout and the roles of a workload
 and a mixin. For field definitions, see the [Kit spec reference](kit-reference.md).
 
 This creates an independent v3 workload. It doesn't inherit the built-in
-`claude` kit, which uses v2. Any mixins you add must also use v3. For existing
-customizations in the deprecated format, see [Kits v2](kits-v2/_index.md).
+`claude` kit, which uses v2. Any mixins you add must also use v3. For
+v2 customizations, see [Kits v2](kits-v2/_index.md).
 
 ## Prepare the kit directory
 

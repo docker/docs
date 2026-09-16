@@ -23,7 +23,7 @@ A workload's build recipe can start from a Docker-provided agent image or
 another Linux base image. Its descriptor declares network access, credentials,
 and lifecycle hooks alongside that build.
 
-Kits are experimental. The format and CLI commands are subject to change.
+V3 kits are experimental. The format and CLI commands are subject to change.
 Share feedback in the
 [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
 
@@ -38,12 +38,12 @@ Share feedback in the
 
 ## Start with v3 kits
 
-V3 is the recommended format for kit development. To use it, select an
+V3 is the recommended format for new kit development. To use it, select an
 explicit v3 workload reference and combine it with v3 mixins. Built-in agent
 shortcuts such as `claude` and `codex` select v2 kits, so they can't be used
 with v3 mixins. See [Run a kit](kits.md#run-a-kit) for the opt-in workflow.
 
-V2 is deprecated but remains supported. For existing customizations, see
+V2 remains supported. For existing customizations, see
 [Kits v2](kits-v2/_index.md), including guidance for moving a complete
 environment to v3.
 
