@@ -9,8 +9,8 @@
   --color-background-dark: var(--tri-background);
   --color-navbar-bg: var(--tri-sidebar);
   --color-navbar-bg-dark: var(--tri-sidebar);
-  --color-navbar-text: var(--tri-sidebar-foreground);
-  --color-navbar-text-dark: var(--tri-sidebar-foreground);
+  --color-navbar-text: var(--tri-sidebar-foreground-muted);
+  --color-navbar-text-dark: var(--tri-sidebar-foreground-muted);
   --color-divider-light: var(--tri-border);
   --color-divider-dark: var(--tri-border);
 }
@@ -92,25 +92,29 @@
   }
 
   .navbar-entry-background-current {
-    background: var(--tri-sidebar-accent);
-    color: var(--tri-sidebar-accent-foreground);
+    background: var(--tri-accent-subtle);
+    color: var(--tri-foreground);
     border-radius: var(--tri-radius-default);
   }
 
+  .navbar-font a:hover {
+    color: var(--tri-sidebar-foreground);
+  }
+
   .navbar-entry-background-current a[aria-current="page"] {
-    color: var(--tri-primary);
+    color: var(--tri-foreground);
     font-weight: var(--tri-font-weight-semibold);
   }
 
   .prose {
-    --tw-prose-body: var(--tri-foreground);
+    --tw-prose-body: var(--tri-muted-foreground);
     --tw-prose-headings: var(--tri-foreground);
     --tw-prose-links: var(--tri-primary);
     --tw-prose-bold: var(--tri-foreground);
     --tw-prose-counters: var(--tri-muted-foreground);
     --tw-prose-bullets: var(--tri-muted-foreground);
     --tw-prose-hr: var(--tri-border);
-    --tw-prose-quotes: var(--tri-foreground);
+    --tw-prose-quotes: var(--tri-muted-foreground);
     --tw-prose-quote-borders: var(--tri-border);
     --tw-prose-captions: var(--tri-muted-foreground);
     --tw-prose-code: var(--tri-foreground);
@@ -169,12 +173,12 @@
 
   .card-header,
   .card-icon,
-  .section-card-title,
-  .section-card-text {
+  .section-card-title {
     color: var(--tri-card-foreground);
   }
 
-  .card-description {
+  .card-description,
+  .section-card-text {
     color: var(--tri-muted-foreground);
   }
 
@@ -227,7 +231,17 @@
     border: 1px solid var(--docs-callout-border);
     border-radius: var(--tri-radius-lg);
     background: var(--docs-callout-bg);
+    color: var(--tri-muted-foreground);
+  }
+
+  .admonition-header {
     color: var(--docs-callout-title);
+  }
+
+  /* Trident alerts keep body copy neutral and strong on tinted surfaces. */
+  .admonition-content,
+  .admonition strong {
+    color: var(--tri-foreground);
   }
 
   .admonition-note {
