@@ -44,9 +44,11 @@ through the local `--docs-reading-foreground` alias. The local
 `sidebar` in dark mode, matching the dark navigation surface. Subtle borders separate the navigation from the reading area. These are
 local layout adaptations; the separate Trident high-contrast mode stays inactive.
 
-Card descriptions use the primary foreground for readability; metadata stays
-muted. Cards and tabs use the component surface with semantic borders and
-accented hover or focus states. Inactive sidebar
+Navigation cards use a transparent surface, compact 16-pixel titles at weight 600,
+and 14-pixel descriptions in Trident gray 700 or gray 300. Decorative icons are
+omitted; titles identify the destinations. Linked cards have a full-area target
+and accented hover or focus states. Tabs retain the component surface and
+semantic borders. Inactive sidebar
 items use `sidebar-foreground-muted`, with stronger text on the active item.
 Inactive table-of-contents links are neutral; active and hovered links use the
 primary accent. Inline code uses a faint foreground tint and compact padding,

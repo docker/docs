@@ -19,6 +19,7 @@
    semantic pairs on the components migrated by this prototype. */
 @layer docs {
   :root {
+    --docs-card-description: var(--tri-gray-700);
     --docs-component-background: var(--tri-background-primary);
     --docs-code-background: var(--tri-background);
     --docs-reading-foreground: var(--tri-foreground);
@@ -35,6 +36,7 @@
   }
 
   :root.dark {
+    --docs-card-description: var(--tri-gray-300);
     --docs-code-background: var(--tri-muted);
     --docs-reading-background: var(--tri-sidebar);
     color-scheme: dark;
@@ -267,17 +269,51 @@
     border-bottom-width: 2px;
   }
 
-  .card {
-    padding: 1rem;
+  .docs-navigation-card {
+    min-width: 0;
+    margin: 0;
+    padding: 1.25rem;
+    gap: 0;
+    background: transparent;
+    border-radius: var(--tri-radius-default);
+  }
+
+  .docs-navigation-card:has(> .card-link) {
+    padding: 0;
+  }
+
+  .docs-navigation-card > .card-link {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1.25rem;
+    border-radius: inherit;
   }
 
   .card-header {
     align-items: flex-start;
+    margin: 0 0 0.5rem;
   }
 
-  .card-icon {
-    flex-shrink: 0;
-    margin-top: 0.2em;
+  .docs-navigation-card .card-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: var(--tri-font-weight-semibold);
+    line-height: 1.4;
+    letter-spacing: normal;
+  }
+
+  .docs-navigation-card .card-description {
+    margin: 0;
+    color: var(--docs-card-description);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    letter-spacing: normal;
+  }
+
+  .docs-navigation-card:has(> .card-link):hover .card-title,
+  .docs-navigation-card:focus-within .card-title {
+    color: var(--tri-primary);
   }
 
   .docs-code {
