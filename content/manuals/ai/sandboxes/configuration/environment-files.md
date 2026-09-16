@@ -252,10 +252,9 @@ $ sbx env run --env-args-file production.args
 ```
 
 You can pass multiple argument files. Later files take precedence over earlier
-files, and `--env-arg` flags take precedence over every argument file. The
-command rejects undeclared arguments, missing required values, and values that
-don't satisfy an argument's `enum` or `pattern`. Values can contain `=`, and
-values in an argument file are read literally rather than expanded by a shell.
+files, and `--env-arg` flags take precedence over every argument file.
+Values can contain `=`, and values in an argument file are read literally
+rather than expanded by a shell.
 
 Argument references and the two directory references are the only variable
 expressions expanded in an environment file. Shell-style expressions such as
@@ -422,8 +421,6 @@ remain after cleanup.
 
 ## File reference
 
-The loader rejects unknown fields and unsupported schema versions.
-
 ### Top-level fields
 
 | Field                  | Type             | Required | Default                        | Description                                                                     |
@@ -459,8 +456,7 @@ true`.
 | `enum`        | list of strings | None    | Values accepted for the argument                                  |
 | `pattern`     | string          | None    | Go (`RE2`) expression matched against the complete argument value |
 
-`enum` and `pattern` can't be used together. A default value must satisfy the
-declared `enum` or `pattern`.
+`enum` and `pattern` can't be used together.
 
 ### `kits`
 
@@ -502,8 +498,7 @@ parameter and OCI kits with an immutable tag or digest.
 When specified as a string, `workspace` is the path. Use the object form for
 clone mode. Omit `workspace` to create a sandbox without a host bind mount. Set
 `workspace: .` to mount the directory that contains the environment file
-that declares it. If `workspace` is present, its path can't be empty or contain
-only whitespace.
+that declares it.
 
 `sbx` mounts the environment file read-only inside the sandbox. Keep the file
 outside direct-mounted workspaces or directly in a workspace root.

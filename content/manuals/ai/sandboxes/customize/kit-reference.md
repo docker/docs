@@ -37,11 +37,8 @@ Starting with Docker Sandboxes version 0.36, two schema versions are supported.
 Use `schemaVersion: "2"` for new kits. Version `"1"` remains accepted through
 the legacy path.
 
-The loader forks on `schemaVersion`. A v2 spec uses the v2 grammar only. Legacy
-v1 fields in a `schemaVersion: "2"` spec are rejected during decode instead of
-being folded into the v2 model. Keep each `spec.yaml` on one grammar.
-
-What changed in v2:
+When migrating to `schemaVersion: "2"`, replace v1 fields with their v2
+equivalents:
 
 | v1                                          | v2                                       |
 | ------------------------------------------- | ---------------------------------------- |
@@ -149,9 +146,7 @@ a sandbox.
 | `pattern`     | Optional Go RE2 regular expression matched against the complete value. Mutually exclusive with `enum`.       |
 
 Each argument must declare either `default`, including an empty-string
-default, or `required: true`. A declared default must satisfy its own `enum` or
-`pattern`. Every `${{ kit.args.<name> }}` reference must have a matching
-declaration.
+default, or `required: true`.
 
 Argument values are strings, but substitution happens before YAML decoding.
 Quote a placeholder in a string-valued field so a value such as `1.20` isn't
@@ -429,8 +424,6 @@ environment:
 | Field       | Description                                    |
 | ----------- | ---------------------------------------------- |
 | `variables` | Key-value pairs set directly in the container. |
-
-Variable names must be valid shell identifiers (`[A-Za-z_][A-Za-z0-9_]*`).
 
 Do not set `DASH_`, `SBX_`, or `DOCKER_` variables, and avoid overriding
 `HOME`, `USER`, `SHELL`, `PATH`, `LD_PRELOAD`, and `LD_LIBRARY_PATH`. The
