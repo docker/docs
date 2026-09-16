@@ -234,6 +234,43 @@ the egress path in the **PROXY** column:
   internal CA applies. The only difference between them is whether the client
   knows it's talking to a proxy.
 
+### Certificate errors during Docker builds
+
+Containers started by the sandbox's Docker Engine have their own trust stores.
+They don't inherit the sandbox's installed certificates. If an HTTPS download
+in a Dockerfile fails with `self signed certificate in certificate chain`,
+install the proxy CA in the build image before the download.
+
+From a shell inside the sandbox, write its proxy CA into your build context:
+
+```console
+$ printf '%s' "$PROXY_CA_CERT_B64" | base64 -d > sbx-proxy-ca.crt
+```
+
+For a Debian-based image with `ca-certificates` installed, copy the certificate
+and update the trust store before commands that make HTTPS requests:
+
+```dockerfile
+FROM python:3.13-slim
+COPY sbx-proxy-ca.crt /usr/local/share/ca-certificates/sbx-proxy-ca.crt
+RUN update-ca-certificates
+```
+
+Build inside the sandbox, passing its proxy settings to the build:
+
+```console
+$ docker build --build-arg HTTP_PROXY --build-arg HTTPS_PROXY --build-arg NO_PROXY -t my-app .
+```
+
+If your organization also inspects TLS, install its root CA in the build image
+as a separate `.crt` file before `update-ca-certificates`. Keep the system CA
+bundle intact so the image trusts both proxies and public certificate
+authorities. The earlier [certificate troubleshooting](#api-calls-fail-with-a-certificate-error)
+explains which proxy paths need each CA.
+
+Keep the generated proxy certificate out of version control. Regenerate it and
+rebuild the image if the sandbox proxy CA changes.
+
 ## Sandbox runs out of disk space
 
 The sandbox root (`/`) filesystem defaults to 20 GB. To increase it, set
