@@ -326,14 +326,14 @@ Store your Anthropic API key on the host:
 $ sbx secret set anthropic
 ```
 
-From the directory containing `claude-team`, launch the kit against your
-project:
+From the directory containing `claude-team`, launch the kit:
 
 ```console
-$ sbx run --name claude-team ./claude-team <PROJECT_PATH>
+$ sbx run --name claude-team ./claude-team
 ```
 
-`sbx` builds the local directory, loads the kit, and launches Claude Code.
+`sbx` builds the kit, mounts your current directory as the workspace, and
+launches Claude Code. To work on another project, append its path to the command.
 Approve the kit's credential request to connect the stored key to this kit,
 then follow Claude Code's first-run prompts. Without an approved credential
 binding, storing a key alone doesn't authenticate the agent. See
@@ -343,7 +343,7 @@ Choose a different model when creating a sandbox:
 
 ```console
 $ sbx run --name claude-team-opus ./claude-team \
-    --kit-arg claude-team.model=opus <PROJECT_PATH>
+    --kit-arg claude-team.model=opus
 ```
 
 The argument prefix is the local kit directory's name. The model value is
@@ -356,7 +356,7 @@ Edit the descriptor, Dockerfile, or context file and create another sandbox
 with a different name to test the changes:
 
 ```console
-$ sbx run --name claude-team-test-2 ./claude-team <PROJECT_PATH>
+$ sbx run --name claude-team-test-2 ./claude-team
 ```
 
 Running an existing sandbox keeps its recorded configuration. During sandbox
@@ -387,7 +387,7 @@ build, add `--build-arg version=<CLAUDE_VERSION>`. Use the kit argument name
 Run the published kit by its image reference:
 
 ```console
-$ sbx run --name claude-team-shared docker.io/<NAMESPACE>/claude-team:1.0.0 <PROJECT_PATH>
+$ sbx run --name claude-team-shared docker.io/<NAMESPACE>/claude-team:1.0.0
 ```
 
 For multi-platform images and distribution details, see

@@ -34,18 +34,19 @@ A v2 kit contains `spec.yaml` and an optional `files/` tree. Pass a sandbox kit
 in place of the agent name and add mixins with `--kit`:
 
 ```console
-$ sbx run ./my-agent --name my-project --kit ./team-config <PROJECT_PATH>
-$ sbx run claude --name claude-project --kit ./team-config <PROJECT_PATH>
+$ sbx run ./my-agent --name my-project --kit ./team-config
+$ sbx run claude --name claude-project --kit ./team-config
 ```
 
-Use `sbx create` with the same arguments to create without launching the
-agent. References can be local directories, ZIP files, OCI artifacts, or Git
-URLs. Start relative paths with `./` or `../` and include `docker.io/` for
+`sbx run` uses your current directory as the workspace. Append a project path
+to use another directory. To create without launching the agent, use
+`sbx create`; include a workspace path or `.` to mount a directory.
+References can be local directories, ZIP files, OCI artifacts, or Git URLs. Start relative paths with `./` or `../` and include `docker.io/` for
 Docker Hub references. In Git URLs, `ref` selects a revision and `dir` the kit
 directory. Quote URLs containing `&`:
 
 ```console
-$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-agent" <PROJECT_PATH>
+$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-agent"
 ```
 
 `git+ssh://` URLs work with your local SSH agent and Git credentials. See
@@ -177,7 +178,7 @@ with the kit's `name` to target one kit. Scoped values override shared values:
 
 ```console
 $ sbx run ./my-agent --kit ./my-mixin --kit-arg channel=stable \
-    --kit-arg my-mixin.channel=beta <PROJECT_PATH>
+    --kit-arg my-mixin.channel=beta
 ```
 
 `--kit-args-file <FILE>` reads `name=value` entries, ignoring blank lines and

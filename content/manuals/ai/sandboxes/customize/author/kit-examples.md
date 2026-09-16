@@ -317,7 +317,7 @@ capabilities:
 Use it with the Claude Code workload from [Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md):
 
 ```console
-$ sbx run ./claude-team --name claude-review --kit ./docker-review <PROJECT_PATH>
+$ sbx run ./claude-team --name claude-review --kit ./docker-review
 ```
 
 Ask Claude Code to review the project's Dockerfile. The hook preserves an

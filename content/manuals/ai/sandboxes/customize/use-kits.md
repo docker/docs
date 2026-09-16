@@ -20,16 +20,20 @@ Sandboxes prepares the environment and applies its settings.
 
 ## Run a kit
 
-Run a workload by passing its kit reference to `sbx run`, followed by the
-project directory to use as the sandbox's workspace. You can choose a
-published v3 workload or supply one from a local directory or Git repository:
+Run a workload with `sbx run`. For example, to use a local kit in the
+`my-agent` directory:
 
 ```console
-$ sbx run <V3_WORKLOAD_KIT> <PROJECT_PATH>
+$ sbx run ./my-agent
 ```
 
-To create a sandbox without launching the workload, use `sbx create` with
-the same arguments.
+The sandbox uses your current directory as its workspace. To use another
+project directory, append its path to the command. See
+[Choose a workspace](/manuals/ai/sandboxes/usage.md#choose-a-workspace).
+
+To create a sandbox without launching the workload, use `sbx create`.
+Include `.` as the workspace argument to mount your current directory;
+omitting the workspace creates a mountless sandbox.
 
 If you don't have a v3 workload to run, the
 [OpenCode workload example](/manuals/ai/sandboxes/customize/author/_index.md#build-a-workload) provides a complete source kit.
@@ -41,7 +45,7 @@ A sandbox runs one workload kit. Add v3 mixins with `--kit`, repeating the
 flag for each one. For example, run a local v3 workload with two v3 mixins:
 
 ```console
-$ sbx run ./my-agent --kit ./linter --kit ./team-config <PROJECT_PATH>
+$ sbx run ./my-agent --kit ./linter --kit ./team-config
 ```
 
 The workload and its mixins form a composition: their tools, files, and
@@ -64,7 +68,7 @@ For Git sources, `ref` selects a revision and `dir` selects the kit's
 subdirectory. Quote Git URLs in shell commands because they can contain `&`:
 
 ```console
-$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-agent" <PROJECT_PATH>
+$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-agent"
 ```
 
 `sbx` pulls published images and builds local or Git sources when creating
@@ -79,7 +83,7 @@ for private image access.
 Use `--name` to give the sandbox a name:
 
 ```console
-$ sbx run ./my-agent --name my-project <PROJECT_PATH>
+$ sbx run ./my-agent --name my-project
 ```
 
 Running an existing sandbox reuses its recorded kit configuration. Kit
@@ -114,14 +118,14 @@ Kits can expose arguments for choices such as a tool's operating mode. Use
 `--kit-arg` to supply a value declared by the kit:
 
 ```console
-$ sbx run ./my-agent --kit ./my-tool --kit-arg mode=fix .
+$ sbx run ./my-agent --kit ./my-tool --kit-arg mode=fix
 ```
 
 A bare argument name applies to every kit that declares it. To target one kit,
 prefix the name with its handle and a period:
 
 ```console
-$ sbx run ./my-agent --kit ./my-tool --kit-arg my-tool.mode=fix .
+$ sbx run ./my-agent --kit ./my-tool --kit-arg my-tool.mode=fix
 ```
 
 The handle is the local directory name, the Git subdirectory or repository
