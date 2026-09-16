@@ -40,13 +40,13 @@ files. The descriptor names `AGENTS.md` as the profile used by the
 [agent-instructions example](#contribute-agent-instructions):
 
 ```yaml {title="shell-v3/shell-v3.yaml"}
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: workload
 displayName: Example shell
 
 capabilities:
-  - type: com.docker.runtime/agent-context@1
+  - type: com.docker.sandbox/agent-context@1
     config:
       filename: AGENTS.md
       content: This shell is an environment for testing composed kits.
@@ -77,13 +77,13 @@ configuration supplied by a kit. A mixin contributes instructions to the
 workload's context profile without choosing its filename:
 
 ```yaml {title="team-review/team-review.yaml"}
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: mixin
 displayName: Team review instructions
 
 capabilities:
-  - type: com.docker.runtime/agent-context@1
+  - type: com.docker.sandbox/agent-context@1
     config:
       content: |
         When reviewing a Dockerfile, check the base image version, layer
@@ -102,8 +102,7 @@ profile, such as `CLAUDE.md`, and the same mixin contributes to that profile.
 $ sbx run --name kit-team-review ./shell-v3 --kit ./team-review .
 ```
 
-Keep this mixin's instructions inline: `contentFile` requires a kit with a
-build recipe. Only workload kits can set `filename`.
+This short example keeps its instructions inline. Only workload kits can set `filename`.
 
 ## Write runtime configuration
 
@@ -112,7 +111,7 @@ This example writes a team settings file using a validated kit argument.
 It needs no Dockerfile because it contributes only declarations:
 
 ```yaml {title="workspace-config/workspace-config.yaml"}
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: mixin
 displayName: Workspace settings
@@ -123,7 +122,7 @@ args:
     pattern: '^[a-z][a-z0-9-]*$'
 
 capabilities:
-  - type: com.docker.runtime/lifecycle@1
+  - type: com.docker.sandbox/lifecycle@1
     config:
       files:
         - path: /home/agent/.config/team/project.json
@@ -157,13 +156,13 @@ Use lifecycle `startup` for work that must repeat after the sandbox stops
 and starts. This example records the time and workspace at each start:
 
 ```yaml {title="start-log/start-log.yaml"}
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: mixin
 displayName: Sandbox start log
 
 capabilities:
-  - type: com.docker.runtime/lifecycle@1
+  - type: com.docker.sandbox/lifecycle@1
     config:
       startup:
         - command: |
@@ -225,13 +224,13 @@ The descriptor copies the default into the workspace only when the project
 has no `.editorconfig`. It also keeps a copy in the agent's home directory:
 
 ```yaml {title="team-config/team-config.yaml"}
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: mixin
 displayName: Team configuration
 
 capabilities:
-  - type: com.docker.runtime/lifecycle@1
+  - type: com.docker.sandbox/lifecycle@1
     config:
       install:
         - command: |
@@ -295,13 +294,13 @@ COPY SKILL.md /usr/share/docker-review/SKILL.md
 An install hook copies it into the project when the sandbox is created:
 
 ```yaml {title="docker-review/docker-review.yaml"}
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: mixin
 displayName: Dockerfile review skill
 
 capabilities:
-  - type: com.docker.runtime/lifecycle@1
+  - type: com.docker.sandbox/lifecycle@1
     config:
       install:
         - command: |
@@ -339,13 +338,13 @@ COPY internal-ca.crt /usr/local/share/ca-certificates/team-internal-ca.crt
 ```
 
 ```yaml {title="internal-ca/internal-ca.yaml"}
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: mixin
 displayName: Internal CA certificate
 
 capabilities:
-  - type: com.docker.runtime/lifecycle@1
+  - type: com.docker.sandbox/lifecycle@1
     config:
       install:
         - command: update-ca-certificates
@@ -377,7 +376,7 @@ tool with `jq` syntax, and ships its binary without the Go compiler.
 Create a `gojq` directory with these two files:
 
 ```yaml {title="gojq/gojq.yaml"}
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: mixin
 displayName: JSON query tool

@@ -56,12 +56,12 @@ The descriptor declares this as a workload, connects OpenCode to the
 Anthropic API, and gives it the team's review instructions:
 
 ```yaml {title="opencode-python/opencode-python.yaml"}
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: workload
 
 capabilities:
-  - type: com.docker.runtime/network-policy@1
+  - type: com.docker.sandbox/network-policy@1
     config:
       runtime:
         allow:
@@ -71,7 +71,7 @@ capabilities:
           - registry.npmjs.org
           - pypi.org
           - files.pythonhosted.org
-  - type: com.docker.runtime/credential@1
+  - type: com.docker.sandbox/credential@1
     config:
       service: anthropic
       phase: runtime
@@ -82,7 +82,7 @@ capabilities:
           - domain: api.anthropic.com
             header: x-api-key
             format: "%s"
-  - type: com.docker.runtime/agent-context@1
+  - type: com.docker.sandbox/agent-context@1
     config:
       filename: AGENTS.md
       content: |
@@ -123,18 +123,18 @@ Use the network-policy capability to declare which domains a sandbox can
 reach. For example, this mixin permits requests to the GitHub API:
 
 ```yaml {title="github-access/github-access.yaml"}
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: mixin
 
 capabilities:
-  - type: com.docker.runtime/network-policy@1
+  - type: com.docker.sandbox/network-policy@1
     config:
       runtime:
         allow: [api.github.com]
 ```
 
-The type `com.docker.runtime/network-policy@1` selects version 1 of the
+The type `com.docker.sandbox/network-policy@1` selects version 1 of the
 network-policy settings. `runtime.allow` lists domains the running sandbox
 can reach.
 
@@ -186,7 +186,7 @@ A mixin can contribute instructions through the agent-context capability:
 
 ```yaml
 capabilities:
-  - type: com.docker.runtime/agent-context@1
+  - type: com.docker.sandbox/agent-context@1
     config:
       content: |
         Follow the project's contribution guide when changing code.
@@ -208,10 +208,10 @@ beside the profile. The profile indexes those files for the agent to read
 when needed. See
 [Contribute agent instructions](/manuals/ai/sandboxes/customize/author/kit-examples.md#contribute-agent-instructions).
 
-For kits with a build recipe, use `contentFile` to keep longer guidance in a
+Use `contentFile` to keep longer guidance in a
 Markdown file beside the descriptor. The build packages that file in the
-image, and the profile points to it instead of copying its text. Mixins
-without a build recipe must use inline `content`. See
+image, and the profile points to it instead of copying its text. The frontend
+also stages these files for mixins without a build recipe. See
 [Add agent instructions](/manuals/ai/sandboxes/customize/author/build-an-agent.md#add-agent-instructions) for a
 workload that uses `contentFile`.
 
@@ -244,12 +244,12 @@ when they don't require sandbox-specific inputs.
 
 ### Lifecycle hooks
 
-Hooks are declared through `com.docker.runtime/lifecycle@1`. For example, write
+Hooks are declared through `com.docker.sandbox/lifecycle@1`. For example, write
 a default config and start a service that the kit's image already contains:
 
 ```yaml
 capabilities:
-  - type: com.docker.runtime/lifecycle@1
+  - type: com.docker.sandbox/lifecycle@1
     config:
       files:
         - path: /home/agent/.config/my-service/config.json
@@ -352,6 +352,11 @@ kit is present, and `conflicts` to reject an incompatible combination. See
 
 ### Avoid conflicting customizations
 
+Give each declared feature one provider. If your workload provides `node`,
+don't add a mixin that also provides `node`, even at the same version. The
+spec rejects multiple owners of a normalized feature name. Credential
+requests also have one owner per service and phase across the selected kits.
+
 The workload supplies the environment and launch command. Mixins add files
 and runtime declarations. Two kits contributing the same image file cause a
 composition error. Conflicting image environment values also cause an error,
@@ -416,7 +421,7 @@ my-kit/
     └── settings.json
 ```
 
-The descriptor's first line, `# syntax=docker/runtime-kit:3`, selects the kit
+The descriptor's first line, `# syntax=docker/sandbox-kit:3`, selects the kit
 BuildKit frontend. Pass the YAML file to `docker buildx build -f`, with its
 directory as the build context. The frontend finds the same-stem
 `my-kit.dockerfile`, builds the content, validates the declarations, and

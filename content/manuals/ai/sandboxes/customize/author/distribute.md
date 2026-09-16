@@ -85,7 +85,7 @@ Docker image tools can inspect and distribute it, and Docker Sandboxes reads
 the descriptor when creating the sandbox.
 
 The built kit also includes its descriptor under
-`/usr/share/runtime/kit/<stem>/`, so you can inspect it inside the sandbox.
+`/usr/share/sandbox/kit/<stem>/`, so you can inspect it inside the sandbox.
 For the image annotations and file layout, see
 [Published image format](/manuals/ai/sandboxes/customize/author/kit-reference.md#published-image-format).
 

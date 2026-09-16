@@ -25,8 +25,11 @@ For the authoritative format definition, see the
 [v3 specification](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/SPEC-v3.md).
 This reference explains the format as used by Docker Sandboxes.
 
-Some capability types describe functionality beyond the `sbx` integration.
-The [capability table](#runtime-capabilities) identifies these types.
+The schema and publishing rules follow the v3 specification. Docker Sandboxes
+support can differ from the specification's runtime contract; the
+[capability table](#runtime-capabilities) and field notes identify integration
+limitations. Acceptance of a descriptor doesn't establish that every request
+is enforced.
 
 ## Schema versions
 
@@ -45,7 +48,7 @@ A descriptor is a YAML document with `schemaVersion: "3"` and a `kind`.
 The `# syntax` line selects the kit BuildKit frontend when you build it.
 
 ```yaml
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: mixin
 displayName: Team guidelines
@@ -53,7 +56,7 @@ description: Development conventions for the team
 version: "1.0.0"
 provides: [team-guidelines]
 capabilities:
-  - type: com.docker.runtime/agent-context@1
+  - type: com.docker.sandbox/agent-context@1
     config:
       content: |
         Run the project's tests before committing changes.
@@ -121,6 +124,9 @@ rather than the order of `--kit` flags.
 Bare names such as `node` normalize to `com.docker.kit/node`. A qualified
 name such as `com.example/node` is a separate feature. Names use lowercase
 letters, digits, and hyphens, with an optional namespace before `/`.
+Only one selected kit can provide a normalized name, even if two providers
+declare the same version. For example, don't combine an agent workload with
+a mixin that provides the same agent.
 
 ### Versions
 
@@ -133,6 +139,7 @@ An explicit version in `provides`, such as `node@20.0.0`, takes precedence.
 For a provide with no version, a version-shaped consumption tag takes precedence
 over the descriptor's `version` fallback. At publication, each `provides`
 entry must have an explicit version or a descriptor `version` fallback.
+An unversioned provide satisfies only a requirement without a version minimum.
 
 Build-time argument references are accepted in `provides` and `version` and
 expanded before publication. Keep `requires`, `integrates`, and `conflicts`
@@ -185,16 +192,23 @@ Arguments aren't exported as environment variables unless you set `env`.
 Use credentials for secrets. Build arguments and published descriptor values
 are part of the kit's build and distribution process.
 
-Create-time substitution inserts values into the serialized descriptor
-before decoding, without escaping them. Quoting a placeholder in YAML doesn't
-safely preserve arbitrary strings: double quotes, backslashes, and control
-characters such as newlines can cause decoding errors or change the value.
-Constrain interpolated values with `enum` or `pattern`, as in these examples,
-to exclude those characters.
+The spec requires create-time substitution to operate on decoded values and
+map keys, preserving quotes, backslashes, and newlines. A placeholder that
+fills an entire value can produce a boolean or number: `8080` becomes an
+integer, while `1.0` and `007` stay strings because converting them would
+change their spelling. A placeholder embedded in a larger string or a map
+key remains text. Keys that become identical after expansion are an error.
 
-The resulting descriptor is validated again, including capability configs.
+The effective descriptor is validated again, including capability configs.
 The published descriptor remains unchanged. Shell expressions such as `$HOME`
 and `${HOME}` aren't kit argument references.
+
+Structural expansion requires a runtime using the updated spec library.
+Integrations that substitute into serialized text don't preserve arbitrary
+strings. Build-time substitution in the frontend also operates on YAML text. Keep interpolated build values constrained with `enum` or `pattern`,
+as in these examples. Descriptor substitution doesn't escape values for a
+shell command or for JSON embedded in a file body; constrain those values for
+the format that will consume them.
 
 See [Pass arguments to kits](/manuals/ai/sandboxes/customize/use-kits.md#pass-arguments-to-kits) for CLI syntax.
 
@@ -218,7 +232,7 @@ For the inline form, `build` contains Dockerfile text, not a map of build
 options:
 
 ```yaml
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: mixin
 build: |
@@ -229,7 +243,7 @@ build: |
 The comment form starts with a descriptor comment block:
 
 ```dockerfile
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 # kit:
 #   schemaVersion: "3"
 #   kind: mixin
@@ -266,7 +280,7 @@ version. The type version is independent of `schemaVersion`.
 
 ```yaml
 capabilities:
-  - type: com.docker.runtime/port@1
+  - type: com.docker.sandbox/port@1
     description: Development server
     optional: false
     config:
@@ -275,20 +289,23 @@ capabilities:
 
 | Field | Description |
 | --- | --- |
-| `type` | Required. `<namespace>/<name>@<version>`, such as `com.docker.runtime/port@1`. Names use lowercase letters, digits, and hyphens. Namespaces can also contain dots. The version is a positive integer. |
+| `type` | Required. `<namespace>/<name>@<version>`, such as `com.docker.sandbox/port@1`. Names use lowercase letters, digits, and hyphens. Namespaces can also contain dots. The version is a positive integer. |
 | `optional` | Defaults to `false`. The spec requires a runtime to refuse unavailable required capabilities and to skip unavailable optional ones. |
 | `description` | Human-readable explanation of the request. |
 | `config` | Type-specific fields. Omit for capability types with no config. |
 
 The following table lists the standard types. Every type has the prefix
-`com.docker.runtime/`.
+`com.docker.sandbox/`.
+A descriptor can declare network policy `@1` or `@2`, but not both.
 
 | Type | Entries per descriptor | `sbx` support |
 | --- | --- | --- |
 | [`network-policy@1`](#network-policy) | At most one | Install and runtime network policy. |
+| [`network-policy@2`](#http-request-rules) | At most one, exclusive with `@1` | HTTP method and path restrictions. Runtime integration pending. |
 | [`credential@1`](#credentials) | One per service and phase | Credential bindings and proxy injection. See field limitations. |
 | [`lifecycle@1`](#lifecycle) | At most one | Install, startup, generated files, and interactive arguments. See field limitations. |
 | [`agent-context@1`](#agent-context) | At most one | Agent profile and kit instructions. |
+| [`agent-skills@1`](#agent-skills) | One per path | Shared skills store mount. Runtime integration pending. |
 | [`port@1`](#ports) | One per container port and transport | Publishes ports to the host. |
 | [`resources@1`](#resources) | At most one | Workload CPU and memory settings. |
 | [`kit-registry@1`](#kit-registry) | At most one | Restricted to approved builder kits. |
@@ -307,13 +324,13 @@ The following sections describe each type's `config` fields.
 
 ## Network policy
 
-`com.docker.runtime/network-policy@1` declares outbound access separately for
+`com.docker.sandbox/network-policy@1` declares outbound access separately for
 install hooks and the running workload. These phases concern sandbox
 execution. They don't control Dockerfile build networking.
 
 ```yaml
 capabilities:
-  - type: com.docker.runtime/network-policy@1
+  - type: com.docker.sandbox/network-policy@1
     config:
       install:
         allow: [registry.npmjs.org]
@@ -343,20 +360,60 @@ allow list. Validation ignores port suffixes for this membership check. A
 bare `*` or `**` covers all injection domains. A narrower wildcard doesn't
 replace an explicit injection-domain entry for validation.
 
+### HTTP request rules
+
+`com.docker.sandbox/network-policy@2` adds HTTP method and path restrictions
+to the same install and runtime phases. The spec defines this type; `sbx`
+integration is pending. Use `@1` for host-based policy with the supported
+integration.
+
+Each allow or deny entry can be a host string or an object:
+
+```yaml
+capabilities:
+  - type: com.docker.sandbox/network-policy@2
+    config:
+      runtime:
+        allow:
+          - github.com
+          - hosts: [api.github.com]
+            methods: [GET, HEAD]
+            paths: [/repos/**]
+        deny:
+          - hosts: [api.github.com]
+            methods: [DELETE]
+```
+
+| Entry field | Description |
+| --- | --- |
+| `hosts` | Required, nonempty list of host patterns. An allow entry with method or path restrictions must use literal hosts, without wildcards. |
+| `methods` | Optional, nonempty list of uppercase HTTP methods, or `[ANY]`. `ANY` can't be combined with other methods. |
+| `paths` | Optional, nonempty list of path globs starting with `/`. Requires `methods`. Omit to match every path for the listed methods. |
+
+A bare host entry permits connections for any protocol. An entry with method
+or path restrictions permits only matching HTTP requests. The spec requires
+the runtime to reject traffic it can't inspect and return HTTP 403 for
+requests its rules refuse.
+
+Across kits, allow entries combine and deny entries take precedence. An
+unrestricted allow from one kit remains unrestricted even if another kit
+allows fewer methods or paths on that host. Use deny rules to restrict the
+combined grant. Separate kits can use different network-policy versions.
+
 ## Credentials
 
-`com.docker.runtime/credential@1` declares a service and how its credential
+`com.docker.sandbox/credential@1` declares a service and how its credential
 is presented. The user stores the value in the secret store and approves its
 use through [credential bindings](/manuals/ai/sandboxes/configuration/credentials.md#credential-bindings).
 The descriptor doesn't name a host file or environment variable to read.
 
 ```yaml
 capabilities:
-  - type: com.docker.runtime/network-policy@1
+  - type: com.docker.sandbox/network-policy@1
     config:
       runtime:
         allow: [api.github.com]
-  - type: com.docker.runtime/credential@1
+  - type: com.docker.sandbox/credential@1
     optional: true
     description: GitHub API access
     config:
@@ -384,11 +441,19 @@ for a required request. Install-only credential injection is removed after
 install hooks. When the same service is declared for both phases, `sbx` uses
 the runtime entry's presentation config.
 
+The spec permits exactly one owner of a service in each phase across a
+composition. Two kits declaring the same service and phase conflict. A single
+kit can declare that service separately for installation and runtime.
+
 ### API keys
+
+Declare at least one of `apiKey.name` or `apiKey.inject`. An inject-only
+credential has no environment variable, including no sentinel. This is a
+schema option; use a named variable with the supported `sbx` integration.
 
 | Field | Description |
 | --- | --- |
-| `apiKey.name` | Required. Environment variable name in the sandbox, such as `GH_TOKEN`. |
+| `apiKey.name` | Environment variable name in the sandbox, such as `GH_TOKEN`. Can be omitted when `inject` rules are present, for injection without an environment variable. Support for this form in `sbx` is pending. |
 | `apiKey.proxyManaged` | If `true`, keeps the real credential on the host and puts a sentinel value in the sandbox. Defaults to `false`. |
 | `apiKey.inject[].domain` | Required for each rule. Domain where the proxy injects the credential. Must be allowed in the same phase's network policy. |
 | `apiKey.inject[].header` | HTTP header to set, such as `Authorization`. |
@@ -406,29 +471,33 @@ the runtime entry's presentation config.
 | `oauth.sentinels.accessToken` | Placeholder access token presented inside the sandbox. |
 | `oauth.sentinels.refreshToken` | Placeholder refresh token presented inside the sandbox. |
 | `oauth.credentialFile.path` | Credential-file destination. `~` expands to the agent's home. |
-| `oauth.credentialFile.structure` | Nested map rendered as JSON after placeholder substitution. |
+| `oauth.credentialFile.structure` | Nested map rendered after placeholder substitution. |
+| `oauth.credentialFile.format` | `json` (default) or `toml`. TOML rendering in `sbx` is pending. |
 | `oauth.responseFields.accessToken` | Provider field to read instead of `access_token`. |
+| `oauth.responseFields.refreshToken` | Provider field to read instead of `refresh_token`. Mapping in `sbx` is pending. |
 | `oauth.responseFields.expiresIn` | Provider field to read instead of `expires_in`. |
 | `oauth.passthrough` | If `true`, returns real tokens to the sandbox instead of sentinels. Defaults to `false`. |
 
 Credential-file leaf values support `{{.AccessToken}}`,
 `{{.RefreshToken}}`, `{{.ExpiresAt}}`, `{{.Scopes}}`, and
 `{{.PrimaryApiKey}}`. The last placeholder's containing key is omitted when
-no primary API key is captured. Unknown placeholders are errors.
+no primary API key is captured. Unknown placeholders are errors. The spec
+preserves placeholder types: expiry is numeric, scopes are an array, and
+tokens are strings.
 
 The v2 fields `provider`, `skipIfEnv`, and `credentialFile.template` aren't
 part of the v3 schema.
 
 ## Lifecycle
 
-`com.docker.runtime/lifecycle@1` declares work performed inside the sandbox
+`com.docker.sandbox/lifecycle@1` declares work performed inside the sandbox
 after the kit image has been built. Use a Dockerfile to install software that
 can ship in the image. Use lifecycle hooks for initialization or work that
 needs the sandbox's runtime state.
 
 ```yaml
 capabilities:
-  - type: com.docker.runtime/lifecycle@1
+  - type: com.docker.sandbox/lifecycle@1
     config:
       install:
         - command: [sh, -c, 'printf "%s\n" "$WORKSPACE_DIR" > /home/agent/workspace-path']
@@ -481,7 +550,9 @@ workload must see before it launches.
 | `files[].description` | Human-readable explanation. |
 
 Files are written after install hooks, as the agent user, before the workload
-runs. An install hook can read files from the image but can't depend on
+runs. This describes `sbx`'s creation-time behavior; the spec requires
+runtimes to write lifecycle files at each start. An install hook can read
+files from the image but can't depend on
 generated files. Choose a path the agent can write. For root-owned locations,
 create the file in the image or use an install hook. For static content, use
 Dockerfile `COPY` instead.
@@ -502,13 +573,13 @@ nonempty interactive argument list.
 
 ## Agent context
 
-`com.docker.runtime/agent-context@1` supplies instructions the agent reads.
+`com.docker.sandbox/agent-context@1` supplies instructions the agent reads.
 The workload chooses the profile filename. Mixins contribute instructions to
 that profile's kit index.
 
 ```yaml
 capabilities:
-  - type: com.docker.runtime/agent-context@1
+  - type: com.docker.sandbox/agent-context@1
     config:
       filename: AGENTS.md
       contentFile: ./agent-context.md
@@ -525,15 +596,49 @@ workspace inside the sandbox. Inline workload `content` is included directly
 in the profile. Inline mixin `content` is written to a separate file under
 `kits-agent-context/` beside the profile and indexed from the profile.
 
+The spec describes per-kit indexing for instruction content. `sbx` puts inline
+workload text directly in the profile, as described here.
+
 For `contentFile`, the frontend copies the file into the kit image and
 rewrites the published descriptor to point to that location. The profile
 references the packaged file, either as workload guidance or in its mixin
-index. A mixin omits `filename`. Mixins without a build recipe must use
-inline `content`. Building them with `contentFile` fails.
+index. A mixin omits `filename`. The frontend stages `contentFile` even when
+a mixin has no build recipe. Its filename must not be `kit.yaml` or
+`kit.dockerfile`, which are reserved for the staged descriptor and recipe.
+
+## Agent skills
+
+`com.docker.sandbox/agent-skills@1` requests a mount of the host's shared skills
+store where an agent reads skills. Runtime integration of this capability in
+`sbx` is pending. It is distinct from packaging a skill as files in a kit.
+
+```yaml
+capabilities:
+  - type: com.docker.sandbox/agent-skills@1
+    optional: true
+    config:
+      path: /home/agent/.claude/skills
+      mode: readonly
+```
+
+| Field | Description |
+| --- | --- |
+| `path` | Required. Absolute mount path, without `.` or `..` segments or a trailing slash. Can't be `/`. |
+| `mode` | `readonly` (default) or `readwrite`. Bounds the access the kit requests. |
+
+The spec requires the runtime to mount the store before lifecycle hooks,
+with access bounded by both the host setting and the kit's request. A host
+that turns the store off withholds the mount; an unsatisfied required request
+fails, while an optional request can be skipped.
+
+Within a descriptor, each path can appear once. Across kits, requests for the
+same path share a mount. If their modes differ, the composition requests
+`readwrite`, still bounded by the host setting. Write access requires both
+the host and at least one kit to request it.
 
 ## Ports
 
-`com.docker.runtime/port@1` publishes an inbound port. Declare a separate
+`com.docker.sandbox/port@1` publishes an inbound port. Declare a separate
 entry for each port and transport.
 
 | Field | Description |
@@ -548,7 +653,7 @@ field. Port publication doesn't grant outbound network access.
 
 ## Resources
 
-`com.docker.runtime/resources@1` declares workload resource settings.
+`com.docker.sandbox/resources@1` declares workload resource settings.
 
 | Field | Description |
 | --- | --- |
@@ -562,7 +667,7 @@ aren't applied.
 
 ## Kit registry
 
-`com.docker.runtime/kit-registry@1` requests access to the runtime's registry
+`com.docker.sandbox/kit-registry@1` requests access to the runtime's registry
 for kit builds. It takes no `config`.
 
 In `sbx`, this capability is restricted to approved OCI builder kits, with
@@ -571,7 +676,7 @@ receive this grant. Declaring it doesn't grant general network access.
 
 ## Volumes
 
-`com.docker.runtime/volume@1` describes a storage mount. `sbx` accepts this
+`com.docker.sandbox/volume@1` describes a storage mount. `sbx` accepts this
 schema, but doesn't apply v3 volume requests to the sandbox.
 
 | Field | Description |
@@ -583,7 +688,7 @@ schema, but doesn't apply v3 volume requests to the sandbox.
 
 ## USB devices
 
-`com.docker.runtime/usb-device@1` describes a USB device request. `sbx`
+`com.docker.sandbox/usb-device@1` describes a USB device request. `sbx`
 accepts this schema, but doesn't apply v3 USB requests.
 
 | Field | Description |
@@ -596,13 +701,13 @@ Declare exactly one match form: a vendor/product pair, or a class.
 
 ## Privileged mode
 
-`com.docker.runtime/privileged@1` requests elevated runtime privileges. It
+`com.docker.sandbox/privileged@1` requests elevated runtime privileges. It
 takes no `config`. `sbx` accepts this schema, but doesn't apply v3 privileged
 requests.
 
 ## Agent sessions
 
-`com.docker.runtime/agent-sessions@1` describes a workload's session commands.
+`com.docker.sandbox/agent-sessions@1` describes a workload's session commands.
 `sbx` accepts this schema, but doesn't use it to drive sessions.
 
 | Field | Description |
@@ -623,18 +728,25 @@ carry content.
 
 | Annotation | Value |
 | --- | --- |
-| `vnd.docker.runtime.kit.descriptor` | Published descriptor as compact JSON. |
-| `vnd.docker.runtime.kit.schema-version` | `"3"`. |
-| `vnd.docker.runtime.kit.capabilities` | Sorted, comma-separated capability types with duplicates removed. Omitted when none are requested. |
+| `vnd.docker.sandbox.kit.descriptor` | Published descriptor as compact JSON. |
+| `vnd.docker.sandbox.kit.schema-version` | `"3"`. |
+| `vnd.docker.sandbox.kit.capabilities` | Sorted, comma-separated capability types with duplicates removed. Omitted when none are requested. |
 
 Each image stages its descriptor at
-`/usr/share/runtime/kit/<stem>/kit.yaml` and its recipe, when present, at
-`/usr/share/runtime/kit/<stem>/kit.dockerfile`. Instruction files referenced
+`/usr/share/sandbox/kit/<stem>/kit.yaml` and its recipe, when present, at
+`/usr/share/sandbox/kit/<stem>/kit.dockerfile`. Instruction files referenced
 by `contentFile` are staged under the same kit directory. Even a mixin with
 no recipe has a layer containing its descriptor.
 
+The frontend also emits standard OCI metadata annotations for the title,
+description, authors, source, licenses, and version when the descriptor
+supplies them. These are display metadata, not verified publisher identity.
+Kit annotations appear on platform manifests and, when supported by the
+exporter, the image index. Consumers fall back to a platform manifest when
+index annotations are absent.
+
 The published descriptor has a 512 KiB limit, with a build warning above
-64 KiB. For kits with a build recipe, keep substantial instruction text in
+64 KiB. Keep substantial instruction text in
 `contentFile` and other content in image layers. See
 [Compose kits](/manuals/ai/sandboxes/customize/author/_index.md#compose-kits) for combining images, and
 [Packaging and distribution](/manuals/ai/sandboxes/customize/author/distribute.md) for publishing them.

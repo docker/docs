@@ -187,7 +187,7 @@ declaring its two inputs: the agent version to build and the model to use
 when the sandbox runs.
 
 ```yaml {title="claude-team/claude-team.yaml"}
-# syntax=docker/runtime-kit:3
+# syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: workload
 displayName: Team Claude Code
@@ -222,7 +222,7 @@ that network access:
 
 ```yaml {title="Add to claude-team/claude-team.yaml"}
 capabilities:
-  - type: com.docker.runtime/network-policy@1
+  - type: com.docker.sandbox/network-policy@1
     config:
       runtime:
         allow:
@@ -241,7 +241,7 @@ on the host.
 Append this entry to the same `capabilities` list:
 
 ```yaml {title="Append under capabilities"}
-  - type: com.docker.runtime/credential@1
+  - type: com.docker.sandbox/credential@1
     description: Anthropic API access
     config:
       service: anthropic
@@ -269,7 +269,7 @@ to create that file with the model chosen for the sandbox.
 Append this entry to `capabilities`:
 
 ```yaml {title="Append under capabilities"}
-  - type: com.docker.runtime/lifecycle@1
+  - type: com.docker.sandbox/lifecycle@1
     config:
       files:
         - path: /home/agent/.config/claude-team/settings.json
@@ -304,7 +304,7 @@ non-interactive commands also source it.
 Append an agent-context entry to `capabilities` to include these instructions:
 
 ```yaml {title="Append under capabilities"}
-  - type: com.docker.runtime/agent-context@1
+  - type: com.docker.sandbox/agent-context@1
     config:
       filename: CLAUDE.md
       contentFile: ./context.md

@@ -238,11 +238,11 @@ a credential capability. The v2 format uses a top-level
 
 ```yaml
 capabilities:
-  - type: com.docker.runtime/network-policy@1
+  - type: com.docker.sandbox/network-policy@1
     config:
       runtime:
         allow: [api.my-service.com]
-  - type: com.docker.runtime/credential@1
+  - type: com.docker.sandbox/credential@1
     config:
       service: my-service
       phase: runtime
