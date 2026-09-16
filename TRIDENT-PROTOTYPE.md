@@ -58,9 +58,6 @@ lockfile: `tsx@4.23.1`, `style-dictionary@5.5.1`, `apca-w3@0.1.9`, and
 `culori@4.0.2`. Upstream checks reported 97 contrast pairs with zero failures and
 explicit dark overrides for all 286 aliased tokens.
 
-The token package does not declare a license. Public redistribution terms remain
-an open item for the Trident team.
-
 Font files come from `@fontsource-variable/manrope@5.2.8` on npmjs.org. The
 unmodified WOFF2 subsets and their SIL Open Font License are under
 `static/assets/fonts/manrope/`. The font declarations retain the package's
@@ -77,7 +74,7 @@ $ node hack/vendor-trident-tokens.mjs /path/to/trident/packages/tokens <40-chara
 
 The script validates the package name and local CSS imports, copies the
 generated files without modification, and records their version and checksums.
-Review the CSS diff and any upstream license terms. Keep docs adjustments in
+Review the CSS diff. Keep docs adjustments in
 `assets/css/trident.css`. The refresh step is separate from ordinary builds.
 
 If the token package becomes available publicly on npmjs.org, replace the
