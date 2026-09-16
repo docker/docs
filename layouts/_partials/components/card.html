@@ -2,6 +2,9 @@
   {{ if .link }}
     <a href="{{ .link }}" class="card-link">
   {{ end }}
+    {{ with .label }}
+      <p class="docs-card-label">{{ . }}</p>
+    {{ end }}
     <div class="card-header">
       {{ with .image }}
         <img class="card-image" src="{{ . }}" alt="">

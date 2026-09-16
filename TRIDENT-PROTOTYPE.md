@@ -44,6 +44,9 @@ through the local `--docs-reading-foreground` alias. The local
 `sidebar` in dark mode, matching the dark navigation surface. Subtle borders separate the navigation from the reading area. These are
 local layout adaptations; the separate Trident high-contrast mode stays inactive.
 
+Home, Get started, Guides featured cards, and Manuals share the
+`components/card.html` partial. Grid layouts and optional audience labels remain
+page-specific; Guides search results retain their list layout.
 Navigation cards use `background-paper-elevation-0`, compact 16-pixel titles at
 weight 600, and 14-pixel descriptions in Trident gray 700 or gray 300.
 The border and shadow follow the surface material in Trident core's
