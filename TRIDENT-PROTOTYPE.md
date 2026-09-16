@@ -38,6 +38,15 @@ Manrope supplies the interface and article typeface. Article body text uses the
 the existing Roboto Mono font. The existing theme switch activates Trident's
 `.dark` overrides.
 
+Body text and card descriptions use `muted-foreground`; headings, emphasis, and
+alert content use `foreground`. Inactive sidebar items use
+`sidebar-foreground-muted`, with stronger text on the active item. These roles
+follow Trident's Markdown renderer and component recipes. The near-black dark
+page background is Trident's default, not its separate high-contrast mode.
+
+The neutral header is a docs-specific adaptation. Trident's `AppHeader` component
+uses the `header-from` and `header-to` blue gradient tokens.
+
 This is an integration prototype. Syntax highlighting, search internals, Gordon,
 landing-page layouts, and other components still need a design review. Loading
 tokens does not provide Trident component behavior or certify accessibility.
