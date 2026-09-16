@@ -1,0 +1,606 @@
+--- original/registry.yaml
++++ converted/registry.yaml
+@@ -1,4 +1,4 @@
+-openapi: 3.0.3
++openapi: 3.2.0
+ info:
+   title: Supported registry API for Docker Hub
+   description: |
+@@ -11,14 +11,13 @@
+     It focuses on pulling, pushing, and deleting images. It does not cover the full OCI Distribution Specification.
+ 
+     For the complete OCI specification, see [OCI Distribution Specification](https://github.com/opencontainers/distribution-spec).
++  version: "2"
+ servers:
+   - description: Docker Hub registry API
+     x-audience: public
+     url: https://registry-1.docker.io
+-
+ tags:
+   - name: overview
+-    x-displayName: Overview
+     description: |
+       All endpoints in this API are prefixed by the version and repository name, for example:
+ 
+@@ -38,29 +37,28 @@
+       1. Consist of path components matching `[a-z0-9]+(?:[._-][a-z0-9]+)*`
+       2. If more than one component, they must be separated by `/`
+       3. Full repository name must be fewer than 256 characters
+-
+-
++    summary: Overview
++    kind: info
+   - name: authentication
+-    x-displayName: Authentication
+     description: |
+       Specifies registry authentication.
+     externalDocs:
+       description: Detailed authentication workflow and token usage
+       url: https://docs.docker.com/reference/api/registry/auth/
+-
++    summary: Authentication
++    kind: info
+   - name: Manifests
+-    x-displayName: Manifests
+     description: |
+       Image manifests are JSON documents that describe an image: its configuration blob, the digests of each layer blob, and metadata such as media‑types and annotations.
+-
++    summary: Manifests
++    kind: nav
+   - name: Blobs
+-    x-displayName: Blobs
+     description: |
+       Blobs are the binary objects referenced from manifests:
+       the config JSON and one or more compressed layer tarballs.
+-
++    summary: Blobs
++    kind: nav
+   - name: pull
+-    x-displayName: Pulling Images
+     description: |
+       Pulling an image involves retrieving the manifest and downloading each of the image's layer blobs. This section outlines the general steps followed by a working example.
+ 
+@@ -79,94 +77,93 @@
+ 
+       # Step 1: Get a bearer token
+       TOKEN=$(curl -s "https://auth.docker.io/token?service=registry.docker.io&scope=repository:library/ubuntu:pull" | jq -r .token)
+-  
++
+       # Step 2: Get the image manifest. In this example, an image manifest list is returned.
+       curl -s -H "Authorization: Bearer $TOKEN" \
+            -H "Accept: application/vnd.docker.distribution.manifest.list.v2+json" \
+            https://registry-1.docker.io/v2/library/ubuntu/manifests/latest \
+            -o manifest-list.json
+-  
++
+       # Step 3a: Parse the `manifests[]` array to locate the digest for your target platform (e.g., `linux/amd64`).
+       IMAGE_MANIFEST_DIGEST=$(jq -r '.manifests[] | select(.platform.architecture == "amd64" and .platform.os == "linux") | .digest' manifest-list.json)
+-  
++
+       # Step 3b: Get the platform-specific image manifest
+       curl -s -H "Authorization: Bearer $TOKEN" \
+            -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
+            https://registry-1.docker.io/v2/library/ubuntu/manifests/$IMAGE_MANIFEST_DIGEST \
+            -o manifest.json
+-  
++
+       # Step 4: Send a HEAD request to check if the layer blob exists
+       DIGEST=$(jq -r '.layers[0].digest' manifest.json)
+       curl -I -H "Authorization: Bearer $TOKEN" \
+            https://registry-1.docker.io/v2/library/ubuntu/blobs/$DIGEST
+-  
++
+       # Step 5: Download the layer blob
+       curl -L -H "Authorization: Bearer $TOKEN" \
+            https://registry-1.docker.io/v2/library/ubuntu/blobs/$DIGEST
+       ```
+-    
+-      This example pulls the manifest and the first layer for the `ubuntu:latest` image on the `linux/amd64` platform. Repeat steps 4 and 5 for each digest in the `.layers[]` array in the manifest.
+-
+ 
++      This example pulls the manifest and the first layer for the `ubuntu:latest` image on the `linux/amd64` platform. Repeat steps 4 and 5 for each digest in the `.layers[]` array in the manifest.
++    summary: Pulling Images
++    kind: info
+   - name: push
+-    x-displayName: Pushing Images
+     description: |
+       Pushing an image involves uploading any image blobs (such as the config or layers), and then uploading the manifest that references those blobs.
+-  
++
+       This section outlines the basic steps to push an image using the registry API.
+-  
++
+       1. [Get a bearer token for the repository](https://docs.docker.com/reference/api/registry/auth/)
+-  
++
+       2. [Check if the blob exists](#operation/CheckBlobExists) using a `HEAD` request for each blob digest.
+-  
++
+       3. If the blob does not exist, [upload the blob](#operation/CompleteBlobUpload) using a monolithic `PUT` request:
+           - First, [initiate the upload](#operation/InitiateBlobUpload) with `POST`.
+           - Then [upload and complete](#operation/CompleteBlobUpload) with `PUT`.
+ 
+           **Note**:  Alternatively, you can upload the blob in multiple chunks by using `PATCH` requests to send each chunk, followed by a final `PUT` request to complete the upload. This is known as a [chunked upload](#operation/UploadBlobChunk) and is useful for large blobs or when resuming interrupted uploads.
+ 
+-  
++
+       4. [Upload the image manifest](#operation/PutImageManifest) using a `PUT` request to associate the config and layers.
+-  
++
+       The following bash script example pushes a dummy config blob and manifest to `yourusername/helloworld:latest` on Docker Hub. You can replace `yourusername` with your Docker Hub username and `dckr_pat` with your Docker Hub personal access token.
+-  
++
+       ```bash
+       #!/bin/bash
+-  
++
+       USERNAME=yourusername
+       PASSWORD=dckr_pat
+       REPO=yourusername/helloworld
+       TAG=latest
+       CONFIG=config.json
+       MIME_TYPE=application/vnd.docker.container.image.v1+json
+-  
++
+       # Step 1: Get a bearer token
+       TOKEN=$(curl -s -u "$USERNAME:$PASSWORD" \
+       "https://auth.docker.io/token?service=registry.docker.io&scope=repository:$REPO:push,pull" \
+       | jq -r .token)
+-  
++
+       # Create a dummy config blob and compute its digest
+       echo '{"architecture":"amd64","os":"linux","config":{},"rootfs":{"type":"layers","diff_ids":[]}}' > $CONFIG
+       DIGEST="sha256:$(sha256sum $CONFIG | awk '{print $1}')"
+-  
++
+       # Step 2: Check if the blob exists
+       STATUS=$(curl -s -o /dev/null -w "%{http_code}" -I \
+         -H "Authorization: Bearer $TOKEN" \
+         https://registry-1.docker.io/v2/$REPO/blobs/$DIGEST)
+-  
++
+       if [ "$STATUS" != "200" ]; then
+         # Step 3: Upload blob using monolithic upload
+         LOCATION=$(curl -sI -X POST \
+           -H "Authorization: Bearer $TOKEN" \
+           https://registry-1.docker.io/v2/$REPO/blobs/uploads/ \
+           | grep -i Location | tr -d '\r' | awk '{print $2}')
+-  
++
+         curl -s -X PUT "$LOCATION&digest=$DIGEST" \
+           -H "Authorization: Bearer $TOKEN" \
+           -H "Content-Type: application/octet-stream" \
+           --data-binary @$CONFIG
+       fi
+-  
++
+       # Step 4: Upload the manifest that references the config blob
+       MANIFEST=$(cat <<EOF
+       {
+@@ -187,14 +184,14 @@
+         -H "Content-Type: application/vnd.docker.distribution.manifest.v2+json" \
+         -d "$MANIFEST" \
+         https://registry-1.docker.io/v2/$REPO/manifests/$TAG
+-  
++
+       echo "Pushed image to $REPO:$TAG"
+       ```
+ 
+       This example pushes a minimal image with no layers. To push a complete image, repeat steps 2–3 for each layer and include the layer digests in the `layers[]` field of the manifest.
+-
++    summary: Pushing Images
++    kind: info
+   - name: delete
+-    x-displayName: Deleting Images
+     description: |
+       Deleting an image involves removing its manifest by digest. You must first retrieve the manifest digest, then issue a `DELETE` request using that digest.
+ 
+@@ -215,36 +212,36 @@
+ 
+       ```bash
+       #!/bin/bash
+-  
++
+       USERNAME=yourusername
+       PASSWORD=dckr_pat
+       REPO=yourusername/helloworld
+       TAG=latest
+-  
++
+       # Step 1: Get a bearer token
+       TOKEN=$(curl -s -u "$USERNAME:$PASSWORD" \
+         "https://auth.docker.io/token?service=registry.docker.io&scope=repository:$REPO:pull,push,delete" \
+         | jq -r .token)
+-  
++
+       # Step 2 and 3: Get the manifest and extract the digest from response headers
+       DIGEST=$(curl -sI -H "Authorization: Bearer $TOKEN" \
+         -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
+         https://registry-1.docker.io/v2/$REPO/manifests/$TAG \
+         | grep -i Docker-Content-Digest | tr -d '\r' | awk '{print $2}')
+-  
++
+       echo "Deleting manifest with digest: $DIGEST"
+-  
++
+       # Step 4: Delete the manifest by digest
+       curl -s -X DELETE \
+         -H "Authorization: Bearer $TOKEN" \
+         https://registry-1.docker.io/v2/$REPO/manifests/$DIGEST
+-  
++
+       echo "Deleted image: $REPO@$DIGEST"
+       ```
+-  
+-      This example deletes the manifest for the `latest` tag. To fully delete all references to an image, ensure no other tags or referrers point to the same manifest digest.
+-
+ 
++      This example deletes the manifest for the `latest` tag. To fully delete all references to an image, ensure no other tags or referrers point to the same manifest digest.
++    summary: Deleting Images
++    kind: info
+ paths:
+   /v2/{name}/manifests/{reference}:
+     get:
+@@ -259,7 +256,6 @@
+         The manifest contains metadata about the image, including configuration and layer digests. It is required for pulling images from the registry.
+ 
+         This endpoint requires authentication. Use the `Authorization: Bearer <token>` header.
+-  
+       x-codeSamples:
+         - lang: Bash
+           label: cURL
+@@ -300,7 +296,7 @@
+           required: false
+           description: |
+             Media type(s) the client supports for the manifest.
+-        
++
+             The registry supports the following media types:
+             - application/vnd.docker.distribution.manifest.v2+json
+             - application/vnd.docker.distribution.manifest.list.v2+json
+@@ -308,7 +304,6 @@
+             - application/vnd.oci.image.index.v1+json
+           schema:
+             type: string
+-
+       responses:
+         "200":
+           description: Manifest fetched successfully.
+@@ -367,28 +362,19 @@
+                 docker-manifest:
+                   summary: Docker image manifest (schema v2)
+                   value:
+-                    {
+-                      "schemaVersion": 2,
+-                      "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+-                      "config": {
+-                        "mediaType": "application/vnd.docker.container.image.v1+json",
+-                        "size": 7023,
+-                        "digest": "sha256:123456abcdef..."
+-                      },
+-                      "layers": [
+-                        {
+-                          "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+-                          "size": 32654,
+-                          "digest": "sha256:abcdef123456..."
+-                        },
+-                        {
+-                          "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+-                          "size": 16724,
+-                          "digest": "sha256:7890abcdef12..."
+-                        }
+-                      ]
+-                    }
+-
++                    schemaVersion: 2
++                    mediaType: application/vnd.docker.distribution.manifest.v2+json
++                    config:
++                      mediaType: application/vnd.docker.container.image.v1+json
++                      size: 7023
++                      digest: sha256:123456abcdef...
++                    layers:
++                      - mediaType: application/vnd.docker.image.rootfs.diff.tar.gzip
++                        size: 32654
++                        digest: sha256:abcdef123456...
++                      - mediaType: application/vnd.docker.image.rootfs.diff.tar.gzip
++                        size: 16724
++                        digest: sha256:7890abcdef12...
+         "400":
+           description: Invalid name or reference.
+         "401":
+@@ -399,8 +385,6 @@
+           description: Repository or manifest not found.
+         "429":
+           description: Too many requests.
+-
+-
+     put:
+       tags:
+         - Manifests
+@@ -459,7 +443,6 @@
+           schema:
+             type: string
+             example: application/vnd.docker.distribution.manifest.v2+json
+-
+       requestBody:
+         required: true
+         content:
+@@ -512,28 +495,20 @@
+                       digest:
+                         type: string
+                         example: sha256:abcdef123456...
+-
+             examples:
+               sample-manifest:
+                 summary: Sample Docker image manifest (schema v2)
+                 value:
+-                  {
+-                    "schemaVersion": 2,
+-                    "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+-                    "config": {
+-                      "mediaType": "application/vnd.docker.container.image.v1+json",
+-                      "size": 7023,
+-                      "digest": "sha256:123456abcdef..."
+-                    },
+-                    "layers": [
+-                      {
+-                        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+-                        "size": 32654,
+-                        "digest": "sha256:abcdef123456..."
+-                      }
+-                    ]
+-                  }
+-
++                  schemaVersion: 2
++                  mediaType: application/vnd.docker.distribution.manifest.v2+json
++                  config:
++                    mediaType: application/vnd.docker.container.image.v1+json
++                    size: 7023
++                    digest: sha256:123456abcdef...
++                  layers:
++                    - mediaType: application/vnd.docker.image.rootfs.diff.tar.gzip
++                      size: 32654
++                      digest: sha256:abcdef123456...
+       responses:
+         "201":
+           description: Manifest created successfully.
+@@ -578,7 +553,6 @@
+         - Determining the digest or size of a manifest before downloading or deleting
+ 
+         This endpoint requires authentication with pull scope.
+-
+       parameters:
+         - name: name
+           in: path
+@@ -642,12 +616,12 @@
+               schema:
+                 type: string
+               example: application/vnd.docker.distribution.manifest.v2+json
+-        "404":
+-          description: Manifest not found.
+         "401":
+           description: Authentication required.
+         "403":
+           description: Access denied.
++        "404":
++          description: Manifest not found.
+         "429":
+           description: Too many requests.
+     delete:
+@@ -733,7 +707,6 @@
+             curl -i -X POST \
+               -H "Authorization: Bearer $TOKEN" \
+               https://registry-1.docker.io/v2/library/ubuntu/blobs/uploads/
+-
+         - lang: Bash
+           label: cURL (Cross-Repository Blob Mount)
+           source: |
+@@ -741,7 +714,6 @@
+             curl -i -X POST \
+               -H "Authorization: Bearer $TOKEN" \
+               "https://registry-1.docker.io/v2/library/ubuntu/blobs/uploads/?mount=sha256:abc123def456...&from=library/busybox"
+-
+       parameters:
+         - name: name
+           in: path
+@@ -770,7 +742,6 @@
+           schema:
+             type: string
+           description: Bearer token for authentication with `push` scope
+-
+       responses:
+         "201":
+           description: Blob successfully mounted from another repository.
+@@ -865,7 +836,6 @@
+           schema:
+             type: string
+           example: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6...
+-
+       responses:
+         "200":
+           description: Blob exists
+@@ -885,32 +855,12 @@
+               schema:
+                 type: string
+               example: application/octet-stream
+-          content:
+-            application/json:
+-              examples:
+-                blob-check-request:
+-                  summary: Sample request
+-                  value:
+-                    method: HEAD
+-                    url: /v2/library/ubuntu/blobs/sha256:abc123def4567890...
+-                    headers:
+-                      Authorization: Bearer <token>
+-                      Accept: '*/*'
+-                blob-check-response:
+-                  summary: Sample 200 response headers
+-                  value:
+-                    status: 200 OK
+-                    headers:
+-                      Docker-Content-Digest: sha256:abc123def4567890...
+-                      Content-Length: 32654
+-                      Content-Type: application/octet-stream
+-
+-        "404":
+-          description: Blob not found
+         "401":
+           description: Authentication required
+         "403":
+           description: Access denied
++        "404":
++          description: Blob not found
+         "429":
+           description: Too many requests
+     get:
+@@ -957,7 +907,6 @@
+             type: string
+           description: Bearer token with pull scope
+           example: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6...
+-
+       responses:
+         "200":
+           description: Blob content returned directly
+@@ -985,8 +934,7 @@
+               examples:
+                 small-layer:
+                   summary: Example binary blob (gzipped tar layer)
+-                  value: "<binary data not shown>"
+-
++                  value: <binary data not shown>
+         "307":
+           description: Temporary redirect to blob location
+           headers:
+@@ -1031,7 +979,7 @@
+           in: path
+           required: true
+           description: Repository Name
+-          example : library/ubuntu
++          example: library/ubuntu
+           schema:
+             type: string
+         - name: uuid
+@@ -1047,7 +995,6 @@
+           schema:
+             type: string
+           example: Bearer eyJhbGciOi...
+-
+       responses:
+         "204":
+           description: Upload in progress. No body is returned.
+@@ -1075,7 +1022,6 @@
+           description: Upload session not found
+         "429":
+           description: Too many requests
+-
+     put:
+       tags:
+         - Blobs
+@@ -1089,7 +1035,6 @@
+         This endpoint supports:
+         - Monolithic uploads (upload entire blob in this request)
+         - Finalizing chunked uploads (last chunk plus `digest`)
+-
+       x-codeSamples:
+         - lang: Bash
+           label: cURL
+@@ -1100,8 +1045,6 @@
+               -H "Content-Type: application/octet-stream" \
+               --data-binary @layer.tar.gz \
+               "https://registry-1.docker.io/v2/library/ubuntu/blobs/uploads/abc123?digest=sha256:abcd1234..."
+-
+-
+       parameters:
+         - name: name
+           in: path
+@@ -1130,7 +1073,6 @@
+           schema:
+             type: string
+           example: Bearer eyJhbGciOi...
+-
+       requestBody:
+         required: false
+         content:
+@@ -1141,8 +1083,7 @@
+             examples:
+               layer-upload:
+                 summary: Layer tarball blob
+-                value: "<binary data not shown>"
+-
++                value: <binary data not shown>
+       responses:
+         "201":
+           description: Upload completed successfully
+@@ -1174,7 +1115,6 @@
+           description: Requested range not satisfiable (if used in chunked mode)
+         "429":
+           description: Too many requests
+-
+     patch:
+       tags:
+         - Blobs
+@@ -1229,7 +1169,6 @@
+             type: string
+           example: bytes 0-65535
+           description: Optional. Byte range of the chunk being sent
+-
+       requestBody:
+         required: true
+         content:
+@@ -1240,8 +1179,7 @@
+             examples:
+               chunk-0:
+                 summary: Upload chunk 0 of a blob
+-                value: "<binary data not shown>"
+-
++                value: <binary data not shown>
+       responses:
+         "202":
+           description: Chunk accepted and stored
+@@ -1288,7 +1226,6 @@
+         - The client wants to clean up unused upload sessions
+ 
+         After cancellation, the UUID is no longer valid and a new `POST` must be issued to restart the upload.
+-
+       x-codeSamples:
+         - lang: Bash
+           label: cURL
+@@ -1297,7 +1234,6 @@
+             curl -X DELETE \
+               -H "Authorization: Bearer $TOKEN" \
+               https://registry-1.docker.io/v2/library/ubuntu/blobs/uploads/abc123`
+-
+       parameters:
+         - name: name
+           in: path
+@@ -1319,7 +1255,6 @@
+           schema:
+             type: string
+           example: Bearer eyJhbGciOi...
+-
+       responses:
+         "204":
+           description: Upload session cancelled successfully. No body is returned.
+@@ -1337,8 +1272,6 @@
+           description: Upload session not found
+         "429":
+           description: Too many requests
+-
+-
+ x-tagGroups:
+   - name: General
+     tags:
+@@ -1351,3 +1284,12 @@
+     tags:
+       - Manifests
+       - Blobs
++jsonSchemaDialect: https://spec.openapis.org/oas/3.1/dialect/base
++components:
++  securitySchemes:
++    registryToken:
++      type: http
++      scheme: bearer
++      description: Follow the WWW-Authenticate challenge and obtain a repository-scoped registry token. This is separate from the Hub API token exchange.
++security:
++  - registryToken: []

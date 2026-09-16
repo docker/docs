@@ -1,0 +1,4464 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/OAI/OpenAPI-Specification/refs/heads/main/schemas/v3.0/schema.yaml
+
+openapi: 3.0.3
+info:
+  title: Docker HUB API
+  version: 2-beta
+  x-logo:
+    url: https://docs.docker.com/assets/images/logo-docker-main.png
+    href: /reference
+  description: |
+    Docker Hub is a service provided by Docker for finding and sharing container images with your team.
+
+    It is the world's largest library and community for container images.
+
+    In addition to the [Docker Hub UI](https://docs.docker.com/docker-hub/) and [Docker Hub CLI tool](https://github.com/docker/hub-tool#readme) (currently experimental), Docker provides an API that allows you to interact with Docker Hub.
+
+    Browse through the Docker Hub API documentation to explore the supported endpoints.
+servers:
+  - description: Docker HUB API
+    x-audience: public
+    url: https://hub.docker.com
+tags:
+  - name: changelog
+    x-displayName: Changelog
+    description: |
+      See the [Changelog](/reference/api/hub/changelog) for a summary of changes across Docker Hub API versions.
+  - name: resources
+    x-displayName: Resources
+    description: |
+      The following resources are available to interact with the documented API:
+      - [Docker Hub CLI tool](https://github.com/docker/hub-tool#readme) (currently experimental)
+  - name: rate-limiting
+    x-displayName: Rate Limiting
+    description: |
+      The Docker Hub API is limited on the amount of requests you can perform per minute against it.
+
+      If you haven't hit the limit, each request to the API will return the following headers in the response.
+
+      - `X-RateLimit-Limit` - The limit of requests per minute.
+      - `X-RateLimit-Remaining` - The remaining amount of calls within the limit period.
+      - `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.
+
+      If you have hit the limit, you will receive a response status of `429` and the `Retry-After` header in the response.
+
+      The [`Retry-After` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) specifies the number of seconds to wait until you can call the API again.
+
+      **Note**: These rate limits are separate from anti-abuse and Docker Hub download, or pull rate limiting.
+      To learn more about Docker Hub pull rate limiting, see [Usage and limits](https://docs.docker.com/docker-hub/usage/).
+  - name: authentication
+    x-displayName: Authentication
+    description: |
+      Most Docker Hub API endpoints require you to authenticate using your Docker credentials before using them.
+
+      Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your subscription (Personal, Pro, or Team) and your account's permissions.
+
+      To learn more about the features available in each subscription and to upgrade your existing subscription, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsApiHub).
+
+      # Types
+
+      The Docker Hub API supports the following authentication types.
+
+      You must use each authentication type with the [Create access token](#tag/authentication-api/operation/AuthCreateAccessToken) route to obtain a bearer token.
+
+      ## Password
+      Using a username and password is the most powerful, yet least secure way 
+      to authenticate with Docker as a user. It allows access to resources 
+      for the user without scopes. 
+
+      _In general, it is recommended to use a personal access token (PAT) instead._
+
+      _**The password authentication type is not available if your organization has SSO enforced.**_
+
+      ## Personal Access Token (PAT)
+      Using a username and PAT is the most secure way to authenticate with 
+      Docker as a user. PATs are scoped to specific resources and scopes.
+
+      Currently, a PAT is a more secure password due to limited functionality. 
+      In the future, we may add fine-grained access like organization 
+      access tokens for enhanced usage and security.
+
+      ## Organization Access Token (OAT)
+      Organization access tokens are scoped to specific resources and scopes 
+      in an organization. They are managed by organization owners. 
+
+      These tokens are meant for automation and are not meant to be used by 
+      users.
+
+      # Labels
+
+      These labels will show up on routes in this reference that allow for use of bearer 
+      tokens issued from them.
+
+      <span class="pat"></span>
+      <span class="oat"></span>
+  - name: authentication-api
+    x-displayName: Authentication
+    description: |
+      The authentication endpoints allow you to authenticate with Docker Hub APIs.
+
+      For more information, see [Authentication](#tag/authentication).
+  - name: access-tokens
+    x-displayName: Personal Access Tokens
+    description: |
+      The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/personal-access-tokens/).
+
+      You can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.
+
+      ### Scopes
+
+      For each scope grouping (in this case "repo"), you only need to define 1 scope as any lower scopes are assumed.
+      For example: If you define `repo:write`, the API assumes the scope of both `repo:read` *and* `repo:public_read` as well.
+      If you were to define both `repo:write` *and* `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.
+
+      ***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after it is generated.***
+  - name: audit-logs
+    x-displayName: Audit Logs
+    description: |
+      The Audit Logs API endpoints allow you to query audit log events across a namespace.
+
+      For more information, see [Audit Logs](https://docs.docker.com/admin/activity-logs/).
+  - name: org-settings
+    x-displayName: Org Settings
+    description: |
+      The Org Settings API endpoints allow you to manage your organization's settings.
+  - name: repositories
+    x-displayName: Repositories
+    description: |
+      The repository endpoints allow you to access your repository's tags.
+  - name: orgs
+    x-displayName: Organizations
+    x-audience: public
+    description: |
+      The organization endpoints allow you to interact with and manage your organizations.
+
+      For more information, see [Organization administration overview](https://docs.docker.com/admin/organization/).
+  - name: groups
+    x-displayName: Groups (Teams)
+    x-audience: public
+    description: |
+      The groups endpoints allow you to manage your organization's teams and their members.
+
+      For more information, see [Create and manage a team](https://docs.docker.com/admin/organization/manage/manage-a-team/).
+  - name: invites
+    x-displayName: Invites
+    x-audience: public
+    description: |
+      The invites endpoints allow you to manage invites for users to join your Docker organization.
+
+      For more information, see [Invite members](https://docs.docker.com/admin/organization/manage/members/#invite-members).
+  - name: scim
+    x-displayName: SCIM
+    x-audience: public
+    description: |
+      SCIM is a provisioning system that lets you manage users within your identity provider (IdP).
+
+      For more information, see [System for Cross-domain Identity management](https://docs.docker.com/security/for-admins/provisioning/scim/).
+  - name: org-access-tokens
+    x-displayName: Organization Access Tokens
+    x-audience: public
+    description: |
+      The organization access token endpoints allow you to manage organization access tokens (OATs). See [Organization access tokens](https://docs.docker.com/security/for-admins/access-tokens/) for more information.
+
+      OATs only authenticate requests to the modern namespace-scoped routes under `/v2/namespaces/{namespace}/repositories/`. Legacy repository paths are OAT unsupported, regardless of the token's scopes, and reject every OAT with `403 token issued from organization access token is not allowed`:
+
+      - `GET /v2/repositories/{namespace}/{repository}` — use [Get repository](#tag/repositories/operation/GetRepository) instead.
+      - `GET /v2/repositories/{namespace}` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.
+      - `GET /v2/users/{username}/repositories` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.
+paths:
+  /v2/users/login:
+    post:
+      tags:
+        - authentication-api
+      summary: Create an authentication token
+      operationId: PostUsersLogin
+      security: []
+      deprecated: true
+      description: |
+        Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
+
+        The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
+
+        _**As of September 16, 2024, this route requires a personal access token (PAT) instead of a password if your organization has SSO enforced.**_
+
+        <div style="background-color:rgb(255, 165, 0, .25); padding:5px; border-radius:4px">
+          <strong>Deprecated</strong>: Use [<a href="#tag/authentication-api/operation/AuthCreateAccessToken">Create access token</a>] instead.
+        </div>
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsersLoginRequest"
+        description: Login details.
+        required: true
+      responses:
+        "200":
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsersLoginSuccessResponse"
+        "401":
+          description: Authentication failed or second factor required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsersLoginErrorResponse"
+  /v2/users/2fa-login:
+    post:
+      tags:
+        - authentication-api
+      summary: Second factor authentication
+      operationId: PostUsers2FALogin
+      security: []
+      description: |
+        When a user has two-factor authentication (2FA) enabled, this is the second call to perform after `/v2/users/login` call.
+
+        Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
+
+        The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
+
+        Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Users2FALoginRequest"
+        description: Login details.
+        required: true
+      responses:
+        "200":
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsersLoginSuccessResponse"
+        "401":
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsers2FALoginErrorResponse"
+  /v2/auth/token:
+    post:
+      tags:
+        - authentication-api
+      security: []
+      summary: Create access token
+      operationId: AuthCreateAccessToken
+      description: |
+        Creates and returns a short-lived access token in JWT format for use as a bearer when calling Docker APIs.
+
+        If successful, the access token returned should be used in the HTTP Authorization header like 
+        `Authorization: Bearer {access_token}`.
+
+        _**If your organization has SSO enforced, you must use a personal access token (PAT) instead of a password.**_
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Request to create access token
+              type: object
+              required:
+                - identifier
+                - secret
+              properties:
+                identifier:
+                  description: |
+                    The identifier of the account to create an access token for. If using a password or personal access token,
+                    this must be a username. If using an organization access token, this must be an organization name.
+                  type: string
+                  example: myusername
+                secret:
+                  description: |
+                    The secret of the account to create an access token for. This can be a password, personal access token, or
+                    organization access token.
+                  type: string
+                  example: dckr_pat_124509ugsdjga93
+      responses:
+        "200":
+          description: Token created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthCreateTokenResponse"
+        "401":
+          description: Authentication failed
+          $ref: "#/components/responses/unauthorized"
+  /v2/access-tokens:
+    post:
+      summary: Create personal access token
+      description: Creates and returns a personal access token.
+      tags:
+        - access-tokens
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createAccessTokenRequest"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createAccessTokensResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    get:
+      summary: List personal access tokens
+      description: Returns a paginated list of personal access tokens.
+      tags:
+        - access-tokens
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: number
+            default: 1
+        - in: query
+          name: page_size
+          schema:
+            type: number
+            default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getAccessTokensResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /v2/access-tokens/{uuid}:
+    parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+    patch:
+      summary: Update personal access token
+      description: |
+        Updates a personal access token partially. You can either update the token's label or enable/disable it.
+      tags:
+        - access-tokens
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/patchAccessTokenRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/patchAccessTokenResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    get:
+      summary: Get personal access token
+      description: Returns a personal access token by UUID.
+      tags:
+        - access-tokens
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/accessToken"
+                  - type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ""
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete personal access token
+      description: |
+        Deletes a personal access token permanently. This cannot be undone.
+      tags:
+        - access-tokens
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: A successful response.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /v2/auditlogs/{account}/actions:
+    get:
+      summary: List audit log actions
+      description: |
+        List audit log actions for a namespace to be used as a filter for querying audit log events.
+
+        <span class="oat"></span>
+      operationId: AuditLogs_ListAuditActions
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAuditActionsResponse"
+              examples:
+                response:
+                  value:
+                    actions:
+                      billing:
+                        actions:
+                          - name: plan.upgrade
+                            description: Occurs when your organization’s billing plan is upgraded to a higher tier plan.
+                            label: Plan Upgraded
+                          - name: plan.downgrade
+                            description: Occurs when your organization’s billing plan is downgraded to a lower tier plan.
+                            label: Plan Downgraded
+                          - name: plan.seat_add
+                            description: Occurs when a seat is added to your organization’s billing plan.
+                            label: Seat Added
+                          - name: plan.seat_remove
+                            description: Occurs when a seat is removed from your organization’s billing plan.
+                            label: Seat Removed
+                          - name: plan.cycle_change
+                            description: Occurs when there is a change in the recurring interval that your organization is charged.
+                            label: Billing Cycle Changed
+                          - name: plan.downgrade_cancel
+                            description: Occurs when a scheduled plan downgrade for your organization is canceled.
+                            label: Plan Downgrade Canceled
+                          - name: plan.seat_removal_cancel
+                            description: Occurs when a scheduled seat removal for an organization’s billing plan is canceled.
+                            label: Seat Removal Canceled
+                          - name: plan.upgrade.request
+                            description: Occurs when a user in your organization requests a plan upgrade.
+                            label: Plan Upgrade Requested
+                          - name: plan.downgrade.request
+                            description: Occurs when a user in your organization requests a plan downgrade.
+                            label: Plan Downgrade Requested
+                          - name: plan.seat_add.request
+                            description: Occurs when a user in your organization requests an increase in the number of seats.
+                            label: Seat Addition Requested
+                          - name: plan.seat_removal.request
+                            description: Occurs when a user in your organization requests a decrease in the number of seats.
+                            label: Seat Removal Requested
+                          - name: plan.cycle_change.request
+                            description: Occurs when a user in your organization requests a change in the billing cycle.
+                            label: Billing Cycle Change Requested
+                          - name: plan.downgrade_cancel.request
+                            description: Occurs when a user in your organization requests a cancellation of a scheduled plan downgrade.
+                            label: Plan Downgrade Cancellation Requested
+                          - name: plan.seat_removal_cancel.request
+                            description: Occurs when a user in your organization requests a cancellation of a scheduled seat removal.
+                            label: Seat Removal Cancellation Requested
+                          - name: plan.product_change
+                            description: Occurs when there is a change in the product that your organization subscribes to.
+                            label: Billing Product Changed
+                        label: Billing
+                      enterprise:
+                        actions:
+                          - name: setting.policy.create
+                            description: Details of adding an admin settings policy
+                            label: Policy created
+                          - name: setting.policy.update
+                            description: Details of updating an admin settings policy
+                            label: Policy updated
+                          - name: setting.policy.delete
+                            description: Details of deleting an admin settings policy
+                            label: Policy deleted
+                          - name: setting.policy.transfer
+                            description: Details of transferring an admin settings policy to another owner
+                            label: Policy transferred
+                          - name: sso.connection.create
+                            description: Details of creating a new org/company SSO connection
+                            label: Create SSO Connection
+                          - name: sso.connection.update
+                            description: Details of updating an existing org/company SSO connection
+                            label: Update SSO Connection
+                          - name: sso.connection.delete
+                            description: Details of deleting an existing org/company SSO connection
+                            label: Delete SSO Connection
+                          - name: sso.connection.enforcement_toggle
+                            description: Details of toggling enforcement on an existing org/company SSO connection
+                            label: Enforce SSO
+                          - name: sso.connection.scim_toggle
+                            description: Details of toggling SCIM on an existing org/company SSO connection
+                            label: Enforce SCIM
+                          - name: sso.connection.scim_token_refresh
+                            description: Details of a SCIM token refresh on an existing org/company SSO connection
+                            label: Refresh SCIM Token
+                          - name: sso.connection.connection_type_change
+                            description: Details of a connection type change on an existing org/company SSO connection
+                            label: Change SSO Connection Type
+                          - name: sso.connection.jit_toggle
+                            description: Details of a JIT toggle on an existing org/company SSO connection
+                            label: Toggle JIT provisioning
+                        label: Enterprise
+                      offload:
+                        actions:
+                          - name: lease.start
+                            description: Details of the started Offload lease.
+                            label: Offload lease start
+                          - name: lease.end
+                            description: Details of the ended Offload lease.
+                            label: Offload lease end
+                        label: Offload
+                      oidc:
+                        actions:
+                          - name: connection.create
+                            description: Details of creating an OIDC connection.
+                            label: OIDC connection created
+                          - name: connection.update
+                            description: Details of updating an OIDC connection.
+                            label: OIDC connection updated
+                          - name: connection.delete
+                            description: Details of deleting an OIDC connection.
+                            label: OIDC connection deleted
+                        label: OIDC
+                      org:
+                        actions:
+                          - name: create
+                            description: Activities related to the creation of a new organization
+                            label: Organization Created
+                          - name: member.add
+                            description: Details of the member added to your organization
+                            label: Organization Member Added
+                          - name: member.remove
+                            description: Details about the member removed from your organization
+                            label: Organization Member Removed
+                          - name: member.role.change
+                            description: Details about the role changed for a member in your organization
+                            label: Member Role Changed
+                          - name: member.invite.send
+                            description: Details of the member invited to your organization
+                            label: Org Member Invited
+                          - name: team.create
+                            description: Activities related to the creation of a team
+                            label: Organization Created
+                          - name: team.update
+                            description: Activities related to the modification of a team
+                            label: Organization Deleted
+                          - name: team.delete
+                            description: Activities related to the deletion of a team
+                            label: Organization Deleted
+                          - name: team.member.add
+                            description: Details of the member added to your team
+                            label: Team Member Added
+                          - name: team.member.remove
+                            description: Details of the member removed from your team
+                            label: Team Member Removed
+                          - name: domain.create
+                            description: Details of the single sign-on domain added to your organization
+                            label: Single Sign-On domain added
+                          - name: domain.verify
+                            description: Details of the single sign-on domain verified for your organization
+                            label: Single Sign-On domain verified
+                          - name: domain.delete
+                            description: Details of the single sign-on domain removed from your organization
+                            label: Single Sign-On domain deleted
+                          - name: domain.auto-provisioning.toggle
+                            description: Details of toggling the Auto-Provisioning feature on a domain on or off
+                            label: Organization Auto-Provisioning Toggled
+                          - name: settings.update
+                            description: Details related to the organization setting that was updated
+                            label: Organization Settings Updated
+                          - name: registry_access.enabled
+                            description: Activities related to enabling Registry Access Management
+                            label: Registry Access Management enabled
+                          - name: registry_access.disabled
+                            description: Activities related to disabling Registry Access Management
+                            label: Registry Access Management disabled
+                          - name: registry_access.registry_added
+                            description: Activities related to the addition of a registry
+                            label: Registry Access Management registry added
+                          - name: registry_access.registry_updated
+                            description: Details related to the registry that was updated
+                            label: Registry Access Management registry updated
+                          - name: registry_access.registry_removed
+                            description: Activities related to the removal of a registry
+                            label: Registry Access Management registry removed
+                          - name: access_token.create
+                            description: Access token created in organization
+                            label: Access token created
+                          - name: access_token.update
+                            description: Access token updated in organization
+                            label: Access token updated
+                          - name: access_token.delete
+                            description: Access token deleted in organization
+                            label: Access token deleted
+                          - name: customrole.create
+                            description: A custom role was created
+                            label: Custom role created
+                          - name: customrole.update
+                            description: An existing custom role was updated
+                            label: Custom role updated
+                          - name: customrole.delete
+                            description: A custom role was deleted
+                            label: Custom role deleted
+                          - name: securepolicyconfigure.create
+                            description: A secure policy configuration was created
+                            label: Secure Policy Configuration created
+                          - name: securepolicyconfigure.update
+                            description: A secure policy configuration was updated
+                            label: Secure Policy Configuration updated
+                          - name: securepolicyconfigure.delete
+                            description: A secure policy configuration was deleted
+                            label: Secure Policy Configuration deleted
+                          - name: securepolicyclient.create
+                            description: A secure policy client was created
+                            label: Secure Policy Client created
+                          - name: securepolicyclient.update
+                            description: A secure policy client was updated
+                            label: Secure Policy Client updated
+                          - name: securepolicyclient.delete
+                            description: A secure policy client was deleted
+                            label: Secure Policy Client deleted
+                          - name: securepolicyprofile.create
+                            description: A secure policy profile was created
+                            label: Secure Policy Profile created
+                          - name: securepolicyprofile.update
+                            description: A secure policy profile was updated
+                            label: Secure Policy Profile updated
+                          - name: securepolicyprofile.delete
+                            description: A secure policy profile was deleted
+                            label: Secure Policy Profile deleted
+                        label: Organization
+                      repo:
+                        actions:
+                          - name: create
+                            description: Activities related to the creation of a new repository
+                            label: Repository Created
+                          - name: update
+                            description: Activities related to the modification of a repository
+                            label: Repository Updated
+                          - name: delete
+                            description: Activities related to the deletion of a repository
+                            label: Repository Deleted
+                          - name: change_privacy
+                            description: Details related to the privacy policies that were updated
+                            label: Privacy Changed
+                          - name: category.updated
+                            description: Details related to updating a repository categories
+                            label: Categories updated
+                          - name: immutable.tags.updated
+                            description: Details related to updating tag immutability of a repository
+                            label: Tag immutability updated
+                          - name: tag.push
+                            description: Activities related to the tags pushed
+                            label: Tag Pushed
+                          - name: tag.delete
+                            description: Activities related to the tags deleted
+                            label: Tag Deleted
+                        label: Repository
+        "429":
+          description: ""
+          content:
+            application/json:
+              schema: {}
+              examples:
+                response:
+                  value:
+                    detail: Rate limit exceeded
+                    error: false
+        "500":
+          description: ""
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/rpcStatus"
+      parameters:
+        - name: account
+          description: Namespace to query audit log actions for.
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - audit-logs
+  /v2/auditlogs/{account}:
+    get:
+      summary: List audit log events
+      description: |
+        List audit log events for a given namespace.
+
+        <span class="oat"></span>
+      operationId: AuditLogs_ListAuditLogs
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAuditLogsResponse"
+              examples:
+                response:
+                  value:
+                    logs:
+                      - account: docker
+                        action: repo.tag.push
+                        name: docker/example
+                        actor: docker
+                        data:
+                          digest: sha256:c1ae9c435032a276f80220c7d9b40f76266bbe79243d34f9cda30b76fe114dfa
+                          tag: latest
+                        timestamp: "2021-02-19T01:34:35Z"
+                        action_description: |
+                          pushed the tag latest with the digest sha256:c1ae9c435032a to the repository docker/example
+                      - account: docker
+                        action: offload.lease.end
+                        name: docker
+                        actor: docker
+                        data:
+                          lease_id: l_3EgPuRCjtUqT279CFPOQWcO8zOf
+                          resource_type: run_4cpu_8mem
+                          started_at: "2026-06-04T18:24:21Z"
+                          updated_at: "2026-06-04T18:36:43Z"
+                          org_id: b908ca6e-b9a9-4a53-a9a5-6bec96f72432
+                          user_id: ecae6747-e42c-43cb-925d-cfce1ab32b02
+                        timestamp: "2026-06-04T18:36:43Z"
+                        action_description: "offload lease 'l_3EgPuRCjtUqT279CFPOQWcO8zOf' ended, ran for '12m22s'"
+        "429":
+          description: ""
+          content:
+            application/json:
+              schema: {}
+              examples:
+                response:
+                  value:
+                    detail: Rate limit exceeded
+                    error: false
+        "500":
+          description: ""
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/rpcStatus"
+      parameters:
+        - name: account
+          description: Namespace to query audit logs for.
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: action
+          description: |
+            action name one of ["repo.tag.push", ...]. Optional parameter to filter specific audit log actions.
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: name
+          description: |
+            name. Optional parameter to filter audit log events to a specific name. For repository events, this is the name of the repository. For organization events, this is the name of the organization. For team member events, this is the username of the team member.
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: actor
+          description: |
+            actor name. Optional parameter to filter audit log events to the specific user who triggered the event.
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: from
+          description: Start of the time window you wish to query audit events for.
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          description: End of the time window you wish to query audit events for.
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: page
+          description: page - specify page number. Page number to get.
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: page_size
+          description: page_size - specify page size. Number of events to return per page.
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 25
+      tags:
+        - audit-logs
+  /v2/orgs/{name}/settings:
+    parameters:
+      - in: path
+        name: name
+        description: Name of the organization.
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get organization settings
+      description: |
+        Returns organization settings by name.
+      tags:
+        - org-settings
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/orgSettings"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update organization settings
+      description: |
+        Updates an organization's settings. Some settings are only used when the organization is on a business subscription.
+
+        ***Only users with administrative privileges for the organization (owner role) can modify these settings.***
+
+        The following settings are only used on a business subscription:
+        - `restricted_images`
+      tags:
+        - org-settings
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - restricted_images
+              properties:
+                restricted_images:
+                  allOf:
+                    - $ref: "#/components/schemas/restricted_images"
+                    - type: object
+                      required:
+                        - enabled
+                        - allow_official_images
+                        - allow_verified_publishers
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/orgSettings"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /v2/orgs/{name}/access-tokens:
+    post:
+      summary: Create access token
+      description: |
+        Create an access token for an organization.
+      tags:
+        - org-access-tokens
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createOrgAccessTokenRequest"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createOrgAccessTokenResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    get:
+      summary: List access tokens
+      description: |
+        List access tokens for an organization.
+      tags:
+        - org-access-tokens
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: number
+            default: 1
+        - in: query
+          name: page_size
+          schema:
+            type: number
+            default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getOrgAccessTokensResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /v2/orgs/{org_name}/access-tokens/{access_token_id}:
+    parameters:
+      - $ref: "#/components/parameters/org_name"
+      - in: path
+        name: access_token_id
+        required: true
+        schema:
+          type: string
+        description: The ID of the access token to retrieve
+        example: "a7a5ef25-8889-43a0-8cc7-f2a94268e861"
+    get:
+      summary: Get access token
+      description: |
+        Get details of a specific access token for an organization.
+      tags:
+        - org-access-tokens
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getOrgAccessTokenResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    patch:
+      summary: Update access token
+      description: |
+        Update a specific access token for an organization.
+      tags:
+        - org-access-tokens
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/updateOrgAccessTokenRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/updateOrgAccessTokenResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete access token
+      description: |
+        Delete a specific access token for an organization. This action cannot be undone.
+      tags:
+        - org-access-tokens
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Access token deleted successfully
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /v2/namespaces/{namespace}/repositories/{repository}/tags:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    get:
+      operationId: ListRepositoryTags
+      summary: List repository tags
+      description: |
+        Returns the list of tags for the specified repository.
+
+        <span class="oat"></span>
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+          description: Page number to get. Defaults to 1.
+        - in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+          description: Number of items to get per page. Defaults to 10. Max of 100.
+      responses:
+        "200":
+          $ref: "#/components/responses/list_tags"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    head:
+      summary: Check repository tags
+      description: |
+        Checks whether the repository has any tags.
+
+        <span class="oat"></span>
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Repository contains tags
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /v2/namespaces/{namespace}/repositories/{repository}/tags/{tag}:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+      - $ref: "#/components/parameters/tag"
+    get:
+      operationId: GetRepositoryTag
+      summary: Read repository tag
+      description: |
+        Returns details for a specific tag in the specified repository.
+
+        <span class="oat"></span>
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          $ref: "#/components/responses/get_tag"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    head:
+      summary: Check repository tag
+      description: |
+        Checks whether the specified tag exists in the repository.
+
+        <span class="oat"></span>
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Repository tag exists
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /v2/namespaces/{namespace}/repositories/{repository}/immutabletags:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    patch:
+      operationId: UpdateRepositoryImmutableTags
+      summary: "Update repository immutable tags"
+      description: |
+        Updates the immutable tags configuration for this repository.
+
+        **Only users with administrative privileges for the repository can modify these settings.**
+
+        <span class="oat"></span>
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/update_repository_immutable_tags_request"
+      responses:
+        200:
+          $ref: "#/components/responses/update_repository_immutable_tags_response"
+        400:
+          $ref: "#/components/responses/bad_request"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+  /v2/namespaces/{namespace}/repositories/{repository}/immutabletags/verify:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    post:
+      operationId: VerifyRepositoryImmutableTags
+      summary: "Verify repository immutable tags"
+      description: |
+        Validates the immutable tags regex passed in the request body and returns a list of tags matching it in this repository.
+
+        **Only users with administrative privileges for the repository can call this endpoint.**
+
+        <span class="oat"></span>
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/immutable_tags_verify_request"
+      responses:
+        200:
+          $ref: "#/components/responses/immutable_tags_verify_response"
+        400:
+          $ref: "#/components/responses/bad_request"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+  /v2/repositories/{namespace}/{repository}/groups:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    post:
+      summary: Assign a group (Team) to a repository for access
+      description: |
+        Assigns an organization group (team) to a repository with a specified permission level.
+
+        <span class="oat"></span>
+      tags:
+        - repositories
+      operationId: CreateRepositoryGroup
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RepositoryGroupCreationRequest"
+            example:
+              group_id: 12345
+              permission: "write"
+      responses:
+        "200":
+          description: Repository group permission created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RepositoryGroup"
+              example:
+                group_name: "developers"
+                permission: "write"
+                group_id: 12345
+        "400":
+          description: Bad Request - Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /v2/namespaces/{namespace}/repositories:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+    get:
+      operationId: listNamespaceRepositories
+      summary: List repositories in a namespace
+      description: |
+        Returns a list of repositories within the specified namespace (organization or user).
+
+        Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+
+        <span class="oat"></span>
+
+        **OAT listing behavior**: an OAT with the `scope-repository-list` scope sees all repositories including private ones. An OAT without that scope only sees public repositories. This filtering is silent: the response is a normal `200` with no indication that private repositories were withheld.
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+        - {} # Allow anonymous access for public repositories
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Page number to get. Defaults to 1.
+        - in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+          description: Number of repositories to get per page. Defaults to 10. Max of 100.
+        - in: query
+          name: name
+          required: false
+          schema:
+            type: string
+          description: Filter repositories by name (partial match).
+        - in: query
+          name: ordering
+          required: false
+          schema:
+            type: string
+            enum:
+              - name
+              - -name
+              - last_updated
+              - -last_updated
+              - pull_count
+              - -pull_count
+          description: |
+            Order repositories by the specified field. Prefix with '-' for descending order.
+            Available options:
+            - `name` / `-name`: Repository name (ascending/descending)
+            - `last_updated` / `-last_updated`: Last update time (ascending/descending)
+            - `pull_count` / `-pull_count`: Number of pulls (ascending/descending)
+      responses:
+        "200":
+          description: List of repositories
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/list_repositories_response"
+              examples:
+                repositories_list:
+                  value:
+                    count: 287
+                    next: "https://hub.docker.com/v2/namespaces/docker/repositories?page=2&page_size=2"
+                    previous: null
+                    results:
+                      - name: "highland_builder"
+                        namespace: "docker"
+                        repository_type: "image"
+                        status: 1
+                        status_description: "active"
+                        description: "Image for performing Docker build requests"
+                        is_private: false
+                        star_count: 7
+                        pull_count: 15722123
+                        last_updated: "2023-06-20T10:44:45.459826Z"
+                        last_modified: "2024-10-16T13:48:34.145251Z"
+                        date_registered: "2015-05-19T21:13:35.937763Z"
+                        affiliation: ""
+                        media_types:
+                          - "application/octet-stream"
+                          - "application/vnd.docker.container.image.v1+json"
+                          - "application/vnd.docker.distribution.manifest.v1+prettyjws"
+                        content_types:
+                          - "unrecognized"
+                          - "image"
+                        categories:
+                          - name: "Languages & frameworks"
+                            slug: "languages-and-frameworks"
+                          - name: "Integration & delivery"
+                            slug: "integration-and-delivery"
+                          - name: "Operating systems"
+                            slug: "operating-systems"
+                        storage_size: 488723114800
+                      - name: "whalesay"
+                        namespace: "docker"
+                        repository_type: null
+                        status: 1
+                        status_description: "active"
+                        description: "An image for use in the Docker demo tutorial"
+                        is_private: false
+                        star_count: 757
+                        pull_count: 130737682
+                        last_updated: "2015-06-19T19:06:27.388123Z"
+                        last_modified: "2024-10-16T13:48:34.145251Z"
+                        date_registered: "2015-06-09T18:16:36.527329Z"
+                        affiliation: ""
+                        media_types:
+                          - "application/vnd.docker.distribution.manifest.v1+prettyjws"
+                        content_types:
+                          - "image"
+                        categories:
+                          - name: "Languages & frameworks"
+                            slug: "languages-and-frameworks"
+                          - name: "Integration & delivery"
+                            slug: "integration-and-delivery"
+                        storage_size: 103666708
+        "400":
+          description: Bad Request - Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+              examples:
+                invalid_ordering:
+                  summary: Invalid ordering value
+                  value:
+                    fields:
+                      ordering:
+                        [
+                          "Invalid ordering value. Must be one of: name, -name, last_updated, -last_updated, pull_count, -pull_count",
+                        ]
+                    text: "Invalid ordering value"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          description: Page not found - occurs when requesting a page number `>1` that exceeds the available results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+    post:
+      summary: Create a new repository
+      description: |
+        Creates a new repository within the specified namespace. The repository will be created
+        with the provided metadata including name, description, and privacy settings.
+
+        <span class="oat"></span>
+      operationId: CreateRepository
+      tags:
+        - repositories
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/repo_creation_request"
+            example:
+              name: "my-app"
+              namespace: "myorganization"
+              description: "A sample application repository"
+              full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+              registry: "docker.io"
+              is_private: false
+      responses:
+        201:
+          description: Repository created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/repository_info"
+              example:
+                name: "my-app"
+                namespace: "myorganization"
+                repository_type: "image"
+                status: 1
+                status_description: "Active"
+                description: "A sample application repository"
+                is_private: false
+                is_automated: false
+                star_count: 0
+                pull_count: 0
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
+                collaborator_count: 0
+                hub_user: "myorganization"
+                has_starred: false
+                full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+                media_types: []
+                content_types: []
+                categories: []
+                immutable_tags_settings:
+                  enabled: false
+                  rules: []
+                storage_size: null
+                source: null
+        400:
+          $ref: "#/components/responses/bad_request"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+        500:
+          $ref: "#/components/responses/internal_error"
+  /v2/namespaces/{namespace}/repositories/{repository}:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    get:
+      operationId: GetRepository
+      summary: Get repository in a namespace
+      description: |
+        Returns a repository within the specified namespace (organization or user).
+
+        Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+
+        <span class="oat"></span>
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+        - {} # Allow anonymous access for public repositories
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/repository_info"
+              example:
+                name: "my-app"
+                namespace: "myorganization"
+                repository_type: "image"
+                status: 1
+                status_description: "Active"
+                description: "A sample application repository"
+                is_private: false
+                is_automated: false
+                star_count: 0
+                pull_count: 0
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
+                collaborator_count: 0
+                hub_user: "myorganization"
+                has_starred: false
+                full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+                media_types: []
+                content_types: []
+                categories: []
+                immutable_tags_settings:
+                  enabled: false
+                  rules: []
+                storage_size: null
+                source: null
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+        500:
+          $ref: "#/components/responses/internal_error"
+    head:
+      operationId: CheckRepository
+      summary: Check repository in a namespace
+      description: |
+        Check a repository within the specified namespace (organization or user).
+
+        Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+
+        <span class="oat"></span>
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+        - {} # Allow anonymous access for public repositories
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/repository_info"
+              example:
+                name: "my-app"
+                namespace: "myorganization"
+                repository_type: "image"
+                status: 1
+                status_description: "Active"
+                description: "A sample application repository"
+                is_private: false
+                is_automated: false
+                star_count: 0
+                pull_count: 0
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
+                collaborator_count: 0
+                hub_user: "myorganization"
+                has_starred: false
+                full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+                media_types: []
+                content_types: []
+                categories: []
+                immutable_tags_settings:
+                  enabled: false
+                  rules: []
+                storage_size: null
+                source: null
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+        500:
+          $ref: "#/components/responses/internal_error"
+  /v2/orgs/{org_name}/members:
+    parameters:
+      - $ref: "#/components/parameters/org_name"
+      - $ref: "#/components/parameters/search"
+      - $ref: "#/components/parameters/page"
+      - $ref: "#/components/parameters/page_size"
+      - $ref: "#/components/parameters/invites"
+      - $ref: "#/components/parameters/type"
+      - $ref: "#/components/parameters/role"
+    get:
+      summary: List org members
+      description: |
+        Returns a list of members for an organization.
+
+        _The following fields are only visible to orgs with insights enabled._
+
+        - `last_logged_in_at`
+        - `last_seen_at`
+        - `last_desktop_version`
+
+        To make visible, please see [View Insights for organization users](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
+
+        <span class="oat"></span>
+      tags:
+        - orgs
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/org_member_paginated"
+        "400":
+          $ref: "#/components/responses/bad_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+  /v2/orgs/{org_name}/members/export:
+    parameters:
+      - $ref: "#/components/parameters/org_name"
+    get:
+      summary: Export org members CSV
+      description: |
+        Export members of an organization as a CSV
+
+        <span class="oat"></span>
+      tags:
+        - orgs
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Exported members
+          content:
+            text/csv:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - Name
+                    - Username
+                    - Email
+                    - Type
+                    - Role
+                    - Date Joined
+                  properties:
+                    Name:
+                      type: string
+                      description: First and last name of the member
+                    Username:
+                      type: string
+                      description: Username of the member
+                    Email:
+                      type: string
+                      description: Email address of the member
+                    Type:
+                      type: string
+                      description: Type of the member
+                      enum:
+                        - Invitee
+                        - User
+                    Permission:
+                      type: string
+                      description: Permission of the member
+                      enum:
+                        - Owner
+                        - Member
+                    Teams:
+                      type: string
+                      description: Comma-separated list of teams the member is part of
+                      example: team-1, team-2
+                    Date Joined:
+                      type: string
+                      description: Date the member joined the organization
+                      example: 2020-01-01 15:00:51.193355 +0000 UTC
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+              example: attachment;filename="{org_name}-members-{timestamp}.csv"
+        "400":
+          $ref: "#/components/responses/bad_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+  /v2/orgs/{org_name}/members/{username}:
+    x-audience: public
+    parameters:
+      - $ref: "#/components/parameters/org_name"
+      - $ref: "#/components/parameters/username"
+    put:
+      summary: Update org member (role)
+      description: |
+        Updates the role of a member in the organization.
+        ***Only users in the "owners" group of the organization can use this endpoint.***
+
+        <span class="oat"></span>
+      tags:
+        - orgs
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - role
+              properties:
+                role:
+                  type: string
+                  description: |
+                    Role of the member. Valid values are the core roles
+                    `owner`, `editor`, and `member`, or the name of an
+                    existing [custom role](https://docs.docker.com/enterprise/security/roles-and-permissions/custom-roles/manage/).
+                    Use the custom role's name identifier, not its label or UUID.
+                  example: owner
+      responses:
+        "200":
+          description: Member role updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/org_member"
+        "400":
+          $ref: "#/components/responses/bad_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+    delete:
+      summary: Remove member from org
+      description: |
+        Removes the member from the org, ie. all groups in the org, unless they're the last owner
+
+        <span class="oat"></span>
+      tags:
+        - orgs
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Member removed successfully
+        "400":
+          $ref: "#/components/responses/bad_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+  /v2/orgs/{org_name}/invites:
+    x-audience: public
+    parameters:
+      - $ref: "#/components/parameters/org_name"
+    get:
+      summary: List org invites
+      description: |
+        Return all pending invites for a given org, only team owners can call this endpoint
+
+        <span class="oat"></span>
+      tags:
+        - invites
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/invite"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+  /v2/orgs/{org_name}/groups:
+    x-audience: public
+    parameters:
+      - $ref: "#/components/parameters/org_name"
+    get:
+      summary: Get groups of an organization
+      description: |
+        <span class="oat"></span>
+      tags:
+        - groups
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/page_size"
+        - in: query
+          name: username
+          schema:
+            type: string
+          description: Get groups for the specified username in the organization.
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Get groups for the specified group in the organization.
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: number
+                    example: 1
+                  next:
+                    type: string
+                    example: null
+                  previous:
+                    type: string
+                    example: null
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/org_group"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+    post:
+      summary: Create a new group
+      description: |
+        Create a new group within an organization.
+
+        <span class="oat"></span>
+      tags:
+        - groups
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "201":
+          description: Group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/org_group"
+        "400":
+          $ref: "#/components/responses/bad_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+  /v2/orgs/{org_name}/groups/{group_name}:
+    x-audience: public
+    parameters:
+      - $ref: "#/components/parameters/org_name"
+      - $ref: "#/components/parameters/group_name"
+    get:
+      summary: Get a group of an organization
+      description: |
+        <span class="oat"></span>
+      tags:
+        - groups
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/org_group"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+    put:
+      summary: Update the details for an organization group
+      description: |
+        <span class="oat"></span>
+      tags:
+        - groups
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/org_group"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+    patch:
+      summary: Update some details for an organization group
+      description: |
+        <span class="oat"></span>
+      tags:
+        - groups
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                role:
+                  type: string
+                  description: |
+                    Role assigned to the team. Valid values are the core roles
+                    `owner`, `editor`, and `member`, or the name of an
+                    existing [custom role](https://docs.docker.com/enterprise/security/roles-and-permissions/custom-roles/manage/).
+                    Use the custom role's name identifier, not its label or UUID.
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/org_group"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+    delete:
+      summary: Delete an organization group
+      description: |
+        <span class="oat"></span>
+      tags:
+        - groups
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Group deleted successfully
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+  /v2/orgs/{org_name}/groups/{group_name}/members:
+    x-audience: public
+    get:
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_name"
+        - $ref: "#/components/parameters/group_name"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/page_size"
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Search members by username, full_name or email.
+      summary: List members of a group
+      description: |
+        List the members (users) that are in a group.
+        If user is owner of the org or has otherwise elevated permissions, they can search by email and the result will also contain emails.
+
+        <span class="oat"></span>
+      tags:
+        - groups
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: number
+                    example: 1
+                  next:
+                    type: string
+                    example: null
+                  previous:
+                    type: string
+                    example: null
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/group_member"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+    post:
+      parameters:
+        - $ref: "#/components/parameters/org_name"
+        - $ref: "#/components/parameters/group_name"
+      summary: Add a member to a group
+      description: |
+        <span class="oat"></span>
+      tags:
+        - groups
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/add_member_to_org_group"
+      responses:
+        "200":
+          description: OK
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+        "500":
+          $ref: "#/components/responses/internal_error"
+  /v2/orgs/{org_name}/groups/{group_name}/members/{username}:
+    x-audience: public
+    parameters:
+      - $ref: "#/components/parameters/org_name"
+      - $ref: "#/components/parameters/group_name"
+      - $ref: "#/components/parameters/username"
+    delete:
+      summary: Remove a user from a group
+      description: |
+        <span class="oat"></span>
+      tags:
+        - groups
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: User removed successfully
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+  /v2/invites/{id}:
+    x-audience: public
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    delete:
+      summary: Cancel an invite
+      description: |
+        Mark the invite as cancelled so it doesn't show up on the list of pending invites
+
+        <span class="oat"></span>
+      tags:
+        - invites
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: ""
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+  /v2/invites/{id}/resend:
+    x-audience: public
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+    patch:
+      summary: Resend an invite
+      description: |
+        Resend a pending invite to the user, any org owner can resend an invite
+
+        <span class="oat"></span>
+      tags:
+        - invites
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: ""
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+  /v2/invites/bulk:
+    x-audience: public
+    parameters:
+      - $ref: "#/components/parameters/bulk_invite"
+    post:
+      summary: Bulk create invites
+      description: |
+        Create multiple invites by emails or DockerIDs. Only a team owner can create invites.
+
+        <span class="oat"></span>
+      tags:
+        - invites
+      requestBody:
+        $ref: "#/components/requestBodies/bulk_invite_request"
+      security:
+        - bearerAuth: []
+      responses:
+        "202":
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invitees:
+                    $ref: "#/components/schemas/bulk_invite"
+        "400":
+          $ref: "#/components/responses/bad_request"
+        "409":
+          $ref: "#/components/responses/conflict"
+  /v2/scim/2.0/ServiceProviderConfig:
+    x-audience: public
+    get:
+      summary: Get service provider config
+      description: |
+        Returns a service provider config for Docker's configuration.
+      tags:
+        - scim
+      security:
+        - bearerSCIMAuth: []
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_service_provider_config_resp"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "500":
+          $ref: "#/components/responses/scim_error"
+  /v2/scim/2.0/ResourceTypes:
+    x-audience: public
+    get:
+      summary: List resource types
+      description: |
+        Returns all resource types supported for the SCIM configuration.
+      tags:
+        - scim
+      security:
+        - bearerSCIMAuth: []
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_resource_types_resp"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "500":
+          $ref: "#/components/responses/scim_error"
+  /v2/scim/2.0/ResourceTypes/{name}:
+    x-audience: public
+    get:
+      summary: Get a resource type
+      description: |
+        Returns a resource type by name.
+      tags:
+        - scim
+      parameters:
+        - name: name
+          in: path
+          schema:
+            type: string
+          example: User
+          required: true
+      security:
+        - bearerSCIMAuth: []
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_resource_type_resp"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "500":
+          $ref: "#/components/responses/scim_error"
+  /v2/scim/2.0/Schemas:
+    x-audience: public
+    get:
+      summary: List schemas
+      description: |
+        Returns all schemas supported for the SCIM configuration.
+      tags:
+        - scim
+      security:
+        - bearerSCIMAuth: []
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_schemas_resp"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "500":
+          $ref: "#/components/responses/scim_error"
+  /v2/scim/2.0/Schemas/{id}:
+    x-audience: public
+    get:
+      summary: Get a schema
+      description: |
+        Returns a schema by ID.
+      tags:
+        - scim
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          example: urn:ietf:params:scim:schemas:core:2.0:User
+          required: true
+      security:
+        - bearerSCIMAuth: []
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_schema_resp"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "500":
+          $ref: "#/components/responses/scim_error"
+  /v2/scim/2.0/Users:
+    x-audience: public
+    get:
+      summary: List users
+      description: |
+        Returns paginated users for an organization. Use `startIndex` and `count` query parameters to receive paginated results.
+
+        **Sorting:**
+
+        Sorting allows you to specify the order in which resources are returned by specifying a combination of `sortBy` and `sortOrder` query parameters.
+
+        The `sortBy` parameter specifies the attribute whose value will be used to order the returned responses. The `sortOrder` parameter defines the order in which the `sortBy` parameter is applied. Allowed values are "ascending" and "descending".
+
+        **Filtering:**
+
+        You can request a subset of resources by specifying the `filter` query parameter containing a filter expression. Attribute names and attribute operators used in filters are case insensitive. The filter parameter must contain at least one valid expression. Each expression must contain an attribute name followed by an attribute operator and an optional value.
+
+        Supported operators are listed below.
+
+        - `eq` equal
+        - `ne` not equal
+        - `co` contains
+        - `sw` starts with
+        - `and` Logical "and"
+        - `or` Logical "or"
+        - `not` "Not" function
+        - `()` Precedence grouping
+      tags:
+        - scim
+      security:
+        - bearerSCIMAuth: []
+      parameters:
+        - name: startIndex
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ""
+          example: 1
+        - name: count
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+          description: ""
+          example: 10
+        - name: filter
+          in: query
+          schema:
+            type: string
+          description: ""
+          example: userName eq "jon.snow@docker.com"
+        - $ref: "#/components/parameters/scim_attributes"
+        - name: sortOrder
+          in: query
+          schema:
+            type: string
+            enum:
+              - ascending
+              - descending
+        - name: sortBy
+          in: query
+          schema:
+            type: string
+          description: User attribute to sort by.
+          example: userName
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_users_resp"
+        "400":
+          $ref: "#/components/responses/scim_bad_request"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "403":
+          $ref: "#/components/responses/scim_forbidden"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "500":
+          $ref: "#/components/responses/scim_error"
+    post:
+      summary: Create user
+      description: |
+        Creates a user. If the user already exists by email, they are assigned to the organization on the "company" team.
+      tags:
+        - scim
+      security:
+        - bearerSCIMAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/scim_create_user_request"
+      responses:
+        "201":
+          $ref: "#/components/responses/scim_create_user_resp"
+        "400":
+          $ref: "#/components/responses/scim_bad_request"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "403":
+          $ref: "#/components/responses/scim_forbidden"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "409":
+          $ref: "#/components/responses/scim_conflict"
+        "500":
+          $ref: "#/components/responses/scim_error"
+  /v2/scim/2.0/Users/{id}:
+    x-audience: public
+    parameters:
+      - $ref: "#/components/parameters/scim_user_id"
+    get:
+      summary: Get a user
+      description: |
+        Returns a user by ID.
+      tags:
+        - scim
+      security:
+        - bearerSCIMAuth: []
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_get_user_resp"
+        "400":
+          $ref: "#/components/responses/scim_bad_request"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "403":
+          $ref: "#/components/responses/scim_forbidden"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "500":
+          $ref: "#/components/responses/scim_error"
+    put:
+      summary: Update a user
+      description: |
+        Updates a user. This route is used to change the user's name, activate, and deactivate the user.
+      tags:
+        - scim
+      security:
+        - bearerSCIMAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/scim_update_user_request"
+      responses:
+        "200":
+          $ref: "#/components/responses/scim_update_user_resp"
+        "400":
+          $ref: "#/components/responses/scim_bad_request"
+        "401":
+          $ref: "#/components/responses/scim_unauthorized"
+        "403":
+          $ref: "#/components/responses/scim_forbidden"
+        "404":
+          $ref: "#/components/responses/scim_not_found"
+        "409":
+          $ref: "#/components/responses/scim_conflict"
+        "500":
+          $ref: "#/components/responses/scim_error"
+components:
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ValueError"
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    list_tags:
+      description: list repository tags
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/paginated_tags"
+    get_tag:
+      description: repository tag
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/tag"
+    bad_request:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/error"
+    unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/error"
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/error"
+    not_found:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/error"
+    conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/error"
+    internal_error:
+      description: Internal
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/error"
+    scim_bad_request:
+      description: Bad Request
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  status:
+                    example: "400"
+                  scimType:
+                    type: string
+                    description: Some types of errors will return this per the specification.
+    scim_unauthorized:
+      description: Unauthorized
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  status:
+                    example: "401"
+    scim_forbidden:
+      description: Forbidden
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  status:
+                    example: "403"
+    scim_not_found:
+      description: Not Found
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  status:
+                    example: "404"
+    scim_conflict:
+      description: Conflict
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  status:
+                    example: "409"
+    scim_error:
+      description: Internal Error
+      content:
+        application/scim+json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/scim_error"
+              - properties:
+                  status:
+                    example: "500"
+    scim_get_service_provider_config_resp:
+      description: ""
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_service_provider_config"
+    scim_get_resource_types_resp:
+      description: ""
+      content:
+        application/scim+json:
+          schema:
+            type: object
+            properties:
+              schemas:
+                type: array
+                items:
+                  type: string
+                  example: urn:ietf:params:scim:api:messages:2.0:ListResponse
+              totalResults:
+                type: integer
+                example: 1
+              resources:
+                type: array
+                items:
+                  $ref: "#/components/schemas/scim_resource_type"
+    scim_get_resource_type_resp:
+      description: ""
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_resource_type"
+    scim_get_schemas_resp:
+      description: ""
+      content:
+        application/scim+json:
+          schema:
+            type: object
+            properties:
+              schemas:
+                type: array
+                items:
+                  type: string
+                  example: urn:ietf:params:scim:api:messages:2.0:ListResponse
+              totalResults:
+                type: integer
+                example: 1
+              resources:
+                type: array
+                items:
+                  $ref: "#/components/schemas/scim_schema"
+    scim_get_schema_resp:
+      description: ""
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_schema"
+    scim_get_users_resp:
+      description: ""
+      content:
+        application/scim+json:
+          schema:
+            type: object
+            properties:
+              schemas:
+                type: array
+                items:
+                  type: string
+                example:
+                  - urn:ietf:params:scim:api:messages:2.0:ListResponse
+              totalResults:
+                type: integer
+                example: 1
+              startIndex:
+                type: integer
+                example: 1
+              itemsPerPage:
+                type: integer
+                example: 10
+              resources:
+                type: array
+                items:
+                  $ref: "#/components/schemas/scim_user"
+    scim_create_user_resp:
+      description: ""
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_user"
+    scim_get_user_resp:
+      description: ""
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_user"
+    scim_update_user_resp:
+      description: ""
+      content:
+        application/scim+json:
+          schema:
+            $ref: "#/components/schemas/scim_user"
+    update_repository_immutable_tags_response:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/repository_info"
+    immutable_tags_verify_response:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/immutable_tags_verify_response"
+  schemas:
+    update_repository_immutable_tags_request:
+      type: object
+      properties:
+        immutable_tags:
+          type: boolean
+          description: Whether immutable tags are enabled
+        immutable_tags_rules:
+          type: array
+          items:
+            type: string
+          description: List of immutable tag rules
+          example:
+            - "v.*"
+            - ".*-RELEASE"
+      required:
+        - immutable_tags
+        - immutable_tags_rules
+    repo_creation_request:
+      type: object
+      required:
+        - name
+        - namespace
+      properties:
+        name:
+          type: string
+          description: |
+            The name of the repository. Must be 2-255 characters long and may only include 
+            alphanumeric characters, periods (.), underscores (_), or hyphens (-). 
+            Letters must be lowercase.
+          minLength: 2
+          maxLength: 255
+          pattern: "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+          example: "my-app"
+        namespace:
+          type: string
+          description: The namespace where the repository will be created
+          example: "myorganization"
+        description:
+          type: string
+          description: Short description of the repository
+          maxLength: 100
+          example: "A sample application repository"
+        full_description:
+          type: string
+          description: Detailed description of the repository
+          maxLength: 25000
+          example: "This is a comprehensive description of my application repository that contains additional details about the project, its purpose, usage instructions, and other relevant information."
+        registry:
+          type: string
+          description: The registry where the repository will be hosted
+          example: "docker.io"
+        is_private:
+          type: boolean
+          description: Whether the repository should be private
+          default: false
+          example: false
+    RepositoryGroupCreationRequest:
+      type: object
+      required:
+        - group_id
+        - permission
+      properties:
+        group_id:
+          type: integer
+          format: int64
+          description: The ID of the organization group to grant access to
+          example: 12345
+        permission:
+          type: string
+          description: |
+            The permission level to grant to the group:
+            - read: Can view and pull from the repository
+            - write: Can view, pull, and push to the repository
+            - admin: Can view, pull, push, and manage repository settings
+          enum: ["read", "write", "admin"]
+          example: "write"
+    RepositoryGroup:
+      type: object
+      properties:
+        group_name:
+          type: string
+          description: The name of the group
+          example: "developers"
+        permission:
+          type: string
+          description: The permission level granted to the group
+          enum: ["read", "write", "admin"]
+          example: "write"
+        group_id:
+          type: integer
+          format: int64
+          description: The ID of the group
+          example: 12345
+    repository_info:
+      type: object
+      properties:
+        user:
+          type: string
+          description: Username of the repository owner
+        name:
+          type: string
+          description: Repository name
+        namespace:
+          type: string
+          description: Repository namespace
+        repository_type:
+          type: string
+          nullable: true
+          description: Type of the repository
+        status:
+          type: integer
+          description: Repository status code
+        status_description:
+          type: string
+          description: Description of the repository status
+        description:
+          type: string
+          description: Short description of the repository
+        is_private:
+          type: boolean
+          description: Whether the repository is private
+        is_automated:
+          type: boolean
+          description: Whether the repository has automated builds
+        star_count:
+          type: integer
+          format: int64
+          description: Number of stars
+        pull_count:
+          type: integer
+          format: int64
+          description: Number of pulls
+        last_updated:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          description: ISO 8601 timestamp of when repository was last updated
+        last_modified:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          nullable: true
+          description: ISO 8601 timestamp of when repository was last modified
+        date_registered:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          description: ISO 8601 timestamp of when repository was created
+        collaborator_count:
+          type: integer
+          format: int64
+          description: Number of collaborators
+        affiliation:
+          type: string
+          nullable: true
+          description: Repository affiliation
+        hub_user:
+          type: string
+          nullable: true
+          description: Hub user information
+        has_starred:
+          type: boolean
+          description: Whether the current user has starred this repository
+        full_description:
+          type: string
+          nullable: true
+          description: Full description of the repository
+        permissions:
+          $ref: "#/components/schemas/repo_permissions"
+        media_types:
+          type: array
+          items:
+            type: string
+            nullable: true
+          description: Supported media types
+        content_types:
+          type: array
+          items:
+            type: string
+          description: Supported content types
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/category"
+          description: Repository categories
+        immutable_tags_settings:
+          $ref: "#/components/schemas/immutable_tags_settings"
+        storage_size:
+          type: integer
+          format: int64
+          nullable: true
+          description: Storage size in bytes
+        source:
+          type: string
+          nullable: true
+          description: Source of the repository, where it was created from
+      required:
+        - user
+        - name
+        - namespace
+        - status
+        - status_description
+        - description
+        - is_private
+        - is_automated
+        - star_count
+        - pull_count
+        - last_updated
+        - date_registered
+        - collaborator_count
+        - has_starred
+        - permissions
+        - media_types
+        - content_types
+        - categories
+        - immutable_tags_settings
+    repo_permissions:
+      type: object
+      properties:
+        read:
+          type: boolean
+          description: Read permission
+        write:
+          type: boolean
+          description: Write permission
+        admin:
+          type: boolean
+          description: Admin permission
+      required:
+        - read
+        - write
+        - admin
+    immutable_tags_settings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether immutable tags are enabled
+        rules:
+          type: array
+          items:
+            type: string
+          description: List of immutable tag rules
+      required:
+        - enabled
+        - rules
+    immutable_tags_verify_request:
+      type: object
+      properties:
+        regex:
+          type: string
+          pattern: '^[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*$'
+          description: 'Immutable tags rule regex pattern. Must match format: [a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*'
+          example: "v.*"
+      required:
+        - regex
+    immutable_tags_verify_response:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: List of tags that match the provided regex pattern
+          example:
+            - "v1.0.0"
+            - "v2.1.3"
+            - "latest"
+      required:
+        - tags
+    repository_list_entry:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the repository
+          example: "hello-world"
+        namespace:
+          type: string
+          description: Namespace (organization or username) that owns the repository
+          example: "docker"
+        repository_type:
+          type: string
+          description: Type of repository
+          enum:
+            - image
+            - plugin
+            - null
+          example: "image"
+          nullable: true
+        status:
+          type: integer
+          description: Repository status code
+          example: 1
+        status_description:
+          type: string
+          description: Human-readable repository status
+          enum:
+            - active
+            - inactive
+          example: "active"
+        description:
+          type: string
+          description: Repository description
+          nullable: true
+          example: "Hello World! (an example of minimal Dockerization)"
+        is_private:
+          type: boolean
+          description: Whether the repository is private
+          example: false
+        star_count:
+          type: integer
+          description: Number of users who starred this repository
+          minimum: 0
+          example: 1234
+        pull_count:
+          type: integer
+          description: Total number of pulls for this repository
+          minimum: 0
+          example: 50000000
+        last_updated:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the repository was last updated
+          example: "2023-12-01T10:30:00Z"
+          nullable: true
+        last_modified:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the repository was last modified
+          example: "2023-12-01T10:30:00Z"
+          nullable: true
+        date_registered:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the repository was created
+          example: "2013-06-19T19:07:54Z"
+        affiliation:
+          type: string
+          description: User's affiliation with the repository (empty string if no affiliation)
+          example: ""
+        media_types:
+          type: array
+          description: Media types supported by this repository
+          items:
+            type: string
+          example:
+            - "application/vnd.docker.plugin.v1+json"
+        content_types:
+          type: array
+          description: Content types supported by this repository
+          items:
+            type: string
+          example:
+            - "plugin"
+        categories:
+          type: array
+          description: Categories associated with this repository
+          items:
+            $ref: "#/components/schemas/category"
+          example: []
+        storage_size:
+          type: integer
+          description: Storage size in bytes used by this repository
+          minimum: 0
+          example: 232719127
+    category:
+      type: object
+      required:
+        - name
+        - slug
+      properties:
+        name:
+          type: string
+          description: Human-readable name of the category
+          example: "Databases"
+          minLength: 1
+        slug:
+          type: string
+          description: URL-friendly identifier for the category
+          example: "databases"
+          minLength: 1
+          pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      description: Repository category for classification and discovery
+    list_repositories_response:
+      allOf:
+        - $ref: "#/components/schemas/page"
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: "#/components/schemas/repository_list_entry"
+    UsersLoginRequest:
+      description: User login details
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          description: The username of the Docker Hub account to authenticate with.
+          type: string
+          example: myusername
+        password:
+          description: |
+            The password or personal access token (PAT) of the Docker Hub account to authenticate with.
+          type: string
+          example: p@ssw0rd
+    AuthCreateTokenResponse:
+      description: successful access token response
+      type: object
+      properties:
+        access_token:
+          description: The created access token. This expires in 10 minutes.
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+    PostUsersLoginSuccessResponse:
+      description: successful user login response
+      type: object
+      properties:
+        token:
+          description: |
+            Created authentication token.
+            This token can be used in the HTTP Authorization header as a JWT to authenticate with the Docker Hub APIs.
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          nullable: false
+    PostUsersLoginErrorResponse:
+      description: failed user login response or second factor required
+      type: object
+      required:
+        - detail
+      properties:
+        detail:
+          description: Description of the error.
+          type: string
+          example: Incorrect authentication credentials
+          nullable: false
+        login_2fa_token:
+          description: |
+            Short time lived token to be used on `/v2/users/2fa-login` to complete the authentication. This field is present only if 2FA is enabled.
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          nullable: true
+    Users2FALoginRequest:
+      description: Second factor user login details
+      type: object
+      required:
+        - login_2fa_token
+        - code
+      properties:
+        login_2fa_token:
+          description: The intermediate 2FA token returned from `/v2/users/login` API.
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        code:
+          description: |
+            The Time-based One-Time Password of the Docker Hub account to authenticate with.
+          type: string
+          example: 123456
+    PostUsers2FALoginErrorResponse:
+      description: failed second factor login response.
+      type: object
+      properties:
+        detail:
+          description: Description of the error.
+          type: string
+          example: Incorrect authentication credentials
+          nullable: false
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
+    rpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: "#/components/schemas/protobufAny"
+    AuditLogAction:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of audit log action.
+        description:
+          type: string
+          description: Description of audit log action.
+        label:
+          type: string
+          description: Label for audit log action.
+      description: Audit Log action
+    AuditLogActions:
+      type: object
+      properties:
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuditLogAction"
+          description: List of audit log actions.
+        label:
+          type: string
+          description: Grouping label for a particular set of audit log actions.
+    GetAuditActionsResponse:
+      type: object
+      properties:
+        actions:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/AuditLogActions"
+          description: Map of audit log actions.
+      description: GetAuditActions response.
+    GetAuditLogsResponse:
+      type: object
+      properties:
+        logs:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuditLog"
+          description: List of audit log events.
+      description: GetAuditLogs response.
+    AuditLog:
+      type: object
+      properties:
+        account:
+          type: string
+        action:
+          type: string
+        name:
+          type: string
+        actor:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            type: string
+        timestamp:
+          type: string
+          format: date-time
+        action_description:
+          type: string
+      description: Audit log event.
+    ValueError:
+      type: object
+      description: Used to error if input validation fails.
+      properties:
+        fields:
+          type: object
+          items:
+            type: string
+        text:
+          type: string
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        message:
+          type: string
+    accessToken:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: b30bbf97-506c-4ecd-aabc-842f3cb484fb
+        client_id:
+          type: string
+          example: HUB
+        creator_ip:
+          type: string
+          example: 127.0.0.1
+        creator_ua:
+          type: string
+          example: some user agent
+        created_at:
+          type: string
+          example: "2021-07-20T12:00:00.000000Z"
+        last_used:
+          type: string
+          example: null
+          nullable: true
+        generated_by:
+          type: string
+          example: manual
+        is_active:
+          type: boolean
+          example: true
+        token:
+          type: string
+          example: a7a5ef25-8889-43a0-8cc7-f2a94268e861
+        token_label:
+          type: string
+          example: My read only token
+        scopes:
+          type: array
+          example:
+            - repo:read
+          items:
+            type: string
+        expires_at:
+          type: string
+          format: date-time
+          example: "2021-10-28T18:30:19.520861Z"
+    createAccessTokenRequest:
+      type: object
+      required:
+        - token_label
+        - scopes
+      properties:
+        token_label:
+          type: string
+          description: Friendly name for you to identify the token.
+          example: My read only token
+          minLength: 1
+          maxLength: 100
+        scopes:
+          type: array
+          description: |
+            Valid scopes: "repo:admin", "repo:write", "repo:read", "repo:public_read"
+          example:
+            - repo:read
+          items:
+            type: string
+        expires_at:
+          type: string
+          description: |
+            Optional expiration date for the token.
+            If omitted, the token will remain valid indefinitely.
+          format: date-time
+          example: "2021-10-28T18:30:19.520861Z"
+    createAccessTokensResponse:
+      $ref: "#/components/schemas/accessToken"
+    getAccessTokensResponse:
+      type: object
+      properties:
+        count:
+          type: number
+          example: 1
+        next:
+          type: string
+          example: null
+        previous:
+          type: string
+          example: null
+        active_count:
+          type: number
+          example: 1
+        results:
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/accessToken"
+              - type: object
+                properties:
+                  token:
+                    type: string
+                    example: ""
+    patchAccessTokenRequest:
+      type: object
+      properties:
+        token_label:
+          type: string
+          example: My read only token
+          minLength: 1
+          maxLength: 100
+        is_active:
+          type: boolean
+          example: false
+    patchAccessTokenResponse:
+      $ref: "#/components/schemas/accessToken"
+    orgSettings:
+      type: object
+      properties:
+        restricted_images:
+          $ref: "#/components/schemas/restricted_images"
+    restricted_images:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether or not to restrict image usage for users in the organization.
+          example: true
+        allow_official_images:
+          type: boolean
+          description: Allow usage of official images if "enabled" is `true`.
+          example: true
+        allow_verified_publishers:
+          type: boolean
+          description: Allow usage of verified publisher images if "enabled" is `true`.
+          example: true
+    layer:
+      type: object
+      properties:
+        digest:
+          type: string
+          description: image layer digest
+          nullable: true
+        size:
+          type: integer
+          description: size of the layer
+        instruction:
+          type: string
+          description: Dockerfile instruction
+    image:
+      type: object
+      properties:
+        architecture:
+          type: string
+          description: CPU architecture
+        features:
+          type: string
+          description: CPU features
+        variant:
+          type: string
+          description: CPU variant
+        digest:
+          type: string
+          description: image digest
+          nullable: true
+        layers:
+          type: array
+          items:
+            $ref: "#/components/schemas/layer"
+        os:
+          type: string
+          description: operating system
+        os_features:
+          type: string
+          description: OS features
+        os_version:
+          type: string
+          description: OS version
+        size:
+          type: integer
+          description: size of the image
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+          description: Status of the image
+        last_pulled:
+          type: string
+          example: "2021-01-05T21:06:53.506400Z"
+          description: datetime of last pull
+          nullable: true
+        last_pushed:
+          type: string
+          example: "2021-01-05T21:06:53.506400Z"
+          description: datetime of last push
+          nullable: true
+    tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: tag ID
+        images:
+          type: object
+          $ref: "#/components/schemas/image"
+        creator:
+          type: integer
+          description: ID of the user that pushed the tag
+        last_updated:
+          type: string
+          example: "2021-01-05T21:06:53.506400Z"
+          description: datetime of last update
+          nullable: true
+        last_updater:
+          type: integer
+          description: ID of the last user that updated the tag
+        last_updater_username:
+          type: string
+          description: Hub username of the user that updated the tag
+        name:
+          type: string
+          description: name of the tag
+        repository:
+          type: integer
+          description: repository ID
+        full_size:
+          type: integer
+          description: compressed size (sum of all layers) of the tagged image
+        v2:
+          type: string
+          description: repository API version
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+          description: whether a tag has been pushed to or pulled in the past month
+        tag_last_pulled:
+          type: string
+          example: "2021-01-05T21:06:53.506400Z"
+          description: datetime of last pull
+          nullable: true
+        tag_last_pushed:
+          type: string
+          example: "2021-01-05T21:06:53.506400Z"
+          description: datetime of last push
+          nullable: true
+    paginated_tags:
+      allOf:
+        - $ref: "#/components/schemas/page"
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: "#/components/schemas/tag"
+    page:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: total number of results available across all pages
+        next:
+          type: string
+          description: link to next page of results if any
+          nullable: true
+        previous:
+          type: string
+          description: link to previous page of results  if any
+          nullable: true
+    scim_schema_attribute:
+      type: object
+      properties:
+        name:
+          type: string
+          example: userName
+        type:
+          enum:
+            - string
+            - boolean
+            - complex
+          type: string
+          example: string
+        multiValued:
+          type: boolean
+          example: false
+        description:
+          type: string
+          example: Unique identifier for the User, typically used by the user to directly authenticate to the service provider. Each User MUST include a non-empty userName value. This identifier MUST be unique across the service provider's entire set of Users.
+        required:
+          type: boolean
+          example: true
+        caseExact:
+          type: boolean
+          example: false
+        mutability:
+          type: string
+          example: readWrite
+        returned:
+          type: string
+          example: default
+        uniqueness:
+          type: string
+          example: server
+    scim_schema_parent_attribute:
+      allOf:
+        - $ref: "#/components/schemas/scim_schema_attribute"
+        - type: object
+          properties:
+            subAttributes:
+              type: array
+              items:
+                $ref: "#/components/schemas/scim_schema_attribute"
+    invite:
+      type: object
+      properties:
+        id:
+          type: string
+          description: uuid representing the invite id
+          example: e36eca69-4cc8-4f17-9845-ae8c2b832691
+        inviter_username:
+          type: string
+          example: moby
+        invitee:
+          type: string
+          description: can either be a dockerID for registered users or an email for non-registered users
+          example: invitee@docker.com
+        org:
+          type: string
+          description: name of the org to join
+          example: docker
+        team:
+          type: string
+          description: name of the team (user group) to join
+          example: owners
+        created_at:
+          type: string
+          example: "2021-10-28T18:30:19.520861Z"
+    bulk_invite:
+      type: object
+      properties:
+        invitees:
+          type: array
+          description: A list of invitees
+          items:
+            type: object
+            properties:
+              invitee:
+                type: string
+                description: invitee email or Docker ID
+              status:
+                type: string
+                description: status of the invite or validation error
+              invite:
+                description: Invite data if successfully invited
+                $ref: "#/components/schemas/invite"
+      example:
+        invitees:
+          - invitee: invitee@docker.com
+            status: invited
+            invite:
+              id: e36eca69-4cc8-4f17-9845-ae8c2b832691
+              inviter_username: moby
+              invitee: invitee@docker.com
+              org: docker
+              team: owners
+              created_at: "2021-10-28T18:30:19.520861Z"
+          - invitee: invitee2@docker.com
+            status: existing_org_member
+          - invitee: invitee3@docker.com
+            status: invalid_email_or_docker_id
+    error:
+      type: object
+      properties:
+        errinfo:
+          type: object
+          items:
+            type: string
+        detail:
+          type: string
+        message:
+          type: string
+    scim_error:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The status code for the response in string format.
+        schemas:
+          type: array
+          items:
+            type: string
+            default: urn:ietf:params:scim:api:messages:2.0:Error
+        detail:
+          type: string
+          description: Details about why the request failed.
+    user:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 0ab70deb065a43fcacd55d48caa945d8
+          description: The UUID trimmed
+        company:
+          type: string
+          example: Docker Inc
+        date_joined:
+          type: string
+          example: "2021-01-05T21:06:53.506400Z"
+        full_name:
+          type: string
+          example: Jon Snow
+        gravatar_email:
+          type: string
+        gravatar_url:
+          type: string
+        location:
+          type: string
+        profile_url:
+          type: string
+        type:
+          type: string
+          enum:
+            - User
+            - Org
+          example: User
+        username:
+          type: string
+          example: dockeruser
+    org_member:
+      allOf:
+        - $ref: "#/components/schemas/user"
+      properties:
+        email:
+          type: string
+          description: User's email address
+          example: example@docker.com
+        role:
+          type: string
+          description: |
+            The member's role in the organization (`Owner`, `Editor`,
+            `Member`, or `Invitee` for pending invites).
+          enum:
+            - Owner
+            - Editor
+            - Member
+            - Invitee
+          example: Owner
+        groups:
+          type: array
+          description: Groups (Teams) that the user is member of
+          items:
+            type: string
+          example:
+            - developers
+            - owners
+        is_guest:
+          type: boolean
+          description: If the organization has verified domains, members that have email addresses outside of those domains will be flagged as guests.
+          example: false
+        primary_email:
+          type: string
+          description: The user's email primary address.
+          example: example@docker.com
+          deprecated: true
+        last_logged_in_at:
+          type: string
+          format: date-time
+          description: |
+            Last time the user logged in. To access this field, you must have insights visible for your organization. See 
+            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
+          example: "2021-01-05T21:06:53.506400Z"
+        last_seen_at:
+          type: string
+          format: date-time
+          description: |
+            Last time the user was seen. To access this field, you must have insights visible for your organization. See 
+            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
+          example: "2021-01-05T21:06:53.506400Z"
+        last_desktop_version:
+          type: string
+          description: |
+            Last desktop version the user used. To access this field, you must have insights visible for your organization. See 
+            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
+          example: 4.29.0
+
+    org_member_paginated:
+      type: object
+      properties:
+        count:
+          type: number
+          description: The total number of items that match with the search.
+          example: 120
+        previous:
+          type: string
+          description: The URL or link for the previous page of items.
+          example: https://hub.docker.com/v2/some/resources/items?page=1&page_size=20
+        next:
+          type: string
+          description: The URL or link for the next page of items.
+          example: https://hub.docker.com/v2/some/resources/items?page=3&page_size=20
+        results:
+          type: array
+          description: List of accounts.
+          items:
+            $ref: "#/components/schemas/org_member"
+    org_group:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 10
+          description: Group ID
+        uuid:
+          type: string
+          description: UUID for the group
+        name:
+          type: string
+          example: mygroup
+          description: Name of the group
+        description:
+          type: string
+          example: Groups description
+          description: Description of the group
+        member_count:
+          type: number
+          example: 10
+          description: Member count of the group
+        role:
+          type: string
+          description: |
+            Role assigned to the team. A core role (`owner`, `editor`, or `member`)
+            or the name of a custom role (not the label or UUID).
+    group_member:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 0ab70deb065a43fcacd55d48caa945d8
+          description: The UUID trimmed
+        company:
+          type: string
+          example: Docker Inc
+        date_joined:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+        full_name:
+          type: string
+          example: John Snow
+        gravatar_email:
+          type: string
+        gravatar_url:
+          type: string
+        location:
+          type: string
+        profile_url:
+          type: string
+        type:
+          type: string
+          enum:
+            - User
+            - Org
+          example: User
+        username:
+          type: string
+          example: dockeruser
+        email:
+          type: string
+          example: dockeruser@docker.com
+    email_address:
+      type: object
+      properties:
+        id:
+          type: number
+        user_id:
+          type: number
+        email:
+          type: string
+          example: dockeruser@docker.com
+        verified:
+          type: boolean
+        primary:
+          type: boolean
+    legacy_email_address:
+      allOf:
+        - $ref: "#/components/schemas/email_address"
+        - type: object
+          properties:
+            user:
+              type: string
+              example: dockeruser
+    email_with_username:
+      allOf:
+        - $ref: "#/components/schemas/email_address"
+        - type: object
+          properties:
+            username:
+              type: string
+              example: dockeruser
+    scim_service_provider_config:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          example:
+            - urn:ietf:params:scim:schemas:core:2.0:ServiceProviderConfig
+        documentationUri:
+          type: string
+          example: ""
+        patch:
+          properties:
+            supported:
+              type: boolean
+              example: false
+        bulk:
+          type: object
+          properties:
+            supported:
+              type: boolean
+              example: false
+            maxOperations:
+              type: integer
+            maxPayloadSize:
+              type: integer
+        filter:
+          type: object
+          properties:
+            supported:
+              type: boolean
+              example: true
+            maxResults:
+              type: integer
+              example: 99999
+        changePassword:
+          type: object
+          properties:
+            supported:
+              type: boolean
+              example: false
+        sort:
+          type: object
+          properties:
+            supported:
+              type: boolean
+              example: true
+        etag:
+          type: object
+          properties:
+            supported:
+              type: boolean
+              example: false
+        authenticationSchemes:
+          type: object
+          properties:
+            name:
+              type: string
+              example: OAuth 2.0 Bearer Token
+            description:
+              type: string
+              example: The OAuth 2.0 Bearer Token Authentication scheme. OAuth enables clients to access protected resources by obtaining an access token, which is defined in RFC 6750 as "a string representing an access authorization issued to the client", rather than using the resource owner's credentials directly.
+            specUri:
+              type: string
+              example: http://tools.ietf.org/html/rfc6750
+            type:
+              type: string
+              example: oauthbearertoken
+    scim_resource_type:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          example:
+            - urn:ietf:params:scim:schemas:core:2.0:ResourceType
+        id:
+          type: string
+          example: User
+        name:
+          type: string
+          example: User
+        description:
+          type: string
+          example: User
+        endpoint:
+          type: string
+          example: /Users
+        schema:
+          type: string
+          example: urn:ietf:params:scim:schemas:core:2.0:User
+    scim_schema:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          example:
+            - urn:ietf:params:scim:schemas:core:2.0:Schema
+        id:
+          type: string
+          example: urn:ietf:params:scim:schemas:core:2.0:User
+        name:
+          type: string
+          example: User
+        description:
+          type: string
+          example: User Account
+        attributes:
+          type: array
+          example: []
+          items:
+            $ref: "#/components/schemas/scim_schema_parent_attribute"
+    scim_email:
+      type: object
+      properties:
+        value:
+          type: string
+          example: jon.snow@docker.com
+        display:
+          type: string
+          example: jon.snow@docker.com
+        primary:
+          type: boolean
+          example: true
+    scim_group:
+      type: object
+      properties:
+        value:
+          type: string
+          example: nightswatch
+        display:
+          type: string
+          example: nightswatch
+    scim_user_username:
+      type: string
+      description: The user's email address. This must be reachable via email.
+      example: jon.snow@docker.com
+    scim_user_name:
+      type: object
+      properties:
+        givenName:
+          type: string
+          example: Jon
+        familyName:
+          type: string
+          example: Snow
+    scim_user_display_name:
+      type: string
+      description: The username in Docker. Also known as the "Docker ID".
+      example: jonsnow
+    scim_user_schemas:
+      type: array
+      items:
+        type: string
+        example: urn:ietf:params:scim:schemas:core:2.0:User
+        minItems: 1
+    scim_user_id:
+      type: string
+      example: d80f7c79-7730-49d8-9a41-7c42fb622d9c
+      description: The unique identifier for the user. A v4 UUID.
+    scim_user:
+      type: object
+      properties:
+        schemas:
+          $ref: "#/components/schemas/scim_user_schemas"
+        id:
+          $ref: "#/components/schemas/scim_user_id"
+        userName:
+          $ref: "#/components/schemas/scim_user_username"
+        name:
+          $ref: "#/components/schemas/scim_user_name"
+        displayName:
+          $ref: "#/components/schemas/scim_user_display_name"
+        active:
+          type: boolean
+          example: true
+        emails:
+          type: array
+          items:
+            $ref: "#/components/schemas/scim_email"
+        groups:
+          type: array
+          items:
+            $ref: "#/components/schemas/scim_group"
+        meta:
+          type: object
+          properties:
+            resourceType:
+              type: string
+              example: User
+            location:
+              type: string
+              example: https://hub.docker.com/v2/scim/2.0/Users/d80f7c79-7730-49d8-9a41-7c42fb622d9c
+            created:
+              type: string
+              format: date-time
+              description: The creation date for the user as a RFC3339 formatted string.
+              example: "2022-05-20T00:54:18Z"
+            lastModified:
+              type: string
+              format: date-time
+              description: The date the user was last modified as a RFC3339 formatted string.
+              example: "2022-05-20T00:54:18Z"
+    orgAccessToken:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "a7a5ef25-8889-43a0-8cc7-f2a94268e861"
+        label:
+          type: string
+          example: "My organization token"
+        created_by:
+          type: string
+          example: "johndoe"
+        is_active:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: "2022-05-20T00:54:18Z"
+        expires_at:
+          type: string
+          format: date-time
+          example: "2023-05-20T00:54:18Z"
+          nullable: true
+        last_used_at:
+          type: string
+          format: date-time
+          example: "2022-06-15T12:30:45Z"
+          nullable: true
+    orgAccessTokenResource:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - TYPE_REPO
+            - TYPE_ORG
+          example: "TYPE_REPO"
+          description: The type of resource
+          required: true
+        path:
+          type: string
+          example: "myorg/myrepo"
+          description: |
+            The path of the resource. The format of this will change depending on the type of resource.
+
+            For TYPE_REPO resources:
+            - Must be an existing repository name (e.g., "myorg/myrepo")
+            - Can use glob patterns (e.g., "myorg/*" for all repositories in the organization)
+            - Use "*/*/public" to reference all public repositories
+          required: true
+        scopes:
+          type: array
+          description: The scopes this token has access to
+          items:
+            type: string
+            example: "scope-image-pull"
+          required: true
+    getOrgAccessTokensResponse:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 10
+        next:
+          type: string
+          example: https://hub.docker.com/v2/orgs/docker/access-tokens?page=2&page_size=10
+        previous:
+          type: string
+          example: https://hub.docker.com/v2/orgs/docker/access-tokens?page=1&page_size=10
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/orgAccessToken"
+    getOrgAccessTokenResponse:
+      allOf:
+        - $ref: "#/components/schemas/orgAccessToken"
+        - type: object
+          properties:
+            resources:
+              type: array
+              description: Resources this token has access to
+              items:
+                $ref: "#/components/schemas/orgAccessTokenResource"
+    createOrgAccessTokenRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Label for the access token
+          example: "My organization token"
+          required: true
+        description:
+          type: string
+          description: Description of the access token
+          example: "Token for CI/CD pipeline"
+        resources:
+          type: array
+          description: Resources this token has access to
+          items:
+            $ref: "#/components/schemas/orgAccessTokenResource"
+        expires_at:
+          type: string
+          format: date-time
+          description: Expiration date for the token
+          example: "2023-05-20T00:54:18Z"
+          nullable: true
+    createOrgAccessTokenResponse:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: string
+              example: "a7a5ef25-8889-43a0-8cc7-f2a94268e861"
+            label:
+              type: string
+              example: "My organization token"
+            is_active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+              example: "2022-05-20T00:54:18Z"
+            expires_at:
+              type: string
+              format: date-time
+              example: "2023-05-20T00:54:18Z"
+              nullable: true
+            last_used_at:
+              type: string
+              format: date-time
+              example: "2022-06-15T12:30:45Z"
+              nullable: true
+        - type: object
+          properties:
+            token:
+              type: string
+              description: The actual token value that can be used for authentication
+              example: "dckr_oat_7awgM4jG5SQvxcvmNzhKj8PQjxo"
+            resources:
+              type: array
+              items:
+                $ref: "#/components/schemas/orgAccessTokenResource"
+    updateOrgAccessTokenRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Label for the access token
+          example: "My organization token"
+        description:
+          type: string
+          description: Description of the access token
+          example: "Token for CI/CD pipeline"
+        resources:
+          type: array
+          description: Resources this token has access to
+          items:
+            $ref: "#/components/schemas/orgAccessTokenResource"
+        is_active:
+          type: boolean
+          description: Whether the token is active
+          example: true
+    updateOrgAccessTokenResponse:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/orgAccessToken"
+        - type: object
+          properties:
+            resources:
+              type: array
+              description: Resources this token has access to
+              items:
+                $ref: "#/components/schemas/orgAccessTokenResource"
+    team_repo:
+      allOf:
+        - $ref: "#/components/responses/team_repo"
+      properties:
+        group_name:
+          type: string
+          description: Name of the group
+        permission:
+          type: string
+          description: Repo access permission
+          enum:
+            - read
+            - write
+            - admin
+  parameters:
+    namespace:
+      in: path
+      name: namespace
+      required: true
+      schema:
+        type: string
+    repository:
+      in: path
+      name: repository
+      required: true
+      schema:
+        type: string
+    tag:
+      in: path
+      name: tag
+      required: true
+      schema:
+        type: string
+    org_name:
+      in: path
+      name: org_name
+      description: Name of the organization (namespace).
+      schema:
+        type: string
+      example: myorganization
+      required: true
+    group_name:
+      in: path
+      name: group_name
+      description: Name of the group (team) in the organization.
+      schema:
+        type: string
+        example: developers
+      required: true
+    username:
+      in: path
+      name: username
+      description: Username, identifier for the user (namespace, DockerID).
+      schema:
+        type: string
+        example: jonsnow
+      required: true
+    page:
+      in: query
+      name: page
+      description: Page number (starts on 1).
+      schema:
+        type: integer
+    page_size:
+      in: query
+      name: page_size
+      description: Number of items (rows) per page.
+      schema:
+        type: integer
+    invites:
+      in: query
+      name: invites
+      description: Include invites in the response.
+      schema:
+        type: boolean
+    search:
+      in: query
+      name: search
+      schema:
+        type: integer
+      description: Search term.
+    scim_attributes:
+      in: query
+      name: attributes
+      schema:
+        type: string
+      description: Comma delimited list of attributes to limit to in the response.
+      example: userName,displayName
+    scim_user_id:
+      name: id
+      in: path
+      schema:
+        type: string
+      description: The user ID.
+      example: d80f7c79-7730-49d8-9a41-7c42fb622d9c
+      required: true
+    type:
+      in: query
+      name: type
+      schema:
+        type: string
+        enum:
+          - all
+          - invitee
+          - member
+      example: all
+    role:
+      in: query
+      name: role
+      schema:
+        type: string
+        enum:
+          - owner
+          - editor
+          - member
+      example: owner
+    bulk_invite:
+      in: header
+      name: X-Analytics-Client-Feature
+      description: Optional string that indicates the feature used to submit the bulk invites (e.g.'file', 'web')
+      schema:
+        type: string
+  requestBodies:
+    bulk_invite_request:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - org
+              - invitees
+            properties:
+              org:
+                type: string
+                description: organization name
+                example: docker
+              team:
+                type: string
+                description: team name
+                example: owners
+              role:
+                type: string
+                description: role for invitees
+                example: member
+              invitees:
+                type: array
+                description: list of invitees emails or Docker Ids
+                items:
+                  type: string
+                  description: invitee email or Docker ID
+                example:
+                  - invitee1DockerId
+                  - invitee2@docker.com
+                  - invitee3@docker.com
+              dry_run:
+                type: boolean
+                description: Optional, run through validation but don't actually change data.
+                example: true
+    scim_create_user_request:
+      required: true
+      content:
+        application/scim+json:
+          schema:
+            type: object
+            required:
+              - schemas
+              - userName
+            properties:
+              schemas:
+                $ref: "#/components/schemas/scim_user_schemas"
+              userName:
+                $ref: "#/components/schemas/scim_user_username"
+              name:
+                $ref: "#/components/schemas/scim_user_name"
+    scim_update_user_request:
+      required: true
+      content:
+        application/scim+json:
+          schema:
+            type: object
+            required:
+              - schemas
+            properties:
+              schemas:
+                $ref: "#/components/schemas/scim_user_schemas"
+              name:
+                allOf:
+                  - $ref: "#/components/schemas/scim_user_name"
+                  - description: If this is omitted from the request, the update will skip the update on it. We will only ever change the name, but not clear it.
+              enabled:
+                type: boolean
+                default: false
+                description: If this is omitted from the request, it will default to false resulting in a deactivated user.
+    add_member_to_org_group:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - member
+            properties:
+              member:
+                type: string
+                example: jonsnow
+    update_repository_immutable_tags_request:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/update_repository_immutable_tags_request"
+    immutable_tags_verify_request:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/immutable_tags_verify_request"
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    bearerSCIMAuth:
+      type: http
+      scheme: bearer
+x-tagGroups:
+  - name: General
+    tags:
+      - changelog
+      - resources
+      - rate-limiting
+      - authentication
+  - name: API
+    tags:
+      - authentication-api
+      - access-tokens
+      - images
+      - audit-logs
+      - org-settings
+      - repositories
+      - scim
+      - orgs
+      - org-access-tokens
+      - groups
+      - invites

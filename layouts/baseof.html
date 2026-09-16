@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     {{ partial "head.html" . }}
+    {{ block "head-extra" . }}{{ end }}
   </head>
 
   <body

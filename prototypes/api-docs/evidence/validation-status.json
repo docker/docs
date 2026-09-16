@@ -1,0 +1,10 @@
+{
+  "strictExitCode": 1,
+  "strictDiagnostics": 491,
+  "previewResult": "pass",
+  "defaultBuildExcludesPrototype": true,
+  "localBuildSeconds": 14,
+  "containerBuildSeconds": 41,
+  "pagefindFirstCompileSeconds": 98,
+  "originalSpecsVerifiedUnchanged": true
+}
