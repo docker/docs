@@ -45,12 +45,12 @@ For a step-by-step authoring walkthrough, see [Build an agent](/manuals/ai/sandb
 ## Add mixins
 
 A sandbox runs one workload kit. Add v3 mixins with `--kit`, repeating the
-flag for each one. For example, add a Neovim mixin and shared team configuration:
+flag for each one. For example, add Neovim for editing and Ruff for Python linting:
 
 ```console
 $ sbx run docker.io/my-org/agent-kit:1.0.0 \
     --kit docker.io/my-org/neovim-kit:1.0.0 \
-    --kit docker.io/my-org/team-config-kit:1.0.0
+    --kit docker.io/my-org/ruff-kit:1.0.0
 ```
 
 The workload and its mixins form a composition: their tools, files, and
