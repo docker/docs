@@ -345,6 +345,20 @@ the command again:
 ✓ Git repository detected: \\wsl.localhost\Ubuntu\home\you\repo
 ```
 
+## SSH agent socket is missing
+
+If `SSH_AUTH_SOCK` is set inside a sandbox but `ssh-add -L` reports
+`No such file or directory`, check whether your custom template includes
+`socat`. Docker Sandboxes uses it to create the socket that forwards requests
+to your host SSH agent. Installing OpenSSH client tools alone isn't enough.
+
+For an Ubuntu-based custom template, add `socat` to the packages installed as
+root in your Dockerfile, then rebuild the template and create a sandbox from
+it. Docker-provided sandbox templates already include `socat`.
+
+If the socket exists but forwarding still fails, check the
+[SSH agent settings](configuration/credentials.md#ssh-agent).
+
 ## Sandbox commits aren't signed
 
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
