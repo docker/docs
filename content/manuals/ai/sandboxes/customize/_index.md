@@ -25,8 +25,11 @@ image builds and runtime capabilities together in the kit format.
 
 > [!NOTE]
 > V3 kits are experimental. The format and CLI commands are subject to change.
-> Share feedback in the
-> [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
+> Share spec feedback or report issues in
+> [docker/sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/issues).
+
+The [sandbox-kit-spec repository](https://github.com/docker/sandbox-kit-spec)
+contains the authoritative v3 specification, build frontend, and examples.
 
 ## Workloads and mixins
 

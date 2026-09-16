@@ -13,13 +13,17 @@ aliases:
 > [!NOTE]
 > V3 kits are experimental. The kit file format, CLI commands, and experience
 > for creating, loading, and managing kits are subject to change. Share
-> feedback in [docker/sbx-releases](https://github.com/docker/sbx-releases).
+> spec feedback in [docker/sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/issues).
 
 This page describes the v3 kit descriptor and its capability configs. Use it
 when authoring a workload or mixin. For a practical introduction, see
 [Author kits](/manuals/ai/sandboxes/customize/author/_index.md). To run existing
 workloads and mixins, see [Use kits](/manuals/ai/sandboxes/customize/use-kits.md).
 For complete examples, see [Kit examples](/manuals/ai/sandboxes/customize/author/kit-examples.md).
+
+For the authoritative format definition, see the
+[v3 specification](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/SPEC-v3.md).
+This reference explains the format as used by Docker Sandboxes.
 
 Some capability types describe functionality beyond the `sbx` integration.
 The [capability table](#runtime-capabilities) identifies these types.

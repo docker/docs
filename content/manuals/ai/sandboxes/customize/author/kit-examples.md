@@ -13,8 +13,7 @@ aliases:
 > [!NOTE]
 > V3 kits are experimental. The kit file format, CLI commands, and experience
 > for creating, loading, and managing kits are subject to change. Share
-> feedback in the [docker/sbx-releases](https://github.com/docker/sbx-releases)
-> repository.
+> spec feedback in [docker/sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/issues).
 
 These schema v3 examples show how to add tools, configuration, and instructions
 to a workload. Each section is a separate customization with its own kit files.
@@ -29,6 +28,8 @@ see [Kits v2](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
 
 For source layout and capability declarations, see
 [Author kits](/manuals/ai/sandboxes/customize/author/_index.md).
+For additional source kits, see the
+[specification examples](https://github.com/docker/sandbox-kit-spec/tree/main/examples).
 For field definitions, see the [Kit spec reference](/manuals/ai/sandboxes/customize/author/kit-reference.md).
 
 ## Create a workload for the examples

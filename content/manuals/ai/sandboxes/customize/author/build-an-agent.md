@@ -13,8 +13,7 @@ aliases:
 > [!NOTE]
 > V3 kits are experimental. The kit file format, CLI commands, and experience
 > for creating, loading, and managing kits are subject to change. Share
-> feedback in the [docker/sbx-releases](https://github.com/docker/sbx-releases)
-> repository.
+> spec feedback in [docker/sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/issues).
 
 Build a sandbox environment from a Linux base image you choose, then package
 it as a schema v3 workload kit. You'll prepare the operating system, install
