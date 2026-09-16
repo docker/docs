@@ -19,6 +19,8 @@
    semantic pairs on the components migrated by this prototype. */
 @layer docs {
   :root {
+    /* Long-form reading sits between Trident's primary and muted text roles. */
+    --docs-reading-foreground: var(--tri-gray-700);
     --navbar-font-size: var(--tri-scale-label-font-size);
     --tw-prose-code-bg: var(--tri-muted);
     --tw-prose-code-bg-dark: var(--tri-muted);
@@ -26,6 +28,7 @@
   }
 
   :root.dark {
+    --docs-reading-foreground: var(--tri-gray-300);
     color-scheme: dark;
   }
 
@@ -107,14 +110,14 @@
   }
 
   .prose {
-    --tw-prose-body: var(--tri-muted-foreground);
+    --tw-prose-body: var(--docs-reading-foreground);
     --tw-prose-headings: var(--tri-foreground);
     --tw-prose-links: var(--tri-primary);
     --tw-prose-bold: var(--tri-foreground);
     --tw-prose-counters: var(--tri-muted-foreground);
     --tw-prose-bullets: var(--tri-muted-foreground);
     --tw-prose-hr: var(--tri-border);
-    --tw-prose-quotes: var(--tri-muted-foreground);
+    --tw-prose-quotes: var(--docs-reading-foreground);
     --tw-prose-quote-borders: var(--tri-border);
     --tw-prose-captions: var(--tri-muted-foreground);
     --tw-prose-code: var(--tri-foreground);
@@ -231,7 +234,7 @@
     border: 1px solid var(--docs-callout-border);
     border-radius: var(--tri-radius-lg);
     background: var(--docs-callout-bg);
-    color: var(--tri-muted-foreground);
+    color: var(--docs-reading-foreground);
   }
 
   .admonition-header {
