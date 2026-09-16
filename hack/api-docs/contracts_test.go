@@ -26,6 +26,9 @@ func TestHubResponseContracts(t *testing.T) {
 		pointer, value string
 		valid          bool
 	}{
+		{"/components/schemas/createOrgAccessTokenRequest", `{"label":"CI token"}`, false},
+		{"/components/schemas/createOrgAccessTokenRequest", `{"label":"CI token","resources":[]}`, false},
+		{"/components/schemas/createOrgAccessTokenRequest", `{"label":"CI token","resources":[{"type":"TYPE_REPO","path":"myorg/myrepo","scopes":["scope-image-pull"]}]}`, true},
 		{"/components/schemas/error", `{"message":"not found","errinfo":null}`, true},
 		{"/components/schemas/error", `{"errinfo":{"field":["invalid"],"limit":5}}`, true},
 		{"/components/schemas/error", `{"errinfo":[]}`, false},

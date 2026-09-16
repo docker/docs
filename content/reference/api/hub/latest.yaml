@@ -85,12 +85,7 @@ tags:
       These tokens are meant for automation and are not meant to be used by 
       users.
 
-      # Labels
-
-      These labels will show up on routes in this reference that allow for use of bearer 
-      tokens issued from them.
-
-
+      Operations that support bearer tokens issued from OATs state this in their descriptions.
 
     summary: Authentication
     kind: info
@@ -450,10 +445,10 @@ paths:
   /v2/auditlogs/{account}/actions:
     get:
       summary: List audit log actions
-      description: |+
+      description: |
         List audit log actions for a namespace to be used as a filter for querying audit log events.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       operationId: AuditLogs_ListAuditActions
       security:
         - bearerAuth: []
@@ -757,10 +752,10 @@ paths:
   /v2/auditlogs/{account}:
     get:
       summary: List audit log events
-      description: |+
+      description: |
         List audit log events for a given namespace.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       operationId: AuditLogs_ListAuditLogs
       security:
         - bearerAuth: []
@@ -1121,10 +1116,10 @@ paths:
     get:
       operationId: ListRepositoryTags
       summary: List repository tags
-      description: |+
+      description: |
         Returns the list of tags for the specified repository.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - repositories
       security:
@@ -1151,10 +1146,10 @@ paths:
           $ref: "#/components/responses/NotFound"
     head:
       summary: Check repository tags
-      description: |+
+      description: |
         Checks whether the repository has any tags.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - repositories
       security:
@@ -1175,10 +1170,10 @@ paths:
     get:
       operationId: GetRepositoryTag
       summary: Read repository tag
-      description: |+
+      description: |
         Returns details for a specific tag in the specified repository.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - repositories
       security:
@@ -1192,10 +1187,10 @@ paths:
           $ref: "#/components/responses/NotFound"
     head:
       summary: Check repository tag
-      description: |+
+      description: |
         Checks whether the specified tag exists in the repository.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - repositories
       security:
@@ -1215,12 +1210,12 @@ paths:
     patch:
       operationId: UpdateRepositoryImmutableTags
       summary: Update repository immutable tags
-      description: |+
+      description: |
         Updates the immutable tags configuration for this repository.
 
         **Only users with administrative privileges for the repository can modify these settings.**
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - repositories
       security:
@@ -1245,12 +1240,12 @@ paths:
     post:
       operationId: VerifyRepositoryImmutableTags
       summary: Verify repository immutable tags
-      description: |+
+      description: |
         Validates the immutable tags regex passed in the request body and returns a list of tags matching it in this repository.
 
         **Only users with administrative privileges for the repository can call this endpoint.**
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - repositories
       security:
@@ -1274,10 +1269,10 @@ paths:
       - $ref: "#/components/parameters/repository"
     post:
       summary: Assign a group (Team) to a repository for access
-      description: |+
+      description: |
         Assigns an organization group (team) to a repository with a specified permission level.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - repositories
       operationId: CreateRepositoryGroup
@@ -1335,6 +1330,8 @@ paths:
 
 
         **OAT listing behavior**: an OAT with the `scope-repository-list` scope sees all repositories including private ones. An OAT without that scope only sees public repositories. This filtering is silent: the response is a normal `200` with no indication that private repositories were withheld.
+
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - repositories
       security:
@@ -1479,11 +1476,11 @@ paths:
                     errinfo: null
     post:
       summary: Create a new repository
-      description: |+
+      description: |
         Creates a new repository within the specified namespace. The repository will be created
         with the provided metadata including name, description, and privacy settings.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       operationId: CreateRepository
       tags:
         - repositories
@@ -1556,12 +1553,12 @@ paths:
     get:
       operationId: GetRepository
       summary: Get repository in a namespace
-      description: |+
+      description: |
         Returns a repository within the specified namespace (organization or user).
 
         Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - repositories
       security:
@@ -1614,12 +1611,12 @@ paths:
     head:
       operationId: CheckRepository
       summary: Check repository in a namespace
-      description: |+
+      description: |
         Check a repository within the specified namespace (organization or user).
 
         Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - repositories
       security:
@@ -1646,7 +1643,7 @@ paths:
       - $ref: "#/components/parameters/role"
     get:
       summary: List org members
-      description: |+
+      description: |
         Returns a list of members for an organization.
 
         _The following fields are only visible to orgs with insights enabled._
@@ -1657,7 +1654,7 @@ paths:
 
         To make visible, please see [View Insights for organization users](https://docs.docker.com/accounts/organization/insights/#view-insights-for-organization-users).
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - orgs
       security:
@@ -1683,10 +1680,10 @@ paths:
       - $ref: "#/components/parameters/org_name"
     get:
       summary: Export org members CSV
-      description: |+
+      description: |
         Export members of an organization as a CSV
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - orgs
       security:
@@ -1723,11 +1720,11 @@ paths:
       - $ref: "#/components/parameters/username"
     put:
       summary: Update org member (role)
-      description: |+
+      description: |
         Updates the role of a member in the organization.
         ***Only users in the "owners" group of the organization can use this endpoint.***
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - orgs
       security:
@@ -1768,10 +1765,10 @@ paths:
       operationId: putV2OrgsByOrgNameMembersByUsername
     delete:
       summary: Remove member from org
-      description: |+
+      description: |
         Removes the member from the org, ie. all groups in the org, unless they're the last owner
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - orgs
       security:
@@ -1794,10 +1791,10 @@ paths:
       - $ref: "#/components/parameters/org_name"
     get:
       summary: List org invites
-      description: |+
+      description: |
         Return all pending invites for a given org, only team owners can call this endpoint
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - invites
       security:
@@ -1835,7 +1832,10 @@ paths:
       - $ref: "#/components/parameters/org_name"
     get:
       summary: Get groups of an organization
-      description: Get groups of an organization.
+      description: |
+        Get groups of an organization.
+
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - groups
       security:
@@ -1898,10 +1898,10 @@ paths:
       operationId: getV2OrgsByOrgNameGroups
     post:
       summary: Create a new group
-      description: |+
+      description: |
         Create a new group within an organization.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - groups
       security:
@@ -1941,7 +1941,10 @@ paths:
       - $ref: "#/components/parameters/group_name"
     get:
       summary: Get a group of an organization
-      description: Get a group of an organization.
+      description: |
+        Get a group of an organization.
+
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - groups
       security:
@@ -1962,7 +1965,10 @@ paths:
       operationId: getV2OrgsByOrgNameGroupsByGroupName
     put:
       summary: Update the details for an organization group
-      description: Update the details for an organization group.
+      description: |
+        Update the details for an organization group.
+
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - groups
       security:
@@ -1997,7 +2003,10 @@ paths:
       operationId: putV2OrgsByOrgNameGroupsByGroupName
     patch:
       summary: Update some details for an organization group
-      description: Update some details for an organization group.
+      description: |
+        Update some details for an organization group.
+
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - groups
       security:
@@ -2037,7 +2046,10 @@ paths:
       operationId: patchV2OrgsByOrgNameGroupsByGroupName
     delete:
       summary: Delete an organization group
-      description: Delete an organization group.
+      description: |
+        Delete an organization group.
+
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - groups
       security:
@@ -2068,11 +2080,11 @@ paths:
             type: string
           description: Search members by username, full_name or email.
       summary: List members of a group
-      description: |+
+      description: |
         List the members (users) that are in a group.
         If user is owner of the org or has otherwise elevated permissions, they can search by email and the result will also contain emails.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - groups
       responses:
@@ -2123,7 +2135,10 @@ paths:
         - $ref: "#/components/parameters/org_name"
         - $ref: "#/components/parameters/group_name"
       summary: Add a member to a group
-      description: Add a member to a group.
+      description: |
+        Add a member to a group.
+
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - groups
       security:
@@ -2150,7 +2165,10 @@ paths:
       - $ref: "#/components/parameters/username"
     delete:
       summary: Remove a user from a group
-      description: Remove a user from a group.
+      description: |
+        Remove a user from a group.
+
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - groups
       security:
@@ -2176,10 +2194,10 @@ paths:
           type: string
     delete:
       summary: Cancel an invite
-      description: |+
+      description: |
         Mark the invite as cancelled so it doesn't show up on the list of pending invites
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - invites
       security:
@@ -2205,10 +2223,10 @@ paths:
         required: true
     patch:
       summary: Resend an invite
-      description: |+
+      description: |
         Resend a pending invite to the user, any org owner can resend an invite
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - invites
       security:
@@ -2229,10 +2247,10 @@ paths:
       - $ref: "#/components/parameters/bulk_invite"
     post:
       summary: Bulk create invites
-      description: |+
+      description: |
         Create multiple invites by emails or DockerIDs. Only a team owner can create invites.
 
-
+        This operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.
       tags:
         - invites
       requestBody:
@@ -4715,6 +4733,7 @@ components:
           example: Token for CI/CD pipeline
         resources:
           type: array
+          minItems: 1
           description: Resources this token has access to
           items:
             $ref: "#/components/schemas/orgAccessTokenResource"
@@ -4727,6 +4746,7 @@ components:
           example: 2023-05-20T00:54:18Z
       required:
         - label
+        - resources
     createOrgAccessTokenResponse:
       examples:
         - id: a7a5ef25-8889-43a0-8cc7-f2a94268e861
