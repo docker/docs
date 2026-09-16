@@ -1,17 +1,10 @@
-<div class="card">
+<div class="card docs-navigation-card">
   {{ if .link }}
     <a href="{{ .link }}" class="card-link">
   {{ end }}
     <div class="card-header">
       {{ with .image }}
         <img class="card-image" src="{{ . }}" alt="">
-      {{ end }}
-      {{ with .icon }}
-      <div class="card-icon">
-        <span class="card-img svg">
-          {{ partialCached "icon" . . }}
-        </span>
-      </div>
       {{ end }}
       <h3 class="card-title">{{ markdownify .title }}</h3>
     </div>
