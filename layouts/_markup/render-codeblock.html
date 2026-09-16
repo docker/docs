@@ -2,12 +2,12 @@
   data-pagefind-ignore
   x-data
   x-ref="root"
-  class="group mt-2 mb-4 flex w-full scroll-mt-2 flex-col items-start gap-4 rounded bg-gray-50 p-2 outline outline-1 outline-offset-[-1px] outline-gray-200 dark:bg-gray-900 dark:outline-gray-800"
+  class="docs-code group mt-2 mb-4 flex w-full scroll-mt-2 flex-col items-start gap-4 rounded bg-gray-50 p-2 outline outline-1 outline-offset-[-1px] outline-gray-200 dark:bg-gray-900 dark:outline-gray-800"
 >
   {{ with .Attributes.title }}
     <div class="flex w-full items-center gap-2">
       <div
-        class="flex items-center gap-2.5 rounded bg-gray-100 px-2 py-0.5 dark:bg-gray-800"
+        class="docs-code-title flex items-center gap-2.5 rounded bg-gray-100 px-2 py-0.5 dark:bg-gray-800"
       >
         <div class="font-normal text-gray-500 dark:text-gray-200">
           {{ . }}
@@ -64,7 +64,7 @@
             <button
               @click="collapse = true"
               x-show="!collapse"
-              class="chip mx-auto mt-4 flex items-center  text-sm"
+              class="chip mx-auto mt-4 flex items-center text-sm"
             >
               <span>Hide</span>
               <span class="icon-svg"

@@ -111,6 +111,8 @@
 @import "syntax-dark.css";
 @import "syntax-light.css";
 @import "components.css";
-@import "highlight-github-dark.css";
+@layer components {
+  @import "highlight-github-dark.css";
+}
 
 @variant dark (&:where(.dark, .dark *));
