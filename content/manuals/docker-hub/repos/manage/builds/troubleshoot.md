@@ -23,8 +23,6 @@ aliases:
 If a build fails, a **Retry** icon appears next to the build report line on the
 **General** and **Builds** tabs. The **Build report** page and **Timeline logs** also display a **Retry** button.
 
-![Timeline view showing the retry build button](images/retry-build.png)
-
 > [!NOTE]
 >
 > If you are viewing the build details for a repository that belongs to an

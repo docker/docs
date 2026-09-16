@@ -84,8 +84,6 @@ Vulnerability exceptions are highlighted in the CLI when you run `docker scout
 cves <image>`. If a CVE is suppressed by an exception, a `SUPPRESSED` label
 appears next to the CVE ID. Details about the exception are also displayed.
 
-![SUPPRESSED label in the CLI output](/scout/images/suppressed-cve-cli.png)
-
 > [!IMPORTANT]
 > In order to view exceptions in the CLI, you must configure the CLI to use
 > the same Docker organization that you used to create the exceptions.

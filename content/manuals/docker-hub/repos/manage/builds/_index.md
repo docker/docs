@@ -22,8 +22,6 @@ aliases:
 Docker Hub can automatically build images from source code in an external
 repository and automatically push the built image to your Docker repositories.
 
-![An automated build dashboard](images/index-dashboard.png)
-
 When you set up automated builds, also called autobuilds, you create a list of
 branches and tags that you want to build into Docker images. When you push code
 to a source-code branch, for example in GitHub, for one of those listed image
