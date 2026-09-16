@@ -113,6 +113,23 @@ $ sbx run docker.io/my-org/agent-kit:1.0.0 \
     --kit docker.io/my-org/chromium-kit:1.0.0
 ```
 
+You can recognize this relationship in the kits' descriptors. The testing kit
+might declare:
+
+```yaml
+requires: ["chromium >= 120.0.0"]
+```
+
+The browser kit declares what it supplies:
+
+```yaml
+provides: ["chromium@120.0.0"]
+```
+
+The testing kit requires Chromium version 120 or later. The browser kit declares
+that it provides version 120, so it satisfies that requirement. These names
+describe what kits provide; they aren't image references that `sbx` downloads.
+
 Docker Sandboxes checks that the selected kits satisfy the declared requirement
 and applies the browser kit before the testing kit. If you leave out the browser
 kit, sandbox creation fails with an unmet requirement. It doesn't download an
@@ -120,9 +137,9 @@ extra kit automatically: you choose which provider to include, using the testing
 kit's documentation to find a compatible one.
 
 Kits can also declare that they can't work together. For example, two kits
-might configure a tool in incompatible ways. Choose a compatible combination;
-changing the order of `--kit` flags doesn't make one kit override another.
-For how authors declare dependencies and avoid conflicting customizations, see
+might configure a tool in incompatible ways. Choose a compatible combination.
+
+To declare these relationships in your own kits, see
 [Authoring compositions](/manuals/ai/sandboxes/customize/author/_index.md#compose-kits).
 
 A sandbox keeps the composition it was created with. To try another combination,
