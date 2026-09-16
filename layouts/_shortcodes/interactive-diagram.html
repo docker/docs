@@ -24,16 +24,6 @@
       </p>
       <p class="interactive-diagram__description">{{ $diagram.description }}</p>
     </div>
-    {{- if eq $type "sequence" }}
-      <button
-        type="button"
-        class="interactive-diagram__button interactive-diagram__button--play"
-        data-step-play
-        aria-pressed="false"
-      >
-        <span data-step-play-label>Play</span>
-      </button>
-    {{- end }}
   </figcaption>
   <div class="interactive-diagram__stage" data-diagram-stage></div>
   {{- if eq $type "topology" }}
@@ -69,20 +59,6 @@
         </div>
       </div>
       <p class="interactive-diagram__state" data-step-state></p>
-    </div>
-    <div
-      class="interactive-diagram__autoplay-progress"
-      data-step-autoplay-progress
-      role="progressbar"
-      aria-label="Time until the next step"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      aria-valuenow="0"
-    >
-      <span
-        class="interactive-diagram__autoplay-progress-bar"
-        data-step-autoplay-progress-bar
-      ></span>
     </div>
     <div class="interactive-diagram__controls" data-diagram-controls>
       <button

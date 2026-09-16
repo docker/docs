@@ -407,21 +407,6 @@
   line-height: 1.5;
 }
 
-.interactive-diagram__autoplay-progress {
-  height: 3px;
-  overflow: hidden;
-  background: color-mix(in srgb, var(--diagram-structure) 28%, transparent);
-}
-
-.interactive-diagram__autoplay-progress-bar {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: var(--diagram-accent);
-  transform: scaleX(0);
-  transform-origin: left center;
-}
-
 .interactive-diagram__controls {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
@@ -463,12 +448,6 @@
 .interactive-diagram__button:disabled {
   cursor: not-allowed;
   opacity: 0.45;
-}
-
-.interactive-diagram__button--play {
-  min-width: 3.8rem;
-  border-color: var(--diagram-accent);
-  color: var(--diagram-accent);
 }
 
 .interactive-diagram__progress {
@@ -517,12 +496,7 @@
 .interactive-diagram:not(.is-enhanced) .interactive-diagram__stage,
 .interactive-diagram:not(.is-enhanced) .interactive-diagram__status,
 .interactive-diagram:not(.is-enhanced) .interactive-diagram__topology-detail,
-.interactive-diagram:not(.is-enhanced) .interactive-diagram__autoplay-progress,
 .interactive-diagram:not(.is-enhanced) .interactive-diagram__controls {
-  display: none;
-}
-
-.interactive-diagram:not(.is-enhanced) .interactive-diagram__button--play {
   display: none;
 }
 

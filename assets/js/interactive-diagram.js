@@ -25,23 +25,8 @@ document.querySelectorAll("[data-interactive-diagram]").forEach((root) => {
 function initializeSequence(root, state, config) {
   const previousButton = root.querySelector("[data-step-previous]");
   const nextButton = root.querySelector("[data-step-next]");
-  const playButton = root.querySelector("[data-step-play]");
-  const playLabel = root.querySelector("[data-step-play-label]");
   const progress = root.querySelector("[data-step-progress]");
-  const autoplayProgress = root.querySelector("[data-step-autoplay-progress]");
-  const autoplayProgressBar = root.querySelector(
-    "[data-step-autoplay-progress-bar]",
-  );
-  const autoplayDuration = Math.max(
-    100,
-    Number(config.autoplayDuration) || 4000,
-  );
   let currentStep = 0;
-  let playTimer;
-  let progressFrame;
-  let stepStartedAt;
-  let elapsedInStep = 0;
-  let isPlaying = false;
 
   const stepButtons = config.steps.map((step, index) => {
     const button = document.createElement("button");
@@ -49,7 +34,6 @@ function initializeSequence(root, state, config) {
     button.className = "interactive-diagram__progress-step";
     button.setAttribute("aria-label", `Show step ${index + 1}: ${step.label}`);
     button.addEventListener("click", () => {
-      resetPlayback();
       showStep(index);
     });
     progress?.append(button);
@@ -79,9 +63,6 @@ function initializeSequence(root, state, config) {
     setText(root, "[data-step-body]", step.body);
     setText(root, "[data-step-state]", step.state);
 
-    elapsedInStep = 0;
-    setAutoplayProgress(0);
-
     if (previousButton) previousButton.disabled = currentStep === 0;
     if (nextButton)
       nextButton.disabled = currentStep === config.steps.length - 1;
@@ -90,119 +71,13 @@ function initializeSequence(root, state, config) {
       button.classList.toggle("is-active", selected);
       button.setAttribute("aria-current", selected ? "step" : "false");
     });
-    updatePlayButton();
-  }
-
-  function clearPlaybackTimers() {
-    window.clearTimeout(playTimer);
-    window.cancelAnimationFrame(progressFrame);
-    playTimer = undefined;
-    progressFrame = undefined;
-  }
-
-  function resetPlayback() {
-    clearPlaybackTimers();
-    isPlaying = false;
-    elapsedInStep = 0;
-    setAutoplayProgress(0);
-    updatePlayButton();
-  }
-
-  function pausePlaying() {
-    if (!isPlaying) return;
-    elapsedInStep = Math.min(
-      autoplayDuration,
-      elapsedInStep + now() - stepStartedAt,
-    );
-    clearPlaybackTimers();
-    isPlaying = false;
-    setAutoplayProgress(elapsedInStep / autoplayDuration);
-    updatePlayButton();
-  }
-
-  function startPlaying() {
-    if (
-      currentStep === config.steps.length - 1 &&
-      elapsedInStep >= autoplayDuration
-    ) {
-      showStep(0);
-    }
-    isPlaying = true;
-    stepStartedAt = now();
-    updatePlayButton();
-    scheduleCurrentStep();
-  }
-
-  function scheduleCurrentStep() {
-    clearPlaybackTimers();
-    const remaining = Math.max(0, autoplayDuration - elapsedInStep);
-    playTimer = window.setTimeout(completeCurrentStep, remaining);
-    updateAutoplayProgress();
-  }
-
-  function completeCurrentStep() {
-    elapsedInStep = autoplayDuration;
-    setAutoplayProgress(1);
-    if (currentStep === config.steps.length - 1) {
-      clearPlaybackTimers();
-      isPlaying = false;
-      updatePlayButton();
-      return;
-    }
-    showStep(currentStep + 1);
-    stepStartedAt = now();
-    scheduleCurrentStep();
-  }
-
-  function updateAutoplayProgress() {
-    if (!isPlaying) return;
-    const elapsed = Math.min(
-      autoplayDuration,
-      elapsedInStep + now() - stepStartedAt,
-    );
-    setAutoplayProgress(elapsed / autoplayDuration);
-    if (elapsed < autoplayDuration) {
-      progressFrame = window.requestAnimationFrame(updateAutoplayProgress);
-    }
-  }
-
-  function setAutoplayProgress(value) {
-    const progressValue = Math.max(0, Math.min(1, value));
-    if (autoplayProgressBar) {
-      autoplayProgressBar.style.transform = `scaleX(${progressValue})`;
-    }
-    autoplayProgress?.setAttribute(
-      "aria-valuenow",
-      String(Math.round(progressValue * 100)),
-    );
-  }
-
-  function updatePlayButton() {
-    playButton?.setAttribute("aria-pressed", String(isPlaying));
-    if (!playLabel) return;
-    if (isPlaying) {
-      playLabel.textContent = "Pause";
-    } else if (
-      currentStep === config.steps.length - 1 &&
-      elapsedInStep >= autoplayDuration
-    ) {
-      playLabel.textContent = "Restart";
-    } else {
-      playLabel.textContent = "Play";
-    }
   }
 
   previousButton?.addEventListener("click", () => {
-    resetPlayback();
     showStep(currentStep - 1);
   });
   nextButton?.addEventListener("click", () => {
-    resetPlayback();
     showStep(currentStep + 1);
-  });
-  playButton?.addEventListener("click", () => {
-    if (isPlaying) pausePlaying();
-    else startPlaying();
   });
 
   root.classList.add("is-enhanced");
@@ -627,10 +502,6 @@ function prefersReducedMotion() {
   return (
     window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
   );
-}
-
-function now() {
-  return window.performance?.now?.() ?? Date.now();
 }
 
 function edgePoints(from, to, offset = 0) {

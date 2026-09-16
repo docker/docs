@@ -82,8 +82,8 @@ allowed out of the box.
 
 ### Follow an authenticated request
 
-The following diagram shows where Docker Sandboxes checks network policy and
-replaces a sentinel credential with the real value. The real credential stays
+Step through the following diagram to see where Docker Sandboxes checks network
+policy and replaces a sentinel credential with the real value. The real credential stays
 outside the sandbox throughout the request.
 
 {{< interactive-diagram src="diagrams/credential-injection.yaml" >}}
