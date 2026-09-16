@@ -19,6 +19,8 @@
    semantic pairs on the components migrated by this prototype. */
 @layer docs {
   :root {
+    --docs-component-background: var(--tri-background-primary);
+    --docs-code-background: var(--tri-background);
     --docs-reading-foreground: var(--tri-foreground);
     --docs-reading-background: var(--tri-background-primary);
     --docs-inline-code-bg: color-mix(
@@ -33,6 +35,7 @@
   }
 
   :root.dark {
+    --docs-code-background: var(--tri-muted);
     --docs-reading-background: var(--tri-sidebar);
     color-scheme: dark;
   }
@@ -192,7 +195,7 @@
 
   .card,
   .section-card {
-    background: var(--tri-card);
+    background: var(--docs-component-background);
     color: var(--tri-card-foreground);
     border-color: var(--tri-border);
     border-radius: var(--tri-radius-lg);
@@ -200,7 +203,9 @@
   }
 
   .card:hover,
-  .section-card:hover {
+  .card:focus-within,
+  .section-card:hover,
+  .section-card:focus-visible {
     border-color: var(--tri-primary);
   }
 
@@ -212,7 +217,7 @@
 
   .card-description,
   .section-card-text {
-    color: var(--tri-muted-foreground);
+    color: var(--tri-foreground);
   }
 
   .button {
@@ -232,16 +237,21 @@
 
   .tabs,
   .summary-bar {
-    background: var(--tri-card);
+    background: var(--docs-component-background);
     border: 1px solid var(--tri-border);
     border-radius: var(--tri-radius-lg);
   }
 
   .tablist {
+    display: flex;
+    overflow-x: auto;
+    padding: 3px;
     border-color: var(--tri-border);
   }
 
   .tab-item {
+    flex-shrink: 0;
+    border-bottom: 2px solid transparent;
     color: var(--tri-muted-foreground);
     font-weight: var(--tri-font-weight-label);
   }
@@ -255,6 +265,248 @@
     color: var(--tri-primary);
     border-color: var(--tri-primary);
     border-bottom-width: 2px;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .card-header {
+    align-items: flex-start;
+  }
+
+  .card-icon {
+    flex-shrink: 0;
+    margin-top: 0.2em;
+  }
+
+  .docs-code {
+    background: var(--docs-code-background);
+    outline-color: var(--tri-border);
+    border-radius: var(--tri-radius-default);
+    color: var(--tri-foreground);
+  }
+
+  .docs-code pre,
+  .docs-code code {
+    background: transparent;
+    color: inherit;
+  }
+
+  /* Chroma and Gordon's highlight.js share the same syntax roles. */
+  :is(.docs-code, #gordon-chat)
+    :is(.k, .kc, .kd, .kn, .kp, .kr, .ow, .hljs-keyword, .hljs-literal) {
+    color: var(--tri-syntax-keyword);
+  }
+
+  :is(.docs-code, #gordon-chat)
+    :is(
+      .s,
+      .s1,
+      .s2,
+      .sa,
+      .sb,
+      .sc,
+      .sd,
+      .se,
+      .sh,
+      .si,
+      .sr,
+      .ss,
+      .sx,
+      .hljs-string,
+      .hljs-regexp
+    ) {
+    color: var(--tri-syntax-string);
+  }
+
+  :is(.docs-code, #gordon-chat)
+    :is(.m, .mb, .mf, .mh, .mi, .il, .mo, .hljs-number) {
+    color: var(--tri-syntax-number);
+  }
+
+  :is(.docs-code, #gordon-chat)
+    :is(.na, .nt, .cp, .cpf, .hljs-attr, .hljs-attribute, .hljs-meta) {
+    color: var(--tri-syntax-attr);
+  }
+
+  :is(.docs-code, #gordon-chat)
+    :is(.nb, .nf, .fm, .hljs-built_in, .hljs-title) {
+    color: var(--tri-syntax-command);
+  }
+
+  :is(.docs-code, #gordon-chat) :is(.kt, .nc, .nn, .hljs-type) {
+    color: var(--tri-syntax-type);
+  }
+
+  :is(.docs-code, #gordon-chat)
+    :is(.c, .c1, .cm, .cs, .ch, .hljs-comment, .hljs-quote) {
+    color: var(--tri-muted-foreground);
+  }
+
+  :is(.docs-code, #gordon-chat)
+    :is(.n, .nv, .no, .p, .o, .go, .gp, .hljs-variable, .hljs-subst) {
+    color: var(--tri-foreground);
+  }
+
+  .gordon-error {
+    background: var(--tri-alert-error-bg);
+    border-color: var(--tri-alert-error-border);
+    color: var(--tri-alert-error-title);
+  }
+
+  .gordon-warning {
+    background: var(--tri-alert-warning-bg);
+    border-color: var(--tri-alert-warning-border);
+    color: var(--tri-alert-warning-title);
+  }
+
+  .gordon-limit {
+    background: var(--tri-alert-info-bg);
+    border-color: var(--tri-alert-info-border);
+    color: var(--tri-foreground);
+  }
+
+  .gordon-limit button {
+    background: var(--tri-primary);
+    color: var(--tri-primary-foreground);
+  }
+
+  .docs-code .cl {
+    color: var(--tri-foreground);
+  }
+
+  .docs-code :is(.ln, .lnt) {
+    color: var(--tri-muted-foreground);
+  }
+
+  .docs-code .hl {
+    background: var(--tri-accent-subtle);
+  }
+
+  .docs-code-title {
+    background: var(--tri-muted);
+    color: var(--tri-muted-foreground);
+  }
+
+  .docs-code-title > div {
+    color: inherit;
+  }
+
+  .docs-code button[title="copy"] {
+    color: var(--tri-muted-foreground);
+    background: var(--docs-code-background);
+    border-radius: var(--tri-radius-default);
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+  }
+
+  .docs-code button[title="copy"]:focus-visible .icon-svg:first-child {
+    display: block;
+  }
+
+  #gordon-chat {
+    background: var(--tri-popover);
+    color: var(--tri-popover-foreground);
+    border-left: 1px solid var(--tri-border);
+    height: 100dvh;
+  }
+
+  #gordon-chat .gordon-muted {
+    color: var(--tri-muted-foreground);
+  }
+
+  .gordon-feedback {
+    background: var(--tri-secondary);
+    color: var(--tri-secondary-foreground);
+    border: 1px solid var(--tri-border);
+  }
+
+  .gordon-feedback:hover,
+  .gordon-feedback[aria-pressed="true"] {
+    background: var(--tri-accent-subtle);
+    color: var(--tri-primary);
+    border-color: var(--tri-primary);
+    box-shadow: none;
+  }
+
+  #gordon-chat button[type="submit"] {
+    color: var(--tri-primary);
+  }
+
+  #gordon-chat button[type="submit"]:disabled {
+    color: var(--tri-muted-foreground);
+  }
+
+  .gordon-header {
+    background: linear-gradient(
+      to right,
+      var(--tri-header-from),
+      var(--tri-header-to)
+    );
+    color: var(--tri-header-foreground);
+    box-shadow: none;
+    border-bottom: 1px solid var(--tri-border);
+  }
+
+  .gordon-suggestion {
+    background: var(--docs-component-background);
+    color: var(--tri-foreground);
+    border-color: var(--tri-border);
+    border-radius: var(--tri-radius-default);
+    text-align: left;
+  }
+
+  .gordon-suggestion:hover {
+    border-color: var(--tri-primary);
+    background: var(--tri-accent-subtle);
+    transform: none;
+  }
+
+  .gordon-suggestion .icon-svg {
+    background: var(--tri-accent-subtle);
+    color: var(--tri-primary);
+  }
+
+  #gordon-chat textarea {
+    background: var(--tri-input-bg);
+    color: var(--tri-foreground);
+    border-color: var(--tri-input);
+    padding-right: 3.5rem;
+    border-radius: var(--tri-radius-default);
+  }
+
+  #gordon-chat textarea::placeholder {
+    color: var(--tri-muted-foreground);
+  }
+
+  #gordon-chat textarea:focus {
+    border-color: var(--tri-ring);
+    outline: 2px solid var(--tri-ring);
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+
+  #gordon-chat textarea:enabled:hover {
+    border-color: var(--tri-ring);
+  }
+
+  .gordon-message {
+    background: var(--docs-component-background);
+    color: var(--tri-foreground);
+    border: 1px solid var(--tri-border);
+    border-radius: var(--tri-radius-lg);
+  }
+
+  .gordon-message-user {
+    background: var(--tri-accent-subtle);
+    border-color: var(--tri-border-accent);
+  }
+
+  .gordon-disclaimer {
+    background: var(--tri-sidebar);
+    color: var(--tri-muted-foreground);
+    border-top: 1px solid var(--tri-border);
   }
 
   .admonition {

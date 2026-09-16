@@ -44,18 +44,35 @@ through the local `--docs-reading-foreground` alias. The local
 `sidebar` in dark mode, matching the dark navigation surface. Subtle borders separate the navigation from the reading area. These are
 local layout adaptations; the separate Trident high-contrast mode stays inactive.
 
-Card descriptions and metadata retain their muted colors. Inactive sidebar
+Card descriptions use the primary foreground for readability; metadata stays
+muted. Cards and tabs use the component surface with semantic borders and
+accented hover or focus states. Inactive sidebar
 items use `sidebar-foreground-muted`, with stronger text on the active item.
 Inactive table-of-contents links are neutral; active and hovered links use the
 primary accent. Inline code uses a faint foreground tint and compact padding,
-while fenced code retains its existing syntax highlighting.
+while fenced code uses Trident's default background in light mode and the muted
+surface in dark mode to preserve syntax contrast. Chroma and Gordon's highlight.js
+map keywords, strings, numbers, attributes, commands, and types to Trident
+syntax roles. Comments retain the muted foreground.
 
 The neutral header is a docs-specific adaptation. Trident's `AppHeader` component
 uses the `header-from` and `header-to` blue gradient tokens.
 
-This is an integration prototype. Syntax highlighting, search internals, Gordon,
-landing-page layouts, and other components still need a design review. Loading
-tokens does not provide Trident component behavior or certify accessibility.
+Gordon uses the Trident header gradient, popover surface, input colors, and
+semantic message, feedback, and alert states. Pagefind inherits the same typeface,
+popover surface, foregrounds, accent highlights, and focus colors through its
+component variables. Search ranking and chat requests retain their existing
+behavior.
+
+This is an integration prototype. Landing-page layouts and components outside
+these mappings still need a design review. Loading tokens does not provide
+Trident component behavior or certify accessibility.
+
+Component checks cover cards, tab switching, code, search results, and Gordon
+at desktop and mobile widths in both themes. Local search checks use the
+preview's Pagefind assets because the local indexer fails with a native allocator
+error. Gordon message and rate-limit checks use intercepted browser responses;
+they verify rendering and interaction, not the live backend.
 
 ## Snapshot provenance
 
