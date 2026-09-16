@@ -97,25 +97,37 @@ mixin set, choose another name or recreate the sandbox with the desired kits.
 
 ## Compose kits
 
-Choose a workload and mixins that are designed to work together. A kit can
-require functionality provided by another selected kit or reject an incompatible
-combination. Docker Sandboxes checks these relationships when creating the
-sandbox; it doesn't find or download missing dependencies for you.
+Composition lets you assemble an environment from kits with different roles.
+In the [Neovim and Ruff example](#add-mixins), the workload supplies the agent,
+Neovim adds an editor, and Ruff adds a Python linter. The agent runs in one
+sandbox with all three available. Adding the tools doesn't change which agent
+starts or how it launches.
 
-For example, if a mixin requires a tool provided by another kit, include both
-kits with `--kit`. Installing a similarly named tool in the workload doesn't
-satisfy that requirement unless its kit declares that it provides it.
+Some kits are designed to work independently; others need something another
+kit supplies. Suppose a browser-testing kit declares that it requires Chromium
+from a browser kit. Include both alongside your agent workload:
 
-Providers are applied before kits that require them. Independent mixins are
-ordered by reference, so changing the order of `--kit` flags doesn't resolve
-conflicts. Two kits contributing the same image file or conflicting environment
-values cause a composition error; `PATH` additions are combined. Choose compatible
-kits or ask their authors to resolve overlapping customizations.
+```console
+$ sbx run docker.io/my-org/agent-kit:1.0.0 \
+    --kit docker.io/my-org/browser-testing-kit:1.0.0 \
+    --kit docker.io/my-org/chromium-kit:1.0.0
+```
 
-The workload controls the launch command and working directory. Mixins add
-content and runtime settings without replacing that launch configuration.
-Select the whole composition at creation time. `sbx kit add` doesn't apply v3
-changes to an existing sandbox.
+Docker Sandboxes checks that the selected kits satisfy the declared requirement
+and applies the browser kit before the testing kit. If you leave out the browser
+kit, sandbox creation fails with an unmet requirement. It doesn't download an
+extra kit automatically: you choose which provider to include, using the testing
+kit's documentation to find a compatible one.
+
+Kits can also declare that they can't work together. For example, two kits
+might configure a tool in incompatible ways. Choose a compatible combination;
+changing the order of `--kit` flags doesn't make one kit override another.
+For how authors declare dependencies and avoid conflicting customizations, see
+[Authoring compositions](/manuals/ai/sandboxes/customize/author/_index.md#compose-kits).
+
+A sandbox keeps the composition it was created with. To try another combination,
+create a sandbox with a different name or recreate the existing one. `sbx kit add`
+doesn't change a v3 composition in place.
 
 ## Pass arguments to kits
 
