@@ -53,6 +53,10 @@ Use the terminal to interact with the sandbox.
 Open **Sandboxes** to review each sandbox's name, type, status, hourly rate,
 expiration, and age. Select a sandbox to reopen its detail page and terminal.
 
+In a Claude Code sandbox, paste an image from your clipboard or drag an image
+file onto the terminal to attach it to your prompt. Wait for the upload to
+finish, type your question, and press Enter to send it.
+
 ## Manage the lifecycle
 
 A sandbox can be running or paused:

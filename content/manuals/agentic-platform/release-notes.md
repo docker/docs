@@ -6,6 +6,11 @@ keywords: docker agentic platform, release notes, updates, fixes
 weight: 90
 ---
 
+## September 14, 2026
+
+- Added image attachments in Claude Code sandboxes. Paste or drop an image
+  into the terminal to include it in your prompt.
+
 ## September 1, 2026
 
 - Added inline credential saving and credential selection for sandbox launches.
