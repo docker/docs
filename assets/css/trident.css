@@ -19,8 +19,12 @@
    semantic pairs on the components migrated by this prototype. */
 @layer docs {
   :root {
-    /* Long-form reading sits between Trident's primary and muted text roles. */
-    --docs-reading-foreground: var(--tri-gray-700);
+    --docs-reading-foreground: var(--tri-foreground);
+    --docs-inline-code-bg: color-mix(
+      in oklab,
+      var(--tri-foreground) 5%,
+      var(--tri-background-primary)
+    );
     --navbar-font-size: var(--tri-scale-label-font-size);
     --tw-prose-code-bg: var(--tri-muted);
     --tw-prose-code-bg-dark: var(--tri-muted);
@@ -28,7 +32,6 @@
   }
 
   :root.dark {
-    --docs-reading-foreground: var(--tri-gray-300);
     color-scheme: dark;
   }
 
@@ -43,13 +46,26 @@
     color: var(--tri-foreground);
   }
 
+  .docs-content {
+    background: var(--tri-background-primary);
+  }
+
+  .docs-sidebar {
+    border-right: 1px solid var(--tri-border-subtle);
+  }
+
+  .docs-aside {
+    border-left: 1px solid var(--tri-border-subtle);
+    padding-left: 1rem;
+  }
+
   .docs-header {
     background: var(--tri-sidebar);
     color: var(--tri-foreground);
     border-bottom: 1px solid var(--tri-border);
   }
 
-  .docs-header a[title="Docker Docs home page"] path[fill="white"] {
+  .docs-logo path {
     fill: currentColor;
   }
 
@@ -150,6 +166,18 @@
 
   .link {
     color: var(--tri-primary);
+  }
+
+  .toc a {
+    color: var(--tri-muted-foreground);
+    background: none;
+    border-left: 2px solid transparent;
+  }
+
+  .toc a[aria-current="true"],
+  .toc a:hover {
+    color: var(--tri-primary);
+    border-left-color: var(--tri-primary);
   }
 
   .prose [marlin-action] {
