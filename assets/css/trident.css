@@ -1,0 +1,262 @@
+/* Docs adapter. Keep the upstream snapshot untouched; migrate legacy aliases here. */
+@theme inline {
+  --default-font-family: var(--tri-font-family-sans);
+  --font-mono: "Roboto Mono", ui-monospace, monospace;
+  --color-blue: var(--tri-primary);
+  --color-primary-blue: var(--tri-primary);
+  --color-gray: var(--tri-muted-foreground);
+  --color-background-light: var(--tri-background);
+  --color-background-dark: var(--tri-background);
+  --color-navbar-bg: var(--tri-sidebar);
+  --color-navbar-bg-dark: var(--tri-sidebar);
+  --color-navbar-text: var(--tri-sidebar-foreground);
+  --color-navbar-text-dark: var(--tri-sidebar-foreground);
+  --color-divider-light: var(--tri-border);
+  --color-divider-dark: var(--tri-border);
+}
+
+/* This layer follows utilities so legacy light/dark classes cannot override
+   semantic pairs on the components migrated by this prototype. */
+@layer docs {
+  :root {
+    --navbar-font-size: var(--tri-scale-label-font-size);
+    --tw-prose-code-bg: var(--tri-muted);
+    --tw-prose-code-bg-dark: var(--tri-muted);
+    color-scheme: light;
+  }
+
+  :root.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: var(--tri-font-family-sans);
+    font-weight: var(--tri-font-weight-body);
+  }
+
+  .docs-body,
+  .docs-content {
+    background: var(--tri-background);
+    color: var(--tri-foreground);
+  }
+
+  .docs-header {
+    background: var(--tri-sidebar);
+    color: var(--tri-foreground);
+    border-bottom: 1px solid var(--tri-border);
+  }
+
+  .docs-header a[title="Docker Docs home page"] path[fill="white"] {
+    fill: currentColor;
+  }
+
+  .docs-header nav li {
+    border-bottom-width: 2px;
+  }
+
+  .docs-header nav li:not(.border-transparent) {
+    color: var(--tri-primary);
+    border-color: var(--tri-primary);
+  }
+
+  .docs-header nav li:hover {
+    color: var(--tri-primary);
+    border-color: var(--tri-border-accent);
+  }
+
+  .docs-header #buttons button {
+    background: var(--tri-background);
+    color: var(--tri-foreground);
+    border: 1px solid var(--tri-border);
+    border-radius: var(--tri-radius-default);
+    font-weight: var(--tri-font-weight-label);
+  }
+
+  .docs-header #buttons button:hover {
+    background: var(--tri-action-hover);
+  }
+
+  .docs-header .shimmer::after {
+    display: none;
+  }
+
+  :where(a, button, input, select, textarea, summary):focus-visible {
+    outline: 2px solid var(--tri-ring);
+    outline-offset: 3px;
+  }
+
+  .navbar-group-font-title {
+    color: var(--tri-sidebar-foreground-muted);
+    text-transform: none;
+    font-weight: var(--tri-font-weight-label);
+  }
+
+  .navbar-entry-background-current {
+    background: var(--tri-sidebar-accent);
+    color: var(--tri-sidebar-accent-foreground);
+    border-radius: var(--tri-radius-default);
+  }
+
+  .navbar-entry-background-current a[aria-current="page"] {
+    color: var(--tri-primary);
+    font-weight: var(--tri-font-weight-semibold);
+  }
+
+  .prose {
+    --tw-prose-body: var(--tri-foreground);
+    --tw-prose-headings: var(--tri-foreground);
+    --tw-prose-links: var(--tri-primary);
+    --tw-prose-bold: var(--tri-foreground);
+    --tw-prose-counters: var(--tri-muted-foreground);
+    --tw-prose-bullets: var(--tri-muted-foreground);
+    --tw-prose-hr: var(--tri-border);
+    --tw-prose-quotes: var(--tri-foreground);
+    --tw-prose-quote-borders: var(--tri-border);
+    --tw-prose-captions: var(--tri-muted-foreground);
+    --tw-prose-code: var(--tri-foreground);
+    --tw-prose-th-borders: var(--tri-border);
+    --tw-prose-td-borders: var(--tri-border);
+    font-size: var(--tri-scale-body-font-size);
+    line-height: var(--tri-scale-body-line-height);
+    letter-spacing: var(--tri-scale-body-letter-spacing);
+  }
+
+  .prose :is(h1, h2, h3, h4) {
+    font-weight: var(--tri-font-weight-heading);
+    line-height: var(--tri-line-height-tight);
+  }
+
+  .prose h1 {
+    font-size: var(--tri-scale-heading-1-font-size);
+    letter-spacing: var(--tri-scale-heading-1-letter-spacing);
+  }
+
+  .prose h2 {
+    font-size: var(--tri-scale-heading-3-font-size);
+    letter-spacing: var(--tri-scale-heading-3-letter-spacing);
+  }
+
+  .prose h3 {
+    font-size: var(--tri-scale-heading-4-font-size);
+    letter-spacing: var(--tri-scale-heading-4-letter-spacing);
+  }
+
+  .link {
+    color: var(--tri-primary);
+  }
+
+  .prose [marlin-action] {
+    color: var(--tri-muted-foreground);
+  }
+
+  .prose [marlin-action]:hover {
+    color: var(--tri-foreground);
+  }
+
+  .card,
+  .section-card {
+    background: var(--tri-card);
+    color: var(--tri-card-foreground);
+    border-color: var(--tri-border);
+    border-radius: var(--tri-radius-lg);
+    filter: none;
+  }
+
+  .card:hover,
+  .section-card:hover {
+    border-color: var(--tri-primary);
+  }
+
+  .card-header,
+  .card-icon,
+  .section-card-title,
+  .section-card-text {
+    color: var(--tri-card-foreground);
+  }
+
+  .card-description {
+    color: var(--tri-muted-foreground);
+  }
+
+  .button {
+    background: var(--tri-primary);
+    color: var(--tri-primary-foreground);
+    padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
+    border-radius: var(--tri-radius-default);
+    font-weight: var(--tri-font-weight-label);
+    text-decoration: none;
+  }
+
+  .button:hover {
+    background: var(--tri-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .tabs,
+  .summary-bar {
+    background: var(--tri-card);
+    border: 1px solid var(--tri-border);
+    border-radius: var(--tri-radius-lg);
+  }
+
+  .tablist {
+    border-color: var(--tri-border);
+  }
+
+  .tab-item {
+    color: var(--tri-muted-foreground);
+    font-weight: var(--tri-font-weight-label);
+  }
+
+  .tab-item:hover {
+    background: var(--tri-action-hover);
+    color: var(--tri-foreground);
+  }
+
+  .tab-item.border-b-4 {
+    color: var(--tri-primary);
+    border-color: var(--tri-primary);
+    border-bottom-width: 2px;
+  }
+
+  .admonition {
+    --docs-callout-border: var(--tri-border);
+    --docs-callout-bg: var(--tri-card);
+    --docs-callout-title: var(--tri-foreground);
+    border: 1px solid var(--docs-callout-border);
+    border-radius: var(--tri-radius-lg);
+    background: var(--docs-callout-bg);
+    color: var(--docs-callout-title);
+  }
+
+  .admonition-note {
+    --docs-callout-border: var(--tri-alert-info-border);
+    --docs-callout-bg: var(--tri-alert-info-bg);
+    --docs-callout-title: var(--tri-alert-info-title);
+  }
+
+  .admonition-tip {
+    --docs-callout-border: var(--tri-alert-success-border);
+    --docs-callout-bg: var(--tri-alert-success-bg);
+    --docs-callout-title: var(--tri-alert-success-title);
+  }
+
+  .admonition-warning {
+    --docs-callout-border: var(--tri-alert-warning-border);
+    --docs-callout-bg: var(--tri-alert-warning-bg);
+    --docs-callout-title: var(--tri-alert-warning-title);
+  }
+
+  .admonition-danger {
+    --docs-callout-border: var(--tri-alert-error-border);
+    --docs-callout-bg: var(--tri-alert-error-bg);
+    --docs-callout-title: var(--tri-alert-error-title);
+  }
+
+  .admonition-important {
+    --docs-callout-border: var(--tri-alert-premium-border);
+    --docs-callout-bg: var(--tri-alert-premium-bg);
+    --docs-callout-title: var(--tri-alert-premium-title);
+  }
+}

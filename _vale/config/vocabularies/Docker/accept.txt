@@ -425,3 +425,5 @@ tokenization
 WebGL
 Xubuntu
 Netlify
+Pagefind
+Roboto
