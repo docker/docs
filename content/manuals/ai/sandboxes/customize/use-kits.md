@@ -163,26 +163,39 @@ for secrets.
 
 ## Runtime access and instructions
 
-Kits declare capabilities: requests for network access, credentials, storage,
-and runtime behavior. Docker Sandboxes applies these declarations when creating
-and running the sandbox.
+A kit can bring the setup needed to use its tools: access to external services,
+authentication, and instructions for the agent. These requests are called
+capabilities. When choosing a kit, look at its documentation for the services
+it connects to, credentials it needs, and behavior it adds to your sandbox.
 
-Network rules from the selected kits combine. Kit deny rules take precedence
-over kit allow rules. When organization governance is active, only organization
-allow rules grant access; kit allow rules don't expand it. See
-[Policy precedence](/manuals/ai/sandboxes/governance/concepts.md#precedence).
+For example, suppose you add a GitHub CLI kit so your agent can read issues
+and open pull requests. The kit can request access to GitHub, declare how to
+authenticate, and give the agent guidance for using `gh`. You don't need to
+configure each of those pieces yourself, but you do need to supply a credential
+and authorize the kit to use it.
 
-A kit can request credentials for a named service. Store the credential on your
-host and approve the kit's use when prompted. With proxy-managed credentials,
-the agent receives a placeholder and the host proxy inserts the real value into
-requests to the declared service. See
-[Credential configuration](/manuals/ai/sandboxes/configuration/credentials.md) for storing keys,
-approval, and unattended use.
+Store the credential on your host using the service name specified by the kit.
+For this example:
 
-Kits can also contribute agent instructions. The workload chooses a profile
-filename, such as `AGENTS.md` or `CLAUDE.md`. Docker Sandboxes generates it above
-the mounted workspace, outside the mount, and includes or references guidance
-from the selected kits. It doesn't replace instructions in your project.
+```console
+$ sbx secret set github
+```
+
+Approve the kit's credential request when prompted if you want it to use that
+credential. For proxy-managed credentials, the real value stays on your host;
+the sandbox proxy authenticates requests to the service on the kit's behalf.
+See [Credential configuration](/manuals/ai/sandboxes/configuration/credentials.md)
+for storing credentials, approving their use, and preparing unattended runs.
+
+A kit's network requests still have to meet your sandbox's network policy.
+For example, a GitHub kit can't grant access to GitHub if your organization's
+policy doesn't allow it. If a connection fails, check the
+[policy log](#debug-kits) to see which rule blocked it.
+
+Agent instructions take effect without you copying files into your project.
+For example, a Ruff kit can tell the agent to run the linter after changing
+Python files. The agent receives that guidance alongside your project's own
+instructions; adding the kit doesn't overwrite them.
 
 ## Restrict kit sources
 
