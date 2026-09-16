@@ -49,7 +49,3 @@ see [Add more organizations](./manage.md#add-more-organizations).
 - [Add organizations](./manage.md#add-more-organizations)
 - [Invite company members](./manage.md#company-invitations)
 - [Manage company owners](./manage.md#company-owners)
-
-## More resources
-
-- [Video: Create a company](https://youtu.be/XZ5_i6qiKho?feature=shared&t=359)
