@@ -20,10 +20,11 @@
 @layer docs {
   :root {
     --docs-reading-foreground: var(--tri-foreground);
+    --docs-reading-background: var(--tri-background-primary);
     --docs-inline-code-bg: color-mix(
       in oklab,
       var(--tri-foreground) 5%,
-      var(--tri-background-primary)
+      var(--docs-reading-background)
     );
     --navbar-font-size: var(--tri-scale-label-font-size);
     --tw-prose-code-bg: var(--tri-muted);
@@ -32,6 +33,7 @@
   }
 
   :root.dark {
+    --docs-reading-background: var(--tri-sidebar);
     color-scheme: dark;
   }
 
@@ -47,7 +49,7 @@
   }
 
   .docs-content {
-    background: var(--tri-background-primary);
+    background: var(--docs-reading-background);
   }
 
   .docs-sidebar {

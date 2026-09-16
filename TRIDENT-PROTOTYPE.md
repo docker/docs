@@ -39,9 +39,9 @@ the existing Roboto Mono font. The existing theme switch activates Trident's
 `.dark` overrides.
 
 Article body text and ordinary quotations use Trident's primary foreground
-through the local `--docs-reading-foreground` alias. The reading surface uses
-`background-primary`: white in light mode and a lifted dark surface in dark
-mode. Subtle borders separate the navigation from the reading area. These are
+through the local `--docs-reading-foreground` alias. The local
+`--docs-reading-background` uses white `background-primary` in light mode and
+`sidebar` in dark mode, matching the dark navigation surface. Subtle borders separate the navigation from the reading area. These are
 local layout adaptations; the separate Trident high-contrast mode stays inactive.
 
 Card descriptions and metadata retain their muted colors. Inactive sidebar
