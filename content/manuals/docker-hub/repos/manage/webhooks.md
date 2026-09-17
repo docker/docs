@@ -78,3 +78,8 @@ Webhook payloads have the following JSON format:
 > [!NOTE]
 >
 > The `callback_url` field is a legacy field and is no longer supported.
+
+Webhooks on a mirrored [Docker Hardened Image](/dhi/) repository include an
+additional `dhi_metadata` object describing the vulnerability and package
+changes in the pushed build. For details, see [Automate syncing with
+webhooks](/dhi/how-to/mirror/#automate-syncing-with-webhooks).
