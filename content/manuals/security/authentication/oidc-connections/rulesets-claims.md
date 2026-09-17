@@ -83,6 +83,10 @@ You can use wildcards to match across repositories or branches:
 | `repo:my-org/*`                                | All repos in the organization                   |
 | `repo:my-org/my-repo:ref:refs/heads/release-*` | All branches starting with `release-`           |
 
+For GitHub repositories created after July 15, 2026 you can find your
+repo's immutable claim prefix under Settings -> Actions -> OIDC. In that
+case, for the pattern you'd use `repo:my-org@123456/my-repo@1234567890`.
+
 ## Resources
 
 Resources define the Docker resources a workflow can access when a ruleset
