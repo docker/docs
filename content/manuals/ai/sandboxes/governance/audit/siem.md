@@ -2,8 +2,8 @@
 title: SIEM forwarding
 linkTitle: SIEM forwarding
 weight: 40
-description: Forward Docker AI Governance audit events to Splunk, Dynatrace, or Datadog.
-keywords: docker sandboxes, SIEM, audit logs, Splunk, Dynatrace, Datadog, AI Governance, forwarding, NDJSON
+description: Forward Docker AI Governance audit events to Splunk, Dynatrace, Datadog, or Sumo Logic.
+keywords: docker sandboxes, SIEM, audit logs, Splunk, Dynatrace, Datadog, Sumo Logic, AI Governance, forwarding, NDJSON
 ---
 
 {{< summary-bar feature_name="AI Governance Audit Logs" >}}
@@ -20,6 +20,7 @@ with the supplied credential before saving.
 | Splunk Cloud (HEC)               | Hosted Splunk using the HTTP Event Collector                    |
 | Dynatrace                        | Dynatrace Log Management using the Log Ingest API               |
 | Datadog                          | Datadog Logs using the HTTP log intake API                      |
+| Sumo Logic                       | Sumo Logic using an HTTP Source                                 |
 
 ## Before you begin
 
@@ -41,6 +42,8 @@ Gather credentials from your SIEM before configuring forwarding:
   scope. See [Dynatrace documentation](https://docs.dynatrace.com/).
 - **Datadog**: Logs intake URL for your Datadog site and an API key. See
   [Datadog documentation](https://docs.datadoghq.com/).
+- **Sumo Logic**: HTTP Source URL and an auth token from an HTTP Logs &
+  Metrics source. See [Sumo Logic documentation](https://www.sumologic.com/help/).
 
 ## Add a SIEM destination
 
