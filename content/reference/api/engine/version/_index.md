@@ -1,5 +1,6 @@
 ---
 title: API reference by version
+weight: 4
 build:
   render: never
 sidebar:
