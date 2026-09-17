@@ -192,11 +192,11 @@ allowed`, regardless of the token's scopes. Use the linked replacement
 endpoints instead:
 
 - `GET /v2/repositories/{namespace}/{repository}` — use
-  [Get repository](/reference/api/hub/latest/#tag/repositories/operation/GetRepository).
+  [Get repository](/reference/api/hub/latest/operations/GetRepository/).
 - `GET /v2/repositories/{namespace}` — use
-  [List repositories](/reference/api/hub/latest/#tag/repositories/operation/listNamespaceRepositories).
+  [List repositories](/reference/api/hub/latest/operations/listNamespaceRepositories/).
 - `GET /v2/users/{username}/repositories` — use
-  [List repositories](/reference/api/hub/latest/#tag/repositories/operation/listNamespaceRepositories).
+  [List repositories](/reference/api/hub/latest/operations/listNamespaceRepositories/).
 
 ## Organization access token best practices
 

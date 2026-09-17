@@ -258,7 +258,7 @@ After you invite and manage members, explore these related topics:
 
 [roles-permissions]: /manuals/security/roles-and-permissions/_index.md
 [licenses-and-invites]: /manuals/accounts/organization/manage/manage-licenses.md#licenses-and-invites
-[bulk-invites]: /reference/api/hub/latest/#tag/invites/paths/~1v2~1invites~1bulk/post
+[bulk-invites]: /reference/api/hub/latest/operations/postV2InvitesBulk/
 [docker-pricing]: https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminMembers
 [scim-role-mapping]: /manuals/security/provisioning/scim/_index.md
 [scim-provisioning]: /manuals/security/provisioning/scim/_index.md

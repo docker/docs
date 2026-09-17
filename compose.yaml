@@ -11,3 +11,16 @@ services:
         - action: sync
           path: .
           target: /project
+          ignore:
+            - hack/api-docs/
+            - content/reference/api/hub/latest.yaml
+            - content/reference/api/dvp/latest.yaml
+            - content/reference/api/registry/latest.yaml
+        - action: rebuild
+          path: hack/api-docs
+        - action: rebuild
+          path: content/reference/api/hub/latest.yaml
+        - action: rebuild
+          path: content/reference/api/dvp/latest.yaml
+        - action: rebuild
+          path: content/reference/api/registry/latest.yaml
