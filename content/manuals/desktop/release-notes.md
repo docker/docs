@@ -33,7 +33,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Updates
 
 - [containerd v2.3.5](https://github.com/containerd/containerd/releases/tag/v2.3.5)
-- [Docker Agent v1.138.1](https://github.com/docker/docker-agent/releases/tag/v1.138.1)
+- [Docker Agent v1.140.0](https://github.com/docker/docker-agent/releases/tag/v1.140.0)
 - [Docker Buildx v0.37.1](https://github.com/docker/buildx/releases/tag/v0.37.1)
 - Docker Offload `v0.6.27`
 
