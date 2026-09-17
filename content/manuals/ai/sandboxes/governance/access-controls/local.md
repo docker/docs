@@ -59,7 +59,25 @@ Initialize the global network policy for your sandboxes:
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Open        | All outbound traffic is allowed. Equivalent to adding a wildcard allow rule with `sbx policy allow network "**"`.                                 |
 | Balanced    | Default deny, with a baseline allowlist covering AI provider APIs, package managers, code hosts, container registries, and common cloud services. |
-| Locked Down | All outbound traffic is blocked, including model provider APIs (for example, `api.anthropic.com`). You must explicitly allow everything you need. |
+| Locked Down | No baseline allow rules. Destinations need an allow rule from you or a kit. |
+
+Presets initialize the global policy. Built-in agent kits and other kits can
+add per-sandbox allow rules, including under **Locked Down** (`deny-all`). The
+preset isn't an explicit deny rule that overrides those allowances. To inspect
+the rules a kit adds to a sandbox, run:
+
+```console
+$ sbx policy ls my-sandbox --source kit --type network --wide
+```
+
+To block a destination allowed by a kit, add an explicit deny rule:
+
+```console
+$ sbx policy deny network --sandbox my-sandbox openrouter.ai
+```
+
+Deny rules take precedence over allow rules. See
+[Policy precedence](../concepts.md#precedence).
 
 The **Balanced** preset's baseline allowlist is a good starting point for most
 workflows. Run `sbx policy ls` to see exactly which rules it includes. As of
