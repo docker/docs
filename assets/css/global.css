@@ -56,19 +56,19 @@ input[type="search"]::-ms-clear {
     @apply mt-8 mb-4;
   }
   :where(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-    font-weight: 500 !important;
-    font-size: 180% !important;
+    font-weight: var(--tri-font-weight-heading);
+    font-size: var(--tri-scale-heading-1-font-size);
     margin-bottom: 0.4em !important;
   }
   > h2 {
     @apply mt-7! mb-3!;
-    font-size: 160% !important;
+    font-size: var(--tri-scale-heading-3-font-size);
     a {
       @apply hover:no-underline!;
     }
   }
   > h3 {
-    font-size: 130% !important;
+    font-size: var(--tri-scale-heading-4-font-size);
     a {
       @apply hover:no-underline!;
     }

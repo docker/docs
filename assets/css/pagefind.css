@@ -1,25 +1,47 @@
-/* Pagefind Component UI Customizations */
-
-/* Dark mode variables for modal */
-.dark pagefind-modal {
-  --pf-text: var(--color-gray-100);
-  --pf-text-secondary: var(--color-gray-300);
-  --pf-text-muted: var(--color-gray-400);
-  --pf-background: var(--color-gray-900);
-  --pf-border: var(--color-gray-700);
-  --pf-border-focus: var(--color-blue-400);
-  --pf-hover: var(--color-gray-800);
+/* Scope variables to the modal so the separately loaded Pagefind defaults
+   cannot replace the docs theme. */
+pagefind-modal {
+  --pf-font: var(--tri-font-family-sans);
+  --pf-text: var(--tri-foreground);
+  --pf-text-secondary: var(--tri-foreground);
+  --pf-text-muted: var(--tri-muted-foreground);
+  --pf-background: var(--tri-popover);
+  --pf-border: var(--tri-border);
+  --pf-border-focus: var(--tri-ring);
+  --pf-outline-focus: var(--tri-ring);
+  --pf-hover: var(--tri-accent-subtle);
+  --pf-skeleton: var(--tri-muted);
+  --pf-skeleton-shine: var(--tri-background-primary);
+  --pf-border-radius: var(--tri-radius-default);
+  --pf-error-bg: var(--tri-alert-error-bg);
+  --pf-error-border: var(--tri-alert-error-border);
+  --pf-error-text: var(--tri-alert-error-title);
+  --pf-error-text-secondary: var(--tri-foreground);
 }
 
-/* Highlight marks in results */
-pagefind-results mark {
-  background-color: var(--color-yellow-200);
-  color: inherit;
-  padding: 0 0.125rem;
-  border-radius: 0.125rem;
-}
+@layer docs {
+  pagefind-results li {
+    border-color: var(--tri-border);
+  }
 
-.dark pagefind-results mark {
-  background-color: rgba(255, 204, 72, 0.3);
-  color: white;
+  pagefind-results a {
+    color: var(--tri-primary);
+  }
+
+  pagefind-results p {
+    color: var(--tri-foreground);
+  }
+
+  pagefind-results .text-xs,
+  #search-placeholder {
+    color: var(--tri-muted-foreground);
+  }
+
+  pagefind-results mark {
+    background: var(--tri-accent-subtle);
+    color: var(--tri-foreground);
+    font-weight: var(--tri-font-weight-semibold);
+    padding: 0 0.125rem;
+    border-radius: 0.125rem;
+  }
 }

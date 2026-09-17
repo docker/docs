@@ -1,0 +1,216 @@
+/* Homepage composition using the shared Trident surfaces and controls. */
+@layer docs {
+  .docs-home {
+    background: var(--tri-sidebar);
+    color: var(--tri-foreground);
+  }
+
+  .home-container {
+    width: min(100% - 3rem, 72rem);
+    margin-inline: auto;
+  }
+
+  .home-hero {
+    padding: clamp(3rem, 6vw, 5rem) 1.5rem 3.5rem;
+  }
+
+  .home-hero-content {
+    max-width: 48rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .home-hero h1 {
+    margin: 0;
+    font-size: clamp(2.25rem, 4vw, 3rem);
+    font-weight: var(--tri-font-weight-semibold);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .home-intro {
+    margin-top: 1rem;
+    color: var(--docs-card-description);
+    font-size: 1rem;
+    line-height: 1.6;
+    text-wrap: balance;
+  }
+
+  .home-question {
+    margin-top: 2rem;
+  }
+
+  .home-question-field {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    padding-left: 1.25rem;
+    background: var(--tri-background-paper-elevation-0);
+    border: 1px solid var(--tri-input);
+    border-radius: var(--tri-radius-lg);
+    box-shadow: var(--docs-card-shadow);
+  }
+
+  .home-question-field:focus-within {
+    border-color: var(--tri-ring);
+    outline: 2px solid var(--tri-ring);
+    outline-offset: 3px;
+  }
+
+  .home-gordon-icon {
+    flex-shrink: 0;
+    color: var(--tri-primary);
+  }
+
+  .home-question input {
+    flex: 1;
+    min-width: 0;
+    padding-block: 0.5rem;
+    color: var(--tri-foreground);
+    background: transparent;
+    font: inherit;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  .home-question input::placeholder {
+    color: var(--tri-muted-foreground);
+    opacity: 1;
+  }
+
+  .home-question-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: var(--tri-primary);
+    color: var(--tri-primary-foreground);
+    border-radius: var(--tri-radius-default);
+    cursor: pointer;
+  }
+
+  .home-question-submit:disabled {
+    background: var(--tri-muted);
+    color: var(--tri-muted-foreground);
+    cursor: default;
+  }
+
+  .home-question-submit:enabled:hover {
+    background: var(--tri-accent-hover);
+  }
+
+  .home-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.625rem;
+    margin: 1.25rem auto 0;
+  }
+
+  .home-suggestion {
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--tri-border);
+    border-radius: var(--tri-radius-lg);
+    background: transparent;
+    color: var(--docs-card-description);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  .home-suggestion:hover {
+    background: var(--tri-accent-subtle);
+    border-color: var(--tri-primary);
+    color: var(--tri-foreground);
+  }
+
+  .home-navigation {
+    padding-bottom: 3.5rem;
+  }
+
+  .home-updates {
+    padding-top: 0;
+    padding-bottom: 4rem;
+  }
+
+  .home-updates header {
+    border-color: var(--tri-border);
+    margin-bottom: 1rem;
+  }
+
+  .home-updates h2 {
+    color: var(--tri-foreground);
+    font-size: 1.5rem;
+    font-weight: var(--tri-font-weight-semibold);
+  }
+
+  .home-updates ol {
+    max-width: 56rem;
+  }
+
+  .home-update-link {
+    border-color: var(--tri-border);
+  }
+
+  .home-update-dot {
+    background: var(--tri-muted-foreground);
+    box-shadow: 0 0 0 4px var(--tri-sidebar);
+  }
+
+  .home-update-product,
+  .home-updates > .home-container > button {
+    color: var(--tri-primary);
+  }
+
+  .home-updates time,
+  .home-update-link .icon-svg {
+    color: var(--tri-muted-foreground);
+  }
+
+  .home-update-title {
+    color: var(--tri-foreground);
+  }
+
+  .home-update-description {
+    color: var(--docs-card-description);
+    line-height: 1.6;
+  }
+
+  .home-update-link:hover .home-update-title {
+    color: var(--tri-primary);
+  }
+
+  .home-update-link:hover .home-update-dot {
+    background: var(--tri-primary);
+  }
+
+  @media (max-width: 40rem) {
+    .home-question-field {
+      gap: 0.625rem;
+      padding-left: 0.75rem;
+    }
+
+    .home-gordon-icon {
+      display: none;
+    }
+
+    .home-hero {
+      padding-bottom: 2.5rem;
+    }
+
+    .home-navigation {
+      padding-bottom: 2.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-update-link .icon-svg {
+      transition: none;
+      transform: none;
+    }
+  }
+}

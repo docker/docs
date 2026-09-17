@@ -1,0 +1,163 @@
+/* Auto-generated from tokens/ — DO NOT EDIT — run `pnpm run tokens:build` */
+
+
+@layer tri.primitives {
+:root {
+  --tri-black-100: oklch(0 0 0);
+  --tri-black-12: oklch(0 0 0 / 0.12);
+  --tri-black-16: oklch(0 0 0 / 0.16);
+  --tri-black-24: oklch(0 0 0 / 0.24);
+  --tri-black-32: oklch(0 0 0 / 0.32);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-black-4: oklch(0 0 0 / 0.04);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-black-40: oklch(0 0 0 / 0.4);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-black-56: oklch(0 0 0 / 0.56);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-black-64: oklch(0 0 0 / 0.64);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-black-8: oklch(0 0 0 / 0.08);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-black-80: oklch(0 0 0 / 0.8);
+  --tri-black-main: oklch(0 0 0);
+  --tri-blue-100: oklch(0.933 0.029 241.4);
+  --tri-blue-200: oklch(0.892 0.049 242.8);
+  --tri-blue-300: oklch(0.806 0.09 242.2);
+  --tri-blue-400: oklch(0.64 0.169 249.4);
+  --tri-blue-450: oklch(0.633 0.199 257.2);
+  --tri-blue-50: oklch(0.954 0.019 240.7);
+  --tri-blue-500: oklch(0.546 0.219 262);
+  --tri-blue-600: oklch(0.455 0.198 262.2);
+  --tri-blue-700: oklch(0.353 0.161 261.8);
+  --tri-blue-800: oklch(0.208 0.081 259.1);
+  --tri-blue-900: oklch(0.204 0.122 264.1);
+  --tri-gray-100: oklch(0.968 0.005 245);
+  --tri-gray-200: oklch(0.913 0.007 245);
+  --tri-gray-300: oklch(0.832 0.01 245);
+  --tri-gray-400: oklch(0.661 0.014 245);
+  --tri-gray-50: oklch(0.985 0.004 245);
+  --tri-gray-500: oklch(0.55 0.016 245);
+  --tri-gray-600: oklch(0.462 0.014 245);
+  --tri-gray-700: oklch(0.366 0.012 245);
+  --tri-gray-775: oklch(0.23 0.014 245);
+  --tri-gray-800: oklch(0.214 0.008 245);
+  --tri-gray-850: oklch(0.2 0.014 245);
+  --tri-gray-900: oklch(0.184 0.008 245);
+  --tri-gray-925: oklch(0.16 0.012 245);
+  --tri-gray-950: oklch(0.1 0.008 245);
+  --tri-green-100: oklch(0.909 0.039 178.6);
+  --tri-green-200: oklch(0.817 0.082 175);
+  --tri-green-300: oklch(0.73 0.089 176.7);
+  --tri-green-400: oklch(0.642 0.097 178.3);
+  --tri-green-50: oklch(0.958 0.016 187.3);
+  --tri-green-500: oklch(0.544 0.08 182.8);
+  --tri-green-600: oklch(0.481 0.077 179.4);
+  --tri-green-700: oklch(0.424 0.066 182.1);
+  --tri-green-800: oklch(0.268 0.038 183.9);
+  --tri-lime-100: oklch(0.91 0.06 145);
+  --tri-lime-200: oklch(0.85 0.1 145);
+  --tri-lime-300: oklch(0.79 0.14 145);
+  --tri-lime-400: oklch(0.72 0.17 145);
+  --tri-lime-50: oklch(0.96 0.03 145);
+  --tri-lime-500: oklch(0.61 0.19 145);
+  --tri-lime-600: oklch(0.5 0.2 145);
+  --tri-lime-700: oklch(0.4 0.17 145);
+  --tri-lime-800: oklch(0.27 0.11 145);
+  --tri-orange-100: oklch(0.919 0.078 85.1);
+  --tri-orange-200: oklch(0.821 0.14 72.9);
+  --tri-orange-300: oklch(0.747 0.15 65.3);
+  --tri-orange-400: oklch(0.673 0.16 57.7);
+  --tri-orange-450: oklch(0.666 0.158 55.8);
+  --tri-orange-50: oklch(0.969 0.034 86.3);
+  --tri-orange-500: oklch(0.564 0.149 49.6);
+  --tri-orange-600: oklch(0.52 0.143 44.4);
+  --tri-orange-700: oklch(0.443 0.125 43.7);
+  --tri-orange-800: oklch(0.274 0.071 48.2);
+  --tri-pink-100: oklch(0.933 0.054 331.4);
+  --tri-pink-200: oklch(0.897 0.084 332);
+  --tri-pink-300: oklch(0.836 0.139 333);
+  --tri-pink-400: oklch(0.69 0.245 329.8);
+  --tri-pink-50: oklch(0.951 0.039 331.1);
+  --tri-pink-500: oklch(0.587 0.256 330.8);
+  --tri-pink-600: oklch(0.516 0.234 330.6);
+  --tri-pink-700: oklch(0.426 0.195 329.6);
+  --tri-pink-800: oklch(0.268 0.122 331.2);
+  --tri-red-100: oklch(0.922 0.039 17.2);
+  --tri-red-200: oklch(0.861 0.075 16.7);
+  --tri-red-300: oklch(0.773 0.134 18.9);
+  --tri-red-400: oklch(0.69 0.199 22.3);
+  --tri-red-50: oklch(0.952 0.021 17.5);
+  --tri-red-500: oklch(0.566 0.208 23);
+  --tri-red-600: oklch(0.507 0.184 21.7);
+  --tri-red-700: oklch(0.416 0.148 22.1);
+  --tri-red-800: oklch(0.225 0.068 16.7);
+  --tri-shadow-2xl: 0px 25px 50px -12px oklch(0 0 0 / 0.25);
+  --tri-shadow-2xs: 0px 1px 0px 0px oklch(0 0 0 / 0.05);
+  --tri-shadow-lg: 0px 10px 15px -3px oklch(0 0 0 / 0.10), 0px 4px 6px -4px oklch(0 0 0 / 0.10);
+  --tri-shadow-md: 0px 4px 6px -1px oklch(0 0 0 / 0.10), 0px 2px 4px -2px oklch(0 0 0 / 0.10);
+  --tri-shadow-sm: 0px 1px 3px 0px oklch(0 0 0 / 0.10), 0px 1px 2px -1px oklch(0 0 0 / 0.10);
+  --tri-shadow-xl: 0px 20px 25px -5px oklch(0 0 0 / 0.10), 0px 8px 10px -6px oklch(0 0 0 / 0.10);
+  --tri-shadow-xs: 0px 1px 2px 0px oklch(0 0 0 / 0.05);
+  --tri-terminal-blue-300: oklch(0.74 0.17 262);
+  --tri-terminal-blue-400: oklch(0.68 0.18 262);
+  --tri-terminal-blue-600: oklch(0.44 0.18 262);
+  --tri-terminal-blue-700: oklch(0.4 0.17 262);
+  --tri-terminal-cyan-300: oklch(0.78 0.09 195);
+  --tri-terminal-cyan-400: oklch(0.72 0.1 195);
+  --tri-terminal-cyan-600: oklch(0.4 0.1 195);
+  --tri-terminal-cyan-700: oklch(0.36 0.09 195);
+  --tri-terminal-green-300: oklch(0.78 0.15 155);
+  --tri-terminal-green-400: oklch(0.72 0.17 145);
+  --tri-terminal-green-600: oklch(0.38 0.15 145);
+  --tri-terminal-green-700: oklch(0.34 0.13 155);
+  --tri-terminal-red-300: oklch(0.78 0.17 25);
+  --tri-terminal-red-400: oklch(0.72 0.2 25);
+  --tri-terminal-red-600: oklch(0.48 0.2 25);
+  --tri-terminal-red-700: oklch(0.44 0.17 25);
+  --tri-terminal-violet-300: oklch(0.74 0.19 290);
+  --tri-terminal-violet-400: oklch(0.68 0.2 290);
+  --tri-terminal-violet-600: oklch(0.46 0.2 290);
+  --tri-terminal-violet-700: oklch(0.42 0.19 290);
+  --tri-terminal-yellow-300: oklch(0.81 0.14 65);
+  --tri-terminal-yellow-400: oklch(0.75 0.15 65);
+  --tri-terminal-yellow-600: oklch(0.42 0.14 65);
+  --tri-terminal-yellow-700: oklch(0.38 0.13 75);
+  --tri-violet-100: oklch(0.9 0.062 307.2);
+  --tri-violet-200: oklch(0.845 0.095 304.4);
+  --tri-violet-300: oklch(0.789 0.128 301.6);
+  --tri-violet-400: oklch(0.63 0.225 295.4);
+  --tri-violet-50: oklch(0.957 0.028 311.3);
+  --tri-violet-500: oklch(0.548 0.275 291.4);
+  --tri-violet-600: oklch(0.489 0.275 290.9);
+  --tri-violet-700: oklch(0.414 0.232 291.7);
+  --tri-violet-800: oklch(0.208 0.111 300.8);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-white-100: oklch(1 0 0);
+  --tri-white-12: oklch(1 0 0 / 0.12);
+  --tri-white-16: oklch(1 0 0 / 0.16);
+  --tri-white-24: oklch(1 0 0 / 0.24);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-white-32: oklch(1 0 0 / 0.32);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-white-4: oklch(1 0 0 / 0.04);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-white-40: oklch(1 0 0 / 0.4);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-white-56: oklch(1 0 0 / 0.56);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-white-64: oklch(1 0 0 / 0.64);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-white-8: oklch(1 0 0 / 0.08);
+  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
+  --tri-white-80: oklch(1 0 0 / 0.8);
+  --tri-white-main: oklch(1 0 0);
+  --tri-z-base: 0;
+  --tri-z-dropdown: 50;
+  --tri-z-modal: 300;
+  --tri-z-overlay: 200;
+  --tri-z-popover: 400;
+  --tri-z-sticky: 100;
+  --tri-z-toast: 500;
+}
+}

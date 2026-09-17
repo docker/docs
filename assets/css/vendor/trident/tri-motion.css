@@ -1,0 +1,45 @@
+/* Auto-generated from tokens/ — DO NOT EDIT — run `pnpm run tokens:build` */
+
+@layer tri.motion {
+:root {
+  --tri-duration-expressive: 200ms;
+  --tri-duration-fast: 100ms;
+  --tri-duration-instant: 50ms;
+  --tri-duration-normal: 200ms;
+  --tri-duration-productive: 120ms;
+  --tri-duration-slow: 300ms;
+  --tri-duration-slower: 500ms;
+  --tri-duration-structural: 300ms;
+  --tri-ease-default: cubic-bezier(0.2, 0, 0, 1);
+  --tri-ease-expressive: cubic-bezier(0.2, 0, 0, 1);
+  --tri-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --tri-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --tri-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --tri-ease-productive: cubic-bezier(0.2, 0, 0.4, 1);
+}
+}
+@theme inline {
+  --duration-expressive: var(--tri-duration-expressive);
+  --duration-fast: var(--tri-duration-fast);
+  --duration-instant: var(--tri-duration-instant);
+  --duration-normal: var(--tri-duration-normal);
+  --duration-productive: var(--tri-duration-productive);
+  --duration-slow: var(--tri-duration-slow);
+  --duration-slower: var(--tri-duration-slower);
+  --duration-structural: var(--tri-duration-structural);
+  --ease-default: var(--tri-ease-default);
+  --ease-expressive: var(--tri-ease-expressive);
+  --ease-in: var(--tri-ease-in);
+  --ease-in-out: var(--tri-ease-in-out);
+  --ease-out: var(--tri-ease-out);
+  --ease-productive: var(--tri-ease-productive);
+}
+
+@utility duration-expressive { transition-duration: var(--tri-duration-expressive); }
+@utility duration-fast { transition-duration: var(--tri-duration-fast); }
+@utility duration-instant { transition-duration: var(--tri-duration-instant); }
+@utility duration-normal { transition-duration: var(--tri-duration-normal); }
+@utility duration-productive { transition-duration: var(--tri-duration-productive); }
+@utility duration-slow { transition-duration: var(--tri-duration-slow); }
+@utility duration-slower { transition-duration: var(--tri-duration-slower); }
+@utility duration-structural { transition-duration: var(--tri-duration-structural); }

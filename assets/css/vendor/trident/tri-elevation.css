@@ -1,0 +1,35 @@
+/* Auto-generated from tokens/ — DO NOT EDIT — run `pnpm run tokens:build` */
+
+
+@layer tri.elevation {
+:root {
+  --tri-elevation-floating-shadow: 0px 4px 6px -1px oklch(0 0 0 / 0.10), 0px 2px 4px -2px oklch(0 0 0 / 0.10);
+  --tri-elevation-floating-z: var(--tri-z-sticky);
+  --tri-elevation-modal-shadow: 0px 20px 25px -5px oklch(0 0 0 / 0.10), 0px 8px 10px -6px oklch(0 0 0 / 0.10);
+  --tri-elevation-modal-z: var(--tri-z-modal);
+  --tri-elevation-overlay-shadow: 0px 10px 15px -3px oklch(0 0 0 / 0.10), 0px 4px 6px -4px oklch(0 0 0 / 0.10);
+  --tri-elevation-overlay-z: var(--tri-z-overlay);
+  --tri-elevation-raised-shadow: 0px 1px 3px 0px oklch(0 0 0 / 0.10), 0px 1px 2px -1px oklch(0 0 0 / 0.10);
+  --tri-elevation-raised-z: var(--tri-z-dropdown);
+  --tri-elevation-toast-shadow: 0px 20px 25px -5px oklch(0 0 0 / 0.10), 0px 8px 10px -6px oklch(0 0 0 / 0.10);
+  --tri-elevation-toast-z: var(--tri-z-toast);
+}
+}
+
+@theme inline {
+  --z-raised: var(--tri-elevation-raised-z);
+  --z-floating: var(--tri-elevation-floating-z);
+  --z-overlay: var(--tri-elevation-overlay-z);
+  --z-modal: var(--tri-elevation-modal-z);
+  --z-toast: var(--tri-elevation-toast-z);
+  --z-sticky: var(--tri-z-sticky);
+  --z-dropdown: var(--tri-z-dropdown);
+}
+
+@utility z-raised { z-index: var(--tri-elevation-raised-z); }
+@utility z-floating { z-index: var(--tri-elevation-floating-z); }
+@utility z-overlay { z-index: var(--tri-elevation-overlay-z); }
+@utility z-modal { z-index: var(--tri-elevation-modal-z); }
+@utility z-toast { z-index: var(--tri-elevation-toast-z); }
+@utility z-sticky { z-index: var(--tri-z-sticky); }
+@utility z-dropdown { z-index: var(--tri-z-dropdown); }
