@@ -15,7 +15,7 @@ it as a schema v3 workload kit. You'll prepare the operating system, install
 Claude Code, and configure its model, API access, and agent instructions.
 The same approach applies to other agents and organization-maintained images.
 
-To customize a published agent with settings, hooks, or instructions,
+To combine a published agent with tools and their runtime requirements,
 [author a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md). Use this
 tutorial when you need control over the base image, agent installation, and
 launch command.

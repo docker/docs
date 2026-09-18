@@ -45,10 +45,10 @@ and launch command, and mixins add tools or behavior to it.
 | `workload` | The environment and command to run, such as an agent or a shell | Pass it to `sbx run` or `sbx create` |
 | `mixin` | Additional tools, configuration, or runtime behavior | Add it with `--kit` |
 
-For example, a shell workload can provide the base environment, a Claude Code
-mixin can add the agent, and another mixin can add an Agent Client Protocol
-(ACP) adapter. Together, they give you a shell with Claude Code and its adapter
-available. Each component can be maintained and reused separately.
+For example, a Claude Code workload supplies the agent and its environment.
+An internal CLI mixin adds your company's tool, permits access to its API,
+and requests the credential it needs. You can reuse that mixin with other
+agent workloads.
 
 ## Kit sets
 
@@ -57,15 +57,11 @@ the kits to include and can add capabilities, lifecycle hooks, instructions,
 and arguments for the combined environment. Publish the set to give consumers
 one reference with the component versions already selected.
 
-Docker publishes the shell, Claude Code, and ACP adapter combination described
-above as a set. Run it with:
-
-```console
-$ sbx run docker.io/docker/sbx-kit-claude-acp-set:2.1.274
-```
-
-This starts the shell with Claude Code and its ACP adapter available. See
-[Use kits](/manuals/ai/sandboxes/customize/use-kits.md) for prerequisites and usage.
+Publish the Claude Code workload and internal CLI mixin as a set, and your
+team can run an agent with the tool and its API access prepared. Consumers
+select the set's reference instead of choosing each component separately.
+See [Use kits](/manuals/ai/sandboxes/customize/use-kits.md) for how to run kits
+and add mixins.
 
 Workload and mixin describe how a published kit is used. A set describes how
 an author builds it from other kits. Publishing a set that contains a workload

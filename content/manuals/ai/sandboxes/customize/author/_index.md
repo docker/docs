@@ -33,16 +33,15 @@ behavior in its own descriptor without a separate mixin for each customization.
 
 ## Customize an environment with a set
 
-Start with published components and declare the behavior you want on the set.
-For example, combine a shell workload and Claude Code mixin, then add a model
-argument, a generated settings file, and team instructions. The components
-supply the software and its runtime requirements; the set supplies your
-customization.
+Combine an agent workload with the tools it needs. For example, pair the
+Claude Code workload with a mixin that packages an internal CLI, permits
+access to its API, and requests a credential. Publish them as a set so your
+team can run the environment through one reference.
 
 The [kit-set guide](/manuals/ai/sandboxes/customize/author/kit-sets.md) walks through
-this example, including publishing and running it. You don't need a separate
-mixin for settings that belong to this environment. Extract a customization
-into a mixin when you want to reuse and version it independently.
+this example, including publishing and running it. The tool mixin can also
+be reused with other agents. The set can add its own runtime declarations,
+such as network access to a package registry needed by this environment.
 
 ## Build a workload
 

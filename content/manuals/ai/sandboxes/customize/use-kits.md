@@ -21,32 +21,22 @@ mixins, and sets.
 ## Run a kit
 
 The built-in agent names are shortcuts for kit references. To run another kit,
-replace the agent name with that kit's reference. For example, Docker's shell
-workload opens a shell without an agent:
+replace the agent name with that kit's reference. For example, run Docker's
+published v3 Claude Code workload:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-shell:1.0.0
+$ sbx run docker.io/docker/sbx-kit-claude:2.1.274 --name claude-project
 ```
 
 The sandbox uses your current directory as its workspace. To use another
 project directory, append its path. See
 [Choose a workspace](/manuals/ai/sandboxes/usage.md#choose-a-workspace).
 
-For a prepared agent environment, use a published set. Docker's Claude ACP
-set combines the shell workload, Claude Code, and an Agent Client Protocol
-(ACP) adapter. Store an Anthropic API key on the host, then run the set:
-
-```console
-$ sbx secret set anthropic
-$ sbx run docker.io/docker/sbx-kit-claude-acp-set:2.1.274 --name claude-acp
-```
-
-Approve the credential request when prompted. This opens a shell with
-`claude` and `claude-agent-acp` installed. Run `claude` for an interactive
-session, or connect an ACP client to `claude-agent-acp` over standard input
-and output. For other authentication options, see
+This starts Claude Code. Follow the prompts to authenticate, or prepare
+credentials on the host as described in
 [Credential configuration](/manuals/ai/sandboxes/configuration/credentials.md).
-The `--name` flag distinguishes this sandbox from the shell-only example.
+A published set containing a workload runs the same way: pass the set's
+reference in place of the workload's reference.
 
 Browse [Docker's published kits](https://hub.docker.com/orgs/docker/repositories?search=sbx-kit)
 for other environments. For local and Git references, see
@@ -59,10 +49,10 @@ omitting the workspace creates a mountless sandbox.
 ## Name and reuse a sandbox
 
 Use `--name` to give a sandbox a name when creating it. Reconnect to the
-Claude ACP sandbox from the previous example with:
+Claude Code sandbox from the previous example with:
 
 ```console
-$ sbx run --name claude-acp
+$ sbx run --name claude-project
 ```
 
 Running an existing sandbox reuses its recorded kit configuration. To try a
@@ -73,10 +63,10 @@ a v3 composition in place.
 
 ## Runtime access and instructions
 
-Kits declare their runtime needs through capabilities. The Claude mixin in the
-published set requests network access and credentials so Claude can reach
-Anthropic. Storing the API key provides its value. Approving the credential
-request authorizes the kit to use it. See
+Kits declare their runtime needs through capabilities. The Claude workload
+requests network access and credentials so Claude can reach
+Anthropic. When using an API key, storing it on the host provides its value.
+Approving the credential request authorizes the kit to use it. See
 [Credential bindings](/manuals/ai/sandboxes/configuration/credentials.md#credential-bindings)
 for preparing unattended runs.
 
@@ -92,10 +82,6 @@ check the [policy log](#debug-kits) to see which rule blocked it.
 Kits can also supply instructions for using their tools. The workload chooses
 the instruction profile, and mixins contribute guidance to it. The generated
 profile sits outside your workspace and doesn't overwrite project instructions.
-When launching an agent manually from a shell workload, follow the kit's
-instructions for passing that guidance to the agent. The
-[set authoring example](/manuals/ai/sandboxes/customize/author/kit-sets.md#run-with-the-sets-settings)
-shows this for Claude Code.
 
 ## Add mixins
 
@@ -104,22 +90,23 @@ together. Built-in shortcuts such as `claude` and `codex` select v2 kits, so
 use [v2 mixins](/manuals/ai/sandboxes/customize/kits-v2/_index.md) with those
 shortcuts. See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility).
 
-To choose the components yourself, start with a workload and add mixins with
-`--kit`. For example, add Claude Code to the shell workload:
+Add a tool to the agent environment with `--kit`. For example, an internal
+CLI mixin can package your company's executable along with network rules
+and a credential request for its API:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name claude-tools \
-    --kit docker.io/docker/sbx-kit-claude-mixin:2.1.274
+$ sbx run docker.io/docker/sbx-kit-claude:2.1.274 --name claude-tools \
+    --kit docker.io/<NAMESPACE>/company-cli:1.0.0
 ```
 
-This provides the shell and Claude Code without the ACP adapter. The Claude
-mixin brings its software, network rules, and credential requests. Use the
-Anthropic credential you stored in [Run a kit](#run-a-kit), and approve any
-requested credential access when prompted.
+Replace the mixin reference with one your organization has published. To
+build this example, see [Package an internal CLI](/manuals/ai/sandboxes/customize/author/kit-examples.md#package-an-internal-cli).
+Store the credential requested by the mixin on the host and approve access
+when prompted.
 
-The workload and mixins form a composition: their files and runtime settings
-combine into one environment. The workload still controls the launch command,
-so this example opens a shell where you can run `claude`.
+The workload and mixin form a composition: their files and runtime settings
+combine into one environment. Claude Code still starts as the agent, with
+`company-cli` available for it to use.
 
 Repeat `--kit` to add more mixins. You can also add compatible mixins to a
 published workload set, or add a set containing only mixins with `--kit`.
@@ -132,15 +119,21 @@ to publish it as one reference. For reusable component examples, see
 
 ## Compose kits
 
-Some mixins need a feature another kit supplies. The ACP adapter needs the
-Claude Code mixin from the previous example. Include both with the shell
-workload:
+Some mixins need a feature another kit supplies. For example, an Agent Client
+Protocol (ACP) adapter lets a compatible editor or other client drive an
+agent session. Docker's Claude ACP adapter needs the Claude Code mixin.
+Include both with a shell workload:
 
 ```console
 $ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name claude-acp-components \
     --kit docker.io/docker/sbx-kit-claude-mixin:2.1.274 \
     --kit docker.io/docker/sbx-kit-claude-acp:0.79.0
 ```
+
+This opens a shell with `claude` and `claude-agent-acp` installed. An ACP
+client communicates with `claude-agent-acp` over standard input and output.
+Use the Claude mixin with this adapter: it supplies the binary at the path
+the adapter expects.
 
 The adapter declares its dependency in its descriptor:
 
@@ -161,38 +154,37 @@ feature, not an image to download: you select the kit that supplies it.
 Requirements can also specify a minimum feature version, and kits can declare
 incompatible combinations.
 
-This command selects the same components as the published Claude ACP set in
-[Run a kit](#run-a-kit). With `--kit`, Docker Sandboxes checks the combination
-when creating the sandbox. With a set, the publisher resolves and merges the
-components during the build, and consumers receive one kit with a digest-pinned
-record of its components.
+Docker publishes this combination as
+`docker.io/docker/sbx-kit-claude-acp-set:2.1.274`. With `--kit`, Docker Sandboxes
+checks the combination when creating the sandbox. With a set, the publisher
+resolves and merges the components during the build, and consumers receive
+one kit with a digest-pinned record of its components.
 
 To declare these relationships in your own kits, see
 [Authoring compositions](/manuals/ai/sandboxes/customize/author/_index.md#compose-kits).
 
 ## Pass arguments to kits
 
-A kit can expose arguments for choices such as an agent's model. Check the
+A kit can expose arguments for choices such as a linter's mode. Check the
 publisher's documentation for argument names, defaults, and accepted values.
-For example, after publishing the set from
-[Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md), select its
-model with `--kit-arg`:
+For example, a set that exposes the `lint_mode` argument shown in
+[Configure component arguments](/manuals/ai/sandboxes/customize/author/kit-sets.md#configure-component-arguments)
+can select a mode with `--kit-arg`:
 
 ```console
-$ sbx run docker.io/<NAMESPACE>/team-claude:1.0.0 \
-    --name team-claude-opus --kit-arg model=opus
+$ sbx run docker.io/<NAMESPACE>/claude-tools:1.0.0 \
+    --name claude-tools-fix --kit-arg lint_mode=fix
 ```
 
-Replace `<NAMESPACE>` with the namespace where you published that example.
-Use the arguments declared by your selected kit. The model argument in this
-example belongs to the set you authored.
+This assumes you have published a workload set with that linter component
+and argument. Replace the reference with your set's published reference.
 
 A bare argument name applies to every selected kit that declares it. To target
 one kit, prefix the name with its handle and a period:
 
 ```console
-$ sbx run docker.io/<NAMESPACE>/team-claude:1.0.0 \
-    --name team-claude-opus --kit-arg team-claude.model=opus
+$ sbx run docker.io/<NAMESPACE>/claude-tools:1.0.0 \
+    --name claude-tools-fix --kit-arg claude-tools.lint_mode=fix
 ```
 
 The handle is the local directory name, the Git subdirectory or repository

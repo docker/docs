@@ -31,7 +31,8 @@ Instructions, generated configuration, and startup hooks can also be declared
 directly on a set. When they belong to one environment, put them in the set's
 `capabilities` and `args` instead of publishing another mixin. See
 [Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md) for a complete
-example with its own model argument, settings file, and team instructions.
+example combining an agent with an internal CLI and adding network access
+on the set.
 
 For source layout and capability declarations, see
 [Author kits](/manuals/ai/sandboxes/customize/author/_index.md).
@@ -76,6 +77,85 @@ $ sbx run --name kit-shell ./shell-v3 .
 
 Each example uses a different sandbox name because selecting a different kit
 combination requires creating a sandbox.
+
+## Package an internal CLI
+
+A tool mixin can carry both an executable and the runtime access it needs.
+This example packages `company-cli`, an illustrative internal tool that calls
+`api.company.example` using a bearer token. Replace the binary, domain,
+credential service, and token variable with those used by your own tool.
+
+Create a `company-cli` directory. Put your tool's Linux executable in it as
+`company-cli`, alongside these two files. Use a binary built for your
+sandbox's CPU architecture. This example assumes a self-contained binary.
+If your tool needs shared libraries or other runtime files, include them in
+the overlay too.
+
+```dockerfile {title="company-cli/company-cli.dockerfile"}
+FROM scratch
+COPY --chmod=0755 company-cli /usr/local/bin/company-cli
+```
+
+The descriptor permits the API domain and requests its credential:
+
+```yaml {title="company-cli/company-cli.yaml"}
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: mixin
+displayName: Company CLI
+version: "1.0.0"
+
+capabilities:
+  - type: com.docker.sandbox/network-policy@1
+    config:
+      runtime:
+        allow:
+          - api.company.example:443
+  - type: com.docker.sandbox/credential@1
+    config:
+      service: company-api
+      phase: runtime
+      apiKey:
+        name: COMPANY_API_TOKEN
+        proxyManaged: true
+        inject:
+          - domain: api.company.example
+            header: Authorization
+            format: "Bearer %s"
+```
+
+The tool reads `COMPANY_API_TOKEN` as its token. With `proxyManaged: true`,
+it receives a placeholder inside the sandbox. The proxy replaces the
+`Authorization` header with the stored credential for requests to the declared
+API domain. The real token stays on the host. Adapt this declaration to your
+tool's authentication behavior.
+
+Store the API credential on the host, then try the mixin with Docker's
+published Claude Code workload:
+
+```console
+$ sbx secret set company-api
+$ sbx run docker.io/docker/sbx-kit-claude:2.1.274 --name claude-company \
+    --kit ./company-cli
+```
+
+Authenticate Claude Code as described in
+[Credential configuration](/manuals/ai/sandboxes/configuration/credentials.md)
+and approve the mixin's credential request when prompted. Claude Code can
+use the installed CLI to work with your internal service. The sandbox must
+also be able to reach the service, and its network policy must permit it.
+
+Publish the mixin so other workloads and sets can use it:
+
+```console
+$ docker login
+$ docker buildx build ./company-cli -f ./company-cli/company-cli.yaml \
+    -t docker.io/<NAMESPACE>/company-cli:1.0.0 --push
+```
+
+Replace `<NAMESPACE>` with a registry namespace you can push to. To package
+this mixin and Claude Code as one environment, continue with
+[Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md).
 
 ## Contribute agent instructions
 
