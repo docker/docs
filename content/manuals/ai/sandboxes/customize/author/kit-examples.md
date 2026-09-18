@@ -82,19 +82,22 @@ combination requires creating a sandbox.
 
 A tool mixin can carry both an executable and the runtime access it needs.
 This example packages `company-cli`, an illustrative internal tool that calls
-`api.company.example` using a bearer token. Replace the binary, domain,
+`api.company.example` using a bearer token. Replace the source image, domain,
 credential service, and token variable with those used by your own tool.
 
-Create a `company-cli` directory. Put your tool's Linux executable in it as
-`company-cli`, alongside these two files. Use a binary built for your
-sandbox's CPU architecture. This example assumes a self-contained binary.
-If your tool needs shared libraries or other runtime files, include them in
-the overlay too.
+Create a `company-cli` directory with these two files. The Dockerfile copies
+the executable from an image your organization publishes into the mixin:
 
 ```dockerfile {title="company-cli/company-cli.dockerfile"}
 FROM scratch
-COPY --chmod=0755 company-cli /usr/local/bin/company-cli
+# Copy the executable from your tool's image into this mixin.
+COPY --from=my-org/internal-cli-bin:latest /usr/local/bin/company-cli /usr/local/bin/company-cli
 ```
+
+Replace the source image and binary path with your tool's image and location.
+The binary must be executable and built for the sandbox's Linux architecture.
+This example assumes a self-contained binary. If your tool needs shared
+libraries or other runtime files, copy them into the overlay too.
 
 The descriptor permits the API domain and requests its credential:
 
