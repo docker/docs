@@ -294,7 +294,7 @@ $ docker buildx build 'https://github.com/user/myrepo.git?tag=v0.1.0&commit=dead
 By default, BuildKit doesn't keep the `.git` directory when using Git contexts.
 You can configure BuildKit to keep the directory by setting the
 [`BUILDKIT_CONTEXT_KEEP_GIT_DIR` build argument](/reference/dockerfile.md#buildkit-built-in-build-args).
-This can be useful to if you want to retrieve Git information during your build:
+This can be useful if you want to retrieve Git information during your build:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -341,8 +341,8 @@ $ GIT_AUTH_TOKEN=<token> docker buildx build \
 
 ### Remote context with Dockerfile from stdin
 
-Use the following syntax to build an image using files on your local
-filesystem, while using a Dockerfile from stdin.
+Use the following syntax to build an image using files from a remote URL,
+while using a Dockerfile from stdin.
 
 ```console
 $ docker build -f- <URL>
@@ -542,6 +542,7 @@ The following code snippet shows an example `.dockerignore` file.
 */*/temp*
 temp?
 ```
+
 <!-- vale off -->
 
 This file causes the following build behavior:
