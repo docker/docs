@@ -7,6 +7,11 @@ weight: 20
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
+Author a kit to package a repeatable sandbox environment or a reusable part of
+one. A workload supplies the base environment and launch command. A mixin adds
+tools or behavior. A set combines these components with its own customization.
+This page introduces the source layout and runtime declarations they use.
+
 > [!NOTE]
 > V3 kits are experimental. Select a v3 workload and v3 mixins together.
 > Built-in shortcuts such as `claude` and `codex` use v2 and can't be combined
@@ -127,6 +132,11 @@ A capability declares a resource or behavior that a kit needs from Docker
 Sandboxes at runtime, such as network access, credentials, lifecycle hooks,
 or agent instructions. Declare these requests in the descriptor's
 `capabilities` list.
+
+The image build packages software and static files. When you create a sandbox,
+Docker Sandboxes uses the declarations to configure access, generate files,
+and run setup. Building or running the image with Docker alone doesn't apply
+these sandbox behaviors.
 
 Sets, workloads, and mixins use the same capability format. For example, a workload
 can declare the network access its agent needs, and a mixin can request access

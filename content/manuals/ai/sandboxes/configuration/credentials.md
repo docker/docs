@@ -37,8 +37,11 @@ value for the same service, the stored secret takes precedence.
 | [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value or dynamic source in your OS keychain, keyed by service | The default for any built-in or kit-declared service                                                          |
 | [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
 | OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, Cursor, or Droid                                              |
-| [Credential bindings](#credential-bindings) (`credentials.yaml`)            | Per-service mechanism and domain approval                    | Required for third-party kits                                                               |
 | [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits                   | Pulling templates or kits from a private registry                                                                |
+
+Providing a value and approving its use are separate steps.
+[Credential bindings](#credential-bindings) record which mechanisms and domains
+you authorize a kit to use. They don't store the credential value.
 
 For multi-provider agents (OpenCode, Docker Agent), the proxy selects
 credentials based on the API endpoint being called. See individual
@@ -229,9 +232,20 @@ it into requests to the listed API domains.
 
 ### Services declared by kits
 
-Custom kits declare their service identifiers in the kit descriptor. V3 uses
-a credential capability. The v2 format uses a top-level
-`credentials` list:
+Use the service identifier from the kit's documentation when storing its
+credential. For a kit that declares `my-service`, run:
+
+```console
+$ sbx secret set my-service
+```
+
+There's no separate registration step. The stored value and the kit's request
+use the same identifier. Approve the kit's credential request when prompted.
+See [Credential bindings](#credential-bindings).
+
+When authoring a kit, declare how it uses that service. V3 uses a credential
+capability, and v2 uses a top-level `credentials` list. Both examples declare the
+service and permit access to its API host:
 
 {{< tabs >}}
 {{< tab name="v3" >}}
@@ -277,19 +291,10 @@ permissions:
 {{< /tabs >}}
 
 Each service declares `apiKey`, `oauth`, or both. When both resolve at runtime,
-the API key takes precedence and OAuth acts as the fallback. To provide the
-credential value, run `sbx secret set` with the same identifier the kit
-declares:
-
-```console
-$ sbx secret set my-service
-```
-
-There's no separate registration step; the keychain entry is keyed on the
-identifier the kit already uses. See
+the API key takes precedence and OAuth acts as the fallback. For complete
+kit-side configuration, see
 [Authenticate to external services](/manuals/ai/sandboxes/customize/author/_index.md#authenticate-to-external-services)
-for the v3 configuration. For existing v2 kits, see
-[V2 credentials](../customize/kits-v2/_index.md#credentials).
+or [V2 credentials](../customize/kits-v2/_index.md#credentials).
 
 ### List and remove secrets
 

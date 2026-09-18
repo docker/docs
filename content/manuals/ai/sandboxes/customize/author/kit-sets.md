@@ -15,7 +15,7 @@ reference for the resulting environment or bundle of mixins.
 V3 kits require a preview build of `sbx`. See
 [Install a v3-capable build](/manuals/ai/sandboxes/customize/use-kits.md#install-a-v3-capable-build).
 To publish the set, you also need Docker Buildx and a registry namespace you
-can push to.
+can push to. To run the Claude example, have an Anthropic API key available.
 
 ## Choose the components
 
@@ -43,6 +43,10 @@ determine composition order; the order of `--kit` flags or entries
 in the set doesn't control it.
 
 ## Write the set descriptor
+
+The set adds a model choice and team instructions to the components. Its
+`model` argument selects a value when you create a sandbox. A lifecycle
+capability writes that value into a settings file for Claude to read.
 
 Create a `team-claude` directory containing `team-claude.yaml`:
 
@@ -146,31 +150,11 @@ This set configures an existing agent through its settings interface. To
 control the image's entrypoint or build the agent on your own Linux base,
 see [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
 
-## Add an ACP adapter
-
-For an Agent Client Protocol (ACP) client, add this component to `kits:` and
-rebuild the set:
-
-```yaml
-  - ref: docker.io/docker/sbx-kit-claude-acp:0.79.0
-```
-
-The adapter requires `claude`, supplied by the Claude mixin. Use that mixin
-with this adapter: it installs the binary at the path the adapter expects.
-The Claude workload is a separate kit and isn't interchangeable with the
-mixin in this combination.
-
-The adapter runs as `claude-agent-acp`. The settings file in this guide is
-passed to the interactive `claude` command; it doesn't configure the adapter.
-Use your ACP client's configuration for its agent session.
-
-Docker publishes the shell, Claude mixin, and adapter combination as
-`docker.io/docker/sbx-kit-claude-acp-set:2.1.274`, with guidance for the adapter.
-Use that reference if you don't need your own set declarations.
-
 ## Configure component arguments
 
-A component's `args` map sets its create-time arguments during publication:
+The previous example declares a model argument for the set's own settings
+file. Components can also declare arguments. Use a component's `args` map to
+choose its create-time values during publication:
 
 ```yaml
 kits:
@@ -204,6 +188,28 @@ supply `--kit-arg lint_mode=fix` to the published set; they don't address its
 internal components. Only arguments declared on the set remain configurable.
 See [Kit sets in the reference](/manuals/ai/sandboxes/customize/author/kit-reference.md#kit-sets)
 for the argument rules.
+
+## Add an ACP adapter
+
+For an Agent Client Protocol (ACP) client, add this component to `kits:` and
+rebuild the set:
+
+```yaml
+  - ref: docker.io/docker/sbx-kit-claude-acp:0.79.0
+```
+
+The adapter requires `claude`, supplied by the Claude mixin. Use that mixin
+with this adapter: it installs the binary at the path the adapter expects.
+The Claude workload is a separate kit and isn't interchangeable with the
+mixin in this combination.
+
+The adapter runs as `claude-agent-acp`. The settings file in this guide is
+passed to the interactive `claude` command; it doesn't configure the adapter.
+Use your ACP client's configuration for its agent session.
+
+Docker publishes the shell, Claude mixin, and adapter combination as
+`docker.io/docker/sbx-kit-claude-acp-set:2.1.274`, with guidance for the adapter.
+Use that reference if you don't need your own set declarations.
 
 ## Review and update the composition
 

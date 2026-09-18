@@ -16,22 +16,12 @@ Built-in shortcuts such as `claude` and `codex` select v2 kits and still work
 with v2 mixins. V3 workloads and mixins can't be combined with v1 or v2 kits.
 V1 also remains supported.
 
-## Move an environment to v3
-
-Select a v3 workload, convert or replace its mixins, and create a separate
-sandbox with a different `--name`. Use the explicit workload reference in
-place of the built-in shortcut. Every selected kit must use v3.
-
-Changing `schemaVersion` alone doesn't convert a kit. See the
-[v2-to-v3 field mapping](/manuals/ai/sandboxes/customize/author/kit-reference.md#move-from-v2-to-v3), the
-[v3 runtime support table](/manuals/ai/sandboxes/customize/author/kit-reference.md#runtime-capabilities), and the
-[agent authoring tutorial](/manuals/ai/sandboxes/customize/author/build-an-agent.md). Running an existing sandbox
-keeps its recorded configuration; it doesn't migrate the kit set.
-
 ## Use existing kits
 
-A v2 kit contains `spec.yaml` and an optional `files/` tree. Pass a sandbox kit
-in place of the agent name and add mixins with `--kit`:
+A v2 kit contains `spec.yaml` with `schemaVersion: "2"` and an optional `files/`
+tree. A sandbox kit defines the agent environment. A mixin adds tools or
+configuration to it. Pass a sandbox kit in place of the agent name and add
+mixins with `--kit`:
 
 ```console
 $ sbx run ./my-agent --name my-project --kit ./team-config
@@ -60,48 +50,41 @@ its kit set, except for the limited updates supported by
 preserving packages, images, volumes, and agent history. Kits can't be
 removed from a running sandbox.
 
-## Schema versions
+## Kit kinds
 
-Schema v2 is supported starting with Docker Sandboxes version 0.36. Use
-`schemaVersion: "2"` for the syntax on this page. Version `"1"` also remains
-accepted. V3 is a separate format for environments built entirely
-with v3 workloads and mixins. V3 kits can't compose with v1 or v2 kits.
-See [Kits v3](/manuals/ai/sandboxes/customize/_index.md) for that workflow.
+### `kind: mixin`
 
-The loader forks on `schemaVersion`. A v2 spec uses the v2 grammar only. Legacy
-v1 fields in a `schemaVersion: "2"` spec are rejected during decode instead of
-being folded into the v2 model. Keep each `spec.yaml` on one grammar.
+A mixin layers capabilities onto an existing sandbox. It must not declare a
+`sandbox:` block, `extends:`, or `mixins:`. A mixin can declare `requires:` to
+pin the base agent it is designed for:
 
-What changed in v2:
+```yaml
+schemaVersion: "2"
+kind: mixin
+name: github-tools
+requires:
+  agent: claude
+```
 
-| v1                                          | v2                                       |
-| ------------------------------------------- | ---------------------------------------- |
-| `credentials.sources.<id>`                  | `credentials:` list entry with `service` |
-| `network.allowedDomains` / `deniedDomains`  | `permissions.network.allow` / `deny`     |
-| `network.serviceDomains` / `serviceAuth`    | `credentials[].apiKey.inject`            |
-| `network.publishedPorts` / `publishedPorts` | top-level `ports`                        |
-| standalone `oauth:` block                   | `credentials[].oauth`                    |
-| `oauth.skipIfEnv`                           | Accepted but ignored                     |
-| `environment.proxyManaged`                  | `credentials[].apiKey.proxyManaged`      |
-| `memory` / `agentContext`                   | `agentInstructions.content`              |
-| `kind: agent` / `agent:` block              | `kind: sandbox` / `sandbox:` block       |
-| `sandbox.aiFilename`                        | `agentInstructions.filename`             |
-| `sandbox.entrypoint.run`                    | `sandbox.entrypoint`                     |
-| `sandbox.entrypoint.args`                   | `sandbox.command.default`                |
-| `sandbox.entrypoint.ttyArgs`                | `sandbox.command.interactive`            |
-| `tmpfs:`                                    | `volumes:` entries with `type: tmpfs`    |
-| `volumes:` (mapping form)                   | `volumes:` sequence (`- path: <path>`)   |
-| `commands:` / `commands.initFiles`          | `setup:` / `setup.files`                 |
-| `settings:` / `kitDir` / `persistence`      | Removed                                  |
+`requires.agent` takes one base-agent name. It is validated as a kit name and
+enforced during composition.
 
-Credential discovery also moved out of the kit in v2: a kit declares which
-credentials it needs and how to inject them, but where each value comes from is
-controlled by the user through
-[credential bindings](../../configuration/credentials.md#credential-bindings).
+### `kind: sandbox`
 
-> [!NOTE]
-> `mixins` and `sandbox.build` are accepted by the parser, but runtime support
-> is pending. A kit that sets `sandbox.build` must also set `sandbox.image`.
+A sandbox kit defines a full agent. A root sandbox must declare a `sandbox:`
+block. A sandbox that uses `extends:` can inherit the parent image and omit its
+own `sandbox:` block:
+
+```yaml
+schemaVersion: "2"
+kind: sandbox
+name: claude-safe
+extends: claude
+```
+
+`extends:` is sandbox-only. The parent must resolve to a sandbox kit. `mixins:`
+is also sandbox-only and accepted by the parser, but runtime composition support
+is pending.
 
 ## Top-level fields
 
@@ -188,42 +171,6 @@ arguments, undeclared placeholders, and invalid values fail before creation.
 Pass the same flags to `sbx kit validate` or `sbx kit inspect` when needed.
 Argument values can remain in shell history and are stored unencrypted in
 argument files.
-
-## Kit kinds
-
-### `kind: mixin`
-
-A mixin layers capabilities onto an existing sandbox. It must not declare a
-`sandbox:` block, `extends:`, or `mixins:`. A mixin can declare `requires:` to
-pin the base agent it is designed for:
-
-```yaml
-schemaVersion: "2"
-kind: mixin
-name: github-tools
-requires:
-  agent: claude
-```
-
-`requires.agent` takes one base-agent name. It is validated as a kit name and
-enforced during composition.
-
-### `kind: sandbox`
-
-A sandbox kit defines a full agent. A root sandbox must declare a `sandbox:`
-block. A sandbox that uses `extends:` can inherit the parent image and omit its
-own `sandbox:` block:
-
-```yaml
-schemaVersion: "2"
-kind: sandbox
-name: claude-safe
-extends: claude
-```
-
-`extends:` is sandbox-only. The parent must resolve to a sandbox kit. `mixins:`
-is also sandbox-only and accepted by the parser, but runtime composition support
-is pending.
 
 ## Sandbox block
 
@@ -702,3 +649,61 @@ The signature covers `spec.yaml` and the kit's `files/` content, but not mutable
 dependencies such as image tags or content downloaded by install and startup
 commands. Pin those dependencies by digest or checksum when they must remain
 immutable.
+
+## Schema versions
+
+Schema v2 is supported starting with Docker Sandboxes version 0.36. Use
+`schemaVersion: "2"` for the syntax on this page. Version `"1"` also remains
+accepted. V3 is a separate format for environments built entirely
+with v3 workloads and mixins. V3 kits can't compose with v1 or v2 kits.
+See [Kits v3](/manuals/ai/sandboxes/customize/_index.md) for that workflow.
+
+The loader forks on `schemaVersion`. A v2 spec uses the v2 grammar only. Legacy
+v1 fields in a `schemaVersion: "2"` spec are rejected during decode instead of
+being folded into the v2 model. Keep each `spec.yaml` on one grammar.
+
+What changed in v2:
+
+| v1                                          | v2                                       |
+| ------------------------------------------- | ---------------------------------------- |
+| `credentials.sources.<id>`                  | `credentials:` list entry with `service` |
+| `network.allowedDomains` / `deniedDomains`  | `permissions.network.allow` / `deny`     |
+| `network.serviceDomains` / `serviceAuth`    | `credentials[].apiKey.inject`            |
+| `network.publishedPorts` / `publishedPorts` | top-level `ports`                        |
+| standalone `oauth:` block                   | `credentials[].oauth`                    |
+| `oauth.skipIfEnv`                           | Accepted but ignored                     |
+| `environment.proxyManaged`                  | `credentials[].apiKey.proxyManaged`      |
+| `memory` / `agentContext`                   | `agentInstructions.content`              |
+| `kind: agent` / `agent:` block              | `kind: sandbox` / `sandbox:` block       |
+| `sandbox.aiFilename`                        | `agentInstructions.filename`             |
+| `sandbox.entrypoint.run`                    | `sandbox.entrypoint`                     |
+| `sandbox.entrypoint.args`                   | `sandbox.command.default`                |
+| `sandbox.entrypoint.ttyArgs`                | `sandbox.command.interactive`            |
+| `tmpfs:`                                    | `volumes:` entries with `type: tmpfs`    |
+| `volumes:` (mapping form)                   | `volumes:` sequence (`- path: <path>`)   |
+| `commands:` / `commands.initFiles`          | `setup:` / `setup.files`                 |
+| `settings:` / `kitDir` / `persistence`      | Removed                                  |
+
+Credential discovery also moved out of the kit in v2: a kit declares which
+credentials it needs and how to inject them, but where each value comes from is
+controlled by the user through
+[credential bindings](../../configuration/credentials.md#credential-bindings).
+
+> [!NOTE]
+> `mixins` and `sandbox.build` are accepted by the parser, but runtime support
+> is pending. A kit that sets `sandbox.build` must also set `sandbox.image`.
+
+## Move an environment to v3
+
+Select a v3 workload, convert or replace its mixins, and create a separate
+sandbox with a different `--name`. Use the explicit workload reference in
+place of the built-in shortcut. Every selected kit must use v3.
+
+Changing `schemaVersion` alone doesn't convert a kit. See the
+[v2-to-v3 field mapping](/manuals/ai/sandboxes/customize/author/kit-reference.md#move-from-v2-to-v3), the
+[v3 runtime support table](/manuals/ai/sandboxes/customize/author/kit-reference.md#runtime-capabilities).
+Use a [kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md) to combine
+published v3 components with your settings. To rebuild the agent environment
+from a base image, follow [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
+Running an existing sandbox keeps its recorded configuration. It doesn't
+migrate the kit composition.

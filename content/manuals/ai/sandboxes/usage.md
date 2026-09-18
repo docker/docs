@@ -394,13 +394,15 @@ stops and restarts. When you remove a sandbox, everything inside is deleted.
 Host workspace files, including repositories used as clone sources, and the
 [shared agent skills store](workflows/agent-skills.md) remain on your host. To
 capture changes in the container filesystem, [save a template](#saving-a-sandbox-as-a-template).
-For a reproducible environment defined in source, use a
-[workload kit](/manuals/ai/sandboxes/customize/_index.md).
+For a reproducible environment defined in source,
+[author a kit](/manuals/ai/sandboxes/customize/author/_index.md).
 
 ## Saving a sandbox as a template
 
 Save a sandbox's container filesystem as a reusable template image after
-setting up tools or configuration interactively.
+setting up tools or configuration interactively. A template contains image
+content; the agent kit still supplies runtime settings such as credentials
+and network rules. The examples here reuse templates with built-in agents.
 
 A saved template isn't a backup of the whole sandbox. Mounted filesystems,
 including host workspaces and the Docker store at `/var/lib/docker`, aren't

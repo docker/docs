@@ -74,6 +74,22 @@ which you can add to a workload with `--kit`.
 To customize and publish your own combination, see
 [Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md).
 
+## What kits can do
+
+Use kits to give agents a repeatable working environment and share it with
+your team:
+
+- Package a custom agent, or configure an existing agent for your team's
+  projects.
+- Include the tools the agent needs, such as linters, language runtimes,
+  test runners, and compilers.
+- Share linter rules, editor settings, helper scripts, and reference material.
+  Give the agent instructions and skills for using them.
+- Connect the agent to services through network rules and credentials,
+  including internal APIs and private package registries.
+- Initialize each sandbox and run supporting services when it starts, such
+  as a development server for previewing the agent's work.
+
 ## Version compatibility
 
 > [!NOTE]
@@ -99,22 +115,6 @@ reference, as shown in [Run a kit](/manuals/ai/sandboxes/customize/use-kits.md#r
 V2 remains supported, including the built-in agents and
 existing v2 customizations. See [Kits v2](/manuals/ai/sandboxes/customize/kits-v2/_index.md) for maintenance
 and migration guidance.
-
-## What kits can do
-
-Use kits to give agents a repeatable working environment and share it with
-your team:
-
-- Package a custom agent, or configure an existing agent for your team's
-  projects.
-- Include the tools the agent needs, such as linters, language runtimes,
-  test runners, and compilers.
-- Share linter rules, editor settings, helper scripts, and reference material.
-  Give the agent instructions and skills for using them.
-- Connect the agent to services through network rules and credentials,
-  including internal APIs and private package registries.
-- Initialize each sandbox and run supporting services when it starts, such
-  as a development server for previewing the agent's work.
 
 ## Choose your next step
 

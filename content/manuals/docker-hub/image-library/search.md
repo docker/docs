@@ -77,14 +77,17 @@ Extensions](/manuals/extensions/_index.md).
 Docker Hub hosts kits for [Docker Sandboxes](/manuals/ai/sandboxes/_index.md),
 which run AI coding agents in isolated microVM sandboxes. A kit packages what
 an agent needs to run in a sandbox, such as its image, tools, credentials,
-network rules, and startup commands. Sandbox kits come in two kinds:
+network rules, and startup commands. In the v2 format, kits have two kinds:
 
 - Sandbox: Defines a full agent from scratch, including its image and
   entrypoint.
 - Mixin: Layers tools, credentials, or configuration onto an existing agent.
 
-To learn more about building and running kits, see
-[Kits](/manuals/ai/sandboxes/customize/_index.md).
+For these kits, see the [v2 reference](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
+The experimental v3 format uses workloads and mixins, and adds sets for
+publishing a composition as one kit. See the
+[Kits overview](/manuals/ai/sandboxes/customize/_index.md) for the v3 model and
+version compatibility.
 
 #### Helm charts
 

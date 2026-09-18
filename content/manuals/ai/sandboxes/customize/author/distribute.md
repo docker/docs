@@ -11,8 +11,11 @@ V3 kits are experimental. This page covers building and distributing kits you've
 [authored](/manuals/ai/sandboxes/customize/author/_index.md). To run a kit someone else has published, see
 [Use kits](/manuals/ai/sandboxes/customize/use-kits.md).
 
-Share kits as published images in a container registry or as source files in
-Git. Consumers can [run a kit](/manuals/ai/sandboxes/customize/use-kits.md#run-a-kit) using either type of reference.
+Publishing a kit produces an image containing its files and descriptor.
+Share that image through a registry, or share the source through Git so
+consumers can build it when creating a sandbox. Both paths use the kit's
+runtime declarations. See [Run a kit](/manuals/ai/sandboxes/customize/use-kits.md#run-a-kit)
+for the consumer workflow.
 
 ## Publish an image
 
@@ -105,4 +108,3 @@ For the image annotations and file layout, see
 Running a workload with `docker run` uses its image configuration, but doesn't
 apply the kit's capability declarations or lifecycle hooks. Use `sbx` to run
 it with those behaviors.
-

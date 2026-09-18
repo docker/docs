@@ -28,6 +28,9 @@ In this guide, you'll learn how to:
 - Write an agent kit that wires Vibe to the Mistral API through the proxy
 - Validate, launch, and iterate on the sandbox
 
+This guide uses the v2 format. For its reference and migration
+guidance, see [Kits v2](../manuals/ai/sandboxes/customize/kits-v2/_index.md).
+
 ## How isolation works
 
 Every outbound request from a sandbox passes through a proxy that runs on
@@ -177,9 +180,6 @@ Each field does the following:
 | `credentials[].apiKey.name` | The environment variable the proxy manages. Vibe sees a sentinel value; the proxy swaps in the real key.       |
 | `credentials[].apiKey.inject`| Where and how the proxy attaches the key. `scheme: bearer` sets `Authorization: Bearer <key>` for the domain. |
 
-This guide uses the v2 format. For its reference and migration
-guidance, see [Kits v2](../manuals/ai/sandboxes/customize/kits-v2/_index.md).
-
 > [!WARNING]
 > `--agent auto-approve` runs Vibe in a mode that approves every tool
 > execution without prompting. The sandbox isolates the agent from your host,
@@ -245,7 +245,7 @@ Files in your workspace are unaffected.
 ## Learn more
 
 - [Get started with Docker Sandboxes](../manuals/ai/sandboxes/get-started.md)
-- [Build your own agent kit](/manuals/ai/sandboxes/customize/author/build-an-agent.md)
+- [Build a v3 agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md)
 - [Customize sandboxes with kits](/manuals/ai/sandboxes/customize/_index.md)
 - [Credentials and built-in services](../manuals/ai/sandboxes/configuration/credentials.md#built-in-services)
 - [Mistral Vibe](https://github.com/mistralai/mistral-vibe)

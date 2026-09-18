@@ -7,10 +7,11 @@ weight: 10
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-You can use a kit someone else has published, or build your own. Kit authors
-describe the environment in a YAML file and package any software and files it
-needs into an image. To use it, give `sbx` the kit's reference. Docker
-Sandboxes prepares the environment and applies its settings.
+Run a published kit by giving its reference to `sbx`. Docker Sandboxes
+prepares the kit's files and applies its runtime settings. A workload kit
+supplies the environment and launch command. Mixins add tools and behavior.
+A published set packages a combination as one kit. See
+[Kits](/manuals/ai/sandboxes/customize/_index.md) for how these roles fit together.
 
 > [!NOTE]
 > V3 kits are experimental. Select a v3 workload and v3 mixins together.
@@ -31,63 +32,187 @@ $ brew install docker/tap/sbx@rc
 
 ## Run a kit
 
-A published kit set gives you a complete environment through one reference.
-For example, Docker's Claude ACP set includes a shell workload, Claude Code,
-and the Agent Client Protocol (ACP) adapter:
-
-```console
-$ sbx run docker.io/docker/sbx-kit-claude-acp-set:2.1.274
-```
-
-This opens a shell with `claude` and `claude-agent-acp` installed. Run `claude`
-in the sandbox for an interactive session; `claude-agent-acp` serves an ACP
-client over standard input and output. The set includes Claude's credential
-requests; see [Runtime access and instructions](#runtime-access-and-instructions)
-for storing and approving credentials.
-
-For a shell without an agent, run the shell workload on its own:
+Start with Docker's shell workload, which opens a shell without an agent:
 
 ```console
 $ sbx run docker.io/docker/sbx-kit-shell:1.0.0
 ```
 
-Browse [Docker's published kits](https://hub.docker.com/orgs/docker/repositories?search=sbx-kit)
-for other environments and components. Kits can also come from a local
-directory or Git repository; see [Choose a kit source](#choose-a-kit-source).
-
 The sandbox uses your current directory as its workspace. To use another
-project directory, append its path to the command. See
+project directory, append its path. See
 [Choose a workspace](/manuals/ai/sandboxes/usage.md#choose-a-workspace).
+
+For a prepared agent environment, use a published set. Docker's Claude ACP
+set combines the shell workload, Claude Code, and an Agent Client Protocol
+(ACP) adapter. Store an Anthropic API key on the host, then run the set:
+
+```console
+$ sbx secret set anthropic
+$ sbx run docker.io/docker/sbx-kit-claude-acp-set:2.1.274 --name claude-acp
+```
+
+Approve the credential request when prompted. This opens a shell with
+`claude` and `claude-agent-acp` installed. Run `claude` for an interactive
+session, or connect an ACP client to `claude-agent-acp` over standard input
+and output. For other authentication options, see
+[Credential configuration](/manuals/ai/sandboxes/configuration/credentials.md).
+The `--name` flag distinguishes this sandbox from the shell-only example.
+
+Browse [Docker's published kits](https://hub.docker.com/orgs/docker/repositories?search=sbx-kit)
+for other environments. For local and Git references, see
+[Choose a kit source](#choose-a-kit-source).
 
 To create a sandbox without launching the workload, use `sbx create`.
 Include `.` as the workspace argument to mount your current directory;
 omitting the workspace creates a mountless sandbox.
 
-If you don't have a v3 workload to run, the
-[OpenCode workload example](/manuals/ai/sandboxes/customize/author/_index.md#build-a-workload) provides a complete source kit.
-For a step-by-step authoring walkthrough, see [Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
+## Name and reuse a sandbox
+
+Use `--name` to give a sandbox a name when creating it. Reconnect to the
+Claude ACP sandbox from the previous example with:
+
+```console
+$ sbx run --name claude-acp
+```
+
+Running an existing sandbox reuses its recorded kit configuration. To try a
+different workload, mixin combination, or argument value, create a sandbox
+with a different name or recreate the existing one. The following examples
+use separate names for separate combinations. `sbx kit add` doesn't change
+a v3 composition in place.
+
+## Runtime access and instructions
+
+Kits declare their runtime needs through capabilities. The Claude mixin in the
+published set requests network access and credentials so Claude can reach
+Anthropic. Storing the API key provides its value. Approving the credential
+request authorizes the kit to use it. See
+[Credential bindings](/manuals/ai/sandboxes/configuration/credentials.md#credential-bindings)
+for preparing unattended runs.
+
+When choosing a kit, check the publisher's documentation for its services,
+credentials, and startup behavior. Proxy-managed credentials stay on your
+host, where the sandbox proxy authenticates matching requests on the kit's
+behalf.
+
+Network requests must also meet your sandbox's network policy. Kit allow rules
+can't grant access beyond your organization's policy. If a connection fails,
+check the [policy log](#debug-kits) to see which rule blocked it.
+
+Kits can also supply instructions for using their tools. The workload chooses
+the instruction profile, and mixins contribute guidance to it. The generated
+profile sits outside your workspace and doesn't overwrite project instructions.
+When launching an agent manually from a shell workload, follow the kit's
+instructions for passing that guidance to the agent. The
+[set authoring example](/manuals/ai/sandboxes/customize/author/kit-sets.md#run-with-the-sets-settings)
+shows this for Claude Code.
 
 ## Add mixins
 
-A published set containing a workload runs as one workload kit. You can add
-compatible mixins to it, or assemble a workload and mixins yourself. Add v3
-mixins with `--kit`, repeating the flag for each one. For example, add Neovim for editing and Ruff for Python linting:
+To choose the components yourself, start with a workload and add mixins with
+`--kit`. For example, add Claude Code to the shell workload:
 
 ```console
-$ sbx run docker.io/my-org/agent-kit:1.0.0 \
-    --kit docker.io/my-org/neovim-kit:1.0.0 \
-    --kit docker.io/my-org/ruff-kit:1.0.0
+$ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name claude-tools \
+    --kit docker.io/docker/sbx-kit-claude-mixin:2.1.274
 ```
 
-The workload and its mixins form a composition: their tools, files, and
-runtime settings combine to define the sandbox's environment. See
-[Compose kits](#compose-kits) for dependency and compatibility rules, and
-[Kit examples](/manuals/ai/sandboxes/customize/author/kit-examples.md) for complete mixins.
+This provides the shell and Claude Code without the ACP adapter. The Claude
+mixin brings its software, network rules, and credential requests. Use the
+Anthropic credential you stored in [Run a kit](#run-a-kit), and approve any
+requested credential access when prompted.
 
-Once you have a combination to share, [publish a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md)
-so consumers can use one reference. A set containing only mixins is added with
-`--kit`, like an individual mixin. Avoid adding components already included in
-a set: duplicate feature providers can cause composition errors.
+The workload and mixins form a composition: their files and runtime settings
+combine into one environment. The workload still controls the launch command,
+so this example opens a shell where you can run `claude`.
+
+Repeat `--kit` to add more mixins. You can also add compatible mixins to a
+published workload set, or add a set containing only mixins with `--kit`.
+Avoid adding components already included in a set: duplicate feature providers
+can cause composition errors.
+
+Once you have a combination to share, [author a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md)
+to publish it as one reference. For reusable component examples, see
+[Mixin examples](/manuals/ai/sandboxes/customize/author/kit-examples.md).
+
+## Compose kits
+
+Some mixins need a feature another kit supplies. The ACP adapter needs the
+Claude Code mixin from the previous example. Include both with the shell
+workload:
+
+```console
+$ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name claude-acp-components \
+    --kit docker.io/docker/sbx-kit-claude-mixin:2.1.274 \
+    --kit docker.io/docker/sbx-kit-claude-acp:0.79.0
+```
+
+The adapter declares its dependency in its descriptor:
+
+```yaml
+requires: [claude]
+```
+
+The Claude Code mixin declares the feature it provides:
+
+```yaml
+provides: ["claude@2.1.274"]
+```
+
+Docker Sandboxes checks these declarations and applies the provider before
+the adapter. Reordering `--kit` flags doesn't change that dependency order.
+If you omit the provider, sandbox creation fails. A requirement names a
+feature, not an image to download: you select the kit that supplies it.
+Requirements can also specify a minimum feature version, and kits can declare
+incompatible combinations.
+
+This command selects the same components as the published Claude ACP set in
+[Run a kit](#run-a-kit). With `--kit`, Docker Sandboxes checks the combination
+when creating the sandbox. With a set, the publisher resolves and merges the
+components during the build, and consumers receive one kit with a digest-pinned
+record of its components.
+
+To declare these relationships in your own kits, see
+[Authoring compositions](/manuals/ai/sandboxes/customize/author/_index.md#compose-kits).
+
+## Pass arguments to kits
+
+A kit can expose arguments for choices such as an agent's model. Check the
+publisher's documentation for argument names, defaults, and accepted values.
+For example, after publishing the set from
+[Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md), select its
+model with `--kit-arg`:
+
+```console
+$ sbx run docker.io/<NAMESPACE>/team-claude:1.0.0 \
+    --name team-claude-opus --kit-arg model=opus
+```
+
+Replace `<NAMESPACE>` with the namespace where you published that example.
+Use the arguments declared by your selected kit. The model argument in this
+example belongs to the set you authored.
+
+A bare argument name applies to every selected kit that declares it. To target
+one kit, prefix the name with its handle and a period:
+
+```console
+$ sbx run docker.io/<NAMESPACE>/team-claude:1.0.0 \
+    --name team-claude-opus --kit-arg team-claude.model=opus
+```
+
+The handle is the local directory name, the Git subdirectory or repository
+name, or the last repository segment in an OCI reference. Scoped values take
+precedence over shared values. Use `--kit-args-file <FILE>` for reusable
+`name=value` entries; `--kit-arg` values take precedence over file values.
+
+A published set exposes only arguments declared on the set. Component
+arguments are fixed during publication unless the author exposes them through
+set arguments. Build-time choices, such as an installed tool's version,
+require rebuilding the image.
+
+Argument values are plain text and can be recorded in shell history and
+sandbox state. Use [stored credentials](/manuals/ai/sandboxes/configuration/credentials.md)
+for secrets.
 
 ## Choose a kit source
 
@@ -113,143 +238,6 @@ reuse cached results. See
 [Restrict kit sources](#restrict-kit-sources) for permitted sources and
 [Registry credentials](/manuals/ai/sandboxes/configuration/credentials.md#registry-credentials)
 for private image access.
-
-## Name and reuse a sandbox
-
-Use `--name` to give the sandbox a name:
-
-```console
-$ sbx run docker.io/my-org/agent-kit:1.0.0 --name my-project
-```
-
-Running an existing sandbox reuses its recorded kit configuration. Kit
-selection applies when creating a sandbox. To use a different v3 workload or
-mixin set, choose another name or recreate the sandbox with the desired kits.
-
-## Compose kits
-
-Composition lets you assemble an environment from kits with different roles.
-A set's publisher resolves its components at build time. The consumer receives
-one merged kit, with a digest-pinned record of those components. When you add
-kits with `--kit`, Docker Sandboxes resolves that combination at sandbox creation.
-In the [Neovim and Ruff example](#add-mixins), the workload supplies the agent,
-Neovim adds an editor, and Ruff adds a Python linter. The agent runs in one
-sandbox with all three available. Adding the tools doesn't change which agent
-starts or how it launches.
-
-Some kits are designed to work independently; others need something another
-kit supplies. Suppose a browser-testing kit declares that it requires Chromium
-from a browser kit. Include both alongside your agent workload:
-
-```console
-$ sbx run docker.io/my-org/agent-kit:1.0.0 \
-    --kit docker.io/my-org/browser-testing-kit:1.0.0 \
-    --kit docker.io/my-org/chromium-kit:1.0.0
-```
-
-You can recognize this relationship in the kits' descriptors. The testing kit
-might declare:
-
-```yaml
-requires: ["chromium >= 120.0.0"]
-```
-
-The browser kit declares what it supplies:
-
-```yaml
-provides: ["chromium@120.0.0"]
-```
-
-The testing kit requires Chromium version 120 or later. The browser kit declares
-that it provides version 120, so it satisfies that requirement. These names
-describe what kits provide; they aren't image references that `sbx` downloads.
-
-Docker Sandboxes checks that the selected kits satisfy the declared requirement
-and applies the browser kit before the testing kit. If you leave out the browser
-kit, sandbox creation fails with an unmet requirement. It doesn't download an
-extra kit automatically: you choose which provider to include, using the testing
-kit's documentation to find a compatible one.
-
-Kits can also declare that they can't work together. For example, two kits
-might configure a tool in incompatible ways. Choose a compatible combination.
-
-To declare these relationships in your own kits, see
-[Authoring compositions](/manuals/ai/sandboxes/customize/author/_index.md#compose-kits).
-
-A sandbox keeps the composition it was created with. To try another combination,
-create a sandbox with a different name or recreate the existing one. `sbx kit add`
-doesn't change a v3 composition in place.
-
-## Pass arguments to kits
-
-Kits can expose arguments for choices such as a tool's operating mode. Use
-`--kit-arg` to supply a value declared by the kit:
-
-```console
-$ sbx run docker.io/my-org/agent-kit:1.0.0 \
-    --kit docker.io/my-org/linter-kit:1.0.0 --kit-arg mode=fix
-```
-
-A bare argument name applies to every kit that declares it. To target one kit,
-prefix the name with its handle and a period:
-
-```console
-$ sbx run docker.io/my-org/agent-kit:1.0.0 \
-    --kit docker.io/my-org/linter-kit:1.0.0 --kit-arg linter-kit.mode=fix
-```
-
-The handle is the local directory name, the Git subdirectory or repository
-name, or the last repository segment in an OCI reference. Scoped values take
-precedence over shared values. Use `--kit-args-file <FILE>` for reusable
-`name=value` entries; `--kit-arg` values take precedence over file values.
-
-Use the kit's documentation to find its argument names, defaults, and accepted
-values. A published set exposes only the arguments its author declares on the
-set. Component arguments are fixed during publication unless the author
-exposes them through set arguments.
-
-Arguments resolved when an image is built, such as a bundled tool's version, require the author to rebuild that image. Creating a sandbox doesn't
-change those values in a published kit.
-
-Argument values are plain text and can be recorded in shell history and
-sandbox state. Use [stored credentials](/manuals/ai/sandboxes/configuration/credentials.md)
-for secrets.
-
-## Runtime access and instructions
-
-A kit can bring the setup needed to use its tools: access to external services,
-authentication, and instructions for the agent. These requests are called
-capabilities. When choosing a kit, look at its documentation for the services
-it connects to, credentials it needs, and behavior it adds to your sandbox.
-
-For example, suppose you add a GitHub CLI kit so your agent can read issues
-and open pull requests. The kit can request access to GitHub, declare how to
-authenticate, and give the agent guidance for using `gh`. You don't need to
-configure each of those pieces yourself, but you do need to supply a credential
-and authorize the kit to use it.
-
-Store the credential on your host using the service name specified by the kit.
-For this example:
-
-```console
-$ sbx secret set github
-```
-
-Approve the kit's credential request when prompted if you want it to use that
-credential. For proxy-managed credentials, the real value stays on your host;
-the sandbox proxy authenticates requests to the service on the kit's behalf.
-See [Credential configuration](/manuals/ai/sandboxes/configuration/credentials.md)
-for storing credentials, approving their use, and preparing unattended runs.
-
-A kit's network requests still have to meet your sandbox's network policy.
-For example, a GitHub kit can't grant access to GitHub if your organization's
-policy doesn't allow it. If a connection fails, check the
-[policy log](#debug-kits) to see which rule blocked it.
-
-Agent instructions take effect without you copying files into your project.
-For example, a Ruff kit can tell the agent to run the linter after changing
-Python files. The agent receives that guidance alongside your project's own
-instructions; adding the kit doesn't overwrite them.
 
 ## Restrict kit sources
 

@@ -94,47 +94,67 @@ spelling `sourceURL`. A v3 descriptor has no `name`, `extends`, `sandbox`,
 the image config defines how it runs, and capabilities declare runtime
 behavior.
 
-## Kit sets
+## Authoring forms
 
-A `kind: set` descriptor lists published kits in `kits:`. Building it produces
-one merged kit. The published kind is `workload` if one component is a
-workload, or `mixin` if all components are mixins. Two workloads are an error.
-The derived kind can also be stated explicitly alongside `kits:` in the source.
+A kit builds content with a Dockerfile or merges published kits through a
+`kits:` list. A workload's Dockerfile sets `ENTRYPOINT`, `CMD`, `ENV`, `USER`,
+and `WORKDIR`. Choose one authoring form:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `kits[].ref` | String | Required registry reference. Local paths and Git URLs aren't accepted. |
-| `kits[].digest` | String | Component manifest digest in `sha256:<64 hex>` form. Optional in source, required in the published descriptor. |
-| `kits[].args` | Map of strings | Component create-time arguments, keyed by the component's argument names. |
-
-List order doesn't determine composition order. Dependencies order providers
-before dependents. A set can also declare capabilities, lifecycle hooks,
-arguments, and composition fields of its own. Those declarations participate
-in the same dependency graph and come last among otherwise equal contributions.
-
-At publication, the frontend resolves the components and applies these rules:
-
-| Contribution | Merge behavior |
+| Form | Descriptor and recipe |
 | --- | --- |
-| Image content | Preserve component layers in composition order, with later layers taking precedence at overlapping paths. Inspect the merged artifact for file collisions. |
-| `provides`, `conflicts`, `licenses` | Union of component and set declarations. Duplicate feature providers are rejected during resolution. |
-| `requires`, `integrates` | Union, with entries satisfied inside the set removed. |
-| `args` and display metadata | The set's own declarations. Component arguments are resolved during publication. |
-| Network policy | Union of allow and deny entries per phase. |
-| Lifecycle | Concatenate hooks and files in composition order. Duplicate file destinations or multiple interactive launch declarations are errors. |
-| Agent context | At most one contribution chooses `filename`; instruction bodies combine into one staged file. |
-| Other capabilities | Merge by capability type and instance key. Conflicting configs for the same key are errors. A capability required by any contribution remains required. |
+| Kit set | A YAML descriptor with `kits:` listing published images to merge. |
+| Companion files | `<stem>.yaml` and `<stem>.dockerfile` in the same directory. Use `dockerfile: <path>` to name the recipe explicitly. |
+| Inline recipe | A YAML descriptor with Dockerfile text in `build: \|`. |
+| Comment descriptor | A Dockerfile with a `# kit:` comment block containing the descriptor. The remaining file is its recipe. |
 
-To expose a component's create-time argument, pass a whole-value
-`${{ kit.args.<name> }}` reference in that component's `args` map and declare
-that argument on the set. The set must preserve the component's required or
-defaulted status, restate or narrow its `enum`, and restate its `pattern`.
-Arguments used as numbers in capability configs must be fixed at publication
-rather than exposed through a set argument.
+An explicitly named Dockerfile must exist and stay within the descriptor's
+directory. A missing conventional companion is accepted for a mixin with no
+content recipe. A workload must have a recipe or obtain its content from `kits:`.
 
-For an authoring example, see [Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md).
-For the complete capability merge rules, see
-[Merging a set](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/SPEC-v3.md#95-merging-a-set).
+For the inline form, `build` contains Dockerfile text, not a map of build
+options:
+
+```yaml
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: mixin
+build: |
+  FROM scratch
+  COPY review-checklist.md /usr/local/share/team/review-checklist.md
+```
+
+The comment form starts with a descriptor comment block:
+
+```dockerfile
+# syntax=docker/sandbox-kit:3
+# kit:
+#   schemaVersion: "3"
+#   kind: mixin
+FROM scratch
+COPY review-checklist.md /usr/local/share/team/review-checklist.md
+```
+
+A comment descriptor can't also declare `build`, `dockerfile`, or `kits`.
+Dockerfile semantics apply to every recipe, including multi-stage builds and
+build mounts. See [Directory and build layout](/manuals/ai/sandboxes/customize/author/_index.md#directory-and-build-layout)
+for organizing source files, and
+[Packaging and distribution](/manuals/ai/sandboxes/customize/author/distribute.md) for build commands.
+
+### Base image requirements
+
+A workload must provide `bash`, `sh`, `curl`, `git`, a populated CA
+certificate store, and a non-root `agent` user with UID 1000 and home
+directory `/home/agent`. Its image must define an `ENTRYPOINT` or `CMD`.
+Install or ship any additional tools the workload needs.
+
+A Docker sandbox template is optional. For a complete example of preparing
+a base image and installing an agent, see
+[Use your own base image](/manuals/ai/sandboxes/customize/author/build-an-agent.md#use-your-own-base-image).
+
+The workload's image config owns the launch command and working directory.
+Mixin recipes add files and additive image settings such as environment
+variables. A mixin's `ENTRYPOINT`, `CMD`, `USER`, and `WORKDIR` don't replace
+the workload's launch contract during composition.
 
 ## Composition fields
 
@@ -255,67 +275,47 @@ the format that will consume them.
 
 See [Pass arguments to kits](/manuals/ai/sandboxes/customize/use-kits.md#pass-arguments-to-kits) for CLI syntax.
 
-## Authoring forms
+## Kit sets
 
-A kit builds content with a Dockerfile or merges published kits through a
-`kits:` list. A workload's Dockerfile sets `ENTRYPOINT`, `CMD`, `ENV`, `USER`,
-and `WORKDIR`. Choose one authoring form:
+A `kind: set` descriptor lists published kits in `kits:`. Building it produces
+one merged kit. The published kind is `workload` if one component is a
+workload, or `mixin` if all components are mixins. Two workloads are an error.
+The derived kind can also be stated explicitly alongside `kits:` in the source.
 
-| Form | Descriptor and recipe |
+| Field | Type | Description |
+| --- | --- | --- |
+| `kits[].ref` | String | Required registry reference. Local paths and Git URLs aren't accepted. |
+| `kits[].digest` | String | Component manifest digest in `sha256:<64 hex>` form. Optional in source, required in the published descriptor. |
+| `kits[].args` | Map of strings | Component create-time arguments, keyed by the component's argument names. |
+
+List order doesn't determine composition order. Dependencies order providers
+before dependents. A set can also declare capabilities, lifecycle hooks,
+arguments, and composition fields of its own. Those declarations participate
+in the same dependency graph and come last among otherwise equal contributions.
+
+At publication, the frontend resolves the components and applies these rules:
+
+| Contribution | Merge behavior |
 | --- | --- |
-| Kit set | A YAML descriptor with `kits:` listing published images to merge. |
-| Companion files | `<stem>.yaml` and `<stem>.dockerfile` in the same directory. Use `dockerfile: <path>` to name the recipe explicitly. |
-| Inline recipe | A YAML descriptor with Dockerfile text in `build: \|`. |
-| Comment descriptor | A Dockerfile with a `# kit:` comment block containing the descriptor. The remaining file is its recipe. |
+| Image content | Preserve component layers in composition order, with later layers taking precedence at overlapping paths. Inspect the merged artifact for file collisions. |
+| `provides`, `conflicts`, `licenses` | Union of component and set declarations. Duplicate feature providers are rejected during resolution. |
+| `requires`, `integrates` | Union, with entries satisfied inside the set removed. |
+| `args` and display metadata | The set's own declarations. Component arguments are resolved during publication. |
+| Network policy | Union of allow and deny entries per phase. |
+| Lifecycle | Concatenate hooks and files in composition order. Duplicate file destinations or multiple interactive launch declarations are errors. |
+| Agent context | At most one contribution chooses `filename`; instruction bodies combine into one staged file. |
+| Other capabilities | Merge by capability type and instance key. Conflicting configs for the same key are errors. A capability required by any contribution remains required. |
 
-An explicitly named Dockerfile must exist and stay within the descriptor's
-directory. A missing conventional companion is accepted for a mixin with no
-content recipe. A workload must have a recipe or obtain its content from `kits:`.
+To expose a component's create-time argument, pass a whole-value
+`${{ kit.args.<name> }}` reference in that component's `args` map and declare
+that argument on the set. The set must preserve the component's required or
+defaulted status, restate or narrow its `enum`, and restate its `pattern`.
+Arguments used as numbers in capability configs must be fixed at publication
+rather than exposed through a set argument.
 
-For the inline form, `build` contains Dockerfile text, not a map of build
-options:
-
-```yaml
-# syntax=docker/sandbox-kit:3
-schemaVersion: "3"
-kind: mixin
-build: |
-  FROM scratch
-  COPY review-checklist.md /usr/local/share/team/review-checklist.md
-```
-
-The comment form starts with a descriptor comment block:
-
-```dockerfile
-# syntax=docker/sandbox-kit:3
-# kit:
-#   schemaVersion: "3"
-#   kind: mixin
-FROM scratch
-COPY review-checklist.md /usr/local/share/team/review-checklist.md
-```
-
-A comment descriptor can't also declare `build`, `dockerfile`, or `kits`.
-Dockerfile semantics apply to every recipe, including multi-stage builds and
-build mounts. See [Directory and build layout](/manuals/ai/sandboxes/customize/author/_index.md#directory-and-build-layout)
-for organizing source files, and
-[Packaging and distribution](/manuals/ai/sandboxes/customize/author/distribute.md) for build commands.
-
-### Base image requirements
-
-A workload must provide `bash`, `sh`, `curl`, `git`, a populated CA
-certificate store, and a non-root `agent` user with UID 1000 and home
-directory `/home/agent`. Its image must define an `ENTRYPOINT` or `CMD`.
-Install or ship any additional tools the workload needs.
-
-A Docker sandbox template is optional. For a complete example of preparing
-a base image and installing an agent, see
-[Use your own base image](/manuals/ai/sandboxes/customize/author/build-an-agent.md#use-your-own-base-image).
-
-The workload's image config owns the launch command and working directory.
-Mixin recipes add files and additive image settings such as environment
-variables. A mixin's `ENTRYPOINT`, `CMD`, `USER`, and `WORKDIR` don't replace
-the workload's launch contract during composition.
+For an authoring example, see [Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md).
+For the complete capability merge rules, see
+[Merging a set](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/SPEC-v3.md#95-merging-a-set).
 
 ## Runtime capabilities
 

@@ -16,6 +16,10 @@ Linux image to control the operating system and prepare the environment yourself
 The kit descriptor declares the workload's runtime requirements alongside that
 build recipe.
 
+For a v3 workload, use the image in its Dockerfile. For a built-in agent such
+as `claude`, use an [image override](#image-overrides-for-built-in-agents).
+A kit set gets its base environment from its workload component.
+
 To save and reuse an environment you've configured interactively, see
 [Save a sandbox as a template](/manuals/ai/sandboxes/usage.md#saving-a-sandbox-as-a-template).
 
