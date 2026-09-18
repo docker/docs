@@ -7,9 +7,10 @@ weight: 5
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-A kit set combines published kits into one image you can version and share.
-Use a set when you have a working combination and want consumers to run it
-without choosing each component and its version.
+A kit set combines published kits with your own runtime declarations into one
+image you can version and share. Alongside its component list, a set can declare
+capabilities, lifecycle hooks, instructions, and arguments. Consumers use one
+reference for the resulting environment or bundle of mixins.
 
 V3 kits require a preview build of `sbx`. See
 [Install a v3-capable build](/manuals/ai/sandboxes/customize/use-kits.md#install-a-v3-capable-build).

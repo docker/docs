@@ -13,12 +13,18 @@ weight: 20
 > with v3 mixins. See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
 > or the [v2 reference](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
 
-Choose what you want to package:
+You can author a set, a workload, or a mixin:
 
-- To share an environment built from existing kits, [compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md).
-  List the components and publish them as one reference.
-- To build an environment or add tools and runtime behavior, author a workload
-  or mixin as described on this page. These are the building blocks of a set.
+- [Author a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md) to combine
+  components and add your own capabilities, lifecycle hooks, instructions,
+  and arguments. Publish the resulting environment or bundle of mixins as
+  one reference.
+- Author a workload or mixin as described on this page to build image content
+  and declare runtime behavior. Use these kits independently or as components
+  of a set.
+
+A set gets its image content from the kits it lists. It can customize runtime
+behavior in its own descriptor without a separate mixin for each customization.
 
 Work in a directory of source files. A workload or mixin that builds software
 has a YAML file and a Dockerfile:
