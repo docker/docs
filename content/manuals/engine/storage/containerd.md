@@ -113,6 +113,23 @@ Docker Engine uses the `overlayfs` containerd snapshotter by default.
 > image store, push them to a registry first, or use `docker save` to export
 > them.
 
+## Private and insecure registries
+
+Registry settings such as `insecure-registries` and custom CAs under
+`/etc/docker/certs.d/` apply through the daemon configuration, but they are
+implemented on a different code path than the legacy graph-driver image store.
+
+After changing those settings, restart Docker and confirm a real
+`docker pull` / `docker push` against the registry. `docker info` may still
+list an insecure registry even when a TLS handshake fails for
+containerd-backed pulls.
+
+If an insecure or custom-CA registry works only after setting
+`"containerd-snapshotter": false`, upgrade Docker Engine to a recent 29.x
+release (auth/TLS handling for the containerd path has received fixes such as
+[moby#52600](https://github.com/moby/moby/pull/52600)) and re-test with the
+containerd image store enabled.
+
 ## Experimental automatic migration
 
 Docker Engine includes an experimental feature that can automatically switch to
