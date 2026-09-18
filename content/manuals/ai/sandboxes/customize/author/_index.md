@@ -1,6 +1,6 @@
 ---
 title: Author kits
-description: Define v3 workloads and mixins with build recipes, capabilities, lifecycle hooks, and composition requirements.
+description: Compose v3 kit sets or build workload and mixin components with recipes, capabilities, and lifecycle hooks.
 keywords: sandboxes, sbx, kits, v3, workloads, mixins
 weight: 20
 ---
@@ -13,7 +13,14 @@ weight: 20
 > with v3 mixins. See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
 > or the [v2 reference](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
 
-When you author a kit, you work in a directory of source files. A typical kit
+Choose what you want to package:
+
+- To share an environment built from existing kits, [compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md).
+  List the components and publish them as one reference.
+- To build an environment or add tools and runtime behavior, author a workload
+  or mixin as described on this page. These are the building blocks of a set.
+
+Work in a directory of source files. A workload or mixin that builds software
 has a YAML file and a Dockerfile:
 
 ```text
@@ -319,8 +326,10 @@ of it because they can fail in non-interactive shells.
 
 ## Compose kits
 
-Composition combines one workload kit with its mixins. Select the kits
-when [creating a sandbox](/manuals/ai/sandboxes/customize/use-kits.md#add-mixins). A kit's descriptor can also declare
+Composition combines kits into an environment. Use a
+[kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md) to publish a combination,
+or select a workload and mixins when [creating a sandbox](/manuals/ai/sandboxes/customize/use-kits.md#add-mixins).
+A kit's descriptor can also declare
 relationships with other kits, such as a dependency on a tool they supply.
 
 Every selected kit must use v3. A v3 mixin can't extend a v2 built-in agent,
@@ -358,8 +367,10 @@ spec rejects multiple owners of a normalized feature name. Credential
 requests also have one owner per service and phase across the selected kits.
 
 The workload supplies the environment and launch command. Mixins add files
-and runtime declarations. Two kits contributing the same image file cause a
-composition error. Conflicting image environment values also cause an error,
+and runtime declarations. When composing kits at sandbox creation, two kits
+contributing the same image file cause a composition error. A set merges image layers during its
+build, where later layers take precedence. Check the resulting files before
+publishing a set. Conflicting image environment values also cause an error,
 while `PATH` additions are combined. Give each kit its own paths for staged
 content and avoid having multiple kits manage the same config.
 
@@ -433,10 +444,12 @@ comment descriptor also works. Avoid `spec.yaml` and `spec.yml`: these names
 select the v1/v2 loader. Matching the descriptor stem to the directory name
 also keeps build and create argument scopes consistent.
 
-A workload needs a Dockerfile to supply its environment and launch command.
+A workload with a Dockerfile recipe gets its environment and launch command
+from that recipe.
 A mixin needs one when it adds image content. A mixin that only declares
 runtime behavior, such as the [GitHub network mixin](#control-network-access),
-can omit it.
+can omit it. A set uses a `kits:` list instead of a Dockerfile and obtains its
+content from published component images.
 
 For a single-file kit, use `build: |` with literal Dockerfile text in the
 YAML. You can also select a differently named recipe with `dockerfile:` or

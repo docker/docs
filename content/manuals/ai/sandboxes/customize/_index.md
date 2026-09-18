@@ -1,6 +1,6 @@
 ---
 title: Kits
-description: Understand sandbox workload and mixin kits, then choose how to use existing kits or author your own.
+description: Use sandbox kits and share environments as kit sets composed from workloads and mixins.
 keywords: sandboxes, sbx, kits, v3, workloads, mixins
 weight: 90
 linkTitle: Kits
@@ -31,6 +31,22 @@ image builds and runtime capabilities together in the kit format.
 The [sandbox-kit-spec repository](https://github.com/docker/sandbox-kit-spec)
 contains the authoritative v3 specification, build frontend, and examples.
 
+## Kit sets
+
+A kit set packages a combination of kits as one reference. Use a set to share
+an environment with your team: the publisher chooses compatible components
+and versions, and consumers run the result without selecting each component.
+
+For example, Docker's Claude ACP set combines a shell base, Claude Code, and
+an Agent Client Protocol (ACP) adapter. Run the published environment with:
+
+```console
+$ sbx run docker.io/docker/sbx-kit-claude-acp-set:2.1.274
+```
+
+This starts the shell environment with Claude Code and its ACP adapter
+available. See [Use kits](/manuals/ai/sandboxes/customize/use-kits.md) for prerequisites and usage.
+
 ## Workloads and mixins
 
 A sandbox runs one workload kit. You can add mixin kits to customize that
@@ -43,9 +59,19 @@ workload:
 
 For example, a team might use an OpenCode workload with a mixin that adds a
 linter and another that supplies the team's review instructions. Each kit can
-be maintained and shared separately.
+be maintained and shared separately. During development, combine them with
+`--kit`. To share that combination, author a `kind: set` descriptor that lists
+the kits and publish it as one image.
+
+Publishing derives the set's kind from its components. A set with one workload
+becomes a workload; a set containing only mixins becomes a mixin. Consumers
+use the result with `sbx run` or `--kit`, like other published kits.
+See [Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md).
 
 ## Version compatibility
+
+V3 requires an `sbx` nightly with v3 support; it isn't available in the stable
+release. See [Install a v3-capable build](/manuals/ai/sandboxes/customize/use-kits.md#install-a-v3-capable-build).
 
 V3 kits cannot be combined with v1 or v2 kits in the same sandbox. To use
 v3, select a v3 workload and use v3 for every mixin you add.
@@ -78,10 +104,10 @@ your team:
 
 ## Choose your next step
 
-- [Use kits](/manuals/ai/sandboxes/customize/use-kits.md) to run a workload, add mixins, and configure a
-  sandbox from kits someone else has published.
-- [Author kits](/manuals/ai/sandboxes/customize/author/_index.md) to define a workload or mixin, build its
-  content, and declare its runtime requirements.
+- [Use kits](/manuals/ai/sandboxes/customize/use-kits.md) to run a published environment or combine
+  a workload with mixins.
+- [Author kits](/manuals/ai/sandboxes/customize/author/_index.md) to compose a kit set or build workload and
+  mixin components with their own runtime requirements.
 
 For the earlier format used by built-in agents, see [Kits v2](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
 To capture an interactively configured sandbox's container filesystem for reuse,

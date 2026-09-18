@@ -1,6 +1,6 @@
 ---
 title: Use kits
-description: Run v3 workload kits, add compatible mixins, supply arguments, and manage kit sources and runtime access.
+description: Run published v3 kit sets and workloads, add compatible mixins, and configure kit arguments and runtime access.
 keywords: sandboxes, sbx, kits, v3, workloads, mixins
 weight: 10
 ---
@@ -18,17 +18,42 @@ Sandboxes prepares the environment and applies its settings.
 > with v3 mixins. See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
 > or the [v2 reference](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
 
-## Run a kit
+## Install a v3-capable build
 
-Run a workload by passing its kit reference to `sbx run`:
+V3 kits require an `sbx` nightly with v3 support. The stable release doesn't
+support v3. Get a build from
+[sbx releases](https://github.com/docker/sbx-releases/releases).
+On macOS, install the preview channel with:
 
 ```console
-$ sbx run docker.io/my-org/agent-kit:1.0.0
+$ brew install docker/tap/sbx@rc
 ```
 
-This example uses an image reference. Kits can also come from a local
+## Run a kit
+
+A published kit set gives you a complete environment through one reference.
+For example, Docker's Claude ACP set includes a shell workload, Claude Code,
+and the Agent Client Protocol (ACP) adapter:
+
+```console
+$ sbx run docker.io/docker/sbx-kit-claude-acp-set:2.1.274
+```
+
+This opens a shell with `claude` and `claude-agent-acp` installed. Run `claude`
+in the sandbox for an interactive session; `claude-agent-acp` serves an ACP
+client over standard input and output. The set includes Claude's credential
+requests; see [Runtime access and instructions](#runtime-access-and-instructions)
+for storing and approving credentials.
+
+For a shell without an agent, run the shell workload on its own:
+
+```console
+$ sbx run docker.io/docker/sbx-kit-shell:1.0.0
+```
+
+Browse [Docker's published kits](https://hub.docker.com/orgs/docker/repositories?search=sbx-kit)
+for other environments and components. Kits can also come from a local
 directory or Git repository; see [Choose a kit source](#choose-a-kit-source).
-Replace the example references with the v3 kits you want to use.
 
 The sandbox uses your current directory as its workspace. To use another
 project directory, append its path to the command. See
@@ -44,8 +69,9 @@ For a step-by-step authoring walkthrough, see [Build an agent](/manuals/ai/sandb
 
 ## Add mixins
 
-A sandbox runs one workload kit. Add v3 mixins with `--kit`, repeating the
-flag for each one. For example, add Neovim for editing and Ruff for Python linting:
+A published set containing a workload runs as one workload kit. You can add
+compatible mixins to it, or assemble a workload and mixins yourself. Add v3
+mixins with `--kit`, repeating the flag for each one. For example, add Neovim for editing and Ruff for Python linting:
 
 ```console
 $ sbx run docker.io/my-org/agent-kit:1.0.0 \
@@ -57,6 +83,11 @@ The workload and its mixins form a composition: their tools, files, and
 runtime settings combine to define the sandbox's environment. See
 [Compose kits](#compose-kits) for dependency and compatibility rules, and
 [Kit examples](/manuals/ai/sandboxes/customize/author/kit-examples.md) for complete mixins.
+
+Once you have a combination to share, [publish a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md)
+so consumers can use one reference. A set containing only mixins is added with
+`--kit`, like an individual mixin. Avoid adding components already included in
+a set: duplicate feature providers can cause composition errors.
 
 ## Choose a kit source
 
@@ -98,6 +129,9 @@ mixin set, choose another name or recreate the sandbox with the desired kits.
 ## Compose kits
 
 Composition lets you assemble an environment from kits with different roles.
+A set's publisher resolves its components at build time. The consumer receives
+one merged kit, with a digest-pinned record of those components. When you add
+kits with `--kit`, Docker Sandboxes resolves that combination at sandbox creation.
 In the [Neovim and Ruff example](#add-mixins), the workload supplies the agent,
 Neovim adds an editor, and Ruff adds a Python linter. The agent runs in one
 sandbox with all three available. Adding the tools doesn't change which agent
@@ -170,8 +204,11 @@ precedence over shared values. Use `--kit-args-file <FILE>` for reusable
 `name=value` entries; `--kit-arg` values take precedence over file values.
 
 Use the kit's documentation to find its argument names, defaults, and accepted
-values. Arguments resolved when an image is built, such as a bundled tool's
-version, require the author to rebuild that image. Creating a sandbox doesn't
+values. A published set exposes only the arguments its author declares on the
+set. Component arguments are fixed during publication unless the author
+exposes them through set arguments.
+
+Arguments resolved when an image is built, such as a bundled tool's version, require the author to rebuild that image. Creating a sandbox doesn't
 change those values in a published kit.
 
 Argument values are plain text and can be recorded in shell history and

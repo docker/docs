@@ -44,6 +44,19 @@ source directory to `sbx` for development. The `sbx kit pack`, `push`, and
 `pull` packaging commands are for v1 and v2 kits. V3 uses the Buildx workflow
 shown here.
 
+## Publish a kit set
+
+Build a set through the same frontend, passing its YAML descriptor with `-f`.
+The frontend resolves the published images in `kits:`, checks compatibility,
+and merges their layers and declarations. See
+[Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md) for a complete example.
+
+The published image is a workload or mixin, with each component recorded by
+manifest digest. Consumers use this image directly. Updating a component tag
+doesn't change an already published set: rebuild and publish another set
+version to distribute the update. Supply component digests in the source
+list when you need rebuilds to use the same inputs.
+
 ## Share source through Git
 
 Commit the kit's source directory to a Git repository. Share a reference that
