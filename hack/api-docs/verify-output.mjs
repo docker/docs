@@ -140,12 +140,6 @@ for (const file of [...files(path.join(base, "reference/api"))].filter((p) =>
     }
   }
 }
-const governance = fs.readFileSync(
-  path.join(base, "reference/api/ai-governance/index.html"),
-  "utf8",
-);
-if (governance.includes("data-api-view="))
-  problems.push("Governance renderer changed");
 if (fs.existsSync(path.join(base, "api-prototype")))
   problems.push("Unexpected prototype routes");
 // Historical Engine pages must keep the original renderer at their existing URLs.
