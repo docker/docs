@@ -1,8 +1,8 @@
 # API reference build
 
-This tool validates the Hub, DVP, and Registry OpenAPI sources in
-`content/reference/api/` and generates presentation data for Hugo. Engine and
-AI Governance retain their existing sources and renderers.
+This tool validates the Hub, DVP, Registry, and AI Governance OpenAPI sources
+in `content/reference/api/` and generates presentation data for Hugo. Engine
+retains its existing sources and renderer.
 
 ## Commands
 
@@ -76,12 +76,13 @@ there is no exception baseline. Reports are written to
 
 Go fixtures cover dialects, references, recursion, boolean schemas, examples,
 security overrides, server and parameter precedence, and request generation.
-`verify-output.mjs` checks all generated HTML/Markdown pairs and retention of
-Engine v1.40–v1.56 in ReDoc, unchanged Governance rendering, and byte-identical
-published specifications. It also checks local links and fragments from API pages,
-including links to `docs.docker.com`. The site `htmltest` checks include migrated
-Hub, DVP, and Registry references. `browser-checks.mjs` exports a Playwright check for
-navigation, page aliases, filtering, requests, and narrow screens.
+`verify-output.mjs` checks all generated HTML/Markdown pairs, retention of
+Engine v1.40–v1.56 in ReDoc, and byte-identical published specifications. It
+also checks local links and fragments from API pages, including links to
+`docs.docker.com`. The site `htmltest` checks include migrated Hub, DVP,
+Registry, and AI Governance references. `browser-checks.mjs` exports a
+Playwright check for navigation, page aliases, filtering, requests, and narrow
+screens.
 
 Callbacks and webhook navigation are unsupported and fail validation. Request
 examples are POSIX shell templates; they do not make service calls.

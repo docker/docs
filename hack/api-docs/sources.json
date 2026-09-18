@@ -29,15 +29,19 @@
       "manual": "/manuals/docker-hub/repos/",
       "connection": "hosted",
       "guides": ["/reference/api/registry/auth.md"]
+    },
+    {
+      "id": "ai-governance",
+      "product": "ai-governance",
+      "title": "AI Governance",
+      "source": "content/reference/api/ai-governance/api.yaml",
+      "owner": "docker/governor-services",
+      "manual": "/manuals/ai/sandboxes/governance/",
+      "connection": "hosted",
+      "guides": []
     }
   ],
   "legacyAPIs": [
-    {
-      "title": "AI Governance",
-      "url": "/reference/api/ai-governance/",
-      "connection": "hosted",
-      "description": "Organization policy and access controls."
-    },
     {
       "title": "Docker Engine",
       "url": "/reference/api/engine/",

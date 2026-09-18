@@ -16,6 +16,7 @@ services:
             - content/reference/api/hub/latest.yaml
             - content/reference/api/dvp/latest.yaml
             - content/reference/api/registry/latest.yaml
+            - content/reference/api/ai-governance/api.yaml
         - action: rebuild
           path: hack/api-docs
         - action: rebuild
@@ -24,3 +25,5 @@ services:
           path: content/reference/api/dvp/latest.yaml
         - action: rebuild
           path: content/reference/api/registry/latest.yaml
+        - action: rebuild
+          path: content/reference/api/ai-governance/api.yaml
