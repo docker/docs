@@ -135,6 +135,10 @@ and view it in [Jaeger](https://www.jaegertracing.io/):
 
 3. Navigate to the **Build results** section, open the actions menu and select **Download as Jaeger format**.
 
+   <video controls>
+     <source src="/assets/video/build-jaeger-export.mp4" type="video/mp4" />
+   </video>
+
 4. Go to <http://localhost:16686> in your browser to open Jaeger UI.
 
 5. Select the **Upload** tab and open the Jaeger build trace you just exported.
