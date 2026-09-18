@@ -13,7 +13,7 @@ tools or behavior. A set combines these components with its own customization.
 This page introduces the source layout and runtime declarations they use.
 
 > [!NOTE]
-> V3 kits are experimental. Select a v3 workload and v3 mixins together.
+> Select a v3 workload and v3 mixins together.
 > Built-in shortcuts such as `claude` and `codex` use v2 and can't be combined
 > with v3 mixins. See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
 > or the [v2 reference](/manuals/ai/sandboxes/customize/kits-v2/_index.md).

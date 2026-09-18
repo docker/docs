@@ -10,11 +10,6 @@ aliases:
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-> [!NOTE]
-> V3 kits are experimental. The kit file format, CLI commands, and experience
-> for creating, loading, and managing kits are subject to change. Share
-> spec feedback in [docker/sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/issues).
-
 Build a sandbox environment from a Linux base image you choose, then package
 it as a schema v3 workload kit. You'll prepare the operating system, install
 Claude Code, and configure its model, API access, and agent instructions.
@@ -36,7 +31,7 @@ v2 customizations, see [Kits v2](/manuals/ai/sandboxes/customize/kits-v2/_index.
 
 ## Prepare the kit directory
 
-You need `sbx` with schema v3 support, Docker with Buildx, and an Anthropic
+You need `sbx`, Docker with Buildx, and an Anthropic
 API key. Create a directory beside the project you want the agent to work on:
 
 ```console

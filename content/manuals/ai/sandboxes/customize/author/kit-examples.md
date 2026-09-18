@@ -10,11 +10,6 @@ aliases:
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-> [!NOTE]
-> V3 kits are experimental. The kit file format, CLI commands, and experience
-> for creating, loading, and managing kits are subject to change. Share
-> spec feedback in [docker/sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/issues).
-
 These schema v3 examples show how to add tools, configuration, and instructions
 to a workload. Each section is a separate customization with its own kit files.
 The run commands use the [sample shell workload](#create-a-workload-for-the-examples)

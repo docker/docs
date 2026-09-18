@@ -7,32 +7,22 @@ weight: 10
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-Run a published kit by giving its reference to `sbx`. Docker Sandboxes
-prepares the kit's files and applies its runtime settings. A workload kit
-supplies the environment and launch command. Mixins add tools and behavior.
-A published set packages a combination as one kit. See
-[Kits](/manuals/ai/sandboxes/customize/_index.md) for how these roles fit together.
+If you've run `sbx run claude` or `sbx run codex`, you've already used a kit.
+The built-in agents are kits that package an environment, tools, and runtime
+settings. Kits you build yourself or get from another publisher use the same
+model: you give `sbx` a reference, and Docker Sandboxes prepares the environment
+and applies its settings.
 
-> [!NOTE]
-> V3 kits are experimental. Select a v3 workload and v3 mixins together.
-> Built-in shortcuts such as `claude` and `codex` use v2 and can't be combined
-> with v3 mixins. See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
-> or the [v2 reference](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
-
-## Install a v3-capable build
-
-V3 kits require an `sbx` nightly with v3 support. The stable release doesn't
-support v3. Get a build from
-[sbx releases](https://github.com/docker/sbx-releases/releases).
-On macOS, install the preview channel with:
-
-```console
-$ brew install docker/tap/sbx@rc
-```
+This page shows how to run published kits, combine them with mixins, and
+configure their runtime behavior. See
+[Kits](/manuals/ai/sandboxes/customize/_index.md) for an introduction to workloads,
+mixins, and sets.
 
 ## Run a kit
 
-Start with Docker's shell workload, which opens a shell without an agent:
+The built-in agent names are shortcuts for kit references. To run another kit,
+replace the agent name with that kit's reference. For example, Docker's shell
+workload opens a shell without an agent:
 
 ```console
 $ sbx run docker.io/docker/sbx-kit-shell:1.0.0
@@ -108,6 +98,11 @@ instructions for passing that guidance to the agent. The
 shows this for Claude Code.
 
 ## Add mixins
+
+The examples on this page use v3 kits. Select a v3 workload and v3 mixins
+together. Built-in shortcuts such as `claude` and `codex` select v2 kits, so
+use [v2 mixins](/manuals/ai/sandboxes/customize/kits-v2/_index.md) with those
+shortcuts. See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility).
 
 To choose the components yourself, start with a workload and add mixins with
 `--kit`. For example, add Claude Code to the shell workload:

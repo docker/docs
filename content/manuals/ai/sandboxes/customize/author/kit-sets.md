@@ -12,10 +12,8 @@ image you can version and share. Alongside its component list, a set can declare
 capabilities, lifecycle hooks, instructions, and arguments. Consumers use one
 reference for the resulting environment or bundle of mixins.
 
-V3 kits require a preview build of `sbx`. See
-[Install a v3-capable build](/manuals/ai/sandboxes/customize/use-kits.md#install-a-v3-capable-build).
-To publish the set, you also need Docker Buildx and a registry namespace you
-can push to. To run the Claude example, have an Anthropic API key available.
+To publish the set, you need Docker Buildx and a registry namespace you
+can push to. To run the Claude example, you need `sbx` and an Anthropic API key.
 
 ## Choose the components
 

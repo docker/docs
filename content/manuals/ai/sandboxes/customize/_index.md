@@ -20,8 +20,9 @@ A kit can define the whole environment or add something to an existing one,
 such as a toolchain or your team's shared configuration. Package those choices
 once, then reuse them across projects and share them with your team.
 
-This page covers v3 kits. See [Version compatibility](#version-compatibility)
-for preview-build requirements and the earlier kit formats.
+This page covers v3 kits, which require `sbx` v0.45 or later. See
+[Version compatibility](#version-compatibility) for compatibility with earlier
+kit formats.
 
 ## What is a kit?
 
@@ -92,16 +93,8 @@ your team:
 
 ## Version compatibility
 
-> [!NOTE]
-> V3 kits are experimental. The format and CLI commands are subject to change.
-> Share spec feedback or report issues in
-> [docker/sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/issues).
-
 The [sandbox-kit-spec repository](https://github.com/docker/sandbox-kit-spec)
 contains the authoritative v3 specification, build frontend, and examples.
-
-V3 requires an `sbx` nightly with v3 support; it isn't available in the stable
-release. See [Install a v3-capable build](/manuals/ai/sandboxes/customize/use-kits.md#install-a-v3-capable-build).
 
 V3 kits cannot be combined with v1 or v2 kits in the same sandbox. To use
 v3, select a v3 workload and use v3 for every mixin you add.

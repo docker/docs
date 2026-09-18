@@ -9,8 +9,7 @@ weight: 60
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 V2 kits remain supported. This page covers v2 usage, configuration, and the
-specification. For new kit development, use [v3 kits](/manuals/ai/sandboxes/customize/_index.md), which are
-experimental.
+specification. For new kit development, use [v3 kits](/manuals/ai/sandboxes/customize/_index.md).
 
 Built-in shortcuts such as `claude` and `codex` select v2 kits and still work
 with v2 mixins. V3 workloads and mixins can't be combined with v1 or v2 kits.

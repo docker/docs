@@ -7,7 +7,7 @@ weight: 40
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-V3 kits are experimental. This page covers building and distributing kits you've
+This page covers building and distributing v3 kits you've
 [authored](/manuals/ai/sandboxes/customize/author/_index.md). To run a kit someone else has published, see
 [Use kits](/manuals/ai/sandboxes/customize/use-kits.md).
 

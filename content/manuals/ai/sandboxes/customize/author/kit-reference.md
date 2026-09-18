@@ -10,11 +10,6 @@ aliases:
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-> [!NOTE]
-> V3 kits are experimental. The kit file format, CLI commands, and experience
-> for creating, loading, and managing kits are subject to change. Share
-> spec feedback in [docker/sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/issues).
-
 This page describes the v3 kit descriptor and its capability configs. Use it
 when authoring a set, workload, or mixin. For a practical introduction, see
 [Author kits](/manuals/ai/sandboxes/customize/author/_index.md). To run existing
