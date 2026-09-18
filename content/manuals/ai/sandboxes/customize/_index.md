@@ -20,8 +20,61 @@ A kit can define the whole environment or add something to an existing one,
 such as a toolchain or your team's shared configuration. Package those choices
 once, then reuse them across projects and share them with your team.
 
-This page covers v3, the recommended format for new kit development. V3 brings
-image builds and runtime capabilities together in the kit format.
+This page covers v3 kits. See [Version compatibility](#version-compatibility)
+for preview-build requirements and the earlier kit formats.
+
+## What is a kit?
+
+A kit packages software and configuration for a sandbox. Its YAML descriptor
+specifies the runtime behavior it needs, such as network access, credentials,
+setup commands, and agent instructions. When published, the kit is a container
+image that carries both its files and its descriptor.
+
+You give Docker Sandboxes a kit reference to use that package. Sandboxes
+prepares its files and applies its runtime configuration. You can use one kit
+for a complete environment or combine kits that contribute different parts.
+
+## Workloads and mixins
+
+Kits have two roles in a sandbox: one workload supplies the base environment
+and launch command, and mixins add tools or behavior to it.
+
+| Kind | What it supplies | How you use it |
+| --- | --- | --- |
+| `workload` | The environment and command to run, such as an agent or a shell | Pass it to `sbx run` or `sbx create` |
+| `mixin` | Additional tools, configuration, or runtime behavior | Add it with `--kit` |
+
+For example, a shell workload can provide the base environment, a Claude Code
+mixin can add the agent, and another mixin can add an Agent Client Protocol
+(ACP) adapter. Together, they give you a shell with Claude Code and its adapter
+available. Each component can be maintained and reused separately.
+
+## Kit sets
+
+A set brings those components together in a descriptor of its own. It lists
+the kits to include and can add capabilities, lifecycle hooks, instructions,
+and arguments for the combined environment. Publish the set to give consumers
+one reference with the component versions already selected.
+
+Docker publishes the shell, Claude Code, and ACP adapter combination described
+above as a set. Run it with:
+
+```console
+$ sbx run docker.io/docker/sbx-kit-claude-acp-set:2.1.274
+```
+
+This starts the shell with Claude Code and its ACP adapter available. See
+[Use kits](/manuals/ai/sandboxes/customize/use-kits.md) for prerequisites and usage.
+
+Workload and mixin describe how a published kit is used. A set describes how
+an author builds it from other kits. Publishing a set that contains a workload
+produces a workload kit. A set containing only mixins produces a mixin kit,
+which you can add to a workload with `--kit`.
+
+To customize and publish your own combination, see
+[Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md).
+
+## Version compatibility
 
 > [!NOTE]
 > V3 kits are experimental. The format and CLI commands are subject to change.
@@ -30,45 +83,6 @@ image builds and runtime capabilities together in the kit format.
 
 The [sandbox-kit-spec repository](https://github.com/docker/sandbox-kit-spec)
 contains the authoritative v3 specification, build frontend, and examples.
-
-## Kit sets
-
-A kit set packages a combination of kits as one reference. Use a set to share
-an environment with your team: the publisher chooses compatible components
-and versions, and consumers run the result without selecting each component.
-
-For example, Docker's Claude ACP set combines a shell base, Claude Code, and
-an Agent Client Protocol (ACP) adapter. Run the published environment with:
-
-```console
-$ sbx run docker.io/docker/sbx-kit-claude-acp-set:2.1.274
-```
-
-This starts the shell environment with Claude Code and its ACP adapter
-available. See [Use kits](/manuals/ai/sandboxes/customize/use-kits.md) for prerequisites and usage.
-
-## Workloads and mixins
-
-A sandbox runs one workload kit. You can add mixin kits to customize that
-workload:
-
-| Kind | What it supplies | How you use it |
-| --- | --- | --- |
-| `workload` | The environment and command to run, such as an agent or a shell | Pass it to `sbx run` or `sbx create` |
-| `mixin` | Additional tools, configuration, or runtime behavior | Add it with `--kit` |
-
-For example, a team might use an OpenCode workload with a mixin that adds a
-linter and another that supplies the team's review instructions. Each kit can
-be maintained and shared separately. During development, combine them with
-`--kit`. To share that combination, author a `kind: set` descriptor that lists
-the kits and publish it as one image.
-
-Publishing derives the set's kind from its components. A set with one workload
-becomes a workload; a set containing only mixins becomes a mixin. Consumers
-use the result with `sbx run` or `--kit`, like other published kits.
-See [Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md).
-
-## Version compatibility
 
 V3 requires an `sbx` nightly with v3 support; it isn't available in the stable
 release. See [Install a v3-capable build](/manuals/ai/sandboxes/customize/use-kits.md#install-a-v3-capable-build).
