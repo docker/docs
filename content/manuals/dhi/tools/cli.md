@@ -272,6 +272,20 @@ Available configuration options:
 | Option      | Environment Variable | Description                                                                                                               |
 |-------------|----------------------|---------------------------------------------------------------------------------------------------------------------------|
 | `org`       | `DHI_ORG`            | Default Docker Hub organization for mirror and customization commands.                                                    |
-| `api_token` | `DHI_API_TOKEN`      | Docker token for authentication. You can generate a token in your [Docker Hub account settings](https://hub.docker.com/). |
+| `api_token` | `DHI_API_TOKEN`      | Access token for authentication, obtained by exchanging a personal access token (PAT) or organization access token (OAT) for an access token. |
 
 Environment variables take precedence over configuration file values.
+
+To get an access token, exchange a [personal access token
+(PAT)](/manuals/security/access-tokens/personal-access-tokens.md) or
+[organization access token
+(OAT)](/manuals/security/access-tokens/organization-access-tokens.md):
+
+```console
+$ export DHI_API_TOKEN=$(curl -s -X POST https://hub.docker.com/v2/auth/token \
+  -H "Content-Type: application/json" \
+  -d '{"identifier": "<identifier>", "secret": "<token>"}' \
+  | jq -r .access_token)
+```
+
+Use your Docker Hub username as `identifier` for a PAT, or your organization name for an OAT.
