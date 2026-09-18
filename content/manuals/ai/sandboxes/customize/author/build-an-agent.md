@@ -1,6 +1,6 @@
 ---
-title: Build your own agent kit
-linkTitle: Build an agent
+title: Build an agent workload
+linkTitle: Build an agent workload
 description: Build a schema v3 agent workload from your own Linux base image, prepare its sandbox environment, and configure credentials and agent instructions.
 keywords: sandboxes, sbx, kits, agent, tutorial, claude, workload, build
 weight: 20
@@ -20,7 +20,12 @@ it as a schema v3 workload kit. You'll prepare the operating system, install
 Claude Code, and configure its model, API access, and agent instructions.
 The same approach applies to other agents and organization-maintained images.
 
-For a shorter example that extends an existing agent environment, see
+To customize a published agent with settings, hooks, or instructions,
+[author a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md). Use this
+tutorial when you need control over the base image, agent installation, and
+launch command.
+
+For a shorter example that packages an existing agent image, see
 [Build a workload](/manuals/ai/sandboxes/customize/author/_index.md#build-a-workload). This tutorial builds up the
 whole environment and its descriptor step by step. If you're starting with
 kits, read [Author kits](/manuals/ai/sandboxes/customize/author/_index.md) for the file layout and descriptor concepts. For field definitions, see the [Kit spec reference](/manuals/ai/sandboxes/customize/author/kit-reference.md).
@@ -391,5 +396,9 @@ $ sbx run --name claude-team-shared docker.io/<NAMESPACE>/claude-team:1.0.0
 
 For multi-platform images and distribution details, see
 [Build and distribute kits](/manuals/ai/sandboxes/customize/author/distribute.md).
-To add tools or shared configuration to this workload,
-see [Kit examples](/manuals/ai/sandboxes/customize/author/kit-examples.md).
+To add reusable tools or shared configuration to this workload,
+see [Mixin examples](/manuals/ai/sandboxes/customize/author/kit-examples.md).
+You can also use the published workload as the component of a
+[kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md), with additional
+settings and instructions declared on the set. Keep its base-image setup,
+agent installation, and launch requirements in the workload.

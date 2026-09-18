@@ -49,8 +49,8 @@ switch back to `agent` before installing tools into the agent's home directory.
 Otherwise, user-level installers put files under `/root/`, where the agent
 can't use them.
 
-The [workload example](/manuals/ai/sandboxes/customize/author/_index.md#build-a-workload) extends the OpenCode image
-with Python tooling and pairs it with a kit descriptor. `sbx` builds the
+The [workload example](/manuals/ai/sandboxes/customize/author/_index.md#build-a-workload) pairs the OpenCode image
+with a kit descriptor and an explicit launch command. `sbx` builds the
 image as part of the kit, so you don't need to build and distribute a separate
 template first.
 
@@ -68,7 +68,7 @@ and prepare it for the sandbox runtime.
 
 See [Base image requirements](/manuals/ai/sandboxes/customize/author/kit-reference.md#base-image-requirements) for the
 required tools, user account, and launch configuration. The
-[Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md) tutorial walks through preparing a base
+[Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md) tutorial walks through preparing a base
 image, installing an agent, and declaring its runtime requirements.
 
 ## Image overrides for built-in agents

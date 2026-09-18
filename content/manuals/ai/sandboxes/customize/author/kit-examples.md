@@ -26,6 +26,18 @@ agent shortcuts, such as `claude` or `codex`. Select a v3 workload before
 adding these mixins. For v2 customizations,
 see [Kits v2](/manuals/ai/sandboxes/customize/kits-v2/_index.md).
 
+## Choose a mixin or a set
+
+Use a mixin for a component you want to reuse and version independently, such
+as a tool binary, packaged skill, or CA certificate. The examples on this page
+keep each component separate so you can try it with different workloads.
+
+Instructions, generated configuration, and startup hooks can also be declared
+directly on a set. When they belong to one environment, put them in the set's
+`capabilities` and `args` instead of publishing another mixin. See
+[Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md) for a complete
+example with its own model argument, settings file, and team instructions.
+
 For source layout and capability declarations, see
 [Author kits](/manuals/ai/sandboxes/customize/author/_index.md).
 For additional source kits, see the
@@ -68,7 +80,7 @@ $ sbx run --name kit-shell ./shell-v3 .
 ```
 
 Each example uses a different sandbox name because selecting a different kit
-set requires creating a sandbox.
+combination requires creating a sandbox.
 
 ## Contribute agent instructions
 
@@ -314,7 +326,7 @@ capabilities:
           env: [WORKSPACE_DIR]
 ```
 
-Use it with the Claude Code workload from [Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md):
+Use it with the Claude Code workload from [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md):
 
 ```console
 $ sbx run ./claude-team --name claude-review --kit ./docker-review
@@ -428,4 +440,4 @@ Another mixin can declare `requires: ["gojq >= 0.12.17"]`. You must include
 both mixins in the launch command: a requirement checks the supplied set
 and doesn't download a provider. See [Compose kits](/manuals/ai/sandboxes/customize/author/_index.md#compose-kits).
 
-To build an agent workload step by step, see [Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
+To build an agent workload step by step, see [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md).

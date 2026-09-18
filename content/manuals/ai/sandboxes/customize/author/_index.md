@@ -26,13 +26,32 @@ You can author a set, a workload, or a mixin:
 A set gets its image content from the kits it lists. It can customize runtime
 behavior in its own descriptor without a separate mixin for each customization.
 
-Work in a directory of source files. A workload or mixin that builds software
-has a YAML file and a Dockerfile:
+## Customize an environment with a set
+
+Start with published components and declare the behavior you want on the set.
+For example, combine a shell workload and Claude Code mixin, then add a model
+argument, a generated settings file, and team instructions. The components
+supply the software and its runtime requirements; the set supplies your
+customization.
+
+The [kit-set guide](/manuals/ai/sandboxes/customize/author/kit-sets.md) walks through
+this example, including publishing and running it. You don't need a separate
+mixin for settings that belong to this environment. Extract a customization
+into a mixin when you want to reuse and version it independently.
+
+## Build a workload
+
+Author a workload when you need to build the environment or define its launch
+command. This example packages Docker's OpenCode base image as a v3 workload.
+You can run it directly or include it in a set with tools and team settings.
+
+Work in a directory of source files. This workload has a YAML file and a
+Dockerfile:
 
 ```text
-opencode-python/
-├── opencode-python.yaml
-└── opencode-python.dockerfile
+opencode-workload/
+├── opencode-workload.yaml
+└── opencode-workload.dockerfile
 ```
 
 The YAML file is the kit's descriptor. It identifies the kit as a workload or
@@ -45,30 +64,21 @@ its descriptor. You can share that image through a container registry. During
 development, `sbx` can build directly from the directory when you create a
 sandbox.
 
-## Build a workload
+The Dockerfile selects Docker's OpenCode [base image](/manuals/ai/sandboxes/customize/author/base-images.md)
+and defines the launch command:
 
-Suppose your team uses OpenCode to work on Python projects. Package it with
-Ruff and instructions to check Python changes before handing work back to you.
-Everyone using the kit gets the same linter version and review workflow.
-
-The Dockerfile starts from Docker's OpenCode [base image](/manuals/ai/sandboxes/customize/author/base-images.md) and
-installs Ruff:
-
-```dockerfile {title="opencode-python/opencode-python.dockerfile"}
+```dockerfile {title="opencode-workload/opencode-workload.dockerfile"}
 FROM docker/sandbox-templates:opencode
 USER agent
-RUN uv tool install ruff==0.12.12
 ENTRYPOINT ["opencode"]
 CMD []
 ```
 
-The template supplies OpenCode, Python, uv, and the `agent` user. Ruff is
-installed during the build, so it is ready when the agent starts.
+The template supplies OpenCode, Python, uv, and the `agent` user.
+The descriptor declares the workload's network access, Anthropic credential,
+and instructions about its environment:
 
-The descriptor declares this as a workload, connects OpenCode to the
-Anthropic API, and gives it the team's review instructions:
-
-```yaml {title="opencode-python/opencode-python.yaml"}
+```yaml {title="opencode-workload/opencode-workload.yaml"}
 # syntax=docker/sandbox-kit:3
 schemaVersion: "3"
 kind: workload
@@ -99,9 +109,8 @@ capabilities:
     config:
       filename: AGENTS.md
       content: |
-        Ruff is installed. Run `ruff check` on Python files you change,
-        and fix any lint errors before reporting completion.
-        Follow the project's existing configuration and test commands.
+        OpenCode runs as the agent user. Python and uv are available.
+        Use the project's environment and dependency configuration.
 ```
 
 The `capabilities` list describes what the sandbox provides at runtime:
@@ -110,7 +119,7 @@ entry names the service; you store the actual API key on your host.
 
 This example extends an existing agent environment. To prepare your own Linux
 base image, install an agent, and configure its runtime needs step by step,
-see [Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
+see [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
 
 ## Capabilities
 
@@ -119,7 +128,7 @@ Sandboxes at runtime, such as network access, credentials, lifecycle hooks,
 or agent instructions. Declare these requests in the descriptor's
 `capabilities` list.
 
-Workloads and mixins use the same capability format. For example, a workload
+Sets, workloads, and mixins use the same capability format. For example, a workload
 can declare the network access its agent needs, and a mixin can request access
 to an additional service.
 
@@ -157,7 +166,7 @@ run it with a v3 workload, such as the
 [OpenCode workload example](#build-a-workload):
 
 ```console
-$ sbx run ./opencode-python --name python-github --kit ./github-access
+$ sbx run ./opencode-workload --name opencode-github --kit ./github-access
 ```
 
 Network rules from the selected kits combine. A kit's `deny` entries take
@@ -492,7 +501,7 @@ See [Run a hook on every start](/manuals/ai/sandboxes/customize/author/kit-examp
 
 - [Base images](/manuals/ai/sandboxes/customize/author/base-images.md) covers Docker-provided images and choosing
   your own Linux base.
-- [Build an agent](/manuals/ai/sandboxes/customize/author/build-an-agent.md) walks through a complete workload from
+- [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md) walks through a complete workload from
   a custom base image.
 - [Mixin examples](/manuals/ai/sandboxes/customize/author/kit-examples.md) includes tools,
   shared configuration, instructions, and lifecycle hooks.
