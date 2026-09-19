@@ -7,6 +7,7 @@ keywords: payments, billing, subscription, invoices, update billing email, chang
 aliases:
   - /billing/details/
   - /billing/cycle/
+  - /billing/core-billing/details/
 ---
 
 You can update your billing contact information, address, and notification email at any time. Existing invoices, whether paid or unpaid, cannot be updated. Changes only apply to future invoices.
