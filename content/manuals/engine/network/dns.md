@@ -137,6 +137,14 @@ cause the other servers to be queried.
 If every upstream server fails, the container receives `SERVFAIL`. In the
 worst case, with three unresponsive servers, that takes about twelve seconds.
 
+> [!NOTE]
+>
+> Failing over between servers means a broken primary server can go unnoticed
+> if the secondary servers still work: containers get answers, but more slowly.
+> If you scrape the daemon's [Prometheus metrics](../daemon/prometheus.md),
+> the `libnetwork_resolver_upstream_failovers_total` counter shows how often
+> this happens.
+
 ### Internal networks
 
 If a container is connected only to
@@ -199,9 +207,13 @@ with the upstream servers or the path to them.
 
 The daemon logs the details of each forwarded query at `debug` level. To
 enable debug logging, see
-[Read the daemon logs](../daemon/logs.md).
+[Read the daemon logs](../daemon/logs.md). If the daemon exposes
+[Prometheus metrics](../daemon/prometheus.md), the
+`libnetwork_resolver_*` metrics report query counts, latencies, upstream
+results, and failovers without needing debug logging.
 
 ## Next steps
 
 - [Networking overview](_index.md)
 - [Bridge network driver](drivers/bridge.md)
+- [Collect Docker metrics with Prometheus](../daemon/prometheus.md)
