@@ -305,7 +305,7 @@ organization's repositories, but not `github.com/myorg-other/`. The value
 by [kit.allowLocalKits](#kitallowlocalkits), and pinned agent kits have the
 [kit.allowExtractedAgents](#kitallowextractedagents) exception.
 
-See [restrict kit sources](../customize/kits.md#restrict-kit-sources) for source
+See [restrict kit sources](../customize/use-kits.md#restrict-kit-sources) for source
 formats and examples.
 
 #### kit.allowLocalKits {.wrap-anywhere}
@@ -366,7 +366,7 @@ Pinned agent kits remain exempt while
 
 A signature covers the kit's `spec.yaml` and `files/` content. It doesn't pin
 image tags or verify downloads performed by the kit's commands. See
-[sign and verify kits](../customize/kits.md#sign-and-verify-kits).
+[sign and verify kits](../customize/kits-v2.md#sign-and-verify-kits).
 
 #### kit.trustedSigners {.wrap-anywhere}
 

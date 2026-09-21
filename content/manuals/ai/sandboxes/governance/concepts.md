@@ -193,14 +193,17 @@ from those sources do still apply. See [Precedence](#precedence).
 
 What applies depends on whether your organization has governance enabled:
 
-- No organization governance: local rules and any
-  [kit-defined network rules](../customize/kits.md#control-network-access)
+- No organization governance: local rules and any kit-defined network rules
   determine what sandboxes can access.
 - Organization governance active: organization policy determines what access can
   be granted. Only organization allow rules grant access, so local and
   kit-defined allow rules are inactive and can't expand what the organization
   permits. Deny rules apply from every source, so a local or kit-defined deny
   can still restrict access further.
+
+For kit-defined rules, see
+[Network policies](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/network-policy@1.md)
+in the kit specification.
 
 Precedence is decided by a rule's decision rather than its source:
 

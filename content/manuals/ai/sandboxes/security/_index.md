@@ -119,7 +119,7 @@ see the full list of active rules, and remove entries you don't need. See
 Kits run install commands with root privileges inside the sandbox. To limit
 supply-chain risk, `sbx` restricts kit installs to an allowlist of sources
 that defaults to Docker Hub only. See
-[Restrict kit sources](../customize/kits.md#restrict-kit-sources).
+[Restrict kit sources](/manuals/ai/sandboxes/customize/use-kits.md#restrict-kit-sources).
 
 Shared agent skills create a narrow exception to cross-sandbox isolation. The
 store can be mounted with `readwrite` access, so one sandbox can modify

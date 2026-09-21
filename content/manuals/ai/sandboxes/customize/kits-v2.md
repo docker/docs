@@ -1,95 +1,182 @@
 ---
-title: Kit spec reference
-linkTitle: Spec reference
-description: Field-by-field reference for a kit's spec.yaml, including arguments, credentials, network rules, environment, setup, files, agent instructions, and the sandbox block.
-keywords: sandboxes, sbx, kits, spec.yaml, reference, schema, fields
-weight: 50
+title: Kits v2
+linkTitle: Kits v2
+description: Reference for v2 kits, including usage, schema fields, maintenance examples, signing, and migration to v3.
+keywords: sandboxes, sbx, kits, v2, migration, spec.yaml
+weight: 60
+aliases:
+  - /ai/sandboxes/customize/kits/
+  - /ai/sandboxes/customize/kit-reference/
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-> [!NOTE]
-> Kits are experimental. The kit file format, CLI commands, and experience
-> for creating, loading, and managing kits are subject to change as the
-> feature evolves. Share feedback and bug reports in the
-> [docker/sbx-releases](https://github.com/docker/sbx-releases) repository.
+V2 kits remain supported. This page covers v2 usage, configuration, and the
+specification. For new kit development, use [v3 kits](/manuals/ai/sandboxes/customize/_index.md).
 
-This page documents every field in a kit's `spec.yaml`. For an overview of
-what kits are and how to use them, see [Kits](kits.md).
+Built-in shortcuts such as `claude` and `codex` select v2 kits and still work
+with v2 mixins. V3 workloads and mixins can't be combined with v1 or v2 kits.
+V1 also remains supported.
 
-For the normative v2 grammar used by the parser and tests, see the
-[`schemaVersion: "2"` specification](https://github.com/docker/sbx-kits-contrib/blob/main/spec/SPEC-v2.md)
-in the `docker/sbx-kits-contrib` repository.
+## Use existing kits
 
-A kit directory has a required `spec.yaml` and an optional `files/` tree:
+A v2 kit contains `spec.yaml` with `schemaVersion: "2"` and an optional `files/`
+tree. A sandbox kit defines the agent environment. A mixin adds tools or
+configuration to it. Pass a sandbox kit in place of the agent name and add
+mixins with `--kit`:
 
-```text
-my-kit/
-├── spec.yaml       # required
-└── files/          # optional — static files to inject
-    ├── home/
-    └── workspace/
+```console
+$ sbx run ./my-agent --name my-project --kit ./team-config
+$ sbx run claude --name claude-project --kit ./team-config
 ```
 
-## Schema versions
+`sbx run` uses your current directory as the workspace. Append a project path
+to use another directory. To create without launching the agent, use
+`sbx create`; include a workspace path or `.` to mount a directory.
+References can be local directories, ZIP files, OCI artifacts, or Git URLs.
+Start relative paths with `./` or `../`. For Docker Hub kits, you can omit
+`docker.io/` and use `<NAMESPACE>/<KIT>:<TAG>`. In Git URLs, `ref` selects a
+revision and `dir` the kit directory. Quote URLs containing `&`:
 
-Starting with Docker Sandboxes version 0.36, two schema versions are supported.
-Use `schemaVersion: "2"` for new kits. Version `"1"` remains accepted through
-the legacy path.
+```console
+$ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-agent"
+```
 
-When migrating to `schemaVersion: "2"`, replace v1 fields with their v2
-equivalents:
+`git+ssh://` URLs work with your local SSH agent and Git credentials.
+For private registries, see
+[Registry credentials](../configuration/credentials.md#registry-credentials).
 
-| v1                                          | v2                                       |
-| ------------------------------------------- | ---------------------------------------- |
-| `credentials.sources.<id>`                  | `credentials:` list entry with `service` |
-| `network.allowedDomains` / `deniedDomains`  | `permissions.network.allow` / `deny`     |
-| `network.serviceDomains` / `serviceAuth`    | `credentials[].apiKey.inject`            |
-| `network.publishedPorts` / `publishedPorts` | top-level `ports`                        |
-| standalone `oauth:` block                   | `credentials[].oauth`                    |
-| `oauth.skipIfEnv`                           | Accepted but ignored                     |
-| `environment.proxyManaged`                  | `credentials[].apiKey.proxyManaged`      |
-| `memory` / `agentContext`                   | `agentInstructions.content`              |
-| `kind: agent` / `agent:` block              | `kind: sandbox` / `sandbox:` block       |
-| `sandbox.aiFilename`                        | `agentInstructions.filename`             |
-| `sandbox.entrypoint.run`                    | `sandbox.entrypoint`                     |
-| `sandbox.entrypoint.args`                   | `sandbox.command.default`                |
-| `sandbox.entrypoint.ttyArgs`                | `sandbox.command.interactive`            |
-| `tmpfs:`                                    | `volumes:` entries with `type: tmpfs`    |
-| `volumes:` (mapping form)                   | `volumes:` sequence (`- path: <path>`)   |
-| `commands:` / `commands.initFiles`          | `setup:` / `setup.files`                 |
-| `settings:` / `kitDir` / `persistence`      | Removed                                  |
+Kit selection with `--kit` applies at creation. Recreate the sandbox to change
+its kit set, except for the limited updates supported by
+[`sbx kit add`](#execution-order). That command restarts the sandbox while
+preserving packages, images, volumes, and agent history. Kits can't be
+removed from a running sandbox.
 
-Credential discovery also moved out of the kit in v2: a kit declares which
-credentials it needs and how to inject them, but where each value comes from is
-controlled by the user through
-[credential bindings](../configuration/credentials.md#credential-bindings).
+### Restrict kit sources
 
-> [!NOTE]
-> `mixins` and `sandbox.build` are accepted by the parser, but runtime support
-> is pending. A kit that sets `sandbox.build` must also set `sandbox.image`.
+See [Restrict kit sources](/manuals/ai/sandboxes/customize/use-kits.md#restrict-kit-sources)
+for source policies. `kit.allowLocalKits` also governs v2 ZIP files.
 
-## Top-level fields
+## Image overrides for built-in agents
+
+Use `--template` to replace a built-in agent's image while keeping its
+configuration and launch command. The replacement image must support the
+same agent. For example, an image used with `claude` must have Claude Code
+installed.
+
+To define an environment with its own launch command and sandbox settings,
+see [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md)
+for the v3 workflow.
+
+### Choose a template
+
+Docker publishes agent images as `docker/sandbox-templates:<variant>`.
+Choose the variant that matches your agent. See
+[Base images](/manuals/ai/sandboxes/customize/author/base-images.md)
+for the available variants.
+
+Variants with a `-docker` suffix, such as `claude-code-docker`, include
+Docker Engine for building and running containers inside the sandbox.
+Built-in agents use these variants by default when you don't specify a
+custom template.
+
+If you don't need Docker inside the sandbox, select a variant without
+the suffix. It uses fewer resources and doesn't require privileged mode:
+
+```console
+$ sbx run claude --template docker.io/docker/sandbox-templates:claude-code
+```
+
+Include the registry domain in `--template` image references. Unlike kit
+references, template references don't automatically expand to include
+`docker.io`.
+
+### Build a custom template
+
+Building a custom template requires
+[Docker Desktop](/manuals/desktop/_index.md).
+
+Extend the Docker-provided image for the agent you plan to run. For example,
+this Dockerfile adds Rust and protocol buffer tools to the Claude Code image:
+
+```dockerfile
+FROM docker/sandbox-templates:claude-code
+USER root
+RUN apt-get update && apt-get install -y protobuf-compiler
+USER agent
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+```
+
+Install system packages as `root`, then switch back to `agent` before
+installing tools in the agent's home directory.
+
+Build the image and push it to a registry. Replace `<NAMESPACE>` with a
+Docker Hub namespace you can push to:
+
+```console
+$ docker build -t docker.io/<NAMESPACE>/my-template:v1 --push .
+```
+
+For registry credentials and loading a locally built image, see
+[Load a template](/manuals/ai/sandboxes/usage.md#load-a-template).
+
+Run the sandbox with your image:
+
+```console
+$ sbx run claude --template docker.io/<NAMESPACE>/my-template:v1
+```
+
+Because this image extends `claude-code`, use it with `claude`. For an
+image based on `codex`, use `codex`. For one based on `shell`, use `shell`
+to open Bash without an agent.
+
+If your added tools need network access, allow the domains they use in
+the sandbox's network policy, unless you use the `allow-all` policy:
+
+```console
+$ sbx policy allow network "*.example.com:443,example.com:443"
+```
+
+## Kit kinds
+
+### `kind: mixin`
+
+A mixin layers capabilities onto an existing sandbox. It must not declare a
+`sandbox:` block, `extends:`, or `mixins:`. A mixin can declare `requires:` to
+pin the base agent it is designed for:
 
 ```yaml
 schemaVersion: "2"
-kind: <mixin | sandbox>
-name: <name>
-version: <version>
-displayName: <name>
-description: <text>
-sourceURL: <url>
-licenses:
-  - MIT
-locked:
-  - sandbox.image
-security:
-  privileged: false
-args:
-  channel:
-    default: stable
-    enum: [stable, beta]
+kind: mixin
+name: github-tools
+requires:
+  agent: claude
 ```
+
+`requires.agent` takes one base-agent name. It is validated as a kit name and
+enforced during composition.
+
+### `kind: sandbox`
+
+A sandbox kit defines a full agent. A root sandbox must declare a `sandbox:`
+block. A sandbox that uses `extends:` can inherit the parent image and omit its
+own `sandbox:` block:
+
+```yaml
+schemaVersion: "2"
+kind: sandbox
+name: claude-safe
+extends: claude
+```
+
+`extends:` is sandbox-only. The parent must resolve to a sandbox kit. `mixins:`
+is also sandbox-only and accepted by the parser, but runtime composition support
+is pending.
+
+## Top-level fields
+
+For the normative grammar, see the
+[v2 specification](https://github.com/docker/sbx-kits-contrib/blob/main/spec/SPEC-v2.md).
 
 | Field           | Required | Description                                                                                     |
 | --------------- | -------- | ----------------------------------------------------------------------------------------------- |
@@ -152,45 +239,23 @@ Argument values are strings, but substitution happens before YAML decoding.
 Quote a placeholder in a string-valued field so a value such as `1.20` isn't
 decoded as a number.
 
-Supply values with `--kit-arg` or `--kit-args-file` when loading the kit. See
-[Pass arguments to kits](kits.md#pass-arguments-to-kits) for scoping,
-precedence, and validation behavior.
+### Pass arguments to kits
 
-## Kit kinds
+Use `--kit-arg name=value` for every kit declaring that argument, or prefix
+with the kit's `name` to target one kit. Scoped values override shared values:
 
-### `kind: mixin`
-
-A mixin layers capabilities onto an existing sandbox. It must not declare a
-`sandbox:` block, `extends:`, or `mixins:`. A mixin can declare `requires:` to
-pin the base agent it is designed for:
-
-```yaml
-schemaVersion: "2"
-kind: mixin
-name: github-tools
-requires:
-  agent: claude
+```console
+$ sbx run ./my-agent --kit ./my-mixin --kit-arg channel=stable \
+    --kit-arg my-mixin.channel=beta
 ```
 
-`requires.agent` takes one base-agent name. It is validated as a kit name and
-enforced during composition.
-
-### `kind: sandbox`
-
-A sandbox kit defines a full agent. A root sandbox must declare a `sandbox:`
-block. A sandbox that uses `extends:` can inherit the parent image and omit its
-own `sandbox:` block:
-
-```yaml
-schemaVersion: "2"
-kind: sandbox
-name: claude-safe
-extends: claude
-```
-
-`extends:` is sandbox-only. The parent must resolve to a sandbox kit. `mixins:`
-is also sandbox-only and accepted by the parser, but runtime composition support
-is pending.
+`--kit-args-file <FILE>` reads `name=value` entries, ignoring blank lines and
+`#` comments. Later files override earlier files; `--kit-arg` overrides files.
+For repeated CLI keys, the last value wins. Missing required values, unknown
+arguments, undeclared placeholders, and invalid values fail before creation.
+Pass the same flags to `sbx kit validate` or `sbx kit inspect` when needed.
+Argument values can remain in shell history and are stored unencrypted in
+argument files.
 
 ## Sandbox block
 
@@ -245,12 +310,7 @@ requirements.
 
 ## Agent instructions
 
-```yaml
-agentInstructions:
-  filename: CLAUDE.md
-  content: |
-    Ruff is installed. Run `ruff check` before committing.
-```
+Declare these fields under `agentInstructions`:
 
 | Field      | Description                                                                                         |
 | ---------- | --------------------------------------------------------------------------------------------------- |
@@ -262,6 +322,11 @@ For mixins, the engine writes `content` to
 section to the base AI file. This keeps each mixin's instructions in a separate
 file.
 
+The generated profile lives in the parent directory of the mounted workspace
+inside the sandbox. It sits outside the mount and doesn't replace an
+instruction file in the project. The sandbox kit's inline instructions go
+directly into that profile.
+
 ## Credentials
 
 A kit declares the credentials it needs and how the proxy injects them into
@@ -269,41 +334,6 @@ outbound requests. It does not declare a host discovery source. The user
 provides the value through the secret store or the first-run prompt, and a
 [credential binding](../configuration/credentials.md) authorizes its use. A kit
 can't read arbitrary host environment variables or files.
-
-```yaml
-credentials:
-  - service: <service-id>
-    description: <text> # optional
-    required: <true | false> # optional, default false
-    provider: <provider> # optional, reserved
-    apiKey:
-      name: <ENV_VAR>
-      proxyManaged: true
-      inject:
-        - domain: <domain>
-          header: <header>
-          format: <format>
-        - domain: <domain>
-          scheme: bearer
-        - domain: <domain>
-          scheme: basic
-          username: <user> # required with scheme: basic
-    oauth:
-      tokenEndpoint:
-        host: <host>
-        path: <path>
-      sentinels:
-        accessToken: <sentinel>
-        refreshToken: <sentinel>
-      credentialFile:
-        path: <path>
-        structure:
-          <key>:
-            accessToken: "{{.AccessToken}}"
-            refreshToken: "{{.RefreshToken}}"
-            expiresAt: "{{.ExpiresAt}}"
-            scopes: "{{.Scopes}}"
-```
 
 `credentials` is a list; each entry names a `service` and configures one or more
 auth mechanisms.
@@ -363,13 +393,6 @@ their own domain mapping — the proxy injects a credential only into the domain
 its [`apiKey.inject`](#apikey) lists, and every domain the
 sandbox reaches must be allowed here.
 
-```yaml
-permissions:
-  network:
-    allow: [<domain>, ...]
-    deny: [<domain>, ...]
-```
-
 | Field                       | Description                                                                                                     |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | `permissions.network.allow` | Domains the sandbox can reach.                                                                                  |
@@ -392,13 +415,7 @@ In v1 this was the `network:` block (`allowedDomains` / `deniedDomains`, plus
 
 ## Ports
 
-Use `ports` to expose sandbox services to the host:
-
-```yaml
-ports:
-  - container: 8080
-    name: web
-```
+Declare `ports` as a list of entries to expose sandbox services to the host:
 
 | Field       | Description                                                         |
 | ----------- | ------------------------------------------------------------------- |
@@ -415,15 +432,9 @@ in the sandbox is listening there. Users can pin host ports with
 
 ## Environment
 
-```yaml
-environment:
-  variables:
-    <NAME>: <value>
-```
-
 | Field       | Description                                    |
 | ----------- | ---------------------------------------------- |
-| `variables` | Key-value pairs set directly in the container. |
+| `environment.variables` | Key-value pairs set directly in the container. |
 
 Do not set `DASH_`, `SBX_`, or `DOCKER_` variables, and avoid overriding
 `HOME`, `USER`, `SHELL`, `PATH`, `LD_PRELOAD`, and `LD_LIBRARY_PATH`. The
@@ -431,24 +442,8 @@ runtime reserves these names and may override them.
 
 ## Setup
 
-```yaml
-setup:
-  install:
-    - command: <shell-string>
-      user: <uid>
-      description: <text>
-  startup:
-    - command: [<argv>, ...]
-      user: <uid>
-      background: <true | false>
-      description: <text>
-  files:
-    - path: <path>
-      content: <text>
-      mode: <octal>
-      onlyIfMissing: <true | false>
-      description: <text>
-```
+`setup.install`, `setup.startup`, and `setup.files` are lists of commands or
+files with the fields described here.
 
 ### Execution order
 
@@ -534,6 +529,14 @@ path must be writable by that user. To write to a root-owned path such as
 `/etc`, use an `install` command, which runs as root by default. Set ownership
 in the install command if the agent needs to modify the file later.
 
+### Shell initialization and service logs
+
+With Docker templates, append shell initialization to
+`/etc/sandbox-persistent.sh` in an install command. Keep existing content and
+omit completion scripts: interactive and non-interactive Bash commands source
+this file. For a background service, redirect startup output to a file and
+read it with `sbx exec`. Use `background: true` instead of a trailing `&`.
+
 ## Static files
 
 ```text
@@ -551,18 +554,13 @@ Parent directories are created automatically. Existing files are
 overwritten. Absolute paths and path-traversal sequences (`../../`) are
 rejected.
 
+Static files can supply linter settings, helper scripts, or agent skills.
+For example, a Claude Code project skill belongs at
+`files/workspace/.claude/skills/<NAME>/SKILL.md`.
+
 ## Volumes
 
-```yaml
-volumes:
-  - path: /workspace
-    size: 10g
-    mode: "0755"
-  - path: /tmp/scratch
-    type: tmpfs
-    size: 512m
-    mode: "1777"
-```
+Declare `volumes` as a list of mounts with these fields:
 
 | Field  | Description                                                         |
 | ------ | ------------------------------------------------------------------- |
@@ -573,3 +571,231 @@ volumes:
 
 Volumes are applied only when a sandbox is created. `sbx kit add` cannot attach
 volumes to a running container.
+
+## Fork an existing agent
+
+Sandbox kits (`kind: sandbox`) define a full agent from scratch. The most
+common variant is a fork of a built-in agent. Use `extends:` to inherit the
+parent's complete configuration and declare only the fields you want to change.
+This example replaces the built-in `claude` entrypoint so Claude Code uses
+manual permission mode instead of bypassing approval prompts:
+
+```yaml {title="claude-safe/spec.yaml"}
+schemaVersion: "2"
+kind: sandbox
+name: claude-safe
+displayName: Claude Code (with approval prompts)
+description: Claude Code in manual permission mode
+
+extends: claude
+
+sandbox:
+  entrypoint: [claude, "--permission-mode", "manual"]
+```
+
+The child inherits the built-in image, credentials, network permissions,
+persistent volumes, settings, MCP integration, agent instructions, setup
+entries, and environment variables. Its `sandbox.entrypoint` replaces the
+inherited entrypoint.
+
+Launch by passing the sandbox kit in place of a built-in agent name:
+
+```console
+$ sbx run ./claude-safe
+```
+
+## Install an internal CA certificate
+
+Put each PEM-encoded root certificate under `files/home/` with a `.crt`
+extension. For `files/home/internal-ca.crt`, use:
+
+```yaml {title="internal-ca/spec.yaml"}
+schemaVersion: "2"
+kind: mixin
+name: internal-ca
+setup:
+  install:
+    - command: "install -m 0644 /home/agent/internal-ca.crt /usr/local/share/ca-certificates/internal-ca.crt && update-ca-certificates"
+      user: "0"
+```
+
+This updates the system trust store. For several CAs, install every
+certificate before running `update-ca-certificates`.
+
+## Sandbox-managed agent configuration
+
+Built-in agent kits reserve the following paths for sandbox setup. Treat these
+paths as sandbox-managed, even if a file is only needed for a particular
+feature. Don't target them with static files, `setup.files`, or install
+commands. Later setup can replace your content or depend on settings that your
+file removes. In this table, `~` is `/home/agent`.
+
+| Built-in agent kit | Managed configuration paths |
+| ------------------ | --------------------------- |
+| `claude` | `~/.claude.json`, `~/.claude/settings.json`, `~/.claude/.config.json` |
+| `codex` | `~/.codex/config.toml` |
+| `copilot` | `~/.copilot/config.json` |
+| `cursor` | `~/.cursor/cli-config.json` |
+| `devin` | `~/.config/devin/config.json`, `~/.config/devin/mcp_config.json` |
+| `gemini` | `~/.gemini/settings.json` |
+| `kiro` | `~/.kiro/settings/mcp.json` |
+| `opencode` | `~/.config/opencode/opencode.json` |
+
+Use separate settings files when supported: Claude Code accepts `--settings`,
+and OpenCode reads `OPENCODE_CONFIG`. Don't use `setup.startup` for settings
+the agent must read during initialization; startup commands don't gate the
+entrypoint.
+
+## Packaging and distribution
+
+The `sbx kit` subcommands validate, inspect, and publish kits:
+
+- `sbx kit validate <path>` — check that a kit directory or ZIP is
+  well-formed.
+- `sbx kit inspect <path>` — display kit details. Add `--json` for
+  machine-readable output.
+- `sbx kit pack <path> -o <file.zip>` — package a directory as a ZIP file
+  for sharing.
+- `sbx kit push <path> <ref>` — publish to an OCI registry (for example,
+  `ghcr.io/myorg/my-kit:1.0`).
+- `sbx kit pull <ref>` — download a kit from a registry as a ZIP file to
+  the working directory.
+
+For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
+`sbx login`. For other registries, they prefer credentials stored with
+[`sbx secret set --registry`](../configuration/credentials.md#registry-credentials).
+Both commands fall back to the Docker credential store, so credentials from
+`docker login` also work.
+
+## Sign and verify kits
+
+Use cosign-compatible Sigstore signatures to verify who approved a kit and
+that its signed content hasn't changed. Signing is keyless by default. Verify a
+keyless signature with the certificate identity and OpenID Connect (OIDC)
+issuer:
+
+```console
+$ sbx kit sign ./my-kit/
+$ sbx kit verify \
+    --certificate-identity user@example.com \
+    --certificate-oidc-issuer https://accounts.google.com \
+    ./my-kit/
+```
+
+For key-based signing, use an ECDSA P-256 key pair:
+
+```console
+$ sbx kit sign --key cosign.key ./my-kit/
+$ sbx kit verify --key cosign.pub ./my-kit/
+```
+
+For a local directory, `sbx kit sign` writes a `kit.sig.bundle` file next to
+`spec.yaml`. Commit this file so consumers can verify a kit loaded from the Git
+repository. For an OCI kit, the signature is stored as an OCI referrer. You can
+sign an OCI kit after pushing it, or push and sign it in one step:
+
+```console
+$ sbx kit push ./my-kit/ ghcr.io/myorg/my-kit:1.0 --sign
+```
+
+ZIP kits can't carry verifiable signatures.
+
+### Require signed kits
+
+Set [`kit.trustedSigners`](../configuration/settings.md#kittrustedsigners) to
+the identities or keys you trust before requiring signatures. Otherwise, `sbx` uses the default policy, which trusts
+Docker employee identities attested by Google's OpenID Connect issuer. A
+keyless policy must specify both the certificate identity and its OpenID
+Connect issuer:
+
+```console
+$ sbx settings set kit.trustedSigners \
+    '[{"identity":"release-bot@example.com","issuer":"https://accounts.google.com"}]'
+$ sbx settings set kit.requireSignature true
+```
+
+To trust a key-based signature, set the policy to the public key path:
+
+```console
+$ sbx settings set kit.trustedSigners '[{"key":"/path/to/cosign.pub"}]'
+$ sbx settings set kit.requireSignature true
+```
+
+When `kit.requireSignature` is `true`, `sbx` rejects unsigned kits, signatures
+that don't match `kit.trustedSigners`, and ZIP kits. This policy applies when a
+kit is loaded from a local directory, Git repository, or OCI registry.
+
+The signature covers `spec.yaml` and the kit's `files/` content, but not mutable
+dependencies such as image tags or content downloaded by install and startup
+commands. Pin those dependencies by digest or checksum when they must remain
+immutable.
+
+## Schema versions
+
+Schema v2 is supported starting with Docker Sandboxes version 0.36. Use
+`schemaVersion: "2"` for the syntax on this page. Version `"1"` also remains
+accepted. V3 is a separate format for environments built entirely
+with v3 workloads and mixins. V3 kits can't compose with v1 or v2 kits.
+See [Kits v3](/manuals/ai/sandboxes/customize/_index.md) for that workflow.
+
+When migrating to `schemaVersion: "2"`, replace v1 fields with their v2
+equivalents:
+
+| v1                                          | v2                                       |
+| ------------------------------------------- | ---------------------------------------- |
+| `credentials.sources.<id>`                  | `credentials:` list entry with `service` |
+| `network.allowedDomains` / `deniedDomains`  | `permissions.network.allow` / `deny`     |
+| `network.serviceDomains` / `serviceAuth`    | `credentials[].apiKey.inject`            |
+| `network.publishedPorts` / `publishedPorts` | top-level `ports`                        |
+| standalone `oauth:` block                   | `credentials[].oauth`                    |
+| `oauth.skipIfEnv`                           | Accepted but ignored                     |
+| `environment.proxyManaged`                  | `credentials[].apiKey.proxyManaged`      |
+| `memory` / `agentContext`                   | `agentInstructions.content`              |
+| `kind: agent` / `agent:` block              | `kind: sandbox` / `sandbox:` block       |
+| `sandbox.aiFilename`                        | `agentInstructions.filename`             |
+| `sandbox.entrypoint.run`                    | `sandbox.entrypoint`                     |
+| `sandbox.entrypoint.args`                   | `sandbox.command.default`                |
+| `sandbox.entrypoint.ttyArgs`                | `sandbox.command.interactive`            |
+| `tmpfs:`                                    | `volumes:` entries with `type: tmpfs`    |
+| `volumes:` (mapping form)                   | `volumes:` sequence (`- path: <path>`)   |
+| `commands:` / `commands.initFiles`          | `setup:` / `setup.files`                 |
+| `settings:` / `kitDir` / `persistence`      | Removed                                  |
+
+Credential discovery also moved out of the kit in v2: a kit declares which
+credentials it needs and how to inject them, but where each value comes from is
+controlled by the user through
+[credential bindings](../configuration/credentials.md#credential-bindings).
+
+> [!NOTE]
+> `mixins` and `sandbox.build` are accepted by the parser, but runtime support
+> is pending. A kit that sets `sandbox.build` must also set `sandbox.image`.
+
+## Move an environment to v3
+
+Select a v3 workload, convert or replace its mixins, and create a separate
+sandbox with a different `--name`. Use the explicit workload reference in
+place of the built-in shortcut. Every selected kit must use v3.
+
+Changing `schemaVersion` alone doesn't convert a kit. Separate reusable image
+content from sandbox initialization, and declare runtime capabilities:
+
+| V2 surface | V3 equivalent |
+| --- | --- |
+| `kind: sandbox` | `kind: workload` with a Dockerfile recipe |
+| `sandbox.image` | Dockerfile `FROM` |
+| `sandbox.entrypoint`, `sandbox.command`, `environment.variables` | Dockerfile `ENTRYPOINT`, `CMD`, and `ENV` |
+| `extends` | A mixin for composition, or a derived workload image with its own descriptor |
+| `setup.install` | Dockerfile `RUN` for reusable content; lifecycle `install` for sandbox initialization |
+| `setup.startup` and `setup.files` | Lifecycle capability `startup` and `files` |
+| `setup.files[].onlyIfMissing: true` | Lifecycle `files[].overwrite: false` |
+| Automatic `files/home/` and `files/workspace/` injection | Dockerfile `COPY`, with lifecycle hooks for destinations provided by runtime mounts |
+| `permissions.network` and `credentials` | Network-policy and credential capabilities |
+| `agentInstructions` | Agent-context capability |
+
+Follow the [v3 authoring guidance](/manuals/ai/sandboxes/customize/author/_index.md)
+when converting runtime setup and capability declarations.
+Use a [kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md) to combine
+published v3 components with your settings. To rebuild the agent environment
+from a base image, follow [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
+Running an existing sandbox keeps its recorded configuration. It doesn't
+migrate the kit composition.

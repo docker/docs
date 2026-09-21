@@ -213,8 +213,8 @@ you turned off forwarding or use a fixed SSH agent socket, see
 
 To apply this configuration automatically to every sandbox, use the
 [`git-ssh-sign`](https://github.com/docker/sbx-kits-contrib/tree/main/git-ssh-sign)
-community kit, which handles all of the above setup. See [Kits](../customize/kits.md)
-if you want to package it alongside other sandbox customizations.
+community kit, which handles all of the above setup. For using it with the
+built-in agents, see [Kits v2](../customize/kits-v2.md).
 
 For troubleshooting, see
 [Sandbox commits aren't signed](../troubleshooting.md#sandbox-commits-arent-signed).
