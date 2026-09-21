@@ -28,7 +28,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-09-21" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.92.0" build_path="/XXXXXX/" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.92.0" build_path="/240144/" >}}
 
 ### Updates
 
@@ -49,7 +49,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed Docker Hub repository and tag browsing to use Docker Hub's current API, and removed the non-functional **Starred** and **Contributed** tabs from Docker Hub organization profiles.
 - Fixed an issue where users signed out before a Docker Desktop update were not prompted to sign in after the app restarted.
 - Fixed **Settings** section navigation to scroll to the selected section reliably, and added a divider between sections for easier visual parsing.
-- Improved Kubernetes cloud cluster management by hiding the kubeadm option in the cluster dialog and resetting the cluster mode to kind when the dialog closes.
+- Improved Kubernetes cloud cluster management by hiding the `kubeadm` option in the cluster dialog and resetting the cluster mode to kind when the dialog closes.
 - Improved Ask Gordon so sessions start in the relevant project directory when launched from a volume or build history row, and added a banner that prompts you to select a project folder when chatting from an auto-generated scratch directory.
 - Fixed Ask Gordon file diffs: edits that share a near-identical text prefix, the summary bar overlapping your message when scrolling, and row backgrounds and column width in the edit tool-call view.
 - Fixed Ask Gordon chat: a blank command in the shell approval dialog, background job tool calls rendering as raw JSON, streamed command output jank, raw internal error details, and opening Ask Gordon from **Settings**, **Troubleshoot**, or **Support** corrupting drawer state for Ask Gordon, notifications, and the Learning Center.
