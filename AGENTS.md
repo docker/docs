@@ -105,6 +105,21 @@ silence individual violations.
 - Don't add a wrong-cased entry to silence one false positive — it
   cascades into `Vale.Terms` violations on every correct usage.
 
+## Human-readable prose
+
+For PR titles and descriptions, documentation, release notes, design documents,
+comments, and other reader-facing prose:
+
+- Write so readers understand the meaning on the first read
+- Use wording that an experienced colleague would plausibly say aloud
+- Prefer verbs and clauses over invented nouns and compressed noun phrases
+- Treat correct grammar as necessary but insufficient for clear writing
+- Before returning prose, silently rewrite wording that is technically
+  interpretable but unnatural or hard to decode
+
+Keep established technical terms and qualifications needed for accuracy.
+Use the write skill's prose review to catch patterns that lint cannot detect.
+
 ## Alpine.js patterns
 
 Do not combine Alpine's `x-show` with the HTML `hidden` attribute on the
