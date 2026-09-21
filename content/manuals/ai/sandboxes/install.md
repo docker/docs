@@ -9,10 +9,6 @@ keywords: sandbox, sbx, install, macOS, Windows, Linux, Ubuntu
 Install the `sbx` CLI to run AI coding agents in isolated microVMs. You don't
 need Docker Desktop or Docker Engine to use `sbx`.
 
-The package also includes [`llmman`](configuration/models.md#bundled-model-service)
-for optional model selection. Installing `sbx` doesn't start this background
-service.
-
 ## Prerequisites
 
 ### macOS
