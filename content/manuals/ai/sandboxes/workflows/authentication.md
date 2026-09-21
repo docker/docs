@@ -14,10 +14,11 @@ secret sources can retrieve a value from an authenticated host CLI without
 copying the value into the secret store.
 
 > [!NOTE]
-> Service secrets are global by default, so all future sandboxes can use them.
-> Sandboxes that already exist when you run `sbx secret set` do not
-> receive the updated value. To update a running sandbox, scope the secret to
-> it directly: `sbx secret set <service> --sandbox <sandbox-name>`.
+> Service secrets are global by default. Starting with Docker Sandboxes v0.45,
+> changes to global service secrets take effect in existing local sandboxes
+> without a restart. Sandbox-scoped secrets take precedence over global secrets.
+> To set a secret for one sandbox, use
+> `sbx secret set <service> --sandbox <sandbox-name>`.
 
 ## GitHub CLI
 

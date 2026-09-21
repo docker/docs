@@ -103,10 +103,10 @@ $ sbx secret set openai --sandbox my-sandbox
 ```
 
 > [!NOTE]
-> A sandbox-scoped secret takes effect immediately, even if the sandbox is
-> running. A global secret only applies when a sandbox is created. If
-> you set or change a global secret while a sandbox is running, recreate the
-> sandbox for the new value to take effect.
+> Starting with Docker Sandboxes v0.45, adding, updating, or removing a global
+> service secret updates existing local sandboxes without a restart.
+> Sandbox-scoped secrets take precedence over global secrets and also take
+> effect immediately, including secrets configured with `--command` or `--ref`.
 
 ### MCP secrets
 
@@ -271,6 +271,26 @@ Remove a secret:
 
 ```console
 $ sbx secret rm github
+```
+
+To remove a sandbox-scoped secret, pass `--sandbox`:
+
+```console
+$ sbx secret rm github --sandbox my-sandbox
+```
+
+Removing a sandbox-scoped secret restores the global secret for that service,
+if one is available.
+
+Starting with Docker Sandboxes v0.45, removing a service secret or OAuth token
+updates running sandbox proxies without a restart. If `sbx secret rm` removes a
+stored credential but fails to revoke it from a sandbox proxy, it reports an
+error. Follow the recovery guidance, then repeat the removal command with
+`--force` and the same scope. This retries revocation even if the stored secret
+or OAuth token has already been deleted:
+
+```console
+$ sbx secret rm github --sandbox my-sandbox --force
 ```
 
 > [!NOTE]
@@ -636,6 +656,10 @@ To remove a sandbox-scoped credential, pass the sandbox name:
 ```console
 $ sbx secret rm --sandbox my-sandbox --registry ghcr.io -f
 ```
+
+In Docker Sandboxes v0.45 and later, registry credential revocation failures
+are also reported. Follow the error's recovery guidance, then repeat the same
+command to retry, even if the stored credential has already been deleted.
 
 ## Best practices
 
