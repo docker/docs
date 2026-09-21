@@ -1,9 +1,13 @@
 ---
 name: write
 description: >
-  Write a documentation fix on a branch. Makes the minimal change, formats,
-  self-reviews, and commits. Use after research has identified what to change.
-  "write the fix", "make the changes", "implement the fix for #1234".
+  Write or edit reader-facing technical prose for immediate comprehension.
+  Use for documentation, PR titles and descriptions, release notes, design
+  documents, user-facing explanations, and substantive comments. Also use
+  when asked to make writing clearer, more natural, less AI-generated, or
+  easier to read. For documentation fixes, handles edits, formatting,
+  self-review, and commits after research identifies what to change.
+  Do not use for code-only tasks with no prose deliverable.
 hooks:
   PostToolUse:
     - matcher: "Edit|Write"
@@ -14,9 +18,37 @@ hooks:
 
 # Write
 
-Make the minimal change that resolves the issue. Research has already
-identified what to change — this skill handles the edit, formatting,
-self-review, and commit.
+Follow the human-readable prose guidance in AGENTS.md and the style rules in
+STYLE.md. Apply the prose review below to every prose deliverable, including
+titles and short comments.
+
+For a prose-only request, return the requested text after reviewing it. Use
+the numbered workflow for a documentation fix after research has identified
+what to change. Branch and commit steps apply to that workflow, not to drafting
+a title, description, or comment. Publishing prose requires authorization
+from the user.
+
+## Prose review
+
+Before returning or committing prose, read it as if explaining the change to
+an experienced colleague. Fix sentences that require a second reading even
+when their grammar is correct. Lint passing does not replace this review.
+
+- Replace invented labels and stacks of nouns with the action or relationship
+  they describe: "post-update configuration validation" becomes "validate
+  the configuration after the update"
+- Use direct verbs: "perform an evaluation of" becomes "evaluate"
+- State concrete behavior instead of vague claims: "improve navigation
+  discoverability" becomes "show the current page in the sidebar" when that
+  is the actual change
+- Keep established technical terms, exact identifiers, and qualifications
+  needed for accuracy. Clarify the surrounding sentence instead of replacing
+  a precise term with a vague one
+- Check titles and headings separately. Use enough words to make their meaning
+  clear without relying on the body to explain an invented label
+
+Make these edits silently. Return the requested prose without a report of
+this review unless the user asks for one.
 
 ## 1. Create a branch
 
@@ -57,7 +89,7 @@ warnings or suggestions remain in its output.
 
 Re-read each changed file: right file, right lines, change is complete,
 front matter is present. Run `git diff` and verify only intended changes
-are present.
+are present. Apply the prose review to the changed text and the commit message.
 
 ## 6. Commit
 
