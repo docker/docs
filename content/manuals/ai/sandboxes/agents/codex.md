@@ -32,9 +32,9 @@ To create a [mountless sandbox](../usage.md#choose-a-workspace), use
 
 ## Authentication
 
-If you haven't stored an OpenAI credential, `sbx run codex` prompts you to
-authenticate on your host before launching the sandbox. The flow runs on the
-host, so credentials are never exposed inside the sandbox.
+For the default OpenAI models, `sbx run codex` prompts you to authenticate on
+your host if you haven't stored an OpenAI credential. Authentication happens
+before launching the sandbox, so credentials are never exposed inside it.
 
 To set up authentication ahead of time, choose one of the following methods.
 
@@ -56,6 +56,11 @@ $ sbx secret set openai
 ```
 
 See [Credentials](../configuration/credentials.md) for more details.
+
+## Model selection
+
+To use Codex with a local model or another inference provider, see
+[Use local and hosted models](../configuration/models.md).
 
 ## Configuration
 
