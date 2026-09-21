@@ -15,7 +15,7 @@ layer 2 VLAN tagging and even IPvlan L3 routing for users interested in underlay
 network integration. For overlay deployments that abstract away physical constraints
 see the [multi-host overlay](overlay.md) driver.
 
-IPvlan is a new twist on the tried and true network virtualization technique.
+IPvlan is a network virtualization technique that provides lightweight container networking.
 The Linux implementations are extremely lightweight because rather than using
 the traditional Linux bridge for isolation, they are associated to a Linux
 Ethernet interface or sub-interface to enforce separation between networks and
@@ -225,7 +225,7 @@ $ docker run --net=ipvlan20 -it --name ivlan_test1 --rm alpine /bin/sh
 $ docker run --net=ipvlan20 -it --name ivlan_test2 --rm alpine /bin/sh
 ```
 
-[O#### VLAN ID 30
+#### VLAN ID 30
 
 In the second network, tagged and isolated by the Docker host, `eth0.30` is the
 parent interface tagged with VLAN id `30` specified with `-o parent=eth0.30`. The
