@@ -34,9 +34,8 @@ $ sbx rm my-sandbox                 # delete it entirely
 ```
 
 `sbx rm` asks for confirmation before deleting a sandbox. Use `--force` to
-skip the prompt, including in scripts. This flag also permits removal when
-the sandbox has an active session — an open attach, SSH connection, or
-in-flight SFTP transfer:
+skip the prompt. This flag also permits removal when the sandbox has an active
+session — an open attach, SSH connection, or in-flight SFTP transfer:
 
 ```console
 $ sbx rm --force my-sandbox
@@ -223,9 +222,8 @@ $ sbx exec -it <sandbox-name> bash
 Without `--workdir`, the command starts in the sandbox's primary workspace. In
 a mountless sandbox, it starts in the container image's working directory.
 
-`sbx exec` runs commands in the foreground. Detached execution isn't supported.
-Starting with `sbx` version 0.45.0, passing `-d` or `--detach` returns an error
-without running the command. Omit these flags from scripts and examples.
+`sbx exec` runs commands in the foreground. Detached execution (`-d` or
+`--detach`) isn't supported.
 
 ## Interactive mode
 

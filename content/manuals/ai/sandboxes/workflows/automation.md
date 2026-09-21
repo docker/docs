@@ -18,7 +18,7 @@ Generate a PAT from your
 with at least **Read** scope.
 
 Create the sandbox in the background with `sbx create`, run agent tasks with
-`sbx exec`, and clean up with `sbx rm --force` to skip the removal prompt:
+`sbx exec`, and remove the sandbox when finished:
 
 ```console
 $ sbx create --name ci-task --clone claude .
@@ -46,20 +46,11 @@ CI provider's secret store, use `-t`. For example, in a GitHub Actions step:
 
 ## Cleanup and exit codes
 
-Use `--force` to skip confirmation when removing resources in scripts. For
-`sbx kit builder history rm`, use `--yes` or `-y` instead. Its `--force` flag
-controls removal of running build records and doesn't skip confirmation.
+Use `--force` to skip confirmation when removing resources in scripts.
+Declining a removal or required-restart prompt returns a non-zero exit code.
+Treat this as an incomplete operation when deciding whether to continue a
+script.
 
-Starting with `sbx` version 0.45.0, declining a destructive-action or
-required-restart prompt returns a non-zero exit code. Treat this as an
-incomplete operation when deciding whether to continue a script.
-
-The same version changes how removal commands handle missing resources:
-
-- `sbx secret rm <service>` returns an error on stderr if the local service
-  secret doesn't exist. With `--force`, it retries credential revocation even
-  when the stored secret is already gone. It returns an error if that revocation
-  fails.
-- `sbx mcp rm <name>` returns an error if the server isn't registered, including
-  with `--force`. If cleanup can run more than once, check registered servers
-  with `sbx mcp ls` or handle the missing-server error explicitly.
+For repeatable cleanup, check which resources exist before removing them. For
+example, use `sbx mcp ls` before `sbx mcp rm`, which fails for an unregistered
+server even with `--force`.
