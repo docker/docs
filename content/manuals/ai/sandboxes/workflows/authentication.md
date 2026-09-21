@@ -13,12 +13,8 @@ injects the resolved value into matching requests from the sandbox. Dynamic
 secret sources can retrieve a value from an authenticated host CLI without
 copying the value into the secret store.
 
-> [!NOTE]
-> Service secrets are global by default. Starting with Docker Sandboxes v0.45,
-> changes to global service secrets take effect in existing local sandboxes
-> without a restart. Sandbox-scoped secrets take precedence over global secrets.
-> To set a secret for one sandbox, use
-> `sbx secret set <service> --sandbox <sandbox-name>`.
+For secret scope and how changes apply to existing sandboxes, see
+[Store a secret](../configuration/credentials.md#store-a-secret).
 
 ## GitHub CLI
 
