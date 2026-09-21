@@ -51,6 +51,14 @@ $ sbx secret set openrouter
 You only need to configure the providers you want to use. OpenCode detects
 available credentials and offers those providers in the TUI.
 
+### GitHub Copilot
+
+To use GitHub Copilot models in OpenCode, configure a
+[GitHub credential](../configuration/credentials.md#github-token) for an
+account with Copilot access. When OpenCode starts, Docker Sandboxes configures
+its GitHub Copilot provider using that credential. You don't need a separate
+device login inside OpenCode.
+
 ### OpenCode Zen API keys
 
 OpenCode Zen API keys aren't part of the built-in OpenCode credentials that
