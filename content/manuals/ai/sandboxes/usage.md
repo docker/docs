@@ -33,8 +33,10 @@ $ sbx stop my-sandbox               # pause it
 $ sbx rm my-sandbox                 # delete it entirely
 ```
 
-If the sandbox has an active session — an open attach, SSH connection, or
-in-flight SFTP transfer — `sbx rm` refuses unless you pass `--force`:
+`sbx rm` asks for confirmation before deleting a sandbox. Use `--force` to
+skip the prompt, including in scripts. This flag also permits removal when
+the sandbox has an active session — an open attach, SSH connection, or
+in-flight SFTP transfer:
 
 ```console
 $ sbx rm --force my-sandbox
@@ -190,7 +192,7 @@ To persist a variable across future sessions of an existing sandbox, append an
 export to `/etc/sandbox-persistent.sh`:
 
 ```console
-$ sbx exec -d <sandbox-name> bash -c "echo 'export INTERNAL_API_URL=https://api.example.com' >> /etc/sandbox-persistent.sh"
+$ sbx exec <sandbox-name> bash -c "echo 'export INTERNAL_API_URL=https://api.example.com' >> /etc/sandbox-persistent.sh"
 ```
 
 The `bash -c` wrapper ensures the `>>` redirect runs inside the sandbox instead
@@ -220,6 +222,10 @@ $ sbx exec -it <sandbox-name> bash
 
 Without `--workdir`, the command starts in the sandbox's primary workspace. In
 a mountless sandbox, it starts in the container image's working directory.
+
+`sbx exec` runs commands in the foreground. Detached execution isn't supported.
+Starting with `sbx` version 0.45.0, passing `-d` or `--detach` returns an error
+without running the command. Omit these flags from scripts and examples.
 
 ## Interactive mode
 
