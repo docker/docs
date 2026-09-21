@@ -56,9 +56,15 @@ sandbox VM. An agent can invoke the tools those servers expose through the MCP
 gateway, subject to MCP policies when organization governance is active. Treat
 local MCP servers as trusted host integrations.
 
-The following diagram shows a sandbox with a directly mounted workspace:
+### MicroVM isolation
 
-![Docker Sandbox security model](../images/sbx-security.png)
+This topology shows what is private to the microVM, what is explicitly mounted,
+and which host resources remain outside the agent's reach.
+
+{{< interactive-diagram src="../diagrams/trust-boundary-topology.yaml" >}}
+
+To follow an outbound request through network policy and credential injection,
+see [Architecture](../architecture.md#follow-an-authenticated-request).
 
 ## Isolation layers
 
