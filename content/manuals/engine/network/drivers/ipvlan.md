@@ -225,7 +225,7 @@ $ docker run --net=ipvlan20 -it --name ivlan_test1 --rm alpine /bin/sh
 $ docker run --net=ipvlan20 -it --name ivlan_test2 --rm alpine /bin/sh
 ```
 
-#### VLAN ID 30
+[O#### VLAN ID 30
 
 In the second network, tagged and isolated by the Docker host, `eth0.30` is the
 parent interface tagged with VLAN id `30` specified with `-o parent=eth0.30`. The
@@ -668,3 +668,4 @@ $ ip link del foo
 As with all of the Libnetwork drivers, they can be mixed and matched, even as
 far as running 3rd party ecosystem drivers in parallel for maximum flexibility
 to the Docker user.
+
