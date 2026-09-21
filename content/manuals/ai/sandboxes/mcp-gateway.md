@@ -89,8 +89,8 @@ address. Register only URLs you trust. Fetching a manifest from an untrusted
 URL can expose internal services or cloud metadata, and DNS rebinding can
 redirect a hostname after it has been checked.
 
-Starting with Docker Sandboxes v0.45, OAuth metadata discovery also warns and
-continues when it encounters these addresses, including redirect destinations.
+OAuth metadata discovery also warns and continues when it encounters these
+addresses, including redirect destinations.
 For a trusted internal server, pass `--skip-ssrf-check` to skip both the MCP
 URL check and the OAuth metadata discovery checks and suppress their warnings.
 Use the flag only when you trust the MCP host, OAuth provider, and all metadata
@@ -105,18 +105,8 @@ $ sbx mcp add notion --url https://mcp.notion.com/mcp
 $ sbx mcp add linear --url https://mcp.linear.app/mcp
 ```
 
-#### Work around HTTP/2 stream stalls
-
-Starting with Docker Sandboxes v0.45, if a remote server's HTTP/2 handling
-stalls long-lived streams, register it with `--disable-http2` to use HTTP/1.1:
-
-```console
-$ sbx mcp add acme --url https://mcp.acme.com/mcp --disable-http2
-```
-
-Replace the example URL with your MCP endpoint. The setting applies to later
-connections to this server. The flag requires `--url` and can't be used with
-`--command` or `--local`.
+If requests to a remote server stall, see
+[MCP server streams stall](troubleshooting.md#mcp-server-streams-stall).
 
 #### Custom request headers
 
@@ -363,11 +353,6 @@ requested, advertised, and refused scopes and suggests a retry command. If the
 server identifies the refused scopes, the command removes them. Otherwise, it
 uses `--no-scope`.
 `sbx` never retries automatically.
-
-If the server rejects a request made without scopes with `invalid_scope`, retry
-with explicit `--scope` values supported by the server. Remove `--no-scope` if
-you used it. Starting with Docker Sandboxes v0.45, the error includes guidance
-for choosing scopes.
 
 For each OAuth-backed remote server exposed to a sandbox, the gateway exposes a
 helper tool named `<server>-authorize`, such as `notion-authorize`. The agent can
