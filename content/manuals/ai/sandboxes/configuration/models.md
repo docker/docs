@@ -17,6 +17,24 @@ a model that supports the tool calls and context length your agent needs.
 > [!NOTE]
 > Model selection is experimental. Enable it before following these examples.
 
+## Bundled model service
+
+Docker Sandboxes includes `llmman`, a model management tool installed alongside
+`sbx`. It serves local models and forwards requests to hosted providers or
+custom endpoints. You don't need to install it separately.
+
+Installing Docker Sandboxes or enabling model selection doesn't start
+`llmman`. Docker Sandboxes starts it on your host as a background process
+when you first use `sbx run --model`, unless you select `--provider ollama`.
+Runs without `--model` don't start it.
+
+Once started, `llmman` keeps running after the sandbox or CLI exits. Later
+model-enabled runs reuse the service, so sandboxes share its model store and
+loaded models.
+
+On Linux, starting the service requires Docker Engine on the host to pull
+the inference server image.
+
 ## Enable model selection
 
 Run these commands on your host:
@@ -25,11 +43,6 @@ Run these commands on your host:
 $ sbx settings set platform.allowExperimentalFeatures true
 $ sbx settings set feature.model true
 ```
-
-The bundled `llmman` service runs on your host. It serves local models or
-forwards requests to another provider. Docker Sandboxes starts it on first
-use and leaves it running so other sandboxes can reuse it. On Linux, this
-startup requires Docker Engine on the host to pull the inference server image.
 
 The `--provider` flag selects where the model runs:
 
