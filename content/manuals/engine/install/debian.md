@@ -6,7 +6,7 @@ title: Install Docker Engine on Debian
 linkTitle: Debian
 weight: 20
 toc_max: 4
-aliases:
+aliases: users
 - /engine/installation/debian/
 - /engine/installation/linux/debian/
 - /engine/installation/linux/docker-ce/debian/
