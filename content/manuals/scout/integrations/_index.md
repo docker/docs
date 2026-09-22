@@ -51,8 +51,7 @@ Integrating with environments lets you compare production workloads to other
 versions, in your image repositories or in your other environments.
 
 The following environment monitoring integrations are available:
-
+- [Docker Scout GitHub Action](./environment/_index.md)
 - [Generic CLI integration](./environment/cli.md)
-
 For more information about environment integrations, see
 [Environments](./environment/_index.md).
