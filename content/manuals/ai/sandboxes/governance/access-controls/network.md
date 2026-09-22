@@ -49,8 +49,8 @@ sandbox sends there. An HTTP rule narrows the match to specific HTTP methods
 and URL paths on that destination, which lets a policy allow reads from an API
 without allowing writes to it.
 
-HTTP rules and network rules layer. A network allow is the baseline for a
-destination and HTTP rules carve into it, while a network deny blocks the
+HTTP rules layer on top of network rules. A network allow is the baseline for
+a destination and HTTP rules carve into it, while a network deny blocks the
 destination outright and no HTTP allow can reopen it. For the pattern syntax
 and the full matching table, see
 [HTTP rules](../concepts.md#http-method-and-path).
