@@ -4,7 +4,10 @@ description: |-
     Save a snapshot of the sandbox as a template.
 
     The saved image is stored in the sandbox runtime's image store and can be
-    used as a template for new sandboxes with: sbx run -t TAG AGENT [WORKSPACE]
+    used as a template for new sandboxes with:
+      sbx run --pull never -t TAG AGENT [WORKSPACE]
+
+    Use --pull never to use the saved image without trying to pull it from a registry.
 
     Use --output to also export the image to a tar file that can be shared
     and loaded on another host with: sbx template load FILE
@@ -42,10 +45,6 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -58,12 +57,12 @@ example: |4-
       sbx template save my-sandbox myimage:v1.0 --output /tmp/myimage.tar
 
       # Cloud: snapshot a running cloud sandbox into a cloud-managed template
-      sbx template save sbx_abc123 my-snap --cloud
+      sbx --cloud template save sbx_abc123 my-snap
 
       # Cloud: attach a description to the saved template
-      sbx template save sbx_abc123 my-snap --cloud --description "nightly build"
+      sbx --cloud template save sbx_abc123 my-snap --description "nightly build"
 
       # Cloud: capture memory + disk + microVM checkpoint for sub-second resume
-      sbx template save sbx_abc123 my-snap --cloud --capture-mode all
+      sbx --cloud template save sbx_abc123 my-snap --capture-mode all
 see_also:
     - sbx template - Manage sandbox templates

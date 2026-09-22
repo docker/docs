@@ -9,6 +9,10 @@ description: |-
 
     If sandboxes are currently running, they will be stopped when the daemon
     shuts down. You will be prompted for confirmation unless --force is used.
+
+    With --cloud, deletes the custom cloud network policy for your account and
+    leaves the local daemon alone. You will be prompted for confirmation unless
+    --force is used. Afterwards the default the server now stores is printed.
 usage: sbx policy reset [flags]
 options:
     - name: force
@@ -24,10 +28,6 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"

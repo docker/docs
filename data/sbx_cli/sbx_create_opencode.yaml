@@ -13,7 +13,19 @@ description: |-
 
     Use "sbx run --name SANDBOX" to attach to the agent after creation.
 
-    Without --cpus/--memory a cloud sandbox defaults to 2 CPUs and 4 GiB.
+    With --cloud:
+    Create a cloud sandbox for opencode.
+
+    Cloud sandboxes have no host workspace, so no path follows the agent. Sizing
+    comes from --cpus and --memory and must land on a billable shape; without them
+    a cloud sandbox gets 2 CPUs and 4 GiB. A template named with -t / --template
+    must already exist in the cloud registry.
+
+    Cloud sandboxes use cloud network policies. Host network and HTTP policies
+    do not apply. Set cloud account defaults with
+    "sbx --cloud policy init <allow-all|balanced|deny-all>".
+
+    Use "sbx --cloud run --name SANDBOX" to attach to the agent after creation.
 usage: sbx create opencode [PATH...] [flags]
 options:
     - name: help
@@ -22,7 +34,6 @@ options:
       usage: help for opencode
 inherited_options:
     - name: allow-network
-      default_value: '[]'
       usage: |
         Network pattern to allow for cloud sandbox egress (cloud only; can be specified multiple times)
     - name: clone
@@ -33,10 +44,6 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: cpus
       default_value: "0"
       usage: |
@@ -46,9 +53,8 @@ inherited_options:
       default_value: "false"
       usage: Enable debug logging
     - name: deny-network
-      default_value: '[]'
       usage: |
-        Add a per-sandbox network deny rule at creation time. Can be specified multiple times. The rule applies only to the new sandbox and can be listed or removed later with `sbx policy ls <NAME>` / `sbx policy rm network --sandbox <NAME> --resource <HOST>`. Safe under centralized governance because a local deny can only narrow, never widen, egress.
+        Add a per-sandbox network deny rule at creation time. Can be specified multiple times. The rule applies only to the new sandbox and can be listed or removed later with 'sbx policy ls <NAME>' or 'sbx policy rm network --sandbox <NAME> --resource <HOST>'. Safe under centralized governance because a local deny can only narrow, never widen, egress.
     - name: env
       shorthand: e
       default_value: '[]'
@@ -82,7 +88,7 @@ inherited_options:
         Memory limit in binary units (e.g., 512m, 8g). Minimum: 512 MiB. Default: 50% of host memory, clamped to 512 MiB–32 GiB. Maximum: max(75% of host memory, 512 MiB)
     - name: name
       usage: |
-        Name for the sandbox (defaults to <agent>-<workdir>; at least two characters, starting with a letter or number, containing only letters, numbers, hyphens and periods; 'default' is reserved)
+        Name for the sandbox (defaults to <agent>-<workdir>; at least two characters, starting with a letter or number, containing only letters, numbers, hyphens and periods (periods are rejected with --cloud); 'default' is reserved)
     - name: on-timeout
       usage: |
         What happens when --ttl lapses: 'delete' (default) tombstones the sandbox, or 'stop' stops it in place so it can be started again later (cloud only; 'stop' requires your account to be entitled to it).
@@ -91,6 +97,9 @@ inherited_options:
       default_value: '[]'
       usage: |
         Publish a sandbox port to the host (can be repeated): [[HOST_IP:]HOST_PORT:]SANDBOX_PORT[/PROTOCOL]
+    - name: pull
+      default_value: always
+      usage: Image pull policy (always|missing|never)
     - name: quiet
       shorthand: q
       default_value: "false"
@@ -103,9 +112,8 @@ inherited_options:
       usage: |
         Container image to use for the sandbox (default: agent-specific image)
     - name: ttl
-      default_value: 0s
       usage: |
-        Cloud sandbox time-to-live before it times out (e.g. 30m, 2h; cloud only; default: server-side)
+        Cloud sandbox time-to-live before it times out (e.g. 30m, 2h, 1h30m; units are case-insensitive; cloud only; default: server-side)
     - name: volume
       shorthand: v
       default_value: '[]'
@@ -124,5 +132,14 @@ example: |4-
 
       # Create without a workspace bind mount
       sbx create opencode
+
+      # Create a cloud sandbox for opencode
+      sbx --cloud create opencode
+
+      # Create a named cloud sandbox with a mixin baked in
+      sbx --cloud create --name my-project opencode --kit ./my-mixin/
+
+      # Create from a template that already exists in the cloud registry
+      sbx --cloud create -t TEMPLATE
 see_also:
     - sbx create - Create a sandbox for an agent

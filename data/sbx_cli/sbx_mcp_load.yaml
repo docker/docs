@@ -7,6 +7,13 @@ description: |-
 
     The server must already exist in the local MCP store (register first with
     'sbx mcp add'). Both remote/hosted and local-stdio servers are supported.
+
+    With --cloud:
+    Load an MCP server into a running cloud sandbox's gateway.
+
+    There is no local registration: the cloud gateway resolves the server name
+    itself, and the sandbox may be given by name or sbx_ ID. Connected agents see
+    the new server's tools immediately.
 usage: sbx mcp load <name> --sandbox <sandbox> [flags]
 options:
     - name: help
@@ -20,10 +27,6 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -36,5 +39,8 @@ example: |4-
       # Local stdio server.
       sbx mcp add github --command npx --args @modelcontextprotocol/server-github
       sbx mcp load github --sandbox my-sbx
+
+      # Cloud: load a gateway-known server into a cloud sandbox by name or ID
+      sbx --cloud mcp load notion --sandbox my-sbx
 see_also:
     - sbx mcp - Manage MCP servers
