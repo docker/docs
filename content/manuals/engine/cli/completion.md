@@ -17,6 +17,7 @@ You can generate completion scripts for the following shells:
 - [Bash](#bash)
 - [Zsh](#zsh)
 - [fish](#fish)
+- [PowerShell](#powershell)
 
 ## Bash
 
@@ -104,4 +105,12 @@ To activate completion for Docker commands, copy or symlink the completion scrip
 ```console
 $ mkdir -p ~/.config/fish/completions
 $ docker completion fish > ~/.config/fish/completions/docker.fish
+```
+
+## PowerShell
+
+In order to make this work with PowerShell, run the following script as-is in a Terminal window, then restart the terminal:
+
+```console
+Add-Content -Path "$PROFILE" -Value 'Invoke-Expression (&docker completion powershell | Out-String)'
 ```
