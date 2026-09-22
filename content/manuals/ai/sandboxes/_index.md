@@ -13,8 +13,8 @@ or on Docker-managed cloud infrastructure. Use the `sbx` CLI to create and
 manage either kind of sandbox.
 
 The `sbx` CLI and local sandbox compute are free to use, including for commercial
-work. Cloud compute is metered through a
-[Docker Agentic Platform plan](/manuals/subscription-billing/plans/docker-agentic-platform.md).
+work. Cloud compute uses a
+[pay-as-you-go subscription](cloud/signup.md#billing).
 Model-provider charges are separate.
 
 Organization admins can

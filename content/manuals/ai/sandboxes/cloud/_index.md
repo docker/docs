@@ -28,13 +28,14 @@ To use cloud sandboxes, you need:
 
 - The [`sbx` CLI](../install.md), version 0.45.0 or later
 - A Docker account signed in through `sbx login`
-- An active [Docker Agentic Platform plan](/manuals/subscription-billing/plans/docker-agentic-platform.md)
+- An active [cloud sandbox subscription](signup.md)
 
-To subscribe, open [Docker Agentic Platform](https://agentic-platform.docker.com/)
-and sign in. The plan is available for Docker Personal and Docker Pro accounts.
+Follow [Signup and billing](signup.md) to activate access through Docker Agentic
+Platform. The subscription is available for Docker Personal and Docker Pro
+accounts.
 
-Cloud sandbox compute is metered through the Docker Agentic Platform
-pay-as-you-go plan. Inference charges aren't included. Your model provider
+Cloud sandbox compute is billed on a pay-as-you-go basis. Inference charges
+aren't included. Your model provider
 charges for requests made with the API keys or OAuth credentials that you
 configure.
 
@@ -98,6 +99,8 @@ Removal deletes files stored only in the sandbox. For your own projects, see
 
 ## Learn more
 
+- [Signup and billing](signup.md) covers activation, CLI sign-in, and compute
+  charges
 - [Local and cloud differences](local-vs-cloud.md) compares the two execution
   environments
 - [Use cloud sandboxes](usage.md) covers creation, files, ports, and lifecycle

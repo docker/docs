@@ -284,8 +284,16 @@ To declare reusable cloud configuration in a file, see
 
 ## Load an MCP server
 
-First, [connect and authorize an MCP server](/manuals/agentic-platform/mcp.md)
-in Docker Agentic Platform. Then load that server into a running cloud sandbox:
+Connect the server in the web console before loading it into a cloud sandbox:
+
+1. Open the [Docker Agentic Platform console](https://agentic-platform.docker.com/)
+   and sign in with the same Docker account you use with `sbx`.
+2. Open **MCP** and choose a predefined server. To use another server, choose
+   the option to add a server by URL and enter its URL.
+3. Connect the server and complete authorization if prompted.
+
+Load the connected server into a running cloud sandbox, using its name from
+the console:
 
 ```console
 $ sbx --cloud mcp load <server-name> --sandbox cloud-project

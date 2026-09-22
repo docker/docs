@@ -20,7 +20,7 @@ choose an environment and identify workflows that need cloud-specific setup.
 | Network policy | Uses local and organization policy sources supported by the local runtime | Uses separate, network-only account and sandbox policy with organization governance unavailable in this release |
 | Storage | Persists in the local sandbox and its attached host resources | Persists in the cloud sandbox and optional cloud volumes |
 | Lifetime | Persists across stops until you remove it | Expires according to its time-to-live and timeout action |
-| Billing | No metered sandbox compute charge | Metered through the Docker Agentic Platform plan |
+| Billing | No metered sandbox compute charge | [Pay-as-you-go compute](signup.md#billing) |
 
 ## Host-dependent features
 
