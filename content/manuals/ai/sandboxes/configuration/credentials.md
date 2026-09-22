@@ -102,11 +102,9 @@ secret to a specific sandbox instead:
 $ sbx secret set openai --sandbox my-sandbox
 ```
 
-> [!NOTE]
-> A sandbox-scoped secret takes effect immediately, even if the sandbox is
-> running. A global secret only applies when a sandbox is created. If
-> you set or change a global secret while a sandbox is running, recreate the
-> sandbox for the new value to take effect.
+Adding, updating, or removing a service secret takes effect in existing local
+sandboxes without a restart, including secrets configured with `--command` or
+`--ref`. Sandbox-scoped secrets take precedence over global secrets.
 
 ### MCP secrets
 
@@ -272,6 +270,15 @@ Remove a secret:
 ```console
 $ sbx secret rm github
 ```
+
+To remove a sandbox-scoped secret, pass `--sandbox`:
+
+```console
+$ sbx secret rm github --sandbox my-sandbox
+```
+
+Removing a sandbox-scoped secret restores the global secret for that service,
+if one is available.
 
 > [!NOTE]
 > Running `sbx reset` deletes all stored secrets along with all sandbox state.
