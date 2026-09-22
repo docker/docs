@@ -41,10 +41,11 @@ supported method; they can also be used by Docker Agent and agents running in
 Docker Sandboxes. Browse the [Docker Skills
 catalog](https://github.com/docker/skills#readme) for current guidance.
 
-**Docker Sandboxes** provides isolated microVM environments for running coding
-agents. It supports multiple agents including Claude Code, Codex, Copilot,
-Devin, Gemini, and Docker Agent. Sandboxes is the isolation layer — the agents
-themselves are separate tools.
+Docker Sandboxes provides isolated environments for running coding agents
+[locally](./ai/sandboxes/get-started.md) or
+[in the cloud](./ai/sandboxes/cloud/_index.md). Sandboxes is the isolation layer;
+the agents themselves are separate tools. Agent configuration and supported
+features differ between local and cloud sandboxes.
 
 Docker Agentic Platform is an experimental service for running agents in
 Docker-managed cloud sandboxes. Its web Console provides kit selection,

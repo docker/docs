@@ -26,15 +26,19 @@ To access private GitHub repositories from inside a sandbox, use a
 
 ## How does Docker Agentic Platform differ from Docker Sandboxes?
 
-With Docker Agentic Platform, you run sandboxes in the cloud and manage their
-compute, MCP connections, secrets, and network policies in a web Console. For
-local development, Docker Sandboxes runs on your machine through the `sbx`
-command.
+Docker Agentic Platform runs sandboxes on Docker-managed cloud infrastructure
+through a web Console. The `sbx` CLI runs local sandboxes on your development
+machine and cloud sandboxes with `sbx --cloud`. The Console and CLI have
+different workflows and secret names. See
+[Cloud sandboxes](/manuals/ai/sandboxes/cloud/_index.md) for the CLI experience.
 
 ## Can I move a sandbox between my machine and Docker Agentic Platform?
 
-No. The initial release doesn't support moving a running sandbox or its local
-bind mounts from your machine to the cloud.
+The `sbx move` command copies a sandbox filesystem between local and cloud
+environments. It does not transfer running processes, host bind mounts, or
+managed secrets, and it leaves the source sandbox in place. See
+[Move a sandbox](/manuals/ai/sandboxes/cloud/move.md) for the CLI workflow and
+its limitations.
 
 ## Can I share sandboxes and configuration with a team?
 

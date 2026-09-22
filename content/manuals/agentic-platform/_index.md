@@ -51,8 +51,11 @@ Docker Agentic Platform lets you run agents and tools in isolated cloud
 sandboxes. Your agent keeps working when you close the Console, disconnect
 your computer, or put it to sleep.
 
-For sandboxes that run on your development machine through the `sbx` CLI, see
-[Docker Sandboxes](/manuals/ai/sandboxes/_index.md).
+The `sbx` CLI supports both
+[local sandboxes](/manuals/ai/sandboxes/get-started.md) and
+[cloud sandboxes](/manuals/ai/sandboxes/cloud/_index.md). These pages describe
+the web Console experience. The Console and CLI use different secret names;
+see [Cloud credentials](/manuals/ai/sandboxes/cloud/credentials.md).
 
 In the Console, choose a [kit](/manuals/agentic-platform/kits.md) and configure
 the sandbox's credentials, network access, tools, and compute size. Once it

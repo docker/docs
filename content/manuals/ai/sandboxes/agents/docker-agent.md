@@ -7,6 +7,8 @@ description: |
 keywords: docker sandboxes, docker agent, openai, anthropic, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 Official documentation: [Docker Agent](/manuals/ai/docker-agent/_index.md)
 
 ## Quick start

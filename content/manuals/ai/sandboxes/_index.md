@@ -8,36 +8,38 @@ params:
     group: AI and agents
 ---
 
-Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
-sandbox gets its own Docker daemon, filesystem, and network — the agent can
-build containers, install packages, and modify files without accessing host
-resources beyond those you share.
+Docker Sandboxes run AI coding agents in isolated environments on your machine
+or on Docker-managed cloud infrastructure. Use the `sbx` CLI to create and
+manage either kind of sandbox.
 
-> [!NOTE]
-> The `sbx` CLI is free to use, including for commercial work. Only
-> [organization governance](governance/) requires a separate paid subscription.
+The `sbx` CLI and local sandbox compute are free to use, including for commercial
+work. Cloud compute is metered through a
+[Docker Agentic Platform plan](/manuals/subscription-billing/plans/docker-agentic-platform.md).
+Model-provider charges are separate.
 
 Organization admins can
 [centrally manage sandbox network, filesystem, and MCP policies](governance/access-controls/organization.md),
-so the same controls apply uniformly across every developer's machine.
+for local sandboxes across developer machines.
 Available on a separate paid subscription.
 
 ## Get started
 
-Follow the [installation guide](install.md) to check the system requirements,
-install the `sbx` CLI, and sign in.
+[Install the `sbx` CLI](install.md) and sign in, then choose where to run your
+agent:
 
-Then launch an agent in a sandbox:
+| Environment | Use it for | Start here |
+| --- | --- | --- |
+| Local sandboxes | Work with files and supported hardware on your machine | [Get started locally](get-started.md) |
+| Cloud sandboxes | Run on Docker-managed compute without local virtualization | [Get started in the cloud](cloud/_index.md#get-started) |
 
-```console
-$ cd ~/my-project
-$ sbx run claude
-```
-
-See the [get started guide](get-started.md) for a first-session walkthrough, or
-jump to the [usage guide](usage.md) for basic commands.
+The two environments have separate credentials, network policies, and lifecycle
+controls. See [Compare local and cloud sandboxes](cloud/local-vs-cloud.md)
+before adapting a workflow.
 
 ## Learn more
+
+The following guides describe local sandbox workflows. For cloud workflows,
+see [Cloud sandboxes](cloud/).
 
 - [Agents](agents/) — supported agents and per-agent configuration
 - [Workflows](workflows/) — patterns for Git, local development,

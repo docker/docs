@@ -5,6 +5,8 @@ description: Use Devin CLI in Docker Sandboxes with reusable, proxy-managed auth
 keywords: docker sandboxes, devin, cognition, ai agent, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 Official documentation: [Devin CLI](https://docs.devin.ai/work-with-devin/devin-cli)
 
 ## Quick start
