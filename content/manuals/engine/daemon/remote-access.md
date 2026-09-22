@@ -71,6 +71,11 @@ and the `daemon.json` file causes a conflict that prevents Docker from starting.
 
 ### Configuring remote access with `daemon.json`
 
+> [!IMPORTANT]
+>
+> Setting `hosts` in the `daemon.json` isn't supported on Docker Desktop for
+> Windows or Docker Desktop for Mac.
+
 1. Set the `hosts` array in the `/etc/docker/daemon.json` to connect to the Unix
    socket and an IP address, as follows:
 
