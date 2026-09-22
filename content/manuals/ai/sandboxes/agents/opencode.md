@@ -87,6 +87,14 @@ $ sbx policy allow network opencode.ai:443
 If you add a global custom secret, recreate existing OpenCode sandboxes so the
 new environment variable is available inside the sandbox.
 
+## Model selection
+
+To select a local model or inference endpoint with `sbx run --model`, see
+[Use local and hosted models](../configuration/models.md).
+
+When you use `--model`, the model's supported thinking levels are available
+as OpenCode variants. Press Ctrl+T to cycle through them.
+
 ## Configuration
 
 Sandboxes don't pick up user-level configuration from your host. Only

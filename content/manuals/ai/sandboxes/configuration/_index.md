@@ -2,8 +2,8 @@
 title: Configure Docker Sandboxes
 linkTitle: Configuration
 weight: 60
-description: Configure credentials, project environments, GPU passthrough, registry mirrors, and upstream proxy settings for Docker Sandboxes.
-keywords: docker sandboxes, sbx, configuration, credentials, environment files, gpu passthrough, registry mirror, upstream proxy
+description: Configure credentials, local and hosted models, project environments, GPU passthrough, registry mirrors, and upstream proxy settings for Docker Sandboxes.
+keywords: docker sandboxes, sbx, configuration, credentials, models, environment files, gpu passthrough, registry mirror, upstream proxy
 ---
 
 Configure credentials and how Docker Sandboxes run for a project, host, or
@@ -13,6 +13,8 @@ sandbox, see [Customize](../customize/).
 
 - [Credentials](credentials.md) configures API keys, authentication
   credentials, and registry access for sandboxed agents.
+- [Models](models.md) selects local models, hosted providers, or custom
+  inference endpoints for sandboxed agents.
 - [Environment files](environment-files.md) declare reusable project
   configuration in `sbxenv.yaml`.
 - [GPU passthrough](gpu-passthrough.md) configures a Linux host and sandbox for
