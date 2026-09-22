@@ -83,10 +83,10 @@ export default async function verify(page, base = "http://localhost:1314") {
     "Latest Engine retains ReDoc",
   );
   await page.goto(base + "/reference/api/ai-governance/");
+  await page.waitForURL("**/reference/api/ai-governance/latest/");
   assert(
-    (await page.locator("[data-api-view]").count()) === 0 &&
-      (await page.locator("h1").count()) > 0,
-    "Governance retains existing renderer",
+    (await page.locator('[data-api-view="overview"]').count()) === 1,
+    "Governance alias reaches generated overview",
   );
   const context = await page
     .context()
