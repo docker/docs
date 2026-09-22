@@ -196,6 +196,20 @@ configured to use the forward proxy. See
 [Monitoring network activity](governance/monitor-and-enforce/monitoring.md)
 for details.
 
+## MCP server streams stall
+
+If a remote MCP server's HTTP/2 handling stalls long-lived streams, register
+it with `--disable-http2` to use HTTP/1.1:
+
+```console
+$ sbx mcp add acme --url https://mcp.acme.com/mcp --disable-http2
+```
+
+Replace the example URL with your MCP endpoint. The setting applies to later
+connections to this server. The flag requires `--url` and can't be used with
+`--command` or `--local`. For registration options, see
+[Register an MCP server](mcp-gateway.md#register-an-mcp-server).
+
 ## API calls fail with a certificate error
 
 If your organization uses a proxy that inspects HTTPS traffic, agent requests
