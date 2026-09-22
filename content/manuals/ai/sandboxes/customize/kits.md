@@ -490,8 +490,8 @@ ERROR: resolve kits: kit "git+https://github.com/docker/sbx-kits-contrib.git#dir
 ```
 
 To allow another publisher, add its host or host/path prefix to the
-`kit.allowedSources` setting. The setting replaces the whole list, so include
-the entries you want to keep:
+[`kit.allowedSources`](../configuration/settings.md#kitallowedsources) setting.
+The setting replaces the whole list, so include the entries you want to keep:
 
 ```console
 $ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
@@ -510,8 +510,8 @@ require a remote source:
 $ sbx settings set kit.allowLocalKits false
 ```
 
-For non-interactive use, both settings have environment-variable equivalents:
-`DOCKER_SANDBOXES_KIT_ALLOWED_SOURCES` and `DOCKER_SANDBOXES_KIT_ALLOW_LOCAL`.
+For defaults and environment variable equivalents, see the
+[kit settings reference](../configuration/settings.md#kits).
 
 ## Sign and verify kits
 
@@ -548,8 +548,9 @@ ZIP kits can't carry verifiable signatures.
 
 ### Require signed kits
 
-Set a trusted signer policy for the identities or keys you trust before
-requiring signatures. Otherwise, `sbx` uses the default policy, which trusts
+Set [`kit.trustedSigners`](../configuration/settings.md#kittrustedsigners) to
+the identities or keys you trust before requiring signatures. Otherwise, `sbx`
+uses the default policy, which trusts
 Docker employee identities attested by Google's OpenID Connect issuer. A
 keyless policy must specify both the certificate identity and its OpenID
 Connect issuer:

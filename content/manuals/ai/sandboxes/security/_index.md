@@ -30,7 +30,9 @@ What crosses the boundary into the VM:
   [network policy](defaults/) are proxied through the host.
 - Shared agent skills: sandboxes created for supported agents mount a
   persistent host-side store read-only by default at the agent's skills
-  directory. Use `--skills` or `skills.defaultMode` to choose another mode at
+  directory. Use `--skills` or
+  [`skills.defaultMode`](../configuration/settings.md#skillsdefaultmode)
+  to choose another mode at
   creation. Existing sandboxes retain their mounts until recreated.
 - **MCP gateway traffic:** supported agents connect to a host-side MCP gateway
   endpoint. The gateway brokers access to registered MCP servers.

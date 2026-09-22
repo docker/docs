@@ -128,7 +128,8 @@ ERROR: resolve kits: kit "git+https://github.com/docker/sbx-kits-contrib.git#dir
 
 `sbx` restricts kit installs to an allowlist of sources, which defaults to
 Docker Hub (`docker.io/`) only. Add the kit's publisher to the
-`kit.allowedSources` setting, keeping the entries you want to retain:
+[`kit.allowedSources`](configuration/settings.md#kitallowedsources) setting,
+keeping the entries you want to retain:
 
 ```console
 $ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
@@ -380,8 +381,10 @@ If the socket exists but forwarding still fails, check the
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
 For setup steps, see [Commit signing](workflows/git.md#commit-signing).
 
-Forwarding is enabled by default. Confirm that it hasn't been disabled and
-check whether a fixed socket path is configured:
+Forwarding is enabled by default. Check
+[`ssh.agentForwardingEnabled`](configuration/settings.md#sshagentforwardingenabled)
+and [`ssh.agentSocketPath`](configuration/settings.md#sshagentsocketpath) to
+confirm that forwarding is enabled and inspect the socket selection:
 
 ```console
 $ sbx settings get ssh.agentForwardingEnabled
@@ -499,7 +502,9 @@ If you have set custom `XDG_STATE_HOME`, `XDG_CACHE_HOME`, or
 
 ## Enable automatic diagnostics uploads
 
-To opt in to automatic diagnostics uploads after certain daemon errors, run:
+To opt in to automatic diagnostics uploads after certain daemon errors, set
+[`diagnostics.autoUpload`](configuration/settings.md#diagnosticsautoupload) to
+`yes`:
 
 ```console
 $ sbx settings set diagnostics.autoUpload yes

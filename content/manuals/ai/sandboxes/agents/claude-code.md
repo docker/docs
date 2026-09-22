@@ -55,8 +55,8 @@ for workarounds.
 
 ### Remote control
 
-To use Claude Code's `/remote-control` command inside a sandbox, turn on remote
-control:
+To use Claude Code's `/remote-control` command inside a sandbox, turn on
+[`claude.remoteControl`](../configuration/settings.md#clauderemotecontrol):
 
 ```console
 $ sbx settings set claude.remoteControl true
