@@ -53,11 +53,12 @@ routes traffic through either a forward proxy or a transparent proxy depending
 on the client's configuration. Both enforce the network policy. Only the
 forward proxy [injects credentials](../configuration/credentials.md) for AI services.
 
-Outbound UDP is disabled by default. When you turn on
-[experimental UDP egress](../governance/access-controls/local.md#allow-outbound-udp),
-network policy controls its destinations. ICMP is blocked. DNS queries use the
-sandbox's internal resolver, which enforces network policy. TCP connections
-are allowed only when a policy rule matches the destination.
+Outbound UDP traffic doesn't pass through either proxy. Docker Sandboxes authorizes
+each UDP destination directly against the same network policy, without HTTP
+or TLS inspection. External ICMP is always blocked. DNS queries use the
+sandbox's internal resolver, which enforces network policy. TCP and UDP
+connections are allowed only when a policy rule matches the destination and
+protocol.
 
 For the default set of allowed domains, see
 [Default security posture](defaults.md). To forward allowed traffic through a

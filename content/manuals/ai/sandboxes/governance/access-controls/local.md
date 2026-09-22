@@ -34,8 +34,9 @@ For domain patterns, wildcards, CIDR ranges, and filesystem path syntax, see
 Outbound TCP traffic passes through a proxy on your host, which enforces access
 rules on every connection. Non-HTTP TCP traffic, including SSH, can be allowed
 with a hostname rule (for example, `sbx policy allow network "myhost:22"`) or an
-address-based rule. UDP requires the experimental feature and policy rules
-described in [Allow outbound UDP](#allow-outbound-udp). ICMP is blocked.
+address-based rule. Allow rules cover TCP only unless you add UDP with
+`--protocol`. See [Allow outbound UDP](#allow-outbound-udp) for how UDP rules
+differ from TCP. External ICMP can't be unblocked with policy rules.
 
 If you haven't chosen a default preset, the CLI prompts you before it runs a
 sandbox. Running `sbx policy reset` clears the preset and prompts you to choose
@@ -110,8 +111,9 @@ narrow the match to part of that host.
 
 Use [`sbx policy allow`](/reference/cli/sbx/policy/allow/) and
 [`sbx policy deny`](/reference/cli/sbx/policy/deny/) to add or restrict access
-on top of the active preset. Changes take effect immediately. Rules apply to
-all sandboxes by default:
+on top of the active preset. Policy changes apply immediately to TCP
+connections and UDP associations opened afterward. Rules apply to all
+sandboxes by default:
 
 ```console
 $ sbx policy allow network api.anthropic.com
@@ -242,33 +244,47 @@ rule-level detail including rule IDs. To inspect a single policy or rule in
 full, use `sbx policy inspect`. See
 [Monitoring](../monitor-and-enforce/monitoring.md).
 
-### Allow outbound UDP
+## Allow outbound UDP
 
-Outbound UDP is experimental and disabled by default. Turn on experimental
-features and UDP egress before adding UDP allow rules:
-
-```console
-$ sbx settings set platform.allowExperimentalFeatures true
-$ sbx settings set feature.udp-egress true
-$ sbx policy allow network --protocol udp api.example.com:443
-```
+Outbound UDP works differently from TCP. UDP traffic doesn't pass through the
+host proxy that TCP uses, so it isn't inspected or credential-injected the way
+HTTP traffic is. Instead, Docker Sandboxes authorizes each UDP destination
+directly against network policy. UDP follows the same organization and local
+policy precedence as TCP.
 
 Local allow rules apply to TCP by default. Use `--protocol udp` for UDP or
 `--protocol tcp,udp` for both. Deny rules apply to both protocols by default.
-Use `--protocol` to restrict a deny rule to one protocol.
-
-UDP follows the same organization and local policy precedence as TCP. It is
-refused when the destination requires an HTTP, SOCKS5, system, or PAC-selected
-proxy, because those proxies can't carry UDP. ICMP remains blocked.
-
-Inspect UDP rules or check a destination:
+Use `--protocol` to restrict a deny rule to one protocol:
 
 ```console
-$ sbx policy ls --protocol udp
-$ sbx policy check network --protocol udp api.example.com:443
+$ sbx policy allow network --protocol udp game-server.example.com
+$ sbx policy deny network --protocol tcp ads.example.com
 ```
 
-The CLI warns if you save a UDP rule while UDP egress is disabled.
+To list UDP rules, run `sbx policy ls --protocol udp`. To check a UDP
+destination, see [Testing policy](#testing-policy).
+
+Policy changes affect UDP associations opened afterward. An association
+that is already authorized continues until it goes idle or the sandbox
+network is torn down, even if you remove its allow rule or add a deny rule
+afterward.
+
+UDP is refused when the destination requires an HTTP, SOCKS5, system, or
+PAC-selected proxy, because those proxies can't carry UDP. External ICMP
+remains blocked.
+
+Docker Sandboxes doesn't inspect UDP traffic for an application-layer
+hostname, so hostname rules rely on DNS history. When multiple tracked
+hostnames share an IP address, a rule for one hostname can authorize
+traffic intended for another hostname at that address. Where possible,
+allow a dedicated IP address and port.
+
+If a destination is reached without a DNS lookup at all, the hostname can't be
+recovered and an address-based rule is the only option:
+
+```console
+$ sbx policy allow network --protocol udp "203.0.113.10:19132"
+```
 
 ## Testing policy
 
@@ -287,6 +303,12 @@ The target can be a hostname, a `host:port` pair, an IP address, or a URL.
 Bare hostnames and IP addresses are evaluated against port 443. This is useful
 for verifying custom rules or checking what the Locked Down preset blocks
 before you start an agent.
+
+Add `--protocol udp` to check UDP instead of the TCP default:
+
+```console
+$ sbx policy check network --protocol udp game-server.example.com:19132
+```
 
 To check policy in the context of a specific sandbox:
 

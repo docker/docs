@@ -162,9 +162,6 @@ can't be recovered. Use an address-based rule in that case:
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-UDP requires [experimental UDP egress](governance/access-controls/local.md#allow-outbound-udp)
-and UDP allow rules. ICMP is blocked and can't be unblocked with policy rules.
-
 For Git operations over SSH, you can either add an allow rule for the Git
 server's hostname or IP address, or use HTTPS URLs instead:
 

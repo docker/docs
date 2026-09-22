@@ -187,14 +187,15 @@ my-sandbox   network  registry.npmjs.org     forward-bypass domain-allowed      
 my-sandbox   network  app.example.com        browser-open                             10:15:10 29-Jan  1
 ```
 
-The `PROXY` column shows how the request left the sandbox:
+The `PROXY` column shows the request's network path or the layer that
+blocked it:
 
 | Value            | Description                                                                                                    |
 | ---------------- | -------------------------------------------------------------------------------------------------------------- |
 | `forward`        | Routed through the forward proxy. Supports [credential injection](../../configuration/credentials.md).              |
 | `forward-bypass` | Routed through the forward proxy without credential injection.                                                 |
-| `transparent`    | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.            |
-| `network`        | Non-HTTP traffic. TCP and experimental UDP egress follow network policy. ICMP is blocked. |
+| `transparent`    | Handled by transparent forwarding. Includes policy-controlled raw TCP and UDP traffic. Credential injection is not available. |
+| `network`        | Blocked at the network layer before forwarding, such as external ICMP or a denied DNS lookup.                  |
 | `browser-open`   | A sandbox process requested opening a URL in the host browser. Policy is enforced before opening the URL.      |
 
 The `RULE` column identifies the policy rule that matched the request. The
