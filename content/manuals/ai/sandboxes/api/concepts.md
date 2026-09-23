@@ -25,7 +25,7 @@ For example, the management route `/v1/sandboxes` becomes
 `https://connect.docker.com/sandboxes/v1/sandboxes`.
 
 Each sandbox endpoint requires a token that grants access to that sandbox.
-Use the SDK's endpoint helper to obtain the token and create a client. See
+The SDK obtains this token when you use a sandbox's process or file methods. See
 [Authentication and authorization](authentication.md) for details.
 
 A sandbox's endpoint can change when its runtime changes. Read the sandbox
@@ -46,7 +46,8 @@ doesn't change the resource's `name`.
 Wait until a sandbox is running before sending commands to it. Creating a
 sandbox takes time, so the API can return HTTP 202 with the sandbox still in a
 pending state. Read the resource repeatedly until it reaches the state you
-need. SDK methods such as TypeScript's `createSandboxAndWait` do this for you.
+need. In TypeScript, call `waitUntilRunning()` on the sandbox returned by
+`client.create()`, or use `client.withSandbox()` to wait, run code, and clean up.
 
 Sandbox creation can continue after your client stops waiting. Read the
 sandbox again to check its state, and inspect its `failure` field if it has

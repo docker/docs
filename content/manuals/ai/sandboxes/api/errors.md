@@ -40,10 +40,13 @@ field describes a failure that occurs after the initial request succeeds.
 
 If a wait times out or is canceled, the action can still finish. Inspect the
 resource before trying again or deleting it. TypeScript wait helpers report
-`ResourceWaitError`, which includes the last resource the client received and
+`WaitError`, which includes the last resource the client received and
 any failure details. If the client never received a resource, use the original
 request and idempotency key to recover it as described in
 [Retry without duplicating work](#retry-without-duplicating-work).
+
+When using `withSandbox`, inspect `WorkflowError.phase`, `resource`, and
+`cleanup` to find the failed step and whether the SDK deleted the sandbox.
 
 ## Handle concurrent changes
 

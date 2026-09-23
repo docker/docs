@@ -22,7 +22,7 @@ $ go get github.com/docker/sandboxes-api
 ```
 
 Import `github.com/docker/sandboxes-api/gen/go/sandboxes` and create a client
-with `sandboxes.NewClient`.
+with `sandboxes.New`.
 
 {{< /tab >}}
 {{< tab name="TypeScript" >}}
@@ -45,7 +45,7 @@ repository:
 $ python -m pip install "git+https://github.com/docker/sandboxes-api.git#subdirectory=gen/python/sandboxes"
 ```
 
-Import `SandboxesClient` from `docker_sandboxes_api.sandboxes_client`.
+Import `SandboxesClient` from `docker_sandboxes_api`.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -55,15 +55,13 @@ Import `SandboxesClient` from `docker_sandboxes_api.sandboxes_client`.
 Before connecting, [activate a Docker Agentic Platform subscription](/manuals/agentic-platform/signup.md#activate-cloud-access)
 for your Docker account.
 
-To create and manage sandboxes, configure your client with the base URL
-`https://connect.docker.com/sandboxes` and a Docker Hub access token. Your
-application supplies the token when it creates the client. See
-[Authentication and authorization](authentication.md) for how to obtain one.
+Configure your client with browser sign-in for interactive use or a personal
+access token for automation. The SDK supplies the service URL and manages
+access tokens. See [Authentication and authorization](authentication.md) for
+setup instructions.
 
-To run commands or transfer files, connect to the individual sandbox's
-endpoint. In TypeScript, call `client.forEndpoint` with the sandbox's
-`core.endpoint` and the permissions you need. The SDK obtains a token for that
-sandbox and uses it to authenticate requests.
+Use the returned sandbox's methods to run commands and transfer files. The
+SDK connects to its endpoint and obtains the required sandbox credentials.
 
 Follow [Run your first cloud sandbox](get-started.md) for a complete TypeScript
 example that creates a sandbox, runs a command, and deletes it.

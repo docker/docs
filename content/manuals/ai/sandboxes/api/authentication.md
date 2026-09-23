@@ -5,20 +5,76 @@ keywords: docker sandboxes API authentication, sandbox authorization, bearer tok
 weight: 30
 ---
 
-Authenticate with a Docker Hub access token to create and manage cloud
-sandboxes. To run commands or transfer files inside a sandbox, use a separate
-token that grants access to that sandbox. The SDK can obtain this second token
-for you.
+Use browser sign-in when running an application interactively, or a personal
+access token (PAT) for automation. The SDK obtains short-lived access tokens
+and renews them as needed.
 
 You need an active [Docker Agentic Platform subscription](/manuals/agentic-platform/signup.md#activate-cloud-access).
-Your credential type must also be enabled for Cloud Sandboxes, and each request
-requires permission for the action you want to perform.
+Authenticate with the Docker account you used to subscribe.
 
-## Create an access token
+## Sign in through your browser
 
-Exchange your Docker ID and personal access token (PAT) for a short-lived
-access token using the
-[Docker Hub authentication API](/reference/api/hub/latest/operations/AuthCreateAccessToken/):
+Use the OAuth helper to sign in with your Docker account. In TypeScript:
+
+```typescript
+import { oauth, SandboxesClient } from '@docker/sandboxes-api';
+
+const auth = oauth({
+  onVerification({ verificationUriComplete, verificationUri, userCode }) {
+    console.log(`Open ${verificationUriComplete ?? verificationUri}`);
+    console.log(`Verification code: ${userCode}`);
+  },
+});
+await auth.getAccessToken();
+const client = new SandboxesClient({ auth });
+```
+
+Open the printed URL and complete sign-in. Calling `getAccessToken()` before
+making API requests gives you time to sign in before request deadlines start.
+Browser sign-in supports single sign-on and two-factor authentication.
+
+The SDK keeps credentials in memory and refreshes them while your application
+runs. With the default configuration, you sign in again each time you start
+the application. SDK sign-in is separate from `docker login` and `sbx login`.
+
+## Authenticate automation with a PAT
+
+Use a [personal access token](/manuals/security/access-tokens/personal-access-tokens.md)
+with Cloud Sandboxes access for CI jobs and unattended applications. PAT
+access must be enabled for your account. An ordinary registry PAT doesn't
+grant Cloud Sandboxes access.
+
+Provide your Docker ID and PAT to the SDK. For example, read them from your
+application's environment:
+
+```typescript
+import { pat, SandboxesClient } from '@docker/sandboxes-api';
+
+const username = process.env.DOCKER_ID;
+const personalAccessToken = process.env.DOCKER_PAT;
+if (!username || !personalAccessToken) {
+  throw new Error('Set DOCKER_ID and DOCKER_PAT');
+}
+
+const client = new SandboxesClient({
+  auth: pat({ username, personalAccessToken }),
+});
+```
+
+The SDK exchanges the PAT for a short-lived access token and repeats the
+exchange when needed. An invalid or revoked PAT causes authentication to
+fail without prompting for browser sign-in. Store the PAT in your CI or
+application's secret store and keep it out of source control and logs.
+
+Python and Go provide `OAuthAuth` and `PATAuth` for the same authentication
+flows. See the [SDK repository](https://github.com/docker/sandboxes-api) for
+language-specific examples.
+
+## Authenticate direct API requests
+
+If you call the REST API without an SDK, obtain and renew access tokens in
+your application. Exchange your Docker ID and a PAT with Cloud Sandboxes
+access using the [Docker Hub authentication API](/reference/api/hub/latest/operations/AuthCreateAccessToken/):
 
 ```console
 $ ACCESS_TOKEN=$(curl --silent --show-error --fail --request POST \
@@ -28,40 +84,28 @@ $ ACCESS_TOKEN=$(curl --silent --show-error --fail --request POST \
   | jq -er '.access_token')
 ```
 
-Use the returned `access_token` to authenticate management requests. The
-Sandboxes API doesn't accept a PAT, organization access token (OAT), or
-password directly.
-
-## Authenticate management requests
-
-Send the access token in the `Authorization` header when calling
+Send the returned access token in the `Authorization` header when calling
 `https://connect.docker.com/sandboxes`:
 
 ```http
 Authorization: Bearer <access_token>
 ```
 
-Supply this header when you configure your SDK client. Your application must
-also obtain a replacement token when it expires. The SDK doesn't refresh
-tokens or load credentials saved by `sbx login`. If a request returns HTTP 401
-`unauthenticated`, obtain a valid token before retrying.
+The Sandboxes API doesn't accept a PAT directly. If you manage access tokens
+in your application but use the TypeScript SDK for requests, configure the
+client with `auth: bearer(accessToken)`. Import `bearer` from
+`@docker/sandboxes-api` and replace the token when it expires.
 
 ## Authenticate sandbox requests
 
-To run a command or transfer a file, your application needs a token for that
-sandbox with permission for the action. For example, `sandboxesExec` permits
-command execution and `sandboxesFilesWrite` permits writing files.
+Use the SDK's sandbox methods to run commands and transfer files. The SDK
+finds the sandbox endpoint and obtains a separate token limited to that
+sandbox and the permissions needed for the operation.
 
-In TypeScript, call `client.forEndpoint(endpoint, permissions)` on your
-management client. Pass the sandbox's `core.endpoint` and the permissions you
-need. The SDK requests a short-lived token, checks that it is valid for the
-sandbox and endpoint, and creates a client that uses it. The caller needs
-`sandboxesCredential` to obtain this token, as well as the permissions it
-requests.
-
-Use the returned client for process and file requests, including streams.
-Keep its token private and out of logs. The Docker Hub token used by the
-management client must not be sent to a sandbox endpoint.
+For example, running a command requires `sandboxesExec` and obtaining its
+token requires `sandboxesCredential`. Your account must have both permissions.
+The Docker Hub token used for management requests must not be sent directly
+to a sandbox endpoint.
 
 ## Resource access and permissions
 
