@@ -13,7 +13,7 @@ adapting those workflows to the cloud.
 
 The `sbx` CLI and local sandbox compute are free to use, including for
 commercial and professional work. Cloud sandbox compute uses a
-[pay-as-you-go subscription](cloud/signup.md#billing).
+[pay-as-you-go subscription](/manuals/agentic-platform/signup.md#billing).
 Model-provider charges are separate from sandbox compute.
 
 Organization governance for local sandboxes includes centrally managed network,
