@@ -10,8 +10,9 @@ sandboxes. To run commands or transfer files inside a sandbox, use a separate
 token that grants access to that sandbox. The SDK can obtain this second token
 for you.
 
-Your account and credential type must be enabled for Cloud Sandboxes. Each
-request also requires permission for the action you want to perform.
+You need an active [cloud sandbox subscription](_index.md#activate-cloud-access).
+Your credential type must also be enabled for Cloud Sandboxes, and each request
+requires permission for the action you want to perform.
 
 ## Create an access token
 

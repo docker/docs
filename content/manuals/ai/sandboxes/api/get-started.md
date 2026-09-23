@@ -14,7 +14,8 @@ from inside the sandbox.
 
 To follow this tutorial, you need:
 
-- A Docker account with access to Cloud Sandboxes
+- A Docker Personal or Docker Pro account with an active
+  [cloud sandbox subscription](_index.md#activate-cloud-access)
 - An image available to your account that includes `sh`
 - A [personal access token](/manuals/security/access-tokens/personal-access-tokens.md)
 - Node.js 20 or later and npm

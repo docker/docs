@@ -52,6 +52,9 @@ Import `SandboxesClient` from `docker_sandboxes_api.sandboxes_client`.
 
 ## Connect to Cloud Sandboxes
 
+Before connecting, [activate a cloud sandbox subscription](_index.md#activate-cloud-access)
+for your Docker account.
+
 To create and manage sandboxes, configure your client with the base URL
 `https://connect.docker.com/sandboxes` and a Docker Hub access token. Your
 application supplies the token when it creates the client. See
