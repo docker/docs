@@ -16,6 +16,10 @@ params:
       - Enterprise
   notoc: true
   ai-and-agents:
+  - title: Docker Agentic Platform
+    description: Run agents in cloud sandboxes with this experimental platform.
+    icon: cloud
+    link: /agentic-platform/
   - title: Docker Sandboxes
     description: Run AI coding agents in isolated environments.
     icon: command-line
