@@ -110,16 +110,18 @@ invitations, including CSV file limits, see
 ### Automatic assignment
 
 Automatic license assignment gives members a product license when they use a
-supported product for the first time. To turn it on, use the
-**Automatic license assignment** toggle on the product's license card on the
-**Licenses** page.
+supported product for the first time. Use the **Automatic license assignment**
+toggle on the product's license card on the **Licenses** page. The toggle
+appears only when that product supports automatic assignment, so you may not
+see it on every card.
 
-- Members receive a Docker Core license the first time they sign in to Docker
+When the toggle is on:
+
+- Docker Core: members receive a license the first time they sign in to Docker
   Desktop.
-- Signing in to
-  [Docker Sandboxes](/manuals/ai/sandboxes/_index.md) with the `sbx login`
-  command provisions AI Governance licenses on a first-come, first-served
-  basis.
+- AI Governance: members receive a license the first time they sign in to
+  [Docker Sandboxes](/manuals/ai/sandboxes/_index.md). The `sbx login` command
+  provisions licenses on a first-come, first-served basis.
 - Licenses are assigned until exhausted.
   - Once the available licenses are exhausted, automatic license assignment
     stops until more licenses are available.
@@ -146,13 +148,13 @@ licenses to your subscription, and turn automatic assignment on or off.
 1. Select **Licenses** from the left navigation.
 
 Products you haven't purchased appear as cards with **Learn more** and **Add
-licenses**. Products you own show how many licenses are:
+licenses**. Products you own show:
 
-- Remaining versus total assigned under **Available**. Select **View all** to
-  open the members who have the license.
-- Assigned through teams under **Team assignment**. Select
+- Remaining licenses under **Available**, and how many of your total are
+  assigned. Select **View all** to open the members who have the license.
+- Team-assigned licenses under **Team assignment**. Select
   **View teams with this license** to open those teams.
-- Assigned to members individually under **Direct assignment**
+- Individual assignments under **Direct assignment**
 
 ## Remove licenses
 
