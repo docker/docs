@@ -9,8 +9,8 @@ aliases:
 ---
 
 Licenses control which organization members can use supported Docker products.
-You can use the **Licenses** page to see how many licenses you have and who holds them, while you can use the **Teams** and **Members** pages to assign licenses through invitations or
-with automatic assignment.
+As an organization owner, you manage license availability for your
+organization.
 
 > [!TIP]
 > To learn more about product licenses, Docker Team and Business seats, and other Docker
@@ -31,9 +31,8 @@ You have a few options for assigning a license to a member. You can assign:
 
 A member can use the product if they have a license from their team, from an
 individual assignment, or from automatic assignment. Each member uses one
-license per product, so if you assign a duplicate license
-through another team or as an individual assignment, it won't use a second
-license.
+license per product. Assigning the same product again through another team or
+as an individual assignment does not consume a second license.
 
 ## Assign licenses
 
@@ -59,23 +58,22 @@ members who join the team later.
    organization.
 1. Select **Teams** from the left navigation, then select the team name.
 1. On the **Licenses** card, select the **edit** icon to open **Add licenses**.
-1. Under **Licenses**, select one or more licenses. 
+1. Under **Licenses**, select one or more licenses.
     - Each license shows how many are available
     - The modal reports how many members receive each license
 1. Select **Save**.
 
 Docker grants the license only to team members who don't already have it.
-Duplicate license assignment won't double assign a license. 
 
-- If a member holds a license from a previous assignment and you've assigned a duplicate, the duplicated license stays in your available pool. The member maintains product access from the previous assignment.
-- If you've assigned members licenses in excess of your license availability, selecting **Save** assigns only available licenses. Docker queues the
-rest until more are available.
+- If a member already holds that license, they keep access and the extra
+  assignment does not consume another license.
+- If there aren't enough licenses for every remaining member, selecting
+  **Save** assigns the licenses you have. Docker queues the rest until more
+  are available.
 
 ### Invitations
 
-Assigning a license through invitations grants product access when a member
-accepts an invitation.
-Assignment happens on acceptance:
+Assignment happens on acceptance if a license is available:
 
 - If a license is available when they accept, Docker assigns it to them and the
   number of available licenses decreases by one.
@@ -144,16 +142,16 @@ licenses to your subscription, and turn automatic assignment on or off.
 Products you haven't purchased appear as cards with **Learn more** and **Add
 licenses**. Products you own show how many licenses are:
 
-- Available over the total number of licenses assigned under **Available**. Select **View all** to open the members who have the license.
+- Remaining versus total assigned under **Available**. Select **View all** to
+  open the members who have the license.
 - Assigned through teams under **Team assignment**. Select
   **View teams with this license** to open those teams.
-- Assigned to members
-  individually under **Direct assignment**
+- Assigned to members individually under **Direct assignment**
 
 ## Remove licenses
 
 When you remove a license from a team or a member, it becomes available to members queued from a team assignment. The same rule applies when a member leaves a team or you
-[delete a team](/manuals/accounts/organization/manage/manage-a-team.md#delete-a-team). 
+[delete a team](/manuals/accounts/organization/manage/manage-a-team.md#delete-a-team).
 
 To remove licenses:
 
@@ -165,8 +163,7 @@ To remove licenses:
     - Remove the license you no longer want the team to assign.
 1. To revoke a license from one member:
     - Select **Members**.
-    - Use the **action menu** on the
-**Members** page.
+    - Use the **action menu** at the end of the member's row.
     - Select **Remove**.
 1. Review the confirmation message, then select **Remove license**.
 
