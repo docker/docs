@@ -37,7 +37,7 @@ params:
     icon: /icons/cagent.svg
     link: /ai/docker-agent
   - title: Docker Skills
-    description: Docker's official, evolving collection of skills for AI coding agents.
+    description: Docker's official skills for AI coding agents.
     icon: document-text
     link: /ai/skills/
   application-development:

@@ -8,47 +8,27 @@ params:
     group: AI and agents
 ---
 
-Docker Skills are Docker's official, open-source collection of guidance for
-compatible AI coding agents. A skill is a directory with a `SKILL.md` file
-describing when and how to use it, and optional references or assets. Explore
-the source in the [Docker Skills repository](https://github.com/docker/skills).
-
-
-## How agents use skills
-
-A compatible agent matches your request to descriptions of the skills it can
-access, then loads the relevant instructions. You don't need an entry-point
-skill or to name a skill in your prompt. For work across products, an agent can
-combine guidance from more than one skill when a task spans Docker products.
-
-## What Docker publishes
-
-Docker Skills can help with tasks involving, for example, Docker Sandboxes,
-Docker Engine, and Docker Compose. These are illustrations, not a complete list
-of supported products or skills: coverage changes as the collection evolves.
-Browse the [repository catalog](https://github.com/docker/skills#readme) for
-the current skills and their descriptions.
+Docker Skills are Docker's official, open-source guidance for compatible AI
+coding agents. They help agents with Docker tasks, such as improving a Dockerfile
+or setting up a Compose application. The collection evolves: browse the
+[repository catalog](https://github.com/docker/skills#readme) for the current
+list of skills. Docker product coverage is non-exhaustive and evolves with the
+collection.
 
 ## Get started
 
-1. [Install Docker Skills](install.md) through your agent's supported
-   installation method. Select only the skills you need, and start a new agent
-   session after installation.
-2. Ask for the outcome in plain language, for example:
-   - “Dockerize this application for local development.”
-   - “Make this Dockerfile smaller and run as a non-root user.”
-   - “Add a database health check to this Compose application.”
-3. Review proposed changes and commands, run your project's tests, and confirm
-   destructive operations before approving them. Skills guide the agent; they
-   don't replace validation.
-4. Keep skills current through the installer that owns them. Update pinned or
-   manually copied skills deliberately from a reviewed release.
+1. [Install Docker Skills](install.md) with a method supported by your agent,
+   and start a new agent session.
+2. Ask for an outcome in plain language, for example, “Make this Dockerfile
+   smaller and run as a non-root user.”
+3. Review the proposed changes and commands, run your project's tests, and
+   confirm destructive operations before approving them. Skills guide the
+   agent; they don't replace validation.
 
-## Learn more
+## How agents use skills
 
-- [Install Docker Skills](install.md) — choose an installation method and verify
-  that your agent can find the skills.
-- [Docker Skills repository catalog](https://github.com/docker/skills#readme)
-  — browse the authoritative list and descriptions.
-- [Docker Skills releases](https://github.com/docker/skills/releases) — review
-  source revisions before pinning an installation.
+A compatible agent matches your request to descriptions of skills it can
+access, then loads the relevant instructions. You don't need to name a skill in
+your prompt. A skill is a directory containing a `SKILL.md` file that describes
+when and how to use it, with optional references or assets. An agent can use
+more than one skill when a task spans Docker products.

@@ -37,8 +37,8 @@ not specific to Docker tasks.
 **Docker Skills** are Docker's official, open-source instructions for compatible
 coding agents working on Docker tasks. Install them through your agent's
 supported method; they can also be used by Docker Agent and agents running in
-Docker Sandboxes. The collection evolves; see the
-[repository catalog](https://github.com/docker/skills#readme) for current skills.
+Docker Sandboxes. Browse the [Docker Skills
+catalog](https://github.com/docker/skills#readme) for current guidance.
 
 **Docker Sandboxes** provides isolated microVM environments for running coding
 agents. It supports multiple agents including Claude Code, Codex, Copilot,

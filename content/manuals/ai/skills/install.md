@@ -6,11 +6,9 @@ keywords: [docker skills, install skills, agent skills, docker sandboxes, docker
 weight: 10
 ---
 
-Choose the installation method managed by your agent or organization. Docker's
-official skill collection evolves, so available skills and product coverage may
-change. Native plugins, the Gemini CLI extension, and the cross-client skills
-CLI are separate options; the skills CLI is not a prerequisite. For the current
-collection, see the [repository catalog](https://github.com/docker/skills#readme).
+Choose the installation method managed by your agent or organization. Native
+plugins, the Gemini CLI extension, and the cross-client skills CLI are separate
+options; the skills CLI is not a prerequisite.
 
 ## Claude Code {#claude-code}
 
@@ -21,10 +19,8 @@ In Claude Code, add Docker's marketplace, then install its plugin:
 /plugin install docker-skills@docker
 ```
 
-Use Claude Code's plugin manager to check the installation scope and receive
-updates. If the plugin isn't found, confirm that the marketplace was added and
-that your organization permits it. See [Claude Code's plugin
-docs](https://code.claude.com/docs/en/discover-plugins).
+See [Claude Code's plugin
+docs](https://code.claude.com/docs/en/discover-plugins) for marketplace setup.
 
 <!-- vale off -->
 ## GitHub Copilot CLI {#github-copilot-cli}
@@ -37,25 +33,39 @@ $ copilot plugin marketplace add docker/skills
 $ copilot plugin install docker-skills@docker
 ```
 
-Use Copilot CLI's plugin manager for scope and updates. If the plugin isn't
-found, confirm that the marketplace was added and that your organization
-permits it. See [Copilot CLI's plugin
-documentation](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing).
+See [Copilot CLI's plugin
+documentation](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing)
+for marketplace setup.
 
 ## Cursor {#cursor}
 
-In Cursor's plugin or marketplace interface, add `docker/skills` if your
-organization enables repository-backed marketplaces. Manage scope and updates
-in that interface. If it isn't available or a skill isn't discovered, check
-that the plugin is enabled or use the [skills CLI](#skills-cli) instead. See
-[Cursor's plugin docs](https://cursor.com/docs/plugins).
+In Cursor, repository-backed marketplaces require a Teams or Enterprise plan
+and someone with permission to add a team marketplace (an admin on Enterprise).
+Ask that person to open **Dashboard → Plugins & MCPs → Team Marketplaces → Add
+Marketplace**, choose **Import from Repo**, enter
+`https://github.com/docker/skills`, add the Docker plugin to the marketplace,
+and save its access settings. Once the marketplace is available to you, open
+**Customize**, find `docker-skills`, select **Install**, and choose a project or
+user scope. If your team can't import a marketplace, use the
+[skills CLI](#skills-cli). See [Cursor's plugin
+instructions](https://cursor.com/docs/plugins) for marketplace permissions and
+installation modes.
 
 ## Codex {#codex}
 
-Where the Codex client offers repository-backed plugins, select the Docker
-marketplace and the `docker-skills` plugin in its marketplace interface. Manage
-scope and updates in the client. If the interface isn't available or the
-plugin isn't found, use the [skills CLI](#skills-cli) instead.
+In Codex CLI, add Docker's repository as a plugin marketplace:
+
+```console
+$ codex plugin marketplace add docker/skills
+```
+
+Enter `/plugins` in Codex CLI, find the `docker-skills` plugin in the Docker
+marketplace, and install it through the plugin browser. Start a new session to
+use its skills. Plugins are available in Codex CLI and the ChatGPT desktop app,
+not the Codex IDE extension. If plugins aren't available in your client, use
+the [skills CLI](#skills-cli). See the [Codex plugin
+instructions](https://developers.openai.com/codex/plugins/) and
+[marketplace setup](https://developers.openai.com/codex/plugins/build/).
 
 ## Gemini CLI {#gemini-cli}
 
@@ -65,10 +75,8 @@ Install the repository as a Gemini CLI extension:
 $ gemini extensions install https://github.com/docker/skills
 ```
 
-Manage its scope and updates in Gemini CLI; the repository URL follows its
-upstream revision, not an immutable release. If the extension or its skills
-don't appear, check that it is enabled and restart the client. See the
-[Gemini CLI extension docs](https://geminicli.com/docs/extensions/).
+See the [Gemini CLI extension docs](https://geminicli.com/docs/extensions/)
+for extension configuration.
 
 ## Google Antigravity {#google-antigravity}
 
@@ -80,16 +88,15 @@ and select Antigravity and the skills you need:
 $ npx skills add docker/skills --agent antigravity
 ```
 
-Alternatively, [clone a reviewed Docker Skills release](#git-clone-or-manual-copy)
+Alternatively, [clone a reviewed Docker Skills tag](#git-clone-or-manual-copy)
 and copy each selected directory from its `skills/` folder into
 `<workspace-root>/.agents/skills/<skill-folder>/`, keeping its `SKILL.md` and
-supporting files together. Start a new conversation and ask for a matching
-Docker task to verify discovery. See Google's [Antigravity agent skills
+supporting files together. See Google's [Antigravity agent skills
 docs](https://antigravity.google/docs/skills) for other discovery locations.
 The Gemini CLI extension is a separate installation method, not an Antigravity
 plugin.
 
-## Any agent with the skills CLI {#skills-cli}
+## Other supported agents with the skills CLI {#skills-cli}
 
 From your project directory, run the interactive installer:
 
@@ -97,12 +104,9 @@ From your project directory, run the interactive installer:
 $ npx skills add docker/skills
 ```
 
-Select the agent and skills when prompted. The default installation is
-project-scoped; use `--global` for user scope. For CLI-managed installations,
-run `npx skills list` to check the selection and `npx skills update` to update
-it (add `--global` for the user scope). If the agent can't find a skill,
-check the selected agent and scope; if it doesn't follow the installed link,
-reinstall with `--copy`. See the [skills CLI docs](https://skills.sh/docs).
+Select your supported agent and the skills you need when prompted. The default
+installation is project-scoped; use `--global` for user scope. See the
+[skills CLI docs](https://skills.sh/docs) for supported agents and options.
 
 ## Docker Sandboxes {#docker-sandboxes}
 
@@ -116,19 +120,35 @@ Install from the repository into the shared sandbox skill store:
 $ sbx skills add docker/skills
 ```
 
-Run `sbx skills ls` to check the store and `sbx skills update` to refresh
-repository-installed skills. Start or restart a sandbox to check that the skill
-is linked. If `sbx skills` is unavailable, use the [skills CLI](#skills-cli)
-or a [manual copy](#git-clone-or-manual-copy). Learn more about
-[shared agent skills](/ai/sandboxes/workflows/agent-skills/).
+For store management, mounting behavior, and supported host directories, see
+[Share agent skills](../sandboxes/workflows/agent-skills.md). A host
+installation with the [skills CLI](#skills-cli) or by
+[manual copy](#git-clone-or-manual-copy) alone doesn't add skills to the shared
+store. If `sbx skills add` is unavailable but `sbx skills import` works, copy
+selected skill directories into a supported host *user* directory, such as
+`~/.agents/skills/` for Codex, and run `sbx skills import` on the host. The
+skills CLI's default project-scoped location and its Codex `--global` location
+(`~/.codex/skills/`) aren't import sources; copy to a supported import source
+instead. Start or restart the sandbox to mount the updated store.
+
+If the `sbx skills` group is unavailable entirely, it cannot manage a shared
+store. Install the selected skills **inside** the sandbox in a discovery path
+supported by the sandbox's agent, or copy them into the sandbox with `sbx cp`;
+for a workspace mounted in [Direct mode](../sandboxes/usage.md#git-workspace-modes),
+a project-scoped installation in that workspace is another option. A
+host-only user installation isn't visible inside the sandbox, and clone-mode
+sandboxes don't inherit subsequent changes from the host workspace. See
+[Share agent skills](../sandboxes/workflows/agent-skills.md) for the shared-store
+modes and [sandbox workspace modes](../sandboxes/usage.md#git-workspace-modes)
+for the workspace distinction.
 
 ## Docker Agent {#docker-agent}
 
 Docker Agent consumes skills installed in its documented
 [discovery paths](/ai/docker-agent/features/skills/); it doesn't install or
-update them. Install with the [skills CLI](#skills-cli) or copy the selected
-skills to a [documented discovery path](#git-clone-or-manual-copy), then select
-those skills in `agent.yaml`:
+update them. Install with the [skills CLI](#skills-cli) or
+[copy the selected skills](#git-clone-or-manual-copy) to one of those paths,
+then select them in `agent.yaml`:
 
 ```yaml
 agents:
@@ -141,55 +161,57 @@ agents:
 ```
 
 `skills: true` includes all discovered skills; use a list of skill names to
-limit the selection. Update with the installer that owns the files and start a
-new `docker agent run ./agent.yaml` after changes. If a skill isn't available,
-check the discovery path and the `agents.<name>.skills` filter.
+limit the selection. See [Docker Agent skill
+discovery](/ai/docker-agent/features/skills/) for paths and configuration.
 
 ## Git clone or manual copy {#git-clone-or-manual-copy}
 
-When a managed installer doesn't fit your client, clone a reviewed
-[Docker Skills release](https://github.com/docker/skills/releases), replacing
-`vX.Y.Z` with the tag you selected:
+When a managed installer doesn't fit your client, select a reviewed
+[tagged revision](https://github.com/docker/skills/tags) of Docker Skills and
+replace `vX.Y.Z` with that tag:
 
 ```console
 $ git clone --branch vX.Y.Z --depth 1 https://github.com/docker/skills.git
 ```
 
 Copy each selected directory under `skills/` into a discovery path documented
-by your agent. Keep its `SKILL.md` and all supporting files together. The
-destination determines project or user scope; update by replacing the complete
-skill directory from another reviewed tag. If the skill isn't found, check the
-client's discovery path and restart it. If supporting files are missing, recopy
-the entire directory.
+by your agent. Keep its `SKILL.md` and all supporting files together.
 
 ## Verify the installation
 
-Check your client's installed-plugin or extension view, `npx skills list`, or
+First, check the installed-plugin or extension view, `npx skills list`, or
 `sbx skills ls`, as appropriate. For a manual copy, check that the destination
-contains a readable `SKILL.md` and its supporting files. Start a new agent
-session and ask for a matching Docker task, such as “Review my Dockerfile for
-cache efficiency and non-root execution.” Confirm that the agent uses the
-expected guidance before relying on it.
+contains a readable `SKILL.md` and its supporting files. This confirms the
+files are installed, not that the agent loaded a skill.
 
-## Update and pin
+Start a new agent session and ask for a matching Docker task, such as “Review my
+Dockerfile for cache efficiency and non-root execution. Tell me which installed
+skill you loaded, and show its `SKILL.md` path.” Check the agent's skill or tool
+activity (if available) for a read of that file, or ask it to quote a specific
+instruction from the file and compare the quotation to the installed `SKILL.md`.
+A plausible Dockerfile recommendation alone does not demonstrate that the skill
+loaded. If your client cannot show skill activity or file access, treat its
+self-report as a clue, not proof; check the discovery path and scope before
+relying on it.
 
-Update native plugins and extensions with their client, CLI-managed skills with
-`npx skills update` in the matching scope, and shared sandbox skills with
-`sbx skills update`. Docker Agent relies on the installer that owns its
-discovered files. For a fixed snapshot, choose a tag from
-[Docker Skills releases](https://github.com/docker/skills/releases) and use a
-tagged source rather than a rolling repository URL. Move to another reviewed
-tag deliberately; manually copied directories don't update themselves.
+## Update and troubleshoot
 
-## Troubleshooting
-
+- Update native plugins and extensions with their client, CLI-managed skills
+  with `npx skills update` in the matching scope (add `--global` for user scope),
+  and repository-installed sandbox skills with `sbx skills update` when
+  available. For host-imported sandbox skills, update the host files and run
+  `sbx skills import` again, then restart the sandbox. Docker Agent relies on
+  the installer that owns its discovered files.
+- For a fixed snapshot, choose a [Docker Skills
+  tag](https://github.com/docker/skills/tags) and use that tagged revision
+  instead of a rolling repository URL. Manually copied directories don't
+  update themselves; replace the complete directory when moving to another
+  reviewed tag.
 - If a plugin or extension doesn't appear, check that it is enabled in the
   intended scope and that your organization permits the repository.
 - If the agent doesn't find an installed skill, check its discovery path and
   selected agent and scope, then start a new session. For Docker Agent, also
-  check the `skills:` filter; for Sandboxes, confirm the shared store is mounted.
-- If a link isn't followed or support files are missing, reinstall with a
+  check the `skills:` filter; for Sandboxes, check that the shared store is
+  mounted and the skill was added or imported into it.
+- If a link isn't followed or supporting files are missing, reinstall with a
   physical copy of the complete skill directory.
-- If updates don't appear, use the installer that owns the installation rather
-  than a different client or CLI; manually copied or pinned sources require a
-  deliberate replacement.
