@@ -4,7 +4,15 @@ linkTitle: API and SDKs
 description: Use the Docker Sandboxes API and SDKs to manage cloud sandboxes programmatically.
 keywords: docker sandboxes API, cloud sandboxes API, sandbox SDK, Go SDK, Python SDK, TypeScript SDK
 weight: 35
+params:
+  sidebar:
+    badge:
+      color: violet
+      text: Experimental
 ---
+
+> [!NOTE]
+> The Docker Sandboxes API and SDKs are experimental. Features and behavior may change.
 
 Use the Docker Sandboxes API to create cloud sandboxes, run commands, and
 transfer files from your applications and automated workflows. You can also
