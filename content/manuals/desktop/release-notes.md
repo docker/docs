@@ -78,6 +78,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Updated containerd to `v2.3.5`, addressing [CVE-2026-53495](https://github.com/advisories/GHSA-7jxh-36q5-gcqv).
 
+### Known issues
+
+- WSL integration can fail to start with `timed out waiting for ... to be automounted` when a distro's `wsl.conf` sets `[automount] root` to `/`, or after a container has bind-mounted a non-drive path under `/mnt`, such as WSLg's `/mnt/wslg`. As a workaround, downgrade to Docker Desktop 4.91.0, or remove the `root` setting from `wsl.conf` and run `wsl --shutdown`.
+
 ## 4.91.0
 
 {{< release-date date="2026-09-14" >}}
