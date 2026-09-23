@@ -13,12 +13,14 @@ Use the Docker Sandboxes SDKs to create and manage cloud sandboxes from Go,
 TypeScript, or Python. The SDKs include methods for running commands,
 transferring files, and waiting for a sandbox to start or stop.
 
+You don't need the Docker CLI to use an SDK.
+
 ## Install an SDK
 
 {{< tabs >}}
 {{< tab name="Go" >}}
 
-Add the SDK to your Go module:
+With Go 1.25 or later, add the SDK to your Go module:
 
 ```console
 $ go get github.com/docker/sandboxes-api
@@ -41,8 +43,16 @@ Import `SandboxesClient` from `@docker/sandboxes-api`.
 {{< /tab >}}
 {{< tab name="Python" >}}
 
-With Python 3.11 or later and Git installed, install the SDK from its source
-repository:
+With Python 3.11 or later and Git installed, create and activate a virtual
+environment:
+
+```console
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+```
+
+On Windows, activate the environment with `.venv\Scripts\activate` instead.
+Then install the SDK from its source repository:
 
 ```console
 $ python -m pip install "git+https://github.com/docker/sandboxes-api.git#subdirectory=gen/python/sandboxes"

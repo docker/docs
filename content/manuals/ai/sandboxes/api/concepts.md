@@ -10,6 +10,22 @@ An application uses the Docker Sandboxes API to create sandboxes, connect to
 them, and track their state. These concepts explain where to send requests and
 how to work with resources throughout their lifecycle.
 
+## Kits and sandbox images
+
+A kit packages an image and configuration for an agent or tool. Use a kit to
+start with that environment, then use the SDK to run processes, transfer
+files, and manage the sandbox's lifecycle.
+
+The SDK includes a versioned catalog of bundled kits. In TypeScript,
+`client.kits.list()` reads that catalog without making an API request.
+`client.kits.launch('shell', options)` creates a sandbox from the shell kit.
+Wait for the returned sandbox to reach the running state before using it.
+Agent kits may also need a model-provider credential.
+
+You can also create a sandbox from a registry image with `imageRef`, or from
+an existing image resource with `image`. A named kit supplies its own image,
+so don't also pass `image` or `imageRef` to `kits.launch`.
+
 ## Management and sandbox endpoints
 
 Creating a sandbox and running a command inside it use different endpoints:
@@ -75,8 +91,12 @@ It lists supported inputs, required permissions, and account requirements.
 The API schema also describes backends other than Cloud, so some of its fields
 aren't supported in Cloud requests.
 
-To create a cloud sandbox, supply exactly one image source: an image resource
-in `image`, or a registry image in `imageRef`. Leave `parent` empty, and omit
-`agent`, `kits`, `startupExecution`, and all members of `features`. Cloud
-rejects these options, including volume attachments, secret injection, and
-timeout configuration during creation.
+Cloud supports kits, sandbox timeouts, stored secrets, and volume attachments,
+subject to account permissions and feature availability. For example, volume
+access must be enabled for your account. An SDK method's presence doesn't
+guarantee that your account can use it.
+
+Leave `parent` empty for Cloud requests. When launching a kit or registry
+image, specify both CPU and memory from a [supported compute size](limits.md#compute-sizes).
+An existing image resource supplies its own resources, so omit resource
+settings when creating from `image`.

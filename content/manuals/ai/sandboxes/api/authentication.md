@@ -36,6 +36,8 @@ Browser sign-in supports single sign-on and two-factor authentication.
 The SDK keeps credentials in memory and refreshes them while your application
 runs. With the default configuration, you sign in again each time you start
 the application. SDK sign-in is separate from `docker login` and `sbx login`.
+Closing a client doesn't revoke sign-in. A TypeScript authenticator can be
+shared by clients and remains usable after one client closes.
 
 ## Authenticate automation with a PAT
 
@@ -106,6 +108,10 @@ For example, running a command requires `sandboxesExec` and obtaining its
 token requires `sandboxesCredential`. Your account must have both permissions.
 The Docker Hub token used for management requests must not be sent directly
 to a sandbox endpoint.
+
+Docker authentication is separate from an agent's model-provider credential.
+An agent kit may need a provider credential to run its agent, even after
+you've signed in to Docker.
 
 ## Resource access and permissions
 

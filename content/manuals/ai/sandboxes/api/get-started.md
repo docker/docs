@@ -11,7 +11,8 @@ weight: 5
 
 Create a cloud sandbox, run a command inside it, and delete it using the Docker
 Sandboxes TypeScript SDK. The example prints `Hello from Docker Sandboxes`
-from inside the sandbox.
+from inside the sandbox. It uses the `shell` kit, so you don't need a
+model-provider credential.
 
 ## Prerequisites
 
@@ -45,15 +46,17 @@ $ npm install --save-dev tsx typescript @types/node
 
 ## Create and use a sandbox
 
-The example uses the public Alpine Linux image `docker.io/library/alpine:3.22`
-with two CPUs and 4 GiB of memory on `linux/amd64`.
+A kit supplies the sandbox's image and configuration for an agent or tool.
+This example launches the bundled `shell` kit with two CPUs and 4 GiB of
+memory. See [Compute sizes and limits](limits.md) for other sizes.
+Cloud compute is billed to your subscription.
 
 Create a file named `index.ts` with the following code. The program prompts
 you to sign in, creates a sandbox, runs a command, and deletes the sandbox.
 
 ```typescript
 import { randomUUID } from 'node:crypto';
-import { oauth, SandboxesClient, WorkflowError } from '@docker/sandboxes-api';
+import { oauth, SandboxesClient, type Sandbox } from '@docker/sandboxes-api';
 
 const auth = oauth({
   onVerification({ verificationUriComplete, verificationUri, userCode }) {
@@ -63,51 +66,55 @@ const auth = oauth({
 });
 const client = new SandboxesClient({ auth });
 const requestId = randomUUID();
+let sandbox: Sandbox | undefined;
 
 try {
   await auth.getAccessToken();
   console.log('Create request ID:', requestId);
-  const result = await client.withSandbox(
-    {
-      imageRef: 'docker.io/library/alpine:3.22',
-      resources: { cpus: 2, memoryMib: '4096' },
-      platform: { os: 'linux', architecture: 'amd64' },
-    },
-    async (sandbox) => {
-      console.log('Sandbox:', sandbox.name);
-      return sandbox.processes.run({
-        args: ['sh', '-lc', 'echo "Hello from Docker Sandboxes"'],
-      });
-    },
-    {
-      idempotencyKey: requestId,
-      timeoutMs: 300_000,
-      cleanup: { timeoutMs: 30_000 },
-    },
+  const operation = { signal: AbortSignal.timeout(300_000) };
+  sandbox = await client.kits.launch(
+    'shell',
+    { resources: { cpus: 2, memoryMib: 4096 } },
+    { ...operation, idempotencyKey: requestId },
+  );
+  console.log('Sandbox:', sandbox.name);
+  sandbox = await sandbox.waitUntilRunning(operation);
+  const result = await sandbox.processes.run(
+    { args: ['echo', 'Hello from Docker Sandboxes'] },
+    operation,
   );
   if (result.exitCode !== 0 || result.incomplete) {
     throw new Error(`Command failed or output was incomplete: ${result.stderr}`);
   }
   console.log(result.stdout.trim());
-} catch (error) {
-  if (error instanceof WorkflowError) {
-    console.error('Failed during:', error.phase);
-    console.error('Sandbox:', error.resource?.name);
-    console.error('Cleanup:', error.cleanup);
-  }
-  throw error;
 } finally {
-  await client.close();
+  try {
+    if (sandbox) {
+      const cleanup = { signal: AbortSignal.timeout(30_000) };
+      const deleting = await sandbox.delete({ force: true }, cleanup);
+      await deleting?.waitUntilDeleted(cleanup);
+      console.log('Deleted', sandbox.name);
+    }
+  } catch (error) {
+    console.error('Cleanup failed; inspect sandbox:', sandbox?.name);
+    throw error;
+  } finally {
+    await client.close();
+  }
 }
 ```
 
-`withSandbox` waits for the sandbox to run before calling your function. It
-attempts deletion after the function finishes, including when the function
-fails. Creation, waiting, and command execution share a five-minute deadline;
-cleanup has a separate 30-second deadline.
+`kits.launch` returns after the API accepts creation. `waitUntilRunning`
+waits until you can run commands. Creation, waiting, and command execution
+share a five-minute deadline, starting after browser sign-in.
+
+The `finally` block attempts deletion even if waiting or command execution
+fails. Cleanup has a separate 30-second deadline. The `force` option permits
+deletion of a running sandbox.
 
 The SDK handles access tokens and the connection to the sandbox's endpoint.
-Closing the client releases local connections and credentials.
+Closing the client releases its local resources. It doesn't revoke your
+Docker sign-in or delete remote sandboxes.
 
 ## Run the program
 
@@ -119,17 +126,16 @@ $ npx tsx index.ts
 
 Open the printed verification URL and sign in with the Docker account that
 has your cloud subscription. The program continues after sign-in. On success,
-it prints `Hello from Docker Sandboxes` after deleting the sandbox.
+it prints `Hello from Docker Sandboxes`, then confirms sandbox deletion.
 
 For CI jobs and other unattended applications, use
 [PAT authentication](authentication.md#authenticate-automation-with-a-pat).
 
 ## If the program fails
 
-If the program reports a workflow error, check its cleanup status. If cleanup
-failed, use the printed sandbox name to inspect it with `client.get(name)`
-and delete it when you no longer need it. Closing the client doesn't delete
-remote sandboxes.
+If the program reports a cleanup failure, use the printed sandbox name to
+inspect it with `client.get(name)` and delete it when you no longer need it.
+A timeout does not prove that creation failed or deletion succeeded.
 
 If a lost response leaves you without a sandbox name, use the printed request
 ID as the idempotency key when retrying the same create request. See

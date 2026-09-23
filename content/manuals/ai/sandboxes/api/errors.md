@@ -9,6 +9,10 @@ Before retrying a failed request, check whether the service already started
 the work. For example, a create request can succeed even if your application
 loses the response. Retrying without checking can create a second sandbox.
 
+An API request can succeed even when the command it runs fails. Check the
+command result's exit code and output separately from request and wait errors.
+A nonzero exit code reports a command failure.
+
 ## Read an error response
 
 API errors contain a `code`, a `message`, and optional typed `details`. Use the
@@ -82,7 +86,20 @@ for completion. Retry only when you need to recover from a failure or a lost
 response. For temporary failures, wait between retries and limit the number
 of attempts.
 
-Command execution and file writes don't support this retry mechanism. Retrying
-a command can run it twice, and file writes have no way to resume partway
-through. Check the result before repeating either action after a lost
-response.
+Process creation supports an idempotency key. Keep the returned process name
+and find that process after a lost response before starting another one.
+This does not make process input, signals, or file writes safe to replay.
+Check the outcome before repeating those actions.
+
+## Account for SDK retries
+
+The SDK can retry transient failures on eligible requests. Use its retry
+policy, or disable automatic retries when your application owns the retry
+loop. In TypeScript, set `maxRetries: 0` for that call. Combining both policies
+can produce more attempts than you intended.
+
+Keep the idempotency key across application-level retries. Automatic retries
+within a call reuse its key, but a separate create call can generate a new
+one. Use a deadline and a bounded attempt count, and honor server retry delays.
+See [Request rate limits](limits.md#request-rate-limits) for how rate limits
+differ from resource quotas.
