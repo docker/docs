@@ -42,7 +42,7 @@ The **Auto-provisioning** column will update to **Enabled** for the domain.
 
 ### Disable auto-provisioning
 
-To disable auto-provisioning for a user:
+To disable auto-provisioning for a domain:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select
    your organization. If your organization is part of a company, select the company

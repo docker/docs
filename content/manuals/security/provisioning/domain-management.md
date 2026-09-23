@@ -117,10 +117,13 @@ CSV file. For more information on bulk inviting users, see
 
 ## Auto-provisioning
 
-[Auto-provisioning](/manuals/security/provisioning/auto-provisioning.md) uses verified domains to associate organization members with email address that match the verified domains. To override auto-provisioning, you can configure one of the two alternative methods:
+[Auto-provisioning](/manuals/security/provisioning/auto-provisioning.md) adds
+existing Docker users to an organization when their email addresses match a
+verified domain. For domains that belong to an SSO connection, Just-in-Time
+(JIT) provisioning takes precedence over auto-provisioning.
 
-- [Just-in-Time (JIT)](/manuals/security/provisioning/just-in-time.md) provisioning
-- [System for Cross-domain Identity Management (SCIM)](/manuals/security/provisioning/scim/_index.md)
+To compare JIT, SCIM, and auto-provisioning, see the
+[user provisioning overview](/manuals/security/provisioning/_index.md).
 
 ## Delete a domain
 

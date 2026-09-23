@@ -16,8 +16,9 @@ This page helps troubleshoot common user provisioning issues including user role
 
 ### Error message
 
-Typically, this scenario does not produce an error message in Docker or your
-IdP. This issue usually surfaces as incorrect role or team assignment.
+This scenario doesn't usually produce an error message in Docker or your IdP.
+A role or team assignment may be incorrect or may revert after the user signs
+in or SCIM synchronizes.
 
 ### Causes
 
@@ -65,6 +66,29 @@ If you prefer to keep JIT enabled:
 This option requires strict coordination between SSO and SCIM attributes
 in your IdP configuration.
 
+## JIT-provisioned user is removed after a SCIM sync
+
+### Cause
+
+JIT and SCIM are both enabled, and the user isn't in the IdP group that SCIM
+maps to the Docker organization. SCIM treats the mapped group as the
+organization roster and removes the user's organization membership during
+synchronization.
+
+### Solution
+
+If you keep both methods enabled:
+
+1. Add every user who can be provisioned through JIT to the SCIM-mapped group.
+1. Make sure each user's email address matches exactly between the SSO
+   assertion and SCIM.
+1. Trigger a SCIM synchronization in your IdP.
+1. Confirm that the user belongs to the expected organization and teams.
+
+To avoid coordinating two provisioning sources, use SCIM without JIT. Review
+[how SCIM works with JIT](/manuals/security/provisioning/scim/_index.md#choose-how-scim-works-with-jit)
+before changing the configuration.
+
 ## SCIM updates don't apply to existing users
 
 ### Causes
@@ -83,5 +107,5 @@ existing user:
 
 > [!WARNING]
 >
-> Deleting a user removes their resource ownership (e.g., repositories).
+> Deleting a user removes their resource ownership, such as repositories.
 > Transfer ownership before removing the user.

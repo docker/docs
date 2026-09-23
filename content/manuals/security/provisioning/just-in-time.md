@@ -11,9 +11,16 @@ aliases:
 
 {{< summary-bar feature_name="SSO" >}}
 
-Just-in-Time (JIT) provisioning streamlines user onboarding by automatically creating and updating user accounts during SSO authentication. This eliminates manual account creation and ensures users have immediate access to your organization's resources. JIT verifies that users belong to the organization and assigns them to the appropriate teams based on your identity provider (IdP) configuration. When you create your SSO connection, JIT provisioning is turned on by default.
+Just-in-Time (JIT) provisioning creates and updates user accounts during SSO
+authentication. JIT verifies that users belong to the organization and assigns
+them to teams based on your identity provider (IdP) configuration. JIT doesn't
+deprovision users.
 
-This page explains how JIT provisioning works, SSO authentication flows, and how to disable JIT provisioning.
+When you create an SSO connection, Docker turns on JIT provisioning by
+default. Before adding SCIM, review
+[how SCIM works with JIT](/manuals/security/provisioning/scim/_index.md#choose-how-scim-works-with-jit).
+
+This page explains the SSO authentication flows with JIT turned on and off.
 
 ## Prerequisites
 
@@ -64,7 +71,10 @@ The following graphic provides an overview of SSO authentication with JIT disabl
 
 > [!WARNING]
 >
-> Disabling JIT provisioning may disrupt your users' access and workflows. With JIT disabled, users will not be automatically added to your organization. Users must already be a member of the organization or have a pending invitation to successfully sign in through SSO. To auto-provision users with JIT disabled, [use SCIM](./scim.md).
+> Disabling JIT provisioning may disrupt your users' access and workflows. With
+> JIT disabled, users aren't automatically added to your organization during
+> SSO sign-in. Users must be organization members, have pending invitations, or
+> be provisioned through SCIM to sign in successfully.
 
 You may want to disable JIT provisioning for reasons such as the following:
 
@@ -80,6 +90,7 @@ Users are provisioned with JIT by default. If you enable SCIM, you can disable J
 
 ## Next steps
 
-- Configure [SCIM provisioning](/manuals/security/provisioning/scim/_index.md) for advanced user management.
+- Review [how SCIM works with JIT](/manuals/security/provisioning/scim/_index.md#choose-how-scim-works-with-jit)
+  before you configure SCIM.
 - Set up [group mapping](/manuals/security/provisioning/scim/group-mapping.md) to automatically assign users to teams.
 - Review [Troubleshoot provisioning](/manuals/security/provisioning/troubleshoot-provisioning.md).
