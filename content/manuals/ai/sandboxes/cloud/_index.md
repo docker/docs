@@ -3,7 +3,16 @@ title: Cloud sandboxes
 description: Run Docker Sandboxes on Docker-managed cloud infrastructure and understand the cloud-specific command, storage, and billing model.
 keywords: docker sandboxes, cloud sandboxes, sbx cloud, ai agents, agentic platform
 weight: 35
+params:
+  sidebar:
+    badge:
+      color: violet
+      text: Experimental
 ---
+
+> [!NOTE]
+> Cloud sandbox support in the `sbx` CLI is experimental. Features and behavior
+> may change.
 
 Cloud sandboxes run AI agents on Docker-managed infrastructure instead of your
 local machine. Use them when you need an isolated environment that doesn't
