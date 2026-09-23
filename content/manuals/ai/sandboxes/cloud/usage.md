@@ -11,9 +11,10 @@ names, resources, and lifecycle controls rather than the local sandbox daemon.
 
 ## Create a sandbox
 
-A cloud sandbox expires after one hour by default and is deleted on expiration.
-See [Configure expiration](#configure-expiration) to choose another timeout or
-action before creating it.
+A cloud sandbox expires after one hour by default. On expiration, the service
+stops sandboxes that can be resumed and deletes the rest. See
+[Configure expiration](#configure-expiration) to choose the timeout and action
+before creating it.
 
 Credentials saved for local sandboxes aren't available in cloud sandboxes.
 [Configure a cloud credential](credentials.md) before launching an agent.
@@ -178,11 +179,19 @@ Set the time-to-live and the action taken when it lapses during creation:
 $ sbx --cloud create --name cloud-project --ttl 2h --on-timeout delete claude
 ```
 
-The default time-to-live is one hour, and the default timeout action is
-`delete`. The `stop` action preserves the sandbox so it can be started again
-and requires account support for stopping sandboxes. Volume-backed sandboxes
-require the `delete` action. Omitting `--ttl` uses the server default. Setting
-`--ttl 0` is an error, not a way to disable expiration.
+The default time-to-live is one hour. If you omit `--on-timeout`, the server
+stops sandboxes that can be resumed and deletes the rest. Choose an action
+explicitly when you need a particular outcome:
+
+- `stop` preserves the sandbox so it can be started again. This requires
+  support for stopping the sandbox.
+- `restart` stops and immediately starts the sandbox. If you also specify
+  `--ttl`, it must be at least one hour.
+- `delete` removes the sandbox.
+
+Volume-backed sandboxes require the `delete` action. Omitting `--ttl` uses
+the server default. Setting `--ttl 0` is an error, not a way to disable
+expiration.
 
 Inspect or extend the expiration. Extensions cannot move expiration beyond
 24 hours from creation:

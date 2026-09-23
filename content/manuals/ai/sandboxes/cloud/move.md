@@ -60,7 +60,8 @@ $ sbx move local-project --to cloud
 ```
 
 The `move` command spans both backends, so don't add the global `--cloud` flag.
-Use `--name` to set the destination name:
+Use `--name` to set the destination name prefix. The cloud destination appends
+a short unique suffix:
 
 ```console
 $ sbx move local-project --to cloud --name cloud-project
@@ -98,11 +99,11 @@ which deletes the sandbox.
 Set the expiration and action explicitly when moving work you want to retain:
 
 ```console
-$ sbx move local-project --to cloud --ttl 2h --on-timeout hibernate
+$ sbx move local-project --to cloud --ttl 2h --on-timeout stop
 ```
 
-For `move`, `hibernate` means stop and preserve state. An explicit request fails
-if stopping is unavailable. Use `--on-timeout delete` to delete on expiration.
+The `stop` action preserves state. An explicit request fails if stopping is
+unavailable. Use `--on-timeout delete` to delete on expiration.
 These flags apply only to moves to the cloud. After the move, inspect or extend
 the expiration with [`sbx --cloud ttl`](usage.md#configure-expiration).
 

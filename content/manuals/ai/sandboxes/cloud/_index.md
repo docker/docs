@@ -52,9 +52,10 @@ $ sbx --cloud secret set anthropic
 See [Authenticate cloud agents](credentials.md) for other agents and credential
 options.
 
-Cloud sandboxes expire after one hour by default and are deleted when they
-expire. Copy out work you want to keep before expiration. For other timeout
-options, see [Configure expiration](usage.md#configure-expiration).
+Cloud sandboxes expire after one hour by default. On expiration, the service
+stops sandboxes that can be resumed and deletes the rest. Check the timeout
+action before relying on a sandbox to retain your work. See
+[Configure expiration](usage.md#configure-expiration).
 
 Create a sandbox without attaching, allowing access to GitHub for this example:
 
