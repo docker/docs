@@ -13,12 +13,6 @@ compatible AI coding agents. A skill is a directory with a `SKILL.md` file
 describing when and how to use it, and optional references or assets. Explore
 the source in the [Docker Skills repository](https://github.com/docker/skills).
 
-> [!NOTE]
-> Docker Skills are the content an agent uses. Docker Sandboxes
-> [shared agent skills](/ai/sandboxes/workflows/agent-skills/) are a way to
-> install and share skills in sandboxes. Docker Agent's
-> [skills feature](/ai/docker-agent/features/skills/) lets an agent consume
-> installed skills. Neither is a separate Docker Skills catalog.
 
 ## How agents use skills
 
