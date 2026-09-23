@@ -14,23 +14,11 @@ To try it, [run your first cloud sandbox](get-started.md) with the TypeScript SD
 
 ## Activate cloud access
 
-To use the API or an SDK, you need a Docker Personal or Docker Pro account with
-an active cloud sandbox subscription. Cloud compute is billed separately from
-your Docker plan on a pay-as-you-go basis.
-
-Signup and billing use Docker Agentic Platform, so you'll see that name in the
-web console, checkout, and your active plans. To activate access:
-
-1. Open the [Docker Agentic Platform console](https://agentic-platform.docker.com/)
-   and sign in with the Docker account you want to use for cloud sandboxes.
-2. If your account doesn't have access, follow the redirect to Docker Billing
-   and complete checkout for the Docker Agentic Platform pay-as-you-go plan.
-   If you see **Docker Agentic Platform access required** instead of a redirect,
-   select **Go to Docker Billing**.
-3. Return to the console after checkout. If your account already has an active
-   subscription, you can skip checkout.
-
+To use the API or an SDK, [activate a Docker Agentic Platform subscription](/manuals/agentic-platform/signup.md#activate-cloud-access).
 Use the same Docker account to [create your API access token](authentication.md#create-an-access-token).
+
+Cloud compute is billed separately from your Docker subscription. See
+[Billing](/manuals/agentic-platform/signup.md#billing) for details.
 
 ## Choose an interface
 

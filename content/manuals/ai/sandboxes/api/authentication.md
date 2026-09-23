@@ -10,7 +10,7 @@ sandboxes. To run commands or transfer files inside a sandbox, use a separate
 token that grants access to that sandbox. The SDK can obtain this second token
 for you.
 
-You need an active [cloud sandbox subscription](_index.md#activate-cloud-access).
+You need an active [Docker Agentic Platform subscription](/manuals/agentic-platform/signup.md#activate-cloud-access).
 Your credential type must also be enabled for Cloud Sandboxes, and each request
 requires permission for the action you want to perform.
 

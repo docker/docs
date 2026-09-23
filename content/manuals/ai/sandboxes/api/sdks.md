@@ -52,7 +52,7 @@ Import `SandboxesClient` from `docker_sandboxes_api.sandboxes_client`.
 
 ## Connect to Cloud Sandboxes
 
-Before connecting, [activate a cloud sandbox subscription](_index.md#activate-cloud-access)
+Before connecting, [activate a Docker Agentic Platform subscription](/manuals/agentic-platform/signup.md#activate-cloud-access)
 for your Docker account.
 
 To create and manage sandboxes, configure your client with the base URL

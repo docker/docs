@@ -14,8 +14,8 @@ from inside the sandbox.
 
 To follow this tutorial, you need:
 
-- A Docker Personal or Docker Pro account with an active
-  [cloud sandbox subscription](_index.md#activate-cloud-access)
+- A Docker account with an active
+  [Docker Agentic Platform subscription](/manuals/agentic-platform/signup.md#activate-cloud-access)
 - A [personal access token](/manuals/security/access-tokens/personal-access-tokens.md)
 - Node.js 20 or later and npm
 - `curl` and `jq`
