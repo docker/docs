@@ -71,7 +71,9 @@ and asks for confirmation before moving it to the cloud.
 
 [`sbx move`](move.md) copies a filesystem snapshot and creates a separate
 destination sandbox. It doesn't transfer running processes or memory, and it
-leaves the source sandbox in place.
+leaves the source sandbox in place. Large images can take time to upload or
+download, depending on image size and available bandwidth. For cloud-to-local
+moves, also allow for [temporary disk space](move.md#move-from-cloud-to-local).
 
 | State | Local to cloud | Cloud to local | What to do |
 | --- | --- | --- | --- |
@@ -79,6 +81,7 @@ leaves the source sandbox in place.
 | Managed secrets | Uses applicable credentials in the cloud secret store | Uses applicable credentials in the local secret store | Configure credentials in the destination store; the CLI warns that secrets aren't copied and you may need to sign in again |
 | Workspace and attached storage | Host mounts and clone-mode volumes aren't copied; a workspace triggers a warning and confirmation | Cloud volumes aren't copied and no host folder is mounted | Transfer needed files separately with `sbx cp` |
 | Published ports | TCP ports get cloud URLs; refused ports are skipped with a warning | Ports use local loopback bindings; cloud URLs aren't retained | Inspect destination ports and update clients |
+| CPU and memory | Rounds recorded source limits up to a supported cloud size; missing limits use defaults with a warning | Uses local defaults | Check destination resources and workload performance; `sbx move` has no CPU or memory override flags |
 | CPU architecture | Cloud access must support the source platform | The local runtime must support the source platform | Match platforms; the CLI checks compatibility before transfer |
 
 The managed-secret warning doesn't itself block a move. Configure

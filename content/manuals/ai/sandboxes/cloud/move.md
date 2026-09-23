@@ -87,6 +87,9 @@ secret store. Credentials in the local secret store don't transfer.
 The CLI rounds the source's recorded CPU and memory limits up to a supported
 [cloud size](usage.md#choose-resources-and-platform). Missing limits use cloud
 defaults with a warning. Limits above the largest cloud size prevent the move.
+The `move` command has no `--cpus` or `--memory` overrides. Resource sizing
+doesn't guarantee the same performance as the source; check your workload on
+the destination before removing the source.
 
 ### Set destination expiration
 
