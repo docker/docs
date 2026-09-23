@@ -37,7 +37,7 @@ The Docker Engine provides the following storage backends on Linux:
 
 | Backend                     | Description                                                                                                                                                                                                                                                |
 | :-------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `containerd` (snapshotters) | The default for Docker Engine 29.0 and later. Uses containerd snapshotters for image storage. Supports multi-platform images and attestations. See [containerd image store](../containerd.md) for details.                                                 |
+| `containerd` (snapshotters) | The default for Docker Engine 29.0 and later for fresh installations. Uses containerd snapshotters for image storage. Supports multi-platform images and attestations. See [containerd image store](../containerd.md) for details.                                 |
 | `overlay2`                  | Classic storage driver. Most widely compatible across all currently supported Linux distributions, and requires no extra configuration.                                                                                                                    |
 | `fuse-overlayfs`            | Preferred only for running Rootless Docker on hosts that don't support rootless `overlay2`. Not needed since Linux kernel 5.11, as `overlay2` works in rootless mode. See [rootless mode documentation](/manuals/engine/security/rootless.md) for details. |
 | `btrfs` and `zfs`           | Allow for advanced options, such as creating snapshots, but require more maintenance and setup. Each relies on the backing filesystem being configured correctly.                                                                                          |
@@ -74,7 +74,7 @@ the final decision.
 > [Rootless mode documentation](/manuals/engine/security/rootless.md).
 
 This section applies to classic storage drivers only. If you're using the
-containerd image store (the default for Docker Engine 29.0+), see the
+containerd image store (the default for Docker Engine 29.0+ for fresh installations), see the
 [containerd image store documentation](../containerd.md) instead.
 
 Your operating system and kernel may not support every classic storage driver.

@@ -13,8 +13,10 @@ storage driver as `overlay2`.
 
 > [!NOTE]
 > Docker Engine 29.0 and later uses the
-> [containerd image store](/manuals/engine/storage/containerd.md) by default.
-> The `overlay2` driver is a legacy storage driver that is superseded by the
+> [containerd image store](/manuals/engine/storage/containerd.md) by default for
+> fresh installations. If you upgraded from an earlier version, your daemon
+> continues using classic storage drivers unless you migrate. The `overlay2`
+> driver is a legacy storage driver that is superseded by the
 > `overlayfs` containerd snapshotter. For more information, see
 > [Select a storage driver](/manuals/engine/storage/drivers/select-storage-driver.md).
 
