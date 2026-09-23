@@ -45,10 +45,10 @@ methods:
 
 | Provisioning method | Description | Default setting in Docker | Recommended for |
 | :--- | :--- | :--- | :--- |
-| System for Cross-domain Identity Management (SCIM) | Syncs user data between your IdP and Docker so attributes stay current without manual updates | Disabled by default | Large organizations or frequent changes in users or roles |
-| Group mapping | Maps IdP groups to Docker roles and permissions based on group membership | Disabled by default | Organizations that assign access from IdP group membership |
-| Just-in-Time (JIT) | Creates and provisions user accounts when they first sign in with SSO | Enabled by default | Organizations that need minimal setup or smaller teams |
-| Auto-provision | Adds users whose email addresses match a verified domain | Disabled by default | Organizations without SSO that add existing Docker users by domain |
+| [System for Cross-domain Identity Management (SCIM)](/manuals/security/provisioning/scim/_index.md) | Syncs user data between your IdP and Docker so attributes stay current without manual updates | Disabled by default | Large organizations, or frequent changes in users and roles |
+| [Group mapping](/manuals/security/provisioning/scim/group-mapping.md) | Syncs IdP groups with Docker organizations and teams. Works with a SAML SSO connection, or with SCIM | Disabled by default | Organizations that assign teams from IdP group membership |
+| [Just-in-Time (JIT)](/manuals/security/provisioning/just-in-time.md) | Creates a user account the first time a user signs in through SSO | Enabled by default | Organizations that want minimal setup, or smaller teams |
+| [Auto-provision](/manuals/security/provisioning/auto-provisioning.md) | Adds existing Docker users to your organization when their email address matches a verified domain. It doesn't create accounts | Disabled by default | Organizations that add existing Docker users by domain |
 
 ## Default provisioning setup
 
@@ -56,13 +56,19 @@ Docker turns on JIT provisioning when you configure an SSO connection.
 With JIT on, Docker creates a user account the first time the user signs
 in through SSO.
 
-If you need more control over user access and attributes, configure SCIM
-or group mapping.
+JIT takes precedence over the other methods:
+
+- When SCIM is also enabled, the values from the SSO sign-in flow
+  overwrite the attributes that SCIM sets. To make SCIM the source of
+  truth for roles and team assignment,
+  [turn off JIT](/manuals/security/provisioning/just-in-time.md#disable-jit-provisioning).
+- For a domain that belongs to an SSO connection, JIT adds the user
+  instead of auto-provisioning.
 
 ## SSO attributes
 
-When a user signs in through SSO, Docker reads attributes from your IdP
-to set identity and permissions:
+Each time a user signs in through SSO, Docker reads attributes from your
+IdP to set the user's identity and permissions:
 
 | Attribute | Required | Description |
 | :--- | :--- | :--- |
@@ -101,3 +107,6 @@ the same attributes.
 Choose the provisioning method that fits your organization:
 
 {{< grid >}}
+
+If users get the wrong role or team after you change methods, see
+[Troubleshoot provisioning](/manuals/security/provisioning/troubleshoot-provisioning.md).
