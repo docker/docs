@@ -311,9 +311,10 @@ configure that path for every sandbox:
 $ sbx settings set ssh.agentSocketPath "$SSH_AUTH_SOCK"
 ```
 
-An empty `ssh.agentSocketPath`, which is the default, uses each client's
-current `SSH_AUTH_SOCK` instead. The `ssh.agentForwardingEnabled` setting is a
-boolean that turns forwarding on or off.
+An empty [`ssh.agentSocketPath`](settings.md#sshagentsocketpath), which is the
+default, uses each client's current `SSH_AUTH_SOCK` instead. Use
+[`ssh.agentForwardingEnabled`](settings.md#sshagentforwardingenabled) to turn
+forwarding on or off.
 
 After changing forwarding or the socket selection, restart the daemon so
 existing sandboxes use the new configuration:

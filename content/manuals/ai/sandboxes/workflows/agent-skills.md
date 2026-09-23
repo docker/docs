@@ -137,15 +137,13 @@ For example, create a sandbox without the shared store:
 $ sbx run --skills=off claude
 ```
 
-To change the default for future sandboxes, set `skills.defaultMode` to `off`,
+To change the default for future sandboxes, set
+[`skills.defaultMode`](../configuration/settings.md#skillsdefaultmode) to `off`,
 `readonly`, or `readwrite`:
 
 ```console
 $ sbx settings set skills.defaultMode readonly
 ```
-
-When no mode is specified, the daemon uses `skills.defaultMode`, whose built-in
-value is `readonly`. An explicit `--skills` value overrides that default.
 
 The mode is applied only when a sandbox is created. Upgrading `sbx` or changing
 `skills.defaultMode` leaves existing sandbox mounts unchanged. Remove and

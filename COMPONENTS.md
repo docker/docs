@@ -262,6 +262,25 @@ params:
 - Use green for new GA features
 - Use gray for deprecated features
 
+### Setting metadata
+
+Use `setting-metadata` below a setting's heading to display its type, default,
+and optional environment variable. Keep explanations and examples in the page
+body. The component uses a definition list with wrapping values and preserves
+the metadata in Markdown output.
+
+```markdown
+{{</* setting-metadata
+  type="boolean"
+  default="false"
+  env="DOCKER_SANDBOXES_CLIPBOARD_IMAGE_PASTE"
+*/>}}
+```
+
+The `type` and `default` parameters are required. Omit `env` when the setting
+has no environment variable equivalent. Use `default="Empty string"` for an
+empty string default.
+
 ### Summary bars
 
 Summary bars indicate subscription requirements, version requirements, or

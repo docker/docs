@@ -12,8 +12,8 @@ Docker Engine's requirements, Docker inside the sandbox uses it too.
 
 ## Configure the mirror
 
-Set `platform.images.registryMirror` to the mirror host. Include a port when
-needed, but omit the URL scheme:
+Set [`platform.images.registryMirror`](settings.md#platformimagesregistrymirror)
+to the mirror host. Include a port when needed, but omit the URL scheme:
 
 ```console
 $ sbx settings set platform.images.registryMirror registry.example.com

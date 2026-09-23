@@ -39,7 +39,8 @@ your OS has no proxy configured, traffic goes direct.
 
 ## Set a proxy manually
 
-Use `sbx settings set` to override the default for one or both kinds of traffic:
+Use [`sbx settings set`](settings.md#change-a-setting) to override the default
+for one or both kinds of traffic:
 
 ```console
 $ sbx settings set proxy http://proxy.corp:3128          # both kinds of traffic
@@ -85,9 +86,8 @@ environment variables, so existing setups keep working without migration:
   form of `proxy.sandbox` and `no_proxy.sandbox`. They apply to sandbox traffic
   only and never affect daemon traffic.
 
-The daemon reads these variables when it starts, so set them before your first
-`sbx` command, or restart the daemon for a change to affect daemon and sandbox
-traffic. Supported CLI clients read their environment on each invocation.
+For how to apply environment variable changes to the CLI and daemon, see
+[Settings environment variables](settings.md#environment-variables).
 
 ## Precedence
 

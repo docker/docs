@@ -167,7 +167,7 @@ sends it directly. Pasting an image or screenshot with `Ctrl+V` is different:
 the agent reads it from your host clipboard, and the sandbox blocks that access
 unless you opt in.
 
-Turn it on with a local setting:
+Turn on [`clipboard.imagePaste`](configuration/settings.md#clipboardimagepaste):
 
 ```console
 $ sbx settings set clipboard.imagePaste true
