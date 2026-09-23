@@ -1,0 +1,81 @@
+---
+title: Docker Sandboxes API concepts
+linkTitle: API concepts
+description: Learn how to connect to cloud sandboxes, identify resources, wait for actions to finish, and retrieve paginated results.
+keywords: docker sandboxes API concepts, cloud sandbox endpoint, API capabilities, API operations
+weight: 20
+---
+
+An application uses the Docker Sandboxes API to create sandboxes, connect to
+them, and track their state. These concepts explain where to send requests and
+how to work with resources throughout their lifecycle.
+
+## Management and sandbox endpoints
+
+Creating a sandbox and running a command inside it use different endpoints:
+
+| Endpoint | Use it to |
+| --- | --- |
+| Management API at `https://connect.docker.com/sandboxes` | Create, inspect, and delete sandboxes and manage related resources. |
+| Sandbox API at the returned `core.endpoint.uri` | Run processes and read or write files inside that sandbox. |
+
+The SDKs build request URLs from these base URLs. If you make HTTP requests
+directly, append the `/v1` route to the base URL, preserving any existing path.
+For example, the management route `/v1/sandboxes` becomes
+`https://connect.docker.com/sandboxes/v1/sandboxes`.
+
+Each sandbox endpoint requires a token that grants access to that sandbox.
+Use the SDK's endpoint helper to obtain the token and create a client. See
+[Authentication and authorization](authentication.md) for details.
+
+A sandbox's endpoint can change when its runtime changes. Read the sandbox
+resource again before reconnecting to get its endpoint.
+
+## Resource names
+
+Use a resource's returned `name` to refer to it in later requests. For example,
+a sandbox name has the form `sandboxes/<uid>`. The server assigns the ID, which
+stays the same throughout the resource's lifetime. Pass the complete name,
+including `sandboxes/`, when reading or deleting that sandbox.
+
+The `displayName` field is a label for people to read. Changing this label
+doesn't change the resource's `name`.
+
+## Wait for an action to finish
+
+Wait until a sandbox is running before sending commands to it. Creating a
+sandbox takes time, so the API can return HTTP 202 with the sandbox still in a
+pending state. Read the resource repeatedly until it reaches the state you
+need. SDK methods such as TypeScript's `createSandboxAndWait` do this for you.
+
+Sandbox creation can continue after your client stops waiting. Read the
+sandbox again to check its state, and inspect its `failure` field if it has
+failed. See [Errors and retries](errors.md) for how to recover.
+
+Deletion can also take time. The API returns HTTP 202 while the sandbox is
+being deleted and HTTP 204 when deletion is complete. After deletion,
+authorized reads return `notFound`.
+
+## Read all results from a list
+
+List requests return one page of results at a time. To retrieve the next page,
+pass the response's `nextPageToken` as the next request's `pageToken`. Keep the
+same page size, filter, and ordering. Continue until `nextPageToken` is empty,
+even if a page contains fewer items than you requested.
+
+The default page size is 25 for Cloud sandbox, image, snapshot, volume, and
+secret lists. You can request up to 100 items per page.
+
+## Choose supported Cloud options
+
+Before adding optional features to a create request, check the
+[Cloud support guide](https://github.com/docker/sandboxes-api/blob/main/CLOUD_SUPPORT.md).
+It lists supported inputs, required permissions, and account requirements.
+The API schema also describes backends other than Cloud, so some of its fields
+aren't supported in Cloud requests.
+
+To create a cloud sandbox, supply exactly one image source: an image resource
+in `image`, or a registry image in `imageRef`. Leave `parent` empty, and omit
+`agent`, `kits`, `startupExecution`, and all members of `features`. Cloud
+rejects these options, including volume attachments, secret injection, and
+timeout configuration during creation.
