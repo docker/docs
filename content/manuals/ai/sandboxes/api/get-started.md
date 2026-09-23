@@ -16,15 +16,13 @@ To follow this tutorial, you need:
 
 - A Docker Personal or Docker Pro account with an active
   [cloud sandbox subscription](_index.md#activate-cloud-access)
-- An image available to your account that includes `sh`
 - A [personal access token](/manuals/security/access-tokens/personal-access-tokens.md)
 - Node.js 20 or later and npm
 - `curl` and `jq`
 
-Your credentials need permission to list images, create and read sandboxes,
-run commands, and delete sandboxes. The required API permissions are
-`imagesRead`, `sandboxesCreate`, `sandboxesRead`, `sandboxesCredential`,
-`sandboxesExec`, and `sandboxesDelete`.
+Your credentials need permission to create and read sandboxes, run commands,
+and delete sandboxes. The required API permissions are `sandboxesCreate`,
+`sandboxesRead`, `sandboxesCredential`, `sandboxesExec`, and `sandboxesDelete`.
 
 ## Create an access token
 
@@ -64,26 +62,10 @@ $ npm install @docker/sandboxes-api
 $ npm install --save-dev tsx typescript @types/node
 ```
 
-## Select an image
-
-Choose an image for the sandbox. It must be available to your account and
-include `sh` to run the example command. List your images:
-
-```console
-$ curl --silent --show-error --fail \
-  --url https://connect.docker.com/sandboxes/v1/images \
-  --header "Authorization: Bearer $DOCKER_ACCESS_TOKEN" \
-  | jq '.images[] | {name, displayName}'
-```
-
-Copy the image's complete `name`, such as `images/<uid>`, and save it in
-`SBX_IMAGE`:
-
-```console
-$ export SBX_IMAGE=<IMAGE_RESOURCE_NAME>
-```
-
 ## Create and use a sandbox
+
+The example uses the public Alpine Linux image `docker.io/library/alpine:3.22`
+with two CPUs and 4 GiB of memory on `linux/amd64`.
 
 Create a file named `index.ts` with the following code. The program creates a
 sandbox and waits until it's running before sending the command. It then
@@ -94,9 +76,8 @@ import { randomUUID } from 'node:crypto';
 import { ResourceWaitError, SandboxesClient } from '@docker/sandboxes-api';
 
 const token = process.env.DOCKER_ACCESS_TOKEN;
-const image = process.env.SBX_IMAGE;
-if (!token || !image) {
-  throw new Error('Set DOCKER_ACCESS_TOKEN and SBX_IMAGE');
+if (!token) {
+  throw new Error('Set DOCKER_ACCESS_TOKEN');
 }
 
 const client = new SandboxesClient({
@@ -107,7 +88,14 @@ const client = new SandboxesClient({
 const requestId = randomUUID();
 console.log('Create request ID:', requestId);
 const sandbox = await client.createSandboxAndWait(
-  { body: { image }, headers: { 'Idempotency-Key': requestId } },
+  {
+    body: {
+      imageRef: 'docker.io/library/alpine:3.22',
+      resources: { cpus: 2, memoryMib: '4096' },
+      platform: { os: 'linux', architecture: 'amd64' },
+    },
+    headers: { 'Idempotency-Key': requestId },
+  },
   { timeoutMs: 300_000 },
 ).catch((error) => {
   if (error instanceof ResourceWaitError && error.resource) {
