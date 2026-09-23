@@ -36,6 +36,10 @@ params:
     description: The open-source multi-agent solution to assist you in your tasks.
     icon: /icons/cagent.svg
     link: /ai/docker-agent
+  - title: Docker Skills
+    description: Docker's official, evolving collection of skills for AI coding agents.
+    icon: document-text
+    link: /ai/skills/
   application-development:
   - title: Docker Desktop
     description: Your command center for container development.
