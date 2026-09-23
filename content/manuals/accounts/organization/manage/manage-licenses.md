@@ -9,12 +9,11 @@ aliases:
 ---
 
 Licenses control which organization members can use supported Docker products.
-Use the **Licenses** page to see how many you have and who has them. Assign
-licenses from the **Teams** view, the **Members** view, through invitations, or
+You can use the **Licenses** page to see how many licenses you have and who holds them, while you can use the **Teams** and **Members** pages to assign licenses through invitations or
 with automatic assignment.
 
 > [!TIP]
-> To learn more about product licenses, Docker Core seats, and other Docker
+> To learn more about product licenses, Docker Team and Business seats, and other Docker
 > add-ons, see [Docker plans](/manuals/subscription-billing/plans/_index.md),
 > or
 > <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_admin_licenses" class="link" rel="noopener">contact sales</a>
@@ -22,18 +21,18 @@ with automatic assignment.
 
 ## License assignment
 
-You can give a member a license in these ways:
+You have a few options for assigning a license to a member. You can assign:
 
-- Assign it to a team. Every member of that team gets the license, including
-  people who join the team later.
-- Assign it to them on the **Members** page, including through invitations.
-- Turn on automatic assignment so they receive a license the first time they
+- Through a team, so every member of that team gets the license, including
+  people who join the team later
+- Through the **Members** page with the action menu, or through invitations
+- By turning on automatic assignment so members receive a license the first time they
   use a supported product.
 
 A member can use the product if they have a license from their team, from an
 individual assignment, or from automatic assignment. Each member uses one
-license per product. If they already have the license, assigning it again
-through another team or as an individual assignment doesn't use a second
+license per product, so if you assign a duplicate license
+through another team or as an individual assignment, it won't use a second
 license.
 
 ## Assign licenses
@@ -48,51 +47,43 @@ invitations, or with automatic assignment.
 1. Select **Members** from the left navigation.
 1. Select the **action menu** at the end of the member's row to assign or
    revoke an active license.
-1. Optional. To assign or revoke licenses for several members, select the
+1. Optional. To assign or revoke licenses for several members, use multi-select to choose the
    members you want to manage, then select the **Bulk actions** menu.
-
-To assign a license through invitations, see
-[Invitations](#invitations).
 
 ### Teams
 
-When you assign a license to a team, every member of that team receives it, and
-members who join the team later receive it too.
+Assigning a license to a team ensures every member of that team receives the license, including
+members who join the team later.
 
 1. Sign in to [Docker Home](https://app.docker.com), then choose your
    organization.
-1. Select **Teams**, then select the team name.
+1. Select **Teams** from the left navigation, then select the team name.
 1. On the **Licenses** card, select the **edit** icon to open **Add licenses**.
-1. Under **Licenses**, select one or more licenses. Each license shows how many
-   are available, and the modal reports how many members receive each license
-   you add.
+1. Under **Licenses**, select one or more licenses. 
+    - Each license shows how many are available
+    - The modal reports how many members receive each license
 1. Select **Save**.
 
 Docker grants the license only to team members who don't already have it.
-Members who already have that license from another team or from an individual
-assignment keep it, and Docker doesn't use another license for them.
+Duplicate license assignment won't double assign a license. 
 
-If the remaining members still need more licenses than you have available, you
-can still select **Save**. Docker assigns the licenses you have and queues the
+- If a member holds a license from a previous assignment and you've assigned a duplicate, the duplicated license stays in your available pool. The member maintains product access from the previous assignment.
+- If you've assigned members licenses in excess of your license availability, selecting **Save** assigns only available licenses. Docker queues the
 rest until more are available.
 
 ### Invitations
 
-Through invitations, you can select a product license to assign when the person
-accepts. Docker doesn't reserve or deduct the license at invite time.
+Assigning a license through invitations grants product access when a member
+accepts an invitation.
 Assignment happens on acceptance:
 
 - If a license is available when they accept, Docker assigns it to them and the
   number of available licenses decreases by one.
 - If no licenses remain when they accept, they still join your organization,
   but without a license.
+- Docker doesn't reserve or deduct the license at invite time.
 
-> [!NOTE]
-> Docker doesn't notify you or the invitee when a selected license is
-> unavailable at acceptance.
-
-Licenses aren't reserved for pending invitations, so they must still be
-available when each invitee accepts. Monitor availability on the **Licenses**
+You can monitor availability on the **Licenses**
 page while invitations are pending.
 
 To select licenses through invitations:
@@ -109,10 +100,7 @@ To select licenses through invitations:
 1. Select **Invite** to send the invite.
 
 A user can accept from the link in their invitation email or from their
-**Notifications Center**. If the selected license is available, Docker assigns
-it automatically upon acceptance.
-
-For more about sending, resending, and removing invitations, including CSV
+**Notifications Center**. For more about sending, resending, and removing invitations, including CSV
 file limits, see
 [Manage organization members](/manuals/accounts/organization/manage/members.md).
 
@@ -154,14 +142,13 @@ licenses to your subscription, and turn automatic assignment on or off.
 1. Select **Licenses** from the left navigation.
 
 Products you haven't purchased appear as cards with **Learn more** and **Add
-licenses**. Products you own show:
+licenses**. Products you own show how many licenses are:
 
-- **Available**: How many licenses remain and how many of your total are
-  assigned. Select **View all** to open the members who have the license.
-- **Team assignment**: How many licenses are assigned through teams. Select
+- Available over the total number of licenses assigned under **Available**. Select **View all** to open the members who have the license.
+- Assigned through teams under **Team assignment**. Select
   **View teams with this license** to open those teams.
-- **Direct assignment**: How many licenses are assigned to members
-  individually.
+- Assigned to members
+  individually under **Direct assignment**
 
 ## Remove licenses
 
@@ -176,8 +163,11 @@ To remove licenses:
     - Select **Teams**, then select the team name.
     - On the **Licenses** card, select the **edit** icon.
     - Remove the license you no longer want the team to assign.
-1. To revoke a license from one member, use the **action menu** on the
+1. To revoke a license from one member:
+    - Select **Members**.
+    - Use the **action menu** on the
 **Members** page.
+    - Select **Remove**.
 1. Review the confirmation message, then select **Remove license**.
 
 ## Next steps
