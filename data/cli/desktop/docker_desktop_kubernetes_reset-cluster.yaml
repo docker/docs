@@ -1,0 +1,11 @@
+command: docker desktop kubernetes reset-cluster
+short: Reset the Kubernetes cluster managed by Docker Desktop
+usage: docker desktop kubernetes reset-cluster
+pname: docker desktop kubernetes
+plink: docker_desktop_kubernetes.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
