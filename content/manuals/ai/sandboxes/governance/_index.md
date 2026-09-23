@@ -5,8 +5,8 @@ description: Control what sandboxes can access, from local developer rules to or
 keywords: docker sandboxes, governance, policy, network access, filesystem access, mcp policy, organization policy
 ---
 
-The governance described here applies to local sandboxes. Organization
-governance is not available for cloud sandboxes in this release. See
+The governance described here applies to local sandboxes. Cloud sandboxes
+use separate network policy configuration. See
 [Cloud network policy](../cloud/network-policy.md) for cloud controls.
 
 Sandbox governance covers the policy system that controls what sandboxes can

@@ -12,9 +12,9 @@ sandbox scopes.
 
 > [!IMPORTANT]
 >
-> Organization governance is not available for cloud sandboxes in this
-> release. Configure cloud rules with `sbx --cloud policy` and verify network
-> access using connection checks and policy logs.
+> Local policy configuration isn't copied to cloud sandboxes. Configure cloud
+> rules with `sbx --cloud policy` and verify network access using connection
+> checks and policy logs.
 
 ## Understand policy scope
 

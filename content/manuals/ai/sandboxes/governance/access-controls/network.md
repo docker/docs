@@ -6,8 +6,8 @@ description: Control outbound network access from Docker Sandboxes with local an
 keywords: docker sandboxes, network access, network rules, governance, local policy, organization policy
 ---
 
-The governance described here applies to local sandboxes. Organization
-governance is not available for cloud sandboxes in this release. See
+The governance described here applies to local sandboxes. Cloud sandboxes
+use separate network policy configuration. See
 [Cloud network policy](../../cloud/network-policy.md) for cloud controls.
 
 Network access policies control outbound connections from sandboxes. Each

@@ -55,7 +55,7 @@ feature requires a separate paid subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
 
-Organization governance is not available for cloud sandboxes in this release.
+Cloud sandboxes use separate network policy configuration.
 See [Cloud network policy](cloud/network-policy.md) for cloud controls.
 
 ## Which domains do I need to allow for Docker Sandboxes to work?

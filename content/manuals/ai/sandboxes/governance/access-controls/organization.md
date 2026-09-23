@@ -9,8 +9,8 @@ aliases:
   - /ai/sandboxes/governance/org/
 ---
 
-The governance described here applies to local sandboxes. Organization
-governance is not available for cloud sandboxes in this release. See
+The governance described here applies to local sandboxes. Cloud sandboxes
+use separate network policy configuration. See
 [Cloud network policy](../../cloud/network-policy.md) for cloud controls.
 
 [Local policies](local.md) give individual developers control over what their
