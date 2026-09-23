@@ -62,7 +62,11 @@ is determined by the characteristics of your workload and the level of stability
 you need. See [Other considerations](#other-considerations) for help in making
 the final decision.
 
-## Supported storage drivers per Linux distribution
+This section applies to classic storage drivers only. If you're using the
+containerd image store (the default for Docker Engine 29.0+), see the
+[containerd image store documentation](../containerd.md) instead.
+
+## Supported classic storage drivers per Linux distribution (legacy)
 
 > [!NOTE]
 > Modifying the storage driver by editing the daemon configuration file isn't
@@ -73,14 +77,10 @@ the final decision.
 > in rootless mode, see the
 > [Rootless mode documentation](/manuals/engine/security/rootless.md).
 
-This section applies to classic storage drivers only. If you're using the
-containerd image store (the default for Docker Engine 29.0+), see the
-[containerd image store documentation](../containerd.md) instead.
-
 Your operating system and kernel may not support every classic storage driver.
 For example, `btrfs` is only supported if your system uses `btrfs` as storage.
-In general, the following configurations work on recent versions of the Linux
-distribution:
+For systems using classic storage drivers, the following configurations are
+supported on recent versions of the Linux distribution:
 
 | Linux distribution   | Default classic driver  | Alternative drivers  |
 | :------------------- | :---------------------- | :------------------- |
