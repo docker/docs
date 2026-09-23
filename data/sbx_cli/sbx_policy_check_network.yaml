@@ -5,7 +5,8 @@ description: |-
 
     TARGET may be a hostname, host:port, IP literal, or URL. Bare hosts and IP
     literals are evaluated with port 443. HTTP(S) URLs use their default ports;
-    other URL schemes must include an explicit port.
+    other URL schemes must include an explicit port. URLs supply only their host
+    and port: this command evaluates network authorization, not HTTP method or path.
 usage: sbx policy check network [--sandbox SANDBOX] TARGET [flags]
 options:
     - name: help
@@ -15,6 +16,8 @@ options:
     - name: json
       default_value: "false"
       usage: Output in JSON format
+    - name: protocol
+      usage: 'Network protocol to evaluate: tcp or udp'
     - name: sandbox
       usage: Evaluate in a specific sandbox policy context
     - name: verbose
@@ -25,10 +28,6 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"

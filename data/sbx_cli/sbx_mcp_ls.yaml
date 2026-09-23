@@ -1,10 +1,10 @@
 name: sbx mcp ls
-synopsis: List MCP servers, grouped by the gateway that serves them
+synopsis: List MCP servers
 description: |-
     List registered MCP servers under the gateway that serves them.
 
-    The gateway header reports where it runs, who controls it, and whether you are
-    signed in; each server row reports its transport and whether it is usable now.
+    The GATEWAY column reports where each server runs, who controls it, and the
+    signed-in identity; each row also reports its transport and whether it is usable now.
     Servers needing authorization carry the 'sbx mcp auth' next step.
 
     A server registered with custom headers is marked as such; one whose header
@@ -15,6 +15,15 @@ description: |-
 
     Auth status is read without starting an OAuth flow — from the local token store
     in local data-plane mode, otherwise from the hosted control plane.
+
+    With --cloud:
+    List MCP servers reported by existing cloud sandbox gateways, with the
+    sandboxes that reference each server. Servers skipped by a gateway are excluded.
+    This is not a complete inventory of configured servers: unused configurations
+    and gateways that do not report server names are absent, including with --quiet.
+
+    Specify a sandbox to show its gateway state and host, requested servers, and
+    skipped servers.
 usage: sbx mcp ls [flags]
 options:
     - name: help
@@ -24,15 +33,15 @@ options:
     - name: json
       default_value: "false"
       usage: Output in JSON format
+    - name: quiet
+      shorthand: q
+      default_value: "false"
+      usage: Only display MCP server names
 inherited_options:
     - name: cloud
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -42,5 +51,11 @@ example: |4-
 
       # Machine-readable output for scripting
       sbx mcp ls --json
+
+      # Cloud: list servers reported across existing sandboxes
+      sbx --cloud mcp ls
+
+      # Cloud: show a cloud sandbox's gateway by name or sbx_ ID
+      sbx --cloud mcp ls my-sbx
 see_also:
     - sbx mcp - Manage MCP servers

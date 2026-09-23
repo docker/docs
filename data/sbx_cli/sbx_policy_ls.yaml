@@ -18,6 +18,9 @@ description: |-
     rule.
 usage: sbx policy ls [SANDBOX] [flags]
 options:
+    - name: created-via
+      usage: |
+        Filter policies by how they were created: "default", "added", "provisioned", or "approval"
     - name: decision
       usage: 'Filter policies by decision: "allow" or "deny"'
     - name: help
@@ -30,12 +33,14 @@ options:
     - name: json
       default_value: "false"
       usage: Output filtered policy rules as JSON
+    - name: protocol
+      usage: 'Filter network rules by protocol: tcp or udp'
     - name: source
       usage: 'Filter policies by source: "local", "org", or "kit"'
     - name: type
       default_value: all
       usage: |
-        Filter policies by type: "all", "network", or "filesystem" (default "all")
+        Filter policies by type: "all", "network", "filesystem" (default "all")
     - name: wide
       default_value: "false"
       usage: Show detailed rule-level output with rule IDs and resources
@@ -44,10 +49,6 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -70,6 +71,9 @@ example: |4-
 
       # List organization policies that deny access
       sbx policy ls --source org --decision deny
+
+      # List persistent rules created from approval prompts
+      sbx policy ls --wide --created-via approval
 
       # Include inactive rules hidden by remote governance
       sbx policy ls --include-inactive

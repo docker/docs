@@ -24,9 +24,15 @@ description: |-
     published with that same default or as dual-stack tcp. Name the protocol to
     remove a tcp6 or udp mapping; anything left behind is reported.
 
-    In cloud mode (--cloud), the sandbox may be given by ID (sbx_*) or name, and
-    only the sandbox port number is accepted. The cloud control plane assigns a
-    publicly reachable URL for each exposed port.
+    With --cloud:
+    Manage the exposed ports of a cloud sandbox.
+
+    List, publish, or unpublish ports on a cloud sandbox given by ID (sbx_*) or
+    name. Without --publish or --unpublish flags, lists the exposed ports.
+
+    A port is the sandbox port number alone or with a /tcp suffix; UDP and host
+    bindings are refused. The cloud control plane assigns a publicly reachable URL
+    for each exposed port.
 usage: sbx ports SANDBOX [flags]
 options:
     - name: help
@@ -39,20 +45,16 @@ options:
     - name: publish
       default_value: '[]'
       usage: |
-        Publish a port (can be repeated): [[HOST_IP:]HOST_PORT:]SANDBOX_PORT[/PROTOCOL] (local) or SANDBOX_PORT (cloud)
+        Publish a port (can be repeated): [[HOST_IP:]HOST_PORT:]SANDBOX_PORT[/PROTOCOL] (local) or SANDBOX_PORT[/tcp] (cloud)
     - name: unpublish
       default_value: '[]'
       usage: |
-        Unpublish a port (can be repeated): [HOST_IP:]HOST_PORT:SANDBOX_PORT[/PROTOCOL] (local) or SANDBOX_PORT (cloud)
+        Unpublish a port (can be repeated): [HOST_IP:]HOST_PORT:SANDBOX_PORT[/PROTOCOL] (local) or SANDBOX_PORT[/tcp] (cloud)
 inherited_options:
     - name: cloud
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -71,9 +73,9 @@ example: |4-
       sbx ports my-sandbox --unpublish 3000:8080
 
       # Expose port 8080 on a cloud sandbox
-      sbx ports sbx_abc123 --cloud --publish 8080
+      sbx --cloud ports sbx_abc123 --publish 8080
 
       # Remove an exposed port from a cloud sandbox
-      sbx ports sbx_abc123 --cloud --unpublish 8080
+      sbx --cloud ports sbx_abc123 --unpublish 8080
 see_also:
     - sbx - Manage AI coding agent sandboxes.

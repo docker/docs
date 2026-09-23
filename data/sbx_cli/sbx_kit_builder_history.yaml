@@ -1,0 +1,32 @@
+name: sbx kit builder history
+synopsis: Inspect kit build history in the builder sandbox
+experimental: true
+description: |-
+    Inspect kit build history in the builder sandbox.
+
+    Each subcommand runs the matching docker buildx history command inside
+    the builder sandbox, against the buildx instance kit builds use. Flags
+    and arguments pass through verbatim.
+usage: sbx kit builder history COMMAND
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for history
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx kit builder - Manage the kit builder sandbox
+    - sbx kit builder history export - Export a kit build record into a bundle
+    - sbx kit builder history inspect - Inspect a kit build record
+    - sbx kit builder history logs - Print a kit build's logs
+    - sbx kit builder history ls - List kit build records
+    - sbx kit builder history rm - Remove kit build records
+    - sbx kit builder history trace - Show the execution trace of a kit build
