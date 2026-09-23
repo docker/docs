@@ -24,6 +24,10 @@ choose an environment and identify workflows that need cloud-specific setup.
 | Lifetime | Persists across stops until you remove it | Expires according to its time-to-live and timeout action |
 | Billing | No metered sandbox compute charge | [Pay-as-you-go compute](/manuals/agentic-platform/signup.md#billing) |
 
+If your workflow runs Docker inside the sandbox, review the
+[Docker exec and healthcheck limitation](usage.md#docker-exec-and-healthchecks).
+It can affect container setup, debugging, and Compose service readiness.
+
 ## Host-dependent features
 
 A cloud sandbox has no path back to the machine where you run `sbx`. The

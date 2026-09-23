@@ -330,3 +330,26 @@ $ sbx --cloud diagnose
 
 These checks don't require a local sandbox daemon. For local diagnostics,
 see [Troubleshooting](../troubleshooting.md).
+
+## Known limitations
+
+### Docker exec and healthchecks
+
+When running Docker inside a cloud sandbox, `docker exec` can access the
+sandbox VM filesystem instead of the target container's filesystem. This also
+affects `docker compose exec` and Docker healthchecks, which use the same
+execution path.
+
+Commands can fail because application files, binaries, or mounted data aren't
+found. They can also succeed while reading or writing the wrong files. A
+successful exit status doesn't confirm that the command used the target
+container's filesystem.
+
+Healthchecks can report incorrect results. Compose services that depend on
+`condition: service_healthy` can remain blocked even when the service they
+need is running.
+
+A container's main process, started by `docker run`, uses the correct
+filesystem. Where your workflow supports it, run setup or readiness checks
+as a container's main command. This avoids the affected exec path for that
+command but doesn't restore exec behavior or ongoing health monitoring.
