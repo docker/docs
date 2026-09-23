@@ -22,10 +22,6 @@ To follow this tutorial, you need:
   [Docker Agentic Platform subscription](/manuals/agentic-platform/signup.md#activate-cloud-access)
 - Node.js 20 or later and npm
 
-Your credentials need permission to create and read sandboxes, run commands,
-and delete sandboxes. The required API permissions are `sandboxesCreate`,
-`sandboxesRead`, `sandboxesCredential`, `sandboxesExec`, and `sandboxesDelete`.
-
 ## Create a project
 
 Create a directory and initialize a Node.js project:
@@ -55,66 +51,44 @@ Create a file named `index.ts` with the following code. The program prompts
 you to sign in, creates a sandbox, runs a command, and deletes the sandbox.
 
 ```typescript
-import { randomUUID } from 'node:crypto';
-import { oauth, SandboxesClient, type Sandbox } from '@docker/sandboxes-api';
+import { oauth, SandboxesClient } from '@docker/sandboxes-api';
 
-const auth = oauth({
-  onVerification({ verificationUriComplete, verificationUri, userCode }) {
-    console.log(`Open ${verificationUriComplete ?? verificationUri}`);
-    console.log(`Verification code: ${userCode}`);
-  },
+const client = new SandboxesClient({
+  auth: oauth({
+    onVerification({ verificationUriComplete, verificationUri, userCode }) {
+      console.log(`Open ${verificationUriComplete ?? verificationUri}`);
+      console.log(`Verification code: ${userCode}`);
+    },
+  }),
 });
-const client = new SandboxesClient({ auth });
-const requestId = randomUUID();
-let sandbox: Sandbox | undefined;
 
 try {
-  await auth.getAccessToken();
-  console.log('Create request ID:', requestId);
-  const operation = { signal: AbortSignal.timeout(300_000) };
-  sandbox = await client.kits.launch(
-    'shell',
-    { resources: { cpus: 2, memoryMib: 4096 } },
-    { ...operation, idempotencyKey: requestId },
-  );
+  let sandbox = await client.kits.launch('shell', {
+    resources: { cpus: 2, memoryMib: 4096 },
+  });
   console.log('Sandbox:', sandbox.name);
-  sandbox = await sandbox.waitUntilRunning(operation);
-  const result = await sandbox.processes.run(
-    { args: ['echo', 'Hello from Docker Sandboxes'] },
-    operation,
-  );
-  if (result.exitCode !== 0 || result.incomplete) {
-    throw new Error(`Command failed or output was incomplete: ${result.stderr}`);
-  }
+  sandbox = await sandbox.waitUntilRunning();
+
+  const result = await sandbox.processes.run({
+    args: ['echo', 'Hello from Docker Sandboxes'],
+  });
   console.log(result.stdout.trim());
+
+  const deleting = await sandbox.delete({ force: true });
+  await deleting?.waitUntilDeleted();
+  console.log('Deleted', sandbox.name);
 } finally {
-  try {
-    if (sandbox) {
-      const cleanup = { signal: AbortSignal.timeout(30_000) };
-      const deleting = await sandbox.delete({ force: true }, cleanup);
-      await deleting?.waitUntilDeleted(cleanup);
-      console.log('Deleted', sandbox.name);
-    }
-  } catch (error) {
-    console.error('Cleanup failed; inspect sandbox:', sandbox?.name);
-    throw error;
-  } finally {
-    await client.close();
-  }
+  await client.close();
 }
 ```
 
-`kits.launch` returns after the API accepts creation. `waitUntilRunning`
-waits until you can run commands. Creation, waiting, and command execution
-share a five-minute deadline, starting after browser sign-in.
+`kits.launch` creates the sandbox, and `waitUntilRunning` waits until it's
+ready to run commands. `processes.run` runs the command and collects its output.
+The program then deletes the sandbox and waits for deletion to finish. The
+`force` option permits deletion while the sandbox is running.
 
-The `finally` block attempts deletion even if waiting or command execution
-fails. Cleanup has a separate 30-second deadline. The `force` option permits
-deletion of a running sandbox.
-
-The SDK handles access tokens and the connection to the sandbox's endpoint.
-Closing the client releases its local resources. It doesn't revoke your
-Docker sign-in or delete remote sandboxes.
+The SDK handles sign-in, access tokens, and the connection to the sandbox.
+Closing the client releases its local resources.
 
 ## Run the program
 
@@ -131,16 +105,9 @@ it prints `Hello from Docker Sandboxes`, then confirms sandbox deletion.
 For CI jobs and other unattended applications, use
 [PAT authentication](authentication.md#authenticate-automation-with-a-pat).
 
-## If the program fails
-
-If the program reports a cleanup failure, use the printed sandbox name to
-inspect it with `client.get(name)` and delete it when you no longer need it.
-A timeout does not prove that creation failed or deletion succeeded.
-
-If a lost response leaves you without a sandbox name, use the printed request
-ID as the idempotency key when retrying the same create request. See
-[Errors and retries](errors.md#retry-without-duplicating-work) for how to retry
-without duplicating work.
+If the program fails before deleting the sandbox, use the printed sandbox
+name to retrieve it with `client.get(name)` and delete it when you're finished.
+Closing the client doesn't delete the sandbox.
 
 ## Next steps
 
