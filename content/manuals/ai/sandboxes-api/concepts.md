@@ -102,16 +102,18 @@ authorized reads return `notFound`.
 
 ### Wait for kit setup
 
-> [!IMPORTANT]
-> `waitUntilRunning()` and `kits.launchAndWait()` wait for the sandbox's
-> `running` state. They don't guarantee that the kit has finished installing
-> tools, cloning repositories, or running other setup commands.
+`waitUntilRunning()` and `kits.launchAndWait()` wait for the sandbox to reach
+the `running` state. Kit setup commands, such as installing tools or cloning
+a repository, can still be running at that point.
 
-Wait until the files or services your workload needs are ready.
-For example, wait for a completion marker that the kit writes
-after a successful repository clone, or check that a service responds to a
-health request. Poll with a delay between checks and a timeout so that failed
-setup doesn't leave your application waiting indefinitely.
+The SDK doesn't provide a helper that waits for all kit setup to finish. If
+your application depends on that setup, add a readiness check before starting
+its work. What you check depends on the kit and the task—for example, a
+completion marker written after a repository clone finishes, or a successful
+health check from a service.
+
+Poll with a delay between checks and a timeout so your application stops
+waiting if setup fails.
 
 ## Management and sandbox endpoints
 
