@@ -19,6 +19,8 @@ The example creates a policy, lists the available policies, reads the new one, a
 
 Supply a policy definition and a replacement using your SDK's policy input type. Include the destinations your workload needs. For a deny-by-default policy, allow the agent's model provider and any required package registries explicitly.
 
+Set `status: 'POLICY_STATUS_ACTIVE'` on both the policy and its replacement. Although the SDK type makes this field optional, the service rejects omitted or other values with `unimplemented`.
+
 An update replaces the definition rather than appending rules. Read the existing policy before deciding what to retain. Personal-policy mutations are not automatically replayed, so inspect the current state after an uncertain result before trying again.
 
 This is a disposable policy-management example: the returned policy ID has been deleted by the time the function finishes. To keep a policy for real workloads, remove that demonstration cleanup and store its ID with your application configuration. Follow [Control what a sandbox can reach](control-what-a-sandbox-can-reach.md) to attach it and inspect enforced rules.

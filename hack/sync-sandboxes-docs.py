@@ -15,6 +15,17 @@ GUIDES = ROOT / "content/manuals/ai/sandboxes-api/cookbook"
 REFERENCE = ROOT / "content/reference/api/sandboxes"
 
 
+def apply_export_patch(content, filename, patch):
+    with tempfile.TemporaryDirectory() as temporary:
+        target = Path(temporary) / filename
+        target.write_bytes(content)
+        subprocess.run(
+            ["git", "apply", "--whitespace=nowarn", str(MANIFEST.parent / patch)],
+            cwd=temporary, check=True,
+        )
+        return target.read_bytes()
+
+
 def main():
     source = json.loads(MANIFEST.read_text())
     archive = subprocess.check_output([
@@ -37,7 +48,11 @@ def main():
     for name in source["guides"]:
         if Path(name).name != name or not name.endswith(".md"):
             raise SystemExit(f"Invalid guide filename: {name}")
-        page = files[f"cookbook/outputs/guides/{name}"].decode()
+        content = files[f"cookbook/outputs/guides/{name}"]
+        patch = source.get("guidePatches", {}).get(name)
+        if patch:
+            content = apply_export_patch(content, name, patch)
+        page = content.decode()
         page = page.replace(
             "](install-the-sdks.md)", "](../install.md)"
         )
@@ -47,15 +62,7 @@ def main():
     # Temporary export correction, generated from the owning upstream source fix.
     # Apply before writing any outputs, and fail if the pinned export has drifted.
     if source.get("apiPatch"):
-        patch = MANIFEST.parent / source["apiPatch"]
-        with tempfile.TemporaryDirectory() as temporary:
-            target = Path(temporary) / "api.yaml"
-            target.write_bytes(specification)
-            subprocess.run(
-                ["git", "apply", "--whitespace=nowarn", str(patch)],
-                cwd=temporary, check=True,
-            )
-            specification = target.read_bytes()
+        specification = apply_export_patch(specification, "api.yaml", source["apiPatch"])
     outputs[REFERENCE / "api.yaml"] = specification
 
     for destination, content in outputs.items():

@@ -28,7 +28,10 @@ authentication, concepts, errors, and limits pages.
 
 The import excludes the upstream overview, installation page, and generated
 Markdown API reference. It redirects recipe installation links to the local
-installation page. Recipe code and prose are otherwise unchanged. The OpenAPI
+installation page. A temporary `guidePatches` entry adds the required active
+policy status to the network-policy recipe. Remove that entry and its patch
+when the upstream export includes the correction. Recipe code is unchanged.
+The OpenAPI
 YAML receives the temporary correction recorded in `source.json` as
 `apiPatch`. The patch removes 13 invalid generated examples without changing
 API schemas or operations. Missing examples are accepted by the renderer;
