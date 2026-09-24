@@ -15,7 +15,7 @@ operations to your application. Each recipe shows the relevant SDK calls and
 an expandable complete TypeScript example.
 
 Start with [Get started](../get-started.md) to run your first sandbox, or
-[install the SDK](../sdks.md) to use these examples in an existing project.
+[install the SDK](../install.md) to use these examples in an existing project.
 For HTTP operations and request fields, see the
 [API reference](/reference/api/sandboxes/latest/).
 

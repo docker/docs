@@ -39,7 +39,7 @@ Cloud compute is billed separately from your Docker subscription. See
 Use the TypeScript SDK in your JavaScript or TypeScript application. The SDK
 provides typed requests and responses, waits for sandboxes to start or stop,
 and handles file transfers and interactive processes.
-See [Install the SDK](sdks.md) for installation instructions.
+See [Install the SDK](install.md) for installation instructions.
 
 You can also call the REST API directly from any language or HTTP tool.
 See the [API reference](/reference/api/sandboxes/latest/) for operations,

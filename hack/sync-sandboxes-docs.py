@@ -39,7 +39,7 @@ def main():
             raise SystemExit(f"Invalid guide filename: {name}")
         page = files[f"cookbook/outputs/guides/{name}"].decode()
         page = page.replace(
-            "](install-the-sdks.md)", "](../sdks.md)"
+            "](install-the-sdks.md)", "](../install.md)"
         )
         outputs[GUIDES / name] = page.encode()
 
