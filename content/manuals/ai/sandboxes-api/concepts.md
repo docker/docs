@@ -168,7 +168,7 @@ supporting files into the serialized
 accepted by the API.
 
 The `kits` array holds the sandbox kit and any mixin kits that add
-configuration to it. See [Kits](../sandboxes/customize/kits.md) for how these kinds of
+configuration to it. See [Kits v2](../sandboxes/customize/kits-v2.md) for how these kinds of
 kits work together. The bundled launch helpers prepare this same input for
 the kits in their catalog.
 
