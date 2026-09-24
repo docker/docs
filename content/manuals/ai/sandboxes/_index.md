@@ -48,8 +48,8 @@ jump to the [usage guide](usage.md) for basic commands.
   Cursor to a sandbox over SSH
 - [MCP gateway](mcp-gateway.md) — register MCP servers and connect them to
   sandboxed agents
-- [Customize](customize/) — reusable templates and declarative kits for
-  extending or tailoring sandboxes
+- [Kits](customize/) — package tools and configuration into reusable
+  sandbox environments
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,
   networking
 - [Security](security/) — isolation model, credential handling, and

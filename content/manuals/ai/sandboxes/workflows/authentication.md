@@ -47,7 +47,7 @@ The token is never stored in plaintext inside the sandbox. See
 
 When using Docker Hub, authentication is handled automatically; `sbx` reuses
 your existing login session. For other registries, you need to configure
-credentials for `sbx` so it can pull private [templates](../customize/templates.md)
+credentials for `sbx` so it can pull private [templates](../usage.md#load-a-template)
 and kits when creating a sandbox:
 
 ```console

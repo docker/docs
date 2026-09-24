@@ -462,8 +462,15 @@ true`.
 
 `kits` accepts local directories, ZIP archives, OCI registry references, and
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
-configure the sandbox, and give the agent project-specific instructions. See
-[Kits](../customize/kits.md) for details.
+configure the sandbox, and give the agent project-specific instructions.
+The examples on this page pair built-in agents with v2 mixins. See
+[Kits v2](/manuals/ai/sandboxes/customize/kits-v2.md) for that format, or
+[Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
+when selecting v3 kits.
+
+An environment file selects kits and configures a sandbox's host resources.
+A kit descriptor defines the package itself. The environment file's
+`schemaVersion` is independent of the schema version in a kit descriptor.
 
 Explicit relative paths resolve from the directory of the environment file
 that declares them. These include `.`, `..`, paths that start with `./` or
