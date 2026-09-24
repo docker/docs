@@ -4,6 +4,8 @@ linkTitle: Get started
 description: Use the TypeScript SDK to create a cloud sandbox, run a command, and delete the sandbox.
 keywords: Docker Sandboxes API tutorial, cloud sandbox TypeScript, create sandbox, sandbox SDK quickstart
 weight: 5
+aliases:
+  - /ai/sandboxes/api/get-started/
 ---
 
 > [!NOTE]

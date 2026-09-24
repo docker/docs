@@ -1,14 +1,17 @@
 ---
-title: Docker Sandboxes API
-linkTitle: API and SDK
+title: Docker Sandboxes API and SDK
+linkTitle: Sandboxes API and SDK
 description: Use the Docker Sandboxes API and TypeScript SDK to manage cloud sandboxes programmatically.
 keywords: docker sandboxes API, cloud sandboxes API, sandbox SDK, TypeScript SDK, JavaScript
-weight: 35
+weight: 15
 params:
   sidebar:
+    group: AI and agents
     badge:
       color: violet
       text: Experimental
+aliases:
+  - /ai/sandboxes/api/
 ---
 
 > [!NOTE]
@@ -39,6 +42,8 @@ and handles file transfers and interactive processes.
 See [Install the SDK](sdks.md) for installation instructions.
 
 You can also call the REST API directly from any language or HTTP tool.
+
+To run agents from your terminal, see [Docker Sandboxes](../sandboxes/_index.md).
 
 ## Develop your application
 

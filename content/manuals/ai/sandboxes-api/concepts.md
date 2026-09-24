@@ -4,6 +4,8 @@ linkTitle: API concepts
 description: Learn how kits and images define a cloud sandbox, how to connect to it, and how to manage resources throughout their lifecycle.
 keywords: docker sandboxes API concepts, sandbox kits, sandbox images, cloud sandbox endpoint, API operations
 weight: 20
+aliases:
+  - /ai/sandboxes/api/concepts/
 ---
 
 > [!NOTE]
@@ -164,7 +166,7 @@ supporting files into the serialized
 accepted by the API.
 
 The `kits` array holds the sandbox kit and any mixin kits that add
-configuration to it. See [Kits](../customize/kits.md) for how these kinds of
+configuration to it. See [Kits](../sandboxes/customize/kits.md) for how these kinds of
 kits work together. The bundled launch helpers prepare this same input for
 the kits in their catalog.
 

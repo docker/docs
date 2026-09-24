@@ -3,6 +3,8 @@ title: Compute sizes and limits
 description: Choose a Cloud Sandboxes compute size and plan for account quotas and request rate limits.
 keywords: cloud sandboxes, compute sizes, CPU, memory, quotas, rate limits
 weight: 50
+aliases:
+  - /ai/sandboxes/api/limits/
 ---
 
 > [!NOTE]

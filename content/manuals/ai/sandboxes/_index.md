@@ -37,6 +37,9 @@ $ sbx run claude
 See the [get started guide](get-started.md) for a first-session walkthrough, or
 jump to the [usage guide](usage.md) for basic commands.
 
+To create and manage cloud sandboxes from your application, see
+[Sandboxes API and SDK](../sandboxes-api/_index.md).
+
 ## Learn more
 
 - [Agents](agents/) — supported agents and per-agent configuration

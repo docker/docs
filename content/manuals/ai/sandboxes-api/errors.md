@@ -3,6 +3,8 @@ title: Errors and retries
 description: Handle Docker Sandboxes API errors, recover from failed waits, and retry requests without duplicating work.
 keywords: docker sandboxes API errors, REST errors, API retries, idempotency keys, rate limits
 weight: 40
+aliases:
+  - /ai/sandboxes/api/errors/
 ---
 
 > [!NOTE]

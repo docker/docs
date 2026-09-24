@@ -4,6 +4,8 @@ linkTitle: Install the SDK
 description: Install and use the Docker Sandboxes SDK in your JavaScript or TypeScript application.
 keywords: docker sandboxes SDK, TypeScript SDK, JavaScript, npm, install sandbox SDK
 weight: 10
+aliases:
+  - /ai/sandboxes/api/sdks/
 ---
 
 > [!NOTE]

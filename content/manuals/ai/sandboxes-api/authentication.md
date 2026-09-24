@@ -3,6 +3,8 @@ title: Authentication and authorization
 description: Authenticate requests to the Docker Sandboxes API with access tokens and learn which permissions your application needs.
 keywords: docker sandboxes API authentication, sandbox authorization, bearer token, sandbox permissions, owner scope
 weight: 30
+aliases:
+  - /ai/sandboxes/api/authentication/
 ---
 
 > [!NOTE]
