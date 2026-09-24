@@ -73,7 +73,8 @@ The exact format varies and depends on what triggered the workflow.
 > identifiers for default subject claims. For example:
 > `repo:octocat@123456/my-repo@456789:ref:refs/heads/main`. See the
 > [GitHub changelog](https://github.blog/changelog/2026-04-23-immutable-subject-claims-for-github-actions-oidc-tokens/)
-> for more details.
+> for more details. You can find your repository's IDs in GitHub under
+> Settings -> Actions -> OIDC to use in the examples below.
 
 You can use wildcards to match across repositories or branches:
 
