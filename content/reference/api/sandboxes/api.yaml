@@ -909,9 +909,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CreateImageRequest"
-            example:
-              displayName: my-image
-              fromImage: {}
         required: true
       responses:
         "201":
@@ -930,13 +927,6 @@ paths:
                             - preparing
                       required:
                         - status
-              example:
-                name: images/img_example
-                uid: img_example
-                createdAt: 2026-01-01T00:00:00Z
-                etag: '"example-version"'
-                status: completed
-                updatedAt: 2026-01-01T00:00:00Z
           headers:
             Cache-Control:
               required: true
@@ -962,13 +952,6 @@ paths:
                           - preparing
                     required:
                       - status
-              example:
-                name: images/img_example
-                uid: img_example
-                createdAt: 2026-01-01T00:00:00Z
-                etag: '"example-version"'
-                status: preparing
-                updatedAt: 2026-01-01T00:00:00Z
           headers:
             Cache-Control:
               required: true
@@ -1065,13 +1048,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Image"
-              example:
-                name: images/img_example
-                uid: img_example
-                createdAt: 2026-01-01T00:00:00Z
-                etag: '"example-version"'
-                status: completed
-                updatedAt: 2026-01-01T00:00:00Z
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -1476,10 +1452,6 @@ paths:
                           - pending
                     required:
                       - status
-              example:
-                server: mcp-servers/example
-                status: pending
-                authorizationUrl: https://example.com/authorize
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -1535,17 +1507,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetNetworkPoliciesResponse"
-              example:
-                effective:
-                  mode: allowAll
-                exact:
-                  revision: example-revision
-                  selectorVersion: destination.v1
-                  nodes:
-                    - constant: "true"
-                      source:
-                        origin: organization
-                        id: example-org
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
@@ -2261,9 +2222,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CreateSandboxRequest"
-            example:
-              displayName: my-sandbox
-              imageRef: ubuntu:24.04
         required: true
       responses:
         "201":
@@ -2285,13 +2243,6 @@ paths:
                             - status
                       required:
                         - core
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: running
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -2315,13 +2266,6 @@ paths:
                           - status
                     required:
                       - core
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: creating
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -2409,13 +2353,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Sandbox"
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: running
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -2511,13 +2448,6 @@ paths:
                           - status
                     required:
                       - core
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: deleting
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -2650,13 +2580,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Sandbox"
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: running
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -3024,9 +2947,6 @@ paths:
                           - provisioning
                     required:
                       - state
-              example:
-                state: provisioning
-                reused: false
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
@@ -3110,17 +3030,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetNetworkPoliciesResponse"
-              example:
-                effective:
-                  mode: allowAll
-                exact:
-                  revision: example-revision
-                  selectorVersion: destination.v1
-                  nodes:
-                    - constant: "true"
-                      source:
-                        origin: organization
-                        id: example-org
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
@@ -3587,13 +3496,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Sandbox"
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: running
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -3702,13 +3604,6 @@ paths:
                             - creating
                       required:
                         - status
-              example:
-                name: snapshots/snap_example
-                uid: snap_example
-                createdAt: 2026-01-01T00:00:00Z
-                etag: '"example-version"'
-                status: ready
-                sandbox: sandboxes/sbx_example
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -3727,13 +3622,6 @@ paths:
                           - creating
                     required:
                       - status
-              example:
-                name: snapshots/snap_example
-                uid: snap_example
-                createdAt: 2026-01-01T00:00:00Z
-                etag: '"example-version"'
-                status: creating
-                sandbox: sandboxes/sbx_example
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -3965,13 +3853,6 @@ paths:
                             - status
                       required:
                         - core
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: running
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -3994,13 +3875,6 @@ paths:
                           - status
                     required:
                       - core
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: starting
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -4131,13 +4005,6 @@ paths:
                             - status
                       required:
                         - core
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: stopped
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -4160,13 +4027,6 @@ paths:
                           - status
                     required:
                       - core
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: stopping
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -4336,10 +4196,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CreateSecretRequest"
-            example:
-              displayName: service-token
-              token:
-                value: example-token
         required: true
       responses:
         "201":
@@ -4348,13 +4204,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Secret"
-              example:
-                name: secrets/sec_example
-                uid: sec_example
-                createdAt: 2026-01-01T00:00:00Z
-                etag: '"example-version"'
-                updatedAt: 2026-01-01T00:00:00Z
-                type: token
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -4447,13 +4296,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Secret"
-              example:
-                name: secrets/sec_example
-                uid: sec_example
-                createdAt: 2026-01-01T00:00:00Z
-                etag: '"example-version"'
-                updatedAt: 2026-01-01T00:00:00Z
-                type: token
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -4546,9 +4388,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/UpdateSecretBody"
-            example:
-              token:
-                value: replacement-example-token
         required: true
       responses:
         "200":
@@ -4557,13 +4396,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Secret"
-              example:
-                name: secrets/sec_example
-                uid: sec_example
-                createdAt: 2026-01-01T00:00:00Z
-                etag: '"example-version"'
-                updatedAt: 2026-01-01T00:00:00Z
-                type: token
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -4853,13 +4685,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Snapshot"
-              example:
-                name: snapshots/snap_example
-                uid: snap_example
-                createdAt: 2026-01-01T00:00:00Z
-                etag: '"example-version"'
-                status: ready
-                sandbox: sandboxes/sbx_example
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -5059,13 +4884,6 @@ paths:
                             - status
                       required:
                         - core
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: running
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -5089,13 +4907,6 @@ paths:
                           - status
                     required:
                       - core
-              example:
-                name: sandboxes/sbx_example
-                uid: sbx_example
-                core:
-                  status: creating
-                  createdAt: 2026-01-01T00:00:00Z
-                  etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -5252,11 +5063,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Volume"
-              example:
-                name: volumes/vol_example
-                uid: vol_example
-                createdAt: 2026-01-01T00:00:00Z
-                etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -5349,11 +5155,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Volume"
-              example:
-                name: volumes/vol_example
-                uid: vol_example
-                createdAt: 2026-01-01T00:00:00Z
-                etag: '"example-version"'
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.

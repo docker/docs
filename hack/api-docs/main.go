@@ -540,12 +540,7 @@ func (d *Document) validate(metaDir string) {
 				d.issue("S8", str(param["pointer"])+"/description", "Parameter description requires editorial review")
 			}
 		}
-		for _, variant := range arr(op["variants"]) {
-			v := obj(variant)
-			if str(v["media"]) != "" && len(arr(v["examples"])) == 0 {
-				d.issue("S11", str(v["pointer"]), "Media variant needs a reviewed example or transfer fixture")
-			}
-		}
+
 	}
 }
 func (d *Document) schemaExamples(s any, p string) {

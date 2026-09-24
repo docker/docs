@@ -382,3 +382,48 @@ func TestExternalDynamicReference(t *testing.T) {
 		t.Fatalf("external dynamic reference rejected: %v", d.Diagnostics)
 	}
 }
+
+func TestExamplesAreOptionalButValidatedWhenPresent(t *testing.T) {
+	d := fixture(t, "valid.yaml")
+	var remove func(any)
+	remove = func(value any) {
+		switch v := value.(type) {
+		case map[string]any:
+			delete(v, "example")
+			delete(v, "examples")
+			for _, child := range v {
+				remove(child)
+			}
+		case []any:
+			for _, child := range v {
+				remove(child)
+			}
+		}
+	}
+	remove(d.Root)
+	d.validate("")
+	if len(d.Diagnostics) != 0 {
+		t.Fatalf("missing examples must be accepted: %+v", d.Diagnostics)
+	}
+	invalid := fixture(t, "invalid-example.yaml")
+	invalid.validate("")
+	for _, diagnostic := range invalid.Diagnostics {
+		if diagnostic.Rule == "example" {
+			return
+		}
+	}
+	t.Fatal("invalid supplied example must still fail")
+}
+
+func TestRequestWithoutExampleUsesBodyFile(t *testing.T) {
+	op := Object{"method": "POST", "path": "/jobs", "servers": []any{Object{"url": "https://api.test"}},
+		"variants": []any{Object{"direction": "Request", "media": "application/json", "required": true, "examples": []any{}}},
+	}
+	command, notes := curlExample(Source{}, op)
+	if !strings.Contains(command, "--data-binary @request-body") || strings.Contains(command, "--data-raw") {
+		t.Fatalf("request must use a body file, not an invented payload: %s", command)
+	}
+	if !strings.Contains(strings.Join(notes, " "), "Prepare request-body") {
+		t.Fatalf("missing body instructions: %v", notes)
+	}
+}
