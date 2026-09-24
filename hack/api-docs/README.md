@@ -86,3 +86,7 @@ screens.
 
 Callbacks and webhook navigation are unsupported and fail validation. Request
 examples are POSIX shell templates; they do not make service calls.
+
+Examples are optional. Supplied examples must validate against their schemas.
+When a request body has no example, the generated cURL command reads from
+`request-body` and directs the reader to prepare that file from the schema.

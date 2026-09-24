@@ -39,6 +39,20 @@
       "manual": "/manuals/ai/sandboxes/governance/",
       "connection": "hosted",
       "guides": []
+    },
+    {
+      "id": "sandboxes",
+      "product": "sandboxes",
+      "title": "Docker Sandboxes",
+      "source": "content/reference/api/sandboxes/api.yaml",
+      "owner": "docker/sbx-api",
+      "manual": "/manuals/ai/sandboxes-api/",
+      "connection": "hosted",
+      "experimental": true,
+      "guides": [
+        "/manuals/ai/sandboxes-api/authentication.md",
+        "/manuals/ai/sandboxes-api/get-started.md"
+      ]
     }
   ],
   "legacyAPIs": [

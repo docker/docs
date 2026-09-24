@@ -1,0 +1,19 @@
+{{ $socket := .socket }}
+{{ $api := .api }}
+<section>
+  <h2>WebSocket session</h2>
+  <p>Subprotocol: <code>{{ $socket.subprotocol }}</code></p>
+  {{ range $key := slice "authentication" "browser" "reconnect" "terminalFrame" }}
+    {{ with index $socket $key }}<p>{{ . }}</p>{{ end }}
+  {{ end }}
+  {{ range $frame := slice (dict "key" "requestFrame" "title" "Client frames") (dict "key" "responseFrame" "title" "Server frames") (dict "key" "errorFrame" "title" "Error frames") }}
+    {{ with index $socket $frame.key }}
+      <h3>{{ $frame.title }}</h3>
+      {{ partial "api-reference/schema.html" (dict "schema" . "api" $api "depth" 0) }}
+    {{ end }}
+  {{ end }}
+  <details>
+    <summary>Handshake, resume fields, and close codes</summary>
+    <pre><code>{{ $socket | jsonify (dict "indent" "  ") }}</code></pre>
+  </details>
+</section>

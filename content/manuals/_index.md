@@ -24,6 +24,10 @@ params:
     description: Run AI coding agents in isolated environments.
     icon: command-line
     link: /ai/sandboxes/
+  - title: Sandboxes API and SDK
+    description: Create and manage cloud sandboxes from your applications.
+    icon: code-bracket
+    link: /ai/sandboxes-api/
   - title: MCP Catalog and Toolkit
     description: Augment your AI workflow with MCP servers.
     icon: /icons/toolkit.svg
