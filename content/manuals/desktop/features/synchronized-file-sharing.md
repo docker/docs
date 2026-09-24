@@ -1,35 +1,3 @@
----
-title: Synchronized file shares
-weight: 70
-description: Get started with Synchronized file shares on Docker Desktop.
-keyword: mutagen, file sharing, docker desktop, bind mounts
----
-
-{{< summary-bar feature_name="Synchronized file sharing" >}}
-
-Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. 
- 
-## Who is it for?
-
-Synchronized file shares is ideal for developers who: 
-- Have large repositories or monorepos with 100 000 files or more totaling hundreds of megabytes or even gigabytes.
-- Are using virtual filesystems, such as VirtioFS and gRPC FUSE which are no longer scaling well with their codebases. 
-- Regularly encounter performance limitations.
-- Don't want to worry about file ownership or spend time resolving conflicting file-ownership information when modifying multiple containers.
-
-## How does Synchronized file shares work?
-
-A Synchronized file share behaves just like a virtual file share, but takes advantage of a high-performance, low-latency code synchronization engine to create a synchronized cache of the host files on an ext4 filesystem within the Docker Desktop VM. If you make filesystem changes on the host or in the VM’s containers, it propagates via bidirectional synchronization.
-
-After creating a file share instance, any container using a bind mount that points to a location on the host filesystem matching the specified synchronized file share location, or a subdirectory within it,  utilizes the Synchronized File Shares feature. Bind mounts that don't satisfy this condition are passed to the normal virtual filesystem [bind-mounting mechanism](/manuals/engine/storage/bind-mounts.md), for example VirtioFS or gRPC-FUSE.
-
-> [!NOTE]
->
-> Synchronized file shares is not used by Kubernetes' `hostPath` volumes in Docker Desktop.
-
-> [!IMPORTANT]
->
-> Synchronized file shares isn't available when using Windows containers. 
 
 ## Create a file share instance 
 
