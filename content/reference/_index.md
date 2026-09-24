@@ -34,7 +34,7 @@ params:
   - title: Sandboxes API (Experimental)
     description: Create cloud sandboxes, run processes, and manage sandbox resources.
     icon: code-bracket
-    link: /reference/api/sandboxes/
+    link: /reference/api/sandboxes/latest/
   - title: Engine API
     description: The main API for Docker, provides programmatic access to a daemon.
     icon: code-bracket

@@ -116,7 +116,7 @@ Account permissions also control access to optional features. See
 
 If you call the REST API without the SDK, obtain and renew access tokens in
 your application. Exchange your Docker ID and a PAT with `sandbox:use`
-permission using the [Docker Hub authentication API](/reference/api/hub/latest.md#tag/authentication-api/operation/AuthCreateAccessToken):
+permission using the [Docker Hub authentication API](/reference/api/hub/latest/operations/AuthCreateAccessToken/):
 
 ```console
 $ ACCESS_TOKEN=$(curl --silent --show-error --fail --request POST \

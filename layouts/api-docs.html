@@ -37,7 +37,7 @@
                 Hosted service
               {{ end }}</span
             >
-            <h2>{{ .title }}</h2>
+            <h2>{{ .title }}{{ if .experimental }}· Experimental{{ end }}</h2>
             <p>API {{ .version }} · {{ len .operations }} operations</p>
             <span>Explore reference →</span></a
           >
@@ -51,7 +51,7 @@
                 Hosted service
               {{ end }}</span
             >
-            <h2>{{ .title }}</h2>
+            <h2>{{ .title }}{{ if .experimental }}· Experimental{{ end }}</h2>
             <p>{{ .description }}</p>
             <span>Explore reference →</span>
           </a>
@@ -63,6 +63,15 @@
         <a href="{{ $api.url }}">{{ $api.title }}</a> /
         <span>API {{ $api.version }}</span>
       </nav>
+      {{ if $api.experimental }}
+        <p class="api-label">Experimental</p>
+        {{ if eq .Params.view "overview" }}
+          <p>
+            This API is experimental. Features, interfaces, and behavior may
+            change.
+          </p>
+        {{ end }}
+      {{ end }}
       <div class="api-tools">
         <label
           >API version
@@ -207,6 +216,11 @@
                     {{ end }}
                   </p>
                 {{ end }}
+                {{ range .servers }}
+                  {{ range $name, $variable := .variables }}
+                    <p><code>{{ $name }}</code>: {{ $variable.description }}</p>
+                  {{ end }}
+                {{ end }}
                 {{ if not .security }}
                   <p>
                     No HTTP authentication requirement is declared for this
@@ -230,6 +244,9 @@
                       </li>
                     {{ end }}
                   </ul>
+                {{ end }}
+                {{ with index .raw "x-websocket" }}
+                  {{ partial "api-reference/websocket.html" (dict "socket" . "api" $api) }}
                 {{ end }}
                 <h2>Parameters</h2>
                 {{ if not .parameters }}
@@ -307,6 +324,16 @@
                       <h4>Stream item</h4>
                       {{ partial "api-reference/schema.html" (dict "schema" $v.itemSchema "api" $api "depth" 0) }}
                     {{ end }}
+                    {{ range $key := slice "encoding" "itemEncoding" "prefixEncoding" }}
+                      {{ with index $v $key }}
+                        <details>
+                          <summary>
+                            {{ $key }}: content types and part headers
+                          </summary>
+                          <pre><code>{{ . | jsonify (dict "indent" "  ") }}</code></pre>
+                        </details>
+                      {{ end }}
+                    {{ end }}
                     {{ if $v.examples }}
                       <div data-api-examples>
                         {{ if gt (len $v.examples) 1 }}
@@ -341,16 +368,23 @@
               </div>
               <aside class="api-request">
                 <div class="api-request-heading">
-                  <h2>Example request</h2>
-                  <span>Shell</span>
+                  <h2>
+                    {{ if .curl }}
+                      Example request
+                    {{ else }}
+                      WebSocket client
+                    {{ end }}
+                  </h2>
+                  {{ if .curl }}<span>Shell</span>{{ end }}
                 </div>
-                <p>
-                  Replace placeholders and supply the required credentials or
-                  request body.
-                </p>
-                <pre><code data-api-copy-source>{{ .curl }}</code></pre>
-                <button type="button" data-api-copy>Copy request</button
-                >{{ range .curlNotes }}<p>{{ . }}</p>{{ end }}
+                {{ if .curl }}
+                  <p>
+                    Replace placeholders and supply the required credentials or
+                    request body.
+                  </p>
+                  <pre><code data-api-copy-source>{{ .curl }}</code></pre>
+                  <button type="button" data-api-copy>Copy request</button>
+                {{ end }}{{ range .curlNotes }}<p>{{ . }}</p>{{ end }}
               </aside>
             </div>
           {{ end }}

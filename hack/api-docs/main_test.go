@@ -47,6 +47,36 @@ func TestActualDialectAndReferences(t *testing.T) {
 		t.Fatal("duplicate overridden parameter")
 	}
 }
+
+func TestSequentialMediaEncodingPreserved(t *testing.T) {
+	d := fixture(t, "valid.yaml")
+	op := obj(obj(obj(d.Root["paths"])["/events"])["get"])
+	response := obj(obj(op["responses"])["200"])
+	encoding := Object{"contentType": "application/json", "headers": Object{
+		"Content-Disposition": Object{"schema": Object{"type": "string"}},
+	}}
+	response["content"] = Object{"multipart/mixed": Object{
+		"itemSchema": true, "example": jsonNumber("0"), "itemEncoding": encoding,
+	}}
+	d.validate("")
+	if len(d.Diagnostics) != 0 {
+		t.Fatalf("sequential media fixture must be valid: %+v", d.Diagnostics)
+	}
+	variants := d.variants(op, "/paths/~1events/get")
+	if len(variants) != 1 || !reflect.DeepEqual(obj(variants[0])["itemEncoding"], encoding) {
+		t.Fatalf("stream content types and part headers were lost: %#v", variants)
+	}
+}
+
+func TestWebSocketDoesNotProducePlainHTTPRequest(t *testing.T) {
+	op := Object{"method": "GET", "path": "/interact", "raw": Object{
+		"x-websocket": Object{"subprotocol": "sandboxes.v1"},
+	}}
+	command, notes := curlExample(Source{}, op)
+	if command != "" || len(notes) == 0 || !strings.Contains(notes[0], "WebSocket") {
+		t.Fatalf("WebSocket operation must describe its client requirements, not a plain HTTP request: %q %v", command, notes)
+	}
+}
 func jsonNumber(s string) any {
 	v, e := js.UnmarshalJSON(strings.NewReader(s))
 	if e != nil {

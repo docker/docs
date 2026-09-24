@@ -42,37 +42,13 @@ def main():
         )
         outputs[GUIDES / name] = page.encode()
 
-    reference = files["cookbook/outputs/api-reference/index.md"].decode()
-    reference = reference.replace(
-        "title: Cloud Sandboxes API reference",
-        "title: Docker Sandboxes API reference\nlayout: api-reference-generated",
-    ).replace(
-        "linkTitle: API reference", "linkTitle: Sandboxes"
-    ).replace(
-        "    group: APIs and SDKs",
-        "    badge:\n      color: violet\n      text: Experimental",
-    ).replace(
-        "](../_index.md)", "](/manuals/ai/sandboxes-api/_index.md)"
-    ).replace(
-        "](../connect-to-cloud-with-a-bearer-token.md)",
-        "](/manuals/ai/sandboxes-api/authentication.md)",
-    )
-    front, body = reference.split("---\n", 2)[1:]
-    notice = (
-        "> [!NOTE]\n"
-        "> The Docker Sandboxes API and SDK are experimental. Features, interfaces,\n"
-        "> and behavior may change.\n\n"
-    )
-    outputs[REFERENCE / "index.md"] = (
-        "---\n" + front + "---\n\n" + notice + body.lstrip()
-    ).encode()
     # Preserve the published spec byte for byte, including streaming contracts.
     outputs[REFERENCE / "api.yaml"] = files["cookbook/outputs/api-reference/api.yaml"]
 
     for destination, content in outputs.items():
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(content)
-    print(f"Imported {len(source['guides'])} recipes and the public API reference")
+    print(f"Imported {len(source['guides'])} recipes and the public OpenAPI specification")
 
 
 if __name__ == "__main__":

@@ -42,7 +42,7 @@ and handles file transfers and interactive processes.
 See [Install the SDK](sdks.md) for installation instructions.
 
 You can also call the REST API directly from any language or HTTP tool.
-See the [API reference](/reference/api/sandboxes/index.md) for operations,
+See the [API reference](/reference/api/sandboxes/latest/) for operations,
 request fields, responses, and the downloadable OpenAPI specification.
 
 To run agents from your terminal, see [Docker Sandboxes](../sandboxes/_index.md).

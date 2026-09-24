@@ -100,14 +100,15 @@ type Diagnostic struct {
 	Message string `json:"message"`
 }
 type Source struct {
-	ID         string   `json:"id"`
-	Product    string   `json:"product"`
-	Title      string   `json:"title"`
-	Source     string   `json:"source"`
-	Owner      string   `json:"owner"`
-	Manual     string   `json:"manual"`
-	Connection string   `json:"connection"`
-	Guides     []string `json:"guides"`
+	Experimental bool     `json:"experimental,omitempty"`
+	ID           string   `json:"id"`
+	Product      string   `json:"product"`
+	Title        string   `json:"title"`
+	Source       string   `json:"source"`
+	Owner        string   `json:"owner"`
+	Manual       string   `json:"manual"`
+	Connection   string   `json:"connection"`
+	Guides       []string `json:"guides"`
 }
 type Registry struct{ resources map[string]any }
 
@@ -646,7 +647,7 @@ func (d *Document) variants(op Object, p string) []any {
 		for _, media := range keys(content) {
 			v := obj(content[media])
 			a := Object{"direction": direction, "status": status, "description": container["description"], "headers": container["headers"], "media": media, "pointer": ptr + "/content/" + esc(media), "examples": d.mediaExamples(v), "required": container["required"]}
-			for _, k := range []string{"schema", "itemSchema", "encoding"} {
+			for _, k := range []string{"schema", "itemSchema", "encoding", "itemEncoding", "prefixEncoding"} {
 				if s, ok := v[k]; ok {
 					a[k] = s
 				}

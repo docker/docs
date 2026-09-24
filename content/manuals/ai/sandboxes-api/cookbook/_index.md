@@ -17,7 +17,7 @@ an expandable complete TypeScript example.
 Start with [Get started](../get-started.md) to run your first sandbox, or
 [install the SDK](../sdks.md) to use these examples in an existing project.
 For HTTP operations and request fields, see the
-[API reference](/reference/api/sandboxes/index.md).
+[API reference](/reference/api/sandboxes/latest/).
 
 ## Get started
 

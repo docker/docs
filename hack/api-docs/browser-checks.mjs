@@ -8,8 +8,8 @@ export default async function verify(page, base = "http://localhost:1314") {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(base + "/reference/api/");
   assert(
-    (await page.locator(".api-card").count()) === 5,
-    "Five API catalog entries",
+    (await page.locator(".api-card").count()) === 6,
+    "Six API catalog entries",
   );
   assert(
     (await page.locator("nav.navbar-font").count()) === 1,
@@ -87,6 +87,41 @@ export default async function verify(page, base = "http://localhost:1314") {
   assert(
     (await page.locator('[data-api-view="overview"]').count()) === 1,
     "Governance alias reaches generated overview",
+  );
+  await page.goto(base + "/ai/sandboxes-api/");
+  assert(
+    (await page
+      .locator('nav.navbar-font a[href="/reference/api/sandboxes/latest/"]')
+      .count()) === 1,
+    "Sandboxes manual links to the API reference in the sidebar",
+  );
+  await page.goto(base + "/reference/api/sandboxes/");
+  await page.waitForURL("**/reference/api/sandboxes/latest/");
+  assert(
+    (await page.locator("article").textContent()).includes("experimental"),
+    "Sandboxes alias reaches the experimental API overview",
+  );
+  await page.goto(
+    base + "/reference/api/sandboxes/latest/operations/download/",
+  );
+  assert(
+    (await page.locator("article").textContent()).includes("itemEncoding"),
+    "File download renders stream encoding",
+  );
+  await page.goto(
+    base + "/reference/api/sandboxes/latest/operations/interact/",
+  );
+  assert(
+    (await page.locator("article").textContent()).includes(
+      "WebSocket session",
+    ) && (await page.locator("[data-api-copy]").count()) === 0,
+    "Interactive processes show WebSocket requirements instead of a plain HTTP example",
+  );
+  assert(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+    "Sandboxes operation fits a narrow screen",
   );
   const context = await page
     .context()
