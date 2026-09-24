@@ -5,6 +5,12 @@ description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
 
+The following diagnostics and recovery steps apply to local sandboxes. Use
+[`sbx --cloud diagnose`](cloud/usage.md#diagnose-cloud-access) to check cloud
+connectivity and account access. For cloud files, expiration, and network access, see
+[Cloud sandboxes](cloud/). Local daemon restarts and `sbx reset` do not repair
+cloud sandbox state.
+
 ## Run diagnostics
 
 Before digging into a specific issue, run
@@ -156,8 +162,8 @@ can't be recovered. Use an address-based rule in that case:
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-UDP and ICMP traffic is blocked at the network layer and can't be unblocked
-with policy rules.
+UDP requires [experimental UDP egress](governance/access-controls/local.md#allow-outbound-udp)
+and UDP allow rules. ICMP is blocked and can't be unblocked with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
 server's hostname or IP address, or use HTTPS URLs instead:

@@ -5,6 +5,10 @@ description: The resource model, rule syntax, and evaluation logic behind Docker
 keywords: docker sandboxes, policy concepts, rule syntax, network rules, filesystem rules, mcp policy, cedar policy, precedence, rule evaluation
 ---
 
+The governance described here applies to local sandboxes. Cloud sandboxes
+use separate network policy configuration. See
+[Cloud network policy](../cloud/network-policy.md) for cloud controls.
+
 ## Resource model
 
 Docker sandbox governance is built around two resource types: **policies** and
@@ -77,10 +81,10 @@ plus every team-scoped policy for a team they belong to. See
 
 ### Network rules
 
-Network rules use the action `connect:tcp`. Resources are hostnames, CIDR
-ranges, or ports. The governance policy schema also accepts `connect:udp`, but
-Docker Sandboxes always blocks direct external UDP and ICMP. `connect:udp`
-rules have no effect.
+Network rules use `connect:tcp` for TCP and `connect:udp` for UDP. Resources are
+hostnames, CIDR ranges, or ports. UDP requires
+[experimental outbound UDP](access-controls/local.md#allow-outbound-udp).
+ICMP is blocked.
 
 **Hostname patterns**
 

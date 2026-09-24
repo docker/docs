@@ -7,6 +7,8 @@ description: |
 keywords: docker sandboxes, cursor, cursor agent, ai agent, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This guide covers authentication, configuration, and usage of Cursor in a
 sandboxed environment.
 

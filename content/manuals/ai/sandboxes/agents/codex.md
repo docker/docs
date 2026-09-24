@@ -7,6 +7,8 @@ description: |
 keywords: docker sandboxes, codex, openai, ai agent, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This guide covers authentication, configuration, and usage of Codex in a
 sandboxed environment.
 

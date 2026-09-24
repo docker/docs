@@ -34,8 +34,8 @@ For domain patterns, wildcards, CIDR ranges, and filesystem path syntax, see
 Outbound TCP traffic passes through a proxy on your host, which enforces access
 rules on every connection. Non-HTTP TCP traffic, including SSH, can be allowed
 with a hostname rule (for example, `sbx policy allow network "myhost:22"`) or an
-address-based rule. UDP and ICMP are blocked at the network layer and can't be
-unblocked with policy rules.
+address-based rule. UDP requires the experimental feature and policy rules
+described in [Allow outbound UDP](#allow-outbound-udp). ICMP is blocked.
 
 If you haven't chosen a default preset, the CLI prompts you before it runs a
 sandbox. Running `sbx policy reset` clears the preset and prompts you to choose
@@ -57,7 +57,7 @@ Initialize the global network policy for your sandboxes:
 
 | Preset      | Description                                                                                                                                       |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Open        | All outbound traffic is allowed. Equivalent to adding a wildcard allow rule with `sbx policy allow network "**"`.                                 |
+| Open        | All outbound TCP traffic is allowed. Equivalent to adding a wildcard allow rule with `sbx policy allow network "**"`. |
 | Balanced    | Default deny, with a baseline allowlist covering AI provider APIs, package managers, code hosts, container registries, and common cloud services. |
 | Locked Down | No baseline allow rules. Destinations need an allow rule from you or a kit. |
 
@@ -241,6 +241,34 @@ To inspect which policies are active and where they come from, use
 rule-level detail including rule IDs. To inspect a single policy or rule in
 full, use `sbx policy inspect`. See
 [Monitoring](../monitor-and-enforce/monitoring.md).
+
+### Allow outbound UDP
+
+Outbound UDP is experimental and disabled by default. Turn on experimental
+features and UDP egress before adding UDP allow rules:
+
+```console
+$ sbx settings set platform.allowExperimentalFeatures true
+$ sbx settings set feature.udp-egress true
+$ sbx policy allow network --protocol udp api.example.com:443
+```
+
+Local allow rules apply to TCP by default. Use `--protocol udp` for UDP or
+`--protocol tcp,udp` for both. Deny rules apply to both protocols by default.
+Use `--protocol` to restrict a deny rule to one protocol.
+
+UDP follows the same organization and local policy precedence as TCP. It is
+refused when the destination requires an HTTP, SOCKS5, system, or PAC-selected
+proxy, because those proxies can't carry UDP. ICMP remains blocked.
+
+Inspect UDP rules or check a destination:
+
+```console
+$ sbx policy ls --protocol udp
+$ sbx policy check network --protocol udp api.example.com:443
+```
+
+The CLI warns if you save a UDP rule while UDP egress is disabled.
 
 ## Testing policy
 

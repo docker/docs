@@ -7,6 +7,8 @@ description: |
 keywords: docker sandboxes, kiro, ai agent, authentication, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This guide covers authentication, configuration, and usage of Kiro in a
 sandboxed environment.
 

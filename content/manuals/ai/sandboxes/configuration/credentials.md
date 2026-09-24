@@ -8,6 +8,10 @@ aliases:
   - /ai/sandboxes/security/credentials/
 ---
 
+These credential stores and authentication flows apply to local sandboxes.
+Cloud credentials require separate setup: see
+[Authenticate cloud agents](../cloud/credentials.md).
+
 Most agents need an API key for their model provider. An HTTP/HTTPS proxy on
 your host intercepts outbound requests from the sandbox, looks up the matching
 credential on the host, and overwrites the auth header before forwarding. The

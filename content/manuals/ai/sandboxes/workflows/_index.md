@@ -8,7 +8,7 @@ toc_max: 2
 ---
 
 Choose a workflow based on how you want to develop, authenticate tools, or run
-sandboxes in automation. For command syntax and lifecycle basics, see
+local sandboxes in automation. For command syntax and lifecycle basics, see
 [Usage](../usage.md).
 
 ## Choose how code moves

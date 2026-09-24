@@ -6,15 +6,18 @@ description: What a sandbox permits and blocks before you change any settings.
 keywords: docker sandboxes, security defaults, network policy, credentials, shared skills, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 A sandbox created with `sbx run claude` and no additional flags has the
 following security posture.
 
 ## Network defaults
 
 All outbound TCP traffic, including HTTP, HTTPS, and SSH, is blocked unless an
-explicit rule allows the destination. Direct external UDP and ICMP traffic is
-blocked at the network layer. DNS queries use the sandbox's internal resolver,
-which enforces network policy.
+explicit rule allows the destination. Outbound UDP is disabled by default. To
+use it, turn on the [experimental UDP feature](../governance/access-controls/local.md#allow-outbound-udp)
+and add UDP allow rules. ICMP is blocked. DNS queries use the sandbox's internal
+resolver, which enforces network policy.
 
 Run `sbx policy ls` to see the active network rules for your installation.
 Rules can be customized per machine with the `sbx policy` CLI, or managed
@@ -82,7 +85,7 @@ policy configuration:
   skills store
 - Host Docker daemon
 - Direct network communication between sandboxes
-- Direct external UDP and ICMP connections
+- Direct external ICMP connections
 
 Outbound TCP to destinations not in the allow list is also blocked by default,
 but you can add allow rules with `sbx policy allow`.
