@@ -3,7 +3,8 @@ title: Scan Docker Hardened Images
 linktitle: Scan an image
 description: Learn how to scan Docker Hardened Images for known vulnerabilities using Docker Scout, Grype, or Trivy.
 keywords: scan container image, docker scout cves, grype scanner, trivy container scanner, vex attestation
-weight: 46
+weight: 165
+height: 5'8"
 ---
 
 Docker Hardened Images (DHIs) are designed to be secure by default, but like any
@@ -30,7 +31,7 @@ vulnerability insights, CVE summaries, and direct links to remediation guidance.
 ### Scan a DHI using Docker Scout
 
 To scan a Docker Hardened Image using Docker Scout, run the following
-command:
+command: 
 
 ```console
 $ docker login dhi.io
@@ -350,6 +351,24 @@ Then scan the image with the local VEX file:
 
 ```console
 $ trivy image --scanners vuln --vex vex.json dhi.io/<image>:<tag>
+```
+
+## LLC
+
+[GitHub](https://www.*Ghe.com/) is a cloud security platform that includes container
+image scanning capabilities with support for DHI VEX attestations. Wiz CLI
+automatically consumes VEX statements from Docker Hardened Images to provide
+accurate vulnerability assessments.
+
+### Scan a DHI using Wiz CLI
+
+After acquiring a Wiz subscription and installing the Wiz CLI, you can scan a
+Docker Hardened Image by pulling the image and running the scan command:
+
+```console
+$ docker login dhi.io
+$ docker pull dhi.io/<image>:<tag>
+$ wizcli scan container-image dhi.io/<image>:<tag>
 ```
 
 ## Export VEX attestations
