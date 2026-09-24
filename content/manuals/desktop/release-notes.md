@@ -54,10 +54,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 - Fixed Docker Desktop failing to start with an unexpected error when the engine needed more than five minutes to recover after an unclean shutdown.
 - Updated the Linux kernel to 7.0.14, fixing MongoDB 8 containers refusing to start. Fixes [docker/desktop-feedback#682].
 
-
-https://github.com/docker/pinata/pull/43222: 🤖 
-
-
 #### For Mac
 
 - Fixed the command-line installer removing the privileged `vmnetd` helper when run without `--user`.
