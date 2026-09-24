@@ -5,6 +5,10 @@ keywords: docker sandboxes API errors, REST errors, API retries, idempotency key
 weight: 40
 ---
 
+> [!NOTE]
+> The Docker Sandboxes API and SDK are experimental. Features, interfaces,
+> and behavior may change.
+
 Before retrying a failed request, check whether the service already started
 the work. For example, a create request can succeed even if your application
 loses the response. Retrying without checking can create a second sandbox.
@@ -63,7 +67,10 @@ handle.
 Pass the etag exactly as returned, including its quotes. A missing required
 header returns HTTP 428, and a stale etag returns HTTP 412. If the etag is
 stale, read the resource again and decide whether your change is still
-appropriate before submitting another request.
+appropriate before submitting another request. In the SDK, `refresh()` returns
+a separate handle. Use that returned handle for the next operation. The
+original handle still has the old etag. If you supply an idempotency key, use
+a different key for the request with the updated etag.
 
 ## Retry without duplicating work
 
@@ -76,10 +83,18 @@ Read the resource afterward to check its latest state.
 
 Use the same key only when repeating the same request. Changing the request
 under that key causes an error, and using a different key submits another
-action. The
-[REST guide](https://github.com/docker/sandboxes-api/blob/main/REST_GUIDE.md#retry-a-mutation)
-lists which operations accept or require `Idempotency-Key`. Send the header
-only for those operations.
+action. Send the header only for operations that support it:
+
+| Operations | `Idempotency-Key` |
+| --- | --- |
+| Create a sandbox, image, process, port, snapshot, secret, or volume | Optional |
+| Restore a snapshot | Optional |
+| Start, stop, or delete a sandbox | Optional |
+| Update a secret | Optional |
+| Update a sandbox | Required |
+
+Other operations don't accept an idempotency key. The SDK generates a key for
+each supported mutation unless you supply one.
 
 Once you know a create request succeeded, poll the returned resource to wait
 for completion. Retry only when you need to recover from a failure or a lost
@@ -93,13 +108,22 @@ Check the outcome before repeating those actions.
 
 ## Account for SDK retries
 
-The SDK can retry transient failures on eligible requests. Use its retry
-policy, or disable automatic retries when your application owns the retry
-loop. In TypeScript, set `maxRetries: 0` for that call. Combining both policies
-can produce more attempts than you intended.
+The SDK makes up to two additional attempts for eligible transient failures.
+Use its retry policy, or disable automatic retries when your application owns
+the retry loop. Set `maxRetries: 0` for that call. Combining both policies can
+produce more attempts than you intended.
 
 Keep the idempotency key across application-level retries. Automatic retries
 within a call reuse its key, but a separate create call can generate a new
 one. Use a deadline and a bounded attempt count, and honor server retry delays.
 See [Request rate limits](limits.md#request-rate-limits) for how rate limits
 differ from resource quotas.
+
+## Set a timeout for commands
+
+`processes.run()` waits for a command to finish without a default overall
+timeout. Individual requests to create the process and read its output have
+a 30-second timeout. To bound the whole run, pass a timeout in the second
+argument, for example `sandbox.processes.run(input, { timeoutMs: 300_000 })`.
+Timing out or canceling the call stops local waiting. It doesn't kill the
+process in the sandbox.

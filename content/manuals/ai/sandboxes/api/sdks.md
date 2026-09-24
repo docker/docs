@@ -1,67 +1,30 @@
 ---
-title: Docker Sandboxes SDKs
-linkTitle: SDKs
-description: Install and use the Go, TypeScript, and Python SDKs for the Docker Sandboxes API.
-keywords: docker sandboxes SDK, Go SDK, TypeScript SDK, Python SDK, install sandbox SDK
+title: Install the Docker Sandboxes SDK
+linkTitle: Install the SDK
+description: Install and use the Docker Sandboxes SDK in your JavaScript or TypeScript application.
+keywords: docker sandboxes SDK, TypeScript SDK, JavaScript, npm, install sandbox SDK
 weight: 10
 ---
 
 > [!NOTE]
-> The Docker Sandboxes API and SDKs are experimental. Features and behavior may change.
+> The Docker Sandboxes API and SDK are experimental. Features, interfaces,
+> and behavior may change.
 
-Use the Docker Sandboxes SDKs to create and manage cloud sandboxes from Go,
-TypeScript, or Python. The SDKs include methods for running commands,
+Use the Docker Sandboxes SDK to create and manage cloud sandboxes from
+JavaScript or TypeScript. The SDK includes methods for running commands,
 transferring files, and waiting for a sandbox to start or stop.
 
-You don't need the Docker CLI to use an SDK.
+You don't need the Docker CLI to use the SDK.
 
-## Install an SDK
-
-{{< tabs >}}
-{{< tab name="Go" >}}
-
-With Go 1.25 or later, add the SDK to your Go module:
-
-```console
-$ go get github.com/docker/sandboxes-api
-```
-
-Import `github.com/docker/sandboxes-api/gen/go/sandboxes` and create a client
-with `sandboxes.New`.
-
-{{< /tab >}}
-{{< tab name="TypeScript" >}}
+## Install the SDK
 
 With Node.js 20 or later, install the SDK in your project:
 
 ```console
-$ npm install @docker/sandboxes-api
+$ npm install @docker/sandboxes
 ```
 
-Import `SandboxesClient` from `@docker/sandboxes-api`.
-
-{{< /tab >}}
-{{< tab name="Python" >}}
-
-With Python 3.11 or later and Git installed, create and activate a virtual
-environment:
-
-```console
-$ python3 -m venv .venv
-$ source .venv/bin/activate
-```
-
-On Windows, activate the environment with `.venv\Scripts\activate` instead.
-Then install the SDK from its source repository:
-
-```console
-$ python -m pip install "git+https://github.com/docker/sandboxes-api.git#subdirectory=gen/python/sandboxes"
-```
-
-Import `SandboxesClient` from `docker_sandboxes_api`.
-
-{{< /tab >}}
-{{< /tabs >}}
+Import `Sandboxes` from `@docker/sandboxes`.
 
 ## Connect to Cloud Sandboxes
 
@@ -81,10 +44,6 @@ example that creates a sandbox, runs a command, and deletes it.
 
 ## File transfers and interactive processes
 
-Use the SDKs to transfer files over HTTP and interact with running processes
-over WebSocket. TypeScript also exports these helpers from
-`@docker/sandboxes-api/streams`, and Python exposes them in
-`docker_sandboxes_api.streams`.
-
-See the [SDK repository](https://github.com/docker/sandboxes-api) for client
-examples and source code.
+Use the SDK to transfer files over HTTP and interact with running processes
+over WebSocket. The package also exports stream helpers from
+`@docker/sandboxes/streams`.

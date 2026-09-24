@@ -1,8 +1,8 @@
 ---
 title: Docker Sandboxes API
-linkTitle: API and SDKs
-description: Use the Docker Sandboxes API and SDKs to manage cloud sandboxes programmatically.
-keywords: docker sandboxes API, cloud sandboxes API, sandbox SDK, Go SDK, Python SDK, TypeScript SDK
+linkTitle: API and SDK
+description: Use the Docker Sandboxes API and TypeScript SDK to manage cloud sandboxes programmatically.
+keywords: docker sandboxes API, cloud sandboxes API, sandbox SDK, TypeScript SDK, JavaScript
 weight: 35
 params:
   sidebar:
@@ -12,7 +12,8 @@ params:
 ---
 
 > [!NOTE]
-> The Docker Sandboxes API and SDKs are experimental. Features and behavior may change.
+> The Docker Sandboxes API and SDK are experimental. Features, interfaces,
+> and behavior may change.
 
 Use the Docker Sandboxes API to create cloud sandboxes, run commands, and
 transfer files from your applications and automated workflows. You can also
@@ -25,7 +26,7 @@ To try it, [run your first cloud sandbox](get-started.md) with the TypeScript SD
 
 ## Activate cloud access
 
-To use the API or an SDK, [activate a Docker Agentic Platform subscription](/manuals/agentic-platform/signup.md#activate-cloud-access).
+To use the API or SDK, [activate a Docker Agentic Platform subscription](/manuals/agentic-platform/signup.md#activate-cloud-access).
 Use the same Docker account to [authenticate your application](authentication.md).
 
 Cloud compute is billed separately from your Docker subscription. See
@@ -33,14 +34,12 @@ Cloud compute is billed separately from your Docker subscription. See
 
 ## Choose an interface
 
-Use an SDK for Go, TypeScript, or Python to work with the API in your
-application. The SDKs provide typed requests and responses, wait for sandboxes
-to start or stop, and handle file transfers and interactive processes.
-See [SDKs](sdks.md) for installation instructions.
+Use the TypeScript SDK in your JavaScript or TypeScript application. The SDK
+provides typed requests and responses, waits for sandboxes to start or stop,
+and handles file transfers and interactive processes.
+See [Install the SDK](sdks.md) for installation instructions.
 
-You can also call the REST API directly from any language or HTTP tool. The
-[OpenAPI specification](https://github.com/docker/sandboxes-api/blob/main/openapi/sandboxes-v1.openapi.yaml)
-describes its requests and responses.
+You can also call the REST API directly from any language or HTTP tool.
 
 ## Develop your application
 

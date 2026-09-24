@@ -5,6 +5,10 @@ keywords: cloud sandboxes, compute sizes, CPU, memory, quotas, rate limits
 weight: 50
 ---
 
+> [!NOTE]
+> The Docker Sandboxes API and SDK are experimental. Features, interfaces,
+> and behavior may change.
+
 Choose a compute size for each sandbox and keep your application's resource
 usage within your account's quotas. Request rate limits also constrain how
 quickly your application can send API requests.
@@ -13,18 +17,32 @@ quickly your application can send API requests.
 
 Cloud Sandboxes supports these CPU and memory pairs:
 
-| Size | CPUs | Memory | SDK memory value in MiB |
+| SDK size name | CPUs | Memory | Memory in MiB |
 | --- | ---: | ---: | ---: |
-| Micro | 1 | 2 GiB | 2048 |
-| Small | 2 | 4 GiB | 4096 |
-| Medium | 4 | 8 GiB | 8192 |
-| Large | 8 | 16 GiB | 16384 |
-| XL | 16 | 32 GiB | 32768 |
+| `micro` | 1 | 2 GiB | 2048 |
+| `small` | 2 | 4 GiB | 4096 |
+| `medium` | 4 | 8 GiB | 8192 |
+| `large` | 8 | 16 GiB | 16384 |
+| `xl` | 16 | 32 GiB | 32768 |
 
-Set both `resources.cpus` and `resources.memoryMib` when launching a kit or
-registry image. CPU and memory aren't independent settings: for example,
-1 CPU with 1024 MiB is not a supported pair. When creating from an existing
-image resource, omit resource settings because the image supplies them.
+Kit launches default to `small` when you omit `resources`. To select another
+size, pass its name:
+
+```typescript
+const sandbox = await client.kits.launchAndWait('shell', {
+  resources: 'medium',
+});
+```
+
+For a registry image, specify a size in `client.create()`, such as
+`resources: 'small'`. You can also pass an explicit CPU and memory pair:
+`resources: { cpus: 2, memoryMib: 4096 }`.
+
+Named sizes are an SDK convenience. In direct REST requests, supply both
+`resources.cpus` and `resources.memoryMib`. CPU and memory aren't independent
+settings: for example, 1 CPU with 1024 MiB is not a supported pair.
+When creating from an existing image resource with `image`, omit resource
+settings because the image supplies them.
 
 Your account access and available capacity determine whether a request can
 be accepted. See [Billing](/manuals/agentic-platform/signup.md#billing) for

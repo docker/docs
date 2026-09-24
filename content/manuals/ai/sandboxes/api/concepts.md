@@ -1,14 +1,18 @@
 ---
 title: Docker Sandboxes API concepts
 linkTitle: API concepts
-description: Learn how to connect to cloud sandboxes, identify resources, wait for actions to finish, and retrieve paginated results.
-keywords: docker sandboxes API concepts, cloud sandbox endpoint, API capabilities, API operations
+description: Learn how kits and images define a cloud sandbox, how to connect to it, and how to manage resources throughout their lifecycle.
+keywords: docker sandboxes API concepts, sandbox kits, sandbox images, cloud sandbox endpoint, API operations
 weight: 20
 ---
 
+> [!NOTE]
+> The Docker Sandboxes API and SDK are experimental. Features, interfaces,
+> and behavior may change.
+
 An application uses the Docker Sandboxes API to create sandboxes, connect to
-them, and track their state. These concepts explain where to send requests and
-how to work with resources throughout their lifecycle.
+them, and track their state. Choose the environment for your sandbox, then
+learn how to work with its resources throughout their lifecycle.
 
 ## Kits and sandbox images
 
@@ -16,15 +20,47 @@ A kit packages an image and configuration for an agent or tool. Use a kit to
 start with that environment, then use the SDK to run processes, transfer
 files, and manage the sandbox's lifecycle.
 
-The SDK includes a versioned catalog of bundled kits. In TypeScript,
-`client.kits.list()` reads that catalog without making an API request.
-`client.kits.launch('shell', options)` creates a sandbox from the shell kit.
-Wait for the returned sandbox to reach the running state before using it.
-Agent kits may also need a model-provider credential.
+You can also create a sandbox from a container image. Choose the source based
+on how much of the environment you want to configure yourself:
 
-You can also create a sandbox from a registry image with `imageRef`, or from
-an existing image resource with `image`. A named kit supplies its own image,
-so don't also pass `image` or `imageRef` to `kits.launch`.
+| Source | What it provides | SDK example |
+| --- | --- | --- |
+| Kit | An image plus agent or tool configuration | `client.kits.launchAndWait('shell')` |
+| Registry image (`imageRef`) | A container image to use with your own sandbox settings | `client.create({ imageRef: 'ubuntu:24.04', resources: 'small' })` |
+| Image resource (`image`) | An image already prepared for Cloud Sandboxes, including its compute settings | `client.create({ image: 'images/<uid>' })` |
+
+The `imageRef` value is an image name in a registry. The `image` value is a
+resource name returned by the Sandboxes API. When you use `image`, omit
+`resources` because the image resource supplies its compute settings.
+A named kit supplies its own image, so omit both `image` and `imageRef` when
+launching one.
+
+### Bundled kits
+
+The SDK includes these kits:
+
+| Kit name | Environment |
+| --- | --- |
+| `shell` | A shell environment for running your own commands |
+| `claude` | Claude Code |
+| `codex` | Codex |
+| `cursor` | Cursor |
+| `devin` | Devin |
+| `docker-agent` | Docker Agent |
+| `gemini` | Gemini CLI |
+| `opencode` | OpenCode |
+
+For example, `client.kits.launchAndWait('shell')` creates a shell sandbox and
+waits until it's running. Kit launches default to Small compute, with two CPUs
+and 4 GiB of memory. To see the catalog bundled with your installed SDK
+version, call `client.kits.list()`.
+
+To run an AI agent, also provide credentials for the service that supplies its
+models. For example, Claude Code can use an Anthropic API key, and Codex can
+use an OpenAI API key. Signing in to Docker gives you access to sandboxes.
+The provider key gives the agent access to its models. See
+[Authenticate agents](authentication.md#authenticate-agents) for how to supply
+these credentials. The `shell` kit needs no provider key to run commands.
 
 ## Management and sandbox endpoints
 
@@ -35,7 +71,7 @@ Creating a sandbox and running a command inside it use different endpoints:
 | Management API at `https://connect.docker.com/sandboxes` | Create, inspect, and delete sandboxes and manage related resources. |
 | Sandbox API at the returned `core.endpoint.uri` | Run processes and read or write files inside that sandbox. |
 
-The SDKs build request URLs from these base URLs. If you make HTTP requests
+The SDK builds request URLs from these base URLs. If you make HTTP requests
 directly, append the `/v1` route to the base URL, preserving any existing path.
 For example, the management route `/v1/sandboxes` becomes
 `https://connect.docker.com/sandboxes/v1/sandboxes`.
@@ -62,8 +98,13 @@ doesn't change the resource's `name`.
 Wait until a sandbox is running before sending commands to it. Creating a
 sandbox takes time, so the API can return HTTP 202 with the sandbox still in a
 pending state. Read the resource repeatedly until it reaches the state you
-need. In TypeScript, call `waitUntilRunning()` on the sandbox returned by
-`client.create()`, or use `client.withSandbox()` to wait, run code, and clean up.
+need. For kits, `client.kits.launchAndWait()` creates the sandbox and waits
+until it's running. If you use `client.create()` or `client.kits.launch()`,
+call `waitUntilRunning()` on the returned sandbox before running commands.
+
+A running sandbox can still be completing setup specified by its kit, such
+as cloning a repository. Wait for any files or services your workload needs
+before starting that work.
 
 Sandbox creation can continue after your client stops waiting. Read the
 sandbox again to check its state, and inspect its `failure` field if it has
@@ -85,18 +126,11 @@ secret lists. You can request up to 100 items per page.
 
 ## Choose supported Cloud options
 
-Before adding optional features to a create request, check the
-[Cloud support guide](https://github.com/docker/sandboxes-api/blob/main/CLOUD_SUPPORT.md).
-It lists supported inputs, required permissions, and account requirements.
-The API schema also describes backends other than Cloud, so some of its fields
-aren't supported in Cloud requests.
-
 Cloud supports kits, sandbox timeouts, stored secrets, and volume attachments,
 subject to account permissions and feature availability. For example, volume
 access must be enabled for your account. An SDK method's presence doesn't
 guarantee that your account can use it.
 
-Leave `parent` empty for Cloud requests. When launching a kit or registry
-image, specify both CPU and memory from a [supported compute size](limits.md#compute-sizes).
-An existing image resource supplies its own resources, so omit resource
-settings when creating from `image`.
+Leave `parent` empty for Cloud requests. Kit launches default to Small compute.
+For a registry image, select a [compute size](limits.md#compute-sizes) with
+`resources`, such as `resources: 'small'`.
