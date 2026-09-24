@@ -25,7 +25,7 @@ The example waits for the initial startup. Automatic resume does not recover a d
 ```typescript
 const sandbox = await client.create(
   { displayName: name, image, lifecycle: { autoResume } },
-  { idempotencyKey: requestId },
+  { timeoutMs: 300_000, idempotencyKey: requestId },
 );
 return sandbox.waitUntilRunning();
 ```
@@ -45,7 +45,7 @@ export async function createWithAutoResume(
 ) {
   const sandbox = await client.create(
     { displayName: name, image, lifecycle: { autoResume } },
-    { idempotencyKey: requestId },
+    { timeoutMs: 300_000, idempotencyKey: requestId },
   );
   return sandbox.waitUntilRunning();
 }

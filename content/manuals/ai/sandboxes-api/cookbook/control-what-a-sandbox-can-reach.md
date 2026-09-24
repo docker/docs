@@ -27,7 +27,7 @@ Include every destination the workload needs, including its model provider and p
 ```typescript
 const sandbox = await client.create(
   { displayName: name, image, network: { policyIds } },
-  { idempotencyKey: requestId },
+  { timeoutMs: 300_000, idempotencyKey: requestId },
 );
 return sandbox.waitUntilRunning();
 ```
@@ -47,7 +47,7 @@ export async function createWithPolicyIds(
 ) {
   const sandbox = await client.create(
     { displayName: name, image, network: { policyIds } },
-    { idempotencyKey: requestId },
+    { timeoutMs: 300_000, idempotencyKey: requestId },
   );
   return sandbox.waitUntilRunning();
 }

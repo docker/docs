@@ -17,6 +17,8 @@ Choose interactive sign-in when running an example yourself. Use a personal acce
 
 The helper creates a client with an OAuth authenticator. Call an SDK method, such as listing sandboxes, to start sign-in. Open the printed verification URL in your browser and enter the displayed code. Sign in to your Docker account and approve the request. The SDK request proceeds when verification succeeds; a denied or expired request fails. The [complete program](run-a-complete-example.md) shows this flow from start to finish.
 
+The request that starts sign-in also sets its deadline. Pass `{ timeoutMs: 300_000 }` as that call's request options to give yourself five minutes to sign in and complete the request.
+
 The SDK holds credentials in memory by default and refreshes the access token as later requests need it, while refresh credentials remain valid. Close the client when finished to release SDK-owned resources. This does not delete sandboxes or revoke Docker sign-in.
 
 You can pass the same authenticator to several clients to reuse their sign-in. Closing one client leaves the authenticator usable by the others.

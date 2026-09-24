@@ -1,0 +1,16 @@
+--- a/clone-a-cloud-sandbox.md
++++ b/clone-a-cloud-sandbox.md
+@@ -70,5 +70,5 @@
+     environment: core.environment,
+   },
+-  { idempotencyKey: requestId },
++  { timeoutMs: 300_000, idempotencyKey: requestId },
+ );
+ return copy.waitUntilRunning();
+@@ -100,5 +100,5 @@
+       environment: core.environment,
+     },
+-    { idempotencyKey: requestId },
++    { timeoutMs: 300_000, idempotencyKey: requestId },
+   );
+   return copy.waitUntilRunning();

@@ -73,7 +73,7 @@ const sandbox = await client.create(
       })),
     },
   },
-  { idempotencyKey: requestId },
+  { timeoutMs: 300_000, idempotencyKey: requestId },
 );
 return sandbox.waitUntilRunning();
 ```
@@ -102,7 +102,7 @@ export async function createWithVolumes(
         })),
       },
     },
-    { idempotencyKey: requestId },
+    { timeoutMs: 300_000, idempotencyKey: requestId },
   );
   return sandbox.waitUntilRunning();
 }

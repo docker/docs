@@ -68,7 +68,7 @@ The SDK returns a handle after the example waits for the sandbox to run. Use tha
 ```typescript
 const sandbox = await client.create(
   { displayName: name, image, storage: { secrets: secretNames } },
-  { idempotencyKey: requestId },
+  { timeoutMs: 300_000, idempotencyKey: requestId },
 );
 return sandbox.waitUntilRunning();
 ```
@@ -88,7 +88,7 @@ export async function createWithSecrets(
 ) {
   const sandbox = await client.create(
     { displayName: name, image, storage: { secrets: secretNames } },
-    { idempotencyKey: requestId },
+    { timeoutMs: 300_000, idempotencyKey: requestId },
   );
   return sandbox.waitUntilRunning();
 }

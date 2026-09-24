@@ -23,11 +23,15 @@ Use this creation-time path for Cloud Sandboxes. Adding a gateway after creation
 {{< tab name="TypeScript" >}}
 
 ```typescript
-const sandbox = await client.kits.launch(kitName, {
-  resources: { cpus: 2, memoryMib: 4096 },
-  mcp: { servers, static: true },
-  storage: { secrets },
-});
+const sandbox = await client.kits.launch(
+  kitName,
+  {
+    resources: { cpus: 2, memoryMib: 4096 },
+    mcp: { servers, static: true },
+    storage: { secrets },
+  },
+  { timeoutMs: 300_000 },
+);
 return sandbox.waitUntilRunning();
 ```
 
@@ -43,11 +47,15 @@ export async function launchMcpKit(
   servers: string[],
   secrets: string[] = [],
 ) {
-  const sandbox = await client.kits.launch(kitName, {
-    resources: { cpus: 2, memoryMib: 4096 },
-    mcp: { servers, static: true },
-    storage: { secrets },
-  });
+  const sandbox = await client.kits.launch(
+    kitName,
+    {
+      resources: { cpus: 2, memoryMib: 4096 },
+      mcp: { servers, static: true },
+      storage: { secrets },
+    },
+    { timeoutMs: 300_000 },
+  );
   return sandbox.waitUntilRunning();
 }
 ```

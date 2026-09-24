@@ -1,0 +1,16 @@
+--- a/recover-when-the-endpoint-moves.md
++++ b/recover-when-the-endpoint-moves.md
+@@ -68,5 +68,5 @@
+ ```typescript
+ const current = await held.refresh();
+-return current.processes.run({ args });
++return current.processes.run({ args }, { timeoutMs: 300_000 });
+ ```
+
+@@ -79,5 +79,5 @@
+ export async function runAndRebind(held: Sandbox, args: string[]) {
+   const current = await held.refresh();
+-  return current.processes.run({ args });
++  return current.processes.run({ args }, { timeoutMs: 300_000 });
+ }
+ ```

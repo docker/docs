@@ -1,0 +1,16 @@
+--- a/control-what-a-sandbox-can-reach.md
++++ b/control-what-a-sandbox-can-reach.md
+@@ -28,5 +28,5 @@
+ const sandbox = await client.create(
+   { displayName: name, image, network: { policyIds } },
+-  { idempotencyKey: requestId },
++  { timeoutMs: 300_000, idempotencyKey: requestId },
+ );
+ return sandbox.waitUntilRunning();
+@@ -48,5 +48,5 @@
+   const sandbox = await client.create(
+     { displayName: name, image, network: { policyIds } },
+-    { idempotencyKey: requestId },
++    { timeoutMs: 300_000, idempotencyKey: requestId },
+   );
+   return sandbox.waitUntilRunning();

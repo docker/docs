@@ -71,9 +71,10 @@ try {
   const sandbox = await client.kits.launchAndWait('shell');
   console.log('Sandbox:', sandbox.name);
 
-  const result = await sandbox.processes.run({
-    args: ['echo', 'Hello from Docker Sandboxes'],
-  });
+  const result = await sandbox.processes.run(
+    { args: ['echo', 'Hello from Docker Sandboxes'] },
+    { timeoutMs: 300_000 },
+  );
   console.log(result.stdout.trim());
 
   const latest = await sandbox.refresh();

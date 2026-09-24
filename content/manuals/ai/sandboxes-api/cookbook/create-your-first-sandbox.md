@@ -85,10 +85,12 @@ Next, [choose an agent kit](add-tools-with-kits.md) or [work with processes](run
 
 ```typescript
 return client.withSandbox(options, async (sandbox) => {
-  const outcome = await sandbox.processes.run({ args }).then(
-    (value) => ({ value }),
-    (error: unknown) => ({ error }),
-  );
+  const outcome = await sandbox.processes
+    .run({ args }, { timeoutMs: 300_000 })
+    .then(
+      (value) => ({ value }),
+      (error: unknown) => ({ error }),
+    );
   try {
     const cleanup = { signal: AbortSignal.timeout(30_000) };
     const current = await client.get(sandbox.name, cleanup);
@@ -123,10 +125,12 @@ export async function runTemporary(
   args: string[],
 ) {
   return client.withSandbox(options, async (sandbox) => {
-    const outcome = await sandbox.processes.run({ args }).then(
-      (value) => ({ value }),
-      (error: unknown) => ({ error }),
-    );
+    const outcome = await sandbox.processes
+      .run({ args }, { timeoutMs: 300_000 })
+      .then(
+        (value) => ({ value }),
+        (error: unknown) => ({ error }),
+      );
     try {
       const cleanup = { signal: AbortSignal.timeout(30_000) };
       const current = await client.get(sandbox.name, cleanup);

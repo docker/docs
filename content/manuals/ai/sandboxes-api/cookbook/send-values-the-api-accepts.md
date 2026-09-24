@@ -58,7 +58,7 @@ export async function sendCreate(
   client: Sandboxes,
   request: ClientCreateOptions,
 ) {
-  const sandbox = await client.create(request);
+  const sandbox = await client.create(request, { timeoutMs: 300_000 });
   return sandbox.waitUntilRunning();
 }
 ```

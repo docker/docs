@@ -52,7 +52,7 @@ An SDK error means the request, wait, or connection failed. Keep the process han
 {{< tab name="TypeScript" >}}
 
 ```typescript
-return sandbox.processes.run({ args });
+return sandbox.processes.run({ args }, { timeoutMs: 300_000 });
 ```
 
 <details>
@@ -62,7 +62,7 @@ return sandbox.processes.run({ args });
 import type { Sandbox } from '@docker/sandboxes';
 
 export async function classifyOutcome(sandbox: Sandbox, args: string[]) {
-  return sandbox.processes.run({ args });
+  return sandbox.processes.run({ args }, { timeoutMs: 300_000 });
 }
 ```
 

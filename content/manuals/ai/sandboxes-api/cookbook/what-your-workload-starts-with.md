@@ -25,7 +25,7 @@ This reports the environment seen by that process. It is a diagnostic example, n
 ```typescript
 export async function readFloor(sandbox: Sandbox) {
   const result = requireSuccess(
-    await sandbox.processes.run({ args: ['env'] }),
+    await sandbox.processes.run({ args: ['env'] }, { timeoutMs: 300_000 }),
   );
   return Object.fromEntries(
     result.stdout
@@ -47,7 +47,7 @@ import { requireSuccess, type Sandbox } from '@docker/sandboxes';
 
 export async function readFloor(sandbox: Sandbox) {
   const result = requireSuccess(
-    await sandbox.processes.run({ args: ['env'] }),
+    await sandbox.processes.run({ args: ['env'] }, { timeoutMs: 300_000 }),
   );
   return Object.fromEntries(
     result.stdout
@@ -77,14 +77,24 @@ The override belongs to the process request and does not change the sandbox's en
 
 ```typescript
 const fromRequest = requireSuccess(
-  await sandbox.processes.run({
-    args: ['printenv', name],
-    env: { [name]: value },
-  }),
+  await sandbox.processes.run(
+    {
+      args: ['printenv', name],
+      env: { [name]: value },
+    },
+    { timeoutMs: 300_000 },
+  ),
 );
-const fromSandbox = await sandbox.processes.run({
-  args: ['printenv', name],
-});
+const fromSandbox = await sandbox.processes.run(
+  {
+    args: ['printenv', name],
+  },
+  { timeoutMs: 300_000 },
+);
+return {
+  fromRequest: fromRequest.stdout.trimEnd(),
+  fromSandbox: fromSandbox.stdout.trimEnd(),
+};
 ```
 
 <details>
@@ -99,14 +109,20 @@ export async function overrideVariable(
   value: string,
 ) {
   const fromRequest = requireSuccess(
-    await sandbox.processes.run({
-      args: ['printenv', name],
-      env: { [name]: value },
-    }),
+    await sandbox.processes.run(
+      {
+        args: ['printenv', name],
+        env: { [name]: value },
+      },
+      { timeoutMs: 300_000 },
+    ),
   );
-  const fromSandbox = await sandbox.processes.run({
-    args: ['printenv', name],
-  });
+  const fromSandbox = await sandbox.processes.run(
+    {
+      args: ['printenv', name],
+    },
+    { timeoutMs: 300_000 },
+  );
   return {
     fromRequest: fromRequest.stdout.trimEnd(),
     fromSandbox: fromSandbox.stdout.trimEnd(),

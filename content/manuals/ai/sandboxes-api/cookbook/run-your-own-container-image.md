@@ -29,7 +29,7 @@ Next, [run a command](run-your-first-command.md) or [copy in your project files]
 ```typescript
 const sandbox = await client.create(
   { displayName: name, imageRef, resources },
-  { idempotencyKey: requestId },
+  { timeoutMs: 300_000, idempotencyKey: requestId },
 );
 return sandbox.waitUntilRunning();
 ```
@@ -49,7 +49,7 @@ export async function createFromImageRef(
 ) {
   const sandbox = await client.create(
     { displayName: name, imageRef, resources },
-    { idempotencyKey: requestId },
+    { timeoutMs: 300_000, idempotencyKey: requestId },
   );
   return sandbox.waitUntilRunning();
 }

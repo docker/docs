@@ -81,7 +81,7 @@ The source sandbox does not need to remain running. Restoration does not replace
 ```typescript
 const sandbox = await snapshot.restore(
   { displayName: newSandboxName },
-  { idempotencyKey: requestId },
+  { timeoutMs: 300_000, idempotencyKey: requestId },
 );
 return sandbox.waitUntilRunning();
 ```
@@ -101,7 +101,7 @@ export async function restoreSnapshot(
   const snapshot = await client.snapshots.get(snapshotName);
   const sandbox = await snapshot.restore(
     { displayName: newSandboxName },
-    { idempotencyKey: requestId },
+    { timeoutMs: 300_000, idempotencyKey: requestId },
   );
   return sandbox.waitUntilRunning();
 }
@@ -144,7 +144,7 @@ export async function listSnapshots(
 
 ## Delete a snapshot {#4-delete-a-snapshot}
 
-Delete through a handle when you no longer need that restore point. Deletion removes the snapshot, not sandboxes that have already been restored from it.
+Delete through a handle when you no longer need that restore point. Deletion removes the snapshot, not sandboxes that have already been restored from it. Snapshot deletion is refused while a sandbox restored from it is still running.
 
 Deleting the source sandbox and deleting its snapshots are separate cleanup steps.
 

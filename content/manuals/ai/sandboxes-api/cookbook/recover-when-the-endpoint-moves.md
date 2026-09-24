@@ -67,7 +67,7 @@ This example starts new work after refresh. It does not replay a command whose c
 
 ```typescript
 const current = await held.refresh();
-return current.processes.run({ args });
+return current.processes.run({ args }, { timeoutMs: 300_000 });
 ```
 
 <details>
@@ -78,7 +78,7 @@ import type { Sandbox } from '@docker/sandboxes';
 
 export async function runAndRebind(held: Sandbox, args: string[]) {
   const current = await held.refresh();
-  return current.processes.run({ args });
+  return current.processes.run({ args }, { timeoutMs: 300_000 });
 }
 ```
 

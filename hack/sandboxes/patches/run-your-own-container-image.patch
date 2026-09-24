@@ -1,0 +1,16 @@
+--- a/run-your-own-container-image.md
++++ b/run-your-own-container-image.md
+@@ -30,5 +30,5 @@
+ const sandbox = await client.create(
+   { displayName: name, imageRef, resources },
+-  { idempotencyKey: requestId },
++  { timeoutMs: 300_000, idempotencyKey: requestId },
+ );
+ return sandbox.waitUntilRunning();
+@@ -50,5 +50,5 @@
+   const sandbox = await client.create(
+     { displayName: name, imageRef, resources },
+-    { idempotencyKey: requestId },
++    { timeoutMs: 300_000, idempotencyKey: requestId },
+   );
+   return sandbox.waitUntilRunning();

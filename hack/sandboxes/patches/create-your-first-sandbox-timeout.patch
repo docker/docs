@@ -29,3 +29,33 @@
 +  );
    return { sandbox, result };
  }
+@@ -79,8 +86,10 @@
+ ```typescript
+ return client.withSandbox(options, async (sandbox) => {
+-  const outcome = await sandbox.processes.run({ args }).then(
+-    (value) => ({ value }),
+-    (error: unknown) => ({ error }),
+-  );
++  const outcome = await sandbox.processes
++    .run({ args }, { timeoutMs: 300_000 })
++    .then(
++      (value) => ({ value }),
++      (error: unknown) => ({ error }),
++    );
+   try {
+     const cleanup = { signal: AbortSignal.timeout(30_000) };
+@@ -117,8 +126,10 @@
+ ) {
+   return client.withSandbox(options, async (sandbox) => {
+-    const outcome = await sandbox.processes.run({ args }).then(
+-      (value) => ({ value }),
+-      (error: unknown) => ({ error }),
+-    );
++    const outcome = await sandbox.processes
++      .run({ args }, { timeoutMs: 300_000 })
++      .then(
++        (value) => ({ value }),
++        (error: unknown) => ({ error }),
++      );
+     try {
+       const cleanup = { signal: AbortSignal.timeout(30_000) };

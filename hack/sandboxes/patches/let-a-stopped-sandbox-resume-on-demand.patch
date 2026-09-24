@@ -1,0 +1,16 @@
+--- a/let-a-stopped-sandbox-resume-on-demand.md
++++ b/let-a-stopped-sandbox-resume-on-demand.md
+@@ -26,5 +26,5 @@
+ const sandbox = await client.create(
+   { displayName: name, image, lifecycle: { autoResume } },
+-  { idempotencyKey: requestId },
++  { timeoutMs: 300_000, idempotencyKey: requestId },
+ );
+ return sandbox.waitUntilRunning();
+@@ -46,5 +46,5 @@
+   const sandbox = await client.create(
+     { displayName: name, image, lifecycle: { autoResume } },
+-    { idempotencyKey: requestId },
++    { timeoutMs: 300_000, idempotencyKey: requestId },
+   );
+   return sandbox.waitUntilRunning();

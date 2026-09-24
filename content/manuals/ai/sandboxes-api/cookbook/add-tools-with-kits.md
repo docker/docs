@@ -115,7 +115,10 @@ Save the sandbox name if you will resume the work later. [Delete the sandbox](de
 {{< tab name="TypeScript" >}}
 
 ```typescript
-return sandbox.processes.run({ args: ['claude', '-p', prompt] });
+return sandbox.processes.run(
+  { args: ['claude', '-p', prompt] },
+  { timeoutMs: 300_000 },
+);
 ```
 
 <details>
@@ -125,7 +128,10 @@ return sandbox.processes.run({ args: ['claude', '-p', prompt] });
 import type { Sandbox } from '@docker/sandboxes';
 
 export async function runKitAgent(sandbox: Sandbox, prompt: string) {
-  return sandbox.processes.run({ args: ['claude', '-p', prompt] });
+  return sandbox.processes.run(
+    { args: ['claude', '-p', prompt] },
+    { timeoutMs: 300_000 },
+  );
 }
 ```
 

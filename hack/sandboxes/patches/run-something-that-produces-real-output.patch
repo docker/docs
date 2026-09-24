@@ -1,0 +1,16 @@
+--- a/run-something-that-produces-real-output.md
++++ b/run-something-that-produces-real-output.md
+@@ -24,5 +24,5 @@
+
+ ```typescript
+-return sandbox.processes.run({ args });
++return sandbox.processes.run({ args }, { timeoutMs: 300_000 });
+ ```
+
+@@ -34,5 +34,5 @@
+
+ export async function collectOutput(sandbox: Sandbox, args: string[]) {
+-  return sandbox.processes.run({ args });
++  return sandbox.processes.run({ args }, { timeoutMs: 300_000 });
+ }
+ ```

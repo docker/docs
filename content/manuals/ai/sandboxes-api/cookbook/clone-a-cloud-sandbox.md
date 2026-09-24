@@ -69,7 +69,7 @@ const copy = await client.create(
         }),
     environment: core.environment,
   },
-  { idempotencyKey: requestId },
+  { timeoutMs: 300_000, idempotencyKey: requestId },
 );
 return copy.waitUntilRunning();
 ```
@@ -99,7 +99,7 @@ export async function rebuildSandbox(
           }),
       environment: core.environment,
     },
-    { idempotencyKey: requestId },
+    { timeoutMs: 300_000, idempotencyKey: requestId },
   );
   return copy.waitUntilRunning();
 }

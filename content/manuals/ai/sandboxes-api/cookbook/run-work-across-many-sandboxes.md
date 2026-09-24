@@ -67,7 +67,9 @@ const size = Number.isFinite(bound) ? Math.max(1, Math.trunc(bound)) : 1;
 for (let start = 0; start < sandboxes.length; start += size) {
   const group = sandboxes.slice(start, start + size);
   const settled = await Promise.allSettled(
-    group.map((sandbox) => sandbox.processes.run({ args })),
+    group.map((sandbox) =>
+      sandbox.processes.run({ args }, { timeoutMs: 300_000 }),
+    ),
   );
   settled.forEach((result, index) => {
     outcomes.push(
@@ -102,7 +104,9 @@ export async function runOnEach(
   for (let start = 0; start < sandboxes.length; start += size) {
     const group = sandboxes.slice(start, start + size);
     const settled = await Promise.allSettled(
-      group.map((sandbox) => sandbox.processes.run({ args })),
+      group.map((sandbox) =>
+        sandbox.processes.run({ args }, { timeoutMs: 300_000 }),
+      ),
     );
     settled.forEach((result, index) => {
       outcomes.push(

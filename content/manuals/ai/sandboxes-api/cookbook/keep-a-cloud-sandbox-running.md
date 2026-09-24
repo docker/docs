@@ -36,7 +36,7 @@ const sandbox = await client.create(
       onTimeout: stopOnTimeout ? 'stop' : 'delete',
     },
   },
-  { idempotencyKey: requestId },
+  { timeoutMs: 300_000, idempotencyKey: requestId },
 );
 return sandbox.waitUntilRunning();
 ```
@@ -64,7 +64,7 @@ export async function createWithDeadline(
         onTimeout: stopOnTimeout ? 'stop' : 'delete',
       },
     },
-    { idempotencyKey: requestId },
+    { timeoutMs: 300_000, idempotencyKey: requestId },
   );
   return sandbox.waitUntilRunning();
 }
@@ -75,9 +75,9 @@ export async function createWithDeadline(
 {{< /tab >}}
 {{< /tabs >}}
 
-## Replace the remaining lifetime {#2-replace-the-remaining-lifetime}
+## Extend the remaining lifetime {#2-extend-the-remaining-lifetime}
 
-Get the sandbox and renew its timeout with the desired remaining duration. Renewal sets the remaining lifetime; do not treat it as an increment to add repeatedly.
+Use `renewTimeout()` to extend the sandbox's remaining lifetime. Pass the desired duration from the time the service accepts the renewal, not an increment to add to the existing deadline. Renewal can only extend the lifetime; it cannot shorten it.
 
 Renew a configured timeout before it expires. If the call fails, inspect the sandbox's current state instead of assuming that renewal took effect.
 

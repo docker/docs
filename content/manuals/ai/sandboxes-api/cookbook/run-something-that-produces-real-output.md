@@ -23,7 +23,7 @@ This form accumulates output for you. Prefer streaming when output could be larg
 {{< tab name="TypeScript" >}}
 
 ```typescript
-return sandbox.processes.run({ args });
+return sandbox.processes.run({ args }, { timeoutMs: 300_000 });
 ```
 
 <details>
@@ -33,7 +33,7 @@ return sandbox.processes.run({ args });
 import type { Sandbox } from '@docker/sandboxes';
 
 export async function collectOutput(sandbox: Sandbox, args: string[]) {
-  return sandbox.processes.run({ args });
+  return sandbox.processes.run({ args }, { timeoutMs: 300_000 });
 }
 ```
 
