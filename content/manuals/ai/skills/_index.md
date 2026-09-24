@@ -10,10 +10,9 @@ params:
 
 Docker Skills are Docker's official, open-source guidance for compatible AI
 coding agents. They help agents with Docker tasks, such as improving a Dockerfile
-or setting up a Compose application. The collection evolves: browse the
-[repository catalog](https://github.com/docker/skills#readme) for the current
-list of skills. Docker product coverage is non-exhaustive and evolves with the
-collection.
+or setting up a Compose application. The collection evolves and doesn't cover
+every Docker product. Browse the [repository catalog](https://github.com/docker/skills#readme)
+for available skills and their descriptions.
 
 ## Get started
 

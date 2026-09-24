@@ -120,27 +120,8 @@ Install from the repository into the shared sandbox skill store:
 $ sbx skills add docker/skills
 ```
 
-For store management, mounting behavior, and supported host directories, see
-[Share agent skills](../sandboxes/workflows/agent-skills.md). A host
-installation with the [skills CLI](#skills-cli) or by
-[manual copy](#git-clone-or-manual-copy) alone doesn't add skills to the shared
-store. If `sbx skills add` is unavailable but `sbx skills import` works, copy
-selected skill directories into a supported host *user* directory, such as
-`~/.agents/skills/` for Codex, and run `sbx skills import` on the host. The
-skills CLI's default project-scoped location and its Codex `--global` location
-(`~/.codex/skills/`) aren't import sources; copy to a supported import source
-instead. Start or restart the sandbox to mount the updated store.
-
-If the `sbx skills` group is unavailable entirely, it cannot manage a shared
-store. Install the selected skills **inside** the sandbox in a discovery path
-supported by the sandbox's agent, or copy them into the sandbox with `sbx cp`;
-for a workspace mounted in [Direct mode](../sandboxes/usage.md#git-workspace-modes),
-a project-scoped installation in that workspace is another option. A
-host-only user installation isn't visible inside the sandbox, and clone-mode
-sandboxes don't inherit subsequent changes from the host workspace. See
-[Share agent skills](../sandboxes/workflows/agent-skills.md) for the shared-store
-modes and [sandbox workspace modes](../sandboxes/usage.md#git-workspace-modes)
-for the workspace distinction.
+For shared-store management, mounting behavior, and host imports, see
+[Share agent skills](../sandboxes/workflows/agent-skills.md).
 
 ## Docker Agent {#docker-agent}
 
@@ -186,13 +167,10 @@ files are installed, not that the agent loaded a skill.
 
 Start a new agent session and ask for a matching Docker task, such as “Review my
 Dockerfile for cache efficiency and non-root execution. Tell me which installed
-skill you loaded, and show its `SKILL.md` path.” Check the agent's skill or tool
-activity (if available) for a read of that file, or ask it to quote a specific
-instruction from the file and compare the quotation to the installed `SKILL.md`.
-A plausible Dockerfile recommendation alone does not demonstrate that the skill
-loaded. If your client cannot show skill activity or file access, treat its
-self-report as a clue, not proof; check the discovery path and scope before
-relying on it.
+skill you loaded, and show its `SKILL.md` path.” If your client displays skill
+activity, check that it loaded the expected file. Otherwise, ask for a specific
+instruction from that file and compare it with the installed copy. If the
+skill isn't available, check the installation path and scope.
 
 ## Update and troubleshoot
 
