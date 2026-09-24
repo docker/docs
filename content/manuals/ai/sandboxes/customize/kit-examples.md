@@ -411,8 +411,6 @@ for the complete order.
 Agent settings mechanisms differ. If an agent doesn't support an additional
 config file, launch option, or environment variable for the setting, kits can't
 replace the sandbox-managed user settings before the agent launches.
-`setup.startup` doesn't gate the agent entrypoint, so don't use it for settings
-the agent must read during initialization.
 
 ## Fork an existing agent
 

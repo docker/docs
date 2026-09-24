@@ -498,7 +498,7 @@ Runs at every sandbox start. String array, not interpreted by a shell.
 | ------------- | -------- | ----------------------------------- |
 | `command`     | —        | Command and args as a string array. |
 | `user`        | `"1000"` | User to run as. `"1000"` = agent.   |
-| `background`  | `false`  | Block later startup commands until this command finishes. Set to `true` to let later commands run without waiting. |
+| `background`  | `false`  | Run this command in the background. When `false`, the startup dispatcher waits for this command to finish before running the next startup command. When `true`, the dispatcher continues immediately. Neither setting delays the agent entrypoint. |
 | `description` | —        | Human-readable description.         |
 
 Startup commands are non-interactive. They run before the agent
