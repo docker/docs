@@ -16,9 +16,10 @@ learn how to work with its resources throughout their lifecycle.
 
 ## Kits and sandbox images
 
-A sandbox kit defines an environment for an agent or tool: its container
-image, setup, network rules, and credential requirements. You can use a kit
-bundled with the SDK or one published separately in an OCI registry.
+A sandbox kit defines an environment for an agent or tool, including its
+image, setup, network rules, and credential requirements. The SDK bundles a
+catalog of kits you can launch by name. Using kits from other sources
+requires preparing their content for the API.
 
 You can also create a sandbox from a container image. Choose the source based
 on how much of the environment you want to configure yourself:
@@ -26,7 +27,7 @@ on how much of the environment you want to configure yourself:
 | Source | What it provides | How to create a sandbox |
 | --- | --- | --- |
 | [Bundled kit](#bundled-kits) | An image reference and configuration included in the SDK's catalog | `client.kits.launch('shell')` |
-| Kit from another source | An environment defined by a kit you obtain separately, such as a published Hermes kit | `client.create()` with [kit artifact inputs](#supply-kit-artifacts) |
+| Custom kit | An environment defined by a kit you obtain separately | `client.create()` with [prepared kit artifacts](#supply-kit-artifacts) |
 | Registry image (`imageRef`) | A container image to use with your own sandbox settings | `client.create({ imageRef: 'ubuntu:24.04', resources: 'small' })` |
 | Image resource (`image`) | An image already prepared for Cloud Sandboxes, including its compute settings | `client.create({ image: 'images/<uid>' })` |
 
@@ -34,19 +35,14 @@ The `imageRef` value is an image name in a registry. The `image` value is a
 resource name returned by the Sandboxes API. When you use `image`, omit
 `resources` because the image resource supplies its compute settings.
 
-A sandbox kit supplies its own image reference. Cloud Sandboxes pulls that
-container image as needed, separately from loading the kit's configuration.
-Bundling a kit with the SDK doesn't bundle its container image.
-
-Both `create()` and `kits.launch()` return after creation is accepted. Call
-`waitUntilRunning()` on the returned sandbox before running commands. For a
-bundled kit, `kits.launchAndWait()` combines creation and waiting in one call.
+These creation methods don't wait for the sandbox to be running. See
+[Wait for an action to finish](#wait-for-an-action-to-finish) before running
+commands.
 
 ### Bundled kits
 
-The npm package includes the following kit definitions and their supporting
-files. These copies are tied to the SDK release. Launch a bundled kit by its
-short name, such as `shell`, without downloading the kit from a registry:
+The npm package includes the following kit definitions and supporting files.
+Launch a bundled kit by its short name, such as `shell`:
 
 | Kit name | Environment |
 | --- | --- |
@@ -60,73 +56,60 @@ short name, such as `shell`, without downloading the kit from a registry:
 | `opencode` | OpenCode |
 
 For example, `client.kits.launchAndWait('shell')` creates a shell sandbox and
-waits until it's running. The kit launch helpers default to Small compute,
-with two CPUs and 4 GiB of memory. To see the catalog bundled with your
-installed SDK version, call `client.kits.list()`.
+waits until it's running. The kit launch helpers default to `small` compute,
+with two CPUs and 4 GiB of memory. See [Compute sizes](limits.md#compute-sizes)
+to choose a different size.
 
-The launch helpers prepare the bundled kit's content and pass it to
-`client.create()` through the `kits` field. Omit `image` and `imageRef` when
-using these helpers because the kit supplies the image reference.
+Bundled kits are tied to the SDK release. Call `client.kits.list()` to see
+the catalog in your installed version. The kit definitions are included in
+the npm package, so the SDK doesn't download them from a registry. Cloud
+Sandboxes pulls their referenced container images as needed.
 
-To run an AI agent, also provide credentials for the service that supplies its
-models. For example, Claude Code can use an Anthropic API key, and Codex can
-use an OpenAI API key. Signing in to Docker gives you access to sandboxes.
-The provider key gives the agent access to its models. See
-[Authenticate agents](authentication.md#authenticate-agents) for how to supply
-these credentials. The `shell` kit needs no provider key to run commands.
+To run an AI agent, provide credentials for its model provider, such as an
+Anthropic API key for Claude Code. See
+[Authenticate agents](authentication.md#authenticate-agents). The `shell` kit
+needs no provider key to run commands.
 
-### Supply kit artifacts
+## Resource names
 
-You can also use kits published by Docker, your organization, or other
-authors. For example, the
-[Hermes agent kit](https://hub.docker.com/r/sbx/hermes-agent-kit) is distributed
-as `docker.io/sbx/hermes-agent-kit:latest`. This reference identifies a kit
-artifact in a registry. The kit, in turn, names the container image to run.
+Use a resource's returned `name` to refer to it in later requests. A sandbox
+name has the form `sandboxes/<uid>`. Pass the complete name, including the
+`sandboxes/` prefix, when reading or deleting it.
 
-To supply a kit outside the bundled catalog, pass its content to
-`client.create()` in the `kits` array. Each entry contains a kit reference and
-the resolved kit artifact serialized as JSON bytes. A sandbox kit defines
-the environment, and mixin kits add configuration to it. See
-[Kits](../customize/kits.md) for how these kinds of kits work together.
+The server assigns the name, which stays the same throughout the resource's
+lifetime. The optional `displayName` is a label you can change without
+changing the resource's identity.
 
-The `kits` field is a low-level API input. It expects the kit definition and
-supporting files in the serialized
-[v2 artifact format](https://github.com/docker/sbx-kits-contrib/blob/v0.17.0/spec/types.go).
-The API doesn't accept v3 kit descriptors directly. The npm SDK has no
-helper to load registry kits or convert them into this input, so using them
-through the SDK requires loading and conversion code outside the SDK.
-The `kits.launch()` and `kits.launchAndWait()` helpers accept only names
-from the bundled catalog.
+## Wait for an action to finish
 
-This function shows the expanded request structure for a prepared sandbox
-kit. It takes the kit's source reference and serialized artifact as inputs:
+Wait until a sandbox is running before sending commands to it. In the SDK,
+`client.kits.launchAndWait()` creates a bundled kit's sandbox and waits for it
+to run. If you use `client.create()` or `client.kits.launch()`, call
+`waitUntilRunning()` on the returned sandbox and use the result to run commands.
 
-```typescript
-function createFromKit(reference: string, artifactBytes: Uint8Array) {
-  return client.create({
-    resources: 'small',
-    kits: [
-      {
-        artifact: {
-          ref: { ref: reference, kind: 'sandbox' },
-          inline: artifactBytes,
-        },
-      },
-    ],
-  });
-}
-```
+For direct API requests, HTTP 202 means the action was accepted and is still
+in progress. Read the resource repeatedly until it reaches the state you need.
 
-The `ref` identifies the kit's source, such as the Hermes registry reference.
-It doesn't trigger a registry pull. The `inline` value carries the prepared
-JSON artifact, including the kit's file content, as a `Uint8Array`. Passing
-raw `spec.yaml`, a kit ZIP, or an OCI manifest in this field isn't supported.
+Sandbox creation can continue after your client stops waiting. Read the
+sandbox again to check its state, and inspect its `failure` field if it has
+failed. See [Errors and retries](errors.md) for how to recover.
 
-To launch a public kit directly by its registry reference, you can use the
-[Docker Agentic Platform Console](/manuals/agentic-platform/kits.md#run-a-kit-by-reference),
-which loads the kit for you. Its backend can load v2 and v3 kits and converts
-compatible v3 kits into the v2 artifact format that Cloud Sandboxes accepts.
-This conversion doesn't support every v3 capability.
+Deletion can also take time. The API returns HTTP 202 while the sandbox is
+being deleted and HTTP 204 when deletion is complete. After deletion,
+authorized reads return `notFound`.
+
+### Wait for kit setup
+
+> [!IMPORTANT]
+> `waitUntilRunning()` and `kits.launchAndWait()` wait for the sandbox's
+> `running` state. They don't guarantee that the kit has finished installing
+> tools, cloning repositories, or running other setup commands.
+
+Before using the results of kit setup, check that the required work has
+completed. For example, wait for a completion marker that the kit writes
+after a successful repository clone, or check that a service responds to a
+health request. Poll with a delay between checks and a timeout so that failed
+setup doesn't leave your application waiting indefinitely.
 
 ## Management and sandbox endpoints
 
@@ -149,37 +132,6 @@ The SDK obtains this token when you use a sandbox's process or file methods. See
 A sandbox's endpoint can change when its runtime changes. Read the sandbox
 resource again before reconnecting to get its endpoint.
 
-## Resource names
-
-Use a resource's returned `name` to refer to it in later requests. For example,
-a sandbox name has the form `sandboxes/<uid>`. The server assigns the ID, which
-stays the same throughout the resource's lifetime. Pass the complete name,
-including `sandboxes/`, when reading or deleting that sandbox.
-
-The `displayName` field is a label for people to read. Changing this label
-doesn't change the resource's `name`.
-
-## Wait for an action to finish
-
-Wait until a sandbox is running before sending commands to it. Creating a
-sandbox takes time, so the API can return HTTP 202 with the sandbox still in a
-pending state. Read the resource repeatedly until it reaches the state you
-need. For kits, `client.kits.launchAndWait()` creates the sandbox and waits
-until it's running. If you use `client.create()` or `client.kits.launch()`,
-call `waitUntilRunning()` on the returned sandbox before running commands.
-
-A running sandbox can still be completing setup specified by its kit, such
-as cloning a repository. Wait for any files or services your workload needs
-before starting that work.
-
-Sandbox creation can continue after your client stops waiting. Read the
-sandbox again to check its state, and inspect its `failure` field if it has
-failed. See [Errors and retries](errors.md) for how to recover.
-
-Deletion can also take time. The API returns HTTP 202 while the sandbox is
-being deleted and HTTP 204 when deletion is complete. After deletion,
-authorized reads return `notFound`.
-
 ## Read all results from a list
 
 List requests return one page of results at a time. To retrieve the next page,
@@ -197,7 +149,48 @@ subject to account permissions and feature availability. For example, volume
 access must be enabled for your account. An SDK method's presence doesn't
 guarantee that your account can use it.
 
-Leave `parent` empty for Cloud requests. The kit launch helpers default to
-Small compute. When calling `client.create()` with kit artifacts or a
-registry image, select a [compute size](limits.md#compute-sizes) with
-`resources`, such as `resources: 'small'`.
+## Supply kit artifacts
+
+To use a kit outside the bundled catalog, your application must load and
+prepare its content before calling `client.create()`. The npm SDK doesn't
+fetch kits from a registry. Its `kits.launch()` and `kits.launchAndWait()`
+helpers accept only bundled kit names.
+
+For example, the [Hermes agent kit](https://hub.docker.com/r/sbx/hermes-agent-kit)
+is published as `docker.io/sbx/hermes-agent-kit:latest`. To use it through the
+SDK, you need code outside the SDK that loads the kit definition and its
+supporting files into the serialized
+[v2 artifact format](https://github.com/docker/sbx-kits-contrib/blob/v0.17.0/spec/types.go)
+accepted by the API.
+
+The `kits` array holds the sandbox kit and any mixin kits that add
+configuration to it. See [Kits](../customize/kits.md) for how these kinds of
+kits work together. The bundled launch helpers prepare this same input for
+the kits in their catalog.
+
+Pass the kit's source reference and prepared artifact bytes to
+`client.create()`:
+
+```typescript
+function createFromKit(reference: string, artifactBytes: Uint8Array) {
+  return client.create({
+    resources: 'small',
+    kits: [
+      {
+        artifact: {
+          ref: { ref: reference, kind: 'sandbox' },
+          inline: artifactBytes,
+        },
+      },
+    ],
+  });
+}
+```
+
+The `ref` identifies the kit's source. It doesn't trigger a registry pull.
+The `inline` value contains the serialized artifact as a `Uint8Array`,
+including the kit's file content. Raw `spec.yaml`, ZIP files, and OCI manifests
+aren't valid inputs for this field.
+
+To launch a public kit by registry reference without writing loading code,
+use the [Docker Agentic Platform Console](/manuals/agentic-platform/kits.md#run-a-kit-by-reference).

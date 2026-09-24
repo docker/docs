@@ -11,9 +11,9 @@ weight: 5
 > and behavior may change.
 
 Create a cloud sandbox, run a command inside it, and delete it using the Docker
-Sandboxes TypeScript SDK. The example prints `Hello from Docker Sandboxes`
-from inside the sandbox. It uses the `shell` kit to run a command without
-setting up an AI agent or a model provider API key.
+Sandboxes TypeScript SDK. This tutorial uses the bundled `shell` kit to print
+`Hello from Docker Sandboxes`. You don't need an AI agent or a model provider
+API key to run it.
 
 ## Prerequisites
 
@@ -44,10 +44,11 @@ $ npm install --save-dev tsx typescript @types/node
 ## Create and use a sandbox
 
 A kit supplies the sandbox's image and configuration for an agent or tool.
-This example launches the bundled `shell` kit with its default Small compute
-size: two CPUs and 4 GiB of memory. See [Compute sizes and limits](limits.md)
-for other sizes.
-Cloud compute is billed to your subscription.
+The `shell` kit provides the environment for this example.
+
+The SDK launches it with the default `small` compute size: two CPUs and
+4 GiB of memory. Cloud compute is billed to your subscription. See
+[Compute sizes and limits](limits.md) for other sizes.
 
 Create a file named `index.ts` with the following code. The program prompts
 you to sign in, creates a sandbox, runs a command, and deletes the sandbox.
@@ -112,6 +113,8 @@ doesn't delete the sandbox.
 
 ## Next steps
 
+- If you use a kit that clones a repository or installs tools,
+  [wait for kit setup](concepts.md#wait-for-kit-setup) before using its results.
 - Read [API concepts](concepts.md) to learn about resource names, lifecycle
   states, and supported Cloud options.
 - Review [Errors and retries](errors.md) before adding recovery logic.

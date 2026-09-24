@@ -41,6 +41,7 @@ For a registry image, specify a size in `client.create()`, such as
 Named sizes are an SDK convenience. In direct REST requests, supply both
 `resources.cpus` and `resources.memoryMib`. CPU and memory aren't independent
 settings: for example, 1 CPU with 1024 MiB is not a supported pair.
+
 When creating from an existing image resource with `image`, omit resource
 settings because the image supplies them.
 
@@ -63,23 +64,23 @@ The default quotas apply across an account:
 Your account can have different quotas. Confirm your account's limits with
 Docker before planning a workload that depends on a particular allowance.
 
-Stopping an ordinary sandbox releases its concurrency slot, but the sandbox
-still counts toward stored usage. Starting it again needs a concurrency slot.
-An always-on sandbox retains its concurrency reservation while stopped.
-Delete sandboxes you no longer need to release stored usage.
+Stopping a sandbox releases its concurrency slot unless the sandbox is
+configured as always-on. Restarting a stopped sandbox requires a concurrency
+slot. A stopped sandbox still counts toward the stored sandbox quota.
+Delete sandboxes you no longer need to reduce stored usage.
 
-Listing sandboxes is not a reservation or an authoritative quota balance.
-Other callers can consume capacity between your list and create requests.
-Handle a quota refusal even if a preceding check showed available capacity.
-Reduce concurrency or remove unused resources before retrying a request that
-exceeds your quota.
+Handle quota errors even if you checked usage before creating a resource.
+Other applications can consume the remaining allowance between requests.
+Reduce concurrency or remove unused resources before retrying.
 
 ## Request rate limits
 
-Request rate limits are separate from resource quotas and can vary by
-operation. Limit concurrent requests, honor the server's retry delay when
-provided, and bound both retry attempts and elapsed time.
+Rate limits control how quickly you can send requests and can vary by
+operation. When a request reaches a rate limit, wait before retrying and
+honor any delay specified by the server. Limit concurrent requests and set
+bounds on retry attempts and elapsed time.
 
-Retrying immediately doesn't resolve an exhausted resource quota. Inspect
-the error details to determine whether to wait, reduce usage, or correct the
-request. See [Errors and retries](errors.md) before retrying a mutation.
+Check the error details to distinguish a rate limit from a resource quota.
+Waiting can resolve a rate limit, but exceeding a quota requires reducing
+resource usage. See [Errors and retries](errors.md) for how to retry without
+duplicating work.

@@ -33,15 +33,13 @@ await auth.getAccessToken();
 const client = new Sandboxes({ auth });
 ```
 
-Open the printed URL and complete sign-in. Calling `getAccessToken()` here
-completes sign-in before your application submits API requests.
-Browser sign-in supports single sign-on and two-factor authentication.
+Open the printed URL and complete sign-in. Browser sign-in supports single
+sign-on and two-factor authentication. The `getAccessToken()` call waits for
+you to finish before the program continues.
 
 The SDK keeps credentials in memory and refreshes them while your application
 runs. With the default configuration, you sign in again each time you start
 the application. SDK sign-in is separate from `docker login` and `sbx login`.
-Closing a client doesn't revoke sign-in. An authenticator can be
-shared by clients and remains usable after one client closes.
 
 ## Authenticate automation with a PAT
 
@@ -68,15 +66,55 @@ const client = new Sandboxes({
 ```
 
 The SDK exchanges the PAT for a short-lived access token and repeats the
-exchange when needed. An invalid or revoked PAT causes authentication to
-fail without prompting for browser sign-in. Store the PAT in your CI or
-application's secret store and keep it out of source control and logs.
+exchange when needed. If the PAT is invalid or revoked, authentication fails.
+
+Store the PAT in your CI or application's secret store and keep it out of
+source control and logs.
+
+## Authenticate agents
+
+An AI agent needs credentials for its model provider in addition to your
+Docker sign-in. For example, Claude Code can use an Anthropic API key, and
+Codex can use an OpenAI API key.
+
+Store the provider key as a secret and attach it when creating the sandbox.
+For example, with an authenticated `client` and an Anthropic API key in
+`providerKey`:
+
+```typescript
+const secret = await client.secrets.create({
+  displayName: 'anthropic-key',
+  serviceType: 'anthropic',
+  token: { value: providerKey },
+});
+
+const sandbox = await client.kits.launchAndWait('claude', {
+  storage: { secrets: [secret.name] },
+});
+```
+
+The secret is attached before the agent runs. Keep the key out of command
+arguments, source files, and plain environment variables inside the sandbox.
+
+## Resource access and permissions
+
+Your credentials determine which account's resources you can access. Cloud
+uses them to identify the account, so leave the optional `parent` field empty
+in requests.
+
+Each request also checks whether you have permission for the action on the
+target resource. For example, creating a sandbox requires `sandboxesCreate`,
+reading it requires `sandboxesRead`, and deleting it requires
+`sandboxesDelete`.
+
+Account permissions also control access to optional features. See
+[Supported Cloud options](concepts.md#choose-supported-cloud-options).
 
 ## Authenticate direct API requests
 
 If you call the REST API without the SDK, obtain and renew access tokens in
 your application. Exchange your Docker ID and a PAT with `sandbox:use`
-permission using the [Docker Hub authentication API](/reference/api/hub/latest/operations/AuthCreateAccessToken/):
+permission using the [Docker Hub authentication API](/reference/api/hub/latest.md#tag/authentication-api/operation/AuthCreateAccessToken):
 
 ```console
 $ ACCESS_TOKEN=$(curl --silent --show-error --fail --request POST \
@@ -93,47 +131,22 @@ Send the returned access token in the `Authorization` header when calling
 Authorization: Bearer <access_token>
 ```
 
-The Sandboxes API doesn't accept a PAT directly. If you manage access tokens
-in your application but use the SDK for requests, configure the
-client with `auth: bearer(accessToken)`. Import `bearer` from
-`@docker/sandboxes` and create a client with a fresh token when it expires.
+The Sandboxes API accepts the access token returned by the exchange, not the
+PAT itself.
+
+If you manage access tokens but use the SDK for requests, import `bearer` from
+`@docker/sandboxes` and configure the client with `auth: bearer(accessToken)`.
+Create a client with a fresh token when the previous token expires.
 
 ## Authenticate sandbox requests
 
-Use the SDK's sandbox methods to run commands and transfer files. The SDK
-finds the sandbox endpoint and obtains a separate token limited to that
-sandbox and the permissions needed for the operation. It reuses valid sandbox
-tokens and renews them when needed.
+The SDK handles authentication when you run commands or transfer files using
+a sandbox's methods. It obtains a token scoped to that sandbox and the
+operation, then reuses or renews the token as needed.
 
 For example, running a command requires `sandboxesExec` and obtaining its
 token requires `sandboxesCredential`. Your account must have both permissions.
-The Docker Hub token used for management requests must not be sent directly
-to a sandbox endpoint.
 
-## Authenticate agents
-
-Give your agent an API key for its model provider so it can request model
-responses. For example, Claude Code can use an Anthropic API key, and Codex
-can use an OpenAI API key. Your Docker credentials authenticate sandbox
-management. They don't give an agent access to these providers.
-
-Store the provider key with `client.secrets.create()`. Give the secret a
-`displayName`, set `serviceType` to `anthropic` for an Anthropic API key, and
-pass the key in `token.value`. Then pass the returned secret's `name` in
-`storage.secrets` when launching the `claude` kit. Attach the secret when
-creating the sandbox, before running the agent. Keep the key out of command
-arguments, source files, and plain environment variables inside the sandbox.
-
-## Resource access and permissions
-
-Your credentials determine which account's resources you can access. The API
-calls this the caller's owner scope. Cloud resolves this scope from your
-credentials, so leave the optional `parent` field empty in requests.
-
-Each request also checks whether you have permission for the action on the
-target resource. For example, creating a sandbox requires `sandboxesCreate`,
-reading it requires `sandboxesRead`, and deleting it requires
-`sandboxesDelete`.
-
-Account permissions also control access to optional features. See
-[Supported Cloud options](concepts.md#choose-supported-cloud-options).
+If you call a sandbox endpoint directly, use a token issued for that sandbox.
+Don't send the Docker Hub token used for management requests to a sandbox
+endpoint. See [Management and sandbox endpoints](concepts.md#management-and-sandbox-endpoints).

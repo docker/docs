@@ -36,14 +36,5 @@ access token for automation. The SDK supplies the service URL and manages
 access tokens. See [Authentication and authorization](authentication.md) for
 setup instructions.
 
-Use the returned sandbox's methods to run commands and transfer files. The
-SDK connects to its endpoint and obtains the required sandbox credentials.
-
 Follow [Run your first cloud sandbox](get-started.md) for a complete TypeScript
 example that creates a sandbox, runs a command, and deletes it.
-
-## File transfers and interactive processes
-
-Use the SDK to transfer files over HTTP and interact with running processes
-over WebSocket. The package also exports stream helpers from
-`@docker/sandboxes/streams`.

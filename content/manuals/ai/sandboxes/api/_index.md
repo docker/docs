@@ -19,10 +19,9 @@ Use the Docker Sandboxes API to create cloud sandboxes, run commands, and
 transfer files from your applications and automated workflows. You can also
 manage related resources, including images, snapshots, volumes, and secrets.
 
-Start from a kit that packages an agent or tool environment. The SDK manages
-the resulting sandbox and its processes, files, and lifecycle.
-
-To try it, [run your first cloud sandbox](get-started.md) with the TypeScript SDK.
+To try it, [run your first cloud sandbox](get-started.md) with the TypeScript
+SDK. The tutorial uses a bundled kit that supplies a shell environment for
+running commands.
 
 ## Activate cloud access
 
@@ -43,8 +42,8 @@ You can also call the REST API directly from any language or HTTP tool.
 
 ## Develop your application
 
-- [API concepts](concepts.md): connect to the right endpoint, identify
-  resources, and wait for actions to finish.
+- [API concepts](concepts.md): choose a kit or image, identify resources, and
+  wait for actions to finish.
 - [Authentication and authorization](authentication.md): authenticate requests
   and understand which permissions your application needs.
 - [Errors and retries](errors.md): handle failures and retry requests without
