@@ -167,10 +167,10 @@ supporting files into the serialized
 [v2 artifact format](https://github.com/docker/sbx-kits-contrib/blob/v0.17.0/spec/types.go)
 accepted by the API.
 
-The `kits` array holds the sandbox kit and any mixin kits that add
-configuration to it. See [Kits v2](../sandboxes/customize/kits-v2.md) for how these kinds of
-kits work together. The bundled launch helpers prepare this same input for
-the kits in their catalog.
+The kit artifacts described here use the v2 format. The `kits` array contains
+a sandbox kit and any mixins that add configuration to it. See the
+[v2 kit reference](../sandboxes/customize/kits-v2.md) for details. The bundled
+launch helpers prepare this same input for the kits in their catalog.
 
 Pass the kit's source reference and prepared artifact bytes to
 `client.create()`:
