@@ -42,6 +42,10 @@
   ],
   "apiPatch": "patches/api-examples.patch",
   "guidePatches": {
-    "manage-network-policies.md": "patches/manage-network-policies.patch"
+    "manage-network-policies.md": "patches/manage-network-policies.patch",
+    "run-a-complete-example.md": "patches/run-a-complete-example-timeout.patch",
+    "create-your-first-sandbox.md": "patches/create-your-first-sandbox-timeout.patch",
+    "retry-without-creating-duplicates.md": "patches/retry-without-creating-duplicates-timeout.patch",
+    "work-within-the-limits.md": "patches/work-within-the-limits-timeout.patch"
   }
 }

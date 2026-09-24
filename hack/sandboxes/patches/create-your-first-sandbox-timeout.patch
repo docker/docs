@@ -1,0 +1,31 @@
+--- a/create-your-first-sandbox.md
++++ b/create-your-first-sandbox.md
+@@ -31,8 +31,12 @@
+   kitName,
+   { resources: { cpus: 2, memoryMib: 4096 } },
+-  { signal },
++  { timeoutMs, signal },
+ );
+ const sandbox = await created.waitUntilRunning({ timeoutMs, signal });
+-const result = await sandbox.processes.run({ args }, { signal });
++const result = await sandbox.processes.run(
++  { args },
++  { timeoutMs, signal },
++);
++return { sandbox, result };
+ ```
+
+@@ -53,8 +57,11 @@
+     kitName,
+     { resources: { cpus: 2, memoryMib: 4096 } },
+-    { signal },
++    { timeoutMs, signal },
+   );
+   const sandbox = await created.waitUntilRunning({ timeoutMs, signal });
+-  const result = await sandbox.processes.run({ args }, { signal });
++  const result = await sandbox.processes.run(
++    { args },
++    { timeoutMs, signal },
++  );
+   return { sandbox, result };
+ }

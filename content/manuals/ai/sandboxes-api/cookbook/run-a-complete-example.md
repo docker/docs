@@ -52,7 +52,7 @@ export async function main() {
   const client = new Sandboxes({ auth });
   let sandbox: Sandbox | undefined;
   try {
-    const operation = { signal: AbortSignal.timeout(300_000) };
+    const operation = { timeoutMs: 300_000 };
     sandbox = await client.kits.launch(
       'shell',
       {

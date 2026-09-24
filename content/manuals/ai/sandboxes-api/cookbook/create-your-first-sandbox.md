@@ -30,10 +30,14 @@ Keep the returned sandbox name. This example leaves the sandbox available for th
 const created = await client.kits.launch(
   kitName,
   { resources: { cpus: 2, memoryMib: 4096 } },
-  { signal },
+  { timeoutMs, signal },
 );
 const sandbox = await created.waitUntilRunning({ timeoutMs, signal });
-const result = await sandbox.processes.run({ args }, { signal });
+const result = await sandbox.processes.run(
+  { args },
+  { timeoutMs, signal },
+);
+return { sandbox, result };
 ```
 
 <details>
@@ -52,10 +56,13 @@ export async function createAndRun(
   const created = await client.kits.launch(
     kitName,
     { resources: { cpus: 2, memoryMib: 4096 } },
-    { signal },
+    { timeoutMs, signal },
   );
   const sandbox = await created.waitUntilRunning({ timeoutMs, signal });
-  const result = await sandbox.processes.run({ args }, { signal });
+  const result = await sandbox.processes.run(
+    { args },
+    { timeoutMs, signal },
+  );
   return { sandbox, result };
 }
 ```

@@ -89,7 +89,12 @@ for (let attempt = 0; attempt < attempts; attempt++) {
     return await client.kits.launch(
       'shell',
       { displayName, resources: { cpus: 2, memoryMib: 4096 } },
-      { idempotencyKey: requestId, signal, maxRetries: 0 },
+      {
+        idempotencyKey: requestId,
+        timeoutMs: 300_000,
+        signal,
+        maxRetries: 0,
+      },
     );
   } catch (error) {
     if (
@@ -130,7 +135,12 @@ export async function createWithBackoff(
       return await client.kits.launch(
         'shell',
         { displayName, resources: { cpus: 2, memoryMib: 4096 } },
-        { idempotencyKey: requestId, signal, maxRetries: 0 },
+        {
+          idempotencyKey: requestId,
+          timeoutMs: 300_000,
+          signal,
+          maxRetries: 0,
+        },
       );
     } catch (error) {
       if (
