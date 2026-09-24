@@ -105,8 +105,8 @@ authorized reads return `notFound`.
 > `running` state. They don't guarantee that the kit has finished installing
 > tools, cloning repositories, or running other setup commands.
 
-Before using the results of kit setup, check that the required work has
-completed. For example, wait for a completion marker that the kit writes
+Wait until the files or services your workload needs are ready.
+For example, wait for a completion marker that the kit writes
 after a successful repository clone, or check that a service responds to a
 health request. Poll with a delay between checks and a timeout so that failed
 setup doesn't leave your application waiting indefinitely.
