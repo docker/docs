@@ -20,6 +20,7 @@ Each tool serves a different purpose.
 | Run AI models locally with an OpenAI-compatible API             | [Model Runner](./ai/model-runner/)                       | `docker model`   |
 | Connect AI tools to external services via MCP                   | [MCP Catalog and Toolkit](./ai/mcp-catalog-and-toolkit/) | `docker mcp`     |
 | Build and orchestrate custom multi-agent teams                  | [Docker Agent](./ai/docker-agent/)                       | `docker agent`   |
+| Give my coding agent Docker best-practice guidance              | [Docker Skills](./ai/skills/)                            | None             |
 | Run coding agents in isolated environments                      | [Docker Sandboxes](./ai/sandboxes/)                      | `sbx`            |
 
 ## How these tools relate
@@ -32,6 +33,12 @@ interact with it through Docker Desktop or the `docker ai` command.
 in YAML. You configure agents with specific roles, models, and tools, then
 run them from your terminal. Docker Agent is a general-purpose agent runtime,
 not specific to Docker tasks.
+
+**Docker Skills** are Docker's official, open-source instructions for compatible
+coding agents working on Docker tasks. Install them through your agent's
+supported method; they can also be used by Docker Agent and agents running in
+Docker Sandboxes. Browse the [Docker Skills
+catalog](https://github.com/docker/skills#readme) for current guidance.
 
 **Docker Sandboxes** provides isolated microVM environments for running coding
 agents. It supports multiple agents including Claude Code, Codex, Copilot,
