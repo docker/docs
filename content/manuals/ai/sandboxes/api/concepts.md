@@ -18,8 +18,7 @@ learn how to work with its resources throughout their lifecycle.
 
 A sandbox kit defines an environment for an agent or tool: its container
 image, setup, network rules, and credential requirements. You can use a kit
-bundled with the SDK or one published separately in an OCI registry. Both
-use the same kit format.
+bundled with the SDK or one published separately in an OCI registry.
 
 You can also create a sandbox from a container image. Choose the source based
 on how much of the environment you want to configure yourself:
@@ -90,11 +89,14 @@ the resolved kit artifact serialized as JSON bytes. A sandbox kit defines
 the environment, and mixin kits add configuration to it. See
 [Kits](../customize/kits.md) for how these kinds of kits work together.
 
-Your application must load the kit definition and its supporting files into
-the API's [kit artifact format](https://github.com/docker/sbx-kits-contrib/blob/v0.17.0/spec/types.go)
-before serializing it. The npm SDK has no helper to download and convert
-registry kits. The `kits.launch()` and `kits.launchAndWait()` helpers accept
-only names from the bundled catalog.
+The `kits` field is a low-level API input. It expects the kit definition and
+supporting files in the serialized
+[v2 artifact format](https://github.com/docker/sbx-kits-contrib/blob/v0.17.0/spec/types.go).
+The API doesn't accept v3 kit descriptors directly. The npm SDK has no
+helper to load registry kits or convert them into this input, so using them
+through the SDK requires loading and conversion code outside the SDK.
+The `kits.launch()` and `kits.launchAndWait()` helpers accept only names
+from the bundled catalog.
 
 This function shows the expanded request structure for a prepared sandbox
 kit. It takes the kit's source reference and serialized artifact as inputs:
@@ -122,7 +124,9 @@ raw `spec.yaml`, a kit ZIP, or an OCI manifest in this field isn't supported.
 
 To launch a public kit directly by its registry reference, you can use the
 [Docker Agentic Platform Console](/manuals/agentic-platform/kits.md#run-a-kit-by-reference),
-which loads the kit for you.
+which loads the kit for you. Its backend can load v2 and v3 kits and converts
+compatible v3 kits into the v2 artifact format that Cloud Sandboxes accepts.
+This conversion doesn't support every v3 capability.
 
 ## Management and sandbox endpoints
 
