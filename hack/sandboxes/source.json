@@ -40,5 +40,6 @@
     "stop-and-restart-a-sandbox.md",
     "what-your-workload-starts-with.md",
     "work-within-the-limits.md"
-  ]
+  ],
+  "apiPatch": "patches/api-examples.patch"
 }

@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import subprocess
 import tarfile
+import tempfile
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -42,8 +43,20 @@ def main():
         )
         outputs[GUIDES / name] = page.encode()
 
-    # Preserve the published spec byte for byte, including streaming contracts.
-    outputs[REFERENCE / "api.yaml"] = files["cookbook/outputs/api-reference/api.yaml"]
+    specification = files["cookbook/outputs/api-reference/api.yaml"]
+    # Temporary export correction, generated from the owning upstream source fix.
+    # Apply before writing any outputs, and fail if the pinned export has drifted.
+    if source.get("apiPatch"):
+        patch = MANIFEST.parent / source["apiPatch"]
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "api.yaml"
+            target.write_bytes(specification)
+            subprocess.run(
+                ["git", "apply", "--whitespace=nowarn", str(patch)],
+                cwd=temporary, check=True,
+            )
+            specification = target.read_bytes()
+    outputs[REFERENCE / "api.yaml"] = specification
 
     for destination, content in outputs.items():
         destination.parent.mkdir(parents=True, exist_ok=True)
