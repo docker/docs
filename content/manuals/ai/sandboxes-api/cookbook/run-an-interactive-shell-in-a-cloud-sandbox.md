@@ -125,7 +125,7 @@ export async function attachToProcess(
 
 Record the sequence number after handling each output chunk. On reconnect, pass the last handled sequence number to resume after that point.
 
-Connections opened through TypeScript, Python and Go process handles resume automatically after temporary disconnects while you consume output. They use the last chunk delivered to your application, not the last chunk your application saved elsewhere. Raw streams require explicit reconnection. Keep your own cursor if you need to resume after an application restart. Input is never replayed; if a write fails, check the process before sending that input again.
+Connections opened through TypeScript process handles resume automatically after temporary disconnects while you consume output. They use the last chunk delivered to your application, not the last chunk your application saved elsewhere. Raw streams require explicit reconnection. Keep your own cursor if you need to resume after an application restart. Input is never replayed; if a write fails, check the process before sending that input again.
 
 Retain the process name with the cursor. A cursor from one process cannot identify output from another. Persist the cursor only after your application has handled the corresponding output.
 

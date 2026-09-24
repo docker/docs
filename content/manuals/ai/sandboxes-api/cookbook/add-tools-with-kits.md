@@ -61,7 +61,11 @@ To run Claude Code, choose `claude` and attach a stored `anthropic` secret conta
 
 Pass a catalog name, a display name, and any stored secret names the agent needs. The example selects Small (2 vCPUs, 4 GiB) and uses the launch-and-wait helper to return a running sandbox under one deadline. Small is also the default when you omit kit resources. See [compute sizes](work-within-the-limits.md) for the other choices.
 
-Use `launch` in TypeScript and Python, or `Launch` in Go, when you want the accepted handle immediately and will wait separately. A running state is not a check that a kit's repository clone or other setup has finished; wait for any workload-specific prerequisite before using it. If the wait fails, inspect the accepted sandbox retained by the error before launching another one. Go also returns that handle alongside the error.
+Use `launch` when you want the accepted handle immediately and will wait separately. If the wait fails, inspect the accepted sandbox retained by the error before launching another one.
+
+`launchAndWait()` waits for the sandbox to reach the running state. A kit can still be installing tools or cloning a repository at that point. The SDK has no helper that waits for all kit setup to finish.
+
+If your work depends on that setup, check the result it needs before starting. For example, a kit can write a completion marker after cloning a repository, or a service can expose a health check. Poll with a delay between checks and a timeout so failed setup does not leave your application waiting indefinitely.
 
 The launch helper accepts only names returned by the bundled catalog, not community repository URLs or registry references. Account network policies still apply to kit sandboxes.
 

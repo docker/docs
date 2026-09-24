@@ -70,25 +70,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FilesListResponse"
-              example:
-                entries:
-                  - path: example
-                    size: 0
-                    mode: 0
-                    isDir: true
-                    type: unspecified
-                    linkTarget: example
-                nextPageToken: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       servers:
         - url: "{endpoint}"
           variables:
@@ -136,21 +123,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FilesRemoveResponse"
-              example:
-                completedPaths:
-                  - example
-                completedCount: 0
-                failedPath: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       servers:
         - url: "{endpoint}"
           variables:
@@ -190,7 +168,6 @@ paths:
             application/octet-stream:
               schema:
                 contentMediaType: application/octet-stream
-              example: ""
           headers:
             Content-Length:
               required: true
@@ -204,10 +181,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       servers:
         - url: "{endpoint}"
           variables:
@@ -262,7 +235,6 @@ paths:
           application/octet-stream:
             schema:
               contentMediaType: application/octet-stream
-            example: ""
       responses:
         "200":
           description: Success
@@ -270,24 +242,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FilesWriteFileResponse"
-              example:
-                info:
-                  path: example
-                  size: 0
-                  mode: 0
-                  isDir: true
-                  type: unspecified
-                  linkTarget: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       servers:
         - url: "{endpoint}"
           variables:
@@ -326,10 +286,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/FilesMkdirRequest"
-            example:
-              path: example
-              mode: 0
-              parents: true
         required: true
       responses:
         "200":
@@ -338,17 +294,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FilesMkdirResponse"
-              example: {}
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       servers:
         - url: "{endpoint}"
           variables:
@@ -434,19 +385,12 @@ paths:
                 repeatedItems: true
                 requiresClosingDelimiter: true
                 requiresTerminal: false
-              example:
-                path: example
-                mode: 0
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       servers:
         - url: "{endpoint}"
           variables:
@@ -488,9 +432,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/FilesMoveRequest"
-            example:
-              from: example
-              to: example
         required: true
       responses:
         "200":
@@ -499,7 +440,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FilesMoveResponse"
-              example: {}
         "409":
           description: |-
             The path resolves through a symlink that does not resolve to a target inside the sandbox jail.
@@ -547,10 +487,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: The path resolves through a symlink that does not resolve to a target inside the sandbox jail.
@@ -606,24 +542,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FilesStatResponse"
-              example:
-                info:
-                  path: example
-                  size: 0
-                  mode: 0
-                  isDir: true
-                  type: unspecified
-                  linkTarget: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       servers:
         - url: "{endpoint}"
           variables:
@@ -677,10 +601,6 @@ paths:
                 - content
               repeatedItems: true
               requiresClosingDelimiter: true
-            example:
-              metadata:
-                path: example
-                mode: 0
         description: Send ordered metadata/content pairs. Each metadata part is application/json; the following content part is application/octet-stream containing raw bytes, including an empty file. Content-Disposition is form-data with the corresponding part name. Content-Transfer-Encoding is refused. A clean closing multipart delimiter is required; truncated content never completes the current item. Malformed occurrences report invalidArgument with a BadRequest detail identifying the occurrence index and path.
       responses:
         "200":
@@ -689,8 +609,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FilesUploadResponse"
-              example:
-                filesWritten: 0
         "409":
           description: |-
             The path resolves through a symlink that does not resolve to a target inside the sandbox jail.
@@ -717,10 +635,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: The path resolves through a symlink that does not resolve to a target inside the sandbox jail.
@@ -769,8 +683,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/IdentityExchangeServiceExchangeDockerCredentialRequest"
-            example:
-              idToken: example
         required: true
       responses:
         "200":
@@ -779,7 +691,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ExchangeCompositionCredentialResponse"
-              example: {}
         "501":
           description: This operation is not available on this service.
           content:
@@ -798,10 +709,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: UNIMPLEMENTED
           description: This operation is not available on this service.
@@ -863,33 +770,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListImagesResponse"
-              example:
-                images:
-                  - uid: example
-                    name: images/example
-                    status: pending
-                    source: unspecified
-                    totalSizeBytes: 0
-                    createdAt: 2023-01-15T01:30:15.01Z
-                    updatedAt: 2023-01-15T01:30:15.01Z
-                    imageRef: example
-                    imageDigest: example
-                    captureMode: unspecified
-                    platform:
-                      os: example
-                      architecture: example
-                    displayName: example
-                nextPageToken: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -990,10 +876,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
           headers:
             Cache-Control:
               required: true
@@ -1073,10 +955,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: NOT_FOUND
           description: The target is absent or not visible within the caller's scope.
@@ -1167,10 +1045,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: The target's preparation, capture, or import has not finished; deletion is refused until it settles to a terminal state.
@@ -1211,20 +1085,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ImagePullSpec"
-              example:
-                manifestDigest: example
-                manifestMediaType: example
-                config:
-                  digest: example
-                  mediaType: example
-                  size: 0
-                  url: example
-                layers:
-                  - digest: example
-                    mediaType: example
-                    size: 0
-                    url: example
-                expiresAt: 2023-01-15T01:30:15.01Z
           headers:
             Cache-Control:
               required: true
@@ -1256,10 +1116,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
           headers:
             Cache-Control:
               required: true
@@ -1304,20 +1160,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/McpAuthorization"
-              example:
-                server: ""
-                uid: example
-                status: unspecified
-                authorizationUrl: example
-                createdAt: 2023-01-15T01:30:15.01Z
-                updatedAt: 2023-01-15T01:30:15.01Z
-                expiresAt: 2023-01-15T01:30:15.01Z
-                failure:
-                  code: notFound
-                  details: []
-                  message: sandbox not found
-                etag: example
-                name: example
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -1343,10 +1185,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: NOT_FOUND
           description: The target is absent or not visible within the caller's scope.
@@ -1401,9 +1239,6 @@ paths:
               title: AuthorizeMcpServerRequest
               additionalProperties: false
               description: AuthorizeMcpServerRequest starts or refreshes MCP upstream authorization.
-            example:
-              remoteUrl: https://example.com
-              forceReauth: true
         required: true
       responses:
         "200":
@@ -1420,20 +1255,6 @@ paths:
                             - pending
                       required:
                         - status
-              example:
-                server: ""
-                uid: example
-                status: unspecified
-                authorizationUrl: example
-                createdAt: 2023-01-15T01:30:15.01Z
-                updatedAt: 2023-01-15T01:30:15.01Z
-                expiresAt: 2023-01-15T01:30:15.01Z
-                failure:
-                  code: notFound
-                  details: []
-                  message: sandbox not found
-                etag: example
-                name: example
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -1478,10 +1299,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -1513,10 +1330,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -1586,30 +1399,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListPolicyLogEntriesResponse"
-              example:
-                entries:
-                  - resource: example
-                    decision: unspecified
-                    proxyType: example
-                    rule: example
-                    reason: example
-                    count: 0
-                    firstSeen: 2023-01-15T01:30:15.01Z
-                    lastSeen: 2023-01-15T01:30:15.01Z
-                    sandbox: example
-                    sandboxUid: example
-                    domain: unspecified
-                nextPageToken: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -1659,28 +1454,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListProcessesResponse"
-              example:
-                processes:
-                  - uid: example
-                    pid: 0
-                    session: example
-                    state: unspecified
-                    lastStreamSequence: 0
-                    receiptKind: unspecified
-                    exitCode: 0
-                    label: example
-                    name: example
-                nextPageToken: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       servers:
         - url: "{endpoint}"
           variables:
@@ -1706,19 +1485,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CreateProcessRequest"
-            example:
-              cmd:
-                - example
-              env: {}
-              workingDir: example
-              user: example
-              pty:
-                initialSize:
-                  rows: 0
-                  cols: 0
-                  bounded: true
-              session: example
-              label: example
         required: true
       responses:
         "201":
@@ -1727,16 +1493,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Process"
-              example:
-                uid: example
-                pid: 0
-                session: example
-                state: unspecified
-                lastStreamSequence: 0
-                receiptKind: unspecified
-                exitCode: 0
-                label: example
-                name: example
         "409":
           description: |-
             Creation conflicts with an existing resource (ALREADY_EXISTS).
@@ -1758,10 +1514,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: The Idempotency-Key was already used with a different payload.
@@ -1802,12 +1554,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ExecRequest"
-            example:
-              cmd:
-                - example
-              env: {}
-              workingDir: example
-              user: example
         required: true
       responses:
         "200":
@@ -1816,21 +1562,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ExecResponse"
-              example:
-                exitCode: 0
-                stdout: ""
-                stderr: ""
-                incomplete: true
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       servers:
         - url: "{endpoint}"
           variables:
@@ -1866,16 +1603,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Process"
-              example:
-                uid: example
-                pid: 0
-                session: example
-                state: unspecified
-                lastStreamSequence: 0
-                receiptKind: unspecified
-                exitCode: 0
-                label: example
-                name: example
         "404":
           description: The target is absent or not visible within the caller's scope.
           content:
@@ -1894,10 +1621,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: NOT_FOUND
           description: The target is absent or not visible within the caller's scope.
@@ -1940,10 +1663,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-websocket:
         subprotocol: sandboxes.v1
         firstRequestField: attach
@@ -2037,25 +1756,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ReadOutputResponse"
-              example:
-                chunks:
-                  - stream: unspecified
-                    data: ""
-                    streamSequence: 0
-                nextResumeFrom: 0
-                exited:
-                  exitCode: 0
-                  reason: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       servers:
         - url: "{endpoint}"
           variables:
@@ -2104,8 +1810,6 @@ paths:
                 - signal
               additionalProperties: false
               description: SignalRequest sends one signal.
-            example:
-              signal: term
         required: true
       responses:
         "200":
@@ -2114,17 +1818,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SignalResponse"
-              example: {}
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       servers:
         - url: "{endpoint}"
           variables:
@@ -2189,18 +1888,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListSandboxesResponse"
-              example:
-                nextPageToken: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -2294,10 +1987,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: Kit admission was refused; an available settled report describes the rejected fields.
@@ -2378,10 +2067,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: NOT_FOUND
           description: The target is absent or not visible within the caller's scope.
@@ -2500,10 +2185,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: The Idempotency-Key was already used with a different payload.
@@ -2570,8 +2251,6 @@ paths:
                 - displayName
               additionalProperties: false
               description: UpdateSandboxRequest changes only the display label under the observed etag.
-            example:
-              displayName: example
         required: true
       responses:
         "200":
@@ -2630,10 +2309,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: The Idempotency-Key was already used with a different payload.
@@ -2686,10 +2361,6 @@ paths:
                 - permissions
               additionalProperties: false
               description: CreateEndpointCredentialRequest requests only endpoint permissions the caller holds.
-            example:
-              permissions:
-                - sandboxesExec
-              ttl: 30s
         required: true
       responses:
         "200":
@@ -2698,13 +2369,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/EndpointCredential"
-              example:
-                token: example
-                expireTime: 2023-01-15T01:30:15.01Z
-                permissions:
-                  - sandboxesExec
-                sandbox: sandboxes/example
-                audience: example
           headers:
             Cache-Control:
               required: true
@@ -2717,10 +2381,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
           headers:
             Cache-Control:
               required: true
@@ -2757,15 +2417,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/McpGateway"
-              example:
-                url: example
-                state: unspecified
-                servers:
-                  - name: example
-                    type: unspecified
-                reused: true
-                uid: example
-                name: example
         "404":
           description: The target is absent or not visible within the caller's scope.
           content:
@@ -2784,10 +2435,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: NOT_FOUND
           description: The target is absent or not visible within the caller's scope.
@@ -2830,8 +2477,6 @@ paths:
                 - server
               additionalProperties: false
               description: AddMcpGatewayServerRequest adds one server to an existing ready gateway.
-            example:
-              server: example
         required: true
       responses:
         "200":
@@ -2840,20 +2485,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AddMcpGatewayServerResponse"
-              example:
-                server:
-                  name: example
-                  type: unspecified
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -2904,11 +2541,6 @@ paths:
               description: |-
                 StartMcpGatewayRequest ensures a sandbox gateway exists.
                 servers must be empty when gateway_url is set
-            example:
-              servers:
-                - example
-              static: true
-              gatewayUrl: https://example.com
         required: true
       responses:
         "200":
@@ -2925,15 +2557,6 @@ paths:
                             - provisioning
                       required:
                         - state
-              example:
-                url: example
-                state: unspecified
-                servers:
-                  - name: example
-                    type: unspecified
-                reused: true
-                uid: example
-                name: example
         "202":
           description: Accepted. The resource is still progressing; read it or follow its events until completion.
           content:
@@ -2953,10 +2576,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -2990,17 +2609,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/StopMcpGatewayResponse"
-              example: {}
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -3036,10 +2650,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -3115,30 +2725,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListPolicyLogEntriesResponse"
-              example:
-                entries:
-                  - resource: example
-                    decision: unspecified
-                    proxyType: example
-                    rule: example
-                    reason: example
-                    count: 0
-                    firstSeen: 2023-01-15T01:30:15.01Z
-                    lastSeen: 2023-01-15T01:30:15.01Z
-                    sandbox: example
-                    sandboxUid: example
-                    domain: unspecified
-                nextPageToken: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -3168,24 +2760,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListPortsResponse"
-              example:
-                published:
-                  - number: 1
-                    protocol: unspecified
-                    url: example
-                    etag: example
-                    uid: example
-                    name: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -3228,10 +2808,6 @@ paths:
                 - port
               additionalProperties: false
               description: CreatePortRequest publishes one sandbox port.
-            example:
-              port:
-                number: 1
-                protocol: unspecified
         required: true
       responses:
         "201":
@@ -3240,13 +2816,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Port"
-              example:
-                number: 1
-                protocol: unspecified
-                url: example
-                etag: example
-                uid: example
-                name: example
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -3280,10 +2849,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: ALREADY_EXISTS
           description: The sandbox already publishes this port number.
@@ -3329,13 +2894,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Port"
-              example:
-                number: 1
-                protocol: unspecified
-                url: example
-                etag: example
-                uid: example
-                name: example
           headers:
             ETag:
               description: The etag of the resource this response carries, which the next mutation of it sends as If-Match.
@@ -3361,10 +2919,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: NOT_FOUND
           description: No publication exists for this port resource name.
@@ -3441,10 +2995,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -3486,8 +3036,6 @@ paths:
                 - timeout
               additionalProperties: false
               description: RenewSandboxTimeoutRequest sets a new remaining TTL.
-            example:
-              timeout: 30s
         required: true
       responses:
         "200":
@@ -3519,10 +3067,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: UNIMPLEMENTED
           description: This operation is not available on this service.
@@ -3584,10 +3128,6 @@ paths:
                 - displayName
               additionalProperties: false
               description: CreateSnapshotRequest captures one running sandbox.
-            example:
-              displayName: example
-              description: example
-              captureMode: unspecified
         required: true
       responses:
         "201":
@@ -3648,10 +3188,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: The Idempotency-Key was already used with a different payload.
@@ -3701,9 +3237,6 @@ paths:
                 - publicKey
               additionalProperties: false
               description: IssueSSHCertRequest asks the backend to sign a caller-held public key.
-            example:
-              publicKey: example
-              ttl: 30s
         required: true
       responses:
         "201":
@@ -3712,14 +3245,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/IssueSSHCertResponse"
-              example:
-                certificate: example
-                sshConfig: example
-                knownHosts: example
-                expiresAt: 2023-01-15T01:30:15.01Z
-                host: example
-                port: 0
-                username: example
           headers:
             Cache-Control:
               required: true
@@ -3732,10 +3257,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
           headers:
             Cache-Control:
               required: true
@@ -3768,10 +3289,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
           headers:
             Cache-Control:
               required: true
@@ -3832,7 +3349,6 @@ paths:
               title: StartSandboxRequest
               additionalProperties: false
               description: StartSandboxRequest starts or resumes a sandbox.
-            example: {}
         required: false
       responses:
         "200":
@@ -3925,10 +3441,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: The Idempotency-Key was already used with a different payload.
@@ -3984,7 +3496,6 @@ paths:
               title: StopSandboxRequest
               additionalProperties: false
               description: StopSandboxRequest stops a sandbox; a backend advertising memory preservation hibernates it.
-            example: {}
         required: false
       responses:
         "200":
@@ -4077,10 +3588,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: The Idempotency-Key was already used with a different payload.
@@ -4147,8 +3654,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListSecretsResponse"
-              example:
-                nextPageToken: example
         "501":
           description: This operation is not available on this service.
           content:
@@ -4167,10 +3672,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: UNIMPLEMENTED
           description: This operation is not available on this service.
@@ -4242,10 +3743,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: UNIMPLEMENTED
           description: This operation is not available on this service.
@@ -4333,10 +3830,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: NOT_FOUND
           description: The target is absent or not visible within the caller's scope.
@@ -4458,10 +3951,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: UNIMPLEMENTED
           description: This operation is not available on this service.
@@ -4510,7 +3999,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteSecretResponse"
-              example: {}
         "412":
           description: The precondition is not the resource's current etag. The body carries failedPrecondition naming etag_mismatch and an EtagMismatch detail with the current value.
           content:
@@ -4556,10 +4044,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: UNIMPLEMENTED
           description: This operation is not available on this service.
@@ -4629,28 +4113,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListSnapshotsResponse"
-              example:
-                snapshots:
-                  - uid: example
-                    name: snapshots/example
-                    sandbox: example
-                    sandboxUid: example
-                    status: creating
-                    totalSizeBytes: 0
-                    createdAt: 2023-01-15T01:30:15.01Z
-                    captureMode: unspecified
-                    displayName: example
-                nextPageToken: example
         default:
           description: The structured Error body identifies the failure with a stable code and optional typed details.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       security:
         - bearer: []
       x-sbx-serving-surface: management
@@ -4710,10 +4178,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: NOT_FOUND
           description: The target is absent or not visible within the caller's scope.
@@ -4804,10 +4268,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: The target's preparation, capture, or import has not finished; deletion is refused until it settles to a terminal state.
@@ -4861,8 +4321,6 @@ paths:
               title: RestoreSnapshotRequest
               additionalProperties: false
               description: RestoreSnapshotRequest creates a new sandbox from one snapshot.
-            example:
-              displayName: example
         required: true
       responses:
         "201":
@@ -4933,10 +4391,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: FAILED_PRECONDITION
           description: The Idempotency-Key was already used with a different payload.
@@ -5004,8 +4458,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListVolumesResponse"
-              example:
-                nextPageToken: example
         "501":
           description: This operation is not available on this service.
           content:
@@ -5024,10 +4476,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: UNIMPLEMENTED
           description: This operation is not available on this service.
@@ -5053,8 +4501,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CreateVolumeRequest"
-            example:
-              displayName: example
         required: true
       responses:
         "201":
@@ -5101,10 +4547,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: UNIMPLEMENTED
           description: This operation is not available on this service.
@@ -5192,10 +4634,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: NOT_FOUND
           description: The target is absent or not visible within the caller's scope.
@@ -5283,10 +4721,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-              example:
-                code: notFound
-                details: []
-                message: sandbox not found
       x-sbx-error-responses:
         - code: UNIMPLEMENTED
           description: This operation is not available on this service.

@@ -25,9 +25,9 @@ Cloud Sandboxes uses fixed CPU and memory pairs as billing shapes:
 | Large  |     8 | 16 GiB |                  16384 |
 | XL     |    16 | 32 GiB |                  32768 |
 
-Choose a name instead of copying the numbers: TypeScript and Python accept `resources: 'small'` and `resources="small"`, respectively. Go uses `CreateInput{Size: sandboxes.ComputeSizeSmall}`. The names are `micro`, `small`, `medium`, `large`, and `xl`; Go uses the corresponding `ComputeSize` constants. Kit launches default to Small when you omit resources. Explicit settings take precedence.
+Choose a size by name, for example, `resources: 'small'`. The supported names are `micro`, `small`, `medium`, `large`, and `xl`. Kit launches default to Small when you omit resources. Explicit settings take precedence.
 
-You can still supply both CPU and memory directly. Use a supported pair; 1 CPU with 1024 MiB is not supported in Cloud Sandboxes. In Go, set either `Size` or `Resources`, not both. A saved image supplies its own resources, so do not override them when creating from that image. Your account and available capacity determine whether a request can be accepted. Check your Docker billing terms for prices.
+You can still supply both CPU and memory directly. Use a supported pair; 1 CPU with 1024 MiB is not supported in Cloud Sandboxes. A saved image supplies its own resources, so do not override them when creating from that image. Your account and available capacity determine whether a request can be accepted. Check your Docker billing terms for prices.
 
 ### Understand account quotas
 

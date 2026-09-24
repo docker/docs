@@ -9,7 +9,7 @@ params:
     group: "Get started"
 ---
 
-Choose an authenticator when your application creates its client. The client obtains a credential when its first request needs one, then uses it for requests to Docker Cloud Sandboxes. You need an [installed SDK](../install.md) and a Docker account with Cloud Sandboxes access.
+Choose an authenticator when your application creates its client. The client obtains a credential when its first request needs one, then uses it for requests to Docker Cloud Sandboxes. You need an [installed SDK](https://docs.docker.com/ai/sandboxes-api/install/) and a Docker account with Cloud Sandboxes access.
 
 Choose interactive sign-in when running an example yourself. Use a personal access token (PAT) for a service or CI job. If your application already manages Docker access tokens, pass a token or a token provider.
 

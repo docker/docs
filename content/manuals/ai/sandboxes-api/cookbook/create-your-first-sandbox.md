@@ -11,7 +11,7 @@ params:
 
 Create a sandbox from a kit and run a command inside it. A kit bundles an image and configuration for a tool or agent. The `shell` kit is a useful first choice because a greeting command needs no model-provider credential.
 
-[Install an SDK](../install.md) and [authenticate to Docker](connect-to-cloud-with-a-bearer-token.md) first. Pass the authenticated client to this example along with a kit name and command.
+[Install an SDK](https://docs.docker.com/ai/sandboxes-api/install/) and [authenticate to Docker](connect-to-cloud-with-a-bearer-token.md) first. Pass the authenticated client to this example along with a kit name and command.
 
 ## Launch a kit and run a command {#1-launch-a-kit-and-run-a-command}
 

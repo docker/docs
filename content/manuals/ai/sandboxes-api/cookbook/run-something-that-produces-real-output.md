@@ -50,7 +50,7 @@ The callback owns what happens to each chunk: display it, append it to a file, o
 
 Always close the connection. A stream that ends before an exit event is an incomplete observation, not proof of success. Keep the process name to [reconnect](find-a-process-you-lost-track-of.md) rather than immediately starting a duplicate command.
 
-Connections opened through TypeScript, Python and Go process handles reconnect after temporary disconnects while you consume output. They resume after the last delivered chunk and stop if recovery exceeds 30 seconds, without replaying process input. These connections have no default lifetime limit once connected, but a timeout you supply still limits the whole session. Raw streams require explicit reconnection.
+Connections opened through TypeScript process handles reconnect after temporary disconnects while you consume output. They resume after the last delivered chunk and stop if recovery exceeds 30 seconds, without replaying process input. These connections have no default lifetime limit once connected, but a timeout you supply still limits the whole session. Raw streams require explicit reconnection.
 
 {{< tabs >}}
 {{< tab name="TypeScript" >}}

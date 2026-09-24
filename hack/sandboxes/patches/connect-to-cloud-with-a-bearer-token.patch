@@ -1,7 +1,0 @@
---- a/connect-to-cloud-with-a-bearer-token.md
-+++ b/connect-to-cloud-with-a-bearer-token.md
-@@ -19,2 +19,4 @@
-
-+The request that starts sign-in also sets its deadline. Pass `{ timeoutMs: 300_000 }` as that call's request options to give yourself five minutes to sign in and complete the request.
-+
- The SDK holds credentials in memory by default and refreshes the access token as later requests need it, while refresh credentials remain valid. Close the client when finished to release SDK-owned resources. This does not delete sandboxes or revoke Docker sign-in.

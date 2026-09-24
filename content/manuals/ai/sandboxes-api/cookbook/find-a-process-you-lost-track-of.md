@@ -11,7 +11,7 @@ params:
 
 Reconnect to work after losing a process connection. Starting a new command can duplicate effects, so first look for the process you already started.
 
-Connections opened through TypeScript, Python and Go process handles recover from temporary disconnects while you consume output. They reconnect to the same process and resume after the last delivered chunk, with a 30-second budget per recovery episode. They never restart the command or replay terminal input. Raw streams require explicit reconnection. Use this guide when automatic recovery stops, you close a connection, or your application restarts.
+Connections opened through TypeScript process handles recover from temporary disconnects while you consume output. They reconnect to the same process and resume after the last delivered chunk, with a 30-second budget per recovery episode. They never restart the command or replay terminal input. Raw streams require explicit reconnection. Use this guide when automatic recovery stops, you close a connection, or your application restarts.
 
 You need a current sandbox handle and a session tag that your application assigned when it started the process. A session tag is searchable metadata, not the process's resource name.
 

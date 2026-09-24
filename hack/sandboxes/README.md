@@ -26,26 +26,10 @@ Treat these files as generated. Make prose, example, and API corrections in
 is maintained in docker/docs, along with the overview, installation,
 authentication, concepts, errors, and limits pages.
 
-The import excludes the upstream overview, installation page, and generated
-Markdown API reference. It redirects recipe installation links to the local
-installation page. Temporary `guidePatches` entries add the required active
-policy status and correct request timeouts while their upstream fixes await
-export. Remove each entry and its patch when the export includes that correction.
-The timeout patches update both the focused snippets and complete examples.
-The OpenAPI
-YAML receives the temporary correction recorded in `source.json` as
-`apiPatch`. The patch removes 13 invalid generated examples without changing
-API schemas or operations. Missing examples are accepted by the renderer;
-examples that are present must pass schema validation.
-The proposed upstream change stops synthesizing examples and preserves authored
-examples. The export patch removes
-only the invalid examples from the pinned export while that change is pending.
-The import applies the patch before writing any files and rejects mismatches.
-
-After sbx-api publishes the corrected export, update the pinned commits,
-remove `apiPatch` and the patch file, and import again. The YAML can then
-be copied byte for byte. Until then, running the import requires `git`
-in addition to Python and `gh`.
+The import copies the selected recipes and OpenAPI specification byte for byte.
+It excludes the upstream overview, installation page, and generated Markdown
+API reference. Recipe installation links point to the canonical Docker Docs
+installation page.
 
 The specification is registered in `hack/api-docs/sources.json`. The shared API
 renderer generates an overview and separate operation and schema pages under

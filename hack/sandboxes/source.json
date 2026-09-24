@@ -1,7 +1,7 @@
 {
   "repository": "docker/sbx-api",
-  "generatedCommit": "12a7cf2031b56fc0a0c5f601cb92791b62d92a9a",
-  "sourceCommit": "68f214b9d884cc805527cff7517397b7972106c3",
+  "generatedCommit": "60d79c1d7744aa5ea5b3cfe871a2faaa5070e7ec",
+  "sourceCommit": "1a7f40266bc009e9602f3ca8a1cf809e1fc391f5",
   "guides": [
     "add-a-docker-credential-for-cloud-sandboxes.md",
     "add-tools-with-kits.md",
@@ -39,30 +39,5 @@
     "stop-and-restart-a-sandbox.md",
     "what-your-workload-starts-with.md",
     "work-within-the-limits.md"
-  ],
-  "apiPatch": "patches/api-examples.patch",
-  "guidePatches": {
-    "manage-network-policies.md": "patches/manage-network-policies.patch",
-    "run-a-complete-example.md": "patches/run-a-complete-example-timeout.patch",
-    "create-your-first-sandbox.md": "patches/create-your-first-sandbox-timeout.patch",
-    "retry-without-creating-duplicates.md": "patches/retry-without-creating-duplicates-timeout.patch",
-    "work-within-the-limits.md": "patches/work-within-the-limits-timeout.patch",
-    "give-a-sandbox-an-mcp-gateway.md": "patches/give-a-sandbox-an-mcp-gateway.patch",
-    "run-your-first-command.md": "patches/run-your-first-command.patch",
-    "run-something-that-produces-real-output.md": "patches/run-something-that-produces-real-output.patch",
-    "send-values-the-api-accepts.md": "patches/send-values-the-api-accepts.patch",
-    "let-a-stopped-sandbox-resume-on-demand.md": "patches/let-a-stopped-sandbox-resume-on-demand.patch",
-    "control-what-a-sandbox-can-reach.md": "patches/control-what-a-sandbox-can-reach.patch",
-    "what-your-workload-starts-with.md": "patches/what-your-workload-starts-with.patch",
-    "run-your-own-container-image.md": "patches/run-your-own-container-image.patch",
-    "get-a-stored-secret-into-a-sandbox.md": "patches/get-a-stored-secret-into-a-sandbox.patch",
-    "connect-to-cloud-with-a-bearer-token.md": "patches/connect-to-cloud-with-a-bearer-token.patch",
-    "snapshot-and-fork-a-sandbox.md": "patches/snapshot-and-fork-a-sandbox.patch",
-    "keep-a-cloud-sandbox-running.md": "patches/keep-a-cloud-sandbox-running.patch",
-    "clone-a-cloud-sandbox.md": "patches/clone-a-cloud-sandbox.patch",
-    "attach-persistent-storage.md": "patches/attach-persistent-storage.patch",
-    "add-tools-with-kits.md": "patches/add-tools-with-kits.patch",
-    "recover-when-the-endpoint-moves.md": "patches/recover-when-the-endpoint-moves.patch",
-    "run-work-across-many-sandboxes.md": "patches/run-work-across-many-sandboxes.patch"
-  }
+  ]
 }

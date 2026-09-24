@@ -11,7 +11,7 @@ params:
 
 Run a small program that signs in to Docker, creates a sandbox from the `shell` kit, prints a greeting, and deletes the sandbox. You do not need a model-provider key for this example.
 
-[Install your SDK](../install.md) first. Your Docker account must have Cloud Sandboxes access and billing set up. This program creates a real sandbox with 2 CPUs and 4096 MiB of memory; compute usage is subject to your Docker billing terms.
+[Install your SDK](https://docs.docker.com/ai/sandboxes-api/install/) first. Your Docker account must have Cloud Sandboxes access and billing set up. This program creates a real sandbox with 2 CPUs and 4096 MiB of memory; compute usage is subject to your Docker billing terms.
 
 ## Run the program {#1-run-the-program}
 
