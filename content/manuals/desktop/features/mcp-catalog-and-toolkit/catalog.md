@@ -1,4 +1,5 @@
 ---
+url: /ai/mcp-catalog-and-toolkit/catalog/
 title: Docker MCP Catalog
 linkTitle: Catalog
 description: Browse Docker's curated collection of verified MCP servers, and create custom catalogs for your team or organization.
@@ -14,7 +15,7 @@ Hub. It solves common challenges with running MCP servers locally: environment
 conflicts, setup complexity, and security concerns.
 
 The catalog serves as the source of available MCP servers. When you add servers
-to your [profiles](/manuals/ai/mcp-catalog-and-toolkit/profiles.md), you select
+to your [profiles](/manuals/desktop/features/mcp-catalog-and-toolkit/profiles.md), you select
 them from the catalog. Each server runs as an isolated container, making it
 portable and consistent across different environments.
 
@@ -116,7 +117,7 @@ its servers to your profiles.
 ### Create and manage custom catalogs
 
 Creating and managing custom catalogs requires the CLI. See
-[Custom catalogs](/manuals/ai/mcp-catalog-and-toolkit/cli.md#custom-catalogs)
+[Custom catalogs](/manuals/desktop/features/mcp-catalog-and-toolkit/cli.md#custom-catalogs)
 in the CLI how-to for step-by-step instructions, including:
 
 - Curating a subset of the Docker catalog

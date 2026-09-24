@@ -1,4 +1,5 @@
 ---
+url: /ai/mcp-catalog-and-toolkit/get-started/
 title: Get started with Docker MCP Toolkit
 linkTitle: Get started
 description: Learn how to quickly install and use the MCP Toolkit to set up servers and clients.
@@ -455,7 +456,7 @@ $ vibe "{{% param test_prompt %}}"
 
 ## Further reading
 
-- [MCP Profiles](/manuals/ai/mcp-catalog-and-toolkit/profiles.md)
-- [MCP Toolkit](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md)
-- [MCP Catalog](/manuals/ai/mcp-catalog-and-toolkit/catalog.md)
-- [MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
+- [MCP Profiles](/manuals/desktop/features/mcp-catalog-and-toolkit/profiles.md)
+- [MCP Toolkit](/manuals/desktop/features/mcp-catalog-and-toolkit/toolkit.md)
+- [MCP Catalog](/manuals/desktop/features/mcp-catalog-and-toolkit/catalog.md)
+- [MCP Gateway](/manuals/desktop/features/mcp-catalog-and-toolkit/mcp-gateway.md)

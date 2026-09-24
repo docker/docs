@@ -117,7 +117,7 @@ See [Configuration options](configuration.md) for details on context size and ot
 > Using Testcontainers or Docker Compose?
 > [Testcontainers for Java](https://java.testcontainers.org/modules/docker_model_runner/)
 > and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/), and
-> [Docker Compose](/manuals/ai/compose/models-and-compose.md) support Docker
+> [Docker Compose](/manuals/compose/how-tos/models-and-compose.md) support Docker
 > Model Runner.
 
 ## Security and isolation

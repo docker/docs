@@ -1,9 +1,9 @@
 ---
+url: /ai/mcp-catalog-and-toolkit/
 title: Docker MCP Catalog and Toolkit
 linkTitle: MCP Catalog and Toolkit
 params:
   sidebar:
-    group: AI and agents
     badge:
       color: blue
       text: Beta

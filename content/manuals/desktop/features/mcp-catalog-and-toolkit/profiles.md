@@ -1,4 +1,5 @@
 ---
+url: /ai/mcp-catalog-and-toolkit/profiles/
 title: MCP Profiles
 linkTitle: Profiles
 description: Organize MCP servers into profiles for different projects and environments
@@ -18,7 +19,7 @@ your server configurations.
 
 A profile is a named collection of MCP servers with their configurations and
 settings. You select servers from the [MCP
-Catalog](/manuals/ai/mcp-catalog-and-toolkit/catalog.md) (the source of
+Catalog](/manuals/desktop/features/mcp-catalog-and-toolkit/catalog.md) (the source of
 available servers) and add them to your profiles (your configured server
 collections for specific work). Think of the catalog as a library of tools, and
 profiles as your toolboxes organized for different jobs.
@@ -129,7 +130,7 @@ From within a profile:
 3. Search for and select servers to add.
 
 If a server requires OAuth authentication, you're prompted to authorize it. See
-[OAuth authentication](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md#oauth-authentication)
+[OAuth authentication](/manuals/desktop/features/mcp-catalog-and-toolkit/toolkit.md#oauth-authentication)
 for details.
 
 ### List servers in a profile
@@ -163,7 +164,7 @@ This means all profiles use the same OAuth credentials for a given service. If
 you need to use different accounts for different projects, you'll need to
 revoke and re-authorize between switching profiles.
 
-See [OAuth authentication](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md#oauth-authentication)
+See [OAuth authentication](/manuals/desktop/features/mcp-catalog-and-toolkit/toolkit.md#oauth-authentication)
 for details on authorizing servers.
 
 ### Configuration persistence
@@ -262,7 +263,7 @@ specify a different `--profile` value in the gateway command arguments.
 
 ## Further reading
 
-- [Get started with MCP Toolkit](/manuals/ai/mcp-catalog-and-toolkit/get-started.md)
-- [Use MCP Toolkit from the CLI](/manuals/ai/mcp-catalog-and-toolkit/cli.md)
-- [MCP Catalog](/manuals/ai/mcp-catalog-and-toolkit/catalog.md)
-- [MCP Toolkit](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md)
+- [Get started with MCP Toolkit](/manuals/desktop/features/mcp-catalog-and-toolkit/get-started.md)
+- [Use MCP Toolkit from the CLI](/manuals/desktop/features/mcp-catalog-and-toolkit/cli.md)
+- [MCP Catalog](/manuals/desktop/features/mcp-catalog-and-toolkit/catalog.md)
+- [MCP Toolkit](/manuals/desktop/features/mcp-catalog-and-toolkit/toolkit.md)
