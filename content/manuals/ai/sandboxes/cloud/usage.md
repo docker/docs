@@ -284,7 +284,7 @@ credentials before saving a template. Managed cloud secrets stay in the secret
 store. See [Authenticate cloud agents](credentials.md).
 
 Cloud sandboxes also support sandbox kits and `--kit` mixins. See
-[Kits](../customize/kits.md) for customization and
+[Kits](../customize/_index.md) for customization and
 [Local and cloud differences](local-vs-cloud.md) for host-dependent features.
 Configure [cloud credentials](credentials.md) before adapting a local kit.
 

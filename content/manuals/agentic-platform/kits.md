@@ -68,7 +68,7 @@ base image and keep the kit's bundled files small.
 
 To ask your coding agent to help create a kit, copy the prompt from **Kits** and
 paste it into your agent. Follow the **Kit authoring docs** link for instructions,
-or see [Kit authoring](/manuals/ai/sandboxes/customize/kits.md).
+or see [Kit authoring](/manuals/ai/sandboxes/customize/author/_index.md).
 
 After publishing the kit to a public registry, enter its reference in the
 launcher. Its base image must also be public.
