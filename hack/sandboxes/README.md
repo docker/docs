@@ -5,6 +5,9 @@ The public cookbook export is published to the `generated` branch of
 the generated commit and the source commit recorded in that export's `SOURCE`
 file. The guide list explicitly selects the recipes to publish.
 
+`name-a-sandbox-and-find-it-again.md` is temporarily excluded pending a
+working example. Restore its manifest entry and import it after verification.
+
 Run the import from the repository root with Python 3 and `gh` authenticated for
 `docker/sbx-api`:
 
