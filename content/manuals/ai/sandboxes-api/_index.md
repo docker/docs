@@ -5,6 +5,7 @@ description: Use the Docker Sandboxes API and TypeScript SDK to manage cloud san
 keywords: docker sandboxes API, cloud sandboxes API, sandbox SDK, TypeScript SDK, JavaScript
 weight: 15
 params:
+  apiReferenceBanner: false
   sidebar:
     group: AI and agents
     badge:
