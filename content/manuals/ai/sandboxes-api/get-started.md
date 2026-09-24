@@ -115,6 +115,8 @@ doesn't delete the sandbox.
 
 ## Next steps
 
+- Explore the [SDK cookbook](cookbook/_index.md) for examples you can use in
+  your application.
 - If you use a kit that clones a repository or installs tools,
   [wait for kit setup](concepts.md#wait-for-kit-setup) before using its results.
 - Read [API concepts](concepts.md) to learn about resource names, lifecycle

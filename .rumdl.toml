@@ -23,6 +23,8 @@ enable = [
   "MD059",
 ]
 exclude = [
+  # Generated upstream reference; fix prose in docker/sbx-api.
+  "content/reference/api/sandboxes/index.md",
   "content/manuals/desktop/previous-versions/*.md",
   "content/manuals/engine/release-notes/*.md",
 ]
