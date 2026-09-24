@@ -9,28 +9,46 @@ aliases:
   - /agentic-platform/guides/create-and-apply-policies/
 ---
 
-Network policies control the external destinations that sandboxes can reach.
-They are separate from MCP server connections and secret bindings.
+Use network policies to control which hosts and services your sandbox can
+reach. For tools and authentication, configure [MCP](mcp.md) and
+[Secrets](secrets.md) separately.
 
-Docker Agentic Platform uses two types of network policy:
+There are two types of network policy:
 
-- Kit policies are read-only policies for each sandbox type. The corresponding
-  kit policy is applied automatically when you create a sandbox. These rules
-  are the sandbox type's kit defaults. Review them under **Kit policies** on the
-  **Policies** page.
+- Kit policies are the read-only network rules defined by the selected kit.
+  They apply automatically when you create a sandbox, including when you use a
+  custom kit. Review curated kit rules under **Kit policies** on the
+  **Policies** page. The launcher's policy picker also shows the selected kit's
+  policy when the kit includes network rules.
 - User policies are policies that you can select when you create a sandbox.
-  Docker provides the read-only **Open** and **Balanced** presets, and you can
-  create custom policies. **Open** allows all outbound destinations.
-  **Balanced** allows a curated set of destinations.
+  Choose the read-only **Open** or **Balanced** presets, or create a custom
+  policy. **Open** allows outbound access to any host. **Balanced** allows
+  access to a curated set of hosts and services.
 
-You can select no user policies, one policy, or multiple policies. The selected
-user policies are combined with the sandbox type's kit policy. Docker evaluates
-all applicable rules, and a deny rule takes precedence over an allow rule.
+## Select policies for a sandbox
 
-If you select no user policies, only the kit policy applies. Network access is
-default-deny, so the sandbox can reach only destinations that the kit policy
-explicitly allows. If its kit policy has no network rules, all outbound
-destinations are blocked.
+The launcher remembers your policy selections from the previous launch in the
+same browser. Without saved selections, it selects the account's policies
+marked **Always applied**. These policies can't be deselected in the launcher.
+You can select zero, one, or several additional user policies.
+
+## How policies combine
+
+Allow rules from all applicable user policies and the kit are combined. A
+destination allowed by any of these rules is permitted unless an explicit
+deny rule blocks it. Deny rules take precedence over allow rules.
+
+For example, selecting both **Open** and **Balanced** permits all outbound
+destinations except those explicitly denied. Open's `**` rule already allows
+all destinations, so Balanced's allow list doesn't narrow access. To restrict
+access with an allow list, deselect **Open** if it is selected and can be
+removed, and review the allow rules in the remaining policies and kit.
+
+If the combined allow list contains any rules, destinations outside that list
+are blocked. This default behavior isn't an explicit deny rule: adding an
+allow rule in another policy permits the matching destinations. If the
+combined allow list is empty or absent, the sandbox can reach any destination
+except those blocked by deny rules.
 
 ## Policy rules
 
@@ -50,34 +68,28 @@ root domain. Add each pattern required by your destinations.
 You can also match IPv4 and IPv6 CIDR ranges, such as `10.0.0.0/8`,
 `192.168.1.0/24`, and `2001:db8::/32`.
 
-When defining access, include every service the sandbox needs during startup
-and operation. Depending on the workload, these services can include source
-control hosts, package registries, and model providers.
+Include the hosts your agent needs both during setup and while it runs, such
+as source control services, package registries, and model providers.
 
 ## Create a policy
 
 1. Open **Policies** and select **New policy**.
-2. Enter a name that identifies the intended workload or access level.
+2. Give the policy a name that describes what it's for.
 3. Add allow and deny rules for the required destinations.
 4. Review the rules and save the policy.
 
 To apply the policy, select it under **Egress policy for this sandbox** when you
 create a sandbox.
 
-You can edit, copy, or delete a custom policy. Docker-managed policies cannot
-be edited or deleted.
+You can edit, copy, or delete a custom policy. You can't edit or delete the
+built-in presets or kit policies.
 
 ## Understand blocked access
 
-An agent might report an HTTP 403 response, a connection failure, or another
-service error when a required destination is not allowed. The error output from
-the agent or tool is the primary source for identifying the destination.
+If a policy blocks a service, your agent or tool might report an HTTP 403
+response, a connection failure, or another service error. Check the error
+message for the host it tried to reach.
 
-For a sandbox that uses limited access, account for every host and port the
-workload needs, including source control, package registries, model providers,
-and supporting APIs. Add the narrowest allow rule that covers the required
-destination. Use **Open** when broad outbound access is appropriate for the
-workload.
-
-Network policy controls outbound destinations. It does not grant MCP tools or
-supply credentials. Configure those separately under **MCP** and **Secrets**.
+Check that your allow rules cover the host and port, along with any supporting
+APIs the service needs. Add the narrowest rule that permits the required
+access. Use **Open** if your task needs broad outbound access.

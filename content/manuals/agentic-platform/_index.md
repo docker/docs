@@ -1,11 +1,8 @@
 ---
 title: Docker Agentic Platform
-description: Run agents and tools in isolated, hosted sandboxes with Docker Agentic Platform.
-keywords: docker agentic platform, agents, sandboxes, mcp, secrets, network policies
+description: Run agents and tools in isolated cloud sandboxes with Docker Agentic Platform.
+keywords: docker agentic platform, agents, kits, sandboxes, mcp, secrets, network policies
 weight: 5
-sitemap: false
-cascade:
-  sitemap: false
 params:
   sidebar:
     group: AI and agents
@@ -13,12 +10,20 @@ params:
       color: violet
       text: Experimental
 grid:
+  - title: Sign up
+    description: Activate cloud access and review billing.
+    icon: credit-card
+    link: /agentic-platform/signup/
   - title: Get started
-    description: Choose an agent environment and start a sandbox.
+    description: Start your first sandbox.
     icon: rocket-launch
     link: /agentic-platform/get-started/
+  - title: Kits
+    description: Find a kit or run your own public kit.
+    icon: cube
+    link: /agentic-platform/kits/
   - title: Sandboxes
-    description: Work with hosted agent environments.
+    description: Access, pause, resume, and delete your sandboxes.
     icon: command-line
     link: /agentic-platform/sandboxes/
   - title: MCP
@@ -34,7 +39,7 @@ grid:
     icon: shield-check
     link: /agentic-platform/policies/
   - title: FAQ
-    description: Review launch scope and product boundaries.
+    description: Find answers about access, billing, and supported features.
     icon: question-mark-circle
     link: /agentic-platform/faq/
 ---
@@ -42,29 +47,29 @@ grid:
 > [!NOTE]
 > Docker Agentic Platform is experimental. Features and behavior may change.
 
-Docker Agentic Platform runs agents and agent-powered tools in isolated
-sandboxes on Docker-managed cloud infrastructure. An active workload is not
-tied to your computer remaining awake or connected. You can leave the Console
-and return to the sandbox while the agent continues working.
+Docker Agentic Platform lets you run agents and tools in isolated cloud
+sandboxes. Your agent keeps working when you close the Console, disconnect
+your computer, or put it to sleep.
 
 For sandboxes that run on your development machine through the `sbx` CLI, see
 [Docker Sandboxes](/manuals/ai/sandboxes/_index.md).
 
-From the web Console, choose the type of sandbox to run and configure its model
-credential, network access, tools, and compute. Docker creates the sandbox and
-opens a live terminal for interacting with the agent. The **Sandboxes** page
-provides one place to return to and manage your running and paused workloads.
+In the Console, choose a [kit](/manuals/agentic-platform/kits.md) and configure
+the sandbox's credentials, network access, tools, and compute size. Once it
+starts, use its terminal to work with the agent. You can return to running or
+paused sandboxes from **Sandboxes**.
 
-Account-level configuration can be reused across sandboxes:
+You can reuse these settings across sandboxes:
 
 - [MCP](/manuals/agentic-platform/mcp.md) connects external tools.
 - [Secrets](/manuals/agentic-platform/secrets.md) provide credentials
   without placing their values inside a sandbox.
 - [Network policies](/manuals/agentic-platform/policies.md) control
-  outbound destinations.
+  which hosts and services a sandbox can reach.
 
-To begin, open [Docker Agentic Platform](https://agentic-platform.docker.com/)
-and sign in with your Docker account. Docker meters sandbox compute per second.
-For account and payment information, see [Docker Billing](/subscription-billing/).
+To begin, [activate your subscription](signup.md#activate-cloud-access), then
+[start a sandbox](get-started.md). You pay for compute by the second while your
+sandbox runs. See [Signup and billing](signup.md) for account and payment
+information.
 
 {{< grid >}}

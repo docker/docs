@@ -10,56 +10,71 @@ aliases:
 
 ## What can I run in Docker Agentic Platform?
 
-Docker Agentic Platform provides predefined sandbox types for Claude Code,
-Codex, OpenCode, Copilot, Gemini CLI, and Shell. Each type runs in an isolated,
-Docker-hosted sandbox with a live terminal.
+You can run agents such as Claude Code, Codex, and Hermes in isolated cloud
+sandboxes with live terminals. Browse [Kits](kits.md) for curated and community
+agents, or choose Shell to work without an agent. You can also enter a public
+kit reference in the launcher.
+
+## Can I use private kits?
+
+You can run private Docker Hub kits using the Docker Sandboxes CLI. Launching
+a kit from the Console requires both the kit and its base image to be public.
+The **Kits** page provides the CLI command to copy.
+
+To access private GitHub repositories from inside a sandbox, use a
+[GitHub credential](secrets.md#github-credential).
 
 ## How does Docker Agentic Platform differ from Docker Sandboxes?
 
-Docker Agentic Platform runs sandboxes on Docker-managed cloud infrastructure
-through a web Console. Docker Sandboxes runs sandboxes on your development
-machine through the `sbx` command. Docker Agentic Platform manages the compute,
-MCP connections, secrets, and network policies used by its hosted sandboxes.
+With Docker Agentic Platform, you run sandboxes in the cloud and manage their
+compute, MCP connections, secrets, and network policies in a web Console. For
+local development, Docker Sandboxes runs on your machine through the `sbx`
+command.
 
 ## Can I move a sandbox between my machine and Docker Agentic Platform?
 
-No. Local and hosted sandboxes are separate in the initial release. You cannot
-move a running sandbox or its local bind mounts into Docker Agentic Platform.
+No. The initial release doesn't support moving a running sandbox or its local
+bind mounts from your machine to the cloud.
 
 ## Can I share sandboxes and configuration with a team?
 
-The initial self-service experience is single-user. You manage your own
-sandboxes, MCP connections, secrets, and network policies. Shared workspaces
-and collaborative ownership are not part of the initial release.
+The initial release is for individual use. You manage your own sandboxes, MCP
+connections, secrets, and network policies. Shared workspaces and team
+ownership aren't supported.
 
 ## How does a sandbox access external services?
 
-By default, every new sandbox uses the **Open** user policy, regardless of
-sandbox type. **Open** allows access to all outbound destinations. To restrict
-egress, replace **Open** with **Balanced**, a custom policy, or no user policy.
+The **Open** user policy allows outbound access to any host. **Balanced**
+allows a curated set of hosts and services. Allow rules from all applicable
+policies are combined: selecting both **Open** and **Balanced** permits all
+outbound destinations except those blocked by explicit deny rules. Balanced's
+allow list doesn't restrict Open's access. To restrict access with an allow
+list, deselect **Open** if it is selected and can be removed.
 
-Network policies control the destinations a sandbox can reach. The sandbox
-type's read-only kit policy applies automatically, and you can select zero or
-more user policies when you create the sandbox. If you select no user policies,
-only the kit policy applies and destinations that it does not allow are blocked.
-A deny rule takes precedence over an allow rule. Docker stores configured
-secret values outside the sandbox and applies them to matching requests through
-the sandbox proxy.
+The launcher remembers your policy selections from the previous launch in the
+same browser. Without saved selections, it selects the account's policies
+marked **Always applied**. These policies can't be deselected in the launcher.
+
+Your kit's network rules also apply. If an allow rule and a deny rule match
+the same destination, the deny rule wins. See [Network policies](policies.md)
+for details.
+
+For services that need authentication, save your credentials under
+[Secrets](secrets.md). The sandbox proxy adds them to matching requests without
+exposing their values to the agent.
 
 ## How are sandbox usage and model inference billed?
 
-Docker bills sandbox compute per second while the sandbox runs. The Console
-also shows the equivalent hourly rate.
+You pay for compute by the second while your sandbox runs. The Console also
+shows the equivalent hourly rate.
 
-Model inference is billed separately. The sandbox uses your credential for an
-external model provider, which meters and bills inference under that provider
-account. See [Docker Billing](/subscription-billing/) for account, usage, and payment
-information.
+Your model provider bills inference separately, under the account associated
+with your API key. See [Docker Billing](/subscription-billing/) for account,
+usage, and payment information.
 
 ## How long are logs, telemetry, and snapshots retained?
 
-Docker retains Docker Agentic Platform service logs for 31 days and raw
-telemetry for 12 months.
+Service logs are kept for 31 days and raw telemetry for 12 months.
 
 All snapshots, including the most recent snapshot created when you pause a
 sandbox, are automatically deleted after seven days of non-use.
