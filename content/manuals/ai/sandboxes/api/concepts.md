@@ -16,16 +16,19 @@ learn how to work with its resources throughout their lifecycle.
 
 ## Kits and sandbox images
 
-A kit packages an image and configuration for an agent or tool. Use a kit to
-start with that environment, then use the SDK to run processes, transfer
-files, and manage the sandbox's lifecycle.
+A sandbox kit defines an image and configuration for an agent or tool. Use a
+kit to start with that environment, then use the SDK to run processes,
+transfer files, and manage the sandbox's lifecycle. You can author your own
+kits and distribute them through OCI registries. See
+[Kit authoring and distribution](../customize/kits.md#packaging-and-distribution).
 
 You can also create a sandbox from a container image. Choose the source based
 on how much of the environment you want to configure yourself:
 
 | Source | What it provides | SDK example |
 | --- | --- | --- |
-| Kit | An image plus agent or tool configuration | `client.kits.launchAndWait('shell')` |
+| Bundled kit | An image plus agent or tool configuration from the SDK's catalog | `client.kits.launch('shell')` |
+| Custom kit (`kits`) | Your own sandbox kit, supplied as artifact content | `client.create({ kits, resources: 'small' })` |
 | Registry image (`imageRef`) | A container image to use with your own sandbox settings | `client.create({ imageRef: 'ubuntu:24.04', resources: 'small' })` |
 | Image resource (`image`) | An image already prepared for Cloud Sandboxes, including its compute settings | `client.create({ image: 'images/<uid>' })` |
 
@@ -34,6 +37,15 @@ resource name returned by the Sandboxes API. When you use `image`, omit
 `resources` because the image resource supplies its compute settings.
 A named kit supplies its own image, so omit both `image` and `imageRef` when
 launching one.
+
+For a custom kit, `kits` is an array of kit inputs containing the kit's
+reference and JSON artifact bytes. Your application must fetch and prepare
+that content. The `kits.launch()` and `kits.launchAndWait()` helpers accept
+bundled kit names, not OCI references.
+
+Both `create()` and `kits.launch()` return after creation is accepted. Call
+`waitUntilRunning()` on the returned sandbox before running commands. For a
+bundled kit, `kits.launchAndWait()` combines creation and waiting in one call.
 
 ### Bundled kits
 
@@ -51,9 +63,9 @@ The SDK includes these kits:
 | `opencode` | OpenCode |
 
 For example, `client.kits.launchAndWait('shell')` creates a shell sandbox and
-waits until it's running. Kit launches default to Small compute, with two CPUs
-and 4 GiB of memory. To see the catalog bundled with your installed SDK
-version, call `client.kits.list()`.
+waits until it's running. The kit launch helpers default to Small compute,
+with two CPUs and 4 GiB of memory. To see the catalog bundled with your
+installed SDK version, call `client.kits.list()`.
 
 To run an AI agent, also provide credentials for the service that supplies its
 models. For example, Claude Code can use an Anthropic API key, and Codex can
@@ -131,6 +143,7 @@ subject to account permissions and feature availability. For example, volume
 access must be enabled for your account. An SDK method's presence doesn't
 guarantee that your account can use it.
 
-Leave `parent` empty for Cloud requests. Kit launches default to Small compute.
-For a registry image, select a [compute size](limits.md#compute-sizes) with
-`resources`, such as `resources: 'small'`.
+Leave `parent` empty for Cloud requests. The kit launch helpers default to
+Small compute. When calling `client.create()` with a custom kit or registry
+image, select a [compute size](limits.md#compute-sizes) with `resources`, such
+as `resources: 'small'`.

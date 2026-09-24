@@ -25,8 +25,8 @@ Cloud Sandboxes supports these CPU and memory pairs:
 | `large` | 8 | 16 GiB | 16384 |
 | `xl` | 16 | 32 GiB | 32768 |
 
-Kit launches default to `small` when you omit `resources`. To select another
-size, pass its name:
+The kit launch helpers default to `small` when you omit `resources`. To select
+another size, pass its name:
 
 ```typescript
 const sandbox = await client.kits.launchAndWait('shell', {
