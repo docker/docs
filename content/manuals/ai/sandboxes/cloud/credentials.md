@@ -47,8 +47,8 @@ $ sbx --cloud run claude --name cloud-project
 
 ## Keep credentials out of the sandbox filesystem
 
-Credentials configured with `sbx --cloud secret` stay in the cloud secret store,
-outside the sandbox filesystem.
+Docker stores credentials configured with `sbx --cloud secret` in its cloud
+secret store, outside the sandbox filesystem.
 
 An agent's interactive sign-in can write credentials inside the sandbox.
 Those files can be included in templates and `sbx move` snapshots. If you
@@ -149,3 +149,7 @@ Custom secrets can also be removed by a host they serve, using
 `sbx --cloud secret rm --host api.example.com`. Removal asks for confirmation.
 Use `--force` in scripts. Cloud mode doesn't support removing every secret in
 one operation.
+
+Removing a secret deletes it from Docker's cloud secret store. It does not
+revoke the credential at its provider. To revoke the credential itself, use
+the provider's controls.
