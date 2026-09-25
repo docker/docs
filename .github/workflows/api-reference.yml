@@ -46,6 +46,9 @@ jobs:
           source: .
           files: docker-bake.hcl
           targets: validate-api-reference
+          set: |
+            validate-api-reference.cache-from=type=gha,scope=api-reference
+            validate-api-reference.cache-to=type=gha,scope=api-reference,mode=max
       - name: Report validation failure
         if: failure()
         run: |
