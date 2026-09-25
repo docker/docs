@@ -87,11 +87,15 @@ In this first step, you will create your own base image that you will then use f
 
     You should then see a “Hello world!” appear in the console.
 
-5. Now that you have Node installed, you’re ready to save the changes you’ve made as a new image layer, from which you can start new containers or build new images. To do so, you will use the [`docker container commit`](https://docs.docker.com/reference/cli/docker/container/commit/) command. Run the following command in a new terminal:
+5. Now that you have Node installed, you’re ready to save the changes you’ve made as a new image layer, from which you can start new containers or build new images. To do so, you will use the [`docker container commit`](https://docs.docker.com/reference/cli/docker/container/commit/) command.
+
+    Keep the container running, then open a **new terminal on your host** (not inside the container shell) and run:
 
     ```console
     $ docker container commit -m "Add node" base-container node-base
     ```
+
+    If you try this command inside the container, you'll get `docker: command not found` because Docker runs on the host.
 
 6. View the layers of your image using the `docker image history` command:
 
