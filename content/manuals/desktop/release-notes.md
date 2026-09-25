@@ -75,7 +75,7 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 -Fixed a false "Virtualization support not detected" error when starting the WSL2 backend on Windows systems with Virtual Machine Platform enabled but the vfpext service absent.
 - Fixed a startup crash (exit code 151) on Windows when config files such as `settings-store.json` or `daemon.json` were saved with a UTF-8 BOM by an external editor or provisioning tool.
 
-#### For Linux
+#### For Linux
 
 - Docker Desktop no longer overwrites a more recent CLI plugin installed under `~/.docker/cli-plugins`, matching existing Windows behavior.
 
