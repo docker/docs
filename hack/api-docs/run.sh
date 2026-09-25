@@ -32,7 +32,6 @@ case "${1:-build}" in
   generate) generate ;;
   test) (cd hack/api-docs && go test ./...) ;;
   build|serve)
-    generate
     hugo --destination tmp/api-reference/site --baseURL "${DOCS_URL:-http://localhost:1314}" --cleanDestinationDir
     node hack/flatten-and-resolve.js tmp/api-reference/site
     node hack/api-docs/verify-output.mjs tmp/api-reference/site

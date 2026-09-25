@@ -12,7 +12,6 @@ ARG PAGEFIND_VERSION=1.5.2
 # base defines the generic base stage
 FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS base
 RUN apk add --no-cache \
-    bash \
     git \
     nodejs \
     npm \
@@ -42,9 +41,6 @@ WORKDIR /project
 COPY --from=hugo /out/hugo /bin/hugo
 COPY --from=npm /out/node_modules node_modules
 COPY . .
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    --mount=type=cache,target=/root/.cache/go-build \
-    ./hack/api-docs/run.sh test && ./hack/api-docs/run.sh generate
 
 # build creates production builds with Hugo
 FROM build-base AS build
@@ -69,6 +65,25 @@ RUN node hack/api-docs/verify-output.mjs public
 # lint lints markdown files
 FROM ghcr.io/rvben/rumdl:0.2.49-alpine AS lint
 RUN --mount=type=bind,target=. rumdl check content
+
+# validate-api-reference checks the vendored presentation data
+FROM base AS validate-api-reference
+RUN apk add --no-cache bash
+WORKDIR /project
+COPY hack/api-docs ./hack/api-docs
+COPY content/reference/api ./content/reference/api
+COPY data/api-reference.json ./data/api-reference.json
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build <<"EOT"
+set -eu
+cp data/api-reference.json /tmp/api-reference-committed.json
+./hack/api-docs/run.sh test
+./hack/api-docs/run.sh generate
+if ! cmp -s /tmp/api-reference-committed.json data/api-reference.json; then
+  echo >&2 'ERROR: API reference data is stale. Run ./hack/api-docs/run.sh generate and commit data/api-reference.json.'
+  exit 1
+fi
+EOT
 
 # test validates HTML output and checks for broken links
 FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS test

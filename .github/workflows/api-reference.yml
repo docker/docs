@@ -1,0 +1,53 @@
+name: API reference data
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/api-reference.yml
+      - .dockerignore
+      - Dockerfile
+      - docker-bake.hcl
+      - content/reference/api/**
+      - hack/api-docs/**
+      - data/api-reference.json
+  pull_request:
+    paths:
+      - .github/workflows/api-reference.yml
+      - .dockerignore
+      - Dockerfile
+      - docker-bake.hcl
+      - content/reference/api/**
+      - hack/api-docs/**
+      - data/api-reference.json
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Check generated API data (advisory)
+    runs-on: ubuntu-24.04
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4
+      - name: Validate API reference data
+        uses: docker/bake-action@82490499d2e5613fcead7e128237ef0b0ea210f7 # v7
+        with:
+          source: .
+          files: docker-bake.hcl
+          targets: validate-api-reference
+      - name: Report validation failure
+        if: failure()
+        run: |
+          echo "::warning::API reference validation failed. See the failed step for details."
+          echo 'API reference validation failed. This check is advisory; site builds use the committed JSON. See the failed step for details.' >> "$GITHUB_STEP_SUMMARY"
