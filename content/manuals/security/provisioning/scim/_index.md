@@ -1,12 +1,12 @@
 ---
-title: SCIM overview
+title: SCIM provisioning overview
 linkTitle: SCIM
 weight: 10
 description: >-
-  Learn how SCIM provisions and deprovisions Docker users, how it interacts
-  with JIT provisioning, and how to choose a provisioning source.
+  Provision, update, and deprovision Docker users with SCIM, and choose how
+  SCIM works with Just-in-Time provisioning.
 keywords: SCIM, SSO, user provisioning, deprovisioning, JIT, role mapping,
-  assign users, identity provider, Provision on Demand
+  group mapping, identity provider, Provision on Demand, Okta, Entra ID
 aliases:
   - /security/for-admins/scim/
   - /security/for-admins/provisioning/scim/
@@ -16,9 +16,9 @@ aliases:
 {{< summary-bar feature_name="SSO" >}}
 
 System for Cross-domain Identity Management (SCIM) synchronizes users and
-groups between your identity provider (IdP) and Docker. It supports automated
-provisioning, profile updates, and deprovisioning throughout the user
-lifecycle.
+groups between your identity provider (IdP) and Docker. It provisions
+accounts, syncs profile updates, and deprovisions users throughout the
+account lifecycle.
 
 ## Prerequisites
 
@@ -29,22 +29,21 @@ Before you begin, you must have:
 
 ## How SCIM works
 
-SCIM automates user provisioning and de-provisioning for Docker through your
-identity provider. After you enable SCIM, any user assigned to your
-Docker application in your identity provider is automatically provisioned and
-added to your Docker organization. When a user is removed from the Docker
-application in your identity provider, SCIM deactivates and removes them from
-your Docker organization.
+After you enable SCIM, any user assigned to your Docker application in the
+identity provider is provisioned and added to your Docker organization. SCIM
+syncs profile updates from the identity provider, such as name changes, and
+reactivates users who are reassigned to the application. If group mapping is
+configured, SCIM also synchronizes groups.
 
-In addition to provisioning and removal, SCIM also syncs profile updates like
-name changes made in your identity provider.
+When a user is removed from the Docker application, SCIM deactivates and
+removes them from your Docker organization.
 
 SCIM automates:
 
 - Creating users
 - Updating user profiles
 - Removing and deactivating users
-- Re-activating users
+- Reactivating users
 - Synchronizing groups when group mapping is configured
 
 > [!NOTE]
@@ -68,9 +67,8 @@ With JIT turned off, SCIM provisions users on the IdP's synchronization
 schedule instead of when users sign in. This configuration provides continuous
 attribute updates and automatic deprovisioning.
 
-If your IdP supports Provision on Demand, you can trigger an immediate sync for
-a user who needs access before the next scheduled synchronization.
-
+If your IdP supports Provision on Demand, you can trigger an immediate sync
+for a user who needs access before the next scheduled synchronization.
 Configure and test SCIM before you
 [turn off JIT](/manuals/security/provisioning/just-in-time.md#disable-jit-provisioning).
 
@@ -100,11 +98,13 @@ Keeping a JIT-provisioned user in the mapped group doesn't convert the account
 to SCIM lifecycle management. To let SCIM manage the account, follow
 [Migrate JIT to SCIM](/manuals/security/provisioning/scim/migrate-scim.md).
 
-For help diagnosing attribute or membership changes, see
-[Troubleshoot provisioning](/manuals/security/provisioning/troubleshoot-provisioning.md).
-
 ## Next steps
 
-- [Migrate JIT to SCIM](/manuals/security/provisioning/scim/migrate-scim.md) if users were provisioned with Just-in-Time (JIT) before you enabled SCIM.
-- [Group mapping](/manuals/security/provisioning/scim/group-mapping.md) to sync identity provider groups with members.
-- [Troubleshoot provisioning](/manuals/security/provisioning/troubleshoot-provisioning.md) for SCIM, JIT, and attribute issues.
+- [Set up SCIM provisioning](/manuals/security/provisioning/scim/provision-scim.md)
+  to enable SCIM in Docker and your identity provider.
+- [Migrate JIT to SCIM](/manuals/security/provisioning/scim/migrate-scim.md)
+  if users were provisioned with Just-in-Time (JIT) before you enabled SCIM.
+- [Group mapping](/manuals/security/provisioning/scim/group-mapping.md) to
+  sync identity provider groups with Docker teams.
+- [Troubleshoot provisioning](/manuals/security/provisioning/troubleshoot-provisioning.md)
+  for SCIM, JIT, and attribute issues.
