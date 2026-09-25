@@ -109,19 +109,28 @@ A network rule matches a destination host on its own. An HTTP rule is a network
 rule that also names an HTTP method and URL path, so a policy can allow reads
 from an API without allowing writes to it.
 
-An HTTP rule names one or more methods, a destination, and a path pattern:
+An HTTP rule names one or more methods, a destination, and path patterns. What
+each part accepts depends on where you configure the rule:
 
-| Part        | Accepts                                                       |
-| ----------- | ------------------------------------------------------------- |
-| Method      | One or more HTTP methods, or every method                      |
-| Destination | A host, with an optional port                                  |
-| Path        | An absolute path pattern, such as `/api/**`                   |
+| Part        | Organization policy                        | Local policy                      |
+| ----------- | ------------------------------------------ | --------------------------------- |
+| Method      | **any (\*)**, or one or more listed methods | `ANY`, or one or more methods     |
+| Destination | A host or IP address                       | A host                            |
+| Path        | One or more absolute path patterns         | One absolute path pattern         |
 
-A CIDR range isn't a valid HTTP destination. Use a network rule to cover one.
+A destination can include a port, and a path pattern looks like `/api/**`.
 
-A rule that names no method matches every method. For the methods you can
-select individually, see
-[HTTP method and path rules](access-controls/local.md#http-method-and-path-rules).
+A CIDR range isn't a valid HTTP destination on either surface, and a local
+rule doesn't accept an IP address either. Use a plain network rule for those
+destinations. To cover a second path in a local policy, add a second rule.
+
+Every rule applies to at least one method. On the CLI, `--method ANY` covers
+every HTTP method. In the composer, **any (\*)** covers every method the
+composer lists. For the methods you can select individually, see
+[Add a network rule](access-controls/organization.md#add-a-network-rule) for an
+organization policy and
+[HTTP method and path rules](access-controls/local.md#http-method-and-path-rules)
+for a local one.
 
 Path patterns follow the same wildcard rules as filesystem paths, where `*`
 matches within one path segment and `**` matches any depth. A pattern without a

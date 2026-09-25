@@ -12,9 +12,9 @@ use separate network policy configuration. See
 
 Network access policies control outbound connections from sandboxes. Each
 policy contains one or more rules that allow the domains, IP ranges, and ports a
-workflow needs, or block destinations that should stay unavailable. A local
-policy rule can also match the HTTP method and path of a request, so it can
-allow part of an API without allowing all of it.
+workflow needs, or block destinations that should stay unavailable. Rules can
+also match the HTTP method and path of a request, so a policy can allow part of
+an API without allowing all of it.
 
 You can configure network access in two places:
 
@@ -58,8 +58,13 @@ destination outright and no HTTP allow can reopen it. For the pattern syntax
 and the full matching table, see
 [HTTP rules](../concepts.md#http-method-and-path).
 
-Add them to a local policy with `--method` and `--path` on `sbx policy`. See
-[HTTP method and path rules](local.md#http-method-and-path-rules).
+Configure them in either place:
+
+- Organization policies, in the network rule composer in Docker Home. Set the
+  rule **Type** to **HTTP**, then select the methods and path patterns. See
+  [Add a network rule](organization.md#add-a-network-rule).
+- Local policies, with `--method` and `--path` on `sbx policy`. See
+  [HTTP method and path rules](local.md#http-method-and-path-rules).
 
 ## Local network rules
 

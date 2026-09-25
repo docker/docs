@@ -189,7 +189,8 @@ Method names are case-insensitive. The accepted values are `GET`, `HEAD`,
 A path must start with `/` and be canonical. It can't contain a query string, a
 fragment, percent-encoding, control characters, surrounding whitespace,
 repeated or trailing slashes, or dot segments such as `.` and `..`. Each rule
-takes one path.
+takes one path. Repeating `--path` keeps only the last value, and a comma is
+read as part of the path, so add a separate rule for each path.
 
 Hosts follow the same patterns as network rules and can include a port. Write
 the host on its own, without a scheme, so an HTTP rule takes `api.example.com`

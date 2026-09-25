@@ -161,6 +161,10 @@ POLICY         SOURCE   APPLIES TO   SUMMARY
 local-policy   local    all          network: 2 allow (L4), 1 deny (L7)
 ```
 
+When the same decision has entries at both layers, each layer gets its own
+count, L4 first. Two host allows and one HTTP allow read
+`network: 2 allow (L4), 1 allow (L7)`.
+
 The labels appear when the current listing includes at least one HTTP rule.
 Because filters and hidden inactive rules change what the listing contains, a
 filtered listing with no HTTP rules shows an unlabeled count, such as
