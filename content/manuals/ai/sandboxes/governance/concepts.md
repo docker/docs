@@ -82,9 +82,9 @@ plus every team-scoped policy for a team they belong to. See
 ### Network rules
 
 Network rules use `connect:tcp` for TCP and `connect:udp` for UDP. Resources are
-hostnames, CIDR ranges, or ports. UDP requires
-[experimental outbound UDP](access-controls/local.md#allow-outbound-udp).
-ICMP is blocked.
+hostnames, CIDR ranges, or ports. See
+[Allow outbound UDP](access-controls/local.md#allow-outbound-udp) for how UDP
+rules differ from TCP. Docker Sandboxes always blocks external ICMP.
 
 **Hostname patterns**
 

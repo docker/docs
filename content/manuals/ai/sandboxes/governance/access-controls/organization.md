@@ -155,9 +155,14 @@ organization policies on the next `sbx` command.
 Policy types differ in when a change takes effect after it reaches the
 developer machine:
 
-- Network policy is evaluated on every outbound request. Once a policy
-  change has synced to the developer's machine (up to 5 minutes), it applies
-  immediately to subsequent requests.
+- Network policy is evaluated when a TCP connection or UDP association opens.
+  Proxied HTTP requests are also evaluated individually. After a policy
+  change reaches the developer machine, it applies to connections and
+  associations opened afterward, and to subsequent proxied HTTP requests.
+  Existing raw TCP connections and UDP associations continue until they
+  close or the sandbox network is torn down. Stop the sandbox or daemon to
+  terminate them immediately, for example with `sbx policy reset`, which
+  also deletes local policy rules as noted above.
 
 - Filesystem policy is only checked when a workspace is mounted — that
   is, when a sandbox is created. Once a sandbox is running, changing the
