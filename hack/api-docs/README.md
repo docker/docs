@@ -20,7 +20,11 @@ For a static build with HTML/Markdown checks, run
 address. These commands use the committed data without running the generator.
 
 After changing a specification, source manifest entry, or generator code, use
-the Go version declared in `hack/api-docs/go.mod` to regenerate the data:
+the Go version declared in `hack/api-docs/go.mod` to regenerate the data.
+
+Install the Vacuum version pinned in the [Dockerfile](../../Dockerfile) and make
+the `vacuum` executable available on `PATH`. The script runs Vacuum and the Go
+generator without installing tools.
 
 ```console
 $ ./hack/api-docs/run.sh test
@@ -30,7 +34,7 @@ $ ./hack/api-docs/run.sh generate
 Commit `data/api-reference.json` with the source changes. With
 `docker compose watch`, the regenerated JSON syncs to the server and Hugo
 rebuilds the reference. Docker builds and Netlify deploy previews also use the
-committed JSON. Validation reports, binaries, and local builds remain under
+committed JSON. Validation reports and local builds remain under
 `tmp/api-reference/`.
 
 ## Processor inputs

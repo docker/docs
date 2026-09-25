@@ -82,7 +82,7 @@ FROM vacuum-${TARGETARCH} AS vacuum
 FROM base AS validate-api-reference
 RUN apk add --no-cache bash
 WORKDIR /project
-COPY --from=vacuum /out/vacuum ./tmp/api-reference/bin/vacuum-v0.30.3
+COPY --from=vacuum /out/vacuum /usr/local/bin/vacuum
 COPY hack/api-docs ./hack/api-docs
 COPY content/reference/api ./content/reference/api
 COPY data/api-reference.json ./data/api-reference.json
