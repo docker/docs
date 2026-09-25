@@ -101,12 +101,6 @@ jobs:
             docker-bake.hcl
           targets: ${{ matrix.target }}
       -
-        name: Report API reference validation failure
-        if: ${{ failure() && matrix.target == 'validate-api-reference' }}
-        run: |
-          echo "::warning::API reference validation failed. See the Validate step for details."
-          echo 'API reference validation failed. This check is advisory; site builds use the committed JSON. See the Validate step for details.' >> "$GITHUB_STEP_SUMMARY"
-      -
         name: Install reviewdog
         if: ${{ matrix.target == 'vale' && github.event_name == 'pull_request' }}
         uses: reviewdog/action-setup@d8a7baabd7f3e8544ee4dbde3ee41d0011c3a93f # v1.5.0
