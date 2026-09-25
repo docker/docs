@@ -24,6 +24,61 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.93.0
+
+{{< release-date date="2026-09-28" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.93.0" build_path="/XXXXXX/" >}}
+
+### Updates
+
+- Docker Offload `v0.6.33`
+- [Docker Agent v1.141.0](https://github.com/docker/docker-agent/releases/tag/v1.141.0)
+- [Docker Engine v29.8.1](https://docs.docker.com/engine/release-notes/29/#2981)
+- Linux kernel `v7.0.14`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- CLI plugin updates are now managed directly from the app bundle and the **Automatically update components** setting has been removed.
+- Fixed Enhanced Container Isolation not being enforced on an engine that was left running while another one was in use.
+- Fixed Enhanced Container Isolation not being enforced when an administrator policy arrived after the engine had started.
+Fixed Enhanced Container Isolation not being enforced when the sign-in completed after the engine had started.
+- Fixed file sharing directories (and other list settings) reverting to their default after clearing them and restarting Docker Desktop. Fixes [docker/desktop-feedback#515](https://github.com/docker/desktop-feedback/issues/515).
+- Fixed a security vulnerability that allowed VM-side code to request Unix socket port forwards, which could expose arbitrary host paths to manipulation.
+- Fixed an issue where dismissing the walkthroughs lead-in on the **Containers** or **Images** screen was not reliably preserved across sessions.
+- Fixed a silent failure when Docker Desktop cannot open an external URL by showing an error notification, and fixed ephemeral error notifications incorrectly appearing as unread in the notification bell.
+- Fixed an issue where Docker Desktop continued showing Kubernetes as running after a cloud cluster stopped externally.
+- Fixed cluster reconnect failures in Kubernetes Offload mode and updated the cluster creation dialog to show only relevant kind cluster options when in Offload mode.
+- Fixed Docker Desktop failing to start with an unexpected error when the engine needed more than five minutes to recover after an unclean shutdown.
+- Updated the Linux kernel to 7.0.14, fixing MongoDB 8 containers refusing to start. Fixes [docker/desktop-feedback#682].
+
+#### For Mac
+
+- Fixed the command-line installer removing the privileged `vmnetd` helper when run without `--user`.
+- Fixed a bug that could make Docker Desktop updates fail repeatedly when a leftover staging directory from a previous update couldn't be deleted.
+- Added a clear error message when macOS denies Docker Desktop the virtualization entitlement, for example due to an MDM configuration profile.
+- Fixed an issue where the Repair function showed no explanation when CLI plugins failed to be correctly set up.
+- Docker Desktop no longer overwrites a more recent CLI plugin installed under `~/.docker/cli-plugins`, matching existing Windows behavior.
+- Fixed "previous version restored" after a failed update even when the restore itself failed.
+- Fixed a bug that could make Docker Desktop updates fail repeatedly when a leftover backup from a previous update couldn't be deleted.
+
+#### For Windows
+
+- Fixed an issue where MSI installs never added the installing user to the `docker-users` group, requiring manual group membership configuration.
+- Fixed an issue on Windows where update failures showed a generic error message instead of the actual installer error details.
+- Fixed a bug where a failed read of a WSL distro's `config.json` caused the distro agent to crash, disabled WSL integration, and prevented factory reset from cleaning up `~/.docker` properly.
+- Fixed an issue where the Docker CLI credential store in a WSL2 distro could be unexpectedly reset to the default on restart.
+- Fixed an unhelpful error message when WSL timed out registering the Docker Desktop Linux distribution.
+- Fixed spurious "WSL integration with distro unexpectedly stopped" dialogs when the Docker Desktop engine was being stopped or restarted.
+-Fixed a false "Virtualization support not detected" error when starting the WSL2 backend on Windows systems with Virtual Machine Platform enabled but the vfpext service absent.
+- Fixed a startup crash (exit code 151) on Windows when config files such as `settings-store.json` or `daemon.json` were saved with a UTF-8 BOM by an external editor or provisioning tool.
+
+#### For Linux
+
+- Docker Desktop no longer overwrites a more recent CLI plugin installed under `~/.docker/cli-plugins`, matching existing Windows behavior.
+
 ## 4.92.0
 
 {{< release-date date="2026-09-21" >}}
