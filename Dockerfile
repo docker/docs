@@ -8,6 +8,7 @@ ARG VALE_VERSION=3.17.0
 ARG HUGO_VERSION=0.163.0
 ARG NODE_VERSION=24
 ARG PAGEFIND_VERSION=1.5.2
+ARG TARGETARCH
 
 # base defines the generic base stage
 FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS base
@@ -66,25 +67,22 @@ RUN node hack/api-docs/verify-output.mjs public
 FROM ghcr.io/rvben/rumdl:0.2.49-alpine AS lint
 RUN --mount=type=bind,target=. rumdl check content
 
+# vacuum downloads the prebuilt validator for the target architecture
+FROM scratch AS vacuum-amd64
+ADD --unpack --checksum=sha256:973b8ed30cd36533da4cdb76729e833324a3043bad48c74f61b6a1cc3df40b78 \
+    https://github.com/daveshanley/vacuum/releases/download/v0.30.3/vacuum_0.30.3_linux_x86_64.tar.gz /out/
+
+FROM scratch AS vacuum-arm64
+ADD --unpack --checksum=sha256:04b604df0b1b570d5abd58b577c816122da162eb8ba12a7f70c3060aec12b3a9 \
+    https://github.com/daveshanley/vacuum/releases/download/v0.30.3/vacuum_0.30.3_linux_arm64.tar.gz /out/
+
+FROM vacuum-${TARGETARCH} AS vacuum
+
 # validate-api-reference checks the vendored presentation data
 FROM base AS validate-api-reference
 RUN apk add --no-cache bash
 WORKDIR /project
-ARG TARGETARCH
-RUN <<"EOT"
-set -eu
-case "$TARGETARCH" in
-  amd64) arch=x86_64; checksum=973b8ed30cd36533da4cdb76729e833324a3043bad48c74f61b6a1cc3df40b78 ;;
-  arm64) arch=arm64; checksum=04b604df0b1b570d5abd58b577c816122da162eb8ba12a7f70c3060aec12b3a9 ;;
-  *) echo >&2 "Unsupported Vacuum architecture: $TARGETARCH"; exit 1 ;;
-esac
-wget -q -O /tmp/vacuum.tar.gz "https://github.com/daveshanley/vacuum/releases/download/v0.30.3/vacuum_0.30.3_linux_${arch}.tar.gz"
-echo "$checksum  /tmp/vacuum.tar.gz" | sha256sum -c -
-mkdir -p tmp/api-reference/bin
-tar -xzf /tmp/vacuum.tar.gz -C tmp/api-reference/bin vacuum
-mv tmp/api-reference/bin/vacuum tmp/api-reference/bin/vacuum-v0.30.3
-rm /tmp/vacuum.tar.gz
-EOT
+COPY --from=vacuum /out/vacuum ./tmp/api-reference/bin/vacuum-v0.30.3
 COPY hack/api-docs ./hack/api-docs
 COPY content/reference/api ./content/reference/api
 COPY data/api-reference.json ./data/api-reference.json

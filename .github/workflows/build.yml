@@ -85,11 +85,6 @@ jobs:
           - dockerfile-lint
           - validate-vendor
           - validate-api-reference
-        include:
-          - target: validate-api-reference
-            cache: |
-              validate-api-reference.cache-from=type=gha,scope=api-reference
-              validate-api-reference.cache-to=type=gha,scope=api-reference,mode=max
     steps:
       -
         name: Checkout
@@ -105,7 +100,6 @@ jobs:
           files: |
             docker-bake.hcl
           targets: ${{ matrix.target }}
-          set: ${{ matrix.cache || '' }}
       -
         name: Report API reference validation failure
         if: ${{ failure() && matrix.target == 'validate-api-reference' }}
