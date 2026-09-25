@@ -1,0 +1,4 @@
+# سجل مستخدم
+curl -X POST http://localhost:3000/api/v1/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"name":"test","email":"test@example.com","password":"123"}'
