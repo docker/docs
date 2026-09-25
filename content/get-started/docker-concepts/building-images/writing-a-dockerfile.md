@@ -49,7 +49,7 @@ Some of the most common instructions in a `Dockerfile` include:
 - `COPY <host-path> <image-path>` - this instruction tells the builder to copy files from the host and put them into the container image.
 - `RUN <command>` - this instruction tells the builder to run the specified command.
 - `ENV <name> <value>` - this instruction sets an environment variable that a running container will use.
-- `EXPOSE <port-number>` - this instruction sets configuration on the image that indicates a port the image would like to expose.
+- `EXPOSE <port-number>` - this instruction sets configuration on the image that indicates a port the image would like to expose. You can also give a range, for example `EXPOSE 3000-3005`.
 - `USER <user-or-uid>` - this instruction sets the default user for all subsequent instructions.
 - `CMD ["<command>", "<arg1>"]` - this instruction sets the default command a container using this image will run.
 
