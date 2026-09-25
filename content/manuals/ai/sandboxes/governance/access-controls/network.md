@@ -83,6 +83,124 @@ organization or to selected teams. For setup steps and team scoping, see
 Use [Monitoring policies](../monitor-and-enforce/monitoring.md) to inspect
 which network rules are active on a developer machine.
 
+## Approval-required access
+
+An organization network policy can require approval instead of granting access
+outright. Destinations the policy allows aren't reachable until the developer
+confirms them, which keeps an allowlist broad enough to be usable while still
+putting a person in front of each destination an agent reaches for.
+
+Without organization governance, a request with no matching allow or deny rule
+also asks for approval rather than being denied outright, so access opens up as
+the developer approves each destination.
+
+Under organization governance, approval is a property of the policy rather
+than of individual rules, so turning it on applies it to every allow rule in
+that policy. A destination stays directly reachable only when no policy that
+allows it requires approval. If a policy that requires approval also matches,
+the request needs approval regardless of what the other policies allow.
+
+Only a destination the developer has already approved satisfies the
+requirement. Preset rules,
+[kit-defined rules](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/network-policy@1.md),
+and rules the developer added with `sbx policy allow network` don't answer it.
+An approval also can't reach a destination the organization doesn't allow at
+all, and it can't override a deny rule. To withdraw a destination, add a deny
+rule, which takes precedence over any approval already recorded.
+
+To require approval on an organization policy, see
+[Organization policies](organization.md#require-approval-for-a-network-policy).
+
+### Respond to an approval request
+
+When a destination needs approval, a sandbox can't reach it until you confirm
+it. The request is blocked and the sandbox receives a message naming the
+destination:
+
+```plaintext
+Approval required for api.example.com.
+
+Review and respond with:
+  sbx policy approval ls
+```
+
+If your organization
+[configures a support message](organization.md#configure-a-support-message), it
+appears after the approval instructions.
+
+The request that triggers the prompt doesn't wait for an answer. It's denied,
+and approving the destination affects later requests. Agents that retry a
+failed request pick up the new access on their next attempt. For others, run
+the operation again.
+
+List the destinations waiting for a response:
+
+```console
+$ sbx policy approval ls
+APPROVAL             SANDBOX      TITLE                 DETAIL                                                                              OPTIONS
+network:c2FuZGJveA   my-sandbox   api.example.com:443   Protocol: TCP Resource type: domain approval required by policy "default network"   allow (Allow), dismiss (Dismiss)
+```
+
+Each entry names the destination, the sandbox that asked for it, and why it
+needs approval. Under organization governance that reason names the policy, as
+shown. Without it, the reason is that no matching allow rule covers the
+destination. A request that an HTTP rule matches also shows the method and
+path, such as `GET api.example.com:443/v1/data`.
+
+To inspect a single entry, pass its ID to `sbx policy approval inspect`:
+
+```console
+$ sbx policy approval inspect network:c2FuZGJveA
+APPROVAL network:c2FuZGJveA  (sandbox: my-sandbox)
+  api.example.com:443
+  Protocol: TCP
+  Resource type: domain
+  approval required by policy "default network"
+
+  OPTION    LABEL
+  allow     Allow
+  dismiss   Dismiss
+```
+
+Respond by selecting one of the options the entry offers:
+
+```console
+$ sbx policy approval respond network:c2FuZGJveA --option allow
+Recorded: Allow
+```
+
+Choosing `allow` grants access to that destination. Choosing `dismiss` leaves
+it blocked, and the destination is requested again the next time the sandbox
+tries to reach it. Repeated attempts collapse into a single entry, so a sandbox
+retrying in a loop leaves one request to answer, not a queue of duplicates.
+
+#### What approving grants
+
+Approving records a rule that allows the destination the sandbox actually
+asked for, scoped to the sandbox that asked. Three things follow from that:
+
+- The rule covers one destination, not the pattern the policy rule used. A
+  policy that allows `*.example.com` with approval asks about
+  `api.example.com` and `cdn.example.com` separately.
+- A destination includes its port, so `api.example.com:443` and
+  `api.example.com:8443` are approved separately.
+- Another sandbox reaching the same destination asks again.
+
+When an [HTTP rule](../concepts.md#http-method-and-path) in the policy matches
+the request, approving covers the method and exact path the sandbox requested
+rather than the whole destination. `GET /v1/data` and `POST /v1/data` on the
+same host are approved separately. A request whose method or path can't be
+recorded as a rule, such as a path with percent-encoding, is blocked without an
+entry to respond to.
+
+Approved destinations stay allowed until the rule is removed. List them with
+`sbx policy ls --wide --created-via approval`, and remove one the same way as
+any other local rule, with [`sbx policy rm network`](local.md#managing-rules).
+
+Approvals live in the local policy store, so [`sbx policy reset`](local.md#resetting)
+removes all of them along with your other local rules. Each destination is
+requested again the next time a sandbox reaches it.
+
 > [!NOTE]
 > To manage Model Context Protocol (MCP) server registration and requests
 > through Docker's MCP gateway, use [MCP access policies](mcp.md). These
