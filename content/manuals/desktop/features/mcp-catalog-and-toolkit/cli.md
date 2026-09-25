@@ -1,4 +1,5 @@
 ---
+url: /ai/mcp-catalog-and-toolkit/cli/
 title: Use MCP Toolkit from the CLI
 linkTitle: Use with CLI
 description: Manage MCP profiles, servers, and catalogs using Docker MCP CLI.
@@ -115,7 +116,7 @@ description: Description of the server
 ```
 
 If the server requires OAuth authentication, authorize it in Docker Desktop
-after adding. See [OAuth authentication](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md#oauth-authentication).
+after adding. See [OAuth authentication](/manuals/desktop/features/mcp-catalog-and-toolkit/toolkit.md#oauth-authentication).
 
 ### List servers
 
@@ -268,7 +269,7 @@ file. Any authentication credentials must be configured separately if needed.
 
 Custom catalogs let you curate a focused collection of servers for your team
 or organization. For an overview of what custom catalogs are and when to use
-them, see [Custom catalogs](/manuals/ai/mcp-catalog-and-toolkit/catalog.md#custom-catalogs).
+them, see [Custom catalogs](/manuals/desktop/features/mcp-catalog-and-toolkit/catalog.md#custom-catalogs).
 
 Catalogs are referenced by OCI reference, for example
 `registry.example.com/mcp/my-catalog:latest`. Servers within a catalog use
@@ -366,7 +367,7 @@ Run the gateway with your catalog instead of the default Docker catalog:
 $ docker mcp gateway run --catalog <oci-reference>
 ```
 
-For [Dynamic MCP](/manuals/ai/mcp-catalog-and-toolkit/dynamic-mcp.md), where
+For [Dynamic MCP](/manuals/desktop/features/mcp-catalog-and-toolkit/dynamic-mcp.md), where
 agents discover and add servers during conversations, this limits what agents
 can find to your curated set.
 
@@ -379,7 +380,7 @@ $ docker mcp gateway run --catalog <oci-reference> \
 
 ## Further reading
 
-- [Get started with MCP Toolkit](/manuals/ai/mcp-catalog-and-toolkit/get-started.md)
-- [MCP Profiles](/manuals/ai/mcp-catalog-and-toolkit/profiles.md)
-- [MCP Catalog](/manuals/ai/mcp-catalog-and-toolkit/catalog.md)
-- [MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
+- [Get started with MCP Toolkit](/manuals/desktop/features/mcp-catalog-and-toolkit/get-started.md)
+- [MCP Profiles](/manuals/desktop/features/mcp-catalog-and-toolkit/profiles.md)
+- [MCP Catalog](/manuals/desktop/features/mcp-catalog-and-toolkit/catalog.md)
+- [MCP Gateway](/manuals/desktop/features/mcp-catalog-and-toolkit/mcp-gateway.md)

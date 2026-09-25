@@ -1,4 +1,5 @@
 ---
+url: /ai/mcp-catalog-and-toolkit/toolkit/
 title: Docker MCP Toolkit
 linkTitle: Toolkit UI
 description: Use the MCP Toolkit to set up MCP servers and MCP clients.
@@ -31,7 +32,7 @@ clients. It is the fastest way from MCP tool discovery to local execution.
 - Organizes MCP servers into profiles, acting as a gateway for clients to access the servers in each profile.
 
 > [!TIP]
-> The MCP Toolkit includes [Dynamic MCP](/manuals/ai/mcp-catalog-and-toolkit/dynamic-mcp.md),
+> The MCP Toolkit includes [Dynamic MCP](/manuals/desktop/features/mcp-catalog-and-toolkit/dynamic-mcp.md),
 > which enables AI agents to discover, add, and compose MCP servers on-demand during
 > conversations, without manual configuration. Your agent can search the catalog and
 > add tools as needed when you connect to the gateway.
@@ -194,6 +195,6 @@ For more information about the Agent mode, see the
 
 ## Further reading
 
-- [Use MCP Toolkit from the CLI](/manuals/ai/mcp-catalog-and-toolkit/cli.md)
-- [MCP Catalog](/manuals/ai/mcp-catalog-and-toolkit/catalog.md)
-- [MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
+- [Use MCP Toolkit from the CLI](/manuals/desktop/features/mcp-catalog-and-toolkit/cli.md)
+- [MCP Catalog](/manuals/desktop/features/mcp-catalog-and-toolkit/catalog.md)
+- [MCP Gateway](/manuals/desktop/features/mcp-catalog-and-toolkit/mcp-gateway.md)

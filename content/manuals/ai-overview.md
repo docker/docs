@@ -20,7 +20,7 @@ Each tool serves a different purpose.
 | Run agents in cloud sandboxes through a web Console | [Docker Agentic Platform](./agentic-platform/_index.md) (experimental) | Web Console |
 | Get AI help with Docker tasks (containers, images, Dockerfiles) | [Gordon](./ai/gordon/)                                   | `docker ai`      |
 | Run AI models locally with an OpenAI-compatible API             | [Model Runner](./ai/model-runner/)                       | `docker model`   |
-| Connect AI tools to external services via MCP                   | [MCP Catalog and Toolkit](./ai/mcp-catalog-and-toolkit/) | `docker mcp`     |
+| Connect AI tools to external services via MCP                   | [MCP Catalog and Toolkit](/manuals/desktop/features/mcp-catalog-and-toolkit/_index.md) | `docker mcp`     |
 | Build and orchestrate custom multi-agent teams                  | [Docker Agent](./ai/docker-agent/)                       | `docker agent`   |
 | Give my coding agent Docker best-practice guidance              | [Docker Skills](./ai/skills/)                            | None             |
 

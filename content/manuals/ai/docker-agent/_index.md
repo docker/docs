@@ -110,7 +110,7 @@ define. Each agent:
 - Has its own context (agents don't share knowledge)
 - Can access built-in tools like todo lists, memory, and task delegation
 - Can use external tools via [MCP
-  servers](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
+  servers](/manuals/desktop/features/mcp-catalog-and-toolkit/mcp-gateway.md)
 
 The root agent delegates tasks to agents listed under `sub_agents`. Sub-agents
 can have their own sub-agents for deeper hierarchies.
@@ -162,5 +162,5 @@ it doesn't exist yet.
 - Browse example agent configurations in the [Docker Agent
   repository](https://github.com/docker/docker-agent/tree/main/examples)
 - Connect agents to external tools via the [Docker MCP
-  Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
+  Gateway](/manuals/desktop/features/mcp-catalog-and-toolkit/mcp-gateway.md)
 - Read the full [configuration reference](./configuration/overview/index.md)

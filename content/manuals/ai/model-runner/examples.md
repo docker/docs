@@ -189,4 +189,4 @@ jobs:
 
 ## Related pages
 
-- [Models and Compose](../compose/models-and-compose.md)
+- [Models and Compose](/manuals/compose/how-tos/models-and-compose.md)

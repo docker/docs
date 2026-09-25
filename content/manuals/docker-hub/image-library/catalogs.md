@@ -40,7 +40,7 @@ minimize configuration headaches. For developers working with Claude Desktop or
 other MCP clients, the catalog provides an easy way to extend functionality with
 drop-in tools.
 
-To learn more about MCP servers, see [MCP Catalog and Toolkit](../../ai/mcp-catalog-and-toolkit/_index.md).
+To learn more about MCP servers, see [MCP Catalog and Toolkit](/manuals/desktop/features/mcp-catalog-and-toolkit/_index.md).
 
 ## AI Models Catalog
 

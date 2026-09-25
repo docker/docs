@@ -1,4 +1,5 @@
 ---
+url: /ai/mcp-catalog-and-toolkit/e2b-sandboxes/
 title: E2B sandboxes
 description: Cloud-based secure sandboxes for AI agents with built-in Docker MCP Gateway integration
 keywords: E2B, cloud sandboxes, MCP Gateway, AI agents, MCP Catalog
@@ -447,6 +448,6 @@ The sandbox connected multiple MCP servers and orchestrated a workflow across No
 - [How to build an AI-powered code quality workflow with SonarQube and E2B](/guides/github-sonarqube-sandbox.md)
 - [Docker + E2B: Building the Future of Trusted AI](https://www.docker.com/blog/docker-e2b-building-the-future-of-trusted-ai/)
 - [Docker Sandboxes](/manuals/ai/sandboxes/_index.md)
-- [Docker MCP Toolkit and Catalog](/manuals/ai/mcp-catalog-and-toolkit/_index.md)
-- [Docker MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
+- [Docker MCP Toolkit and Catalog](/manuals/desktop/features/mcp-catalog-and-toolkit/_index.md)
+- [Docker MCP Gateway](/manuals/desktop/features/mcp-catalog-and-toolkit/mcp-gateway.md)
 - [E2B MCP documentation](https://e2b.dev/docs/mcp)
