@@ -55,13 +55,46 @@ To create a policy:
 1. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
    choose the teams the policy applies to. See
    [Scope policies to teams](#scope-policies-to-teams).
-1. Define the policy rules. For network and filesystem policies, select
-   **Add rule** for each rule. For MCP policies, enter Cedar statements in the
-   policy editor. For syntax and examples, use the relevant access-control page
-   in [Choose a policy type](#choose-a-policy-type).
+1. Define the policy rules.
+   - Network and filesystem policies: select **Add rule** for each rule. For a
+     network policy, see [Add a network rule](#add-a-network-rule).
+   - MCP policies: enter Cedar statements in the policy editor. See
+     [MCP access policies](mcp.md).
 
 Existing policies are listed with their name, scope, rule count, and last
 update. Use the action menu (⋮) to edit or delete a policy.
+
+### Add a network rule
+
+Each rule has an optional **Rule name**, an **Effect** of **Allow** or **Deny**,
+and a **Type** that decides what the rule matches.
+
+- **All traffic** matches every request to the destinations you list, on any
+  port, method, and path.
+  - Under **Destinations**, add the hosts, IP addresses, or CIDR ranges the
+    rule covers. A destination matches any port unless you add one, such as
+    `example.com:8080`.
+  - Under **Protocols**, select the transport protocols the rule applies to.
+- **HTTP** matches only HTTP requests with the methods and paths you specify.
+  - In **Destination**, enter the host or IP address the rule covers. It
+    matches any port unless you add one. Enter the destination with no scheme
+    and no path, so `api.github.com` rather than
+    `https://api.github.com/repos`. A CIDR range isn't accepted here. Use an
+    **All traffic** rule for one. A local HTTP rule accepts only a host.
+  - Under **HTTP methods**, select the methods the rule applies to. Leave
+    **any (\*)** selected to match every method listed. A method the composer
+    doesn't list won't match, which differs from the CLI, where `--method ANY`
+    matches every HTTP method.
+  - Under **Path patterns**, add one or more paths the rule covers, such as
+    `/repos/*` and `/v1/**`. Leave it empty to match any path.
+
+An HTTP rule's paths all belong to its one destination, so to cover paths on a
+second host, add a second rule. For the pattern syntax and how HTTP rules
+combine with **All traffic** rules, see
+[HTTP rules](../concepts.md#http-method-and-path).
+
+The composer summarizes the rule in a sentence as you fill it in, so you can
+confirm the effect, methods, and destination before saving.
 
 ## Configure a support message
 
@@ -87,7 +120,7 @@ Organization policies are managed by access surface. Use the access-control
 pages for syntax, examples, and enforcement details:
 
 - [Network access policies](network.md): control outbound network access from
-  sandboxes.
+  sandboxes, by host or by HTTP method and path.
 - [Filesystem access policies](filesystem.md): control which host paths
   sandboxes can mount as workspaces.
 - [MCP access policies](mcp.md): control MCP server registration, tool calls,
@@ -157,7 +190,8 @@ developer machine:
 
 - Network policy is evaluated on every outbound request. Once a policy
   change has synced to the developer's machine (up to 5 minutes), it applies
-  immediately to subsequent requests.
+  immediately to subsequent requests. HTTP rules are evaluated per request in
+  the same way.
 
 - Filesystem policy is only checked when a workspace is mounted — that
   is, when a sandbox is created. Once a sandbox is running, changing the
