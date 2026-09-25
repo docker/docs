@@ -15,8 +15,9 @@ recommended cache to use inside your GitHub Actions workflows, as long as your
 use case falls within the
 [size and usage limits set by GitHub](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy).
 
-This cache storage backend is not supported with the default `docker` driver.
-To use this feature, create a new builder using a different driver. See
+This cache storage backend works with the default `docker` driver only when the
+[containerd image store](/manuals/desktop/features/containerd.md) is enabled. If
+the containerd image store isn't enabled, use a different driver. See
 [Build drivers](/manuals/build/builders/drivers/_index.md) for more information.
 
 ## Synopsis
