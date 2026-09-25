@@ -1,7 +1,12 @@
 command: docker push
 aliases: docker image push, docker push
 short: Upload an image to a registry
-long: Upload an image to a registry
+long: |-
+    Upload an image to a registry.
+
+    `NAME[:TAG]` is `[HOST[:PORT]/][NAMESPACE/]REPOSITORY[:TAG]`. `NAMESPACE` is
+    usually your username or organization (for example `myadmin` in the
+    [image push](/reference/cli/docker/image/push/) examples).
 usage: docker push [OPTIONS] NAME[:TAG]
 pname: docker
 plink: docker.yaml
