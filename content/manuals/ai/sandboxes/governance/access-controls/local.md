@@ -63,8 +63,14 @@ Initialize the global network policy for your sandboxes:
 
 Presets initialize the global policy. Built-in agent kits and other kits can
 add per-sandbox allow rules, including under **Locked Down** (`deny-all`). The
-preset isn't an explicit deny rule that overrides those allowances. To inspect
-the rules a kit adds to a sandbox, run:
+preset isn't an explicit deny rule that overrides those allowances.
+
+Under **Balanced** and **Locked Down**, a sandbox request that no rule matches
+is blocked and asks for your approval instead of being denied outright, so you
+can open access to each destination as a sandbox needs it. See
+[Approval-required access](network.md#approval-required-access).
+
+To inspect the rules a kit adds to a sandbox, run:
 
 ```console
 $ sbx policy ls my-sandbox --source kit --type network --wide
@@ -288,6 +294,11 @@ Bare hostnames and IP addresses are evaluated against port 443. This is useful
 for verifying custom rules or checking what the Locked Down preset blocks
 before you start an agent.
 
+A check never creates an approval request. A destination that a sandbox would
+ask you to approve shows as `Denied:`, with a `Reason:` line of
+`no matching allow rule (default deny)`, or `approval required by policy` under
+organization governance.
+
 To check policy in the context of a specific sandbox:
 
 ```console
@@ -347,3 +358,14 @@ denied by an HTTP rule. Run `sbx policy ls --type http` to see which HTTP rules
 apply. `sbx policy check network` reports the decision for the host only, so it
 shows a host as allowed even when the specific request is denied. See
 [HTTP method and path rules](#http-method-and-path-rules).
+
+### A request is blocked with "Approval required"
+
+The destination needs your confirmation. Either no allow or deny rule matches
+it and your machine isn't under organization governance, or an organization
+policy allows it but requires approval first.
+
+Run `sbx policy approval ls` to see the pending request and respond to it with
+`sbx policy approval respond`. Approving applies to later requests, not the one
+that was blocked, so run the operation again afterward. See
+[Respond to an approval request](network.md#respond-to-an-approval-request).
