@@ -1,7 +1,9 @@
 ---
 title: Set up SCIM provisioning
 linkTitle: Setup
-description: Learn how System for Cross-domain Identity Management works and how to set it up.
+description: Configure SCIM user provisioning and role mapping for Docker with Okta or Microsoft Entra ID.
+keywords: SCIM setup, user provisioning, role mapping, Okta, Microsoft Entra ID,
+  identity provider, Docker Home
 weight: 10
 aliases:
   - /platform/security/provisioning/scim/provision-scim/
@@ -31,13 +33,9 @@ For additional details about supported attributes and SCIM, see
 
 > [!IMPORTANT]
 >
-> By default, Docker uses Just-in-Time (JIT) provisioning for SSO. If SCIM is
-> enabled, JIT values still take precedence and will overwrite attribute values
-> set by SCIM. To avoid conflicts, make sure your JIT attribute values match
-> your SCIM values.
->
-> Alternatively, you can disable JIT provisioning to rely solely on SCIM.
-> For details, see [Just-in-Time](/manuals/security/provisioning/just-in-time.md).
+> Docker turns on Just-in-Time (JIT) provisioning by default when you configure
+> SSO. Before setting up SCIM, decide which method will manage provisioning and
+> review [how SCIM works with JIT](./_index.md#choose-how-scim-works-with-jit).
 
 ## Enable SCIM in Docker
 
