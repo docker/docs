@@ -175,6 +175,14 @@ other Docker Hub repository, so you can manage access and permissions, configure
 webhooks, and use other standard Hub features. See [Docker Hub
 repositories](/manuals/docker-hub/repos/_index.md) for details.
 
+### Mirrors in the EU region
+
+If your organization's DHI subscription is in the EU region, Docker creates
+your mirrored repositories on Docker Hub in the EU. Mirrors created before your
+subscription moved to the EU region stay in their original region. For
+details, including how to get a subscription in the EU region, see [EU data
+residency](../explore/eu-region.md).
+
 ### Stop mirroring a repository
 
 After you stop mirroring, the repository remains, but it no longer receives
