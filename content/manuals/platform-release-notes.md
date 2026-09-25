@@ -79,7 +79,7 @@ Docker Home, the Admin Console, billing, security, and subscriptions.
 
 ### New
 
-- [Personal access tokens](/security/access-tokens/personal-access-tokens/)
+- [Personal access tokens](/manuals/security/access-tokens/personal-access-tokens.md)
   (PATs) now support expiration dates.
 
 ## 2024-10-15
@@ -87,9 +87,9 @@ Docker Home, the Admin Console, billing, security, and subscriptions.
 ### New
 
 - Beta: You can now create
-  [organization access tokens](/security/for-admins/access-tokens/) (OATs) to
-  enhance security for organizations and streamline access management for
-  organizations in the Docker Admin Console.
+  [organization access tokens](/manuals/security/access-tokens/organization-access-tokens.md)
+  (OATs) to enhance security for organizations and streamline access
+  management for organizations in the Docker Admin Console.
 
 ## 2024-08-29
 
