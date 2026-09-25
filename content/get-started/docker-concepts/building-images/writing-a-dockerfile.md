@@ -49,6 +49,7 @@ Some of the most common instructions in a `Dockerfile` include:
 - `COPY <host-path> <image-path>` - this instruction tells the builder to copy files from the host and put them into the container image.
 - `RUN <command>` - this instruction tells the builder to run the specified command.
 - `ENV <name> <value>` - this instruction sets an environment variable that a running container will use.
+- `ARG <name>[=<default>]` - a build-time variable. Names the Dockerfile interpolates (`$NAME` / `${NAME}`) should be letters, digits, and `_`, and must not start with a digit. `ARG foo-bar` then `$foo-bar` is `$foo` plus the text `-bar`. `RUN` lets the shell expand whatever the image's OS accepts.
 - `EXPOSE <port-number>` - this instruction sets configuration on the image that indicates a port the image would like to expose.
 - `USER <user-or-uid>` - this instruction sets the default user for all subsequent instructions.
 - `CMD ["<command>", "<arg1>"]` - this instruction sets the default command a container using this image will run.
