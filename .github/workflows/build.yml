@@ -72,6 +72,7 @@ jobs:
 
   validate:
     runs-on: ubuntu-24.04
+    continue-on-error: ${{ matrix.target == 'validate-api-reference' }}
     strategy:
       fail-fast: false
       matrix:
@@ -83,6 +84,12 @@ jobs:
           - test-go-redirects
           - dockerfile-lint
           - validate-vendor
+          - validate-api-reference
+        include:
+          - target: validate-api-reference
+            cache: |
+              validate-api-reference.cache-from=type=gha,scope=api-reference
+              validate-api-reference.cache-to=type=gha,scope=api-reference,mode=max
     steps:
       -
         name: Checkout
@@ -98,6 +105,13 @@ jobs:
           files: |
             docker-bake.hcl
           targets: ${{ matrix.target }}
+          set: ${{ matrix.cache || '' }}
+      -
+        name: Report API reference validation failure
+        if: ${{ failure() && matrix.target == 'validate-api-reference' }}
+        run: |
+          echo "::warning::API reference validation failed. See the Validate step for details."
+          echo 'API reference validation failed. This check is advisory; site builds use the committed JSON. See the Validate step for details.' >> "$GITHUB_STEP_SUMMARY"
       -
         name: Install reviewdog
         if: ${{ matrix.target == 'vale' && github.event_name == 'pull_request' }}

@@ -76,10 +76,10 @@ Generation runs the same strict validation. Any diagnostic fails generation;
 there is no exception baseline. Reports are written to
 `tmp/api-reference/validation.json`.
 
-The independent API reference data workflow runs tests, validates the sources,
-and regenerates the JSON when API sources, generator files, or the committed
-JSON change. It compares the result with the committed file and reports stale
-data. This check is advisory: failures do not block site builds or deployment.
+The build workflow's validation matrix runs API reference checks alongside the
+other validation targets. It runs tests, validates the sources, regenerates the
+JSON, and compares the result with the committed file to detect stale data.
+This matrix entry is advisory: failures do not block site builds or deployment.
 
 Run the same check locally with Docker:
 
