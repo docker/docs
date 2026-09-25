@@ -28769,7 +28769,7 @@
       "connection": "hosted",
       "description": "Use this API to create sandboxes, run processes, work with files, and manage sandbox resources. Start with a kit through the SDK, or use the HTTP operations here directly.\n\nManagement requests use an Authorization bearer token. File and process requests go to the sandbox endpoint in core.endpoint.uri and require a short-lived scoped endpoint credential, not the management token. The SDK obtains that credential for you. Each operation also checks its declared permissions. Direct Unix socket access uses the operating system's socket access controls instead of HTTP authentication. Interactive WebSocket operations describe their supported credential transports separately.\n\nThe Docker Cloud API base URL is https://connect.docker.com/sandboxes. Append each /v1 path without removing the base URL's path prefix. For sandbox endpoint operations, use the sandbox endpoint as the base URL instead.\n\nOperations list their success and error responses. A 202 response means work is still in progress; read the resource until it reaches the expected state. Errors contain a stable code, a message, and optional details. Inspect the code as well as the HTTP status.\n\nSend the current ETag in If-Match when an operation requires it. Operations that accept Idempotency-Key use that HTTP header to identify retries: the same key and payload return the first result; a different payload fails. Keys are retained for at least 24 hours.\n\nLists use pageSize and pageToken. Continue with nextPageToken until it is empty. Supported filters and ordering are listed on each operation. Resource names contain immutable identifiers; displayName is a label. A 64-bit integer is returned as a JSON string; inputs accept a number or a string.",
       "diagnostics": [],
-      "digest": "150e4a3299c8cd2372aa18c3d2c4f6313e9833532924ae9be2907b0a233e9aba",
+      "digest": "e57c2e2d328a3fde9d906ba051cf310ab484b2bdaf98d29501d038f5aeae29ce",
       "exampleCount": 81,
       "experimental": true,
       "guides": [
@@ -33461,13 +33461,50 @@
           "id": "getNetworkPoliciesInOwnerScope",
           "line": 1314,
           "method": "GET",
-          "parameters": [],
+          "parameters": [
+            {
+              "description": "Omitted versions accept only destination.v1; an unsupported representation fails closed.",
+              "in": "query",
+              "name": "acceptedSelectorVersions",
+              "pointer": "/paths/~1v1~1network-policies/get/parameters/0",
+              "required": false,
+              "schema": {
+                "items": {
+                  "description": "",
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 8,
+                "title": "accepted_selector_versions",
+                "type": "array",
+                "uniqueItems": true
+              }
+            }
+          ],
           "path": "/v1/network-policies",
           "pointer": "/paths/~1v1~1network-policies/get",
           "raw": {
             "description": "GetNetworkPolicies returns effective and exact views of the same installed generation.",
             "operationId": "getNetworkPoliciesInOwnerScope",
-            "parameters": [],
+            "parameters": [
+              {
+                "description": "Omitted versions accept only destination.v1; an unsupported representation fails closed.",
+                "in": "query",
+                "name": "acceptedSelectorVersions",
+                "required": false,
+                "schema": {
+                  "items": {
+                    "description": "",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 8,
+                  "title": "accepted_selector_versions",
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            ],
             "responses": {
               "200": {
                 "content": {
@@ -33599,7 +33636,7 @@
           "deprecated": null,
           "description": "ListPolicyLogEntries lists observed policy decisions.",
           "id": "listPolicyLogEntriesInOwnerScope",
-          "line": 1343,
+          "line": 1356,
           "method": "GET",
           "parameters": [
             {
@@ -33862,7 +33899,7 @@
           "deprecated": null,
           "description": "ListProcesses lists processes in creation order.",
           "id": "listProcesses",
-          "line": 1418,
+          "line": 1431,
           "method": "GET",
           "parameters": [
             {
@@ -34085,7 +34122,7 @@
           "deprecated": null,
           "description": "CreateProcess starts a durable interactive process and returns its resource name.",
           "id": "createProcess",
-          "line": 1478,
+          "line": 1491,
           "method": "POST",
           "parameters": [
             {
@@ -34343,7 +34380,7 @@
           "deprecated": null,
           "description": "Exec runs one command to completion. A retry after transport failure may run it again.\nAction at the collection root: it runs a command to completion instead of creating a\nprocess a caller can address.",
           "id": "exec",
-          "line": 1544,
+          "line": 1557,
           "method": "POST",
           "parameters": [],
           "path": "/v1/processes/exec",
@@ -34527,7 +34564,7 @@
           "deprecated": null,
           "description": "GetProcess reads one process by its endpoint-scoped resource name.",
           "id": "getProcess",
-          "line": 1587,
+          "line": 1600,
           "method": "GET",
           "parameters": [
             {
@@ -34754,7 +34791,7 @@
           "deprecated": null,
           "description": "Interact binds the complete process name from the path to the first Attach frame.\nA conflicting name is INVALID_ARGUMENT before any attach.",
           "id": "interact",
-          "line": 1643,
+          "line": 1656,
           "method": "GET",
           "parameters": [
             {
@@ -34972,7 +35009,7 @@
           "deprecated": null,
           "description": "ReadOutput returns one page of retained output after a stream_sequence, the\nsame cursor Interact resumes from, so a REST client can read what a process printed.",
           "id": "readOutput",
-          "line": 1717,
+          "line": 1730,
           "method": "GET",
           "parameters": [
             {
@@ -35201,7 +35238,7 @@
           "deprecated": null,
           "description": "Signal sends one signal to an existing process.\nAction: a signal is delivered to a running process and leaves no representation to\nreplace.",
           "id": "signal",
-          "line": 1781,
+          "line": 1794,
           "method": "POST",
           "parameters": [
             {
@@ -35458,7 +35495,7 @@
           "deprecated": null,
           "description": "ListSandboxes lists sandboxes in the caller's owner scope.",
           "id": "listSandboxes",
-          "line": 1843,
+          "line": 1856,
           "method": "GET",
           "parameters": [
             {
@@ -35686,7 +35723,7 @@
           "deprecated": null,
           "description": "CreateSandbox admits a sandbox. Unknown fields at any level are rejected before\nreplay lookup, reservation, policy binding, or workload effects.",
           "id": "createSandbox",
-          "line": 1906,
+          "line": 1919,
           "method": "POST",
           "parameters": [
             {
@@ -36101,7 +36138,7 @@
           "deprecated": null,
           "description": "GetSandbox reads one sandbox by its resource name.",
           "id": "getSandbox",
-          "line": 2021,
+          "line": 2034,
           "method": "GET",
           "parameters": [
             {
@@ -36354,7 +36391,7 @@
           "deprecated": null,
           "description": "DeleteSandbox returns the deleting resource while work remains, or an empty message when absent.",
           "id": "deleteSandbox",
-          "line": 2082,
+          "line": 2095,
           "method": "DELETE",
           "parameters": [
             {
@@ -36802,7 +36839,7 @@
           "deprecated": null,
           "description": "UpdateSandbox changes only the display label under the observed etag.\nIts resource name, backing identity and child addresses remain unchanged.",
           "id": "updateSandbox",
-          "line": 2202,
+          "line": 2215,
           "method": "PATCH",
           "parameters": [
             {
@@ -37251,7 +37288,7 @@
           "deprecated": null,
           "description": "CreateEndpointCredential grants short-lived access to one sandbox endpoint.\nIssuance checks current authority and never stores a token in the replay ledger.",
           "id": "createEndpointCredential",
-          "line": 2325,
+          "line": 2338,
           "method": "POST",
           "parameters": [
             {
@@ -37561,7 +37598,7 @@
           "deprecated": null,
           "description": "GetMcpGateway reads gateway state for the sandbox.",
           "id": "getMcpGateway",
-          "line": 2401,
+          "line": 2414,
           "method": "GET",
           "parameters": [
             {
@@ -37772,7 +37809,7 @@
           "deprecated": null,
           "description": "AddMcpGatewayServer adds one server to an existing ready gateway.",
           "id": "addMcpGatewayServer",
-          "line": 2451,
+          "line": 2464,
           "method": "POST",
           "parameters": [
             {
@@ -37992,530 +38029,12 @@
         },
         {
           "acceptMedia": "application/json",
-          "curl": "curl \\\n  --request POST \\\n  --header \"Authorization: Bearer ${TOKEN}\" \\\n  --header 'Accept: application/json' \\\n  --header 'Content-Type: application/json' \\\n  --data-binary @request-body \\\n  'https://connect.docker.com/sandboxes/v1/sandboxes/\u003cSANDBOX\u003e/mcp-gateway/start'",
-          "curlNotes": [
-            "Prepare request-body using the selected media type and schema."
-          ],
-          "deprecated": null,
-          "description": "StartMcpGateway ensures a gateway exists for the sandbox.\nAction: a lifecycle transition is not a representation a caller can PUT.",
-          "id": "startMcpGateway",
-          "line": 2504,
-          "method": "POST",
-          "parameters": [
-            {
-              "description": "The sandbox id.",
-              "in": "path",
-              "name": "sandbox",
-              "pointer": "/paths/~1v1~1sandboxes~1{sandbox}~1mcp-gateway~1start/post/parameters/0",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "path": "/v1/sandboxes/{sandbox}/mcp-gateway/start",
-          "pointer": "/paths/~1v1~1sandboxes~1{sandbox}~1mcp-gateway~1start/post",
-          "raw": {
-            "description": "StartMcpGateway ensures a gateway exists for the sandbox.\nAction: a lifecycle transition is not a representation a caller can PUT.",
-            "operationId": "startMcpGateway",
-            "parameters": [
-              {
-                "description": "The sandbox id.",
-                "in": "path",
-                "name": "sandbox",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            ],
-            "requestBody": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "additionalProperties": false,
-                    "description": "StartMcpGatewayRequest ensures a sandbox gateway exists.\nservers must be empty when gateway_url is set",
-                    "properties": {
-                      "gatewayUrl": {
-                        "description": "gateway_url attaches read-only to a pre-existing shareable gateway when supported.",
-                        "format": "uri",
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "servers": {
-                        "description": "servers are initial server names for a backend-minted gateway.",
-                        "items": {
-                          "minLength": 1,
-                          "type": "string"
-                        },
-                        "type": "array"
-                      },
-                      "static": {
-                        "description": "static pins the requested server set and closes gateway-side discovery.",
-                        "type": "boolean"
-                      }
-                    },
-                    "title": "StartMcpGatewayRequest",
-                    "type": "object"
-                  }
-                }
-              },
-              "required": true
-            },
-            "responses": {
-              "200": {
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "allOf": [
-                        {
-                          "$ref": "#/components/schemas/McpGateway"
-                        },
-                        {
-                          "not": {
-                            "properties": {
-                              "state": {
-                                "enum": [
-                                  "provisioning"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "state"
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                },
-                "description": "Success"
-              },
-              "202": {
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "allOf": [
-                        {
-                          "$ref": "#/components/schemas/McpGateway"
-                        },
-                        {
-                          "properties": {
-                            "state": {
-                              "enum": [
-                                "provisioning"
-                              ]
-                            }
-                          },
-                          "required": [
-                            "state"
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                },
-                "description": "Accepted. The resource is still progressing; read it or follow its events until completion."
-              },
-              "default": {
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/Error"
-                    }
-                  }
-                },
-                "description": "The structured Error body identifies the failure with a stable code and optional typed details."
-              }
-            },
-            "security": [
-              {
-                "bearer": []
-              }
-            ],
-            "summary": "StartMcpGateway ensures a gateway exists for the sandbox.",
-            "tags": [
-              "MCP gateways"
-            ],
-            "x-sbx-authenticated-only": false,
-            "x-sbx-conditional-permissions": [],
-            "x-sbx-plane": "control",
-            "x-sbx-required-permissions": [
-              "mcpWrite"
-            ],
-            "x-sbx-resource-response": {
-              "$ref": "#/components/schemas/McpGateway"
-            },
-            "x-sbx-serving-surface": "management"
-          },
-          "references": [
-            {
-              "ref": "#/components/schemas/Error",
-              "url": "/reference/api/sandboxes/latest/schemas/Error/"
-            },
-            {
-              "ref": "#/components/schemas/McpGateway",
-              "url": "/reference/api/sandboxes/latest/schemas/McpGateway/"
-            }
-          ],
-          "requestSchema": {
-            "additionalProperties": false,
-            "description": "StartMcpGatewayRequest ensures a sandbox gateway exists.\nservers must be empty when gateway_url is set",
-            "properties": {
-              "gatewayUrl": {
-                "description": "gateway_url attaches read-only to a pre-existing shareable gateway when supported.",
-                "format": "uri",
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "servers": {
-                "description": "servers are initial server names for a backend-minted gateway.",
-                "items": {
-                  "minLength": 1,
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "static": {
-                "description": "static pins the requested server set and closes gateway-side discovery.",
-                "type": "boolean"
-              }
-            },
-            "title": "StartMcpGatewayRequest",
-            "type": "object"
-          },
-          "security": [
-            {
-              "bearer": []
-            }
-          ],
-          "securitySchemes": {
-            "bearer": {
-              "description": "A bearer credential is required for every HTTP request. Management operations use an API credential; sandbox endpoint operations use an issued credential scoped to the sandbox, audience and permitted actions.",
-              "scheme": "bearer",
-              "type": "http"
-            },
-            "sandboxBearer": {
-              "description": "A short-lived bearer issued by createEndpointCredential for this sandbox, audience and explicit permissions. Management credentials are not accepted.",
-              "scheme": "bearer",
-              "type": "http"
-            },
-            "sandboxWebSocketBearer": {
-              "description": "Sandbox-scoped credential encoded in the non-echoed subprotocol offer declared by x-websocket. Offer the API subprotocol alongside it; use this carrier only when endpoint discovery advertises webSocketSubprotocol. Never combine it with Authorization.",
-              "in": "header",
-              "name": "Sec-WebSocket-Protocol",
-              "type": "apiKey"
-            }
-          },
-          "servers": [
-            {
-              "description": "The API base URL. Append the /v1 paths while preserving this URL's path prefix.",
-              "url": "https://connect.docker.com/sandboxes"
-            }
-          ],
-          "summary": "StartMcpGateway ensures a gateway exists for the sandbox.",
-          "tags": [
-            "MCP gateways"
-          ],
-          "url": "/reference/api/sandboxes/latest/operations/startMcpGateway/",
-          "variants": [
-            {
-              "description": null,
-              "direction": "Request",
-              "examples": [],
-              "headers": null,
-              "media": "application/json",
-              "pointer": "/paths/~1v1~1sandboxes~1{sandbox}~1mcp-gateway~1start/post/requestBody/content/application~1json",
-              "required": true,
-              "schema": {
-                "additionalProperties": false,
-                "description": "StartMcpGatewayRequest ensures a sandbox gateway exists.\nservers must be empty when gateway_url is set",
-                "properties": {
-                  "gatewayUrl": {
-                    "description": "gateway_url attaches read-only to a pre-existing shareable gateway when supported.",
-                    "format": "uri",
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "servers": {
-                    "description": "servers are initial server names for a backend-minted gateway.",
-                    "items": {
-                      "minLength": 1,
-                      "type": "string"
-                    },
-                    "type": "array"
-                  },
-                  "static": {
-                    "description": "static pins the requested server set and closes gateway-side discovery.",
-                    "type": "boolean"
-                  }
-                },
-                "title": "StartMcpGatewayRequest",
-                "type": "object"
-              },
-              "status": ""
-            },
-            {
-              "description": "Success",
-              "direction": "Response",
-              "examples": [],
-              "headers": null,
-              "media": "application/json",
-              "pointer": "/paths/~1v1~1sandboxes~1{sandbox}~1mcp-gateway~1start/post/responses/200/content/application~1json",
-              "required": null,
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/McpGateway"
-                  },
-                  {
-                    "not": {
-                      "properties": {
-                        "state": {
-                          "enum": [
-                            "provisioning"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "state"
-                      ]
-                    }
-                  }
-                ]
-              },
-              "status": "200"
-            },
-            {
-              "description": "Accepted. The resource is still progressing; read it or follow its events until completion.",
-              "direction": "Response",
-              "examples": [],
-              "headers": null,
-              "media": "application/json",
-              "pointer": "/paths/~1v1~1sandboxes~1{sandbox}~1mcp-gateway~1start/post/responses/202/content/application~1json",
-              "required": null,
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/McpGateway"
-                  },
-                  {
-                    "properties": {
-                      "state": {
-                        "enum": [
-                          "provisioning"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "state"
-                    ]
-                  }
-                ]
-              },
-              "status": "202"
-            },
-            {
-              "description": "The structured Error body identifies the failure with a stable code and optional typed details.",
-              "direction": "Response",
-              "examples": [
-                {
-                  "language": "json",
-                  "name": "Schema example",
-                  "text": "{\n  \"code\": \"notFound\",\n  \"details\": [],\n  \"message\": \"sandbox not found\"\n}",
-                  "value": {
-                    "code": "notFound",
-                    "details": [],
-                    "message": "sandbox not found"
-                  }
-                }
-              ],
-              "headers": null,
-              "media": "application/json",
-              "pointer": "/paths/~1v1~1sandboxes~1{sandbox}~1mcp-gateway~1start/post/responses/default/content/application~1json",
-              "required": null,
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              },
-              "status": "default"
-            }
-          ]
-        },
-        {
-          "acceptMedia": "application/json",
-          "curl": "curl \\\n  --request POST \\\n  --header \"Authorization: Bearer ${TOKEN}\" \\\n  --header 'Accept: application/json' \\\n  'https://connect.docker.com/sandboxes/v1/sandboxes/\u003cSANDBOX\u003e/mcp-gateway/stop'",
-          "curlNotes": [],
-          "deprecated": null,
-          "description": "StopMcpGateway stops or detaches the gateway and succeeds when already absent.\nAction: a lifecycle transition is not a representation a caller can PUT.",
-          "id": "stopMcpGateway",
-          "line": 2591,
-          "method": "POST",
-          "parameters": [
-            {
-              "description": "The sandbox id.",
-              "in": "path",
-              "name": "sandbox",
-              "pointer": "/paths/~1v1~1sandboxes~1{sandbox}~1mcp-gateway~1stop/post/parameters/0",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "path": "/v1/sandboxes/{sandbox}/mcp-gateway/stop",
-          "pointer": "/paths/~1v1~1sandboxes~1{sandbox}~1mcp-gateway~1stop/post",
-          "raw": {
-            "description": "StopMcpGateway stops or detaches the gateway and succeeds when already absent.\nAction: a lifecycle transition is not a representation a caller can PUT.",
-            "operationId": "stopMcpGateway",
-            "parameters": [
-              {
-                "description": "The sandbox id.",
-                "in": "path",
-                "name": "sandbox",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "200": {
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/StopMcpGatewayResponse"
-                    }
-                  }
-                },
-                "description": "Success"
-              },
-              "default": {
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/Error"
-                    }
-                  }
-                },
-                "description": "The structured Error body identifies the failure with a stable code and optional typed details."
-              }
-            },
-            "security": [
-              {
-                "bearer": []
-              }
-            ],
-            "summary": "StopMcpGateway stops or detaches the gateway and succeeds when already absent.",
-            "tags": [
-              "MCP gateways"
-            ],
-            "x-sbx-authenticated-only": false,
-            "x-sbx-conditional-permissions": [],
-            "x-sbx-plane": "control",
-            "x-sbx-required-permissions": [
-              "mcpWrite"
-            ],
-            "x-sbx-serving-surface": "management"
-          },
-          "references": [
-            {
-              "ref": "#/components/schemas/Error",
-              "url": "/reference/api/sandboxes/latest/schemas/Error/"
-            },
-            {
-              "ref": "#/components/schemas/StopMcpGatewayResponse",
-              "url": "/reference/api/sandboxes/latest/schemas/StopMcpGatewayResponse/"
-            }
-          ],
-          "requestSchema": null,
-          "security": [
-            {
-              "bearer": []
-            }
-          ],
-          "securitySchemes": {
-            "bearer": {
-              "description": "A bearer credential is required for every HTTP request. Management operations use an API credential; sandbox endpoint operations use an issued credential scoped to the sandbox, audience and permitted actions.",
-              "scheme": "bearer",
-              "type": "http"
-            },
-            "sandboxBearer": {
-              "description": "A short-lived bearer issued by createEndpointCredential for this sandbox, audience and explicit permissions. Management credentials are not accepted.",
-              "scheme": "bearer",
-              "type": "http"
-            },
-            "sandboxWebSocketBearer": {
-              "description": "Sandbox-scoped credential encoded in the non-echoed subprotocol offer declared by x-websocket. Offer the API subprotocol alongside it; use this carrier only when endpoint discovery advertises webSocketSubprotocol. Never combine it with Authorization.",
-              "in": "header",
-              "name": "Sec-WebSocket-Protocol",
-              "type": "apiKey"
-            }
-          },
-          "servers": [
-            {
-              "description": "The API base URL. Append the /v1 paths while preserving this URL's path prefix.",
-              "url": "https://connect.docker.com/sandboxes"
-            }
-          ],
-          "summary": "StopMcpGateway stops or detaches the gateway and succeeds when already absent.",
-          "tags": [
-            "MCP gateways"
-          ],
-          "url": "/reference/api/sandboxes/latest/operations/stopMcpGateway/",
-          "variants": [
-            {
-              "description": "Success",
-              "direction": "Response",
-              "examples": [],
-              "headers": null,
-              "media": "application/json",
-              "pointer": "/paths/~1v1~1sandboxes~1{sandbox}~1mcp-gateway~1stop/post/responses/200/content/application~1json",
-              "required": null,
-              "schema": {
-                "$ref": "#/components/schemas/StopMcpGatewayResponse"
-              },
-              "status": "200"
-            },
-            {
-              "description": "The structured Error body identifies the failure with a stable code and optional typed details.",
-              "direction": "Response",
-              "examples": [
-                {
-                  "language": "json",
-                  "name": "Schema example",
-                  "text": "{\n  \"code\": \"notFound\",\n  \"details\": [],\n  \"message\": \"sandbox not found\"\n}",
-                  "value": {
-                    "code": "notFound",
-                    "details": [],
-                    "message": "sandbox not found"
-                  }
-                }
-              ],
-              "headers": null,
-              "media": "application/json",
-              "pointer": "/paths/~1v1~1sandboxes~1{sandbox}~1mcp-gateway~1stop/post/responses/default/content/application~1json",
-              "required": null,
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              },
-              "status": "default"
-            }
-          ]
-        },
-        {
-          "acceptMedia": "application/json",
           "curl": "curl \\\n  --request GET \\\n  --header \"Authorization: Bearer ${TOKEN}\" \\\n  --header 'Accept: application/json' \\\n  'https://connect.docker.com/sandboxes/v1/sandboxes/\u003cSANDBOX\u003e/network-policies'",
           "curlNotes": [],
           "deprecated": null,
           "description": "GetNetworkPolicies returns effective and exact views of the same installed generation.",
           "id": "getNetworkPolicies",
-          "line": 2628,
+          "line": 2517,
           "method": "GET",
           "parameters": [
             {
@@ -38526,6 +38045,24 @@
               "required": true,
               "schema": {
                 "type": "string"
+              }
+            },
+            {
+              "description": "Omitted versions accept only destination.v1; an unsupported representation fails closed.",
+              "in": "query",
+              "name": "acceptedSelectorVersions",
+              "pointer": "/paths/~1v1~1sandboxes~1{sandbox}~1network-policies/get/parameters/1",
+              "required": false,
+              "schema": {
+                "items": {
+                  "description": "",
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 8,
+                "title": "accepted_selector_versions",
+                "type": "array",
+                "uniqueItems": true
               }
             }
           ],
@@ -38542,6 +38079,23 @@
                 "required": true,
                 "schema": {
                   "type": "string"
+                }
+              },
+              {
+                "description": "Omitted versions accept only destination.v1; an unsupported representation fails closed.",
+                "in": "query",
+                "name": "acceptedSelectorVersions",
+                "required": false,
+                "schema": {
+                  "items": {
+                    "description": "",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 8,
+                  "title": "accepted_selector_versions",
+                  "type": "array",
+                  "uniqueItems": true
                 }
               }
             ],
@@ -38676,7 +38230,7 @@
           "deprecated": null,
           "description": "ListPolicyLogEntries lists observed policy decisions.",
           "id": "listPolicyLogEntries",
-          "line": 2663,
+          "line": 2565,
           "method": "GET",
           "parameters": [
             {
@@ -38958,7 +38512,7 @@
           "deprecated": null,
           "description": "ListPorts lists currently published ports for one sandbox.",
           "id": "listPorts",
-          "line": 2744,
+          "line": 2646,
           "method": "GET",
           "parameters": [
             {
@@ -39121,7 +38675,7 @@
           "deprecated": null,
           "description": "CreatePort makes one sandbox port reachable outside the sandbox.",
           "id": "createPort",
-          "line": 2778,
+          "line": 2680,
           "method": "POST",
           "parameters": [
             {
@@ -39451,7 +39005,7 @@
           "deprecated": null,
           "description": "GetPort reads one published port by its resource name.",
           "id": "getPort",
-          "line": 2867,
+          "line": 2769,
           "method": "GET",
           "parameters": [
             {
@@ -39723,7 +39277,7 @@
           "deprecated": null,
           "description": "DeletePort withdraws one published port. A name that is not published\nsucceeds, so a retried delete reports the same result as the first.",
           "id": "deletePort",
-          "line": 2934,
+          "line": 2836,
           "method": "DELETE",
           "parameters": [
             {
@@ -40009,7 +39563,7 @@
           "deprecated": null,
           "description": "RenewSandboxTimeout sets a TTL when timeout renewal is supported. The TTL starts at acceptance, and the response returns the new expires_at with the sandbox's timeout configuration preserved.\nAction: the TTL restarts at acceptance, so the result is not a value the caller could\nPUT.\n\nReturns unimplemented when this operation is unavailable. Support does not grant permission.",
           "id": "renewSandboxTimeout",
-          "line": 3008,
+          "line": 2910,
           "method": "POST",
           "parameters": [
             {
@@ -40300,7 +39854,7 @@
           "deprecated": null,
           "description": "CreateSnapshot checkpoints a running sandbox; a stopped source is rejected.",
           "id": "createSnapshot",
-          "line": 3083,
+          "line": 2985,
           "method": "POST",
           "parameters": [
             {
@@ -40772,7 +40326,7 @@
           "deprecated": null,
           "description": "IssueSSHCert signs a caller-held public key for sandbox SSH access.\nA create: each call mints one certificate under the sandbox's certificate collection.\n\nReturns unimplemented when this operation is unavailable. Support does not grant permission.",
           "id": "issueSSHCert",
-          "line": 3206,
+          "line": 3108,
           "method": "POST",
           "parameters": [
             {
@@ -41177,7 +40731,7 @@
           "deprecated": null,
           "description": "StartSandbox starts a stopped sandbox; a backend that preserved memory resumes it.\nAction: a lifecycle transition is not a representation a caller can PUT.",
           "id": "startSandbox",
-          "line": 3312,
+          "line": 3214,
           "method": "POST",
           "parameters": [
             {
@@ -41717,7 +41271,7 @@
           "deprecated": null,
           "description": "StopSandbox stops a running sandbox; a backend advertising memory preservation hibernates it.\nAction: a lifecycle transition is not a representation a caller can PUT.",
           "id": "stopSandbox",
-          "line": 3459,
+          "line": 3361,
           "method": "POST",
           "parameters": [
             {
@@ -42255,7 +41809,7 @@
           "deprecated": null,
           "description": "ListSecrets lists secret metadata in the caller's owner scope.\n\nReturns unimplemented when this operation is unavailable. Support does not grant permission.",
           "id": "listSecrets",
-          "line": 3606,
+          "line": 3508,
           "method": "GET",
           "parameters": [
             {
@@ -42531,7 +42085,7 @@
           "deprecated": null,
           "description": "CreateSecret stores new secret material.\n\nReturns unimplemented when this operation is unavailable. Support does not grant permission.",
           "id": "createSecret",
-          "line": 3687,
+          "line": 3589,
           "method": "POST",
           "parameters": [
             {
@@ -42832,7 +42386,7 @@
           "deprecated": null,
           "description": "GetSecret reads one secret's metadata; material is never returned.\n\nReturns unimplemented when this operation is unavailable. Support does not grant permission.",
           "id": "getSecret",
-          "line": 3769,
+          "line": 3671,
           "method": "GET",
           "parameters": [
             {
@@ -43133,7 +42687,7 @@
           "deprecated": null,
           "description": "UpdateSecret replaces secret metadata and material.\n\nReturns unimplemented when this operation is unavailable. Support does not grant permission.",
           "id": "updateSecret",
-          "line": 3847,
+          "line": 3749,
           "method": "PUT",
           "parameters": [
             {
@@ -43572,7 +43126,7 @@
           "deprecated": null,
           "description": "DeleteSecret deletes a secret; deleting an already absent secret succeeds.\nIts response carries the credential fence receipt, so it answers 200 with a\nbody rather than the 204 an empty-response delete declares.\n\nReturns unimplemented when this operation is unavailable. Support does not grant permission.",
           "id": "deleteSecret",
-          "line": 3968,
+          "line": 3870,
           "method": "DELETE",
           "parameters": [
             {
@@ -43900,7 +43454,7 @@
           "deprecated": null,
           "description": "ListSnapshots lists snapshots in the caller's owner scope.",
           "id": "listSnapshots",
-          "line": 4060,
+          "line": 3962,
           "method": "GET",
           "parameters": [
             {
@@ -44149,7 +43703,7 @@
           "deprecated": null,
           "description": "GetSnapshot reads one snapshot by its resource name.",
           "id": "getSnapshot",
-          "line": 4132,
+          "line": 4034,
           "method": "GET",
           "parameters": [
             {
@@ -44402,7 +43956,7 @@
           "deprecated": null,
           "description": "DeleteSnapshot deletes a snapshot; deleting an already absent snapshot succeeds.",
           "id": "deleteSnapshot",
-          "line": 4193,
+          "line": 4095,
           "method": "DELETE",
           "parameters": [
             {
@@ -44739,7 +44293,7 @@
           "deprecated": null,
           "description": "RestoreSnapshot forks a new sandbox from a snapshot.\nAction: a restore creates a sandbox, so the snapshot in the path is the source and not\nthe created resource.",
           "id": "restoreSnapshot",
-          "line": 4288,
+          "line": 4190,
           "method": "POST",
           "parameters": [
             {
@@ -45184,7 +44738,7 @@
           "deprecated": null,
           "description": "ListVolumes lists volumes in the caller's owner scope.\n\nReturns unimplemented when this operation is unavailable. Support does not grant permission.",
           "id": "listVolumes",
-          "line": 4410,
+          "line": 4312,
           "method": "GET",
           "parameters": [
             {
@@ -45460,7 +45014,7 @@
           "deprecated": null,
           "description": "CreateVolume creates a persistent volume.\n\nReturns unimplemented when this operation is unavailable. Support does not grant permission.",
           "id": "createVolume",
-          "line": 4491,
+          "line": 4393,
           "method": "POST",
           "parameters": [
             {
@@ -45761,7 +45315,7 @@
           "deprecated": null,
           "description": "GetVolume reads one volume by its resource name.\n\nReturns unimplemented when this operation is unavailable. Support does not grant permission.",
           "id": "getVolume",
-          "line": 4573,
+          "line": 4475,
           "method": "GET",
           "parameters": [
             {
@@ -46060,7 +45614,7 @@
           "deprecated": null,
           "description": "DeleteVolume deletes a volume; deleting an already absent volume succeeds.\n\nReturns unimplemented when this operation is unavailable. Support does not grant permission.",
           "id": "deleteVolume",
-          "line": 4651,
+          "line": 4553,
           "method": "DELETE",
           "parameters": [
             {
@@ -46369,7 +45923,7 @@
       ],
       "owner": "docker/sbx-api",
       "product": "sandboxes",
-      "schemaCount": 557,
+      "schemaCount": 550,
       "schemaURLs": {
         "#/components/schemas/AddMcpGatewayServerResponse": "/reference/api/sandboxes/latest/schemas/AddMcpGatewayServerResponse/",
         "#/components/schemas/AppliedKit": "/reference/api/sandboxes/latest/schemas/AppliedKit/",
@@ -46540,7 +46094,6 @@
         "#/components/schemas/SnapshotSummary": "/reference/api/sandboxes/latest/schemas/SnapshotSummary/",
         "#/components/schemas/StartupArgv": "/reference/api/sandboxes/latest/schemas/StartupArgv/",
         "#/components/schemas/StartupExecution": "/reference/api/sandboxes/latest/schemas/StartupExecution/",
-        "#/components/schemas/StopMcpGatewayResponse": "/reference/api/sandboxes/latest/schemas/StopMcpGatewayResponse/",
         "#/components/schemas/StopMemoryOutcome": "/reference/api/sandboxes/latest/schemas/StopMemoryOutcome/",
         "#/components/schemas/StoredSecretOptions": "/reference/api/sandboxes/latest/schemas/StoredSecretOptions/",
         "#/components/schemas/StreamType": "/reference/api/sandboxes/latest/schemas/StreamType/",
@@ -47325,6 +46878,13 @@
           "schema": {
             "description": "EffectiveCoreLifecycle is persisted at admission and cannot silently degrade.",
             "properties": {
+              "autoResume": {
+                "description": "auto_resume is the configured authenticated auto-resume setting; absent means unknown.\nSnapshot readback preserves the capture-time value, not current support or a resume guarantee.",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
               "canCaptureMemory": {
                 "description": "can_capture_memory is this sandbox's ALL snapshot support, independently set.",
                 "type": "boolean"
@@ -47960,11 +47520,11 @@
           "name": "ExactDestination",
           "pointer": "/components/schemas/ExactDestination",
           "schema": {
-            "description": "ExactDestination uses destination.v1 canonical selector values, never legacy glob syntax.",
+            "description": "ExactDestination uses canonical selector values, never legacy glob syntax.\ndnsLabelPrefix requires a canonical DNS label prefix and suffix",
             "properties": {
               "kind": {
                 "$ref": "#/components/schemas/ExactDestinationKind",
-                "description": "kind selects a destination.v1 matching rule.",
+                "description": "kind selects a matching rule; dnsLabelPrefix requires destination.v2.",
                 "not": {
                   "enum": [
                     "unspecified"
@@ -47981,7 +47541,7 @@
                 ]
               },
               "value": {
-                "description": "value is canonical for its kind and contains no legacy selector syntax.",
+                "description": "For dnsLabelPrefix, crl.digicert.com matches a first label starting with crl\nand remaining labels exactly digicert.com; every value label is canonical ASCII DNS.",
                 "minLength": 1,
                 "type": "string"
               }
@@ -47999,14 +47559,15 @@
           "name": "ExactDestinationKind",
           "pointer": "/components/schemas/ExactDestinationKind",
           "schema": {
-            "description": "ExactDestinationKind keeps DNS and IP-literal decisions distinct.\n\nValues:\nunspecified\ndns\ndnsLabel\ndnsSubtree\nip\ncidr",
+            "description": "ExactDestinationKind keeps DNS and IP-literal decisions distinct.\n\nValues:\nunspecified\ndns\ndnsLabel\ndnsSubtree\nip\ncidr\ndnsLabelPrefix",
             "enum": [
               "unspecified",
               "dns",
               "dnsLabel",
               "dnsSubtree",
               "ip",
-              "cidr"
+              "cidr",
+              "dnsLabelPrefix"
             ],
             "title": "ExactDestinationKind",
             "type": "string"
@@ -48017,7 +47578,7 @@
           "name": "ExactNetworkPolicy",
           "pointer": "/components/schemas/ExactNetworkPolicy",
           "schema": {
-            "description": "ExactNetworkPolicy is a complete consumer-installed generation; its last node is the root.",
+            "description": "ExactNetworkPolicy is a complete consumer-installed generation; its last node is the root.\ndnsLabelPrefix requires destination.v2",
             "properties": {
               "nodes": {
                 "description": "nodes are complete and topologically ordered; the final node is the root.",
@@ -48034,8 +47595,11 @@
                 "type": "string"
               },
               "selectorVersion": {
-                "const": "destination.v1",
                 "description": "selector_version fixes matching semantics across implementations.",
+                "enum": [
+                  "destination.v1",
+                  "destination.v2"
+                ],
                 "type": "string"
               }
             },
@@ -50219,7 +49783,7 @@
           "pointer": "/components/schemas/McpCreateSpec",
           "schema": {
             "additionalProperties": false,
-            "description": "McpCreateSpec is CreateSandboxRequest's MCP block: the StartMcpGateway\nfields without the sandbox ref, wired before the workload starts.\nservers must be empty when gateway_url is set",
+            "description": "McpCreateSpec configures the sandbox's MCP gateway before the workload starts.\nservers must be empty when gateway_url is set",
             "properties": {
               "gatewayUrl": {
                 "description": "gateway_url attaches read-only to a pre-existing shareable gateway when supported.",
@@ -52125,16 +51689,6 @@
             "unevaluatedProperties": false
           },
           "url": "/reference/api/sandboxes/latest/schemas/StartupExecution/"
-        },
-        {
-          "name": "StopMcpGatewayResponse",
-          "pointer": "/components/schemas/StopMcpGatewayResponse",
-          "schema": {
-            "description": "StopMcpGatewayResponse may retain the fenced desired configuration without claiming a live gateway.",
-            "title": "StopMcpGatewayResponse",
-            "type": "object"
-          },
-          "url": "/reference/api/sandboxes/latest/schemas/StopMcpGatewayResponse/"
         },
         {
           "name": "StopMemoryOutcome",
