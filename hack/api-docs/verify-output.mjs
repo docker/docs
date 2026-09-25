@@ -4,7 +4,7 @@ import { isDeepStrictEqual } from "node:util";
 const root = path.resolve(import.meta.dirname, "../..");
 const base = path.resolve(process.argv[2] || "public");
 const data = JSON.parse(
-  fs.readFileSync(path.join(root, "tmp/api-reference/data/api-reference.json")),
+  fs.readFileSync(path.join(root, "data/api-reference.json")),
 );
 const decode = (s) =>
   s
@@ -157,6 +157,7 @@ const bytes = files(path.join(base, "reference/api")).reduce(
   (n, p) => n + fs.statSync(p).size,
   0,
 );
+fs.mkdirSync(path.join(root, "tmp/api-reference/reports"), { recursive: true });
 fs.writeFileSync(
   path.join(root, "tmp/api-reference/reports/output.json"),
   JSON.stringify(
