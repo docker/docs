@@ -174,10 +174,12 @@ An invitee must accept the invitation before you can add them to a team.
 ### Remove members from teams
 
 If your organization uses single sign-on (SSO) with
-[SCIM](/manuals/security/provisioning/scim/_index.md) enabled,
-remove members from your identity provider (IdP). That removes them from
-Docker automatically. If SCIM is disabled, remove members manually in Docker
-using the following steps.
+[group mapping](/manuals/security/provisioning/scim/group-mapping.md), team
+membership follows your identity provider (IdP) groups. Remove the member
+from the mapped IdP group to remove them from the team. Removing a member
+from the Docker application in your IdP removes them from the organization,
+not from a single team. If team membership isn't mapped to your IdP, remove
+members manually in Docker using the following steps.
 
 Removing a member from a team revokes their access to that team's permitted
 resources.
