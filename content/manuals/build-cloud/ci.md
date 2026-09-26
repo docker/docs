@@ -94,8 +94,6 @@ If you are not an organization administrator:
 
 ### GitHub Actions
 
-<!-- TODO: Confirm whether standard Buildx requires a minimum setup-buildx-action version. -->
-
 ```yaml
 name: ci
 
