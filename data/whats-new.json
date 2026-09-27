@@ -30,6 +30,15 @@
       "featured": true
     },
     {
+      "product": "Docker Skills",
+      "title": "Give coding agents guidance with Docker Skills",
+      "description": "Install Docker's official open-source skills in compatible coding agents to give them guidance for Dockerfiles, Compose applications, and other Docker tasks.",
+      "url": "/ai/skills/",
+      "published": "2026-09-24",
+      "source_prs": [26169],
+      "featured": true
+    },
+    {
       "product": "Docker Sandboxes",
       "title": "Share agent skills read-only by default",
       "description": "Sandboxes created with version 0.43.0 mount shared agent skills read-only by default. Choose read-only, read-write, or no access when creating a sandbox.",
@@ -45,7 +54,7 @@
       "url": "/ai/sandboxes/usage/#choose-a-workspace",
       "published": "2026-09-07",
       "source_prs": [25902, 26032],
-      "featured": true
+      "featured": false
     },
     {
       "product": "Docker Sandboxes",
