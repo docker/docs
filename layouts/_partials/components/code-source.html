@@ -1,0 +1,7 @@
+<div
+  class="pierre-code not-prose"
+  data-pierre-language="{{ .lang | default "text" }}"
+  data-pierre-options="{{ .options | default dict | jsonify }}"
+>
+  <pre data-pierre-source><code>{{ .content }}</code></pre>
+</div>

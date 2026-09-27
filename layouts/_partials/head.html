@@ -96,6 +96,25 @@
 />
 {{ $theme := resources.Get "js/theme.js" | js.Build (dict "minify" true) }}
 <script>{{ $theme.Content | safeJS }}</script>
+{{ $pierre := resources.Get "js/pierre.js" | js.Build (dict "minify" true "targetPath" "pierre.js" "shims" (dict "shiki" "js/pierre/shiki.js")) }}
+<link
+  rel="preload"
+  href="{{ $pierre.RelPermalink }}"
+  as="script"
+  fetchpriority="high"
+/>
+<script>
+  document.documentElement.classList.add('pierre-loading');
+  setTimeout(function () {
+    document.documentElement.classList.remove('pierre-loading');
+  }, 4000);
+</script>
+<script
+  defer
+  src="{{ $pierre.RelPermalink }}"
+  fetchpriority="high"
+  onerror="document.documentElement.classList.remove('pierre-loading')"
+></script>
 {{ $js := resources.Match "js/src/**.js"
   | resources.Concat "scripts.js"
   | js.Build (dict "minify" true "targetPath" "scripts.js")

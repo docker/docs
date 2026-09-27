@@ -43,9 +43,10 @@ Home, Get started, Guides featured cards, and Manuals share the
 Trident's body and small-body typography scales. The homepage uses the display,
 body, label, and heading scales. Layout dimensions remain specific to the docs.
 
-Inline and fenced code use `muted` in both themes. Trident removed its syntax
-color tokens in beta.5, so code uses `foreground`, with `muted-foreground` for
-comments. Syntax categories have no separate colors in this prototype.
+Inline and fenced code use `muted` in both themes. Fenced code uses
+`@pierre/diffs@1.1.22` with its `pierre-light` and `pierre-dark` syntax themes,
+matching the renderer used by Trident. The token package does not define syntax
+colors.
 
 The header uses the `sidebar` surface. Tabs and messages use `card`, and the
 homepage question field uses `input-bg`.
@@ -66,6 +67,31 @@ These page-specific rules live in `assets/css/home.css`.
 This is an integration prototype. Components outside these mappings still need
 a design review. Loading tokens does not provide
 Trident component behavior or certify accessibility.
+
+## Browser code rendering
+
+Hugo emits escaped plain code through `components/code-source.html`. An eagerly
+preloaded, deferred `pierre.js` bundle enhances every block as soon as the document
+is parsed. It also renders code in Gordon responses as they stream in. There is
+no separate code-rendering build step and no React integration.
+
+The head script hides fallback text while retaining its space until Pierre has
+rendered it. If the bundle fails to load, fallback text becomes visible. A
+four-second deadline also reveals fallback text if loading stalls. With
+JavaScript disabled, plain code remains visible from the start. This avoids a
+flash of unhighlighted text during normal loading, but does not guarantee
+highlighted code at first paint on slow connections.
+
+The existing title, copy, and Show more controls remain outside Pierre's shadow
+root. The adapter preserves `linenos`, `linenostart`, and `hl_lines` options and
+Dockerfile instruction links. Theme changes update existing renderers. Replaced
+Gordon blocks release their renderer instances.
+
+`assets/js/pierre/shiki.js` limits Shiki's eager bundle to selected languages used
+by the docs. Add grammars there and aliases in `assets/js/pierre.js` when extending
+language support. Unsupported languages, including Rego, render as plain text.
+The initial bundle is approximately 576 KB gzipped, separate from the site's
+main JavaScript bundle.
 
 ## Snapshot provenance
 
@@ -101,7 +127,7 @@ Unicode ranges and use local asset URLs.
   Both use `muted`.
 - The Roboto Mono font override and custom card/homepage type sizes, line heights,
   and letter spacing. These use the corresponding Trident typography tokens.
-- References to removed `syntax-*` tokens. Code uses semantic foreground tokens.
+- References to removed `syntax-*` tokens. Pierre supplies the syntax palette.
 
 The dark `background` token is `oklch(0.1 0.008 245)` in both snapshots.
 The beta.5 source does not contain a lighter replacement for that token.

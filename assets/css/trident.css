@@ -321,16 +321,6 @@
     color: inherit;
   }
 
-  /* Trident no longer exports syntax colors. Keep code on semantic text tokens. */
-  :is(.docs-code, #gordon-chat pre) span {
-    color: var(--tri-foreground);
-  }
-
-  :is(.docs-code, #gordon-chat)
-    :is(.c, .c1, .cm, .cs, .ch, .hljs-comment, .hljs-quote) {
-    color: var(--tri-muted-foreground);
-  }
-
   .gordon-error {
     background: var(--tri-alert-error-bg);
     border-color: var(--tri-alert-error-border);
@@ -352,18 +342,6 @@
   .gordon-limit button {
     background: var(--tri-primary);
     color: var(--tri-primary-foreground);
-  }
-
-  .docs-code .cl {
-    color: var(--tri-foreground);
-  }
-
-  .docs-code :is(.ln, .lnt) {
-    color: var(--tri-muted-foreground);
-  }
-
-  .docs-code .hl {
-    background: var(--tri-accent-subtle);
   }
 
   .docs-code-title {

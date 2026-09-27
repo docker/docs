@@ -17,10 +17,8 @@
   {{ end }}
   <div class="relative w-full">
     {{ $lang := .Type | default "text" }}
-    {{ $result := transform.Highlight .Inner
-      $lang .Options
-    }}
-    <div class="syntax-light dark:syntax-dark not-prose w-full">
+    {{ $source := partial "components/code-source.html" (dict "content" .Inner "lang" $lang "options" .Options) }}
+    <div class="not-prose w-full">
       <button
         x-data="{ code: '{{ encoding.Base64Encode .Inner }}', copying: false }"
         class="{{ if .Attributes.title }}
@@ -60,7 +58,7 @@
             </button>
           </div>
           <div :class="{ 'h-32': collapse }">
-            {{ $result }}
+            {{ $source }}
             <button
               @click="collapse = true"
               x-show="!collapse"
@@ -74,7 +72,7 @@
           </div>
         </div>
       {{ else }}
-        {{ $result }}
+        {{ $source }}
       {{ end }}
     </div>
   </div>
