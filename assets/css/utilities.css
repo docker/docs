@@ -117,12 +117,9 @@
     border-radius: 0.25rem;
     border: none !important;
     padding: 0.1em 0.25em !important;
-    background: var(--docs-inline-code-bg, var(--tw-prose-code-bg)) !important;
+    background: var(--tw-prose-code-bg) !important;
     .dark & {
-      background: var(
-        --docs-inline-code-bg,
-        var(--tw-prose-code-bg-dark)
-      ) !important;
+      background: var(--tw-prose-code-bg-dark) !important;
     }
     &::before,
     &::after {

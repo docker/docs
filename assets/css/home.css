@@ -1,7 +1,7 @@
 /* Homepage composition using the shared Trident surfaces and controls. */
 @layer docs {
   .docs-home {
-    background: var(--tri-sidebar);
+    background: var(--tri-background);
     color: var(--tri-foreground);
   }
 
@@ -22,18 +22,18 @@
 
   .home-hero h1 {
     margin: 0;
-    font-size: clamp(2.25rem, 4vw, 3rem);
+    font-size: var(--tri-scale-display-font-size);
     font-weight: var(--tri-font-weight-semibold);
-    line-height: 1.15;
-    letter-spacing: -0.03em;
+    line-height: var(--tri-scale-display-line-height);
+    letter-spacing: var(--tri-scale-display-letter-spacing);
     text-wrap: balance;
   }
 
   .home-intro {
     margin-top: 1rem;
-    color: var(--docs-card-description);
-    font-size: 1rem;
-    line-height: 1.6;
+    color: var(--tri-muted-foreground);
+    font-size: var(--tri-scale-body-font-size);
+    line-height: var(--tri-scale-body-line-height);
     text-wrap: balance;
   }
 
@@ -47,10 +47,10 @@
     gap: 1rem;
     padding: 0.75rem;
     padding-left: 1.25rem;
-    background: var(--tri-background-paper-elevation-0);
+    background: var(--tri-input-bg);
     border: 1px solid var(--tri-input);
     border-radius: var(--tri-radius-lg);
-    box-shadow: var(--docs-card-shadow);
+    box-shadow: var(--tri-elevation-raised-shadow);
   }
 
   .home-question-field:focus-within {
@@ -71,7 +71,7 @@
     color: var(--tri-foreground);
     background: transparent;
     font: inherit;
-    font-size: 1rem;
+    font-size: var(--tri-scale-body-font-size);
     outline: none;
   }
 
@@ -116,9 +116,9 @@
     border: 1px solid var(--tri-border);
     border-radius: var(--tri-radius-lg);
     background: transparent;
-    color: var(--docs-card-description);
-    font-size: 0.8125rem;
-    line-height: 1.5;
+    color: var(--tri-muted-foreground);
+    font-size: var(--tri-scale-label-font-size);
+    line-height: var(--tri-scale-label-line-height);
     cursor: pointer;
   }
 
@@ -144,7 +144,7 @@
 
   .home-updates h2 {
     color: var(--tri-foreground);
-    font-size: 1.5rem;
+    font-size: var(--tri-scale-heading-3-font-size);
     font-weight: var(--tri-font-weight-semibold);
   }
 
@@ -158,7 +158,7 @@
 
   .home-update-dot {
     background: var(--tri-muted-foreground);
-    box-shadow: 0 0 0 4px var(--tri-sidebar);
+    box-shadow: 0 0 0 4px var(--tri-background);
   }
 
   .home-update-product,
@@ -176,8 +176,8 @@
   }
 
   .home-update-description {
-    color: var(--docs-card-description);
-    line-height: 1.6;
+    color: var(--tri-muted-foreground);
+    line-height: var(--tri-scale-body-line-height);
   }
 
   .home-update-link:hover .home-update-title {

@@ -42,6 +42,6 @@ pagefind-modal {
     color: var(--tri-foreground);
     font-weight: var(--tri-font-weight-semibold);
     padding: 0 0.125rem;
-    border-radius: 0.125rem;
+    border-radius: var(--tri-radius-xs);
   }
 }

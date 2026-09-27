@@ -3,24 +3,7 @@
 
 @layer tri.primitives {
 :root {
-  --tri-black-100: oklch(0 0 0);
-  --tri-black-12: oklch(0 0 0 / 0.12);
-  --tri-black-16: oklch(0 0 0 / 0.16);
-  --tri-black-24: oklch(0 0 0 / 0.24);
-  --tri-black-32: oklch(0 0 0 / 0.32);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-black-4: oklch(0 0 0 / 0.04);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-black-40: oklch(0 0 0 / 0.4);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-black-56: oklch(0 0 0 / 0.56);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-black-64: oklch(0 0 0 / 0.64);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-black-8: oklch(0 0 0 / 0.08);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-black-80: oklch(0 0 0 / 0.8);
-  --tri-black-main: oklch(0 0 0);
+  --tri-black: oklch(0 0 0);
   --tri-blue-100: oklch(0.933 0.029 241.4);
   --tri-blue-200: oklch(0.892 0.049 242.8);
   --tri-blue-300: oklch(0.806 0.09 242.2);
@@ -94,10 +77,10 @@
   --tri-red-800: oklch(0.225 0.068 16.7);
   --tri-shadow-2xl: 0px 25px 50px -12px oklch(0 0 0 / 0.25);
   --tri-shadow-2xs: 0px 1px 0px 0px oklch(0 0 0 / 0.05);
-  --tri-shadow-lg: 0px 10px 15px -3px oklch(0 0 0 / 0.10), 0px 4px 6px -4px oklch(0 0 0 / 0.10);
-  --tri-shadow-md: 0px 4px 6px -1px oklch(0 0 0 / 0.10), 0px 2px 4px -2px oklch(0 0 0 / 0.10);
-  --tri-shadow-sm: 0px 1px 3px 0px oklch(0 0 0 / 0.10), 0px 1px 2px -1px oklch(0 0 0 / 0.10);
-  --tri-shadow-xl: 0px 20px 25px -5px oklch(0 0 0 / 0.10), 0px 8px 10px -6px oklch(0 0 0 / 0.10);
+  --tri-shadow-lg: 0px 10px 15px -3px oklch(0 0 0 / 0.1), 0px 4px 6px -4px oklch(0 0 0 / 0.1);
+  --tri-shadow-md: 0px 4px 6px -1px oklch(0 0 0 / 0.1), 0px 2px 4px -2px oklch(0 0 0 / 0.1);
+  --tri-shadow-sm: 0px 1px 3px 0px oklch(0 0 0 / 0.1), 0px 1px 2px -1px oklch(0 0 0 / 0.1);
+  --tri-shadow-xl: 0px 20px 25px -5px oklch(0 0 0 / 0.1), 0px 8px 10px -6px oklch(0 0 0 / 0.1);
   --tri-shadow-xs: 0px 1px 2px 0px oklch(0 0 0 / 0.05);
   --tri-terminal-blue-300: oklch(0.74 0.17 262);
   --tri-terminal-blue-400: oklch(0.68 0.18 262);
@@ -132,26 +115,7 @@
   --tri-violet-600: oklch(0.489 0.275 290.9);
   --tri-violet-700: oklch(0.414 0.232 291.7);
   --tri-violet-800: oklch(0.208 0.111 300.8);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-white-100: oklch(1 0 0);
-  --tri-white-12: oklch(1 0 0 / 0.12);
-  --tri-white-16: oklch(1 0 0 / 0.16);
-  --tri-white-24: oklch(1 0 0 / 0.24);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-white-32: oklch(1 0 0 / 0.32);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-white-4: oklch(1 0 0 / 0.04);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-white-40: oklch(1 0 0 / 0.4);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-white-56: oklch(1 0 0 / 0.56);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-white-64: oklch(1 0 0 / 0.64);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-white-8: oklch(1 0 0 / 0.08);
-  /* DEPRECATED: Not referenced by any overlay/scrim/surface token today. (remove in 4.0.0) */
-  --tri-white-80: oklch(1 0 0 / 0.8);
-  --tri-white-main: oklch(1 0 0);
+  --tri-white: oklch(1 0 0);
   --tri-z-base: 0;
   --tri-z-dropdown: 50;
   --tri-z-modal: 300;

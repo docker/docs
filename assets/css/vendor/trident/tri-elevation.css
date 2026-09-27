@@ -3,15 +3,15 @@
 
 @layer tri.elevation {
 :root {
-  --tri-elevation-floating-shadow: 0px 4px 6px -1px oklch(0 0 0 / 0.10), 0px 2px 4px -2px oklch(0 0 0 / 0.10);
+  --tri-elevation-floating-shadow: 0px 4px 6px -1px oklch(0 0 0 / 0.1), 0px 2px 4px -2px oklch(0 0 0 / 0.1);
   --tri-elevation-floating-z: var(--tri-z-sticky);
-  --tri-elevation-modal-shadow: 0px 20px 25px -5px oklch(0 0 0 / 0.10), 0px 8px 10px -6px oklch(0 0 0 / 0.10);
+  --tri-elevation-modal-shadow: 0px 20px 25px -5px oklch(0 0 0 / 0.1), 0px 8px 10px -6px oklch(0 0 0 / 0.1);
   --tri-elevation-modal-z: var(--tri-z-modal);
-  --tri-elevation-overlay-shadow: 0px 10px 15px -3px oklch(0 0 0 / 0.10), 0px 4px 6px -4px oklch(0 0 0 / 0.10);
+  --tri-elevation-overlay-shadow: 0px 10px 15px -3px oklch(0 0 0 / 0.1), 0px 4px 6px -4px oklch(0 0 0 / 0.1);
   --tri-elevation-overlay-z: var(--tri-z-overlay);
-  --tri-elevation-raised-shadow: 0px 1px 3px 0px oklch(0 0 0 / 0.10), 0px 1px 2px -1px oklch(0 0 0 / 0.10);
+  --tri-elevation-raised-shadow: 0px 1px 3px 0px oklch(0 0 0 / 0.1), 0px 1px 2px -1px oklch(0 0 0 / 0.1);
   --tri-elevation-raised-z: var(--tri-z-dropdown);
-  --tri-elevation-toast-shadow: 0px 20px 25px -5px oklch(0 0 0 / 0.10), 0px 8px 10px -6px oklch(0 0 0 / 0.10);
+  --tri-elevation-toast-shadow: 0px 20px 25px -5px oklch(0 0 0 / 0.1), 0px 8px 10px -6px oklch(0 0 0 / 0.1);
   --tri-elevation-toast-z: var(--tri-z-toast);
 }
 }

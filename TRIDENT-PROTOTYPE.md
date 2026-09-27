@@ -33,40 +33,22 @@ The `docs` cascade layer follows utilities so existing light and dark classes
 cannot override these semantic color pairs. Token imports stay at the root
 because they contain Tailwind directives as well as CSS layer declarations.
 
-Manrope supplies the interface and article typeface. Article body text uses the
-16-pixel reading scale, while navigation uses the smaller label scale. Code keeps
-the existing Roboto Mono font. The existing theme switch activates Trident's
-`.dark` overrides.
-
-Article body text and ordinary quotations use Trident's primary foreground
-through the local `--docs-reading-foreground` alias. The local
-`--docs-reading-background` uses white `background-primary` in light mode and
-`sidebar` in dark mode, matching the dark navigation surface. Subtle borders separate the navigation from the reading area. These are
-local layout adaptations; the separate Trident high-contrast mode stays inactive.
+Manrope supplies the interface and article typeface. Article and homepage backgrounds use `background` in both themes. Article text
+and quotations use `foreground`. Navigation retains the `sidebar` surface.
+The separate Trident high-contrast mode stays inactive.
 
 Home, Get started, Guides featured cards, and Manuals share the
-`components/card.html` partial. Grid layouts and optional audience labels remain
-page-specific; Guides search results retain their list layout.
-Navigation cards use `background-paper-elevation-0`, compact 16-pixel titles at
-weight 600, and 14-pixel descriptions in Trident gray 700 or gray 300.
-The border and shadow follow the surface material in Trident core's
-`tri-materials.css`: a semantic border in both themes, with a faint inset
-top-edge highlight in dark mode and no visible shadow in light mode. The local
-`--docs-card-shadow` mirrors this material because it is outside the token
-package. The elevated background is a docs-specific surface choice. Decorative icons are
-omitted; titles identify the destinations. Linked cards have a full-area target
-and accented hover or focus states. Tabs retain the component surface and
-semantic borders. Inactive sidebar
-items use `sidebar-foreground-muted`, with stronger text on the active item.
-Inactive table-of-contents links are neutral; active and hovered links use the
-primary accent. Inline code uses a faint foreground tint and compact padding,
-while fenced code uses Trident's default background in light mode and the muted
-surface in dark mode to preserve syntax contrast. Chroma and Gordon's highlight.js
-map keywords, strings, numbers, attributes, commands, and types to Trident
-syntax roles. Comments retain the muted foreground.
+`components/card.html` partial. Cards use `card`, `card-foreground`,
+`muted-foreground`, and `elevation-raised-shadow`. Titles and descriptions use
+Trident's body and small-body typography scales. The homepage uses the display,
+body, label, and heading scales. Layout dimensions remain specific to the docs.
 
-The neutral header is a docs-specific adaptation. Trident's `AppHeader` component
-uses the `header-from` and `header-to` blue gradient tokens.
+Inline and fenced code use `muted` in both themes. Trident removed its syntax
+color tokens in beta.5, so code uses `foreground`, with `muted-foreground` for
+comments. Syntax categories have no separate colors in this prototype.
+
+The header uses the `sidebar` surface. Tabs and messages use `card`, and the
+homepage question field uses `input-bg`.
 
 Gordon uses the Trident header gradient, popover surface, input colors, and
 semantic message, feedback, and alert states. Pagefind inherits the same typeface,
@@ -76,7 +58,7 @@ behavior.
 
 The homepage composes Gordon's question form, suggested questions, shared
 navigation cards, and release feed with the same Trident palette. The form uses
-the raised surface and a visible focus outline; suggested questions use quieter
+the input surface and a visible focus outline; suggested questions use quieter
 bordered controls. The navigation and release feed share a content width.
 The decorative background pattern and scaling interactions are omitted.
 These page-specific rules live in `assets/css/home.css`.
@@ -85,32 +67,44 @@ This is an integration prototype. Components outside these mappings still need
 a design review. Loading tokens does not provide
 Trident component behavior or certify accessibility.
 
-Component checks cover cards, tab switching, code, search results, and Gordon
-at desktop and mobile widths in both themes. Local search checks use the
-preview's Pagefind assets because the local indexer fails with a native allocator
-error. Gordon message and rate-limit checks use intercepted browser responses;
-they verify rendering and interaction, not the live backend.
-
 ## Snapshot provenance
 
-- Package: `@docker/trident-tokens@2.0.0-beta.3`
+- Package: `@docker/trident-tokens@2.0.0-beta.5`
 - Repository: <https://github.com/docker/trident>
-- Release commit: `bbc0746b17209071ceddabcb14b180fcb32b2fa9`
+- Source commit: `22ff6c848be181d439fd1f5d057175dddfdc9430`
 - CSS: ten unmodified generated files in `assets/css/vendor/trident/`
 - Checksums: SHA-256 per file in that directory's `manifest.json`
 
-The registry rejected the available credentials. This snapshot was generated
-from the release commit using the upstream `sd.config.ts` and
+This snapshot was generated
+from the source commit using the upstream `sd.config.ts` and
 `scripts/check-dark-coverage.ts`. It was not extracted from the published npm
 archive. The build used Node.js and these dependency versions from the upstream
 lockfile: `tsx@4.23.1`, `style-dictionary@5.5.1`, `apca-w3@0.1.9`, and
-`culori@4.0.2`. Upstream checks reported 97 contrast pairs with zero failures and
-explicit dark overrides for all 286 aliased tokens.
+`culori@4.0.2`. Upstream checks reported 87 contrast pairs with zero failures and
+explicit dark overrides for all 243 aliased tokens.
 
 Font files come from `@fontsource-variable/manrope@5.2.8` on npmjs.org. The
 unmodified WOFF2 subsets and their SIL Open Font License are under
 `static/assets/fonts/manrope/`. The font declarations retain the package's
 Unicode ranges and use local asset URLs.
+
+## Removed prototype overrides
+
+- Alternate article backgrounds: `background-primary` in light mode and `sidebar`
+  in dark mode. Both use `background`.
+- Gray 700/300 descriptions. Descriptions use `muted-foreground`.
+- The copied dark inset card highlight and transparent light shadow. Cards and
+  the homepage input use `elevation-raised-shadow`.
+- Elevated paper surfaces for cards and the homepage input. They use `card` and
+  `input-bg`, respectively.
+- Light/dark fenced-code background switching and the 5% inline-code color mix.
+  Both use `muted`.
+- The Roboto Mono font override and custom card/homepage type sizes, line heights,
+  and letter spacing. These use the corresponding Trident typography tokens.
+- References to removed `syntax-*` tokens. Code uses semantic foreground tokens.
+
+The dark `background` token is `oklch(0.1 0.008 245)` in both snapshots.
+The beta.5 source does not contain a lighter replacement for that token.
 
 ## Refresh the snapshot
 
