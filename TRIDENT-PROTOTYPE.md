@@ -44,9 +44,15 @@ Trident's body and small-body typography scales. The homepage uses the display,
 body, label, and heading scales. Layout dimensions remain specific to the docs.
 
 Inline and fenced code use `muted` in both themes. Fenced code uses
-`@pierre/diffs@1.1.22` with its `pierre-light` and `pierre-dark` syntax themes,
-matching the renderer used by Trident. The token package does not define syntax
-colors.
+`@pierre/diffs@1.1.22` with a shared docs syntax theme. Keywords, functions,
+and property names use Trident's primary blue; comments use muted foreground;
+values and punctuation use the normal foreground. Diff additions and deletions
+retain semantic success and error colors. The token package does not define
+syntax roles, so this mapping lives in `assets/js/pierre/themes.js`.
+
+Console transcripts highlight prompt-prefixed commands and their backslash
+continuations. Command output remains neutral instead of being parsed as shell
+code. This grammar lives in `assets/js/pierre/console.js`.
 
 The header uses the `sidebar` surface. Tabs and messages use `card`, and the
 homepage question field uses `input-bg`.
@@ -127,7 +133,7 @@ Unicode ranges and use local asset URLs.
   Both use `muted`.
 - The Roboto Mono font override and custom card/homepage type sizes, line heights,
   and letter spacing. These use the corresponding Trident typography tokens.
-- References to removed `syntax-*` tokens. Pierre supplies the syntax palette.
+- References to removed `syntax-*` tokens. Pierre applies the docs syntax theme.
 
 The dark `background` token is `oklch(0.1 0.008 245)` in both snapshots.
 The beta.5 source does not contain a lighter replacement for that token.

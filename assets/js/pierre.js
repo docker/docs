@@ -1,9 +1,9 @@
 import { File, preloadHighlighter } from "@pierre/diffs";
 import { bundledLanguages } from "./pierre/shiki.js";
 
-const themes = ["pierre-light", "pierre-dark"];
+import { themes } from "./pierre/themes.js";
 const aliases = {
-  console: "shellscript",
+  console: "docs-console",
   bash: "shellscript",
   sh: "shellscript",
   shell: "shellscript",

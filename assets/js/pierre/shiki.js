@@ -5,6 +5,7 @@ export { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 export { createOnigurumaEngine } from "shiki/engine/oniguruma";
 export const bundledThemes = {};
 export const bundledLanguages = {
+  "docs-console": () => import("./console.js"),
   shellscript: () => import("shiki/langs/shellscript.mjs"),
   docker: () => import("shiki/langs/docker.mjs"),
   yaml: () => import("shiki/langs/yaml.mjs"),
