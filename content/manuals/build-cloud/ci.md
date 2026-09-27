@@ -101,9 +101,13 @@ on:
   push:
     branches:
       - "main"
+  pull_request:
+    branches:
+      - "main"
 
 jobs:
   docker:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
@@ -126,6 +130,9 @@ jobs:
           # Otherwise, push to a registry.
           outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry' }}
 ```
+
+Pull requests from forks skip this job because they don't have access to the
+required secrets.
 
 The example above uses `docker/build-push-action`, which automatically uses the
 builder set up by `setup-buildx-action`. If you need to use the `docker build`
@@ -172,6 +179,8 @@ variables:
 # Build multi-platform image and push to a registry
 build_push:
   stage: build
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
   script:
     - |
       docker buildx build \
@@ -182,6 +191,8 @@ build_push:
 # Build an image and discard the result
 build_cache:
   stage: build
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_SOURCE_PROJECT_PATH == $CI_PROJECT_PATH'
   script:
     - |
       docker buildx build \
@@ -269,7 +280,7 @@ steps:
     key: build-push
     plugins:
       - docker-login#v2.1.0:
-          username: DOCKER_ACCOUNT
+          username: "<DOCKER_ACCOUNT>" # replace with your organization name or username
           password-env: DOCKER_ACCESS_TOKEN # the variable name in the environment hook
 ```
 
