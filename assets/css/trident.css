@@ -105,7 +105,8 @@
     border-radius: var(--tri-radius-default);
   }
 
-  .navbar-font a:hover {
+  .navbar-font .navbar-entry-margin:hover,
+  .navbar-font .navbar-entry-margin:hover > :is(a, button) {
     color: var(--tri-sidebar-foreground);
   }
 
