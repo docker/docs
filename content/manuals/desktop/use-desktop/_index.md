@@ -21,8 +21,8 @@ The Dashboard also gives you quick access to AI tooling, extensions, settings, a
 ## Use AI features
 
 - [Gordon](/manuals/ai/gordon/_index.md): A personal AI assistant built into Docker Desktop and the Docker CLI, designed to streamline your workflow and help you get more out of the Docker ecosystem.
-- [Docker Model Runner](manuals/ai/model-runner/_index.md): Manage, run, and deploy AI models using Docker.
-- [Docker MCP Toolkit](manuals/ai/mcp-catalog-and-toolkit/_index.md): A management interface integrated into Docker Desktop that lets you set up, manage, and run containerized MCP servers in profiles and connect them to AI agents.
+- [Docker Model Runner](/manuals/ai/model-runner/_index.md): Manage, run, and deploy AI models using Docker.
+- [Docker MCP Toolkit](/manuals/ai/mcp-catalog-and-toolkit/_index.md): A management interface integrated into Docker Desktop that lets you set up, manage, and run containerized MCP servers in profiles and connect them to AI agents.
 
 ### Extend Docker Desktop
 
