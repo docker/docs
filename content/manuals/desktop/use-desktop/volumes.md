@@ -58,7 +58,7 @@ The **Container in-use** tab displays the name of the container using the volume
 
 The **Stored data** tab displays the files and folders in the volume and their file size.
 
-- To save a file or folder, right-click it, select **Save as...**, and then specify a location to download it to.
+- Right-click a file or folder to save it, select **Save as...**, and then specify a location to download it to.
 - To delete a file or folder from the volume, right-click it, select **Delete**, and then confirm.
 - To edit a text file directly, double-click it to open it in the built-in editor. Unsaved changes are indicated in the editor, and you can save them back to the volume.
 
