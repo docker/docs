@@ -186,7 +186,7 @@ See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
 in the Apple documentation, and Docker Desktop [Mac system requirements](/manuals/desktop/setup/install/mac-install.md#system-requirements).
 
-### Docker.app is damaged and can't be opened. You should move it to the Trash.
+### Docker.app is damaged and can't be opened
 
 #### Cause
 
