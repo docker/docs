@@ -18,7 +18,7 @@ repository by name, and use the following filters to narrow the list:
 - Categories
 - Compliance: FIPS or STIG.
 - Types: Image or Helm chart.
-- OS: For example, Alpine or Debian.
+- OS: Alpine or Debian.
 - Versions: Extended Lifecycle Support.
 
 Use **Sort by** to order the results by popularity, recently updated, recently
