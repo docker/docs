@@ -14,7 +14,7 @@ aliases:
 
 Learn how to convert an existing user account into an organization. This is
 useful if you need multiple users to access your account and the repositories
-it’s connected to. Converting it to an organization gives you better control
+it's connected to. Converting it to an organization gives you better control
 over permissions for these users through
 [teams](/manuals/accounts/organization/manage/manage-a-team.md) and
 [roles](/manuals/security/roles-and-permissions/_index.md).
@@ -49,6 +49,11 @@ an organization:
   removed email address for another account after converting.
 - The current subscription will automatically cancel and your new subscription
   will start.
+- If you have a paid individual subscription, such as Docker Pro, it will be
+  canceled when you convert your account. Docker doesn't refund the unused
+  portion of a paid subscription. Consider timing your conversion near the end
+  of your billing cycle to avoid losing unused subscription time. For specific
+  questions about your subscription, contact [Docker Support](https://docs.docker.com/support/).
 - Repository namespaces and names won't change, but converting your account
   removes any repository collaborators. Once you convert the account, you'll need
   to add repository collaborators as team members.
@@ -65,8 +70,8 @@ an organization:
 
 > [!IMPORTANT]
 >
-> Converting an account into an organization is permanent. Back up any data
-> or settings you want to retain.
+> Converting an account into an organization is permanent. Back up any data or
+> settings you want to retain.
 
 1. Sign in to [Docker Home](https://app.docker.com/).
 1. Select your avatar in the top-right corner to open the drop-down.
@@ -75,8 +80,9 @@ an organization:
    cannot be undone and has considerable implications for your assets and the
    account.
 1. Enter a **Username of new owner** to set an organization owner. The new
-   Docker ID you specify becomes the organization’s owner. You cannot use the
+   Docker ID you specify becomes the organization's owner. You cannot use the
    same Docker ID as the account you are trying to convert. The Docker ID is
    case-sensitive.
 1. Select **Confirm**. The new owner receives a notification email. Use that
    owner account to sign in and manage the new organization.
+
