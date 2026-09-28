@@ -131,6 +131,13 @@ Used for Docker Desktop host-level traffic: signing in to Docker, the Desktop ap
 | **No proxy** | Connect directly without a proxy. |
 | **Manual configuration** | Enter a **Web Server (HTTP)** and **Secure Web Server (HTTPS)** URL manually. Use the format `http://proxy:port` or `https://proxy:port`. You can also specify hosts and domains that should bypass the proxy, for example: `registry-1.docker.com,*.docker.com,10.0.0.0/8`. |
 
+Docker Desktop reads a proxy or PAC URL that is statically configured on the
+host. For example a manual proxy setting, a static PAC file URL, or a
+GPO-managed override. WPAD (Web Proxy Auto-Discovery Protocol) auto-discovery
+is untested on both Windows and Mac and isn't officially supported. If your
+proxy is only discoverable via WPAD (DHCP option 252 or the `wpad.<domain>`
+DNS convention), configure a static PAC URL or proxy address instead.
+
 > [!NOTE]
 >
 > If you use a PAC file hosted on a web server, add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` extension. Without this, the PAC file may not parse correctly. See [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/air-gapped-containers.md#proxy-auto-configuration-files).
