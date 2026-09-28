@@ -5257,7 +5257,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/).
 
 #### For Mac
 
-- Docker Desktop on Apple silicon no longer requires Rosetta 2, with the exception of [three optional command line tools](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
+- Docker Desktop on Apple silicon no longer requires Rosetta 2, with the exception of three optional command line tools.
 
 #### For Windows
 
