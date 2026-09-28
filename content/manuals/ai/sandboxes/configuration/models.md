@@ -23,17 +23,16 @@ Docker Sandboxes includes `llmman`, a model management tool installed alongside
 `sbx`. It serves local models and forwards requests to hosted providers or
 custom endpoints. You don't need to install it separately.
 
-Installing Docker Sandboxes or enabling model selection doesn't start
-`llmman`. Docker Sandboxes starts it on your host as a background process
-when you first use `sbx run --model`, unless you select `--provider ollama`.
-Runs without `--model` don't start it.
+The Docker Sandboxes daemon starts `llmman` on your host and stops it when
+the daemon stops. At startup, `llmman` downloads its llama.cpp runtime if
+needed, so the first startup requires network access for that download. The service starts even if you haven't used `--model`.
 
-Once started, `llmman` keeps running after the sandbox or CLI exits. Later
-model-enabled runs reuse the service, so sandboxes share its model store and
-loaded models.
+The service keeps running after a sandbox or CLI exits. Sandboxes share its
+model store and loaded models.
 
-On Linux, starting the service requires Docker Engine on the host to pull
-the inference server image.
+On Linux, `llmman` first tries Docker or Podman to run the inference server
+in a container. If neither is usable, it tries a downloaded binary, then
+`llama-server` on the host's `PATH`.
 
 ## Enable model selection
 
@@ -84,9 +83,10 @@ For Docker Model Runner, see
 
 Select a provider supported by `llmman` and a model available from that
 provider. For example, to run Codex with an OpenAI model, export `OPENAI_API_KEY`
-in your host shell, then run:
+in your host shell, restart the daemon to pick it up, then run:
 
 ```console
+$ sbx daemon restart
 $ sbx run --provider openai --model gpt-5-nano codex
 ```
 
@@ -96,15 +96,15 @@ variable names, see the [llmman provider documentation](https://github.com/llmma
 
 ### Provider authentication
 
-Make the provider's API key available in the host shell before the first
-`sbx run --model` command starts `llmman`. For a custom endpoint, choose the
-variable name with [`apiKeyEnv`](#connect-a-custom-endpoint).
+Make the provider's API key available in the host shell that starts the
+Docker Sandboxes daemon. For a custom endpoint, choose the variable name
+with [`apiKeyEnv`](#connect-a-custom-endpoint).
 
-`llmman` inherits the environment of the process that starts it. Changing a
-variable in another shell doesn't update an already-running service. After
-changing a key, stop the host's `llmman serve` process, then run `sbx run --model`
-from the shell containing the updated variable. This interrupts model requests
-from other sandboxes using that service.
+`llmman` inherits the daemon's environment. After setting or changing a key,
+run `sbx daemon restart` from the shell containing the updated variable.
+This restarts the model service and interrupts model requests from sandboxes
+using it. Setting a variable only in the shell where you run `sbx run --model`
+doesn't update an already-running service.
 
 Provider authentication for this route is handled by `llmman` on the host.
 Credentials stored with `sbx secret set` aren't automatically supplied to it.
