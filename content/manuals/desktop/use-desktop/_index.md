@@ -35,4 +35,4 @@ The Dashboard also gives you quick access to AI tooling, extensions, settings, a
 - **Settings**: Select the Settings icon in the Dashboard header to configure Docker Desktop.
 - **Troubleshoot**: Select the Troubleshoot icon in the Dashboard header to debug issues or restart Docker Desktop.
 - **Notifications center**: Select the bell icon in the bottom-right corner to see new releases, installation progress, and other updates.
-- Learning center: Open it from the Dashboard header for in-app walkthroughs and other learning resources,
+- Learning center: Open it from the Dashboard header for in-app walkthroughs and other learning resources.
