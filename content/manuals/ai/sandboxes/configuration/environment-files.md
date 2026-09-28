@@ -720,6 +720,12 @@ secrets:
     command: gh auth token
 ```
 
+Secret commands execute from a fresh temporary directory on the host. Relative
+helper paths resolve from that directory. Keep helpers and their dependencies
+outside writable sandbox mounts. Use an absolute path, an absolute host
+`PATH` entry, or an explicit change to the helper's private directory. See
+[dynamic secret sources](credentials.md#use-a-dynamic-secret-source).
+
 For a cloud environment, set `snapshot: true` on a `ref` or `command` source:
 
 ```yaml
