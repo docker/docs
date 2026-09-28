@@ -12,7 +12,7 @@
   - /learn
 "/security/access-tokens/personal-access-tokens/":
   - /go/access-tokens/
-"/agentic-platform/":
+"/ai/sandboxes/console/":
   - /go/dap/
 "/reference/api/engine/#deprecated-api-versions":
   - /engine/api/v1.18/
@@ -325,13 +325,12 @@
 "/docker-hub/usage/pulls/":
   - /go/hub-pull-limits/
 
-
 # Links in Desktop
 
 # Docker Sandboxes
-"/ai/sandboxes/governance/access-controls/mcp/":
+"/ai/governance/access-controls/mcp/":
   - /go/mcp-policy/
-"/ai/sandboxes/mcp-gateway/":
+"/ai/sandboxes/cli/mcp/":
   - /go/sbx-mcp-gateway/
 
 # Desktop MCP Toolkit
@@ -354,7 +353,7 @@
 "/ai/mcp-catalog-and-toolkit/catalog/#custom-catalogs":
   - /go/mcp-custom-catalogs/
 
- # Desktop DMR
+  # Desktop DMR
 "/ai/model-runner/":
   - /go/model-runner/
 
@@ -1386,3 +1385,317 @@
   - /engine/reference/commandline/volume_rm/
 "/reference/cli/docker/volume/update/":
   - /engine/reference/commandline/volume_update/
+
+# Sandbox SDK recipes are imported byte for byte from docker/sbx-api.
+"/ai/sandboxes/api/cookbook/add-a-docker-credential-for-cloud-sandboxes/":
+  - /ai/sandboxes-api/cookbook/add-a-docker-credential-for-cloud-sandboxes/
+"/ai/sandboxes/api/cookbook/add-tools-with-kits/":
+  - /ai/sandboxes-api/cookbook/add-tools-with-kits/
+"/ai/sandboxes/api/cookbook/attach-persistent-storage/":
+  - /ai/sandboxes-api/cookbook/attach-persistent-storage/
+"/ai/sandboxes/api/cookbook/clone-a-cloud-sandbox/":
+  - /ai/sandboxes-api/cookbook/clone-a-cloud-sandbox/
+"/ai/sandboxes/api/cookbook/connect-to-cloud-with-a-bearer-token/":
+  - /ai/sandboxes-api/cookbook/connect-to-cloud-with-a-bearer-token/
+"/ai/sandboxes/api/cookbook/control-what-a-sandbox-can-reach/":
+  - /ai/sandboxes-api/cookbook/control-what-a-sandbox-can-reach/
+"/ai/sandboxes/api/cookbook/copy-a-file-into-a-cloud-sandbox/":
+  - /ai/sandboxes-api/cookbook/copy-a-file-into-a-cloud-sandbox/
+"/ai/sandboxes/api/cookbook/create-your-first-sandbox/":
+  - /ai/sandboxes-api/cookbook/create-your-first-sandbox/
+"/ai/sandboxes/api/cookbook/delete-a-cloud-sandbox/":
+  - /ai/sandboxes-api/cookbook/delete-a-cloud-sandbox/
+"/ai/sandboxes/api/cookbook/expose-a-port-from-a-cloud-sandbox/":
+  - /ai/sandboxes-api/cookbook/expose-a-port-from-a-cloud-sandbox/
+"/ai/sandboxes/api/cookbook/find-a-process-you-lost-track-of/":
+  - /ai/sandboxes-api/cookbook/find-a-process-you-lost-track-of/
+"/ai/sandboxes/api/cookbook/get-a-stored-secret-into-a-sandbox/":
+  - /ai/sandboxes-api/cookbook/get-a-stored-secret-into-a-sandbox/
+"/ai/sandboxes/api/cookbook/get-an-ssh-certificate/":
+  - /ai/sandboxes-api/cookbook/get-an-ssh-certificate/
+"/ai/sandboxes/api/cookbook/get-image-pull-urls/":
+  - /ai/sandboxes-api/cookbook/get-image-pull-urls/
+"/ai/sandboxes/api/cookbook/give-a-sandbox-an-mcp-gateway/":
+  - /ai/sandboxes-api/cookbook/give-a-sandbox-an-mcp-gateway/
+"/ai/sandboxes/api/cookbook/handle-errors-and-degradation/":
+  - /ai/sandboxes-api/cookbook/handle-errors-and-degradation/
+"/ai/sandboxes/api/cookbook/keep-a-cloud-sandbox-running/":
+  - /ai/sandboxes-api/cookbook/keep-a-cloud-sandbox-running/
+"/ai/sandboxes/api/cookbook/let-a-stopped-sandbox-resume-on-demand/":
+  - /ai/sandboxes-api/cookbook/let-a-stopped-sandbox-resume-on-demand/
+"/ai/sandboxes/api/cookbook/manage-cloud-secrets/":
+  - /ai/sandboxes-api/cookbook/manage-cloud-secrets/
+"/ai/sandboxes/api/cookbook/manage-network-policies/":
+  - /ai/sandboxes-api/cookbook/manage-network-policies/
+"/ai/sandboxes/api/cookbook/page-through-and-filter-lists/":
+  - /ai/sandboxes-api/cookbook/page-through-and-filter-lists/
+"/ai/sandboxes/api/cookbook/read-files-out-of-a-sandbox/":
+  - /ai/sandboxes-api/cookbook/read-files-out-of-a-sandbox/
+"/ai/sandboxes/api/cookbook/recover-when-the-endpoint-moves/":
+  - /ai/sandboxes-api/cookbook/recover-when-the-endpoint-moves/
+"/ai/sandboxes/api/cookbook/register-and-manage-an-image/":
+  - /ai/sandboxes-api/cookbook/register-and-manage-an-image/
+"/ai/sandboxes/api/cookbook/retry-without-creating-duplicates/":
+  - /ai/sandboxes-api/cookbook/retry-without-creating-duplicates/
+"/ai/sandboxes/api/cookbook/run-a-complete-example/":
+  - /ai/sandboxes-api/cookbook/run-a-complete-example/
+"/ai/sandboxes/api/cookbook/run-an-interactive-shell-in-a-cloud-sandbox/":
+  - /ai/sandboxes-api/cookbook/run-an-interactive-shell-in-a-cloud-sandbox/
+"/ai/sandboxes/api/cookbook/run-something-that-produces-real-output/":
+  - /ai/sandboxes-api/cookbook/run-something-that-produces-real-output/
+"/ai/sandboxes/api/cookbook/run-work-across-many-sandboxes/":
+  - /ai/sandboxes-api/cookbook/run-work-across-many-sandboxes/
+"/ai/sandboxes/api/cookbook/run-your-first-command/":
+  - /ai/sandboxes-api/cookbook/run-your-first-command/
+"/ai/sandboxes/api/cookbook/run-your-own-container-image/":
+  - /ai/sandboxes-api/cookbook/run-your-own-container-image/
+"/ai/sandboxes/api/cookbook/send-values-the-api-accepts/":
+  - /ai/sandboxes-api/cookbook/send-values-the-api-accepts/
+"/ai/sandboxes/api/cookbook/snapshot-and-fork-a-sandbox/":
+  - /ai/sandboxes-api/cookbook/snapshot-and-fork-a-sandbox/
+"/ai/sandboxes/api/cookbook/stop-and-restart-a-sandbox/":
+  - /ai/sandboxes-api/cookbook/stop-and-restart-a-sandbox/
+"/ai/sandboxes/api/cookbook/what-your-workload-starts-with/":
+  - /ai/sandboxes-api/cookbook/what-your-workload-starts-with/
+"/ai/sandboxes/api/cookbook/work-within-the-limits/":
+  - /ai/sandboxes-api/cookbook/work-within-the-limits/
+
+# Preserve flattened Markdown URLs for moved sandbox documentation.
+"/ai/sandboxes/console.md":
+  - /agentic-platform.md
+"/ai/sandboxes/console/faq.md":
+  - /agentic-platform/faq.md
+"/ai/sandboxes/console/get-started.md":
+  - /agentic-platform/get-started.md
+"/ai/sandboxes/console/kits.md":
+  - /agentic-platform/kits.md
+"/ai/sandboxes/console/mcp.md":
+  - /agentic-platform/mcp.md
+"/ai/sandboxes/console/policies.md":
+  - /agentic-platform/policies.md
+"/ai/sandboxes/reference/console-release-notes.md":
+  - /agentic-platform/release-notes.md
+"/ai/sandboxes/console/sandboxes.md":
+  - /agentic-platform/sandboxes.md
+"/ai/sandboxes/console/secrets.md":
+  - /agentic-platform/secrets.md
+"/ai/sandboxes/cloud-access.md":
+  - /agentic-platform/signup.md
+"/ai/sandboxes/api.md":
+  - /ai/sandboxes-api.md
+"/ai/sandboxes/api/authentication.md":
+  - /ai/sandboxes-api/authentication.md
+"/ai/sandboxes/api/concepts.md":
+  - /ai/sandboxes-api/concepts.md
+"/ai/sandboxes/api/cookbook.md":
+  - /ai/sandboxes-api/cookbook.md
+"/ai/sandboxes/api/cookbook/add-a-docker-credential-for-cloud-sandboxes.md":
+  - /ai/sandboxes-api/cookbook/add-a-docker-credential-for-cloud-sandboxes.md
+"/ai/sandboxes/api/cookbook/add-tools-with-kits.md":
+  - /ai/sandboxes-api/cookbook/add-tools-with-kits.md
+"/ai/sandboxes/api/cookbook/attach-persistent-storage.md":
+  - /ai/sandboxes-api/cookbook/attach-persistent-storage.md
+"/ai/sandboxes/api/cookbook/clone-a-cloud-sandbox.md":
+  - /ai/sandboxes-api/cookbook/clone-a-cloud-sandbox.md
+"/ai/sandboxes/api/cookbook/connect-to-cloud-with-a-bearer-token.md":
+  - /ai/sandboxes-api/cookbook/connect-to-cloud-with-a-bearer-token.md
+"/ai/sandboxes/api/cookbook/control-what-a-sandbox-can-reach.md":
+  - /ai/sandboxes-api/cookbook/control-what-a-sandbox-can-reach.md
+"/ai/sandboxes/api/cookbook/copy-a-file-into-a-cloud-sandbox.md":
+  - /ai/sandboxes-api/cookbook/copy-a-file-into-a-cloud-sandbox.md
+"/ai/sandboxes/api/cookbook/create-your-first-sandbox.md":
+  - /ai/sandboxes-api/cookbook/create-your-first-sandbox.md
+"/ai/sandboxes/api/cookbook/delete-a-cloud-sandbox.md":
+  - /ai/sandboxes-api/cookbook/delete-a-cloud-sandbox.md
+"/ai/sandboxes/api/cookbook/expose-a-port-from-a-cloud-sandbox.md":
+  - /ai/sandboxes-api/cookbook/expose-a-port-from-a-cloud-sandbox.md
+"/ai/sandboxes/api/cookbook/find-a-process-you-lost-track-of.md":
+  - /ai/sandboxes-api/cookbook/find-a-process-you-lost-track-of.md
+"/ai/sandboxes/api/cookbook/get-a-stored-secret-into-a-sandbox.md":
+  - /ai/sandboxes-api/cookbook/get-a-stored-secret-into-a-sandbox.md
+"/ai/sandboxes/api/cookbook/get-an-ssh-certificate.md":
+  - /ai/sandboxes-api/cookbook/get-an-ssh-certificate.md
+"/ai/sandboxes/api/cookbook/get-image-pull-urls.md":
+  - /ai/sandboxes-api/cookbook/get-image-pull-urls.md
+"/ai/sandboxes/api/cookbook/give-a-sandbox-an-mcp-gateway.md":
+  - /ai/sandboxes-api/cookbook/give-a-sandbox-an-mcp-gateway.md
+"/ai/sandboxes/api/cookbook/handle-errors-and-degradation.md":
+  - /ai/sandboxes-api/cookbook/handle-errors-and-degradation.md
+"/ai/sandboxes/api/cookbook/keep-a-cloud-sandbox-running.md":
+  - /ai/sandboxes-api/cookbook/keep-a-cloud-sandbox-running.md
+"/ai/sandboxes/api/cookbook/let-a-stopped-sandbox-resume-on-demand.md":
+  - /ai/sandboxes-api/cookbook/let-a-stopped-sandbox-resume-on-demand.md
+"/ai/sandboxes/api/cookbook/manage-cloud-secrets.md":
+  - /ai/sandboxes-api/cookbook/manage-cloud-secrets.md
+"/ai/sandboxes/api/cookbook/manage-network-policies.md":
+  - /ai/sandboxes-api/cookbook/manage-network-policies.md
+"/ai/sandboxes/api/cookbook/page-through-and-filter-lists.md":
+  - /ai/sandboxes-api/cookbook/page-through-and-filter-lists.md
+"/ai/sandboxes/api/cookbook/read-files-out-of-a-sandbox.md":
+  - /ai/sandboxes-api/cookbook/read-files-out-of-a-sandbox.md
+"/ai/sandboxes/api/cookbook/recover-when-the-endpoint-moves.md":
+  - /ai/sandboxes-api/cookbook/recover-when-the-endpoint-moves.md
+"/ai/sandboxes/api/cookbook/register-and-manage-an-image.md":
+  - /ai/sandboxes-api/cookbook/register-and-manage-an-image.md
+"/ai/sandboxes/api/cookbook/retry-without-creating-duplicates.md":
+  - /ai/sandboxes-api/cookbook/retry-without-creating-duplicates.md
+"/ai/sandboxes/api/cookbook/run-a-complete-example.md":
+  - /ai/sandboxes-api/cookbook/run-a-complete-example.md
+"/ai/sandboxes/api/cookbook/run-an-interactive-shell-in-a-cloud-sandbox.md":
+  - /ai/sandboxes-api/cookbook/run-an-interactive-shell-in-a-cloud-sandbox.md
+"/ai/sandboxes/api/cookbook/run-something-that-produces-real-output.md":
+  - /ai/sandboxes-api/cookbook/run-something-that-produces-real-output.md
+"/ai/sandboxes/api/cookbook/run-work-across-many-sandboxes.md":
+  - /ai/sandboxes-api/cookbook/run-work-across-many-sandboxes.md
+"/ai/sandboxes/api/cookbook/run-your-first-command.md":
+  - /ai/sandboxes-api/cookbook/run-your-first-command.md
+"/ai/sandboxes/api/cookbook/run-your-own-container-image.md":
+  - /ai/sandboxes-api/cookbook/run-your-own-container-image.md
+"/ai/sandboxes/api/cookbook/send-values-the-api-accepts.md":
+  - /ai/sandboxes-api/cookbook/send-values-the-api-accepts.md
+"/ai/sandboxes/api/cookbook/snapshot-and-fork-a-sandbox.md":
+  - /ai/sandboxes-api/cookbook/snapshot-and-fork-a-sandbox.md
+"/ai/sandboxes/api/cookbook/stop-and-restart-a-sandbox.md":
+  - /ai/sandboxes-api/cookbook/stop-and-restart-a-sandbox.md
+"/ai/sandboxes/api/cookbook/what-your-workload-starts-with.md":
+  - /ai/sandboxes-api/cookbook/what-your-workload-starts-with.md
+"/ai/sandboxes/api/cookbook/work-within-the-limits.md":
+  - /ai/sandboxes-api/cookbook/work-within-the-limits.md
+"/ai/sandboxes/api/errors.md":
+  - /ai/sandboxes-api/errors.md
+"/ai/sandboxes/api/get-started.md":
+  - /ai/sandboxes-api/get-started.md
+"/ai/sandboxes/api/install.md":
+  - /ai/sandboxes-api/install.md
+"/ai/sandboxes/api/limits.md":
+  - /ai/sandboxes-api/limits.md
+"/ai/sandboxes/concepts/architecture.md":
+  - /ai/sandboxes/architecture.md
+"/ai/sandboxes/cli/get-started-cloud.md":
+  - /ai/sandboxes/cloud.md
+"/ai/sandboxes/cli/credentials-cloud.md":
+  - /ai/sandboxes/cloud/credentials.md
+"/ai/sandboxes/cli/local-vs-cloud.md":
+  - /ai/sandboxes/cloud/local-vs-cloud.md
+"/ai/sandboxes/cli/move.md":
+  - /ai/sandboxes/cloud/move.md
+"/ai/sandboxes/cli/network-cloud.md":
+  - /ai/sandboxes/cloud/network-policy.md
+"/ai/sandboxes/cli/cloud-usage.md":
+  - /ai/sandboxes/cloud/usage.md
+"/ai/sandboxes/cli/local.md":
+  - /ai/sandboxes/configuration.md
+"/ai/sandboxes/cli/credentials.md":
+  - /ai/sandboxes/configuration/credentials.md
+"/ai/sandboxes/cli/environment-files.md":
+  - /ai/sandboxes/configuration/environment-files.md
+"/ai/sandboxes/cli/local/gpu-passthrough.md":
+  - /ai/sandboxes/configuration/gpu-passthrough.md
+"/ai/sandboxes/cli/local/models.md":
+  - /ai/sandboxes/configuration/models.md
+"/ai/sandboxes/cli/local/registry-mirror.md":
+  - /ai/sandboxes/configuration/registry-mirror.md
+"/ai/sandboxes/cli/local/settings.md":
+  - /ai/sandboxes/configuration/settings.md
+"/ai/sandboxes/cli/local/upstream-proxy.md":
+  - /ai/sandboxes/configuration/upstream-proxy.md
+"/ai/sandboxes/concepts/kits.md":
+  - /ai/sandboxes/customize.md
+"/ai/sandboxes/author-kits.md":
+  - /ai/sandboxes/customize/author.md
+"/ai/sandboxes/author-kits/base-images.md":
+  - /ai/sandboxes/customize/author/base-images.md
+"/ai/sandboxes/author-kits/build-an-agent.md":
+  - /ai/sandboxes/customize/author/build-an-agent.md
+"/ai/sandboxes/author-kits/distribute.md":
+  - /ai/sandboxes/customize/author/distribute.md
+"/ai/sandboxes/author-kits/kit-sets.md":
+  - /ai/sandboxes/customize/author/kit-sets.md
+"/ai/sandboxes/author-kits/patterns.md":
+  - /ai/sandboxes/customize/author/patterns.md
+"/ai/sandboxes/author-kits/tool-mixins.md":
+  - /ai/sandboxes/customize/author/tool-mixins.md
+"/ai/sandboxes/author-kits/kits-v2.md":
+  - /ai/sandboxes/customize/kits-v2.md
+"/ai/sandboxes/cli/kits.md":
+  - /ai/sandboxes/customize/use-kits.md
+"/ai/sandboxes/cli/get-started-local.md":
+  - /ai/sandboxes/get-started.md
+"/ai/governance.md":
+  - /ai/sandboxes/governance.md
+"/ai/governance/access-controls.md":
+  - /ai/sandboxes/governance/access-controls.md
+"/ai/governance/access-controls/filesystem.md":
+  - /ai/sandboxes/governance/access-controls/filesystem.md
+"/ai/sandboxes/cli/network-local.md":
+  - /ai/sandboxes/governance/access-controls/local.md
+"/ai/governance/access-controls/mcp.md":
+  - /ai/sandboxes/governance/access-controls/mcp.md
+"/ai/governance/access-controls/network.md":
+  - /ai/sandboxes/governance/access-controls/network.md
+"/ai/governance/access-controls/organization.md":
+  - /ai/sandboxes/governance/access-controls/organization.md
+"/ai/governance/audit.md":
+  - /ai/sandboxes/governance/audit.md
+"/ai/governance/audit/configure.md":
+  - /ai/sandboxes/governance/audit/configure.md
+"/ai/governance/audit/local.md":
+  - /ai/sandboxes/governance/audit/local.md
+"/ai/governance/audit/record-reference.md":
+  - /ai/sandboxes/governance/audit/record-reference.md
+"/ai/governance/audit/siem.md":
+  - /ai/sandboxes/governance/audit/siem.md
+"/ai/governance/audit/view-export.md":
+  - /ai/sandboxes/governance/audit/view-export.md
+"/ai/governance/concepts.md":
+  - /ai/sandboxes/governance/concepts.md
+"/ai/governance/monitor-and-enforce.md":
+  - /ai/sandboxes/governance/monitor-and-enforce.md
+"/ai/governance/monitor-and-enforce/monitoring.md":
+  - /ai/sandboxes/governance/monitor-and-enforce/monitoring.md
+"/ai/governance/monitor-and-enforce/sign-in-enforcement.md":
+  - /ai/sandboxes/governance/monitor-and-enforce/sign-in-enforcement.md
+"/ai/governance/reference.md":
+  - /ai/sandboxes/governance/reference.md
+"/ai/governance/reference/mcp-policy.md":
+  - /ai/sandboxes/governance/reference/mcp-policy.md
+"/ai/sandboxes/cli/install.md":
+  - /ai/sandboxes/install.md
+"/ai/sandboxes/cli/integrations.md":
+  - /ai/sandboxes/integrations.md
+"/ai/sandboxes/cli/integrations/chatgpt.md":
+  - /ai/sandboxes/integrations/chatgpt.md
+"/ai/sandboxes/cli/integrations/claude-desktop.md":
+  - /ai/sandboxes/integrations/claude-desktop.md
+"/ai/sandboxes/cli/integrations/cursor.md":
+  - /ai/sandboxes/integrations/cursor.md
+"/ai/sandboxes/cli/integrations/t3-code.md":
+  - /ai/sandboxes/integrations/t3-code.md
+"/ai/sandboxes/cli/integrations/vscode.md":
+  - /ai/sandboxes/integrations/vscode.md
+"/ai/sandboxes/cli/mcp.md":
+  - /ai/sandboxes/mcp-gateway.md
+"/ai/sandboxes/reference/cli-release-notes.md":
+  - /ai/sandboxes/release-notes.md
+"/ai/sandboxes/concepts/isolation.md":
+  - /ai/sandboxes/security.md
+"/ai/sandboxes/concepts/isolation/defaults.md":
+  - /ai/sandboxes/security/defaults.md
+"/ai/sandboxes/concepts/isolation/isolation.md":
+  - /ai/sandboxes/security/isolation.md
+"/ai/sandboxes/cli/troubleshooting.md":
+  - /ai/sandboxes/troubleshooting.md
+"/ai/sandboxes/cli/usage.md":
+  - /ai/sandboxes/usage.md
+"/ai/sandboxes/cli/workflows.md":
+  - /ai/sandboxes/workflows.md
+"/ai/sandboxes/cli/local/agent-skills.md":
+  - /ai/sandboxes/workflows/agent-skills.md
+"/ai/sandboxes/cli/authentication.md":
+  - /ai/sandboxes/workflows/authentication.md
+"/ai/sandboxes/cli/automation.md":
+  - /ai/sandboxes/workflows/automation.md
+"/ai/sandboxes/cli/development.md":
+  - /ai/sandboxes/workflows/development.md
+"/ai/sandboxes/cli/git.md":
+  - /ai/sandboxes/workflows/git.md

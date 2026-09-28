@@ -83,10 +83,10 @@ network rules, and startup commands. In the v2 format, kits have two kinds:
   entrypoint.
 - Mixin: Layers tools, credentials, or configuration onto an existing agent.
 
-For these kits, see the [v2 reference](/manuals/ai/sandboxes/customize/kits-v2.md).
+For these kits, see the [v2 reference](/manuals/ai/sandboxes/author-kits/kits-v2.md).
 The experimental v3 format uses workloads and mixins, and adds sets for
 publishing a composition as one kit. See the
-[Kits overview](/manuals/ai/sandboxes/customize/_index.md) for the v3 model and
+[Kits overview](/manuals/ai/sandboxes/concepts/kits.md) for the v3 model and
 version compatibility.
 
 #### Helm charts

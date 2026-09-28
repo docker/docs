@@ -29,7 +29,7 @@ In this guide, you'll learn how to:
 - Validate, launch, and iterate on the sandbox
 
 This guide uses the v2 format. For its reference and migration
-guidance, see [Kits v2](../manuals/ai/sandboxes/customize/kits-v2.md).
+guidance, see [Kits v2](/manuals/ai/sandboxes/author-kits/kits-v2.md).
 
 ## How isolation works
 
@@ -38,7 +38,7 @@ your host. The proxy enforces network policy and injects credentials, so the
 agent inside the VM never handles the real key.
 
 Mistral is a
-[built-in service](../manuals/ai/sandboxes/configuration/credentials.md#built-in-services):
+[built-in service](/manuals/ai/sandboxes/cli/credentials.md#built-in-services):
 `sbx` already maps the `mistral` service name to the `MISTRAL_API_KEY`
 environment variable and the `api.mistral.ai` domain. Inside the VM, Vibe
 sees only a sentinel value for `MISTRAL_API_KEY`. The proxy swaps in the real
@@ -54,7 +54,7 @@ and how the proxy attaches it to requests.
 Before you start, make sure you have:
 
 - [Docker Desktop](../get-started/get-docker.md) or Docker Engine installed
-- [Docker Sandboxes (`sbx`) installed and signed in](../manuals/ai/sandboxes/install.md)
+- [Docker Sandboxes (`sbx`) installed and signed in](/manuals/ai/sandboxes/cli/install.md)
 - A [Mistral API key](https://console.mistral.ai/)
 - A Docker Hub namespace, or another registry, to publish the image to
 
@@ -70,7 +70,7 @@ $ sbx secret set mistral
 Service secrets are global by default, so any sandbox that declares the
 `mistral` service can use it. Use `--sandbox` to scope a secret to a single
 sandbox instead. For how the proxy resolves and injects credentials, see
-[Credentials](../manuals/ai/sandboxes/configuration/credentials.md).
+[Credentials](/manuals/ai/sandboxes/cli/credentials.md).
 
 ## Step 2: Write a pinned Vibe image
 
@@ -244,8 +244,8 @@ Files in your workspace are unaffected.
 
 ## Learn more
 
-- [Get started with Docker Sandboxes](../manuals/ai/sandboxes/get-started.md)
-- [Build a v3 agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md)
-- [Customize sandboxes with kits](/manuals/ai/sandboxes/customize/_index.md)
-- [Credentials and built-in services](../manuals/ai/sandboxes/configuration/credentials.md#built-in-services)
+- [Get started with Docker Sandboxes](/manuals/ai/sandboxes/cli/get-started-local.md)
+- [Build a v3 agent workload](/manuals/ai/sandboxes/author-kits/build-an-agent.md)
+- [Customize sandboxes with kits](/manuals/ai/sandboxes/concepts/kits.md)
+- [Credentials and built-in services](/manuals/ai/sandboxes/cli/credentials.md#built-in-services)
 - [Mistral Vibe](https://github.com/mistralai/mistral-vibe)

@@ -6,7 +6,7 @@
       "product": "Docker Sandboxes",
       "title": "Run sandboxes on Docker-managed cloud infrastructure",
       "description": "Create and manage cloud sandboxes with the sbx CLI, including cloud-specific credentials, network policies, lifecycle controls, and transfers between local and cloud environments.",
-      "url": "/ai/sandboxes/cloud/",
+      "url": "/ai/sandboxes/cli/get-started-cloud/",
       "published": "2026-09-24",
       "source_prs": [26142, 26157, 26158, 26181],
       "featured": true
@@ -15,7 +15,7 @@
       "product": "Docker Sandboxes",
       "title": "Manage cloud sandboxes with the API and TypeScript SDK",
       "description": "Create cloud sandboxes, run commands, transfer files, and manage images, snapshots, volumes, and secrets from applications and automated workflows.",
-      "url": "/ai/sandboxes-api/",
+      "url": "/ai/sandboxes/api/",
       "published": "2026-09-24",
       "source_prs": [26142, 26168],
       "featured": true
@@ -24,7 +24,7 @@
       "product": "Docker Sandboxes",
       "title": "Compose sandbox environments with kits v3",
       "description": "Build sandbox environments from workload and mixin kits, combine them into reusable kit sets, and publish the result as a container image.",
-      "url": "/ai/sandboxes/customize/",
+      "url": "/ai/sandboxes/concepts/kits/",
       "published": "2026-09-24",
       "source_prs": [26065, 26157],
       "featured": true
@@ -42,7 +42,7 @@
       "product": "Docker Sandboxes",
       "title": "Share agent skills read-only by default",
       "description": "Sandboxes created with version 0.43.0 mount shared agent skills read-only by default. Choose read-only, read-write, or no access when creating a sandbox.",
-      "url": "/ai/sandboxes/workflows/agent-skills/#shared-store-behavior",
+      "url": "/ai/sandboxes/cli/local/agent-skills/#shared-store-behavior",
       "published": "2026-09-15",
       "source_prs": [26098, 26095],
       "featured": false
@@ -51,7 +51,7 @@
       "product": "Docker Sandboxes",
       "title": "Run agents without mounting host files",
       "description": "Create a sandbox without a host workspace mount. Keep agent files inside the sandbox across stops and restarts, and copy files between the sandbox and host when needed.",
-      "url": "/ai/sandboxes/usage/#choose-a-workspace",
+      "url": "/ai/sandboxes/cli/usage/#choose-a-workspace",
       "published": "2026-09-07",
       "source_prs": [25902, 26032],
       "featured": false
@@ -60,7 +60,7 @@
       "product": "Docker Sandboxes",
       "title": "Install and update shared skills from Git repositories",
       "description": "Install agent skills from Git repositories into a persistent store shared across sandboxes, and update or remove them with sbx skills.",
-      "url": "/ai/sandboxes/workflows/agent-skills/",
+      "url": "/ai/sandboxes/cli/local/agent-skills/",
       "published": "2026-09-07",
       "source_prs": [25910, 26032],
       "featured": false

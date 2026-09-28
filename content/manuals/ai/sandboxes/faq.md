@@ -6,21 +6,21 @@ keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste
 ---
 
 Host integration and workspace instructions on this page describe local
-sandboxes. See [Local and cloud differences](cloud/local-vs-cloud.md) before
+sandboxes. See [Local and cloud differences](/manuals/ai/sandboxes/cli/local-vs-cloud.md) before
 adapting those workflows to the cloud.
 
 ## Is Docker Sandboxes free? Can I use it commercially?
 
 The `sbx` CLI and local sandbox compute are free to use, including for
 commercial and professional work. Cloud sandbox compute uses a
-[pay-as-you-go subscription](/manuals/agentic-platform/signup.md#billing).
+[pay-as-you-go subscription](/manuals/ai/sandboxes/cloud-access/_index.md#billing).
 Model-provider charges are separate from sandbox compute.
 
 Organization governance for local sandboxes includes centrally managed network,
 filesystem, and MCP policies,
-[sign-in enforcement](governance/monitor-and-enforce/sign-in-enforcement.md),
-and [audit logs](governance/audit/). These
-[organization governance features](governance/) require a separate paid
+[sign-in enforcement](/manuals/ai/governance/monitor-and-enforce/sign-in-enforcement.md),
+and [audit logs](/manuals/ai/governance/audit/_index.md). These
+[organization governance features](/manuals/ai/governance/_index.md) require a separate paid
 subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
@@ -34,7 +34,7 @@ Signing in gives each sandbox a verified identity, which lets Docker:
   containers, install packages, and push code. Your Docker identity is the
   anchor.
 - **Enable team features.** Team-scale features like
-  [organization governance](governance/), shared environments, and audit logs
+  [organization governance](/manuals/ai/governance/_index.md), shared environments, and audit logs
   need a concept of "who," and adding that later would be worse for everyone.
 - **Authenticate against Docker infrastructure.** Sandboxes pull images, run
   daemons, and talk to Docker services. A Docker account authenticates those
@@ -50,13 +50,13 @@ governance is active, only organization allow rules grant access: local allow
 rules set with `sbx policy` are no longer evaluated, while local deny rules
 still apply on top.
 
-See [Organization policies](governance/access-controls/organization.md). This
+See [Organization policies](/manuals/ai/governance/access-controls/organization.md). This
 feature requires a separate paid subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
 
 Cloud sandboxes use separate network policy configuration.
-See [Cloud network policy](cloud/network-policy.md) for cloud controls.
+See [Cloud network policy](/manuals/ai/sandboxes/cli/network-cloud.md) for cloud controls.
 
 ## Which domains do I need to allow for Docker Sandboxes to work?
 
@@ -100,7 +100,7 @@ $ export SBX_NO_TELEMETRY=1
 
 Starting with `sbx` version 0.39.0, use `-e`/`--env` or `--env-file` with
 `sbx run` and `sbx create`. See
-[Set environment variables](usage.md#set-environment-variables) for syntax,
+[Set environment variables](/manuals/ai/sandboxes/cli/usage.md#set-environment-variables) for syntax,
 precedence rules, persistent configuration for an existing sandbox, and
 guidance for credentials.
 
@@ -112,8 +112,8 @@ the sandbox, to pick up the new value.
 ## Why do agents run without approval prompts?
 
 The sandbox itself is the safety boundary. Because agents run inside an
-isolated microVM with [network policies](governance/access-controls/network.md),
-[credential isolation](security/isolation.md#credential-isolation), and no access to your host
+isolated microVM with [network policies](/manuals/ai/governance/access-controls/network.md),
+[credential isolation](/manuals/ai/sandboxes/concepts/isolation/isolation.md#credential-isolation), and no access to your host
 system outside explicitly shared paths, the usual reasons for approval prompts
 (preventing destructive commands, network access, file modifications) are
 handled by the sandbox isolation layers instead.
@@ -125,11 +125,11 @@ interactively.
 
 To make approval prompts the default for every session, create a v2 sandbox
 kit that extends the built-in agent and changes its launch options. See
-[Fork an existing agent](customize/kits-v2.md#fork-an-existing-agent)
+[Fork an existing agent](/manuals/ai/sandboxes/author-kits/kits-v2.md#fork-an-existing-agent)
 for a complete example.
 
 For an environment built entirely with v3 kits, set the launch command in
-the workload's Dockerfile. See [Build a v3 agent kit](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
+the workload's Dockerfile. See [Build a v3 agent kit](/manuals/ai/sandboxes/author-kits/build-an-agent.md).
 
 ## How do I know if my agent is running in a sandbox?
 
@@ -151,7 +151,7 @@ inside the sandbox.
 Shared agent skills are the exception. Use `sbx skills add` to install skills
 from a Git repository, or run `sbx skills import` to copy skills from supported
 host directories. `sbx` keeps the skills in a persistent store shared with
-sandboxes. See [Share agent skills](workflows/agent-skills.md) for repository
+sandboxes. See [Share agent skills](/manuals/ai/sandboxes/cli/local/agent-skills.md) for repository
 management, supported host directories, mount behavior, and per-sandbox
 opt-out.
 
@@ -166,7 +166,7 @@ terminal sends it directly. Pasting an image or screenshot with `Ctrl+V` is diff
 the agent reads it from your host clipboard, and the sandbox blocks that access
 unless you opt in.
 
-Turn on [`clipboard.imagePaste`](configuration/settings.md#clipboardimagepaste):
+Turn on [`clipboard.imagePaste`](/manuals/ai/sandboxes/cli/local/settings.md#clipboardimagepaste):
 
 ```console
 $ sbx settings set clipboard.imagePaste true
@@ -212,4 +212,4 @@ storing them: install `gnome-keyring` and start `dbus-run-session`, or run the
 keyring daemon under a login session that unlocks it. Once a working Secret
 Service is available, `sbx` stores new
 secrets in the keychain again. For where each platform keeps secrets, see
-[Where secrets are stored](configuration/credentials.md#where-secrets-are-stored).
+[Where secrets are stored](/manuals/ai/sandboxes/cli/credentials.md#where-secrets-are-stored).

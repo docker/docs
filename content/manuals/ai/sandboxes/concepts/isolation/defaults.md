@@ -1,0 +1,93 @@
+---
+title: Default security posture
+linkTitle: Defaults
+weight: 20
+description: What a sandbox permits and blocks before you change any settings.
+keywords: docker sandboxes, security defaults, network policy, credentials, shared skills, sbx
+aliases:
+  - /ai/sandboxes/security/defaults/
+---
+
+{{% include "sandboxes-local-scope.md" %}}
+
+A sandbox created with `sbx run claude` and no additional flags has the
+following security posture.
+
+## Network defaults
+
+All outbound TCP traffic, including HTTP, HTTPS, and SSH, is blocked unless an
+explicit rule allows the destination. Outbound UDP is disabled by default. To
+use it, turn on the [experimental UDP feature](/manuals/ai/sandboxes/cli/network-local.md#allow-outbound-udp)
+and add UDP allow rules. ICMP is blocked. DNS queries use the sandbox's internal
+resolver, which enforces network policy.
+
+Run `sbx policy ls` to see the active network rules for your installation.
+Rules can be customized per machine with the `sbx policy` CLI, or managed
+centrally across your organization. Org-level rules take precedence over local
+rules. See
+[Network access policies](/manuals/ai/governance/access-controls/network.md).
+
+## Workspace defaults
+
+`sbx run` mounts the current directory when you don't pass a workspace path.
+The agent can read, write, and delete any file within that directory, including
+hidden files, configuration files, build scripts, and Git hooks.
+
+When you omit the workspace path from `sbx create`, the sandbox doesn't mount a
+host workspace. The agent uses the sandbox template's default working
+directory. Docker-provided agent templates use `/home/agent/workspace`. If the
+template doesn't define a usable absolute working directory, the daemon uses
+that path. Files in this directory persist across stops and restarts and are
+deleted when you remove the sandbox. See
+[Workspace isolation](/manuals/ai/sandboxes/concepts/isolation/isolation.md#workspace-isolation) for the available
+workspace modes and what to review after a direct-mount session.
+
+## Shared skills defaults
+
+Sandboxes created for supported agents mount a persistent shared skills store
+read-only by default. The
+[`skills.defaultMode`](/manuals/ai/sandboxes/cli/local/settings.md#skillsdefaultmode) setting
+can change this default,
+and `--skills` overrides it for a sandbox at creation. A sandbox with `readwrite` access can change skills that other
+participating sandboxes load, including those with `readonly` access. Use
+`--skills=off` when creating a sandbox to omit the shared store. Existing
+sandboxes retain their mounts until recreated. See
+[Share agent skills](/manuals/ai/sandboxes/cli/local/agent-skills.md).
+
+## Credential defaults
+
+No credentials are available to the sandbox unless you provide them using
+`sbx secret` or environment variables. When credentials are provided, the
+host-side proxy injects them into outbound HTTP headers. The agent cannot
+read the raw credential values.
+
+See [Credentials](/manuals/ai/sandboxes/cli/credentials.md) for setup instructions.
+
+## Agent capabilities inside the sandbox
+
+The agent runs with full control inside the sandbox VM:
+
+- `sudo` access (the agent runs as a non-root user with sudo privileges)
+- A private Docker Engine for building images and running containers
+- Package installation through `apt`, `pip`, `npm`, and other package managers
+- Full read and write access to the VM filesystem
+
+Everything the agent installs or creates inside the VM, including packages,
+Docker images, mountless workspace files, and configuration changes, persists
+across stop and restart cycles. When you remove the sandbox with `sbx rm`, the
+VM and its contents are deleted. Direct-mounted workspace files and the shared
+skills store remain on the host, as do repositories used as clone sources.
+
+## What is blocked by default
+
+The following are blocked for all sandboxes and cannot be changed through
+policy configuration:
+
+- Host filesystem access outside explicitly mounted workspaces and the shared
+  skills store
+- Host Docker daemon
+- Direct network communication between sandboxes
+- Direct external ICMP connections
+
+Outbound TCP to destinations not in the allow list is also blocked by default,
+but you can add allow rules with `sbx policy allow`.

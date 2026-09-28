@@ -121,7 +121,7 @@ $ sbx skills add docker/skills
 ```
 
 For shared-store management, mounting behavior, and host imports, see
-[Share agent skills](../sandboxes/workflows/agent-skills.md).
+[Share agent skills](/manuals/ai/sandboxes/cli/local/agent-skills.md).
 
 ## Docker Agent {#docker-agent}
 

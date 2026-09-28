@@ -7,11 +7,30 @@ description: |
 keywords: docker sandboxes, claude code, anthropic, ai agent, sbx, local models, llmman, ollama
 ---
 
-The following instructions apply to local sandboxes. For cloud authentication
-and usage, see [Authenticate cloud agents](../cloud/credentials.md) and
-[Use cloud sandboxes](../cloud/usage.md).
-
 Official documentation: [Claude Code](https://code.claude.com/docs)
+
+## Choose where to run
+
+Use the local setup on this page for host workspaces and local authentication.
+For a cloud CLI launch, use the cloud setup here. Generic files, ports, and
+lifecycle tasks are covered in [Use the CLI](/manuals/ai/sandboxes/cli/_index.md).
+
+## Cloud CLI setup
+
+[Activate cloud access](/manuals/ai/sandboxes/cloud-access/_index.md) and sign in with `sbx login`.
+Store the provider credential in the cloud secret store, then launch the agent:
+
+```console
+$ sbx --cloud secret set anthropic
+$ sbx --cloud run claude --name cloud-project
+```
+
+Cloud sandboxes do not mount your host project directory. Copy files or clone a
+repository into the sandbox. See [Cloud operations](/manuals/ai/sandboxes/cli/cloud-usage.md) and
+[Cloud credentials](/manuals/ai/sandboxes/cli/credentials-cloud.md) for the supported workflow.
+
+The setup and host configuration instructions that follow apply to local
+sandboxes.
 
 ## Quick start
 
@@ -30,7 +49,7 @@ $ sbx run --name my-sandbox claude -- "Add error handling to the login function"
 Everything after `--` is passed directly to Claude Code. You can also pipe in a
 prompt from a file with `-- "$(cat prompt.txt)"`.
 
-To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
 ## Authentication
@@ -40,7 +59,7 @@ API key or a Claude subscription. For other models, see
 [Use a local model](#use-a-local-model).
 
 **API key**: Store your key using
-[stored secrets](../configuration/credentials.md#stored-secrets):
+[stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set anthropic
@@ -54,13 +73,13 @@ Claude Code to authenticate via OAuth.
 Sandboxes don't pick up user-level configuration from your host, such as
 `~/.claude`. Only project-level configuration in the working directory is
 available inside the sandbox. See
-[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+[Why doesn't the sandbox use my user-level agent configuration?](/manuals/ai/sandboxes/faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
 ### Remote control
 
 To use Claude Code's `/remote-control` command inside a sandbox, turn on
-[`claude.remoteControl`](../configuration/settings.md#clauderemotecontrol):
+[`claude.remoteControl`](/manuals/ai/sandboxes/cli/local/settings.md#clauderemotecontrol):
 
 ```console
 $ sbx settings set claude.remoteControl true
@@ -92,7 +111,7 @@ for available options.
 
 Claude Code's [agents view](https://code.claude.com/docs/en/agent-view)
 starts background sessions that run tasks in parallel. Pair it with
-[clone mode](../workflows/git.md#clone-mode) to keep their changes inside the
+[clone mode](/manuals/ai/sandboxes/cli/git.md#clone-mode) to keep their changes inside the
 sandbox:
 
 ```console
@@ -123,15 +142,15 @@ $ git fetch sandbox-<sandbox-name>
 $ git diff main..sandbox-<sandbox-name>/<branch>
 ```
 
-See [Git workflows](../workflows/git.md) for clone-mode details.
+See [Git workflows](/manuals/ai/sandboxes/cli/git.md) for clone-mode details.
 
 ## Base image
 
 The sandbox uses `docker/sandbox-templates:claude-code`. See
-[Base images](/manuals/ai/sandboxes/customize/author/base-images.md) to build your own image on top of
+[Base images](/manuals/ai/sandboxes/author-kits/base-images.md) to build your own image on top of
 this base.
 
 ## Use a local model
 
 For local models, hosted providers, and custom inference endpoints, see
-[Use local and hosted models](../configuration/models.md).
+[Use local and hosted models](/manuals/ai/sandboxes/cli/local/models.md).

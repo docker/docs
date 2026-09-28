@@ -70,6 +70,6 @@ its image, tools, credentials, network rules, and startup commands.
 Follow the publisher's instructions for the kit's schema version and role.
 A kit that defines a complete environment is the main reference passed to
 `sbx run`. Add mixins with `--kit`. Components in one sandbox must use
-compatible kit formats. See [Kits](/manuals/ai/sandboxes/customize/_index.md) for
-the v3 model and [Kits v2](/manuals/ai/sandboxes/customize/kits-v2.md) for
+compatible kit formats. See [Kits](/manuals/ai/sandboxes/concepts/kits.md) for
+the v3 model and [Kits v2](/manuals/ai/sandboxes/author-kits/kits-v2.md) for
 kits used with built-in agents.

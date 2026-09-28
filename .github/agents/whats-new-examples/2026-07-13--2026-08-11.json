@@ -15,7 +15,7 @@
       "product": "Docker Sandboxes",
       "title": "Connect sandboxes through an MCP gateway",
       "description": "Register local or remote MCP servers on the host, reuse them across sandboxes, and govern server and tool access with Cedar policies.",
-      "url": "/ai/sandboxes/mcp-gateway/",
+      "url": "/ai/sandboxes/cli/mcp/",
       "published": "2026-08-06",
       "source_prs": [25559, 25707],
       "featured": true
@@ -42,7 +42,7 @@
       "product": "Docker AI Governance",
       "title": "Search and forward audit events",
       "description": "Search and export policy decisions from Docker Cloud, or forward events to Splunk, Dynatrace, and custom HTTPS endpoints.",
-      "url": "/ai/sandboxes/governance/audit/",
+      "url": "/ai/governance/audit/",
       "published": "2026-08-03",
       "source_prs": [25679, 25687],
       "featured": true
@@ -60,7 +60,7 @@
       "product": "Docker Sandboxes",
       "title": "Share agent skills across sandboxes",
       "description": "Import skills from supported host agents into a persistent store that sandboxes can share.",
-      "url": "/ai/sandboxes/workflows/#share-agent-skills",
+      "url": "/ai/sandboxes/cli/workflows/#share-agent-skills",
       "published": "2026-07-24",
       "source_prs": [25588],
       "featured": false
@@ -69,7 +69,7 @@
       "product": "Docker Sandboxes",
       "title": "Connect editors and desktop apps over SSH",
       "description": "Use a sandbox from VS Code, Cursor, Claude Desktop, ChatGPT, or another SSH-capable tool.",
-      "url": "/ai/sandboxes/integrations/",
+      "url": "/ai/sandboxes/cli/integrations/",
       "published": "2026-07-24",
       "source_prs": [25557],
       "featured": true

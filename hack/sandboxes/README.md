@@ -17,7 +17,7 @@ $ python3 hack/sync-sandboxes-docs.py
 
 The import writes:
 
-- Cookbook recipes to `content/manuals/ai/sandboxes-api/cookbook/`
+- Cookbook recipes to `content/manuals/ai/sandboxes/api/cookbook/`
 - The public OpenAPI specification to
   `content/reference/api/sandboxes/api.yaml`
 
@@ -46,3 +46,14 @@ The import does not select the latest release or push changes.
 Release automation can update this manifest and run the same command in a pull
 request once upstream publishes a release-to-export mapping. Keep the source
 and generated commits paired rather than importing a moving branch.
+
+## Sandbox navigation migration
+
+`migration-map.json` records the source and destination of every page in the
+sandbox restructure. Imported recipes remain byte-identical to the pinned
+export. Their former public URLs are preserved in `data/redirects.yml`, so
+re-importing does not remove redirects.
+
+Three recipes retain an absolute link to the former SDK installation URL.
+That URL redirects to its replacement. Correct those links in `docker/sbx-api`
+and import the paired export; do not edit the recipes in this repository.

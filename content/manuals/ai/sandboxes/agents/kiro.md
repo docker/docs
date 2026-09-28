@@ -73,7 +73,7 @@ it.
 Sandboxes don't pick up user-level configuration from your host. Only
 project-level configuration in the working directory is available inside the
 sandbox. See
-[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+[Why doesn't the sandbox use my user-level agent configuration?](/manuals/ai/sandboxes/faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
 Kiro requires minimal configuration. The agent runs with trust-all-tools mode
@@ -104,5 +104,5 @@ Template: `docker/sandbox-templates:kiro`
 
 Authentication state is persisted across sandbox restarts.
 
-See [Customize](../customize/) to pre-install tools or customize this
+See [Customize](/manuals/ai/sandboxes/concepts/kits.md) to pre-install tools or customize this
 environment.

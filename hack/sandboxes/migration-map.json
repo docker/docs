@@ -1,0 +1,1239 @@
+{
+  "baseCommit": "c917c7fa873a6bc61de2c25c116f355450b5b97a",
+  "pages": [
+    {
+      "source": "content/manuals/agentic-platform/_index.md",
+      "destination": "content/manuals/ai/sandboxes/console/_index.md",
+      "oldURL": "/agentic-platform/",
+      "url": "/ai/sandboxes/console/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/agentic-platform/faq.md",
+      "destination": "content/manuals/ai/sandboxes/console/faq.md",
+      "oldURL": "/agentic-platform/faq/",
+      "url": "/ai/sandboxes/console/faq/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/agentic-platform/get-started.md",
+      "destination": "content/manuals/ai/sandboxes/console/get-started.md",
+      "oldURL": "/agentic-platform/get-started/",
+      "url": "/ai/sandboxes/console/get-started/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/agentic-platform/kits.md",
+      "destination": "content/manuals/ai/sandboxes/console/kits.md",
+      "oldURL": "/agentic-platform/kits/",
+      "url": "/ai/sandboxes/console/kits/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/agentic-platform/mcp.md",
+      "destination": "content/manuals/ai/sandboxes/console/mcp.md",
+      "oldURL": "/agentic-platform/mcp/",
+      "url": "/ai/sandboxes/console/mcp/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/agentic-platform/policies.md",
+      "destination": "content/manuals/ai/sandboxes/console/policies.md",
+      "oldURL": "/agentic-platform/policies/",
+      "url": "/ai/sandboxes/console/policies/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/agentic-platform/release-notes.md",
+      "destination": "content/manuals/ai/sandboxes/reference/console-release-notes.md",
+      "oldURL": "/agentic-platform/release-notes/",
+      "url": "/ai/sandboxes/reference/console-release-notes/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/agentic-platform/sandboxes.md",
+      "destination": "content/manuals/ai/sandboxes/console/sandboxes.md",
+      "oldURL": "/agentic-platform/sandboxes/",
+      "url": "/ai/sandboxes/console/sandboxes/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/agentic-platform/secrets.md",
+      "destination": "content/manuals/ai/sandboxes/console/secrets.md",
+      "oldURL": "/agentic-platform/secrets/",
+      "url": "/ai/sandboxes/console/secrets/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/agentic-platform/signup.md",
+      "destination": "content/manuals/ai/sandboxes/cloud-access/_index.md",
+      "oldURL": "/agentic-platform/signup/",
+      "url": "/ai/sandboxes/cloud-access/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/_index.md",
+      "destination": "content/manuals/ai/sandboxes/api/_index.md",
+      "oldURL": "/ai/sandboxes-api/",
+      "url": "/ai/sandboxes/api/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/authentication.md",
+      "destination": "content/manuals/ai/sandboxes/api/authentication.md",
+      "oldURL": "/ai/sandboxes-api/authentication/",
+      "url": "/ai/sandboxes/api/authentication/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/concepts.md",
+      "destination": "content/manuals/ai/sandboxes/api/concepts.md",
+      "oldURL": "/ai/sandboxes-api/concepts/",
+      "url": "/ai/sandboxes/api/concepts/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/_index.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/_index.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/",
+      "url": "/ai/sandboxes/api/cookbook/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/add-a-docker-credential-for-cloud-sandboxes.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/add-a-docker-credential-for-cloud-sandboxes.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/add-a-docker-credential-for-cloud-sandboxes/",
+      "url": "/ai/sandboxes/api/cookbook/add-a-docker-credential-for-cloud-sandboxes/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/add-tools-with-kits.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/add-tools-with-kits.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/add-tools-with-kits/",
+      "url": "/ai/sandboxes/api/cookbook/add-tools-with-kits/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/attach-persistent-storage.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/attach-persistent-storage.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/attach-persistent-storage/",
+      "url": "/ai/sandboxes/api/cookbook/attach-persistent-storage/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/clone-a-cloud-sandbox.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/clone-a-cloud-sandbox.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/clone-a-cloud-sandbox/",
+      "url": "/ai/sandboxes/api/cookbook/clone-a-cloud-sandbox/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/connect-to-cloud-with-a-bearer-token.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/connect-to-cloud-with-a-bearer-token.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/connect-to-cloud-with-a-bearer-token/",
+      "url": "/ai/sandboxes/api/cookbook/connect-to-cloud-with-a-bearer-token/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/control-what-a-sandbox-can-reach.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/control-what-a-sandbox-can-reach.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/control-what-a-sandbox-can-reach/",
+      "url": "/ai/sandboxes/api/cookbook/control-what-a-sandbox-can-reach/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/copy-a-file-into-a-cloud-sandbox.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/copy-a-file-into-a-cloud-sandbox.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/copy-a-file-into-a-cloud-sandbox/",
+      "url": "/ai/sandboxes/api/cookbook/copy-a-file-into-a-cloud-sandbox/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/create-your-first-sandbox.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/create-your-first-sandbox.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/create-your-first-sandbox/",
+      "url": "/ai/sandboxes/api/cookbook/create-your-first-sandbox/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/delete-a-cloud-sandbox.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/delete-a-cloud-sandbox.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/delete-a-cloud-sandbox/",
+      "url": "/ai/sandboxes/api/cookbook/delete-a-cloud-sandbox/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/expose-a-port-from-a-cloud-sandbox.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/expose-a-port-from-a-cloud-sandbox.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/expose-a-port-from-a-cloud-sandbox/",
+      "url": "/ai/sandboxes/api/cookbook/expose-a-port-from-a-cloud-sandbox/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/find-a-process-you-lost-track-of.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/find-a-process-you-lost-track-of.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/find-a-process-you-lost-track-of/",
+      "url": "/ai/sandboxes/api/cookbook/find-a-process-you-lost-track-of/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/get-a-stored-secret-into-a-sandbox.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/get-a-stored-secret-into-a-sandbox.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/get-a-stored-secret-into-a-sandbox/",
+      "url": "/ai/sandboxes/api/cookbook/get-a-stored-secret-into-a-sandbox/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/get-an-ssh-certificate.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/get-an-ssh-certificate.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/get-an-ssh-certificate/",
+      "url": "/ai/sandboxes/api/cookbook/get-an-ssh-certificate/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/get-image-pull-urls.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/get-image-pull-urls.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/get-image-pull-urls/",
+      "url": "/ai/sandboxes/api/cookbook/get-image-pull-urls/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/give-a-sandbox-an-mcp-gateway.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/give-a-sandbox-an-mcp-gateway.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/give-a-sandbox-an-mcp-gateway/",
+      "url": "/ai/sandboxes/api/cookbook/give-a-sandbox-an-mcp-gateway/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/handle-errors-and-degradation.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/handle-errors-and-degradation.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/handle-errors-and-degradation/",
+      "url": "/ai/sandboxes/api/cookbook/handle-errors-and-degradation/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/keep-a-cloud-sandbox-running.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/keep-a-cloud-sandbox-running.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/keep-a-cloud-sandbox-running/",
+      "url": "/ai/sandboxes/api/cookbook/keep-a-cloud-sandbox-running/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/let-a-stopped-sandbox-resume-on-demand.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/let-a-stopped-sandbox-resume-on-demand.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/let-a-stopped-sandbox-resume-on-demand/",
+      "url": "/ai/sandboxes/api/cookbook/let-a-stopped-sandbox-resume-on-demand/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/manage-cloud-secrets.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/manage-cloud-secrets.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/manage-cloud-secrets/",
+      "url": "/ai/sandboxes/api/cookbook/manage-cloud-secrets/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/manage-network-policies.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/manage-network-policies.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/manage-network-policies/",
+      "url": "/ai/sandboxes/api/cookbook/manage-network-policies/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/page-through-and-filter-lists.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/page-through-and-filter-lists.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/page-through-and-filter-lists/",
+      "url": "/ai/sandboxes/api/cookbook/page-through-and-filter-lists/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/read-files-out-of-a-sandbox.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/read-files-out-of-a-sandbox.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/read-files-out-of-a-sandbox/",
+      "url": "/ai/sandboxes/api/cookbook/read-files-out-of-a-sandbox/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/recover-when-the-endpoint-moves.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/recover-when-the-endpoint-moves.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/recover-when-the-endpoint-moves/",
+      "url": "/ai/sandboxes/api/cookbook/recover-when-the-endpoint-moves/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/register-and-manage-an-image.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/register-and-manage-an-image.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/register-and-manage-an-image/",
+      "url": "/ai/sandboxes/api/cookbook/register-and-manage-an-image/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/retry-without-creating-duplicates.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/retry-without-creating-duplicates.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/retry-without-creating-duplicates/",
+      "url": "/ai/sandboxes/api/cookbook/retry-without-creating-duplicates/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/run-a-complete-example.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/run-a-complete-example.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/run-a-complete-example/",
+      "url": "/ai/sandboxes/api/cookbook/run-a-complete-example/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/run-an-interactive-shell-in-a-cloud-sandbox.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/run-an-interactive-shell-in-a-cloud-sandbox.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/run-an-interactive-shell-in-a-cloud-sandbox/",
+      "url": "/ai/sandboxes/api/cookbook/run-an-interactive-shell-in-a-cloud-sandbox/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/run-something-that-produces-real-output.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/run-something-that-produces-real-output.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/run-something-that-produces-real-output/",
+      "url": "/ai/sandboxes/api/cookbook/run-something-that-produces-real-output/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/run-work-across-many-sandboxes.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/run-work-across-many-sandboxes.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/run-work-across-many-sandboxes/",
+      "url": "/ai/sandboxes/api/cookbook/run-work-across-many-sandboxes/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/run-your-first-command.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/run-your-first-command.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/run-your-first-command/",
+      "url": "/ai/sandboxes/api/cookbook/run-your-first-command/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/run-your-own-container-image.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/run-your-own-container-image.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/run-your-own-container-image/",
+      "url": "/ai/sandboxes/api/cookbook/run-your-own-container-image/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/send-values-the-api-accepts.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/send-values-the-api-accepts.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/send-values-the-api-accepts/",
+      "url": "/ai/sandboxes/api/cookbook/send-values-the-api-accepts/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/snapshot-and-fork-a-sandbox.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/snapshot-and-fork-a-sandbox.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/snapshot-and-fork-a-sandbox/",
+      "url": "/ai/sandboxes/api/cookbook/snapshot-and-fork-a-sandbox/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/stop-and-restart-a-sandbox.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/stop-and-restart-a-sandbox.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/stop-and-restart-a-sandbox/",
+      "url": "/ai/sandboxes/api/cookbook/stop-and-restart-a-sandbox/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/what-your-workload-starts-with.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/what-your-workload-starts-with.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/what-your-workload-starts-with/",
+      "url": "/ai/sandboxes/api/cookbook/what-your-workload-starts-with/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/cookbook/work-within-the-limits.md",
+      "destination": "content/manuals/ai/sandboxes/api/cookbook/work-within-the-limits.md",
+      "oldURL": "/ai/sandboxes-api/cookbook/work-within-the-limits/",
+      "url": "/ai/sandboxes/api/cookbook/work-within-the-limits/",
+      "disposition": "move",
+      "owner": "docker/sbx-api",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/errors.md",
+      "destination": "content/manuals/ai/sandboxes/api/errors.md",
+      "oldURL": "/ai/sandboxes-api/errors/",
+      "url": "/ai/sandboxes/api/errors/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/get-started.md",
+      "destination": "content/manuals/ai/sandboxes/api/get-started.md",
+      "oldURL": "/ai/sandboxes-api/get-started/",
+      "url": "/ai/sandboxes/api/get-started/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/install.md",
+      "destination": "content/manuals/ai/sandboxes/api/install.md",
+      "oldURL": "/ai/sandboxes-api/install/",
+      "url": "/ai/sandboxes/api/install/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/limits.md",
+      "destination": "content/manuals/ai/sandboxes/api/limits.md",
+      "oldURL": "/ai/sandboxes-api/limits/",
+      "url": "/ai/sandboxes/api/limits/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes-api/reference.md",
+      "destination": "content/manuals/ai/sandboxes/api/reference.md",
+      "oldURL": "/ai/sandboxes-api/reference/",
+      "url": "/ai/sandboxes/api/reference/",
+      "disposition": "move-navigation-link",
+      "owner": "docker/docs",
+      "fragments": "preserve",
+      "rendered": false
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/_index.md",
+      "destination": "content/manuals/ai/sandboxes/_index.md",
+      "oldURL": "/ai/sandboxes/",
+      "url": "/ai/sandboxes/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/_index.md",
+      "destination": "content/manuals/ai/sandboxes/agents/_index.md",
+      "oldURL": "/ai/sandboxes/agents/",
+      "url": "/ai/sandboxes/agents/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/claude-code.md",
+      "destination": "content/manuals/ai/sandboxes/agents/claude-code.md",
+      "oldURL": "/ai/sandboxes/agents/claude-code/",
+      "url": "/ai/sandboxes/agents/claude-code/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/codex.md",
+      "destination": "content/manuals/ai/sandboxes/agents/codex.md",
+      "oldURL": "/ai/sandboxes/agents/codex/",
+      "url": "/ai/sandboxes/agents/codex/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/copilot.md",
+      "destination": "content/manuals/ai/sandboxes/agents/copilot.md",
+      "oldURL": "/ai/sandboxes/agents/copilot/",
+      "url": "/ai/sandboxes/agents/copilot/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/cursor.md",
+      "destination": "content/manuals/ai/sandboxes/agents/cursor.md",
+      "oldURL": "/ai/sandboxes/agents/cursor/",
+      "url": "/ai/sandboxes/agents/cursor/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/devin.md",
+      "destination": "content/manuals/ai/sandboxes/agents/devin.md",
+      "oldURL": "/ai/sandboxes/agents/devin/",
+      "url": "/ai/sandboxes/agents/devin/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/docker-agent.md",
+      "destination": "content/manuals/ai/sandboxes/agents/docker-agent.md",
+      "oldURL": "/ai/sandboxes/agents/docker-agent/",
+      "url": "/ai/sandboxes/agents/docker-agent/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/droid.md",
+      "destination": "content/manuals/ai/sandboxes/agents/droid.md",
+      "oldURL": "/ai/sandboxes/agents/droid/",
+      "url": "/ai/sandboxes/agents/droid/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/gemini.md",
+      "destination": "content/manuals/ai/sandboxes/agents/gemini.md",
+      "oldURL": "/ai/sandboxes/agents/gemini/",
+      "url": "/ai/sandboxes/agents/gemini/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/kiro.md",
+      "destination": "content/manuals/ai/sandboxes/agents/kiro.md",
+      "oldURL": "/ai/sandboxes/agents/kiro/",
+      "url": "/ai/sandboxes/agents/kiro/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/opencode.md",
+      "destination": "content/manuals/ai/sandboxes/agents/opencode.md",
+      "oldURL": "/ai/sandboxes/agents/opencode/",
+      "url": "/ai/sandboxes/agents/opencode/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/agents/shell.md",
+      "destination": "content/manuals/ai/sandboxes/agents/shell.md",
+      "oldURL": "/ai/sandboxes/agents/shell/",
+      "url": "/ai/sandboxes/agents/shell/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/architecture.md",
+      "destination": "content/manuals/ai/sandboxes/concepts/architecture.md",
+      "oldURL": "/ai/sandboxes/architecture/",
+      "url": "/ai/sandboxes/concepts/architecture/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cloud/_index.md",
+      "destination": "content/manuals/ai/sandboxes/cli/get-started-cloud.md",
+      "oldURL": "/ai/sandboxes/cloud/",
+      "url": "/ai/sandboxes/cli/get-started-cloud/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cloud/credentials.md",
+      "destination": "content/manuals/ai/sandboxes/cli/credentials-cloud.md",
+      "oldURL": "/ai/sandboxes/cloud/credentials/",
+      "url": "/ai/sandboxes/cli/credentials-cloud/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cloud/local-vs-cloud.md",
+      "destination": "content/manuals/ai/sandboxes/cli/local-vs-cloud.md",
+      "oldURL": "/ai/sandboxes/cloud/local-vs-cloud/",
+      "url": "/ai/sandboxes/cli/local-vs-cloud/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cloud/move.md",
+      "destination": "content/manuals/ai/sandboxes/cli/move.md",
+      "oldURL": "/ai/sandboxes/cloud/move/",
+      "url": "/ai/sandboxes/cli/move/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cloud/network-policy.md",
+      "destination": "content/manuals/ai/sandboxes/cli/network-cloud.md",
+      "oldURL": "/ai/sandboxes/cloud/network-policy/",
+      "url": "/ai/sandboxes/cli/network-cloud/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cloud/usage.md",
+      "destination": "content/manuals/ai/sandboxes/cli/cloud-usage.md",
+      "oldURL": "/ai/sandboxes/cloud/usage/",
+      "url": "/ai/sandboxes/cli/cloud-usage/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/configuration/_index.md",
+      "destination": "content/manuals/ai/sandboxes/cli/local/_index.md",
+      "oldURL": "/ai/sandboxes/configuration/",
+      "url": "/ai/sandboxes/cli/local/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/configuration/credentials.md",
+      "destination": "content/manuals/ai/sandboxes/cli/credentials.md",
+      "oldURL": "/ai/sandboxes/configuration/credentials/",
+      "url": "/ai/sandboxes/cli/credentials/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/configuration/environment-files.md",
+      "destination": "content/manuals/ai/sandboxes/cli/environment-files.md",
+      "oldURL": "/ai/sandboxes/configuration/environment-files/",
+      "url": "/ai/sandboxes/cli/environment-files/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/configuration/gpu-passthrough.md",
+      "destination": "content/manuals/ai/sandboxes/cli/local/gpu-passthrough.md",
+      "oldURL": "/ai/sandboxes/configuration/gpu-passthrough/",
+      "url": "/ai/sandboxes/cli/local/gpu-passthrough/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/configuration/models.md",
+      "destination": "content/manuals/ai/sandboxes/cli/local/models.md",
+      "oldURL": "/ai/sandboxes/configuration/models/",
+      "url": "/ai/sandboxes/cli/local/models/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/configuration/registry-mirror.md",
+      "destination": "content/manuals/ai/sandboxes/cli/local/registry-mirror.md",
+      "oldURL": "/ai/sandboxes/configuration/registry-mirror/",
+      "url": "/ai/sandboxes/cli/local/registry-mirror/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/configuration/settings.md",
+      "destination": "content/manuals/ai/sandboxes/cli/local/settings.md",
+      "oldURL": "/ai/sandboxes/configuration/settings/",
+      "url": "/ai/sandboxes/cli/local/settings/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/configuration/upstream-proxy.md",
+      "destination": "content/manuals/ai/sandboxes/cli/local/upstream-proxy.md",
+      "oldURL": "/ai/sandboxes/configuration/upstream-proxy/",
+      "url": "/ai/sandboxes/cli/local/upstream-proxy/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/customize/_index.md",
+      "destination": "content/manuals/ai/sandboxes/concepts/kits.md",
+      "oldURL": "/ai/sandboxes/customize/",
+      "url": "/ai/sandboxes/concepts/kits/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/customize/author/_index.md",
+      "destination": "content/manuals/ai/sandboxes/author-kits/_index.md",
+      "oldURL": "/ai/sandboxes/customize/author/",
+      "url": "/ai/sandboxes/author-kits/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/customize/author/base-images.md",
+      "destination": "content/manuals/ai/sandboxes/author-kits/base-images.md",
+      "oldURL": "/ai/sandboxes/customize/author/base-images/",
+      "url": "/ai/sandboxes/author-kits/base-images/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/customize/author/build-an-agent.md",
+      "destination": "content/manuals/ai/sandboxes/author-kits/build-an-agent.md",
+      "oldURL": "/ai/sandboxes/customize/author/build-an-agent/",
+      "url": "/ai/sandboxes/author-kits/build-an-agent/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/customize/author/distribute.md",
+      "destination": "content/manuals/ai/sandboxes/author-kits/distribute.md",
+      "oldURL": "/ai/sandboxes/customize/author/distribute/",
+      "url": "/ai/sandboxes/author-kits/distribute/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/customize/author/kit-sets.md",
+      "destination": "content/manuals/ai/sandboxes/author-kits/kit-sets.md",
+      "oldURL": "/ai/sandboxes/customize/author/kit-sets/",
+      "url": "/ai/sandboxes/author-kits/kit-sets/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/customize/author/patterns.md",
+      "destination": "content/manuals/ai/sandboxes/author-kits/patterns.md",
+      "oldURL": "/ai/sandboxes/customize/author/patterns/",
+      "url": "/ai/sandboxes/author-kits/patterns/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/customize/author/tool-mixins.md",
+      "destination": "content/manuals/ai/sandboxes/author-kits/tool-mixins.md",
+      "oldURL": "/ai/sandboxes/customize/author/tool-mixins/",
+      "url": "/ai/sandboxes/author-kits/tool-mixins/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/customize/kits-v2.md",
+      "destination": "content/manuals/ai/sandboxes/author-kits/kits-v2.md",
+      "oldURL": "/ai/sandboxes/customize/kits-v2/",
+      "url": "/ai/sandboxes/author-kits/kits-v2/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/customize/use-kits.md",
+      "destination": "content/manuals/ai/sandboxes/cli/kits.md",
+      "oldURL": "/ai/sandboxes/customize/use-kits/",
+      "url": "/ai/sandboxes/cli/kits/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/faq.md",
+      "destination": "content/manuals/ai/sandboxes/faq.md",
+      "oldURL": "/ai/sandboxes/faq/",
+      "url": "/ai/sandboxes/faq/",
+      "disposition": "keep",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/get-started.md",
+      "destination": "content/manuals/ai/sandboxes/cli/get-started-local.md",
+      "oldURL": "/ai/sandboxes/get-started/",
+      "url": "/ai/sandboxes/cli/get-started-local/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/_index.md",
+      "destination": "content/manuals/ai/governance/_index.md",
+      "oldURL": "/ai/sandboxes/governance/",
+      "url": "/ai/governance/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/access-controls/_index.md",
+      "destination": "content/manuals/ai/governance/access-controls/_index.md",
+      "oldURL": "/ai/sandboxes/governance/access-controls/",
+      "url": "/ai/governance/access-controls/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/access-controls/filesystem.md",
+      "destination": "content/manuals/ai/governance/access-controls/filesystem.md",
+      "oldURL": "/ai/sandboxes/governance/access-controls/filesystem/",
+      "url": "/ai/governance/access-controls/filesystem/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/access-controls/local.md",
+      "destination": "content/manuals/ai/sandboxes/cli/network-local.md",
+      "oldURL": "/ai/sandboxes/governance/access-controls/local/",
+      "url": "/ai/sandboxes/cli/network-local/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/access-controls/mcp.md",
+      "destination": "content/manuals/ai/governance/access-controls/mcp.md",
+      "oldURL": "/ai/sandboxes/governance/access-controls/mcp/",
+      "url": "/ai/governance/access-controls/mcp/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/access-controls/network.md",
+      "destination": "content/manuals/ai/governance/access-controls/network.md",
+      "oldURL": "/ai/sandboxes/governance/access-controls/network/",
+      "url": "/ai/governance/access-controls/network/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/access-controls/organization.md",
+      "destination": "content/manuals/ai/governance/access-controls/organization.md",
+      "oldURL": "/ai/sandboxes/governance/access-controls/organization/",
+      "url": "/ai/governance/access-controls/organization/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/audit/_index.md",
+      "destination": "content/manuals/ai/governance/audit/_index.md",
+      "oldURL": "/ai/sandboxes/governance/audit/",
+      "url": "/ai/governance/audit/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/audit/configure.md",
+      "destination": "content/manuals/ai/governance/audit/configure.md",
+      "oldURL": "/ai/sandboxes/governance/audit/configure/",
+      "url": "/ai/governance/audit/configure/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/audit/local.md",
+      "destination": "content/manuals/ai/governance/audit/local.md",
+      "oldURL": "/ai/sandboxes/governance/audit/local/",
+      "url": "/ai/governance/audit/local/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/audit/record-reference.md",
+      "destination": "content/manuals/ai/governance/audit/record-reference.md",
+      "oldURL": "/ai/sandboxes/governance/audit/record-reference/",
+      "url": "/ai/governance/audit/record-reference/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/audit/siem.md",
+      "destination": "content/manuals/ai/governance/audit/siem.md",
+      "oldURL": "/ai/sandboxes/governance/audit/siem/",
+      "url": "/ai/governance/audit/siem/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/audit/view-export.md",
+      "destination": "content/manuals/ai/governance/audit/view-export.md",
+      "oldURL": "/ai/sandboxes/governance/audit/view-export/",
+      "url": "/ai/governance/audit/view-export/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/concepts.md",
+      "destination": "content/manuals/ai/governance/concepts.md",
+      "oldURL": "/ai/sandboxes/governance/concepts/",
+      "url": "/ai/governance/concepts/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/monitor-and-enforce/_index.md",
+      "destination": "content/manuals/ai/governance/monitor-and-enforce/_index.md",
+      "oldURL": "/ai/sandboxes/governance/monitor-and-enforce/",
+      "url": "/ai/governance/monitor-and-enforce/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/monitor-and-enforce/monitoring.md",
+      "destination": "content/manuals/ai/governance/monitor-and-enforce/monitoring.md",
+      "oldURL": "/ai/sandboxes/governance/monitor-and-enforce/monitoring/",
+      "url": "/ai/governance/monitor-and-enforce/monitoring/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/monitor-and-enforce/sign-in-enforcement.md",
+      "destination": "content/manuals/ai/governance/monitor-and-enforce/sign-in-enforcement.md",
+      "oldURL": "/ai/sandboxes/governance/monitor-and-enforce/sign-in-enforcement/",
+      "url": "/ai/governance/monitor-and-enforce/sign-in-enforcement/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/reference/_index.md",
+      "destination": "content/manuals/ai/governance/reference/_index.md",
+      "oldURL": "/ai/sandboxes/governance/reference/",
+      "url": "/ai/governance/reference/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/reference/api.md",
+      "destination": "content/manuals/ai/governance/reference/api.md",
+      "oldURL": "/ai/sandboxes/governance/reference/api/",
+      "url": "/ai/governance/reference/api/",
+      "disposition": "move-navigation-link",
+      "owner": "docker/docs",
+      "fragments": "preserve",
+      "rendered": false
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/governance/reference/mcp-policy.md",
+      "destination": "content/manuals/ai/governance/reference/mcp-policy.md",
+      "oldURL": "/ai/sandboxes/governance/reference/mcp-policy/",
+      "url": "/ai/governance/reference/mcp-policy/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/install.md",
+      "destination": "content/manuals/ai/sandboxes/cli/install.md",
+      "oldURL": "/ai/sandboxes/install/",
+      "url": "/ai/sandboxes/cli/install/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/integrations/_index.md",
+      "destination": "content/manuals/ai/sandboxes/cli/integrations/_index.md",
+      "oldURL": "/ai/sandboxes/integrations/",
+      "url": "/ai/sandboxes/cli/integrations/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/integrations/chatgpt.md",
+      "destination": "content/manuals/ai/sandboxes/cli/integrations/chatgpt.md",
+      "oldURL": "/ai/sandboxes/integrations/chatgpt/",
+      "url": "/ai/sandboxes/cli/integrations/chatgpt/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/integrations/claude-desktop.md",
+      "destination": "content/manuals/ai/sandboxes/cli/integrations/claude-desktop.md",
+      "oldURL": "/ai/sandboxes/integrations/claude-desktop/",
+      "url": "/ai/sandboxes/cli/integrations/claude-desktop/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/integrations/cursor.md",
+      "destination": "content/manuals/ai/sandboxes/cli/integrations/cursor.md",
+      "oldURL": "/ai/sandboxes/integrations/cursor/",
+      "url": "/ai/sandboxes/cli/integrations/cursor/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/integrations/t3-code.md",
+      "destination": "content/manuals/ai/sandboxes/cli/integrations/t3-code.md",
+      "oldURL": "/ai/sandboxes/integrations/t3-code/",
+      "url": "/ai/sandboxes/cli/integrations/t3-code/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/integrations/vscode.md",
+      "destination": "content/manuals/ai/sandboxes/cli/integrations/vscode.md",
+      "oldURL": "/ai/sandboxes/integrations/vscode/",
+      "url": "/ai/sandboxes/cli/integrations/vscode/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/mcp-gateway.md",
+      "destination": "content/manuals/ai/sandboxes/cli/mcp.md",
+      "oldURL": "/ai/sandboxes/mcp-gateway/",
+      "url": "/ai/sandboxes/cli/mcp/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/release-notes.md",
+      "destination": "content/manuals/ai/sandboxes/reference/cli-release-notes.md",
+      "oldURL": "/ai/sandboxes/release-notes/",
+      "url": "/ai/sandboxes/reference/cli-release-notes/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/security/_index.md",
+      "destination": "content/manuals/ai/sandboxes/concepts/isolation/_index.md",
+      "oldURL": "/ai/sandboxes/security/",
+      "url": "/ai/sandboxes/concepts/isolation/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/security/defaults.md",
+      "destination": "content/manuals/ai/sandboxes/concepts/isolation/defaults.md",
+      "oldURL": "/ai/sandboxes/security/defaults/",
+      "url": "/ai/sandboxes/concepts/isolation/defaults/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/security/isolation.md",
+      "destination": "content/manuals/ai/sandboxes/concepts/isolation/isolation.md",
+      "oldURL": "/ai/sandboxes/security/isolation/",
+      "url": "/ai/sandboxes/concepts/isolation/isolation/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/troubleshooting.md",
+      "destination": "content/manuals/ai/sandboxes/cli/troubleshooting.md",
+      "oldURL": "/ai/sandboxes/troubleshooting/",
+      "url": "/ai/sandboxes/cli/troubleshooting/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/usage.md",
+      "destination": "content/manuals/ai/sandboxes/cli/usage.md",
+      "oldURL": "/ai/sandboxes/usage/",
+      "url": "/ai/sandboxes/cli/usage/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/workflows/_index.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows.md",
+      "oldURL": "/ai/sandboxes/workflows/",
+      "url": "/ai/sandboxes/cli/workflows/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/workflows/agent-skills.md",
+      "destination": "content/manuals/ai/sandboxes/cli/local/agent-skills.md",
+      "oldURL": "/ai/sandboxes/workflows/agent-skills/",
+      "url": "/ai/sandboxes/cli/local/agent-skills/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/workflows/authentication.md",
+      "destination": "content/manuals/ai/sandboxes/cli/authentication.md",
+      "oldURL": "/ai/sandboxes/workflows/authentication/",
+      "url": "/ai/sandboxes/cli/authentication/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/workflows/automation.md",
+      "destination": "content/manuals/ai/sandboxes/cli/automation.md",
+      "oldURL": "/ai/sandboxes/workflows/automation/",
+      "url": "/ai/sandboxes/cli/automation/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/workflows/development.md",
+      "destination": "content/manuals/ai/sandboxes/cli/development.md",
+      "oldURL": "/ai/sandboxes/workflows/development/",
+      "url": "/ai/sandboxes/cli/development/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/workflows/git.md",
+      "destination": "content/manuals/ai/sandboxes/cli/git.md",
+      "oldURL": "/ai/sandboxes/workflows/git/",
+      "url": "/ai/sandboxes/cli/git/",
+      "disposition": "move",
+      "owner": "docker/docs",
+      "fragments": "preserve"
+    }
+  ],
+  "explanationOwners": {
+    "secrets": "content/manuals/ai/sandboxes/concepts/secrets.md",
+    "lifecycle": "content/manuals/ai/sandboxes/concepts/lifecycle.md",
+    "mcp": "content/manuals/ai/sandboxes/concepts/mcp.md",
+    "kitCompatibility": "content/manuals/ai/sandboxes/author-kits/compatibility.md",
+    "cloudQuotas": "content/manuals/ai/sandboxes/cloud-access/resources.md"
+  },
+  "upstreamFollowups": [
+    {
+      "owner": "docker/sbx-api",
+      "reason": "Three imported recipes link to the former SDK install URL; its redirect is preserved. Update the export upstream before changing these links."
+    },
+    {
+      "owner": "docker/governor-services",
+      "reason": "Vendored governance API overview links to the former governance URL; its redirect is preserved."
+    }
+  ]
+}

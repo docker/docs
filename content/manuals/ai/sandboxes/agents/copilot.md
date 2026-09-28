@@ -32,7 +32,7 @@ $ sbx run copilot
 ## Authentication
 
 Copilot requires a GitHub token with Copilot access. Store your token using
-[stored secrets](../configuration/credentials.md#stored-secrets):
+[stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set github --command 'gh auth token'
@@ -43,7 +43,7 @@ $ sbx secret set github --command 'gh auth token'
 Sandboxes don't pick up user-level configuration from your host. Only
 project-level configuration in the working directory is available inside the
 sandbox. See
-[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+[Why doesn't the sandbox use my user-level agent configuration?](/manuals/ai/sandboxes/faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
 Copilot is configured to trust the workspace directory by default, so it
@@ -73,5 +73,5 @@ Template: `docker/sandbox-templates:copilot`
 
 Preconfigured to trust the workspace directory.
 
-See [Customize](../customize/) to pre-install tools or customize this
+See [Customize](/manuals/ai/sandboxes/concepts/kits.md) to pre-install tools or customize this
 environment.

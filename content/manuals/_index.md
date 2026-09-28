@@ -16,18 +16,14 @@ params:
       - Enterprise
   notoc: true
   ai-and-agents:
-  - title: Docker Agentic Platform
-    description: Run agents in cloud sandboxes with this experimental platform.
-    icon: cloud
-    link: /agentic-platform/
   - title: Docker Sandboxes
-    description: Run AI coding agents in isolated environments.
+    description: Run agents locally or in the cloud with the CLI, Console, API, or SDK.
     icon: command-line
     link: /ai/sandboxes/
-  - title: Sandboxes API and SDK
-    description: Create and manage cloud sandboxes from your applications.
-    icon: code-bracket
-    link: /ai/sandboxes-api/
+  - title: AI Governance
+    description: Manage organization policies, sign-in enforcement, and audit logs.
+    icon: shield-check
+    link: /ai/governance/
   - title: MCP Catalog and Toolkit
     description: Augment your AI workflow with MCP servers.
     icon: /icons/toolkit.svg

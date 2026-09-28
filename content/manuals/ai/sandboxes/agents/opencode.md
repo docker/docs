@@ -29,7 +29,7 @@ $ cd ~/my-project
 $ sbx run opencode
 ```
 
-To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
 OpenCode launches a TUI (text user interface) where you can select your
@@ -38,7 +38,7 @@ preferred LLM provider and interact with the agent.
 ## Authentication
 
 OpenCode supports multiple providers. Store keys for the providers you want to
-use with [stored secrets](../configuration/credentials.md#stored-secrets):
+use with [stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set openai
@@ -56,7 +56,7 @@ available credentials and offers those providers in the TUI.
 ### GitHub Copilot
 
 To use GitHub Copilot models in OpenCode, configure a
-[GitHub credential](../configuration/credentials.md#github-token) for an
+[GitHub credential](/manuals/ai/sandboxes/cli/credentials.md#github-token) for an
 account with Copilot access. When OpenCode starts, Docker Sandboxes configures
 its GitHub Copilot provider using that credential. You don't need a separate
 device login inside OpenCode.
@@ -65,7 +65,7 @@ device login inside OpenCode.
 
 OpenCode Zen API keys aren't part of the built-in OpenCode credentials that
 `sbx secret set` supports. To use an OpenCode Zen API key, store it as a
-[custom secret](../configuration/credentials.md#custom-secrets):
+[custom secret](/manuals/ai/sandboxes/cli/credentials.md#custom-secrets):
 
 Set the `OPENCODE_API_KEY` environment variable on the host, then store it:
 
@@ -92,7 +92,7 @@ new environment variable is available inside the sandbox.
 ## Model selection
 
 To select a local model or inference endpoint with `sbx run --model`, see
-[Use local and hosted models](../configuration/models.md).
+[Use local and hosted models](/manuals/ai/sandboxes/cli/local/models.md).
 
 When you use `--model`, the model's supported thinking levels are available
 as OpenCode variants. Press Ctrl+T to cycle through them.
@@ -102,7 +102,7 @@ as OpenCode variants. Press Ctrl+T to cycle through them.
 Sandboxes don't pick up user-level configuration from your host. Only
 project-level configuration in the working directory is available inside the
 sandbox. See
-[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+[Why doesn't the sandbox use my user-level agent configuration?](/manuals/ai/sandboxes/faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
 OpenCode uses a TUI interface and doesn't require extensive configuration
@@ -136,5 +136,5 @@ Template: `docker/sandbox-templates:opencode`
 OpenCode supports multiple LLM providers with automatic credential injection
 through the sandbox proxy.
 
-See [Customize](../customize/) to pre-install tools or customize this
+See [Customize](/manuals/ai/sandboxes/concepts/kits.md) to pre-install tools or customize this
 environment.

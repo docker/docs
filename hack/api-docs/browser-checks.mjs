@@ -88,7 +88,7 @@ export default async function verify(page, base = "http://localhost:1314") {
     (await page.locator('[data-api-view="overview"]').count()) === 1,
     "Governance alias reaches generated overview",
   );
-  await page.goto(base + "/ai/sandboxes-api/");
+  await page.goto(base + "/ai/sandboxes/api/");
   assert(
     (await page
       .locator('nav.navbar-font a[href="/reference/api/sandboxes/latest/"]')

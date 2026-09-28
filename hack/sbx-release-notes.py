@@ -33,7 +33,7 @@ from jinja2 import Template
 PRESETS: dict[str, dict] = {
     "sbx": {
         "repo": "docker/sbx-releases",
-        "file": Path("content/manuals/ai/sandboxes/release-notes.md"),
+        "file": Path("content/manuals/ai/sandboxes/reference/cli-release-notes.md"),
     },
     "dhi": {
         "repo": "docker-hardened-images/dhictl",

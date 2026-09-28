@@ -19,13 +19,13 @@ aliases:
 > credit toward cloud compute usage. To review your balance, see
 > [Credits](/manuals/subscription-billing/manage/_index.md#credits).
 
-[Docker Agentic Platform](https://agentic-platform.docker.com/) is a
+[Docker Agentic Platform](https://ai/sandboxes/console.docker.com/) is a
 pay-as-you-go plan for running agent and tool workloads in isolated
 sandboxes with Docker-managed cloud infrastructure. You pay for the usage you accrue without a recurring
 subscription fee.
 
 To activate access for the Console, cloud sandbox CLI, or API and SDKs, follow
-[Signup and billing](/manuals/agentic-platform/signup.md#activate-cloud-access).
+[Signup and billing](/manuals/ai/sandboxes/cloud-access/_index.md#activate-cloud-access).
 
 ## Usage
 
@@ -42,7 +42,7 @@ runtime and the vCPU plus memory configuration you choose at setup.
 Different sandbox configurations can produce different costs.
 
 You can track usage and pricing from the
-[Usage & billing](https://agentic-platform.docker.com/usage) page in Agentic Platform.
+[Usage & billing](https://ai/sandboxes/console.docker.com/usage) page in Agentic Platform.
 
 To track usage for Docker Agentic Platform from Docker Home:
 

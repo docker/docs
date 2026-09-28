@@ -35,11 +35,11 @@ and supplies it to future Devin sandboxes through the proxy.
 Sandboxes don't pick up user-level Devin configuration from your host. Only
 project-level configuration in the working directory is available inside the
 sandbox. See
-[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+[Why doesn't the sandbox use my user-level agent configuration?](/manuals/ai/sandboxes/faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
 Devin reads `AGENTS.md` from the workspace for agent-specific instructions and
-uses the [shared agent skills](../workflows/agent-skills.md) store.
+uses the [shared agent skills](/manuals/ai/sandboxes/cli/local/agent-skills.md) store.
 
 ### Default startup command
 
@@ -53,5 +53,5 @@ devin --permission-mode dangerous --respect-workspace-trust=false
 
 Template: `docker/sandbox-templates:devin-docker`
 
-See [Customize](../customize/) to pre-install tools or customize this
+See [Customize](/manuals/ai/sandboxes/concepts/kits.md) to pre-install tools or customize this
 environment.

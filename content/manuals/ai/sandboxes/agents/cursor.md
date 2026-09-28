@@ -29,7 +29,7 @@ $ cd ~/my-project
 $ sbx run cursor
 ```
 
-To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
 ## Authentication
@@ -37,7 +37,7 @@ To create a [mountless sandbox](../usage.md#choose-a-workspace), use
 Cursor supports two authentication methods: an API key or OAuth.
 
 **API key**: Store your Cursor API key using
-[stored secrets](../configuration/credentials.md#stored-secrets):
+[stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set cursor
@@ -53,7 +53,7 @@ stored inside the sandbox.
 Sandboxes don't pick up user-level configuration from your host, such as
 `~/.cursor`. Only project-level configuration in the working directory is
 available inside the sandbox. See
-[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+[Why doesn't the sandbox use my user-level agent configuration?](/manuals/ai/sandboxes/faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
 Cursor reads `AGENTS.md` from the workspace for agent-specific instructions.
@@ -84,5 +84,5 @@ Preconfigured with HTTP/1.1 and server-sent events for agent traffic so
 requests flow through the host proxy. Authentication state is persisted across
 sandbox restarts.
 
-See [Customize](../customize/) to pre-install tools or customize this
+See [Customize](/manuals/ai/sandboxes/concepts/kits.md) to pre-install tools or customize this
 environment.

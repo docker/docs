@@ -29,7 +29,7 @@ $ cd ~/my-project
 $ sbx run gemini
 ```
 
-To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
 ## Authentication
@@ -37,7 +37,7 @@ To create a [mountless sandbox](../usage.md#choose-a-workspace), use
 Gemini requires either a Google API key or a Google account with Gemini access.
 
 **API key**: Store your key using
-[stored secrets](../configuration/credentials.md#stored-secrets):
+[stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set google
@@ -52,7 +52,7 @@ sandbox and doesn't persist if you remove and recreate it.
 Sandboxes don't pick up user-level configuration from your host, such as
 `~/.gemini`. Only project-level configuration in the working directory is
 available inside the sandbox. See
-[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+[Why doesn't the sandbox use my user-level agent configuration?](/manuals/ai/sandboxes/faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
 The sandbox disables Gemini's built-in sandbox tool (since the sandbox itself
@@ -83,5 +83,5 @@ Template: `docker/sandbox-templates:gemini`
 Gemini is configured to disable its built-in OAuth flow. Authentication is
 managed through the proxy with API keys.
 
-See [Customize](../customize/) to pre-install tools or customize this
+See [Customize](/manuals/ai/sandboxes/concepts/kits.md) to pre-install tools or customize this
 environment.

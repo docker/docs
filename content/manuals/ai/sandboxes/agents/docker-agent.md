@@ -22,13 +22,13 @@ $ sbx run docker-agent ~/my-project
 `sbx run docker-agent` defaults the workspace to the current directory, so you
 can run it from inside your project.
 
-To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
 ## Authentication
 
 Docker Agent supports multiple providers. Store keys for the providers you want
-to use with [stored secrets](../configuration/credentials.md#stored-secrets):
+to use with [stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set openai
@@ -48,7 +48,7 @@ available credentials and routes requests to the appropriate provider.
 Sandboxes don't pick up user-level configuration from your host. Only
 project-level configuration in the working directory is available inside the
 sandbox. See
-[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+[Why doesn't the sandbox use my user-level agent configuration?](/manuals/ai/sandboxes/faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
 ### Default startup command
@@ -71,5 +71,5 @@ $ sbx run --name <sandbox-name> -- run --yolo agent.yml
 ## Base image
 
 The sandbox uses `docker/sandbox-templates:docker-agent`. See
-[Base images](/manuals/ai/sandboxes/customize/author/base-images.md) to build your own image on top of
+[Base images](/manuals/ai/sandboxes/author-kits/base-images.md) to build your own image on top of
 this base.

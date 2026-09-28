@@ -36,7 +36,7 @@ where you supply a model provider key, Factory manages model access through
 your Factory account.
 
 **API key**: Store your Factory API key using
-[stored secrets](../configuration/credentials.md#stored-secrets):
+[stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set droid
@@ -51,7 +51,7 @@ aren't stored inside the sandbox.
 Sandboxes don't pick up user-level configuration from your host. Only
 project-level configuration in the working directory is available inside the
 sandbox. See
-[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+[Why doesn't the sandbox use my user-level agent configuration?](/manuals/ai/sandboxes/faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
 ### Default startup command
@@ -70,5 +70,5 @@ Template: `docker/sandbox-templates:droid-docker`
 Preconfigured to run without approval prompts. Authentication state is
 persisted across sandbox restarts.
 
-See [Customize](../customize/) to pre-install tools or customize this
+See [Customize](/manuals/ai/sandboxes/concepts/kits.md) to pre-install tools or customize this
 environment.

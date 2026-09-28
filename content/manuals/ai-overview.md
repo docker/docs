@@ -17,7 +17,7 @@ Each tool serves a different purpose.
 | I want to...                                                    | Use                                                      | Interface        |
 | --------------------------------------------------------------- | -------------------------------------------------------- | ---------------- |
 | Run coding agents in isolated environments                      | [Docker Sandboxes](./ai/sandboxes/)                      | `sbx`            |
-| Run agents in cloud sandboxes through a web Console | [Docker Agentic Platform](./agentic-platform/_index.md) (experimental) | Web Console |
+| Run agents in cloud sandboxes through a web Console | [Docker Agentic Platform](/manuals/ai/sandboxes/console/_index.md) (experimental) | Web Console |
 | Get AI help with Docker tasks (containers, images, Dockerfiles) | [Gordon](./ai/gordon/)                                   | `docker ai`      |
 | Run AI models locally with an OpenAI-compatible API             | [Model Runner](./ai/model-runner/)                       | `docker model`   |
 | Connect AI tools to external services via MCP                   | [MCP Catalog and Toolkit](/manuals/desktop/features/mcp-catalog-and-toolkit/_index.md) | `docker mcp`     |
@@ -42,15 +42,15 @@ Docker Sandboxes. Browse the [Docker Skills
 catalog](https://github.com/docker/skills#readme) for current guidance.
 
 Docker Sandboxes provides isolated environments for running coding agents
-[locally](./ai/sandboxes/get-started.md) or
-[in the cloud](./ai/sandboxes/cloud/_index.md). Sandboxes is the isolation layer;
+[locally](/manuals/ai/sandboxes/cli/get-started-local.md) or
+[in the cloud](/manuals/ai/sandboxes/cli/get-started-cloud.md). Sandboxes is the isolation layer;
 the agents themselves are separate tools. Agent configuration and supported
 features differ between local and cloud sandboxes.
 
 Docker Agentic Platform is an experimental service for running agents in
 Docker-managed cloud sandboxes. Its web Console provides kit selection,
 credentials, network policies, MCP tools, and sandbox lifecycle controls.
-[Activate a subscription](./agentic-platform/signup.md) to use cloud compute,
+[Activate a subscription](/manuals/ai/sandboxes/cloud-access/_index.md) to use cloud compute,
 billed on a pay-as-you-go basis.
 
 **Model Runner** lets you run LLMs locally. Other tools like Docker Agent can

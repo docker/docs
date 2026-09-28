@@ -36,7 +36,7 @@
       "title": "AI Governance",
       "source": "content/reference/api/ai-governance/api.yaml",
       "owner": "docker/governor-services",
-      "manual": "/manuals/ai/sandboxes/governance/",
+      "manual": "/manuals/ai/governance/",
       "connection": "hosted",
       "guides": []
     },
@@ -46,12 +46,12 @@
       "title": "Docker Sandboxes",
       "source": "content/reference/api/sandboxes/api.yaml",
       "owner": "docker/sbx-api",
-      "manual": "/manuals/ai/sandboxes-api/",
+      "manual": "/manuals/ai/sandboxes/api/",
       "connection": "hosted",
       "experimental": true,
       "guides": [
-        "/manuals/ai/sandboxes-api/authentication.md",
-        "/manuals/ai/sandboxes-api/get-started.md"
+        "/manuals/ai/sandboxes/api/authentication.md",
+        "/manuals/ai/sandboxes/api/get-started.md"
       ]
     }
   ],

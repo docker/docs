@@ -23,7 +23,7 @@ command instead of an interactive shell, pass it after `--`:
 $ sbx run shell -- -c "echo 'Hello from sandbox'"
 ```
 
-To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name:
 
 ```console
@@ -43,7 +43,7 @@ $ sbx run shell -- -c "echo hi"   # runs bash -l -c "echo hi"
 
 When the first argument is a bare word, it replaces `-l` instead.
 
-Store credentials using [stored secrets](../configuration/credentials.md#stored-secrets)
+Store credentials using [stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets)
 before running the sandbox. The proxy injects them into outbound API requests;
 credentials are never stored inside the VM:
 
@@ -54,7 +54,7 @@ $ sbx secret set openai
 
 Once inside the shell, you can install agents using their standard methods,
 for example `npm install -g @continuedev/cli`. For complex setups, build a
-[workload kit](/manuals/ai/sandboxes/customize/_index.md) instead of installing
+[workload kit](/manuals/ai/sandboxes/concepts/kits.md) instead of installing
 interactively each time.
 
 ## Base image

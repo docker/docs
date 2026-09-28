@@ -10,7 +10,7 @@ import tarfile
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "hack/sandboxes/source.json"
-GUIDES = ROOT / "content/manuals/ai/sandboxes-api/cookbook"
+GUIDES = ROOT / "content/manuals/ai/sandboxes/api/cookbook"
 REFERENCE = ROOT / "content/reference/api/sandboxes"
 
 

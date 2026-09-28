@@ -52,7 +52,7 @@ Before you start, make sure you have:
 
 - [Docker Desktop](../get-started/get-docker.md) or Docker Engine installed
 - [Docker Model Runner enabled](../manuals/ai/model-runner/get-started.md#enable-docker-model-runner)
-- [Docker Sandboxes (`sbx`) version 0.39.0 or later installed and signed in](../manuals/ai/sandboxes/install.md)
+- [Docker Sandboxes (`sbx`) version 0.39.0 or later installed and signed in](/manuals/ai/sandboxes/cli/install.md)
 
 If you use Docker Desktop, turn on TCP access in **Settings** > **AI**, or
 run:
@@ -88,7 +88,7 @@ $ sbx policy allow network localhost:12434
 ```
 
 For background on host access from sandboxes, see
-[Accessing host services from a sandbox](../manuals/ai/sandboxes/workflows/development.md#accessing-host-services-from-a-sandbox).
+[Accessing host services from a sandbox](/manuals/ai/sandboxes/cli/development.md#accessing-host-services-from-a-sandbox).
 
 ## Step 3: Create a Claude Code sandbox
 
@@ -111,9 +111,9 @@ You don't need to set an Anthropic API key or run `sbx secret set
 anthropic`. Docker Model Runner doesn't authenticate the local endpoint,
 and the sandbox proxy only injects credentials for requests bound for
 `api.anthropic.com`. See
-[Credentials](../manuals/ai/sandboxes/configuration/credentials.md) for the full
+[Credentials](/manuals/ai/sandboxes/cli/credentials.md) for the full
 list of services the proxy authenticates. For more ways to set variables, see
-[Set environment variables](../manuals/ai/sandboxes/usage.md#set-environment-variables).
+[Set environment variables](/manuals/ai/sandboxes/cli/usage.md#set-environment-variables).
 
 To confirm the variable is set, open a shell in the sandbox:
 
@@ -204,7 +204,7 @@ Files in your workspace are unaffected.
 ## Learn more
 
 - [Use Claude Code with Docker Model Runner](claude-code-model-runner.md)
-- [Get started with Docker Sandboxes](../manuals/ai/sandboxes/get-started.md)
+- [Get started with Docker Sandboxes](/manuals/ai/sandboxes/cli/get-started-local.md)
 - [Claude Code in Docker Sandboxes](../manuals/ai/sandboxes/agents/claude-code.md)
 - [Docker Model Runner overview](../manuals/ai/model-runner/_index.md)
 - [Docker Model Runner API reference](../manuals/ai/model-runner/api-reference.md)
