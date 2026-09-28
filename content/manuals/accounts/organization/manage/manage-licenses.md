@@ -2,11 +2,9 @@
 title: Manage licenses
 linkTitle: Licenses
 description: View your organization's license inventory and assign licenses to
-  teams or individual members, including invite-time, automatic, and queued
-  assignment.
+  teams or individual members, including invite-time and automatic assignment.
 keywords: licenses, organization, teams, members, invite, Docker Core, Docker
-  Offload, AI Governance, license assignment, team assignment, license queue,
-  docker home
+  Offload, AI Governance, license assignment, team assignment, docker home
 weight: 40
 aliases:
   - /admin/organization/manage/manage-licenses/
@@ -30,8 +28,8 @@ You have a few options for assigning a license to a member. You can assign:
 - Through a team, so every member of that team gets the license, including
   people who join the team later
 - Through the **Members** page with the action menu, or through invitations
-- By turning on automatic assignment so members receive a license the first
-  time they use a supported product.
+- By turning on automatic assignment so members receive a license when they
+  use a supported product.
 
 A member can use the product if they have a license from their team, from an
 individual assignment, or from automatic assignment. Each member uses one
@@ -42,17 +40,6 @@ as an individual assignment does not consume a second license.
 
 Assign licenses from the **Teams** view, the **Members** view, through
 invitations, or with automatic assignment.
-
-### Members
-
-1. Sign in to [Docker Home](https://app.docker.com), then choose your
-   organization.
-1. Select **Members** from the left navigation.
-1. Select the **action menu** at the end of the member's row to assign or
-   revoke an active license.
-1. Optional. To assign or revoke licenses for several members, use
-   multi-select to choose the members you want to manage, then select the
-   **Bulk actions** menu.
 
 ### Teams
 
@@ -72,9 +59,19 @@ Docker grants the license only to team members who don't already have it.
 
 - If a member already holds that license, they keep access and the extra
   assignment does not consume another license.
-- If there aren't enough licenses for every remaining member, selecting
-  **Save** assigns the licenses you have. Docker queues the rest until more
-  are available.
+- A product can be selected for the team only when enough licenses are
+  available for every member of the team.
+
+### Members
+
+1. Sign in to [Docker Home](https://app.docker.com), then choose your
+   organization.
+1. Select **Members** from the left navigation.
+1. Select the **action menu** at the end of the member's row to assign or
+   revoke an active license.
+1. Optional. To assign or revoke licenses for several members, use
+   multi-select to choose the members you want to manage, then select the
+   **Bulk actions** menu.
 
 ### Invitations
 
@@ -110,16 +107,15 @@ invitations, including CSV file limits, see
 ### Automatic assignment
 
 Automatic license assignment gives members a product license when they use a
-supported product for the first time. Use the **Automatic license assignment**
-toggle on the product's license card on the **Licenses** page. The toggle
-appears only when that product supports automatic assignment, so you may not
-see it on every card.
+supported product. Use the **Automatic license assignment** toggle on the
+product's license card on the **Licenses** page. The toggle appears only when
+that product supports automatic assignment, so you may not see it on every
+card.
 
 When the toggle is on:
 
-- Docker Core: members receive a license the first time they sign in to Docker
-  Desktop.
-- AI Governance: members receive a license the first time they sign in to
+- Docker Core: members receive a license when they sign in to Docker Desktop.
+- AI Governance: members receive a license when they sign in to
   [Docker Sandboxes](/manuals/ai/sandboxes/_index.md). The `sbx login` command
   provisions licenses on a first-come, first-served basis.
 - Licenses are assigned until exhausted.
@@ -129,18 +125,16 @@ When the toggle is on:
     organization policies for those products won't affect their usage.
 
 AI Governance licenses include single sign-on (SSO) and provisioning features
-regardless of your Docker Core subscription. Automatic license assignment for
-AI Governance requires
-[setting up SSO](/manuals/security/authentication/single-sign-on/connect.md),
-then
-[provisioning](/manuals/security/provisioning/_index.md) with System for
-Cross-domain Identity Management (SCIM) or Just-in-Time (JIT).
+regardless of your Docker Core subscription. With automatic assignment on,
+Docker assigns a license when a member uses Docker Sandboxes, whether they
+joined by invitation or through SSO with System for Cross-domain Identity
+Management (SCIM) or Just-in-Time (JIT) provisioning.
 
 ## View licenses
 
 The **Licenses** page shows how many licenses you have, how many are assigned,
 and whether those assignments are to teams or to individual members. Use it to
-check remaining capacity, open the members or teams that have a license, add
+check remaining capacity, view the members or teams that have a license, add
 licenses to your subscription, and turn automatic assignment on or off.
 
 1. Sign in to [Docker Home](https://app.docker.com), then choose your
@@ -151,17 +145,19 @@ Products you haven't purchased appear as cards with **Learn more** and **Add
 licenses**. Products you own show:
 
 - Remaining licenses under **Available**, and how many of your total are
-  assigned. Select **View all** to open the members who have the license.
-- Team-assigned licenses under **Team assignment**. Select
-  **View teams with this license** to open those teams.
+  assigned. To view the members who have the license, select **View all**.
+- Team-assigned licenses under **Team assignment**. To view those teams,
+  select **View teams with this license**.
 - Individual assignments under **Direct assignment**
 
 ## Remove licenses
 
-When you remove a license from a team or a member, it becomes available to
-members queued from a team assignment. The same rule applies when a member
-leaves a team or you
-[delete a team](/manuals/accounts/organization/manage/manage-a-team.md#delete-a-team).
+Removing a license from a team, or
+[deleting a team](/manuals/accounts/organization/manage/manage-a-team.md#delete-a-team),
+removes that license from every member of the team, unless they hold it from a
+direct assignment or through membership in another team. The license returns to
+the available pool. The same applies when a member leaves a team. Revoking a
+license from one member returns that license to the available pool.
 
 To remove licenses:
 
