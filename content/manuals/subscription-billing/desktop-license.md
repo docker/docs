@@ -21,7 +21,7 @@ terms.
 The Docker Subscription Service Agreement states:
 
 - Docker Desktop is free for:
-  - Small businesses (fewer than 250 employees and less than $10 million in
+  - Small businesses (fewer than 250 employees AND less than $10 million in
     annual revenue)
   - Personal use
   - Education
@@ -35,23 +35,24 @@ The Docker Subscription Service Agreement states:
 
 ## Understand licensing terms
 
-For detailed information about how these terms affect your organization, see:
+For detailed information about how these terms may affect your organization,
+see:
 
 - [Subscription updates blog post](https://www.docker.com/blog/updating-product-subscriptions/)
-- [Docker subscription FAQs](https://www.docker.com/pricing/faq)
+- [Docker subscription FAQs](https://www.docker.com/pricing/faq) to learn how
+  this may affect companies using Docker Desktop.
 
 > [!NOTE]
 >
-> The Docker Subscription Service Agreement doesn't change the licensing and
-> distribution terms for Docker and Moby open-source projects, such as
-> Docker Engine.
+> The licensing and distribution terms for Docker and Moby open-source
+> projects, such as Docker Engine, aren't changing.
 
-Docker Desktop is built using open-source software. To find the licenses for
-the open-source components in Docker Desktop, select the whale menu, then
-**About Docker Desktop** and **Acknowledgements**.
+Docker Desktop is built using open-source software. For information about the
+licensing of open-source components in Docker Desktop, select the whale menu >
+**About Docker Desktop** > **Acknowledgements**.
 
 ## Open source components
 
 Docker Desktop distributes some components that are licensed under the
 GNU General Public License.
-[Download the source code for these components](https://download.docker.com/opensource/License.tar.gz).
+[Download the source code for these components here](https://download.docker.com/opensource/License.tar.gz).
