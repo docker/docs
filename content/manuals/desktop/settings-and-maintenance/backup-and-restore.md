@@ -28,7 +28,7 @@ Use this procedure to back up and restore your images and container data. This i
 
    If you used a [named volume](/manuals/engine/storage/_index.md#more-details-about-mount-types) to store container data, such as databases, refer to the [back up, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section.
 
-2. Use [`docker push`](/reference/cli/docker/image/push/) to push any
+1. Use [`docker push`](/reference/cli/docker/image/push/) to push any
    images you have built locally and want to keep to the [Docker Hub registry](/manuals/docker-hub/_index.md).
    
    > [!TIP]
@@ -57,7 +57,7 @@ and [install a different version](/manuals/desktop/release-notes.md) or reset Do
       $ docker image load -i images.tar
       ```
 
-2. Re-create your containers if needed, using [`docker run`](/reference/cli/docker/container/run/),
+1. Re-create your containers if needed, using [`docker run`](/reference/cli/docker/container/run/),
    or [Docker Compose](/manuals/compose/_index.md).
 
 To restore volume data, refer to [backup, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes). 
@@ -102,9 +102,9 @@ Virtual Machine Manager (VMM)** to see which one applies to you.
    %LOCALAPPDATA%\Docker\vm-data\DockerDesktop.vhdx
    ```
 
-2. Copy your back-up to a safe location. 
+1. Copy your back-up to a safe location. 
 
-3. After reinstalling Docker Desktop, restore the `.vhdx` file to the same location for your backend, and re-import your WSL distributions if needed.
+1. After reinstalling Docker Desktop, restore the `.vhdx` file to the same location for your backend, and re-import your WSL distributions if needed.
 
 {{< /tab >}}
 {{< tab name="Mac" >}}
