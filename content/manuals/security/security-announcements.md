@@ -16,6 +16,17 @@ aliases:
 
 [Subscribe to security RSS feed](/security/security-announcements/index.xml)
 
+## Docker Sandboxes 0.42.0 security update: CVE-2026-77179 and CVE-2026-79994
+
+Two vulnerabilities in Docker Sandboxes were fixed on September 7 in the [0.42.0](/manuals/ai/sandboxes/release-notes.md#0420) release:
+
+- Addressed [CVE-2026-77179](https://www.cve.org/cverecord?id=CVE-2026-77179), where the virtio-fs host server on macOS followed symlinks when reopening an unlinked file from a stored path. A malicious guest could replace a parent directory with a symlink, escape the shared workspace, and read or modify arbitrary host files as the VMM user, potentially leading to code execution on the host. Versions 0.28.0 up to but not including 0.42.0 on macOS are affected. [Critical]
+- Addressed [CVE-2026-79994](https://www.cve.org/cverecord?id=CVE-2026-79994), where the guest-to-host Unix domain socket relay checked that a socket path was inside an authorized workspace but reconnected using the path name. A malicious guest could replace an intermediate directory with a symlink between the check and the connection, causing the host to connect to an arbitrary `AF_UNIX` socket outside the shared workspace and exposing data or host-side capabilities provided by that socket. Versions 0.37.0 up to but not including 0.42.0 are affected. [High]
+
+If you can't update to [0.42.0](/manuals/ai/sandboxes/release-notes.md#0420) or
+later, use [clone mode](/manuals/ai/sandboxes/usage.md#clone-mode) and avoid
+adding read-write host mounts.
+
 ## Docker Desktop 4.86.0 security update: CVE-2026-17106
 
 A vulnerability in Docker Desktop was fixed on August 10 in the [4.86.0](/manuals/desktop/release-notes.md#4860) release:
@@ -171,7 +182,7 @@ If you are unable to update to an unaffected version promptly, follow these best
   - [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md), which mitigates the impact of CVE-2024-21626 in the case of running containers from malicious images.
   - [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md), and [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md), which give organizations control over which images and repositories their users can access.
 - For CVE-2024-23650, CVE-2024-23651, CVE-2024-23652, and CVE-2024-23653, avoid using BuildKit frontend from an untrusted source. A frontend image is usually specified as the #syntax line on your Dockerfile, or with `--frontend` flag when using the `buildctl build` command.
-- To mitigate CVE-2024-24557, make sure to either use BuildKit or disable caching when building images. From the CLI this can be done via the `DOCKER_BUILDKIT=1` environment variable (default for Moby >= v23.0 if the buildx plugin is installed) or the `--no-cache flag`. If you are using the HTTP API directly or through a client, the same can be done by setting `nocache` to `true` or `version` to `2` for the [/build API endpoint](https://docs.docker.com/reference/api/engine/version/v1.44/#tag/Image/operation/ImageBuild).
+- To mitigate CVE-2024-24557, make sure to either use BuildKit or disable caching when building images. From the CLI this can be done via the `DOCKER_BUILDKIT=1` environment variable (default for Moby >= v23.0 if the Buildx plugin is installed) or the `--no-cache flag`. If you are using the HTTP API directly or through a client, the same can be done by setting `nocache` to `true` or `version` to `2` for the [/build API endpoint](https://docs.docker.com/reference/api/engine/version/v1.44/#tag/Image/operation/ImageBuild).
 
 ### Technical details and impact
 

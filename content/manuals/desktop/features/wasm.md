@@ -69,7 +69,7 @@ If you are receiving an error message, see the [troubleshooting section](#troubl
 
 Note the `--runtime` and `--platform` flags used in this command:
 
-- `--runtime=io.containerd.wasmedge.v1`: Informs the Docker engine that you want
+- `--runtime=io.containerd.wasmedge.v1`: Informs Docker Engine that you want
   to use the Wasm containerd shim instead of the standard Linux container
   runtime
 - `--platform=wasi/wasm`: Specifies the architecture of the image you want to

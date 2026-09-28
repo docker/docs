@@ -34,8 +34,8 @@ For domain patterns, wildcards, CIDR ranges, and filesystem path syntax, see
 Outbound TCP traffic passes through a proxy on your host, which enforces access
 rules on every connection. Non-HTTP TCP traffic, including SSH, can be allowed
 with a hostname rule (for example, `sbx policy allow network "myhost:22"`) or an
-address-based rule. UDP and ICMP are blocked at the network layer and can't be
-unblocked with policy rules.
+address-based rule. UDP requires the experimental feature and policy rules
+described in [Allow outbound UDP](#allow-outbound-udp). ICMP is blocked.
 
 If you haven't chosen a default preset, the CLI prompts you before it runs a
 sandbox. Running `sbx policy reset` clears the preset and prompts you to choose
@@ -57,9 +57,27 @@ Initialize the global network policy for your sandboxes:
 
 | Preset      | Description                                                                                                                                       |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Open        | All outbound traffic is allowed. Equivalent to adding a wildcard allow rule with `sbx policy allow network "**"`.                                 |
+| Open        | All outbound TCP traffic is allowed. Equivalent to adding a wildcard allow rule with `sbx policy allow network "**"`. |
 | Balanced    | Default deny, with a baseline allowlist covering AI provider APIs, package managers, code hosts, container registries, and common cloud services. |
-| Locked Down | All outbound traffic is blocked, including model provider APIs (for example, `api.anthropic.com`). You must explicitly allow everything you need. |
+| Locked Down | No baseline allow rules. Destinations need an allow rule from you or a kit. |
+
+Presets initialize the global policy. Built-in agent kits and other kits can
+add per-sandbox allow rules, including under **Locked Down** (`deny-all`). The
+preset isn't an explicit deny rule that overrides those allowances. To inspect
+the rules a kit adds to a sandbox, run:
+
+```console
+$ sbx policy ls my-sandbox --source kit --type network --wide
+```
+
+To block a destination allowed by a kit, add an explicit deny rule:
+
+```console
+$ sbx policy deny network --sandbox my-sandbox openrouter.ai
+```
+
+Deny rules take precedence over allow rules. See
+[Policy precedence](../concepts.md#precedence).
 
 The **Balanced** preset's baseline allowlist is a good starting point for most
 workflows. Run `sbx policy ls` to see exactly which rules it includes. As of
@@ -84,6 +102,11 @@ $ sbx policy init balanced
 Available values are `allow-all`, `balanced`, and `deny-all`.
 
 ## Managing rules
+
+A rule covers a destination host. It can also name HTTP methods and paths to
+narrow the match to part of that host.
+
+### Network rules
 
 Use [`sbx policy allow`](/reference/cli/sbx/policy/allow/) and
 [`sbx policy deny`](/reference/cli/sbx/policy/deny/) to add or restrict access
@@ -134,12 +157,118 @@ To remove a sandbox-scoped rule, pass `--sandbox <name>`:
 $ sbx policy rm network --sandbox my-sandbox --resource api.example.com
 ```
 
+### HTTP method and path rules
+
+Add `--method` to an allow or deny rule to match specific HTTP methods on a
+host, and `--path` to restrict it to part of the host's URL space:
+
+```console
+$ sbx policy allow network api.github.com --method GET --path '/repos/org/project/**'
+```
+
+Quote the path so your shell doesn't expand the wildcard. Pass several methods
+as a comma-separated list:
+
+```console
+$ sbx policy allow network api.github.com --method GET,HEAD
+```
+
+`--method ANY` matches every HTTP method, and `--path` defaults to `/**` when
+you omit it:
+
+```console
+$ sbx policy allow network api.github.com --method ANY
+```
+
+`ANY` can't be combined with specific methods, and a path without a method is
+rejected. Pass a method, or use `ANY` when you mean every method.
+
+Method names are case-insensitive. The accepted values are `GET`, `HEAD`,
+`POST`, `PUT`, `PATCH`, `DELETE`, `OPTIONS`, `CONNECT`, and `TRACE`.
+
+A path must start with `/` and be canonical. It can't contain a query string, a
+fragment, percent-encoding, control characters, surrounding whitespace,
+repeated or trailing slashes, or dot segments such as `.` and `..`. Each rule
+takes one path.
+
+Hosts follow the same patterns as network rules and can include a port. Write
+the host on its own, without a scheme, so an HTTP rule takes `api.example.com`
+rather than `https://api.example.com`.
+
+A local HTTP rule takes a hostname. To match an IP address or a CIDR range,
+add a plain network rule for that destination instead.
+
+Deny rules take the same flags, which is the usual way to carve a method or
+path out of a broader allow:
+
+```console
+$ sbx policy allow network api.example.com
+$ sbx policy deny network api.example.com --method POST --path '/admin/**'
+```
+
+For how the two layers combine, see
+[HTTP rules](../concepts.md#http-method-and-path).
+
+Remove an HTTP rule by naming the same qualifiers you added it with, or by
+rule ID:
+
+```console
+$ sbx policy rm network --resource api.github.com --method GET --path '/repos/org/project/**'
+$ sbx policy rm network --id 7f3a1c2e-4a73-4e05-bc9d-f2f9a4b50d67
+```
+
+List HTTP rules with `--type http`, or see them alongside network rules in a
+wide listing, where the `METHOD` and `PATH` columns are empty for rules that
+match a whole host:
+
+```console
+$ sbx policy ls --wide
+TYPE      METHOD   PATH
+network   -        -
+http      GET      /repos/org/project/**
+```
+
+> [!NOTE]
+> `sbx policy check network` and `sbx policy log` don't evaluate or display
+> HTTP methods and paths. A check reports the decision for the host, which can
+> differ from the decision for a specific method and path on that host.
+
+## Inspecting rules
+
 To inspect which policies are active and where they come from, use
 `sbx policy ls`. Use `--source` to filter by origin (`local`, `org`, `kit`),
 `--decision` to filter by outcome (`allow`, `deny`), and `--wide` for
 rule-level detail including rule IDs. To inspect a single policy or rule in
 full, use `sbx policy inspect`. See
 [Monitoring](../monitor-and-enforce/monitoring.md).
+
+### Allow outbound UDP
+
+Outbound UDP is experimental and disabled by default. Turn on experimental
+features and UDP egress before adding UDP allow rules:
+
+```console
+$ sbx settings set platform.allowExperimentalFeatures true
+$ sbx settings set feature.udp-egress true
+$ sbx policy allow network --protocol udp api.example.com:443
+```
+
+Local allow rules apply to TCP by default. Use `--protocol udp` for UDP or
+`--protocol tcp,udp` for both. Deny rules apply to both protocols by default.
+Use `--protocol` to restrict a deny rule to one protocol.
+
+UDP follows the same organization and local policy precedence as TCP. It is
+refused when the destination requires an HTTP, SOCKS5, system, or PAC-selected
+proxy, because those proxies can't carry UDP. ICMP remains blocked.
+
+Inspect UDP rules or check a destination:
+
+```console
+$ sbx policy ls --protocol udp
+$ sbx policy check network --protocol udp api.example.com:443
+```
+
+The CLI warns if you save a UDP rule while UDP egress is disabled.
 
 ## Testing policy
 
@@ -210,3 +339,11 @@ a `Governance:` status line showing `Managed by <org>`, it is. Add
 `--include-inactive` to confirm your rule shows an `inactive` status. If so,
 the block can only be lifted by updating the org policy in Docker Home or via
 the [API](/reference/api/ai-governance/).
+
+### An HTTP method or path is blocked on an allowed host
+
+A host that a network rule allows can still have individual methods or paths
+denied by an HTTP rule. Run `sbx policy ls --type http` to see which HTTP rules
+apply. `sbx policy check network` reports the decision for the host only, so it
+shows a host as allowed even when the specific request is denied. See
+[HTTP method and path rules](#http-method-and-path-rules).

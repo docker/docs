@@ -6,9 +6,15 @@ description: Control outbound network access from Docker Sandboxes with local an
 keywords: docker sandboxes, network access, network rules, governance, local policy, organization policy
 ---
 
+The governance described here applies to local sandboxes. Cloud sandboxes
+use separate network policy configuration. See
+[Cloud network policy](../../cloud/network-policy.md) for cloud controls.
+
 Network access policies control outbound connections from sandboxes. Each
 policy contains one or more rules that allow the domains, IP ranges, and ports a
-workflow needs, or block destinations that should stay unavailable.
+workflow needs, or block destinations that should stay unavailable. A local
+policy rule can also match the HTTP method and path of a request, so it can
+allow part of an API without allowing all of it.
 
 You can configure network access in two places:
 
@@ -24,10 +30,9 @@ policy. See [Precedence](../concepts.md#precedence).
 
 ## Rule syntax
 
-Network rules use the action `connect:tcp`. Resources are hostnames, CIDR
-ranges, ports, or hostnames with ports. The governance policy schema also
-accepts `connect:udp`, but Docker Sandboxes always blocks direct external UDP
-and ICMP. `connect:udp` rules have no effect.
+Network rules use `connect:tcp` for TCP and `connect:udp` for UDP. Resources are
+hostnames, CIDR ranges, ports, or hostnames with ports. UDP requires
+[experimental outbound UDP](local.md#allow-outbound-udp). ICMP is blocked.
 
 Examples:
 
@@ -39,6 +44,22 @@ Examples:
 
 For exact wildcard behavior and CIDR support, see
 [Network rules](../concepts.md#network-rules).
+
+## HTTP method and path rules
+
+A network rule matches a destination, so it allows or blocks everything a
+sandbox sends there. An HTTP rule narrows the match to specific HTTP methods
+and URL paths on that destination, which lets a policy allow reads from an API
+without allowing writes to it.
+
+HTTP rules layer on top of network rules. A network allow is the baseline for
+a destination and HTTP rules carve into it, while a network deny blocks the
+destination outright and no HTTP allow can reopen it. For the pattern syntax
+and the full matching table, see
+[HTTP rules](../concepts.md#http-method-and-path).
+
+Add them to a local policy with `--method` and `--path` on `sbx policy`. See
+[HTTP method and path rules](local.md#http-method-and-path-rules).
 
 ## Local network rules
 

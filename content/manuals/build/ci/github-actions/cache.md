@@ -1,5 +1,6 @@
 ---
 title: Cache management with GitHub Actions
+description: Configure build cache backends for GitHub Actions and handle cache write restrictions.
 linkTitle: Cache management
 keywords: ci, github actions, gha, buildkit, buildx, cache
 ---
@@ -178,6 +179,41 @@ jobs:
 >         }
 >       }
 > ```
+
+### Cache write restrictions
+
+Cache export requires write access to the GitHub Actions cache. GitHub gives
+events such as `issue_comment` and `pull_request_target` read-only cache access
+by default when they run in the default-branch context. These workflows can
+restore existing cache entries, but exporting with `cache-to: type=gha` can fail
+with `error writing layer blob: failed to reserve cache`, even after the image
+has been built and pushed.
+
+This also affects `pull_request` workflows with `types: [closed]` when a pull
+request is merged into the default branch: the run uses the target branch ref
+instead of the pull request merge ref. Regular `pull_request` runs using a
+merge ref retain read-write cache access by default. See GitHub's
+[cache access policy](https://github.blog/changelog/2026-06-26-read-only-actions-cache-for-untrusted-triggers/).
+
+For workflows with read-only cache access, keep `cache-from: type=gha` and omit
+`cache-to`. Populate the cache from a workflow with write access, such as a
+`push` workflow on the default branch. For builds after a merge, use `push` on
+the target branch instead of `pull_request` with `types: [closed]`.
+
+GitHub's workflow or job-level
+[`cache-mode` setting](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#cache-mode)
+can override the default cache access. Granting write access to untrusted
+workflows increases the risk of cache poisoning.
+
+If cache export is optional, you can make export failures non-fatal:
+
+```yaml
+cache-from: type=gha
+cache-to: type=gha,mode=max,ignore-error=true
+```
+
+`ignore-error=true` suppresses all cache export errors, not only access errors.
+It doesn't grant write access or save the cache when writes are denied.
 
 ### Cache mounts
 

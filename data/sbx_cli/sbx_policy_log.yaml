@@ -27,6 +27,10 @@ options:
       usage: |
         Filter logs by type: "all", "network", or "filesystem" (filesystem logs are not supported yet; default "all")
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
     - name: debug
       shorthand: D
       default_value: "false"

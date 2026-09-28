@@ -76,7 +76,3 @@ the following steps:
 
 If your organization has a Docker Business subscription with a purchase
 order, contact Support or your Account Manager at Docker.
-
-## More resources
-
-- [Video: Docker Hub Organizations](https://www.youtube.com/watch?v=WKlT1O-4Du8)

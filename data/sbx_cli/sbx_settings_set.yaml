@@ -1,0 +1,39 @@
+name: sbx settings set
+synopsis: Set a setting override
+description: |-
+    Set a user override for a setting.
+
+    The value is parsed according to the setting's type:
+      bool   "true" or "false"
+      int    integer value
+      float  floating-point value
+      string plain text
+      json   raw JSON
+
+    Environment variables take precedence over user overrides.
+
+    Most changes take effect within about five seconds. If a daemon restart is
+    required, this command tells you to run 'sbx daemon restart'.
+usage: sbx settings set <key> <value> [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for set
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Route sandbox, daemon, and CLI egress through an upstream proxy
+      sbx settings set proxy http://proxy.example.com:3128
+
+      # Pull template and kit images through a registry mirror
+      sbx settings set platform.images.registryMirror artifactory.corp/docker-remote
+see_also:
+    - sbx settings - Manage Docker Sandboxes settings

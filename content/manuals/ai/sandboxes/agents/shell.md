@@ -5,6 +5,8 @@ description: Run an agent-less sandbox with a Bash login shell for manual setup,
 keywords: sandboxes, sbx, shell, agent, manual setup, testing
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 `sbx run shell` drops you into a Bash login shell inside a sandbox with no
 pre-installed agent binary. It's useful for installing and configuring
 agents manually, testing custom implementations, or inspecting a running
@@ -14,11 +16,19 @@ environment.
 $ sbx run shell ~/my-project
 ```
 
-The workspace path defaults to the current directory. To run a one-off
+`sbx run` defaults the workspace to the current directory. To run a one-off
 command instead of an interactive shell, pass it after `--`:
 
 ```console
 $ sbx run shell -- -c "echo 'Hello from sandbox'"
+```
+
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name:
+
+```console
+$ sbx create --name scratch shell
+$ sbx run --name scratch
 ```
 
 ## Default startup command
@@ -44,7 +54,7 @@ $ sbx secret set openai
 
 Once inside the shell, you can install agents using their standard methods,
 for example `npm install -g @continuedev/cli`. For complex setups, build a
-[custom template](../customize/templates.md) instead of installing
+[workload kit](/manuals/ai/sandboxes/customize/_index.md) instead of installing
 interactively each time.
 
 ## Base image

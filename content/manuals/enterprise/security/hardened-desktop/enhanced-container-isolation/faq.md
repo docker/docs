@@ -60,7 +60,7 @@ ECI protection varies by container type and Docker Desktop version:
 
 - Containers created with `docker run` and `docker create`
 - Containers using the `docker-container` build driver
-- Kubernetes with the Kind provisioner
+- Kubernetes with the `kind` provisioner
 
 ### Platform dependent
 
@@ -70,7 +70,7 @@ ECI protection varies by container type and Docker Desktop version:
 
 - Docker Extensions
 - Docker Debug containers
-- Kubernetes with Kubeadm provisioner
+- Kubernetes with `kubeadm` provisioner
 
 For complete details, see [ECI limitations](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/limitations.md).
 

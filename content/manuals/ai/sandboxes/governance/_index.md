@@ -5,6 +5,10 @@ description: Control what sandboxes can access, from local developer rules to or
 keywords: docker sandboxes, governance, policy, network access, filesystem access, mcp policy, organization policy
 ---
 
+The governance described here applies to local sandboxes. Cloud sandboxes
+use separate network policy configuration. See
+[Cloud network policy](../cloud/network-policy.md) for cloud controls.
+
 Sandbox governance covers the policy system that controls what sandboxes can
 access over the network, on the filesystem, and through MCP. For MCP setup and
 server registration, see [MCP gateway](../mcp-gateway.md). Governance operates
@@ -17,7 +21,7 @@ See [Local policy](access-controls/local.md).
 **Organization policy** is configured centrally in Docker Home. Network and
 filesystem policies can also be managed via the
 [Governance API](/reference/api/ai-governance/). Controls defined at the org
-level apply uniformly across every sandbox in the organization. Organization
+level apply uniformly across every local sandbox in the organization. Organization
 governance can also include MCP policies for sandbox MCP activity. When
 organization governance is active, only organization allow rules grant access:
 local `sbx policy` allow rules are no longer evaluated, while local deny rules
@@ -47,7 +51,8 @@ MCP policy basics, evaluation, and precedence.
 - [Organization policies](access-controls/organization.md): centrally manage
   sandbox policies across your organization.
 - [Network access policies](access-controls/network.md): control outbound network
-  access from sandboxes.
+  access from sandboxes. A local policy rule can match a host, or an HTTP
+  method and path.
 - [Filesystem access policies](access-controls/filesystem.md): control which
   host paths sandboxes can mount as workspaces.
 - [MCP access policies](access-controls/mcp.md): control MCP server registration,

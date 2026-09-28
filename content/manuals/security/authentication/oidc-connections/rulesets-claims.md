@@ -6,7 +6,7 @@ keywords: oidc connections, rulesets, subject claims, github actions, jwt claims
 tags: [admin]
 weight: 20
 aliases:
-  - /platform/security/authentication/oidc-connections/rulesets-claims/
+  - /enterprise/security/authentication/oidc-connections/rulesets-claims/
 ---
 
 {{< summary-bar feature_name="OIDC connections" >}}

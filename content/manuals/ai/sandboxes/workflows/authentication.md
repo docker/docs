@@ -6,6 +6,9 @@ description: Use authenticated command-line tools and dynamic secret sources ins
 keywords: docker sandboxes, sbx, authentication, github cli, registry, 1password, aws secrets manager
 ---
 
+These workflows resolve credentials on the host for local sandboxes. For
+cloud secret setup, see [Authenticate cloud agents](../cloud/credentials.md).
+
 The sandbox proxy handles API credentials for model providers automatically,
 but agents often also need credentials for tools like `gh`, `docker`, or a
 secrets manager. Configure the credential source on your host, and the proxy
@@ -13,11 +16,8 @@ injects the resolved value into matching requests from the sandbox. Dynamic
 secret sources can retrieve a value from an authenticated host CLI without
 copying the value into the secret store.
 
-> [!NOTE]
-> Service secrets are global by default, so all future sandboxes can use them.
-> Sandboxes that already exist when you run `sbx secret set` do not
-> receive the updated value. To update a running sandbox, scope the secret to
-> it directly: `sbx secret set <service> --sandbox <sandbox-name>`.
+For secret scope and how changes apply to existing sandboxes, see
+[Store a secret](../configuration/credentials.md#store-a-secret).
 
 ## GitHub CLI
 
@@ -50,7 +50,7 @@ The token is never stored in plaintext inside the sandbox. See
 
 When using Docker Hub, authentication is handled automatically; `sbx` reuses
 your existing login session. For other registries, you need to configure
-credentials for `sbx` so it can pull private [templates](../customize/templates.md)
+credentials for `sbx` so it can pull private [templates](../usage.md#load-a-template)
 and kits when creating a sandbox:
 
 ```console

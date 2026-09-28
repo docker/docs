@@ -36,7 +36,7 @@ Configure startup behavior, UI appearance, terminal preferences, and feature def
 | **Open Docker Dashboard when Docker Desktop starts**              | Automatically open the dashboard when starting Docker Desktop.              | Disabled           | All          |                                       |
 | **Choose theme for Docker Desktop**                               | Apply a **Light** or **Dark** theme to Docker Desktop. | **Use system settings**. | All |                                   |
 | **Configure shell completions**                                  | Edits your shell configuration to enable word completion for commands, flags, and Docker objects when you press `<Tab>` in your terminal. For more information, see [Completion](/manuals/engine/cli/completion.md). | Disabled | All | |
-| **Choose container terminal** | Sets which terminal opens when you select a container terminal. Use the integrated terminal to run commands in a running container from the Dashboard. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md). | Disabled | All | |
+| **Choose container terminal** | Sets which terminal opens when you select a container terminal. Use the integrated terminal to run commands in a running container from the Dashboard. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md). | Integrated | All | |
 | **Enable Docker terminal**.                                       | Interact with your host machine and execute commands directly from Docker Desktop.  | Disabled | All | |
 | **Enable Docker Debug by default**                                | Use Docker Debug by default opening the integrated terminal. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md#integrated-terminal).   | Disabled | All | |
 | **Include VM in Time Machine backups**                            | Back up the Docker Desktop virtual machine. | Disabled | Mac | |
@@ -45,8 +45,8 @@ Configure startup behavior, UI appearance, terminal preferences, and feature def
 | **Use the WSL 2 based engine** | WSL 2 provides better performance than the Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/features/wsl/_index.md). | Disabled | Windows | |
 | **Add \*.docker.internal to host file**                | Adds internal DNS entries.                                  | Enabled                   | Windows                        | Helps resolve Docker-internal domains |
 | **Choose Virtual Machine Manager (VMM)**              | Choose the VMM for creating and managing the Docker Desktop Linux VM. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md). | | Mac, Windows | Select **Docker VMM** for optimized container performance. Docker VMM is in Beta. |
-| **Choose file sharing implementation for your containers** | Choose whether you want to share files using **VirtioFS**, or **gRPC FUSE** | **VirtioFS** | Mac | Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206). It is the only file sharing implementation supported by Docker VMM. |
-|**Use Rosetta for x86_64/amd64 emulation on Apple Silicon** | Accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have selected **Apple Virtualization framework** as the Virtual Machine Manager. | Disabled | Mac | |
+| **Choose file sharing implementation for your containers** (Available with the Apple Virtualization framework VMM) | Choose whether you want to share files using **VirtioFS**, or **gRPC FUSE** | **VirtioFS** | Mac | Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206). It is the only file sharing implementation supported by Docker VMM. |
+|**Use Rosetta for x86_64/amd64 emulation on Apple Silicon** (Available with the Apple Virtualization framework VMM) | Accelerate x86/AMD64 binary emulation on Apple Silicon. | Disabled | Mac | |
 | **Send usage statistics** | Send diagnostics, crash reports, and usage data to Docker to improve and troubleshoot the application. Docker may periodically prompt you for more information. | Enabled | All | |
 | **Use Enhanced Container Isolation** | Prevent containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md). | Disabled | All | Must be signed in and have a Docker Business subscription. |
 | **Show CLI hints**                                   | Display helpful CLI suggestions in terminal.               | Enabled                  | All        | Improves discoverability              |
@@ -130,6 +130,13 @@ Used for Docker Desktop host-level traffic: signing in to Docker, the Desktop ap
 | **System proxy** | Use the proxy configured on the host (static or Proxy Auto-Configuration (PAC)). Docker Desktop reads this automatically. |
 | **No proxy** | Connect directly without a proxy. |
 | **Manual configuration** | Enter a **Web Server (HTTP)** and **Secure Web Server (HTTPS)** URL manually. Use the format `http://proxy:port` or `https://proxy:port`. You can also specify hosts and domains that should bypass the proxy, for example: `registry-1.docker.com,*.docker.com,10.0.0.0/8`. |
+
+Docker Desktop reads a proxy or PAC URL that is statically configured on the
+host. For example a manual proxy setting, a static PAC file URL, or a
+GPO-managed override. WPAD (Web Proxy Auto-Discovery Protocol) auto-discovery
+is untested on both Windows and Mac and isn't officially supported. If your
+proxy is only discoverable via WPAD (DHCP option 252 or the `wpad.<domain>`
+DNS convention), configure a static PAC URL or proxy address instead.
 
 > [!NOTE]
 >
@@ -296,7 +303,7 @@ Manage how and when Docker Desktop checks for and downloads updates.
 | ------------------- | ----------------------------------------- | ------------------------------------- |
 | **Automatically check for updates** | Notifies you of available updates in the Docker menu and Dashboard footer. | Enabled |
 | **Always download updates** | Automatically download new versions of Docker Desktop in the background. | Disabled |
-| **Automatically update components** | Update Docker Desktop components (such as Docker Compose, Docker Scout, and the Docker CLI) independently, without a full restart. | Enabled |
+| **Automatically update components** | Update Docker Desktop components (such as Docker Compose, Docker Scout, and the Docker CLI) independently, without a full restart. Available with Docker Desktop version 4.92 and earlier. | Enabled |
 
 ## Extensions
 

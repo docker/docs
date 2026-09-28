@@ -137,7 +137,7 @@ Build Cloud.
 #### How does Docker Build Cloud work with Docker Compose?
 
 Docker Compose works out of the box with Docker Build Cloud. Install the Docker
-Build Cloud-compatible client (buildx) and it works with both commands.
+Build Cloud-compatible client (Buildx) and it works with both commands.
 
 #### How many minutes are included in Docker Build Cloud Team plans?
 

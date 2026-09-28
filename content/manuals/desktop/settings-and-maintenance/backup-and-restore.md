@@ -28,7 +28,7 @@ Use this procedure to back up and restore your images and container data. This i
 
    If you used a [named volume](/manuals/engine/storage/_index.md#more-details-about-mount-types) to store container data, such as databases, refer to the [back up, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section.
 
-2. Use [`docker push`](/reference/cli/docker/image/push/) to push any
+1. Use [`docker push`](/reference/cli/docker/image/push/) to push any
    images you have built locally and want to keep to the [Docker Hub registry](/manuals/docker-hub/_index.md).
    
    > [!TIP]
@@ -57,7 +57,7 @@ and [install a different version](/manuals/desktop/release-notes.md) or reset Do
       $ docker image load -i images.tar
       ```
 
-2. Re-create your containers if needed, using [`docker run`](/reference/cli/docker/container/run/),
+1. Re-create your containers if needed, using [`docker run`](/reference/cli/docker/container/run/),
    or [Docker Compose](/manuals/compose/_index.md).
 
 To restore volume data, refer to [backup, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes). 
@@ -66,26 +66,45 @@ To restore volume data, refer to [backup, restore, or migrate data volumes](/man
 
 If Docker Desktop cannot launch and must be reinstalled, you can back up its VM disk and image data directly from disk. Docker Desktop must be fully stopped before backing up these files.
 
+> [!NOTE]
+>
+> The paths below are the default locations. If you've customized the
+> **Disk image location** setting (**Settings** > **Resources** > **Advanced**),
+> back up the file at your configured location instead.
+
 {{< tabs >}}
 {{< tab name="Windows" >}}
 
+Docker Desktop on Windows stores VM data in a different location depending on
+which backend you're using. Check **Settings** > **General** > **Choose
+Virtual Machine Manager (VMM)** to see which one applies to you.
+
 1. Back up Docker containers/images.
 
-   Backup the following file:
+   For WSL 2, back up the following file:
 
    ```console
-   %LOCALAPPDATA%\Docker\wsl\data\docker_data.vhdx
+   %LOCALAPPDATA%\Docker\wsl\disk\docker_data.vhdx
    ```
 
-   Copy it to a safe location. 
+   If you're running any WSL Linux distributions (Ubuntu, Alpine, etc.), back
+   them up separately using [Microsoft's guide](https://learn.microsoft.com/en-us/windows/wsl/export-import).
 
-1. Back up WSL distributions.
+   For Hyper-V, back up the following file:
 
-   If you're running any WSL Linux distributions (Ubuntu, Alpine, etc.), back them up using [Microsoft's guide](https://learn.microsoft.com/en-us/windows/wsl/faq#how-can-i-back-up-my-wsl-distributions-).
+   ```console
+   %ProgramData%\DockerDesktop\vm-data\DockerDesktop.vhdx
+   ```
 
-1. Restore. 
+   For Docker VMM (Beta), back up the following file:
 
-   After reinstalling Docker Desktop, restore the `docker_data.vhdx` to the same location and re-import your WSL distributions if needed.
+   ```console
+   %LOCALAPPDATA%\Docker\vm-data\DockerDesktop.vhdx
+   ```
+
+1. Copy your back-up to a safe location. 
+
+1. After reinstalling Docker Desktop, restore the `.vhdx` file to the same location for your backend, and re-import your WSL distributions if needed.
 
 {{< /tab >}}
 {{< tab name="Mac" >}}

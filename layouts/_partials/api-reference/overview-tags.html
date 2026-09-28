@@ -1,0 +1,11 @@
+{{- /* Navigation placeholders and schema-only links are covered by the indexes. */ -}}
+{{- $visible := slice -}}
+{{- range .tags -}}
+  {{- $description := strings.TrimSpace (.description | default "") -}}
+  {{- $placeholder := or (eq $description (printf "%s reference." .summary)) (eq $description (printf "%s operations." .name)) -}}
+  {{- $schemaLink := findRE `^\[[^\]]+\]\(#schema-[^)]+\)$` $description -}}
+  {{- if and $description (not $placeholder) (not $schemaLink) -}}
+    {{- $visible = $visible | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $visible -}}

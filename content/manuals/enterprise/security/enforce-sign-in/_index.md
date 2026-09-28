@@ -27,7 +27,7 @@ This page provides an overview of how sign-in enforcement works.
 
 ## How sign-in enforcement works
 
-When Docker Desktop detects a registry key, `.plist` file, or
+When Docker Desktop detects a registry key, configuration profile, `.plist` file, or
 `registry.json` file:
 
 - A **Sign in required!** prompt appears, requiring users to sign

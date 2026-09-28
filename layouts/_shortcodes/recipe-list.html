@@ -1,0 +1,17 @@
+{{ $recipes := where .Page.RegularPages "Params.sidebar.group" (.Get "group") }}
+<ul
+  class="not-prose mb-8 grid list-none grid-cols-1 gap-x-8 p-0 md:grid-cols-2"
+>
+  {{ range $recipes }}
+    <li class="border-t border-gray-200 py-4 dark:border-gray-700">
+      <a
+        class="font-semibold text-blue-600 hover:underline dark:text-blue-400"
+        href="{{ .RelPermalink }}"
+        >{{ .LinkTitle }}</a
+      >
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        {{ .Description }}
+      </p>
+    </li>
+  {{ end }}
+</ul>

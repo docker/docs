@@ -58,7 +58,7 @@ Docker Desktop integrates with your preferred development tools and languages, a
 
 ## Products inside Docker Desktop
 
-- [Docker MCP Toolkit and Catalog](/manuals/ai/mcp-catalog-and-toolkit/_index.md)
+- [Docker MCP Toolkit and Catalog](/manuals/desktop/features/mcp-catalog-and-toolkit/_index.md)
 - [Docker Model Runner](/manuals/ai/model-runner/_index.md)
 - [Gordon](/manuals/ai/gordon/_index.md)
 - [Docker Offload](/manuals/offload/_index.md)

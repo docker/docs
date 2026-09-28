@@ -11,6 +11,7 @@ public
 resources
 static/pagefind
 tmp
+_vale/Docker/
 # Binary installed by cagent-action in CI
 cagent
 # cagent tmp files

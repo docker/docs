@@ -1,0 +1,82 @@
+{{ define "right" }}{{ end }}
+{{ define "article" }}
+  <article class="w-full max-w-5xl pb-10 md:pb-16">
+    {{ partial "breadcrumbs.html" . }}
+    <header class="max-w-3xl pb-8 md:pb-10">
+      <h1
+        data-pagefind-weight="10"
+        class="mb-3 text-4xl leading-tight font-semibold tracking-tight text-balance text-gray-950 md:text-5xl dark:text-white"
+      >
+        Get started with Docker
+      </h1>
+      <p
+        class="max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-300"
+      >
+        Install what you need, then choose a tutorial that matches what you want
+        to do.
+      </p>
+    </header>
+
+    <section class="mb-12 md:mb-16" aria-labelledby="install-heading">
+      <h2
+        id="install-heading"
+        class="mb-5 text-2xl leading-tight font-semibold tracking-tight text-gray-950 dark:text-white"
+      >
+        Install what you need
+      </h2>
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {{ range .Params.installs }}
+          <a
+            href="{{ .link }}"
+            class="group block rounded-xl border border-gray-200 bg-white p-5 transition hover:scale-[1.01] hover:border-blue-500 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-400/40 motion-reduce:transform-none dark:border-gray-700 dark:bg-gray-900 dark:hover:border-blue-500"
+          >
+            <p
+              class="mb-2 font-mono text-xs font-semibold tracking-[0.12em] text-gray-600 uppercase dark:text-gray-300"
+            >
+              {{ .eyebrow }}
+            </p>
+            <h3
+              class="mb-1 text-lg font-semibold text-gray-950 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400"
+            >
+              {{ .title }}
+            </h3>
+            <p class="leading-relaxed text-gray-600 dark:text-gray-300">
+              {{ .description }}
+            </p>
+          </a>
+        {{ end }}
+      </div>
+    </section>
+
+    <section aria-labelledby="tutorials-heading">
+      <h2
+        id="tutorials-heading"
+        class="mb-5 text-2xl leading-tight font-semibold tracking-tight text-gray-950 dark:text-white"
+      >
+        Choose a tutorial
+      </h2>
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        {{ range .Params.tutorials }}
+          <a
+            href="{{ .link }}"
+            class="group flex h-full flex-col rounded-xl border border-gray-200 bg-white p-6 transition hover:scale-[1.01] hover:border-blue-500 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-400/40 motion-reduce:transform-none dark:border-gray-700 dark:bg-gray-900 dark:hover:border-blue-500"
+          >
+            <p
+              class="mb-3 font-mono text-xs font-semibold tracking-[0.12em] text-gray-600 uppercase dark:text-gray-300"
+            >
+              {{ .audience }}
+            </p>
+            <h3
+              class="mb-2 text-xl leading-tight font-semibold tracking-tight text-gray-950 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400"
+            >
+              {{ .title }}
+            </h3>
+            <p class="leading-relaxed text-gray-600 dark:text-gray-300">
+              {{ .description }}
+            </p>
+          </a>
+        {{ end }}
+      </div>
+    </section>
+  </article>
+{{ end }}

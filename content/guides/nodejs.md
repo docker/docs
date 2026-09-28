@@ -59,7 +59,8 @@ Start by containerizing a Node.js application.
 ### Prerequisites
 
 - You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
-- You're familiar with basic Docker concepts. If you're new to Docker, start with [Get started](/get-started/introduction/).
+- You're familiar with basic Docker concepts. If you're new to Docker, start
+  with [Build and share a containerized application](/get-started/tutorials/run-an-app.md).
 
 ### Overview
 

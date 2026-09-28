@@ -1,0 +1,32 @@
+name: sbx settings
+synopsis: Manage Docker Sandboxes settings
+description: |-
+    View and manage settings for Docker Sandboxes.
+
+    Settings can come from defaults, environment variables, or user overrides.
+    These commands use the local daemon to read evaluated values and manage
+    overrides, starting it if necessary.
+
+    Most changes take effect within about five seconds. Some require a daemon
+    restart.
+usage: sbx settings COMMAND
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for settings
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx - Manage AI coding agent sandboxes.
+    - sbx settings get - Get the value of a setting
+    - sbx settings list - List settings
+    - sbx settings set - Set a setting override
+    - sbx settings unset - Remove a setting override

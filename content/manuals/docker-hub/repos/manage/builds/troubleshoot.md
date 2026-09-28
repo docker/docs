@@ -23,8 +23,6 @@ aliases:
 If a build fails, a **Retry** icon appears next to the build report line on the
 **General** and **Builds** tabs. The **Build report** page and **Timeline logs** also display a **Retry** button.
 
-![Timeline view showing the retry build button](images/retry-build.png)
-
 > [!NOTE]
 >
 > If you are viewing the build details for a repository that belongs to an
@@ -61,7 +59,7 @@ system access to the repositories.
 > also do this for an individual account to limit Docker Hub's access to your
 > source repositories.
 
-1. Generate a SSH keypair that you use for builds only, and add the public key to your source code provider account.
+1. Generate an SSH keypair that you use for builds only, and add the public key to your source code provider account.
 
     This step is optional, but allows you to revoke the build-only keypair without removing other access.
 

@@ -8,6 +8,10 @@ keywords: docker sandboxes, ssh, integrations, vs code, cursor, remote developme
 
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
+These integrations use local sandbox SSH access. Cloud sandboxes use a
+different SSH configuration and address: see
+[Connect with SSH](../cloud/usage.md#connect-with-ssh).
+
 You can connect an external editor or desktop app to a running sandbox over
 SSH. This lets you use the tools you already know — VS Code, Cursor, Claude
 Desktop, and others — while your code runs, builds, and executes inside the
@@ -63,13 +67,17 @@ $ ssh demo.sbx
 ## Select the workspace folder
 
 Connecting an app to a sandbox selects the remote environment, but it might not
-open the mounted workspace automatically. Use the app's remote folder picker to
-select the workspace when you configure the connection or start a session.
+open the primary workspace automatically. The initial folder depends on the
+client. A remote folder picker might open at the sandbox user's home directory,
+`/home/agent`, while an interactive `ssh` shell might start in
+`/home/agent/workspace`. Select the intended folder explicitly instead of
+relying on the initial location.
 
-The folder picker might open at the sandbox user's home directory, typically
-`/home/agent`. Workspaces retain their absolute host paths inside the sandbox.
-For example, if you mount `/Users/bob/src/my-project`, select
-`/Users/bob/src/my-project` in the remote folder picker.
+For a sandbox with a primary workspace, each workspace path appears inside the
+sandbox at the same absolute path as on the host. For example, if you pass
+`/Users/bob/src/my-project`, select that path in the remote folder picker. For
+a mountless sandbox that uses a Docker-provided agent template, select
+`/home/agent/workspace`.
 
 ## Connect a specific tool
 

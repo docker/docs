@@ -353,7 +353,7 @@ Buildx detects `Dockerfile.rego` and evaluates it before running the build.
 
 ### When policies don't load
 
-If buildx can't find a matching `.rego` file, the build proceeds without policy
+If Buildx can't find a matching `.rego` file, the build proceeds without policy
 evaluation. To require policies and fail if none are found, use strict mode:
 
 ```console

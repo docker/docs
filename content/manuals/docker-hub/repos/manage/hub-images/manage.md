@@ -28,7 +28,7 @@ The following objects are shown in the diagram.
 
 Use the following steps to delete one or more items via the graphical user
 interface. To delete in bulk, see the [deletion API
-endpoint](/reference/api/registry/latest/#tag/delete).
+endpoint](/reference/api/registry/latest/#tag-delete).
 
 > [!NOTE]
 > Images associated with [immutable tags](./immutable-tags.md) can't be

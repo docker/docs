@@ -19,8 +19,6 @@ they need to focus on.
 
 ## Overview
 
-![A screenshot of the Docker Scout Dashboard overview](../images/dashboard-overview.webp?border=true)
-
 The **Overview** tab provides a summary for the repositories in the selected
 organization.
 
@@ -45,8 +43,6 @@ sections of the Docker Scout Dashboard:
 
 The **Images** view shows all images in Scout-enabled repositories for the selected environment.
 You can filter the list by selecting a different environment, or by repository name using the text filter.
-
-![Screenshot of the images view](../images/dashboard-images.webp)
 
 For each repository, the list displays the following details:
 

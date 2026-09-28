@@ -17,7 +17,7 @@ Performs an HTTP GET request to a backend service.
 ```typescript
 ddClient.extension.vm.service
  .get("/some/service")
- .then((value: any) => console.log(value)
+ .then((value: any) => console.log(value))
 ```
 
 See [Service API Reference](/reference/api/extensions-sdk/HttpService.md) for other HTTP methods.

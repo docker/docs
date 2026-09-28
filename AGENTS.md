@@ -105,6 +105,21 @@ silence individual violations.
 - Don't add a wrong-cased entry to silence one false positive — it
   cascades into `Vale.Terms` violations on every correct usage.
 
+## Human-readable prose
+
+For PR titles and descriptions, documentation, release notes, design documents,
+comments, and other reader-facing prose:
+
+- Write so readers understand the meaning on the first read
+- Use wording that an experienced colleague would plausibly say aloud
+- Prefer verbs and clauses over invented nouns and compressed noun phrases
+- Treat correct grammar as necessary but insufficient for clear writing
+- Before returning prose, silently rewrite wording that is technically
+  interpretable but unnatural or hard to decode
+
+Keep established technical terms and qualifications needed for accuracy.
+Use the write skill's prose review to catch patterns that lint cannot detect.
+
 ## Alpine.js patterns
 
 Do not combine Alpine's `x-show` with the HTML `hidden` attribute on the
@@ -185,16 +200,24 @@ produces broken HTML — always check COMPONENTS.md for correct syntax.
 ```sh
 npx --no-install rumdl fmt <file>  # Format Markdown before committing
 npx prettier --write <file>        # Format non-Markdown files
-scripts/lint.sh <file>...          # Lint specific files (rumdl + Vale)
+scripts/lint.sh <markdown-file>... # Lint specific files (rumdl + Vale)
 docker buildx bake validate        # Run all validation checks
 docker buildx bake lint            # Markdown linting only
 docker buildx bake vale            # Style guide checks only
 docker buildx bake test            # HTML and link checking
 ```
 
-For incremental work, prefer `scripts/lint.sh` over the `bake` targets —
-it runs the same checks on just the files you pass, so the output stays
-scoped to your changes instead of the whole repo.
+`npx --no-install` uses the repository-pinned rumdl binary and never downloads
+a replacement. If the binary is unavailable, run `npm ci` to install the
+repository dependencies. Install Vale separately.
+
+For incremental work, prefer `scripts/lint.sh` over the `bake` targets. Pass
+only the Markdown files you changed so the output stays scoped instead of
+including the whole repository.
+
+Vale exits successfully when it reports only warnings or suggestions. Read the
+full output: fix errors and warnings on lines you added or changed, and review
+each suggestion. Don't expand the change to unrelated alerts in existing text.
 
 ### Validation in git worktrees
 
@@ -207,10 +230,10 @@ and `validate-vendor` targets run correctly in CI.
 
 1. Make changes
 2. Format Markdown with rumdl: `npx --no-install rumdl fmt <file>`
-3. Lint the changed files: `scripts/lint.sh <file>...`
+3. Lint the changed Markdown files: `scripts/lint.sh <markdown-file>...`
 4. Run a full build with `docker buildx bake` (optional for small changes)
 
-Always lint the specific files you changed before committing. Use
+Always lint the specific Markdown files you changed before committing. Use
 `scripts/lint.sh` rather than the `bake` targets so the output is scoped
 to your changes — bake runs across the entire repo and the noise makes
 real issues easy to miss.

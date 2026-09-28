@@ -40,7 +40,7 @@ This page provides download links, system requirements, and step-by-step install
   > Docker Desktop is supported on the current and two previous major macOS releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases).
 
 - At least 4 GB of RAM.
-- For the best experience, it's recommended that you install Rosetta 2. Rosetta 2 is no longer strictly required, however there are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See [Known issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md). To install Rosetta 2 manually from the command line, run the following command:
+- For the best experience, it's recommended that you install Rosetta 2. Rosetta 2 is no longer strictly required, however there are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
 
    ```console
    $ softwareupdate --install-rosetta
@@ -67,7 +67,7 @@ This page provides download links, system requirements, and step-by-step install
 >
 > - Keep the installer volume mounted until the installation completes.
 >
-> If you encounter a "Docker.app is damaged" dialog, see [Fix "Docker.app is damaged" on macOS](/manuals/desktop/troubleshoot-and-support/troubleshoot/mac-damaged-dialog.md).
+> If you encounter a "Docker.app is damaged" dialog, see [Fix "Docker.app is damaged" on macOS](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md).
 
 ## Install and run Docker Desktop on Mac
 
@@ -164,7 +164,7 @@ $ sudo /Applications/Docker.app/Contents/MacOS/install --user testuser --proxy-h
 ## Where to go next
 
 - Explore [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopMacInstall) to see what Docker can offer you.
-- [Get started with Docker](/get-started/introduction/_index.md).
+- [Build and share a containerized application](/get-started/tutorials/run-an-app.md).
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
 - [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.

@@ -29,13 +29,16 @@ The columns are:
 - `POLICY`: the policy name.
 - `SOURCE`: where the policy came from. `local` means your local configuration
   — a preset or rules you added with `sbx policy`. `kit` means a
-  [kit](../../customize/kits.md#control-network-access). `org` means your
+  [kit](/manuals/ai/sandboxes/governance/concepts.md#precedence). `org` means your
   organization.
 - `APPLIES TO`: which sandboxes the policy applies to. `all` means the policy
   is global. `sandbox:<name>` scopes it to a single sandbox; a profile name
   scopes it to sandboxes using that profile.
-- `SUMMARY`: a count of rules by type and decision — for example,
-  `network: 5 allow, 1 deny`.
+- `SUMMARY`: a count of rule entries by type and decision, for example
+  `network: 5 allow, 1 deny`. A rule that names several destinations
+  contributes one entry per destination. When the listing includes rules that
+  match an HTTP method and path, the network count labels each part `(L4)` or
+  `(L7)`. See [HTTP rules](#http-rules).
 
 To see full rule-level detail including rule IDs and resources, pass `--wide`.
 To inspect a single policy or rule, use `sbx policy inspect`:
@@ -46,6 +49,10 @@ $ sbx policy inspect Balanced
 
 Use `--source` to filter by origin (`local`, `org`, or `kit`) and `--decision`
 to filter by outcome (`allow` or `deny`).
+
+Use `--protocol tcp` or `--protocol udp` to filter network rules. The
+`--created-via` filter selects how a rule was created: `default`, `added`,
+`provisioned`, or `approval`.
 
 A `STATUS` column also appears when you pass `--include-inactive`; see
 [Showing inactive rules](#showing-inactive-rules).
@@ -68,6 +75,14 @@ the daemon has pulled the latest rules. If the sync state shows an error or a
 stale timestamp, the daemon may not have the most recent org policy. Run
 `sbx policy reset` to force a fresh pull. `Hidden` reports how many inactive
 rules are suppressed and how to reveal them.
+
+If Docker can't determine which organization governs your account, policy
+output shows `Governance: Unresolved`, and the dashboard shows the same
+unresolved state. For example, this happens when your account belongs to
+multiple organizations with governance enabled. Policy enforcement fails closed
+until the conflict is resolved, so local allow rules can't grant access. Contact
+an administrator for the affected organizations to resolve the conflicting
+governance configuration.
 
 ### Showing inactive rules
 
@@ -92,10 +107,10 @@ while organization governance is active. Local and kit-defined deny rules stay
 active and aren't hidden, because a deny still applies on top of the
 organization policy. See [Precedence](../concepts.md#precedence).
 
-Use `--type network` or `--type filesystem` to show only policies of that type.
-Without a sandbox argument, `sbx policy ls` shows every policy across all
-sandboxes. Pass a sandbox name to filter to global policies and those scoped to
-that sandbox:
+Use `--type network`, `--type filesystem`, or `--type http` to show only
+policies of that type. Without a sandbox argument, `sbx policy ls` shows every
+policy across all sandboxes. Pass a sandbox name to filter to global policies
+and those scoped to that sandbox:
 
 ```console
 $ sbx policy ls my-sandbox
@@ -118,6 +133,41 @@ A writable workspace mount must be allowed by both a `filesystem:read` and a
 default local policy allows read and write access to all paths, shown as the
 two `default-fs-*` rules above. For the rule syntax and path patterns, see
 [Policy concepts](../concepts.md#filesystem-rules).
+
+### HTTP rules
+
+Rules that match an HTTP method and path are listed as type `http`. Pass
+`--wide` to see the `METHOD` and `PATH` columns alongside network rules:
+
+```console
+$ sbx policy ls --wide
+TYPE      METHOD   PATH
+network   -        -
+http      GET      /repos/org/project/**
+http      POST     /admin/**
+```
+
+Rules that match a whole destination show `-` in both columns. To list only
+HTTP rules, pass `--type http`.
+
+HTTP rules are counted as network rules in the `SUMMARY` column, with each part
+labeled by the network layer it matches on. `L4` counts entries that match a
+whole destination, and `L7` counts those that also match an HTTP method and
+path:
+
+```console
+$ sbx policy ls
+POLICY         SOURCE   APPLIES TO   SUMMARY
+local-policy   local    all          network: 2 allow (L4), 1 deny (L7)
+```
+
+The labels appear when the current listing includes at least one HTTP rule.
+Because filters and hidden inactive rules change what the listing contains, a
+filtered listing with no HTTP rules shows an unlabeled count, such as
+`network: 42 allow`.
+
+For the rule syntax, see
+[HTTP method and path](../concepts.md#http-method-and-path).
 
 ## Monitoring traffic
 
@@ -144,7 +194,7 @@ The `PROXY` column shows how the request left the sandbox:
 | `forward`        | Routed through the forward proxy. Supports [credential injection](../../configuration/credentials.md).              |
 | `forward-bypass` | Routed through the forward proxy without credential injection.                                                 |
 | `transparent`    | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.            |
-| `network`        | Non-HTTP traffic (raw TCP, UDP, ICMP). TCP can be allowed with a policy rule. UDP and ICMP are always blocked. |
+| `network`        | Non-HTTP traffic. TCP and experimental UDP egress follow network policy. ICMP is blocked. |
 | `browser-open`   | A sandbox process requested opening a URL in the host browser. Policy is enforced before opening the URL.      |
 
 The `RULE` column identifies the policy rule that matched the request. The

@@ -5,6 +5,12 @@ description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
 
+The following diagnostics and recovery steps apply to local sandboxes. Use
+[`sbx --cloud diagnose`](cloud/usage.md#diagnose-cloud-access) to check cloud
+connectivity and account access. For cloud files, expiration, and network access, see
+[Cloud sandboxes](cloud/). Local daemon restarts and `sbx reset` do not repair
+cloud sandbox state.
+
 ## Run diagnostics
 
 Before digging into a specific issue, run
@@ -40,6 +46,54 @@ sandbox data. If the issue persists or state is corrupted, use
 If you hit persistent issues or corrupted state, run
 [`sbx reset`](/reference/cli/sbx/reset/) to stop all VMs and delete all sandbox
 data. Create fresh sandboxes afterwards.
+
+## Sandbox doesn't contain my project files
+
+Starting with `sbx` version 0.42.0, the workspace path is optional for
+`sbx create`. When you omit it, the command creates a mountless sandbox. For
+example, these commands create and attach to a sandbox without mounting your
+host project files:
+
+```console
+$ sbx create --name <sandbox-name> <agent>
+$ sbx run --name <sandbox-name>
+```
+
+By contrast, `sbx run` mounts the current directory when you don't pass a
+workspace path:
+
+```console
+$ sbx run <agent>
+```
+
+A sandbox's workspace configuration is fixed when the sandbox is created. To
+reuse the name of an existing mountless sandbox, first
+[copy out any files you want to keep](usage.md#copy-files-between-host-and-sandbox),
+then remove and recreate it with a workspace path:
+
+```console
+$ sbx rm <sandbox-name>
+$ sbx run --name <sandbox-name> <agent>
+```
+
+See [Choose a workspace](usage.md#choose-a-workspace) for mountless, direct,
+and clone-mode behavior.
+
+## Kiro, Copilot, or Droid shorthand fails
+
+In Docker Sandboxes v0.42, `sbx run kiro`, `sbx run copilot`, and
+`sbx run droid` fail because these agents moved from built-in agents to
+public kits and their shorthand names aren't resolved in this release.
+
+[Upgrade Docker Sandboxes](install.md) to v0.43.0 or later to launch
+these agents by name again. If you need to stay on v0.42, use the full kit
+reference for your agent:
+
+```console
+$ sbx run docker.io/sbx/kiro-kit:latest
+$ sbx run docker.io/sbx/copilot-kit:latest
+$ sbx run docker.io/sbx/droid-kit:latest
+```
 
 ## Agent can't install packages or reach an API
 
@@ -80,14 +134,15 @@ ERROR: resolve kits: kit "git+https://github.com/docker/sbx-kits-contrib.git#dir
 
 `sbx` restricts kit installs to an allowlist of sources, which defaults to
 Docker Hub (`docker.io/`) only. Add the kit's publisher to the
-`kit.allowedSources` setting, keeping the entries you want to retain:
+[`kit.allowedSources`](configuration/settings.md#kitallowedsources) setting,
+keeping the entries you want to retain:
 
 ```console
 $ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
 ```
 
 Then run the command again. For details, including how to allow local kits or
-any remote source, see [Restrict kit sources](customize/kits.md#restrict-kit-sources).
+any remote source, see [Restrict kit sources](/manuals/ai/sandboxes/customize/use-kits.md#restrict-kit-sources).
 
 ## SSH and other non-HTTP connections fail
 
@@ -107,8 +162,8 @@ can't be recovered. Use an address-based rule in that case:
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-UDP and ICMP traffic is blocked at the network layer and can't be unblocked
-with policy rules.
+UDP requires [experimental UDP egress](governance/access-controls/local.md#allow-outbound-udp)
+and UDP allow rules. ICMP is blocked and can't be unblocked with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
 server's hostname or IP address, or use HTTPS URLs instead:
@@ -148,6 +203,20 @@ configured to use the forward proxy. See
 [Monitoring network activity](governance/monitor-and-enforce/monitoring.md)
 for details.
 
+## MCP server streams stall
+
+If a remote MCP server's HTTP/2 handling stalls long-lived streams, register
+it with `--disable-http2` to use HTTP/1.1:
+
+```console
+$ sbx mcp add acme --url https://mcp.acme.com/mcp --disable-http2
+```
+
+Replace the example URL with your MCP endpoint. The setting applies to later
+connections to this server. The flag requires `--url` and can't be used with
+`--command` or `--local`. For registration options, see
+[Register an MCP server](mcp-gateway.md#register-an-mcp-server).
+
 ## API calls fail with a certificate error
 
 If your organization uses a proxy that inspects HTTPS traffic, agent requests
@@ -157,9 +226,10 @@ your organization's internal root CA inside the sandbox so the agent and its
 SDKs trust certificates signed by the proxy. Certificate errors can stop a
 request before the credential proxy can inject credentials.
 
-For repeatable setup, create a [sandbox kit](customize/kits.md) that installs
-the CA when the sandbox is created. See
-[Install an internal CA certificate](customize/kit-examples.md#install-an-internal-ca-certificate)
+For repeatable setup with a built-in agent, create a
+[v2 mixin kit](customize/kits-v2.md) that installs the CA when the
+sandbox is created. See
+[Install an internal CA certificate](customize/kits-v2.md#install-an-internal-ca-certificate)
 for an example kit.
 
 Use a PEM-encoded certificate with a `.crt` extension. If traffic can be signed
@@ -202,17 +272,63 @@ the egress path in the **PROXY** column:
   internal CA applies. The only difference between them is whether the client
   knows it's talking to a proxy.
 
+### Certificate errors during Docker builds
+
+Containers started by the sandbox's Docker Engine have their own trust stores.
+They don't inherit the sandbox's installed certificates. If an HTTPS download
+in a Dockerfile fails with `self signed certificate in certificate chain`,
+install the proxy CA in the build image before the download.
+
+From a shell inside the sandbox, write its proxy CA into your build context:
+
+```console
+$ printf '%s' "$PROXY_CA_CERT_B64" | base64 -d > sbx-proxy-ca.crt
+```
+
+For a Debian-based image with `ca-certificates` installed, copy the certificate
+and update the trust store before commands that make HTTPS requests:
+
+```dockerfile
+FROM python:3.13-slim
+COPY sbx-proxy-ca.crt /usr/local/share/ca-certificates/sbx-proxy-ca.crt
+RUN update-ca-certificates
+```
+
+Build inside the sandbox, passing its proxy settings to the build:
+
+```console
+$ docker build --build-arg HTTP_PROXY --build-arg HTTPS_PROXY --build-arg NO_PROXY -t my-app .
+```
+
+If your organization also inspects TLS, install its root CA in the build image
+as a separate `.crt` file before `update-ca-certificates`. Keep the system CA
+bundle intact so the image trusts both proxies and public certificate
+authorities. The earlier [certificate troubleshooting](#api-calls-fail-with-a-certificate-error)
+explains which proxy paths need each CA.
+
+Keep the generated proxy certificate out of version control. Regenerate it and
+rebuild the image if the sandbox proxy CA changes.
+
 ## Sandbox runs out of disk space
 
-The sandbox root (`/`) filesystem defaults to 20 GB. To increase it, set `DOCKER_SANDBOXES_ROOT_SIZE`
-before creating the sandbox:
+The sandbox root (`/`) filesystem defaults to 20 GB. To increase it, set
+`DOCKER_SANDBOXES_ROOT_SIZE` before creating the sandbox:
 
 ```console
 $ DOCKER_SANDBOXES_ROOT_SIZE=40g sbx run claude
 ```
 
-`DOCKER_SANDBOXES_ROOT_SIZE` controls the root filesystem size. `DOCKER_SANDBOXES_DOCKER_SIZE`
-controls the Docker data disk (`/var/lib/docker`) size. The two are independent — set both if needed.
+`DOCKER_SANDBOXES_ROOT_SIZE` controls the root filesystem size. The Docker data
+disk at `/var/lib/docker` is independent and defaults to 10 GB. To change the
+Docker data disk size for a sandbox, set `DOCKER_SANDBOXES_DOCKER_SIZE` when you
+create it:
+
+```console
+$ DOCKER_SANDBOXES_DOCKER_SIZE=20g sbx run claude
+```
+
+The Docker data disk must be at least 512 MiB. The environment variable doesn't
+resize existing volumes.
 
 For a [clone-mode sandbox](usage.md#clone-mode), set
 `DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE` before creating the sandbox to
@@ -220,23 +336,22 @@ configure the cloned workspace volume capacity. The variable accepts
 human-readable size strings such as `100g`:
 
 ```console
-$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude
+$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude .
 ```
 
 ## Filesystem operations are slow in large repositories
 
 Filesystem operations such as `git status`, `git log`, or directory scans can
-be noticeably slow when the sandbox workspace is mounted in direct mode (the
-default for workspaces without `--clone`). Virtiofs caching speeds up these
-workloads. Clone-mode sandboxes always enable it, so this tuning applies only
-to direct mode.
+be noticeably slow when you pass a workspace path and use direct mode.
+Virtiofs caching speeds up these workloads. Clone-mode sandboxes always enable
+it, so this tuning applies only to direct mode.
 
 Virtiofs caching is enabled by default on all operating systems. If you
 experience Git index corruption or unexpected file content, disable caching
 with the kill switch and recreate the sandbox:
 
 ```console
-$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <agent>
 ```
 
 ## Clone mode reports "not in a Git repository" on WSL
@@ -268,10 +383,39 @@ the command again:
 ✓ Git repository detected: \\wsl.localhost\Ubuntu\home\you\repo
 ```
 
+## SSH agent socket is missing
+
+If `SSH_AUTH_SOCK` is set inside a sandbox but `ssh-add -L` reports
+`No such file or directory`, check whether your custom template includes
+`socat`. Docker Sandboxes uses it to create the socket that forwards requests
+to your host SSH agent. Installing OpenSSH client tools alone isn't enough.
+
+For an Ubuntu-based custom template, add `socat` to the packages installed as
+root in your Dockerfile, then rebuild the template and create a sandbox from
+it. Docker-provided sandbox templates already include `socat`.
+
+If the socket exists but forwarding still fails, check the
+[SSH agent settings](configuration/credentials.md#ssh-agent).
+
 ## Sandbox commits aren't signed
 
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
 For setup steps, see [Commit signing](workflows/git.md#commit-signing).
+
+Forwarding is enabled by default. Check
+[`ssh.agentForwardingEnabled`](configuration/settings.md#sshagentforwardingenabled)
+and [`ssh.agentSocketPath`](configuration/settings.md#sshagentsocketpath) to
+confirm that forwarding is enabled and inspect the socket selection:
+
+```console
+$ sbx settings get ssh.agentForwardingEnabled
+$ sbx settings get ssh.agentSocketPath
+```
+
+If you use each client's current `SSH_AUTH_SOCK`, reconnect from a shell where
+it points to the intended agent. If `ssh.agentSocketPath` returns a path,
+confirm that it points to an active host agent. After changing forwarding or
+the socket selection, run `sbx daemon restart`.
 
 If `ssh-add -L` prints `The agent has no identities.`, the sandbox can reach
 the forwarded agent, but the host agent doesn't have a loaded key. Load the
@@ -376,6 +520,21 @@ If you have set custom `XDG_STATE_HOME`, `XDG_CACHE_HOME`, or
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## Enable automatic diagnostics uploads
+
+To opt in to automatic diagnostics uploads after certain daemon errors, set
+[`diagnostics.autoUpload`](configuration/settings.md#diagnosticsautoupload) to
+`yes`:
+
+```console
+$ sbx settings set diagnostics.autoUpload yes
+```
+
+Automatic bundles include basic system information and client, daemon, crash,
+and MCP logs. Docker Sandboxes redacts recognized identity values and
+credential patterns, but collected logs can still contain user content. Failed
+uploads remain in a local queue for a later retry.
 
 ## Report an issue
 

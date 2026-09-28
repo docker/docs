@@ -579,7 +579,7 @@ Controls whether users can access all Docker Desktop features that are in public
 
 ### Enable Docker MCP Toolkit (Beta)
 
-Enables [Docker MCP Toolkit](/manuals/ai/mcp-catalog-and-toolkit/_index.md) in Docker Desktop for AI model development workflows.
+Enables [Docker MCP Toolkit](/manuals/desktop/features/mcp-catalog-and-toolkit/_index.md) in Docker Desktop for AI model development workflows.
 
 | Property | Value |
 |---|---|

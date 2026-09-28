@@ -38,7 +38,7 @@ organization.
 {{< /tab >}}
 {{< tab name="API">}}
 
-To view activity logs using the Docker Hub API, use the [Audit logs endpoints](https://docs.docker.com/reference/api/hub/latest/#tag/audit-logs).
+To view activity logs using the Docker Hub API, use the [Audit logs endpoints](/reference/api/hub/latest/#tag-audit-logs).
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -49,7 +49,7 @@ To view activity logs using the Docker Hub API, use the [Audit logs endpoints](h
 >
 > Docker Home retains activity logs for 30 days. To retrieve
 activities beyond 30 days, you must use the
-[Docker Hub API](https://docs.docker.com/reference/api/hub/latest/#tag/audit-logs).
+[Docker Hub API](/reference/api/hub/latest/#tag-audit-logs).
 
 By default, the **Activity** tab displays all recorded events within
 the last 30 days. To narrow your view, use the calendar to select a specific

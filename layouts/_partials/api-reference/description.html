@@ -1,0 +1,13 @@
+{{- $text := .text | default "" -}}
+{{- $api := .api -}}
+{{- range $api.operations -}}
+  {{- $text = replace $text (printf "(#operation/%s)" .id) (printf "(%s)" .url) -}}
+  {{- $text = replaceRE (printf "\\(#tag/[^)]+/operation/%s\\)" .id) (printf "(%s)" .url) $text -}}
+{{- end -}}
+{{- range $api.schemas -}}
+  {{- $text = replace $text (printf "(#schema-%s)" .name) (printf "(%s)" .url) -}}
+{{- end -}}
+{{- range $api.tags -}}
+  {{- $text = replace $text (printf "(#tag/%s)" .name) (printf "(%s#tag-%s)" $api.url (.name | urlize)) -}}
+{{- end -}}
+{{- return $text -}}

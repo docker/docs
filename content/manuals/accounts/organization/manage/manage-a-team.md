@@ -73,8 +73,7 @@ have enough licenses, and what members lose when you remove a license, see
 ## Set team repository permissions
 
 You must create a team before you are able to configure repository permissions.
-For more details, see [Create and manage a
-team](/manuals/accounts/organization/manage/manage-a-team.md).
+For more details, see [Create a team](#create-a-team).
 
 To set team repository permissions:
 
@@ -143,8 +142,3 @@ assignment. See
 1. Select the **Actions** icon next to the name of the team you want to delete.
 1. Select **Delete team**.
 1. Review the confirmation message, then select **Delete**.
-
-## More resources
-
-- [Video: Docker Teams](https://youtu.be/WKlT1O-4Du8?feature=shared&t=348)
-- [Video: Roles, teams, and repositories](https://youtu.be/WKlT1O-4Du8?feature=shared&t=435)
