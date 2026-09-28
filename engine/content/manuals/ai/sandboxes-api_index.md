@@ -9,9 +9,9 @@ params:
   sidebar:
     group: AI and agents
     badge:
-      color: violet
-      text: Experimental
-aliases:
+      theme: loading
+      platform: Experimental
+aliases: violet
   - /ai/sandboxes/api/
 ---
 
