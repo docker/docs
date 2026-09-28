@@ -201,6 +201,4 @@ to learn how to view the Docker Daemon logs.
 ## Further resources
 
 - View specific [troubleshoot topics](topics.md).
-- View information on [known issues](known-issues.md)
-- [Fix "Docker.app is damaged" on macOS](mac-damaged-dialog.md) - Resolve macOS installation issues
 - [Get support for Docker products](/manuals/support/_index.md)
