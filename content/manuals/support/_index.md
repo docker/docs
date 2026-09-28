@@ -23,7 +23,7 @@ Docker products.
 
 ### Support response times
 
-- Docker Pro: 3 business day response
+- Docker Pro: 5 business day response
 - Docker Team: 2 business day response, 24×5 availability
 - Docker Business: 1 business day response, 24×5 availability
 
