@@ -16,8 +16,9 @@ add OCI artifacts (such as custom certificates or additional tools), and
 configure settings. For charts, this lets you customize the image references.
 
 Your customizations stay secure automatically. When the base Docker Hardened
-Image or chart receives a security patch or your OCI artifacts are updated,
-Docker automatically rebuilds your customizations in the background. This
+Image or chart receives a security patch, your OCI artifacts are updated, or a
+[hardened system package](./hardened-packages.md) you added is updated, Docker
+automatically rebuilds your customizations in the background. This
 ensures continuous compliance and protection by default, with no manual work
 required. The rebuilt artifacts are signed and attested to the same SLSA Build
 Level 3 standard as the base images and charts, ensuring a secure and verifiable
