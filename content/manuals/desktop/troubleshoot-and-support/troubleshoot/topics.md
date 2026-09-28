@@ -1,6 +1,6 @@
 ---
 description: Explore common troubleshooting topics for Docker Desktop
-keywords: Linux, Mac, Windows, troubleshooting, topics, Docker Desktop
+keywords: Linux, Mac, Windows, troubleshooting, topics, Docker Desktop, known issues
 title: Troubleshoot topics for Docker Desktop
 linkTitle: Common topics
 toc_max: 3
@@ -8,6 +8,9 @@ tags: [ Troubleshooting ]
 weight: 10 
 aliases:
  - /desktop/troubleshoot/topics/
+ - /desktop/troubleshoot/known-issues/
+ - /desktop/troubleshoot-and-support/troubleshoot/known-issues/
+ - /desktop/troubleshoot-and-support/troubleshoot/mac-damaged-dialog/
 ---
 
 > [!TIP]
@@ -117,45 +120,13 @@ currently using the port (the PID is the number in the rightmost column).
 Then, decide whether to shut the other process down, or to use a different port in your
 Docker app.
 
-## Topics for Linux and Mac
-
-### Docker Desktop fails to start on Mac or Linux platforms
-
-#### Error message 
-
-Docker fails to start due to Unix domain socket path length limitations:
-
-```console
-[vpnkit-bridge][F] listen unix <HOME>/Library/Containers/com.docker.docker/Data/http-proxy-control.sock: bind: invalid argument
-```
-
-```console
-[com.docker.backend][E] listen(vsock:4099) failed: listen unix <HOME>/Library/Containers/com.docker.docker/Data/vms/0/00000002.00001003: bind: invalid argument
-```
-
-#### Cause
-
-On Mac and Linux, Docker Desktop creates Unix domain sockets used for inter-process communication. These sockets are created under the user's home directory.
-
-Unix domain sockets have a maximum path length:
- - 104 characters on Mac
- - 108 characters on Linux
-
-If your home directory path is too long, Docker Desktop fails to create necessary sockets.
-
-#### Solution
-
-Ensure your username is short enough to keep paths within the allowed limit:
- - Mac: Username should be ≤ 33 characters
- - Linux: Username should be ≤ 55 characters
-
 ## Topics for Mac
 
 ### Upgrade requires administrator privileges
 
 #### Cause 
 
-On macOS, users without administrator privileges cannot perform in-app upgrades from the Docker Desktop Dashboard.
+On Mac, users without administrator privileges cannot perform in-app upgrades from the Docker Desktop Dashboard.
 
 #### Solution
 
@@ -214,6 +185,49 @@ Check that:
 See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
 in the Apple documentation, and Docker Desktop [Mac system requirements](/manuals/desktop/setup/install/mac-install.md#system-requirements).
+
+### Docker.app is damaged and can't be opened. You should move it to the Trash.
+
+#### Cause
+
+This issue occurs due to a non-atomic copy during a drag/drop installation. When you drag and drop `Docker.app` from a DMG file while another application, like VS Code, is invoking the Docker CLI through symlinks, the copy operation may be interrupted, leaving the app in a partially copied state that Gatekeeper marks as "damaged".
+
+#### Solution
+
+1. Quit third-party software
+
+   Close any applications that might call Docker in the background:
+
+   - Visual Studio Code and other IDEs
+   - Terminal applications
+   - Agent apps or development tools
+   - Any scripts or processes that use the Docker CLI
+
+2. Remove any partial installation: 
+
+   1. Move `/Applications/Docker.app` to Trash and empty Trash.
+   2. If you used a DMG installer, eject and re-mount the Docker DMG.
+
+3. Reinstall Docker Desktop
+
+   Follow the instructions in the [Mac installation guide](/manuals/desktop/setup/install/mac-install.md) to reinstall Docker Desktop.
+
+If you continue to see the "damaged" dialog after following the recovery steps:
+
+   1. Gather diagnostics using the terminal. Follow the instructions in [Diagnose from the terminal](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md#diagnose-from-the-terminal).
+
+   - Note down the your diagnostics ID displayed in the terminal after running diagnostics.
+
+   2. Get help:
+      - If you have a paid Docker subscription, [contact support](/manuals/support/_index.md) and include your diagnostics ID
+      - For community users, [open an issue on GitHub](https://github.com/docker/desktop-feedback) and include your diagnostics ID
+
+To avoid this issue in the future:
+
+- If your organization allows, update Docker Desktop via the in-app update flow
+- Always quit applications that use Docker before installing Docker Desktop via the DMG installer drag-and-drop approach
+- In managed environments, use PKG installations over DMG drag-and-drop
+- Keep installer volumes mounted until installation is complete
 
 ## Topics for Windows
 

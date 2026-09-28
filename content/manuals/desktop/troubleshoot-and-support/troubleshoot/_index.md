@@ -31,13 +31,12 @@ The **Troubleshoot** menu contains the following options:
 
 - **Reset Kubernetes cluster**. Select to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](/manuals/desktop/settings-and-maintenance/settings.md#kubernetes).
 
-- **Clean up data**. This option resets all Docker data without a
-  reset to factory defaults. Selecting this option results in the loss of existing settings.
+- **Clean up data**. A disk image reset destroys all Docker containers and images local to the machine, preserving all settings.
 
 - **Reset to factory defaults**: Choose this option to reset all options on
   Docker Desktop to their initial state, the same as when Docker Desktop was first installed.
 
-If you are a Mac or Linux user, you also have the option to **Uninstall** Docker Desktop from your system.
+If you are a Mac user, you also have the option to **Uninstall** Docker Desktop from your system.
 
 ## Diagnose
 
