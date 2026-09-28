@@ -38,7 +38,7 @@ subscriptions, the following response times apply:
 >
 > Premium Support with faster response times and 24×7 availability is
 > available as an add-on for
-> [Docker Business subscribers](https://www.docker.com/pricing?ref=Docs&refAction=DocsSupport).
+> [Docker Business and Docker Hardened Images subscribers](https://www.docker.com/pricing?ref=Docs&refAction=DocsSupport).
 
 ### Support severity levels
 
