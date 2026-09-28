@@ -1,10 +1,11 @@
 ---
-title: Docker Home, Admin Console, and billing release notes
+title: Accounts and admin release notes
 linkTitle: Release notes
 description: >-
-  Learn about new features, bug fixes, and breaking changes for Docker Home,
-  the Admin Console, billing, security, and subscriptions.
-keywords: Docker Home, Admin Console, billing, subscription, security, admin,
+  Learn about new features, bug fixes, and breaking changes for Docker accounts
+  and admin features, including Docker Home, billing, security, and
+  subscriptions.
+keywords: accounts, admin, Docker Home, billing, subscription, security,
   release notes, what's new
 weight: 60
 params:
@@ -14,7 +15,8 @@ tags: [Release notes, admin]
 ---
 
 This page lists new features, enhancements, known issues, and bug fixes for
-Docker Home, the Admin Console, billing, security, and subscriptions.
+Docker accounts and admin features, including Docker Home, billing, security,
+and subscriptions.
 
 ## 2026-02-13
 
