@@ -63,13 +63,13 @@ Disable hardware acceleration:
    - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json`
    - Linux: `~/.docker/desktop/settings-store.json.`
 
-2. Add the following entry:
+1. Add the following entry:
 
    ```JSON
    "disableHardwareAcceleration": "always"
    ```
 
-3. Save the file and restart Docker Desktop.
+1. Save the file and restart Docker Desktop.
 
 ### Using mounted volumes and getting runtime errors indicating an application file is not found, access to a volume mount is denied, or a service cannot start
 
@@ -82,12 +82,12 @@ If your project directory is located outside your home directory (`/home/<user>`
 Enable file sharing in Docker Desktop for Mac and Linux:
 
 1. Navigate to **Settings**, select **Resources** and then **File sharing**.
-2. Add the drive or folder that contains the Dockerfile and volume mount paths.
+1. Add the drive or folder that contains the Dockerfile and volume mount paths.
 
 Enable file sharing in Docker Desktop for Windows:
 
 1. From **Settings**, select **Shared Folders**. 
-2. Share the folder that contains the Dockerfile and volume mount paths.
+1. Share the folder that contains the Dockerfile and volume mount paths.
 
 ### `port already allocated` errors
 
@@ -203,12 +203,12 @@ This issue occurs due to a non-atomic copy during a drag/drop installation. When
    - Agent apps or development tools
    - Any scripts or processes that use the Docker CLI
 
-2. Remove any partial installation: 
+1. Remove any partial installation: 
 
    1. Move `/Applications/Docker.app` to Trash and empty Trash.
    2. If you used a DMG installer, eject and re-mount the Docker DMG.
 
-3. Reinstall Docker Desktop
+1. Reinstall Docker Desktop
 
    Follow the instructions in the [Mac installation guide](/manuals/desktop/setup/install/mac-install.md) to reinstall Docker Desktop.
 
@@ -218,7 +218,7 @@ If you continue to see the "damaged" dialog after following the recovery steps:
 
    - Note down the your diagnostics ID displayed in the terminal after running diagnostics.
 
-   2. Get help:
+   1. Get help:
       - If you have a paid Docker subscription, [contact support](/manuals/support/_index.md) and include your diagnostics ID
       - For community users, [open an issue on GitHub](https://github.com/docker/desktop-feedback) and include your diagnostics ID
 
@@ -383,10 +383,10 @@ Your machine must have the following features for Docker Desktop to function cor
 ##### WSL 2 and Windows Home
 
 1. Virtual Machine Platform
-2. [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
-3. [Virtualization enabled in the BIOS](https://support.microsoft.com/en-gb/windows/enable-virtualization-on-windows-c5578302-6e43-4b4b-a449-8ced115f58e1)
+1. [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+1. [Virtualization enabled in the BIOS](https://support.microsoft.com/en-gb/windows/enable-virtualization-on-windows-c5578302-6e43-4b4b-a449-8ced115f58e1)
    Note that many Windows devices already have virtualization enabled, so this may not apply.
-4. Hypervisor enabled at Windows startup
+1. Hypervisor enabled at Windows startup
 
 ![WSL 2 enabled](../../images/wsl2-enabled.png)
 
@@ -411,9 +411,9 @@ On Windows 10 Pro or Enterprise, you can also use Hyper-V with the following fea
 
 1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview)
    installed and working
-2. [Virtualization enabled in the BIOS](https://support.microsoft.com/en-gb/windows/enable-virtualization-on-windows-c5578302-6e43-4b4b-a449-8ced115f58e1)
+1. [Virtualization enabled in the BIOS](https://support.microsoft.com/en-gb/windows/enable-virtualization-on-windows-c5578302-6e43-4b4b-a449-8ced115f58e1)
    Note that many Windows devices already have virtualization enabled, so this may not apply.
-3. Hypervisor enabled at Windows startup
+1. Hypervisor enabled at Windows startup
 
 ![Hyper-V on Windows features](../../images/hyperv-enabled.png)
 
@@ -448,8 +448,8 @@ but not launched during Windows startup. Some tools (such as older versions of
 Virtual Box) and video game installers turn off hypervisor on boot. To turn it back on:
 
 1. Open an administrative console prompt.
-2. Run `bcdedit /set hypervisorlaunchtype auto`.
-3. Restart Windows.
+1. Run `bcdedit /set hypervisorlaunchtype auto`.
+1. Restart Windows.
 
 You can also refer to the [Microsoft TechNet article](https://social.technet.microsoft.com/Forums/en-US/ee5b1d6b-09e2-49f3-a52c-820aafc316f9/hyperv-doesnt-work-after-upgrade-to-windows-10-1809?forum=win10itprovirt) on Code flow guard (CFG) settings.
 
@@ -514,6 +514,6 @@ The user is not part of the `docker-users` group, which is required for permissi
 If your admin account is different to your user account, add it:
 
 1. Run **Computer Management** as an administrator.
-2. Navigate to **Local Users and Groups** > **Groups** > **docker-users**.
-3. Right-click to add the user to the group.
-4. Sign out and sign back in for the changes to take effect
+1. Navigate to **Local Users and Groups** > **Groups** > **docker-users**.
+1. Right-click to add the user to the group.
+1. Sign out and sign back in for the changes to take effect
