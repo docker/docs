@@ -1,6 +1,6 @@
 ---
 title: Kits
-description: Browse curated and community kits or launch a public sandbox kit in Docker Agentic Platform.
+description: Browse sandbox kits, check kit formats and Docker Hub details, or launch a public kit in Docker Agentic Platform.
 keywords: docker agentic platform, kits, community kits, custom kits, docker hub, sandboxes
 weight: 15
 aliases:
@@ -18,16 +18,24 @@ Sandboxes CLI. The **Kits** page provides the command to copy.
 
 ## Browse and run a kit
 
-The catalog includes kits curated by Docker and community kits published on
-Docker Hub. Curated kits include agents such as Claude Code, Codex, Antigravity,
+The catalog opens on v2 kits, matching what `sbx --cloud run <KIT>` launches.
+Kits curated by Docker include agents such as Claude Code, Codex, Antigravity,
 and Hermes, as well as a Shell kit for working without a pre-installed agent.
 
+Each card shows a kit format badge: **v2** or **v3 · Experimental**. When
+available, Docker Hub details include the publisher, pull and star counts,
+last update, architectures, and a security attestations indicator.
+
 1. Open **Kits** in the Console.
-2. Search by name or description. Use **Curated kits** or **Community kits** to
-   filter the catalog, or **All kits** to see both.
+2. Search by name or description.
 3. Select **Run** on a kit to open the sandbox launcher with that kit selected.
 4. Review its credentials, network policies, tools, compute size, and
    timer, then select **Run** in the launcher to create the sandbox.
+
+If your account has the format and community controls enabled, use **Format**
+to switch between **v2 kits** and **v3 kits**. The **Community kits** toggle is
+off by default. Turn it on to include kits from third-party publishers alongside
+Docker's kits in the selected format.
 
 Use a kit's Hub link to open its repository on Docker Hub. For the launch steps,
 see [Get started](get-started.md#start-a-sandbox).
