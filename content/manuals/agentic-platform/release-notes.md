@@ -12,10 +12,8 @@ This marks the experimental public release of Docker Agentic Platform.
 Features and behavior may change. To begin, [activate your subscription](signup.md).
 
 - Added a **Kits** catalog with search, kit format badges, Docker Hub details
-  when available, and links to Docker Hub. The catalog defaults to v2 kits.
-  Accounts with the format and community controls enabled can switch to v3
-  kits and include community kits. Selecting **Run** opens the sandbox launcher
-  with the kit selected.
+  when available, and links to Docker Hub. Selecting **Run** opens the sandbox
+  launcher with the kit selected.
 - Added public kit references in the launcher. Both the kit and its base image
   must be public.
 - Added Hermes and Antigravity as curated kits. Hermes uses Anthropic or
