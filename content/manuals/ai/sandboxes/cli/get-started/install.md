@@ -16,7 +16,7 @@ version 0.45.0 or later for the workflows in these guides.
 
 The operating system and processor requirements apply to the CLI installation.
 Hypervisor and KVM setup is required only to run local sandboxes. For cloud
-account requirements, see [Cloud sandboxes](/manuals/ai/sandboxes/cli/get-started-cloud.md#prerequisites).
+account requirements, see [Cloud sandboxes](/manuals/ai/sandboxes/cli/get-started/cloud.md#prerequisites).
 
 ### macOS
 
@@ -152,5 +152,5 @@ $ sbx login
 The command opens a browser for Docker OAuth. See the [FAQ](/manuals/ai/sandboxes/faq.md) for why
 sign-in is required and how Docker handles your data.
 
-After signing in, [run your first local sandbox](/manuals/ai/sandboxes/cli/get-started-local.md) or
-[get started with cloud sandboxes](/manuals/ai/sandboxes/cli/get-started-cloud.md#get-started).
+After signing in, [run your first local sandbox](/manuals/ai/sandboxes/cli/get-started/local.md) or
+[get started with cloud sandboxes](/manuals/ai/sandboxes/cli/get-started/cloud.md#get-started).

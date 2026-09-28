@@ -192,7 +192,7 @@ The `PROXY` column shows how the request left the sandbox:
 
 | Value            | Description                                                                                                    |
 | ---------------- | -------------------------------------------------------------------------------------------------------------- |
-| `forward`        | Routed through the forward proxy. Supports [credential injection](/manuals/ai/sandboxes/cli/credentials.md).              |
+| `forward`        | Routed through the forward proxy. Supports [credential injection](/manuals/ai/sandboxes/cli/access/credentials-local.md).              |
 | `forward-bypass` | Routed through the forward proxy without credential injection.                                                 |
 | `transparent`    | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.            |
 | `network`        | Non-HTTP traffic. TCP and experimental UDP egress follow network policy. ICMP is blocked. |

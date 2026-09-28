@@ -11,7 +11,7 @@ aliases:
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
 These connection instructions use a local sandbox. For cloud SSH setup, see
-[Connect with SSH](/manuals/ai/sandboxes/cli/cloud-usage.md#connect-with-ssh).
+[Connect with SSH](/manuals/ai/sandboxes/cli/manage/cloud.md#connect-with-ssh).
 
 Use the Remote - SSH extension to open a VS Code window that runs inside a
 sandbox. Your editor stays on your host while files, terminals, and extensions
@@ -19,7 +19,7 @@ run in the isolated sandbox.
 
 ## Prerequisites
 
-- SSH access set up. See [Editor and app integrations](/manuals/ai/sandboxes/cli/integrations/_index.md#enable-ssh-access).
+- SSH access set up. See [Editor and app integrations](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md#enable-ssh-access).
 - The [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
   extension (`ms-vscode-remote.remote-ssh`) installed in VS Code.
 
@@ -34,7 +34,7 @@ $ ssh demo.sbx
 In VS Code, open the Command Palette and run **Remote-SSH: Connect to Host...**.
 Enter the sandbox hostname, such as `demo.sbx`, manually. After VS Code
 connects, use the remote folder picker to
-[select the mounted workspace](/manuals/ai/sandboxes/cli/integrations/_index.md#select-the-workspace-folder).
+[select the mounted workspace](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md#select-the-workspace-folder).
 
 For more connection options, see the VS Code instructions to
 [connect to a remote host](https://code.visualstudio.com/docs/remote/ssh#_connect-to-a-remote-host).
@@ -89,5 +89,5 @@ Reconnect to the sandbox from VS Code.
 
 ## Related
 
-- [Editor and app integrations](/manuals/ai/sandboxes/cli/integrations/_index.md) — how SSH access works and how to
+- [Editor and app integrations](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md) — how SSH access works and how to
   set it up

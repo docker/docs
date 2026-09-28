@@ -2,7 +2,7 @@
 title: Connect MCP servers
 description: Register MCP servers, authorize OAuth-backed servers, and connect MCP tools to Docker Sandboxes.
 keywords: docker sandboxes, sbx, MCP gateway, Model Context Protocol, MCP servers, sbx mcp, static MCP, OAuth
-weight: 80
+weight: 60
 aliases:
   - /ai/sandboxes/mcp-gateway/
 linkTitle: Connect MCP servers
@@ -21,7 +21,7 @@ command for your environment.
 ## Cloud sandbox setup
 
 You need cloud access and a running sandbox. If you haven't created one,
-follow the [cloud CLI quickstart](/manuals/ai/sandboxes/cli/get-started-cloud.md).
+follow the [cloud CLI quickstart](/manuals/ai/sandboxes/cli/get-started/cloud.md).
 
 1. Open Docker Agentic Platform with the same Docker account used by `sbx`.
 2. Open **MCP**, choose a predefined server or add a server by URL, and
@@ -151,7 +151,7 @@ $ sbx secret set mcp:acme:api-key
 
 Replace the example URL with your MCP endpoint. The `sbx secret set` command
 prompts for the API key and stores it in the
-[host credential store](/manuals/ai/sandboxes/cli/credentials.md#where-secrets-are-stored).
+[host credential store](/manuals/ai/sandboxes/cli/access/credentials-local.md#where-secrets-are-stored).
 The `${api-key}` placeholder stays in the registration. When a sandbox
 connects, the gateway reads the secret and substitutes its value in the header.
 Use single quotes around header values so your shell preserves placeholders.

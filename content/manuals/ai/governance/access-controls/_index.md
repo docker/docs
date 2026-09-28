@@ -14,7 +14,7 @@ and filesystem rule format.
 
 ## Policy scope
 
-- [Local policy](/manuals/ai/sandboxes/cli/network-local.md): configure network rules on a developer machine with
+- [Local policy](/manuals/ai/sandboxes/cli/access/network-local.md): configure network rules on a developer machine with
   the `sbx policy` CLI.
 - [Organization policies](/manuals/ai/governance/access-controls/organization.md): manage centralized policies for an
   organization or team.

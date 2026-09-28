@@ -19,8 +19,8 @@ Cloud sandbox account policies are personal controls, separate from this
 organization governance. Delivering local audit records to the cloud does not
 extend governance to cloud sandboxes.
 
-For developer tasks, use [local CLI policies](/manuals/ai/sandboxes/cli/network-local.md)
-or [cloud CLI policies](/manuals/ai/sandboxes/cli/network-cloud.md). See
+For developer tasks, use [local CLI policies](/manuals/ai/sandboxes/cli/access/network-local.md)
+or [cloud CLI policies](/manuals/ai/sandboxes/cli/access/network-cloud.md). See
 [Network access and policies](/manuals/ai/sandboxes/concepts/network.md) for the
 relationship between personal controls and organization enforcement.
 

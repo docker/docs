@@ -1,7 +1,7 @@
 ---
 title: Editor and app integrations
-linkTitle: Integrations
-weight: 120
+linkTitle: Editors and apps
+weight: 40
 description: Connect editors and desktop apps to a Docker Sandbox over SSH.
 keywords: docker sandboxes, ssh, integrations, vs code, cursor, remote development, sbx
 aliases:
@@ -12,7 +12,7 @@ aliases:
 
 These integrations use local sandbox SSH access. Cloud sandboxes use a
 different SSH configuration and address: see
-[Connect with SSH](/manuals/ai/sandboxes/cli/cloud-usage.md#connect-with-ssh).
+[Connect with SSH](/manuals/ai/sandboxes/cli/manage/cloud.md#connect-with-ssh).
 
 You can connect an external editor or desktop app to a running sandbox over
 SSH. This lets you use the tools you already know — VS Code, Cursor, Claude
@@ -25,7 +25,7 @@ that supports remote development over SSH can connect to it.
 
 ## Prerequisites
 
-- The `sbx` CLI installed and signed in. See [Get started](/manuals/ai/sandboxes/cli/get-started-local.md).
+- The `sbx` CLI installed and signed in. See [Get started](/manuals/ai/sandboxes/cli/get-started/local.md).
 - An SSH client. macOS and most Linux distributions include OpenSSH. On
   Windows, install the OpenSSH client.
 - The editor or app you want to connect, with its remote-over-SSH support
@@ -83,11 +83,11 @@ a mountless sandbox that uses a Docker-provided agent template, select
 
 ## Connect a specific tool
 
-- [VS Code](/manuals/ai/sandboxes/cli/integrations/vscode.md)
-- [Cursor](/manuals/ai/sandboxes/cli/integrations/cursor.md)
-- [Claude Desktop](/manuals/ai/sandboxes/cli/integrations/claude-desktop.md)
-- [ChatGPT](/manuals/ai/sandboxes/cli/integrations/chatgpt.md)
-- [T3 Code](/manuals/ai/sandboxes/cli/integrations/t3-code.md)
+- [VS Code](/manuals/ai/sandboxes/cli/workflows/integrations/vscode.md)
+- [Cursor](/manuals/ai/sandboxes/cli/workflows/integrations/cursor.md)
+- [Claude Desktop](/manuals/ai/sandboxes/cli/workflows/integrations/claude-desktop.md)
+- [ChatGPT](/manuals/ai/sandboxes/cli/workflows/integrations/chatgpt.md)
+- [T3 Code](/manuals/ai/sandboxes/cli/workflows/integrations/t3-code.md)
 
 ## How SSH connections work
 

@@ -19,7 +19,7 @@ credentials, and other sandbox behavior. A kit set uses the base image from its
 workload.
 
 To save and reuse an environment you've configured interactively, see
-[Save a sandbox as a template](/manuals/ai/sandboxes/cli/usage.md#saving-a-sandbox-as-a-template).
+[Save a sandbox as a template](/manuals/ai/sandboxes/cli/manage/local.md#saving-a-sandbox-as-a-template).
 
 ## Docker-provided images
 

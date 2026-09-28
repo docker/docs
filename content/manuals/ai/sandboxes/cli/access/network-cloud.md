@@ -3,7 +3,7 @@ title: Manage cloud network policy
 linkTitle: Cloud network access
 description: Control outbound connections from Docker cloud sandboxes with account-level and sandbox-level allow and deny network rules.
 keywords: docker sandboxes, cloud network policy, sbx cloud, allow network, deny network
-weight: 65
+weight: 50
 aliases:
   - /ai/sandboxes/cloud/network-policy/
 ---

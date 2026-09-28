@@ -6,7 +6,7 @@
       "product": "Docker Sandboxes",
       "title": "Run sandboxes on Docker-managed cloud infrastructure",
       "description": "Create and manage cloud sandboxes with the sbx CLI, including cloud-specific credentials, network policies, lifecycle controls, and transfers between local and cloud environments.",
-      "url": "/ai/sandboxes/cli/get-started-cloud/",
+      "url": "/ai/sandboxes/cli/get-started/cloud/",
       "published": "2026-09-24",
       "source_prs": [26142, 26157, 26158, 26181],
       "featured": true
@@ -51,7 +51,7 @@
       "product": "Docker Sandboxes",
       "title": "Run agents without mounting host files",
       "description": "Create a sandbox without a host workspace mount. Keep agent files inside the sandbox across stops and restarts, and copy files between the sandbox and host when needed.",
-      "url": "/ai/sandboxes/cli/usage/#choose-a-workspace",
+      "url": "/ai/sandboxes/cli/manage/local/#choose-a-workspace",
       "published": "2026-09-07",
       "source_prs": [25902, 26032],
       "featured": false

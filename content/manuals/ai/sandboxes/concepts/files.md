@@ -18,8 +18,8 @@ clone and leaves the source repository mounted read-only.
 
 Deleting the sandbox removes files stored only inside it. Host files remain.
 Fetch or push work from a private clone before deleting its sandbox. See
-[CLI workspace modes](/manuals/ai/sandboxes/cli/usage.md#git-workspace-modes) and
-[Git workflows](/manuals/ai/sandboxes/cli/git.md).
+[CLI workspace modes](/manuals/ai/sandboxes/cli/manage/local.md#git-workspace-modes) and
+[Git workflows](/manuals/ai/sandboxes/cli/workflows/git.md).
 
 ## Cloud files
 
@@ -27,7 +27,7 @@ Cloud sandboxes do not mount your local directories. Copy files into a sandbox
 or clone a repository there. A copy is a point-in-time transfer, not ongoing
 synchronization. Push commits or copy results out before deleting the sandbox.
 
-Use [CLI file transfers](/manuals/ai/sandboxes/cli/cloud-usage.md#transfer-files),
+Use [CLI file transfers](/manuals/ai/sandboxes/cli/manage/cloud.md#transfer-files),
 [Console files](/manuals/ai/sandboxes/console/sandboxes.md#source-code-and-files), or the
 [SDK cookbook](/manuals/ai/sandboxes/api/cookbook/_index.md).
 
@@ -44,7 +44,7 @@ process resumption.
 
 Experimental cloud volumes store data independently of one sandbox. The CLI
 workflow saves their data at sandbox exit. Concurrent writers can overwrite
-each other's snapshots. See [Cloud volumes](/manuals/ai/sandboxes/cli/cloud-usage.md#use-persistent-volumes)
+each other's snapshots. See [Cloud volumes](/manuals/ai/sandboxes/cli/manage/cloud.md#use-persistent-volumes)
 before using a volume for shared data.
 
 See [Lifecycle and persistence](/manuals/ai/sandboxes/concepts/lifecycle.md) for how stopping, resuming, and

@@ -370,7 +370,7 @@ secret values remain outside the environment file.
 ### Use a cloud environment
 
 Use `sbx --cloud env` to manage a cloud sandbox from an environment file. For
-account and CLI requirements, see [Cloud sandboxes](/manuals/ai/sandboxes/cli/get-started-cloud.md).
+account and CLI requirements, see [Cloud sandboxes](/manuals/ai/sandboxes/cli/get-started/cloud.md).
 
 Save this as `cloud.sbxenv.yaml`:
 
@@ -397,7 +397,7 @@ $ sbx --cloud env exec ./cloud.sbxenv.yaml -- printenv PROJECT_NAME
 
 Cloud environments support agents and kits, environment variables, CPU and
 memory limits, credentials for supported providers, and host lifecycle commands.
-Resource limits must match a [cloud size](/manuals/ai/sandboxes/cli/cloud-usage.md#choose-resources-and-platform).
+Resource limits must match a [cloud size](/manuals/ai/sandboxes/cli/manage/cloud.md#choose-resources-and-platform).
 Lifecycle commands still run on your machine with your privileges.
 
 Remove `workspace`, `additionalWorkspaces`, clone options, `ports`, `registries`,
@@ -405,7 +405,7 @@ and MCP server definitions from a local file before using it in cloud mode.
 Cloud environments also reject local sandbox options such as GPU, USB,
 display, shared skills, templates, and governance profiles. These checks run
 before host commands or provisioning. Transfer project files with
-[`sbx --cloud cp`](/manuals/ai/sandboxes/cli/cloud-usage.md#transfer-files) or clone a repository inside
+[`sbx --cloud cp`](/manuals/ai/sandboxes/cli/manage/cloud.md#transfer-files) or clone a repository inside
 the sandbox.
 
 The plan shows inherited cloud credentials. Sandbox-scoped credentials override
@@ -778,7 +778,7 @@ registries:
 ### `mcp`
 
 The `mcp.servers` list registers servers with the built-in
-[MCP gateway](/manuals/ai/sandboxes/cli/mcp.md) and adds them to the sandbox. MCP registrations
+[MCP gateway](/manuals/ai/sandboxes/cli/access/mcp.md) and adds them to the sandbox. MCP registrations
 are host-global and remain after `sbx env rm`.
 
 | Field     | Type            | Required | Default | Description                                                     |

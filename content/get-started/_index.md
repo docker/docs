@@ -13,7 +13,7 @@ params:
     - eyebrow: Docker Sandboxes
       title: Install Docker Sandboxes
       description: Install the sbx command to run coding agents in isolated environments.
-      link: /ai/sandboxes/cli/install/
+      link: /ai/sandboxes/cli/get-started/install/
   tutorials:
     - audience: New to Docker
       title: Build and share a containerized application

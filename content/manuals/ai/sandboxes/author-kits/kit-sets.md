@@ -32,7 +32,7 @@ To package a tool of your own, see
 
 You can try a workload and mixins together with `sbx run` and `--kit`
 before composing a set. See
-[Add mixins](/manuals/ai/sandboxes/cli/kits.md#add-mixins).
+[Add mixins](/manuals/ai/sandboxes/cli/customize/kits.md#add-mixins).
 If one kit depends on another, Docker Sandboxes applies the dependency first.
 Changing the order of `--kit` flags or entries in a set doesn't change that
 order.
@@ -86,7 +86,7 @@ capabilities:
 Replace the example domain with your registry's host. The rule permits access
 as long as the sandbox's policy allows it. If the registry also requires
 authentication, add a credential request. See
-[Services declared by kits](/manuals/ai/sandboxes/cli/credentials.md#services-declared-by-kits).
+[Services declared by kits](/manuals/ai/sandboxes/cli/access/credentials-local.md#services-declared-by-kits).
 
 Keep access required by a tool in that tool's kit, so its access rules follow
 it when used with another workload. Put settings shared by the combined
@@ -142,7 +142,7 @@ $ sbx run <WORKLOAD_REFERENCE> --kit <SET_REFERENCE> --name my-project
 Authentication depends on the kits in the set. Check their documentation for
 required credentials, store those credentials on the host, and approve access
 when prompted. See
-[Credential configuration](/manuals/ai/sandboxes/cli/credentials.md)
+[Credential configuration](/manuals/ai/sandboxes/cli/access/credentials-local.md)
 for authentication options and preparing unattended runs.
 
 To control the agent's base image or launch command, see

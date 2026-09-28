@@ -11,7 +11,7 @@ aliases:
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
 These connection instructions use a local sandbox. For cloud SSH setup, see
-[Connect with SSH](/manuals/ai/sandboxes/cli/cloud-usage.md#connect-with-ssh).
+[Connect with SSH](/manuals/ai/sandboxes/cli/manage/cloud.md#connect-with-ssh).
 
 Connect the ChatGPT desktop app to a sandbox over SSH so Codex works inside the
 isolated environment instead of on your host.
@@ -23,7 +23,7 @@ isolated environment instead of on your host.
 
 ## Prerequisites
 
-- SSH access set up. See [Editor and app integrations](/manuals/ai/sandboxes/cli/integrations/_index.md#enable-ssh-access).
+- SSH access set up. See [Editor and app integrations](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md#enable-ssh-access).
 - The ChatGPT desktop app installed.
 
 ChatGPT's remote server requires the `codex` command in the sandbox. The Codex
@@ -47,7 +47,7 @@ $ ssh demo.sbx
 In the ChatGPT desktop app, open **Settings > Connections** and add an SSH
 connection manually. Enter the sandbox hostname, such as `demo.sbx`, as the
 host, then use the remote folder picker to
-[select the mounted workspace](/manuals/ai/sandboxes/cli/integrations/_index.md#select-the-workspace-folder) as the
+[select the mounted workspace](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md#select-the-workspace-folder) as the
 remote project.
 
 For more connection options, see the OpenAI instructions to
@@ -68,6 +68,6 @@ that return after reconnecting can indicate a
 
 ## Related
 
-- [Editor and app integrations](/manuals/ai/sandboxes/cli/integrations/_index.md) — how SSH access works and how to
+- [Editor and app integrations](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md) — how SSH access works and how to
   set it up
 - [Codex](/manuals/ai/sandboxes/agents/codex.md) — run the Codex CLI inside a sandbox

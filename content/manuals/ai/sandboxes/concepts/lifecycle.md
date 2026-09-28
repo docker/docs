@@ -22,7 +22,7 @@ because its interface offers a stop or pause action. See the
 [API reference](/reference/api/sandboxes/latest/) for the stop and start contract.
 
 For local sandboxes, stopping retains filesystem changes. Follow the
-[local lifecycle instructions](/manuals/ai/sandboxes/cli/usage.md#start-stop-and-remove) to start
+[local lifecycle instructions](/manuals/ai/sandboxes/cli/manage/local.md#start-stop-and-remove) to start
 the agent again.
 
 ## Disk and other stored data
@@ -58,7 +58,7 @@ workflow. It requires deletion at expiration, which saves the volume snapshot.
 Inspect the expiration after resuming a cloud sandbox. Follow your interface's
 instructions for configuring or extending its timer:
 
-- [CLI expiration](/manuals/ai/sandboxes/cli/cloud-usage.md#configure-expiration)
+- [CLI expiration](/manuals/ai/sandboxes/cli/manage/cloud.md#configure-expiration)
 - [Console lifecycle](/manuals/ai/sandboxes/console/sandboxes.md#manage-the-lifecycle)
 - [SDK stop and restart](/manuals/ai/sandboxes/api/cookbook/stop-and-restart-a-sandbox.md)
 

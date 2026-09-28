@@ -29,7 +29,7 @@ $ cd ~/my-project
 $ sbx run opencode
 ```
 
-To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/manage/local.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
 OpenCode launches a TUI (text user interface) where you can select your
@@ -38,7 +38,7 @@ preferred LLM provider and interact with the agent.
 ## Authentication
 
 OpenCode supports multiple providers. Store keys for the providers you want to
-use with [stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
+use with [stored secrets](/manuals/ai/sandboxes/cli/access/credentials-local.md#stored-secrets):
 
 ```console
 $ sbx secret set openai
@@ -56,7 +56,7 @@ available credentials and offers those providers in the TUI.
 ### GitHub Copilot
 
 To use GitHub Copilot models in OpenCode, configure a
-[GitHub credential](/manuals/ai/sandboxes/cli/credentials.md#github-token) for an
+[GitHub credential](/manuals/ai/sandboxes/cli/access/credentials-local.md#github-token) for an
 account with Copilot access. When OpenCode starts, Docker Sandboxes configures
 its GitHub Copilot provider using that credential. You don't need a separate
 device login inside OpenCode.
@@ -65,7 +65,7 @@ device login inside OpenCode.
 
 OpenCode Zen API keys aren't part of the built-in OpenCode credentials that
 `sbx secret set` supports. To use an OpenCode Zen API key, store it as a
-[custom secret](/manuals/ai/sandboxes/cli/credentials.md#custom-secrets):
+[custom secret](/manuals/ai/sandboxes/cli/access/credentials-local.md#custom-secrets):
 
 Set the `OPENCODE_API_KEY` environment variable on the host, then store it:
 

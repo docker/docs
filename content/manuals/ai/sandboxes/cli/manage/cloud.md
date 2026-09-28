@@ -2,7 +2,7 @@
 title: Use cloud sandboxes
 description: Create and manage Docker cloud sandboxes with the sbx CLI, including file transfer, commands, ports, storage, and lifecycle controls.
 keywords: docker sandboxes, cloud sandbox, sbx cloud, cloud ports, sandbox ttl
-weight: 45
+weight: 20
 aliases:
   - /ai/sandboxes/cloud/usage/
 linkTitle: Cloud operations
@@ -20,7 +20,7 @@ stops sandboxes that can be resumed and deletes the rest. See
 before creating it.
 
 Credentials saved for local sandboxes aren't available in cloud sandboxes.
-[Configure a cloud credential](/manuals/ai/sandboxes/cli/credentials-cloud.md) before launching an agent.
+[Configure a cloud credential](/manuals/ai/sandboxes/cli/access/credentials-cloud.md) before launching an agent.
 
 Create a sandbox and attach to its agent, or reuse the named sandbox if it
 already exists:
@@ -81,7 +81,7 @@ other resource. Unsupported combinations are rejected.
 
 Use `--platform linux/amd64` or `--platform linux/arm64` to select an
 architecture supported by your account. This matters when you plan to
-[move the sandbox to your machine](/manuals/ai/sandboxes/cli/move.md): the architectures must match.
+[move the sandbox to your machine](/manuals/ai/sandboxes/cli/manage/move.md): the architectures must match.
 
 ## Run without attaching
 
@@ -147,8 +147,8 @@ $ sbx --cloud cp cloud-project:/home/agent/workspace/result.json ./result.json
 Copying creates a point-in-time transfer. It doesn't mount or synchronize the
 local path. For source control workflows, you can also clone a remote
 repository from inside the sandbox and push changes to the remote. Configure
-[cloud credentials](/manuals/ai/sandboxes/cli/credentials-cloud.md) before creating a sandbox that needs access
-to a private repository. The [cloud walkthrough](/manuals/ai/sandboxes/cli/get-started-cloud.md#get-started) shows a
+[cloud credentials](/manuals/ai/sandboxes/cli/access/credentials-cloud.md) before creating a sandbox that needs access
+to a private repository. The [cloud walkthrough](/manuals/ai/sandboxes/cli/get-started/cloud.md#get-started) shows a
 public repository example.
 
 ## Expose a port
@@ -286,19 +286,19 @@ directly instead, use `--image-ref` with explicit CPU and memory values.
 
 Snapshots include credentials written to the sandbox filesystem. Remove those
 credentials before saving a template. Managed cloud secrets stay in the secret
-store. See [Authenticate cloud agents](/manuals/ai/sandboxes/cli/credentials-cloud.md).
+store. See [Authenticate cloud agents](/manuals/ai/sandboxes/cli/access/credentials-cloud.md).
 
 Cloud sandboxes also support sandbox kits and `--kit` mixins. See
 [Kits](/manuals/ai/sandboxes/concepts/kits.md) for customization and
-[Local and cloud differences](/manuals/ai/sandboxes/cli/local-vs-cloud.md) for host-dependent features.
-Configure [cloud credentials](/manuals/ai/sandboxes/cli/credentials-cloud.md) before adapting a local kit.
+[Local and cloud differences](/manuals/ai/sandboxes/cli/get-started/local-vs-cloud.md) for host-dependent features.
+Configure [cloud credentials](/manuals/ai/sandboxes/cli/access/credentials-cloud.md) before adapting a local kit.
 
 To declare reusable cloud configuration in a file, see
-[Use a cloud environment](/manuals/ai/sandboxes/cli/environment-files.md#use-a-cloud-environment).
+[Use a cloud environment](/manuals/ai/sandboxes/cli/customize/environment-files.md#use-a-cloud-environment).
 
 ## Load an MCP server
 
-Use [Connect MCP servers](/manuals/ai/sandboxes/cli/mcp.md) for cloud account setup, authorization,
+Use [Connect MCP servers](/manuals/ai/sandboxes/cli/access/mcp.md) for cloud account setup, authorization,
 loading a server into a running sandbox, and inspecting the gateway.
 
 ## Diagnose cloud access

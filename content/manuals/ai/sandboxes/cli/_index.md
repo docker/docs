@@ -11,33 +11,24 @@ settings remain local.
 
 ## Get started
 
-[Install and sign in](/manuals/ai/sandboxes/cli/install.md), then follow the
-[local quickstart](/manuals/ai/sandboxes/cli/get-started-local.md) or the
-[cloud quickstart](/manuals/ai/sandboxes/cli/get-started-cloud.md).
+[Install the CLI and run your first sandbox](/manuals/ai/sandboxes/cli/get-started/_index.md).
+The quickstarts cover local and cloud setup separately.
 
 ## Manage your work
 
-| Task | Guide |
+Choose the task you want to complete:
+
+| Task | Section |
 | --- | --- |
-| Create, stop, and remove sandboxes | [Manage sandboxes](/manuals/ai/sandboxes/cli/manage.md) |
-| Run commands, use workspaces, and save templates locally | [Local operations](/manuals/ai/sandboxes/cli/usage.md) |
-| Transfer files, expose services, and manage cloud expiration | [Cloud operations](/manuals/ai/sandboxes/cli/cloud-usage.md) |
-| Configure credentials | [Local credentials](/manuals/ai/sandboxes/cli/credentials.md) and [cloud credentials](/manuals/ai/sandboxes/cli/credentials-cloud.md) |
-| Configure network access | [Local policies](/manuals/ai/sandboxes/cli/network-local.md) and [cloud policies](/manuals/ai/sandboxes/cli/network-cloud.md) |
-| Connect tools | [MCP servers](/manuals/ai/sandboxes/cli/mcp.md) |
-| Apply reusable environments | [Kits and mixins](/manuals/ai/sandboxes/cli/kits.md) and [environment files](/manuals/ai/sandboxes/cli/environment-files.md) |
-| Transfer sandbox state | [Move between local and cloud](/manuals/ai/sandboxes/cli/move.md) |
+| Create sandboxes, run commands, transfer files, and manage state | [Run and manage](/manuals/ai/sandboxes/cli/manage/_index.md) |
+| Set credentials, control network access, and connect MCP tools | [Access and connections](/manuals/ai/sandboxes/cli/access/_index.md) |
+| Apply kits and reusable project configuration | [Customize environments](/manuals/ai/sandboxes/cli/customize/_index.md) |
+| Work with Git, develop applications, connect editors, and automate jobs | [Development workflows](/manuals/ai/sandboxes/cli/workflows/_index.md) |
+| Configure host settings, models, skills, GPUs, and proxies | [Local configuration](/manuals/ai/sandboxes/cli/local/_index.md) |
 
 ## Configure your workflow
 
-Use [Git workflows](/manuals/ai/sandboxes/cli/git.md), [local development](/manuals/ai/sandboxes/cli/development.md),
-[authenticated command-line tools](/manuals/ai/sandboxes/cli/authentication.md), or
-[automation](/manuals/ai/sandboxes/cli/automation.md) for complete workflows. Connect an editor through
-[integrations](/manuals/ai/sandboxes/cli/integrations/_index.md).
-
-[Local configuration](/manuals/ai/sandboxes/cli/local/_index.md) covers model endpoints, agent skills,
-GPU passthrough, upstream proxies, and registry mirrors.
-
-For unsupported options and host dependencies, see
-[Local and cloud differences](/manuals/ai/sandboxes/cli/local-vs-cloud.md). To diagnose a problem, use
-[Troubleshooting](/manuals/ai/sandboxes/cli/troubleshooting.md).
+[Local and cloud differences](/manuals/ai/sandboxes/cli/get-started/local-vs-cloud.md)
+lists unsupported options and host dependencies. Use
+[Troubleshooting](/manuals/ai/sandboxes/cli/troubleshooting.md) to diagnose a
+problem, or the [`sbx` reference](/reference/cli/sbx/) to look up a command.

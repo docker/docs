@@ -11,7 +11,7 @@ aliases:
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
 These connection instructions use a local sandbox. For cloud SSH setup, see
-[Connect with SSH](/manuals/ai/sandboxes/cli/cloud-usage.md#connect-with-ssh).
+[Connect with SSH](/manuals/ai/sandboxes/cli/manage/cloud.md#connect-with-ssh).
 
 T3 Code's SSH integration lets the desktop app drive coding agents inside a
 sandbox. T3 Code has no dedicated Docker Sandboxes integration — it treats the
@@ -20,7 +20,7 @@ that tunnels back to the app.
 
 ## Prerequisites
 
-- SSH access set up. See [Editor and app integrations](/manuals/ai/sandboxes/cli/integrations/_index.md#enable-ssh-access).
+- SSH access set up. See [Editor and app integrations](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md#enable-ssh-access).
 - T3 Code installed.
 
 The first connection installs the T3 server in the sandbox, which needs a
@@ -71,7 +71,7 @@ the sandbox unless the `t3code` kit pre-installed it, so it can take a
 moment. Later connections are faster.
 
 Then add a new project, select the SSH environment from the list, and
-[choose the mounted workspace](/manuals/ai/sandboxes/cli/integrations/_index.md#select-the-workspace-folder) as the
+[choose the mounted workspace](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md#select-the-workspace-folder) as the
 project directory inside the sandbox.
 
 ## Troubleshoot a server that never becomes ready
@@ -159,5 +159,5 @@ so Full access works normally there.
 
 ## Related
 
-- [Editor and app integrations](/manuals/ai/sandboxes/cli/integrations/_index.md) — how SSH access works and how to
+- [Editor and app integrations](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md) — how SSH access works and how to
   set it up

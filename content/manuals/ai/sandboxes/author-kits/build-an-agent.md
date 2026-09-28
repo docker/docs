@@ -329,7 +329,7 @@ Use `contentFile`, as in this example, to keep longer instructions in a
 separate Markdown file. You can also write instructions directly in the
 workload's descriptor using `content` instead of `contentFile`.
 For how instructions from multiple kits work together, see
-[Runtime access and instructions](/manuals/ai/sandboxes/cli/kits.md#runtime-access-and-instructions).
+[Runtime access and instructions](/manuals/ai/sandboxes/cli/customize/kits.md#runtime-access-and-instructions).
 
 ## Store the key and run
 
@@ -350,7 +350,7 @@ launches Claude Code. To work on another project, append its path to the command
 When prompted, approve the kit's request to use your stored key, then follow
 Claude Code's first-run prompts. The agent needs both the stored key and your
 approval to use it. See
-[Credential bindings](/manuals/ai/sandboxes/cli/credentials.md#credential-bindings).
+[Credential bindings](/manuals/ai/sandboxes/cli/access/credentials-local.md#credential-bindings).
 
 Choose a different model when creating a sandbox:
 

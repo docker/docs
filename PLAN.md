@@ -59,22 +59,29 @@ Docker Sandboxes
     One page per supported agent
     Shell
   Use the CLI
-    Install and sign in
-    Get started locally
-    Get started in the cloud
-    Create and manage sandboxes
-    Run commands and attach sessions
-    Work with files and repositories
-    Configure credentials
-    Configure network access
-    Connect MCP servers
-    Use kits and mixins
-    Use environment files
-    Expose services
-    Manage storage and templates
-    Move between local and cloud
-    Automate sandbox workflows
-    Connect editors and applications
+    Get started
+      Install and sign in
+      Get started locally
+      Get started in the cloud
+      Local and cloud differences
+    Run and manage
+      Create, stop, resume, and remove sandboxes
+      Local operations: commands, workspaces, ports, and templates
+      Cloud operations: files, ports, storage, and expiration
+      Move between local and cloud
+    Access and connections
+      Local and cloud credentials
+      Authenticate command-line tools
+      Local and cloud network access
+      Connect MCP servers
+    Customize environments
+      Use kits and mixins
+      Use environment files
+    Development workflows
+      Work with Git repositories
+      Develop and test applications
+      Automate sandbox workflows
+      Connect editors and applications
     Local configuration
       Runtime settings and model providers
       Agent skills
@@ -137,7 +144,7 @@ Proposed source roots:
 | Console tasks | `content/manuals/ai/sandboxes/console/` |
 | API and SDK guides | `content/manuals/ai/sandboxes/api/` |
 | Kit authoring | `content/manuals/ai/sandboxes/author-kits/` |
-| Shared cloud account guidance | `content/manuals/ai/sandboxes/cloud/` |
+| Shared cloud account guidance | `content/manuals/ai/sandboxes/cli/get-started/cloud.md` |
 | Organization administration | `content/manuals/ai/governance/` |
 
 The proposed API root overlaps historical aliases such as
@@ -152,8 +159,8 @@ The baseline contains 135 Markdown pages, including section indexes:
 | Source | Pages | Migration role |
 | --- | ---: | --- |
 | `content/manuals/ai/sandboxes/` | 80 | Split shared concepts, CLI tasks, agent guides, authoring, and administration |
-| `content/manuals/agentic-platform/` | 10 | Console procedures plus shared cloud account information |
-| `content/manuals/ai/sandboxes-api/` | 45 | Docs-owned guides and an imported cookbook |
+| `content/manuals/ai/sandboxes/console/_index.md` | 10 | Console procedures plus shared cloud account information |
+| `content/manuals/ai/sandboxes/api/_index.md` | 45 | Docs-owned guides and an imported cookbook |
 
 The sandbox section includes 20 governance pages, six cloud CLI pages, ten kit
 pages, and 12 agent pages. The SDK cookbook contains 36 imported recipes and a
@@ -218,8 +225,9 @@ docs-owned redirect mechanism and verify its generated output.
 
 The cookbook index and the SDK overview, installation, authentication, concepts,
 errors, and limits pages are docs-owned. Keep generated API reference routes
-under `content/reference/`; `hack/api-docs/sources.json` and its renderer manage
-those outputs. Likewise, link to CLI reference rather than relocating generated
+under `content/reference/`; `hack/api-docs/sources.json` defines their manual
+links. Regenerate and commit `data/api-reference.json` when that manifest
+changes; site builds use the committed presentation data. Likewise, link to CLI reference rather than relocating generated
 pages or editing their YAML to make this migration work. The `sbx` renderer uses
 `data/sbx_cli/`; inspect its source workflow if reference changes become needed.
 Do not edit `_vendor/`, `data/cli/`, or the vendored Governance API spec.

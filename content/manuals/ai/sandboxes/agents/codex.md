@@ -32,8 +32,8 @@ For account-scoped OpenAI OAuth instead of an API key, use
 `sbx --cloud secret set openai --oauth` before launching the sandbox.
 
 Cloud sandboxes do not mount your host project directory. Copy files or clone a
-repository into the sandbox. See [Cloud operations](/manuals/ai/sandboxes/cli/cloud-usage.md) and
-[Cloud credentials](/manuals/ai/sandboxes/cli/credentials-cloud.md) for the supported workflow.
+repository into the sandbox. See [Cloud operations](/manuals/ai/sandboxes/cli/manage/cloud.md) and
+[Cloud credentials](/manuals/ai/sandboxes/cli/access/credentials-cloud.md) for the supported workflow.
 
 The setup and host configuration instructions that follow apply to local
 sandboxes.
@@ -53,7 +53,7 @@ $ cd ~/my-project
 $ sbx run codex
 ```
 
-To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/manage/local.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
 ## Authentication
@@ -75,13 +75,13 @@ in your OS keychain. The OAuth flow runs on the host, not inside the sandbox,
 so browser-based authentication works without any extra setup.
 
 **API key**: Store your OpenAI API key using
-[stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
+[stored secrets](/manuals/ai/sandboxes/cli/access/credentials-local.md#stored-secrets):
 
 ```console
 $ sbx secret set openai
 ```
 
-See [Credentials](/manuals/ai/sandboxes/cli/credentials.md) for more details.
+See [Credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md) for more details.
 
 ## Model selection
 

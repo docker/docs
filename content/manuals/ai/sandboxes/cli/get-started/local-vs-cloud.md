@@ -3,7 +3,7 @@ title: Compare local and cloud sandboxes
 linkTitle: Local and cloud
 description: Compare local and cloud Docker Sandboxes, including workspaces, host integrations, ports, secrets, storage, and lifecycle behavior.
 keywords: docker sandboxes, local sandbox, cloud sandbox, sbx cloud, comparison
-weight: 150
+weight: 40
 aliases:
   - /ai/sandboxes/cloud/local-vs-cloud/
 ---
@@ -27,7 +27,7 @@ choose an environment and identify workflows that need cloud-specific setup.
 | Billing | No metered sandbox compute charge | [Pay-as-you-go compute](/manuals/ai/sandboxes/cloud-access/_index.md#billing) |
 
 If your workflow runs Docker inside the sandbox, review the
-[Docker exec and healthcheck limitation](/manuals/ai/sandboxes/cli/cloud-usage.md#docker-exec-and-healthchecks).
+[Docker exec and healthcheck limitation](/manuals/ai/sandboxes/cli/manage/cloud.md#docker-exec-and-healthchecks).
 It can affect container setup, debugging, and Compose service readiness.
 
 ## Host-dependent features
@@ -44,7 +44,7 @@ following local features don't apply in cloud mode:
 
 The CLI rejects local-only flags used with `--cloud` instead of ignoring them.
 
-You can use [environment files](/manuals/ai/sandboxes/cli/environment-files.md#use-a-cloud-environment)
+You can use [environment files](/manuals/ai/sandboxes/cli/customize/environment-files.md#use-a-cloud-environment)
 with `sbx --cloud env`. Cloud environments support a subset of the local
 configuration fields, including agents, environment variables, resource limits,
 and credentials. Remove host workspace and port mappings before using a local
@@ -57,14 +57,14 @@ Adding `--cloud` changes the backend for the command. A sandbox shown by
 backend don't automatically become available to the other.
 
 This separation applies to sandboxes, templates, secrets, volumes, and network
-policy. Use [`sbx move`](/manuals/ai/sandboxes/cli/move.md) when you need to copy a sandbox filesystem
+policy. Use [`sbx move`](/manuals/ai/sandboxes/cli/manage/move.md) when you need to copy a sandbox filesystem
 between backends. Moving doesn't unify the resource stores or transfer
 host-mounted files or managed secrets. Credentials saved in copied files can
 still travel with the sandbox.
 
 ## Network policy differences
 
-Configure and verify [cloud network policy](/manuals/ai/sandboxes/cli/network-cloud.md) separately.
+Configure and verify [cloud network policy](/manuals/ai/sandboxes/cli/access/network-cloud.md) separately.
 Moving a sandbox doesn't carry its local policy configuration into the cloud.
 The cloud CLI supports account and sandbox network rules, but rejects local
 governance profiles and the `--protocol` option.
@@ -75,11 +75,11 @@ and asks for confirmation before moving it to the cloud.
 
 ## What changes when you move
 
-[`sbx move`](/manuals/ai/sandboxes/cli/move.md) copies a filesystem snapshot and creates a separate
+[`sbx move`](/manuals/ai/sandboxes/cli/manage/move.md) copies a filesystem snapshot and creates a separate
 destination sandbox. It doesn't transfer running processes or memory, and it
 leaves the source sandbox in place. Large images can take time to upload or
 download, depending on image size and available bandwidth. For cloud-to-local
-moves, also allow for [temporary disk space](/manuals/ai/sandboxes/cli/move.md#move-from-cloud-to-local).
+moves, also allow for [temporary disk space](/manuals/ai/sandboxes/cli/manage/move.md#move-from-cloud-to-local).
 
 | State | Local to cloud | Cloud to local | What to do |
 | --- | --- | --- | --- |
@@ -91,8 +91,8 @@ moves, also allow for [temporary disk space](/manuals/ai/sandboxes/cli/move.md#m
 | CPU architecture | Cloud access must support the source platform | The local runtime must support the source platform | Match platforms; the CLI checks compatibility before transfer |
 
 The managed-secret warning doesn't itself block a move. Configure
-[cloud credentials](/manuals/ai/sandboxes/cli/credentials-cloud.md) or
-[local credentials](/manuals/ai/sandboxes/cli/credentials.md) before using an agent
+[cloud credentials](/manuals/ai/sandboxes/cli/access/credentials-cloud.md) or
+[local credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md) before using an agent
 that needs them. Credentials written to files inside the sandbox can be
 included in the snapshot; remove those files before moving if you don't want
 the credentials copied.
@@ -104,4 +104,4 @@ the move fails unless you pass `--force`. This flag skips confirmation but
 retains warnings and doesn't change what transfers.
 
 Verify the destination's files, credentials, network access, ports, and
-[expiration settings](/manuals/ai/sandboxes/cli/cloud-usage.md#configure-expiration) before removing the source.
+[expiration settings](/manuals/ai/sandboxes/cli/manage/cloud.md#configure-expiration) before removing the source.

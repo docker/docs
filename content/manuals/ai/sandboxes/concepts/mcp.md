@@ -35,7 +35,7 @@ The local gateway's static mode preloads selected servers. Dynamic mode lets
 supported agents discover and attach registered servers during a session.
 Do not assume those local discovery controls apply to cloud gateways.
 
-See [Connect MCP servers with the CLI](/manuals/ai/sandboxes/cli/mcp.md),
+See [Connect MCP servers with the CLI](/manuals/ai/sandboxes/cli/access/mcp.md),
 [Console MCP setup](/manuals/ai/sandboxes/console/mcp.md), or the
 [SDK gateway recipe](/manuals/ai/sandboxes/api/cookbook/give-a-sandbox-an-mcp-gateway.md).
 

@@ -11,7 +11,7 @@ aliases:
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
 These connection instructions use a local sandbox. For cloud SSH setup, see
-[Connect with SSH](/manuals/ai/sandboxes/cli/cloud-usage.md#connect-with-ssh).
+[Connect with SSH](/manuals/ai/sandboxes/cli/manage/cloud.md#connect-with-ssh).
 
 Cursor is built on VS Code, so it connects to a sandbox the same way, using
 Remote - SSH. Your editor stays on your host while files, terminals, and
@@ -24,7 +24,7 @@ extensions run in the isolated sandbox.
 
 ## Prerequisites
 
-- SSH access set up. See [Editor and app integrations](/manuals/ai/sandboxes/cli/integrations/_index.md#enable-ssh-access).
+- SSH access set up. See [Editor and app integrations](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md#enable-ssh-access).
 - Cursor's Remote - SSH support installed.
 
 ## Connect
@@ -38,7 +38,7 @@ $ ssh demo.sbx
 1. Open the Command Palette and run **Remote-SSH: Connect to Host**.
 2. Enter the sandbox host manually as `<name>.sbx`.
 3. Cursor opens a new window connected to the sandbox. Use the remote folder
-   picker to [select the mounted workspace](/manuals/ai/sandboxes/cli/integrations/_index.md#select-the-workspace-folder).
+   picker to [select the mounted workspace](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md#select-the-workspace-folder).
 
 ## Notes
 
@@ -47,6 +47,6 @@ $ ssh demo.sbx
 
 ## Related
 
-- [Editor and app integrations](/manuals/ai/sandboxes/cli/integrations/_index.md) — how SSH access works and how to
+- [Editor and app integrations](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md) — how SSH access works and how to
   set it up
 - [Cursor agent](/manuals/ai/sandboxes/agents/cursor.md) — run the Cursor CLI inside a sandbox

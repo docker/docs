@@ -54,8 +54,8 @@ sandboxes. Your agent keeps working when you close the Console, disconnect
 your computer, or put it to sleep.
 
 The `sbx` CLI supports both
-[local sandboxes](/manuals/ai/sandboxes/cli/get-started-local.md) and
-[cloud sandboxes](/manuals/ai/sandboxes/cli/get-started-cloud.md). These pages describe
+[local sandboxes](/manuals/ai/sandboxes/cli/get-started/local.md) and
+[cloud sandboxes](/manuals/ai/sandboxes/cli/get-started/cloud.md). These pages describe
 the web Console experience. The Console and cloud CLI share a secret store. See
 [Secrets and credential injection](/manuals/ai/sandboxes/concepts/secrets.md).
 

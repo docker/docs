@@ -20,7 +20,7 @@ discard.
 
 In this tutorial, you'll move an existing coding-agent workflow into a local
 sandbox. For a cloud workflow, see
-[Get started with cloud sandboxes](/manuals/ai/sandboxes/cli/get-started-cloud.md#get-started).
+[Get started with cloud sandboxes](/manuals/ai/sandboxes/cli/get-started/cloud.md#get-started).
 
 ## Before you start
 
@@ -31,7 +31,7 @@ You don't need Docker Desktop or Docker Engine on your host.
 
 ## Install and sign in
 
-[Install Docker Sandboxes](/manuals/ai/sandboxes/cli/install.md) for your operating
+[Install Docker Sandboxes](/manuals/ai/sandboxes/cli/get-started/install.md) for your operating
 system, then sign in to Docker:
 
 ```console
@@ -74,7 +74,7 @@ $ sbx secret import
 The dry run shows which exported keys `sbx` found. The import command prompts
 you to confirm each key before storing it. If the dry run finds nothing, use
 the `sbx secret set` command from the picker. See
-[Credentials](/manuals/ai/sandboxes/cli/credentials.md) for other
+[Credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md) for other
 secret sources and [supported coding agents](/manuals/ai/sandboxes/agents/_index.md)
 for agent-specific authentication.
 
@@ -94,7 +94,7 @@ The first time you run a sandbox, `sbx` asks you to choose a default network
 policy. This policy controls which external services your sandboxes can reach.
 Select **Balanced** to permit common development services and block other
 destinations by default. You can change these rules later with
-[`sbx policy`](/manuals/ai/sandboxes/cli/network-local.md).
+[`sbx policy`](/manuals/ai/sandboxes/cli/access/network-local.md).
 
 The built-in integrations start coding agents in their full-autonomy mode. For
 example, Codex bypasses approvals, Claude Code skips permission prompts, and
@@ -139,7 +139,7 @@ full-autonomy execution into an environment you control and can throw away.
 
 Continue with the Docker Sandboxes manuals:
 
-- [Manage your sandboxes](/manuals/ai/sandboxes/cli/usage.md) with day-to-day
+- [Manage your sandboxes](/manuals/ai/sandboxes/cli/manage/local.md) with day-to-day
   commands
 - [Configure your coding agent](/manuals/ai/sandboxes/agents/_index.md) for its
   authentication and settings

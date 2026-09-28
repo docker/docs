@@ -1,7 +1,7 @@
 ---
 title: Run sandboxes in CI
 linkTitle: CI and headless
-weight: 50
+weight: 30
 description: Authenticate and run Docker Sandboxes in CI systems and other headless environments.
 keywords: docker sandboxes, sbx, ci, headless, automation, personal access token
 aliases:
@@ -9,7 +9,7 @@ aliases:
 ---
 
 This page describes local sandboxes in CI. For cloud execution without local
-virtualization, see [Run without attaching](/manuals/ai/sandboxes/cli/cloud-usage.md#run-without-attaching).
+virtualization, see [Run without attaching](/manuals/ai/sandboxes/cli/manage/cloud.md#run-without-attaching).
 
 For CI environments and scripts where a browser isn't available, authenticate
 with a Docker Personal Access Token (PAT):
@@ -35,7 +35,7 @@ $ sbx rm --force ci-task
 Agent credentials (API keys, GitHub token) can be preconfigured as global
 secrets so they're available to any sandbox the CI runner creates. If the
 relevant environment variables are already set in the CI environment (see the
-[built-in services table](/manuals/ai/sandboxes/cli/credentials.md#built-in-services) for which
+[built-in services table](/manuals/ai/sandboxes/cli/access/credentials-local.md#built-in-services) for which
 variables each service reads), import them all at once:
 
 ```console

@@ -3,7 +3,7 @@ title: Authenticate cloud agents
 linkTitle: Cloud credentials
 description: Configure cloud-specific API keys and OpenAI OAuth credentials for agents without storing credentials in the cloud sandbox filesystem.
 keywords: docker sandboxes, cloud credentials, cloud secrets, oauth, anthropic, openai
-weight: 55
+weight: 20
 aliases:
   - /ai/sandboxes/cloud/credentials/
 ---
@@ -75,7 +75,7 @@ the sandbox starts. OAuth credentials can't use sandbox scope.
 ## Service identifiers
 
 The following table shows cloud secret support for the
-[built-in services documented for local sandboxes](/manuals/ai/sandboxes/cli/credentials.md#built-in-services):
+[built-in services documented for local sandboxes](/manuals/ai/sandboxes/cli/access/credentials-local.md#built-in-services):
 
 | Service | Cloud secret authentication |
 | --- | --- |
@@ -98,7 +98,7 @@ For other services, configure a [custom secret](#configure-a-custom-secret).
 
 The cloud secret commands don't support registry credentials or dynamic
 `--ref` and `--command` resolvers. An
-[environment file](/manuals/ai/sandboxes/cli/environment-files.md#secrets) can resolve a
+[environment file](/manuals/ai/sandboxes/cli/customize/environment-files.md#secrets) can resolve a
 host command or vault reference once with `snapshot: true` and upload the
 result as a literal cloud secret.
 

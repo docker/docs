@@ -1,9 +1,9 @@
 ---
 title: Create and manage sandboxes
-linkTitle: Manage sandboxes
+linkTitle: Run and manage
 description: Create, inspect, stop, resume, and remove local or cloud sandboxes with sbx.
 keywords: docker sandboxes, sbx, cloud sandboxes
-weight: 30
+weight: 20
 ---
 
 Use `sbx` for local sandboxes and add `--cloud` for cloud sandboxes. Choose the
@@ -12,8 +12,8 @@ be configured in that environment.
 
 ## Before you start
 
-[Install the CLI](/manuals/ai/sandboxes/cli/install.md) and sign in with `sbx login`. Configure
-[local credentials](/manuals/ai/sandboxes/cli/credentials.md) or [cloud credentials](/manuals/ai/sandboxes/cli/credentials-cloud.md)
+[Install the CLI](/manuals/ai/sandboxes/cli/get-started/install.md) and sign in with `sbx login`. Configure
+[local credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md) or [cloud credentials](/manuals/ai/sandboxes/cli/access/credentials-cloud.md)
 for the agent. Cloud use also requires [cloud access](/manuals/ai/sandboxes/cloud-access/_index.md).
 
 The examples use Claude Code and the name `my-project`.
@@ -31,7 +31,7 @@ $ sbx run --name my-project
 ```
 
 Edits to the mounted directory affect host files. For a private clone or a
-sandbox without a mount, see [Workspace modes](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace).
+sandbox without a mount, see [Workspace modes](/manuals/ai/sandboxes/cli/manage/local.md#choose-a-workspace).
 
 {{< /tab >}}
 {{< tab name="Cloud" >}}
@@ -44,8 +44,8 @@ $ sbx --cloud attach my-project
 ```
 
 Cloud creation does not accept a local workspace path. Clone a repository or
-[transfer files](/manuals/ai/sandboxes/cli/cloud-usage.md#transfer-files) into the sandbox. Check its
-[expiration action](/manuals/ai/sandboxes/cli/cloud-usage.md#configure-expiration) before relying on it
+[transfer files](/manuals/ai/sandboxes/cli/manage/cloud.md#transfer-files) into the sandbox. Check its
+[expiration action](/manuals/ai/sandboxes/cli/manage/cloud.md#configure-expiration) before relying on it
 to retain your work.
 
 {{< /tab >}}
@@ -125,4 +125,4 @@ $ sbx --cloud rm my-project
 {{< /tabs >}}
 
 For commands, ports, templates, and other operations, see
-[Local operations](/manuals/ai/sandboxes/cli/usage.md) or [Cloud operations](/manuals/ai/sandboxes/cli/cloud-usage.md).
+[Local operations](/manuals/ai/sandboxes/cli/manage/local.md) or [Cloud operations](/manuals/ai/sandboxes/cli/manage/cloud.md).

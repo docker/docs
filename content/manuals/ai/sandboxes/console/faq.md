@@ -31,14 +31,14 @@ Docker Agentic Platform runs sandboxes on Docker-managed cloud infrastructure
 through a web Console. The `sbx` CLI runs local sandboxes on your development
 machine and cloud sandboxes with `sbx --cloud`. The Console and CLI have
 different workflows and secret names. See
-[Cloud sandboxes](/manuals/ai/sandboxes/cli/get-started-cloud.md) for the CLI experience.
+[Cloud sandboxes](/manuals/ai/sandboxes/cli/get-started/cloud.md) for the CLI experience.
 
 ## Can I move a sandbox between my machine and Docker Agentic Platform?
 
 The `sbx move` command copies a sandbox filesystem between local and cloud
 environments. It does not transfer running processes, host bind mounts, or
 managed secrets, and it leaves the source sandbox in place. See
-[Move a sandbox](/manuals/ai/sandboxes/cli/move.md) for the CLI workflow and
+[Move a sandbox](/manuals/ai/sandboxes/cli/manage/move.md) for the CLI workflow and
 its limitations.
 
 ## Can I share sandboxes and configuration with a team?

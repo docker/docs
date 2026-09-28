@@ -25,7 +25,7 @@ What crosses the boundary into the VM:
 - **Host workspace directory:** shared when you pass a workspace path or use
   `sbx run`, which defaults to the current directory. A direct mount is
   read-write, so the agent edits your working tree in place. With
-  [`--clone`](/manuals/ai/sandboxes/cli/usage.md#clone-mode), your repository is mounted read-only and
+  [`--clone`](/manuals/ai/sandboxes/cli/manage/local.md#clone-mode), your repository is mounted read-only and
   the agent works on a private clone. A mountless sandbox doesn't share a host
   workspace.
 - **Credentials:** the host-side proxy injects authentication headers into
@@ -54,7 +54,7 @@ Outside the workspace and shared skills store, the agent cannot access your
 host filesystem. It also cannot access your host Docker daemon, your host
 network directly, or any destination not allowed by network policy. Sandboxes
 cannot communicate directly over the network. Outbound UDP is blocked unless
-you turn on the [experimental UDP feature](/manuals/ai/sandboxes/cli/network-local.md#allow-outbound-udp)
+you turn on the [experimental UDP feature](/manuals/ai/sandboxes/cli/access/network-local.md#allow-outbound-udp)
 and allow it through network policy. ICMP is blocked.
 
 MCP servers are an explicit integration point. Remote MCP servers run outside
@@ -124,7 +124,7 @@ see the full list of active rules, and remove entries you don't need. See
 Kits run install commands with root privileges inside the sandbox. To limit
 supply-chain risk, `sbx` restricts kit installs to an allowlist of sources
 that defaults to Docker Hub only. See
-[Restrict kit sources](/manuals/ai/sandboxes/cli/kits.md#restrict-kit-sources).
+[Restrict kit sources](/manuals/ai/sandboxes/cli/customize/kits.md#restrict-kit-sources).
 
 Shared agent skills create a narrow exception to cross-sandbox isolation. The
 store can be mounted with `readwrite` access, so one sandbox can modify
@@ -138,7 +138,7 @@ per-sandbox opt-out.
 Local stdio MCP servers run outside the sandbox VM. If you register a local MCP
 server that starts a host process or host Docker container, that process or
 container uses host permissions and host isolation, not sandbox isolation. See
-[MCP gateway](/manuals/ai/sandboxes/cli/mcp.md).
+[MCP gateway](/manuals/ai/sandboxes/cli/access/mcp.md).
 
 ## Organization-wide control
 
@@ -157,7 +157,7 @@ admins.
   workspace, and credential isolation work
 - [Default security posture](/manuals/ai/sandboxes/concepts/isolation/defaults.md): what a fresh sandbox permits and
   blocks
-- [Manage credentials](/manuals/ai/sandboxes/cli/credentials.md): provide and manage API
+- [Manage credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md): provide and manage API
   keys while keeping their values outside the sandbox
 - [Governance](/manuals/ai/governance/_index.md): configure network, filesystem, and MCP access
   controls locally or across your organization

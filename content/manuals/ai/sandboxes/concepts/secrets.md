@@ -26,8 +26,8 @@ they do not create independent stores for each interface.
 
 | Environment | Store | Setup instructions |
 | --- | --- | --- |
-| Local | Host OS credential store, with a file fallback on some Linux hosts | [Local CLI credentials](/manuals/ai/sandboxes/cli/credentials.md) |
-| Cloud | Cloud secret store | [Cloud CLI credentials](/manuals/ai/sandboxes/cli/credentials-cloud.md), [Console secrets](/manuals/ai/sandboxes/console/secrets.md), or [SDK secrets](/manuals/ai/sandboxes/api/cookbook/manage-cloud-secrets.md) |
+| Local | Host OS credential store, with a file fallback on some Linux hosts | [Local CLI credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md) |
+| Cloud | Cloud secret store | [Cloud CLI credentials](/manuals/ai/sandboxes/cli/access/credentials-cloud.md), [Console secrets](/manuals/ai/sandboxes/console/secrets.md), or [SDK secrets](/manuals/ai/sandboxes/api/cookbook/manage-cloud-secrets.md) |
 
 ## How injection works
 

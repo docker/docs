@@ -29,7 +29,7 @@ $ cd ~/my-project
 $ sbx run gemini
 ```
 
-To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/manage/local.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
 ## Authentication
@@ -37,7 +37,7 @@ To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-work
 Gemini requires either a Google API key or a Google account with Gemini access.
 
 **API key**: Store your key using
-[stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
+[stored secrets](/manuals/ai/sandboxes/cli/access/credentials-local.md#stored-secrets):
 
 ```console
 $ sbx secret set google

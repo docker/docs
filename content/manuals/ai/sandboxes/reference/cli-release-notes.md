@@ -44,7 +44,7 @@ V2 kits remain supported for built-in agents and existing customizations. V3 wor
 
 #### Run agents in cloud sandboxes
 
-Run AI agents on Docker-managed cloud infrastructure with `sbx --cloud`. Cloud support is experimental and requires an active Docker Agentic Platform subscription. See [Get started with cloud sandboxes](https://docs.docker.com/ai/sandboxes/cloud/).
+Run AI agents on Docker-managed cloud infrastructure with `sbx --cloud`. Cloud support is experimental and requires an active Docker Agentic Platform subscription. See [Get started with cloud sandboxes](https://docs.docker.com/ai/sandboxes/cli/get-started/cloud/).
 
 ### What's new
 
@@ -142,7 +142,7 @@ Run AI agents on Docker-managed cloud infrastructure with `sbx --cloud`. Cloud s
 
 #### Breaking changes
 
-- `shareSkills` in `sbxenv.yaml` ([experimental feature](https://docs.docker.com/ai/sandboxes/cli/environment-files/)) has been replaced with `skills`, `skills` may be set to `off|readonly|readwrite`.
+- `shareSkills` in `sbxenv.yaml` ([experimental feature](https://docs.docker.com/ai/sandboxes/cli/customize/environment-files/)) has been replaced with `skills`, `skills` may be set to `off|readonly|readwrite`.
 
 - MCP OAuth client secrets are renamed to `mcp:<server>:client_secret` (was `mcp:<server>.client_secret`), matching the header-secret naming; a secret stored under the old name is no longer read and must be re-set with `sbx secret set mcp:<server>:client_secret`.
 

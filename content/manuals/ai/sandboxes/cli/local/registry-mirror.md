@@ -35,7 +35,7 @@ preserves their repository path, tag, and digest. References that explicitly
 name another registry remain unchanged.
 
 If the mirror requires authentication, configure
-[registry credentials](/manuals/ai/sandboxes/cli/credentials.md#registry-credentials) for the mirror
+[registry credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md#registry-credentials) for the mirror
 host.
 
 ## Mirror Docker pulls inside the sandbox

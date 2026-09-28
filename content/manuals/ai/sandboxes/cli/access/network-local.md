@@ -1,6 +1,6 @@
 ---
 title: Local policy
-weight: 60
+weight: 40
 description: Configure local network access rules for sandboxes on your machine.
 keywords: docker sandboxes, local policy, network access, allow rules, deny rules, sbx policy
 aliases:

@@ -164,7 +164,7 @@ $ claude -p "Reply with the word hello."
 A response confirms that Claude Code can reach the API and authenticate with
 your stored key. If authentication fails, check that you stored the key and
 approved the kit's request to use it. See
-[Credential bindings](/manuals/ai/sandboxes/cli/credentials.md#credential-bindings).
+[Credential bindings](/manuals/ai/sandboxes/cli/access/credentials-local.md#credential-bindings).
 Network requests must also meet the sandbox's
 [network policy](/manuals/ai/governance/concepts.md#precedence).
 

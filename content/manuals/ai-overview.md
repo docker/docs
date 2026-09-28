@@ -42,8 +42,8 @@ Docker Sandboxes. Browse the [Docker Skills
 catalog](https://github.com/docker/skills#readme) for current guidance.
 
 Docker Sandboxes provides isolated environments for running coding agents
-[locally](/manuals/ai/sandboxes/cli/get-started-local.md) or
-[in the cloud](/manuals/ai/sandboxes/cli/get-started-cloud.md). Sandboxes is the isolation layer;
+[locally](/manuals/ai/sandboxes/cli/get-started/local.md) or
+[in the cloud](/manuals/ai/sandboxes/cli/get-started/cloud.md). Sandboxes is the isolation layer;
 the agents themselves are separate tools. Agent configuration and supported
 features differ between local and cloud sandboxes.
 

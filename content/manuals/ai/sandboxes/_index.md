@@ -16,8 +16,8 @@ Choose the CLI, web Console, or API and SDK to work with it.
 
 | How you want to work | Start here |
 | --- | --- |
-| Run an agent on your machine | [Local CLI quickstart](/manuals/ai/sandboxes/cli/get-started-local.md) |
-| Run an agent in the cloud from your terminal | [Cloud CLI quickstart](/manuals/ai/sandboxes/cli/get-started-cloud.md) |
+| Run an agent on your machine | [Local CLI quickstart](/manuals/ai/sandboxes/cli/get-started/local.md) |
+| Run an agent in the cloud from your terminal | [Cloud CLI quickstart](/manuals/ai/sandboxes/cli/get-started/cloud.md) |
 | Work in your browser | [Console quickstart](/manuals/ai/sandboxes/console/get-started.md) |
 | Build sandbox operations into an application | [API and SDK quickstart](/manuals/ai/sandboxes/api/get-started.md) |
 

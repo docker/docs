@@ -1,6 +1,6 @@
 ---
 title: Local sandbox operations
-weight: 40
+weight: 10
 description: Basic sbx commands for creating, managing, and connecting to Docker Sandboxes.
 keywords: docker sandboxes, sbx, usage, run, create, stop, remove, ports, workspaces, templates, save, load
 aliases:
@@ -9,10 +9,10 @@ linkTitle: Local operations
 ---
 
 This page describes local sandboxes. For cloud commands, file transfers, ports,
-and expiration, see [Use cloud sandboxes](/manuals/ai/sandboxes/cli/cloud-usage.md).
+and expiration, see [Use cloud sandboxes](/manuals/ai/sandboxes/cli/manage/cloud.md).
 
 Use this page as a command-oriented guide to day-to-day `sbx` operations. For
-scenario-based recommendations, see [Workflow patterns](/manuals/ai/sandboxes/cli/workflows.md).
+scenario-based recommendations, see [Workflow patterns](/manuals/ai/sandboxes/cli/workflows/_index.md).
 
 ## Sign in
 
@@ -23,7 +23,7 @@ $ sbx login
 ```
 
 For scripts or CI runners where a browser isn't available, see
-[CI and headless use](/manuals/ai/sandboxes/cli/automation.md).
+[CI and headless use](/manuals/ai/sandboxes/cli/workflows/automation.md).
 
 ## Start, stop, and remove
 
@@ -211,9 +211,9 @@ afterward. Restart a running agent, or stop and start the sandbox, to pick up
 the new value.
 
 Environment variables are readable by processes inside the sandbox. For API
-keys and other credentials, use [`sbx secret set`](/manuals/ai/sandboxes/cli/credentials.md#store-a-secret)
+keys and other credentials, use [`sbx secret set`](/manuals/ai/sandboxes/cli/access/credentials-local.md#store-a-secret)
 for a supported service or the experimental
-[`sbx secret set-custom`](/manuals/ai/sandboxes/cli/credentials.md#custom-secrets) for a
+[`sbx secret set-custom`](/manuals/ai/sandboxes/cli/access/credentials-local.md#custom-secrets) for a
 credential sent to known hosts. The host-side proxy can then inject the real
 value without exposing it to the agent.
 
@@ -269,7 +269,7 @@ it when you create the sandbox:
   `/run/sandbox/source`, but only with read access.
 
 For guidance on branch strategy, fetching work from a sandbox, and parallel
-agent workflows, see [Git workflows](/manuals/ai/sandboxes/cli/git.md). For the
+agent workflows, see [Git workflows](/manuals/ai/sandboxes/cli/workflows/git.md). For the
 security model behind each mode, see
 [Workspace isolation](/manuals/ai/sandboxes/concepts/isolation/isolation.md#workspace-isolation).
 
@@ -394,7 +394,7 @@ $ sbx ports my-sandbox --unpublish 8080:3000
 When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
 `sbx ports` to publish ports on that sandbox. For dev server and host-service
 recipes, see
-[Local services](/manuals/ai/sandboxes/cli/development.md#local-services).
+[Local services](/manuals/ai/sandboxes/cli/workflows/development.md#local-services).
 
 ## What persists
 
@@ -424,7 +424,7 @@ included. Save any data from those mounts separately.
 > shared with anyone you distribute it to. To keep credentials out of
 > templates, manage them with `sbx secret set` instead — the proxy injects
 > them at runtime so they're never written to the filesystem. For more
-> information, see [Manage credentials](/manuals/ai/sandboxes/cli/credentials.md).
+> information, see [Manage credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md).
 
 ### Save and reuse
 
@@ -512,7 +512,7 @@ workflow, see [Base images](/manuals/ai/sandboxes/author-kits/base-images.md).
 > For Docker Hub, `sbx` reuses your `sbx login` session to pull private
 > images. For other registries (GitHub Container Registry, ECR, ACR, a
 > self-hosted Nexus, and so on), store pull credentials with
-> [`sbx secret set --registry`](/manuals/ai/sandboxes/cli/credentials.md#registry-credentials)
+> [`sbx secret set --registry`](/manuals/ai/sandboxes/cli/access/credentials-local.md#registry-credentials)
 > before running the sandbox:
 >
 > ```console

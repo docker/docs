@@ -83,7 +83,7 @@ combined environment.
 If the set includes a workload, you run the published kit with `sbx run`.
 If it contains only mixins, you add it to a workload with `--kit`.
 
-See [Use kits](/manuals/ai/sandboxes/cli/kits.md) for how to run kits
+See [Use kits](/manuals/ai/sandboxes/cli/customize/kits.md) for how to run kits
 and add mixins. To customize and publish your own combination, see
 [Compose a kit set](/manuals/ai/sandboxes/author-kits/kit-sets.md).
 
@@ -95,7 +95,7 @@ preparation. Check that page before reusing a kit through another interface.
 
 ## Choose your next step
 
-- [Use kits](/manuals/ai/sandboxes/cli/kits.md) to run a published environment or combine
+- [Use kits](/manuals/ai/sandboxes/cli/customize/kits.md) to run a published environment or combine
   a workload with mixins.
 - [Author kits](/manuals/ai/sandboxes/author-kits/_index.md) to build an agent environment,
   package a tool, or combine kits into a set to share with your team.
@@ -104,4 +104,4 @@ preparation. Check that page before reusing a kit through another interface.
 
 For the earlier format used by built-in agents, see [Kits v2](/manuals/ai/sandboxes/author-kits/kits-v2.md).
 To save an environment you've configured inside a sandbox,
-see [Save a sandbox as a template](/manuals/ai/sandboxes/cli/usage.md#saving-a-sandbox-as-a-template).
+see [Save a sandbox as a template](/manuals/ai/sandboxes/cli/manage/local.md#saving-a-sandbox-as-a-template).

@@ -9,7 +9,7 @@ aliases:
 
 The governance described here applies to local sandboxes. Cloud sandboxes
 use separate network policy configuration. See
-[Cloud network policy](/manuals/ai/sandboxes/cli/network-cloud.md) for cloud controls.
+[Cloud network policy](/manuals/ai/sandboxes/cli/access/network-cloud.md) for cloud controls.
 
 ## Resource model
 
@@ -85,7 +85,7 @@ plus every team-scoped policy for a team they belong to. See
 
 Network rules use `connect:tcp` for TCP and `connect:udp` for UDP. Resources are
 hostnames, CIDR ranges, or ports. UDP requires
-[experimental outbound UDP](/manuals/ai/sandboxes/cli/network-local.md#allow-outbound-udp).
+[experimental outbound UDP](/manuals/ai/sandboxes/cli/access/network-local.md#allow-outbound-udp).
 ICMP is blocked.
 
 **Hostname patterns**
@@ -123,7 +123,7 @@ A CIDR range isn't a valid HTTP destination. Use a network rule to cover one.
 
 A rule that names no method matches every method. For the methods you can
 select individually, see
-[HTTP method and path rules](/manuals/ai/sandboxes/cli/network-local.md#http-method-and-path-rules).
+[HTTP method and path rules](/manuals/ai/sandboxes/cli/access/network-local.md#http-method-and-path-rules).
 
 Path patterns follow the same wildcard rules as filesystem paths, where `*`
 matches within one path segment and `**` matches any depth. A pattern without a
@@ -203,7 +203,7 @@ For organization policy configuration and enforcement details, see
 ### MCP policies
 
 MCP policies control Model Context Protocol activity made available to a
-sandbox through Docker's [MCP gateway](/manuals/ai/sandboxes/cli/mcp.md). They are
+sandbox through Docker's [MCP gateway](/manuals/ai/sandboxes/cli/access/mcp.md). They are
 organization policies written in Cedar using the `MCP` namespace, rather than
 the network and filesystem rule format.
 

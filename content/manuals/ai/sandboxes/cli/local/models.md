@@ -111,7 +111,7 @@ from other sandboxes using that service.
 Provider authentication for this route is handled by `llmman` on the host.
 Credentials stored with `sbx secret set` aren't automatically supplied to it.
 For the agents' default authentication flows, see
-[Manage credentials](/manuals/ai/sandboxes/cli/credentials.md).
+[Manage credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md).
 
 ## Connect a custom endpoint
 

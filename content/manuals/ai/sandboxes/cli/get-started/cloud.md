@@ -2,7 +2,7 @@
 title: Cloud sandboxes
 description: Run Docker Sandboxes on Docker-managed cloud infrastructure and understand the cloud-specific command, storage, and billing model.
 keywords: docker sandboxes, cloud sandboxes, sbx cloud, ai agents, agentic platform
-weight: 20
+weight: 30
 params:
   sidebar:
     badge:
@@ -10,7 +10,7 @@ params:
       text: Experimental
 aliases:
   - /ai/sandboxes/cloud/
-linkTitle: Get started in the cloud
+linkTitle: Cloud quickstart
 ---
 
 > [!NOTE]
@@ -31,14 +31,14 @@ $ sbx --cloud ls
 Cloud and local sandboxes have separate state and different capabilities. A
 cloud sandbox can't mount a host workspace or use host hardware, and its
 secrets, network policy, ports, and lifecycle are managed in the cloud. See
-[Local and cloud differences](/manuals/ai/sandboxes/cli/local-vs-cloud.md) before adapting a local
+[Local and cloud differences](/manuals/ai/sandboxes/cli/get-started/local-vs-cloud.md) before adapting a local
 workflow.
 
 ## Prerequisites
 
 To use cloud sandboxes, you need:
 
-- The [`sbx` CLI](/manuals/ai/sandboxes/cli/install.md), version 0.45.0 or later
+- The [`sbx` CLI](/manuals/ai/sandboxes/cli/get-started/install.md), version 0.45.0 or later
 - An active [Docker Agentic Platform subscription](/manuals/ai/sandboxes/cloud-access/_index.md#activate-cloud-access)
 
 Follow [Signup and billing](/manuals/ai/sandboxes/cloud-access/_index.md) to activate
@@ -72,13 +72,13 @@ For Claude Code, store an Anthropic API key:
 $ sbx --cloud secret set anthropic
 ```
 
-See [Authenticate cloud agents](/manuals/ai/sandboxes/cli/credentials-cloud.md) for other agents and credential
+See [Authenticate cloud agents](/manuals/ai/sandboxes/cli/access/credentials-cloud.md) for other agents and credential
 options.
 
 Cloud sandboxes expire after one hour by default. On expiration, the service
 stops sandboxes that can be resumed and deletes the rest. Check the timeout
 action before relying on a sandbox to retain your work. See
-[Configure expiration](/manuals/ai/sandboxes/cli/cloud-usage.md#configure-expiration).
+[Configure expiration](/manuals/ai/sandboxes/cli/manage/cloud.md#configure-expiration).
 
 Create a sandbox without attaching, allowing access to GitHub for this example:
 
@@ -118,20 +118,20 @@ $ sbx --cloud rm cloud-project
 ```
 
 Removal deletes files stored only in the sandbox. For your own projects, see
-[Transfer files](/manuals/ai/sandboxes/cli/cloud-usage.md#transfer-files) and
-[Authenticate cloud agents](/manuals/ai/sandboxes/cli/credentials-cloud.md) before cloning private repositories.
+[Transfer files](/manuals/ai/sandboxes/cli/manage/cloud.md#transfer-files) and
+[Authenticate cloud agents](/manuals/ai/sandboxes/cli/access/credentials-cloud.md) before cloning private repositories.
 
 ## Learn more
 
 - [Signup and billing](/manuals/ai/sandboxes/cloud-access/_index.md) covers activation
   and compute charges
-- [Local and cloud differences](/manuals/ai/sandboxes/cli/local-vs-cloud.md) compares the two execution
+- [Local and cloud differences](/manuals/ai/sandboxes/cli/get-started/local-vs-cloud.md) compares the two execution
   environments
-- [Use cloud sandboxes](/manuals/ai/sandboxes/cli/cloud-usage.md) covers creation, files, ports, and lifecycle
-- [Authenticate cloud agents](/manuals/ai/sandboxes/cli/credentials-cloud.md) covers cloud-specific secrets,
+- [Use cloud sandboxes](/manuals/ai/sandboxes/cli/manage/cloud.md) covers creation, files, ports, and lifecycle
+- [Authenticate cloud agents](/manuals/ai/sandboxes/cli/access/credentials-cloud.md) covers cloud-specific secrets,
   API keys, and OAuth
-- [Manage cloud network policy](/manuals/ai/sandboxes/cli/network-cloud.md) covers account-level and
+- [Manage cloud network policy](/manuals/ai/sandboxes/cli/access/network-cloud.md) covers account-level and
   sandbox-level network access
-- [Move a sandbox](/manuals/ai/sandboxes/cli/move.md) explains filesystem transfers between local and
+- [Move a sandbox](/manuals/ai/sandboxes/cli/manage/move.md) explains filesystem transfers between local and
   cloud environments
 - [`sbx` CLI reference](/reference/cli/sbx/) lists commands and options

@@ -17,7 +17,7 @@ following security posture.
 
 All outbound TCP traffic, including HTTP, HTTPS, and SSH, is blocked unless an
 explicit rule allows the destination. Outbound UDP is disabled by default. To
-use it, turn on the [experimental UDP feature](/manuals/ai/sandboxes/cli/network-local.md#allow-outbound-udp)
+use it, turn on the [experimental UDP feature](/manuals/ai/sandboxes/cli/access/network-local.md#allow-outbound-udp)
 and add UDP allow rules. ICMP is blocked. DNS queries use the sandbox's internal
 resolver, which enforces network policy.
 
@@ -61,7 +61,7 @@ No credentials are available to the sandbox unless you provide them using
 host-side proxy injects them into outbound HTTP headers. The agent cannot
 read the raw credential values.
 
-See [Credentials](/manuals/ai/sandboxes/cli/credentials.md) for setup instructions.
+See [Credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md) for setup instructions.
 
 ## Agent capabilities inside the sandbox
 

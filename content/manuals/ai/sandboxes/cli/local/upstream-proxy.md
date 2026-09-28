@@ -11,7 +11,7 @@ aliases:
 
 This page describes proxy settings for local sandboxes and the local daemon.
 For cloud sandbox egress controls, see
-[Cloud network policy](/manuals/ai/sandboxes/cli/network-cloud.md).
+[Cloud network policy](/manuals/ai/sandboxes/cli/access/network-cloud.md).
 
 > [!IMPORTANT]
 > Upstream proxy support is experimental. Everything described on this page —

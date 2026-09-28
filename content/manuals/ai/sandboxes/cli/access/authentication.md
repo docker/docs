@@ -9,7 +9,7 @@ aliases:
 ---
 
 These workflows resolve credentials on the host for local sandboxes. For
-cloud secret setup, see [Authenticate cloud agents](/manuals/ai/sandboxes/cli/credentials-cloud.md).
+cloud secret setup, see [Authenticate cloud agents](/manuals/ai/sandboxes/cli/access/credentials-cloud.md).
 
 The sandbox proxy handles API credentials for model providers automatically,
 but agents often also need credentials for tools like `gh`, `docker`, or a
@@ -19,7 +19,7 @@ secret sources can retrieve a value from an authenticated host CLI without
 copying the value into the secret store.
 
 For secret scope and how changes apply to existing sandboxes, see
-[Store a secret](/manuals/ai/sandboxes/cli/credentials.md#store-a-secret).
+[Store a secret](/manuals/ai/sandboxes/cli/access/credentials-local.md#store-a-secret).
 
 ## GitHub CLI
 
@@ -46,13 +46,13 @@ $ gh issue list
 ```
 
 The token is never stored in plaintext inside the sandbox. See
-[GitHub token](/manuals/ai/sandboxes/cli/credentials.md#github-token) for details.
+[GitHub token](/manuals/ai/sandboxes/cli/access/credentials-local.md#github-token) for details.
 
 ## Docker registry
 
 When using Docker Hub, authentication is handled automatically; `sbx` reuses
 your existing login session. For other registries, you need to configure
-credentials for `sbx` so it can pull private [templates](/manuals/ai/sandboxes/cli/usage.md#load-a-template)
+credentials for `sbx` so it can pull private [templates](/manuals/ai/sandboxes/cli/manage/local.md#load-a-template)
 and kits when creating a sandbox:
 
 ```console
@@ -73,7 +73,7 @@ Docker daemon, not your host's. They're deleted when the sandbox is removed.
 
 For information on how registry credentials differ from other secrets,
 per-registry username requirements, and all-sandbox versus per-sandbox scoping, see
-[Registry credentials](/manuals/ai/sandboxes/cli/credentials.md#registry-credentials).
+[Registry credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md#registry-credentials).
 
 ## Source credentials from 1Password
 
@@ -106,6 +106,6 @@ $ sbx secret set anthropic \
     --ref 'arn:aws:secretsmanager:us-west-2:123456789012:secret:anthropic-api-key'
 ```
 
-See [Use a dynamic secret source](/manuals/ai/sandboxes/cli/credentials.md#use-a-dynamic-secret-source)
+See [Use a dynamic secret source](/manuals/ai/sandboxes/cli/access/credentials-local.md#use-a-dynamic-secret-source)
 for refresh policies, verification options, custom secrets, and provider
 account or profile selection.

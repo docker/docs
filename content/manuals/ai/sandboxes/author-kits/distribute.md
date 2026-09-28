@@ -16,7 +16,7 @@ the source lets them build it when they create a sandbox. Either way, `sbx`
 reads the kit's descriptor to configure the sandbox.
 
 This page shows how to publish and sign v3 kits. To run a kit someone else has
-shared, see [Use kits](/manuals/ai/sandboxes/cli/kits.md).
+shared, see [Use kits](/manuals/ai/sandboxes/cli/customize/kits.md).
 
 ## Publish an image
 
@@ -36,7 +36,7 @@ Push the image before running it by its registry reference. `sbx` pulls the
 published image. It can't use images stored only in your host's Docker image
 store. During development, you can pass a local source directory to `sbx`
 instead. For private images, configure
-[registry credentials](/manuals/ai/sandboxes/cli/credentials.md#registry-credentials)
+[registry credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md#registry-credentials)
 for your sandbox.
 
 Use Buildx for v3 kits. The `sbx kit pack`, `push`, and `pull` commands are
@@ -98,7 +98,7 @@ identity and OpenID Connect issuer. To sign with a key instead, pass
 `--key cosign.key` to `sign` and `--key cosign.pub` to `verify`.
 
 To require a valid signature before using a kit, see
-[Verify kit signatures](/manuals/ai/sandboxes/cli/kits.md#verify-kit-signatures).
+[Verify kit signatures](/manuals/ai/sandboxes/cli/customize/kits.md#verify-kit-signatures).
 
 V3 kits shared as source directories or Git references can't be signed.
 If you need signatures, publish and sign an OCI image.

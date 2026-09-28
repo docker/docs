@@ -12,9 +12,9 @@ aliases:
 
 The governance described here applies to local sandboxes. Cloud sandboxes
 use separate network policy configuration. See
-[Cloud network policy](/manuals/ai/sandboxes/cli/network-cloud.md) for cloud controls.
+[Cloud network policy](/manuals/ai/sandboxes/cli/access/network-cloud.md) for cloud controls.
 
-[Local policies](/manuals/ai/sandboxes/cli/network-local.md) give individual developers control over what their
+[Local policies](/manuals/ai/sandboxes/cli/access/network-local.md) give individual developers control over what their
 sandboxes can access. Organization policy moves that control to the admin level:
 organization policies apply to local sandboxes across the organization, either to
 every member or to specific teams. When organization governance is active, only

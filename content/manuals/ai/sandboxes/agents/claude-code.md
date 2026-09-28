@@ -26,8 +26,8 @@ $ sbx --cloud run claude --name cloud-project
 ```
 
 Cloud sandboxes do not mount your host project directory. Copy files or clone a
-repository into the sandbox. See [Cloud operations](/manuals/ai/sandboxes/cli/cloud-usage.md) and
-[Cloud credentials](/manuals/ai/sandboxes/cli/credentials-cloud.md) for the supported workflow.
+repository into the sandbox. See [Cloud operations](/manuals/ai/sandboxes/cli/manage/cloud.md) and
+[Cloud credentials](/manuals/ai/sandboxes/cli/access/credentials-cloud.md) for the supported workflow.
 
 The setup and host configuration instructions that follow apply to local
 sandboxes.
@@ -49,7 +49,7 @@ $ sbx run --name my-sandbox claude -- "Add error handling to the login function"
 Everything after `--` is passed directly to Claude Code. You can also pipe in a
 prompt from a file with `-- "$(cat prompt.txt)"`.
 
-To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/manage/local.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
 ## Authentication
@@ -59,7 +59,7 @@ API key or a Claude subscription. For other models, see
 [Use a local model](#use-a-local-model).
 
 **API key**: Store your key using
-[stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
+[stored secrets](/manuals/ai/sandboxes/cli/access/credentials-local.md#stored-secrets):
 
 ```console
 $ sbx secret set anthropic
@@ -111,7 +111,7 @@ for available options.
 
 Claude Code's [agents view](https://code.claude.com/docs/en/agent-view)
 starts background sessions that run tasks in parallel. Pair it with
-[clone mode](/manuals/ai/sandboxes/cli/git.md#clone-mode) to keep their changes inside the
+[clone mode](/manuals/ai/sandboxes/cli/workflows/git.md#clone-mode) to keep their changes inside the
 sandbox:
 
 ```console
@@ -142,7 +142,7 @@ $ git fetch sandbox-<sandbox-name>
 $ git diff main..sandbox-<sandbox-name>/<branch>
 ```
 
-See [Git workflows](/manuals/ai/sandboxes/cli/git.md) for clone-mode details.
+See [Git workflows](/manuals/ai/sandboxes/cli/workflows/git.md) for clone-mode details.
 
 ## Base image
 

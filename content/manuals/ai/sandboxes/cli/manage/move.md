@@ -2,7 +2,7 @@
 title: Move a sandbox
 description: Transfer a Docker Sandbox filesystem between local and cloud environments and understand which state, files, policies, and secrets remain behind.
 keywords: docker sandboxes, sbx move, cloud sandbox, local sandbox, migrate sandbox
-weight: 50
+weight: 30
 aliases:
   - /ai/sandboxes/cloud/move/
 ---
@@ -87,7 +87,7 @@ The destination can use applicable credentials that already exist in the cloud
 secret store. Credentials in the local secret store don't transfer.
 
 The CLI rounds the source's recorded CPU and memory limits up to a supported
-[cloud size](/manuals/ai/sandboxes/cli/cloud-usage.md#choose-resources-and-platform). Missing limits use cloud
+[cloud size](/manuals/ai/sandboxes/cli/manage/cloud.md#choose-resources-and-platform). Missing limits use cloud
 defaults with a warning. Limits above the largest cloud size prevent the move.
 The `move` command has no `--cpus` or `--memory` overrides. Resource sizing
 doesn't guarantee the same performance as the source; check your workload on
@@ -110,7 +110,7 @@ $ sbx move local-project --to cloud --ttl 2h --on-timeout stop
 The `stop` action preserves state. An explicit request fails if stopping is
 unavailable. Use `--on-timeout delete` to delete on expiration.
 These flags apply only to moves to the cloud. After the move, inspect or extend
-the expiration with [`sbx --cloud ttl`](/manuals/ai/sandboxes/cli/cloud-usage.md#configure-expiration).
+the expiration with [`sbx --cloud ttl`](/manuals/ai/sandboxes/cli/manage/cloud.md#configure-expiration).
 
 ## Move from cloud to local
 

@@ -20,7 +20,7 @@ accepts that reference directly.
 | SDK | Names from the bundled catalog, or serialized v2 custom kit artifacts | Launch-by-name does not accept an arbitrary OCI reference; custom artifacts require preparation |
 | REST API | Serialized kit artifacts; the SDK guide documents v2 | Prepare artifact bytes; a source reference does not trigger a registry pull |
 
-See [CLI kit usage](/manuals/ai/sandboxes/cli/kits.md), [Console kits](/manuals/ai/sandboxes/console/kits.md), and
+See [CLI kit usage](/manuals/ai/sandboxes/cli/customize/kits.md), [Console kits](/manuals/ai/sandboxes/console/kits.md), and
 [SDK custom kits](/manuals/ai/sandboxes/api/concepts.md) for each launch path.
 
 ## V3 and earlier formats

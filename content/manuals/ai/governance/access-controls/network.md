@@ -10,7 +10,7 @@ aliases:
 
 The governance described here applies to local sandboxes. Cloud sandboxes
 use separate network policy configuration. See
-[Cloud network policy](/manuals/ai/sandboxes/cli/network-cloud.md) for cloud controls.
+[Cloud network policy](/manuals/ai/sandboxes/cli/access/network-cloud.md) for cloud controls.
 
 Network access policies control outbound connections from sandboxes. Each
 policy contains one or more rules that allow the domains, IP ranges, and ports a
@@ -20,7 +20,7 @@ allow part of an API without allowing all of it.
 
 You can configure network access in two places:
 
-- [Local policy](/manuals/ai/sandboxes/cli/network-local.md), which applies to sandboxes on one developer machine
+- [Local policy](/manuals/ai/sandboxes/cli/access/network-local.md), which applies to sandboxes on one developer machine
   when organization governance is not active.
 - [Organization policies](/manuals/ai/governance/access-controls/organization.md), which apply centrally across an
   organization or to selected teams.
@@ -34,7 +34,7 @@ policy. See [Precedence](/manuals/ai/governance/concepts.md#precedence).
 
 Network rules use `connect:tcp` for TCP and `connect:udp` for UDP. Resources are
 hostnames, CIDR ranges, ports, or hostnames with ports. UDP requires
-[experimental outbound UDP](/manuals/ai/sandboxes/cli/network-local.md#allow-outbound-udp). ICMP is blocked.
+[experimental outbound UDP](/manuals/ai/sandboxes/cli/access/network-local.md#allow-outbound-udp). ICMP is blocked.
 
 Examples:
 
@@ -61,7 +61,7 @@ and the full matching table, see
 [HTTP rules](/manuals/ai/governance/concepts.md#http-method-and-path).
 
 Add them to a local policy with `--method` and `--path` on `sbx policy`. See
-[HTTP method and path rules](/manuals/ai/sandboxes/cli/network-local.md#http-method-and-path-rules).
+[HTTP method and path rules](/manuals/ai/sandboxes/cli/access/network-local.md#http-method-and-path-rules).
 
 ## Local network rules
 
@@ -74,7 +74,7 @@ $ sbx policy deny network ads.example.com
 ```
 
 For presets, sandbox-scoped rules, testing, and troubleshooting, see
-[Local policy](/manuals/ai/sandboxes/cli/network-local.md).
+[Local policy](/manuals/ai/sandboxes/cli/access/network-local.md).
 
 ## Organization network rules
 

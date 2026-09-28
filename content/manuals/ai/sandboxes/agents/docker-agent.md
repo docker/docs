@@ -22,13 +22,13 @@ $ sbx run docker-agent ~/my-project
 `sbx run docker-agent` defaults the workspace to the current directory, so you
 can run it from inside your project.
 
-To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/manage/local.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
 ## Authentication
 
 Docker Agent supports multiple providers. Store keys for the providers you want
-to use with [stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
+to use with [stored secrets](/manuals/ai/sandboxes/cli/access/credentials-local.md#stored-secrets):
 
 ```console
 $ sbx secret set openai

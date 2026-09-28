@@ -15,7 +15,7 @@
       "product": "Docker Sandboxes",
       "title": "Connect sandboxes through an MCP gateway",
       "description": "Register local or remote MCP servers on the host, reuse them across sandboxes, and govern server and tool access with Cedar policies.",
-      "url": "/ai/sandboxes/cli/mcp/",
+      "url": "/ai/sandboxes/cli/access/mcp/",
       "published": "2026-08-06",
       "source_prs": [25559, 25707],
       "featured": true
@@ -24,7 +24,7 @@
       "product": "Docker Sandboxes",
       "title": "Author version 2 sandbox kits",
       "description": "Define kit setup, permissions, networking, and API key or OAuth credential requirements with the version 2 kit schema.",
-      "url": "/ai/sandboxes/customize/kit-reference/#schema-versions",
+      "url": "/ai/sandboxes/concepts/kits/kit-reference/#schema-versions",
       "published": "2026-08-06",
       "source_prs": [25467, 25707],
       "featured": false
@@ -69,7 +69,7 @@
       "product": "Docker Sandboxes",
       "title": "Connect editors and desktop apps over SSH",
       "description": "Use a sandbox from VS Code, Cursor, Claude Desktop, ChatGPT, or another SSH-capable tool.",
-      "url": "/ai/sandboxes/cli/integrations/",
+      "url": "/ai/sandboxes/cli/workflows/integrations/",
       "published": "2026-07-24",
       "source_prs": [25557],
       "featured": true

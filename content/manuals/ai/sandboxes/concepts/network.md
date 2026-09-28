@@ -20,8 +20,8 @@ different: applicable sandbox or kit allow rules can still grant access.
 Inspect the rules that apply to your sandbox when a connection behaves
 differently from what you expect.
 
-See [local CLI policies](/manuals/ai/sandboxes/cli/network-local.md),
-[cloud CLI policies](/manuals/ai/sandboxes/cli/network-cloud.md), or
+See [local CLI policies](/manuals/ai/sandboxes/cli/access/network-local.md),
+[cloud CLI policies](/manuals/ai/sandboxes/cli/access/network-cloud.md), or
 [Console policies](/manuals/ai/sandboxes/console/policies.md) for setup and inspection.
 
 ## Organization governance

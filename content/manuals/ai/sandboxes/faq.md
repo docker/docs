@@ -6,7 +6,7 @@ keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste
 ---
 
 Host integration and workspace instructions on this page describe local
-sandboxes. See [Local and cloud differences](/manuals/ai/sandboxes/cli/local-vs-cloud.md) before
+sandboxes. See [Local and cloud differences](/manuals/ai/sandboxes/cli/get-started/local-vs-cloud.md) before
 adapting those workflows to the cloud.
 
 ## Is Docker Sandboxes free? Can I use it commercially?
@@ -56,7 +56,7 @@ feature requires a separate paid subscription —
 to get started.
 
 Cloud sandboxes use separate network policy configuration.
-See [Cloud network policy](/manuals/ai/sandboxes/cli/network-cloud.md) for cloud controls.
+See [Cloud network policy](/manuals/ai/sandboxes/cli/access/network-cloud.md) for cloud controls.
 
 ## Which domains do I need to allow for Docker Sandboxes to work?
 
@@ -100,7 +100,7 @@ $ export SBX_NO_TELEMETRY=1
 
 Starting with `sbx` version 0.39.0, use `-e`/`--env` or `--env-file` with
 `sbx run` and `sbx create`. See
-[Set environment variables](/manuals/ai/sandboxes/cli/usage.md#set-environment-variables) for syntax,
+[Set environment variables](/manuals/ai/sandboxes/cli/manage/local.md#set-environment-variables) for syntax,
 precedence rules, persistent configuration for an existing sandbox, and
 guidance for credentials.
 
@@ -212,4 +212,4 @@ storing them: install `gnome-keyring` and start `dbus-run-session`, or run the
 keyring daemon under a login session that unlocks it. Once a working Secret
 Service is available, `sbx` stores new
 secrets in the keychain again. For where each platform keeps secrets, see
-[Where secrets are stored](/manuals/ai/sandboxes/cli/credentials.md#where-secrets-are-stored).
+[Where secrets are stored](/manuals/ai/sandboxes/cli/access/credentials-local.md#where-secrets-are-stored).

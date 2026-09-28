@@ -32,7 +32,7 @@ repository into a cloud sandbox instead of mounting a local directory.
 Read [files and storage](/manuals/ai/sandboxes/concepts/files.md),
 [secrets](/manuals/ai/sandboxes/concepts/secrets.md), and [lifecycle](/manuals/ai/sandboxes/concepts/lifecycle.md) before
 adapting a workflow that depends on these differences. The
-[CLI capability comparison](/manuals/ai/sandboxes/cli/local-vs-cloud.md) lists command-specific limits.
+[CLI capability comparison](/manuals/ai/sandboxes/cli/get-started/local-vs-cloud.md) lists command-specific limits.
 
 ## Choose an interface
 

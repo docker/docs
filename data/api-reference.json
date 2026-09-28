@@ -25033,7 +25033,7 @@
       "experimental": false,
       "guides": [],
       "id": "ai-governance",
-      "manual": "/manuals/ai/sandboxes/governance/",
+      "manual": "/manuals/ai/governance/",
       "operations": [
         {
           "acceptMedia": "application/json",
@@ -28773,11 +28773,11 @@
       "exampleCount": 81,
       "experimental": true,
       "guides": [
-        "/manuals/ai/sandboxes-api/authentication.md",
-        "/manuals/ai/sandboxes-api/get-started.md"
+        "/manuals/ai/sandboxes/api/authentication.md",
+        "/manuals/ai/sandboxes/api/get-started.md"
       ],
       "id": "sandboxes",
-      "manual": "/manuals/ai/sandboxes-api/",
+      "manual": "/manuals/ai/sandboxes/api/",
       "operations": [
         {
           "acceptMedia": "application/json",

@@ -1,7 +1,7 @@
 ---
 title: Get started with local Docker Sandboxes
-linkTitle: Get started locally
-weight: 15
+linkTitle: Local quickstart
+weight: 20
 description: Configure agent credentials and work through your first local Docker Sandboxes session.
 keywords: sandbox, sbx, get started, credentials, clone mode, network policy
 aliases:
@@ -9,7 +9,7 @@ aliases:
 ---
 
 This walkthrough uses local sandboxes. For cloud credentials and a first cloud
-session, see [Get started with cloud sandboxes](/manuals/ai/sandboxes/cli/get-started-cloud.md#get-started).
+session, see [Get started with cloud sandboxes](/manuals/ai/sandboxes/cli/get-started/cloud.md#get-started).
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can
@@ -22,7 +22,7 @@ up.
 
 ## Prerequisites
 
-- [Install the `sbx` CLI](/manuals/ai/sandboxes/cli/install.md) and sign in to Docker
+- [Install the `sbx` CLI](/manuals/ai/sandboxes/cli/get-started/install.md) and sign in to Docker
 - Configure an authentication method for the agent you want to use. Most agents
   require an API key for their model provider. See the [agent pages](/manuals/ai/sandboxes/agents/_index.md)
   for provider-specific instructions.
@@ -35,7 +35,7 @@ in with OAuth. The session token stays on your host and is never stored inside
 the sandbox.
 
 If you prefer to authenticate with an API key, see
-[Credentials](/manuals/ai/sandboxes/cli/credentials.md) for how to store one with
+[Credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md) for how to store one with
 `sbx secret set`.
 
 To give the agent access to GitHub for creating pull requests or interacting
@@ -74,7 +74,7 @@ Initialize the global network policy for your sandboxes:
 
 **Balanced** is a good starting point — it permits traffic to common
 development services while blocking everything else. You can adjust individual
-rules later. See [Local policy](/manuals/ai/sandboxes/cli/network-local.md) for a full
+rules later. See [Local policy](/manuals/ai/sandboxes/cli/access/network-local.md) for a full
 description of each option.
 
 Replace `claude` with the agent you want to use — see [Agents](/manuals/ai/sandboxes/agents/_index.md) for the
@@ -100,7 +100,7 @@ my-sandbox    claude   running           ~/my-project
 ```
 
 Each row shows a sandbox's name, the agent running in it, its status, any
-[published ports](/manuals/ai/sandboxes/cli/usage.md#publish-ports), and its
+[published ports](/manuals/ai/sandboxes/cli/manage/local.md#publish-ports), and its
 workspace — the host directory shared into the sandbox. That workspace is the
 one part of your machine the agent can see.
 
@@ -119,7 +119,7 @@ Everything else runs inside the microVM, isolated from your host:
 
 If you'd rather the agent not touch your working tree at all — for example,
 when running several agents on one repository — use
-[clone mode](/manuals/ai/sandboxes/cli/usage.md#clone-mode), which gives it a private clone instead.
+[clone mode](/manuals/ai/sandboxes/cli/manage/local.md#clone-mode), which gives it a private clone instead.
 
 ## Control what the agent can reach
 
@@ -142,7 +142,7 @@ $ sbx policy allow network registry.npmjs.org
 With **Locked Down**, even your model provider API is blocked unless you
 explicitly allow it. With **Balanced**, common development services are
 permitted by default. See
-[local policy](/manuals/ai/sandboxes/cli/network-local.md) for the full rule set
+[local policy](/manuals/ai/sandboxes/cli/access/network-local.md) for the full rule set
 and how to customize it.
 
 ## Clean up
@@ -179,11 +179,11 @@ rules from one place.
 
 Then explore:
 
-- [Usage guide](/manuals/ai/sandboxes/cli/usage.md) — basic commands, reconnecting, workspaces, and port
+- [Usage guide](/manuals/ai/sandboxes/cli/manage/local.md) — basic commands, reconnecting, workspaces, and port
   publishing.
-- [Workflow patterns](/manuals/ai/sandboxes/cli/workflows.md) — Git strategies, local services, CI, and
+- [Workflow patterns](/manuals/ai/sandboxes/cli/workflows/_index.md) — Git strategies, local services, CI, and
   authenticated tools.
-- [Sandbox environment files](/manuals/ai/sandboxes/cli/environment-files.md) — declare and share
+- [Sandbox environment files](/manuals/ai/sandboxes/cli/customize/environment-files.md) — declare and share
   repeatable local sandbox configurations with `sbxenv.yaml`.
 - [Customize with kits](/manuals/ai/sandboxes/concepts/kits.md) — package an agent, its tools, and its
   network rules into a reusable definition you launch with a single flag.

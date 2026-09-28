@@ -1,7 +1,7 @@
 ---
 title: Manage credentials
 linkTitle: Local credentials
-weight: 50
+weight: 10
 description: How Docker Sandboxes handle API keys and authentication credentials for sandboxed agents.
 keywords: docker sandboxes, credentials, api keys, authentication, proxy, ssh agent, secrets
 aliases:
@@ -11,7 +11,7 @@ aliases:
 
 These credential stores and authentication flows apply to local sandboxes.
 Cloud credentials require separate setup: see
-[Authenticate cloud agents](/manuals/ai/sandboxes/cli/credentials-cloud.md).
+[Authenticate cloud agents](/manuals/ai/sandboxes/cli/access/credentials-cloud.md).
 
 Most agents need an API key for their model provider. An HTTP/HTTPS proxy on
 your host intercepts outbound requests from the sandbox, looks up the matching
@@ -63,7 +63,7 @@ services. Custom kits can declare their own. The same `sbx secret set` flow
 works for both.
 
 Secrets whose names start with `mcp:` are reserved for the host's
-[MCP gateway](/manuals/ai/sandboxes/cli/mcp.md). See [MCP secrets](#mcp-secrets) for how
+[MCP gateway](/manuals/ai/sandboxes/cli/access/mcp.md). See [MCP secrets](#mcp-secrets) for how
 these differ from agent and provider credentials.
 
 ### Where secrets are stored
@@ -126,10 +126,10 @@ into sandboxes. The gateway uses them to authenticate connections to MCP
 servers on behalf of sandboxed agents.
 
 For setup instructions, see
-[OAuth client secrets](/manuals/ai/sandboxes/cli/mcp.md#use-a-pre-registered-oauth-client) and
-[custom request headers](/manuals/ai/sandboxes/cli/mcp.md#custom-request-headers). Header
+[OAuth client secrets](/manuals/ai/sandboxes/cli/access/mcp.md#use-a-pre-registered-oauth-client) and
+[custom request headers](/manuals/ai/sandboxes/cli/access/mcp.md#custom-request-headers). Header
 secrets use the global scope and have their own
-[restart requirements](/manuals/ai/sandboxes/cli/mcp.md#manage-header-secrets).
+[restart requirements](/manuals/ai/sandboxes/cli/access/mcp.md#manage-header-secrets).
 
 ### Use a dynamic secret source
 
@@ -212,7 +212,7 @@ $ sbx secret import openai --force
 
 Pass `--dry-run` to preview what would be imported without writing anything.
 Run `sbx secret ls` afterwards to confirm what's stored. For setting up
-credentials in CI, see [CI and headless use](/manuals/ai/sandboxes/cli/automation.md).
+credentials in CI, see [CI and headless use](/manuals/ai/sandboxes/cli/workflows/automation.md).
 
 ### Built-in services
 
@@ -396,7 +396,7 @@ Use SSH agent forwarding for Git operations over SSH and SSH-based commit
 signing. The signing key must be loaded in the host SSH agent for sandboxed
 commit signing to work. Outbound SSH connections are still subject to sandbox
 network policy. For details, see
-[Commit signing](/manuals/ai/sandboxes/cli/git.md#commit-signing).
+[Commit signing](/manuals/ai/sandboxes/cli/workflows/git.md#commit-signing).
 
 ## Custom secrets
 
@@ -497,7 +497,7 @@ $ sbx secret set-custom \
 The command prints a generated placeholder. For an existing sandbox, set
 `NODE_AUTH_TOKEN` to that placeholder using `sbx run -e` for an agent session,
 or `/etc/sandbox-persistent.sh` for future sessions. See
-[Set environment variables](/manuals/ai/sandboxes/cli/usage.md#set-environment-variables).
+[Set environment variables](/manuals/ai/sandboxes/cli/manage/local.md#set-environment-variables).
 Use the placeholder, not the actual GitHub token.
 
 Inside the sandbox, add the following entries to your project's `.npmrc`,
@@ -594,7 +594,7 @@ a third-party kit that requests the same service itself.
 ## Registry credentials
 
 Registry credentials authenticate to private OCI registries when pulling
-[templates](/manuals/ai/sandboxes/cli/usage.md#load-a-template) or [kits](/manuals/ai/sandboxes/concepts/kits.md), and can
+[templates](/manuals/ai/sandboxes/cli/manage/local.md#load-a-template) or [kits](/manuals/ai/sandboxes/concepts/kits.md), and can
 also let the agent pull and push images from inside the sandbox through the
 host-side proxy. Use `sbx secret set --registry <host>` to store them. For
 Docker Hub, `sbx` reuses your `sbx login` session — no registry secret needed.
@@ -736,8 +736,8 @@ $ sbx secret rm --sandbox my-sandbox --registry ghcr.io -f
   appears when the agent starts. See the individual [agent pages](/manuals/ai/sandboxes/agents/_index.md)
   for each agent's flow.
 - If you store credentials in 1Password or AWS Secrets Manager, see
-  [Sourcing credentials from 1Password](/manuals/ai/sandboxes/cli/authentication.md#source-credentials-from-1password)
-  and [Sourcing credentials from AWS Secrets Manager](/manuals/ai/sandboxes/cli/authentication.md#source-credentials-from-aws-secrets-manager).
+  [Sourcing credentials from 1Password](/manuals/ai/sandboxes/cli/access/authentication.md#source-credentials-from-1password)
+  and [Sourcing credentials from AWS Secrets Manager](/manuals/ai/sandboxes/cli/access/authentication.md#source-credentials-from-aws-secrets-manager).
 
 ## Custom templates and placeholder values
 

@@ -330,7 +330,7 @@
 # Docker Sandboxes
 "/ai/governance/access-controls/mcp/":
   - /go/mcp-policy/
-"/ai/sandboxes/cli/mcp/":
+"/ai/sandboxes/cli/access/mcp/":
   - /go/sbx-mcp-gateway/
 
 # Desktop MCP Toolkit
@@ -1571,23 +1571,23 @@
   - /ai/sandboxes-api/limits.md
 "/ai/sandboxes/concepts/architecture.md":
   - /ai/sandboxes/architecture.md
-"/ai/sandboxes/cli/get-started-cloud.md":
+"/ai/sandboxes/cli/get-started/cloud.md":
   - /ai/sandboxes/cloud.md
-"/ai/sandboxes/cli/credentials-cloud.md":
+"/ai/sandboxes/cli/access/credentials-cloud.md":
   - /ai/sandboxes/cloud/credentials.md
-"/ai/sandboxes/cli/local-vs-cloud.md":
+"/ai/sandboxes/cli/get-started/local-vs-cloud.md":
   - /ai/sandboxes/cloud/local-vs-cloud.md
-"/ai/sandboxes/cli/move.md":
+"/ai/sandboxes/cli/manage/move.md":
   - /ai/sandboxes/cloud/move.md
-"/ai/sandboxes/cli/network-cloud.md":
+"/ai/sandboxes/cli/access/network-cloud.md":
   - /ai/sandboxes/cloud/network-policy.md
-"/ai/sandboxes/cli/cloud-usage.md":
+"/ai/sandboxes/cli/manage/cloud.md":
   - /ai/sandboxes/cloud/usage.md
 "/ai/sandboxes/cli/local.md":
   - /ai/sandboxes/configuration.md
-"/ai/sandboxes/cli/credentials.md":
+"/ai/sandboxes/cli/access/credentials-local.md":
   - /ai/sandboxes/configuration/credentials.md
-"/ai/sandboxes/cli/environment-files.md":
+"/ai/sandboxes/cli/customize/environment-files.md":
   - /ai/sandboxes/configuration/environment-files.md
 "/ai/sandboxes/cli/local/gpu-passthrough.md":
   - /ai/sandboxes/configuration/gpu-passthrough.md
@@ -1617,9 +1617,9 @@
   - /ai/sandboxes/customize/author/tool-mixins.md
 "/ai/sandboxes/author-kits/kits-v2.md":
   - /ai/sandboxes/customize/kits-v2.md
-"/ai/sandboxes/cli/kits.md":
+"/ai/sandboxes/cli/customize/kits.md":
   - /ai/sandboxes/customize/use-kits.md
-"/ai/sandboxes/cli/get-started-local.md":
+"/ai/sandboxes/cli/get-started/local.md":
   - /ai/sandboxes/get-started.md
 "/ai/governance.md":
   - /ai/sandboxes/governance.md
@@ -1627,7 +1627,7 @@
   - /ai/sandboxes/governance/access-controls.md
 "/ai/governance/access-controls/filesystem.md":
   - /ai/sandboxes/governance/access-controls/filesystem.md
-"/ai/sandboxes/cli/network-local.md":
+"/ai/sandboxes/cli/access/network-local.md":
   - /ai/sandboxes/governance/access-controls/local.md
 "/ai/governance/access-controls/mcp.md":
   - /ai/sandboxes/governance/access-controls/mcp.md
@@ -1659,21 +1659,21 @@
   - /ai/sandboxes/governance/reference.md
 "/ai/governance/reference/mcp-policy.md":
   - /ai/sandboxes/governance/reference/mcp-policy.md
-"/ai/sandboxes/cli/install.md":
+"/ai/sandboxes/cli/get-started/install.md":
   - /ai/sandboxes/install.md
-"/ai/sandboxes/cli/integrations.md":
+"/ai/sandboxes/cli/workflows/integrations.md":
   - /ai/sandboxes/integrations.md
-"/ai/sandboxes/cli/integrations/chatgpt.md":
+"/ai/sandboxes/cli/workflows/integrations/chatgpt.md":
   - /ai/sandboxes/integrations/chatgpt.md
-"/ai/sandboxes/cli/integrations/claude-desktop.md":
+"/ai/sandboxes/cli/workflows/integrations/claude-desktop.md":
   - /ai/sandboxes/integrations/claude-desktop.md
-"/ai/sandboxes/cli/integrations/cursor.md":
+"/ai/sandboxes/cli/workflows/integrations/cursor.md":
   - /ai/sandboxes/integrations/cursor.md
-"/ai/sandboxes/cli/integrations/t3-code.md":
+"/ai/sandboxes/cli/workflows/integrations/t3-code.md":
   - /ai/sandboxes/integrations/t3-code.md
-"/ai/sandboxes/cli/integrations/vscode.md":
+"/ai/sandboxes/cli/workflows/integrations/vscode.md":
   - /ai/sandboxes/integrations/vscode.md
-"/ai/sandboxes/cli/mcp.md":
+"/ai/sandboxes/cli/access/mcp.md":
   - /ai/sandboxes/mcp-gateway.md
 "/ai/sandboxes/reference/cli-release-notes.md":
   - /ai/sandboxes/release-notes.md
@@ -1685,17 +1685,17 @@
   - /ai/sandboxes/security/isolation.md
 "/ai/sandboxes/cli/troubleshooting.md":
   - /ai/sandboxes/troubleshooting.md
-"/ai/sandboxes/cli/usage.md":
+"/ai/sandboxes/cli/manage/local.md":
   - /ai/sandboxes/usage.md
 "/ai/sandboxes/cli/workflows.md":
   - /ai/sandboxes/workflows.md
 "/ai/sandboxes/cli/local/agent-skills.md":
   - /ai/sandboxes/workflows/agent-skills.md
-"/ai/sandboxes/cli/authentication.md":
+"/ai/sandboxes/cli/access/authentication.md":
   - /ai/sandboxes/workflows/authentication.md
-"/ai/sandboxes/cli/automation.md":
+"/ai/sandboxes/cli/workflows/automation.md":
   - /ai/sandboxes/workflows/automation.md
-"/ai/sandboxes/cli/development.md":
+"/ai/sandboxes/cli/workflows/development.md":
   - /ai/sandboxes/workflows/development.md
-"/ai/sandboxes/cli/git.md":
+"/ai/sandboxes/cli/workflows/git.md":
   - /ai/sandboxes/workflows/git.md

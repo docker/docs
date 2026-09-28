@@ -36,7 +36,7 @@ where you supply a model provider key, Factory manages model access through
 your Factory account.
 
 **API key**: Store your Factory API key using
-[stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
+[stored secrets](/manuals/ai/sandboxes/cli/access/credentials-local.md#stored-secrets):
 
 ```console
 $ sbx secret set droid

@@ -46,7 +46,7 @@ $ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-age
 
 `git+ssh://` URLs work with your local SSH agent and Git credentials.
 For private registries, see
-[Registry credentials](/manuals/ai/sandboxes/cli/credentials.md#registry-credentials).
+[Registry credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md#registry-credentials).
 
 Kit selection with `--kit` applies at creation. Recreate the sandbox to change
 its kit set, except for the limited updates supported by
@@ -56,7 +56,7 @@ removed from a running sandbox.
 
 ### Restrict kit sources
 
-See [Restrict kit sources](/manuals/ai/sandboxes/cli/kits.md#restrict-kit-sources)
+See [Restrict kit sources](/manuals/ai/sandboxes/cli/customize/kits.md#restrict-kit-sources)
 for source policies. `kit.allowLocalKits` also governs v2 ZIP files.
 
 ## Image overrides for built-in agents
@@ -120,7 +120,7 @@ $ docker build -t docker.io/<NAMESPACE>/my-template:v1 --push .
 ```
 
 For registry credentials and loading a locally built image, see
-[Load a template](/manuals/ai/sandboxes/cli/usage.md#load-a-template).
+[Load a template](/manuals/ai/sandboxes/cli/manage/local.md#load-a-template).
 
 Run the sandbox with your image:
 
@@ -222,7 +222,7 @@ environment:
 ```
 
 Don't use kit arguments for API tokens, passwords, or other secrets. Use
-[Credentials](/manuals/ai/sandboxes/cli/credentials.md) to provide sensitive values to
+[Credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md) to provide sensitive values to
 a sandbox.
 
 | Field         | Description                                                                                                  |
@@ -334,7 +334,7 @@ directly into that profile.
 A kit declares the credentials it needs and how the proxy injects them into
 outbound requests. It does not declare a host discovery source. The user
 provides the value through the secret store or the first-run prompt, and a
-[credential binding](/manuals/ai/sandboxes/cli/credentials.md) authorizes its use. A kit
+[credential binding](/manuals/ai/sandboxes/cli/access/credentials-local.md) authorizes its use. A kit
 can't read arbitrary host environment variables or files.
 
 `credentials` is a list; each entry names a `service` and configures one or more
@@ -343,7 +343,7 @@ auth mechanisms.
 | Field         | Description                                                                                                                                 |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `service`     | Credential identifier, matched against the value stored with `sbx secret set`. Lowercase kebab-case.                                        |
-| `description` | Optional. Shown to the user when approving a [binding](/manuals/ai/sandboxes/cli/credentials.md#credential-bindings).                                     |
+| `description` | Optional. Shown to the user when approving a [binding](/manuals/ai/sandboxes/cli/access/credentials-local.md#credential-bindings).                                     |
 | `required`    | Marks the credential as essential to the agent. If it has no binding, `sbx` warns and starts with the credential withheld. Default `false`. |
 | `provider`    | Reserved for a provider registry. Accepted with a warning and no runtime effect.                                                            |
 | `apiKey`      | API-key injection (see [apiKey](#apikey)).                                                                                                  |
@@ -665,7 +665,7 @@ The `sbx kit` subcommands validate, inspect, and publish kits:
 
 For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
 `sbx login`. For other registries, they prefer credentials stored with
-[`sbx secret set --registry`](/manuals/ai/sandboxes/cli/credentials.md#registry-credentials).
+[`sbx secret set --registry`](/manuals/ai/sandboxes/cli/access/credentials-local.md#registry-credentials).
 Both commands fall back to the Docker credential store, so credentials from
 `docker login` also work.
 
@@ -766,7 +766,7 @@ equivalents:
 Credential discovery also moved out of the kit in v2: a kit declares which
 credentials it needs and how to inject them, but where each value comes from is
 controlled by the user through
-[credential bindings](/manuals/ai/sandboxes/cli/credentials.md#credential-bindings).
+[credential bindings](/manuals/ai/sandboxes/cli/access/credentials-local.md#credential-bindings).
 
 > [!NOTE]
 > `mixins` and `sandbox.build` are accepted by the parser, but runtime support

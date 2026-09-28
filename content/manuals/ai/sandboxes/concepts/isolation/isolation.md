@@ -46,16 +46,16 @@ pasting them on the host.
 Each sandbox has its own isolated network. Sandboxes cannot communicate
 directly with each other or share a network with your host. To reach a service
 running on the host through a policy-controlled connection, see
-[Accessing host services from a sandbox](/manuals/ai/sandboxes/cli/development.md#accessing-host-services-from-a-sandbox).
+[Accessing host services from a sandbox](/manuals/ai/sandboxes/cli/workflows/development.md#accessing-host-services-from-a-sandbox).
 
 All outbound TCP traffic passes through a proxy on your host that enforces the
 [network access policy](/manuals/ai/governance/access-controls/network.md). The sandbox
 routes traffic through either a forward proxy or a transparent proxy depending
 on the client's configuration. Both enforce the network policy. Only the
-forward proxy [injects credentials](/manuals/ai/sandboxes/cli/credentials.md) for AI services.
+forward proxy [injects credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md) for AI services.
 
 Outbound UDP is disabled by default. When you turn on
-[experimental UDP egress](/manuals/ai/sandboxes/cli/network-local.md#allow-outbound-udp),
+[experimental UDP egress](/manuals/ai/sandboxes/cli/access/network-local.md#allow-outbound-udp),
 network policy controls its destinations. ICMP is blocked. DNS queries use the
 sandbox's internal resolver, which enforces network policy. TCP connections
 are allowed only when a policy rule matches the destination.
@@ -79,7 +79,7 @@ daemon.
 
 This Docker Engine boundary applies to processes running inside the sandbox VM.
 It doesn't apply to local stdio MCP servers registered through the
-[MCP gateway](/manuals/ai/sandboxes/cli/mcp.md). Those servers run on the host, outside the
+[MCP gateway](/manuals/ai/sandboxes/cli/access/mcp.md). Those servers run on the host, outside the
 sandbox VM. If a local MCP server starts a Docker container, it uses Docker on
 the host.
 
@@ -117,7 +117,7 @@ When you create a sandbox, choose how the agent receives a workspace:
   read-only into the VM and the agent works on a private clone inside the VM.
   The agent's edits never reach your host until you fetch them.
 
-See [Git workflows](/manuals/ai/sandboxes/cli/git.md) for direct-mount and clone-mode
+See [Git workflows](/manuals/ai/sandboxes/cli/workflows/git.md) for direct-mount and clone-mode
 workflows.
 
 ### Mountless
@@ -193,7 +193,7 @@ shows them in an environment plan and asks for approval. Review the plan before
 you approve host commands.
 
 For file placement and read-only protection, see
-[Sandbox environment files](/manuals/ai/sandboxes/cli/environment-files.md#workspace).
+[Sandbox environment files](/manuals/ai/sandboxes/cli/customize/environment-files.md#workspace).
 
 > [!WARNING]
 > Treat sandbox-modified workspace files the same way you would treat a pull
@@ -202,7 +202,7 @@ For file placement and read-only protection, see
 
 ### Clone mode
 
-When you start a sandbox with [`--clone`](/manuals/ai/sandboxes/cli/usage.md#clone-mode), the agent
+When you start a sandbox with [`--clone`](/manuals/ai/sandboxes/cli/manage/local.md#clone-mode), the agent
 never works directly against your host repository. Even with full root
 inside the VM, it cannot modify your `.git` directory, your working tree,
 or any tracked file on your host.
@@ -285,4 +285,4 @@ sign data. Docker Sandboxes forwards only sockets it recognizes as SSH agents.
 A sandbox receives no SSH agent when forwarding is disabled, the configuration
 is unavailable, or the selected socket can't be used.
 
-For how to store and manage credentials, see [Credentials](/manuals/ai/sandboxes/cli/credentials.md).
+For how to store and manage credentials, see [Credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md).

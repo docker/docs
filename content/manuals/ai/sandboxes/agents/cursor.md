@@ -29,7 +29,7 @@ $ cd ~/my-project
 $ sbx run cursor
 ```
 
-To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace), use
+To create a [mountless sandbox](/manuals/ai/sandboxes/cli/manage/local.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
 ## Authentication
@@ -37,7 +37,7 @@ To create a [mountless sandbox](/manuals/ai/sandboxes/cli/usage.md#choose-a-work
 Cursor supports two authentication methods: an API key or OAuth.
 
 **API key**: Store your Cursor API key using
-[stored secrets](/manuals/ai/sandboxes/cli/credentials.md#stored-secrets):
+[stored secrets](/manuals/ai/sandboxes/cli/access/credentials-local.md#stored-secrets):
 
 ```console
 $ sbx secret set cursor

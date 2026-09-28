@@ -9,9 +9,9 @@ aliases:
 ---
 
 These workspace modes apply to local sandboxes. In cloud sandboxes,
-[transfer files or clone a remote repository](/manuals/ai/sandboxes/cli/cloud-usage.md#transfer-files).
+[transfer files or clone a remote repository](/manuals/ai/sandboxes/cli/manage/cloud.md#transfer-files).
 To copy a sandbox filesystem between environments, see
-[Move a sandbox](/manuals/ai/sandboxes/cli/move.md). Host mounts and clone-mode volumes are not
+[Move a sandbox](/manuals/ai/sandboxes/cli/manage/move.md). Host mounts and clone-mode volumes are not
 included in that snapshot.
 
 Sandboxes support three approaches for working with Git repositories. The
@@ -195,7 +195,7 @@ SSH agent forwarding is enabled by default. When `SSH_AUTH_SOCK` is set,
 sandboxes forward your host SSH agent into the sandbox, so the agent can sign
 commits with your SSH key without the private key ever leaving your host. If
 you turned off forwarding or use a fixed SSH agent socket, see
-[SSH agent configuration](/manuals/ai/sandboxes/cli/credentials.md#ssh-agent).
+[SSH agent configuration](/manuals/ai/sandboxes/cli/access/credentials-local.md#ssh-agent).
 
 1. Make sure the signing key is loaded in your host SSH agent:
 

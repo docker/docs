@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-weight: 160
+weight: 70
 description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 aliases:
@@ -8,9 +8,9 @@ aliases:
 ---
 
 The following diagnostics and recovery steps apply to local sandboxes. Use
-[`sbx --cloud diagnose`](/manuals/ai/sandboxes/cli/cloud-usage.md#diagnose-cloud-access) to check cloud
+[`sbx --cloud diagnose`](/manuals/ai/sandboxes/cli/manage/cloud.md#diagnose-cloud-access) to check cloud
 connectivity and account access. For cloud files, expiration, and network access, see
-[Cloud sandboxes](/manuals/ai/sandboxes/cli/get-started-cloud.md). Local daemon restarts and `sbx reset` do not repair
+[Cloud sandboxes](/manuals/ai/sandboxes/cli/get-started/cloud.md). Local daemon restarts and `sbx reset` do not repair
 cloud sandbox state.
 
 ## Run diagnostics
@@ -70,7 +70,7 @@ $ sbx run <agent>
 
 A sandbox's workspace configuration is fixed when the sandbox is created. To
 reuse the name of an existing mountless sandbox, first
-[copy out any files you want to keep](/manuals/ai/sandboxes/cli/usage.md#copy-files-between-host-and-sandbox),
+[copy out any files you want to keep](/manuals/ai/sandboxes/cli/manage/local.md#copy-files-between-host-and-sandbox),
 then remove and recreate it with a workspace path:
 
 ```console
@@ -78,7 +78,7 @@ $ sbx rm <sandbox-name>
 $ sbx run --name <sandbox-name> <agent>
 ```
 
-See [Choose a workspace](/manuals/ai/sandboxes/cli/usage.md#choose-a-workspace) for mountless, direct,
+See [Choose a workspace](/manuals/ai/sandboxes/cli/manage/local.md#choose-a-workspace) for mountless, direct,
 and clone-mode behavior.
 
 ## Kiro, Copilot, or Droid shorthand fails
@@ -87,7 +87,7 @@ In Docker Sandboxes v0.42, `sbx run kiro`, `sbx run copilot`, and
 `sbx run droid` fail because these agents moved from built-in agents to
 public kits and their shorthand names aren't resolved in this release.
 
-[Upgrade Docker Sandboxes](/manuals/ai/sandboxes/cli/install.md) to v0.43.0 or later to launch
+[Upgrade Docker Sandboxes](/manuals/ai/sandboxes/cli/get-started/install.md) to v0.43.0 or later to launch
 these agents by name again. If you need to stay on v0.42, use the full kit
 reference for your agent:
 
@@ -144,7 +144,7 @@ $ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
 ```
 
 Then run the command again. For details, including how to allow local kits or
-any remote source, see [Restrict kit sources](/manuals/ai/sandboxes/cli/kits.md#restrict-kit-sources).
+any remote source, see [Restrict kit sources](/manuals/ai/sandboxes/cli/customize/kits.md#restrict-kit-sources).
 
 ## SSH and other non-HTTP connections fail
 
@@ -164,7 +164,7 @@ can't be recovered. Use an address-based rule in that case:
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-UDP requires [experimental UDP egress](/manuals/ai/sandboxes/cli/network-local.md#allow-outbound-udp)
+UDP requires [experimental UDP egress](/manuals/ai/sandboxes/cli/access/network-local.md#allow-outbound-udp)
 and UDP allow rules. ICMP is blocked and can't be unblocked with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
@@ -178,7 +178,7 @@ $ git clone https://github.com/owner/repo.git
 
 If a request to `127.0.0.1` or a local network IP returns "connection refused"
 from inside a sandbox, the address is not reachable from within the sandbox VM.
-See [Accessing host services from a sandbox](/manuals/ai/sandboxes/cli/development.md#accessing-host-services-from-a-sandbox).
+See [Accessing host services from a sandbox](/manuals/ai/sandboxes/cli/workflows/development.md#accessing-host-services-from-a-sandbox).
 
 ## Docker authentication failure
 
@@ -193,7 +193,7 @@ If the agent can't reach its model provider or you see API key errors, the key
 is likely invalid, expired, or not configured. Verify it's set in your shell
 configuration file and that you sourced it or opened a new terminal.
 
-For agents that use the [credential proxy](/manuals/ai/sandboxes/cli/credentials.md), make sure
+For agents that use the [credential proxy](/manuals/ai/sandboxes/cli/access/credentials-local.md), make sure
 you haven't set the API key to an invalid value inside the sandbox — the proxy
 injects credentials automatically on outbound requests.
 
@@ -217,7 +217,7 @@ $ sbx mcp add acme --url https://mcp.acme.com/mcp --disable-http2
 Replace the example URL with your MCP endpoint. The setting applies to later
 connections to this server. The flag requires `--url` and can't be used with
 `--command` or `--local`. For registration options, see
-[Register an MCP server](/manuals/ai/sandboxes/cli/mcp.md#register-an-mcp-server).
+[Register an MCP server](/manuals/ai/sandboxes/cli/access/mcp.md#register-an-mcp-server).
 
 ## API calls fail with a certificate error
 
@@ -332,7 +332,7 @@ $ DOCKER_SANDBOXES_DOCKER_SIZE=20g sbx run claude
 The Docker data disk must be at least 512 MiB. The environment variable doesn't
 resize existing volumes.
 
-For a [clone-mode sandbox](/manuals/ai/sandboxes/cli/usage.md#clone-mode), set
+For a [clone-mode sandbox](/manuals/ai/sandboxes/cli/manage/local.md#clone-mode), set
 `DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE` before creating the sandbox to
 configure the cloned workspace volume capacity. The variable accepts
 human-readable size strings such as `100g`:
@@ -358,7 +358,7 @@ $ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <agent>
 
 ## Clone mode reports "not in a Git repository" on WSL
 
-On Windows, running [`sbx run --clone`](/manuals/ai/sandboxes/cli/usage.md#clone-mode) against a
+On Windows, running [`sbx run --clone`](/manuals/ai/sandboxes/cli/manage/local.md#clone-mode) against a
 repository on a WSL filesystem (a `\\wsl.localhost\...` path) can fail even
 though the directory is a valid Git repository:
 
@@ -397,12 +397,12 @@ root in your Dockerfile, then rebuild the template and create a sandbox from
 it. Docker-provided sandbox templates already include `socat`.
 
 If the socket exists but forwarding still fails, check the
-[SSH agent settings](/manuals/ai/sandboxes/cli/credentials.md#ssh-agent).
+[SSH agent settings](/manuals/ai/sandboxes/cli/access/credentials-local.md#ssh-agent).
 
 ## Sandbox commits aren't signed
 
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
-For setup steps, see [Commit signing](/manuals/ai/sandboxes/cli/git.md#commit-signing).
+For setup steps, see [Commit signing](/manuals/ai/sandboxes/cli/workflows/git.md#commit-signing).
 
 Forwarding is enabled by default. Check
 [`ssh.agentForwardingEnabled`](/manuals/ai/sandboxes/cli/local/settings.md#sshagentforwardingenabled)

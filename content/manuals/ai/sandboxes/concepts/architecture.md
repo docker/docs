@@ -38,7 +38,7 @@ changes.
 
 Clone mode uses a third storage layout. The host repository is mounted
 read-only at `/run/sandbox/source`, and the agent works in a private clone
-inside the sandbox. See [Clone mode](/manuals/ai/sandboxes/cli/usage.md#clone-mode).
+inside the sandbox. See [Clone mode](/manuals/ai/sandboxes/cli/manage/local.md#clone-mode).
 
 > [!WARNING]
 > Avoid mounting network-attached or remote storage (network drives, SMB/NFS
@@ -82,7 +82,7 @@ All outbound TCP traffic from the sandbox routes through a proxy on your host.
 Agents use a forward proxy for HTTP and HTTPS; other TCP traffic is forwarded
 transparently. Both paths enforce
 [network access policies](/manuals/ai/governance/access-controls/network.md). The forward
-proxy also handles [credential injection](/manuals/ai/sandboxes/cli/credentials.md). See
+proxy also handles [credential injection](/manuals/ai/sandboxes/cli/access/credentials-local.md). See
 [Network isolation](/manuals/ai/sandboxes/concepts/isolation/isolation.md#network-isolation) for how this
 works and [Default security posture](/manuals/ai/sandboxes/concepts/isolation/defaults.md) for what is
 allowed out of the box.
@@ -139,7 +139,7 @@ Docker images, and in-sandbox files.
 Sandboxes persist until explicitly removed. Stopping an agent doesn't delete
 the VM; environment setup carries over between runs. Use `sbx rm` to delete
 the sandbox, its VM, and all of its contents. If the sandbox used
-[`--clone`](/manuals/ai/sandboxes/cli/usage.md#clone-mode), the `sandbox-<name>` Git remote is also
+[`--clone`](/manuals/ai/sandboxes/cli/manage/local.md#clone-mode), the `sandbox-<name>` Git remote is also
 removed from your host repository.
 
 ## Comparison to alternatives

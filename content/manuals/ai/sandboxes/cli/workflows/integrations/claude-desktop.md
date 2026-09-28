@@ -11,7 +11,7 @@ aliases:
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
 These connection instructions use a local sandbox. For cloud SSH setup, see
-[Connect with SSH](/manuals/ai/sandboxes/cli/cloud-usage.md#connect-with-ssh).
+[Connect with SSH](/manuals/ai/sandboxes/cli/manage/cloud.md#connect-with-ssh).
 
 Claude Desktop can run Claude Code on a remote machine over SSH. Point it at a
 sandbox so the agent works inside the isolated environment instead of on your
@@ -24,7 +24,7 @@ host.
 
 ## Prerequisites
 
-- SSH access set up. See [Editor and app integrations](/manuals/ai/sandboxes/cli/integrations/_index.md#enable-ssh-access).
+- SSH access set up. See [Editor and app integrations](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md#enable-ssh-access).
 - Claude Desktop installed.
 
 Use a sandbox created with the Claude agent type. The Claude sandbox template
@@ -58,7 +58,7 @@ sandbox hostname, such as `demo.sbx`, in **SSH Host**. Leave **SSH Port** and
 
 Select the connection from the environment drop-down, then use the remote
 folder picker to
-[select the mounted workspace](/manuals/ai/sandboxes/cli/integrations/_index.md#select-the-workspace-folder). The
+[select the mounted workspace](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md#select-the-workspace-folder). The
 picker might initially open at `/home/agent`.
 
 For more connection options, see the Claude Desktop instructions for
@@ -91,7 +91,7 @@ Claude Desktop after updating `Path`.
 
 ## Related
 
-- [Editor and app integrations](/manuals/ai/sandboxes/cli/integrations/_index.md) — how SSH access works and how to
+- [Editor and app integrations](/manuals/ai/sandboxes/cli/workflows/integrations/_index.md) — how SSH access works and how to
   set it up
 - [Claude Code](/manuals/ai/sandboxes/agents/claude-code.md) — run the Claude Code CLI inside a
   sandbox

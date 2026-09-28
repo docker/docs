@@ -11,7 +11,7 @@ aliases:
 Use `sbx settings` to configure Docker Sandboxes on your host, including
 clipboard access, kit sources, and defaults for sandbox creation. Settings
 apply across your local sandboxes. For project-specific configuration, use
-[environment files](/manuals/ai/sandboxes/cli/environment-files.md).
+[environment files](/manuals/ai/sandboxes/cli/customize/environment-files.md).
 
 The commands read and write settings through the local daemon, starting it if
 necessary. Overrides persist across CLI invocations and daemon restarts.
@@ -185,7 +185,7 @@ $ sbx settings set env.rememberHostCommands true
 The first approval is still required. Commands run on your host with your
 permissions, outside the sandbox. Leave the setting at `false` to require
 approval on every invocation, or use `--auto-approve` to approve only one
-invocation. See [environment lifecycle commands](/manuals/ai/sandboxes/cli/environment-files.md#lifecycle).
+invocation. See [environment lifecycle commands](/manuals/ai/sandboxes/cli/customize/environment-files.md#lifecycle).
 
 #### ssh.agentForwardingEnabled {.wrap-anywhere}
 
@@ -201,7 +201,7 @@ $ sbx daemon restart
 
 Restarting the daemon applies the change to existing forwarders. When forwarding
 is enabled, the private keys remain on the host, but sandboxed processes can
-ask the agent to use them. See [SSH agent credentials](/manuals/ai/sandboxes/cli/credentials.md#ssh-agent).
+ask the agent to use them. See [SSH agent credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md#ssh-agent).
 
 #### ssh.agentSocketPath {.wrap-anywhere}
 
@@ -307,7 +307,7 @@ organization's repositories, but not `github.com/myorg-other/`. The value
 by [kit.allowLocalKits](#kitallowlocalkits), and pinned agent kits have the
 [kit.allowExtractedAgents](#kitallowextractedagents) exception.
 
-See [restrict kit sources](/manuals/ai/sandboxes/cli/kits.md#restrict-kit-sources) for source
+See [restrict kit sources](/manuals/ai/sandboxes/cli/customize/kits.md#restrict-kit-sources) for source
 formats and examples.
 
 #### kit.allowLocalKits {.wrap-anywhere}
@@ -433,7 +433,7 @@ $ sbx daemon restart
 The daemon caches its gateway selection, so a restart is required after changing
 this setting. It doesn't override a gateway selected by organization governance.
 Set it back to `false` and restart to return to automatic selection. See
-[MCP gateway](/manuals/ai/sandboxes/cli/mcp.md) for server registration and agent setup.
+[MCP gateway](/manuals/ai/sandboxes/cli/access/mcp.md) for server registration and agent setup.
 
 ### Diagnostics
 

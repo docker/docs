@@ -57,7 +57,7 @@ reuse cached results.
 By default, remote kit sources are limited to Docker Hub. To use a Git
 source or another registry, see [Restrict kit sources](#restrict-kit-sources).
 For private images, see
-[Registry credentials](/manuals/ai/sandboxes/cli/credentials.md#registry-credentials).
+[Registry credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md#registry-credentials).
 
 ## Reuse a sandbox
 
@@ -80,7 +80,7 @@ workload needs to reach OpenAI and authenticate. If you use an API key,
 store it on your host and approve the kit's request to use it. These are
 separate steps: storing a secret doesn't give a third-party kit permission to
 use it. See
-[Credential bindings](/manuals/ai/sandboxes/cli/credentials.md#credential-bindings)
+[Credential bindings](/manuals/ai/sandboxes/cli/access/credentials-local.md#credential-bindings)
 for preparing unattended runs.
 
 Check the kit's documentation for the services it contacts, the credentials
@@ -199,7 +199,7 @@ arguments in your own set, see
 
 Argument values are plain text and can be recorded in shell history and
 sandbox state. Use
-[stored credentials](/manuals/ai/sandboxes/cli/credentials.md)
+[stored credentials](/manuals/ai/sandboxes/cli/access/credentials-local.md)
 for secrets.
 
 ### Target a specific kit

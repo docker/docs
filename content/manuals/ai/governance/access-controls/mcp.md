@@ -13,7 +13,7 @@ Context Protocol (MCP) servers developers can register and what agents can do
 through Docker's MCP gateway. Use these policies to approve trusted servers,
 withdraw access to a server, require approval for tool calls, and restrict
 host-run servers. To register MCP servers and connect them to sandboxes, see
-[MCP gateway](/manuals/ai/sandboxes/cli/mcp.md).
+[MCP gateway](/manuals/ai/sandboxes/cli/access/mcp.md).
 
 MCP access policies apply only to server registration and requests handled by
 Docker's MCP gateway. They don't govern an MCP server that an agent or MCP
@@ -55,7 +55,7 @@ existing server must match every name under which it was registered.
 Built-in gateway tools, such as `mcp-add`, `code-mode`, and OAuth authorization
 helpers, are also governed at use time. They are `MCP::Primordial` resources
 rather than tools associated with a registered server. For details, see
-[Built-in gateway tools](/manuals/ai/sandboxes/cli/mcp.md#built-in-gateway-tools).
+[Built-in gateway tools](/manuals/ai/sandboxes/cli/access/mcp.md#built-in-gateway-tools).
 
 Use-time policy doesn't hide or remove existing registrations. Tool and
 resource listings can also include entries that policy denies when an agent

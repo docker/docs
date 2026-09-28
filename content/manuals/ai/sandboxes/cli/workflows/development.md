@@ -9,7 +9,7 @@ aliases:
 ---
 
 This page describes local sandboxes, host services, and local port mappings.
-For cloud endpoints, see [Expose a port](/manuals/ai/sandboxes/cli/cloud-usage.md#expose-a-port).
+For cloud endpoints, see [Expose a port](/manuals/ai/sandboxes/cli/manage/cloud.md#expose-a-port).
 
 Use a sandbox's private runtime to build images, run tests, and connect local
 tools to development services across the sandbox boundary.

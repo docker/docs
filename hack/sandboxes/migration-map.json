@@ -1,5 +1,5 @@
 {
-  "baseCommit": "c917c7fa873a6bc61de2c25c116f355450b5b97a",
+  "baseCommit": "f22c0e6595ca1996d2a6559cadcf2596499e6c11",
   "pages": [
     {
       "source": "content/manuals/agentic-platform/_index.md",
@@ -625,54 +625,54 @@
     },
     {
       "source": "content/manuals/ai/sandboxes/cloud/_index.md",
-      "destination": "content/manuals/ai/sandboxes/cli/get-started-cloud.md",
+      "destination": "content/manuals/ai/sandboxes/cli/get-started/cloud.md",
       "oldURL": "/ai/sandboxes/cloud/",
-      "url": "/ai/sandboxes/cli/get-started-cloud/",
+      "url": "/ai/sandboxes/cli/get-started/cloud/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/cloud/credentials.md",
-      "destination": "content/manuals/ai/sandboxes/cli/credentials-cloud.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/credentials-cloud.md",
       "oldURL": "/ai/sandboxes/cloud/credentials/",
-      "url": "/ai/sandboxes/cli/credentials-cloud/",
+      "url": "/ai/sandboxes/cli/access/credentials-cloud/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/cloud/local-vs-cloud.md",
-      "destination": "content/manuals/ai/sandboxes/cli/local-vs-cloud.md",
+      "destination": "content/manuals/ai/sandboxes/cli/get-started/local-vs-cloud.md",
       "oldURL": "/ai/sandboxes/cloud/local-vs-cloud/",
-      "url": "/ai/sandboxes/cli/local-vs-cloud/",
+      "url": "/ai/sandboxes/cli/get-started/local-vs-cloud/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/cloud/move.md",
-      "destination": "content/manuals/ai/sandboxes/cli/move.md",
+      "destination": "content/manuals/ai/sandboxes/cli/manage/move.md",
       "oldURL": "/ai/sandboxes/cloud/move/",
-      "url": "/ai/sandboxes/cli/move/",
+      "url": "/ai/sandboxes/cli/manage/move/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/cloud/network-policy.md",
-      "destination": "content/manuals/ai/sandboxes/cli/network-cloud.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/network-cloud.md",
       "oldURL": "/ai/sandboxes/cloud/network-policy/",
-      "url": "/ai/sandboxes/cli/network-cloud/",
+      "url": "/ai/sandboxes/cli/access/network-cloud/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/cloud/usage.md",
-      "destination": "content/manuals/ai/sandboxes/cli/cloud-usage.md",
+      "destination": "content/manuals/ai/sandboxes/cli/manage/cloud.md",
       "oldURL": "/ai/sandboxes/cloud/usage/",
-      "url": "/ai/sandboxes/cli/cloud-usage/",
+      "url": "/ai/sandboxes/cli/manage/cloud/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
@@ -688,18 +688,18 @@
     },
     {
       "source": "content/manuals/ai/sandboxes/configuration/credentials.md",
-      "destination": "content/manuals/ai/sandboxes/cli/credentials.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/credentials-local.md",
       "oldURL": "/ai/sandboxes/configuration/credentials/",
-      "url": "/ai/sandboxes/cli/credentials/",
+      "url": "/ai/sandboxes/cli/access/credentials-local/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/configuration/environment-files.md",
-      "destination": "content/manuals/ai/sandboxes/cli/environment-files.md",
+      "destination": "content/manuals/ai/sandboxes/cli/customize/environment-files.md",
       "oldURL": "/ai/sandboxes/configuration/environment-files/",
-      "url": "/ai/sandboxes/cli/environment-files/",
+      "url": "/ai/sandboxes/cli/customize/environment-files/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
@@ -832,9 +832,9 @@
     },
     {
       "source": "content/manuals/ai/sandboxes/customize/use-kits.md",
-      "destination": "content/manuals/ai/sandboxes/cli/kits.md",
+      "destination": "content/manuals/ai/sandboxes/cli/customize/kits.md",
       "oldURL": "/ai/sandboxes/customize/use-kits/",
-      "url": "/ai/sandboxes/cli/kits/",
+      "url": "/ai/sandboxes/cli/customize/kits/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
@@ -850,9 +850,9 @@
     },
     {
       "source": "content/manuals/ai/sandboxes/get-started.md",
-      "destination": "content/manuals/ai/sandboxes/cli/get-started-local.md",
+      "destination": "content/manuals/ai/sandboxes/cli/get-started/local.md",
       "oldURL": "/ai/sandboxes/get-started/",
-      "url": "/ai/sandboxes/cli/get-started-local/",
+      "url": "/ai/sandboxes/cli/get-started/local/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
@@ -886,9 +886,9 @@
     },
     {
       "source": "content/manuals/ai/sandboxes/governance/access-controls/local.md",
-      "destination": "content/manuals/ai/sandboxes/cli/network-local.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/network-local.md",
       "oldURL": "/ai/sandboxes/governance/access-controls/local/",
-      "url": "/ai/sandboxes/cli/network-local/",
+      "url": "/ai/sandboxes/cli/access/network-local/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
@@ -1040,72 +1040,72 @@
     },
     {
       "source": "content/manuals/ai/sandboxes/install.md",
-      "destination": "content/manuals/ai/sandboxes/cli/install.md",
+      "destination": "content/manuals/ai/sandboxes/cli/get-started/install.md",
       "oldURL": "/ai/sandboxes/install/",
-      "url": "/ai/sandboxes/cli/install/",
+      "url": "/ai/sandboxes/cli/get-started/install/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/integrations/_index.md",
-      "destination": "content/manuals/ai/sandboxes/cli/integrations/_index.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/_index.md",
       "oldURL": "/ai/sandboxes/integrations/",
-      "url": "/ai/sandboxes/cli/integrations/",
+      "url": "/ai/sandboxes/cli/workflows/integrations/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/integrations/chatgpt.md",
-      "destination": "content/manuals/ai/sandboxes/cli/integrations/chatgpt.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/chatgpt.md",
       "oldURL": "/ai/sandboxes/integrations/chatgpt/",
-      "url": "/ai/sandboxes/cli/integrations/chatgpt/",
+      "url": "/ai/sandboxes/cli/workflows/integrations/chatgpt/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/integrations/claude-desktop.md",
-      "destination": "content/manuals/ai/sandboxes/cli/integrations/claude-desktop.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/claude-desktop.md",
       "oldURL": "/ai/sandboxes/integrations/claude-desktop/",
-      "url": "/ai/sandboxes/cli/integrations/claude-desktop/",
+      "url": "/ai/sandboxes/cli/workflows/integrations/claude-desktop/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/integrations/cursor.md",
-      "destination": "content/manuals/ai/sandboxes/cli/integrations/cursor.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/cursor.md",
       "oldURL": "/ai/sandboxes/integrations/cursor/",
-      "url": "/ai/sandboxes/cli/integrations/cursor/",
+      "url": "/ai/sandboxes/cli/workflows/integrations/cursor/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/integrations/t3-code.md",
-      "destination": "content/manuals/ai/sandboxes/cli/integrations/t3-code.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/t3-code.md",
       "oldURL": "/ai/sandboxes/integrations/t3-code/",
-      "url": "/ai/sandboxes/cli/integrations/t3-code/",
+      "url": "/ai/sandboxes/cli/workflows/integrations/t3-code/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/integrations/vscode.md",
-      "destination": "content/manuals/ai/sandboxes/cli/integrations/vscode.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/vscode.md",
       "oldURL": "/ai/sandboxes/integrations/vscode/",
-      "url": "/ai/sandboxes/cli/integrations/vscode/",
+      "url": "/ai/sandboxes/cli/workflows/integrations/vscode/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/mcp-gateway.md",
-      "destination": "content/manuals/ai/sandboxes/cli/mcp.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/mcp.md",
       "oldURL": "/ai/sandboxes/mcp-gateway/",
-      "url": "/ai/sandboxes/cli/mcp/",
+      "url": "/ai/sandboxes/cli/access/mcp/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
@@ -1157,16 +1157,16 @@
     },
     {
       "source": "content/manuals/ai/sandboxes/usage.md",
-      "destination": "content/manuals/ai/sandboxes/cli/usage.md",
+      "destination": "content/manuals/ai/sandboxes/cli/manage/local.md",
       "oldURL": "/ai/sandboxes/usage/",
-      "url": "/ai/sandboxes/cli/usage/",
+      "url": "/ai/sandboxes/cli/manage/local/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/workflows/_index.md",
-      "destination": "content/manuals/ai/sandboxes/cli/workflows.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/_index.md",
       "oldURL": "/ai/sandboxes/workflows/",
       "url": "/ai/sandboxes/cli/workflows/",
       "disposition": "move",
@@ -1184,36 +1184,36 @@
     },
     {
       "source": "content/manuals/ai/sandboxes/workflows/authentication.md",
-      "destination": "content/manuals/ai/sandboxes/cli/authentication.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/authentication.md",
       "oldURL": "/ai/sandboxes/workflows/authentication/",
-      "url": "/ai/sandboxes/cli/authentication/",
+      "url": "/ai/sandboxes/cli/access/authentication/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/workflows/automation.md",
-      "destination": "content/manuals/ai/sandboxes/cli/automation.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/automation.md",
       "oldURL": "/ai/sandboxes/workflows/automation/",
-      "url": "/ai/sandboxes/cli/automation/",
+      "url": "/ai/sandboxes/cli/workflows/automation/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/workflows/development.md",
-      "destination": "content/manuals/ai/sandboxes/cli/development.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/development.md",
       "oldURL": "/ai/sandboxes/workflows/development/",
-      "url": "/ai/sandboxes/cli/development/",
+      "url": "/ai/sandboxes/cli/workflows/development/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
     },
     {
       "source": "content/manuals/ai/sandboxes/workflows/git.md",
-      "destination": "content/manuals/ai/sandboxes/cli/git.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/git.md",
       "oldURL": "/ai/sandboxes/workflows/git/",
-      "url": "/ai/sandboxes/cli/git/",
+      "url": "/ai/sandboxes/cli/workflows/git/",
       "disposition": "move",
       "owner": "docker/docs",
       "fragments": "preserve"
@@ -1234,6 +1234,138 @@
     {
       "owner": "docker/governor-services",
       "reason": "Vendored governance API overview links to the former governance URL; its redirect is preserved."
+    }
+  ],
+  "prototypeNavigationMoves": [
+    {
+      "source": "content/manuals/ai/sandboxes/cli/install.md",
+      "destination": "content/manuals/ai/sandboxes/cli/get-started/install.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/get-started-local.md",
+      "destination": "content/manuals/ai/sandboxes/cli/get-started/local.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/get-started-cloud.md",
+      "destination": "content/manuals/ai/sandboxes/cli/get-started/cloud.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/local-vs-cloud.md",
+      "destination": "content/manuals/ai/sandboxes/cli/get-started/local-vs-cloud.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/manage.md",
+      "destination": "content/manuals/ai/sandboxes/cli/manage/_index.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/usage.md",
+      "destination": "content/manuals/ai/sandboxes/cli/manage/local.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/cloud-usage.md",
+      "destination": "content/manuals/ai/sandboxes/cli/manage/cloud.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/move.md",
+      "destination": "content/manuals/ai/sandboxes/cli/manage/move.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/credentials.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/credentials-local.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/credentials-cloud.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/credentials-cloud.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/network-local.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/network-local.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/network-cloud.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/network-cloud.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/authentication.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/authentication.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/mcp.md",
+      "destination": "content/manuals/ai/sandboxes/cli/access/mcp.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/kits.md",
+      "destination": "content/manuals/ai/sandboxes/cli/customize/kits.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/environment-files.md",
+      "destination": "content/manuals/ai/sandboxes/cli/customize/environment-files.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/workflows.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/_index.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/git.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/git.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/development.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/development.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/automation.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/automation.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/integrations/vscode.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/vscode.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/integrations/_index.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/_index.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/integrations/cursor.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/cursor.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/integrations/claude-desktop.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/claude-desktop.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/integrations/chatgpt.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/chatgpt.md",
+      "fragments": "preserve"
+    },
+    {
+      "source": "content/manuals/ai/sandboxes/cli/integrations/t3-code.md",
+      "destination": "content/manuals/ai/sandboxes/cli/workflows/integrations/t3-code.md",
+      "fragments": "preserve"
     }
   ]
 }

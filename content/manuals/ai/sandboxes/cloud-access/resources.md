@@ -21,7 +21,7 @@ selects resources for the sandbox it creates.
 
 Your account access and available capacity determine whether a request can be
 accepted. Resource selection differs by interface: use
-[CLI resource flags](/manuals/ai/sandboxes/cli/cloud-usage.md#choose-resources-and-platform), the
+[CLI resource flags](/manuals/ai/sandboxes/cli/manage/cloud.md#choose-resources-and-platform), the
 [Console compute picker](/manuals/ai/sandboxes/console/sandboxes.md), or
 [SDK resource options](/manuals/ai/sandboxes/api/limits.md#compute-sizes).
 
