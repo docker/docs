@@ -12,8 +12,17 @@ DHI repositories and their metadata.
 
 ## Catalog page
 
-The catalog lists all available DHI repositories. You can filter by name,
-image type, or compliance requirements (FIPS, STIG) to find the image you need.
+The catalog lists all available DHI repositories. Use the search bar to find a
+repository by name, and use the following filters to narrow the list:
+
+- Categories
+- Compliance: FIPS or STIG.
+- Types: Image or Helm chart.
+- OS: For example, Alpine or Debian.
+- Versions: Extended Lifecycle Support.
+
+Use **Sort by** to order the results by popularity, recently updated, recently
+added, or alphabetical.
 
 ## Repository details page
 
@@ -22,14 +31,11 @@ provides the following:
 
 - Overview: A brief explanation of the image.
 - Guides: Several guides on how to use the image and migrate your existing application.
-- Images: Select this option to [view image variants](#images-page).
-- Security summary: Select a tag name to view a quick security summary,
-  including package count and total known vulnerabilities.
-- Recently pushed tags: A list of recently updated image variants and when they
-  were last updated.
-- Use this image: After selecting an image variant, you can select this option to
-  view instructions on how to pull and use the image variant, or select **Mirror
-  repository** to mirror it to your organization.
+- Images: Select this tab to [view image variants](#images-page). Helm chart
+  repositories have a Tags tab instead.
+- Use this image: Select this button to view instructions on how to pull and use
+  the image, or select **Mirror repository** to mirror it to your organization.
+  For Helm chart repositories, the button reads **Use this chart**.
 
 ## Images page
 
