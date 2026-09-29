@@ -279,5 +279,5 @@ This resolves digest mismatches when upstream images are updated.
 
 ## Next steps
 
-- Review [Enhanced Container Isolation limitations](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/limitations.md).
-- Review [Enhanced Container Isolation FAQs](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/faq.md).
+- Review [Enhanced Container Isolation limitations](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/limitations.md).
+- Review [Enhanced Container Isolation FAQs](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/faq.md).
