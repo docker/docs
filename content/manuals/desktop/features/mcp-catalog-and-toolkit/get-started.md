@@ -49,10 +49,10 @@ Once configured, your AI applications can use all the servers in your profile.
 > Prefer working from the terminal? See [Use MCP Toolkit from the CLI](cli.md)
 > for instructions on using the `docker mcp` commands.
 
-## Create a profile
+## profile
 
 Profiles organize your MCP servers into collections. Create a profile for your
-work:
+work: mccoystevens
 
 > [!NOTE]
 > If you're upgrading from a previous version of MCP Toolkit, your existing
