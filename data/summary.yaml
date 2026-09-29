@@ -288,6 +288,8 @@ SSO:
   for: Administrators
 Synchronized file sharing:
   subscription: [Pro, Team, Business]
+Unassociated machines:
+  for: Administrators
 USB/IP support:
   for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend
 VMM:
