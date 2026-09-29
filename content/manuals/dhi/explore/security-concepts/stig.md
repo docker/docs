@@ -62,10 +62,10 @@ the Docker Hardened Images catalog.
 To find DHI repositories with STIG image variants, [explore
 images](../../tools/hub.md#images-page) and:
 
-- Use the **STIG** filter on the catalog page
+- Use the **Compliance** filter on the catalog page and select **STIG**
 - Look for **STIG** labels on individual image listings
 
-To find a STIG image variant within a repository, go to the **Tags** tab in the
+To find a STIG image variant within a repository, go to the **Images** tab in the
 repository, and find images labeled with **STIG** in the **Compliance** column.
 
 ## Use a STIG variant
