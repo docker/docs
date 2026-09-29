@@ -7,7 +7,7 @@ keywords: SCIM, SSO, user provisioning, de-provisioning, role mapping, assign us
 aliases:
   - /security/for-admins/scim/
   - /security/for-admins/provisioning/scim/
-  - /platform/security/provisioning/scim/
+  - /enterprise/security/provisioning/scim/
 ---
 
 {{< summary-bar feature_name="SSO" >}}

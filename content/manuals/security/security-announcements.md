@@ -9,9 +9,7 @@ weight: 1
 toc_min: 1
 toc_max: 2
 aliases:
-  - /platform/security/resources/security-announcements/
   - /security-announcements/
-  - /platform/security/security-announcements/
 ---
 
 [Subscribe to security RSS feed](/security/security-announcements/index.xml)

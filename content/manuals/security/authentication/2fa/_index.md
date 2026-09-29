@@ -10,7 +10,6 @@ aliases:
  - /security/for-developers/2fa/
  - /security/for-developers/2fa/disable-2fa/
  - /security/2fa/
- - /platform/security/authentication/2fa/
 ---
 
 {{< summary-bar feature_name="2FA" >}}

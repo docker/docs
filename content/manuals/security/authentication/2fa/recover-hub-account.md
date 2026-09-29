@@ -6,7 +6,7 @@ aliases:
   - /docker-hub/2fa/recover-hub-account/
   - /security/for-developers/2fa/recover-hub-account/
   - /security/2fa/new-recovery-code/
-  - /platform/security/authentication/2fa/recover-hub-account/
+  - /security/2fa/recover-hub-account/
 weight: 20
 ---
 

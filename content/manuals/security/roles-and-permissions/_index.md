@@ -14,7 +14,6 @@ aliases:
   - /security/for-admins/roles-and-permissions/
   - /docker-hub/roles-and-permissions/
   - /enterprise/security/roles-and-permissions/
-  - /platform/security/roles-and-permissions/
 grid:
   - title: Core roles
     description: >-

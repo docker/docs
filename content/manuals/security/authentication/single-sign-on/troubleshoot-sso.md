@@ -10,7 +10,7 @@ aliases:
   - /security/for-admins/single-sign-on/troubleshoot/
   - /security/troubleshoot/troubleshoot-sso/
   - /enterprise/troubleshoot/troubleshoot-sso/
-  - /platform/security/authentication/single-sign-on/troubleshoot-sso/
+  - /enterprise/security/single-sign-on/troubleshoot-sso/
 ---
 
 This page describes common single sign-on (SSO) errors and their solutions. Issues can stem from your identity provider (IdP) configuration or Docker settings.
