@@ -119,7 +119,7 @@ params:
   - title: Deploy Docker Desktop
     description: Deploy Docker Desktop at scale within your company
     icon: arrow-down-tray
-    link: /enterprise/enterprise-deployment/
+    link: /desktop/enterprise/enterprise-deployment/
   - title: Hardened Docker Desktop
     description: Security features that strengthen developer environments.
     icon: shield-check

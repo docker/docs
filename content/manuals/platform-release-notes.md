@@ -64,7 +64,7 @@ and subscriptions.
     (Early Access).
   - Enforce sign-in for more than one organization at a time (Early Access).
   - Deploy Docker Desktop for Mac in bulk with the
-    [PKG installer](/manuals/enterprise/enterprise-deployment/pkg-install-and-configure.md)
+    [PKG installer](/manuals/desktop/enterprise/enterprise-deployment/pkg-install-and-configure.md)
     (Early Access).
   - [Use Desktop Settings Management via the Docker Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
     (Early Access).
@@ -98,7 +98,7 @@ and subscriptions.
 ### New
 
 - Deploying Docker Desktop via the
-  [MSI installer](/manuals/enterprise/enterprise-deployment/msi-install-and-configure.md)
+  [MSI installer](/manuals/desktop/enterprise/enterprise-deployment/msi-install-and-configure.md)
   is now generally available.
 - Two new methods to
   [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md)

@@ -206,7 +206,7 @@ $ net localgroup docker-users <user> /add
 >
 > Membership in `docker-users` grants access to the Docker daemon socket, which is equivalent to granting administrative privileges on the host. Only add users who require access to Windows containers or Hyper-V VM management. For Linux containers using the WSL 2 backend, this group membership is not required. See [Protect the Docker daemon socket](/manuals/engine/security/protect-access.md) for more information.
 
-If you're deploying via MDM (such as Intune) and the `docker-users` group isn't populated automatically, see [Why isn't the `docker-users` group populated when the MSI is installed with Intune or another MDM solution?](/manuals/enterprise/enterprise-deployment/faq.md#why-isnt-the-docker-users-group-populated-when-the-msi-is-installed-with-intune-or-another-mdm-solution).
+If you're deploying via MDM (such as Intune) and the `docker-users` group isn't populated automatically, see [Why isn't the `docker-users` group populated when the MSI is installed with Intune or another MDM solution?](/manuals/desktop/enterprise/enterprise-deployment/faq.md#why-isnt-the-docker-users-group-populated-when-the-msi-is-installed-with-intune-or-another-mdm-solution).
 
 See the [Installer flags](#installer-flags) section to see what flags the `install` command accepts.
 

@@ -6,6 +6,7 @@ tags: [admin]
 weight: 10
 aliases:
   - /desktop/setup/install/enterprise-deployment/msi-install-and-configure/
+  - /enterprise/enterprise-deployment/msi-install-and-configure/
 ---
 
 {{< summary-bar feature_name="MSI installer" >}}
@@ -41,7 +42,7 @@ If your administrator account is different from your user account, you must add 
 > [!NOTE]
 >
 > When installing Docker Desktop with the MSI, in-app updates are automatically disabled by default. This ensures organizations can maintain version consistency and prevent unapproved updates.
-> Starting with Docker Desktop version 4.60 and later, in-app updates from an MSI installation can be enabled by changing the `disableUpdate` setting to `false` through [Settings Management](../security/hardened-desktop/settings-management/).
+> Starting with Docker Desktop version 4.60 and later, in-app updates from an MSI installation can be enabled by changing the `disableUpdate` setting to `false` through [Settings Management](/manuals/security/hardened-desktop/settings-management/).
 >
 > Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from Docker Home. Navigate to the **Deploy** page.
 >
@@ -261,4 +262,4 @@ When analytics is disabled, this key is set to `1`.
 
 ## Additional resources
 
-- [Explore the FAQs](/manuals/enterprise/enterprise-deployment/faq.md)
+- [Explore the FAQs](/manuals/desktop/enterprise/enterprise-deployment/faq.md)
