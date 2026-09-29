@@ -80,7 +80,7 @@ Continue with these guides when you're ready to expand the deployment:
   full deployment handbook
 - [Manage organization members](/manuals/accounts/organization/manage/members.md)
   for roles, teams, and bulk invitations
-- [Configure Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+- [Configure Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/configure-admin-console.md)
   for additional policies and deployment controls
 - [Set up SSO and provisioning](/manuals/security/authentication/single-sign-on/_index.md)
   for centralized identity management
