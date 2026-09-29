@@ -7,8 +7,7 @@ aliases:
 - /admin/organization/security-settings/group-mapping/
 - /security/for-admins/group-mapping/
 - /security/for-admins/provisioning/scim/group-mapping/
-- /platform/security/provisioning/group-mapping/
-- /platform/security/provisioning/scim/group-mapping/
+- /enterprise/security/provisioning/scim/group-mapping/
 weight: 20
 ---
 

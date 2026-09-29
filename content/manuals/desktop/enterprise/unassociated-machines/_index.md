@@ -2,18 +2,12 @@
 title: Manage unassociated machines
 description: Learn how to manage unassociated machines in Docker Home
 keywords: unassociated machines, insights, manage users, enforce sign-in
-sitemap: false
-pagefind_exclude: true
-noindex: true
-params:
-  sidebar:
-    group: Enterprise
+weight: 50
+aliases:
+ - /unassociated-machines/
 ---
 
-{{< restricted title="About unassociated machines" >}}
-Unassociated machines is a private feature that may not be available to all
-accounts.
-{{< /restricted >}}
+{{< summary-bar feature_name="Unassociated machines" >}}
 
 Docker administrators can identify, view, and manage Docker Desktop machines
 that are likely associated with their organization but aren't currently linked
