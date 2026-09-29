@@ -80,9 +80,7 @@ Deny rules take precedence over allow rules. See
 [Policy precedence](../concepts.md#precedence).
 
 The **Balanced** preset's baseline allowlist is a good starting point for most
-workflows. Run `sbx policy ls` to see exactly which rules it includes. As of
-v0.35.0, the Balanced preset also allows VS Code domains, Azure Blob Storage
-(`*.blob.core.windows.net`), and `dhi.io` over HTTP.
+workflows. Run `sbx policy ls` to see exactly which rules it includes.
 
 > [!NOTE]
 > If your organization manages sandbox policies centrally, organization rules
