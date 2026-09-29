@@ -66,7 +66,7 @@ To learn how to manage seats from Docker Home, see
 
 ### Docker Offload licenses
 
-[Docker Offload](/manuals/offload/_index.md) licenses are available for Docker Team and Docker Business plans. Once assigned to your account, organization owners can [manage license assignments](/manuals/accounts/organization/manage/manage-licenses.md) in Docker Home.
+[Docker Offload](/manuals/offload/_index.md) licenses are available for Docker Team and Docker Business plans. Once assigned to your account, organization owners can [manage licenses](/manuals/accounts/organization/manage/manage-licenses.md) in Docker Home.
 
 To add Docker Offload licenses, you must <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_docker_offload" class="link" rel="noopener">contact sales</a>.
 

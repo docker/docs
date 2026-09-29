@@ -1,6 +1,6 @@
 ---
 title: Change general organization information
-linkTitle: Change information
+linkTitle: Information
 weight: 60
 description: Learn how to manage settings for organizations.
 keywords: organization, settings, Docker Home, manage, Docker organization, Gravatar, SCIM, SSO setup, domain management, organization settings
