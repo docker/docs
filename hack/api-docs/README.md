@@ -1,31 +1,41 @@
 # API reference build
 
-This tool validates the Hub, DVP, Registry, and AI Governance OpenAPI sources
+This tool validates the Hub, DVP, Registry, AI Governance, and Sandboxes OpenAPI sources
 in `content/reference/api/` and generates presentation data for Hugo. Engine
 retains its existing sources and renderer.
 
 ## Commands
 
-Use the Go version declared in `go.mod`, Hugo, and the site's Node dependencies.
-From the repository root:
+Site builds use the committed `data/api-reference.json`. To build the site,
+use Hugo and the site's Node dependencies. From the repository root:
 
 ```console
 $ npm ci
-$ ./hack/api-docs/run.sh test
-$ ./hack/api-docs/run.sh generate
 $ hugo server
 ```
 
 For a static build with HTML/Markdown checks, run
 `./hack/api-docs/run.sh build`. To serve that build on port 1314, run
 `./hack/api-docs/run.sh serve`. Set `DOCS_URL` and `DOCS_PORT` when using another
-address. Run generation again after changing a specification or source manifest entry.
-With `docker compose watch`, changes to the registered specifications or
-`hack/api-docs/` rebuild the server image and regenerate the reference.
+address. These commands use the committed data without running the generator.
 
-Docker builds and Netlify deploy previews run generation before Hugo. Generated
-data, validation reports, binaries, and local builds go under `tmp/api-reference/`.
-Hugo reports an error if the generated data is absent.
+After changing a specification, source manifest entry, or generator code, use
+the Go version declared in `hack/api-docs/go.mod` to regenerate the data.
+
+Install the Vacuum version pinned in the [Dockerfile](../../Dockerfile) and make
+the `vacuum` executable available on `PATH`. The script runs Vacuum and the Go
+generator without installing tools.
+
+```console
+$ ./hack/api-docs/run.sh test
+$ ./hack/api-docs/run.sh generate
+```
+
+Commit `data/api-reference.json` with the source changes. With
+`docker compose watch`, the regenerated JSON syncs to the server and Hugo
+rebuilds the reference. Docker builds and Netlify deploy previews also use the
+committed JSON. Validation reports and local builds remain under
+`tmp/api-reference/`.
 
 ## Processor inputs
 
@@ -56,9 +66,7 @@ relative to each original file, then moves `index.md` files to flattened paths.
 It preserves code examples and other text. API pages use the same processing as
 other pages; links that already use published URLs remain unchanged.
 
-The published YAML URLs still serve the source files directly. There is no
-conversion step, snapshot dependency, Node migration package, or source archive
-in the build.
+The published YAML URLs still serve the source files directly.
 
 ## Validation
 
@@ -68,9 +76,24 @@ in the build.
 $ ./hack/api-docs/run.sh check
 ```
 
-Generation runs the same strict validation. Any diagnostic fails the build;
+Generation runs the same strict validation. Any diagnostic fails generation;
 there is no exception baseline. Reports are written to
 `tmp/api-reference/validation.json`.
+
+The build workflow's validation matrix runs API reference checks alongside the
+other validation targets. It runs tests, validates the sources, regenerates the
+JSON, and compares the result with the committed file to detect stale data.
+This matrix entry is advisory: failures do not block site builds or deployment.
+
+Run the same check locally with Docker:
+
+```console
+$ docker buildx bake validate-api-reference
+```
+
+This target runs generator tests, strict validation, and a byte-for-byte
+comparison inside Docker. It leaves the working tree unchanged and is also
+included in the `validate` Bake group.
 
 ## Tests and scope
 

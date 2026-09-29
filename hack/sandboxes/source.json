@@ -1,7 +1,7 @@
 {
   "repository": "docker/sbx-api",
-  "generatedCommit": "60d79c1d7744aa5ea5b3cfe871a2faaa5070e7ec",
-  "sourceCommit": "1a7f40266bc009e9602f3ca8a1cf809e1fc391f5",
+  "generatedCommit": "74627446ce26418b25c996e55e1c7cfe49216b8f",
+  "sourceCommit": "de20ec671b32ac17b79eb0b690f13d17d55a98bf",
   "guides": [
     "add-a-docker-credential-for-cloud-sandboxes.md",
     "add-tools-with-kits.md",

@@ -8,11 +8,11 @@ ARG VALE_VERSION=3.17.0
 ARG HUGO_VERSION=0.163.0
 ARG NODE_VERSION=24
 ARG PAGEFIND_VERSION=1.5.2
+ARG TARGETARCH
 
 # base defines the generic base stage
 FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS base
 RUN apk add --no-cache \
-    bash \
     git \
     nodejs \
     npm \
@@ -42,9 +42,6 @@ WORKDIR /project
 COPY --from=hugo /out/hugo /bin/hugo
 COPY --from=npm /out/node_modules node_modules
 COPY . .
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    --mount=type=cache,target=/root/.cache/go-build \
-    ./hack/api-docs/run.sh test && ./hack/api-docs/run.sh generate
 
 # build creates production builds with Hugo
 FROM build-base AS build
@@ -69,6 +66,37 @@ RUN node hack/api-docs/verify-output.mjs public
 # lint lints markdown files
 FROM ghcr.io/rvben/rumdl:0.2.49-alpine AS lint
 RUN --mount=type=bind,target=. rumdl check content
+
+# vacuum downloads the prebuilt validator for the target architecture
+FROM scratch AS vacuum-amd64
+ADD --unpack --checksum=sha256:973b8ed30cd36533da4cdb76729e833324a3043bad48c74f61b6a1cc3df40b78 \
+    https://github.com/daveshanley/vacuum/releases/download/v0.30.3/vacuum_0.30.3_linux_x86_64.tar.gz /out/
+
+FROM scratch AS vacuum-arm64
+ADD --unpack --checksum=sha256:04b604df0b1b570d5abd58b577c816122da162eb8ba12a7f70c3060aec12b3a9 \
+    https://github.com/daveshanley/vacuum/releases/download/v0.30.3/vacuum_0.30.3_linux_arm64.tar.gz /out/
+
+FROM vacuum-${TARGETARCH} AS vacuum
+
+# validate-api-reference checks the vendored presentation data
+FROM base AS validate-api-reference
+RUN apk add --no-cache bash
+WORKDIR /project
+COPY --from=vacuum /out/vacuum /usr/local/bin/vacuum
+COPY hack/api-docs ./hack/api-docs
+COPY content/reference/api ./content/reference/api
+COPY data/api-reference.json ./data/api-reference.json
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build <<"EOT"
+set -eu
+cp data/api-reference.json /tmp/api-reference-committed.json
+./hack/api-docs/run.sh test
+./hack/api-docs/run.sh generate
+if ! cmp -s /tmp/api-reference-committed.json data/api-reference.json; then
+  echo >&2 'ERROR: API reference data is stale. Run ./hack/api-docs/run.sh generate and commit data/api-reference.json.'
+  exit 1
+fi
+EOT
 
 # test validates HTML output and checks for broken links
 FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS test

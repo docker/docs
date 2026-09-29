@@ -41,7 +41,7 @@ To configure SSO in Docker, follow these steps:
 1. Link Docker to your identity provider.
 1. Test your SSO connection.
 1. Provision users in Docker.
-1. Optional. [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
+1. Optional. [Enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).
 1. [Manage your SSO configuration](manage.md).
 
 Once configuration is complete, users can sign in to Docker services using
