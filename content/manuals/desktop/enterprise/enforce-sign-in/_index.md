@@ -9,7 +9,7 @@ aliases:
  - /security/for-admins/configure-sign-in/
  - /security/for-admins/enforce-sign-in/
  - /enterprise/security/enforce-sign-in/
-weight: 10
+weight: 30
 ---
 
 {{< summary-bar feature_name="Enforce sign-in" >}}

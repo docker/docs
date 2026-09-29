@@ -33,6 +33,7 @@ grid:
     description: Control whether organization members can push content to their personal namespaces.
     icon: folder-open
     link: /desktop/enterprise/hardened-desktop/namespace-access/
+weight: 40
 ---
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}

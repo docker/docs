@@ -4,9 +4,10 @@ keywords: Docker Desktop, allowlist, allow list, firewall, authentication URLs, 
 title: Allowlist for Docker Desktop
 tags: [admin]
 linkTitle: Allowlist
-weight: 100
+weight: 20
 aliases:
   - /desktop/allow-list/
+  - /desktop/setup/allow-list/
 ---
 
 {{< summary-bar feature_name="Allow list" >}}
