@@ -13,7 +13,6 @@ params:
       - Application development
       - Supply chain security
       - Accounts and admin
-      - Enterprise
   notoc: true
   ai-and-agents:
   - title: Docker Agentic Platform
