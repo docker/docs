@@ -135,6 +135,8 @@ feature, Docker Sandboxes can reject the combination.
 
 To publish your combination as one reference, see
 [Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md).
+To keep the kits separate in a shared sandbox configuration, list them in a
+[sandbox environment file](/manuals/ai/sandboxes/configuration/environment-files.md).
 
 ### Change a sandbox's mixins
 
