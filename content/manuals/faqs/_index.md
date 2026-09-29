@@ -8,7 +8,6 @@ params:
   sidebar:
     group: Accounts and admin
 aliases:
-  - /platform/security/faqs/
   - /faq/security/
 grid:
   - title: Account FAQs

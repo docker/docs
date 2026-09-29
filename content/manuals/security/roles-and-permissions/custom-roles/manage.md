@@ -9,7 +9,7 @@ keywords: >-
   Docker Home, Docker Business, organization roles, permissions, teams
 weight: 10
 aliases:
-  - /platform/security/roles-and-permissions/custom-roles/manage/
+  - /enterprise/security/roles-and-permissions/custom-roles/manage/
 ---
 
 {{< summary-bar feature_name="Custom roles" >}}

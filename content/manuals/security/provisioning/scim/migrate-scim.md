@@ -4,7 +4,7 @@ linkTitle: Migrate
 description: Learn how to migrate from just-in-time (JIT) to SCIM.
 weight: 30
 aliases:
-  - /platform/security/provisioning/scim/migrate-scim/
+  - /enterprise/security/provisioning/scim/migrate-scim/
 ---
 
 If you already have users provisioned through Just-in-Time (JIT) and want to

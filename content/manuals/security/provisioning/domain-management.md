@@ -6,8 +6,6 @@ weight: 5
 aliases:
   - /security/for-admins/domain-management/
   - /enterprise/security/domain-management/
-  - /platform/security/domains/domain-management/
-  - /platform/security/provisioning/domain-management/
 ---
 
 {{< summary-bar feature_name="Domain management" >}}

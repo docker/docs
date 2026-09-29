@@ -9,7 +9,6 @@ aliases:
 - /single-sign-on/manage/
 - /security/for-admins/single-sign-on/manage/
 - /enterprise/security/single-sign-on/manage/
-- /platform/security/authentication/single-sign-on/manage/
 ---
 
 {{< summary-bar feature_name="SSO" >}}

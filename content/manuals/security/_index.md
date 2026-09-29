@@ -9,7 +9,6 @@ keywords: docker, docker hub, security, account security, 2FA, access tokens,
 weight: 40
 aliases:
   - /security/for-developers/
-  - /platform/security/
 params:
   sidebar:
     group: Accounts and admin

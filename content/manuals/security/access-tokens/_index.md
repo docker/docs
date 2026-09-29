@@ -4,8 +4,6 @@ linkTitle: Access tokens
 description: Create and manage personal and organization access tokens for Docker Hub authentication.
 keywords: access tokens, personal access tokens, organization access tokens, PAT, OAT, Docker security
 weight: 10
-aliases:
-  - /platform/security/access-tokens/
 grid:
   - title: Personal access tokens
     description: Authenticate the Docker CLI and tools with a token tied to your account.
