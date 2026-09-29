@@ -24,6 +24,57 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.94.0
+
+{{< release-date date="2026-10-05" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.94.0" build_path="/XXXXXX/" >}}
+
+### Update
+
+- Docker Offload `v0.6.53`
+- [containerd v2.3.6](https://github.com/containerd/containerd/releases/tag/v2.3.6)
+- [Docker Agent v1.144.0](https://github.com/docker/docker-agent/releases/tag/v1.144.0)
+- [NVIDIA Container Toolkit v1.20.1](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.20.1)
+- [Docker Scout CLI v1.25.0](https://github.com/docker/scout-cli/releases/tag/v1.25.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where Resource Saver could pause the VM before the Docker API was ready, causing transient errors during engine startup or restart.
+- Fixed `kubectl logs` not working with `kubeadm`.
+- Fixed the Docker Desktop service being left stopped after an update when it was running but not configured to auto-start.
+- Fixed stored API keys being written in clear to Docker Desktop logs and included in diagnostics bundles.
+- Fixed the account name and tier briefly showing as empty and personal after a restart when Docker Hub was slow to respond.
+- Changed the default logging driver for new Linux containers to `local` to enable automatic log rotation and reduce disk usage.
+- Fixed an issue in the **Images** view where the reclaimable disk space value could get stuck at **0 Bytes** while selecting images for deletion.
+- Improved VM disk creation speed and reduced host disk space usage by skipping unnecessary inode table zeroing on sparse and pre-zeroed storage.
+- Fixed Docker Desktop writing a multi-gigabyte error file and consuming excessive memory when the backend failed to start.
+- Docker Desktop now names the settings file that needs correcting instead of reporting an unexpected error when it contains invalid JSON.
+- Stopped Docker Desktop logs from recording unobfuscated values for IPC payloads that are JSON arrays or plain strings.
+- Fixed a deadlock that caused Docker Desktop to hang indefinitely when quitting while an engine recovery or error dialog was displayed.
+- Fixed the kindest/node tag showing blank in `docker desktop kubernetes images`.
+- docker-pass:
+   - Removing a secret that does not exist is now consistent with other `docker remove` commands.
+   - Running the examples from the help text no longer prefixes the secret with a line break.
+
+#### For Mac
+
+- Fixed the update tooltip suggesting to move Docker Desktop to `/Applications` when that is the folder the current user cannot modify. Fixes [docker/desktop-feedback#598](https://github.com/docker/desktop-feedback/issues/598).
+- Fixed repeated privileged-access prompts when Docker Desktop starts automatically after a reboot. Fixes [docker/desktop-feedback#651](https://github.com/docker/desktop-feedback/issues/651).
+- Fixed the "CLI tools installation" setting on macOS reverting to System when Docker Desktop could not update the login shell profile.
+
+#### For Windows
+
+- Improved WSL startup errors to explain when virtualization is disabled in firmware, nested virtualization is unavailable, or the Windows hypervisor is disabled at startup, with guidance for resolving each condition.
+- Fixed the Docker Desktop service losing its automatic start mode after an update run by WinGet or another external installer when the service had been installed with `--always-run-service`.
+- Fixed a bug introduced in 4.92.0 where WSL integration could fail to start with "timed out waiting for ... to be automounted". Fixes [docker/desktop-feedback#695](https://github.com/docker/desktop-feedback/issues/695).
+
+#### For Linux
+
+- Fixed a bug on Linux where quitting Docker Desktop could close unrelated applications, including all open terminal windows. Fixes [docker/desktop-linux#109](https://github.com/docker/desktop-linux/issues/109).
+
 ## 4.93.0
 
 {{< release-date date="2026-09-28" >}}
