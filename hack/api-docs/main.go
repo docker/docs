@@ -749,7 +749,7 @@ func run() error {
 		return fmt.Errorf("%d blocking diagnostics; see tmp/api-reference/validation.json", blocking)
 	}
 	if command == "generate" {
-		if e = writeJSON(filepath.Join(out, "data/api-reference.json"), Object{"modelVersion": 1, "apis": models, "legacyAPIs": manifest.LegacyAPIs}); e != nil {
+		if e = writeJSON(filepath.Join(root, "data/api-reference.json"), Object{"modelVersion": 1, "apis": models, "legacyAPIs": manifest.LegacyAPIs}); e != nil {
 			return e
 		}
 	}

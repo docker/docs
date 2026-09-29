@@ -288,6 +288,24 @@ Cloud sandboxes also support sandbox kits and `--kit` mixins. See
 [Local and cloud differences](local-vs-cloud.md) for host-dependent features.
 Configure [cloud credentials](credentials.md) before adapting a local kit.
 
+Use `--kit-arg` or `--kit-args-file` with `sbx --cloud create` to pass
+arguments to kits supplied with `--kit`.
+For example, configure a v2 mixin that declares a `version` argument:
+
+```console
+$ sbx --cloud create --name cloud-tools claude \
+    --kit docker.io/<NAMESPACE>/company-cli:1.0.0 \
+    --kit-arg company-cli.version=1.2
+```
+
+Replace the kit reference and argument with those from your kit's
+documentation. The `company-cli` prefix targets the kit by its repository
+name. Built-in agents such as `claude` require v2 mixins.
+
+To load arguments from a file, pass `--kit-args-file <FILE>` with one
+`name=value` entry per line, such as `company-cli.version=1.2`. Values passed
+with `--kit-arg` override values from the file.
+
 To declare reusable cloud configuration in a file, see
 [Use a cloud environment](../configuration/environment-files.md#use-a-cloud-environment).
 

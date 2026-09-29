@@ -72,12 +72,12 @@ You can:
 > [!NOTE]
 >
 > Sign-in enforcement for unassociated machines is different from
-> the [organization-level sign-in enforcement](/enterprise/security/enforce-sign-in/)
+> the [organization-level sign-in enforcement](/manuals/desktop/enterprise/enforce-sign-in/_index.md)
 > available through `registry.json` and configuration profiles. This sign-in
 > enforcement only requires users to sign in so admins can identify who is
 > using the machine, meaning users can sign in with any email address. For more
 > stringent security controls that limit sign-ins to users who are already part
-> of your organization, see [Enforce sign-in](/enterprise/security/enforce-sign-in/).
+> of your organization, see [Enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).
 
 Sign-in enforcement helps you identify who is using unassociated machines in
 your organization. When you enable enforcement, users on these machines will

@@ -34,7 +34,8 @@ installation page.
 The specification is registered in `hack/api-docs/sources.json`. The shared API
 renderer generates an overview and separate operation and schema pages under
 `/reference/api/sandboxes/latest/`, in HTML and Markdown. Run
-`./hack/api-docs/run.sh generate` before Hugo. Strict validation checks the
+`./hack/api-docs/run.sh generate` after importing a specification and commit
+`data/api-reference.json` with the source changes. Strict validation checks the
 specification and its examples. Fix failures upstream and re-import the export.
 
 To update, change both commit IDs in `source.json`, review additions or removals

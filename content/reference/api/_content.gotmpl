@@ -1,6 +1,6 @@
 {{- $data := index hugo.Data "api-reference" -}}
 {{- if not $data }}
-  {{ errorf "API reference data missing: run ./hack/api-docs/run.sh generate before Hugo" }}
+  {{ errorf "API reference data missing: regenerate data/api-reference.json with ./hack/api-docs/run.sh generate" }}
 {{ end -}}
 {{- if ne (int $data.modelVersion) 1 }}
   {{ errorf "Unsupported API presentation model version" }}

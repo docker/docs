@@ -40,7 +40,7 @@ SSO requires a Docker Business subscription. OIDC connections require a
 Docker Team or Business subscription.
 
 To require Docker Desktop users to sign in as organization members, see
-[Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
+[Enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).
 Enforce sign-in is configured in Enterprise, not in this section.
 
 ## Next steps
