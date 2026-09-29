@@ -18,6 +18,108 @@ This page lists new features, enhancements, known issues, and bug fixes for
 Docker accounts and admin features, including Docker Home, billing, security,
 and subscriptions.
 
+## 2026-09-24
+
+### New
+
+- You can now subscribe to the
+  [Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md)
+  pay-as-you-go plan with a personal account to run agents in cloud
+  sandboxes. Compute is metered by the second while a sandbox runs.
+
+## 2026-09-14
+
+### New
+
+- Organization owners can now
+  [export a member list](/manuals/accounts/organization/manage/members.md#export-a-member-list-csv)
+  from Docker Home and receive the CSV by email. Docker generates the file
+  asynchronously and emails a download link to the owner.
+
+## 2026-08-20
+
+### New
+
+- [Docker Verified Publisher](/manuals/subscription-billing/plans/docker-verified-publisher.md)
+  Starter and Growth plans are now available via self-serve. Organizations
+  can apply and subscribe without contacting sales.
+
+## 2026-08-14
+
+### New
+
+- Administrators can now
+  [select a product license when inviting a member](/manuals/accounts/organization/manage/manage-licenses.md#licenses-and-invites).
+  Docker assigns the license when the invitee accepts.
+
+## 2026-07-31
+
+### New
+
+- Administrators can now create
+  [OIDC connections](/manuals/security/authentication/oidc-connections/_index.md)
+  so GitHub Actions workflows authenticate to Docker with short-lived tokens
+  instead of stored personal or organization access tokens. Available for
+  Docker Team, Docker Business, Docker Hardened Images, and Docker Sponsored
+  Open Source organizations.
+
+## 2026-06-18
+
+### New
+
+- Custom roles now include
+  [AI Governance permissions](/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md#ai-governance)
+  so owners can delegate policy management to other users and teams.
+
+## 2026-06-02
+
+### New
+
+- Administrators can now provision products to organization members with
+  [licenses](/manuals/accounts/organization/manage/manage-licenses.md).
+  Licenses were introduced with AI Governance. Owners can assign or revoke
+  them from the Members page, or turn on automatic assignment when a member
+  first uses a supported product.
+
+## 2026-05-19
+
+### New
+
+- You can now purchase
+  [Gordon Plus, Max, and Ultra plans](/manuals/subscription-billing/plans/gordon.md)
+  for personal accounts from the billing portal in Docker Home.
+- Organizations can now purchase
+  [DHI Select](/manuals/subscription-billing/plans/dhi.md) repositories via
+  self-serve from the billing portal in Docker Home.
+
+## 2026-05-12
+
+### New
+
+- [AI Governance](/manuals/subscription-billing/plans/ai-governance.md) is
+  now available. Administrators can purchase licenses through sales,
+  [assign them to members](/manuals/accounts/organization/manage/manage-licenses.md),
+  and enforce
+  [organization policies](/manuals/ai/sandboxes/governance/_index.md) for
+  Docker AI products from Docker Home.
+
+## 2026-03-03
+
+### New
+
+- [DHI Select](/manuals/subscription-billing/plans/dhi.md) is now available
+  as a Docker Hardened Images plan for organizations that need SLA-backed
+  patching and compliance-ready images.
+
+## 2026-02-18
+
+### New
+
+- Administrators can now
+  [configure DVP analytics settings](/manuals/docker-hub/repos/manage/trusted-content/insights-analytics.md#configure-dvp-analytics-settings)
+  for consuming domain and benchmark report allocations in the Admin
+  Console.
+
 ## 2026-02-13
 
 ### New
