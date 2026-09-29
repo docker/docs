@@ -120,7 +120,7 @@ A vulnerability in Docker Desktop was fixed on September 25 in the
 
 - Fixed [CVE-2025-10657](https://www.cve.org/CVERecord?id=CVE-2025-10657) where
   the Enhanced Container Isolation
-  [Docker Socket command restrictions](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md#command-restrictions)
+  [Docker Socket command restrictions](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/config.md#command-restrictions)
   feature was not working properly in Docker Desktop 4.46.0 only (the
   configuration for it was being ignored).
 
@@ -142,7 +142,7 @@ A vulnerability in Docker Desktop was fixed on August 20 in the
 
 _Last updated July 31, 2025_
 
-We are aware of
+Docker is aware of
 [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266), a critical
 vulnerability affecting the NVIDIA Container Toolkit in CDI mode up to version
 1.17.7. Docker Desktop includes version 1.17.8, which is not impacted. However,
@@ -180,7 +180,7 @@ Three vulnerabilities in Docker Desktop were fixed on April 28 in the
   information from Docker Desktop log files, including environment variables
   configured for running containers.
 
-We strongly encourage you to update to Docker Desktop
+Update to Docker Desktop
 [4.41.0](/manuals/desktop/release-notes.md#4410).
 
 ## Docker Desktop 4.34.2 security update: CVE-2024-8695 and CVE-2024-8696
@@ -204,7 +204,7 @@ No existing extensions exploiting the vulnerabilities were found in the
 Extensions Marketplace. The Docker Team will be closely monitoring and
 diligently reviewing any requests for publishing new extensions.
 
-We strongly encourage you to update to Docker Desktop
+Update to Docker Desktop
 [4.34.2](/manuals/desktop/release-notes.md#4342). If you are unable to update
 promptly, you can
 [disable Docker Extensions](/manuals/extensions/settings-feedback.md#turn-on-or-turn-off-extensions)
@@ -218,8 +218,8 @@ When
 [SSO enforcement](/manuals/security/authentication/single-sign-on/connect.md)
 was first introduced, Docker provided a grace period to continue to let
 passwords be used on the Docker CLI when authenticating to Docker Hub. This was
-allowed so organizations could more easily use SSO enforcement. It is
-recommended that administrators configuring SSO encourage users using the CLI
+allowed so organizations could adopt SSO enforcement. It is recommended that
+administrators configuring SSO encourage users using the CLI
 [to switch over to Personal Access Tokens](/manuals/security/authentication/single-sign-on/_index.md#prerequisites)
 in anticipation of this grace period ending.
 
@@ -227,20 +227,20 @@ On September 16, 2024, the grace period ended and passwords can no longer
 authenticate to Docker Hub via the Docker CLI when SSO is enforced. Affected
 users are required to switch over to using PATs to continue signing in.
 
-At Docker, we want the experience to be the most secure for our developers and
-organizations and this deprecation is an essential step in that direction.
+This deprecation is a step toward a secure experience for developers and
+organizations.
 
 ## SOC 2 Type 2 attestation and ISO 27001 certification
 
 _Last updated June 2024_
 
-Docker is pleased to announce that we have received our SOC 2 Type 2 attestation
-and ISO 27001 certification with no exceptions or major non-conformities.
+Docker received its SOC 2 Type 2 attestation and ISO 27001 certification with
+no exceptions or major non-conformities.
 
-Security is a fundamental pillar to Docker's operations, which is embedded into
-our overall mission and company strategy. Docker's products are core to our user
-community and our SOC 2 Type 2 attestation and ISO 27001 certification
-demonstrate Docker's ongoing commitment to security to our user base.
+Security is part of Docker's operations, mission, and company strategy.
+Docker's products are core to the user community, and the SOC 2 Type 2
+attestation and ISO 27001 certification demonstrate Docker's ongoing commitment
+to security.
 
 For more information, see the
 [Blog announcement](https://www.docker.com/blog/docker-announces-soc-2-type-2-attestation-iso-27001-certification/).
@@ -249,23 +249,21 @@ For more information, see the
 
 _Last updated February 2, 2024_
 
-We at Docker prioritize the security and integrity of our software and the trust
-of our users. Security researchers at Snyk Labs identified and reported four
+Docker prioritizes the security and integrity of its software and the trust of
+its users. Security researchers at Snyk Labs identified and reported four
 security vulnerabilities in the container ecosystem. One of the vulnerabilities,
 [CVE-2024-21626](https://scout.docker.com/v/CVE-2024-21626), concerns the runc
 container runtime, and the other three affect BuildKit
 ([CVE-2024-23651](https://scout.docker.com/v/CVE-2024-23651),
 [CVE-2024-23652](https://scout.docker.com/v/CVE-2024-23652), and
-[CVE-2024-23653](https://scout.docker.com/v/CVE-2024-23653)). We want to assure
-our community that our team, in collaboration with the reporters and open source
-maintainers, has been diligently working on coordinating and implementing
-necessary remediations.
+[CVE-2024-23653](https://scout.docker.com/v/CVE-2024-23653)). Docker, in
+collaboration with the reporters and open source maintainers, coordinated and
+implemented the remediations.
 
-We are committed to maintaining the highest security standards. We have
-published patched versions of runc, BuildKit, and Moby on January 31 and
+Docker published patched versions of runc, BuildKit, and Moby on January 31 and
 released an update for Docker Desktop on February 1 to address these
-vulnerabilities. Additionally, our latest BuildKit and Moby releases included
-fixes for [CVE-2024-23650](https://scout.docker.com/v/CVE-2024-23650) and
+vulnerabilities. The latest BuildKit and Moby releases also included fixes for
+[CVE-2024-23650](https://scout.docker.com/v/CVE-2024-23650) and
 [CVE-2024-24557](https://scout.docker.com/v/CVE-2024-24557), discovered
 respectively by an independent researcher and through Docker's internal research
 initiatives.
@@ -297,14 +295,14 @@ practices to mitigate risk:
 - Don't build Docker images from untrusted sources or untrusted Dockerfiles.
 - If you are a Docker Business customer using Docker Desktop and unable to
   update to v4.27.1, make sure to enable
-  [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md)
+  [Hardened Docker Desktop](/manuals/desktop/enterprise/hardened-desktop/_index.md)
   features such as:
-  - [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md),
+  - [Enhanced Container Isolation](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/_index.md),
     which mitigates the impact of CVE-2024-21626 in the case of running
     containers from malicious images.
-  - [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md),
+  - [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md),
     and
-    [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md),
+    [Registry Access Management](/manuals/desktop/enterprise/hardened-desktop/registry-access-management.md),
     which give organizations control over which images and repositories their
     users can access.
 - For CVE-2024-23650, CVE-2024-23651, CVE-2024-23652, and CVE-2024-23653, avoid
@@ -390,9 +388,8 @@ _The issue has been fixed in Moby >= v25.0.2 and >= v24.0.9._
 
 Docker Desktop v4.27.0 and earlier are affected. Docker Desktop v4.27.1 was
 released on February 1 and includes runc, BuildKit, and dockerd binaries
-patches. In addition to updating to this new version, we encourage all Docker
-users to diligently use Docker images and Dockerfiles and ensure you only use
-trusted content in your builds.
+patches. In addition to updating to this new version, use only trusted Docker
+images and Dockerfiles in your builds.
 
 As always, you should check Docker Desktop system requirements for your
 operating system
@@ -429,16 +426,16 @@ _Last updated October 2022_
 discovered in the popular Apache Commons Text library. Versions of this library
 up to but not including 1.10.0 are affected by this vulnerability.
 
-We strongly encourage you to update to the latest version of
+Update to the latest version of
 [Apache Commons Text](https://commons.apache.org/proper/commons-text/download_text.cgi).
 
 ### Scan images on Docker Hub
 
 Docker Hub security scans triggered after 1200 UTC 21 October 2021 are now
 correctly identifying the Text4Shell CVE. Scans before this date do not
-currently reflect the status of this vulnerability. Therefore, we recommend that
-you trigger scans by pushing new images to Docker Hub to view the status of the
-Text4Shell CVE in the vulnerability report. For detailed instructions, see
+currently reflect the status of this vulnerability. Trigger scans by pushing
+new images to Docker Hub to view the status of the Text4Shell CVE in the
+vulnerability report. For detailed instructions, see
 [Scan images on Docker Hub](/manuals/docker-hub/repos/manage/vulnerability-scanning.md).
 
 ### Docker Official Images impacted by CVE-2022-42889
@@ -457,25 +454,25 @@ Commons Text:
 - [solr](https://hub.docker.com/_/solr)
 - [xwiki](https://hub.docker.com/_/xwiki)
 
-We have updated Apache Commons Text in these images to the latest version. Some
-of these images may not be vulnerable for other reasons. We recommend that you
-also review the guidelines published on the upstream websites.
+Docker updated Apache Commons Text in these images to the latest version. Some
+of these images may not be vulnerable for other reasons. Also review the
+guidelines published on the upstream websites.
 
 ## Log4j 2 CVE-2021-44228
 
 _Last updated December 2021_
 
 The [Log4j 2 CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228)
-vulnerability in Log4j 2, a very common Java logging library, allows remote code
-execution, often from a context that is easily available to an attacker. For
-example, it was found in Minecraft servers which allowed the commands to be
-typed into chat logs as these were then sent to the logger. This makes it a very
-serious vulnerability, as the logging library is used so widely and it may be
-simple to exploit. Many open source maintainers are working hard with fixes and
+vulnerability in Log4j 2, a common Java logging library, allows remote code
+execution, often from a context that is available to an attacker. For example,
+it was found in Minecraft servers which allowed the commands to be typed into
+chat logs as these were then sent to the logger. This makes it a serious
+vulnerability, as the logging library is used so widely and it may be simple
+to exploit. Many open source maintainers are working hard with fixes and
 updates to the software ecosystem.
 
 The vulnerable versions of Log4j 2 are versions 2.0 to version 2.14.1 inclusive.
-The first fixed version is 2.15.0. We strongly encourage you to update to the
+The first fixed version is 2.15.0. Update to the
 [latest version](https://logging.apache.org/log4j/2.x/download.html) if you can.
 If you are using a version before 2.0, you are also not vulnerable.
 
@@ -493,16 +490,15 @@ will want to upgrade all code using vulnerable versions.
 > and are tracked with
 > [CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046) and
 > [CVE-2021-45105](https://nvd.nist.gov/vuln/detail/CVE-2021-45105). For a more
-> complete fix to this vulnerability, we recommended that you update to 2.17.0
-> where possible.
+> complete fix to this vulnerability, update to 2.17.0 where possible.
 
 ### Scan images on Docker Hub
 
 Docker Hub security scans triggered after 1700 UTC 13 December 2021 are now
 correctly identifying the Log4j 2 CVEs. Scans before this date do not currently
-reflect the status of this vulnerability. Therefore, we recommend that you
-trigger scans by pushing new images to Docker Hub to view the status of Log4j 2
-CVE in the vulnerability report. For detailed instructions, see
+reflect the status of this vulnerability. Trigger scans by pushing new images
+to Docker Hub to view the status of Log4j 2 CVE in the vulnerability report.
+For detailed instructions, see
 [Scan images on Docker Hub](/manuals/docker-hub/repos/manage/vulnerability-scanning.md).
 
 ## Docker Official Images impacted by Log4j 2 CVE
@@ -513,9 +509,9 @@ A number of
 [Docker Official Images](/manuals/docker-hub/image-library/trusted-content.md#docker-official-images)
 contain the vulnerable versions of Log4j 2 CVE-2021-44228. The following table
 lists Docker Official Images that may contain the vulnerable versions of Log4j
-2. We updated Log4j 2 in these images to the latest version. Some of these
-images may not be vulnerable for other reasons. We recommend that you also
-review the guidelines published on the upstream websites.
+2. Docker updated Log4j 2 in these images to the latest version. Some of these
+images may not be vulnerable for other reasons. Also review the guidelines
+published on the upstream websites.
 
 | Repository                                              | Patched version                | Additional documentation                                                                                                |
 | :------------------------------------------------------ | :----------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
