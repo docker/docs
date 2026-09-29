@@ -54,4 +54,4 @@ Next, assign the app:
 ## Additional resources
 
 - [Explore the FAQs](faq.md).
-- Learn how to [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for your users.
+- Learn how to [enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md) for your users.

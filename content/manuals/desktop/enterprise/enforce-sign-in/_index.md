@@ -8,7 +8,8 @@ tags: [admin]
 aliases:
  - /security/for-admins/configure-sign-in/
  - /security/for-admins/enforce-sign-in/
-weight: 30
+ - /enterprise/security/enforce-sign-in/
+weight: 10
 ---
 
 {{< summary-bar feature_name="Enforce sign-in" >}}
@@ -66,5 +67,5 @@ Enforcing Docker Desktop sign-in and [enforcing SSO](/manuals/security/authentic
 
 ## Next steps
 
-- To set up sign-in enforcement, see [Configure sign-in enforcement](/manuals/enterprise/security/enforce-sign-in/methods.md).
+- To set up sign-in enforcement, see [Configure sign-in enforcement](methods.md).
 - To configure SSO enforcement, see [Enforce SSO](/manuals/security/authentication/single-sign-on/connect.md).

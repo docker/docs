@@ -20,7 +20,7 @@ You need:
 - A Docker Business subscription
 - Owner access to a Docker organization
 - A [verified company domain](/manuals/security/authentication/single-sign-on/connect.md#step-1-add-a-domain)
-- [Enforced Docker Desktop sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md)
+- [Enforced Docker Desktop sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md)
 - One pilot user with Docker Desktop installed
 
 ## Invite the pilot user

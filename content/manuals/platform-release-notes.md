@@ -60,7 +60,7 @@ and subscriptions.
 
 - Administrators can now:
   - Enforce sign-in with
-    [configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#configuration-profiles-method-mac-only)
+    [configuration profiles](/manuals/desktop/enterprise/enforce-sign-in/methods.md#configuration-profiles-method-mac-only)
     (Early Access).
   - Enforce sign-in for more than one organization at a time (Early Access).
   - Deploy Docker Desktop for Mac in bulk with the
@@ -101,7 +101,7 @@ and subscriptions.
   [MSI installer](/manuals/desktop/enterprise/enterprise-deployment/msi-install-and-configure.md)
   is now generally available.
 - Two new methods to
-  [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md)
+  [enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md)
   (Windows registry key and `.plist` file) are now generally available.
 
 ## 2024-08-24
