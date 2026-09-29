@@ -6,10 +6,8 @@ keywords: personal access tokens, PAT, docker cli authentication, docker hub sec
 weight: 10
 aliases:
  - /docker-hub/access-tokens/
- - /security/access-tokens/
  - /security/personal-access-tokens/
  - /security/for-developers/access-tokens/
- - /platform/security/access-tokens/personal-access-tokens/
 ---
 
 {{< summary-bar feature_name="PATs" >}}

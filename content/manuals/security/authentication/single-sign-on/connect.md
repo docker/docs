@@ -18,7 +18,6 @@ aliases:
   - /admin/organization/security-settings/sso-configuration/
   - /security/for-admins/single-sign-on/configure/
   - /enterprise/security/single-sign-on/connect/
-  - /platform/security/authentication/single-sign-on/connect/
 ---
 
 {{< summary-bar feature_name="SSO" >}}

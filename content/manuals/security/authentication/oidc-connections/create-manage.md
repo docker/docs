@@ -6,7 +6,7 @@ keywords: oidc connections, create oidc connection, github actions, docker/login
 tags: [admin]
 weight: 10
 aliases:
-  - /platform/security/authentication/oidc-connections/create-manage/
+  - /enterprise/security/oidc-connections/create-manage/
 ---
 
 {{< summary-bar feature_name="OIDC connections" >}}

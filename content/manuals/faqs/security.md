@@ -13,18 +13,15 @@ aliases:
   - /faq/security/single-sign-on/saml-faqs/
   - /security/faqs/single-sign-on/saml-faqs/
   - /security/faqs/single-sign-on/faqs/
-  - /platform/security/authentication/single-sign-on/FAQs/general/
+  - /enterprise/security/single-sign-on/FAQs/general/
   - /single-sign-on/idp-faqs/
   - /faq/security/single-sign-on/idp-faqs/
   - /security/faqs/single-sign-on/idp-faqs/
-  - /platform/security/authentication/single-sign-on/FAQs/idp-faqs/
-  - /platform/security/faqs/idp-faqs/
+  - /enterprise/security/single-sign-on/FAQs/idp-faqs/
   - /single-sign-on/users-faqs/
   - /faq/security/single-sign-on/users-faqs/
   - /security/faqs/single-sign-on/users-faqs/
-  - /platform/security/authentication/single-sign-on/FAQs/users-faqs/
-  - /platform/security/faqs/users-faqs/
-  - /platform/security/faqs/sso-faqs/
+  - /enterprise/security/single-sign-on/FAQs/users-faqs/
   - /single-sign-on/enforcement-faqs/
   - /faq/security/single-sign-on/enforcement-faqs/
   - /security/faqs/single-sign-on/enforcement-faqs/
@@ -32,8 +29,7 @@ aliases:
   - /single-sign-on/domain-faqs/
   - /faq/security/single-sign-on/domain-faqs/
   - /security/faqs/single-sign-on/domain-faqs/
-  - /platform/security/authentication/single-sign-on/FAQs/domain-faqs/
-  - /platform/security/faqs/domain-faqs/
+  - /enterprise/security/single-sign-on/FAQs/domain-faqs/
   - /faqs/sso-faqs/
   - /faqs/domain-faqs/
 ---

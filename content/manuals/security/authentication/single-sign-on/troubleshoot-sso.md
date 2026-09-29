@@ -14,7 +14,7 @@ aliases:
   - /security/for-admins/single-sign-on/troubleshoot/
   - /security/troubleshoot/troubleshoot-sso/
   - /enterprise/troubleshoot/troubleshoot-sso/
-  - /platform/security/authentication/single-sign-on/troubleshoot-sso/
+  - /enterprise/security/single-sign-on/troubleshoot-sso/
 ---
 
 Single sign-on (SSO) problems can stem from your identity provider (IdP)
