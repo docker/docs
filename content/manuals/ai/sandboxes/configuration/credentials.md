@@ -161,6 +161,17 @@ $ sbx secret set github --command 'gh auth token'
 text is stored and replayed by the daemon. Don't embed a secret directly in the
 command because the text can appear in shell history and process listings.
 
+Secret commands run from a fresh temporary directory on the host during
+verification and refresh. Relative paths such as `./credential-helper` resolve
+from that temporary directory. This applies to both
+`sbx secret set --command` and `sbx secret set-custom --command`.
+
+Store helpers and any code or configuration they load outside writable
+sandbox mounts. Run a helper by name from an absolute directory on the host's
+`PATH`, use its absolute path, or explicitly change to its private directory
+in the command. Keep the host's temporary directory outside writable sandbox
+mounts as well.
+
 By default, `sbx` verifies the source when you register it and reports an error
 without exposing the resolver's standard error. Use `--no-verify` to store a
 source that can't be resolved during registration. To troubleshoot an initial

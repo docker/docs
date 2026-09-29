@@ -93,4 +93,4 @@ For WSL 2-related issues, contact Nutanix support. For Docker Desktop-specific i
 
 ## Additional resources
 
-- [Docker Desktop on Microsoft Dev Box](/manuals/enterprise/enterprise-deployment/dev-box.md)
+- [Docker Desktop on Microsoft Dev Box](/manuals/desktop/enterprise/enterprise-deployment/dev-box.md)

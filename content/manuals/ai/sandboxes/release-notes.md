@@ -16,6 +16,16 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.45.1
+
+{{< release-date date="2026-09-22" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.45.1)
+
+### Fixes and improvements
+
+- Improved sandbox moves and support for private kit images in cloud sandboxes.
+
 ## 0.45.0
 
 {{< release-date date="2026-09-21" >}}
@@ -29,6 +39,10 @@ the full release history, including pre-releases and downloads, see the
 Docker Sandboxes now supports v3 kits: OCI-based packages that combine an agent workload with reusable mixins for tools, configuration, credentials, network access, and agent instructions. Compose compatible kits directly when creating a sandbox, or publish the combination as a kit set that your team can run from a single reference.
 
 V2 kits remain supported for built-in agents and existing customizations. V3 workloads and mixins must be used together; they can't be combined with v1 or v2 kits. [Learn more about kits](https://docs.docker.com/ai/sandboxes/customize/).
+
+#### Run agents in cloud sandboxes
+
+Run AI agents on Docker-managed cloud infrastructure with `sbx --cloud`. Cloud support is experimental and requires an active Docker Agentic Platform subscription. See [Get started with cloud sandboxes](https://docs.docker.com/ai/sandboxes/cloud/).
 
 ### What's new
 

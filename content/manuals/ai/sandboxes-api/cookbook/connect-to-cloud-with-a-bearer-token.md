@@ -9,17 +9,17 @@ params:
     group: "Get started"
 ---
 
-Choose an authenticator when your application creates its client. The client obtains a credential when its first request needs one, then uses it for requests to Docker Cloud Sandboxes. You need an [installed SDK](https://docs.docker.com/ai/sandboxes-api/install/) and a Docker account with Cloud Sandboxes access.
+Sign in to Docker so your application can create and use Cloud Sandboxes. Before you begin, [install the SDK](https://docs.docker.com/ai/sandboxes-api/install/) and make sure your Docker account has Cloud Sandboxes access.
 
 Choose interactive sign-in when running an example yourself. Use a personal access token (PAT) for a service or CI job. If your application already manages Docker access tokens, pass a token or a token provider.
 
 ## Sign in interactively {#1-sign-in-interactively}
 
-The helper creates a client with an OAuth authenticator. Call an SDK method, such as listing sandboxes, to start sign-in. Open the printed verification URL in your browser and enter the displayed code. Sign in to your Docker account and approve the request. The SDK request proceeds when verification succeeds; a denied or expired request fails. The [complete program](run-a-complete-example.md) shows this flow from start to finish.
+Call `const client = await login()` using the function below. It prints a link and a code in your terminal. Open the link in your browser, enter the code, and approve sign-in with your Docker account.
 
-The request that starts sign-in also sets its deadline. Pass `{ timeoutMs: 300_000 }` as that call's request options to give yourself five minutes to sign in and complete the request.
+The function waits for sign-in to finish before returning a client you can use to call the API. If you deny sign-in or the verification code expires, it reports an error. Run the program again to get a new code. The [complete program](run-a-complete-example.md) shows how to sign in and create a sandbox.
 
-The SDK holds credentials in memory by default and refreshes the access token as later requests need it, while refresh credentials remain valid. Close the client when finished to release SDK-owned resources. This does not delete sandboxes or revoke Docker sign-in.
+The SDK keeps your sign-in details in memory and renews access automatically while your sign-in remains valid. You need to sign in again when you restart the program unless you save these details as described below. Call `await client.close()` when finished. Closing the client does not delete your sandboxes or sign you out of Docker.
 
 You can pass the same authenticator to several clients to reuse their sign-in. Closing one client leaves the authenticator usable by the others.
 
@@ -27,12 +27,15 @@ You can pass the same authenticator to several clients to reuse their sign-in. C
 {{< tab name="TypeScript" >}}
 
 ```typescript
-const auth = oauth({
-  onVerification: ({ verificationUri, userCode }) => {
-    console.log(`Open ${verificationUri} and enter ${userCode}`);
-  },
-});
-return new Sandboxes({ auth });
+export const login = async () => {
+  const auth = oauth({
+    onVerification: ({ verificationUri, userCode }) => {
+      console.log(`Open ${verificationUri} and enter ${userCode}`);
+    },
+  });
+  await auth.getAccessToken();
+  return new Sandboxes({ auth });
+};
 ```
 
 <details>
@@ -45,22 +48,24 @@ import {
   Sandboxes,
 } from '@docker/sandboxes';
 
-export function login() {
+export const login = async () => {
   const auth = oauth({
     onVerification: ({ verificationUri, userCode }) => {
       console.log(`Open ${verificationUri} and enter ${userCode}`);
     },
   });
+  await auth.getAccessToken();
   return new Sandboxes({ auth });
-}
+};
 
-export function loginWithSavedCredentials(path: string) {
+export async function loginWithSavedCredentials(path: string) {
   const storedAuth = oauth({
     store: fileOAuthCredentialStore({ path }),
     onVerification: ({ verificationUri, userCode }) => {
       console.log(`Open ${verificationUri} and enter ${userCode}`);
     },
   });
+  await storedAuth.getAccessToken();
   return new Sandboxes({ auth: storedAuth });
 }
 ```
@@ -72,9 +77,9 @@ export function loginWithSavedCredentials(path: string) {
 
 ## Optional: save credentials between runs {#2-optional-save-credentials-between-runs}
 
-To avoid signing in each time a Node.js program starts, expand the complete example above and use `loginWithSavedCredentials(path)`. It passes `fileOAuthCredentialStore` to the OAuth authenticator.
+To reuse your sign-in when a Node.js program restarts, expand the complete example above and use `await loginWithSavedCredentials(path)`. Set `path` to the file where you want to save your sign-in details. The function uses saved details when they are still valid, or asks you to sign in again, before returning a client.
 
-The file store supports Node.js on POSIX systems, not browsers or Windows. Its file contains plaintext access and refresh credentials: keep it out of source control, use a private directory, and do not share it between processes. For a keychain or secret manager, implement `OAuthCredentialStore` with `load` and `save` instead.
+The file store works in Node.js on systems such as macOS and Linux, but not in browsers or on Windows. The file is not encrypted. Keep it in a private directory, exclude it from source control, and do not share it between running programs. To save sign-in details in a keychain or secret manager instead, implement `OAuthCredentialStore` with `load` and `save`.
 
 Remove the stored credentials when your application no longer needs them. Your application owns that removal; closing a client does not remove the file or revoke the credentials.
 
@@ -164,8 +169,6 @@ Use one credential source per client. The SDK does not read environment variable
 Authentication errors mean the credential is missing, rejected, or expired. Sign in again or replace the credential. A permission error means the account cannot perform the requested action; check its Cloud Sandboxes access and resource permissions before retrying.
 
 When you run commands or transfer files through a sandbox handle, the SDK obtains a credential scoped to that sandbox. You do not need to copy your account token into a second client.
-
-The client reuses valid sandbox credentials. Concurrent requests share acquisition only within the same management client and for the same resolved Docker credential, sandbox endpoint and permissions. A later request renews the credential shortly before expiry. Renewal happens when needed, not on a five-minute timer, and does not change a request or stream already in progress.
 
 Docker sign-in is separate from an agent's provider credential. To let an agent call its model provider, follow [Use secrets in a sandbox](get-a-stored-secret-into-a-sandbox.md).
 

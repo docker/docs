@@ -610,13 +610,19 @@ paths resolve from the directory of the environment file that declares them.
 | ------------- | --------------- | -------- | ----------------------------------------------------- |
 | `template`    | string          | None     | Custom sandbox template image                         |
 | `memory`      | string          | None     | Memory limit, such as `8g` or `512m`                   |
-| `cpus`        | integer         | `0`      | Number of CPUs. `0` allocates all host CPUs            |
+| `cpus`        | integer         | `0`      | Number of CPUs. `0` selects the host default            |
 | `pullPolicy`  | string          | `always` | Image pull policy: `always`, `missing`, or `never`     |
 | `profile`     | string          | None     | Governance profile name                               |
 | `skills`      | string          | Daemon default | Shared agent skills store access: `off`, `readonly`, or `readwrite` |
 | `display`     | boolean         | `false`  | Provision a display socket for graphical applications |
 | `gpu`         | boolean         | `false`  | Pass the host GPU through to the sandbox               |
 | `usb`         | list of strings | None     | USB device selectors to pass through to the sandbox   |
+
+For local sandboxes, `cpus: 0` allocates all host CPUs, except on Linux arm64
+hosts, where the default is capped at 16. Set `cpus` to an explicit count to
+request a larger allocation, up to the number of available host CPUs. When creating a sandbox directly with
+`sbx create` or `sbx run`, use `--cpus` for the same override. Cloud resource
+limits must match a [cloud size](../cloud/usage.md#choose-resources-and-platform).
 
 `skills` controls access to the shared [agent skills](../workflows/agent-skills.md)
 store. Set it to `off` to omit the mount, `readonly` to mount the store read-only,
@@ -719,6 +725,12 @@ secrets:
   github:
     command: gh auth token
 ```
+
+Secret commands execute from a fresh temporary directory on the host. Relative
+helper paths resolve from that directory. Keep helpers and their dependencies
+outside writable sandbox mounts. Use an absolute path, an absolute host
+`PATH` entry, or an explicit change to the helper's private directory. See
+[dynamic secret sources](credentials.md#use-a-dynamic-secret-source).
 
 For a cloud environment, set `snapshot: true` on a `ref` or `command` source:
 
