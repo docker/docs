@@ -31,6 +31,7 @@ This page contains the domain URLs that you need to add to a firewall allowlist 
 | https://api.dso.docker.com                                                           | Docker Scout service                         |
 | https://api.docker.com                                                               | New API                                      |
 | https://api.offload.docker.com                                                       | Docker Offload                               |
+| https://api.sandboxes-cloud.docker.com                                               | Docker Offload                               |
 | https://dhi.io                                                                       | Docker Hardened Images                       |
 | https://registry.scout.docker.com                                                    | Docker Scout registry for DHI attestations   |
 | https://ai-backend-service.docker.com                                                | [Gordon](/manuals/ai/gordon/_index.md)       |
