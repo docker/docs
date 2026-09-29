@@ -18,6 +18,19 @@ This page lists new features, enhancements, known issues, and bug fixes for
 Docker accounts and admin features, including Docker Home, billing, security,
 and subscriptions.
 
+## 2026-09-29
+
+### New
+
+- Organization owners can now
+  [assign a license to a team](/manuals/accounts/organization/manage/manage-licenses.md#teams).
+  Every member of the team receives the license, including people who join the
+  team later. Each member uses one license per product.
+- The
+  [Licenses page](/manuals/accounts/organization/manage/manage-licenses.md#view-licenses)
+  in Docker Home shows how many licenses are available and whether they are
+  assigned to teams or to individual members.
+
 ## 2026-09-24
 
 ### New
