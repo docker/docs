@@ -5,8 +5,8 @@ description: >-
   Sign in with a recovery code, generate a new recovery code, or contact
   Support when you lose your authenticator app.
 keywords: account recovery, two-factor authentication, 2FA, recovery code,
-  lost authenticator app, 2FA lockout, Docker account, generate recovery
-  code
+  Lost Authentication Device, lost authenticator app, 2FA lockout, Docker
+  account, Generate new code, Docker Support
 aliases:
   - /docker-hub/2fa/recover-hub-account/
   - /security/for-developers/2fa/recover-hub-account/
@@ -17,16 +17,15 @@ weight: 20
 
 {{< summary-bar feature_name="2FA" >}}
 
-Get back into your Docker account when part of your two-factor
-authentication (2FA) setup is missing. What you do depends on what you
-still have:
+Get back into your Docker account when you lose your authenticator app,
+your recovery code, or both. Docker asks for your password before it
+shows or replaces the recovery code.
 
-- You lost your recovery code and can still sign in.
-  [Generate a new recovery code](#generate-a-new-recovery-code).
-- You lost your authenticator app and still have your recovery code.
-  [Sign in with your recovery code](#sign-in-with-your-recovery-code).
-- You lost both your authenticator app and your recovery code.
-  [Contact Docker Support](#contact-docker-support).
+> [!IMPORTANT]
+>
+> The recovery code works once. Using it on the **Lost Authentication
+> Device** page signs you in, turns 2FA off, and deletes the code. Turn
+> 2FA on again from your new device as soon as you're signed in.
 
 ## Generate a new recovery code
 
@@ -49,11 +48,6 @@ Select the visibility icon to view the new code. Then select **Copy**,
 If you lost your authenticator app and still have your recovery code, use
 the code to sign in.
 
-> [!IMPORTANT]
->
-> The recovery code works once. Using it signs you in and turns 2FA off.
-> Turn 2FA on again from your new device as soon as you're signed in.
-
 1. Sign in to your [Docker account](https://app.docker.com/login) with your
    username and password.
 1. On the **Two-Factor Authentication** page, select **I've lost my
@@ -65,11 +59,8 @@ You're signed in and 2FA is off. To protect your account again, follow
 
 ## Contact Docker Support
 
-If you lose both your authenticator app and your recovery code, contact
-Docker Support to restore access.
-
-Open the
-[Contact Support](https://hub.docker.com/support/contact/?category=2fa-lockout).
+If you lost both your authenticator app and your recovery code, open the
+[Contact Support form](https://hub.docker.com/support/contact/?category=2fa-lockout).
 The subject and description already describe a 2FA lockout. Enter the
 email address on your Docker account, then follow the instructions from
 Docker Support.

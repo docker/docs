@@ -15,11 +15,11 @@ aliases:
 
 {{< summary-bar feature_name="2FA" >}}
 
-Turn on two-factor authentication (2FA) to require a code from your
-authenticator app when you sign in with your password. Turn it off to
-sign in with your password alone, or to move 2FA to a new device. For
-how 2FA works and what the recovery code does, see
-[Two-factor authentication][overview].
+Turn two-factor authentication (2FA) on or off for your Docker account
+in **Account settings**. Setup is not available while 2FA is on, so
+moving 2FA to a new device means turning it off and on again. For how
+2FA works, when Docker asks for the code, and what the recovery code
+does, see [Two-factor authentication][overview].
 
 ## Prerequisites
 
@@ -29,14 +29,6 @@ Before you turn on 2FA, you need:
   another device
 - Your Docker account password
 - A verified email address on your account
-
-Docker opens the 2FA settings after your email address is verified.
-
-> [!NOTE]
->
-> If your organization enforces single sign-on (SSO), the **2FA** page
-> tells you to contact your administrator. Your identity provider manages
-> sign-in for your account.
 
 ## Enable two-factor authentication
 
@@ -59,15 +51,6 @@ Two-factor authentication is on. When you sign in with your password,
 Docker asks for a code from your authenticator app. Docker also emails
 you a reminder to save your recovery code.
 
-> [!IMPORTANT]
->
-> The recovery code works once. Using it signs you in and turns 2FA off.
-> Keep it somewhere safe. If you lose both your authenticator app and your
-> recovery code, contact Docker Support to recover your account.
-
-To sign in with `docker login -u`, or from scripts and CI, use a
-[personal access token][pat] in place of your password.
-
 ## Disable two-factor authentication
 
 > [!WARNING]
@@ -86,16 +69,17 @@ change.
 
 ## Move 2FA to a new device
 
-Docker keeps one authenticator per account. To move 2FA to a new phone or
-device, [turn 2FA off](#disable-two-factor-authentication), then
+To move 2FA to a new phone or device,
+[turn 2FA off](#disable-two-factor-authentication), then
 [turn it on again](#enable-two-factor-authentication) from the new
-device. Setup is not available while 2FA is on.
+device.
 
 ## Next steps
 
 - [Recover your account][recover] if you lose your authenticator app or
   recovery code.
-- Create a [personal access token][pat] for the Docker CLI and automation.
+- Create a [personal access token][pat] to sign in from the Docker CLI,
+  scripts, and CI.
 
 [overview]: /manuals/security/authentication/2fa/_index.md
 [pat]: /manuals/security/access-tokens/personal-access-tokens.md

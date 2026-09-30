@@ -1,12 +1,12 @@
 ---
-title: Two-factor authentication for your Docker account
+title: Two-factor authentication for your individual Docker account
 linkTitle: Two-factor authentication
 description: >-
   Learn how two-factor authentication protects a Docker account, when Docker
   asks for the code, and what the recovery code does.
-keywords: two-factor authentication, 2FA, how 2FA works, Docker account,
-  TOTP, authenticator app, authentication code, recovery code, personal
-  access token, docker login, account security, Docker Hub
+keywords: two-factor authentication, 2FA, individual Docker account, TOTP,
+  authenticator app, authentication code, recovery code, personal access
+  token, docker login, Account settings, Docker Hub, account security
 weight: 20
 aliases:
   - /docker-hub/2fa/
@@ -31,30 +31,21 @@ Two-factor authentication (2FA) adds a code from an authenticator app to
 your password when you sign in to your Docker account. Someone who knows
 your password still needs the code from your device to sign in.
 
-2FA is a setting on individual Docker accounts. You turn it on and off
-yourself in **Account settings**. Organization and company settings do not
-include 2FA. To control how members sign in across an organization, use
-[single sign-on](/manuals/security/authentication/single-sign-on/_index.md).
+> [!TIP]
+>
+> Organization and company settings do not include 2FA. To control how
+> members sign in across an organization, use
+> [single sign-on](/manuals/security/authentication/single-sign-on/_index.md).
 
 ## How two-factor authentication works
 
 When you turn on 2FA, you pair a time-based one-time password (TOTP)
 authenticator app with your account by scanning a QR code or entering a
-text code. Any authenticator app that supports TOTP works. The app then
-shows a six-digit code that changes every 30 seconds.
+text code. Any authenticator app that supports TOTP works. Docker keeps
+one authenticator per account.
 
-After you enter your password, Docker shows the **Two-Factor
-Authentication** page. Enter the code from your app in
-**Authentication Code** and select **Verify**. If you no longer have the
-device, select **I've lost my authentication device** to sign in with
-your recovery code instead.
-
-A wrong code fails with `Invalid one-time password`. After repeated
-failures, Docker returns `Too many failed login attempts` and blocks
-further attempts for a short time.
-
-Docker keeps one authenticator per account. To move 2FA to a new device,
-turn it off and turn it on again from the new device.
+After repeated wrong codes, Docker returns `Too many failed login
+attempts` and blocks further attempts for a short time.
 
 ## When Docker asks for the code
 
@@ -70,19 +61,6 @@ turn it off and turn it on again from the new device.
 Docker gives you one recovery code when you turn on 2FA. The code signs
 you in if you lose your authenticator app, so copy, download, or print it
 and store it somewhere safe.
-
-> [!IMPORTANT]
->
-> The recovery code works once. Using it on the **Lost Authentication
-> Device** page signs you in, turns 2FA off, and deletes the code. Turn
-> 2FA on again from your new device as soon as you are signed in.
-
-- **Generate new code** replaces the previous code. Only the latest code
-  works.
-- Docker asks for your password before it shows the code or lets you
-  change 2FA settings.
-- If you lose both the authenticator app and the recovery code, contact
-  Docker Support to recover your account.
 
 Docker emails the verified address on your account when you turn 2FA on
 or off, when a recovery code is generated, and when a recovery code is
