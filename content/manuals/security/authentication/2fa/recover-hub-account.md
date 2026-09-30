@@ -79,5 +79,5 @@ Docker Support.
 - [Turn on 2FA][enable] again after you recover your account.
 - Create a [personal access token][pat] for the Docker CLI and automation.
 
-[enable]: /manuals/security/authentication/2fa/_index.md
+[enable]: /manuals/security/authentication/2fa/manage.md
 [pat]: /manuals/security/access-tokens/personal-access-tokens.md
