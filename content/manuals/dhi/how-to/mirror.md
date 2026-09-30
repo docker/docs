@@ -236,12 +236,13 @@ Mirroring an image requires copying both the image and its associated signed
 attestations, including SBOMs, provenance, and VEX. Copying only the image does
 not preserve these attestations in your destination registry.
 
-When you access a DHI image through `dhi.io`, the proxy provides access to both
-the image and its associated attestations. It retrieves image manifests and
-layers from Docker Hub, and attestations from `registry.scout.docker.com`.
+The `dhi.io` proxy provides access to DHI catalog images and their associated
+attestations. It retrieves image manifests and layers from Docker Hub, and
+attestations from `registry.scout.docker.com`.
 
-The examples that follow copy from your organization's mirrored repository on
-Docker Hub. They therefore use two source locations:
+Customer mirrors and customized images are accessed through your organization's
+repositories on Docker Hub. These repositories are not available through
+`dhi.io`. The following examples therefore use two source locations:
 `docker.io/<your-org>/<repository>` for the image and
 `registry.scout.docker.com/<your-org>/<repository>` for its attestations. Both
 are copied into the same repository in your destination registry.
