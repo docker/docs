@@ -109,10 +109,10 @@ connection. You can turn off JIT after you configure and test SCIM. See
 ### Can I use JIT and SCIM together?
 
 Yes, but Docker recommends using one provisioning source. When both are
-enabled, JIT applies attributes during sign-in and SCIM applies attributes on
-its synchronization schedule. Review
-[how SCIM works with JIT](/manuals/security/provisioning/scim/_index.md#choose-how-scim-works-with-jit)
-before enabling both.
+enabled, sign-in and SCIM sync can each change a user's full name and team
+memberships, so those values can move back and forth. Before you enable both,
+review
+[how SCIM works with JIT](/manuals/security/provisioning/scim/_index.md#choose-how-scim-works-with-jit).
 
 ### How can I give a user immediate access with SCIM?
 
@@ -122,9 +122,10 @@ provisioning without enabling JIT.
 
 ### Do I need to manually add users to my organization?
 
-Not when JIT, SCIM, or auto-provisioning is configured for the user. If you
-turn off JIT without configuring SCIM, users must already be organization
-members or have pending invitations before they sign in through SSO.
+Not when JIT, SCIM, or auto-provisioning covers the user. If none of those
+methods applies, for example when JIT is turned off and the user isn't
+assigned to the Docker application in your IdP, an organization owner must
+invite the user.
 
 ### Can users use different email addresses to authenticate through SSO?
 
@@ -159,7 +160,10 @@ and group synchronization, including automatic deprovisioning.
 
 ### How does turning off Just-in-Time provisioning affect user sign-in?
 
-When JIT is turned off (available with SCIM in Docker Home), users must be organization members or have pending invitations to access Docker. Users who don't meet these criteria get an "Access denied" error and need administrator invitations.
+You can turn off JIT only while SCIM is enabled. With JIT turned off, users
+must already be members, have a pending invitation, or be provisioned through
+SCIM. Users who don't meet these criteria get an "Access denied" error and
+need an administrator to invite them.
 
 See [SSO authentication with JIT provisioning disabled](/manuals/security/provisioning/just-in-time.md#sso-authentication-with-jit-provisioning-disabled).
 
@@ -172,10 +176,13 @@ method, an organization owner must invite the user.
 
 ### What happens to existing licensed users when SCIM is turned on?
 
-Turning on SCIM doesn't convert existing manually or JIT-provisioned users into
-SCIM-managed users. They retain their access and roles until you migrate or
-remove them. To move JIT-provisioned users under SCIM lifecycle management,
-see [Migrate JIT to SCIM](/manuals/security/provisioning/scim/migrate-scim.md).
+SCIM can manage and deprovision organization members whose email domain is
+verified on the SSO connection, including users created through JIT or added
+manually. When your IdP pushes a user with a matching email address, SCIM
+links the existing Docker account. Members whose email domain isn't verified
+on the connection stay outside SCIM. To use SCIM as the only provisioning
+source, see
+[Migrate JIT to SCIM](/manuals/security/provisioning/scim/migrate-scim.md).
 
 ### Is user information visible in Docker Hub?
 

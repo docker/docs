@@ -25,6 +25,7 @@ Docker supports the following SCIM attributes:
 | Attribute | Description |
 | :--- | :--- |
 | `userName` | User's primary email address, used as the unique identifier |
+| `externalId` | Identifier for the user in your IdP. Docker stores the value |
 | `name.givenName` | User's first name |
 | `name.familyName` | User's surname |
 | `active` | Indicates whether a user is enabled. Set to `false` to deprovision a user |
@@ -45,9 +46,13 @@ To enable SCIM:
 1. Sign in to [Docker Home](https://app.docker.com).
 1. Select **Identity & auth**, then **SSO and SCIM**.
 1. In the **SSO connections** table, select the **Actions** icon for your
-   connection, then select **Setup SCIM**.
-1. Copy the **SCIM Base URL** and **API Token** and paste the values into your
-   IdP.
+   connection, then select **Enable SCIM**.
+1. In the **Enable SCIM provisioning** dialog, select **Enable**.
+1. Copy the **SCIM Base URL** and **API Token**, then paste the values into
+   your IdP.
+
+To view the **SCIM Base URL** and **API Token** again, select the **Actions**
+icon, then **Edit SCIM**.
 
 ## Enable SCIM in your IdP
 
@@ -164,7 +169,7 @@ The following table lists the supported optional user-level attributes:
 | :--- | :--- | :--- |
 | `dockerRole` | `member`, `editor`, or `owner` | Overrides the default role. If unset, the user has the `member` role |
 | `dockerOrg` | Docker organization name, such as `moby` | Overrides the default organization. If `dockerOrg` and `dockerTeam` are set, the user is provisioned to the team in this organization |
-| `dockerTeam` | Docker team name, such as `developers` | Provisions the user to the team in the default or specified organization. Docker creates the team if it doesn't exist. You can also use [group mapping](group-mapping.md) to assign users to multiple teams or organizations |
+| `dockerTeam` | Docker Team name, such as `developers` | Provisions the user to the team in the default or specified organization. Docker creates the team if it doesn't exist. You can also use [group mapping](group-mapping.md) to assign users to multiple teams or organizations |
 
 The external namespace for these attributes is
 `urn:ietf:params:scim:schemas:extension:docker:2.0:User`. Enter this value when
@@ -360,16 +365,18 @@ After completing role mapping, you can test the configuration manually.
 
 ## Disable SCIM
 
-When you disable SCIM, users provisioned through SCIM remain in the
-organization, but changes from your IdP stop syncing. To deprovision these
-users, remove them manually from the organization.
-
-To disable SCIM:
+You can disable SCIM only while JIT provisioning is turned on. When SCIM is
+off, users remain in the organization, but changes from your IdP stop
+syncing. To deprovision these users, remove them manually from the
+organization.
 
 1. Sign in to [Docker Home](https://app.docker.com).
 1. Select **Identity & auth**, then **SSO and SCIM**.
 1. In the **SSO connections** table, select the **Actions** icon.
+1. If JIT is off, select **Enable JIT provisioning**, then **Enable**. Open
+   the **Actions** menu again.
 1. Select **Disable SCIM**.
+1. Select **Disable** to confirm.
 
 ## Next steps
 

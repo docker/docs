@@ -47,7 +47,7 @@ methods:
 | :--- | :--- | :--- | :--- |
 | [System for Cross-domain Identity Management (SCIM)](/manuals/security/provisioning/scim/_index.md) | On the IdP's synchronization schedule or through Provision on Demand | Creates and updates users, synchronizes configured groups, and deprovisions users | Disabled |
 | [Just-in-Time (JIT)](/manuals/security/provisioning/just-in-time.md) | When a user signs in through SSO | Creates users and applies attributes from the SSO assertion. It doesn't deprovision users | Enabled when you configure SSO |
-| [Auto-provisioning](/manuals/security/provisioning/auto-provisioning.md) | When an existing Docker user signs in with an email address from a verified domain | Adds the user to the organization. It doesn't create or deprovision accounts | Disabled |
+| [Auto-provisioning](/manuals/security/provisioning/auto-provisioning.md) | When an existing Docker user signs in or verifies their email, and that address uses a verified domain | Adds the user to the organization. It doesn't create or deprovision accounts | Disabled |
 
 [Group mapping](/manuals/security/provisioning/scim/group-mapping.md) assigns
 users to Docker organizations and teams. Use it with SAML SSO or SCIM. You can

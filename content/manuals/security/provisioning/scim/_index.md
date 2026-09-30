@@ -35,21 +35,24 @@ syncs profile updates from the identity provider, such as name changes, and
 reactivates users who are reassigned to the application. If group mapping is
 configured, SCIM also synchronizes groups.
 
-When a user is removed from the Docker application, SCIM deactivates and
-removes them from your Docker organization.
+When a user is no longer assigned to the Docker application in the IdP,
+SCIM deactivates the Docker account.
 
 SCIM automates:
 
 - Creating users
 - Updating user profiles
-- Removing and deactivating users
+- Deactivating users
 - Reactivating users
 - Synchronizing groups when group mapping is configured
 
 > [!NOTE]
 >
-> Enabling SCIM doesn't convert manually added users into SCIM-managed users.
-> SCIM only provides full lifecycle management for users it provisions.
+> After you enable SCIM, it can manage and deprovision any organization member
+> whose email domain is verified on the SSO connection. That includes users
+> created through JIT or added manually. When your IdP pushes a user with a
+> matching email address, SCIM links the existing Docker account. Members
+> whose email domain isn't verified on the connection stay outside SCIM.
 
 ## Choose how SCIM works with JIT
 
@@ -74,28 +77,43 @@ Configure and test SCIM before you
 
 ### Use SCIM with JIT
 
-JIT and SCIM run independently:
+JIT and SCIM run independently. While JIT is on, you still assign users to
+the Docker application and maintain group mappings in your IdP.
 
-- JIT reads the SSO assertion and applies its values when a user signs in.
-- SCIM reads users, attributes, and group membership from the IdP on its
-  synchronization schedule.
+Two values can change back and forth when both are enabled:
 
-When both are enabled, values applied during sign-in can overwrite values that
-SCIM set. A JIT-provisioned user who isn't in the SCIM-mapped IdP group can
-also be removed from the Docker organization during the next SCIM
-synchronization.
+- Full name. Each SSO sign-in writes the name from the SSO assertion to the
+  Docker account. If SCIM set a different name, for example the IdP profile
+  says "Jon Smith" but the assertion sends "Jonathan Smith", sign-in replaces
+  the SCIM value. The next SCIM sync can set it back.
+- Team membership. At sign-in, JIT reads the `groups` or `dockerTeam` value
+  from the SSO assertion and adds the user to those teams. It never removes
+  teams. SCIM group sync makes each mapped `organization:team` group's
+  membership match the IdP group exactly. If JIT added a user to a team that
+  the IdP group doesn't include, the next sync of that group removes the
+  user from the team, and the next sign-in adds them back.
+
+Roles don't move back and forth. JIT sets the organization role only when it
+first adds the user. A later SCIM update can change that role, and the next
+sign-in leaves the SCIM role in place.
+
+When a user isn't assigned to the Docker application in the IdP, the next
+synchronization deactivates the Docker account. Removing a user from a mapped
+`organization:team` group removes that user from the team only.
 
 If you keep both enabled:
 
 - Match each user's email address exactly between the SSO assertion and SCIM.
-- Add every user who can be provisioned through JIT to the SCIM-mapped group.
-- Keep roles, organizations, teams, and group membership consistent in the
-  IdP.
-- Monitor users and assignments for changes after sign-in and SCIM
-  synchronization.
+- Assign every user who can sign in through SSO to the Docker application in
+  the IdP.
+- Keep the IdP authoritative for roles, organizations, teams, and group
+  membership.
+- After sign-in and after each SCIM synchronization, confirm that full names
+  and team memberships still match the IdP.
 
-Keeping a JIT-provisioned user in the mapped group doesn't convert the account
-to SCIM lifecycle management. To let SCIM manage the account, follow
+SCIM links an existing account, including one created through JIT or added
+manually, when the IdP pushes a user with a matching email address. To use
+SCIM as the only provisioning source, see
 [Migrate JIT to SCIM](/manuals/security/provisioning/scim/migrate-scim.md).
 
 ## Next steps
@@ -103,7 +121,7 @@ to SCIM lifecycle management. To let SCIM manage the account, follow
 - [Set up SCIM provisioning](/manuals/security/provisioning/scim/provision-scim.md)
   to enable SCIM in Docker and your identity provider.
 - [Migrate JIT to SCIM](/manuals/security/provisioning/scim/migrate-scim.md)
-  if users were provisioned with Just-in-Time (JIT) before you enabled SCIM.
+  to turn off JIT after SCIM is managing your users.
 - [Group mapping](/manuals/security/provisioning/scim/group-mapping.md) to
   sync identity provider groups with Docker teams.
 - [Troubleshoot provisioning](/manuals/security/provisioning/troubleshoot-provisioning.md)
