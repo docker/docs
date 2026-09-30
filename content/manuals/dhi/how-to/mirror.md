@@ -232,10 +232,19 @@ You can use any standard workflow to mirror the image, such as the
 API](/reference/api/registry/latest/), third-party registry tools, or CI/CD
 automation.
 
-However, to preserve the full security context, including attestations, you must
-also mirror its associated OCI artifacts. DHI repositories store the image
-layers on `dhi.io` (or `docker.io` for customized images) and the signed
-attestations in a separate registry (`registry.scout.docker.com`).
+Mirroring an image requires copying both the image and its associated signed
+attestations, including SBOMs, provenance, and VEX. Copying only the image does
+not preserve these attestations in your destination registry.
+
+When you access a DHI image through `dhi.io`, the proxy provides access to both
+the image and its associated attestations. It retrieves image manifests and
+layers from Docker Hub, and attestations from `registry.scout.docker.com`.
+
+The examples that follow copy from your organization's mirrored repository on
+Docker Hub. They therefore use two source locations:
+`docker.io/<your-org>/<repository>` for the image and
+`registry.scout.docker.com/<your-org>/<repository>` for its attestations. Both
+are copied into the same repository in your destination registry.
 
 To copy both, you can use [`regctl`](https://regclient.org/cli/regctl/), an
 OCI-aware CLI that supports mirroring images along with attached artifacts such
