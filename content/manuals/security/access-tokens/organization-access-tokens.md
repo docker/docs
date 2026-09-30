@@ -6,7 +6,6 @@ keywords: organization access tokens, OAT, docker hub security, programmatic acc
 aliases:
  - /security/for-admins/access-tokens/
  - /enterprise/security/access-tokens/
- - /platform/security/access-tokens/organization-access-tokens/
 ---
 
 {{< summary-bar feature_name="OATs" >}}

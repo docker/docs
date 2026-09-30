@@ -5,6 +5,8 @@ description: Technical architecture of Docker Sandboxes; workspace mounting, sto
 keywords: docker sandboxes, architecture, microVM, workspace mounting, sandbox lifecycle
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This page explains how Docker Sandboxes work under the hood. For the security
 properties of the architecture, see [Sandbox isolation](security/isolation.md).
 

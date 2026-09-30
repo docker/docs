@@ -6,7 +6,7 @@ linkTitle: Just-in-Time
 weight: 20
 aliases:
   - /security/for-admins/provisioning/just-in-time/
-  - /platform/security/provisioning/just-in-time/
+  - /enterprise/security/provisioning/just-in-time/
 ---
 
 {{< summary-bar feature_name="SSO" >}}

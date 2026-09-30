@@ -5,7 +5,7 @@ description: Auto-provision users by associating members to your organization wh
 keywords: user provisioning, just-in-time provisioning, JIT, autoprovision, Docker Admin, admin, security
 weight: 30
 aliases:
-  - /platform/security/provisioning/auto-provisioning/
+  - /enterprise/security/provisioning/auto-provisioning/
 ---
 
 Auto-provisioning automatically adds users to your organization when they sign in with email addresses that match your verified domains. You must verify a domain before enabling auto-provisioning.

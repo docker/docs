@@ -29,7 +29,7 @@ The columns are:
 - `POLICY`: the policy name.
 - `SOURCE`: where the policy came from. `local` means your local configuration
   — a preset or rules you added with `sbx policy`. `kit` means a
-  [kit](../../customize/kits.md#control-network-access). `org` means your
+  [kit](/manuals/ai/sandboxes/governance/concepts.md#precedence). `org` means your
   organization.
 - `APPLIES TO`: which sandboxes the policy applies to. `all` means the policy
   is global. `sandbox:<name>` scopes it to a single sandbox; a profile name
@@ -49,6 +49,19 @@ $ sbx policy inspect Balanced
 
 Use `--source` to filter by origin (`local`, `org`, or `kit`) and `--decision`
 to filter by outcome (`allow` or `deny`).
+
+Use `--protocol tcp` or `--protocol udp` to filter network rules.
+
+Use `--created-via` to filter by how a rule was created. Pass `default` for
+preset rules, `added` for rules you added yourself, `provisioned` for rules a
+kit or application added, or `approval` for rules recorded when you approved a
+destination. A wide listing shows the same information per rule:
+
+```console
+$ sbx policy ls --wide --created-via approval
+```
+
+See [Approval-required access](../access-controls/network.md#approval-required-access).
 
 A `STATUS` column also appears when you pass `--include-inactive`; see
 [Showing inactive rules](#showing-inactive-rules).
@@ -157,6 +170,10 @@ POLICY         SOURCE   APPLIES TO   SUMMARY
 local-policy   local    all          network: 2 allow (L4), 1 deny (L7)
 ```
 
+When the same decision has entries at both layers, each layer gets its own
+count, L4 first. Two host allows and one HTTP allow read
+`network: 2 allow (L4), 1 allow (L7)`.
+
 The labels appear when the current listing includes at least one HTTP rule.
 Because filters and hidden inactive rules change what the listing contains, a
 filtered listing with no HTTP rules shows an unlabeled count, such as
@@ -190,7 +207,7 @@ The `PROXY` column shows how the request left the sandbox:
 | `forward`        | Routed through the forward proxy. Supports [credential injection](../../configuration/credentials.md).              |
 | `forward-bypass` | Routed through the forward proxy without credential injection.                                                 |
 | `transparent`    | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.            |
-| `network`        | Non-HTTP traffic (raw TCP, UDP, ICMP). TCP can be allowed with a policy rule. UDP and ICMP are always blocked. |
+| `network`        | Non-HTTP traffic. TCP and experimental UDP egress follow network policy. ICMP is blocked. |
 | `browser-open`   | A sandbox process requested opening a URL in the host browser. Policy is enforced before opening the URL.      |
 
 The `RULE` column identifies the policy rule that matched the request. The

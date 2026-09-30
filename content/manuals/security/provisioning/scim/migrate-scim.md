@@ -8,7 +8,7 @@ keywords: JIT to SCIM migration, SCIM provisioning, user deprovisioning,
   identity provider, Docker Home, user lifecycle management
 weight: 30
 aliases:
-  - /platform/security/provisioning/scim/migrate-scim/
+  - /enterprise/security/provisioning/scim/migrate-scim/
 ---
 
 {{< summary-bar feature_name="SSO" >}}
@@ -124,5 +124,5 @@ After you turn off JIT:
 - Set up [group mapping](/manuals/security/provisioning/scim/group-mapping.md).
 - [Assign roles](/manuals/security/roles-and-permissions/core-roles.md) to
   organization members.
-- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in.md) for your
-  organization.
+- [Enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md) for
+  your organization.

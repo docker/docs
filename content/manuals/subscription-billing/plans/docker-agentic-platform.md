@@ -10,7 +10,6 @@ keywords:
   subscription, promotional credit, cancel subscription, sandbox
   compute, usage and billing
 weight: 20
-sitemap: false
 aliases:
   - /subscription/plans/docker-agentic-platform/
 ---
@@ -25,11 +24,14 @@ pay-as-you-go plan for running agent and tool workloads in isolated
 sandboxes with Docker-managed cloud infrastructure. You pay for the usage you accrue without a recurring
 subscription fee.
 
+To activate access for the Console, cloud sandbox CLI, or API and SDKs, follow
+[Signup and billing](/manuals/agentic-platform/signup.md#activate-cloud-access).
+
 ## Usage
 
 > [!NOTE]
-> Docker Agentic Platform is available only on Docker Personal and
-> Docker Pro accounts.
+> Subscribe using your personal Docker account, including if you belong to
+> an organization. The subscription is attached to your personal account.
 
 Docker Agentic Platform requires bringing your own API keys for inference. Your inference provider
 handles those costs.
@@ -47,7 +49,7 @@ To track usage for Docker Agentic Platform from Docker Home:
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your
    account.
 1. Go to **Billing** to view the Overview page, then go to **Active
-   plans**.
+   subscriptions**.
 1. Select **Manage** next to **Docker Agentic Platform**.
 1. View the estimated totals and usage for the current pay period.
 
@@ -71,7 +73,7 @@ the plan period.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and go to
    **Billing**.
-1. From **Active plans**, select **Manage** next to
+1. From **Active subscriptions**, select **Manage** next to
    **Docker Agentic Platform**.
 1. Select **Cancel subscription**.
 1. Review your usage, then select **Cancel subscription** to confirm.

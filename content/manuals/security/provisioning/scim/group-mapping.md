@@ -11,8 +11,7 @@ aliases:
   - /admin/organization/security-settings/group-mapping/
   - /security/for-admins/group-mapping/
   - /security/for-admins/provisioning/scim/group-mapping/
-  - /platform/security/provisioning/group-mapping/
-  - /platform/security/provisioning/scim/group-mapping/
+  - /enterprise/security/provisioning/scim/group-mapping/
 weight: 20
 ---
 
@@ -223,5 +222,5 @@ in the IdP.
 
 - [Assign roles](/manuals/security/roles-and-permissions/core-roles.md) to
   organization members.
-- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in.md) for your
-  organization.
+- [Enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md) for
+  your organization.

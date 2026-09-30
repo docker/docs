@@ -5,6 +5,10 @@ keywords: docker sandboxes, sbx, MCP gateway, Model Context Protocol, MCP server
 weight: 80
 ---
 
+This page describes the local MCP gateway. Cloud sandboxes use MCP servers
+configured in Docker Agentic Platform: see
+[Load an MCP server](cloud/usage.md#load-an-mcp-server).
+
 Docker Sandboxes includes an MCP gateway for connecting agents to Model Context
 Protocol servers. The gateway gives the agent inside the sandbox one MCP
 endpoint, while `sbx` manages the registered servers, OAuth credentials, and

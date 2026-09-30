@@ -5,6 +5,12 @@ description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
 
+The following diagnostics and recovery steps apply to local sandboxes. Use
+[`sbx --cloud diagnose`](cloud/usage.md#diagnose-cloud-access) to check cloud
+connectivity and account access. For cloud files, expiration, and network access, see
+[Cloud sandboxes](cloud/). Local daemon restarts and `sbx reset` do not repair
+cloud sandbox state.
+
 ## Run diagnostics
 
 Before digging into a specific issue, run
@@ -136,7 +142,7 @@ $ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
 ```
 
 Then run the command again. For details, including how to allow local kits or
-any remote source, see [Restrict kit sources](customize/kits.md#restrict-kit-sources).
+any remote source, see [Restrict kit sources](/manuals/ai/sandboxes/customize/use-kits.md#restrict-kit-sources).
 
 ## SSH and other non-HTTP connections fail
 
@@ -156,8 +162,8 @@ can't be recovered. Use an address-based rule in that case:
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-UDP and ICMP traffic is blocked at the network layer and can't be unblocked
-with policy rules.
+UDP requires [experimental UDP egress](governance/access-controls/local.md#allow-outbound-udp)
+and UDP allow rules. ICMP is blocked and can't be unblocked with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
 server's hostname or IP address, or use HTTPS URLs instead:
@@ -220,9 +226,10 @@ your organization's internal root CA inside the sandbox so the agent and its
 SDKs trust certificates signed by the proxy. Certificate errors can stop a
 request before the credential proxy can inject credentials.
 
-For repeatable setup, create a [sandbox kit](customize/kits.md) that installs
-the CA when the sandbox is created. See
-[Install an internal CA certificate](customize/kit-examples.md#install-an-internal-ca-certificate)
+For repeatable setup with a built-in agent, create a
+[v2 mixin kit](customize/kits-v2.md) that installs the CA when the
+sandbox is created. See
+[Install an internal CA certificate](customize/kits-v2.md#install-an-internal-ca-certificate)
 for an example kit.
 
 Use a PEM-encoded certificate with a `.crt` extension. If traffic can be signed

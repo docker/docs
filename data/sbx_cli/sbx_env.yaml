@@ -15,6 +15,16 @@ description: |
     and with --cloud. Snapshots do not refresh; recreate the environment to rotate
     them. A snapshot cannot set refresh or noVerify.
 
+    Command secrets run from a fresh temporary directory on the host during
+    verification and refresh. The host temporary directory must be absolute and must
+    remain outside writable sandbox mounts. Relative references such as ./helper or
+    cat token no longer resolve against the project or daemon working directory. Use an absolute
+    helper path outside shared workspaces. sbx does not copy helpers, inspect their
+    dependencies, or confine their execution. Helpers and any code or configuration
+    they load must remain outside writable sandbox mounts. Explicit paths into shared
+    workspaces and broad mounts exposing host configuration or the host temporary
+    directory remain unsafe, including mounts added later with sbx mount.
+
       secrets:
         github:
           command: gh auth token

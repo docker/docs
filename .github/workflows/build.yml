@@ -72,6 +72,7 @@ jobs:
 
   validate:
     runs-on: ubuntu-24.04
+    continue-on-error: ${{ matrix.target == 'validate-api-reference' }}
     strategy:
       fail-fast: false
       matrix:
@@ -83,6 +84,7 @@ jobs:
           - test-go-redirects
           - dockerfile-lint
           - validate-vendor
+          - validate-api-reference
     steps:
       -
         name: Checkout

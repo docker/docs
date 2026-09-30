@@ -86,6 +86,15 @@ params:
 | time             | Estimated time to complete               |
 | prerequisites    | Prerequisites or "None"                  |
 
+### Catalog navigation
+
+Set `params.sidebar.activeChildrenOnly: true` on a section to show only its
+active child in the sidebar. Other children remain available in search and
+the sitemap. Sidebar group headings are omitted in this mode.
+
+For a recipe catalog, set `params.recipeCatalog: true` on the section to add
+a **Browse all recipes** link to each recipe page.
+
 ## Shortcodes
 
 Shortcodes are reusable components that add rich functionality to your
@@ -340,6 +349,18 @@ Create card layouts for organizing content.
   link="/get-started/"
 */>}}
 ```
+
+### Recipe lists
+
+List a section's recipes by their `params.sidebar.group` value:
+
+```markdown
+{{</* recipe-list group="Working in a sandbox" */>}}
+```
+
+The list uses each page's sidebar title and description, ordered by page
+weight. It renders in two columns on larger screens and one column on smaller
+screens. The Markdown output includes the same links and descriptions.
 
 ### Icons
 

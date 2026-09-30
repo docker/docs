@@ -35,6 +35,12 @@ grid:
   description: Provide feedback on Docker Desktop or Docker Desktop features.
   icon: chat-bubble-left
   link: /desktop/troubleshoot-and-support/feedback/
+aliases:
+  - /desktop/mac/
+  - /desktop/windows/
+  - /docker-for-mac/
+  - /docker-for-windows/
+  - /desktop/get-started/
 ---
 
 Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment
@@ -58,7 +64,7 @@ Docker Desktop integrates with your preferred development tools and languages, a
 
 ## Products inside Docker Desktop
 
-- [Docker MCP Toolkit and Catalog](/manuals/ai/mcp-catalog-and-toolkit/_index.md)
+- [Docker MCP Toolkit and Catalog](/manuals/desktop/features/mcp-catalog-and-toolkit/_index.md)
 - [Docker Model Runner](/manuals/ai/model-runner/_index.md)
 - [Gordon](/manuals/ai/gordon/_index.md)
 - [Docker Offload](/manuals/offload/_index.md)

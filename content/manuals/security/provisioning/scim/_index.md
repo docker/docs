@@ -10,7 +10,7 @@ keywords: SCIM, SSO, user provisioning, deprovisioning, JIT, role mapping,
 aliases:
   - /security/for-admins/scim/
   - /security/for-admins/provisioning/scim/
-  - /platform/security/provisioning/scim/
+  - /enterprise/security/provisioning/scim/
 ---
 
 {{< summary-bar feature_name="SSO" >}}

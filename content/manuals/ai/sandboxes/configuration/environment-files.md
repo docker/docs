@@ -19,13 +19,17 @@ params:
       text: Experimental
 ---
 
-A sandbox environment file captures the setup for a project in a
+A sandbox environment file captures the setup for a local or cloud sandbox in a
 `sbxenv.yaml` file. Share the file with project contributors so they use the
 same agent, tools, resources, and credentials without reproducing CLI flags and
 setup steps.
 
 > [!NOTE]
 > `sbx env` is experimental. The command interface and file format may change.
+
+The examples on this page use local sandboxes unless stated otherwise. For
+cloud configuration and lifecycle differences, see
+[Use a cloud environment](#use-a-cloud-environment).
 
 ## Start an environment
 
@@ -362,6 +366,78 @@ Commands and vault references under `secrets` resolve on the host, so the
 automation runner must provide the referenced tools and authentication. The
 secret values remain outside the environment file.
 
+### Use a cloud environment
+
+Use `sbx --cloud env` to manage a cloud sandbox from an environment file. For
+account and CLI requirements, see [Cloud sandboxes](../cloud/_index.md).
+
+Save this as `cloud.sbxenv.yaml`:
+
+```yaml
+schemaVersion: "1"
+name: cloud-project
+agent: shell
+
+env:
+  PROJECT_NAME: example
+
+sandboxOptions:
+  cpus: 2
+  memory: 4g
+```
+
+Review the plan, create the sandbox without attaching, and run a command:
+
+```console
+$ sbx --cloud env plan ./cloud.sbxenv.yaml
+$ sbx --cloud env run --detached ./cloud.sbxenv.yaml
+$ sbx --cloud env exec ./cloud.sbxenv.yaml -- printenv PROJECT_NAME
+```
+
+Cloud environments support agents and kits, environment variables, CPU and
+memory limits, credentials for supported providers, and host lifecycle commands.
+Resource limits must match a [cloud size](../cloud/usage.md#choose-resources-and-platform).
+Lifecycle commands still run on your machine with your privileges.
+
+Remove `workspace`, `additionalWorkspaces`, clone options, `ports`, `registries`,
+and MCP server definitions from a local file before using it in cloud mode.
+Cloud environments also reject local sandbox options such as GPU, USB,
+display, shared skills, templates, and governance profiles. These checks run
+before host commands or provisioning. Transfer project files with
+[`sbx --cloud cp`](../cloud/usage.md#transfer-files) or clone a repository inside
+the sandbox.
+
+The plan shows inherited cloud credentials. Sandbox-scoped credentials override
+account defaults, and credentials declared in `secrets` override both. Declare
+literal values or use [`snapshot: true`](#secrets) to resolve a host command or
+vault reference once. Dynamic secret sources and custom credential providers
+aren't supported. Credential bindings require cloud support for kit credentials
+and explicit approval of the kit's injection domains.
+
+Changes to secrets and bindings require recreating the sandbox. Updated `env`
+values apply to subsequent sessions. Rejoining a running agent keeps that
+process's environment.
+
+Use the same machine, Docker identity, cloud endpoint, and ordered file paths
+for later commands. `sbx login` keeps environment state associated with your
+Docker identity. With `DOCKER_ACCESS_TOKEN`, changing the token starts a separate
+state scope.
+
+Remove the environment when you're finished:
+
+```console
+$ sbx --cloud env rm ./cloud.sbxenv.yaml
+```
+
+Removal deletes the sandbox and only the secrets provisioned by this
+environment. Inherited secrets remain. Global bindings remain unless you pass
+`--prune-bindings`. For unattended runs, use `--auto-approve` with `create` or
+`run`, and `--force` with `rm`.
+
+If creation is interrupted, retry the same command and unchanged declaration
+within 23 hours. Unresolved requests prevent removal. Follow the recovery
+message and retain its journal until the original requests are resolved.
+
 ## Review an environment plan
 
 `sbx env create`, `sbx env run`, and `sbx env rm` show the changes an
@@ -462,8 +538,15 @@ true`.
 
 `kits` accepts local directories, ZIP archives, OCI registry references, and
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
-configure the sandbox, and give the agent project-specific instructions. See
-[Kits](../customize/kits.md) for details.
+configure the sandbox, and give the agent project-specific instructions.
+The examples on this page pair built-in agents with v2 mixins. See
+[Kits v2](/manuals/ai/sandboxes/customize/kits-v2.md) for that format, or
+[Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
+when selecting v3 kits.
+
+An environment file selects kits and configures a sandbox's host resources.
+A kit descriptor defines the package itself. The environment file's
+`schemaVersion` is independent of the schema version in a kit descriptor.
 
 Explicit relative paths resolve from the directory of the environment file
 that declares them. These include `.`, `..`, paths that start with `./` or
@@ -527,13 +610,19 @@ paths resolve from the directory of the environment file that declares them.
 | ------------- | --------------- | -------- | ----------------------------------------------------- |
 | `template`    | string          | None     | Custom sandbox template image                         |
 | `memory`      | string          | None     | Memory limit, such as `8g` or `512m`                   |
-| `cpus`        | integer         | `0`      | Number of CPUs. `0` allocates all host CPUs            |
+| `cpus`        | integer         | `0`      | Number of CPUs. `0` selects the host default            |
 | `pullPolicy`  | string          | `always` | Image pull policy: `always`, `missing`, or `never`     |
 | `profile`     | string          | None     | Governance profile name                               |
 | `skills`      | string          | Daemon default | Shared agent skills store access: `off`, `readonly`, or `readwrite` |
 | `display`     | boolean         | `false`  | Provision a display socket for graphical applications |
 | `gpu`         | boolean         | `false`  | Pass the host GPU through to the sandbox               |
 | `usb`         | list of strings | None     | USB device selectors to pass through to the sandbox   |
+
+For local sandboxes, `cpus: 0` allocates all host CPUs, except on Linux arm64
+hosts, where the default is capped at 16. Set `cpus` to an explicit count to
+request a larger allocation, up to the number of available host CPUs. When creating a sandbox directly with
+`sbx create` or `sbx run`, use `--cpus` for the same override. Cloud resource
+limits must match a [cloud size](../cloud/usage.md#choose-resources-and-platform).
 
 `skills` controls access to the shared [agent skills](../workflows/agent-skills.md)
 store. Set it to `off` to omit the mount, `readonly` to mount the store read-only,
@@ -619,6 +708,7 @@ the environment is created.
 | `value`    | string  | None    | Literal secret value                                                         |
 | `ref`      | string  | None    | Vault URI, such as `op://Vault/Item/field`                                    |
 | `command`  | string  | None    | Host shell command whose standard output becomes the secret                   |
+| `snapshot` | boolean | `false` | Resolve `ref` or `command` once on the host and store the result as a literal |
 | `refresh`  | string  | None    | Resolution policy for `ref` or `command`, such as `on-demand` or `55m`        |
 | `backend`  | string  | Automatic | Resolver for `ref`: `sdk` or `cli`                                          |
 | `noVerify` | boolean | `false` | Skip verifying that a `ref` or `command` resolves during provisioning          |
@@ -635,6 +725,27 @@ secrets:
   github:
     command: gh auth token
 ```
+
+Secret commands execute from a fresh temporary directory on the host. Relative
+helper paths resolve from that directory. Keep helpers and their dependencies
+outside writable sandbox mounts. Use an absolute path, an absolute host
+`PATH` entry, or an explicit change to the helper's private directory. See
+[dynamic secret sources](credentials.md#use-a-dynamic-secret-source).
+
+For a cloud environment, set `snapshot: true` on a `ref` or `command` source:
+
+```yaml
+secrets:
+  github:
+    command: gh auth token
+    snapshot: true
+```
+
+The command runs on the host after plan approval. The resolved value is stored
+as a literal secret and doesn't refresh. Recreate the environment to rotate
+it. Snapshots also work with local environments. A snapshot can't set
+`refresh` or `noVerify`. Cloud snapshots use CLI resolvers for vault references
+and don't support `backend: sdk`.
 
 ### `bindings`
 

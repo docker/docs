@@ -12,7 +12,6 @@ weight: 30
 aliases:
   - /security/for-admins/provisioning/
   - /enterprise/security/provisioning/
-  - /platform/security/provisioning/
 grid:
   - title: Add and manage domains
     description: Add, verify, and manage domains for auto-provisioning.

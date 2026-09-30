@@ -37,9 +37,8 @@ then pre-existing images and containers will be inaccessible.
 
 1. Navigate to **Settings** in Docker Desktop.
 2. In the **General** tab, check **Use containerd for pulling and storing images**.
-3. Go to **Features in development** and check the **Enable Wasm** option.
+3. Go to **Beta features** and check the **Enable Wasm** option.
 4. Select **Apply** to save the settings.
-5. In the confirmation dialog, select **Install** to install the Wasm runtimes.
 
 Docker Desktop downloads and installs the following runtimes: 
 - `io.containerd.slight.v1`
@@ -200,7 +199,7 @@ store](./containerd.md), an error similar to the following displays:
 docker: Error response from daemon: Unknown runtime specified io.containerd.wasmedge.v1.
 ```
 
-[Turn on the containerd feature](./containerd.md#enable-the-containerd-image-store)
+[Turn on the containerd feature](./containerd.md#switch-image-stores)
 in Docker Desktop settings and try again.
 
 ### Failed to start shim: failed to resolve runtime path

@@ -20,7 +20,7 @@ grid:
     icon: list-bullet
     link: /security/roles-and-permissions/custom-roles/permissions-reference/
 aliases:
-  - /platform/security/roles-and-permissions/custom-roles/
+  - /enterprise/security/roles-and-permissions/custom-roles/
 ---
 
 {{< summary-bar feature_name="Custom roles" >}}

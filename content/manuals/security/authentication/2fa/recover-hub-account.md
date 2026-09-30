@@ -1,37 +1,47 @@
 ---
 title: Recover your Docker account
-description: Recover your Docker account and manage two-factor authentication recovery codes
-keywords: account recovery, two-factor authentication, 2FA, recovery code, docker hub security
+linkTitle: Recover your account
+description: >-
+  Recover your Docker account and manage two-factor authentication recovery
+  codes.
+keywords: account recovery, two-factor authentication, 2FA, recovery code,
+  docker hub security, lost authenticator app, 2FA lockout
 aliases:
- - /docker-hub/2fa/recover-hub-account/
- - /security/for-developers/2fa/recover-hub-account/
- - /security/2fa/new-recovery-code/
- - /platform/security/authentication/2fa/recover-hub-account/
+  - /docker-hub/2fa/recover-hub-account/
+  - /security/for-developers/2fa/recover-hub-account/
+  - /security/2fa/new-recovery-code/
+  - /security/2fa/recover-hub-account/
 weight: 20
 ---
 
 {{< summary-bar feature_name="2FA" >}}
 
-This page explains how to recover your Docker account and manage recovery codes for two-factor authentication.
+If you lose your two-factor authentication recovery code, or lose access to both
+your authenticator app and your recovery code, you can generate a new code or
+contact Support to recover your account.
 
 ## Generate a new recovery code
 
-If you lost your two-factor authentication recovery code but still have access to your Docker Hub account, you can generate a new recovery code.
+If you lost your two-factor authentication recovery code but still have access
+to your Docker Hub account, you can generate a new recovery code.
 
-1. Sign in to your [Docker account](https://app.docker.com/login) with your username and password.
+1. Sign in to your [Docker account](https://app.docker.com/login) with your
+   username and password.
 1. Select your avatar and from the drop-down menu, select **Account settings**.
 1. Select **2FA**.
 1. Enter your password, then select **Confirm**.
 1. Select **Generate new code**.
 
-This generates a new code. Select the visibility icon to view the code. Save your recovery code and store it somewhere safe.
+This generates a new code. Select the visibility icon to view the code. Save
+your recovery code and store it somewhere safe.
 
 ## Recover your account without access
 
-If you lost access to both your two-factor authentication application and your recovery code:
+If you lost access to both your two-factor authentication application and your
+recovery code, you can't complete the normal sign-in process because you don't
+have the required 2FA verification code.
 
-1. Sign in to your [Docker account](https://app.docker.com/login) with your username and password.
-1. Select **I've lost my authentication device** and **I've lost my recovery code**.
-1. Complete the [Contact Support form](https://hub.docker.com/support/contact/?category=2fa-lockout).
-
-You must enter the primary email address associated with your Docker ID in the Contact Support form for recovery instructions.
+Complete the
+[Contact Support form](https://hub.docker.com/support/contact/?category=2fa-lockout)
+with the primary email address associated with your Docker ID and follow the
+recovery instructions provided by Docker Support.

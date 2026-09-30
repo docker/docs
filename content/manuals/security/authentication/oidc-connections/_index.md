@@ -7,7 +7,6 @@ tags: [admin]
 weight: 35
 aliases:
   - /enterprise/security/oidc-connections/
-  - /platform/security/authentication/oidc-connections/
 ---
 
 {{< summary-bar feature_name="OIDC connections" >}}

@@ -13,18 +13,15 @@ aliases:
   - /faq/security/single-sign-on/saml-faqs/
   - /security/faqs/single-sign-on/saml-faqs/
   - /security/faqs/single-sign-on/faqs/
-  - /platform/security/authentication/single-sign-on/FAQs/general/
+  - /enterprise/security/single-sign-on/FAQs/general/
   - /single-sign-on/idp-faqs/
   - /faq/security/single-sign-on/idp-faqs/
   - /security/faqs/single-sign-on/idp-faqs/
-  - /platform/security/authentication/single-sign-on/FAQs/idp-faqs/
-  - /platform/security/faqs/idp-faqs/
+  - /enterprise/security/single-sign-on/FAQs/idp-faqs/
   - /single-sign-on/users-faqs/
   - /faq/security/single-sign-on/users-faqs/
   - /security/faqs/single-sign-on/users-faqs/
-  - /platform/security/authentication/single-sign-on/FAQs/users-faqs/
-  - /platform/security/faqs/users-faqs/
-  - /platform/security/faqs/sso-faqs/
+  - /enterprise/security/single-sign-on/FAQs/users-faqs/
   - /single-sign-on/enforcement-faqs/
   - /faq/security/single-sign-on/enforcement-faqs/
   - /security/faqs/single-sign-on/enforcement-faqs/
@@ -32,8 +29,7 @@ aliases:
   - /single-sign-on/domain-faqs/
   - /faq/security/single-sign-on/domain-faqs/
   - /security/faqs/single-sign-on/domain-faqs/
-  - /platform/security/authentication/single-sign-on/FAQs/domain-faqs/
-  - /platform/security/faqs/domain-faqs/
+  - /enterprise/security/single-sign-on/FAQs/domain-faqs/
   - /faqs/sso-faqs/
   - /faqs/domain-faqs/
 ---
@@ -151,7 +147,7 @@ For detailed instructions, see [Configure single sign-on](/manuals/security/auth
 ### Is Docker SSO fully synced with the IdP?
 
 Not with JIT alone. JIT provisions users when they authenticate, but it
-doesn't deprovision users who leave your IdP. Administrators must
+doesn't deprovision users who leave your IdP. You must
 [remove those users](/manuals/accounts/organization/manage/members.md#remove-a-member-from-the-organization)
 manually.
 
@@ -219,7 +215,7 @@ These are separate features you can use independently or together:
 - Enforcing SSO ensures users sign in using SSO credentials instead of their Docker ID, enabling better credential management.
 - Enforcing sign-in to Docker Desktop ensures users always sign in to accounts that are members of your organization, so security settings and subscription benefits are always applied.
 
-For more details, see [Enforce sign-in for Desktop](/manuals/enterprise/security/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
+For more details, see [Enforce sign-in for Desktop](/manuals/desktop/enterprise/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
 
 ## Domain
 

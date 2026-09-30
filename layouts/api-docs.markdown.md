@@ -15,6 +15,11 @@ Choose a Docker HTTP API:
 
 API version: {{ $api.version }}
 
+{{ if $api.experimental }}
+> This API is experimental. Features, interfaces,
+> and behavior may change.
+{{ end }}
+
 {{ if eq .Params.view "overview" }}
 ## Overview
 
@@ -28,7 +33,9 @@ API version: {{ $api.version }}
 {{ end }}{{ end }}
 {{ range $api.servers }}
 Server: `{{ .url }}`
-{{ end }}
+{{ range $name,$variable := .variables }}
+`{{ $name }}`: {{ $variable.description }}
+{{ end }}{{ end }}
 {{ if eq $api.connection "unix" }}
 ```console
 curl --unix-socket /var/run/docker.sock http://localhost/v{{ $api.version }}/version
@@ -68,12 +75,15 @@ Deprecated operation.
 {{ end }}
 {{ range .servers }}
 Server: `{{ .url }}`
-{{ end }}
+{{ range $name,$variable := .variables }}
+`{{ $name }}`: {{ $variable.description }}
+{{ end }}{{ end }}
 Effective security: alternatives are OR; schemes within an alternative are AND. An empty array declares no HTTP authentication requirement.
 
 ```json
 {{ .security | jsonify (dict "indent" "  ") }}
 ```
+{{ if .curl }}
 ## Example request
 
 Replace placeholders and provide the required credentials or request body.
@@ -81,8 +91,26 @@ Replace placeholders and provide the required credentials or request body.
 ```console
 {{ .curl }}
 ```
+{{ end }}
 {{ range .curlNotes }}
 {{ . }}
+{{ end }}
+{{ with index .raw "x-websocket" }}
+## WebSocket session
+
+Subprotocol: `{{ .subprotocol }}`
+
+{{ .authentication }}
+
+{{ .browser }}
+
+{{ .reconnect }}
+
+{{ .terminalFrame }}
+
+```json
+{{ . | jsonify (dict "indent" "  ") }}
+```
 {{ end }}
 ## Parameters
 {{ range .parameters }}
@@ -125,6 +153,15 @@ Headers:
 {{ . | jsonify (dict "indent" "  ") }}
 ```
 {{ end }}
+{{ $variant := . }}
+{{ range $key := slice "encoding" "itemEncoding" "prefixEncoding" }}
+{{ with index $variant $key }}
+{{ $key }}:
+
+```json
+{{ . | jsonify (dict "indent" "  ") }}
+```
+{{ end }}{{ end }}
 {{ range .examples }}
 {{ .name }}:
 ```{{ .language }}

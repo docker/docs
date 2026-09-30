@@ -18,7 +18,7 @@ sandbox, see [Customize](../customize/).
 - [Models](models.md) selects local models, hosted providers, or custom
   inference endpoints for sandboxed agents.
 - [Environment files](environment-files.md) declare reusable project
-  configuration in `sbxenv.yaml`.
+  configuration in `sbxenv.yaml` for local or cloud sandboxes.
 - [GPU passthrough](gpu-passthrough.md) configures a Linux host and sandbox for
   NVIDIA GPU workloads.
 - [Registry mirror](registry-mirror.md) routes Docker Hub template, kit, and

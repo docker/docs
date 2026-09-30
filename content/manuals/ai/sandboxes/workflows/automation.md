@@ -6,6 +6,9 @@ description: Authenticate and run Docker Sandboxes in CI systems and other headl
 keywords: docker sandboxes, sbx, ci, headless, automation, personal access token
 ---
 
+This page describes local sandboxes in CI. For cloud execution without local
+virtualization, see [Run without attaching](../cloud/usage.md#run-without-attaching).
+
 For CI environments and scripts where a browser isn't available, authenticate
 with a Docker Personal Access Token (PAT):
 

@@ -1,6 +1,6 @@
 {{- $data := index hugo.Data "api-reference" -}}
 {{- if not $data }}
-  {{ errorf "API reference data missing: run ./hack/api-docs/run.sh generate before Hugo" }}
+  {{ errorf "API reference data missing: regenerate data/api-reference.json with ./hack/api-docs/run.sh generate" }}
 {{ end -}}
 {{- if ne (int $data.modelVersion) 1 }}
   {{ errorf "Unsupported API presentation model version" }}
@@ -14,6 +14,9 @@
   {{ end -}}
   {{- if eq $api.id "ai-governance" }}
     {{ $aliases = slice "/reference/api/ai-governance/" "/ai/sandboxes/governance/api/" }}
+  {{ end -}}
+  {{- if eq $api.id "sandboxes" }}
+    {{ $aliases = slice "/reference/api/sandboxes/" }}
   {{ end -}}
   {{- $.AddPage (dict "linkTitle" "Latest" "path" $path "url" $api.url "aliases" $aliases "kind" "section" "title" (printf "%s API %v" $api.title $api.version) "description" (printf "%s HTTP API reference, version %v." $api.title $api.version) "layout" "api-docs" "weight" 1 "params" (dict "view" "overview" "apiID" $api.id "keywords" (slice "API" $api.product))) -}}
   {{- range $op := $api.operations -}}

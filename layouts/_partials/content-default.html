@@ -13,6 +13,9 @@
   <hr />
 </div>
 {{ partial "api-reference/manual-link.html" . }}
+{{ if and .CurrentSection.Params.recipeCatalog (not .IsSection) }}
+  <p><a href="{{ .CurrentSection.RelPermalink }}">Browse all recipes</a></p>
+{{ end }}
 {{ .Content }}
 {{- if and (eq .Type "guides") (not .IsSection) (ne .CurrentSection .FirstSection) -}}
   {{- with .PrevInSection -}}

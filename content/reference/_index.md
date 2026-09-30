@@ -3,6 +3,7 @@ title: Reference documentation
 linkTitle: Reference
 layout: wide
 description: Find reference documentation for the Docker platform’s various APIs, CLIs, and file formats
+keywords: Docker reference, API, CLI, file formats
 params:
   icon: command-line
   notoc: true
@@ -30,6 +31,10 @@ params:
     icon: cpu-chip
     link: /reference/cli/dockerd/
   grid_apis:
+  - title: Sandboxes API (Experimental)
+    description: Create cloud sandboxes, run processes, and manage sandbox resources.
+    icon: code-bracket
+    link: /reference/api/sandboxes/latest/
   - title: Engine API
     description: The main API for Docker, provides programmatic access to a daemon.
     icon: code-bracket
