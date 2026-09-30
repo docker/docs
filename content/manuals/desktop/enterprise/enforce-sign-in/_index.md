@@ -35,7 +35,7 @@ When Docker Desktop detects a registry key, configuration profile, `.plist` file
 
 - A **Sign in using your work email address** prompt appears, requiring users to
   sign in as organization members to use Docker Desktop. The prompt states which
-  organizations are required and which method enforced it.
+  organizations are required and which method enforces it.
 - If users sign in with accounts that aren't organization members, they're
   automatically signed out and can't use Docker Desktop. The prompt changes to
   **You have been signed out** and explains why. They can sign in again with a
@@ -63,11 +63,11 @@ is required. Sign in enforced by your administrators (via registry.json).
 
 > [!IMPORTANT]
 >
-> Plan for this before you roll out enforcement. Any scripted or CI use of the
+> Make sure you plan for blocking the Docker CLI before you roll out enforcement. Any scripted or CI use of the
 > Docker CLI on an enforced machine stops working until that machine's user signs
 > in as an organization member.
 
-Sign-in enforcement is separate from [SSO enforcement](#enforcing-sign-in-versus-enforcing-single-sign-on-sso), which governs how users authenticate rather than whether they must.
+Sign-in enforcement is separate from [SSO enforcement](#enforcing-sign-in-versus-enforcing-single-sign-on-sso), which governs how users authenticate as opposed to whether they must authenticate.
 
 ### Impact on already-signed-in users
 

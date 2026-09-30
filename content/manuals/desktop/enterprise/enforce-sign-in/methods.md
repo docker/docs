@@ -253,10 +253,8 @@ Create the `registry.json` file (UTF-8) at the appropriate location:
 1. Restart Docker Desktop.
 1. Verify the **Sign in using your work email address** prompt appears in Docker Desktop.
 
-> [!TIP]
->
-> If users have issues starting Docker Desktop after enforcing sign-in,
-> they may need to update to the latest version.
+If users have issues starting Docker Desktop after enforcing sign-in,
+they may need to update to the latest version.
 
 {{< /tab >}}
 {{< tab name="Command line setup" >}}
@@ -299,10 +297,7 @@ Start-Process '.\Docker Desktop Installer.exe' -Wait 'install --allowed-org=myor
 # Command Prompt
 "Docker Desktop Installer.exe" install --allowed-org=myorg1
 ```
-
-> [!NOTE]
->
-> The `--allowed-org` flag accepts only one organization. To enforce sign-in for multiple organizations on Mac, configure the `registry.json` file after installation.
+The `--allowed-org` flag accepts only one organization. To enforce sign-in for multiple organizations on Mac, configure the `registry.json` file after installation.
 
 > [!IMPORTANT]
 >
@@ -320,9 +315,8 @@ sudo hdiutil attach Docker.dmg
 sudo /Volumes/Docker/Docker.app/Contents/MacOS/install --allowed-org=myorg
 sudo hdiutil detach /Volumes/Docker
 ```
-> [!NOTE]
->
-> The `--allowed-org` flag accepts only one organization. To enforce sign-in for multiple organizations on Mac, configure the `registry.json` file after installation.
+
+The `--allowed-org` flag accepts only one organization. To enforce sign-in for multiple organizations on Mac, configure the `registry.json` file after installation.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -347,7 +341,7 @@ only the organizations in the configuration profile are enforced.
 
 Deploying an `admin-settings.json` file enforces sign-in on its own, even if the
 file contains no organization list. Users who aren't on a Docker Business
-subscription see the sign-in prompt, and the Docker engine is held until they
+subscription see the sign-in prompt, and the Docker Engine is held until they
 sign in.
 
 This differs from the four methods above in two ways:
