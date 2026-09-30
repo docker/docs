@@ -48,14 +48,13 @@ action.
 
 ## Decisions
 
-| Decision                           | Description                                                                                                   |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `AUDIT_DECISION_ALLOW`             | Docker allowed the action.                                                                                    |
-| `AUDIT_DECISION_DENY`              | Docker denied the action.                                                                                     |
-| `AUDIT_DECISION_APPROVAL_REQUIRED` | The policy requires a user to approve the action.                                                             |
-| `AUDIT_DECISION_APPROVAL_ALLOW`    | A user approved a pending request.                                                                            |
-| `AUDIT_DECISION_APPROVAL_DENY`     | A user denied a pending request.                                                                              |
-| `AUDIT_DECISION_APPROVAL_TIMEOUT`  | The gateway stopped waiting for an answer to a pending request. Docker Sandboxes doesn't write this decision. |
+| Decision                           | Description                                       |
+| ---------------------------------- | ------------------------------------------------- |
+| `AUDIT_DECISION_ALLOW`             | Docker allowed the action.                        |
+| `AUDIT_DECISION_DENY`              | Docker denied the action.                         |
+| `AUDIT_DECISION_APPROVAL_REQUIRED` | The policy requires a user to approve the action. |
+| `AUDIT_DECISION_APPROVAL_ALLOW`    | A user approved a pending request.                |
+| `AUDIT_DECISION_APPROVAL_DENY`     | A user denied a pending request.                  |
 
 ## Enforcement modes
 
@@ -65,7 +64,6 @@ Docker evaluated it.
 | Mode      | Description                                                                     |
 | --------- | ------------------------------------------------------------------------------- |
 | `enforce` | Your organization's governance policy is enforced.                              |
-| `warn`    | Defined by the shared schema. Docker Sandboxes doesn't write this mode.         |
 | `audit`   | Docker records the decision for observability but doesn't enforce policy.       |
 | `off`     | Governance isn't active. Docker still writes the record to the local audit log. |
 
@@ -94,15 +92,12 @@ For MCP approvals, an approved request is evaluated again and recorded with
 | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `approval.reason_codes`        | Policy reasons for requiring approval. Present on `AUDIT_DECISION_APPROVAL_REQUIRED` records when the policy supplies reasons, and on declined MCP approvals when reasons are available. |
 | `approval.approval_request_id` | ID that links an approval required record to the record that resolves it.                                                                                                                |
-| `approval.grant_scope`         | Scope the user accepted, either `AUDIT_APPROVAL_GRANT_SCOPE_PER_REQUEST` or `AUDIT_APPROVAL_GRANT_SCOPE_PERSISTENT`. Present only on `AUDIT_DECISION_APPROVAL_ALLOW` records.            |
-| `approval.context_digest`      | SHA-256 digest of the request that was resolved, which shows it matches the request that was held. Docker Sandboxes sets it on declined MCP approvals.                                   |
-| `approval.broker_identity`     | Person or service that resolved the approval. Docker Sandboxes doesn't set this field.                                                                                                   |
-| `approval.digest_verified`     | Whether the engine verified `context_digest`. Docker Sandboxes doesn't set this field.                                                                                                   |
-| `approval.timeout_ms`          | How long the gateway waited before giving up. Present only on `AUDIT_DECISION_APPROVAL_TIMEOUT` records, which Docker Sandboxes doesn't write.                                           |
+| `approval.grant_scope`         | Scope the user accepted. Present only on `AUDIT_DECISION_APPROVAL_ALLOW` records.                                                                                                        |
+| `approval.context_digest`      | SHA-256 digest of the request that was resolved, which shows it matches the request that was held. Present only on declined MCP approvals.                                               |
 
 For network approvals, Docker Sandboxes records `approval.grant_scope` as
 `AUDIT_APPROVAL_GRANT_SCOPE_PERSISTENT`, which means that the approval applies
-to later requests. It doesn't write `AUDIT_APPROVAL_GRANT_SCOPE_PER_REQUEST`.
+to later requests.
 
 If a user approves a request but Docker can't apply the grant, the record has
 an `AUDIT_DECISION_DENY` decision and includes the `approval` object.
