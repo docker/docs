@@ -79,9 +79,9 @@ To set it on an existing policy:
    organization.
 1. In the left-hand navigation, expand **AI Platform** and select
    **Network access**.
-1. Open the policy's action menu (⋮) and select **Edit**.
+1. In the policy list, open the policy's action menu (⋮) and select **Edit**.
 1. Turn on **Require approval before access**.
-1. Select **Save changes**.
+1. Select **Save**.
 
 The policy's detail page reports approval as **Required** or **Not required**.
 Editing a policy replaces it in full, so turning the setting off removes the

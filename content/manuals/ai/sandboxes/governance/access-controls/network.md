@@ -137,8 +137,8 @@ List the destinations waiting for a response:
 
 ```console
 $ sbx policy approval ls
-APPROVAL             SANDBOX      TITLE                 DETAIL                                                                              OPTIONS
-network:c2FuZGJveA   my-sandbox   api.example.com:443   Protocol: TCP Resource type: domain approval required by policy "default network"   allow (Allow), dismiss (Dismiss)
+APPROVAL                                              SANDBOX      TITLE                 DETAIL                                                                              OPTIONS
+network:cWtN-4xUrNjxh4ouezcstgjrky6Rg57QfeRe3WEkyyY   my-sandbox   api.example.com:443   Protocol: TCP Resource type: domain approval required by policy "default network"   allow (Allow), dismiss (Dismiss)
 ```
 
 Each entry names the destination, the sandbox that asked for it, and why it
@@ -150,8 +150,8 @@ path, such as `GET api.example.com:443/v1/data`.
 To inspect a single entry, pass its ID to `sbx policy approval inspect`:
 
 ```console
-$ sbx policy approval inspect network:c2FuZGJveA
-APPROVAL network:c2FuZGJveA  (sandbox: my-sandbox)
+$ sbx policy approval inspect network:cWtN-4xUrNjxh4ouezcstgjrky6Rg57QfeRe3WEkyyY
+APPROVAL network:cWtN-4xUrNjxh4ouezcstgjrky6Rg57QfeRe3WEkyyY  (sandbox: my-sandbox)
   api.example.com:443
   Protocol: TCP
   Resource type: domain
@@ -165,7 +165,7 @@ APPROVAL network:c2FuZGJveA  (sandbox: my-sandbox)
 Respond by selecting one of the options the entry offers:
 
 ```console
-$ sbx policy approval respond network:c2FuZGJveA --option allow
+$ sbx policy approval respond network:cWtN-4xUrNjxh4ouezcstgjrky6Rg57QfeRe3WEkyyY --option allow
 Recorded: Allow
 ```
 
