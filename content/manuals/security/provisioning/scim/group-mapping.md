@@ -39,7 +39,7 @@ Before you begin, you must have:
 
 ## How group mapping works
 
-Group mapping uses IdP attributes to keep Docker team membership synchronized:
+Group mapping uses IdP attributes to keep Docker Team membership synchronized:
 
 - With SAML SSO, the IdP sends group membership when a user signs in.
 - With SCIM, the IdP synchronizes group membership on its provisioning

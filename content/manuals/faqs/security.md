@@ -125,11 +125,16 @@ invite the user.
 
 ### Can users use different email addresses to authenticate through SSO?
 
-All users must authenticate using the email domain specified during SSO setup. Users with email addresses that don't match the verified domain can sign in as guests with username and password if SSO isn't enforced, but only if they've been invited.
+All users must authenticate using the email domain specified during SSO setup.
+Users with email addresses that don't match the verified domain can sign in as
+guests with username and password if SSO isn't enforced, but only if they've
+been invited.
 
 ### How will users know they're being added to a Docker organization?
 
-When SSO is turned on, users are prompted to authenticate through SSO the next time they sign in to Docker Hub or Docker Desktop. The system detects their domain email and prompts them to sign in with SSO credentials instead.
+When SSO is turned on, users are prompted to authenticate through SSO the next
+time they sign in to Docker Hub or Docker Desktop. The system detects their
+domain email and prompts them to sign in with SSO credentials instead.
 
 For CLI access, users must authenticate using personal access tokens.
 
@@ -182,7 +187,10 @@ source, see
 
 ### Is user information visible in Docker Hub?
 
-All Docker accounts have public profiles associated with their namespace. If you don't want user information (like full names) to be visible, remove those attributes from your SSO and SCIM mappings, or use different identifiers to replace users' full names.
+All Docker accounts have public profiles associated with their namespace. If
+you don't want user information (like full names) to be visible, remove those
+attributes from your SSO and SCIM mappings, or use different identifiers to
+replace users' full names.
 
 ## Enforcement
 

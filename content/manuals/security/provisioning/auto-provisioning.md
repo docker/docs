@@ -8,21 +8,30 @@ aliases:
   - /enterprise/security/provisioning/auto-provisioning/
 ---
 
-Auto-provisioning automatically adds users to your organization when they sign in with email addresses that match your verified domains. You must verify a domain before enabling auto-provisioning.
+Auto-provisioning automatically adds users to your organization when they
+sign in with email addresses that match your verified domains. You must verify
+a domain before enabling auto-provisioning.
 
 > [!IMPORTANT]
 >
-> For domains that are part of an SSO connection, Just-in-Time (JIT) provisioning takes precedence over auto-provisioning when adding users to an organization.
+> For domains that are part of an SSO connection, Just-in-Time (JIT)
+> provisioning takes precedence over auto-provisioning when adding users to an
+> organization.
 
 ### Overview
 
 When auto-provisioning is enabled for a verified domain:
 
-- Users who sign in to Docker with matching email addresses are automatically added to your organization.
-- Auto-provisioning only adds existing Docker users to your organization, it doesn't create new accounts.
+- Users who sign in to Docker with matching email addresses are automatically
+  added to your organization.
+- Auto-provisioning only adds existing Docker users to your organization, it
+  doesn't create new accounts.
 - Users experience no changes to their sign-in process.
-- Company and organization owners receive email notifications when new users are added.
-- You may need to [manage seats](/manuals/accounts/organization/manage/manage-seats.md) to accommodate new users.
+- Company and organization owners receive email notifications when new users
+  are added.
+- You may need to
+  [manage seats](/manuals/accounts/organization/manage/manage-seats.md) to
+  accommodate new users.
 
 ### Enable auto-provisioning
 
@@ -56,5 +65,7 @@ To disable auto-provisioning for a domain:
 
 To choose a different method to provision users, you can set up:
 
-- [SCIM provisioning](/manuals/security/provisioning/scim/_index.md) for advanced user management.
-- [Group mapping](/manuals/security/provisioning/scim/group-mapping.md) to assign users to teams automatically.
+- [SCIM provisioning](/manuals/security/provisioning/scim/_index.md) for
+  advanced user management.
+- [Group mapping](/manuals/security/provisioning/scim/group-mapping.md) to
+  assign users to teams automatically.
