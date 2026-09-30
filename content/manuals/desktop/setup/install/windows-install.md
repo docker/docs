@@ -144,21 +144,21 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](/m
 
 1. Download the installer using the download button at the top of the page, or from the [release notes](/manuals/desktop/release-notes.md).
 
-2. Double-click `Docker Desktop Installer.exe` to run the installer. The installer will ask which installation mode you prefer. Choosing per-user installs to `%LOCALAPPDATA%\Programs\DockerDesktop` and requires no administrator privileges. Choosing all users will prompt for elevation.
+1. Double-click `Docker Desktop Installer.exe` to run the installer. The installer will ask which installation mode you prefer. Choosing per-user installs to `%LOCALAPPDATA%\Programs\DockerDesktop` and requires no administrator privileges. Choosing all users will prompt for elevation.
 
    > [!NOTE]
    >
    >If you want to switch installation mode at a later date, you need to uninstall and reinstall Docker Desktop.
 
-3. When prompted, select your backend on the Configuration page: **Use WSL 2 instead of Hyper-V** for WSL 2, or leave it unselected for Hyper-V. You can switch to Docker VMM after installation from **Settings** > **General**.
+1. When prompted, select your backend on the Configuration page: **Use WSL 2 instead of Hyper-V** for WSL 2, or leave it unselected for Hyper-V. You can switch to Docker VMM after installation from **Settings** > **General**.
 
     On systems that support only one backend, Docker Desktop automatically selects the available option.
 
-4. Follow the instructions on the installation wizard to authorize the installer and proceed with the installation.
+1. Follow the instructions on the installation wizard to authorize the installer and proceed with the installation.
 
-5. When the installation is successful, select **Close** to complete the installation process.
+1. When the installation is successful, select **Close** to complete the installation process.
 
-6. [Start Docker Desktop](#start-docker-desktop).
+1. [Start Docker Desktop](#start-docker-desktop).
 
 ### Install from the command line
 
@@ -283,12 +283,11 @@ If Microsoft Store access is blocked due to security policies:
 
 #### Installation behavior
 
-
 - `--user`: Installs Docker Desktop in per-user mode, to `%LOCALAPPDATA%\Programs\DockerDesktop`. No administrator privileges are required. This is the recommended mode for most users. See [Installation modes](#installation-modes).
 - `--quiet`: Suppresses information output when running the installer 
 - `--accept-license`: Accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) now, rather than requiring it to be accepted when the application is first run
 - `--installation-dir=<path>`: Changes the default installation location (`C:\Program Files\Docker\Docker`)
-- `--backend=<backend name>`: Selects the default backend to use for Docker Desktop, `hyper-v`, `windows` or `wsl-2` (default)
+- `--backend=<backend name>`: Selects the default backend to use for Docker Desktop: `wsl-2` (default), `hyper-v`, `windows`, or `docker-vmm`.
 - `--always-run-service`: After installation completes, starts `com.docker.service` and sets the service startup type to Automatic. This circumvents the need for administrator privileges, which are otherwise necessary to start `com.docker.service`. `com.docker.service` is required by Windows containers and Hyper-V backend.
 
 #### Security and access control
@@ -297,7 +296,7 @@ If Microsoft Store access is blocked due to security policies:
 - `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md).
   - It must be used together with the `--allowed-org=<org name>` flag. 
   - For example:`--allowed-org=<org name> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"`
-- `--no-windows-containers`: Disables the Windows containers integration. This can improve security. For more information, see [Windows containers](/manuals/desktop/setup/install/windows-permission-requirements.md#windows-containers).
+- `--no-windows-containers`: Disables the Windows containers integration. This can improve security.  Can't be combined with `--backend=windows`. For more information, see [Windows containers](/manuals/desktop/setup/install/windows-permission-requirements.md#windows-containers).
 
 #### Proxy configuration
 

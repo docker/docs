@@ -18,6 +18,22 @@ The Dashboard also gives you quick access to AI tooling, extensions, settings, a
 >
 > You can customize the left-hand navigation to show only the tabs that matter to you, and hide the ones that don’t. Right-click the left-hand navigation, select **Customize**, and then select, deselect, or re-order the tabs.
 
+## Sign in
+
+Docker recommends signing in with the **Sign in** option in the top-right corner of the Dashboard. Signing in lets you:
+
+- Access your Docker Hub repositories directly from Docker Desktop.
+- Increase your pull rate limit compared to anonymous users. See [Usage and limits](/manuals/docker-hub/usage/_index.md).
+- Enhance your organization's security posture for containerized development with [Hardened Desktop](/manuals/desktop/enterprise/hardened-desktop/_index.md).
+
+Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity.
+
+In large enterprises where admin access is restricted, administrators can [enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).
+
+> [!TIP]
+>
+> Explore [Docker's core subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopSignIn) to see what else Docker can offer you.
+
 ## Use AI features
 
 - [Gordon](/manuals/ai/gordon/_index.md): A personal AI assistant built into Docker Desktop and the Docker CLI, designed to streamline your workflow and help you get more out of the Docker ecosystem.

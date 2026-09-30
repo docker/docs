@@ -113,7 +113,7 @@ isolated from the Docker daemon and other services running inside the VM.
 >
 > Windows containers are only supported in all-users installation mode. They are not available when Docker Desktop is installed per-user. See [Installation modes](/manuals/desktop/setup/install/windows-install.md#installation-modes).
 
-Unlike the Linux Docker Engine and containers which run in a VM, Windows containers are implemented using operating system features, and run directly on the Windows host. If you enable Windows containers during installation, the `ContainerAdministrator` user used for administration inside the container is a local administrator on the host machine. Enabling Windows containers during installation makes it so that members of the `docker-users` group are able to elevate to administrators on the host. For organizations who don't want their developers to run Windows containers, a `-–no-windows-containers` installer flag is available to disable their use.
+Unlike the Linux Docker Engine and containers which run in a VM, Windows containers are implemented using operating system features, and run directly on the Windows host. If you enable Windows containers during installation, the `ContainerAdministrator` user used for administration inside the container is a local administrator on the host machine. Enabling Windows containers during installation makes it so that members of the `docker-users` group are able to elevate to administrators on the host. For organizations who don't want their developers to run Windows containers, a `--no-windows-containers` installer flag is available to disable their use.
 
 ## Networking
 
