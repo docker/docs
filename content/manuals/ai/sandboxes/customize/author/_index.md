@@ -176,6 +176,10 @@ for setup examples and the upstream
 [lifecycle definition](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/lifecycle@1.md)
 for the fields.
 
+Lifecycle `files` content can read the same variables through
+`${{ kit.env.NAME }}`, for example `${{ kit.env.WORKSPACE_DIR }}` for the
+workspace path. Plain `$VAR` and `${VAR}` stay literal in the written file.
+
 ## Set workload compute requirements
 
 Set the workload's default CPU and memory allocation with the
