@@ -1,6 +1,6 @@
 ---
 title: PKG installer
-description: Understand how to use the PKG installer. Also explore additional configuration options.
+description: Understand how to use the PKG installer to deploy Docker Desktop for Mac at scale.
 keywords: pkg, mac, docker desktop, install, deploy, configure, admin, mdm
 tags: [admin]
 weight: 20
@@ -15,10 +15,10 @@ The PKG package supports various MDM (Mobile Device Management) solutions, makin
 ## Install interactively
 
 1. In [Docker Home](http://app.docker.com), choose your organization.
-2. Select **Docker Desktop**, then **Deploy**.
-3. From the **macOS** tab, select the **Download PKG installer** button.
-4. Once downloaded, double-click `Docker.pkg` to run the installer.
-5. Follow the instructions on the installation wizard to authorize the installer and proceed with the installation.
+1. Select **Docker Desktop**, then **Deploy**.
+1. From the **macOS** tab, select the **Download PKG installer** button.
+1. Once downloaded, double-click `Docker.pkg` to run the installer.
+1. Follow the instructions on the installation wizard to authorize the installer and proceed with the installation.
    - **Introduction**: Select **Continue**.
    - **License**: Review the license agreement and select **Agree**.
    - **Destination Select**: This step is optional. It is recommended that you keep the default installation destination (usually `Macintosh HD`). Select **Continue**.
@@ -37,9 +37,9 @@ The PKG package supports various MDM (Mobile Device Management) solutions, makin
 ## Install from the command line
 
 1. In [Docker Home](http://app.docker.com), choose your organization.
-2. Select **Docker Desktop**, then **Deploy**.
-3. From the **macOS** tab, select the **Download PKG installer** button.
-4. From your terminal, run the following command:
+1. Select **Docker Desktop**, then **Deploy**.
+1. From the **macOS** tab, select the **Download PKG installer** button.
+1. From your terminal, run the following command:
 
    ```console
    $ sudo installer -pkg "/path/to/Docker.pkg" -target /Applications
@@ -48,4 +48,4 @@ The PKG package supports various MDM (Mobile Device Management) solutions, makin
 ## Additional resources
 
 - See how you can deploy Docker Desktop for Mac using [Intune](use-intune.md) or [Jamf Pro](use-jamf-pro.md)
-- Explore how to [Enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/methods.md#plist-method-mac-only) for your users.
+- Explore how to [Enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/methods.md#mac-plist-file-method) for your users.

@@ -15,20 +15,71 @@ Common questions about installing Docker Desktop using the MSI installer.
 
 ### What happens to user data if they have an older Docker Desktop installation (i.e. `.exe`)?
 
-Users must [uninstall](/manuals/desktop/uninstall.md) older `.exe` installations before using the new MSI version. The `.exe` installer includes a `-keep-data` flag that removes Docker Desktop while preserving underlying resources such as the container VMs:
+Users must [uninstall](/manuals/desktop/uninstall.md) older `.exe` installations before using the new MSI version. The `.exe` installer includes a `--keep-data` flag that removes Docker Desktop while preserving underlying resources such as the container VMs:
 
 ```powershell
 # For all-user installations
-& 'C:\Program Files\Docker\Docker\Docker Desktop Installer.exe' uninstall -keep-data
+& 'C:\Program Files\Docker\Docker\Docker Desktop Installer.exe' uninstall --keep-data
 
 # For per-user installations
-& '%LOCALAPPDATA%\Programs\DockerDesktop\Docker Desktop Installer.exe' uninstall -keep-data
+& '%LOCALAPPDATA%\Programs\DockerDesktop\Docker Desktop Installer.exe' uninstall --keep-data
 
 ```
 
+For all-users installations, you can have the MSI do this for you with the `REMOVEEXISTINGINSTALL` property, described in the next answer.
+
 ### What happens if the user's machine has an older `.exe` installation?
 
-The MSI installer detects older `.exe` installations and blocks the installation until the previous version is uninstalled. It prompts the user to uninstall their current/old version first, before retrying to install the MSI version.
+### What happens if the user's machine has an older `.exe` installation?
+
+The MSI installer detects existing `.exe` installations and, by default, blocks the installation. How you resolve it depends on whether the `.exe` was installed for all users or for a single user.
+
+#### All-users `.exe` installation
+
+The installation stops with:
+
+```text
+You need to uninstall the previous Docker Desktop version in order to use the MSI installer.
+```
+
+Either uninstall it first with `--keep-data` as described in the previous answer, or let the MSI do it by setting `REMOVEEXISTINGINSTALL=1`:
+
+```powershell
+msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart REMOVEEXISTINGINSTALL=1
+```
+
+This runs the existing uninstaller with `--keep-data`, so settings and container data are preserved. `REMOVEEXISTINGINSTALL` defaults to `0` and is available with Docker Desktop version 4.30 and later.
+
+#### Per-user `.exe` installation
+
+Available with Docker Desktop version 4.84 and later, the installation stops with:
+
+```text
+Docker Desktop is installed per-user for one or more accounts on this machine: <usernames>.
+Please have each affected user uninstall Docker Desktop first before running the MSI installer.
+```
+
+`REMOVEEXISTINGINSTALL` doesn't help here. The MSI runs with machine-wide privileges and can't reliably uninstall software installed under another user's profile, so each listed user must uninstall Docker Desktop themselves before the MSI can proceed.
+
+With Docker Desktop version 4.83 and earlier, the MSI doesn't detect per-user installations.
+
+> [!NOTE]
+>
+> Per-user installations became more common with Docker Desktop version 4.83, when the EXE installer started selecting a per-user installation by default. Expect to encounter them on machines where developers installed Docker Desktop themselves.
+
+### Can I install the MSI per-user?
+
+No. The MSI installer only supports all-users installations.
+
+Available with Docker Desktop version 4.92 and later, passing `MSIINSTALLPERUSER` fails with:
+
+```text
+Docker Desktop does not support per-user installation with the MSI installer.
+```
+
+With Docker Desktop version 4.91 and earlier, the MSI accepts `MSIINSTALLPERUSER` but produces an installation that later updates can't upgrade.
+
+Use the EXE installer with the `--user` flag if you need a per-user installation.
 
 ### My installation failed, how do I find out what happened?
 

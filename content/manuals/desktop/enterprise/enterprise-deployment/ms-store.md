@@ -28,7 +28,7 @@ For developers who install Docker Desktop directly:
 ### Intune-managed installations
 
 In environments managed with Intune:
-- Intune checks for updates approximately every 8 hours.
+- - Intune checks for updates periodically, typically several times a day. The exact interval is controlled by Intune, not by Docker.
 - When a new version is detected, Intune triggers a `winget` upgrade.  
 - If appropriate policies are configured, updates can occur automatically without user intervention. 
 - Updates are handled by Intune's management infrastructure rather than the Microsoft Store itself.
@@ -45,3 +45,7 @@ If using Intune to manage Docker Desktop for Windows:
 - Ensure your Intune policies are configured to handle application updates
 - Be aware that the update process uses WinGet APIs rather than direct Store mechanisms
 - Consider testing the update process in a controlled environment to verify proper functionality
+
+## Installation mode
+
+Available with Docker Desktop version 4.85 and later, fresh installations from the Microsoft Store use per-user install mode by default, which removes the need for admin privileges.

@@ -290,6 +290,7 @@ Synchronized file sharing:
   subscription: [Pro, Team, Business]
 Unassociated machines:
   for: Administrators
+  subscription: [Team, Business]
 USB/IP support:
   for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend
 VMM:
