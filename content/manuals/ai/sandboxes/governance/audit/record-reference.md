@@ -76,20 +76,18 @@ is evaluated again, so its record includes `enforcement_mode`.
 ## Approval fields
 
 When network access requires approval, Docker blocks the request and writes an
-`AUDIT_DECISION_APPROVAL_REQUIRED` record. For how approval works, see
-[Approval-required access](../access-controls/network.md#approval-required-access).
+`AUDIT_DECISION_APPROVAL_REQUIRED` record. If the user approves, Docker writes
+a second record with `AUDIT_DECISION_APPROVAL_ALLOW`. Both records carry the
+same `approval.approval_request_id`, so you can join them to reconstruct the
+full approval. The approval applies to later requests from the sandbox. It
+doesn't retry the request that was blocked. If the user dismisses the request,
+it isn't resolved, so no second record is written and the destination is
+requested again the next time the sandbox reaches it. For how approval works,
+see [Approval-required access](../access-controls/network.md#approval-required-access).
 
-When a user approves the pending approval, Docker writes a second record with
-`AUDIT_DECISION_APPROVAL_ALLOW`. When a user declines an MCP approval, the
-record has `AUDIT_DECISION_APPROVAL_DENY`. For network approvals, dismissing
-the request doesn't resolve it, so no second record is written and the
-destination is requested again the next time the sandbox reaches it.
-
-The records carry the same `approval.approval_request_id`, so you can join them
-to reconstruct the full approval. An approval applies to later requests from
-the sandbox. It doesn't retry the request that was blocked.
-
-For MCP approvals, the record that resolves the approval doesn't include
+For MCP approvals, an approved request is evaluated again and recorded with
+`AUDIT_DECISION_APPROVAL_ALLOW`, and a declined request is recorded with
+`AUDIT_DECISION_APPROVAL_DENY`. Neither record includes
 `approval.approval_request_id` or `approval.grant_scope`.
 
 | Field                          | Description                                                                                                                                                                              |
