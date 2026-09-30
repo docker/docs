@@ -50,7 +50,7 @@ approval. See
 [Approval-required access](access-controls/network.md#approval-required-access).
 
 Network approval is separate from the MCP `@requireApproval` annotation. An MCP
-approval confirms a single call within the session and records nothing, while
+approval confirms a single call within the session and creates no rule, while
 an approved network destination stays allowed until you remove the rule. See
 [MCP access policies](access-controls/mcp.md).
 
