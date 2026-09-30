@@ -31,8 +31,8 @@ policy. See [Precedence](../concepts.md#precedence).
 ## Rule syntax
 
 Network rules use `connect:tcp` for TCP and `connect:udp` for UDP. Resources are
-hostnames, CIDR ranges, ports, or hostnames with ports. UDP requires
-[experimental outbound UDP](local.md#allow-outbound-udp). ICMP is blocked.
+hostnames, CIDR ranges, ports, or hostnames with ports. Docker Sandboxes
+always blocks external ICMP.
 
 Examples:
 
@@ -71,6 +71,10 @@ $ sbx policy allow network api.example.com
 $ sbx policy deny network ads.example.com
 ```
 
+Allow rules cover TCP only by default, while deny rules cover TCP and UDP by
+default. See [Allow outbound UDP](local.md#allow-outbound-udp) for how to change either
+with `--protocol`.
+
 For presets, sandbox-scoped rules, testing, and troubleshooting, see
 [Local policy](local.md).
 
@@ -79,6 +83,10 @@ For presets, sandbox-scoped rules, testing, and troubleshooting, see
 Organization network rules belong to policies that can apply to the whole
 organization or to selected teams. For setup steps and team scoping, see
 [Organization policies](organization.md).
+
+Organization rules apply only to the protocols selected for the rule. Docker
+Home and the Governance API store this selection explicitly. The defaults for
+local CLI rules don't apply.
 
 Use [Monitoring policies](../monitor-and-enforce/monitoring.md) to inspect
 which network rules are active on a developer machine.

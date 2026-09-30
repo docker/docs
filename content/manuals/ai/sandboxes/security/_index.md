@@ -29,7 +29,9 @@ What crosses the boundary into the VM:
 - **Credentials:** the host-side proxy injects authentication headers into
   outbound HTTP requests. The raw credential values never enter the VM.
 - **Network access:** outbound TCP connections to destinations allowed by
-  [network policy](defaults/) are proxied through the host.
+  [network policy](defaults/) are proxied through the host. Outbound UDP
+  traffic to allowed destinations is forwarded by the host without passing
+  through the TCP proxy.
 - Shared agent skills: sandboxes created for supported agents mount a
   persistent host-side store read-only by default at the agent's skills
   directory. Use `--skills` or
@@ -45,15 +47,15 @@ What crosses the boundary back to the host:
   direct mount.
 - **Outbound TCP connections:** sent to allowed destinations through the host
   proxy.
+- **Outbound UDP traffic:** forwarded by the host to allowed destinations
+  without passing through the TCP proxy.
 - Shared skill changes: sandboxes with `readwrite` access can write to the
   host-side store. These changes are visible to other sandboxes that share it.
 
 Outside the workspace and shared skills store, the agent cannot access your
 host filesystem. It also cannot access your host Docker daemon, your host
 network directly, or any destination not allowed by network policy. Sandboxes
-cannot communicate directly over the network. Outbound UDP is blocked unless
-you turn on the [experimental UDP feature](../governance/access-controls/local.md#allow-outbound-udp)
-and allow it through network policy. ICMP is blocked.
+cannot communicate directly over the network. External ICMP is always blocked.
 
 MCP servers are an explicit integration point. Remote MCP servers run outside
 Docker Sandboxes, and local stdio MCP servers run on the host, not inside the
@@ -79,8 +81,8 @@ The sandbox security model has five layers. See
 - **Hypervisor isolation:** separate kernel per sandbox. No shared memory or
   processes with the host.
 - **Network isolation:** outbound TCP traffic is proxied through the host and
-  governed by a [deny-by-default policy](defaults/). Experimental UDP egress
-  also follows network policy. ICMP is blocked.
+  governed by a [deny-by-default policy](defaults/). Outbound UDP also follows
+  network policy. External ICMP is blocked.
 - **Docker Engine isolation:** each sandbox has its own Docker Engine with no
   path to the host daemon.
 - **Workspace isolation:** a mountless sandbox has no host workspace mount.
