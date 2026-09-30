@@ -35,6 +35,12 @@ grid:
   description: Provide feedback on Docker Desktop or Docker Desktop features.
   icon: chat-bubble-left
   link: /desktop/troubleshoot-and-support/feedback/
+aliases:
+  - /desktop/mac/
+  - /desktop/windows/
+  - /docker-for-mac/
+  - /docker-for-windows/
+  - /desktop/get-started/
 ---
 
 Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment
