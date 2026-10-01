@@ -60,7 +60,7 @@ options:
     - name: cpus
       default_value: "0"
       usage: |
-        Number of CPUs to allocate to the sandbox (0 = auto: all host CPUs)
+        Number of CPUs to allocate to the sandbox (0 = auto: all host CPUs, at most 16 on Linux arm64)
     - name: deny-network
       usage: |
         Add a per-sandbox network deny rule at creation time. Can be specified multiple times. The rule applies only to the new sandbox and can be listed or removed later with 'sbx policy ls <NAME>' or 'sbx policy rm network --sandbox <NAME> --resource <HOST>'. Safe under centralized governance because a local deny can only narrow, never widen, egress.
