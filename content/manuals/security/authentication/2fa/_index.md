@@ -54,7 +54,6 @@ attempts` and blocks further attempts for a short time.
 | Browser sign-in to Docker Home or Docker Hub | Your password, then the code from your authenticator app |
 | `docker login` with no username | The same browser sign-in, if the browser is not already signed in |
 | `docker login -u`, scripts, and CI | A [personal access token](/manuals/security/access-tokens/personal-access-tokens.md) in the password prompt. Password sign-in from the CLI is not supported when 2FA is on |
-| Enforced single sign-on | No code. Your identity provider handles sign-in, and the **2FA** page tells you to contact your administrator |
 
 ## Recovery code
 

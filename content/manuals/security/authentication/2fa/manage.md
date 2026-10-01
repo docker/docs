@@ -16,10 +16,9 @@ aliases:
 {{< summary-bar feature_name="2FA" >}}
 
 Turn two-factor authentication (2FA) on or off for your Docker account
-in **Account settings**. Setup is not available while 2FA is on, so
-moving 2FA to a new device means turning it off and on again. For how
-2FA works, when Docker asks for the code, and what the recovery code
-does, see [Two-factor authentication][overview].
+in **Account settings**. For how 2FA works, when Docker asks for the
+code, and what the recovery code does, see
+[Two-factor authentication][overview].
 
 ## Prerequisites
 
