@@ -49,7 +49,7 @@ Before you onboard your organization:
     created an organization yet, see
     [Create an organization](/manuals/accounts/organization/setup/orgs.md).
 
-## Onboard with guided setup
+## Guided onboarding
 
 You can use a guided setup for the first onboarding tasks:
 
@@ -64,7 +64,7 @@ Guided setup walks through these steps:
 - **Docker Desktop security**: Configure Image Access Management,
   Registry Access Management, and Settings Management.
 
-## Onboard manually
+## Manual onboarding
 
 ### Step one: Identify your Docker users
 
