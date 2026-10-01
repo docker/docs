@@ -14,8 +14,7 @@ keywords:
   - SSO
   - SCIM
   - Docker Desktop
-toc_min: 1
-toc_max: 3
+toc_max: 2
 aliases:
   - /admin/organization/setup/onboard/
   - /docker-hub/onboard/
