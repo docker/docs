@@ -11,6 +11,15 @@ This page contains information about the new features, improvements, and changes
 in the Docker Hardened Images (DHI) platform. Release notes are aggregated by
 quarter and include only notable product changes.
 
+## Q4 2026
+
+New features and enhancements released in the fourth quarter of 2026.
+
+- EU data residency: Docker can provision your DHI subscription in the EU
+  region. When your subscription is in the EU region, Docker stores your
+  mirrored and customized images in the EU. For more information, see [EU data
+  residency](../explore/eu-region.md).
+
 ## Q3 2026
 
 New features and enhancements released in the third quarter of 2026.
@@ -28,10 +37,6 @@ New features and enhancements released in the third quarter of 2026.
   package changes, and configuration changes between builds. For more
   information, see [Automate syncing with
   webhooks](../how-to/mirror.md#automate-syncing-with-webhooks).
-- EU data residency: Docker can provision your DHI subscription in the EU
-  region. When your subscription is in the EU region, Docker stores your
-  mirrored and customized images in the EU. For more information, see [EU data
-  residency](../explore/eu-region.md).
 
 ## Q2 2026
 

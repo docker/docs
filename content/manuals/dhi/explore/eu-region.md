@@ -40,9 +40,9 @@ When your subscription is in the EU region, Docker stores the following in the
 EU:
 
 - The repositories that Docker creates when you [mirror a DHI
-  repository](../how-to/mirror.md) to your organization on Docker Hub
-- Your [customized images](../how-to/customize.md) and their attestations,
-  such as SBOM, provenance, and signature attestations
+  repository](../how-to/mirror.md) to your organization on Docker Hub, and
+  their attestations
+- Your [customized images](../how-to/customize.md) and their attestations
 
 OCI artifacts that you use in customizations are stored in the region of the
 repository that you push them to. To keep them in the EU, push them to
@@ -51,6 +51,19 @@ repositories in the EU region.
 Your region doesn't apply to repositories that you [mirror to a third-party
 registry](../how-to/mirror.md#mirror-a-dhi-repository-to-a-third-party-registry).
 Where that content is stored depends on the registry you use.
+
+## Attestations in the EU region
+
+Docker stores attestations with the images in your Docker Hub repository. For
+mirrored repositories, Docker copies only the attestations that the DHI build
+produces, such as SBOM, provenance, and verification summary attestations.
+Docker doesn't copy VEX statements or vulnerability reports into your
+repositories.
+
+Attestations in the EU region aren't recorded in the public Rekor transparency
+log. When you verify them, skip the transparency log check. For details, see
+[Handle missing transparency log
+entries](../how-to/verify.md#handle-missing-transparency-log-entries).
 
 ## Limitations in the EU region
 
