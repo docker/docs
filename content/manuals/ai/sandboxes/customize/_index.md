@@ -82,6 +82,14 @@ combined environment.
 If the set includes a workload, you run the published kit with `sbx run`.
 If it contains only mixins, you add it to a workload with `--kit`.
 
+To share a combination without publishing another kit, list the workload and
+mixins in a [sandbox environment file](/manuals/ai/sandboxes/configuration/environment-files.md).
+Docker Sandboxes composes those kits when it creates the sandbox. An environment
+file can also configure the workspace and host resources. Choose a set when you
+want one published reference with a fixed list of components; the set records
+their image digests when you build it. You can also use a set in an environment
+file.
+
 See [Use kits](/manuals/ai/sandboxes/customize/use-kits.md) for how to run kits
 and add mixins. To customize and publish your own combination, see
 [Compose a kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md).
