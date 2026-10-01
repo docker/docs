@@ -74,9 +74,7 @@ conversion. Each owner signs in to a separate individual account, then selects t
 organization in Docker Home.
 
 To name someone else as the owner, enter that person's Docker ID during
-conversion. After conversion, you can sign up again with
-`alex@example.com`, then the new owner can invite you to the organization
-if you still need access.
+conversion. If you still need access after conversion, you must sign up again so the new owner can invite you to the organization.
 
 If you want to remain the sole owner without assigning another owner, you must create a second individual account with a different email address.
 Use your new account's Docker ID.
