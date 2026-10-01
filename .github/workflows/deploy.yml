@@ -66,6 +66,20 @@ jobs:
           targets: release
           provenance: false
       -
+        name: Login to Docker Hub
+        if: ${{ env.DOCS_S3_BUCKET != '' && github.ref == 'refs/heads/lab' }}
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      -
+        name: Copy dash sub-site
+        if: ${{ env.DOCS_S3_BUCKET != '' && github.ref == 'refs/heads/lab' }}
+        run: |
+          docker buildx build --output type=local,dest=public - <<'EOF'
+          FROM docs/dash:dist-latest
+          EOF
+      -
         name: Configure AWS Credentials
         if: ${{ env.DOCS_AWS_IAM_ROLE != '' }}
         uses: aws-actions/configure-aws-credentials@d979d5b3a71173a29b74b5b88418bfda9437d885 # v6.1.1
