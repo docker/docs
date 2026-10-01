@@ -214,7 +214,7 @@ file them with the library maintainers.
 | NodeJS   | [harbor-master](https://github.com/arhea/harbor-master)                     |
 | NodeJS   | [the-moby-effect](https://github.com/leonitousconforti/the-moby-effect)     |
 | Perl     | [Eixo::Docker](https://github.com/alambike/eixo-docker)                     |
-| PHP      | [Docker-PHP](https://github.com/docker-php/docker-php)                      |
+| PHP      | [Docker-PHP](https://github.com/beluga-php/docker-php)                      |
 | Ruby     | [docker-api](https://github.com/swipely/docker-api)                         |
 | Rust     | [bollard](https://github.com/fussybeaver/bollard)                           |
 | Rust     | [docker-rust](https://github.com/abh1nav/docker-rust)                       |
