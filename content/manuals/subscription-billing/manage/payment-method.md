@@ -80,20 +80,19 @@ To remove your default payment method, first set a different payment method as d
 > [!TIP]
 > Do you need to pay by invoice? [Upgrade to a Docker Business or Docker Team plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsBillingPaymentMethod) and choose the annual subscription.
 
-Pay by invoice requires you to pay upfront for your first subscription period using a payment card or ACH bank transfer. At renewal time, instead of automatic payment, you'll receive an invoice via
-email that you must pay manually.
+Pay by invoice is available for annual Docker Team and Docker Business subscriptions. Docker Sales may need to enable pay by invoice on your account before it appears in Docker Home. For the first subscription period, you pay using a payment card or ACH bank transfer. At renewal time, instead of automatic payment, you'll receive an invoice by email that you must pay manually.
 
 Follow these steps to enable or disable pay by invoice:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your organization.
 2. Select **Billing**, then **Payment methods**.
-3. Select **Pay by invoice**, then select the pay by invoice toggle to enable or disable.
+3. Select **Pay by invoice**, then use the pay by invoice toggle to enable or disable.
 4. Confirm your billing contact details. If you need to change them, select
    **Change** and enter your new details.
 
-Pay by invoice is not available for
-subscription upgrades or changes.
+If the pay by invoice option isn't available in Docker Home, contact your Docker sales representative.
+
+Pay by invoice isn't available for subscription upgrades or changes.
 
 ## Verify a bank account
 
@@ -114,34 +113,12 @@ When the account is verified, a success message appears.
 
 If your payment fails, select **Pay now** to retry the payment through Stripe.
 
-You have a grace period of 15 days, including the due date, when your payment
-fails. Docker attempts to collect the payment three times using the following
-schedule:
+You have a grace period of 15 days, including the due date, when your payment fails. Docker attempts to collect the payment three times using the following schedule:
 
 - 3 days after the due date
 - 5 days after the previous attempt
 - 7 days after the previous attempt
 
-Docker also sends an email notification
-`Action Required - Credit Card Payment Failed` with an attached unpaid invoice
-after each failed payment attempt.
+Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt.
 
-If the invoice remains unpaid after the grace period, the
-subscription downgrades to a free subscription and all paid features are
-disabled.
-
-## Pay by invoice
-
-> [!TIP]
->
-> To pay by invoice,
-> [upgrade to a Docker Team or Docker Business plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsBillingPaymentMethod)
-> and choose an annual subscription.
-
-Pay by invoice requires upfront payment for your first subscription period
-using a payment card or ACH bank transfer. At renewal, Docker emails you an
-invoice to pay manually instead of charging your default payment method.
-
-- To add pay by invoice as a payment method, contact your Docker sales representative.
-- You can only pay by invoice by choosing it as a payment method when subscribing to Docker Team or Docker Business plans. 
-- Pay by invoice isn't available for subscription upgrades or changes.
+If the invoice remains unpaid after the grace period, the subscription downgrades to a free subscription and all paid features are disabled.
