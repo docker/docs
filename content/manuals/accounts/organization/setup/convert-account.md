@@ -58,7 +58,7 @@ Converting an account into an organization does the following:
   the same billing cycle.
 - Docker signs you out. Your email address is no longer on any Docker
   account. You can [sign up](https://hub.docker.com/signup) with it again
-  or add it to an existing account.
+  or update an existing account to use it.
 - Repository collaborators are removed.
   [Invite them to your organization](/manuals/accounts/organization/manage/members.md),
   then add them to a
