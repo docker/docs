@@ -1,20 +1,28 @@
 ---
-title: Set up your organization
+title: Set up a Docker organization
 linkTitle: Setup
 weight: 10
-description: Learn how to set up your Docker organization, including creating an organization, onboarding, and converting an account.
-keywords: set up organization, create organization, onboard, convert account, docker home
+description: >
+  Create, convert, or onboard a Docker organization under one namespace and
+  subscription.
+keywords:
+  - Docker organization setup
+  - create organization
+  - onboard organization
+  - convert Docker account
+  - organization namespace
+  - Docker Home
 grid:
   - title: Create your organization
-    description: Create an organization to group teams and members and assign access.
+    description: Choose a new namespace and subscription.
     icon: building-storefront
     link: /accounts/organization/setup/orgs/
   - title: Onboard your organization
-    description: Onboard and secure your Docker Team or Business organization.
+    description: Invite members and configure sign-in.
     icon: magnifying-glass-plus
     link: /accounts/organization/setup/onboard/
-  - title: Convert account
-    description: Convert an existing Docker user account into an organization.
+  - title: Convert your account
+    description: Keep an existing Docker ID as the organization namespace.
     icon: arrows-right-left
     link: /accounts/organization/setup/convert-account/
   - title: Manage your organization
@@ -29,26 +37,43 @@ aliases:
   - /admin/organization/setup/
 ---
 
-Before you manage members and access, set up your Docker organization. You can
-create an organization, onboard and secure it, or convert an existing user
-account into an organization.
+An organization groups members and teams under one namespace and one
+subscription. Anyone with a [Docker ID](/manuals/accounts/_index.md) can
+create an organization or convert an individual account into one.
 
-## Setting up your organization
+You start by creating a new organization or converting an individual
+account. After creating or converting, you can onboard your organization.
 
-You set up your organization from [Docker Home](https://app.docker.com) and
-must be assigned the
-[organization owner role](/manuals/security/roles-and-permissions/_index.md).
-Setting up an organization happens in broad phases:
+## Choose how to set up
 
-1. You can create a new organization, or convert an existing user account
-   into one. Choose the option that fits how you already use Docker. You
-   don't need both.
-1. After creating your organization, you must onboard it by inviting members,
-   securing authentication, and enforcing sign-in. These steps build on each
-   other, so follow them in order.
+The difference between creating and converting is what happens to your
+existing repositories.
+
+- Every account has a namespace that prefixes its image names.
+- For an individual account, the namespace is your Docker ID.
+- When you create an organization, you choose a new namespace for it, and
+  your existing repositories stay under your Docker ID.
+
+When you convert, your Docker ID becomes the organization's namespace, so
+your repositories and image names stay the same. If people already pull
+images from your Docker ID, converting means they don't have to update
+their image references.
+
+## Names versus namespaces
+
+When you create an organization, you set two values:
+
+- Organization namespace is the permanent, unique identifier for your
+  organization. It becomes the first part of every image name you push, as
+  in `namespace/image:tag`. You can't change it after you create the
+  organization.
+  - Docker IDs and organization namespaces must be unique.
+  - If a Docker ID is `acme`, no organization can use `acme` as its
+    namespace.
+- Organization name is the display name that other users see on
+  Docker. You can change it at any time. See
+  [Change organization information](/manuals/accounts/organization/manage/general-settings.md).
 
 ## Next steps
-
-Explore the following sections to set up your organization.
 
 {{< grid >}}

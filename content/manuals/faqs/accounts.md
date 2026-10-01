@@ -68,12 +68,17 @@ Docker ID for you.
 
 ### What's an organization name or namespace?
 
-The organization name, sometimes referred to as the organization namespace or
-the organization ID, is the unique identifier of a Docker organization. The
-organization name can't be the same as an existing Docker ID.
+The organization namespace and the organization name are different.
 
-For more information, see
-[Organization accounts](/manuals/accounts/organization/_index.md).
+The namespace is the permanent identifier for the organization. Image names
+use it as the first part, as in `namespace/image:tag`. You can't change it,
+and it can't match an existing Docker ID.
+
+The organization name is the public name of the organization. You can change
+it.
+
+For the fields you set when you create an organization, see
+[Create a Docker organization](/manuals/accounts/organization/setup/orgs.md).
 
 ### How can I see how many active users are in my organization?
 
@@ -108,6 +113,21 @@ revert it to a personal user account.
 
 For prerequisites and instructions, see
 [Convert an account into an organization](/manuals/accounts/organization/setup/convert-account.md).
+
+### Can I convert an individual account that uses single sign-on?
+
+No. **Convert** shows "Your account uses single sign-on. Contact your
+administrator to manage these settings."
+
+### Why can't I sign in after converting my account to an organization?
+
+The converted account no longer exists as an individual account, and
+organizations don't have a sign-in. Sign in with the Docker ID you named as
+the owner, then select the organization in Docker Home.
+
+If you need to sign in with the converted account's email address, sign up
+again with that address, or add it to another account under
+**Account settings** > **Email**.
 
 ### Do organization invitees take up seats?
 

@@ -1,85 +1,131 @@
 ---
-description: Convert your Docker Hub user account into an organization
+title: Convert a Docker account to an organization
 linkTitle: Convert account
-title: Convert an account into an organization
-keywords: docker hub, hub, organization, convert account, migrate account
-weight: 40
+weight: 20
+description: >-
+  Convert an individual Docker account into an organization. Keep the same
+  Docker ID and repository namespace, then assign a new owner for shared
+  access.
+keywords:
+  - convert Docker account
+  - convert account to organization
+  - individual account to organization
+  - organization owner
+  - Docker organization
+  - organization namespace
 aliases:
   - /admin/organization/setup/convert-account/
   - /docker-hub/convert-account/
   - /admin/organization/convert-account/
+toc_max: 2
 ---
 
 {{< summary-bar feature_name="Admin orgs" >}}
 
-Learn how to convert an existing user account into an organization. This is
-useful if you need multiple users to access your account and the repositories
-it’s connected to. Converting it to an organization gives you better control
-over permissions for these users through
-[teams](/manuals/accounts/organization/manage/manage-a-team.md) and
-[roles](/manuals/security/roles-and-permissions/_index.md).
-
-When you convert a user account to an organization, the account is migrated to
-a Docker Team subscription by default.
+When you convert, your
+[Docker ID](/manuals/accounts/_index.md) becomes an organization instead of
+an individual account. The Docker ID stays the same, so repository
+namespaces and names stay the same. Convert an existing individual account
+into an organization when more than one person needs access to that
+account and its repositories. To choose a new namespace and keep this
+Docker ID as an individual account, see
+[Create a Docker organization](/manuals/accounts/organization/setup/orgs.md).
 
 ## Prerequisites
 
-Before you convert a user account to an organization, ensure that you meet the following requirements:
+Before you convert an individual account to an organization:
 
-- The user account that you want to convert must not be a member of a company or any teams or organizations. You must remove the account from all teams, organizations, or the company.
-
-  To do this:
-  1. Navigate to **My Hub** and then select the organization you need to leave.
-  1. Find your username in the **Members** tab.
-  1. Select the **More options** menu and then select **Leave organization**.
-
-  If the user account is the sole owner of any organization or company, assign another user the owner role and then remove yourself from the organization or company.
-
-- You must have a separate Docker ID ready to assign as the owner of the organization during conversion.
-
-  If you want to convert your user account into an organization account and you don't have any other user accounts, you need to create a new user account to assign it as the owner of the new organization. With the owner role assigned, this user account has full administrative access to configure and manage the organization. You can assign more users the owner role after the conversion.
-
-## What happens when you convert your account
-
-The following happens when you convert your account into
-an organization:
-
-- This process removes the email address for the account. Notifications are
-  instead sent to organization owners. You'll be able to reuse the
-  removed email address for another account after converting.
-- The current subscription will automatically cancel and your new subscription
-  will start.
-- Repository namespaces and names won't change, but converting your account
-  removes any repository collaborators. Once you convert the account, you'll need
-  to add repository collaborators as team members.
-- Existing automated builds appear as if they were set up by the first owner
-  added to the organization.
-- The user account that you add as the first owner will have full
-  administrative access to configure and manage the organization.
-
-## Convert an account into an organization
-
-> [!IMPORTANT]
->
-> Converting an account into an organization is permanent. Back up any data
-> or settings you want to retain.
-
-1. Sign in to [Docker Home](https://app.docker.com/).
-1. Select your avatar in the top-right corner to open the drop-down.
-1. From **Account settings**, select **Convert**.
-1. Review the warning displayed about converting a user account. This action
-   cannot be undone and has considerable implications for your assets and the
-   account.
-1. Enter a **Username of new owner** to set an organization owner. The new
-   Docker ID you specify becomes the organization’s owner. You cannot use the
-   same Docker ID as the account you are trying to convert. The Docker ID is
-   case-sensitive.
-1. Select **Confirm**. The new owner receives a notification email. Use that
-   owner account to sign in and manage the new organization.
+- The individual account must have a verified email address.
+- You need a separate Docker ID to assign as the organization owner.
+- The individual account must not belong to an organization, a team, or a
+  company. If it does, you must
+  [leave the organization](#leave-an-organization) before you convert.
 
 > [!TIP]
 >
-> After you convert an account, existing personal access tokens from that
-> account no longer work. Sign in as the new owner and create an
+> After you convert an account, personal access tokens from that account
+> stop working. Sign in as the new owner and create an
 > [organization access token (OAT)](/manuals/security/access-tokens/organization-access-tokens.md)
 > for the converted organization.
+
+## Conversion
+
+Converting an account into an organization does the following:
+
+- The account gets a
+  [Docker Team](/manuals/subscription-billing/plans/docker.md)
+  subscription. If the individual account was on a paid plan, it keeps
+  the same billing cycle.
+- Docker signs you out. Your email address is no longer on any Docker
+  account. You can [sign up](https://hub.docker.com/signup) with it again
+  or add it to an existing account.
+- Repository collaborators are removed.
+  [Invite them to your organization](/manuals/accounts/organization/manage/members.md),
+  then add them to a
+  [team](/manuals/accounts/organization/manage/manage-a-team.md)
+  that has access to the repositories.
+- Existing automated builds appear as if the new owner set them up.
+
+Each owner must sign in to a separate individual account, then select the
+organization in Docker Home.
+
+### Choose an organization owner
+
+To convert, you name an owner. That owner has full administrative access
+to configure and manage the organization. You can add more owners after
+conversion. To stay the sole owner without assigning a new member the
+role, create a second individual account with a different email address,
+and enter its Docker ID as the owner. If the account you are converting
+uses `alex@example.com`, create the owner account with
+`alex.admin@example.com`.
+
+After conversion, `alex@example.com` is no longer on any Docker account.
+You can change the owner account's email to `alex@example.com`. See
+[Update email address](/manuals/accounts/individual/manage-account.md#update-email-address).
+
+To name someone else as the owner, enter that person's Docker ID during
+conversion. After conversion, you can sign up again with
+`alex@example.com`. The owner must invite you again to the organization
+if you still need access.
+
+## Convert to an organization
+
+Converting an account into an organization is permanent. Back up any data
+or settings you want to keep.
+
+1. Sign in to [Docker Home](https://app.docker.com/).
+1. Select your avatar in the top-right corner.
+1. Select **Account settings**, then **Convert**.
+1. Review the warning. You can't undo this action.
+1. Enter the **Username of new owner**.
+   Enter a Docker ID, not an email address. Use 4 to 30 letters and
+   digits. The Docker ID must belong to a different account from the one
+   you are converting. That account must be active and have a verified
+   email address.
+1. Select **Confirm**. For an account on a Pro plan, the button is
+   **Confirm and purchase**.
+   The new owner receives a notification email. Sign in with that account
+   to manage the organization.
+
+### Leave an organization
+
+Use this procedure when the individual account is already a member of an
+organization, a team, or a company. The account can be converted after it
+has left each of them. If it has no memberships, skip this section and
+[convert the account](#convert-to-an-organization).
+
+If the account is the only owner of an organization or company, assign
+the owner role to another member first. Leave after that member can
+administer the organization or company.
+
+To leave an organization and its teams:
+
+1. Sign in to [Docker Home](https://app.docker.com/) and select the
+   organization.
+1. Select **Members** and find your username.
+1. Select the **Actions** menu, then **Leave organization**.
+
+## Next steps
+
+- [Onboard your organization](/manuals/accounts/organization/setup/onboard.md)
+- [Create an organization access token](/manuals/security/access-tokens/organization-access-tokens.md)
