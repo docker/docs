@@ -274,7 +274,7 @@ storage driver.
 > Many of these factors are mitigated by using Docker volumes for write-heavy
 > workloads, rather than relying on storing data in the container's writable
 > layer. However, in the case of Btrfs, Docker volumes still suffer from these
-> draw-backs unless `/var/lib/docker/volumes/` isn't backed by Btrfs.
+> drawbacks if `/var/lib/docker/volumes/` is backed by Btrfs.
 
 ### Page caching
 
