@@ -66,15 +66,12 @@ Converting an account into an organization does the following:
   that has access to the repositories.
 - Existing automated builds appear as if the new owner set them up.
 
-Each owner must sign in to a separate individual account, then select the
-organization in Docker Home.
-
 ### Choose an organization owner
 
 To convert, you name an owner. That owner has full administrative access
 to configure and manage the organization. You can add more owners after
-conversion. To stay the sole owner without assigning a new member the
-role, create a second individual account with a different email address,
+conversion. To remain the sole owner without naming anyone else as
+owner, create a second individual account with a different email address
 and enter its Docker ID as the owner. If the account you are converting
 uses `alex@example.com`, create the owner account with
 `alex.admin@example.com`.
@@ -87,6 +84,9 @@ To name someone else as the owner, enter that person's Docker ID during
 conversion. After conversion, you can sign up again with
 `alex@example.com`. The owner must invite you again to the organization
 if you still need access.
+
+Each owner must sign in to a separate individual account, then select the
+organization in Docker Home.
 
 ## Convert to an organization
 

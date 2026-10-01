@@ -35,29 +35,28 @@ organization.
 
 ## Create an organization
 
-Checkout has four steps: **Plan**, **Organization**, **Billing**, and
-**Payment**.
+When you create a new organization, you must select a Docker plan,
+enter organization details, and verify billing details.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
    **Create new organization** at the bottom of the organization list.
 1. On **Plan**, choose a subscription, a billing cycle, and the number of
    seats. Select **Continue to profile**.
 1. On **Organization**, enter the details for the new organization.
-    - If you already belong to one or more organizations, this step opens as
-   **Choose an organization**, which applies the subscription to an
-   existing organization. 
-    - Select **Create an organization** to make a new
-   one instead. The picker is replaced by the **Organization namespace**
-   and **Organization name** fields. 
-    - For what each field means, see
-   [Names versus namespaces](/manuals/accounts/organization/setup/_index.md#names-versus-namespaces).
-
+   - If you already belong to one or more organizations, this step opens
+     as **Choose an organization**, which applies the subscription to an
+     existing organization.
+   - Select **Create an organization** to make a new one instead. The
+     picker is replaced by the **Organization namespace** and
+     **Organization name** fields.
+   - For what each field means, see
+     [Names versus namespaces](/manuals/accounts/organization/setup/_index.md#names-versus-namespaces).
 1. Select **Continue to billing**.
 1. On **Billing**, enter billing information and select
    **Continue to payment**.
 1. On **Payment**, enter payment details and select **Purchase**.
 
-The organization is created.
+You can now view your new organization.
 
 ## View an organization
 

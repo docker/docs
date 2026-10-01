@@ -17,14 +17,14 @@ grid:
     description: Choose a new namespace and subscription.
     icon: building-storefront
     link: /accounts/organization/setup/orgs/
-  - title: Onboard your organization
-    description: Invite members and configure sign-in.
-    icon: magnifying-glass-plus
-    link: /accounts/organization/setup/onboard/
   - title: Convert your account
     description: Keep an existing Docker ID as the organization namespace.
     icon: arrows-right-left
     link: /accounts/organization/setup/convert-account/
+  - title: Onboard your organization
+    description: Invite members and configure sign-in.
+    icon: magnifying-glass-plus
+    link: /accounts/organization/setup/onboard/
   - title: Manage your organization
     description: Add members, teams, licenses, and seats after setup.
     icon: user-group
@@ -70,8 +70,8 @@ When you create an organization, you set two values:
   - Docker IDs and organization namespaces must be unique.
   - If a Docker ID is `acme`, no organization can use `acme` as its
     namespace.
-- Organization name is the display name that other users see on
-  Docker. You can change it at any time. See
+- Organization name is the display name shown on your organization's
+  Docker profile. You can change it at any time. See
   [Change organization information](/manuals/accounts/organization/manage/general-settings.md).
 
 ## Next steps
