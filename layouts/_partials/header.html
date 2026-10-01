@@ -1,4 +1,6 @@
-<header class="sticky top-0 z-20 h-16 w-full bg-blue-600 text-white">
+<header
+  class="docs-header sticky top-0 z-20 h-16 w-full bg-blue-600 text-white"
+>
   <div class="mx-auto flex h-full justify-between gap-2 px-4">
     <div class="flex h-full items-center gap-2 lg:gap-8">
       {{- if not .IsHome }}
@@ -13,7 +15,11 @@
       {{- end }}
       <div>
         {{/* main logo */}}
-        <a title="Docker Docs home page" href="{{ site.BaseURL }}">
+        <a
+          class="docs-logo"
+          title="Docker Docs home page"
+          href="{{ site.BaseURL }}"
+        >
           <div class="hidden sm:block">
             {{- (resources.Get "images/docker-docs-white.svg").Content | safe.HTML -}}
           </div>

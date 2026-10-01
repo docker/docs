@@ -1,0 +1,31 @@
+/* Auto-generated from tokens/src/themes/ — DO NOT EDIT — run `pnpm run tokens:build` */
+
+/* Product and marketing themes override spatial/typographic tokens only.
+   Color tokens in theme files are a build error.
+   Apply via: <html class="product"> or <html class="marketing"> */
+
+.marketing {
+  --tri-font-size-base: 16px;
+  --tri-font-weight-body: 400;
+  --tri-font-weight-heading: 800;
+  --tri-font-weight-label: 600;
+  --tri-icon-size-default: 24px;
+  --tri-icon-size-lg: 32px;
+  --tri-icon-size-md: 24px;
+  --tri-icon-size-sm: 20px;
+  --tri-icon-stroke: 2;
+  --tri-radius-default: 8px;
+}
+
+.product {
+  --tri-font-size-base: 14px;
+  --tri-font-weight-body: 420;
+  --tri-font-weight-heading: 680;
+  --tri-font-weight-label: 520;
+  --tri-icon-size-default: 16px;
+  --tri-icon-size-lg: 24px;
+  --tri-icon-size-md: 20px;
+  --tri-icon-size-sm: 16px;
+  --tri-icon-stroke: 1.5;
+  --tri-radius-default: 5px;
+}
