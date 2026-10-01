@@ -322,6 +322,18 @@ examples: |-
     | `com.docker.network.driver.mtu`                  | `--mtu`                     | Set the containers network MTU                        |
     | `com.docker.network.container_iface_prefix`      | -                           | Set a custom prefix for container interfaces          |
 
+    The `--ip-masq` daemon option configures masquerading for the default
+    `docker0` bridge. To disable masquerading for a custom bridge network, pass
+    the `com.docker.network.bridge.enable_ip_masquerade` driver option when you
+    create the network:
+
+    ```console
+    $ docker network create \
+        --driver bridge \
+        --opt com.docker.network.bridge.enable_ip_masquerade=false \
+        no-masq-network
+    ```
+
     The following arguments can be passed to `docker network create` for any
     network driver, again with their approximate equivalents to Docker daemon
     flags used for the `docker0` bridge:
@@ -417,4 +429,3 @@ experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
-
