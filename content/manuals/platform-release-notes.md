@@ -18,6 +18,14 @@ This page lists new features, enhancements, known issues, and bug fixes for
 Docker accounts and admin features, including Docker Home, billing, security,
 and subscriptions.
 
+## 2026-09-30
+
+### Bug fixes and enhancements
+
+- Accounts that already have cloud sandboxes skip
+  [Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md)
+  checkout.
+
 ## 2026-09-29
 
 ### New
@@ -31,6 +39,17 @@ and subscriptions.
   in Docker Home shows how many licenses are available and whether they are
   assigned to teams or to individual members.
 
+## 2026-09-28
+
+### Bug fixes and enhancements
+
+- [Creating a team](/manuals/accounts/organization/manage/manage-a-team.md#create-a-team)
+  in Docker Home opens that team's page.
+- The
+  [member list CSV](/manuals/accounts/organization/manage/members.md#export-a-member-list-csv)
+  includes a **Licenses** column when the organization has at least one active
+  license pool. The column lists each member's assigned licenses.
+
 ## 2026-09-24
 
 ### New
@@ -39,6 +58,12 @@ and subscriptions.
   [Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md)
   pay-as-you-go plan with a personal account to run agents in cloud
   sandboxes. Compute is metered by the second while a sandbox runs.
+
+### Bug fixes and enhancements
+
+- The [support request form](https://app.docker.com/support/contact) **Legal**
+  topic includes **PII/Sensitive information**, **Service abuse**, and
+  **Trademark takedowns**.
 
 ## 2026-09-14
 
