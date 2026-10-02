@@ -201,6 +201,12 @@ $ sbx --cloud ttl cloud-project
 $ sbx --cloud ttl +30m cloud-project
 ```
 
+A stopped sandbox has no running time-to-live, so `sbx --cloud ttl` reports
+that it is stopped instead of showing an expiration time. Its time-to-live
+starts again when the sandbox resumes. In `--json` output, `stopped` and
+`ttl_paused` are `true`, and the expiry fields still hold the previous
+deadline. While the sandbox is resuming, only `ttl_paused` is `true`.
+
 ## Stop or remove a sandbox
 
 Stop a cloud sandbox while preserving its memory and filesystem:
@@ -223,8 +229,9 @@ You can also use `sbx --cloud run claude --name cloud-project`, or run the agent
 without `--name` and select the sandbox when prompted. Add `--detached` to a
 named run to resume without attaching.
 
-Resuming keeps the sandbox ID and state. Check its expiration with
-`sbx --cloud ttl cloud-project` after resuming.
+Resuming keeps the sandbox ID and state, and starts a new time-to-live
+period. Check its expiration with `sbx --cloud ttl cloud-project` after
+resuming.
 
 If stop or resume reports that an existing sandbox was not found, the operation
 may be disabled for your account.
