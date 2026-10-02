@@ -35,28 +35,6 @@ personal access token instead.
 > [organization access tokens][oat], which aren't tied to individual
 > user accounts.
 
-## Personal access token permissions {#access-permissions}
-
-Each personal access token has one permission level. The token applies
-to every repository your account can access. You can't limit a token to
-a single repository.
-
-- **Repo Public Read-only:** View, search, and pull images from public
-  repositories. This is the default.
-- **Repo Read-only:** View, search, and pull images from public
-  repositories and from private repositories you have access to.
-- **Repo Read & Write:** Everything in **Repo Read-only**, plus push
-  images to any repository your account manages.
-- **Repo Read, Write, Delete:** Everything in **Repo Read & Write**,
-  plus delete images and manage your repositories.
-- **Cloud Sandboxes:** Authenticate to the
-  [Docker Cloud Sandboxes API][sandboxes]. Cloud Sandboxes is a paid
-  feature.
-
-Choose the lowest permission that covers what the token needs to do.
-For example, a CI job that only pulls a private base image needs
-**Repo Read-only**.
-
 ## Create a personal access token
 
 > [!IMPORTANT]
@@ -81,7 +59,7 @@ To create a personal access token:
      from today. The default, **None**, creates a token that doesn't
      expire.
    - **Access permissions:** Select one
-     [permission level](#access-permissions). The default is
+     [permission level][permissions]. The default is
      **Repo Public Read-only**.
 1. Select **Generate**. Copy the token and save it. Docker shows the
    token once and doesn't store it. You can't retrieve it after you
@@ -158,10 +136,11 @@ Best practices for fair use include:
 ## Next steps
 
 - [Choose a personal or organization access token][overview]
+- [Look up personal access token permissions][permissions]
 - [Create an organization access token][oat]
 - [Turn on two-factor authentication][2fa]
 
 [overview]: /manuals/security/access-tokens/_index.md
+[permissions]: /manuals/security/access-tokens/reference.md#access-permissions
 [oat]: /manuals/security/access-tokens/organization-access-tokens.md
 [2fa]: /manuals/security/authentication/2fa/_index.md
-[sandboxes]: /manuals/ai/sandboxes-api/authentication.md

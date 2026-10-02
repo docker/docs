@@ -91,15 +91,15 @@ To create an organization access token:
    - Select **Add repository**, then choose a repository or
      **All `<organization>` repositories** from the drop-down.
    - Select one or more scopes for that repository. See
-     [Repository scopes](#repository-scopes).
+     [Repository scopes][repo-scopes].
    - Repeat for up to 50 repositories. Each repository has its own
      scopes.
 1. Optional. Expand **Organization** and select the organization-level
    scopes the token needs, such as reading members or creating
-   repositories. See [Organization scopes](#organization-scopes).
+   repositories. See [Organization scopes][org-scopes].
 1. Optional. Expand **Docker Build Cloud** or **Docker Governance** to
    grant access to those products. See
-   [Product scopes](#product-scopes).
+   [Product scopes][product-scopes].
 1. Select **Generate token**. Copy the token and save it. Docker shows
    the token once and doesn't store it. You can't retrieve it after you
    leave the page.
@@ -135,131 +135,19 @@ it, activate it again, or delete it.
 1. If you selected **Edit**, change the label, description, or
    resources, then select **Update token**.
 
-## Available scopes
-
-Scopes control what a token can do. You choose them when you create or
-edit the token. In the Docker Home UI, each scope shows its name and a
-short description; the value in the table is what the token carries.
-
-Where a scope includes another one, selecting the higher scope grants
-the lower one too.
-
-### Repository scopes
-
-Repository scopes apply to each repository you add, or to all
-repositories in the organization if you select
-**All `<organization>` repositories**.
-
-| Scope | Value | Grants |
-|---|---|---|
-| Image Pull | `scope-image-pull` | Pull images |
-| Image Push | `scope-image-push` | Push images. Includes Image Pull |
-| Image Delete | `scope-image-delete` | Delete images and tags through registry endpoints. Includes Image Push |
-| Repository Read | `scope-repository-read` | Read repository metadata, the Dockerfile, and stars |
-| Repository Edit | `scope-repository-edit` | Edit privacy, categories, Dockerfile, description, and stars. Includes Repository Read |
-| Repository Admin | `scope-repository-admin` | Delete the repository. Includes Repository Edit |
-| Tag Read | `scope-tag-read` | List and read tags, image lists, attestations, and compose files |
-| Tag Admin | `scope-tag-admin` | Delete tags. Includes Tag Read |
-| Webhook Read | `scope-webhook-read` | List webhook pipelines and delivery history |
-| Webhook Edit | `scope-webhook-edit` | Create webhook pipelines. Includes Webhook Read |
-| Webhook Admin | `scope-webhook-admin` | Delete webhook pipelines. Includes Webhook Edit |
-| Repository Group Read | `scope-repo-group-read` | List and read repository group assignments |
-| Repository Group Edit | `scope-repo-group-edit` | Create and update repository group assignments. Includes Repository Group Read |
-| Repository Group Admin | `scope-repo-group-admin` | Delete repository group assignments. Includes Repository Group Edit |
-| Repository Settings Admin | `scope-repository-settings-admin` | Configure immutable tag rules |
-
-### Organization scopes
-
-Organization scopes apply to the whole organization.
-
-| Scope | Value | Grants |
-|---|---|---|
-| Member Read | `scope-member-read` | Read organization members |
-| Member Edit | `scope-member-edit` | Edit organization members. Includes Member Read |
-| Invite Read | `scope-invite-read` | Read invitations |
-| Invite Edit | `scope-invite-edit` | Edit invitations. Includes Invite Read |
-| Group Read | `scope-group-read` | Read the organization's groups (teams) |
-| Group Edit | `scope-group-edit` | Edit the organization's groups (teams). Includes Group Read |
-| Audit Log Read | `scope-activity-read` | Read the organization's activity logs |
-| SIEM Credentials Read | `scope-siem_credentials-read` | Read SIEM destination settings, including credentials |
-| Registry Access Management Read | `scope-ram-read` | Read Registry Access Management settings |
-| Registry Access Management Edit | `scope-ram-write` | Edit Registry Access Management settings. Includes Registry Access Management Read |
-| Report Read | `scope-report-read` | Download organization usage reports |
-| Repository Create | `scope-repository-create` | Create repositories in the organization namespace |
-| Repository List | `scope-repository-list` | List all repositories in the namespace, including private ones |
-| Registry Usage Read | `scope-registry-usage-read` | Read namespace-level registry usage metrics |
-
-Creating a repository requires the organization-level **Repository
-Create** scope. No repository scope grants it, not even
-**Repository Admin** on an existing repository.
-
-### Product scopes
-
-These sections appear alongside **Repository** and **Organization** in
-the token's resources.
-
-| Section | Scope | Value | Grants |
-|---|---|---|---|
-| Docker Build Cloud | Cloud Connect | `scope-cloud-connect` | Connect to, build with, and run on Docker Build Cloud |
-| Docker Governance | Audit Events Read | `scope-audit_events-read` | Read governance audit events |
-| Docker Governance | Governance Policy Read | `scope-governance-policy-read` | Read governance policies |
-| Docker Governance | Governance Policy Write | `scope-governance-policy-write` | Write governance policies. Includes Governance Policy Read |
-
-## Use the Docker Hub API {#hub-api-support}
-
-An OAT can authenticate most Docker Hub API endpoints under
-`/v2/namespaces/{namespace}/repositories/`. Exchange the token for a
-bearer token with your organization name as the username, then pass it
-in the `Authorization` header.
-
-### Supported endpoints
-
-The following endpoint groups accept OAT authentication:
-
-- Repositories: list, create, get, update, and delete
-- Tags: list, get, and delete; get tag images, attestations, and compose
-  files
-- Dockerfile: get and update a repository's linked Dockerfile
-- Repository groups: list, get, create, update, and delete assignments
-- Stars: list, count, add, and remove
-- Immutable tags: update and verify policies
-- Repository categories, privacy, and webhook pipeline settings
-- Namespace metrics
-
-### Listing behavior
-
-`GET /v2/namespaces/{namespace}/repositories` filters results by the
-token's scopes:
-
-- With **Repository List** (`scope-repository-list`), the response
-  includes every repository, including private ones.
-- Without it, the response includes only public repositories.
-
-The filtering is silent. The response is a normal `200` with no
-indication that private repositories were left out.
-
-### Unsupported legacy endpoints
-
-OATs only work with the namespace-scoped routes described above. The
-following legacy paths reject every OAT, regardless of its scopes, with
-`403 token issued from organization access token is not allowed`. Use
-the replacement endpoint instead:
-
-- `GET /v2/repositories/{namespace}/{repository}`: use
-  [Get repository](/reference/api/hub/latest/operations/GetRepository/)
-- `GET /v2/repositories/{namespace}`: use
-  [List repositories](/reference/api/hub/latest/operations/listNamespaceRepositories/)
-- `GET /v2/users/{username}/repositories`: use
-  [List repositories](/reference/api/hub/latest/operations/listNamespaceRepositories/)
-
 ## Next steps
 
 - [Choose a personal or organization access token][overview]
+- [Look up scopes and Docker Hub API support][reference]
 - [Create a personal access token][pat]
 - [Set up OIDC connections for GitHub Actions][oidc]
 - [Review custom role permissions][custom-roles]
 
 [overview]: /manuals/security/access-tokens/_index.md
+[reference]: /manuals/security/access-tokens/reference.md
+[repo-scopes]: /manuals/security/access-tokens/reference.md#repository-scopes
+[org-scopes]: /manuals/security/access-tokens/reference.md#organization-scopes
+[product-scopes]: /manuals/security/access-tokens/reference.md#product-scopes
 [pat]: /manuals/security/access-tokens/personal-access-tokens.md
 [oidc]: /manuals/security/authentication/oidc-connections/_index.md
 [custom-roles]: /manuals/security/roles-and-permissions/custom-roles/permissions-reference.md

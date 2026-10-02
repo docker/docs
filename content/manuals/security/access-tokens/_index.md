@@ -13,6 +13,10 @@ grid:
     description: Grant org-owned Hub access to CI/CD and other automation.
     icon: building-office-2
     link: /security/access-tokens/organization-access-tokens/
+  - title: Reference
+    description: Look up PAT permissions, OAT scopes, and Hub API support.
+    icon: list-bullet
+    link: /security/access-tokens/reference/
 ---
 
 Access tokens let you authenticate to Docker Hub without using your password.
@@ -76,4 +80,4 @@ are an alternative to storing a long-lived organization access token.
 
 {{< grid >}}
 
-[hub-api]: /manuals/security/access-tokens/organization-access-tokens.md#hub-api-support
+[hub-api]: /manuals/security/access-tokens/reference.md#hub-api-support
