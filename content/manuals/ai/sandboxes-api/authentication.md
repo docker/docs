@@ -50,6 +50,13 @@ for CI jobs and unattended applications. When creating the token, select the
 `sandbox:use` permission in your Docker account's personal access token
 settings. Registry permissions alone don't grant Cloud Sandboxes access.
 
+The `sandbox:use` permission authorizes the PAT to access Cloud Sandboxes, but
+it doesn't grant the account's granular permissions. Each API operation also
+checks the permissions required for that operation. For example, creating a
+sandbox requires `sandboxesCreate`, reading it requires `sandboxesRead`, and
+deleting it requires `sandboxesDelete`. Your PAT must have `sandbox:use`, and
+your account must have the permission required for the operation.
+
 Provide your Docker ID and PAT to the SDK. For example, read them from your
 application's environment:
 
