@@ -2,8 +2,8 @@
 title: Troubleshoot OIDC connections
 linkTitle: Troubleshoot
 description: >-
-  Use the Failures tab to diagnose OIDC connection token-exchange errors and
-  fix common GitHub Actions authentication issues
+  Troubleshoot common OIDC connection token-exchange errors with GitHub
+  Actions
 weight: 30
 keywords: >-
   oidc troubleshooting, oidc connection errors, Failures tab, github actions
@@ -16,54 +16,12 @@ toc_max: 2
 
 {{< summary-bar feature_name="OIDC connections" >}}
 
-When a GitHub Actions workflow fails to sign in to Docker with an OIDC
-connection, open the connection's **Failures** tab. Compare the incoming
-token claims with your rulesets, then use the sections below to fix common
-errors.
+OIDC connection problems can stem from mismatched rulesets, an inactive
+or incorrect connection ID, or your GitHub Actions workflow. The following
+sections describe common errors and how to resolve them.
 
-## View connection failures
-
-Docker records a failure when a workflow reaches the token-exchange step
-for your connection and no ruleset matches the token's claims. For GitHub
-Actions, Docker only logs the failure when the token's repository
-namespace matches a namespace in a `sub` rule on the connection. An
-unrelated repository can still receive `access denied` without a
-**Failures** row.
-
-1. Sign in to [Docker Home](https://app.docker.com/), select your
-   organization, then go to **Identity & auth**.
-1. Select **OIDC connections**.
-1. Find the connection, open the action menu, and select **Edit**.
-1. On the **Edit OIDC connection** page, select the **Failures** tab.
-
-The **Failures** tab is view-only. It lists past failed exchanges so you
-can compare claims to rulesets. It does not run a test or accept inputs.
-
-If Docker has not recorded any failures for the connection, the tab shows
-**No failures have been reported for this connection**.
-
-> [!NOTE]
-> Wrong connection IDs, deactivated connections, and token problems that
-> fail before claim matching do not appear on **Failures**. Use the error
-> sections later on this page for those cases.
-
-### Read a failure entry
-
-Each failure row includes:
-
-- The date and time of the failed exchange
-- The ruleset rule that did not match, shown as `claim = expected value`
-  (for example, `sub = repo:my-org/my-repo:ref:refs/heads/main`)
-- The incoming claim value from the GitHub ID token, marked with ❌ when
-  it does not match
-
-To inspect every claim in the token, expand **Show all claims**. The
-expanded table lists **Incoming claim** and **Value**. Claims that failed
-validation appear with ❌.
-
-Use the unmatched expected value and the incoming value together to
-decide whether to update the ruleset or the workflow that produced the
-token.
+To inspect failed token exchanges in Docker Home, see
+[View connection failures](/manuals/security/authentication/oidc-connections/create-manage.md#view-connection-failures).
 
 ## Subject claim does not match a ruleset
 
@@ -79,7 +37,8 @@ access denied
 When Docker records the failure, the **Failures** tab shows the expected
 subject claim next to the incoming `sub` value from GitHub. If there is
 no failure row, confirm the workflow uses the correct connection ID and
-that a ruleset `sub` pattern covers that repository's namespace.
+that a ruleset `sub` pattern covers that repository's namespace. See
+[View connection failures](/manuals/security/authentication/oidc-connections/create-manage.md#view-connection-failures).
 
 ### Causes
 
@@ -203,5 +162,6 @@ exchange fails before Docker evaluates your rulesets.
 ## Related information
 
 - [Create and manage OIDC connections](/manuals/security/authentication/oidc-connections/create-manage.md)
+- [View connection failures](/manuals/security/authentication/oidc-connections/create-manage.md#view-connection-failures)
 - [OIDC rulesets and subject claims](/manuals/security/authentication/oidc-connections/rulesets-claims.md)
 - [OIDC connections overview](/manuals/security/authentication/oidc-connections/_index.md)
