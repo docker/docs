@@ -67,7 +67,7 @@ existing accounts.
 To compare the Docker member list with the IdP, export it:
 
 1. On the **Members** page, select **Export members**.
-1. The CSV downloads immediately, or Docker emails you a link to download it.
+1. Docker emails you a link to download the CSV file.
 
 ## Disable JIT provisioning
 

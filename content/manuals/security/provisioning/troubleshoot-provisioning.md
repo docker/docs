@@ -30,9 +30,9 @@ JIT and SCIM are both enabled:
   account, replacing a name that SCIM set. The next SCIM sync can set it
   back.
 - At sign-in, JIT adds the user to the teams the SSO assertion lists. SCIM
-  group sync makes each mapped `organization:team` group's membership match
-  the IdP group exactly. If the IdP group doesn't include the user, the next
-  sync removes the team JIT added, and the next sign-in adds it back.
+  group sync makes each mapped group's membership match the IdP group
+  exactly. If the IdP group doesn't include the user, the next sync removes
+  the team JIT added, and the next sign-in adds it back.
 
 Roles aren't affected. JIT sets the organization role only when it first adds
 the user. A later SCIM update can change that role, and the next sign-in
@@ -80,7 +80,7 @@ before you keep both enabled.
 
 The user isn't assigned to the Docker application in the IdP. On the next
 synchronization, Docker deactivates the Docker account. Removing the user
-from a mapped `organization:team` group removes that user from the team only.
+from a mapped group removes that user from the team only.
 
 ### Solution
 

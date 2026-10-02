@@ -88,10 +88,10 @@ Two values can change back and forth when both are enabled:
   the SCIM value. The next SCIM sync can set it back.
 - Team membership. At sign-in, JIT reads the `groups` or `dockerTeam` value
   from the SSO assertion and adds the user to those teams. It never removes
-  teams. SCIM group sync makes each mapped `organization:team` group's
-  membership match the IdP group exactly. If JIT added a user to a team that
-  the IdP group doesn't include, the next sync of that group removes the
-  user from the team, and the next sign-in adds them back.
+  teams. SCIM group sync makes each mapped group's membership match the IdP
+  group exactly. If JIT added a user to a team that the IdP group doesn't
+  include, the next sync of that group removes the user from the team, and
+  the next sign-in adds them back.
 
 Roles don't move back and forth. JIT sets the organization role only when it
 first adds the user. A later SCIM update can change that role, and the next
@@ -99,7 +99,7 @@ sign-in leaves the SCIM role in place.
 
 When a user isn't assigned to the Docker application in the IdP, the next
 synchronization deactivates the Docker account. Removing a user from a mapped
-`organization:team` group removes that user from the team only.
+group removes that user from the team only.
 
 If you keep both enabled:
 
