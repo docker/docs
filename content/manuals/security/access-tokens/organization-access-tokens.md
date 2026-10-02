@@ -32,6 +32,16 @@ organization settings you choose.
 > Access Management. For those features, use
 > [personal access tokens][pat] instead.
 
+## Best practices
+
+- Set an expiration date and rotate tokens on a schedule
+- Grant only the repositories and scopes each job needs
+- Review the **Last used** column to find unused or suspicious tokens
+- Store tokens in a credential manager, never in plain text or source
+  code
+- Deactivate or delete a token as soon as it's compromised or no longer
+  needed
+
 ## Prerequisites
 
 To create and manage organization access tokens, you need:
@@ -241,16 +251,6 @@ the replacement endpoint instead:
   [List repositories](/reference/api/hub/latest/operations/listNamespaceRepositories/)
 - `GET /v2/users/{username}/repositories`: use
   [List repositories](/reference/api/hub/latest/operations/listNamespaceRepositories/)
-
-## Best practices
-
-- Set an expiration date and rotate tokens on a schedule
-- Grant only the repositories and scopes each job needs
-- Review the **Last used** column to find unused or suspicious tokens
-- Store tokens in a credential manager, never in plain text or source
-  code
-- Deactivate or delete a token as soon as it's compromised or no longer
-  needed
 
 ## Next steps
 
