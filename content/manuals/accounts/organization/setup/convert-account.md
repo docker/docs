@@ -17,7 +17,7 @@ aliases:
   - /admin/organization/setup/convert-account/
   - /docker-hub/convert-account/
   - /admin/organization/convert-account/
-toc_max: 2
+toc_max: 3
 ---
 
 {{< summary-bar feature_name="Admin orgs" >}}
@@ -27,26 +27,9 @@ When you convert, your
 an individual account. The Docker ID stays the same, so repository
 namespaces and names stay the same. Convert an existing individual account
 into an organization when more than one person needs access to that
-account and its repositories. To choose a new namespace and keep this
+account and its repositories. To choose a new namespace and keep your
 Docker ID as an individual account, see
 [Create a Docker organization](/manuals/accounts/organization/setup/orgs.md).
-
-## Prerequisites
-
-Before you convert an individual account to an organization:
-
-- The individual account must have a verified email address.
-- You need a separate Docker ID to assign as the organization owner.
-- The individual account must not belong to an organization, a team, or a
-  company. If it does, you must
-  [leave the organization](#leave-an-organization) before you convert.
-
-> [!TIP]
->
-> After you convert an account, personal access tokens from that account
-> stop working. Sign in as the new owner and create an
-> [organization access token (OAT)](/manuals/security/access-tokens/organization-access-tokens.md)
-> for the converted organization.
 
 ## Conversion
 
@@ -65,6 +48,23 @@ Converting an account into an organization does the following:
   [team](/manuals/accounts/organization/manage/manage-a-team.md)
   that has access to the repositories.
 - Existing automated builds appear as if the new owner set them up.
+
+## Prerequisites
+
+Before you convert an individual account to an organization:
+
+- The individual account must have a verified email address.
+- You need a separate Docker ID to [assign as organization owner](#choose-an-organization-owner).
+- The individual account must not belong to an organization, a team, or a
+  company. If it does, you must
+  [leave the organization](#leave-an-organization) before you convert.
+
+> [!TIP]
+>
+> After you convert an account, personal access tokens from that account
+> stop working. Sign in as the new owner and create an
+> [organization access token (OAT)](/manuals/security/access-tokens/organization-access-tokens.md)
+> for the converted organization.
 
 ### Choose an organization owner
 
@@ -87,6 +87,24 @@ uses `alex@example.com`, create the owner account with
 You can update the `alex.admin@example.com` email back to `alex@example.com` after conversion. See
 [Update email address](/manuals/accounts/individual/manage-account.md#update-email-address).
 
+### Leave an existing organization
+
+Use this procedure when the individual account is already a member of an
+organization, a team, or a company. The account can be converted after it
+has left each of them. If it has no memberships, skip this section and
+[convert the account](#convert-to-an-organization).
+
+If the account is the only owner of an organization or company, assign
+the owner role to another member first. Leave after that member can
+administer the organization or company.
+
+To leave an organization and its teams:
+
+1. Sign in to [Docker Home](https://app.docker.com/) and select the
+   organization.
+1. Select **Members** and find your username.
+1. Select the **Actions** menu, then **Leave organization**.
+
 ## Convert to an organization
 
 Converting an account into an organization is permanent. Back up any data
@@ -105,24 +123,6 @@ or settings you want to keep.
    **Confirm and purchase**.
    The new owner receives a notification email. Sign in with that account
    to manage the organization.
-
-### Leave an organization
-
-Use this procedure when the individual account is already a member of an
-organization, a team, or a company. The account can be converted after it
-has left each of them. If it has no memberships, skip this section and
-[convert the account](#convert-to-an-organization).
-
-If the account is the only owner of an organization or company, assign
-the owner role to another member first. Leave after that member can
-administer the organization or company.
-
-To leave an organization and its teams:
-
-1. Sign in to [Docker Home](https://app.docker.com/) and select the
-   organization.
-1. Select **Members** and find your username.
-1. Select the **Actions** menu, then **Leave organization**.
 
 ## Next steps
 

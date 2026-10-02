@@ -121,13 +121,12 @@ administrator to manage these settings."
 
 ### Why can't I sign in after converting my account to an organization?
 
-The converted account no longer exists as an individual account, and
-organizations don't have a sign-in. Sign in with the Docker ID you named as
-the owner, then select the organization in Docker Home.
-
-If you need to sign in with the converted account's email address, sign up
-again with that address, or add it to another account under
-**Account settings** > **Email**.
+Converting signs you out and removes your email address from every Docker
+account, so you can no longer sign in with it. Sign in with the Docker ID you
+named as the owner and select the organization in Docker Home. If you named
+someone else as the owner, sign up again and ask that owner to invite you. See
+[Convert a Docker account to an organization](/manuals/accounts/organization/setup/convert-account.md#conversion)
+for the full explanation.
 
 ### Do organization invitees take up seats?
 

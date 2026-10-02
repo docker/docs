@@ -44,21 +44,6 @@ create an organization or convert an individual account into one.
 You start by creating a new organization or converting an individual
 account. After creating or converting, you can onboard your organization.
 
-## Choose how to set up
-
-The difference between creating and converting is what happens to your
-existing repositories.
-
-- Every account has a namespace that prefixes its image names.
-- For an individual account, the namespace is your Docker ID.
-- When you create an organization, you choose a new namespace for it, and
-  your existing repositories stay under your Docker ID.
-
-When you convert, your Docker ID becomes the organization's namespace, so
-your repositories and image names stay the same. If people already pull
-images from your Docker ID, converting means they don't have to update
-their image references.
-
 ## Names versus namespaces
 
 When you create an organization, you set two values:
@@ -73,6 +58,13 @@ When you create an organization, you set two values:
 - Organization name is the display name shown on your organization's
   Docker profile. You can change it at any time. See
   [Change organization information](/manuals/accounts/organization/manage/general-settings.md).
+
+## Choose how to set up
+
+The difference between creating and converting is what happens to your existing repositories.
+
+- Create an organization: Choose a new namespace. Your existing repositories stay under your personal Docker ID.
+- Convert your account: Your Docker ID becomes the organization’s namespace. Your repositories and image names stay the same, so anyone pulling your images can keep using their existing image references.
 
 ## Next steps
 
