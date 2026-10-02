@@ -18,7 +18,8 @@ explicitly targeted by a command. In that case its profile is added to the set o
 
 > [!NOTE]
 >
-> All other top-level elements are not affected by `profiles` and are always active.
+> All other top-level elements, except [jobs](jobs.md), are not affected by
+> `profiles` and are always active.
 
 References to other services (by `links`, `extends` or shared resource syntax `service:xxx`) do not
 automatically enable a component that would otherwise have been ignored by active profiles. Instead
