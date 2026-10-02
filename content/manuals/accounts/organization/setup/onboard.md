@@ -1,11 +1,20 @@
 ---
-title: Onboard your organization
+title: Onboard a Docker organization
 linkTitle: Onboard
-weight: 20
-description: Get started onboarding your Docker Team or Business organization.
-keywords: business, team, organizations, get started, onboarding, Docker Home, organization management,
-toc_min: 1
-toc_max: 3
+weight: 30
+description: >
+  Invite members, configure SSO and SCIM, and enforce Docker Desktop
+  sign-in for a Team or Business organization.
+keywords:
+  - onboard Docker organization
+  - guided setup
+  - Docker Team
+  - Docker Business
+  - enforce sign-in
+  - SSO
+  - SCIM
+  - Docker Desktop
+toc_max: 2
 aliases:
   - /admin/organization/setup/onboard/
   - /docker-hub/onboard/
@@ -16,145 +25,133 @@ aliases:
 
 {{< summary-bar feature_name="Admin orgs" >}}
 
-Learn how to onboard your organization.
-
 Onboarding your organization includes:
 
-- Identifying users to help you allocate your subscription seats
-- Invite members and owners to your organization
-- Secure authentication and authorization for your organization
-- Enforce sign-in for Docker Desktop to ensure security best practices
+- Identifying users so you can allocate subscription seats
+- Inviting members and owners
+- Securing authentication and authorization
+- Enforcing sign-in for Docker Desktop
 
-These actions help administrators gain visibility into user activity and
-enforce security settings. Organization members also receive increased pull
-limits and other benefits when they are signed in.
+These actions give administrators visibility into user activity and a way
+to enforce security settings. Organization members also receive higher
+pull limits and other benefits when they are signed in.
 
 ## Prerequisites
 
-Before you start onboarding your organization, ensure you:
+Before you onboard your organization, you need a Docker Team or Business
+subscription. For details, see
+[Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOnboard).
+When you buy a self-serve subscription, the on-screen instructions guide
+you through creating an organization.
 
-- Have a Docker Team or Business subscription. For more details, see
-  [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOnboard).
+If you bought a subscription through Docker Sales and you haven't created
+an organization yet, see
+[Create an organization](/manuals/accounts/organization/setup/orgs.md).
 
-  > [!NOTE]
-  >
-  > When purchasing a self-serve subscription, the on-screen instructions
-  > guide you through creating an organization. If you have purchased a
-  > subscription through Docker Sales and you have not yet created an
-  > organization, see [Create an organization](/manuals/accounts/organization/setup/orgs.md).
+## Guided onboarding
 
-- Familiarize yourself with Docker concepts and terminology in
-  the [administration overview](../../_index.md).
+You can use a guided setup for the first onboarding tasks:
 
-## Onboard with guided setup
+1. Sign in to [Docker Home](https://app.docker.com).
+1. Select **Guided setup** at the bottom of the left sidebar.
 
-Docker Home has a guided setup to help you
-onboard your organization. The guided setup's steps consist of basic onboarding
-tasks. If you want to onboard outside of the guided setup,
-see [Recommended onboarding steps](/manuals/accounts/organization/setup/onboard.md#recommended-onboarding-steps).
-
-To onboard using the guided setup,
-navigate to [Docker Home](https://app.docker.com) and
-select **Guided setup** in the left-hand navigation.
-
-The guided setup walks you through the following onboarding steps:
+Guided setup walks through these steps:
 
 - **Invite your team**: Invite owners and members.
-- **Manage user access**: Add and verify a domain, manage users with SSO, and
-  enforce Docker Desktop sign-in.
-- **Docker Desktop security**: Configure image access management, registry
-  access management, and settings management.
+- **Manage user access**: Claim your company's domain, manage members
+  with SSO, and enforce Docker Desktop sign-in.
+- **Docker Desktop security**: Configure Image Access Management,
+  Registry Access Management, and Settings Management.
 
-## Recommended onboarding steps
+## Manual onboarding
 
 ### Step one: Identify your Docker users
 
-Identifying your users helps you allocate seats efficiently and ensures they
+Identifying your users helps you allocate seats and makes sure they
 receive your Docker subscription benefits.
 
 1. Identify the Docker users in your organization.
-   - If your organization uses device management software, like MDM or Jamf,
-     you can use the device management software to help identify Docker users.
-     See your device management software's documentation for details. You can
-     identify Docker users by checking if Docker Desktop is installed at the
-     following location on each user's machine:
+   - If your organization uses device management software, such as MDM
+     or Jamf, use it to find machines with Docker Desktop installed:
      - Mac: `/Applications/Docker.app`
-     - Windows: `C:\Program Files\Docker\Docker`(all-user installation) or `%LOCALAPPDATA%\Programs\DockerDesktop` (per-user installation (Beta))
+     - Windows: `C:\Program Files\Docker\Docker` (all-users
+       installation) or `%LOCALAPPDATA%\Programs\DockerDesktop`
+       (per-user installation)
      - Linux: `/opt/docker-desktop`
-   - If your organization doesn't use device management software or your
-     users haven't installed Docker Desktop yet, you can survey your users to
-     identify who is using Docker Desktop.
-1. Ask users to update their Docker account's email address to one associated
-   with your organization's domain, or create a new account with that email.
-   - To update an account's email address, instruct your users to sign in
-     to [Docker Hub](https://hub.docker.com), and update the email address to
-     their email address in your organization's domain.
-   - To create a new account, instruct your users to
-     [sign up](https://hub.docker.com/signup) using their email address associated
-     with your organization's domain. Ensure your users verify their email address.
-1. Identify Docker accounts associated with your organization's domain:
-   - Ask your Docker sales representative or
-     <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_org_onboarding" class="link" rel="noopener">contact sales</a> to get a list
-     of Docker accounts that use an email address in your organization's domain.
+   - If your organization doesn't use device management software, or
+     users haven't installed Docker Desktop yet, ask them who uses
+     Docker Desktop.
+1. Ask users to update their Docker account email address to one in your
+   organization's domain, or to create an account with that email.
+   - To update an email address, see
+     [Update email address](/manuals/accounts/individual/manage-account.md#update-email-address).
+   - To create an account, users
+     [sign up](https://hub.docker.com/signup) with an email address in
+     your organization's domain and verify that address.
+1. Identify Docker accounts that already use your organization's domain:
+   - Ask your Docker sales representative, or
+     <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_org_onboarding" class="link" rel="noopener">contact sales</a>,
+     for a list of Docker accounts that use an email address in your
+     domain.
 
 ### Step two: Invite owners
 
-Owners can help you onboard and manage your organization.
+When you create an organization, you are the only owner. Adding more
+owners is optional, but additional owners can help you onboard and manage
+your organization.
 
-When you create an organization, you are the only owner. It is optional to
-add additional owners.
-
-To add an owner, invite a user and assign them the owner role. For more
-details, see [Invite members](/manuals/accounts/organization/manage/members.md) and
+To add an owner, invite a user and assign the owner role. For details,
+see [Invite members](/manuals/accounts/organization/manage/members.md)
+and
 [Roles and permissions](/manuals/security/roles-and-permissions/_index.md).
 
 ### Step three: Invite members
 
-When you add users to your organization, you gain visibility into their
-activity and you can enforce security settings. Your members also
-receive increased pull limits and other organization wide benefits when
-they are signed in.
+When you add users to your organization, you can see their activity and
+enforce security settings. Members also receive higher pull limits and
+other organization-wide benefits when they are signed in.
 
-To add a member, invite a user and assign them the member role.
-For more details, see [Invite members](/manuals/accounts/organization/manage/members.md) and
+To add a member, invite a user and assign the member role. For details,
+see [Invite members](/manuals/accounts/organization/manage/members.md)
+and
 [Roles and permissions](/manuals/security/roles-and-permissions/_index.md).
 
 ### Step four: Manage user access with SSO and SCIM
 
-Configuring SSO and SCIM is optional and only available to Docker Business
-subscribers. To upgrade a Docker Team subscription to a Docker Business
-subscription, see [Upgrade a plan](/manuals/subscription-billing/manage/plans.md#upgrade-plans).
+SSO and SCIM are optional and available to Docker Business subscribers.
+To upgrade a Docker Team subscription to Docker Business, see
+[Upgrade a plan](/manuals/subscription-billing/manage/plans.md#upgrade-plans).
 
-Use your identity provider (IdP) to manage members and provision them to Docker
-automatically via SSO and SCIM. See the following for more details:
+Use your identity provider (IdP) to manage members and provision them to
+Docker through SSO and SCIM:
 
 - [Configure SSO](/manuals/security/authentication/single-sign-on/connect.md)
-  to authenticate and add members when they sign in to Docker through your
+  to authenticate members and add them when they sign in through your
   identity provider.
 - Optional.
-  [Enforce SSO](/manuals/security/authentication/single-sign-on/connect.md) to
-  ensure that when users sign in to Docker, they must use SSO.
+  [Enforce SSO](/manuals/security/authentication/single-sign-on/connect.md)
+  so users must use SSO when they sign in to Docker.
 
   > [!NOTE]
   >
-  > Enforcing single sign-on (SSO) and enforcing Docker Desktop sign in
-  > are different features. For more details, see
+  > Enforcing single sign-on (SSO) and enforcing Docker Desktop sign-in
+  > are different features. For details, see
   > [Enforcing sign-in versus enforcing single sign-on (SSO)](/manuals/desktop/enterprise/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
 
 - [Configure SCIM](/manuals/security/provisioning/scim/_index.md) to
-  automatically provision, add, and de-provision members to Docker through
-  your identity provider.
+  provision, add, and deprovision members through your identity
+  provider.
 
 ### Step five: Enforce sign-in for Docker Desktop
 
-By default, members of your organization can use Docker Desktop without signing
-in. When users don’t sign in as a member of your organization, they don’t
-receive the
-[benefits of your organization’s subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOnboard)
-and they can circumvent [Docker’s security features](/manuals/desktop/enterprise/hardened-desktop/_index.md).
+By default, members of your organization can use Docker Desktop without
+signing in. When users don't sign in as a member of your organization,
+they don't receive the
+[benefits of your organization's subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOnboard)
+and they can bypass
+[Docker's security features](/manuals/desktop/enterprise/hardened-desktop/_index.md).
 
-There are multiple ways you can enforce sign-in, depending on your organization's
-Docker configuration:
+You can enforce sign-in in more than one way:
 
 - [Registry key method (Windows only)](/manuals/desktop/enterprise/enforce-sign-in/methods.md#registry-key-method-windows-only)
 - [`.plist` method (Mac only)](/manuals/desktop/enterprise/enforce-sign-in/methods.md#plist-method-mac-only)
@@ -162,18 +159,21 @@ Docker configuration:
 
 ### Step six: Manage Docker Desktop security
 
-Docker offers the following security features to manage your organization's
-security posture:
+Use these features to manage your organization's security posture:
 
-- [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md): Control which types of images your developers can pull from Docker Hub.
-- [Registry Access Management](/manuals/desktop/enterprise/hardened-desktop/registry-access-management.md): Define which registries your developers can access.
-- [Settings management](/manuals/desktop/enterprise/hardened-desktop/settings-management.md): Set and control Docker Desktop settings for your users.
+- [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md):
+  Control which types of images developers can pull from Docker Hub.
+- [Registry Access Management](/manuals/desktop/enterprise/hardened-desktop/registry-access-management.md):
+  Define which registries developers can access.
+- [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management.md):
+  Set and control Docker Desktop settings for your users.
 
 ## Next steps
 
-- [Manage Docker products](../manage/manage-products.md) to configure access and view usage.
-- Configure [Hardened Docker Desktop](/manuals/desktop/enterprise/hardened-desktop/_index.md) to improve your organization’s security posture for containerized development.
-- [Manage your domains](/manuals/security/provisioning/domain-management.md) to ensure that all Docker users in your domain are part of your organization.
-
-Your Docker subscription provides many more additional features. To learn more,
-see [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOnboard).
+- [Manage Docker products](../manage/manage-products.md) to configure
+  access and view usage.
+- Configure
+  [Hardened Docker Desktop](/manuals/desktop/enterprise/hardened-desktop/_index.md)
+  to tighten security for containerized development.
+- [Manage your domains](/manuals/security/provisioning/domain-management.md)
+  so Docker users in your domain are part of your organization.
