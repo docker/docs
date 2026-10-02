@@ -33,6 +33,10 @@ DHI Enterprise extends DHI Select with unlimited customizations, optional full c
 
 For details on setting up and managing repositories, see [Get started with DHI Select and Enterprise](/manuals/dhi/how-to/select-enterprise.md).
 
+> [!TIP]
+>
+> Docker can provision your organization's DHI subscription in the EU region. To request it, contact your Docker account representative or <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_dhi_eu_region" class="link" rel="noopener">Docker sales</a>. For details, see [EU data residency for Docker Hardened Images](/manuals/dhi/explore/eu-region.md).
+
 ## Billing cycle
 
 DHI Select is an annual plan billed per repository from the date your plan starts. Repositories added mid-cycle are prorated for the remainder of the billing period. You can add more repositories to your DHI Select plan by going to **Active plans** in the billing portal. For steps, see [Manage plans](/manuals/subscription-billing/manage/plans.md#upgrade-plans).

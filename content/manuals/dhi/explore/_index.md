@@ -33,6 +33,10 @@ params:
       description: Understand Docker's role and your responsibilities when using Docker Hardened Images as part of your secure software supply chain.
       icon: user-group
       link: /dhi/explore/responsibility/
+    - title: EU data residency
+      description: Learn how Docker stores your mirrored and customized images in the EU when your subscription is in the EU region.
+      icon: globe-alt
+      link: /dhi/explore/eu-region/
     - title: Security concepts
       description: Learn the core concepts behind Docker Hardened Images — signed attestations, immutable digests, SLSA, VEX, and more.
       icon: clipboard-document-check
