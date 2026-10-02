@@ -70,21 +70,23 @@ Before you convert an individual account to an organization:
 
 To convert, you must name an owner. That owner has full administrative access
 to configure and manage the organization. You can add more owners after
-conversion. Each owner signs in to a separate individual account, then selects the
-organization in Docker Home.
+conversion. Each owner signs in to a separate individual account, then
+selects the organization in Docker Home.
 
 To name someone else as the owner, enter that person's Docker ID during
-conversion. If you still need access after conversion, you must sign up again so the new owner can invite you to the organization.
+conversion. If you still need access after conversion, you must sign up
+again so the new owner can invite you to the organization.
 
-If you want to remain the sole owner without assigning another owner, you must create a second individual account with a different email address.
+If you want to remain the sole owner without assigning another owner, you
+must create a second individual account with a different email address.
 Use your new account's Docker ID.
 
-- For example, if the account you are converting
-uses `alex@example.com`, create the owner account with
-`alex.admin@example.com`.
+- For example, if the account you are converting uses `alex@example.com`,
+  create the owner account with `alex.admin@example.com`.
 - After conversion, `alex@example.com` is no longer on any Docker account.
 
-You can update the `alex.admin@example.com` email back to `alex@example.com` after conversion. See
+You can update the `alex.admin@example.com` email back to
+`alex@example.com` after conversion. See
 [Update email address](/manuals/accounts/individual/manage-account.md#update-email-address).
 
 ### Leave an existing organization

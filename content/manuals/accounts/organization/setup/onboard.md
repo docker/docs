@@ -38,11 +38,15 @@ pull limits and other benefits when they are signed in.
 
 ## Prerequisites
 
-Before you onboard your organization, you need a Docker Team or Business subscription. For details, see
-  [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOnboard). When you buy a self-serve subscription, the on-screen instructions
-    guide you through creating an organization.
+Before you onboard your organization, you need a Docker Team or Business
+subscription. For details, see
+[Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOnboard).
+When you buy a self-serve subscription, the on-screen instructions guide
+you through creating an organization.
 
-If you bought a subscription through Docker Sales and you haven't created an organization yet, see [Create an organization](/manuals/accounts/organization/setup/orgs.md).
+If you bought a subscription through Docker Sales and you haven't created
+an organization yet, see
+[Create an organization](/manuals/accounts/organization/setup/orgs.md).
 
 ## Guided onboarding
 

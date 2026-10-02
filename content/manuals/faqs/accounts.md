@@ -4,9 +4,25 @@ linkTitle: Accounts
 weight: 10
 description: FAQs about Docker IDs, account creation, organizations, companies, seats, and members
 keywords:
-  docker ID, docker account FAQ, change docker ID, username taken, trademark,
-  organization name, organization namespace, create account, Google, GitHub,
-  deactivate docker ID, organizations, members, seats, company, company owners
+  - docker ID
+  - docker account FAQ
+  - change docker ID
+  - username taken
+  - trademark
+  - organization name
+  - organization namespace
+  - create account
+  - Google
+  - GitHub
+  - deactivate docker ID
+  - organizations
+  - members
+  - seats
+  - company
+  - company owners
+  - convert Docker account
+  - sign in after convert
+  - organization owner
 tags: [FAQ]
 toc_max: 2
 aliases:
@@ -87,7 +103,8 @@ find out how many users have Docker Desktop installed. If your organization
 doesn't use this software, you can run an internal survey
 to find out who is using Docker Desktop.
 
-For more information, see [Identify your Docker users and their Docker accounts](/manuals/accounts/organization/setup/onboard.md#step-one-identify-your-docker-users).
+For more information, see
+[Identify your Docker users and their Docker accounts](/manuals/accounts/organization/setup/onboard.md#step-one-identify-your-docker-users).
 
 ### Do users need to authenticate with Docker before an owner can add them to an organization?
 
@@ -102,7 +119,11 @@ Yes. You can
 Some benefits of enforcing sign-in are:
 
 - Ensures users receive the benefits of your subscription.
-- Ensures security features like [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md) and [Registry Access Management](/manuals/desktop/enterprise/hardened-desktop/registry-access-management.md) are applied.
+- Ensures security features like
+  [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md)
+  and
+  [Registry Access Management](/manuals/desktop/enterprise/hardened-desktop/registry-access-management.md)
+  are applied.
 - Ensures you gain insights into users' activity.
 
 ### Can I convert my personal Docker ID to an organization account?

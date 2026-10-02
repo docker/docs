@@ -61,10 +61,14 @@ When you create an organization, you set two values:
 
 ## Choose how to set up
 
-The difference between creating and converting is what happens to your existing repositories.
+The difference between creating and converting is what happens to your
+existing repositories.
 
-- Create an organization: Choose a new namespace. Your existing repositories stay under your personal Docker ID.
-- Convert your account: Your Docker ID becomes the organization’s namespace. Your repositories and image names stay the same, so anyone pulling your images can keep using their existing image references.
+- Create an organization: Choose a new namespace. Your existing
+  repositories stay under your personal Docker ID.
+- Convert your account: Your Docker ID becomes the organization’s
+  namespace. Your repositories and image names stay the same, so anyone
+  pulling your images can keep using their existing image references.
 
 ## Next steps
 
