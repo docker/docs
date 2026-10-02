@@ -116,6 +116,14 @@ To run the application locally, follow these steps:
 
    ![Screenshot of the application](./images/agentic-ai-app.png)
 
+   > [!NOTE]
+   >
+   > If the MCP gateway logs `secrets engine is not available`, Docker Desktop's
+   > secrets engine for MCP isn't running. The DuckDuckGo sample usually still
+   > works without it. If queries return HTTP 401 from the app or gateway, check
+   > that Model Runner is enabled, the model finished pulling, and the gateway
+   > finished listing tools before you submit a prompt.
+
 3. Press ctrl-c in the terminal to stop the application when you're done.
 
 ## Step 3: Review the application environment
