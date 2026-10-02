@@ -57,7 +57,7 @@ Before you convert an individual account to an organization:
 - You need a separate Docker ID to [assign as organization owner](#choose-an-organization-owner).
 - The individual account must not belong to an organization, a team, or a
   company. If it does, you must
-  [leave the organization](#leave-an-organization) before you convert.
+  [leave the organization](#leave-an-existing-organization) before you convert.
 
 > [!TIP]
 >
