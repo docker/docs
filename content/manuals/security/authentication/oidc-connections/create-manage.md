@@ -71,7 +71,9 @@ connections** page.
 1. Find the row with your target connection ID.
 1. Select the action menu icon for your options.
    - **Edit** opens the **Edit OIDC connection** page where you can copy
-     your connection ID, update rulesets, or view the **Failures** table.
+     your connection ID, update rulesets, or open the **Failures** tab.
+     For how to use Failures and resolve common errors, see
+     [Troubleshoot OIDC connections](/manuals/security/authentication/oidc-connections/troubleshoot.md).
    - **Deactivate** temporarily disables access to your GitHub workflow.
    - **Activate** restores access to your GitHub workflow.
    - **Delete** permanently deletes a connection.
@@ -93,3 +95,4 @@ fails at the token-exchange step until you activate the connection.
 ## Next steps
 
 - [OIDC connections rulesets and subject claims](/manuals/security/authentication/oidc-connections/rulesets-claims.md)
+- [Troubleshoot OIDC connections](/manuals/security/authentication/oidc-connections/troubleshoot.md)

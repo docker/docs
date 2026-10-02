@@ -95,3 +95,4 @@ Docker Hub repositories and Docker Build Cloud are supported resources.
 
 - [OIDC connections overview](/manuals/security/authentication/oidc-connections/_index.md)
 - [Create or manage OIDC connections](/manuals/security/authentication/oidc-connections/create-manage.md)
+- [Troubleshoot OIDC connections](/manuals/security/authentication/oidc-connections/troubleshoot.md)

@@ -41,3 +41,4 @@ For how OIDC connections compare to organization access tokens, see
 
 - [Create an OIDC connection](/manuals/security/authentication/oidc-connections/create-manage.md)
 - [OIDC rulesets and subject claims](/manuals/security/authentication/oidc-connections/rulesets-claims.md)
+- [Troubleshoot OIDC connections](/manuals/security/authentication/oidc-connections/troubleshoot.md)
