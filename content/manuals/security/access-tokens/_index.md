@@ -35,6 +35,33 @@ Both token types share the same basic behavior:
 - You can deactivate a token to stop it from working without deleting it.
   Deleting a token is permanent.
 
+## Who should use personal access tokens?
+
+Create a personal access token for:
+
+- Local Docker CLI sessions and development tools that should run as you
+- Scripts and CI jobs that push or pull images as you
+- CLI sign-in when two-factor authentication is turned on or single
+  sign-on is enforced
+
+## Who should use organization access tokens?
+
+Create an organization access token for:
+
+- CI/CD pipelines that build, push, and pull images
+- Production systems that pull images during deployment
+- Monitoring or backup tools that check repository status or pull images
+- Third-party services that integrate with your Docker Hub repositories
+- Scripts that call the [Docker Hub API][hub-api]
+
+Compared with a personal access token, an OAT:
+
+- Keeps working when the person who created it leaves the organization
+- Can be managed by every organization owner, not only its creator
+- Has its own Docker Hub usage limits, separate from personal accounts
+- Can be limited to specific repositories and operations
+- Shows when it was last used, so you can spot unused or misused tokens
+
 ## Choose a token type
 
 | Token | Ownership | Use when | Limitations |
@@ -48,3 +75,5 @@ are an alternative to storing a long-lived organization access token.
 ## Next steps
 
 {{< grid >}}
+
+[hub-api]: /manuals/security/access-tokens/organization-access-tokens.md#hub-api-support

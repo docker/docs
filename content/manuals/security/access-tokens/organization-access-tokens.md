@@ -32,24 +32,6 @@ organization settings you choose.
 > Access Management. For those features, use
 > [personal access tokens][pat] instead.
 
-## Who should use organization access tokens?
-
-Create an organization access token for:
-
-- CI/CD pipelines that build, push, and pull images
-- Production systems that pull images during deployment
-- Monitoring or backup tools that check repository status or pull images
-- Third-party services that integrate with your Docker Hub repositories
-- Scripts that call the [Docker Hub API](#hub-api-support)
-
-Compared with a personal access token, an OAT:
-
-- Keeps working when the person who created it leaves the organization
-- Can be managed by every organization owner, not only its creator
-- Has its own Docker Hub usage limits, separate from personal accounts
-- Can be limited to specific repositories and operations
-- Shows when it was last used, so you can spot unused or misused tokens
-
 ## Prerequisites
 
 To create and manage organization access tokens, you need:

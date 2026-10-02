@@ -29,15 +29,6 @@ When two-factor authentication is turned on, or single sign-on is
 enforced, password sign-in to the CLI isn't supported. Sign in with a
 personal access token instead.
 
-## Who should use personal access tokens?
-
-Create a personal access token for:
-
-- Local Docker CLI sessions and development tools that should run as you
-- Scripts and CI jobs that push or pull images as you
-- CLI sign-in when two-factor authentication is turned on or single
-  sign-on is enforced
-
 > [!NOTE]
 >
 > For organization-wide automation, consider
