@@ -20,6 +20,21 @@ Use a token for the Docker CLI, automation, and any account that has
 two-factor authentication (2FA) or enforced single sign-on (SSO), because
 password sign-in to the CLI is not supported in those cases.
 
+## How access tokens work
+
+Both token types share the same basic behavior:
+
+- A token stands in for your password. Enter it at the password prompt for
+  `docker login`, or wherever a tool asks for your Docker Hub password.
+- Each token has its own permissions, so it can only do what you allowed when
+  you created it. A leaked token can't do more than that.
+- Docker shows the token value once, when you create it. Docker doesn't store
+  the value, so copy it right away. If you lose it, create a new token.
+- A token can have an expiration date. An expired token stops working but
+  stays in your token list until you delete it.
+- You can deactivate a token to stop it from working without deleting it.
+  Deleting a token is permanent.
+
 ## Choose a token type
 
 | Token | Ownership | Use when | Limitations |
