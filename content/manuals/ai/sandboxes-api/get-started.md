@@ -111,8 +111,18 @@ For CI jobs and other unattended applications, use
 [PAT authentication](authentication.md#authenticate-automation-with-a-pat).
 
 If the program stops after printing the sandbox name, retrieve the sandbox
-with `client.get(name)` and delete it when you're finished. Closing the client
-doesn't delete the sandbox.
+with `client.get(name)` and delete it when you're finished. The `name` value is
+the full resource name printed by the program, such as
+`sandboxes/<uid>`:
+
+```typescript
+const existing = await client.get(name);
+const latest = await existing.refresh();
+const deleting = await latest.delete({ force: true });
+await deleting?.waitUntilDeleted();
+```
+
+Closing the client doesn't delete the sandbox.
 
 ## Next steps
 
