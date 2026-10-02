@@ -100,6 +100,15 @@ agent running, press `Ctrl+\`. Reconnect with `sbx --cloud attach <sandbox-name>
 Reconnecting joins the existing agent session. Use `--detach-keys` with `run`
 or `attach` to change the detach gesture, for example `--detach-keys ctrl-x,ctrl-d`.
 
+To remove the sandbox when the agent session ends, pass `--rm` to an
+interactive `run`. The detach gesture is turned off for that session. If the
+session ends without completing, for example because the connection drops,
+the sandbox is kept and the CLI prints the command to remove it:
+
+```console
+$ sbx --cloud run --rm claude
+```
+
 ## List and inspect sandboxes
 
 List cloud sandboxes separately from local sandboxes:
@@ -223,8 +232,13 @@ You can also use `sbx --cloud run claude --name cloud-project`, or run the agent
 without `--name` and select the sandbox when prompted. Add `--detached` to a
 named run to resume without attaching.
 
-Resuming keeps the sandbox ID and state. Check its expiration with
-`sbx --cloud ttl cloud-project` after resuming.
+Resuming keeps the sandbox ID and state, and starts a new time-to-live
+period. Check its expiration with `sbx --cloud ttl cloud-project` after
+resuming. For a stopped sandbox, `sbx --cloud ttl` reports that the sandbox is
+stopped instead of showing an expiration time. In `--json` output, the
+`stopped` and `ttl_paused` fields are `true`, and the expiry fields still hold
+the previous deadline. While the sandbox is resuming, only `ttl_paused` is
+`true`.
 
 If stop or resume reports that an existing sandbox was not found, the operation
 may be disabled for your account.
