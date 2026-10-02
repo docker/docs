@@ -8,6 +8,15 @@ long: |-
     Refer to the [`docker image tag`](/reference/cli/docker/image/tag/) reference for more information
     about valid image and tag names.
 
+    `NAME[:TAG]` is the repository to push. The name can include a registry host
+    and a namespace (usually your username or organization):
+
+    `[HOST[:PORT]/][NAMESPACE/]REPOSITORY[:TAG]`
+
+    For Docker Hub, omit `HOST` and use your Docker ID as the namespace. For a
+    private registry, include `HOST[:PORT]`. In the examples below, `myadmin`
+    and `myname` are that namespace — not a special Docker flag.
+
     Killing the `docker image push` process, for example by pressing `CTRL-c` while it is
     running in a terminal, terminates the push operation.
 
@@ -95,10 +104,9 @@ examples: |-
     $ docker container commit c16378f943fe rhel-httpd:latest
     ```
 
-    Now, push the image to the registry using the image ID. In this example the
-    registry is on host named `registry-host` and listening on port `5000`. To do
-    this, tag the image with the host name or IP address, and the port of the
-    registry:
+    Now, push the image to the registry. In this example the registry is
+    `registry-host:5000` and `myadmin` is the repository namespace (your
+    username or org on that registry):
 
     ```console
     $ docker image tag rhel-httpd:latest registry-host:5000/myadmin/rhel-httpd:latest
