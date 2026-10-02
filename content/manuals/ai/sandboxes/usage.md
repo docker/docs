@@ -67,6 +67,23 @@ such as `168h`, an RFC 3339 timestamp, or a Unix timestamp. The older
 
 Run `sbx prune` without flags to confirm and remove all stopped sandboxes.
 
+### Remove a sandbox when the agent exits
+
+Pass `--rm` to `sbx run` for a throwaway session. The sandbox is removed when
+the agent exits, without a confirmation prompt:
+
+```console
+$ sbx run --rm claude
+```
+
+The sandbox is removed however the agent exits, and `sbx run` exits with the
+agent's exit status. If `sbx run` created the sandbox and the agent fails
+to start, the sandbox is also removed. If you reattach to an existing sandbox
+with `--rm`, that sandbox is removed only after its agent session finishes.
+
+`--rm` needs an attached agent session to know when to remove the sandbox, so
+you can't combine it with `--detached` or `--detach-keys`.
+
 ## Choose a workspace
 
 `sbx run` mounts the current directory when you don't pass a workspace path.

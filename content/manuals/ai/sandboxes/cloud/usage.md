@@ -241,6 +241,20 @@ $ sbx --cloud rm cloud-project
 Removal asks for confirmation, deletes the cloud sandbox, and can't be undone.
 Use `--force` to skip the prompt in scripts.
 
+### Remove a sandbox when the agent exits
+
+Pass `--rm` to an interactive `run` to remove the sandbox when the agent
+session ends:
+
+```console
+$ sbx --cloud run --rm claude
+```
+
+The detach gesture is turned off for that session, and you can't combine
+`--rm` with `--detached`. If the session ends without completing, for example
+because the connection drops, the sandbox is kept and the CLI prints the
+command to remove it.
+
 ## Use persistent volumes
 
 Cloud volumes are experimental and preserve data independently of a sandbox.
