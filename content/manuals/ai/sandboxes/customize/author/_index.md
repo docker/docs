@@ -186,3 +186,31 @@ can override these defaults with `--cpus` and `--memory` when creating a sandbox
 Put these settings on the workload. `sbx` ignores resource settings on
 mixins added separately, and it doesn't use the capability's `gpu` field
 to select GPUs.
+
+## Keep the sandbox running after sessions end
+
+By default, a local sandbox stops automatically shortly after its last session
+disconnects. A kit that runs a service, such as a development server on a
+published port, can ask the sandbox to keep running instead. Add the
+config-less
+[`long-running@1` capability](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/long-running@1.md):
+
+```yaml
+capabilities:
+  - type: com.docker.sandbox/long-running@1
+```
+
+A sandbox created with this kit behaves like one started with
+[`sbx run --detached`](/manuals/ai/sandboxes/usage.md#keep-a-sandbox-running-in-the-background):
+it keeps running until someone stops or removes it. When a workload, mixin, or
+set declares the capability, it applies to the whole sandbox.
+
+The entry is required by default. Mark it `optional: true` if the kit still
+works when the sandbox stops after its sessions end. This affects where the kit
+can run:
+
+- Cloud sandboxes can't provide this capability. `sbx --cloud` refuses a kit
+  that requires it and skips an optional entry.
+- `sbx kit add` can't apply the capability to a running sandbox. A required
+  entry fails, and an optional entry is skipped with a warning. Recreate the
+  sandbox with the kit to apply it.
