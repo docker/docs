@@ -72,7 +72,11 @@ appear in the cloud destination. When the source has a workspace, the CLI
 warns and asks for confirmation. The `--force` flag skips the prompt but
 doesn't include those files.
 
-The destination uses cloud network policy. Local network rules don't transfer.
+The destination uses cloud network policy. Network rules you added locally
+don't transfer. Moving to the cloud applies the network rules of the
+sandbox's kit, or of its built-in agent, as `sbx --cloud create` does. If the
+CLI can't apply the kit's rules, it warns and the move continues with only
+your account's cloud policy.
 If the local source has HTTP method or path restrictions, the CLI warns and
 asks for confirmation because those restrictions won't apply in the cloud.
 `--force` skips the prompt but retains the warning.
