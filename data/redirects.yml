@@ -369,7 +369,7 @@
 "/desktop/features/wsl/":
   - /go/wsl2/
   - /go/windows-linux-vmm/
-"/desktop/set-up/install/linux/":
+"/desktop/setup/install/linux/":
   - /go/linux-credentials/
 "/desktop/use-desktop/pause/":
   - /go/mac-desktop-pause/
