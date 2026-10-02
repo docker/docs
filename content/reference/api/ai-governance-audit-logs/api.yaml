@@ -1,0 +1,370 @@
+openapi: "3.0.3"
+
+info:
+  title: Docker AI Governance Audit Logs API
+  version: "1"
+  description: |
+    Retrieve Docker AI Governance audit events for an organization.
+
+    The API returns cloud-delivered governance records in reverse chronological
+    order. Use filters to investigate policy decisions, principals, resources,
+    sessions, and agents. Results use cursor-based pagination.
+
+    Send an Organization Access Token (OAT) with the **View audit logs**
+    permission as the bearer token. Personal Access Tokens (PATs) and Docker
+    account session tokens aren't supported. The organization in the request
+    path must match the organization associated with the OAT.
+
+    An AI Governance subscription and Docker Cloud audit delivery are required.
+
+    Requests are limited to 100 per minute for each organization, 600 per
+    minute for each source IP address, and 1000 per hour for each organization.
+    A request must remain below every limit.
+  contact:
+    name: Docker
+    url: https://www.docker.com/products/ai-governance/
+
+servers:
+  - url: https://api.docker.com
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: audit-events
+    description: Retrieve Docker AI Governance audit events.
+
+paths:
+  /v2/auditlogs/governance/{org_name}:
+    get:
+      operationId: listAuditEvents
+      tags: [audit-events]
+      summary: List audit events
+      description: |
+        Returns audit events for the organization in reverse chronological
+        order. Pass `next_page_token` from one response as `page_token` in the
+        next request to continue listing events.
+
+        When `query` is present, `from` and `to` are required and must define a
+        range of 30 days or less. The search term must contain at least three
+        characters.
+      parameters:
+        - $ref: "#/components/parameters/OrgName"
+        - $ref: "#/components/parameters/From"
+        - $ref: "#/components/parameters/To"
+        - $ref: "#/components/parameters/AuditSessionID"
+        - $ref: "#/components/parameters/Username"
+        - $ref: "#/components/parameters/Decision"
+        - $ref: "#/components/parameters/EnforcementMode"
+        - $ref: "#/components/parameters/ActionType"
+        - $ref: "#/components/parameters/Query"
+        - $ref: "#/components/parameters/ResourceID"
+        - $ref: "#/components/parameters/Agent"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/PageToken"
+      responses:
+        "200":
+          description: Paginated audit events.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAuditEventsResponse"
+              examples:
+                default:
+                  value:
+                    events:
+                      - audit_event_id: 95e7257f-93c9-4f29-bde7-88830e2dae80
+                        org_id: 9f8e7d6c-5b4a-3210-fedc-ba9876543210
+                        event_type: docker.marlin.audit.event.v1.AuditRecord
+                        category: AUDIT_CATEGORY_EVALUATION
+                        decision: AUDIT_DECISION_DENY
+                        action_type: network_egress
+                        enforcement_mode: enforce
+                        audit_session_id: 8a3bc076-79d0-4502-baf3-cc6ad35fb578
+                        username: jordandoe
+                        created_at: "2026-08-25T18:42:31.123Z"
+                        ingested_at: "2026-08-25T18:42:31.456Z"
+                        payload:
+                          resource_id: example.com:443
+                          agent: claude
+                          network_egress:
+                            protocol: tcp
+                    next_page_token: eyJ0cyI6IjIwMjYtMDgtMjVUMTg6NDI6MzEuMTIzWiIsImVpZCI6Ijk1ZTcyNTdmLTkzYzktNGYyOS1iZGU3LTg4ODMwZTJkYWU4MCJ9
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: |
+        A raw Organization Access Token with the **View audit logs** permission.
+        Pass the OAT in the `Authorization: Bearer <OAT>` header. Don't exchange
+        the OAT for a Docker account session token. PATs aren't supported.
+
+  parameters:
+    OrgName:
+      name: org_name
+      in: path
+      required: true
+      description: Organization name. The value must match the organization associated with the OAT.
+      schema:
+        type: string
+      example: my-org
+
+    From:
+      name: from
+      in: query
+      required: false
+      description: Include events created at or after this RFC 3339 timestamp. Required with `query`.
+      schema:
+        type: string
+        format: date-time
+      example: "2026-08-01T00:00:00Z"
+
+    To:
+      name: to
+      in: query
+      required: false
+      description: Include events created at or before this RFC 3339 timestamp. Required with `query`.
+      schema:
+        type: string
+        format: date-time
+      example: "2026-08-25T23:59:59Z"
+
+    AuditSessionID:
+      name: audit_session_id
+      in: query
+      required: false
+      description: Return events from this audit session.
+      schema:
+        type: string
+      example: 8a3bc076-79d0-4502-baf3-cc6ad35fb578
+
+    Username:
+      name: username
+      in: query
+      required: false
+      description: Return events associated with this Docker username.
+      schema:
+        type: string
+      example: jordandoe
+
+    Decision:
+      name: decision
+      in: query
+      required: false
+      description: Return events with this exact audit decision value.
+      schema:
+        type: string
+      example: AUDIT_DECISION_DENY
+
+    EnforcementMode:
+      name: enforcement_mode
+      in: query
+      required: false
+      description: Return events with this exact enforcement mode.
+      schema:
+        type: string
+        enum: [audit, warn, enforce]
+      example: enforce
+
+    ActionType:
+      name: action_type
+      in: query
+      required: false
+      description: Return events with this exact action type.
+      schema:
+        type: string
+      example: network_egress
+
+    Query:
+      name: query
+      in: query
+      required: false
+      description: |
+        Case-insensitive text search across username, action type, decision, and
+        event type. `from` and `to` are required when this parameter is present,
+        and their range must not exceed 30 days.
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 256
+      example: network
+
+    ResourceID:
+      name: resource_id
+      in: query
+      required: false
+      description: Case-insensitive prefix match against the resource ID in the event payload.
+      schema:
+        type: string
+        maxLength: 256
+      example: example.com
+
+    Agent:
+      name: agent
+      in: query
+      required: false
+      description: Exact match against the agent in the event payload.
+      schema:
+        type: string
+        maxLength: 256
+      example: claude
+
+    PageSize:
+      name: page_size
+      in: query
+      required: false
+      description: Number of events to return. Defaults to 25 and is capped at 500.
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 500
+        default: 25
+      example: 25
+
+    PageToken:
+      name: page_token
+      in: query
+      required: false
+      description: Opaque cursor from `next_page_token` in the previous response.
+      schema:
+        type: string
+
+  schemas:
+    ListAuditEventsResponse:
+      type: object
+      required: [events, next_page_token]
+      properties:
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuditEvent"
+        next_page_token:
+          type: string
+          description: Opaque cursor for the next page. Empty when no more events remain.
+
+    AuditEvent:
+      type: object
+      required: [audit_event_id, org_id, event_type]
+      properties:
+        audit_event_id:
+          type: string
+          format: uuid
+          description: Unique audit event ID.
+        org_id:
+          type: string
+          format: uuid
+          description: ID of the organization that owns the event.
+        event_type:
+          type: string
+          description: Fully qualified event schema name.
+        category:
+          type: string
+          description: Audit event category.
+          example: AUDIT_CATEGORY_EVALUATION
+        decision:
+          type: string
+          description: Governance decision for evaluation records.
+          example: AUDIT_DECISION_DENY
+        action_type:
+          type: string
+          description: Action-specific payload discriminator.
+          example: network_egress
+        enforcement_mode:
+          type: string
+          description: Enforcement mode in effect for the decision.
+          example: enforce
+        audit_session_id:
+          type: string
+          description: Session that produced the event.
+        username:
+          type: string
+          description: Docker username associated with the event.
+        created_at:
+          type: string
+          format: date-time
+          description: Time Docker recorded the event.
+        ingested_at:
+          type: string
+          format: date-time
+          description: Time Docker ingested the event into cloud storage.
+        payload:
+          type: object
+          description: Event-specific audit record fields.
+          additionalProperties: true
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+
+  responses:
+    BadRequest:
+      description: Invalid timestamp, page size, page token, filter, or search window.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            default:
+              value:
+                error: "invalid argument\nfrom must be RFC3339"
+
+    Unauthenticated:
+      description: Missing, malformed, invalid, or expired OAT.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            default:
+              value:
+                error: invalid or expired token
+
+    Forbidden:
+      description: The OAT lacks permission, lacks organization identity, or belongs to another organization.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            default:
+              value:
+                error: insufficient permissions
+
+    RateLimited:
+      description: The organization or source IP address exceeded a request limit.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            default:
+              value:
+                error: rate limit exceeded
+
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            default:
+              value:
+                error: internal error
