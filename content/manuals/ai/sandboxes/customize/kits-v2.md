@@ -475,7 +475,6 @@ Runs synchronously when a kit is applied, either during sandbox creation or
 through `sbx kit add`. Shell strings are passed to `sh -c`.
 
 Kit install commands start in the template image's configured `WORKDIR`.
-The workspace path is available as the `WORKSPACE_DIR` environment variable.
 Docker-provided templates use `/home/agent/workspace`, which isn't necessarily
 the primary workspace in a direct-mounted or clone-mode sandbox. Don't rely on
 the current directory to locate workspace files. Use absolute paths for bundled
@@ -489,7 +488,9 @@ assets from `files/home/`.
 
 ### startup
 
-Runs at every sandbox start. String array, not interpreted by a shell.
+Runs at every sandbox start. String array, not interpreted by a shell. A
+`$WORKSPACE_DIR` reference in the array is passed unchanged. To expand it, run
+the command through a shell, for example `["sh", "-c", "..."]`.
 
 | Field         | Default  | Description                         |
 | ------------- | -------- | ----------------------------------- |
@@ -522,7 +523,7 @@ Files written at sandbox start, with runtime substitution.
 | Field           | Default  | Description                                               |
 | --------------- | -------- | --------------------------------------------------------- |
 | `path`          | —        | Absolute container path.                                  |
-| `content`       | —        | File content. The literal `${WORKDIR}` is replaced with the workspace path when the sandbox is created. |
+| `content`       | —        | File content. Write `${WORKDIR}` for the workspace path. |
 | `mode`          | `"0644"` | File permissions in octal.                                |
 | `onlyIfMissing` | `false`  | Skip if the file already exists.                          |
 
@@ -531,20 +532,20 @@ path must be writable by that user. To write to a root-owned path such as
 `/etc`, use an `install` command, which runs as root by default. Set ownership
 in the install command if the agent needs to modify the file later.
 
-`${WORKDIR}` is a placeholder, not an environment variable. It is replaced
-only inside `content`, never in `path` or in commands. Three names look
-alike and mean different things:
+Write `${WORKDIR}` in `content` and `$WORKSPACE_DIR` in commands. Three names
+look alike and mean different things:
 
-| Name            | What it is                                                    | Where it applies                                |
-| --------------- | ------------------------------------------------------------- | ----------------------------------------------- |
-| `${WORKDIR}`    | Placeholder replaced with the workspace path at creation      | `setup.files[].content` only                    |
-| `WORKSPACE_DIR` | Environment variable set by the runtime to the workspace path | `install` and `startup` commands, and the agent |
-| `WORKDIR`       | The template image's Dockerfile working directory             | Where commands start, see [install](#install)   |
+| Name            | What it is                                                    | Where it applies                                 |
+| --------------- | ------------------------------------------------------------- | ------------------------------------------------ |
+| `${WORKDIR}`    | Placeholder for the workspace path                            | `setup.files[].content` only                     |
+| `WORKSPACE_DIR` | Environment variable set by the runtime to the workspace path | Shell commands, and the agent                    |
+| `WORKDIR`       | The template image's Dockerfile working directory             | Where commands start, see [install](#install)    |
 
-Read `$WORKSPACE_DIR` in commands and scripts. There is no `WORKDIR`
-environment variable in the sandbox. V3 kits have no `${WORKDIR}`
-placeholder; lifecycle `files` content expands `${{ kit.env.WORKSPACE_DIR }}`
-instead, and `$VAR` stays literal in the file.
+The runtime replaces `${WORKDIR}` when it creates the sandbox, only inside
+`content`, never in `path` or in commands. `WORKSPACE_DIR` is an environment
+variable, so a `$WORKSPACE_DIR` reference expands only when a shell runs the
+command. `install` strings run through `sh -c`. `startup` arrays run without a
+shell. A Dockerfile `WORKDIR` doesn't define an environment variable.
 
 ### Shell initialization and service logs
 
@@ -808,6 +809,7 @@ content from sandbox initialization, and declare runtime capabilities:
 | Automatic `files/home/` and `files/workspace/` injection | Dockerfile `COPY`, with lifecycle hooks for destinations provided by runtime mounts |
 | `permissions.network` and `credentials` | Network-policy and credential capabilities |
 | `agentInstructions` | Agent-context capability |
+| `${WORKDIR}` in `setup.files[].content` | `${{ kit.env.WORKSPACE_DIR }}` in lifecycle [`files` content](/manuals/ai/sandboxes/customize/author/_index.md#generated-files) |
 
 Follow the [v3 authoring guidance](/manuals/ai/sandboxes/customize/author/_index.md)
 when converting runtime setup and capability declarations.
