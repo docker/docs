@@ -169,6 +169,25 @@ After `sbx create` finishes, the local sandbox stops automatically when no
 sessions keep it running. Its files and configuration persist. Running
 `sbx run --name <sandbox-name>` starts it again and attaches you to the agent.
 
+### Keep a sandbox running in the background
+
+To keep a sandbox running after every session ends, for example to serve an
+application on a [published port](#publish-ports), start it with
+`sbx run --detached` (`-d`). The command starts the sandbox, prints its ID,
+and returns without opening an agent session:
+
+```console
+$ sbx run -d --name my-project claude .
+```
+
+A detached sandbox doesn't stop automatically. It keeps running until you stop
+it with `sbx stop` or remove it with `sbx rm`. You can still attach to it, or
+run commands in it with `sbx exec`.
+
+Running `sbx run -d` against an existing sandbox switches that sandbox to
+detached mode permanently. To return to the default behavior, remove the
+sandbox and create it again.
+
 ## Set environment variables
 
 > [!NOTE]
