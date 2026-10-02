@@ -48,7 +48,7 @@ Either uninstall it first with `--keep-data` as described in the previous answer
 msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart REMOVEEXISTINGINSTALL=1
 ```
 
-This runs the existing uninstaller with `--keep-data`, so settings and container data are preserved. `REMOVEEXISTINGINSTALL` defaults to `0` and is available with Docker Desktop version 4.30 and later.
+This runs the existing uninstaller with `--keep-data`, so settings and container data are preserved.
 
 #### Per-user `.exe` installation
 

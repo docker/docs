@@ -19,13 +19,13 @@ The MSI package supports various MDM (Mobile Device Management) solutions, makin
 1. Select **Docker Desktop**, then **Deploy**.
 1. From the **Windows OS** tab, select the **Download MSI installer** button.
 1. Once downloaded, double-click `DockerDesktop.msi` to run the installer.
-1. After accepting the license agreement, choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`. The MSI installer only supports all-users installations (version 4.92 and later). If you need a per-user installation, use the EXE installer.
+1. After accepting the license agreement, choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`. The MSI installer only supports all-users installations. If you need a per-user installation, use the EXE installer.
 1. Configure the Docker Desktop installation. You can:
    - Create a desktop shortcut
 
    - Set the Docker Desktop service startup type to automatic
 
-   - Allow Windows Containers to be used with this installation. With Docker Desktop version 4.40 and later, this is cleared by default in the installation wizard, so Windows containers are disabled unless you select it.
+   - Allow Windows Containers to be used with this installation. This is cleared by default in the installation wizard, so Windows containers are disabled unless you select it.
 
    - Select the Docker Desktop backend: WSL or Hyper-V.
 1. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
@@ -202,7 +202,7 @@ In addition to the following custom properties, the Docker Desktop MSI installer
 | `ADMINSETTINGS`                    | Automatically creates an `admin-settings.json` file which is used to [control certain Docker Desktop settings](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md) on client machines within organizations. It must be used together with the `ALLOWEDORG` property. If you pass `ADMINSETTINGS` on its own, the installation still succeeds but no `admin-settings.json` file is written and no error is reported. | None                    |
 | `ALLOWEDORG`                       | Requires the user to sign in and be part of the specified Docker Hub organization when running the application. This creates a registry key called `allowedOrgs` in `HKLM\Software\Policies\Docker\Docker Desktop`.                                                                           | None                    |
 | `ALWAYSRUNSERVICE`                 | Lets users switch to Windows containers without needing admin rights                                                                                                                                                                                                                          | 0                       |
-| `DISABLEWINDOWSCONTAINERS`         | Disables the Windows containers integration                                                                                                                                                                                                                                                   | 0                       |
+| `DISABLEWINDOWSCONTAINERS`         | Disables the Windows containers integration                                                                                                                                                                                                                                                   | 1                       |
 | `ENGINE`                           | Sets the Docker Engine that's used to run containers. This can be `wsl`, `hyperv`, `windows`, or `docker-vmm`. The installation wizard only offers `wsl` and `hyperv`. The others are command line only. `docker-vmm` is available with Docker Desktop version 4.90 and later.                                                                                                                                                                                       | `wsl`                   |
 | `PROXYENABLEKERBEROSNTLM`          | When set to 1, enables support for Kerberos and NTLM proxy authentication.                                                                                                                                                                                                                    | 0                       |
 | `PROXYHTTPMODE`                    | Sets the HTTP Proxy mode. This can be either `system` or `manual`                                                                                                                                                                                                                             | `system`                |
