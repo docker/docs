@@ -3,6 +3,8 @@ synopsis: Set a setting override
 description: |-
     Set a user override for a setting.
 
+    Administrator constraints apply to saved overrides. A conflicting value is rejected.
+
     The value is parsed according to the setting's type:
       bool   "true" or "false"
       int    integer value
