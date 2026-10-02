@@ -100,6 +100,15 @@ agent running, press `Ctrl+\`. Reconnect with `sbx --cloud attach <sandbox-name>
 Reconnecting joins the existing agent session. Use `--detach-keys` with `run`
 or `attach` to change the detach gesture, for example `--detach-keys ctrl-x,ctrl-d`.
 
+To remove the sandbox when the agent session ends, pass `--rm` to an
+interactive `run`. The detach gesture is turned off for that session. If the
+session ends without completing, for example because the connection drops,
+the sandbox is kept and the CLI prints the command to remove it:
+
+```console
+$ sbx --cloud run --rm claude
+```
+
 ## List and inspect sandboxes
 
 List cloud sandboxes separately from local sandboxes:
