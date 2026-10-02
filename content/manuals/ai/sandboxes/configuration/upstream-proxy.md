@@ -66,6 +66,11 @@ A proxy value can be any of the following:
 With `socks5://`, DNS is resolved locally before the connection is handed to the
 proxy. With `socks5h://`, DNS resolution is delegated to the proxy.
 
+`sbx settings set` checks a proxy value before saving it. A value with an unsupported scheme, no host, an invalid
+port, or a malformed PAC source is rejected immediately, and the previous
+setting stays in effect. The check doesn't connect to the proxy, so a
+reachable but misconfigured proxy shows up only when traffic uses it.
+
 ### Exclude destinations from the proxy
 
 Exclusion lists mirror the same scopes. Each takes a comma-separated list of
