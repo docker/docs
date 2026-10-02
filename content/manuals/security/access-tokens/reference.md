@@ -13,13 +13,9 @@ weight: 30
 Look up what an access token is allowed to do. You choose a permission
 or a set of scopes when you create the token.
 
-- [Personal access token permissions](#access-permissions)
-- [Organization access token scopes](#available-scopes)
-- [Docker Hub API](#hub-api-support)
-
 ## Personal access token permissions {#access-permissions}
 
-Each personal access token has one permission level. Select it when you
+Each personal access token (PAT) has one permission level that you select when you
 [create the token][pat]. The token applies to every repository your
 account can access. You can't limit a token to a single repository.
 
@@ -37,17 +33,24 @@ account can access. You can't limit a token to a single repository.
 
 Choose the lowest permission that covers what the token needs to do.
 For example, a CI job that only pulls a private base image needs
-**Repo Read-only**.
+**Repo Read-only**. You can change PAT permissions at any time if the PAT is active or inactive, but not expired. 
 
 ## Organization access token scopes {#available-scopes}
 
-Scopes control what an organization access token can do. You choose
-them when you [create][oat] or [edit][oat-edit] the token. In the Docker
-Home UI, each scope shows its name and a short description; the value
-in the table is what the token carries.
+Scopes control what an organization access token (OAT) can do. You choose
+them when you [create][oat] or [edit][oat-edit] the token. In Docker
+Home, each scope shows its name and a short description while the value
+in the table is what the token carries. You can change OAT scopes at any time if the OAT is active or inactive,
+but not expired.
 
-Where a scope includes another one, selecting the higher scope grants
-the lower one too.
+Within a related set of operations, selecting a more capable scope
+also grants the less capable ones. For example:
+
+- **Image Delete** includes **Image Push**
+- **Image Push** includes **Image Pull**
+
+If you select **Image Delete**, you don't need to select the other two.
+The Grants column notes each inclusion.
 
 ### Repository scopes {#repository-scopes}
 
@@ -112,16 +115,29 @@ the token's resources.
 
 ## Docker Hub API {#hub-api-support}
 
-An organization access token can authenticate most Docker Hub API
-endpoints under `/v2/namespaces/{namespace}/repositories/`. Exchange
-the token for a bearer token with your organization name as the
-username, then pass it in the `Authorization` header. To create the
-token, see [Create an organization access token][oat].
+An OAT can authenticate most Docker Hub API endpoints under
+`/v2/namespaces/{namespace}/repositories/`. First [create an
+OAT][oat], then exchange it for a short-lived bearer token with the
+[Create access token][hub-auth] API. Use your organization name as the
+identifier and the OAT as the secret:
+
+```console
+$ TOKEN=$(curl -s -X POST "https://hub.docker.com/v2/auth/token" \
+    -H "Content-Type: application/json" \
+    -d '{"identifier": "<YOUR_ORGANIZATION_NAME>", "secret": "<YOUR_OAT>"}' \
+    | jq -r .access_token)
+```
+
+Pass the bearer token in the `Authorization` header:
+
+```console
+$ curl -s -H "Authorization: Bearer $TOKEN" \
+    "https://hub.docker.com/v2/namespaces/<YOUR_ORGANIZATION_NAME>/repositories"
+```
 
 ### Supported endpoints
 
-The following endpoint groups accept organization access token
-authentication:
+The following endpoint groups accept OAT authentication:
 
 - Repositories: list, create, get, update, and delete
 - Tags: list, get, and delete; get tag images, attestations, and compose
@@ -147,11 +163,10 @@ indication that private repositories were left out.
 
 ### Unsupported legacy endpoints
 
-Organization access tokens only work with the namespace-scoped routes
-described above. The following legacy paths reject every organization
-access token, regardless of its scopes, with `403 token issued from
-organization access token is not allowed`. Use the replacement endpoint
-instead:
+OATs only work with the namespace-scoped routes described above. The
+following legacy paths reject every OAT, regardless of its scopes, with
+`403 token issued from organization access token is not allowed`. Use
+the replacement endpoint instead:
 
 - `GET /v2/repositories/{namespace}/{repository}`: use
   [Get repository](/reference/api/hub/latest/operations/GetRepository/)
@@ -162,12 +177,13 @@ instead:
 
 ## Next steps
 
-- [Create a personal access token][pat]
-- [Create an organization access token][oat]
-- [Choose a personal or organization access token][overview]
+- [Create a PAT][pat]
+- [Create an OAT][oat]
+- [Choose a PAT or OAT][overview]
 
 [pat]: /manuals/security/access-tokens/personal-access-tokens.md#create-a-personal-access-token
 [oat]: /manuals/security/access-tokens/organization-access-tokens.md#create-an-organization-access-token
 [oat-edit]: /manuals/security/access-tokens/organization-access-tokens.md#modify-existing-tokens
 [overview]: /manuals/security/access-tokens/_index.md
 [sandboxes]: /manuals/ai/sandboxes-api/authentication.md
+[hub-auth]: /reference/api/hub/latest/operations/AuthCreateAccessToken/

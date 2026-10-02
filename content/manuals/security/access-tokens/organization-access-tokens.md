@@ -21,16 +21,15 @@ Docker Hub as your organization instead of as a person. Use an OAT for
 CI/CD pipelines, deployment jobs, and other automation that must keep
 working when people join or leave the organization.
 
-Unlike a personal access token, an OAT belongs to the organization. Any
-organization owner can see, edit, deactivate, or delete it. Each token
-has its own scopes, so it can only reach the repositories and
-organization settings you choose.
+Unlike a personal access token (PAT), an OAT belongs to the
+organization. Any organization owner can see, edit, deactivate, or
+delete it. Each token has its own scopes, so it can only reach the
+repositories and organization settings you choose.
 
 > [!WARNING]
 >
-> Organization access tokens don't work with Docker Desktop or Image
-> Access Management. For those features, use
-> [personal access tokens][pat] instead.
+> OATs don't work with Docker Desktop or Image Access Management. For
+> those features, use [PATs][pat] instead.
 
 ## Best practices
 
@@ -44,7 +43,7 @@ organization settings you choose.
 
 ## Prerequisites
 
-To create and manage organization access tokens, you need:
+To create and manage OATs, you need:
 
 - A Docker Team or Docker Business subscription
 - One of these roles in the organization:
@@ -53,23 +52,14 @@ To create and manage organization access tokens, you need:
   - A [custom role][custom-roles] that includes the
     **Manage organization access tokens** permission
 
-Each organization can have a limited number of tokens:
-
-- Docker Team: Up to 10 tokens
-- Docker Business: Up to 100 tokens
-
-Expired and deactivated tokens count toward the limit until you delete
-them. When you reach the limit, the **Generate access token** button is
-disabled until you delete a token.
-
-## Create an organization access token
+## Create
 
 > [!IMPORTANT]
 >
 > Treat access tokens like passwords and keep them secure. Store tokens
 > in a credential manager and never commit them to source code.
 
-To create an organization access token:
+To create an OAT:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
@@ -104,17 +94,17 @@ To create an organization access token:
    the token once and doesn't store it. You can't retrieve it after you
    leave the page.
 
-## Sign in with an organization access token
+## Sign in
 
 Run `docker login` with your organization name as the username. When
-the CLI asks for a password, paste the organization access token.
+the CLI asks for a password, paste the OAT.
 
 ```console
 $ docker login --username <YOUR_ORGANIZATION_NAME>
 Password: [paste your OAT here]
 ```
 
-## Update, deactivate, or delete a token {#modify-existing-tokens}
+## Update, deactivate, or delete
 
 You can rename a token, change its description or scopes, deactivate
 it, activate it again, or delete it.
@@ -135,11 +125,22 @@ it, activate it again, or delete it.
 1. If you selected **Edit**, change the label, description, or
    resources, then select **Update token**.
 
+## Token limits
+
+Each organization can have a limited number of tokens:
+
+- Docker Team: Up to 10 tokens
+- Docker Business: Up to 100 tokens
+
+Expired and deactivated tokens count toward the limit until you delete
+them. When you reach the limit, the **Generate access token** button is
+disabled until you delete a token.
+
 ## Next steps
 
-- [Choose a personal or organization access token][overview]
+- [Choose a PAT or OAT][overview]
 - [Look up scopes and Docker Hub API support][reference]
-- [Create a personal access token][pat]
+- [Create a PAT][pat]
 - [Set up OIDC connections for GitHub Actions][oidc]
 - [Review custom role permissions][custom-roles]
 
