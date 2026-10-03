@@ -1,0 +1,33 @@
+{
+  "name": "@alshuyukh/api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file=../../.env src/server.ts",
+    "start": "node --env-file=../../.env dist/server.js",
+    "build": "tsc -p tsconfig.build.json && cp -r src/db/migrations dist/db/",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "tsx --env-file=../../.env src/db/migrate-cli.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.1.2",
+    "@fastify/cors": "^11.3.0",
+    "@fastify/helmet": "^13.1.1",
+    "@fastify/rate-limit": "^11.2.0",
+    "argon2": "^0.45.1",
+    "fastify": "^5.12.5",
+    "fastify-plugin": "^5.1.0",
+    "jose": "^6.2.12",
+    "pg": "^8.23.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9",
+    "vitest": "^5.0.3"
+  }
+}

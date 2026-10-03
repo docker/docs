@@ -1,0 +1,69 @@
+/**
+ * API client. The access token is kept in memory only (never localStorage).
+ * The refresh token lives in an HttpOnly cookie the browser sends to
+ * /api/auth/refresh; on a 401 the client refreshes once and retries.
+ */
+let accessToken: string | null = null;
+let refreshing: Promise<boolean> | null = null;
+let onSessionExpired: () => void = () => {};
+
+export const setAccessToken = (t: string | null) => { accessToken = t; };
+export const setSessionExpiredHandler = (fn: () => void) => { onSessionExpired = fn; };
+
+export class ApiError extends Error {
+  constructor(public status: number, public code: string, message: string, public details?: { path: string; message: string }[]) {
+    super(message);
+  }
+}
+
+export async function refreshSession(): Promise<boolean> {
+  refreshing ??= (async () => {
+    try {
+      const res = await fetch('/api/auth/refresh', { method: 'POST', credentials: 'include', headers: { 'X-CSRF-Protection': '1' } });
+      if (!res.ok) return false;
+      setAccessToken((await res.json()).accessToken);
+      return true;
+    } catch {
+      return false;
+    } finally {
+      setTimeout(() => { refreshing = null; }, 0);
+    }
+  })();
+  return refreshing;
+}
+
+export async function api<T = unknown>(method: string, path: string, body?: unknown, retry = true): Promise<T> {
+  const headers: Record<string, string> = { 'X-CSRF-Protection': '1' };
+  if (body !== undefined) headers['Content-Type'] = 'application/json';
+  if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
+  const res = await fetch(path, { method, headers, credentials: 'include', body: body === undefined ? undefined : JSON.stringify(body) });
+
+  if (res.status === 401 && retry && !path.startsWith('/api/auth/login') && !path.startsWith('/api/auth/register')) {
+    if (await refreshSession()) return api<T>(method, path, body, false);
+    setAccessToken(null);
+    onSessionExpired();
+  }
+  if (res.status === 204) return undefined as T;
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const e = data?.error ?? {};
+    throw new ApiError(res.status, e.code ?? 'ERROR', translateError(e.code, e.message), e.details);
+  }
+  return data as T;
+}
+
+const MESSAGES: Record<string, string> = {
+  UNAUTHORIZED: 'البريد الإلكتروني أو كلمة المرور غير صحيحة',
+  ACCOUNT_LOCKED: 'تم إيقاف الحساب مؤقتًا بسبب محاولات دخول فاشلة متكررة. حاول لاحقًا.',
+  EMAIL_TAKEN: 'يوجد حساب مسجل بهذا البريد الإلكتروني',
+  FORBIDDEN: 'لا تملك صلاحية تنفيذ هذا الإجراء',
+  NOT_FOUND: 'السجل غير موجود',
+  VALIDATION_ERROR: 'تحقق من البيانات المدخلة',
+  DUPLICATE: 'توجد قيمة مكررة لحقل يجب أن يكون فريدًا',
+  TENANT_SUSPENDED: 'تم تعليق هذه المنشأة',
+  ALREADY_MEMBER: 'المستخدم عضو في المنشأة بالفعل',
+  LAST_COMPANY: 'يجب أن تبقى شركة واحدة على الأقل',
+  ROLE_IN_USE: 'الدور مُسند لمستخدمين؛ أزله منهم أولًا',
+  INVALID_CURRENT_PASSWORD: 'كلمة المرور الحالية غير صحيحة',
+};
+const translateError = (code?: string, fallback?: string) => (code && MESSAGES[code]) || fallback || 'حدث خطأ غير متوقع';
