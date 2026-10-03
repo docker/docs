@@ -4,6 +4,7 @@ import { AppError, conflict, forbidden, unauthorized } from '../../lib/errors.js
 import { getDummyHash, hashPassword, verifyPassword } from '../../lib/password.js';
 import { hashToken, newRefreshToken } from '../../lib/tokens.js';
 import type { Deps } from '../../types.js';
+import { setupCompanyAccounting } from '../accounting/setup.js';
 import { writeAudit, type AuditMeta } from '../audit/audit.service.js';
 
 export interface Membership {
@@ -78,6 +79,7 @@ export class AuthService {
          VALUES ($1, $2, $3, 'MAIN', 'المستودع الرئيسي', $4)`,
         [tenantId, company!.id, branch!.id, uid],
       );
+      await setupCompanyAccounting(db, { tenantId, companyId: company!.id, userId: uid });
       await writeAudit(db, {
         tenantId, userId: uid, action: 'REGISTER', entityType: 'tenant', entityId: tenantId,
         newValues: { tenantName: input.tenantName, companyName: input.companyName, email: input.email },

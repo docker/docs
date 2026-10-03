@@ -17,6 +17,7 @@
     "@fastify/helmet": "^13.1.1",
     "@fastify/rate-limit": "^11.2.0",
     "argon2": "^0.45.1",
+    "decimal.js": "^10.6.0",
     "fastify": "^5.12.5",
     "fastify-plugin": "^5.1.0",
     "jose": "^6.2.12",

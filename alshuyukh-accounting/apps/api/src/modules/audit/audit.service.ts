@@ -4,7 +4,8 @@ export type AuditAction =
   | 'REGISTER' | 'LOGIN' | 'LOGIN_FAILED' | 'LOGOUT' | 'TOKEN_REUSE_DETECTED'
   | 'TENANT_SWITCH' | 'PASSWORD_CHANGE'
   | 'CREATE' | 'UPDATE' | 'DELETE'
-  | 'SETTINGS_CHANGE' | 'PERMISSION_CHANGE';
+  | 'SETTINGS_CHANGE' | 'PERMISSION_CHANGE'
+  | 'POST' | 'REVERSE' | 'CLOSE' | 'REOPEN';
 
 export interface AuditMeta {
   ip?: string | null;

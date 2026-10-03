@@ -41,7 +41,7 @@ describe('audit log', () => {
 
   it('records settings and permission changes', async () => {
     const api = client(t.app, owner.token);
-    await api.patch('/api/settings/tenant', { fiscalYearStartMonth: 7 });
+    await api.patch('/api/settings/tenant', { dateFormat: 'DD/MM/YYYY' });
     await api.post('/api/roles', { code: 'AUDIT_TEST', nameAr: 'اختبار', nameEn: 'Test', permissions: ['company.view'] });
     const actions = (await logs()).map((l) => l.action);
     expect(actions).toContain('SETTINGS_CHANGE');

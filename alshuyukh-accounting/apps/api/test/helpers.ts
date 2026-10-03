@@ -78,3 +78,35 @@ export async function addMember(app: FastifyInstance, owner: Session, roleCode: 
   if (res.statusCode !== 201) throw new Error(`addMember failed: ${res.statusCode} ${res.body}`);
   return login(app, email, PASSWORD, owner.tenantId);
 }
+
+// Accounting helpers ------------------------------------------------------------
+
+export interface Chart { byCode: Map<string, string>; byKey: Map<string, string> }
+
+export async function chart(app: FastifyInstance, token: string): Promise<Chart> {
+  const res = await client(app, token).get('/api/accounts?includeInactive=true');
+  if (res.statusCode !== 200) throw new Error(`accounts failed: ${res.body}`);
+  const rows = res.json().data as { id: string; code: string; systemKey: string | null }[];
+  return {
+    byCode: new Map(rows.map((r) => [r.code, r.id])),
+    byKey: new Map(rows.filter((r) => r.systemKey).map((r) => [r.systemKey!, r.id])),
+  };
+}
+
+export interface FiscalYear {
+  id: string; name: string; startDate: string; endDate: string; status: string;
+  periods: { id: string; periodNumber: number; startDate: string; endDate: string; status: string }[];
+}
+
+export async function fiscalYears(app: FastifyInstance, token: string): Promise<FiscalYear[]> {
+  return (await client(app, token).get('/api/fiscal-years')).json().data;
+}
+
+/** A date inside the first fiscal year, `month` 1-12 relative to its start. */
+export async function dateInYear(app: FastifyInstance, token: string, month = 3, day = 15): Promise<string> {
+  const [year] = await fiscalYears(app, token);
+  return year!.periods[month - 1]!.startDate.slice(0, 8) + String(day).padStart(2, '0');
+}
+
+export const dr = (accountId: string, amount: string) => ({ accountId, debit: amount });
+export const cr = (accountId: string, amount: string) => ({ accountId, credit: amount });

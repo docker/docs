@@ -7,6 +7,10 @@ import type pg from 'pg';
 import type { Env } from './config/env.js';
 import { AppError } from './lib/errors.js';
 import { TokenService } from './lib/tokens.js';
+import accountsRoutes from './modules/accounting/accounts.routes.js';
+import fiscalRoutes from './modules/accounting/fiscal.routes.js';
+import journalRoutes from './modules/accounting/journal.routes.js';
+import trialBalanceRoutes from './modules/accounting/trial-balance.routes.js';
 import auditRoutes from './modules/audit/audit.routes.js';
 import authRoutes from './modules/auth/auth.routes.js';
 import companiesRoutes from './modules/companies/companies.routes.js';
@@ -59,7 +63,9 @@ export async function buildApp({ env, pool, logger = true }: BuildOptions): Prom
     const mapped = pgCode ? PG_ERRORS[pgCode] : undefined;
     if (mapped) {
       req.log.warn({ err }, 'database constraint');
-      return reply.code(mapped[0]).send({ error: { code: mapped[1], message: mapped[2] } });
+      // Messages raised by our own ledger triggers are safe and useful to show.
+      const fromTrigger = /PL\/pgSQL function/.test((err as { where?: string }).where ?? '');
+      return reply.code(mapped[0]).send({ error: { code: fromTrigger ? 'LEDGER_RULE' : mapped[1], message: fromTrigger ? err.message : mapped[2] } });
     }
     const status = (err as { statusCode?: number }).statusCode;
     if (status && status >= 400 && status < 500) {
@@ -81,6 +87,10 @@ export async function buildApp({ env, pool, logger = true }: BuildOptions): Prom
     await api.register(companiesRoutes);
     await api.register(settingsRoutes);
     await api.register(auditRoutes);
+    await api.register(accountsRoutes);
+    await api.register(fiscalRoutes);
+    await api.register(journalRoutes);
+    await api.register(trialBalanceRoutes);
   }, { prefix: '/api' });
 
   return app;

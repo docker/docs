@@ -1,6 +1,13 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from './auth';
 import Shell from './Shell';
+import Accounting from './pages/accounting/Accounting';
+import ChartOfAccounts from './pages/accounting/ChartOfAccounts';
+import FiscalYears from './pages/accounting/FiscalYears';
+import JournalDetail from './pages/accounting/JournalDetail';
+import JournalForm from './pages/accounting/JournalForm';
+import JournalList from './pages/accounting/JournalList';
+import TrialBalance from './pages/accounting/TrialBalance';
 import AuditLog from './pages/AuditLog';
 import Companies from './pages/Companies';
 import ComingSoon from './pages/ComingSoon';
@@ -34,7 +41,15 @@ export default function App() {
         <Route path="customers" element={<ComingSoon title="العملاء" phase={3} />} />
         <Route path="suppliers" element={<ComingSoon title="الموردون" phase={3} />} />
         <Route path="expenses" element={<ComingSoon title="المصروفات" phase={6} />} />
-        <Route path="accounting" element={<ComingSoon title="المحاسبة" phase={2} />} />
+        <Route path="accounting" element={<Accounting />}>
+          <Route index element={<Navigate to="journal" replace />} />
+          <Route path="journal" element={<JournalList />} />
+          <Route path="journal/new" element={<JournalForm />} />
+          <Route path="journal/:id" element={<JournalDetail />} />
+          <Route path="accounts" element={<ChartOfAccounts />} />
+          <Route path="fiscal" element={<FiscalYears />} />
+          <Route path="trial-balance" element={<TrialBalance />} />
+        </Route>
         <Route path="reports" element={<ComingSoon title="التقارير" phase={7} />} />
         <Route path="e-invoicing" element={<ComingSoon title="الفوترة الإلكترونية" phase={8} />} />
         <Route path="settings" element={<Settings />} />

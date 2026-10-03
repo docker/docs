@@ -18,7 +18,8 @@ export function useLoad<T>(load: () => Promise<T>, deps: unknown[] = []) {
 export function ErrorBox({ error }: { error: unknown }) {
   if (!error) return null;
   const msg = error instanceof Error ? error.message : String(error);
-  const details = error instanceof ApiError ? error.details : undefined;
+  // Only field-validation errors carry a list; other details are structured data.
+  const details = error instanceof ApiError && Array.isArray(error.details) ? error.details : undefined;
   return (
     <div className="alert alert-error" role="alert">
       {msg}

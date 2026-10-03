@@ -11,7 +11,7 @@ export const setAccessToken = (t: string | null) => { accessToken = t; };
 export const setSessionExpiredHandler = (fn: () => void) => { onSessionExpired = fn; };
 
 export class ApiError extends Error {
-  constructor(public status: number, public code: string, message: string, public details?: { path: string; message: string }[]) {
+  constructor(public status: number, public code: string, message: string, public details?: unknown) {
     super(message);
   }
 }
@@ -65,5 +65,26 @@ const MESSAGES: Record<string, string> = {
   LAST_COMPANY: 'يجب أن تبقى شركة واحدة على الأقل',
   ROLE_IN_USE: 'الدور مُسند لمستخدمين؛ أزله منهم أولًا',
   INVALID_CURRENT_PASSWORD: 'كلمة المرور الحالية غير صحيحة',
+  UNBALANCED_ENTRY: 'القيد غير متوازن: مجموع المدين لا يساوي مجموع الدائن',
+  TOO_FEW_LINES: 'القيد يحتاج سطرين على الأقل',
+  INVALID_LINE: 'كل سطر يجب أن يحتوي على مبلغ مدين أو دائن فقط',
+  INVALID_AMOUNT: 'مبلغ غير صحيح: يجب أن يكون موجبًا وبخانتين عشريتين كحد أقصى',
+  INVALID_ACCOUNT: 'الحساب غير موجود في هذه الشركة',
+  ACCOUNT_NOT_POSTABLE: 'لا يمكن الترحيل على حساب تجميعي',
+  ACCOUNT_INACTIVE: 'الحساب غير نشط',
+  NO_FISCAL_PERIOD: 'لا توجد فترة مالية تغطي هذا التاريخ. أنشئ السنة المالية أولًا.',
+  PERIOD_CLOSED: 'الفترة المالية لهذا التاريخ مقفلة',
+  ENTRY_NOT_DRAFT: 'لا يمكن تعديل قيد مرحّل؛ استخدم العكس',
+  ALREADY_REVERSED: 'تم عكس هذا القيد مسبقًا',
+  CANNOT_REVERSE_REVERSAL: 'لا يمكن عكس قيد عكسي؛ أنشئ قيدًا جديدًا',
+  SYSTEM_ENTRY: 'هذا القيد صادر عن مستند؛ صحّحه من المستند نفسه',
+  ACCOUNT_HAS_BALANCE: 'لا يمكن إيقاف حساب له رصيد',
+  SYSTEM_ACCOUNT: 'حساب نظامي يستخدمه المحرك المحاسبي ولا يمكن إيقافه أو حذفه',
+  ACCOUNT_IN_USE: 'الحساب عليه قيود؛ يمكن إيقافه بدل حذفه',
+  DRAFTS_EXIST: 'توجد مسودات قيود في هذه السنة؛ رحّلها أو احذفها أولًا',
+  EARLIER_YEAR_OPEN: 'أقفل السنوات المالية السابقة أولًا',
+  YEAR_CLOSED: 'السنة المالية مقفلة',
+  FISCAL_YEAR_OVERLAP: 'السنة المالية تتداخل مع سنة موجودة',
+  FISCAL_YEARS_EXIST: 'لا يمكن تغيير بداية السنة المالية بعد إنشاء سنوات مالية',
 };
 const translateError = (code?: string, fallback?: string) => (code && MESSAGES[code]) || fallback || 'حدث خطأ غير متوقع';

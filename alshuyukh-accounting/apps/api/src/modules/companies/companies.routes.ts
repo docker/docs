@@ -4,6 +4,7 @@ import type { Db } from '../../db/tx.js';
 import { conflict, notFound } from '../../lib/errors.js';
 import { optionalText, parse, timezone, uuidParam } from '../../lib/validation.js';
 import { requirePermission } from '../../plugins/auth.js';
+import { setupCompanyAccounting } from '../accounting/setup.js';
 import { writeAudit } from '../audit/audit.service.js';
 
 const companyFields = {
@@ -106,7 +107,8 @@ export default async function companiesRoutes(app: FastifyInstance) {
         `INSERT INTO companies (tenant_id, created_by, updated_by${cols.map((c) => `, ${c}`).join('')})
          VALUES ($1, $2, $3${values.map((_, i) => `, $${i + 4}`).join('')}) RETURNING id`,
         [a.tenantId, a.userId, a.userId, ...values]);
-      const created = await findOne(db, COMPANY_SELECT, a.tenantId, c!.id);
+      const created = await findOne<{ timezone: string }>(db, COMPANY_SELECT, a.tenantId, c!.id);
+      await setupCompanyAccounting(db, { tenantId: a.tenantId, companyId: c!.id, userId: a.userId }, created!.timezone);
       await writeAudit(db, { tenantId: a.tenantId, userId: a.userId, action: 'CREATE', entityType: 'company', entityId: c!.id, newValues: created }, req.auditMeta());
       return created;
     });
@@ -141,7 +143,8 @@ export default async function companiesRoutes(app: FastifyInstance) {
       const { rows: [count] } = await db.query<{ n: string }>(
         `SELECT count(*) AS n FROM companies WHERE tenant_id = $1 AND deleted_at IS NULL`, [a.tenantId]);
       if (Number(count!.n) <= 1) throw conflict('LAST_COMPANY', 'An organization must keep at least one company');
-      // TODO(Phase 2): refuse when the company has posted journal entries.
+      const posted = await db.query(`SELECT 1 FROM journal_entries WHERE company_id = $1 AND status <> 'DRAFT' LIMIT 1`, [id]);
+      if (posted.rowCount) throw conflict('COMPANY_HAS_LEDGER', 'A company with posted journal entries cannot be deleted. Deactivate it instead.');
       await db.query(`UPDATE companies SET deleted_at = now(), is_active = false, updated_by = $3 WHERE tenant_id = $1 AND id = $2`, [a.tenantId, id, a.userId]);
       await writeAudit(db, { tenantId: a.tenantId, userId: a.userId, action: 'DELETE', entityType: 'company', entityId: id, oldValues: before }, req.auditMeta());
     });

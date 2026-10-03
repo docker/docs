@@ -2,8 +2,12 @@
 
 نظام محاسبي سحابي متعدد المنشآت (Multi-Tenant SaaS) للسوق السعودي.
 
-**الحالة:** المرحلة 1 مكتملة (تأسيس المشروع، قاعدة البيانات، المصادقة، تعدد المنشآت، الصلاحيات).
-الوحدات المحاسبية لم تُبنَ بعد، وتظهر في الواجهة بعلامة «قريبًا» دون أي بيانات تجريبية.
+**الحالة:**
+
+- المرحلة 1 مكتملة: تأسيس المشروع، قاعدة البيانات، المصادقة، تعدد المنشآت، الصلاحيات.
+- المرحلة 2 مكتملة: دليل الحسابات، المحرك المحاسبي، القيود اليومية، السنوات والفترات المالية.
+
+بقية الوحدات تظهر في الواجهة بعلامة «قريبًا» دون أي بيانات تجريبية.
 
 ## التقنيات المستخدمة
 
@@ -33,12 +37,17 @@ alshuyukh-accounting/
 │   │   │   │   ├── migrate.ts         # مشغّل الترحيلات + مزامنة الصلاحيات
 │   │   │   │   ├── pool.ts            # اتصال UTC، NUMERIC كنص
 │   │   │   │   └── tx.ts              # withTx: معاملة + سياق المنشأة
-│   │   │   ├── lib/                   # الأخطاء، التحقق، كلمات المرور، الرموز
+│   │   │   ├── lib/                   # الأخطاء، التحقق، كلمات المرور، الرموز، المبالغ، التواريخ
 │   │   │   ├── plugins/auth.ts        # المصادقة وحارس الصلاحيات
 │   │   │   └── modules/
 │   │   │       ├── auth/              # التسجيل، الدخول، التجديد، الخروج، التبديل
 │   │   │       ├── users/             # أعضاء المنشأة
 │   │   │       ├── rbac/              # catalog.ts (مصدر الصلاحيات) + الأدوار
+│   │   │       ├── accounting/        # المحرك المحاسبي (المرحلة 2)
+│   │   │       │   ├── engine.ts      # إنشاء القيود، الترحيل، العكس، إقفال السنة
+│   │   │       │   ├── chart-template.ts # دليل الحسابات الافتراضي
+│   │   │       │   ├── setup.ts       # تجهيز الشركة: الدليل + السنة المالية
+│   │   │       │   └── *.routes.ts    # الحسابات، القيود، السنوات، ميزان المراجعة
 │   │   │       ├── companies/         # الشركات، الفروع، المستودعات
 │   │   │       ├── settings/          # إعدادات المنشأة
 │   │   │       └── audit/             # سجل التدقيق
@@ -189,6 +198,110 @@ erDiagram
 | PATCH | `/api/warehouses/:id` | `company.manage` |
 | GET | `/api/audit-logs` (فلاتر: action، entityType، entityId، userId، from، to، cursor) | `audit.view` |
 
+## المرحلة 2: المحرك المحاسبي
+
+### القواعد
+
+كل عملية مالية في النظام (يدوية الآن، ومن الفواتير والمدفوعات لاحقًا) تمر عبر `modules/accounting/engine.ts`. دوال المحرك تعمل داخل معاملة المستدعي، فالمستند وقيده يُحفظان معًا أو يُلغيان معًا.
+
+| القاعدة | التطبيق | قاعدة البيانات |
+|---|---|---|
+| مجموع المدين = مجموع الدائن، وأكبر من صفر | عند الترحيل (decimal.js) | Trigger يعيد الحساب عند `POSTED` |
+| سطران على الأقل | ✓ | ✓ |
+| كل سطر مدين **أو** دائن فقط، موجب، بخانتين عشريتين | ✓ (المبالغ نصوص، لا float) | `CHECK` + `NUMERIC(18,2)` |
+| الحساب فرعي (يقبل القيود)، نشط، ومن نفس الشركة | ✓ | Trigger + مفتاح أجنبي مركّب |
+| التاريخ داخل فترة مالية مفتوحة في سنة مفتوحة | ✓ مع قفل `FOR SHARE` | Trigger |
+| القيد المرحّل لا يُعدَّل ولا يُحذف، وكذلك سطوره | ✓ | Trigger يرفض أي تغيير إلا التحول إلى `REVERSED` |
+| لا حذف نهائي للقيود | حذف ناعم للمسودات فقط | دور التطبيق بلا صلاحية `DELETE` |
+| ترقيم متسلسل بلا فجوات لكل شركة وسنة | يُسند عند الترحيل `JV-2026-000001` | جدول تسلسل بقفل صف، وفهرس فريد |
+
+**دورة حياة القيد:** `DRAFT` ← `POSTED` ← `REVERSED`.
+
+- المسودة تُعدَّل وتُحذف (حذفًا ناعمًا).
+- القيد المرحّل يُصحَّح فقط بقيد عكسي (`REVERSAL`) بنفس الحسابات والمبالغ معكوسة، ثم بقيد تصحيح جديد. نقطة `reverse` تنشئ الاثنين في معاملة واحدة إذا أُرسل `correction`.
+- القيد الأصلي يبقى في الدفتر بحالة `REVERSED`، والقيدان معًا يصفّران الأثر.
+- لا يمكن عكس قيد عكسي، ولا عكس قيد صادر عن مستند (`source = SYSTEM`) يدويًا؛ يُصحَّح من المستند نفسه.
+
+**إقفال السنة المالية:**
+
+1. يتطلب أن تكون السنوات السابقة مقفلة، وألا توجد مسودات داخل السنة.
+2. يرحّل قيد إقفال (`YEAR_CLOSING`) بتاريخ آخر يوم في السنة، يصفّر حسابات الإيرادات والتكاليف والمصروفات، ويحوّل صافي الربح أو الخسارة إلى الأرباح المحتجزة.
+3. يقفل جميع الفترات ثم السنة. لا يمكن بعدها الترحيل في السنة ولا إعادة فتح فتراتها.
+
+**دليل الحسابات:** يُنشأ تلقائيًا لكل شركة جديدة، مع السنة المالية الحالية (12 فترة شهرية حسب شهر بداية السنة في إعدادات المنشأة).
+
+- يستخدم المحرك «مفتاح النظام» (`system_key`) مثل `ACCOUNTS_RECEIVABLE` و `VAT_OUTPUT` و `RETAINED_EARNINGS`، لا رمز الحساب، فيمكن للمستخدم إعادة ترقيم الحسابات.
+- قواعد الشجرة مفروضة في قاعدة البيانات: نوع الفرع = نوع الأصل، الأصل حساب تجميعي، لا دوائر، والمستوى يُحسب تلقائيًا.
+- لا يمكن تغيير نوع حساب له قيود أو فروع، ولا إيقاف حساب له رصيد، ولا حذف حساب عليه قيود أو حساب نظامي.
+
+### الجداول الجديدة
+
+| الجدول | الغرض |
+|---|---|
+| `fiscal_years` | السنوات المالية؛ قيد `EXCLUDE` يمنع التداخل لنفس الشركة |
+| `fiscal_periods` | الفترات الشهرية؛ لا تداخل، ولا تُعاد فتح فترة في سنة مقفلة |
+| `account_groups` | تصنيف الحسابات للقوائم المالية (أصول متداولة، مصروفات تشغيلية…) |
+| `accounts` | دليل الحسابات الشجري |
+| `cost_centers` | مراكز التكلفة |
+| `journal_entries` | رؤوس القيود |
+| `journal_entry_lines` | سطور القيود |
+| `journal_sequences` | عداد الترقيم لكل سنة مالية |
+
+```mermaid
+erDiagram
+    companies ||--o{ fiscal_years : has
+    fiscal_years ||--o{ fiscal_periods : "split into"
+    fiscal_years ||--|| journal_sequences : numbers
+    companies ||--o{ account_groups : has
+    companies ||--o{ accounts : has
+    accounts ||--o{ accounts : "parent_id"
+    account_groups ||--o{ accounts : classifies
+    companies ||--o{ cost_centers : has
+    companies ||--o{ journal_entries : has
+    fiscal_periods ||--o{ journal_entries : "posted in"
+    journal_entries ||--o{ journal_entry_lines : has
+    accounts ||--o{ journal_entry_lines : "(account_id, company_id)"
+    cost_centers ||--o{ journal_entry_lines : tags
+    branches ||--o{ journal_entry_lines : tags
+    journal_entries ||--o| journal_entries : "reversal_of_id / correction_of_id"
+
+    accounts { uuid id PK; uuid company_id; text code; text account_type; uuid parent_id; smallint level; bool is_postable; text system_key }
+    journal_entries { uuid id PK; uuid company_id; text entry_number; date entry_date; text status; text source; numeric total_debit; numeric total_credit; uuid reversal_of_id }
+    journal_entry_lines { uuid id PK; uuid journal_entry_id; smallint line_no; uuid account_id; numeric debit; numeric credit; uuid cost_center_id; uuid branch_id }
+    fiscal_years { uuid id PK; uuid company_id; date start_date; date end_date; text status; uuid closing_entry_id }
+    fiscal_periods { uuid id PK; uuid fiscal_year_id; smallint period_number; date start_date; date end_date; text status }
+```
+
+كل الجداول الجديدة عليها `tenant_id` و RLS، وكل المراجع بينها مفاتيح أجنبية مركّبة مع `company_id`، فلا يمكن لسطر قيد أن يشير إلى حساب أو مركز تكلفة أو فرع من شركة أخرى.
+
+**الفهارس الرئيسية:**
+
+- `journal_entries`: `(company_id, fiscal_year_id, entry_number)` فريد؛ `(tenant_id, company_id, entry_date)`؛ `(company_id, status)`؛ `(company_id, reference_type, reference_id)`؛ قيد عكسي واحد فقط لكل قيد.
+- `journal_entry_lines`: `account_id`؛ `(tenant_id, company_id, account_id)`؛ `(journal_entry_id, line_no)` فريد.
+- `accounts`: `(company_id, code)` و `(company_id, system_key)` فريدان لغير المحذوفة؛ `parent_id`.
+- `fiscal_periods`: `(company_id, start_date, end_date)`.
+
+### واجهات API (المرحلة 2)
+
+`companyId` اختياري عندما تملك المنشأة شركة واحدة. المبالغ تُرسل وتُستقبل نصوصًا (`"1150.00"`).
+
+| الطريقة | المسار | الصلاحية |
+|---|---|---|
+| POST | `/api/accounting/setup` (للشركات القديمة؛ آمن للتكرار) | `account.manage` + `fiscal.manage` |
+| GET | `/api/accounts`، `/api/accounts/:id` (مع الرصيد)، `/api/account-groups` | `account.view` |
+| POST / PATCH / DELETE | `/api/accounts`، `/api/accounts/:id` | `account.manage` |
+| GET / POST / PATCH | `/api/cost-centers`، `/api/cost-centers/:id` | `account.view` / `account.manage` |
+| GET / POST | `/api/fiscal-years` | `account.view` / `fiscal.manage` |
+| POST | `/api/fiscal-years/:id/close` | `fiscal.manage` |
+| POST | `/api/fiscal-periods/:id/close`، `/api/fiscal-periods/:id/reopen` | `fiscal.manage` |
+| GET | `/api/journal-entries` (فلاتر: status، dateFrom، dateTo، accountId، referenceType، search) | `journal.view` |
+| GET | `/api/journal-entries/:id` | `journal.view` |
+| POST | `/api/journal-entries` (مع `post: true` يتطلب `journal.post`) | `journal.create` |
+| PATCH / DELETE | `/api/journal-entries/:id` (المسودات فقط) | `journal.create` |
+| POST | `/api/journal-entries/:id/post` | `journal.post` |
+| POST | `/api/journal-entries/:id/reverse` (`reason`، `date`، `correction`) | `journal.reverse` |
+| GET | `/api/reports/trial-balance?dateFrom&dateTo` (رصيد افتتاحي، حركة، ختامي) | `report.view` |
+
 ## تدفق المصادقة
 
 1. **التسجيل** ينشئ في معاملة واحدة: المستخدم، المنشأة، إعداداتها (SAR، Asia/Riyadh)، الشركة الافتراضية، الفرع الرئيسي، المستودع الرئيسي، العضوية بدور `TENANT_OWNER`، وسجل تدقيق.
@@ -228,7 +341,7 @@ argon2id لكلمات المرور · JWT قصير العمر مع جلسات ق
 
 ## الاختبارات
 
-54 اختبار تكامل على PostgreSQL حقيقي باستخدام دور التطبيق المقيد، فتُختبر سياسات RLS فعليًا:
+94 اختبار تكامل على PostgreSQL حقيقي باستخدام دور التطبيق المقيد، فتُختبر سياسات RLS فعليًا:
 
 | الملف | ما يغطيه |
 |---|---|
@@ -236,13 +349,17 @@ argon2id لكلمات المرور · JWT قصير العمر مع جلسات ق
 | `tenant-isolation.test.ts` | محاولات منشأة B الوصول لبيانات A عبر المعرفات (قراءة، تعديل، حذف، فروع، مستخدمون، سجل التدقيق، تبديل، أدوار)؛ ثم مباشرة على قاعدة البيانات: الدور لا يتجاوز RLS، الاستعلام بلا فلتر، بلا سياق، الإدخال في منشأة أخرى، المفتاح المركّب، التعديل عبر المنشآت، أدوار النظام، منع الحذف |
 | `rbac.test.ts` | سلامة الكتالوج، المحاسب والمشاهد، سريان تغيير الأدوار فورًا، التعطيل الفوري، منع التصعيد، حماية المالك، أدوار النظام، الأدوار المخصصة |
 | `audit.test.ts` | تسجيل العمليات، القيم قبل/بعد، عدم تخزين الأسرار، منع التعديل والحذف، الترقيم |
+| `journal-entries.test.ts` | مثال الفاتورة 1000 + ضريبة 150؛ الترحيل والترقيم المتسلسل؛ رفض القيد غير المتوازن مع التفاصيل؛ التراجع الكامل عند الفشل؛ دقة الكسور (0.10 + 0.20)؛ التحقق من كل سطر؛ الحسابات التجميعية وغير النشطة والأجنبية؛ غياب الفترة؛ ترقيم بلا فجوات تحت التزامن؛ تعديل وحذف المسودات؛ رفض تعديل القيد المرحّل عبر API وعبر SQL مباشر؛ فرض التوازن في قاعدة البيانات؛ العكس والتصحيح؛ الفترات المقفلة؛ الصلاحيات؛ العزل؛ سجل التدقيق؛ ميزان المراجعة |
+| `chart-of-accounts.test.ts` | الدليل الافتراضي ومفاتيح النظام؛ السنة المالية التلقائية؛ تجهيز الشركات اللاحقة؛ الحسابات الفرعية وتحويل الحساب إلى تجميعي؛ منع الدوائر والتكرار وعدم تطابق النوع؛ حماية الحسابات النظامية وذات الرصيد؛ الإيقاف والحذف الناعم؛ مراكز التكلفة؛ العزل |
+| `fiscal-years.test.ts` | إنشاء السنوات ومنع التداخل؛ السنة القصيرة؛ قفل شهر البداية؛ إقفال السنة بربح وبخسارة وبلا حركة؛ منع الترحيل وإعادة الفتح بعد الإقفال؛ اشتراط إقفال السنوات السابقة |
 | `companies.test.ts` | القيم السعودية الافتراضية، التحقق، التكرار، الحذف الناعم، ربط المستودع بفرع شركة أخرى، تجاهل `tenant_id` في جسم الطلب، العضوية في منشأتين والتبديل |
 
 ## ملاحظات وقرارات تصميم
 
 - **المنشأة مقابل الشركة:** المنشأة (tenant) هي حدود العزل والاشتراك. يمكن أن تملك المنشأة أكثر من شركة. السجلات المالية في المراحل القادمة ستحمل `tenant_id` و`company_id` معًا.
 - **جدول `users` بلا RLS:** الهوية عامة لأن الدخول يحتاج البحث بالبريد قبل معرفة المنشأة. لا يحتوي على بيانات تجارية، والوصول إليه يمر دائمًا عبر `user_tenants`. يمكن لاحقًا نقل البحث إلى دالة `SECURITY DEFINER` وتفعيل RLS عليه.
-- **المبالغ المالية:** `pg` مضبوط ليعيد `NUMERIC` كنص، حتى لا يتحول أي مبلغ إلى float. المرحلة 2 ستستخدم `NUMERIC(19,4)` ومكتبة Decimal.
+- **المبالغ المالية:** مخزنة `NUMERIC(18,2)` (حتى الهللة). `pg` مضبوط ليعيد `NUMERIC` كنص، والحسابات في الخادم بـ decimal.js، والـ API يقبل المبالغ نصوصًا فقط. الواجهة تعرض المجاميع أثناء الكتابة بالهللات (أعداد صحيحة) للعرض فقط، والخادم هو المرجع.
+- **القيود العكسية:** الأصل يبقى بحالة `REVERSED` ويُحسب في الأرصدة مع قيده العكسي، فيبقى الدفتر كاملًا والأثر صفرًا.
 - **الوقت:** كل الاتصالات بتوقيت UTC، والعرض بتوقيت المنشأة (افتراضيًا Asia/Riyadh).
 
 ## المتبقي (TODO)
@@ -252,6 +369,11 @@ argon2id لكلمات المرور · JWT قصير العمر مع جلسات ق
 - لوحة `/admin` لمدير المنصة — المرحلة 9.
 - رفع شعار الشركة (حاليًا رابط https فقط).
 - نقل ملكية المنشأة.
-- منع حذف شركة لها قيود مرحّلة، ومنع تغيير بداية السنة المالية بعد إنشاء سنة — المرحلة 2.
 - Rate limiting يعتمد على ذاكرة العملية؛ في الإنتاج بأكثر من نسخة يلزم Redis.
 - لم تُطبَّق المصادقة الثنائية (2FA).
+- **المرحلة 2:**
+  - تعدد العملات وأسعار الصرف: القيود حاليًا بعملة الشركة فقط.
+  - إعادة فتح سنة مالية مقفلة (عكس قيد الإقفال) غير مدعومة.
+  - استيراد الأرصدة الافتتاحية من ملف: حاليًا تُدخل بقيد يدوي.
+  - سير موافقات للقيود (من يُنشئ لا يُرحّل) غير مطبق؛ الفصل الحالي عبر صلاحيتي `journal.create` و `journal.post` فقط.
+  - دفتر الأستاذ وبقية التقارير في المرحلة 7. التقارير يجب أن تستثني قيد `YEAR_CLOSING` من قائمة الدخل.

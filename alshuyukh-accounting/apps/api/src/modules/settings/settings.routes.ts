@@ -1,5 +1,6 @@
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
+import { conflict } from '../../lib/errors.js';
 import { parse, timezone } from '../../lib/validation.js';
 import { requireAuth, requirePermission } from '../../plugins/auth.js';
 import { writeAudit } from '../audit/audit.service.js';
@@ -27,7 +28,10 @@ export default async function settingsRoutes(app: FastifyInstance) {
     return req.tenantTx(async (db) => {
       const before = (await db.query(SELECT, [a.tenantId])).rows[0];
       if (body.tenantName) await db.query(`UPDATE tenants SET name = $2 WHERE id = $1`, [a.tenantId, body.tenantName]);
-      // TODO(Phase 2): block fiscalYearStartMonth changes once a fiscal year exists.
+      if (body.fiscalYearStartMonth !== undefined && body.fiscalYearStartMonth !== before.fiscalYearStartMonth) {
+        const years = await db.query(`SELECT 1 FROM fiscal_years WHERE tenant_id = $1 LIMIT 1`, [a.tenantId]);
+        if (years.rowCount) throw conflict('FISCAL_YEARS_EXIST', 'The fiscal year start month cannot change after fiscal years have been created');
+      }
       await db.query(
         `UPDATE tenant_settings SET
            default_currency = COALESCE($2, default_currency), timezone = COALESCE($3, timezone),
