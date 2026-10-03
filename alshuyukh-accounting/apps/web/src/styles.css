@@ -218,3 +218,23 @@ button.tab { font: inherit; background: none; border: none; border-bottom: 2px s
 @media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .grid-3 { grid-template-columns: 1fr; } }
 .party-select { margin-top: 4px; }
+
+/* Commercial documents ----------------------------------------------------------- */
+.doc-lines td:nth-child(1) { min-width: 240px; }
+.doc-lines td:nth-child(2), .doc-lines td:nth-child(4) { width: 90px; }
+.doc-lines td:nth-child(3) { width: 120px; }
+.sub-row { margin-top: 4px; display: flex; gap: 4px; width: 100%; }
+.sub-row select { flex: 1; }
+.doc-footer { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; margin-top: 16px; }
+.totals { margin: 0; min-width: 300px; border: 1px solid var(--border); border-radius: 8px; padding: 6px 14px; }
+.totals div { display: flex; justify-content: space-between; gap: 24px; padding: 4px 0; }
+.totals dt { color: var(--muted); }
+.totals dd { margin: 0; font-variant-numeric: tabular-nums; }
+.totals .strong { border-top: 1px solid var(--border); font-weight: 700; font-size: 1.05rem; }
+.totals .strong dt { color: var(--text); }
+.reverse-box.neutral { border-color: var(--primary); background: #f6fbfa; }
+.related { margin-top: 18px; }
+.related h3 { margin-bottom: 4px; }
+.status-open { background: #e8f0fe; color: #1d4ed8; border-color: transparent; }
+.status-partial { background: var(--warn-bg); color: var(--warn-ink); border-color: transparent; }
+.doc-lines { min-width: 760px; }

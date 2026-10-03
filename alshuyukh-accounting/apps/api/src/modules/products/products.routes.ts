@@ -296,7 +296,10 @@ export default async function productsRoutes(app: FastifyInstance) {
     await req.tenantTx(async (db) => {
       const before = await loadProduct(db, a.tenantId, id);
       if (!before) throw notFound('Product');
-      // TODO(Phase 4/5): refuse when invoices or stock movements reference the product.
+      const itemTables = ['sales_quote_items', 'sales_invoice_items', 'sales_return_items', 'purchase_order_items', 'purchase_invoice_items', 'purchase_return_items'];
+      // TODO(Phase 5): also refuse when stock movements reference the product.
+      const used = await db.query(`${itemTables.map((t) => `SELECT 1 FROM ${t} WHERE product_id = $1`).join(' UNION ALL ')} LIMIT 1`, [id]);
+      if (used.rowCount) throw conflict('PRODUCT_IN_USE', 'This product is used in documents. Deactivate it instead.');
       await db.query(`UPDATE products SET deleted_at = now(), is_active = false, updated_by = $2 WHERE id = $1`, [id, a.userId]);
       await writeAudit(db, { tenantId: a.tenantId, userId: a.userId, action: 'DELETE', entityType: 'product', entityId: id, oldValues: before }, req.auditMeta());
     });

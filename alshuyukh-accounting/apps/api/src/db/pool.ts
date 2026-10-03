@@ -14,3 +14,6 @@ export function createPool(connectionString: string): pg.Pool {
 pg.types.setTypeParser(pg.types.builtins.NUMERIC, (v) => v);
 // Return bigint (e.g. COUNT(*)) as string; callers convert explicitly.
 pg.types.setTypeParser(pg.types.builtins.INT8, (v) => v);
+// Return DATE as 'YYYY-MM-DD' text. The default converts it to a JS Date in
+// the server's local time zone, which can shift a calendar date by a day.
+pg.types.setTypeParser(pg.types.builtins.DATE, (v) => v);

@@ -55,8 +55,10 @@ export const PERMISSIONS: readonly PermissionDef[] = [
   { code: 'purchase.view', module: 'purchases', ar: 'عرض المشتريات', en: 'View purchases' },
   { code: 'purchase.create', module: 'purchases', ar: 'إنشاء المشتريات', en: 'Create purchases' },
   { code: 'purchase.post', module: 'purchases', ar: 'اعتماد المشتريات', en: 'Post purchases' },
+  { code: 'purchase.cancel', module: 'purchases', ar: 'إلغاء المشتريات', en: 'Cancel purchases' },
   { code: 'payment.view', module: 'payments', ar: 'عرض المدفوعات', en: 'View payments' },
   { code: 'payment.create', module: 'payments', ar: 'تسجيل المدفوعات', en: 'Record payments' },
+  { code: 'payment.void', module: 'payments', ar: 'إلغاء المدفوعات', en: 'Void payments' },
 
   // Phase 5–6 — inventory, expenses, tax
   { code: 'inventory.view', module: 'inventory', ar: 'عرض المخزون', en: 'View inventory' },
@@ -105,8 +107,8 @@ export const SYSTEM_ROLES: readonly SystemRoleDef[] = [
       'journal.post', 'journal.reverse', 'fiscal.manage', 'customer.view', 'customer.manage',
       'supplier.view', 'supplier.manage',
       'product.view', 'invoice.view', 'invoice.create', 'invoice.edit', 'invoice.post',
-      'invoice.cancel', 'purchase.view', 'purchase.create', 'purchase.post', 'payment.view',
-      'payment.create', 'inventory.view', 'expense.view', 'expense.create', 'expense.post',
+      'invoice.cancel', 'purchase.view', 'purchase.create', 'purchase.post', 'purchase.cancel', 'payment.view',
+      'payment.create', 'payment.void', 'inventory.view', 'expense.view', 'expense.create', 'expense.post',
       'tax.manage', 'report.view', 'zatca.view',
     ],
   },
@@ -132,7 +134,7 @@ export const SYSTEM_ROLES: readonly SystemRoleDef[] = [
     en: 'Purchase manager',
     permissions: [
       'company.view', 'supplier.view', 'supplier.manage', 'product.view', 'purchase.view',
-      'purchase.create', 'purchase.post', 'payment.view', 'inventory.view', 'report.view',
+      'purchase.create', 'purchase.post', 'purchase.cancel', 'payment.view', 'inventory.view', 'report.view',
     ],
   },
   {

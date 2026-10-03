@@ -4,8 +4,8 @@ import { useAuth } from './auth';
 
 const NAV: { to: string; label: string; icon: string; phase?: number }[] = [
   { to: '/', label: 'الرئيسية', icon: '⌂' },
-  { to: '/sales', label: 'المبيعات', icon: '↗', phase: 4 },
-  { to: '/purchases', label: 'المشتريات', icon: '↙', phase: 4 },
+  { to: '/sales', label: 'المبيعات', icon: '↗' },
+  { to: '/purchases', label: 'المشتريات', icon: '↙' },
   { to: '/inventory', label: 'المخزون', icon: '▦' },
   { to: '/customers', label: 'العملاء', icon: '☺' },
   { to: '/suppliers', label: 'الموردون', icon: '⚑' },

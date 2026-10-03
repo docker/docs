@@ -255,8 +255,11 @@ export function partyRoutes(kind: PartyKind) {
       await req.tenantTx(async (db) => {
         const before = await load(db, a.tenantId, id);
         if (!before) throw notFound(kind.label);
-        const used = await db.query(`SELECT 1 FROM journal_entry_lines WHERE ${kind.fk} = $1 LIMIT 1`, [id]);
-        // TODO(Phase 4): also refuse when invoices or payments reference the party.
+        const docTables = kind.table === 'customers' ? ['sales_quotes', 'sales_invoices', 'sales_returns'] : ['purchase_orders', 'purchase_invoices', 'purchase_returns'];
+        const used = await db.query(
+          `SELECT 1 FROM journal_entry_lines WHERE ${kind.fk} = $1
+           UNION ALL SELECT 1 FROM payments WHERE ${kind.fk} = $1
+           ${docTables.map((t) => `UNION ALL SELECT 1 FROM ${t} WHERE ${kind.fk} = $1`).join(' ')} LIMIT 1`, [id]);
         if (used.rowCount) throw conflict('PARTY_IN_USE', `This ${kind.entity} has accounting transactions. Deactivate it instead.`);
         await db.query(`UPDATE ${kind.table} SET deleted_at = now(), is_active = false, updated_by = $2 WHERE id = $1`, [id, a.userId]);
         await writeAudit(db, { tenantId: a.tenantId, userId: a.userId, action: 'DELETE', entityType: kind.entity, entityId: id, oldValues: before }, req.auditMeta());

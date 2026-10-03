@@ -101,6 +101,30 @@ export async function seedDefaultUnits(db: Db, ref: CompanyRef): Promise<void> {
   }
 }
 
+/** Standard VAT rate (configurable later in tax settings) and default payment methods. */
+export async function seedTaxAndPayments(db: Db, ref: CompanyRef): Promise<void> {
+  const hasRate = await db.query(`SELECT 1 FROM tax_rates WHERE company_id = $1 LIMIT 1`, [ref.companyId]);
+  if (!hasRate.rowCount) {
+    await db.query(
+      `INSERT INTO tax_rates (tenant_id, company_id, name_ar, rate, effective_from, created_by)
+       VALUES ($1, $2, 'ضريبة القيمة المضافة - النسبة الأساسية', 0.15, DATE '2020-07-01', $3)`,
+      [ref.tenantId, ref.companyId, ref.userId]);
+  }
+  const methods: [string, string, string, string, number][] = [
+    ['CASH', 'نقدًا', 'CASH', 'CASH', 1], ['BANK', 'تحويل بنكي', 'BANK', 'BANK', 2],
+    ['CARD', 'بطاقة مدى / ائتمان', 'CARD', 'BANK', 3], ['STC_PAY', 'STC Pay', 'STC_PAY', 'BANK', 4],
+    ['TAMARA', 'تمارا', 'TAMARA', 'BANK', 5],
+  ];
+  for (const [code, name, type, accountKey, sort] of methods) {
+    await db.query(
+      `INSERT INTO payment_methods (tenant_id, company_id, code, name_ar, method_type, account_id, sort_order)
+       SELECT $1, $2, $3, $4, $5, a.id, $7 FROM accounts a
+        WHERE a.company_id = $2 AND a.system_key = $6 AND a.deleted_at IS NULL
+       ON CONFLICT (company_id, code) DO NOTHING`,
+      [ref.tenantId, ref.companyId, code, name, type, accountKey, sort]);
+  }
+}
+
 /**
  * Prepares a new company for accounting: default chart and the current
  * fiscal year. Safe to call again; existing setup is left as is.
@@ -108,6 +132,7 @@ export async function seedDefaultUnits(db: Db, ref: CompanyRef): Promise<void> {
 export async function setupCompanyAccounting(db: Db, ref: CompanyRef, timezone = 'Asia/Riyadh') {
   const chartCreated = await seedDefaultChart(db, ref);
   await seedDefaultUnits(db, ref);
+  await seedTaxAndPayments(db, ref);
   let fiscalYearId: string | null = null;
   const hasYear = await db.query(`SELECT 1 FROM fiscal_years WHERE company_id = $1 LIMIT 1`, [ref.companyId]);
   if (!hasYear.rowCount) {

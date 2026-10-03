@@ -11,6 +11,7 @@ import TrialBalance from './pages/accounting/TrialBalance';
 import AuditLog from './pages/AuditLog';
 import Parties, { CUSTOMERS, SUPPLIERS } from './pages/parties/Parties';
 import Products from './pages/products/Products';
+import Section from './pages/documents/Section';
 import Companies from './pages/Companies';
 import ComingSoon from './pages/ComingSoon';
 import Home from './pages/Home';
@@ -37,8 +38,8 @@ export default function App() {
     <Routes>
       <Route element={<Shell />}>
         <Route index element={<Home />} />
-        <Route path="sales" element={<ComingSoon title="المبيعات" phase={4} />} />
-        <Route path="purchases" element={<ComingSoon title="المشتريات" phase={4} />} />
+        <Route path="sales/*" element={<Section key="sales" party="customer" />} />
+        <Route path="purchases/*" element={<Section key="purchases" party="supplier" />} />
         <Route path="inventory" element={<Products />} />
         <Route path="customers" element={<Parties key="customers" config={CUSTOMERS} />} />
         <Route path="suppliers" element={<Parties key="suppliers" config={SUPPLIERS} />} />

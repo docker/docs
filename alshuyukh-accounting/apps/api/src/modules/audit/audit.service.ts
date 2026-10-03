@@ -5,7 +5,7 @@ export type AuditAction =
   | 'TENANT_SWITCH' | 'PASSWORD_CHANGE'
   | 'CREATE' | 'UPDATE' | 'DELETE'
   | 'SETTINGS_CHANGE' | 'PERMISSION_CHANGE'
-  | 'POST' | 'REVERSE' | 'CLOSE' | 'REOPEN';
+  | 'POST' | 'REVERSE' | 'CLOSE' | 'REOPEN' | 'CANCEL' | 'PAYMENT' | 'VOID';
 
 export interface AuditMeta {
   ip?: string | null;

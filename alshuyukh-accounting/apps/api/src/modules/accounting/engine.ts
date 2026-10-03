@@ -342,12 +342,12 @@ export async function closeFiscalYear(db: Db, ctx: EngineContext, yearId: string
   if (balances.length) {
     const lines: LineInput[] = balances.map((b) => {
       const net = new Decimal(b.net);
-      return net.isPositive() ? { accountId: b.account_id, credit: toMoney(net) } : { accountId: b.account_id, debit: toMoney(net.abs()) };
+      return net.greaterThan(0) ? { accountId: b.account_id, credit: toMoney(net) } : { accountId: b.account_id, debit: toMoney(net.abs()) };
     });
     // Positive total = expenses exceed revenue (a loss) → debit retained earnings.
     const result = sum(balances.map((b) => b.net));
     if (!result.isZero()) {
-      lines.push(result.isPositive() ? { accountId: re.id, debit: toMoney(result) } : { accountId: re.id, credit: toMoney(result.abs()) });
+      lines.push(result.greaterThan(0) ? { accountId: re.id, debit: toMoney(result) } : { accountId: re.id, credit: toMoney(result.abs()) });
     }
     const closing = await postEntry(db, ctx, {
       companyId: year.company_id, entryDate: year.end_date, description: 'قيد إقفال السنة المالية',

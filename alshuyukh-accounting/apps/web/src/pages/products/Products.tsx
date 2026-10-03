@@ -66,7 +66,7 @@ function ProductList() {
   return (
     <>
       <ErrorBox error={error ?? products.error} />
-      {editing && (
+      {editing && units.data && categories.data && (
         <form key={current?.id ?? 'new'} className="card form" onSubmit={save}>
           <h2>{current ? `تعديل: ${current.nameAr}` : 'منتج أو خدمة جديدة'}</h2>
           <div className="grid-3">
