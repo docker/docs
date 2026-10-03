@@ -10,7 +10,7 @@ export interface Entry {
   id: string; entryNumber: string | null; entryDate: string; description: string; referenceType: string; referenceId: string | null;
   source: string; status: string; currency: string; totalDebit: string; totalCredit: string;
   reversalOfId: string | null; reversedByEntryId: string | null; correctionOfId: string | null; postedAt: string | null; createdAt: string;
-  lines: { id: string; lineNo: number; accountId: string; accountCode: string; accountName: string; debit: string; credit: string; description: string | null }[];
+  lines: { id: string; lineNo: number; accountId: string; accountCode: string; accountName: string; debit: string; credit: string; description: string | null; customerId: string | null; supplierId: string | null }[];
 }
 
 export default function JournalDetail() {

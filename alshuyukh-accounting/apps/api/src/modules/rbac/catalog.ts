@@ -102,7 +102,8 @@ export const SYSTEM_ROLES: readonly SystemRoleDef[] = [
     en: 'Accountant',
     permissions: [
       'company.view', 'account.view', 'account.manage', 'journal.view', 'journal.create',
-      'journal.post', 'journal.reverse', 'fiscal.manage', 'customer.view', 'supplier.view',
+      'journal.post', 'journal.reverse', 'fiscal.manage', 'customer.view', 'customer.manage',
+      'supplier.view', 'supplier.manage',
       'product.view', 'invoice.view', 'invoice.create', 'invoice.edit', 'invoice.post',
       'invoice.cancel', 'purchase.view', 'purchase.create', 'purchase.post', 'payment.view',
       'payment.create', 'inventory.view', 'expense.view', 'expense.create', 'expense.post',

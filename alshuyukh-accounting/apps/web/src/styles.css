@@ -207,3 +207,14 @@ input[aria-invalid="true"] { border-color: var(--danger); }
 .reverse-box p { margin-top: 0; }
 .tb-table th { text-align: center; }
 .tb-table th:nth-child(1), .tb-table th:nth-child(2) { text-align: start; }
+
+/* Parties & products ------------------------------------------------------------ */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 16px; }
+h3 { font-size: 0.95rem; margin: 6px 0 10px; color: var(--muted); }
+.grow { flex: 1 1 240px; }
+.link-btn { all: unset; cursor: pointer; color: var(--primary); }
+.link-btn:hover { text-decoration: underline; }
+button.tab { font: inherit; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; }
+@media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .grid-3 { grid-template-columns: 1fr; } }
+.party-select { margin-top: 4px; }

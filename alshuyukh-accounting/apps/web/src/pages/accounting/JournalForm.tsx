@@ -7,17 +7,27 @@ import { ErrorBox, useLoad } from '../../ui';
 import type { Account } from './ChartOfAccounts';
 import type { Entry } from './JournalDetail';
 
-interface Line { accountId: string; debit: string; credit: string; description: string }
+interface Line { accountId: string; debit: string; credit: string; description: string; partyId: string }
 
-const emptyLine = (): Line => ({ accountId: '', debit: '', credit: '', description: '' });
+const emptyLine = (): Line => ({ accountId: '', debit: '', credit: '', description: '', partyId: '' });
+
+interface PartyOption { id: string; code: string; nameAr: string }
 
 export default function JournalForm({ entry, onSaved }: { entry?: Entry; onSaved?: () => void }) {
   const { can } = useAuth();
   const navigate = useNavigate();
   const accounts = useLoad(() => api<{ data: Account[] }>('GET', '/api/accounts?postableOnly=true'));
+  // Receivable / payable lines can be tagged with a customer or supplier (sub-ledger).
+  const customers = useLoad(() => (can('customer.view') ? api<{ data: PartyOption[] }>('GET', '/api/customers?limit=200') : Promise.resolve({ data: [] })));
+  const suppliers = useLoad(() => (can('supplier.view') ? api<{ data: PartyOption[] }>('GET', '/api/suppliers?limit=200') : Promise.resolve({ data: [] })));
+  const partyKind = (accountId: string) => {
+    const key = accounts.data?.data.find((a) => a.id === accountId)?.systemKey;
+    return key === 'ACCOUNTS_RECEIVABLE' ? 'customer' : key === 'ACCOUNTS_PAYABLE' ? 'supplier' : null;
+  };
   const [lines, setLines] = useState<Line[]>(() =>
     entry ? entry.lines.map((l) => ({
       accountId: l.accountId, debit: l.debit === '0.00' ? '' : l.debit, credit: l.credit === '0.00' ? '' : l.credit, description: l.description ?? '',
+      partyId: l.customerId ?? l.supplierId ?? '',
     })) : [emptyLine(), emptyLine()]);
   const [error, setError] = useState<unknown>(null);
   const [busy, setBusy] = useState(false);
@@ -38,6 +48,8 @@ export default function JournalForm({ entry, onSaved }: { entry?: Entry; onSaved
         ...(l.debit.trim() ? { debit: l.debit.trim() } : {}),
         ...(l.credit.trim() ? { credit: l.credit.trim() } : {}),
         description: l.description || null,
+        ...(l.partyId && partyKind(l.accountId) === 'customer' ? { customerId: l.partyId } : {}),
+        ...(l.partyId && partyKind(l.accountId) === 'supplier' ? { supplierId: l.partyId } : {}),
       })),
     };
     setBusy(true);
@@ -76,10 +88,18 @@ export default function JournalForm({ entry, onSaved }: { entry?: Entry; onSaved
             {lines.map((l, i) => (
               <tr key={i}>
                 <td>
-                  <select value={l.accountId} onChange={(e) => update(i, { accountId: e.target.value })} aria-label={`حساب السطر ${i + 1}`}>
+                  <select value={l.accountId} onChange={(e) => update(i, { accountId: e.target.value, partyId: '' })} aria-label={`حساب السطر ${i + 1}`}>
                     <option value="">— اختر الحساب —</option>
                     {accounts.data?.data.map((a) => <option key={a.id} value={a.id}>{a.code} — {a.nameAr}</option>)}
                   </select>
+                  {partyKind(l.accountId) && (
+                    <select className="party-select" value={l.partyId} onChange={(e) => update(i, { partyId: e.target.value })}
+                      aria-label={`${partyKind(l.accountId) === 'customer' ? 'العميل' : 'المورد'} في السطر ${i + 1}`}>
+                      <option value="">— {partyKind(l.accountId) === 'customer' ? 'العميل' : 'المورد'} (اختياري) —</option>
+                      {(partyKind(l.accountId) === 'customer' ? customers : suppliers).data?.data.map((p) =>
+                        <option key={p.id} value={p.id}>{p.code} — {p.nameAr}</option>)}
+                    </select>
+                  )}
                 </td>
                 <td><input inputMode="decimal" dir="ltr" value={l.debit} aria-label={`مدين السطر ${i + 1}`}
                   aria-invalid={toHalalas(l.debit) === null} onChange={(e) => update(i, { debit: e.target.value, credit: e.target.value ? '' : l.credit })} /></td>

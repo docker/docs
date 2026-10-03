@@ -15,6 +15,8 @@ const line = z.object({
   description: z.string().trim().max(500).nullish(),
   costCenterId: z.uuid().nullish(),
   branchId: z.uuid().nullish(),
+  customerId: z.uuid().nullish(),
+  supplierId: z.uuid().nullish(),
 });
 const lines = z.array(line).min(2).max(1000);
 

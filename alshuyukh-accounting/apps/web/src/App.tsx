@@ -9,6 +9,8 @@ import JournalForm from './pages/accounting/JournalForm';
 import JournalList from './pages/accounting/JournalList';
 import TrialBalance from './pages/accounting/TrialBalance';
 import AuditLog from './pages/AuditLog';
+import Parties, { CUSTOMERS, SUPPLIERS } from './pages/parties/Parties';
+import Products from './pages/products/Products';
 import Companies from './pages/Companies';
 import ComingSoon from './pages/ComingSoon';
 import Home from './pages/Home';
@@ -37,9 +39,9 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="sales" element={<ComingSoon title="المبيعات" phase={4} />} />
         <Route path="purchases" element={<ComingSoon title="المشتريات" phase={4} />} />
-        <Route path="inventory" element={<ComingSoon title="المخزون" phase={5} />} />
-        <Route path="customers" element={<ComingSoon title="العملاء" phase={3} />} />
-        <Route path="suppliers" element={<ComingSoon title="الموردون" phase={3} />} />
+        <Route path="inventory" element={<Products />} />
+        <Route path="customers" element={<Parties key="customers" config={CUSTOMERS} />} />
+        <Route path="suppliers" element={<Parties key="suppliers" config={SUPPLIERS} />} />
         <Route path="expenses" element={<ComingSoon title="المصروفات" phase={6} />} />
         <Route path="accounting" element={<Accounting />}>
           <Route index element={<Navigate to="journal" replace />} />

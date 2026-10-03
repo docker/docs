@@ -85,12 +85,29 @@ export function currentFiscalYearStart(today: string, startMonth: number): strin
   return `${startYear}-${String(startMonth).padStart(2, '0')}-01`;
 }
 
+// UN/ECE Recommendation 20 codes, used later in ZATCA XML.
+const DEFAULT_UNITS: readonly [string, string, string][] = [
+  ['PCE', 'حبة', 'Piece'], ['BX', 'كرتون', 'Box'], ['KGM', 'كيلوجرام', 'Kilogram'], ['LTR', 'لتر', 'Litre'],
+  ['MTR', 'متر', 'Metre'], ['SET', 'طقم', 'Set'], ['HUR', 'ساعة', 'Hour'], ['DAY', 'يوم', 'Day'],
+];
+
+/** Creates the default units of measure. Existing units are kept. */
+export async function seedDefaultUnits(db: Db, ref: CompanyRef): Promise<void> {
+  for (const [code, ar, en] of DEFAULT_UNITS) {
+    await db.query(
+      `INSERT INTO units (tenant_id, company_id, code, name_ar, name_en) VALUES ($1, $2, $3, $4, $5)
+       ON CONFLICT (company_id, code) DO NOTHING`,
+      [ref.tenantId, ref.companyId, code, ar, en]);
+  }
+}
+
 /**
  * Prepares a new company for accounting: default chart and the current
  * fiscal year. Safe to call again; existing setup is left as is.
  */
 export async function setupCompanyAccounting(db: Db, ref: CompanyRef, timezone = 'Asia/Riyadh') {
   const chartCreated = await seedDefaultChart(db, ref);
+  await seedDefaultUnits(db, ref);
   let fiscalYearId: string | null = null;
   const hasYear = await db.query(`SELECT 1 FROM fiscal_years WHERE company_id = $1 LIMIT 1`, [ref.companyId]);
   if (!hasYear.rowCount) {
