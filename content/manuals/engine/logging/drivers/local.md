@@ -62,11 +62,16 @@ Note that `local` is a bash reserved keyword, so you may need to quote it in scr
 
 The `local` logging driver supports the following logging options:
 
-| Option     | Description                                                                                                                                                   | Example value              |
-| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------- |
-| `max-size` | The maximum size of the log before it's rolled. A positive integer plus a unit modifier (`k`, `m`, or `g`; case-insensitive). Defaults to 20m.      | `--log-opt max-size=10m`   |
-| `max-file` | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. A positive integer. Defaults to 5. | `--log-opt max-file=3`     |
-| `compress` | Toggle compression of rotated log files. Enabled by default.                                                                                                  | `--log-opt compress=false` |
+| Option         | Description                                                                                                                                                                    | Example value                                      |
+| :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------- |
+| `max-size`     | The maximum size of the log before it's rolled. A positive integer plus a unit modifier (`k`, `m`, or `g`; case-insensitive). Defaults to 20m.                                | `--log-opt max-size=10m`                           |
+| `max-file`     | The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed. A positive integer. Defaults to 5.                | `--log-opt max-file=3`                             |
+| `compress`     | Toggle compression of rotated log files. Enabled by default.                                                                                                                   | `--log-opt compress=false`                         |
+| `labels`       | A comma-separated list of logging-related labels this daemon accepts. Used for advanced [log tag options](log_tags.md).                                                        | `--log-opt labels=production_status,geo`           |
+| `labels-regex` | Similar to and compatible with `labels`. A regular expression to match logging-related labels. Used for advanced [log tag options](log_tags.md).                              | `--log-opt labels-regex=^(production_status\|geo)` |
+| `env`          | A comma-separated list of logging-related environment variables this daemon accepts. Used for advanced [log tag options](log_tags.md).                                        | `--log-opt env=os,customer`                        |
+| `env-regex`    | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                 | `--log-opt env-regex=^(os\|customer)`              |
+| `tag`          | Specify a template to set the `tag` value in log messages. Refer to the [log tag option documentation](log_tags.md) to customize the log tag format.                          | `--log-opt tag={{.ImageName}}`                     |
 
 ### Examples
 
