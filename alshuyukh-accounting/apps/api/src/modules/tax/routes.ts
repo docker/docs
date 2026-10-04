@@ -17,7 +17,7 @@ interface Box { amount: string; adjustment: string; vat: string }
 export default async function taxRoutes(app: FastifyInstance) {
   const range = z.object({ companyId: z.uuid().optional(), dateFrom: isoDate, dateTo: isoDate });
 
-  app.get('/reports/vat-return', { preHandler: requirePermission(app, 'report.view') }, async (req) => {
+  app.get('/reports/vat-return', { preHandler: requirePermission(app, 'financial_report.view') }, async (req) => {
     const q = parse(range, req.query);
     if (q.dateFrom > q.dateTo) throw badRequest('INVALID_RANGE', 'dateFrom must be on or before dateTo');
     return req.tenantTx(async (db) => {
@@ -88,7 +88,7 @@ export default async function taxRoutes(app: FastifyInstance) {
   });
 
   /** The tax transactions behind the return, for review and audit. */
-  app.get('/reports/vat-transactions', { preHandler: requirePermission(app, 'report.view') }, async (req) => {
+  app.get('/reports/vat-transactions', { preHandler: requirePermission(app, 'financial_report.view') }, async (req) => {
     const q = parse(range.extend({ direction: z.enum(['OUTPUT', 'INPUT']).optional(), vatCategory: z.enum(['S', 'Z', 'E', 'O']).optional() }), req.query);
     return req.tenantTx(async (db) => {
       const companyId = await resolveCompanyId(db, req.auth!.tenantId, q.companyId);

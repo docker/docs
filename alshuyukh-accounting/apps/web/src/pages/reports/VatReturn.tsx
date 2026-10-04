@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../../api';
 import { formatAmount } from '../../money';
-import { ErrorBox, PageHeader, useLoad } from '../../ui';
+import { ErrorBox, useLoad } from '../../ui';
+import { ReportFrame } from './shared';
 
 interface Box { amount: string; adjustment: string; vat: string }
 interface VatReturnData {
@@ -64,10 +65,9 @@ export default function VatReturn() {
   );
 
   return (
-    <>
-      <PageHeader title="إقرار ضريبة القيمة المضافة" />
+    <ReportFrame title="إقرار ضريبة القيمة المضافة" subtitle={`من ${range.from} إلى ${range.to}`}>
       <div className="card">
-        <div className="toolbar">
+        <div className="toolbar no-print">
           <label>من<input type="date" value={range.from} onChange={(e) => setRange((x) => ({ ...x, from: e.target.value }))} /></label>
           <label>إلى<input type="date" value={range.to} onChange={(e) => setRange((x) => ({ ...x, to: e.target.value }))} /></label>
         </div>
@@ -126,6 +126,6 @@ export default function VatReturn() {
           </div>
         </div>
       )}
-    </>
+    </ReportFrame>
   );
 }

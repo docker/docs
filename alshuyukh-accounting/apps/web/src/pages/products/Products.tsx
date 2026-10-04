@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { api } from '../../api';
 import { useAuth } from '../../auth';
 import { ErrorBox, PageHeader, useLoad } from '../../ui';
@@ -25,7 +26,9 @@ type Tab = 'products' | 'balances' | 'card' | 'transfers' | 'adjustments' | 'val
 
 export default function Products() {
   const { can } = useAuth();
-  const [tab, setTab] = useState<Tab>('products');
+  const [params] = useSearchParams();
+  const TABS: Tab[] = ['products', 'balances', 'card', 'transfers', 'adjustments', 'valuation', 'setup'];
+  const [tab, setTab] = useState<Tab>(() => (TABS.find((x) => x === params.get('tab')) ?? 'products'));
   const tabs: [Tab, string, boolean][] = [
     ['products', 'المنتجات والخدمات', can('product.view')],
     ['balances', 'الأرصدة', can('inventory.view')],

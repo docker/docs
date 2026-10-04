@@ -18,6 +18,10 @@ import documentsModule from './modules/documents/routes.js';
 import inventoryRoutes from './modules/inventory/routes.js';
 import expenseRoutes from './modules/expenses/routes.js';
 import taxRoutes from './modules/tax/routes.js';
+import commercialReportRoutes from './modules/reports/commercial.routes.js';
+import dashboardRoutes from './modules/reports/dashboard.routes.js';
+import financialReportRoutes from './modules/reports/financial.routes.js';
+import partyReportRoutes from './modules/reports/parties.routes.js';
 import authRoutes from './modules/auth/auth.routes.js';
 import companiesRoutes from './modules/companies/companies.routes.js';
 import rbacRoutes from './modules/rbac/rbac.routes.js';
@@ -104,6 +108,10 @@ export async function buildApp({ env, pool, logger = true }: BuildOptions): Prom
     await api.register(inventoryRoutes);
     await api.register(expenseRoutes);
     await api.register(taxRoutes);
+    await api.register(financialReportRoutes);
+    await api.register(partyReportRoutes);
+    await api.register(commercialReportRoutes);
+    await api.register(dashboardRoutes);
   }, { prefix: '/api' });
 
   return app;

@@ -71,7 +71,8 @@ export const PERMISSIONS: readonly PermissionDef[] = [
   { code: 'tax.manage', module: 'tax', ar: 'إدارة الضرائب', en: 'Manage tax rates' },
 
   // Phase 7–8 — reports, e-invoicing
-  { code: 'report.view', module: 'reports', ar: 'عرض التقارير', en: 'View reports' },
+  { code: 'report.view', module: 'reports', ar: 'عرض التقارير التشغيلية', en: 'View operational reports' },
+  { code: 'financial_report.view', module: 'reports', ar: 'عرض القوائم والتقارير المالية', en: 'View financial statements and reports' },
   { code: 'zatca.view', module: 'zatca', ar: 'عرض الفوترة الإلكترونية', en: 'View e-invoicing' },
   { code: 'zatca.manage', module: 'zatca', ar: 'إدارة الفوترة الإلكترونية', en: 'Manage e-invoicing' },
 ] as const;
@@ -110,7 +111,7 @@ export const SYSTEM_ROLES: readonly SystemRoleDef[] = [
       'product.view', 'invoice.view', 'invoice.create', 'invoice.edit', 'invoice.post',
       'invoice.cancel', 'purchase.view', 'purchase.create', 'purchase.post', 'purchase.cancel', 'payment.view',
       'payment.create', 'payment.void', 'inventory.view', 'expense.view', 'expense.create', 'expense.post', 'expense.cancel',
-      'tax.manage', 'report.view', 'zatca.view',
+      'tax.manage', 'report.view', 'financial_report.view', 'zatca.view',
     ],
   },
   {

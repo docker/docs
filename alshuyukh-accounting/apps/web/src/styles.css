@@ -243,3 +243,46 @@ button.tab { font: inherit; background: none; border: none; border-bottom: 2px s
 .table .group-row th { background: var(--bg); text-align: start; font-weight: 600; }
 .table .total-row td { font-weight: 700; border-top: 2px solid var(--border); }
 .table tr.muted td { color: var(--muted); }
+
+/* Reports */
+:root { --series-1: #2a78d6; --series-2: #eb6834; }
+.toolbar .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.report-group h2 { font-size: 1rem; margin: 20px 0 10px; color: var(--muted); }
+.report-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.report-card { display: flex; flex-direction: column; gap: 4px; }
+.report-table td.strong, .report-table .strong { font-weight: 700; }
+.table .total-row.emphasis td { background: var(--primary-soft); }
+.table tr.sub-detail td { background: var(--bg); font-size: 0.9em; }
+.negative { color: var(--danger); }
+.print-only { display: none; }
+
+/* Dashboard */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+@media (max-width: 600px) { .kpi { padding: 12px; } .kpi strong { font-size: 1.05rem; } }
+.kpi { display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: inherit; margin: 0; }
+.kpi strong { font-size: 1.25rem; font-variant-numeric: tabular-nums; text-align: end; }
+.kpi-main { border-inline-start: 4px solid var(--primary); }
+.grid-cards.charts { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.chart { position: relative; }
+.chart-plot { position: relative; }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart-grid { stroke: var(--border); stroke-width: 1; }
+.chart-baseline { stroke: var(--muted); stroke-width: 1; }
+.chart-crosshair { stroke: var(--muted); stroke-dasharray: 3 3; }
+.chart-tick { fill: var(--muted); font-size: 13px; }
+.chart svg rect[tabindex]:focus { outline: none; stroke: var(--primary); stroke-width: 1; }
+.chart-legend { display: flex; gap: 16px; font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+.chart-legend i, .chart-tooltip i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-inline-end: 6px; vertical-align: middle; }
+.chart-tooltip { position: absolute; top: 0; transform: translateX(-50%); background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  box-shadow: var(--shadow); padding: 8px 10px; font-size: 0.85rem; pointer-events: none; min-width: 180px; }
+.chart-tooltip div { display: flex; align-items: center; gap: 4px; }
+.chart-tooltip div span { margin-inline-start: auto; font-variant-numeric: tabular-nums; }
+
+@media print {
+  .sidebar, .topbar, .no-print, .scrim { display: none !important; }
+  .shell, .main, .content { display: block; padding: 0; margin: 0; }
+  .card { box-shadow: none; border: none; padding: 0; }
+  .print-only { display: block; }
+  body { background: #fff; }
+}

@@ -12,7 +12,7 @@ import { resolveCompanyId } from './company-context.js';
  * reversals both count, so they cancel out). Other reports arrive in Phase 7.
  */
 export default async function trialBalanceRoutes(app: FastifyInstance) {
-  app.get('/reports/trial-balance', { preHandler: requirePermission(app, 'report.view') }, async (req) => {
+  app.get('/reports/trial-balance', { preHandler: requirePermission(app, 'financial_report.view') }, async (req) => {
     const q = parse(z.object({
       companyId: z.uuid().optional(),
       dateFrom: isoDate,

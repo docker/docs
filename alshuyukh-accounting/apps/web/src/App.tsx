@@ -20,7 +20,7 @@ import Register from './pages/Register';
 import Roles from './pages/Roles';
 import Settings from './pages/Settings';
 import Expenses from './pages/expenses/Expenses';
-import VatReturn from './pages/reports/VatReturn';
+import Reports from './pages/reports/Reports';
 import Users from './pages/Users';
 
 export default function App() {
@@ -55,8 +55,7 @@ export default function App() {
           <Route path="fiscal" element={<FiscalYears />} />
           <Route path="trial-balance" element={<TrialBalance />} />
         </Route>
-        <Route path="reports" element={<Navigate to="vat" replace />} />
-        <Route path="reports/vat" element={<VatReturn />} />
+        <Route path="reports/*" element={<Reports />} />
         <Route path="e-invoicing" element={<ComingSoon title="الفوترة الإلكترونية" phase={8} />} />
         <Route path="settings" element={<Settings />} />
         <Route path="settings/companies" element={<Companies />} />
