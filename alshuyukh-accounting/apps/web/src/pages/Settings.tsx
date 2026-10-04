@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { api } from '../api';
 import { useAuth } from '../auth';
 import { ErrorBox, PageHeader, useLoad } from '../ui';
+import TaxRates from './TaxRates';
 
 interface TenantSettings { tenantName: string; defaultCurrency: string; timezone: string; locale: string; fiscalYearStartMonth: number; dateFormat: string }
 
@@ -80,6 +81,8 @@ export default function Settings() {
           </fieldset>
         </form>
       )}
+
+      {can('invoice.view') && <TaxRates />}
 
       <form className="card form" onSubmit={changePassword}>
         <h2>تغيير كلمة المرور</h2>

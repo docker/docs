@@ -5,6 +5,7 @@ import { nextDocumentNumber } from '../../lib/sequences.js';
 import { postEntry, reverse, type LineInput as JournalLine } from '../accounting/engine.js';
 import { writeAudit } from '../audit/audit.service.js';
 import { issue, receive, resolveWarehouse, reverseDocumentMovements, trackedProducts, type Ref } from '../inventory/engine.js';
+import { recordTax, reverseTax, taxGroups, type TaxSource } from '../tax/ledger.js';
 import { totalsOf } from './calc.js';
 import {
   buildLines, buildReturn, createDraft, defaultDueDate, insertItems, loadDocument, lockDocument,
@@ -228,8 +229,15 @@ export async function issueDocument(db: Db, kind: DocKind, ctx: Ctx, id: string)
     sets.push(['applied_amount', toMoney(applied)]);
     await db.query(`UPDATE ${originalKind.table} SET returned_amount = returned_amount + $2 WHERE id = $1`, [d.original_invoice_id, toMoney(applied)]);
   }
+  const snapshot = JSON.parse(sets.find(([c]) => c === 'party_snapshot')![1] as string) as { nameAr: string; vatNumber: string | null };
   await db.query(`UPDATE ${kind.table} SET ${sets.map(([c], i) => `${c} = $${i + 2}`).join(', ')} WHERE id = $1`, [id, ...sets.map(([, v]) => v)]);
   if (originalKind) await refreshInvoiceStatus(db, originalKind, d.original_invoice_id as string);
+
+  await recordTax(db, {
+    tenantId: ctx.tenantId, companyId: d.company_id, sourceType: kind.key as TaxSource, sourceId: id, sourceNumber: number,
+    journalEntryId: entry.id, date: d.doc_date, groups: taxGroups(lines, totals.taxAmount),
+    partyName: snapshot.nameAr, partyVatNumber: snapshot.vatNumber,
+  });
 
   await writeAudit(db, {
     tenantId: ctx.tenantId, userId: ctx.userId, action: 'POST', entityType: kind.entity, entityId: id,
@@ -260,6 +268,7 @@ export async function cancelDocument(db: Db, kind: DocKind, ctx: Ctx, id: string
       if (returns.rowCount) throw conflict('HAS_RETURNS', 'Cancel the returns issued against this invoice first');
     }
     await reverse(db, ctx, d.journal_entry_id!, { reason: `إلغاء ${kind.labelAr} ${d.doc_number}: ${reason}`, date: d.doc_date, allowSystem: true });
+    await reverseTax(db, kind.key as TaxSource, id);
     const residual = await reverseDocumentMovements(db, stockRef(ctx, d.company_id, d.doc_date, kind.key, id), kind.key, id);
     if (new Decimal(residual).greaterThan(0)) {
       // The warehouse emptied with value left over: expense it so the ledgers stay equal.

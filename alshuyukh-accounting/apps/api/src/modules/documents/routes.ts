@@ -192,7 +192,7 @@ const paymentBody = z.object({
   notes: z.string().trim().max(1000).nullish(),
   branchId: z.uuid().nullish(),
   allocations: z.array(z.object({
-    documentType: z.enum(['SALES_INVOICE', 'SALES_RETURN', 'PURCHASE_INVOICE', 'PURCHASE_RETURN']),
+    documentType: z.enum(['SALES_INVOICE', 'SALES_RETURN', 'PURCHASE_INVOICE', 'PURCHASE_RETURN', 'EXPENSE']),
     documentId: z.uuid(),
     amount: amountString,
   })).max(200).default([]),

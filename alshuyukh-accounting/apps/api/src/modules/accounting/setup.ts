@@ -125,6 +125,22 @@ export async function seedTaxAndPayments(db: Db, ref: CompanyRef): Promise<void>
   }
 }
 
+/** Default expense categories mapped to the template expense accounts. */
+export async function seedExpenseCategories(db: Db, ref: CompanyRef): Promise<void> {
+  const categories: [string, string, string, string][] = [
+    ['RENT', 'إيجار', '6100', 'S'], ['SALARIES', 'رواتب وأجور', '6200', 'O'],
+    ['MARKETING', 'تسويق وإعلان', '6300', 'S'], ['UTILITIES', 'كهرباء ومياه', '6400', 'S'],
+  ];
+  for (const [code, name, accountCode, vat] of categories) {
+    await db.query(
+      `INSERT INTO expense_categories (tenant_id, company_id, code, name_ar, account_id, vat_category)
+       SELECT $1, $2, $3, $4, a.id, $6 FROM accounts a
+        WHERE a.company_id = $2 AND a.code = $5 AND a.deleted_at IS NULL AND a.is_postable
+       ON CONFLICT (company_id, code) DO NOTHING`,
+      [ref.tenantId, ref.companyId, code, name, accountCode, vat]);
+  }
+}
+
 /**
  * Prepares a new company for accounting: default chart and the current
  * fiscal year. Safe to call again; existing setup is left as is.
@@ -133,6 +149,7 @@ export async function setupCompanyAccounting(db: Db, ref: CompanyRef, timezone =
   const chartCreated = await seedDefaultChart(db, ref);
   await seedDefaultUnits(db, ref);
   await seedTaxAndPayments(db, ref);
+  await seedExpenseCategories(db, ref);
   let fiscalYearId: string | null = null;
   const hasYear = await db.query(`SELECT 1 FROM fiscal_years WHERE company_id = $1 LIMIT 1`, [ref.companyId]);
   if (!hasYear.rowCount) {

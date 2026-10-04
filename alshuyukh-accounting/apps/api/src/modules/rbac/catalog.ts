@@ -67,6 +67,7 @@ export const PERMISSIONS: readonly PermissionDef[] = [
   { code: 'expense.view', module: 'expenses', ar: 'عرض المصروفات', en: 'View expenses' },
   { code: 'expense.create', module: 'expenses', ar: 'إنشاء المصروفات', en: 'Create expenses' },
   { code: 'expense.post', module: 'expenses', ar: 'اعتماد المصروفات', en: 'Post expenses' },
+  { code: 'expense.cancel', module: 'expenses', ar: 'إلغاء المصروفات', en: 'Cancel expenses' },
   { code: 'tax.manage', module: 'tax', ar: 'إدارة الضرائب', en: 'Manage tax rates' },
 
   // Phase 7–8 — reports, e-invoicing
@@ -108,7 +109,7 @@ export const SYSTEM_ROLES: readonly SystemRoleDef[] = [
       'supplier.view', 'supplier.manage',
       'product.view', 'invoice.view', 'invoice.create', 'invoice.edit', 'invoice.post',
       'invoice.cancel', 'purchase.view', 'purchase.create', 'purchase.post', 'purchase.cancel', 'payment.view',
-      'payment.create', 'payment.void', 'inventory.view', 'expense.view', 'expense.create', 'expense.post',
+      'payment.create', 'payment.void', 'inventory.view', 'expense.view', 'expense.create', 'expense.post', 'expense.cancel',
       'tax.manage', 'report.view', 'zatca.view',
     ],
   },

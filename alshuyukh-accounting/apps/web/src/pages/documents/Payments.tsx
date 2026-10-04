@@ -73,11 +73,22 @@ export default function Payments({ party }: { party: 'customer' | 'supplier' }) 
 }
 
 function NewPayment({ party, onDone }: { party: 'customer' | 'supplier'; onDone: () => void }) {
+  const { can } = useAuth();
   const parties = useLoad(() => api<{ data: Party[] }>('GET', `/api/${party}s?limit=200`));
   const methods = useLoad(() => api<{ data: Method[] }>('GET', '/api/payment-methods'));
   const [partyId, setPartyId] = useState('');
   const docPath = party === 'customer' ? 'invoices' : 'purchase-invoices';
-  const openDocs = useLoad(() => (partyId ? api<{ data: Doc[] }>('GET', `/api/${docPath}?partyId=${partyId}&open=true&limit=200`) : Promise.resolve({ data: [] as Doc[] })), [partyId]);
+  // Supplier payments can also settle credit expenses.
+  const openDocs = useLoad(async () => {
+    if (!partyId) return { data: [] as (Doc & { documentType: string })[] };
+    const docs = (await api<{ data: Doc[] }>('GET', `/api/${docPath}?partyId=${partyId}&open=true&limit=200`)).data
+      .map((d) => ({ ...d, documentType: party === 'customer' ? 'SALES_INVOICE' : 'PURCHASE_INVOICE' }));
+    if (party === 'supplier' && can('expense.view')) {
+      const exp = (await api<{ data: Doc[] }>('GET', `/api/expenses?supplierId=${partyId}&open=true&limit=200`)).data;
+      docs.push(...exp.map((d) => ({ ...d, documentType: 'EXPENSE' })));
+    }
+    return { data: docs };
+  }, [partyId]);
   const [alloc, setAlloc] = useState<Record<string, string>>({});
   const [error, setError] = useState<unknown>(null);
 
@@ -92,7 +103,7 @@ function NewPayment({ party, onDone }: { party: 'customer' | 'supplier'; onDone:
         paymentDate: String(f.get('date')), methodId: String(f.get('methodId')), amount: String(f.get('amount')),
         reference: f.get('reference') || null,
         allocations: Object.entries(alloc).filter(([, v]) => v.trim() && Number(v) > 0).map(([documentId, amount]) => ({
-          documentType: party === 'customer' ? 'SALES_INVOICE' : 'PURCHASE_INVOICE', documentId, amount: amount.trim(),
+          documentType: openDocs.data?.data.find((d) => d.id === documentId)?.documentType, documentId, amount: amount.trim(),
         })),
       });
       onDone();
@@ -125,7 +136,7 @@ function NewPayment({ party, onDone }: { party: 'customer' | 'supplier'; onDone:
             <tbody>
               {openDocs.data?.data.map((d) => (
                 <tr key={d.id}>
-                  <td dir="ltr" className="code">{d.number}</td><td dir="ltr">{d.date}</td>
+                  <td dir="ltr" className="code">{d.number}{d.documentType === 'EXPENSE' && <span className="muted small"> (مصروف)</span>}</td><td dir="ltr">{d.date}</td>
                   <td className="num" dir="ltr">{formatAmount(d.remainingAmount)}</td>
                   <td><input dir="ltr" inputMode="decimal" value={alloc[d.id] ?? ''} aria-label={`تخصيص ${d.number}`}
                     onChange={(e) => setAlloc((a) => ({ ...a, [d.id]: e.target.value }))} /></td>

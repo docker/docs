@@ -19,6 +19,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Roles from './pages/Roles';
 import Settings from './pages/Settings';
+import Expenses from './pages/expenses/Expenses';
+import VatReturn from './pages/reports/VatReturn';
 import Users from './pages/Users';
 
 export default function App() {
@@ -43,7 +45,7 @@ export default function App() {
         <Route path="inventory" element={<Products />} />
         <Route path="customers" element={<Parties key="customers" config={CUSTOMERS} />} />
         <Route path="suppliers" element={<Parties key="suppliers" config={SUPPLIERS} />} />
-        <Route path="expenses" element={<ComingSoon title="المصروفات" phase={6} />} />
+        <Route path="expenses/*" element={<Expenses />} />
         <Route path="accounting" element={<Accounting />}>
           <Route index element={<Navigate to="journal" replace />} />
           <Route path="journal" element={<JournalList />} />
@@ -53,7 +55,8 @@ export default function App() {
           <Route path="fiscal" element={<FiscalYears />} />
           <Route path="trial-balance" element={<TrialBalance />} />
         </Route>
-        <Route path="reports" element={<ComingSoon title="التقارير" phase={7} />} />
+        <Route path="reports" element={<Navigate to="vat" replace />} />
+        <Route path="reports/vat" element={<VatReturn />} />
         <Route path="e-invoicing" element={<ComingSoon title="الفوترة الإلكترونية" phase={8} />} />
         <Route path="settings" element={<Settings />} />
         <Route path="settings/companies" element={<Companies />} />

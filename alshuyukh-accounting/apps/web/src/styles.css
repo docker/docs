@@ -238,3 +238,8 @@ button.tab { font: inherit; background: none; border: none; border-bottom: 2px s
 .status-open { background: #e8f0fe; color: #1d4ed8; border-color: transparent; }
 .status-partial { background: var(--warn-bg); color: var(--warn-ink); border-color: transparent; }
 .doc-lines { min-width: 760px; }
+
+/* Report tables */
+.table .group-row th { background: var(--bg); text-align: start; font-weight: 600; }
+.table .total-row td { font-weight: 700; border-top: 2px solid var(--border); }
+.table tr.muted td { color: var(--muted); }

@@ -24,7 +24,7 @@ import { controlAccount, refreshInvoiceStatus } from './posting.js';
  */
 
 export type Direction = 'RECEIPT' | 'DISBURSEMENT';
-export type TargetType = 'SALES_INVOICE' | 'SALES_RETURN' | 'PURCHASE_INVOICE' | 'PURCHASE_RETURN';
+export type TargetType = 'SALES_INVOICE' | 'SALES_RETURN' | 'PURCHASE_INVOICE' | 'PURCHASE_RETURN' | 'EXPENSE';
 
 export interface AllocationInput { documentType: TargetType; documentId: string; amount: string }
 
@@ -44,13 +44,34 @@ export interface PaymentInput {
 
 const TARGET_COLUMN: Record<TargetType, string> = {
   SALES_INVOICE: 'sales_invoice_id', SALES_RETURN: 'sales_return_id',
-  PURCHASE_INVOICE: 'purchase_invoice_id', PURCHASE_RETURN: 'purchase_return_id',
+  PURCHASE_INVOICE: 'purchase_invoice_id', PURCHASE_RETURN: 'purchase_return_id', EXPENSE: 'expense_id',
 };
 
 /** Which documents a payment may settle, by party and direction. */
-function allowedTarget(party: 'customer' | 'supplier', direction: Direction): TargetType {
-  if (party === 'customer') return direction === 'RECEIPT' ? 'SALES_INVOICE' : 'SALES_RETURN';
-  return direction === 'DISBURSEMENT' ? 'PURCHASE_INVOICE' : 'PURCHASE_RETURN';
+function allowedTargets(party: 'customer' | 'supplier', direction: Direction): TargetType[] {
+  if (party === 'customer') return direction === 'RECEIPT' ? ['SALES_INVOICE'] : ['SALES_RETURN'];
+  return direction === 'DISBURSEMENT' ? ['PURCHASE_INVOICE', 'EXPENSE'] : ['PURCHASE_RETURN'];
+}
+
+/** Where a settlement target lives and how its paid amount and status are kept. */
+interface Target { table: string; partyColumn: string; settleColumn: string; numberColumn: string; refresh(db: Db, id: string): Promise<void> }
+
+function target(type: TargetType): Target {
+  if (type === 'EXPENSE') {
+    return {
+      table: 'expenses', partyColumn: 'supplier_id', settleColumn: 'paid_amount', numberColumn: 'expense_number',
+      refresh: async (db, id) => {
+        await db.query(
+          `UPDATE expenses SET status = CASE WHEN remaining_amount = 0 THEN 'PAID' WHEN paid_amount > 0 THEN 'PARTIALLY_PAID' ELSE 'POSTED' END
+            WHERE id = $1 AND status <> 'CANCELLED'`, [id]);
+      },
+    };
+  }
+  const kind: DocKind = KINDS[type];
+  return {
+    table: kind.table, partyColumn: `${kind.party}_id`, settleColumn: kind.isReturn ? 'refunded_amount' : 'paid_amount', numberColumn: 'doc_number',
+    refresh: (db, id) => (kind.isReturn ? Promise.resolve() : refreshInvoiceStatus(db, kind, id)),
+  };
 }
 
 export async function createPayment(db: Db, ctx: Ctx, input: PaymentInput) {
@@ -111,7 +132,7 @@ export async function allocate(db: Db, ctx: Ctx, paymentId: string, allocations:
   if (pay.status !== 'POSTED') throw conflict('PAYMENT_VOIDED', 'This payment is voided');
   const party = pay.customer_id ? 'customer' : 'supplier';
   const partyId = (pay.customer_id ?? pay.supplier_id)!;
-  const expected = allowedTarget(party, pay.direction);
+  const expected = allowedTargets(party, pay.direction);
 
   const total = allocations.reduce((s, a) => s.plus(a.amount), new Decimal(0));
   if (total.greaterThan(pay.unallocated_amount)) {
@@ -119,23 +140,22 @@ export async function allocate(db: Db, ctx: Ctx, paymentId: string, allocations:
   }
   const seen = new Set<string>();
   for (const a of allocations) {
-    if (a.documentType !== expected) throw badRequest('INVALID_ALLOCATION', `This payment can only settle ${expected.toLowerCase().replace('_', ' ')}s`);
+    if (!expected.includes(a.documentType)) throw badRequest('INVALID_ALLOCATION', `This payment can only settle: ${expected.join(', ')}`);
     if (seen.has(a.documentId)) throw badRequest('INVALID_ALLOCATION', 'The same document appears twice');
     seen.add(a.documentId);
     const amount = new Decimal(a.amount);
     if (!amount.greaterThan(0)) throw badRequest('INVALID_ALLOCATION', 'Allocation amounts must be positive');
-    const kind: DocKind = KINDS[a.documentType];
-    const { rows: [doc] } = await db.query<{ status: string; party_id: string; remaining_amount: string; doc_date: string; doc_number: string }>(
-      `SELECT status, ${kind.party}_id AS party_id, remaining_amount::text, doc_date, doc_number
-         FROM ${kind.table} WHERE company_id = $1 AND id = $2 AND deleted_at IS NULL FOR UPDATE`, [pay.company_id, a.documentId]);
+    const tg = target(a.documentType);
+    const { rows: [doc] } = await db.query<{ status: string; party_id: string; remaining_amount: string; doc_number: string }>(
+      `SELECT status, ${tg.partyColumn} AS party_id, remaining_amount::text, ${tg.numberColumn} AS doc_number
+         FROM ${tg.table} WHERE company_id = $1 AND id = $2 AND deleted_at IS NULL FOR UPDATE`, [pay.company_id, a.documentId]);
     if (!doc || doc.party_id !== partyId) throw badRequest('INVALID_ALLOCATION', `Document does not belong to this ${party}`);
     if (doc.status === 'DRAFT' || doc.status === 'CANCELLED') throw conflict('DOCUMENT_NOT_OPEN', `${doc.doc_number ?? 'The draft'} is not open for settlement`);
     if (amount.greaterThan(doc.remaining_amount)) {
       throw badRequest('OVER_ALLOCATED', `${doc.doc_number}: only ${doc.remaining_amount} is still open`);
     }
-    const settleColumn = kind.isReturn ? 'refunded_amount' : 'paid_amount';
-    await db.query(`UPDATE ${kind.table} SET ${settleColumn} = ${settleColumn} + $2 WHERE id = $1`, [a.documentId, toMoney(amount)]);
-    if (!kind.isReturn) await refreshInvoiceStatus(db, kind, a.documentId);
+    await db.query(`UPDATE ${tg.table} SET ${tg.settleColumn} = ${tg.settleColumn} + $2 WHERE id = $1`, [a.documentId, toMoney(amount)]);
+    await tg.refresh(db, a.documentId);
     await db.query(
       `INSERT INTO payment_allocations (tenant_id, company_id, payment_id, ${TARGET_COLUMN[a.documentType]}, amount, created_by)
        VALUES ($1, $2, $3, $4, $5, $6)`, [ctx.tenantId, pay.company_id, paymentId, a.documentId, toMoney(amount), ctx.userId]);
@@ -156,15 +176,15 @@ export async function voidPayment(db: Db, ctx: Ctx, paymentId: string, reason: s
   const { rows: allocations } = await db.query<{ id: string; amount: string; target: TargetType; document_id: string }>(
     `SELECT id, amount::text,
             CASE WHEN sales_invoice_id IS NOT NULL THEN 'SALES_INVOICE' WHEN sales_return_id IS NOT NULL THEN 'SALES_RETURN'
-                 WHEN purchase_invoice_id IS NOT NULL THEN 'PURCHASE_INVOICE' ELSE 'PURCHASE_RETURN' END AS target,
-            COALESCE(sales_invoice_id, sales_return_id, purchase_invoice_id, purchase_return_id) AS document_id
+                 WHEN purchase_invoice_id IS NOT NULL THEN 'PURCHASE_INVOICE' WHEN expense_id IS NOT NULL THEN 'EXPENSE'
+                 ELSE 'PURCHASE_RETURN' END AS target,
+            COALESCE(sales_invoice_id, sales_return_id, purchase_invoice_id, purchase_return_id, expense_id) AS document_id
        FROM payment_allocations WHERE payment_id = $1 AND reversed_at IS NULL`, [paymentId]);
   for (const a of allocations) {
-    const kind = KINDS[a.target];
-    const settleColumn = kind.isReturn ? 'refunded_amount' : 'paid_amount';
-    await db.query(`SELECT 1 FROM ${kind.table} WHERE id = $1 FOR UPDATE`, [a.document_id]);
-    await db.query(`UPDATE ${kind.table} SET ${settleColumn} = ${settleColumn} - $2 WHERE id = $1`, [a.document_id, a.amount]);
-    if (!kind.isReturn) await refreshInvoiceStatus(db, kind, a.document_id);
+    const tg = target(a.target);
+    await db.query(`SELECT 1 FROM ${tg.table} WHERE id = $1 FOR UPDATE`, [a.document_id]);
+    await db.query(`UPDATE ${tg.table} SET ${tg.settleColumn} = ${tg.settleColumn} - $2 WHERE id = $1`, [a.document_id, a.amount]);
+    await tg.refresh(db, a.document_id);
     await db.query(`UPDATE payment_allocations SET reversed_at = now() WHERE id = $1`, [a.id]);
   }
   await reverse(db, ctx, pay.journal_entry_id, { reason: `إلغاء ${pay.payment_number}: ${reason}`, date: pay.payment_date, allowSystem: true });
@@ -192,15 +212,17 @@ export async function loadPayment(db: Db, tenantId: string, id: string) {
   if (!p) throw notFound('Payment');
   const { rows: allocations } = await db.query(
     `SELECT a.id, a.amount::text, a.reversed_at AS "reversedAt",
-            COALESCE(si.doc_number, sr.doc_number, pi.doc_number, pr.doc_number) AS "documentNumber",
+            COALESCE(si.doc_number, sr.doc_number, pi.doc_number, pr.doc_number, ex.expense_number) AS "documentNumber",
             CASE WHEN a.sales_invoice_id IS NOT NULL THEN 'SALES_INVOICE' WHEN a.sales_return_id IS NOT NULL THEN 'SALES_RETURN'
-                 WHEN a.purchase_invoice_id IS NOT NULL THEN 'PURCHASE_INVOICE' ELSE 'PURCHASE_RETURN' END AS "documentType",
-            COALESCE(a.sales_invoice_id, a.sales_return_id, a.purchase_invoice_id, a.purchase_return_id) AS "documentId"
+                 WHEN a.purchase_invoice_id IS NOT NULL THEN 'PURCHASE_INVOICE' WHEN a.expense_id IS NOT NULL THEN 'EXPENSE'
+                 ELSE 'PURCHASE_RETURN' END AS "documentType",
+            COALESCE(a.sales_invoice_id, a.sales_return_id, a.purchase_invoice_id, a.purchase_return_id, a.expense_id) AS "documentId"
        FROM payment_allocations a
        LEFT JOIN sales_invoices si ON si.id = a.sales_invoice_id
        LEFT JOIN sales_returns sr ON sr.id = a.sales_return_id
        LEFT JOIN purchase_invoices pi ON pi.id = a.purchase_invoice_id
        LEFT JOIN purchase_returns pr ON pr.id = a.purchase_return_id
+       LEFT JOIN expenses ex ON ex.id = a.expense_id
       WHERE a.payment_id = $1 ORDER BY a.created_at`, [id]);
   return { ...p, allocations };
 }

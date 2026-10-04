@@ -16,6 +16,8 @@ import { CUSTOMER, SUPPLIER, partyRoutes } from './modules/parties/parties.route
 import productsRoutes from './modules/products/products.routes.js';
 import documentsModule from './modules/documents/routes.js';
 import inventoryRoutes from './modules/inventory/routes.js';
+import expenseRoutes from './modules/expenses/routes.js';
+import taxRoutes from './modules/tax/routes.js';
 import authRoutes from './modules/auth/auth.routes.js';
 import companiesRoutes from './modules/companies/companies.routes.js';
 import rbacRoutes from './modules/rbac/rbac.routes.js';
@@ -100,6 +102,8 @@ export async function buildApp({ env, pool, logger = true }: BuildOptions): Prom
     await api.register(productsRoutes);
     await api.register(documentsModule);
     await api.register(inventoryRoutes);
+    await api.register(expenseRoutes);
+    await api.register(taxRoutes);
   }, { prefix: '/api' });
 
   return app;
