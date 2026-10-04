@@ -26,10 +26,15 @@ const MEMBER_SELECT = `
     LEFT JOIN roles r ON r.id = ur.role_id AND r.deleted_at IS NULL
    WHERE ut.tenant_id = $1 AND u.deleted_at IS NULL`;
 
-const toMember = (m: MemberRow) => ({
-  id: m.id, email: m.email, fullName: m.full_name, status: m.member_status === 'ACTIVE' && m.user_status === 'ACTIVE' ? 'ACTIVE' : 'DISABLED',
-  isOwner: m.is_owner, lastLoginAt: m.last_login_at, joinedAt: m.joined_at, roles: m.roles,
-});
+/** An invited person's name and activity stay private until they accept. */
+const toMember = (m: MemberRow) => {
+  const invited = m.member_status === 'INVITED';
+  return {
+    id: m.id, email: m.email, fullName: invited ? null : m.full_name,
+    status: invited ? 'INVITED' : m.member_status === 'ACTIVE' && m.user_status === 'ACTIVE' ? 'ACTIVE' : 'DISABLED',
+    isOwner: m.is_owner, lastLoginAt: invited ? null : m.last_login_at, joinedAt: m.joined_at, roles: m.roles,
+  };
+};
 
 async function loadMember(db: Db, tenantId: string, userId: string) {
   const { rows } = await db.query<MemberRow>(`${MEMBER_SELECT} AND u.id = $2 GROUP BY u.id, ut.id`, [tenantId, userId]);
@@ -59,7 +64,11 @@ export default async function usersRoutes(app: FastifyInstance) {
     return toMember(member);
   });
 
-  /** Adds a user to the tenant. Creates the account if the e-mail is new. */
+  /**
+   * Adds a user to the tenant. A new e-mail gets an account (with the initial
+   * password); an existing account gets an invitation it must accept, so no one
+   * can be added to an organization without consent.
+   */
   app.post('/users', { preHandler: requirePermission(app, 'user.invite', 'user.manage') }, async (req, reply) => {
     const body = parse(createBody, req.body);
     const a = req.auth!;
@@ -81,7 +90,7 @@ export default async function usersRoutes(app: FastifyInstance) {
       const exists = await db.query(`SELECT 1 FROM user_tenants WHERE tenant_id = $1 AND user_id = $2`, [a.tenantId, user!.id]);
       if (exists.rowCount) throw conflict('ALREADY_MEMBER', 'This user is already a member of the organization');
 
-      await db.query(`INSERT INTO user_tenants (tenant_id, user_id) VALUES ($1, $2)`, [a.tenantId, user!.id]);
+      await db.query(`INSERT INTO user_tenants (tenant_id, user_id, status) VALUES ($1, $2, $3)`, [a.tenantId, user!.id, created ? 'ACTIVE' : 'INVITED']);
       await db.query(
         `INSERT INTO user_roles (tenant_id, user_id, role_id, created_by) SELECT $1, $2, unnest($3::uuid[]), $4`,
         [a.tenantId, user!.id, [...new Set(body.roleIds)], a.userId]);
@@ -105,6 +114,11 @@ export default async function usersRoutes(app: FastifyInstance) {
       const before = await loadMember(db, a.tenantId, id);
       if (!before) throw notFound('User');
       if (before.is_owner) throw forbidden('The organization owner cannot be disabled');
+      // Only the invited person can accept an invitation; it can be withdrawn by disabling it.
+      if (before.member_status === 'INVITED' && body.status === 'ACTIVE') throw conflict('INVITATION_PENDING', 'The invitation has not been accepted yet');
+      // You cannot act on someone who holds permissions you do not have.
+      if (before.roles.length) assertCanGrant(a, (await resolveRoles(db, before.roles.map((r) => r.id))).permissions);
+      if (body.status === 'ACTIVE' && before.member_status !== 'ACTIVE') await assertWithinLimit(db, a.tenantId, 'max_users');
       await db.query(`UPDATE user_tenants SET status = $3 WHERE tenant_id = $1 AND user_id = $2`, [a.tenantId, id, body.status]);
       if (body.status === 'DISABLED') {
         await db.query(`UPDATE user_sessions SET revoked_at = now() WHERE user_id = $1 AND tenant_id = $2 AND revoked_at IS NULL`, [id, a.tenantId]);

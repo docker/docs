@@ -11,8 +11,14 @@ import { badRequest } from '../../lib/errors.js';
 
 export const rangeFields = { companyId: z.uuid().optional(), dateFrom: isoDate, dateTo: isoDate };
 
+/** Longest period a report may cover. */
+export const MAX_RANGE_YEARS = 5;
+
 export function checkRange(q: { dateFrom: string; dateTo: string }) {
   if (q.dateFrom > q.dateTo) throw badRequest('INVALID_RANGE', 'dateFrom must be on or before dateTo');
+  const limit = new Date(`${q.dateFrom}T00:00:00Z`);
+  limit.setUTCFullYear(limit.getUTCFullYear() + MAX_RANGE_YEARS);
+  if (new Date(`${q.dateTo}T00:00:00Z`) > limit) throw badRequest('RANGE_TOO_LONG', `A report can cover at most ${MAX_RANGE_YEARS} years`);
 }
 
 /**
@@ -34,18 +40,20 @@ export const GL = `
 /** Year-closing entries move P&L balances into retained earnings; income reports exclude them. */
 export const NOT_CLOSING = `g.origin_type <> 'YEAR_CLOSING'`;
 
-/** The document number behind a ledger line, looked up from its origin. */
-export const DOCUMENT_NUMBER = `
-  CASE g.origin_type
-    WHEN 'SALES_INVOICE' THEN (SELECT doc_number FROM sales_invoices WHERE id = g.origin_id)
-    WHEN 'SALES_RETURN' THEN (SELECT doc_number FROM sales_returns WHERE id = g.origin_id)
-    WHEN 'PURCHASE_INVOICE' THEN (SELECT doc_number FROM purchase_invoices WHERE id = g.origin_id)
-    WHEN 'PURCHASE_RETURN' THEN (SELECT doc_number FROM purchase_returns WHERE id = g.origin_id)
-    WHEN 'PAYMENT_RECEIPT' THEN (SELECT payment_number FROM payments WHERE id = g.origin_id)
-    WHEN 'PAYMENT_DISBURSEMENT' THEN (SELECT payment_number FROM payments WHERE id = g.origin_id)
-    WHEN 'EXPENSE' THEN (SELECT expense_number FROM expenses WHERE id = g.origin_id)
-    WHEN 'STOCK_ADJUSTMENT' THEN (SELECT adjustment_number FROM stock_adjustments WHERE id = g.origin_id)
-  END`;
+/**
+ * Document numbers of the company ($1 tenant, $2 company), keyed by id, to be
+ * LEFT JOINed on a ledger line's origin_id. A join rather than a correlated
+ * subquery per line: under RLS those subqueries cannot use the primary-key
+ * index and turned into a sequential scan per ledger line.
+ */
+export const DOC_NUMBERS = `
+  SELECT id, doc_number AS number FROM sales_invoices WHERE tenant_id = $1 AND company_id = $2
+  UNION ALL SELECT id, doc_number FROM sales_returns WHERE tenant_id = $1 AND company_id = $2
+  UNION ALL SELECT id, doc_number FROM purchase_invoices WHERE tenant_id = $1 AND company_id = $2
+  UNION ALL SELECT id, doc_number FROM purchase_returns WHERE tenant_id = $1 AND company_id = $2
+  UNION ALL SELECT id, payment_number FROM payments WHERE tenant_id = $1 AND company_id = $2
+  UNION ALL SELECT id, expense_number FROM expenses WHERE tenant_id = $1 AND company_id = $2
+  UNION ALL SELECT id, adjustment_number FROM stock_adjustments WHERE tenant_id = $1 AND company_id = $2`;
 
 /**
  * Cash and cash equivalents: the system cash and bank accounts plus every

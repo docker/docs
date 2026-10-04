@@ -1,5 +1,4 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { withTx } from '../src/db/tx.js';
 import { flushUsage } from '../src/modules/subscriptions/service.js';
 import { commerce } from './commerce-helpers.js';
 import { addMember, client, register, roleId, setupApp, type Session, type TestContext } from './helpers.js';
@@ -10,7 +9,7 @@ let admin: ReturnType<typeof client>;
 /** A platform administrator (the flag is set directly; the API never lets a tenant grant it). */
 async function makeAdmin(): Promise<Session> {
   const s = await register(t.app);
-  await t.pool.query(`UPDATE users SET is_platform_admin = true WHERE id = $1`, [s.userId]);
+  await t.ownerPool.query(`UPDATE users SET is_platform_admin = true WHERE id = $1`, [s.userId]);
   return s;
 }
 const setLimits = async (tenantId: string, overrides: Record<string, number | null>) => {
@@ -18,9 +17,8 @@ const setLimits = async (tenantId: string, overrides: Record<string, number | nu
   expect(r.statusCode).toBe(200);
 };
 /** Moves the subscription period into the past (the API only extends periods). */
-const endPeriod = (s: Session, daysAgo: number) => withTx(t.pool, { tenantId: s.tenantId, userId: s.userId }, (db) =>
-  db.query(`UPDATE subscriptions SET current_period_start = now() - interval '60 days', current_period_end = now() - make_interval(days => $2)
-             WHERE tenant_id = $1 AND status <> 'CANCELLED'`, [s.tenantId, daysAgo]));
+const endPeriod = (s: Session, daysAgo: number) => t.ownerPool.query(`UPDATE subscriptions SET current_period_start = now() - interval '60 days', current_period_end = now() - make_interval(days => $2)
+             WHERE tenant_id = $1 AND status <> 'CANCELLED'`, [s.tenantId, daysAgo]);
 
 beforeAll(async () => {
   t = await setupApp();
@@ -46,6 +44,23 @@ describe('trial on sign-up', () => {
 });
 
 describe('plan limits', () => {
+  it('counts reactivated members and accepted invitations against the user limit', async () => {
+    const s = await register(t.app);
+    const other = await register(t.app);
+    const api = client(t.app, s.token);
+    const viewer = await roleId(t.app, s.token, 'VIEWER');
+    const member = (await api.post('/api/users', { email: `m-${Date.now()}@example.test`, fullName: 'عضو', initialPassword: 'Str0ng-Passw0rd!', roleIds: [viewer] })).json();
+    expect((await api.post('/api/users', { email: other.email, fullName: 'مدعو', roleIds: [viewer] })).statusCode).toBe(201);
+    expect((await api.patch(`/api/users/${member.id}`, { status: 'DISABLED' })).statusCode).toBe(200);
+    await setLimits(s.tenantId, { max_users: 1 });
+    const reactivate = await api.patch(`/api/users/${member.id}`, { status: 'ACTIVE' });
+    expect(reactivate.json().error).toMatchObject({ code: 'PLAN_LIMIT_REACHED', details: { limit: 'max_users' } });
+    const accept = await client(t.app, other.token).post(`/api/auth/invitations/${s.tenantId}/accept`);
+    expect(accept.json().error.code).toBe('PLAN_LIMIT_REACHED');
+    await setLimits(s.tenantId, { max_users: null });
+    expect((await client(t.app, other.token).post(`/api/auth/invitations/${s.tenantId}/accept`)).statusCode).toBe(204);
+  });
+
   it('stops at each limit with 402 and leaves nothing half-created', async () => {
     const s = await register(t.app);
     const c = await commerce(t.app, s);

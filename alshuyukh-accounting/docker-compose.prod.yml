@@ -1,0 +1,65 @@
+# Production stack: PostgreSQL, a one-shot migration job, the API and nginx.
+#   cp deploy/.env.example deploy/.env   # then fill in the secrets
+#   docker compose -f docker-compose.prod.yml --env-file deploy/.env up -d --build
+# Only nginx publishes a port. Put TLS in front of it (load balancer, Caddy, certbot…).
+
+x-api-env: &api-env
+  NODE_ENV: production
+  DATABASE_URL: postgres://alshuyukh_app:${APP_DB_PASSWORD:?}@postgres:5432/alshuyukh
+  JWT_SECRET: ${JWT_SECRET:?}
+  ZATCA_ENCRYPTION_KEY: ${ZATCA_ENCRYPTION_KEY:?}
+  CORS_ORIGINS: ${PUBLIC_ORIGIN:?}
+  TRUST_PROXY: "1"
+  ZATCA_WORKER: ${ZATCA_WORKER:-on}
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      OWNER_DB_PASSWORD: ${OWNER_DB_PASSWORD:?}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?}
+      TZ: UTC
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./deploy/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d alshuyukh"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  migrate:
+    build: { context: ., dockerfile: deploy/api.Dockerfile }
+    image: alshuyukh-api
+    command: ["node", "dist/db/migrate-cli.js"]
+    environment:
+      <<: *api-env
+      DATABASE_URL_MIGRATE: postgres://alshuyukh_owner:${OWNER_DB_PASSWORD:?}@postgres:5432/alshuyukh
+    depends_on:
+      postgres: { condition: service_healthy }
+    restart: "no"
+
+  api:
+    image: alshuyukh-api
+    restart: unless-stopped
+    environment: *api-env
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: [no-new-privileges:true]
+
+  web:
+    build: { context: ., dockerfile: deploy/web.Dockerfile }
+    image: alshuyukh-web
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-8080}:8080"
+    depends_on:
+      api: { condition: service_healthy }
+    security_opt: [no-new-privileges:true]
+
+volumes:
+  pgdata:

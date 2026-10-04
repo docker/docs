@@ -51,14 +51,15 @@ export class AuthService {
   async login(email: string, password: string, tenantId: string | undefined, meta: AuditMeta): Promise<IssuedTokens> {
     const { env, pool } = this.deps;
 
+    const ip = meta.ip ?? 'unknown';
     const user = await withTx(pool, {}, async (db) => {
       const { rows } = await db.query<{
-        id: string; password_hash: string; status: string; deleted_at: Date | null;
-        failed_login_attempts: number; locked_until: Date | null;
+        id: string; password_hash: string; status: string; deleted_at: Date | null; locked_until: Date | null;
       }>(
-        `SELECT id, password_hash, status, deleted_at, failed_login_attempts, locked_until
-           FROM users WHERE email = $1`,
-        [email],
+        `SELECT u.id, u.password_hash, u.status, u.deleted_at,
+                (SELECT f.locked_until FROM login_failures f WHERE f.user_id = u.id AND f.ip = $2) AS locked_until
+           FROM users u WHERE u.email = $1`,
+        [email, ip],
       );
       return rows[0];
     });
@@ -68,20 +69,24 @@ export class AuthService {
       await this.auditFailedLogin(null, email, 'unknown_email', meta);
       throw unauthorized('Invalid e-mail or password');
     }
+    // The password is always checked (same timing) and every failure looks the
+    // same, so a lock reveals neither that the account exists nor that it is locked.
+    const ok = await verifyPassword(user.password_hash, password);
     if (user.locked_until && user.locked_until > new Date()) {
       await this.auditFailedLogin(user.id, email, 'locked', meta);
-      throw new AppError(423, 'ACCOUNT_LOCKED', 'Too many failed attempts. Try again later.');
+      throw unauthorized('Invalid e-mail or password');
     }
-
-    const ok = await verifyPassword(user.password_hash, password);
     if (!ok) {
+      // Locks only this account from this address; the owner can still sign in from elsewhere.
       await withTx(pool, { userId: user.id }, async (db) => {
         await db.query(
-          `UPDATE users SET failed_login_attempts = failed_login_attempts + 1,
-             locked_until = CASE WHEN failed_login_attempts + 1 >= $2
-                                 THEN now() + make_interval(mins => $3) ELSE locked_until END
-           WHERE id = $1`,
-          [user.id, env.LOGIN_MAX_ATTEMPTS, env.LOGIN_LOCK_MINUTES],
+          `INSERT INTO login_failures (user_id, ip, failures, locked_until) VALUES ($1, $2, 1, NULL)
+           ON CONFLICT (user_id, ip) DO UPDATE SET
+             failures = CASE WHEN login_failures.locked_until < now() THEN 1 ELSE login_failures.failures + 1 END,
+             locked_until = CASE WHEN (CASE WHEN login_failures.locked_until < now() THEN 1 ELSE login_failures.failures + 1 END) >= $3
+                                 THEN now() + make_interval(mins => $4) ELSE NULL END,
+             updated_at = now()`,
+          [user.id, ip, env.LOGIN_MAX_ATTEMPTS, env.LOGIN_LOCK_MINUTES],
         );
       });
       await this.auditFailedLogin(user.id, email, 'bad_password', meta);
@@ -101,7 +106,7 @@ export class AuthService {
     }
 
     await withTx(pool, { userId: user.id }, (db) =>
-      db.query(`UPDATE users SET failed_login_attempts = 0, locked_until = NULL, last_login_at = now() WHERE id = $1`, [user.id]),
+      db.query(`WITH c AS (DELETE FROM login_failures WHERE user_id = $1 AND ip = $2) UPDATE users SET last_login_at = now() WHERE id = $1`, [user.id, ip]),
     );
     return this.issueSession(user.id, target.tenantId, meta, 'LOGIN');
   }
@@ -280,6 +285,8 @@ export interface ProvisionInput extends RegisterInput {
  */
 export async function provisionTenant(db: Db, input: ProvisionInput, meta: AuditMeta): Promise<string> {
   const { tenantId, passwordHash, slug } = input;
+  // Lets RLS accept the organization's first subscription rows (see migration 0014).
+  await db.query(`SELECT set_config('app.provisioning', 'on', true)`);
   const existing = await db.query('SELECT 1 FROM users WHERE email = $1', [input.email]);
   if (existing.rowCount) throw conflict('EMAIL_TAKEN', 'An account with this e-mail already exists');
 

@@ -60,10 +60,10 @@ export default function Users() {
                       </form>
                     ) : u.roles.map((r) => r.nameAr).join('، ')}
                   </td>
-                  <td><span className={`tag ${u.status === 'ACTIVE' ? 'tag-ok' : 'tag-off'}`}>{u.status === 'ACTIVE' ? 'نشط' : 'معطّل'}</span></td>
+                  <td><span className={`tag ${u.status === 'ACTIVE' ? 'tag-ok' : 'tag-off'}`}>{u.status === 'ACTIVE' ? 'نشط' : u.status === 'INVITED' ? 'بانتظار قبول الدعوة' : 'معطّل'}</span></td>
                   <td>{formatDateTime(u.lastLoginAt)}</td>
                   <td className="row-actions">
-                    {manage && u.id !== me?.user.id && !u.isOwner && (
+                    {manage && u.id !== me?.user.id && !u.isOwner && u.status !== 'INVITED' && (
                       <>
                         <button className="btn btn-small" onClick={() => setEditing(u.id)}>الأدوار</button>
                         <button className="btn btn-small" onClick={() => run(() => api('PATCH', `/api/users/${u.id}`, { status: u.status === 'ACTIVE' ? 'DISABLED' : 'ACTIVE' }))}>

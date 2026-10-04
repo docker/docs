@@ -3,3 +3,4 @@ dist/
 .env
 *.log
 coverage/
+e2e-failure-*.png

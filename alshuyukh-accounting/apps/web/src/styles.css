@@ -108,6 +108,7 @@ fieldset { border: none; padding: 0; margin: 0; min-width: 0; }
 .alert ul { margin: 6px 0 0; padding-inline-start: 18px; }
 .alert-error { background: var(--err-bg); color: var(--danger); }
 .alert-warn { background: var(--warn-bg); color: var(--warn-ink); }
+.invite-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .alert-ok { background: var(--ok-bg); color: var(--ok-ink); }
 
 .table-wrap { overflow-x: auto; }

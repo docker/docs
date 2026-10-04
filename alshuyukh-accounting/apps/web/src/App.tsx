@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from './auth';
 import Shell from './Shell';
@@ -8,22 +9,24 @@ import JournalDetail from './pages/accounting/JournalDetail';
 import JournalForm from './pages/accounting/JournalForm';
 import JournalList from './pages/accounting/JournalList';
 import TrialBalance from './pages/accounting/TrialBalance';
-import AuditLog from './pages/AuditLog';
 import Parties, { CUSTOMERS, SUPPLIERS } from './pages/parties/Parties';
 import Products from './pages/products/Products';
 import Section from './pages/documents/Section';
-import Companies from './pages/Companies';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Roles from './pages/Roles';
-import Settings from './pages/Settings';
-import Expenses from './pages/expenses/Expenses';
-import Reports from './pages/reports/Reports';
-import EInvoicing from './pages/einvoicing/EInvoicing';
-import Admin from './pages/admin/Admin';
-import Subscription from './pages/subscription/Subscription';
 import Users from './pages/Users';
+
+// Less frequently used sections load on first visit, keeping the initial bundle small.
+const Reports = lazy(() => import('./pages/reports/Reports'));
+const EInvoicing = lazy(() => import('./pages/einvoicing/EInvoicing'));
+const Admin = lazy(() => import('./pages/admin/Admin'));
+const Subscription = lazy(() => import('./pages/subscription/Subscription'));
+const Expenses = lazy(() => import('./pages/expenses/Expenses'));
+const AuditLog = lazy(() => import('./pages/AuditLog'));
+const Roles = lazy(() => import('./pages/Roles'));
+const Companies = lazy(() => import('./pages/Companies'));
+const Settings = lazy(() => import('./pages/Settings'));
 
 export default function App() {
   const { me, loading } = useAuth();

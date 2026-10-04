@@ -5,7 +5,7 @@ import { Decimal, sum, toMoney } from '../../lib/money.js';
 import { parse } from '../../lib/validation.js';
 import { requirePermission } from '../../plugins/auth.js';
 import { resolveCompanyId } from '../accounting/company-context.js';
-import { checkRange, companyToday, DOCUMENT_NUMBER, GL, rangeFields } from './common.js';
+import { checkRange, companyToday, DOC_NUMBERS, GL, rangeFields } from './common.js';
 import { runningLines } from './financial.routes.js';
 
 type Party = 'customer' | 'supplier';
@@ -96,11 +96,11 @@ export default async function partyReportRoutes(app: FastifyInstance) {
         const { rows: [o] } = await db.query<{ opening: string }>(
           `WITH g AS (${GL}) SELECT COALESCE(sum(g.debit - g.credit), 0)::text AS opening FROM g WHERE g.${col} = $3 AND g.entry_date < $4`, params.slice(0, 4));
         const { rows } = await db.query<{ debit: string; credit: string }>(
-          `WITH g AS (${GL})
+          `WITH g AS (${GL}), dn AS (${DOC_NUMBERS})
            SELECT g.entry_id AS "entryId", g.entry_number AS "entryNumber", g.entry_date AS date, g.description,
                   g.origin_type AS "referenceType", g.origin_id AS "referenceId", (g.reference_type = 'REVERSAL') AS "isReversal",
-                  ${DOCUMENT_NUMBER} AS "documentNumber", g.debit::text, g.credit::text
-             FROM g WHERE g.${col} = $3 AND g.entry_date BETWEEN $4 AND $5
+                  dn.number AS "documentNumber", g.debit::text, g.credit::text
+             FROM g LEFT JOIN dn ON dn.id = g.origin_id WHERE g.${col} = $3 AND g.entry_date BETWEEN $4 AND $5
             ORDER BY g.entry_date, g.posted_at, g.entry_number, g.line_no`, params);
         return { companyId, dateFrom: q.dateFrom, dateTo: q.dateTo, party: p, ...runningLines(o!.opening, rows, party === 'customer') };
       });

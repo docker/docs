@@ -68,6 +68,15 @@ describe('multi-tenant membership', () => {
     const viewerRole = (await client(t.app, t2.token).get('/api/roles')).json().data.find((r: { code: string }) => r.code === 'VIEWER').id;
     const add = await client(t.app, t2.token).post('/api/users', { email: t1.email, fullName: 'Shared', roleIds: [viewerRole] });
     expect(add.statusCode).toBe(201);
+    // An existing account joins only after it accepts; until then the inviter sees no personal details.
+    expect(add.json()).toMatchObject({ status: 'INVITED', fullName: null, lastLoginAt: null });
+    expect((await client(t.app, t1.token).get('/api/auth/me')).json().memberships).toHaveLength(1);
+    expect((await client(t.app, t1.token).post('/api/auth/switch-tenant', { tenantId: t2.tenantId })).statusCode).not.toBe(200);
+    expect((await client(t.app, t2.token).patch(`/api/users/${add.json().id}`, { status: 'ACTIVE' })).statusCode).toBe(409);
+    const inv = (await client(t.app, t1.token).get('/api/auth/invitations')).json().data;
+    expect(inv).toEqual([{ tenantId: t2.tenantId, tenantName: 'Org Two', invitedAt: expect.any(String) }]);
+    expect((await client(t.app, t1.token).post(`/api/auth/invitations/${t2.tenantId}/accept`)).statusCode).toBe(204);
+    expect((await client(t.app, t1.token).get('/api/auth/invitations')).json().data).toEqual([]);
 
     const me = (await client(t.app, t1.token).get('/api/auth/me')).json();
     expect(me.memberships.map((m: { tenantName: string }) => m.tenantName).sort()).toEqual(['Org One', 'Org Two']);
@@ -81,5 +90,19 @@ describe('multi-tenant membership', () => {
     expect((await api2.post('/api/companies', { name: 'Not allowed' })).statusCode).toBe(403);
     // The pre-switch token is bound to the old tenant and is no longer valid.
     expect((await client(t.app, t1.token).get('/api/companies')).statusCode).toBe(401);
+  });
+
+  it('lets an invited user decline, and refuses answering for another user', async () => {
+    const t1 = await register(t.app);
+    const t2 = await register(t.app);
+    const t3 = await register(t.app);
+    const viewerRole = (await client(t.app, t2.token).get('/api/roles')).json().data.find((r: { code: string }) => r.code === 'VIEWER').id;
+    expect((await client(t.app, t2.token).post('/api/users', { email: t1.email, fullName: 'Someone', roleIds: [viewerRole] })).statusCode).toBe(201);
+    // t3 was not invited: answering is not possible.
+    expect((await client(t.app, t3.token).post(`/api/auth/invitations/${t2.tenantId}/accept`)).statusCode).toBe(404);
+    expect((await client(t.app, t1.token).post(`/api/auth/invitations/${t2.tenantId}/decline`)).statusCode).toBe(204);
+    expect((await client(t.app, t1.token).post(`/api/auth/invitations/${t2.tenantId}/accept`)).statusCode).toBe(404);
+    const member = (await client(t.app, t2.token).get('/api/users')).json().data.find((u: { email: string }) => u.email === t1.email);
+    expect(member.status).toBe('DISABLED');
   });
 });

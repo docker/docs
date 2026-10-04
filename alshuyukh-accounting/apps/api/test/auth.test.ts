@@ -74,13 +74,28 @@ describe('login', () => {
     expect(wrong.json().error.message).toBe(unknown.json().error.message);
   });
 
-  it('locks the account after repeated failures', async () => {
+  it('locks sign-in from an address after repeated failures, without revealing it', async () => {
+    const s = await register(t.app);
+    const login = (password: string, remoteAddress: string) =>
+      t.app.inject({ method: 'POST', url: '/api/auth/login', remoteAddress, payload: { email: s.email, password } });
+    for (let i = 0; i < 5; i++) await login('Wrong-passw0rd', '203.0.113.7');
+    // Same answer as a wrong password: an attacker cannot tell the account exists or is locked.
+    const locked = await login(PASSWORD, '203.0.113.7');
+    expect(locked.statusCode).toBe(401);
+    expect(locked.json().error.code).toBe('UNAUTHORIZED');
+    // Failures from one address do not lock the owner out everywhere.
+    expect((await login(PASSWORD, '198.51.100.20')).statusCode).toBe(200);
+  });
+
+  it('ignores X-Forwarded-For unless a proxy is trusted', async () => {
     const s = await register(t.app);
     for (let i = 0; i < 5; i++) {
-      await t.app.inject({ method: 'POST', url: '/api/auth/login', payload: { email: s.email, password: 'Wrong-passw0rd' } });
+      await t.app.inject({ method: 'POST', url: '/api/auth/login', remoteAddress: '203.0.113.8',
+        headers: { 'x-forwarded-for': `10.0.0.${i}` }, payload: { email: s.email, password: 'Wrong-passw0rd' } });
     }
-    const res = await t.app.inject({ method: 'POST', url: '/api/auth/login', payload: { email: s.email, password: PASSWORD } });
-    expect(res.statusCode).toBe(423);
+    const res = await t.app.inject({ method: 'POST', url: '/api/auth/login', remoteAddress: '203.0.113.8',
+      headers: { 'x-forwarded-for': '10.0.0.99' }, payload: { email: s.email, password: PASSWORD } });
+    expect(res.statusCode).toBe(401);
   });
 
   it('rejects requests without a token or with a tampered token', async () => {

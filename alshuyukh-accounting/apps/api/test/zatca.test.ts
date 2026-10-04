@@ -14,6 +14,7 @@ import { buildInvoiceXml, type EInvoice } from '../src/modules/zatca/xml.js';
 import { commerce, type Commerce } from './commerce-helpers.js';
 import { addMember, client, register, setupApp, type Session, type TestContext } from './helpers.js';
 import { FakeZatca } from './zatca-fake.js';
+import { runDueSubmissions } from '../src/modules/zatca/worker.js';
 
 const UBL_CBC = 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2';
 const SELLER_ADDRESS = { street: 'طريق الملك عبدالعزيز', buildingNumber: '2322', district: 'الملقا', city: 'الرياض', postalCode: '13521', country: 'SA' };
@@ -306,6 +307,21 @@ describe('issuing e-invoices', () => {
     expect(list.summary).toMatchObject({ rejected: 1, overdue: 0 });
     expect(list.data[0].qr).toBeUndefined();
     expect((await c.api.get('/api/zatca/invoices?status=CLEARED')).json().total).toBe(1);
+  });
+});
+
+describe('background submitter', () => {
+  it('reports every due e-invoice in its tenant context', async () => {
+    const res = await issue((await c.customer()).id);
+    const z = (await einvoiceOf('SALES_INVOICE', res.json().id)).einvoice;
+    const warnings: unknown[] = [];
+    const attempted = await runDueSubmissions(t.pool, { warn: (...a: unknown[]) => warnings.push(a) } as never);
+    expect(attempted).toBeGreaterThanOrEqual(1);
+    expect(warnings).toEqual([]);
+    expect((await einvoiceOf('SALES_INVOICE', res.json().id)).einvoice.status).toBe('REPORTED');
+    expect(z.status).toBe('PENDING');
+    // Nothing is due any more: a second pass attempts nothing for this tenant.
+    expect((await c.api.get('/api/zatca/invoices?status=PENDING')).json().total).toBe(0);
   });
 });
 

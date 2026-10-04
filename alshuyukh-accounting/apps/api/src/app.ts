@@ -25,6 +25,7 @@ import zatcaRoutes from './modules/zatca/routes.js';
 import adminPlatformRoutes from './modules/admin/platform.routes.js';
 import adminTenantRoutes from './modules/admin/tenants.routes.js';
 import subscriptionRoutes from './modules/subscriptions/routes.js';
+import { pendingMigrations } from './db/migrate.js';
 import { flushUsage } from './modules/subscriptions/service.js';
 import { configureZatca } from './modules/zatca/service.js';
 import { setGatewayUrl } from './modules/zatca/client.js';
@@ -43,6 +44,8 @@ const PG_ERRORS: Record<string, [number, string, string]> = {
   '23503': [400, 'INVALID_REFERENCE', 'A referenced record does not exist'],
   '23514': [400, 'CONSTRAINT_VIOLATION', 'A value is outside the allowed range or format'],
   '42501': [403, 'FORBIDDEN', 'Operation not permitted'],
+  '22003': [400, 'VALUE_OUT_OF_RANGE', 'A number is too large'],
+  '57014': [503, 'QUERY_TIMEOUT', 'The request took too long; narrow the date range or filters'],
 };
 
 export interface BuildOptions {
@@ -54,7 +57,10 @@ export interface BuildOptions {
 export async function buildApp({ env, pool, logger = true }: BuildOptions): Promise<FastifyInstance> {
   const app = Fastify({
     logger: logger ? { level: env.NODE_ENV === 'production' ? 'info' : 'debug', redact: ['req.headers.authorization', 'req.headers.cookie'] } : false,
-    trustProxy: env.NODE_ENV === 'production',
+    // Hop count → trust only that many proxies closest to us; or an explicit address list.
+    trustProxy: env.TRUST_PROXY === 'false' ? false
+      : /^\d+$/.test(env.TRUST_PROXY) ? (_address: string, hop: number) => hop < Number(env.TRUST_PROXY)
+      : env.TRUST_PROXY.split(',').map((s) => s.trim()),
     bodyLimit: 1_048_576,
     genReqId: () => crypto.randomUUID(),
   });
@@ -106,9 +112,20 @@ export async function buildApp({ env, pool, logger = true }: BuildOptions): Prom
   usageTimer.unref();
   app.addHook('onClose', async () => { clearInterval(usageTimer); await flushUsage(pool); });
 
+  // Liveness: the process answers and reaches the database.
   app.get('/api/health', async () => {
     await pool.query('SELECT 1');
     return { status: 'ok' };
+  });
+  // Readiness: safe to send traffic — the schema matches this build.
+  app.get('/api/ready', async (_req, reply) => {
+    try {
+      const pending = await pendingMigrations(pool);
+      if (pending.length) return reply.code(503).send({ status: 'migrations_pending', pending });
+      return { status: 'ready' };
+    } catch {
+      return reply.code(503).send({ status: 'database_unavailable' });
+    }
   });
 
   await app.register(authRoutes, { prefix: '/api/auth' });

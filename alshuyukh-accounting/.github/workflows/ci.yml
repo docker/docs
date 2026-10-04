@@ -1,0 +1,48 @@
+# Continuous integration for ALSHUYUKH ACCOUNTING.
+# GitHub runs workflows only from the repository root's .github directory: this
+# file takes effect once the project lives in its own repository.
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      TEST_DATABASE_URL: postgres://alshuyukh_app:app_dev_password@localhost:5432/alshuyukh_test
+      TEST_DATABASE_URL_MIGRATE: postgres://alshuyukh_owner:owner_dev_password@localhost:5432/alshuyukh_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Create database roles
+        run: PGPASSWORD=postgres psql -h localhost -U postgres -f scripts/db-setup.sql
+      - run: npm ci
+      - run: npm run typecheck
+      - name: API tests (real PostgreSQL, row-level security enforced)
+        run: npm test -w apps/api
+      - run: npm test -w apps/web
+      - run: npm run build
+
+  images:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -f deploy/api.Dockerfile -t alshuyukh-api .
+      - run: docker build -f deploy/web.Dockerfile -t alshuyukh-web .

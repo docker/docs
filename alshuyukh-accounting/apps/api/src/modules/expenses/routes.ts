@@ -45,9 +45,15 @@ export default async function expenseRoutes(app: FastifyInstance) {
     FROM expense_categories c JOIN accounts a ON a.id = c.account_id`;
 
   const checkAccount = async (db: Parameters<Parameters<FastifyRequest['tenantTx']>[0]>[0], companyId: string, accountId: string) => {
-    const { rows: [a] } = await db.query<{ account_type: string; is_postable: boolean; is_active: boolean }>(
-      `SELECT account_type, is_postable, is_active FROM accounts WHERE company_id = $1 AND id = $2 AND deleted_at IS NULL`, [companyId, accountId]);
-    if (!a || !a.is_postable || !a.is_active || !['EXPENSE', 'COST_OF_GOODS_SOLD', 'ASSET'].includes(a.account_type)) {
+    // Asset accounts are allowed for prepaid expenses and small purchases, but not
+    // cash, bank, payment-method or control accounts (AR, inventory…): those have
+    // their own sub-ledgers and must not move through an expense.
+    const { rows: [a] } = await db.query<{ account_type: string; is_postable: boolean; is_active: boolean; protected: boolean }>(
+      `SELECT account_type, is_postable, is_active,
+              (system_key IS NOT NULL OR id IN (SELECT account_id FROM payment_methods WHERE company_id = $1)) AS protected
+         FROM accounts WHERE company_id = $1 AND id = $2 AND deleted_at IS NULL`, [companyId, accountId]);
+    if (!a || !a.is_postable || !a.is_active || !['EXPENSE', 'COST_OF_GOODS_SOLD', 'ASSET'].includes(a.account_type)
+        || (a.account_type === 'ASSET' && a.protected)) {
       throw badRequest('INVALID_ACCOUNT', 'An expense category needs an active postable expense, cost or asset account');
     }
   };

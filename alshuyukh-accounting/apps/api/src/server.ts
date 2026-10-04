@@ -4,7 +4,7 @@ import { createPool } from './db/pool.js';
 import { startZatcaWorker } from './modules/zatca/worker.js';
 
 const env = loadEnv();
-const pool = createPool(env.DATABASE_URL);
+const pool = createPool(env.DATABASE_URL, { max: env.DB_POOL_MAX, statementTimeoutMs: env.DB_STATEMENT_TIMEOUT_MS });
 const app = await buildApp({ env, pool });
 
 const stopWorker = env.ZATCA_WORKER === 'on' ? startZatcaWorker(pool, app.log, env.ZATCA_WORKER_INTERVAL_SECONDS) : () => undefined;

@@ -16,8 +16,25 @@ export class ApiError extends Error {
   }
 }
 
+/**
+ * Refreshes the access token. Tabs share the refresh cookie, and presenting a
+ * token that another tab has just rotated looks like token theft to the server
+ * (it then signs out every session). The Web Locks API makes tabs take turns,
+ * so each refresh uses the current cookie.
+ */
 export async function refreshSession(): Promise<boolean> {
-  refreshing ??= (async () => {
+  if (!refreshing) {
+    const run = (): Promise<boolean> => fetchRefresh();
+    const locked = navigator.locks ? (navigator.locks.request('alshuyukh-refresh', run) as unknown as Promise<boolean>) : run();
+    refreshing = locked.finally(() => {
+      setTimeout(() => { refreshing = null; }, 0);
+    });
+  }
+  return refreshing;
+}
+
+async function fetchRefresh(): Promise<boolean> {
+  {
     try {
       const res = await fetch('/api/auth/refresh', { method: 'POST', credentials: 'include', headers: { 'X-CSRF-Protection': '1' } });
       if (!res.ok) return false;
@@ -25,11 +42,8 @@ export async function refreshSession(): Promise<boolean> {
       return true;
     } catch {
       return false;
-    } finally {
-      setTimeout(() => { refreshing = null; }, 0);
     }
-  })();
-  return refreshing;
+  }
 }
 
 export async function api<T = unknown>(method: string, path: string, body?: unknown, retry = true): Promise<T> {
@@ -70,8 +84,7 @@ export async function downloadFile(path: string, filename: string, retry = true)
 }
 
 const MESSAGES: Record<string, string> = {
-  UNAUTHORIZED: 'البريد الإلكتروني أو كلمة المرور غير صحيحة',
-  ACCOUNT_LOCKED: 'تم إيقاف الحساب مؤقتًا بسبب محاولات دخول فاشلة متكررة. حاول لاحقًا.',
+  UNAUTHORIZED: 'البريد الإلكتروني أو كلمة المرور غير صحيحة، أو أن الدخول أُوقف مؤقتًا بعد محاولات فاشلة متكررة',
   EMAIL_TAKEN: 'يوجد حساب مسجل بهذا البريد الإلكتروني',
   FORBIDDEN: 'لا تملك صلاحية تنفيذ هذا الإجراء',
   NOT_FOUND: 'السجل غير موجود',
@@ -107,6 +120,10 @@ const MESSAGES: Record<string, string> = {
   COMPLIANCE_INCOMPLETE: 'شغّل فحوص الامتثال حتى تنجح جميعها قبل التفعيل',
   NOT_PENDING: 'هذه الفاتورة الإلكترونية ليست بانتظار الإرسال (أو يجري إرسالها الآن)',
   ZATCA_NOT_CONFIGURED: 'مفتاح تشفير الفوترة الإلكترونية غير مضبوط في الخادم',
+  INVITATION_PENDING: 'لم يقبل المستخدم الدعوة بعد',
+  RANGE_TOO_LONG: 'الفترة طويلة جدًا؛ التقرير يغطي 5 سنوات كحد أقصى',
+  VALUE_OUT_OF_RANGE: 'رقم كبير جدًا',
+  QUERY_TIMEOUT: 'استغرق الطلب وقتًا طويلًا؛ ضيّق الفترة أو عوامل التصفية',
   OWN_TENANT: 'لا يمكنك إيقاف المنشأة التي سجلت الدخول بها',
   SELF: 'لا يمكنك تنفيذ هذا الإجراء على حسابك',
   DEFAULT_PLAN: 'الباقة الافتراضية يجب أن تبقى متاحة؛ اختر باقة افتراضية أخرى أولًا',

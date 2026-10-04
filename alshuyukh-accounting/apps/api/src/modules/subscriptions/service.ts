@@ -86,11 +86,13 @@ const LABEL_AR: Record<LimitKey, string> = {
 
 /**
  * Throws 402 PLAN_LIMIT_REACHED when creating one more item would exceed the
- * plan. The subscription row is locked, so concurrent creations in the same
- * tenant are serialised and cannot overshoot the limit together.
+ * plan. A per-tenant advisory lock serialises concurrent creations, so they
+ * cannot overshoot the limit together.
  */
 export async function assertWithinLimit(db: Db, tenantId: string, key: Exclude<LimitKey, 'max_storage_mb' | 'max_api_calls_per_month'>) {
-  const sub = await currentSubscription(db, tenantId, true);
+  // A per-tenant transaction lock (tenants cannot lock their subscription row: it is read-only to them).
+  await db.query(`SELECT pg_advisory_xact_lock(hashtext('plan-limits:' || $1))`, [tenantId]);
+  const sub = await currentSubscription(db, tenantId);
   const limit = sub.limits[key];
   if (limit === null) return;
   const sql = USAGE_SQL[key];

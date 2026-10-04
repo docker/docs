@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
+import { api } from './api';
+import { ErrorBox, useLoad } from './ui';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from './auth';
 
@@ -64,10 +66,11 @@ export default function Shell() {
         </header>
         <main className="content">
           <SubscriptionBanner />
+          <Invitations />
           {me.user.mustChangePassword && (
             <div className="alert alert-warn">يجب تغيير كلمة المرور المؤقتة من صفحة الإعدادات.</div>
           )}
-          <Outlet />
+          <Suspense fallback={<div className="muted">جارٍ التحميل…</div>}><Outlet /></Suspense>
         </main>
       </div>
     </div>
@@ -92,4 +95,28 @@ function SubscriptionBanner() {
     return <div className="alert alert-warn">تنتهي الفترة التجريبية خلال {Math.max(days, 0)} يوم. {link}</div>;
   }
   return null;
+}
+
+/** Organizations that invited this user; joining needs the user's consent. */
+function Invitations() {
+  const { reload } = useAuth();
+  const list = useLoad(() => api<{ data: { tenantId: string; tenantName: string }[] }>('GET', '/api/auth/invitations'));
+  const [error, setError] = useState<unknown>(null);
+  async function answer(tenantId: string, action: 'accept' | 'decline') {
+    setError(null);
+    try { await api('POST', `/api/auth/invitations/${tenantId}/${action}`); list.reload(); if (action === 'accept') await reload(); } catch (e) { setError(e); }
+  }
+  if (!list.data?.data.length) return null;
+  return (
+    <div className="alert alert-warn">
+      <ErrorBox error={error} />
+      {list.data.data.map((i) => (
+        <div key={i.tenantId} className="invite-row">
+          دعتك منشأة «{i.tenantName}» للانضمام إليها.
+          <button className="btn btn-small btn-primary" onClick={() => answer(i.tenantId, 'accept')}>قبول</button>
+          <button className="btn btn-small" onClick={() => answer(i.tenantId, 'decline')}>رفض</button>
+        </div>
+      ))}
+    </div>
+  );
 }

@@ -1,8 +1,9 @@
-import { currentSubscription, featuresOf } from '../subscriptions/service.js';
+import { assertWithinLimit, currentSubscription, featuresOf } from '../subscriptions/service.js';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { withTx } from '../../db/tx.js';
-import { badRequest, unauthorized } from '../../lib/errors.js';
+import { badRequest, notFound, unauthorized } from '../../lib/errors.js';
+import { writeAudit } from '../audit/audit.service.js';
 import { parse, password } from '../../lib/validation.js';
 import { requireAuth } from '../../plugins/auth.js';
 import { AuthService, type IssuedTokens } from './auth.service.js';
@@ -97,6 +98,37 @@ export default async function authRoutes(app: FastifyInstance) {
     const a = req.auth!;
     return service.switchTenant(a.sessionId, a.userId, a.tenantId, tenantId, req.auditMeta());
   });
+
+  /** Organizations that invited the signed-in user (an existing account is never added without consent). */
+  app.get('/invitations', { preHandler: requireAuth(app) }, async (req) => {
+    const a = req.auth!;
+    const ids = await withTx(app.deps.pool, { tenantId: a.tenantId, userId: a.userId }, async (db) =>
+      (await db.query<{ tenant_id: string; invited_at: Date }>(
+        `SELECT tenant_id, joined_at AS invited_at FROM user_tenants WHERE user_id = $1 AND status = 'INVITED'`, [a.userId])).rows);
+    const data = [];
+    // The tenant's name is visible only in that tenant's own context.
+    for (const inv of ids) {
+      const name = await withTx(app.deps.pool, { tenantId: inv.tenant_id, userId: a.userId }, async (db) =>
+        (await db.query<{ name: string }>(`SELECT name FROM tenants WHERE id = $1 AND status = 'ACTIVE' AND deleted_at IS NULL`, [inv.tenant_id])).rows[0]?.name);
+      if (name) data.push({ tenantId: inv.tenant_id, tenantName: name, invitedAt: inv.invited_at });
+    }
+    return { data };
+  });
+
+  for (const action of ['accept', 'decline'] as const) {
+    app.post(`/invitations/:tenantId/${action}`, { preHandler: requireAuth(app) }, async (req, reply) => {
+      const { tenantId } = parse(z.object({ tenantId: z.uuid() }), req.params);
+      const a = req.auth!;
+      await withTx(app.deps.pool, { tenantId, userId: a.userId }, async (db) => {
+        const { rows: [m] } = await db.query(`SELECT 1 FROM user_tenants WHERE tenant_id = $1 AND user_id = $2 AND status = 'INVITED' FOR UPDATE`, [tenantId, a.userId]);
+        if (!m) throw notFound('Invitation');
+        if (action === 'accept') await assertWithinLimit(db, tenantId, 'max_users');
+        await db.query(`UPDATE user_tenants SET status = $3 WHERE tenant_id = $1 AND user_id = $2`, [tenantId, a.userId, action === 'accept' ? 'ACTIVE' : 'DISABLED']);
+        await writeAudit(db, { tenantId, userId: a.userId, action: 'UPDATE', entityType: 'user', entityId: a.userId, newValues: { invitation: action === 'accept' ? 'ACCEPTED' : 'DECLINED' } }, req.auditMeta());
+      });
+      return reply.code(204).send();
+    });
+  }
 
   app.post('/change-password', { preHandler: requireAuth(app), config: strictLimit }, async (req, reply) => {
     const body = parse(z.object({ currentPassword: z.string().min(1).max(200), newPassword: password }), req.body);

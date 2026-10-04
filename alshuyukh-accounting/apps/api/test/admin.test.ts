@@ -1,7 +1,9 @@
+import { readdirSync } from 'node:fs';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { withTx } from '../src/db/tx.js';
 import { addMember, client, login, register, setupApp, type Session, type TestContext } from './helpers.js';
 
+const latestMigration = readdirSync(new URL('../src/db/migrations/', import.meta.url)).filter((f) => f.endsWith('.sql')).sort().at(-1);
 let t: TestContext;
 let adminSession: Session;
 let admin: ReturnType<typeof client>;
@@ -10,7 +12,7 @@ let tenant: Session;
 beforeAll(async () => {
   t = await setupApp();
   adminSession = await register(t.app, { tenantName: 'مشغل المنصة' });
-  await t.pool.query(`UPDATE users SET is_platform_admin = true WHERE id = $1`, [adminSession.userId]);
+  await t.ownerPool.query(`UPDATE users SET is_platform_admin = true WHERE id = $1`, [adminSession.userId]);
   admin = client(t.app, adminSession.token);
   tenant = await register(t.app, { tenantName: 'شركة العميل الأولى' });
 });
@@ -39,6 +41,19 @@ describe('access', () => {
     expect((await asTenant((db) => db.query(`SELECT * FROM system_errors`))).rowCount).toBe(0);
     // Without the platform flag a tenant still sees only itself.
     expect((await asTenant((db) => db.query(`SELECT * FROM subscriptions`))).rows.every((r) => r.tenant_id === tenant.tenantId)).toBe(true);
+  });
+
+  it('stops a tenant from changing its own subscription, status or platform access in SQL', async () => {
+    const asTenant = <T>(fn: Parameters<typeof withTx<T>>[2]) => withTx(t.pool, { tenantId: tenant.tenantId, userId: tenant.userId }, fn);
+    expect((await asTenant((db) => db.query(`UPDATE subscriptions SET current_period_end = now() + interval '10 years' WHERE tenant_id = $1`, [tenant.tenantId]))).rowCount).toBe(0);
+    await expect(asTenant((db) => db.query(`INSERT INTO subscriptions (tenant_id, plan_id, status, current_period_start, current_period_end)
+      SELECT $1, id, 'ACTIVE', now(), now() + interval '10 years' FROM plans LIMIT 1`, [tenant.tenantId]))).rejects.toThrow(/row-level security/);
+    await expect(asTenant((db) => db.query(`INSERT INTO billing_events (tenant_id, event_type) VALUES ($1, 'PAYMENT_RECORDED')`, [tenant.tenantId]))).rejects.toThrow(/row-level security/);
+    await expect(asTenant((db) => db.query(`INSERT INTO tenant_feature_flags (tenant_id, flag_key, enabled) VALUES ($1, 'zatca_einvoicing', true)`, [tenant.tenantId]))).rejects.toThrow(/row-level security/);
+    await expect(asTenant((db) => db.query(`UPDATE tenants SET status = 'SUSPENDED' WHERE id = $1`, [tenant.tenantId]))).rejects.toThrow(/platform administrator/);
+    await expect(asTenant((db) => db.query(`UPDATE users SET is_platform_admin = true WHERE id = $1`, [tenant.userId]))).rejects.toThrow(/platform administrator/);
+    // Ordinary profile edits still work.
+    expect((await asTenant((db) => db.query(`UPDATE tenants SET name = name WHERE id = $1`, [tenant.tenantId]))).rowCount).toBe(1);
   });
 });
 
@@ -136,7 +151,9 @@ describe('users', () => {
     expect((await client(t.app, s.token).get('/api/companies')).statusCode).toBe(401);
     await admin.post(`/api/admin/users/${s.userId}/status`, { status: 'ACTIVE' });
     expect((await client(t.app, s.token).get('/api/companies')).statusCode).toBe(200);
-    await t.pool.query(`UPDATE users SET failed_login_attempts = 9, locked_until = now() + interval '1 hour' WHERE id = $1`, [s.userId]);
+    await t.ownerPool.query(`INSERT INTO login_failures (user_id, ip, failures, locked_until) VALUES ($1, '127.0.0.1', 9, now() + interval '1 hour')`, [s.userId]);
+    await expect(login(t.app, s.email)).rejects.toThrow();
+    expect((await admin.get(`/api/admin/users?search=${encodeURIComponent(s.email)}`)).json().data[0]).toMatchObject({ failedLogins: 9, lockedUntil: expect.any(String) });
     await admin.post(`/api/admin/users/${s.userId}/unlock`);
     expect((await login(t.app, s.email)).token).toBeTruthy();
     await admin.post(`/api/admin/users/${s.userId}/platform-admin`, { grant: true });
@@ -193,6 +210,6 @@ describe('monitoring', () => {
     const errors = (await admin.get('/api/admin/errors')).json().data;
     expect(errors.some((e: { message: string }) => e.message === 'visible only to admins')).toBe(true);
     const health = (await admin.get('/api/admin/health')).json();
-    expect(health).toMatchObject({ status: 'ok', database: { migrations: expect.any(Number), lastMigration: expect.stringContaining('0013') }, zatca: { pending: expect.any(Number) } });
+    expect(health).toMatchObject({ status: 'ok', database: { migrations: expect.any(Number), lastMigration: latestMigration }, zatca: { pending: expect.any(Number) } });
   });
 });

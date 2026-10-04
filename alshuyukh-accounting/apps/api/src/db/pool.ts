@@ -1,11 +1,11 @@
 import pg from 'pg';
 
 /** Creates a pool whose sessions always use UTC. */
-export function createPool(connectionString: string): pg.Pool {
+export function createPool(connectionString: string, opts: { max?: number; statementTimeoutMs?: number } = {}): pg.Pool {
   return new pg.Pool({
     connectionString,
-    max: 20,
-    options: '-c timezone=UTC',
+    max: opts.max ?? 20,
+    options: `-c timezone=UTC -c statement_timeout=${opts.statementTimeoutMs ?? 15000}`,
   });
 }
 

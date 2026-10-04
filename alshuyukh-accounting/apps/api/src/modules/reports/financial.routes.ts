@@ -7,7 +7,7 @@ import { parse } from '../../lib/validation.js';
 import { requirePermission } from '../../plugins/auth.js';
 import { DEBIT_NORMAL, type AccountType } from '../accounting/chart-template.js';
 import { resolveCompanyId } from '../accounting/company-context.js';
-import { CASH_ACCOUNTS, checkRange, DOCUMENT_NUMBER, GL, NOT_CLOSING, rangeFields } from './common.js';
+import { CASH_ACCOUNTS, checkRange, DOC_NUMBERS, GL, NOT_CLOSING, rangeFields } from './common.js';
 
 interface AccountRow { accountId: string; code: string; nameAr: string; type: AccountType; groupCode: string | null; groupName: string | null; amount: string }
 
@@ -150,11 +150,11 @@ export default async function financialReportRoutes(app: FastifyInstance) {
         `WITH g AS (${GL}) SELECT COALESCE(sum(g.debit - g.credit), 0)::text AS opening FROM g WHERE ${filters} AND g.entry_date < $4 AND $5::date IS NOT NULL`, params);
       const LIMIT = 5000;
       const { rows } = await db.query<{ entryId: string; entryNumber: string; date: string; description: string; referenceType: string; documentNumber: string | null; debit: string; credit: string }>(
-        `WITH g AS (${GL})
+        `WITH g AS (${GL}), dn AS (${DOC_NUMBERS})
          SELECT g.entry_id AS "entryId", g.entry_number AS "entryNumber", g.entry_date AS date,
                 COALESCE(g.line_description, g.description) AS description, g.origin_type AS "referenceType", g.origin_id AS "referenceId",
-                ${DOCUMENT_NUMBER} AS "documentNumber", g.debit::text, g.credit::text
-           FROM g WHERE ${filters} AND g.entry_date BETWEEN $4 AND $5
+                dn.number AS "documentNumber", g.debit::text, g.credit::text
+           FROM g LEFT JOIN dn ON dn.id = g.origin_id WHERE ${filters} AND g.entry_date BETWEEN $4 AND $5
           ORDER BY g.entry_date, g.posted_at, g.entry_number, g.line_no LIMIT ${LIMIT + 1}`, params);
       const truncated = rows.length > LIMIT;
       return { companyId, dateFrom: q.dateFrom, dateTo: q.dateTo, account, ...runningLines(o!.opening, rows.slice(0, LIMIT), DEBIT_NORMAL.has(account.type)), truncated };

@@ -10,6 +10,13 @@ const schema = z.object({
   PORT: z.coerce.number().int().default(3000),
   HOST: z.string().default('0.0.0.0'),
   CORS_ORIGINS: z.string().default('http://localhost:5173'),
+  // Reverse proxies in front of the API: a hop count (e.g. 1 behind nginx) or a
+  // comma-separated list of proxy IPs/CIDRs. Never "true": X-Forwarded-For
+  // would then be taken from the client and IP rate limits could be bypassed.
+  TRUST_PROXY: z.string().regex(/^(false|\d{1,2}|[0-9a-fA-F.:/,\s]+)$/, 'TRUST_PROXY: false, a hop count, or proxy IPs/CIDRs').default('false'),
+  // Longest a single SQL statement may run (protects against runaway reports).
+  DB_STATEMENT_TIMEOUT_MS: z.coerce.number().int().min(1000).max(600000).default(15000),
+  DB_POOL_MAX: z.coerce.number().int().min(2).max(200).default(20),
   LOGIN_MAX_ATTEMPTS: z.coerce.number().int().min(3).default(5),
   LOGIN_LOCK_MINUTES: z.coerce.number().int().min(1).default(15),
   // 32 random bytes, base64: encrypts ZATCA private keys and CSID secrets at rest.

@@ -61,6 +61,14 @@ export async function migrate(connectionString: string, log: (msg: string) => vo
   }
 }
 
+/** Migration files shipped with this build that the database has not applied yet. */
+export async function pendingMigrations(db: { query: pg.Pool['query'] }): Promise<string[]> {
+  const files = (await readdir(MIGRATIONS_DIR)).filter((f) => f.endsWith('.sql'));
+  const { rows } = await db.query<{ version: string }>('SELECT version FROM schema_migrations');
+  const applied = new Set(rows.map((r) => r.version));
+  return files.filter((f) => !applied.has(f)).sort();
+}
+
 async function syncRbacCatalog(client: pg.Client): Promise<void> {
   await client.query('BEGIN');
   try {

@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "db:migrate": "tsx --env-file=../../.env src/db/migrate-cli.ts",
     "test": "vitest run",
-    "admin": "tsx --env-file=../../.env src/admin-cli.ts"
+    "admin": "tsx --env-file=../../.env src/admin-cli.ts",
+    "perf": "tsx --env-file=../../.env scripts/perf.ts"
   },
   "dependencies": {
     "@fastify/cookie": "^11.1.2",
@@ -32,6 +33,7 @@
     "@types/node": "^22",
     "@types/pg": "^8.23.1",
     "@types/qrcode": "^1.5.6",
+    "@vitest/coverage-v8": "^5.0.3",
     "tsx": "^4.23.15",
     "typescript": "^5.9",
     "vitest": "^5.0.3"

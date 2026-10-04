@@ -60,7 +60,8 @@ export default async function adminPlatformRoutes(app: FastifyInstance) {
     return platformTx(app, req, async (db) => {
       const { rows } = await db.query<{ total: string }>(
         `SELECT count(*) OVER () AS total, u.id, u.email, u.full_name AS "fullName", u.status, u.is_platform_admin AS "isPlatformAdmin",
-                u.locked_until AS "lockedUntil", u.failed_login_attempts AS "failedLogins", u.last_login_at AS "lastLoginAt", u.created_at AS "createdAt",
+                (SELECT max(f.locked_until) FROM login_failures f WHERE f.user_id = u.id) AS "lockedUntil",
+                COALESCE((SELECT sum(f.failures) FROM login_failures f WHERE f.user_id = u.id), 0)::int AS "failedLogins", u.last_login_at AS "lastLoginAt", u.created_at AS "createdAt",
                 COALESCE((SELECT json_agg(json_build_object('tenantId', t.id, 'name', t.name, 'isOwner', ut.is_owner) ORDER BY t.name)
                             FROM user_tenants ut JOIN tenants t ON t.id = ut.tenant_id WHERE ut.user_id = u.id), '[]') AS tenants
            FROM users u WHERE u.deleted_at IS NULL AND ($1::text IS NULL OR u.email ILIKE '%' || $1 || '%' OR u.full_name ILIKE '%' || $1 || '%')
@@ -87,7 +88,7 @@ export default async function adminPlatformRoutes(app: FastifyInstance) {
     return { status: b.status };
   });
   userAction('unlock', z.object({}), async (db, id) => {
-    await db.query(`UPDATE users SET failed_login_attempts = 0, locked_until = NULL WHERE id = $1`, [id]);
+    await db.query(`DELETE FROM login_failures WHERE user_id = $1`, [id]);
     return { unlocked: true };
   });
   userAction('platform-admin', z.object({ grant: z.boolean() }), async (db, id, b, self) => {
