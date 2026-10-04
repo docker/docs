@@ -41,7 +41,9 @@ export interface DocLine {
 }
 
 export interface Doc {
-  id: string; number: string | null; date: string; partyId: string; partyName: string; partyCode: string; status: string;
+  id: string; companyId: string; number: string | null; date: string; partyId: string; partyName: string; partyCode: string; status: string;
+  issuedAt?: string | null;
+  partySnapshot?: { nameAr: string; vatNumber: string | null; commercialRegistration: string | null; address: { buildingNumber: string | null; street: string | null; district: string | null; city: string | null; postalCode: string | null; additionalNumber: string | null } | null } | null;
   pricesIncludeVat: boolean; subtotal: string; discountTotal: string; taxableAmount: string; taxAmount: string; total: string;
   notes: string | null; journalEntryId: string | null; cancelReason: string | null;
   dueDate?: string | null; paidAmount?: string; returnedAmount?: string; remainingAmount?: string; invoiceKind?: string;

@@ -418,6 +418,7 @@ export function headerSelect(kind: DocKind) {
       `d.returned_amount::text AS "returnedAmount"`, `d.remaining_amount::text AS "remainingAmount"`);
   }
   if (kind.key === 'SALES_INVOICE') extra.push(`d.invoice_kind AS "invoiceKind"`, `d.source_quote_id AS "sourceQuoteId"`);
+  if (kind.key === 'SALES_RETURN') extra.push(`d.invoice_kind AS "invoiceKind"`);
   if (kind.key === 'PURCHASE_INVOICE') extra.push(`d.supplier_invoice_number AS "supplierInvoiceNumber"`, `d.source_order_id AS "sourceOrderId"`);
   if (kind.isReturn) {
     extra.push(`d.original_invoice_id AS "originalInvoiceId"`, `d.reason`, `d.applied_amount::text AS "appliedAmount"`,

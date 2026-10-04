@@ -14,6 +14,12 @@ const companyFields = {
   vatNumber: z.string().regex(/^3\d{13}3$/, 'Saudi VAT number must be 15 digits starting and ending with 3').nullish(),
   address: optionalText(500),
   city: optionalText(100),
+  // Saudi national address, required for e-invoicing.
+  buildingNumber: z.string().regex(/^\d{4}$/, 'Building number must be 4 digits').nullish(),
+  street: optionalText(200),
+  district: optionalText(200),
+  postalCode: z.string().regex(/^\d{5}$/, 'Postal code must be 5 digits').nullish(),
+  additionalNumber: z.string().regex(/^\d{4}$/, 'Additional number must be 4 digits').nullish(),
   country: z.string().regex(/^[A-Z]{2}$/).optional(),
   currency: z.string().regex(/^[A-Z]{3}$/).optional(),
   timezone: timezone.optional(),
@@ -28,11 +34,13 @@ const companyUpdate = z.object({ ...companyFields, isActive: z.boolean() }).part
 const COMPANY_COLUMNS: Record<string, string> = {
   name: 'name', legalName: 'legal_name', commercialRegistration: 'commercial_registration',
   vatNumber: 'vat_number', address: 'address', city: 'city', country: 'country', currency: 'currency',
+  buildingNumber: 'building_number', street: 'street', district: 'district', postalCode: 'postal_code', additionalNumber: 'additional_number',
   timezone: 'timezone', logoUrl: 'logo_url', email: 'email', phone: 'phone', isActive: 'is_active',
 };
 
 const COMPANY_SELECT = `SELECT id, name, legal_name AS "legalName", commercial_registration AS "commercialRegistration",
-  vat_number AS "vatNumber", address, city, country, currency, timezone, logo_url AS "logoUrl", email, phone,
+  vat_number AS "vatNumber", address, city, building_number AS "buildingNumber", street, district,
+  postal_code AS "postalCode", additional_number AS "additionalNumber", country, currency, timezone, logo_url AS "logoUrl", email, phone,
   is_active AS "isActive", created_at AS "createdAt", updated_at AS "updatedAt" FROM companies`;
 
 const branchFields = {

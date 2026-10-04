@@ -12,7 +12,7 @@ import Valuation from '../inventory/Valuation';
 interface Product {
   id: string; sku: string; barcode: string | null; nameAr: string; nameEn: string | null; productType: string;
   categoryId: string | null; categoryName: string | null; unitId: string; unitName: string; salePrice: string;
-  salePriceIncludesVat: boolean; purchasePrice: string; vatCategory: string; trackInventory: boolean; isActive: boolean; onHand: string;
+  salePriceIncludesVat: boolean; purchasePrice: string; vatCategory: string; vatExemptionCode: string | null; vatExemptionReason: string | null; trackInventory: boolean; isActive: boolean; onHand: string;
 }
 interface Unit { id: string; code: string; nameAr: string; isActive: boolean }
 interface Category { id: string; parentId: string | null; nameAr: string; isActive: boolean }
@@ -21,6 +21,16 @@ const VAT_AR: Record<string, string> = { S: 'خاضع للنسبة الأساس�
 const blank = (v: FormDataEntryValue | null) => (v === null || String(v).trim() === '' ? null : String(v).trim());
 /** Shows a 4-decimal unit price without trailing zeros beyond 2 places. */
 const price = (v: string) => v.replace(/(\.\d\d)00$/, '$1').replace(/(\.\d\d\d)0$/, '$1');
+
+/** ZATCA exemption and zero-rating reason codes. */
+const EXEMPTION_CODES: [string, string][] = [
+  ['VATEX-SA-29', 'خدمات مالية (معفى)'], ['VATEX-SA-29-7', 'تأمين على الحياة (معفى)'], ['VATEX-SA-30', 'توريد عقاري (معفى)'],
+  ['VATEX-SA-32', 'تصدير سلع (صفري)'], ['VATEX-SA-33', 'تصدير خدمات (صفري)'], ['VATEX-SA-34-1', 'نقل دولي للسلع (صفري)'],
+  ['VATEX-SA-34-2', 'نقل دولي للركاب (صفري)'], ['VATEX-SA-34-3', 'خدمات مرتبطة بالنقل الدولي (صفري)'], ['VATEX-SA-34-4', 'توريد وسائل نقل مؤهلة (صفري)'],
+  ['VATEX-SA-34-5', 'خدمات متعلقة بنقل السلع أو الركاب (صفري)'], ['VATEX-SA-35', 'أدوية ومعدات طبية (صفري)'], ['VATEX-SA-36', 'معادن مؤهلة (صفري)'],
+  ['VATEX-SA-EDU', 'تعليم خاص للمواطنين (صفري)'], ['VATEX-SA-HEA', 'رعاية صحية خاصة للمواطنين (صفري)'], ['VATEX-SA-MLTRY', 'سلع عسكرية مؤهلة (صفري)'],
+  ['VATEX-SA-OOS', 'خارج نطاق الضريبة'],
+];
 
 type Tab = 'products' | 'balances' | 'card' | 'transfers' | 'adjustments' | 'valuation' | 'setup';
 
@@ -77,6 +87,8 @@ function ProductList() {
       salePrice: String(f.get('salePrice') || '0'), purchasePrice: String(f.get('purchasePrice') || '0'),
       salePriceIncludesVat: f.get('salePriceIncludesVat') === 'on', vatCategory: String(f.get('vatCategory')),
       trackInventory: type === 'GOODS' && f.get('trackInventory') === 'on',
+      vatExemptionCode: String(f.get('vatCategory')) === 'S' ? null : blank(f.get('vatExemptionCode')),
+      vatExemptionReason: String(f.get('vatCategory')) === 'S' ? null : blank(f.get('vatExemptionReason')),
     };
     setError(null);
     try {
@@ -122,6 +134,13 @@ function ProductList() {
                 {Object.entries(VAT_AR).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
               </select>
             </label>
+            <label>سبب الإعفاء أو النسبة الصفرية (للفوترة الإلكترونية)
+              <select name="vatExemptionCode" defaultValue={current?.vatExemptionCode ?? ''}>
+                <option value="">— لا ينطبق على الخاضع —</option>
+                {EXEMPTION_CODES.map(([k, v]) => <option key={k} value={k}>{k} — {v}</option>)}
+              </select>
+            </label>
+            <label>نص سبب الإعفاء (اختياري)<input name="vatExemptionReason" defaultValue={current?.vatExemptionReason ?? ''} /></label>
           </div>
           <label className="check"><input type="checkbox" name="salePriceIncludesVat" defaultChecked={current?.salePriceIncludesVat} />سعر البيع شامل الضريبة</label>
           <label className="check"><input type="checkbox" name="trackInventory" defaultChecked={current?.trackInventory ?? true} />تتبع المخزون (للسلع فقط)</label>

@@ -12,7 +12,7 @@ const NAV: { to: string; label: string; icon: string; phase?: number }[] = [
   { to: '/expenses', label: 'المصروفات', icon: '−' },
   { to: '/accounting', label: 'المحاسبة', icon: '⚖' },
   { to: '/reports', label: 'التقارير', icon: '▤' },
-  { to: '/e-invoicing', label: 'الفوترة الإلكترونية', icon: '⎙', phase: 8 },
+  { to: '/e-invoicing', label: 'الفوترة الإلكترونية', icon: '⎙' },
   { to: '/settings', label: 'الإعدادات', icon: '⚙' },
 ];
 

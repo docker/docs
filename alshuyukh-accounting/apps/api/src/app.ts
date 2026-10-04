@@ -20,6 +20,10 @@ import expenseRoutes from './modules/expenses/routes.js';
 import taxRoutes from './modules/tax/routes.js';
 import commercialReportRoutes from './modules/reports/commercial.routes.js';
 import dashboardRoutes from './modules/reports/dashboard.routes.js';
+import { encryptionKey } from './modules/zatca/crypto.js';
+import zatcaRoutes from './modules/zatca/routes.js';
+import { configureZatca } from './modules/zatca/service.js';
+import { setGatewayUrl } from './modules/zatca/client.js';
 import financialReportRoutes from './modules/reports/financial.routes.js';
 import partyReportRoutes from './modules/reports/parties.routes.js';
 import authRoutes from './modules/auth/auth.routes.js';
@@ -51,6 +55,8 @@ export async function buildApp({ env, pool, logger = true }: BuildOptions): Prom
     genReqId: () => crypto.randomUUID(),
   });
 
+  configureZatca(encryptionKey(env));
+  setGatewayUrl(env.ZATCA_GATEWAY_URL ?? null);
   app.decorate('deps', { env, pool, tokens: new TokenService(env.JWT_SECRET, env.ACCESS_TOKEN_TTL_SECONDS) });
 
   await app.register(helmet, {
@@ -112,6 +118,7 @@ export async function buildApp({ env, pool, logger = true }: BuildOptions): Prom
     await api.register(partyReportRoutes);
     await api.register(commercialReportRoutes);
     await api.register(dashboardRoutes);
+    await api.register(zatcaRoutes);
   }, { prefix: '/api' });
 
   return app;

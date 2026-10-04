@@ -3,7 +3,8 @@ import { api } from '../api';
 import { useAuth } from '../auth';
 import { ErrorBox, PageHeader, useLoad } from '../ui';
 
-interface Company { id: string; name: string; legalName: string | null; vatNumber: string | null; commercialRegistration: string | null; city: string | null; address: string | null; phone: string | null; email: string | null; currency: string }
+interface Company { id: string; name: string; legalName: string | null; vatNumber: string | null; commercialRegistration: string | null; city: string | null; address: string | null;
+  buildingNumber: string | null; street: string | null; district: string | null; postalCode: string | null; additionalNumber: string | null; phone: string | null; email: string | null; currency: string }
 interface Branch { id: string; code: string; name: string; city: string | null; isMain: boolean; isActive: boolean }
 interface Warehouse { id: string; code: string; name: string; branchId: string | null; isActive: boolean }
 
@@ -33,6 +34,8 @@ export default function Companies() {
       name: String(f.get('name')), legalName: nullIfEmpty(f.get('legalName')), vatNumber: nullIfEmpty(f.get('vatNumber')),
       commercialRegistration: nullIfEmpty(f.get('commercialRegistration')), city: nullIfEmpty(f.get('city')),
       address: nullIfEmpty(f.get('address')), phone: nullIfEmpty(f.get('phone')), email: nullIfEmpty(f.get('email')),
+      buildingNumber: nullIfEmpty(f.get('buildingNumber')), street: nullIfEmpty(f.get('street')), district: nullIfEmpty(f.get('district')),
+      postalCode: nullIfEmpty(f.get('postalCode')), additionalNumber: nullIfEmpty(f.get('additionalNumber')),
     }), companies.reload);
   }
 
@@ -77,6 +80,14 @@ export default function Companies() {
               <label>العنوان<input name="address" defaultValue={company.address ?? ''} /></label>
               <label>الهاتف<input name="phone" defaultValue={company.phone ?? ''} dir="ltr" /></label>
               <label>البريد الإلكتروني<input name="email" type="email" defaultValue={company.email ?? ''} dir="ltr" /></label>
+            </div>
+            <h3>العنوان الوطني <span className="muted small">(مطلوب للفوترة الإلكترونية)</span></h3>
+            <div className="grid-3">
+              <label>رقم المبنى<input name="buildingNumber" defaultValue={company.buildingNumber ?? ''} pattern="[0-9]{4}" dir="ltr" /></label>
+              <label>الشارع<input name="street" defaultValue={company.street ?? ''} /></label>
+              <label>الحي<input name="district" defaultValue={company.district ?? ''} /></label>
+              <label>الرمز البريدي<input name="postalCode" defaultValue={company.postalCode ?? ''} pattern="[0-9]{5}" dir="ltr" /></label>
+              <label>الرقم الإضافي<input name="additionalNumber" defaultValue={company.additionalNumber ?? ''} pattern="[0-9]{4}" dir="ltr" /></label>
             </div>
             <p className="muted small">العملة: {company.currency}</p>
             {manage && <button className="btn btn-primary">حفظ</button>}

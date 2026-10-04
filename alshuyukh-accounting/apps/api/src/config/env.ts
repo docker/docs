@@ -12,6 +12,13 @@ const schema = z.object({
   CORS_ORIGINS: z.string().default('http://localhost:5173'),
   LOGIN_MAX_ATTEMPTS: z.coerce.number().int().min(3).default(5),
   LOGIN_LOCK_MINUTES: z.coerce.number().int().min(1).default(15),
+  // 32 random bytes, base64: encrypts ZATCA private keys and CSID secrets at rest.
+  ZATCA_ENCRYPTION_KEY: z.string().optional(),
+  // Background submission of pending e-invoices (reporting / clearance).
+  // Overrides the Fatoora gateway base URL (a proxy, or a local stand-in for testing).
+  ZATCA_GATEWAY_URL: z.url().optional(),
+  ZATCA_WORKER: z.enum(['on', 'off']).default('on'),
+  ZATCA_WORKER_INTERVAL_SECONDS: z.coerce.number().int().min(10).default(60),
 });
 
 export type Env = z.infer<typeof schema>;
@@ -24,6 +31,9 @@ export function loadEnv(source: NodeJS.ProcessEnv = process.env): Env {
   }
   if (parsed.data.NODE_ENV === 'production' && parsed.data.JWT_SECRET.startsWith('change-me')) {
     throw new Error('JWT_SECRET must be changed in production');
+  }
+  if (parsed.data.NODE_ENV === 'production' && !parsed.data.ZATCA_ENCRYPTION_KEY) {
+    throw new Error('ZATCA_ENCRYPTION_KEY is required in production (openssl rand -base64 32)');
   }
   return parsed.data;
 }

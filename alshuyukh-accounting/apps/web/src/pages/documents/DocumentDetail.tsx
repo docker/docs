@@ -7,6 +7,7 @@ import { ErrorBox, useLoad } from '../../ui';
 import { DOCS, STATUS_AR, statusClass, type DocConfig, type Doc } from './config';
 import DocumentForm from './DocumentForm';
 import Totals from './Totals';
+import EInvoicePanel from './EInvoicePanel';
 
 const today = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Riyadh' }).format(new Date());
 
@@ -47,6 +48,9 @@ export default function DocumentDetail({ config }: { config: DocConfig }) {
         </div>
         <span className={`tag ${statusClass(d.status)}`}>{STATUS_AR[d.status] ?? d.status}</span>
       </div>
+      {(config.key === 'SALES_INVOICE' || config.key === 'SALES_RETURN') && d.status !== 'DRAFT' && (
+        <EInvoicePanel key={d.status} type={config.key} id={d.id} printPath={`/sales/${config.route}/${d.id}/print`} />
+      )}
       <dl className="meta">
         <div><dt>التاريخ</dt><dd dir="ltr">{d.date}</dd></div>
         {d.dueDate && <div><dt>الاستحقاق</dt><dd dir="ltr">{d.dueDate}</dd></div>}

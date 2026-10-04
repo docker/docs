@@ -1,3 +1,4 @@
+import { assertCancellable, generateForDocument } from '../zatca/service.js';
 import type { Db } from '../../db/tx.js';
 import { badRequest, conflict } from '../../lib/errors.js';
 import { Decimal, toMoney } from '../../lib/money.js';
@@ -217,6 +218,11 @@ export async function issueDocument(db: Db, kind: DocKind, ctx: Ctx, id: string)
     sets.push(['due_date', d.due_date ?? await defaultDueDate(db, kind, d.party_id, d.doc_date)]);
   }
   if (kind.key === 'SALES_INVOICE') sets.push(['invoice_kind', party!.vat_number ? 'STANDARD' : 'SIMPLIFIED']);
+  if (kind.key === 'SALES_RETURN') {
+    // A credit note follows the kind of the invoice it credits (standard or simplified).
+    const { rows: [o] } = await db.query<{ invoice_kind: string | null }>(`SELECT invoice_kind FROM sales_invoices WHERE id = $1`, [d.original_invoice_id]);
+    sets.push(['invoice_kind', o?.invoice_kind ?? 'SIMPLIFIED']);
+  }
 
   let originalKind: DocKind | null = null;
   if (kind.isReturn) {
@@ -239,9 +245,14 @@ export async function issueDocument(db: Db, kind: DocKind, ctx: Ctx, id: string)
     partyName: snapshot.nameAr, partyVatNumber: snapshot.vatNumber,
   });
 
+  // E-invoice (ZATCA) for sales documents when the company has an active unit.
+  const zatcaInvoiceId = kind.key === 'SALES_INVOICE' || kind.key === 'SALES_RETURN'
+    ? await generateForDocument(db, ctx, kind.key, id, { companyId: d.company_id, branchId: d.branch_id as string | null })
+    : null;
+
   await writeAudit(db, {
     tenantId: ctx.tenantId, userId: ctx.userId, action: 'POST', entityType: kind.entity, entityId: id,
-    newValues: { number, total: totals.total, taxAmount: totals.taxAmount, journalEntryId: entry.id },
+    newValues: { number, total: totals.total, taxAmount: totals.taxAmount, journalEntryId: entry.id, zatcaInvoiceId },
   }, ctx.meta);
   return loadDocument(db, kind, ctx.tenantId, id);
 }
@@ -249,7 +260,7 @@ export async function issueDocument(db: Db, kind: DocKind, ctx: Ctx, id: string)
 /**
  * Cancels an issued invoice or return that nothing has been settled
  * against: its journal entry is reversed on the original date.
- * TODO(Phase 8): once an invoice is reported to ZATCA it can only be corrected by a return (credit note).
+ * Sales documents in the e-invoicing chain cannot be cancelled; they are corrected with a credit note.
  */
 export async function cancelDocument(db: Db, kind: DocKind, ctx: Ctx, id: string, reason: string) {
   const d = await lockDocument(db, kind, ctx.tenantId, id);
@@ -259,6 +270,7 @@ export async function cancelDocument(db: Db, kind: DocKind, ctx: Ctx, id: string
   } else {
     if (d.status === 'DRAFT') throw conflict('DOCUMENT_NOT_ISSUED', 'Delete the draft instead');
     if (d.status === 'CANCELLED') throw conflict('ALREADY_CANCELLED', 'This document is already cancelled');
+    if (kind.key === 'SALES_INVOICE' || kind.key === 'SALES_RETURN') await assertCancellable(db, kind.key, id);
     if (kind.isReturn) {
       if (new Decimal(d.refunded_amount as string).greaterThan(0)) throw conflict('HAS_PAYMENTS', 'Void the refund payments first');
     } else {

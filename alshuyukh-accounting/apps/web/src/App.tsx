@@ -13,7 +13,6 @@ import Parties, { CUSTOMERS, SUPPLIERS } from './pages/parties/Parties';
 import Products from './pages/products/Products';
 import Section from './pages/documents/Section';
 import Companies from './pages/Companies';
-import ComingSoon from './pages/ComingSoon';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -21,6 +20,7 @@ import Roles from './pages/Roles';
 import Settings from './pages/Settings';
 import Expenses from './pages/expenses/Expenses';
 import Reports from './pages/reports/Reports';
+import EInvoicing from './pages/einvoicing/EInvoicing';
 import Users from './pages/Users';
 
 export default function App() {
@@ -56,7 +56,7 @@ export default function App() {
           <Route path="trial-balance" element={<TrialBalance />} />
         </Route>
         <Route path="reports/*" element={<Reports />} />
-        <Route path="e-invoicing" element={<ComingSoon title="الفوترة الإلكترونية" phase={8} />} />
+        <Route path="e-invoicing" element={<EInvoicing />} />
         <Route path="settings" element={<Settings />} />
         <Route path="settings/companies" element={<Companies />} />
         <Route path="settings/users" element={<Users />} />

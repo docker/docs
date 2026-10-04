@@ -6,6 +6,7 @@ import DocumentDetail from './DocumentDetail';
 import DocumentForm from './DocumentForm';
 import DocumentList from './DocumentList';
 import Payments from './Payments';
+import PrintDocument from './PrintDocument';
 
 /** Sales or purchases section: tabs for each document type and payments. */
 export default function Section({ party }: { party: 'customer' | 'supplier' }) {
@@ -31,6 +32,7 @@ export default function Section({ party }: { party: 'customer' | 'supplier' }) {
             <Route index element={<DocumentList config={d} />} />
             {!d.isReturn && <Route path="new" element={<DocumentForm config={d} />} />}
             <Route path=":id" element={<DocumentDetail config={d} />} />
+            {(d.key === 'SALES_INVOICE' || d.key === 'SALES_RETURN') && <Route path=":id/print" element={<PrintDocument config={d} />} />}
           </Route>
         ))}
         <Route path={paymentsRoute} element={<Payments party={party} />} />

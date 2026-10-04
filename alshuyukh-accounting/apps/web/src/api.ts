@@ -52,6 +52,23 @@ export async function api<T = unknown>(method: string, path: string, body?: unkn
   return data as T;
 }
 
+/** Downloads a file from an authenticated endpoint and hands it to the browser. */
+export async function downloadFile(path: string, filename: string, retry = true): Promise<void> {
+  const res = await fetch(path, { headers: { 'X-CSRF-Protection': '1', ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}) }, credentials: 'include' });
+  if (res.status === 401 && retry && await refreshSession()) return downloadFile(path, filename, false);
+  if (!res.ok) {
+    const e = (await res.json().catch(() => ({})))?.error ?? {};
+    throw new ApiError(res.status, e.code ?? 'ERROR', translateError(e.code, e.message), e.details);
+  }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(await res.blob());
+  a.download = filename;
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
 const MESSAGES: Record<string, string> = {
   UNAUTHORIZED: 'البريد الإلكتروني أو كلمة المرور غير صحيحة',
   ACCOUNT_LOCKED: 'تم إيقاف الحساب مؤقتًا بسبب محاولات دخول فاشلة متكررة. حاول لاحقًا.',
@@ -86,5 +103,9 @@ const MESSAGES: Record<string, string> = {
   YEAR_CLOSED: 'السنة المالية مقفلة',
   FISCAL_YEAR_OVERLAP: 'السنة المالية تتداخل مع سنة موجودة',
   FISCAL_YEARS_EXIST: 'لا يمكن تغيير بداية السنة المالية بعد إنشاء سنوات مالية',
+  DEVICE_STATE: 'لا يمكن تنفيذ هذه الخطوة في المرحلة الحالية لوحدة الفوترة',
+  COMPLIANCE_INCOMPLETE: 'شغّل فحوص الامتثال حتى تنجح جميعها قبل التفعيل',
+  NOT_PENDING: 'هذه الفاتورة الإلكترونية ليست بانتظار الإرسال (أو يجري إرسالها الآن)',
+  ZATCA_NOT_CONFIGURED: 'مفتاح تشفير الفوترة الإلكترونية غير مضبوط في الخادم',
 };
 const translateError = (code?: string, fallback?: string) => (code && MESSAGES[code]) || fallback || 'حدث خطأ غير متوقع';

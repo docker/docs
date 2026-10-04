@@ -16,7 +16,8 @@ const PRODUCT_SELECT = `
          p.description, p.product_type AS "productType", p.category_id AS "categoryId", c.name_ar AS "categoryName",
          p.unit_id AS "unitId", u.code AS "unitCode", u.name_ar AS "unitName",
          p.sale_price::text AS "salePrice", p.sale_price_includes_vat AS "salePriceIncludesVat",
-         p.purchase_price::text AS "purchasePrice", p.vat_category AS "vatCategory", p.track_inventory AS "trackInventory",
+         p.purchase_price::text AS "purchasePrice", p.vat_category AS "vatCategory",
+         p.vat_exemption_code AS "vatExemptionCode", p.vat_exemption_reason AS "vatExemptionReason", p.track_inventory AS "trackInventory",
          p.sales_account_id AS "salesAccountId", p.purchase_account_id AS "purchaseAccountId",
          p.is_active AS "isActive", p.created_at AS "createdAt", p.updated_at AS "updatedAt",
          COALESCE((SELECT sum(b.quantity) FROM inventory_balances b WHERE b.product_id = p.id), 0)::text AS "onHand"
@@ -37,6 +38,9 @@ const productFields = {
   salePriceIncludesVat: z.boolean(),
   purchasePrice: price,
   vatCategory: z.enum(['S', 'Z', 'E', 'O']),
+  // ZATCA exemption reason for zero-rated, exempt and out-of-scope supplies.
+  vatExemptionCode: z.string().regex(/^VATEX-SA-[A-Z0-9-]{2,12}$/).nullish(),
+  vatExemptionReason: optionalText(300),
   trackInventory: z.boolean(),
   salesAccountId: z.uuid().nullish(),
   purchaseAccountId: z.uuid().nullish(),
@@ -60,6 +64,7 @@ const COLUMNS: [keyof z.infer<typeof updateBody>, string][] = [
   ['sku', 'sku'], ['barcode', 'barcode'], ['nameAr', 'name_ar'], ['nameEn', 'name_en'], ['description', 'description'],
   ['productType', 'product_type'], ['categoryId', 'category_id'], ['unitId', 'unit_id'], ['salePrice', 'sale_price'],
   ['salePriceIncludesVat', 'sale_price_includes_vat'], ['purchasePrice', 'purchase_price'], ['vatCategory', 'vat_category'],
+  ['vatExemptionCode', 'vat_exemption_code'], ['vatExemptionReason', 'vat_exemption_reason'],
   ['trackInventory', 'track_inventory'], ['salesAccountId', 'sales_account_id'], ['purchaseAccountId', 'purchase_account_id'],
   ['isActive', 'is_active'],
 ];
@@ -251,11 +256,12 @@ export default async function productsRoutes(app: FastifyInstance) {
       const { rows: [row] } = await db.query<{ id: string }>(
         `INSERT INTO products (tenant_id, company_id, sku, barcode, name_ar, name_en, description, product_type, category_id,
            unit_id, sale_price, sale_price_includes_vat, purchase_price, vat_category, track_inventory,
-           sales_account_id, purchase_account_id, created_by, updated_by)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $18) RETURNING id`,
+           sales_account_id, purchase_account_id, created_by, updated_by, vat_exemption_code, vat_exemption_reason)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $18, $19, $20) RETURNING id`,
         [a.tenantId, companyId, sku, body.barcode ?? null, body.nameAr, body.nameEn ?? null, body.description ?? null,
          body.productType, body.categoryId ?? null, unitId, body.salePrice, body.salePriceIncludesVat, body.purchasePrice,
-         body.vatCategory, trackInventory, body.salesAccountId ?? null, body.purchaseAccountId ?? null, a.userId]);
+         body.vatCategory, trackInventory, body.salesAccountId ?? null, body.purchaseAccountId ?? null, a.userId,
+         body.vatExemptionCode ?? null, body.vatExemptionReason ?? null]);
       const created = await loadProduct(db, a.tenantId, row!.id);
       await writeAudit(db, { tenantId: a.tenantId, userId: a.userId, action: 'CREATE', entityType: 'product', entityId: row!.id, newValues: created }, req.auditMeta());
       return created;
