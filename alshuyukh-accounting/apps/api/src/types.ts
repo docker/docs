@@ -17,6 +17,8 @@ export interface AuthContext {
   isOwner: boolean;
   isPlatformAdmin: boolean;
   permissions: ReadonlySet<string>;
+  /** Subscription state; writes are refused when it is not writable. */
+  subscription: { state: string; writable: boolean };
 }
 
 declare module 'fastify' {

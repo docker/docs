@@ -1,3 +1,4 @@
+import { currentSubscription, featuresOf } from '../subscriptions/service.js';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { withTx } from '../../db/tx.js';
@@ -115,7 +116,8 @@ export default async function authRoutes(app: FastifyInstance) {
         [a.tenantId, a.userId]);
       const { rows: [tenant] } = await db.query<{ id: string; name: string; status: string }>(
         `SELECT id, name, status FROM tenants WHERE id = $1`, [a.tenantId]);
-      return { u: u!, roles, tenant: tenant! };
+      const sub = await currentSubscription(db, a.tenantId);
+      return { u: u!, roles, tenant: tenant!, sub, features: await featuresOf(db, a.tenantId) };
     });
     return {
       user: {
@@ -126,6 +128,11 @@ export default async function authRoutes(app: FastifyInstance) {
       roles: profile.roles.map((r) => ({ id: r.id, code: r.code, nameAr: r.name_ar, nameEn: r.name_en })),
       permissions: [...a.permissions].sort(),
       memberships: await service.listMemberships(a.userId),
+      subscription: {
+        state: profile.sub.state, writable: profile.sub.writable, planName: profile.sub.planName,
+        periodEnd: profile.sub.periodEnd, graceEnd: profile.sub.graceEnd,
+      },
+      features: profile.features,
     };
   });
 }

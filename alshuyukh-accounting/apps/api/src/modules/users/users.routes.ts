@@ -1,3 +1,4 @@
+import { assertWithinLimit } from '../subscriptions/service.js';
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import type { Db } from '../../db/tx.js';
@@ -63,8 +64,8 @@ export default async function usersRoutes(app: FastifyInstance) {
     const body = parse(createBody, req.body);
     const a = req.auth!;
     const passwordHash = body.initialPassword ? await hashPassword(body.initialPassword) : null;
-    // TODO(Phase 9): enforce the plan's user limit.
     const member = await req.tenantTx(async (db) => {
+      await assertWithinLimit(db, a.tenantId, 'max_users');
       const { permissions } = await resolveRoles(db, body.roleIds);
       assertCanGrant(a, permissions);
 

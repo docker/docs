@@ -54,6 +54,7 @@ export default function Settings() {
         {can('user.view') && <Link className="card link-card" to="/settings/users">المستخدمون</Link>}
         {can('role.view') && <Link className="card link-card" to="/settings/roles">الأدوار والصلاحيات</Link>}
         {can('audit.view') && <Link className="card link-card" to="/settings/audit">سجل التدقيق</Link>}
+        <Link className="card link-card" to="/settings/subscription">الاشتراك والباقة</Link>
       </div>
 
       {s && (

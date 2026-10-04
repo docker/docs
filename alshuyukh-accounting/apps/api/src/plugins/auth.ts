@@ -3,6 +3,13 @@ import fp from 'fastify-plugin';
 import { withTx, type Db } from '../db/tx.js';
 import { AppError, forbidden, unauthorized } from '../lib/errors.js';
 import type { AuthContext } from '../types.js';
+import { countApiCall, currentSubscription, monthStart, pendingApiCalls } from '../modules/subscriptions/service.js';
+
+const READS = new Set(['GET', 'HEAD', 'OPTIONS']);
+/** Paths that stay usable when the subscription has expired (sign in/out, renewing). */
+const ALWAYS_ALLOWED = /^\/api\/(auth|subscription)(\/|$|\?)/;
+// Not counted or limited: signing in, the subscription page itself, and platform administration.
+const UNMETERED = /^\/api\/(auth|admin|subscription)(\/|$|\?)/;
 
 export async function loadPermissions(db: Db, tenantId: string, userId: string): Promise<Set<string>> {
   const { rows } = await db.query<{ code: string }>(
@@ -53,6 +60,26 @@ async function authenticate(this: FastifyInstance, req: FastifyRequest): Promise
     if (r.member_status !== 'ACTIVE') throw forbidden('Your access to this organization is disabled');
     if (r.tenant_status !== 'ACTIVE') throw new AppError(403, 'TENANT_SUSPENDED', 'This organization is suspended');
 
+    // Subscription: an expired one leaves the data readable but refuses changes.
+    const sub = await currentSubscription(db, claims.tid);
+    const url = req.url;
+    const adminRequest = r.is_platform_admin && url.startsWith('/api/admin');
+    if (!sub.writable && !READS.has(req.method) && !ALWAYS_ALLOWED.test(url) && !adminRequest) {
+      throw new AppError(402, 'SUBSCRIPTION_INACTIVE', 'انتهى الاشتراك؛ البيانات متاحة للاطلاع فقط حتى التجديد');
+    }
+    // Monthly API call allowance (counted in memory, flushed periodically).
+    if (!UNMETERED.test(url)) {
+      const limit = sub.limits.max_api_calls_per_month;
+      if (limit !== null) {
+        const { rows: [u] } = await db.query<{ quantity: string }>(
+          `SELECT quantity::text FROM usage_records WHERE tenant_id = $1 AND metric = 'API_CALLS' AND period = $2::date`, [claims.tid, monthStart()]);
+        if (Number(u?.quantity ?? 0) + pendingApiCalls(claims.tid) >= limit) {
+          throw new AppError(429, 'PLAN_LIMIT_REACHED', 'بلغت المنشأة الحد الشهري لطلبات API في باقتها');
+        }
+      }
+      countApiCall(claims.tid);
+    }
+
     const ctx: AuthContext = {
       userId: claims.sub,
       tenantId: claims.tid,
@@ -60,6 +87,7 @@ async function authenticate(this: FastifyInstance, req: FastifyRequest): Promise
       isOwner: r.is_owner,
       isPlatformAdmin: r.is_platform_admin,
       permissions: await loadPermissions(db, claims.tid, claims.sub),
+      subscription: { state: sub.state, writable: sub.writable },
     };
     return ctx;
   });

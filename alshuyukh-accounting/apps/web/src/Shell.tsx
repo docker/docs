@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from './auth';
 
-const NAV: { to: string; label: string; icon: string; phase?: number }[] = [
+const NAV: { to: string; label: string; icon: string; phase?: number; feature?: string }[] = [
   { to: '/', label: 'الرئيسية', icon: '⌂' },
   { to: '/sales', label: 'المبيعات', icon: '↗' },
   { to: '/purchases', label: 'المشتريات', icon: '↙' },
@@ -12,7 +12,7 @@ const NAV: { to: string; label: string; icon: string; phase?: number }[] = [
   { to: '/expenses', label: 'المصروفات', icon: '−' },
   { to: '/accounting', label: 'المحاسبة', icon: '⚖' },
   { to: '/reports', label: 'التقارير', icon: '▤' },
-  { to: '/e-invoicing', label: 'الفوترة الإلكترونية', icon: '⎙' },
+  { to: '/e-invoicing', label: 'الفوترة الإلكترونية', icon: '⎙', feature: 'zatca_einvoicing' },
   { to: '/settings', label: 'الإعدادات', icon: '⚙' },
 ];
 
@@ -29,7 +29,7 @@ export default function Shell() {
           <span>الشيوخ للمحاسبة</span>
         </div>
         <nav>
-          {NAV.map((n) => (
+          {NAV.filter((n) => !n.feature || me.features[n.feature] !== false).map((n) => (
             <NavLink key={n.to} to={n.to} end={n.to === '/'} onClick={() => setOpen(false)}
               className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
               <span className="nav-icon" aria-hidden>{n.icon}</span>
@@ -37,6 +37,11 @@ export default function Shell() {
               {n.phase && <span className="badge-soon">قريبًا</span>}
             </NavLink>
           ))}
+          {me.user.isPlatformAdmin && (
+            <NavLink to="/admin" onClick={() => setOpen(false)} className={({ isActive }) => `nav-item nav-admin ${isActive ? 'active' : ''}`}>
+              <span className="nav-icon" aria-hidden>★</span><span>إدارة المنصة</span>
+            </NavLink>
+          )}
         </nav>
       </aside>
       {open && <div className="scrim" onClick={() => setOpen(false)} />}
@@ -58,6 +63,7 @@ export default function Shell() {
           <button className="btn btn-ghost" onClick={logout}>تسجيل الخروج</button>
         </header>
         <main className="content">
+          <SubscriptionBanner />
           {me.user.mustChangePassword && (
             <div className="alert alert-warn">يجب تغيير كلمة المرور المؤقتة من صفحة الإعدادات.</div>
           )}
@@ -66,4 +72,24 @@ export default function Shell() {
       </div>
     </div>
   );
+}
+
+/** Trial ending soon, grace period, or expired (read-only) subscription. */
+function SubscriptionBanner() {
+  const { me, can } = useAuth();
+  const s = me?.subscription;
+  if (!s) return null;
+  const days = s.periodEnd ? Math.ceil((new Date(s.periodEnd).getTime() - Date.now()) / 86_400_000) : 0;
+  const link = can('subscription.manage') ? <Link to="/settings/subscription">إدارة الاشتراك</Link> : <span>تواصل مع مالك المنشأة.</span>;
+  if (s.state === 'EXPIRED' || s.state === 'NONE' || s.state === 'CANCELLED') {
+    return <div className="alert alert-error">انتهى الاشتراك؛ البيانات متاحة للاطلاع فقط ولا يمكن إضافة أو تعديل شيء حتى التجديد. {link}</div>;
+  }
+  if (s.state === 'GRACE') {
+    const left = s.graceEnd ? Math.max(0, Math.ceil((new Date(s.graceEnd).getTime() - Date.now()) / 86_400_000)) : 0;
+    return <div className="alert alert-warn">انتهت فترة الاشتراك. يبقى الوصول الكامل {left} يومًا ثم يتحول النظام للاطلاع فقط. {link}</div>;
+  }
+  if (s.state === 'TRIALING' && days <= 3) {
+    return <div className="alert alert-warn">تنتهي الفترة التجريبية خلال {Math.max(days, 0)} يوم. {link}</div>;
+  }
+  return null;
 }

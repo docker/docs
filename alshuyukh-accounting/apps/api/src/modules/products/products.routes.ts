@@ -1,3 +1,4 @@
+import { assertWithinLimit } from '../subscriptions/service.js';
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import type { Db } from '../../db/tx.js';
@@ -244,6 +245,7 @@ export default async function productsRoutes(app: FastifyInstance) {
     if (body.productType === 'SERVICE' && trackInventory) throw badRequest('SERVICE_NO_STOCK', 'Services cannot track inventory');
     const a = req.auth!;
     const product = await req.tenantTx(async (db) => {
+      await assertWithinLimit(db, a.tenantId, 'max_products');
       const companyId = await resolveCompanyId(db, a.tenantId, body.companyId);
       let unitId = body.unitId;
       if (!unitId) {

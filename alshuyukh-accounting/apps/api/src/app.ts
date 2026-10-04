@@ -22,6 +22,10 @@ import commercialReportRoutes from './modules/reports/commercial.routes.js';
 import dashboardRoutes from './modules/reports/dashboard.routes.js';
 import { encryptionKey } from './modules/zatca/crypto.js';
 import zatcaRoutes from './modules/zatca/routes.js';
+import adminPlatformRoutes from './modules/admin/platform.routes.js';
+import adminTenantRoutes from './modules/admin/tenants.routes.js';
+import subscriptionRoutes from './modules/subscriptions/routes.js';
+import { flushUsage } from './modules/subscriptions/service.js';
 import { configureZatca } from './modules/zatca/service.js';
 import { setGatewayUrl } from './modules/zatca/client.js';
 import financialReportRoutes from './modules/reports/financial.routes.js';
@@ -88,8 +92,19 @@ export async function buildApp({ env, pool, logger = true }: BuildOptions): Prom
       return reply.code(status).send({ error: { code: (err as { code?: string }).code ?? 'BAD_REQUEST', message: err.message } });
     }
     req.log.error({ err }, 'unhandled error');
+    // Recorded for the platform's error view; never blocks the response.
+    pool.query(
+      `INSERT INTO system_errors (tenant_id, user_id, request_id, method, path, status_code, error_code, message, stack) VALUES ($1, $2, $3, $4, $5, 500, $6, $7, $8)`,
+      [req.auth?.tenantId ?? null, req.auth?.userId ?? null, String(req.id), req.method, req.url.split('?')[0]!.slice(0, 500),
+       (err as { code?: string }).code ?? null, err.message.slice(0, 2000), err.stack?.slice(0, 8000) ?? null],
+    ).catch((e) => req.log.warn({ err: e }, 'could not record system error'));
     return reply.code(500).send({ error: { code: 'INTERNAL_ERROR', message: 'Internal server error' } });
   });
+
+  // API calls are counted in memory and written every 15 seconds (and on shutdown).
+  const usageTimer = setInterval(() => { void flushUsage(pool); }, 15_000);
+  usageTimer.unref();
+  app.addHook('onClose', async () => { clearInterval(usageTimer); await flushUsage(pool); });
 
   app.get('/api/health', async () => {
     await pool.query('SELECT 1');
@@ -119,6 +134,9 @@ export async function buildApp({ env, pool, logger = true }: BuildOptions): Prom
     await api.register(commercialReportRoutes);
     await api.register(dashboardRoutes);
     await api.register(zatcaRoutes);
+    await api.register(subscriptionRoutes);
+    await api.register(adminTenantRoutes);
+    await api.register(adminPlatformRoutes);
   }, { prefix: '/api' });
 
   return app;

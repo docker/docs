@@ -1,3 +1,4 @@
+import { startSubscription } from '../subscriptions/service.js';
 import { randomUUID } from 'node:crypto';
 import { withTx, type Db } from '../../db/tx.js';
 import { AppError, conflict, forbidden, unauthorized } from '../../lib/errors.js';
@@ -41,51 +42,8 @@ export class AuthService {
     const tenantId = randomUUID();
     const slug = `org-${tenantId.slice(0, 8)}`;
 
-    // TODO(Phase 9): enforce plan limits and attach a trial subscription here.
-    const userId = await withTx(this.deps.pool, { tenantId, userId: null }, async (db) => {
-      const existing = await db.query('SELECT 1 FROM users WHERE email = $1', [input.email]);
-      if (existing.rowCount) throw conflict('EMAIL_TAKEN', 'An account with this e-mail already exists');
-
-      const { rows: [user] } = await db.query<{ id: string }>(
-        `INSERT INTO users (email, password_hash, full_name) VALUES ($1, $2, $3) RETURNING id`,
-        [input.email, passwordHash, input.fullName],
-      );
-      const uid = user!.id;
-      await db.query(`SELECT set_config('app.user_id', $1, true)`, [uid]);
-
-      await db.query(`INSERT INTO tenants (id, name, slug) VALUES ($1, $2, $3)`, [tenantId, input.tenantName, slug]);
-      await db.query(`INSERT INTO tenant_settings (tenant_id) VALUES ($1)`, [tenantId]);
-      await db.query(
-        `INSERT INTO user_tenants (tenant_id, user_id, is_owner) VALUES ($1, $2, true)`,
-        [tenantId, uid],
-      );
-      await db.query(
-        `INSERT INTO user_roles (tenant_id, user_id, role_id, created_by)
-         SELECT $1, $2, id, $2 FROM roles WHERE code = 'TENANT_OWNER' AND tenant_id IS NULL`,
-        [tenantId, uid],
-      );
-      const { rows: [company] } = await db.query<{ id: string }>(
-        `INSERT INTO companies (tenant_id, name, legal_name, vat_number, commercial_registration, created_by)
-         VALUES ($1, $2, $2, $3, $4, $5) RETURNING id`,
-        [tenantId, input.companyName, input.vatNumber ?? null, input.commercialRegistration ?? null, uid],
-      );
-      const { rows: [branch] } = await db.query<{ id: string }>(
-        `INSERT INTO branches (tenant_id, company_id, code, name, is_main, created_by)
-         VALUES ($1, $2, 'MAIN', 'الفرع الرئيسي', true, $3) RETURNING id`,
-        [tenantId, company!.id, uid],
-      );
-      await db.query(
-        `INSERT INTO warehouses (tenant_id, company_id, branch_id, code, name, created_by)
-         VALUES ($1, $2, $3, 'MAIN', 'المستودع الرئيسي', $4)`,
-        [tenantId, company!.id, branch!.id, uid],
-      );
-      await setupCompanyAccounting(db, { tenantId, companyId: company!.id, userId: uid });
-      await writeAudit(db, {
-        tenantId, userId: uid, action: 'REGISTER', entityType: 'tenant', entityId: tenantId,
-        newValues: { tenantName: input.tenantName, companyName: input.companyName, email: input.email },
-      }, meta);
-      return uid;
-    });
+    const userId = await withTx(this.deps.pool, { tenantId, userId: null }, (db) =>
+      provisionTenant(db, { ...input, tenantId, passwordHash, slug }, meta));
 
     return this.issueSession(userId, tenantId, meta);
   }
@@ -306,3 +264,64 @@ export class AuthService {
 }
 
 const badCurrentPassword = () => new AppError(400, 'INVALID_CURRENT_PASSWORD', 'Current password is incorrect');
+
+export interface ProvisionInput extends RegisterInput {
+  tenantId: string; passwordHash: string; slug: string;
+  /** Admin-created owners must change the temporary password at first sign-in. */
+  mustChangePassword?: boolean;
+  planId?: string | null;
+  createdBy?: string | null;
+}
+
+/**
+ * Creates the owner user, the tenant, its default company, main branch,
+ * warehouse, chart of accounts and subscription. Used by self-service sign-up
+ * and by the platform administrator. Runs in the caller's transaction.
+ */
+export async function provisionTenant(db: Db, input: ProvisionInput, meta: AuditMeta): Promise<string> {
+  const { tenantId, passwordHash, slug } = input;
+  const existing = await db.query('SELECT 1 FROM users WHERE email = $1', [input.email]);
+  if (existing.rowCount) throw conflict('EMAIL_TAKEN', 'An account with this e-mail already exists');
+
+  const { rows: [user] } = await db.query<{ id: string }>(
+    `INSERT INTO users (email, password_hash, full_name, must_change_password) VALUES ($1, $2, $3, $4) RETURNING id`,
+    [input.email, passwordHash, input.fullName, input.mustChangePassword ?? false],
+  );
+  const uid = user!.id;
+  await db.query(`SELECT set_config('app.user_id', $1, true)`, [uid]);
+
+  await db.query(`INSERT INTO tenants (id, name, slug) VALUES ($1, $2, $3)`, [tenantId, input.tenantName, slug]);
+  await db.query(`INSERT INTO tenant_settings (tenant_id) VALUES ($1)`, [tenantId]);
+  await db.query(
+    `INSERT INTO user_tenants (tenant_id, user_id, is_owner) VALUES ($1, $2, true)`,
+    [tenantId, uid],
+  );
+  await db.query(
+    `INSERT INTO user_roles (tenant_id, user_id, role_id, created_by)
+     SELECT $1, $2, id, $2 FROM roles WHERE code = 'TENANT_OWNER' AND tenant_id IS NULL`,
+    [tenantId, uid],
+  );
+  const { rows: [company] } = await db.query<{ id: string }>(
+    `INSERT INTO companies (tenant_id, name, legal_name, vat_number, commercial_registration, created_by)
+     VALUES ($1, $2, $2, $3, $4, $5) RETURNING id`,
+    [tenantId, input.companyName, input.vatNumber ?? null, input.commercialRegistration ?? null, uid],
+  );
+  const { rows: [branch] } = await db.query<{ id: string }>(
+    `INSERT INTO branches (tenant_id, company_id, code, name, is_main, created_by)
+     VALUES ($1, $2, 'MAIN', 'الفرع الرئيسي', true, $3) RETURNING id`,
+    [tenantId, company!.id, uid],
+  );
+  await db.query(
+    `INSERT INTO warehouses (tenant_id, company_id, branch_id, code, name, created_by)
+     VALUES ($1, $2, $3, 'MAIN', 'المستودع الرئيسي', $4)`,
+    [tenantId, company!.id, branch!.id, uid],
+  );
+  await setupCompanyAccounting(db, { tenantId, companyId: company!.id, userId: uid });
+  // Every new organization starts on the default plan (a trial when the plan has trial days).
+  await startSubscription(db, tenantId, input.createdBy ?? uid, input.planId ?? null);
+  await writeAudit(db, {
+    tenantId, userId: uid, action: 'REGISTER', entityType: 'tenant', entityId: tenantId,
+    newValues: { tenantName: input.tenantName, companyName: input.companyName, email: input.email },
+  }, meta);
+  return uid;
+}

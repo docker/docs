@@ -21,6 +21,8 @@ import Settings from './pages/Settings';
 import Expenses from './pages/expenses/Expenses';
 import Reports from './pages/reports/Reports';
 import EInvoicing from './pages/einvoicing/EInvoicing';
+import Admin from './pages/admin/Admin';
+import Subscription from './pages/subscription/Subscription';
 import Users from './pages/Users';
 
 export default function App() {
@@ -62,6 +64,8 @@ export default function App() {
         <Route path="settings/users" element={<Users />} />
         <Route path="settings/roles" element={<Roles />} />
         <Route path="settings/audit" element={<AuditLog />} />
+        <Route path="settings/subscription" element={<Subscription />} />
+        <Route path="admin/*" element={<Admin />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

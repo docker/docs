@@ -12,7 +12,9 @@ const H = 220;
 const PAD = { top: 12, right: 12, bottom: 28, left: 64 };
 
 function scale(values: number[]) {
-  const max = Math.max(0, ...values);
+  // With no data at all, show a round empty scale instead of fractions of a riyal.
+  const empty = values.every((v) => v === 0);
+  const max = empty ? 100 : Math.max(0, ...values);
   const min = Math.min(0, ...values);
   const span = max - min || 1;
   const step = niceStep(span / 4);

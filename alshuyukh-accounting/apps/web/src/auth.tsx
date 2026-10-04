@@ -2,11 +2,13 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 import { api, refreshSession, setAccessToken, setSessionExpiredHandler } from './api';
 
 export interface Me {
-  user: { id: string; email: string; fullName: string; mustChangePassword: boolean };
+  user: { id: string; email: string; fullName: string; mustChangePassword: boolean; isPlatformAdmin: boolean };
   tenant: { id: string; name: string; status: string; isOwner: boolean };
   roles: { id: string; code: string; nameAr: string }[];
   permissions: string[];
   memberships: { tenantId: string; tenantName: string; isOwner: boolean }[];
+  subscription: { state: 'TRIALING' | 'ACTIVE' | 'GRACE' | 'EXPIRED' | 'CANCELLED' | 'NONE'; writable: boolean; planName: string | null; periodEnd: string | null; graceEnd: string | null };
+  features: Record<string, boolean>;
 }
 
 interface AuthState {

@@ -1,3 +1,4 @@
+import { assertWithinLimit } from '../subscriptions/service.js';
 import { assertCancellable, generateForDocument } from '../zatca/service.js';
 import type { Db } from '../../db/tx.js';
 import { badRequest, conflict } from '../../lib/errors.js';
@@ -132,6 +133,7 @@ export async function issueDocument(db: Db, kind: DocKind, ctx: Ctx, id: string)
   if (!kind.legal) throw badRequest('NOT_POSTABLE', `${kind.label}s do not post to the ledger`);
   const d = await lockDocument(db, kind, ctx.tenantId, id);
   if (d.status !== 'DRAFT') throw conflict('DOCUMENT_NOT_DRAFT', 'This document has already been issued');
+  if (kind.key === 'SALES_INVOICE') await assertWithinLimit(db, ctx.tenantId, 'max_invoices_per_month');
 
   const { lines, totals } = await recalculate(db, kind, ctx, d);
   if (!new Decimal(totals.total).greaterThan(0)) throw badRequest('ZERO_TOTAL', 'A document with a zero total cannot be issued');

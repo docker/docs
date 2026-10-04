@@ -309,3 +309,24 @@ button.tab { font: inherit; background: none; border: none; border-bottom: 2px s
 @media (max-width: 600px) { .invoice-parties { grid-template-columns: 1fr; } .invoice-sheet { padding: 12px; } .invoice-qr { width: 110px; height: 110px; } }
 @media print { .invoice-sheet { box-shadow: none; padding: 0; max-width: none; } .print-page .alert-error { border: 2px solid #000; } }
 @media print { body:has(.print-page) .tabs, body:has(.print-page) .page-header { display: none !important; } }
+
+/* Subscriptions and platform admin */
+.usage-row { margin: 10px 0; }
+.usage-label { display: flex; justify-content: space-between; font-size: 0.9rem; }
+.usage-bar { height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden; margin-top: 4px; }
+.usage-bar i { display: block; height: 100%; background: var(--primary); border-radius: 3px; }
+.usage-bar i.high { background: var(--danger); }
+.plan-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.plan-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; background: var(--surface); display: flex; flex-direction: column; gap: 8px; }
+.plan-card h3 { margin: 0; }
+.plan-price { font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.plan-price small { font-size: 0.8rem; font-weight: 400; color: var(--muted); }
+.plan-limits { list-style: none; padding: 0; margin: 0; font-size: 0.85rem; display: grid; gap: 2px; }
+.tabs-scroll { overflow-x: auto; flex-wrap: nowrap; }
+.tabs-scroll .tab { white-space: nowrap; }
+.nav-admin { margin-top: 12px; border-top: 1px solid rgb(255 255 255 / 12%); padding-top: 12px; }
+.sub-form { border: 1px dashed var(--border); border-radius: var(--radius); padding: 12px; margin-bottom: 12px; }
+.inline-form { flex-wrap: wrap; }
+.limits-form summary { cursor: pointer; margin-top: 8px; }
+.stack { white-space: pre-wrap; font-size: 0.75rem; max-height: 260px; overflow: auto; margin: 0; }
+tr.clickable { cursor: pointer; }

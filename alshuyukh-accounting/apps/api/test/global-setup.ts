@@ -11,4 +11,10 @@ export default async function setup() {
   await client.query('DROP SCHEMA public CASCADE; CREATE SCHEMA public;');
   await client.end();
   await migrate(url);
+  // Module tests should not depend on the trial plan's limits; subscription tests set their own.
+  const c2 = new pg.Client({ connectionString: url });
+  await c2.connect();
+  await c2.query(`UPDATE plans SET max_users = NULL, max_companies = NULL, max_branches = NULL, max_warehouses = NULL, max_products = NULL,
+    max_invoices_per_month = NULL, max_storage_mb = NULL, max_api_calls_per_month = NULL WHERE code = 'TRIAL'`);
+  await c2.end();
 }

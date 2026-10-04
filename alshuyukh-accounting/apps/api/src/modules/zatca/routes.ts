@@ -2,7 +2,8 @@ import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import QRCode from 'qrcode';
 import { z } from 'zod';
 import type { Db } from '../../db/tx.js';
-import { notFound } from '../../lib/errors.js';
+import { forbidden, notFound } from '../../lib/errors.js';
+import { featuresOf } from '../subscriptions/service.js';
 import { parse, uuidParam } from '../../lib/validation.js';
 import { requirePermission } from '../../plugins/auth.js';
 import { resolveCompanyId } from '../accounting/company-context.js';
@@ -45,6 +46,7 @@ export default async function zatcaRoutes(app: FastifyInstance) {
       invoiceTypes: z.enum(['1100', '1000', '0100']).default('1100'),
     }), req.body);
     const device = await req.tenantTx(async (db) => {
+      if (!(await featuresOf(db, req.auth!.tenantId)).zatca_einvoicing) throw forbidden('الفوترة الإلكترونية غير مفعلة لهذه المنشأة');
       const companyId = await resolveCompanyId(db, req.auth!.tenantId, body.companyId);
       return createDevice(db, ctxOf(req), { ...body, companyId });
     });

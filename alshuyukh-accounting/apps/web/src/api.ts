@@ -107,5 +107,10 @@ const MESSAGES: Record<string, string> = {
   COMPLIANCE_INCOMPLETE: 'شغّل فحوص الامتثال حتى تنجح جميعها قبل التفعيل',
   NOT_PENDING: 'هذه الفاتورة الإلكترونية ليست بانتظار الإرسال (أو يجري إرسالها الآن)',
   ZATCA_NOT_CONFIGURED: 'مفتاح تشفير الفوترة الإلكترونية غير مضبوط في الخادم',
+  OWN_TENANT: 'لا يمكنك إيقاف المنشأة التي سجلت الدخول بها',
+  SELF: 'لا يمكنك تنفيذ هذا الإجراء على حسابك',
+  DEFAULT_PLAN: 'الباقة الافتراضية يجب أن تبقى متاحة؛ اختر باقة افتراضية أخرى أولًا',
+  NO_SUBSCRIPTION: 'اختر باقة لهذه المنشأة أولًا',
+  PLAN_INACTIVE: 'هذه الباقة لم تعد متاحة',
 };
 const translateError = (code?: string, fallback?: string) => (code && MESSAGES[code]) || fallback || 'حدث خطأ غير متوقع';

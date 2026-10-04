@@ -9,7 +9,8 @@
     "build": "tsc -p tsconfig.build.json && cp -r src/db/migrations dist/db/",
     "typecheck": "tsc --noEmit",
     "db:migrate": "tsx --env-file=../../.env src/db/migrate-cli.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "admin": "tsx --env-file=../../.env src/admin-cli.ts"
   },
   "dependencies": {
     "@fastify/cookie": "^11.1.2",

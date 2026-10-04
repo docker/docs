@@ -1,3 +1,4 @@
+import { assertWithinLimit } from '../subscriptions/service.js';
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import type { Db } from '../../db/tx.js';
@@ -107,8 +108,8 @@ export default async function companiesRoutes(app: FastifyInstance) {
   app.post('/companies', { preHandler: canManage }, async (req, reply) => {
     const body = parse(companyCreate, req.body);
     const a = req.auth!;
-    // TODO(Phase 9): enforce the plan's company limit.
     const company = await req.tenantTx(async (db) => {
+      await assertWithinLimit(db, a.tenantId, 'max_companies');
       const { sets, values } = buildSet(body, COMPANY_COLUMNS, 4);
       const cols = sets.map((s) => s.split(' = ')[0]);
       const { rows: [c] } = await db.query<{ id: string }>(
@@ -173,8 +174,8 @@ export default async function companiesRoutes(app: FastifyInstance) {
     const { id: companyId } = parse(uuidParam, req.params);
     const body = parse(z.object(branchFields), req.body);
     const a = req.auth!;
-    // TODO(Phase 9): enforce the plan's branch limit.
     const branch = await req.tenantTx(async (db) => {
+      await assertWithinLimit(db, a.tenantId, 'max_branches');
       await assertCompany(db, a.tenantId, companyId);
       const { rows: [b] } = await db.query<{ id: string }>(
         `INSERT INTO branches (tenant_id, company_id, code, name, address, city, phone, created_by, updated_by)
@@ -220,8 +221,8 @@ export default async function companiesRoutes(app: FastifyInstance) {
     const { id: companyId } = parse(uuidParam, req.params);
     const body = parse(z.object(warehouseFields), req.body);
     const a = req.auth!;
-    // TODO(Phase 9): enforce the plan's warehouse limit.
     const warehouse = await req.tenantTx(async (db) => {
+      await assertWithinLimit(db, a.tenantId, 'max_warehouses');
       await assertCompany(db, a.tenantId, companyId);
       if (body.branchId) {
         const b = await db.query(`SELECT 1 FROM branches WHERE tenant_id = $1 AND id = $2 AND company_id = $3 AND deleted_at IS NULL`, [a.tenantId, body.branchId, companyId]);
