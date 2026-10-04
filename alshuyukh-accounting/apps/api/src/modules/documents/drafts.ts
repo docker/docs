@@ -256,18 +256,22 @@ async function checkBranchWarehouse(db: Db, companyId: string, branchId?: string
   }
 }
 
-export async function insertItems(db: Db, kind: DocKind, tenantId: string, companyId: string, documentId: string, lines: BuiltLine[]) {
+export async function insertItems(db: Db, kind: DocKind, tenantId: string, companyId: string, documentId: string, lines: BuiltLine[]): Promise<string[]> {
   const sourceCol = kind.isReturn ? ', source_item_id' : '';
+  const ids: string[] = [];
   for (const [i, l] of lines.entries()) {
-    await db.query(
+    const { rows: [row] } = await db.query<{ id: string }>(
       `INSERT INTO ${kind.itemsTable} (tenant_id, company_id, document_id, line_no, product_id, account_id, description,
          quantity, unit_id, unit_price, gross_amount, discount_basis, discount_amount, net_amount, vat_category, vat_rate,
          vat_amount, total_amount${sourceCol})
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18${kind.isReturn ? ', $19' : ''})`,
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18${kind.isReturn ? ', $19' : ''})
+       RETURNING id`,
       [tenantId, companyId, documentId, i + 1, l.productId, l.accountId, l.description, l.quantity, l.unitId, l.unitPrice,
        l.grossAmount, l.discountBasis, l.discountAmount, l.netAmount, l.vatCategory, l.vatRate, l.vatAmount, l.totalAmount,
        ...(kind.isReturn ? [l.sourceItemId] : [])]);
+    ids.push(row!.id);
   }
+  return ids;
 }
 
 const totalsParams = (t: CalcTotals) => [t.subtotal, t.discountTotal, t.taxableAmount, t.taxAmount, t.total];

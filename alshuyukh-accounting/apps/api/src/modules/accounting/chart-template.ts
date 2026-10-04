@@ -62,6 +62,7 @@ export const DEFAULT_ACCOUNTS: readonly AccountTemplate[] = [
 
   { code: '5000', ar: 'تكلفة المبيعات', en: 'Cost of goods sold', type: 'COST_OF_GOODS_SOLD', postable: false },
   { code: '5100', ar: 'تكلفة البضاعة المباعة', en: 'Cost of goods sold', type: 'COST_OF_GOODS_SOLD', parent: '5000', group: 'COST_OF_SALES', postable: true, systemKey: 'COGS' },
+  { code: '5200', ar: 'فروقات وتسويات المخزون', en: 'Inventory adjustments', type: 'COST_OF_GOODS_SOLD', parent: '5000', group: 'COST_OF_SALES', postable: true, systemKey: 'INVENTORY_ADJUSTMENT' },
 
   { code: '6000', ar: 'المصروفات', en: 'Expenses', type: 'EXPENSE', postable: false },
   { code: '6100', ar: 'الإيجار', en: 'Rent', type: 'EXPENSE', parent: '6000', group: 'OPERATING_EXPENSES', postable: true },

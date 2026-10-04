@@ -4,6 +4,7 @@ import { Decimal, toMoney } from '../../lib/money.js';
 import { nextDocumentNumber } from '../../lib/sequences.js';
 import { postEntry, reverse, type LineInput as JournalLine } from '../accounting/engine.js';
 import { writeAudit } from '../audit/audit.service.js';
+import { issue, receive, resolveWarehouse, reverseDocumentMovements, trackedProducts, type Ref } from '../inventory/engine.js';
 import { totalsOf } from './calc.js';
 import {
   buildLines, buildReturn, createDraft, defaultDueDate, insertItems, loadDocument, lockDocument,
@@ -19,8 +20,14 @@ import { KINDS, partyColumn, partyTable, type DocKind } from './kinds.js';
  *  Purchase invoice  Dr Inventory/Expense per account, Dr VAT input  /  Cr Payable (supplier)
  *  Purchase return   Dr Payable (supplier)  /  Cr Inventory/Expense, Cr VAT input
  *
- * The document and its entry are written in the same transaction.
- * TODO(Phase 5): stock movements and the cost-of-goods-sold entry for tracked goods.
+ * Stocked goods also move inventory, in the same entry:
+ *  Sales invoice     Dr Cost of goods sold / Cr Inventory (average cost)
+ *  Sales return      Dr Inventory / Cr Cost of goods sold (the cost the goods left at)
+ *  Purchase invoice  Inventory is the line account (purchase price)
+ *  Purchase return   Cr Inventory at average cost; the difference from the
+ *                    purchase price goes to cost of goods sold
+ *
+ * The document, its stock movements and its entry are written in the same transaction.
  */
 
 export async function systemAccount(db: Db, companyId: string, key: string): Promise<string> {
@@ -51,10 +58,12 @@ async function lineAccounts(db: Db, kind: DocKind, companyId: string, lines: Bui
     const p = products.get(l.productId!)!;
     if (kind.party === 'customer') {
       result.push(p.sales_account_id ?? await systemAccount(db, companyId, 'SALES'));
+    } else if (p.track_inventory) {
+      // Stocked goods always go through the Inventory account so the stock
+      // ledger and the general ledger stay equal.
+      result.push(await systemAccount(db, companyId, 'INVENTORY'));
     } else if (p.purchase_account_id) {
       result.push(p.purchase_account_id);
-    } else if (p.track_inventory) {
-      result.push(await systemAccount(db, companyId, 'INVENTORY'));
     } else {
       throw badRequest('ACCOUNT_REQUIRED', `Line ${i + 1}: choose an expense account for "${p.name_ar}" or set a purchase account on the product`);
     }
@@ -144,7 +153,7 @@ export async function issueDocument(db: Db, kind: DocKind, ctx: Ctx, id: string)
   const accounts = await lineAccounts(db, kind, d.company_id, lines);
   lines.forEach((l, i) => { l.accountId = accounts[i]!; });
   await db.query(`DELETE FROM ${kind.itemsTable} WHERE document_id = $1`, [id]);
-  await insertItems(db, kind, ctx.tenantId, d.company_id, id, lines);
+  const lineIds = await insertItems(db, kind, ctx.tenantId, d.company_id, id, lines);
 
   const number = await nextDocumentNumber(db, ctx.tenantId, d.company_id, kind.key, { prefix: kind.prefix, padding: 6 });
   const control = await controlAccount(db, kind.party, d.company_id, d.party_id);
@@ -154,15 +163,43 @@ export async function issueDocument(db: Db, kind: DocKind, ctx: Ctx, id: string)
 
   // Revenue / cost side, grouped per account.
   const perAccount = new Map<string, Decimal>();
-  lines.forEach((l) => perAccount.set(l.accountId!, (perAccount.get(l.accountId!) ?? new Decimal(0)).plus(l.netAmount)));
+  const addTo = (accountId: string, amount: Decimal.Value) => perAccount.set(accountId, (perAccount.get(accountId) ?? new Decimal(0)).plus(amount));
+  lines.forEach((l) => addTo(l.accountId!, l.netAmount));
+
+  // Stock movements. `cogs` > 0 means Dr Cost of goods sold / Cr Inventory.
+  const stock = await moveStock(db, kind, ctx, d, lines, lineIds);
+  const cogs = stock.cogs;
+  if (stock.warehouseId) d.warehouse_id = stock.warehouseId;
+  if (kind.key === 'PURCHASE_RETURN' && stock.costs.size) {
+    // Inventory leaves at average cost; the gap to the purchase price is a cost difference.
+    // The line accounts are credited: Inventory at cost, the difference to cost of goods sold
+    // (a credit when the purchase price was above average, a debit when below).
+    const inventory = await systemAccount(db, d.company_id, 'INVENTORY');
+    const cogsAccount = await systemAccount(db, d.company_id, 'COGS');
+    for (const [i, l] of lines.entries()) {
+      const cost = stock.costs.get(i);
+      if (cost === undefined) continue;
+      addTo(inventory, new Decimal(cost).minus(l.netAmount));
+      addTo(cogsAccount, new Decimal(l.netAmount).minus(cost));
+    }
+  }
+
   // Sales invoice & purchase return credit the line accounts; the other two debit them.
   const linesSideCredit = kind.key === 'SALES_INVOICE' || kind.key === 'PURCHASE_RETURN';
-  const side = (credit: boolean, amount: Decimal.Value) => (credit ? { credit: toMoney(amount) } : { debit: toMoney(amount) });
+  /** A signed amount on the given side; negative amounts flip to the other side. */
+  const side = (credit: boolean, amount: Decimal.Value) => {
+    const a = new Decimal(amount);
+    return (credit !== a.isNegative()) ? { credit: toMoney(a.abs()) } : { debit: toMoney(a.abs()) };
+  };
   const journal: JournalLine[] = [
     { accountId: control, ...side(!linesSideCredit, totals.total), ...tag, branchId },
     ...[...perAccount.entries()].filter(([, v]) => !v.isZero()).map(([accountId, v]) => ({ accountId, ...side(linesSideCredit, v), branchId })),
   ];
   if (new Decimal(totals.taxAmount).greaterThan(0)) journal.push({ accountId: vatAccount, ...side(linesSideCredit, totals.taxAmount), branchId });
+  if (!cogs.isZero()) {
+    journal.push({ accountId: await systemAccount(db, d.company_id, 'COGS'), ...side(false, cogs), branchId });
+    journal.push({ accountId: await systemAccount(db, d.company_id, 'INVENTORY'), ...side(true, cogs), branchId });
+  }
 
   const entry = await postEntry(db, ctx, {
     companyId: d.company_id, entryDate: d.doc_date, description: `${kind.labelAr} ${number}`,
@@ -173,7 +210,7 @@ export async function issueDocument(db: Db, kind: DocKind, ctx: Ctx, id: string)
     ['status', kind.issuedStatus], ['doc_number', number], ['journal_entry_id', entry.id], ['issued_by', ctx.userId],
     ['issued_at', new Date()], ['party_snapshot', JSON.stringify(await partySnapshot(db, kind, d.party_id))],
     ['subtotal', totals.subtotal], ['discount_total', totals.discountTotal], ['taxable_amount', totals.taxableAmount],
-    ['tax_amount', totals.taxAmount], ['total', totals.total],
+    ['tax_amount', totals.taxAmount], ['total', totals.total], ['warehouse_id', d.warehouse_id],
   ];
   if (kind.key === 'SALES_INVOICE' || kind.key === 'PURCHASE_INVOICE') {
     sets.push(['due_date', d.due_date ?? await defaultDueDate(db, kind, d.party_id, d.doc_date)]);
@@ -223,6 +260,18 @@ export async function cancelDocument(db: Db, kind: DocKind, ctx: Ctx, id: string
       if (returns.rowCount) throw conflict('HAS_RETURNS', 'Cancel the returns issued against this invoice first');
     }
     await reverse(db, ctx, d.journal_entry_id!, { reason: `إلغاء ${kind.labelAr} ${d.doc_number}: ${reason}`, date: d.doc_date, allowSystem: true });
+    const residual = await reverseDocumentMovements(db, stockRef(ctx, d.company_id, d.doc_date, kind.key, id), kind.key, id);
+    if (new Decimal(residual).greaterThan(0)) {
+      // The warehouse emptied with value left over: expense it so the ledgers stay equal.
+      await postEntry(db, ctx, {
+        companyId: d.company_id, entryDate: d.doc_date, description: `تسوية قيمة مخزون بعد إلغاء ${kind.labelAr} ${d.doc_number}`,
+        referenceType: 'INVENTORY_RESIDUAL', referenceId: id, source: 'SYSTEM',
+        lines: [
+          { accountId: await systemAccount(db, d.company_id, 'COGS'), debit: residual },
+          { accountId: await systemAccount(db, d.company_id, 'INVENTORY'), credit: residual },
+        ],
+      });
+    }
   }
   await db.query(`UPDATE ${kind.table} SET status = 'CANCELLED', cancelled_by = $2, cancelled_at = now(), cancel_reason = $3 WHERE id = $1`,
     [id, ctx.userId, reason]);
@@ -234,6 +283,61 @@ export async function cancelDocument(db: Db, kind: DocKind, ctx: Ctx, id: string
   }
   await writeAudit(db, { tenantId: ctx.tenantId, userId: ctx.userId, action: 'CANCEL', entityType: kind.entity, entityId: id, newValues: { reason } }, ctx.meta);
   return loadDocument(db, kind, ctx.tenantId, id);
+}
+
+const stockRef = (ctx: Ctx, companyId: string, date: string, referenceType: string, referenceId: string): Ref =>
+  ({ tenantId: ctx.tenantId, companyId, userId: ctx.userId, date, referenceType, referenceId });
+
+/**
+ * Records the stock movements of an invoice or return being issued.
+ * Returns the net cost moved to cost of goods sold and, for purchase
+ * returns, the cost of each line.
+ */
+async function moveStock(db: Db, kind: DocKind, ctx: Ctx, d: Awaited<ReturnType<typeof lockDocument>>, lines: BuiltLine[], lineIds: string[]) {
+  const tracked = await trackedProducts(db, lines.map((l) => l.productId));
+  const result = { cogs: new Decimal(0), costs: new Map<number, string>(), warehouseId: null as string | null };
+  if (!tracked.size) return result;
+  const ref = stockRef(ctx, d.company_id, d.doc_date, kind.key, d.id);
+  const docWarehouse = await resolveWarehouse(db, d.company_id, d.warehouse_id as string | null);
+  result.warehouseId = docWarehouse;
+
+  for (const [i, l] of lines.entries()) {
+    if (!l.productId || !tracked.has(l.productId)) continue;
+    const move = { productId: l.productId, quantity: l.quantity, lineId: lineIds[i]! };
+    if (kind.key === 'SALES_INVOICE') {
+      const { cost } = await issue(db, ref, { ...move, warehouseId: docWarehouse, type: 'SALE' });
+      result.cogs = result.cogs.plus(cost);
+    } else if (kind.key === 'PURCHASE_INVOICE') {
+      await receive(db, ref, { ...move, warehouseId: docWarehouse, type: 'PURCHASE' }, l.netAmount);
+    } else {
+      // Returns go back to (or leave from) the warehouse of the original movement.
+      const origType = kind.key === 'SALES_RETURN' ? 'SALE' : 'PURCHASE';
+      const { rows: [orig] } = await db.query<{ warehouse_id: string; quantity: string; total_cost: string }>(
+        `SELECT warehouse_id, quantity::text, total_cost::text FROM stock_movements
+          WHERE reference_line_id = $1 AND movement_type = $2 LIMIT 1`, [l.sourceItemId, origType]);
+      const warehouseId = orig?.warehouse_id ?? docWarehouse;
+      if (kind.key === 'PURCHASE_RETURN') {
+        const { cost } = await issue(db, ref, { ...move, warehouseId, type: 'PURCHASE_RETURN' });
+        result.costs.set(i, cost);
+        continue;
+      }
+      if (!orig) continue; // sold before stock tracking: nothing to bring back at cost
+      // Sales return: the cost the goods left at, prorated; the last return takes the rest.
+      const { rows: [prior] } = await db.query<{ qty: string; cost: string }>(
+        `SELECT COALESCE(sum(m.quantity), 0)::text AS qty, COALESCE(sum(m.total_cost), 0)::text AS cost
+           FROM stock_movements m
+           JOIN ${kind.itemsTable} ri ON ri.id = m.reference_line_id
+           JOIN ${kind.table} r ON r.id = ri.document_id
+          WHERE ri.source_item_id = $1 AND m.movement_type = 'SALE_RETURN' AND r.status = 'ISSUED'`, [l.sourceItemId]);
+      const remainingQty = new Decimal(orig.quantity).minus(prior!.qty);
+      const cost = new Decimal(l.quantity).equals(remainingQty)
+        ? new Decimal(orig.total_cost).minus(prior!.cost)
+        : new Decimal(orig.total_cost).times(l.quantity).dividedBy(orig.quantity).toDecimalPlaces(2, Decimal.ROUND_HALF_UP);
+      await receive(db, ref, { ...move, warehouseId, type: 'SALE_RETURN' }, toMoney(cost));
+      result.cogs = result.cogs.minus(cost);
+    }
+  }
+  return result;
 }
 
 const TRANSITIONS: Record<string, Record<string, string[]>> = {

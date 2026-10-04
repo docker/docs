@@ -132,7 +132,7 @@ describe('customer receipts', () => {
 describe('supplier payments', () => {
   it('pays a purchase invoice: Dr AP / Cr Bank', async () => {
     const sup = await c.supplier();
-    const bill = await c.purchase(sup.id, [{ productId: (await c.product({ purchasePrice: '400' })).id, quantity: '1' }]); // 460
+    const bill = await c.purchase(sup.id, [{ productId: (await c.goods({ purchasePrice: '400' })).id, quantity: '1' }]); // 460
     const res = await c.api.post('/api/payments', {
       direction: 'DISBURSEMENT', supplierId: sup.id, paymentDate: c.date, methodId: await c.method('BANK'), amount: '460.00',
       allocations: [{ documentType: 'PURCHASE_INVOICE', documentId: bill.id, amount: '460.00' }],

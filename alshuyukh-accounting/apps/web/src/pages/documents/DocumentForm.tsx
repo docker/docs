@@ -6,6 +6,7 @@ import { ErrorBox, useLoad } from '../../ui';
 import type { Account } from '../accounting/ChartOfAccounts';
 import type { DocConfig, Doc } from './config';
 import Totals, { type TotalsData } from './Totals';
+import { loadWarehouses } from '../inventory/shared';
 
 interface Product { id: string; sku: string; nameAr: string; salePrice: string; purchasePrice: string; productType: string; vatCategory: string }
 interface Party { id: string; code: string; nameAr: string }
@@ -31,6 +32,7 @@ export default function DocumentForm({ config, doc, onSaved }: { config: DocConf
   const parties = useLoad(() => api<{ data: Party[] }>('GET', `/api/${config.party}s?limit=200`));
   const products = useLoad(() => api<{ data: Product[] }>('GET', '/api/products?limit=200'));
   const accounts = useLoad(() => (isPurchase ? api<{ data: Account[] }>('GET', '/api/accounts?postableOnly=true') : Promise.resolve({ data: [] as Account[] })));
+  const warehouses = useLoad(loadWarehouses);
   const [partyId, setPartyId] = useState(doc?.partyId ?? '');
   const [docDate, setDocDate] = useState(doc?.date ?? today());
   const [includeVat, setIncludeVat] = useState(doc?.pricesIncludeVat ?? false);
@@ -78,6 +80,7 @@ export default function DocumentForm({ config, doc, onSaved }: { config: DocConf
     if (config.key === 'SALES_QUOTE') body.validUntil = opt('validUntil');
     if (config.key === 'PURCHASE_ORDER') body.expectedDate = opt('expectedDate');
     if (config.key === 'PURCHASE_INVOICE') body.supplierInvoiceNumber = opt('supplierInvoiceNumber');
+    if (opt('warehouseId')) body.warehouseId = opt('warehouseId');
     setBusy(true);
     setError(null);
     try {
@@ -109,6 +112,14 @@ export default function DocumentForm({ config, doc, onSaved }: { config: DocConf
         )}
         {config.key === 'SALES_QUOTE' && <label>صالح حتى<input name="validUntil" type="date" defaultValue={doc?.validUntil ?? ''} /></label>}
         {config.key === 'PURCHASE_ORDER' && <label>تاريخ التوريد المتوقع<input name="expectedDate" type="date" /></label>}
+        {(warehouses.data?.length ?? 0) > 1 && (
+          <label>المستودع
+            <select name="warehouseId" defaultValue={(doc as { warehouseId?: string } | undefined)?.warehouseId ?? ''}>
+              <option value="">المستودع الرئيسي</option>
+              {warehouses.data!.filter((w) => w.isActive).map((w) => <option key={w.id} value={w.id}>{w.name}</option>)}
+            </select>
+          </label>
+        )}
         {config.key === 'PURCHASE_INVOICE' && <label>رقم فاتورة المورد<input name="supplierInvoiceNumber" dir="ltr" defaultValue={doc?.supplierInvoiceNumber ?? ''} /></label>}
       </div>
       <label className="check"><input type="checkbox" checked={includeVat} onChange={(e) => setIncludeVat(e.target.checked)} />الأسعار شاملة ضريبة القيمة المضافة</label>

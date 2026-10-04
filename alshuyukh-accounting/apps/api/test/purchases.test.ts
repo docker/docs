@@ -16,7 +16,7 @@ afterAll(async () => { await t.close(); });
 describe('purchase invoices', () => {
   it('posts goods to inventory: Dr Inventory + Dr VAT input / Cr AP', async () => {
     const sup = await c.supplier({ vatNumber: '310000000000003' });
-    const prod = await c.product({ purchasePrice: '60' });
+    const prod = await c.goods({ purchasePrice: '60' });
     const bill = await c.purchase(sup.id, [{ productId: prod.id, quantity: '10' }], { supplierInvoiceNumber: 'S-9001' });
     expect(bill).toMatchObject({ status: 'POSTED', taxableAmount: '600.00', taxAmount: '90.00', total: '690.00', supplierInvoiceNumber: 'S-9001' });
     expect(bill.number).toMatch(/^PINV-\d{6}$/);
@@ -30,7 +30,7 @@ describe('purchase invoices', () => {
 
   it('records the supplier invoice number once per supplier', async () => {
     const sup = await c.supplier();
-    const prod = await c.product();
+    const prod = await c.goods();
     await c.purchase(sup.id, [{ productId: prod.id, quantity: '1' }], { supplierInvoiceNumber: 'DUP-1' });
     const dup = await c.api.post('/api/purchase-invoices', { partyId: sup.id, docDate: c.date, supplierInvoiceNumber: 'DUP-1', lines: [{ productId: prod.id, quantity: '1' }] });
     expect(dup.statusCode).toBe(409);
@@ -39,7 +39,7 @@ describe('purchase invoices', () => {
   it('posts expense lines to their account and requires one for untracked services', async () => {
     const sup = await c.supplier();
     const ch = await chart(t.app, owner.token);
-    const service = await c.product({ productType: 'SERVICE', purchasePrice: '1000' });
+    const service = await c.product({ purchasePrice: '1000' });
     const draft = (await c.api.post('/api/purchase-invoices', { partyId: sup.id, docDate: c.date, lines: [{ productId: service.id, quantity: '1' }] })).json();
     expect((await c.api.post(`/api/purchase-invoices/${draft.id}/post`)).json().error.code).toBe('ACCOUNT_REQUIRED');
 
@@ -57,7 +57,7 @@ describe('purchase invoices', () => {
 
   it('returns goods to the supplier: Dr AP / Cr Inventory + Cr VAT input', async () => {
     const sup = await c.supplier();
-    const bill = await c.purchase(sup.id, [{ productId: (await c.product()).id, quantity: '4', unitPrice: '50' }]); // 230
+    const bill = await c.purchase(sup.id, [{ productId: (await c.goods()).id, quantity: '4', unitPrice: '50' }]); // 230
     const r = (await c.api.post('/api/purchase-returns', { originalInvoiceId: bill.id, docDate: c.date, reason: 'معيب', lines: [{ sourceItemId: bill.lines[0].id, quantity: '1' }] })).json();
     const ret = (await c.api.post(`/api/purchase-returns/${r.id}/post`)).json();
     expect(ret.number).toMatch(/^DN-\d{6}$/);
@@ -70,7 +70,7 @@ describe('purchase invoices', () => {
 
   it('cancels an unpaid purchase invoice', async () => {
     const sup = await c.supplier();
-    const bill = await c.purchase(sup.id, [{ productId: (await c.product()).id, quantity: '1' }]);
+    const bill = await c.purchase(sup.id, [{ productId: (await c.goods()).id, quantity: '1' }]);
     expect((await c.api.post(`/api/purchase-invoices/${bill.id}/cancel`, { reason: 'مكرر' })).json().status).toBe('CANCELLED');
     expect(await balanceOf(c.api, 'suppliers', sup.id)).toBe('0.00');
   });
@@ -79,7 +79,7 @@ describe('purchase invoices', () => {
 describe('purchase orders', () => {
   it('approves an order and converts it to a draft bill', async () => {
     const sup = await c.supplier();
-    const po = (await c.api.post('/api/purchase-orders', { partyId: sup.id, docDate: c.date, lines: [{ productId: (await c.product()).id, quantity: '12' }] })).json();
+    const po = (await c.api.post('/api/purchase-orders', { partyId: sup.id, docDate: c.date, lines: [{ productId: (await c.goods()).id, quantity: '12' }] })).json();
     expect(po.number).toMatch(/^PO-\d{6}$/);
     expect((await c.api.post(`/api/purchase-orders/${po.id}/convert`, {})).statusCode).toBe(409);
     expect((await c.api.post(`/api/purchase-orders/${po.id}/status`, { status: 'APPROVED' })).json().status).toBe('APPROVED');
@@ -92,7 +92,7 @@ describe('purchase orders', () => {
 describe('purchase permissions', () => {
   it('lets purchase managers post bills and sales staff see nothing', async () => {
     const sup = await c.supplier();
-    const prod = await c.product();
+    const prod = await c.goods();
     const pm = await addMember(t.app, owner, 'PURCHASE_MANAGER');
     const pApi = client(t.app, pm.token);
     const draft = await pApi.post('/api/purchase-invoices', { partyId: sup.id, docDate: c.date, lines: [{ productId: prod.id, quantity: '1' }] });

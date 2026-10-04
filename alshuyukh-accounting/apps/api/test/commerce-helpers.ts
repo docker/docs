@@ -6,7 +6,9 @@ export interface Commerce {
   date: string;
   customer(extra?: Record<string, unknown>): Promise<{ id: string }>;
   supplier(extra?: Record<string, unknown>): Promise<{ id: string }>;
+  /** A service by default (no stock); use goods() for stocked items. */
   product(extra?: Record<string, unknown>): Promise<{ id: string }>;
+  goods(extra?: Record<string, unknown>): Promise<{ id: string }>;
   invoice(customerId: string, lines: unknown[], extra?: Record<string, unknown>): Promise<Record<string, any>>;
   postInvoice(customerId: string, lines: unknown[], extra?: Record<string, unknown>): Promise<Record<string, any>>;
   purchase(supplierId: string, lines: unknown[], extra?: Record<string, unknown>): Promise<Record<string, any>>;
@@ -28,7 +30,8 @@ export async function commerce(app: FastifyInstance, s: Session): Promise<Commer
     date,
     customer: (extra = {}) => ok(api.post('/api/customers', { nameAr: `عميل ${++seq}`, ...extra })),
     supplier: (extra = {}) => ok(api.post('/api/suppliers', { nameAr: `مورد ${++seq}`, ...extra })),
-    product: (extra = {}) => ok(api.post('/api/products', { nameAr: `منتج ${++seq}`, salePrice: '100', purchasePrice: '60', ...extra })),
+    product: (extra = {}) => ok(api.post('/api/products', { nameAr: `خدمة ${++seq}`, productType: 'SERVICE', salePrice: '100', purchasePrice: '60', ...extra })),
+    goods: (extra = {}) => ok(api.post('/api/products', { nameAr: `صنف ${++seq}`, productType: 'GOODS', salePrice: '100', purchasePrice: '60', ...extra })),
     invoice: (customerId, lines, extra = {}) => ok(api.post('/api/invoices', { partyId: customerId, docDate: date, lines, ...extra })),
     async postInvoice(customerId, lines, extra = {}) {
       const inv = await ok(api.post('/api/invoices', { partyId: customerId, docDate: date, lines, ...extra }));

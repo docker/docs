@@ -2,11 +2,16 @@ import { useState, type FormEvent } from 'react';
 import { api } from '../../api';
 import { useAuth } from '../../auth';
 import { ErrorBox, PageHeader, useLoad } from '../../ui';
+import Adjustments from '../inventory/Adjustments';
+import Balances from '../inventory/Balances';
+import StockCard from '../inventory/StockCard';
+import Transfers from '../inventory/Transfers';
+import Valuation from '../inventory/Valuation';
 
 interface Product {
   id: string; sku: string; barcode: string | null; nameAr: string; nameEn: string | null; productType: string;
   categoryId: string | null; categoryName: string | null; unitId: string; unitName: string; salePrice: string;
-  salePriceIncludesVat: boolean; purchasePrice: string; vatCategory: string; trackInventory: boolean; isActive: boolean;
+  salePriceIncludesVat: boolean; purchasePrice: string; vatCategory: string; trackInventory: boolean; isActive: boolean; onHand: string;
 }
 interface Unit { id: string; code: string; nameAr: string; isActive: boolean }
 interface Category { id: string; parentId: string | null; nameAr: string; isActive: boolean }
@@ -16,18 +21,35 @@ const blank = (v: FormDataEntryValue | null) => (v === null || String(v).trim() 
 /** Shows a 4-decimal unit price without trailing zeros beyond 2 places. */
 const price = (v: string) => v.replace(/(\.\d\d)00$/, '$1').replace(/(\.\d\d\d)0$/, '$1');
 
+type Tab = 'products' | 'balances' | 'card' | 'transfers' | 'adjustments' | 'valuation' | 'setup';
+
 export default function Products() {
   const { can } = useAuth();
-  const [tab, setTab] = useState<'products' | 'setup'>('products');
+  const [tab, setTab] = useState<Tab>('products');
+  const tabs: [Tab, string, boolean][] = [
+    ['products', 'المنتجات والخدمات', can('product.view')],
+    ['balances', 'الأرصدة', can('inventory.view')],
+    ['card', 'حركة الصنف', can('inventory.view')],
+    ['transfers', 'التحويلات', can('inventory.view')],
+    ['adjustments', 'التسويات والجرد', can('inventory.view')],
+    ['valuation', 'تقييم المخزون', can('inventory.view')],
+    ['setup', 'الوحدات والتصنيفات', can('product.manage')],
+  ];
   return (
     <>
       <PageHeader title="المخزون" />
       <nav className="tabs">
-        <button className={`tab ${tab === 'products' ? 'active' : ''}`} onClick={() => setTab('products')}>المنتجات والخدمات</button>
-        {can('product.manage') && <button className={`tab ${tab === 'setup' ? 'active' : ''}`} onClick={() => setTab('setup')}>الوحدات والتصنيفات</button>}
+        {tabs.filter(([, , show]) => show).map(([key, label]) => (
+          <button key={key} className={`tab ${tab === key ? 'active' : ''}`} onClick={() => setTab(key)}>{label}</button>
+        ))}
       </nav>
-      {tab === 'products' ? <ProductList /> : <Setup />}
-      <p className="muted small">حركات المخزون والأرصدة والتكلفة تُضاف في المرحلة 5.</p>
+      {tab === 'products' && <ProductList />}
+      {tab === 'balances' && <Balances />}
+      {tab === 'card' && <StockCard />}
+      {tab === 'transfers' && <Transfers />}
+      {tab === 'adjustments' && <Adjustments />}
+      {tab === 'valuation' && <Valuation />}
+      {tab === 'setup' && <Setup />}
     </>
   );
 }
@@ -114,7 +136,7 @@ function ProductList() {
         </div>
         <div className="table-wrap">
           <table className="table">
-            <thead><tr><th>الرمز</th><th>الاسم</th><th>النوع</th><th>التصنيف</th><th>الوحدة</th><th className="num">سعر البيع</th><th className="num">سعر الشراء</th></tr></thead>
+            <thead><tr><th>الرمز</th><th>الاسم</th><th>النوع</th><th>التصنيف</th><th>الوحدة</th><th className="num">سعر البيع</th><th className="num">سعر الشراء</th><th className="num">الكمية المتاحة</th></tr></thead>
             <tbody>
               {products.data?.data.map((p) => (
                 <tr key={p.id}>
@@ -125,10 +147,11 @@ function ProductList() {
                   <td>{p.unitName}</td>
                   <td className="num" dir="ltr">{price(p.salePrice)}{p.salePriceIncludesVat && <span className="muted small"> شامل</span>}</td>
                   <td className="num" dir="ltr">{price(p.purchasePrice)}</td>
+                  <td className="num" dir="ltr">{p.trackInventory ? p.onHand.replace(/\.?0+$/, '') || '0' : '—'}</td>
                 </tr>
               ))}
               {!products.data && !products.error && <tr><td colSpan={7} className="muted empty-row">جارٍ التحميل…</td></tr>}
-              {products.data?.data.length === 0 && <tr><td colSpan={7} className="muted empty-row">لا توجد منتجات</td></tr>}
+              {products.data?.data.length === 0 && <tr><td colSpan={8} className="muted empty-row">لا توجد منتجات</td></tr>}
             </tbody>
           </table>
         </div>

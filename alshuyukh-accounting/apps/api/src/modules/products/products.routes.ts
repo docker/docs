@@ -18,7 +18,8 @@ const PRODUCT_SELECT = `
          p.sale_price::text AS "salePrice", p.sale_price_includes_vat AS "salePriceIncludesVat",
          p.purchase_price::text AS "purchasePrice", p.vat_category AS "vatCategory", p.track_inventory AS "trackInventory",
          p.sales_account_id AS "salesAccountId", p.purchase_account_id AS "purchaseAccountId",
-         p.is_active AS "isActive", p.created_at AS "createdAt", p.updated_at AS "updatedAt"
+         p.is_active AS "isActive", p.created_at AS "createdAt", p.updated_at AS "updatedAt",
+         COALESCE((SELECT sum(b.quantity) FROM inventory_balances b WHERE b.product_id = p.id), 0)::text AS "onHand"
     FROM products p
     JOIN units u ON u.id = p.unit_id
     LEFT JOIN product_categories c ON c.id = p.category_id`;
@@ -273,7 +274,11 @@ export default async function productsRoutes(app: FastifyInstance) {
       const type = body.productType ?? before.productType;
       const track = body.trackInventory ?? (body.productType === 'SERVICE' ? false : before.trackInventory);
       if (type === 'SERVICE' && track) throw badRequest('SERVICE_NO_STOCK', 'Services cannot track inventory');
-      // TODO(Phase 5): refuse changing type or tracking once stock movements exist.
+      if ((body.productType !== undefined && body.productType !== before.productType) ||
+          (body.trackInventory !== undefined && body.trackInventory !== before.trackInventory)) {
+        const moved = await db.query(`SELECT 1 FROM stock_movements WHERE product_id = $1 LIMIT 1`, [id]);
+        if (moved.rowCount) throw conflict('PRODUCT_HAS_STOCK_HISTORY', 'The type and stock tracking of a product with stock movements cannot change');
+      }
       if (body.productType === 'SERVICE' && body.trackInventory === undefined) body.trackInventory = false;
       await checkReferences(db, before.companyId, body);
       const sets: string[] = [];
@@ -297,8 +302,7 @@ export default async function productsRoutes(app: FastifyInstance) {
       const before = await loadProduct(db, a.tenantId, id);
       if (!before) throw notFound('Product');
       const itemTables = ['sales_quote_items', 'sales_invoice_items', 'sales_return_items', 'purchase_order_items', 'purchase_invoice_items', 'purchase_return_items'];
-      // TODO(Phase 5): also refuse when stock movements reference the product.
-      const used = await db.query(`${itemTables.map((t) => `SELECT 1 FROM ${t} WHERE product_id = $1`).join(' UNION ALL ')} LIMIT 1`, [id]);
+      const used = await db.query(`${[...itemTables, 'stock_movements'].map((t) => `SELECT 1 FROM ${t} WHERE product_id = $1`).join(' UNION ALL ')} LIMIT 1`, [id]);
       if (used.rowCount) throw conflict('PRODUCT_IN_USE', 'This product is used in documents. Deactivate it instead.');
       await db.query(`UPDATE products SET deleted_at = now(), is_active = false, updated_by = $2 WHERE id = $1`, [id, a.userId]);
       await writeAudit(db, { tenantId: a.tenantId, userId: a.userId, action: 'DELETE', entityType: 'product', entityId: id, oldValues: before }, req.auditMeta());
