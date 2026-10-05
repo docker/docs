@@ -176,6 +176,18 @@ for setup examples and the upstream
 [lifecycle definition](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/lifecycle@1.md)
 for the fields.
 
+### Generated files
+
+In lifecycle `files` content, write `${{ kit.env.NAME }}` to insert a
+container environment variable. For example, write
+`${{ kit.env.WORKSPACE_DIR }}` for the workspace path. Plain `$VAR` and
+`${VAR}` are written unchanged, without substituting their values. In hook
+commands, use shell syntax such as `$WORKSPACE_DIR` instead.
+
+Docker Sandboxes substitutes `${{ kit.env.NAME }}` once, when it creates the
+sandbox. `kit.env` reads the final container environment, independently of a
+hook's `env` list.
+
 ## Set workload compute requirements
 
 Set the workload's default CPU and memory allocation with the
