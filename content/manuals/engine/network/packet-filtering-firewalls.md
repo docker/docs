@@ -90,9 +90,9 @@ forwarding from `ANY` zone to the `docker` zone.
 ## Docker and ufw
 
 [Uncomplicated Firewall](https://launchpad.net/ufw)
-(ufw) is a frontend that ships with Debian and Ubuntu,
-and it lets you manage firewall rules. Docker and ufw use firewall rules in
-ways that make them incompatible with each other.
+(ufw) is a frontend that ships with Ubuntu, and it lets you manage firewall
+rules. Docker and ufw use firewall rules in ways that make them incompatible
+with each other.
 
 When you publish a container's ports using Docker, traffic to and from that
 container gets diverted before it goes through the ufw firewall settings.

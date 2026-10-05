@@ -175,7 +175,7 @@ stages:
     displayName: Build and Push Docker Image
 ```
 
-This stage executes only if the source branch is `main`.
+This stage builds the image on both commit and pull request runs. The push task below runs only when the source branch is `main`.
 
 > [!TIP]
 >
@@ -187,11 +187,11 @@ This stage executes only if the source branch is `main`.
 ```yaml
 jobs:
   - job: DockerJob
-  displayName: Build and Push
-  pool:
-    vmImage: ubuntu-latest
-    demands:
-      - docker
+    displayName: Build and Push
+    pool:
+      vmImage: ubuntu-latest
+      demands:
+        - docker
 ```
 
 This job utilizes the latest Ubuntu VM image with Docker support, provided by Microsoft-hosted agents. It can be replaced with a custom pool for self-hosted agents if necessary.
@@ -233,7 +233,7 @@ Uses a pre-configured Azure DevOps Docker registry service connection to authent
 #### Step 4.3: Build the Docker image
 
 ```yaml
- - task: Docker@2
+  - task: Docker@2
     displayName: Build Docker Image
     inputs:
       command: build

@@ -154,7 +154,6 @@ params:
       stage: 3218181
     google: GTM-WL2QLG5
     onetrust: 65425fb0-7b36-4317-9f10-7b3e08039af0
-    vwo: 723167
     marlin:
       # Public-write API keys for the Marlin analytics SDK.
       apiKey:
@@ -180,7 +179,7 @@ params:
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
   docker_ce_version_prev: "29.8.1"
   # Latest Docker Compose version
-  compose_version: "v5.5.0"
+  compose_version: "v5.6.0"
   # Latest BuildKit version
   buildkit_version: "0.32.0"
   # Latest actions version
