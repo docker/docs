@@ -5,7 +5,7 @@
     {
       "product": "Docker Home",
       "title": "Assign licenses to teams",
-      "description": "Assign a product license to a team so every current and future member receives it. Each member uses one license per product.",
+      "description": "Assign a product license to a team so every current and future member receives it. The Licenses page in Docker Home shows available licenses and whether they are assigned to teams or individuals.",
       "url": "/accounts/organization/manage/manage-licenses/#teams",
       "published": "2026-09-29",
       "source_prs": [26205],
