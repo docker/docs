@@ -90,25 +90,51 @@ If SSO is turned on but not enforced, users can fall back to username/password a
 
 Yes, bot accounts need seats like regular users, requiring a non-aliased domain email in the IdP and using a seat in Docker Hub. You can add bot accounts to your IdP and create access tokens to replace other credentials.
 
-### Does SAML SSO use Just-in-Time provisioning?
-
-The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally turn off JIT in Docker Home if you turn on auto-provisioning using SCIM. See [Just-in-Time provisioning](/manuals/security/provisioning/just-in-time.md).
-
 ### How can I troubleshoot an Entra ID SSO connection error?
 
 Confirm that you've configured the necessary API permissions in Entra ID for your SSO connection. You need to grant administrator consent within your Entra ID tenant. See [Entra ID (formerly Azure AD) documentation](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=portal#grant-admin-consent-in-app-registrations).
 
+## Provisioning
+
+### Does SAML SSO use Just-in-Time provisioning?
+
+Yes. Docker turns on Just-in-Time (JIT) provisioning when you configure an SSO
+connection. You can turn off JIT after you configure and test SCIM. See
+[Just-in-Time provisioning](/manuals/security/provisioning/just-in-time.md).
+
+### Can I use JIT and SCIM together?
+
+Yes, but Docker recommends using one provisioning source. When both are
+enabled, sign-in and SCIM sync can each change a user's full name and team
+memberships, so those values can move back and forth. Before you enable both,
+review
+[how SCIM works with JIT](/manuals/security/provisioning/scim/_index.md#choose-how-scim-works-with-jit).
+
+### How can I give a user immediate access with SCIM?
+
+If your IdP supports Provision on Demand, use it to synchronize the user
+before the next scheduled SCIM synchronization. This provides immediate
+provisioning without enabling JIT.
+
 ### Do I need to manually add users to my organization?
 
-No, you don't need to manually add users to your organization. Just ensure user accounts exist in your IdP. When users sign in to Docker with their domain email address, they're automatically added to the organization after successful authentication.
+Not when JIT, SCIM, or auto-provisioning covers the user. If none of those
+methods applies, for example when JIT is turned off and the user isn't
+assigned to the Docker application in your IdP, an organization owner must
+invite the user.
 
 ### Can users use different email addresses to authenticate through SSO?
 
-All users must authenticate using the email domain specified during SSO setup. Users with email addresses that don't match the verified domain can sign in as guests with username and password if SSO isn't enforced, but only if they've been invited.
+All users must authenticate using the email domain specified during SSO setup.
+Users with email addresses that don't match the verified domain can sign in as
+guests with username and password if SSO isn't enforced, but only if they've
+been invited.
 
 ### How will users know they're being added to a Docker organization?
 
-When SSO is turned on, users are prompted to authenticate through SSO the next time they sign in to Docker Hub or Docker Desktop. The system detects their domain email and prompts them to sign in with SSO credentials instead.
+When SSO is turned on, users are prompted to authenticate through SSO the next
+time they sign in to Docker Hub or Docker Desktop. The system detects their
+domain email and prompts them to sign in with SSO credentials instead.
 
 For CLI access, users must authenticate using personal access tokens.
 
@@ -125,29 +151,46 @@ For detailed instructions, see [Configure single sign-on](/manuals/security/auth
 
 ### Is Docker SSO fully synced with the IdP?
 
-Docker SSO provides Just-in-Time (JIT) provisioning by default. Users are provisioned when they authenticate with SSO. If users leave the organization, administrators must manually [remove the user](/manuals/accounts/organization/manage/members.md#remove-a-member-from-the-organization) from the organization.
+Not with JIT alone. JIT provisions users when they authenticate, but it
+doesn't deprovision users who leave your IdP. You must
+[remove those users](/manuals/accounts/organization/manage/members.md#remove-a-member-from-the-organization)
+manually.
 
-[SCIM](/manuals/security/provisioning/scim/_index.md) provides full synchronization with users and groups. When using SCIM, the recommended configuration is to turn off JIT so all auto-provisioning is handled by SCIM.
-
-Additionally, you can use the [Docker Hub API](/reference/api/hub/latest.md) to complete this process.
+[SCIM](/manuals/security/provisioning/scim/_index.md) provides continuous user
+and group synchronization, including automatic deprovisioning.
 
 ### How does turning off Just-in-Time provisioning affect user sign-in?
 
-When JIT is turned off (available with SCIM in Docker Home), users must be organization members or have pending invitations to access Docker. Users who don't meet these criteria get an "Access denied" error and need administrator invitations.
+You can turn off JIT only while SCIM is enabled. With JIT turned off, users
+must already be members, have a pending invitation, or be provisioned through
+SCIM. Users who don't meet these criteria get an "Access denied" error and
+need an administrator to invite them.
 
 See [SSO authentication with JIT provisioning disabled](/manuals/security/provisioning/just-in-time.md#sso-authentication-with-jit-provisioning-disabled).
 
 ### Can someone join an organization without an invitation?
 
-Not without SSO. Joining requires an invite from an organization owner. When SSO is enforced, users with verified domain emails can automatically join the organization when they sign in.
+Yes. JIT can add users when they sign in through SSO, SCIM can provision users
+assigned in the IdP, and auto-provisioning can add existing Docker users whose
+email addresses match a verified domain. Without an automatic provisioning
+method, an organization owner must invite the user.
 
 ### What happens to existing licensed users when SCIM is turned on?
 
-Turning on SCIM doesn't immediately remove or modify existing licensed users. They retain current access and roles, but you'll manage them through your IdP after SCIM is active. If SCIM is later turned off, previously SCIM-managed users remain in Docker but are no longer automatically updated based on your IdP.
+SCIM can manage and deprovision organization members whose email domain is
+verified on the SSO connection, including users created through JIT or added
+manually. When your IdP pushes a user with a matching email address, SCIM
+links the existing Docker account. Members whose email domain isn't verified
+on the connection stay outside SCIM. To use SCIM as the only provisioning
+source, see
+[Migrate JIT to SCIM](/manuals/security/provisioning/scim/migrate-scim.md).
 
 ### Is user information visible in Docker Hub?
 
-All Docker accounts have public profiles associated with their namespace. If you don't want user information (like full names) to be visible, remove those attributes from your SSO and SCIM mappings, or use different identifiers to replace users' full names.
+All Docker accounts have public profiles associated with their namespace. If
+you don't want user information (like full names) to be visible, remove those
+attributes from your SSO and SCIM mappings, or use different identifiers to
+replace users' full names.
 
 ## Enforcement
 
