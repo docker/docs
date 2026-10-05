@@ -24,8 +24,9 @@ with a short-lived token.
 1. Sign in to [Docker Home](https://app.docker.com/), select your
    organization, then go to **Identity & auth**.
 1. Select **OIDC connections**.
-1. Select **Create OIDC connection** and fill in the OIDC connection form.
-   - Provide rulesets and subject claims. Other values are optional.
+1. Select **Create OIDC connection** and fill in the form.
+   - **Connection name**, a **Ruleset name**, and a **Subject claim** are
+     required. **Description** is optional.
    - For rulesets, subject claims, and resources, see
      [OIDC connections rulesets and subject claims](/manuals/security/authentication/oidc-connections/rulesets-claims.md).
 1. Select **Create connection**.
