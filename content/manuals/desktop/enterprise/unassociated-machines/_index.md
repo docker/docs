@@ -128,7 +128,7 @@ organization in two ways:
   - Auto-provisioning: If you have verified domains with auto-provisioning
     enabled, users who sign in with a matching email domain will automatically
     be added to your organization. For more information on verifying domains and
-    auto-provisioning, see [Domain management](/security/provisioning/domain-management).
+    auto-provisioning, see [Domain management](/manuals/security/provisioning/domain-management.md).
   - SSO user provisioning: If you have SSO configured with
     [Just-in-Time provisioning](/manuals/security/provisioning/just-in-time.md),
     users who sign in through your SSO connection will automatically be added
