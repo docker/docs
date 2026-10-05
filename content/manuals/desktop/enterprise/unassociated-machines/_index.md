@@ -106,7 +106,7 @@ To enable sign-in enforcement for individual unassociated machines:
 The **Sign-in required** status updates for the individual machine to
 **Yes**.
 
-### What happens sign-in is enforced
+### What happens when sign-in is enforced
 
 After you enable sign-in enforcement:
 
