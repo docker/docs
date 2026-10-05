@@ -28,7 +28,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-10-05" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.94.0" build_path="/XXXXXX/" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.94.0" build_path="/241994/" >}}
 
 ### Update
 
@@ -37,6 +37,8 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Agent v1.144.0](https://github.com/docker/docker-agent/releases/tag/v1.144.0)
 - [NVIDIA Container Toolkit v1.20.1](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.20.1)
 - [Docker Scout CLI v1.25.0](https://github.com/docker/scout-cli/releases/tag/v1.25.0)
+- [Docker Engine v29.8.2](https://docs.docker.com/engine/release-notes/29/#2982)
+- [Docker Buildx v0.37.2](https://github.com/docker/buildx/releases/tag/v0.37.2)
 
 ### Bug fixes and enhancements
 
@@ -58,12 +60,14 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - docker-pass:
    - Removing a secret that does not exist is now consistent with other `docker remove` commands.
    - Running the examples from the help text no longer prefixes the secret with a line break.
+- Fixed long Ask Gordon conversations where the end of responses was hidden behind the user's message, and where scrolling up jumped around or got stuck.
 
 #### For Mac
 
 - Fixed the update tooltip suggesting to move Docker Desktop to `/Applications` when that is the folder the current user cannot modify. Fixes [docker/desktop-feedback#598](https://github.com/docker/desktop-feedback/issues/598).
 - Fixed repeated privileged-access prompts when Docker Desktop starts automatically after a reboot. Fixes [docker/desktop-feedback#651](https://github.com/docker/desktop-feedback/issues/651).
 - Fixed the "CLI tools installation" setting on macOS reverting to System when Docker Desktop could not update the login shell profile.
+- Fixed zsh completions not being set up when `~/.zshrc` doesn't exist.
 
 #### For Windows
 
