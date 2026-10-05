@@ -10,50 +10,41 @@ keywords: >-
   image push, image pull, docker build cloud, wildcards, access control
 tags: [admin]
 weight: 20
+toc_max: 2
 aliases:
   - /enterprise/security/oidc-connections/rulesets-claims/
 ---
 
 {{< summary-bar feature_name="OIDC connections" >}}
 
-Rulesets and subject claims define what actions your GitHub workflows can
-take with your Docker resources. Use them to authorize GitHub workflow
-behaviors for an OIDC connection.
+Rulesets and subject claims authorize which GitHub workflows can use which
+Docker resources on an OIDC connection.
 
 ## Rulesets
 
-A ruleset tells Docker which GitHub workflow can access which Docker
-resources. When a workflow triggers an OIDC exchange, Docker checks the
-token's subject claim against every ruleset on the connection. If the
-subject claim matches, Docker grants the resources and scopes on that
-ruleset.
+When a workflow triggers an OIDC exchange, Docker checks the token's
+subject claim against every ruleset on the connection. If the subject
+claim matches, Docker grants the resources and scopes on that ruleset.
 
 Each ruleset has these fields:
 
 - **Ruleset name**: A name for the ruleset.
-- **Subject claim**: One `sub` string from the GitHub ID token. The
-  repository, branch, tag, pull request, or environment is part of that
-  string, not a separate field. See [Subject claims](#subject-claims).
-- **Resources**: What the workflow can access when the subject claim
-  matches. See [Resources](#resources).
+- **Subject claim**: One `sub` string from the GitHub ID token.
+- **Resources**: What the workflow can access.
 - **Scopes**: The access granted on those resources.
-  - Repository: **Image Pull**, **Image Push**, and **Read public
-    repositories**
-  - Docker Build Cloud: **Cloud Connect**
 
 You can add one to five rulesets on a connection. If more than one
-ruleset matches a token, Docker combines their resources and grants
-access to that combined set. For more information, see
-[Ruleset examples](#ruleset-examples).
+ruleset matches a token, Docker grants the union of their resources and
+scopes.
 
 ## Subject claims
 
 A subject claim is the `sub` field in a GitHub-issued JWT ID token. It
-encodes details of a workflow into a single string, identifying the
-workflow by organization, repository, branch, environment, and so on.
+encodes the workflow's organization, repository, branch, environment, and
+related details into a single string. The repository, branch, tag, pull
+request, or environment is part of that string, not a separate field.
 
-On each ruleset, enter that string in **Subject claim**. The default
-format is:
+The default format is:
 
 ```text
 repo:<org>/<repo>:ref:refs/heads/<branch>
@@ -79,18 +70,8 @@ For the full list of formats, see
 
 ## Resources
 
-A resource is a Docker product the workflow can use after the subject
-claim matches. The subject claim decides whether a ruleset applies. The
-resources on that ruleset decide what the workflow can reach, and the
-scopes decide what it can do there.
-
-You set resources on each ruleset, next to the scopes for those
-resources. A workflow receives only the resources from rulesets that
-match its token. When more than one ruleset matches, Docker combines
-those resources.
-
-Docker Hub repositories and Docker Build Cloud are the supported
-resources.
+A resource is a Docker Hub repository or Docker Build Cloud builder.
+Scopes on the matching ruleset decide what the workflow can do with a defined resource.
 
 - A repository resource is a Docker Hub repository in your organization.
   **Image Pull** and **Image Push** apply to that repository. **Read
@@ -100,74 +81,62 @@ resources.
 
 ## Ruleset examples
 
-These are different ways to set up rulesets on a connection. Each
-example is its own setup.
+The following examples are working setups you can adapt. They are not
+exhaustive, and they are not the only valid way to configure a
+connection. Use them when you decide how to allocate your five
+rulesets.
 
-### One ruleset for several resources
+Start with one ruleset. Add more when different branches or permissions
+need to change independently. Each example is a complete setup on its
+own.
 
-If you have workflows on `main` that need to push the
-`octo-org/octo-repo` image and build it in Docker Build Cloud, you can
-set up one ruleset:
+### Publish from main and use Build Cloud
+
+Use one ruleset when the same workflows need several permissions and
+you want to change those permissions together.
 
 | Ruleset name | Subject claim                                 | Resources and scopes                                                                               |
 | :----------- | :-------------------------------------------- | :------------------------------------------------------------------------------------------------- |
 | `main`       | `repo:octo-org/octo-repo:ref:refs/heads/main` | Repository `octo-org/octo-repo` with **Image Push**, and Docker Build Cloud with **Cloud Connect** |
 
-A push to `main` makes GitHub set the token's subject claim to
-`repo:octo-org/octo-repo:ref:refs/heads/main`, which Docker compares
-against the ruleset. When the string matches the ruleset named `main`,
-the run can push the image and connect to Docker Build Cloud.
+Other branches receive `access denied` unless you add another ruleset.
 
-Choose this setup when you want to update both permissions
-together.
+### Different access for release branches and main
 
-### Two rulesets for different branches
-
-You may want to create different rulesets for different branches. For
-example, release branches need to pull `octo-org/octo-repo` while any
-workflows on `main` need to push that image. In this case it makes sense
-to create two rulesets:
+Split into two rulesets when release work should only pull an image,
+but `main` should publish it. You can then tighten release access
+without editing the publish rule.
 
 | Ruleset name   | Subject claim                                      | Resources and scopes                                |
 | :------------- | :------------------------------------------------- | :-------------------------------------------------- |
 | `release-pull` | `repo:octo-org/octo-repo:ref:refs/heads/release-*` | Repository `octo-org/octo-repo` with **Image Pull** |
 | `main-push`    | `repo:octo-org/octo-repo:ref:refs/heads/main`      | Repository `octo-org/octo-repo` with **Image Push** |
 
-The subject claim uses `release-*` to extend the permission to every branch whose
-name starts with `release-`, letting the workflow pull the image for
-all release branches. On the other hand, a push to `main`
-matches the ruleset named `main-push`, so that workflow can push the
-image.
+With this setup:
 
-Docker returns `access denied` on any other branch you leave off the
-rulesets. For example, a branch named `feature-x` can still send its
-token to Docker, but the subject claim matches neither ruleset.
+- Branches whose names start with `release-` can pull the image.
+- Workflows on `main` can publish the image.
+- Other branches, such as `feature-x`, receive `access denied`.
 
-Choose this setup when branches need different access. You can change
-what release branches are allowed to do without editing `main-push`.
+### Combine a broad read rule with a narrow push rule
 
-### Rulesets that match the same run
-
-A single run can match multiple rulesets. For example:
+Use two overlapping rulesets when every repository in the GitHub org
+should read public images, but only `main` in one repository should
+publish.
 
 | Ruleset name | Subject claim                                 | Resources and scopes                                   |
 | :----------- | :-------------------------------------------- | :----------------------------------------------------- |
 | `main-push`  | `repo:octo-org/octo-repo:ref:refs/heads/main` | Repository `octo-org/octo-repo` with **Image Push**    |
 | `org-read`   | `repo:octo-org/*`                             | Public repositories with **Read public repositories** |
 
-When you push to `main` in this instance, the subject claim matches the
-ruleset named `main-push` and the ruleset named `org-read`. It matches
-`org-read` because `octo-repo` is a repository in `octo-org`. Docker
-combines their permissions, so the workflow that pushed to `main` can
-push the image and read public repositories.
+With this setup:
 
-Alternatively, a push to any other branch or repository in `octo-org`
-matches `org-read` only. That run can read public repositories.
-
-Choose this setup when the organization-wide read permission and the
-`main` push permission should be added and removed separately. You could
-then delete `org-read` to remove read access to public repositories and
-leave the `main-push` ruleset as it is.
+- A workflow on `main` matches both rulesets, so it can publish the
+  image and read public repositories.
+- A workflow on any other branch or repository in `octo-org` matches
+  `org-read` only, so it can read public repositories.
+- Deleting `org-read` removes the shared read permission and leaves the
+  publish rule unchanged.
 
 ## Next steps
 
