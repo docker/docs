@@ -129,6 +129,8 @@ github.com/docker/cli v29.7.1+incompatible h1:ILZpP6B7fedIr6ANy824QkDp1WMJuouIq0
 github.com/docker/cli v29.7.1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v29.7.2+incompatible h1:dlkwallR8XqfeVnA2ELEhdwvb4lsSwuB4IgsG8Q9cLY=
 github.com/docker/cli v29.7.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v29.8.2+incompatible h1:2zgdFuoFst2T80oS42vhKGxkd0JRo305eIEKTsxR7pQ=
+github.com/docker/cli v29.8.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose/v5 v5.0.0 h1:J2uMCzJ/5xLcoIVVXvMmPe6HBzVQpmJThKa7Qk7Xldc=
 github.com/docker/compose/v5 v5.0.0/go.mod h1:BurapGv8zmYnsbSmlpCz5EU2Pi3YFV/PjeUnoFpcw64=
 github.com/docker/compose/v5 v5.0.1 h1:5yCjDJbwUqcuI+6WNFHNWz2/3vyBDsNnfe8LlFjyxEc=
@@ -151,6 +153,8 @@ github.com/docker/compose/v5 v5.5.0 h1:B5Eh5CtlbscCMlbyMydbEj3rpIuP9GthdD7PC0Isv
 github.com/docker/compose/v5 v5.5.0/go.mod h1:5yn5qs7G7V7OZc1Kkd6wLz72Le0C45xLNJQ7dgASvMk=
 github.com/docker/compose/v5 v5.5.1 h1:saWlMxB0tfQ+FVUlWGIUjLvR0jF5cfTU18KI5zKLD/M=
 github.com/docker/compose/v5 v5.5.1/go.mod h1:I1MDqH4C/vHlbaWcA6A9pKTOBx9vhtQO3hx3e45igDE=
+github.com/docker/compose/v5 v5.6.0 h1:WCDEV0D1CtZLyPdklHdEjFBnCStosBYkfsD3tvM/ITU=
+github.com/docker/compose/v5 v5.6.0/go.mod h1:NLnbMzshDO3QlhgzMxd9sm981O1yLjPybL1WGStUesI=
 github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=
 github.com/docker/distribution v2.8.3+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/docker v28.5.2+incompatible h1:DBX0Y0zAjZbSrm1uzOkdr1onVghKaftjlSWt4AFexzM=
@@ -333,6 +337,8 @@ github.com/moby/moby/api v1.55.0 h1:2/sexvQyqIWS8pRSCFddBfpW2qE7vR7FCL+vN8pxwMc=
 github.com/moby/moby/api v1.55.0/go.mod h1:+RQ6wluLwtYaTd1WnPLykIDPekkuyD/ROWQClE83pzs=
 github.com/moby/moby/api v1.56.0 h1:GQzua3NA599ASSIICx0iFgiJeO9YkdDARvQsm23ZZuQ=
 github.com/moby/moby/api v1.56.0/go.mod h1:sZ+THbVWkjOmBPPfbnzdD/G1LuIexWhqlSHHPTDQ1Uk=
+github.com/moby/moby/api v1.56.1 h1:PpWkvVPB7Fr/No8w+TfyJ/I6rWZ2YPZhT3JorIg+06c=
+github.com/moby/moby/api v1.56.1/go.mod h1:sZ+THbVWkjOmBPPfbnzdD/G1LuIexWhqlSHHPTDQ1Uk=
 github.com/moby/moby/client v0.2.1 h1:1Grh1552mvv6i+sYOdY+xKKVTvzJegcVMhuXocyDz/k=
 github.com/moby/moby/client v0.2.1/go.mod h1:O+/tw5d4a1Ha/ZA/tPxIZJapJRUS6LNZ1wiVRxYHyUE=
 github.com/moby/moby/client v0.2.2 h1:Pt4hRMCAIlyjL3cr8M5TrXCwKzguebPAc2do2ur7dEM=
