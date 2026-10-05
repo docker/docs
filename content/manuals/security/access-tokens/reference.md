@@ -13,11 +13,12 @@ weight: 30
 Look up what an access token is allowed to do. You choose a permission
 or a set of scopes when you create the token.
 
-## Personal access token permissions {#access-permissions}
+## Personal access token permissions
 
 Each personal access token (PAT) has one permission level that you select when you
-[create the token][pat]. The token applies to every repository your
-account can access. You can't limit a token to a single repository.
+[create the token](/manuals/security/access-tokens/personal-access-tokens.md#create-a-personal-access-token).
+The token applies to every repository your account can access. You
+can't limit a token to a single repository.
 
 - **Repo Public Read-only:** View, search, and pull images from public
   repositories. This is the default.
@@ -28,17 +29,21 @@ account can access. You can't limit a token to a single repository.
 - **Repo Read, Write, Delete:** Everything in **Repo Read & Write**,
   plus delete images and manage your repositories.
 - **Cloud Sandboxes:** Authenticate to the
-  [Docker Cloud Sandboxes API][sandboxes]. Cloud Sandboxes is a paid
-  feature.
+  [Docker Cloud Sandboxes API](/manuals/ai/sandboxes-api/authentication.md).
+  Cloud Sandboxes is a paid feature.
 
 Choose the lowest permission that covers what the token needs to do.
 For example, a CI job that only pulls a private base image needs
 **Repo Read-only**. You can change PAT permissions at any time if the PAT is active or inactive, but not expired. 
 
-## Organization access token scopes {#available-scopes}
+## Organization access token scopes
 
 Scopes control what an organization access token (OAT) can do. You choose
-them when you [create][oat] or [edit][oat-edit] the token. In Docker
+them when you
+[create](/manuals/security/access-tokens/organization-access-tokens.md#create-an-organization-access-token)
+or
+[edit](/manuals/security/access-tokens/organization-access-tokens.md#update-deactivate-or-delete)
+the token. In Docker
 Home, each scope shows its name and a short description while the value
 in the table is what the token carries. You can change OAT scopes at any time if the OAT is active or inactive,
 but not expired.
@@ -52,7 +57,7 @@ also grants the less capable ones. For example:
 If you select **Image Delete**, you don't need to select the other two.
 The Grants column notes each inclusion.
 
-### Repository scopes {#repository-scopes}
+### Repository scopes
 
 Repository scopes apply to each repository you add, or to all
 repositories in the organization if you select
@@ -76,7 +81,7 @@ repositories in the organization if you select
 | Repository Group Admin | `scope-repo-group-admin` | Delete repository group assignments. Includes Repository Group Edit |
 | Repository Settings Admin | `scope-repository-settings-admin` | Configure immutable tag rules |
 
-### Organization scopes {#organization-scopes}
+### Organization scopes
 
 Organization scopes apply to the whole organization.
 
@@ -101,7 +106,7 @@ Creating a repository requires the organization-level **Repository
 Create** scope. No repository scope grants it, not even
 **Repository Admin** on an existing repository.
 
-### Product scopes {#product-scopes}
+### Product scopes
 
 These sections appear alongside **Repository** and **Organization** in
 the token's resources.
@@ -113,13 +118,15 @@ the token's resources.
 | Docker Governance | Governance Policy Read | `scope-governance-policy-read` | Read governance policies |
 | Docker Governance | Governance Policy Write | `scope-governance-policy-write` | Write governance policies. Includes Governance Policy Read |
 
-## Docker Hub API {#hub-api-support}
+## Docker Hub API
 
 An OAT can authenticate most Docker Hub API endpoints under
-`/v2/namespaces/{namespace}/repositories/`. First [create an
-OAT][oat], then exchange it for a short-lived bearer token with the
-[Create access token][hub-auth] API. Use your organization name as the
-identifier and the OAT as the secret:
+`/v2/namespaces/{namespace}/repositories/`. First
+[create an OAT](/manuals/security/access-tokens/organization-access-tokens.md#create-an-organization-access-token),
+then exchange it for a short-lived bearer token with the
+[Create access token](/reference/api/hub/latest/operations/AuthCreateAccessToken/)
+API. Use your organization name as the identifier and the OAT as the
+secret:
 
 ```console
 $ TOKEN=$(curl -s -X POST "https://hub.docker.com/v2/auth/token" \
@@ -177,13 +184,6 @@ the replacement endpoint instead:
 
 ## Next steps
 
-- [Create a PAT][pat]
-- [Create an OAT][oat]
-- [Choose a PAT or OAT][overview]
-
-[pat]: /manuals/security/access-tokens/personal-access-tokens.md#create-a-personal-access-token
-[oat]: /manuals/security/access-tokens/organization-access-tokens.md#create-an-organization-access-token
-[oat-edit]: /manuals/security/access-tokens/organization-access-tokens.md#modify-existing-tokens
-[overview]: /manuals/security/access-tokens/_index.md
-[sandboxes]: /manuals/ai/sandboxes-api/authentication.md
-[hub-auth]: /reference/api/hub/latest/operations/AuthCreateAccessToken/
+- [Create a PAT](/manuals/security/access-tokens/personal-access-tokens.md#create-a-personal-access-token)
+- [Create an OAT](/manuals/security/access-tokens/organization-access-tokens.md#create-an-organization-access-token)
+- [Choose a PAT or OAT](/manuals/security/access-tokens/_index.md)

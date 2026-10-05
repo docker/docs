@@ -99,7 +99,7 @@ status of **Revoked**.
 For how these tokens are created and how to tell them apart, see
 [Auto-generated PATs](/manuals/security/access-tokens/personal-access-tokens.md#auto-generated-tokens).
 
-### Why does sign-in fail with Incorrect authentication credentials?
+### Why does sign-in fail with "Incorrect authentication credentials"?
 
 `docker login` returns `Incorrect authentication credentials` when the
 username and secret don't match a credential that can sign in. The
@@ -114,7 +114,7 @@ Check the following:
    [organization access token](/manuals/security/access-tokens/organization-access-tokens.md).
 2. You pasted the full token, with no spaces or line breaks. Docker
    shows a token only once. If you no longer have it,
-   [create a new personal access token](/manuals/security/access-tokens/personal-access-tokens.md#create).
+   [create a new personal access token](/manuals/security/access-tokens/personal-access-tokens.md#create-a-personal-access-token).
 3. On the **Personal access tokens** page, find the token and use its
    status:
    - **Expired:** Create a new token. You can't change the expiration

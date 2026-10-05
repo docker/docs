@@ -32,10 +32,10 @@ PAT instead.
 > [!TIP]
 >
 > For organization-wide automation, consider
-> [organization access tokens (OATs)][oat], which aren't tied to individual
-> user accounts.
+> [organization access tokens (OATs)](/manuals/security/access-tokens/organization-access-tokens.md),
+> which aren't tied to individual user accounts.
 
-## Create {#create-a-personal-access-token}
+## Create a personal access token
 
 Treat PATs like passwords and keep them secure. Store tokens in a
 credential manager and never commit them to source code. Before you create a PAT, you must verify your email address. To create a PAT:
@@ -53,8 +53,8 @@ credential manager and never commit them to source code. Before you create a PAT
      from today. The default, **None**, creates a token that doesn't
      expire.
    - **Access permissions:** Select one
-     [permission level][permissions]. The default is
-     **Repo Public Read-only**.
+     [permission level](/manuals/security/access-tokens/reference.md#personal-access-token-permissions).
+     The default is **Repo Public Read-only**.
 1. Select **Generate**. Copy the token and save it. Docker shows the
    token once and doesn't store it. You can't retrieve it after you
    leave the page.
@@ -70,7 +70,7 @@ Password: [paste your PAT here]
 ```
 
 If sign-in fails with `Incorrect authentication credentials`, see
-[Why does sign-in fail with Incorrect authentication credentials?][auth-error].
+[Why does sign-in fail with "Incorrect authentication credentials"?](/manuals/faqs/accounts.md#why-does-sign-in-fail-with-incorrect-authentication-credentials).
 
 ## Update or delete
 
@@ -99,7 +99,7 @@ date.
 1. If you selected **Edit**, change the **Access token description** or
    **Scopes**, then select **Save token**.
 
-## Auto-generate {#auto-generated-tokens}
+## Auto-generated tokens
 
 Signing in to Docker Desktop creates a PAT for CLI
 authentication. These tokens show **Auto-generated** in the **Source**
@@ -128,18 +128,13 @@ Best practices for fair use include:
 - Reuse tokens across similar use cases instead of creating many
   single-purpose tokens
 - Delete unused tokens regularly
-- Use [OATs][oat] for organization-wide automation
+- Use [OATs](/manuals/security/access-tokens/organization-access-tokens.md)
+  for organization-wide automation
 - Monitor token usage to identify optimization opportunities
 
 ## Next steps
 
-- [Choose a PAT or OAT][overview]
-- [Look up PAT permissions][permissions]
-- [Create an OAT][oat]
-- [Turn on two-factor authentication][2fa]
-
-[overview]: /manuals/security/access-tokens/_index.md
-[permissions]: /manuals/security/access-tokens/reference.md#access-permissions
-[oat]: /manuals/security/access-tokens/organization-access-tokens.md
-[2fa]: /manuals/security/authentication/2fa/_index.md
-[auth-error]: /manuals/faqs/accounts.md#why-does-sign-in-fail-with-incorrect-authentication-credentials
+- [Choose a PAT or OAT](/manuals/security/access-tokens/_index.md)
+- [Look up PAT permissions](/manuals/security/access-tokens/reference.md#personal-access-token-permissions)
+- [Create an OAT](/manuals/security/access-tokens/organization-access-tokens.md)
+- [Turn on two-factor authentication](/manuals/security/authentication/2fa/_index.md)

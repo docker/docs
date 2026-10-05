@@ -29,7 +29,8 @@ repositories and organization settings you choose.
 > [!WARNING]
 >
 > OATs don't work with Docker Desktop or Image Access Management. For
-> those features, use [PATs][pat] instead.
+> those features, use
+> [PATs](/manuals/security/access-tokens/personal-access-tokens.md) instead.
 
 ## Best practices
 
@@ -49,10 +50,10 @@ To create and manage OATs, you need:
 - One of these roles in the organization:
   - Organization owner
   - Company owner, for organizations that belong to a company
-  - A [custom role][custom-roles] that includes the
-    **Manage organization access tokens** permission
+  - A [custom role](/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md)
+    that includes the **Manage organization access tokens** permission
 
-## Create
+## Create an organization access token
 
 > [!IMPORTANT]
 >
@@ -81,15 +82,16 @@ To create an OAT:
    - Select **Add repository**, then choose a repository or
      **All `<organization>` repositories** from the drop-down.
    - Select one or more scopes for that repository. See
-     [Repository scopes][repo-scopes].
+     [Repository scopes](/manuals/security/access-tokens/reference.md#repository-scopes).
    - Repeat for up to 50 repositories. Each repository has its own
      scopes.
 1. Optional. Expand **Organization** and select the organization-level
    scopes the token needs, such as reading members or creating
-   repositories. See [Organization scopes][org-scopes].
+   repositories. See
+   [Organization scopes](/manuals/security/access-tokens/reference.md#organization-scopes).
 1. Optional. Expand **Docker Build Cloud** or **Docker Governance** to
    grant access to those products. See
-   [Product scopes][product-scopes].
+   [Product scopes](/manuals/security/access-tokens/reference.md#product-scopes).
 1. Select **Generate token**. Copy the token and save it. Docker shows
    the token once and doesn't store it. You can't retrieve it after you
    leave the page.
@@ -138,17 +140,8 @@ disabled until you delete a token.
 
 ## Next steps
 
-- [Choose a PAT or OAT][overview]
-- [Look up scopes and Docker Hub API support][reference]
-- [Create a PAT][pat]
-- [Set up OIDC connections for GitHub Actions][oidc]
-- [Review custom role permissions][custom-roles]
-
-[overview]: /manuals/security/access-tokens/_index.md
-[reference]: /manuals/security/access-tokens/reference.md
-[repo-scopes]: /manuals/security/access-tokens/reference.md#repository-scopes
-[org-scopes]: /manuals/security/access-tokens/reference.md#organization-scopes
-[product-scopes]: /manuals/security/access-tokens/reference.md#product-scopes
-[pat]: /manuals/security/access-tokens/personal-access-tokens.md
-[oidc]: /manuals/security/authentication/oidc-connections/_index.md
-[custom-roles]: /manuals/security/roles-and-permissions/custom-roles/permissions-reference.md
+- [Choose a PAT or OAT](/manuals/security/access-tokens/_index.md)
+- [Look up scopes and Docker Hub API support](/manuals/security/access-tokens/reference.md)
+- [Create a PAT](/manuals/security/access-tokens/personal-access-tokens.md)
+- [Set up OIDC connections for GitHub Actions](/manuals/security/authentication/oidc-connections/_index.md)
+- [Review custom role permissions](/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md)
