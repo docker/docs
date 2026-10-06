@@ -28,7 +28,7 @@ no compiler, so install one before you connect:
 
 ```console
 $ sbx exec <sandbox> -- sudo apt-get update
-$ sbx exec <sandbox> -- sudo DEBIAN_FRONTEND=noninteractive apt-get install -y g++
+$ sbx exec <sandbox> -- sudo DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential
 ```
 
 Verify the compiler is in place:
