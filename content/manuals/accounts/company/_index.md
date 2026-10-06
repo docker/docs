@@ -33,13 +33,12 @@ aliases:
 {{< summary-bar feature_name="Company" >}}
 
 A company groups multiple Docker organizations so you can configure settings
-in one place and view those organizations together. Companies are available
-with a Docker Business subscription. Organization owners with Docker
-Business can create a company in [Docker Home](https://app.docker.com/).
+in one place and view those organizations together. Organization owners with a Docker
+Business subsription can create a company in [Docker Home](https://app.docker.com/).
 
 ## Company structure
 
-Company owners manage the company. A company sits above its organizations.
+A company sits above its organizations so company owners manage the company and all organizations within the company.
 Each organization keeps its own members, teams, repositories, and billing.
 Shared configuration, such as SSO and SCIM, applies at the company.
 

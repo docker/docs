@@ -50,11 +50,10 @@ The following diagram shows that hierarchy.
 flowchart TB
   oo((Organization owners)) -.-> manage@{ shape: text, label: "manage" }
   manage -.-> org[Organization]
+  org --- m((Members))
   org -.- t["Teams (optional)"]
   t -.- mt((Members))
   org --- r[(Repositories)]
-  org --- m1((Members))
-  org --- m2((Members))
   classDef optional stroke-dasharray: 5 5
   class t optional
 ```
@@ -64,24 +63,21 @@ flowchart TB
 Organization owners administer the organization. They invite members, assign
 roles, and manage teams and repositories.
 
-You can have multiple organization owners per organization. You can have different and its permissions, see
+You can have multiple organization owners per organization. All owners
+share the same predefined permissions. For other permission sets, see
 [Roles and
 permissions](/manuals/security/roles-and-permissions/_index.md).
 
 ### Members
 
-A member is a Docker user added to the organization. Organization and company
-owners assign a role to each member. That role sets organization-wide access.
-Team permissions can grant extra access to specific repositories.
+A member is a Docker user invited to the organization. Organization
+owners assign a role to each member and that role sets organization-wide access.
 
 ### Teams
 
 Teams group members so you can grant repository access to many people at
 once. Use a team when several members need the same repositories. Members
 don't have to join a team.
-
-For how companies relate to organizations, see
-[Company structure](/manuals/accounts/company/_index.md#company-structure).
 
 ## Next steps
 
