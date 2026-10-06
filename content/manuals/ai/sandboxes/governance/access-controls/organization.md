@@ -9,9 +9,13 @@ aliases:
   - /ai/sandboxes/governance/org/
 ---
 
+The governance described here applies to local sandboxes. Cloud sandboxes
+use separate network policy configuration. See
+[Cloud network policy](../../cloud/network-policy.md) for cloud controls.
+
 [Local policies](local.md) give individual developers control over what their
 sandboxes can access. Organization policy moves that control to the admin level:
-organization policies apply to sandboxes across the organization, either to
+organization policies apply to local sandboxes across the organization, either to
 every member or to specific teams. When organization governance is active, only
 organization allow rules grant access: local `sbx policy` allow rules are no
 longer evaluated and can't expand what the organization permits. Local network
@@ -23,10 +27,10 @@ programmatic management of network and filesystem policies, use the
 [Governance API](/reference/api/ai-governance/).
 
 By default, only organization
-[owners](/manuals/enterprise/security/roles-and-permissions/core-roles.md) can
+[owners](/manuals/security/roles-and-permissions/core-roles.md) can
 view and manage AI Governance policies. To let someone other than an owner
 manage policies, create a
-[custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles/_index.md)
+[custom role](/manuals/security/roles-and-permissions/custom-roles/_index.md)
 with the **Governance** permissions and assign it to a user or team.
 
 > [!NOTE]
@@ -51,13 +55,68 @@ To create a policy:
 1. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
    choose the teams the policy applies to. See
    [Scope policies to teams](#scope-policies-to-teams).
-1. Define the policy rules. For network and filesystem policies, select
-   **Add rule** for each rule. For MCP policies, enter Cedar statements in the
-   policy editor. For syntax and examples, use the relevant access-control page
-   in [Choose a policy type](#choose-a-policy-type).
+1. Define the policy rules.
+   - Network and filesystem policies: select **Add rule** for each rule. For a
+     network policy, see [Add a network rule](#add-a-network-rule).
+   - MCP policies: enter Cedar statements in the policy editor. See
+     [MCP access policies](mcp.md).
+1. For a network policy, set **Require approval before access** if developers
+   should confirm each destination before a sandbox can reach it. See
+   [Require approval for a network policy](#require-approval-for-a-network-policy).
 
 Existing policies are listed with their name, scope, rule count, and last
 update. Use the action menu (⋮) to edit or delete a policy.
+
+### Add a network rule
+
+Each rule has an optional **Rule name**, a **Type** that decides what the rule
+matches, and a **Decision** of **Allow** or **Deny**.
+
+- **HTTP** matches only HTTP requests with the methods and paths you specify.
+  - In **Destination**, enter the host or IP address the rule covers. It
+    matches any port unless you add one. Enter the destination with no scheme
+    and no path, so `api.github.com` rather than
+    `https://api.github.com/repos`. A local HTTP rule accepts only a host.
+  - Under **HTTP methods**, select the methods the rule applies to. Use
+    **Select all** to select every method, or **Read-only** to select `GET`,
+    `HEAD`, and `OPTIONS`. A rule saved with no methods selected matches every
+    method the composer lists. The composer doesn't list `CONNECT` or
+    `TRACE`, which differs from the CLI, where `--method ANY` matches every
+    HTTP method.
+  - Under **Path patterns**, add one or more paths the rule covers, such as
+    `/repos/*` and `/v1/**`. Leave it empty to match any path.
+- **All traffic** matches every request to the destinations you list, on any
+  port, method, and path.
+  - Under **Protocols**, select **TCP**, **UDP**, or **Both**.
+  - Under **Destinations**, add the hosts, IP addresses, or CIDR ranges the
+    rule covers. A destination matches any port unless you add one, such as
+    `example.com:8080`.
+
+An HTTP rule's paths all belong to its one destination, so to cover paths on a
+second host, add a second rule. For the pattern syntax and how HTTP rules
+combine with **All traffic** rules, see
+[HTTP rules](../concepts.md#http-method-and-path).
+
+### Require approval for a network policy
+
+Turning on **Require approval before access** means the destinations a network
+policy allows aren't reachable until the developer confirms each one. For how
+approval behaves and what satisfies it, see
+[Approval-required access](network.md#approval-required-access).
+
+To set it on an existing policy:
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your
+   organization.
+1. In the left-hand navigation, expand **AI Platform** and select
+   **Network access**.
+1. In the policy list, open the policy's action menu (⋮) and select **Edit**.
+1. Turn on **Require approval before access**.
+1. Select **Save**.
+
+The policy's detail page reports approval as **Required** or **Not required**.
+Editing a policy replaces it in full, so turning the setting off removes the
+requirement from every rule in that policy.
 
 ## Configure a support message
 
@@ -74,8 +133,9 @@ To set the message:
 1. Select **Save changes**.
 
 Docker shows the message only for denials caused by organization governance
-policy. If you leave it blank, Docker shows the policy denial without additional
-contact text.
+policy and for requests an
+[approval-required policy](network.md#approval-required-access) blocks. If you
+leave it blank, Docker shows the policy denial without additional contact text.
 
 ## Choose a policy type
 
@@ -83,7 +143,7 @@ Organization policies are managed by access surface. Use the access-control
 pages for syntax, examples, and enforcement details:
 
 - [Network access policies](network.md): control outbound network access from
-  sandboxes.
+  sandboxes, by host or by HTTP method and path.
 - [Filesystem access policies](filesystem.md): control which host paths
   sandboxes can mount as workspaces.
 - [MCP access policies](mcp.md): control MCP server registration, tool calls,
@@ -108,13 +168,13 @@ it only to members of the teams you select.
 ### Before you start
 
 Team scoping targets your organization's existing
-[teams](/manuals/admin/organization/manage/manage-a-team.md), so a team must
+[teams](/manuals/accounts/organization/manage/manage-a-team.md), so a team must
 exist before you can scope a policy to it. Create teams and manage their members
 in one of two ways:
 
 - Manually, in Docker Home.
 - Automatically, by using
-  [group mapping](/manuals/enterprise/security/provisioning/scim/group-mapping.md)
+  [group mapping](/manuals/security/provisioning/scim/group-mapping.md)
   to synchronize your identity provider's groups with the teams in your
   organization. Group mapping creates teams that don't already exist and keeps
   their membership in step with your IdP groups.
@@ -143,8 +203,11 @@ propagate to developer machines. To apply changes immediately, users can run
 organization policies on the next `sbx` command.
 
 > [!WARNING]
-> `sbx policy reset` deletes all locally configured policy rules. The command
-> prompts for confirmation before proceeding.
+> `sbx policy reset` deletes all locally configured policy rules, including any
+> destinations the developer has approved under an
+> [approval-required policy](network.md#approval-required-access). Those
+> destinations are requested again the next time a sandbox reaches them. The
+> command prompts for confirmation before proceeding.
 
 #### Enforcement timing by policy type
 
@@ -153,7 +216,13 @@ developer machine:
 
 - Network policy is evaluated on every outbound request. Once a policy
   change has synced to the developer's machine (up to 5 minutes), it applies
-  immediately to subsequent requests.
+  immediately to subsequent requests. HTTP rules are evaluated per request in
+  the same way.
+
+- An approval requirement applies from the point the policy change syncs.
+  Destinations a developer already approved stay reachable, because the
+  approval is recorded on the developer's machine. To withdraw one, add a deny
+  rule. A deny takes precedence over a recorded approval.
 
 - Filesystem policy is only checked when a workspace is mounted — that
   is, when a sandbox is created. Once a sandbox is running, changing the

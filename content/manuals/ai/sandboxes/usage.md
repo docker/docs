@@ -2,8 +2,11 @@
 title: Usage
 weight: 30
 description: Basic sbx commands for creating, managing, and connecting to Docker Sandboxes.
-keywords: docker sandboxes, sbx, usage, run, create, stop, remove, ports, workspaces
+keywords: docker sandboxes, sbx, usage, run, create, stop, remove, ports, workspaces, templates, save, load
 ---
+
+This page describes local sandboxes. For cloud commands, file transfers, ports,
+and expiration, see [Use cloud sandboxes](cloud/usage.md).
 
 Use this page as a command-oriented guide to day-to-day `sbx` operations. For
 scenario-based recommendations, see [Workflow patterns](workflows/).
@@ -27,14 +30,15 @@ The basic workflow is [`run`](/reference/cli/sbx/run/) to start,
 [`rm`](/reference/cli/sbx/rm/) to clean up:
 
 ```console
-$ sbx run claude                    # start an agent
+$ sbx run claude                    # start an agent in the current directory
 $ sbx ls                            # see what's running
 $ sbx stop my-sandbox               # pause it
 $ sbx rm my-sandbox                 # delete it entirely
 ```
 
-If the sandbox has an active session — an open attach, SSH connection, or
-in-flight SFTP transfer — `sbx rm` refuses unless you pass `--force`:
+`sbx rm` asks for confirmation before deleting a sandbox. Use `--force` to
+skip the prompt. This flag also permits removal when the sandbox has an active
+session — an open attach, SSH connection, or in-flight SFTP transfer:
 
 ```console
 $ sbx rm --force my-sandbox
@@ -54,10 +58,62 @@ sandboxes stopped within the last week:
 
 ```console
 $ sbx prune --dry-run
-$ sbx prune --filter since=168h
+$ sbx prune --filter until=168h
 ```
 
+The `until` filter uses the time the sandbox stopped. It accepts a duration
+such as `168h`, an RFC 3339 timestamp, or a Unix timestamp. The older
+`since=<duration>` filter remains supported.
+
 Run `sbx prune` without flags to confirm and remove all stopped sandboxes.
+
+### Remove a sandbox when the agent exits
+
+Pass `--rm` to `sbx run` for a throwaway session. The sandbox is removed when
+the agent exits, without a confirmation prompt:
+
+```console
+$ sbx run --rm claude
+```
+
+The sandbox is removed however the agent exits, and `sbx run` exits with the
+agent's exit status. If `sbx run` created the sandbox and the agent fails
+to start, the sandbox is also removed. If you reattach to an existing sandbox
+with `--rm`, that sandbox is removed only after its agent session finishes.
+
+`--rm` needs an attached agent session to know when to remove the sandbox, so
+you can't combine it with `--detached` or `--detach-keys`.
+
+## Choose a workspace
+
+`sbx run` mounts the current directory when you don't pass a workspace path.
+Pass a path to mount another directory instead:
+
+```console
+$ sbx run claude
+$ sbx run claude ~/my-project
+```
+
+The first workspace path is the primary workspace. The agent starts there, and
+`sbx exec` uses it as the default working directory. The host directory is
+mounted at the same absolute path inside the sandbox. When you don't pass a
+path to `sbx run`, the current directory is the primary workspace.
+
+Starting with `sbx` version 0.42.0, workspace paths are optional for
+`sbx create`. Omit them to create a mountless sandbox without a host workspace
+bind mount, then attach to the sandbox by name:
+
+```console
+$ sbx create --name scratch claude
+$ sbx run --name scratch
+```
+
+In a mountless sandbox, the agent starts in the template image's working
+directory. Docker-provided templates use `/home/agent/workspace`. Files there
+persist across stops and restarts but are deleted when you remove the sandbox.
+Assign the sandbox a name so you can reconnect to it, and use
+[`sbx cp`](#copy-files-between-host-and-sandbox) to transfer files between the
+sandbox and the host.
 
 ## Reconnect and name sandboxes
 
@@ -72,11 +128,11 @@ $ sbx run claude ~/my-project  # reconnects to same sandbox
 Use `--name` to give a sandbox an explicit identity:
 
 ```console
-$ sbx run claude --name my-project
+$ sbx run --name my-project claude
 ```
 
-Once a named sandbox exists, use `--name` to re-attach to it from any working
-directory, with or without the agent positional:
+Once a named sandbox exists, reattach from any working directory with
+`sbx run --name`. You can omit the agent name when reattaching:
 
 ```console
 $ sbx run --name my-project        # re-attaches from anywhere
@@ -94,18 +150,43 @@ $ sbx run claude --name spike ~/my-project
 ## Create without attaching
 
 [`sbx run`](/reference/cli/sbx/run/) creates the sandbox and attaches you to the
-agent. To create a sandbox in the background without attaching:
+agent. To create a sandbox with the current directory mounted, without
+attaching to it:
 
 ```console
 $ sbx create --name my-project claude .
 ```
 
-Unlike `run`, `create` requires an explicit workspace path. Attach later with
+Omit the path to create a mountless sandbox instead. Attach later with
 `sbx run --name`:
 
 ```console
-$ sbx run --name my-project
+$ sbx create --name scratch claude
+$ sbx run --name scratch
 ```
+
+After `sbx create` finishes, the local sandbox stops automatically when no
+sessions keep it running. Its files and configuration persist. Running
+`sbx run --name <sandbox-name>` starts it again and attaches you to the agent.
+
+### Keep a sandbox running in the background
+
+To keep a sandbox running after every session ends, for example to serve an
+application on a [published port](#publish-ports), start it with
+`sbx run --detached` (`-d`). The command starts the sandbox, prints its ID,
+and returns without opening an agent session:
+
+```console
+$ sbx run -d --name my-project claude .
+```
+
+A detached sandbox keeps running until you stop it with `sbx stop` or remove
+it with `sbx rm`. You can attach to it with `sbx run --name` or run commands
+with `sbx exec`, and it keeps running after those sessions end.
+
+Running `sbx run -d --name <sandbox-name>` against an existing sandbox, such
+as one created with `sbx create`, switches it to detached mode permanently. To
+return to the default behavior, remove the sandbox and create it again.
 
 ## Set environment variables
 
@@ -149,7 +230,7 @@ To persist a variable across future sessions of an existing sandbox, append an
 export to `/etc/sandbox-persistent.sh`:
 
 ```console
-$ sbx exec -d <sandbox-name> bash -c "echo 'export INTERNAL_API_URL=https://api.example.com' >> /etc/sandbox-persistent.sh"
+$ sbx exec <sandbox-name> bash -c "echo 'export INTERNAL_API_URL=https://api.example.com' >> /etc/sandbox-persistent.sh"
 ```
 
 The `bash -c` wrapper ensures the `>>` redirect runs inside the sandbox instead
@@ -176,6 +257,12 @@ To get a shell inside a running sandbox, use [`sbx exec`](/reference/cli/sbx/exe
 ```console
 $ sbx exec -it <sandbox-name> bash
 ```
+
+Without `--workdir`, the command starts in the sandbox's primary workspace. In
+a mountless sandbox, it starts in the container image's working directory.
+
+`sbx exec` runs commands in the foreground. Detached execution (`-d` or
+`--detach`) isn't supported.
 
 ## Interactive mode
 
@@ -206,8 +293,9 @@ hosts, and add custom network rules. Press `?` to see all keyboard shortcuts.
 When your primary workspace is a Git repository, choose how the sandbox receives
 it when you create the sandbox:
 
-- Direct mode is the default. The agent has read-write access to your working
-  tree, and changes appear on your host immediately.
+- Direct mode is the default for `sbx run`. It also applies when you pass a
+  workspace path to `sbx create`. The agent has read-write access to your
+  working tree, and changes appear on your host immediately.
 - [Clone mode](#clone-mode) uses `--clone`. The agent edits a separate Git clone
   inside the sandbox. Its changes stay there until you fetch them or the agent
   pushes them. Your host repository is also available at
@@ -223,7 +311,7 @@ security model behind each mode, see
 To create a clone-mode sandbox, pass `--clone` when you run or create it:
 
 ```console
-$ sbx run --clone claude
+$ sbx run --clone claude .
 ```
 
 You can also create the sandbox in the background and attach later:
@@ -243,7 +331,7 @@ Clone mode has a few create-time constraints:
   workspaces.
 - Clone mode is rejected from inside a Git worktree other than the main one. The
   read-only bind mount can't resolve the worktree's `.git` pointer file. Run
-  `sbx create --clone` from the main repository checkout instead.
+  `sbx create --clone <agent> .` from the main repository checkout instead.
 - Removing a clone-mode sandbox drops the in-sandbox clone. Fetch or push any
   commits you want to keep before you remove it.
 
@@ -254,9 +342,9 @@ The first path is the primary workspace — the agent starts here, and the
 sandbox's in-container Git clone is populated from this directory if you
 use `--clone`. Extra workspaces are always mounted directly.
 
-All workspaces appear inside the sandbox at their absolute host paths. Append
-`:ro` to mount an extra workspace read-only — useful for reference material or
-shared libraries the agent shouldn't modify:
+Each workspace path appears inside the sandbox at the same absolute path as on
+the host. Append `:ro` to mount an extra workspace read-only — useful for
+reference material or shared libraries the agent shouldn't modify:
 
 ```console
 $ sbx run claude ~/project-a ~/shared-libs:ro ~/docs:ro
@@ -271,16 +359,21 @@ $ sbx run claude ~/project-b
 $ sbx rm <sandbox-name>       # when finished
 ```
 
-## Copying files between host and sandbox
+## Copy files between host and sandbox
 
 Use [`sbx cp`](/reference/cli/sbx/cp/) to copy files or directories between
 your host and a sandbox. This is useful for one-off files that aren't part of a
-mounted workspace, such as generated output, logs, or setup files.
+mounted workspace, such as generated output, logs, or setup files. The sandbox
+path must be absolute. `sbx cp` doesn't resolve relative paths such as `.`
+against the sandbox's default working directory.
+
+For example, copy files to or from the default working directory used by a
+Docker-provided agent template:
 
 ```console
-$ sbx cp ./config.json my-sandbox:/home/user/
-$ sbx cp my-sandbox:/home/user/output.log ./
-$ sbx cp ./src/ my-sandbox:/home/user/src
+$ sbx cp ./config.json my-sandbox:/home/agent/workspace/
+$ sbx cp my-sandbox:/home/agent/workspace/output.log ./
+$ sbx cp ./src/ my-sandbox:/home/agent/workspace/src
 ```
 
 One side of the copy must use `SANDBOX:PATH`. Copying directly between two
@@ -299,7 +392,8 @@ $ sbx run --publish 8080:3000 --name my-sandbox claude
 ```
 
 For an existing sandbox, use [`sbx ports`](/reference/cli/sbx/ports/) to
-forward traffic from your host:
+forward traffic from your host. Publishing a port on a stopped local sandbox
+starts it first:
 
 ```console
 $ sbx ports my-sandbox --publish 8080:3000
@@ -321,7 +415,7 @@ them in detail.
 ```console
 $ sbx ls
 SANDBOX         AGENT   STATUS   PORTS                    WORKSPACE
-my-sandbox      claude  running  127.0.0.1:8080->3000/tcp /home/user/proj
+my-sandbox      claude  running  127.0.0.1:8080->3000/tcp4 /home/user/proj
 ```
 
 To stop forwarding a port:
@@ -338,8 +432,158 @@ recipes, see
 ## What persists
 
 While a sandbox exists, installed packages, Docker images, configuration
-changes, and command history all persist across stops and restarts. When you
-remove a sandbox, everything inside is deleted. Your workspace files and the
-[shared agent skills store](workflows/agent-skills.md) remain on your
-host. To preserve a configured environment, create a [custom
-template](customize/templates.md) or use a [kit](customize/kits.md).
+changes, command history, and mountless workspace files all persist across
+stops and restarts. When you remove a sandbox, everything inside is deleted.
+Host workspace files, including repositories used as clone sources, and the
+[shared agent skills store](workflows/agent-skills.md) remain on your host. To
+capture changes in the container filesystem, [save a template](#saving-a-sandbox-as-a-template).
+For a reproducible environment defined in source,
+[author a kit](/manuals/ai/sandboxes/customize/author/_index.md).
+
+## Saving a sandbox as a template
+
+Save a sandbox's container filesystem as a reusable template image after
+setting up tools or configuration interactively. A template contains image
+content; the agent kit still supplies runtime settings such as credentials
+and network rules. The examples here reuse templates with built-in agents.
+
+A saved template isn't a backup of the whole sandbox. Mounted filesystems,
+including host workspaces and the Docker store at `/var/lib/docker`, aren't
+included. Save any data from those mounts separately.
+
+> [!WARNING]
+> Saving a sandbox captures files in its container filesystem, including any
+> secrets stored there. If you manually added API keys, tokens, or other
+> credentials to the sandbox, they're embedded in the saved template and
+> shared with anyone you distribute it to. To keep credentials out of
+> templates, manage them with `sbx secret set` instead — the proxy injects
+> them at runtime so they're never written to the filesystem. For more
+> information, see [Manage credentials](configuration/credentials.md).
+
+### Save and reuse
+
+Stop the sandbox (or let the CLI prompt you), then save it with a name and
+tag:
+
+```console
+$ sbx template save my-sandbox my-template:v1
+```
+
+The image is stored in the sandbox runtime's local image store. Create a
+new sandbox from it with the `-t` flag:
+
+```console
+$ sbx run -t my-template:v1 claude
+```
+
+### List and remove templates
+
+List all saved templates:
+
+```console
+$ sbx template ls
+```
+
+Remove a template you no longer need:
+
+```console
+$ sbx template rm my-template:v1
+```
+
+### Export and import
+
+To share a saved template or move it to another machine, export it as a
+tar file:
+
+```console
+$ sbx template save my-sandbox my-template:v1 --output my-template.tar
+```
+
+On the other machine, load the tar file and use it:
+
+```console
+$ sbx template load my-template.tar
+$ sbx run -t my-template:v1 claude
+```
+
+### Limitations
+
+Agent configuration files are always recreated when a sandbox is created.
+Changes to user-level agent configuration files, such as
+`/home/agent/.claude/settings.json` and `/home/agent/.claude.json`, do not
+persist in saved templates.
+
+If the saved template was built for a different agent than the one you
+specify in `sbx run`, you get a warning. For example, saving a Claude
+sandbox and running it with `codex` produces:
+
+```text
+⚠ WARNING: template "my-template:v1" was built for the "claude" agent but you are using "codex".
+  The sandbox may not work correctly. Consider using: sbx run -t my-template:v1 claude
+```
+
+## Load a template
+
+To create a sandbox from a template image in a registry, pass its full image
+reference to `--template`. Use the agent the image was prepared for:
+
+```console
+$ sbx run --template docker.io/my-org/my-template:v1 claude
+```
+
+Unlike Docker commands, `sbx` doesn't automatically add the Docker Hub domain
+(`docker.io`) to image references. For available images and the built-in agent
+workflow, see [Base images](/manuals/ai/sandboxes/customize/author/base-images.md).
+
+> [!NOTE]
+> The Docker daemon used by Docker Sandboxes pulls templates from a
+> registry directly; it doesn't share the image store of your local Docker
+> daemon on the host. To route Docker Hub image pulls through your
+> organization's registry infrastructure, configure a
+> [registry mirror](configuration/registry-mirror.md).
+
+> [!IMPORTANT]
+> For Docker Hub, `sbx` reuses your `sbx login` session to pull private
+> images. For other registries (GitHub Container Registry, ECR, ACR, a
+> self-hosted Nexus, and so on), store pull credentials with
+> [`sbx secret set --registry`](configuration/credentials.md#registry-credentials)
+> before running the sandbox:
+>
+> ```console
+> $ gh auth token | sbx secret set --registry ghcr.io --password-stdin
+> ```
+>
+> Without stored credentials, pulls from non-Docker Hub registries are
+> anonymous and private images fail to pull.
+
+For locally-built images, save the image to a tar and load it directly
+into the sandbox runtime instead of pulling from a registry:
+
+```console
+$ docker image save my-org/my-template:v1 -o my-template.tar
+$ sbx template load my-template.tar
+$ sbx run --template my-org/my-template:v1 claude
+```
+
+`sbx template load` imports the tar into the sandbox runtime's image
+store, so the image doesn't need to be reachable from a registry at
+sandbox creation time.
+
+### Template caching
+
+When creating a sandbox, `sbx` checks the registry for the template image by
+default and downloads missing or updated layers. If the pull fails and the
+image is cached locally, it can use the cached image. Cached images persist
+across sandbox creation and deletion, and are cleared when you run `sbx reset`.
+
+### Updating agents
+
+Agent templates include an agent version, which can differ from the agent's
+latest release. Updating the `sbx` CLI or pulling an updated template doesn't
+update agents inside existing sandboxes.
+
+To update an installed agent, run its documented update command inside the
+sandbox, either from a sandbox shell or with `sbx exec`. Restart the agent
+session to use the updated version. The update persists across sandbox stops
+and starts, but is deleted when you remove the sandbox. To reuse the updated
+agent in other sandboxes, [save a template](#saving-a-sandbox-as-a-template).

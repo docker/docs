@@ -27,6 +27,8 @@ Open the **Builds** view from the Docker Dashboard to access:
 
 Only builds from active, running builders are listed. Builds from removed or stopped builders are not shown.
 
+If Gordon is available, build history rows can offer AI-suggested questions, such as "Why did this build fail?"
+
 ### Builder settings
 
 The top-right corner shows the name of your currently selected builder, and the

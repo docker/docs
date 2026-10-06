@@ -26,15 +26,15 @@ docker desktop COMMAND [OPTIONS]
 | `start`              | Starts Docker Desktop                    |
 | `stop`               | Stops Docker Desktop                     |
 | `restart`            | Restarts Docker Desktop                  |
-| `status`             | Displays whether Docker Desktop is running or stopped.       |
+| `status`             | Displays whether Docker Desktop is running or stopped       |
 | `engine ls`          | Lists available engines (Windows only)   |
 | `engine use`         | Switch between Linux and Windows containers (Windows only) |
-| `update`             | Manage Docker Desktop updates. |
+| `update`             | Manage Docker Desktop updates |
 | `logs`               | Print log entries                        |
 | `disable`            | Disable a feature                        |
 | `enable`             | Enable a feature                         | 
 | `version`            | Show the Docker Desktop CLI plugin version information |
-| `kubernetes`         | List Kubernetes images used by Docker Desktop or restart the cluster. Available with Docker Desktop version 4.44 and later.          |
-| `diagnose`           | Diagnose Docker Desktop and upload the diagnostics. Available with Docker Desktop 4.60 and later. |
+| `kubernetes`         | Manage Kubernetes    |
+| `diagnose`           | Diagnose Docker Desktop and upload the diagnostics. |
 
 For more details on each command, see the [Docker Desktop CLI reference](/reference/cli/docker/desktop/).

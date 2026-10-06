@@ -20,7 +20,7 @@ and filesystem rule format.
 ## Access surfaces
 
 - [Network access policies](network.md): control outbound network access from
-  sandboxes.
+  sandboxes, by host or by HTTP method and path.
 - [Filesystem access policies](filesystem.md): control which host paths
   sandboxes can mount as workspaces.
 - [MCP access policies](mcp.md): control MCP server registration, tool calls,

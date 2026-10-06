@@ -86,6 +86,15 @@ params:
 | time             | Estimated time to complete               |
 | prerequisites    | Prerequisites or "None"                  |
 
+### Catalog navigation
+
+Set `params.sidebar.activeChildrenOnly: true` on a section to show only its
+active child in the sidebar. Other children remain available in search and
+the sitemap. Sidebar group headings are omitted in this mode.
+
+For a recipe catalog, set `params.recipeCatalog: true` on the section to add
+a **Browse all recipes** link to each recipe page.
+
 ## Shortcodes
 
 Shortcodes are reusable components that add rich functionality to your
@@ -262,6 +271,25 @@ params:
 - Use green for new GA features
 - Use gray for deprecated features
 
+### Setting metadata
+
+Use `setting-metadata` below a setting's heading to display its type, default,
+and optional environment variable. Keep explanations and examples in the page
+body. The component uses a definition list with wrapping values and preserves
+the metadata in Markdown output.
+
+```markdown
+{{</* setting-metadata
+  type="boolean"
+  default="false"
+  env="DOCKER_SANDBOXES_CLIPBOARD_IMAGE_PASTE"
+*/>}}
+```
+
+The `type` and `default` parameters are required. Omit `env` when the setting
+has no environment variable equivalent. Use `default="Empty string"` for an
+empty string default.
+
 ### Summary bars
 
 Summary bars indicate subscription requirements, version requirements, or
@@ -296,7 +324,7 @@ features:
 | subscription | Subscription tier required            | All, Personal, Pro, Team, Business                |
 | availability | Product development stage             | Experimental, Beta, Early Access, GA, Retired     |
 | requires     | Minimum version requirement           | String describing version (link to release notes) |
-| for          | Indicates administrator-only features | Administrators                                    |
+| for          | Audience for the feature              | Administrators, Individuals                       |
 
 ### Buttons
 
@@ -321,6 +349,18 @@ Create card layouts for organizing content.
   link="/get-started/"
 */>}}
 ```
+
+### Recipe lists
+
+List a section's recipes by their `params.sidebar.group` value:
+
+```markdown
+{{</* recipe-list group="Working in a sandbox" */>}}
+```
+
+The list uses each page's sidebar title and description, ordered by page
+weight. It renders in two columns on larger screens and one column on smaller
+screens. The Markdown output includes the same links and descriptions.
 
 ### Icons
 

@@ -6,15 +6,18 @@ description: What a sandbox permits and blocks before you change any settings.
 keywords: docker sandboxes, security defaults, network policy, credentials, shared skills, sbx
 ---
 
-A sandbox created with `sbx run` and no additional flags has the following
-security posture.
+{{% include "sandboxes-local-scope.md" %}}
+
+A sandbox created with `sbx run claude` and no additional flags has the
+following security posture.
 
 ## Network defaults
 
 All outbound TCP traffic, including HTTP, HTTPS, and SSH, is blocked unless an
-explicit rule allows the destination. Direct external UDP and ICMP traffic is
-blocked at the network layer. DNS queries use the sandbox's internal resolver,
-which enforces network policy.
+explicit rule allows the destination. Outbound UDP is disabled by default. To
+use it, turn on the [experimental UDP feature](../governance/access-controls/local.md#allow-outbound-udp)
+and add UDP allow rules. ICMP is blocked. DNS queries use the sandbox's internal
+resolver, which enforces network policy.
 
 Run `sbx policy ls` to see the active network rules for your installation.
 Rules can be customized per machine with the `sbx policy` CLI, or managed
@@ -24,20 +27,29 @@ rules. See
 
 ## Workspace defaults
 
-Sandboxes use a direct mount by default. The agent sees and modifies your
-working tree directly, and changes appear on your host immediately.
+`sbx run` mounts the current directory when you don't pass a workspace path.
+The agent can read, write, and delete any file within that directory, including
+hidden files, configuration files, build scripts, and Git hooks.
 
-The agent can read, write, and delete any file within the workspace directory,
-including hidden files, configuration files, build scripts, and Git hooks.
-See [Workspace isolation](isolation.md#workspace-isolation) for what to
-review after an agent session.
+When you omit the workspace path from `sbx create`, the sandbox doesn't mount a
+host workspace. The agent uses the sandbox template's default working
+directory. Docker-provided agent templates use `/home/agent/workspace`. If the
+template doesn't define a usable absolute working directory, the daemon uses
+that path. Files in this directory persist across stops and restarts and are
+deleted when you remove the sandbox. See
+[Workspace isolation](isolation.md#workspace-isolation) for the available
+workspace modes and what to review after a direct-mount session.
 
 ## Shared skills defaults
 
-Sandboxes for supported agents mount a persistent shared skills store
-read-write by default. Every sandbox that uses the store can change skills that
-other participating sandboxes may load. Use `--no-share-skills` when creating a
-sandbox to keep it outside this shared trust boundary. See
+Sandboxes created for supported agents mount a persistent shared skills store
+read-only by default. The
+[`skills.defaultMode`](../configuration/settings.md#skillsdefaultmode) setting
+can change this default,
+and `--skills` overrides it for a sandbox at creation. A sandbox with `readwrite` access can change skills that other
+participating sandboxes load, including those with `readonly` access. Use
+`--skills=off` when creating a sandbox to omit the shared store. Existing
+sandboxes retain their mounts until recreated. See
 [Share agent skills](../workflows/agent-skills.md).
 
 ## Credential defaults
@@ -59,9 +71,10 @@ The agent runs with full control inside the sandbox VM:
 - Full read and write access to the VM filesystem
 
 Everything the agent installs or creates inside the VM, including packages,
-Docker images, and configuration changes, persists across stop and restart
-cycles. When you remove the sandbox with `sbx rm`, the VM and its contents
-are deleted. Workspace files and the shared skills store remain on the host.
+Docker images, mountless workspace files, and configuration changes, persists
+across stop and restart cycles. When you remove the sandbox with `sbx rm`, the
+VM and its contents are deleted. Direct-mounted workspace files and the shared
+skills store remain on the host, as do repositories used as clone sources.
 
 ## What is blocked by default
 
@@ -72,7 +85,7 @@ policy configuration:
   skills store
 - Host Docker daemon
 - Direct network communication between sandboxes
-- Direct external UDP and ICMP connections
+- Direct external ICMP connections
 
 Outbound TCP to destinations not in the allow list is also blocked by default,
 but you can add allow rules with `sbx policy allow`.

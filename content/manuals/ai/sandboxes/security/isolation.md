@@ -7,6 +7,8 @@ aliases:
   - /ai/sandboxes/security/workspace/
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 AI coding agents need to execute code, install packages, and run tools on
 your behalf. Docker Sandboxes run each agent in its own microVM. Five
 isolation layers protect your host: hypervisor, network, Docker Engine,
@@ -20,16 +22,23 @@ processes, files, or resources outside its defined boundaries.
 
 - **Process isolation:** separate kernel per sandbox; processes inside the VM
   are invisible to your host and to other sandboxes
-- **Filesystem isolation:** your workspace directory and, for supported agents
-  that haven't opted out, the dedicated [shared skills
-  store](../workflows/agent-skills.md) are shared with the host. The rest
-  of the VM filesystem persists across restarts but is removed when you delete
-  the sandbox. Symlinks pointing outside the workspace scope are not followed.
+- **Filesystem isolation:** a host workspace is shared when you pass a
+  workspace path or use `sbx run`, which defaults to the current directory.
+  For supported agents that haven't opted out, the dedicated
+  [shared skills store](../workflows/agent-skills.md) is also shared with the
+  host. The rest of the VM filesystem persists across restarts but is removed
+  when you delete the sandbox. Symlinks pointing outside the workspace scope
+  are not followed.
 - **Full cleanup:** when you remove a sandbox with `sbx rm`, the VM and
   everything inside it is deleted
 
 The agent runs as a non-root user with sudo privileges inside the VM. The
 hypervisor boundary is the isolation control, not in-VM privilege separation.
+
+Processes in a local sandbox can write text to your host clipboard, but can't
+read existing clipboard text. Host clipboard image reads are a separate,
+opt-in feature. After running untrusted code, check clipboard contents before
+pasting them on the host.
 
 ## Network isolation
 
@@ -44,8 +53,10 @@ routes traffic through either a forward proxy or a transparent proxy depending
 on the client's configuration. Both enforce the network policy. Only the
 forward proxy [injects credentials](../configuration/credentials.md) for AI services.
 
-Direct external UDP and ICMP are blocked at the network layer. DNS queries use
-the sandbox's internal resolver, which enforces network policy. TCP connections
+Outbound UDP is disabled by default. When you turn on
+[experimental UDP egress](../governance/access-controls/local.md#allow-outbound-udp),
+network policy controls its destinations. ICMP is blocked. DNS queries use the
+sandbox's internal resolver, which enforces network policy. TCP connections
 are allowed only when a policy rule matches the destination.
 
 For the default set of allowed domains, see
@@ -94,28 +105,59 @@ flowchart TB
 
 ## Workspace isolation
 
-When you create a sandbox, you choose one of two ways to share your
-workspace with it:
+When you create a sandbox, choose how the agent receives a workspace:
 
-- **Direct mount** (the default): the agent has read-write access to
-  your working tree. There is no boundary between the agent's edits and
-  your host filesystem.
-- **Clone mode** (`--clone`): your repository is mounted read-only into
-  the VM and the agent works on a private clone inside the VM. The
-  agent's edits never reach your host until you fetch them.
+- **Mountless** (no path to `sbx create`): the sandbox doesn't receive a host
+  workspace. The agent works in the sandbox's own filesystem.
+- **Direct mount** (a path such as `.`): the agent has read-write access to
+  your working tree. There is no boundary between the agent's edits and your
+  host filesystem.
+- **Clone mode** (`--clone` and a Git path): your repository is mounted
+  read-only into the VM and the agent works on a private clone inside the VM.
+  The agent's edits never reach your host until you fetch them.
 
-See [Git workflows](../workflows/git.md) for the workflow side of
-each.
+See [Git workflows](../workflows/git.md) for direct-mount and clone-mode
+workflows.
 
-### Direct mount (default)
+### Mountless
 
-By default, your workspace is shared into the VM as a read-write mount.
-The agent and the host see the same files, and changes the agent makes
-appear on your host as soon as they're written.
+Omit the workspace path from `sbx create` to create a mountless sandbox, then
+attach by name:
 
-There is no isolation between the agent and your workspace in this mode.
-The agent can create, modify, or delete any file in the workspace,
-including:
+```console
+$ sbx create --name scratch claude
+$ sbx run --name scratch
+```
+
+The agent uses the sandbox template's default working directory.
+Docker-provided agent templates use `/home/agent/workspace`. If the template
+doesn't define a usable absolute working directory, the daemon uses that path.
+Files there stay within the sandbox, persist across stops and restarts, and are
+deleted when you remove the sandbox. A mountless sandbox doesn't expose a host
+project directory, but separately configured host resources such as the shared
+skills store can still be mounted.
+
+### Direct mount
+
+Pass a workspace path to share it into the VM as a read-write mount. The agent
+and the host see the same files, and changes the agent makes appear on your
+host as soon as they're written. `sbx run` mounts the current directory when
+you don't pass a path:
+
+```console
+$ sbx run claude
+```
+
+Direct mounts enforce access by path. If a workspace file is a hard link to a
+file outside the workspace, the agent can read and modify the underlying file
+through the workspace path. Changes affect every hard link to that file,
+including links outside the authorized workspace. Filesystem access policies
+do not block this access because they evaluate the workspace path rather than
+other paths to the same file. [Clone mode](#clone-mode) prevents writes through
+the primary workspace by mounting the host repository read-only.
+
+Direct mount gives the agent broad write access to your workspace. The agent
+can create, modify, or delete workspace files, including:
 
 - Source code and configuration files
 - Build files (`Makefile`, `package.json`, `Cargo.toml`)
@@ -123,7 +165,6 @@ including:
 - CI configuration (`.github/workflows/`, `.gitlab-ci.yml`)
 - IDE configuration (`.vscode/tasks.json`, `.idea/` run configurations)
 - AI project configuration and settings (`.claude/`, `.codex/`, `.gemini/`)
-- Sandbox environment files (`.sbxenv.yaml`)
 - Hidden files, shell scripts, and executables
 
 Some of these files execute code when you trigger normal development
@@ -142,12 +183,16 @@ Review them after any agent session before performing those actions:
 - AI project configuration and settings (`.claude/settings.json`, `.codex/config.toml`,
   `.gemini/settings.json`) can define hooks and startup commands that
   execute automatically.
-- Sandbox environment files (`.sbxenv.yaml`) can declare `secrets` and
-  `registries` whose values come from a `command`. Those commands run on
-  the host, as you, the next time you run `sbx env create` or
-  `sbx env run` in that directory — before the sandbox exists. Because the
-  file sits in the workspace, an agent in direct mount can add or change
-  one.
+
+#### Sandbox environment files
+
+Sandbox environment files can declare lifecycle and credential commands that
+run on the host with your privileges. Before running these commands, `sbx`
+shows them in an environment plan and asks for approval. Review the plan before
+you approve host commands.
+
+For file placement and read-only protection, see
+[Sandbox environment files](../configuration/environment-files.md#workspace).
 
 > [!WARNING]
 > Treat sandbox-modified workspace files the same way you would treat a pull
@@ -232,5 +277,11 @@ Credential values are never stored inside the VM. They are not available as
 environment variables or files inside the sandbox unless you explicitly set
 them. This means a compromised sandbox cannot read API keys from the local
 environment.
+
+SSH agent forwarding is enabled by default. Private keys stay on the host, but
+any process inside the sandbox can ask the forwarded agent to authenticate or
+sign data. Docker Sandboxes forwards only sockets it recognizes as SSH agents.
+A sandbox receives no SSH agent when forwarding is disabled, the configuration
+is unavailable, or the selected socket can't be used.
 
 For how to store and manage credentials, see [Credentials](../configuration/credentials.md).

@@ -1,0 +1,85 @@
+{{ $s := .schema }}{{ $api := .api }}{{ $depth := .depth }}
+{{ if reflect.IsMap $s }}
+  {{ with index $s "$ref" }}
+    {{ $url := index $api.schemaURLs . }}
+    <p class="api-ref">
+      Schema:
+      {{ if $url }}
+        <a href="{{ $url }}"
+          ><code>{{ strings.TrimPrefix "#/components/schemas/" . }}</code></a
+        >
+      {{ else }}
+        <code>{{ . }}</code>
+      {{ end }}
+    </p>
+  {{ end }}
+  {{ with $s.type }}
+    <p class="api-type">
+      Type:
+      <code
+        >{{ if reflect.IsSlice . }}
+          {{ delimit . " | " }}
+        {{ else }}
+          {{ . }}
+        {{ end }}</code
+      >
+    </p>
+  {{ end }}
+  {{ with $s.description }}
+    <div class="prose dark:prose-invert">{{ . | markdownify }}</div>
+  {{ end }}
+  {{ if lt $depth 3 }}
+    {{ range $name,$v := $s.properties }}
+      <details class="api-field" {{ if eq $depth 0 }}open{{ end }}>
+        <summary>
+          <code>{{ $name }}</code>{{ if in $s.required $name }}
+            · required
+          {{ end }}{{ if $v.readOnly }}
+            · response only
+          {{ end }}{{ if $v.writeOnly }}· request only{{ end }}
+        </summary>
+        {{ partial "api-reference/schema.html" (dict "schema" $v "api" $api "depth" (add $depth 1)) }}
+      </details>
+    {{ end }}
+    {{ range $keyword := slice "allOf" "oneOf" "anyOf" }}
+      {{ with index $s $keyword }}
+        <details class="api-field" open>
+          <summary>
+            {{ if eq $keyword "allOf" }}
+              All constraints apply
+            {{ else if eq $keyword "oneOf" }}
+              Exactly one alternative must match
+            {{ else }}
+              One or more alternatives must match
+            {{ end }}
+          </summary>
+          {{ range . }}
+            {{ partial "api-reference/schema.html" (dict "schema" . "api" $api "depth" (add $depth 1)) }}
+          {{ end }}
+        </details>
+      {{ end }}
+    {{ end }}
+    {{ if isset $s "items" }}
+      <details class="api-field">
+        <summary>Array item</summary>
+        {{ partial "api-reference/schema.html" (dict "schema" $s.items "api" $api "depth" (add $depth 1)) }}
+      </details>
+    {{ end }}
+  {{ end }}
+  {{ if or (ge $depth 3) (not (index $s "$ref")) (gt (len $s) 1) }}
+    <details class="api-constraints">
+      <summary>All schema constraints and annotations</summary>
+      <pre><code>{{ $s | jsonify (dict "indent" "  ") }}</code></pre>
+    </details>
+  {{ end }}
+{{ else }}
+  <p>
+    {{ if eq $s false }}
+      No value satisfies this schema.
+    {{ else if eq $s true }}
+      Any value satisfies this schema.
+    {{ else }}
+      No schema is declared.
+    {{ end }}
+  </p>
+{{ end }}

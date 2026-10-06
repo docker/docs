@@ -20,7 +20,7 @@ To use this workflow, you need:
 - One of the following:
   - A DHI Select or Enterprise subscription. [Contact Docker
     sales](https://www.docker.com/products/hardened-images/#compare) to purchase DHI Enterprise
-    or [learn more about DHI plans](../../subscription/plans/dhi.md).
+    or [learn more about DHI plans](../../subscription-billing/plans/dhi.md).
   - An active DHI trial. [Start a free DHI
     trial](https://hub.docker.com/hardened-images/start-free-trial).
 - [Docker Desktop](../../desktop/release-notes.md) 4.65 or later to use the
@@ -41,7 +41,7 @@ can use either interface.
    `node`, or `golang`). For this example, search for `python`.
 
    To search for an image with a compliance variant (FIPS or STIG), select
-   **Filter by** and select the relevant compliance option.
+   **Compliance** and select the relevant compliance option.
 
 5. Select the Python repository to view its details.
 

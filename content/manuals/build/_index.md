@@ -29,6 +29,10 @@ grid:
   description: Configure where and how you run your builds.
   icon: wrench-screwdriver
   link: /build/builders/drivers/
+- title: Docker Build Cloud
+  description: Run builds on managed cloud builders with a shared cache.
+  icon: /icons/logo-build-cloud.svg
+  link: /build-cloud/
 - title: Exporters
   description: Export any artifact you like, not just Docker images.
   icon: arrow-up-on-square

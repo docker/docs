@@ -244,6 +244,7 @@ the configurations supported by RootlessKit, and how they compare:
 | `gvisor-tap-vsock`| `gvisor-tap-vsock`| Slow           | Slow            | ❌                    | ✅      | Not recommended. Use `builtin` port driver instead.                          |
 | `slirp4netns`     | `slirp4netns`     | Slow           | Slow            | ✅                    | ✅      |                                                                              |
 | `pasta`           | `implicit`        | Slow           | Fast ✅         | ✅                    | ✅      | Experimental; Needs pasta version 2023_12_04 or later                        |
+| `pasta`           | `pesto`           | —              | —               | —                     | —       | IPv4 only; needs Docker Engine 29.8+                                         |
 | `lxc-user-nic`    | `builtin`         | Fast ✅        | Fast ✅         | ✅ (*)                | ❌      | Experimental                                                                 |
 | `bypass4netns`    | `bypass4netns`    | Fast ✅        | Fast ✅         | ✅                    | ✅      | **Note:** Not integrated to RootlessKit as it needs a custom seccomp profile |
 

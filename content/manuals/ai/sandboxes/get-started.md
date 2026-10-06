@@ -1,15 +1,18 @@
 ---
-title: Get started with Docker Sandboxes
-linkTitle: Get started
+title: Get started with local Docker Sandboxes
+linkTitle: Get started locally
 weight: 20
-description: Configure agent credentials and work through your first Docker Sandboxes session.
+description: Configure agent credentials and work through your first local Docker Sandboxes session.
 keywords: sandbox, sbx, get started, credentials, clone mode, network policy
 ---
 
+This walkthrough uses local sandboxes. For cloud credentials and a first cloud
+session, see [Get started with cloud sandboxes](cloud/_index.md#get-started).
+
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can
-build containers, install packages, and modify files without touching your host
-system.
+build containers, install packages, and modify files without accessing host
+resources beyond those you share.
 
 This page walks through your first session: run an agent in a sandbox, see how
 the sandbox isolates it, control what it can reach on the network, and clean
@@ -99,7 +102,8 @@ Each row shows a sandbox's name, the agent running in it, its status, any
 workspace — the host directory shared into the sandbox. That workspace is the
 one part of your machine the agent can see.
 
-By default, the workspace is shared read-write, so the agent and your host see
+When you run `sbx run` from a project directory without passing a workspace
+path, the current directory is mounted read-write. The agent and your host see
 the same files. Edits the agent makes to your project appear in your working
 tree as it writes them, and you review them as an ordinary Git diff before
 committing.
@@ -178,8 +182,7 @@ Then explore:
 - [Workflow patterns](workflows/) — Git strategies, local services, CI, and
   authenticated tools.
 - [Sandbox environment files](configuration/environment-files.md) — declare and share
-  repeatable local sandbox configurations with `.sbxenv.yaml`. Requires `sbx`
-  0.39.0 or later.
+  repeatable local sandbox configurations with `sbxenv.yaml`.
 - [Customize with kits](customize/) — package an agent, its tools, and its
   network rules into a reusable definition you launch with a single flag.
 - [Agents](agents/) — the full list of supported agents and how to configure

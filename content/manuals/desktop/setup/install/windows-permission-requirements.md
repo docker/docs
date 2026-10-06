@@ -65,15 +65,15 @@ The privileged helper `com.docker.service` is a Windows service which runs in th
 The service performs the following functionalities:
 - Ensuring that `kubernetes.docker.internal` is defined in the Win32 hosts file. Defining the DNS name `kubernetes.docker.internal` allows Docker to share Kubernetes contexts with containers.
 - Ensuring that `host.docker.internal` and `gateway.docker.internal` are defined in the Win32 hosts file. They point to the host local IP address and allow an application to resolve the host IP using the same name from either the host itself or a container.
-- Securely caching the Registry Access Management policy which is read-only for the developer.
 - Creating the Hyper-V VM `"DockerDesktopVM"` and managing its lifecycle - starting, stopping, and destroying it. The VM name is hard coded in the service code so the service cannot be used for creating or manipulating any other VMs.
 - Moving the VHDX file or folder.
-- Starting and stopping the Windows Docker engine and querying whether it's running.
+- Starting and stopping Windows Docker Engine and querying whether it's running.
 - Deleting all Windows containers data files.
 - Checking if Hyper-V is enabled.
 - Checking if the bootloader activates Hyper-V.
 - Checking if required Windows features are both installed and enabled.
 - Conducting healthchecks and retrieving the version of the service itself.
+- Securely caching the Registry Access Management policy which is read-only for the developer. (Applies to version 4.88.0 and earlier)
 
 The service start mode depends on which container engine is selected, and, for WSL, on whether it is needed to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file. This is controlled by a setting under `Use the WSL 2 based engine` in the settings page. When this is set, WSL engine behaves the same as Hyper-V. So:
 - With Windows containers, or Hyper-v Linux containers, the service is started when the system boots and runs all the time, even when Docker Desktop isn't running. This is required so you can launch Docker Desktop without admin privileges.
@@ -93,7 +93,7 @@ into Docker containers still retain their original permissions.  Containers don'
 ## Enhanced Container Isolation
 
 In addition, Docker Desktop supports [Enhanced Container Isolation
-mode](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md) (ECI),
+mode](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/_index.md) (ECI),
 available to Business customers only, which further secures containers without
 impacting developer workflows.
 
@@ -113,7 +113,7 @@ isolated from the Docker daemon and other services running inside the VM.
 >
 > Windows containers are only supported in all-users installation mode. They are not available when Docker Desktop is installed per-user. See [Installation modes](/manuals/desktop/setup/install/windows-install.md#installation-modes).
 
-Unlike the Linux Docker Engine and containers which run in a VM, Windows containers are implemented using operating system features, and run directly on the Windows host. If you enable Windows containers during installation, the `ContainerAdministrator` user used for administration inside the container is a local administrator on the host machine. Enabling Windows containers during installation makes it so that members of the `docker-users` group are able to elevate to administrators on the host. For organizations who don't want their developers to run Windows containers, a `-–no-windows-containers` installer flag is available to disable their use.
+Unlike the Linux Docker Engine and containers which run in a VM, Windows containers are implemented using operating system features, and run directly on the Windows host. If you enable Windows containers during installation, the `ContainerAdministrator` user used for administration inside the container is a local administrator on the host machine. Enabling Windows containers during installation makes it so that members of the `docker-users` group are able to elevate to administrators on the host. For organizations who don't want their developers to run Windows containers, a `--no-windows-containers` installer flag is available to disable their use.
 
 ## Networking
 

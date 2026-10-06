@@ -8,36 +8,41 @@ params:
     group: AI and agents
 ---
 
-Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
-sandbox gets its own Docker daemon, filesystem, and network — the agent can
-build containers, install packages, and modify files without touching your host
-system.
+Docker Sandboxes run AI coding agents in isolated environments on your machine
+or on Docker-managed cloud infrastructure. Use the `sbx` CLI to create and
+manage either kind of sandbox.
 
-> [!NOTE]
-> The `sbx` CLI is free to use, including for commercial work. Only
-> [organization governance](governance/) requires a separate paid subscription.
+The `sbx` CLI and local sandbox compute are free to use, including for commercial
+work. Cloud compute uses a
+[pay-as-you-go subscription](/manuals/agentic-platform/signup.md#billing).
+Model-provider charges are separate.
 
 Organization admins can
 [centrally manage sandbox network, filesystem, and MCP policies](governance/access-controls/organization.md),
-so the same controls apply uniformly across every developer's machine.
+for local sandboxes across developer machines.
 Available on a separate paid subscription.
 
 ## Get started
 
-Follow the [installation guide](install.md) to check the system requirements,
-install the `sbx` CLI, and sign in.
+[Install the `sbx` CLI](install.md) and sign in, then choose where to run your
+agent:
 
-Then launch an agent in a sandbox:
+| Environment | Use it for | Start here |
+| --- | --- | --- |
+| Local sandboxes | Work with files and supported hardware on your machine | [Get started locally](get-started.md) |
+| Cloud sandboxes | Run on Docker-managed compute without local virtualization | [Get started in the cloud](cloud/_index.md#get-started) |
 
-```console
-$ cd ~/my-project
-$ sbx run claude
-```
+The two environments have separate credentials, network policies, and lifecycle
+controls. See [Compare local and cloud sandboxes](cloud/local-vs-cloud.md)
+before adapting a workflow.
 
-See the [get started guide](get-started.md) for a first-session walkthrough, or
-jump to the [usage guide](usage.md) for basic commands.
+To create and manage cloud sandboxes from your application, see
+[Sandboxes API and SDK](../sandboxes-api/_index.md).
 
 ## Learn more
+
+The following guides describe local sandbox workflows. For cloud workflows,
+see [Cloud sandboxes](cloud/).
 
 - [Agents](agents/) — supported agents and per-agent configuration
 - [Workflows](workflows/) — patterns for Git, local development,
@@ -48,8 +53,8 @@ jump to the [usage guide](usage.md) for basic commands.
   Cursor to a sandbox over SSH
 - [MCP gateway](mcp-gateway.md) — register MCP servers and connect them to
   sandboxed agents
-- [Customize](customize/) — reusable templates and declarative kits for
-  extending or tailoring sandboxes
+- [Kits](customize/) — package tools and configuration into reusable
+  sandbox environments
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,
   networking
 - [Security](security/) — isolation model, credential handling, and

@@ -5,6 +5,10 @@ description: The resource model, rule syntax, and evaluation logic behind Docker
 keywords: docker sandboxes, policy concepts, rule syntax, network rules, filesystem rules, mcp policy, cedar policy, precedence, rule evaluation
 ---
 
+The governance described here applies to local sandboxes. Cloud sandboxes
+use separate network policy configuration. See
+[Cloud network policy](../cloud/network-policy.md) for cloud controls.
+
 ## Resource model
 
 Docker sandbox governance is built around two resource types: **policies** and
@@ -37,6 +41,37 @@ share the same domain, either `network` or `filesystem`. MCP policies use Cedar
 statements written in the `MCP` namespace instead of the network and filesystem
 rule format.
 
+An organization network policy can also require approval, which turns every
+allow in that policy into a request the developer must confirm before access is
+granted. Approval is set on the policy rather than on individual rules, so it
+applies to all of the policy's allow rules at once. Without organization
+governance, a request with no matching allow or deny rule also asks for
+approval. See
+[Approval-required access](access-controls/network.md#approval-required-access).
+
+Network approval is separate from the MCP `@requireApproval` annotation. An MCP
+approval confirms a single call within the session and creates no rule, while
+an approved network destination stays allowed until you remove the rule. See
+[MCP access policies](access-controls/mcp.md).
+
+### Limits
+
+Organization policies have the following limits, which help ensure fair usage
+and resource availability across organizations:
+
+| Limit                     | Value                                               |
+|---------------------------|-----------------------------------------------------|
+| Policies per organization | 100                                                 |
+| Rules per policy          | 250                                                 |
+| Policy size               | 400 KB total, shared across all of a policy's rules |
+
+Typical policies use only a small fraction of the policy size limit. Domain
+and file path values have no separate length limit beyond valid format.
+
+If these limits don't fit your organization's needs,
+[contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
+to discuss options.
+
 ## Policy scope
 
 Each organization policy applies either across the whole organization or only
@@ -47,7 +82,7 @@ to specific teams:
 - Team-scoped: with one or more teams assigned, the policy applies only to
   members of those teams.
 
-Teams are the same [teams](/manuals/admin/organization/manage/manage-a-team.md)
+Teams are the same [teams](/manuals/accounts/organization/manage/manage-a-team.md)
 you manage for your organization; Docker matches a policy's teams against each
 user's team membership. Because an organization can mix org-wide and team-scoped
 policies, a single user is often subject to several at once. The policies that
@@ -59,19 +94,19 @@ plus every team-scoped policy for a team they belong to. See
 
 ### Network rules
 
-Network rules use the action `connect:tcp`. Resources are hostnames, CIDR
-ranges, or ports. The governance policy schema also accepts `connect:udp`, but
-Docker Sandboxes always blocks direct external UDP and ICMP. `connect:udp`
-rules have no effect.
+Network rules use `connect:tcp` for TCP and `connect:udp` for UDP. Resources are
+hostnames, CIDR ranges, or ports. UDP requires
+[experimental outbound UDP](access-controls/local.md#allow-outbound-udp).
+ICMP is blocked.
 
 **Hostname patterns**
 
-| Pattern               | Example           | Matches                                            |
-| --------------------- | ----------------- | -------------------------------------------------- |
-| Exact hostname        | `example.com`     | `example.com` only, not subdomains                 |
-| Single-level wildcard | `*.example.com`   | One subdomain level: `api.example.com`             |
-| Multi-level wildcard  | `**.example.com`  | Any depth: `api.example.com`, `v2.api.example.com` |
-| Hostname with port    | `example.com:443` | `example.com` on port 443 only                     |
+| Pattern               | Example           | Matches                                                      |
+| --------------------- | ----------------- | ------------------------------------------------------------- |
+| Exact hostname        | `example.com`     | `example.com` on any port, not subdomains                     |
+| Single-level wildcard | `*.example.com`   | One subdomain level, any port: `api.example.com`              |
+| Multi-level wildcard  | `**.example.com`  | Any depth, any port: `api.example.com`, `v2.api.example.com`  |
+| Hostname with port    | `example.com:443` | `example.com` on port 443 only                                |
 
 `example.com` and `*.example.com` don't cover each other. Specify both if you
 need to match the root domain and its subdomains.
@@ -80,6 +115,66 @@ need to match the root domain and its subdomains.
 
 Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
 `2001:db8::/32`.
+
+#### HTTP method and path
+
+A network rule matches a destination host on its own. An HTTP rule is a network
+rule that also names an HTTP method and URL path, so a policy can allow reads
+from an API without allowing writes to it.
+
+An HTTP rule names one or more methods, a destination, and path patterns. What
+each part accepts depends on where you configure the rule:
+
+| Part        | Organization policy                        | Local policy                      |
+| ----------- | ------------------------------------------ | --------------------------------- |
+| Method      | One or more listed methods                 | `ANY`, or one or more methods     |
+| Destination | A host or IP address                       | A host                            |
+| Path        | One or more absolute path patterns         | One absolute path pattern         |
+
+A destination can include a port, and a path pattern looks like `/api/**`.
+
+A local rule doesn't accept an IP address or a CIDR range. Use a plain network
+rule for those destinations. To cover a second path in a local policy, add a
+second rule.
+
+Every rule applies to at least one method. On the CLI, `--method ANY` covers
+every HTTP method. In the composer, a rule with no methods selected covers
+every method the composer lists. For the methods you can select individually, see
+[Add a network rule](access-controls/organization.md#add-a-network-rule) for an
+organization policy and
+[HTTP method and path rules](access-controls/local.md#http-method-and-path-rules)
+for a local one.
+
+Path patterns follow the same wildcard rules as filesystem paths, where `*`
+matches within one path segment and `**` matches any depth. A pattern without a
+wildcard matches that path exactly, so `/repos` matches `/repos` and nothing
+below it. Every pattern must start with `/` and can't contain a query string, a
+fragment, or a `..` segment. A local rule's path must also be canonical, so it
+can't contain percent-encoding, control characters, repeated or trailing
+slashes, or a `.` segment. For the full list, see
+[HTTP method and path rules](access-controls/local.md#http-method-and-path-rules).
+
+HTTP requests are evaluated against both layers. A network rule sets the
+baseline for a host, and HTTP rules adjust individual methods and paths within
+it:
+
+| Rules that cover the host   | Result for an HTTP request                                              |
+| --------------------------- | ----------------------------------------------------------------------- |
+| Network allow only          | Allowed at any method and path                                          |
+| HTTP allow only             | Allowed only where a rule matches the method and path. Anything else is denied |
+| Network allow and HTTP deny | The denied methods and paths are blocked. The rest stay allowed          |
+| Network deny                | Blocked. An HTTP allow can't reopen a denied host                        |
+
+A network deny is therefore a floor that HTTP rules can't raise, while a
+network allow is a ceiling that HTTP rules can carve into.
+
+When a rule requires a method and path decision, the sandbox HTTP proxy
+evaluates each request separately instead of deciding once per connection.
+
+Those requests have to go through the proxy. A connection it can't inspect,
+such as one it handles transparently, is blocked rather than evaluated.
+Traffic that isn't HTTP, such as SSH, carries no method or path, so HTTP rules
+never match it. Control those destinations with network rules.
 
 For local and organization policy configuration, see
 [Network access policies](access-controls/network.md).
@@ -171,18 +266,28 @@ team-scoped policy, which makes org-wide deny rules useful as guardrails.
 Local and kit-defined allow rules take no part in this evaluation. Deny rules
 from those sources do still apply. See [Precedence](#precedence).
 
+A request that an approval-required policy allows produces a third outcome.
+Rather than being allowed outright, it's held back until the developer confirms
+the destination, and the confirmation governs later requests to it. This holds
+even when another policy allows the same request without requiring approval. A
+matching deny still wins, so a denied destination is blocked without asking.
+See [Approval-required access](access-controls/network.md#approval-required-access).
+
 ## Precedence
 
 What applies depends on whether your organization has governance enabled:
 
-- No organization governance: local rules and any
-  [kit-defined network rules](../customize/kits.md#control-network-access)
+- No organization governance: local rules and any kit-defined network rules
   determine what sandboxes can access.
 - Organization governance active: organization policy determines what access can
   be granted. Only organization allow rules grant access, so local and
   kit-defined allow rules are inactive and can't expand what the organization
   permits. Deny rules apply from every source, so a local or kit-defined deny
   can still restrict access further.
+
+For kit-defined rules, see
+[Network policies](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/network-policy@1.md)
+in the kit specification.
 
 Precedence is decided by a rule's decision rather than its source:
 
@@ -200,6 +305,13 @@ top of organization policy is always a network deny. `sbx policy ls` hides
 inactive rules by default. See
 [Monitoring](monitor-and-enforce/monitoring.md#showing-inactive-rules) for how
 to list them.
+
+A local deny takes precedence over an organization approval requirement as
+well, so the request is blocked and no approval is requested. Rules that a
+developer gains by approving a request are the one exception to local allow
+rules being inactive, because they record an answer to the organization's own
+approval requirement rather than granting new access. See
+[Approval-required access](access-controls/network.md#approval-required-access).
 
 When organization governance is active, a user's organization policies are
 evaluated together, as described in [Rule evaluation](#rule-evaluation).

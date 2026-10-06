@@ -12,14 +12,21 @@ params:
       - AI and agents
       - Application development
       - Supply chain security
-      - Platform
-      - Enterprise
+      - Accounts and admin
   notoc: true
   ai-and-agents:
+  - title: Docker Agentic Platform
+    description: Run agents in cloud sandboxes with this experimental platform.
+    icon: cloud
+    link: /agentic-platform/
   - title: Docker Sandboxes
     description: Run AI coding agents in isolated environments.
     icon: command-line
     link: /ai/sandboxes/
+  - title: Sandboxes API and SDK
+    description: Create and manage cloud sandboxes from your applications.
+    icon: code-bracket
+    link: /ai/sandboxes-api/
   - title: MCP Catalog and Toolkit
     description: Augment your AI workflow with MCP servers.
     icon: /icons/toolkit.svg
@@ -36,6 +43,10 @@ params:
     description: The open-source multi-agent solution to assist you in your tasks.
     icon: /icons/cagent.svg
     link: /ai/docker-agent
+  - title: Docker Skills
+    description: Docker's official skills for AI coding agents.
+    icon: document-text
+    link: /ai/skills/
   application-development:
   - title: Docker Desktop
     description: Your command center for container development.
@@ -79,31 +90,30 @@ params:
     icon: /icons/Scout.svg
     link: /scout/
   platform:
-  - title: Administration
-    description: Centralized observability for companies and organizations.
-    icon: shield-check
-    link: /admin/
-  - title: Billing
-    description: Manage billing and payment methods.
-    icon: credit-card
-    link: /billing/
   - title: Accounts
-    description: Manage your Docker account.
+    description: Manage Docker individual and organization accounts.
     icon: user-circle
     link: /accounts/
+  - title: Subscription and billing
+    description: Manage Docker subscriptions, plans, billing, and payments.
+    icon: credit-card
+    link: /subscription-billing/
   - title: Security
     description: Security guardrails for both administrators and developers.
     icon: lock-closed
     link: /security/
-  - title: Subscription
-    description: Commercial use licenses for Docker products.
-    icon: credit-card
-    link: /subscription/
-  enterprise:
-  - title: Deploy Docker Desktop
-    description: Deploy Docker Desktop at scale within your company
-    icon: arrow-down-tray
-    link: /enterprise/enterprise-deployment/
+  - title: FAQs
+    description: Frequently asked questions about Docker accounts, organizations, companies, subscriptions, billing, and security.
+    icon: question-mark-circle
+    link: /faqs/
+  - title: Support
+    description: Support options for paid subscriptions and community resources.
+    icon: chat-bubble-left
+    link: /support/
+  - title: Release notes
+    description: Features, bug fixes, and breaking changes for Docker Home, billing, security, and subscriptions.
+    icon: document-plus
+    link: /platform-release-notes/
 ---
 
 This section contains user guides on how to install, set up, configure, and use
@@ -127,16 +137,8 @@ Security guardrails and image analysis for your software supply chain.
 
 {{< grid items=supply-chain-security >}}
 
-## Platform
+## Accounts and admin
 
-Documentation related to the Docker platform, such as administration and
-subscription management.
+Manage Docker accounts, administration, subscriptions, billing, and security.
 
 {{< grid items=platform >}}
-
-## Enterprise
-
-Targeted at IT administrators with help on deploying Docker Desktop at scale with configuration guidance on security related features.
-
-{{< grid items=enterprise >}}
-

@@ -23,6 +23,11 @@ New features and enhancements released in the third quarter of 2026.
 - DHI API: VEX statements and suppressed CVEs for a Docker Hardened Image are
   now available to query by digest through the DHI GraphQL API. For more
   information, see [Use the DHI API](../tools/api.md).
+- DHI webhook payloads: Webhooks on a mirrored Docker Hardened Image repository
+  now include a `dhi_metadata` object describing the vulnerability fixes,
+  package changes, and configuration changes between builds. For more
+  information, see [Automate syncing with
+  webhooks](../how-to/mirror.md#automate-syncing-with-webhooks).
 
 ## Q2 2026
 

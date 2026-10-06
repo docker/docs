@@ -5,8 +5,12 @@ pname: docker desktop
 plink: docker_desktop.yaml
 cname:
     - docker desktop kubernetes images
+    - docker desktop kubernetes reset-cluster
+    - docker desktop kubernetes status
 clink:
-    - docker_desktop_engine_images.yaml
+    - docker_desktop_kubernetes_images.yaml
+    - docker_desktop_kubernetes_reset-cluster.yaml
+    - docker_desktop_kubernetes_status.yaml
 deprecated: false
 hidden: false
 experimental: false

@@ -1,0 +1,9 @@
+type: object
+required:
+- event
+- data
+properties:
+  event:
+    type: string
+  data:
+    type: string

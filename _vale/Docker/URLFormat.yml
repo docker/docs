@@ -1,9 +1,0 @@
-extends: substitution
-message: "Use '%s' instead of '%s'."
-ignorecase: true
-level: warning
-action:
-  name: replace
-swap:
-  URL for: URL of
-  an URL: a URL

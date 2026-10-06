@@ -6,6 +6,12 @@ description: Choose a Git workspace mode and manage branches, parallel tasks, an
 keywords: docker sandboxes, sbx, git, clone mode, direct mode, worktrees, branches, commit signing
 ---
 
+These workspace modes apply to local sandboxes. In cloud sandboxes,
+[transfer files or clone a remote repository](../cloud/usage.md#transfer-files).
+To copy a sandbox filesystem between environments, see
+[Move a sandbox](../cloud/move.md). Host mounts and clone-mode volumes are not
+included in that snapshot.
+
 Sandboxes support three approaches for working with Git repositories. The
 right choice depends on whether you want branch isolation and whether you
 plan to run tasks in parallel:
@@ -93,7 +99,7 @@ It's only reachable while the sandbox is running:
 1. Start a clone-mode sandbox:
 
    ```console
-   $ sbx run --clone claude
+   $ sbx run --clone claude .
    ```
 
 2. Ask the agent to create a branch before it starts editing:
@@ -126,7 +132,7 @@ It's only reachable while the sandbox is running:
    [agents view](../agents/claude-code.md#agents-view):
 
    ```console
-   $ sbx run --clone claude
+   $ sbx run --clone claude .
    ```
 
 2. Dispatch each independent task to a separate background session. Your agent
@@ -183,11 +189,13 @@ yourself after reviewing the changes.
 
 ## Commit signing
 
-Sandboxes forward your host SSH agent into the sandbox, so the agent can
-sign commits with your SSH key without the private key ever leaving your
-host.
+SSH agent forwarding is enabled by default. When `SSH_AUTH_SOCK` is set,
+sandboxes forward your host SSH agent into the sandbox, so the agent can sign
+commits with your SSH key without the private key ever leaving your host. If
+you turned off forwarding or use a fixed SSH agent socket, see
+[SSH agent configuration](../configuration/credentials.md#ssh-agent).
 
-1. On your host, make sure the signing key is loaded in your SSH agent:
+1. Make sure the signing key is loaded in your host SSH agent:
 
    ```console
    $ ssh-add ~/.ssh/id_ed25519
@@ -211,8 +219,8 @@ host.
 
 To apply this configuration automatically to every sandbox, use the
 [`git-ssh-sign`](https://github.com/docker/sbx-kits-contrib/tree/main/git-ssh-sign)
-community kit, which handles all of the above setup. See [Kits](../customize/kits.md)
-if you want to package it alongside other sandbox customizations.
+community kit, which handles all of the above setup. For using it with the
+built-in agents, see [Kits v2](../customize/kits-v2.md).
 
 For troubleshooting, see
 [Sandbox commits aren't signed](../troubleshooting.md#sandbox-commits-arent-signed).

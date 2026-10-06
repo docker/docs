@@ -9,6 +9,7 @@ aliases:
 > [!WARNING]
 > Docker Hub Automated Builds is a deprecated feature.
 > It will be fully retired on April 1, 2027.
+> See the [migration guide](migrate.md) to move to a supported CI/CD workflow.
 
 > [!NOTE]
 >
@@ -22,8 +23,6 @@ report link on the **General** tab and on the **Builds** tab. You can also selec
 **Cancel** on the **Build report** page, or from the **Timeline** tab's logs
 display for the build.
 
-![List of builds showing the cancel icon](images/build-cancelicon.png)
-
 ## Check your active builds
 
 A summary of a repository's builds appears both on the repository **General**
@@ -32,8 +31,6 @@ bar chart of the build queue times and durations. Both views display the
 pending, in progress, successful, and failed builds for any tag of the
 repository.
 
-![Active builds](images/index-active.png)
-
 From either location, you can select a build job to view its build report. The
 build report shows information about the build job. This includes the source
 repository and branch, or tag, the build logs, the build duration, creation time and location, and the user account the build occurred in.
@@ -41,8 +38,6 @@ repository and branch, or tag, the build logs, the build duration, creation time
 > [!NOTE]
 >
 > You can now view the progress of your builds every 30 seconds when you refresh the **Builds** page. With the in-progress build logs, you can debug your builds before they're finished.
-
-![Build report](./images/index-report.png)
 
 ## Disable an automated build
 

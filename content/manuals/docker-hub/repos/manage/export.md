@@ -25,7 +25,7 @@ Before you begin, ensure you have:
 
 ## Create a personal access token
 
-[Create a personal access token](/security/access-tokens/) from
+[Create a personal access token](/security/access-tokens/personal-access-tokens/) from
 a user account that has access to the organization's repositories. When creating
 the token, select at minimum **Read-only** access permissions to list
 repositories.

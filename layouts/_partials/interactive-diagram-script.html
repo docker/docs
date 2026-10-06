@@ -1,0 +1,4 @@
+{{ $diagram := resources.Get "js/interactive-diagram.js"
+  | js.Build (dict "minify" true "targetPath" "interactive-diagram.js")
+}}
+<script defer src="{{ $diagram.RelPermalink }}"></script>

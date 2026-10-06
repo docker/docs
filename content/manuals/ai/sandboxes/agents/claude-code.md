@@ -7,6 +7,10 @@ description: |
 keywords: docker sandboxes, claude code, anthropic, ai agent, sbx, local models, llmman, ollama
 ---
 
+The following instructions apply to local sandboxes. For cloud authentication
+and usage, see [Authenticate cloud agents](../cloud/credentials.md) and
+[Use cloud sandboxes](../cloud/usage.md).
+
 Official documentation: [Claude Code](https://code.claude.com/docs)
 
 ## Quick start
@@ -17,19 +21,23 @@ Launch Claude Code in a sandbox by pointing it at a project directory:
 $ sbx run claude ~/my-project
 ```
 
-The workspace parameter defaults to the current directory, so `sbx run claude`
-from inside your project works too. To start Claude with a specific prompt:
+To start Claude with a specific prompt in the current directory:
 
 ```console
-$ sbx run claude --name my-sandbox -- "Add error handling to the login function"
+$ sbx run --name my-sandbox claude -- "Add error handling to the login function"
 ```
 
 Everything after `--` is passed directly to Claude Code. You can also pipe in a
 prompt from a file with `-- "$(cat prompt.txt)"`.
 
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
+
 ## Authentication
 
-Claude Code requires either an Anthropic API key or a Claude subscription.
+For the default Anthropic models, Claude Code requires either an Anthropic
+API key or a Claude subscription. For other models, see
+[Use a local model](#use-a-local-model).
 
 **API key**: Store your key using
 [stored secrets](../configuration/credentials.md#stored-secrets):
@@ -51,8 +59,8 @@ for workarounds.
 
 ### Remote control
 
-To use Claude Code's `/remote-control` command inside a sandbox, turn on remote
-control:
+To use Claude Code's `/remote-control` command inside a sandbox, turn on
+[`claude.remoteControl`](../configuration/settings.md#clauderemotecontrol):
 
 ```console
 $ sbx settings set claude.remoteControl true
@@ -71,7 +79,7 @@ itself a flag (begins with `-`), so `--dangerously-skip-permissions` is
 preserved:
 
 ```console
-$ sbx run claude -- -c   # runs claude --dangerously-skip-permissions -c
+$ sbx run --name <sandbox-name> -- -c   # runs claude --dangerously-skip-permissions -c
 ```
 
 When the first argument is a bare word, such as the `agents` subcommand, it
@@ -88,7 +96,7 @@ starts background sessions that run tasks in parallel. Pair it with
 sandbox:
 
 ```console
-$ sbx run --clone claude -- agents
+$ sbx run --clone claude . -- agents
 ```
 
 This invocation replaces the
@@ -98,7 +106,7 @@ bypass-permissions mode inside the sandbox. To work around this, either
 use Claude Code's auto mode or pass the flag explicitly:
 
 ```console
-$ sbx run --clone claude -- --dangerously-skip-permissions agents
+$ sbx run --clone claude . -- --dangerously-skip-permissions agents
 ```
 
 Claude Code may use branches or worktrees to keep changes from its background
@@ -120,49 +128,10 @@ See [Git workflows](../workflows/git.md) for clone-mode details.
 ## Base image
 
 The sandbox uses `docker/sandbox-templates:claude-code`. See
-[Templates](../customize/templates.md) to build your own image on top of
+[Base images](/manuals/ai/sandboxes/customize/author/base-images.md) to build your own image on top of
 this base.
 
 ## Use a local model
 
-The `--model` flag routes Claude Code's Anthropic API requests to a model
-served on your host. This feature is experimental and isn't supported on
-Windows.
-
-Enable the feature:
-
-```console
-$ sbx settings set platform.allowExperimentalFeatures true
-$ sbx settings set feature.model true
-```
-
-To use the bundled `llmman` model server, pass a GGUF model reference or short
-name:
-
-```console
-$ sbx run --model gemma4 claude
-```
-
-On first use, `sbx` starts `llmman`, pulls the model, and leaves the server
-running on your host. Later sandboxes reuse the server and its model store.
-
-To use an existing Ollama installation instead, set the provider to `ollama`:
-
-```console
-$ sbx run --model gemma4 --provider ollama claude
-```
-
-Ollama must already be installed and running. `sbx` connects to it but doesn't
-start or manage the Ollama process.
-
-You can also change the model for an existing sandbox:
-
-```console
-$ sbx run --name <sandbox-name> --model <model-name>
-```
-
-Changing the model recreates the sandbox container. The workspace and
-kit-owned volumes persist.
-
-To use Docker Model Runner instead, see
-[Run Claude Code in a Docker Sandbox with Docker Model Runner](/guides/claude-code-sandbox-model-runner/).
+For local models, hosted providers, and custom inference endpoints, see
+[Use local and hosted models](../configuration/models.md).

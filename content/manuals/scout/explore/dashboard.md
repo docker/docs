@@ -19,8 +19,6 @@ they need to focus on.
 
 ## Overview
 
-![A screenshot of the Docker Scout Dashboard overview](../images/dashboard-overview.webp?border=true)
-
 The **Overview** tab provides a summary for the repositories in the selected
 organization.
 
@@ -45,8 +43,6 @@ sections of the Docker Scout Dashboard:
 
 The **Images** view shows all images in Scout-enabled repositories for the selected environment.
 You can filter the list by selecting a different environment, or by repository name using the text filter.
-
-![Screenshot of the images view](../images/dashboard-images.webp)
 
 For each repository, the list displays the following details:
 
@@ -84,46 +80,11 @@ affected by the CVE.
 The settings menu in the Docker Scout Dashboard contains:
 
 - [**Repository settings**](#repository-settings) for enabling and disabling repositories.
-- [**Notifications**](#notification-settings) for managing your notification preferences.
 
 ### Repository settings
 
 When you enable Docker Scout for a repository,
 Docker Scout analyzes new tags automatically when you push to that repository.
-To enable repositories in Amazon ECR, Azure ACR, or other third-party registries,
-you first need to integrate them.
-See [Container registry integrations](/manuals/scout/integrations/_index.md#container-registries)
-
-### Notification settings
-
-> [!IMPORTANT]
->
-> Docker Scout notifications are deprecated and will be retired on
-> July 30, 2026. To surface CVE and policy results without push notifications,
-> integrate `docker scout cves` or `docker scout policy` into your CI pipeline.
-> See [CI integrations](/manuals/scout/integrations/_index.md#continuous-integration).
-> For details, see the
-> [Scout platform release notes](/manuals/scout/release-notes/platform.md).
-
-The [Notification settings](https://scout.docker.com/settings/notifications)
-page is where you can change the preferences for receiving notifications from
-Docker Scout. Notification settings are personal, and changing notification
-settings only affects your personal account, not the entire organization.
-
-Docker Scout notifies you when a new vulnerability is disclosed in a security
-advisory and it affects one or more of your images. Notifications are only
-triggered for the _last pushed_ image tags for each repository.
-
-The available notification settings are:
-
-- **Repository scope**: select whether you want notifications for all
-  repositories or only specific ones.
-- **Delivery preferences**: choose between in-product notification pop-ups
-  and OS-level browser notifications.
-
-You can also configure your notification settings in Docker Desktop by going
-to **Settings** > **Notifications**.
-
-From this page, you can also go to the settings for
-[Team collaboration integrations](/manuals/scout/integrations/team-collaboration/slack.md).
+To enable repositories in third-party registries, you first need to integrate
+them. See [Container registry integrations](/manuals/scout/integrations/_index.md#container-registries)
 

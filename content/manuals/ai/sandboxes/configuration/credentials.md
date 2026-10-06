@@ -8,6 +8,10 @@ aliases:
   - /ai/sandboxes/security/credentials/
 ---
 
+These credential stores and authentication flows apply to local sandboxes.
+Cloud credentials require separate setup: see
+[Authenticate cloud agents](../cloud/credentials.md).
+
 Most agents need an API key for their model provider. An HTTP/HTTPS proxy on
 your host intercepts outbound requests from the sandbox, looks up the matching
 credential on the host, and overwrites the auth header before forwarding. The
@@ -27,7 +31,7 @@ sees only a sentinel like `proxy-managed`.
 
 A kit can set OAuth `passthrough: true` to opt out of sentinel masking. This
 sends the real token response into the sandbox and reduces credential isolation.
-See the [`oauth` kit fields](../customize/kit-reference.md#oauth).
+See the [`oauth` kit fields](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/credential@1.md).
 
 There are several ways to provide that value. When more than one source has a
 value for the same service, the stored secret takes precedence.
@@ -37,8 +41,11 @@ value for the same service, the stored secret takes precedence.
 | [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value or dynamic source in your OS keychain, keyed by service | The default for any built-in or kit-declared service                                                          |
 | [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
 | OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, Cursor, or Droid                                              |
-| [Credential bindings](#credential-bindings) (`credentials.yaml`)            | Per-service mechanism and domain approval                    | Required for third-party `schemaVersion: "2"` kits                                                               |
 | [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits                   | Pulling templates or kits from a private registry                                                                |
+
+Providing a value and approving its use are separate steps.
+[Credential bindings](#credential-bindings) record which mechanisms and domains
+you authorize a kit to use. They don't store the credential value.
 
 For multi-provider agents (OpenCode, Docker Agent), the proxy selects
 credentials based on the API endpoint being called. See individual
@@ -50,6 +57,10 @@ credentials based on the API endpoint being called. See individual
 keychain, keyed on a service identifier. Built-in agents declare a fixed set of
 services. Custom kits can declare their own. The same `sbx secret set` flow
 works for both.
+
+Secrets whose names start with `mcp:` are reserved for the host's
+[MCP gateway](../mcp-gateway.md). See [MCP secrets](#mcp-secrets) for how
+these differ from agent and provider credentials.
 
 ### Where secrets are stored
 
@@ -98,11 +109,23 @@ secret to a specific sandbox instead:
 $ sbx secret set openai --sandbox my-sandbox
 ```
 
-> [!NOTE]
-> A sandbox-scoped secret takes effect immediately, even if the sandbox is
-> running. A global secret only applies when a sandbox is created. If
-> you set or change a global secret while a sandbox is running, recreate the
-> sandbox for the new value to take effect.
+Adding, updating, or removing a service secret takes effect in existing local
+sandboxes without a restart, including secrets configured with `--command` or
+`--ref`. Sandbox-scoped secrets take precedence over global secrets.
+
+### MCP secrets
+
+The MCP gateway uses the same host credential store for OAuth client secrets
+and custom request header secrets. These records have names starting with
+`mcp:` and appear in `sbx secret ls`. They stay on the host and aren't injected
+into sandboxes. The gateway uses them to authenticate connections to MCP
+servers on behalf of sandboxed agents.
+
+For setup instructions, see
+[OAuth client secrets](../mcp-gateway.md#use-a-pre-registered-oauth-client) and
+[custom request headers](../mcp-gateway.md#custom-request-headers). Header
+secrets use the global scope and have their own
+[restart requirements](../mcp-gateway.md#manage-header-secrets).
 
 ### Use a dynamic secret source
 
@@ -137,6 +160,17 @@ $ sbx secret set github --command 'gh auth token'
 `sbx` runs the command through the host shell and trims its output. The command
 text is stored and replayed by the daemon. Don't embed a secret directly in the
 command because the text can appear in shell history and process listings.
+
+Secret commands run from a fresh temporary directory on the host during
+verification and refresh. Relative paths such as `./credential-helper` resolve
+from that temporary directory. This applies to both
+`sbx secret set --command` and `sbx secret set-custom --command`.
+
+Store helpers and any code or configuration they load outside writable
+sandbox mounts. Run a helper by name from an absolute directory on the host's
+`PATH`, use its absolute path, or explicitly change to its private directory
+in the command. Keep the host's temporary directory outside writable sandbox
+mounts as well.
 
 By default, `sbx` verifies the source when you register it and reports an error
 without exposing the resolver's standard error. Use `--no-verify` to store a
@@ -211,8 +245,64 @@ it into requests to the listed API domains.
 
 ### Services declared by kits
 
-Custom kits can declare their own service identifiers in `spec.yaml`. In
-`schemaVersion: "2"`, credentials are declared under the `credentials:` list:
+Use the service identifier from the kit's documentation when storing its
+credential. For a kit that declares `my-service`, run:
+
+```console
+$ sbx secret set my-service
+```
+
+There's no separate registration step. The stored value and the kit's request
+use the same identifier. Approve the kit's credential request when prompted.
+See [Credential bindings](#credential-bindings).
+
+When authoring a kit, declare how it uses that service. V3 uses a credential
+capability, and v2 uses a top-level `credentials` list. Both examples declare the
+service and permit access to its API host:
+
+{{< tabs >}}
+{{< tab name="v3" >}}
+
+```yaml
+capabilities:
+  - type: com.docker.sandbox/network-policy@1
+    config:
+      runtime:
+        allow: [api.my-service.com]
+  - type: com.docker.sandbox/credential@1
+    config:
+      service: my-service
+      phase: runtime
+      apiKey:
+        name: MY_SERVICE_TOKEN
+        proxyManaged: true
+        inject:
+          - domain: api.my-service.com
+            header: Authorization
+            format: "Bearer %s"
+```
+
+For API keys, specify both the HTTP header and its value format, as in this
+example. `sbx` doesn't use `apiKey.inject[].scheme` in v3 kits.
+
+For OAuth, use JSON credential files and a provider that returns the refresh
+token in `refresh_token`. `sbx` doesn't support TOML credential files or a
+different refresh-token field.
+
+Credentials declared for the install phase are available during install hooks.
+Add the domains that receive these credentials to the network policy's
+`install.allow` list. An entry in `runtime.allow` alone doesn't grant access
+during installation. If a hook reads a credential environment variable,
+include that name in its `env` list.
+
+In `sbx`, the proxy stops injecting credentials into install-only domains
+before the agent launches. A domain remains available for credential injection
+if any runtime credential targets it, even under a different service name.
+If you declare the same service for both phases, `sbx` uses the runtime
+declaration's credential settings in both phases.
+
+{{< /tab >}}
+{{< tab name="v2" >}}
 
 ```yaml
 credentials:
@@ -223,21 +313,20 @@ credentials:
       inject:
         - domain: api.my-service.com
           scheme: bearer
+
+permissions:
+  network:
+    allow: [api.my-service.com]
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 Each service declares `apiKey`, `oauth`, or both. When both resolve at runtime,
-the API key takes precedence and OAuth acts as the fallback. To provide the
-credential value, run `sbx secret set` with the same identifier the kit
-declares:
-
-```console
-$ sbx secret set my-service
-```
-
-There's no separate registration step; the keychain entry is keyed on the
-identifier the kit already uses. See
-[Authenticate to external services](../customize/kits.md#authenticate-to-external-services)
-for the full kit-side wiring.
+the API key takes precedence and OAuth acts as the fallback. For complete
+kit-side configuration, see
+[V3 credential definition](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/credential@1.md)
+or [V2 credentials](../customize/kits-v2.md#credentials).
 
 ### List and remove secrets
 
@@ -254,6 +343,15 @@ Remove a secret:
 ```console
 $ sbx secret rm github
 ```
+
+To remove a sandbox-scoped secret, pass `--sandbox`:
+
+```console
+$ sbx secret rm github --sandbox my-sandbox
+```
+
+Removing a sandbox-scoped secret restores the global secret for that service,
+if one is available.
 
 > [!NOTE]
 > Running `sbx reset` deletes all stored secrets along with all sandbox state.
@@ -274,11 +372,32 @@ interact with GitHub APIs on your behalf.
 
 ### SSH agent
 
-If your host has an SSH agent and `SSH_AUTH_SOCK` is set, Docker Sandboxes
-forwards the agent into the sandbox and sets `SSH_AUTH_SOCK` there. The
-private keys stay on your host. Processes inside the sandbox can request
-signatures from the forwarded agent, but they can't read or copy the private
-key.
+SSH agent forwarding is enabled by default. When `SSH_AUTH_SOCK` is set,
+Docker Sandboxes uses the value from the client that creates, starts, or joins
+each sandbox. It forwards that agent into the sandbox and sets `SSH_AUTH_SOCK`
+there.
+
+If your agent exposes a stable socket path, such as the 1Password SSH agent,
+configure that path for every sandbox:
+
+```console
+$ sbx settings set ssh.agentSocketPath "$SSH_AUTH_SOCK"
+```
+
+An empty [`ssh.agentSocketPath`](settings.md#sshagentsocketpath), which is the
+default, uses each client's current `SSH_AUTH_SOCK` instead. Use
+[`ssh.agentForwardingEnabled`](settings.md#sshagentforwardingenabled) to turn
+forwarding on or off.
+
+After changing forwarding or the socket selection, restart the daemon so
+existing sandboxes use the new configuration:
+
+```console
+$ sbx daemon restart
+```
+
+The private keys stay on your host. Processes inside the sandbox can request
+signatures from the forwarded agent, but they can't read or copy a private key.
 
 Use SSH agent forwarding for Git operations over SSH and SSH-based commit
 signing. The signing key must be loaded in the host SSH agent for sandboxed
@@ -297,8 +416,15 @@ when an agent validates the environment variable format at boot, or when the
 credential lands in a request body rather than a header — use
 `sbx secret set-custom`. The secret is keyed on one or more target domains, an
 environment variable name, and an optional placeholder string, instead of a
-service identifier. Custom secrets are global by default. Pass `--sandbox` to
-scope one to a specific sandbox.
+service identifier.
+
+Prefer the [service-based flow](#stored-secrets) whenever it's an option —
+the kit handles the wiring; you only provide the value.
+
+### Set a custom secret
+
+Custom secrets are global by default. Pass `--sandbox` to scope one to a
+specific sandbox.
 
 ```console
 $ sbx secret set-custom \
@@ -306,6 +432,20 @@ $ sbx secret set-custom \
     --env API_KEY \
     --value <secret>
 ```
+
+> [!WARNING]
+> Passing the secret as `--value <secret>` records it in your shell history
+> and exposes it to other processes running as your user. Avoid pasting
+> real credentials inline — read the value from a variable that's already
+> in your environment, and clear shell history if a real secret was passed
+> on the command line.
+
+Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
+`sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
+configured hosts and the placeholder appears anywhere in the request, the
+proxy replaces it with the real value. The agent never sees the real secret.
+
+### Target multiple hosts
 
 Repeat `--host` to cover multiple domains with the same secret — useful when
 an API is split across related hostnames or when two unrelated endpoints share
@@ -324,6 +464,8 @@ A `--host` value can also use wildcards, with the same syntax as
 single label (`*.example.com` covers `api.example.com`) and `**` matches any
 number (`**.example.com` covers `api.example.com` and `v2.api.example.com`).
 
+### Resolve custom secrets dynamically
+
 Custom secrets also accept [dynamic secret sources](#use-a-dynamic-secret-source).
 Replace `--value` with either `--ref` or `--command`:
 
@@ -339,20 +481,50 @@ duration to cache the resolved value. The verification and error-output flags
 work the same as they do for service secrets. `--ref` and `--command` can't be
 combined with `--value` or `--token`.
 
-> [!WARNING]
-> Passing the secret as `--value <secret>` records it in your shell history
-> and exposes it to other processes running as your user. Avoid pasting
-> real credentials inline — read the value from a variable that's already
-> in your environment, and clear shell history if a real secret was passed
-> on the command line.
+### Install npm packages from GitHub Packages
 
-Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
-`sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
-configured hosts and the placeholder appears anywhere in the request, the
-proxy replaces it with the real value. The agent never sees the real secret.
+The built-in `github` service doesn't inject credentials into requests to
+`npm.pkg.github.com`. To install private npm packages from GitHub Packages,
+add a custom secret for that host.
 
-Prefer the [service-based flow](#stored-secrets) whenever it's an option —
-the kit handles the wiring; you only provide the value.
+On the host, authenticate the GitHub CLI with a token that can read the package.
+GitHub documents a personal access token (classic) with at least `read:packages`
+scope for this use. See
+[Authenticating to GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-to-github-packages).
+Then register the token source, replacing `my-sandbox` with your sandbox's name:
+
+```console
+$ sbx secret set-custom \
+    --sandbox my-sandbox \
+    --host npm.pkg.github.com \
+    --env NODE_AUTH_TOKEN \
+    --command 'gh auth token'
+```
+
+The command prints a generated placeholder. For an existing sandbox, set
+`NODE_AUTH_TOKEN` to that placeholder using `sbx run -e` for an agent session,
+or `/etc/sandbox-persistent.sh` for future sessions. See
+[Set environment variables](../usage.md#set-environment-variables).
+Use the placeholder, not the actual GitHub token.
+
+Inside the sandbox, add the following entries to your project's `.npmrc`,
+replacing `@my-org` with the package's scope. Keep `${NODE_AUTH_TOKEN}` literal
+so npm reads the environment variable:
+
+```ini
+@my-org:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+```
+
+Install the package inside the sandbox:
+
+```console
+$ npm install @my-org/my-package
+```
+
+Replace `@my-org/my-package` with your package name. npm sends the placeholder
+to `npm.pkg.github.com`, and the proxy replaces it with the token retrieved by
+`gh auth token` on the host.
 
 ## Credential bindings
 
@@ -361,11 +533,11 @@ you've approved for each service. It lives at
 `~/.config/sbx/credentials.yaml`, or `%APPDATA%\sbx\credentials.yaml` on
 Windows.
 
-Third-party kits that declare `schemaVersion: "2"` require an approved binding
-for each credential they use. `sbx` creates one interactively the first time you
+Third-party kits require an approved binding for each credential they use,
+regardless of schema version. `sbx` creates one interactively the first time you
 run such a kit (see [First-run approval](#first-run-approval)); you can also
-write entries by hand. Credentials declared only by embedded, built-in kits are
-authorized by provenance and don't need a binding.
+write entries by hand. Credentials requested only by the built-in kits shipped
+with `sbx` don't need a binding.
 
 Each entry under `bindings` is keyed by a
 [service identifier](#built-in-services) and approves one or both credential
@@ -405,37 +577,31 @@ both cases, you approve the domains declared by the kit. `sbx` writes the entry
 to `credentials.yaml`.
 
 In non-interactive contexts (CI or `--detached`), there's no one to answer the
-prompt. Without a binding, the sandbox starts with the credential withheld. If
-the kit marks the credential as `required: true`, `sbx` also prints a warning.
+prompt. In `sbx`, the sandbox starts with the credential withheld when no
+binding exists. For a required credential, `sbx` prints a warning rather than
+failing sandbox creation. This is a limitation of `sbx` enforcement: kit authors
+shouldn't rely on a required credential being available merely because the
+sandbox started.
+
 Pre-create the binding by running the kit interactively once or by writing
 `credentials.yaml` directly before running unattended.
 
-The bindings file gates whether a third-party v2 kit can use a service
+The bindings file gates whether a third-party kit can use a service
 credential. The kit's credential injection rules and network permissions still
 constrain which requests can carry the credential.
 
 ### Kits that require a binding
 
-Only third-party kits that declare `schemaVersion: "2"` require a binding.
-Built-in agents also use `schemaVersion: "2"`, but credentials declared only by
-embedded kits are authorized by provenance and inject automatically. A
-third-party kit that extends a built-in agent inherits its credentials, but not
-its built-in provenance. The inherited credentials therefore require approval.
-If a third-party kit declares the same service itself, that service also
-requires approval. Kits on `schemaVersion: "1"` inject their declared
-credentials without a binding.
-
-> [!WARNING]
-> Proxy-managed OAuth isn't supported for third-party sandbox agents, including
-> kits that extend a built-in agent. Repeating the parent's OAuth declaration in
-> the child kit doesn't activate OAuth interception. Use a stored API key when
-> the service supports one. Otherwise, an OAuth login performed inside the
-> sandbox stores the real token there.
+Third-party kits require your approval to use credentials, regardless of
+schema version. The built-in kits shipped with `sbx` can use credentials they
+request without a binding. If a third-party v2 kit extends a built-in agent,
+you must approve its use of the inherited credentials. You must also approve
+a third-party kit that requests the same service itself.
 
 ## Registry credentials
 
 Registry credentials authenticate to private OCI registries when pulling
-[templates](../customize/templates.md) or [kits](../customize/kits.md), and can
+[templates](../usage.md#load-a-template) or [kits](/manuals/ai/sandboxes/customize/_index.md), and can
 also let the agent pull and push images from inside the sandbox through the
 host-side proxy. Use `sbx secret set --registry <host>` to store them. For
 Docker Hub, `sbx` reuses your `sbx login` session — no registry secret needed.
@@ -495,9 +661,44 @@ To scope the credential to a single sandbox, store it under that sandbox's name:
 $ gh auth token | sbx secret set --sandbox my-app --registry ghcr.io --password-stdin
 ```
 
-`sbx kit pull` also uses these credentials, with the Docker credential
-store as a fallback. `sbx kit push` uses only the Docker credential store —
-push targets still require a prior `docker login`.
+For v2 kits on Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
+`sbx login`. For other registries, both commands use these credentials. Both
+commands fall back to the Docker credential store, so credentials from
+`docker login` also work. V3 kits are
+[published with Docker Buildx](/manuals/ai/sandboxes/customize/author/distribute.md#publish-an-image),
+which uses the credentials from `docker login`.
+
+### Trust a private registry authentication endpoint
+
+Use `--registry-auth-endpoint` with `--registry` when a self-hosted registry
+authenticates sandbox requests through a separate host. For example, a
+self-hosted GitLab registry at
+`registry.example.com` might advertise `https://gitlab.example.com/jwt/auth`
+as the `realm` in its Registry v2 `WWW-Authenticate: Bearer` challenge.
+
+Store the credential and trust that endpoint for a specific sandbox:
+
+```console
+$ echo "$GITLAB_PAT" | sbx secret set --sandbox my-app \
+    --registry registry.example.com \
+    --username "$GITLAB_USER" \
+    --registry-auth-endpoint https://gitlab.example.com/jwt/auth \
+    --password-stdin
+```
+
+Replace the example hosts with your registry and authentication hosts, and set
+`GITLAB_USER` and `GITLAB_PAT` to your GitLab username and personal access token.
+
+This authorizes the proxy to send the stored registry credential to
+`https://gitlab.example.com/jwt/auth` to exchange it for a registry token. The
+advertised realm must use HTTPS and match the configured host and path exactly.
+Other paths on that host, including `/jwt/auth/`, aren't covered. The endpoint
+URL must contain no embedded credentials, query string, or fragment. Token
+requests can still include protocol parameters such as `service` and `scope`.
+
+Without this flag, the proxy accepts authentication endpoints on the registry's
+own host and built-in registry relationships, such as Docker Hub's authentication
+host. Other authentication hosts require explicit configuration.
 
 ### Remove registry credentials
 

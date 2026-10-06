@@ -7,11 +7,9 @@ IgnoreAltEmpty: true
 IgnoreEmptyHref: true
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreURLs:
-- "^/reference/api/hub/.*$"
-- "^/reference/api/engine/v.+/#.*$"
-- "^/reference/api/registry/.*$"
-- "^/pagefind/.*$"
+  - "^/reference/api/engine/v.+/#.*$"
+  - "^/pagefind/.*$"
 IgnoreDirs:
-- "registry/configuration"
-- "compose/compose-file" # temporarily ignore until upstream is fixed
+  - "registry/configuration"
+  - "compose/compose-file" # temporarily ignore until upstream is fixed
 CacheExpires: "6h"

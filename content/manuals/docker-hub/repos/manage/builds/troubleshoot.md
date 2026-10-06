@@ -11,6 +11,7 @@ aliases:
 > [!WARNING]
 > Docker Hub Automated Builds is a deprecated feature.
 > It will be fully retired on April 1, 2027.
+> See the [migration guide](migrate.md) to move to a supported CI/CD workflow.
 
 > [!NOTE]
 >
@@ -21,8 +22,6 @@ aliases:
 
 If a build fails, a **Retry** icon appears next to the build report line on the
 **General** and **Builds** tabs. The **Build report** page and **Timeline logs** also display a **Retry** button.
-
-![Timeline view showing the retry build button](images/retry-build.png)
 
 > [!NOTE]
 >
@@ -60,7 +59,7 @@ system access to the repositories.
 > also do this for an individual account to limit Docker Hub's access to your
 > source repositories.
 
-1. Generate a SSH keypair that you use for builds only, and add the public key to your source code provider account.
+1. Generate an SSH keypair that you use for builds only, and add the public key to your source code provider account.
 
     This step is optional, but allows you to revoke the build-only keypair without removing other access.
 

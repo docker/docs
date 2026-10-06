@@ -1,0 +1,20 @@
+name: sbx kit builder history trace
+synopsis: Show the execution trace of a kit build
+experimental: true
+usage: sbx kit builder history trace [ARGS...] [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for trace
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx kit builder history - Inspect kit build history in the builder sandbox

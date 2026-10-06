@@ -53,9 +53,13 @@ status only when the relative importance of the candidate set changes.
 
 1. Read `data/whats-new.json`.
 2. Determine the review mode from the request:
+   - If the request does not specify a publication window, end it on the
+     previous UTC day and start it 29 days earlier.
    - For an incremental review, list PRs merged from the day after the supplied
      checkpoint through the end of the publication window. Retain existing
      items inside the publication window without re-reviewing their source PRs.
+     If the request does not supply a checkpoint, use the existing
+     `period_end` from `data/whats-new.json`.
    - For a full review, inspect every PR merged in the supplied publication
      window.
 3. List PRs in the range that applies to the review mode:
@@ -74,8 +78,19 @@ status only when the relative importance of the candidate set changes.
    merely because they were not part of the incremental candidate range.
 7. Replace `period_start`, `period_end`, and `items` in
    `data/whats-new.json`. Sort items by `published` date, newest first.
-8. Write `.pr-body.md` with the publication period, selected highlights and
-   source PRs, plus concise reasons for plausible exclusions.
+8. Report the curation outcome in the response:
+   - Enumerate every newly selected entry by product, title, and source PRs.
+   - Summarize retained and expired entries by count. Identify any retained
+     entry whose content or sources changed.
+   - Explain only the most relevant plausible exclusions. Do not enumerate
+     routine maintenance PRs that were never credible candidates.
+
+If the request includes creating a pull request, use the same report in the PR
+body with `## Summary`, `## Selected entries`, and `## Curation notes`
+sections. Put each selected entry on one Markdown bullet and reference PRs as
+`#NNNN` rather than full same-repository links. Do not hard-wrap bullets. Do
+not create `.pr-body.md` or another handoff file unless the request explicitly
+asks for one.
 
 Each item must contain `product`, `title`, `description`, `url`, `published`,
 `source_prs`, and `featured`. Use the canonical product name, a published

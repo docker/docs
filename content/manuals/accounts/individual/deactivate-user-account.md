@@ -1,0 +1,74 @@
+---
+title: Deactivate a Docker account
+linkTitle: Deactivate
+weight: 30
+description: Prerequisites and steps to deactivate an individual Docker account
+keywords:
+  deactivate docker account, delete docker account, close docker account,
+  disable docker account, account management, leave organization, privacy
+  request, personal data
+aliases:
+  - /accounts/deactivate-user-account/
+---
+
+Learn how to deactivate an individual Docker account, including the
+prerequisites required for deactivation.
+
+For information on deactivating an organization, see
+[Deactivate an organization](/manuals/accounts/organization/manage/deactivate-account.md).
+
+> [!WARNING]
+>
+> All Docker products and services that use your Docker account are
+> inaccessible after deactivating your account.
+
+## Prerequisites
+
+Before deactivating your Docker account, complete the following
+requirements:
+
+- If you are an organization or company owner, you must leave your
+  organization or company before deactivating your Docker account:
+  1. Sign in to [Docker Home](https://app.docker.com/admin) and choose your
+     organization.
+  1. Select **Members** and find your username.
+  1. Select the **Actions** menu and then select **Leave organization**.
+- If you are the sole owner of an organization, you must assign the owner
+  role to another member of the organization and then remove yourself from
+  the organization, or deactivate the organization. Similarly, if you are
+  the sole owner of a company, either add someone else as a company owner
+  and then remove yourself, or deactivate the company.
+- If you have an active Docker subscription,
+  [downgrade it to a Docker Personal
+  subscription](/manuals/subscription-billing/plans/docker.md#cancel-a-docker-plan).
+- Download any images and tags you want to keep. Use
+  `docker pull -a <image>` to pull all tags, or `docker pull <image>:<tag>`
+  to pull a specific tag.
+- If you linked a GitHub or Bitbucket account for automated builds, unlink
+  it. See
+  [Unlink a GitHub user
+  account](/manuals/docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account)
+  or
+  [Unlink a Bitbucket user
+  account](/manuals/docker-hub/repos/manage/builds/link-source.md#unlink-a-bitbucket-user-account).
+
+## Deactivate
+
+After you complete the prerequisites, you can deactivate your account.
+
+> [!WARNING]
+>
+> Deactivating your account is permanent and can't be undone. Make sure
+> to back up any important data.
+
+1. Sign in to [Docker Home](https://app.docker.com/login).
+1. Select your avatar to open the drop-down menu.
+1. Select **Account settings**.
+1. Select **Deactivate**.
+1. Select **Deactivate account**, then select again to confirm.
+
+## Delete personal data
+
+Deactivating your account does not delete your personal data. To request
+personal data deletion, fill out Docker's
+[Privacy request form](https://preferences.docker.com/).

@@ -7,6 +7,8 @@ description: |
 keywords: docker sandboxes, codex, openai, ai agent, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This guide covers authentication, configuration, and usage of Codex in a
 sandboxed environment.
 
@@ -20,18 +22,21 @@ Create a sandbox and run Codex for a project directory:
 $ sbx run codex ~/my-project
 ```
 
-The workspace parameter is optional and defaults to the current directory:
+`sbx run` defaults the workspace to the current directory:
 
 ```console
 $ cd ~/my-project
 $ sbx run codex
 ```
 
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
+
 ## Authentication
 
-If you haven't stored an OpenAI credential, `sbx run codex` prompts you to
-authenticate on your host before launching the sandbox. The flow runs on the
-host, so credentials are never exposed inside the sandbox.
+For the default OpenAI models, `sbx run codex` prompts you to authenticate on
+your host if you haven't stored an OpenAI credential. Authentication happens
+before launching the sandbox, so credentials are never exposed inside it.
 
 To set up authentication ahead of time, choose one of the following methods.
 
@@ -54,6 +59,11 @@ $ sbx secret set openai
 
 See [Credentials](../configuration/credentials.md) for more details.
 
+## Model selection
+
+To use Codex with a local model or another inference provider, see
+[Use local and hosted models](../configuration/models.md).
+
 ## Configuration
 
 Sandboxes don't pick up user-level configuration from your host, such as
@@ -75,7 +85,7 @@ itself a flag (begins with `-`). A bare word — such as a prompt — replaces t
 defaults instead, so lead with the flag to keep bypass mode:
 
 ```console
-$ sbx run codex -- --dangerously-bypass-approvals-and-sandbox "fix the build"
+$ sbx run --name <sandbox-name> -- --dangerously-bypass-approvals-and-sandbox "fix the build"
 ```
 
 ## Base image
