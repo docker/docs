@@ -17,9 +17,10 @@ info:
 
     An AI Governance subscription and Docker Cloud audit delivery are required.
 
-    Requests are limited to 100 per minute for each organization, 600 per
-    minute for each source IP address, and 1000 per hour for each organization.
-    A request must remain below every limit.
+    All clients and tokens in an organization share its request quota, and
+    each pagination request counts. Additional organization and source IP
+    limits apply at the API gateway. Application rate-limit responses report
+    the configured quota and window.
   contact:
     name: Docker
     url: https://www.docker.com/products/ai-governance/
@@ -45,9 +46,15 @@ paths:
         order. Pass `next_page_token` from one response as `page_token` in the
         next request to continue listing events.
 
-        When `query` is present, `from` and `to` are required and must define a
-        range of 30 days or less. The search term must contain at least three
-        characters.
+        Every request covers a time range of 30 days or less. If `to` is
+        omitted, it defaults to the request time. If `from` is omitted, it
+        defaults to 30 days before `to`. `from` must be earlier than `to`.
+        Text search uses the same defaults and requires at least three
+        bytes after trimming whitespace.
+
+        The page token preserves the resolved time range. Keep other filters
+        unchanged on later pages. Omit `from` and `to` or supply timestamps that
+        match the token's range.
       parameters:
         - $ref: "#/components/parameters/OrgName"
         - $ref: "#/components/parameters/From"
@@ -89,17 +96,21 @@ paths:
                           agent: claude
                           network_egress:
                             protocol: tcp
-                    next_page_token: eyJ0cyI6IjIwMjYtMDgtMjVUMTg6NDI6MzEuMTIzWiIsImVpZCI6Ijk1ZTcyNTdmLTkzYzktNGYyOS1iZGU3LTg4ODMwZTJkYWU4MCJ9
+                    next_page_token: eyJ0cyI6IjIwMjYtMDgtMjVUMTg6NDI6MzEuMTIzWiIsImVpZCI6Ijk1ZTcyNTdmLTkzYzktNGYyOS1iZGU3LTg4ODMwZTJkYWU4MCIsImZyb20iOiIyMDI2LTA4LTAxVDAwOjAwOjAwWiIsInRvIjoiMjAyNi0wOC0yNVQyMzo1OTo1OVoifQ
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthenticated"
         "403":
           $ref: "#/components/responses/Forbidden"
+        "408":
+          $ref: "#/components/responses/RequestTimeout"
         "429":
           $ref: "#/components/responses/RateLimited"
         "500":
           $ref: "#/components/responses/InternalError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
 components:
   securitySchemes:
@@ -125,7 +136,11 @@ components:
       name: from
       in: query
       required: false
-      description: Include events created at or after this RFC 3339 timestamp. Required with `query`.
+      description: |
+        Include events created at or after this RFC 3339 timestamp. Defaults to
+        30 days before the effective `to` on the first page. Must be earlier
+        than `to`, with a range of no more than 30 days. On later pages, omit
+        this parameter or use the timestamp preserved in the page token.
       schema:
         type: string
         format: date-time
@@ -135,7 +150,10 @@ components:
       name: to
       in: query
       required: false
-      description: Include events created at or before this RFC 3339 timestamp. Required with `query`.
+      description: |
+        Include events created at or before this RFC 3339 timestamp. Defaults
+        to the request time on the first page. On later pages, omit this
+        parameter or use the timestamp preserved in the page token.
       schema:
         type: string
         format: date-time
@@ -172,10 +190,9 @@ components:
       name: enforcement_mode
       in: query
       required: false
-      description: Return events with this exact enforcement mode.
+      description: Return events with this exact enforcement mode, such as `audit`, `warn`, or `enforce`.
       schema:
         type: string
-        enum: [audit, warn, enforce]
       example: enforce
 
     ActionType:
@@ -193,11 +210,10 @@ components:
       required: false
       description: |
         Case-insensitive text search across username, action type, decision, and
-        event type. `from` and `to` are required when this parameter is present,
-        and their range must not exceed 30 days.
+        event type. Uses the same default time range as other list requests.
+        The trimmed value must be between 3 and 256 bytes.
       schema:
         type: string
-        minLength: 3
         maxLength: 256
       example: network
 
@@ -205,7 +221,7 @@ components:
       name: resource_id
       in: query
       required: false
-      description: Case-insensitive prefix match against the resource ID in the event payload.
+      description: Case-insensitive prefix match against the resource ID in the event payload. The trimmed value must not exceed 256 bytes.
       schema:
         type: string
         maxLength: 256
@@ -215,7 +231,7 @@ components:
       name: agent
       in: query
       required: false
-      description: Exact match against the agent in the event payload.
+      description: Exact match against the agent in the event payload. The trimmed value must not exceed 256 bytes.
       schema:
         type: string
         maxLength: 256
@@ -225,12 +241,14 @@ components:
       name: page_size
       in: query
       required: false
-      description: Number of events to return. Defaults to 25 and is capped at 500.
+      description: |
+        Number of events to return. Defaults to 25; 0 also uses the default.
+        Values above 100 are capped at 100. Negative values are rejected.
       schema:
         type: integer
         format: int32
-        minimum: 1
-        maximum: 500
+        minimum: 0
+        maximum: 2147483647
         default: 25
       example: 25
 
@@ -238,7 +256,7 @@ components:
       name: page_token
       in: query
       required: false
-      description: Opaque cursor from `next_page_token` in the previous response.
+      description: Opaque cursor from `next_page_token` in the previous response. Preserves the resolved time range; pass it unchanged.
       schema:
         type: string
 
@@ -305,6 +323,36 @@ components:
           description: Event-specific audit record fields.
           additionalProperties: true
 
+    ApplicationRateLimitError:
+      allOf:
+        - $ref: "#/components/schemas/Error"
+        - type: object
+          required: [code, policy, scope, limit, window_seconds]
+          properties:
+            code:
+              type: string
+              enum: [rate_limit_exceeded]
+              description: Stable application rate-limit error code.
+            policy:
+              type: string
+              enum: [audit_governance]
+            scope:
+              type: string
+              enum: [organization]
+              description: All clients and tokens in the organization share this quota.
+            limit:
+              type: integer
+              format: int64
+              description: Configured request quota.
+            window_seconds:
+              type: number
+              description: Duration of the quota window in seconds.
+            retry_after_seconds:
+              type: integer
+              format: int64
+              minimum: 1
+              description: Seconds until the quota resets, rounded up. Omitted when the reset time is unknown.
+
     Error:
       type: object
       required: [error]
@@ -323,7 +371,7 @@ components:
           examples:
             default:
               value:
-                error: "invalid argument\nfrom must be RFC3339"
+                error: "invalid argument: from must be RFC3339"
 
     Unauthenticated:
       description: Missing, malformed, invalid, or expired OAT.
@@ -347,16 +395,49 @@ components:
               value:
                 error: insufficient permissions
 
-    RateLimited:
-      description: The organization or source IP address exceeded a request limit.
+    RequestTimeout:
+      description: Request deadline exceeded.
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
+          example:
+            error: request deadline exceeded
+
+    RateLimited:
+      description: |
+        The organization or source IP address exceeded a request limit.
+        Application responses include the configured quota, window, and stable
+        error code. Gateway responses can use a different body and omit these
+        fields. Honor `Retry-After` when present; otherwise use exponential
+        backoff.
+      headers:
+        Retry-After:
+          description: |
+            Seconds to wait before retrying. Application responses include
+            this header when the reset time is known, rounded up to whole
+            seconds. It matches `retry_after_seconds`. Gateway responses can
+            omit this header.
+          schema:
+            type: integer
+            minimum: 1
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: "#/components/schemas/ApplicationRateLimitError"
+              - $ref: "#/components/schemas/Error"
           examples:
-            default:
+            application:
+              summary: Example organization quota; actual values reflect the configured limit.
               value:
-                error: rate limit exceeded
+                error: "Your organization has reached the audit API request limit. This quota is shared across all clients and tokens in your organization; each pagination request counts. Request limit: 1000 per 3600 seconds. Retry after 60 seconds."
+                code: rate_limit_exceeded
+                policy: audit_governance
+                scope: organization
+                limit: 1000
+                window_seconds: 3600
+                retry_after_seconds: 60
 
     InternalError:
       description: Unexpected server error.
@@ -368,3 +449,20 @@ components:
             default:
               value:
                 error: internal error
+
+    ServiceUnavailable:
+      description: |
+        The audit store or an authentication dependency is unavailable, or the
+        search timed out. Retry with exponential backoff. For a search timeout,
+        use a narrower time range or a simpler query.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            storeUnavailable:
+              value:
+                error: service temporarily unavailable
+            searchTimeout:
+              value:
+                error: search timed out; try a narrower time range or simpler query

@@ -16,7 +16,7 @@ shown in the hosted audit log view.
 
 Before you use the API, you need:
 
-- A Docker [AI Governance plan](/manuals/subscription/plans/ai-governance.md)
+- A Docker [AI Governance plan](/manuals/subscription-billing/plans/ai-governance.md)
 - Docker Cloud delivery turned on in [audit delivery settings](configure.md)
 - An Organization Access Token (OAT) with the **View audit logs** permission
 
@@ -35,7 +35,7 @@ Create an OAT for the organization whose events you want to retrieve:
 1. Select **Generate token**, then store the token in a credential manager.
 
 For token expiration, rotation, and management instructions, see
-[Organization access tokens](/manuals/enterprise/security/access-tokens.md).
+[Organization access tokens](/manuals/security/access-tokens/organization-access-tokens.md).
 
 Set variables for the examples:
 
@@ -81,7 +81,7 @@ array of events and an opaque cursor for the next page:
       }
     }
   ],
-  "next_page_token": "eyJ0cyI6IjIwMjYtMDgtMjVUMTg6NDI6MzEuMTIzWiIsImVpZCI6Ijk1ZTcyNTdmLTkzYzktNGYyOS1iZGU3LTg4ODMwZTJkYWU4MCJ9"
+  "next_page_token": "eyJ0cyI6IjIwMjYtMDgtMjVUMTg6NDI6MzEuMTIzWiIsImVpZCI6Ijk1ZTcyNTdmLTkzYzktNGYyOS1iZGU3LTg4ODMwZTJkYWU4MCIsImZyb20iOiIyMDI2LTA4LTAxVDAwOjAwOjAwWiIsInRvIjoiMjAyNi0wOC0yNVQyMzo1OTo1OVoifQ"
 }
 ```
 
@@ -115,12 +115,21 @@ $ curl --get "https://api.docker.com/v2/auditlogs/governance/$ORG" \
   --data-urlencode "to=2026-08-25T23:59:59Z" | jq .
 ```
 
-A `query` search requires both `from` and `to`. The search term must contain at
-least three characters, and the time range must not exceed 30 days.
+Every request covers a time range of 30 days or less. If you omit `to`, it
+defaults to the request time. If you omit `from`, it defaults to 30 days before
+`to`. The `from` timestamp must be earlier than `to`. To retrieve a longer
+history, make separate requests for time ranges of up to 30 days each.
+
+A `query` search uses the same time range defaults. After trimming whitespace,
+the search term must contain between 3 and 256 bytes. The `resource_id` and
+`agent` values must each be no more than 256 bytes after trimming whitespace.
 
 ## Retrieve the next page
 
-The API returns up to 25 events by default and accepts a `page_size` up to 500.
+The API returns up to 25 events by default and caps `page_size` at 100. A
+`page_size` of `0` uses the default; negative values are rejected. Values above
+100 return at most 100 events.
+
 When `next_page_token` isn't empty, pass it unchanged as `page_token`:
 
 ```console
@@ -130,19 +139,46 @@ $ curl --get "https://api.docker.com/v2/auditlogs/governance/$ORG" \
   --data-urlencode "page_token=$NEXT_PAGE_TOKEN" | jq .
 ```
 
-Keep the same filters while paging through one result set.
+Keep the same filters while paging through one result set. The cursor preserves
+the first request's time range, including default timestamps. You can omit
+`from` and `to` on later pages; if you supply them, they must match the cursor's
+time range. Stop when `next_page_token` is empty.
 
 ## Request limits
 
-The API applies all of the following request limits:
+All clients and tokens in an organization share its request quota. Each
+pagination request counts toward that quota. Additional organization and source
+IP limits apply at the API gateway.
 
-- 100 requests per minute for each organization
-- 600 requests per minute for each source IP address
-- 1000 requests per hour for each organization
+Requests that exceed a limit receive `429 Too Many Requests`. Application
+rate-limit responses include these fields:
 
-Requests that exceed a limit receive `429 Too Many Requests` with a JSON error
-response. The minute limit controls bursts, while the hourly limit controls
-sustained traffic.
+| Field | Meaning |
+| --- | --- |
+| `code` | `rate_limit_exceeded` |
+| `policy` | `audit_governance` |
+| `scope` | `organization` |
+| `limit` | Configured request quota |
+| `window_seconds` | Duration of the quota window in seconds |
+| `retry_after_seconds` | Seconds to wait before retrying, when the reset time is known |
+
+Use `code` and the structured fields to handle application rate limits rather
+than matching the human-readable `error` message. When the reset time is known,
+the response includes a `Retry-After` header with the same delay, rounded up to
+whole seconds. Rejected requests don't extend the quota window.
+
+Gateway rate-limit responses can have a different body and omit `Retry-After`.
+Wait for the delay in `Retry-After` when present. Otherwise, retry with
+exponential backoff rather than sending repeated requests immediately.
+
+## Handle query errors
+
+A `400 Bad Request` response indicates invalid parameters or a page token that
+doesn't match the supplied time range. Correct the request before retrying.
+
+For `503 Service Unavailable`, retry with exponential backoff. If the response
+reports a search timeout, use a narrower time range or a simpler query. A
+`408 Request Timeout` response indicates that the request deadline was exceeded.
 
 ## API reference
 
