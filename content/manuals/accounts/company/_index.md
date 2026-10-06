@@ -1,9 +1,11 @@
 ---
-title: Company overview
+title: Company accounts
 linkTitle: Company
 weight: 20
-description: Why a Docker company groups organizations, and what company owners administer.
-keywords: company, multiple organizations, manage companies, Docker Home, Docker Business settings
+description: Why a Docker company groups organizations, and what company
+  owners administer.
+keywords: company, multiple organizations, Docker Home, Docker Business,
+  company owners, SSO, SCIM
 grid:
   - title: Create a company
     description: Get started by learning how to create a company.
@@ -64,7 +66,8 @@ flowchart TB
 When you create a company, you can:
 
 - Administer every organization in the company from one place.
-- Configure SSO and SCIM once for every organization in the company.
+- Configure single sign-on (SSO) and System for Cross-domain Identity
+  Management (SCIM) once for every organization in the company.
 - Verify your domains once at the company instead of in each organization.
   When you turn on auto-provisioning for a domain, you choose which
   organization new users join.

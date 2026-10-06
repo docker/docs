@@ -1,11 +1,11 @@
 ---
 title: Organization accounts
 linkTitle: Organization
-description: How Docker organizations relate to members, teams, and repositories.
-keywords: admin, administration, company, organization, Docker Home, user
-  accounts, account management, organizations, manage teams, roles, members,
-  permissions, organization settings, organization account, individual account,
-  Docker ID, account types, owners, teams
+description: How Docker organizations relate to members, teams, and
+  repositories.
+keywords: admin, organization, Docker Home, user accounts, account management,
+  roles, members, permissions, organization settings, owners, teams,
+  repositories
 weight: 15
 grid:
   - title: Set up your organization
@@ -17,7 +17,8 @@ grid:
     icon: user-plus
     link: /accounts/organization/manage/
   - title: Activity logs
-    description: Review member activity across your organization and repositories.
+    description: Review member activity across your organization and
+      repositories.
     icon: clipboard-document-list
     link: /accounts/organization/activity-logs/
   - title: Insights
@@ -77,7 +78,7 @@ assign a role to each member, and that role sets organization-wide access.
 
 Teams group members so you can grant repository access to many people at
 once. Use a team when several members need the same repositories. Members
-don't have to join a team.
+can belong to the organization without joining a team.
 
 ## Next steps
 
