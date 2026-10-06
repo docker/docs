@@ -48,10 +48,7 @@ multiple organizations.
 | Company | Shared sign-in and administration for organizations that keep their own members, repositories, and billing | Docker Business subscribers |
 
 You always sign in with your individual account, then work in the
-organizations you own or belong to. When you administer more than one, a
-company is where you configure sign-in and administration for those
-organizations. See
-[Company overview](/manuals/accounts/company/_index.md).
+organizations you own or belong to.
 
 ## Next steps
 
