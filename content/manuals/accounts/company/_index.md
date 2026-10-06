@@ -2,7 +2,7 @@
 title: Company overview
 linkTitle: Company
 weight: 20
-description: Learn how to manage multiple organizations using companies, including managing users, owners, and security.
+description: How a Docker company groups organizations for centralized administration.
 keywords: company, multiple organizations, manage companies, Docker Home, Docker Business settings
 grid:
   - title: Create a company
@@ -32,67 +32,51 @@ aliases:
 
 {{< summary-bar feature_name="Company" >}}
 
-A company groups multiple Docker organizations for centralized configuration
-and provides a single point of visibility across those organizations.
-Organization owners with a Docker Business subscription can create a company
-and manage it through Docker Home.
+A company groups multiple Docker organizations so you can configure settings
+in one place and view those organizations together. Companies are available
+with a Docker Business subscription. Organization owners with Docker
+Business can create a company in [Docker Home](https://app.docker.com/).
 
 ## Company structure
 
-A company sits at the top of the hierarchy and groups multiple Docker
-organizations for centralized configuration. Companies are only available
-for Docker Business subscribers.
+Company owners manage the company. A company sits above its organizations.
+Each organization keeps its own members, teams, repositories, and billing.
+Shared configuration, such as SSO and SCIM, applies at the company.
 
-The following diagram shows how a company groups organizations, optional
-teams, and members.
+The following diagram shows that hierarchy.
 
 ```mermaid
 flowchart TB
-  co[Company owner] -.-> C[Company]
-  C --> O1[Organization]
-  C --> O2[Organization]
-  oo1[Organization owner] -.-> O1
-  oo2[Organization owner] -.-> O2
-  O1 --> T1["Team (optional)"]
-  O1 --> T2["Team (optional)"]
-  O2 --> T3["Team (optional)"]
-  O2 --> T4["Team (optional)"]
-  T1 --> M1[Member]
-  T1 --> M2[Member]
-  T2 --> M3[Member]
-  T2 --> M4[Member]
-  T3 --> M5[Member]
-  T3 --> M6[Member]
-  T4 --> M7[Member]
-  T4 --> M8[Member]
-  classDef optional stroke-dasharray: 5 5
-  class T1,T2,T3,T4 optional
+  co((Company owners)) -.-> manage@{ shape: text, label: "manage" }
+  manage -.-> C[Company]
+  C --- O1[Organization]
+  C --- O2[Organization]
 ```
 
-An organization sits below the company. You group teams and members there
-and assign access to repositories. Every Docker Team and Business
-subscriber has at least one organization.
+Docker Team and Business subscriptions use an organization as the workspace.
+To group more than one organization, [upgrade to Docker
+Business](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdmin) and
+create a company. Creating the company makes you a company owner. The
+organization you start from moves under the company, and you remain an
+organization owner there.
 
-For organization structure, including teams and members, see
+For members, teams, and repositories inside an organization, see
 [Organization accounts](/manuals/accounts/organization/_index.md).
-
-[Upgrading to a Docker Business plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdmin)
-grants you the company owner role so you can manage multiple organizations.
 
 ## Company roles
 
-A company includes one or more company owners. The creator of a company
-becomes both a company owner and an organization owner, and occupies a seat
-as organization owner. After creation, a company can have multiple owners,
-and each owner has visibility across the entire company. They can manage
-settings for every organization under it and have the same access rights as
-organization owners.
+Company owners have full administrative access across the organizations in
+the company. They can manage company settings and the same
+organization-management work as organization owners. Content and registry
+permissions, such as repository pull and push, don't apply to the company
+owner role. For the permission comparison, see
+[Core roles](/manuals/security/roles-and-permissions/core-roles.md).
 
-- A company can have up to ten unique company owners.
-- Company owners don't occupy a seat unless one of the following applies:
-  - They're added as a member of an organization under the company.
-  - SSO is enabled and the company owner signs in through SSO, which
-    automatically adds them as an organization member.
+You can assign 10 company owner roles without occupying a purchased seat.
+A company owner occupies a seat when they're also a member of an
+organization under the company. For those cases, see
+[Do company owners occupy a subscription
+seat?](/manuals/faqs/accounts.md#do-company-owners-occupy-a-subscription-seat).
 
 To add or remove company owners, see
 [Manage your company](/manuals/accounts/company/manage.md#company-owners).
