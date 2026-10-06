@@ -26,8 +26,9 @@ prebuilt native modules for Linux, so nothing compiles, but those binaries
 link against `libatomic1`. Docker-provided templates include it.
 
 The [`t3code` kit](https://github.com/docker/sbx-kits-contrib/tree/main/t3code)
-goes further: it installs the `t3` npm package when the sandbox is created, so
-the first connection starts a server that is already there. Pair it with any agent whose base image ships
+goes further: it installs the `t3` npm package when the sandbox is created,
+along with `libatomic1` if the base image lacks it, so the first connection
+starts a server that is already there. Pair it with any agent whose base image ships
 Node.js 18 or later, which all standard agent templates do:
 
 ```console
@@ -36,7 +37,8 @@ $ sbx run claude --kit docker.io/sbx/t3code-kit:latest
 
 A sandbox built from a custom
 [base image](/manuals/ai/sandboxes/customize/author/base-images.md) without
-`libatomic1` needs it installed before the first connection:
+`libatomic1` needs it installed before the first connection, unless you apply
+the kit above, which installs it for you:
 
 ```console
 $ sbx exec <sandbox> -- sudo apt-get update
