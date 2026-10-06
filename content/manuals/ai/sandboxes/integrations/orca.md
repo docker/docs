@@ -22,26 +22,20 @@ there while the editor and diff views stay on your host.
 - Orca installed.
 
 Orca's remote terminals need `node-pty`, which ships prebuilt binaries only for
-macOS and Windows. On a Linux sandbox it compiles from source, and the build
-needs a C++ compiler. Agent templates ship Node.js, `make`, and `python3`, but
-no compiler, so install one before you connect:
+macOS and Windows. On a Linux sandbox it compiles from source, and that build
+needs a C++ compiler. Docker-provided templates include one, so a sandbox
+created from a template is ready to connect.
+
+A sandbox built from a custom
+[base image](/manuals/ai/sandboxes/customize/author/base-images.md) without a
+compiler still connects, and files, git, and the editor all work, but remote
+terminals don't start. Add the toolchain to the image, or install it in the
+running sandbox until you can:
 
 ```console
 $ sbx exec <sandbox> -- sudo apt-get update
 $ sbx exec <sandbox> -- sudo DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential
 ```
-
-Verify the compiler is in place:
-
-```console
-$ sbx exec <sandbox> -- sh -lc 'command -v g++ && command -v make && command -v python3'
-```
-
-Without a compiler, Orca still connects and you keep files, git, and the
-editor, but remote terminals don't start. A manual install lasts only until the
-sandbox is recreated. For a setup that persists, recreate the sandbox with a
-[kit](../customize/kits-v2.md) or a custom
-[template](/manuals/ai/sandboxes/customize/author/base-images.md).
 
 ## Connect
 
