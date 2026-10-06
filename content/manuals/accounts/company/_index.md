@@ -43,7 +43,31 @@ A company sits at the top of the hierarchy and groups multiple Docker
 organizations for centralized configuration. Companies are only available
 for Docker Business subscribers.
 
-![Diagram showing Docker’s administration hierarchy with Company at the top, followed by Organizations, Teams, and Members](../organization/images/docker-admin-structure.webp)
+The following diagram shows how a company groups organizations, optional
+teams, and members.
+
+```mermaid
+flowchart TB
+  co[Company owner] -.-> C[Company]
+  C --> O1[Organization]
+  C --> O2[Organization]
+  oo1[Organization owner] -.-> O1
+  oo2[Organization owner] -.-> O2
+  O1 --> T1["Team (optional)"]
+  O1 --> T2["Team (optional)"]
+  O2 --> T3["Team (optional)"]
+  O2 --> T4["Team (optional)"]
+  T1 --> M1[Member]
+  T1 --> M2[Member]
+  T2 --> M3[Member]
+  T2 --> M4[Member]
+  T3 --> M5[Member]
+  T3 --> M6[Member]
+  T4 --> M7[Member]
+  T4 --> M8[Member]
+  classDef optional stroke-dasharray: 5 5
+  class T1,T2,T3,T4 optional
+```
 
 An organization sits below the company. You group teams and members there
 and assign access to repositories. Every Docker Team and Business

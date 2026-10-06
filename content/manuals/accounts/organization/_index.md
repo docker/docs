@@ -49,8 +49,18 @@ To create, convert, or onboard an organization, see
 
 The following diagram shows how organizations relate to teams and members.
 
-![Diagram showing how teams and members relate within a Docker
-organization](./images/org-structure.webp)
+```mermaid
+flowchart TB
+  oo[Organization owner] -.-> org[Organization]
+  org --> t1["Team (optional)"]
+  org --> t2["Team (optional)"]
+  t1 --> m1[Member]
+  t1 --> m2[Member]
+  t2 --> m3[Member]
+  t2 --> m4[Member]
+  classDef optional stroke-dasharray: 5 5
+  class t1,t2 optional
+```
 
 An organization includes owners, members, and optional teams. Organization
 owners have full administrator access to manage members, roles, and teams.
