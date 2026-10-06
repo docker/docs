@@ -39,24 +39,16 @@ A Docker organization is a shared workspace for members and repositories
 under one namespace. You manage it in [Docker Home](https://app.docker.com/).
 Organization owners administer membership, access, and security.
 
-For how individual, organization, and company accounts compare, see
-[Accounts](/manuals/accounts/_index.md). For individual accounts, see
-[Docker individual accounts](/manuals/accounts/individual/_index.md).
-To create, convert, or onboard an organization, see
-[Set up a Docker organization](/manuals/accounts/organization/setup/_index.md).
-
 ## Organization structure
 
-Owners manage the organization. The organization contains repositories and
-members. Teams are an optional way to group some of those members. The
-members beside the repositories belong to the organization without joining
-a team.
+Organization owners manage the organization, which contains
+members, repositories, and teams. While teams are optional, they're another way to group your members within your organization.
 
 The following diagram shows that hierarchy.
 
 ```mermaid
 flowchart TB
-  oo((Owners)) -.-> manage@{ shape: text, label: "manage" }
+  oo((Organization owners)) -.-> manage@{ shape: text, label: "manage" }
   manage -.-> org[Organization]
   org -.- t["Teams (optional)"]
   t -.- mt((Members))
@@ -72,7 +64,7 @@ flowchart TB
 Organization owners administer the organization. They invite members, assign
 roles, and manage teams and repositories.
 
-For each role and its permissions, see
+You can have multiple organization owners per organization. You can have different and its permissions, see
 [Roles and
 permissions](/manuals/security/roles-and-permissions/_index.md).
 
