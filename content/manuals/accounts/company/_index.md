@@ -37,13 +37,19 @@ Docker organizations.
 
 > [!TIP]
 >
-> Organization owners with a Docker Business
-> subscription can [create a company](./new-company.md) in
+> Organization owners with a Docker Business subscription can
+> [create a company](./new-company.md) in
 > [Docker Home](https://app.docker.com/).
 
-## Company roles
+## Company structure
 
-The following diagram shows the hierarchy between companies and organizations.
+A company sits above its organizations so company owners have full
+administrative access across every organization in the company. You can
+assign up to 10 company owners, and they don't occupy a purchased seat.
+Without a company, each organization's owners occupy a seat in that
+organization.
+
+The following diagram shows that hierarchy.
 
 ```mermaid
 flowchart TB
@@ -53,17 +59,17 @@ flowchart TB
   C --- O2[Organization]
 ```
 
- A company lets you:
+## What a company lets you do
 
-- Administer every organization in the company through up to 10 company
-  owners who don't occupy a purchased seat. Without a company, each
-  organization's owners occupy a seat in that organization.
-- Configure SSO and SCIM once for every organization in the company
+When you create a company, you can:
+
+- Administer every organization in the company from one place.
+- Configure SSO and SCIM once for every organization in the company.
 - Verify your domains once at the company instead of in each organization.
   When you turn on auto-provisioning for a domain, you choose which
-  organization new users join
+  organization new users join.
 - View members and invitations from every organization in one list, and
-  export that list as a CSV
+  export that list as a CSV.
 
 ## Next steps
 

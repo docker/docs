@@ -41,8 +41,9 @@ Organization owners administer membership, access, and security.
 
 ## Organization structure
 
-Organization owners manage the organization, which contains
-members, repositories, and teams. While teams are optional, they're another way to group your members within your organization.
+Organization owners manage the organization, which contains members,
+repositories, and teams. Teams are optional and group members within the
+organization.
 
 The following diagram shows that hierarchy.
 
@@ -63,15 +64,14 @@ flowchart TB
 Organization owners administer the organization. They invite members, assign
 roles, and manage teams and repositories.
 
-You can have multiple organization owners per organization. All owners
-share the same predefined permissions. For other permission sets, see
-[Roles and
-permissions](/manuals/security/roles-and-permissions/_index.md).
+An organization can have multiple owners. All owners share the same
+predefined permissions. For other roles and their permissions, see
+[Roles and permissions](/manuals/security/roles-and-permissions/_index.md).
 
 ### Members
 
-A member is a Docker user invited to the organization. Organization
-owners assign a role to each member and that role sets organization-wide access.
+A member is a Docker user invited to the organization. Organization owners
+assign a role to each member, and that role sets organization-wide access.
 
 ### Teams
 
