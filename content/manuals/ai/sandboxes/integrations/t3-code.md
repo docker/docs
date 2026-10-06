@@ -21,15 +21,13 @@ that tunnels back to the app.
 - SSH access set up. See [Editor and app integrations](_index.md#enable-ssh-access).
 - T3 Code installed.
 
-The first connection installs the T3 server in the sandbox. T3 depends on
-`node-pty`, which ships prebuilt binaries only for macOS and Windows, so on a
-Linux sandbox it compiles from source. Docker-provided templates include the
-toolchain that build needs.
+The first connection installs the T3 server in the sandbox. `t3` ships
+prebuilt native modules for Linux, so nothing compiles, but those binaries
+link against `libatomic1`. Docker-provided templates include it.
 
 The [`t3code` kit](https://github.com/docker/sbx-kits-contrib/tree/main/t3code)
 goes further: it installs the `t3` npm package when the sandbox is created, so
-the first connection starts a pre-installed server instead of building
-`node-pty` while you wait. Pair it with any agent whose base image ships
+the first connection starts a server that is already there. Pair it with any agent whose base image ships
 Node.js 18 or later, which all standard agent templates do:
 
 ```console
@@ -37,18 +35,18 @@ $ sbx run claude --kit docker.io/sbx/t3code-kit:latest
 ```
 
 A sandbox built from a custom
-[base image](/manuals/ai/sandboxes/customize/author/base-images.md) without a
-toolchain needs one installed before the first connection:
+[base image](/manuals/ai/sandboxes/customize/author/base-images.md) without
+`libatomic1` needs it installed before the first connection:
 
 ```console
 $ sbx exec <sandbox> -- sudo apt-get update
-$ sbx exec <sandbox> -- sudo DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential python3
+$ sbx exec <sandbox> -- sudo DEBIAN_FRONTEND=noninteractive apt-get install -y libatomic1
 ```
 
-Verify the toolchain is in place:
+Verify it's in place:
 
 ```console
-$ sbx exec <sandbox> -- sh -lc 'command -v g++ && command -v make && command -v python3'
+$ sbx exec <sandbox> -- sh -lc 'ldconfig -p | grep libatomic.so.1'
 ```
 
 ## Connect
@@ -87,29 +85,27 @@ and are separate from the failure: npm enforces engine requirements only
 when `engine-strict` is set, which is off by default, so this warning alone
 still lets the install proceed.
 
-The most common causes are a missing C++ toolchain and a full disk, and both
-produce this identical error. Get npm's actual output to tell them apart:
+The most common causes are a missing shared library and a full disk. Install
+`t3` by hand and run it to tell them apart:
 
 ```console
 $ sbx exec <sandbox> -- sh -lc \
   'rm -rf /tmp/t3probe && mkdir -p /tmp/t3probe && cd /tmp/t3probe \
-   && npm init -y >/dev/null && npm install t3@latest 2>&1 | tail -40'
+   && npm init -y >/dev/null && npm install t3@latest 2>&1 | tail -20 \
+   && ./node_modules/.bin/t3 --version'
 ```
 
-A missing compiler fails the native `node-pty` build with `Error 127` from
-`make`:
+A missing `libatomic1` lets the install finish and leaves a binary that can't
+start:
 
 ```text
-npm ERR! make: g++: No such file or directory
-npm ERR! make: *** [pty.target.mk:115: Release/obj.target/pty/src/unix/pty.o] Error 127
-npm ERR! gyp ERR! build error
-npm ERR! gyp ERR! stack Error: `make` failed with exit code: 2
+node_modules/@t3code/t3-linux-x64/t3: error while loading shared libraries:
+libatomic.so.1: cannot open shared object file: No such file or directory
 ```
 
-Install the build toolchain as described in [Prerequisites](#prerequisites).
+Install it as described in [Prerequisites](#prerequisites).
 
-A full disk fails with `ENOSPC`, and no gyp output appears at all because npm
-fails before the native build starts:
+A full disk fails the install itself with `ENOSPC`:
 
 ```text
 npm ERR! code ENOSPC
@@ -123,9 +119,9 @@ $ sbx exec <sandbox> -- df -h /
 ```
 
 A sandbox can have both problems at once. Fixing one still leaves the same
-top-level error, so check both the toolchain and disk space before
-concluding the sandbox is ready. Free up space or install the toolchain as
-needed, then reconnect.
+top-level error, so check the library and disk space before concluding the
+sandbox is ready. Free up space or install `libatomic1` as needed, then
+reconnect.
 
 ## Troubleshoot `turn/setPermissionMode failed`
 
