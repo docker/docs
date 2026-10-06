@@ -27,6 +27,10 @@ description: |-
     flag, and the consent block marks that set as derived rather than chosen. Pass
     --no-scope to suppress all scope fallbacks and request the server's default grant.
 
+    When using recorded defaults or resource scopes, sbx also requests offline_access
+    if the authorization server advertises it, allowing refresh tokens. An explicit
+    --scope on this command requests exactly that set, without adding offline_access.
+
     Scopes you choose are checked against both the authorization server's RFC 8414
     scopes_supported and the resource's RFC 9728 metadata. A scope present in neither
     prints a warning but is still requested. If neither document publishes scopes,

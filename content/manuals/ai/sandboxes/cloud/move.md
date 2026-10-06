@@ -72,10 +72,12 @@ appear in the cloud destination. When the source has a workspace, the CLI
 warns and asks for confirmation. The `--force` flag skips the prompt but
 doesn't include those files.
 
-The destination uses cloud network policy. Local network rules don't transfer.
-If the local source has HTTP method or path restrictions, the CLI warns and
-asks for confirmation because those restrictions won't apply in the cloud.
-`--force` skips the prompt but retains the warning.
+The destination uses cloud network policy and the network rules of the
+sandbox's kit, or of its built-in agent, as `sbx --cloud create` does. Network
+rules you added locally don't transfer. If the local source has HTTP method or
+path restrictions, the CLI warns and asks for confirmation because those
+restrictions won't apply in the cloud. `--force` skips the prompt but retains
+the warning.
 
 Published TCP sandbox ports are published on the cloud destination with cloud
 URLs. Ports that the cloud refuses are skipped with a warning. Host port

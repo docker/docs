@@ -124,6 +124,9 @@ options:
     - name: pull
       default_value: always
       usage: Image pull policy (always|missing|never)
+    - name: rm
+      default_value: "false"
+      usage: Remove the sandbox after the agent session exits
     - name: skills
       usage: |
         Shared skills store mode for the agent's skills directory (e.g. ~/.claude/skills): off, readonly (store linked in read-only, directory stays writable), or readwrite (store mounted over it, writes are shared). Default: readonly, or the configured skills.defaultMode setting. Can only be used when creating a new sandbox.
