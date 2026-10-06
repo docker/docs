@@ -45,11 +45,13 @@ multiple organizations.
 | --- | --- | --- |
 | Individual | A Docker ID with personal settings, Hub repositories, and sign-in methods | A person |
 | Organization | A shared workspace for members, teams, and repositories | Teams on Docker Team or Business |
-| Company | Multiple organizations under centralized administration | Docker Business subscribers |
+| Company | Shared sign-in and administration for organizations that keep their own members, repositories, and billing | Docker Business subscribers |
 
 You always sign in with your individual account, then work in the
-organizations you own or belong to. Those organizations sit under a
-company when you administer more than one.
+organizations you own or belong to. When you administer more than one, a
+company is where you configure sign-in and administration for those
+organizations. See
+[Company overview](/manuals/accounts/company/_index.md).
 
 ## Next steps
 
