@@ -41,7 +41,7 @@ For an existing sandbox, install the toolchain manually:
 
 ```console
 $ sbx exec <sandbox> -- sudo apt-get update
-$ sbx exec <sandbox> -- sudo DEBIAN_FRONTEND=noninteractive apt-get install -y g++ make python3
+$ sbx exec <sandbox> -- sudo DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential python3
 ```
 
 Verify the toolchain is in place:
