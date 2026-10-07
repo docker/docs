@@ -29,6 +29,10 @@ sandbox template used in the following section includes this command.
 
 ## Connect
 
+For a dedicated sandbox created on first connection, see
+[Set up desktop app connections](_index.md#set-up-desktop-app-connections).
+The following steps connect to a sandbox with a mounted host workspace.
+
 Create a named Codex sandbox for the current directory if you don't already
 have one:
 
