@@ -163,6 +163,25 @@ Changing the model recreates the sandbox container. The workspace and
 kit-owned volumes persist. Omit `--provider` to select a local model managed
 by `llmman`.
 
+## Choose a reasoning level
+
+Use `--variant` with `--model` to select a reasoning level supported by your
+model. For example, replace `<MODEL_NAME>` with an OpenAI model that supports
+`high` reasoning effort to start Codex at that level:
+
+```console
+$ sbx run --provider openai --model <MODEL_NAME> --variant high codex
+```
+
+Available values depend on the model and agent. Reasoning levels are `minimal`,
+`low`, `medium`, `high`, `xhigh`, and `max`. Some models support `none` to disable
+thinking or `thinking` to enable it. Omit `--variant` to use the default.
+
+Claude Code doesn't support `none` or `minimal`. For Claude Code and Codex,
+`--variant` requires an attached session and can't be combined with `--detach`.
+In OpenCode, it selects the initial variant, which you can change inside
+OpenCode.
+
 ## Use another provider for larger requests
 
 Pair a local model with another provider to handle requests that exceed the
