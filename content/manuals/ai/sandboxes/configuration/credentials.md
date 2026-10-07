@@ -372,7 +372,10 @@ interact with GitHub APIs on your behalf.
 
 ### SSH agent
 
-SSH agent forwarding is enabled by default. When `SSH_AUTH_SOCK` is set,
+SSH agent forwarding is enabled by default. V3 kits must also request
+[`ssh-agent@1`](/manuals/ai/sandboxes/customize/author/_index.md#request-host-git-identity-and-ssh-access)
+for the phase where they need it; without that grant, no agent socket is
+forwarded. When `SSH_AUTH_SOCK` is set,
 Docker Sandboxes uses the value from the client that creates, starts, or joins
 each sandbox. It forwards that agent into the sandbox and sets `SSH_AUTH_SOCK`
 there.

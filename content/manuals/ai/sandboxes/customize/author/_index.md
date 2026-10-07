@@ -188,6 +188,43 @@ Docker Sandboxes substitutes `${{ kit.env.NAME }}` once, when it creates the
 sandbox. `kit.env` reads the final container environment, independently of a
 hook's `env` list.
 
+## Request host Git identity and SSH access
+
+For local v3 kits, request the host's Git name and email with
+`com.docker.sandbox/git-identity@1`. Docker Sandboxes captures the identity
+when creating the sandbox and sets its global Git defaults.
+This shares commit attribution, not credentials.
+
+Request SSH-agent access separately with `com.docker.sandbox/ssh-agent@1`.
+For example, allow Git signatures and authentication to GitHub during runtime:
+
+```yaml
+capabilities:
+  - type: com.docker.sandbox/git-identity@1
+  - type: com.docker.sandbox/ssh-agent@1
+    config:
+      phase: runtime
+      unrestricted: false
+      sign: [git]
+      authenticate: [git@github.com]
+```
+
+The host must have Git `user.name` and `user.email` configured, and a running
+SSH agent with [forwarding enabled](/manuals/ai/sandboxes/configuration/credentials.md#ssh-agent).
+Required requests fail when these prerequisites are missing. Set
+`optional: true` on an entry if the kit can work without it.
+
+SSH access applies only to the requested phase: `install`, `runtime`, or
+both. Add `SSH_AUTH_SOCK` to an install hook's `env` list to use its grant.
+Without an SSH-agent grant, a v3 sandbox receives no forwarded agent socket.
+For bounded authentication, the server's host key must be in the host's
+`known_hosts` file, and the SSH client must support session binding, as
+OpenSSH 8.9 and later do. Private keys stay on the host. Network policy must
+also permit the Git server.
+
+For the available fields and restrictions, see the
+[SSH-agent capability](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/ssh-agent@1.md).
+
 ## Set workload compute requirements
 
 Set the workload's default CPU and memory allocation with the
