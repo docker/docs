@@ -424,7 +424,14 @@ the kit handles the wiring; you only provide the value.
 ### Set a custom secret
 
 Custom secrets are global by default. Pass `--sandbox` to scope one to a
-specific sandbox.
+specific sandbox. If a global secret and a sandbox-scoped secret use the same
+environment variable name, the sandbox receives the scoped secret's placeholder
+in that variable. Other sandboxes keep the global placeholder.
+
+The global secret's distinct placeholder remains available for proxy
+substitution in the sandbox that has the override. The override changes which
+placeholder is assigned to the environment variable; it doesn't disable the
+global secret.
 
 ```console
 $ sbx secret set-custom \
