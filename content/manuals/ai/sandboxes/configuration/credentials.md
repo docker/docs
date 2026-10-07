@@ -425,13 +425,8 @@ the kit handles the wiring; you only provide the value.
 
 Custom secrets are global by default. Pass `--sandbox` to scope one to a
 specific sandbox. If a global secret and a sandbox-scoped secret use the same
-environment variable name, the sandbox receives the scoped secret's placeholder
-in that variable. Other sandboxes keep the global placeholder.
-
-The global secret's distinct placeholder remains available for proxy
-substitution in the sandbox that has the override. The override changes which
-placeholder is assigned to the environment variable; it doesn't disable the
-global secret.
+environment variable name, that sandbox uses the scoped secret's placeholder
+in the variable. Other sandboxes use the global placeholder.
 
 ```console
 $ sbx secret set-custom \
@@ -451,6 +446,10 @@ Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
 `sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
 configured hosts and the placeholder appears anywhere in the request, the
 proxy replaces it with the real value. The agent never sees the real secret.
+
+If the two secrets have different placeholders, the global placeholder still
+works in the sandbox with the override. For requests to the global secret's
+configured hosts, the proxy replaces that placeholder with the global secret.
 
 ### Target multiple hosts
 
