@@ -113,6 +113,48 @@ Docker Engine uses the `overlayfs` containerd snapshotter by default.
 > image store, push them to a registry first, or use `docker save` to export
 > them.
 
+## Lazy pulling
+
+With lazy pulling, containers can start before their images are fully downloaded.
+Remote snapshotters fetch layer data from the registry as containers need it.
+
+Docker Engine enables lazy pulling by default when configured to use the `nydus`, `overlaybd`, `soci`, or `stargz` snapshotter.
+With other snapshotters, including the default `overlayfs`, Docker downloads all layer content before the container starts unless you explicitly enable lazy pulling.
+
+During a lazy pull, Docker skips downloading a layer if the snapshotter can mount it remotely or already has its snapshot.
+Docker downloads all other layers.
+For example, the stargz snapshotter can mount eStargz layers remotely, but plain gzip layers must be downloaded unless their snapshots already exist.
+
+### Saving and pushing images
+
+Lazily pulled images can run even if some layer content is missing from the containerd content store.
+However, missing content affects saving and pushing:
+
+- `docker save` can fail or produce an incomplete archive without reporting an error.
+- `docker push` cannot upload missing layers, but can reuse them if the target registry supports mounting them from the source repository.
+
+Running the image is not guaranteed to fill in the missing content in the containerd content store.
+For example, the stargz snapshotter keeps the data it fetches in its own cache.
+See [moby#53878](https://github.com/moby/moby/issues/53878) for details.
+
+### Configuration
+
+To disable lazy-pulling, set the `lazy-pull` feature to `false` in `/etc/docker/daemon.json`:
+
+```json
+{
+  "features": {
+    "containerd-snapshotter": true,
+    "lazy-pull": false
+  }
+}
+```
+
+Reload the daemon configuration to apply the setting to subsequent pulls.
+For images you already pulled lazily, pull them again to download the missing content.
+
+To enable lazy pulling for a snapshotter outside the default list, set `lazy-pull` to `true` instead.
+
 ## Experimental automatic migration
 
 Docker Engine includes an experimental feature that can automatically switch to
