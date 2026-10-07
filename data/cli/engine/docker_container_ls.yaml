@@ -205,7 +205,9 @@ examples: |-
 
     #### name
 
-    The `name` filter matches on all or part of a container's name.
+    The `name` filter matches container names using a Go regular expression
+    (RE2). Unanchored patterns act like a substring match; use anchors such as
+    `^name$` for an exact name.
 
     The following filter matches all containers with a name containing the `nostalgic_stallman` string.
 
@@ -229,7 +231,7 @@ examples: |-
 
     #### exited
 
-    The `exited` filter matches containers by exist status code. For example, to
+    The `exited` filter matches containers by exit status code. For example, to
     filter for containers that have exited successfully:
 
     ```console
