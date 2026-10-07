@@ -88,6 +88,27 @@ defaults instead, so lead with the flag to keep bypass mode:
 $ sbx run --name <sandbox-name> -- --dangerously-bypass-approvals-and-sandbox "fix the build"
 ```
 
+## MCP gateway configuration after an upgrade
+
+If Codex warns about ignored `type` or `headers` settings for the MCP gateway,
+the sandbox has an older gateway configuration. The built-in Codex kit uses
+`http_headers` to send the gateway its Authorization header, but existing
+sandboxes keep the setup script saved when they were created.
+
+Upgrading Docker Sandboxes, restarting the sandbox, or adding a kit doesn't
+replace that script. [Copy out files you want to keep](/manuals/ai/sandboxes/usage.md#copy-files-between-host-and-sandbox),
+then remove and recreate the sandbox:
+
+```console
+$ sbx rm <SANDBOX_NAME>
+$ sbx create --name <SANDBOX_NAME> codex ~/my-project
+$ sbx run --name <SANDBOX_NAME>
+```
+
+Use your existing workspace path in place of `~/my-project`, or omit it to
+create a mountless sandbox. Host workspace files remain on the host; files
+stored only inside the removed sandbox are deleted.
+
 ## Base image
 
 Template: `docker/sandbox-templates:codex`
