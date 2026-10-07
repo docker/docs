@@ -28,6 +28,19 @@ with suggested fixes. Use `--output json` to get machine-readable output, or
 `--output github-issue` to generate a Markdown snippet suitable for pasting
 into a GitHub issue.
 
+## Sandbox is not responding
+
+If `sbx ls` shows `running (not responding)`, Docker Sandboxes has detected
+that the sandbox isn't responding to commands. Stop and start that sandbox,
+then retry your command:
+
+```console
+$ sbx stop <SANDBOX_NAME>
+$ sbx start <SANDBOX_NAME>
+```
+
+Files saved in the sandbox are kept when you stop and start it.
+
 ## Restart the sandbox daemon
 
 If sandbox commands hang, fail to connect to the daemon, or keep returning
