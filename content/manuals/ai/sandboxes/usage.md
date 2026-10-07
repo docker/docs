@@ -476,6 +476,20 @@ new sandbox from it with the `-t` flag:
 $ sbx run -t my-template:v1 claude
 ```
 
+Snapshots saved with Docker Sandboxes v0.48.0 or later use the local image
+without contacting a registry by default. This applies to `sbx create` and
+`sbx run`. An explicit `--pull` value overrides that default.
+
+Snapshots saved with earlier versions lack the metadata that identifies them
+as local snapshots. To reuse one without a registry request, pass `--pull never`:
+
+```console
+$ sbx run --pull never -t my-template:v1 claude
+```
+
+Other template images default to `--pull always`, so keeping an image in the
+local store alone doesn't prevent registry access.
+
 ### List and remove templates
 
 List all saved templates:
