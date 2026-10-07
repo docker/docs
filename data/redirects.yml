@@ -260,6 +260,8 @@
 # Run Cloud links & Docker Cloud & Docker Offload
 "https://www.docker.com/products/docker-offload/":
   - /go/offload/
+"https://app.docker.com/billing/catalog":
+  - /go/get-offload/
 "/":
   - /go/run-cloud-eap/
 "/offload/":
