@@ -19,13 +19,20 @@ whether a backup or a migration succeeded after its container is gone. Because
 the daemon evaluates schedules itself, scheduled jobs keep running when no
 client is connected.
 
-To declare jobs in a Compose file, see
+Creating a job happens in Docker Compose; `docker job` then manages it. You declare jobs with the top-level [`jobs`](/reference/compose-file/jobs.md) element in a Compose file, and `docker compose up` registers them with the daemon. No `docker job` command creates a job.
+
+This page covers turning on the jobs extension and using the `docker job`
+commands to inspect and control jobs. To declare jobs in a Compose file, see
 [Run jobs in Compose](/manuals/compose/how-tos/jobs.md).
 
 > [!IMPORTANT]
 >
-> Jobs are experimental. The daemon ships the feature as a built-in extension
-> that is off by default, and its behavior might change between releases.
+> Jobs are experimental. The behavior of jobs
+> might change between releases.
+>
+> Docker Engine ships jobs as an extension that's off by default. Until you
+> [turn it on](#turn-on-the-jobs-extension), both Compose and `docker job`
+> fail with an error saying that the daemon doesn't support jobs.
 
 ## Turn on the jobs extension
 
@@ -89,8 +96,9 @@ the oldest finished runs first.
 
 ## Manage jobs with the CLI
 
-There is no `docker job` command to create a job. Declare jobs in a Compose file
-and let Docker Compose register them with the daemon.
+The `docker job` commands inspect and control jobs that already exist. To
+create one, declare it in a Compose file and run `docker compose up`. See
+[Run jobs in Compose](/manuals/compose/how-tos/jobs.md).
 
 | Command                  | Description                                                     |
 | ------------------------ | --------------------------------------------------------------- |
@@ -104,9 +112,9 @@ and let Docker Compose register them with the daemon.
 | `docker job pause JOB`   | Stop a job from firing on its schedule                          |
 | `docker job resume JOB`  | Let a paused job fire on its schedule again                     |
 | `docker job rm JOB`      | Remove a job. The `--runs` option sets what happens to its runs |
-| `docker job prune`       | Remove idle manual jobs                                         |
+| `docker job prune`       | Remove idle manual jobs. Leaves scheduled job.                  |
 
-`JOB` is the name or the ID of the job. Jobs that Docker Compose registers are
+`JOB` is the name or the ID of the job.  Jobs that Docker Compose registers are
 named `<PROJECT>.<JOB>`, for example `jobs-demo.backup`.
 
 ### List jobs and runs
@@ -123,6 +131,13 @@ jobs-demo.report  manual     idle   false   failed (2 minutes ago)      1     -
 The `NEXT FIRE` column shows `-` for manual jobs, for paused jobs, and while a
 run is in progress.
 
+The daemon writes the run record before it creates the container, so the
+record and its exit code survive both the removal of the container and a
+daemon restart.
+
+By default, the daemon keeps up to 10 000 run records for each job and removes
+the oldest finished runs first.
+
 List the runs of one job:
 
 ```console
@@ -131,30 +146,36 @@ ITERATION  STATE   EXIT  TRIGGER  STARTED        FINISHED       CONTAINER
 1          failed  1     manual   2 minutes ago  2 minutes ago  3f9a1c0d2b7e
 ```
 
-### Run a job and read its logs
+### Start a run on demand
 
-`docker job run` returns right away without streaming output. With
-`--reschedule`, the run replaces the next scheduled run. To follow a run to its
-end, use `docker job wait`, which exits with the exit code of the run. For jobs
-that Docker Compose registers, `docker compose run` also starts the services
-that the job depends on and streams the output:
+`docker job run` starts a run and returns immediately, printing the run ID. It doesn't stream output and doesn't wait for the run to finish. Pair it with `docker job wait`, which blocks until the run ends and exits with the run's exit code:
 
 ```console
 $ docker job run jobs-demo.report
 $ docker job wait jobs-demo.report
 ```
 
-To read the output, use `docker job logs`. With `--follow`, it keeps reading
-and switches to the next run when the current one ends:
+Reach for `docker job run` when the job name is all you have: from a machine without the project files, against a remote Engine, or from a script.
+
+If you're working in the Compose project, use `docker compose run` instead. It starts the services the job depends on, streams the output, and exits with the run's exit code, all in one command.
+
+By default a manual run of a scheduled job is an extra run and leaves the schedule untouched. Pass `--reschedule` to make it count as the next scheduled run instead.
+
+### Read the logs of a run
+
+`docker job logs` prints the output of the most recent run whose container still exists:
 
 ```console
 $ docker job logs jobs-demo.report
+```
+
+Add `--follow` to keep reading, and to switch to the next run when the current one ends:
+
+```console
 $ docker job logs --follow jobs-demo.report
 ```
 
-`docker job logs` prints the logs of the most recent run whose container still
-exists. For when Docker Compose keeps containers, see
-[Find out why a job failed](/manuals/compose/how-tos/jobs.md#find-out-why-a-job-failed).
+Logs live in the run's container, so they're gone once the container is removed, even though the run record survives. For which containers Docker Compose keeps and which it removes, see [Find out why a job failed](/manuals/compose/how-tos/jobs.md#find-out-why-a-job-failed).
 
 ### Find the containers of a job
 
