@@ -143,6 +143,33 @@ The guides here show how to use capabilities with Docker Sandboxes. For all
 descriptor fields and the rules for combining kits, see the
 [upstream v3 specification](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/SPEC-v3.md).
 
+### Group optional features
+
+Use a capability group when a feature needs several capabilities to work
+together. For example, a Git integration can request the host's Git identity
+and network access as one optional feature:
+
+```yaml
+capabilities:
+  - group:
+      name: Git integration
+      optional: true
+      capabilities:
+        - type: com.docker.sandbox/git-identity@1
+        - type: com.docker.sandbox/network-policy@1
+          config:
+            runtime:
+              allow: [github.com:443]
+```
+
+Docker Sandboxes selects the whole group only when it can provide every
+member. If the host has no configured Git name and email, this optional group
+is skipped, including its network rule. A group without `optional: true`
+is required; an unavailable member prevents sandbox creation.
+
+Put related lifecycle files and agent context in the same group when they
+should apply only with that feature. Selected groups retain all their entries.
+
 ## Choose when setup runs
 
 Install tools and copy static files during the image build so you can reuse
