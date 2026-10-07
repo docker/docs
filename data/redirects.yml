@@ -265,6 +265,7 @@
 "/":
   - /go/run-cloud-eap/
 "/offload/":
+  - /go/cloud-flag/
   # Onboarding - VDI beta
   - /go/docker-cloud/
 "/offload/about/":
