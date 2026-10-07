@@ -371,6 +371,8 @@ secret values remain outside the environment file.
 Use `sbx --cloud env` to manage a cloud sandbox from an environment file. For
 account and CLI requirements, see [Cloud sandboxes](../cloud/_index.md).
 
+#### Create a cloud environment
+
 Save this as `cloud.sbxenv.yaml`:
 
 ```yaml
@@ -386,42 +388,72 @@ sandboxOptions:
   memory: 4g
 ```
 
+Resource limits must match a [cloud size](../cloud/usage.md#choose-resources-and-platform).
 Review the plan, create the sandbox without attaching, and run a command:
 
 ```console
 $ sbx --cloud env plan ./cloud.sbxenv.yaml
-$ sbx --cloud env run --detached ./cloud.sbxenv.yaml
+$ sbx --cloud env create ./cloud.sbxenv.yaml
 $ sbx --cloud env exec ./cloud.sbxenv.yaml -- printenv PROJECT_NAME
 ```
 
+To attach to the agent, use `sbx --cloud env run ./cloud.sbxenv.yaml`.
+
+#### Adapt a local environment file
+
 Cloud environments support agents and kits, environment variables, CPU and
 memory limits, credentials for supported providers, and host lifecycle commands.
-Resource limits must match a [cloud size](../cloud/usage.md#choose-resources-and-platform).
 Lifecycle commands still run on your machine with your privileges.
 
-Remove `workspace`, `additionalWorkspaces`, clone options, `ports`, `registries`,
-and MCP server definitions from a local file before using it in cloud mode.
-Cloud environments also reject local sandbox options such as GPU, USB,
-display, shared skills, templates, and governance profiles. These checks run
-before host commands or provisioning. Transfer project files with
-[`sbx --cloud cp`](../cloud/usage.md#transfer-files) or clone a repository inside
-the sandbox.
+Before using a local file in cloud mode, remove:
+
+- `workspace`, `additionalWorkspaces`, and clone options
+- `ports`, `registries`, and MCP server definitions
+- Local sandbox options: GPU, USB, display, shared skills, templates, and
+  governance profiles
+
+Unsupported settings are rejected before host commands or provisioning run.
+Transfer project files with [`sbx --cloud cp`](../cloud/usage.md#transfer-files)
+or clone a repository inside the sandbox.
+
+#### Set expiration
+
+Set expiration when creating a cloud environment with `--ttl` and
+`--on-timeout`. For example, restart the sandbox when it expires:
+
+```console
+$ sbx --cloud env create --ttl 4h --on-timeout restart ./cloud.sbxenv.yaml
+```
+
+The `restart` action stops and immediately starts the sandbox. With this action,
+an explicit `--ttl` must be at least one hour. You can also choose `stop` or
+`delete`; see [Configure expiration](../cloud/usage.md#configure-expiration).
+
+These flags apply only when creating a cloud sandbox. `sbx --cloud env run`
+accepts them when creating a sandbox, but rejects them when attaching to an
+existing one. Local environment commands reject both flags.
+
+#### Configure credentials
 
 The plan shows inherited cloud credentials. Sandbox-scoped credentials override
-account defaults, and credentials declared in `secrets` override both. Declare
-literal values or use [`snapshot: true`](#secrets) to resolve a host command or
-vault reference once. Dynamic secret sources and custom credential providers
-aren't supported. Credential bindings require cloud support for kit credentials
-and explicit approval of the kit's injection domains.
+account defaults, and credentials declared in `secrets` override both.
 
-Changes to secrets and bindings require recreating the sandbox. Updated `env`
-values apply to subsequent sessions. Rejoining a running agent keeps that
-process's environment.
+Declare literal values or use [`snapshot: true`](#secrets) to resolve a host
+command or vault reference once. Dynamic secret sources and custom credential
+providers aren't supported. Credential bindings require cloud support for kit
+credentials and explicit approval of the kit's injection domains.
 
-Use the same machine, Docker identity, cloud endpoint, and ordered file paths
-for later commands. `sbx login` keeps environment state associated with your
-Docker identity. With `DOCKER_ACCESS_TOKEN`, changing the token starts a separate
-state scope.
+Changes to secrets and bindings require recreating the sandbox.
+
+#### Reuse the environment
+
+For later commands, use the same machine, cloud endpoint, and ordered file
+paths, and sign in with the same Docker account using `sbx login`.
+
+Updated `env` values apply to subsequent sessions. Rejoining a running agent
+keeps that process's environment.
+
+#### Remove the environment
 
 Remove the environment when you're finished:
 
@@ -431,8 +463,10 @@ $ sbx --cloud env rm ./cloud.sbxenv.yaml
 
 Removal deletes the sandbox and only the secrets provisioned by this
 environment. Inherited secrets remain. Global bindings remain unless you pass
-`--prune-bindings`. For unattended runs, use `--auto-approve` with `create` or
-`run`, and `--force` with `rm`.
+`--prune-bindings`. For unattended runs, use `--force` with `create`, `run`, or
+`rm` to approve the plan.
+
+#### Recover from interrupted creation
 
 If creation is interrupted, retry the same command and unchanged declaration
 within 23 hours. Unresolved requests prevent removal. Follow the recovery
