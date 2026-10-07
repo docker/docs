@@ -15,10 +15,10 @@ quarter and include only notable product changes.
 
 New features and enhancements released in the fourth quarter of 2026.
 
-- EU data residency: Docker can provision your DHI subscription in the EU
-  region. When your subscription is in the EU region, Docker stores your
-  mirrored and customized images in the EU. For more information, see [EU data
-  residency](../explore/eu-region.md).
+- EU data residency (early access): Docker can provision your DHI
+  subscription in the EU region. When your subscription is in the EU region,
+  Docker stores your mirrored and customized images in the EU. For more
+  information, see [EU data residency](../explore/eu-region.md).
 
 ## Q3 2026
 

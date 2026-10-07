@@ -35,7 +35,7 @@ For details on setting up and managing repositories, see [Get started with DHI S
 
 > [!TIP]
 >
-> Docker can provision your organization's DHI subscription in the EU region. To request it, contact your Docker account representative or <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_dhi_eu_region" class="link" rel="noopener">Docker sales</a>. For details, see [EU data residency for Docker Hardened Images](/manuals/dhi/explore/eu-region.md).
+> EU data residency is in early access. Docker can provision your organization's DHI subscription in the EU region. To request it, contact your Docker account representative or <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_dhi_eu_region" class="link" rel="noopener">Docker sales</a>. For details, see [EU data residency for Docker Hardened Images](/manuals/dhi/explore/eu-region.md).
 
 ## Billing cycle
 

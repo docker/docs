@@ -399,8 +399,10 @@ paths:
 
 > [!NOTE]
 >
-> The `paths` field isn't supported in the EU region. For details, see
-> [EU data residency](../explore/eu-region.md).
+> If your organization's DHI subscription is in the EU region, you can't add
+> files with `contents` in the `paths` field. File content isn't supported in
+> the EU region. For details, see [EU data
+> residency](../explore/eu-region.md).
 
 #### Configure user accounts
 

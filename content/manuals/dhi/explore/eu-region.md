@@ -6,6 +6,8 @@ keywords: docker hardened images, dhi, eu region, data residency, europe, mirror
 weight: 48
 ---
 
+{{< summary-bar feature_name="Docker Hardened Images EU data residency" >}}
+
 Docker can provision your organization's Docker Hardened Images (DHI)
 subscription in the EU region. When your subscription is in the EU region,
 Docker stores your mirrored and customized images in the EU.
@@ -55,15 +57,10 @@ Where that content is stored depends on the registry you use.
 ## Attestations in the EU region
 
 Docker stores attestations with the images in your Docker Hub repository. For
-mirrored repositories, Docker copies only the attestations that the DHI build
-produces, such as SBOM, provenance, and verification summary attestations.
-Docker doesn't copy VEX statements or vulnerability reports into your
-repositories.
-
-Attestations in the EU region aren't recorded in the public Rekor transparency
-log. When you verify them, skip the transparency log check. For details, see
-[Handle missing transparency log
-entries](../how-to/verify.md#handle-missing-transparency-log-entries).
+mirrored repositories, Docker copies only the attestations created when the
+image is built, such as SBOM, provenance, virus scan, secrets scan, test
+results, and verification summary attestations. Docker doesn't copy VEX
+statements or vulnerability reports into your repositories.
 
 ## Limitations in the EU region
 
@@ -74,7 +71,8 @@ with the following differences:
   that you write directly in a customization, such as configuration files or
   setup scripts. This doesn't affect files that come from OCI artifacts. You can
   still add packages, OCI artifacts, and symlinks.
-- Docker doesn't provide VEX statements for your customized images.
+- Docker doesn't provide VEX statements or vulnerability reports for your
+  mirrored repositories or customized images.
 - Docker doesn't turn on Docker Scout image analysis for your mirrored
   repositories or customized images in the EU region. If you turn on Docker
   Scout image analysis for a repository in the EU region, the data that Docker
