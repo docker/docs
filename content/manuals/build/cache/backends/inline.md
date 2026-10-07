@@ -16,6 +16,11 @@ output artifacts and your cache output. This means that if you're using a
 particularly complex build flow, or not exporting your images directly to a
 registry, then you may want to consider the [registry](./registry.md) cache.
 
+This cache storage backend works with the default `docker` driver only when the
+[containerd image store](/manuals/desktop/features/containerd.md) is enabled. If
+the containerd image store isn't enabled, use a different driver. See
+[Build drivers](/manuals/build/builders/drivers/_index.md) for more information.
+
 ## Synopsis
 
 ```console
