@@ -15,6 +15,7 @@ cname:
     - docker desktop disable
     - docker desktop enable
     - docker desktop version
+    - docker desktop auth
 clink:
     - docker_desktop_start.yaml
     - docker_desktop_stop.yaml
@@ -26,6 +27,7 @@ clink:
     - docker_desktop_disable.yaml
     - docker_desktop_enable.yaml
     - docker_desktop_version.yaml
+    - docker_desktop_auth.yaml
 deprecated: false
 hidden: false
 experimental: false
