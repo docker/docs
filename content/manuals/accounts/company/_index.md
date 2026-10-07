@@ -53,12 +53,24 @@ organization.
 
 The following diagram shows that hierarchy.
 
-```mermaid
+```mermaid {title="Company structure" caption="Company owners manage a company that contains one or more organizations."}
 flowchart TB
-  co((Company owners)) -.-> manage@{ shape: text, label: "manage" }
-  manage -.-> C[Company]
-  C --- O1[Organization]
-  C --- O2[Organization]
+  co(("Company owners")) -.->|"manage"| C
+  subgraph C["Company"]
+    direction TB
+    subgraph O1["Organization A"]
+      direction TB
+      m1(("Members"))
+      r1[("Repositories")]
+    end
+    subgraph O2["Organization B"]
+      direction TB
+      m2(("Members"))
+      r2[("Repositories")]
+    end
+    O1 ~~~ O2
+  end
+  style C fill:#3b82f622,stroke:#3b82f6
 ```
 
 ## What a company lets you do

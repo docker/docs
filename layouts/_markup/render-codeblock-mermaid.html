@@ -1,5 +1,34 @@
 {{- .Page.Store.Set "mermaid" true -}}
-<pre
-  class="mermaid not-prose my-4 flex justify-center bg-transparent"
-  data-pagefind-ignore
->{{- .Inner -}}</pre>
+{{- $title := .Attributes.title -}}
+{{- $caption := .Attributes.caption -}}
+{{- if or $title $caption -}}
+  {{- $id := printf "mermaid-%s-%d" .Page.File.UniqueID .Ordinal -}}
+  <figure
+    class="my-4"
+    {{- with $title }} aria-labelledby="{{ $id }}-title"{{ end }}
+    {{- with $caption }} aria-describedby="{{ $id }}-caption"{{ end }}
+  >
+    {{- with $title }}
+      <p id="{{ $id }}-title" class="mb-2 text-center font-medium">
+        {{ . }}
+      </p>
+    {{- end }}
+    <pre
+      class="mermaid not-prose flex justify-center bg-transparent"
+      data-pagefind-ignore
+    >{{- $.Inner -}}</pre>
+    {{- with $caption }}
+      <figcaption
+        id="{{ $id }}-caption"
+        class="text-center text-gray-200 dark:text-gray-500"
+      >
+        {{ . }}
+      </figcaption>
+    {{- end }}
+  </figure>
+{{- else -}}
+  <pre
+    class="mermaid not-prose my-4 flex justify-center bg-transparent"
+    data-pagefind-ignore
+  >{{- .Inner -}}</pre>
+{{- end -}}

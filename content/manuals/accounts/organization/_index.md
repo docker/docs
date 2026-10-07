@@ -48,16 +48,19 @@ organization.
 
 The following diagram shows that hierarchy.
 
-```mermaid
+```mermaid {title="Organization structure" caption="Organization owners manage an organization that contains members, repositories, and optional teams."}
 flowchart TB
-  oo((Organization owners)) -.-> manage@{ shape: text, label: "manage" }
-  manage -.-> org[Organization]
-  org --- m((Members))
-  org -.- t["Teams (optional)"]
-  t -.- mt((Members))
-  org --- r[(Repositories)]
-  classDef optional stroke-dasharray: 5 5
-  class t optional
+  oo(("Organization owners")) -.->|"manage"| org
+  subgraph org["Organization"]
+    direction TB
+    m(("Members"))
+    subgraph t["Teams (optional)"]
+      tm(("Members"))
+    end
+    r[("Repositories")]
+  end
+  style org fill:#3b82f622,stroke:#3b82f6
+  style t stroke-dasharray: 5 5
 ```
 
 ### Owners
