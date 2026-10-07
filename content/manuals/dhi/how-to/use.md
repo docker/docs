@@ -30,6 +30,10 @@ package manager, and may run as a non-root user by default.
 >   [organization access token
 >   (OAT)](../../security/access-tokens/organization-access-tokens.md) with your organization
 >   name as the username.
+> - OIDC: In GitHub Actions, use a Docker-issued access token from an
+>   [OIDC connection](/manuals/security/authentication/oidc-connections/create-manage.md)
+>   with your organization name as the username. The connection must grant
+>   pull access to the requested repository.
 >
 > Run `docker login dhi.io` to authenticate.
 
@@ -88,6 +92,16 @@ images](./search-evaluate.md).
 Docker Hardened Images work just like any other image in your CI/CD pipelines.
 You can reference them in Dockerfiles, pull them as part of a pipeline step, or
 run containers based on them during builds and tests.
+
+In GitHub Actions, you can use an OIDC connection to authenticate with
+short-lived Docker access tokens instead of storing a PAT or OAT. Repository
+grants restrict which images and attestations the workflow can read. For
+`dhi.io/<image>`, grant pull access to `dhi/<image>`. For a mirrored image,
+grant pull access to `<your-organization>/<repository>`. Your organization's
+DHI subscription still determines access to paid image variants.
+
+See [Authenticate with OIDC in GitHub Actions](./verify.md#authenticate-with-oidc-in-github-actions)
+for an example that reads an image manifest and its private attestations.
 
 Unlike typical container images, DHIs also include signed
 [attestations](../explore/security-concepts/attestations.md) such as SBOMs and provenance
