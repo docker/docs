@@ -45,13 +45,10 @@ Docker organizations.
 
 ## Company structure
 
-A company sits above its organizations so company owners have full
-administrative access across every organization in the company. You can
-assign up to 10 company owners, and they don't occupy a purchased seat.
-Without a company, each organization's owners occupy a seat in that
-organization.
+A company sits above its organizations, giving company owners full
+administrative access across every organization in the company.
 
-The following diagram shows that hierarchy.
+The following diagram shows that hierarchy:
 
 ```mermaid {title="Company structure" caption="Company owners manage a company that contains one or more organizations."}
 flowchart TB
@@ -80,11 +77,15 @@ When you create a company, you can:
 - Administer every organization in the company from one place.
 - Configure single sign-on (SSO) and System for Cross-domain Identity
   Management (SCIM) once for every organization in the company.
-- Verify your domains once at the company instead of in each organization.
-  When you turn on auto-provisioning for a domain, you choose which
-  organization new users join.
+- Verify your domains once at the company level instead of in each
+  organization. When you turn on auto-provisioning for a domain, you
+  choose which organization new users join.
 - View members and invitations from every organization in one list, and
   export that list as a CSV.
+
+You can assign up to 10 company owners. Company owners occupy a purchased
+seat only when they are also members of an organization. A company owner
+who is not an organization member does not occupy a seat.
 
 ## Next steps
 

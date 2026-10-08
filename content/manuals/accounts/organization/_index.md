@@ -37,16 +37,16 @@ aliases:
 ---
 
 A Docker organization is a shared workspace for members and repositories
-under one namespace. You manage it in [Docker Home](https://app.docker.com/).
+under one namespace.
 Organization owners administer membership, access, and security.
 
 ## Organization structure
 
-Organization owners manage the organization, which contains members,
-repositories, and teams. Teams are optional and group members within the
+Organization owners manage organizations that contain members,
+repositories, and teams, which group members within an
 organization.
 
-The following diagram shows that hierarchy.
+The following diagram shows that hierarchy:
 
 ```mermaid {title="Organization structure" caption="Organization owners manage an organization that contains members, repositories, and optional teams."}
 flowchart TB
@@ -79,9 +79,10 @@ assign a role to each member, and that role sets organization-wide access.
 
 ### Teams
 
-Teams group members so you can grant repository access to many people at
-once. Use a team when several members need the same repositories. Members
-can belong to the organization without joining a team.
+Teams are optional. They group members so you can grant repository
+access to many people at once. Use a team when several members need the
+same repositories. Members can belong to the organization without joining
+a team.
 
 ## Next steps
 
