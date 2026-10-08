@@ -202,8 +202,6 @@ RUN apt-get update
 
 ## Provenance attestation example
 
-<!-- TODO: add a link to the definitions page, imported from moby/buildkit -->
-
 The following example shows what a JSON representation of a provenance
 attestation with `mode=max` looks like:
 
