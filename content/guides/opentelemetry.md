@@ -5,7 +5,7 @@ keywords: OpenTelemetry, observability, tracing
 linktitle: Instrumenting JS Apps with OpenTelemetry
 summary: *desc
 params:
-  tags: [cicd]
+  tags: [observability]
   time: 10 minutes
 ---
 
