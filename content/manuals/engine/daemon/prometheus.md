@@ -150,6 +150,39 @@ traffic caused by the container you just ran.
 
 ![Prometheus report showing traffic](images/prometheus-graph_load.webp)
 
+## Embedded DNS server metrics
+
+The embedded DNS server that resolves names for containers on user-defined
+networks reports the following metrics. See
+[DNS resolution in containers](../network/dns.md) for how the server works.
+
+| Metric                                                  | Type      | Labels                     | Description                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------- | --------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `libnetwork_resolver_query_duration_seconds`            | histogram | `qtype`, `proto`, `outcome` | Time taken to answer each query. The `_count` series is the number of queries. `qtype` is `A`, `AAAA`, `MX`, `PTR`, `SRV`, or `other`. `proto` is `udp` or `tcp`. `outcome` is one of `local`, `forwarded`, `ndots`, `refused`, `upstream_failed`, `error`, or `write_error`. |
+| `libnetwork_resolver_upstream_request_duration_seconds` | histogram | `proto`, `result`           | Time taken by each request to an upstream DNS server. `result` is the DNS response code, such as `NOERROR`, `NXDOMAIN`, or `SERVFAIL`, or `dial_error`, `timeout`, or `error` when there was no response.                                                    |
+| `libnetwork_resolver_upstream_failovers_total`          | counter   | `reason`                   | Number of requests to an upstream server that failed and were retried with the next server. `reason` is `no_response`, `servfail`, or `refused`. A failure with no server left to try is reported as `outcome="upstream_failed"` on the query instead.        |
+| `libnetwork_resolver_upstream_in_flight_requests`       | gauge     |                            | Number of queries currently being forwarded to upstream servers. Each container's embedded DNS server forwards at most 1024 queries at a time.                                                                                                                 |
+
+The `outcome` label values mean:
+
+- `local`: answered from the container's networks, for example a container
+  name or alias.
+- `forwarded`: answered by an upstream server, with any response code.
+- `ndots`: a single-label name wasn't forwarded because `ndots` is set. See
+  [Search domains and ndots](../network/dns.md#search-domains-and-ndots).
+- `refused`: the limit on concurrent forwarded queries was reached.
+- `upstream_failed`: no upstream server answered.
+- `error`: the embedded DNS server failed to handle the query.
+- `write_error`: the response couldn't be sent to the container.
+
+For example, this query shows the rate of upstream failovers over the last
+five minutes, which is a useful signal that a primary DNS server is
+unhealthy even though containers are still getting answers:
+
+```text
+sum by (reason) (rate(libnetwork_resolver_upstream_failovers_total[5m]))
+```
+
 ## Next steps
 
 The example provided here shows how to run Prometheus as a container on your
