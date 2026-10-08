@@ -33,6 +33,7 @@ The following table describes the available parameters:
 | Parameter           | Type                                   | Default | Description                                                                                                                           |
 | ------------------- | -------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `name`              | String                                 |         | Specify image name(s)                                                                                                                 |
+| `context`           | String                                 |         | Docker context to load the image into (`type=docker`). Empty uses the current CLI context.                                            |
 | `dest`              | String                                 |         | Path                                                                                                                                  |
 | `tar`               | `true`,`false`                         | `true`  | Bundle the output into a tarball layout                                                                                               |
 | `compression`       | `uncompressed`,`gzip`,`estargz`,`zstd` | `gzip`  | Compression type, see [compression][1]                                                                                                |
