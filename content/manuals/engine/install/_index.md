@@ -67,6 +67,12 @@ Click on a platform's link to view the relevant installation procedure.
 | [Ubuntu](ubuntu.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |  ✅   |
 | [Binaries](binaries.md)                        |       ✅       |       ✅        |      ✅      |         |       |
 
+> [!WARNING]
+>
+> The ⚠️ for Raspberry Pi OS (32-bit) means support is **deprecated**, not
+> partially supported. Docker Engine v28 is the last major version with `armhf`
+> packages. See [Install Docker Engine on Raspberry Pi OS (32-bit)](raspberry-pi-os.md).
+
 ### Other Linux distributions
 
 > [!NOTE]
