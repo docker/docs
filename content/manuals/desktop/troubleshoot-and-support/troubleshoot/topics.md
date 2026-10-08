@@ -229,6 +229,27 @@ To avoid this issue in the future:
 - In managed environments, use PKG installations over DMG drag-and-drop
 - Keep installer volumes mounted until installation is complete
 
+### Containers can't reach devices on my local network
+
+Containers can reach the internet, but not other devices on your local network
+(LAN), such as a NAS, a printer, or another computer at a `192.168.x.x`
+address. The Mac itself can reach them.
+
+#### Cause
+
+Docker Desktop doesn't have the macOS **Local Network** permission. macOS then
+blocks container traffic to devices on your local network, including your
+router, while traffic to the internet still works.
+
+#### Solution
+
+To give Docker Desktop the Local Network permission:
+
+1. Open **System Settings** > **Privacy & Security** > **Local Network**.
+2. Turn on **Docker**.
+
+The change applies immediately, without restarting Docker Desktop.
+
 ## Topics for Windows
 
 ### Docker Desktop fails to start when anti-virus software is installed
