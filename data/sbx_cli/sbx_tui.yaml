@@ -15,5 +15,6 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: '  sbx tui'
 see_also:
     - sbx - Manage AI coding agent sandboxes.

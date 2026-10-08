@@ -21,5 +21,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx kit builder history rm 3b6l9x
+
+      # Skip the confirmation prompt
+      sbx kit builder history rm --yes 3b6l9x
 see_also:
-    - sbx kit builder history - Inspect kit build history in the builder sandbox
+    - sbx kit builder history - Show kit build history in the builder sandbox

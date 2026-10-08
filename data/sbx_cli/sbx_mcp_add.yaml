@@ -215,7 +215,7 @@ description: |-
       process runs with your host user's full permissions — it can read
       your filesystem, access your network, and call any API your user
       can. Do not use --command with untrusted executables.
-usage: sbx mcp add <name> (--url <url> | --command <cmd>) [flags]
+usage: sbx mcp add NAME (--url URL | --command COMMAND) [flags]
 options:
     - name: args
       default_value: '[]'

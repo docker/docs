@@ -1,5 +1,5 @@
 name: sbx ttl
-synopsis: Inspect or extend a cloud sandbox's TTL
+synopsis: Show or extend a cloud sandbox's TTL
 description: |-
     Inspect or extend a cloud sandbox's TTL.
 
@@ -15,15 +15,17 @@ description: |-
     SANDBOX may be given by ID (sbx_*) or name, as shown by "sbx --cloud ls".
 
     Cloud-only: local sandboxes are not TTL-managed.
-usage: sbx ttl [+DURATION] SANDBOX
+usage: sbx ttl [+DURATION] SANDBOX [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for ttl
     - name: json
       default_value: "false"
-      usage: Output as JSON
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -33,5 +35,11 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      # Show the remaining TTL
+      sbx --cloud ttl my-sandbox
+
+      # Extend it by two hours
+      sbx --cloud ttl +2h my-sandbox
 see_also:
     - sbx - Manage AI coding agent sandboxes.

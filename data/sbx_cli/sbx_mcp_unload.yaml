@@ -1,0 +1,32 @@
+name: sbx mcp unload
+synopsis: Unload an MCP server from a running sandbox
+description: |-
+    Detach an MCP server from a running sandbox's gateway.
+    Connected agents stop seeing the server's tools immediately via the standard
+    MCP tools/list_changed notification — no agent restart required. The server
+    is not restored when the sandbox is restarted.
+
+    The server stays registered in the local MCP store; load it again with
+    'sbx mcp load', or remove the registration with 'sbx mcp rm'.
+usage: sbx mcp unload NAME --sandbox SANDBOX [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for unload
+    - name: sandbox
+      usage: Target sandbox name (required)
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Unload the 'notion' server from the running sandbox 'my-sbx'.
+      sbx mcp unload notion --sandbox my-sbx
+see_also:
+    - sbx mcp - Manage MCP servers

@@ -16,7 +16,7 @@ description: |-
 
     Most changes take effect within about five seconds. If a daemon restart is
     required, this command tells you to run 'sbx daemon restart'.
-usage: sbx settings set <key> <value> [flags]
+usage: sbx settings set KEY VALUE [flags]
 options:
     - name: help
       shorthand: h

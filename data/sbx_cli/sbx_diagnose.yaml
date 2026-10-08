@@ -1,17 +1,16 @@
 name: sbx diagnose
 synopsis: Diagnose common issues with your sbx installation
-usage: sbx diagnose
+usage: sbx diagnose [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json, yaml or github-issue'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for diagnose
     - name: json
       default_value: "false"
-      usage: Output in JSON format (alias for --output json)
-    - name: output
-      shorthand: o
-      usage: 'Output format: "json" or "github-issue"'
+      usage: Output in JSON format
     - name: upload
       default_value: "false"
       usage: Upload diagnostics to Docker support
@@ -24,5 +23,13 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx diagnose
+
+      # Print the report as JSON
+      sbx diagnose --format json
+
+      # Upload the report to Docker support
+      sbx diagnose --upload
 see_also:
     - sbx - Manage AI coding agent sandboxes.

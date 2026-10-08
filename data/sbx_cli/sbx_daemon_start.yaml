@@ -22,5 +22,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx daemon start
+
+      # Run in the background
+      sbx daemon start --detach
 see_also:
     - sbx daemon - Manage sandboxd daemon

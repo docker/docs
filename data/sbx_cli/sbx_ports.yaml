@@ -35,13 +35,15 @@ description: |-
     for each exposed port.
 usage: sbx ports SANDBOX [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for ports
     - name: json
       default_value: "false"
-      usage: Output in JSON format (for port listing)
+      usage: Output in JSON format
     - name: publish
       default_value: '[]'
       usage: |
