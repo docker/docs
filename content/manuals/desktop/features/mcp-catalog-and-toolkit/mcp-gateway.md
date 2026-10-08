@@ -26,11 +26,6 @@ If you use Docker Desktop with MCP Toolkit enabled, the Gateway runs
 automatically in the background. You don't need to start or configure it
 manually. This documentation is for users who want to understand how the Gateway works or run it directly for advanced use cases.
 
-> [!TIP]
-> E2B sandboxes now include direct access to the Docker MCP Catalog, giving developers
-> access to over 200 tools and services to seamlessly build and run AI agents. For
-> more information, see [E2B Sandboxes](e2b-sandboxes.md).
-
 ## How it works
 
 MCP Gateway runs MCP servers in isolated Docker containers with restricted

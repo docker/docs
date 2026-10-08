@@ -404,6 +404,21 @@
  # Desktop DMR
 "/ai/model-runner/":
   - /go/model-runner/
+  - /guides/genai-pdf-bot/
+  - /guides/use-case/genai-pdf-bot/
+  - /guides/genai-pdf-bot/containerize/
+  - /guides/genai-pdf-bot/develop/
+  - /guides/rag-ollama/
+  - /guides/use-case/rag-ollama/
+  - /guides/rag-ollama/containerize/
+  - /guides/rag-ollama/develop/
+"/ai/sandboxes/":
+  - /guides/github-sonarqube-sandbox/
+  - /guides/github-sonarqube-sandbox/customize/
+  - /guides/github-sonarqube-sandbox/troubleshoot/
+  - /guides/github-sonarqube-sandbox/workflow/
+  - /ai/mcp-catalog-and-toolkit/e2b-sandboxes/
+  - /ai/mcp-catalog-and-toolkit/sandboxes/
 
 # Docker Desktop - volumes cloud backup
 "/desktop/use-desktop/volumes/#export-a-volume":

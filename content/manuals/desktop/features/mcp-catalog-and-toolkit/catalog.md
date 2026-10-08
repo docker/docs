@@ -19,11 +19,6 @@ to your [profiles](/manuals/desktop/features/mcp-catalog-and-toolkit/profiles.md
 them from the catalog. Each server runs as an isolated container, making it
 portable and consistent across different environments.
 
-> [!NOTE]
-> E2B sandboxes now include direct access to the Docker MCP Catalog, giving
-> developers access to over 200 tools and services to seamlessly build and run
-> AI agents. For more information, see [E2B Sandboxes](e2b-sandboxes.md).
-
 ## What's in the catalog
 
 The Docker MCP Catalog includes:
