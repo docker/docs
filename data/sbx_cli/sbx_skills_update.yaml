@@ -7,7 +7,7 @@ description: |-
     With no names, every skill added from a repository is updated. Specify one or
     more names to update only those skills. Skills installed with 'sbx skills
     import' must be added from a repository before they can be updated.
-usage: sbx skills update [skill]... [flags]
+usage: sbx skills update [SKILL...] [flags]
 options:
     - name: help
       shorthand: h
@@ -22,5 +22,11 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      # Update every skill added from a repository
+      sbx skills update
+
+      # Update one skill
+      sbx skills update my-skill
 see_also:
     - sbx skills - (Experimental) Manage skills available in sandboxes

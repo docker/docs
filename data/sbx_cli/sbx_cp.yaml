@@ -9,7 +9,7 @@ description: |-
     When copying a directory, the directory itself is placed at the destination.
     If the destination path does not exist it is created; if it already exists
     as a directory, the source is placed inside it.
-usage: sbx cp [flags] SRC DST
+usage: sbx cp SRC DST [flags]
 options:
     - name: follow-link
       shorthand: L

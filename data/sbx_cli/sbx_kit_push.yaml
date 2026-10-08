@@ -59,5 +59,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx kit push ./my-kit ghcr.io/myorg/my-kit:1.0
+
+      # Sign the pushed kit (keyless)
+      sbx kit push ./my-kit ghcr.io/myorg/my-kit:1.0 --sign
 see_also:
     - sbx kit - (Experimental) Manage kit artifacts

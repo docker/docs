@@ -4,6 +4,8 @@ experimental: true
 description: List skills available to agents in Docker Sandboxes.
 usage: sbx skills ls [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
@@ -24,5 +26,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx skills ls
+
+      # Machine-readable output
+      sbx skills ls --format json
 see_also:
     - sbx skills - (Experimental) Manage skills available in sandboxes

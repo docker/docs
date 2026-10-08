@@ -25,3 +25,4 @@ see_also:
     - sbx mcp load - Load an already-registered MCP server into a running sandbox
     - sbx mcp ls - List MCP servers
     - sbx mcp rm - Remove a registered MCP server
+    - sbx mcp unload - Unload an MCP server from a running sandbox

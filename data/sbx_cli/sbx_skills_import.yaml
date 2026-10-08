@@ -48,5 +48,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx skills import
+
+      # Preview without changing anything
+      sbx skills import --dry-run
 see_also:
     - sbx skills - (Experimental) Manage skills available in sandboxes

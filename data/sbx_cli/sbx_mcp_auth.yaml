@@ -48,7 +48,7 @@ description: |-
 
     Scope values may be URN-shaped (urn:ietf:params:oauth:scope:mail) or URL-shaped
     (https://www.fastmail.com/dev/mcp); neither needs quoting.
-usage: sbx mcp auth [server-name] [flags]
+usage: sbx mcp auth [SERVER] [flags]
 options:
     - name: all
       default_value: "false"
@@ -62,7 +62,7 @@ options:
       usage: help for auth
     - name: json
       default_value: "false"
-      usage: Output in JSON format (alias for --format json)
+      usage: Output in JSON format
     - name: no-scope
       default_value: "false"
       usage: |

@@ -1,4 +1,4 @@
-name: sbx settings list
+name: sbx settings ls
 synopsis: List settings
 description: |-
     List known settings with their evaluated value, type, source, and description.
@@ -6,17 +6,19 @@ description: |-
     The SOURCE column shows where the value came from (default, envvar, or
     override). RESTART identifies settings that require 'sbx daemon restart' for
     existing daemon-side consumers. Long values and descriptions are truncated to
-    keep the table readable; use --no-trunc or --json for complete output. Use
-    'sbx settings get <key>' to print one value in full.
-usage: sbx settings list [flags]
+    keep the table readable; use --no-trunc or --format json for complete output. Use
+    'sbx settings get KEY' to print one value in full.
+usage: sbx settings ls [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
-      usage: help for list
+      usage: help for ls
     - name: json
       default_value: "false"
-      usage: Print complete setting records as JSON
+      usage: Output in JSON format
     - name: no-trunc
       default_value: "false"
       usage: Show full values and descriptions, one setting per block
@@ -31,9 +33,9 @@ inherited_options:
       usage: Enable debug logging
 example: |4-
       # List settings as a table
-      sbx settings list
+      sbx settings ls
 
       # List settings as JSON
-      sbx settings list --json
+      sbx settings ls --format json
 see_also:
     - sbx settings - Manage Docker Sandboxes settings

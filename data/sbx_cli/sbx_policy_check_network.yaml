@@ -9,6 +9,8 @@ description: |-
     and port: this command evaluates network authorization, not HTTP method or path.
 usage: sbx policy check network [--sandbox SANDBOX] TARGET [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"

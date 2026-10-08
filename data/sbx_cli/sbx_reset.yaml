@@ -46,5 +46,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx reset
+
+      # Skip the confirmation prompt and keep stored secrets
+      sbx reset --force --preserve-secrets
 see_also:
     - sbx - Manage AI coding agent sandboxes.

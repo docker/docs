@@ -6,7 +6,7 @@ description: |-
 
     Running agents may be reading installed skills. Removal cannot be undone and
     requires confirmation; use --force to skip confirmation in scripts.
-usage: sbx skills rm <skill>... [flags]
+usage: sbx skills rm SKILL... [flags]
 options:
     - name: force
       shorthand: f
@@ -25,5 +25,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx skills rm my-skill
+
+      # Skip the confirmation prompt
+      sbx skills rm --force my-skill
 see_also:
     - sbx skills - (Experimental) Manage skills available in sandboxes

@@ -16,5 +16,6 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: '  sbx kit builder history ls'
 see_also:
-    - sbx kit builder history - Inspect kit build history in the builder sandbox
+    - sbx kit builder history - Show kit build history in the builder sandbox
