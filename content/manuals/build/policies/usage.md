@@ -6,9 +6,9 @@ keywords: build policies, policy eval, docker buildx, policy development, debugg
 weight: 20
 ---
 
-Build policies validate inputs before builds execute. This guide covers how to
-develop policies iteratively and apply them to real builds with `docker buildx
-build` and `docker buildx bake`.
+Build policies validate build inputs and can check HTTP(S) requests during build
+steps. This guide covers how to develop policies iteratively and apply them to
+builds with `docker buildx build` and `docker buildx bake`.
 
 ## Prerequisites
 
@@ -222,6 +222,82 @@ Use only your specified policy:
 ```console
 $ docker buildx build --policy reset=true,filename=strict.rego .
 ```
+
+## Block URLs in build steps
+
+With Buildx 0.35.0 or later and BuildKit 0.31.0 or later, you can apply HTTP
+policy rules to requests made by `RUN` instructions, such as package downloads
+or requests from `curl` and `wget`.
+
+To opt in, add `"caps": {"exec.proxy": true}` to the policy's `decision`
+object. BuildKit routes network traffic from build steps through its HTTP(S)
+proxy and evaluates requests using the same `input.http` fields as `ADD`
+downloads. By default, HTTP policy rules only check `ADD` downloads.
+
+For example, save this policy as `Dockerfile.rego` alongside your Dockerfile
+to allow Debian package downloads and block requests to other hosts:
+
+```rego {title="Dockerfile.rego"}
+package docker
+
+default allow := false
+
+allow if input.local
+
+allow if {
+    input.image.repo == "debian"
+}
+
+allow if {
+    input.http.host == "deb.debian.org"
+}
+
+decision := {
+    "allow": allow,
+    "caps": {"exec.proxy": true},
+}
+```
+
+Test it with this Dockerfile:
+
+```dockerfile {title="Dockerfile"}
+FROM debian:trixie
+RUN apt-get update && apt-get install -y curl
+RUN curl -f http://example.com/
+```
+
+```console
+$ docker buildx build --no-cache --progress=plain .
+```
+
+The package installation succeeds because its requests go to
+`deb.debian.org`. The `curl` request to `example.com` is denied, and `curl -f`
+returns an error for the proxy's HTTP 403 response, causing the build to fail.
+Use `--no-cache` when testing so the build runs the steps and makes the requests
+again.
+
+To restrict individual URLs, match `input.http.url` or combine
+`input.http.host` with `input.http.path`. See the [HTTP input
+reference](./inputs.md#http-inputs) for the available fields.
+
+Proxy networking applies to Linux build steps. Applications must use the
+injected proxy environment variables and, for HTTPS, trust the certificate
+BuildKit adds to the system trust store. Traffic that bypasses the proxy,
+including raw TCP connections, is blocked.
+
+### Enable the proxy for a CI builder
+
+To enable proxy networking for all builds on a dedicated CI builder, pass
+`--proxy-network` to the BuildKit daemon when creating the builder:
+
+```console
+$ docker buildx create --name ci-policy --driver docker-container \
+    --buildkitd-flags '--proxy-network' --use --bootstrap
+```
+
+This enables the proxy without requiring `exec.proxy` in each policy file.
+Load a policy to define which URLs are allowed. Enabling the proxy alone does
+not define an allowlist.
 
 ## Using policies with bake
 
