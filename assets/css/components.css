@@ -127,10 +127,14 @@
     @apply inline-block rounded-t-sm px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-900;
     @apply dark:text-gray-200;
   }
+}
 
-  /* Mermaid blocks hold the diagram source until mermaid.js replaces it with
-     an SVG. Hide the source while that happens, unless rendering failed. */
-  pre.mermaid:not(:has(svg)):not([data-error]) {
-    display: none;
-  }
+/* Mermaid blocks hold the diagram source until mermaid.js replaces it with
+   an SVG. Hide the source while that happens, unless rendering failed.
+
+   Kept outside @layer components on purpose: the element also carries the
+   `flex` utility, and Tailwind's utilities layer outranks components
+   regardless of selector specificity. An unlayered rule wins over both. */
+pre.mermaid:not(:has(svg)):not([data-error]) {
+  display: none;
 }
