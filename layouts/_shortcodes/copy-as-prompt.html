@@ -22,19 +22,41 @@
   >
     <button
       type="button"
-      class="button inline-flex items-center gap-2"
+      :aria-label="status === 'copied' ? 'Copied!' : status === 'copying' ? 'Copying…' : 'Copy as prompt'"
+      class="button inline-flex cursor-pointer items-center gap-2 transition duration-150 hover:shadow-sm disabled:cursor-default motion-safe:hover:-translate-y-0.5 motion-safe:active:scale-95 motion-reduce:transition-none"
+      :class="status === 'copied' ? 'bg-green-800 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-800' : ''"
       :disabled="status === 'copying' || status === 'copied'"
       @click="copy()"
     >
-      <span class="icon-svg icon-sm" aria-hidden="true">
-        {{ partialCached "icon" "document-duplicate" "document-duplicate" }}
+      <span class="grid" aria-hidden="true">
+        <span
+          class="icon-svg icon-sm col-start-1 row-start-1 transition duration-150 motion-reduce:scale-100 motion-reduce:rotate-0 motion-reduce:transition-none"
+          :class="status === 'copied' ? 'scale-75 -rotate-12 opacity-0' : 'scale-100 rotate-0 opacity-100'"
+        >
+          {{ partialCached "icon" "document-duplicate" "document-duplicate" }}
+        </span>
+        <span
+          class="icon-svg icon-sm col-start-1 row-start-1 transition duration-150 motion-reduce:scale-100 motion-reduce:rotate-0 motion-reduce:transition-none"
+          :class="status === 'copied' ? 'scale-100 rotate-0 opacity-100' : 'scale-75 rotate-12 opacity-0'"
+        >
+          {{ partialCached "icon" "check-circle" "check-circle" }}
+        </span>
       </span>
-      <span>Copy as prompt</span>
+      <span class="grid text-center">
+        <span class="invisible col-start-1 row-start-1" aria-hidden="true"
+          >Copy as prompt</span
+        >
+        <span
+          role="status"
+          class="col-start-1 row-start-1"
+          x-text="status === 'copied' ? 'Copied!' : status === 'copying' ? 'Copying…' : 'Copy as prompt'"
+        ></span>
+      </span>
     </button>
     <span
       role="status"
       class="text-sm"
-      x-text="status === 'copied' ? 'Copied!' : status === 'failed' ? 'Could not copy. Select and copy the section text instead.' : ''"
+      x-text="status === 'failed' ? 'Could not copy. Select and copy the section text instead.' : ''"
     ></span>
   </div>
   {{ .Page.RenderString (dict "display" "block") .Inner }}
