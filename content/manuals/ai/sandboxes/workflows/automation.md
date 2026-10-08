@@ -96,7 +96,7 @@ that use the following flags:
 | --- | --- | --- |
 | `sbx run`, `sbx env run` | `--detached` | `--detach` or `-d` |
 | `sbx logout` | `--yes`, `-y` | `--force` or `-f` |
-| `sbx env plan`, `sbx env create`, `sbx env run` | `--auto-approve`, `-y` | `--force` or `-f` |
+| `sbx env create`, `sbx env run` | `--auto-approve`, `-y` | `--force` or `-f` |
 | `sbx create` | `--quiet`, `-q` | `--no-progress` suppresses progress but still prints the creation summary |
 | `sbx template save` | `-d` for a description | `--description` |
 | `sbx diagnose` | `--output`, `-o` | `--format table`, `json`, `yaml`, or `github-issue` |
