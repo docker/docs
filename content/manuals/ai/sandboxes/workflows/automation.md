@@ -70,12 +70,12 @@ server even with `--force`.
 
 ## Parse command output
 
-Use `--format json` or `--format yaml` on commands that support structured
+Use `--json` or `--format yaml` on commands that support structured
 output. Human-readable tables and messages can change between releases.
 Results go to stdout. Errors, warnings, hints, and progress go to stderr.
 
 ```console
-$ sbx ls --format json | jq -r '.[].name'
+$ sbx ls --json | jq -r '.[].name'
 $ sbx prune --dry-run --format yaml
 ```
 
@@ -121,4 +121,4 @@ parsers for these commands:
 | `sbx rm`, `sbx stop`, `sbx template rm`, `sbx volume rm` | An array of results with `action`, `resource`, `name`, and optional `id` and `error`, including missing or failed targets. Actions are lowercase: `removed`, `stopped`, `removing`, `stopping`, or `failed`. |
 
 For example, replace the jq filter `.sandboxes[].name` with `.[].name` when
-extracting sandbox names from `sbx ls --format json`.
+extracting sandbox names from `sbx ls --json`.

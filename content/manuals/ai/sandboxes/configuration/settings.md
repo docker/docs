@@ -23,7 +23,7 @@ $ sbx settings ls
 ```
 
 Long values and descriptions are truncated in the table. Use
-`sbx settings ls --no-trunc` for complete text, or `sbx settings ls --format json`
+`sbx settings ls --no-trunc` for complete text, or `sbx settings ls --json`
 for JSON output. The JSON records also include defaults and environment
 variable names where available.
 
@@ -32,10 +32,10 @@ To inspect one setting:
 ```console
 $ sbx settings get clipboard.imagePaste
 false
-$ sbx settings get clipboard.imagePaste --format json
+$ sbx settings get clipboard.imagePaste --json
 ```
 
-By default, `get` prints only the effective value. Use `--format json` or
+By default, `get` prints only the effective value. Use `--json` or
 `--format yaml` for the complete setting record, including the source and default.
 
 ## Change a setting
@@ -661,14 +661,14 @@ and the consequences of sharing a writable store.
 
 List settings. Alias: `sbx settings list`.
 
-Use `--format json` for complete records as JSON, or `--no-trunc` for full text. These
+Use `--json` for complete records as JSON, or `--no-trunc` for full text. These
 options are mutually exclusive.
 
 ### sbx settings get \<KEY\>
 
 Print one effective value.
 
-Use `--format json` for the complete setting record.
+Use `--json` for the complete setting record.
 
 ### sbx settings set \<KEY\> \<VALUE\>
 

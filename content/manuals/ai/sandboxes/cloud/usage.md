@@ -203,7 +203,7 @@ $ sbx --cloud ttl +30m cloud-project
 
 A stopped sandbox has no running time-to-live, so `sbx --cloud ttl` reports
 that it is stopped instead of showing an expiration time. Its time-to-live
-starts again when the sandbox resumes. In `--format json` output, `stopped` and
+starts again when the sandbox resumes. In `--json` output, `stopped` and
 `ttl_paused` are `true`, and the expiry fields still hold the previous
 deadline. While the sandbox is resuming, only `ttl_paused` is `true`.
 

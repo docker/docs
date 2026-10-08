@@ -24,7 +24,7 @@ $ sbx diagnose
 ```
 
 The command prints a summary of checks that passed, warned, or failed, along
-with suggested fixes. Use `--format json` or `--format yaml` for machine-readable
+with suggested fixes. Use `--json` or `--format yaml` for machine-readable
 output, or `--format github-issue` to generate a Markdown snippet suitable for pasting
 into a GitHub issue.
 
