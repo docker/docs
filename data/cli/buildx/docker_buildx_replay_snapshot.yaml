@@ -1,0 +1,132 @@
+command: docker buildx replay snapshot
+short: Export replay inputs for a subject as a reusable materials store
+long: Export replay inputs for a subject as a reusable materials store
+usage: docker buildx replay snapshot [OPTIONS] SUBJECT
+pname: docker buildx replay
+plink: docker_buildx_replay.yaml
+options:
+    - option: dry-run
+      value_type: bool
+      default_value: "false"
+      description: Print a JSON plan of the snapshot without writing output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: include-materials
+      value_type: bool
+      default_value: "true"
+      description: Include material content in the snapshot
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: materials
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Materials store (repeatable; format: `provenance` | `oci-layout://<path>[:<tag>]` | `<absolute-path>` | `<key>=<value>`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: network
+      value_type: string
+      description: |
+        Network mode for RUN instructions (`default` | `none`; defaults to the mode of the original build)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: output
+      shorthand: o
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Output destination (default: `-` — oci tar to stdout; bare `<path>` writes an oci-layout directory; `type=oci,dest=X[,tar=true|false]`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: platform
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Platform of the subject to replay (defaults to the only platform of the subject or the builder default platform)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: progress
+      value_type: string
+      default_value: auto
+      description: |
+        Set type of progress output (`auto` | `plain` | `tty` | `quiet` | `rawjson`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: secret
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Secret to expose to the replayed build (format: `id=mysecret[,src=/local/secret]`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ssh
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        SSH agent socket or keys to expose (format: `default|<id>[=<socket>|<key>[,<key>]]`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+
