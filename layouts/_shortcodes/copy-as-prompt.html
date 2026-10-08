@@ -1,0 +1,41 @@
+{{- $prompt := printf "%s\n\n%s" (.Get "instruction") (strings.TrimSpace .Inner) -}}
+<div
+  data-prompt="{{ $prompt }}"
+  x-data="{
+    status: 'idle',
+    async copy() {
+      this.status = 'copying';
+      try {
+        await navigator.clipboard.writeText(this.$root.dataset.prompt);
+        this.status = 'copied';
+        setTimeout(() => this.status = 'idle', 2000);
+      } catch {
+        this.status = 'failed';
+      }
+    }
+  }"
+>
+  <div
+    data-pagefind-ignore
+    x-cloak
+    class="not-prose my-4 flex flex-wrap items-center gap-3"
+  >
+    <button
+      type="button"
+      class="button inline-flex items-center gap-2"
+      :disabled="status === 'copying' || status === 'copied'"
+      @click="copy()"
+    >
+      <span class="icon-svg icon-sm" aria-hidden="true">
+        {{ partialCached "icon" "document-duplicate" "document-duplicate" }}
+      </span>
+      <span>Copy as prompt</span>
+    </button>
+    <span
+      role="status"
+      class="text-sm"
+      x-text="status === 'copied' ? 'Copied!' : status === 'failed' ? 'Could not copy. Select and copy the section text instead.' : ''"
+    ></span>
+  </div>
+  {{ .Page.RenderString (dict "display" "block") .Inner }}
+</div>

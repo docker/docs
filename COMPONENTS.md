@@ -336,6 +336,18 @@ Create styled buttons for calls to action.
 {{</* button text="Download Docker Desktop" url="/get-docker/" */>}}
 ```
 
+### Copy as prompt
+
+Wrap a section with `copy-as-prompt` to add a **Copy as prompt** button. The
+button copies the instruction followed by the section's source Markdown.
+The section remains visible and appears in the page's Markdown output.
+
+```markdown
+{{</* copy-as-prompt instruction="Update this project using the migration reference below." */>}}
+Migration reference content
+{{</* /copy-as-prompt */>}}
+```
+
 ### Cards
 
 Create card layouts for organizing content.

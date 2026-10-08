@@ -70,7 +70,7 @@ server even with `--force`.
 
 ## Parse command output
 
-Use `--json` or `--format yaml` on commands that support structured
+Use `--format json` or `--format yaml` on commands that support structured
 output. Human-readable tables and messages can change between releases.
 Results go to stdout. Errors, warnings, hints, and progress go to stderr.
 
@@ -86,6 +86,8 @@ are rejected. `sbx events --json` emits newline-delimited JSON, and
 `sbx mcp auth --format text|json` uses command-specific formats.
 
 ### Update scripts for v0.48.0
+
+{{< copy-as-prompt instruction="Update this repository's Docker Sandboxes CLI usage for v0.48.0 using the migration reference below. Inspect scripts and documentation, update affected commands and output parsers, and verify the changes. Preserve unrelated behavior." >}}
 
 Docker Sandboxes v0.48.0 changes flags and structured output. Update scripts
 that use the following flags:
@@ -114,7 +116,7 @@ parsers for these commands:
 | `sbx ls` | A sandbox array, replacing `{sandboxes: [...]}`. `created_at` and `last_used_at` use RFC 3339 timestamps. Rows include `detached`. |
 | `sbx template ls` | An image array, replacing `{images: [...]}`. |
 | Local `sbx mcp ls` | A server array, replacing `{gateway: {...}, servers: [...]}`. Each row includes `gateway`. Cloud rows describe server usage across sandboxes and differ from local registration rows. |
-| `sbx policy log` | `{updated_at, allowed: [...], blocked: [...]}` for local and cloud output. See [Monitoring traffic](../governance/monitor-and-enforce/monitoring.md#monitoring-traffic). |
+| `sbx policy log` | `{updated_at, allowed: [...], blocked: [...]}` for local and cloud output. See [Monitoring traffic](/manuals/ai/sandboxes/governance/monitor-and-enforce/monitoring.md#monitoring-traffic). |
 | `sbx --cloud policy ls` | Field names use `snake_case` instead of camelCase. |
 | `sbx ports` | Local rows contain `host_ip`, `host_port`, `sandbox_port`, and `protocol`. Cloud rows contain `sandbox_port` and `url`, replacing `port`. Local publish and unpublish results include `action: published` or `action: unpublished`. |
 | Cloud `sbx volume create`, `sbx volume ls`, `sbx volume inspect` | Fields such as `ID`, `Name`, and `CreatedAt` become `id`, `name`, and `created_at`. `volume inspect` defaults to human-readable details, so request a structured format explicitly. |
@@ -122,3 +124,5 @@ parsers for these commands:
 
 For example, replace the jq filter `.sandboxes[].name` with `.[].name` when
 extracting sandbox names from `sbx ls --json`.
+
+{{< /copy-as-prompt >}}
