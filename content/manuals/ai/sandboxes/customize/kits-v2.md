@@ -670,7 +670,7 @@ The `sbx kit` subcommands validate, inspect, and publish kits:
 
 - `sbx kit validate <path>` — check that a kit directory or ZIP is
   well-formed.
-- `sbx kit inspect <path>` — display kit details. Add `--json` for
+- `sbx kit inspect <path>` — display kit details. Add `--format json` for
   machine-readable output.
 - `sbx kit pack <path> -o <file.zip>` — package a directory as a ZIP file
   for sharing.

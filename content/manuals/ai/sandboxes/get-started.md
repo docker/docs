@@ -93,14 +93,14 @@ From another terminal, list your sandboxes:
 
 ```console
 $ sbx ls
-SANDBOX       AGENT    STATUS    PORTS   WORKSPACE
-my-sandbox    claude   running           ~/my-project
+SANDBOX      AGENT    STATUS      PORTS   WORKSPACE      CREATED
+my-sandbox   claude   ● running           ~/my-project   2m
 ```
 
-Each row shows a sandbox's name, the agent running in it, its status, any
-[published ports](usage.md#publish-ports), and its
-workspace — the host directory shared into the sandbox. That workspace is the
-one part of your machine the agent can see.
+Each row shows a sandbox's name, agent, status,
+[published ports](usage.md#publish-ports), workspace, and age. The workspace is
+the host directory shared into the sandbox and the one part of your machine
+the agent can see.
 
 When you run `sbx run` from a project directory without passing a workspace
 path, the current directory is mounted read-write. The agent and your host see

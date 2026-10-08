@@ -334,8 +334,8 @@ List all stored secrets:
 
 ```console
 $ sbx secret ls
-SCOPE      TYPE      NAME      SECRET
-(global)   service   github    gho_GCaw4o****...****43qy
+SCOPE      SERVICE   SECRET
+(global)   github    gho_GCaw4o****...****43qy
 ```
 
 Remove a secret:
@@ -576,7 +576,7 @@ store or enter one at the prompt. For OAuth, you approve the sign-in flow. In
 both cases, you approve the domains declared by the kit. `sbx` writes the entry
 to `credentials.yaml`.
 
-In non-interactive contexts (CI or `--detached`), there's no one to answer the
+In non-interactive contexts (CI or `--detach`), there's no one to answer the
 prompt. In `sbx`, the sandbox starts with the credential withheld when no
 binding exists. For a required credential, `sbx` prints a warning rather than
 failing sandbox creation. This is a limitation of `sbx` enforcement: kit authors

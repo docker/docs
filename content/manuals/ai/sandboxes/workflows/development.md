@@ -73,8 +73,8 @@ lists them in detail:
 
 ```console
 $ sbx ls
-SANDBOX         AGENT   STATUS   PORTS                    WORKSPACE
-my-sandbox      claude  running  127.0.0.1:8080->3000/tcp4 /home/user/proj
+SANDBOX      AGENT    STATUS      PORTS                       WORKSPACE         CREATED
+my-sandbox   claude   ● running   127.0.0.1:8080->3000/tcp4    /home/user/proj    2m
 ```
 
 To stop forwarding a port:

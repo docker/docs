@@ -86,7 +86,7 @@ For scripts or terminals without interactive input, start the sandbox without
 opening an agent session:
 
 ```console
-$ sbx --cloud run --detached claude --name cloud-task
+$ sbx --cloud run --detach claude --name cloud-task
 ```
 
 A detached run with `--name` reuses the named sandbox and starts it if stopped.
@@ -203,7 +203,7 @@ $ sbx --cloud ttl +30m cloud-project
 
 A stopped sandbox has no running time-to-live, so `sbx --cloud ttl` reports
 that it is stopped instead of showing an expiration time. Its time-to-live
-starts again when the sandbox resumes. In `--json` output, `stopped` and
+starts again when the sandbox resumes. In `--format json` output, `stopped` and
 `ttl_paused` are `true`, and the expiry fields still hold the previous
 deadline. While the sandbox is resuming, only `ttl_paused` is `true`.
 
@@ -226,7 +226,7 @@ $ sbx --cloud attach cloud-project
 ```
 
 You can also use `sbx --cloud run claude --name cloud-project`, or run the agent
-without `--name` and select the sandbox when prompted. Add `--detached` to a
+without `--name` and select the sandbox when prompted. Add `--detach` to a
 named run to resume without attaching.
 
 Resuming keeps the sandbox ID and state, and starts a new time-to-live
@@ -258,7 +258,7 @@ $ sbx --cloud run --rm claude
 ```
 
 The detach gesture is turned off for that session, and you can't combine
-`--rm` with `--detached`. If the session ends without completing, for example
+`--rm` with `--detach`. If the session ends without completing, for example
 because the connection drops, the sandbox is kept and the CLI prints the
 command to remove it.
 

@@ -213,7 +213,7 @@ capabilities:
 ```
 
 A sandbox created with this kit behaves like one started with
-[`sbx run --detached`](/manuals/ai/sandboxes/usage.md#keep-a-sandbox-running-in-the-background):
+[`sbx run --detach`](/manuals/ai/sandboxes/usage.md#keep-a-sandbox-running-in-the-background):
 it keeps running until someone stops or removes it, including after you attach
 to it and disconnect. When a workload, mixin, or set declares the capability,
 it applies to the whole sandbox.

@@ -50,9 +50,9 @@ the registration. After registration, verify that the server is registered:
 
 ```console
 $ sbx mcp ls
-NAME                 TYPE     URL/COMMAND
-notion               remote   https://mcp.notion.com/mcp
 ```
+
+The listing shows each server's transport, status, gateway, and details.
 
 Then start a sandbox and expose the registered server:
 
@@ -248,11 +248,6 @@ authorization flow by default:
 
 ```console
 $ sbx mcp add notion --url https://mcp.notion.com/mcp
-Resolving MCP server "notion"...
-Open this URL to authorize MCP server "notion":
-https://api.notion.com/v1/oauth/authorize?...
-MCP server "notion" authorized
-MCP server "notion" registered (type: remote)
 ```
 
 OAuth credentials stay on the host. In local gateway mode, `sbx` stores tokens
@@ -384,10 +379,10 @@ OAuth-backed servers. The `auth status` output reports the scopes granted by the
 authorization server, the defaults recorded with `sbx mcp add --scope`, and the
 scopes the server supports. It collapses duplicate scope names and highlights
 granted scopes that weren't requested or are no longer in the supported set.
-Use `--json` for machine-readable output:
+Use `--format json` for machine-readable output:
 
 ```console
-$ sbx mcp auth status notion --json
+$ sbx mcp auth status notion --format json
 ```
 
 ## Choose an MCP mode
@@ -448,7 +443,6 @@ To attach an already-registered server to a running sandbox, use
 ```console
 $ sbx mcp add linear --url https://mcp.linear.app/mcp
 $ sbx mcp load linear --sandbox my-session
-MCP server "linear" loaded into sandbox "my-session" (live)
 ```
 
 Connected agent sessions receive a tool-list update, so the added tools become
