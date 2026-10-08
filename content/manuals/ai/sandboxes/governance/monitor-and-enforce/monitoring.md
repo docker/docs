@@ -224,7 +224,7 @@ Filter by sandbox name by passing it as an argument:
 $ sbx policy log my-sandbox
 ```
 
-Use `--limit N` to show only the last `N` entries, `--format json` or `--format yaml` for
+Use `--limit N` to show only the last `N` entries, `--json` or `--format yaml` for
 machine-readable output, or `--type network` to filter by policy type.
 `sbx policy log` records network traffic only; filesystem mount decisions
 aren't available in the log yet.

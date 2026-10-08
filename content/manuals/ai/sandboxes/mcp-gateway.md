@@ -379,10 +379,10 @@ OAuth-backed servers. The `auth status` output reports the scopes granted by the
 authorization server, the defaults recorded with `sbx mcp add --scope`, and the
 scopes the server supports. It collapses duplicate scope names and highlights
 granted scopes that weren't requested or are no longer in the supported set.
-Use `--format json` for machine-readable output:
+Use `--json` for machine-readable output:
 
 ```console
-$ sbx mcp auth status notion --format json
+$ sbx mcp auth status notion --json
 ```
 
 ## Choose an MCP mode
