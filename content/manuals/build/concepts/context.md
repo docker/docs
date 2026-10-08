@@ -615,6 +615,11 @@ README-secret.md
 All of the README files are included. The middle line has no effect because
 `!README*.md` matches `README-secret.md` and comes last.
 
+Exception patterns that use `**` to pull files back out of an excluded
+directory (for example `!vendor/**/*.go` after a `vendor` exclude) are not
+reliably supported. Prefer a tighter exclude, or list the paths you want to
+keep.
+
 ## Named contexts
 
 In addition to the default build context (the positional argument to the
