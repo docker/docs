@@ -1,11 +1,11 @@
 ---
 title: Organization accounts
 linkTitle: Organization
-description: Overview of administration features and roles in Docker Home
-keywords: admin, administration, company, organization, Docker Home, user
-  accounts, account management, organizations, manage teams, roles, members,
-  permissions, organization settings, organization account, individual account,
-  Docker ID, account types, owners, teams
+description: How Docker organizations relate to members, teams, and
+  repositories.
+keywords: admin, organization, Docker Home, user accounts, account management,
+  roles, members, permissions, organization settings, owners, teams,
+  repositories
 weight: 15
 grid:
   - title: Set up your organization
@@ -17,7 +17,8 @@ grid:
     icon: user-plus
     link: /accounts/organization/manage/
   - title: Activity logs
-    description: Review member activity across your organization and repositories.
+    description: Review member activity across your organization and
+      repositories.
     icon: clipboard-document-list
     link: /accounts/organization/activity-logs/
   - title: Insights
@@ -35,43 +36,53 @@ aliases:
   - /accounts/organization/overview/
 ---
 
-A Docker organization is a collection of teams and repositories that you
-manage in [Docker Home](https://app.docker.com/). Organization and company
-owners manage members, assign access, and enforce security.
-
-For how individual, organization, and company accounts compare, see
-[Accounts](/manuals/accounts/_index.md). For individual accounts, see
-[Docker individual accounts](/manuals/accounts/individual/_index.md).
-To create, convert, or onboard an organization, see
-[Set up a Docker organization](/manuals/accounts/organization/setup/_index.md).
+A Docker organization is a shared workspace for members and repositories
+under one namespace.
+Organization owners administer membership, access, and security.
 
 ## Organization structure
 
-The following diagram shows how organizations relate to teams and members.
+Organization owners manage organizations that contain members,
+repositories, and teams, which group members within an
+organization.
 
-![Diagram showing how teams and members relate within a Docker
-organization](./images/org-structure.webp)
+The following diagram shows that hierarchy:
 
-An organization includes owners, members, and optional teams. Organization
-owners have full administrator access to manage members, roles, and teams.
+```mermaid {title="Organization structure" caption="Organization owners manage an organization that contains members, repositories, and optional teams."}
+flowchart TB
+  oo(("Organization owners")) -.->|"manage"| org
+  subgraph org["Organization"]
+    direction TB
+    m(("Members"))
+    subgraph t["Teams (optional)"]
+      tm(("Members"))
+    end
+    r[("Repositories")]
+  end
+  style org fill:#3b82f622,stroke:#3b82f6
+  style t stroke-dasharray: 5 5
+```
 
-### Team
+### Owners
 
-Teams are optional and let you group members to assign repository permissions
-collectively. Teams simplify permission management across projects
-or functions.
+Organization owners administer the organization. They invite members, assign
+roles, and manage teams and repositories.
 
-### Member
+An organization can have multiple owners. All owners share the same
+predefined permissions. For other roles and their permissions, see
+[Roles and permissions](/manuals/security/roles-and-permissions/_index.md).
 
-A member is any Docker user added to an organization. Organization and company
-owners can assign roles to members to define their level of access.
+### Members
 
-For details about each role and its permissions, see
-[Roles and
-permissions](/manuals/security/roles-and-permissions/_index.md).
+A member is a Docker user invited to the organization. Organization owners
+assign a role to each member, and that role sets organization-wide access.
 
-For how companies relate to organizations, see
-[Company structure](/manuals/accounts/company/_index.md#company-structure).
+### Teams
+
+Teams are optional. They group members so you can grant repository
+access to many people at once. Use a team when several members need the
+same repositories. Members can belong to the organization without joining
+a team.
 
 ## Next steps
 
