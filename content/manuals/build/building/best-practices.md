@@ -526,7 +526,7 @@ The `EXPOSE` instruction indicates the ports on which a container listens
 for connections. Consequently, you should use the common, traditional port for
 your application. For example, an image containing the Apache web server would
 use `EXPOSE 80`, while an image containing MongoDB would use `EXPOSE 27017` and
-so on.
+so on. A range is valid too (`EXPOSE 3000-3005`).
 
 For external access, your users can execute `docker run` with a flag indicating
 how to map the specified port to the port of their choice.
