@@ -17,4 +17,3 @@ cagent
 # cagent tmp files
 .cagent
 .pr-body.md
-.validation.log
