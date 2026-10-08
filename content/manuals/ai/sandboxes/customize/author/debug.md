@@ -42,12 +42,13 @@ capabilities:
 The rows for this kit look like this:
 
 ```text
-→ running 1 install command
-  ✓ Install ripgrep (kit=my-kit, user=0, 12.4s)
-  view install logs: ls /var/log/sbx-kits
-→ registering 1 startup command, run on every container start
-  + Record the ripgrep version (kit=my-kit, user=1000)
-  view startup log: cat /var/log/sbx-kit-startup.log
+AGENT
+    running 1 install command
+      ✓ Install ripgrep (kit=my-kit, user=0, 12.4s)
+      view install logs: ls /var/log/sbx-kits
+    registering 1 startup command, run on every container start
+      ○ Record the ripgrep version (kit=my-kit, user=agent)
+      view startup log: cat /var/log/sbx-kit-startup.log
 ```
 
 ## Read a failed install command
