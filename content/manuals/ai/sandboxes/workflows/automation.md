@@ -100,7 +100,6 @@ that use the following flags:
 | `sbx create` | `--quiet`, `-q` | `--no-progress` suppresses progress but still prints the creation summary |
 | `sbx template save` | `-d` for a description | `--description` |
 | `sbx diagnose` | `--output`, `-o` | `--format table`, `json`, `yaml`, or `github-issue` |
-| `sbx secret ls`, `sbx secret rm` | `--env` | `--env-name` |
 | `sbx policy log` | `--quiet`, `-q` | Removed without a replacement |
 
 `sbx settings ls` is the primary command spelling. `sbx settings list` remains
