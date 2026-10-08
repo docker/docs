@@ -30,7 +30,9 @@ There are two types of network policy:
 The launcher remembers your policy selections from the previous launch in the
 same browser. Without saved selections, it selects the account's policies
 marked **Always applied**. These policies can't be deselected in the launcher.
-You can select zero, one, or several additional user policies.
+You can select zero, one, or several additional user policies. By default,
+**Open** is marked **Always applied**, unlike local sandboxes where you choose a
+network preset.
 
 ## How policies combine
 
