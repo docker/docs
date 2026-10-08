@@ -101,8 +101,10 @@ ok <script>
 ```
 
 A failing command ends with `fail <script> exit=<code>` instead of `ok`. It
-also stops the startup commands after it, and `sbx create` prints a warning
-that points at the startup log with its last lines.
+also stops the startup commands after it, and the command that started the
+sandbox (`sbx create`, `sbx run`, `sbx exec` after `sbx stop`, or
+`sbx kit add`) prints a warning that points at the startup log with its last
+lines. The sandbox stays usable.
 
 After the create phase, the agent takes over the terminal. The logs in the
 sandbox are the record you can come back to.
