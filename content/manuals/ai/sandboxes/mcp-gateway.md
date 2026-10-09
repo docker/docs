@@ -331,28 +331,6 @@ old secret. Set the secret for the new client with the same commands.
 For secrets stored under the legacy name `mcp:<server>.client_secret`, set
 the secret again using `mcp:<server>:client_secret`.
 
-### Set the OAuth resource indicator
-
-OAuth requests identify the MCP server the token is intended for with a
-resource indicator. `sbx` derives it from the server's protected-resource
-metadata, or from the endpoint URL when that metadata is absent. Use
-`--resource` if the provider expects a different identifier:
-
-```console
-$ sbx mcp add serverx --url https://mcp.serverx.example/mcp \
-  --resource https://api.serverx.example/mcp
-```
-
-The value must be an absolute URI with a scheme and host, without a fragment.
-Run `sbx mcp inspect serverx` to see the effective indicator and its source.
-The registration uses the same value for authorization, token exchange, and
-refresh. To change it, remove the registration and add it again.
-
-The override applies to OAuth flows run by the host, including servers with
-`--oauth-authorization-server` or `--client-id`. For a remote server connected
-through the hosted gateway without these overrides, the gateway doesn't send
-this value and `sbx mcp add` prints a warning.
-
 ### Set OAuth scopes
 
 Use the repeatable `--scope` flag to record the default scopes requested during
@@ -433,6 +411,28 @@ Use `--json` for machine-readable output:
 ```console
 $ sbx mcp auth status notion --json
 ```
+
+### Override the OAuth resource indicator
+
+Use `--resource` when your OAuth provider requires a token audience that
+differs from the resource identifier discovered by `sbx`. By default, `sbx`
+uses the server's protected-resource metadata, or the endpoint URL if the
+metadata is absent. Check the value with `sbx mcp inspect <SERVER>` before
+setting an override:
+
+```console
+$ sbx mcp add serverx --url https://mcp.serverx.example/mcp \
+  --resource https://api.serverx.example/mcp
+```
+
+Use the resource URI supplied by your provider. It must have a scheme and host
+and no fragment. To change an existing registration's value, remove the
+registration and add it again.
+
+This override requires OAuth authorization on the host. The hosted gateway
+doesn't use it unless you also supply `--oauth-authorization-server` or
+`--client-id` to route authorization through the host. Without those flags,
+`sbx mcp add` warns that the hosted gateway won't use the override.
 
 ## Choose an MCP mode
 
