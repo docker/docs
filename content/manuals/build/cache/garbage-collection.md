@@ -123,7 +123,7 @@ default GC policies resolve to:
           "reservedSpace": "2.764GB",
           "keepDuration": "48h",
           "filter": [
-            "type=source.local,type=exec.cachemount,type=source.git.checkout"
+            "type=source.local,type==exec.cachemount,type==source.git.checkout"
           ]
         },
         { "reservedSpace": "20GB", "keepDuration": ["1440h"] },
