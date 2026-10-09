@@ -403,7 +403,8 @@ mode:
 - Dynamic mode pre-loads no servers and lets the agent find and attach
   registered servers.
 
-This choice persists across sandbox restarts.
+This choice persists across sandbox restarts unless you
+[unload every server in the static set](#remove-a-server-from-a-running-sandbox).
 
 ### Use static mode
 
@@ -454,6 +455,36 @@ MCP server "linear" loaded into sandbox "my-session" (live)
 Connected agent sessions receive a tool-list update, so the added tools become
 visible without reconnecting. The loaded server remains attached across sandbox
 restarts.
+
+## Remove a server from a running sandbox
+
+In Docker Sandboxes v0.48.0 and later, use `sbx mcp unload` to detach a server
+from a running sandbox's local MCP gateway. This works in both static and
+dynamic modes. Cloud sandboxes and hosted MCP gateways don't support unloading
+servers.
+
+```console
+$ sbx mcp unload linear --sandbox my-session
+```
+
+Connected agent sessions receive a tool-list update, so the server's tools are
+removed without restarting the agent. The command also removes the saved
+attachment so the server isn't restored when the sandbox or daemon restarts.
+The server's host registration and credentials remain available, and other
+sandboxes that have loaded the server are unaffected.
+
+To attach the server again:
+
+```console
+$ sbx mcp load linear --sandbox my-session
+```
+
+In dynamic mode, the agent can also find and attach the registered server
+again. Unloading a server doesn't prevent the agent from reloading it.
+
+If you unload all servers from a static sandbox, it stays in static mode for
+the current session. After restarting the Docker Sandboxes daemon and
+reconnecting, the agent can find and attach registered servers.
 
 ## Built-in gateway tools
 
@@ -506,6 +537,11 @@ Remove a registered server:
 ```console
 $ sbx mcp rm notion
 ```
+
+Removing a registration doesn't detach the server from sandboxes that have
+already loaded it. Use
+[`sbx mcp unload`](#remove-a-server-from-a-running-sandbox) for each sandbox
+before removing the registration.
 
 For OAuth-backed servers, `sbx mcp rm` removes the OAuth access token before it
 removes the server registration. A client secret for a pre-registered OAuth
