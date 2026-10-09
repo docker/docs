@@ -1,8 +1,12 @@
 ---
 title: Access tokens
 linkTitle: Access tokens
-description: Create and manage personal and organization access tokens for Docker Hub authentication.
-keywords: access tokens, personal access tokens, organization access tokens, PAT, OAT, Docker security
+description: >-
+  Choose a personal or organization access token to authenticate to
+  Docker Hub.
+keywords: >-
+  access tokens, personal access tokens, organization access tokens,
+  PAT, OAT, Docker Hub, Docker security
 weight: 10
 grid:
   - title: Personal access tokens
@@ -13,22 +17,60 @@ grid:
     description: Grant org-owned Hub access to CI/CD and other automation.
     icon: building-office-2
     link: /security/access-tokens/organization-access-tokens/
+  - title: Reference
+    description: Look up PAT permissions, OAT scopes, and Hub API support.
+    icon: list-bullet
+    link: /security/access-tokens/reference/
 ---
 
-Access tokens let you authenticate to Docker Hub without using your password.
-Use a token for the Docker CLI, automation, and any account that has
-two-factor authentication (2FA) or enforced single sign-on (SSO), because
-password sign-in to the CLI is not supported in those cases.
+Access tokens authenticate to Docker Hub in place of a password. Docker
+Hub offers two types: personal access tokens (PATs), tied to your
+account, and organization access tokens (OATs), owned by an
+organization. Both work with `docker login` and in automation, and you
+can deactivate or delete a token at any time without changing a
+password.
 
 ## Choose a token type
 
-| Token | Ownership | Use when | Limitations |
-| --- | --- | --- | --- |
-| Personal access token (PAT) | Tied to an individual Docker account | CLI access, local tools, and automation that should run as you. Required for CLI sign-in when 2FA is on or SSO is enforced | Access ends if the account leaves the organization or the token is revoked |
-| Organization access token (OAT) | Owned by the organization. Any organization owner can manage it | CI/CD and other automation that must keep working when membership changes | Incompatible with Docker Desktop and Image Access Management |
+## PATs
 
-For GitHub Actions, [OIDC connections](/manuals/security/authentication/oidc-connections/_index.md)
-are an alternative to storing a long-lived organization access token.
+Use a PAT for Docker Desktop, for environments governed by
+[Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md),
+and for other tools that run as you. A PAT is also required to sign in
+to the CLI when two-factor authentication (2FA) is turned on or single
+sign-on (SSO) is enforced, because the CLI doesn't accept your password
+in those cases.
+
+A PAT uses
+[one permission level](/manuals/security/access-tokens/reference.md#personal-access-token-permissions)
+for every repository the account can access.
+
+## OATs
+
+Use an OAT for production systems that pull images during deployment,
+monitoring or backup tools that check repository status or pull images,
+third-party services that integrate with your repositories, and scripts
+that call the
+[Docker Hub API](/manuals/security/access-tokens/reference.md#docker-hub-api).
+OATs don't work with Docker Desktop or Image Access Management.
+
+An OAT can be limited to specific repositories and operations, and it
+has its own Docker Hub usage limits, separate from individual accounts.
+To see scopes, see
+[Access token reference](/manuals/security/access-tokens/reference.md).
+
+## OIDC connections
+
+If your automation runs in GitHub Actions, you don't need to store a token.
+An [OIDC connection](/manuals/security/authentication/oidc-connections/_index.md)
+lets a workflow exchange GitHub's short-lived identity token for Docker
+access on each run, so there is no long-lived credential to rotate,
+scope, or leak. Organization owners set up OIDC connections, and they
+require a Docker Team or Docker Business subscription.
+
+Use an OAT instead when the automation runs outside GitHub Actions, or
+when you need a credential that works with `docker login` from any
+system.
 
 ## Next steps
 

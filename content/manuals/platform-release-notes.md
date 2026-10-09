@@ -305,7 +305,7 @@ and subscriptions.
 
 ### New
 
-- [Organization access tokens](/manuals/security/access-tokens/organization-access-tokens.md#available-scopes)
+- [Organization access tokens](/manuals/security/access-tokens/reference.md#organization-access-token-scopes)
   now include repository scopes and organization management scopes for members,
   invites, and groups.
 

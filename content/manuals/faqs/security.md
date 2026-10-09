@@ -145,7 +145,7 @@ Yes, you can convert existing users to SSO accounts. Ensure users have:
 - Company domain email addresses and accounts in your IdP
 - Docker Desktop version 4.4.2 or later
 - Personal access tokens created to replace passwords for CLI access
-- CI/CD pipelines updated to use PATs instead of passwords
+- CI/CD pipelines updated to use [PATs or OATs](/manuals/security/access-tokens/_index.md) instead of passwords, or an [OIDC connection](/manuals/security/authentication/oidc-connections/_index.md) for GitHub Actions
 
 For detailed instructions, see [Configure single sign-on](/manuals/security/authentication/single-sign-on/connect.md).
 
@@ -196,13 +196,13 @@ replace users' full names.
 
 ### Does Docker SSO support authenticating through the command line?
 
-When SSO is enforced, [passwords are prevented from accessing the Docker CLI](/manuals/security/security-announcements.md#deprecation-of-password-logins-on-cli-when-sso-enforced). You must use a personal access token (PAT) for CLI authentication instead.
+When SSO is enforced, [passwords are prevented from accessing the Docker CLI](/manuals/security/security-announcements.md#deprecation-of-password-logins-on-cli-when-sso-enforced). Each user must sign in with a [personal access token (PAT)](/manuals/security/access-tokens/personal-access-tokens.md). Users who already used a PAT before SSO enforcement can continue using that PAT.
 
-Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage personal access tokens](/manuals/security/access-tokens/personal-access-tokens.md). Users who already used a PAT before SSO enforcement can continue using that PAT.
+For CI/CD and other automation, use an [organization access token (OAT)](/manuals/security/access-tokens/organization-access-tokens.md) or a PAT. For GitHub Actions, you can use an [OIDC connection](/manuals/security/authentication/oidc-connections/_index.md) instead of storing a long-lived token. See [Access tokens](/manuals/security/access-tokens/_index.md).
 
 ### How does SSO affect automation systems and CI/CD pipelines?
 
-Before enforcing SSO, you must [create personal access tokens](/manuals/security/access-tokens/personal-access-tokens.md) to replace passwords in automation systems and CI/CD pipelines.
+Before enforcing SSO, replace passwords in automation and CI/CD with an access token. Prefer an [organization access token (OAT)](/manuals/security/access-tokens/organization-access-tokens.md) for pipelines owned by the organization. Use a [personal access token (PAT)](/manuals/security/access-tokens/personal-access-tokens.md) when the job should run as a person. For GitHub Actions, you can use an [OIDC connection](/manuals/security/authentication/oidc-connections/_index.md) instead of storing a long-lived token.
 
 ### Can I turn on SSO without enforcing it immediately?
 

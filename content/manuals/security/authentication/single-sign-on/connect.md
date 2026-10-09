@@ -305,7 +305,12 @@ which centralizes authentication and enforces policies set by the IdP.
 
 Before enforcing SSO, users accessing Docker through the CLI must
 [create a personal access token (PAT)](/manuals/security/access-tokens/personal-access-tokens.md).
-The PAT replaces their username and password for authentication.
+The PAT replaces their password for authentication. For CI/CD and other
+automation, replace passwords with a PAT or an
+[organization access token (OAT)](/manuals/security/access-tokens/organization-access-tokens.md).
+For GitHub Actions, you can use an
+[OIDC connection](/manuals/security/authentication/oidc-connections/_index.md)
+instead of storing a long-lived token.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization or company.
@@ -323,6 +328,7 @@ you want to use 2FA, you must enable 2FA through your IdP.
 
 - [Provision users](/manuals/security/provisioning/_index.md).
 - [Enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).
-- [Create personal access tokens](/manuals/security/access-tokens/personal-access-tokens.md).
+- [Choose a PAT or OAT](/manuals/security/access-tokens/_index.md).
+- [Set up OIDC connections for GitHub Actions](/manuals/security/authentication/oidc-connections/_index.md).
 - [Troubleshoot SSO](/manuals/security/authentication/single-sign-on/troubleshoot-sso.md)
   issues.

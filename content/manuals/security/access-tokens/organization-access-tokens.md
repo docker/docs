@@ -1,206 +1,147 @@
 ---
-title: Organization access tokens
+title: Create and manage organization access tokens
 linkTitle: Organization access tokens
-description: Create and manage organization access tokens to securely authenticate automated systems and CI/CD pipelines with Docker Hub
-keywords: organization access tokens, OAT, docker hub security, programmatic access, automation
+description: >-
+  Create an organization access token, choose its repository and
+  organization scopes, and use it in CI/CD and the Docker Hub API.
+keywords: >-
+  organization access token, OAT, Docker Hub, CI/CD authentication,
+  docker login, token scopes, repository permissions, Docker Hub API,
+  automation, Docker Team, Docker Business
+weight: 20
 aliases:
- - /security/for-admins/access-tokens/
- - /enterprise/security/access-tokens/
+  - /security/for-admins/access-tokens/
+  - /enterprise/security/access-tokens/
 ---
 
 {{< summary-bar feature_name="OATs" >}}
 
-Organization access tokens (OATs) provide secure, programmatic access to Docker Hub for automated systems, CI/CD pipelines, and other business-critical tasks. Unlike personal access tokens tied to individual users, OATs are associated with your organization and can be managed by any organization owner.
+An organization access token (OAT) lets automated systems sign in to
+Docker Hub as your organization instead of as a person. Use an OAT for
+CI/CD pipelines, deployment jobs, and other automation that must keep
+working when people join or leave the organization.
+
+Unlike a personal access token (PAT), an OAT belongs to the
+organization. Any organization owner can see, edit, deactivate, or
+delete it. Each token has its own scopes, so it can only reach the
+repositories and organization settings you choose.
 
 > [!WARNING]
 >
-> Organization access tokens are incompatible with Docker Desktop and Image Access Management. If you use these features, use [personal access tokens](/manuals/security/access-tokens/personal-access-tokens.md) instead.
+> OATs don't work with Docker Desktop or Image Access Management. For
+> those features, use
+> [PATs](/manuals/security/access-tokens/personal-access-tokens.md) instead.
 
-## Who should use organization access tokens?
+## Best practices
 
-Use OATs for automated systems that need Docker Hub access without depending on individual user accounts:
-
-- CI/CD pipelines: Build and deployment systems that push and pull images
-- Production systems: Applications that pull images during deployment
-- Monitoring tools: Systems that need to check repository status or pull images
-- Backup systems: Tools that periodically pull images for archival
-- Integration services: Third-party tools that integrate with your Docker Hub repositories
-
-## Key benefits
-
-Benefits of using organization access tokens include:
-
-- Organizational ownership: Not tied to individual users who might leave the company
-- Shared management: All organization owners can create and manage OATs
-- Separate usage limits: OATs have their own Docker Hub rate limits, not counting against personal accounts
-- Better security audit: Track when tokens were last used and identify suspicious activity
-- Granular permissions: Limit access to specific repositories and operations
+- Set an expiration date and rotate tokens on a schedule
+- Grant only the repositories and scopes each job needs
+- Review the **Last used** column to find unused or suspicious tokens
+- Store tokens in a credential manager, never in plain text or source
+  code
+- Deactivate or delete a token as soon as it's compromised or no longer
+  needed
 
 ## Prerequisites
 
-To create and use organization access tokens, you must have:
+To create and manage OATs, you need:
 
-- A Docker Team or Business subscription
-- Owner permissions
-- Repositories you want to grant access to
+- A Docker Team or Docker Business subscription
+- One of these roles in the organization:
+  - Organization owner
+  - Company owner, for organizations that belong to a company
+  - A [custom role](/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md)
+    that includes the **Manage organization access tokens** permission
 
 ## Create an organization access token
 
-Owners can create tokens with these limits:
-
-- Team subscription: Up to 10 OATs per organization
-- Business subscription: Up to 100 OATs per organization
-
-Expired tokens count toward your total limit.
+> [!IMPORTANT]
+>
+> Treat access tokens like passwords and keep them secure. Store tokens
+> in a credential manager and never commit them to source code.
 
 To create an OAT:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
-organization.
+   organization.
 1. Select **Identity & auth**, then **Access tokens**.
 1. Select **Generate access token**.
-1. Configure token details:
-    - Label: Descriptive name indicating the token's purpose
-    - Description (optional): Additional details
-    - Expiration date: When the token should expire
-1. Expand the **Repository** drop-down to set per-repository access permissions:
-    - Optional. Select **Read public repositories** for access to public repositories.
-    - Select **Add repository** and choose a repository from the drop-down.
-    - Set the permission level for each repository. Available scopes range from
-       pulling and pushing images to managing tags, webhooks, repository groups,
-       and immutable tag settings. See [Repository scopes](#repository-scopes)
-       for the full list.
-    - Add up to 50 repositories as needed.
-1. Optional. Configure organization-level permissions by expanding the **Organization** drop-down and selecting **Allow management access to this organization's resources**:
-    - **Member Edit**: Edit members of the organization
-    - **Member Read**: Read members of the organization
-    - **Invite Edit**: Invite members to the organization
-    - **Invite Read**: Read invites to the organization
-    - **Group Edit**: Edit groups of the organization
-    - **Group Read**: Read groups of the organization
-    - **Repository List**: List all repositories, including private ones (`scope-repository-list`)
-    - **Repository Create**: Create new repositories (`scope-repository-create`)
-    - **Registry Usage Read**: Read namespace-level registry usage metrics (`scope-registry-usage-read`)
-1. Select **Generate token**. Copy the token that appears on the screen and save it. You won't be able to retrieve the token once you exit the screen.
+1. Configure the token:
+   - **Label:** A name that describes what the token is for. This field
+     is required.
+   - **Access token description:** Optional. Up to 200 characters.
+   - **Expiration date:** Select **30 days**, **90 days**, or
+     **Custom**. With **Custom**, choose a date and time up to one year
+     from today. The default, **None**, creates a token that doesn't
+     expire. You can't change the expiration date after you create the
+     token.
+1. In **Resources**, expand **Repository** to choose which repositories
+   the token can reach:
+   - Optional. Select **Read public repositories** to let the token pull
+     from any public repository.
+   - Select **Add repository**, then choose a repository or
+     **All `<organization>` repositories** from the drop-down.
+   - Select one or more scopes for that repository. See
+     [Repository scopes](/manuals/security/access-tokens/reference.md#repository-scopes).
+   - Repeat for up to 50 repositories. Each repository has its own
+     scopes.
+1. Optional. Expand **Organization** and select the organization-level
+   scopes the token needs, such as reading members or creating
+   repositories. See
+   [Organization scopes](/manuals/security/access-tokens/reference.md#organization-scopes).
+1. Optional. Expand **Docker Build Cloud** or **Docker Governance** to
+   grant access to those products. See
+   [Product scopes](/manuals/security/access-tokens/reference.md#product-scopes).
+1. Select **Generate token**. Copy the token and save it. Docker shows
+   the token once and doesn't store it. You can't retrieve it after you
+   leave the page.
 
-> [!IMPORTANT]
->
-> Treat organization access tokens like passwords. Store them securely in a credential manager and never commit them to source code repositories.
+## Sign in
 
-## Use organization access tokens
-
-Sign in to the Docker CLI using your organization access token:
+Run `docker login` with your organization name as the username. When
+the CLI asks for a password, paste the OAT.
 
 ```console
 $ docker login --username <YOUR_ORGANIZATION_NAME>
 Password: [paste your OAT here]
 ```
 
-When prompted for a password, enter your organization access token.
+## Update, deactivate, or delete
 
-## Modify existing tokens
-
-To manage existing tokens:
+You can rename a token, change its description or scopes, deactivate
+it, activate it again, or delete it.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
-organization.
+   organization.
 1. Select **Identity & auth**, then **Access tokens**.
-1. Select the actions menu in the token row, you can:
-    - **Edit**
-    - **Deactivate**
-    - **Delete**
-1. Select **Save** after making changes to a token.
 
-## Available scopes
+   The list shows each token's label, status, who created it, when it
+   was created, when it was last used, and when it expires.
 
-Scopes control what an OAT can do. Repository-level scopes are assigned per
-repository when you create the token. Organization-level scopes apply to the
-whole organization.
+1. Select the actions menu at the end of a token row, then select
+   **Deactivate**, **Activate**, **Edit**, or **Delete**.
 
-Higher scopes include the permissions of lower ones where noted.
+   A deactivated token stops working until you activate it again.
+   Expired tokens can only be deleted. Deleting a token is permanent.
 
-### Repository scopes
+1. If you selected **Edit**, change the label, description, or
+   resources, then select **Update token**.
 
-| Scope | Description | Includes |
-|---|---|---|
-| `scope-image-pull` | Pull images from the registry | — |
-| `scope-image-push` | Push images to the registry | `scope-image-pull` |
-| `scope-image-delete` | Delete images and tags via registry endpoints | `scope-image-push` |
-| `scope-repository-read` | Read repository metadata, Dockerfile, and stars | — |
-| `scope-repository-edit` | Edit repository privacy, categories, Dockerfile, description, and stars | `scope-repository-read` |
-| `scope-repository-admin` | Delete the repository | `scope-repository-edit` |
-| `scope-tag-read` | List and read tags, image lists, attestations, and compose files | — |
-| `scope-tag-admin` | Delete tags | `scope-tag-read` |
-| `scope-webhook-read` | List webhook pipelines and delivery history | — |
-| `scope-webhook-edit` | Create webhook pipelines | `scope-webhook-read` |
-| `scope-webhook-admin` | Delete webhook pipelines | `scope-webhook-edit` |
-| `scope-repo-group-read` | List and read repository group assignments | — |
-| `scope-repo-group-edit` | Create and update repository group assignments | `scope-repo-group-read` |
-| `scope-repo-group-admin` | Delete repository group assignments | `scope-repo-group-edit` |
-| `scope-repository-settings-admin` | Configure immutable tag rules | — |
+## Token limits
 
-### Organization scopes
+Each organization can have a limited number of tokens:
 
-| Scope | Description |
-|---|---|
-| `scope-repository-list` | List all repositories in the namespace, including private ones |
-| `scope-repository-create` | Create new repositories |
-| `scope-registry-usage-read` | Read namespace-level registry usage metrics |
+- Docker Team: Up to 10 tokens
+- Docker Business: Up to 100 tokens
 
-Creating a repository requires the organization-level `scope-repository-create`
-permission. No repository-level scope, including admin scopes on existing
-repositories, grants this permission.
+Expired and deactivated tokens count toward the limit until you delete
+them. When you reach the limit, the **Generate access token** button is
+disabled until you delete a token.
 
-## Hub API support
+## Next steps
 
-OATs can authenticate requests to most Docker Hub API endpoints under
-`/v2/namespaces/{namespace}/repositories/`. Pass the token as a Bearer token
-in the `Authorization` header with your organization name as the username.
-
-### Supported endpoints
-
-The following endpoint categories accept OAT authentication:
-
-- Repository management: list, create, get, update, and delete repositories
-- Tags: list, get, and delete tags; get tag images, attestations, and compose files
-- Dockerfile: get and update a repository's linked Dockerfile
-- Repository groups: list, get, create, update, and delete group assignments
-- Stars: list, count, add, and remove repository stars
-- Immutable tags: update and verify immutable tag policies
-- Repository categories, privacy, and webhook pipeline settings
-- Namespace metrics
-
-### Listing behavior
-
-`GET /v2/namespaces/{namespace}/repositories` returns results based on the
-token's configured scopes:
-
-- **With `scope-repository-list` scope** (or equivalent): all repositories are
-  returned, including private ones.
-- **Without that scope**: only public repositories are returned.
-
-This filtering is silent: the response is a normal `200`, with no error or
-indicator that private repositories were withheld.
-
-### Unsupported legacy endpoints
-
-OATs only authenticate requests to the namespace-scoped routes documented
-above. The following legacy repository paths are OAT unsupported and reject
-every OAT with `403 token issued from organization access token is not
-allowed`, regardless of the token's scopes. Use the linked replacement
-endpoints instead:
-
-- `GET /v2/repositories/{namespace}/{repository}` — use
-  [Get repository](/reference/api/hub/latest/operations/GetRepository/).
-- `GET /v2/repositories/{namespace}` — use
-  [List repositories](/reference/api/hub/latest/operations/listNamespaceRepositories/).
-- `GET /v2/users/{username}/repositories` — use
-  [List repositories](/reference/api/hub/latest/operations/listNamespaceRepositories/).
-
-## Organization access token best practices
-
-- Regular token rotation: Set reasonable expiration dates and rotate tokens regularly to minimize security risks.
-- Principle of least privilege: Grant only the minimum repository access and permissions needed for each use case.
-- Monitor token usage: Regularly review when tokens were last used to identify unused or suspicious tokens.
-- Secure storage: Store tokens in secure credential management systems, never in plain text or source code.
-- Immediate revocation: Deactivate or delete tokens immediately if they're compromised or no longer needed.
+- [Choose a PAT or OAT](/manuals/security/access-tokens/_index.md)
+- [Look up scopes and Docker Hub API support](/manuals/security/access-tokens/reference.md)
+- [Create a PAT](/manuals/security/access-tokens/personal-access-tokens.md)
+- [Set up OIDC connections for GitHub Actions](/manuals/security/authentication/oidc-connections/_index.md)
+- [Review custom role permissions](/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md)
