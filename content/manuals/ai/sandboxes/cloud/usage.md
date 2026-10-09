@@ -300,6 +300,24 @@ The template supplies its CPU and memory configuration. Do not combine
 `--template` with an agent name, `--cpus`, or `--memory`. To launch an OCI image
 directly instead, use `--image-ref` with explicit CPU and memory values.
 
+To upload a local template tar as a cloud template, pass the file and a name
+that is unique in your account:
+
+```console
+$ sbx --cloud template load my-template.tar cloud-template \
+  --cpus 2 --memory-mib 4096
+```
+
+Both resource flags are required and must match a
+[cloud size](#choose-resources-and-platform). Uploads and snapshots can take
+several minutes for large templates.
+
+For cloud `template save` and `template load`, `--capture-mode disk` is the
+default. It captures the filesystem and starts subsequent sandboxes with a
+cold boot. Use `--capture-mode all` to capture memory, disk, and the microVM
+checkpoint so subsequent sandboxes resume from that state. Capturing all state
+takes longer to load.
+
 Snapshots include credentials written to the sandbox filesystem. Remove those
 credentials before saving a template. Managed cloud secrets stay in the secret
 store. See [Authenticate cloud agents](credentials.md).
