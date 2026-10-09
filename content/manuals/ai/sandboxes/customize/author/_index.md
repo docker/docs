@@ -131,13 +131,8 @@ format version and the `sbx` release. The
 [upstream capability definitions](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/SPEC-v3.md#72-well-known-types)
 describe the available capabilities and their settings.
 
-> [!NOTE]
-> `sbx` doesn't apply `usb-device@1`, `privileged@1`, or `agent-sessions@1`
-> requests. Its capability enforcement can let sandbox creation succeed even
-> when a required capability is unsupported. Don't rely on this behavior:
-> choose capabilities supported by the runtime where your kit will run.
-> The `kit-registry@1` capability is restricted to approved OCI builder kits;
-> local and Git kit sources don't receive it.
+See [Capability support](capabilities.md) for local and cloud availability,
+minimum `sbx` versions, and Docker-specific restrictions.
 
 The guides here show how to use capabilities with Docker Sandboxes. For all
 descriptor fields and the rules for combining kits, see the
@@ -226,6 +221,4 @@ it:
 
 - Cloud sandboxes can't provide this capability. `sbx --cloud` refuses a kit
   that requires it and skips an optional entry.
-- `sbx kit add` can't apply the capability to a running sandbox. A required
-  entry fails, and an optional entry is skipped with a warning. Recreate the
-  sandbox with the kit to apply it.
+- `sbx kit add` can't apply the capability to a running sandbox. Create the sandbox with the kit to apply it.
