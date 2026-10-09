@@ -676,8 +676,13 @@ The `sbx kit` subcommands validate, inspect, and publish kits:
   for sharing.
 - `sbx kit push <path> <ref>` — publish to an OCI registry (for example,
   `ghcr.io/myorg/my-kit:1.0`).
-- `sbx kit pull <ref>` — download a kit from a registry as a ZIP file to
-  the working directory.
+- `sbx kit pull <ref>` — download a kit's layer payload to the working
+  directory. Version 1 kits use `.zip`; version 2 kits use `.tar.gz`.
+
+The kit's `schemaVersion` selects its published format. Version 1 uses a ZIP
+layer. Version 2 uses a tar+gzip layer, with the spec in the manifest config
+and standard OCI annotations so tools can inspect metadata without downloading
+the layer. Use `sbx kit pull --output <FILE>` to choose the output path.
 
 For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
 `sbx login`. For other registries, they prefer credentials stored with
