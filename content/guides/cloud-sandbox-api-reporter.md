@@ -11,8 +11,8 @@ params:
 ---
 
 <!-- Publication gate: run the Console journey with a recorded Claude Code kit
-version. Verify the public report and ZIP after sandbox deletion. The screenshot
-and test excerpt below come from the locally tested companion implementation.
+version. Verify the public report and ZIP after sandbox deletion. The screenshots
+and test excerpt below were reproduced locally for illustration.
 See samples/cloud-sandbox-workflows/README.md for the remaining checks. -->
 
 Build a small utility without setting up a development environment on your
@@ -36,12 +36,14 @@ Docker bills sandbox compute, and Anthropic bills model usage separately.
 1. Open the [Console](https://agentic-platform.docker.com/) and select **New**.
 2. Select the Claude Code kit and add your Anthropic API key through the
    credential control. Keep the key out of the task prompt.
-3. Review the selected [network policies](/manuals/agentic-platform/policies.md).
-   Allow `api.anthropic.com:443`, `pypi.org:443`, and
-   `files.pythonhosted.org:443` for the agent and Python dependency downloads.
-   Add a custom policy if the selected policies don't cover those hosts.
-4. Set **Run for** to two hours and **When the time is up** to **Stop**.
-   Select **Run**.
+3. Select the **Balanced** network policy for agent and package-registry access.
+
+   Optional. Use a [custom network policy](/manuals/agentic-platform/policies.md#create-a-policy)
+   with `api.anthropic.com:443`, `pypi.org:443`, and `files.pythonhosted.org:443`
+   instead of **Balanced**. Deselect **Open** if it is selected, since its rules
+   permit broader access.
+
+4. Select **Run**.
 
 The Console opens a terminal connected to the agent. Dependencies, files, and
 processes created here belong to the sandbox. They don't change your computer.
@@ -51,33 +53,25 @@ processes created here belong to the sandbox. They don't change your computer.
 Paste this request into the agent terminal:
 
 ```text
-Build a Python CLI in /home/agent/workspace/api-change-reporter that compares
-two OpenAPI documents in JSON or YAML. Detect removed paths and removed HTTP
-operations only. Explain that this is not a complete API compatibility check.
-Support inline Path Item objects; reject referenced Path Items with a clear error.
+Build a Python CLI in /home/agent/workspace/api-change-reporter to compare
+OpenAPI JSON or YAML files. Report removed paths and HTTP operations, without
+claiming complete API compatibility. Reject referenced Path Items.
 
-Use a project-local .venv and pin dependencies in requirements.txt. Create
-reporter.py, a README with run instructions, and automated tests. Cover JSON
-and YAML input, unchanged and added operations, removed paths, multiple removed
-operations on one path, invalid input, and HTML escaping.
+Use a local .venv, pinned requirements.txt, and a README with run instructions.
+Test unchanged, added, and removed operations, invalid input, and HTML escaping.
 
-Create examples/before.yaml and examples/after.json with these changes:
-- GET /pets and GET /pets/{id} stay unchanged.
-- POST /pets is added.
-- DELETE /pets/{id} is removed.
-- /legacy, which had GET, is removed entirely.
-
-Run the tests and compare the examples. Generate a self-contained HTML report
-at output/index.html. Keep output/ limited to files intended for the browser.
-Show the test command, results, and removed operations. Stop if tests fail.
+Create examples/before.yaml and examples/after.json: keep GET /pets and
+GET /pets/{id}, add POST /pets, remove DELETE /pets/{id}, and remove /legacy
+with its GET operation. Generate a self-contained output/index.html report
+with a light color scheme.
+Keep output/ limited to browser outputs. Run the tests and show the results.
 ```
 
 The agent handles setup and implementation. Inspect its results before moving
 on. The example should report one removed path and two removed operations.
 Adding `POST /pets` should not count as a removal.
 
-For comparison, the companion implementation produced this local test summary
-and CLI output:
+For example, a test summary and CLI output might look like this:
 
 ```text
 Ran 8 tests
@@ -97,9 +91,8 @@ behavior and that the report agrees with the inputs.
 Ask the agent to serve the report:
 
 ```text
-Serve only /home/agent/workspace/api-change-reporter/output on 0.0.0.0:8080
-using the project's Python interpreter. Keep the server running while I
-inspect the report. Verify that GET / returns the HTML report.
+Serve /home/agent/workspace/api-change-reporter/output on 0.0.0.0:8080.
+Verify that GET / returns the report, and keep the server running.
 ```
 
 In the sandbox detail page, open **Connect**, find **Connect via a Port**, enter
@@ -109,40 +102,40 @@ This is a public endpoint tied to the running sandbox. The server's dedicated
 directory limits what you publish to the demonstration outputs. Use sample
 specifications without private API details.
 
-Request a small refinement:
-
-```text
-Group removed operations by path in the HTML report, with a methods column.
-Keep the removed-path count and the scope limitation visible. Rerun the tests
-and regenerate output/index.html so I can refresh the same URL.
-```
-
-The following report was rendered from the locally tested companion
-implementation:
+An example report shows the removed operations and the scope of the check:
 
 ![API-change report showing GET removed from /legacy and DELETE removed from /pets/{id}](images/cloud-sandbox-api-reporter-report.png)
+
+## Refine the result
+
+Ask for a visible change to the report:
+
+```text
+Give the report a dark background, light text, and teal headings.
+Keep the contents unchanged. Rerun the tests and regenerate output/index.html.
+```
+
+Refresh the same URL to inspect the result. For example:
+
+![API-change report with a dark background, light text, and teal headings](images/cloud-sandbox-api-reporter-dark-report.png)
 
 ## Download the work
 
 Ask the agent to package the project:
 
 ```text
-Create output/api-change-reporter.zip containing only the source, README,
-requirements.txt, tests, example inputs, and the generated HTML report. Exclude
-.venv, caches, credentials, Git metadata, and unrelated sandbox files.
-
-Inspect the ZIP's member list. Extract it to a temporary directory and verify
-that its tests and documented example command work. Show the results and add
-a relative download link to the ZIP on the served report page.
+Create output/api-change-reporter.zip with the source, README, requirements,
+tests, examples, and report. Exclude .venv, caches, credentials, and Git metadata.
+Extract the ZIP and verify its tests and example command work. Add a download
+link to the ZIP on the report page.
 ```
 
 Refresh the report and follow the download link. Open the downloaded ZIP and
 confirm that it contains the project and report. Saving this bundle is the step
 that keeps the work after sandbox deletion.
 
-Use the close action next to port `8080` in **Connect**, then delete the sandbox
-from the Console. The report URL stops serving the application when the sandbox
-is no longer running.
+After verifying the download, select **Delete** in the Console to remove the
+sandbox. Deletion also closes its published port.
 
 ## Use your own inputs
 
@@ -153,5 +146,5 @@ in the sandbox's network policy. For private GitHub files, select a
 with repository read access before launching. Keep reports containing private
 details out of a public port unless the service authenticates readers.
 
-To continue developing this tool across local and cloud environments, see
+To learn how to transfer work between local and cloud environments, see
 [Send local work to the cloud](cloud-sandbox-local-handoff.md).

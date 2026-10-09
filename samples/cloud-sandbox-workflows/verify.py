@@ -55,6 +55,10 @@ def verify_express(work):
     )
     assert baseline(project, "express-baseline")
     original = (project / "app.js").read_text()
+    baseline_files = {
+        name: (project / name).read_text()
+        for name in ["app.js", "package.json", "package-lock.json"]
+    }
     require_success(
         run(
             [
@@ -78,10 +82,31 @@ def verify_express(work):
     partial = run(["npm", "test"], project, "express-partial-tests.txt")
     assert (
         partial.returncode != 0
-        and "# pass 2" in partial.stdout
-        and "# fail 1" in partial.stdout
+        and "# pass 4" in partial.stdout
+        and "# fail 4" in partial.stdout
     )
-    fixed = original.replace('app.get("*",', 'app.get("/{*splat}",')
+    routing_fix = original.replace('app.get("*",', 'app.get("/{*splat}",')
+    (project / "app.js").write_text(routing_fix)
+    routing = run(["npm", "test"], project, "express-routing-tests.txt")
+    assert (
+        routing.returncode != 0
+        and "# pass 5" in routing.stdout
+        and "# fail 3" in routing.stdout
+    )
+    parser_fix = routing_fix.replace(
+        "const app = express();",
+        'const app = express();\napp.set("query parser", "extended");',
+    )
+    (project / "app.js").write_text(parser_fix)
+    parser = run(["npm", "test"], project, "express-parser-tests.txt")
+    assert (
+        parser.returncode != 0
+        and "# pass 7" in parser.stdout
+        and "# fail 1" in parser.stdout
+    )
+    fixed = parser_fix.replace(
+        "const { filters } = req.body;", "const { filters } = req.body ?? {};"
+    )
     (project / "app.js").write_text(fixed)
     require_success(run(["npm", "test"], project, "express-fixed-tests.txt"))
     require_success(
@@ -94,7 +119,7 @@ def verify_express(work):
     shutil.copyfile(
         project / "package-lock.json", OUTPUT / "express-target-package-lock.json"
     )
-    patch = "".join(
+    app_patch = "".join(
         difflib.unified_diff(
             original.splitlines(True),
             fixed.splitlines(True),
@@ -102,23 +127,43 @@ def verify_express(work):
             tofile="b/app.js",
         )
     )
+    patch = "".join(
+        "".join(
+            difflib.unified_diff(
+                content.splitlines(True),
+                (project / name).read_text().splitlines(True),
+                fromfile=f"a/{name}",
+                tofile=f"b/{name}",
+            )
+        )
+        for name, content in baseline_files.items()
+    )
     (OUTPUT / "express-fix.patch").write_text(patch)
     (OUTPUT / "express-report.md").write_text(
-        "# Express upgrade investigation\n\n"
-        "Local fixture run; this report has not been posted to GitHub.\n\n"
+        "# Plan the Express 5.1.0 migration\n\n"
+        "Recommendation: preserve the API contract before deploying. The "
+        "proposed compatibility fixes pass eight tests, but production traffic "
+        "and security review remain outside this fixture's coverage.\n\n"
+        "Local reproduction only; this report has not been posted to GitHub.\n\n"
         f"Baseline lockfile SHA-256: `{hashlib.sha256((ROOT / 'express-upgrade/package-lock.json').read_bytes()).hexdigest()}`.\n\n"
+        f"Baseline app SHA-256: `{hashlib.sha256(original.encode()).hexdigest()}`.\n\n"
         "| Stage | Result |\n| --- | --- |\n"
-        "| Express 4.21.2 | Three tests pass |\n"
+        "| Express 4.21.2 | Eight tests pass |\n"
         "| Express 5.1.0, unchanged route | Application fails to load: Missing parameter name |\n"
-        "| Express 5.1.0, /*splat | Two pass; root route returns 404 |\n"
-        "| Express 5.1.0, /{*splat} | Three tests pass |\n\n"
-        "Express 5 requires a named wildcard. Braces include the root path. "
-        "The API route remains registered before the fallback.\n\n"
-        f"```diff\n{patch}```\n\n"
-        "The dependency and lockfile also change. The target lockfile and "
-        "individual test logs are saved alongside this report.\n\n"
-        "Unresolved work: this fixture covers routing only. Review other "
-        "migration changes and dependency advisories for a production application.\n",
+        "| Express 5.1.0, /*splat | Four pass; root, nested filters, and empty search fail |\n"
+        "| Express 5.1.0, /{*splat} | Five pass; nested filters and empty search fail |\n"
+        "| Extended query parser restored | Seven pass; empty search fails |\n"
+        "| Empty request body handled | Eight tests pass |\n\n"
+        "Compatibility changes: name the fallback wildcard and include `/`; "
+        "preserve nested query filters by selecting the extended parser; "
+        "handle an unparsed request body as an empty search. Without these fixes, "
+        "clients cannot open the app, filtered searches return unwanted tickets, "
+        "and empty searches return HTTP 500.\n\n"
+        f"```diff\n{app_patch}```\n\n"
+        "Follow-up: verify real client requests and filter validation/limits, "
+        "review dependency advisories, and test rollout and rollback. "
+        "The full proposed patch, target lockfile, dependency versions, and "
+        "individual test logs are saved alongside this report.\n",
         encoding="utf-8",
     )
     blocked = work / "blocked"
@@ -207,7 +252,7 @@ def main():
     (OUTPUT / "environment.txt").write_text(
         f"Python {sys.version.split()[0]}\n"
         + subprocess.check_output(["node", "--version"], text=True)
-        + "Local execution only. Console, sbx, GitHub delivery, and email are unverified.\n"
+        + "Local execution only. Console, sbx, and GitHub delivery are unverified.\n"
     )
     print(f"All local checks passed. Evidence and bundle: {OUTPUT}")
 
