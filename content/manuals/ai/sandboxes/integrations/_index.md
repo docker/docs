@@ -86,6 +86,7 @@ a mountless sandbox that uses a Docker-provided agent template, select
 - [Claude Desktop](claude-desktop.md)
 - [ChatGPT](chatgpt.md)
 - [T3 Code](t3-code.md)
+- [Orca](orca.md)
 
 ## How SSH connections work
 
