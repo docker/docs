@@ -584,7 +584,13 @@ clone mode. Omit `workspace` to create a sandbox without a host bind mount. Set
 that declares it.
 
 `sbx` mounts the environment file read-only inside the sandbox. Keep the file
-outside direct-mounted workspaces or directly in a workspace root.
+outside direct-mounted workspaces or directly in a workspace root. A file
+below the workspace root can still be replaced by renaming its parent directory.
+
+For a local environment, set `sandboxOptions.writableEnvFiles: true` to let the
+agent edit a shared environment file. The plan reports that the file is
+writable. Only use this option when you trust the agent to change lifecycle
+and secret commands that future invocations run on your host.
 
 | Field   | Type    | Required | Default | Description                                                     |
 | ------- | ------- | -------- | ------- | --------------------------------------------------------------- |
@@ -617,6 +623,7 @@ paths resolve from the directory of the environment file that declares them.
 | `display`     | boolean         | `false`  | Provision a display socket for graphical applications |
 | `gpu`         | boolean         | `false`  | Pass the host GPU through to the sandbox               |
 | `usb`         | list of strings | None     | USB device selectors to pass through to the sandbox   |
+| `writableEnvFiles` | boolean     | `false`  | Let the sandbox write to shared environment files; local only |
 
 For local sandboxes, `cpus: 0` allocates all host CPUs, except on Linux arm64
 hosts, where the default is capped at 16. Set `cpus` to an explicit count to
