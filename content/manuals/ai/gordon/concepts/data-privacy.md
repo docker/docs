@@ -86,9 +86,6 @@ Your data is protected through encryption in transit. For paid subscriptions,
 no persistent storage occurs—Gordon processes your requests and discards the
 data immediately.
 
-For questions about privacy terms and conditions, review the
-[Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/).
-
 ## Organizational data policies
 
 For Business subscriptions, administrators can enable or disable Gordon for
