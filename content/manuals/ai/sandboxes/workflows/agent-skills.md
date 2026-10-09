@@ -93,6 +93,9 @@ All imported skills go into the same store, regardless of their source. If
 more than one source contains a skill with the same directory name, the skill
 from the first source in the table wins and `sbx` warns about the others.
 
+Import follows symlinks to skill directories at the top level of each source.
+Symlinks inside skill directories and loose files at the top level are skipped.
+
 Import the skills:
 
 ```console
