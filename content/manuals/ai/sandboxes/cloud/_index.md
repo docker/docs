@@ -50,6 +50,15 @@ Sign in with the same Docker account you used to subscribe:
 $ sbx login
 ```
 
+For CI and other environments without a browser, sign in with a Docker
+Personal Access Token (PAT) for the subscribed account:
+
+```console
+$ echo "$DOCKER_PAT" | sbx login --username <your-docker-id> --password-stdin
+```
+
+For PAT setup instructions, see [CI and headless use](../workflows/automation.md).
+
 Check cloud connectivity and account access:
 
 ```console
