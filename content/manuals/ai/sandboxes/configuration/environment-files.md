@@ -77,10 +77,24 @@ named `web-app`, installs Playwright and Chromium, and publishes sandbox port
 `3000` on the host. It then attaches to the agent. Later runs attach to the
 existing sandbox.
 
-This placement keeps the environment file outside the agent's writable
-workspace. If you later add `additionalWorkspaces`, keep `sbxenv.yaml`
-outside those directories too. See the [`workspace` guidance](#workspace)
-for details.
+
+
+### Protect the environment file
+
+Environment files can declare lifecycle and secret commands that run on your
+host. Keep them outside writable sandbox mounts so the agent cannot change
+what a later invocation runs. This applies to both the primary workspace and
+`additionalWorkspaces`.
+
+If you need to keep an environment file in a direct-mounted workspace, place
+it directly in the workspace root. `sbx` mounts the file read-only by default,
+but a file in a subdirectory can still be replaced by renaming its parent
+directory.
+
+For a local environment where you intend the agent to edit the file, set
+`sandboxOptions.writableEnvFiles: true`. The plan reports that the file is
+writable. Use this option only when you trust the agent to change commands
+that future invocations run on your host.
 
 ## Commands
 
@@ -459,6 +473,24 @@ already approved. Literal secret values appear as SHA-256 digests. Secret
 references, host commands, environment variables, ports, paths, and binding
 domains remain visible so you can review them.
 
+Changes appear under the same keys and nesting as the environment file.
+For example, this plan changes `GOFLAGS` from `-mod=mod` to `-mod=readonly`:
+
+```text
+   env:
+~    GOFLAGS: -mod=mod -> -mod=readonly
+```
+
+Read the symbol beside each entry before approving the plan:
+
+| Symbol | Effect of applying the entry |
+| ------ | ---------------------------- |
+| `+` | Add a resource |
+| `~` | Change a resource |
+| `-` | Destroy a resource |
+| `>` | Run a host command again |
+| `!` | Stop tracking a resource that is no longer declared, without deleting it |
+
 Interactive approval is recorded for the environment under the `sbx` state
 directory. Plans without host commands apply silently on later invocations until
 the environment changes or a resource is missing. An approval provided with
@@ -583,8 +615,8 @@ clone mode. Omit `workspace` to create a sandbox without a host bind mount. Set
 `workspace: .` to mount the directory that contains the environment file
 that declares it.
 
-`sbx` mounts the environment file read-only inside the sandbox. Keep the file
-outside direct-mounted workspaces or directly in a workspace root.
+For environment file placement and write protection, see
+[Protect the environment file](#protect-the-environment-file).
 
 | Field   | Type    | Required | Default | Description                                                     |
 | ------- | ------- | -------- | ------- | --------------------------------------------------------------- |
@@ -617,6 +649,7 @@ paths resolve from the directory of the environment file that declares them.
 | `display`     | boolean         | `false`  | Provision a display socket for graphical applications |
 | `gpu`         | boolean         | `false`  | Pass the host GPU through to the sandbox               |
 | `usb`         | list of strings | None     | USB device selectors to pass through to the sandbox   |
+| `writableEnvFiles` | boolean     | `false`  | Let the sandbox write to shared environment files; local only |
 
 For local sandboxes, `cpus: 0` allocates all host CPUs, except on Linux arm64
 hosts, where the default is capped at 16. Set `cpus` to an explicit count to

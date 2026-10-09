@@ -676,8 +676,9 @@ The `sbx kit` subcommands validate, inspect, and publish kits:
   for sharing.
 - `sbx kit push <path> <ref>` — publish to an OCI registry (for example,
   `ghcr.io/myorg/my-kit:1.0`).
-- `sbx kit pull <ref>` — download a kit from a registry as a ZIP file to
-  the working directory.
+- `sbx kit pull <ref>` — download a kit to the working directory as `.zip`
+  for schema v1 or `.tar.gz` for schema v2. Use `--output <FILE>` to choose
+  the output path.
 
 For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
 `sbx login`. For other registries, they prefer credentials stored with
@@ -717,6 +718,19 @@ $ sbx kit push ./my-kit/ ghcr.io/myorg/my-kit:1.0 --sign
 ```
 
 ZIP kits can't carry verifiable signatures.
+
+### Inspect provenance
+
+Pushing a kit also attaches a provenance attestation that records its content
+digests, declared sandbox image, and source Git commit when pushed from a
+working tree. Inspect it to check the source of a published kit:
+
+```console
+$ sbx kit provenance ghcr.io/myorg/my-kit:1.0
+```
+
+Provenance is unsigned by default. Use `sbx kit push --sign` to sign both the
+kit manifest and its provenance when publishing.
 
 ### Require signed kits
 
