@@ -178,6 +178,20 @@ commands to remove them. To remove the example secret:
 $ sbx secret rm mcp:acme:api-key
 ```
 
+### Docker Hardened Image
+
+You can pass a Docker Hardened Image reference to `--url`. `sbx` reads the MCP
+server manifest from the image's attestation:
+
+```console
+$ sbx mcp add fetch --url dhi.io/fetch-mcp:latest
+```
+
+Use a tag or digest, such as `dhi.io/<IMAGE>:<TAG>` or
+`dhi.io/<IMAGE>@sha256:<DIGEST>`. Other direct image references aren't accepted
+by `--url`. Use a registry or server-manifest URL for those images, or
+`--command docker` to supply the command yourself.
+
 ### Local stdio server
 
 Some MCP servers communicate over stdio instead of exposing a remote HTTP
