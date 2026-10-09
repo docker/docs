@@ -464,10 +464,11 @@ command can consume a bundled file from `files/home/`, but not one from
 
 `sbx kit add` recreates the sandbox rather than modifying it in place. It
 supports mixin kits limited to
-`environment.variables`, `setup.install`, and `permissions.network.allow`,
-which follow the same order as sandbox creation. It rejects a kit that declares
-static files, `setup.startup`, or `setup.files`. To use those fields, recreate
-the sandbox with the kit.
+`environment.variables`, `setup.install`, `setup.startup`, and
+`permissions.network.allow`, which follow the same order as sandbox creation.
+Startup commands run after the kit is added and on each subsequent sandbox
+start. The command rejects kits that declare static files or `setup.files`.
+To use those fields, create the sandbox with the kit included.
 
 ### install
 
