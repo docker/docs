@@ -1,0 +1,24 @@
+openapi: 3.0.3
+info:
+  title: Pet API
+  version: 1.0.0
+paths:
+  /pets:
+    get:
+      responses:
+        "200":
+          description: List pets
+  /pets/{id}:
+    get:
+      responses:
+        "200":
+          description: Read a pet
+    delete:
+      responses:
+        "204":
+          description: Delete a pet
+  /legacy:
+    get:
+      responses:
+        "200":
+          description: Legacy response
