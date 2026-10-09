@@ -25,11 +25,115 @@ attestation infrastructure.
 > [!IMPORTANT]
 >
 > You must authenticate to the Docker Hardened Images registry (`dhi.io`) to
-> pull images. Use your Docker ID credentials (the same username and password
-> you use for Docker Hub) when signing in. If you don't have a Docker account,
-> [create one](../../accounts/individual/create-account.md) for free.
+> pull images. Use your Docker ID credentials, a personal access token, an
+> organization access token, or a Docker-issued OIDC access token. See
+> [DHI authentication options](./use.md).
 >
 > Run `docker login dhi.io` to authenticate.
+
+## Authenticate with OIDC in GitHub Actions
+
+Use an [OIDC connection](/manuals/security/authentication/oidc-connections/create-manage.md)
+to read DHI images and attestations with short-lived Docker access tokens.
+Use your Docker organization name as the username and the Docker-issued access
+token as the password. The GitHub identity token is exchanged for this access
+token. Don't use the GitHub identity token as a registry password.
+
+Configure the connection's [rulesets and subject claims](/manuals/security/authentication/oidc-connections/rulesets-claims.md)
+to match your workflow and grant pull access to the repository:
+
+- For `dhi.io/<image>`, the repository grant must cover `dhi/<image>`.
+- For a mirrored or customized image, the grant must cover
+  `<your-organization>/<repository>`.
+
+The same repository grant controls reads of the image's private attestations
+from `registry.scout.docker.com`. Signing in doesn't grant access to other
+repositories or change your organization's DHI subscription. OIDC repository
+grants don't authorize managing customizations or other organization settings.
+
+The following workflow uses `regctl` to read a mirrored image manifest and list
+its attestations. Set these GitHub Actions repository variables:
+
+- `DOCKER_ORG`: Your Docker organization name
+- `DOCKER_OIDC_CONNECTION_ID`: Your OIDC connection ID
+- `DHI_REPOSITORY`: The mirrored repository name, such as `dhi-node`
+- `DHI_TAG`: The image tag, such as `22`
+
+Grant the connection pull access to `DOCKER_ORG/DHI_REPOSITORY`, and ensure its
+subject claims match this workflow's `workflow_dispatch` run on your selected
+branch. The exchange requests a token with a five-minute lifetime. Run the
+registry operations before the token expires. Longer jobs must obtain a fresh
+token before further registry operations.
+
+```yaml
+name: Read DHI attestations
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_ORG: ${{ vars.DOCKER_ORG }}
+      DOCKER_OIDC_CONNECTION_ID: ${{ vars.DOCKER_OIDC_CONNECTION_ID }}
+      DHI_REPOSITORY: ${{ vars.DHI_REPOSITORY }}
+      DHI_TAG: ${{ vars.DHI_TAG }}
+    steps:
+      - name: Install regctl
+        uses: regclient/actions/regctl-installer@v0.1.0
+        with:
+          release: v0.8.2
+      - name: Exchange the GitHub identity token and sign in
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const identityToken = await core.getIDToken('https://identity.docker.com');
+            const response = await fetch('https://identity.docker.com/oauth/token', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              body: new URLSearchParams({
+                grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
+                subject_token_type: 'urn:ietf:params:oauth:token-type:id_token',
+                subject_token: identityToken,
+                connection_id: process.env.DOCKER_OIDC_CONNECTION_ID,
+                expires_in: '300'
+              })
+            });
+            if (!response.ok) {
+              throw new Error(`Docker token exchange failed: HTTP ${response.status}`);
+            }
+            const {access_token: token} = await response.json();
+            if (typeof token !== 'string' || !token) {
+              throw new Error('Docker token exchange returned no access token');
+            }
+            core.setSecret(token);
+            for (const registry of ['docker.io', 'registry.scout.docker.com']) {
+              await exec.getExecOutput('regctl', [
+                'registry', 'login', registry,
+                '--user', process.env.DOCKER_ORG, '--pass-stdin'
+              ], {input: token, silent: true});
+            }
+      - name: Read the manifest and list attestations
+        run: |
+          regctl manifest get "docker.io/${DOCKER_ORG}/${DHI_REPOSITORY}:${DHI_TAG}"
+          regctl artifact list "docker.io/${DOCKER_ORG}/${DHI_REPOSITORY}:${DHI_TAG}" \
+            --external "registry.scout.docker.com/${DOCKER_ORG}/${DHI_REPOSITORY}" \
+            --platform linux/amd64
+      - name: Sign out
+        if: always()
+        run: |
+          regctl registry logout docker.io
+          regctl registry logout registry.scout.docker.com
+```
+
+For an image pulled directly from `dhi.io`, sign in to `dhi.io` instead of
+`docker.io`. Use `dhi.io/<image>:<tag>` as the image reference and
+`registry.scout.docker.com/dhi/<image>` as the external attestation repository.
+Update the repository grant and sign-out step to match.
 
 ## Verify image attestations
 
@@ -67,6 +171,8 @@ pull access to the DHI repositories you want to verify. Only repositories in
 the token's scope are accessible. Alternatively, you can authenticate as a
 Docker Hub user with a [personal access token
 (PAT)](../../security/access-tokens/personal-access-tokens.md) that has `read only` access.
+For GitHub Actions, use the [OIDC workflow](#authenticate-with-oidc-in-github-actions)
+to authenticate with a Docker-issued token instead of an OAT or PAT.
 
 > [!WARNING]
 >
