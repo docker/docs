@@ -1,0 +1,13 @@
+{
+  "openapi": "3.0.3",
+  "info": { "title": "Pet API", "version": "2.0.0" },
+  "paths": {
+    "/pets": {
+      "get": { "responses": { "200": { "description": "List pets" } } },
+      "post": { "responses": { "201": { "description": "Create a pet" } } }
+    },
+    "/pets/{id}": {
+      "get": { "responses": { "200": { "description": "Read a pet" } } }
+    }
+  }
+}
