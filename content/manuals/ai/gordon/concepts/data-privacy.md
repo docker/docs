@@ -2,6 +2,7 @@
 title: Data privacy and Gordon
 linkTitle: Data privacy
 description: How Gordon handles your data and what information is collected
+keywords: Gordon, data privacy, data retention, security
 weight: 30
 ---
 
@@ -85,9 +86,8 @@ Your data is protected through encryption in transit. For paid subscriptions,
 no persistent storage occurs—Gordon processes your requests and discards the
 data immediately.
 
-For questions about privacy terms and conditions, review [Gordon's
-Supplemental
-Terms](https://www.docker.com/legal/docker-ai-supplemental-terms/).
+For questions about privacy terms and conditions, review the
+[Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/).
 
 ## Organizational data policies
 
@@ -120,5 +120,5 @@ for details.
 For questions about Docker's privacy practices:
 
 - Review the [Docker Privacy Policy](https://www.docker.com/legal/privacy/)
-- Read [Gordon's Supplemental Terms](https://www.docker.com/legal/docker-ai-supplemental-terms/)
+- Read the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/)
 - Contact Docker Support for specific concerns
