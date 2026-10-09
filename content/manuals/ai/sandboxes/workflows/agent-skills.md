@@ -92,14 +92,16 @@ All imported skills go into the same store, regardless of their source. If
 more than one source contains a skill with the same directory name, the skill
 from the first source in the table wins and `sbx` warns about the others.
 
-Import follows symlinks to skill directories at the top level of each source.
-Symlinks inside skill directories and loose files at the top level are skipped.
-
-Import the skills:
+Copy the skills into the shared store:
 
 ```console
 $ sbx skills import
 ```
+
+Import copies each skill directory, including directories reached through a
+symlink at the top level of a source. It skips symlinks inside skill directories
+and loose files in the source directory. If a skill depends on linked files,
+replace those links with files before importing it.
 
 The final output reports the shared store path. The default locations are:
 
