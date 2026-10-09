@@ -323,6 +323,22 @@ secret to the OAuth client. For secrets stored by a version that used
 `mcp:<server>.client_secret`, set the secret again using the colon-separated
 name.
 
+If you register the same server name with a different client ID, issuer, or
+token endpoint, `sbx` won't reuse the bound client secret. Store the secret
+again for the new client:
+
+```console
+$ sbx secret set mcp:slack:client_secret
+```
+
+If you intend to reuse the existing secret with a different OAuth identity,
+remove only its identity binding before authorizing again:
+
+```console
+$ sbx secret rm mcp:slack:client_secret:identity
+$ sbx mcp auth slack
+```
+
 ### Set the OAuth resource indicator
 
 OAuth requests identify the MCP server the token is intended for with a
