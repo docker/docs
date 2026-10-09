@@ -6,6 +6,12 @@ aliases:
 - /security/trust/trust_sandbox/
 ---
 
+> [!WARNING]
+>
+> Docker Content Trust (DCT) is being retired. The Notary v1 service at
+> `notary.docker.io` will shut down on December 8, 2026. For more information, see
+> [Docker Content Trust (DCT)](/manuals/retired.md#docker-content-trust-dct).
+
 This page explains how to set up and use a sandbox for experimenting with trust.
 The sandbox allows you to configure and try trust operations locally without
 impacting your production images.

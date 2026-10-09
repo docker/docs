@@ -6,6 +6,12 @@ aliases:
 - /ee/dtr/user/access-dtr/configure-your-notary-client/
 ---
 
+> [!WARNING]
+>
+> Docker Content Trust (DCT) is being retired. The Notary v1 service at
+> `notary.docker.io` will shut down on December 8, 2026. For more information, see
+> [Docker Content Trust (DCT)](/manuals/retired.md#docker-content-trust-dct).
+
 Delegations in Docker Content Trust (DCT) allow you to control who can and cannot sign
 an image tag. A delegation will have a pair of private and public delegation keys. A delegation 
 could contain multiple pairs of keys and contributors in order to a) allow multiple users 
