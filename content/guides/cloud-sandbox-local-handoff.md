@@ -5,7 +5,6 @@ keywords: docker sandboxes, sbx move, cloud sandbox, claude code, task handoff
 summary: |
   Carry a prepared project and task notes into a cloud sandbox, leave the
   agent working, and retrieve a bundle of its results.
-draft: true
 params:
   tags: [ai]
   time: 25 minutes

@@ -3,7 +3,8 @@
 This directory is the prepared content for a companion repository. Publish its
 source files, README files, `.gitignore`, and `LICENSE`, excluding generated
 output and caches. No remote repository has been created. The documentation
-guides remain Hugo drafts until the live workflows have been verified.
+guides render in previews while the pull request remains a draft pending live
+verification.
 
 - `api-change-reporter/` contains the optional reference implementation for
   the build guide and the independent starting point for the transfer guide
@@ -37,7 +38,7 @@ HTTP server and verified after that server stopped.
 
 ## Complete live verification
 
-Before removing `draft: true` from the guides:
+Before publishing the guides:
 
 - Publish this directory as a companion repository and record its baseline
   commit. Replace the companion setup notes in the guides with that verified

@@ -5,7 +5,6 @@ keywords: cloud sandboxes, claude code, openapi, python, api changes
 summary: |
   Turn an idea into a tested command-line tool, open its report through a
   sandbox port, and download the work to keep it.
-draft: true
 params:
   tags: [ai]
   time: 20 minutes

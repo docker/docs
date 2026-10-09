@@ -5,7 +5,6 @@ keywords: cloud sandboxes, claude code, express, dependency upgrade, github issu
 summary: |
   Reproduce a dependency upgrade failure, test the smallest fix, and return
   findings to the GitHub issue where the work was requested.
-draft: true
 params:
   tags: [ai]
   time: 20 minutes
