@@ -115,6 +115,9 @@ Compose include:
   requires: Docker Compose [2.20.3](https://github.com/docker/compose/releases/tag/v2.20.3) and later
 Compose interface-name:
   requires: Docker Compose [2.36.0](https://github.com/docker/compose/releases/tag/v2.36.0) and later
+Compose jobs:
+  availability: Experimental
+  requires: Docker Engine with the [jobs extension](/manuals/engine/daemon/jobs.md#turn-on-the-jobs-extension) turned on
 Compose label file:
   requires: Docker Compose [2.32.2](https://github.com/docker/compose/releases/tag/v2.32.2) and later
 Compose lifecycle hooks:
@@ -162,6 +165,9 @@ Docker Build Cloud:
   subscription: [Pro, Team, Business]
 Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
+Docker Engine jobs:
+  availability: Experimental
+  requires: Docker Compose
 Docker Offload:
   subscription: [Docker Offload]
   requires: Docker Desktop 4.68 or later
