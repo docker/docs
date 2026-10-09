@@ -76,9 +76,8 @@ Preview the skills that `sbx` finds without copying them:
 $ sbx skills import --dry-run
 ```
 
-The command scans the following directories in order and copies each skill
-subdirectory into the shared store. When the sandbox starts, `sbx` mounts the
-store at the path the agent reads inside the sandbox.
+The preview scans the host sources in the following order. The table also
+shows where supported agents read the shared store inside the sandbox:
 
 | Agent       | Host source         | Sandbox mount target          |
 | ----------- | ------------------- | ----------------------------- |
