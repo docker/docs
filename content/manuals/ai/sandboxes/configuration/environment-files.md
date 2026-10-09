@@ -473,23 +473,23 @@ already approved. Literal secret values appear as SHA-256 digests. Secret
 references, host commands, environment variables, ports, paths, and binding
 domains remain visible so you can review them.
 
-The plan follows the environment file's keys and nesting. Symbols in the
-margin identify what applying each change does:
-
-| Symbol | Meaning |
-| ------ | ------- |
-| `+` | Add a resource |
-| `~` | Change a resource |
-| `-` | Destroy a resource |
-| `>` | Run a host command again |
-| `!` | Stop tracking a previously applied resource that is no longer declared |
-
-For example, a variable change shows the previous and proposed values:
+Changes appear under the same keys and nesting as the environment file.
+For example, this plan changes `GOFLAGS` from `-mod=mod` to `-mod=readonly`:
 
 ```text
    env:
 ~    GOFLAGS: -mod=mod -> -mod=readonly
 ```
+
+Read the symbol beside each entry before approving the plan:
+
+| Symbol | Effect of applying the entry |
+| ------ | ---------------------------- |
+| `+` | Add a resource |
+| `~` | Change a resource |
+| `-` | Destroy a resource |
+| `>` | Run a host command again |
+| `!` | Stop tracking a resource that is no longer declared, without deleting it |
 
 Interactive approval is recorded for the environment under the `sbx` state
 directory. Plans without host commands apply silently on later invocations until
