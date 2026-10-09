@@ -82,11 +82,11 @@ For Docker Model Runner, see
 ## Use a hosted provider
 
 Select a provider supported by `llmman` and a model available from that
-provider. For example, to run Codex with an OpenAI model, export `OPENAI_API_KEY`
-in your host shell, restart the daemon to pick it up, then run:
+provider. For example, store your OpenAI API key on the host, then run Codex
+with an OpenAI model:
 
 ```console
-$ sbx daemon restart
+$ sbx secret set openai
 $ sbx run --provider openai --model gpt-5-nano codex
 ```
 
@@ -96,19 +96,41 @@ variable names, see the [llmman provider documentation](https://github.com/llmma
 
 ### Provider authentication
 
-Make the provider's API key available in the host shell that starts the
-Docker Sandboxes daemon. For a custom endpoint, choose the variable name
-with [`apiKeyEnv`](#connect-a-custom-endpoint).
+Store the API key with `sbx secret set <PROVIDER_ID>`, using the same ID as
+`--provider` or `--overflow-provider`. This also works for a custom provider
+ID defined in `model.providers`. Sandbox-scoped secrets take precedence over
+global secrets.
 
-`llmman` inherits the daemon's environment. After setting or changing a key,
-run `sbx daemon restart` from the shell containing the updated variable.
+The sandbox sends a placeholder in place of the key. The host proxy replaces
+it with the stored key only in authentication headers on requests to the host's
+`llmman` service. That service uses the key to authenticate requests to the
+selected provider. The real key stays outside the sandbox.
+
+Docker Sandboxes configures this injection automatically when you select the
+provider. You don't need `sbx secret set-custom` or domain injection rules for
+this workflow.
+
+> [!WARNING]
+> Model-provider credentials are protected differently from other sandbox
+> credentials. For other credentials, the proxy restricts injection to their
+> configured domains. For model providers, it supplies the key to the host's
+> `llmman` service instead. That service can forward the key to other endpoints
+> it supports; selecting `--provider` does not restrict the key to that
+> provider's endpoint.
+
+If no stored secret is available, make the key available in the host shell
+that starts the daemon. For a custom endpoint, choose the variable name with
+[`apiKeyEnv`](#connect-a-custom-endpoint).
+
+`llmman` inherits the daemon's environment. After setting or changing a key
+in that environment, run `sbx daemon restart` from the shell containing the
+updated variable.
 This restarts the model service and interrupts model requests from sandboxes
 using it. Setting a variable only in the shell where you run `sbx run --model`
 doesn't update an already-running service.
 
-Provider authentication for this route is handled by `llmman` on the host.
-Credentials stored with `sbx secret set` aren't automatically supplied to it.
-For the agents' default authentication flows, see
+Using a stored secret avoids restarting the daemon to load a key from its
+environment. For the agents' default authentication flows, see
 [Manage credentials](credentials.md).
 
 ## Connect a custom endpoint
@@ -127,7 +149,7 @@ $ sbx settings get model.providers
 For an OpenAI-compatible endpoint, define a provider named `company`:
 
 ```console
-$ sbx settings set model.providers '{"company":{"url":"https://inference.example.com/v1","wire":"openai","apiKeyEnv":"COMPANY_API_KEY"}}'
+$ sbx settings set model.providers '{"company":{"url":"https://inference.example.com/v1","wire":"openai"}}'
 ```
 
 Replace the URL with your endpoint's base URL. Setting `model.providers`
@@ -137,14 +159,15 @@ replaces the whole object, so include any existing providers you want to keep.
 | --- | --- |
 | `url` | Required HTTP or HTTPS base URL, usually ending in `/v1`. Use the base URL, without `/chat/completions` or `/messages`. |
 | `wire` | The endpoint's API format: `openai` (default) or `anthropic`. This describes the endpoint, regardless of which agent you run. |
-| `apiKeyEnv` | Name of the host environment variable containing the API key. Omit it for an endpoint that doesn't require a key. |
+| `apiKeyEnv` | Name of an optional host environment variable containing the API key. Used as a fallback when no stored provider secret is available. |
 | `name` | Optional display name. Defaults to the provider ID. |
 
-Export `COMPANY_API_KEY` in your host shell as described in
-[Provider authentication](#provider-authentication), then select the provider
-and a model served by that endpoint:
+If the endpoint requires an API key, store it using the provider ID
+(`company`). Docker Sandboxes configures authentication when you select that
+provider with `--provider`:
 
 ```console
+$ sbx secret set company
 $ sbx run --provider company --model <MODEL_NAME> claude
 ```
 
