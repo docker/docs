@@ -178,20 +178,6 @@ commands to remove them. To remove the example secret:
 $ sbx secret rm mcp:acme:api-key
 ```
 
-### Docker Hardened Image
-
-You can pass a Docker Hardened Image reference to `--url`. `sbx` reads the MCP
-server manifest from the image's attestation:
-
-```console
-$ sbx mcp add fetch --url dhi.io/fetch-mcp:latest
-```
-
-Use a tag or digest, such as `dhi.io/<IMAGE>:<TAG>` or
-`dhi.io/<IMAGE>@sha256:<DIGEST>`. Other direct image references aren't accepted
-by `--url`. Use a registry or server-manifest URL for those images, or
-`--command docker` to supply the command yourself.
-
 ### Local stdio server
 
 Some MCP servers communicate over stdio instead of exposing a remote HTTP
@@ -254,6 +240,19 @@ development, private servers, or custom container flags.
 > network resources, and credentials made available to it. Use trusted commands
 > and images, and avoid mounting host paths or passing credentials unless the
 > server needs them.
+
+### Docker Hardened Image
+
+For an MCP server packaged as a Docker Hardened Image, pass its `dhi.io`
+reference instead of a registry or manifest URL:
+
+```console
+$ sbx mcp add fetch --url dhi.io/fetch-mcp:latest
+```
+
+Use a tag or digest: `dhi.io/<IMAGE>:<TAG>` or
+`dhi.io/<IMAGE>@sha256:<DIGEST>`. For images from other registries, use a
+server-manifest URL or an [explicit command](#from-an-explicit-command).
 
 ## Authorize OAuth-backed servers
 
