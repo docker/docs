@@ -4,7 +4,7 @@ description: |-
     Show hosted OAuth credential status for registered MCP servers.
 
     This command does not start OAuth or refresh expired credentials.
-usage: sbx mcp auth status [server-name] [flags]
+usage: sbx mcp auth status [SERVER] [flags]
 options:
     - name: all
       default_value: "false"
@@ -18,7 +18,7 @@ options:
       usage: help for status
     - name: json
       default_value: "false"
-      usage: Output in JSON format (alias for --format json)
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"

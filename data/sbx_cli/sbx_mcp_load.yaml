@@ -14,7 +14,7 @@ description: |-
     There is no local registration: the cloud gateway resolves the server name
     itself, and the sandbox may be given by name or sbx_ ID. Connected agents see
     the new server's tools immediately.
-usage: sbx mcp load <name> --sandbox <sandbox> [flags]
+usage: sbx mcp load NAME --sandbox SANDBOX [flags]
 options:
     - name: help
       shorthand: h

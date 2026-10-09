@@ -70,5 +70,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx env rm
+
+      # Also remove the credential bindings the environment created
+      sbx env rm --force --prune-bindings ./project
 see_also:
     - sbx env - (Experimental) Manage sandboxes declaratively from an sbxenv.yaml file

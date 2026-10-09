@@ -5,15 +5,17 @@ description: |-
 
     Use --json to print the complete setting record, including its source, type,
     default, and description.
-usage: sbx settings get <key> [flags]
+usage: sbx settings get KEY [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for get
     - name: json
       default_value: "false"
-      usage: Print the complete setting record as JSON
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"

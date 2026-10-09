@@ -352,14 +352,14 @@ Automation can create the sandbox without attaching, run commands in it, and
 remove it afterward:
 
 ```console
-$ sbx env create --auto-approve
+$ sbx env create --force
 $ sbx env exec -- npm test
 $ sbx env rm --force
 ```
 
-`--auto-approve` approves the plan for that invocation without recording
-consent for later invocations. Use the flag for each unattended `create` or
-`run`. The `--force` flag approves the destroy plan and removes the sandbox even
+For `create` and `run`, `--force` approves the plan for that invocation without
+recording consent for later invocations. Use the flag for each unattended `create` or
+`run`. For `rm`, `--force` approves the destroy plan and removes the sandbox even
 when it is in use.
 
 Commands and vault references under `secrets` resolve on the host, so the
@@ -390,7 +390,7 @@ Review the plan, create the sandbox without attaching, and run a command:
 
 ```console
 $ sbx --cloud env plan ./cloud.sbxenv.yaml
-$ sbx --cloud env run --detached ./cloud.sbxenv.yaml
+$ sbx --cloud env run --detach ./cloud.sbxenv.yaml
 $ sbx --cloud env exec ./cloud.sbxenv.yaml -- printenv PROJECT_NAME
 ```
 
@@ -431,8 +431,8 @@ $ sbx --cloud env rm ./cloud.sbxenv.yaml
 
 Removal deletes the sandbox and only the secrets provisioned by this
 environment. Inherited secrets remain. Global bindings remain unless you pass
-`--prune-bindings`. For unattended runs, use `--auto-approve` with `create` or
-`run`, and `--force` with `rm`.
+`--prune-bindings`. For unattended runs, use `--force` with `create`,
+`run`, or `rm`.
 
 If creation is interrupted, retry the same command and unchanged declaration
 within 23 hours. Unresolved requests prevent removal. Follow the recovery
@@ -462,7 +462,7 @@ domains remain visible so you can review them.
 Interactive approval is recorded for the environment under the `sbx` state
 directory. Plans without host commands apply silently on later invocations until
 the environment changes or a resource is missing. An approval provided with
-`--auto-approve` applies only to that invocation.
+`--force` applies only to that invocation.
 
 ## Update an environment
 
@@ -688,7 +688,7 @@ commands.
 
 Plans containing lifecycle commands or credential `command` sources require
 approval for every invocation by default, even when the command text hasn't
-changed. Approve one invocation with `--auto-approve`, skip lifecycle commands
+changed. Approve one invocation with `--force`, skip lifecycle commands
 with `--skip-host-commands`, or turn on
 [`env.rememberHostCommands`](settings.md#envrememberhostcommands) to remember
 approval until the commands change:

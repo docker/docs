@@ -295,11 +295,11 @@ a network request with `sbx policy check network`:
 
 ```console
 $ sbx policy check network api.anthropic.com
-Allowed: api.anthropic.com
-
 $ sbx policy check network blocked.example.com
-Denied: blocked.example.com
 ```
+
+The output reports `Allowed` or `Denied`, along with governance and context
+details. A denied check returns a non-zero exit status.
 
 The target can be a hostname, a `host:port` pair, an IP address, or a URL.
 Bare hostnames and IP addresses are evaluated against port 443. This is useful
@@ -340,7 +340,7 @@ $ sbx policy reset --force
 
 If rules you add with `sbx policy allow` don't change sandbox behavior, your
 organization likely has governance enabled. Run `sbx policy ls` to check: if
-the output starts with a `Governance:` status line showing `Managed by <org>`,
+the summary block contains `Governance: Managed by <org>`,
 org governance is active. When it's active, local allow rules are inactive.
 You can't use them to loosen restrictions the org policy imposes.
 

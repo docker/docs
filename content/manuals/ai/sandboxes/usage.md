@@ -9,7 +9,9 @@ This page describes local sandboxes. For cloud commands, file transfers, ports,
 and expiration, see [Use cloud sandboxes](cloud/usage.md).
 
 Use this page as a command-oriented guide to day-to-day `sbx` operations. For
-scenario-based recommendations, see [Workflow patterns](workflows/).
+scenario-based recommendations, see [Workflow patterns](workflows/). For script
+output and the v0.48.0 CLI migration, see
+[CI and headless use](workflows/automation.md#update-scripts-for-v0480).
 
 ## Sign in
 
@@ -82,7 +84,7 @@ to start, the sandbox is also removed. If you reattach to an existing sandbox
 with `--rm`, that sandbox is removed only after its agent session finishes.
 
 `--rm` needs an attached agent session to know when to remove the sandbox, so
-you can't combine it with `--detached` or `--detach-keys`.
+you can't combine it with `--detach` or `--detach-keys`.
 
 ## Choose a workspace
 
@@ -173,7 +175,7 @@ sessions keep it running. Its files and configuration persist. Running
 
 To keep a sandbox running after every session ends, for example to serve an
 application on a [published port](#publish-ports), start it with
-`sbx run --detached` (`-d`). The command starts the sandbox, prints its ID,
+`sbx run --detach` (`-d`). The command starts the sandbox, prints its ID,
 and returns without opening an agent session:
 
 ```console
@@ -287,6 +289,9 @@ to switch between the sandboxes panel and the network panel.
 
 From the network panel you can browse connection logs, allow or block specific
 hosts, and add custom network rules. Press `?` to see all keyboard shortcuts.
+
+At selection and text prompts, Enter accepts the default. Ctrl-D cancels the
+prompt. Declining a confirmation returns a non-zero exit status.
 
 ## Git workspace modes
 
@@ -410,12 +415,13 @@ $ sbx ports my-sandbox
 ```
 
 `sbx ls` shows active port mappings alongside each sandbox. `sbx ports` lists
-them in detail.
+them in detail. The `CREATED` column shows the sandbox age, and the `STATUS`
+column identifies sandboxes kept running in detached mode with `(detached)`.
 
 ```console
 $ sbx ls
-SANDBOX         AGENT   STATUS   PORTS                    WORKSPACE
-my-sandbox      claude  running  127.0.0.1:8080->3000/tcp4 /home/user/proj
+SANDBOX      AGENT    STATUS      PORTS                       WORKSPACE         CREATED
+my-sandbox   claude   ● running   127.0.0.1:8080->3000/tcp4    /home/user/proj    2m
 ```
 
 To stop forwarding a port:
@@ -514,13 +520,9 @@ Changes to user-level agent configuration files, such as
 persist in saved templates.
 
 If the saved template was built for a different agent than the one you
-specify in `sbx run`, you get a warning. For example, saving a Claude
-sandbox and running it with `codex` produces:
-
-```text
-⚠ WARNING: template "my-template:v1" was built for the "claude" agent but you are using "codex".
-  The sandbox may not work correctly. Consider using: sbx run -t my-template:v1 claude
-```
+specify in `sbx run`, the CLI prints a warning to stderr with a suggested
+command. For example, saving a Claude sandbox and running it with `codex`
+suggests `sbx run -t my-template:v1 claude`.
 
 ## Load a template
 

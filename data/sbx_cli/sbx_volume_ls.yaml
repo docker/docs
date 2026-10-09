@@ -2,6 +2,8 @@ name: sbx volume ls
 synopsis: List persistent volumes
 usage: sbx volume ls [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"

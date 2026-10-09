@@ -28,10 +28,15 @@ options:
       default_value: "false"
       usage: |
         Skip confirmation prompts and delete even if in use (e.g. an open SSH connection)
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for rm
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -41,5 +46,13 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx rm my-sandbox
+
+      # Remove several at once
+      sbx rm one two
+
+      # Remove every sandbox without asking
+      sbx rm --all --force
 see_also:
     - sbx - Manage AI coding agent sandboxes.

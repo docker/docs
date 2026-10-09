@@ -1,5 +1,5 @@
 name: sbx template inspect
-synopsis: Show full metadata for a single template
+synopsis: Show template details
 description: |-
     Show full metadata for a single template.
 
@@ -9,6 +9,8 @@ description: |-
     Cloud-only in v1: requires --cloud.
 usage: sbx template inspect NAME|ID [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"

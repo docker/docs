@@ -13,7 +13,7 @@ options:
       usage: help for pack
     - name: output
       shorthand: o
-      usage: 'Output ZIP file path (default: <name>.zip)'
+      usage: 'Output file path; must end in .zip (default: <name>.zip)'
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -23,5 +23,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx kit pack ./my-kit
+
+      # Choose the archive name
+      sbx kit pack ./my-kit --output dist/my-kit.zip
 see_also:
     - sbx kit - (Experimental) Manage kit artifacts

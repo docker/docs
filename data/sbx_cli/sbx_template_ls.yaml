@@ -4,6 +4,8 @@ description: |
     List all template images stored in the sandbox runtime's image store.
 usage: sbx template ls [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"

@@ -1,5 +1,5 @@
 name: sbx volume rm
-synopsis: Delete a persistent volume
+synopsis: Remove a persistent volume
 description: |-
     Delete a persistent volume by name.
 
@@ -11,10 +11,15 @@ options:
       shorthand: f
       default_value: "false"
       usage: Skip confirmation prompt
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for rm
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"

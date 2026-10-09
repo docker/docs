@@ -31,7 +31,6 @@ options:
       usage: |
         What gets captured for this template. "disk" (default) captures only the filesystem — cold-boot from a standard OCI image, faster load. "all" captures memory + disk + microVM checkpoint — sub-second TTI on resume, slower load. Only effective with --cloud.
     - name: description
-      shorthand: d
       usage: Description for the template (cloud only)
     - name: help
       shorthand: h

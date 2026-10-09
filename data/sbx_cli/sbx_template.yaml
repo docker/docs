@@ -30,7 +30,7 @@ inherited_options:
       usage: Enable debug logging
 see_also:
     - sbx - Manage AI coding agent sandboxes.
-    - sbx template inspect - Show full metadata for a single template
+    - sbx template inspect - Show template details
     - sbx template load - Load an image from a tar file into the sandbox runtime
     - sbx template ls - List template images
     - sbx template rm - Remove a template image

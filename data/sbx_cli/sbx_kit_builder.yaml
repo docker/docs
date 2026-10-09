@@ -26,6 +26,6 @@ inherited_options:
       usage: Enable debug logging
 see_also:
     - sbx kit - (Experimental) Manage kit artifacts
-    - sbx kit builder history - Inspect kit build history in the builder sandbox
+    - sbx kit builder history - Show kit build history in the builder sandbox
     - sbx kit builder rm - Remove the kit builder sandbox and its build cache
     - sbx kit builder status - Show the kit builder sandbox and build-cache state

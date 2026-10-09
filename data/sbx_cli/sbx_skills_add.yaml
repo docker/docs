@@ -13,7 +13,7 @@ description: |-
     The repository can be specified as a Git URL or as GitHub owner/repository
     shorthand. Skills installed with this command can later be refreshed with
     'sbx skills update'.
-usage: sbx skills add <repository> [flags]
+usage: sbx skills add REPOSITORY [flags]
 options:
     - name: force
       shorthand: f

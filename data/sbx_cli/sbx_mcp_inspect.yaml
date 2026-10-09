@@ -1,7 +1,9 @@
 name: sbx mcp inspect
 synopsis: Show MCP server details
-usage: sbx mcp inspect <name> [flags]
+usage: sbx mcp inspect NAME [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"

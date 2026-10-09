@@ -26,6 +26,8 @@ description: |-
     skipped servers.
 usage: sbx mcp ls [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"

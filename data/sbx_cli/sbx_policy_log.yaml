@@ -8,6 +8,8 @@ description: |-
     issues or auditing network activity.
 usage: sbx policy log [SANDBOX] [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
@@ -18,10 +20,6 @@ options:
     - name: limit
       default_value: "0"
       usage: Maximum number of log entries to show
-    - name: quiet
-      shorthand: q
-      default_value: "false"
-      usage: Only display log entries
     - name: type
       default_value: all
       usage: |

@@ -1,14 +1,16 @@
 name: sbx daemon status
-synopsis: Check sandboxd daemon status
+synopsis: Show sandboxd daemon status
 usage: sbx daemon status [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for status
     - name: json
       default_value: "false"
-      usage: Output as JSON
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -18,5 +20,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx daemon status
+
+      # Machine-readable output
+      sbx daemon status --format json
 see_also:
     - sbx daemon - Manage sandboxd daemon

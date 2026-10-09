@@ -4,6 +4,8 @@ description: |
     List all sandboxes with their agent, status, published ports, and workspace.
 usage: sbx ls [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
@@ -24,5 +26,13 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx ls
+
+      # Names only, for scripting
+      sbx ls -q
+
+      # Machine-readable output
+      sbx ls --format json
 see_also:
     - sbx - Manage AI coding agent sandboxes.

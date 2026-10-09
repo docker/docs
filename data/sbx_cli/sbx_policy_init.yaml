@@ -26,7 +26,7 @@ description: |-
     one sandbox with --sandbox, keeps the existing allow and deny rules, and can be
     run again. balanced is deny-all plus the balanced allow list added to the scope.
     Use "sbx --cloud policy reset" to clear the rules first.
-usage: sbx policy init <allow-all|balanced|deny-all> [flags]
+usage: sbx policy init allow-all|balanced|deny-all [flags]
 options:
     - name: help
       shorthand: h
