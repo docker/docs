@@ -686,17 +686,6 @@ For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
 Both commands fall back to the Docker credential store, so credentials from
 `docker login` also work.
 
-Every `sbx kit push` attaches a provenance attestation as an OCI referrer.
-It records content digests, the declared sandbox image, and the source Git
-commit when the kit directory is in a working tree. The attestation is unsigned
-unless you pass `--sign`, which signs both the manifest and the provenance.
-
-Inspect the attached provenance with:
-
-```console
-$ sbx kit provenance ghcr.io/myorg/my-kit:1.0
-```
-
 ## Sign and verify kits
 
 Use cosign-compatible Sigstore signatures to verify who approved a kit and
@@ -729,6 +718,19 @@ $ sbx kit push ./my-kit/ ghcr.io/myorg/my-kit:1.0 --sign
 ```
 
 ZIP kits can't carry verifiable signatures.
+
+### Inspect provenance
+
+Pushing a kit also attaches a provenance attestation that records its content
+digests, declared sandbox image, and source Git commit when pushed from a
+working tree. Inspect it to check the source of a published kit:
+
+```console
+$ sbx kit provenance ghcr.io/myorg/my-kit:1.0
+```
+
+Provenance is unsigned by default. Use `sbx kit push --sign` to sign both the
+kit manifest and its provenance when publishing.
 
 ### Require signed kits
 
