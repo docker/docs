@@ -309,6 +309,28 @@ secret to the OAuth client. For secrets stored by a version that used
 `mcp:<server>.client_secret`, set the secret again using the colon-separated
 name.
 
+### Set the OAuth resource indicator
+
+OAuth requests identify the MCP server the token is intended for with a
+resource indicator. `sbx` derives it from the server's protected-resource
+metadata, or from the endpoint URL when that metadata is absent. Use
+`--resource` if the provider expects a different identifier:
+
+```console
+$ sbx mcp add serverx --url https://mcp.serverx.example/mcp \
+  --resource https://api.serverx.example/mcp
+```
+
+The value must be an absolute URI with a scheme and host, without a fragment.
+Run `sbx mcp inspect serverx` to see the effective indicator and its source.
+The registration uses the same value for authorization, token exchange, and
+refresh. To change it, remove the registration and add it again.
+
+The override applies to OAuth flows run by the host, including servers with
+`--oauth-authorization-server` or `--client-id`. For a remote server connected
+through the hosted gateway without these overrides, the gateway doesn't send
+this value and `sbx mcp add` prints a warning.
+
 ### Set OAuth scopes
 
 Use the repeatable `--scope` flag to record the default scopes requested during
