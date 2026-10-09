@@ -287,21 +287,31 @@ exit overwrites the stored snapshot.
 
 ## Customize a cloud sandbox
 
-Cloud templates have their own store. A local template is not available to
-`sbx --cloud` until you transfer it. To capture a running cloud sandbox and
-create another sandbox from that template:
+### Save and reuse a template
+
+Save a running cloud sandbox as a template to reuse its configured filesystem.
+Before saving, remove credentials written to the sandbox filesystem: snapshots
+include those files. Managed cloud secrets stay in the secret store. See
+[Authenticate cloud agents](credentials.md).
 
 ```console
 $ sbx --cloud template save cloud-project cloud-template
 $ sbx --cloud create --name cloud-copy --template cloud-template
 ```
 
+By default, saving a template captures disk state, and sandboxes created from
+it cold-boot from that filesystem. To resume from the running sandbox's state
+instead, add `--capture-mode all` to `template save`. This captures memory,
+disk, and the microVM checkpoint, and takes longer to load.
+
 The template supplies its CPU and memory configuration. Do not combine
 `--template` with an agent name, `--cpus`, or `--memory`. To launch an OCI image
 directly instead, use `--image-ref` with explicit CPU and memory values.
 
-To upload a local template tar as a cloud template, pass the file and a name
-that is unique in your account:
+### Import a local template
+
+Cloud templates have a separate store. To use a local template in the cloud,
+upload its tar file with a name that is unique in your account:
 
 ```console
 $ sbx --cloud template load my-template.tar cloud-template \
@@ -309,18 +319,12 @@ $ sbx --cloud template load my-template.tar cloud-template \
 ```
 
 Both resource flags are required and must match a
-[cloud size](#choose-resources-and-platform). Uploads and snapshots can take
-several minutes for large templates.
+[cloud size](#choose-resources-and-platform). Like `template save`,
+`template load` uses disk capture by default and accepts `--capture-mode all` to capture
+memory and checkpoint state as well. Uploading or saving large templates can
+take several minutes.
 
-For cloud `template save` and `template load`, `--capture-mode disk` is the
-default. It captures the filesystem and starts subsequent sandboxes with a
-cold boot. Use `--capture-mode all` to capture memory, disk, and the microVM
-checkpoint so subsequent sandboxes resume from that state. Capturing all state
-takes longer to load.
-
-Snapshots include credentials written to the sandbox filesystem. Remove those
-credentials before saving a template. Managed cloud secrets stay in the secret
-store. See [Authenticate cloud agents](credentials.md).
+### Customize with kits
 
 Cloud sandboxes also support sandbox kits and `--kit` mixins. See
 [Kits](../customize/_index.md) for customization and
