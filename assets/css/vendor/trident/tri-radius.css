@@ -1,0 +1,31 @@
+/* Auto-generated from tokens/ — DO NOT EDIT — run `pnpm run tokens:build` */
+
+@layer tri.radius {
+:root {
+  --tri-radius-2xl: 16px;
+  --tri-radius-3xl: 24px;
+  --tri-radius-4xl: 32px;
+  --tri-radius-default: 5px;
+  --tri-radius-full: 9999px;
+  --tri-radius-lg: 8px;
+  --tri-radius-md: 6px;
+  --tri-radius-none: 0px;
+  --tri-radius-sm: 4px;
+  --tri-radius-xl: 12px;
+  --tri-radius-xs: 2px;
+}
+}
+
+@theme inline {
+  --radius-2xl: var(--tri-radius-2xl);
+  --radius-3xl: var(--tri-radius-3xl);
+  --radius-4xl: var(--tri-radius-4xl);
+  --radius-default: var(--tri-radius-default);
+  --radius-full: var(--tri-radius-full);
+  --radius-lg: var(--tri-radius-lg);
+  --radius-md: var(--tri-radius-md);
+  --radius-none: var(--tri-radius-none);
+  --radius-sm: var(--tri-radius-sm);
+  --radius-xl: var(--tri-radius-xl);
+  --radius-xs: var(--tri-radius-xs);
+}

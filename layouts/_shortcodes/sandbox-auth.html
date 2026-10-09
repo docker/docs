@@ -83,12 +83,9 @@
           store. The command prompts for the key without displaying it:
         </p>
         <div
-          class="syntax-light dark:syntax-dark overflow-hidden rounded-md border border-gray-200 dark:border-gray-700"
+          class="not-prose overflow-hidden rounded-md border border-gray-200 dark:border-gray-700"
         >
-          {{ transform.Highlight
-            (printf "$ sbx secret set %s" $choice.service)
-            "console" ""
-          }}
+          {{ partial "components/code-source.html" (dict "content" (printf "$ sbx secret set %s" $choice.service) "lang" "console") }}
         </div>
       </div>
     {{ end }}

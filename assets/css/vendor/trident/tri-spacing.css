@@ -1,0 +1,5 @@
+/* Auto-generated from tokens/ — DO NOT EDIT — run `pnpm run tokens:build` */
+
+@theme inline {
+  --spacing: 4px;
+}

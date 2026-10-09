@@ -120,13 +120,12 @@
             </p>
             <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {{- range .ByWeight }}
-                <a
-                  href="{{ .Permalink }}"
-                  class="group flex flex-col gap-1.5 rounded-lg border border-gray-200 p-4 transition-colors hover:border-gray-300 dark:border-gray-800 dark:hover:border-gray-700"
-                >
-                  <span class="font-medium leading-snug text-gray-900 transition-colors group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">{{ .Title }}</span>
-                  <span class="line-clamp-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">{{ .Summary }}</span>
-                </a>
+                {{ partial "components/card.html" (dict
+                  "title" .Title
+                  "description" .Summary
+                  "link" .Permalink
+                  )
+                }}
               {{- end }}
             </div>
           </div>
