@@ -144,6 +144,23 @@ $ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
 Then run the command again. For details, including how to allow local kits or
 any remote source, see [Restrict kit sources](/manuals/ai/sandboxes/customize/use-kits.md#restrict-kit-sources).
 
+## Kit install or startup command fails
+
+If `sbx create` or `sbx run` shows ✗ on a kit's install command, or warns that a
+startup command failed, the full output is inside the sandbox. Read it with
+`sbx exec`:
+
+```console
+$ sbx exec <sandbox-name> cat /var/log/sbx-kits/<kit>/install-<n>.log
+$ sbx exec <sandbox-name> cat /var/log/sbx-kit-startup.log
+```
+
+`<n>` is the install command's position in the kit's `install` list, starting
+at 0. To stream every install command's output and the startup log while the
+sandbox is created, run `sbx -D create` or `sbx -D run`. See
+[Debug a kit](/manuals/ai/sandboxes/customize/author/debug.md) for how to read
+the output and fix the common causes.
+
 ## SSH and other non-HTTP connections fail
 
 Non-HTTP TCP connections such as SSH can be allowed by adding a policy rule for
