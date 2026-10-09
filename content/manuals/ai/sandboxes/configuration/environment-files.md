@@ -77,10 +77,24 @@ named `web-app`, installs Playwright and Chromium, and publishes sandbox port
 `3000` on the host. It then attaches to the agent. Later runs attach to the
 existing sandbox.
 
-This placement keeps the environment file outside the agent's writable
-workspace. If you later add `additionalWorkspaces`, keep `sbxenv.yaml`
-outside those directories too. See the [`workspace` guidance](#workspace)
-for details.
+
+
+### Protect the environment file
+
+Environment files can declare lifecycle and secret commands that run on your
+host. Keep them outside writable sandbox mounts so the agent cannot change
+what a later invocation runs. This applies to both the primary workspace and
+`additionalWorkspaces`.
+
+If you need to keep an environment file in a direct-mounted workspace, place
+it directly in the workspace root. `sbx` mounts the file read-only by default,
+but a file in a subdirectory can still be replaced by renaming its parent
+directory.
+
+For a local environment where you intend the agent to edit the file, set
+`sandboxOptions.writableEnvFiles: true`. The plan reports that the file is
+writable. Use this option only when you trust the agent to change commands
+that future invocations run on your host.
 
 ## Commands
 
@@ -601,14 +615,8 @@ clone mode. Omit `workspace` to create a sandbox without a host bind mount. Set
 `workspace: .` to mount the directory that contains the environment file
 that declares it.
 
-`sbx` mounts the environment file read-only inside the sandbox. Keep the file
-outside direct-mounted workspaces or directly in a workspace root. A file
-below the workspace root can still be replaced by renaming its parent directory.
-
-For a local environment, set `sandboxOptions.writableEnvFiles: true` to let the
-agent edit a shared environment file. The plan reports that the file is
-writable. Only use this option when you trust the agent to change lifecycle
-and secret commands that future invocations run on your host.
+For environment file placement and write protection, see
+[Protect the environment file](#protect-the-environment-file).
 
 | Field   | Type    | Required | Default | Description                                                     |
 | ------- | ------- | -------- | ------- | --------------------------------------------------------------- |
