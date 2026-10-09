@@ -316,18 +316,23 @@ written to the MCP registration. If the server requires a confidential client
 and no secret is stored, registration succeeds but authorization is skipped.
 Store the secret, then run `sbx mcp auth <server>`.
 
-#### Replace a client secret
+#### Change the OAuth client
 
-To rotate a client secret, store the replacement and authorize again:
+If you re-register a server name with a different client ID, issuer, or token
+endpoint, `sbx` refuses to use the secret bound to the previous client.
+After verifying that the registration points to the intended client and
+provider, store that client's secret, clear the old binding, and authorize:
 
 ```console
 $ sbx secret set mcp:slack:client_secret
+$ sbx secret rm mcp:slack:client_secret:identity
 $ sbx mcp auth slack
 ```
 
-The stored secret is bound to the client's ID, issuer, and token endpoint.
-If you re-register `slack` with different values, `sbx` refuses to reuse the
-old secret. Set the secret for the new client with the same commands.
+Setting a secret alone doesn't clear the old binding. The `:identity` record
+is metadata that binds the stored secret to its OAuth client. Authorization
+records the binding for the new client.
+
 For secrets stored under the legacy name `mcp:<server>.client_secret`, set
 the secret again using `mcp:<server>:client_secret`.
 
