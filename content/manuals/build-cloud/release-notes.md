@@ -39,6 +39,7 @@ issues, and bug fixes in Docker Build Cloud releases.
   Build Cloud, so your client version depends on how you installed Docker. See
   the [Buildx release notes](https://github.com/docker/buildx/releases) for
   client-side changes.
+For the current minimum Buildx version requirement, see [Set up Docker Build Cloud](./setup.md).
 
 ### Bug fixes
 
@@ -59,7 +60,7 @@ issues, and bug fixes in Docker Build Cloud releases.
   `--output type=image,oci-artifact=false`. For details, see the
   [BuildKit release notes](https://github.com/moby/buildkit/releases/tag/v0.32.2).
 
-- Docker Build Cloud is verified against Buildx v0.36.1, up from v0.36.0. See
+- At the time of this release, Docker Build Cloud was verified against Buildx v0.36.1, up from v0.36.0 . See
   the [Buildx release notes](https://github.com/docker/buildx/releases) for
   client-side changes.
 
@@ -95,7 +96,7 @@ issues, and bug fixes in Docker Build Cloud releases.
     weaken a supply chain check. To keep the previous format while you update
     your tooling, build with `--attest type=provenance,version=v0.2`.
 
-- Docker Build Cloud is verified against Buildx v0.36.0, up from v0.21.0. Buildx
+- At the time of this release, Docker Build Cloud was verified against Buildx v0.36.0, up from v0.21.0. Buildx
   is the client you build with, and it's distributed with Docker Desktop and
   Docker Engine rather than with Docker Build Cloud, so your client version
   depends on how you installed Docker. For the client-side features available
