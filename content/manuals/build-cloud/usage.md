@@ -70,10 +70,16 @@ variable](/manuals/build/building/variables.md#buildx_builder) to select the clo
 
 ## Loading build results
 
-When you don't specify an output, Buildx leaves an untagged build result in the
-cloud build cache and doesn't load it into Docker Engine. If you use `--tag`,
-Buildx automatically loads the image when the build targets a single platform
-and runs on one cloud node. Use `--load` to request loading explicitly.
+Build Cloud runs builds on remote workers. You don't select a worker count;
+Buildx and Build Cloud determine whether a build can load directly. If you don't
+specify an output, Buildx leaves an untagged build result in the cloud build
+cache and doesn't load it into Docker Engine. If you use `--tag`, Buildx
+automatically loads the image only when the build targets a single platform and
+runs on one cloud node. Builds that use multiple nodes or multiple outputs
+follow the standard exporter path. Use `--push` to publish an image to a
+registry, or `--load` to request loading into Docker Engine. For details about
+exporter behavior and limitations, see
+[Load results from Docker Build Cloud](/manuals/build/exporters/_index.md#load-results-from-docker-build-cloud).
 
 The target Docker context determines which Docker Engine image store receives
 the result. For details about loading behavior and other output configurations,
