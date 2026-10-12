@@ -37,18 +37,11 @@ For other agents and their credentials, see [Kits](kits.md) and
 2. Choose the Claude Code kit.
 3. Add your Anthropic API key if it isn't already saved. Don't enter it in
    the agent's prompt or in a file inside the sandbox.
-4. Review the selected network policies. The sandbox needs access to
-   `github.com:443` to clone the sample, along with the model provider access
-   supplied by the kit. If GitHub isn't allowed, follow
-   [Create a policy](policies.md#create-a-policy) to add an allow rule and
-   select that policy in the launcher. An explicit deny rule takes precedence
-   over an allow rule.
-5. Keep the default compute size and **auto** platform. Under **Run for**,
-   choose **1 hour**, and under **When the time is up**, choose **Stop** to
-   keep the sandbox's files when the timer expires. You don't need MCP tools
-   for this task.
-6. Select **Run**. If a required credential is missing, the launcher opens its
-   input so you can add it.
+4. Keep the defaults and select **Run**.
+
+On your first launch, the default **Open** network policy permits outbound
+access to any host. If you're using a custom policy, make sure it permits
+GitHub and your model provider. See [Network policies](policies.md).
 
 When the sandbox is ready, its terminal opens with Claude Code. Complete any
 agent setup prompts. After launch, you can't change the selected credentials,
@@ -165,8 +158,8 @@ Return to **Sandboxes** in the Console and choose what to do next:
   it is paused in the list. To continue later, reopen the sandbox and resume
   it. Resuming starts a fresh timer with the original duration.
 - Leave it running if the agent still has work to do. Check the expiration
-  time: the **Stop** action you selected ends the session when the timer
-  expires, including background processes.
+  time: the default **Stop** action stops the sandbox after one hour, including
+  background processes, and keeps its files.
 - Delete it when you no longer need it. Save the review or push any changes
   you want to keep first. Deletion removes files stored only in the sandbox.
 
