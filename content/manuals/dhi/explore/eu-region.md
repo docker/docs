@@ -58,9 +58,10 @@ Where that content is stored depends on the registry you use.
 
 Docker stores attestations with the images in your Docker Hub repository. For
 mirrored repositories, Docker copies only the attestations created when the
-image is built, such as SBOM, provenance, virus scan, secrets scan, test
-results, and verification summary attestations. Docker doesn't copy VEX
-statements or vulnerability reports into your repositories.
+image is built. Attestations that Docker Scout generates, such as VEX
+statements and vulnerability reports, aren't available in the EU region. To
+see which attestations are available, see [Image
+attestations](./security-concepts/attestations.md#image-attestations).
 
 ## Limitations in the EU region
 
