@@ -20,6 +20,8 @@ Custom roles use permissions from organization management, Docker Hub,
 billing, AI Governance, Docker Hardened Images, and Docker Offload. Use
 the following tables to [create or edit a custom role](manage.md).
 
+<!-- BEGIN GENERATED: custom-role-permissions -->
+
 ## Organization management
 
 | Permission                        | Description                                                                                     |
@@ -45,11 +47,11 @@ the following tables to [create or edit a custom role](manage.md).
 
 ## Docker Hub
 
-| Permission                         | Description                                                                                  |
-| :--------------------------------- | :------------------------------------------------------------------------------------------- |
-| View repositories                  | View repository details and contents                                                         |
-| Manage repositories                | Full repository management including settings, webhooks, privacy, Dockerfile, immutable tags |
-| Manage repository team permissions | Add and remove teams from a repository, and manage team access level                         |
+| Permission                         | Description                                                                                   |
+| :--------------------------------- | :-------------------------------------------------------------------------------------------- |
+| View repositories                  | View repository details and contents                                                          |
+| Manage repositories                | Full repository management including settings, webhooks, privacy, Dockerfile, immutable tags. |
+| Manage repository team permissions | Add and remove teams from a repository, and manage team access level                          |
 
 ## Billing
 
@@ -57,6 +59,12 @@ the following tables to [create or edit a custom role](manage.md).
 | :------------- | :----------------------------------------------- |
 | View billing   | View organization billing information            |
 | Manage billing | Complete access to managing organization billing |
+
+## Licensing
+
+| Permission      | Description                                                                                                                          |
+| :-------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| Manage licenses | Assign and revoke licenses for members and manage auto-assign rules. Does not include purchasing or changing the number of licenses. |
 
 ## AI Governance
 
@@ -69,15 +77,24 @@ the following tables to [create or edit a custom role](manage.md).
 
 ## DHI (Docker Hardened Images)
 
-| Permission         | Description                                      |
-| :----------------- | :----------------------------------------------- |
-| Create DHI mirrors | Create Docker Hardened Image mirror repositories |
+| Permission            | Description                                                     |
+| :-------------------- | :-------------------------------------------------------------- |
+| Create DHI mirrors    | Create Docker Hardened Image mirror repositories                |
+| Manage customizations | Create, update, and delete Docker Hardened Image customizations |
 
 ## Docker Offload
 
 | Permission        | Description                                    |
 | :---------------- | :--------------------------------------------- |
 | Offload Read-Only | View Offload account status, leases, and zones |
+
+## Cloud Sandboxes
+
+| Permission          | Description                           |
+| :------------------ | :------------------------------------ |
+| Use Cloud Sandboxes | Create and use Docker Cloud Sandboxes |
+
+<!-- END GENERATED: custom-role-permissions -->
 
 ## Next steps
 

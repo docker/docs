@@ -1,0 +1,74 @@
+name: Sync custom role permissions
+
+# Regenerates the custom-role permissions reference from the IAM source of truth
+# (custom-role-metadata.yaml in docker/iam-services) and opens a PR for review.
+# Triggered by the "Sync docs permissions" workflow in docker/iam-services when
+# that file changes on main; can also be run manually.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'The git ref in docker/iam-services to read custom-role-metadata.yaml from.'
+        type: string
+        required: false
+        default: 'main'
+
+concurrency:
+  group: sync-custom-role-permissions
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    name: Sync custom role permissions reference
+    runs-on: ubuntu-latest
+    steps:
+      - id: setup
+        uses: docker/actions/setup@707e5d98a430d92e8e6c2d34faa5bfb2a9149e9b
+        with:
+          app_id: ${{ secrets.HUB_PLATFORM_APP_ID }}
+          app_private_key: ${{ secrets.HUB_PLATFORM_APP_PRIVATE_KEY }}
+
+      - name: Checkout docs
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          token: ${{ steps.setup.outputs.token }}
+          show-progress: false
+
+      - name: Fetch custom-role-metadata.yaml from iam-services
+        env:
+          GH_TOKEN: ${{ steps.setup.outputs.token }}
+          REF: ${{ inputs.ref }}
+        run: |
+          gh api \
+            "repos/docker/iam-services/contents/internal/services/access_control/config/custom-role-metadata.yaml?ref=${REF}" \
+            -H "Accept: application/vnd.github.raw+json" \
+            > /tmp/custom-role-metadata.yaml
+
+      - name: Generate permissions reference
+        run: |
+          node scripts/generate-custom-role-permissions.mjs \
+            --metadata /tmp/custom-role-metadata.yaml \
+            --doc content/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0
+        with:
+          token: ${{ steps.setup.outputs.token }}
+          title: '⚙️ Sync custom role permissions reference'
+          body: |
+            Automatically generated from
+            [`custom-role-metadata.yaml`](https://github.com/docker/iam-services/blob/main/internal/services/access_control/config/custom-role-metadata.yaml)
+            in `docker/iam-services` by the **Sync custom role permissions**
+            workflow, triggered by a change to that file.
+
+            Only the content between the generation markers in
+            `permissions-reference.md` is updated. If this change is unexpected
+            or shouldn't ship yet, close this PR — the workflow will re-open it
+            the next time the source changes.
+          commit-message: 'Sync custom role permissions reference'
+          sign-commits: true
+          add-paths: |
+            content/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md
+          branch: chore/sync-custom-role-permissions
+          delete-branch: true
