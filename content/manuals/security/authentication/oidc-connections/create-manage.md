@@ -1,6 +1,6 @@
 ---
 title: Create and manage OIDC connections
-linkTitle: Create and manage connections
+linkTitle: Create and manage
 description: Create and manage OIDC connections in Docker Home, then authenticate GitHub Actions to Docker Hub with docker/login-action and short-lived tokens
 keywords: oidc connections, create oidc connection, github actions, docker/login-action, DOCKERHUB_OIDC_CONNECTIONID, openid connect, docker hub, enterprise security, admin
 tags: [admin]
@@ -26,8 +26,9 @@ with a short-lived token.
 1. Sign in to [Docker Home](https://app.docker.com/), select your
    organization, then go to **Identity & auth**.
 1. Select **OIDC connections**.
-1. Select **Create OIDC connection** and fill in the OIDC connection form.
-   - Provide rulesets and subject claims. Other values are optional.
+1. Select **Create OIDC connection** and fill in the form.
+   - **Connection name**, a **Ruleset name**, and a **Subject claim** are
+     required. **Description** is optional.
    - For rulesets, subject claims, and resources, see
      [OIDC connections rulesets and subject claims](/manuals/security/authentication/oidc-connections/rulesets-claims.md).
 1. Select **Create connection**.
@@ -73,7 +74,8 @@ connections** page.
 1. Find the row with your target connection ID.
 1. Select the action menu icon for your options.
    - **Edit** opens the **Edit OIDC connection** page where you can copy
-     your connection ID, update rulesets, or view the **Failures** table.
+     your connection ID, update rulesets, or open the **Failures** tab.
+     See [View connection failures](#view-connection-failures).
    - **Deactivate** temporarily disables access to your GitHub workflow.
    - **Activate** restores access to your GitHub workflow.
    - **Delete** permanently deletes a connection.
@@ -92,6 +94,51 @@ fails at the token-exchange step until you activate the connection.
 > replacement connection ID in every affected workflow before it runs
 > again.
 
+## View connection failures
+
+Docker records a failure when a workflow reaches the token-exchange step
+for your connection and no ruleset matches the token's claims. For GitHub
+Actions, Docker only logs the failure when the token's repository
+namespace matches a namespace in a `sub` rule on the connection. An
+unrelated repository can still receive `access denied` without a
+**Failures** row.
+
+1. Sign in to [Docker Home](https://app.docker.com/), select your
+   organization, then go to **Identity & auth**.
+1. Select **OIDC connections**.
+1. Find the connection, open the action menu, and select **Edit**.
+1. On the **Edit OIDC connection** page, select the **Failures** tab.
+
+The **Failures** tab is view-only. It lists past failed exchanges so you
+can compare claims to rulesets. It does not run a test or accept inputs.
+
+If Docker has not recorded any failures for the connection, the tab shows
+**No failures have been reported for this connection**.
+
+> [!NOTE]
+> Wrong connection IDs, deactivated connections, and token problems that
+> fail before claim matching do not appear on **Failures**. See
+> [Troubleshoot OIDC connections](/manuals/security/authentication/oidc-connections/troubleshoot.md).
+
+### Read a failure entry
+
+Each failure row includes:
+
+- The date and time of the failed exchange
+- The ruleset rule that did not match, shown as `claim = expected value`
+  (for example, `sub = repo:my-org/my-repo:ref:refs/heads/main`)
+- The incoming claim value from the GitHub ID token, marked with ❌ when
+  it does not match
+
+To inspect every claim in the token, expand **Show all claims**. The
+expanded table lists **Incoming claim** and **Value**. Claims that failed
+validation appear with ❌.
+
+Use the unmatched expected value and the incoming value together to
+decide whether to update the ruleset or the workflow that produced the
+token.
+
 ## Next steps
 
 - [OIDC connections rulesets and subject claims](/manuals/security/authentication/oidc-connections/rulesets-claims.md)
+- [Troubleshoot OIDC connections](/manuals/security/authentication/oidc-connections/troubleshoot.md)
