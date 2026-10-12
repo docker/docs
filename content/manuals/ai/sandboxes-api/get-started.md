@@ -8,10 +8,6 @@ aliases:
   - /ai/sandboxes/api/get-started/
 ---
 
-> [!NOTE]
-> The Docker Sandboxes API and SDK are experimental. Features, interfaces,
-> and behavior may change.
-
 Create a cloud sandbox, run a command inside it, and delete it using the Docker
 Sandboxes TypeScript SDK. This tutorial uses the bundled `shell` kit to print
 `Hello from Docker Sandboxes`. You don't need an AI agent or a model provider

@@ -8,16 +8,9 @@ params:
   apiReferenceBanner: false
   sidebar:
     group: AI and agents
-    badge:
-      color: violet
-      text: Experimental
 aliases:
   - /ai/sandboxes/api/
 ---
-
-> [!NOTE]
-> The Docker Sandboxes API and SDK are experimental. Features, interfaces,
-> and behavior may change.
 
 Use the Docker Sandboxes API to create cloud sandboxes, run commands, and
 transfer files from your applications and automated workflows. You can also

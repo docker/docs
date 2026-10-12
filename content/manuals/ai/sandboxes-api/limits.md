@@ -7,10 +7,6 @@ aliases:
   - /ai/sandboxes/api/limits/
 ---
 
-> [!NOTE]
-> The Docker Sandboxes API and SDK are experimental. Features, interfaces,
-> and behavior may change.
-
 Choose a compute size for each sandbox and keep your application's resource
 usage within your account's quotas. Request rate limits also constrain how
 quickly your application can send API requests.

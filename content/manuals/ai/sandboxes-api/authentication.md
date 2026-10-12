@@ -7,10 +7,6 @@ aliases:
   - /ai/sandboxes/api/authentication/
 ---
 
-> [!NOTE]
-> The Docker Sandboxes API and SDK are experimental. Features, interfaces,
-> and behavior may change.
-
 Use browser sign-in when running an application interactively, or a personal
 access token (PAT) for automation. The SDK obtains short-lived access tokens
 and renews them as needed.
