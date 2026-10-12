@@ -31,7 +31,7 @@ params:
     icon: cpu-chip
     link: /reference/cli/dockerd/
   grid_apis:
-  - title: Sandboxes API (Experimental)
+  - title: Sandboxes API
     description: Create cloud sandboxes, run processes, and manage sandbox resources.
     icon: code-bracket
     link: /reference/api/sandboxes/latest/
