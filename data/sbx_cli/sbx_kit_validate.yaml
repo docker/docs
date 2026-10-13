@@ -11,6 +11,8 @@ description: |-
     create.
 usage: sbx kit validate REFERENCE [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
@@ -37,5 +39,11 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx kit validate ./my-kit
+      sbx kit validate ./my-kit.zip
+
+      # Supply the arguments a kit declares
+      sbx kit validate ./my-kit --kit-arg region=eu
 see_also:
     - sbx kit - (Experimental) Manage kit artifacts

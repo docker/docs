@@ -32,5 +32,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx kit pull ghcr.io/myorg/my-kit:1.0
+
+      # Choose where to save the payload
+      sbx kit pull ghcr.io/myorg/my-kit:1.0 --output my-kit.tar.gz
 see_also:
     - sbx kit - (Experimental) Manage kit artifacts

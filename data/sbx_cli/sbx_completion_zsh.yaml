@@ -41,5 +41,11 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      # Load completions in the current shell
+      source <(sbx completion zsh)
+
+      # Install for every new shell
+      sbx completion zsh > "${fpath[1]}/_sbx"
 see_also:
     - sbx completion - Generate the autocompletion script for the specified shell

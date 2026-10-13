@@ -30,5 +30,11 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      # Load completions in the current shell
+      sbx completion fish | source
+
+      # Install for every new shell
+      sbx completion fish > ~/.config/fish/completions/sbx.fish
 see_also:
     - sbx completion - Generate the autocompletion script for the specified shell

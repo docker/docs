@@ -5,7 +5,7 @@ description: |-
 
     Administrator policy remains in effect. Otherwise, the setting evaluates from
     its environment variable, remote default, or built-in default.
-usage: sbx settings unset <key> [flags]
+usage: sbx settings unset KEY [flags]
 options:
     - name: help
       shorthand: h

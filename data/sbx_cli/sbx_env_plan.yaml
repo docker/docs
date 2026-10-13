@@ -80,5 +80,8 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx env plan
+      sbx env plan ./project
 see_also:
     - sbx env - (Experimental) Manage sandboxes declaratively from an sbxenv.yaml file

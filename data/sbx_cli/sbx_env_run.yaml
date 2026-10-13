@@ -33,15 +33,11 @@ description: |-
     than overriding, so an entry declared in both appears twice.
 usage: sbx env run [PATH...] [flags]
 options:
-    - name: auto-approve
-      shorthand: "y"
-      default_value: "false"
-      usage: Apply the environment plan without asking
     - name: clone
       default_value: "false"
       usage: |
         Override workspace.clone in sbxenv.yaml (see 'sbx create --clone')
-    - name: detached
+    - name: detach
       shorthand: d
       default_value: "false"
       usage: Create/start the sandbox without attaching
@@ -55,6 +51,10 @@ options:
       experimental: true
       usage: |
         File of name=value environment arguments, one per line (can be repeated); --env-arg overrides
+    - name: force
+      shorthand: f
+      default_value: "false"
+      usage: Apply the environment plan without asking
     - name: help
       shorthand: h
       default_value: "false"
@@ -72,9 +72,15 @@ options:
     - name: name
       usage: |
         Name for the sandbox, overriding 'name:' in sbxenv.yaml and the derived <agent>-<directory> (every 'sbx env' command addressing this environment needs the same value)
+    - name: on-timeout
+      usage: |
+        What happens when --ttl lapses: 'stop' stops the sandbox in place so it can be started again later, 'restart' keeps it running by stopping and immediately starting it, or 'delete' removes it. Omit the flag and the server stops the sandbox when it can be started again later, and deletes it otherwise. With 'restart' a supplied --ttl must be at least 1h (cloud only). Only applies when the sandbox is created; 'sbx --cloud env run' refuses it when attaching to an existing one.
     - name: skip-host-commands
       default_value: "false"
       usage: Skip the host lifecycle commands the environment declares
+    - name: ttl
+      usage: |
+        Cloud sandbox time-to-live before it times out (e.g. 30m, 2h, 1h30m; units are case-insensitive; cloud only; default: server-side). Only applies when the sandbox is created; 'sbx --cloud env run' refuses it when attaching to an existing one
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -84,5 +90,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx env run
+
+      # Start without attaching
+      sbx env run --detach ./project
 see_also:
     - sbx env - (Experimental) Manage sandboxes declaratively from an sbxenv.yaml file

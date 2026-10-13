@@ -7,6 +7,8 @@ description: |-
     with a name already in use is rejected.
 usage: sbx volume create NAME [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"

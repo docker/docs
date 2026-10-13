@@ -1,11 +1,16 @@
 name: sbx volume inspect
-synopsis: Show details for a volume
+synopsis: Show volume details
 usage: sbx volume inspect NAME [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for inspect
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"

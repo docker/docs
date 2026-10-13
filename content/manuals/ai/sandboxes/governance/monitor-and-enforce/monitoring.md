@@ -66,13 +66,16 @@ See [Approval-required access](../access-controls/network.md#approval-required-a
 A `STATUS` column also appears when you pass `--include-inactive`; see
 [Showing inactive rules](#showing-inactive-rules).
 
-When organization governance is active, the output starts with a summary line
+When organization governance is active, the output starts with a summary block
 showing which organization manages the policy, the sync state, and how many
 inactive rules are hidden:
 
 ```console
 $ sbx policy ls
-Governance: Managed by my-org | Sync: OK, last synced 08:21:01 | Hidden: 9 inactive rules. Show with: sbx policy ls --include-inactive
+POLICY RULES
+  Governance: Managed by my-org
+  Sync:       OK, last synced 08:21:01
+  Hidden:     9 inactive rules. Show with: sbx policy ls --include-inactive
 
 POLICY               SOURCE   APPLIES TO   SUMMARY
 default filesystem   org      all          filesystem read: 2 allow; filesystem write: 7 allow, 2 deny
@@ -102,7 +105,9 @@ example, to confirm which allow rules the organization policy overrides — pass
 
 ```console
 $ sbx policy ls --include-inactive
-Governance: Managed by my-org | Sync: OK, last synced 08:41:06
+POLICY RULES
+  Governance: Managed by my-org
+  Sync:       OK, last synced 08:41:06
 
 POLICY                       SOURCE   APPLIES TO   SUMMARY                                                    STATUS
 default filesystem           org      all          filesystem read: 2 allow; filesystem write: 7 allow, 2 deny   active
@@ -189,11 +194,11 @@ which rules matched:
 
 ```console
 $ sbx policy log
-Blocked requests:
+BLOCKED REQUESTS
 SANDBOX      TYPE     HOST                   PROXY        RULE            REASON         LAST SEEN        COUNT
 my-sandbox   network  blocked.example.com    transparent  domain-blocked  default-deny   10:15:25 29-Jan  1
 
-Allowed requests:
+ALLOWED REQUESTS
 SANDBOX      TYPE     HOST                   PROXY          RULE             REASON   LAST SEEN        COUNT
 my-sandbox   network  api.anthropic.com      forward        domain-allowed            10:15:23 29-Jan  42
 my-sandbox   network  registry.npmjs.org     forward-bypass domain-allowed            10:15:20 29-Jan  18
@@ -219,7 +224,12 @@ Filter by sandbox name by passing it as an argument:
 $ sbx policy log my-sandbox
 ```
 
-Use `--limit N` to show only the last `N` entries, `--json` for
+Use `--limit N` to show only the last `N` entries, `--json` or `--format yaml` for
 machine-readable output, or `--type network` to filter by policy type.
 `sbx policy log` records network traffic only; filesystem mount decisions
 aren't available in the log yet.
+
+Structured output uses the same document for local and cloud sandboxes:
+`{updated_at, allowed: [...], blocked: [...]}`. Each entry includes `sandbox_id`,
+`host`, `proxy_type`, `rule`, `reason`, `count`, `first_seen`, and `last_seen`.
+The `--limit` flag applies to structured output too.
