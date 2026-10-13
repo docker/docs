@@ -79,6 +79,13 @@ following command from the directory that will contain both:
 $ mkdir mistral-vibe
 ```
 
+If you don't have an existing project, create an empty workspace beside
+the kit to verify the agent launch:
+
+```console
+$ mkdir my-project
+```
+
 The kit has two files with matching filename stems:
 
 ```text
@@ -253,7 +260,8 @@ MISTRAL_API_KEY=proxy-managed
 
 Vibe receives the placeholder while the proxy authenticates its Mistral
 requests. The following capture shows this check in the sample workspace
-used in the next section:
+used in the next section. Vibe displays the mounted workspace's path; your
+path and account greeting will differ from the screenshots:
 
 ![Vibe 2.25.8 displaying MISTRAL_API_KEY=proxy-managed inside the sandbox](images/mistral-vibe-sandbox-credential.png)
 
@@ -264,10 +272,12 @@ The community-maintained
 contains a small FastAPI application, three tests, and one intentional bug.
 It uses the published
 [Vibe kit](https://github.com/shelajev/vibe-sbx-kit), so you can try this
-exercise without building or publishing your own kit.
+exercise without building or publishing your own kit. This starts a
+separate sandbox from the sample's checked-in environment file. Your local
+kit sandbox remains available for later use.
 
-Exit Vibe, then run these commands on your host from a directory where you
-want to keep the sample:
+Type `/exit` at the Vibe prompt to return to your host terminal. Then run
+these commands from a directory where you want to keep the sample:
 
 ```console
 $ git clone https://github.com/shelajev/mistral-vibe-sbx-demo.git
@@ -312,16 +322,23 @@ incomplete tasks. A correct repair changes `if completed:` to
 
 ![Vibe explaining the boolean-filter bug, its application-code repair, and that all three tests pass](images/mistral-vibe-sandbox-repair.png)
 
-Check the result yourself at the Vibe prompt:
+Check the test suite yourself at the Vibe prompt:
 
 ```text
 !uv run pytest
-!git diff -- main.py
 ```
 
-The test suite should end with `3 passed`, and the diff should show the
-filter change. To repeat the exercise, exit Vibe and run
-`git restore app/main.py` on the host to restore the intentional bug.
+The test suite should end with `3 passed`. In your second host terminal,
+change to the `mistral-vibe-sbx-demo` repository and inspect the edit:
+
+```console
+$ git diff -- app/main.py
+```
+
+The repository's `.git` directory stays on the host because only `app/`
+is mounted. The diff should show the filter change. To repeat the exercise,
+type `/exit` in Vibe and run `git restore app/main.py` from the host
+repository to restore the intentional bug.
 
 Optional. Run `/model` inside Vibe and select **GLM 5.2 (Mistral hosted)**.
 The sample adds `zai-glm-5-2` to `app/.vibe/config.toml`; the local kit you
