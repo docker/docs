@@ -15,7 +15,7 @@ layer 2 VLAN tagging and even IPvlan L3 routing for users interested in underlay
 network integration. For overlay deployments that abstract away physical constraints
 see the [multi-host overlay](overlay.md) driver.
 
-IPvlan is a new twist on the tried and true network virtualization technique.
+IPvlan is a network virtualization technique that provides lightweight container networking.
 The Linux implementations are extremely lightweight because rather than using
 the traditional Linux bridge for isolation, they are associated to a Linux
 Ethernet interface or sub-interface to enforce separation between networks and
@@ -668,3 +668,4 @@ $ ip link del foo
 As with all of the Libnetwork drivers, they can be mixed and matched, even as
 far as running 3rd party ecosystem drivers in parallel for maximum flexibility
 to the Docker user.
+
