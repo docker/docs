@@ -214,10 +214,17 @@ $ sbx daemon restart
 ```
 
 Run this from a shell whose `SSH_AUTH_SOCK` points to the intended agent. The
-command stores that path, not a reference to the variable. With an empty value,
-Docker Sandboxes uses the socket supplied by each client instead. Remove the
-fixed path with `sbx settings unset ssh.agentSocketPath` and restart the daemon
-to update existing forwarders.
+command stores that path, not a reference to the variable.
+
+When this setting is empty, Docker Sandboxes uses the `SSH_AUTH_SOCK` value
+supplied by each client. On Windows, if `SSH_AUTH_SOCK` is also unset, it uses
+the `\\.\pipe\openssh-ssh-agent` named pipe. This works with Windows OpenSSH
+and with 1Password's SSH agent when it provides that pipe. The host agent must
+be running. Set `SSH_AUTH_SOCK` or configure `ssh.agentSocketPath` to use a
+different agent.
+
+Remove the fixed path with `sbx settings unset ssh.agentSocketPath` and restart
+the daemon to update existing forwarders.
 
 ### Images and storage
 
