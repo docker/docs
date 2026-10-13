@@ -120,17 +120,20 @@ When the toggle is on:
 - Docker Team or Business: members receive a license when they sign in to
   Docker Desktop.
 - AI Governance: members receive a license when they sign in to
-  [Docker Sandboxes](/manuals/ai/sandboxes/_index.md), whether they joined by
-  invitation or through single sign-on (SSO) with System for Cross-domain
-  Identity Management (SCIM) or Just-in-Time (JIT) provisioning. The
-  `sbx login` command provisions licenses on a first-come, first-served
-  basis. SSO itself requires a Docker Business subscription. See
-  [Authentication](/manuals/security/authentication/_index.md).
+  [Docker Sandboxes](/manuals/ai/sandboxes/_index.md). The `sbx login`
+  command provisions licenses on a first-come, first-served basis.
 - Licenses are assigned until exhausted.
   - Once the available licenses are exhausted, automatic license assignment
     stops until more licenses are available.
   - Members can still use Docker Sandboxes or Docker Desktop, but
     organization policies for those products won't affect their usage.
+
+AI Governance licenses include single sign-on (SSO) and provisioning with
+System for Cross-domain Identity Management (SCIM) or Just-in-Time (JIT),
+even if your organization doesn't have a Docker Business subscription.
+Members who join through SSO can receive an automatically assigned license
+when they use Docker Sandboxes, the same as members you invite. See
+[Authentication](/manuals/security/authentication/_index.md).
 
 ## View licenses
 
