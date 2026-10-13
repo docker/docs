@@ -58,9 +58,6 @@ be combined with these workloads. Their sources are on the
 [v3 branch of docker/sbx-kits-contrib](https://github.com/docker/sbx-kits-contrib/tree/v3).
 For more source examples, see
 [sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/tree/main/examples).
-For Gemini, author a
-[v3 workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md)
-or keep the built-in `gemini` shortcut with v2 mixins.
 
 Use a version tag to select a kit release, or a digest to identify exact
 content. A `latest` tag can move to a kit that needs a later `sbx` release.
@@ -158,25 +155,6 @@ when prompted.
 
 Codex starts with `company-cli` available to use. Docker Sandboxes
 applies the files and settings from both the workload and the mixin.
-
-### Run Codex from a shell
-
-To start a shell with Codex available as a tool, combine the published v3
-Shell workload with the v3 Codex mixin:
-
-```console
-$ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name codex-shell \
-    --kit docker.io/sbx/codex-mixin:0.155.1
-```
-
-Approve the kit's credential request, then run `codex` inside the sandbox.
-The workload selects the launch command, so the sandbox opens a shell rather
-than starting Codex automatically. See
-[Codex authentication](/manuals/ai/sandboxes/agents/codex.md#authentication)
-for credential setup.
-
-Use the v3 Shell workload as the `sbx run` argument; the built-in `shell`
-shortcut selects v2. The `--kit` flag selects the Codex mixin.
 
 ### Combine multiple mixins
 
