@@ -20,15 +20,25 @@ avoid one container being responsible for multiple aspects of your overall
 application. You can connect multiple containers using user-defined networks and
 shared volumes.
 
-The container's main process is responsible for managing all processes that it
-starts. In some cases, the main process isn't well-designed, and doesn't handle
-"reaping" (stopping) child processes gracefully when the container exits. If
-your process falls into this category, you can use the `--init` option when you
-run the container. The `--init` flag inserts a tiny init-process into the
-container as the main process, and handles reaping of all processes when the
-container exits. Handling such processes this way is superior to using a
-full-fledged init process such as `sysvinit` or `systemd` to handle process
-lifecycle within your container.
+The container's main process is responsible for managing the processes that it
+starts. If the main process doesn't reap exited child processes, they can remain
+as zombies. Use the `--init` option when the application doesn't handle this
+responsibility itself.
+
+The `--init` flag inserts a small init process as PID 1. The init process
+forwards signals to the container's main process and reaps processes that become
+zombies. This is preferable to using a full init system, such as `sysvinit` or
+`systemd`, inside the container.
+
+When using Docker Compose, set `init: true` on the service to run an init
+process:
+
+```yaml
+services:
+  web:
+    image: alpine
+    init: true
+```
 
 If you need to run more than one service within a container, you can achieve
 this in a few different ways.
