@@ -3,11 +3,11 @@ title: Manage licenses
 linkTitle: Licenses
 description: >-
   View your organization's license inventory and assign licenses to teams or
-  members by team, invitation, or automatic assignment for Docker Core, AI
-  Governance, and Offload.
-keywords: licenses, organization, teams, members, invite, Docker Core, Docker
-  Offload, AI Governance, license assignment, team assignment, docker home,
-  automatic license assignment, SSO, SCIM, Sandboxes
+  members by team, invitation, or automatic assignment for Docker Team or
+  Business, AI Governance, and Offload.
+keywords: licenses, organization, teams, members, invite, Docker Team, Docker
+  Business, Docker Offload, AI Governance, license assignment, team assignment,
+  docker home, automatic license assignment, SSO, SCIM, Sandboxes
 weight: 40
 aliases:
   - /admin/organization/manage/manage-licenses/
@@ -117,7 +117,8 @@ card.
 
 When the toggle is on:
 
-- Docker Core: members receive a license when they sign in to Docker Desktop.
+- Docker Team or Business: members receive a license when they sign in to
+  Docker Desktop.
 - AI Governance: members receive a license when they sign in to
   [Docker Sandboxes](/manuals/ai/sandboxes/_index.md), whether they joined by
   invitation or through single sign-on (SSO) with System for Cross-domain
