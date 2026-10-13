@@ -11,8 +11,8 @@ aliases:
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-V2 kits remain supported. This page covers v2 usage, configuration, and the
-specification. For new kit development with the `sbx` CLI, use
+V2 kits remain supported and are not deprecated. This page covers v2 usage,
+configuration, and the specification. Docker recommends
 [v3 kits](/manuals/ai/sandboxes/customize/_index.md).
 
 Built-in shortcuts such as `claude` and `codex` select v2 kits and still work
@@ -792,7 +792,15 @@ controlled by the user through
 
 Select a v3 workload, convert or replace its mixins, and create a separate
 sandbox with a different `--name`. Use the explicit workload reference in
-place of the built-in shortcut. Every selected kit must use v3.
+place of the built-in shortcut. Find a published replacement in the
+[v3 workload mapping](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads).
+Every selected kit must use v3.
+
+For an environment file, replace the built-in `agent` value with the v3
+workload reference and replace every `kits` entry with a v3 mixin. Keep the
+environment file's `schemaVersion: "1"`: it is independent of kit descriptor
+versions. Use a different environment `name` to create a separate sandbox;
+running the existing environment doesn't migrate its kits.
 
 Changing `schemaVersion` alone doesn't convert a kit. Separate reusable image
 content from sandbox initialization, and declare runtime capabilities:

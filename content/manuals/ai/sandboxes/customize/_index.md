@@ -19,9 +19,10 @@ A kit can define the whole environment or add something to an existing one,
 such as a toolchain or your team's shared configuration. Package those choices
 once, then reuse them across projects and share them with your team.
 
-This page covers v3 kits, which require `sbx` v0.45 or later. See
-[Version compatibility](#version-compatibility) for compatibility with earlier
-kit formats.
+Docker recommends v3 for using and authoring kits. V3 kits require `sbx`
+v0.45 or later, a v3 workload, and v3 for every mixin you add. V2 remains
+supported and is not deprecated. See [Version compatibility](#version-compatibility)
+for how to choose compatible kits.
 
 ## What is a kit?
 
@@ -31,8 +32,8 @@ credentials, setup commands, or instructions for the agent. You publish the
 kit as a container image containing its files and descriptor.
 
 You identify a published kit by its container image reference, such as
-`me/my-kit:latest`. When you use the kit, `sbx` prepares its files and applies
-its settings. You can use one kit for a complete environment or combine kits
+`docker.io/sbx/claude:2.1.267`. When you use the kit, `sbx` prepares its files
+and applies its settings. You can use one kit for a complete environment or combine kits
 that contribute different parts.
 
 ## What kits can do
@@ -63,11 +64,11 @@ and launch command, and mixins add tools or behavior to it.
 For example, this command runs a workload with a mixin:
 
 ```console
-$ sbx run me/my-agent-kit:latest --kit me/my-mixin:latest
+$ sbx run docker.io/sbx/claude:2.1.267 --kit docker.io/sbx/playwright:1.61.1
 ```
 
-The workload supplies the environment and launch command. The mixin adds its
-tools and configuration to that environment.
+The Claude Code workload supplies the environment and launch command. The
+Playwright mixin adds browser-testing tools and configuration to that environment.
 
 ## Kit sets
 
@@ -103,7 +104,14 @@ The built-in agent names, such as `claude` and `codex`, select v2 kits.
 You can't add a v3 mixin to these built-ins. For example,
 `sbx run claude --kit ./some-v3-mixin` fails because it mixes kit versions.
 Instead, select a v3 workload by its published image, local path, or Git
-reference, as shown in [Run a kit](/manuals/ai/sandboxes/customize/use-kits.md#run-a-kit).
+reference. Use the [built-in agent to v3 workload mapping](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads)
+to find a published workload for your agent.
+
+A kit's capabilities can require a later `sbx` release than v0.45.
+Check [Kit capability support](/manuals/ai/sandboxes/customize/author/capabilities.md)
+for minimum versions and local or cloud restrictions. Pin published kits to
+a version tag or digest: `latest` can change the kit you get when you create
+a sandbox, including its runtime requirements.
 
 V2 remains supported, including the built-in agents and
 existing v2 customizations. See [Kits v2](/manuals/ai/sandboxes/customize/kits-v2.md) for maintenance

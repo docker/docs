@@ -49,7 +49,7 @@ displayName: Codex with tools
 version: "1.0.0"
 
 kits:
-  - ref: docker.io/docker/sbx-kit-codex:0.155.1
+  - ref: docker.io/sbx/codex:0.155.1
   - ref: <MIXIN_REFERENCE>
 ```
 

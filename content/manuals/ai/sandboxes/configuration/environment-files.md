@@ -50,11 +50,11 @@ publishes the application's development port:
 ```yaml
 schemaVersion: "1"
 name: web-app
-agent: claude
+agent: docker.io/sbx/claude:2.1.267
 workspace: ./web-app
 
 kits:
-  - docker.io/sbx/playwright-kit:latest
+  - docker.io/sbx/playwright:1.61.1
 
 env:
   NODE_ENV: test
@@ -63,6 +63,13 @@ ports:
   - sandbox: 3000
     host: 3000
 ```
+
+This example uses v3 kits, the recommended kit format. Both `agent` and
+every entry in `kits` must select v3 kits. Built-in shortcuts such as
+`claude` select v2 and can't be combined with these mixins. See the
+[published v3 workload mapping](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads)
+for other agents. The environment file keeps `schemaVersion: "1"`; this
+version is independent of the kits' schema versions.
 
 From `web-app-env`, run the environment:
 
@@ -573,10 +580,13 @@ true`.
 `kits` accepts local directories, ZIP archives, OCI registry references, and
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
 configure the sandbox, and give the agent project-specific instructions.
-The examples on this page pair built-in agents with v2 mixins. See
-[Kits v2](/manuals/ai/sandboxes/customize/kits-v2.md) for that format, or
+Docker recommends v3 kits. To use v3 mixins, set `agent` to a v3 workload
+reference and use v3 for every entry in `kits`. Built-in agent shortcuts
+select v2 kits and require v2 mixins. V2 remains supported and is not
+deprecated. See
 [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
-when selecting v3 kits.
+and [Kit capability support](/manuals/ai/sandboxes/customize/author/capabilities.md)
+when selecting kits and an `sbx` version.
 
 An environment file selects kits and configures a sandbox's host resources.
 A kit descriptor defines the package itself. The environment file's

@@ -13,8 +13,10 @@ settings. You run kits you build yourself or get from another publisher in the
 same way: give `sbx` a reference, and Docker Sandboxes prepares the environment
 and applies the kit's settings.
 
-This page shows how to run published kits, combine them with mixins, and
-customize their settings.
+Docker recommends v3 for using kits. This page shows how to run published
+v3 workloads, combine them with v3 mixins, and customize their settings.
+Built-in agent shortcuts select v2 kits, which remain supported and are not
+deprecated. Replace the shortcut with a v3 workload reference to use v3 mixins.
 
 ## Run a kit
 
@@ -23,11 +25,45 @@ replace the agent name with that kit's reference. For example, run Docker's
 published v3 Codex workload:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-v3-kit
+$ sbx run docker.io/sbx/codex:0.155.1 --name codex-v3-kit
 ```
 
 This starts Codex using a v3 kit from Docker Hub. The built-in `codex`
 shortcut uses a v2 kit to preserve compatibility with existing customizations.
+
+### Published v3 workloads
+
+Use these published v3 workloads in place of built-in shortcuts when adding
+v3 mixins. You can also use the references as the `agent` value in a
+[sandbox environment file](/manuals/ai/sandboxes/configuration/environment-files.md).
+
+| Built-in agent | V3 workload OCI reference |
+| --- | --- |
+| `claude` | `docker.io/sbx/claude:2.1.267` |
+| `codex` | `docker.io/sbx/codex:0.155.1` |
+| `copilot` | `docker.io/sbx/copilot:1.0.86` |
+| `cursor` | `docker.io/sbx/cursor:2026.09.18-9a7762b` |
+| `devin` | `docker.io/sbx/devin:3000.10.31` |
+| `docker-agent` | `docker.io/sbx/docker-agent:1.141.0` |
+| `droid` | `docker.io/sbx/droid:0.223.0` |
+| `kiro` | `docker.io/sbx/kiro:1.0.0` |
+| `opencode` | `docker.io/sbx/opencode:1.18.31` |
+| `shell` | `docker.io/docker/sbx-kit-shell:1.0.0` |
+
+The `sbx/*` kits are published from the
+[v3 branch of docker/sbx-kits-contrib](https://github.com/docker/sbx-kits-contrib/tree/v3).
+The Shell workload is published from
+[sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/tree/main/examples/shell).
+For Gemini, author a
+[v3 workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md)
+or keep the built-in `gemini` shortcut with v2 mixins.
+
+Use a version tag to select a kit release, or a digest to identify exact
+content. A `latest` tag can move to a kit that needs a later `sbx` release.
+V3 format support starts at v0.45, but a kit's capabilities can require a
+later version or a local sandbox. Check
+[Kit capability support](/manuals/ai/sandboxes/customize/author/capabilities.md)
+and the publisher's requirements before choosing a kit.
 
 ### Choose a kit source
 
@@ -107,7 +143,7 @@ For example, an internal CLI mixin can package your company's executable
 along with network rules and a credential request for its API:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-tools \
+$ sbx run docker.io/sbx/codex:0.155.1 --name codex-tools \
     --kit docker.io/<NAMESPACE>/company-cli:1.0.0
 ```
 
@@ -124,6 +160,26 @@ Built-in shortcuts such as `claude` and `codex` use v2 kits and require
 [v2 mixins](/manuals/ai/sandboxes/customize/kits-v2.md).
 See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
 for details.
+
+### Run Codex from a shell
+
+To start a shell with Codex available as a tool, combine the published v3
+Shell workload with the v3 Codex mixin:
+
+```console
+$ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name codex-shell \
+    --kit docker.io/sbx/codex-mixin:0.155.1
+```
+
+Approve the kit's credential request, then run `codex` inside the sandbox.
+The workload selects the launch command, so the sandbox opens a shell rather
+than starting Codex automatically. See
+[Codex authentication](/manuals/ai/sandboxes/agents/codex.md#authentication)
+for credential setup.
+
+Pass the workload as the argument to `sbx run`; `--kit` selects mixins.
+The built-in `shell` shortcut uses v2 and can't run this v3 mixin. To start
+Codex directly, use the `sbx/codex` workload instead.
 
 ### Combine multiple mixins
 
