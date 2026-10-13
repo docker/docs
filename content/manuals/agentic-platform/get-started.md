@@ -43,27 +43,18 @@ On your first launch, the default **Open** network policy permits outbound
 access to any host. If you're using a custom policy, make sure it permits
 GitHub and your model provider. See [Network policies](policies.md).
 
-When the sandbox is ready, its terminal opens with Claude Code. Complete any
-agent setup prompts. After launch, you can't change the selected credentials,
-tools, network policies, or compute size. See [Sandbox options](#sandbox-options)
-for other launch settings.
+When the sandbox is ready, its terminal opens with Claude Code. After launch,
+you can't change the selected credentials, tools, network policies, or compute
+size. See [Sandbox options](#sandbox-options) for other launch settings.
 
 ## Give the agent a task
 
-Your local files aren't mounted in a cloud sandbox. Clone the sample project
-inside it so the agent has source code to work with.
-
-Select **+** in the terminal tab bar to open another shell in the same sandbox.
-Run:
-
-```console
-$ git clone https://github.com/docker/welcome-to-docker.git /home/agent/workspace/project
-```
-
-Return to the Claude Code terminal tab and enter this prompt:
+Your local files aren't mounted in a cloud sandbox. Ask Claude Code to clone
+and review a public sample project:
 
 ```text
-Review the application in /home/agent/workspace/project.
+Clone https://github.com/docker/welcome-to-docker.git into
+/home/agent/workspace/project, then review the application.
 Read the source, package.json, and Dockerfile. Don't modify the application
 or install dependencies.
 Write /home/agent/workspace/review.md with:
@@ -72,39 +63,28 @@ Write /home/agent/workspace/review.md with:
 - An explanation of how the Dockerfile builds and serves the application.
 - One small improvement you'd recommend, with the relevant file path.
 Base the review on the files you read. Don't claim to have run the application.
+Summarize your findings in your response.
 ```
 
-Review any permission requests from the agent and approve the actions needed
-for the task. The agent's response can vary; the result to look for is
-`/home/agent/workspace/review.md`.
+Claude Code summarizes the project in the conversation and saves the review
+at `/home/agent/workspace/review.md`. You can ask follow-up questions or give
+it another task in the same session.
 
-## Inspect and save the result
+## Keep your work
 
-When the agent finishes, switch to the shell tab and read the review:
+The cloned project and review are stored in the sandbox. Files don't sync
+automatically with your computer or a remote repository. They remain available
+when you pause and resume the sandbox, but are lost when you delete it.
 
-```console
-$ cat /home/agent/workspace/review.md
-$ cat /home/agent/workspace/project/package.json
-$ cat /home/agent/workspace/project/Dockerfile
-```
-
-Compare the commands and Dockerfile explanation with the source files. If
-something is missing or incorrect, return to the agent tab and ask it to
-correct the review.
-
-Copy the review's text from the terminal into a file on your computer. Files
-don't sync automatically with your computer or a remote repository. Saving a
-copy means you can keep the result after deleting the sandbox.
-
-For larger files or directories, use the CLI to
-[transfer files](/manuals/ai/sandboxes/cloud/usage.md#transfer-files).
-For your own projects, you can also commit and push changes to a repository;
-include a [GitHub credential](secrets.md#github-credential) when launching a
-sandbox that needs to push changes.
+To keep files outside the sandbox, use the CLI to
+[transfer files](/manuals/ai/sandboxes/cloud/usage.md#transfer-files), or commit
+and push changes to a repository. Include a
+[GitHub credential](secrets.md#github-credential) when launching a sandbox that
+needs to push changes.
 
 ## Open the project in your editor (optional)
 
-Use SSH to inspect the project and review in VS Code or Cursor. Your editor
+Open the project and review in VS Code or Cursor over SSH. Your editor
 runs on your computer, while the files and terminal commands stay in the
 cloud sandbox.
 
@@ -135,11 +115,9 @@ cloud sandbox.
 6. Open `/home/agent/workspace` in the remote window. You'll find the cloned
    application in `project` and the agent's output in `review.md`.
 
-The first connection installs the editor's server inside the sandbox. If the
-connection reports a blocked download, check the sandbox's
-[network policies](policies.md) for the host shown in the error.
+The first connection installs the editor's server inside the sandbox.
 
-You can also copy the review to your computer from a local terminal:
+To download the review, run this command in a terminal on your computer:
 
 ```console
 $ sbx --cloud cp <SANDBOX_ID>:/home/agent/workspace/review.md ./review.md
