@@ -13,7 +13,7 @@ settings. You run kits you build yourself or get from another publisher in the
 same way: give `sbx` a reference, and Docker Sandboxes prepares the environment
 and applies the kit's settings.
 
-Docker recommends kits v3. V2 remains supported and is the default format
+Docker recommends v3 kits. V2 remains supported and is the default format
 for built-in agent references such as `claude` and `codex`.
 
 ## Run a kit
@@ -25,9 +25,6 @@ published v3 Codex workload:
 ```console
 $ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-v3-kit
 ```
-
-This starts Codex using a v3 kit from Docker Hub. The built-in `codex`
-shortcut uses a v2 kit to preserve compatibility with existing customizations.
 
 ### Published v3 workloads
 
@@ -143,8 +140,7 @@ instructions intact.
 ## Add mixins
 
 Mixins add tools and configuration to a workload. Use `--kit` to add a mixin
-when creating a sandbox. For v3 kits, both the workload and the mixin must
-use v3.
+when creating a sandbox.
 
 For example, an internal CLI mixin can package your company's executable
 along with network rules and a credential request for its API:
@@ -163,11 +159,6 @@ when prompted.
 Codex starts with `company-cli` available to use. Docker Sandboxes
 applies the files and settings from both the workload and the mixin.
 
-Built-in shortcuts such as `claude` and `codex` use v2 kits and require
-[v2 mixins](/manuals/ai/sandboxes/customize/kits-v2.md).
-See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
-for details.
-
 ### Run Codex from a shell
 
 To start a shell with Codex available as a tool, combine the published v3
@@ -184,9 +175,8 @@ than starting Codex automatically. See
 [Codex authentication](/manuals/ai/sandboxes/agents/codex.md#authentication)
 for credential setup.
 
-Pass the workload as the argument to `sbx run`; `--kit` selects mixins.
-The built-in `shell` shortcut uses v2 and can't run this v3 mixin. To start
-Codex directly, use the `docker/sbx-kit-codex` workload instead.
+Use the v3 Shell workload as the `sbx run` argument; the built-in `shell`
+shortcut selects v2. The `--kit` flag selects the Codex mixin.
 
 ### Combine multiple mixins
 

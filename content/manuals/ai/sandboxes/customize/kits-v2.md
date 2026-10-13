@@ -11,13 +11,10 @@ aliases:
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-V2 kits remain supported and are not deprecated. This page covers v2 usage,
-configuration, and the specification. Docker recommends
-[v3 kits](/manuals/ai/sandboxes/customize/_index.md).
-
-Built-in shortcuts such as `claude` and `codex` select v2 kits and still work
-with v2 mixins. V3 workloads and mixins can't be combined with v1 or v2 kits.
-V1 also remains supported.
+V2 kits remain supported and are not deprecated. Built-in agent names such
+as `claude` and `codex` select v2 kits and work with v2 mixins. This page
+covers their usage and specification. For new kits, Docker recommends
+[v3](/manuals/ai/sandboxes/customize/_index.md). V1 also remains supported.
 
 ## Use existing kits
 
@@ -790,19 +787,13 @@ controlled by the user through
 
 ## Move an environment to v3
 
-Select a v3 workload, convert or replace its mixins, and create a separate
-sandbox with a different `--name`. Use the explicit workload reference in
-place of the built-in shortcut. Find a published replacement in the
-[v3 workload mapping](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads).
-Every selected kit must use v3.
+Select a [v3 workload](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads),
+convert or replace its mixins, and create a separate sandbox. Every selected
+kit must use v3. Running an existing sandbox keeps its recorded kit configuration.
 
-For an environment file, include the v3 workload and its v3 mixins in
-`kits`, and set `agent` to the workload's name. For an OCI workload, use the
-last component of its repository name, such as `sbx-kit-claude`. The workload
-name must differ from built-in agent names. Keep the
-environment file's `schemaVersion: "1"`: it is independent of kit descriptor
-versions. Use a different environment `name` to create a separate sandbox;
-running the existing environment doesn't migrate its kits.
+For an environment file, see [Add v3 kits](/manuals/ai/sandboxes/configuration/environment-files.md#add-v3-kits).
+Keep its `schemaVersion: "1"`: the environment file version is independent of
+kit descriptor versions.
 
 Changing `schemaVersion` alone doesn't convert a kit. Separate reusable image
 content from sandbox initialization, and declare runtime capabilities:
@@ -826,5 +817,3 @@ when converting runtime setup and capability declarations.
 Use a [kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md) to combine
 published v3 components with your settings. To rebuild the agent environment
 from a base image, follow [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
-Running an existing sandbox keeps its recorded configuration. It doesn't
-migrate the kit composition.

@@ -19,10 +19,8 @@ A kit can define the whole environment or add something to an existing one,
 such as a toolchain or your team's shared configuration. Package those choices
 once, then reuse them across projects and share them with your team.
 
-Docker recommends v3 for using and authoring kits. V3 kits require `sbx`
-v0.45 or later, a v3 workload, and v3 for every mixin you add. V2 remains
-supported and is not deprecated. See [Version compatibility](#version-compatibility)
-for how to choose compatible kits.
+Docker recommends v3 kits. This section covers v3. For the supported v2
+format, see [Kits v2](/manuals/ai/sandboxes/customize/kits-v2.md).
 
 ## What is a kit?
 
@@ -32,9 +30,9 @@ credentials, setup commands, or instructions for the agent. You publish the
 kit as a container image containing its files and descriptor.
 
 You identify a published kit by its container image reference, such as
-`docker.io/docker/sbx-kit-claude:2.1.267`. When you use the kit, `sbx` prepares its files
-and applies its settings. You can use one kit for a complete environment or combine kits
-that contribute different parts.
+`docker.io/docker/sbx-kit-claude:2.1.267`. When you use the kit, `sbx`
+prepares its files and applies its settings. You can use one kit for a
+complete environment or combine kits that contribute different parts.
 
 ## What kits can do
 
@@ -67,8 +65,8 @@ For example, this command runs a workload with a mixin:
 $ sbx run docker.io/docker/sbx-kit-claude:2.1.267 --kit docker.io/sbx/playwright:1.61.1
 ```
 
-The Claude Code workload supplies the environment and launch command. The
-Playwright mixin adds browser-testing tools and configuration to that environment.
+The Claude Code workload starts the agent, and the Playwright mixin adds
+browser-testing tools.
 
 ## Kit sets
 
@@ -97,25 +95,17 @@ and add mixins. To customize and publish your own combination, see
 
 ## Version compatibility
 
-V3 kits cannot be combined with v1 or v2 kits in the same sandbox. To use
-v3, select a v3 workload and use v3 for every mixin you add.
+V3 requires `sbx` v0.45 or later. Every kit in a v3 sandbox must use v3:
+select a v3 workload and add only v3 mixins.
 
-The built-in agent names, such as `claude` and `codex`, select v2 kits.
-You can't add a v3 mixin to these built-ins. For example,
-`sbx run claude --kit ./some-v3-mixin` fails because it mixes kit versions.
-Instead, select a v3 workload by its published image, local path, or Git
-reference. Use the [built-in agent to v3 workload mapping](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads)
-to find a published workload for your agent.
+Built-in agent names such as `claude` and `codex` select v2 kits, so
+`sbx run claude --kit ./some-v3-mixin` fails. To use that mixin, choose a
+[v3 workload](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads)
+by its image, local path, or Git reference.
 
-A kit's capabilities can require a later `sbx` release than v0.45.
-Check [Kit capability support](/manuals/ai/sandboxes/customize/author/capabilities.md)
-for minimum versions and local or cloud restrictions. Pin published kits to
-a version tag or digest: `latest` can change the kit you get when you create
-a sandbox, including its runtime requirements.
-
-V2 remains supported, including the built-in agents and
-existing v2 customizations. See [Kits v2](/manuals/ai/sandboxes/customize/kits-v2.md) for maintenance
-and migration guidance.
+A kit's capabilities can require a later release or a local sandbox. See
+[Kit capability support](/manuals/ai/sandboxes/customize/author/capabilities.md)
+for details. V2 remains supported and is not deprecated.
 
 ## Choose your next step
 
@@ -126,6 +116,5 @@ and migration guidance.
 - Explore the [sandbox-kit-spec repository](https://github.com/docker/sandbox-kit-spec)
   for the authoritative v3 specification, build frontend, and examples.
 
-For the earlier format used by built-in agents, see [Kits v2](/manuals/ai/sandboxes/customize/kits-v2.md).
 To save an environment you've configured inside a sandbox,
 see [Save a sandbox as a template](/manuals/ai/sandboxes/usage.md#saving-a-sandbox-as-a-template).

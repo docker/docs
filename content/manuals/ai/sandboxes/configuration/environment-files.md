@@ -278,9 +278,8 @@ can adapt for a project.
 
 ### Add v3 kits
 
-Docker recommends kits v3. To use v3 mixins, include a v3 workload in `kits`
-and set `agent` to the workload's name. Built-in agents use v2 and can't be
-combined with v3 mixins.
+To add v3 mixins, include a v3 workload in `kits` and set `agent` to the
+workload's name.
 
 For example, save this as `web-app-env/v3.sbxenv.yaml` to use a v3 Claude Code
 workload with the v3 Playwright mixin:
@@ -302,14 +301,10 @@ From `web-app-env`, run:
 $ sbx env run v3.sbxenv.yaml
 ```
 
-The `agent` value matches the last component of the workload's repository
-name, `sbx-kit-claude`. It must differ from built-in agent names. The
-`web-app-v3` name creates a separate sandbox from the first example.
-The environment file keeps `schemaVersion: "1"`, independent of the kits'
-schema versions.
-
+The `agent` value, `sbx-kit-claude`, matches the last component of the
+workload's repository name. The `web-app-v3` name creates a separate sandbox.
 For other agents, see the
-[published v3 workload mapping](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads).
+[published v3 workloads](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads).
 
 ### Combine team defaults and personal settings
 
@@ -612,17 +607,8 @@ true`.
 `kits` accepts local directories, ZIP archives, OCI registry references, and
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
 configure the sandbox, and give the agent project-specific instructions.
-Docker recommends v3 kits. Include a v3 workload in `kits` alongside its
-v3 mixins, and set `agent` to the workload's name. For an OCI workload, this
-is the last component of its repository name, such as `sbx-kit-claude` for
-`docker.io/docker/sbx-kit-claude:2.1.267`. The workload name must differ from
-built-in agent names; `sbx/claude` conflicts with `claude`.
-
-Built-in agent shortcuts select v2 kits and require v2 mixins. V2 remains
-supported and is not deprecated. See
-[Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
-and [Kit capability support](/manuals/ai/sandboxes/customize/author/capabilities.md)
-when selecting kits and an `sbx` version.
+Built-in agents use v2 mixins. For v3 workloads and mixins, see
+[Add v3 kits](#add-v3-kits).
 
 An environment file selects kits and configures a sandbox's host resources.
 A kit descriptor defines the package itself. The environment file's
