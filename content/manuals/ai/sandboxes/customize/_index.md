@@ -32,7 +32,7 @@ credentials, setup commands, or instructions for the agent. You publish the
 kit as a container image containing its files and descriptor.
 
 You identify a published kit by its container image reference, such as
-`docker.io/sbx/claude:2.1.267`. When you use the kit, `sbx` prepares its files
+`docker.io/docker/sbx-kit-claude:2.1.267`. When you use the kit, `sbx` prepares its files
 and applies its settings. You can use one kit for a complete environment or combine kits
 that contribute different parts.
 
@@ -64,7 +64,7 @@ and launch command, and mixins add tools or behavior to it.
 For example, this command runs a workload with a mixin:
 
 ```console
-$ sbx run docker.io/sbx/claude:2.1.267 --kit docker.io/sbx/playwright:1.61.1
+$ sbx run docker.io/docker/sbx-kit-claude:2.1.267 --kit docker.io/sbx/playwright:1.61.1
 ```
 
 The Claude Code workload supplies the environment and launch command. The

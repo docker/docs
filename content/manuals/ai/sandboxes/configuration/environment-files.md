@@ -50,10 +50,11 @@ publishes the application's development port:
 ```yaml
 schemaVersion: "1"
 name: web-app
-agent: docker.io/sbx/claude:2.1.267
+agent: sbx-kit-claude
 workspace: ./web-app
 
 kits:
+  - docker.io/docker/sbx-kit-claude:2.1.267
   - docker.io/sbx/playwright:1.61.1
 
 env:
@@ -64,12 +65,11 @@ ports:
     host: 3000
 ```
 
-This example uses v3 kits, the recommended kit format. Both `agent` and
-every entry in `kits` must select v3 kits. Built-in shortcuts such as
-`claude` select v2 and can't be combined with these mixins. See the
-[published v3 workload mapping](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads)
-for other agents. The environment file keeps `schemaVersion: "1"`; this
-version is independent of the kits' schema versions.
+This example uses v3 kits, the recommended kit format. The `kits` list
+includes both the workload and its mixins. The `agent` value is the workload's
+repository name, `sbx-kit-claude`, rather than its OCI reference or the built-in
+`claude` name. The environment file keeps `schemaVersion: "1"`; this version
+is independent of the kits' schema versions.
 
 From `web-app-env`, run the environment:
 
@@ -580,10 +580,14 @@ true`.
 `kits` accepts local directories, ZIP archives, OCI registry references, and
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
 configure the sandbox, and give the agent project-specific instructions.
-Docker recommends v3 kits. To use v3 mixins, set `agent` to a v3 workload
-reference and use v3 for every entry in `kits`. Built-in agent shortcuts
-select v2 kits and require v2 mixins. V2 remains supported and is not
-deprecated. See
+Docker recommends v3 kits. Include a v3 workload in `kits` alongside its
+v3 mixins, and set `agent` to the workload's name. For an OCI workload, this
+is the last component of its repository name, such as `sbx-kit-claude` for
+`docker.io/docker/sbx-kit-claude:2.1.267`. The workload name must differ from
+built-in agent names; `sbx/claude` conflicts with `claude`.
+
+Built-in agent shortcuts select v2 kits and require v2 mixins. V2 remains
+supported and is not deprecated. See
 [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
 and [Kit capability support](/manuals/ai/sandboxes/customize/author/capabilities.md)
 when selecting kits and an `sbx` version.

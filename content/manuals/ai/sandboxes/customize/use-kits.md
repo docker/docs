@@ -23,7 +23,7 @@ replace the agent name with that kit's reference. For example, run Docker's
 published v3 Codex workload:
 
 ```console
-$ sbx run docker.io/sbx/codex:0.155.1 --name codex-v3-kit
+$ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-v3-kit
 ```
 
 This starts Codex using a v3 kit from Docker Hub. The built-in `codex`
@@ -32,26 +32,35 @@ shortcut uses a v2 kit to preserve compatibility with existing customizations.
 ### Published v3 workloads
 
 Use these published v3 workloads in place of built-in shortcuts when adding
-v3 mixins. You can also use the references as the `agent` value in a
-[sandbox environment file](/manuals/ai/sandboxes/configuration/environment-files.md).
+v3 mixins with `sbx run` or `sbx create`.
+
+A workload's agent name comes from the last component of its repository name.
+It must differ from built-in agent names: `docker/sbx-kit-claude` registers
+`sbx-kit-claude`, while `sbx/claude` conflicts with built-in `claude` and
+fails to register. Changing the sandbox's `--name` doesn't change the agent name.
 
 | Built-in agent | V3 workload OCI reference |
 | --- | --- |
-| `claude` | `docker.io/sbx/claude:2.1.267` |
-| `codex` | `docker.io/sbx/codex:0.155.1` |
-| `copilot` | `docker.io/sbx/copilot:1.0.86` |
-| `cursor` | `docker.io/sbx/cursor:2026.09.18-9a7762b` |
-| `devin` | `docker.io/sbx/devin:3000.10.31` |
-| `docker-agent` | `docker.io/sbx/docker-agent:1.141.0` |
-| `droid` | `docker.io/sbx/droid:0.223.0` |
-| `kiro` | `docker.io/sbx/kiro:1.0.0` |
-| `opencode` | `docker.io/sbx/opencode:1.18.31` |
+| `claude` | `docker.io/docker/sbx-kit-claude:2.1.267` |
+| `codex` | `docker.io/docker/sbx-kit-codex:0.155.1` |
+| `copilot` | `docker.io/docker/sbx-kit-copilot:1.0.86` |
+| `cursor` | `docker.io/docker/sbx-kit-cursor:2026.09.18-9a7762b` |
+| `devin` | `docker.io/docker/sbx-kit-devin:3000.10.31` |
+| `docker-agent` | `docker.io/docker/sbx-kit-docker-agent:1.141.0` |
+| `droid` | `docker.io/docker/sbx-kit-droid:0.223.0` |
+| `kiro` | `docker.io/docker/sbx-kit-kiro:1.0.0` |
+| `opencode` | `docker.io/docker/sbx-kit-opencode:1.18.31` |
 | `shell` | `docker.io/docker/sbx-kit-shell:1.0.0` |
 
-The `sbx/*` kits are published from the
+For a [sandbox environment file](/manuals/ai/sandboxes/configuration/environment-files.md),
+list the workload reference under `kits` and set `agent` to its repository
+name, such as `sbx-kit-claude`.
+
+Published `sbx/*` mixins, such as `sbx/playwright` and `sbx/codex-mixin`, can
+be combined with these workloads. Their sources are on the
 [v3 branch of docker/sbx-kits-contrib](https://github.com/docker/sbx-kits-contrib/tree/v3).
-The Shell workload is published from
-[sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/tree/main/examples/shell).
+For more source examples, see
+[sandbox-kit-spec](https://github.com/docker/sandbox-kit-spec/tree/main/examples).
 For Gemini, author a
 [v3 workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md)
 or keep the built-in `gemini` shortcut with v2 mixins.
@@ -141,7 +150,7 @@ For example, an internal CLI mixin can package your company's executable
 along with network rules and a credential request for its API:
 
 ```console
-$ sbx run docker.io/sbx/codex:0.155.1 --name codex-tools \
+$ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-tools \
     --kit docker.io/<NAMESPACE>/company-cli:1.0.0
 ```
 
@@ -177,7 +186,7 @@ for credential setup.
 
 Pass the workload as the argument to `sbx run`; `--kit` selects mixins.
 The built-in `shell` shortcut uses v2 and can't run this v3 mixin. To start
-Codex directly, use the `sbx/codex` workload instead.
+Codex directly, use the `docker/sbx-kit-codex` workload instead.
 
 ### Combine multiple mixins
 

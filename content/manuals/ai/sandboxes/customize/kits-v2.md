@@ -796,8 +796,10 @@ place of the built-in shortcut. Find a published replacement in the
 [v3 workload mapping](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads).
 Every selected kit must use v3.
 
-For an environment file, replace the built-in `agent` value with the v3
-workload reference and replace every `kits` entry with a v3 mixin. Keep the
+For an environment file, include the v3 workload and its v3 mixins in
+`kits`, and set `agent` to the workload's name. For an OCI workload, use the
+last component of its repository name, such as `sbx-kit-claude`. The workload
+name must differ from built-in agent names. Keep the
 environment file's `schemaVersion: "1"`: it is independent of kit descriptor
 versions. Use a different environment `name` to create a separate sandbox;
 running the existing environment doesn't migrate its kits.
