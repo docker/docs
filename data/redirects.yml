@@ -433,6 +433,8 @@
   - /go/windows-linux-vmm/
 "/desktop/setup/install/linux/":
   - /go/linux-credentials/
+"/desktop/enterprise/enforce-sign-in/":
+  - /go/enforce-sign-in/
 "/desktop/use-desktop/pause/":
   - /go/mac-desktop-pause/
   - /go/win-desktop-pause/
