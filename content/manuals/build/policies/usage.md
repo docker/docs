@@ -6,9 +6,9 @@ keywords: build policies, policy eval, docker buildx, policy development, debugg
 weight: 20
 ---
 
-Build policies validate inputs before builds execute. This guide covers how to
-develop policies iteratively and apply them to real builds with `docker buildx
-build` and `docker buildx bake`.
+Build policies validate build inputs and can check HTTP(S) requests during build
+steps. This guide covers how to develop policies iteratively and apply them to
+builds with `docker buildx build` and `docker buildx bake`.
 
 ## Prerequisites
 
@@ -222,6 +222,74 @@ Use only your specified policy:
 ```console
 $ docker buildx build --policy reset=true,filename=strict.rego .
 ```
+
+## Block URLs in build steps
+
+To check HTTP(S) requests from `RUN` instructions, add
+`"caps": {"exec.proxy": true}` to the policy's `decision` object. This enables
+BuildKit's proxy, which checks requests against your `input.http` rules.
+By default, these rules only apply to `ADD` downloads.
+
+Save this policy as `Dockerfile.rego` alongside your Dockerfile to allow Debian
+package downloads and block requests to other hosts:
+
+```rego {title="Dockerfile.rego"}
+package docker
+
+default allow := false
+
+allow if input.local
+
+allow if {
+    input.image.repo == "debian"
+}
+
+allow if {
+    input.http.host == "deb.debian.org"
+}
+
+decision := {
+    "allow": allow,
+    "caps": {"exec.proxy": true},
+}
+```
+
+Test it with this Dockerfile:
+
+```dockerfile {title="Dockerfile"}
+FROM debian:trixie
+RUN apt-get update && apt-get install -y curl
+RUN curl -f http://example.com/
+```
+
+```console
+$ docker buildx build --no-cache --progress=plain .
+```
+
+The package downloads from `deb.debian.org` succeed. The proxy denies the request
+to `example.com` with HTTP 403, and `curl -f` fails the build. Use `--no-cache`
+when testing to run the steps again.
+
+To restrict individual URLs, use `input.http.url` or match both `input.http.host`
+and `input.http.path`. See the [HTTP input reference](./inputs.md#http-inputs).
+
+The proxy supports Linux build steps. Applications must use the injected proxy
+environment variables and trust BuildKit's certificate for HTTPS. BuildKit adds
+the certificate to the system trust store. Traffic that bypasses the proxy is
+blocked.
+
+### Enable the proxy for a CI builder
+
+For a dedicated CI builder, enable the proxy for all builds with
+`--buildkitd-flags '--proxy-network'`:
+
+```console
+$ docker buildx create --name ci-policy --driver docker-container \
+    --buildkitd-flags '--proxy-network' --use --bootstrap
+```
+
+This replaces the `exec.proxy` opt-in in each policy file. You still need a
+policy to restrict URLs.
 
 ## Using policies with bake
 
