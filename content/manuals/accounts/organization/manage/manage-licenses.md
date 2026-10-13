@@ -1,10 +1,13 @@
 ---
 title: Manage licenses
 linkTitle: Licenses
-description: View your organization's license inventory and assign licenses to
-  teams or individual members, including invite-time and automatic assignment.
+description: >-
+  View your organization's license inventory and assign licenses to teams or
+  members by team, invitation, or automatic assignment for Docker Core, AI
+  Governance, and Offload.
 keywords: licenses, organization, teams, members, invite, Docker Core, Docker
-  Offload, AI Governance, license assignment, team assignment, docker home
+  Offload, AI Governance, license assignment, team assignment, docker home,
+  automatic license assignment, SSO, SCIM, Sandboxes
 weight: 40
 aliases:
   - /admin/organization/manage/manage-licenses/
@@ -116,19 +119,17 @@ When the toggle is on:
 
 - Docker Core: members receive a license when they sign in to Docker Desktop.
 - AI Governance: members receive a license when they sign in to
-  [Docker Sandboxes](/manuals/ai/sandboxes/_index.md). The `sbx login` command
-  provisions licenses on a first-come, first-served basis.
+  [Docker Sandboxes](/manuals/ai/sandboxes/_index.md), whether they joined by
+  invitation or through single sign-on (SSO) with System for Cross-domain
+  Identity Management (SCIM) or Just-in-Time (JIT) provisioning. The
+  `sbx login` command provisions licenses on a first-come, first-served
+  basis. SSO itself requires a Docker Business subscription. See
+  [Authentication](/manuals/security/authentication/_index.md).
 - Licenses are assigned until exhausted.
   - Once the available licenses are exhausted, automatic license assignment
     stops until more licenses are available.
   - Members can still use Docker Sandboxes or Docker Desktop, but
     organization policies for those products won't affect their usage.
-
-AI Governance licenses include single sign-on (SSO) and provisioning features
-regardless of your Docker Core subscription. With automatic assignment on,
-Docker assigns a license when a member uses Docker Sandboxes, whether they
-joined by invitation or through SSO with System for Cross-domain Identity
-Management (SCIM) or Just-in-Time (JIT) provisioning.
 
 ## View licenses
 
