@@ -2,20 +2,21 @@
 title: Invite and manage organization members
 linkTitle: Members
 weight: 10
-description: Invite and manage organization members in Docker Home. Assign
-  roles, resend or remove invitations, add members to teams, and export a CSV
-  member list.
+description: >-
+  Invite organization members in Docker Home, assign roles and licenses,
+  manage teams, remove members with or without SCIM, and export a CSV member
+  list.
 keywords: members, invite members, organization members, Docker Home, Docker
   Hub, export member list, edit roles, manage invitations, CSV invite, bulk
   invite, resend invitation, remove member, accept invitation, teams, pending
-  invitations, organization owner, licenses
+  invitations, organization owner, licenses, SCIM, IdP, group mapping
 aliases:
   - /admin/organization/manage/members/
   - /docker-hub/members/
   - /admin/organization/members/
 ---
 
-Learn how to invite and manage members for your organization in Docker Home.
+Invite and manage members for your organization in Docker Home.
 
 ## Invite members
 
@@ -179,14 +180,16 @@ An invitee must accept the invitation before you can add them to a team.
 
 ### Remove members from teams
 
-If your organization uses single sign-on (SSO) with
-[SCIM](/manuals/security/provisioning/scim/_index.md) enabled,
-remove members from your identity provider (IdP). That removes them from
-Docker automatically. If SCIM is disabled, remove members manually in Docker
-using the following steps.
+If your organization uses
+[SCIM group mapping](/manuals/security/provisioning/scim/group-mapping.md) or
+the `dockerTeam` attribute to manage teams, update team membership in your
+identity provider (IdP). You can also remove a member from a team in Docker
+Home with the following steps.
 
 Removing a member from a team revokes their access to that team's permitted
-resources.
+resources. To remove someone from the organization entirely when SCIM is
+enabled, see
+[Remove a member from the organization](#remove-a-member-from-the-organization).
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
