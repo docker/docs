@@ -50,12 +50,11 @@ publishes the application's development port:
 ```yaml
 schemaVersion: "1"
 name: web-app
-agent: sbx-kit-claude
+agent: claude
 workspace: ./web-app
 
 kits:
-  - docker.io/docker/sbx-kit-claude:2.1.267
-  - docker.io/sbx/playwright:1.61.1
+  - docker.io/sbx/playwright-kit:latest
 
 env:
   NODE_ENV: test
@@ -65,11 +64,9 @@ ports:
     host: 3000
 ```
 
-This example uses v3 kits, the recommended kit format. The `kits` list
-includes both the workload and its mixins. The `agent` value is the workload's
-repository name, `sbx-kit-claude`, rather than its OCI reference or the built-in
-`claude` name. The environment file keeps `schemaVersion: "1"`; this version
-is independent of the kits' schema versions.
+> [!NOTE]
+> This example uses kits v2, the format used by built-in agents. For v3, see
+> [Add v3 kits](#add-v3-kits).
 
 From `web-app-env`, run the environment:
 
@@ -278,6 +275,41 @@ second time.
 
 The following examples combine environment file fields into configurations you
 can adapt for a project.
+
+### Add v3 kits
+
+Docker recommends kits v3. To use v3 mixins, include a v3 workload in `kits`
+and set `agent` to the workload's name. Built-in agents use v2 and can't be
+combined with v3 mixins.
+
+For example, save this as `web-app-env/v3.sbxenv.yaml` to use a v3 Claude Code
+workload with the v3 Playwright mixin:
+
+```yaml
+schemaVersion: "1"
+name: web-app-v3
+agent: sbx-kit-claude
+workspace: ./web-app
+
+kits:
+  - docker.io/docker/sbx-kit-claude:2.1.267
+  - docker.io/sbx/playwright:1.61.1
+```
+
+From `web-app-env`, run:
+
+```console
+$ sbx env run v3.sbxenv.yaml
+```
+
+The `agent` value matches the last component of the workload's repository
+name, `sbx-kit-claude`. It must differ from built-in agent names. The
+`web-app-v3` name creates a separate sandbox from the first example.
+The environment file keeps `schemaVersion: "1"`, independent of the kits'
+schema versions.
+
+For other agents, see the
+[published v3 workload mapping](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads).
 
 ### Combine team defaults and personal settings
 
