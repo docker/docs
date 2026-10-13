@@ -171,6 +171,17 @@ variable, name it in the hook's `env` list. For example, `env: [WORKSPACE_DIR]`
 gives the command the mounted workspace's path. In `sbx`, startup hooks receive
 the sandbox's environment without this filtering.
 
+Sandbox containers set `SBX_AGENT` to the provisioned agent's name, such
+as `claude` or `codex`. For a v3 workload from a registry, the value is the
+last component of the kit's repository name. For example,
+`sbx run --name foo docker.io/me/my-custom-kit` sets `SBX_AGENT` to
+`my-custom-kit`. The `--name` flag names the sandbox and does not change
+`SBX_AGENT`.
+
+Use `SBX_AGENT` in hooks or scripts that need different behavior for different
+agents. Add `SBX_AGENT` to an install hook's `env` list to make it available
+to that hook. Startup hooks receive it without that declaration.
+
 See [Kit authoring patterns](/manuals/ai/sandboxes/customize/author/patterns.md#run-setup-after-combining-kits)
 for setup examples and the upstream
 [lifecycle definition](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/lifecycle@1.md)
