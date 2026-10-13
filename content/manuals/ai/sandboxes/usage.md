@@ -291,7 +291,7 @@ From the network panel you can browse connection logs, allow or block specific
 hosts, and add custom network rules. Press `?` to see all keyboard shortcuts.
 
 At selection and text prompts, Enter accepts the default. Ctrl-D cancels the
-prompt. Declining a confirmation returns a non-zero exit status.
+prompt. Declining a required confirmation returns a non-zero exit status.
 
 ## Git workspace modes
 

@@ -564,6 +564,6 @@ information. When `--upload` is confirmed, the bundle is uploaded to Docker
 support and the command prints a diagnostics ID. Include this ID in your
 issue so the team can correlate it with the uploaded bundle.
 
-Without terminal input, `sbx diagnose --upload` saves the bundle locally, skips
-the upload, and exits with status 0. Check for a diagnostics ID before treating
-the command as a successful upload.
+Without terminal input, `sbx diagnose --upload` saves the bundle locally and
+skips the upload. Check for a diagnostics ID to confirm that the upload
+succeeded.
