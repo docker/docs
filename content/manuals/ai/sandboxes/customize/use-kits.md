@@ -13,10 +13,8 @@ settings. You run kits you build yourself or get from another publisher in the
 same way: give `sbx` a reference, and Docker Sandboxes prepares the environment
 and applies the kit's settings.
 
-Docker recommends v3 for using kits. This page shows how to run published
-v3 workloads, combine them with v3 mixins, and customize their settings.
-Built-in agent shortcuts select v2 kits, which remain supported and are not
-deprecated. Replace the shortcut with a v3 workload reference to use v3 mixins.
+Docker recommends kits v3. V2 remains supported and is the default format
+for built-in agent references such as `claude` and `codex`.
 
 ## Run a kit
 
