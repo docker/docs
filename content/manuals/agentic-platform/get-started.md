@@ -106,7 +106,8 @@ cloud sandbox.
    $ ssh <SANDBOX_ID>@sbx_cloud
    ```
 
-   Run `exit` to return to your computer's terminal.
+   A successful connection opens a shell inside the cloud sandbox. Run `exit`
+   to return to your computer's terminal.
 4. In VS Code, install the
    [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh).
    In Cursor, install its Remote - SSH support.
