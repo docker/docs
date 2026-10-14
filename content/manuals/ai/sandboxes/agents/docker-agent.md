@@ -1,11 +1,13 @@
 ---
 title: Docker Agent
-weight: 70
+weight: 50
 description: |
   Use Docker Agent in Docker Sandboxes with multi-provider authentication
   supporting OpenAI, Anthropic, and more.
 keywords: docker sandboxes, docker agent, openai, anthropic, sbx
 ---
+
+{{% include "sandboxes-local-scope.md" %}}
 
 Official documentation: [Docker Agent](/manuals/ai/docker-agent/_index.md)
 
@@ -17,32 +19,29 @@ Create a sandbox and run Docker Agent for a project directory:
 $ sbx run docker-agent ~/my-project
 ```
 
-The workspace parameter defaults to the current directory, so
-`sbx run docker-agent` from inside your project works too.
+`sbx run docker-agent` defaults the workspace to the current directory, so you
+can run it from inside your project.
+
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
 
 ## Authentication
 
 Docker Agent supports multiple providers. Store keys for the providers you want
-to use with [stored secrets](../security/credentials.md#stored-secrets):
+to use with [stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g openai
-$ sbx secret set -g anthropic
-$ sbx secret set -g google
-$ sbx secret set -g xai
-$ sbx secret set -g nebius
-$ sbx secret set -g mistral
-$ sbx secret set -g openrouter
+$ sbx secret set openai
+$ sbx secret set anthropic
+$ sbx secret set google
+$ sbx secret set xai
+$ sbx secret set nebius
+$ sbx secret set mistral
+$ sbx secret set openrouter
 ```
 
 You only need to configure the providers you want to use. Docker Agent detects
 available credentials and routes requests to the appropriate provider.
-
-Alternatively, export the environment variables (`OPENAI_API_KEY`,
-`ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `XAI_API_KEY`, `NEBIUS_API_KEY`,
-`MISTRAL_API_KEY`, `OPENROUTER_API_KEY`) in your shell before running the
-sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
 
 ## Configuration
 
@@ -66,11 +65,11 @@ as the `run` subcommand or a config file — it replaces the defaults, so includ
 `run --yolo` yourself:
 
 ```console
-$ sbx run docker-agent -- run --yolo agent.yml
+$ sbx run --name <sandbox-name> -- run --yolo agent.yml
 ```
 
 ## Base image
 
 The sandbox uses `docker/sandbox-templates:docker-agent`. See
-[Templates](../customize/templates.md) to build your own image on top of
+[Base images](/manuals/ai/sandboxes/customize/author/base-images.md) to build your own image on top of
 this base.

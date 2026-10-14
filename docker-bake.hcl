@@ -40,7 +40,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "validate-vendor"]
+  targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "validate-vendor", "validate-api-reference"]
 }
 
 target "test" {
@@ -72,6 +72,13 @@ target "unused-media" {
 
 target "test-go-redirects" {
   target = "test-go-redirects"
+  output = ["type=cacheonly"]
+  provenance = false
+}
+
+target "releaser-test" {
+  context = "hack/releaser"
+  target = "releaser-test"
   output = ["type=cacheonly"]
   provenance = false
 }
@@ -160,6 +167,12 @@ target "vendor" {
 target "validate-vendor" {
   target = "validate-vendor"
   output = ["type=cacheonly"]
+}
+
+target "validate-api-reference" {
+  target = "validate-api-reference"
+  output = ["type=cacheonly"]
+  provenance = false
 }
 
 variable "UPSTREAM_MODULE_NAME" {

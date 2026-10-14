@@ -1,3 +1,9 @@
+2FA:
+  subscription: [Personal, Pro]
+  for: Individuals
+AI Governance Audit Logs:
+  subscription: [AI Governance]
+  requires: Docker Sandboxes [0.39.0](/manuals/ai/sandboxes/release-notes.md) or later
 Activity logs:
   subscription: [Team, Business]
   for: Administrators
@@ -67,6 +73,8 @@ Buildx metadata warnings:
   requires: Docker Buildx [0.16.0](https://github.com/docker/buildx/releases/tag/v0.16.0) and later
 Buildx no default:
   requires: Docker Buildx [0.10.4](https://github.com/docker/buildx/releases/tag/v0.10.4) and later
+Buildx no default OCI artifact:
+  requires: Docker Buildx [0.36.1](https://github.com/docker/buildx/releases/tag/v0.36.1) and later
 Cache backend API:
   availability: Experimental
 Company:
@@ -145,6 +153,9 @@ Compose sbom:
   requires: Docker Compose [2.39.0](https://github.com/docker/compose/releases/tag/v2.39.0) and later
 Compose SDK:
   requires: Docker Compose [5.0.0](https://github.com/docker/compose/releases/tag/v5.0.0) and later
+Custom roles:
+  subscription: [Business]
+  for: Administrators
 Dev Environments:
   availability: Beta
 Docker Build Cloud:
@@ -166,6 +177,9 @@ Docker Hardened Images:
   subscription: [Docker Hardened Images Select or Enterprise]
 Docker Hardened Images Enterprise:
   subscription: [Docker Hardened Images Enterprise]
+Docker Hardened Images EU data residency:
+  availability: Early Access
+  subscription: [Docker Hardened Images Select or Enterprise]
 Docker Init:
   requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Model Runner:
@@ -187,6 +201,9 @@ Docker Projects:
   availability: Beta
 Docker Sandboxes sbx:
   availability: Early Access
+Docker Sandboxes SSH:
+  availability: GA
+  requires: Docker Sandboxes 0.37.0 or later
 Docker Sandboxes:
   availability: Experimental
   requires: Docker Desktop [4.58](/manuals/desktop/release-notes.md#4580) or later
@@ -203,6 +220,9 @@ Docker Scout health scores:
   availability: Beta
 Docker Scout Mount Permissions:
   requires: Docker Desktop [4.34.0](/manuals/desktop/release-notes.md#4340) and later
+OIDC connections:
+  subscription: [Team, Business]
+  for: Administrators
 Domain management:
   subscription: [Business]
   for: Administrators
@@ -247,6 +267,10 @@ MSI installer:
   for: Administrators
 OATs:
   subscription: [Team, Business]
+  for: Administrators
+PATs:
+  subscription: [Personal, Pro]
+  for: Individuals
 Pay by invoice:
   subscription: [Team, Business]
 PKG installer:
@@ -267,10 +291,14 @@ SSO:
   for: Administrators
 Synchronized file sharing:
   subscription: [Pro, Team, Business]
+Unassociated machines:
+  for: Administrators
+  subscription: [Team, Business]
 USB/IP support:
   for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend
 VMM:
-  for: Docker Desktop on Mac with Apple Silicon
+  availability: Beta
+  requires: "Docker Desktop 4.86 or later"
 Wasm workloads:
   availability: Beta
 Wasmtime:

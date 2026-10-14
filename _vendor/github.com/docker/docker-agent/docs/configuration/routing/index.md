@@ -3,6 +3,7 @@ title: "Model Routing"
 description: "Route requests to different models based on the content of user messages."
 keywords: docker agent, ai agents, configuration, yaml, model routing
 weight: 100
+canonical: https://docs.docker.com/ai/docker-agent/configuration/routing/
 ---
 
 _Route requests to different models based on the content of user messages._
@@ -14,7 +15,7 @@ Model routing lets you define a "router" model that automatically selects the be
 > [!NOTE]
 > **How It Works**
 >
-> docker-agent uses NLP-based text similarity (via Bleve full-text search) to match user messages against example phrases you define. The route with the best-matching examples wins, and that model handles the request.
+> Docker Agent uses NLP-based text similarity (via Bleve full-text search) to match user messages against example phrases you define. The route with the best-matching examples wins, and that model handles the request.
 
 ## Configuration
 

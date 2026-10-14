@@ -4,6 +4,7 @@ description: "Task list management for complex multi-step workflows."
 keywords: docker agent, ai agents, tools, toolsets, todo tool
 linkTitle: "Todo"
 weight: 170
+canonical: https://docs.docker.com/ai/docker-agent/tools/todo/
 ---
 
 _Task list management for complex multi-step workflows._

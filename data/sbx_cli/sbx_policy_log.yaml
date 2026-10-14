@@ -8,6 +8,8 @@ description: |-
     issues or auditing network activity.
 usage: sbx policy log [SANDBOX] [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
@@ -18,15 +20,15 @@ options:
     - name: limit
       default_value: "0"
       usage: Maximum number of log entries to show
-    - name: quiet
-      shorthand: q
-      default_value: "false"
-      usage: Only display log entries
     - name: type
       default_value: all
       usage: |
         Filter logs by type: "all", "network", or "filesystem" (filesystem logs are not supported yet; default "all")
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
     - name: debug
       shorthand: D
       default_value: "false"

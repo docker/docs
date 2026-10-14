@@ -18,6 +18,7 @@ cname:
     - docker buildx ls
     - docker buildx policy
     - docker buildx prune
+    - docker buildx replay
     - docker buildx rm
     - docker buildx stop
     - docker buildx use
@@ -36,6 +37,7 @@ clink:
     - docker_buildx_ls.yaml
     - docker_buildx_policy.yaml
     - docker_buildx_prune.yaml
+    - docker_buildx_replay.yaml
     - docker_buildx_rm.yaml
     - docker_buildx_stop.yaml
     - docker_buildx_use.yaml
@@ -66,6 +68,14 @@ examples: |-
     ### Override the configured builder instance (--builder) {#builder}
 
     You can also use the `BUILDX_BUILDER` environment variable.
+
+    ### Enable the default policy
+
+    Set `BUILDX_DEFAULT_POLICY=1` to enable Buildx's built-in source policy. The
+    policy verifies signed tags for images managed by Docker, including BuildKit
+    builder images and Dockerfile frontends. Untagged digest references and images
+    outside the managed repositories are allowed unchanged. Tagged references
+    that also contain a digest still have their release identity verified.
 deprecated: false
 hidden: false
 experimental: false

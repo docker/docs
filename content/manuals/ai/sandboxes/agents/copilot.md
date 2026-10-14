@@ -7,6 +7,8 @@ description: |
 keywords: docker sandboxes, github copilot, ai agent, github token, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This guide covers authentication, configuration, and usage of GitHub Copilot
 in a sandboxed environment.
 
@@ -30,15 +32,11 @@ $ sbx run copilot
 ## Authentication
 
 Copilot requires a GitHub token with Copilot access. Store your token using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
-$ echo "$(gh auth token)" | sbx secret set -g github
+$ sbx secret set github --command 'gh auth token'
 ```
-
-Alternatively, export the `GH_TOKEN` or `GITHUB_TOKEN` environment variable in
-your shell before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
 
 ## Configuration
 

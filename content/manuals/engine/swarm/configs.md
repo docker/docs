@@ -244,7 +244,7 @@ This example assumes that you have PowerShell installed.
     <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
-        <p>Hello Docker! You have deployed a HTML page.</p>
+        <p>Hello Docker! You have deployed an HTML page.</p>
       </body>
     </html>
     ```

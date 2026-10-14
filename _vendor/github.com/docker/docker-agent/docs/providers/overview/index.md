@@ -1,14 +1,15 @@
 ---
 title: "Model Providers"
-description: "docker-agent supports multiple AI model providers. Choose the right one for your use case, or use multiple providers in the same configuration."
+description: "Docker Agent supports multiple AI model providers. Choose the right one for your use case, or use multiple providers in the same configuration."
 keywords: docker agent, ai agents, model providers, llm
 linkTitle: "Overview"
 weight: 10
+canonical: https://docs.docker.com/ai/docker-agent/providers/overview/
 aliases:
   - /ai/docker-agent/model-providers/
 ---
 
-_docker-agent supports multiple AI model providers. Choose the right one for your use case, or use multiple providers in the same configuration._
+_Docker Agent supports multiple AI model providers. Choose the right one for your use case, or use multiple providers in the same configuration._
 
 ## Supported Providers
 
@@ -17,6 +18,7 @@ _docker-agent supports multiple AI model providers. Choose the right one for you
 - [**Google Gemini**](../google/index.md) — Gemini 2.5 Flash, Gemini 3 Pro. Fast and cost-effective.
 - [**AWS Bedrock**](../bedrock/index.md) — access Claude, Nova, Llama, and more through AWS infrastructure.
 - [**Docker Model Runner**](../dmr/index.md) — run models locally with Docker. No API keys, no costs.
+- [**Local Models**](../local/index.md) — run Ollama, vLLM, or LocalAI locally. No API key required.
 - [**Provider Definitions**](../custom/index.md) — define reusable provider configurations with shared defaults for any provider type.
 
 ## Quick Comparison
@@ -28,18 +30,21 @@ _docker-agent supports multiple AI model providers. Choose the right one for you
 | Google              | `google`         | No     | Fast inference, competitive pricing, multimodal       |
 | AWS Bedrock         | `amazon-bedrock` | No     | Enterprise features, multiple models, AWS integration |
 | Docker Model Runner | `dmr`            | Yes    | No API costs, data privacy, offline capable           |
+| Local Models (Ollama / vLLM) | `ollama` / custom | Yes | No API costs, full data privacy, any OpenAI-compatible server |
 
 ## Additional Built-in Providers
 
-docker-agent also includes built-in aliases for these providers:
+Docker Agent also includes built-in aliases for these providers:
 
 | Provider       | Alias            | API Key / Env Variable              |
 | -------------- | ---------------- | ----------------------------------- |
+| ChatGPT (OpenAI account) | [`chatgpt`](../chatgpt/index.md) | None (sign in via `docker agent setup`) |
 | OpenCode Zen   | `opencode-zen`   | `OPENCODE_API_KEY`                  |
 | OpenCode Go    | `opencode-go`    | `OPENCODE_API_KEY`                  |
 | Mistral        | `mistral`        | `MISTRAL_API_KEY`                   |
 | xAI (Grok)     | `xai`            | `XAI_API_KEY`                       |
 | Nebius         | `nebius`         | `NEBIUS_API_KEY`                    |
+| NVIDIA NIM     | `nvidia`         | `NVIDIA_API_KEY`                    |
 | MiniMax        | `minimax`        | `MINIMAX_API_KEY`                   |
 | Baseten        | `baseten`        | `BASETEN_API_KEY`                   |
 | OVHcloud       | `ovhcloud`       | `OVH_AI_ENDPOINTS_ACCESS_TOKEN`     |
@@ -56,7 +61,7 @@ docker-agent also includes built-in aliases for these providers:
 | Requesty       | `requesty`       | `REQUESTY_API_KEY`                  |
 | OpenRouter     | `openrouter`     | `OPENROUTER_API_KEY`                |
 | Azure OpenAI   | `azure`          | `AZURE_API_KEY` + `base_url`        |
-| Ollama         | `ollama`         | None (local; optional `base_url`)   |
+| [Ollama](../local/index.md) | `ollama` | None (local; optional `base_url`) |
 | GitHub Copilot | `github-copilot` | `GITHUB_TOKEN` (PAT with `copilot` scope) |
 
 ```bash

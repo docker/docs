@@ -9,6 +9,10 @@ description: |-
 
     If sandboxes are currently running, they will be stopped when the daemon
     shuts down. You will be prompted for confirmation unless --force is used.
+
+    With --cloud, deletes the custom cloud network policy for your account and
+    leaves the local daemon alone. You will be prompted for confirmation unless
+    --force is used. Afterwards the default the server now stores is printed.
 usage: sbx policy reset [flags]
 options:
     - name: force
@@ -20,6 +24,10 @@ options:
       default_value: "false"
       usage: help for reset
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
     - name: debug
       shorthand: D
       default_value: "false"

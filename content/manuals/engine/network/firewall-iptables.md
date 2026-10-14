@@ -53,6 +53,31 @@ additional rules to filter these packets, use the `DOCKER-USER` chain.
 
 Rules appended to the `FORWARD` chain will be processed after Docker's rules.
 
+> [!NOTE]
+>
+> By default, remote hosts can only reach a container through a port published
+> to one of the Docker host's addresses. Sending packets to the container's own
+> IP address instead ("direct routed" access) is not allowed.
+>
+> These packets are dropped by a rule in the `raw` table's `PREROUTING` chain,
+> which is processed before the `filter` table. So, they never reach the
+> `DOCKER-USER` chain, and a rule in `DOCKER-USER` cannot allow them.
+>
+> Any packet that reaches the host's firewall rules already addressed to a
+> container is treated this way. For example, a Kubernetes CNI plugin may
+> translate a Service address to a container address before the packet reaches
+> the host's `PREROUTING` rules. Docker cannot distinguish the result from a
+> packet routed to the container by a remote host. Which host interface these
+> packets arrive on depends on the plugin's data path — for an overlay network
+> it is normally the tunnel device.
+>
+> To allow direct routed access to a container's *published* ports, use network
+> option `com.docker.network.bridge.trusted_host_interfaces`, or daemon option
+> `allow-direct-routing`. Unpublished ports are still protected. See
+> [Direct routing to containers in bridge networks](./port-publishing.md#direct-routing-to-containers-in-bridge-networks).
+> To allow direct routed access to all container ports, published or not, see
+> [Gateway modes](./port-publishing.md#gateway-modes).
+
 ### Match the original IP and ports for requests
 
 When packets arrive to the `DOCKER-USER` chain, they have already passed through

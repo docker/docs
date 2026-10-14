@@ -13,7 +13,7 @@ vulnerability management process.
 ## Scan with OpenVEX-compliant scanners
 
 To get accurate vulnerability assessments, use scanners that support
-[VEX](/manuals/dhi/core-concepts/vex.md) attestations. The following scanners can
+[VEX](/manuals/dhi/explore/security-concepts/vex.md) attestations. The following scanners can
 read and apply the VEX statements included with Docker Hardened Images:
 
 - [Docker Scout](#docker-scout): Automatically applies VEX statements with zero configuration

@@ -9,7 +9,7 @@ summary: |
   using a Docker Hardened Image, then add a development stage and Compose Watch
   for fast iteration.
 params:
-  tags: [security]
+  tags: [languages]
   time: 25 minutes
 ---
 

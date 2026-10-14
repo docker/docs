@@ -50,6 +50,10 @@ You can select a tag's digest to see more details.
 Only the repository owner or other team members with granted permissions can
 delete tags.
 
+> [!NOTE]
+> If your repository has [immutable tags](./immutable-tags.md) enabled, those
+> tags can't be deleted. Only mutable tags can be deleted.
+
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **My Hub** > **Repositories**.
 

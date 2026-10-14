@@ -51,8 +51,7 @@ requirements.
 
 ## Switch image stores
 
-The containerd image store is enabled by default in Docker Desktop version 4.34
-and later. To switch between image stores:
+The containerd image store is enabled by default. To switch between image stores:
 
 1. Navigate to **Settings** in Docker Desktop.
 2. In the **General** tab, check or clear the **Use containerd for pulling and storing images** option.

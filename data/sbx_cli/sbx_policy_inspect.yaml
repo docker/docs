@@ -1,0 +1,44 @@
+name: sbx policy inspect
+synopsis: Show policy or rule details
+description: |-
+    Inspect full detail for a selected policy or rule.
+
+    The selector may be a policy ID, policy name, rule ID, or rule name.
+    Selecting a policy lists every resource with its decision, rule, and status,
+    plus a rule table showing each rule's RULE_ID, whether it is editable, and
+    either the exact removal command or the reason it is read-only. Selecting a
+    rule shows just that rule with the same editability detail. RULE_ID is the
+    identifier accepted by "sbx policy rm network --id" (local rules only). Use
+    "sbx policy ls" to find policy names and "sbx policy ls --wide" to find rule
+    IDs and resource values.
+usage: sbx policy inspect POLICY|RULE [flags]
+options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for inspect
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Inspect a policy by name
+      sbx policy inspect "Developer access"
+
+      # Inspect a rule by ID
+      sbx policy inspect 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
+
+      # Machine-readable output for scripting
+      sbx policy inspect "Developer access" --json
+see_also:
+    - sbx policy - Manage sandbox policies

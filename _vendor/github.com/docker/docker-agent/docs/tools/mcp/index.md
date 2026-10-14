@@ -4,6 +4,7 @@ description: "Extend agents with external tools via the Model Context Protocol."
 keywords: docker agent, ai agents, tools, toolsets, mcp tool
 linkTitle: "MCP"
 weight: 130
+canonical: https://docs.docker.com/ai/docker-agent/tools/mcp/
 aliases:
   - /ai/docker-agent/integrations/mcp/
 ---
@@ -75,11 +76,11 @@ toolsets:
 > [!TIP]
 > **Auto-installation**
 >
-> If the `command` is not in your `PATH`, docker-agent looks it up in the [aqua registry](https://github.com/aquaproj/aqua-registry) and installs it for you. Use `version: "false"` to opt out, or set `DOCKER_AGENT_AUTO_INSTALL=false` globally. See [Auto-Installing Tools](../../configuration/tools/index.md#auto-installing-tools).
+> If the `command` is not in your `PATH`, Docker Agent looks it up in the [aqua registry](https://github.com/aquaproj/aqua-registry) and installs it for you. Use `version: "false"` to opt out, or set `DOCKER_AGENT_AUTO_INSTALL=false` globally. See [Auto-Installing Tools](../../configuration/tools/index.md#auto-installing-tools).
 
 ## Remote MCP (Streamable HTTP / SSE)
 
-Connect to MCP servers over the network. OAuth flows (including [Dynamic Client Registration](https://datatracker.ietf.org/doc/html/rfc7591)) are handled automatically — docker-agent opens your browser when authentication is required and caches tokens for subsequent sessions. Tokens are refreshed silently when they expire or are revoked server-side; if a silent refresh is not possible, the OAuth prompt reappears on the next message.
+Connect to MCP servers over the network. OAuth flows (including [Dynamic Client Registration](https://datatracker.ietf.org/doc/html/rfc7591)) are handled automatically — Docker Agent opens your browser when authentication is required and caches tokens for subsequent sessions. Tokens are refreshed silently when they expire or are revoked server-side; if a silent refresh is not possible, the OAuth prompt reappears on the next message.
 
 ```yaml
 toolsets:
@@ -98,11 +99,32 @@ toolsets:
 | ----------------------- | ------- | ----------- |
 | `remote.url`            | string  | Base URL of the MCP server. |
 | `remote.transport_type` | string  | `streamable` or `sse`. |
-| `remote.headers`        | object  | HTTP headers (typically for static auth tokens). |
+| `remote.headers`        | object  | HTTP headers sent on every request. Values support `${env.VAR}` and `${headers.NAME}` placeholders, resolved per request. See [Remote MCP Servers](../../features/remote-mcp/index.md#per-request-header-template-expansion) for details. |
 | `remote.oauth`          | object  | Explicit OAuth client credentials for servers that don't support DCR. See [Remote MCP Servers](../../features/remote-mcp/index.md#oauth-for-servers-without-dynamic-client-registration). |
 | `allow_private_ips`     | boolean | Permit remote MCP OAuth helper requests to dial non-public IP addresses. Use only for trusted internal servers. |
 
 For a curated list of public remote MCP endpoints (Linear, GitHub, Vercel, Notion, …) and full OAuth configuration details, see [Remote MCP Servers](../../features/remote-mcp/index.md).
+
+## MCP Prompts
+
+MCP servers can expose **prompts** — named, parameterized templates that the server provides via the `/prompts` endpoint. Docker Agent discovers these at toolset startup and registers them as **slash commands** in the TUI, so you can invoke them directly from the input box.
+
+```text
+# Type / to see available prompts alongside built-in commands
+/review         # invoke an MCP prompt named "review"
+/summarize My text here   # invoke with the first argument filled in
+```
+
+**How it works:**
+
+- Each MCP prompt appears in the command palette (accessible via <kbd>Ctrl</kbd>+<kbd>K</kbd>) under the **MCP Prompts** category.
+- Typing `/<prompt-name>` in the input box invokes the prompt immediately.
+- If the prompt declares arguments and you provide text after the slash command, that text is mapped to the first declared argument.
+- If a required argument is missing, Docker Agent opens the argument input dialog before running the prompt.
+- When no argument is needed or all required arguments are supplied, the prompt runs immediately.
+
+> [!NOTE]
+> MCP prompt discovery requires a YAML-declared `mcp` toolset. Prompts from servers activated through the [Docker MCP Catalog](../../tools/mcp-catalog/index.md) (`ref: docker:<name>`) are not currently surfaced.
 
 ## Embedded Resources
 
@@ -217,7 +239,7 @@ See [Per-Toolset Model Routing](../../configuration/tools/index.md#per-toolset-m
 
 ### Lifecycle (auto-restart, profiles)
 
-Local stdio and remote MCP servers are supervised: crashed servers reconnect automatically with exponential backoff. **Remote** MCP servers (Streamable HTTP / SSE) also reconnect after idle/clean connection closes — services like Notion and Linear periodically close idle connections, and docker-agent reconnects transparently. Tune the policy with the `lifecycle` block:
+Local stdio and remote MCP servers are supervised: crashed servers reconnect automatically with exponential backoff. **Remote** MCP servers (Streamable HTTP / SSE) also reconnect after idle/clean connection closes — services like Notion and Linear periodically close idle connections, and Docker Agent reconnects transparently. Tune the policy with the `lifecycle` block:
 
 ```yaml
 toolsets:

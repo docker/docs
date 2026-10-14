@@ -1,11 +1,13 @@
 ---
 title: Kiro
-weight: 50
+weight: 80
 description: |
   Use Kiro in Docker Sandboxes with device flow authentication for interactive
   AI-assisted development.
 keywords: docker sandboxes, kiro, ai agent, authentication, sbx
 ---
+
+{{% include "sandboxes-local-scope.md" %}}
 
 This guide covers authentication, configuration, and usage of Kiro in a
 sandboxed environment.

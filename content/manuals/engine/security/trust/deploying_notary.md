@@ -27,6 +27,7 @@ for [Notary](https://github.com/docker/notary#using-notary) depending on which o
 
 ## If you want to use Notary in production
 
-Check back here for instructions after Notary Server has an official
-stable release. To get a head start on deploying Notary in production, see
-[the Notary repository](https://github.com/theupdateframework/notary).
+The Compose sample on this page is for local testing and uses sample
+certificates. For a production deployment, follow the upstream
+[instructions to run a Notary service](https://github.com/theupdateframework/notary/blob/master/docs/running_a_service.md)
+and the rest of [the Notary repository](https://github.com/theupdateframework/notary).

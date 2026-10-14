@@ -43,7 +43,6 @@ To install Docker Engine, you need one of these Debian versions:
 
 - Debian Trixie 13 (stable)
 - Debian Bookworm 12 (oldstable)
-- Debian Bullseye 11 (oldoldstable)
 
 Docker Engine for Debian is compatible with x86_64 (or amd64), armhf (arm/v7),
 arm64, and ppc64le (ppc64el) architectures.
@@ -61,6 +60,7 @@ The unofficial packages to uninstall are:
 - `docker.io`
 - `docker-compose`
 - `docker-doc`
+- `docker-buildx`
 - `podman-docker`
 
 Moreover, Docker Engine depends on `containerd` and `runc`. Docker Engine
@@ -71,7 +71,7 @@ conflicts with the versions bundled with Docker Engine.
 Run the following command to uninstall all conflicting packages:
 
 ```console
-$ sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-doc podman-docker containerd runc | cut -f1)
+$ sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-doc docker-buildx podman-docker containerd runc | cut -f1)
 ```
 
 `apt` might report that you have none of these packages installed.

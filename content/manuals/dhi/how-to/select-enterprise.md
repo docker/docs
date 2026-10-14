@@ -20,7 +20,7 @@ To use this workflow, you need:
 - One of the following:
   - A DHI Select or Enterprise subscription. [Contact Docker
     sales](https://www.docker.com/products/hardened-images/#compare) to purchase DHI Enterprise
-    or [learn more about DHI plans](../../subscription/plans/dhi.md).
+    or [learn more about DHI plans](../../subscription-billing/plans/dhi.md).
   - An active DHI trial. [Start a free DHI
     trial](https://hub.docker.com/hardened-images/start-free-trial).
 - [Docker Desktop](../../desktop/release-notes.md) 4.65 or later to use the
@@ -41,7 +41,7 @@ can use either interface.
    `node`, or `golang`). For this example, search for `python`.
 
    To search for an image with a compliance variant (FIPS or STIG), select
-   **Filter by** and select the relevant compliance option.
+   **Compliance** and select the relevant compliance option.
 
 5. Select the Python repository to view its details.
 
@@ -72,7 +72,7 @@ can use either interface.
 {{< /tabs >}}
 
 Continue to the next step to mirror the image. To dive deeper into exploring
-images see [Search and evaluate Docker Hardened Images](explore.md).
+images see [Search and evaluate Docker Hardened Images](search-evaluate.md).
 
 ## Step 2: Mirror the repository
 
@@ -97,7 +97,7 @@ can mirror repositories.
 
 To use the following commands, you must authenticate or configure DHI CLI
 authentication using your Docker token. For details, see [Use the DHI
-CLI](cli.md#configuration).
+CLI](../tools/cli.md#configuration).
 
 1. Start mirroring the repository to your organization namespace. Replace
    `<your-org>` with your organization name.
@@ -152,7 +152,7 @@ column to monitor the build status.
 
 To use the following commands, you must authenticate or configure DHI CLI
 authentication using your Docker token. For details, see [Use the DHI
-CLI](cli.md#configuration).
+CLI](../tools/cli.md#configuration).
 
 1. Create a customization. Replace `<your-org>` with your organization name.
    This creates a file called `my-customization.yaml` with the customization

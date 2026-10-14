@@ -1,24 +1,25 @@
 ---
 title: "Configuration Overview"
-description: "docker-agent uses YAML or HCL configuration files to define agents, models, tools, and their relationships."
+description: "Docker Agent uses YAML or HCL configuration files to define agents, models, tools, and their relationships."
 keywords: docker agent, ai agents, configuration, yaml, configuration overview
 linkTitle: "Overview"
 weight: 10
+canonical: https://docs.docker.com/ai/docker-agent/configuration/overview/
 aliases:
   - /ai/docker-agent/reference/config/
 ---
 
-_docker-agent uses YAML or HCL configuration files to define agents, models, tools, and their relationships._
+_Docker Agent uses YAML or HCL configuration files to define agents, models, tools, and their relationships._
 
 ## File Structure
 
-A docker-agent config can be written in YAML or HCL. The examples on this page use YAML; see [HCL Configuration](../hcl/index.md) for the block-based HCL syntax.
+A Docker Agent config can be written in YAML or HCL. The examples on this page use YAML; see [HCL Configuration](../hcl/index.md) for the block-based HCL syntax.
 
-A docker-agent config has these main sections:
+A Docker Agent config has these main sections:
 
 ```bash
 # 1. Version — configuration schema version (optional but recommended)
-version: 10
+version: 15
 
 # 2. Metadata — optional agent metadata for distribution
 metadata:
@@ -33,7 +34,7 @@ models:
     model: claude-sonnet-4-5
     max_tokens: 64000
 
-# 4. Agents — define AI agents with their behavior
+# 4. Agents — define AI agents with their behavior (at least one is required)
 agents:
   root:
     model: claude
@@ -125,10 +126,11 @@ Models can be referenced inline or defined in the `models` section:
 - [**Permissions**](../permissions/index.md) — control which tools auto-approve, require confirmation, or are blocked.
 - [**Sandbox Mode**](../sandbox/index.md) — run agents in an isolated Docker container for security.
 - [**Structured Output**](../structured-output/index.md) — constrain agent responses to match a specific JSON schema.
+- [**Flavors**](../flavors/index.md) — ship one agent file with named variants, enabled at run time as YAML patches.
 
 ## Environment Variables
 
-API keys and secrets are read from environment variables — never stored in config files. See [Managing Secrets](../../guides/secrets/index.md) for all the ways to provide credentials (env files, Docker Compose secrets, macOS Keychain, `pass`):
+API keys and secrets are read from environment variables — never stored in config files. See [Managing Secrets](../../guides/secrets/index.md) for all the ways to provide credentials (env files, Docker Compose secrets, the Docker Agent env file):
 
 | Variable                   | Provider                                            |
 | -------------------------- | --------------------------------------------------- |
@@ -160,6 +162,8 @@ API keys and secrets are read from environment variables — never stored in con
 | `DOCKER_AGENT_MODELS_GATEWAY`       | Route model traffic through a gateway. Equivalent to the `--models-gateway` flag.                    |
 | `DOCKER_AGENT_HIDE_TELEMETRY_BANNER`| Set to `1` to suppress the first-run telemetry notice.                                               |
 | `DOCKER_AGENT_AUTO_UPDATE`          | Set to a truthy value (`1`, `true`, `yes`, `on`) to let standalone release binaries self-update before running. See [Optional Self-Updates](../../getting-started/installation/index.md#optional-self-updates). |
+| `DOCKER_AGENT_NO_TOKEN_EXCHANGE`    | Set to `1` to stop Docker Agent from exchanging the access token stored by `docker login` for a Docker token. See [Docker authentication](../../guides/secrets/index.md#docker-authentication). |
+| `DOCKER_AGENT_HUB_LOGIN_URL`        | Point the token exchange at a Docker staging environment. Ignored unless it is an HTTPS `docker.com` URL. |
 
 > [!NOTE]
 > **Legacy `CAGENT_*` aliases**
@@ -171,7 +175,7 @@ API keys and secrets are read from environment variables — never stored in con
 
 ## Variable Expansion in Config Fields
 
-docker-agent expands `${env.VAR}` references in many config fields. This is the **canonical syntax everywhere** — prefer it for every field. Two engines back it: a full JavaScript evaluator for prompt/HTTP fields (where you also get defaults, ternaries, and tool calls), and a simpler path expander for filesystem/env fields (which additionally accepts the legacy `$VAR` / `${VAR}` / `~` shell forms). Picking `${env.VAR}` everywhere always works; the one caveat is that the path expander does not evaluate richer JS expressions. Using a shell-style `$VAR` in a JS-templated field is currently a silent no-op, so the literal string is passed through. Tracking issue: [#2615](https://github.com/docker/docker-agent/issues/2615).
+Docker Agent expands `${env.VAR}` references in many config fields. This is the **canonical syntax everywhere** — prefer it for every field. Two engines back it: a full JavaScript evaluator for prompt/HTTP fields (where you also get defaults, ternaries, and tool calls), and a simpler path expander for filesystem/env fields (which additionally accepts the legacy `$VAR` / `${VAR}` / `~` shell forms). Picking `${env.VAR}` everywhere always works; the one caveat is that the path expander does not evaluate richer JS expressions. Using a shell-style `$VAR` in a JS-templated field is currently a silent no-op, so the literal string is passed through. Tracking issue: [#2615](https://github.com/docker/docker-agent/issues/2615).
 
 ### JavaScript template literals — `${env.VAR}`
 
@@ -212,6 +216,8 @@ Applies to:
 - `agents.<name>.toolsets[*].working_dir` (MCP, LSP)
 - `agents.<name>.toolsets[*].path` (memory, tasks)
 - `agents.<name>.toolsets[*].env` values (MCP, shell, script, LSP)
+- `agents.<name>.toolsets[*].shell.<tool>.working_dir` (script tools)
+- `agents.<name>.hooks.*.working_dir`
 - The `~` prefix is also accepted in any path-like field documented as such.
 
 ```yaml
@@ -226,6 +232,21 @@ agents:
 ```
 
 Unlike the JS-templated fields above, these accept only a plain variable reference: richer JS expressions (e.g. `${env.VAR || 'default'}`) are **not** evaluated here, and the legacy `$VAR` / `${VAR}` forms keep working for backward compatibility.
+
+Hook and script-tool `env` values expand only the plain `${env.VAR}` form, resolved against the **OS process environment** (dotenv/secret-provider values are not consulted); a bare `$VAR` or `${VAR}` is passed through **literally**, so values that legitimately contain `$` (passwords, templates) are never mangled:
+
+```yaml
+agents:
+  root:
+    hooks:
+      session_start:
+        - type: command
+          command: ./notify.sh
+          working_dir: "~/scripts"                # ~, $VAR, ${VAR}, ${env.VAR} all work
+          env:
+            API_TOKEN: "${env.NOTIFY_TOKEN}"      # expanded
+            PASSWORD: "pa$$word"                  # kept literal
+```
 
 Model definitions follow the same rule. The `models.<name>.model` and `models.<name>.base_url` fields are expanded when the provider is built, accepting both `${env.VAR}` and `${VAR}`. This is useful when the model id or endpoint is injected by the environment (for example a Docker Compose / DMR setup that exports the model reference as a variable):
 
@@ -248,18 +269,19 @@ models:
 | `commands.*`                                  |     ✓      |       ✗       |  ✗  |
 | `headers`, `remote.headers`, `api_config.headers` |     ✓      |       ✗       |  ✗  |
 | `models.*.model`, `models.*.base_url`         |     ✓      |       ✓       |  ✗  |
-| `working_dir`, `path`                         |     ✓      |       ✓       |  ✓  |
-| `env` values                                  |     ✓      |       ✓       |  ✗  |
+| `working_dir`, `path` (toolset, script tool, hook) |     ✓      |       ✓       |  ✓  |
+| `env` values (toolset)                        |     ✓      |       ✓       |  ✗  |
+| `env` values (hook, script tool)              |     ✓      |   literal     |  ✗  |
 
-The `~` prefix is meaningful only in path-like fields (`working_dir`, `path`).
+The `~` prefix is meaningful only in path-like fields (`working_dir`, `path`). In hook and script-tool `env` values, "literal" means a bare `$X` / `${X}` is passed to the process unchanged — only `${env.X}` is substituted there, so values containing `$` survive intact.
 
 Prefer `${env.X}` everywhere. The bare `$X` / `${X}` and `~` forms are accepted only in path and `env` value fields, where they remain supported for backward compatibility.
 
 ## Validation
 
-docker-agent validates your configuration at startup:
+Docker Agent validates your configuration at startup:
 
-- Local `sub_agents` must reference agents defined in the config (external OCI references like `agentcatalog/pirate` are pulled from registries automatically; pin them to a digest with `@sha256:…` to avoid a per-run registry lookup)
+- Local `sub_agents` must reference agents defined in the config (external OCI references like `myorg/agent:tag` are pulled from registries automatically; pin them to a digest with `@sha256:…` to avoid a per-run registry lookup)
 - Named model references must exist in the `models` section
 - Provider names must be valid (`openai`, `anthropic`, `google`, `dmr`, etc.)
 - Required environment variables (API keys) must be set
@@ -275,10 +297,10 @@ For YAML editor autocompletion and validation, use the [Docker Agent JSON Schema
 
 ## Config Versioning
 
-docker-agent configs are versioned. The current version is `10`. Add the version at the top of your config:
+Docker Agent configs are versioned. The current version is `15`. Add the version at the top of your config:
 
 ```yaml
-version: 10
+version: 15
 
 agents:
   root:
@@ -286,7 +308,15 @@ agents:
     # ...
 ```
 
-When you load an older config, docker-agent automatically migrates it to the latest schema. It's recommended to include the version to ensure consistent behavior.
+When you load an older config, Docker Agent automatically migrates it to the latest schema. It's recommended to include the version to ensure consistent behavior.
+
+If you use a config key that requires a newer schema version, Docker Agent will fail with a strict-parse error and include a hint like:
+
+```text
+hint: this key is supported by config version 12; update the top-level 'version' field (currently 11)
+```
+
+Bump the `version` field as directed to enable the new key.
 
 ## Metadata Section
 

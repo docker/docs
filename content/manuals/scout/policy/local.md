@@ -2,6 +2,12 @@
 title: Evaluate policies
 description: Evaluate Docker Scout policies using the CLI, with built-in and custom Rego policies
 keywords: scout, policy, rego, opa, cli, custom policies, policy bundle
+aliases:
+  - /scout/policy/dashboard/
+  - /scout/policy/ci/
+  - /scout/policy/view/
+  - /scout/policy/configure/
+  - /scout/policy/remediation/
 ---
 
 {{< summary-bar feature_name="Evaluate policies" >}}
@@ -27,21 +33,7 @@ Policies come from three sources, which can be combined:
 - Local `.rego` files: for authoring and iterating on custom policies with
   `--policy-file` or `--policy-dir`.
 
-## Migrate from Policy Evaluation in the Dashboard
-
-If you used the Policies page in the Docker Scout Dashboard, `docker scout
-policy` provides the same capability from the CLI. The built-in policies are
-the same set. To evaluate an image:
-
-```console
-$ docker scout policy <image>
-```
-
-If you had customized policies in the dashboard, such as adjusted severity
-thresholds or disabled policies, you can replicate those settings with a
-`--policy-config` file. See [Configure built-in policies](#configure-built-in-policies).
-
-### Use in CI
+## Use in CI
 
 Use the [Docker Scout GitHub Action](https://github.com/marketplace/actions/docker-scout)
 to evaluate policies as part of your workflow:
@@ -59,15 +51,11 @@ For other CI platforms, install the
 [Docker Scout CLI plugin](/manuals/scout/install.md) on your runner and run
 `docker scout policy <image> --exit-code`.
 
-### Migrate the GitHub Action from dashboard-based policy evaluation
-
-The Docker Scout GitHub Action now supports the same local policy configuration
-flags as `docker scout policy`. If you used `compare --exit-on policy` with
-dashboard-managed policy settings, replicate those settings locally with
-`--policy-config`:
+To gate a build on policy compliance compared to an environment, use the
+`compare` command with a policy configuration:
 
 ```yaml
-- uses: docker/scout-action@v1.23.0
+- uses: docker/scout-action@v1
   with:
     command: compare
     image: ${{ env.IMAGE_NAME }}
@@ -118,6 +106,74 @@ $ docker scout policy myorg/app:latest --only-policy "No copyleft licenses"
 $ docker scout policy myorg/app:latest --output report.txt
 ```
 
+## Health score
+
+`docker scout policy`, `docker scout quickview`, and `docker scout compare` also
+report a health score alongside the policy results: a numeric percentage and an
+A-F letter grade, computed entirely from the local policy evaluation. No data is
+sent to the Scout service to compute it.
+
+```console
+$ docker scout policy myorg/app:latest
+...
+Health score  B (83%)
+```
+
+`docker scout compare` shows the score for both images:
+
+```console
+Health score  Analyzed B (83%)  Comparison C (65%)
+```
+
+### How the score is calculated
+
+The score is a weighted pass ratio:
+
+- Each policy contributes a weight to the total, taken from its `custom.weight`
+  metadata annotation (see [Metadata annotations](#metadata-annotations)) or a
+  `weight` override in the policy-config file. Policies without a declared
+  weight default to `10`.
+- A policy that passes (reports zero violations) contributes its full weight to
+  the scored points.
+- A policy that fails still counts its weight toward the total, but contributes
+  nothing to the scored points, which lowers the score.
+- A policy with no data to evaluate (unknown) also counts toward the total
+  without contributing to the scored points.
+- A policy with a weight of `0` is excluded from the score entirely.
+
+The percentage is `scored / total * 100`, mapped to a letter grade using strict
+greater-than thresholds:
+
+| Score | Grade |
+| --- | --- |
+| > 90% | A |
+| > 70% | B |
+| > 50% | C |
+| > 30% | D |
+| > 10% | E |
+| <= 10% | F |
+
+Thresholds are exclusive of their lower bound, so an exact boundary value
+grades down: a score of exactly 90% is a B, not an A; exactly 70% is a C, and
+so on.
+
+If every policy is excluded from the score (for example, all policies are
+configured with `weight: 0`), no health score is shown at all.
+
+To change a policy's contribution to the score, set `custom.weight` in the
+policy's Rego metadata, or override it per policy in the policy-config file:
+
+```json
+{
+  "policies": [
+    {
+      "name": "copyleft-license",
+      "weight": 0
+    }
+  ]
+}
+```
+
 ## Built-in policies
 
 The following policies are available by default:
@@ -157,6 +213,10 @@ Pass it with `--policy-config`.
 
 - `policies[].name`: the policy's stable ID (see the following table).
 - `policies[].enabled`: set to `false` to skip the policy. Policies not listed are enabled by default.
+- `policies[].weight`: overrides the policy's `custom.weight` metadata annotation,
+  which determines its contribution to the [health score](#health-score). A
+  weight of `0` excludes the policy from the score. When omitted, the policy's
+  own annotation is used, or `10` if it has none.
 - `policies[].config`: an object passed to the policy as `data.config`.
 
 ### Configuration reference
@@ -169,7 +229,7 @@ The following table lists the configurable keys for each built-in policy.
 | `fixable-vulnerabilities` | `fixable_only` | `true` | When `true`, only vulnerabilities with a known fix count |
 | `fixable-vulnerabilities` | `package_types` | `[]` | Allowlist of PURL package types to consider; empty means all |
 | `fixable-vulnerabilities` | `grace_period_days` | `0` | Days a newly disclosed CVE is exempt |
-| `high-profile-vulnerabilities` | `cves` | curated list | CVE IDs considered high-profile |
+| `high-profile-vulnerabilities` | `cves` | [Default high-profile CVEs](#default-high-profile-cves) | CVE IDs considered high-profile |
 | `high-profile-vulnerabilities` | `ignored_cves` | `[]` | CVE IDs excluded from causing a failure |
 | `high-profile-vulnerabilities` | `include_cisa_kev` | `true` | Also flag vulnerabilities in the CISA KEV catalog |
 | `copyleft-license` | `licenses` | AGPL/GPL/LGPL/MPL/… | SPDX license IDs treated as copyleft |
@@ -178,6 +238,37 @@ The following table lists the configurable keys for each built-in policy.
 | `approved-base-images` | `allowed_distros_only` | `true` | When enabled, base image must use an allowed OS distribution |
 | `approved-base-images` | `allowed_distros` | curated list | OS distributions considered allowed |
 | `supply-chain-attestations` | `required_attestations` | provenance and SBOM predicate types | Attestation predicate types that must be present |
+
+#### Default high-profile CVEs
+
+The built-in `cves` list includes the following CVEs. Docker updates this list
+as new high-profile vulnerabilities are disclosed.
+
+| CVE ID | Common name |
+| --- | --- |
+| CVE-2014-0160 | Heartbleed |
+| CVE-2014-6271 | Shellshock |
+| CVE-2021-44228 | Log4Shell |
+| CVE-2021-45046 | Log4j follow-up |
+| CVE-2022-22965 | Spring4Shell |
+| CVE-2023-38545 | curl SOCKS5 heap overflow |
+| CVE-2023-44487 | HTTP/2 Rapid Reset |
+| CVE-2024-3094 | XZ Utils backdoor |
+
+To override the list, set `cves` in your policy-config file:
+
+```json
+{
+  "policies": [
+    {
+      "name": "high-profile-vulnerabilities",
+      "config": {
+        "cves": ["CVE-2021-44228", "CVE-2024-3094"]
+      }
+    }
+  ]
+}
+```
 
 ## Write custom policies
 
@@ -262,7 +353,7 @@ to render results. Place them in a `# METADATA` block immediately above the
 | `description` | Longer explanation |
 | `custom.name` | Stable ID used to match `--policy-config` entries. Defaults to the package path if omitted |
 | `custom.result_type` | How violations are rendered: `vulnerability`, `license`, `boolean`, or `generic` (default) |
-| `custom.weight` | Higher weights sort first in the report |
+| `custom.weight` | Scoring weight and display sort order. Higher weights sort first in the report and contribute more to the [health score](#health-score). Defaults to `10` when omitted; a weight of `0` excludes the policy from the score |
 | `custom.not_compliant_title` | Status label shown when the policy fails |
 | `custom.details_order` | Ordered list of `detail` keys to display as columns |
 

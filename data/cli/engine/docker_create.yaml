@@ -810,7 +810,7 @@ options:
     - option: pull
       value_type: string
       default_value: missing
-      description: Pull image before creating (`always`, `|missing`, `never`)
+      description: Pull image before creating (`always`, `missing`, `never`)
       deprecated: false
       hidden: false
       experimental: false
@@ -956,6 +956,18 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: umask
+      value_type: umask
+      default_value: <nil>
+      description: Set umask for the container
+      deprecated: false
+      hidden: false
+      min_api_version: "1.56"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+      os_type: linux
     - option: use-api-socket
       value_type: bool
       default_value: "false"

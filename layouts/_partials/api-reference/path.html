@@ -1,0 +1,4 @@
+{{- /* Break long paths between segments without changing their copied text. */ -}}
+{{- range $i, $segment := split . "/" -}}
+  {{- if $i -}}<wbr />/{{- end -}}{{- $segment -}}
+{{- end -}}

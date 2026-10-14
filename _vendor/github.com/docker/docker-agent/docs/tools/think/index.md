@@ -4,6 +4,7 @@ description: "Step-by-step reasoning scratchpad for planning and decision-making
 keywords: docker agent, ai agents, tools, toolsets, think tool
 linkTitle: "Think"
 weight: 140
+canonical: https://docs.docker.com/ai/docker-agent/tools/think/
 ---
 
 _Step-by-step reasoning scratchpad for planning and decision-making._

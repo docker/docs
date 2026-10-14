@@ -11,3 +11,5 @@ content/**/*.md linguist-detectable
 /_vendor/** linguist-generated=true
 # Generated CLI reference data (vendored from upstream)
 /data/cli/** linguist-generated=true
+# Generated API presentation data
+/data/api-reference.json linguist-generated=true

@@ -100,7 +100,7 @@ agents:
          - Broken or missing links → htmltest catches these; do not file
          - Time-relative words ("currently", "recently", "still", "yet",
            "new") with no broader context problem → Vale catches these
-         - Formatting or style problems → markdownlint/Vale catch these
+         - Formatting or style problems → rumdl/Vale catch these
       4. Is this a legitimate product feature gate? "Limited Access", "Contact
          your Docker account team to request access", "available on paid plans",
          "coming soon for Business subscribers" are product decisions, not stale
@@ -121,7 +121,7 @@ agents:
       - **Vague verification tasks** — "verify this diagram is up to date",
         "check these links are still valid" — if you cannot identify the
         specific problem from reading the file, don't file
-      - **Style and formatting** — Vale and markdownlint handle these
+      - **Style and formatting** — Vale and rumdl handle these
       - **Suspicions without evidence** — you must quote the specific wrong text
 
       ## Filing issues

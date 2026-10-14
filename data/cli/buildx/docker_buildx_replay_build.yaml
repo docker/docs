@@ -1,0 +1,201 @@
+command: docker buildx replay build
+short: Rebuild an image from provenance and pinned materials
+long: |-
+    `replay build` reconstructs an image from the provenance attestation attached
+    to an existing subject.
+
+    The replay mode controls how sources are resolved:
+
+    - `materials` (default) pins every source to the digest recorded in the
+      provenance. A source that is not recorded, or whose content changed, fails
+      the build.
+    - `frontend` replays the recorded frontend and options, but resolves sources
+      again, so the result can differ from the original build.
+
+    Replayed builds do not add new provenance or SBOM attestations. Local outputs
+    with `mode=delete` are not supported.
+usage: docker buildx replay build [OPTIONS] SUBJECT
+pname: docker buildx replay
+plink: docker_buildx_replay.yaml
+options:
+    - option: dry-run
+      value_type: bool
+      default_value: "false"
+      description: Print a plan of the replay without solving or exporting
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: format
+      value_type: string
+      default_value: pretty
+      description: Format dry-run output (`pretty` | `json`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: load
+      value_type: bool
+      default_value: "false"
+      description: Shorthand for `--output=type=docker`
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: materials
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Materials store (repeatable; format: `provenance` | `oci-layout://<path>[:<tag>]` | `<absolute-path>` | `<key>=<value>`)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: network
+      value_type: string
+      description: |
+        Network mode for RUN instructions (`default` | `none`; defaults to the mode of the original build)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: output
+      shorthand: o
+      value_type: stringArray
+      default_value: '[]'
+      description: 'Output destination (format: `type=local,dest=path`)'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: platform
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Platform of the subject to replay (defaults to the only platform of the subject or the builder default platform)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: progress
+      value_type: string
+      default_value: auto
+      description: |
+        Set type of progress output (`auto` | `plain` | `tty` | `quiet` | `rawjson`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: push
+      value_type: bool
+      default_value: "false"
+      description: Shorthand for `--output=type=registry,unpack=false`
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: replay-mode
+      value_type: string
+      default_value: materials
+      description: Replay mode (`materials` | `frontend`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: secret
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Secret to expose to the replayed build (format: `id=mysecret[,src=/local/secret]`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ssh
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        SSH agent socket or keys to expose (format: `default|<id>[=<socket>|<key>[,<key>]]`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: tag
+      shorthand: t
+      value_type: stringArray
+      default_value: '[]'
+      description: 'Image identifier (format: `[registry/]repository[:tag]`)'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
+    ### Replay a registry image and export to an OCI tar
+
+    ```console
+    docker buildx replay build docker-image://example.com/app@sha256:deadbeef \
+      --output=type=oci,dest=replay.oci.tar
+    ```
+
+    ### Dry-run a replay to inspect the plan
+
+    ```console
+    docker buildx replay build docker-image://example.com/app@sha256:deadbeef --dry-run --format=json | jq
+    ```
+
+    Dry-run runs the same checks as a real replay, so a subject that cannot be
+    replayed fails before any build starts.
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

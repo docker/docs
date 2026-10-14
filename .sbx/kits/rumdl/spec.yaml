@@ -1,0 +1,52 @@
+schemaVersion: "2"
+kind: mixin
+name: rumdl
+displayName: rumdl
+description: Installs the rumdl Markdown linter/formatter from a pinned GitHub release, matching the version this repository uses.
+
+permissions:
+  network:
+    allow:
+      # Release tarball download (install time, one-shot).
+      # github.com 302-redirects to release-assets.githubusercontent.com for binary downloads.
+      - github.com
+      - release-assets.githubusercontent.com
+
+setup:
+  install:
+    - command: |
+        set -euo pipefail
+        # Keep in sync with the "rumdl" devDependency version in this repo's package.json.
+        RUMDL_VERSION=0.2.49
+        ARCH=$(dpkg --print-architecture)
+        case "$ARCH" in
+          amd64)
+            TARBALL="rumdl-v${RUMDL_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+            SHA256="e208db27143592a18b26d9d42e6e76133a2dcdb8738d2ed0f8d3b44027b2d8d6"
+            ;;
+          arm64)
+            TARBALL="rumdl-v${RUMDL_VERSION}-aarch64-unknown-linux-gnu.tar.gz"
+            SHA256="b57cfdc83f4bbe0714c4a7642464107a5c64f258d5925d67bc9b3816dbe0701a"
+            ;;
+          *)
+            echo "unsupported arch: $ARCH" >&2
+            exit 1
+            ;;
+        esac
+        curl --proto '=https' --tlsv1.2 -fsSL \
+          -o /tmp/rumdl.tgz \
+          "https://github.com/rvben/rumdl/releases/download/v${RUMDL_VERSION}/${TARBALL}"
+        echo "${SHA256}  /tmp/rumdl.tgz" | sha256sum -c -
+        tar -C /usr/local/bin -xzf /tmp/rumdl.tgz rumdl
+        rm /tmp/rumdl.tgz
+        rumdl --version
+      user: "0"
+      description: "Install pinned rumdl CLI"
+
+agentInstructions:
+  content: |
+    ## rumdl Markdown linter
+
+    The `rumdl` CLI is installed and available on `PATH`. Format a Markdown
+    file with `rumdl fmt <file>` and lint it with `rumdl check <file>` (or
+    the project's `scripts/lint.sh <file>...`, which also runs Vale).

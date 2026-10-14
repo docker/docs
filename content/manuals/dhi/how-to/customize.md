@@ -16,8 +16,9 @@ add OCI artifacts (such as custom certificates or additional tools), and
 configure settings. For charts, this lets you customize the image references.
 
 Your customizations stay secure automatically. When the base Docker Hardened
-Image or chart receives a security patch or your OCI artifacts are updated,
-Docker automatically rebuilds your customizations in the background. This
+Image or chart receives a security patch, your OCI artifacts are updated, or a
+[hardened system package](./hardened-packages.md) you added is updated, Docker
+automatically rebuilds your customizations in the background. This
 ensures continuous compliance and protection by default, with no manual work
 required. The rebuilt artifacts are signed and attested to the same SLSA Build
 Level 3 standard as the base images and charts, ensuring a secure and verifiable
@@ -103,18 +104,36 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
 
       For more details, see [OCI artifacts](#oci-artifacts).
 
-   1. In the **Scripts** section, you can add, edit, or remove scripts.
+   1. In the **Files** section, you can add, edit, or remove files.
 
-      Scripts let you add files to the container image that you can access at runtime. They are not executed during
-      the build process. This is useful for services that require pre-start initialization, such as setup scripts or
+      Files let you add static content to the container image that you can
+      access at runtime, such as configuration files or setup scripts. Files
+      are not executed during the build process. This is useful for services
+      that require initialization before they start, such as setup scripts or
       file writes to directories like `/var/lock` or `/out`.
 
       You must specify the following:
 
-      - The path where the script will be placed
-      - The script content
-      - The UID and GID ownership of the script
-      - The octal file permissions of the script
+      - The path where the file will be placed
+      - The file content
+      - The UID and GID ownership of the file
+      - The octal file permissions of the file
+
+      > [!NOTE]
+      >
+      > If your organization's DHI subscription is in the EU region, the
+      > **Add** option in the **Files** section is greyed out. File content
+      > isn't supported in the EU region. For details, see [EU data
+      > residency](../explore/eu-region.md).
+
+   1. In the **Symlinks** section, you can add, edit, or remove symbolic links.
+
+      You must specify the following:
+
+      - The path where the symlink will be placed
+      - The source path that the symlink points to
+
+      Optionally, you can specify the UID and GID ownership of the symlink.
 
 1. Select **Next: Configure** to configure the following image settings:
 
@@ -161,9 +180,9 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
 {{< tab name="CLI" >}}
 
 Authenticate with `docker login` using your Docker credentials or a [personal
-access token (PAT)](../../security/access-tokens.md) with **Read & Write**
+access token (PAT)](../../security/access-tokens/personal-access-tokens.md) with **Read & Write**
 permissions, or an [organization access token
-(OAT)](../../enterprise/security/access-tokens.md). When using an OAT, the
+(OAT)](../../security/access-tokens/organization-access-tokens.md). When using an OAT, the
 available operations depend on the token's permission scope:
 
 - To list or get customizations, or to view build logs, the OAT must have read
@@ -219,10 +238,9 @@ For a complete reference of all YAML fields, see
 {{< tab name="Terraform" >}}
 
 You can manage DHI customizations as infrastructure-as-code using the [DHI
-Terraform
-provider](https://registry.terraform.io/providers/docker-hardened-images/dhi/latest/docs).
-If you haven't configured the provider yet, see the Terraform tab in [Mirror a
-repository](./mirror.md) for setup instructions.
+Terraform provider](/dhi/tools/terraform/). If you haven't configured the
+provider yet, see [DHI Terraform provider](/dhi/tools/terraform/) for setup
+instructions.
 
 Define a `dhi_customization` resource for each customization:
 
@@ -379,6 +397,13 @@ paths:
 | `mode` | Octal file permissions, such as `"0644"`. Quote the value to prevent YAML from treating the leading zero as octal notation. |
 | `uid` | User ID of the file owner. |
 | `gid` | Group ID of the file owner. |
+
+> [!NOTE]
+>
+> If your organization's DHI subscription is in the EU region, you can't add
+> files with `contents` in the `paths` field. File content isn't supported in
+> the EU region. For details, see [EU data
+> residency](../explore/eu-region.md).
 
 #### Configure user accounts
 

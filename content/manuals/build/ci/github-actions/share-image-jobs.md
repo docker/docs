@@ -13,6 +13,14 @@ in a workflow using the [actions/upload-artifact](https://github.com/actions/upl
 and [actions/download-artifact](https://github.com/actions/download-artifact)
 actions:
 
+> [!NOTE]
+>
+> This workflow supports only single-platform images because the Docker exporter
+> doesn't support manifest lists. For multi-platform images, push the image to a
+> registry. If a later job rebuilds the image before pushing it, configure a
+> [shared cache backend](cache.md) to reuse the earlier build results. See also
+> [Multi-platform image with GitHub Actions](multi-platform.md).
+
 ```yaml
 name: ci
 

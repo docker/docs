@@ -210,6 +210,33 @@ The firewall mark must be added before Docker's rules run. So if the mark
 is added in a chain with type `filter` and hook `forward`, it must have
 priority `filter - 1` or lower.
 
+> [!NOTE]
+>
+> By default, remote hosts can only reach a container through a port published
+> to one of the Docker host's addresses. Sending packets to the container's own
+> IP address instead ("direct routed" access) is not allowed.
+>
+> These packets are dropped by a rule in the `raw-PREROUTING` chain of the
+> `docker-bridges` tables. Because a drop is final, a rule in one of your own
+> tables cannot allow them. And, because that chain runs at the `prerouting`
+> hook, before Docker's `filter-FORWARD` rules, a firewall mark added with
+> `--bridge-accept-fwmark` has no effect on it.
+>
+> Any packet that reaches the host's firewall rules already addressed to a
+> container is treated this way. For example, a Kubernetes CNI plugin may
+> translate a Service address to a container address before the packet reaches
+> the host's pre-routing rules. Docker cannot distinguish the result from a
+> packet routed to the container by a remote host. Which host interface these
+> packets arrive on depends on the plugin's data path — for an overlay network
+> it is normally the tunnel device.
+>
+> To allow direct routed access to a container's *published* ports, use network
+> option `com.docker.network.bridge.trusted_host_interfaces`, or daemon option
+> `allow-direct-routing`. Unpublished ports are still protected. See
+> [Direct routing to containers in bridge networks](./port-publishing.md#direct-routing-to-containers-in-bridge-networks).
+> To allow direct routed access to all container ports, published or not, see
+> [Gateway modes](./port-publishing.md#gateway-modes).
+
 #### Replacing `DOCKER-USER` with an nftables table
 
 Because nftables doesn't have pre-defined chains, to replace the `DOCKER-USER`

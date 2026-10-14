@@ -48,6 +48,11 @@ $ docker run --rm \
              hello-world
 ```
 
+The Docker CLI resolves a relative profile path from the working directory
+where you invoke `docker`. The CLI reads the profile and sends its contents to
+the daemon, so the profile must be available on the client host when the client
+and daemon run on separate hosts.
+
 ### Significant syscalls blocked by the default profile
 
 Docker's default seccomp profile is an allowlist which specifies the calls that
@@ -98,8 +103,7 @@ the reason each syscall is blocked rather than white-listed.
 | `setns`             | Deny associating a thread with a namespace. Also gated by `CAP_SYS_ADMIN`.                                                                                                                                                                     |
 | `settimeofday`      | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.                                                                                                                                                                                     |
 | `stime`             | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.                                                                                                                                                                                     |
-| `socket`            | Blocked for `AF_ALG` to prevent in-container privilege escalation via the kernel cryptographic API ([CVE-2026-31431](https://nvd.nist.gov/vuln/detail/CVE-2026-31431)). Also blocked for `AF_VSOCK`. See [moby/moby#52494](https://github.com/moby/moby/pull/52494). |
-| `socketcall`        | Denied to prevent bypassing socket address family filters on architectures with the legacy `socketcall` multiplexer (i386, s390, MIPS o32). See [moby/moby#52494](https://github.com/moby/moby/pull/52494).                                     |
+| `socket`            | Blocked for `AF_ALG` to prevent in-container privilege escalation via the kernel cryptographic API ([CVE-2026-31431](https://nvd.nist.gov/vuln/detail/CVE-2026-31431)). Also blocked for `AF_VSOCK`. Seccomp argument filtering doesn't cover `socketcall(2)`. The default AppArmor profile and SELinux policy module deny both address families through `socket(2)` and `socketcall(2)`. See [moby/moby#52494](https://github.com/moby/moby/pull/52494) and [moby/moby#53551](https://github.com/moby/moby/pull/53551). |
 | `swapon`            | Deny start/stop swapping to file/device. Also gated by `CAP_SYS_ADMIN`.                                                                                                                                                                        |
 | `swapoff`           | Deny start/stop swapping to file/device. Also gated by `CAP_SYS_ADMIN`.                                                                                                                                                                        |
 | `sysfs`             | Obsolete syscall.                                                                                                                                                                                                                              |
@@ -112,6 +116,15 @@ the reason each syscall is blocked rather than white-listed.
 | `ustat`             | Obsolete syscall.                                                                                                                                                                                                                              |
 | `vm86`              | In kernel x86 real mode virtual machine. Also gated by `CAP_SYS_ADMIN`.                                                                                                                                                                        |
 | `vm86old`           | In kernel x86 real mode virtual machine. Also gated by `CAP_SYS_ADMIN`.                                                                                                                                                                        |
+
+> [!IMPORTANT]
+>
+> The SELinux rule that blocks `AF_VSOCK` requires SELinux userspace 3.6 or
+> later, the `container-selinux` policy, and SELinux enabled for the Docker
+> daemon. RHEL 8 ships an older SELinux userspace, so its standard packages
+> can't apply this rule. On affected hosts, use AppArmor or a custom seccomp
+> profile that denies `socketcall`. Denying `socketcall` can break networking
+> for 32-bit programs that use it.
 
 ## Run without the default seccomp profile
 

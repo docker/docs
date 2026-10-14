@@ -26,7 +26,7 @@ included with Docker, you can also implement and use [logging driver plugins](pl
 > [!TIP]
 >
 > Use the `local` logging driver to prevent disk-exhaustion. By default, no log-rotation is performed. As a result, log-files stored by the
-> default [`json-file` logging driver](drivers/json-file.md) logging driver can cause
+> default [`json-file` logging driver](drivers/json-file.md) can cause
 > a significant amount of disk space to be used for containers that generate much
 > output, which can lead to disk space exhaustion.
 >
@@ -74,7 +74,19 @@ example sets four configurable options on the `json-file` logging driver:
 }
 ```
 
-Restart Docker for the changes to take effect for newly created containers.
+Restart Docker Engine on a Linux system that uses `systemd`:
+
+```console
+$ sudo systemctl restart docker
+```
+
+If you use Docker Desktop, restart it with the Docker Desktop CLI:
+
+```console
+$ docker desktop restart
+```
+
+The changes take effect for newly created containers after the restart.
 Existing containers don't use the new logging configuration automatically.
 
 > [!NOTE]

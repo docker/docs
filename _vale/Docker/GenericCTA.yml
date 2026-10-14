@@ -1,8 +1,0 @@
-extends: existence
-message: "Avoid generic calls to action: '%s'"
-link: https://docs.docker.com/contribute/style/formatting/#links
-level: warning
-scope: raw
-ignorecase: true
-raw:
-  - \[(click here|(find out|learn) more)\]

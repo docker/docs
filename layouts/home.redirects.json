@@ -24,9 +24,14 @@
 {{- range hugo.Sites -}}
   {{- range .Pages -}}
     {{- if .Params.aliases -}}
+      {{- $page := . -}}
       {{- $target := .RelPermalink -}}
       {{- range .Params.aliases -}}
-        {{ $redirects.SetInMap "paths" . $target }}
+        {{- $alias := . -}}
+        {{- if eq (strings.TrimSuffix "/" $alias) (strings.TrimSuffix "/" $target) -}}
+          {{- errorf "alias %q in %s resolves to the page itself" $alias $page.File.Path -}}
+        {{- end -}}
+        {{- $redirects.SetInMap "paths" $alias $target -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}

@@ -12,12 +12,12 @@ aliases:
 
 Docker provides [restart policies](/reference/cli/docker/container/run/#restart)
 to control whether your containers start automatically when they exit, or when
-Docker restarts. Restart policies start linked containers in the correct order.
+Docker restarts.
 Docker recommends that you use restart policies, and avoid using process
 managers to start containers.
 
 Restart policies are different from the `--live-restore` flag of the `dockerd`
-command. Using `--live-restore` lets you to keep your containers running during
+command. Using `--live-restore` lets you keep your containers running during
 a Docker upgrade, though networking and user input are interrupted.
 
 ## Use a restart policy
@@ -33,11 +33,12 @@ any of the following:
 | `always`                   | Always restart the container if it stops. If it's manually stopped, it's restarted only when Docker daemon restarts or the container itself is manually restarted. (See the second bullet listed in [restart policy details](#restart-policy-details))                                                                                                                |
 | `unless-stopped`           | Similar to `always`, except that when the container is stopped (manually or otherwise), it isn't restarted even after Docker daemon restarts.                                                                                                                                                                                                                         |
 
-The following command starts a Redis container and configures it to always
-restart, unless the container is explicitly stopped, or the daemon restarts.
+The following command starts a Redis container with the `unless-stopped`
+restart policy. Docker restarts the container if it exits or if the daemon
+restarts, but not if you stopped the container yourself.
 
 ```console
-$ docker run -d --restart unless-stopped redis
+$ docker run -d --name redis --restart unless-stopped redis
 ```
 
 The following command changes the restart policy for an already running

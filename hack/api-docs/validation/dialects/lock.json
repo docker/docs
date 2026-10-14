@@ -1,0 +1,20 @@
+[
+  {
+    "file": "oas-dialect.json",
+    "uri": "https://spec.openapis.org/oas/3.1/dialect/base",
+    "resolvedURL": "https://spec.openapis.org/oas/3.1/dialect/base",
+    "sha256": "8a0e89e365dadbebce2921ce6244340c1090e9d544c60d977e9ad6b97a61227b"
+  },
+  {
+    "file": "oas-vocabulary.json",
+    "uri": "https://spec.openapis.org/oas/3.1/meta/base",
+    "resolvedURL": "https://spec.openapis.org/oas/3.1/meta/base",
+    "sha256": "267a88226e64e96dfc8c89dbd7e863160c84715e0fb893ca1d9fbf9f830f1f54"
+  },
+  {
+    "file": "oas-document.json",
+    "uri": "https://spec.openapis.org/oas/3.2/schema/2025-09-17",
+    "resolvedURL": "https://spec.openapis.org/oas/3.2/schema/2025-09-17",
+    "sha256": "0c9d74bf25f9b9388b2d81e421ef60fdefa9feffa94898dadfc501b342b3bfcc"
+  }
+]

@@ -1,23 +1,41 @@
 ---
 title: Architecture
-weight: 40
+weight: 100
 description: Technical architecture of Docker Sandboxes; workspace mounting, storage, networking, and sandbox lifecycle.
 keywords: docker sandboxes, architecture, microVM, workspace mounting, sandbox lifecycle
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This page explains how Docker Sandboxes work under the hood. For the security
 properties of the architecture, see [Sandbox isolation](security/isolation.md).
 
-## Workspace mounting
+## Workspace storage
 
-Your workspace is mounted directly into the sandbox through a filesystem
-passthrough. The sandbox sees your actual host files, so changes in either
-direction are instant with no sync process involved.
+Starting with `sbx` version 0.42.0, workspace paths are optional for
+`sbx create`. When you omit them, the sandbox has no host workspace bind mount.
+The sandbox uses the template image's configured `WORKDIR` as its default
+working directory. Docker-provided agent templates set `WORKDIR` to
+`/home/agent/workspace`. A custom template can set another absolute path. If
+the daemon can't resolve a usable absolute `WORKDIR` from the image config, it
+falls back to `/home/agent/workspace`. Files created there stay inside the
+sandbox and persist across stops and restarts.
 
-Your workspace is mounted at the same absolute path as on your host. Preserving
-absolute paths means error messages, configuration files, and build outputs all
-reference paths you can find on your host. The agent sees exactly the directory
-structure you see, which reduces confusion when debugging or reviewing changes.
+When you pass a workspace path to `sbx create` or `sbx run`, the directory is
+mounted into the sandbox through a filesystem passthrough. `sbx run` uses the
+current directory when you don't pass a path. The sandbox sees your actual
+host files, so changes in either direction are instant with no sync process
+involved.
+
+A directly mounted workspace appears at the same absolute path as on your
+host. Preserving absolute paths means error messages, configuration files, and
+build outputs all reference paths you can find on your host. The agent sees the
+same directory structure, which reduces confusion when debugging or reviewing
+changes.
+
+Clone mode uses a third storage layout. The host repository is mounted
+read-only at `/run/sandbox/source`, and the agent works in a private clone
+inside the sandbox. See [Clone mode](usage.md#clone-mode).
 
 > [!WARNING]
 > Avoid mounting network-attached or remote storage (network drives, SMB/NFS
@@ -29,24 +47,50 @@ structure you see, which reduces confusion when debugging or reviewing changes.
 
 When you create a sandbox, everything inside it persists until you remove it:
 Docker images and containers built or pulled by the agent, installed packages,
-agent state and history, and workspace changes.
+agent state and history, and files in mountless or cloned workspaces. Files in
+a directly mounted workspace live on the host instead.
 
-Sandboxes are isolated from each other. Each one maintains its own Docker
-daemon state, image cache, and package installations. Multiple sandboxes don't
-share images or layers.
+Each sandbox maintains its own Docker daemon state, image cache, and package
+installations. Multiple sandboxes don't share images or layers. The
+[shared agent skills store](workflows/agent-skills.md) is an exception:
+sandboxes created for supported agents mount the same host-side store read-only
+by default. Use `--skills` or
+[`skills.defaultMode`](configuration/settings.md#skillsdefaultmode)
+to choose another mode at
+creation. Existing sandboxes retain their mounts until recreated.
 
 Each sandbox consumes disk space for its VM image, Docker images, container
 layers, and volumes, and this grows as you build images and install packages.
 
+Virtiofs caching is enabled by default for directly mounted workspaces on all
+operating systems. File reads from the sandbox VM are cached on the host side,
+reducing round-trips through the filesystem passthrough and improving
+performance for read-heavy workloads such as `git status` or directory scans.
+To opt out, set
+`DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0` when creating the sandbox:
+
+```console
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <agent>
+```
+
 ## Networking
 
-All outbound traffic from the sandbox routes through an HTTP/HTTPS proxy on
-your host. Agents are configured to use the proxy automatically. The proxy
-enforces [network access policies](governance/) and handles
-[credential injection](security/credentials.md). See
+All outbound TCP traffic from the sandbox routes through a proxy on your host.
+Agents use a forward proxy for HTTP and HTTPS; other TCP traffic is forwarded
+transparently. Both paths enforce
+[network access policies](governance/access-controls/network.md). The forward
+proxy also handles [credential injection](configuration/credentials.md). See
 [Network isolation](security/isolation.md#network-isolation) for how this
 works and [Default security posture](security/defaults.md) for what is
 allowed out of the box.
+
+### Follow an authenticated request
+
+Step through the following diagram to see where Docker Sandboxes checks network
+policy and replaces a sentinel credential with the real value. The real credential stays
+outside the sandbox throughout the request.
+
+{{< interactive-diagram src="diagrams/credential-injection.yaml" >}}
 
 ### Upstream proxy
 
@@ -57,35 +101,37 @@ upstream proxy, the host-side proxy forwards the request to it. Chaining to an
 upstream proxy means sandbox traffic respects the same egress controls as other
 applications on your host.
 
-The sandbox daemon makes these upstream requests, and it reads the proxy
-environment variables `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY`, along with
-their lowercase equivalents. Set `NO_PROXY` to list hosts that should be
-reached directly instead of through the upstream proxy.
+By default, both sandbox traffic and the daemon's own traffic follow your OS
+system proxy, so this usually works without any configuration. To set a proxy
+explicitly — with a proxy URL, a PAC file, a SOCKS5 proxy, or separate settings
+for sandbox and daemon traffic — see
+[Configure an upstream proxy](configuration/upstream-proxy.md). Upstream proxy support is
+experimental and subject to change.
 
-To route sandbox traffic through a different proxy, set
-`DOCKER_SANDBOXES_PROXY` to the proxy URL. It applies only to sandbox traffic
-and sets the upstream proxy for both HTTP and HTTPS to that URL. Unlike
-`HTTP_PROXY` and `HTTPS_PROXY`, it doesn't affect image pulls or the daemon's
-own requests.
+Only HTTP and HTTPS traffic can be forwarded to an upstream proxy. Other TCP
+traffic can't be redirected to a proxy.
 
-Set these variables in the environment where the sandbox daemon starts. The
-daemon starts automatically the first time a command needs it, so set the
-variables before you run a `sbx` command. If the daemon is already running,
-restart it for a change to take effect.
+## MCP gateway
 
-Two limitations apply:
+Supported agents connect to a single MCP gateway endpoint for the sandbox. The
+gateway runs on the host side of the sandbox boundary and brokers access to
+registered MCP servers.
 
-- Only HTTP and HTTPS traffic can be forwarded to an upstream proxy. Other TCP
-  traffic can't be redirected to a proxy.
-- Proxy auto-configuration files, such as `proxy.pac`, aren't supported. Set the
-  `HTTP_PROXY`, `HTTPS_PROXY`, or `DOCKER_SANDBOXES_PROXY` environment variables
-  explicitly.
+Registered MCP servers can be remote endpoints, or they can be local stdio
+servers launched on the host. Local stdio servers don't run inside the sandbox
+VM. If a local stdio server is packaged as an OCI image, or if you register an
+explicit `docker` command, it uses Docker on the host.
+
+When MCP policies apply, enforcement happens on the MCP gateway path, separate
+from the HTTP/HTTPS network proxy. Server registration is checked before the
+server is stored, and governed MCP requests are checked by the gateway before
+tool calls, resource reads, prompt retrieval, or gateway meta-tool execution.
 
 ## Lifecycle
 
-`sbx run` initializes a VM with a workspace for a specified agent and starts
-the agent. You can stop and restart without recreating the VM, preserving
-installed packages and Docker images.
+`sbx run` initializes a VM for a specified agent and starts the agent. You can
+stop and restart without recreating the VM, preserving installed packages,
+Docker images, and in-sandbox files.
 
 Sandboxes persist until explicitly removed. Stopping an agent doesn't delete
 the VM; environment setup carries over between runs. Use `sbx rm` to delete

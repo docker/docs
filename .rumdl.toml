@@ -1,0 +1,44 @@
+[global]
+flavor = "hugo"
+enable = [
+  "MD011",
+  "MD018",
+  "MD019",
+  "MD020",
+  "MD021",
+  "MD022",
+  "MD023",
+  "MD025",
+  "MD026",
+  "MD029",
+  "MD035",
+  "MD037",
+  "MD038",
+  "MD039",
+  "MD040",
+  "MD042",
+  "MD052",
+  "MD055",
+  "MD056",
+  "MD059",
+]
+exclude = [
+  "content/manuals/desktop/previous-versions/*.md",
+  "content/manuals/engine/release-notes/*.md",
+]
+
+[MD029]
+style = "one_or_ordered"
+
+[MD052]
+shortcut-syntax = false
+
+[MD059]
+prohibited-texts = [
+  "click here",
+  "here",
+  "link",
+  "more",
+  "learn more",
+  "find out more",
+]

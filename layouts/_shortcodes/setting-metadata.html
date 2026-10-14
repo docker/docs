@@ -1,0 +1,21 @@
+{{ if or (not (isset .Params "type")) (not (isset .Params "default")) }}
+  {{ errorf "setting-metadata requires type and default: %s" .Position }}
+{{ end }}
+<dl
+  class="not-prose my-4 grid grid-cols-2 gap-x-6 gap-y-3 rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm shadow-sm dark:border-gray-700 dark:bg-gray-900"
+>
+  <div class="min-w-0">
+    <dt class="text-gray-600 dark:text-gray-400">Type</dt>
+    <dd class="mt-1 wrap-anywhere">{{ .Get "type" }}</dd>
+  </div>
+  <div class="min-w-0">
+    <dt class="text-gray-600 dark:text-gray-400">Default</dt>
+    <dd class="mt-1 wrap-anywhere">{{ .Get "default" }}</dd>
+  </div>
+  {{ with .Get "env" }}
+    <div class="col-span-2 min-w-0">
+      <dt class="text-gray-600 dark:text-gray-400">Environment variable</dt>
+      <dd class="mt-1 wrap-anywhere"><code>{{ . }}</code></dd>
+    </div>
+  {{ end }}
+</dl>

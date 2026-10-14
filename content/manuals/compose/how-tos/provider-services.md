@@ -101,7 +101,7 @@ This information is then passed to dependent services as environment variables.
 
 > [!TIP]
 >
-> If you're working with AI models in Compose, use the [`models` top-level element](/manuals/ai/compose/models-and-compose.md) instead.
+> If you're working with AI models in Compose, use the [`models` top-level element](/manuals/compose/how-tos/models-and-compose.md) instead.
 
 ## Benefits of using provider services
 

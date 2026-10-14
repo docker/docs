@@ -135,7 +135,7 @@ def shift_headings(body: str) -> str:
 
 
 def normalize_body(body: str) -> str:
-    """Fix markdownlint issues in release body content:
+    """Fix Markdown lint issues in release body content:
     - Ensure a blank line follows each heading (MD022).
     - Add 'console' language tag to fenced code blocks that have none (MD040).
     Safe to run on content that already complies — no double blank lines are added."""
@@ -203,7 +203,7 @@ def main() -> None:
     generated = TEMPLATE.render(releases=releases)
     splice(file, generated)
     if shutil.which("npx"):
-        subprocess.run(["npx", "--no-install", "prettier", "--write", str(file)], check=False)
+        subprocess.run(["npx", "--no-install", "rumdl", "fmt", str(file)], check=False)
     print(f"Wrote {len(releases)} releases (latest {args.minor_releases} minor releases) to {file}")
 
 

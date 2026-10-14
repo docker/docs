@@ -4,6 +4,7 @@ description: "Delegate tasks to sub-agents in multi-agent setups."
 keywords: docker agent, ai agents, tools, toolsets, transfer task tool
 linkTitle: "Transfer Task"
 weight: 80
+canonical: https://docs.docker.com/ai/docker-agent/tools/transfer-task/
 ---
 
 _Delegate tasks to sub-agents in multi-agent setups._
@@ -56,6 +57,15 @@ The `transfer_task` tool takes three parameters:
 | `expected_output` | string | ✓        | Description of the result/format the caller expects back.                                   |
 
 The call blocks until the sub-agent returns its result, which becomes the tool's response. For non-blocking parallel delegation, use [`background_agents`](../background-agents/index.md) instead.
+
+## Delegation Limits
+
+Sub-agents can have `sub_agents` of their own, so multi-level delegation chains are supported. Two runtime guards keep chains sane, applied to both `transfer_task` and `run_background_agent`:
+
+- **Cycles are rejected.** A delegation targeting an agent that is already part of the active delegation chain (for example `a -> b -> a`) fails with an error naming the cycle.
+- **Depth is capped at 10 nested delegations.** The root agent delegating to its first sub-agent counts as depth 1; a call that would exceed the cap fails with an error stating the attempted depth.
+
+A rejected delegation returns a tool error to the calling agent and never starts the sub-agent.
 
 > [!TIP]
 > **See also**

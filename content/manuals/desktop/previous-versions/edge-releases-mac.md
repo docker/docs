@@ -1104,7 +1104,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 - Add daemon options validation
 - Diagnose can be cancelled & Improved help information. Fixes [docker/for-mac#1134](https://github.com/docker/for-mac/issues/1134), [docker/for-mac#1474](https://github.com/docker/for-mac/issues/1474)
-- Support paging of Docker Cloud [repositories](../../docker-hub/repos/_index.md) and [organizations](../../admin/organization/setup/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
+- Support paging of Docker Cloud [repositories](../../docker-hub/repos/_index.md) and [organizations](../../accounts/organization/setup/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
 
 ### Docker Community Edition 17.06.1-ce-mac20, 2017-07-18
 
@@ -1703,8 +1703,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and
   traversals of large directories are currently slow. Additionally, containers
   that perform large numbers of directory operations, such as repeated scans of
-  large directory trees, may suffer from poor performance. More information is
-  available in [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) in Troubleshooting.
+  large directory trees, may suffer from poor performance.
 
 - Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart `Docker.app`.
 
@@ -1733,8 +1732,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   with `osxfs`. In particular, writes of small blocks and traversals of large
   directories are currently slow. Additionally, containers that perform large
   numbers of directory operations, such as repeated scans of large directory
-  trees, may suffer from poor performance. More information is available in
-  [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) in Troubleshooting.
+  trees, may suffer from poor performance. 
 
 - Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app.
 
@@ -1768,7 +1766,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large
   directories are currently slow. Additionally, containers that perform large
   numbers of directory operations, such as repeated scans of large directory
-  trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) in Troubleshooting.
+  trees, may suffer from poor performance. 
 
 - Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart `Docker.app`.
 
@@ -1794,7 +1792,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 - Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
-- There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) in Troubleshooting.
+- There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. 
 
 - Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app
 
@@ -1817,7 +1815,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 - Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
-- There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. More information is available in [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
+- There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. 
 
 - Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app
 
@@ -1864,7 +1862,7 @@ events or unexpected unmounts.
 
 - Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
-- There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks, and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) in [Logs and Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md).
+- There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks, and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. 
 
 - Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app
 
@@ -1906,10 +1904,6 @@ events or unexpected unmounts.
 - `com.docker.slirp`: included the DNS TCP fallback fix, required when UDP responses are truncated
 - `docker build/events/logs/stats...` won't leak when interrupted with Ctrl-C
 
-**Known issues**
-
-- See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
-
 ### Beta 18.1 Release Notes (2016-07-07 1.12.0-rc3-beta18.1)
 
 > [!NOTE]
@@ -1934,10 +1928,6 @@ events or unexpected unmounts.
 - VPNKit: Improved scalability as number of network connections increases
 - The docker API proxy was failing to deal with some 1.12 features, such as health check.
 
-**Known issues**
-
-- See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
-
 ### Beta 18 Release Notes (2016-07-06 1.12.0-rc3-beta18)
 
 **New**
@@ -1955,9 +1945,6 @@ events or unexpected unmounts.
 - Interrupting a `docker build` with Ctrl-C will actually stop the build
 - The docker API proxy was failing to deal with some 1.12 features, such as health check.
 
-**Known issues**
-
-- See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 17 Release Notes (2016-06-29 1.12.0-rc2-beta17)
 
@@ -1974,9 +1961,6 @@ events or unexpected unmounts.
 - Fixed "failure: No error" message in diagnostic panel
 - Improved diagnostics for networking and logs for the service port openers
 
-**Known issues**
-
-- See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 16 Release Notes (2016-06-17 1.12.0-rc2-beta16)
 
@@ -1995,9 +1979,6 @@ events or unexpected unmounts.
 - HyperKit API: Improved error reporting
 - osxfs: fix sporadic EBADF due to fd access/release races (#3683)
 
-**Known issues**
-
-- See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 15 Release Notes (2016-06-10 1.11.2-beta15)
 
@@ -2018,10 +1999,6 @@ events or unexpected unmounts.
 - Number of concurrent TCP/UDP connections increased in VPNKit
 - Hyperkit: `vsock` stability improvements
 - Fixed crash when user is admin
-
-**Known issues**
-
-- See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 14 Release Notes (2016-06-02 1.11.1-beta14)
 

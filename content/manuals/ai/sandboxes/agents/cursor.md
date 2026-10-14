@@ -1,11 +1,13 @@
 ---
 title: Cursor
-weight: 33
+weight: 40
 description: |
   Use Cursor in Docker Sandboxes with API key or proxy-managed OAuth
   authentication.
 keywords: docker sandboxes, cursor, cursor agent, ai agent, sbx
 ---
+
+{{% include "sandboxes-local-scope.md" %}}
 
 This guide covers authentication, configuration, and usage of Cursor in a
 sandboxed environment.
@@ -20,27 +22,26 @@ Create a sandbox and run Cursor for a project directory:
 $ sbx run cursor ~/my-project
 ```
 
-The workspace parameter is optional and defaults to the current directory:
+`sbx run` defaults the workspace to the current directory:
 
 ```console
 $ cd ~/my-project
 $ sbx run cursor
 ```
 
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
+
 ## Authentication
 
 Cursor supports two authentication methods: an API key or OAuth.
 
 **API key**: Store your Cursor API key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g cursor
+$ sbx secret set cursor
 ```
-
-Alternatively, export the `CURSOR_API_KEY` environment variable in your shell
-before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
 
 **OAuth**: If no API key is set, Cursor prompts you to sign in interactively
 on first run. The proxy intercepts the token exchange with
@@ -69,7 +70,7 @@ Arguments after `--` are added after the default flags when the first one is
 itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run cursor -- -p "refactor this"   # runs cursor-agent --yolo -p "refactor this"
+$ sbx run --name <sandbox-name> -- -p "refactor this"   # runs cursor-agent --yolo -p "refactor this"
 ```
 
 When the first argument is a bare word — a subcommand or prompt — it replaces

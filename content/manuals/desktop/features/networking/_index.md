@@ -65,13 +65,9 @@ Host firewalls can permit or deny inbound connections by filtering on `com.docke
 
 ## Using Docker Desktop with a proxy
 
-Docker Desktop can use your system’s default proxy settings or custom settings that you configure with [Docker Desktop's proxy setting](/manuals/desktop/settings-and-maintenance/settings.md#proxies). All proxy traffic passes through `com.docker.backend.exe`.
+Docker Desktop can use your system’s default proxy settings or custom settings that you configure with [Docker Desktop’s proxy setting](/manuals/desktop/settings-and-maintenance/settings.md#proxies).
 
-When a proxy is enabled:
-
-- The backend process forwards the network requests, for example `docker pull`, through an internal proxy at `http.docker.internal:3128`.
-- The internal proxy then connects either directly to the internet or through your upstream proxy, depending on your configuration and adding authentication if necessary.
-- Docker Desktop then downloads the requested images or data through the proxy as usual.
+Docker Desktop routes traffic through two separate proxies. The Containers proxy governs all `docker image pull` operations, as well as running container traffic when air-gapped container enforcement is enabled. The Docker Desktop proxy governs host-level traffic - the Desktop application, Docker CLI, and extensions — and is a fallback for image pulls only when the Containers proxy is not explicitly configured.
 
 Note that:
 

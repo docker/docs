@@ -1,24 +1,29 @@
 ---
 title: FAQ
-weight: 70
+weight: 140
 description: Frequently asked questions about Docker Sandboxes.
 keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste, pricing, commercial use, allowlist, firewall, domains, proxy
 ---
 
+Host integration and workspace instructions on this page describe local
+sandboxes. See [Local and cloud differences](cloud/local-vs-cloud.md) before
+adapting those workflows to the cloud.
+
 ## Is Docker Sandboxes free? Can I use it commercially?
 
-Yes to both. The `sbx` CLI is free to use, including for commercial and
-professional work, with no per-seat fee. Install it, sign in with a free
-Docker account, and run sandboxes at no cost.
+The `sbx` CLI and local sandbox compute are free to use, including for
+commercial and professional work. Cloud sandbox compute uses a
+[pay-as-you-go subscription](/manuals/agentic-platform/signup.md#billing).
+Model-provider charges are separate from sandbox compute.
 
-The only paid component is organization governance: centrally managed network
-and filesystem policies, [sign-in enforcement](governance/sign-in-enforcement.md),
-and [audit logs](governance/audit.md). These
+Organization governance for local sandboxes includes centrally managed network,
+filesystem, and MCP policies,
+[sign-in enforcement](governance/monitor-and-enforce/sign-in-enforcement.md),
+and [audit logs](governance/audit/). These
 [organization governance features](governance/) require a separate paid
 subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
-to get started. Everything else, including running agents in isolated
-sandboxes, is free.
+to get started.
 
 ## Why do I need to sign in?
 
@@ -29,9 +34,8 @@ Signing in gives each sandbox a verified identity, which lets Docker:
   containers, install packages, and push code. Your Docker identity is the
   anchor.
 - **Enable team features.** Team-scale features like
-  [organization governance](governance/org.md), shared environments, and
-  audit logs need a concept of "who," and adding that later would be worse for
-  everyone.
+  [organization governance](governance/), shared environments, and audit logs
+  need a concept of "who," and adding that later would be worse for everyone.
 - **Authenticate against Docker infrastructure.** Sandboxes pull images, run
   daemons, and talk to Docker services. A Docker account authenticates those
   requests.
@@ -40,21 +44,26 @@ Your Docker account email is only used for authentication, not marketing.
 
 ## Can I enforce sandbox policies across my organization?
 
-Yes. Admins can centrally manage network and filesystem policies from the
-Docker Admin Console. Rules defined there apply to every sandbox in the
-organization. When organization governance is active, it replaces local rules
-set with `sbx policy` — local rules are no longer evaluated.
+Yes. Admins can centrally manage network, filesystem, and MCP policies. These
+controls apply to local sandboxes in the organization. When organization
+governance is active, only organization allow rules grant access: local allow
+rules set with `sbx policy` are no longer evaluated, while local deny rules
+still apply on top.
 
-See [Organization governance](governance/org.md). This feature requires
-a separate paid subscription —
+See [Organization policies](governance/access-controls/organization.md). This
+feature requires a separate paid subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
+
+Cloud sandboxes use separate network policy configuration.
+See [Cloud network policy](cloud/network-policy.md) for cloud controls.
 
 ## Which domains do I need to allow for Docker Sandboxes to work?
 
 If your organization restricts outbound network access with a firewall or
 proxy, add the following domains to your allowlist so that `sbx` can
-authenticate, pull images, and report diagnostics.
+authenticate, pull images, and report diagnostics for local sandboxes.
+Cloud operations also connect to `https://api.sandboxes-cloud.docker.com`.
 
 | Domain                                             | Description             |
 | -------------------------------------------------- | ----------------------- |
@@ -77,10 +86,11 @@ The `sbx` CLI collects basic usage data about CLI invocations:
 - How long it took
 - If you're signed in, your Docker username is included
 
-Docker Sandboxes doesn't monitor sessions, read your prompts, or access your
-code. Your code stays in the sandbox and on your host.
+CLI usage telemetry does not include your prompts or code. Cloud sandboxes
+execute on Docker-managed infrastructure, so files you transfer to them are
+stored in the cloud.
 
-To opt out of all analytics, set the `SBX_NO_TELEMETRY` environment variable:
+To opt out of CLI usage analytics, set the `SBX_NO_TELEMETRY` environment variable:
 
 ```console
 $ export SBX_NO_TELEMETRY=1
@@ -88,78 +98,38 @@ $ export SBX_NO_TELEMETRY=1
 
 ## How do I set custom environment variables inside a sandbox?
 
-The [`sbx secret`](/reference/cli/sbx/secret/) command only supports a fixed set
-of [services](security/credentials.md#built-in-services) (Anthropic, OpenAI,
-GitHub, and others). If your agent needs an environment variable that isn't
-tied to a supported service, such as `BRAVE_API_KEY` or a custom internal
-token, write it to `/etc/sandbox-persistent.sh` inside the sandbox. This
-file is sourced on every shell login, so the variable persists across agent
-sessions for the sandbox's lifetime.
+Starting with `sbx` version 0.39.0, use `-e`/`--env` or `--env-file` with
+`sbx run` and `sbx create`. See
+[Set environment variables](usage.md#set-environment-variables) for syntax,
+precedence rules, persistent configuration for an existing sandbox, and
+guidance for credentials.
 
-Use `sbx exec` to append the export:
-
-```console
-$ sbx exec -d <sandbox-name> bash -c "echo 'export BRAVE_API_KEY=your_key' >> /etc/sandbox-persistent.sh"
-```
-
-The `bash -c` wrapper is required so the `>>` redirect runs inside the
-sandbox instead of on your host.
-
-> [!NOTE]
-> Unlike `sbx secret`, which injects credentials through a host-side proxy
-> without exposing them to the agent, this approach stores the value inside
-> the sandbox. The agent process can read it directly. Only use this for
-> credentials where proxy-based injection isn't available.
-
-Variables in `/etc/sandbox-persistent.sh` are sourced automatically when
-bash runs inside the sandbox, including interactive sessions and agents
-started with `sbx run`. If you run a command directly with
-`sbx exec <name> <command>`, the command runs without a shell, so the
-persistent environment file is not sourced. Wrap the command in `bash -c`
-to load the environment:
-
-```console
-$ sbx exec <sandbox-name> bash -c "your-command"
-```
-
-To verify the variable is set, open a shell in the sandbox:
-
-```console
-$ sbx exec -it <sandbox-name> bash
-$ echo $BRAVE_API_KEY
-```
+Variables in `/etc/sandbox-persistent.sh` are available to interactive sessions
+and agents started with `sbx run`. A variable only takes effect for sessions
+and agents started after it's added. Restart a running agent, or stop and start
+the sandbox, to pick up the new value.
 
 ## Why do agents run without approval prompts?
 
 The sandbox itself is the safety boundary. Because agents run inside an
-isolated microVM with [network policies](governance/),
-[credential isolation](security/credentials.md), and no access to your host
-system outside the workspace, the usual reasons for approval prompts (preventing
-destructive commands, network access, file modifications) are handled by the
-sandbox isolation layers instead.
+isolated microVM with [network policies](governance/access-controls/network.md),
+[credential isolation](security/isolation.md#credential-isolation), and no access to your host
+system outside explicitly shared paths, the usual reasons for approval prompts
+(preventing destructive commands, network access, file modifications) are
+handled by the sandbox isolation layers instead.
 
 If you prefer to re-enable approval prompts, change the permission mode
 inside the session. Most agents let you switch permission modes after
 startup. In Claude Code, use the `/permissions` command to change the mode
 interactively.
 
-To make approval prompts the default for every session, define a custom
-sandbox kit that overrides the agent's entrypoint to drop the
-permission-skipping flag. For example, a kit that launches Claude Code
-without `--dangerously-skip-permissions`:
+To make approval prompts the default for every session, create a v2 sandbox
+kit that extends the built-in agent and changes its launch options. See
+[Fork an existing agent](customize/kits-v2.md#fork-an-existing-agent)
+for a complete example.
 
-```yaml {title="claude-safe/spec.yaml"}
-schemaVersion: "1"
-kind: sandbox
-name: claude-safe
-sandbox:
-  image: "docker/sandbox-templates:claude-code-docker"
-  entrypoint:
-    run: [claude]
-```
-
-Run it with `sbx run claude-safe --kit ./claude-safe/`. See
-[Sandbox kits](customize/kits.md#sandbox-kits) for the full pattern.
+For an environment built entirely with v3 kits, set the launch command in
+the workload's Dockerfile. See [Build a v3 agent kit](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
 
 ## How do I know if my agent is running in a sandbox?
 
@@ -173,33 +143,30 @@ in-progress task:
 
 ## Why doesn't the sandbox use my user-level agent configuration?
 
-Sandboxes don't pick up user-level agent configuration from your host. This
-includes directories like `~/.claude` for Claude Code or `~/.codex` for Codex,
-where hooks, skills, and other settings are stored. Only project-level
-configuration in the working directory is available inside the sandbox.
+Local sandboxes don't import your complete user-level agent configuration. Hooks,
+settings, and other files under directories such as `~/.claude` remain on the
+host. Project-level configuration in the working directory remains available
+inside the sandbox.
 
-To make configuration available in a sandbox, copy or move what you need into
-your project directory before starting a session:
+Shared agent skills are the exception. Use `sbx skills add` to install skills
+from a Git repository, or run `sbx skills import` to copy skills from supported
+host directories. `sbx` keeps the skills in a persistent store shared with
+sandboxes. See [Share agent skills](workflows/agent-skills.md) for repository
+management, supported host directories, mount behavior, and per-sandbox
+opt-out.
 
-```console
-$ cp -r ~/.claude/skills .claude/skills
-```
-
-Don't use symlinks — a sandboxed agent can't follow symlinks to paths outside
-the sandbox.
-
-Collocating skills and other agent configuration with the project itself is a
-good practice regardless of sandboxes. It's versioned alongside the code and
-evolves with the project as it changes.
+Keep project-specific skills and other agent configuration in the project
+itself. This versions the configuration alongside the code. Don't use symlinks
+to host paths because a sandboxed agent can't follow them outside the sandbox.
 
 ## Can I paste images into an agent?
 
-Yes, but it's off by default. Text paste already works, because the terminal
-sends it directly. Pasting an image or screenshot with `Ctrl+V` is different:
+In local sandboxes, image paste is off by default. Text paste works because the
+terminal sends it directly. Pasting an image or screenshot with `Ctrl+V` is different:
 the agent reads it from your host clipboard, and the sandbox blocks that access
 unless you opt in.
 
-Turn it on with a local setting:
+Turn on [`clipboard.imagePaste`](configuration/settings.md#clipboardimagepaste):
 
 ```console
 $ sbx settings set clipboard.imagePaste true
@@ -223,24 +190,26 @@ $ sbx settings set clipboard.imagePaste false
 
 ## Can I use Docker Sandboxes on headless Linux?
 
-Yes. On Linux, `sbx` stores secrets in the Secret Service exposed by your
-desktop keyring, such as GNOME Keyring or KDE Wallet. Headless servers and some
-WSL setups have no running Secret Service, so `sbx` falls back to an encrypted
-file under `$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
+Yes. For local sandboxes on Linux, `sbx` stores secrets in the Secret Service
+exposed by your desktop keyring, such as GNOME Keyring or KDE Wallet. Headless servers and some
+WSL setups have no running Secret Service, so `sbx` falls back to a file under
+`$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
 `~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. No setup is
 required. When you store a secret on such a host, `sbx` prints a notice:
 
 ```text
-No keychain detected - this secret will be stored in an encrypted file on disk
+No keychain detected - this secret will be stored on disk, protected by file permissions rather than a password
 ```
 
-The file is encrypted at rest and protected by `0700` directory permissions,
-the same posture as `~/.docker/config.json`. It's weaker than an OS keychain,
-which also mediates access per application.
+`sbx` stores the file in a directory with `0700` permissions, the same
+file-permission model used for `~/.docker/config.json`. Any user or process that
+can read the file can retrieve the stored credentials, so treat the directory as
+sensitive. Where available, prefer a keychain, which mediates access per
+application.
 
 To keep secrets in a keyring instead, run a Secret Service on the host before
 storing them: install `gnome-keyring` and start `dbus-run-session`, or run the
 keyring daemon under a login session that unlocks it. Once a working Secret
 Service is available, `sbx` stores new
 secrets in the keychain again. For where each platform keeps secrets, see
-[Where secrets are stored](security/credentials.md#where-secrets-are-stored).
+[Where secrets are stored](configuration/credentials.md#where-secrets-are-stored).

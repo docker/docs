@@ -86,7 +86,9 @@ flag is more explicit and supports all the available options.
 
 If you use `--volume` to bind-mount a file or directory that does not yet
 exist on the Docker host, Docker automatically creates the directory on the
-host for you. It's always created as a directory.
+host for you. It's always created as a directory. If the Docker daemon doesn't
+have permission to create the source directory, create it before starting the
+container.
 
 By default, `--mount` does not automatically create a directory if the specified mount
 path does not exist on the host. Instead, it produces an error:
@@ -115,8 +117,8 @@ $ docker run --mount type=bind,src=<host-path>,dst=<container-path>[,<key>=<valu
 
 Valid options for `--mount type=bind` include:
 
-| Option                         | Description                                                                                                                                                          |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Option                         | Description                                                                                                                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `source`, `src`                | The location of the file or directory on the host. This can be an absolute or relative path.                                                                        |
 | `destination`, `dst`, `target` | The path where the file or directory is mounted in the container. Must be an absolute path.                                                                         |
 | `readonly`, `ro`               | If present, causes the bind mount to be [mounted into the container as read-only](#use-a-read-only-bind-mount).                                                     |
@@ -486,4 +488,5 @@ and
 
 - Learn about [volumes](./volumes.md).
 - Learn about [tmpfs mounts](./tmpfs.md).
+- Learn about [image mounts](./image-mounts.md).
 - Learn about [storage drivers](/engine/storage/drivers/).

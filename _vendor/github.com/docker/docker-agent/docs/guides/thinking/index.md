@@ -3,6 +3,7 @@ title: "Thinking / Reasoning"
 description: "Control how much a model reasons before responding. Works across OpenAI, Anthropic, Google Gemini, AWS Bedrock, and Docker Model Runner."
 keywords: docker agent, ai agents, guides, thinking / reasoning
 weight: 20
+canonical: https://docs.docker.com/ai/docker-agent/guides/thinking/
 ---
 
 _Control how much a model reasons before responding. Works across OpenAI, Anthropic, Google Gemini, AWS Bedrock, and Docker Model Runner._
@@ -11,7 +12,7 @@ _Control how much a model reasons before responding. Works across OpenAI, Anthro
 
 Several modern models support an extended reasoning phase that happens before they produce visible output. During this phase the model plans, evaluates options, and works through the problem — internally, not shown in the response by default. This typically improves accuracy on complex tasks like coding, math, and multi-step planning, at the cost of higher token usage and latency.
 
-docker-agent exposes this through a single `thinking_budget` field on any named model. The value format differs slightly by provider, but the semantics are the same: higher effort means more thorough reasoning.
+Docker Agent exposes this through a single `thinking_budget` field on any named model. The value format differs slightly by provider, but the semantics are the same: higher effort means more thorough reasoning.
 
 > [!NOTE]
 > **Think tool vs. thinking budget**
@@ -22,7 +23,7 @@ docker-agent exposes this through a single `thinking_budget` field on any named 
 
 | Provider            | Format     | Values                                                                                  | Default            |
 | ------------------- | ---------- | --------------------------------------------------------------------------------------- | ------------------ |
-| OpenAI              | string     | `minimal`, `low`, `medium`, `high`, `none`; `xhigh` on gpt-5.2+ only                    | `medium` (API default) |
+| OpenAI              | string     | `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, `max`; `xhigh` on gpt-5.2+, `none`/`max` on gpt-5.6+ only, `minimal` dropped on gpt-5.6+ | `medium` (API default) |
 | Anthropic           | int or str | 1024–32768 tokens, or `minimal`–`max`, `adaptive`, `adaptive/<effort>`, `none`          | off                |
 | Gemini 2.5          | int        | `0` (off), `-1` (dynamic), or token count (max 24576 / 32768)                           | `-1` (dynamic)     |
 | Gemini 3            | string     | `minimal`, `low`, `medium`, `high`                                                      | API default (model-dependent) |
@@ -35,33 +36,34 @@ String values are case-insensitive. The full set of accepted strings is `none`, 
 
 ## OpenAI
 
-OpenAI reasoning models (o-series, gpt-5, gpt-5-mini) use a string effort level that maps to their `reasoning_effort` API parameter. The `xhigh` level is only accepted by gpt-5.2 and later minor versions; o-series and earlier gpt-5 releases top out at `high`.
+OpenAI reasoning models (o-series, gpt-5, gpt-5-mini, gpt-5.6 family) use a string effort level that maps to their `reasoning_effort` API parameter. The `xhigh` level requires gpt-5.2+; `none` and `max` require gpt-5.6+ (Sol/Terra/Luna); `minimal` is dropped on gpt-5.6+.
 
 ```yaml
 models:
   gpt-thinker:
     provider: openai
-    model: gpt-5-mini
-    thinking_budget: high   # minimal | low | medium | high | xhigh
+    model: gpt-5.6
+    thinking_budget: high   # none | minimal | low | medium | high | xhigh | max
 ```
 
 **Effort levels:**
 
 | Level     | Description                                              |
 | --------- | -------------------------------------------------------- |
-| `none`    | Don't request extra reasoning (alias for `0`); the API's own default still applies. |
-| `minimal` | Fastest; lightest reasoning pass.                        |
+| `none`    | No reasoning. Sent as-is on gpt-5.6+ (a real API value); on older models it just disables the local `thinking_budget` (the API's own default still applies). |
+| `minimal` | Fastest; lightest reasoning pass. Not accepted on gpt-5.6+ (dropped from the API). |
 | `low`     | Quick reasoning for straightforward tasks.               |
 | `medium`  | Balanced default.                                        |
 | `high`    | More thorough; recommended for complex tasks.            |
-| `xhigh`   | Near-maximum effort; slower but most accurate.           |
+| `xhigh`   | Near-maximum effort; slower but most accurate. Requires gpt-5.2+. |
+| `max`     | Maximum effort. Requires gpt-5.6+.                       |
 
-These effort levels (`minimal`–`xhigh`) are the **only** values accepted for OpenAI. Token counts, `max`, `adaptive`, and `adaptive/<effort>` are rejected with a configuration error at request time. The `xhigh` level is only supported by gpt-5.2 and later minor versions (e.g. gpt-5.2, gpt-5.4-mini); o-series and earlier gpt-5 releases top out at `high`. Older models (o1, o3-mini) only accept `low`/`medium`/`high` — sending an unsupported level returns an API error.
+Token counts, `adaptive`, and `adaptive/<effort>` are rejected with a configuration error at request time. `xhigh` is only supported by gpt-5.2 and later minor versions (e.g. gpt-5.2, gpt-5.4-mini); `none` and `max` are only supported by gpt-5.6 and later (Sol/Terra/Luna); `minimal` is not accepted on gpt-5.6+. Older models (o1, o3-mini) only accept `low`/`medium`/`high` — sending an unsupported level returns an API error.
 
 > [!WARNING]
 > **Tokens and max_tokens**
 >
-> OpenAI reasoning models always reason internally — even with `thinking_budget: none` there are hidden reasoning tokens that count against `max_tokens`. docker-agent automatically raises the output-token floor for its internal low-effort calls (e.g. title generation) so hidden reasoning cannot starve visible text output.
+> Older OpenAI reasoning models always reason internally — even with `thinking_budget: none` there are hidden reasoning tokens that count against `max_tokens`. On gpt-5.6+ (Sol/Terra/Luna), `none` is a real API value that genuinely disables reasoning. Docker Agent automatically raises the output-token floor for its internal low-effort calls (e.g. title generation) so hidden reasoning cannot starve visible text output.
 
 ## Anthropic
 
@@ -79,7 +81,7 @@ models:
     thinking_budget: 16384   # tokens reserved for internal reasoning
 ```
 
-docker-agent auto-adjusts `max_tokens` when you set a thinking budget but leave `max_tokens` at its default. If you set `max_tokens` explicitly, it must be greater than `thinking_budget`.
+Docker Agent auto-adjusts `max_tokens` when you set a thinking budget but leave `max_tokens` at its default. If you set `max_tokens` explicitly, it must be greater than `thinking_budget`.
 
 ### Adaptive thinking (Opus 4.6+ and Sonnet 4.6)
 
@@ -128,7 +130,7 @@ thinking_budget: none   # or 0
 
 ### Interleaved thinking
 
-Interleaved thinking lets the model reason between tool calls — useful for complex agentic tasks. docker-agent auto-enables it whenever a thinking budget is configured on a Claude model, so you only need to set it explicitly to turn it off:
+Interleaved thinking lets the model reason between tool calls — useful for complex agentic tasks. Docker Agent auto-enables it whenever a thinking budget is configured on a Claude model, so you only need to set it explicitly to turn it off:
 
 ```yaml
 models:
@@ -144,11 +146,11 @@ models:
 > [!NOTE]
 > **Temperature and top_p**
 >
-> When extended thinking is enabled, Anthropic requires `temperature=1.0`. docker-agent automatically suppresses any `temperature` or `top_p` settings you have configured — they are silently ignored while thinking is active.
+> When extended thinking is enabled, Anthropic requires `temperature=1.0`. Docker Agent automatically suppresses any `temperature` or `top_p` settings you have configured — they are silently ignored while thinking is active.
 
 ### Thinking display
 
-Newer Claude models (Opus 4.7+, Fable 5) hide thinking content by default at the API level. To keep reasoning visible, docker-agent requests `summarized` thinking whenever adaptive/effort-based thinking is used without an explicit `thinking_display`. Use `thinking_display` in `provider_opts` to override:
+Newer Claude models (Opus 4.7+, Fable 5) hide thinking content by default at the API level. To keep reasoning visible, Docker Agent requests `summarized` thinking whenever adaptive/effort-based thinking is used without an explicit `thinking_display`. Use `thinking_display` in `provider_opts` to override:
 
 ```yaml
 models:
@@ -157,13 +159,13 @@ models:
     model: claude-opus-4-7
     thinking_budget: adaptive
     provider_opts:
-      thinking_display: omitted   # summarized | display | omitted
+      thinking_display: omitted   # summarized | omitted (display: pre-4.6 models only)
 ```
 
 | Value        | Behavior                                                                              |
 | ------------ | ------------------------------------------------------------------------------------- |
-| `summarized` | Thinking blocks returned with a text summary (docker-agent default for adaptive thinking). |
-| `display`    | Full thinking blocks returned for display.                                            |
+| `summarized` | Thinking blocks returned with a text summary (Docker Agent default for adaptive thinking). |
+| `display`    | Full thinking blocks returned for display. Pre-4.6 token-thinking models only — rejected by Opus/Sonnet 4.6+, Sonnet 5, and Fable 5 (Docker Agent fails fast with a configuration error). |
 | `omitted`    | Thinking blocks hidden — only the signature is returned.                               |
 
 Full thinking tokens are billed regardless of `thinking_display`.
@@ -252,7 +254,7 @@ models:
       # interleaved_thinking is auto-enabled when thinking_budget is set
 ```
 
-**Claude Opus 4.6+ on Bedrock requires adaptive thinking** — these models reject `thinking.type=enabled` (token budgets). Configure them with `adaptive` or `adaptive/<effort>`; docker-agent auto-coerces token budgets and effort levels on these models with a warning:
+**Claude Opus 4.6+ on Bedrock requires adaptive thinking** — these models reject `thinking.type=enabled` (token budgets). Configure them with `adaptive` or `adaptive/<effort>`; Docker Agent auto-coerces token budgets and effort levels on these models with a warning:
 
 ```yaml
 models:
@@ -267,7 +269,7 @@ models:
 > [!WARNING]
 > **Bedrock thinking requirements**
 >
-> Bedrock Claude requires token-based `thinking_budget` values to be ≥ 1024 and less than `max_tokens`. docker-agent logs a warning and ignores the budget if either condition is violated. Interleaved thinking requires the `interleaved-thinking-2025-05-14` beta header, which docker-agent adds automatically; it is auto-enabled whenever a token thinking budget is set on a Bedrock-hosted Claude model (adaptive thinking interleaves on its own).
+> Bedrock Claude requires token-based `thinking_budget` values to be ≥ 1024 and less than `max_tokens`. Docker Agent logs a warning and ignores the budget if either condition is violated. Interleaved thinking requires the `interleaved-thinking-2025-05-14` beta header, which Docker Agent adds automatically; it is auto-enabled whenever a token thinking budget is set on a Bedrock-hosted Claude model (adaptive thinking interleaves on its own).
 
 ## Docker Model Runner (local models)
 
@@ -289,7 +291,7 @@ See the [Docker Model Runner provider page](../../providers/dmr/index.md) for de
 
 ## xAI (Grok) and Mistral
 
-xAI and Mistral run through docker-agent's OpenAI-compatible client, but the `reasoning_effort` parameter is only sent for OpenAI reasoning model names (o-series, gpt-5). **Setting `thinking_budget` on Grok or Mistral models currently has no effect** — the value is accepted by config validation but never sent to the API.
+xAI and Mistral run through Docker Agent's OpenAI-compatible client, but the `reasoning_effort` parameter is only sent for OpenAI reasoning model names (o-series, gpt-5). **Setting `thinking_budget` on Grok or Mistral models currently has no effect** — the value is accepted by config validation but never sent to the API.
 
 Grok and Mistral reasoning models (e.g. `grok-3-mini`, `magistral`) manage reasoning on their own; for non-reasoning models, consider the [think tool](../../tools/think/index.md) instead.
 
@@ -310,7 +312,7 @@ models:
     thinking_budget: 0
 ```
 
-`none` and `0` clear docker-agent's thinking configuration — no thinking parameter is sent. Models that always reason (OpenAI o-series, gpt-5, Gemini 3) then fall back to the API's default behavior and still reason internally; only models with optional thinking (Gemini 2.5, Claude, local models) are fully disabled.
+`none` and `0` clear Docker Agent's thinking configuration — no thinking parameter is sent. Models that always reason (OpenAI o-series, gpt-5 through gpt-5.5, Gemini 3) then fall back to the API's default behavior and still reason internally; gpt-5.6+ (Sol/Terra/Luna) sends `none` as a real API value that genuinely disables reasoning. Models with optional thinking (Gemini 2.5, Claude, local models) are also fully disabled.
 
 ## Choosing an Effort Level
 
@@ -325,13 +327,14 @@ models:
 
 ## Changing Thinking Level at Runtime
 
-While running in the TUI, press **Shift+Tab** to cycle the thinking effort level for the current model without editing your YAML config, or type `/effort <level>` to jump straight to a specific level (e.g. `/effort high`):
+While running in the TUI, press **Shift+Tab** to cycle the thinking effort level for the current model without editing your YAML config, or type `/effort <level>` to jump straight to a specific level (e.g. `/effort high`). Running `/effort` without an argument opens a picker listing the levels the current model supports:
 
-- The level steps through the model's supported range (model-specific), wrapping around — for example `none → minimal → low → medium → high → none` on OpenAI gpt-5/o-series, `none → minimal → low → medium → high → xhigh → none` on gpt-5.2+, `none → low → medium → high → max → none` on Anthropic Opus 4.6 and Sonnet 4.6, and `none → low → medium → high → xhigh → max → none` on Anthropic Opus 4.7+, Fable 5, and Mythos 5. For older Anthropic models (e.g. Sonnet 4.5) that only accept token budgets, effort-string cycling has no effect — use an integer `thinking_budget` in your YAML config instead.
+- The level steps through the model's supported range (model-specific), wrapping around — for example `none → minimal → low → medium → high → none` on OpenAI gpt-5/o-series, `none → minimal → low → medium → high → xhigh → none` on gpt-5.2+, `none → low → medium → high → xhigh → max → none` on gpt-5.6+ (no `minimal`), `none → low → medium → high → max → none` on Anthropic Opus 4.6 and Sonnet 4.6, and `none → low → medium → high → xhigh → max → none` on Anthropic Opus 4.7+, Fable 5, and Mythos 5. For older Anthropic models (e.g. Sonnet 4.5) that only accept token budgets, effort-string cycling has no effect — use an integer `thinking_budget` in your YAML config instead.
 - The current level is shown in the sidebar next to the model name (e.g. `openai/gpt-5 • high`).
 - This applies as a session override — it is **not** saved to the config file. The next session starts from the level defined in your YAML.
 - For models that don't support reasoning, and for remote runtimes, Shift+Tab is a no-op and an informational message is displayed.
 - `/effort` only accepts levels the current model supports; requesting an unsupported level shows the model's supported list. Like Shift+Tab, it is unavailable for non-reasoning models and remote runtimes.
+- Press <kbd>Tab</kbd> after `/effort` and a space to complete a level from the current model's supported range; it lists the same levels the picker shows (and, like the picker, offers no candidates for non-reasoning models or remote runtimes).
 
 ## Sharing Thinking Config Across Models
 

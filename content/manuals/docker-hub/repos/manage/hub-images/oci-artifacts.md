@@ -100,13 +100,9 @@ Steps:
 5. Go to the repository page on Docker Hub. The **Tags** section of the page
    shows the Helm chart tag.
 
-   ![List of repository tags](./images/oci-helm.png)
-
 6. Select the tag name to go to the page for that tag.
 
    The page lists a few useful commands for working with Helm charts.
-
-   ![Tag page of a Helm chart artifact](./images/oci-helm-tagview.png)
 
 ### Push a volume
 
@@ -146,8 +142,6 @@ Steps:
 4. Go to the repository page on Docker Hub. The **Tags** section on that page
    shows the volume tag.
 
-   ![Repository page showing a volume in the tag list](./images/oci-volume.png)
-
 ### Push a generic artifact file
 
 The following procedure shows how to push a generic OCI artifact to Docker Hub.
@@ -178,5 +172,3 @@ Steps:
 
 4. Go to the repository page on Docker Hub. The **Tags** section on that page
    shows the artifact tag.
-
-   ![Repository page showing an artifact in the tag list](./images/oci-artifact.png)

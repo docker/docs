@@ -10,6 +10,7 @@ aliases:
 > [!WARNING]
 > Docker Hub Automated Builds is a deprecated feature.
 > It will be fully retired on April 1, 2027.
+> See the [migration guide](migrate.md) to move to a supported CI/CD workflow.
 
 > [!NOTE]
 >

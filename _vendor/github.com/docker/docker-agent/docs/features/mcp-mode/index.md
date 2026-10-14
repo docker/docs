@@ -1,11 +1,12 @@
 ---
 title: "MCP Mode"
-description: "Expose your docker-agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications."
+description: "Expose your Docker Agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications."
 keywords: docker agent, ai agents, features, mcp mode
 weight: 40
+canonical: https://docs.docker.com/ai/docker-agent/features/mcp-mode/
 ---
 
-_Expose your docker-agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications._
+_Expose your Docker Agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications._
 
 ## Why MCP Mode?
 
@@ -28,7 +29,7 @@ The `docker agent serve mcp` command makes your agents available to any applicat
 $ docker agent serve mcp ./agent.yaml
 
 # Expose from a registry
-$ docker agent serve mcp agentcatalog/pirate
+$ docker agent serve mcp myorg/agent:tag
 
 # Set the working directory
 $ docker agent serve mcp ./agent.yaml --working-dir /path/to/project
@@ -44,8 +45,8 @@ To expose the MCP server over streaming HTTP instead, pass `--http`:
 # Streaming HTTP transport on the default 127.0.0.1:8081
 $ docker agent serve mcp ./agent.yaml --http
 
-# Override the listen address / port
-$ docker agent serve mcp ./agent.yaml --http --listen 0.0.0.0:9090
+# Override the listen address / port; non-loopback HTTP requires authentication
+$ docker agent serve mcp ./agent.yaml --http --listen 0.0.0.0:9090 --auth-token "$MCP_BEARER_TOKEN"
 ```
 
 | Flag                   | Default            | Description                                                                                                  |
@@ -54,9 +55,16 @@ $ docker agent serve mcp ./agent.yaml --http --listen 0.0.0.0:9090
 | `-l`, `--listen`       | `127.0.0.1:8081`   | Address to listen on when `--http` is enabled.                                                               |
 | `-a`, `--agent`        | all agents         | Expose a single named agent instead of every agent in the config.                                            |
 | `--tool-name`          | (none)             | Override the MCP tool identifier clients call (defaults to agent name); only valid when exposing one agent.  |
+| `--auth-token`          | (none)             | Require this Bearer token for HTTP requests. Required for non-loopback HTTP unless explicitly overridden.       |
+| `--insecure-no-auth`    | `false`            | Permit unauthenticated non-loopback HTTP. Use only behind a trusted authentication boundary.                    |
+| `--safety`              | `restricted`       | Tool safety policy for HTTP requests. CLI value overrides agent/runtime configuration.                           |
 | `--mcp-keepalive`      | `0`                | Interval between MCP keep-alive pings (e.g. `30s`); `0` disables keep-alive.                                 |
 
 Runtime configuration flags such as `--working-dir`, `--env-from-file`, `--models-gateway`, and hook flags are also available — see the [CLI reference](../cli/index.md).
+
+## HTTP security
+
+HTTP MCP defaults to loopback binding. A non-loopback `--listen` address requires `--auth-token`; use `--insecure-no-auth` only when a trusted reverse proxy or network boundary authenticates clients. The safety policy is resolved in this order: `--safety`, agent configuration, runtime configuration, then `restricted`. These HTTP-only flags do not affect stdio or `--attach` operation.
 
 ## Using with Claude Desktop
 
@@ -74,7 +82,7 @@ Add a configuration to your Claude Desktop MCP settings file:
         "agent", 
         "serve",
         "mcp",
-        "agentcatalog/coder",
+        "myorg/coder",
         "--working-dir",
         "/home/user/projects"
       ],
@@ -95,7 +103,7 @@ Restart Claude Desktop after updating the configuration.
 $ claude mcp add --transport stdio myagent \
   --env OPENAI_API_KEY=$OPENAI_API_KEY \
   --env ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY \
-  -- docker agent serve mcp agentcatalog/pirate --working-dir $(pwd)
+  -- docker agent serve mcp myorg/agent:tag --working-dir $(pwd)
 ```
 
 ## Multi-Agent in MCP Mode

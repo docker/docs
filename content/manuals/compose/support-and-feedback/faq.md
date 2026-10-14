@@ -15,6 +15,8 @@ Version one of the Docker Compose command-line binary was first released in 2014
 
 Version two of the Docker Compose command-line binary was announced in 2020, is written in Go, and is invoked with `docker compose`. Compose v2 ignores the version top-level element in the compose.yaml file.
 
+Compose v5, released in 2025, uses the same `docker compose` command and is functionally identical to Compose v2. Its primary distinction is the introduction of an official [Go SDK](/manuals/compose/compose-sdk.md).
+
 For further information, see [History and development of Compose](/manuals/compose/intro/history.md).
 
 ### What's the difference between `up`, `run`, and `start`?

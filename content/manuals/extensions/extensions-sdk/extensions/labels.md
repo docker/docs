@@ -56,5 +56,3 @@ When you create and install your unpublished extension, you can preview the exte
 >
 > You can re-tag your image in order to have a different image name that's not listed as a published extension.
 > Use `docker tag org/published-extension unpublished-extension` and then `docker extension install unpublished-extension`.
-
-![List preview](images/list-preview.png)

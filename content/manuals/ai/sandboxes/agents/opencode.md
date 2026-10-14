@@ -1,11 +1,13 @@
 ---
 title: OpenCode
-weight: 60
+weight: 90
 description: |
   Use OpenCode in Docker Sandboxes with multi-provider authentication and TUI
   interface for AI development.
 keywords: docker sandboxes, opencode, ai agent, authentication, sbx
 ---
+
+{{% include "sandboxes-local-scope.md" %}}
 
 This guide covers authentication, configuration, and usage of OpenCode in a
 sandboxed environment.
@@ -20,12 +22,15 @@ Create a sandbox and run OpenCode for a project directory:
 $ sbx run opencode ~/my-project
 ```
 
-The workspace parameter is optional and defaults to the current directory:
+`sbx run` defaults the workspace to the current directory:
 
 ```console
 $ cd ~/my-project
 $ sbx run opencode
 ```
+
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
 
 OpenCode launches a TUI (text user interface) where you can select your
 preferred LLM provider and interact with the agent.
@@ -33,25 +38,64 @@ preferred LLM provider and interact with the agent.
 ## Authentication
 
 OpenCode supports multiple providers. Store keys for the providers you want to
-use with [stored secrets](../security/credentials.md#stored-secrets):
+use with [stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g openai
-$ sbx secret set -g anthropic
-$ sbx secret set -g google
-$ sbx secret set -g xai
-$ sbx secret set -g groq
-$ sbx secret set -g aws
-$ sbx secret set -g openrouter
+$ sbx secret set openai
+$ sbx secret set anthropic
+$ sbx secret set google
+$ sbx secret set xai
+$ sbx secret set groq
+$ sbx secret set aws
+$ sbx secret set openrouter
 ```
 
 You only need to configure the providers you want to use. OpenCode detects
 available credentials and offers those providers in the TUI.
 
-You can also use environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`,
-`GOOGLE_GENERATIVE_AI_API_KEY`, `XAI_API_KEY`, `GROQ_API_KEY`,
-`AWS_ACCESS_KEY_ID`, `OPENROUTER_API_KEY`). See
-[Credentials](../security/credentials.md) for details on both methods.
+### GitHub Copilot
+
+To use GitHub Copilot models in OpenCode, configure a
+[GitHub credential](../configuration/credentials.md#github-token) for an
+account with Copilot access. When OpenCode starts, Docker Sandboxes configures
+its GitHub Copilot provider using that credential. You don't need a separate
+device login inside OpenCode.
+
+### OpenCode Zen API keys
+
+OpenCode Zen API keys aren't part of the built-in OpenCode credentials that
+`sbx secret set` supports. To use an OpenCode Zen API key, store it as a
+[custom secret](../configuration/credentials.md#custom-secrets):
+
+Set the `OPENCODE_API_KEY` environment variable on the host, then store it:
+
+```console
+$ sbx secret set-custom \
+    --host opencode.ai \
+    --env OPENCODE_API_KEY \
+    --value "$OPENCODE_API_KEY"
+```
+
+Custom secrets keep the real key in the host secret store. The sandbox receives
+`OPENCODE_API_KEY` as a placeholder, and the host-side proxy replaces that
+placeholder with the real key on requests to `opencode.ai`.
+
+OpenCode Zen also requires network access to `opencode.ai`:
+
+```console
+$ sbx policy allow network opencode.ai:443
+```
+
+If you add a global custom secret, recreate existing OpenCode sandboxes so the
+new environment variable is available inside the sandbox.
+
+## Model selection
+
+To select a local model or inference endpoint with `sbx run --model`, see
+[Use local and hosted models](../configuration/models.md).
+
+When you use `--model`, the model's supported thinking levels are available
+as OpenCode variants. Press Ctrl+T to cycle through them.
 
 ## Configuration
 
@@ -71,7 +115,7 @@ The sandbox runs `opencode` with no implicit flags. Args after `--` are passed
 straight through. For example, to resume an existing session:
 
 ```console
-$ sbx run opencode -- -s <session-id>
+$ sbx run --name <sandbox-name> -- -s <session-id>
 ```
 
 ### TUI mode

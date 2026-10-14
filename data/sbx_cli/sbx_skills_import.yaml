@@ -1,0 +1,57 @@
+name: sbx skills import
+synopsis: Import skills from supported agent directories
+experimental: true
+description: |-
+    Import skills already installed for supported coding agents on this
+    machine.
+
+    The following directories are checked in order:
+      ~/.agents/skills
+      ~/.claude/skills
+      ~/.config/opencode/skills
+      ~/.copilot/skills
+      ~/.cursor/skills
+      ~/.factory/skills
+
+    When the same skill appears in more than one directory, the first copy is used
+    and the others are skipped with a warning.
+
+    Importing a skill that is already installed replaces it completely, including
+    removing files that are no longer present. You will be prompted before a skill
+    is replaced; use --force to skip all prompts.
+
+    Symlinks at the top level are followed if they point to a directory. Symlinks
+    within skill folders and loose files at the top level are skipped.
+
+    Imported skills are available to Claude, Codex, Copilot, Cursor, Droid, and
+    OpenCode.
+usage: sbx skills import [flags]
+options:
+    - name: dry-run
+      default_value: "false"
+      usage: |
+        Preview which skills would be imported without copying anything
+    - name: force
+      shorthand: f
+      default_value: "false"
+      usage: Overwrite existing skills without prompting
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for import
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      sbx skills import
+
+      # Preview without changing anything
+      sbx skills import --dry-run
+see_also:
+    - sbx skills - (Experimental) Manage skills available in sandboxes

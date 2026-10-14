@@ -11,6 +11,33 @@ This page contains information about the new features, improvements, and changes
 in the Docker Hardened Images (DHI) platform. Release notes are aggregated by
 quarter and include only notable product changes.
 
+## Q4 2026
+
+New features and enhancements released in the fourth quarter of 2026.
+
+- EU data residency (early access): Docker can provision your DHI
+  subscription in the EU region. When your subscription is in the EU region,
+  Docker stores your mirrored and customized images in the EU. For more
+  information, see [EU data residency](../explore/eu-region.md).
+
+## Q3 2026
+
+New features and enhancements released in the third quarter of 2026.
+
+- DHI MCP server: The DHI catalog is now accessible via a remote MCP server at
+  `https://dhi.io/mcp`. Connect any MCP-capable AI assistant to search
+  repositories, inspect image metadata, retrieve SBOMs, check CVEs, and manage
+  mirrors using plain language. For more information, see [Use the DHI MCP
+  server](/dhi/tools/mcp/).
+- DHI API: VEX statements and suppressed CVEs for a Docker Hardened Image are
+  now available to query by digest through the DHI GraphQL API. For more
+  information, see [Use the DHI API](../tools/api.md).
+- DHI webhook payloads: Webhooks on a mirrored Docker Hardened Image repository
+  now include a `dhi_metadata` object describing the vulnerability fixes,
+  package changes, and configuration changes between builds. For more
+  information, see [Automate syncing with
+  webhooks](../how-to/mirror.md#automate-syncing-with-webhooks).
+
 ## Q2 2026
 
 New features and enhancements released in the second quarter of 2026.

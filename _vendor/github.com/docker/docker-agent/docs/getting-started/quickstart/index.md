@@ -3,6 +3,7 @@ title: "Quick Start"
 description: "Get up and running with Docker Agent in under 5 minutes. Pick whichever path suits you best."
 keywords: docker agent, ai agents, getting started, quick start
 weight: 30
+canonical: https://docs.docker.com/ai/docker-agent/getting-started/quickstart/
 aliases:
   - /ai/docker-agent/tutorial/
 ---
@@ -20,16 +21,15 @@ $ docker agent run
 
 This starts a general-purpose assistant with sensible defaults. Just start chatting.
 
-## Option B: Run a Pre-Built Agent from the Registry
+> [!NOTE]
+> This needs a model: a cloud provider API key, or a local model pulled through Docker Model Runner. [Set Up a Model](../set-up-a-model/index.md) walks through both paths.
 
-Try a ready-made agent from the [agent catalog](https://hub.docker.com/u/agentcatalog) — no YAML needed:
+## Option B: Run an Agent from a Registry
+
+Run an agent shared through any OCI-compatible registry — no local YAML needed:
 
 ```bash
-# Run a pirate-themed assistant
-$ docker agent run agentcatalog/pirate
-
-# Run a coding agent
-$ docker agent run agentcatalog/coder
+$ docker agent run myorg/agent:tag
 ```
 
 ## Option C: Generate a Config Interactively
@@ -78,6 +78,8 @@ This gives your agent:
 - **Shell access** to run commands
 - **Think tool** for step-by-step reasoning
 
+This config needs `ANTHROPIC_API_KEY` set. See [Set Up a Model](../set-up-a-model/index.md) for where to put it, or use a local `dmr/...` model that needs no key.
+
 ```bash
 # Launch the interactive terminal UI
 $ docker agent run agent.yaml
@@ -98,6 +100,16 @@ Once your agent is running, try asking it to:
 
 > [!TIP]
 > Add `--yolo` to auto-approve all tool calls: `docker agent run agent.yaml --yolo`
+
+## Take the Interactive Tour
+
+Prefer to learn by doing? Run:
+
+```bash
+$ docker agent getting-started
+```
+
+This launches a short, scripted tour inside the chat UI: sending messages, approving tool calls, the command palette, and slash commands. It's skippable at any point with <kbd>Esc</kbd>, and you can replay it later with the same command or the `/getting-started` slash command.
 
 ## Non-Interactive Mode
 

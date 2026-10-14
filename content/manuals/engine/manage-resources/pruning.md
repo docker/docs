@@ -10,12 +10,13 @@ aliases:
 ---
 
 Docker takes a conservative approach to cleaning up unused objects (often
-referred to as "garbage collection"), such as images, containers, volumes, and
-networks. These objects are generally not removed unless you explicitly ask
-Docker to do so. This can cause Docker to use extra disk space. For each type of
-object, Docker provides a `prune` command. In addition, you can use `docker
-system prune` to clean up multiple types of objects at once. This topic shows
-how to use these `prune` commands.
+referred to as "garbage collection"), such as images, containers, volumes,
+networks, and build cache. These objects are generally not removed unless you
+explicitly ask Docker to do so. This can cause Docker to use extra disk space.
+For each type of object, Docker provides a `prune` command. In addition, you can
+use `docker system prune` to clean up multiple types of objects at once
+(including unused build cache). This topic shows how to use these `prune`
+commands.
 
 ## Prune images
 
@@ -96,16 +97,18 @@ data.
 ```console
 $ docker volume prune
 
-WARNING! This will remove all volumes not used by at least one container.
+WARNING! This will remove anonymous local volumes not used by at least one container.
 Are you sure you want to continue? [y/N] y
 ```
 
 By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
 
-By default, all unused volumes are removed. You can limit the scope using
-the `--filter` flag. For instance, the following command only removes
-volumes which aren't labelled with the `keep` label:
+By default, only **anonymous** unused volumes are removed. Named volumes that
+aren't attached to a container are left alone unless you pass `--all` / `-a`.
+You can also limit the scope with the `--filter` flag. For instance, the
+following command only removes volumes which aren't labelled with the `keep`
+label:
 
 ```console
 $ docker volume prune --filter "label!=keep"
@@ -166,8 +169,10 @@ for all options, including `--all` to also remove internal and frontend images.
 ## Prune everything
 
 The `docker system prune` command is a shortcut that prunes images, containers,
-and networks. Volumes aren't pruned by default, and you must specify the
-`--volumes` flag for `docker system prune` to prune volumes.
+networks, and unused build cache (including BuildKit cache mounts). Volumes
+aren't pruned by default. Add `--volumes` to also remove unused **anonymous**
+volumes. Named unused volumes are left alone; use `docker volume prune --all`
+if you intend to delete those too.
 
 ```console
 $ docker system prune
@@ -181,7 +186,7 @@ WARNING! This will remove:
 Are you sure you want to continue? [y/N] y
 ```
 
-To also prune volumes, add the `--volumes` flag:
+To also prune unused anonymous volumes, add the `--volumes` flag:
 
 ```console
 $ docker system prune --volumes
@@ -189,9 +194,9 @@ $ docker system prune --volumes
 WARNING! This will remove:
         - all stopped containers
         - all networks not used by at least one container
-        - all volumes not used by at least one container
+        - all anonymous volumes not used by at least one container
         - all dangling images
-        - all build cache
+        - unused build cache
 
 Are you sure you want to continue? [y/N] y
 ```
@@ -199,9 +204,10 @@ Are you sure you want to continue? [y/N] y
 By default, you're prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
 
-By default, all unused containers, networks, and images are removed. You can
-limit the scope using the `--filter` flag. For instance, the following command
-removes items older than 24 hours:
+By default, unused containers and networks are removed, along with dangling
+images. Unused tagged images are kept unless you also pass `-a` / `--all`.
+You can further limit the scope with the `--filter` flag. For instance, the
+following command removes items older than 24 hours:
 
 ```console
 $ docker system prune --filter "until=24h"

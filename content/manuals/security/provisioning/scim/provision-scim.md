@@ -1,0 +1,385 @@
+---
+title: Set up SCIM provisioning
+linkTitle: Set up
+description: >-
+  Configure SCIM user provisioning and role mapping for Docker with Okta or
+  Microsoft Entra ID.
+keywords: SCIM setup, user provisioning, role mapping, Okta, Microsoft Entra ID,
+  identity provider, Docker Home
+weight: 10
+aliases:
+  - /enterprise/security/provisioning/scim/provision-scim/
+---
+
+{{< summary-bar feature_name="SSO" >}}
+
+## Supported attributes
+
+System for Cross-domain Identity Management (SCIM) uses attributes to sync user
+information between your identity provider (IdP) and Docker. Map these
+attributes to provision users and prevent duplicate accounts when using single
+sign-on (SSO).
+
+Docker supports the following SCIM attributes:
+
+| Attribute | Description |
+| :--- | :--- |
+| `userName` | User's primary email address, used as the unique identifier |
+| `externalId` | Identifier for the user in your IdP. Docker stores the value |
+| `name.givenName` | User's first name |
+| `name.familyName` | User's surname |
+| `active` | Indicates whether a user is enabled. Set to `false` to deprovision a user |
+
+For additional details about supported attributes and SCIM, see
+[Docker Hub API SCIM reference](/reference/api/hub/latest/#tag-scim).
+
+> [!IMPORTANT]
+>
+> Docker turns on Just-in-Time (JIT) provisioning by default when you configure
+> SSO. Before setting up SCIM, review
+> [how SCIM works with JIT](./_index.md#choose-how-scim-works-with-jit), then
+> decide which method manages provisioning.
+
+## Enable SCIM in Docker
+
+To enable SCIM:
+
+1. Sign in to [Docker Home](https://app.docker.com).
+1. Select **Identity & auth**, then **SSO and SCIM**.
+1. In the **SSO connections** table, select the **Actions** icon for your
+   connection, then select **Enable SCIM**.
+1. In the **Enable SCIM provisioning** dialog, select **Enable**.
+1. Copy the **SCIM Base URL** and **API Token**, then paste the values into
+   your IdP.
+
+To view the **SCIM Base URL** and **API Token** again, select the **Actions**
+icon, then **Edit SCIM**.
+
+## Enable SCIM in your IdP
+
+The IdP interface may differ from these steps. For more information, see your
+IdP's documentation:
+
+- [Okta](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm)
+- [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/user-provisioning)
+
+> [!NOTE]
+>
+> Microsoft Entra ID doesn't support SCIM and OIDC in the same non-gallery
+> application. For OIDC connections, create a separate non-gallery application
+> for SCIM provisioning.
+
+{{< tabs >}}
+{{< tab name="Okta" >}}
+
+### Step one: Enable SCIM
+
+1. Sign in to Okta and select **Admin** to open the admin portal.
+1. Open the application you created when you configured your SSO connection.
+1. On the application page, select the **General** tab, then
+   **Edit App Settings**.
+1. Enable SCIM provisioning, then select **Save**.
+1. Select **Provisioning**, then **Edit SCIM Connection**.
+1. To configure SCIM in Okta, set up your connection using the following
+   values and settings:
+   - **SCIM connector base URL**: The **SCIM Base URL** from Docker Home
+   - **Unique identifier field for users**: `email`
+   - **Supported provisioning actions**: **Push New Users** and
+     **Push Profile Updates**
+   - **Authentication Mode**: **HTTP Header**
+   - **Authorization**: The **API Token** from Docker Home
+1. Select **Test Connector Configuration**.
+1. Review the test results and select **Save**.
+
+### Step two: Enable synchronization
+
+1. In Okta, select **Provisioning**.
+1. Select **To App**, then **Edit**.
+1. Enable **Create Users**, **Update User Attributes**, and **Deactivate Users**.
+1. Select **Save**.
+1. Remove unnecessary mappings. The necessary mappings are:
+   - Username
+   - Given name
+   - Family name
+   - Email
+
+Next, [set up role mapping](#set-up-role-mapping).
+
+{{< /tab >}}
+{{< tab name="Entra ID (OIDC)" >}}
+
+Microsoft does not support SCIM and OIDC in the same non-gallery application.
+You must create a second non-gallery application in Entra ID for SCIM
+provisioning.
+
+### Step one: Create a separate SCIM app
+
+1. In the Microsoft Entra admin center, go to **Microsoft Entra ID** >
+   **Enterprise Applications** > **New application**.
+1. Select **Create your own application**.
+1. Name your application and choose
+   **Integrate any other application you don't find in the gallery**.
+1. Select **Create**.
+
+### Step two: Configure SCIM provisioning
+
+1. In your new SCIM application, go to **Provisioning** > **Get started**.
+1. Set **Provisioning Mode** to **Automatic**.
+1. Under **Admin Credentials**:
+   - **Tenant URL**: Paste the **SCIM Base URL** from Docker Home.
+   - **Secret Token**: Paste the **SCIM API token** from Docker Home.
+1. Select **Test Connection** to verify.
+1. Select **Save** to store credentials.
+
+Next, [set up role mapping](#set-up-role-mapping).
+
+{{< /tab >}}
+{{< tab name="Entra ID (SAML 2.0)" >}}
+
+1. In the Microsoft Entra admin center, go to **Microsoft Entra ID** >
+   **Enterprise Applications**, and select your Docker SAML app.
+1. Select **Provisioning** > **Get started**.
+1. Set **Provisioning Mode** to **Automatic**.
+1. Under **Admin Credentials**:
+   - **Tenant URL**: Paste the **SCIM Base URL** from Docker Home.
+   - **Secret Token**: Paste the **SCIM API token** from Docker Home.
+1. Select **Test Connection** to verify.
+1. Select **Save** to store credentials.
+
+Next, [set up role mapping](#set-up-role-mapping).
+
+{{< /tab >}}
+{{< /tabs >}}
+
+## Set up role mapping
+
+You can assign
+[Docker roles](/manuals/security/roles-and-permissions/core-roles.md) to users
+by adding optional SCIM attributes in your IdP. These attributes override
+default role and team values set in your SSO configuration.
+
+> [!NOTE]
+>
+> Role mappings are supported for both SCIM and Just-in-Time (JIT)
+> provisioning. For JIT, role mapping applies only when the user is first
+> provisioned.
+
+The following table lists the supported optional user-level attributes:
+
+| Attribute | Possible values | Notes |
+| :--- | :--- | :--- |
+| `dockerRole` | `member`, `editor`, or `owner` | Overrides the default role. If unset, the user has the `member` role |
+| `dockerOrg` | Docker organization name, such as `moby` | Overrides the default organization. If `dockerOrg` and `dockerTeam` are set, the user is provisioned to the team in this organization |
+| `dockerTeam` | Docker Team name, such as `developers` | Provisions the user to the team in the default or specified organization. Docker creates the team if it doesn't exist. You can also use [group mapping](group-mapping.md) to assign users to multiple teams or organizations |
+
+The external namespace for these attributes is
+`urn:ietf:params:scim:schemas:extension:docker:2.0:User`. Enter this value when
+you create custom SCIM attributes for Docker in your IdP.
+
+{{< tabs >}}
+{{< tab name="Okta" >}}
+
+### Step one: Set up role mapping in Okta
+
+1. Set up [SSO](/manuals/security/authentication/single-sign-on/connect.md) and
+   SCIM.
+1. In the Okta admin portal, go to **Directory**, select **Profile Editor**,
+   and then **User (Default)**.
+1. Select **Add Attribute** and configure the values for the role, organization,
+   or team you want to add. Exact naming isn't required.
+1. Return to the **Profile Editor** and select your application.
+1. Select **Add Attribute** and enter the required values. The **External Name**
+   and **External Namespace** must be exact.
+   - The external name values for organization/team/role mapping are
+     `dockerOrg`, `dockerTeam`, and `dockerRole`, as listed in the previous
+     table.
+   - The external namespace is the same for all of them:
+     `urn:ietf:params:scim:schemas:extension:docker:2.0:User`.
+1. After creating the attributes, navigate to the top of the page and select
+   **Mappings**, then **Okta User to YOUR APP**.
+1. Go to the newly created attributes and map the variable names to the external
+   names, then select **Save Mappings**. If you're using JIT provisioning,
+   continue to the following steps.
+1. Navigate to **Applications** and select **YOUR APP**.
+1. Select **General**, then **SAML Settings**, and **Edit**.
+1. Select **Step 2** and configure the mapping from the user attribute to the
+   Docker variables.
+
+### Step two: Assign roles by user
+
+1. In the Okta Admin portal, select **Directory**, then **People**.
+1. Select **Profile**, then **Edit**.
+1. Select **Attributes** and update the attributes to the desired values.
+
+### Step three: Assign roles by group
+
+1. In the Okta Admin portal, select **Directory**, then **People**.
+1. Select **YOUR GROUP**, then **Applications**.
+1. Open **YOUR APPLICATION** and select the **Edit** icon.
+1. Update the attributes to the desired values.
+
+If a user doesn't already have attributes set up, users who are added to the
+group will inherit these attributes upon provisioning.
+
+{{< /tab >}}
+{{< tab name="Entra ID (SAML 2.0 and OIDC)" >}}
+
+### Step one: Configure attribute mappings
+
+1. Complete the [SCIM provisioning setup](/manuals/security/provisioning/scim/provision-scim.md#enable-scim-in-docker).
+1. In the Microsoft Entra admin center, open **Microsoft Entra ID** >
+   **Enterprise Applications**, and select your SCIM application.
+1. Go to **Provisioning** > **Mappings** >
+   **Provision Microsoft Entra ID Users**.
+1. Add or update the following mappings:
+   - `userPrincipalName` -> `userName`
+   - `mail` -> `emails.value`
+   - Optional. Map `dockerRole`, `dockerOrg`, or `dockerTeam` using one of the
+     [mapping methods](/manuals/security/provisioning/scim/provision-scim.md#set-up-role-mapping).
+1. Remove any unsupported attributes to prevent sync errors.
+1. Optional. Go to **Mappings** > **Provision Microsoft Entra ID Groups**:
+   - If group provisioning causes errors, set **Enabled** to **No**.
+   - If enabling, test group mappings carefully.
+1. Select **Save** to apply mappings.
+
+### Step two: Choose a role mapping method
+
+You can map `dockerRole`, `dockerOrg`, or `dockerTeam` using one of the
+following methods:
+
+#### Expression mapping
+
+Use this method if you only need to assign Docker roles like `member`, `editor`,
+or `owner`.
+
+1. In the **Edit Attribute** view, set the mapping type to **Expression**.
+1. In the **Expression** field:
+   1. If your App Roles match Docker roles exactly, use:
+      `SingleAppRoleAssignment([appRoleAssignments])`
+   1. If they don't match, use a switch expression:
+      `Switch(SingleAppRoleAssignment([appRoleAssignments]), "My Corp Admins", "owner", "My Corp Editors", "editor", "My Corp Users", "member")`
+1. Set:
+   - **Target attribute**: `urn:ietf:params:scim:schemas:extension:docker:2.0:User:dockerRole`
+   - **Match objects using this attribute**: No
+   - **Apply this mapping**: Always
+1. Save your changes.
+
+> [!WARNING]
+>
+> You can't use `dockerOrg` or `dockerTeam` with this method. Expression mapping
+> is only compatible with one attribute.
+
+#### Direct mapping
+
+Use this method if you need to map multiple attributes (`dockerRole` +
+`dockerTeam`).
+
+1. For each Docker attribute, choose a unique Entra extension attribute
+   (`extensionAttribute1`, `extensionAttribute2`, etc.).
+1. In the **Edit Attribute** view:
+   - Set mapping type to **Direct**.
+   - Set **Source attribute** to your selected extension attribute.
+   - Set **Target attribute** to one of:
+     - `dockerRole: urn:ietf:params:scim:schemas:extension:docker:2.0:User:dockerRole`
+     - `dockerOrg: urn:ietf:params:scim:schemas:extension:docker:2.0:User:dockerOrg`
+     - `dockerTeam: urn:ietf:params:scim:schemas:extension:docker:2.0:User:dockerTeam`
+   - Set **Apply this mapping** to **Always**.
+1. Save your changes.
+
+Assign extension attribute values with Microsoft Graph.
+
+### Step three: Assign users and groups
+
+For either mapping method:
+
+1. In the SCIM app, go to **Users and Groups** > **Add user/group**.
+1. Select the users or groups to provision to Docker.
+1. Select **Assign**.
+
+If you're using expression mapping:
+
+1. Go to **App registrations** > your SCIM app > **App Roles**.
+1. Create App Roles that match Docker roles.
+1. Assign users or groups to App Roles under **Users and Groups**.
+
+If you're using direct mapping:
+
+1. Go to [Microsoft Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer)
+   and sign in as a tenant admin.
+1. Use Microsoft Graph API to assign attribute values. Example PATCH request:
+
+```bash
+PATCH https://graph.microsoft.com/v1.0/users/{user-id}
+Content-Type: application/json
+
+{
+  "onPremisesExtensionAttributes": {
+    "extensionAttribute1": "owner",
+    "extensionAttribute2": "moby",
+    "extensionAttribute3": "developers"
+  }
+}
+```
+
+> [!NOTE]
+>
+> You must use a different extension attribute for each SCIM field. Microsoft
+> Graph can update these attributes for cloud-only users that haven't
+> previously been synchronized from an on-premises directory.
+
+{{< /tab >}}
+{{< /tabs >}}
+
+See the documentation for your IdP for additional details:
+
+- [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-add-custom-user-attributes.htm)
+- [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/customize-application-attributes#provisioning-a-custom-extension-attribute-to-a-scim-compliant-application)
+
+## Test SCIM provisioning
+
+After completing role mapping, you can test the configuration manually.
+
+{{< tabs >}}
+{{< tab name="Okta" >}}
+
+1. In the Okta admin portal, go to **Directory > People**.
+1. Select a user you've assigned to your SCIM application.
+1. Select **Provision User**.
+1. Wait a few seconds, then check the Docker
+   **Members** in [Docker Home](https://app.docker.com).
+1. If the user doesn't appear, review logs in **Reports > System Log** and
+   confirm SCIM settings in the app.
+
+{{< /tab >}}
+{{< tab name="Entra ID (OIDC and SAML 2.0)" >}}
+
+1. In the Microsoft Entra admin center, go to **Microsoft Entra ID** >
+   **Enterprise Applications**, and select your SCIM app.
+1. Go to **Provisioning** > **Provision on demand**.
+1. Select a user or group and choose **Provision**.
+1. Confirm that the user appears in the Docker
+   **Members** in [Docker Home](https://app.docker.com).
+1. If needed, check **Provisioning logs** for errors.
+
+{{< /tab >}}
+{{< /tabs >}}
+
+## Disable SCIM
+
+You can disable SCIM only while JIT provisioning is turned on. When SCIM is
+off, users remain in the organization, but changes from your IdP stop
+syncing. To deprovision these users, remove them manually from the
+organization.
+
+1. Sign in to [Docker Home](https://app.docker.com).
+1. Select **Identity & auth**, then **SSO and SCIM**.
+1. In the **SSO connections** table, select the **Actions** icon.
+1. If JIT is off, select **Enable JIT provisioning**, then **Enable**. Open
+   the **Actions** menu again.
+1. Select **Disable SCIM**.
+1. Select **Disable** to confirm.
+
+## Next steps
+
+- Set up [Group mapping](/manuals/security/provisioning/scim/group-mapping.md).
+- [Troubleshoot provisioning](/manuals/security/provisioning/troubleshoot-provisioning.md).

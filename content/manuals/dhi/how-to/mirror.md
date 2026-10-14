@@ -34,9 +34,23 @@ repositories:
 
 ## Mirror a DHI repository to your organization
 
-To mirror repositories, you must be an organization owner or editor, or use a
-personal access token (PAT) or organization access token (OAT). See the CLI and
-Terraform tabs in the following sections for required permission scopes.
+Organization owners, editors, and members with a [custom role](../../security/roles-and-permissions/custom-roles/_index.md)
+that includes the DHI mirroring permission can create, view, and manage mirrors.
+When using the CLI or Terraform, you can also mirror using an [organization
+access token (OAT)](../../security/access-tokens/organization-access-tokens.md) with the
+appropriate permission scopes, without requiring role-based access.
+
+When a member with a custom role that includes the DHI mirroring permission
+creates a mirror, Docker automatically creates and manages the
+`dhi-mirroring-admins` team in your organization, adds that member to it, and
+grants the team access to the new mirror. This lets the member manage mirrors
+they create without organization owner or editor access. Mirrors created by
+organization owners or editors don't use this team. Removing members from this
+team may affect their ability to view and manage mirrors.
+
+You can mirror image and chart repositories to your organization's namespace on
+Docker Hub. Mirroring makes the repositories available within your organization
+and lets you customize them for your environment:
 
 - Image repositories: Mirroring lets you customize images by adding packages,
   OCI artifacts (such as custom certificates or additional tools), environment
@@ -61,7 +75,7 @@ Terraform tabs in the following sections for required permission scopes.
     - To mirror an image repository, select **Use this image** > **Mirror
       repository**, and then follow the on-screen instructions. If you have the ELS add-on, you can also
       select **Enable support for end-of-life versions**.
-    - To mirror a Helm chart repository, select **Get Helm chart**, and then follow the on-screen instructions.
+    - To mirror a Helm chart repository, select **Use this chart**, and then follow the on-screen instructions.
 
 It may take a few minutes for all the tags to finish mirroring.
 
@@ -69,9 +83,9 @@ It may take a few minutes for all the tags to finish mirroring.
 {{< tab name="CLI" >}}
 
 Authenticate with `docker login` using your Docker credentials, a [personal
-access token (PAT)](../../security/access-tokens.md) with **Read & Write**
+access token (PAT)](../../security/access-tokens/personal-access-tokens.md) with **Read & Write**
 permissions, or an [organization access token
-(OAT)](../../enterprise/security/access-tokens.md). When using an OAT, the
+(OAT)](../../security/access-tokens/organization-access-tokens.md). When using an OAT, the
 available operations depend on the token's permission scope:
 
 - To list mirrored repositories, the OAT must have read (pull) access to the
@@ -118,37 +132,9 @@ $ docker dhi mirror list --org my-org --type helm-chart
 {{< tab name="Terraform" >}}
 
 You can manage DHI mirrors as infrastructure-as-code using the [DHI Terraform
-provider](https://registry.terraform.io/providers/docker-hardened-images/dhi/latest/docs).
+provider](/dhi/tools/terraform/).
 
-First, install and configure the provider:
-
-```hcl
-terraform {
-  required_providers {
-    dhi = {
-      source = "docker-hardened-images/dhi"
-    }
-  }
-}
-
-provider "dhi" {
-  docker_hub_username = var.docker_username
-  docker_hub_password = var.docker_password
-  organization        = var.org_name
-}
-```
-
-> [!NOTE]
->
-> Instead of specifying credentials in the provider block, you can set the
-> `DOCKER_USERNAME`, `DOCKER_PASSWORD`, and `DHI_ORG` environment variables. You
-> can also authenticate using an organization access token (OAT) in place of a
-> password. Set `DOCKER_USERNAME` to your organization namespace and
-> `DOCKER_PASSWORD` to the OAT. When using an OAT, the same permission scopes
-> apply as with the CLI: read (pull) access is required to list mirrors, and
-> push access is required to create or delete them.
-
-Then, define a `dhi_mirror` resource for each repository you want to mirror:
+Define a `dhi_mirror` resource for each repository you want to mirror:
 
 ```hcl
 resource "dhi_mirror" "golang" {
@@ -189,6 +175,14 @@ other Docker Hub repository, so you can manage access and permissions, configure
 webhooks, and use other standard Hub features. See [Docker Hub
 repositories](/manuals/docker-hub/repos/_index.md) for details.
 
+### Mirrors in the EU region
+
+If your organization's DHI subscription is in the EU region, Docker creates
+your mirrored repositories on Docker Hub in the EU. Mirrors created before your
+subscription moved to the EU region stay in their original region. For
+details, including how to get a subscription in the EU region, see [EU data
+residency](../explore/eu-region.md).
+
 ### Stop mirroring a repository
 
 After you stop mirroring, the repository remains, but it no longer receives
@@ -214,9 +208,9 @@ updates. You can still use the last images or charts that were mirrored.
 {{< tab name="CLI" >}}
 
 Authenticate with `docker login` using your Docker credentials, a [personal
-access token (PAT)](../../security/access-tokens.md) with **Read & Write**
+access token (PAT)](../../security/access-tokens/personal-access-tokens.md) with **Read & Write**
 permissions, or an [organization access token
-(OAT)](../../enterprise/security/access-tokens.md) with push access to the
+(OAT)](../../security/access-tokens/organization-access-tokens.md) with push access to the
 relevant repository.
 
 Use the [`docker dhi mirror`](/reference/cli/docker/dhi/mirror/) command:
@@ -246,10 +240,20 @@ You can use any standard workflow to mirror the image, such as the
 API](/reference/api/registry/latest/), third-party registry tools, or CI/CD
 automation.
 
-However, to preserve the full security context, including attestations, you must
-also mirror its associated OCI artifacts. DHI repositories store the image
-layers on `dhi.io` (or `docker.io` for customized images) and the signed
-attestations in a separate registry (`registry.scout.docker.com`).
+Mirroring an image requires copying both the image and its associated signed
+attestations, including SBOMs, provenance, and VEX. Copying only the image does
+not preserve these attestations in your destination registry.
+
+The `dhi.io` proxy provides access to DHI catalog images and their associated
+attestations. It retrieves image manifests and layers from Docker Hub, and
+attestations from `registry.scout.docker.com`.
+
+Customer mirrors and customized images are accessed through your organization's
+repositories on Docker Hub. These repositories are not available through
+`dhi.io`. The following examples therefore use two source locations:
+`docker.io/<your-org>/<repository>` for the image and
+`registry.scout.docker.com/<your-org>/<repository>` for its attestations. Both
+are copied into the same repository in your destination registry.
 
 To copy both, you can use [`regctl`](https://regclient.org/cli/regctl/), an
 OCI-aware CLI that supports mirroring images along with attached artifacts such
@@ -276,26 +280,165 @@ Other common webhook use cases include:
 - Signing or promoting images
 - Sending notifications to downstream systems
 
-#### Example webhook payload
+When a webhook fires, Docker Hub sends the standard [webhook
+payload](/docker-hub/repos/manage/webhooks/#example-webhook-payload). For a
+mirrored DHI repository, the payload also includes an additional
+`dhi_metadata` object. This object describes what changed between the newly
+pushed build and the previous build of the same tag, including vulnerability
+fixes, package changes, and configuration changes.
 
-When a webhook is triggered, Docker Hub sends a JSON payload like the following:
+> [!NOTE]
+>
+> Docker Hub adds `dhi_metadata` only to pushes on mirrored DHI repositories.
+> Webhooks on other repositories deliver the standard payload.
 
-```json{collapse=true}
+Each DHI build produces a signed changelog attestation. At webhook delivery
+time, Docker Hub retrieves the changelog for the pushed image and embeds it in
+the payload as `dhi_metadata`.
+
+DHI changelogs are generated per architecture, so `dhi_metadata` is a map
+keyed by the architecture-specific manifest digest. A multi-platform image
+push contains an entry for each platform that has a changelog. Match the
+digest key against the platform you care about instead of assuming a single
+entry.
+
+#### `dhi_metadata` fields
+
+Each platform entry contains the following fields.
+
+| Field | Type | Description |
+| :---- | :---- | :---- |
+| `schema_version` | integer | Version of the `dhi_metadata` schema. |
+| `change_categories` | array of strings | High-level summary of what changed in this build. See [Change categories](#change-categories). |
+| `previous_version` | object | The prior build this one is compared against. Contains `tag` and `digest`. |
+| `changes` | object | Detailed diff versus the previous version. See the following table. |
+
+The `changes` object contains:
+
+| Field | Type | Description |
+| :---- | :---- | :---- |
+| `vulnerabilities_fixed` | array | CVEs resolved in this build. Each entry has `cve_id`, `severity`, `package`, and `fixed_in_version`. |
+| `packages_updated` | array | Packages whose version changed. Each entry has `name`, `type`, `old_version`, and `new_version`. |
+| `packages_added` | array | Packages added in this build. Each entry has `name`, `type`, and `version`. |
+| `packages_removed` | array | Packages removed in this build. Each entry has `name`, `type`, and `version`. |
+| `environment_variables_changed` | array | Changes to environment variables. Each entry has `change`, `key`, and `from_value` or `to_value` as applicable. |
+| `labels_changed` | array | Changes to image labels, in the same shape as environment variable changes. |
+| `configuration_changed` | array | Changes to other image configuration. For example, the entrypoint. |
+
+When a change type has no entries, its array is present but empty, shown as `[]`.
+
+#### Change categories
+
+`change_categories` gives a quick, machine-readable summary of the build.
+
+| Value | Meaning |
+| :---- | :---- |
+| `vulnerability_fix` | The build resolves one or more CVEs. See `changes.vulnerabilities_fixed`. |
+| `version_upgrade` | One or more packages changed version. See `changes.packages_updated`. |
+| `other` | The build has package, environment variable, label, or configuration changes that don't fall into either category above. |
+
+A build can have more than one category. For example, a build that fixes a CVE
+and also bumps a package version returns both `vulnerability_fix` and
+`version_upgrade`. A build with no changes at all returns an empty array.
+
+#### Example: vulnerability fix and version upgrade
+
+The following excerpt shows the `dhi_metadata` object from a webhook payload
+for a push to a mirrored DHI repository. The example is trimmed to a single
+platform and a subset of changes for readability. A real payload contains one
+`dhi_metadata` entry per architecture.
+
+```json {collapse=true}
 {
-  "callback_url": "https://registry.hub.docker.com/u/exampleorg/dhi-python/hook/abc123/",
-  "push_data": {
-    "pushed_at": 1712345678,
-    "pusher": "trustedbuilder",
-    "tag": "3.13-alpine3.21"
-  },
-  "repository": {
-    "name": "dhi-python",
-    "namespace": "exampleorg",
-    "repo_name": "exampleorg/dhi-python",
-    "repo_url": "https://hub.docker.com/r/exampleorg/dhi-python",
-    "is_private": true,
-    "status": "Active",
-    ...
+  ...
+  "dhi_metadata": {
+    "sha256:04639747b6d72bcf1d0322f2a5b122ee76d963e31bb4a070891b25f15a5001c5": {
+      "schema_version": 1,
+      "change_categories": ["vulnerability_fix", "version_upgrade"],
+      "previous_version": {
+        "tag": "2-compat-fips-dev",
+        "digest": "sha256:1738aa35838f520431c898b85d7cd60da71d8f997965287db4f3be27c1df32a1"
+      },
+      "changes": {
+        "vulnerabilities_fixed": [
+          {
+            "cve_id": "CVE-2019-9192",
+            "severity": "low",
+            "package": "glibc",
+            "fixed_in_version": "2.41-12+deb13u4+dhi0"
+          },
+          {
+            "cve_id": "CVE-2018-20796",
+            "severity": "low",
+            "package": "glibc",
+            "fixed_in_version": "2.41-12+deb13u4+dhi0"
+          }
+        ],
+        "packages_updated": [
+          {
+            "name": "glibc",
+            "type": "deb",
+            "old_version": "2.41-12+deb13u4",
+            "new_version": "2.41-12+deb13u4+dhi0"
+          },
+          {
+            "name": "libc6",
+            "type": "deb",
+            "old_version": "2.41-12+deb13u4",
+            "new_version": "2.41-12+deb13u4+dhi0"
+          }
+        ],
+        "packages_added": [],
+        "packages_removed": [],
+        "environment_variables_changed": [],
+        "labels_changed": [
+          {
+            "change": "changed",
+            "key": "com.docker.dhi.chain-id",
+            "from_value": "sha256:4567092c648d813b8c4c60c7d100fc34df817dd5cb4c7968e9a5c43bafb9e7a5",
+            "to_value": "sha256:62d4e2090951e812a87fb599db362677f72dee095f85889ea56df63c0999b02a"
+          }
+        ],
+        "configuration_changed": []
+      }
+    }
+  }
+}
+```
+
+#### Example: version bump with no CVEs
+
+When a build only bumps package versions, `change_categories` contains
+`version_upgrade` and `vulnerabilities_fixed` is empty.
+
+```json {collapse=true}
+{
+  ...
+  "dhi_metadata": {
+    "sha256:2982980b6bb3cdedafa9377bcc37405c20ed48702deef11faf13ec99d596057d": {
+      "schema_version": 1,
+      "change_categories": ["version_upgrade"],
+      "previous_version": {
+        "tag": "5-fips-dev",
+        "digest": "sha256:81355a1301ecc5f78dd87b68a284642d7b6bfbd86f3a37f3932fad7ecf1141e6"
+      },
+      "changes": {
+        "vulnerabilities_fixed": [],
+        "packages_updated": [
+          {
+            "name": "sqlite3",
+            "type": "deb",
+            "old_version": "3.46.1-7+deb13u2+dhi0",
+            "new_version": "3.46.1-7+deb13u2+dhi1"
+          }
+        ],
+        "packages_added": [],
+        "packages_removed": [],
+        "environment_variables_changed": [],
+        "labels_changed": [],
+        "configuration_changed": []
+      }
+    }
   }
 }
 ```
@@ -317,11 +460,11 @@ same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
 
    In this example, you authenticate as your Docker organization using an
    [organization access token
-   (OAT)](../../enterprise/security/access-tokens.md). The OAT must have at
+   (OAT)](../../security/access-tokens/organization-access-tokens.md). The OAT must have at
    least pull access to every DHI repository you want to mirror. Only
    repositories in the token's scope are accessible. Alternatively, you can
    authenticate as a Docker Hub user with a [personal access token
-   (PAT)](../../security/access-tokens.md) that has `read only` access.
+   (PAT)](../../security/access-tokens/personal-access-tokens.md) that has `read only` access.
 
    > [!WARNING]
    >

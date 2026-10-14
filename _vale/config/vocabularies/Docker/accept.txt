@@ -23,13 +23,12 @@ autolock
 Azure
 Azure AD
 [Bb]ackport
+[Bb]enchmarked
 bootup
 Bitnami
 Btrfs
 Bugsnag
-BuildKit
 buildkitd
-BusyBox
 cagent
 CD
 CentOS
@@ -69,24 +68,17 @@ Dex
 displayName
 Django
 DMR
-Docker Build Cloud
-Docker Business
 Docker Dashboard
-Docker Desktop
-Docker Engine
 Docker Extension
-Docker Hub
-Docker Scout
-Docker Team
 Docker-Sponsored Open Source
 Docker's
-Dockerfile
 dockerignore
 Dockerize
 Dockerized
 Dockerizing
 Dependabot
 DuckDuckGo
+Dynatrace
 Entra
 EPERM
 ESXi
@@ -104,8 +96,6 @@ GeoNetwork
 GGUF
 Git
 Gitea
-GitHub
-GitHub Actions
 Google
 Gradle
 Grafana
@@ -127,7 +117,6 @@ IPv[46]
 IPvlan
 isort
 Jamf
-JavaScript
 JetBrains
 JFrog
 JUnit
@@ -140,7 +129,6 @@ Kubeadm
 kubectl
 kubefwd
 kubelet
-Kubernetes
 Laradock
 Laravel
 libseccomp
@@ -151,7 +139,6 @@ logback
 Loggly
 Logstash
 lookup
-macOS
 macvlan
 Mail(chimp|gun)
 mfsymlinks
@@ -162,7 +149,6 @@ misconfiguration
 [Mm]ixins?
 monorepos?
 musl
-MySQL
 nameserver
 namespaced?
 namespacing
@@ -173,12 +159,10 @@ netlabel
 netlink
 Netplan
 NFSv\d
-Nginx
 npm
 nvm
 Nutanix
 Nuxeo
-NVIDIA
 OAuth
 Okta
 Ollama
@@ -197,7 +181,6 @@ pluggable
 Postgres
 psycopg
 pytest
-PowerShell
 Python
 Qualcomm
 Quickview
@@ -223,10 +206,12 @@ Sigstore
 Snyk
 Solr
 SonarQube
+Sonatype
 Sonoma
 Splunk
 SQLite
 stargz
+eStargz
 stdin
 stdout
 subfolder
@@ -240,7 +225,6 @@ sysctls
 Sysdig
 systemd
 teleop
-Testcontainers
 tmpfs
 Traefik
 Trivy
@@ -258,7 +242,6 @@ Unix
 unmarshalling
 unmanaged
 upsert
-Visual Studio Code
 VMware
 VPNKit
 vSphere
@@ -288,9 +271,7 @@ Zsh
 [Aa]utobuilds?
 [Aa]utotests?
 [Aa]utoscaling
-[Bb]uildx
 [Bb]uildpack(s)?
-[Bb]uildx
 [Cc]odenames?
 [Cc]ompose
 [Cc]onfigs
@@ -323,6 +304,7 @@ Zsh
 README
 [Rr]eal-time
 [Rr]egex(es)?
+[Rr]uleset(s)?
 [Rr]untimes?
 [Ss]andbox(ed)?
 [Ss]eccomp
@@ -354,7 +336,6 @@ README
 [Ee]vals?
 [Ll]abspaces?
 [Uu]nsloth
-AppArmor
 [Aa]utolocking
 [Bb]oolean
 [Bb]reakpoint
@@ -424,20 +405,24 @@ bootloader
 Buildkite
 crypto
 Graylog
+Heartbleed
 Kubuntu
 Libnetwork
 lockfile
 Lubuntu
 multimodal
 multithreading
+Log4Shell
 NLP
 Nodemon
 oldoldstable
 parallelizable
 PHPUnit
 pnpm
-PyTorch
+Shellshock
+Spring4Shell
 superset
 tokenization
 WebGL
 Xubuntu
+Netlify

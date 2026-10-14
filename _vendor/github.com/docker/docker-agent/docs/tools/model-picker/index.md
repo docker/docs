@@ -4,6 +4,7 @@ description: "Let the agent pick between several models per turn."
 keywords: docker agent, ai agents, tools, toolsets, model picker tool
 linkTitle: "Model Picker"
 weight: 200
+canonical: https://docs.docker.com/ai/docker-agent/tools/model-picker/
 ---
 
 _Let the agent pick between several models per turn._

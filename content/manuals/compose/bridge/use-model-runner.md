@@ -85,7 +85,7 @@ When `modelRunner.enabled` is `true`, Compose Bridge uses the generated manifest
 - Service: Exposes port `80` (maps to container port `12434`)
 - `PersistentVolumeClaim`: Stores model files
 
-The `modelRunner.enabled` setting also determines the number of replicas for the `model-runner-deployment`:
+The `modelRunner.enabled` setting also determines the number of replicas for the in-cluster `model-runner-deployment`:
 
-- When `true`, the deployment replica count is set to 1, and Docker Model Runner is deployed in the Kubernetes cluster.
-- When `false`, the replica count is 0, and no Docker Model Runner resources are deployed.
+- When `true`, the Kubernetes deployment replica count is set to 1, and Docker Model Runner is deployed in the cluster.
+- When `false`, the Kubernetes deployment replica count is 0 (no in-cluster Model Runner). On Docker Desktop, workloads still connect to the host Model Runner as described above.

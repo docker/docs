@@ -2,10 +2,14 @@
 title: Claude Code
 weight: 10
 description: |
-  Use Claude Code in Docker Sandboxes with authentication, configuration, and
-  YOLO mode for AI-assisted development.
-keywords: docker sandboxes, claude code, anthropic, ai agent, sbx
+  Use Claude Code in Docker Sandboxes with authentication, local models,
+  configuration, and YOLO mode for AI-assisted development.
+keywords: docker sandboxes, claude code, anthropic, ai agent, sbx, local models, llmman, ollama
 ---
+
+The following instructions apply to local sandboxes. For cloud authentication
+and usage, see [Authenticate cloud agents](../cloud/credentials.md) and
+[Use cloud sandboxes](../cloud/usage.md).
 
 Official documentation: [Claude Code](https://code.claude.com/docs)
 
@@ -17,32 +21,32 @@ Launch Claude Code in a sandbox by pointing it at a project directory:
 $ sbx run claude ~/my-project
 ```
 
-The workspace parameter defaults to the current directory, so `sbx run claude`
-from inside your project works too. To start Claude with a specific prompt:
+To start Claude with a specific prompt in the current directory:
 
 ```console
-$ sbx run claude --name my-sandbox -- "Add error handling to the login function"
+$ sbx run --name my-sandbox claude -- "Add error handling to the login function"
 ```
 
 Everything after `--` is passed directly to Claude Code. You can also pipe in a
 prompt from a file with `-- "$(cat prompt.txt)"`.
 
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
+
 ## Authentication
 
-Claude Code requires either an Anthropic API key or a Claude subscription.
+For the default Anthropic models, Claude Code requires either an Anthropic
+API key or a Claude subscription. For other models, see
+[Use a local model](#use-a-local-model).
 
 **API key**: Store your key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g anthropic
+$ sbx secret set anthropic
 ```
 
-Alternatively, export the `ANTHROPIC_API_KEY` environment variable in your
-shell before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
-
-**Claude subscription**: If no API key is set, use the `/login` command inside 
+**Claude subscription**: If no API key is set, use the `/login` command inside
 Claude Code to authenticate via OAuth.
 
 ## Configuration
@@ -52,6 +56,15 @@ Sandboxes don't pick up user-level configuration from your host, such as
 available inside the sandbox. See
 [Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
+
+### Remote control
+
+To use Claude Code's `/remote-control` command inside a sandbox, turn on
+[`claude.remoteControl`](../configuration/settings.md#clauderemotecontrol):
+
+```console
+$ sbx settings set claude.remoteControl true
+```
 
 ### Default startup command
 
@@ -66,7 +79,7 @@ itself a flag (begins with `-`), so `--dangerously-skip-permissions` is
 preserved:
 
 ```console
-$ sbx run claude -- -c   # runs claude --dangerously-skip-permissions -c
+$ sbx run --name <sandbox-name> -- -c   # runs claude --dangerously-skip-permissions -c
 ```
 
 When the first argument is a bare word, such as the `agents` subcommand, it
@@ -78,12 +91,12 @@ for available options.
 ## Agents view
 
 Claude Code's [agents view](https://code.claude.com/docs/en/agent-view)
-dispatches tasks to subagents that work in parallel, each in its own
-Git worktree. Pair it with [clone mode](../usage.md#clone-mode) for an
-isolated multi-agent workflow:
+starts background sessions that run tasks in parallel. Pair it with
+[clone mode](../workflows/git.md#clone-mode) to keep their changes inside the
+sandbox:
 
 ```console
-$ sbx run --clone claude -- agents
+$ sbx run --clone claude . -- agents
 ```
 
 This invocation replaces the
@@ -93,31 +106,32 @@ bypass-permissions mode inside the sandbox. To work around this, either
 use Claude Code's auto mode or pass the flag explicitly:
 
 ```console
-$ sbx run --clone claude -- --dangerously-skip-permissions agents
+$ sbx run --clone claude . -- --dangerously-skip-permissions agents
 ```
 
-The subagents' worktrees live inside the sandbox's private clone — none
-of them touches your host repository. Each subagent commits to its own
-branch, and you review the work from the host by fetching the
-`sandbox-<sandbox-name>` remote:
+Claude Code may use branches or worktrees to keep changes from its background
+sessions separate. This depends on the task, Claude Code configuration, and
+project instructions. The `--clone` flag doesn't control this behavior. Claude
+Code creates any branches and worktrees inside the sandbox, not in your host
+checkout.
+
+To review a branch created by a session, fetch the
+`sandbox-<sandbox-name>` remote from the host:
 
 ```console
 $ git fetch sandbox-<sandbox-name>
 $ git diff main..sandbox-<sandbox-name>/<branch>
 ```
 
-See [Git workflow](../usage.md#git-workflow) for clone-mode details.
+See [Git workflows](../workflows/git.md) for clone-mode details.
 
 ## Base image
 
 The sandbox uses `docker/sandbox-templates:claude-code`. See
-[Templates](../customize/templates.md) to build your own image on top of
+[Base images](/manuals/ai/sandboxes/customize/author/base-images.md) to build your own image on top of
 this base.
 
 ## Use a local model
 
-To run Claude Code in a sandbox against a local model on your host through
-Docker Model Runner, see
-[Run Claude Code in a Docker Sandbox with Docker Model Runner](/guides/claude-code-sandbox-model-runner/).
-For the host-only version without a sandbox, see
-[Use Claude Code with Docker Model Runner](/guides/claude-code-model-runner/).
+For local models, hosted providers, and custom inference endpoints, see
+[Use local and hosted models](../configuration/models.md).

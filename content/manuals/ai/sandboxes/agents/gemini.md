@@ -1,11 +1,13 @@
 ---
 title: Gemini
-weight: 40
+weight: 70
 description: |
   Use Google Gemini in Docker Sandboxes with proxy-managed authentication and
   API key configuration.
 keywords: docker sandboxes, gemini, google, ai agent, sbx
 ---
+
+{{% include "sandboxes-local-scope.md" %}}
 
 This guide covers authentication, configuration, and usage of Google Gemini in
 a sandboxed environment.
@@ -20,27 +22,26 @@ Create a sandbox and run Gemini for a project directory:
 $ sbx run gemini ~/my-project
 ```
 
-The workspace parameter is optional and defaults to the current directory:
+`sbx run` defaults the workspace to the current directory:
 
 ```console
 $ cd ~/my-project
 $ sbx run gemini
 ```
 
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
+
 ## Authentication
 
 Gemini requires either a Google API key or a Google account with Gemini access.
 
 **API key**: Store your key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g google
+$ sbx secret set google
 ```
-
-Alternatively, export the `GEMINI_API_KEY` or `GOOGLE_API_KEY` environment
-variable in your shell before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
 
 **Google account**: If no API key is set, Gemini prompts you to sign in
 interactively when it starts. Interactive authentication is scoped to the
@@ -69,7 +70,7 @@ Arguments after `--` are added after the default flags when the first one is
 itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run gemini -- -p "explain this"   # runs gemini --yolo -p "explain this"
+$ sbx run --name <sandbox-name> -- -p "explain this"   # runs gemini --yolo -p "explain this"
 ```
 
 When the first argument is a bare word — a subcommand or prompt — it replaces

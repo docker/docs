@@ -1,5 +1,6 @@
 {{ $text := .Get "text" }}
 {{ $url := .Get "url" }}
+{{ $marlinLabel := .Get "marlin_label" }}
 {{- if (strings.HasPrefix $url "http") -}}
   {{ $url = $url | safeURL }}
 {{- else if (strings.FindRE `([^_]|^)index.md` $url 1) -}}
@@ -7,4 +8,4 @@
 {{- else -}}
   {{ $url = ref .Page $url }}
 {{- end -}}
-<a class="button not-prose" href="{{ $url }}">{{ $text }}</a>
+<a class="button not-prose" href="{{ $url }}"{{ with $marlinLabel }} marlin-label="{{ . }}"{{ end }}>{{ $text }}</a>

@@ -66,4 +66,4 @@ In this advanced setup:
 
 ## Additional resources
 
-For more examples and information on using `model`, see [Use AI models in Compose](/manuals/ai/compose/models-and-compose.md)
+For more examples and information on using `model`, see [Use AI models in Compose](/manuals/compose/how-tos/models-and-compose.md)

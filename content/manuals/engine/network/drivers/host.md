@@ -18,8 +18,8 @@ address.
 > [!NOTE]
 >
 > Given that the container does not have its own IP-address when using
-> `host` mode networking, [port-mapping](overlay.md#publish-ports) doesn't
-> take effect, and the `-p`, `--publish`, `-P`, and `--publish-all` option are
+> `host` mode networking, [port mapping](../port-publishing.md) doesn't
+> take effect, and the `-p`, `--publish`, `-P`, and `--publish-all` options are
 > ignored, producing a warning instead:
 >
 > ```console
