@@ -380,6 +380,8 @@
   - /go/mcp-policy/
 "/ai/sandboxes/mcp-gateway/":
   - /go/sbx-mcp-gateway/
+"https://www.docker.com/blog/harbor-docker-sandboxes-run-safe-reproducible-agent-evals/":
+  - /ai/sandboxes/harbor/
 
 # Desktop MCP Toolkit
 "/ai/mcp-catalog-and-toolkit/toolkit/":
