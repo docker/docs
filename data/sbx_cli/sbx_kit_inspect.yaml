@@ -1,5 +1,5 @@
 name: sbx kit inspect
-synopsis: Display details about a kit artifact
+synopsis: Show kit artifact details
 experimental: true
 description: |-
     Load and display details about a kit artifact.
@@ -10,6 +10,8 @@ description: |-
     arguments; the output shows the substituted content.
 usage: sbx kit inspect REFERENCE [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
@@ -36,5 +38,11 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx kit inspect ./my-kit
+      sbx kit inspect ghcr.io/myorg/my-kit:1.0
+
+      # Machine-readable output
+      sbx kit inspect ghcr.io/myorg/my-kit:1.0 --format json
 see_also:
     - sbx kit - (Experimental) Manage kit artifacts

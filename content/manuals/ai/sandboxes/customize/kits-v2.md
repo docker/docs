@@ -11,13 +11,10 @@ aliases:
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-V2 kits remain supported. This page covers v2 usage, configuration, and the
-specification. For new kit development with the `sbx` CLI, use
-[v3 kits](/manuals/ai/sandboxes/customize/_index.md).
-
-Built-in shortcuts such as `claude` and `codex` select v2 kits and still work
-with v2 mixins. V3 workloads and mixins can't be combined with v1 or v2 kits.
-V1 also remains supported.
+V2 kits remain supported and are not deprecated. Built-in agent names such
+as `claude` and `codex` select v2 kits and work with v2 mixins. This page
+covers their usage and specification. For new kits, Docker recommends
+[v3](/manuals/ai/sandboxes/customize/_index.md). V1 also remains supported.
 
 ## Use existing kits
 
@@ -464,10 +461,11 @@ command can consume a bundled file from `files/home/`, but not one from
 
 `sbx kit add` recreates the sandbox rather than modifying it in place. It
 supports mixin kits limited to
-`environment.variables`, `setup.install`, and `permissions.network.allow`,
-which follow the same order as sandbox creation. It rejects a kit that declares
-static files, `setup.startup`, or `setup.files`. To use those fields, recreate
-the sandbox with the kit.
+`environment.variables`, `setup.install`, `setup.startup`, and
+`permissions.network.allow`, which follow the same order as sandbox creation.
+Startup commands run after the kit is added and on each subsequent sandbox
+start. The command rejects kits that declare static files or `setup.files`.
+To use those fields, create the sandbox with the kit included.
 
 ### install
 
@@ -488,7 +486,9 @@ assets from `files/home/`.
 
 ### startup
 
-Runs at every sandbox start. String array, not interpreted by a shell.
+Runs at every sandbox start. String array, not interpreted by a shell. A
+`$WORKSPACE_DIR` reference in the array is passed unchanged. To expand it, run
+the command through a shell, for example `["sh", "-c", "..."]`.
 
 | Field         | Default  | Description                         |
 | ------------- | -------- | ----------------------------------- |
@@ -521,7 +521,7 @@ Files written at sandbox start, with runtime substitution.
 | Field           | Default  | Description                                               |
 | --------------- | -------- | --------------------------------------------------------- |
 | `path`          | —        | Absolute container path.                                  |
-| `content`       | —        | File content. `${WORKDIR}` expands to the workspace path. |
+| `content`       | —        | File content. Write `${WORKDIR}` for the workspace path. |
 | `mode`          | `"0644"` | File permissions in octal.                                |
 | `onlyIfMissing` | `false`  | Skip if the file already exists.                          |
 
@@ -529,6 +529,21 @@ The runtime writes these files as the agent user with UID 1000. The target
 path must be writable by that user. To write to a root-owned path such as
 `/etc`, use an `install` command, which runs as root by default. Set ownership
 in the install command if the agent needs to modify the file later.
+
+Write `${WORKDIR}` in `content` and `$WORKSPACE_DIR` in commands. Three names
+look alike and mean different things:
+
+| Name            | What it is                                                    | Where it applies                                 |
+| --------------- | ------------------------------------------------------------- | ------------------------------------------------ |
+| `${WORKDIR}`    | Placeholder for the workspace path                            | `setup.files[].content` only                     |
+| `WORKSPACE_DIR` | Environment variable set by the runtime to the workspace path | Shell commands, and the agent                    |
+| `WORKDIR`       | The template image's Dockerfile working directory             | Where commands start, see [install](#install)    |
+
+The runtime replaces `${WORKDIR}` when it creates the sandbox, only inside
+`content`, never in `path` or in commands. `WORKSPACE_DIR` is an environment
+variable, so a `$WORKSPACE_DIR` reference expands only when a shell runs the
+command. `install` strings run through `sh -c`. `startup` arrays run without a
+shell. A Dockerfile `WORKDIR` doesn't define an environment variable.
 
 ### Shell initialization and service logs
 
@@ -659,8 +674,9 @@ The `sbx kit` subcommands validate, inspect, and publish kits:
   for sharing.
 - `sbx kit push <path> <ref>` — publish to an OCI registry (for example,
   `ghcr.io/myorg/my-kit:1.0`).
-- `sbx kit pull <ref>` — download a kit from a registry as a ZIP file to
-  the working directory.
+- `sbx kit pull <ref>` — download a kit to the working directory as `.zip`
+  for schema v1 or `.tar.gz` for schema v2. Use `--output <FILE>` to choose
+  the output path.
 
 For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
 `sbx login`. For other registries, they prefer credentials stored with
@@ -700,6 +716,19 @@ $ sbx kit push ./my-kit/ ghcr.io/myorg/my-kit:1.0 --sign
 ```
 
 ZIP kits can't carry verifiable signatures.
+
+### Inspect provenance
+
+Pushing a kit also attaches a provenance attestation that records its content
+digests, declared sandbox image, and source Git commit when pushed from a
+working tree. Inspect it to check the source of a published kit:
+
+```console
+$ sbx kit provenance ghcr.io/myorg/my-kit:1.0
+```
+
+Provenance is unsigned by default. Use `sbx kit push --sign` to sign both the
+kit manifest and its provenance when publishing.
 
 ### Require signed kits
 
@@ -773,9 +802,13 @@ controlled by the user through
 
 ## Move an environment to v3
 
-Select a v3 workload, convert or replace its mixins, and create a separate
-sandbox with a different `--name`. Use the explicit workload reference in
-place of the built-in shortcut. Every selected kit must use v3.
+Select a [v3 workload](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads),
+convert or replace its mixins, and create a separate sandbox. Every selected
+kit must use v3. Running an existing sandbox keeps its recorded kit configuration.
+
+For an environment file, see [Add v3 kits](/manuals/ai/sandboxes/configuration/environment-files.md#add-v3-kits).
+Keep its `schemaVersion: "1"`: the environment file version is independent of
+kit descriptor versions.
 
 Changing `schemaVersion` alone doesn't convert a kit. Separate reusable image
 content from sandbox initialization, and declare runtime capabilities:
@@ -792,11 +825,10 @@ content from sandbox initialization, and declare runtime capabilities:
 | Automatic `files/home/` and `files/workspace/` injection | Dockerfile `COPY`, with lifecycle hooks for destinations provided by runtime mounts |
 | `permissions.network` and `credentials` | Network-policy and credential capabilities |
 | `agentInstructions` | Agent-context capability |
+| `${WORKDIR}` in `setup.files[].content` | `${{ kit.env.WORKSPACE_DIR }}` in lifecycle [`files` content](/manuals/ai/sandboxes/customize/author/_index.md#generated-files) |
 
 Follow the [v3 authoring guidance](/manuals/ai/sandboxes/customize/author/_index.md)
 when converting runtime setup and capability declarations.
 Use a [kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md) to combine
 published v3 components with your settings. To rebuild the agent environment
 from a base image, follow [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
-Running an existing sandbox keeps its recorded configuration. It doesn't
-migrate the kit composition.

@@ -6,7 +6,6 @@
 
 {{- if hugo.IsProduction -}}
 User-agent: *
-Disallow: /unassociated-machines/
 Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
 

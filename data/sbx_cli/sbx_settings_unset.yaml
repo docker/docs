@@ -3,8 +3,9 @@ synopsis: Remove a setting override
 description: |-
     Remove the user override for a setting.
 
-    The setting then evaluates from its environment variable or default value.
-usage: sbx settings unset <key> [flags]
+    Administrator policy remains in effect. Otherwise, the setting evaluates from
+    its environment variable, remote default, or built-in default.
+usage: sbx settings unset KEY [flags]
 options:
     - name: help
       shorthand: h

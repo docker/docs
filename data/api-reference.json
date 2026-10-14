@@ -25028,8 +25028,8 @@
       "connection": "hosted",
       "description": "HTTP+JSON API for managing Docker governance policies and rules.\n\n**Resource model.** An organization owns one or more policies. Each policy\ncontains a list of rules grouped into a single domain: either `network` or\n`filesystem`. A policy's domain is derived from its rule actions; mixing\ndomains within a single policy is not permitted.\n\n**Lifecycle.** Create a policy with CreatePolicy, then add rules with\nCreateRule. Rules can be updated in place with UpdateRule or removed with\nDeleteRule. Deleting all rules does not delete the policy itself.\n\n**Rule evaluation.** All rules in a policy are tested against every request.\n`deny` always wins: if any rule matches with `decision: deny`, the request\nis denied regardless of any `allow` rules.\n\n**Enforcement.** Organization policies take precedence over local sandbox\npolicies and cannot be overridden by individual users.\n\n**Propagation.** Policy changes take up to five minutes to reach developer\nmachines after being written.\n\nSee the [AI Governance documentation](https://docs.docker.com/ai/sandboxes/governance/)\nfor product documentation.\n",
       "diagnostics": [],
-      "digest": "85e78016fe389c0f17d684fcda083bdb768ddedd075f1736aae9b31f155a0344",
-      "exampleCount": 53,
+      "digest": "4f9f7d5cadd50f50ba01c30333846338283e1a95d2bf7dacada0ccabc84ad19c",
+      "exampleCount": 59,
       "experimental": false,
       "guides": [],
       "id": "ai-governance",
@@ -26944,7 +26944,7 @@
           "curl": "curl \\\n  --request POST \\\n  --header \"Authorization: Bearer ${TOKEN}\" \\\n  --header 'Accept: application/json' \\\n  --header 'Content-Type: application/json' \\\n  --data-raw '{\n  \"actions\": [\n    \"read\",\n    \"write\"\n  ],\n  \"decision\": \"allow\",\n  \"name\": \"allow data directory\",\n  \"resources\": [\n    \"/data\"\n  ]\n}' \\\n  'https://hub.docker.com/v2/orgs/\u003cORG_NAME\u003e/governance/policies/\u003cPOLICY_ID\u003e/rules'",
           "curlNotes": [],
           "deprecated": null,
-          "description": "Adds a rule to the policy's rule set. All rules in a policy must share\nthe same domain (network or filesystem); mixing domains is rejected.\n\n**Network** actions: `connect:tcp`, `connect:udp`. Resources are\nhostnames (for example, `example.com`), wildcard subdomains (`*.example.com`\nfor one level, `**.example.com` for any depth), hostnames with an optional\nport (for example, `example.com:443`), or CIDRs in IPv4 or IPv6 notation\n(for example, `10.0.0.0/8` or `2001:db8::/32`).\n\n**Filesystem** actions: `read`, `write`. Resources are paths (for example,\n`/data`). Use `*` to match within a single path segment and `**` to match\nrecursively across segments (for example, `/data/**`).\n\nChanges may take up to five minutes to reach developer machines.\n",
+          "description": "Adds a rule to the policy's rule set. All rules in a policy must share\nthe same domain (`network`, which includes HTTP, or `filesystem`);\nmixing domains is rejected. A single rule cannot mix L4 network and L7\nHTTP actions.\n\n**Network** actions: `connect:tcp`, `connect:udp`. Resources are\nhostnames (for example, `example.com`), wildcard subdomains (`*.example.com`\nfor one level, `**.example.com` for any depth), hostnames with an optional\nport (for example, `example.com:443`), or CIDRs in IPv4 or IPv6 notation\n(for example, `10.0.0.0/8` or `2001:db8::/32`).\n\n**Filesystem** actions: `read`, `write`. Resources are paths (for example,\n`/data`). Use `*` to match within a single path segment and `**` to match\nrecursively across segments (for example, `/data/**`).\n\n**HTTP** actions identify request methods, such as `request:get` and\n`request:post`. Use `http_resources` to identify the host, optional port,\nand absolute path glob. HTTP rules must not supply `resources`.\n\nChanges may take up to five minutes to reach developer machines.\n",
           "id": "createRule",
           "line": 356,
           "method": "POST",
@@ -26983,7 +26983,7 @@
           "path": "/orgs/{org_name}/governance/policies/{policy_id}/rules",
           "pointer": "/paths/~1orgs~1{org_name}~1governance~1policies~1{policy_id}~1rules/post",
           "raw": {
-            "description": "Adds a rule to the policy's rule set. All rules in a policy must share\nthe same domain (network or filesystem); mixing domains is rejected.\n\n**Network** actions: `connect:tcp`, `connect:udp`. Resources are\nhostnames (for example, `example.com`), wildcard subdomains (`*.example.com`\nfor one level, `**.example.com` for any depth), hostnames with an optional\nport (for example, `example.com:443`), or CIDRs in IPv4 or IPv6 notation\n(for example, `10.0.0.0/8` or `2001:db8::/32`).\n\n**Filesystem** actions: `read`, `write`. Resources are paths (for example,\n`/data`). Use `*` to match within a single path segment and `**` to match\nrecursively across segments (for example, `/data/**`).\n\nChanges may take up to five minutes to reach developer machines.\n",
+            "description": "Adds a rule to the policy's rule set. All rules in a policy must share\nthe same domain (`network`, which includes HTTP, or `filesystem`);\nmixing domains is rejected. A single rule cannot mix L4 network and L7\nHTTP actions.\n\n**Network** actions: `connect:tcp`, `connect:udp`. Resources are\nhostnames (for example, `example.com`), wildcard subdomains (`*.example.com`\nfor one level, `**.example.com` for any depth), hostnames with an optional\nport (for example, `example.com:443`), or CIDRs in IPv4 or IPv6 notation\n(for example, `10.0.0.0/8` or `2001:db8::/32`).\n\n**Filesystem** actions: `read`, `write`. Resources are paths (for example,\n`/data`). Use `*` to match within a single path segment and `**` to match\nrecursively across segments (for example, `/data/**`).\n\n**HTTP** actions identify request methods, such as `request:get` and\n`request:post`. Use `http_resources` to identify the host, optional port,\nand absolute path glob. HTTP rules must not supply `resources`.\n\nChanges may take up to five minutes to reach developer machines.\n",
             "operationId": "createRule",
             "requestBody": {
               "content": {
@@ -27001,6 +27001,24 @@
                         "resources": [
                           "/data"
                         ]
+                      }
+                    },
+                    "http": {
+                      "summary": "HTTP rule",
+                      "value": {
+                        "actions": [
+                          "request:get",
+                          "request:head"
+                        ],
+                        "decision": "allow",
+                        "http_resources": [
+                          {
+                            "host": "api.github.com",
+                            "path": "/repos/docker/**",
+                            "port": 443
+                          }
+                        ],
+                        "name": "read GitHub repositories"
                       }
                     },
                     "network": {
@@ -27024,7 +27042,7 @@
                   }
                 }
               },
-              "description": "Rule definition including actions, resources, and decision.",
+              "description": "Rule definition including actions, matching resources, and decision.",
               "required": true
             },
             "responses": {
@@ -27045,6 +27063,25 @@
                           "resources": [
                             "/data"
                           ]
+                        }
+                      },
+                      "http": {
+                        "summary": "HTTP rule",
+                        "value": {
+                          "actions": [
+                            "request:get",
+                            "request:head"
+                          ],
+                          "decision": "allow",
+                          "http_resources": [
+                            {
+                              "host": "api.github.com",
+                              "path": "/repos/docker/**",
+                              "port": 443
+                            }
+                          ],
+                          "id": "rule_08gxuos1lo3rfum2c0pmgcz09lpc",
+                          "name": "read GitHub repositories"
                         }
                       },
                       "network": {
@@ -27157,7 +27194,7 @@
           "url": "/reference/api/ai-governance/latest/operations/createRule/",
           "variants": [
             {
-              "description": "Rule definition including actions, resources, and decision.",
+              "description": "Rule definition including actions, matching resources, and decision.",
               "direction": "Request",
               "examples": [
                 {
@@ -27174,6 +27211,26 @@
                     "resources": [
                       "/data"
                     ]
+                  }
+                },
+                {
+                  "language": "json",
+                  "name": "http",
+                  "text": "{\n  \"actions\": [\n    \"request:get\",\n    \"request:head\"\n  ],\n  \"decision\": \"allow\",\n  \"http_resources\": [\n    {\n      \"host\": \"api.github.com\",\n      \"path\": \"/repos/docker/**\",\n      \"port\": 443\n    }\n  ],\n  \"name\": \"read GitHub repositories\"\n}",
+                  "value": {
+                    "actions": [
+                      "request:get",
+                      "request:head"
+                    ],
+                    "decision": "allow",
+                    "http_resources": [
+                      {
+                        "host": "api.github.com",
+                        "path": "/repos/docker/**",
+                        "port": 443
+                      }
+                    ],
+                    "name": "read GitHub repositories"
                   }
                 },
                 {
@@ -27222,6 +27279,27 @@
                     "resources": [
                       "/data"
                     ]
+                  }
+                },
+                {
+                  "language": "json",
+                  "name": "http",
+                  "text": "{\n  \"actions\": [\n    \"request:get\",\n    \"request:head\"\n  ],\n  \"decision\": \"allow\",\n  \"http_resources\": [\n    {\n      \"host\": \"api.github.com\",\n      \"path\": \"/repos/docker/**\",\n      \"port\": 443\n    }\n  ],\n  \"id\": \"rule_08gxuos1lo3rfum2c0pmgcz09lpc\",\n  \"name\": \"read GitHub repositories\"\n}",
+                  "value": {
+                    "actions": [
+                      "request:get",
+                      "request:head"
+                    ],
+                    "decision": "allow",
+                    "http_resources": [
+                      {
+                        "host": "api.github.com",
+                        "path": "/repos/docker/**",
+                        "port": 443
+                      }
+                    ],
+                    "id": "rule_08gxuos1lo3rfum2c0pmgcz09lpc",
+                    "name": "read GitHub repositories"
                   }
                 },
                 {
@@ -27422,7 +27500,7 @@
           "deprecated": null,
           "description": "Deletes a rule from the policy. Returns the deleted rule. Changes may\ntake up to five minutes to reach developer machines.\n",
           "id": "deleteRule",
-          "line": 497,
+          "line": 526,
           "method": "DELETE",
           "parameters": [
             {
@@ -27712,9 +27790,9 @@
           "curl": "curl \\\n  --request PATCH \\\n  --header \"Authorization: Bearer ${TOKEN}\" \\\n  --header 'Accept: application/json' \\\n  --header 'Content-Type: application/json' \\\n  --data-raw '{\n  \"resources\": [\n    \"research.mitre.org\"\n  ]\n}' \\\n  'https://hub.docker.com/v2/orgs/\u003cORG_NAME\u003e/governance/policies/\u003cPOLICY_ID\u003e/rules/\u003cRULE_ID\u003e'",
           "curlNotes": [],
           "deprecated": null,
-          "description": "Partially updates a rule. Only fields present in the request body are\nupdated; absent fields are left unchanged. Returns the rule in both its\nold and new states.\n\nChanging `actions` across domains (for example, from network actions to\nfilesystem actions) is rejected. Changes may take up to five minutes to\nreach developer machines.\n",
+          "description": "Partially updates a rule. Only fields present in the request body are\nupdated; absent fields are left unchanged. Returns the rule in both its\nold and new states.\n\nChanging `actions` across domains (for example, from network actions to\nfilesystem actions) is rejected while other rules remain in the policy.\nWhen changing a rule between L4 network and L7 HTTP, supply the matching\n`resources` or `http_resources` in the same request. Changes may take up\nto five minutes to reach developer machines.\n",
           "id": "updateRule",
-          "line": 439,
+          "line": 466,
           "method": "PATCH",
           "parameters": [
             {
@@ -27766,7 +27844,7 @@
           "path": "/orgs/{org_name}/governance/policies/{policy_id}/rules/{rule_id}",
           "pointer": "/paths/~1orgs~1{org_name}~1governance~1policies~1{policy_id}~1rules~1{rule_id}/patch",
           "raw": {
-            "description": "Partially updates a rule. Only fields present in the request body are\nupdated; absent fields are left unchanged. Returns the rule in both its\nold and new states.\n\nChanging `actions` across domains (for example, from network actions to\nfilesystem actions) is rejected. Changes may take up to five minutes to\nreach developer machines.\n",
+            "description": "Partially updates a rule. Only fields present in the request body are\nupdated; absent fields are left unchanged. Returns the rule in both its\nold and new states.\n\nChanging `actions` across domains (for example, from network actions to\nfilesystem actions) is rejected while other rules remain in the policy.\nWhen changing a rule between L4 network and L7 HTTP, supply the matching\n`resources` or `http_resources` in the same request. Changes may take up\nto five minutes to reach developer machines.\n",
             "operationId": "updateRule",
             "requestBody": {
               "content": {
@@ -28140,7 +28218,7 @@
       ],
       "owner": "docker/governor-services",
       "product": "ai-governance",
-      "schemaCount": 43,
+      "schemaCount": 45,
       "schemaURLs": {
         "#/components/schemas/AllowlistV0": "/reference/api/ai-governance/latest/schemas/AllowlistV0/",
         "#/components/schemas/CedarV1Policy": "/reference/api/ai-governance/latest/schemas/CedarV1Policy/",
@@ -28149,6 +28227,8 @@
         "#/components/schemas/DeletePolicyResponse": "/reference/api/ai-governance/latest/schemas/DeletePolicyResponse/",
         "#/components/schemas/DeleteRuleResponse": "/reference/api/ai-governance/latest/schemas/DeleteRuleResponse/",
         "#/components/schemas/Error": "/reference/api/ai-governance/latest/schemas/Error/",
+        "#/components/schemas/HTTPResource": "/reference/api/ai-governance/latest/schemas/HTTPResource/",
+        "#/components/schemas/HTTPResources": "/reference/api/ai-governance/latest/schemas/HTTPResources/",
         "#/components/schemas/Policy": "/reference/api/ai-governance/latest/schemas/Policy/",
         "#/components/schemas/PolicySummary": "/reference/api/ai-governance/latest/schemas/PolicySummary/",
         "#/components/schemas/Rule": "/reference/api/ai-governance/latest/schemas/Rule/",
@@ -28167,7 +28247,7 @@
           "name": "AllowlistV0",
           "pointer": "/components/schemas/AllowlistV0",
           "schema": {
-            "description": "Network or filesystem allowlist containing a list of rules. Present on\nPolicy when `PolicySummary.type` is `allowlist_v0`; omitted when the\npolicy has no rules yet. All rules in an allowlist share the same domain.\nAll rules are evaluated on every request: `deny` always wins over `allow`.\n",
+            "description": "Network, HTTP, or filesystem allowlist containing a list of rules. Present on\nPolicy when `PolicySummary.type` is `allowlist_v0`; omitted when the\npolicy has no rules yet. All rules in an allowlist share the same domain.\nAll rules are evaluated on every request: `deny` always wins over `allow`.\n",
             "properties": {
               "domain": {
                 "description": "The access-control domain shared by all rules in this allowlist. Derived from rule actions: network actions (`connect:tcp`, `connect:udp`) produce `network`; filesystem actions (`read`, `write`) produce `filesystem`. Present when `rules` is non-empty; absent when the allowlist has no rules.\n",
@@ -28255,12 +28335,29 @@
           "pointer": "/components/schemas/CreateRuleRequest",
           "schema": {
             "description": "Fields required to create a new rule within a policy's rule set.",
+            "oneOf": [
+              {
+                "required": [
+                  "resources"
+                ],
+                "type": "object"
+              },
+              {
+                "required": [
+                  "http_resources"
+                ],
+                "type": "object"
+              }
+            ],
             "properties": {
               "actions": {
                 "$ref": "#/components/schemas/RuleActions"
               },
               "decision": {
                 "$ref": "#/components/schemas/RuleDecision"
+              },
+              "http_resources": {
+                "$ref": "#/components/schemas/HTTPResources"
               },
               "name": {
                 "description": "Human-readable label for the rule.",
@@ -28276,7 +28373,6 @@
             "required": [
               "name",
               "actions",
-              "resources",
               "decision"
             ],
             "type": "object"
@@ -28363,6 +28459,59 @@
             "type": "object"
           },
           "url": "/reference/api/ai-governance/latest/schemas/Error/"
+        },
+        {
+          "name": "HTTPResource",
+          "pointer": "/components/schemas/HTTPResource",
+          "schema": {
+            "properties": {
+              "host": {
+                "description": "Domain name or domain glob without a URL scheme or port. Use the separate `port` field to restrict the target to one port.\n",
+                "examples": [
+                  "api.github.com",
+                  "*.example.com"
+                ],
+                "minLength": 1,
+                "type": "string"
+              },
+              "path": {
+                "description": "Absolute HTTP path glob. `*` matches one segment and `**` matches any depth, including the bare path.\n",
+                "examples": [
+                  "/repos/docker/**"
+                ],
+                "pattern": "^/",
+                "type": "string"
+              },
+              "port": {
+                "description": "Optional destination port. Omit it to match every port.",
+                "examples": [
+                  443
+                ],
+                "maximum": 65535,
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "host",
+              "path"
+            ],
+            "type": "object"
+          },
+          "url": "/reference/api/ai-governance/latest/schemas/HTTPResource/"
+        },
+        {
+          "name": "HTTPResources",
+          "pointer": "/components/schemas/HTTPResources",
+          "schema": {
+            "description": "HTTP request targets. Required for HTTP rules and forbidden for network and filesystem rules. A request matches when any target matches.\n",
+            "items": {
+              "$ref": "#/components/schemas/HTTPResource"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "url": "/reference/api/ai-governance/latest/schemas/HTTPResources/"
         },
         {
           "name": "Policy",
@@ -28461,7 +28610,7 @@
                 "$ref": "#/components/schemas/Scope"
               },
               "type": {
-                "description": "Identifies the policy type. `allowlist_v0` for network/filesystem allowlist policies; `cedar_v1` for Cedar language policies.\n",
+                "description": "Identifies the policy type. `allowlist_v0` for network, HTTP, and filesystem allowlist policies; `cedar_v1` for Cedar language policies.\n",
                 "enum": [
                   "allowlist_v0",
                   "cedar_v1"
@@ -28497,12 +28646,29 @@
           "pointer": "/components/schemas/Rule",
           "schema": {
             "description": "A single allow or deny rule within an allowlist policy.",
+            "oneOf": [
+              {
+                "required": [
+                  "resources"
+                ],
+                "type": "object"
+              },
+              {
+                "required": [
+                  "http_resources"
+                ],
+                "type": "object"
+              }
+            ],
             "properties": {
               "actions": {
                 "$ref": "#/components/schemas/RuleActions"
               },
               "decision": {
                 "$ref": "#/components/schemas/RuleDecision"
+              },
+              "http_resources": {
+                "$ref": "#/components/schemas/HTTPResources"
               },
               "id": {
                 "examples": [
@@ -28525,7 +28691,6 @@
               "id",
               "name",
               "actions",
-              "resources",
               "decision"
             ],
             "type": "object"
@@ -28536,7 +28701,7 @@
           "name": "RuleActions",
           "pointer": "/components/schemas/RuleActions",
           "schema": {
-            "description": "Network actions: `connect:tcp`, `connect:udp`. Filesystem actions: `read`, `write`. All actions in a rule must belong to the same domain; mixing network and filesystem actions in one rule is rejected.\n",
+            "description": "Network actions: `connect:tcp`, `connect:udp`. Filesystem actions: `read`, `write`. HTTP actions: `request:get`, `request:post`, `request:put`, `request:delete`, `request:patch`, `request:head`, `request:options`, `request:connect`, `request:trace`. All actions in a rule must belong to the same layer; mixing HTTP, network, or filesystem actions in one rule is rejected.\n",
             "examples": [
               [
                 "connect:tcp",
@@ -28548,7 +28713,16 @@
                 "connect:tcp",
                 "connect:udp",
                 "read",
-                "write"
+                "write",
+                "request:get",
+                "request:post",
+                "request:put",
+                "request:delete",
+                "request:patch",
+                "request:head",
+                "request:options",
+                "request:connect",
+                "request:trace"
               ],
               "type": "string"
             },
@@ -28577,7 +28751,7 @@
           "name": "RuleResources",
           "pointer": "/components/schemas/RuleResources",
           "schema": {
-            "description": "Network domain: hostnames (for example, `example.com`), wildcard subdomains (`*.example.com` or `**.example.com`), hostnames with port (for example, `example.com:443`), or CIDRs in IPv4 or IPv6 notation (for example, `10.0.0.0/8` or `2001:db8::/32`). Filesystem domain: paths (for example, `/data`); `*` matches within one path segment, `**` matches recursively (for example, `/data/**`).\n",
+            "description": "Network domain: hostnames (for example, `example.com`), wildcard subdomains (`*.example.com` or `**.example.com`), hostnames with port (for example, `example.com:443`), or CIDRs in IPv4 or IPv6 notation (for example, `10.0.0.0/8` or `2001:db8::/32`). Filesystem domain: paths (for example, `/data`); `*` matches within one path segment, `**` matches recursively (for example, `/data/**`). Required for network and filesystem rules and forbidden for HTTP rules.\n",
             "examples": [
               [
                 "research.mitre.org",
@@ -28688,12 +28862,22 @@
           "pointer": "/components/schemas/UpdateRuleRequest",
           "schema": {
             "description": "Partial update. Only fields present in the body are updated; absent fields are left unchanged.",
+            "not": {
+              "required": [
+                "resources",
+                "http_resources"
+              ],
+              "type": "object"
+            },
             "properties": {
               "actions": {
                 "$ref": "#/components/schemas/RuleActions"
               },
               "decision": {
                 "$ref": "#/components/schemas/RuleDecision"
+              },
+              "http_resources": {
+                "$ref": "#/components/schemas/HTTPResources"
               },
               "name": {
                 "description": "Human-readable label for the rule.",

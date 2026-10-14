@@ -1,15 +1,16 @@
 name: sbx version
 synopsis: Show Docker Sandboxes version information
-usage: sbx version
+usage: sbx version [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for version
     - name: json
       default_value: "false"
-      usage: |
-        Output in JSON format, including the server version and, when the backend reports them, the runtime component versions
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -19,5 +20,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx version
+
+      # Include daemon and build details
+      sbx version --debug
 see_also:
     - sbx - Manage AI coding agent sandboxes.

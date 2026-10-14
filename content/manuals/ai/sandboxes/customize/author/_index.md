@@ -131,13 +131,8 @@ format version and the `sbx` release. The
 [upstream capability definitions](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/SPEC-v3.md#72-well-known-types)
 describe the available capabilities and their settings.
 
-> [!NOTE]
-> `sbx` doesn't apply `usb-device@1`, `privileged@1`, or `agent-sessions@1`
-> requests. Its capability enforcement can let sandbox creation succeed even
-> when a required capability is unsupported. Don't rely on this behavior:
-> choose capabilities supported by the runtime where your kit will run.
-> The `kit-registry@1` capability is restricted to approved OCI builder kits;
-> local and Git kit sources don't receive it.
+See [Capability support](capabilities.md) for local and cloud availability,
+minimum `sbx` versions, and Docker-specific restrictions.
 
 The guides here show how to use capabilities with Docker Sandboxes. For all
 descriptor fields and the rules for combining kits, see the
@@ -171,10 +166,33 @@ variable, name it in the hook's `env` list. For example, `env: [WORKSPACE_DIR]`
 gives the command the mounted workspace's path. In `sbx`, startup hooks receive
 the sandbox's environment without this filtering.
 
+Sandbox containers set `SBX_AGENT` to the provisioned agent's name, such
+as `claude` or `codex`. For a v3 workload from a registry, the value is the
+last component of the kit's repository name. For example,
+`sbx run --name foo docker.io/me/my-custom-kit` sets `SBX_AGENT` to
+`my-custom-kit`. The `--name` flag names the sandbox and does not change
+`SBX_AGENT`.
+
+Use `SBX_AGENT` in hooks or scripts that need different behavior for different
+agents. Add `SBX_AGENT` to an install hook's `env` list to make it available
+to that hook. Startup hooks receive it without that declaration.
+
 See [Kit authoring patterns](/manuals/ai/sandboxes/customize/author/patterns.md#run-setup-after-combining-kits)
 for setup examples and the upstream
 [lifecycle definition](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/lifecycle@1.md)
 for the fields.
+
+### Generated files
+
+In lifecycle `files` content, write `${{ kit.env.NAME }}` to insert a
+container environment variable. For example, write
+`${{ kit.env.WORKSPACE_DIR }}` for the workspace path. Plain `$VAR` and
+`${VAR}` are written unchanged, without substituting their values. In hook
+commands, use shell syntax such as `$WORKSPACE_DIR` instead.
+
+Docker Sandboxes substitutes `${{ kit.env.NAME }}` once, when it creates the
+sandbox. `kit.env` reads the final container environment, independently of a
+hook's `env` list.
 
 ## Set workload compute requirements
 
@@ -186,3 +204,32 @@ can override these defaults with `--cpus` and `--memory` when creating a sandbox
 Put these settings on the workload. `sbx` ignores resource settings on
 mixins added separately, and it doesn't use the capability's `gpu` field
 to select GPUs.
+
+## Keep the sandbox running after sessions end
+
+By default, a local sandbox stops automatically shortly after its last session
+disconnects. A kit that runs a service, such as a development server on a
+published port, can ask the sandbox to keep running instead. Declare the
+[`long-running@1` capability](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/long-running@1.md),
+which takes no `config`:
+
+```yaml
+capabilities:
+  - type: com.docker.sandbox/long-running@1
+```
+
+A sandbox created with this kit behaves like one started with
+[`sbx run --detach`](/manuals/ai/sandboxes/usage.md#keep-a-sandbox-running-in-the-background):
+it keeps running until someone stops or removes it, including after you attach
+to it and disconnect. When a workload, mixin, or set declares the capability,
+it applies to the whole sandbox.
+
+A kit that declares the capability runs only where the runtime can provide it.
+If the kit also works when the sandbox stops after its sessions end, set
+`optional: true` on the entry. A runtime that can't provide the capability
+then skips it instead of refusing the kit. In `sbx`, two cases can't provide
+it:
+
+- Cloud sandboxes can't provide this capability. `sbx --cloud` refuses a kit
+  that requires it and skips an optional entry.
+- `sbx kit add` can't apply the capability to a running sandbox. Create the sandbox with the kit to apply it.

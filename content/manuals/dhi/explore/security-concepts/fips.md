@@ -70,7 +70,7 @@ in the Docker Hardened Images catalog.
 
 To find DHI repositories with FIPS image variants, [search the catalog](../../how-to/search-evaluate.md) and:
 
-- Use the **FIPS** filter on the catalog page
+- Use the **Compliance** filter on the catalog page and select **FIPS**
 - Look for **FIPS** compliant on individual image listings
 
 These indicators help you quickly locate repositories that support FIPS-based

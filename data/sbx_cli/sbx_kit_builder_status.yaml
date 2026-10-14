@@ -16,5 +16,6 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: '  sbx kit builder status'
 see_also:
     - sbx kit builder - Manage the kit builder sandbox

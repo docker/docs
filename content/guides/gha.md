@@ -254,4 +254,4 @@ additional features based on your project's needs, such as
 - Learn more about advanced configurations and examples in the [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md) section.
 - For more complex build setups, you may want to consider [Bake](/manuals/build/bake/_index.md). (See also the [Mastering Buildx Bake guide](/guides/bake/).)
 
-- Learn about Docker's managed build service, designed for faster, multi-platform builds, see [Docker Build Cloud](/guides/docker-build-cloud/_index.md).
+- Learn about Docker's managed build service, designed for faster, multi-platform builds, see [Docker Build Cloud](/manuals/build-cloud/_index.md).

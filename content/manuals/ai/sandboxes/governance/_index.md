@@ -51,8 +51,7 @@ MCP policy basics, evaluation, and precedence.
 - [Organization policies](access-controls/organization.md): centrally manage
   sandbox policies across your organization.
 - [Network access policies](access-controls/network.md): control outbound network
-  access from sandboxes. A local policy rule can match a host, or an HTTP
-  method and path.
+  access from sandboxes, by host or by HTTP method and path.
 - [Filesystem access policies](access-controls/filesystem.md): control which
   host paths sandboxes can mount as workspaces.
 - [MCP access policies](access-controls/mcp.md): control MCP server registration,

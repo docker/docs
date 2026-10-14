@@ -50,20 +50,32 @@ $ sbx policy inspect Balanced
 Use `--source` to filter by origin (`local`, `org`, or `kit`) and `--decision`
 to filter by outcome (`allow` or `deny`).
 
-Use `--protocol tcp` or `--protocol udp` to filter network rules. The
-`--created-via` filter selects how a rule was created: `default`, `added`,
-`provisioned`, or `approval`.
+Use `--protocol tcp` or `--protocol udp` to filter network rules.
+
+Use `--created-via` to filter by how a rule was created. Pass `default` for
+preset rules, `added` for rules you added yourself, `provisioned` for rules a
+kit or application added, or `approval` for rules recorded when you approved a
+destination. A wide listing shows the same information per rule:
+
+```console
+$ sbx policy ls --wide --created-via approval
+```
+
+See [Approval-required access](../access-controls/network.md#approval-required-access).
 
 A `STATUS` column also appears when you pass `--include-inactive`; see
 [Showing inactive rules](#showing-inactive-rules).
 
-When organization governance is active, the output starts with a summary line
+When organization governance is active, the output starts with a summary block
 showing which organization manages the policy, the sync state, and how many
 inactive rules are hidden:
 
 ```console
 $ sbx policy ls
-Governance: Managed by my-org | Sync: OK, last synced 08:21:01 | Hidden: 9 inactive rules. Show with: sbx policy ls --include-inactive
+POLICY RULES
+  Governance: Managed by my-org
+  Sync:       OK, last synced 08:21:01
+  Hidden:     9 inactive rules. Show with: sbx policy ls --include-inactive
 
 POLICY               SOURCE   APPLIES TO   SUMMARY
 default filesystem   org      all          filesystem read: 2 allow; filesystem write: 7 allow, 2 deny
@@ -93,7 +105,9 @@ example, to confirm which allow rules the organization policy overrides — pass
 
 ```console
 $ sbx policy ls --include-inactive
-Governance: Managed by my-org | Sync: OK, last synced 08:41:06
+POLICY RULES
+  Governance: Managed by my-org
+  Sync:       OK, last synced 08:41:06
 
 POLICY                       SOURCE   APPLIES TO   SUMMARY                                                    STATUS
 default filesystem           org      all          filesystem read: 2 allow; filesystem write: 7 allow, 2 deny   active
@@ -161,6 +175,10 @@ POLICY         SOURCE   APPLIES TO   SUMMARY
 local-policy   local    all          network: 2 allow (L4), 1 deny (L7)
 ```
 
+When the same decision has entries at both layers, each layer gets its own
+count, L4 first. Two host allows and one HTTP allow read
+`network: 2 allow (L4), 1 allow (L7)`.
+
 The labels appear when the current listing includes at least one HTTP rule.
 Because filters and hidden inactive rules change what the listing contains, a
 filtered listing with no HTTP rules shows an unlabeled count, such as
@@ -176,11 +194,11 @@ which rules matched:
 
 ```console
 $ sbx policy log
-Blocked requests:
+BLOCKED REQUESTS
 SANDBOX      TYPE     HOST                   PROXY        RULE            REASON         LAST SEEN        COUNT
 my-sandbox   network  blocked.example.com    transparent  domain-blocked  default-deny   10:15:25 29-Jan  1
 
-Allowed requests:
+ALLOWED REQUESTS
 SANDBOX      TYPE     HOST                   PROXY          RULE             REASON   LAST SEEN        COUNT
 my-sandbox   network  api.anthropic.com      forward        domain-allowed            10:15:23 29-Jan  42
 my-sandbox   network  registry.npmjs.org     forward-bypass domain-allowed            10:15:20 29-Jan  18
@@ -206,7 +224,12 @@ Filter by sandbox name by passing it as an argument:
 $ sbx policy log my-sandbox
 ```
 
-Use `--limit N` to show only the last `N` entries, `--json` for
+Use `--limit N` to show only the last `N` entries, `--json` or `--format yaml` for
 machine-readable output, or `--type network` to filter by policy type.
 `sbx policy log` records network traffic only; filesystem mount decisions
 aren't available in the log yet.
+
+Structured output uses the same document for local and cloud sandboxes:
+`{updated_at, allowed: [...], blocked: [...]}`. Each entry includes `sandbox_id`,
+`host`, `proxy_type`, `rule`, `reason`, `count`, `first_seen`, and `last_seen`.
+The `--limit` flag applies to structured output too.

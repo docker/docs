@@ -74,7 +74,19 @@ example sets four configurable options on the `json-file` logging driver:
 }
 ```
 
-Restart Docker for the changes to take effect for newly created containers.
+Restart Docker Engine on a Linux system that uses `systemd`:
+
+```console
+$ sudo systemctl restart docker
+```
+
+If you use Docker Desktop, restart it with the Docker Desktop CLI:
+
+```console
+$ docker desktop restart
+```
+
+The changes take effect for newly created containers after the restart.
 Existing containers don't use the new logging configuration automatically.
 
 > [!NOTE]

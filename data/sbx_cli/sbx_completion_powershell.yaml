@@ -27,5 +27,11 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      # Load completions in the current session
+      sbx completion powershell | Out-String | Invoke-Expression
+
+      # Install for every new session
+      sbx completion powershell >> $PROFILE
 see_also:
     - sbx completion - Generate the autocompletion script for the specified shell

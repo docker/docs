@@ -5,7 +5,7 @@ description: |-
 
     This command does not remove local MCP server registrations. Use 'sbx mcp rm'
     to remove a registration.
-usage: sbx mcp auth rm [server-name] [flags]
+usage: sbx mcp auth rm [SERVER] [flags]
 options:
     - name: all
       default_value: "false"
@@ -23,7 +23,7 @@ options:
       usage: help for rm
     - name: json
       default_value: "false"
-      usage: Output in JSON format (alias for --format json)
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"

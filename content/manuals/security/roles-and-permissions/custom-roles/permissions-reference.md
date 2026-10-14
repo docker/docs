@@ -11,7 +11,7 @@ keywords: >-
   Docker Offload, security
 weight: 20
 aliases:
-  - /platform/security/roles-and-permissions/custom-roles/permissions-reference/
+  - /enterprise/security/roles-and-permissions/custom-roles/permissions-reference/
 ---
 
 {{< summary-bar feature_name="Custom roles" >}}

@@ -13,7 +13,6 @@ params:
       - Application development
       - Supply chain security
       - Accounts and admin
-      - Enterprise
   notoc: true
   ai-and-agents:
   - title: Docker Agentic Platform
@@ -115,15 +114,6 @@ params:
     description: Features, bug fixes, and breaking changes for Docker Home, billing, security, and subscriptions.
     icon: document-plus
     link: /platform-release-notes/
-  enterprise:
-  - title: Deploy Docker Desktop
-    description: Deploy Docker Desktop at scale within your company
-    icon: arrow-down-tray
-    link: /enterprise/enterprise-deployment/
-  - title: Hardened Docker Desktop
-    description: Security features that strengthen developer environments.
-    icon: shield-check
-    link: /enterprise/security/hardened-desktop/
 ---
 
 This section contains user guides on how to install, set up, configure, and use
@@ -152,9 +142,3 @@ Security guardrails and image analysis for your software supply chain.
 Manage Docker accounts, administration, subscriptions, billing, and security.
 
 {{< grid items=platform >}}
-
-## Enterprise
-
-Targeted at IT administrators with help on deploying Docker Desktop at scale with configuration guidance on security related features.
-
-{{< grid items=enterprise >}}

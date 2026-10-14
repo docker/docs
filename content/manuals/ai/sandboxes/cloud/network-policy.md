@@ -26,7 +26,8 @@ precedence over allow rules across the applicable policies.
 Cloud creation uses cloud account policy, network rules passed to the command,
 and network access declared by the agent or kit. Both `sbx --cloud create` and
 `sbx --cloud run` leave local network and organization policies on the host.
-Moving a local sandbox to the cloud also uses cloud policy.
+Moving a local sandbox to the cloud works the same way, except that rules you
+added locally don't transfer.
 
 Define the intended policy in the cloud store. After creation, inspect the
 configured rules and [verify connection decisions](#inspect-network-policy).

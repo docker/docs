@@ -2,6 +2,7 @@
 title: Data privacy and Gordon
 linkTitle: Data privacy
 description: How Gordon handles your data and what information is collected
+keywords: Gordon, data privacy, data retention, security
 weight: 30
 ---
 
@@ -85,17 +86,13 @@ Your data is protected through encryption in transit. For paid subscriptions,
 no persistent storage occurs—Gordon processes your requests and discards the
 data immediately.
 
-For questions about privacy terms and conditions, review [Gordon's
-Supplemental
-Terms](https://www.docker.com/legal/docker-ai-supplemental-terms/).
-
 ## Organizational data policies
 
 For Business subscriptions, administrators can enable or disable Gordon for
 their organization using Settings Management. Review your organization's data
 handling requirements before enabling Gordon.
 
-See [Settings Management](/enterprise/security/hardened-desktop/settings-management/)
+See [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md)
 for configuration details.
 
 ## Disabling Gordon
@@ -112,7 +109,7 @@ Individual users:
 Business organizations:
 
 Administrators can disable Gordon for the entire organization using Settings
-Management. See [Settings Management](/enterprise/security/hardened-desktop/settings-management/)
+Management. See [Settings Management](/desktop/enterprise/hardened-desktop/settings-management/)
 for details.
 
 ## Questions about privacy
@@ -120,5 +117,5 @@ for details.
 For questions about Docker's privacy practices:
 
 - Review the [Docker Privacy Policy](https://www.docker.com/legal/privacy/)
-- Read [Gordon's Supplemental Terms](https://www.docker.com/legal/docker-ai-supplemental-terms/)
+- Read the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/)
 - Contact Docker Support for specific concerns

@@ -1,7 +1,16 @@
 {
   "period_start": "2026-08-29",
-  "period_end": "2026-09-27",
+  "period_end": "2026-09-29",
   "items": [
+    {
+      "product": "Docker Home",
+      "title": "Assign licenses to teams",
+      "description": "Assign a product license to a team so every current and future member receives it. The Licenses page in Docker Home shows available licenses and whether they are assigned to teams or individuals.",
+      "url": "/accounts/organization/manage/manage-licenses/#teams",
+      "published": "2026-09-29",
+      "source_prs": [26205],
+      "featured": true
+    },
     {
       "product": "Docker Sandboxes",
       "title": "Run sandboxes on Docker-managed cloud infrastructure",
@@ -72,7 +81,7 @@
       "url": "/build/builders/drivers/cloud/",
       "published": "2026-09-03",
       "source_prs": [25885],
-      "featured": true
+      "featured": false
     }
   ]
 }

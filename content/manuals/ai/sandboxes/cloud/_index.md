@@ -3,16 +3,7 @@ title: Cloud sandboxes
 description: Run Docker Sandboxes on Docker-managed cloud infrastructure and understand the cloud-specific command, storage, and billing model.
 keywords: docker sandboxes, cloud sandboxes, sbx cloud, ai agents, agentic platform
 weight: 35
-params:
-  sidebar:
-    badge:
-      color: violet
-      text: Experimental
 ---
-
-> [!NOTE]
-> Cloud sandbox support in the `sbx` CLI is experimental. Features and behavior
-> may change.
 
 Cloud sandboxes run AI agents on Docker-managed infrastructure instead of your
 local machine. Use them when you need an isolated environment that doesn't
@@ -49,6 +40,15 @@ Sign in with the same Docker account you used to subscribe:
 ```console
 $ sbx login
 ```
+
+For CI and other environments without a browser, sign in with a Docker
+Personal Access Token (PAT) for the subscribed account:
+
+```console
+$ echo "$DOCKER_PAT" | sbx login --username <your-docker-id> --password-stdin
+```
+
+For PAT setup instructions, see [CI and headless use](../workflows/automation.md).
 
 Check cloud connectivity and account access:
 

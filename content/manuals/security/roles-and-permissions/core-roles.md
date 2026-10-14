@@ -9,7 +9,7 @@ keywords: >-
   OIDC, teams, access control, Docker Business, custom roles
 weight: 10
 aliases:
-  - /platform/security/roles-and-permissions/core-roles/
+  - /enterprise/security/roles-and-permissions/core-roles/
 ---
 
 {{< summary-bar feature_name="General admin" >}}

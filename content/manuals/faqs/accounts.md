@@ -4,9 +4,28 @@ linkTitle: Accounts
 weight: 10
 description: FAQs about Docker IDs, account creation, organizations, companies, seats, and members
 keywords:
-  docker ID, docker account FAQ, change docker ID, username taken, trademark,
-  organization name, organization namespace, create account, Google, GitHub,
-  deactivate docker ID, organizations, members, seats, company, company owners
+  - docker ID
+  - docker account FAQ
+  - change docker ID
+  - username taken
+  - trademark
+  - organization name
+  - organization namespace
+  - create account
+  - Google
+  - GitHub
+  - deactivate docker ID
+  - organizations
+  - members
+  - seats
+  - company
+  - company owners
+  - convert Docker account
+  - sign in after convert
+  - organization owner
+  - personal access token
+  - auto-generated token
+  - incorrect authentication credentials
 tags: [FAQ]
 toc_max: 2
 aliases:
@@ -64,16 +83,61 @@ If you have a trademark for your Docker ID,
 [Docker Support](https://hub.docker.com/support/contact/) can retrieve the
 Docker ID for you.
 
+### Why did one of my personal access tokens disappear?
+
+Signing in to Docker Desktop creates an auto-generated personal access
+token for CLI authentication. An account can have five of these tokens.
+When Docker Desktop creates another one, it deletes the least recently
+used auto-generated token. A token that has never been used is ranked
+by when it was created. The deleted token is removed from your token
+list.
+
+Tokens you create yourself are not deleted this way. They stay in the
+list until you delete them. A revoked token stays in the list with a
+status of **Revoked**.
+
+For how these tokens are created and how to tell them apart, see
+[Auto-generated PATs](/manuals/security/access-tokens/personal-access-tokens.md#auto-generated-tokens).
+
+### Why does sign-in fail with "Incorrect authentication credentials"?
+
+`docker login` returns `Incorrect authentication credentials` when the
+username and secret don't match a credential that can sign in. The
+message is the same when a personal access token is wrong, expired,
+inactive, or revoked, and when the username is not the account that
+owns the token.
+
+Check the following:
+
+1. The username is the Docker ID of the account that owns the token.
+   Use an organization name only with an
+   [organization access token](/manuals/security/access-tokens/organization-access-tokens.md).
+2. You pasted the full token, with no spaces or line breaks. Docker
+   shows a token only once. If you no longer have it,
+   [create a new personal access token](/manuals/security/access-tokens/personal-access-tokens.md#create-a-personal-access-token).
+3. On the **Personal access tokens** page, find the token and use its
+   status:
+   - **Expired:** Create a new token. You can't change the expiration
+     date.
+   - **Inactive:** Select **Activate**.
+   - **Revoked:** The token can't be used again. Delete it and create
+     a new one.
+
 ## Organizations
 
 ### What's an organization name or namespace?
 
-The organization name, sometimes referred to as the organization namespace or
-the organization ID, is the unique identifier of a Docker organization. The
-organization name can't be the same as an existing Docker ID.
+The organization namespace and the organization name are different.
 
-For more information, see
-[Organization accounts](/manuals/accounts/organization/_index.md).
+The namespace is the permanent identifier for the organization. Image names
+use it as the first part, as in `namespace/image:tag`. You can't change it,
+and it can't match an existing Docker ID.
+
+The organization name is the public name of the organization. You can change
+it.
+
+For the fields you set when you create an organization, see
+[Create a Docker organization](/manuals/accounts/organization/setup/orgs.md).
 
 ### How can I see how many active users are in my organization?
 
@@ -82,7 +146,8 @@ find out how many users have Docker Desktop installed. If your organization
 doesn't use this software, you can run an internal survey
 to find out who is using Docker Desktop.
 
-For more information, see [Identify your Docker users and their Docker accounts](/manuals/accounts/organization/setup/onboard.md#step-one-identify-your-docker-users).
+For more information, see
+[Identify your Docker users and their Docker accounts](/manuals/accounts/organization/setup/onboard.md#step-one-identify-your-docker-users).
 
 ### Do users need to authenticate with Docker before an owner can add them to an organization?
 
@@ -92,12 +157,16 @@ assign them to a team during the invite process.
 ### Can I force my organization's members to authenticate before using Docker Desktop and are there any benefits?
 
 Yes. You can
-[enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
+[enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).
 
 Some benefits of enforcing sign-in are:
 
 - Ensures users receive the benefits of your subscription.
-- Ensures security features like [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md) and [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) are applied.
+- Ensures security features like
+  [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md)
+  and
+  [Registry Access Management](/manuals/desktop/enterprise/hardened-desktop/registry-access-management.md)
+  are applied.
 - Ensures you gain insights into users' activity.
 
 ### Can I convert my personal Docker ID to an organization account?
@@ -108,6 +177,20 @@ revert it to a personal user account.
 
 For prerequisites and instructions, see
 [Convert an account into an organization](/manuals/accounts/organization/setup/convert-account.md).
+
+### Can I convert an individual account that uses single sign-on?
+
+No. **Convert** shows "Your account uses single sign-on. Contact your
+administrator to manage these settings."
+
+### Why can't I sign in after converting my account to an organization?
+
+Converting signs you out and removes your email address from every Docker
+account, so you can no longer sign in with it. Sign in with the Docker ID you
+named as the owner and select the organization in Docker Home. If you named
+someone else as the owner, sign up again and ask that owner to invite you. See
+[Convert a Docker account to an organization](/manuals/accounts/organization/setup/convert-account.md#conversion)
+for the full explanation.
 
 ### Do organization invitees take up seats?
 

@@ -51,7 +51,7 @@ Docker Desktop Kubernetes can be provisioned with either the `kubeadm` or `kind`
 provisioners.
 
 `kubeadm` is the older provisioner. It supports a single-node cluster, you can't select the kubernetes
-version, it's slower to provision than `kind`, and it's not supported by [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/index.md) (ECI),
+version, it's slower to provision than `kind`, and it's not supported by [Enhanced Container Isolation](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/index.md) (ECI),
 meaning that if ECI is enabled the cluster works but it's not protected by ECI.
 
 `kind` is the newer provisioner. It supports multi-node clusters (for
@@ -154,7 +154,7 @@ factors, including the version of Kubernetes being used. The tags vary for each 
 
 To accommodate scenarios where access to Docker Hub is not allowed, admins can
 configure Docker Desktop to pull the above listed images from a different registry (e.g., a mirror)
-using the [KubernetesImagesRepository](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md#kubernetes) setting as follows.
+using the [KubernetesImagesRepository](/manuals/desktop/enterprise/hardened-desktop/settings-management/configure-json-file.md#kubernetes) setting as follows.
 
 An image name can be broken into `[registry[:port]/][namespace/]repository[:tag]` components.
 The `KubernetesImagesRepository` setting allows users to override the `[registry[:port]/][namespace]`

@@ -31,7 +31,13 @@ permissions for each role.
 You can also select one or more product licenses for an invitee. Docker
 assigns available licenses when they accept. Unlike a seat, licenses aren't
 deducted from your organization's available licenses until the invitee
-accepts. See [Licenses and invites][licenses-and-invites].
+accepts. See [Invitations][license-invitations].
+
+The **Members** page is where you assign or revoke a license for one member,
+using the **action menu** on their row or the **Bulk actions** menu. To assign
+a license to a whole team, or to view how many licenses your organization has,
+use the **Teams** and **Licenses** views. See
+[Manage licenses][manage-licenses].
 
 {{< tabs >}}
 {{< tab name="Email or username" >}}
@@ -257,7 +263,8 @@ After you invite and manage members, explore these related topics:
   management
 
 [roles-permissions]: /manuals/security/roles-and-permissions/_index.md
-[licenses-and-invites]: /manuals/accounts/organization/manage/manage-licenses.md#licenses-and-invites
+[license-invitations]: /manuals/accounts/organization/manage/manage-licenses.md#invitations
+[manage-licenses]: /manuals/accounts/organization/manage/manage-licenses.md
 [bulk-invites]: /reference/api/hub/latest/operations/postV2InvitesBulk/
 [docker-pricing]: https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminMembers
 [scim-role-mapping]: /manuals/security/provisioning/scim/_index.md

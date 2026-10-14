@@ -72,10 +72,12 @@ appear in the cloud destination. When the source has a workspace, the CLI
 warns and asks for confirmation. The `--force` flag skips the prompt but
 doesn't include those files.
 
-The destination uses cloud network policy. Local network rules don't transfer.
-If the local source has HTTP method or path restrictions, the CLI warns and
-asks for confirmation because those restrictions won't apply in the cloud.
-`--force` skips the prompt but retains the warning.
+The destination uses cloud network policy and the network rules of the
+sandbox's kit, or of its built-in agent, as `sbx --cloud create` does. Network
+rules you added locally don't transfer. If the local source has HTTP method or
+path restrictions, the CLI warns and asks for confirmation because those
+restrictions won't apply in the cloud. `--force` skips the prompt but retains
+the warning.
 
 Published TCP sandbox ports are published on the cloud destination with cloud
 URLs. Ports that the cloud refuses are skipped with a warning. Host port
@@ -107,6 +109,16 @@ $ sbx move local-project --to cloud --ttl 2h --on-timeout stop
 
 The `stop` action preserves state. An explicit request fails if stopping is
 unavailable. Use `--on-timeout delete` to delete on expiration.
+
+To restart the destination automatically when it expires, use `restart`:
+
+```console
+$ sbx move local-project --to cloud --ttl 4h --on-timeout restart
+```
+
+The `restart` action stops and immediately starts the destination. If you
+specify `--ttl`, it must be at least one hour.
+
 These flags apply only to moves to the cloud. After the move, inspect or extend
 the expiration with [`sbx --cloud ttl`](usage.md#configure-expiration).
 

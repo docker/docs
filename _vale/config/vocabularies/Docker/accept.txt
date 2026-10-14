@@ -211,6 +211,7 @@ Sonoma
 Splunk
 SQLite
 stargz
+eStargz
 stdin
 stdout
 subfolder

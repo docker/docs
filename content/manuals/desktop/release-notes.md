@@ -24,6 +24,105 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.95.0
+
+{{< release-date date="2026-10-12" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.95.0" build_path="/242831/" >}}
+
+### Updates
+
+- [Docker Compose v5.6.0](https://github.com/docker/compose/releases/tag/v5.6.0)
+- [Docker Offload v0.6.73](https://github.com/docker/cloud/releases/tag/v0.6.73)
+- [Docker Scout CLI v1.26.0](https://github.com/docker/scout-cli/releases/tag/v1.26.0)
+- [Docker Agent v1.145.0](https://github.com/docker/docker-agent/releases/tag/v1.145.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed the engine restarting right after Docker Desktop starts when an admin policy enables Enhanced Container Isolation.
+- Fixed automatic update downloads starting before sign-in on machines that enforce sign-in, which could ignore an organization's policy disabling updates.
+- Fixed long Ask Gordon conversations where the end of responses was hidden behind the user's message, and where scrolling up jumped around or got stuck.
+- Fixed **Settings** accepting a disk image location inside the Docker Desktop installation directory, which the installer replaces on every update. Fixes [docker/desktop-feedback#667](https://github.com/docker/desktop-feedback/issues/667).
+- Fixed **Quit** doing nothing in the error dialog shown when the Docker Engine fails, and the dialog taking around 2 minutes to appear when the engine fails while starting.
+- Fixed an issue where Gordon AI chat displayed the final answer inside the collapsed Activity section instead of below it when token usage was hidden by the gateway.
+- Fixed an issue where gathering diagnostics from the error dialog failed repeatedly when Docker Desktop could not start.
+- Fixed Kubernetes occasionally failing to start when a Registry Access Management image pull hit a transient network timeout.
+- Added `docker desktop auth status` CLI subcommand to display Docker Hub login status, username, email, plan, and organization membership, with `--format pretty|json` output options.
+
+#### For Mac
+
+- Fixed Docker Desktop being unable to start subprocesses after being launched a second time.
+
+#### For Windows
+
+- Fixed an issue on Windows with WSL 3.0.1 where `docker info` reported `Docker Desktop (containerized)` instead of `Docker Desktop`, causing `docker debug` to fail when Registry Access Management is enabled.
+- Fixed a Windows update failure where `app.asar` was reported as locked by Docker Desktop.
+- Fixed the Windows installer deleting the WSL data disk during an update when the data root was inside the installation directory. Fixes [docker/desktop-feedback#667](https://github.com/docker/desktop-feedback/issues/667).
+- Fixed Docker Desktop failing to start with the Hyper-V backend when the Windows hosts file is protected by an antivirus or endpoint security tool.
+- Fixed issues on Windows with WSL/MSYS2 native symlink (LX symlink) handling, sparse stream exports via backup tar, and a race condition in named pipe listener close.
+- Added a dedicated error message when the Hyper-V virtual machine cannot start because the host does not have enough free memory.
+- Fixed an intermittent MSI installation failure (error code 1603) on Windows caused by analytics custom actions racing with other installer steps.
+- Fixed a per-user installation on Windows silently completing on machines where the Virtual Machine Platform feature is disabled, leaving Docker Desktop unable to start.
+- The Windows installer now fails with an explicit error when a per-user installation is attempted from the SYSTEM account (e.g. deployed via SCCM or Intune), instead of silently installing into the SYSTEM profile.
+- Fixed an issue where the Hyper-V VM could fail to start after a restart because its disk was still being compacted.
+
+## 4.94.0
+
+{{< release-date date="2026-10-05" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.94.0" build_path="/241994/" >}}
+
+### Update
+
+- Docker Offload `v0.6.53`
+- [containerd v2.3.6](https://github.com/containerd/containerd/releases/tag/v2.3.6)
+- [Docker Agent v1.144.0](https://github.com/docker/docker-agent/releases/tag/v1.144.0)
+- [NVIDIA Container Toolkit v1.20.1](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.20.1)
+- [Docker Scout CLI v1.25.0](https://github.com/docker/scout-cli/releases/tag/v1.25.0)
+- [Docker Engine v29.8.2](https://docs.docker.com/engine/release-notes/29/#2982)
+- [Docker Buildx v0.37.2](https://github.com/docker/buildx/releases/tag/v0.37.2)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where Resource Saver could pause the VM before the Docker API was ready, causing transient errors during engine startup or restart.
+- Fixed `kubectl logs` not working with `kubeadm`.
+- Fixed the Docker Desktop service being left stopped after an update when it was running but not configured to auto-start.
+- Fixed stored API keys being written in clear to Docker Desktop logs and included in diagnostics bundles.
+- Fixed the account name and tier briefly showing as empty and personal after a restart when Docker Hub was slow to respond.
+- Changed the default logging driver for new Linux containers to `local` to enable automatic log rotation and reduce disk usage.
+- Fixed an issue in the **Images** view where the reclaimable disk space value could get stuck at **0 Bytes** while selecting images for deletion.
+- Improved VM disk creation speed and reduced host disk space usage by skipping unnecessary inode table zeroing on sparse and pre-zeroed storage.
+- Fixed Docker Desktop writing a multi-gigabyte error file and consuming excessive memory when the backend failed to start.
+- Docker Desktop now names the settings file that needs correcting instead of reporting an unexpected error when it contains invalid JSON.
+- Stopped Docker Desktop logs from recording unobfuscated values for IPC payloads that are JSON arrays or plain strings.
+- Fixed a deadlock that caused Docker Desktop to hang indefinitely when quitting while an engine recovery or error dialog was displayed.
+- Fixed the kindest/node tag showing blank in `docker desktop kubernetes images`.
+- docker-pass:
+   - Removing a secret that does not exist is now consistent with other `docker remove` commands.
+   - Running the examples from the help text no longer prefixes the secret with a line break.
+- Fixed long Ask Gordon conversations where the end of responses was hidden behind the user's message, and where scrolling up jumped around or got stuck.
+
+#### For Mac
+
+- Fixed the update tooltip suggesting to move Docker Desktop to `/Applications` when that is the folder the current user cannot modify. Fixes [docker/desktop-feedback#598](https://github.com/docker/desktop-feedback/issues/598).
+- Fixed repeated privileged-access prompts when Docker Desktop starts automatically after a reboot. Fixes [docker/desktop-feedback#651](https://github.com/docker/desktop-feedback/issues/651).
+- Fixed the "CLI tools installation" setting on macOS reverting to System when Docker Desktop could not update the login shell profile.
+- Fixed zsh completions not being set up when `~/.zshrc` doesn't exist.
+
+#### For Windows
+
+- Improved WSL startup errors to explain when virtualization is disabled in firmware, nested virtualization is unavailable, or the Windows hypervisor is disabled at startup, with guidance for resolving each condition.
+- Fixed the Docker Desktop service losing its automatic start mode after an update run by WinGet or another external installer when the service had been installed with `--always-run-service`.
+- Fixed a bug introduced in 4.92.0 where WSL integration could fail to start with "timed out waiting for ... to be automounted". Fixes [docker/desktop-feedback#695](https://github.com/docker/desktop-feedback/issues/695).
+
+#### For Linux
+
+- Fixed a bug on Linux where quitting Docker Desktop could close unrelated applications, including all open terminal windows. Fixes [docker/desktop-linux#109](https://github.com/docker/desktop-linux/issues/109).
+
 ## 4.93.0
 
 {{< release-date date="2026-09-28" >}}
@@ -1659,7 +1758,7 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 ### Security 
 
-- Added security patches to address CVEs [2025-52565](https://github.com/opencontainers/runc/security/advisories/GHSA-9493-h29p-rfm2), [2025-52881](https://github.com/opencontainers/runc/security/advisories/GHSA-cgrx-mc8f-2prm), and [2025-31133](https://github.com/opencontainers/runc/security/advisories/GHSA-qw9x-cqr3-wc7r) when using [Enhanced Container Isolation](https://docs.docker.com/enterprise/security/hardened-desktop/enhanced-container-isolation). 
+- Added security patches to address CVEs [2025-52565](https://github.com/opencontainers/runc/security/advisories/GHSA-9493-h29p-rfm2), [2025-52881](https://github.com/opencontainers/runc/security/advisories/GHSA-cgrx-mc8f-2prm), and [2025-31133](https://github.com/opencontainers/runc/security/advisories/GHSA-qw9x-cqr3-wc7r) when using [Enhanced Container Isolation](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/_index.md). 
 
 ## 4.52.0
 
@@ -1785,7 +1884,7 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ### New
 
 - You can now specify PAC files and Embedded PAC scripts with installer flags for [macOS](/manuals/desktop/setup/install/mac-install.md#proxy-configuration) and [Windows](/manuals/desktop/setup/install/windows-install.md#proxy-configuration). 
-- Administrators can set proxy settings via [macOS configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#macos-configuration-profiles-method-recommended). 
+- Administrators can set proxy settings via [macOS configuration profiles](/manuals/desktop/enterprise/enforce-sign-in/methods.md#macos-configuration-profiles-method-recommended). 
 
 ### Upgrades
 
@@ -1817,7 +1916,7 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 ### Security
 
-- Fixed [CVE-2025-10657](https://www.cve.org/CVERecord?id=CVE-2025-10657) where the Enhanced Container Isolation [Docker Socket command restrictions](../enterprise/security/hardened-desktop/enhanced-container-isolation/config.md#command-restrictions) feature was not working properly in Docker Desktop 4.46.0 only (the configuration for it was being ignored).
+- Fixed [CVE-2025-10657](https://www.cve.org/CVERecord?id=CVE-2025-10657) where the Enhanced Container Isolation [Docker Socket command restrictions](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/config.md#command-restrictions) feature was not working properly in Docker Desktop 4.46.0 only (the configuration for it was being ignored).
 
 ### New
 
@@ -1862,7 +1961,7 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ### New
 
 - Added a new Learning center walkthrough for Docker MCP Toolkit and other onboarding improvements.
-- Administrators can now control [PAC configurations with Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md#proxy-settings).
+- Administrators can now control [PAC configurations with Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/configure-json-file.md#proxy-settings).
 - The update experience has been redesigned to make it easier to understand and manage updates for Docker Desktop and its components.
 
 ### Upgrades
@@ -1998,9 +2097,9 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 - Fixed an issue pulling images with zstd differential layers when the containerd image store is enabled.
 - Fixed a bug causing containers launching  with the `--restart` flag to not restart properly when using Enhanced Container Isolation.
-- Improved interaction between [Kubernetes custom registry images](/manuals/desktop/use-desktop/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) and Enhanced Container Isolation (ECI), so the [ECI Docker Socket image list](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md) no longer needs to be manually updated when using a custom registry for Kubernetes control plane images.
+- Improved interaction between [Kubernetes custom registry images](/manuals/desktop/use-desktop/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) and Enhanced Container Isolation (ECI), so the [ECI Docker Socket image list](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/config.md) no longer needs to be manually updated when using a custom registry for Kubernetes control plane images.
 - Fixed a bug where a Docker Desktop Kubernetes cluster in kind mode fails to start after restarting Docker Desktop if the user is required to be signed in but is currently signed out.
-- Fixed a bug that prevented the mounting of MCP secrets into containers when [Enhanced Container Isolation](/enterprise/security/hardened-desktop/enhanced-container-isolation/) is enabled.
+- Fixed a bug that prevented the mounting of MCP secrets into containers when [Enhanced Container Isolation](/desktop/enterprise/hardened-desktop/enhanced-container-isolation/) is enabled.
 - Fixed a bug preventing the use of `--publish-all` when `--publish` was already specified.
 - Fixed a bug causing the **Images** view to scroll infinitely. Fixes [docker/for-mac#7725](https://github.com/docker/for-mac/issues/7725).
 - Fixed a bug which caused the **Volumes** tab to be blank while in Resource Saver mode.
@@ -2164,7 +2263,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 - Improved the sign-in enforcement message when more than 10 organizations are enforced.
 - Changed the way ports are mapped by Docker Desktop to fully support IPv6 ports.
 - Fixed a bug in the Dashboard container logs screen causing the scrollbar to disappear as the mouse approaches.
-- [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) fixed for Teams subscription users.
+- [Enforced sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md) fixed for Teams subscription users.
 - `llama.cpp` server now supports streaming and tool calling in Model Runner.
 - Sign-in Enforcement capability is now available to all subscriptions.
 
@@ -2259,7 +2358,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 - Improved error messages when downloading Registry Access Management configuration.
 - If Docker can't bind an ICMPv4 socket, it now logs an error and continues rather than quits.
 - Enabled the memory protection keys mechanism in the Docker Desktop Linux VM, allowing containers like Oracle database images to run correctly.
-- Fixed a problem with containers accessing `/proc/sys/kernel/shm*` sysctls when [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md) is enabled on Mac, Windows Hyper-V, or Linux.
+- Fixed a problem with containers accessing `/proc/sys/kernel/shm*` sysctls when [Enhanced Container Isolation](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/_index.md) is enabled on Mac, Windows Hyper-V, or Linux.
 - Added kernel module `nft_fib_inet`, required for running firewalld in a Linux container.
 - MacOS QEMU Virtualization option is being deprecated on July 14, 2025.
 
@@ -2416,7 +2515,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 #### For all platforms
 
 - Fixed a bug where access tokens generated by the `docker login` web flow could not be refreshed by Docker Desktop.
-- Fixed a bug where container creation via the Docker API using `curl` failed when [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md) was enabled.
+- Fixed a bug where container creation via the Docker API using `curl` failed when [Enhanced Container Isolation](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/_index.md) was enabled.
 - Fixed a bug where the RAM policy was not refreshed after the refresh period had elapsed.
 - Fixed a bug in Enhanced Container Isolation when mounting the Docker socket into a container, and then creating Docker containers with bind-mounts from within that container.
 - Fixed an issue that caused a discrepancy between the GUI and the CLI, the former forcing the `0.0.0.0` HostIP in port-mappings. This caused default binding IPs configured through Engine's `ip` flag, or through the bridge option `com.docker.network.bridge.host_binding_ipv4`, to not be used.
@@ -2475,7 +2574,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 #### For all platforms
 
 - Fixed an issue that caused the AI Catalog in Docker Hub to be unavailable in Docker Desktop.
-- Fixed an issue that caused Docker Desktop to panic with `index out of range [0] with length 0` when using [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md).
+- Fixed an issue that caused Docker Desktop to panic with `index out of range [0] with length 0` when using [Enhanced Container Isolation](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/_index.md).
 
 ### Known issues
 
@@ -2565,13 +2664,13 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 - Existing Docker Desktop installations using the WSL2 engine on Windows are now automatically migrated to a unified single-distribution architecture for enhanced consistency and performance.
 - Administrators can now:
-  - Enforce sign-in with macOS [configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) (Early Access).
+  - Enforce sign-in with macOS [configuration profiles](/manuals/desktop/enterprise/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) (Early Access).
   - Enforce sign-in for more than one organization at a time (Early Access).
-  - Deploy Docker Desktop for Mac in bulk with the [PKG installer](/manuals/enterprise/enterprise-deployment/pkg-install-and-configure.md) (Early Access).
+  - Deploy Docker Desktop for Mac in bulk with the [PKG installer](/manuals/desktop/enterprise/enterprise-deployment/pkg-install-and-configure.md) (Early Access).
   - Use Desktop Settings Management to manage and enforce defaults via admin.docker.com (Early Access).
 - Enhance Container Isolation (ECI) has been improved to:
-  - Allow admins to [turn off Docker socket mount restrictions](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md#allowing-all-containers-to-mount-the-docker-socket).
-  - Support wildcard tags when using the [`allowedDerivedImages` setting](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images).
+  - Allow admins to [turn off Docker socket mount restrictions](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/config.md#allowing-all-containers-to-mount-the-docker-socket).
+  - Support wildcard tags when using the [`allowedDerivedImages` setting](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images).
 
 ### Upgrades
 
@@ -2675,7 +2774,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 - Fixed a bug where the **Push to Docker Hub** action in the **Images** view would result in an `invalid tag format` error. Fixes [docker/for-win#14258](https://github.com/docker/for-win/issues/14258).
 - Fixed an issue where Docker Desktop startup failed when ICMPv6 setup was not successful.
 - Added drivers that allow USB/IP to work.
-- Fixed a bug in Enhanced Container Isolation (ECI) [Docker socket mount permissions for derived images](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md) where it was incorrectly denying Docker socket mounts for some images when Docker Desktop uses the containerd image store.
+- Fixed a bug in Enhanced Container Isolation (ECI) [Docker socket mount permissions for derived images](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/config.md) where it was incorrectly denying Docker socket mounts for some images when Docker Desktop uses the containerd image store.
 - Enable `NFT_NUMGEN`, `NFT_FIB_IPV4` and `NFT_FIB_IPV6` kernel modules.
 - Build UI:
   - Highlight build check warnings in the **Completed builds** list.
@@ -2683,7 +2782,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
   - Image tags added to **Build results** section under the **Info** tab.
 - Improved efficiency of host-side disk utilization for fresh installations on Mac and Linux.
 - Fixed a bug that prevented the Sign in enforcement popup to be triggered when token expires.
-- Fixed a bug where containers would not be displayed in the GUI immediately after signing in when using [enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
+- Fixed a bug where containers would not be displayed in the GUI immediately after signing in when using [enforced sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).
 - `settings.json` has been renamed to `settings-store.json`
 - The host networking feature no longer requires users to be signed-in in order to use it.
 
@@ -2784,8 +2883,8 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 - [Host networking](/manuals/engine/network/drivers/host.md#docker-desktop) support on Docker Desktop is now generally available.
 - If you authenticate via the CLI, you can now authenticate through a browser-based flow, removing the need for manual PAT generation.
 - Windows now supports automatic reclamation of disk space in Docker Desktop for WSL2 installations [using a managed virtual hard disk](/manuals/desktop/features/wsl/best-practices.md).
-- Deploying Docker Desktop via the [MSI installer](/manuals/enterprise/enterprise-deployment/msi-install-and-configure.md) is now generally available.
-- Two new methods to [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) (windows registry key and `.plist` file) are now generally available.
+- Deploying Docker Desktop via the [MSI installer](/manuals/desktop/enterprise/enterprise-deployment/msi-install-and-configure.md) is now generally available.
+- Two new methods to [enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md) (windows registry key and `.plist` file) are now generally available.
 - Fresh installations of Docker Desktop now use the containerd image store by default.
 - [Compose Bridge](/manuals/compose/bridge/_index.md) (Experimental) is now available from the Compose file viewer. Easily convert and deploy your Compose project to a Kubernetes cluster.
 
@@ -2832,8 +2931,8 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
   > [!NOTE]
   > Using `docker login` with an address that includes URL path segments is not a documented use case and is considered unsupported. The recommended usage is to specify only a registry hostname, and optionally a port, as the address for `docker login`.
 - When running `docker compose up` and Docker Desktop is in the Resource Saver mode, the command is unresponsive. As a workaround, manually exit the Resource Saving mode and Docker Compose becomes responsive again.
-- When [Enhanced Container Isolation (ECI)](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md) is enabled, Docker Desktop may not enter Resource Saver mode. This will be fixed in a future Docker Desktop release.
-- The new [ECI Docker socket mount permissions for derived images](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images) feature does not yet work when Docker Desktop is configured with the  **Use containerd for pulling and storing images**. This will be fixed in the next Docker Desktop release.
+- When [Enhanced Container Isolation (ECI)](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/_index.md) is enabled, Docker Desktop may not enter Resource Saver mode. This will be fixed in a future Docker Desktop release.
+- The new [ECI Docker socket mount permissions for derived images](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images) feature does not yet work when Docker Desktop is configured with the  **Use containerd for pulling and storing images**. This will be fixed in the next Docker Desktop release.
 
 ## 4.33.2
 
@@ -2979,7 +3078,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 - Improved instructions for `watch` in the Compose File Viewer
 - Added support for Golang projects that don't have dependencies in Docker Init. Addresses [docker/roadmap#611](https://github.com/docker/roadmap/issues/611)
-- [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) now lets admins set the default value to `ProxyEnableKerberosNTLM`.
+- [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md) now lets admins set the default value to `ProxyEnableKerberosNTLM`.
 - Removed a temporary compatibility fix for older versions of Visual Studio Code.
 - Builds view:
   - Changed icon for imported build record to a "files" icon.
@@ -3034,7 +3133,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 ### New
 
-- [Air-Gapped Containers](/manuals/enterprise/security/hardened-desktop/air-gapped-containers.md) is now generally available.
+- [Air-Gapped Containers](/manuals/desktop/enterprise/hardened-desktop/air-gapped-containers.md) is now generally available.
 - Docker Compose File Viewer shows your Compose YAML with syntax highlighting and contextual links to relevant docs (Beta, progressive rollout).
 - New Sidebar user experience.
 
@@ -3058,7 +3157,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 - Added `proxyEnableKerberosNTLM` config to `settings.json` to enable fallback to basic proxy authentication if Kerberos/NTLM environment is not properly set up.
 - Fixed a bug where Docker Debug was not working properly with Enhanced Container Isolation enabled.
 - Fixed a bug where UDP responses were not truncated properly.
-- Fixed a bug where the **Update** screen was hidden when using [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
+- Fixed a bug where the **Update** screen was hidden when using [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md).
 - Fixed a bug where proxy settings defined in `admin-settings.json` were not applied correctly on startup.
 - Fixed a bug where the **Manage Synchronized file shares with Compose** toggle did not correctly reflect the value with the feature.
 - Fixed a bug where a bind mounted file modified on host is not updated after the container restarts, when gRPC FUSE file sharing is used on macOS and on Windows with Hyper-V. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274), [docker/for-win#14060](https://github.com/docker/for-win/issues/14060).
@@ -3121,7 +3220,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 #### For all platforms
 
 - Docker Desktop now supports [SOCKS5 proxies](/manuals/desktop/features/networking.md#socks5-proxy-support). Requires a Business subscription.
-- Added a new setting to manage the onboarding survey in [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
+- Added a new setting to manage the onboarding survey in [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md).
 
 #### For Windows
 
@@ -3198,14 +3297,14 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- You can now enforce Rosetta usage via [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
-- [Docker socket mount restrictions](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md) with ECI is now generally available.
+- You can now enforce Rosetta usage via [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md).
+- [Docker socket mount restrictions](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/config.md) with ECI is now generally available.
 - Docker Engine and CLI updated to [Moby 26.0](https://github.com/moby/moby/releases/tag/v26.0.0). This includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
 - New and improved Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
 - Compose supports [Synchronized file shares (experimental)](/manuals/desktop/features/synchronized-file-sharing.md).
 - New [interactive Compose CLI (experimental)](/manuals/compose/how-tos/environment-variables/envvars.md#compose_menu).
 - Beta release of:
-  - Air-Gapped Containers with [Settings Management](/manuals/enterprise/security/hardened-desktop/air-gapped-containers.md).
+  - Air-Gapped Containers with [Settings Management](/manuals/desktop/enterprise/hardened-desktop/air-gapped-containers.md).
   - [Host networking](/manuals/engine/network/drivers/host.md#docker-desktop) in Docker Desktop.
   - [Docker Debug](use-desktop/container.md#integrated-terminal) for running containers.
   - [Volumes Backup & Share extension](use-desktop/volumes.md) functionality available in the **Volumes** tab.
@@ -3276,7 +3375,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) now allows admins to set the default file-sharing implementation and specify which paths developer can add file shares to.
+- [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md) now allows admins to set the default file-sharing implementation and specify which paths developer can add file shares to.
 - Added support for `socks5://` HTTP and HTTPS proxy URLs when the [`SOCKS` proxy support beta feature](/manuals/desktop/features/networking.md) is enabled.
 - Users can now filter volumes to see which ones are in use in the **Volumes** tab.
 
@@ -3395,7 +3494,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 - Docker init now supports Java and is generally available to all users.
 - [Synchronized File Shares](/manuals/desktop/features/synchronized-file-sharing.md) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
-- Organization admins can now [configure Docker socket mount permissions](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md) when ECI is enabled.
+- Organization admins can now [configure Docker socket mount permissions](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/config.md) when ECI is enabled.
 - [Containerd Image Store](/manuals/desktop/features/containerd.md) support is now generally available to all users.
 - Get a debug shell into any container or image with the new [`docker debug` command](/reference/cli/docker/debug/) (Beta).
 - Organization admins, with a Docker Business subscription, can now configure a custom list of extensions with [Private Extensions Marketplace](/manuals/extensions/private-marketplace.md) enabled (Beta)
@@ -3496,7 +3595,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Administrators can now control access to beta and experimental features in the **Features in development** tab with [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
+- Administrators can now control access to beta and experimental features in the **Features in development** tab with [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md).
 - Introduced four new version update states in the footer.
 - `docker init` (Beta) now supports PHP with Apache + Composer.
 - The [**Builds** view](use-desktop/builds.md) is now GA. You can now inspect builds, troubleshoot errors, and optimize build speed.
@@ -3606,7 +3705,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Rosetta is now Generally Available for all users on macOS 13 or later. It provides faster emulation of Intel-based images on Apple Silicon. To use Rosetta, see [Settings](/manuals/desktop/settings-and-maintenance/settings.md). Rosetta is enabled by default on macOS 14.1 and later.
 - Docker Desktop now detects if a WSL version is out of date. If an out dated version of WSL is detected, you can allow Docker Desktop to automatically update the installation or you can manually update WSL outside of Docker Desktop.
 - New installations of Docker Desktop for Windows now require a Windows version of 19044 or later.
-- Administrators now have the ability to control Docker Scout image analysis in [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
+- Administrators now have the ability to control Docker Scout image analysis in [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md).
 
 ### Upgrades
 
@@ -3867,7 +3966,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For all platforms
 
-- [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) now lets you turn off Docker Extensions for your organisation.
+- [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md) now lets you turn off Docker Extensions for your organisation.
 - Fixed a bug where turning on Kubernetes from the UI failed when the system was paused.
 - Fixed a bug where turning on Wasm from the UI failed when the system was paused.
 - Bind mounts are now shown when you [inspect a container](use-desktop/container.md).
@@ -4499,7 +4598,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Two new security features have been introduced for Docker Business users, Settings Management and Enhanced Container Isolation. Read more about Docker Desktop’s new [Hardened Docker Desktop security model](/manuals/enterprise/security/hardened-desktop/_index.md).
+- Two new security features have been introduced for Docker Business users, Settings Management and Enhanced Container Isolation. Read more about Docker Desktop’s new [Hardened Docker Desktop security model](/manuals/desktop/enterprise/hardened-desktop/_index.md).
 - Added the new Dev Environments CLI `docker dev`, so you can create, list, and run Dev Envs via command line. Now it's easier to integrate Dev Envs into custom scripts.
 - Docker Desktop can now be installed to any drive and folder using the `--installation-dir`. Partially addresses [docker/roadmap#94](https://github.com/docker/roadmap/issues/94).
 

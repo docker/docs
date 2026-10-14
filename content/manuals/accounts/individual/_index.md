@@ -23,7 +23,7 @@ grid:
     link: /security/access-tokens/
   - title: Set up two-factor authentication
     description: Add an extra layer of authentication to your Docker account.
-    link: /security/2fa/
+    link: /security/authentication/2fa/manage/
     icon: device-phone-mobile
   - title: Organization accounts
     description: Learn how to create and manage Docker organizations.

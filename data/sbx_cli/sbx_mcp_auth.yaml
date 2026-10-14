@@ -27,6 +27,10 @@ description: |-
     flag, and the consent block marks that set as derived rather than chosen. Pass
     --no-scope to suppress all scope fallbacks and request the server's default grant.
 
+    When using recorded defaults or resource scopes, sbx also requests offline_access
+    if the authorization server advertises it, allowing refresh tokens. An explicit
+    --scope on this command requests exactly that set, without adding offline_access.
+
     Scopes you choose are checked against both the authorization server's RFC 8414
     scopes_supported and the resource's RFC 9728 metadata. A scope present in neither
     prints a warning but is still requested. If neither document publishes scopes,
@@ -44,7 +48,7 @@ description: |-
 
     Scope values may be URN-shaped (urn:ietf:params:oauth:scope:mail) or URL-shaped
     (https://www.fastmail.com/dev/mcp); neither needs quoting.
-usage: sbx mcp auth [server-name] [flags]
+usage: sbx mcp auth [SERVER] [flags]
 options:
     - name: all
       default_value: "false"
@@ -58,7 +62,7 @@ options:
       usage: help for auth
     - name: json
       default_value: "false"
-      usage: Output in JSON format (alias for --format json)
+      usage: Output in JSON format
     - name: no-scope
       default_value: "false"
       usage: |

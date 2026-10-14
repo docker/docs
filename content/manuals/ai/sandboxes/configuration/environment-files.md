@@ -64,6 +64,10 @@ ports:
     host: 3000
 ```
 
+> [!NOTE]
+> This example uses kits v2, the format used by built-in agents. For v3, see
+> [Add v3 kits](#add-v3-kits).
+
 From `web-app-env`, run the environment:
 
 ```console
@@ -77,10 +81,24 @@ named `web-app`, installs Playwright and Chromium, and publishes sandbox port
 `3000` on the host. It then attaches to the agent. Later runs attach to the
 existing sandbox.
 
-This placement keeps the environment file outside the agent's writable
-workspace. If you later add `additionalWorkspaces`, keep `sbxenv.yaml`
-outside those directories too. See the [`workspace` guidance](#workspace)
-for details.
+
+
+### Protect the environment file
+
+Environment files can declare lifecycle and secret commands that run on your
+host. Keep them outside writable sandbox mounts so the agent cannot change
+what a later invocation runs. This applies to both the primary workspace and
+`additionalWorkspaces`.
+
+If you need to keep an environment file in a direct-mounted workspace, place
+it directly in the workspace root. `sbx` mounts the file read-only by default,
+but a file in a subdirectory can still be replaced by renaming its parent
+directory.
+
+For a local environment where you intend the agent to edit the file, set
+`sandboxOptions.writableEnvFiles: true`. The plan reports that the file is
+writable. Use this option only when you trust the agent to change commands
+that future invocations run on your host.
 
 ## Commands
 
@@ -272,6 +290,36 @@ second time.
 The following examples combine environment file fields into configurations you
 can adapt for a project.
 
+### Add v3 kits
+
+To add v3 mixins, include a v3 workload in `kits` and set `agent` to the
+workload's name.
+
+For example, save this as `web-app-env/v3.sbxenv.yaml` to use a v3 Claude Code
+workload with the v3 Playwright mixin:
+
+```yaml
+schemaVersion: "1"
+name: web-app-v3
+agent: sbx-kit-claude
+workspace: ./web-app
+
+kits:
+  - docker.io/docker/sbx-kit-claude:2.1.267
+  - docker.io/sbx/playwright:1.61.1
+```
+
+From `web-app-env`, run:
+
+```console
+$ sbx env run v3.sbxenv.yaml
+```
+
+The `agent` value, `sbx-kit-claude`, matches the last component of the
+workload's repository name. The `web-app-v3` name creates a separate sandbox.
+For other agents, see the
+[published v3 workloads](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads).
+
 ### Combine team defaults and personal settings
 
 Keep the shared configuration in a version-controlled environment directory
@@ -352,14 +400,14 @@ Automation can create the sandbox without attaching, run commands in it, and
 remove it afterward:
 
 ```console
-$ sbx env create --auto-approve
+$ sbx env create --force
 $ sbx env exec -- npm test
 $ sbx env rm --force
 ```
 
-`--auto-approve` approves the plan for that invocation without recording
-consent for later invocations. Use the flag for each unattended `create` or
-`run`. The `--force` flag approves the destroy plan and removes the sandbox even
+For `create` and `run`, `--force` approves the plan for that invocation without
+recording consent for later invocations. Use the flag for each unattended `create` or
+`run`. For `rm`, `--force` approves the destroy plan and removes the sandbox even
 when it is in use.
 
 Commands and vault references under `secrets` resolve on the host, so the
@@ -370,6 +418,8 @@ secret values remain outside the environment file.
 
 Use `sbx --cloud env` to manage a cloud sandbox from an environment file. For
 account and CLI requirements, see [Cloud sandboxes](../cloud/_index.md).
+
+#### Create a cloud environment
 
 Save this as `cloud.sbxenv.yaml`:
 
@@ -386,42 +436,72 @@ sandboxOptions:
   memory: 4g
 ```
 
+Resource limits must match a [cloud size](../cloud/usage.md#choose-resources-and-platform).
 Review the plan, create the sandbox without attaching, and run a command:
 
 ```console
 $ sbx --cloud env plan ./cloud.sbxenv.yaml
-$ sbx --cloud env run --detached ./cloud.sbxenv.yaml
+$ sbx --cloud env create ./cloud.sbxenv.yaml
 $ sbx --cloud env exec ./cloud.sbxenv.yaml -- printenv PROJECT_NAME
 ```
 
+To attach to the agent, use `sbx --cloud env run ./cloud.sbxenv.yaml`.
+
+#### Adapt a local environment file
+
 Cloud environments support agents and kits, environment variables, CPU and
 memory limits, credentials for supported providers, and host lifecycle commands.
-Resource limits must match a [cloud size](../cloud/usage.md#choose-resources-and-platform).
 Lifecycle commands still run on your machine with your privileges.
 
-Remove `workspace`, `additionalWorkspaces`, clone options, `ports`, `registries`,
-and MCP server definitions from a local file before using it in cloud mode.
-Cloud environments also reject local sandbox options such as GPU, USB,
-display, shared skills, templates, and governance profiles. These checks run
-before host commands or provisioning. Transfer project files with
-[`sbx --cloud cp`](../cloud/usage.md#transfer-files) or clone a repository inside
-the sandbox.
+Before using a local file in cloud mode, remove:
+
+- `workspace`, `additionalWorkspaces`, and clone options
+- `ports`, `registries`, and MCP server definitions
+- Local sandbox options: GPU, USB, display, shared skills, templates, and
+  governance profiles
+
+Unsupported settings are rejected before host commands or provisioning run.
+Transfer project files with [`sbx --cloud cp`](../cloud/usage.md#transfer-files)
+or clone a repository inside the sandbox.
+
+#### Set expiration
+
+Set expiration when creating a cloud environment with `--ttl` and
+`--on-timeout`. For example, restart the sandbox when it expires:
+
+```console
+$ sbx --cloud env create --ttl 4h --on-timeout restart ./cloud.sbxenv.yaml
+```
+
+The `restart` action stops and immediately starts the sandbox. With this action,
+an explicit `--ttl` must be at least one hour. You can also choose `stop` or
+`delete`; see [Configure expiration](../cloud/usage.md#configure-expiration).
+
+These flags apply only when creating a cloud sandbox. `sbx --cloud env run`
+accepts them when creating a sandbox, but rejects them when attaching to an
+existing one. Local environment commands reject both flags.
+
+#### Configure credentials
 
 The plan shows inherited cloud credentials. Sandbox-scoped credentials override
-account defaults, and credentials declared in `secrets` override both. Declare
-literal values or use [`snapshot: true`](#secrets) to resolve a host command or
-vault reference once. Dynamic secret sources and custom credential providers
-aren't supported. Credential bindings require cloud support for kit credentials
-and explicit approval of the kit's injection domains.
+account defaults, and credentials declared in `secrets` override both.
 
-Changes to secrets and bindings require recreating the sandbox. Updated `env`
-values apply to subsequent sessions. Rejoining a running agent keeps that
-process's environment.
+Declare literal values or use [`snapshot: true`](#secrets) to resolve a host
+command or vault reference once. Dynamic secret sources and custom credential
+providers aren't supported. Credential bindings require cloud support for kit
+credentials and explicit approval of the kit's injection domains.
 
-Use the same machine, Docker identity, cloud endpoint, and ordered file paths
-for later commands. `sbx login` keeps environment state associated with your
-Docker identity. With `DOCKER_ACCESS_TOKEN`, changing the token starts a separate
-state scope.
+Changes to secrets and bindings require recreating the sandbox.
+
+#### Reuse the environment
+
+For later commands, use the same machine, cloud endpoint, and ordered file
+paths, and sign in with the same Docker account using `sbx login`.
+
+Updated `env` values apply to subsequent sessions. Rejoining a running agent
+keeps that process's environment.
+
+#### Remove the environment
 
 Remove the environment when you're finished:
 
@@ -431,8 +511,10 @@ $ sbx --cloud env rm ./cloud.sbxenv.yaml
 
 Removal deletes the sandbox and only the secrets provisioned by this
 environment. Inherited secrets remain. Global bindings remain unless you pass
-`--prune-bindings`. For unattended runs, use `--auto-approve` with `create` or
-`run`, and `--force` with `rm`.
+`--prune-bindings`. For unattended runs, use `--force` with `create`, `run`, or
+`rm` to approve the plan.
+
+#### Recover from interrupted creation
 
 If creation is interrupted, retry the same command and unchanged declaration
 within 23 hours. Unresolved requests prevent removal. Follow the recovery
@@ -459,10 +541,28 @@ already approved. Literal secret values appear as SHA-256 digests. Secret
 references, host commands, environment variables, ports, paths, and binding
 domains remain visible so you can review them.
 
+Changes appear under the same keys and nesting as the environment file.
+For example, this plan changes `GOFLAGS` from `-mod=mod` to `-mod=readonly`:
+
+```text
+   env:
+~    GOFLAGS: -mod=mod -> -mod=readonly
+```
+
+Read the symbol beside each entry before approving the plan:
+
+| Symbol | Effect of applying the entry |
+| ------ | ---------------------------- |
+| `+` | Add a resource |
+| `~` | Change a resource |
+| `-` | Destroy a resource |
+| `>` | Run a host command again |
+| `!` | Stop tracking a resource that is no longer declared, without deleting it |
+
 Interactive approval is recorded for the environment under the `sbx` state
 directory. Plans without host commands apply silently on later invocations until
 the environment changes or a resource is missing. An approval provided with
-`--auto-approve` applies only to that invocation.
+`--force` applies only to that invocation.
 
 ## Update an environment
 
@@ -539,10 +639,8 @@ true`.
 `kits` accepts local directories, ZIP archives, OCI registry references, and
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
 configure the sandbox, and give the agent project-specific instructions.
-The examples on this page pair built-in agents with v2 mixins. See
-[Kits v2](/manuals/ai/sandboxes/customize/kits-v2.md) for that format, or
-[Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
-when selecting v3 kits.
+Built-in agents use v2 mixins. For v3 workloads and mixins, see
+[Add v3 kits](#add-v3-kits).
 
 An environment file selects kits and configures a sandbox's host resources.
 A kit descriptor defines the package itself. The environment file's
@@ -583,8 +681,8 @@ clone mode. Omit `workspace` to create a sandbox without a host bind mount. Set
 `workspace: .` to mount the directory that contains the environment file
 that declares it.
 
-`sbx` mounts the environment file read-only inside the sandbox. Keep the file
-outside direct-mounted workspaces or directly in a workspace root.
+For environment file placement and write protection, see
+[Protect the environment file](#protect-the-environment-file).
 
 | Field   | Type    | Required | Default | Description                                                     |
 | ------- | ------- | -------- | ------- | --------------------------------------------------------------- |
@@ -617,6 +715,7 @@ paths resolve from the directory of the environment file that declares them.
 | `display`     | boolean         | `false`  | Provision a display socket for graphical applications |
 | `gpu`         | boolean         | `false`  | Pass the host GPU through to the sandbox               |
 | `usb`         | list of strings | None     | USB device selectors to pass through to the sandbox   |
+| `writableEnvFiles` | boolean     | `false`  | Let the sandbox write to shared environment files; local only |
 
 For local sandboxes, `cpus: 0` allocates all host CPUs, except on Linux arm64
 hosts, where the default is capped at 16. Set `cpus` to an explicit count to
@@ -688,7 +787,7 @@ commands.
 
 Plans containing lifecycle commands or credential `command` sources require
 approval for every invocation by default, even when the command text hasn't
-changed. Approve one invocation with `--auto-approve`, skip lifecycle commands
+changed. Approve one invocation with `--force`, skip lifecycle commands
 with `--skip-host-commands`, or turn on
 [`env.rememberHostCommands`](settings.md#envrememberhostcommands) to remember
 approval until the commands change:

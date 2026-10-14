@@ -39,10 +39,6 @@ grid:
     description: Common questions about MCP security, credentials, and server verification
     icon: shield-check
     link: /ai/mcp-catalog-and-toolkit/faqs/
-  - title: E2B sandboxes
-    description: Cloud sandboxes for AI agents with built-in MCP Catalog access
-    icon: cloud
-    link: /ai/mcp-catalog-and-toolkit/e2b-sandboxes/
 ---
 
 {{< summary-bar feature_name="Docker MCP Catalog and Toolkit" >}}

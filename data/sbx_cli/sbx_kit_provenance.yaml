@@ -25,6 +25,8 @@ options:
       usage: Exact keyless OIDC issuer
     - name: certificate-oidc-issuer-regexp
       usage: Keyless OIDC issuer regexp
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
