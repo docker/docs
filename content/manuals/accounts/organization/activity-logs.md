@@ -1,8 +1,12 @@
 ---
 title: Activity logs
 weight: 40
-description: Learn how to access and interpret Docker activity logs for organizations and repositories.
-keywords: audit log, organization activity, Docker business logs, repository activity, track changes Docker, security logs Docker, filter logs, log Docker events
+description: >-
+  View, filter, and export organization and repository activity logs in Docker
+  Home.
+keywords: >-
+  activity logs, audit logs, Docker Home, organization activity, repository
+  activity, filter activity logs, export CSV, security audit trail
 aliases:
 - /admin/activity-logs/
 - /docker-hub/audit-log/
@@ -11,48 +15,45 @@ aliases:
 
 {{< summary-bar feature_name="Activity logs" >}}
 
-Activity logs display a chronological list of activities that occur at organization and repository levels. They let you view and track what changes were made, when they were made, and who initiated those changes. 
+Activity logs show a chronological list of organization and repository
+changes in Docker Home. Use them to see what changed, when it changed, and who
+made the change.
 
-The activity log provides a record of all
-member activities for organization owners or members with a custom role that includes the **View activity logs** permission.
+Organization owners and members with a custom role that includes the
+**View activity logs** permission can open the activity log.
 
 > [!TIP]
 >
-> Use activity logs when you need an admin audit trail for your organization
-> and repositories in Docker Home, including AI Governance policy and
-> settings changes. Plans list this capability as **Audit logs**. For
-> enforcement events, such as policy decisions and sandbox sessions, use
+> Use activity logs for an admin audit trail of your organization and
+> repositories, including AI Governance policy and settings changes. For
+> enforcement events, such as policy decisions and sandbox sessions, see
 > [AI Governance Audit Logs](/manuals/ai/sandboxes/governance/audit/).
 
-## Activity logs
-
-To view activity logs in Docker Home:
-
-1. Sign in to [Docker Home](https://app.docker.com) and select your
-organization.
-1. Select **Activity**.
-
-To view activity logs programmatically, use the
-[Audit logs endpoints](/reference/api/hub/latest/#tag-audit-logs) in the
-Docker Hub API. The
-Docker Hub API has the same date limits: events from the last 3 months, up to 31 days per request.
-
-### Filter by date
-
-Docker Home shows activity logs from the last 90 days, up to 30 days at a time. To view an earlier period, type a start date and an end date in the **Date range** field.
-
-By default, the **Activity** page shows all events from the last 7 days. To change the date range:
+## Access activity logs
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.
 1. Select **Activity**.
-1. Select the **Date range** calendar.
-    - On the calendar, you can select dates in the 30 days leading up to the end date
-    - The field shows the current range as text, such as Oct 08, 2026 – Oct 15, 2026
-    - To view an earlier period, type the start date and the end date in the field
-1. Type a start date and an end date, or select a preset such as **Today**, **Last 7 days**, or **Last 30 days**.
-1. Select a preset, such as **Today**, **Last 7 days**, or **Last 30 days**,
-   or select a start date and an end date.
+
+To query activity logs programmatically, use the
+[Audit logs endpoints](/reference/api/hub/latest/#tag-audit-logs) in the
+Docker Hub API. The API returns events from the last 3 months, up to 31 days
+per request.
+
+### Filter by date
+
+By default, the **Activity** page shows events from the last 7 days. Docker
+Home keeps activity logs for 90 days, and you can query up to 30 days at a
+time.
+
+1. On the **Activity** page, select the **Date range** field.
+1. Select a preset such as **Today**, **Yesterday**, **This week**, **This
+   month**, **Last 7 days**, or **Last 30 days**, or type a start date and an
+   end date.
+
+On the calendar, you can select dates in the 30 days leading up to the end
+date. To view an earlier period within the 90-day retention window, type the
+start date and the end date in the field.
 
 The log updates to show only the activities that occurred during that period.
 
@@ -60,29 +61,23 @@ The log updates to show only the activities that occurred during that period.
 
 To show only one category of events:
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your
-   organization.
-1. Select **Activity**.
-1. From the **All activities** drop-down, select a category:
+1. On the **Activity** page, open the **All activities** drop-down and select
+   a category:
    - **Organization**: Organization management events
-   - **Repository**: Events from repositories
+   - **Repository**: Events from repositories for every repository that belongs
+     to the organization
    - **Enterprise**: Configuration events for company settings
    - **Billing**: Subscription change events
-   - **OIDC**: OIDC set up events
+   - **OIDC**: OIDC setup events
    - **Offload**: Docker Offload usage
    - **Governance**: Admin configuration events for AI Governance
 1. Optional. From the **All Actions** drop-down, select a specific event type
    within that category.
 
-The **Repository** category includes events for every repository that belongs to the organization.
-
 ### Export
 
-To download activity logs as a CSV file:
+To download activity logs as a CSV file from the **Activity** page:
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your
-   organization.
-1. Select **Activity**.
 1. Optional. Apply a date range or activity type filter. The export includes
    only the events that match your current filters.
 1. Select the export icon next to the date range.
@@ -249,3 +244,12 @@ events, such as policy decisions and sandbox sessions, see
 | AI Governance Settings updated | AI governance settings were updated |
 
 {{< /accordion >}}
+
+## Next steps
+
+- [Roles and permissions](/manuals/security/roles-and-permissions/_index.md) for
+  the **View activity logs** permission and custom roles
+- [AI Governance Audit Logs](/manuals/ai/sandboxes/governance/audit/) for
+  enforcement events such as policy decisions and sandbox sessions
+- [Audit logs API](/reference/api/hub/latest/#tag-audit-logs) to query events
+  programmatically
