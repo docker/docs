@@ -858,8 +858,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-06-08" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.77.0" build_path="/228796/" >}}
-
 ### New
 
 - You can now export log data from the **Logs** view.
@@ -900,8 +898,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ## 4.76.0
 
 {{< release-date date="2026-06-01" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.76.0" build_path="/228118/" >}}
 
 ### New
 
@@ -956,8 +952,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-05-26" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.75.0" build_path="/227598/" >}}
-
 ### Updates
 
 - Docker Offload v0.5.92
@@ -987,8 +981,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ## 4.74.0
 
 {{< release-date date="2026-05-19" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.74.0" build_path="/227015/" >}}
 
 ### New
 
@@ -1023,8 +1015,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-05-13" >}}
 
-{{< desktop-install-v2 win=true version="4.73.1" build_path="/226574/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Windows
@@ -1034,8 +1024,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ## 4.73.0
 
 {{< release-date date="2026-05-11" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.73.0" build_path="/226246/" >}}
 
 ### Updates
 
@@ -1060,8 +1048,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ## 4.72.0
 
 {{< release-date date="2026-05-06" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.72.0" build_path="/225998/" >}}
 
 ### New
 
@@ -1105,8 +1091,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-04-27" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.71.0" build_path="/225177/" >}}
-
 > [!IMPORTANT]
 >
 > Support for RHEL 8 has ended. Installing Docker Desktop will require RHEL 9 or RHEL 10 in the next release.
@@ -1148,8 +1132,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-04-20" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.70.0" build_path="/224270/" >}}
-
 ### New
 
 - Added a CLI hint that surfaces the **Logs** view when running `logs`, `compose logs`, `compose attach`, or `compose up` commands, giving you quick access to logs across all running containers. Available with the **Logs** (Beta) feature enabled.
@@ -1187,8 +1169,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-04-13" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.69.0" build_path="/224084/" >}}
-
 ### Updates
 
 - [Docker Agent v1.42.0](https://github.com/docker/docker-agent/releases/tag/v1.42.0)
@@ -1223,8 +1203,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ## 4.68.0
 
 {{< release-date date="2026-04-07" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.68.0" build_path="/223695/" >}}
 
 ### New
 
