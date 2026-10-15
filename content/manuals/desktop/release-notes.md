@@ -24,6 +24,55 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.96.0
+
+{{< release-date date="2026-10-19" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.96.0" build_path="/111111/" >}}
+
+### Updates
+
+- [Credential helpers v0.9.10](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.10)
+- [containerd v2.4.1](https://github.com/containerd/containerd/releases/tag/v2.4.1)
+- Docker Desktop Build `v0.39.0`
+- Docker Offload `v0.6.105`
+- `docker pass` v0.3.0
+- [Docker Engine v29.9.0](https://docs.docker.com/engine/release-notes/29/#2990)
+- [Docker Buildx v0.38.0](https://github.com/docker/buildx/releases/tag/v0.38.0)
+- [Docker Agent v1.149.0](https://github.com/docker/docker-agent/releases/tag/v1.149.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where the error dialog could close unexpectedly on systems under memory pressure.
+- Fixed an issue where Docker Desktop's internal DHCP replies were sent onto the host's physical network.
+- Fixed the reclaimable space on the **Images** view staying at 0 when a local image has no history.
+- Improved telemetry for secrets injection by including the realm of each resolved environment variable secret reference in observability events.
+- Fixed Docker Desktop getting stuck on "Starting the Docker Engine..." when a Docker network took addresses inside Docker Desktop's internal network (`192.168.65.0/24` by default). Such networks are now rejected, and an existing one can be removed from the error dialog. Fixes [docker/desktop-feedback#659](https://github.com/docker/desktop-feedback/issues/659).
+- Fixed file ownership and transient `0:0` reporting on Apple Virtualization Framework + VirtioFS bind mounts. Fixes [docker/desktop-feedback#628](https://github.com/docker/desktop-feedback/issues/628) and [#649](https://github.com/docker/desktop-feedback/issues/649).
+- Fixed the CLI error message when combining a leading `+` with a trailing `ago` in a time span to read as natural prose.
+- Fixed a bug where uninstalling Docker Desktop could leave the installation directory behind.
+- Added a **Check for updates** button to the **Software update** drawer when an update is available or ready to install, so newer releases can be found without installing the pending update first.
+- Fixed the backend crashing, and the engine becoming unreachable, when a container's `--volumes-from` refers back to itself, for example after renaming a container to the name of the removed container it inherits volumes from. See [docker/desktop-feedback#286](https://github.com/docker/desktop-feedback/issues/286).
+- Clearing Gordon sessions no longer deletes sessions that are still running.
+- Improved buffered filesystem performance and fixed a FUSE issue that could expose stale bytes when extending files.
+
+#### For Mac
+
+- Fixed an issue where a misconfigured `allowedOrgs` type in a configuration profile was silently ignored; admins now see a log message explaining why sign-in enforcement is not applied.
+- Fixed Docker Desktop on Mac not reporting an error when the VM stops unexpectedly.
+
+#### For Windows
+
+- Fixed a bug where `chmod` on a Unix socket in a bind mount failed with an I/O error and turned the socket into a symlink when using Docker VMM on Windows.
+- Fixed the Windows Docker VMM data disk growing unbounded over time.
+- Fixed an issue where tray icon light/dark theme detection could fail.
+- Fixed disk full detection on Windows so that a full-disk error during startup now shows the disk full recovery dialog instead of a generic failure dialog.
+- Fixed an issue on Windows where WSL distro startup failures showed a confusing 'bad magic string' error instead of the actual reason reported by wsl.exe.
+- Improved the error shown when Docker VMM cannot use the Windows hypervisor, for example on some virtual machines where WSL 2 works.
+- Fixed a bug where an unusable WSL data disk (e.g., already in use) would repeatedly trigger failed mkfs format attempts instead of reporting a clear error.
+
 ## 4.95.0
 
 {{< release-date date="2026-10-12" >}}
