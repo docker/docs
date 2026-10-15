@@ -91,7 +91,10 @@ The SDK exchanges the PAT for a short-lived access token and repeats the exchang
 
 Managed OAuth and PAT authentication use the default Docker service address. Use a caller-supplied access token or provider when you need to override that address.
 
-Your PAT needs the `sandbox:use` permission. Select it when you create the token, at `https://app.docker.com/accounts/[username]/settings/personal-access-tokens`.
+Your PAT needs the `sandbox:use` scope. When you create the token, select
+**Allow Cloud Sandboxes access**. The same token can also have a repository
+permission. Create the token at
+`https://app.docker.com/accounts/[username]/settings/personal-access-tokens`.
 
 Keep the PAT on the machine running your application. Do not put it in a sandbox's environment, source code, or logs.
 

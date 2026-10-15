@@ -42,9 +42,11 @@ the application. SDK sign-in is separate from `docker login` and `sbx login`.
 ## Authenticate automation with a PAT
 
 Use a [personal access token](/manuals/security/access-tokens/personal-access-tokens.md)
-for CI jobs and unattended applications. When creating the token, select the
-`sandbox:use` permission in your Docker account's personal access token
-settings. Registry permissions alone don't grant Cloud Sandboxes access.
+for CI jobs and unattended applications. When creating the token, select
+**Allow Cloud Sandboxes access**. That grants the `sandbox:use` scope. The
+same token can also have a repository permission, for example to push
+images and use Cloud Sandboxes. Registry permissions alone don't grant
+Cloud Sandboxes access.
 
 Provide your Docker ID and PAT to the SDK. For example, read them from your
 application's environment:

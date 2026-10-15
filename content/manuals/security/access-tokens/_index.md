@@ -6,7 +6,7 @@ description: >-
   Docker Hub.
 keywords: >-
   access tokens, personal access tokens, organization access tokens,
-  PAT, OAT, Docker Hub, Docker security
+  PAT, OAT, Docker Hub, Docker security, Cloud Sandboxes
 weight: 10
 grid:
   - title: Personal access tokens
@@ -34,16 +34,18 @@ password.
 
 ## PATs
 
+A PAT has
+[one repository permission](/manuals/security/access-tokens/reference.md#personal-access-token-permissions)
+for every repository the account can access. A PAT can also grant
+[Cloud Sandboxes access](/manuals/security/access-tokens/reference.md#cloud-sandboxes-access),
+which is a separate setting on the token.
+
 Use a PAT for Docker Desktop, for environments governed by
 [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md),
 and for other tools that run as you. A PAT is also required to sign in
 to the CLI when two-factor authentication (2FA) is turned on or single
 sign-on (SSO) is enforced, because the CLI doesn't accept your password
 in those cases.
-
-A PAT uses
-[one permission level](/manuals/security/access-tokens/reference.md#personal-access-token-permissions)
-for every repository the account can access.
 
 ## OATs
 

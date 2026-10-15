@@ -15,6 +15,21 @@ issues for Docker Service APIs.
 
 ---
 
+## 2026-10-15
+
+### Updates
+
+- Add `sandbox:use` to personal access token scopes on
+  [Create personal access token](/reference/api/hub/latest/operations/postV2AccessTokens/).
+  A request can send `sandbox:use` alone, or `sandbox:use` with one
+  repository scope (`repo:admin`, `repo:write`, `repo:read`, or
+  `repo:public_read`).
+- In Docker Home, **Allow Cloud Sandboxes access** is separate from
+  **Repository permissions**. The checkbox grants `sandbox:use`.
+  **No repository access** leaves the token without a repository scope.
+
+---
+
 ## 2026-09-01
 
 ### Updates

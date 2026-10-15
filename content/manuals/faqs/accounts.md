@@ -114,7 +114,7 @@ Check the following:
    [organization access token](/manuals/security/access-tokens/organization-access-tokens.md).
 2. You pasted the full token, with no spaces or line breaks. Docker
    shows a token only once. If you no longer have it,
-   [create a new personal access token](/manuals/security/access-tokens/personal-access-tokens.md#create-a-personal-access-token).
+   [create a new personal access token](/manuals/security/access-tokens/personal-access-tokens.md#create).
 3. On the **Personal access tokens** page, find the token and use its
    status:
    - **Expired:** Create a new token. You can't change the expiration
