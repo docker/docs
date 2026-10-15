@@ -34,8 +34,9 @@ Connect (OIDC) connections authenticate CI workloads such as GitHub Actions.
 | Single sign-on (SSO) | An organization or company | An organization or company owner | Users sign in through the organization's identity provider (IdP) |
 | OIDC connections | GitHub Actions and similar workloads | An organization owner or editor | Docker exchanges short-lived tokens issued per workflow run |
 
-SSO requires a Docker Business subscription. OIDC connections require a
-Docker Team or Business subscription.
+SSO requires a Docker Business subscription, or an
+[AI Governance](/manuals/accounts/organization/manage/manage-licenses.md)
+license. OIDC connections require a Docker Team or Business subscription.
 
 To require Docker Desktop users to sign in as organization members, see
 [Enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).

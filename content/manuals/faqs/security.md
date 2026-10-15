@@ -153,7 +153,7 @@ For detailed instructions, see [Configure single sign-on](/manuals/security/auth
 
 Not with JIT alone. JIT provisions users when they authenticate, but it
 doesn't deprovision users who leave your IdP. You must
-[remove those users](/manuals/accounts/organization/manage/members.md#remove-a-member-from-the-organization)
+[remove those users](/manuals/accounts/organization/manage/members.md#remove-member-from-organization)
 manually.
 
 [SCIM](/manuals/security/provisioning/scim/_index.md) provides continuous user

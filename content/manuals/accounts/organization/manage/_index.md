@@ -63,7 +63,7 @@ plans. The following table summarizes the difference.
 
 | Entitlement | What it grants                                          | Applies to                                       | Managed from                 |
 | ----------- | ------------------------------------------------------- | ------------------------------------------------ | ---------------------------- |
-| Seat        | Membership in your Docker Team or Business subscription | Docker Core subscription                         | Billing                      |
+| Seat        | Membership in your Docker Team or Business subscription | Docker Team or Business subscription             | Billing                      |
 | License     | Access to a specific product or add-on                  | AI Governance, Docker Offload, and other add-ons | Licenses, Teams, and Members |
 
 For details, see [Seats](/manuals/accounts/organization/manage/manage-seats.md)
