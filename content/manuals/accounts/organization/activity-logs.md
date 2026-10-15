@@ -11,23 +11,20 @@ aliases:
 
 {{< summary-bar feature_name="Activity logs" >}}
 
-Activity logs display a chronological list of activities that occur at organization and repository levels. The activity log provides organization owners with a record of all
-member activities.
+Activity logs display a chronological list of activities that occur at organization and repository levels. They let you view and track what changes were made, when they were made, and who initiated those changes. 
 
-With activity logs, owners can view and track:
+The activity log provides a record of all
+member activities for organization owners or members with a custom role that includes the **View activity logs** permission.
 
- - What changes were made
- - The date when a change was made
- - Who initiated the change
+> [!TIP]
+>
+> Use activity logs when you need an admin audit trail for your organization
+> and repositories in Docker Home, including AI Governance policy and
+> settings changes. Plans list this capability as **Audit logs**. For
+> enforcement events, such as policy decisions and sandbox sessions, use
+> [AI Governance Audit Logs](/manuals/ai/sandboxes/governance/audit/).
 
-For example, activity logs display activities such as the date when a repository was created or deleted, the member who created the repository, the name of the repository, and when there was a change to the privacy settings.
-
-Owners can also see the activity logs for their repository if the repository is part of the organization subscribed to a Docker Business or Team subscription.
-
-## Access activity logs
-
-{{< tabs >}}
-{{< tab name="Docker Home">}}
+## Activity logs
 
 To view activity logs in Docker Home:
 
@@ -35,125 +32,226 @@ To view activity logs in Docker Home:
 organization.
 1. Select **Activity**.
 
-{{< /tab >}}
-{{< tab name="API">}}
+To view activity logs programmatically, use the
+[Audit logs endpoints](/reference/api/hub/latest/#tag-audit-logs) in the
+Docker Hub API. The
+Docker Hub API has the same date limits: events from the last 3 months, up to 31 days per request.
 
-To view activity logs using the Docker Hub API, use the [Audit logs endpoints](/reference/api/hub/latest/#tag-audit-logs).
+### Filter by date
 
-{{< /tab >}}
-{{< /tabs >}}
+Docker Home shows activity logs from the last 90 days, up to 30 days at a time. To view an earlier period, type a start date and an end date in the **Date range** field.
 
-## Filter and customize activity logs
+By default, the **Activity** page shows all events from the last 7 days. To change the date range:
 
-> [!IMPORTANT]
->
-> Docker Home retains activity logs for 30 days. To retrieve
-activities beyond 30 days, you must use the
-[Docker Hub API](/reference/api/hub/latest/#tag-audit-logs).
+1. Sign in to [Docker Home](https://app.docker.com) and select your
+   organization.
+1. Select **Activity**.
+1. Select the **Date range** calendar.
+    - On the calendar, you can select dates in the 30 days leading up to the end date
+    - The field shows the current range as text, such as Oct 08, 2026 – Oct 15, 2026
+    - To view an earlier period, type the start date and the end date in the field
+1. Type a start date and an end date, or select a preset such as **Today**, **Last 7 days**, or **Last 30 days**.
+1. Select a preset, such as **Today**, **Last 7 days**, or **Last 30 days**,
+   or select a start date and an end date.
 
-By default, the **Activity** tab displays all recorded events within
-the last 30 days. To narrow your view, use the calendar to select a specific
-date range. The log updates to show only the activities that occurred during
-that period.
+The log updates to show only the activities that occurred during that period.
 
-You can also filter by activity type. Use the **All Activities** drop-down to
-focus on organization-level, repository-level, or billing-related events.
-In Docker Hub, when viewing a repository, the **Activities** tab only shows
-events for that repository.
+### Filter by type
 
-After selecting a category—**Organization**, **Repository**, or **Billing**—use
-the **All Actions** drop-down to refine the results even further by specific
-event type.
+To show only one category of events:
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your
+   organization.
+1. Select **Activity**.
+1. From the **All activities** drop-down, select a category:
+   - **Organization**: teams, members, SSO domains, access tokens, and custom
+     roles
+   - **Repository**: create, delete, privacy, tags, and related repository
+     changes
+   - **Enterprise**: settings policies and company-level SSO and SCIM
+     connections
+   - **Billing**: plan changes, seats, and license assignment
+   - **OIDC**: creating, updating, and deleting OIDC connections
+   - **Offload**: lease start and end
+   - **Governance**: the AI Governance admin audit trail, such as policy and
+     settings changes. For enforcement events, such as policy decisions and
+     sandbox sessions, see
+     [AI Governance Audit Logs](/manuals/ai/sandboxes/governance/audit/).
+1. Optional. From the **All Actions** drop-down, select a specific event type
+   within that category.
+
+The **Repository** category includes events for every repository that belongs to the organization.
+
+### Export
+
+To download activity logs as a CSV file:
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your
+   organization.
+1. Select **Activity**.
+1. Optional. Apply a date range or activity type filter. The export includes
+   only the events that match your current filters.
+1. Select the export icon next to the date range.
+
+## Activity log events reference
+
+{{< accordion title="Organization" >}}
+
+The following table lists organization events that cover teams, members, SSO
+domains, access tokens, and custom roles.
+
+| Event | Description |
+|:------|:------------|
+| Team Created | Team was created |
+| Team Updated | Team was modified |
+| Team Deleted | Team was deleted |
+| Team Member Added | Member was added to a team |
+| Team Member Removed | Member was removed from a team |
+| Org Member Invited | Member was invited to the organization |
+| Organization Member Added | Member was added to the organization |
+| Organization Member Removed | Member was removed from the organization |
+| Member Role Changed | Member's role in the organization was changed |
+| Organization Created | Organization was created |
+| Organization Settings Updated | Organization setting was updated |
+| Registry Access Management enabled | Registry Access Management was enabled |
+| Registry Access Management disabled | Registry Access Management was disabled |
+| Registry Access Management registry added | Registry was added |
+| Registry Access Management registry removed | Registry was removed |
+| Registry Access Management registry updated | Registry was updated |
+| Single Sign-On domain added | SSO domain was added |
+| Single Sign-On domain deleted | SSO domain was removed |
+| Single Sign-On domain verified | SSO domain was verified |
+| Organization Auto-Provisioning Toggled | Auto-provisioning was turned on or off for a domain |
+| Access token created | Access token was created |
+| Access token updated | Access token was updated |
+| Access token revoked | Access token was revoked |
+| Access token deleted | Access token was deleted |
+| Custom role created | Custom role was created |
+| Custom role updated | Custom role was updated |
+| Custom role deleted | Custom role was deleted |
+
+{{< /accordion >}}
+
+{{< accordion title="Enterprise" >}}
+
+The following table lists enterprise events that cover settings policies and
+company-level SSO and SCIM connections.
+
+| Event | Description |
+|:------|:------------|
+| Policy created | Settings policy was added |
+| Policy updated | Settings policy was updated |
+| Policy deleted | Settings policy was deleted |
+| Policy transferred | Settings policy was transferred to another owner |
+| Create SSO Connection | Organization or company SSO connection was created |
+| Update SSO Connection | Organization or company SSO connection was updated |
+| Delete SSO Connection | Organization or company SSO connection was deleted |
+| Enforce SSO | SSO enforcement was toggled on a connection |
+| Enforce SCIM | SCIM was toggled on a connection |
+| Refresh SCIM Token | SCIM token was refreshed |
+| Change SSO Connection Type | Connection type was changed |
+| Toggle JIT provisioning | JIT provisioning was toggled on a connection |
+
+{{< /accordion >}}
+
+{{< accordion title="Repository" >}}
+
+The following table lists repository events that cover create, delete, privacy,
+tags, and related repository changes.
 
 > [!NOTE]
 >
-> Events triggered by Docker Support appear under the username **dockersupport**.
+> Event descriptions that include a user action can refer to a Docker username,
+> personal access token (PAT), or organization access token (OAT). For example,
+> if a user pushes a tag, the description may show:
+> `<user-access-token>` pushed the tag to the repository.
 
-## Types of activity log events
+| Event | Description |
+|:------|:------------|
+| Repository Created | Repository was created |
+| Repository Deleted | Repository was deleted |
+| Repository Updated | Repository description, full description, or status was updated |
+| Privacy Changed | Repository privacy settings were updated |
+| Tag Pushed | Tags were pushed |
+| Tag Deleted | Tags were deleted |
+| Categories updated | Repository categories were set or updated |
+| Tag immutability updated | Tag immutability was updated |
 
-Refer to the following section for a list of events and their descriptions:
+{{< /accordion >}}
 
-### Organization events
+{{< accordion title="Billing" >}}
 
-| Event                                                          | Description                                   |
-|:------------------------------------------------------------------|:------------------------------------------------|
-| Team Created | Activities related to the creation of a team |
-| Team Updated | Activities related to the modification of a team |
-| Team Deleted | Activities related to the deletion of a team |
-| Team Member Added | Details of the member added to your team |
-| Team Member Removed | Details of the member removed from your team |
-| Team Member Invited | Details of the member invited to your team |
-| Organization Member Added | Details of the member added to your organization |
-| Organization Member Removed | Details about the member removed from your organization |
-| Member Role Changed | Details about the role changed for a member in your organization |
-| Organization Created | Activities related to the creation of a new organization |
-| Organization Settings Updated | Details related to the organization setting that was updated |
-| Registry Access Management enabled | Activities related to enabling Registry Access Management |
-| Registry Access Management disabled | Activities related to disabling Registry Access Management |
-| Registry Access Management registry added | Activities related to the addition of a registry |
-| Registry Access Management registry removed | Activities related to the removal of a registry |
-| Registry Access Management registry updated | Details related to the registry that was updated |
-| Single Sign-On domain added | Details of the single sign-on domain added to your organization |
-| Single Sign-On domain removed | Details of the single sign-on domain removed from your organization |
-| Single Sign-On domain verified | Details of the single sign-on domain verified for your organization |
-| Access token created | Access token created in organization |
-| Access token updated | Access token updated in organization |
-| Access token deleted | Access token deleted in organization |
-| Policy created | Details of adding a settings policy |
-| Policy updated | Details of updating a settings policy |
-| Policy deleted | Details of deleting a settings policy |
-| Policy transferred | Details of transferring a settings policy to another owner |
-| Create SSO Connection | Details of creating a new org/company SSO connection |
-| Update SSO Connection | Details of updating an existing org/company SSO connection |
-| Delete SSO Connection | Details of deleting an existing org/company SSO connection |
-| Enforce SSO | Details of toggling enforcement on an existing org/company SSO connection |
-| Enforce SCIM | Details of toggling SCIM on an existing org/company SSO connection |
-| Refresh SCIM Token | Details of a SCIM token refresh on an existing org/company SSO connection |
-| Change SSO Connection Type | Details of a connection type change on an existing org/company SSO connection |
-| Toggle JIT provisioning | Details of a JIT toggle on an existing org/company SSO connection |
+The following table lists billing events that cover plan changes, seats, and
+license assignment.
 
-### Repository events
+| Event | Description |
+|:------|:------------|
+| Plan Upgraded | Billing plan was upgraded |
+| Plan Downgraded | Billing plan was downgraded |
+| Seat Added | Seat was added to the billing plan |
+| Seat Removed | Seat was removed from the billing plan |
+| Billing Cycle Changed | Billing cycle interval was changed |
+| Plan Downgrade Canceled | Scheduled plan downgrade was canceled |
+| Seat Removal Canceled | Scheduled seat removal was canceled |
+| Plan Upgrade Requested | User requested a plan upgrade |
+| Plan Downgrade Requested | User requested a plan downgrade |
+| Seat Addition Requested | User requested additional seats |
+| Seat Removal Requested | User requested fewer seats |
+| Billing Cycle Change Requested | User requested a billing cycle change |
+| Plan Downgrade Cancellation Requested | User requested cancellation of a scheduled plan downgrade |
+| Seat Removal Cancellation Requested | User requested cancellation of a scheduled seat removal |
+| Billing Product Changed | Subscribed product was changed |
+| License Assigned | Product license was assigned to a user |
+| License Removed | Product license was removed from a user |
+| Auto-assign rule created | Automatic license assignment rule was created |
+| Auto-assign rule removed | Automatic license assignment rule was removed |
+| Automatic License Assignment Enabled | Automatic license assignment was turned on for a product |
+| Automatic License Assignment Disabled | Automatic license assignment was turned off for a product |
+| Licenses Expired | Licenses expired |
 
-> [!NOTE]
->
-> Event descriptions that include a user action can refer to a Docker username, personal access token (PAT) or organization access token (OAT). For example, if a user pushes a tag to a repository, the event would include the description: `<user-access-token>` pushed the tag to the repository.
+{{< /accordion >}}
 
-| Event                                                          | Description                                   |
-|:------------------------------------------------------------------|:------------------------------------------------|
-| Repository Created | Activities related to the creation of a new repository |
-| Repository Deleted | Activities related to the deletion of a repository |
-| Repository Updated | Activities related to updating the description, full description, or status of a repository |
-| Privacy Changed | Details related to the privacy policies that were updated |
-| Tag Pushed | Activities related to the tags pushed |
-| Tag Deleted | Activities related to the tags deleted |
-| Categories Updated | Activities related to setting or updating categories of a repository |
+{{< accordion title="OIDC" >}}
 
-### Billing events
+The following table lists OIDC events that cover creating, updating, and
+deleting OIDC connections.
 
-| Event                                                          | Description                                   |
-|:------------------------------------------------------------------|:------------------------------------------------|
-| Plan Upgraded | Occurs when your organization’s billing plan is upgraded to a higher tier plan.|
-| Plan Downgraded | Occurs when your organization’s billing plan is downgraded to a lower tier plan. |
-| Seat Added | Occurs when a seat is added to your organization’s billing plan. |
-| Seat Removed | Occurs when a seat is removed from your organization’s billing plan. |
-| Billing Cycle Changed | Occurs when there is a change in the recurring interval that your organization is charged.|
-| Plan Downgrade Canceled | Occurs when a scheduled plan downgrade for your organization is canceled.|
-| Seat Removal Canceled | Occurs when a scheduled seat removal for an organization’s billing plan is canceled. |
-| Plan Upgrade Requested | Occurs when a user in your organization requests a plan upgrade. |
-| Plan Downgrade Requested | Occurs when a user in your organization requests a plan downgrade. |
-| Seat Addition Requested | Occurs when a user in your organization requests an increase in the number of seats. |
-| Seat Removal Requested | Occurs when a user in your organization requests a decrease in the number of seats. |
-| Billing Cycle Change Requested | Occurs when a user in your organization requests a change in the billing cycle. |
-| Plan Downgrade Cancellation Requested | Occurs when a user in your organization requests a cancellation of a scheduled plan downgrade. |
-| Seat Removal Cancellation Requested | Occurs when a user in your organization requests a cancellation of a scheduled seat removal. |
+| Event | Description |
+|:------|:------------|
+| OIDC connection created | OIDC connection was created |
+| OIDC connection updated | OIDC connection was updated |
+| OIDC connection deleted | OIDC connection was deleted |
 
-### Offload events
+{{< /accordion >}}
+
+{{< accordion title="Offload" >}}
+
+The following table lists Offload events that cover lease start and end.
 
 > [!NOTE]
 >
-> Event descriptions show the Docker username of the actor and details about the lease.
+> Event descriptions show the Docker username of the actor and details about
+> the lease.
 
-| Event                                                          | Description                                   |
-|:------------------------------------------------------------------|:------------------------------------------------|
-| Offload Lease Start | Occurs when an Offload lease is started in your organization. |
-| Offload Lease End | Occurs when an Offload lease is ended in your organization. |
+| Event | Description |
+|:------|:------------|
+| Offload lease start | Offload lease started |
+| Offload lease end | Offload lease ended |
+
+{{< /accordion >}}
+
+{{< accordion title="Governance" >}}
+
+The following table lists governance events that cover the AI Governance
+admin audit trail, such as policy and settings changes. For enforcement
+events, such as policy decisions and sandbox sessions, see
+[AI Governance Audit Logs](/manuals/ai/sandboxes/governance/audit/).
+
+| Event | Description |
+|:------|:------------|
+| AI Governance Policy created | AI governance policy was created |
+| AI Governance Policy updated | AI governance policy was updated |
+| AI Governance Policy deleted | AI governance policy was deleted |
+| AI Governance Settings updated | AI governance settings were updated |
+
+{{< /accordion >}}
