@@ -24,7 +24,7 @@ without opening the rest of the web.
 In this guide, you'll learn how to:
 
 - Store your Firecrawl API key on the host as a sandbox secret
-- Add the Firecrawl mixin to a v3 workload, alone or with a coding agent
+- Add the Firecrawl mixin to a v3 workload
 - Check that the SDK, the proxy-managed credential, and the network rule work
 - Call Firecrawl from inside the sandbox
 - Understand the limits the sandbox network policy places on the kit
@@ -82,9 +82,11 @@ unattended runs, see
 
 ## Step 2: Run a workload with the Firecrawl mixin
 
-V3 mixins compose onto v3 workloads. Start with Docker's shell workload, which
-opens a login shell so you can try the SDK directly. From your project
-directory, run:
+This example uses a shell workload without a coding agent so you can try the
+SDK directly. You can also add the Firecrawl mixin to another compatible v3
+workload, including one that runs a coding agent.
+
+From your project directory, run:
 
 ```console
 $ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name firecrawl-shell \
@@ -94,19 +96,7 @@ $ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name firecrawl-shell \
 Approve the credential request when prompted. `sbx` pulls both kits, runs the
 install hook, and opens a shell in the sandbox.
 
-To give a coding agent web access, add the agent's mixin alongside Firecrawl.
-For example, to run Claude Code on the shell workload:
-
-```console
-$ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name firecrawl-claude \
-    --kit docker.io/docker/sbx-kit-claude-mixin:2.1.285 \
-    --kit docker.io/firecrawl/sbx-kit-firecrawl:1.0.0
-```
-
-The Claude Code mixin also needs its own credential. See
-[Build a tool mixin](/manuals/ai/sandboxes/customize/author/tool-mixins.md#try-the-mixin).
-Other v3 workloads, such as `docker.io/docker/sbx-kit-codex`, accept the
-Firecrawl mixin the same way. For more on combining kits, see
+For more on combining kits, see
 [Use kits](/manuals/ai/sandboxes/customize/use-kits.md#add-mixins).
 
 > [!NOTE]
@@ -178,31 +168,41 @@ API, including structured extraction with a schema, see the
 
 ## How the kit interacts with network policy
 
-Kit network rules add hosts to your sandbox policy. They don't open the web.
-Keep these limits in mind, because they can look like Firecrawl errors:
+Without organization governance, your default network policy and kit-defined
+rules determine which domains the sandbox can access. Under organization
+governance, organization policy controls which domains can be allowed; local
+and kit-defined allow rules are inactive, while deny rules can still restrict
+access. See
+[Network policy precedence](/manuals/ai/sandboxes/governance/concepts.md#precedence).
 
-- Under the `balanced` policy, most websites are blocked, so `curl` or
-  `requests` to a URL from a search result fails with a proxy `403`. Scrape
-  the URL through Firecrawl instead.
-- Under a deny-all policy, `api.firecrawl.dev` is the only web host the agent
-  can reach.
-- Screenshot and other media formats return links on a Firecrawl storage host
-  that isn't in the kit's allow list, so the agent can't download those files.
-- If your organization manages sandbox policy centrally, kit rules can't grant
-  access beyond it. An administrator must allow `api.firecrawl.dev`.
+The Firecrawl kit requests access to PyPI during installation and
+`api.firecrawl.dev` at runtime. Its credential declaration tells the proxy to
+inject your Firecrawl key only into requests to `api.firecrawl.dev`.
 
-To see which rule handled a request, run this on the host:
+Firecrawl fetches target pages on its servers. Scraping a URL through
+Firecrawl doesn't require the sandbox to have direct access to that URL.
+
+To see which hosts the sandbox contacted, run this on the host:
 
 ```console
-$ sbx policy log
+$ sbx policy log firecrawl-shell
+ALLOWED REQUESTS
+SANDBOX          TYPE     HOST                    PROXY    RULE            REASON   LAST SEEN        COUNT
+firecrawl-shell  network  api.firecrawl.dev       forward  domain-allowed           10:16:02 15-Oct  1
+firecrawl-shell  network  files.pythonhosted.org  forward  domain-allowed           10:15:41 15-Oct  6
+firecrawl-shell  network  pypi.org                forward  domain-allowed           10:15:40 15-Oct  4
 ```
+
+The scrape of `docs.docker.com` doesn't appear in this log because Firecrawl
+fetches that page on its servers. The sandbox sends its request to
+`api.firecrawl.dev`.
 
 ## Clean up
 
-Sandboxes persist after you exit. To remove the sandboxes from this guide:
+Sandboxes persist after you exit. To remove the sandbox from this guide:
 
 ```console
-$ sbx rm firecrawl-shell firecrawl-claude
+$ sbx rm firecrawl-shell
 ```
 
 Files in your workspace are unaffected. To remove the stored key, run
