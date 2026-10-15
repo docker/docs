@@ -187,8 +187,10 @@ $ docker run --rm --cpus=2 ubuntu getconf _NPROCESSORS_ONLN
 Programs that size a thread pool from this count, for example with Python's
 `os.cpu_count()`, start more busy threads than the quota can run at the same
 time, and the kernel throttles the container for most of each period. Some
-tools also read the quota: the `nproc` command in the `ubuntu:26.04` image
-reports 2 in the same container, while the one in `ubuntu:24.04` reports 20.
+tools also read the quota, so their output depends on the image. GNU coreutils
+9.8 and later make `nproc` follow a cgroup v2 CPU quota, and the `nproc` in
+the `ubuntu:26.04` image reports 2 in the same container. The `nproc` in
+`ubuntu:24.04` (GNU coreutils 9.4) reports 20.
 
 To keep the thread count in line with the limit, set the program's thread
 count explicitly, for example with `OMP_NUM_THREADS` or a command-line option.
