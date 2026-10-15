@@ -30,7 +30,8 @@ licensing, and expanded feature sets.
 To upgrade to Docker Pro, go to the
 <a href="https://www.docker.com/pricing/" id="dkr_docs_pricing_docker_pro" class="link" rel="noopener">Docker pricing page</a>
 and select **Buy now**.
-To upgrade to Docker Team or Docker Business, see [Manage plans](../manage.md).
+To upgrade to Docker Team or Docker Business, see
+[Manage plans](/manuals/subscription-billing/manage/plans.md).
 
 ## Usage
 
