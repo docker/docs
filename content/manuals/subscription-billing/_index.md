@@ -53,11 +53,11 @@ a different plan.
 
 | Unit | Description | Examples |
 | --- | --- | --- |
-| Seats | Each seat extends entitlements to one more member. | Docker Team, Docker Business |
-| Licenses | Access to specific products or features. | AI Governance, Docker Offload |
-| Minutes | Cloud build capacity, sold in blocks and consumed within the billing period. | Docker Build Cloud |
-| Repositories | Additional container repositories covered by security scanning and analysis features. | DHI |
-| Consuming domains | Additional consuming domains tracked in publisher analytics, sold in blocks of 25. | DVP Starter, DVP Growth |
+| [Seats](/manuals/accounts/organization/manage/manage-seats.md) | Each seat extends entitlements to one more member. | Docker Team, Docker Business |
+| [Licenses](/manuals/accounts/organization/manage/manage-licenses.md) | Access to specific products or features. | AI Governance, Docker Offload |
+| [Minutes](/manuals/subscription-billing/plans/docker.md#docker-build-cloud-minutes) | Cloud build capacity, sold in blocks and consumed within the billing period. | Docker Build Cloud |
+| [Repositories](/manuals/subscription-billing/plans/dhi.md) | Additional container repositories covered by security scanning and analysis features. | DHI |
+| [Consuming domains](/manuals/subscription-billing/plans/docker-verified-publisher.md#add-consuming-domains) | Additional consuming domains tracked in publisher analytics, sold in blocks of 25. | DVP Starter, DVP Growth |
 
 ## Manage your plans
 
