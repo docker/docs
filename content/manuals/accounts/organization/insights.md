@@ -41,7 +41,7 @@ To use Insights, you must meet the following requirements:
   [Settings
   Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md).
 
-## View Insights
+## View Insights {#view-insights-for-organization-users}
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
