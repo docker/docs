@@ -1,212 +1,174 @@
 ---
-title: Insights
+title: View organization Insights for Docker Desktop
+linkTitle: Insights
 weight: 50
-description: Gain insights about your organization's users and their Docker usage.
-keywords: organization, insights, Docker Desktop analytics, user usage statistics, Docker Business, track Docker activity
+description: >-
+  View Docker Desktop usage for your organization in Insights, including
+  active users, builds, containers, images, and extensions.
+keywords: organization, Insights, Desktop insights, Docker Desktop analytics,
+  Send usage statistics, analyticsEnabled, active users, builds, containers,
+  images, extensions, export Docker Desktop users, Docker Business
 aliases:
   - /admin/insights/
 ---
 
 {{< summary-bar feature_name="Insights" >}}
 
-Insights helps administrators visualize and understand how Docker is used within
-their organizations. With Insights, administrators can ensure their teams are
-fully equipped to utilize Docker to its fullest potential, leading to improved
-productivity and efficiency across the organization.
+Insights shows organization administrators how people in their organization
+use Docker Desktop. Use it to track adoption, spot version and platform
+patterns, and see where builds, containers, images, and extensions are in
+use.
 
-Key benefits include:
-
-- Uniform working environment: Establish and maintain standardized
-  configurations across teams.
-- Best practices: Promote and enforce usage guidelines to ensure optimal
-  performance.
-- Increased visibility: Monitor and drive adoption of organizational
-  configurations and policies.
-- Optimized license use: Ensure that developers have access to advanced
-  features provided by a Docker subscription.
+> [!TIP]
+>
+> After
+> [upgrading to Docker Business](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminInsights),
+> you must reach out to your Docker account team to enable Insights for
+> your organization.
 
 ## Prerequisites
 
 To use Insights, you must meet the following requirements:
 
-- [Docker Business subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminInsights)
-- Administrators must [enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md)
+- A Docker Business subscription
+- Administrators must
+  [enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md)
   for users
-- Your Account Executive must turn on Insights for your organization
+- Docker Desktop users must have
+  [Send usage
+  statistics](/manuals/desktop/enterprise/hardened-desktop/settings-management/settings-reference.md#send-usage-statistics)
+  enabled (`analyticsEnabled`). You can set this for every user through
+  [Settings
+  Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md).
 
-## View Insights for organization users
+## View Insights
 
-To access Insights, contact your Account Executive to turn on the feature. Once enabled, access Insights using the
-following steps:
-
-1. Sign in to [Docker Home](https://app.docker.com/) and choose
-   your organization.
-2. Select **Insights**, then select a time period for the data you want to view.
-
-> [!NOTE]
->
-> Insights data is not real-time and is updated daily. At the top-right of the
-> Insights page, view the **Last updated** date to understand when the data was
-> last updated.
-
-### Docker Desktop users
-
-Track active Docker Desktop users in your domain, differentiated by license
-status. This chart helps you understand the engagement levels within your
-organization, providing insights into how many users are actively using Docker
-Desktop. Note that users who opt out of analytics aren't included in the active
-counts.
-
-The chart contains the following data:
-
-| Data                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| :--------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Active user                  | The number of users who have actively used Docker Desktop and either signed in with a Docker account that has a license in your organization or signed in to a Docker account with an email address from a domain associated with your organization. <br><br>Users who don’t sign in to an account associated with your organization are not represented in the data. To ensure users sign in with an account associated with your organization, you can [enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md). |
-| Total organization members   | The number of users who have used Docker Desktop, regardless of their Insights activity.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Users opted out of analytics | The number of users who are members of your organization that have opted out of sending analytics. <br><br>When users opt out of sending analytics, you won't see any of their data in Insights. To ensure that the data includes all users, you can use [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md) to set `analyticsEnabled` for all your users.                                                                                                                           |
-| Active users (graph)         | The view over time for total active users.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-
-### Builds
-
-Monitor development efficiency and the time your team invests in builds with
-this chart. It provides a clear view of the build activity, helping you identify
-patterns, optimize build times, and enhance overall development productivity.
-
-The chart contains the following data:
-
-| Data                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Average build per user | The average number of builds per active user. A build includes any time a user runs one of the following commands: <ul><li>`docker build`</li><li>`docker buildx b`</li><li>`docker buildx bake`</li><li>`docker buildx build`</li><li>`docker buildx f`</li><li>`docker builder b`</li><li>`docker builder bake`</li><li>`docker builder build`</li><li>`docker builder f`</li><li>`docker compose build`</li><li>`docker compose up --build`</li><li>`docker image build`</li></ul> |
-| Average build time     | The average build time per build.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Build success rate     | The percentage of builds that were successful out of the total number of builds. A successful build includes any build that exits normally.                                                                                                                                                                                                                                                                                                                                           |
-| Total builds (graph)   | The total number of builds separated into successful builds and failed builds. A successful build includes any build that exits normally. A failed build includes any build that exits abnormally.                                                                                                                                                                                                                                                                                    |
-
-### Containers
-
-View the total and average number of containers run by users with this chart. It
-lets you gauge container usage across your organization, helping you understand
-usage trends and manage resources effectively.
-
-The chart contains the following data:
-
-| Data                                   | Description                                                                                                                                                                |
-| :------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Total containers run                   | The total number of containers run by active users. Containers run include those run using the Docker Desktop graphical user interface, `docker run`, or `docker compose`. |
-| Average number of containers run       | The average number of containers run per active user.                                                                                                                      |
-| Containers run by active users (graph) | The number of containers run over time by active users.                                                                                                                    |
-
-### Docker Desktop usage
-
-Explore Docker Desktop usage patterns with this chart to optimize your team's
-workflows and ensure compatibility. It provides valuable insights into how
-Docker Desktop is being utilized, enabling you to streamline processes and
-improve efficiency.
-
-The chart contains the following data:
-
-| Data                              | Description                                                                                                                                                                                                                                                                       |
-| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Most used version                 | The most used version of Docker Desktop by users in your organization.                                                                                                                                                                                                            |
-| Most used OS                      | The most used operating system by users.                                                                                                                                                                                                                                          |
-| Versions by active users (graph)  | The number of active users using each version of Docker Desktop. <br><br>To learn more about each version and release dates, see the [Docker Desktop release notes](/manuals/desktop/release-notes.md).                                                                           |
-| Interface by active users (graph) | The number of active users grouped into the type of interface they used to interact with Docker Desktop. <br><br>A CLI user is any active user who has run a `docker` command. A GUI user is any active user who has interacted with the Docker Desktop graphical user interface. |
-
-### Docker Hub images
-
-Analyze image distribution activity with this chart and view the most utilized
-Docker Hub images within your domain. This information helps you manage image
-usage, ensuring that the most critical resources are readily available and
-efficiently used.
-
-> [!NOTE]
->
-> Data for images is only for Docker Hub. Data for third-party
-> registries and mirrors aren't included.
-
-The chart contains the following data:
-
-| Data                 | Description                                                                                                     |
-| :------------------- | :-------------------------------------------------------------------------------------------------------------- |
-| Total pulled images  | The total number of images pulled by users from Docker Hub.                                                     |
-| Total pushed images  | The total number of images pushed by users to Docker Hub.                                                       |
-| Top 10 pulled images | A list of the top 10 images pulled by users from Docker Hub and the number of times each image has been pulled. |
-
-### Extensions
-
-Monitor extension installation activity with this chart. It provides visibility
-into the Docker Desktop extensions your teams are using, letting you track
-adoption and identify popular tools that enhance productivity.
-
-The chart contains the following data:
-
-| Data                                           | Description                                                                                                                                      |
-| :--------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Percentage of org with extensions installed    | The percentage of users in your organization with at least one Docker Desktop extension installed.                                               |
-| Top 5 extensions installed in the organization | A list of the top 5 Docker Desktop extensions installed by users in your organization and the number of users who have installed each extension. |
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+   organization.
+1. Select **Docker Desktop**, then **Desktop insights**.
+1. Select a time period: **1 Week**, **1 Month**, or **3 Months**. Data
+   may be delayed 24–48 hours. **Last updated** shows the sync date.
 
 ## Export Docker Desktop user data
 
-You can export Docker Desktop user data as a CSV file:
-
-1. Open [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+   organization.
 1. Select **Docker Desktop**, then **Desktop insights**.
-1. Choose a timeframe for your insights data: **1 Week**, **1 Month**, or
-   **3 Months**.
-1. Select **Export** and choose **Docker Desktop users** from the drop-down.
+1. Select **Export Docker Desktop users**. The CSV file downloads
+   automatically. It includes the standard
+   [member CSV fields](/manuals/accounts/organization/manage/members.md#export-a-member-list-csv),
+   plus these Insights columns:
 
-Your export will automatically download. Open the file to view
-the export data.
+   | Column                 | Description                                                                                                                                                                                 |
+   | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | Last Logged-in Date    | Last browser sign-in to Docker Hub or Docker Home                                                                                                                                           |
+   | Docker Desktop Version | Last Docker Desktop version the user ran                                                                                                                                                    |
+   | Last Seen Date         | Last time the user ran Docker Desktop                                                                                                                                                       |
+   | Opted Out Analytics    | Whether the user turned off [Send usage statistics](/manuals/desktop/enterprise/hardened-desktop/settings-management/settings-reference.md#send-usage-statistics) |
 
-### Understanding export data
+## Reference
 
-A Docker Desktop user export file contains the following data points:
+The Insights dashboard is organized into sections that capture each area of
+Docker Desktop activity. Refer to these tables when a value looks
+unexpected, when you need to explain a metric to someone else, or when
+you're deciding which section answers a question about adoption, build
+health, or image usage.
 
-- Name: User's name
-- Username: User's Docker ID
-- Email: User's email address associated with their Docker ID
-- Type: User type
-- Role: User [role](/manuals/security/roles-and-permissions.md)
-- Teams: Team(s) within your organization the user is a
-  member of
-- Date Joined: The date the user joined your organization
-- Last Logged-In Date: The last date the user logged into Docker using
-  their web browser (this includes Docker Hub and Docker Home)
-- Docker Desktop Version: The version of Docker Desktop the user has
-  installed
-- Last Seen Date: The last date the user used the Docker Desktop application
-- Opted Out Analytics: Whether the user has opted out of the
-  [Send usage statistics](/manuals/desktop/enterprise/hardened-desktop/settings-management/settings-reference.md#send-usage-statistics) setting in Docker Desktop
+{{< accordion title="Docker Desktop users" >}}
 
-## Troubleshoot Insights
+The Docker Desktop users section shows how many people in your organization
+run Docker Desktop and how that number changes over time. Use it to measure
+adoption and to find users missing from the active counts. Active counts
+include only users who send analytics.
 
-If you’re experiencing issues with data in Insights, consider the following
-solutions to resolve common problems:
+| Data | Description |
+| :--------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Active members | Users who used Docker Desktop and signed in with a licensed account in your organization, or with an email address from a domain associated with your organization. |
+| Total org members | Users who have used Docker Desktop, regardless of their Insights activity. |
+| Members opted out of analytics | Organization members who opted out of sending analytics. |
+| Registered users | Users linked to unassociated machines whose email addresses Docker captured, and those emails are outside your organization's domain. |
+| Active users (graph) | Total active users over time. |
 
-- Update users to the latest version of Docker Desktop.
+{{< /accordion >}}
 
-  Data is not shown for users using versions 4.16 or lower of Docker Desktop.
-  In addition, older versions may not provide all data. Ensure all users have
-  installed the latest version of Docker Desktop.
+{{< accordion title="Builds" >}}
 
-- Turn on **Send usage statistics** in Docker Desktop for all your users.
+The Builds section shows how often users build images, how long builds take,
+and how many succeed. Use it to spot slow or failing builds across the
+organization and to gauge how much of your Docker Desktop usage is build
+activity.
 
-  If users have opted out of sending usage statistics for Docker Desktop, then
-  their usage data will not be a part of Insights. To manage the setting at
-  scale for all your users, you can use [Settings
-  Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md) and turn on the
-  `analyticsEnabled` setting.
+| Data | Description |
+| :--------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Average build per user | Average builds per active user. A build includes any time a user runs one of: `docker buildx bake`, `docker buildx build`, `docker buildx f`, `docker builder build`, `docker builder f`, `docker compose build`, or `docker image build`. |
+| Average build time | Average build time per build. |
+| Build success rate | Percentage of builds that exited normally. A failed build is any build that exits abnormally. |
+| Total builds (graph) | Successful builds versus failed builds over time. |
 
-- Ensure users use Docker Desktop and aren't using the standalone
-  version of Docker Engine.
+{{< /accordion >}}
 
-  Only Docker Desktop can provide data for Insights. If a user installs Docker
-  Engine outside of Docker Desktop, Docker Engine won't provide
-  data for that user.
+{{< accordion title="Containers" >}}
 
-- Make sure users sign in to an account associated with your
-  organization.
+The Containers section shows how many containers active users run and how
+that activity trends over time. Use it to see how heavily your organization
+relies on Docker Desktop for running workloads, not only for building them.
 
-  Users who don’t sign in to an account associated with your organization are
-  not represented in the data. To ensure users sign in with an account
-  associated with your organization, you can [enforce
-  sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).
+| Data | Description |
+| :------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Total containers run | Containers run by active users in the Docker Desktop GUI, with `docker run`, or with `docker compose`. |
+| Average number of containers run | Average containers run per active user. |
+| Containers run by active users (graph) | Containers run over time by active users. |
+
+{{< /accordion >}}
+
+{{< accordion title="Docker Desktop usage" >}}
+
+The Docker Desktop usage section shows which versions, operating systems,
+and interfaces your users run. Use it to plan upgrades, find users on
+outdated versions, and understand whether your organization works mainly
+through the CLI or the GUI.
+
+| Data | Description |
+| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Most used version | Most used Docker Desktop version in your organization. |
+| Most used OS | Most used operating system. |
+| Versions by active users (graph) | Active users per Docker Desktop version. See the [Docker Desktop release notes](/manuals/desktop/release-notes.md). |
+| Interface by active users (graph) | Active users by interface. A CLI user has run a `docker` command. A GUI user has used the Docker Desktop graphical interface. |
+
+{{< /accordion >}}
+
+{{< accordion title="Docker Hub images" >}}
+
+The Docker Hub images section shows which images your users pull and push,
+and how often. Use it to see which images matter most to your organization
+and to confirm that users pull from the sources you expect. Image data
+covers Docker Hub only. Third-party registries and mirrors are excluded.
+
+| Data | Description |
+| :----------------- | :------------------------------------------------------------------------------------------------------ |
+| Total pulled images | Images pulled by active users. |
+| Total pushed images | Images pushed. |
+| Top pulled images | Top images pulled, and how many times each was pulled. |
+
+{{< /accordion >}}
+
+{{< accordion title="Extensions" >}}
+
+The Extensions section shows how widely Docker Desktop extensions are used
+in your organization and which ones users install most. Use it to find
+popular tools worth supporting and to spot extensions you did not
+expect.
+
+| Data | Description |
+| :---------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| Percentage of org with extensions installed | Percentage of users with at least one extension installed. |
+| Top extensions installed in the organization | Top extensions installed, and how many users installed each one. |
+
+{{< /accordion >}}
+
+## Next steps
+
+- [Activity logs](/manuals/accounts/organization/activity-logs.md) for a
+  record of organization and repository changes.
+- [Insights FAQs](/manuals/faqs/accounts.md#why-is-insights-data-missing-for-some-users)
+  to troubleshoot missing data.
