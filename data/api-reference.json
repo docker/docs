@@ -4,7 +4,7 @@
       "connection": "hosted",
       "description": "Docker Hub is a service provided by Docker for finding and sharing container images with your team.\n\nIt is the world's largest library and community for container images.\n\nIn addition to the [Docker Hub UI](https://docs.docker.com/docker-hub/) and [Docker Hub CLI tool](https://github.com/docker/hub-tool#readme) (currently experimental), Docker provides an API that allows you to interact with Docker Hub.\n\nBrowse through the Docker Hub API documentation to explore the supported endpoints.\n",
       "diagnostics": [],
-      "digest": "46c09f04fd8e7b3fe464c9b406a1bf8a0a6a164c87083f57ebbab64ccb7c8d3f",
+      "digest": "b4db8f3d9b51ba9fb291b52842e83dfffe0992bf3432325bc5866a1fa4192e58",
       "exampleCount": 315,
       "experimental": false,
       "guides": [
@@ -20,7 +20,7 @@
           "deprecated": null,
           "description": "Returns a paginated list of personal access tokens.",
           "id": "getV2AccessTokens",
-          "line": 325,
+          "line": 327,
           "method": "GET",
           "parameters": [
             {
@@ -244,7 +244,7 @@
           "deprecated": null,
           "description": "Creates and returns a personal access token.",
           "id": "postV2AccessTokens",
-          "line": 300,
+          "line": 302,
           "method": "POST",
           "parameters": [],
           "path": "/v2/access-tokens",
@@ -460,7 +460,7 @@
           "deprecated": null,
           "description": "Returns a personal access token by UUID.",
           "id": "getV2AccessTokensByUuid",
-          "line": 391,
+          "line": 393,
           "method": "GET",
           "parameters": [
             {
@@ -708,7 +708,7 @@
           "deprecated": null,
           "description": "Deletes a personal access token permanently. This cannot be undone.\n",
           "id": "deleteV2AccessTokensByUuid",
-          "line": 430,
+          "line": 432,
           "method": "DELETE",
           "parameters": [
             {
@@ -857,7 +857,7 @@
           "deprecated": null,
           "description": "Updates a personal access token partially. You can either update the token's label or enable/disable it.\n",
           "id": "patchV2AccessTokensByUuid",
-          "line": 365,
+          "line": 367,
           "method": "PATCH",
           "parameters": [
             {
@@ -1082,7 +1082,7 @@
           "deprecated": null,
           "description": "List audit log events for a given namespace.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "AuditLogs_ListAuditLogs",
-          "line": 754,
+          "line": 756,
           "method": "GET",
           "parameters": [
             {
@@ -1541,7 +1541,7 @@
           "deprecated": null,
           "description": "List audit log actions for a namespace to be used as a filter for querying audit log events.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "AuditLogs_ListAuditActions",
-          "line": 447,
+          "line": 449,
           "method": "GET",
           "parameters": [
             {
@@ -2609,7 +2609,7 @@
           "deprecated": null,
           "description": "Creates and returns a short-lived access token in JWT format for use as a bearer when calling Docker APIs.\n\nIf successful, the access token returned should be used in the HTTP Authorization header like \n`Authorization: Bearer {access_token}`.\n\n_**If your organization has SSO enforced, you must use a personal access token (PAT) instead of a password.**_\n",
           "id": "AuthCreateAccessToken",
-          "line": 251,
+          "line": 253,
           "method": "POST",
           "parameters": [],
           "path": "/v2/auth/token",
@@ -2837,7 +2837,7 @@
           "deprecated": null,
           "description": "Create multiple invites by emails or DockerIDs. Only a team owner can create invites.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "postV2InvitesBulk",
-          "line": 2249,
+          "line": 2251,
           "method": "POST",
           "parameters": [
             {
@@ -3173,7 +3173,7 @@
           "deprecated": null,
           "description": "Mark the invite as cancelled so it doesn't show up on the list of pending invites\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "deleteV2InvitesById",
-          "line": 2196,
+          "line": 2198,
           "method": "DELETE",
           "parameters": [
             {
@@ -3352,7 +3352,7 @@
           "deprecated": null,
           "description": "Resend a pending invite to the user, any org owner can resend an invite\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "patchV2InvitesByIdResend",
-          "line": 2225,
+          "line": 2227,
           "method": "PATCH",
           "parameters": [
             {
@@ -3533,7 +3533,7 @@
           "deprecated": null,
           "description": "Returns a list of repositories within the specified namespace (organization or user).\n\nPublic repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.\n\n\n\n**OAT listing behavior**: an OAT with the `scope-repository-list` scope sees all repositories including private ones. An OAT without that scope only sees public repositories. This filtering is silent: the response is a normal `200` with no indication that private repositories were withheld.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "listNamespaceRepositories",
-          "line": 1323,
+          "line": 1325,
           "method": "GET",
           "parameters": [
             {
@@ -4065,7 +4065,7 @@
           "deprecated": null,
           "description": "Creates a new repository within the specified namespace. The repository will be created\nwith the provided metadata including name, description, and privacy settings.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "CreateRepository",
-          "line": 1478,
+          "line": 1480,
           "method": "POST",
           "parameters": [
             {
@@ -4444,7 +4444,7 @@
           "deprecated": null,
           "description": "Returns a repository within the specified namespace (organization or user).\n\nPublic repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "GetRepository",
-          "line": 1554,
+          "line": 1556,
           "method": "GET",
           "parameters": [
             {
@@ -4753,7 +4753,7 @@
           "deprecated": null,
           "description": "Check a repository within the specified namespace (organization or user).\n\nPublic repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "CheckRepository",
-          "line": 1612,
+          "line": 1614,
           "method": "HEAD",
           "parameters": [
             {
@@ -4972,7 +4972,7 @@
           "deprecated": null,
           "description": "Updates the immutable tags configuration for this repository.\n\n**Only users with administrative privileges for the repository can modify these settings.**\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "UpdateRepositoryImmutableTags",
-          "line": 1211,
+          "line": 1213,
           "method": "PATCH",
           "parameters": [
             {
@@ -5273,7 +5273,7 @@
           "deprecated": null,
           "description": "Validates the immutable tags regex passed in the request body and returns a list of tags matching it in this repository.\n\n**Only users with administrative privileges for the repository can call this endpoint.**\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "VerifyRepositoryImmutableTags",
-          "line": 1241,
+          "line": 1243,
           "method": "POST",
           "parameters": [
             {
@@ -5544,7 +5544,7 @@
           "deprecated": null,
           "description": "Returns the list of tags for the specified repository.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "ListRepositoryTags",
-          "line": 1117,
+          "line": 1119,
           "method": "GET",
           "parameters": [
             {
@@ -5792,7 +5792,7 @@
           "deprecated": null,
           "description": "Checks whether the repository has any tags.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "headV2NamespacesByNamespaceRepositoriesByRepositoryTags",
-          "line": 1148,
+          "line": 1150,
           "method": "HEAD",
           "parameters": [
             {
@@ -5951,7 +5951,7 @@
           "deprecated": null,
           "description": "Returns details for a specific tag in the specified repository.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "GetRepositoryTag",
-          "line": 1171,
+          "line": 1173,
           "method": "GET",
           "parameters": [
             {
@@ -6162,7 +6162,7 @@
           "deprecated": null,
           "description": "Checks whether the specified tag exists in the repository.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "headV2NamespacesByNamespaceRepositoriesByRepositoryTagsByTag",
-          "line": 1189,
+          "line": 1191,
           "method": "HEAD",
           "parameters": [
             {
@@ -6331,7 +6331,7 @@
           "deprecated": null,
           "description": "List access tokens for an organization.\n",
           "id": "getV2OrgsByNameAccessTokens",
-          "line": 1000,
+          "line": 1002,
           "method": "GET",
           "parameters": [
             {
@@ -6577,7 +6577,7 @@
           "deprecated": null,
           "description": "Create an access token for an organization.\n",
           "id": "postV2OrgsByNameAccessTokens",
-          "line": 970,
+          "line": 972,
           "method": "POST",
           "parameters": [],
           "path": "/v2/orgs/{name}/access-tokens",
@@ -6862,7 +6862,7 @@
           "deprecated": null,
           "description": "Returns organization settings by name.\n",
           "id": "getV2OrgsByNameSettings",
-          "line": 899,
+          "line": 901,
           "method": "GET",
           "parameters": [
             {
@@ -7069,7 +7069,7 @@
           "deprecated": null,
           "description": "Updates an organization's settings. Some settings are only used when the organization is on a business subscription.\n\n***Only users with administrative privileges for the organization (owner role) can modify these settings.***\n\nThe following settings are only used on a business subscription:\n- `restricted_images`\n",
           "id": "putV2OrgsByNameSettings",
-          "line": 921,
+          "line": 923,
           "method": "PUT",
           "parameters": [
             {
@@ -7402,7 +7402,7 @@
           "deprecated": null,
           "description": "Get details of a specific access token for an organization.\n",
           "id": "getV2OrgsByOrgNameAccessTokensByAccessTokenId",
-          "line": 1045,
+          "line": 1047,
           "method": "GET",
           "parameters": [
             {
@@ -7632,7 +7632,7 @@
           "deprecated": null,
           "description": "Delete a specific access token for an organization. This action cannot be undone.\n",
           "id": "deleteV2OrgsByOrgNameAccessTokensByAccessTokenId",
-          "line": 1095,
+          "line": 1097,
           "method": "DELETE",
           "parameters": [
             {
@@ -7823,7 +7823,7 @@
           "deprecated": null,
           "description": "Update a specific access token for an organization.\n",
           "id": "patchV2OrgsByOrgNameAccessTokensByAccessTokenId",
-          "line": 1067,
+          "line": 1069,
           "method": "PATCH",
           "parameters": [
             {
@@ -8102,7 +8102,7 @@
           "deprecated": null,
           "description": "Get groups of an organization.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "getV2OrgsByOrgNameGroups",
-          "line": 1834,
+          "line": 1836,
           "method": "GET",
           "parameters": [
             {
@@ -8472,7 +8472,7 @@
           "deprecated": null,
           "description": "Create a new group within an organization.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "postV2OrgsByOrgNameGroups",
-          "line": 1900,
+          "line": 1902,
           "method": "POST",
           "parameters": [
             {
@@ -8763,7 +8763,7 @@
           "deprecated": null,
           "description": "Get a group of an organization.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "getV2OrgsByOrgNameGroupsByGroupName",
-          "line": 1943,
+          "line": 1945,
           "method": "GET",
           "parameters": [
             {
@@ -8983,7 +8983,7 @@
           "deprecated": null,
           "description": "Update the details for an organization group.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "putV2OrgsByOrgNameGroupsByGroupName",
-          "line": 1967,
+          "line": 1969,
           "method": "PUT",
           "parameters": [
             {
@@ -9285,7 +9285,7 @@
           "deprecated": null,
           "description": "Delete an organization group.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "deleteV2OrgsByOrgNameGroupsByGroupName",
-          "line": 2048,
+          "line": 2050,
           "method": "DELETE",
           "parameters": [
             {
@@ -9476,7 +9476,7 @@
           "deprecated": null,
           "description": "Update some details for an organization group.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "patchV2OrgsByOrgNameGroupsByGroupName",
-          "line": 2005,
+          "line": 2007,
           "method": "PATCH",
           "parameters": [
             {
@@ -9781,7 +9781,7 @@
           "deprecated": null,
           "description": "List the members (users) that are in a group.\nIf user is owner of the org or has otherwise elevated permissions, they can search by email and the result will also contain emails.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "getV2OrgsByOrgNameGroupsByGroupNameMembers",
-          "line": 2070,
+          "line": 2072,
           "method": "GET",
           "parameters": [
             {
@@ -10159,7 +10159,7 @@
           "deprecated": null,
           "description": "Add a member to a group.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "postV2OrgsByOrgNameGroupsByGroupNameMembers",
-          "line": 2134,
+          "line": 2136,
           "method": "POST",
           "parameters": [
             {
@@ -10455,7 +10455,7 @@
           "deprecated": null,
           "description": "Remove a user from a group.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "deleteV2OrgsByOrgNameGroupsByGroupNameMembersByUsername",
-          "line": 2167,
+          "line": 2169,
           "method": "DELETE",
           "parameters": [
             {
@@ -10657,7 +10657,7 @@
           "deprecated": null,
           "description": "Return all pending invites for a given org, only team owners can call this endpoint\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "getV2OrgsByOrgNameInvites",
-          "line": 1793,
+          "line": 1795,
           "method": "GET",
           "parameters": [
             {
@@ -10914,7 +10914,7 @@
           "deprecated": null,
           "description": "Returns a list of members for an organization.\n\n_The following fields are only visible to orgs with insights enabled._\n\n- `last_logged_in_at`\n- `last_seen_at`\n- `last_desktop_version`\n\nTo make visible, please see [View Insights for organization users](https://docs.docker.com/accounts/organization/insights/#view-insights-for-organization-users).\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "getV2OrgsByOrgNameMembers",
-          "line": 1645,
+          "line": 1647,
           "method": "GET",
           "parameters": [
             {
@@ -11231,7 +11231,7 @@
           "deprecated": null,
           "description": "Export members of an organization as a CSV\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "getV2OrgsByOrgNameMembersExport",
-          "line": 1682,
+          "line": 1684,
           "method": "GET",
           "parameters": [
             {
@@ -11477,7 +11477,7 @@
           "deprecated": null,
           "description": "Updates the role of a member in the organization.\n***Only users in the \"owners\" group of the organization can use this endpoint.***\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "putV2OrgsByOrgNameMembersByUsername",
-          "line": 1722,
+          "line": 1724,
           "method": "PUT",
           "parameters": [
             {
@@ -11808,7 +11808,7 @@
           "deprecated": null,
           "description": "Removes the member from the org, ie. all groups in the org, unless they're the last owner\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "deleteV2OrgsByOrgNameMembersByUsername",
-          "line": 1767,
+          "line": 1769,
           "method": "DELETE",
           "parameters": [
             {
@@ -12029,7 +12029,7 @@
           "deprecated": null,
           "description": "Assigns an organization group (team) to a repository with a specified permission level.\n\nThis operation accepts bearer tokens issued from organization access tokens (OATs). The token must have the required resource access and scopes.\n",
           "id": "CreateRepositoryGroup",
-          "line": 1271,
+          "line": 1273,
           "method": "POST",
           "parameters": [
             {
@@ -12338,7 +12338,7 @@
           "deprecated": null,
           "description": "Returns all resource types supported for the SCIM configuration.\n",
           "id": "getV2Scim20ResourceTypes",
-          "line": 2293,
+          "line": 2295,
           "method": "GET",
           "parameters": [],
           "path": "/v2/scim/2.0/ResourceTypes",
@@ -12573,7 +12573,7 @@
           "deprecated": null,
           "description": "Returns a resource type by name.\n",
           "id": "getV2Scim20ResourceTypesByName",
-          "line": 2311,
+          "line": 2313,
           "method": "GET",
           "parameters": [
             {
@@ -12828,7 +12828,7 @@
           "deprecated": null,
           "description": "Returns all schemas supported for the SCIM configuration.\n",
           "id": "getV2Scim20Schemas",
-          "line": 2339,
+          "line": 2341,
           "method": "GET",
           "parameters": [],
           "path": "/v2/scim/2.0/Schemas",
@@ -13061,7 +13061,7 @@
           "deprecated": null,
           "description": "Returns a schema by ID.\n",
           "id": "getV2Scim20SchemasById",
-          "line": 2357,
+          "line": 2359,
           "method": "GET",
           "parameters": [
             {
@@ -13315,7 +13315,7 @@
           "deprecated": null,
           "description": "Returns a service provider config for Docker's configuration.\n",
           "id": "getV2Scim20ServiceProviderConfig",
-          "line": 2275,
+          "line": 2277,
           "method": "GET",
           "parameters": [],
           "path": "/v2/scim/2.0/ServiceProviderConfig",
@@ -13526,7 +13526,7 @@
           "deprecated": null,
           "description": "Returns paginated users for an organization. Use `startIndex` and `count` query parameters to receive paginated results.\n\n**Sorting:**\n\nSorting allows you to specify the order in which resources are returned by specifying a combination of `sortBy` and `sortOrder` query parameters.\n\nThe `sortBy` parameter specifies the attribute whose value will be used to order the returned responses. The `sortOrder` parameter defines the order in which the `sortBy` parameter is applied. Allowed values are \"ascending\" and \"descending\".\n\n**Filtering:**\n\nYou can request a subset of resources by specifying the `filter` query parameter containing a filter expression. Attribute names and attribute operators used in filters are case insensitive. The filter parameter must contain at least one valid expression. Each expression must contain an attribute name followed by an attribute operator and an optional value.\n\nSupported operators are listed below.\n\n- `eq` equal\n- `ne` not equal\n- `co` contains\n- `sw` starts with\n- `and` Logical \"and\"\n- `or` Logical \"or\"\n- `not` \"Not\" function\n- `()` Precedence grouping\n",
           "id": "getV2Scim20Users",
-          "line": 2385,
+          "line": 2387,
           "method": "GET",
           "parameters": [
             {
@@ -14079,7 +14079,7 @@
           "deprecated": null,
           "description": "Creates a user. If the user already exists by email, they are assigned to the organization on the \"company\" team.\n",
           "id": "postV2Scim20Users",
-          "line": 2465,
+          "line": 2467,
           "method": "POST",
           "parameters": [],
           "path": "/v2/scim/2.0/Users",
@@ -14557,7 +14557,7 @@
           "deprecated": null,
           "description": "Returns a user by ID.\n",
           "id": "getV2Scim20UsersById",
-          "line": 2495,
+          "line": 2497,
           "method": "GET",
           "parameters": [
             {
@@ -14912,7 +14912,7 @@
           "deprecated": null,
           "description": "Updates a user. This route is used to change the user's name, activate, and deactivate the user.\n",
           "id": "putV2Scim20UsersById",
-          "line": 2517,
+          "line": 2519,
           "method": "PUT",
           "parameters": [
             {
@@ -15415,7 +15415,7 @@
           "deprecated": null,
           "description": "When a user has two-factor authentication (2FA) enabled, this is the second call to perform after `/v2/users/login` call.\n\nCreates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.\n\nThe returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.\n\nMost Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.\n",
           "id": "PostUsers2FALogin",
-          "line": 216,
+          "line": 218,
           "method": "POST",
           "parameters": [],
           "path": "/v2/users/2fa-login",
@@ -15585,7 +15585,7 @@
           "deprecated": true,
           "description": "Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.\n\nThe returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.\n\n_**As of September 16, 2024, this route requires a personal access token (PAT) instead of a password if your organization has SSO enforced.**_\n\n\n  Deprecated: Use [Create access token](#tag/authentication-api/operation/AuthCreateAccessToken) instead.\n\n",
           "id": "PostUsersLogin",
-          "line": 178,
+          "line": 180,
           "method": "POST",
           "parameters": [],
           "path": "/v2/users/login",
@@ -16333,7 +16333,7 @@
                 "type": "string"
               },
               "scopes": {
-                "description": "Valid scopes: \"repo:admin\", \"repo:write\", \"repo:read\", \"repo:public_read\"\n",
+                "description": "Valid scopes: \"repo:admin\", \"repo:write\", \"repo:read\", \"repo:public_read\", \"sandbox:use\". Include one repository scope, \"sandbox:use\", or both.\n",
                 "example": [
                   "repo:read"
                 ],
@@ -18896,7 +18896,7 @@
           "summary": "Authentication"
         },
         {
-          "description": "The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/personal-access-tokens/).\n\nYou can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/reference/cli/docker/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.\n\n### Scopes\n\nFor each scope grouping (in this case \"repo\"), you only need to define 1 scope as any lower scopes are assumed.\nFor example: If you define `repo:write`, the API assumes the scope of both `repo:read` *and* `repo:public_read` as well.\nIf you were to define both `repo:write` *and* `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.\n\n***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after it is generated.***\n",
+          "description": "The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/personal-access-tokens/).\n\nYou can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/reference/cli/docker/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.\n\n### Scopes\n\nFor each scope grouping (in this case \"repo\"), you only need to define 1 scope as any lower scopes are assumed.\nFor example: If you define `repo:write`, the API assumes the scope of both `repo:read` *and* `repo:public_read` as well.\nIf you were to define both `repo:write` *and* `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.\n\n`sandbox:use` is a separate grouping for Cloud Sandboxes. A repository scope does not include it, and it does not include a repository scope. A request can include `sandbox:use` on its own or with one repository scope.\n\n***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after it is generated.***\n",
           "kind": "nav",
           "name": "access-tokens",
           "summary": "Personal Access Tokens"
