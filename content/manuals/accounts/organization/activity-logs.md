@@ -64,19 +64,13 @@ To show only one category of events:
    organization.
 1. Select **Activity**.
 1. From the **All activities** drop-down, select a category:
-   - **Organization**: teams, members, SSO domains, access tokens, and custom
-     roles
-   - **Repository**: create, delete, privacy, tags, and related repository
-     changes
-   - **Enterprise**: settings policies and company-level SSO and SCIM
-     connections
-   - **Billing**: plan changes, seats, and license assignment
-   - **OIDC**: creating, updating, and deleting OIDC connections
-   - **Offload**: lease start and end
-   - **Governance**: the AI Governance admin audit trail, such as policy and
-     settings changes. For enforcement events, such as policy decisions and
-     sandbox sessions, see
-     [AI Governance Audit Logs](/manuals/ai/sandboxes/governance/audit/).
+   - **Organization**: Organization management events
+   - **Repository**: Events from repositories
+   - **Enterprise**: Configuration events for company settings
+   - **Billing**: Subscription change events
+   - **OIDC**: OIDC set up events
+   - **Offload**: Docker Offload usage
+   - **Governance**: Admin configuration events for AI Governance
 1. Optional. From the **All Actions** drop-down, select a specific event type
    within that category.
 
