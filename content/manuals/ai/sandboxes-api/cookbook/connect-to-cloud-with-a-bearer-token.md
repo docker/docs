@@ -85,18 +85,28 @@ Remove the stored credentials when your application no longer needs them. Your a
 
 ## Use a personal access token {#3-use-a-personal-access-token}
 
-Create a [Docker personal access token](https://docs.docker.com/security/access-tokens/) for the Docker account your application will use. Provide your Docker username and PAT through your application's secret manager or environment, then pass them to the SDK's PAT authentication option.
+Create a
+[Docker personal access token](https://docs.docker.com/security/access-tokens/)
+for the Docker account your application will use. Provide your Docker
+username and PAT through your application's secret manager or
+environment, then pass them to the SDK's PAT authentication option.
 
-The SDK exchanges the PAT for a short-lived access token and repeats the exchange when needed. Supply the PAT as a PAT credential, not as an access token or an Authorization header. A revoked or expired PAT requires a replacement credential.
+The SDK exchanges the PAT for a short-lived access token and repeats
+the exchange when needed. Supply the PAT as a PAT credential, not as
+an access token or an Authorization header. A revoked or expired PAT
+requires a replacement credential.
 
-Managed OAuth and PAT authentication use the default Docker service address. Use a caller-supplied access token or provider when you need to override that address.
+Managed OAuth and PAT authentication use the default Docker service
+address. Use a caller-supplied access token or provider when you need
+to override that address.
 
-Your PAT needs the `sandbox:use` scope. When you create the token, select
-**Allow Cloud Sandboxes access**. The same token can also have a repository
-permission. Create the token at
+Your PAT needs the `sandbox:use` scope. When you create the token,
+select **Allow Cloud Sandboxes access**. The same token can also have
+a repository permission. Create the token at
 `https://app.docker.com/accounts/[username]/settings/personal-access-tokens`.
 
-Keep the PAT on the machine running your application. Do not put it in a sandbox's environment, source code, or logs.
+Keep the PAT on the machine running your application. Do not put it in
+a sandbox's environment, source code, or logs.
 
 {{< tabs >}}
 {{< tab name="TypeScript" >}}

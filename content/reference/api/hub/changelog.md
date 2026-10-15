@@ -2,7 +2,9 @@
 description: Docker Hub API changelog
 title: Docker Hub API changelog
 linkTitle: Changelog
-keywords: docker hub, hub, whats new, release notes, api, changelog
+keywords: >-
+  docker hub, hub, whats new, release notes, api, changelog,
+  personal access token, sandbox:use, Cloud Sandboxes
 weight: 2
 toc_min: 1
 toc_max: 2

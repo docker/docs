@@ -2,12 +2,13 @@
 title: Create and manage personal access tokens
 linkTitle: Personal access tokens
 description: >-
-  Create a personal access token, set its permissions and expiration,
-  and sign in to the Docker CLI.
+  Create a personal access token, set repository permissions and Cloud
+  Sandboxes access, set expiration, and sign in to the Docker CLI.
 keywords: >-
   personal access token, PAT, Docker Hub, docker login,
-  CLI authentication, token permissions, token expiration,
-  two-factor authentication, SSO, Cloud Sandboxes, sandbox:use
+  CLI authentication, token permissions, repository permissions,
+  token expiration, two-factor authentication, SSO, Cloud Sandboxes,
+  sandbox:use, Allow Cloud Sandboxes access, No repository access
 weight: 10
 aliases:
   - /docker-hub/access-tokens/
@@ -18,13 +19,13 @@ aliases:
 {{< summary-bar feature_name="PATs" >}}
 
 A personal access token (PAT) lets you sign in to Docker Hub without
-your password. You can create several
-tokens and revoke one without changing your password. From Docker Home, you can view the token list, which
-shows when each token was last used.
+your password. You can create several tokens and revoke one without
+changing your password. From Docker Home, you can view the token list,
+which shows when each token was last used.
 
 Treat PATs like passwords and keep them secure. Store tokens in a
 credential manager and never commit them to source code. Before you
-create a PAT, you must verify your email address. 
+create a PAT, you must verify your email address.
 
 > [!TIP]
 >
@@ -32,9 +33,12 @@ create a PAT, you must verify your email address.
 > [organization access tokens (OATs)](/manuals/security/access-tokens/organization-access-tokens.md),
 > which aren't tied to individual user accounts.
 
-## Create
+## Create a personal access token {#create}
 
-When you create a PAT, you choose one repository scope and whether the token can use Cloud Sandboxes. You can combine these to fit the task: for example, a token can use Cloud Sandboxes with no repository access, or it can push images and use Cloud Sandboxes.
+When you create a PAT, you choose one repository permission and whether
+the token can use Cloud Sandboxes. You can combine these to fit the
+task. For example, a token can use Cloud Sandboxes with no repository
+access, or it can push images and use Cloud Sandboxes.
 
 To create a PAT:
 
@@ -46,27 +50,28 @@ To create a PAT:
 1. Configure your token:
    - **Access token description:** Enter a name for the token, up to
      100 characters. This field is required.
-   - **Expiration date:** Optional. The default is **None** and creates a token that doesn't
-     expire.
-        - Select **30 days**, **90 days**, or
-        **Custom**.
-        - With **Custom**, choose a date and hour up to one year
-     from today.
+   - **Expiration date:** Optional. The default is **None**, which
+     creates a token that doesn't expire.
+     - Select **30 days**, **90 days**, or **Custom**.
+     - With **Custom**, choose a date and hour up to one year from
+       today.
    - **Access permissions:** Set a repository permission and, if you
-     need it, Cloud Sandboxes access. Select at least [one permission](/manuals/security/access-tokens/reference.md#personal-access-token-permissions).
-     - **Repository permissions:** The default is
-       **Repo Public Read-only**. 
-            - Select one level.
-            - Select **No repository access** when
-            the token should not access repositories.
+     need it, Cloud Sandboxes access. Select at least
+     [one permission](/manuals/security/access-tokens/reference.md#personal-access-token-permissions).
+     - **Repository permissions:** The default is **Repo Public
+       Read-only**.
+       - Select one level.
+       - Select **No repository access** when the token should not
+         access repositories.
      - **Allow Cloud Sandboxes access:** Select this to let the token
-       create and use Cloud Sandboxes. You can add it to any repository
-       permission, or use it with **No repository access**.
+       create and use Cloud Sandboxes. You can add it to any
+       repository permission, or use it with **No repository
+       access**.
 1. Select **Generate**. Copy the token and save it. Docker shows the
    token once and doesn't store it. You can't retrieve it after you
    leave the page.
 
-## Sign in
+## Sign in with a personal access token {#sign-in}
 
 Run `docker login` with your Docker ID. When the CLI asks for a
 password, paste the PAT.
@@ -79,7 +84,7 @@ Password: [paste your PAT here]
 If sign-in fails with `Incorrect authentication credentials`, see
 [Why does sign-in fail with "Incorrect authentication credentials"?](/manuals/faqs/accounts.md#why-does-sign-in-fail-with-incorrect-authentication-credentials).
 
-## Update or delete
+## Update or delete a personal access token {#update-or-delete}
 
 You can rename a token, change its permissions, deactivate it, activate
 it again, or delete it. You can't edit the expiration date on an

@@ -1,7 +1,13 @@
 ---
 title: Authentication and authorization
-description: Authenticate requests to the Docker Sandboxes API with access tokens and learn which permissions your application needs.
-keywords: docker sandboxes API authentication, sandbox authorization, bearer token, sandbox permissions, owner scope
+description: >-
+  Authenticate requests to the Docker Sandboxes API with a personal
+  access token or browser sign-in, and learn which permissions your
+  application needs.
+keywords: >-
+  docker sandboxes API authentication, sandbox authorization, bearer
+  token, sandbox permissions, personal access token, PAT, sandbox:use,
+  Allow Cloud Sandboxes access, Cloud Sandboxes
 weight: 30
 aliases:
   - /ai/sandboxes/api/authentication/
@@ -113,8 +119,8 @@ Account permissions also control access to optional features. See
 ## Authenticate direct API requests
 
 If you call the REST API without the SDK, obtain and renew access tokens in
-your application. Exchange your Docker ID and a PAT with `sandbox:use`
-permission using the [Docker Hub authentication API](/reference/api/hub/latest/operations/AuthCreateAccessToken/):
+your application. Exchange your Docker ID and a PAT with the `sandbox:use`
+scope using the [Docker Hub authentication API](/reference/api/hub/latest/operations/AuthCreateAccessToken/):
 
 ```console
 $ ACCESS_TOKEN=$(curl --silent --show-error --fail --request POST \
