@@ -51,8 +51,30 @@ $ sbx daemon restart
 ```
 
 Then retry the command that failed. Restarting the daemon doesn't delete
-sandbox data. If the issue persists or state is corrupted, use
+sandbox data. For Windows socket errors during startup, see the next section.
+For other persistent issues or corrupted state, use
 [`sbx reset`](/reference/cli/sbx/reset/).
+
+## Windows daemon startup fails on a socket
+
+On Windows, the daemon may fail to start with an error such as:
+
+```text
+failed to get listener for main ttrpc endpoint:
+remove <LOCALAPPDATA>\DockerSandboxes\sandboxes\state\sandboxd\containerd\containerd.sock.ttrpc:
+The file cannot be accessed by the system.
+```
+
+This failure occurs before the daemon can serve sandbox requests. A working
+Docker Desktop engine doesn't establish that the Sandboxes daemon is healthy.
+
+If a daemon restart returns the same error, record `sbx version`,
+`sbx daemon status`, `sbx diagnose`, your Windows build, and the relevant
+daemon startup error. Redact personal paths before sharing logs. Report the
+failure through [the issue tracker](https://github.com/docker/sbx-releases/issues)
+and mention any existing state that must be preserved. A socket error alone
+doesn't establish that sandbox data is corrupted. Resetting or removing state
+deletes sandbox data; see the consequences below before choosing that recovery.
 
 ## Resetting sandboxes
 
