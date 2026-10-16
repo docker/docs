@@ -17,7 +17,7 @@
     path      required. File path within the project, can include folders (e.g. "db/password.txt").
     lang      optional. Overrides the fence info string for syntax highlighting.
     status    optional. One of "modified" or "new". Shows a colored badge in the file tree.
-    hl_lines  optional. Line numbers/ranges to highlight (e.g. "8" or "6,8-11"). Passed to chroma.
+    hl_lines  optional. Line numbers/ranges to highlight (e.g. "8" or "6,8-11"). Passed to the code renderer.
 */}}
 
 {{ if ne .Parent.Name "files" }}
