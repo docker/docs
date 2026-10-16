@@ -19,7 +19,7 @@ Just-in-Time (JIT) provisioning creates and updates user accounts during SSO
 authentication. JIT verifies that users belong to the organization and assigns
 them to teams based on your identity provider (IdP) configuration.
 
-## How JIT works
+## How it works
 
 With JIT, users get access the first time they sign in with SSO. No invitation
 is required. JIT fits organizations that want the quickest path to access.
@@ -73,7 +73,7 @@ If JIT is disabled, sign-in succeeds only for organization members and users
 with a pending invitation, which Docker accepts at sign-in. Everyone else sees
 an `Access denied` error and must ask an administrator for an invitation.
 
-## Set up JIT provisioning
+## Set up
 
 When you create an SSO connection, Docker turns on JIT provisioning by
 default. To set up JIT provisioning:
@@ -92,7 +92,7 @@ default. To set up JIT provisioning:
 JIT doesn't remove users when they leave your IdP, so you must remove them
 manually. To remove users automatically, use SCIM.
 
-## Disable JIT provisioning
+## Disable
 
 > [!WARNING]
 >
@@ -117,7 +117,7 @@ To disable JIT provisioning:
    **Disable JIT provisioning**.
 1. Select **Disable** to confirm.
 
-## Re-enable JIT provisioning
+## Re-enable
 
 If you disabled JIT provisioning, you can turn it back on:
 

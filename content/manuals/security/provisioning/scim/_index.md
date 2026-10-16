@@ -73,7 +73,7 @@ attribute updates and automatic deprovisioning.
 If your IdP supports Provision on Demand, you can trigger an immediate sync
 for a user who needs access before the next scheduled synchronization.
 Configure and test SCIM before you
-[turn off JIT](/manuals/security/provisioning/just-in-time.md#disable-jit-provisioning).
+[turn off JIT](/manuals/security/provisioning/just-in-time.md#disable).
 
 ### Use SCIM with JIT
 
