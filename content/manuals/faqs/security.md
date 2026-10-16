@@ -166,7 +166,7 @@ must already be members, have a pending invitation, or be provisioned through
 SCIM. Users who don't meet these criteria get an "Access denied" error and
 need an administrator to invite them.
 
-See [Disable JIT provisioning](/manuals/security/provisioning/just-in-time.md#disable).
+See [Disable JIT provisioning](/manuals/security/provisioning/just-in-time.md#disable-jit-provisioning).
 
 ### Can someone join an organization without an invitation?
 

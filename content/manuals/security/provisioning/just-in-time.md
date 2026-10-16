@@ -1,6 +1,10 @@
 ---
-description: Learn how Just-in-Time provisioning creates and updates accounts during SSO sign-in, and how to turn it off.
-keywords: user provisioning, just-in-time provisioning, JIT, autoprovision, SSO, single sign-on, SCIM, disable JIT, Docker Admin, admin, security
+description: >-
+  Learn how Just-in-Time (JIT) provisioning creates and updates Docker
+  accounts during SSO sign-in, and how to turn it off or back on.
+keywords: user provisioning, just-in-time provisioning, JIT provisioning, JIT,
+  autoprovision, automatic provisioning, SSO, single sign-on, SCIM, enable JIT,
+  disable JIT, identity provider, group mapping, Docker Home, admin, security
 title: Just-in-Time provisioning
 linkTitle: Just-in-Time
 weight: 20
@@ -13,16 +17,14 @@ aliases:
 
 Just-in-Time (JIT) provisioning creates and updates user accounts during SSO
 authentication. JIT verifies that users belong to the organization and assigns
-them to teams based on your identity provider (IdP) configuration. JIT doesn't
-deprovision users.
+them to teams based on your identity provider (IdP) configuration.
 
-## Overview
+## How JIT works
 
-JIT gives users access the first time they sign in with SSO, with no
-invitations to send or directory sync to set up. It fits organizations that
-want the quickest path to access and can remove users manually. 
+With JIT, users get access the first time they sign in with SSO. No invitation
+is required. JIT fits organizations that want the quickest path to access.
 
-The diagram shows how JIT provisioning works:
+The following diagram shows SSO sign-in with and without JIT:
 
 ```mermaid {title="SSO authentication with and without JIT provisioning" caption="With JIT, Docker adds users to organizations and teams at sign-in. Without it, only members can sign in. Highlighted steps happen only with JIT."}
 ---
@@ -62,40 +64,51 @@ flowchart LR
   style jitbox fill:#3b82f622,stroke:#3b82f6
 ```
 
-When a user signs in with SSO, Docker looks for a Docker account with the email address your IdP sent. Docker creates one if none exists, and generates a unique username from the user's email and name, and random numbers. If one does exist, Docker updates the user's full name, if needed.
+When a user signs in with SSO, Docker looks for a Docker account with the
+email address your IdP sent. If none exists, Docker creates one and generates
+a unique username from the user's email, name, and random numbers. If one
+exists, Docker updates the user's full name if it changed.
 
-If JIT is disabled, sign-in succeeds for a member of the organization,
-including a user whose invitation Docker accepted at sign-in. Everyone else sees an
-`Access denied` error and must ask an administrator for an invitation.
+If JIT is disabled, sign-in succeeds only for organization members and users
+with a pending invitation, which Docker accepts at sign-in. Everyone else sees
+an `Access denied` error and must ask an administrator for an invitation.
 
-Disable JIT provisioning if you want SCIM to be the source of truth for
-provisioning. For example, you have multiple organizations or want to restrict
-access based on your organization's security configuration.
-
-## Enable
+## Set up JIT provisioning
 
 When you create an SSO connection, Docker turns on JIT provisioning by
-default. To enable JIT provisioning:
+default. To set up JIT provisioning:
 
-1. Set up an [SSO connection](/manuals/security/authentication/single-sign-on/connect.md)
-   for your organization. Docker turns on JIT when you create the connection.
-1. Optional. Set the default organization and team that Docker uses for users
+1. Set up an
+   [SSO connection](/manuals/security/authentication/single-sign-on/connect.md)
+   for your organization.
+1. Set the default organization and team that Docker uses for users
    who sign in without IdP group mappings. You set these when you create the
-    connection.
+   connection.
 1. Optional. Set up
    [group mapping](/manuals/security/provisioning/scim/group-mapping.md#configure-group-mapping-with-sso)
    to assign users to organizations and teams from your IdP.
 1. Have your users sign in with SSO.
 
-Setting up SSO requires that at least one provisioning method stay enabled: JIT,
-SCIM, or both. Before adding SCIM, review
+JIT doesn't remove users when they leave your IdP, so you must remove them
+manually. To remove users automatically, use SCIM.
+
+## Disable JIT provisioning
+
+> [!WARNING]
+>
+> Disabling JIT provisioning may disrupt your users' access and workflows.
+> With JIT disabled, only existing organization members and users with a
+> pending invitation can sign in with SSO.
+
+An SSO connection must keep at least one provisioning method enabled:
+JIT, SCIM, or both. You can disable JIT only while
+[SCIM is enabled](/manuals/security/provisioning/scim/provision-scim.md#enable-scim-in-docker),
+and you can disable SCIM only while JIT is enabled. Before you add SCIM,
+review
 [how SCIM works with JIT](/manuals/security/provisioning/scim/_index.md#choose-how-scim-works-with-jit).
+Disable JIT if you want SCIM to be the source of truth for provisioning.
 
-## Disable
-
-Disabling JIT provisioning may disrupt your users' access and workflows,
-because only existing organization members can then sign in with SSO. To
-disable it:
+To disable JIT provisioning:
 
 1. Go to [Docker Home](https://app.docker.com/) and select your organization
    from the top-left account drop-down.
@@ -104,11 +117,7 @@ disable it:
    **Disable JIT provisioning**.
 1. Select **Disable** to confirm.
 
-You can disable JIT only while
-[SCIM is enabled](/manuals/security/provisioning/scim/provision-scim.md#enable-scim-in-docker),
-and you can disable SCIM only while JIT is enabled.
-
-## Re-enable
+## Re-enable JIT provisioning
 
 If you disabled JIT provisioning, you can turn it back on:
 
@@ -123,4 +132,5 @@ If you disabled JIT provisioning, you can turn it back on:
 
 - Set up [group mapping](/manuals/security/provisioning/scim/group-mapping.md)
   to automatically assign users to teams.
-- Review [Troubleshoot provisioning](/manuals/security/provisioning/troubleshoot-provisioning.md).
+- Review
+  [Troubleshoot provisioning](/manuals/security/provisioning/troubleshoot-provisioning.md).
