@@ -410,6 +410,7 @@ module:
     # bumped on each docker-agent release by sync-docker-agent-docs.yml.
     # Sections are mounted individually so hugo mod vendor does not
     # vendor the upstream Jekyll site files that also live in docs/.
+    # Community is published only at https://docker.github.io/docker-agent/.
     - path: github.com/docker/docker-agent
       mounts:
         - source: docs/getting-started
@@ -426,7 +427,5 @@ module:
           target: content/manuals/ai/docker-agent/features
         - source: docs/guides
           target: content/manuals/ai/docker-agent/guides
-        - source: docs/community
-          target: content/manuals/ai/docker-agent/community
         - source: docs/demo.gif
           target: content/manuals/ai/docker-agent/demo.gif
