@@ -16,6 +16,147 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.48.0
+
+{{< release-date date="2026-10-13" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.48.0)
+
+### Highlights
+
+Docker Sandboxes v0.48.0 updates the CLI across all commands, with consistent terminal output and JSON/YAML formats. This changes flags, structured output, and prompts used by existing scripts. Review the migration details below before upgrading automated workflows.
+
+The release also adds managed Codex and Claude Desktop SSH targets on macOS and Windows, additional v3 kit capabilities, and support for adding kits with startup commands to existing sandboxes.
+
+### Breaking changes
+
+#### CLI flags, output, and automation
+
+The CLI refactor changes both interactive use and scripting interfaces. Existing `--json` parsers may need updates even if their command lines still work. Scripts that parse human-readable output must switch to `--format json` or `--format yaml`.
+
+##### Update command flags
+
+| Command | Previous spelling | Replacement or behavior |
+| --- | --- | --- |
+| `sbx run`, `sbx env run` | `--detached` | Use `--detach` or `-d`. `--detached` is rejected. |
+| `sbx logout` | `--yes`, `-y` | Use `--force` or `-f`. |
+| `sbx env plan`, `sbx env create`, `sbx env run` | `--auto-approve`, `-y` | Use `--force` or `-f`. |
+| `sbx create` | `--quiet`, `-q` | Use `--no-progress`. This suppresses progress, but still prints the creation summary. |
+| `sbx template save` | `-d` for the description | Use `--description`. |
+| `sbx diagnose` | `--output`, `-o` | Use `--format table`, `--format json`, `--format yaml`, or `--format github-issue`. |
+| `sbx secret ls`, `sbx secret rm` | `--env` | Use `--env-name`. |
+| `sbx policy log` | `--quiet`, `-q` | Removed; there is no replacement. |
+
+`--format`, `--json`, and `-q` are mutually exclusive on commands that use the shared output flags. Even `--json --format json` is rejected. Unsupported format values fail during flag parsing instead of falling back to human-readable output.
+
+`sbx settings ls` is the primary spelling; `sbx settings list` remains an alias. `sbx kit builder history rm` keeps `--yes` / `-y` because its `--force` flag is forwarded to Buildx. The deprecated `--global` and `mcp add --skip_auth` flags remain accepted but hidden, with a deprecation warning on stderr; use `--skip-auth` instead of `--skip_auth`.
+
+##### Update structured-output parsers
+
+`--json` is an alias of `--format json` and emits the same document. JSON output structures have changed for the commands listed in the following table. Output uses `snake_case` field names; YAML is derived from the same representation.
+
+| Command | Output change |
+| --- | --- |
+| `sbx ls` | Returns the sandbox array directly instead of `{"sandboxes": [...]}`. Fields use `snake_case`, `created_at` and `last_used_at` use RFC 3339 timestamps, and rows include `detached`. |
+| `sbx template ls` | Returns the image array directly instead of `{"images": [...]}`, for local and cloud sandboxes. |
+| `sbx mcp ls` locally | Returns the server array directly instead of `{"gateway": {...}, "servers": [...]}`. Each server row carries `gateway`. |
+| `sbx policy log` | Local and cloud output use `{updated_at, allowed: [...], blocked: [...]}`. Entries contain `sandbox_id`, `host`, `proxy_type`, `rule`, `reason`, `count`, `first_seen`, and `last_seen`. `--limit` applies. This replaces local `allowed_hosts` / `blocked_hosts` and the cloud camelCase document. |
+| `sbx --cloud policy ls` | Field names change from camelCase to `snake_case`. |
+| `sbx ports` | Cloud rows use `sandbox_port` instead of `port`, alongside `url`. Local rows use `host_ip`, `host_port`, `sandbox_port`, and `protocol`. |
+| `sbx ports --publish` / `--unpublish` locally | Structured formats emit result rows with `action: published` or `action: unpublished` instead of human-readable lines. Warnings go to stderr. |
+| Cloud `volume create`, `volume ls`, and `volume inspect` | Fields such as `ID`, `Name`, and `CreatedAt` become `id`, `name`, and `created_at`. `volume inspect` defaults to a human-readable details view; request `--format json` for JSON. |
+| `sbx rm`, `sbx stop`, `sbx template rm`, `sbx volume rm` | Structured formats return an array of results with `action`, `resource`, `name`, and optional `id` and `error`. Actions are lowercase: `removed`, `stopped`, `removing`, `stopping`, or `failed`. Missing and failed targets are included. |
+
+For example, a script that extracts sandbox names from `sbx ls --json` must change its filter from `.sandboxes[].name` to `.[].name`.
+
+Local and cloud output follow the same conventions. MCP list output still represents different resources: local registrations versus server usage across cloud sandboxes, so those rows differ beyond their shared `name` and `type` fields.
+
+`sbx prune --dry-run` accepts `--format json` and `--format yaml`. Cloud `ttl --format yaml` emits YAML instead of JSON, and `sbx diagnose` supports YAML. `sbx events --json` remains an NDJSON stream, and `sbx mcp auth --format text|json` retains its command-specific formats.
+
+##### Update non-interactive workflows
+
+- Confirmation prompts require terminal input. Piping an answer, such as `echo y | sbx secret set …`, no longer confirms the operation. Use `--force` / `-f` where the command provides it. Commands that require confirmation fail with exit status 1 when stdin is not a terminal.
+- Declining a confirmation returns a non-zero exit status consistently, including for removal, reset, and prune operations.
+- Read-only invocations and runs with `--force` do not start an interactive sign-in flow. Sign in before running automation that requires authentication. Read-only examples include `ports SANDBOX`, `ttl SANDBOX`, `prune --dry-run`, and `diagnose`; their modifying or upload variants are not read-only.
+- Without a terminal, `sbx diagnose --upload` saves the diagnostic bundle but skips uploading it and exits with status 0. A successful exit does not mean that an upload occurred.
+- Without a terminal, `sbx create` and `sbx run` fail if the workspace directory does not exist and print a `mkdir -p` hint. Create the directory before invoking the command.
+- Ctrl-D at a selection or free-text prompt cancels instead of accepting the default. Enter still accepts the default.
+
+##### Terminal output and streams
+
+Human-readable output changes across all commands: headings, status marks, indentation, progress, and result messages use a consistent format. `sbx ls` includes state marks and a creation-time column; `sbx ls` and `sbx inspect` identify detached sandboxes.
+
+Results go to stdout. Errors, warnings, corrective hints, daemon-start progress, image pulls, and kit-build progress go to stderr. Update scripts that depend on exact message text or capture only one stream.
+
+### What's new
+
+#### Security
+
+- Fixed sign-in enforcement ignoring `allowedOrgs` on macOS.
+- `sbx cp` blocks local paths that escape a sandbox workspace through symbolic links.
+- Cloud `sbx cp` downloads and `sbx kit pack` preserve restrictive destination permissions without temporarily exposing the replacement file. They account for permissions at completion and do not widen them. On Unix, cloud `sbx cp` refuses to replace files owned by another user; on Windows, permission preservation covers the read-only attribute. Special permission bits are retained where the kernel permits. This cloud-copy change does not affect local `sbx cp`.
+- `sbx kit add` checks the filesystem mount policy before recreating a sandbox and refuses the operation if its workspace or a saved mount is denied, matching `sbx start`.
+- Fixed the daemon crashing on a malformed request sent through an intercepted HTTPS connection.
+
+#### SSH and desktop integration
+
+- On macOS and Windows, `sbx setup ssh --auto-create` registers Docker Sandbox connections in Codex and Claude Desktop. Each connection creates a dedicated sandbox on first use and reuses it on subsequent connections. These sandboxes have no host workspace mounted. Clone or copy your project into the sandbox to work on it.
+- Desktop SSH setup warns about missing authentication and provides local sign-in guidance for Codex and Claude. Repeating `sbx setup ssh` recognizes existing registrations even while the applications are running.
+- Closing a Cursor or VS Code window connected over SSH no longer stops the daemon and other running sandboxes.
+- SSH connections no longer fail because the CLI's initial feature lookup timed out before starting the daemon.
+- SSH-agent forwarding supports Windows OpenSSH and 1Password agents when `SSH_AUTH_SOCK` is not set.
+
+#### Kits
+
+- V3 kits support capability groups, `kit.env` references, bundled agent skills, and the `ssh-agent@1` and `git-identity@1` capabilities. Selected optional groups retain their network rules, lifecycle files, and context; unsupported optional groups are skipped. Bundled skills can use directories outside the agent's home.
+- `sbx kit add` accepts kits with startup commands. Those commands run after the kit is added and on each subsequent sandbox start.
+- Sandbox containers expose the provisioned agent's name through `SBX_AGENT` for kit hooks and scripts.
+- `sbx kit validate` rejects kits whose credentials route the same host, identifying the conflicting services. The daemon logs the collision during sandbox creation.
+- Sandbox creation supports kits whose resolved lock exceeds Docker's container-label size limit.
+- `sbx kit pack` excludes its output from the archive, prevents writes into the kit's `files/` directory, and handles Windows 8.3 output paths without renaming the destination or including a previous archive. The output path must end in `.zip` and cannot be a named pipe, socket, or device node.
+- An unresolvable kit-file path no longer causes `sbx kit push` to fail.
+- Kits that declare an agent-context directory now have their agent instructions file written in that directory instead of beside the workspace, and large workload and mixin kit combinations no longer fail to create with "failed to run sandbox container".
+
+#### Sandbox lifecycle and workspaces
+
+- Creating a sandbox from a local snapshot saved with this version avoids registry requests by default, including when using the daemon API.
+- `sbx exec`, `sbx run`, `sbx cp`, and SSH report an unresponsive guest with stop-and-start guidance instead of hanging. `sbx ls` marks the sandbox as not responding.
+- Commands against an already-running sandbox reuse guest setup instead of repeating it on every `exec`, `run`, or `cp` invocation. Setup runs once per container start or daemon restart.
+- `sbx reset` no longer leaves stray sandbox resources or stalls when another sandbox operation is in progress.
+- Sandbox startup identifies files still in use from a previous run instead of reporting a generic failure.
+- `sbx exec` accepts empty command arguments.
+- `sbx cp` preserves dot-prefixed paths and restrictive directory permissions. On Windows, downloads can replace a read-only destination instead of failing with “Access is denied”.
+- `sbx run` and `sbx create` support workspace directories whose names start with a dot.
+
+#### Cloud sandboxes
+
+- `sbx move --to cloud` and `sbx --cloud env create` accept `--ttl` and `--on-timeout restart`, extending always-on support beyond `sbx --cloud create`.
+- Fixed `on_timeout` response decoding errors when using `--on-timeout`.
+
+#### Authentication, agents, and MCP
+
+- Sandbox-scoped custom secrets can override global secrets that use the same environment variable name.
+- Fixed Docker Hub sign-outs on macOS when the host sleeps or wakes during login-token refresh.
+- The built-in Codex kit registers the MCP gateway with supported settings, removing ignored-setting warnings and sending the gateway its Authorization header. Recreate existing Codex sandboxes with `sbx rm` and `sbx create` to receive the change.
+- `sbx mcp unload NAME --sandbox SANDBOX` detaches a loaded MCP server without restarting the sandbox's agent.
+- MCP connections and discovery probes identify as `docker-sbx`, and backend recovery respects rate limits to avoid reconnect storms.
+- `sbx run --model --provider` uses the API key stored with `sbx secret set <provider>` without exposing it to the sandbox. `sbx run --variant` selects a model thinking variant.
+- Fixed `sbx run --model` failing with “401 Unauthorized” when pulling from Docker Hub after a browser-based `docker login`.
+
+#### Networking and policy
+
+- The proxy handles trailing-dot hostnames and mixed-case `host.docker.internal` consistently, fixing refused requests and missing credential injection.
+- Sandbox image pulls retry temporary registry failures reported as HTTP 5xx errors, including when the original error type is lost across API or progress-stream boundaries.
+- Fixed WebSocket connections through the proxy occasionally losing the first bytes sent by the client.
+- `sbx policy ls SANDBOX` returns an error when the sandbox does not exist.
+- `sbx policy inspect` accepts policy names that match one of their own rule names, such as `default-deny-all`.
+- Removing a kit-managed network rule by resource explains that the kit manages it instead of asking for a rule ID.
+
+#### CLI and diagnostics
+
+- Shell completion scripts generate without starting telemetry, reducing generation time.
+- `sbx diagnose` checks for `mkfs.ext4`.
+
 ## 0.47.0
 
 {{< release-date date="2026-10-05" >}}
@@ -134,120 +275,6 @@ Docker Sandboxes v0.47.0 adds automatic cleanup after agent sessions with `sbx r
 - Windows MSI installations include `llmman` and the guest kernel, fixing local model serving with `sbx run --model` and sandbox launches that failed with `No kernel specified`.
 - Uninstalling Docker Sandboxes through the Windows MSI stops the daemon.
 - Fixed the Linux static tarball failing to start on distributions with older glibc versions. The tarball is built against glibc 2.34.
-
-## 0.45.1
-
-{{< release-date date="2026-09-22" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.45.1)
-
-### Fixes and improvements
-
-- Improved sandbox moves and support for private kit images in cloud sandboxes.
-
-## 0.45.0
-
-{{< release-date date="2026-09-21" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.45.0)
-
-### Highlights
-
-#### Compose reusable environments with v3 kits
-
-Docker Sandboxes now supports v3 kits: OCI-based packages that combine an agent workload with reusable mixins for tools, configuration, credentials, network access, and agent instructions. Compose compatible kits directly when creating a sandbox, or publish the combination as a kit set that your team can run from a single reference.
-
-V2 kits remain supported for built-in agents and existing customizations. V3 workloads and mixins must be used together; they can't be combined with v1 or v2 kits. [Learn more about kits](https://docs.docker.com/ai/sandboxes/customize/).
-
-#### Run agents in cloud sandboxes
-
-Run AI agents on Docker-managed cloud infrastructure with `sbx --cloud`. Cloud support requires an active Docker Agentic Platform subscription. See [Get started with cloud sandboxes](https://docs.docker.com/ai/sandboxes/cloud/).
-
-### What's new
-
-#### Breaking changes
-
-- `sbx mcp catalog` has been removed. To authorize a remote MCP server, register it with `sbx mcp add` before running `sbx mcp auth`.
-- `sbx secret rm` now returns an error on stderr when the requested secret doesn't exist.
-- `sbx mcp rm` now returns an error when the requested MCP server isn't registered.
-
-#### Security
-
-- Fixed an issue where revoking a sandbox's OAuth or API-key credential could leave its running proxy authorized until the sandbox was recreated.
-
-#### Kits
-
-- V3 kits introduce separate workload and mixin roles. A workload supplies the base environment and command to run; mixins add tools, configuration, and runtime behavior. Dependencies and compatibility declarations determine composition order.
-- Kit sets let authors combine a workload and mixins, pin their component versions, and publish the result as a single OCI reference. Sets can also add capabilities, lifecycle hooks, instructions, and arguments of their own.
-- V3 kits can scope network access by HTTP method and path, declare install-phase network access and credential use, and specify where an agent reads shared skills.
-- Multiple OAuth-backed agents can be composed in the same sandbox with credentials scoped to the kits that request them.
-- HTTP Basic credentials declared by a kit now produce the expected `Authorization: Basic` header. Composition fails when kits declare conflicting ownership of a Basic-auth service instead of silently dropping the username.
-- `sbx kit validate` now rejects malformed API-key declarations, including invalid names, missing injection domains, invalid format placeholders, and Basic-auth usernames containing a colon. It also warns about declarations that have no effect or target domains outside the kit's network allowlist.
-- Reusing an unchanged local kit no longer rebuilds its composed image.
-- Adding a mixin to an existing sandbox through the daemon API now writes the mixin's agent instructions as expected.
-
-#### Agents and models
-
-- `sbx run --model` can use any OpenAI- or Anthropic-compatible endpoint configured in the new `model.providers` setting.
-- `sbx run opencode --model` now exposes the model's supported thinking levels as OpenCode variants, selectable with <kbd>Ctrl</kbd>+<kbd>T</kbd>.
-- The OpenCode kit now configures GitHub Copilot from the account's stored GitHub credential, so Copilot models work without a separate device login.
-- Codex sandboxes now install Codex with its native installer instead of npm.
-
-#### CLI and output
-
-- MCP server, secret, skill, template, volume, and policy-profile list commands now support `--quiet` (`-q`) for name-only output.
-- List commands now use consistent table formatting, and errors use a consistent format with clearer recovery guidance.
-- Commands that remove resources now ask for confirmation. Use `--force`, or `--yes`/`-y` for `sbx kit builder history rm`, in non-interactive workflows. Declining a destructive-action or required-restart prompt now returns a non-zero exit code.
-- Running `sbx secret rm` without a service opens a picker showing existing local secrets and their scope, type, and name.
-- Unsupported detached execution with `sbx exec -d` or `--detach` now fails immediately instead of running in the foreground.
-- `sbx settings` now appears in `sbx --help` and the CLI reference.
-- `sbx ls --json` now includes `created_at`. `sbx ls --json` and `sbx inspect --json` also report recorded CPU and memory limits for local sandboxes.
-- The updater no longer asks to switch channels when the requested version is already installed.
-- `sbx env rm` now warns about data loss for a cloned workspace before asking for confirmation.
-- `sbx logout` no longer warns about stopped sandboxes when the daemon isn't running.
-
-#### Sandbox lifecycle and workspaces
-
-- Sandboxes now recover when the guest kernel crashes instead of becoming permanently unusable. If a guest stops responding, affected operations fail with an explanation, held proxy connections are released, and `sbx ls` and `sbx inspect` report the unresponsive state.
-- Dynamic mounts are restored after a sandbox restart. Startup fails clearly if a saved mount can't be restored, and `sbx umount` can remove a saved mount while the sandbox is stopped. A missing unmount target no longer disrupts existing mounts.
-- Clone-mode sandboxes restore their host Git remotes on every restart, preserve complete remote configuration during concurrent lifecycle operations, and provide recovery instructions if configuration fails.
-- Newly created or recreated sandboxes have a writable `/etc/hosts` file.
-- Image pulls retry transient registry network failures before sandbox creation fails.
-- Cached-image recovery is reported as successful without also showing a registry error, and mount-policy evaluation failures are distinguished from access denials.
-- Container swaps remove obsolete registry-mirror allowances even if saving the previous swap state fails.
-- Updated containerd to fix image layers being dropped.
-
-#### Authentication and credentials
-
-- Adding, updating, or removing global service secrets now updates existing local sandboxes without a restart while preserving sandbox-specific credentials. Sandbox-scoped command and reference secrets also take effect immediately.
-- Registry and service-secret revocation failures are now reported and can be retried, including after a stored OAuth token has been deleted.
-- OAuth refreshes are coordinated across sandboxes that share credentials, preventing simultaneous refreshes from forcing another sign-in.
-
-#### Networking and policy
-
-- Network policy now treats hostnames with a trailing dot the same as their canonical form for routing, interception, credential injection, and `host.docker.internal` handling. The policy log also records cleartext HTTP requests whose `Host` header differs from the connection destination.
-- Experimental outbound UDP now follows sandbox network policy. New local allow rules cover TCP by default; select UDP explicitly with `--protocol` in the CLI or the TCP+UDP option in the TUI. UDP is refused when the destination requires an HTTP, SOCKS5, system, or PAC-selected proxy, because those proxies can't carry it.
-- Reverse-DNS lookups are now allowed only for destination IPs already authorized by policy, including IP, CIDR, and allow-all rules. This closes the previous policy bypass without blocking PTR lookups for permitted addresses.
-- DNS resolution is no longer allowed when no network rule permits it.
-- Connections allowed only by a CIDR rule no longer wait for hostname detection before connecting, improving protocols such as SSH where the server speaks first.
-- Network and filesystem access now fail closed with accurate errors when policy evaluation fails, governance can't be resolved, a policy snapshot is stale, or a request is malformed.
-- `sbx policy allow network`, `sbx policy deny network`, `--allow-network`, and `--deny-network` now reject malformed patterns before saving them.
-- `sbx policy ls` now shows how each rule was created and supports filtering with `--created-via`.
-- Fixed excessive daemon CPU use caused by reading the settings file for every blocked UDP packet.
-- The governance-rules table no longer reserves space for a hidden profile column, keeping host values readable in narrow terminals.
-
-#### MCP
-
-- Fixed gateway creation failures caused by parentheses or other sandbox-ID punctuation in generated gateway names.
-- MCP gateways now recover correctly after a daemon restart when using `sbx exec` or `sbx env run`.
-- Internal MCP discovery and OAuth informational logs no longer appear in normal command output.
-- OAuth authorization errors now suggest explicit scopes when the authorization server rejects a request without scopes.
-- OAuth metadata discovery for private addresses now warns and continues by default. `--skip-ssrf-check` remains available to suppress the warning for trusted providers and their discovery destinations.
-- `sbx mcp add --disable-http2` disables HTTP/2 for a remote MCP transport, providing a workaround for servers whose HTTP/2 handling stalls long-lived streams.
-
-#### Packaging and installation
-
-- macOS distributions now contain a single signed `Sbx.app` bundle. Homebrew and tarball PATH installs continue to work through a symlink into the bundle.
 
 <!-- END GENERATED RELEASES -->
 
