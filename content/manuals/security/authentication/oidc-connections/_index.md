@@ -46,6 +46,7 @@ subscription:
 | Subscription | Maximum OIDC connections |
 | :----------- | :----------------------- |
 | Team         | 10                       |
+| [Docker-Sponsored Open Source](/manuals/docker-hub/repos/manage/trusted-content/dsos-program.md) | 10 |
 | Business     | 100                      |
 
 Active and deactivated connections count toward the limit, but deleted
