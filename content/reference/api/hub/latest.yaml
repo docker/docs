@@ -108,6 +108,8 @@ tags:
       For example: If you define `repo:write`, the API assumes the scope of both `repo:read` *and* `repo:public_read` as well.
       If you were to define both `repo:write` *and* `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.
 
+      `sandbox:use` is a separate grouping for Cloud Sandboxes. A repository scope does not include it, and it does not include a repository scope. A request can include `sandbox:use` on its own or with one repository scope.
+
       ***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after it is generated.***
     summary: Personal Access Tokens
     kind: nav
@@ -3614,7 +3616,7 @@ components:
         scopes:
           type: array
           description: |
-            Valid scopes: "repo:admin", "repo:write", "repo:read", "repo:public_read"
+            Valid scopes: "repo:admin", "repo:write", "repo:read", "repo:public_read", "sandbox:use". Include one repository scope, "sandbox:use", or both.
           example:
             - repo:read
           items:

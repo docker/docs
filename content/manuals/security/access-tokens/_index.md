@@ -3,14 +3,17 @@ title: Access tokens
 linkTitle: Access tokens
 description: >-
   Choose a personal or organization access token to authenticate to
-  Docker Hub.
+  Docker Hub and Cloud Sandboxes.
 keywords: >-
   access tokens, personal access tokens, organization access tokens,
-  PAT, OAT, Docker Hub, Docker security
+  PAT, OAT, Docker Hub, Docker security, Cloud Sandboxes,
+  repository permissions, sandbox:use
 weight: 10
 grid:
   - title: Personal access tokens
-    description: Authenticate the Docker CLI and tools with a token tied to your account.
+    description: >-
+      Authenticate the Docker CLI and tools with a token tied to your
+      account.
     icon: lock-closed
     link: /security/access-tokens/personal-access-tokens/
   - title: Organization access tokens
@@ -32,7 +35,16 @@ password.
 
 ## Choose a token type
 
-## PATs
+Pick a PAT for work that runs as you, or an OAT for organization-owned
+automation.
+
+## Personal access tokens (PATs) {#pats}
+
+A PAT has
+[one repository permission](/manuals/security/access-tokens/reference.md#personal-access-token-permissions)
+for every repository the account can access. A PAT can also grant
+[Cloud Sandboxes access](/manuals/security/access-tokens/reference.md#cloud-sandboxes-access),
+which is a separate setting on the token.
 
 Use a PAT for Docker Desktop, for environments governed by
 [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md),
@@ -41,11 +53,7 @@ to the CLI when two-factor authentication (2FA) is turned on or single
 sign-on (SSO) is enforced, because the CLI doesn't accept your password
 in those cases.
 
-A PAT uses
-[one permission level](/manuals/security/access-tokens/reference.md#personal-access-token-permissions)
-for every repository the account can access.
-
-## OATs
+## Organization access tokens (OATs) {#oats}
 
 Use an OAT for production systems that pull images during deployment,
 monitoring or backup tools that check repository status or pull images,
