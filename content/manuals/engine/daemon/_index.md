@@ -66,7 +66,14 @@ You can also explicitly specify the location of the configuration file on
 startup, using the `dockerd --config-file` flag.
 
 Learn about the available configuration options in the
-[dockerd reference docs](/reference/cli/dockerd.md#daemon-configuration-file)
+[dockerd reference docs](/reference/cli/dockerd.md#daemon-configuration-file).
+
+One option people often miss: `default-address-pools` controls which IPv4/IPv6
+ranges Docker picks subnets from when you create a network without `--subnet`.
+It is **not** IPv6-only. See
+[Subnet allocation](/manuals/engine/network/_index.md#subnet-allocation) (and
+[Dynamic IPv6 subnet allocation](/manuals/engine/daemon/ipv6.md#dynamic-ipv6-subnet-allocation)
+for IPv6 pools).
 
 ### Configuration using flags
 
