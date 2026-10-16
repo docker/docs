@@ -508,6 +508,32 @@ ignore-file with the name of the Dockerfile, as shown in the following example.
 A Dockerfile-specific ignore-file takes precedence over the `.dockerignore`
 file at the root of the build context if both exist.
 
+### Global ignore file
+
+To exclude files created by your local tools without changing each project's
+`.dockerignore`, add patterns to a global `.dockerignore` file. Its location
+depends on your configuration:
+
+- `$BUILDX_CONFIG/.dockerignore` if `BUILDX_CONFIG` is set.
+- `$DOCKER_CONFIG/buildx/.dockerignore` if only `DOCKER_CONFIG` is set.
+- `~/.docker/buildx/.dockerignore` if neither variable is set.
+
+Buildx applies the global file to local directory contexts and local named
+contexts before sending files to the builder. It doesn't apply to remote Git,
+HTTP, or tarball contexts, image contexts, or `target:` contexts.
+
+The global file uses the [same pattern syntax](#syntax) as a context
+`.dockerignore`. Buildx applies global and context-specific ignore rules
+independently. A path excluded by either file stays out of the build
+context. For example, if the global file excludes `*.log`, a repository
+`!build.log` can't restore `build.log`. Use a later `!` pattern in the
+global file to make an exception to a global rule.
+
+The context root `.dockerignore` is an exception: global patterns don't
+exclude it because Buildx keeps it available for the builder to read.
+Exclude it in the applicable context or Dockerfile-specific ignore file
+if it should not be copied into the image.
+
 ### Syntax
 
 The `.dockerignore` file is a newline-separated list of patterns similar to the
