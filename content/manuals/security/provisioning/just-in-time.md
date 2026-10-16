@@ -55,10 +55,40 @@ following steps occur automatically:
      part of the organization. If not, the user is added to the default
      organization and team configured in the SSO connection.
 
-The following graphic provides an overview of SSO authentication with JIT
+The following diagram provides an overview of SSO authentication with JIT
 enabled:
 
-![JIT provisioning enabled workflow](../images/jit-enabled-flow.svg)
+```mermaid {title="SSO authentication with JIT provisioning enabled" caption="Docker creates or updates the account, accepts any pending invitation, then assigns the user to organizations and teams from IdP group mappings or the SSO connection defaults."}
+---
+config:
+  themeVariables:
+    fontSize: 14px
+  flowchart:
+    nodeSpacing: 20
+    rankSpacing: 24
+    padding: 5
+    curve: linear
+---
+flowchart TB
+  start(["User signs in with SSO"]) --> acct{"Account exists?"}
+  acct -->|Yes| update["Update profile if needed"]
+  acct -->|No| create["Create new account"]
+  update --> invite{"Pending invitation?"}
+  create --> invite
+  invite -->|Yes| accept["Accept invitation, add to invited group"]
+  invite -->|No| map{"IdP group mappings?"}
+  accept --> map
+  map -->|No| member{"Already in SSO org?"}
+  map -->|Yes| assign["Add user to orgs and teams from IdP"]
+  member -->|Yes| ok(["SSO successful"])
+  member -->|No| default["Add user to default org and team"]
+  assign ~~~ default
+  assign --> ok
+  default --> ok
+
+  classDef success fill:#22c55e22,stroke:#22c55e
+  class ok success
+```
 
 ## SSO authentication with JIT provisioning disabled
 
@@ -86,10 +116,37 @@ With JIT disabled, group mapping is only available if you have
 [SCIM enabled](/manuals/security/provisioning/scim/provision-scim.md#enable-scim-in-docker).
 If SCIM is not enabled, users won't be auto-provisioned to groups.
 
-The following graphic provides an overview of SSO authentication with JIT
+The following diagram provides an overview of SSO authentication with JIT
 disabled:
 
-![JIT provisioning disabled workflow](../images/jit-disabled-flow.svg)
+```mermaid {title="SSO authentication with JIT provisioning disabled" caption="Docker signs in only users who are already organization members or have a pending invitation. All other users see an Access denied error."}
+---
+config:
+  themeVariables:
+    fontSize: 14px
+  flowchart:
+    nodeSpacing: 20
+    rankSpacing: 24
+    padding: 5
+    curve: linear
+---
+flowchart TB
+  start(["User signs in with SSO"]) --> acct{"Account exists?"}
+  acct -->|Yes| update["Update profile if needed"]
+  acct -->|No| create["Create new account"]
+  update --> invite{"Pending invitation?"}
+  create --> invite
+  invite -->|Yes| accept["Accept invitation, add user to SSO org"]
+  invite -->|No| member{"Already in SSO org?"}
+  accept --> ok(["SSO successful"])
+  member -->|Yes| ok
+  member -->|No| denied(["Access denied"])
+
+  classDef success fill:#22c55e22,stroke:#22c55e
+  classDef failure fill:#ef444422,stroke:#ef4444
+  class ok success
+  class denied failure
+```
 
 ## Disable JIT provisioning
 
