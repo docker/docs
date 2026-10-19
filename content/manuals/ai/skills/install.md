@@ -158,25 +158,6 @@ $ git clone --branch vX.Y.Z --depth 1 https://github.com/docker/skills.git
 Copy each selected directory under `skills/` into a discovery path documented
 by your agent. Keep its `SKILL.md` and all supporting files together.
 
-## Docker Docs MCP server
-
-The `docker-docs` skill can use the Docker Docs MCP server to search official
-Docker documentation. The Docker Skills plugins and Gemini CLI extension
-register this server as `docker-docs` alongside the skills. Check your client's
-MCP settings if the plugin is installed but the server isn't available.
-
-The skills CLI, Docker Sandboxes installer, and manual copies install skills
-only. To add the server with those methods, configure a remote MCP server in
-your agent using Streamable HTTP and this URL:
-
-```text
-https://ai-backend-service.docker.com/mcp
-```
-
-See the [server setup reference](https://github.com/docker/skills/blob/main/skills/docker-docs/references/mcp-setup.md)
-for client-specific configuration.
-The skill can also retrieve documentation from the docs site without MCP.
-
 ## Verify the installation
 
 First, check the installed-plugin or extension view, `npx skills list`, or
