@@ -40,16 +40,33 @@ token as the password. The GitHub identity token is exchanged for this access
 token. Don't use the GitHub identity token as a registry password.
 
 Configure the connection's [rulesets and subject claims](/manuals/security/authentication/oidc-connections/rulesets-claims.md)
-to match your workflow and grant pull access to the repository:
+to match your workflow. Repository access depends on the registry you use:
 
-- For `dhi.io/<image>`, the repository grant must cover `dhi/<image>`.
-- For a mirrored or customized image, the grant must cover
+- Free images and their attestations served through `dhi.io` require authentication,
+  but no `dhi/<image>` grant or **Read public repositories** permission.
+- For a mirrored or customized image on Docker Hub, grant pull access to
   `<your-organization>/<repository>`.
+- Direct reads from `registry.scout.docker.com` require access to the referenced
+  repository and use your organization as the Scout registry namespace.
 
-The same repository grant controls reads of the image's private attestations
-from `registry.scout.docker.com`. Signing in doesn't grant access to other
-repositories or change your organization's DHI subscription. OIDC repository
-grants don't authorize managing customizations or other organization settings.
+Repository grants can cover an exact repository, all repositories in a namespace
+(`namespace/*`), or public Docker Hub repositories (`*/*/public`, with pull access
+only). Public access applies across namespaces. It requires the repository to be
+public when each read is authorized. It doesn't grant access to private
+repositories or remove DHI subscription, FIPS, or Extended Lifecycle Support
+requirements.
+
+Grants are additive. Push access includes pull access. An exact pull grant cannot
+restrict a matching namespace-wide push grant. To restrict a repository to
+pull-only access, remove every matching push grant. The `dhi.io` endpoint accepts
+read operations with OIDC credentials. Push grants also authorize supported
+uploads to `registry.scout.docker.com`, but don't authorize deletion.
+
+The repository grant also controls direct reads of the image's private
+attestations from `registry.scout.docker.com`. Free access through `dhi.io` doesn't
+change these direct-access permissions or your organization's DHI subscription.
+Managing customization definitions requires the destination-repository permissions
+described in [Customize a DHI](./customize.md).
 
 The following workflow uses `regctl` to read a mirrored image manifest and list
 its attestations. Set these GitHub Actions repository variables:
@@ -130,10 +147,10 @@ jobs:
           regctl registry logout registry.scout.docker.com
 ```
 
-For an image pulled directly from `dhi.io`, sign in to `dhi.io` instead of
-`docker.io`. Use `dhi.io/<image>:<tag>` as the image reference and
-`registry.scout.docker.com/dhi/<image>` as the external attestation repository.
-Update the repository grant and sign-out step to match.
+For a free image served through `dhi.io`, sign in to `dhi.io` and use
+`dhi.io/<image>:<tag>` for both commands. Omit `--external` so that image and
+attestation reads both use `dhi.io`. Sign out of `dhi.io` when finished. This path
+doesn't require a `dhi/<image>` repository grant or a separate Scout registry login.
 
 ## Verify image attestations
 

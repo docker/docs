@@ -81,6 +81,34 @@ Scopes on the matching ruleset decide what the workflow can do with a defined re
 - A Docker Build Cloud resource uses the **Cloud Connect** scope, so the
   workflow can connect and build in Docker Build Cloud.
 
+Repository grants combine across all matching rulesets. **Image Push** includes
+pull access. An exact-repository **Image Pull** grant doesn't restrict a broader
+**Image Push** grant that also matches that repository. Remove every matching
+push grant to make access pull-only.
+
+**Read public repositories** grants pull access across Docker Hub namespaces.
+It doesn't grant access to private repositories, customization management, or
+organization settings. Product-specific requirements, such as DHI subscription
+and variant eligibility, still apply. Authenticated pulls of free images and
+attestations through `dhi.io` remain available even with **Read public
+repositories** unchecked. See [DHI authentication options](/manuals/dhi/how-to/use.md).
+
+### DHI and Scout compatibility exceptions
+
+The resource scopes don't describe every permission an authenticated connection
+receives in DHI and Docker Scout:
+
+- Free DHI images and attestations remain available through `dhi.io` without an
+  image grant, including when **Read public repositories** is unchecked.
+- Docker Scout preserves legacy organization access for GraphQL operations,
+  including writing image analysis data. Selecting only **Image Pull**, or
+  omitting image grants, doesn't make all Scout GraphQL operations read-only.
+  Repository-filtered queries and DHI customization operations still enforce
+  their repository permissions.
+
+These exceptions preserve existing integrations. **Image Push** still controls
+registry push access; the Scout behavior doesn't grant registry push permission.
+
 ## Ruleset examples
 
 The following examples are working setups you can adapt. They are not
