@@ -33,11 +33,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Updates
 
 - [Credential helpers v0.9.10](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.10)
-- [containerd v2.4.1](https://github.com/containerd/containerd/releases/tag/v2.4.1)
+- [containerd v2.4.2](https://github.com/containerd/containerd/releases/tag/v2.4.2)
 - Docker Desktop Build `v0.39.0`
-- Docker Offload `v0.6.105`
+- Docker Offload `v0.7.4`
 - `docker pass` v0.3.0
-- [Docker Engine v29.9.0](https://docs.docker.com/engine/release-notes/29/#2990)
+- [Docker Engine v29.9.1](https://docs.docker.com/engine/release-notes/29/#2991)
 - [Docker Buildx v0.38.0](https://github.com/docker/buildx/releases/tag/v0.38.0)
 - [Docker Agent v1.149.0](https://github.com/docker/docker-agent/releases/tag/v1.149.0)
 
