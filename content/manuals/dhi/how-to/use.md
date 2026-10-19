@@ -94,11 +94,11 @@ You can reference them in Dockerfiles, pull them as part of a pipeline step, or
 run containers based on them during builds and tests.
 
 In GitHub Actions, you can use an OIDC connection to authenticate with
-short-lived Docker access tokens instead of storing a PAT or OAT. Repository
-grants restrict which images and attestations the workflow can read. For
-`dhi.io/<image>`, grant pull access to `dhi/<image>`. For a mirrored image,
-grant pull access to `<your-organization>/<repository>`. Your organization's
-DHI subscription still determines access to paid image variants.
+short-lived Docker access tokens instead of storing a PAT or OAT. Authenticated
+OIDC callers can pull free images and their attestations through `dhi.io` without
+a `dhi/<image>` grant, even with **Read public repositories** unchecked. For a
+mirrored image, grant pull access to `<your-organization>/<repository>`. Your
+organization's DHI subscription still determines access to paid image variants.
 
 See [Authenticate with OIDC in GitHub Actions](./verify.md#authenticate-with-oidc-in-github-actions)
 for an example that reads an image manifest and its private attestations.
