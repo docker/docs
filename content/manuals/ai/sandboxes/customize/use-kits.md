@@ -129,10 +129,13 @@ Network requests must also meet your sandbox's network policy. Kit allow rules
 can't grant access beyond your organization's policy. If a connection fails,
 check the [policy log](#debug-kits) to see which rule blocked it.
 
-Kits can also give the agent instructions for using their tools. The workload
-chooses the instruction file, and mixins add their guidance to it. Docker
-Sandboxes writes that file outside your workspace, leaving your project's
-instructions intact.
+Kits can also give the agent instructions for using their tools. Docker
+Sandboxes writes an instruction file with a Kits section that tells the agent
+where to read each kit's guidance. Context files packaged in kit images live
+under `/usr/share/sandbox/kit/<stem>/` inside the sandbox, where `<stem>` is
+the kit descriptor's filename without its extension. Instructions declared
+inline in a kit descriptor are written to a directory beside the generated
+instruction file. Your project's instructions stay intact.
 
 ## Add mixins
 
