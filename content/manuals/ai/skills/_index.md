@@ -31,3 +31,15 @@ access, then loads the relevant instructions. You don't need to name a skill in
 your prompt. A skill is a directory containing a `SKILL.md` file that describes
 when and how to use it, with optional references or assets. An agent can use
 more than one skill when a task spans Docker products.
+
+## Docker documentation answers
+
+The `docker-docs` skill helps your agent answer Docker questions using official
+Docker documentation. It searches for relevant pages, reads the documentation,
+and cites the sources in its answers.
+
+When the Docker Docs MCP server is available, the skill uses it to search
+Docker's documentation knowledge base. Without the server, it uses the docs
+site's `llms.txt` index and Markdown pages. The skill works with either method;
+see [Docker Docs MCP server setup](install.md#docker-docs-mcp-server) for how the
+server is installed.
