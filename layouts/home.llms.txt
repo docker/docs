@@ -16,6 +16,7 @@ Hub, Docker Scout, and Docker AI features.
 Use this file as a generated discovery guide for the docs site. For the complete
 page index, use [llms-full.txt](https://docs.docker.com/llms-full.txt).
 
+> Docker Skills for AI coding agents: https://docs.docker.com/ai/skills/
 > MCP endpoint for structured agent access: https://mcp-docs.docker.com/mcp
 > Bulk text corpus for offline indexing: https://docs.docker.com/llms-full.txt
 
