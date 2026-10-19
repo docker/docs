@@ -132,8 +132,9 @@ check the [policy log](#debug-kits) to see which rule blocked it.
 Kits can also give the agent instructions for using their tools. Docker
 Sandboxes writes an instruction file with a Kits section that tells the agent
 where to read each kit's guidance. Context files packaged in kit images live
-under `/usr/share/sandbox/kit/<stem>/` inside the sandbox, where `<stem>` is
-the kit descriptor's filename without its extension. Instructions declared
+in a subdirectory of `/usr/share/sandbox/kit/` inside the sandbox, such as
+`/usr/share/sandbox/kit/git-signing/git-signing-context.md`. The Kits section
+gives the exact path for each kit. Instructions declared
 inline in a kit descriptor are written to a directory beside the generated
 instruction file. Your project's instructions stay intact.
 
