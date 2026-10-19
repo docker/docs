@@ -1,10 +1,12 @@
 ---
 description: >-
   Learn how Just-in-Time (JIT) provisioning creates and updates Docker
-  accounts during SSO sign-in, and how to turn it off or back on.
+  accounts during SSO sign-in and assigns teams, and how to turn it off or
+  back on.
 keywords: user provisioning, just-in-time provisioning, JIT provisioning, JIT,
-  autoprovision, automatic provisioning, SSO, single sign-on, SCIM, enable JIT,
-  disable JIT, identity provider, group mapping, Docker Home, admin, security
+  SSO, single sign-on, SCIM, enable JIT, disable JIT, enable JIT provisioning,
+  disable JIT provisioning, identity provider, IdP, group mapping,
+  SSO connection
 title: Just-in-Time provisioning
 linkTitle: Just-in-Time
 weight: 20
@@ -21,8 +23,9 @@ them to teams based on your identity provider (IdP) configuration.
 
 ## How it works
 
-With JIT, users get access the first time they sign in with SSO. No invitation
-is required. JIT fits organizations that want the quickest path to access.
+JIT fits organizations that want to give their users the quickest path to
+access. JIT grants users access the first time they sign in with SSO without
+needing an invitation.
 
 The following diagram shows SSO sign-in with and without JIT:
 
@@ -82,7 +85,7 @@ default. To set up JIT provisioning:
    [SSO connection](/manuals/security/authentication/single-sign-on/connect.md)
    for your organization.
 1. Set the default organization and team that Docker uses for users
-   who sign in without IdP group mappings. You set these when you create the
+   who sign in without IdP group mappings. You set these when you create the SSO
    connection.
 1. Optional. Set up
    [group mapping](/manuals/security/provisioning/scim/group-mapping.md#configure-group-mapping-with-sso)
