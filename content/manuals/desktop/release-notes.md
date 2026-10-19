@@ -65,8 +65,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Windows
 
-- Fixed a bug where `chmod` on a Unix socket in a bind mount failed with an I/O error and turned the socket into a symlink when using Docker VMM on Windows.
-- Fixed the Windows Docker VMM data disk growing unbounded over time.
 - Fixed an issue where tray icon light/dark theme detection could fail.
 - Fixed disk full detection on Windows so that a full-disk error during startup now shows the disk full recovery dialog instead of a generic failure dialog.
 - Fixed an issue on Windows where WSL distro startup failures showed a confusing 'bad magic string' error instead of the actual reason reported by wsl.exe.
