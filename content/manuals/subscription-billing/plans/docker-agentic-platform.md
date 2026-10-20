@@ -14,10 +14,7 @@ aliases:
   - /subscription/plans/docker-agentic-platform/
 ---
 
-> [!TIP]
-> Docker Agentic Platform signups receive a one-time promotional
-> credit toward cloud compute usage. To review your balance, see
-> [Credits](/manuals/subscription-billing/manage/_index.md#credits).
+{{< summary-bar feature_name="Docker Agentic Platform" >}}
 
 [Docker Agentic Platform](https://agentic-platform.docker.com/) is a
 pay-as-you-go plan for running agent and tool workloads in isolated
@@ -27,11 +24,18 @@ subscription fee.
 To activate access for the Console, cloud sandbox CLI, or API and SDKs, follow
 [Signup and billing](/manuals/agentic-platform/signup.md#activate-cloud-access).
 
+> [!TIP]
+>
+> Docker Agentic Platform signups receive a one-time promotional
+> credit toward cloud compute usage. To review your balance, see
+> [Credits](/manuals/subscription-billing/manage/_index.md#credits).
+
 ## Usage
 
 > [!NOTE]
-> Subscribe using your personal Docker account, including if you belong to
-> an organization. The subscription is attached to your personal account.
+>
+> If you belong to an organization, subscribe with your personal Docker
+> account. The subscription stays on that account.
 
 Docker Agentic Platform requires bringing your own API keys for inference. Your inference provider
 handles those costs.

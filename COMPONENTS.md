@@ -292,9 +292,9 @@ empty string default.
 
 ### Summary bars
 
-Summary bars indicate subscription requirements, version requirements, the
-role or permission a task needs, or the feature's availability at the top of
-a page.
+Summary bars indicate the account type, subscription, purchase path, version
+requirements, the role or permission a task needs, or the feature's
+availability at the top of a page.
 
 **Example:**
 
@@ -314,6 +314,9 @@ Activity logs:
   subscription: [Team, Business]
   role: Owner
   permission: View activity logs
+Gordon plans:
+  account: Individual
+  purchase: Self-serve
 ```
 
 2. Add shortcode to page:
@@ -326,7 +329,9 @@ Activity logs:
 
 | Attribute    | Description                                       | Values                                                                                                                       |
 | ------------ | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| subscription | Subscription tiers required (list). Use `Available to all organization accounts` when the task is not limited to a plan. | Personal, Pro, Team, Business, AI Governance, Docker Offload, Available to all organization accounts, and the Docker Hardened Images tiers |
+| account      | Account the plan or setting belongs to            | Individual, Organization                                                                                                     |
+| subscription | Subscription tiers required (list). Use `Available to all organization accounts` when the task is not limited to a plan. Set it only when the page is gated to those tiers. | Personal, Pro, Team, Business, AI Governance, Docker Offload, Available to all organization accounts, and the Docker Hardened Images tiers |
+| purchase     | How you buy the plan                              | Self-serve, Sales-led                                                                                                        |
 | role         | Core role that has the task                      | Owner, Editor, Company owner                                                                                                 |
 | permission   | Custom role permission that grants the same task. The bar links the name to its section of the permissions reference. | An exact permission name from `content/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md` |
 | availability | Product development stage                         | Experimental, Beta, Early Access, GA, Retired                                                                                |

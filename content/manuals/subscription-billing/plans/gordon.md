@@ -14,6 +14,8 @@ aliases:
   - /subscription/gordon/
 ---
 
+{{< summary-bar feature_name="Gordon plans" >}}
+
 [Gordon](/manuals/ai/gordon/_index.md) is an AI assistant for Docker workflows. For pricing details, see the [Gordon product page](https://www.docker.com/products/gordon/).
 
 - Gordon Base is included at no cost with Docker plans. It covers everyday Docker workflow questions with a baseline monthly usage allowance.
@@ -28,9 +30,9 @@ To upgrade to a Gordon paid plan, see [Manage plans](/manuals/subscription-billi
 Gordon usage is measured in questions. When you upgrade from Gordon Base to a paid plan, your usage multiplies the Base allowance. Usage is capped across three time windows: 4-hour, daily, and monthly. For full limit details, see [Gordon usage limits](/manuals/ai/gordon/usage-limits.md).
 
 > [!IMPORTANT]
-> Gordon plans apply to personal Docker accounts only. If you purchase a Gordon
-> plan while signed in with an organization account, the plan applies
-> to your personal account automatically.
+>
+> If you purchase a Gordon plan while signed in with an organization account,
+> the plan applies to your personal account automatically.
 
 ## Billing cycle
 

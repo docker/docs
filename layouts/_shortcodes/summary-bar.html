@@ -9,6 +9,12 @@
 {{ if .Get "role" }}
   {{ errorf "[summary-bar] role can't be overridden on the page; set it on the %q record in data/summary.yaml %v" $featureName .Position }}
 {{ end }}
+{{ if .Get "account" }}
+  {{ errorf "[summary-bar] account can't be overridden on the page; set it on the %q record in data/summary.yaml %v" $featureName .Position }}
+{{ end }}
+{{ if .Get "purchase" }}
+  {{ errorf "[summary-bar] purchase can't be overridden on the page; set it on the %q record in data/summary.yaml %v" $featureName .Position }}
+{{ end }}
 {{ if $feature }}
   {{ $subscriptionIcons := dict
     "Business" "building-office"
@@ -28,6 +34,14 @@
     "Early Access" "rocket-launch"
     "GA" "check-circle"
     "Retired" "archive-box"
+  }}
+  {{ $accountIcons := dict
+    "Individual" "user"
+    "Organization" "building-office"
+  }}
+  {{ $purchaseIcons := dict
+    "Self-serve" "shopping-cart"
+    "Sales-led" "phone"
   }}
   {{ $requiresIcon := "arrow-down-circle" }}
   {{ $roleIcon := "shield-check" }}
@@ -66,6 +80,20 @@
   {{ end }}
 
   <div class="not-prose summary-bar">
+    {{ with $feature.account }}
+      {{ $accountIcon := index $accountIcons . }}
+      {{ if not $accountIcon }}
+        {{ errorf "[summary-bar] invalid account: %q %v" . $.Position }}
+      {{ end }}
+      <div class="flex flex-wrap gap-1">
+        <span class="font-bold">Account:</span>
+        <span>{{ . }}</span>
+        <span class="icon-svg icon-sm">
+          {{ partialCached "icon" $accountIcon $accountIcon }}
+        </span>
+      </div>
+    {{ end }}
+
     {{ with $feature.subscription }}
       <div class="flex flex-wrap gap-1">
         <span class="font-bold">Subscription:</span>
@@ -80,6 +108,20 @@
             {{ end }}
           </span>
         {{ end }}
+      </div>
+    {{ end }}
+
+    {{ with $feature.purchase }}
+      {{ $purchaseIcon := index $purchaseIcons . }}
+      {{ if not $purchaseIcon }}
+        {{ errorf "[summary-bar] invalid purchase: %q %v" . $.Position }}
+      {{ end }}
+      <div class="flex flex-wrap gap-1">
+        <span class="font-bold">Purchase:</span>
+        <span>{{ . }}</span>
+        <span class="icon-svg icon-sm">
+          {{ partialCached "icon" $purchaseIcon $purchaseIcon }}
+        </span>
       </div>
     {{ end }}
 

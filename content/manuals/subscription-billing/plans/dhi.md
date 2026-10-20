@@ -15,6 +15,8 @@ aliases:
   - /subscription/plans/dhi-select/
 ---
 
+{{< summary-bar feature_name="DHI plans" >}}
+
 [Docker Hardened Images (DHI)](/manuals/dhi/_index.md) are secure, minimal, production-ready container images maintained by Docker.
 
 - DHI Community is free and available to every developer.

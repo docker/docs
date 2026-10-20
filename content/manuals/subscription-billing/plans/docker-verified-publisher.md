@@ -13,6 +13,8 @@ aliases:
   - /subscription/plans/docker-verified-publisher/
 ---
 
+{{< summary-bar feature_name="Docker Verified Publisher" >}}
+
 [Docker Verified Publisher (DVP)](/manuals/docker-hub/repos/manage/trusted-content/dvp-program.md)
 is a program for commercial publishers who distribute content on Docker
 Hub. DVP Starter and DVP Growth are paid organization plans that add

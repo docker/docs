@@ -4,6 +4,9 @@
 AI Governance Audit Logs:
   subscription: [AI Governance]
   requires: Docker Sandboxes [0.39.0](/manuals/ai/sandboxes/release-notes.md) or later
+AI Governance plan:
+  account: Organization
+  purchase: Sales-led
 Activity logs:
   subscription: [Team, Business]
   role: Owner
@@ -23,6 +26,9 @@ Amazon S3 cache:
   availability: Experimental
 Gordon:
   requires: Docker Desktop [4.74.0](/manuals/desktop/release-notes.md#4740) or later
+Gordon plans:
+  account: Individual
+  purchase: Self-serve
 Gordon DHI migration:
   availability: Experimental
   requires: Docker Desktop [4.38.0](/manuals/desktop/release-notes.md#4380) or later
@@ -160,10 +166,16 @@ Custom roles:
   permission: Manage custom roles
 Dev Environments:
   availability: Beta
+Docker Agentic Platform:
+  account: Individual
+  purchase: Self-serve
 Docker Build Cloud:
   subscription: [Pro, Team, Business]
 Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
+Docker Verified Publisher:
+  account: Organization
+  purchase: Self-serve
 Docker Offload:
   subscription: [Docker Offload]
   requires: Docker Desktop 4.68 or later
@@ -179,6 +191,9 @@ Docker Hardened Images:
   subscription: [Docker Hardened Images Select or Enterprise]
 Docker Hardened Images Enterprise:
   subscription: [Docker Hardened Images Enterprise]
+DHI plans:
+  account: Organization
+  purchase: Self-serve
 Docker Hardened Images EU data residency:
   availability: Early Access
   subscription: [Docker Hardened Images Select or Enterprise]
