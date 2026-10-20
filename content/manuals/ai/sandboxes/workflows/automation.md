@@ -86,6 +86,14 @@ $ sbx prune --dry-run --format yaml
 are rejected. `sbx events --json` emits newline-delimited JSON, and
 `sbx mcp auth --format text|json` uses command-specific formats.
 
+For lists of identifiers without table headings, use `--quiet` or `-q`:
+
+| Command | Output |
+| --- | --- |
+| `sbx policy ls -q` | Local rule IDs. With `--cloud`, network patterns instead. |
+| `sbx settings ls -q` | Setting keys. |
+| `sbx policy approval ls -q` | Approval IDs. |
+
 ### Update scripts for v0.48.0
 
 {{< copy-as-prompt instruction="Update this repository's Docker Sandboxes CLI usage for v0.48.0 using the migration reference below. Inspect scripts and documentation, update affected commands and output parsers, and verify the changes. Preserve unrelated behavior." >}}
