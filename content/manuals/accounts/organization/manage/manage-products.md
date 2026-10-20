@@ -3,9 +3,9 @@ title: Manage usage and access for Docker products
 linkTitle: Products
 weight: 30
 description: >-
-  Map of where organization owners control Docker product access and check
-  usage in Docker Home
-keywords: organization, product access, product usage, access control, docker desktop, docker hub, docker scout, docker build cloud, docker offload, testcontainers cloud, docker sandboxes, ai governance
+  Control which Docker products organization members can use, and find
+  where to check usage
+keywords: organization, product access, product usage, access control, seats, licenses, docker desktop, docker hub, docker scout, docker build cloud, docker offload, testcontainers cloud, docker sandboxes, ai governance
 aliases:
   - /admin/organization/manage/manage-products/
   - /admin/organization/manage-products/
@@ -13,205 +13,164 @@ aliases:
 
 {{< summary-bar feature_name="Admin orgs" >}}
 
-As an organization owner, you decide which Docker products members can
-access and you monitor how much your organization consumes. Use this page
-to learn where to change product access in Docker Home and how to check
-usage.
+Use this page to learn how to control and monitor product access and usage
+for your organization's members. If you're looking for setup and
+configuration instructions, see each product's manual under
+[Next steps](#next-steps).
 
 ## How product access works
 
-Organization product access is usually set up in this order:
+Members receive access to products through seats, licenses, and the controls
+you configure:
 
-1. [Invite members](/manuals/accounts/organization/manage/members.md) to the
-   organization (or provision them with
-   [SSO or SCIM](/manuals/security/provisioning/_index.md)).
-1. Choose a
-   [subscription](/manuals/subscription-billing/plans/_index.md), then
-   assign [seats](/manuals/accounts/organization/manage/manage-seats.md) for
-   Docker Team or Business and
-   [licenses](/manuals/accounts/organization/manage/manage-licenses.md) for
-   add-ons such as Docker Offload or AI Governance.
-1. Configure product controls on this page so members with seats or
-   licenses get the product behavior you want, such as Hub image pulls,
-   Scout analysis, or Desktop Offload.
+- A member uses one seat on a Docker Team or Business
+  [subscription](/manuals/subscription-billing/plans/_index.md). The seat
+  includes the products in the plan, such as Docker Desktop and Docker Hub.
+- Some products need a separate
+  [license](/manuals/accounts/organization/manage/manage-licenses.md) that
+  you assign to teams or members.
+- After a member has a seat or license, the controls on this page set what
+  they can do in each product, such as which Hub images they can pull,
+  which repositories Scout analyzes, or whether Docker Offload is available
+  in Docker Desktop.
 
-Seats and licenses decide who is entitled to a product. This page is the
-next step: what those entitled members can do in each product. It does
-not cover credentials. For personal and organization access tokens used to
-authenticate to Docker Hub, see
-[Access tokens](/manuals/security/access-tokens/_index.md).
+This page covers the product controls. It does not cover credentials. For
+personal and organization access tokens used to authenticate to Docker Hub,
+see [Access tokens](/manuals/security/access-tokens/_index.md).
 
-## Control access
+## Control access for your organization
 
-Pick a product when you need to change who can use it or what they're
-allowed to do.
+Organization members can access Docker products that your organization is
+subscribed to by default. When signed in as an organization owner, you can
+use the following procedures to control access for all members.
 
-### Docker Desktop
+### Docker Desktop access
 
-Restrict Docker Desktop to organization members who must sign in.
+To manage Docker Desktop access:
 
 1. [Enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).
-1. Add members
-   [manually](/manuals/accounts/organization/manage/members.md) or with
-   [provisioning](/manuals/security/provisioning/_index.md).
+1. Manage members [manually](./members.md) or use
+   [provisioning](../../../security/provisioning/_index.md).
 
-### Docker Hub
+With sign-in enforced, only members of your organization can use Docker
+Desktop after they sign in.
 
-Limit which Hub images members can pull, which registries Desktop can
-reach, and whether members can push to personal namespaces.
+### Docker Hub access
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
-1. Select **Docker Desktop**.
-1. Select the control you want to change:
-   - **Image Access**, to limit which Docker Hub images members can pull.
-     See
-     [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md).
-   - **Registry Access**, to limit which registries Docker Desktop can
-     reach. See
-     [Registry Access Management](/manuals/desktop/enterprise/hardened-desktop/registry-access-management.md).
-   - **Namespace access**, to control whether members can push to their
-     personal namespaces. See
-     [Namespace access control](/manuals/desktop/enterprise/hardened-desktop/namespace-access.md).
-
-### Docker Build Cloud
-
-Assign Build Cloud seats so members can use cloud builders.
+To manage Docker Hub access:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
-1. Select **Build Cloud**, then **User management**.
-1. Invite members and assign seats for cloud builders.
+   organization, then select **Docker Desktop**.
+1. Select **Registry Access** to configure
+   [Registry Access Management](/manuals/desktop/enterprise/hardened-desktop/registry-access-management.md).
+1. Select **Image Access** to control
+   [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md).
+
+### Docker Build Cloud access
+
+To set up Docker Build Cloud, sign in to
+[Docker Build Cloud](https://app.docker.com/build) and follow the on-screen
+instructions.
+
+To manage Docker Build Cloud access:
+
+1. Sign in to [Docker Home](https://app.docker.com/), then select
+   [Docker Build Cloud](https://app.docker.com/build).
+1. Select **Account settings**.
+1. Select **Lock access to Docker Build Account**.
 
 > [!WARNING]
 >
-> Under **Build Cloud**, on **Account settings**, **Lock access to Docker
-> Build Account** removes cloud builders and build minutes for the
-> organization and purges build data.
+> **Lock access to Docker Build Account** removes the ability to use cloud
+> builders or build minutes, and it purges build data.
 
-### Docker Scout
+### Docker Scout access
 
-Choose which repositories Scout analyzes, and turn Scout image analysis on
-or off in Docker Desktop.
+To set up Docker Scout, sign in to [Docker Scout](https://scout.docker.com/)
+and follow the on-screen instructions.
 
-To choose which repositories Docker Scout analyzes:
+To manage Docker Scout access:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
-1. Select **Scout** or **Go to Scout**.
-1. Select **Settings**, then **Repository settings**. See
-   [Repository settings](/manuals/scout/explore/dashboard.md#repository-settings).
+1. Sign in to [Docker Home](https://app.docker.com/), then select
+   [Docker Scout](https://scout.docker.com/).
+1. Select your organization, then **Settings**.
+1. To manage which repositories Docker Scout analyzes, select
+   **Repository settings**. See
+   [Repository settings](../../../scout/explore/dashboard.md#repository-settings).
+1. To manage Docker Scout for local images in Docker Desktop, use
+   [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md)
+   and set `sbomIndexing` to `false` to turn it off, or to `true` to turn
+   it on.
 
-To control Scout image analysis in Docker Desktop:
+### Testcontainers Cloud access
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
-1. Select **Docker Desktop**, then **Settings Management**.
-1. In a settings policy, set **SBOM indexing** (`sbomIndexing`). See
-   [Enable Scout image analysis](/manuals/desktop/enterprise/hardened-desktop/settings-management/settings-reference.md#enable-scout-image-analysis).
+To set up Testcontainers Cloud, sign in to
+[Testcontainers Cloud](https://app.testcontainers.cloud/) and follow the
+on-screen instructions.
 
-### Testcontainers Cloud
+To manage access to Testcontainers Cloud:
 
-Docker Home does not provide Testcontainers Cloud access controls. Open
-Testcontainers Cloud from Docker Home, then manage access in Testcontainers
-Cloud.
+1. Sign in to [Testcontainers Cloud](https://app.testcontainers.cloud/),
+   then select the menu icon.
+1. Select **Account**, then **Settings**.
+1. Select **Lock access to Testcontainers Cloud**.
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
-1. Select **Testcontainers Cloud** or **Go to Testcontainers Cloud**.
-1. Continue in the
-   [Testcontainers Cloud documentation](https://testcontainers.com/cloud/docs/).
+### Docker Offload access
 
-### Docker Offload
+To manage Docker Offload access for your organization, use [Settings
+Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md):
 
-Gate Docker Offload with licenses, then control whether it is available in
-Docker Desktop.
+1. Sign in to [Docker Home](https://app.docker.com/), then select **Docker
+   Desktop**.
+1. Select **Settings Management**.
+1. Configure the **Enable Docker Offload** setting to control whether
+   Docker Offload features are available in Docker Desktop. You can
+   configure this setting in five states:
+   - **Always enabled**: Docker Offload is always enabled and users cannot
+     disable it. The Offload toggle is always visible in the Docker Desktop
+     header. Recommended for VDI environments where local Docker execution
+     is not possible.
+   - **Enabled**: Docker Offload is enabled by default but users can
+     disable it in Docker Desktop settings. Suitable for hybrid
+     environments.
+   - **Disabled**: Docker Offload is disabled by default but users can
+     enable it in Docker Desktop settings.
+   - **Always disabled**: Docker Offload is disabled and users cannot
+     enable it. The option is visible but locked. Use when Docker Offload
+     is not approved for organizational use.
+   - **User defined**: No enforced default. Users choose whether to enable
+     or disable Docker Offload in their Docker Desktop settings.
+1. Select **Save**.
 
-> [!NOTE]
->
-> Docker Offload licenses are available for Docker Team and Docker Business
-> plans. To add licenses,
-> [contact sales](https://www.docker.com/pricing/contact-sales/).
-> Organization owners assign licenses in Docker Home. See
-> [Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md).
+For more details on Settings Management, see the [Settings
+reference](/manuals/desktop/enterprise/hardened-desktop/settings-management/settings-reference.md#enable-docker-offload).
 
-To control Docker Offload in Docker Desktop:
+## Monitor product usage for your organization
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
-1. Select **Docker Desktop**, then **Settings Management**.
-1. Create or edit a settings policy, and set **Enable Docker Offload**. See
-   [Configure Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/configure-admin-console.md)
-   and
-   [Enable Docker Offload](/manuals/desktop/enterprise/hardened-desktop/settings-management/settings-reference.md#enable-docker-offload).
+You can monitor usage for Docker products across your organization. Use the
+following table to learn where you can monitor organization usage:
 
-### Docker Sandboxes
+| Product              | Monitor usage                                                                                                                                                                                                                                                            |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Docker Desktop       | From [Docker Home](https://app.docker.com/), select your organization, then **Docker Desktop**, then [**Desktop insights**](/manuals/accounts/organization/insights.md).                                                                                                 |
+| Docker Hub           | From [Docker Home](https://app.docker.com/), select your organization, then **Go to Hub**, then **Usage**, then **Pulls** or **Storage**. For example, `https://hub.docker.com/orgs/{namespace}/usage`.                                                                  |
+| Docker Build Cloud   | From [Docker Home](https://app.docker.com/), select your organization, then **Build Cloud**, then **Build minutes**.                                                                                                                                                      |
+| Docker Scout         | From [Docker Home](https://app.docker.com/), select your organization, then **Go to Scout**, then **Settings**, then [**Repository settings**](https://scout.docker.com/settings/repos).                                                                                  |
+| Testcontainers Cloud | From [Docker Home](https://app.docker.com/), select your organization, then **Go to Testcontainers Cloud**, then the menu icon, then [**Billing**](https://app.testcontainers.cloud/dashboard/billing).                                                                   |
+| Docker Offload       | From [Docker Home](https://app.docker.com/), select your organization, then **Docker Offload** or **Offload**, then [**Offload activity**](../../../offload/usage.md).                                                                                                    |
 
-Gate Sandboxes with AI Governance licenses and organization policies for
-network, filesystem, and MCP access.
-
-> [!NOTE]
->
-> Organization policies for Docker Sandboxes require an
-> [AI Governance](/manuals/subscription-billing/plans/ai-governance.md)
-> subscription. To add licenses,
-> [contact sales](https://www.docker.com/pricing/contact-sales/).
-
-To control what sandboxes can access:
-
-1. Assign AI Governance licenses to teams or members. See
-   [Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md).
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
-1. In the left navigation, expand **AI Platform** and select
-   **Network access**, **Filesystem access**, or **MCP access**.
-1. Create a policy and set its scope to the organization or to teams. For
-   rules, approval, and precedence, see
-   [Organization policies](/manuals/ai/sandboxes/governance/access-controls/organization.md).
-
-To require members to sign in before they use sandboxes, see
-[Sign-in enforcement](/manuals/ai/sandboxes/governance/monitor-and-enforce/sign-in-enforcement.md).
-
-## Monitor usage
-
-Find where to check consumption or related activity when you need to compare
-it against your plan, such as seats, Hub pulls, or build minutes.
-
-| Product              | Where to check                                                                                                                                 |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| Docker Desktop       | [**Desktop insights**](/manuals/accounts/organization/insights.md), under **Docker Desktop** in Docker Home                                     |
-| Docker Hub           | [**Usage**](https://hub.docker.com/usage) for your organization in Docker Hub, including **Pulls** and **Storage**                             |
-| Docker Build Cloud   | **Build minutes**, under **Build Cloud** in [Docker Home](https://app.docker.com/)                                                             |
-| Docker Scout         | Scout dashboard [**Overview**](/manuals/scout/explore/dashboard.md#overview) for analyzed repositories (not a usage meter)                      |
-| Testcontainers Cloud | Open [Testcontainers Cloud](https://app.testcontainers.cloud/) (no usage view in Docker Home)                                                   |
-| Docker Offload       | [**Offload activity**](/manuals/offload/usage.md), under **Docker Offload** or **Offload** in Docker Home                                      |
-| Docker Sandboxes     | [**Audit logs**](/manuals/ai/sandboxes/governance/audit/_index.md) for policy and session activity, under **AI Platform** in Docker Home        |
-
-If usage, seat count, or license assignments exceed what you have,
-[add seats](/manuals/accounts/organization/manage/manage-seats.md),
-[manage licenses](/manuals/accounts/organization/manage/manage-licenses.md),
-or compare [Docker plans](/manuals/subscription-billing/plans/_index.md).
+If your usage or seat count exceeds your subscription amount, you can
+[add seats](./manage-seats.md) or [view available Docker plans](../../../subscription-billing/plans/_index.md) to meet your needs.
 
 ## Next steps
 
-After you decide who can use each product and where to watch usage:
+For more detailed information about each product, including how to set up
+and configure them, see the following manuals:
 
-- [Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md)
-  to assign Docker Offload, AI Governance, and other add-on licenses to teams
-  or members.
-- [Manage seats](/manuals/accounts/organization/manage/manage-seats.md) to add
-  capacity when invitations or usage need more Docker Team or Business seats.
-- [Manage members](/manuals/accounts/organization/manage/members.md) and
-  [roles and permissions](/manuals/security/roles-and-permissions/_index.md)
-  to control who can change product settings.
-- [Desktop insights](/manuals/accounts/organization/insights.md) for deeper
-  Docker Desktop usage across the organization.
-- [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md)
-  and
-  [Hardened Docker Desktop](/manuals/desktop/enterprise/hardened-desktop/_index.md)
-  to enforce Desktop policies beyond the product controls on this page.
-- [Docker plans](/manuals/subscription-billing/plans/_index.md) if you need a
-  product or add-on your organization does not have yet.
-- [Access tokens](/manuals/security/access-tokens/_index.md) to authenticate
-  to Docker Hub with a personal or organization access token instead of a
-  password.
+- [Docker Desktop](../../../desktop/_index.md)
+- [Docker Hub](../../../docker-hub/_index.md)
+- [Docker Build Cloud](../../../build-cloud/_index.md)
+- [Docker Scout](../../../scout/_index.md)
+- [Testcontainers Cloud](https://testcontainers.com/cloud/docs/#getting-started)
+- [Docker Offload](../../../offload/_index.md)
+- [Docker Sandboxes](../../../ai/sandboxes/_index.md)
