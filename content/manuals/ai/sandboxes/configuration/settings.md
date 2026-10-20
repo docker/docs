@@ -534,8 +534,8 @@ updated value; existing sandbox proxies require a daemon restart.
 {{< setting-metadata type="string" default="Empty string" >}}
 
 Use this to route the daemon's requests, such as image pulls, separately from
-sandbox traffic. Supported host CLI requests, including `sbx login` and
-`sbx diagnose --upload`, also use this scope.
+sandbox traffic. Host CLI connections, including connections to cloud sandboxes,
+also use this scope. See [traffic scopes](upstream-proxy.md).
 
 For example, keep a shared proxy for sandbox traffic while letting the daemon
 connect directly:
@@ -547,6 +547,15 @@ $ sbx daemon restart
 
 Unset this setting to inherit `proxy`. Supported CLI requests use changes on
 the next invocation; the daemon's own requests require a restart.
+
+#### proxy.sshDirect {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Set this to `true` to bypass the upstream proxy for cloud SSH connections.
+Other host CLI requests keep using the configured proxy. Changes apply on the
+next SSH connection without a daemon restart. For setup, see
+[Cloud SSH](upstream-proxy.md#cloud-ssh).
 
 #### no_proxy {.wrap-anywhere}
 
