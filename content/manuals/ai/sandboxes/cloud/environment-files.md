@@ -37,16 +37,9 @@ The command prompts for the key. For other agents and authentication options,
 see [Authenticate cloud agents](credentials.md). A credential configured for a
 local sandbox isn't available in the cloud.
 
-Keep the environment file beside your project, outside the directory you'll
-copy into the sandbox:
-
-```text
-web-app-env/
-├── cloud.sbxenv.yaml
-└── web-app/
-```
-
-Save the following as `web-app-env/cloud.sbxenv.yaml`:
+Save the following as `cloud.sbxenv.yaml` in your project's root directory.
+You can keep the file elsewhere if you prefer: its location doesn't determine
+which files are available in the cloud sandbox.
 
 ```yaml
 schemaVersion: "1"
@@ -68,7 +61,8 @@ CPUs and 4 GiB of memory. Resource limits must match a
 
 ## Create the sandbox and add your project
 
-From `web-app-env`, review the plan and create the sandbox without attaching:
+From your project directory, review the plan and create the sandbox without
+attaching:
 
 ```console
 $ sbx --cloud env plan ./cloud.sbxenv.yaml
@@ -85,7 +79,7 @@ stops sandboxes that can be resumed and deletes the rest. See
 Copy your project into the sandbox's workspace:
 
 ```console
-$ sbx --cloud cp ./web-app cloud-web-app:/home/agent/workspace/web-app
+$ sbx --cloud cp . cloud-web-app:/home/agent/workspace/web-app
 ```
 
 Use a destination that doesn't already exist for this first copy. Copying a
@@ -140,7 +134,7 @@ After the agent finishes, copy the project back to a separate local directory
 so you can review it before updating your original files:
 
 ```console
-$ sbx --cloud cp cloud-web-app:/home/agent/workspace/web-app ./web-app-result
+$ sbx --cloud cp cloud-web-app:/home/agent/workspace/web-app ../web-app-result
 ```
 
 Use a destination that doesn't already exist. If you cloned the project inside
