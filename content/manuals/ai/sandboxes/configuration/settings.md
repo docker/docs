@@ -134,6 +134,19 @@ variable appears only when the setting has a direct equivalent. Use
 
 ### Agents and host access
 
+#### browser.enabled {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Set this to `false` to prevent sandboxed processes from opening URLs in your
+host browser:
+
+```console
+$ sbx settings set browser.enabled false
+```
+
+This also prevents in-sandbox OAuth logins that redirect to localhost.
+
 #### clipboard.imagePaste {.wrap-anywhere}
 
 {{< setting-metadata type="boolean" default="false"
