@@ -32,8 +32,7 @@ package manager, and may run as a non-root user by default.
 >   name as the username.
 > - OIDC: In GitHub Actions, use a Docker-issued access token from an
 >   [OIDC connection](/manuals/security/authentication/oidc-connections/create-manage.md)
->   with your organization name as the username. The connection must grant
->   pull access to the requested repository.
+>   with your organization name as the username.
 >
 > Run `docker login dhi.io` to authenticate.
 
@@ -94,11 +93,10 @@ You can reference them in Dockerfiles, pull them as part of a pipeline step, or
 run containers based on them during builds and tests.
 
 In GitHub Actions, you can use an OIDC connection to authenticate with
-short-lived Docker access tokens instead of storing a PAT or OAT. Authenticated
-OIDC callers can pull free images and their attestations through `dhi.io` without
-a `dhi/<image>` grant, even with **Read public repositories** unchecked. For a
-mirrored image, grant pull access to `<your-organization>/<repository>`. Your
-organization's DHI subscription still determines access to paid image variants.
+short-lived Docker access tokens instead of storing a PAT or OAT. For a
+mirrored image on Docker Hub, grant pull access to
+`<your-organization>/<repository>`. Your organization's DHI subscription still
+determines access to paid image variants.
 
 See [Authenticate with OIDC in GitHub Actions](./verify.md#authenticate-with-oidc-in-github-actions)
 for an example that reads an image manifest and its private attestations.

@@ -68,7 +68,7 @@ the GitHub OIDC token and signs in to Docker Hub in a single step.
 ### Read Docker Hardened Images and attestations
 
 A Docker-issued OIDC access token can also authenticate reads from `dhi.io`
-and `registry.scout.docker.com`, subject to the connection's repository grants.
+and `registry.scout.docker.com`. Access requirements differ between these registries.
 The automatic OIDC exchange in `docker/login-action` applies to Docker Hub.
 Setting `registry: dhi.io` or `registry: registry.scout.docker.com` doesn't
 perform that exchange. Exchange the GitHub identity token first, then use the
