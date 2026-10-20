@@ -66,7 +66,8 @@ script.
 
 For repeatable cleanup, check which resources exist before removing them. For
 example, use `sbx mcp ls` before `sbx mcp rm`, which fails for an unregistered
-server even with `--force`.
+server even with `--force`. Likewise, `sbx secret rm` fails if no secret matches
+the selector; check for matches with `sbx secret ls` before removing secrets.
 
 ## Parse command output
 
