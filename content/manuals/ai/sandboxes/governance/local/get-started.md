@@ -55,9 +55,9 @@ The **Balanced** preset's baseline allowlist is a good starting point for most
 workflows. Run `sbx policy ls` to see exactly which rules it includes.
 
 > [!NOTE]
-> If your organization manages sandbox policies centrally, organization rules
-> take precedence over the preset you select here. See
-> [Organization policies](../organization/_index.md).
+> If an organization policy is enforced for you, organization rules take
+> precedence over the preset you select here. See
+> [Precedence](../organization/policies/_index.md#precedence).
 
 ### Non-interactive environments
 
@@ -87,3 +87,10 @@ choose a new preset. Running sandboxes stop when the daemon shuts down. Pass
 ```console
 $ sbx policy reset --force
 ```
+
+> [!WARNING]
+> `sbx policy reset` deletes all locally configured policy rules, including any
+> destinations you approved. Those destinations are requested again the next
+> time a sandbox reaches them. To pick up organization policy changes without
+> deleting local rules, use `sbx policy refresh` instead. See
+> [Policy changes not taking effect](../organization/policies/_index.md#policy-changes-not-taking-effect).

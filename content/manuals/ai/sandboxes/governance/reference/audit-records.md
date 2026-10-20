@@ -34,11 +34,30 @@ action.
 | `app_version`      | Version of the Docker component that produced the record.                                                        |
 | `client_name`      | Source component, such as `sbx` for Docker Sandboxes.                                                            |
 | `hostname`         | Hostname of the machine that produced the record.                                                                |
+| `sandbox_id` | Stable ID of the sandbox. It persists across restarts of the same sandbox. |
 | `deny_reason`      | Why a denied request was blocked. Present on deny decisions.                                                     |
+| `policy_rule` | Name of the policy rule that matched, or `default-deny` when no rule matched. |
+| `policy_id` | ID of the policy that produced the decision. |
+| `policy_type` | Schema type of the policy, such as `allowlist/v0` or `cedar:auth:v0`. |
+| `policy_source` | Origin of the policy: `remote`, `local`, or `system`. |
+| `policy_denial_code` | Why a request was denied. Present only on deny decisions. See [Denial codes](#denial-codes). |
 | `enforcement_mode` | Governance mode in effect when Docker evaluated the request. See [Enforcement modes](#enforcement-modes).        |
 | `approval`         | Approval details. Present when the decision involves an approval. See [Approval fields](#approval-fields).       |
 | `action_type`      | Payload discriminator that identifies the action-specific object in the record.                                  |
 | `agent`            | AI agent associated with the event, when Docker knows it.                                                        |
+
+### Denial codes
+
+`policy_denial_code` classifies why a request was denied:
+
+| Code | Meaning |
+| --- | --- |
+| `POLICY_DENIAL_CODE_POLICY_DENY` | A deny rule matched. `policy_id` and `policy_rule` identify it. |
+| `POLICY_DENIAL_CODE_DEFAULT_DENY` | No rule allowed the request, so default deny applied. |
+| `POLICY_DENIAL_CODE_POLICY_SNAPSHOT_STALE` | The cached policy expired, so evaluation failed closed. |
+| `POLICY_DENIAL_CODE_POLICY_EVALUATION_FAILED` | Loading or evaluating the policy failed, so evaluation failed closed. |
+| `POLICY_DENIAL_CODE_GOVERNANCE_BLOCKED` | Governance couldn't be resolved for the user, for example because of membership in several organizations, so the request was denied without consulting local rules. |
+| `POLICY_DENIAL_CODE_INVALID_REQUEST` | The request was malformed, so evaluation failed closed. |
 
 ## Categories
 
@@ -47,6 +66,10 @@ action.
 | `AUDIT_CATEGORY_MANAGEMENT` | Session lifecycle, policy sync, and configuration events.     |
 | `AUDIT_CATEGORY_EVALUATION` | Governance policy decisions, such as allow, deny, or consent. |
 | `AUDIT_CATEGORY_EXECUTION`  | Outcomes after an evaluated action runs.                      |
+
+Session lifecycle records mark the start and end of each daemon run. Evaluation
+records share the run's `audit_session_id`, so you can correlate every decision
+back to a daemon session.
 
 ## Decisions
 
@@ -141,47 +164,6 @@ separate from the `network_egress` record for the connection.
 | `http_request.host`   | Destination hostname or IP address. IPv6 addresses appear without brackets. |
 | `http_request.port`   | Destination port.                                                           |
 | `http_request.path`   | URL path, without the query string or fragment.                             |
-
-## What gets recorded
-
-The daemon writes two categories of local record:
-
-- Evaluation records capture each policy decision: the resource, the action,
-  the verdict, and the reason for a denial.
-- Session lifecycle records mark the start and end of each daemon run.
-  Evaluation records share the run's `audit_session_id`, so you can correlate
-  every decision back to a daemon session.
-
-Records contain metadata only. They don't contain prompt content, agent output,
-or parameter values.
-
-A network evaluation record looks like this:
-
-```json
-{
-  "audit_event_id": "95e7257f-93c9-4f29-bde7-88830e2dae80",
-  "timestamp": "2026-05-28T19:15:00.728933Z",
-  "schema_version": "1.82.0",
-  "category": "AUDIT_CATEGORY_EVALUATION",
-  "decision": "AUDIT_DECISION_DENY",
-  "username": "jordandoe",
-  "user_email": "jordandoe@example.com",
-  "org_id": "9f8e7d6c-5b4a-3210-fedc-ba9876543210",
-  "org_name": "Acme Inc",
-  "audit_session_id": "8a3bc076-79d0-4502-baf3-cc6ad35fb578",
-  "resource_id": "example.com:443",
-  "os": "macos",
-  "app_version": "v0.31.0",
-  "client_name": "sbx",
-  "hostname": "host-machine",
-  "deny_reason": [
-    "no applicable policies for op(action=net:connect:tcp, resource=net:domain:example.com:443)"
-  ],
-  "action_type": "network_egress",
-  "network_egress": { "protocol": "tcp" },
-  "agent": "claude"
-}
-```
 
 ## Sample record
 

@@ -9,17 +9,15 @@ aliases:
   - /ai/sandboxes/governance/access-controls/organization/
 ---
 
-[Local policies](../local/_index.md) give individual developers control over what their
-sandboxes can access. Organization policy moves that control to the admin level:
-organization policies apply to local sandboxes across the organization, either to
-every member or to specific teams. When organization governance is active, only
-organization allow rules grant access: local `sbx policy` allow rules are no
-longer evaluated and can't expand what the organization permits. Local network
-deny rules remain active, so developers can restrict access further but never
-loosen it.
+Organization governance is policy, sign-in enforcement, and audit logs that
+administrators set for organization members, either organization-wide or for
+selected teams. Organization policies apply to the local sandboxes of members
+who hold an AI Governance license. When an organization policy is enforced for
+a member, it takes precedence over their [local policy](../local/_index.md).
+See [Precedence](policies/_index.md#precedence).
 
 Admins can manage organization policies through the Docker Home UI. For
-programmatic management of network and filesystem policies, use the
+programmatic management of network, filesystem, and MCP policies, use the
 [Governance API](/reference/api/ai-governance/).
 
 By default, only organization
@@ -30,7 +28,6 @@ manage policies, create a
 with the **Governance** permissions and assign it to a user or team.
 
 > [!NOTE]
-> Sandbox organization governance is available on a separate paid
-> subscription.
+> Organization governance requires a Docker AI Governance subscription.
 > [Contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 > to request access.

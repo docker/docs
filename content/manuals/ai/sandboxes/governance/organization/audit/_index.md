@@ -76,17 +76,10 @@ available start with cloud delivery off until an owner opts in from
 
 ### Where records are stored
 
-The sandbox daemon writes local audit records as JSON Lines (`.jsonl`) files.
-Local audit logs stay on the host that produced them and can be collected by
-your own log shipper. Local delivery is independent of
-[cloud delivery](configure.md), so you can use local files with cloud delivery
-on or off.
-
-The sandbox daemon writes local audit records only for signed-in users who have
-an AI Governance license and are governed by an enforced centralized
-[organization policy](../_index.md). Docker Sandboxes
-users without both do not send audit data to audit logs. To confirm governance
-is active, run `sbx policy ls`. The output includes a `Governance: Managed by
+Local audit files stay on the host that produced them. Local delivery is
+independent of [cloud delivery](configure.md), so you can use local files with
+cloud delivery on or off. To confirm that a machine is governed and writes
+records, run `sbx policy ls`. The output includes a `Governance: Managed by
 <org>` line when an organization policy is in effect.
 
 The daemon writes audit records, not the CLI. Running a command such as

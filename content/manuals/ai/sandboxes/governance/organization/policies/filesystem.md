@@ -3,50 +3,32 @@ title: Filesystem access policies
 linkTitle: Filesystem
 weight: 30
 description: Control which host paths Docker Sandboxes can mount as workspaces with organization filesystem policies.
-keywords: docker sandboxes, filesystem access, filesystem rules, workspace mount, organization policy, governance
+keywords: docker sandboxes, filesystem access, filesystem mount rules, workspace mount, organization policy, governance
 aliases:
   - /ai/sandboxes/governance/access-controls/filesystem/
 ---
 
-Filesystem access policies control which host paths a sandbox can mount as a
-workspace. Each policy contains one or more rules that restrict sandbox
-workspaces to approved directories.
+Filesystem access policies are organization policies that control which host
+paths a sandbox can mount as a workspace. Each policy contains one or more
+filesystem mount rules that restrict sandbox workspaces to approved
+directories. These rules control which host paths a sandbox can mount. They
+don't control access to individual files inside an allowed mount.
 
-Filesystem access is managed with [organization policies](../_index.md). When
-organization governance is active, organization rules determine which paths a
-sandbox can mount, and the local filesystem allow rules from the default preset
-become inactive. `sbx policy deny` applies to network access only, so there are
-no local filesystem deny rules to layer on top. See
-[Precedence](_index.md#precedence).
+To create a filesystem access policy, see
+[Create and manage policies](create-manage.md). For path patterns and the
+`read` and `write` actions, see
+[Filesystem mount rule syntax](../../reference/filesystem-rules.md).
 
-## Rule syntax
+When an organization policy is enforced for you, organization filesystem mount
+rules decide which paths a sandbox can mount, and the filesystem allow rules
+from your local preset stop applying. See [Precedence](_index.md#precedence).
 
-Filesystem rules use the actions `read` and `write`. Resources are host path
-patterns.
+## When changes take effect
 
-A writable workspace mount must be allowed by both a `read` rule and a `write`
-rule. A read-only workspace needs only `read`.
-
-Examples:
-
-- `~/**`
-- `/data/project/**`
-- `C:\data\project\**`
-- `\\wsl.localhost\<distro>\data\project\**`
-
-Use `**` to match a directory tree recursively. A single `*` matches only one
-path segment. For exact path matching behavior across macOS, Linux, Windows,
-and WSL, see [Filesystem rules](../../reference/filesystem-rules.md).
-
-## Organization filesystem rules
-
-Organization filesystem rules belong to policies that can apply to the whole
-organization or to selected teams. For setup steps and team scoping, see
-[Organization policies](../_index.md).
-
-Filesystem policy is checked when a workspace is mounted, which happens when a
-sandbox is created. To apply a filesystem policy change to a running workflow,
-remove the sandbox and create a new one.
+Filesystem policy is checked only when a workspace is mounted, which happens
+when a sandbox is created. Changing the filesystem policy has no effect on a
+running sandbox, which keeps access to the previously allowed path. To apply a
+filesystem policy change, remove the sandbox and create a new one.
 
 ## Troubleshooting
 

@@ -9,31 +9,15 @@ keywords: docker sandboxes, MCP policy, Cedar policy, MCP actions, MCP resources
 MCP policies are organization policies written in Cedar using Docker's `MCP`
 namespace. This reference defines the Docker-specific policy surface for Model
 Context Protocol (MCP) activity made available to sandboxes through Docker's
-[MCP gateway](../../mcp-gateway.md).
+[MCP gateway](../../mcp-gateway.md). MCP policy applies when a developer
+registers a server and when an agent uses the MCP gateway. Registration rules
+control future `sbx mcp add` operations. Use-time rules control tool calls,
+gateway meta-tools, resource reads, and prompt retrieval from servers that are
+already registered or loaded.
 
 Use this reference with [MCP access policies](../organization/policies/mcp.md) for
 common policy patterns. For the Cedar language, see the
 [Cedar documentation](https://docs.cedarpolicy.com/).
-
-## MCP policies
-
-MCP policies control Model Context Protocol activity made available to a
-sandbox through Docker's [MCP gateway](../../mcp-gateway.md). They are
-organization policies written in Cedar using the `MCP` namespace, rather than
-the network and filesystem rule format.
-
-MCP policy applies when a developer registers a server and when an agent uses
-the MCP gateway. Registration rules control future `sbx mcp add` operations.
-Use-time rules control tool calls, gateway meta-tools, resource reads, and
-prompt retrieval from servers that are already registered or loaded.
-
-Governed MCP activity is default deny: a request is blocked unless a matching
-`permit` allows it. A matching `forbid` overrides any `permit`, including a
-permit that requires approval. Policy scope supplies the principal, so use
-organization or team scope instead of matching users, teams, tenants, or roles
-in Cedar.
-
-For representative policies, see [MCP access policies](../organization/policies/mcp.md).
 
 ## Evaluation model
 
