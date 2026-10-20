@@ -715,8 +715,14 @@ $ sbx kit verify --key cosign.pub ./my-kit/
 
 For a local directory, `sbx kit sign` writes a `kit.sig.bundle` file next to
 `spec.yaml`. Commit this file so consumers can verify a kit loaded from the Git
-repository. For an OCI kit, the signature is stored as an OCI referrer. You can
-sign an OCI kit after pushing it, or push and sign it in one step:
+repository.
+
+Git line-ending conversion and clean filters can invalidate a source signature.
+If `sbx kit sign` warns about these transformations, ensure Git preserves the
+signed files unchanged before sharing the Git reference.
+
+For an OCI kit, the signature is stored as an OCI referrer. You can sign an OCI
+kit after pushing it, or push and sign it in one step:
 
 ```console
 $ sbx kit push ./my-kit/ ghcr.io/myorg/my-kit:1.0 --sign
