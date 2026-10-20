@@ -453,6 +453,49 @@ this setting. It doesn't override a gateway selected by organization governance.
 Set it back to `false` and restart to return to automatic selection. See
 [MCP gateway](../mcp-gateway.md) for server registration and agent setup.
 
+### Daemon logging
+
+These settings control rotation of `daemon.log`, not logs written by the CLI
+or processes inside a sandbox. Changes take effect after `sbx daemon restart`.
+The backup count and age limits apply together: a rotated log is removed when
+it exceeds either limit.
+
+#### daemon.log.maxSizeMB {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="50" >}}
+
+Set the size in MB at which the daemon log rotates. The minimum is `1`:
+
+```console
+$ sbx settings set daemon.log.maxSizeMB 100
+$ sbx daemon restart
+```
+
+#### daemon.log.maxBackups {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="3" >}}
+
+Set the maximum number of rotated daemon logs to keep. The value must be zero
+or greater. A value of `0` removes the count limit, but the age limit still
+applies:
+
+```console
+$ sbx settings set daemon.log.maxBackups 5
+$ sbx daemon restart
+```
+
+#### daemon.log.maxAgeDays {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="0" >}}
+
+Set how many days to keep rotated daemon logs, from `0` to `3650`. A value of
+`0` removes the age limit, but the backup count limit still applies:
+
+```console
+$ sbx settings set daemon.log.maxAgeDays 30
+$ sbx daemon restart
+```
+
 ### Diagnostics
 
 #### diagnostics.autoUpload {.wrap-anywhere}
