@@ -165,7 +165,7 @@ your stored key. If authentication fails, check that you stored the key and
 approved the kit's request to use it. See
 [Credential bindings](/manuals/ai/sandboxes/configuration/credentials.md#credential-bindings).
 Network requests must also meet the sandbox's
-[network policy](/manuals/ai/sandboxes/governance/concepts.md#precedence).
+[network policy](/manuals/ai/sandboxes/governance/organization/policies/_index.md#precedence).
 
 Run `claude` without arguments to start an interactive session. Follow its
 first-run prompts. Exit Claude Code and the shell to return to your host.

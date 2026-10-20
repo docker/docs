@@ -1,10 +1,12 @@
 ---
-title: Monitoring policies
-weight: 10
+title: Inspect policy status and rules
+linkTitle: Inspect policies
+weight: 40
 description: Inspect active policy rules and monitor sandbox network traffic with sbx policy ls and sbx policy log.
 keywords: docker sandboxes, policy monitoring, sbx policy ls, sbx policy log, network traffic, policy debugging
 aliases:
   - /ai/sandboxes/governance/monitoring/
+  - /ai/sandboxes/governance/monitor-and-enforce/monitoring/
 ---
 
 `sbx policy ls` and `sbx policy log` give you a combined view of all active
@@ -29,7 +31,7 @@ The columns are:
 - `POLICY`: the policy name.
 - `SOURCE`: where the policy came from. `local` means your local configuration
   — a preset or rules you added with `sbx policy`. `kit` means a
-  [kit](/manuals/ai/sandboxes/governance/concepts.md#precedence). `org` means your
+  [kit](/manuals/ai/sandboxes/governance/organization/policies/_index.md#precedence). `org` means your
   organization.
 - `APPLIES TO`: which sandboxes the policy applies to. `all` means the policy
   is global. `sandbox:<name>` scopes it to a single sandbox; a profile name
@@ -61,7 +63,7 @@ destination. A wide listing shows the same information per rule:
 $ sbx policy ls --wide --created-via approval
 ```
 
-See [Approval-required access](../access-controls/network.md#approval-required-access).
+See [Approval-required access](approvals.md).
 
 A `STATUS` column also appears when you pass `--include-inactive`; see
 [Showing inactive rules](#showing-inactive-rules).
@@ -122,7 +124,7 @@ default-fs-write-allow-all   local    all          filesystem write: 1 allow    
 Inactive policies show `inactive` in the `STATUS` column. They have no effect
 while organization governance is active. Local and kit-defined deny rules stay
 active and aren't hidden, because a deny still applies on top of the
-organization policy. See [Precedence](../concepts.md#precedence).
+organization policy. See [Precedence](../organization/policies/_index.md#precedence).
 
 Use `--type network`, `--type filesystem`, or `--type http` to show only
 policies of that type. Without a sandbox argument, `sbx policy ls` shows every
@@ -149,7 +151,7 @@ A writable workspace mount must be allowed by both a `filesystem:read` and a
 `filesystem:write` rule; a read-only mount needs only `filesystem:read`. The
 default local policy allows read and write access to all paths, shown as the
 two `default-fs-*` rules above. For the rule syntax and path patterns, see
-[Policy concepts](../concepts.md#filesystem-rules).
+[Policy concepts](../reference/filesystem-rules.md).
 
 ### HTTP rules
 
@@ -188,51 +190,41 @@ filtered listing with no HTTP rules shows an unlabeled count, such as
 `network: 42 allow`.
 
 For the rule syntax, see
-[HTTP method and path](../concepts.md#http-method-and-path).
+[HTTP method and path](../reference/network-rules.md#http-method-and-path).
 
-## Monitoring traffic
+## Inspecting rules
 
-Use `sbx policy log` to see which hosts your sandboxes have contacted and
-which rules matched:
+To inspect which policies are active and where they come from, use
+`sbx policy ls`. Use `--source` to filter by origin (`local`, `org`, `kit`),
+`--decision` to filter by outcome (`allow`, `deny`), and `--wide` for
+rule-level detail including rule IDs. To inspect a single policy or rule in
+full, use `sbx policy inspect`.
 
-```console
-$ sbx policy log
-BLOCKED REQUESTS
-SANDBOX      TYPE     HOST                   PROXY        RULE            REASON         LAST SEEN        COUNT
-my-sandbox   network  blocked.example.com    transparent  domain-blocked  default-deny   10:15:25 29-Jan  1
+## Troubleshooting
 
-ALLOWED REQUESTS
-SANDBOX      TYPE     HOST                   PROXY          RULE             REASON   LAST SEEN        COUNT
-my-sandbox   network  api.anthropic.com      forward        domain-allowed            10:15:23 29-Jan  42
-my-sandbox   network  registry.npmjs.org     forward-bypass domain-allowed            10:15:20 29-Jan  18
-my-sandbox   network  app.example.com        browser-open                             10:15:10 29-Jan  1
-```
+### Local allow rules have no effect
 
-The `PROXY` column shows how the request left the sandbox:
+If rules you add with `sbx policy allow` don't change sandbox behavior, your
+organization likely has governance enabled. Run `sbx policy ls` to check: if
+the summary block contains `Governance: Managed by <org>`,
+org governance is active. When it's active, local allow rules are inactive.
+You can't use them to loosen restrictions the org policy imposes.
 
-| Value            | Description                                                                                                    |
-| ---------------- | -------------------------------------------------------------------------------------------------------------- |
-| `forward`        | Routed through the forward proxy. Supports [credential injection](../../configuration/credentials.md).              |
-| `forward-bypass` | Routed through the forward proxy without credential injection.                                                 |
-| `transparent`    | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.            |
-| `network`        | Non-HTTP traffic. TCP and experimental UDP egress follow network policy. ICMP is blocked. |
-| `browser-open`   | A sandbox process requested opening a URL in the host browser. Policy is enforced before opening the URL.      |
+Inactive allow rules are hidden from `sbx policy ls` by default; run
+`sbx policy ls --include-inactive` to see them with an `inactive` status in
+the `STATUS` column.
 
-The `RULE` column identifies the policy rule that matched the request. The
-`REASON` column includes extra context when the daemon records one.
+When organization governance is active, only organization allow rules can grant
+access. Ask your admin to update the organization policy if you need access to
+an additional resource. Local deny rules remain active, so you can use
+`sbx policy deny` to restrict access further.
 
-Filter by sandbox name by passing it as an argument:
+### A domain is still blocked after adding an allow rule
 
-```console
-$ sbx policy log my-sandbox
-```
-
-Use `--limit N` to show only the last `N` entries, `--json` or `--format yaml` for
-machine-readable output, or `--type network` to filter by policy type.
-`sbx policy log` records network traffic only; filesystem mount decisions
-aren't available in the log yet.
-
-Structured output uses the same document for local and cloud sandboxes:
-`{updated_at, allowed: [...], blocked: [...]}`. Each entry includes `sandbox_id`,
-`host`, `proxy_type`, `rule`, `reason`, `count`, `first_seen`, and `last_seen`.
-The `--limit` flag applies to structured output too.
+If a domain remains blocked after you add a local allow rule, your organization
+likely enforces governance, which makes local allow rules inactive. Run `sbx
+policy ls` to check whether org governance is active; if the output starts with
+a `Governance:` status line showing `Managed by <org>`, it is. Add
+`--include-inactive` to confirm your rule shows an `inactive` status. If so,
+the block can only be lifted by updating the org policy in Docker Home or via
+the [API](/reference/api/ai-governance/).

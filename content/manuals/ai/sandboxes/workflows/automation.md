@@ -124,7 +124,7 @@ parsers for these commands:
 | `sbx ls` | A sandbox array, replacing `{sandboxes: [...]}`. `created_at` and `last_used_at` use RFC 3339 timestamps. Rows include `detached`. |
 | `sbx template ls` | An image array, replacing `{images: [...]}`. |
 | Local `sbx mcp ls` | A server array, replacing `{gateway: {...}, servers: [...]}`. Each row includes `gateway`. Cloud rows describe server usage across sandboxes and differ from local registration rows. |
-| `sbx policy log` | `{updated_at, allowed: [...], blocked: [...]}` for local and cloud output. See [Monitoring traffic](/manuals/ai/sandboxes/governance/monitor-and-enforce/monitoring.md#monitoring-traffic). |
+| `sbx policy log` | `{updated_at, allowed: [...], blocked: [...]}` for local and cloud output. See [Monitoring traffic](/manuals/ai/sandboxes/governance/local/test-monitor.md#monitoring-traffic). |
 | `sbx --cloud policy ls` | Field names use `snake_case` instead of camelCase. |
 | `sbx ports` | Local rows contain `host_ip`, `host_port`, `sandbox_port`, and `protocol`. Cloud rows contain `sandbox_port` and `url`, replacing `port`. Local publish and unpublish results include `action: published` or `action: unpublished`. |
 | Cloud `sbx volume create`, `sbx volume ls`, `sbx volume inspect` | Fields such as `ID`, `Name`, and `CreatedAt` become `id`, `name`, and `created_at`. `volume inspect` defaults to human-readable details, so request a structured format explicitly. |

@@ -1,9 +1,12 @@
 ---
 title: AI Governance Audit Logs
 linkTitle: Audit logs
-weight: 30
+weight: 40
 description: Capture, view, export, and collect structured audit records for Docker AI Governance policy decisions.
 keywords: docker sandboxes, audit log, audit logging, AI Governance, policy decision, SIEM, compliance, jsonl
+aliases:
+  - /ai/sandboxes/governance/audit/
+  - /ai/sandboxes/governance/audit/local/
 ---
 
 {{< summary-bar feature_name="AI Governance Audit Logs" >}}
@@ -11,7 +14,7 @@ keywords: docker sandboxes, audit log, audit logging, AI Governance, policy deci
 The Docker Sandboxes coverage on this page applies to local sandboxes.
 Docker Cloud delivery stores their audit records in the cloud; it does not add
 cloud sandbox coverage. For cloud network decisions, see
-[Cloud policy logs](../../cloud/network-policy.md#inspect-network-policy).
+[Cloud policy logs](../../../cloud/network-policy.md#inspect-network-policy).
 
 AI Governance Audit Logs record Docker AI Governance activity for your
 organization. Each record captures the principal, action, target, decision, and
@@ -21,7 +24,7 @@ prompt content, agent output, or parameter values.
 Audit logs are exposed when AI Governance is enabled for your organization.
 Docker Sandboxes send audit records only for signed-in users who have an AI
 Governance license and are governed by an enforced centralized [organization
-policy](../access-controls/organization.md). Docker Sandboxes users without both
+policy](../_index.md). Docker Sandboxes users without both
 don't send audit data to audit logs.
 
 > [!NOTE]
@@ -71,6 +74,48 @@ Organizations that used local audit logging before hosted audit logs were
 available start with cloud delivery off until an owner opts in from
 [audit delivery settings](configure.md).
 
+### Where records are stored
+
+The sandbox daemon writes local audit records as JSON Lines (`.jsonl`) files.
+Local audit logs stay on the host that produced them and can be collected by
+your own log shipper. Local delivery is independent of
+[cloud delivery](configure.md), so you can use local files with cloud delivery
+on or off.
+
+The sandbox daemon writes local audit records only for signed-in users who have
+an AI Governance license and are governed by an enforced centralized
+[organization policy](../_index.md). Docker Sandboxes
+users without both do not send audit data to audit logs. To confirm governance
+is active, run `sbx policy ls`. The output includes a `Governance: Managed by
+<org>` line when an organization policy is in effect.
+
+The daemon writes audit records, not the CLI. Running a command such as
+`sbx create` sends a request to the daemon, and the daemon emits the resulting
+record to its own audit directory.
+
+The default location depends on your operating system:
+
+| OS      | Default path                                                      |
+| ------- | ----------------------------------------------------------------- |
+| macOS   | `~/Library/Logs/com.docker.sandboxes/sandboxes/auditkit/`         |
+| Linux   | `${XDG_STATE_HOME:-~/.local/state}/sandboxes/sandboxes/auditkit/` |
+| Windows | `%LOCALAPPDATA%\DockerSandboxes\sandboxes\logs\auditkit\`         |
+
+The directory layout differs by platform because each operating system places
+application logs in its own conventional location.
+
+Files are named `audit-<utc-timestamp>-<process-uuid>-<seq>.jsonl`.
+
+The daemon writes in-progress records to a temporary `.tmp` file and
+finalizes it into a `.jsonl` file by atomic rename. Finalization happens at a
+rotation threshold: by default, 5 minutes, 1000 events, or 50 MiB, whichever
+comes first. Finalization also happens when the daemon shuts down cleanly. Only
+`.jsonl` files are complete. Treat `.tmp` files as incomplete and don't collect
+them.
+
+Sandboxes never delete `.jsonl` files. Retention and cleanup are the
+responsibility of your log shipper or your own housekeeping.
+
 ## Data handling
 
 When Docker Cloud delivery is enabled, Docker stores audit records in Docker
@@ -81,8 +126,7 @@ Policy](https://www.docker.com/legal/privacy/).
 
 ## Learn more
 
-- [Local audit logs](local.md)
 - [Configure audit delivery](configure.md)
 - [View and export audit events](view-export.md)
 - [SIEM forwarding](siem.md)
-- [Audit record reference](record-reference.md)
+- [Audit record reference](../../reference/audit-records.md)

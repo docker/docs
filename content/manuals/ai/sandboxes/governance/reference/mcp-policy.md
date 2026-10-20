@@ -1,7 +1,7 @@
 ---
 title: MCP policy reference
 linkTitle: MCP policy
-weight: 20
+weight: 30
 description: Reference for Docker MCP policy actions, resources, attributes, context fields, and approval behavior.
 keywords: docker sandboxes, MCP policy, Cedar policy, MCP actions, MCP resources, requireApproval, AI Governance
 ---
@@ -11,9 +11,29 @@ namespace. This reference defines the Docker-specific policy surface for Model
 Context Protocol (MCP) activity made available to sandboxes through Docker's
 [MCP gateway](../../mcp-gateway.md).
 
-Use this reference with [MCP access policies](../access-controls/mcp.md) for
+Use this reference with [MCP access policies](../organization/policies/mcp.md) for
 common policy patterns. For the Cedar language, see the
 [Cedar documentation](https://docs.cedarpolicy.com/).
+
+## MCP policies
+
+MCP policies control Model Context Protocol activity made available to a
+sandbox through Docker's [MCP gateway](../../mcp-gateway.md). They are
+organization policies written in Cedar using the `MCP` namespace, rather than
+the network and filesystem rule format.
+
+MCP policy applies when a developer registers a server and when an agent uses
+the MCP gateway. Registration rules control future `sbx mcp add` operations.
+Use-time rules control tool calls, gateway meta-tools, resource reads, and
+prompt retrieval from servers that are already registered or loaded.
+
+Governed MCP activity is default deny: a request is blocked unless a matching
+`permit` allows it. A matching `forbid` overrides any `permit`, including a
+permit that requires approval. Policy scope supplies the principal, so use
+organization or team scope instead of matching users, teams, tenants, or roles
+in Cedar.
+
+For representative policies, see [MCP access policies](../organization/policies/mcp.md).
 
 ## Evaluation model
 
@@ -28,7 +48,7 @@ Governed MCP activity is default deny. A request is blocked unless a matching
 permit annotated with `@requireApproval`.
 
 For details about when Docker Sandboxes evaluates MCP policies for a user, see
-[Govern the server lifecycle](../access-controls/mcp.md#govern-the-server-lifecycle).
+[Govern the server lifecycle](../organization/policies/mcp.md#govern-the-server-lifecycle).
 
 An actionless `permit` matches every MCP action that reaches Cedar evaluation:
 
@@ -165,7 +185,7 @@ over a normal `permit`. A matching `forbid` denies the request without an
 elicitation.
 
 For the request flow and trust model, see
-[Require confirmation with MCP elicitation](../access-controls/mcp.md#require-confirmation-with-mcp-elicitation).
+[Require confirmation with MCP elicitation](../organization/policies/mcp.md#require-confirmation-with-mcp-elicitation).
 
 Approval requires a client session that can present an MCP elicitation request
 to the user. If the request can't be presented for approval, the request is
