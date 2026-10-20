@@ -24,8 +24,7 @@ changing your password. From Docker Home, you can view the token list,
 which shows when each token was last used.
 
 Treat PATs like passwords and keep them secure. Store tokens in a
-credential manager and never commit them to source code. Before you
-create a PAT, you must verify your email address.
+credential manager and never commit them to source code.
 
 > [!TIP]
 >

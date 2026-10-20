@@ -33,11 +33,6 @@ If Docker's predefined permission sets meet your needs, use
 [core roles](/manuals/security/roles-and-permissions/_index.md)
 instead.
 
-## Prerequisites
-
-- A Docker Business subscription
-- Owner permissions in your Docker organization
-
 ## Creating custom roles
 
 To create a custom role, you select permissions from organization management,

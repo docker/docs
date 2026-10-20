@@ -292,8 +292,9 @@ empty string default.
 
 ### Summary bars
 
-Summary bars indicate subscription requirements, version requirements, or
-administrator-only features at the top of a page.
+Summary bars indicate subscription requirements, version requirements, the
+role or permission a task needs, or the feature's availability at the top of
+a page.
 
 **Example:**
 
@@ -301,14 +302,18 @@ administrator-only features at the top of a page.
 
 **Setup:**
 
-1. Add feature to `/data/summary.yaml`:
+1. Add feature to `/data/summary.yaml`. The file is a flat map keyed by
+   feature name, and `subscription` is a list:
 
 ```yaml
-features:
-  Docker Scout:
-    subscription: Business
-    availability: GA
-    requires: "Docker Desktop 4.17 or later"
+Docker Scout:
+  subscription: [Pro, Team, Business]
+  availability: GA
+  requires: "Docker Desktop 4.17 or later"
+Activity logs:
+  subscription: [Team, Business]
+  role: Owner
+  permission: View activity logs
 ```
 
 2. Add shortcode to page:
@@ -319,12 +324,31 @@ features:
 
 **Attributes in summary.yaml:**
 
-| Attribute    | Description                           | Values                                            |
-| ------------ | ------------------------------------- | ------------------------------------------------- |
-| subscription | Subscription tier required            | All, Personal, Pro, Team, Business                |
-| availability | Product development stage             | Experimental, Beta, Early Access, GA, Retired     |
-| requires     | Minimum version requirement           | String describing version (link to release notes) |
-| for          | Audience for the feature              | Administrators, Individuals                       |
+| Attribute    | Description                                       | Values                                                                                                                       |
+| ------------ | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| subscription | Subscription tiers required (list). Use `Available to all organization accounts` when the task is not limited to a plan. | Personal, Pro, Team, Business, AI Governance, Docker Offload, Available to all organization accounts, and the Docker Hardened Images tiers |
+| role         | Core role that has the task                      | Owner, Editor, Company owner                                                                                                 |
+| permission   | Custom role permission that grants the same task. The bar links the name to its section of the permissions reference. | An exact permission name from `content/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md` |
+| availability | Product development stage                         | Experimental, Beta, Early Access, GA, Retired                                                                                |
+| requires     | Minimum version or other prerequisite             | String describing the requirement (link to release notes)                                                                    |
+| for          | Audience for the feature                          | Administrators, Individuals. Prefer `role` and `permission` for new records; `for` remains for records that still set it     |
+
+Role and permission render as separate lines. The role is the core role that already includes the task. The permission line shows the permission name as a link to its section of the custom role permissions reference, followed by a key icon. A custom role on a Docker Business subscription can grant that permission to a member. A record with only a role shows the role line.
+
+**Page override:**
+
+When several pages share one record but each page is gated by a different
+permission, pass `permission` on the shortcode. The page value replaces the
+record value for that page only:
+
+```markdown
+{{</* summary-bar feature_name="Admin orgs" permission="Manage teams" */>}}
+```
+
+The build fails when `permission`, on the record or on the page, is not an
+exact name from the permissions reference, the same way it fails for an
+unknown `feature_name`. A page can't override `subscription` or `role`;
+passing either on the shortcode fails the build. Change the record instead.
 
 ### Buttons
 

@@ -1,18 +1,19 @@
 2FA:
   subscription: [Personal, Pro]
-  for: Individuals
+  requires: A verified email address
 AI Governance Audit Logs:
   subscription: [AI Governance]
   requires: Docker Sandboxes [0.39.0](/manuals/ai/sandboxes/release-notes.md) or later
 Activity logs:
   subscription: [Team, Business]
-  for: Administrators
+  role: Owner
+  permission: View activity logs
 Admin Console:
   subscription: [Business]
   for: Administrators
 Admin orgs:
   subscription: [Team, Business]
-  for: Administrators
+  role: Owner
 Air-gapped containers:
   subscription: [Business]
   for: Administrators
@@ -79,7 +80,7 @@ Cache backend API:
   availability: Experimental
 Company:
   subscription: [Business]
-  for: Administrators
+  role: Company owner
 Compliance reporting:
   subscription: [Business]
   for: Administrators
@@ -155,7 +156,8 @@ Compose SDK:
   requires: Docker Compose [5.0.0](https://github.com/docker/compose/releases/tag/v5.0.0) and later
 Custom roles:
   subscription: [Business]
-  for: Administrators
+  role: Owner
+  permission: Manage custom roles
 Dev Environments:
   availability: Beta
 Docker Build Cloud:
@@ -222,10 +224,12 @@ Docker Scout Mount Permissions:
   requires: Docker Desktop [4.34.0](/manuals/desktop/release-notes.md#4340) and later
 OIDC connections:
   subscription: [Team, Business]
-  for: Administrators
+  role: Editor
+  permission: Manage OIDC connections
 Domain management:
   subscription: [Business]
-  for: Administrators
+  role: Owner
+  permission: Manage domains
 Domain audit:
   subscription: [Business]
   for: Administrators
@@ -235,7 +239,8 @@ Enforce sign-in:
 Gated distribution:
   availability: Early Access
 General admin:
-  for: Administrators
+  subscription: [Available to all organization accounts]
+  role: Owner
 GitHub Actions cache:
   availability: Experimental
 Hardened Docker Desktop:
@@ -253,11 +258,15 @@ Immutable tags:
   availability: Beta
 Insights:
   subscription: [Business]
-  for: Administrators
+  role: Owner
 Intune:
   for: Administrators
 Jamf Pro:
   for: Administrators
+Licenses:
+  subscription: [AI Governance, Docker Offload]
+  role: Owner
+  permission: Manage licenses
 Load by default:
   requires: Docker Buildx [0.14.0](https://github.com/docker/buildx/releases/tag/v0.14.0) and later
 Evaluate policies:
@@ -267,10 +276,15 @@ MSI installer:
   for: Administrators
 OATs:
   subscription: [Team, Business]
-  for: Administrators
+  role: Owner
+  permission: Manage organization access tokens
+Organization information:
+  subscription: [Available to all organization accounts]
+  role: Owner
+  permission: Update organization information
 PATs:
   subscription: [Personal, Pro]
-  for: Individuals
+  requires: A verified email address
 Pay by invoice:
   subscription: [Team, Business]
 PKG installer:
@@ -288,7 +302,8 @@ SOCKS5 proxy support:
   subscription: [Business]
 SSO:
   subscription: [Business]
-  for: Administrators
+  role: Owner
+  permission: Manage SSO and SCIM
 Synchronized file sharing:
   subscription: [Pro, Team, Business]
 Unassociated machines:

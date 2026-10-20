@@ -3,6 +3,12 @@
 {{ if not $feature }}
   {{ errorf "[summary-bar] invalid feature: %s %v" $featureName .Position }}
 {{ end }}
+{{ if .Get "subscription" }}
+  {{ errorf "[summary-bar] subscription can't be overridden on the page; set it on the %q record in data/summary.yaml %v" $featureName .Position }}
+{{ end }}
+{{ if .Get "role" }}
+  {{ errorf "[summary-bar] role can't be overridden on the page; set it on the %q record in data/summary.yaml %v" $featureName .Position }}
+{{ end }}
 {{ if $feature }}
   {{ $subscriptionIcons := dict
     "Business" "building-office"
@@ -10,6 +16,7 @@
     "Pro" "user-plus"
     "Personal" "user"
     "Available to all" "globe-alt"
+    "Available to all organization accounts" "globe-alt"
     "Docker Hardened Images Enterprise" "/icons/dhi.svg"
     "Docker Hardened Images Select or Enterprise" "/icons/dhi.svg"
     "Docker Offload" "cloud"
@@ -23,11 +30,40 @@
     "Retired" "archive-box"
   }}
   {{ $requiresIcon := "arrow-down-circle" }}
+  {{ $roleIcon := "shield-check" }}
+  {{ $permissionIcon := "key" }}
   {{ $forIcons := dict
     "Administrators" "shield-check"
     "Individuals" "user-circle"
   }}
 
+  {{/* The page value wins over the record value. */}}
+  {{ $permission := .Get "permission" | default $feature.permission }}
+  {{ $permissionURL := "" }}
+  {{ if $permission }}
+    {{/* Only exact names from the custom role permissions reference are allowed. */}}
+    {{ $permissionsReference := "content/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md" }}
+    {{ $permissionSections := dict }}
+    {{ $section := "" }}
+    {{ range split (os.ReadFile $permissionsReference) "\n" }}
+      {{ with findRESubmatch `^## (.+?)\s*$` . 1 }}
+        {{ $section = index (index . 0) 1 }}
+      {{ end }}
+      {{ with findRESubmatch `^\| ([^|:][^|]*?) +\|` . 1 }}
+        {{ $name := index (index . 0) 1 }}
+        {{ if ne $name "Permission" }}
+          {{ $permissionSections = merge $permissionSections (dict $name $section) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ $permissionSection := index $permissionSections $permission }}
+    {{ if not $permissionSection }}
+      {{ errorf "[summary-bar] invalid permission: %q is not a permission in %s %v" $permission $permissionsReference .Position }}
+    {{ end }}
+    {{ with site.GetPage "/manuals/security/roles-and-permissions/custom-roles/permissions-reference" }}
+      {{ $permissionURL = printf "%s#%s" .RelPermalink (anchorize $permissionSection) }}
+    {{ end }}
+  {{ end }}
 
   <div class="not-prose summary-bar">
     {{ with $feature.subscription }}
@@ -44,6 +80,30 @@
             {{ end }}
           </span>
         {{ end }}
+      </div>
+    {{ end }}
+
+    {{ with $feature.role }}
+      <div class="flex flex-wrap gap-1">
+        <span class="font-bold">Role:</span>
+        <span>{{ . }}</span>
+        <span class="icon-svg icon-sm">
+          {{ partialCached "icon" $roleIcon $roleIcon }}
+        </span>
+      </div>
+    {{ end }}
+
+    {{ with $permission }}
+      <div class="flex flex-wrap gap-1">
+        <span class="font-bold">Permission:</span>
+        {{ if $permissionURL }}
+          <a class="link" href="{{ $permissionURL }}">{{ . }}</a>
+        {{ else }}
+          <span>{{ . }}</span>
+        {{ end }}
+        <span class="icon-svg icon-sm">
+          {{ partialCached "icon" $permissionIcon $permissionIcon }}
+        </span>
       </div>
     {{ end }}
 

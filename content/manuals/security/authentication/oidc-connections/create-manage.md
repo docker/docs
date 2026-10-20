@@ -11,8 +11,8 @@ aliases:
 
 {{< summary-bar feature_name="OIDC connections" >}}
 
-Organization owners and editors create and manage OIDC connections from
-**OIDC connections** in Docker Home. After you create a connection,
+Create and manage OIDC connections from **OIDC connections** in Docker
+Home. After you create a connection,
 configure your GitHub Actions workflow so it can sign in to Docker Hub
 with a short-lived token.
 

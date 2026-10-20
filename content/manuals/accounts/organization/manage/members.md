@@ -16,6 +16,8 @@ aliases:
   - /admin/organization/members/
 ---
 
+{{< summary-bar feature_name="Admin orgs" permission="Member management" >}}
+
 Invite and manage members for your organization in Docker Home.
 
 ## Invite members
