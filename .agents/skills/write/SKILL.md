@@ -64,6 +64,17 @@ Always read each file before modifying it. Make the minimal change that
 fixes the issue. Do not improve surrounding content, add comments, or
 address adjacent problems.
 
+Before drafting an addition, identify the reader's task and read the destination
+section with the surrounding content. Choose where the information fits and
+whether to correct prose, replace an example, or extend the explanation.
+Related subject matter alone doesn't make a section an appropriate home.
+
+Explain current behavior in terms of what readers need to do, choose, or
+understand. Keep detail proportional to that need. Give each explanation a
+clear home; elsewhere, include only the context needed for that page's task
+and link to the fuller explanation. Don't interrupt a procedure, example, or
+explanation to insert a related fact.
+
 Follow the writing guidelines in CLAUDE.md, STYLE.md, and COMPONENTS.md.
 
 ## 3. Front matter check
