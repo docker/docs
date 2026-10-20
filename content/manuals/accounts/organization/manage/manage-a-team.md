@@ -1,7 +1,7 @@
 ---
 title: Create and manage a team
 linkTitle: Teams
-weight: 20
+weight: 30
 description: Learn how to create and manage teams for your organization
 keywords: docker, registry, teams, organizations, plans, Dockerfile, Docker
   Hub, docs, documentation, repository permissions, configure repository access, team management
