@@ -52,7 +52,7 @@ Outside the workspace and shared skills store, the agent cannot access your
 host filesystem. It also cannot access your host Docker daemon, your host
 network directly, or any destination not allowed by network policy. Sandboxes
 cannot communicate directly over the network. Outbound UDP is blocked unless
-you turn on the [experimental UDP feature](../governance/access-controls/local.md#allow-outbound-udp)
+you turn on the [experimental UDP feature](../governance/local/network-rules.md#allow-outbound-udp)
 and allow it through network policy. ICMP is blocked.
 
 MCP servers are an explicit integration point. Remote MCP servers run outside

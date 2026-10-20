@@ -173,7 +173,7 @@ rules determine which domains the sandbox can access. Under organization
 governance, organization policy controls which domains can be allowed; local
 and kit-defined allow rules are inactive, while deny rules can still restrict
 access. See
-[Network policy precedence](/manuals/ai/sandboxes/governance/concepts.md#precedence).
+[Network policy precedence](/manuals/ai/sandboxes/governance/organization/policies/_index.md#precedence).
 
 The Firecrawl kit requests access to PyPI during installation and
 `api.firecrawl.dev` at runtime. Its credential declaration tells the proxy to

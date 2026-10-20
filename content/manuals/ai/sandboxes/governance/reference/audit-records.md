@@ -1,9 +1,11 @@
 ---
 title: Audit record reference
-linkTitle: Record reference
-weight: 50
+linkTitle: Audit records
+weight: 40
 description: Reference fields, categories, decisions, and payload types for Docker AI Governance audit records.
 keywords: docker sandboxes, audit record, audit schema, AI Governance, policy decision, action_type, jsonl
+aliases:
+  - /ai/sandboxes/governance/audit/record-reference/
 ---
 
 Docker AI Governance audit records use one schema across delivery modes. Local
@@ -81,7 +83,7 @@ full approval. The approval applies to later requests from the sandbox. It
 doesn't retry the request that was blocked. If the user dismisses the request,
 it isn't resolved, so no second record is written and the destination is
 requested again the next time the sandbox reaches it. For how approval works,
-see [Approval-required access](../access-controls/network.md#approval-required-access).
+see [Approval-required access](../organization/policies/network.md#approval-required-access).
 
 For MCP approvals, an approved request is evaluated again and recorded with
 `AUDIT_DECISION_APPROVAL_ALLOW`, and a declined request is recorded with
@@ -139,6 +141,47 @@ separate from the `network_egress` record for the connection.
 | `http_request.host`   | Destination hostname or IP address. IPv6 addresses appear without brackets. |
 | `http_request.port`   | Destination port.                                                           |
 | `http_request.path`   | URL path, without the query string or fragment.                             |
+
+## What gets recorded
+
+The daemon writes two categories of local record:
+
+- Evaluation records capture each policy decision: the resource, the action,
+  the verdict, and the reason for a denial.
+- Session lifecycle records mark the start and end of each daemon run.
+  Evaluation records share the run's `audit_session_id`, so you can correlate
+  every decision back to a daemon session.
+
+Records contain metadata only. They don't contain prompt content, agent output,
+or parameter values.
+
+A network evaluation record looks like this:
+
+```json
+{
+  "audit_event_id": "95e7257f-93c9-4f29-bde7-88830e2dae80",
+  "timestamp": "2026-05-28T19:15:00.728933Z",
+  "schema_version": "1.82.0",
+  "category": "AUDIT_CATEGORY_EVALUATION",
+  "decision": "AUDIT_DECISION_DENY",
+  "username": "jordandoe",
+  "user_email": "jordandoe@example.com",
+  "org_id": "9f8e7d6c-5b4a-3210-fedc-ba9876543210",
+  "org_name": "Acme Inc",
+  "audit_session_id": "8a3bc076-79d0-4502-baf3-cc6ad35fb578",
+  "resource_id": "example.com:443",
+  "os": "macos",
+  "app_version": "v0.31.0",
+  "client_name": "sbx",
+  "hostname": "host-machine",
+  "deny_reason": [
+    "no applicable policies for op(action=net:connect:tcp, resource=net:domain:example.com:443)"
+  ],
+  "action_type": "network_egress",
+  "network_egress": { "protocol": "tcp" },
+  "agent": "claude"
+}
+```
 
 ## Sample record
 

@@ -1,9 +1,11 @@
 ---
 title: SIEM forwarding
-linkTitle: SIEM forwarding
-weight: 40
+linkTitle: Forward to a SIEM
+weight: 30
 description: Forward Docker AI Governance audit events to Splunk, Dynatrace, Datadog, Sumo Logic, or CrowdStrike Falcon Next-Gen SIEM.
 keywords: docker sandboxes, SIEM, audit logs, Splunk, Dynatrace, Datadog, Sumo Logic, CrowdStrike, Falcon Next-Gen SIEM, AI Governance, forwarding, NDJSON
+aliases:
+  - /ai/sandboxes/governance/audit/siem/
 ---
 
 {{< summary-bar feature_name="AI Governance Audit Logs" >}}
@@ -70,3 +72,11 @@ From the **SIEM forwarding** list, select the menu next to a destination to
 edit or delete it. The edit form lets you update credentials and toggle
 forwarding on or off for that destination. Deleting a destination permanently
 removes the endpoint and its stored credential and cannot be undone.
+
+## Collect records with a SIEM
+
+Point your log shipper at the audit directory and configure it to collect
+`.jsonl` files only. Tools such as the Splunk Universal Forwarder,
+Filebeat, and CrowdStrike Falcon LogScale read the directory and forward each
+line as an event. Because in-progress records live in `.tmp` files until they
+are finalized, collectors never see partial records.

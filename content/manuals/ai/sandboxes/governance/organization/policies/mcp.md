@@ -1,9 +1,11 @@
 ---
 title: MCP access policies
-linkTitle: MCP access
-weight: 50
+linkTitle: MCP
+weight: 40
 description: Use Cedar-based policies to control MCP server registration and activity routed through the Docker Sandboxes MCP gateway.
 keywords: docker sandboxes, MCP policy, MCP access, Cedar policy, requireApproval, AI Governance
+aliases:
+  - /ai/sandboxes/governance/access-controls/mcp/
 ---
 
 MCP access policies let organization administrators control which Model
@@ -11,7 +13,7 @@ Context Protocol (MCP) servers developers can register and what agents can do
 through Docker's MCP gateway. Use these policies to approve trusted servers,
 withdraw access to a server, require approval for tool calls, and restrict
 host-run servers. To register MCP servers and connect them to sandboxes, see
-[MCP gateway](../../mcp-gateway.md).
+[MCP gateway](../../../mcp-gateway.md).
 
 MCP access policies apply only to server registration and requests handled by
 Docker's MCP gateway. They don't govern an MCP server that an agent or MCP
@@ -26,7 +28,7 @@ Unlike [network access policies](network.md) and
 policies written in Cedar. Docker defines the `MCP` namespace, including the
 actions, resource types, attributes, and approval behavior that policies can
 match. This page focuses on representative access patterns. For Docker's exact
-policy surface, see the [MCP policy reference](../reference/mcp-policy.md). For
+policy surface, see the [MCP policy reference](../../reference/mcp-policy.md). For
 Cedar syntax and language semantics, see the
 [Cedar documentation](https://docs.cedarpolicy.com/).
 
@@ -53,7 +55,7 @@ existing server must match every name under which it was registered.
 Built-in gateway tools, such as `mcp-add`, `code-mode`, and OAuth authorization
 helpers, are also governed at use time. They are `MCP::Primordial` resources
 rather than tools associated with a registered server. For details, see
-[Built-in gateway tools](../../mcp-gateway.md#built-in-gateway-tools).
+[Built-in gateway tools](../../../mcp-gateway.md#built-in-gateway-tools).
 
 Use-time policy doesn't hide or remove existing registrations. Tool and
 resource listings can also include entries that policy denies when an agent
@@ -220,7 +222,7 @@ when { resource in MCP::Primordial::"example-authorize" };
 Local stdio servers run on the host, outside the sandbox VM. This includes
 explicit host commands and OCI-packaged stdio servers started with host Docker.
 For details about this boundary, see
-[Docker Engine isolation](../../security/isolation.md#docker-engine-isolation).
+[Docker Engine isolation](../../../security/isolation.md#docker-engine-isolation).
 
 In a blocklist policy that otherwise permits registration, deny the host-run
 server type:
@@ -234,12 +236,19 @@ when { resource.type == "local-stdio" };
 container, and OCI-packaged stdio servers resolved from registry or manifest
 metadata with `--local`.
 
+> [!NOTE]
+> To manage Model Context Protocol (MCP) server registration and requests
+> through Docker's MCP gateway, use MCP access policies. These
+> policies apply only to the gateway. Direct MCP connections from a sandbox
+> don't use the gateway, but you can control access to remote MCP servers with
+> network policy.
+
 ## Related information
 
-- [MCP policy concepts](../concepts.md#mcp-policies): policy model and rule
+- [MCP policy concepts](../../reference/mcp-policy.md#mcp-policies): policy model and rule
   evaluation.
-- [MCP policy reference](../reference/mcp-policy.md): exact action, resource,
+- [MCP policy reference](../../reference/mcp-policy.md): exact action, resource,
   attribute, context, and approval behavior.
-- [Organization policies](organization.md): policy creation and scope.
-- [MCP policy audit logs](../audit/): policy decision
+- [Organization policies](../_index.md): policy creation and scope.
+- [MCP policy audit logs](../audit/_index.md): policy decision
   records.

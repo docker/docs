@@ -1,21 +1,23 @@
 ---
 title: Filesystem access policies
-linkTitle: Filesystem access
-weight: 40
+linkTitle: Filesystem
+weight: 30
 description: Control which host paths Docker Sandboxes can mount as workspaces with organization filesystem policies.
 keywords: docker sandboxes, filesystem access, filesystem rules, workspace mount, organization policy, governance
+aliases:
+  - /ai/sandboxes/governance/access-controls/filesystem/
 ---
 
 Filesystem access policies control which host paths a sandbox can mount as a
 workspace. Each policy contains one or more rules that restrict sandbox
 workspaces to approved directories.
 
-Filesystem access is managed with [organization policies](organization.md). When
+Filesystem access is managed with [organization policies](../_index.md). When
 organization governance is active, organization rules determine which paths a
 sandbox can mount, and the local filesystem allow rules from the default preset
 become inactive. `sbx policy deny` applies to network access only, so there are
 no local filesystem deny rules to layer on top. See
-[Precedence](../concepts.md#precedence).
+[Precedence](_index.md#precedence).
 
 ## Rule syntax
 
@@ -34,13 +36,13 @@ Examples:
 
 Use `**` to match a directory tree recursively. A single `*` matches only one
 path segment. For exact path matching behavior across macOS, Linux, Windows,
-and WSL, see [Filesystem rules](../concepts.md#filesystem-rules).
+and WSL, see [Filesystem rules](../../reference/filesystem-rules.md).
 
 ## Organization filesystem rules
 
 Organization filesystem rules belong to policies that can apply to the whole
 organization or to selected teams. For setup steps and team scoping, see
-[Organization policies](organization.md).
+[Organization policies](../_index.md).
 
 Filesystem policy is checked when a workspace is mounted, which happens when a
 sandbox is created. To apply a filesystem policy change to a running workflow,

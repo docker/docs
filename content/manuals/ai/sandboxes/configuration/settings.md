@@ -628,7 +628,7 @@ $ sbx daemon restart
 This shared list applies to sandbox and daemon traffic unless a scope-specific
 list replaces it. A value of `*` bypasses the upstream proxy for all destinations.
 Proxy exclusions don't grant network access: sandbox requests must still pass
-[network policy](../governance/access-controls/network.md).
+[network policy](../governance/_index.md).
 
 #### no_proxy.sandbox {.wrap-anywhere}
 

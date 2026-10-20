@@ -1,9 +1,11 @@
 ---
 title: View and export audit events
 linkTitle: View and export
-weight: 30
+weight: 20
 description: Search, filter, and export Docker AI Governance audit events from the hosted audit log UI.
 keywords: docker sandboxes, audit events, audit logs, AI Governance, CSV export
+aliases:
+  - /ai/sandboxes/governance/audit/view-export/
 ---
 
 Cloud delivery stores AI Governance audit records in Docker Cloud and makes
