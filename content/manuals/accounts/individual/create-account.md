@@ -21,9 +21,8 @@ Docker Desktop, Docker Scout, and
 
 > [!TIP]
 >
-> Want to upgrade from Docker Personal to Docker Pro? See
-> [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsCreateAccount)
-> for available plans.
+> Ready to move from Docker Personal to Docker Pro?
+> [Upgrade your subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsCreateAccount).
 
 ## Create and verify your account
 
