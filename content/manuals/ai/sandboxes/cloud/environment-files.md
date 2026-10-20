@@ -37,6 +37,19 @@ The command prompts for the key. For other agents and authentication options,
 see [Authenticate cloud agents](credentials.md). A credential configured for a
 local sandbox isn't available in the cloud.
 
+If you want the agent to push changes to GitHub, configure a GitHub token
+before creating the sandbox:
+
+```console
+$ sbx --cloud secret set github --sandbox cloud-web-app
+```
+
+The command prompts for a token. Use one with write access to your repository.
+The `--sandbox` value must match the environment's `name`. Cloud environments
+select their credentials at creation: adding a GitHub secret afterward won't
+make it available to an existing environment. If you decide to push later,
+copy your work out first, then recreate the environment with the secret.
+
 Save the following as `cloud.sbxenv.yaml` in your project's root directory.
 You can keep the file elsewhere if you prefer: its location doesn't determine
 which files are available in the cloud sandbox.
@@ -137,8 +150,33 @@ so you can review it before updating your original files:
 $ sbx --cloud cp cloud-web-app:/home/agent/workspace/web-app ../web-app-result
 ```
 
-Use a destination that doesn't already exist. If you cloned the project inside
-the sandbox instead, push the commits you want to keep to your remote.
+Use a destination that doesn't already exist.
+
+### Push changes to GitHub instead
+
+If you configured the GitHub secret before creating the environment, you can
+retrieve changes through Git instead of copying files. This works with a
+repository cloned inside the sandbox or a copied Git repository whose
+`.git` directory contains the repository history. Use an HTTPS GitHub remote
+that your token can push to.
+
+For example, ask the agent:
+
+```text
+In /home/agent/workspace/web-app, review the diff, create a branch named
+cloud-fixes, commit the changes for this task, and push that branch to origin.
+```
+
+Then, from your local checkout, fetch the branch and check it out for review:
+
+```console
+$ git fetch origin
+$ git switch --track origin/cloud-fixes
+```
+
+The commits are available on GitHub even after the sandbox is removed.
+
+### Remove the environment
 
 When you've saved your work, remove the environment:
 
@@ -160,7 +198,11 @@ is available.
 Cloud environments support agents, kits, environment variables, CPU and memory
 limits, credentials for supported providers, and host lifecycle commands.
 They support a subset of the [environment file fields](../configuration/environment-files.md#file-reference).
-Before reusing a local file, remove:
+Use the following checks before reusing a local file.
+
+### Remove local settings
+
+Remove these declarations:
 
 - `workspace`, `additionalWorkspaces`, and clone options
 - `ports`, `registries`, and `mcp.servers`
@@ -172,9 +214,13 @@ Pass the cloud file path explicitly to avoid loading local settings from
 `~/.sbxenv.yaml`. For services and integrations, use the cloud commands to
 [expose ports](usage.md#expose-a-port) and [load MCP servers](usage.md#load-an-mcp-server).
 
+### Check host commands
+
 Lifecycle commands run on your machine even for a cloud environment. A command
 that installs dependencies locally won't install them in the cloud sandbox.
 Use a kit or run the installation inside the sandbox instead.
+
+### Configure cloud credentials
 
 The plan shows inherited cloud credentials. Sandbox-scoped credentials override
 account defaults, and credentials declared in `secrets` override both. Use
@@ -183,6 +229,8 @@ host command or vault reference once and upload the value. Snapshots don't
 refresh. Dynamic secret sources and custom credential providers aren't
 supported. Credential bindings require cloud support for kit credentials and
 explicit approval of the kit's injection domains.
+
+### Apply changes and recover interrupted creation
 
 Changes to secrets, bindings, kits, or resource limits require recreating the
 sandbox. Updated `env` values apply to subsequent sessions. Rejoining a running
