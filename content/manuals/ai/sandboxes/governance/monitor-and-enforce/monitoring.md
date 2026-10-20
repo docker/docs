@@ -83,10 +83,13 @@ default network      org      all          network: 38 allow, 4 deny
 ```
 
 `Governance` shows which organization manages the policy, and `Sync` confirms
-the daemon has pulled the latest rules. If the sync state shows an error or a
-stale timestamp, the daemon may not have the most recent org policy. Run
-`sbx policy reset` to force a fresh pull. `Hidden` reports how many inactive
-rules are suppressed and how to reveal them.
+the daemon has pulled the latest rules. `Hidden` reports how many inactive rules
+are suppressed and how to reveal them.
+
+If the sync state shows an error or a stale timestamp, run `sbx policy refresh`
+to fetch and apply the latest policy without restarting the daemon or stopping
+sandboxes. The policy applies to new connections. To close existing connections
+that the updated policy denies, restart the sandbox.
 
 If Docker can't determine which organization governs your account, policy
 output shows `Governance: Unresolved`, and the dashboard shows the same
