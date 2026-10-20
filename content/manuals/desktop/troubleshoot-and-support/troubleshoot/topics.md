@@ -233,11 +233,11 @@ To avoid this issue in the future:
 
 Containers can reach the internet, but not other devices on your local network
 (LAN), such as a NAS, a printer, or another computer at a `192.168.x.x`
-address. The Mac itself can reach them.
+address. The device itself can reach them.
 
 #### Cause
 
-Docker Desktop doesn't have the macOS **Local Network** permission. macOS then
+Docker Desktop doesn't have the Mac **Local Network** permission. Mac then
 blocks container traffic to devices on your local network, including your
 router, while traffic to the internet still works.
 
@@ -245,10 +245,10 @@ router, while traffic to the internet still works.
 
 To give Docker Desktop the Local Network permission:
 
-1. Open **System Settings** > **Privacy & Security** > **Local Network**.
+1. On your device, open **System Settings** > **Privacy & Security** > **Local Network**.
 2. Turn on **Docker**.
 
-The change applies immediately, without restarting Docker Desktop.
+The change applies immediately, without needing to restart Docker Desktop.
 
 ## Topics for Windows
 
