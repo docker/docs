@@ -37,6 +37,10 @@ options:
       usage: Output in JSON format
     - name: protocol
       usage: 'Filter network rules by protocol: tcp or udp'
+    - name: quiet
+      shorthand: q
+      default_value: "false"
+      usage: Only display rule IDs (network patterns with --cloud)
     - name: source
       usage: 'Filter policies by source: "local", "org", or "kit"'
     - name: type
@@ -67,6 +71,9 @@ example: |4-
 
       # Output filtered rules as JSON
       sbx policy ls --json
+
+      # List only rule IDs
+      sbx policy ls -q
 
       # List only network policies
       sbx policy ls --type network
