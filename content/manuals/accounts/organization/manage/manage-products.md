@@ -216,6 +216,38 @@ ran and which images they used.
 1. Select **Docker Offload** or **Offload**, then
    [**Offload activity**](../../../offload/usage.md).
 
+## AI Governance
+
+AI Governance is the separate paid subscription that adds the
+organization-level controls to
+[Docker Sandboxes](../../../ai/sandboxes/_index.md): policies for what
+members' local sandboxes can reach on the network, mount from the filesystem,
+or call through MCP, plus sign-in enforcement and audit logs.
+
+### Access
+
+Organization policies govern only members who hold an AI Governance license.
+
+- [Manage licenses](./manage-licenses.md): assign AI Governance licenses to
+  teams or members, or turn on **Automatic license assignment** so members
+  receive a license when they run `sbx login`.
+- [Organization policies](../../../ai/sandboxes/governance/access-controls/organization.md):
+  create network, filesystem, and MCP policies under **AI Platform** in Docker
+  Home, and scope them to the whole organization or to specific teams.
+- [Sign-in enforcement](../../../ai/sandboxes/governance/monitor-and-enforce/sign-in-enforcement.md):
+  deploy a configuration through your endpoint management tooling so
+  `sbx login` succeeds only for members of your organization.
+
+### Usage
+
+- [View licenses](./manage-licenses.md#view-licenses): the **Licenses** page
+  shows how many AI Governance licenses you have, how many are assigned, and
+  whether the assignments go to teams or to individual members.
+- [View and export audit events](../../../ai/sandboxes/governance/audit/view-export.md):
+  **AI Platform** > **Audit logs** shows the policy decisions Docker recorded
+  for members' sandboxes, including who made the request, which resource it
+  targeted, and whether Docker allowed or denied it.
+
 ## Next steps
 
 If your usage or seat count exceeds your subscription amount, you can
@@ -232,3 +264,4 @@ and configure them, see the following manuals:
 - [Testcontainers Cloud](https://testcontainers.com/cloud/docs/#getting-started)
 - [Docker Offload](../../../offload/_index.md)
 - [Docker Sandboxes](../../../ai/sandboxes/_index.md)
+- [AI Governance](../../../ai/sandboxes/governance/_index.md)
