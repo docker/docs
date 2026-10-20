@@ -56,7 +56,7 @@ and subscriptions.
 
 - You can now subscribe to the
   [Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md)
-  pay-as-you-go plan with a personal account to run agents in cloud
+  pay-as-you-go plan with an individual account to run agents in cloud
   sandboxes. Compute is metered by the second while a sandbox runs.
 
 ### Bug fixes and enhancements
@@ -125,7 +125,7 @@ and subscriptions.
 
 - You can now purchase
   [Gordon Plus, Max, and Ultra plans](/manuals/subscription-billing/plans/gordon.md)
-  for personal accounts from the billing portal in Docker Home.
+  for individual accounts from the billing portal in Docker Home.
 - Organizations can now purchase
   [DHI Select](/manuals/subscription-billing/plans/dhi.md) repositories via
   self-serve from the billing portal in Docker Home.

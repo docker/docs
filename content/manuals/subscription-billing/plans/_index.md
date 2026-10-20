@@ -43,11 +43,11 @@ grid:
 > Interested in pricing details? Check out the
 > <a href="https://www.docker.com/pricing/" id="dkr_docs_index_pricing" class="link" rel="noopener">pricing page</a> to compare plans.
 
-Docker plans attach to a personal account, an organization, or a specific
-product. Personal plans (Docker Personal and Docker Pro) upgrade an individual
-account. Organization plans (Docker Team and Docker Business) upgrade an
-organization. Product add-ons add usage or features without changing that
-account's Docker plan type: Gordon increases usage on a personal account, and
+Docker plans attach to an individual account, an organization, or a specific
+product. Docker Personal and Docker Pro are subscriptions for individual
+accounts. Docker Team and Docker Business are subscriptions for organization
+accounts. Product add-ons add usage or features without changing that
+account's Docker plan type: Gordon increases usage on an individual account, and
 DHI, AI Governance, and DVP add product features on an organization.
 
 Topping up extends a plan's entitlements, such as seats, licenses, or

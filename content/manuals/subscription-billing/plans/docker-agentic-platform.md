@@ -30,8 +30,8 @@ To activate access for the Console, cloud sandbox CLI, or API and SDKs, follow
 ## Usage
 
 > [!NOTE]
-> Subscribe using your personal Docker account, including if you belong to
-> an organization. The subscription is attached to your personal account.
+> Subscribe using your individual Docker account, including if you belong to
+> an organization. The subscription is attached to your individual account.
 
 Docker Agentic Platform requires bringing your own API keys for inference. Your inference provider
 handles those costs.
