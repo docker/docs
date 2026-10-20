@@ -82,6 +82,18 @@ context:
 - Would a reader be confused by anything the change introduces or leaves
   out?
 
+Accuracy alone doesn't justify an addition. For each substantive addition, ask:
+
+- Does it help readers act, choose, or understand a consequence?
+- Does it belong under this heading and at this point in the explanation?
+- Does it interrupt a procedure, example, or explanation already in progress?
+- Is the detail proportional to its value here, or would a link suffice?
+- Would removing it improve the page without losing necessary guidance?
+
+Recommend shortening, moving, or deleting accurate text when it doesn't serve
+the page's task. When reviewing multiple commits, check both each change in
+context and the combined diff for repeated explanations.
+
 ## 6. Review code and template changes
 
 For non-Markdown changes (JS, HTML, CSS, Hugo templates):
@@ -102,6 +114,7 @@ accurate.
 - There is a factual error or contradiction (on-page or cross-page)
 - A cross-reference is broken or misleading
 - A reader would be confused
+- An addition duplicates guidance or disrupts the page without enough reader value
 
 When requesting changes, be specific: quote the exact text that is wrong,
 explain why, and suggest the correct fix.
