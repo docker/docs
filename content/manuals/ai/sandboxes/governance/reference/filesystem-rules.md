@@ -5,8 +5,9 @@ description: Syntax for sandbox filesystem rules, including path patterns across
 keywords: docker sandboxes, filesystem rules, path patterns, workspace mount, rule syntax
 ---
 
-Filesystem rules use the actions `read` and `write`. Resources are host paths
-that sandboxes can mount as workspaces.
+Filesystem mount rules use the actions `read` and `write`. Resources are host
+paths that sandboxes can mount as workspaces. The rules control which paths a
+sandbox can mount, not access to individual files inside an allowed mount.
 
 A workspace mounted with write access must be allowed by both a `read` and a
 `write` rule; a read-only workspace needs only `read`. When default deny blocks

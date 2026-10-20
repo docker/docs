@@ -2,69 +2,27 @@
 title: Network access policies
 linkTitle: Network
 weight: 20
-description: Control outbound network access from Docker Sandboxes with local and organization policy rules.
-keywords: docker sandboxes, network access, network rules, governance, local policy, organization policy
+description: Control outbound network access from Docker Sandboxes with organization network policies.
+keywords: docker sandboxes, network access, network rules, HTTP rules, approval, governance, organization policy
 aliases:
   - /ai/sandboxes/governance/access-controls/network/
 ---
 
-Network access policies control outbound connections from sandboxes. Each
-policy contains one or more rules that allow the domains, IP ranges, and ports a
-workflow needs, or block destinations that should stay unavailable. Rules can
-also match the HTTP method and path of a request, so a policy can allow part of
-an API without allowing all of it.
+Network access policies are organization policies that control outbound
+connections from sandboxes. Each policy contains one or more rules that allow
+the domains, IP ranges, and ports a workflow needs, or block destinations that
+should stay unavailable. Rules can also match the HTTP method and path of a
+request, so a policy can allow part of an API without allowing all of it.
 
-You can configure network access in two places:
+To create a network access policy, see
+[Create and manage policies](create-manage.md). For hostname patterns, CIDR
+ranges, and how HTTP rules combine with network rules, see
+[Network and HTTP rule syntax](../../reference/network-rules.md). Developers can
+also add network rules on their own machines with
+[local policy](../../local/network-rules.md). For how local and organization
+rules combine, see [Precedence](_index.md#precedence).
 
-- [Local policy](../../local/_index.md), which applies to sandboxes on one developer machine
-  when organization governance is not active.
-- [Organization policies](../_index.md), which apply centrally across an
-  organization or to selected teams.
-
-When organization governance is active, only organization allow rules grant
-network access. Local allow rules are inactive until organization governance no
-longer applies, while local deny rules still apply on top of the organization
-policy. See [Precedence](_index.md#precedence).
-
-## Rule syntax
-
-Network rules use `connect:tcp` for TCP and `connect:udp` for UDP. Resources are
-hostnames, CIDR ranges, ports, or hostnames with ports. UDP requires
-[experimental outbound UDP](../../local/network-rules.md#allow-outbound-udp). ICMP is blocked.
-
-Examples:
-
-- `api.example.com`
-- `*.example.com`
-- `**.example.com`
-- `example.com:443`
-- `10.0.0.0/8`
-
-For exact wildcard behavior and CIDR support, see
-[Network rules](../../reference/network-rules.md).
-
-## HTTP method and path rules
-
-A network rule matches a destination, so it allows or blocks everything a
-sandbox sends there. An HTTP rule narrows the match to specific HTTP methods
-and URL paths on that destination, which lets a policy allow reads from an API
-without allowing writes to it.
-
-HTTP rules layer on top of network rules. A network allow is the baseline for
-a destination and HTTP rules carve into it, while a network deny blocks the
-destination outright and no HTTP allow can reopen it. For the pattern syntax
-and the full matching table, see
-[HTTP rules](../../reference/network-rules.md#http-method-and-path).
-
-Configure them in either place:
-
-- Organization policies, in the network rule composer in Docker Home. Set the
-  rule **Type** to **HTTP**, then select the methods and path patterns. See
-  [Add a network rule](#add-a-network-rule).
-- Local policies, with `--method` and `--path` on `sbx policy`. See
-  [HTTP method and path rules](../../local/network-rules.md#http-method-and-path-rules).
-
-## Add a network rule
+## Network rule fields
 
 Each rule has an optional **Rule name**, a **Type** that decides what the rule
 matches, and a **Decision** of **Allow** or **Deny**.
@@ -73,13 +31,12 @@ matches, and a **Decision** of **Allow** or **Deny**.
   - In **Destination**, enter the host or IP address the rule covers. It
     matches any port unless you add one. Enter the destination with no scheme
     and no path, so `api.github.com` rather than
-    `https://api.github.com/repos`. A local HTTP rule accepts only a host.
+    `https://api.github.com/repos`.
   - Under **HTTP methods**, select the methods the rule applies to. Use
     **Select all** to select every method, or **Read-only** to select `GET`,
-    `HEAD`, and `OPTIONS`. A rule saved with no methods selected matches every
-    method the composer lists. The composer doesn't list `CONNECT` or
-    `TRACE`, which differs from the CLI, where `--method ANY` matches every
-    HTTP method.
+    `HEAD`, and `OPTIONS`. Select at least one method. A rule with no methods
+    selected fails validation. The composer doesn't list `CONNECT` or `TRACE`,
+    which differs from the CLI, where `--method ANY` matches every HTTP method.
   - Under **Path patterns**, add one or more paths the rule covers, such as
     `/repos/*` and `/v1/**`. Leave it empty to match any path.
 - **All traffic** matches every request to the destinations you list, on any
@@ -115,9 +72,6 @@ An approval also can't reach a destination the organization doesn't allow at
 all, and it can't override a deny rule. To withdraw a destination, add a deny
 rule, which takes precedence over any approval already recorded.
 
-To require approval on an organization policy, see
-[Organization policies](#require-approval-for-a-network-policy).
-
 Network approval is separate from the MCP `@requireApproval` annotation. An MCP
 approval confirms a single call within the session and creates no rule, while
 an approved network destination stays allowed until you remove the rule. See
@@ -126,9 +80,7 @@ an approved network destination stays allowed until you remove the rule. See
 ### Require approval for a network policy
 
 Turning on **Require approval before access** means the destinations a network
-policy allows aren't reachable until the developer confirms each one. For how
-approval behaves and what satisfies it, see
-[Approval-required access](#approval-required-access).
+policy allows aren't reachable until the developer confirms each one.
 
 To set it on an existing policy:
 
@@ -143,3 +95,15 @@ To set it on an existing policy:
 The policy's detail page reports approval as **Required** or **Not required**.
 Editing a policy replaces it in full, so turning the setting off removes the
 requirement from every rule in that policy.
+
+## When changes take effect
+
+- Network policy is evaluated on every outbound request. Once a policy
+  change has synced to the developer's machine (up to 5 minutes), it applies
+  immediately to subsequent requests. HTTP rules are evaluated per request in
+  the same way.
+
+- An approval requirement applies from the point the policy change syncs.
+  Destinations a developer already approved stay reachable, because the
+  approval is recorded on the developer's machine. To withdraw one, add a deny
+  rule. A deny takes precedence over a recorded approval.

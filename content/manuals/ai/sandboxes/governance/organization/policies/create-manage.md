@@ -24,7 +24,9 @@ To create a policy:
    [Scope policies to teams](#scope-policies-to-teams).
 1. Define the policy rules.
    - Network and filesystem policies: select **Add rule** for each rule. For a
-     network policy, see [Add a network rule](network.md#add-a-network-rule).
+     network policy, see [Network rule fields](network.md#network-rule-fields).
+     For a filesystem policy, see
+     [Filesystem mount rule syntax](../../reference/filesystem-rules.md).
    - MCP policies: enter Cedar statements in the policy editor. See
      [MCP access policies](mcp.md).
 1. For a network policy, set **Require approval before access** if developers
@@ -33,6 +35,11 @@ To create a policy:
 
 Existing policies are listed with their name, scope, rule count, and last
 update. Use the action menu (⋮) to edit or delete a policy.
+
+If you manage policies through the
+[Governance API](/reference/api/ai-governance/), a network or filesystem
+policy's `domain` field is `network` or `filesystem`. It's derived from the
+policy's rule actions, so one policy can't mix network and filesystem rules.
 
 ## Configure a support message
 

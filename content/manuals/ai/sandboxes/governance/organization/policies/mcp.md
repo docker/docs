@@ -25,7 +25,11 @@ access policy and block its network destination in network access policy.
 
 Unlike [network access policies](network.md) and
 [filesystem access policies](filesystem.md), MCP policies are organization
-policies written in Cedar. Docker defines the `MCP` namespace, including the
+policies written in Cedar. In the
+[Governance API](/reference/api/ai-governance/), an MCP policy is a `cedar_v1`
+policy whose rules are the Cedar statements in the policy text, rather than
+separate rules managed through the rules endpoints. Docker defines the `MCP`
+namespace, including the
 actions, resource types, attributes, and approval behavior that policies can
 match. This page focuses on representative access patterns. For Docker's exact
 policy surface, see the [MCP policy reference](../../reference/mcp-policy.md). For
@@ -236,19 +240,25 @@ when { resource.type == "local-stdio" };
 container, and OCI-packaged stdio servers resolved from registry or manifest
 metadata with `--local`.
 
-> [!NOTE]
-> To manage Model Context Protocol (MCP) server registration and requests
-> through Docker's MCP gateway, use MCP access policies. These
-> policies apply only to the gateway. Direct MCP connections from a sandbox
-> don't use the gateway, but you can control access to remote MCP servers with
-> network policy.
+## When changes take effect
+
+- MCP registration policy is evaluated when a server is registered with
+  `sbx mcp add`. Changing registration rules doesn't remove existing
+  registrations or stop an already-loaded server by itself.
+
+- MCP use-time policy is evaluated by the MCP gateway when a sandbox makes a
+  governed MCP request, such as a tool call, resource read, prompt retrieval,
+  or built-in gateway tool call. Once a policy change has synced, use-time
+  rules apply to subsequent governed MCP requests through the gateway.
+
+To prevent use of an MCP server that is already registered or loaded, add
+use-time rules for the registered server name. See
+[Withdraw server access](#withdraw-server-access).
 
 ## Related information
 
-- [MCP policy concepts](../../reference/mcp-policy.md#mcp-policies): policy model and rule
-  evaluation.
 - [MCP policy reference](../../reference/mcp-policy.md): exact action, resource,
   attribute, context, and approval behavior.
-- [Organization policies](../_index.md): policy creation and scope.
+- [Create and manage policies](create-manage.md): policy creation and scope.
 - [MCP policy audit logs](../audit/_index.md): policy decision
   records.

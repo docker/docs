@@ -5,33 +5,15 @@ description: Syntax for sandbox network rules, including domain patterns, CIDR r
 keywords: docker sandboxes, network rules, rule syntax, wildcards, CIDR, HTTP rules, method and path
 ---
 
-Network rules use `connect:tcp` for TCP and `connect:udp` for UDP. Resources are
-hostnames, CIDR ranges, or ports. UDP requires
-[experimental outbound UDP](../local/network-rules.md#allow-outbound-udp).
-ICMP is blocked.
-
-**Hostname patterns**
-
-| Pattern               | Example           | Matches                                                      |
-| --------------------- | ----------------- | ------------------------------------------------------------- |
-| Exact hostname        | `example.com`     | `example.com` on any port, not subdomains                     |
-| Single-level wildcard | `*.example.com`   | One subdomain level, any port: `api.example.com`              |
-| Multi-level wildcard  | `**.example.com`  | Any depth, any port: `api.example.com`, `v2.api.example.com`  |
-| Hostname with port    | `example.com:443` | `example.com` on port 443 only                                |
-
-`example.com` and `*.example.com` don't cover each other. Specify both if you
-need to match the root domain and its subdomains.
-
-**CIDR ranges**
-
-Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
-`2001:db8::/32`.
-
-## HTTP method and path
-
 A network rule matches a destination host on its own. An HTTP rule is a network
 rule that also names an HTTP method and URL path, so a policy can allow reads
-from an API without allowing writes to it.
+from an API without allowing writes to it. For how to write destinations, see
+[Destinations](#destinations).
+
+Developer machines must run sbx 0.35.0 or later to enforce HTTP method and path
+rules.
+
+## HTTP method and path
 
 An HTTP rule names one or more methods, a destination, and path patterns. What
 each part accepts depends on where you configure the rule:
@@ -44,15 +26,16 @@ each part accepts depends on where you configure the rule:
 
 A destination can include a port, and a path pattern looks like `/api/**`.
 
-A local rule doesn't accept an IP address or a CIDR range. Use a plain network
-rule for those destinations. To cover a second path in a local policy, add a
-second rule.
+A local HTTP rule accepts only a host pattern, not an IP address or a CIDR
+range. To match an IP address or a CIDR range, use a network rule without
+`--method` or `--path`. A local HTTP rule also takes one path, so add a separate
+rule for each path.
 
 Every rule applies to at least one method. On the CLI, `--method ANY` covers
-every HTTP method. In the composer, a rule with no methods selected covers
-every method the composer lists. For the methods you can select individually, see
-[Add a network rule](../organization/policies/network.md#add-a-network-rule) for an
-organization policy and
+every HTTP method. In the composer, select at least one method. A rule with no
+methods selected fails validation. For the methods you can select individually,
+see [Network rule fields](../organization/policies/network.md#network-rule-fields)
+for an organization policy and
 [HTTP method and path rules](../local/network-rules.md#http-method-and-path-rules)
 for a local one.
 
@@ -86,6 +69,30 @@ Those requests have to go through the proxy. A connection it can't inspect,
 such as one it handles transparently, is blocked rather than evaluated.
 Traffic that isn't HTTP, such as SSH, carries no method or path, so HTTP rules
 never match it. Control those destinations with network rules.
+
+## Destinations
+
+Network rules use `connect:tcp` for TCP and `connect:udp` for UDP. Resources are
+hostnames, CIDR ranges, or ports. UDP requires
+[experimental outbound UDP](../local/network-rules.md#allow-outbound-udp).
+ICMP is blocked.
+
+**Hostname patterns**
+
+| Pattern               | Example           | Matches                                                      |
+| --------------------- | ----------------- | ------------------------------------------------------------- |
+| Exact hostname        | `example.com`     | `example.com` on any port, not subdomains                     |
+| Single-level wildcard | `*.example.com`   | One subdomain level, any port: `api.example.com`              |
+| Multi-level wildcard  | `**.example.com`  | Any depth, any port: `api.example.com`, `v2.api.example.com`  |
+| Hostname with port    | `example.com:443` | `example.com` on port 443 only                                |
+
+`example.com` and `*.example.com` don't cover each other. Specify both if you
+need to match the root domain and its subdomains.
+
+**CIDR ranges**
+
+Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
+`2001:db8::/32`.
 
 For local and organization policy configuration, see
 [Manage local network rules](../local/network-rules.md) and

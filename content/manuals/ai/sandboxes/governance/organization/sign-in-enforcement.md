@@ -265,9 +265,8 @@ For access, contact ACME IT Security:
 
 ## Related pages
 
-- [Organization policies](_index.md): centrally manage
-  sandbox network, filesystem, and MCP access controls from the Docker Admin
-  Console
+- [Organization governance](_index.md): centrally manage
+  sandbox network, filesystem, and MCP policies in Docker Home
 - [Governance overview](../_index.md): how local and organization governance fit
   together
 - [Enforce sign-in for Docker Desktop](/manuals/desktop/enterprise/enforce-sign-in/_index.md):
