@@ -662,14 +662,21 @@ and OpenCode reads `OPENCODE_CONFIG`. Don't use `setup.startup` for settings
 the agent must read during initialization; startup commands don't gate the
 entrypoint.
 
-## Packaging and distribution
+## Validate and inspect kits
 
-The `sbx kit` subcommands validate, inspect, and publish kits:
+Use these commands to check a kit before sharing it:
 
 - `sbx kit validate <path>` — check that a kit directory or ZIP is
   well-formed.
 - `sbx kit inspect <path>` — display kit details. Add `--json` for
   machine-readable output.
+
+Add `--offline` to validate or inspect a local directory or ZIP without starting
+the daemon or signing in. Offline checks skip kit source and signature policies;
+they don't establish whether the kit is permitted to load.
+
+## Packaging and distribution
+
 - `sbx kit pack <path> -o <file.zip>` — package a directory as a ZIP file
   for sharing.
 - `sbx kit push <path> <ref>` — publish to an OCI registry (for example,
