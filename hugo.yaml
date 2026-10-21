@@ -166,6 +166,10 @@ params:
   # Docs repository URL
   repo: https://github.com/docker/docs
 
+  # MCP endpoint that serves semantic search over the docs. Used by the 404 page.
+  # The stage backend has no /mcp route, so every environment uses production.
+  docsSearchURL: https://ai-backend-service.docker.com/mcp
+
   # === Example versions ===
   # The following parameters are used in various ways in content and templates.
   # Mostly as examples in code snippets, but also in other exotic ways.
