@@ -108,6 +108,31 @@ push commits to your remote. Configure [cloud credentials](credentials.md) for
 private repository access and [cloud network policy](network-policy.md) for
 the destinations your project needs.
 
+### Automate the upload
+
+To upload your project whenever you create a fresh sandbox, add a `postCreate`
+command to the environment file. This makes the upload part of setup, so
+contributors can create a ready-to-use environment with a single command.
+
+```yaml
+lifecycle:
+  postCreate:
+    - name: Upload project
+      command: sbx --cloud cp . "$SBX_SANDBOX_NAME:/home/agent/workspace/web-app"
+```
+
+The command runs from the directory containing the environment file, after the
+sandbox is created and before `run` attaches to the agent. `SBX_SANDBOX_NAME`
+contains the sandbox name, including any `--name` override. Reconnecting to an
+existing sandbox doesn't run `postCreate` again, so it won't overwrite the
+agent's work with another upload.
+
+With this block in place, use `sbx --cloud env run ./cloud.sbxenv.yaml` to create
+the sandbox, upload the project, and attach to the agent. It replaces the manual
+upload step for future sandbox creation. See
+[Automate setup with host commands](#automate-setup-with-host-commands) for more
+about lifecycle commands and approval.
+
 ## Work with the agent
 
 Attach to Claude Code using the same environment file:
@@ -220,22 +245,6 @@ Lifecycle commands connect the cloud environment’s lifecycle to work on your
 machine. They’re useful when setup or cleanup depends on local files, tools, or
 credentials. Including those steps in the environment file makes the workflow
 repeatable, even when it spans your machine and the cloud sandbox.
-
-For example, add this block to the environment file to upload your project
-automatically instead of running the manual `sbx --cloud cp` step:
-
-```yaml
-lifecycle:
-  postCreate:
-    - name: Upload project
-      command: sbx --cloud cp . "$SBX_SANDBOX_NAME:/home/agent/workspace/web-app"
-```
-
-The command runs from the directory containing the environment file, after the
-sandbox is created and before `run` attaches to the agent. `SBX_SANDBOX_NAME`
-contains the sandbox name, including any `--name` override. Reconnecting to an
-existing sandbox doesn't run `postCreate` again, so it won't overwrite the
-agent's work with another upload.
 
 Use `initialize` to prepare files before creation and `preRemove` to retrieve
 results when you run `sbx --cloud env rm`. `preRemove` doesn't run when the
