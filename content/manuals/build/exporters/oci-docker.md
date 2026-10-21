@@ -33,8 +33,8 @@ The following table describes the available parameters:
 | Parameter           | Type                                   | Default | Description                                                                                                                           |
 | ------------------- | -------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `name`              | String                                 |         | Specify image name(s)                                                                                                                 |
-| `dest`              | String                                 |         | Path                                                                                                                                  |
-| `tar`               | `true`,`false`                         | `true`  | Bundle the output into a tarball layout                                                                                               |
+| `dest`              | String                                 |         | Destination path for the exported image layout                                                                                         |
+| `tar`               | `true`,`false`                         | `true`  | Bundle the output into a tar archive                                                                                                  |
 | `compression`       | `uncompressed`,`gzip`,`estargz`,`zstd` | `gzip`  | Compression type, see [compression][1]                                                                                                |
 | `compression-level` | `0..22`                                |         | Compression level, see [compression][1]                                                                                               |
 | `force-compression` | `true`,`false`                         | `false` | Forcefully apply compression, see [compression][1]                                                                                    |
@@ -46,6 +46,37 @@ The following table describes the available parameters:
 [2]: _index.md#oci-media-types
 [3]: #annotations
 [4]: https://github.com/moby/buildkit/blob/master/docs/build-repro.md
+
+## Output modes
+
+By default, these exporters write the image layout as a tar archive. The `dest`
+parameter sets the path to the archive:
+
+```console
+$ docker buildx build --output type=oci,dest=./image.tar .
+```
+
+To write the image layout as an unpacked directory instead, set `tar=false`.
+In this mode, `dest` sets the output directory:
+
+```console
+$ docker buildx build --output type=oci,dest=./image-layout,tar=false .
+```
+
+For the `docker` exporter, omitting `dest` loads the image to the local image
+store when the builder supports loading images:
+
+```console
+$ docker buildx build \
+  --output type=docker,name=<registry>/<image> .
+```
+
+To save the Docker image layout to disk instead, specify `dest`:
+
+```console
+$ docker buildx build \
+  --output type=docker,dest=./image.tar,name=<registry>/<image> .
+```
 
 ## Annotations
 
