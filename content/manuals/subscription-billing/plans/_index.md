@@ -5,8 +5,9 @@ description:
   Browse available Docker plans and add-ons for individuals, teams, and
   organizations.
 keywords:
-  docker products, docker subscriptions, docker core, ai governance, dhi select,
-  docker build cloud, gordon plans, product catalog
+  docker products, docker subscriptions, docker team, docker business,
+  ai governance, dhi select, docker build cloud, gordon plans,
+  docker agentic platform, product catalog
 weight: 10
 aliases:
   - /subscription/plans/
@@ -18,13 +19,18 @@ aliases:
   - /docker-hub/billing/downgrade/
 grid:
   - title: Docker
-    description: Personal and organization plans, including build and runtime minutes.
+    description: >-
+      Personal and organization plans, including build and runtime minutes.
     link: /subscription-billing/plans/docker/
     icon: credit-card
   - title: Gordon plans
     description: Usage plans that increase your Gordon allowance.
     link: /subscription-billing/plans/gordon/
     icon: /icons/gordon.svg
+  - title: Docker Agentic Platform
+    description: Pay-as-you-go cloud compute for personal accounts.
+    link: /subscription-billing/plans/docker-agentic-platform/
+    icon: cloud
   - title: Docker Hardened Images (DHI)
     description: Hardened image repositories for organization accounts.
     link: /subscription-billing/plans/dhi/
@@ -34,7 +40,8 @@ grid:
     link: /subscription-billing/plans/ai-governance/
     icon: shield-check
   - title: Docker Verified Publisher (DVP)
-    description: Publisher analytics and reporting plans for organization accounts.
+    description: >-
+      Publisher analytics and reporting plans for organization accounts.
     link: /subscription-billing/plans/docker-verified-publisher/
     icon: check-badge
 ---
@@ -47,8 +54,9 @@ Docker plans attach to an individual account, an organization, or a specific
 product. Docker Personal and Docker Pro are subscriptions for individual
 accounts. Docker Team and Docker Business are subscriptions for organization
 accounts. Product add-ons add usage or features without changing that
-account's Docker plan type: Gordon increases usage on an individual account, and
-DHI, AI Governance, and DVP add product features on an organization.
+account's Docker plan type: Gordon and Docker Agentic Platform attach to an
+individual account, and DHI, AI Governance, and DVP add product features on an
+organization.
 
 Topping up extends a plan's entitlements, such as seats, licenses, or
 minutes, without changing the plan type. For the units you can top up, see
