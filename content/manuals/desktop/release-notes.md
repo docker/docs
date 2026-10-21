@@ -24,6 +24,27 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.96.1
+
+{{< release-date date="2026-10-21" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.96.1" build_path="/244132/" >}}
+
+### Updates 
+
+- [Docker Engine 29.9.2](https://github.com/docker/docker/releases/tag/29.9.2)
+- [Docker Buildx v0.38.1](https://github.com/docker/buildx/releases/tag/v0.38.1)
+- [Credential helpers to v0.9.12](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.12)
+-  Docker Offload `v0.7.16`
+
+### Security
+
+- Removed trust for certificates issued by the compromised [eMudhra intermediate CA compromise](https://emudhra.we-have-a-problem.com/). An attacker with network access could have used these certificates to intercept TLS connections made by non-browser clients, such as the Docker CLI and daemon.
+
+> [!IMPORTANT]
+>
+> This fix is being rolled out in batches as individual Docker Desktop components are updated. Upcoming patch releases will cover the remaining components. We recommend updating to each patch release as soon as it’s available.
+
 ## 4.96.0
 
 {{< release-date date="2026-10-19" >}}

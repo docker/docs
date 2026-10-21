@@ -30,7 +30,7 @@ grid:
     icon: credit-card
 ---
 
-A Docker plan is a subscription tied to a personal account, an organization
+A Docker plan is a subscription tied to an individual account, an organization
 account, or a specific product. When you upgrade a plan, you expand your
 usage entitlements and feature sets. You can also top up some plans,
 extending usage without changing your plan type.

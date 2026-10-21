@@ -134,6 +134,19 @@ variable appears only when the setting has a direct equivalent. Use
 
 ### Agents and host access
 
+#### browser.enabled {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Set this to `false` to prevent sandboxed processes from opening URLs in your
+host browser:
+
+```console
+$ sbx settings set browser.enabled false
+```
+
+This also prevents in-sandbox OAuth logins that redirect to localhost.
+
 #### clipboard.imagePaste {.wrap-anywhere}
 
 {{< setting-metadata type="boolean" default="false"
@@ -440,6 +453,49 @@ this setting. It doesn't override a gateway selected by organization governance.
 Set it back to `false` and restart to return to automatic selection. See
 [MCP gateway](../mcp-gateway.md) for server registration and agent setup.
 
+### Daemon logging
+
+These settings control rotation of `daemon.log`, not logs written by the CLI
+or processes inside a sandbox. Changes take effect after `sbx daemon restart`.
+The backup count and age limits apply together: a rotated log is removed when
+it exceeds either limit.
+
+#### daemon.log.maxSizeMB {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="50" >}}
+
+Set the size in MB at which the daemon log rotates. The minimum is `1`:
+
+```console
+$ sbx settings set daemon.log.maxSizeMB 100
+$ sbx daemon restart
+```
+
+#### daemon.log.maxBackups {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="3" >}}
+
+Set the maximum number of rotated daemon logs to keep. The value must be zero
+or greater. A value of `0` removes the count limit, but the age limit still
+applies:
+
+```console
+$ sbx settings set daemon.log.maxBackups 5
+$ sbx daemon restart
+```
+
+#### daemon.log.maxAgeDays {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="0" >}}
+
+Set how many days to keep rotated daemon logs, from `0` to `3650`. A value of
+`0` removes the age limit, but the backup count limit still applies:
+
+```console
+$ sbx settings set daemon.log.maxAgeDays 30
+$ sbx daemon restart
+```
+
 ### Diagnostics
 
 #### diagnostics.autoUpload {.wrap-anywhere}
@@ -534,8 +590,8 @@ updated value; existing sandbox proxies require a daemon restart.
 {{< setting-metadata type="string" default="Empty string" >}}
 
 Use this to route the daemon's requests, such as image pulls, separately from
-sandbox traffic. Supported host CLI requests, including `sbx login` and
-`sbx diagnose --upload`, also use this scope.
+sandbox traffic. Host CLI connections, including connections to cloud sandboxes,
+also use this scope. See [traffic scopes](upstream-proxy.md).
 
 For example, keep a shared proxy for sandbox traffic while letting the daemon
 connect directly:
@@ -547,6 +603,15 @@ $ sbx daemon restart
 
 Unset this setting to inherit `proxy`. Supported CLI requests use changes on
 the next invocation; the daemon's own requests require a restart.
+
+#### proxy.sshDirect {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Set this to `true` to bypass the upstream proxy for cloud SSH connections.
+Other host CLI requests keep using the configured proxy. Changes apply on the
+next SSH connection without a daemon restart. For setup, see
+[Cloud SSH](upstream-proxy.md#cloud-ssh).
 
 #### no_proxy {.wrap-anywhere}
 

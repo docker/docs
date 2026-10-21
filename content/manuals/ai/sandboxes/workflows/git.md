@@ -187,6 +187,20 @@ yourself after reviewing the changes.
    $ gh pr create
    ```
 
+## Git ignore rules
+
+Git inside a local sandbox preserves host-specific ignore decisions for paths
+that exist when you create the sandbox. This applies when the primary workspace
+is at a Git repository root.
+
+The sandbox receives a snapshot of ignored paths, not the host-specific patterns.
+Those patterns don't apply to files created later, but ignored directories still
+cover files added inside them. Additional repositories and primary workspaces
+below a repository root don't receive this snapshot. Repository `.gitignore`
+files continue to work as usual.
+
+Git ignore rules don't restrict the agent's access to files in the workspace.
+
 ## Commit signing
 
 SSH agent forwarding is enabled by default. When `SSH_AUTH_SOCK` is set,

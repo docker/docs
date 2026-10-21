@@ -362,6 +362,10 @@ replace earlier scalar values. In this example, the sandbox has four CPUs,
 12 GB of memory, and both environment variables. Each relative workspace path
 resolves from the directory of the file that declares it.
 
+Each source file must contain valid fields and values before merging. A later
+override can't repair an invalid value in an earlier file. This also applies
+to [user defaults](#set-user-defaults) loaded from `~/.sbxenv.yaml`.
+
 ### Work across multiple repositories
 
 Mount related repositories alongside the primary project when the agent needs

@@ -25,7 +25,8 @@ To save and reuse an environment you've configured interactively, see
 Docker's sandbox templates are published as
 `docker/sandbox-templates:<variant>`. They are based on Ubuntu and run as a
 non-root `agent` user with sudo access. Most variants include Git, Docker
-CLI, and common development tools like Node.js, Python, Go, and Java.
+CLI, and common development tools like Node.js, Python, Go, and Java. Full
+templates also include a C/C++ compiler toolchain for building native code.
 
 | Variant               | Agent                                                                |
 | --------------------- | -------------------------------------------------------------------- |

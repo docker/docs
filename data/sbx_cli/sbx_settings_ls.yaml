@@ -22,6 +22,10 @@ options:
     - name: no-trunc
       default_value: "false"
       usage: Show full values and descriptions, one setting per block
+    - name: quiet
+      shorthand: q
+      default_value: "false"
+      usage: Only display setting keys
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -37,5 +41,8 @@ example: |4-
 
       # List settings as JSON
       sbx settings ls --format json
+
+      # List only setting keys
+      sbx settings ls -q
 see_also:
     - sbx settings - Manage Docker Sandboxes settings
