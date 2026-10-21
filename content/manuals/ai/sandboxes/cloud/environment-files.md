@@ -214,11 +214,36 @@ Pass the cloud file path explicitly to avoid loading local settings from
 `~/.sbxenv.yaml`. For services and integrations, use the cloud commands to
 [expose ports](usage.md#expose-a-port) and [load MCP servers](usage.md#load-an-mcp-server).
 
-### Check host commands
+### Automate setup with host commands
 
-Lifecycle commands run on your machine even for a cloud environment. A command
-that installs dependencies locally won't install them in the cloud sandbox.
-Use a kit or run the installation inside the sandbox instead.
+Lifecycle commands run on your machine with your user privileges. In a cloud
+workflow, use them to prepare local files before uploading, upload a project after
+creation, or download results before removal.
+
+For example, add this block to the environment file to upload your project
+automatically instead of running the manual `sbx --cloud cp` step:
+
+```yaml
+lifecycle:
+  postCreate:
+    - name: Upload project
+      command: sbx --cloud cp . "$SBX_SANDBOX_NAME:/home/agent/workspace/web-app"
+```
+
+The command runs from the directory containing the environment file, after the
+sandbox is created and before `run` attaches to the agent. `SBX_SANDBOX_NAME`
+contains the sandbox name, including any `--name` override. Reconnecting to an
+existing sandbox doesn't run `postCreate` again, so it won't overwrite the
+agent's work with another upload.
+
+Use `initialize` to prepare files before creation and `preRemove` to retrieve
+results when you run `sbx --cloud env rm`. `preRemove` doesn't run when the
+cloud service deletes an expired sandbox, and a failed command doesn't prevent
+removal. Save work you need to keep before removing the environment.
+
+Host commands appear in the plan and require approval. See
+[Lifecycle commands](../configuration/environment-files.md#lifecycle) for phase
+timing, working directories, and approval options.
 
 ### Configure cloud credentials
 
