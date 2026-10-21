@@ -199,6 +199,11 @@ $ docker network rm my-net
 > details should be considered implementation details. Let Docker manage your
 > user-defined networks for you.
 
+On hosts running [firewalld](https://firewalld.org), Docker puts its bridge
+devices in a `docker` zone. If containers on a user-defined bridge cannot
+reach each other, see
+[Packet filtering and firewalls](../packet-filtering-firewalls.md#integration-with-firewalld).
+
 ## Connect a container to a user-defined bridge
 
 When you create a new container, you can specify one or more `--network` flags.
