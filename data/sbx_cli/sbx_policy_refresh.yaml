@@ -1,0 +1,32 @@
+name: sbx policy refresh
+synopsis: Force an immediate policy refresh
+description: |-
+    Force sandboxd to fetch and apply governance policy immediately.
+
+    The daemon normally polls for policy changes on a regular interval. Use this
+    after changing an org policy setting (for example, toggling AI Governance) so
+    the change takes effect without waiting for the next poll. This also
+    invalidates the cached registry credential; it never restarts the daemon or
+    stops running sandboxes.
+
+    The refreshed policy applies to new connections only. Connections a sandbox
+    opened while the previous policy allowed them stay open even if the new
+    policy denies them; restart the sandbox to drop them.
+usage: sbx policy refresh [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for refresh
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: '  sbx policy refresh'
+see_also:
+    - sbx policy - Manage sandbox policies

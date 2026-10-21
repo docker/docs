@@ -30,5 +30,6 @@ see_also:
     - sbx policy inspect - Show policy or rule details
     - sbx policy log - Show sandbox policy logs
     - sbx policy ls - List sandbox policies
+    - sbx policy refresh - Force an immediate policy refresh
     - sbx policy reset - Reset policies to defaults
     - sbx policy rm - Remove a policy rule
