@@ -5,7 +5,7 @@ weight: 20
 description: How to use profiles with Docker Compose
 keywords: cli, compose, profile, profiles reference
 aliases:
-- /compose/profiles/
+  - /compose/profiles/
 ---
 
 {{% include "compose/profiles.md" %}}
@@ -56,6 +56,7 @@ use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.
 ```console
 $ docker compose --profile debug up
 ```
+
 ```console
 $ COMPOSE_PROFILES=debug docker compose up
 ```
@@ -88,6 +89,7 @@ If you want to enable all profiles at the same time, you can run `docker compose
 When you explicitly target a service on the command line that has one or more profiles assigned, you do not need to enable the profile manually as Compose runs that service regardless of whether its profile is activated. This is useful for running one-off services or debugging tools.
 
 Only the targeted service (and any of its declared dependencies via `depends_on`) is started. Other services that share the same profile will not be started unless:
+
 - They are also explicitly targeted, or
 - The profile is explicitly enabled using `--profile` or `COMPOSE_PROFILES`.
 
@@ -123,10 +125,11 @@ $ docker compose run db-migrations
 
 In this example, `db-migrations` runs even though it is assigned to the tools profile, because it was explicitly targeted. The `db` service is also started automatically because it is listed in `depends_on`.
 
-If the targeted service has dependencies that are also gated behind a profile, you must ensure those dependencies are either: 
- - In the same profile
- - Started separately
- - Not assigned to any profile so are always enabled
+If the targeted service has dependencies that are also gated behind a profile, you must ensure those dependencies are either:
+
+- In the same profile
+- Started separately
+- Not assigned to any profile so are always enabled
 
 ## Stop application and services with specific profiles
 
@@ -136,6 +139,7 @@ use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.
 ```console
 $ docker compose --profile debug down
 ```
+
 ```console
 $ COMPOSE_PROFILES=debug docker compose down
 ```
@@ -160,13 +164,15 @@ services:
     image: mysql
 ```
 
-if you only want to stop the `phpmyadmin` service, you can run 
+If you only want to stop the `phpmyadmin` service, you can run
 
-```console 
+```console
 $ docker compose down phpmyadmin
-``` 
-or 
-```console 
+```
+
+or
+
+```console
 $ docker compose stop phpmyadmin
 ```
 
