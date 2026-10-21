@@ -45,38 +45,23 @@ To upgrade to Docker Pro, go to the
 <a href="https://www.docker.com/pricing/" id="dkr_docs_pricing_manage_pro" class="link" rel="noopener">Docker pricing page</a>
 and select **Buy now**.
 
-## Upgrade plans
+## Change an active plan {#upgrade-plans}
 
-You can upgrade active plans from the billing Overview page.
+These are the actions available on a plan you already have. Sign in to
+[Docker Home](https://app.docker.com/), go to **Billing**, then go to
+**Active subscriptions**. The control on the plan tile depends on the plan.
+Each plan page has the steps and says when the change takes effect.
 
-1. Sign in to [Docker Home](https://app.docker.com/), then choose your personal
-   account or your organization account.
-1. Go to **Billing** to view the Overview page.
-   - The Overview page contains your active plans and payment details.
-   - **Active plans** contains information about plan type, renewal cadence, and usage.
-1. Top up or upgrade from the **Active plans** section.
-   - **Active plans** is where you complete all management actions.
-   - Depending on the plan type, you can select the action menu button or the **Manage** button to choose from available actions.
-1. Verify your billing details, continue to payment, and complete checkout.
+| Plan | Control | Actions |
+| --- | --- | --- |
+| [Docker](/manuals/subscription-billing/plans/docker.md) | Action menu | Add or remove seats, add Build Cloud or Testcontainers Cloud minutes, switch to annual billing, cancel, reactivate |
+| [Gordon](/manuals/subscription-billing/plans/gordon.md) | **Manage** | Upgrade, downgrade, disable or enable auto-renewal |
+| [Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md) | **Manage** | Cancel, re-enable renewal |
+| [Docker Hardened Images](/manuals/subscription-billing/plans/dhi.md) | **Manage** | Add or remove repositories, disable or enable auto-renewal |
+| [Docker Verified Publisher](/manuals/subscription-billing/plans/docker-verified-publisher.md) | **Manage** | Upgrade or downgrade, add or remove consuming domains, disable or enable auto-renewal |
 
-> [!TIP]
-> Billing cycle details vary from plan to plan. Learn more about usage, downgrading, or canceling plans
-> from the relevant
-> [product page](/manuals/subscription-billing/plans/_index.md).
-
-## View your credits
-
-Docker displays available account credits in the billing portal. Credits
-offset eligible usage automatically before Docker charges your payment
-method. To review credit balance and applied credits, see
+To review credits, see
 [Credits](/manuals/subscription-billing/manage/_index.md#credits).
-
-Credits apply to
-[Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md).
-When you sign up for Docker Agentic Platform, Docker adds a one-time
-promotional credit to your account. This credit is non-recurring,
-doesn't expire, and applies to cloud compute usage only. It doesn't
-apply to inference, which you pay for through your own API keys.
 
 ## Sales-led products
 

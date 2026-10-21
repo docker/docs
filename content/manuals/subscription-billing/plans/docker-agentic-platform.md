@@ -94,7 +94,7 @@ date.
 
 ## Next steps
 
-- To add or cancel a plan, see
+- To add a plan, see
   [Manage plans](/manuals/subscription-billing/manage/plans.md)
 - To track usage across plans, see
   [Usage](/manuals/subscription-billing/manage/_index.md#usage)

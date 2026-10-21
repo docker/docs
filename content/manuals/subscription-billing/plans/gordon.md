@@ -21,7 +21,7 @@ aliases:
 - Gordon Max is for power users who rely on Gordon throughout their workflow. It offers a significantly higher usage allowance than Plus.
 - Gordon Ultra is for developers with the highest usage needs. It provides the maximum monthly allowance available on a self-serve plan.
 
-To upgrade to a Gordon paid plan, see [Manage plans](/manuals/subscription-billing/manage/plans.md).
+To subscribe to a Gordon paid plan, see [Manage plans](/manuals/subscription-billing/manage/plans.md). To move between paid tiers, see [Upgrade](#upgrade).
 
 ## Usage
 

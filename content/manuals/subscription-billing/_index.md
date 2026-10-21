@@ -1,9 +1,13 @@
 ---
-title: Subscription and billing
+title: Docker subscriptions and billing
 linkTitle: Subscription and billing
-description: Manage Docker subscriptions, plans, billing, and payments.
+description: >-
+  Learn about Docker subscription plans, billing models, payment methods,
+  invoices, usage, credits, taxes, and how to manage plan changes in Docker
+  Home.
 keywords:
-  subscription, billing, docker plans, payments, invoices, pricing, top up,
+  docker subscription, docker billing, docker plans, billing models, pricing,
+  payment methods, invoices, usage, credits, taxes, auto-renewal, plan upgrades,
   add-ons, seats, licenses, minutes
 weight: 20
 params:
@@ -16,66 +20,57 @@ aliases:
   - /docker-hub/billing/faq/
   - /billing/docker-hub-pricing/
 grid:
-  - title: Explore plans
+  - title: Plans
     description: >-
-      Browse available Docker plans and add-ons for individuals, teams, and
-      organizations.
+      Compare billing models and tiers for Docker, Docker Hardened Images,
+      Gordon, Docker Agentic Platform, AI Governance, and DVP.
     link: /subscription-billing/plans/
     icon: chart-bar
-  - title: Manage billing
+  - title: Manage plans
     description: >-
-      Manage payment methods, invoices, credits, and billing details in the
-      billing portal.
+      Subscribe to a new plan, upgrade an active plan, or cancel auto-renewal.
+    link: /subscription-billing/manage/plans/
+    icon: shopping-cart
+  - title: Billing overview
+    description: >-
+      Open Billing in Docker Home to review active plans, usage, costs, and
+      credits for an account.
     link: /subscription-billing/manage/
     icon: credit-card
+  - title: Payment methods
+    description: >-
+      Add or update a card, US bank account, or Stripe Link, or set up pay by
+      invoice for annual organization plans.
+    link: /subscription-billing/manage/payment-method/
+    icon: banknotes
+  - title: Invoices
+    description: View billing history and download past invoices.
+    link: /subscription-billing/manage/history/
+    icon: receipt-percent
+  - title: 3D Secure authentication
+    description: Learn how 3DS works and how to troubleshoot card verification.
+    link: /subscription-billing/manage/3d-secure/
+    icon: shield-check
 ---
 
-A Docker plan is a subscription tied to an individual account, an organization
-account, or a specific product. When you upgrade a plan, you expand your
-usage entitlements and feature sets. You can also top up some plans,
-extending usage without changing your plan type.
+> [!TIP]
+>
+> Compare plan features and prices on the
+> <a href="https://www.docker.com/pricing/" id="dkr_docs_index_pricing" class="link" rel="noopener">Docker pricing page</a>.
 
-## Docker plans
+Docker subscriptions determine the products, features, and usage included with
+an individual account or organization. This section explains the available
+plans and how to manage subscriptions and billing.
 
-The following table summarizes the available plans.
+Use these docs to:
 
-| Plans | Billing model | Types |
-| --- | --- | --- |
-| [Docker](/manuals/subscription-billing/plans/docker.md) | Flat-rate plans for personal and organization accounts | Docker Personal, Docker Pro, Docker Team, Docker Business |
-| [Docker Hardened Images (DHI)](/manuals/subscription-billing/plans/dhi.md) | Annual plans billed per repository. DHI Community is free. | DHI Community, DHI Select, DHI Enterprise |
-| [Gordon](/manuals/subscription-billing/plans/gordon.md) | Monthly plans that raise your Gordon usage allowance | Gordon Plus, Gordon Max, Gordon Ultra |
-| [Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md) | Pay-as-you-go cloud compute, billed monthly | Pay-as-you-go |
-| [AI Governance](/manuals/subscription-billing/plans/ai-governance.md) | Licenses purchased through Docker sales. <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_index_aigov" class="link" rel="noopener">Contact sales</a> to add more. | AI Governance |
-| [Docker Verified Publisher (DVP)](/manuals/subscription-billing/plans/docker-verified-publisher.md) | Flat-rate annual plans. DVP Growth lets you add consuming domains in blocks of 25. | DVP Starter, DVP Growth |
-
-Docker plans that upgrade your account (Docker Pro, Team, and Business) cover
-most use cases. Some product plans require an upgraded Docker account. Others
-let you subscribe without one. For details, see
-[Plans](/manuals/subscription-billing/plans/_index.md).
-
-## Top up your plan
-
-Plans come with usage entitlements that can be extended without upgrading to
-a different plan.
-
-| Unit | Description | Examples |
-| --- | --- | --- |
-| [Seats](/manuals/accounts/organization/manage/manage-seats.md) | Each seat extends entitlements to one more member. | Docker Team, Docker Business |
-| [Licenses](/manuals/accounts/organization/manage/manage-licenses.md) | Access to specific products or features. | AI Governance, Docker Offload |
-| [Minutes](/manuals/subscription-billing/plans/docker.md#docker-build-cloud-minutes) | Build and test runtime capacity, sold in blocks and consumed within the billing period. | Docker Build Cloud, [Testcontainers Cloud](/manuals/subscription-billing/plans/docker.md#testcontainers-cloud-minutes) |
-| [Repositories](/manuals/subscription-billing/plans/dhi.md) | Additional container repositories covered by security scanning and analysis features. | DHI |
-| [Consuming domains](/manuals/subscription-billing/plans/docker-verified-publisher.md#add-consuming-domains) | Additional consuming domains tracked in publisher analytics, sold in blocks of 25. | DVP Growth |
-
-## Manage your plans
-
-To subscribe to a new plan or upgrade an active plan, see
-[Manage plans](/manuals/subscription-billing/manage/plans.md). See
-[Docker plans](/manuals/subscription-billing/plans/docker.md) to learn about
-Docker Team, Business, and Pro. You can also
-<a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_index_sales" class="link" rel="noopener">contact sales</a>.
-
-To update payment methods, review usage and credits, or download invoices, see
-[Manage billing](/manuals/subscription-billing/manage/_index.md).
+- Compare Docker account plans and product-specific plans, including their
+  billing models, usage entitlements, and available add-ons. You can also
+  review Docker Desktop licensing requirements.
+- Purchase a plan and manage an active subscription by upgrading, downgrading,
+  adding seats or usage, managing auto-renewal, or canceling the plan.
+- Manage payment methods and billing details, review invoices and taxes, and
+  track usage, costs, and credits for an account in Docker Home.
 
 ## Next steps
 
