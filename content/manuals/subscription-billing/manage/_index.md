@@ -10,11 +10,11 @@ grid:
     icon: shopping-cart
     link: /subscription-billing/manage/plans/
   - title: Add or update a payment method
-    description: Add or update a payment method for your personal account or organization.
+    description: Add or update a payment method for your individual account or organization.
     icon: credit-card
     link: /subscription-billing/manage/payment-method/
   - title: Update billing information
-    description: Update billing information for your personal account or organization.
+    description: Update billing information for your individual account or organization.
     icon: pencil-square
     link: /subscription-billing/manage/details/
   - title: View billing history
@@ -36,7 +36,7 @@ Docker Home. Billing is scoped to the account you
 select. To manage billing:
 
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your
-   personal account or organization.
+   individual account or organization.
 1. Select **Billing**.
 1. Select the page you want in the sidebar, or stay on **Overview**.
 
