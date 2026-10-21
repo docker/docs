@@ -2,7 +2,7 @@
 title: Use Git with sandboxes
 linkTitle: Git workflows
 weight: 10
-description: Choose a Git workspace mode and manage branches, parallel tasks, and signed commits with Docker Sandboxes.
+description: Choose where your Git checkout lives and manage branches, parallel tasks, and signed commits with Docker Sandboxes.
 keywords: docker sandboxes, sbx, git, clone mode, direct mode, worktrees, branches, commit signing
 ---
 
@@ -12,23 +12,38 @@ To copy a sandbox filesystem between environments, see
 [Move a sandbox](../cloud/move.md). Host mounts and clone-mode volumes are not
 included in that snapshot.
 
-Sandboxes support three approaches for working with Git repositories. The
-right choice depends on whether you want branch isolation and whether you
-plan to run tasks in parallel:
+Choose where your checkout lives based on how you want to review and run the
+agent's changes:
 
-|                           | Direct mode      | Clone mode (`--clone`)       | Host worktree                 |
-| ------------------------- | ---------------- | ---------------------------- | ----------------------------- |
-| Branch management         | You, on the host | Agent, inside the clone      | You, on the host              |
-| Changes visible on host   | Immediately      | After fetch or agent push    | Immediately                   |
-| Agent can use Git         | Yes              | Yes                          | No                            |
-| Parallelism               | No               | Multiple agents, one sandbox | One sandbox per parallel task |
-| Mode fixed at create time | No               | Yes                          | —                             |
+- Share a host checkout with [direct mode](#direct-mode) to see edits in your
+  local editor as they happen. A [host worktree](#host-worktree) gives a task
+  its own branch and directory while keeping edits visible on the host.
+- Use [clone mode](#clone-mode) to give the agent a separate checkout based on
+  your local repository. Fetch or push committed work to bring it back.
+- Use a [mountless sandbox](#mountless-sandbox) to clone repositories inside
+  the sandbox without attaching a host workspace. Push branches to a Git
+  remote to share the results.
+
+| Checkout | Changes visible in host checkout | Agent can use Git |
+| --- | --- | --- |
+| Direct mount | Immediately | Yes |
+| Mounted host worktree | Immediately, in the worktree | No |
+| Clone mode (`--clone`) | After checking out or merging a fetched branch | Yes |
+| Mountless sandbox | After pulling committed work from a Git remote | Yes |
+
+For simultaneous tasks, use a separate worktree or clone for each task.
+Branches alone don't isolate edits in a shared working directory. Worktrees
+inside one sandbox share its tools and services. Use separate sandboxes when
+tasks also need independent environments.
 
 ## Direct mode
 
-The simplest approach. The sandbox mounts your host working tree directly —
-the agent edits files in place and changes appear immediately. You manage
-branches yourself.
+The sandbox mounts your host working tree directly. The agent edits files in
+place, and changes appear immediately. Both you and the agent can use Git,
+so agree on who manages branches and commits. Switching branches from either
+side changes the files both sides see.
+
+To manage Git operations from the host:
 
 1. Check out the branch you want to work on:
 
@@ -52,10 +67,8 @@ branches yourself.
    $ git push -u origin feat/my-feature
    ```
 
-Because the sandbox mounts your working tree, switching branches on the host
-also changes what the agent sees. This makes direct mode well-suited for
-focused, single-branch work where you're collaborating with the agent
-turn-by-turn.
+Direct mode suits focused, single-branch work where you collaborate with the
+agent turn-by-turn.
 
 ## Clone mode
 
@@ -68,7 +81,7 @@ access. The sandbox clone is not a Git worktree linked to your host checkout.
 A single clone-mode sandbox can hold multiple branches and worktrees for
 parallel tasks. The `--clone` flag creates the clone, but it doesn't separate
 one task from another. To keep parallel tasks isolated, instruct your agent tool
-to create a separate branch or worktree for each task.
+to create a separate worktree or clone for each task.
 
 > [!NOTE]
 > `--clone` is a create-time flag and cannot be changed on an existing
@@ -136,11 +149,12 @@ It's only reachable while the sandbox is running:
    ```
 
 2. Dispatch each independent task to a separate background session. Your agent
-   tool may use branches or worktrees to keep their changes separate. If it
-   doesn't, add a project instruction such as:
+   tool controls how it separates their working directories. To require a
+   separate worktree for each task, add a project instruction such as:
 
    ```markdown
-   Always start each task on its own git branch before making changes.
+   For each simultaneous task, create a separate Git worktree with its own branch
+   and make all changes for that task in that worktree.
    ```
 
 3. Fetch all branches when the agents are done:
@@ -186,6 +200,36 @@ yourself after reviewing the changes.
    $ git push -u origin feat/my-feature
    $ gh pr create
    ```
+
+## Mountless sandbox
+
+A mountless sandbox has no host workspace attached. Clone repositories inside
+it to keep the checkout, dependencies, and development tools in the sandbox.
+Files persist across stops and restarts, but removing the sandbox deletes them.
+
+1. Create a named sandbox without a workspace path, then attach:
+
+   ```console
+   $ sbx create --name my-project claude
+   $ sbx run --name my-project
+   ```
+
+   Omitting the path from `sbx create` creates a mountless sandbox. Omitting
+   it from `sbx run claude` mounts your current host directory instead.
+   See [Choose a workspace](../usage.md#choose-a-workspace).
+
+2. Ask the agent to clone your repository inside the sandbox and create a
+   branch before editing. For simultaneous tasks, ask it to create a separate
+   worktree for each task.
+
+3. Review and commit the changes inside the sandbox, then push the branch to
+   your Git remote. You can fetch that branch in a host checkout or review it
+   in a pull request. Push any work you want to keep before removing the sandbox.
+
+For running the application and opening a preview from your host browser, see
+[Develop and test locally](development.md#accessing-services-in-the-sandbox).
+To work with several host repositories in one sandbox instead, see
+[Multiple workspaces](../usage.md#multiple-workspaces).
 
 ## Git ignore rules
 
