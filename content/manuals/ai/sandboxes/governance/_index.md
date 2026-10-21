@@ -8,73 +8,72 @@ aliases:
   - /ai/sandboxes/governance/monitor-and-enforce/
 ---
 
-Sandbox governance controls what sandboxes can access over the network, on the
-filesystem, and through MCP. For MCP setup and server registration, see
-[MCP gateway](../mcp-gateway.md). Governance has two parts:
-
-- **Local policy** is the policy you set on your machine with the `sbx policy`
-  CLI. It lets individual developers customize which domains their sandboxes
-  can reach. See [Local policy](local/_index.md).
-- **Organization governance** is policy, sign-in enforcement, and audit logs
-  that administrators set for organization members, either organization-wide
-  or for selected teams. Organization policy is configured centrally in Docker
-  Home. Network, filesystem, and MCP policies can also be managed through the
-  [Governance API](/reference/api/ai-governance/). See
-  [Organization governance](organization/_index.md).
-
-Both apply to local sandboxes. Cloud sandboxes use separate network policies.
-See [Cloud network policy](../cloud/network-policy.md) and Docker Agentic
-Platform [network policies](/manuals/agentic-platform/policies.md).
-
-Organization policies apply to members who hold an AI Governance license.
-Developer machines must run sbx 0.35.0 or later to enforce HTTP method and
-path rules.
-
-When an organization policy is enforced for you, access is default deny: a
-request that no organization allow rule matches is blocked, and a matching deny
-rule takes precedence over any allow rule. Governed MCP activity is default
-deny in the same way. Without organization governance, a request that no rule
-matches is handled according to your local preset. See
-[Local policy](local/_index.md).
-
-Administrators can also require developers to sign in as members of their
-organization before using sandboxes at all.
-[Sign-in enforcement](organization/sign-in-enforcement.md) is deployed
-through endpoint management and ensures developers can't bypass organization
-policy by using a personal account.
+Agents in sandboxes work on their own. They install packages, call APIs, and
+use tools without asking you first. Governance lets an agent work freely within
+limits you set. It has two parts: local policy, which applies to one machine,
+and organization governance, which applies across an organization and also
+records what sandboxes did in audit logs.
 
 > [!NOTE]
-> Organization governance requires a Docker AI Governance subscription.
-> [Contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
-> to request access.
+> This section covers sandboxes that run on your machine. Cloud sandboxes use
+> the same kinds of allow and deny rules, but they don't use local policy or
+> organization policy. They use
+> [cloud network policy](../cloud/network-policy.md), which is stored in your
+> Docker account and managed with `sbx --cloud policy` or in the Docker Agentic
+> Platform [Console](/manuals/agentic-platform/policies.md).
 
-## Resource model
+## Who sets the rules
 
-Docker sandbox governance is built around two resource types: **policies** and
-**rules**.
+The two parts of governance differ in who sets the rules and who the rules
+apply to.
 
-A **policy** is a named collection of rules that controls sandbox access.
-Policies exist at two levels:
+### You, with local policy and kits
 
-- **Local**: configured per machine using the `sbx policy` CLI. Applies to
-  sandboxes on that machine only.
-- **Organization**: configured in Docker Home or through the
-  [Governance API](/reference/api/ai-governance/). Applies to licensed members
-  of the organization. An organization can have several policies, each applying
-  either org-wide or to specific teams. See
-  [Policy scope](organization/policies/_index.md#policy-scope).
+[Local policy](local/_index.md) is the policy you set on your machine with the
+`sbx policy` CLI. You start from a preset, then allow or block the network
+destinations your sandboxes need. Local policy is available to everyone on their
+machine.
 
-When an organization policy is enforced for you, only organization allow rules
-can grant access. Local and kit-defined deny rules still apply on top. See
-[Precedence](organization/policies/_index.md#precedence).
+The kits your sandboxes use, including the built-in agent kits, can add network
+rules too, such as the API endpoints an agent needs. Kit rules work like the
+rules you add yourself.
 
-A **rule** is the unit of access control within a policy. Each rule has:
+### Your organization, with organization governance
 
-- **Name**: a human-readable label
-- **Actions**: the type of access the rule controls
-- **Resources**: the targets the rule matches against
-- **Decision**: `allow` or `deny`
+With [organization governance](organization/_index.md), administrators set
+policies for the members of their organization who hold an AI Governance
+license. Organization policies control network access, the host paths
+sandboxes can mount, and MCP activity. Organization governance requires an
+[AI Governance plan](/manuals/subscription-billing/plans/ai-governance.md).
 
-Each policy covers one kind of access: network or filesystem. MCP policies use
-Cedar statements written in the `MCP` namespace instead of the network and
-filesystem rule format.
+## How governance works
+
+Governance works through rules. A rule allows or denies one kind of access,
+such as a network destination, and a policy is a set of rules. When a sandbox
+tries to reach a network destination, the request is checked against your
+rules. With organization policy, the same check also applies when a sandbox
+mounts a host path or uses an MCP server.
+
+The rules are enforced outside the sandbox, so an agent running inside it
+can't change or bypass them. For where network rules are enforced as a request
+leaves the sandbox, see [Networking](../architecture.md#networking).
+
+Local policy and organization policy both follow this model. For how each one
+works, see [How local policy works](local/_index.md#how-local-policy-works)
+and
+[How organization governance works](organization/_index.md#how-organization-governance-works).
+
+Local policy, kit rules, and organization policy combine differently depending
+on whether an organization policy is enforced for you. For more details, see
+[How organization policy relates to local and kit rules](organization/policies/_index.md#how-organization-policy-relates-to-local-and-kit-rules).
+
+## Get started
+
+If you're a developer, start with
+[Try out local policy](local/try-it-out.md), an example that allows and blocks
+destinations for one sandbox.
+
+If you're an administrator, start with
+[Get started with organization governance](organization/get-started.md) to set
+up licenses, sign-in enforcement, policies, and audit logs for your
+organization.

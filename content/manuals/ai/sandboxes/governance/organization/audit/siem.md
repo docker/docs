@@ -1,5 +1,5 @@
 ---
-title: SIEM forwarding
+title: Forward audit events to a SIEM
 linkTitle: Forward to a SIEM
 weight: 30
 description: Forward Docker AI Governance audit events to Splunk, Dynatrace, Datadog, Sumo Logic, or CrowdStrike Falcon Next-Gen SIEM.
@@ -8,72 +8,81 @@ aliases:
   - /ai/sandboxes/governance/audit/siem/
 ---
 
-{{< summary-bar feature_name="AI Governance Audit Logs" >}}
+{{< summary-bar feature_name="AI Governance" >}}
 
-Docker can forward audit events to your security information and event
-management (SIEM) system, letting you centralize Docker governance data
-alongside other security signals. Docker verifies the endpoint is reachable
-with the supplied credential before saving.
+Send your Docker AI Governance audit events to your security information and
+event management (SIEM) system to centralize Docker governance data alongside
+other security signals. How you do it depends on where your audit records are
+delivered:
 
-## Supported destinations
+- With Docker Cloud delivery, Docker forwards events directly to a supported
+  SIEM destination. For more details, see
+  [Forward events from Docker Cloud](#forward-events-from-docker-cloud).
+- With local disk delivery, your own log shipper collects the audit files from
+  each machine. For more details, see
+  [Collect local audit files with a log shipper](#collect-local-audit-files-with-a-log-shipper).
 
-| Destination                      | Description                                                     |
-| -------------------------------- | --------------------------------------------------------------- |
-| Splunk Cloud (HEC)               | Hosted Splunk using the HTTP Event Collector                    |
-| Dynatrace                        | Dynatrace Log Management using the Log Ingest API               |
-| Datadog                          | Datadog Logs using the HTTP log intake API                      |
-| Sumo Logic                       | Sumo Logic using an HTTP Source                                 |
-| CrowdStrike Falcon Next-Gen SIEM | Falcon Next-Gen SIEM using an HEC / HTTP Event Connector        |
+For how the two delivery modes differ, see
+[Where records go](_index.md#where-records-go).
 
-## Before you begin
+## Forward events from Docker Cloud
 
-SIEM forwarding requires Docker Sandboxes
-[0.39.0](/manuals/ai/sandboxes/release-notes.md) or later. Earlier versions
-don't deliver audit records to a SIEM destination, even when forwarding is
-configured. Update Docker Sandboxes before enabling a new destination.
+Docker forwards audit events from Docker Cloud to the SIEM destinations you
+add in Docker Home.
+
+### Supported destinations
+
+| Destination                                                                                          | Connects through           | What you need                                                                            |
+| ---------------------------------------------------------------------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------- |
+| [Splunk Cloud](https://docs.splunk.com/)                                                             | HTTP Event Collector (HEC) | HEC ingest URL and an HEC token. Optionally, a Splunk index name.                        |
+| [Dynatrace](https://docs.dynatrace.com/)                                                             | Log Ingest API             | Log Ingest API URL and an API token with the `logs.ingest` scope.                        |
+| [Datadog](https://docs.datadoghq.com/)                                                               | HTTP log intake API        | Logs intake URL for your Datadog site and an API key.                                    |
+| [Sumo Logic](https://www.sumologic.com/help/)                                                        | HTTP Source                | HTTP Source URL and an auth token from an HTTP Logs & Metrics source.                    |
+| [CrowdStrike Falcon Next-Gen SIEM](https://library.humio.com/logscale-api/log-shippers-hec-raw.html) | HEC / HTTP Event Connector | API URL and an API key from the connector. Append `/raw` to the API URL when you add it. |
+
+### Before you begin
+
+You need organization owner access, or a
+[custom role](/manuals/security/roles-and-permissions/custom-roles/_index.md)
+with AI Governance audit permissions.
 
 SIEM forwarding requires Docker Cloud delivery to be enabled for your
-organization. If you haven't already, enable it under **AI Platform** >
-**Audit logs** > **Audit delivery** before configuring a SIEM destination. See
-[Configure audit delivery](configure.md).
+organization. If you haven't already, enable it under **AI Platform** > **Audit
+logs** > **Audit delivery** before configuring a SIEM destination. For more
+details, see [Configure audit delivery](configure.md).
 
-Gather the endpoint URL and credential from your SIEM before configuring
-forwarding. Some destinations require you to create a connector or source
-first:
+Gather the endpoint URL and credential your destination needs, listed in
+[Supported destinations](#supported-destinations). Some destinations require you
+to create a connector or source first.
 
-- **Splunk Cloud**: HEC ingest URL and an HEC token. Optionally, a Splunk index
-  name. See [Splunk documentation](https://docs.splunk.com/).
-- **Dynatrace**: Log Ingest API URL and an API token with the `logs.ingest`
-  scope. See [Dynatrace documentation](https://docs.dynatrace.com/).
-- **Datadog**: Logs intake URL for your Datadog site and an API key. See
-  [Datadog documentation](https://docs.datadoghq.com/).
-- **Sumo Logic**: HTTP Source URL and an auth token from an HTTP Logs &
-  Metrics source. See [Sumo Logic documentation](https://www.sumologic.com/help/).
-- **CrowdStrike Falcon Next-Gen SIEM**: API URL and an API key from an HEC /
-  HTTP Event Connector. Append `/raw` to the API URL when you add the
-  destination. See [CrowdStrike documentation](https://library.humio.com/logscale-api/log-shippers-hec-raw.html).
+### Add a SIEM destination
 
-## Add a SIEM destination
-
-1. Sign in to [Docker Home](https://app.docker.com/).
-1. Open your organization.
+1. Sign in to [Docker Home](https://app.docker.com) and select your
+   organization.
 1. Go to **AI Platform** > **Audit logs**.
 1. Open **Export & Connectors**.
 1. Select **Add destination**.
 1. Select your destination and complete the form.
 1. Select **Save**.
 
-If verification fails, check that the URL and credential are correct and that
-the endpoint is accessible from the internet.
+Docker verifies the endpoint is reachable with the supplied credential before
+saving. If verification fails, check that the URL and credential are correct
+and that the endpoint is accessible from the internet.
 
-## Manage destinations
+### Edit or delete a destination
 
 From the **SIEM forwarding** list, select the menu next to a destination to
 edit or delete it. The edit form lets you update credentials and toggle
 forwarding on or off for that destination. Deleting a destination permanently
-removes the endpoint and its stored credential and cannot be undone.
+removes the endpoint and its stored credential and can't be undone.
 
-## Collect records with a SIEM
+## Collect local audit files with a log shipper
+
+With local disk delivery, each machine writes its audit records to `.jsonl`
+files in its own audit directory. For the directory on each operating system
+and how files are named, see
+[Where records are stored](_index.md#where-records-are-stored). For how to
+turn on local disk delivery, see [Configure audit delivery](configure.md).
 
 Point your log shipper at the audit directory and configure it to collect
 `.jsonl` files only. Tools such as the Splunk Universal Forwarder,

@@ -10,9 +10,6 @@ rule that also names an HTTP method and URL path, so a policy can allow reads
 from an API without allowing writes to it. For how to write destinations, see
 [Destinations](#destinations).
 
-Developer machines must run sbx 0.35.0 or later to enforce HTTP method and path
-rules.
-
 ## HTTP method and path
 
 An HTTP rule names one or more methods, a destination, and path patterns. What
@@ -34,9 +31,10 @@ rule for each path.
 Every rule applies to at least one method. On the CLI, `--method ANY` covers
 every HTTP method. In the composer, select at least one method. A rule with no
 methods selected fails validation. For the methods you can select individually,
-see [Network rule fields](../organization/policies/network.md#network-rule-fields)
+see
+[What a network rule can match](../organization/policies/network.md#what-a-network-rule-can-match)
 for an organization policy and
-[HTTP method and path rules](../local/network-rules.md#http-method-and-path-rules)
+[Allow or block HTTP methods and paths](../local/network-rules.md#allow-or-block-http-methods-and-paths)
 for a local one.
 
 Path patterns follow the same wildcard rules as filesystem paths, where `*`
@@ -44,9 +42,8 @@ matches within one path segment and `**` matches any depth. A pattern without a
 wildcard matches that path exactly, so `/repos` matches `/repos` and nothing
 below it. Every pattern must start with `/` and can't contain a query string, a
 fragment, or a `..` segment. A local rule's path must also be canonical, so it
-can't contain percent-encoding, control characters, repeated or trailing
-slashes, or a `.` segment. For the full list, see
-[HTTP method and path rules](../local/network-rules.md#http-method-and-path-rules).
+can't contain percent-encoding, control characters, surrounding whitespace,
+repeated or trailing slashes, or a `.` segment.
 
 HTTP requests are evaluated against both layers. A network rule sets the
 baseline for a host, and HTTP rules adjust individual methods and paths within
@@ -77,7 +74,7 @@ hostnames, CIDR ranges, or ports. UDP requires
 [experimental outbound UDP](../local/network-rules.md#allow-outbound-udp).
 ICMP is blocked.
 
-**Hostname patterns**
+### Hostname patterns
 
 | Pattern               | Example           | Matches                                                      |
 | --------------------- | ----------------- | ------------------------------------------------------------- |
@@ -89,11 +86,11 @@ ICMP is blocked.
 `example.com` and `*.example.com` don't cover each other. Specify both if you
 need to match the root domain and its subdomains.
 
-**CIDR ranges**
+### CIDR ranges
 
 Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
 `2001:db8::/32`.
 
 For local and organization policy configuration, see
 [Manage local network rules](../local/network-rules.md) and
-[Network access policies](../organization/policies/network.md).
+[Organization network access policies](../organization/policies/network.md).

@@ -15,8 +15,9 @@ control future `sbx mcp add` operations. Use-time rules control tool calls,
 gateway meta-tools, resource reads, and prompt retrieval from servers that are
 already registered or loaded.
 
-Use this reference with [MCP access policies](../organization/policies/mcp.md) for
-common policy patterns. For the Cedar language, see the
+Use this reference with
+[Organization MCP access policies](../organization/policies/mcp.md) for common
+policy patterns. For the Cedar language, see the
 [Cedar documentation](https://docs.cedarpolicy.com/).
 
 ## Evaluation model
@@ -32,7 +33,7 @@ Governed MCP activity is default deny. A request is blocked unless a matching
 permit annotated with `@requireApproval`.
 
 For details about when Docker Sandboxes evaluates MCP policies for a user, see
-[Govern the server lifecycle](../organization/policies/mcp.md#govern-the-server-lifecycle).
+[Where MCP policy applies](../organization/policies/mcp.md#where-mcp-policy-applies).
 
 An actionless `permit` matches every MCP action that reaches Cedar evaluation:
 
@@ -87,8 +88,8 @@ and are advisory.
 | `resource.destructive`     | Tools             | Defaults to `true` when a tool doesn't declare it.                                                                                                    |
 | `resource.idempotent`      | Tools             | Defaults to `false` when a tool doesn't declare it.                                                                                                   |
 | `resource.openWorld`       | Tools             | Defaults to `true` when a tool doesn't declare it.                                                                                                    |
-| `resource.type`            | Servers           | Use for server registration rules. See [Server type values](#server-type-values).                                                                     |
-| `resource.identityURL`     | Servers           | Canonical server identity. The value depends on the registration type. See [Server identity values](#server-identity-values).                         |
+| `resource.type`            | Servers           | Use for server registration rules. For more details, see [Server type values](#server-type-values).                                                                     |
+| `resource.identityURL`     | Servers           | Canonical server identity. The value depends on the registration type. For more details, see [Server identity values](#server-identity-values).                         |
 | `resource.requiresOAuth`   | Servers           | Use for server registration rules.                                                                                                                    |
 | `resource.requiresNetwork` | Servers           | Use for server registration rules.                                                                                                                    |
 | `resource.command`         | Servers           | Local stdio server command, such as `npx` or `docker`, when available. Empty for remote servers and registrations that don't include command details. |

@@ -22,8 +22,7 @@ resolver, which enforces network policy.
 Run `sbx policy ls` to see the active network rules for your installation.
 Rules can be customized per machine with the `sbx policy` CLI, or managed
 centrally across your organization. Org-level rules take precedence over local
-rules. See
-[Network access policies](../governance/_index.md).
+rules. See [Governance](../governance/_index.md).
 
 ## Workspace defaults
 

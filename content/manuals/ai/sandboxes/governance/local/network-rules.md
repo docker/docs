@@ -6,10 +6,13 @@ description: Allow, deny, and remove local network rules for sandboxes on your m
 keywords: docker sandboxes, local policy, network rules, sbx policy allow, sbx policy deny, HTTP rules, UDP
 ---
 
-A rule covers a destination host. It can also name HTTP methods and paths to
-narrow the match to part of that host.
+Local network rules allow or block destinations on top of your
+[preset](_index.md#start-from-a-preset). You can add rules for all sandboxes or
+for one sandbox, narrow a rule to HTTP methods and paths, and remove rules you
+no longer need. For the host patterns a rule accepts, see
+[Network and HTTP rule syntax](../reference/network-rules.md#destinations).
 
-## Network rules
+## Allow or block a destination
 
 Use [`sbx policy allow`](/reference/cli/sbx/policy/allow/) and
 [`sbx policy deny`](/reference/cli/sbx/policy/deny/) to add or restrict access
@@ -21,6 +24,14 @@ $ sbx policy allow network api.anthropic.com
 $ sbx policy deny network ads.example.com
 ```
 
+Specify multiple hosts in one command with a comma-separated list:
+
+```console
+$ sbx policy allow network "api.anthropic.com,*.npmjs.org,*.pypi.org"
+```
+
+## Allow or block a destination for one sandbox
+
 Pass `--sandbox <name>` to scope a rule to one sandbox:
 
 ```console
@@ -28,9 +39,8 @@ $ sbx policy allow network --sandbox my-sandbox api.example.com
 $ sbx policy deny network --sandbox my-sandbox ads.example.com
 ```
 
-As of v0.38.0, you can also set per-sandbox deny rules at creation time with
-`--deny-network` on `sbx create` or `sbx run`, instead of adding them after the
-fact:
+You can also add deny rules for a sandbox when you create it, with
+`--deny-network` on `sbx create` or `sbx run`:
 
 ```console
 $ sbx create --deny-network ads.example.com claude .
@@ -38,29 +48,23 @@ $ sbx run --deny-network ads.example.com claude
 ```
 
 Pass the flag multiple times to deny more than one host. Rules added this way
-appear in `sbx policy ls <name>` and can be removed with
-`sbx policy rm network --sandbox <name> --resource <host>`.
+appear in `sbx policy ls <name>`, like any other rule scoped to the sandbox.
 
-Specify multiple hosts in one command with a comma-separated list:
-
-```console
-$ sbx policy allow network "api.anthropic.com,*.npmjs.org,*.pypi.org"
-```
-
-Remove a rule by resource or by rule ID:
+To block a destination that a kit allows, add a deny rule for the sandbox that
+uses the kit. A deny rule takes precedence over the kit's allow rule:
 
 ```console
-$ sbx policy rm network --resource ads.example.com
-$ sbx policy rm network --id 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
+$ sbx policy deny network --sandbox my-sandbox openrouter.ai
 ```
 
-To remove a sandbox-scoped rule, pass `--sandbox <name>`:
+Removing a sandbox also removes the rules scoped to it.
 
-```console
-$ sbx policy rm network --sandbox my-sandbox --resource api.example.com
-```
+## Allow or block HTTP methods and paths
 
-## HTTP method and path rules
+The rules in the previous sections match a whole host. An HTTP rule matches
+specific HTTP methods and paths on a host instead, so you can allow or block
+specific API requests. For example, you can let an agent read from an API
+without letting it write to it.
 
 Add `--method` to an allow or deny rule to match specific HTTP methods on a
 host, and `--path` to restrict it to part of the host's URL space:
@@ -105,7 +109,7 @@ the host on its own, without a scheme, so an HTTP rule takes `api.example.com`
 rather than `https://api.example.com`.
 
 A local HTTP rule takes a hostname. To match an IP address or a CIDR range,
-add a plain network rule for that destination instead.
+use a network rule without `--method` or `--path`.
 
 Deny rules take the same flags, which is the usual way to carve a method or
 path out of a broader allow:
@@ -115,32 +119,42 @@ $ sbx policy allow network api.example.com
 $ sbx policy deny network api.example.com --method POST --path '/admin/**'
 ```
 
-For how the two layers combine, see
-[HTTP rules](../reference/network-rules.md#http-method-and-path).
+For more details on how the two layers combine, see
+[HTTP method and path](../reference/network-rules.md#http-method-and-path).
 
-Remove an HTTP rule by naming the same qualifiers you added it with, or by
-rule ID:
-
-```console
-$ sbx policy rm network --resource api.github.com --method GET --path '/repos/org/project/**'
-$ sbx policy rm network --id 7f3a1c2e-4a73-4e05-bc9d-f2f9a4b50d67
-```
-
-List HTTP rules with `--type http`, or see them alongside network rules in a
-wide listing, where the `METHOD` and `PATH` columns are empty for rules that
-match a whole host:
-
-```console
-$ sbx policy ls --wide
-TYPE      METHOD   PATH
-network   -        -
-http      GET      /repos/org/project/**
-```
+To list only HTTP rules, run `sbx policy ls --type http`. In
+`sbx policy ls --wide`, the `METHOD` and `PATH` columns show `-` for rules that
+match a whole host.
 
 > [!NOTE]
 > `sbx policy check network` and `sbx policy log` don't evaluate or display
 > HTTP methods and paths. A check reports the decision for the host, which can
 > differ from the decision for a specific method and path on that host.
+
+## Remove a rule
+
+Remove a rule by resource or by rule ID:
+
+```console
+$ sbx policy rm network --resource ads.example.com
+$ sbx policy rm network --id 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
+```
+
+To remove a rule scoped to a sandbox, pass `--sandbox <name>`:
+
+```console
+$ sbx policy rm network --sandbox my-sandbox --resource api.example.com
+```
+
+To remove an HTTP rule, name the same method and path you added it with, or
+use its rule ID:
+
+```console
+$ sbx policy rm network --resource api.github.com --method GET --path '/repos/org/project/**'
+```
+
+To find a rule's ID, run `sbx policy ls --wide`. For more details, see
+[Inspect policy status and rules](inspect.md).
 
 ## Allow outbound UDP
 
@@ -178,12 +192,47 @@ $ sbx policy check network --protocol udp api.example.com:443
 
 The CLI warns if you save a UDP rule while UDP egress is disabled.
 
-## Troubleshooting
+## Set or reset the preset
 
-### An HTTP method or path is blocked on an allowed host
+You choose a preset the first time you run a sandbox. For more details, see
+[Start from a preset](_index.md#start-from-a-preset). To set the preset without
+the prompt, or to start over with a new one, use `sbx policy init` or `sbx
+policy reset`.
 
-A host that a network rule allows can still have individual methods or paths
-denied by an HTTP rule. Run `sbx policy ls --type http` to see which HTTP rules
-apply. `sbx policy check network` reports the decision for the host only, so it
-shows a host as allowed even when the specific request is denied. See
-[HTTP method and path rules](#http-method-and-path-rules).
+### Set the preset without the prompt
+
+In non-interactive environments such as CI pipelines or headless servers, the
+interactive prompt can't be displayed. Use `sbx policy init` to set the
+preset before running any other `sbx` commands:
+
+```console
+$ sbx policy init balanced
+```
+
+Available values are `allow-all`, `balanced`, and `deny-all`. `sbx policy init`
+only works before a preset is set. To change the preset after that, reset local
+policy.
+
+### Reset local policy
+
+To remove all custom rules and start fresh with a new preset, use
+`sbx policy reset`:
+
+```console
+$ sbx policy reset
+```
+
+This deletes the local policy store, restarts the daemon, and prompts you to
+choose a new preset. Running sandboxes stop when the daemon shuts down. Pass
+`--force` to skip the confirmation prompt:
+
+```console
+$ sbx policy reset --force
+```
+
+> [!WARNING]
+> `sbx policy reset` deletes all locally configured policy rules, including any
+> destinations you approved. Those destinations are requested again the next
+> time a sandbox reaches them. To pick up organization policy changes without
+> deleting local rules, use `sbx policy refresh` instead. For more details, see
+> [Organization policy changes aren't taking effect](../../troubleshooting.md#organization-policy-changes-arent-taking-effect).
