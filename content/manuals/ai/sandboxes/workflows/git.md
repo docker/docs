@@ -226,6 +226,11 @@ Files persist across stops and restarts, but removing the sandbox deletes them.
    your Git remote. You can fetch that branch in a host checkout or review it
    in a pull request. Push any work you want to keep before removing the sandbox.
 
+You can also create a mountless sandbox with an `sbxenv.yaml` environment file.
+Omit `workspace` and any `additionalWorkspaces` mounts, then run `sbx env run`.
+See [Sandbox environment files](../configuration/environment-files.md#workspace)
+for configuration options.
+
 For running the application and opening a preview from your host browser, see
 [Develop and test locally](development.md#accessing-services-in-the-sandbox).
 To work with several host repositories in one sandbox instead, see
