@@ -194,6 +194,11 @@ long: |-
     understand these headers; it simply puts them into the messages. Docker does
     not allow these headers to change any headers it sets for itself.
 
+    When pulling or pushing images, the daemon forwards only custom headers whose
+    names start with `X-Meta-` to the registry. For example, use
+    `"X-Meta-MyHeader": "MyValue"` when the header should be included in a
+    registry request.
+
     Alternatively, use the `DOCKER_CUSTOM_HEADERS` [environment variable](#environment-variables),
     which is available in v27.1 and higher. This environment-variable is experimental,
     and its exact behavior may change.
@@ -277,7 +282,7 @@ long: |-
     ```json
     {
       "HttpHeaders": {
-        "MyHeader": "MyValue"
+        "X-Meta-MyHeader": "MyValue"
       },
       "psFormat": "table {{.ID}}\\t{{.Image}}\\t{{.Command}}\\t{{.Labels}}",
       "imagesFormat": "table {{.ID}}\\t{{.Repository}}\\t{{.Tag}}\\t{{.CreatedAt}}",
@@ -629,4 +634,3 @@ experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
-
