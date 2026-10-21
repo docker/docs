@@ -216,9 +216,10 @@ Pass the cloud file path explicitly to avoid loading local settings from
 
 ### Automate setup with host commands
 
-Lifecycle commands run on your machine with your user privileges. In a cloud
-workflow, use them to prepare local files before uploading, upload a project after
-creation, or download results before removal.
+Lifecycle commands connect the cloud environment’s lifecycle to work on your
+machine. They’re useful when setup or cleanup depends on local files, tools, or
+credentials. Including those steps in the environment file makes the workflow
+repeatable, even when it spans your machine and the cloud sandbox.
 
 For example, add this block to the environment file to upload your project
 automatically instead of running the manual `sbx --cloud cp` step:
