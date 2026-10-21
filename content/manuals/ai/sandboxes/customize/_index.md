@@ -19,6 +19,13 @@ A kit can define the whole environment or add something to an existing one,
 such as a toolchain or your team's shared configuration. Package those choices
 once, then reuse them across projects and share them with your team.
 
+To keep the configuration for a sandbox in an editable, shareable file, use a
+[sandbox environment file](/manuals/ai/sandboxes/configuration/environment-files.md).
+It selects kits alongside workspace paths, resources, credentials, and lifecycle
+commands. Keep a tool's requirements in its kit so they follow the tool across
+environments. Use the environment file for the choices involved in setting up
+your sandbox.
+
 Docker recommends v3 kits. This section covers v3. For the supported v2
 format, see [Kits v2](/manuals/ai/sandboxes/customize/kits-v2.md).
 
@@ -81,13 +88,9 @@ combined environment.
 If the set includes a workload, you run the published kit with `sbx run`.
 If it contains only mixins, you add it to a workload with `--kit`.
 
-To share a combination without publishing another kit, list the workload and
-mixins in a [sandbox environment file](/manuals/ai/sandboxes/configuration/environment-files.md).
-Docker Sandboxes composes those kits when it creates the sandbox. An environment
-file can also configure the workspace and host resources. Choose a set when you
-want one published reference with a fixed list of components; the set records
-their image digests when you build it. You can also use a set in an environment
-file.
+An environment file can select individual kits or a published set. Choose a set
+when you want one published reference with a fixed list of components. The set
+records their image digests when you build it.
 
 See [Use kits](/manuals/ai/sandboxes/customize/use-kits.md) for how to run kits
 and add mixins. To customize and publish your own combination, see

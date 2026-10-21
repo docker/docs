@@ -24,6 +24,13 @@ A sandbox environment file captures the setup for a local or cloud sandbox in a
 same agent, tools, resources, and credentials without reproducing CLI flags and
 setup steps.
 
+Kits package software and declare what it needs to run. An environment file
+selects those kits and configures the sandbox that uses them, including its
+workspace, resources, credentials, and lifecycle commands. You can change or
+share that configuration without repackaging the tools. See
+[Kits](/manuals/ai/sandboxes/customize/_index.md) for how kits supply agents,
+tools, and their runtime requirements.
+
 > [!NOTE]
 > `sbx env` is experimental. The command interface and file format may change.
 
