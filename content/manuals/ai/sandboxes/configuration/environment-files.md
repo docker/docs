@@ -904,6 +904,10 @@ are host-global and remain after `sbx env rm`.
 
 Each server must set exactly one of `url` or `command`.
 
+To reuse servers already registered on the host, see
+[Load registered servers when creating an environment](../mcp-gateway.md#load-registered-servers-when-creating-an-environment)
+for a `postCreate` lifecycle example.
+
 ### `ports`
 
 `ports` publishes sandbox ports when the environment is created. Ports exposed
