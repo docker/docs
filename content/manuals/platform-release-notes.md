@@ -138,7 +138,7 @@ and subscriptions.
   now available. Administrators can purchase licenses through sales,
   [assign them to members](/manuals/accounts/organization/manage/manage-licenses.md),
   and enforce
-  [organization policies](/manuals/ai/sandboxes/governance/_index.md) for
+  [organization policies](/manuals/ai/sandboxes/governance/organization/policies/_index.md) for
   Docker AI products from Docker Home.
 
 ## 2026-03-03

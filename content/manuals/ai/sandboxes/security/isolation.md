@@ -47,10 +47,11 @@ directly with each other or share a network with your host. To reach a service
 running on the host through a policy-controlled connection, see
 [Accessing host services from a sandbox](../workflows/development.md#accessing-host-services-from-a-sandbox).
 
-All outbound TCP traffic passes through a proxy on your host that enforces the
-[network access policy](../governance/_index.md). The sandbox
-routes traffic through either a forward proxy or a transparent proxy depending
-on the client's configuration. Both enforce the network policy. Only the
+All outbound TCP traffic passes through a proxy on your host that enforces
+network policy. The sandbox routes traffic through either a forward proxy or a
+transparent proxy depending on the client's configuration. Both enforce the
+network policy. For how network policy is set, see
+[Governance](../governance/_index.md). Only the
 forward proxy [injects credentials](../configuration/credentials.md) for AI services.
 
 Outbound UDP is disabled by default. When you turn on

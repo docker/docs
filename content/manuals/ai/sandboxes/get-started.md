@@ -60,8 +60,8 @@ is already configured, the CLI uses it without prompting.
 
 To initialize the policy without an interactive prompt, run
 `sbx policy init balanced` before `sbx run`. See
-[Local policy](governance/local/_index.md) for the available presets
-and how to change an existing policy.
+[Start from a preset](governance/local/_index.md#start-from-a-preset) for the
+available presets and how to change an existing policy.
 
 Replace `claude` with the agent you want to use — see [Agents](agents/) for the
 full list.

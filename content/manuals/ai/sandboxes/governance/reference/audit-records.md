@@ -17,47 +17,47 @@ action.
 
 ## Common fields
 
-| Field              | Description                                                                                                      |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| `audit_event_id`   | Unique ID for the audit event.                                                                                   |
-| `timestamp`        | UTC time when Docker recorded the event.                                                                         |
-| `schema_version`   | Version of the record schema. Pin SIEM field mappings to this value.                                             |
-| `category`         | Event category, such as `AUDIT_CATEGORY_MANAGEMENT`, `AUDIT_CATEGORY_EVALUATION`, or `AUDIT_CATEGORY_EXECUTION`. |
-| `decision`         | Governance decision for evaluation records.                                                                      |
-| `username`         | The signed-in Docker user's Docker Hub username.                                                                 |
-| `user_email`       | The signed-in Docker user's email address.                                                                       |
-| `org_id`           | ID of the organization whose governance policy is in effect.                                                     |
-| `org_name`         | Display name of the organization whose governance policy is in effect.                                           |
-| `audit_session_id` | Identifies the daemon session that produced the record.                                                          |
-| `resource_id`      | Target of the evaluation, such as a host and port, file path, or tool.                                           |
-| `os`               | Operating system that produced the record.                                                                       |
-| `app_version`      | Version of the Docker component that produced the record.                                                        |
-| `client_name`      | Source component, such as `sbx` for Docker Sandboxes.                                                            |
-| `hostname`         | Hostname of the machine that produced the record.                                                                |
-| `sandbox_id` | Stable ID of the sandbox. It persists across restarts of the same sandbox. |
-| `deny_reason`      | Why a denied request was blocked. Present on deny decisions.                                                     |
-| `policy_rule` | Name of the policy rule that matched, or `default-deny` when no rule matched. |
-| `policy_id` | ID of the policy that produced the decision. |
-| `policy_type` | Schema type of the policy, such as `allowlist/v0` or `cedar:auth:v0`. |
-| `policy_source` | Origin of the policy: `remote`, `local`, or `system`. |
-| `policy_denial_code` | Why a request was denied. Present only on deny decisions. See [Denial codes](#denial-codes). |
-| `enforcement_mode` | Governance mode in effect when Docker evaluated the request. See [Enforcement modes](#enforcement-modes).        |
-| `approval`         | Approval details. Present when the decision involves an approval. See [Approval fields](#approval-fields).       |
-| `action_type`      | Payload discriminator that identifies the action-specific object in the record.                                  |
-| `agent`            | AI agent associated with the event, when Docker knows it.                                                        |
+| Field                | Description                                                                                                                  |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `audit_event_id`     | Unique ID for the audit event.                                                                                               |
+| `timestamp`          | UTC time when Docker recorded the event.                                                                                     |
+| `schema_version`     | Version of the record schema. Pin SIEM field mappings to this value.                                                         |
+| `category`           | Event category, such as `AUDIT_CATEGORY_MANAGEMENT`, `AUDIT_CATEGORY_EVALUATION`, or `AUDIT_CATEGORY_EXECUTION`.             |
+| `decision`           | Governance decision for evaluation records.                                                                                  |
+| `username`           | The signed-in Docker user's Docker Hub username.                                                                             |
+| `user_email`         | The signed-in Docker user's email address.                                                                                   |
+| `org_id`             | ID of the organization whose governance policy is in effect.                                                                 |
+| `org_name`           | Display name of the organization whose governance policy is in effect.                                                       |
+| `audit_session_id`   | Identifies the daemon session that produced the record.                                                                      |
+| `resource_id`        | Target of the evaluation, such as a host and port, file path, or tool.                                                       |
+| `os`                 | Operating system that produced the record.                                                                                   |
+| `app_version`        | Version of the Docker component that produced the record.                                                                    |
+| `client_name`        | Source component, such as `sbx` for Docker Sandboxes.                                                                        |
+| `hostname`           | Hostname of the machine that produced the record.                                                                            |
+| `sandbox_id`         | Stable ID of the sandbox. It persists across restarts of the same sandbox.                                                   |
+| `deny_reason`        | Why a denied request was blocked. Present on deny decisions.                                                                 |
+| `policy_rule`        | Name of the policy rule that matched, or `default-deny` when no rule matched.                                                |
+| `policy_id`          | ID of the policy that produced the decision.                                                                                 |
+| `policy_type`        | Schema type of the policy, such as `AllowList:V0`.                                                                           |
+| `policy_source`      | Origin of the policy: `remote`, `local`, or `system`.                                                                        |
+| `policy_denial_code` | Why a request was denied. Present only on deny decisions. For more details, see [Denial codes](#denial-codes).               |
+| `enforcement_mode`   | Governance mode in effect when Docker evaluated the request. For more details, see [Enforcement modes](#enforcement-modes).  |
+| `approval`           | Approval details. Present when the decision involves an approval. For more details, see [Approval fields](#approval-fields). |
+| `action_type`        | Payload discriminator that identifies the action-specific object in the record.                                              |
+| `agent`              | AI agent associated with the event, when Docker knows it.                                                                    |
 
 ### Denial codes
 
 `policy_denial_code` classifies why a request was denied:
 
-| Code | Meaning |
-| --- | --- |
-| `POLICY_DENIAL_CODE_POLICY_DENY` | A deny rule matched. `policy_id` and `policy_rule` identify it. |
-| `POLICY_DENIAL_CODE_DEFAULT_DENY` | No rule allowed the request, so default deny applied. |
-| `POLICY_DENIAL_CODE_POLICY_SNAPSHOT_STALE` | The cached policy expired, so evaluation failed closed. |
-| `POLICY_DENIAL_CODE_POLICY_EVALUATION_FAILED` | Loading or evaluating the policy failed, so evaluation failed closed. |
-| `POLICY_DENIAL_CODE_GOVERNANCE_BLOCKED` | Governance couldn't be resolved for the user, for example because of membership in several organizations, so the request was denied without consulting local rules. |
-| `POLICY_DENIAL_CODE_INVALID_REQUEST` | The request was malformed, so evaluation failed closed. |
+| Code                                          | Meaning                                                                                                                                                             |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `POLICY_DENIAL_CODE_POLICY_DENY`              | A deny rule matched. `policy_id` and `policy_rule` identify it.                                                                                                     |
+| `POLICY_DENIAL_CODE_DEFAULT_DENY`             | No rule allowed the request, so default deny applied.                                                                                                               |
+| `POLICY_DENIAL_CODE_POLICY_SNAPSHOT_STALE`    | The cached policy expired, so evaluation failed closed.                                                                                                             |
+| `POLICY_DENIAL_CODE_POLICY_EVALUATION_FAILED` | Loading or evaluating the policy failed, so evaluation failed closed.                                                                                               |
+| `POLICY_DENIAL_CODE_GOVERNANCE_BLOCKED`       | Governance couldn't be resolved for the user, for example because of membership in several organizations, so the request was denied without consulting local rules. |
+| `POLICY_DENIAL_CODE_INVALID_REQUEST`          | The request was malformed, so evaluation failed closed.                                                                                                             |
 
 ## Categories
 
@@ -131,25 +131,25 @@ an `AUDIT_DECISION_DENY` decision and includes the `approval` object.
 
 The `action_type` field identifies the action-specific payload in the record.
 
-| Action type                  | Description                                                                 |
-| ---------------------------- | --------------------------------------------------------------------------- |
-| `session`                    | Sandbox daemon session lifecycle event.                                     |
-| `network_egress`             | Network access evaluation.                                                  |
-| `http_request`               | HTTP request evaluation. See [HTTP request payload](#http-request-payload). |
-| `filesystem_mount`           | Filesystem mount or path access evaluation.                                 |
-| `tool_invocation`            | Tool invocation evaluation.                                                 |
-| `resource_read`              | Resource read evaluation.                                                   |
-| `server_registration`        | Server registration event.                                                  |
-| `prompt`                     | Prompt-related metadata event.                                              |
-| `network_egress_execution`   | Outcome of a network action.                                                |
-| `filesystem_mount_execution` | Outcome of a filesystem action.                                             |
-| `tool_execution`             | Outcome of a tool invocation.                                               |
-| `resource_read_execution`    | Outcome of a resource read.                                                 |
-| `prompt_execution`           | Outcome of a prompt request.                                                |
-| `policy_sync`                | Policy synchronization event.                                               |
-| `pii_detection`              | Metadata event for a data detection result.                                 |
-| `c_score_report`             | Metadata event for a C-score report.                                        |
-| `policy_action`              | Policy configuration or policy action event.                                |
+| Action type                  | Description                                                                                   |
+| ---------------------------- | --------------------------------------------------------------------------------------------- |
+| `session`                    | Sandbox daemon session lifecycle event.                                                       |
+| `network_egress`             | Network access evaluation.                                                                    |
+| `http_request`               | HTTP request evaluation. For more details, see [HTTP request payload](#http-request-payload). |
+| `filesystem_mount`           | Filesystem mount or path access evaluation.                                                   |
+| `tool_invocation`            | Tool invocation evaluation.                                                                   |
+| `resource_read`              | Resource read evaluation.                                                                     |
+| `server_registration`        | Server registration event.                                                                    |
+| `prompt`                     | Prompt-related metadata event.                                                                |
+| `network_egress_execution`   | Outcome of a network action.                                                                  |
+| `filesystem_mount_execution` | Outcome of a filesystem action.                                                               |
+| `tool_execution`             | Outcome of a tool invocation.                                                                 |
+| `resource_read_execution`    | Outcome of a resource read.                                                                   |
+| `prompt_execution`           | Outcome of a prompt request.                                                                  |
+| `policy_sync`                | Policy synchronization event.                                                                 |
+| `pii_detection`              | Metadata event for a data detection result.                                                   |
+| `c_score_report`             | Metadata event for a C-score report.                                                          |
+| `policy_action`              | Policy configuration or policy action event.                                                  |
 
 ## HTTP request payload
 
@@ -167,29 +167,38 @@ separate from the `network_egress` record for the connection.
 
 ## Sample record
 
+The following sample shows a request that a deny rule blocked:
+
 ```json
 {
-  "audit_event_id": "95e7257f-93c9-4f29-bde7-88830e2dae80",
-  "timestamp": "2026-05-28T19:15:00.728933Z",
-  "schema_version": "1.82.0",
+  "audit_event_id": "032d5bf2-6be0-484c-9fd1-296680bb9af4",
+  "timestamp": "2026-10-22T21:15:32.674118Z",
+  "schema_version": "1.228.0",
   "category": "AUDIT_CATEGORY_EVALUATION",
   "decision": "AUDIT_DECISION_DENY",
   "username": "jordandoe",
   "user_email": "jordandoe@example.com",
+  "audit_session_id": "d038717d-e86d-48c5-abbb-19b7f14c37c8",
+  "agent": "shell",
+  "sandbox_id": "my-sandbox",
+  "resource_id": "example.com:443",
+  "policy_rule": "local:fa56f4d3-7f16-4144-af84-caa7917b2387",
+  "policy_id": "f588126a-8323-47d5-b099-b3d184055733",
+  "policy_type": "AllowList:V0",
+  "policy_source": "local",
+  "policy_denial_code": "POLICY_DENIAL_CODE_POLICY_DENY",
   "org_id": "9f8e7d6c-5b4a-3210-fedc-ba9876543210",
   "org_name": "Acme Inc",
-  "audit_session_id": "8a3bc076-79d0-4502-baf3-cc6ad35fb578",
-  "resource_id": "example.com:443",
-  "os": "macos",
-  "app_version": "v0.31.0",
+  "os": "windows",
+  "app_version": "v0.48.0",
   "client_name": "sbx",
   "hostname": "host-machine",
   "deny_reason": [
-    "no applicable policies for op(action=net:connect:tcp, resource=net:domain:example.com:443)"
+    "denied: rule \"local:fa56f4d3-7f16-4144-af84-caa7917b2387\" matched op(action=net:connect:tcp, resource=net:domain:example.com:443)"
   ],
+  "enforcement_mode": "audit",
   "action_type": "network_egress",
-  "network_egress": { "protocol": "tcp" },
-  "agent": "claude"
+  "network_egress": { "destination_port": "443", "protocol": "tcp" }
 }
 ```
 

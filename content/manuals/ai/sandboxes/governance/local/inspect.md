@@ -2,22 +2,23 @@
 title: Inspect policy status and rules
 linkTitle: Inspect policies
 weight: 40
-description: Inspect active policy rules and monitor sandbox network traffic with sbx policy ls and sbx policy log.
-keywords: docker sandboxes, policy monitoring, sbx policy ls, sbx policy log, network traffic, policy debugging
+description: List the policies and rules that apply to your sandboxes, see where they come from, and check organization governance status with sbx policy ls.
+keywords: docker sandboxes, sbx policy ls, sbx policy inspect, policy rules, inactive rules, organization governance, policy debugging
 aliases:
   - /ai/sandboxes/governance/monitoring/
   - /ai/sandboxes/governance/monitor-and-enforce/monitoring/
 ---
 
-`sbx policy ls` and `sbx policy log` give you a combined view of all active
-policy rules and sandbox network activity, regardless of whether those rules
-come from local configuration or organization governance. They're useful both
-for verifying rules you've written and for debugging why a request is being
-blocked or allowed.
+Use `sbx policy ls` to see which policies and rules apply to your sandboxes and
+where they come from, and `sbx policy inspect` to see one policy or rule in
+full. A listing includes rules from your local policy, from kits, and from your
+organization, so you can confirm the rules you added and work out why a request
+is allowed or blocked. To watch network activity instead, see
+[Test and monitor network policy](test-monitor.md).
 
-## Listing rules
+## List the policies that apply
 
-Use `sbx policy ls` to see all active policies and their current status:
+Run `sbx policy ls` to see every active policy:
 
 ```console
 $ sbx policy ls
@@ -29,147 +30,89 @@ local-policy                           local    all                 network: 42 
 The columns are:
 
 - `POLICY`: the policy name.
-- `SOURCE`: where the policy came from. `local` means your local configuration
-  — a preset or rules you added with `sbx policy`. `kit` means a
-  [kit](/manuals/ai/sandboxes/governance/organization/policies/_index.md#precedence). `org` means your
-  organization.
+- `SOURCE`: where the policy came from. `local` means your local policy, which
+  holds your preset and the rules you added with `sbx policy`. `kit` means a
+  [kit](../../customize/use-kits.md). `org` means your organization.
 - `APPLIES TO`: which sandboxes the policy applies to. `all` means the policy
-  is global. `sandbox:<name>` scopes it to a single sandbox; a profile name
-  scopes it to sandboxes using that profile.
+  is global, and `sandbox:<name>` scopes it to one sandbox.
 - `SUMMARY`: a count of rule entries by type and decision, for example
   `network: 5 allow, 1 deny`. A rule that names several destinations
-  contributes one entry per destination. When the listing includes rules that
-  match an HTTP method and path, the network count labels each part `(L4)` or
-  `(L7)`. See [HTTP rules](#http-rules).
+  contributes one entry per destination.
 
-To see full rule-level detail including rule IDs and resources, pass `--wide`.
-To inspect a single policy or rule, use `sbx policy inspect`:
+## List the policies for one sandbox
 
-```console
-$ sbx policy inspect Balanced
-```
-
-Use `--source` to filter by origin (`local`, `org`, or `kit`) and `--decision`
-to filter by outcome (`allow` or `deny`).
-
-Use `--protocol tcp` or `--protocol udp` to filter network rules.
-
-Use `--created-via` to filter by how a rule was created. Pass `default` for
-preset rules, `added` for rules you added yourself, `provisioned` for rules a
-kit or application added, or `approval` for rules recorded when you approved a
-destination. A wide listing shows the same information per rule:
-
-```console
-$ sbx policy ls --wide --created-via approval
-```
-
-See [Approval-required access](approvals.md).
-
-A `STATUS` column also appears when you pass `--include-inactive`; see
-[Showing inactive rules](#showing-inactive-rules).
-
-When organization governance is active, the output starts with a summary block
-showing which organization manages the policy, the sync state, and how many
-inactive rules are hidden:
-
-```console
-$ sbx policy ls
-POLICY RULES
-  Governance: Managed by my-org
-  Sync:       OK, last synced 08:21:01
-  Hidden:     9 inactive rules. Show with: sbx policy ls --include-inactive
-
-POLICY               SOURCE   APPLIES TO   SUMMARY
-default filesystem   org      all          filesystem read: 2 allow; filesystem write: 7 allow, 2 deny
-default network      org      all          network: 38 allow, 4 deny
-```
-
-`Governance` shows which organization manages the policy, and `Sync` confirms
-the daemon has pulled the latest rules. If the sync state shows an error or a
-stale timestamp, the daemon may not have the most recent org policy. Run
-`sbx policy refresh` to fetch and apply it right away. The command requires
-sbx 0.49.0 or later. `Hidden` reports how many inactive
-rules are suppressed and how to reveal them.
-
-If Docker can't determine which organization governs your account, policy
-output shows `Governance: Unresolved`, and the dashboard shows the same
-unresolved state. For example, this happens when your account belongs to
-multiple organizations with governance enabled. Policy enforcement fails closed
-until the conflict is resolved, so local allow rules can't grant access. Contact
-an administrator for the affected organizations to resolve the conflicting
-governance configuration.
-
-### Showing inactive rules
-
-When organization governance is active, local and kit-defined allow rules are
-not evaluated, so `sbx policy ls` hides them by default. To list them too — for
-example, to confirm which allow rules the organization policy overrides — pass
-`--include-inactive`. This adds a `STATUS` column:
-
-```console
-$ sbx policy ls --include-inactive
-POLICY RULES
-  Governance: Managed by my-org
-  Sync:       OK, last synced 08:41:06
-
-POLICY                       SOURCE   APPLIES TO   SUMMARY                                                    STATUS
-default filesystem           org      all          filesystem read: 2 allow; filesystem write: 7 allow, 2 deny   active
-default network              org      all          network: 38 allow, 4 deny                                   active
-default-fs-read-allow-all    local    all          filesystem read: 1 allow                                    inactive
-default-fs-write-allow-all   local    all          filesystem write: 1 allow                                   inactive
-```
-
-Inactive policies show `inactive` in the `STATUS` column. They have no effect
-while organization governance is active. Local and kit-defined deny rules stay
-active and aren't hidden, because a deny still applies on top of the
-organization policy. See [Precedence](../organization/policies/_index.md#precedence).
-
-Use `--type network`, `--type filesystem`, or `--type http` to show only
-policies of that type. Without a sandbox argument, `sbx policy ls` shows every
-policy across all sandboxes. Pass a sandbox name to filter to global policies
-and those scoped to that sandbox:
+Pass a sandbox name to see only the global policies and the policies scoped to
+that sandbox:
 
 ```console
 $ sbx policy ls my-sandbox
 ```
 
-### Filesystem rules
+The output summarizes the rules by type, for example
+`allow 46 hosts from local-policy`. To see each rule, add `--wide`.
 
-`sbx policy ls` lists filesystem policies alongside network policies. Filesystem
-rules control which host paths a sandbox can mount as a workspace. Pass
-`--type filesystem` to show only them:
+## Show rule details
 
-```console
-$ sbx policy ls --type filesystem
-POLICY         SOURCE   APPLIES TO   SUMMARY
-local-policy   local    all          filesystem read: 1 allow; filesystem write: 1 allow
-```
-
-A writable workspace mount must be allowed by both a `filesystem:read` and a
-`filesystem:write` rule; a read-only mount needs only `filesystem:read`. The
-default local policy allows read and write access to all paths, shown as the
-two `default-fs-*` rules above. For the rule syntax and path patterns, see
-[Policy concepts](../reference/filesystem-rules.md).
-
-### HTTP rules
-
-Rules that match an HTTP method and path are listed as type `http`. Pass
-`--wide` to see the `METHOD` and `PATH` columns alongside network rules:
+Pass `--wide` to list each rule on its own row, with its rule ID, type,
+decision, protocols, and resources:
 
 ```console
 $ sbx policy ls --wide
-TYPE      METHOD   PATH
-network   -        -
-http      GET      /repos/org/project/**
-http      POST     /admin/**
 ```
 
-Rules that match a whole destination show `-` in both columns. To list only
-HTTP rules, pass `--type http`.
+Use the rule ID from this listing to remove a rule with
+`sbx policy rm network --id`. For more details, see
+[Remove a rule](network-rules.md#remove-a-rule).
 
-HTTP rules are counted as network rules in the `SUMMARY` column, with each part
+To see one policy or rule in full, pass its name or rule ID to
+`sbx policy inspect`:
+
+```console
+$ sbx policy inspect local-policy
+```
+
+## Filter the listing
+
+Filters work with both the summary and the `--wide` listing:
+
+- `--type`: show only `network`, `http`, or `filesystem` policies.
+- `--source`: show only policies from `local`, `kit`, or `org`.
+- `--decision`: show only `allow` or `deny` rules.
+- `--protocol`: show only network rules for `tcp` or `udp`.
+- `--created-via`: show only rules created a certain way. Pass `default` for
+  preset rules, `added` for rules you added yourself, `provisioned` for rules a
+  kit or application added, or `approval` for rules recorded when you approved
+  a destination.
+
+For example, to list the destinations you've approved:
+
+```console
+$ sbx policy ls --wide --created-via approval
+```
+
+For more details, see [Respond to approval requests](approvals.md).
+
+To list the rules a kit added to a sandbox:
+
+```console
+$ sbx policy ls my-sandbox --source kit --wide
+```
+
+## List HTTP rules
+
+Rules that match an HTTP method and path have the type `http`. To list only
+those rules, pass `--type http`:
+
+```console
+$ sbx policy ls --type http
+```
+
+In a `--wide` listing, HTTP rules fill the `METHOD` and `PATH` columns. Rules
+that match a whole destination show `-` in both columns.
+
+In the `SUMMARY` column, HTTP rules count as network rules, and each part is
 labeled by the network layer it matches on. `L4` counts entries that match a
-whole destination, and `L7` counts those that also match an HTTP method and
+whole destination, and `L7` counts entries that also match an HTTP method and
 path:
 
 ```console
@@ -182,47 +125,73 @@ When the same decision has entries at both layers, each layer gets its own
 count, L4 first. Two host allows and one HTTP allow read
 `network: 2 allow (L4), 1 allow (L7)`.
 
-The labels appear when the current listing includes at least one HTTP rule.
+The labels appear only when the listing includes at least one HTTP rule.
 Because filters and hidden inactive rules change what the listing contains, a
 filtered listing with no HTTP rules shows an unlabeled count, such as
 `network: 42 allow`.
 
-For the rule syntax, see
+For more details, see
 [HTTP method and path](../reference/network-rules.md#http-method-and-path).
 
-## Inspecting rules
+## List filesystem rules
 
-To inspect which policies are active and where they come from, use
-`sbx policy ls`. Use `--source` to filter by origin (`local`, `org`, `kit`),
-`--decision` to filter by outcome (`allow`, `deny`), and `--wide` for
-rule-level detail including rule IDs. To inspect a single policy or rule in
-full, use `sbx policy inspect`.
+Filesystem rules control which host paths a sandbox can mount as a workspace.
+To list only those rules, pass `--type filesystem`:
 
-## Troubleshooting
+```console
+$ sbx policy ls --type filesystem
+POLICY         SOURCE   APPLIES TO   SUMMARY
+local-policy   local    all          filesystem read: 1 allow; filesystem write: 1 allow
+```
 
-### Local allow rules have no effect
+A writable workspace mount must be allowed by both a `filesystem:read` and a
+`filesystem:write` rule. A read-only mount needs only `filesystem:read`. Your
+local policy allows read and write access to all paths by default, shown as the
+two allow entries above. For more details, see
+[Filesystem mount rule syntax](../reference/filesystem-rules.md).
 
-If rules you add with `sbx policy allow` don't change sandbox behavior, your
-organization likely has governance enabled. Run `sbx policy ls` to check: if
-the summary block contains `Governance: Managed by <org>`,
-org governance is active. When it's active, local allow rules are inactive.
-You can't use them to loosen restrictions the org policy imposes.
+## Check organization governance status
 
-Inactive allow rules are hidden from `sbx policy ls` by default; run
-`sbx policy ls --include-inactive` to see them with an `inactive` status in
-the `STATUS` column.
+When an organization policy is enforced for you, `sbx policy ls` starts with a
+status line:
 
-Ask your admin to update the organization policy if you need access to an
-additional resource. Local deny rules remain active, so you can use
-`sbx policy deny` to restrict access further. See
-[Precedence](../organization/policies/_index.md#precedence).
+```console
+$ sbx policy ls
+Governance: Managed by my-org · Sync: OK, last synced 08:21:01 · Hidden: 9 inactive rules. Show with: sbx policy ls --include-inactive
 
-### A domain is still blocked after adding an allow rule
+POLICY               SOURCE   APPLIES TO   SUMMARY
+default filesystem   org      all          filesystem read: 2 allow; filesystem write: 7 allow, 2 deny
+default network      org      all          network: 38 allow, 4 deny
+```
 
-If a domain remains blocked after you add a local allow rule, your organization
-likely enforces governance, which makes local allow rules inactive. Run `sbx
-policy ls` to check whether org governance is active; if the output starts with
-a `Governance:` status line showing `Managed by <org>`, it is. Add
-`--include-inactive` to confirm your rule shows an `inactive` status. If so,
-the block can only be lifted by updating the org policy in Docker Home or via
-the [API](/reference/api/ai-governance/).
+A `--wide` listing shows the same fields as a `POLICY RULES` block above the
+table.
+
+- `Governance` shows which organization manages the policy.
+- `Sync` shows when the daemon last pulled the organization policy. If it shows
+  an error or an old timestamp, run `sbx policy refresh` to fetch and apply the
+  latest organization policy right away, without restarting the daemon or
+  stopping sandboxes. The refreshed policy applies to new connections. To close
+  existing connections that the updated policy denies, restart the sandbox.
+- `Hidden` shows how many inactive rules the listing leaves out. For more
+  details, see [Show inactive rules](#show-inactive-rules).
+
+If the status shows `Governance: Unresolved`, see
+[`sbx policy ls` shows Governance: Unresolved](../../troubleshooting.md#sbx-policy-ls-shows-governance-unresolved).
+
+## Show inactive rules
+
+When an organization policy is enforced for you, local and kit allow rules
+aren't evaluated, so `sbx policy ls` hides them. To list them, for example to
+confirm which of your allow rules the organization policy overrides, pass
+`--include-inactive` with `--wide`:
+
+```console
+$ sbx policy ls --wide --include-inactive
+```
+
+The `STATUS` column shows `active` or `inactive` for each rule. Inactive rules
+have no effect while the organization policy is enforced. Local and kit deny
+rules stay active and aren't hidden, because a deny still applies on top of the
+organization policy. For more details, see
+[How organization policy relates to local and kit rules](../organization/policies/_index.md#how-organization-policy-relates-to-local-and-kit-rules).

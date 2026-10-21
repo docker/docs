@@ -146,8 +146,8 @@ move these controls to the organization level so that security, policy, and
 access apply consistently across every developer's sandboxes, rather than
 depending on local configuration.
 
-See [Governance](../governance/) for the controls available to organization
-admins.
+See [Organization governance](../governance/organization/_index.md) for the
+controls available to organization admins.
 
 ## Learn more
 
@@ -157,5 +157,5 @@ admins.
   blocks
 - [Manage credentials](../configuration/credentials.md): provide and manage API
   keys while keeping their values outside the sandbox
-- [Governance](../governance/): configure network, filesystem, and MCP access
-  controls locally or across your organization
+- [Governance](../governance/): configure network, filesystem, and MCP policies
+  locally or across your organization
