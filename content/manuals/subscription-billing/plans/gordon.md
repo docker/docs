@@ -34,7 +34,18 @@ Gordon usage is measured in questions. When you upgrade from Gordon Base to a pa
 
 ## Billing cycle
 
-Gordon plans are billed monthly at the first of the month. If you purchase after the first of the month, your invoice reflects prorated charges for the remaining days in the cycle. Subscribing to a Gordon plan charges you at the time of purchase. When you upgrade your Gordon plan, usage limits are immediately effective after payment. 
+Gordon plans are billed monthly at the first of the month. If you purchase after the first of the month, your invoice reflects prorated charges for the remaining days in the cycle. Subscribing to a Gordon plan charges you at the time of purchase. When you upgrade your Gordon plan, usage limits are immediately effective after payment.
+
+## Upgrade
+
+You can move to a higher Gordon tier at any time. The new usage limits
+take effect after payment.
+
+1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
+1. From **Active plans**, select **Manage** next to your Gordon plan.
+1. Select **Upgrade subscription**.
+1. Choose the tier, verify your billing details, continue to payment, and
+   complete checkout.
 
 ## Downgrade or disable auto-renewal
 
@@ -48,6 +59,10 @@ To downgrade or disable auto-renewal:
 1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
 1. From **Active plans**, select **Manage** next to your Gordon plan.
 1. Select **Downgrade plan** to switch to a lower tier, or **Disable auto renewal** to end your plan after the current billing cycle.
+
+If you disabled auto-renewal and the plan is still active, **Manage** includes **Enable auto-renewal**.
+
+If a downgrade is scheduled, **Manage** includes **Cancel scheduled change**. Selecting it keeps your current tier after renewal.
 
 > [!IMPORTANT]
 > Docker does not issue refunds or credits

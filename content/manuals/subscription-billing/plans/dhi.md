@@ -49,6 +49,8 @@ If you want to revert your plan to DHI Community, you must disable auto-renewal.
 1. From **Active plans**, select **Manage** next to **Hardened Images**.
 1. Select **Disable auto-renewal**.
 
+If you disabled auto-renewal and the plan is still active, **Manage** includes **Enable auto-renewal**.
+
 ## Remove repositories
 
 You may also remove repositories from your plan. Repository removals are deferred to the end of the current billing cycle. You can remove repositories at any time, but you cannot stop a plan mid-cycle to receive a partial refund. Repository access remains active until the cycle ends.
