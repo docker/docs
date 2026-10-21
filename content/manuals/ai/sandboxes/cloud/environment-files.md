@@ -97,8 +97,10 @@ $ sbx --cloud cp . cloud-web-app:/home/agent/workspace/web-app
 
 Use a destination that doesn't already exist for this first copy. Copying a
 directory to an existing directory nests it under its source name. Review the
-files you're uploading, including hidden files, and exclude credentials and
-other files you don't want in the cloud. Copying is a one-time transfer:
+files you're uploading: `cp .` doesn't respect `.gitignore`. It includes hidden
+files such as `.env`, Git history, dependencies, and build output. For larger
+projects, prepare a clean staging directory containing only the files you want
+to upload, and copy that directory instead. Copying is a one-time transfer:
 later edits on either side aren't synchronized. Directory uploads skip symbolic
 links and empty directories and report what was skipped. Install dependencies
 inside the sandbox rather than copying a local dependency directory.
@@ -106,13 +108,14 @@ inside the sandbox rather than copying a local dependency directory.
 For a Git workflow, you can instead clone a repository inside the sandbox and
 push commits to your remote. Configure [cloud credentials](credentials.md) for
 private repository access and [cloud network policy](network-policy.md) for
-the destinations your project needs.
+the destinations your project needs. Copying includes uncommitted local work;
+cloning a specific commit gives contributors a reproducible starting point.
 
-### Automate the upload
+### Automate the initial upload
 
 To upload your project whenever you create a fresh sandbox, add a `postCreate`
-command to the environment file. This makes the upload part of setup, so
-contributors can create a ready-to-use environment with a single command.
+command to the environment file. This automates the initial upload as part of
+setup.
 
 ```yaml
 lifecycle:
@@ -121,16 +124,26 @@ lifecycle:
       command: sbx --cloud cp . "$SBX_SANDBOX_NAME:/home/agent/workspace/web-app"
 ```
 
-The command runs from the directory containing the environment file, after the
-sandbox is created and before `run` attaches to the agent. `SBX_SANDBOX_NAME`
-contains the sandbox name, including any `--name` override. Reconnecting to an
-existing sandbox doesn't run `postCreate` again, so it won't overwrite the
-agent's work with another upload.
+Here, `.` resolves to the directory containing the environment file. If you
+keep the file elsewhere or upload from a staging directory, set the command's
+`workdir` to the project or staging directory. The same file selection rules
+as the manual copy apply, including copying ignored files and skipping symbolic
+links and empty directories.
+
+The command runs on your machine after sandbox creation and before `run`
+attaches to the agent. `SBX_SANDBOX_NAME` contains the sandbox name, including
+any `--name` override. Reconnecting skips `postCreate`, preserving the agent's
+work. Later local edits aren't uploaded automatically.
 
 With this block in place, use `sbx --cloud env run ./cloud.sbxenv.yaml` to create
 the sandbox, upload the project, and attach to the agent. It replaces the manual
-upload step for future sandbox creation. See
-[Automate setup with host commands](#automate-setup-with-host-commands) for more
+upload step for future sandbox creation.
+
+If the upload fails, the sandbox has already been created and remains available.
+Inspect it and finish transferring files manually, or remove it with
+`sbx --cloud env rm ./cloud.sbxenv.yaml` before trying a fresh creation.
+
+See [Automate setup with host commands](#automate-setup-with-host-commands) for more
 about lifecycle commands and approval.
 
 ## Work with the agent
