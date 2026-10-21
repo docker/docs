@@ -28,7 +28,14 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-10-21" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.96.1" build_path="/244079/" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.96.1" build_path="/244132/" >}}
+
+### Updates 
+
+- [Docker Engine 29.9.2](https://github.com/docker/docker/releases/tag/29.9.2)
+- [Docker Buildx v0.38.1](https://github.com/docker/buildx/releases/tag/v0.38.1)
+- [Credential helpers to v0.9.12](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.12)
+-  Docker Offload `v0.7.16`
 
 ### Security
 
