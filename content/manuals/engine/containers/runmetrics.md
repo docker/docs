@@ -17,7 +17,7 @@ You can use the `docker stats` command to live stream a container's
 runtime metrics. The command supports CPU, memory usage, memory limit,
 and network IO metrics.
 
-The following is a sample output from the `docker stats` command
+The following is a sample output from the `docker stats` command:
 
 ```console
 $ docker stats redis1 redis2

@@ -1,7 +1,7 @@
 ---
 title: Manage usage and access for Docker products
 linkTitle: Products
-weight: 30
+weight: 60
 description: >-
   Control which Docker products organization members can use, and find
   where to check usage

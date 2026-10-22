@@ -131,6 +131,9 @@ $ ssh sbx_01abc123@sbx_cloud
 Replace the example with `ssh <sandbox-id>@sbx_cloud`, using the
 `sbx_`-prefixed ID from `sbx --cloud ls`.
 
+Cloud SSH honors your host's configured upstream proxy. If the proxy refuses
+SSH connections, see [Cloud SSH proxy configuration](../configuration/upstream-proxy.md#cloud-ssh).
+
 ## Transfer files
 
 Use `sbx --cloud cp` to copy files or directories between the client machine
@@ -350,7 +353,7 @@ To load arguments from a file, pass `--kit-args-file <FILE>` with one
 with `--kit-arg` override values from the file.
 
 To declare reusable cloud configuration in a file, see
-[Use a cloud environment](../configuration/environment-files.md#use-a-cloud-environment).
+[Use environment files in the cloud](environment-files.md).
 
 ## Load an MCP server
 

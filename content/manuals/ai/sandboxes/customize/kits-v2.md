@@ -662,14 +662,21 @@ and OpenCode reads `OPENCODE_CONFIG`. Don't use `setup.startup` for settings
 the agent must read during initialization; startup commands don't gate the
 entrypoint.
 
-## Packaging and distribution
+## Validate and inspect kits
 
-The `sbx kit` subcommands validate, inspect, and publish kits:
+Use these commands to check a kit before sharing it:
 
 - `sbx kit validate <path>` — check that a kit directory or ZIP is
   well-formed.
 - `sbx kit inspect <path>` — display kit details. Add `--json` for
   machine-readable output.
+
+Add `--offline` to validate or inspect a local directory or ZIP without starting
+the daemon or signing in. Offline checks skip kit source and signature policies;
+they don't establish whether the kit is permitted to load.
+
+## Packaging and distribution
+
 - `sbx kit pack <path> -o <file.zip>` — package a directory as a ZIP file
   for sharing.
 - `sbx kit push <path> <ref>` — publish to an OCI registry (for example,
@@ -708,8 +715,14 @@ $ sbx kit verify --key cosign.pub ./my-kit/
 
 For a local directory, `sbx kit sign` writes a `kit.sig.bundle` file next to
 `spec.yaml`. Commit this file so consumers can verify a kit loaded from the Git
-repository. For an OCI kit, the signature is stored as an OCI referrer. You can
-sign an OCI kit after pushing it, or push and sign it in one step:
+repository.
+
+Git line-ending conversion and clean filters can invalidate a source signature.
+If `sbx kit sign` warns about these transformations, ensure Git preserves the
+signed files unchanged before sharing the Git reference.
+
+For an OCI kit, the signature is stored as an OCI referrer. You can sign an OCI
+kit after pushing it, or push and sign it in one step:
 
 ```console
 $ sbx kit push ./my-kit/ ghcr.io/myorg/my-kit:1.0 --sign

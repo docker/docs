@@ -10,7 +10,9 @@
     {{- if ne .Params.sitemap false }}
       <url>
         <loc>{{ .Permalink}}</loc>
+        {{- if not .Lastmod.IsZero }}
         <lastmod>{{ .Lastmod | time.Format "2006-01-02" }}</lastmod>
+        {{- end }}
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
       </url>
