@@ -22,11 +22,13 @@ to open the same project in VS Code or Cursor over SSH.
 You need a personal Docker account with an active
 [Docker Agentic Platform subscription](signup.md#activate-cloud-access).
 
-The Shell kit doesn't require a model provider API key. This example uses a
-public repository, so you don't need a GitHub token either. For agents and
-their credentials, see [Kits](kits.md) and [Secrets](secrets.md).
+You don't need a model provider API key for this walkthrough. The sample
+project is public, so you don't need a GitHub token either.
 
 ## Start a sandbox
+
+A [kit](kits.md) defines a sandbox's base image and installed tools. This
+walkthrough uses the Shell kit, which starts a Bash shell without an agent.
 
 1. Open [Docker Agentic Platform](https://agentic-platform.docker.com/) and
    select **+ New sandbox**.
