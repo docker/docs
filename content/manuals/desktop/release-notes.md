@@ -26,7 +26,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ## 4.96.2
 
-{{< release-date date="2026-10-21" >}}
+{{< release-date date="2026-10-22" >}}
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.96.2" build_path="/XXXXXX/" >}}
 
