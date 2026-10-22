@@ -192,6 +192,12 @@ available operations depend on the token's permission scope:
   the destination repository. Bulk operations require push access to every
   referenced destination repository.
 
+OIDC credentials follow the same destination-repository permissions for
+customization queries and mutations: pull access for reads and build logs, and
+push access for changes. Pulling a built customized image and reading its
+attestations also require pull access. See
+[Read DHI images and attestations with OIDC](./verify.md#authenticate-with-oidc-in-github-actions).
+
 Use the [`docker dhi customization`](/reference/cli/docker/dhi/customization/) command:
 
 ```console

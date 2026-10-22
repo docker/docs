@@ -81,6 +81,38 @@ Scopes on the matching ruleset decide what the workflow can do with a defined re
 - A Docker Build Cloud resource uses the **Cloud Connect** scope, so the
   workflow can connect and build in Docker Build Cloud.
 
+Repository grants combine across all matching rulesets. **Image Push** includes
+pull access. An exact-repository **Image Pull** grant doesn't restrict a broader
+**Image Push** grant that also matches that repository. Remove every matching
+push grant to make access pull-only.
+
+**Read public repositories** grants pull access across Docker Hub namespaces.
+It doesn't grant access to private repositories, customization management, or
+organization settings. Product-specific requirements, such as DHI subscription
+and variant eligibility, still apply.
+
+### DHI and Scout compatibility exceptions
+
+To preserve existing integrations, DHI and Docker Scout retain access that isn't
+fully restricted by the connection's resource scopes:
+
+- Omitting image grants or leaving **Read public repositories** unchecked doesn't
+  block an authenticated connection from pulling free DHI images and attestations
+  through `dhi.io`. This is a compatibility exception to the resource-scope model.
+- Within the connection's organization, Docker Scout accepts the
+  `listEnabledRepos` and `listBlockedRepos` GraphQL queries and the
+  `ingestImagePackages` mutation even when the connection has no image grants.
+  The queries list repositories enabled or blocked for Scout, including names
+  outside the connection's repository grants. The mutation writes an image's
+  package inventory to Scout. These operations also remain available with only
+  **Image Pull** or **Cloud Connect**, so those scopes don't make the Scout
+  GraphQL API read-only. Repository-filtered image and vulnerability queries
+  still enforce repository access, and DHI customization changes still require
+  **Image Push** on the applicable repositories.
+
+**Image Push** still controls registry push access; the Scout behavior doesn't
+grant registry push permission.
+
 ## Ruleset examples
 
 The following examples are working setups you can adapt. They are not
