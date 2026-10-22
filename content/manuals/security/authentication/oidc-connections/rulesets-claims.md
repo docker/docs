@@ -97,11 +97,16 @@ fully restricted by the connection's resource scopes:
 - Omitting image grants or leaving **Read public repositories** unchecked doesn't
   block an authenticated connection from pulling free DHI images and attestations
   through `dhi.io`. This is a compatibility exception to the resource-scope model.
-- Docker Scout preserves legacy organization access for GraphQL operations,
-  including writing image analysis data. Selecting only **Image Pull**, or
-  omitting image grants, doesn't make all Scout GraphQL operations read-only.
-  Repository-filtered queries and DHI customization operations still enforce
-  their repository permissions.
+- Within the connection's organization, Docker Scout accepts the
+  `listEnabledRepos` and `listBlockedRepos` GraphQL queries and the
+  `ingestImagePackages` mutation even when the connection has no image grants.
+  The queries list repositories enabled or blocked for Scout, including names
+  outside the connection's repository grants. The mutation writes an image's
+  package inventory to Scout. These operations also remain available with only
+  **Image Pull** or **Cloud Connect**, so those scopes don't make the Scout
+  GraphQL API read-only. Repository-filtered image and vulnerability queries
+  still enforce repository access, and DHI customization changes still require
+  **Image Push** on the applicable repositories.
 
 **Image Push** still controls registry push access; the Scout behavior doesn't
 grant registry push permission.
