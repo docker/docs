@@ -1,0 +1,39 @@
+@layer docs {
+  .pierre-code {
+    position: relative;
+    min-width: 0;
+    width: 100%;
+    color: var(--tri-foreground);
+    background: var(--tri-muted);
+    border-radius: var(--tri-radius-default);
+  }
+
+  .pierre-code [data-pierre-source] {
+    margin: 0;
+    padding: 0 8px;
+    overflow-x: auto;
+    font-family: var(--tri-font-family-mono);
+    font-size: var(--tri-scale-mono-code-font-size);
+    line-height: var(--tri-scale-mono-code-line-height);
+    color: inherit;
+    background: transparent;
+  }
+
+  .pierre-code [data-pierre-source] code {
+    font: inherit;
+  }
+
+  .pierre-loading .pierre-code:not(.pierre-fallback) [data-pierre-source] {
+    visibility: hidden;
+  }
+
+  .pierre-render {
+    display: block;
+    min-width: 0;
+  }
+
+  .pierre-code:not(.pierre-ready) .pierre-render {
+    position: absolute;
+    inset: 0;
+  }
+}
