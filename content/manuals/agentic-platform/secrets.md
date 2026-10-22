@@ -9,8 +9,8 @@ aliases:
 ---
 
 Save API keys and tokens under **Secrets** so your agents can use external
-services without reading the credentials themselves. The values stay outside
-the sandbox.
+services without reading the credentials themselves. Docker stores these
+credentials in its cloud secret store, outside the sandbox.
 
 You can save credentials for the following services:
 
@@ -67,7 +67,8 @@ separate selection step. If a required credential is missing when you select
 
 ## Add a custom secret
 
-Use a custom secret for a service outside the built-in provider list.
+Use a custom secret for a service outside the built-in provider list. The
+launcher includes all your custom secrets whenever you create a sandbox.
 
 1. Open **Secrets** and select **New secret** in the **Custom** section.
 2. Enter the hosts that may receive the credential.
@@ -81,9 +82,18 @@ where your client expects a credential. The sandbox proxy substitutes the real
 value only for requests to the configured hosts. The value stays outside the
 sandbox.
 
-The launcher includes all your custom secrets when you create a sandbox. To
-edit a custom secret, enter its value again; saved values can't be retrieved.
-You can also remove custom secrets from the **Custom** section.
+To edit a custom secret, enter its value again; saved values can't be retrieved.
+
+## Delete a custom secret
+
+Under **Secrets**, find the secret in the **Custom** section and select its
+trash icon. In the confirmation dialog, select **Remove**.
+
+Deleting a custom secret removes it from Docker's cloud secret store. Sandboxes
+you launch after deletion no longer include it.
+
+Deleting the secret does not revoke the credential at its provider. To revoke
+the credential itself, use the provider's controls.
 
 ## Manage secrets
 
