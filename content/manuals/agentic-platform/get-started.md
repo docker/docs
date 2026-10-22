@@ -50,7 +50,6 @@ Your local files aren't mounted in a cloud sandbox. In the browser terminal,
 clone a public sample project:
 
 ```console
-$ cd /home/agent/workspace
 $ git clone https://github.com/docker/welcome-to-docker.git project
 $ cd project
 ```
