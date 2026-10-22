@@ -1,17 +1,18 @@
 ---
 title: Get started with Docker Agentic Platform
 linkTitle: Get started
-description: Start a shell in your first cloud sandbox, explore a sample project, save a file, and pause or delete the sandbox when you're finished.
+description: Build and run a sample web app in a cloud sandbox, preview it in your browser, and connect your editor without setting up a local development environment.
 keywords: docker agentic platform, get started, cloud sandboxes, shell, agents, ssh, vscode, cursor
 weight: 10
 aliases:
   - /agentic-platform/concepts/platform-model/
 ---
 
-Use a cloud sandbox to work on a project without setting it up on your
-computer. In this walkthrough, you'll start a shell, clone a public sample
-application, and save a record of its latest commit. Then you'll pause the
-sandbox to return later or delete it when you're finished.
+Build and run a web application in a cloud sandbox without installing its
+dependencies on your computer. In this walkthrough, you'll start a shell,
+clone a sample application, build its container image, and open the running
+app in your browser. Then you'll pause the sandbox to return later or delete
+it when you're finished.
 
 You can complete the walkthrough in the browser. An optional step shows how
 to open the same project in VS Code or Cursor over SSH.
@@ -33,16 +34,17 @@ their credentials, see [Kits](kits.md) and [Secrets](secrets.md).
 3. If saved secrets or a GitHub token are selected, deselect them for this
    walkthrough. You don't need MCP tools either.
 4. In the network policy picker, select **Balanced** to permit access to
-   GitHub. Keep the compute and timer defaults and select **Run**.
+   GitHub, Docker Hub, and npm. Keep the compute and timer defaults and select
+   **Run**.
 
-If you use a custom network policy, make sure it permits GitHub. See
-[Network policies](policies.md).
+If you use a custom network policy, make sure it permits GitHub, Docker Hub,
+and npm. See [Network policies](policies.md).
 
 When the sandbox is ready, its terminal opens with a Bash shell. After launch,
 you can't change the selected credentials, tools, network policies, or compute
 size. See [Sandbox options](#sandbox-options) for other launch settings.
 
-## Explore a project
+## Build and run an application
 
 Your local files aren't mounted in a cloud sandbox. In the browser terminal,
 clone a public sample project:
@@ -51,29 +53,37 @@ clone a public sample project:
 $ cd /home/agent/workspace
 $ git clone https://github.com/docker/welcome-to-docker.git project
 $ cd project
-$ ls
 ```
 
-Read the project's package scripts and Dockerfile:
+The Shell kit includes Docker Engine. Build the application's container image:
 
 ```console
-$ cat package.json
-$ cat Dockerfile
+$ docker build -t welcome-to-docker .
 ```
 
-Save a record of the latest commit to a file in the workspace:
+The build installs the application's dependencies and compiles it inside the
+sandbox. When it finishes, start a container and publish its port:
 
 ```console
-$ git log -1 --oneline > /home/agent/workspace/latest-commit.txt
-$ cat /home/agent/workspace/latest-commit.txt
+$ docker run -d --name welcome-to-docker -p 3000:3000 welcome-to-docker
 ```
 
-The output shows the commit's short ID and message. The file stays in the
-sandbox so you can open it later or copy it to your computer.
+## Preview the application
+
+1. Select **Connect** on the sandbox's detail page.
+2. Under **Connect via a Port**, enter `3000` and select **Open Port**.
+3. Open the generated URL in your browser.
+
+You should see the Welcome to Docker application. The application runs in the
+cloud sandbox, so you can try it without installing Docker or Node.js on your
+computer.
+
+The generated URL is public. Close the port in **Connect** when you've finished
+previewing the application.
 
 ## Keep your work
 
-The cloned project and commit record are stored in the sandbox. Files don't sync
+The source code and container image are stored in the sandbox. Files don't sync
 automatically with your computer or a remote repository. They remain available
 when you pause and resume the sandbox, but are lost when you delete it.
 
@@ -85,9 +95,9 @@ needs to push changes.
 
 ## Open the project in your editor (optional)
 
-Open the project and commit record in VS Code or Cursor over SSH. Your editor
-runs on your computer, while the files and terminal commands stay in the
-cloud sandbox.
+Open the project in VS Code or Cursor over SSH to edit the application. Your
+editor runs on your computer, while the files and terminal commands stay in
+the cloud sandbox.
 
 1. Install the [Docker Sandboxes CLI](/manuals/ai/sandboxes/install.md),
    version 0.45.0 or later.
@@ -114,16 +124,11 @@ cloud sandbox.
    In Cursor, install its Remote - SSH support.
 5. Open your editor's Command Palette and run **Remote-SSH: Connect to Host**.
    Enter `<SANDBOX_ID>@sbx_cloud`, using the same ID as in the SSH command.
-6. Open `/home/agent/workspace` in the remote window. You'll find the cloned
-   application in `project` and the commit record in `latest-commit.txt`.
+6. Open `/home/agent/workspace/project` in the remote window. Edit the source
+   files, then rebuild the image and recreate the container to preview your
+   changes.
 
 The first connection installs the editor's server inside the sandbox.
-
-To download the commit record, run this command in a terminal on your computer:
-
-```console
-$ sbx --cloud cp <SANDBOX_ID>:/home/agent/workspace/latest-commit.txt ./latest-commit.txt
-```
 
 ## Pause, keep running, or delete the sandbox
 
@@ -137,10 +142,10 @@ Return to **Sandboxes** in the Console and choose what to do next:
 - Pause the sandbox to stop compute charges and keep its files. Confirm that
   it is paused in the list. To continue later, reopen the sandbox and resume
   it. Resuming starts a fresh timer with the original duration.
-- Leave it running if a command or background process still has work to do. Check the expiration
+- Leave it running to keep the application available. Check the expiration
   time: the default **Stop** action stops the sandbox after one hour, including
   background processes, and keeps its files.
-- Delete it when you no longer need it. Save the commit record or push any changes
+- Delete it when you no longer need it. Push any source changes
   you want to keep first. Deletion removes files stored only in the sandbox.
 
 For more detail, see [Lifecycle actions](sandboxes.md#manage-the-lifecycle).
