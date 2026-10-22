@@ -61,8 +61,6 @@ The install commands don't take a version number. Choose the version by
 downloading that release's installer, then run the install steps for your
 operating system.
 
-#### Find a specific version
-
 1. Open the [release notes](/manuals/desktop/release-notes.md).
 1. Go to the version you want. Under the version heading and date, look for
    a **Download Docker Desktop** section with links for Windows, Mac, and
@@ -71,73 +69,14 @@ operating system.
    entry from the docs. Choose another version that includes **Download Docker
    Desktop**.
 1. Download the installer for your platform.
+1. If a newer version of Docker Desktop is already installed,
+   [uninstall](/manuals/desktop/uninstall.md) it before installing the older
+   version.
+1. Install the version you downloaded:
 
-If a newer version of Docker Desktop is already installed,
-[uninstall](/manuals/desktop/uninstall.md) it before installing the older
-version.
-
-#### Install the version you downloaded
-
-{{< tabs >}}
-{{< tab name="Windows" >}}
-
-1. Download `Docker Desktop Installer.exe` for the target version from that
-   release's **Download Docker Desktop** links.
-1. In PowerShell, run the installer for a per-user install:
-
-   ```powershell
-   Start-Process 'Docker Desktop Installer.exe' -Wait -ArgumentList 'install', '--user'
-   ```
-
-   For an all-users install (requires administrator privileges):
-
-   ```powershell
-   Start-Process 'Docker Desktop Installer.exe' -Wait -ArgumentList 'install'
-   ```
-
-For more options, see
-[Install from the command line](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line).
-
-{{< /tab >}}
-{{< tab name="macOS" >}}
-
-1. Download `Docker.dmg` for the target version (Apple chip or Intel chip)
-   from that release's **Download Docker Desktop** links.
-1. In a terminal, install from the DMG you downloaded:
-
-   ```console
-   $ sudo hdiutil attach Docker.dmg
-   $ sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
-   $ sudo hdiutil detach /Volumes/Docker
-   ```
-
-For more options, see
-[Install from the command line](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line).
-
-{{< /tab >}}
-{{< tab name="Linux" >}}
-
-1. Download the `.deb` or `.rpm` package for the target version from that
-   release's **Download Docker Desktop** links.
-1. Install the package file you downloaded.
-
-   Ubuntu / Debian:
-
-   ```console
-   $ sudo apt-get install ./docker-desktop-amd64.deb
-   ```
-
-   Fedora:
-
-   ```console
-   $ sudo dnf install ./docker-desktop-x86_64.rpm
-   ```
-
-Package filenames vary by distribution. For distribution-specific steps, see
-[Install Docker Desktop on Linux](/manuals/desktop/setup/install/linux/_index.md).
-
-{{< /tab >}}
-{{< /tabs >}}
+   - [Install Docker Desktop on Windows](/manuals/desktop/setup/install/windows-install.md)
+   - [Install Docker Desktop on Mac](/manuals/desktop/setup/install/mac-install.md)
+   - [Install Docker Desktop on Linux](/manuals/desktop/setup/install/linux/_index.md)
 
 ### Why do I get a 403 download error?
 
