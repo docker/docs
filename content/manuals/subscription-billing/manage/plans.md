@@ -47,21 +47,16 @@ and select **Buy now**.
 
 ## Change an active plan {#upgrade-plans}
 
-These are the actions available on a plan you already have. Sign in to
+To change a plan you already have, sign in to
 [Docker Home](https://app.docker.com/), go to **Billing**, then go to
-**Active subscriptions**. The control on the plan tile depends on the plan.
-Each plan page has the steps and says when the change takes effect.
+**Active subscriptions**. Each plan tile has a control, such as an action
+menu or a **Manage** button, that opens the options for that plan.
 
-| Plan | Control | Actions |
-| --- | --- | --- |
-| [Docker](/manuals/subscription-billing/plans/docker.md) | Action menu | Add or remove seats, add Build Cloud or Testcontainers Cloud minutes, switch to annual billing, cancel, reactivate |
-| [Gordon](/manuals/subscription-billing/plans/gordon.md) | **Manage** | Upgrade, downgrade, disable or enable auto-renewal |
-| [Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md) | **Manage** | Cancel, re-enable renewal |
-| [Docker Hardened Images](/manuals/subscription-billing/plans/dhi.md) | **Manage** | Add or remove repositories, disable or enable auto-renewal |
-| [Docker Verified Publisher](/manuals/subscription-billing/plans/docker-verified-publisher.md) | **Manage** | Upgrade or downgrade, add or remove consuming domains, disable or enable auto-renewal |
-
-To review credits, see
-[Credits](/manuals/subscription-billing/manage/_index.md#credits).
+The available options depend on the plan. For example, Docker plans let you
+add seats or switch to annual billing, while product plans let you upgrade
+or downgrade tiers, add units, or turn auto-renewal on or off. For the
+steps for each plan and when the change takes effect, see the
+[plans catalog](/manuals/subscription-billing/plans/_index.md).
 
 ## Sales-led products
 
