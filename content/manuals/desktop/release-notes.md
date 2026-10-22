@@ -24,6 +24,25 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.96.3
+
+{{< release-date date="2026-10-22" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.96.3" build_path="/244472/" >}}
+
+### Updates
+
+- Docker Init `v1.4.1`
+- Docker Offload `v0.7.19`
+- Docker Model Runner `v1.2.9`
+- Docker Debug `v0.49.0`
+- Docker MCP `v0.44.2`
+- `kubectl` `v1.36.1`
+
+### Security
+
+- Removed trust for certificates issued by the compromised [eMudhra intermediate CA compromise](https://emudhra.we-have-a-problem.com/). An attacker with network access could have used these certificates to intercept TLS connections made by non-browser clients, such as the Docker CLI and daemon.
+
 ## 4.96.2
 
 {{< release-date date="2026-10-22" >}}
@@ -37,6 +56,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Agent v1.152.0](https://github.com/docker/docker-agent/releases/tag/v1.152.0)
 - [Docker Hardened Images CLI (`dhictl`) v0.0.9](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.9)
 - Docker Desktop Build `v0.39.1`
+- [Docker Scout CLI v1.27.0](https://github.com/docker/scout-cli/releases/tag/v1.27.0)
 
 ### Security
 
