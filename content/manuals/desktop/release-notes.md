@@ -35,14 +35,13 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Docker Init `v1.4.1`
 - Docker Offload `v0.7.19`
 - Docker Model Runner `v1.2.9`
+- Docker Debug `v0.49.0`
+- Docker MCP `v0.44.2`
+- `kubectl` `v1.36.1`
 
 ### Security
 
 - Removed trust for certificates issued by the compromised [eMudhra intermediate CA compromise](https://emudhra.we-have-a-problem.com/). An attacker with network access could have used these certificates to intercept TLS connections made by non-browser clients, such as the Docker CLI and daemon.
-
-> [!IMPORTANT]
->
-> This fix is being rolled out in batches as individual Docker Desktop components are updated. Upcoming patch releases will cover the remaining components. We recommend updating to each patch release as soon as it’s available.
 
 ## 4.96.2
 
