@@ -28,11 +28,6 @@ Both workflows use a public sample project, so you don't need a GitHub token.
 - [Use a shell](#use-a-shell) to build and run the sample application and preview
   it in your browser. You don't need a model provider API key.
 
-A [kit](kits.md) defines a sandbox's base image and installed tools. Choose the
-kit for the workflow you want to follow. After launch, you can't change the
-selected credentials, tools, network policies, or compute size. See
-[Sandbox options](#sandbox-options) for other launch settings.
-
 ## Use a coding agent
 
 Add an Anthropic API key under **Secrets** or enter it when you launch the
@@ -221,7 +216,8 @@ For programmatic workflows, see the
 
 ## Sandbox options
 
-Configure these options before selecting **Run**:
+After launch, you can't change the selected credentials, tools, network policies,
+or compute size. Configure these options before selecting **Run**:
 
 | Option | What to choose |
 | --- | --- |
