@@ -31,10 +31,18 @@ agent's changes:
 | Clone mode (`--clone`) | After checking out or merging a fetched branch | Yes |
 | Mountless sandbox | After pulling committed work from a Git remote | Yes |
 
-For simultaneous tasks, use a separate worktree or clone for each task.
-Branches alone don't isolate edits in a shared working directory. Worktrees
-inside one sandbox share its tools and services. Use separate sandboxes when
-tasks also need independent environments.
+As you give the agent more responsibility for managing work, consider a
+mountless sandbox. The agent can manage branches, create worktrees, and push
+results for review without coordinating changes in your host checkout. You
+review and bring back committed work through Git, and run previews through
+published sandbox ports.
+
+For simultaneous tasks, have the agent create a separate worktree or clone
+for each task inside the sandbox. This works in both mountless sandboxes and
+clone mode, and keeps Git available to the agent. Branches alone don't isolate
+edits in a shared working directory. Worktrees inside one sandbox share its
+tools and services. Use separate sandboxes when tasks also need independent
+environments.
 
 ## Direct mode
 
@@ -175,9 +183,9 @@ only the worktree directory (not the parent repository), it can't resolve the
 `.git` pointer file and has no Git access. The agent can read and write files,
 but can't commit, branch, or check status.
 
-This is useful when you want branch isolation without the create-time
-commitment of clone mode, and you're comfortable committing from the host
-yourself after reviewing the changes.
+Use this approach when you want edits visible in a separate host directory
+and prefer to handle Git operations yourself. To give the agent Git access in
+each working directory, use worktrees inside a mountless or clone-mode sandbox.
 
 1. Create the worktree on the host:
 
@@ -206,6 +214,10 @@ yourself after reviewing the changes.
 A mountless sandbox has no host workspace attached. Clone repositories inside
 it to keep the checkout, dependencies, and development tools in the sandbox.
 Files persist across stops and restarts, but removing the sandbox deletes them.
+
+You can keep one sandbox per project and reuse it across tasks. The agent can
+prepare its tools and create worktrees as needed, so starting another task
+doesn't require another host checkout or sandbox.
 
 1. Create a named sandbox without a workspace path, then attach:
 
