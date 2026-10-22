@@ -353,7 +353,7 @@ To load arguments from a file, pass `--kit-args-file <FILE>` with one
 with `--kit-arg` override values from the file.
 
 To declare reusable cloud configuration in a file, see
-[Use a cloud environment](../configuration/environment-files.md#use-a-cloud-environment).
+[Use environment files in the cloud](environment-files.md).
 
 ## Load an MCP server
 
