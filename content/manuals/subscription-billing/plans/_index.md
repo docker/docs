@@ -28,7 +28,7 @@ grid:
     link: /subscription-billing/plans/gordon/
     icon: /icons/gordon.svg
   - title: Docker Agentic Platform
-    description: Pay-as-you-go cloud compute for personal accounts.
+    description: Pay-as-you-go cloud compute for individual accounts.
     link: /subscription-billing/plans/docker-agentic-platform/
     icon: cloud
   - title: Docker Hardened Images (DHI)

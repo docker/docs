@@ -2,7 +2,7 @@
 title: Docker plans
 linkTitle: Docker
 description:
-  Learn about Docker plans that upgrade personal and organization accounts,
+  Learn about Docker plans that upgrade individual and organization accounts,
   including usage entitlements, billing cycle, and downgrade options.
 keywords:
   docker team, docker business, docker pro, docker personal,

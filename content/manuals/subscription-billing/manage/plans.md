@@ -27,7 +27,7 @@ self-serve Docker products, while the Overview page shows your active plans with
 
 You can purchase Docker Team, Docker Business, and other products through the product catalog:
 
-1. Sign in to [Docker Home](https://app.docker.com/), then choose your personal
+1. Sign in to [Docker Home](https://app.docker.com/), then choose your individual
    account or your organization account.
 1. Go to **Billing**.
 1. Select **Browse products**.
