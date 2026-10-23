@@ -14,6 +14,8 @@ aliases:
   - /subscription/ai-governance/
 ---
 
+{{< summary-bar feature_name="AI Governance plan" >}}
+
 > [!TIP]
 > To subscribe to AI Governance, <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_aigov" class="link" rel="noopener">contact sales</a>.
 

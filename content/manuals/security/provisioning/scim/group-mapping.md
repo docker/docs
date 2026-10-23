@@ -35,7 +35,7 @@ Use group mapping to manage team membership through SAML SSO, SCIM, or both.
 Before you begin, you must have:
 
 - SSO configured for your organization
-- Administrator access to Docker Home and your identity provider
+- Administrator access to your identity provider
 
 ## How group mapping works
 

@@ -10,6 +10,8 @@ aliases:
   - /accounts/organization/setup/general-settings/
 ---
 
+{{< summary-bar feature_name="Organization information" >}}
+
 Learn how to update your organization information.
 
 ## Update organization information

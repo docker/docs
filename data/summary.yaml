@@ -1,18 +1,24 @@
 2FA:
   subscription: [Personal, Pro]
-  for: Individuals
+  requires: A verified email address
 AI Governance Audit Logs:
   subscription: [AI Governance]
   requires: Docker Sandboxes [0.39.0](/manuals/ai/sandboxes/release-notes.md) or later
+AI Governance plan:
+  account: Organization
+  purchase: Sales-led
 Activity logs:
   subscription: [Team, Business]
-  for: Administrators
+  role: Owner
+  permission: View activity logs
 Admin Console:
   subscription: [Business]
   for: Administrators
 Admin orgs:
   subscription: [Team, Business]
-  for: Administrators
+  role: Owner
+Create organization:
+  subscription: [Team, Business]
 Air-gapped containers:
   subscription: [Business]
   for: Administrators
@@ -22,6 +28,9 @@ Amazon S3 cache:
   availability: Experimental
 Gordon:
   requires: Docker Desktop [4.74.0](/manuals/desktop/release-notes.md#4740) or later
+Gordon plans:
+  account: Individual
+  purchase: Self-serve
 Gordon DHI migration:
   availability: Experimental
   requires: Docker Desktop [4.38.0](/manuals/desktop/release-notes.md#4380) or later
@@ -30,6 +39,10 @@ Automated builds:
   subscription: [Pro, Team, Business]
 Azure blob:
   availability: Experimental
+Billing:
+  subscription: [Personal, Pro, Team, Business]
+  role: Owner
+  permission: Manage billing
 Build additional contexts:
   requires: Docker Compose [2.17.0](https://github.com/docker/compose/releases/tag/v2.17.0) and later
 Build checks:
@@ -79,7 +92,7 @@ Cache backend API:
   availability: Experimental
 Company:
   subscription: [Business]
-  for: Administrators
+  role: Company owner
 Compliance reporting:
   subscription: [Business]
   for: Administrators
@@ -155,13 +168,20 @@ Compose SDK:
   requires: Docker Compose [5.0.0](https://github.com/docker/compose/releases/tag/v5.0.0) and later
 Custom roles:
   subscription: [Business]
-  for: Administrators
+  role: Owner
+  permission: Manage custom roles
 Dev Environments:
   availability: Beta
+Docker Agentic Platform:
+  account: Individual
+  purchase: Self-serve
 Docker Build Cloud:
   subscription: [Pro, Team, Business]
 Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
+Docker Verified Publisher:
+  account: Organization
+  purchase: Self-serve
 Docker Offload:
   subscription: [Docker Offload]
   requires: Docker Desktop 4.68 or later
@@ -177,6 +197,9 @@ Docker Hardened Images:
   subscription: [Docker Hardened Images Select or Enterprise]
 Docker Hardened Images Enterprise:
   subscription: [Docker Hardened Images Enterprise]
+DHI plans:
+  account: Organization
+  purchase: Self-serve
 Docker Hardened Images EU data residency:
   availability: Early Access
   subscription: [Docker Hardened Images Select or Enterprise]
@@ -222,10 +245,12 @@ Docker Scout Mount Permissions:
   requires: Docker Desktop [4.34.0](/manuals/desktop/release-notes.md#4340) and later
 OIDC connections:
   subscription: [Team, Business]
-  for: Administrators
+  role: Editor
+  permission: Manage OIDC connections
 Domain management:
   subscription: [Business]
-  for: Administrators
+  role: Owner
+  permission: Manage domains
 Domain audit:
   subscription: [Business]
   for: Administrators
@@ -235,7 +260,8 @@ Enforce sign-in:
 Gated distribution:
   availability: Early Access
 General admin:
-  for: Administrators
+  subscription: [Available to all organization accounts]
+  role: Owner
 GitHub Actions cache:
   availability: Experimental
 Hardened Docker Desktop:
@@ -253,11 +279,15 @@ Immutable tags:
   availability: Beta
 Insights:
   subscription: [Business]
-  for: Administrators
+  role: Owner
 Intune:
   for: Administrators
 Jamf Pro:
   for: Administrators
+Licenses:
+  subscription: [Team, Business, AI Governance, Docker Offload]
+  role: Owner
+  permission: Manage licenses
 Load by default:
   requires: Docker Buildx [0.14.0](https://github.com/docker/buildx/releases/tag/v0.14.0) and later
 Evaluate policies:
@@ -267,10 +297,15 @@ MSI installer:
   for: Administrators
 OATs:
   subscription: [Team, Business]
-  for: Administrators
+  role: Owner
+  permission: Manage organization access tokens
+Organization information:
+  subscription: [Available to all organization accounts]
+  role: Owner
+  permission: Update organization information
 PATs:
   subscription: [Personal, Pro]
-  for: Individuals
+  requires: A verified email address
 Pay by invoice:
   subscription: [Team, Business]
 PKG installer:
@@ -288,7 +323,8 @@ SOCKS5 proxy support:
   subscription: [Business]
 SSO:
   subscription: [Business]
-  for: Administrators
+  role: Owner
+  permission: Manage SSO and SCIM
 Synchronized file sharing:
   subscription: [Pro, Team, Business]
 Unassociated machines:

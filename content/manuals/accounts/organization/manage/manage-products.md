@@ -9,7 +9,7 @@ aliases:
   - /admin/organization/manage-products/
 ---
 
-{{< summary-bar feature_name="Admin orgs" >}}
+{{< summary-bar feature_name="Admin orgs" permission="Manage Desktop settings" >}}
 
 Use this page to learn how to control and monitor product access and usage
 for your organization's members. If you're looking for setup and

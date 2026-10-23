@@ -13,9 +13,10 @@ aliases:
   - /admin/organization/manage/manage-licenses/
 ---
 
-Licenses control which organization members can use supported Docker products.
-As an organization owner, you manage license availability for your
-organization.
+{{< summary-bar feature_name="Licenses" >}}
+
+Licenses control which organization members can use supported Docker
+products. You manage license availability for your organization.
 
 > [!TIP]
 > To learn more about product licenses, Docker Team and Business seats, and

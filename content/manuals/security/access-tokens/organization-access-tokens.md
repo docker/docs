@@ -23,7 +23,8 @@ working when people join or leave the organization.
 
 Unlike a personal access token (PAT), an OAT belongs to the
 organization. Any organization owner can see, edit, deactivate, or
-delete it. Each token has its own scopes, so it can only reach the
+delete it. A company owner can do the same for organizations in the
+company. Each token has its own scopes, so it can only reach the
 repositories and organization settings you choose.
 
 > [!WARNING]
@@ -41,17 +42,6 @@ repositories and organization settings you choose.
   code
 - Deactivate or delete a token as soon as it's compromised or no longer
   needed
-
-## Prerequisites
-
-To create and manage OATs, you need:
-
-- A Docker Team or Docker Business subscription
-- One of these roles in the organization:
-  - Organization owner
-  - Company owner, for organizations that belong to a company
-  - A [custom role](/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md)
-    that includes the **Manage organization access tokens** permission
 
 ## Create an organization access token
 

@@ -19,9 +19,6 @@ Activity logs show a chronological list of organization and repository
 changes in Docker Home. Use them to see what changed, when it changed, and who
 made the change.
 
-Organization owners and members with a custom role that includes the
-**View activity logs** permission can open the activity log.
-
 > [!TIP]
 >
 > Use activity logs for an admin audit trail of your organization and

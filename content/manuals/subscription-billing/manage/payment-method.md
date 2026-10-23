@@ -13,6 +13,8 @@ aliases:
   - /billing/core-billing/payment-method/
 ---
 
+{{< summary-bar feature_name="Billing" >}}
+
 Docker supports several payment methods for paid individual accounts and
 organizations. This page describes supported payment types, how to manage
 payments from [Docker Home](https://app.docker.com/), and how to set up pay

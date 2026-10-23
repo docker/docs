@@ -13,6 +13,8 @@ aliases:
   - /subscription/plans/docker-verified-publisher/
 ---
 
+{{< summary-bar feature_name="Docker Verified Publisher" >}}
+
 > [!TIP]
 > DVP plans require an approved application before you can subscribe.
 > See [Apply for DVP Starter or Growth](#apply-for-dvp-starter-or-growth).

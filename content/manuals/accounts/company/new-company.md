@@ -14,13 +14,6 @@ aliases:
 Learn how to create a new company in Docker Home, a centralized
 dashboard for managing organizations.
 
-## Prerequisites
-
-Before you begin, you must:
-
-- Be the owner of the organization you want to add to your company
-- Have a Docker Business subscription
-
 ## Create a company
 
 To create a new company:

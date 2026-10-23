@@ -30,7 +30,6 @@ use.
 
 To use Insights, you must meet the following requirements:
 
-- A Docker Business subscription
 - Administrators must
   [enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md)
   for users

@@ -20,6 +20,8 @@ aliases:
   - /billing/subscription-management/
 ---
 
+{{< summary-bar feature_name="Billing" >}}
+
 You can add and manage your plans from the billing portal in Docker Home. Within the billing portal, you use the product catalog to view
 self-serve Docker products, while the Overview page shows your active plans with options to upgrade or cancel.
 

@@ -11,7 +11,7 @@ aliases:
   - /admin/organization/manage-a-team/
 ---
 
-{{< summary-bar feature_name="Admin orgs" >}}
+{{< summary-bar feature_name="Admin orgs" permission="Manage teams" >}}
 
 You can create teams for your organization in Docker Home or Docker Hub,
 and configure team repository access in Docker Hub.

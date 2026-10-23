@@ -27,7 +27,6 @@ Before you turn on 2FA, you need:
 - A time-based one-time password (TOTP) authenticator app on your phone or
   another device
 - Your Docker account password
-- A verified email address on your account
 
 ## Enable two-factor authentication
 
