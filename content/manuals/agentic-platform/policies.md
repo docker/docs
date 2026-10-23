@@ -34,6 +34,15 @@ You can select zero, one, or several additional user policies. By default,
 **Open** is marked **Always applied**, unlike local sandboxes where you choose a
 network preset.
 
+On **Policies**, use the **Always applied** switch in the user-policy table
+to change this account setting, including for read-only presets. The setting
+is saved and controls which policies are required for future sandbox launches.
+Turning it off makes the policy optional in the launcher. Review your saved
+selections before launching.
+
+To use a preset as an editable starting point, select **Duplicate** on its
+row, edit the copied name and rules, and save the custom policy.
+
 ## How policies combine
 
 Allow rules from all applicable user policies and the kit are combined. A
