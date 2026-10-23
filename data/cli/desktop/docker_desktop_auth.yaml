@@ -1,0 +1,15 @@
+command: docker desktop auth
+short: Manage Docker Desktop authentication
+usage: docker desktop auth
+pname: docker desktop
+plink: docker_desktop.yaml
+cname:
+    - docker desktop auth status
+clink:
+    - docker_desktop_auth_status.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

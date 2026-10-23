@@ -8,13 +8,14 @@ description: |-
     "sbx stop" if you want it pruned. To remove a specific sandbox regardless of
     state, use "sbx rm SANDBOX".
 
-    Use --filter since=DURATION to narrow the set to sandboxes that have been
-    stopped for longer than DURATION (e.g. since=168h to keep anything stopped
-    within the last week). A sandbox whose stop time the daemon cannot report is
-    left alone, since how long it has been stopped cannot be established.
+    Use --filter until=TIMESTAMP to narrow the set to sandboxes that stopped before
+    TIMESTAMP. The value can be an RFC 3339 timestamp, Unix timestamp, or Go duration
+    relative to now (e.g. until=168h keeps anything stopped within the last week).
+    A sandbox whose stop time the daemon cannot report is left alone, since how long
+    it has been stopped cannot be established.
 
     Use --dry-run to list what would be removed without removing anything, and
-    --json with it for machine-readable output.
+    --format json or --format yaml with it for machine-readable output.
 
     Pruning requires confirmation; use --force to skip the confirmation prompt
     (for non-interactive scripts) and to remove a sandbox that is in use (e.g. an
@@ -32,31 +33,38 @@ options:
     - name: filter
       default_value: '[]'
       usage: |
-        Filter candidates (supported: since=DURATION — stopped for longer than DURATION)
+        Filter candidates (supported: until=TIMESTAMP — stopped before TIMESTAMP)
     - name: force
       shorthand: f
       default_value: "false"
       usage: |
         Skip confirmation prompts and remove even if in use (e.g. an open SSH connection)
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for prune
     - name: json
       default_value: "false"
-      usage: Output the --dry-run listing in JSON format
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      # Show what would be removed
+      sbx prune --dry-run
+
+      # Remove without asking
+      sbx prune --force
+
+      # Only sandboxes stopped before a point in time
+      sbx prune --filter until=2026-01-01T00:00:00Z
 see_also:
     - sbx - Manage AI coding agent sandboxes.

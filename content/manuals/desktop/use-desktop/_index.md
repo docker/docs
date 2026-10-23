@@ -8,80 +8,47 @@ aliases:
 - /desktop/dashboard/
 ---
 
-When you open Docker Desktop, the Docker Desktop Dashboard displays.
+When you open Docker Desktop, the Docker Desktop Dashboard is the first thing you see. 
 
 It provides a centralized interface to manage your [containers](container.md), [images](images.md), [volumes](volumes.md), [builds](builds.md), [Kubernetes resources](kubernetes.md), and [logs](logs.md).
 
-In addition, the Docker Desktop Dashboard lets you:
-
-- Use [Gordon](/manuals/ai/gordon/_index.md), a personal AI assistant embedded in Docker Desktop and the Docker CLI. It's designed to streamline your workflow and help you make the most of the Docker ecosystem.
-- Navigate to the **Settings** menu to configure your Docker Desktop settings. Select the **Settings** icon in the Dashboard header.
-- Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
-- Be notified of new releases, installation progress updates, and more in the **Notifications center**. Select the bell icon in the bottom-right corner of the Docker Desktop Dashboard to access the notification center.
-- Access the **Learning center** from the Dashboard header. It helps you get started with quick in-app walkthroughs and provides other resources for learning about Docker. 
-
-  For a guided introduction, see
-  [Build and share a containerized application](/get-started/tutorials/run-an-app.md).
-- Access [Docker Hub](/manuals/docker-hub/_index.md) to search, browse, pull, run, or view details
-  of images.
-- Navigate to [Docker Extensions](/manuals/extensions/_index.md) if you have enabled it.
+The Dashboard also gives you quick access to AI tooling, extensions, settings, and help, so you rarely need to leave Docker Desktop. Use Quick search in the header any time to jump straight to a container, image, extension, volume, or doc.
 
 > [!TIP]
 >
 > You can customize the left-hand navigation to show only the tabs that matter to you, and hide the ones that don’t. Right-click the left-hand navigation, select **Customize**, and then select, deselect, or re-order the tabs.
 
-## Docker terminal
+## Sign in
 
-From the Docker Dashboard footer, you can use the integrated terminal directly within Docker Desktop. 
+Docker recommends signing in with the **Sign in** option in the top-right corner of the Dashboard. Signing in lets you:
 
-The integrated terminal:
+- Access your Docker Hub repositories directly from Docker Desktop.
+- Increase your pull rate limit compared to anonymous users. See [Usage and limits](/manuals/docker-hub/usage/_index.md).
+- Enhance your organization's security posture for containerized development with [Hardened Desktop](/manuals/desktop/enterprise/hardened-desktop/_index.md).
 
-- Persists your session if you navigate to another
-  part of the Docker Desktop Dashboard and then return.
-- Supports copy, paste, search, and clearing your session.
+Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity.
 
-#### Open the integrated terminal
+In large enterprises where admin access is restricted, administrators can [enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).
 
-To open the integrated terminal, either:
+> [!TIP]
+>
+> Explore [Docker's core subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopSignIn) to see what else Docker can offer you.
 
-- Hover over your running container and under the **Actions** column, select the **Show container actions**
-  menu. From the drop-down menu, select **Open in terminal**.
-- Or, select the **Terminal** icon located in the bottom-right corner, next to the version number.
+## Use AI features
 
-To use your external terminal, navigate to the **General** tab in **Settings**
-and select the **System default** option under **Choose your terminal**.
+- [Gordon](/manuals/ai/gordon/_index.md): A personal AI assistant built into Docker Desktop and the Docker CLI, designed to streamline your workflow and help you get more out of the Docker ecosystem.
+- [Docker Model Runner](/manuals/ai/model-runner/_index.md): Manage, run, and deploy AI models using Docker.
+- [Docker MCP Toolkit](/manuals/desktop/features/mcp-catalog-and-toolkit/_index.md): A management interface integrated into Docker Desktop that lets you set up, manage, and run containerized MCP servers in profiles and connect them to AI agents.
 
-## Quick search
+### Extend Docker Desktop
 
-Use Quick Search, which is located in the Docker Dashboard header, to search for:
+- [Docker Offload](/manuals/offload/_index.md): Run builds and containers in the cloud when local resources aren't enough.
+- [Docker Hub](/manuals/docker-hub/_index.md): Search, browse, pull, run, or view details for images.
+- [Docker Extensions](/manuals/extensions/_index.md): Add third-party tools directly into Docker Desktop.
 
-- Any container or Compose application on your local system. You can see an overview of associated environment variables or perform quick actions, such as start, stop, or delete.
+### Configure, troubleshoot, and stay updated
 
-- Public Docker Hub images, local images, and images from remote repositories (private repositories from organizations you're a part of in Hub). Depending on the type of image you select, you can either pull the image by tag, view documentation, go to Docker Hub for more details, or run a new container using the image.
-
-- Extensions. From here, you can learn more about the extension and install it with a single click. Or, if you already have an extension installed, you can open it straight from the search results.
-
-- Any volume. From here you can view the associated container.
-
-- Docs. Find help from Docker's official documentation straight from Docker Desktop. 
-
-## The Docker menu
-
-Docker Desktop also includes a tray icon, referred to as the Docker menu {{< inline-image src="../../assets/images/whale-x.svg" alt="whale menu" >}} for quick access.
-
-Select the {{< inline-image src="../../assets/images/whale-x.svg" alt="whale menu" >}} icon in your taskbar to open options such as:
-
-- **Dashboard**. This takes you to the Docker Desktop Dashboard.
-- **Sign in/Sign up**
-- **Settings**
-- **Check for updates**
-- **Troubleshoot**
-- **Give feedback**
-- **Switch to Windows containers** (if you're on Windows)
-- **About Docker Desktop**. Contains information on the versions you are running, and links to the Subscription Service Agreement for example.
-- **Docker Hub**
-- **Documentation**
-- **Extensions**
-- **Kubernetes**
-- **Restart**
-- **Quit Docker Desktop**
+- **Settings**: Select the Settings icon in the Dashboard header to configure Docker Desktop.
+- **Troubleshoot**: Select the Troubleshoot icon in the Dashboard header to debug issues or restart Docker Desktop.
+- **Notifications center**: Select the bell icon in the bottom-right corner to see new releases, installation progress, and other updates.
+- Learning center: Open it from the Dashboard header for in-app walkthroughs and other learning resources.

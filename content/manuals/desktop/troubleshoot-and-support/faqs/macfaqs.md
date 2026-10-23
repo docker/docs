@@ -59,7 +59,7 @@ To move the disk image file to a different location:
 
 ##### How do I delete unnecessary containers and images?
 
-Check whether you have any unnecessary containers and images. If your client and daemon API are running version 1.25 or later (use the `docker version` command on the client to check your client and daemon API versions), you can see the detailed space usage information by running:
+Check whether you have any unnecessary containers and images. You can see the detailed space usage information by running:
 
 ```console
 $ docker system df -v
@@ -85,10 +85,7 @@ $ docker system prune
 
 This command removes all stopped containers, unused networks, dangling images, and build cache.
 
-It might take a few minutes to reclaim space on the host depending on the format of the disk image file. If the file is named:
-
-- `Docker.raw`, space on the host is reclaimed within a few seconds.
-- `Docker.qcow2`, space is freed by a background process after a few minutes.
+It might take a few minutes to reclaim space on the host.
 
 Space is only freed when images are deleted. Space is not freed automatically when files are deleted inside running containers. To trigger a space reclamation at any point, run the command:
 
@@ -166,8 +163,7 @@ You can put your client certificates in
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`.
 
 When the Docker Desktop application starts, it copies the `~/.docker/certs.d`
-folder on your Mac to the `/etc/docker/certs.d` directory on Moby (the Docker
-Desktop `xhyve` virtual machine).
+folder on your Mac to the `/etc/docker/certs.d` directory inside the Docker Desktop Linux VM.
 
 > [!NOTE]
 >

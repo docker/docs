@@ -1,12 +1,17 @@
 ---
 title: Configure an upstream proxy
 linkTitle: Upstream proxy
-description: Route sandbox and daemon traffic through a corporate or upstream proxy, including PAC files, SOCKS5, and your OS system proxy.
+description: Route local sandbox, daemon, and host CLI traffic through an upstream proxy, including cloud connections, PAC files, SOCKS5, and your OS system proxy.
 keywords: docker sandboxes, sbx, upstream proxy, corporate proxy, pac, socks5, system proxy, no_proxy, egress, ntlm, kerberos
 weight: 40
 aliases:
   - /ai/sandboxes/upstream-proxy/
 ---
+
+This page describes proxy settings for local sandboxes, the local daemon, and
+host CLI connections to cloud sandboxes. These settings don't configure traffic
+originating inside a cloud sandbox. For cloud sandbox egress controls, see
+[Cloud network policy](../cloud/network-policy.md).
 
 > [!IMPORTANT]
 > Upstream proxy support is experimental. Everything described on this page —
@@ -24,9 +29,10 @@ traffic reaches them.
 Docker Sandboxes sends two kinds of outbound traffic, and you can proxy them
 independently:
 
-- Sandbox traffic — network access from inside your sandboxes.
-- Daemon traffic — the `sbx` daemon's own access: image pulls, telemetry,
-  sign-in, and feature flags.
+- Sandbox traffic — network access from inside your local sandboxes.
+- Daemon and host CLI traffic — the daemon's own access, including image pulls,
+  telemetry, and feature flags, and host CLI requests, including `sbx login`,
+  `sbx diagnose --upload`, cloud commands, `sbx move`, the TUI, and cloud SSH.
 
 ## Default behavior
 
@@ -38,7 +44,8 @@ your OS has no proxy configured, traffic goes direct.
 
 ## Set a proxy manually
 
-Use `sbx settings set` to override the default for one or both kinds of traffic:
+Use [`sbx settings set`](settings.md#change-a-setting) to override the default
+for one or both kinds of traffic:
 
 ```console
 $ sbx settings set proxy http://proxy.corp:3128          # both kinds of traffic
@@ -84,8 +91,8 @@ environment variables, so existing setups keep working without migration:
   form of `proxy.sandbox` and `no_proxy.sandbox`. They apply to sandbox traffic
   only and never affect daemon traffic.
 
-The daemon reads these variables when it starts, so set them before your first
-`sbx` command, or restart the daemon for a change to take effect.
+For how to apply environment variable changes to the CLI and daemon, see
+[Settings environment variables](settings.md#environment-variables).
 
 ## Precedence
 
@@ -110,24 +117,43 @@ over the OS system proxy.
 
 ## When changes take effect
 
-The two kinds of traffic are resolved at different times:
+Proxy settings take effect at different times depending on the consumer:
 
 - Sandbox scope (`proxy.sandbox`, `no_proxy.sandbox`, and the sandbox side of
-  `proxy` and `no_proxy`) is re-resolved every time a sandbox is created or
-  restarted. A change takes effect on the next sandbox you create or restart;
-  already-running sandboxes keep the proxy they were created with.
+  `proxy` and `no_proxy`) is resolved when a sandbox network proxy is created.
+  Sandboxes you create after a change use the updated settings. Existing
+  sandboxes retain their selected upstream proxy until `sbx daemon restart`
+  rebuilds their network proxies. Restarting a sandbox alone is insufficient.
 - Daemon scope (`proxy.daemon`, `no_proxy.daemon`, and the daemon side of
-  `proxy` and `no_proxy`) is resolved once when the daemon starts. A change
-  requires a daemon restart.
+  `proxy` and `no_proxy`) is resolved once when the daemon starts. Changes to
+  the daemon's own traffic require `sbx daemon restart`.
+- Host CLI clients read daemon-scoped settings on each invocation. Changes
+  apply on the next invocation without a daemon restart.
 
 The `DOCKER_SANDBOXES_*` environment variables are a separate case. They control
 sandbox traffic only, as described in
 [Environment variables](#environment-variables), but `sbx` reads them from the
 daemon's environment as the daemon starts, so changing one also requires a
-daemon restart.
+daemon restart. If one of these variables overrides a stored setting, unset
+the variable and restart the daemon for the stored setting to take effect.
 
 When a `system` or PAC proxy is in use, `sbx` still tracks OS-level proxy changes
 (such as switching networks, connecting a VPN, or updated PAC contents) live.
+
+## Cloud SSH
+
+Cloud SSH uses the configured host proxy to connect to the SSH gateway. Some
+proxies refuse connections to the gateway's SSH port. If your network permits
+direct SSH connections, bypass the proxy for cloud SSH:
+
+```console
+$ sbx settings set proxy.sshDirect true
+```
+
+This setting skips the proxy entirely for cloud SSH, without trying it first.
+Other host CLI requests keep using the configured proxy. The change applies on
+the next SSH connection without a daemon restart. Set it to `false` to use the
+proxy again.
 
 ## Authentication
 
@@ -152,9 +178,10 @@ $ sbx settings set proxy.integratedAuth true
 
 The setting isn't scoped: it applies to both sandbox and daemon traffic. If the
 proxy offers several schemes, the strongest one is used, preferring Negotiate
-over NTLM. A change takes effect on the same schedule as the other proxy
-settings: on the next sandbox you create or restart for sandbox traffic, and
-after `sbx daemon restart` for daemon traffic.
+over NTLM. Changes follow the same
+[schedule as other proxy settings](#when-changes-take-effect): on the next
+invocation for supported CLI clients, when you create a sandbox, and after
+`sbx daemon restart` for daemon traffic and existing sandbox proxies.
 
 Your identity stays on the host. Authentication to the upstream proxy happens
 on the host side of the sandbox boundary, after network policy has already been

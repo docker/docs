@@ -1999,7 +1999,7 @@ work. Some insider builds may not work.
 **Known issues**
 
 * Only UTF-8 passwords are supported for host filesystem sharing
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc`.
 
 ### Beta 22 Release (2016-08-11 1.12.0-beta22)
 
@@ -2007,7 +2007,7 @@ Unreleased. See Beta 23 for changes.
 
 **Known issues**
 
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc`.
 
 ### Beta 21 Release (2016-07-28 1.12.0-beta21)
 
@@ -2308,7 +2308,7 @@ This Beta release includes some significant changes:
 
 **Known issues**
 
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. 
 
 * Logs for the windows service are not aggregated with logs from the GUI. This is expected to be fixed in future versions.
 

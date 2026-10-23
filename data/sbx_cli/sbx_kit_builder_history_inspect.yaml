@@ -1,0 +1,26 @@
+name: sbx kit builder history inspect
+synopsis: Show a kit build record
+experimental: true
+usage: sbx kit builder history inspect [ARGS...] [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for inspect
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # The most recent build
+      sbx kit builder history inspect
+
+      # One build by record reference
+      sbx kit builder history inspect 3b6l9x
+see_also:
+    - sbx kit builder history - Show kit build history in the builder sandbox

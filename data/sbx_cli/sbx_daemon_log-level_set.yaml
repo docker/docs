@@ -1,6 +1,6 @@
 name: sbx daemon log-level set
 synopsis: 'Set a category''s log level (target: proxy, general, or all)'
-usage: sbx daemon log-level set <target> <level> [flags]
+usage: sbx daemon log-level set TARGET LEVEL [flags]
 options:
     - name: help
       shorthand: h
@@ -11,13 +11,14 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx daemon log-level set proxy debug
+
+      # Every category at once
+      sbx daemon log-level set all info
 see_also:
-    - sbx daemon log-level - Inspect or change sandboxd's per-category log levels
+    - sbx daemon log-level - Show or change sandboxd's per-category log levels

@@ -5,6 +5,12 @@ description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
 
+The following diagnostics and recovery steps apply to local sandboxes. Use
+[`sbx --cloud diagnose`](cloud/usage.md#diagnose-cloud-access) to check cloud
+connectivity and account access. For cloud files, expiration, and network access, see
+[Cloud sandboxes](cloud/). Local daemon restarts and `sbx reset` do not repair
+cloud sandbox state.
+
 ## Run diagnostics
 
 Before digging into a specific issue, run
@@ -18,9 +24,22 @@ $ sbx diagnose
 ```
 
 The command prints a summary of checks that passed, warned, or failed, along
-with suggested fixes. Use `--output json` to get machine-readable output, or
-`--output github-issue` to generate a Markdown snippet suitable for pasting
+with suggested fixes. Use `--json` or `--format yaml` for machine-readable
+output, or `--format github-issue` to generate a Markdown snippet suitable for pasting
 into a GitHub issue.
+
+## Sandbox is not responding
+
+If `sbx ls` shows `running (not responding)`, Docker Sandboxes has detected
+that the sandbox isn't responding to commands. Stop and start that sandbox,
+then retry your command:
+
+```console
+$ sbx stop <SANDBOX_NAME>
+$ sbx start <SANDBOX_NAME>
+```
+
+Files saved in the sandbox are kept when you stop and start it.
 
 ## Restart the sandbox daemon
 
@@ -73,6 +92,22 @@ $ sbx run --name <sandbox-name> <agent>
 See [Choose a workspace](usage.md#choose-a-workspace) for mountless, direct,
 and clone-mode behavior.
 
+## Kiro, Copilot, or Droid shorthand fails
+
+In Docker Sandboxes v0.42, `sbx run kiro`, `sbx run copilot`, and
+`sbx run droid` fail because these agents moved from built-in agents to
+public kits and their shorthand names aren't resolved in this release.
+
+[Upgrade Docker Sandboxes](install.md) to v0.43.0 or later to launch
+these agents by name again. If you need to stay on v0.42, use the full kit
+reference for your agent:
+
+```console
+$ sbx run docker.io/sbx/kiro-kit:latest
+$ sbx run docker.io/sbx/copilot-kit:latest
+$ sbx run docker.io/sbx/droid-kit:latest
+```
+
 ## Agent can't install packages or reach an API
 
 Sandboxes use [network access rules](governance/access-controls/network.md) to
@@ -107,19 +142,19 @@ allowlist:
 
 ```console
 $ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale"
-ERROR: resolve kits: kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale" cannot be installed — its source is not in your allowlist.
 ```
 
 `sbx` restricts kit installs to an allowlist of sources, which defaults to
 Docker Hub (`docker.io/`) only. Add the kit's publisher to the
-`kit.allowedSources` setting, keeping the entries you want to retain:
+[`kit.allowedSources`](configuration/settings.md#kitallowedsources) setting,
+keeping the entries you want to retain:
 
 ```console
 $ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
 ```
 
 Then run the command again. For details, including how to allow local kits or
-any remote source, see [Restrict kit sources](customize/kits.md#restrict-kit-sources).
+any remote source, see [Restrict kit sources](/manuals/ai/sandboxes/customize/use-kits.md#restrict-kit-sources).
 
 ## SSH and other non-HTTP connections fail
 
@@ -139,8 +174,8 @@ can't be recovered. Use an address-based rule in that case:
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-UDP and ICMP traffic is blocked at the network layer and can't be unblocked
-with policy rules.
+UDP requires [experimental UDP egress](governance/access-controls/local.md#allow-outbound-udp)
+and UDP allow rules. ICMP is blocked and can't be unblocked with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
 server's hostname or IP address, or use HTTPS URLs instead:
@@ -180,6 +215,20 @@ configured to use the forward proxy. See
 [Monitoring network activity](governance/monitor-and-enforce/monitoring.md)
 for details.
 
+## MCP server streams stall
+
+If a remote MCP server's HTTP/2 handling stalls long-lived streams, register
+it with `--disable-http2` to use HTTP/1.1:
+
+```console
+$ sbx mcp add acme --url https://mcp.acme.com/mcp --disable-http2
+```
+
+Replace the example URL with your MCP endpoint. The setting applies to later
+connections to this server. The flag requires `--url` and can't be used with
+`--command` or `--local`. For registration options, see
+[Register an MCP server](mcp-gateway.md#register-an-mcp-server).
+
 ## API calls fail with a certificate error
 
 If your organization uses a proxy that inspects HTTPS traffic, agent requests
@@ -189,9 +238,10 @@ your organization's internal root CA inside the sandbox so the agent and its
 SDKs trust certificates signed by the proxy. Certificate errors can stop a
 request before the credential proxy can inject credentials.
 
-For repeatable setup, create a [sandbox kit](customize/kits.md) that installs
-the CA when the sandbox is created. See
-[Install an internal CA certificate](customize/kit-examples.md#install-an-internal-ca-certificate)
+For repeatable setup with a built-in agent, create a
+[v2 mixin kit](customize/kits-v2.md) that installs the CA when the
+sandbox is created. See
+[Install an internal CA certificate](customize/kits-v2.md#install-an-internal-ca-certificate)
 for an example kit.
 
 Use a PEM-encoded certificate with a `.crt` extension. If traffic can be signed
@@ -233,6 +283,43 @@ the egress path in the **PROXY** column:
   organization's certificate directly. These paths are where installing the
   internal CA applies. The only difference between them is whether the client
   knows it's talking to a proxy.
+
+### Certificate errors during Docker builds
+
+Containers started by the sandbox's Docker Engine have their own trust stores.
+They don't inherit the sandbox's installed certificates. If an HTTPS download
+in a Dockerfile fails with `self signed certificate in certificate chain`,
+install the proxy CA in the build image before the download.
+
+From a shell inside the sandbox, write its proxy CA into your build context:
+
+```console
+$ printf '%s' "$PROXY_CA_CERT_B64" | base64 -d > sbx-proxy-ca.crt
+```
+
+For a Debian-based image with `ca-certificates` installed, copy the certificate
+and update the trust store before commands that make HTTPS requests:
+
+```dockerfile
+FROM python:3.13-slim
+COPY sbx-proxy-ca.crt /usr/local/share/ca-certificates/sbx-proxy-ca.crt
+RUN update-ca-certificates
+```
+
+Build inside the sandbox, passing its proxy settings to the build:
+
+```console
+$ docker build --build-arg HTTP_PROXY --build-arg HTTPS_PROXY --build-arg NO_PROXY -t my-app .
+```
+
+If your organization also inspects TLS, install its root CA in the build image
+as a separate `.crt` file before `update-ca-certificates`. Keep the system CA
+bundle intact so the image trusts both proxies and public certificate
+authorities. The earlier [certificate troubleshooting](#api-calls-fail-with-a-certificate-error)
+explains which proxy paths need each CA.
+
+Keep the generated proxy certificate out of version control. Regenerate it and
+rebuild the image if the sandbox proxy CA changes.
 
 ## Sandbox runs out of disk space
 
@@ -287,7 +374,7 @@ though the directory is a valid Git repository:
 
 ```console
 > sbx run --clone claude \\wsl.localhost\Ubuntu\home\you\repo
-ERROR: --clone requires a Git repository, but \\wsl.localhost\Ubuntu\home\you\repo is not in a Git repository
+error: --clone requires a Git repository, but \\wsl.localhost\Ubuntu\home\you\repo is not in a Git repository
 ```
 
 The cause is Git's dubious ownership check. When Git on Windows accesses a
@@ -305,16 +392,31 @@ the command again:
 ```console
 > git config --global --add safe.directory '%(prefix)///wsl.localhost/Ubuntu/home/you/repo'
 > sbx run --clone claude \\wsl.localhost\Ubuntu\home\you\repo
-✓ Git repository detected: \\wsl.localhost\Ubuntu\home\you\repo
 ```
+
+## SSH agent socket is missing
+
+If `SSH_AUTH_SOCK` is set inside a sandbox but `ssh-add -L` reports
+`No such file or directory`, check whether your custom template includes
+`socat`. Docker Sandboxes uses it to create the socket that forwards requests
+to your host SSH agent. Installing OpenSSH client tools alone isn't enough.
+
+For an Ubuntu-based custom template, add `socat` to the packages installed as
+root in your Dockerfile, then rebuild the template and create a sandbox from
+it. Docker-provided sandbox templates already include `socat`.
+
+If the socket exists but forwarding still fails, check the
+[SSH agent settings](configuration/credentials.md#ssh-agent).
 
 ## Sandbox commits aren't signed
 
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
 For setup steps, see [Commit signing](workflows/git.md#commit-signing).
 
-Forwarding is enabled by default. Confirm that it hasn't been disabled and
-check whether a fixed socket path is configured:
+Forwarding is enabled by default. Check
+[`ssh.agentForwardingEnabled`](configuration/settings.md#sshagentforwardingenabled)
+and [`ssh.agentSocketPath`](configuration/settings.md#sshagentsocketpath) to
+confirm that forwarding is enabled and inspect the socket selection:
 
 ```console
 $ sbx settings get ssh.agentForwardingEnabled
@@ -375,7 +477,7 @@ If you downgrade `sbx` to a version older than the one that last managed your
 local state, the daemon may fail to start with a database version mismatch:
 
 ```text
-ERROR: failed to start backend in-process: start backend: creating containerd
+error: failed to start backend in-process: start backend: creating containerd
 server: ... database is at major version 6, but this binary only supports up
 to major version 1
 ```
@@ -432,7 +534,9 @@ If you have set custom `XDG_STATE_HOME`, `XDG_CACHE_HOME`, or
 
 ## Enable automatic diagnostics uploads
 
-To opt in to automatic diagnostics uploads after certain daemon errors, run:
+To opt in to automatic diagnostics uploads after certain daemon errors, set
+[`diagnostics.autoUpload`](configuration/settings.md#diagnosticsautoupload) to
+`yes`:
 
 ```console
 $ sbx settings set diagnostics.autoUpload yes
@@ -459,3 +563,7 @@ The bundle contains daemon logs, diagnostic check results, and basic system
 information. When `--upload` is confirmed, the bundle is uploaded to Docker
 support and the command prints a diagnostics ID. Include this ID in your
 issue so the team can correlate it with the uploaded bundle.
+
+Without terminal input, `sbx diagnose --upload` saves the bundle locally and
+skips the upload. Check for a diagnostics ID to confirm that the upload
+succeeded.

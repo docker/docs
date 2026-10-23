@@ -32,7 +32,7 @@ cloud-based resources as if they were local. When you run a container, Docker
 provisions a secure, isolated, and ephemeral cloud environment connected to
 Docker Desktop via an SSH tunnel. Despite running remotely, features like bind
 mounts and port forwarding continue to work seamlessly, providing a local-like
-experience. To use Docker Offload:
+experience.
 
 For more information, see the [Docker Offload product
 page](https://www.docker.com/products/docker-offload/) and the [Docker Offload
@@ -42,9 +42,25 @@ documentation](/offload/).
 
 > [!NOTE]
 >
-> Support for running Docker Desktop on a virtual desktop is available to Docker Business customers, on VMware ESXi or Azure VMs only.
+> Support for running Docker Desktop on a virtual desktop is available to Docker Business customers only.
 
-Docker support includes installing and running Docker Desktop within the VM, provided that nested virtualization is correctly enabled. The only hypervisors successfully tested are VMware ESXi and Azure, and there is no support for other VMs. For more information on Docker Desktop support, see [Get support](/manuals/support/_index.md).
+Docker support includes installing and running Docker Desktop within the VM, provided that nested virtualization is correctly enabled.
+
+| Platform | Support status |
+| :--- | :--- |
+| VMware ESXi | Supported. Tested by Docker. |
+| Azure VM | Supported. Tested by Docker. |
+| Nutanix-powered VDI | Supported, provided the underlying Windows environment supports WSL 2 or Windows container mode. |
+| Any other hypervisor | Not supported. |
+
+For more information on Docker Desktop support, see [Get support](/manuals/support/_index.md).
+
+### Persistent and non-persistent environments
+
+Whichever platform you use, Docker Desktop support depends on the virtual desktop persisting between sessions:
+
+- Persistent VDI environments: supported. You receive the same virtual desktop instance across sessions, preserving installed software and configurations.
+- Non-persistent VDI environments: not supported. Docker Desktop doesn't support environments where the OS resets between sessions, requiring re-installation or reconfiguration each time.
 
 For troubleshooting problems and intermittent failures that are outside of Docker's control, you should contact your hypervisor vendor. Each hypervisor vendor offers different levels of support. For example, Microsoft supports running nested Hyper-V both on-prem and on Azure, with some version constraints. This may not be the case for VMware ESXi.
 
@@ -59,13 +75,13 @@ Docker does not support running multiple instances of Docker Desktop on the same
 ## Turn on nested virtualization
 
 You must turn on nested virtualization before you install Docker Desktop on a
-virtual machine that will not use Docker Cloud.
+virtual machine that will not use Docker Offload.
 
 ### Turn on nested virtualization on VMware ESXi
 
 Nested virtualization of other hypervisors like Hyper-V inside a vSphere VM [is not a supported scenario](https://kb.vmware.com/s/article/2009916). However, running Hyper-V VM in a VMware ESXi VM is technically possible and, depending on the version, ESXi includes hardware-assisted virtualization as a supported feature. A VM that had 1 CPU with 4 cores and 12GB of memory was used for internal testing.
 
-For steps on how to expose hardware-assisted virtualization to the guest OS, [see VMware's documentation](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/expose-hardware-assisted-virtualization.html).
+For steps on how to expose hardware-assisted virtualization to the guest OS, [see VMware's documentation](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-virtual-machine-administration/configuring-virtual-machine-hardwarevsphere-vm-admin/configure-virtual-machine-cpu-resourcesvsphere-vm-admin.html#GUID-58028e27-5353-4bc0-9808-4ff3ca399e49-en_GUID-2A98801C-68E8-47AF-99ED-00C63E4857F6__GUID-CF3C6412-1260-4EE2-9997-4019A1D136FD).
 
 ### Turn on nested virtualization on an Azure Virtual Machine
 
@@ -75,22 +91,8 @@ For Azure virtual machines, [check that the VM size chosen supports nested virtu
 
 ## Docker Desktop support on Nutanix-powered VDI
 
-Docker Desktop can be used within Nutanix-powered VDI environments provided that the underlying Windows environment supports WSL 2 or Windows container mode. Since Nutanix officially supports WSL 2, Docker Desktop should function as expected, as long as WSL 2 operates correctly within the VDI environment.
-
 If using Windows container mode, confirm that the Nutanix environment supports Hyper-V or alternative Windows container backends.
 
-### Supported configurations
-
-Docker Desktop follows the VDI support definitions outlined [previously](#virtual-desktop-support-when-using-nested-virtualization):
-
-- Persistent VDI environments (Supported): You receive the same virtual desktop instance across sessions, preserving installed software and configurations.
-
-- Non-persistent VDI environments (Not supported): Docker Desktop does not support environments where the OS resets between sessions, requiring re-installation or reconfiguration each time.
-
-### Support scope and responsibilities
+As with any virtual desktop, only persistent environments are supported. See [Persistent and non-persistent environments](#persistent-and-non-persistent-environments).
 
 For WSL 2-related issues, contact Nutanix support. For Docker Desktop-specific issues, contact Docker support.
-
-## Additional resources
-
-- [Docker Desktop on Microsoft Dev Box](/manuals/enterprise/enterprise-deployment/dev-box.md)

@@ -5,6 +5,10 @@ keywords: docker sandboxes, sbx, MCP gateway, Model Context Protocol, MCP server
 weight: 80
 ---
 
+This page describes the local MCP gateway. Cloud sandboxes use MCP servers
+configured in Docker Agentic Platform: see
+[Load an MCP server](cloud/usage.md#load-an-mcp-server).
+
 Docker Sandboxes includes an MCP gateway for connecting agents to Model Context
 Protocol servers. The gateway gives the agent inside the sandbox one MCP
 endpoint, while `sbx` manages the registered servers, OAuth credentials, and
@@ -46,9 +50,9 @@ the registration. After registration, verify that the server is registered:
 
 ```console
 $ sbx mcp ls
-NAME                 TYPE     URL/COMMAND
-notion               remote   https://mcp.notion.com/mcp
 ```
+
+The listing shows each server's transport, status, gateway, and details.
 
 Then start a sandbox and expose the registered server:
 
@@ -87,8 +91,14 @@ If a `--url` hostname resolves to a private, loopback, link-local, or cloud
 metadata address, `sbx` registers the server but warns you about the resolved
 address. Register only URLs you trust. Fetching a manifest from an untrusted
 URL can expose internal services or cloud metadata, and DNS rebinding can
-redirect a hostname after it has been checked. For a trusted internal server,
-pass `--skip-ssrf-check` to suppress the check and warning.
+redirect a hostname after it has been checked.
+
+OAuth metadata discovery also warns and continues when it encounters these
+addresses, including redirect destinations.
+For a trusted internal server, pass `--skip-ssrf-check` to skip both the MCP
+URL check and the OAuth metadata discovery checks and suppress their warnings.
+Use the flag only when you trust the MCP host, OAuth provider, and all metadata
+redirect destinations.
 
 ### Remote endpoint URL
 
@@ -97,6 +107,75 @@ For a remote MCP endpoint, pass the server URL:
 ```console
 $ sbx mcp add notion --url https://mcp.notion.com/mcp
 $ sbx mcp add linear --url https://mcp.linear.app/mcp
+```
+
+If requests to a remote server stall, see
+[MCP server streams stall](troubleshooting.md#mcp-server-streams-stall).
+
+#### Custom request headers
+
+Use `--header 'Name: value'` to send custom HTTP headers to a remote MCP
+endpoint, for example to authenticate with an API key. Repeat the flag for
+each header, using each header name once:
+
+```console
+$ sbx mcp add acme --url https://mcp.acme.com/mcp \
+  --header 'Authorization: Bearer ${api-key}' \
+  --header 'Accept: application/json, text/event-stream'
+$ sbx secret set mcp:acme:api-key
+```
+
+Replace the example URL with your MCP endpoint. The `sbx secret set` command
+prompts for the API key and stores it in the
+[host credential store](configuration/credentials.md#where-secrets-are-stored).
+The `${api-key}` placeholder stays in the registration. When a sandbox
+connects, the gateway reads the secret and substitutes its value in the header.
+Use single quotes around header values so your shell preserves placeholders.
+Placeholders name stored secrets, not environment variables: `${api-key}`
+reads `mcp:acme:api-key`, regardless of your shell environment.
+
+Store each placeholder with `sbx secret set mcp:<server>:<placeholder>`.
+Credential headers such as `Authorization` must use a secret placeholder.
+An explicit `Authorization` header takes precedence over an OAuth access token.
+
+After storing the secret, expose the server to a sandbox:
+
+```console
+$ sbx run claude --name acme-demo --static-mcp acme
+```
+
+Custom headers require a remote HTTP endpoint and can't be used with
+`--command` or `--local`. They also require the host to connect to the server.
+The hosted gateway rejects these registrations unless you supply
+`--oauth-authorization-server`, which routes the connection through the host.
+
+#### Manage header secrets
+
+Header secrets use the global scope on the host. Set them with
+`sbx secret set mcp:<server>:<placeholder>` without `--sandbox`.
+Header secrets require a stored value and don't support `--ref` or `--command`
+dynamic sources.
+To check the header templates and whether their secrets are set, run
+`sbx mcp inspect acme`. The command doesn't display resolved secret values.
+
+The secret store also contains an automatically managed `:endpoint` record,
+such as `mcp:acme:api-key:endpoint`. This metadata binds the secret to the
+registered server's URLs so the gateway can detect an endpoint change before
+sending the secret. You don't need to set this record yourself. If you change
+the server's endpoint, follow the CLI guidance to set the secret again for
+that endpoint.
+
+To rotate a header secret, run `sbx secret set` with the same name. After
+setting, changing, or removing a header secret, stop and restart the sandbox
+or restart `sandboxd` to apply the change to an existing gateway. An existing
+connection keeps its previous value, and a server skipped because its secret
+was missing isn't retried automatically.
+
+Removing a registration with `sbx mcp rm` keeps its header secrets and prints
+commands to remove them. To remove the example secret:
+
+```console
+$ sbx secret rm mcp:acme:api-key
 ```
 
 ### Local stdio server
@@ -162,6 +241,19 @@ development, private servers, or custom container flags.
 > and images, and avoid mounting host paths or passing credentials unless the
 > server needs them.
 
+### Docker Hardened Image
+
+For an MCP server packaged as a Docker Hardened Image, pass its `dhi.io`
+reference instead of a registry or manifest URL:
+
+```console
+$ sbx mcp add fetch --url dhi.io/fetch-mcp:latest
+```
+
+Use a tag or digest: `dhi.io/<IMAGE>:<TAG>` or
+`dhi.io/<IMAGE>@sha256:<DIGEST>`. For images from other registries, use a
+server-manifest URL or an [explicit command](#from-an-explicit-command).
+
 ## Authorize OAuth-backed servers
 
 If a registered remote server requires OAuth, `sbx mcp add` starts the
@@ -169,11 +261,6 @@ authorization flow by default:
 
 ```console
 $ sbx mcp add notion --url https://mcp.notion.com/mcp
-Resolving MCP server "notion"...
-Open this URL to authorize MCP server "notion":
-https://api.notion.com/v1/oauth/authorize?...
-MCP server "notion" authorized
-MCP server "notion" registered (type: remote)
 ```
 
 OAuth credentials stay on the host. In local gateway mode, `sbx` stores tokens
@@ -214,15 +301,35 @@ For a confidential OAuth client, store the client secret before registering
 the server. There is no `--client-secret` flag:
 
 ```console
-$ sbx secret set mcp:slack.client_secret
+$ sbx secret set mcp:slack:client_secret
 $ sbx mcp add slack --url https://slack.example.com/mcp \
   --client-id <CLIENT_ID>
 ```
 
-The client secret stays in the encrypted host credential store and isn't
+The client secret stays in the host credential store and isn't
 written to the MCP registration. If the server requires a confidential client
 and no secret is stored, registration succeeds but authorization is skipped.
 Store the secret, then run `sbx mcp auth <server>`.
+
+#### Change the OAuth client
+
+If you re-register a server name with a different client ID, issuer, or token
+endpoint, `sbx` refuses to use the secret bound to the previous client.
+After verifying that the registration points to the intended client and
+provider, store that client's secret, clear the old binding, and authorize:
+
+```console
+$ sbx secret set mcp:slack:client_secret
+$ sbx secret rm mcp:slack:client_secret:identity
+$ sbx mcp auth slack
+```
+
+Setting a secret alone doesn't clear the old binding. The `:identity` record
+is metadata that binds the stored secret to its OAuth client. Authorization
+records the binding for the new client.
+
+For secrets stored under the legacy name `mcp:<server>.client_secret`, set
+the secret again using `mcp:<server>:client_secret`.
 
 ### Set OAuth scopes
 
@@ -247,24 +354,38 @@ the following order:
 1. Scopes passed to `sbx mcp auth --scope`
 2. Default scopes recorded by `sbx mcp add --scope`
 3. Scopes that the protected resource says it requires
+4. Whichever of `openid`, `email`, `profile`, and `offline_access` the
+   authorization server advertises
 
 If none of these provide a scope set, `sbx` omits the OAuth `scope` parameter so
-the authorization server applies its default grant. The authorization server's
-full advertised scope set is never requested automatically.
+the authorization server applies its default grant. Other advertised scopes
+aren't included in the fallback.
 
-Pass `--no-scope` to suppress both the recorded defaults and the resource's
-required scopes for one authorization:
+When `sbx` uses recorded defaults or resource-required scopes, it also
+requests `offline_access` if the authorization server advertises it. The
+server can then issue a refresh token, so you don't have to authorize again
+when the access token expires. Scopes passed to `sbx mcp auth --scope` are
+requested exactly as given, without `offline_access`. Existing credentials
+issued without a refresh token aren't upgraded; run `sbx mcp auth` again to
+request a new grant.
+
+Pass `--no-scope` to suppress the recorded defaults, resource-required scopes,
+and advertised scope fallback for one authorization, without changing the
+stored defaults:
 
 ```console
 $ sbx mcp auth serverx --no-scope
 ```
 
-You can't combine `--no-scope` with `--scope`. If the authorization server
-advertises supported scopes, each scope you choose must be in that set. The
-authorization server can still refuse an advertised scope for a particular
-client. For a local authorization flow, `sbx` lists the requested, advertised,
-and refused scopes and suggests a retry command. If the server identifies the
-refused scopes, the command removes them. Otherwise, it uses `--no-scope`.
+You can't combine `--no-scope` with `--scope`. Scopes you choose are checked
+against the authorization server's advertised scopes and the resource's
+required scopes. If either source publishes scopes, a scope present in neither
+produces a warning but is still requested. The authorization server can still
+refuse an advertised scope for a particular
+client. For a local authorization flow that requested scopes, `sbx` lists the
+requested, advertised, and refused scopes and suggests a retry command. If the
+server identifies the refused scopes, the command removes them. Otherwise, it
+uses `--no-scope`.
 `sbx` never retries automatically.
 
 For each OAuth-backed remote server exposed to a sandbox, the gateway exposes a
@@ -291,6 +412,28 @@ Use `--json` for machine-readable output:
 $ sbx mcp auth status notion --json
 ```
 
+### Override the OAuth resource indicator
+
+Use `--resource` when your OAuth provider requires a token audience that
+differs from the resource identifier discovered by `sbx`. By default, `sbx`
+uses the server's protected-resource metadata, or the endpoint URL if the
+metadata is absent. Check the value with `sbx mcp inspect <SERVER>` before
+setting an override:
+
+```console
+$ sbx mcp add serverx --url https://mcp.serverx.example/mcp \
+  --resource https://api.serverx.example/mcp
+```
+
+Use the resource URI supplied by your provider. It must have a scheme and host
+and no fragment. To change an existing registration's value, remove the
+registration and add it again.
+
+This override requires OAuth authorization on the host. The hosted gateway
+doesn't use it unless you also supply `--oauth-authorization-server` or
+`--client-id` to route authorization through the host. Without those flags,
+`sbx mcp add` warns that the hosted gateway won't use the override.
+
 ## Choose an MCP mode
 
 Every sandbox starts an MCP gateway. When the sandbox starts, supported agent
@@ -304,7 +447,8 @@ mode:
 - Dynamic mode pre-loads no servers and lets the agent find and attach
   registered servers.
 
-This choice persists across sandbox restarts.
+This choice persists across sandbox restarts unless you
+[unload every server in the static set](#remove-a-server-from-a-running-sandbox).
 
 ### Use static mode
 
@@ -349,12 +493,41 @@ To attach an already-registered server to a running sandbox, use
 ```console
 $ sbx mcp add linear --url https://mcp.linear.app/mcp
 $ sbx mcp load linear --sandbox my-session
-MCP server "linear" loaded into sandbox "my-session" (live)
 ```
 
 Connected agent sessions receive a tool-list update, so the added tools become
 visible without reconnecting. The loaded server remains attached across sandbox
 restarts.
+
+## Remove a server from a running sandbox
+
+In Docker Sandboxes v0.48.0 and later, use `sbx mcp unload` to detach a server
+from a running sandbox's local MCP gateway. This works in both static and
+dynamic modes. Cloud sandboxes and hosted MCP gateways don't support unloading
+servers.
+
+```console
+$ sbx mcp unload linear --sandbox my-session
+```
+
+Connected agent sessions receive a tool-list update, so the server's tools are
+removed without restarting the agent. The command also removes the saved
+attachment so the server isn't restored when the sandbox or daemon restarts.
+The server's host registration and credentials remain available, and other
+sandboxes that have loaded the server are unaffected.
+
+To attach the server again:
+
+```console
+$ sbx mcp load linear --sandbox my-session
+```
+
+In dynamic mode, the agent can also find and attach the registered server
+again. Unloading a server doesn't prevent the agent from reloading it.
+
+If you unload all servers from a static sandbox, it stays in static mode for
+the current session. After restarting the Docker Sandboxes daemon and
+reconnecting, the agent can find and attach registered servers.
 
 ## Built-in gateway tools
 
@@ -407,6 +580,11 @@ Remove a registered server:
 ```console
 $ sbx mcp rm notion
 ```
+
+Removing a registration doesn't detach the server from sandboxes that have
+already loaded it. Use
+[`sbx mcp unload`](#remove-a-server-from-a-running-sandbox) for each sandbox
+before removing the registration.
 
 For OAuth-backed servers, `sbx mcp rm` removes the OAuth access token before it
 removes the server registration. A client secret for a pre-registered OAuth

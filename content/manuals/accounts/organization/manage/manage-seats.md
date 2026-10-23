@@ -12,7 +12,7 @@ aliases:
   - /subscription/core-subscription/add-seats/
   - /subscription/core-subscription/remove-seats/
   - /subscription/manage-seats/
-weight: 40
+weight: 50
 ---
 
 You can add or remove seats from your Docker Team or Business subscription at any time to accommodate team changes. When you add seats mid-billing cycle, you're charged a prorated amount for the additional seats.

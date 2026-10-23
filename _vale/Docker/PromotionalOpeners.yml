@@ -1,8 +1,0 @@
-extends: existence
-message: "Replace promotional opener '%s' with a specific description."
-ignorecase: true
-level: warning
-scope: sentence
-tokens:
-  - '^in today'
-  - '^(?:whether you[\x27’]re|whether you are)\b'

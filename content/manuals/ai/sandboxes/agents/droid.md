@@ -6,16 +6,14 @@ description: |
 keywords: docker sandboxes, droid, factory, ai agent, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This guide covers authentication, configuration, and usage of Droid, an AI
 coding agent by Factory, in a sandboxed environment.
 
 Official documentation: [Droid](https://docs.factory.ai/)
 
 ## Quick start
-
-> [!NOTE]
-> In Docker Sandboxes v0.42, use `sbx run docker.io/sbx/droid-kit:latest`.
-> The `droid` shorthand is unavailable in this release.
 
 Create a sandbox and run Droid for a project directory:
 

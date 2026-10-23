@@ -67,7 +67,7 @@ $ docker info
 ### SSH Tips
 
 For the best user experience with SSH, configure `~/.ssh/config` as follows to allow
-reusing a SSH connection for multiple invocations of the `docker` CLI:
+reusing an SSH connection for multiple invocations of the `docker` CLI:
 
 ```text
 ControlMaster     auto

@@ -18,7 +18,9 @@ daemon. Your project remains available on your host, while tools the agent
 installs and system changes it makes stay inside an environment you can
 discard.
 
-In this tutorial, you'll move an existing coding-agent workflow into a sandbox.
+In this tutorial, you'll move an existing coding-agent workflow into a local
+sandbox. For a cloud workflow, see
+[Get started with cloud sandboxes](/manuals/ai/sandboxes/cloud/_index.md#get-started).
 
 ## Before you start
 

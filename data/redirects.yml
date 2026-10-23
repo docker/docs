@@ -132,12 +132,54 @@
 "https://docker.qualtrics.com/jfe/form/SV_3F9hnsKdzmlIr6m":
   - /feedback/gha-build-summary/
 
+# Removed product-tour guides
+"/build-cloud/setup/":
+  - /guides/docker-build-cloud/
+  - /learning-paths/docker-build-cloud/
+"/build-cloud/ci/":
+  - /guides/docker-build-cloud/ci/
+"/build-cloud/usage/":
+  - /guides/docker-build-cloud/dev/
+"/build-cloud/":
+  - /guides/docker-build-cloud/common-questions/
+  - /guides/docker-build-cloud/why/
+"/compose/gettingstarted/":
+  - /guides/docker-compose/
+  - /learning-paths/docker-compose/
+  - /guides/docker-compose/setup/
+"/compose/support-and-feedback/faq/":
+  - /guides/docker-compose/common-questions/
+"/compose/intro/features-uses/":
+  - /guides/docker-compose/why/
+"/scout/how-tos/view-create-sboms/":
+  - /guides/docker-scout/sbom/
+  - /scout/concepts/sbom/
+"/build/metadata/attestations/":
+  - /guides/docker-scout/attestations/
+"/scout/explore/image-details-view/#remediation-recommendations":
+  - /guides/docker-scout/remediation/
+"https://testcontainers.com/cloud/docs/":
+  - /guides/testcontainers-cloud/
+  - /guides/testcontainers-cloud/common-questions/
+  - /guides/testcontainers-cloud/demo-ci/
+  - /guides/testcontainers-cloud/demo-local/
+  - /guides/testcontainers-cloud/why/
+"/guides/lab-container-supported-development/":
+  - /guides/container-supported-development/
+
 # Docker Scout
 "/scout/":
   - /go/scout/
   - /go/docker-scout/
+  - /guides/docker-scout/why/
+  - /guides/docker-scout/s3c/
+  - /scout/concepts/s3c/
 "/scout/quickstart/":
   - /go/scout-quickstart/
+  - /guides/docker-scout/
+  - /learning-paths/docker-scout/
+  - /guides/docker-scout/common-questions/
+  - /guides/docker-scout/demo/
 "/scout/explore/dashboard/":
   - /go/scout-dashboard/
 "/scout/policy/":
@@ -258,9 +300,14 @@
   - /go/docker-build-cloud/
 
 # Run Cloud links & Docker Cloud & Docker Offload
+"https://www.docker.com/products/docker-offload/":
+  - /go/offload/
+"https://app.docker.com/billing/subscription/dap/compute?returnTo=https://docs.docker.com/offload/quickstart/&ref=cli&refAction=NotEntitled":
+  - /go/get-offload/
 "/":
   - /go/run-cloud-eap/
 "/offload/":
+  - /go/cloud-flag/
   # Onboarding - VDI beta
   - /go/docker-cloud/
 "/offload/about/":
@@ -316,7 +363,7 @@
 "/admin/organization/insights/#extensions":
   - /go/insights-extensions/
 
-"/enterprise/security/hardened-desktop/settings-management/":
+"/desktop/enterprise/hardened-desktop/settings-management/":
   - /go/settings-management/
 
 # Billing - cancellation
@@ -333,6 +380,8 @@
   - /go/mcp-policy/
 "/ai/sandboxes/mcp-gateway/":
   - /go/sbx-mcp-gateway/
+"https://www.docker.com/blog/harbor-docker-sandboxes-run-safe-reproducible-agent-evals/":
+  - /ai/sandboxes/harbor/
 
 # Desktop MCP Toolkit
 "/ai/mcp-catalog-and-toolkit/toolkit/":
@@ -357,6 +406,21 @@
  # Desktop DMR
 "/ai/model-runner/":
   - /go/model-runner/
+  - /guides/genai-pdf-bot/
+  - /guides/use-case/genai-pdf-bot/
+  - /guides/genai-pdf-bot/containerize/
+  - /guides/genai-pdf-bot/develop/
+  - /guides/rag-ollama/
+  - /guides/use-case/rag-ollama/
+  - /guides/rag-ollama/containerize/
+  - /guides/rag-ollama/develop/
+"/ai/sandboxes/":
+  - /guides/github-sonarqube-sandbox/
+  - /guides/github-sonarqube-sandbox/customize/
+  - /guides/github-sonarqube-sandbox/troubleshoot/
+  - /guides/github-sonarqube-sandbox/workflow/
+  - /ai/mcp-catalog-and-toolkit/e2b-sandboxes/
+  - /ai/mcp-catalog-and-toolkit/sandboxes/
 
 # Docker Desktop - volumes cloud backup
 "/desktop/use-desktop/volumes/#export-a-volume":
@@ -369,8 +433,10 @@
 "/desktop/features/wsl/":
   - /go/wsl2/
   - /go/windows-linux-vmm/
-"/desktop/get-started/#credentials-management-for-linux-users":
+"/desktop/setup/install/linux/":
   - /go/linux-credentials/
+"/desktop/enterprise/enforce-sign-in/":
+  - /go/enforce-sign-in/
 "/desktop/use-desktop/pause/":
   - /go/mac-desktop-pause/
   - /go/win-desktop-pause/
@@ -450,7 +516,10 @@
 "/support/#diagnostic-data-and-privacy":
   - /go/diagnostic-data/
 
+#app.docker.com links
 
+"/security/authentication/oidc-connections/rulesets-claims/#subject-claims":
+  - /go/oidc-subject-claims/
 
 "/compose/":
   - /go/compose/

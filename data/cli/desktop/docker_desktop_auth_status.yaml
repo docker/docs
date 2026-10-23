@@ -1,0 +1,27 @@
+command: docker desktop auth status
+short: Show the current Docker Hub authentication status
+long: |-
+    Show whether you are logged in to Docker Hub and, if so,
+    display your username, email, plan, organizations, and policy flags.
+
+    The authentication token is never printed.
+usage: docker desktop auth status
+pname: docker desktop auth
+plink: docker_desktop_auth.yaml
+options:
+    - option: format
+      value_type: string
+      default_value: pretty
+      description: 'Format the output. Accepted values are: pretty, json'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

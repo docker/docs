@@ -1,0 +1,122 @@
+command: docker buildx replay verify
+short: Replay a subject and compare the result against the original artifact
+long: Replay a subject and compare the result against the original artifact
+usage: docker buildx replay verify [OPTIONS] SUBJECT
+pname: docker buildx replay
+plink: docker_buildx_replay.yaml
+options:
+    - option: compare
+      value_type: string
+      default_value: digest
+      description: Comparison mode (`digest` | `artifact`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: materials
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Materials store (repeatable; format: `provenance` | `oci-layout://<path>[:<tag>]` | `<absolute-path>` | `<key>=<value>`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: network
+      value_type: string
+      description: |
+        Network mode for RUN instructions (`default` | `none`; defaults to the mode of the original build)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: output
+      shorthand: o
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Output destination for the verification result (VSA) (format: `type=local,dest=path`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: platform
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Platform of the subject to replay (defaults to the only platform of the subject or the builder default platform)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: progress
+      value_type: string
+      default_value: auto
+      description: |
+        Set type of progress output (`auto` | `plain` | `tty` | `quiet` | `rawjson`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: secret
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Secret to expose to the replayed build (format: `id=mysecret[,src=/local/secret]`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ssh
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        SSH agent socket or keys to expose (format: `default|<id>[=<socket>|<key>[,<key>]]`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

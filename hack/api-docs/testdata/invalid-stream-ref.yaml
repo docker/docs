@@ -1,0 +1,101 @@
+openapi: 3.2.0
+jsonSchemaDialect: https://spec.openapis.org/oas/3.1/dialect/base
+info:
+  title: Docker documentation tooling fixture
+  version: '1'
+  description: Component capability fixture.
+servers:
+- url: https://api.example.test/v1
+security:
+- bearerAuth: []
+tags:
+- name: operations
+  summary: Operations
+  kind: nav
+  description: Fixture operations.
+paths:
+  /events:
+    get:
+      operationId: listEvents
+      tags:
+      - operations
+      summary: List events
+      responses:
+        '200':
+          description: Event stream
+          content:
+            text/event-stream:
+              itemSchema:
+                $ref: ./schemas/missing.yaml
+  /search:
+    parameters:
+    - name: limit
+      in: query
+      schema:
+        type: integer
+      example: 10
+    servers:
+    - url: https://search.example.test
+    query:
+      operationId: querySearch
+      tags:
+      - operations
+      summary: Search
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 0
+      responses:
+        '200':
+          description: Search result
+          content:
+            application/json:
+              schema: true
+  /public:
+    get:
+      operationId: getPublic
+      tags:
+      - operations
+      summary: Public result
+      security: []
+      responses:
+        '200':
+          description: A flag
+          content:
+            application/json:
+              schema:
+                type: boolean
+              example: false
+  /items:
+    get:
+      operationId: getItems
+      tags:
+      - operations
+      summary: Get items
+      responses:
+        '200':
+          description: Item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+                description: Description beside a reference.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Item:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+        next:
+          anyOf:
+          - $ref: '#/components/schemas/Item'
+          - type: 'null'

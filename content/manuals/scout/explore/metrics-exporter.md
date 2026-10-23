@@ -158,16 +158,10 @@ The Prometheus server runs in a Docker container and is accessible on port 9090.
 After a few seconds, you should see the metrics endpoint as a target in the
 Prometheus UI at <http://localhost:9090/targets>.
 
-![Docker Scout metrics exporter Prometheus target](../images/scout-metrics-prom-target.png "Docker Scout metrics exporter Prometheus target")
-
 ### Viewing the metrics in Grafana
 
 To view the Grafana dashboards, go to <http://localhost:3000/dashboards>,
 and sign in using the credentials defined in the Docker Compose file (username: `admin`, password: `grafana`).
-
-![Vulnerability dashboard in Grafana](../images/scout-metrics-grafana-vulns.png "Vulnerability dashboard in Grafana")
-
-![Policy dashboard in Grafana](../images/scout-metrics-grafana-policy.png "Policy dashboard in Grafana")
 
 The dashboards are pre-configured to visualize the vulnerability and policy metrics scraped by Prometheus.
 

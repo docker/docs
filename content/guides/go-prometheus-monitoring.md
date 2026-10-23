@@ -11,7 +11,7 @@ aliases:
   - /guides/go-prometheus-monitoring/containerize/
   - /guides/go-prometheus-monitoring/develop/
 params:
-  tags: [cicd]
+  tags: [observability]
   time: 45 minutes
 ---
 

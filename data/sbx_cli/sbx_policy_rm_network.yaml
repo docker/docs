@@ -12,9 +12,22 @@ description: |-
     remove from policy "local" scoped to a single sandbox instead.
 
     Use "sbx policy ls --wide" to see active rule IDs and resources, or
-    "sbx policy ls --json" for the raw filtered daemon response.
+    "sbx policy ls --json" for the filtered rules; network values are printed in
+    the form the CLI accepts back.
+
+    With --cloud:
+    Remove a cloud network rule by pattern.
+
+    Cloud rules have no IDs: --resource removes the pattern from both the allow
+    and deny lists, and the output names each list it was removed from. The rule
+    leaves the account policy by default; use --sandbox to scope the removal to one
+    sandbox. Use "sbx --cloud policy ls" to see the current rules.
 usage: sbx policy rm network [--sandbox SANDBOX] [flags]
 options:
+    - name: force
+      shorthand: f
+      default_value: "false"
+      usage: Skip confirmation prompts
     - name: help
       shorthand: h
       default_value: "false"
@@ -31,10 +44,6 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -51,5 +60,11 @@ example: |4-
 
       # Remove a sandbox-scoped rule by resource
       sbx policy rm network --sandbox my-sandbox --resource api.example.com
+
+      # Remove a cloud rule by pattern, from the allow or deny list it is in
+      sbx --cloud policy rm network --resource api.example.com
+
+      # Remove a pattern from one cloud sandbox's rules
+      sbx --cloud policy rm network --sandbox my-sandbox --resource api.example.com
 see_also:
     - sbx policy rm - Remove a policy rule

@@ -11,14 +11,17 @@ databases:
   title: Databases
   description: Run and connect to databases in containers.
 deployment:
-  title: Deployment
-  description: Deploy containerized apps to Kubernetes and other platforms.
+  title: Services & infrastructure
+  description: Run containerized services and set up development infrastructure.
 labs:
   title: Hands-on labs
   description: Interactive, guided labs you can run directly in your browser.
 languages:
   title: Languages & frameworks
   description: Containerize and develop apps in your language of choice.
+observability:
+  title: Observability
+  description: Monitor application metrics and traces with containerized tools.
 security:
   title: Security
   description: Harden images, scan vulnerabilities, and secure your supply chain.

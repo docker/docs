@@ -2,7 +2,9 @@
 title: Subscription and billing
 linkTitle: Subscription and billing
 description: Manage Docker subscriptions, plans, billing, and payments.
-keywords: subscription, billing, docker plans, payments, invoices, pricing
+keywords:
+  subscription, billing, docker plans, payments, invoices, pricing, top up,
+  add-ons, seats, licenses, minutes
 weight: 20
 params:
   sidebar:
@@ -15,16 +17,20 @@ aliases:
   - /billing/docker-hub-pricing/
 grid:
   - title: Explore plans
-    description: Browse available Docker plans and add-ons for individuals, teams, and organizations.
+    description: >-
+      Browse available Docker plans and add-ons for individuals, teams, and
+      organizations.
     link: /subscription-billing/plans/
     icon: chart-bar
   - title: Manage billing
-    description: Manage payment methods, invoices, credits, and billing details in the billing portal.
+    description: >-
+      Manage payment methods, invoices, credits, and billing details in the
+      billing portal.
     link: /subscription-billing/manage/
     icon: credit-card
 ---
 
-A Docker plan is a subscription tied to a personal account, an organization
+A Docker plan is a subscription tied to an individual account, an organization
 account, or a specific product. When you upgrade a plan, you expand your
 usage entitlements and feature sets. You can also top up some plans,
 extending usage without changing your plan type.
@@ -36,10 +42,11 @@ The following table summarizes the available plans.
 | Plans | Billing model | Types |
 | --- | --- | --- |
 | [Docker](/manuals/subscription-billing/plans/docker.md) | Flat-rate plans for personal and organization accounts | Docker Personal, Docker Pro, Docker Team, Docker Business |
-| [Docker Hardened Images (DHI)](/manuals/subscription-billing/plans/dhi.md) | Graduated security features for hardened container images | DHI Community, DHI Select, DHI Enterprise |
-| [Gordon](/manuals/subscription-billing/plans/gordon.md) | Prepaid usage for the Gordon AI agent | Gordon Plus, Gordon Max, Gordon Ultra |
-| [AI Governance](/manuals/subscription-billing/plans/ai-governance.md) | Purchase set amount of licenses | AI Governance |
-| [Docker Verified Publisher (DVP)](/manuals/subscription-billing/plans/docker-verified-publisher.md) | Annual plans based on consuming domains | DVP Starter, DVP Growth |
+| [Docker Hardened Images (DHI)](/manuals/subscription-billing/plans/dhi.md) | Annual plans billed per repository. DHI Community is free. | DHI Community, DHI Select, DHI Enterprise |
+| [Gordon](/manuals/subscription-billing/plans/gordon.md) | Monthly plans that raise your Gordon usage allowance | Gordon Plus, Gordon Max, Gordon Ultra |
+| [Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md) | Pay-as-you-go cloud compute, billed monthly | Pay-as-you-go |
+| [AI Governance](/manuals/subscription-billing/plans/ai-governance.md) | Licenses purchased through Docker sales. <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_index_aigov" class="link" rel="noopener">Contact sales</a> to add more. | AI Governance |
+| [Docker Verified Publisher (DVP)](/manuals/subscription-billing/plans/docker-verified-publisher.md) | Flat-rate annual plans. DVP Growth lets you add consuming domains in blocks of 25. | DVP Starter, DVP Growth |
 
 Docker plans that upgrade your account (Docker Pro, Team, and Business) cover
 most use cases. Some product plans require an upgraded Docker account. Others
@@ -53,11 +60,11 @@ a different plan.
 
 | Unit | Description | Examples |
 | --- | --- | --- |
-| Seats | Each seat extends entitlements to one more member. | Docker Team, Docker Business |
-| Licenses | Access to specific products or features. | AI Governance, Docker Offload |
-| Minutes | Cloud build capacity, sold in blocks and consumed within the billing period. | Docker Build Cloud |
-| Repositories | Additional container repositories covered by security scanning and analysis features. | DHI |
-| Consuming domains | Additional consuming domains tracked in publisher analytics, sold in blocks of 25. | DVP Starter, DVP Growth |
+| [Seats](/manuals/accounts/organization/manage/manage-seats.md) | Each seat extends entitlements to one more member. | Docker Team, Docker Business |
+| [Licenses](/manuals/accounts/organization/manage/manage-licenses.md) | Access to specific products or features. | AI Governance, Docker Offload |
+| [Minutes](/manuals/subscription-billing/plans/docker.md#docker-build-cloud-minutes) | Build and test runtime capacity, sold in blocks and consumed within the billing period. | Docker Build Cloud, [Testcontainers Cloud](/manuals/subscription-billing/plans/docker.md#testcontainers-cloud-minutes) |
+| [Repositories](/manuals/subscription-billing/plans/dhi.md) | Additional container repositories covered by security scanning and analysis features. | DHI |
+| [Consuming domains](/manuals/subscription-billing/plans/docker-verified-publisher.md#add-consuming-domains) | Additional consuming domains tracked in publisher analytics, sold in blocks of 25. | DVP Growth |
 
 ## Manage your plans
 

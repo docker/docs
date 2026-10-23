@@ -32,7 +32,7 @@ You can purchase Docker Team, Docker Business, and other products through the pr
 1. Go to **Billing**.
 1. Select **Browse products**.
    - The **Products** page contains products and upgrades available for self-serve.
-   - Some products in the catalog may apply to personal accounts, organization accounts, or both.
+   - Some products in the catalog may apply to individual accounts, organization accounts, or both.
    - Each product tile uses an account-type flag so you know the difference.
 1. Select **View plans**, then choose the plan you want to add to your Docker subscription.
 1. Verify your billing details, continue to payment, and complete checkout.

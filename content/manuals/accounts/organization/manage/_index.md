@@ -5,6 +5,10 @@ weight: 20
 description: Learn how to manage your Docker organization, including members, teams, licenses, seats, product access, and settings.
 keywords: manage organization, members, teams, licenses, seats, product access, organization management, docker home, organization settings, deactivate organization
 grid:
+  - title: Information
+    description: Update your organization's general information and settings.
+    icon: pencil-square
+    link: /accounts/organization/manage/general-settings/
   - title: Members
     description: Invite, manage, and assign roles to your organization members.
     icon: user-plus
@@ -13,23 +17,19 @@ grid:
     description: Create teams and manage repository access for groups of members.
     icon: user-group
     link: /accounts/organization/manage/manage-a-team/
+  - title: Licenses
+    description: View your license inventory and assign licenses to teams or individual members.
+    icon: key
+    link: /accounts/organization/manage/manage-licenses/
   - title: Seats
     description: Add or remove seats for Docker Team and Business subscriptions.
     icon: user-circle
     link: /accounts/organization/manage/manage-seats/
-  - title: Licenses
-    description: Assign and revoke product licenses for organization members.
-    icon: key
-    link: /accounts/organization/manage/manage-licenses/
-  - title: Product access and usage
+  - title: Products
     description: Manage access and view usage for Docker products across your organization.
     icon: squares-2x2
     link: /accounts/organization/manage/manage-products/
-  - title: Change information
-    description: Update your organization's general information and settings.
-    icon: pencil-square
-    link: /accounts/organization/manage/general-settings/
-  - title: Deactivate
+  - title: Deactivation
     description: Deactivate an organization after completing the required steps.
     icon: minus-circle
     link: /accounts/organization/manage/deactivate-account/
@@ -61,13 +61,13 @@ must be assigned the
 Seats and licenses both control access, but they apply to different kinds of
 plans. The following table summarizes the difference.
 
-| Entitlement | What it grants                                          | Applies to                                       | Managed from |
-| ----------- | ------------------------------------------------------- | ------------------------------------------------ | ------------ |
-| Seat        | Membership in your Docker Team or Business subscription | Docker Core subscription                         | Billing      |
-| License     | Access to a specific product or add-on                  | AI Governance, Docker Offload, and other add-ons | Members      |
+| Entitlement | What it grants                                          | Applies to                                       | Managed from                 |
+| ----------- | ------------------------------------------------------- | ------------------------------------------------ | ---------------------------- |
+| Seat        | Membership in your Docker Team or Business subscription | Docker Team or Business subscription             | Billing                      |
+| License     | Access to a specific product or add-on                  | AI Governance, Docker Offload, and other add-ons | Licenses, Teams, and Members |
 
 For details, see [Seats](/manuals/accounts/organization/manage/manage-seats.md)
-and [License assignment](/manuals/accounts/organization/manage/manage-licenses.md).
+and [Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md).
 
 ## Next steps
 

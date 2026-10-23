@@ -13,19 +13,20 @@ options:
       usage: help for pack
     - name: output
       shorthand: o
-      usage: 'Output ZIP file path (default: <name>.zip)'
+      usage: 'Output file path; must end in .zip (default: <name>.zip)'
 inherited_options:
     - name: cloud
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx kit pack ./my-kit
+
+      # Choose the archive name
+      sbx kit pack ./my-kit --output dist/my-kit.zip
 see_also:
     - sbx kit - (Experimental) Manage kit artifacts

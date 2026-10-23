@@ -17,20 +17,10 @@ description: |-
     path to the environment file itself. Passing more than one PATH deep-merges them
     in order, matching the other "sbx env" subcommands.
 
-    A directory resolves to the sbxenv.yaml in it and to no other name; any
-    other file is read only when a PATH names it. The hidden .sbxenv.yaml was once
-    read as a directory's own environment too, so a project still holding one now
-    reads as having none.
-
-    With no PATH, an existing .sbxenv.yaml in your home directory is merged
-    underneath as a base layer for defaults shared across projects; naming any
-    PATH skips the layer. It may not set "name:" or "workspace:", each of which
-    identifies a single project. Changing its "agent:" changes the derived
-    <agent>-<directory-basename> sandbox name, leaving sandboxes created under
-    the previous name for "sbx env rm" to miss.
-
-    A list such as "ports" or "mcp.servers" concatenates across layers rather
-    than overriding, so an entry declared in both appears twice.
+    A directory PATH selects sbxenv.yaml; a file PATH selects that file.
+    With no PATH, ~/.sbxenv.yaml supplies shared defaults when present.
+    Explicit PATHs skip those defaults. Later files override earlier values;
+    lists such as ports and mcp.servers are concatenated.
 usage: sbx env plan [PATH...] [flags]
 options:
     - name: clone
@@ -61,6 +51,9 @@ options:
       experimental: true
       usage: |
         File of name=value kit arguments, one per line (can be repeated); --kit-arg overrides
+    - name: name
+      usage: |
+        Name for the sandbox, overriding 'name:' in sbxenv.yaml and the derived <agent>-<directory> (every 'sbx env' command addressing this environment needs the same value)
     - name: skip-host-commands
       default_value: "false"
       usage: |
@@ -70,13 +63,12 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx env plan
+      sbx env plan ./project
 see_also:
     - sbx env - (Experimental) Manage sandboxes declaratively from an sbxenv.yaml file

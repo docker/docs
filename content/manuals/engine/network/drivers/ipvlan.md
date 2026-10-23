@@ -15,7 +15,7 @@ layer 2 VLAN tagging and even IPvlan L3 routing for users interested in underlay
 network integration. For overlay deployments that abstract away physical constraints
 see the [multi-host overlay](overlay.md) driver.
 
-IPvlan is a new twist on the tried and true network virtualization technique.
+IPvlan is a network virtualization technique that provides lightweight container networking.
 The Linux implementations are extremely lightweight because rather than using
 the traditional Linux bridge for isolation, they are associated to a Linux
 Ethernet interface or sub-interface to enforce separation between networks and
@@ -286,7 +286,7 @@ An example being, NetOps provides VLAN ID and the associated subnets for VLANs
 being passed on the Ethernet link to the Docker host server. Those values are
 plugged into the `docker network create` commands when provisioning the
 Docker networks. These are persistent configurations that are applied every time
-the Docker engine starts which alleviates having to manage often complex
+Docker Engine starts which alleviates having to manage often complex
 configuration files. The network interfaces can also be managed manually by
 being pre-created and Docker networking will never modify them, and use them
 as parent interfaces. Example mappings from NetOps to Docker network commands
@@ -668,3 +668,4 @@ $ ip link del foo
 As with all of the Libnetwork drivers, they can be mixed and matched, even as
 far as running 3rd party ecosystem drivers in parallel for maximum flexibility
 to the Docker user.
+

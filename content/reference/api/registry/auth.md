@@ -1,5 +1,6 @@
 ---
 title: Registry authentication
+weight: 10
 description: "Specifies the Docker Registry v2 authentication"
 keywords: registry, images, tags, repository, distribution, Bearer authentication, advanced
 ---

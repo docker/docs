@@ -8,6 +8,9 @@ keywords: docker sandboxes, chatgpt, codex, openai, remote ssh, sbx
 
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
+These connection instructions use a local sandbox. For cloud SSH setup, see
+[Connect with SSH](../cloud/usage.md#connect-with-ssh).
+
 Connect the ChatGPT desktop app to a sandbox over SSH so Codex works inside the
 isolated environment instead of on your host.
 
@@ -25,6 +28,10 @@ ChatGPT's remote server requires the `codex` command in the sandbox. The Codex
 sandbox template used in the following section includes this command.
 
 ## Connect
+
+For a dedicated sandbox created on first connection, see
+[Set up desktop app connections](_index.md#set-up-desktop-app-connections).
+The following steps connect to a sandbox with a mounted host workspace.
 
 Create a named Codex sandbox for the current directory if you don't already
 have one:

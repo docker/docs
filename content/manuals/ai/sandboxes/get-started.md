@@ -1,10 +1,13 @@
 ---
-title: Get started with Docker Sandboxes
-linkTitle: Get started
+title: Get started with local Docker Sandboxes
+linkTitle: Get started locally
 weight: 20
-description: Configure agent credentials and work through your first Docker Sandboxes session.
+description: Configure agent credentials and work through your first local Docker Sandboxes session.
 keywords: sandbox, sbx, get started, credentials, clone mode, network policy
 ---
+
+This walkthrough uses local sandboxes. For cloud credentials and a first cloud
+session, see [Get started with cloud sandboxes](cloud/_index.md#get-started).
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can
@@ -90,14 +93,14 @@ From another terminal, list your sandboxes:
 
 ```console
 $ sbx ls
-SANDBOX       AGENT    STATUS    PORTS   WORKSPACE
-my-sandbox    claude   running           ~/my-project
+SANDBOX      AGENT    STATUS      PORTS   WORKSPACE      CREATED
+my-sandbox   claude   ● running           ~/my-project   2m
 ```
 
-Each row shows a sandbox's name, the agent running in it, its status, any
-[published ports](usage.md#publish-ports), and its
-workspace — the host directory shared into the sandbox. That workspace is the
-one part of your machine the agent can see.
+Each row shows a sandbox's name, agent, status,
+[published ports](usage.md#publish-ports), workspace, and age. The workspace is
+the host directory shared into the sandbox and the one part of your machine
+the agent can see.
 
 When you run `sbx run` from a project directory without passing a workspace
 path, the current directory is mounted read-write. The agent and your host see

@@ -8,6 +8,9 @@ keywords: docker sandboxes, claude desktop, claude code, remote ssh, sbx
 
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
+These connection instructions use a local sandbox. For cloud SSH setup, see
+[Connect with SSH](../cloud/usage.md#connect-with-ssh).
+
 Claude Desktop can run Claude Code on a remote machine over SSH. Point it at a
 sandbox so the agent works inside the isolated environment instead of on your
 host.
@@ -32,6 +35,10 @@ session.
 > Connecting Claude Desktop to a sandbox over SSH transmits Anthropic
 > credentials into the Claude Code process within the sandbox, reducing
 > isolation guarantees.
+
+For a dedicated sandbox created on first connection, see
+[Set up desktop app connections](_index.md#set-up-desktop-app-connections).
+The following steps connect to a sandbox with a mounted host workspace.
 
 Create a named Claude sandbox for the current directory if you don't already
 have one:

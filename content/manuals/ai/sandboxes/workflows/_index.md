@@ -8,7 +8,7 @@ toc_max: 2
 ---
 
 Choose a workflow based on how you want to develop, authenticate tools, or run
-sandboxes in automation. For command syntax and lifecycle basics, see
+local sandboxes in automation. For command syntax and lifecycle basics, see
 [Usage](../usage.md).
 
 ## Choose how code moves
@@ -16,7 +16,9 @@ sandboxes in automation. For command syntax and lifecycle basics, see
 Your workspace strategy determines when an agent's changes appear on the host.
 Direct mode edits the host working tree in place. Clone mode keeps changes in a
 private clone until you fetch or push them. Host worktrees provide branch
-isolation while keeping Git operations on the host. See [Git workflows](git.md)
+isolation while keeping Git operations on the host. Mountless sandboxes keep
+repositories inside the sandbox, with branches pushed to a Git remote for
+review or use on the host. See [Git workflows](git.md)
 to choose a strategy for single or parallel tasks.
 
 ## Develop in the sandbox

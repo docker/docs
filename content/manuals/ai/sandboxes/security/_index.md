@@ -6,6 +6,8 @@ description: Trust boundaries, isolation layers, and security properties of Dock
 keywords: docker sandboxes, security model, isolation, trust boundaries, microVM
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 Docker Sandboxes run AI agents in microVMs so they can execute code, install
 packages, and use tools without accessing host resources beyond those you
 share. Multiple isolation layers protect your host system.
@@ -28,9 +30,12 @@ What crosses the boundary into the VM:
   outbound HTTP requests. The raw credential values never enter the VM.
 - **Network access:** outbound TCP connections to destinations allowed by
   [network policy](defaults/) are proxied through the host.
-- **Shared agent skills:** a persistent host-side store is mounted read-write
-  at the agent's skills directory unless you opt out when creating the
-  sandbox. Supported agents in other sandboxes mount the same store.
+- Shared agent skills: sandboxes created for supported agents mount a
+  persistent host-side store read-only by default at the agent's skills
+  directory. Use `--skills` or
+  [`skills.defaultMode`](../configuration/settings.md#skillsdefaultmode)
+  to choose another mode at
+  creation. Existing sandboxes retain their mounts until recreated.
 - **MCP gateway traffic:** supported agents connect to a host-side MCP gateway
   endpoint. The gateway brokers access to registered MCP servers.
 
@@ -40,14 +45,15 @@ What crosses the boundary back to the host:
   direct mount.
 - **Outbound TCP connections:** sent to allowed destinations through the host
   proxy.
-- **Shared skill changes:** written to the host-side store and visible to other
-  sandboxes that share it.
+- Shared skill changes: sandboxes with `readwrite` access can write to the
+  host-side store. These changes are visible to other sandboxes that share it.
 
 Outside the workspace and shared skills store, the agent cannot access your
 host filesystem. It also cannot access your host Docker daemon, your host
 network directly, or any destination not allowed by network policy. Sandboxes
-cannot communicate directly over the network. Direct external UDP and ICMP are
-blocked at the network layer.
+cannot communicate directly over the network. Outbound UDP is blocked unless
+you turn on the [experimental UDP feature](../governance/access-controls/local.md#allow-outbound-udp)
+and allow it through network policy. ICMP is blocked.
 
 MCP servers are an explicit integration point. Remote MCP servers run outside
 Docker Sandboxes, and local stdio MCP servers run on the host, not inside the
@@ -55,9 +61,15 @@ sandbox VM. An agent can invoke the tools those servers expose through the MCP
 gateway, subject to MCP policies when organization governance is active. Treat
 local MCP servers as trusted host integrations.
 
-The following diagram shows a sandbox with a directly mounted workspace:
+### MicroVM isolation
 
-![Docker Sandbox security model](../images/sbx-security.png)
+This topology shows what is private to the microVM, what is explicitly mounted,
+and which host resources remain outside the agent's reach.
+
+{{< interactive-diagram src="../diagrams/trust-boundary-topology.yaml" >}}
+
+To follow an outbound request through network policy and credential injection,
+see [Architecture](../architecture.md#follow-an-authenticated-request).
 
 ## Isolation layers
 
@@ -67,8 +79,8 @@ The sandbox security model has five layers. See
 - **Hypervisor isolation:** separate kernel per sandbox. No shared memory or
   processes with the host.
 - **Network isolation:** outbound TCP traffic is proxied through the host and
-  governed by a [deny-by-default policy](defaults/). Direct external UDP and
-  ICMP are blocked.
+  governed by a [deny-by-default policy](defaults/). Experimental UDP egress
+  also follows network policy. ICMP is blocked.
 - **Docker Engine isolation:** each sandbox has its own Docker Engine with no
   path to the host daemon.
 - **Workspace isolation:** a mountless sandbox has no host workspace mount.
@@ -110,11 +122,12 @@ see the full list of active rules, and remove entries you don't need. See
 Kits run install commands with root privileges inside the sandbox. To limit
 supply-chain risk, `sbx` restricts kit installs to an allowlist of sources
 that defaults to Docker Hub only. See
-[Restrict kit sources](../customize/kits.md#restrict-kit-sources).
+[Restrict kit sources](/manuals/ai/sandboxes/customize/use-kits.md#restrict-kit-sources).
 
 Shared agent skills create a narrow exception to cross-sandbox isolation. The
-store is mounted read-write, so one sandbox can modify instructions or scripts
-that an agent later uses in another sandbox. This doesn't expose the rest of
+store can be mounted with `readwrite` access, so one sandbox can modify
+instructions or scripts that an agent later uses in another sandbox, including
+one with `readonly` access. This doesn't expose the rest of
 the host filesystem or create a direct network path between sandboxes, but it
 does put participating sandboxes in the same trust boundary. See
 [Share agent skills](../workflows/agent-skills.md) for details and the

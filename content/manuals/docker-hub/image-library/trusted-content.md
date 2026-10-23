@@ -145,7 +145,7 @@ codename for Ubuntu 24.04 is "Noble Numbat".
 
 Linux distribution indicators are helpful because many Docker Official Images
 provide variants built upon multiple underlying distribution versions (for
-example, `postgres:bookworm` and `postgres:bullseye`).
+example, `postgres:bookworm` and `postgres:trixie`).
 
 ### Other tags
 

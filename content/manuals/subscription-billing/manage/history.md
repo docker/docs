@@ -15,7 +15,7 @@ needed.
 
 ## View billing history
 
-Personal accounts and organization accounts use the same steps to view billing
+Individual accounts and organization accounts use the same steps to view billing
 history. To view your billing history:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your personal

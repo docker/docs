@@ -14,8 +14,6 @@ access the image view from the Docker Scout Dashboard, the Docker Desktop
 show a breakdown of the image hierarchy (base images), image layers, packages,
 and vulnerabilities.
 
-![The image details view in Docker Desktop](../images/dd-image-view.png)
-
 Docker Desktop first analyzes images locally, where it generates a software bill of materials (SBOM).
 Docker Desktop, Docker Hub, and the Docker Scout Dashboard and CLI all use the [package URL (PURL) links](https://github.com/package-url/purl-spec)
 in this SBOM to query for matching Common Vulnerabilities and Exposures (CVEs) in [Docker Scout's advisory database](/manuals/scout/deep-dive/advisory-db-sources.md).
@@ -142,8 +140,6 @@ as a base image, it shows recommendations for newer and more secure versions
 of `debian` to use. By providing more than one alternative to choose from, you
 can see for yourself how the options compare with each other, and decide which
 one to use.
-
-![Base image recommendations](../images/change-base-image.png)
 
 Select a tag recommendation to see further details of the recommendation.
 It shows the benefits and potential disadvantages of the tag, why it's a

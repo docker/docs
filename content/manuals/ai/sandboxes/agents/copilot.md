@@ -7,16 +7,14 @@ description: |
 keywords: docker sandboxes, github copilot, ai agent, github token, sbx
 ---
 
+{{% include "sandboxes-local-scope.md" %}}
+
 This guide covers authentication, configuration, and usage of GitHub Copilot
 in a sandboxed environment.
 
 Official documentation: [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli)
 
 ## Quick start
-
-> [!NOTE]
-> In Docker Sandboxes v0.42, use `sbx run docker.io/sbx/copilot-kit:latest`.
-> The `copilot` shorthand is unavailable in this release.
 
 Create a sandbox and run Copilot for a project directory:
 

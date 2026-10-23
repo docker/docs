@@ -8,6 +8,18 @@ weight: 10
 
 The **Containers** view lists all running and stopped containers and applications. It provides a clean interface to manage the lifecycle of your containers, interact with running applications, and inspect Docker objects—including Docker Compose apps.
 
+## Toolbar and grid
+
+Use the **Search** field to find a specific container or Compose project by name.
+
+The toolbar also lets you:
+
+- Toggle **Only show running containers** to hide stopped containers from the grid.
+- Customize the grid using the **Columns** button. You can show, hide, or reorder columns, including live stats like CPU %, memory usage/limit, memory %, disk read/write, network I/O, PIDs, and last-started time. Column choices persist between sessions.
+- Select multiple containers or Compose projects using the row checkboxes, then use the bulk actions toolbar to start, pause, stop, or delete everything selected at once.
+
+Compose apps are grouped in the grid with an expand/collapse control. Selecting a project's checkbox selects or deselects all of its containers together.
+
 ## Container actions
 
 Use the **Search** field to find a specific container by name.
@@ -16,10 +28,14 @@ From the **Containers** view you can:
 - Start, stop, pause, resume, or restart containers
 - View image packages and CVEs
 - Delete containers
-- Open the application in VS code
+- Open a terminal in the container
 - Open the port exposed by the container in a browser
 - Copy the `docker run` command for reuse or modification
 - Use [Docker Debug](#execdebug)
+
+From a Compose project's row, you get a similar set of actions scoped to the whole project: start/stop, pause, restart, view details, delete, and if [VS Code](https://code.visualstudio.com/) is set as your default editor, **Open in VS Code**.
+
+If [Gordon](/manuals/ai/gordon/_index.md) is available, each row can surface AI-suggested diagnostic questions and flag detected issues, such as "Container exited with an error" or "Container keeps restarting."
 
 ## Resource usage
 
@@ -89,7 +105,7 @@ default** option.
 
 ### Files
 
-Select **Files** to explore the filesystem of running or stopped containers. You
+Select **Files** to explore the filesystem of running containers. You
 can also:
 
 - See which files have been recently added, modified, or deleted

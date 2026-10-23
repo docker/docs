@@ -1,5 +1,5 @@
 name: sbx policy inspect
-synopsis: Inspect policy or rule details
+synopsis: Show policy or rule details
 description: |-
     Inspect full detail for a selected policy or rule.
 
@@ -11,8 +11,10 @@ description: |-
     identifier accepted by "sbx policy rm network --id" (local rules only). Use
     "sbx policy ls" to find policy names and "sbx policy ls --wide" to find rule
     IDs and resource values.
-usage: sbx policy inspect <policy-or-rule> [flags]
+usage: sbx policy inspect POLICY|RULE [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
@@ -25,10 +27,6 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"

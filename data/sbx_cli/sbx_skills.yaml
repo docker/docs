@@ -4,8 +4,15 @@ experimental: true
 description: |-
     Manage skills available to agents in Docker Sandboxes.
 
-    Skills are shared across sandboxes by default. Use --no-share-skills when
-    creating a sandbox to opt out.
+    Skills are shared across sandboxes by default: the store's entries are linked
+    into the agent's skills directory read-only, which stays writable so kits can
+    install skills beside them. Linking happens at container start, so editing an
+    existing skill is live through the link, while adding a store entry reaches a
+    running sandbox only on its next start. Removing one takes effect immediately:
+    the link in a running sandbox stops resolving at once, and the next start is
+    what clears the stale link away. Use --skills=off when creating a sandbox to
+    opt out, or --skills=readwrite to mount the store over that directory so the
+    sandbox's own writes are shared.
 usage: sbx skills COMMAND
 options:
     - name: help
@@ -17,10 +24,6 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"

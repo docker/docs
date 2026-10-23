@@ -6,6 +6,9 @@ description: Build, test, and connect to development services in Docker Sandboxe
 keywords: docker sandboxes, sbx, local development, build, test, ports, host services
 ---
 
+This page describes local sandboxes, host services, and local port mappings.
+For cloud endpoints, see [Expose a port](../cloud/usage.md#expose-a-port).
+
 Use a sandbox's private runtime to build images, run tests, and connect local
 tools to development services across the sandbox boundary.
 
@@ -70,8 +73,8 @@ lists them in detail:
 
 ```console
 $ sbx ls
-SANDBOX         AGENT   STATUS   PORTS                    WORKSPACE
-my-sandbox      claude  running  127.0.0.1:8080->3000/tcp4 /home/user/proj
+SANDBOX      AGENT    STATUS      PORTS                       WORKSPACE         CREATED
+my-sandbox   claude   ● running   127.0.0.1:8080->3000/tcp4    /home/user/proj    2m
 ```
 
 To stop forwarding a port:

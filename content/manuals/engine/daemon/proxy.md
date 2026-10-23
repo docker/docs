@@ -110,7 +110,7 @@ systemd drop-in file that sets the variables for the `docker` service.
    ```
 
    Multiple environment variables can be set; to set both an HTTP and an
-   HTTPS proxy;
+   HTTPS proxy:
 
    ```systemd
    [Service]
@@ -196,7 +196,7 @@ systemd drop-in file that sets the variables for the `docker` service.
    ```
 
    Multiple environment variables can be set; to set both an HTTP and an
-   HTTPS proxy;
+   HTTPS proxy:
 
    ```systemd
    [Service]

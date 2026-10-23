@@ -1,7 +1,7 @@
 ---
 title: Create and manage a team
 linkTitle: Teams
-weight: 20
+weight: 30
 description: Learn how to create and manage teams for your organization
 keywords: docker, registry, teams, organizations, plans, Dockerfile, Docker
   Hub, docs, documentation, repository permissions, configure repository access, team management
@@ -56,6 +56,19 @@ For more information on roles, see
 1. Select **Teams**.
 1. Select **Create team**.
 1. Provide the team's information, then select **Create**.
+
+Docker opens the team view, where you can add members and assign licenses.
+
+## Assign licenses to a team
+
+Each team has a **Licenses** card that lists the product licenses the team
+assigns. Every member of the team receives those licenses, including members
+who join later.
+
+To assign licenses, open the team from **Teams**, then select the **edit** icon
+on the **Licenses** card. For the full procedure, what happens when you don't
+have enough licenses, and what members lose when you remove a license, see
+[Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md#teams).
 
 ## Set team repository permissions
 
@@ -118,7 +131,10 @@ The following table shows what each permission level allows users to do:
 Organization owners can delete a team. When you remove a team from your
 organization, this action revokes member access to the team's permitted
 resources. It won't remove users from other teams that they belong to, and it
-won't delete any resources.
+won't delete any resources. Members also lose the licenses that came only from
+that team, unless another team assigns the same license or they hold a direct
+assignment. See
+[Remove licenses](/manuals/accounts/organization/manage/manage-licenses.md#remove-licenses).
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
@@ -126,8 +142,3 @@ won't delete any resources.
 1. Select the **Actions** icon next to the name of the team you want to delete.
 1. Select **Delete team**.
 1. Review the confirmation message, then select **Delete**.
-
-## More resources
-
-- [Video: Docker Teams](https://youtu.be/WKlT1O-4Du8?feature=shared&t=348)
-- [Video: Roles, teams, and repositories](https://youtu.be/WKlT1O-4Du8?feature=shared&t=435)

@@ -41,7 +41,7 @@ can use either interface.
    `node`, or `golang`). For this example, search for `python`.
 
    To search for an image with a compliance variant (FIPS or STIG), select
-   **Filter by** and select the relevant compliance option.
+   **Compliance** and select the relevant compliance option.
 
 5. Select the Python repository to view its details.
 

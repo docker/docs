@@ -6,7 +6,7 @@ description: |-
 
     Running agents may be reading installed skills. Removal cannot be undone and
     requires confirmation; use --force to skip confirmation in scripts.
-usage: sbx skills rm <skill>... [flags]
+usage: sbx skills rm SKILL... [flags]
 options:
     - name: force
       shorthand: f
@@ -21,13 +21,14 @@ inherited_options:
       default_value: "false"
       usage: |
         Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
-    - name: cloud-api-url
-      default_value: https://api.sandboxes-cloud.docker.com
-      usage: |
-        Cloud Sandboxes API base URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com). Set DOCKER_CLOUD_API_URL or pass this flag to override; a legacy value ending in /v1 is accepted.
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx skills rm my-skill
+
+      # Skip the confirmation prompt
+      sbx skills rm --force my-skill
 see_also:
     - sbx skills - (Experimental) Manage skills available in sandboxes
