@@ -75,8 +75,20 @@ own tab while you run commands in another.
 
 If the sandbox detail page shows **Connect**, open it to find SSH connection
 options. The panel includes a Docker Sandboxes CLI option and a connect script.
-For the script, manage your public SSH key under **Settings**. Follow the
-instructions in the panel for your chosen connection method.
+For the script, register your public SSH key first. Follow the instructions
+in the panel for your chosen connection method.
+
+### Register an SSH key
+
+1. Open the user menu and select **Settings**.
+2. Under **Sandbox SSH key**, optionally enter a **Name** for the key.
+3. Paste your public key into **Public key**, then select **Add key**. Use the
+   contents of your public key file, such as `~/.ssh/id_ed25519.pub`. Never
+   paste your private key.
+
+Only the public key is stored. It takes effect immediately, without restarting
+a sandbox. Check **Registered key** to review it. Adding another key replaces
+the registered key. To remove it, select **Delete key** and confirm deletion.
 
 ### Access a service by port
 
