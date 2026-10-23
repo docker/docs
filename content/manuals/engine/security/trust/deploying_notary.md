@@ -4,6 +4,12 @@ keywords: trust, security, notary, deployment
 title: Deploy Notary Server with Compose
 ---
 
+> [!WARNING]
+>
+> Docker Content Trust (DCT) is being retired. The Notary v1 service at
+> `notary.docker.io` will shut down on December 8, 2026. For more information, see
+> [Docker Content Trust (DCT)](/manuals/retired.md#docker-content-trust-dct).
+
 The easiest way to deploy Notary Server is by using Docker Compose. To follow the procedure on this page, you must have already [installed Docker Compose](/manuals/compose/install/_index.md).
 
 1. Clone the Notary repository.
