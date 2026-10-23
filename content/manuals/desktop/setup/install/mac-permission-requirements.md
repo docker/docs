@@ -51,6 +51,10 @@ It is your responsibility to ensure that localhost is resolved to `127.0.0.1` an
 
 You can choose to enable privileged port mapping during installation (version 4.88.0 and earlier), or from the **Advanced** page in **Settings** post-installation. Docker Desktop requires authorization to confirm this choice.
 
+With version 4.97 and later, Docker Desktop binds privileged ports directly and doesn't require authorization. By default, privileged ports are only reachable through loopback addresses, such as `127.0.0.1`. Publishing a privileged port on a specific non-loopback IP address, for example `-p 192.168.1.10:80:80`, fails with an error.
+
+To expose privileged ports to other machines on your local network, go to **Settings** > **Advanced** and select **Allow privileged port forwarding to external machines**.
+
 ## Local Network permission
 
 For containers to reach devices on your local network, Docker Desktop needs the macOS **Local Network** permission. You can check it in **System Settings** > **Privacy & Security** > **Local Network**. See [Containers can't reach devices on my local network](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#containers-cant-reach-devices-on-my-local-network).
