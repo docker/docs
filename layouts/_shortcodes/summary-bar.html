@@ -28,6 +28,13 @@
     "Docker Offload" "cloud"
     "AI Governance" "shield-check"
   }}
+  {{/* Short YAML keys map to pricing-page names for display. */}}
+  {{ $subscriptionLabels := dict
+    "Personal" "Docker Personal"
+    "Pro" "Docker Pro"
+    "Team" "Docker Team"
+    "Business" "Docker Business"
+  }}
   {{ $availabilityIcons := dict
     "Experimental" "beaker"
     "Beta" "bolt"
@@ -53,29 +60,20 @@
 
   {{/* The page value wins over the record value. */}}
   {{ $permission := .Get "permission" | default $feature.permission }}
-  {{ $permissionURL := "" }}
   {{ if $permission }}
     {{/* Only exact names from the custom role permissions reference are allowed. */}}
     {{ $permissionsReference := "content/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md" }}
-    {{ $permissionSections := dict }}
-    {{ $section := "" }}
+    {{ $permissionNames := slice }}
     {{ range split (os.ReadFile $permissionsReference) "\n" }}
-      {{ with findRESubmatch `^## (.+?)\s*$` . 1 }}
-        {{ $section = index (index . 0) 1 }}
-      {{ end }}
       {{ with findRESubmatch `^\| ([^|:][^|]*?) +\|` . 1 }}
         {{ $name := index (index . 0) 1 }}
         {{ if ne $name "Permission" }}
-          {{ $permissionSections = merge $permissionSections (dict $name $section) }}
+          {{ $permissionNames = $permissionNames | append $name }}
         {{ end }}
       {{ end }}
     {{ end }}
-    {{ $permissionSection := index $permissionSections $permission }}
-    {{ if not $permissionSection }}
+    {{ if not (in $permissionNames $permission) }}
       {{ errorf "[summary-bar] invalid permission: %q is not a permission in %s %v" $permission $permissionsReference .Position }}
-    {{ end }}
-    {{ with site.GetPage "/manuals/security/roles-and-permissions/custom-roles/permissions-reference" }}
-      {{ $permissionURL = printf "%s#%s" .RelPermalink (anchorize $permissionSection) }}
     {{ end }}
   {{ end }}
 
@@ -98,7 +96,8 @@
       <div class="flex flex-wrap gap-1">
         <span class="font-bold">Subscription:</span>
         {{ range . }}
-          <span>{{ . }}</span>
+          {{ $label := index $subscriptionLabels . | default . }}
+          <span>{{ $label }}</span>
           <span class="icon-svg icon-sm">
             {{ $icon := index $subscriptionIcons . }}
             {{ if $icon }}
@@ -127,11 +126,13 @@
 
     {{ with $feature.role }}
       <div class="flex flex-wrap gap-1">
-        {{ with site.GetPage "/manuals/security/roles-and-permissions/core-roles" }}
-          <a class="link font-bold" href="{{ .RelPermalink }}">Core role:</a>
-        {{ else }}
-          <span class="font-bold">Core role:</span>
-        {{ end }}
+        <span class="font-bold">
+          {{- with site.GetPage "/manuals/security/roles-and-permissions/core-roles" -}}
+            <a class="link" href="{{ .RelPermalink }}">Core role</a>:
+          {{- else -}}
+            Core role:
+          {{- end -}}
+        </span>
         <span>{{ . }}</span>
         <span class="icon-svg icon-sm">
           {{ partialCached "icon" $roleIcon $roleIcon }}
@@ -141,16 +142,14 @@
 
     {{ with $permission }}
       <div class="flex flex-wrap gap-1">
-        {{ with site.GetPage "/manuals/security/roles-and-permissions/custom-roles" }}
-          <a class="link font-bold" href="{{ .RelPermalink }}">Custom role permission:</a>
-        {{ else }}
-          <span class="font-bold">Custom role permission:</span>
-        {{ end }}
-        {{ if $permissionURL }}
-          <a class="link" href="{{ $permissionURL }}">{{ . }}</a>
-        {{ else }}
-          <span>{{ . }}</span>
-        {{ end }}
+        <span class="font-bold">
+          {{- with site.GetPage "/manuals/security/roles-and-permissions/custom-roles" -}}
+            <a class="link" href="{{ .RelPermalink }}">Custom role permission</a>:
+          {{- else -}}
+            Custom role permission:
+          {{- end -}}
+        </span>
+        <span>{{ . }}</span>
         <span class="icon-svg icon-sm">
           {{ partialCached "icon" $permissionIcon $permissionIcon }}
         </span>

@@ -330,23 +330,22 @@ Gordon plans:
 | Attribute    | Description                                       | Values                                                                                                                       |
 | ------------ | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | account      | Account the plan or setting belongs to            | Individual, Organization                                                                                                     |
-| subscription | Subscription tiers required (list). Use `Available to all organization accounts` when the task is not limited to a plan. Set it only when the page is gated to those tiers. | Personal, Pro, Team, Business, AI Governance, Docker Offload, Available to all organization accounts, and the Docker Hardened Images tiers |
+| subscription | Subscription tiers required (list). Use `Available to all organization accounts` when the task is not limited to a plan. Set it only when the page is gated to those tiers. The bar displays Personal, Pro, Team, and Business as Docker Personal, Docker Pro, Docker Team, and Docker Business to match the [pricing page](https://www.docker.com/pricing/). | Personal, Pro, Team, Business, AI Governance, Docker Offload, Available to all organization accounts, and the Docker Hardened Images tiers |
 | purchase     | How you buy the plan                              | Self-serve, Sales-led                                                                                                        |
 | role         | Core role that has the task                      | Owner, Editor, Company owner                                                                                                 |
-| permission   | Custom role permission that grants the same task. The bar links the name to its section of the permissions reference. | An exact permission name from `content/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md` |
+| permission   | Custom role permission that grants the same task. Must match an exact name from the permissions reference. | An exact permission name from `content/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md` |
 | availability | Product development stage                         | Experimental, Beta, Early Access, GA, Retired                                                                                |
 | requires     | Minimum version or other prerequisite             | String describing the requirement (link to release notes)                                                                    |
 | for          | Audience for the feature                          | Administrators, Individuals. Prefer `role` and `permission` for new records; `for` remains for records that still set it     |
 
-Role and permission render as separate lines labeled **Core role:** and
-**Custom role permission:**. Those labels link to the
+Role and permission render as separate lines. The **Core role** and
+**Custom role permission** labels (without the colon) link to the
 [core roles](/manuals/security/roles-and-permissions/core-roles.md) and
 [custom roles](/manuals/security/roles-and-permissions/custom-roles/_index.md)
 overview pages. The core role is the built-in role that already includes the
-task. The custom role permission line shows the permission name as a link to
-its section of the custom role permissions reference, followed by a key icon.
-A custom role on a Docker Business subscription can grant that permission to a
-member. A record with only a role shows the core role line.
+task. The permission name appears as plain text after the label, followed by a
+key icon. A custom role on a Docker Business subscription can grant that
+permission to a member. A record with only a role shows the core role line.
 
 **Page override:**
 
