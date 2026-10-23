@@ -17,6 +17,8 @@ Admin Console:
 Admin orgs:
   subscription: [Team, Business]
   role: Owner
+Create organization:
+  subscription: [Team, Business]
 Air-gapped containers:
   subscription: [Business]
   for: Administrators
@@ -283,7 +285,7 @@ Intune:
 Jamf Pro:
   for: Administrators
 Licenses:
-  subscription: [AI Governance, Docker Offload]
+  subscription: [Team, Business, AI Governance, Docker Offload]
   role: Owner
   permission: Manage licenses
 Load by default:

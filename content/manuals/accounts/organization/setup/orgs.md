@@ -16,7 +16,7 @@ aliases:
   - /admin/organization/orgs/
 ---
 
-{{< summary-bar feature_name="Admin orgs" >}}
+{{< summary-bar feature_name="Create organization" >}}
 
 Create an organization to group members and teams under one namespace and
 one subscription. Your Docker ID stays an individual account. To use an
