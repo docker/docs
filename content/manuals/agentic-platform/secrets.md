@@ -88,9 +88,9 @@ You can also remove custom secrets from the **Saved secrets** table.
 
 ## Manage secrets
 
-The **Secrets** page shows each secret ID and the sandboxes that use it. Select
-the copy icon to copy the secret ID, or select the edit icon to change the
-stored value.
+The **Saved secrets** table on the **Secrets** page lists each secret's name,
+type, compatible kits under **Works with**, and last update. Select the copy
+icon to copy the secret ID, or select the edit icon to change the stored value.
 
 Agents see a secret ID instead of the actual key or token. For requests that
 match the secret's configured service, the sandbox proxy substitutes the real
