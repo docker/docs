@@ -1,0 +1,151 @@
+# File contains metadata that is used to drive the roles UI screen.
+# Custom role permissions are grouped together by domain model (note these grouping have no logical impact on access control service).
+#
+# Only permissions defined below will show up in the UI.
+groups:
+  - name: Organization management
+    relations:
+      - name: View teams
+        description: View teams and team members
+        relation: permset-group-read
+      - name: Manage teams
+        description: Create, update, and delete teams and team members
+        relation: permset-group-write
+      - name: Manage registry access
+        description: Control which registries members can access
+        relation: permset-registry-access-management-write
+      - name: Manage image access
+        description: Set policies for which images members can pull and use
+        relation: permset-image-access-management-write
+      - name: Update organization information
+        description: Update organization information such as name and location
+        relation: permset-organization-info-write
+      - name: Member management
+        description: Manage organization members, invites, and roles
+        relation: permset-member-write
+      - name: View custom roles
+        description: View existing custom roles and their permissions
+        relation: permset-custom-role-read
+      - name: Manage custom roles
+        description: Full access to custom role management and assignment
+        relation: permset-custom-role-write
+      - name: Manage organization access tokens
+        description: Create, update, and delete organization access tokens
+        relation: permset-access-token-write
+      - name: View activity logs
+        description: Access organization audit logs and activity history
+        relation: permset-activity-log-read
+      - name: View usage reports
+        description: Download organization usage reports (pulls, storage)
+        relation: permset-report-read
+      - name: View domains
+        description: View domains and domain audit settings
+        relation: permset-domain-read
+      - name: Manage domains
+        description: Manage verified domains and domain audit settings
+        relation: permset-domain-write
+      - name: View SSO and SCIM
+        description: View single sign-on and user provisioning configurations
+        relation: permset-sso-read
+      - name: Manage SSO and SCIM
+        description: Full access to SSO and SCIM management
+        relation: permset-sso-write
+      - name: Manage Desktop settings
+        description: Configure Docker Desktop settings policies and view usage reports
+        relation: permset-desktop-settings-write
+      - name: View OIDC connections
+        description: View OIDC connections and their configuration
+        relation: permset-oidc-read
+      - name: Manage OIDC connections
+        description: View, create, edit, and delete OIDC connections
+        relation: permset-oidc-write
+
+  - name: Docker Hub
+    relations:
+      - name: View repositories
+        description: View repository details and contents
+        relation: permset-repo-read
+      - name: Manage repositories
+        description: Full repository management including settings, webhooks, privacy, Dockerfile, immutable tags.
+        relation: permset-repo-write
+      - name: Manage repository team permissions
+        description: Add and remove teams from a repository, and manage team access level
+        relation: permset-repo-group-write
+      # - name: Pull Image
+      #   description: Pull Docker images from repositories
+      #   relation: permset-repo-image-pull
+      # - name: Push Image
+      #   description: Push Docker images from repositories
+      #   relation: permset-repo-image-push
+      # - name: Manage stars
+      #   description: Star and unstar repositories
+      #   relation: permset-repo-star-write
+      # - name: View tags
+      #   description: View image tags in repositories
+      #   relation: permset-repo-tag-read
+      # - name: Manage tags
+      #   description: Delete image tags in repositories
+      #   relation: permset-repo-tag-write
+      # - name: View images
+      #   description: View image list and reclaimable size
+      #   relation: permset-repo-image-read
+      # - name: Manage images
+      #   description: Create, update and delete images
+      #   relation: permset-repo-image-write
+      # - name: View teams
+      #   description: View repository team details
+      #   relation: permset-repo-team-read
+      # - name: Manage teams
+      #   description: Create, update, and delete repository teams
+      #   relation: permset-repo-team-write
+
+  - name: Billing
+    relations:
+      - name: View billing
+        description: View organization billing information
+        relation: permset-billing-read
+      - name: Manage billing
+        description: Complete access to managing organization billing
+        relation: permset-billing-manage
+
+  - name: Licensing
+    relations:
+      - name: Manage licenses
+        description: Assign and revoke licenses for members and manage auto-assign rules. Does not include purchasing or changing the number of licenses.
+        relation: permset-license-manage
+
+  - name: AI Governance
+    relations:
+      - name: View policies
+        description: View existing AI Governance policies and their rules
+        relation: permset-governance-policy-read
+      - name: Manage policies
+        description: Full access to AI Governance policy management
+        relation: permset-governance-policy-write
+      - name: View audit logs
+        description: View audit events for the organization
+        relation: permset-audit_events-read
+      - name: Manage audit settings
+        description: Update audit configuration for the organization
+        relation: permset-audit_settings-write
+
+  - name: DHI (Docker Hardened Images)
+    relations:
+      - name: Create DHI mirrors
+        description: Create Docker Hardened Image mirror repositories
+        relation: permset-dhi-mirror-write
+      - name: Manage customizations
+        description: Create, update, and delete Docker Hardened Image customizations
+        relation: permset-dhi-customization-write
+
+  - name: Docker Offload
+    relations:
+      - name: Offload Read-Only
+        description: View Offload account status, leases, and zones
+        relation: permset-offload-read
+
+  - name: Cloud Sandboxes
+    relations:
+      - name: Use Cloud Sandboxes
+        description: Create and use Docker Cloud Sandboxes
+        relation: permset-sandbox-use
