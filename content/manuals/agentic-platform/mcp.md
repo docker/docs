@@ -32,9 +32,10 @@ release doesn't support MCP-specific policies.
 
 To connect a server that is not predefined:
 
-1. Open **MCP**.
-2. Choose the option to add a server and enter its URL.
-3. Connect the server and authorize access if prompted.
+1. Open **MCP** and find **Add a server**.
+2. Enter a streamable HTTP MCP endpoint in **Remote MCP URL**.
+3. Select **Add**. Public servers are ready immediately. For servers that
+   require an account, authorize access after adding the server.
 
 ## Use tools from another client
 
