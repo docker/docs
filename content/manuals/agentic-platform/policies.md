@@ -49,8 +49,11 @@ removed, and review the allow rules in the remaining policies and kit.
 If the combined allow list contains any rules, destinations outside that list
 are blocked. This default behavior isn't an explicit deny rule: adding an
 allow rule in another policy permits the matching destinations. If the
-combined allow list is empty or absent, the sandbox can reach any destination
-except those blocked by deny rules.
+combined allow list is empty or absent, your account's default network mode
+applies. The default is deny all, so the sandbox can't reach any destination
+until an allow rule permits it. Accounts created before deny all became the
+default have an explicit allow all default instead, so their sandboxes can
+reach any destination except those blocked by deny rules.
 
 ## Policy rules
 

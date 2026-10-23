@@ -596,6 +596,7 @@ token, use `sbx mcp auth rm`.
 ## Governance
 
 Organizations with AI Governance can use
-[MCP access policies](governance/access-controls/mcp.md) to control MCP server
-registration, tool calls, gateway meta-tools, resources, prompts, and approval
-requirements. MCP access policies are organization policies written in Cedar.
+[Organization MCP access policies](governance/organization/policies/mcp.md) to
+control MCP server registration, tool calls, gateway meta-tools, resources,
+prompts, and approval requirements. MCP access policies are organization
+policies written in Cedar.

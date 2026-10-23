@@ -13,7 +13,10 @@
     "Docker Hardened Images Enterprise" "/icons/dhi.svg"
     "Docker Hardened Images Select or Enterprise" "/icons/dhi.svg"
     "Docker Offload" "cloud"
-    "AI Governance" "shield-check"
+    "AI Governance" "lock-closed"
+  }}
+  {{ $subscriptionLinks := dict
+    "AI Governance" "/manuals/subscription-billing/plans/ai-governance"
   }}
   {{ $availabilityIcons := dict
     "Experimental" "beaker"
@@ -34,7 +37,16 @@
       <div class="flex flex-wrap gap-1">
         <span class="font-bold">Subscription:</span>
         {{ range . }}
-          <span>{{ . }}</span>
+          {{ $name := . }}
+          {{ with index $subscriptionLinks $name }}
+            {{ with site.GetPage . }}
+              <a class="link" href="{{ .RelPermalink }}">{{ $name }}</a>
+            {{ else }}
+              {{ errorf "[summary-bar] subscription link page not found: %s" . }}
+            {{ end }}
+          {{ else }}
+            <span>{{ $name }}</span>
+          {{ end }}
           <span class="icon-svg icon-sm">
             {{ $icon := index $subscriptionIcons . }}
             {{ if $icon }}
