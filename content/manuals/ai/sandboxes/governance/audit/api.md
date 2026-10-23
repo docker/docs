@@ -146,9 +146,10 @@ time range. Stop when `next_page_token` is empty.
 
 ## Request limits
 
-All clients and tokens in an organization share its request quota. Each
-pagination request counts toward that quota. Additional organization and source
-IP limits apply at the API gateway.
+The API and gateway each enforce a limit of 5 requests per second per
+organization. All clients and tokens in an organization share these limits.
+Each pagination request counts. The gateway also limits requests to 600 per
+minute per source IP address. Gateway platform limits also apply.
 
 Requests that exceed a limit receive `429 Too Many Requests`. Application
 rate-limit responses include these fields:
