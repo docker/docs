@@ -97,8 +97,9 @@ The payload is a dictionary of key-values. Docker Desktop supports the following
 > [!IMPORTANT]
 >
 > `allowedOrgs` must be a `<string>`, not an `<array>`. Docker Desktop only reads
-> string values from a configuration profile, so an array is silently ignored and
-> no enforcement happens. This differs from the
+> string values from a configuration profile, so an array is ignored, no
+> enforcement happens, and Docker Desktop logs a warning. See
+> [Check `allowedOrgs` on Mac](#check-allowedorgs-on-mac). This differs from the
 > [`.plist` method](#mac-plist-file-method), which does use an array.
 
 Setting at least one of the proxy keys puts Docker Desktop's proxy into manual
@@ -363,6 +364,8 @@ If sign-in enforcement doesn't work:
   every user
 - Check for stray whitespace in the value. In the Windows registry key, put each
   organization on its own line rather than separating them with spaces or commas
+- On Mac, check that `allowedOrgs` has the type the method expects. See
+  [Check `allowedOrgs` on Mac](#check-allowedorgs-on-mac)
 - Check whether a higher-precedence method is in effect. See
   [Method precedence](#method-precedence)
 - Restart Docker Desktop or reboot the system. Docker Desktop doesn't pick up new
@@ -372,3 +375,54 @@ If sign-in enforcement doesn't work:
 
 If enforcement works but developers report that the Docker CLI stopped working,
 that's expected. See [Impact on the Docker CLI](_index.md#impact-on-the-docker-cli).
+
+### Check `allowedOrgs` on Mac
+
+Use `defaults read-type` to check that `allowedOrgs` has the type the method
+expects, and `defaults read` to check its value. In `defaults read` output, an
+array is shown in parentheses and a string isn't.
+
+For the [configuration profiles method](#mac-configuration-profiles-method-recommended),
+`allowedOrgs` must be a string:
+
+```console
+$ defaults read-type "/Library/Managed Preferences/com.docker.config" allowedOrgs
+Type is string
+$ defaults read "/Library/Managed Preferences/com.docker.config"
+{
+    allowedOrgs = "first_org;second_org";
+}
+```
+
+If the output shows `Type is array`, or the value is in parentheses, the profile
+wraps `allowedOrgs` in an `<array>` and Docker Desktop ignores it:
+
+```console
+{
+    allowedOrgs =     (
+        "first_org;second_org"
+    );
+}
+```
+
+Docker Desktop also logs a warning to `com.docker.backend.log` in
+`~/Library/Containers/com.docker.docker/Data/log/host`:
+
+```text
+ignoring allowedOrgs from configuration profile: value must be a string of organizations separated by ";"
+```
+
+For the [plist file method](#mac-plist-file-method), `allowedOrgs` must be an
+array:
+
+```console
+$ defaults read-type "/Library/Application Support/com.docker.docker/desktop.plist" allowedOrgs
+Type is array
+$ defaults read "/Library/Application Support/com.docker.docker/desktop.plist"
+{
+    allowedOrgs =     (
+        myorg1,
+        myorg2
+    );
+}
+```
