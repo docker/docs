@@ -6,9 +6,7 @@ description: >-
 keywords: >-
   Docker roles, core roles, Member role, Editor role, Owner role, organization
   permissions, company owner, Docker Hub, Docker Scout, Docker Build Cloud,
-  OIDC, teams, access control, Docker Business, custom roles, organization
-  access tokens, licenses, AI Governance, Docker Hardened Images,
-  Docker Offload, Cloud Sandboxes
+  OIDC, teams, access control, Docker Business, custom roles
 weight: 10
 aliases:
   - /enterprise/security/roles-and-permissions/core-roles/
@@ -52,7 +50,6 @@ These permissions apply organization-wide.
 | Explore images and extensions                         | ✅     | ✅     | ✅    |
 | Star, favorite, vote, and comment on content          | ✅     | ✅     | ✅    |
 | Pull images                                           | ✅     | ✅     | ✅    |
-| Push images                                           | ❌     | ✅     | ✅    |
 | Create and publish an extension                       | ✅     | ✅     | ✅    |
 | Become a Verified, Official, or Open Source publisher | ❌     | ❌     | ✅    |
 | Edit and delete publisher repository logos            | ❌     | ✅     | ✅    |
@@ -90,23 +87,19 @@ Use team permissions for that.
 | Invite members                                                    | ❌     | ❌     | ✅    |
 | Manage members                                                    | ❌     | ❌     | ✅    |
 | Manage member roles and permissions                               | ❌     | ❌     | ✅    |
-| Manage custom roles                                               | ❌     | ❌     | ✅    |
-| Manage organization access tokens                                 | ❌     | ❌     | ✅    |
 | View member activity                                              | ❌     | ❌     | ✅    |
 | Export and reporting                                              | ❌     | ❌     | ✅    |
 | Image Access Management                                           | ❌     | ❌     | ✅    |
 | Registry Access Management                                        | ❌     | ❌     | ✅    |
 | Namespace access control                                          | ❌     | ❌     | ✅    |
 | Set up Single Sign-On (SSO) and SCIM                              | ❌     | ❌     | ✅ \* |
-| Manage verified domains and domain audit settings                 | ❌     | ❌     | ✅    |
 | Require Docker Desktop sign-in                                    | ❌     | ❌     | ✅ \* |
-| Manage Desktop settings policies                                  | ❌     | ❌     | ✅    |
 | Manage billing information (for example, billing address)         | ❌     | ❌     | ✅    |
 | Manage payment methods (for example, credit card or invoice)      | ❌     | ❌     | ✅    |
 | View billing history                                              | ❌     | ❌     | ✅    |
 | Manage subscriptions                                              | ❌     | ❌     | ✅    |
 | Manage seats                                                      | ❌     | ❌     | ✅    |
-| Assign and revoke licenses and manage auto-assign rules           | ❌     | ❌     | ✅    |
+| Manage licenses                                                   | ❌     | ❌     | ✅    |
 | Upgrade and downgrade plans                                       | ❌     | ❌     | ✅    |
 
 > [!TIP]
@@ -136,38 +129,6 @@ _\* If not part of a company_
 | Configure builder settings | ✅     | ✅     | ✅    |
 | Buy minutes                | ❌     | ❌     | ✅    |
 | Manage subscription        | ❌     | ❌     | ✅    |
-
-### AI Governance
-
-| Permission             | Member | Editor | Owner |
-| :--------------------- | :----- | :----- | :---- |
-| View policies          | ✅     | ✅     | ✅    |
-| Manage policies        | ❌     | ❌     | ✅    |
-| View audit logs        | ❌     | ❌     | ✅    |
-| Manage audit settings  | ❌     | ❌     | ✅    |
-
-### Docker Hardened Images
-
-Members can create, update, and delete customizations unless the organization
-has denied customizations for all members.
-
-| Permission                  | Member | Editor | Owner |
-| :-------------------------- | :----- | :----- | :---- |
-| View mirrors                | ✅     | ✅     | ✅    |
-| Create and delete mirrors   | ❌     | ✅     | ✅    |
-| Manage customizations       | ✅     | ✅     | ✅    |
-
-### Docker Offload
-
-| Permission                                 | Member | Editor | Owner |
-| :----------------------------------------- | :----- | :----- | :---- |
-| View account status, leases, and zones     | ✅     | ✅     | ✅    |
-
-### Cloud Sandboxes
-
-| Permission                  | Member | Editor | Owner |
-| :-------------------------- | :----- | :----- | :---- |
-| Create and use sandboxes    | ❌     | ❌     | ✅    |
 
 ## Next steps
 

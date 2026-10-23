@@ -33,7 +33,7 @@ or edit a custom role](manage.md).
 | Member management                 | Manage organization members, invites, and roles                                                 |
 | View custom roles                 | View existing custom roles and their permissions                                                |
 | Manage custom roles               | Full access to custom role management and assignment                                            |
-| Manage organization access tokens | Create, update, and delete organization access tokens                                           |
+| Manage organization access tokens | Create, update, and delete repositories in this org. Push/pull or registry actions not included |
 | View activity logs                | Access organization audit logs and activity history                                             |
 | View usage reports                | Download organization usage reports (pulls, storage)                                            |
 | View domains                      | View domains and domain audit settings                                                          |
