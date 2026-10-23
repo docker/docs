@@ -37,6 +37,10 @@ Automated builds:
   subscription: [Pro, Team, Business]
 Azure blob:
   availability: Experimental
+Billing:
+  subscription: [Personal, Pro, Team, Business]
+  role: Owner
+  permission: Manage billing
 Build additional contexts:
   requires: Docker Compose [2.17.0](https://github.com/docker/compose/releases/tag/v2.17.0) and later
 Build checks:

@@ -12,6 +12,8 @@ aliases:
   - /billing/tax-certificate/
 ---
 
+{{< summary-bar feature_name="Billing" >}}
+
 Depending on your location, Docker may collect sales tax or VAT on your
 subscription. Tax relief is the same idea in both cases, but the process
 differs:

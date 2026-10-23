@@ -9,6 +9,8 @@ aliases:
   - /billing/cycle/
 ---
 
+{{< summary-bar feature_name="Billing" >}}
+
 You can update your billing contact information, address, and notification email at any time. Existing invoices, whether paid or unpaid, cannot be updated. Changes only apply to future invoices.
 
 ## Update billing details

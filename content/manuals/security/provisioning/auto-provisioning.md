@@ -8,6 +8,8 @@ aliases:
   - /enterprise/security/provisioning/auto-provisioning/
 ---
 
+{{< summary-bar feature_name="Domain management" >}}
+
 Auto-provisioning automatically adds users to your organization when they
 sign in with email addresses that match your verified domains. You must verify
 a domain before enabling auto-provisioning.
