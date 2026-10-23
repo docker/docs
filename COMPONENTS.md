@@ -338,7 +338,12 @@ Gordon plans:
 | requires     | Minimum version or other prerequisite             | String describing the requirement (link to release notes)                                                                    |
 | for          | Audience for the feature                          | Administrators, Individuals. Prefer `role` and `permission` for new records; `for` remains for records that still set it     |
 
-Role and permission render as separate lines. The role is the core role that already includes the task. The permission line shows the permission name as a link to its section of the custom role permissions reference, followed by a key icon. A custom role on a Docker Business subscription can grant that permission to a member. A record with only a role shows the role line.
+Role and permission render as separate lines labeled **Core role:** and
+**Custom role permission:**. The core role is the built-in role that already
+includes the task. The custom role permission line shows the permission name
+as a link to its section of the custom role permissions reference, followed by
+a key icon. A custom role on a Docker Business subscription can grant that
+permission to a member. A record with only a role shows the core role line.
 
 **Page override:**
 

@@ -127,7 +127,7 @@
 
     {{ with $feature.role }}
       <div class="flex flex-wrap gap-1">
-        <span class="font-bold">Role:</span>
+        <span class="font-bold">Core role:</span>
         <span>{{ . }}</span>
         <span class="icon-svg icon-sm">
           {{ partialCached "icon" $roleIcon $roleIcon }}
@@ -137,7 +137,7 @@
 
     {{ with $permission }}
       <div class="flex flex-wrap gap-1">
-        <span class="font-bold">Permission:</span>
+        <span class="font-bold">Custom role permission:</span>
         {{ if $permissionURL }}
           <a class="link" href="{{ $permissionURL }}">{{ . }}</a>
         {{ else }}
