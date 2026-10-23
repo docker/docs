@@ -153,7 +153,7 @@ For detailed instructions, see [Configure single sign-on](/manuals/security/auth
 
 Not with JIT alone. JIT provisions users when they authenticate, but it
 doesn't deprovision users who leave your IdP. You must
-[remove those users](/manuals/accounts/organization/manage/members.md#remove-a-member-from-the-organization)
+[remove those users](/manuals/accounts/organization/manage/members.md#remove-member-from-organization)
 manually.
 
 [SCIM](/manuals/security/provisioning/scim/_index.md) provides continuous user
@@ -166,7 +166,7 @@ must already be members, have a pending invitation, or be provisioned through
 SCIM. Users who don't meet these criteria get an "Access denied" error and
 need an administrator to invite them.
 
-See [SSO authentication with JIT provisioning disabled](/manuals/security/provisioning/just-in-time.md#sso-authentication-with-jit-provisioning-disabled).
+See [Disable JIT provisioning](/manuals/security/provisioning/just-in-time.md#disable).
 
 ### Can someone join an organization without an invitation?
 

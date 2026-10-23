@@ -16,10 +16,15 @@ options:
       shorthand: f
       default_value: "false"
       usage: Skip confirmation prompts
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for rm
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"

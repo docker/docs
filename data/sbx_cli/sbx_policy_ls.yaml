@@ -23,6 +23,8 @@ options:
         Filter policies by how they were created: "default", "added", "provisioned", or "approval"
     - name: decision
       usage: 'Filter policies by decision: "allow" or "deny"'
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
@@ -32,9 +34,13 @@ options:
       usage: Show inactive policy rules hidden by remote governance
     - name: json
       default_value: "false"
-      usage: Output filtered policy rules as JSON
+      usage: Output in JSON format
     - name: protocol
       usage: 'Filter network rules by protocol: tcp or udp'
+    - name: quiet
+      shorthand: q
+      default_value: "false"
+      usage: Only display rule IDs (network patterns with --cloud)
     - name: source
       usage: 'Filter policies by source: "local", "org", or "kit"'
     - name: type
@@ -65,6 +71,9 @@ example: |4-
 
       # Output filtered rules as JSON
       sbx policy ls --json
+
+      # List only rule IDs
+      sbx policy ls -q
 
       # List only network policies
       sbx policy ls --type network

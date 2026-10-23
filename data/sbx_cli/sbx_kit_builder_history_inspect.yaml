@@ -1,5 +1,5 @@
 name: sbx kit builder history inspect
-synopsis: Inspect a kit build record
+synopsis: Show a kit build record
 experimental: true
 usage: sbx kit builder history inspect [ARGS...] [flags]
 options:
@@ -16,5 +16,11 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      # The most recent build
+      sbx kit builder history inspect
+
+      # One build by record reference
+      sbx kit builder history inspect 3b6l9x
 see_also:
-    - sbx kit builder history - Inspect kit build history in the builder sandbox
+    - sbx kit builder history - Show kit build history in the builder sandbox

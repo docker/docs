@@ -50,9 +50,9 @@ the registration. After registration, verify that the server is registered:
 
 ```console
 $ sbx mcp ls
-NAME                 TYPE     URL/COMMAND
-notion               remote   https://mcp.notion.com/mcp
 ```
+
+The listing shows each server's transport, status, gateway, and details.
 
 Then start a sandbox and expose the registered server:
 
@@ -241,6 +241,19 @@ development, private servers, or custom container flags.
 > and images, and avoid mounting host paths or passing credentials unless the
 > server needs them.
 
+### Docker Hardened Image
+
+For an MCP server packaged as a Docker Hardened Image, pass its `dhi.io`
+reference instead of a registry or manifest URL:
+
+```console
+$ sbx mcp add fetch --url dhi.io/fetch-mcp:latest
+```
+
+Use a tag or digest: `dhi.io/<IMAGE>:<TAG>` or
+`dhi.io/<IMAGE>@sha256:<DIGEST>`. For images from other registries, use a
+server-manifest URL or an [explicit command](#from-an-explicit-command).
+
 ## Authorize OAuth-backed servers
 
 If a registered remote server requires OAuth, `sbx mcp add` starts the
@@ -248,11 +261,6 @@ authorization flow by default:
 
 ```console
 $ sbx mcp add notion --url https://mcp.notion.com/mcp
-Resolving MCP server "notion"...
-Open this URL to authorize MCP server "notion":
-https://api.notion.com/v1/oauth/authorize?...
-MCP server "notion" authorized
-MCP server "notion" registered (type: remote)
 ```
 
 OAuth credentials stay on the host. In local gateway mode, `sbx` stores tokens
@@ -303,11 +311,25 @@ written to the MCP registration. If the server requires a confidential client
 and no secret is stored, registration succeeds but authorization is skipped.
 Store the secret, then run `sbx mcp auth <server>`.
 
-MCP OAuth client secrets use the name `mcp:<server>:client_secret`. The store
-also maintains a `mcp:<server>:client_secret:identity` record that binds the
-secret to the OAuth client. For secrets stored by a version that used
-`mcp:<server>.client_secret`, set the secret again using the colon-separated
-name.
+#### Change the OAuth client
+
+If you re-register a server name with a different client ID, issuer, or token
+endpoint, `sbx` refuses to use the secret bound to the previous client.
+After verifying that the registration points to the intended client and
+provider, store that client's secret, clear the old binding, and authorize:
+
+```console
+$ sbx secret set mcp:slack:client_secret
+$ sbx secret rm mcp:slack:client_secret:identity
+$ sbx mcp auth slack
+```
+
+Setting a secret alone doesn't clear the old binding. The `:identity` record
+is metadata that binds the stored secret to its OAuth client. Authorization
+records the binding for the new client.
+
+For secrets stored under the legacy name `mcp:<server>.client_secret`, set
+the secret again using `mcp:<server>:client_secret`.
 
 ### Set OAuth scopes
 
@@ -390,6 +412,28 @@ Use `--json` for machine-readable output:
 $ sbx mcp auth status notion --json
 ```
 
+### Override the OAuth resource indicator
+
+Use `--resource` when your OAuth provider requires a token audience that
+differs from the resource identifier discovered by `sbx`. By default, `sbx`
+uses the server's protected-resource metadata, or the endpoint URL if the
+metadata is absent. Check the value with `sbx mcp inspect <SERVER>` before
+setting an override:
+
+```console
+$ sbx mcp add serverx --url https://mcp.serverx.example/mcp \
+  --resource https://api.serverx.example/mcp
+```
+
+Use the resource URI supplied by your provider. It must have a scheme and host
+and no fragment. To change an existing registration's value, remove the
+registration and add it again.
+
+This override requires OAuth authorization on the host. The hosted gateway
+doesn't use it unless you also supply `--oauth-authorization-server` or
+`--client-id` to route authorization through the host. Without those flags,
+`sbx mcp add` warns that the hosted gateway won't use the override.
+
 ## Choose an MCP mode
 
 Every sandbox starts an MCP gateway. When the sandbox starts, supported agent
@@ -403,7 +447,8 @@ mode:
 - Dynamic mode pre-loads no servers and lets the agent find and attach
   registered servers.
 
-This choice persists across sandbox restarts.
+This choice persists across sandbox restarts unless you
+[unload every server in the static set](#remove-a-server-from-a-running-sandbox).
 
 ### Use static mode
 
@@ -448,12 +493,41 @@ To attach an already-registered server to a running sandbox, use
 ```console
 $ sbx mcp add linear --url https://mcp.linear.app/mcp
 $ sbx mcp load linear --sandbox my-session
-MCP server "linear" loaded into sandbox "my-session" (live)
 ```
 
 Connected agent sessions receive a tool-list update, so the added tools become
 visible without reconnecting. The loaded server remains attached across sandbox
 restarts.
+
+## Remove a server from a running sandbox
+
+In Docker Sandboxes v0.48.0 and later, use `sbx mcp unload` to detach a server
+from a running sandbox's local MCP gateway. This works in both static and
+dynamic modes. Cloud sandboxes and hosted MCP gateways don't support unloading
+servers.
+
+```console
+$ sbx mcp unload linear --sandbox my-session
+```
+
+Connected agent sessions receive a tool-list update, so the server's tools are
+removed without restarting the agent. The command also removes the saved
+attachment so the server isn't restored when the sandbox or daemon restarts.
+The server's host registration and credentials remain available, and other
+sandboxes that have loaded the server are unaffected.
+
+To attach the server again:
+
+```console
+$ sbx mcp load linear --sandbox my-session
+```
+
+In dynamic mode, the agent can also find and attach the registered server
+again. Unloading a server doesn't prevent the agent from reloading it.
+
+If you unload all servers from a static sandbox, it stays in static mode for
+the current session. After restarting the Docker Sandboxes daemon and
+reconnecting, the agent can find and attach registered servers.
 
 ## Built-in gateway tools
 
@@ -506,6 +580,11 @@ Remove a registered server:
 ```console
 $ sbx mcp rm notion
 ```
+
+Removing a registration doesn't detach the server from sandboxes that have
+already loaded it. Use
+[`sbx mcp unload`](#remove-a-server-from-a-running-sandbox) for each sandbox
+before removing the registration.
 
 For OAuth-backed servers, `sbx mcp rm` removes the OAuth access token before it
 removes the server registration. A client secret for a pre-registered OAuth

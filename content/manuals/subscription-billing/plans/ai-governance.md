@@ -14,10 +14,10 @@ aliases:
   - /subscription/ai-governance/
 ---
 
-[AI Governance](/manuals/ai/sandboxes/governance/_index.md) lets organization owners enforce policies for members across supported Docker AI products, like [Docker Sandbox](/manuals/ai/sandboxes/_index.md). When you add an AI Governance plan, you work with your Docker sales representative to determine the number of licenses needed, which are applied to your account.
-
 > [!TIP]
 > To subscribe to AI Governance, <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_aigov" class="link" rel="noopener">contact sales</a>.
+
+[AI Governance](/manuals/ai/sandboxes/governance/_index.md) lets organization owners enforce policies for members across supported Docker AI products, like [Docker Sandbox](/manuals/ai/sandboxes/_index.md). When you add an AI Governance plan, you work with your Docker sales representative to determine the number of licenses needed, which are applied to your account.
 
 ## Usage
 

@@ -24,6 +24,116 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.96.3
+
+{{< release-date date="2026-10-22" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.96.3" build_path="/244472/" >}}
+
+### Updates
+
+- Docker Init `v1.4.1`
+- Docker Offload `v0.7.19`
+- Docker Model Runner `v1.2.9`
+- Docker Debug `v0.49.0`
+- Docker MCP `v0.44.2`
+- `kubectl` `v1.36.1`
+
+### Security
+
+- Removed trust for certificates issued by the compromised [eMudhra intermediate CA compromise](https://emudhra.we-have-a-problem.com/). An attacker with network access could have used these certificates to intercept TLS connections made by non-browser clients, such as the Docker CLI and daemon.
+
+## 4.96.2
+
+{{< release-date date="2026-10-22" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.96.2" build_path="/244353/" >}}
+
+### Updates 
+
+- [Docker Compose v5.6.1](https://github.com/docker/compose/releases/tag/v5.6.1)
+- Docker Offload `v0.7.6`
+- [Docker Agent v1.152.0](https://github.com/docker/docker-agent/releases/tag/v1.152.0)
+- [Docker Hardened Images CLI (`dhictl`) v0.0.9](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.9)
+- Docker Desktop Build `v0.39.1`
+- [Docker Scout CLI v1.27.0](https://github.com/docker/scout-cli/releases/tag/v1.27.0)
+
+### Security
+
+- Removed trust for certificates issued by the compromised [eMudhra intermediate CA compromise](https://emudhra.we-have-a-problem.com/). An attacker with network access could have used these certificates to intercept TLS connections made by non-browser clients, such as the Docker CLI and daemon.
+
+> [!IMPORTANT]
+>
+> This fix is being rolled out in batches as individual Docker Desktop components are updated. Upcoming patch releases will cover the remaining components. We recommend updating to each patch release as soon as it’s available.
+
+## 4.96.1
+
+{{< release-date date="2026-10-21" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.96.1" build_path="/244132/" >}}
+
+### Updates 
+
+- [Docker Engine 29.9.2](https://github.com/docker/docker/releases/tag/29.9.2)
+- [Docker Buildx v0.38.1](https://github.com/docker/buildx/releases/tag/v0.38.1)
+- [Credential helpers to v0.9.12](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.12)
+-  Docker Offload `v0.7.16`
+
+### Security
+
+- Removed trust for certificates issued by the compromised [eMudhra intermediate CA compromise](https://emudhra.we-have-a-problem.com/). An attacker with network access could have used these certificates to intercept TLS connections made by non-browser clients, such as the Docker CLI and daemon.
+
+> [!IMPORTANT]
+>
+> This fix is being rolled out in batches as individual Docker Desktop components are updated. Upcoming patch releases will cover the remaining components. We recommend updating to each patch release as soon as it’s available.
+
+## 4.96.0
+
+{{< release-date date="2026-10-19" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.96.0" build_path="/243774/" >}}
+
+### Updates
+
+- [Credential helpers v0.9.10](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.10)
+- [containerd v2.4.2](https://github.com/containerd/containerd/releases/tag/v2.4.2)
+- Docker Desktop Build `v0.39.0`
+- Docker Offload `v0.7.4`
+- `docker pass` v0.3.0
+- [Docker Engine v29.9.1](https://docs.docker.com/engine/release-notes/29/#2991)
+- [Docker Buildx v0.38.0](https://github.com/docker/buildx/releases/tag/v0.38.0)
+- [Docker Agent v1.149.0](https://github.com/docker/docker-agent/releases/tag/v1.149.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where the error dialog could close unexpectedly on systems under memory pressure.
+- Fixed an issue where Docker Desktop's internal DHCP replies were sent onto the host's physical network.
+- Fixed the reclaimable space on the **Images** view staying at 0 when a local image has no history.
+- Improved telemetry for secrets injection by including the realm of each resolved environment variable secret reference in observability events.
+- Fixed Docker Desktop getting stuck on "Starting the Docker Engine..." when a Docker network took addresses inside Docker Desktop's internal network (`192.168.65.0/24` by default). Such networks are now rejected, and an existing one can be removed from the error dialog. Fixes [docker/desktop-feedback#659](https://github.com/docker/desktop-feedback/issues/659).
+- Fixed file ownership and transient `0:0` reporting on Apple Virtualization Framework + VirtioFS bind mounts. Fixes [docker/desktop-feedback#628](https://github.com/docker/desktop-feedback/issues/628) and [#649](https://github.com/docker/desktop-feedback/issues/649).
+- Fixed the CLI error message when combining a leading `+` with a trailing `ago` in a time span to read as natural prose.
+- Fixed a bug where uninstalling Docker Desktop could leave the installation directory behind.
+- Added a **Check for updates** button to the **Software update** drawer when an update is available or ready to install, so newer releases can be found without installing the pending update first.
+- Fixed the backend crashing, and the engine becoming unreachable, when a container's `--volumes-from` refers back to itself, for example after renaming a container to the name of the removed container it inherits volumes from. See [docker/desktop-feedback#286](https://github.com/docker/desktop-feedback/issues/286).
+- Clearing Gordon sessions no longer deletes sessions that are still running.
+- Improved buffered filesystem performance and fixed a FUSE issue that could expose stale bytes when extending files.
+
+#### For Mac
+
+- Fixed an issue where a misconfigured `allowedOrgs` type in a configuration profile was silently ignored; admins now see a log message explaining why sign-in enforcement is not applied.
+- Fixed Docker Desktop on Mac not reporting an error when the VM stops unexpectedly.
+
+#### For Windows
+
+- Fixed an issue where tray icon light/dark theme detection could fail.
+- Fixed disk full detection on Windows so that a full-disk error during startup now shows the disk full recovery dialog instead of a generic failure dialog.
+- Fixed an issue on Windows where WSL distro startup failures showed a confusing 'bad magic string' error instead of the actual reason reported by wsl.exe.
+- Improved the error shown when Docker VMM cannot use the Windows hypervisor, for example on some virtual machines where WSL 2 works.
+- Fixed a bug where an unusable WSL data disk (e.g., already in use) would repeatedly trigger failed mkfs format attempts instead of reporting a clear error.
+
 ## 4.95.0
 
 {{< release-date date="2026-10-12" >}}
@@ -858,8 +968,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-06-08" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.77.0" build_path="/228796/" >}}
-
 ### New
 
 - You can now export log data from the **Logs** view.
@@ -900,8 +1008,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ## 4.76.0
 
 {{< release-date date="2026-06-01" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.76.0" build_path="/228118/" >}}
 
 ### New
 
@@ -956,8 +1062,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-05-26" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.75.0" build_path="/227598/" >}}
-
 ### Updates
 
 - Docker Offload v0.5.92
@@ -987,8 +1091,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ## 4.74.0
 
 {{< release-date date="2026-05-19" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.74.0" build_path="/227015/" >}}
 
 ### New
 
@@ -1023,8 +1125,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-05-13" >}}
 
-{{< desktop-install-v2 win=true version="4.73.1" build_path="/226574/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Windows
@@ -1034,8 +1134,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ## 4.73.0
 
 {{< release-date date="2026-05-11" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.73.0" build_path="/226246/" >}}
 
 ### Updates
 
@@ -1060,8 +1158,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ## 4.72.0
 
 {{< release-date date="2026-05-06" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.72.0" build_path="/225998/" >}}
 
 ### New
 
@@ -1105,8 +1201,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-04-27" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.71.0" build_path="/225177/" >}}
-
 > [!IMPORTANT]
 >
 > Support for RHEL 8 has ended. Installing Docker Desktop will require RHEL 9 or RHEL 10 in the next release.
@@ -1148,8 +1242,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-04-20" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.70.0" build_path="/224270/" >}}
-
 ### New
 
 - Added a CLI hint that surfaces the **Logs** view when running `logs`, `compose logs`, `compose attach`, or `compose up` commands, giving you quick access to logs across all running containers. Available with the **Logs** (Beta) feature enabled.
@@ -1187,8 +1279,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 
 {{< release-date date="2026-04-13" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.69.0" build_path="/224084/" >}}
-
 ### Updates
 
 - [Docker Agent v1.42.0](https://github.com/docker/docker-agent/releases/tag/v1.42.0)
@@ -1223,8 +1313,6 @@ Fixed Enhanced Container Isolation not being enforced when the sign-in completed
 ## 4.68.0
 
 {{< release-date date="2026-04-07" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.68.0" build_path="/223695/" >}}
 
 ### New
 

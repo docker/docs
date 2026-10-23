@@ -11,9 +11,9 @@ description: >
 
 # Research
 
-Thoroughly investigate the topic at hand and produce a clear plan for
-the fix. The goal is to identify exact files, named targets within those
-files, and the verified content needed for the fix.
+Investigate the topic and determine whether documentation needs to change.
+When an update is warranted, identify exact files, named targets within
+those files, and the verified content needed.
 
 ## 1. Gather context
 
@@ -65,15 +65,34 @@ plan a fix based on an unverified claim.
 If the fix requires a replacement URL and that URL cannot be verified (e.g.
 network restrictions), report it as a blocker rather than guessing.
 
-## 6. Check the live site (if needed)
+## 6. Assess documentation impact
+
+A code change or release-note entry is evidence to investigate, not a reason
+by itself to add documentation. Identify the reader's task and what the
+change alters about it. Recommend an update when existing guidance becomes
+incorrect, leaves a gap in that task, or omits a capability useful to readers.
+An implementation fix may need no update if the docs already describe the
+intended behavior.
+
+For each recommended update, connect the reader's task, the documentation
+gap, the destination page and section, and the proposed treatment. Prefer
+correcting existing prose or examples when they serve that task. Check related
+pages for contradictions, without assuming each needs the same explanation.
+
+If there is no clear home, reconsider the value and scope before proposing a
+section or page. A separate home can be justified by a distinct reader task,
+not by the need to place a release-note bullet. "No documentation change" is
+a valid finding; explain it briefly when assessing a set of changes.
+
+## 7. Check the live site (if needed)
 
 For URL or rendering issues, fetch the live page:
 
-```
+```text
 https://docs.docker.com/<path>/
 ```
 
-## 7. Report findings
+## 8. Report findings
 
 Summarize what you found — files to change, the specific problem in each,
 what the fix should be, and any constraints. This context feeds directly

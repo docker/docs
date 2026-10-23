@@ -1,16 +1,11 @@
 name: sbx template save
 synopsis: Save a snapshot of the sandbox as a template
 description: |-
-    Save a snapshot of the sandbox as a template.
+    Save a sandbox snapshot as a template in the local image store.
+    Use --pull never when creating a sandbox from the saved template.
 
-    The saved image is stored in the sandbox runtime's image store and can be
-    used as a template for new sandboxes with:
-      sbx run --pull never -t TAG AGENT [WORKSPACE]
-
-    Use --pull never to use the saved image without trying to pull it from a registry.
-
-    Use --output to also export the image to a tar file that can be shared
-    and loaded on another host with: sbx template load FILE
+    Use --output to export a tar file for loading on another host with
+    sbx template load.
 
     With --cloud:
     Snapshot a running cloud sandbox into a cloud-managed template. The
@@ -31,7 +26,6 @@ options:
       usage: |
         What gets captured for this template. "disk" (default) captures only the filesystem — cold-boot from a standard OCI image, faster load. "all" captures memory + disk + microVM checkpoint — sub-second TTI on resume, slower load. Only effective with --cloud.
     - name: description
-      shorthand: d
       usage: Description for the template (cloud only)
     - name: help
       shorthand: h
@@ -52,6 +46,9 @@ inherited_options:
 example: |4-
       # Save as a template for new sandboxes on this host
       sbx template save my-sandbox myimage:v1.0
+
+      # Create a sandbox from the saved template
+      sbx run --pull never -t myimage:v1.0 claude ./project
 
       # Also export to a shareable tar file
       sbx template save my-sandbox myimage:v1.0 --output /tmp/myimage.tar

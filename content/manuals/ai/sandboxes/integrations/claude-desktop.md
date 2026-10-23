@@ -36,6 +36,10 @@ session.
 > credentials into the Claude Code process within the sandbox, reducing
 > isolation guarantees.
 
+For a dedicated sandbox created on first connection, see
+[Set up desktop app connections](_index.md#set-up-desktop-app-connections).
+The following steps connect to a sandbox with a mounted host workspace.
+
 Create a named Claude sandbox for the current directory if you don't already
 have one:
 

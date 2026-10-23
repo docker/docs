@@ -37,9 +37,8 @@ grid:
 ---
 
 A Docker account identifies you and lets you access Docker products. You
-manage it in [Docker Home](https://app.docker.com/). Docker has two
-primary account types: individual and organization. A company groups
-multiple organizations.
+manage your Docker accounts in [Docker Home](https://app.docker.com/).
+Docker offers individual, organization, and company account types.
 
 | Account type | What it is | Who it's for |
 | --- | --- | --- |
@@ -48,7 +47,7 @@ multiple organizations.
 | Company | Shared sign-in and administration for organizations that keep their own members, repositories, and billing | Docker Business subscribers |
 
 You always sign in with your individual account, then work in the
-organizations you own or belong to.
+organizations or companies you own or belong to.
 
 ## Next steps
 

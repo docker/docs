@@ -302,7 +302,7 @@
 # Run Cloud links & Docker Cloud & Docker Offload
 "https://www.docker.com/products/docker-offload/":
   - /go/offload/
-"https://app.docker.com/billing/catalog":
+"https://app.docker.com/billing/subscription/dap/compute?returnTo=https://docs.docker.com/offload/quickstart/&ref=cli&refAction=NotEntitled":
   - /go/get-offload/
 "/":
   - /go/run-cloud-eap/
@@ -380,6 +380,8 @@
   - /go/mcp-policy/
 "/ai/sandboxes/mcp-gateway/":
   - /go/sbx-mcp-gateway/
+"https://www.docker.com/blog/harbor-docker-sandboxes-run-safe-reproducible-agent-evals/":
+  - /ai/sandboxes/harbor/
 
 # Desktop MCP Toolkit
 "/ai/mcp-catalog-and-toolkit/toolkit/":
@@ -433,6 +435,8 @@
   - /go/windows-linux-vmm/
 "/desktop/setup/install/linux/":
   - /go/linux-credentials/
+"/desktop/enterprise/enforce-sign-in/":
+  - /go/enforce-sign-in/
 "/desktop/use-desktop/pause/":
   - /go/mac-desktop-pause/
   - /go/win-desktop-pause/

@@ -39,7 +39,7 @@ value for the same service, the stored secret takes precedence.
 | Form                                                                        | What it is                                                   | Use it when                                                                                                      |
 | --------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
 | [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value or dynamic source in your OS keychain, keyed by service | The default for any built-in or kit-declared service                                                          |
-| [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
+| [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit, or the agent validates the variable's format |
 | OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, Cursor, or Droid                                              |
 | [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits                   | Pulling templates or kits from a private registry                                                                |
 
@@ -334,8 +334,8 @@ List all stored secrets:
 
 ```console
 $ sbx secret ls
-SCOPE      TYPE      NAME      SECRET
-(global)   service   github    gho_GCaw4o****...****43qy
+SCOPE      SERVICE   SECRET
+(global)   github    gho_GCaw4o****...****43qy
 ```
 
 Remove a secret:
@@ -372,7 +372,12 @@ interact with GitHub APIs on your behalf.
 
 ### SSH agent
 
-SSH agent forwarding is enabled by default. When `SSH_AUTH_SOCK` is set,
+SSH agent forwarding is enabled by default. V3 kits must also request
+[`ssh-agent@1`](/manuals/ai/sandboxes/customize/author/capabilities.md#support-by-capability)
+for the phase where they need it. Without that request, no agent socket is
+forwarded to a v3 sandbox.
+
+When `SSH_AUTH_SOCK` is set,
 Docker Sandboxes uses the value from the client that creates, starts, or joins
 each sandbox. It forwards that agent into the sandbox and sets `SSH_AUTH_SOCK`
 there.
@@ -385,7 +390,7 @@ $ sbx settings set ssh.agentSocketPath "$SSH_AUTH_SOCK"
 ```
 
 An empty [`ssh.agentSocketPath`](settings.md#sshagentsocketpath), which is the
-default, uses each client's current `SSH_AUTH_SOCK` instead. Use
+default, uses the agent supplied by each client instead. Use
 [`ssh.agentForwardingEnabled`](settings.md#sshagentforwardingenabled) to turn
 forwarding on or off.
 
@@ -412,8 +417,7 @@ network policy. For details, see
 > change without notice.
 
 For credentials that don't fit the service-identifier model — for example,
-when an agent validates the environment variable format at boot, or when the
-credential lands in a request body rather than a header — use
+when an agent validates the environment variable format at boot — use
 `sbx secret set-custom`. The secret is keyed on one or more target domains, an
 environment variable name, and an optional placeholder string, instead of a
 service identifier.
@@ -442,8 +446,9 @@ $ sbx secret set-custom \
 
 Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
 `sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
-configured hosts and the placeholder appears anywhere in the request, the
-proxy replaces it with the real value. The agent never sees the real secret.
+configured hosts and the placeholder appears in an HTTP request header, the
+proxy replaces it with the real value. Replacement applies only to HTTP request
+headers, not request bodies. The agent never sees the real secret.
 
 ### Target multiple hosts
 
@@ -576,7 +581,7 @@ store or enter one at the prompt. For OAuth, you approve the sign-in flow. In
 both cases, you approve the domains declared by the kit. `sbx` writes the entry
 to `credentials.yaml`.
 
-In non-interactive contexts (CI or `--detached`), there's no one to answer the
+In non-interactive contexts (CI or `--detach`), there's no one to answer the
 prompt. In `sbx`, the sandbox starts with the credential withheld when no
 binding exists. For a required credential, `sbx` prints a warning rather than
 failing sandbox creation. This is a limitation of `sbx` enforcement: kit authors

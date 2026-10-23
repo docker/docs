@@ -7,7 +7,7 @@ description: >-
 weight: 40
 keywords: sso troubleshooting, single sign-on errors, authentication issues,
   identity provider problems, JIT provisioning, SCIM errors, domain
-  verification
+  verification, AADSTS700016
 tags: [Troubleshooting]
 toc_max: 2
 aliases:
@@ -297,3 +297,43 @@ In your IdP, ensure the Name ID attribute format is correct:
 1. Verify that the Name ID attribute format in your IdP is set to
    `EmailAddress`.
 1. Adjust your IdP settings to return the correct Name ID format.
+
+## Application was not found in the directory
+
+### Error message
+
+During Azure AD (OIDC) sign-in, Microsoft Entra can return:
+
+```text
+AADSTS700016: Application with identifier '{identifier}' was not found in the directory '{directory}'.
+```
+
+### Causes
+
+The **Client ID** on the Docker SSO connection is not the **Application
+(client) ID** from the app registration **Overview** page. Pasting the
+**Secret ID** into **Client ID** makes Entra search for an application that
+does not exist.
+
+Entra also returns this error when the sign-in request goes to a directory
+that does not contain the app registration.
+
+### Solutions
+
+Replace the application identifier in Docker:
+
+1. In the [Microsoft Entra admin center](https://entra.microsoft.com/), open
+   the app registration.
+1. On the **Overview** page, copy **Application (client) ID**.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+   organization.
+1. Select **Identity & auth**, then **SSO and SCIM**.
+1. In the SSO connections table, select the **Action** menu, then **Edit
+   connection**.
+1. Paste **Application (client) ID** into **Client ID**. The **Secret ID**
+   and the secret **Value** are not application identifiers.
+
+If the directory named in the error is not the tenant where you registered
+the app, update **Azure AD Domain** on the Docker connection so sign-in uses
+that tenant. For the connection steps, see
+[Set up single sign-on](/manuals/security/authentication/single-sign-on/connect.md).

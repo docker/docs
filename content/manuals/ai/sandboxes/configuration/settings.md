@@ -19,11 +19,11 @@ necessary. Overrides persist across CLI invocations and daemon restarts.
 List settings with their effective value, type, source, and description:
 
 ```console
-$ sbx settings list
+$ sbx settings ls
 ```
 
 Long values and descriptions are truncated in the table. Use
-`sbx settings list --no-trunc` for complete text, or `sbx settings list --json`
+`sbx settings ls --no-trunc` for complete text, or `sbx settings ls --json`
 for JSON output. The JSON records also include defaults and environment
 variable names where available.
 
@@ -35,8 +35,8 @@ false
 $ sbx settings get clipboard.imagePaste --json
 ```
 
-Without `--json`, `get` prints only the effective value. With `--json`, it
-prints the complete setting record, including the source and default.
+By default, `get` prints only the effective value. Use `--json` or
+`--format yaml` for the complete setting record, including the source and default.
 
 ## Change a setting
 
@@ -74,7 +74,7 @@ For each setting, the first available value wins:
 2. A user override written with `sbx settings set`
 3. The built-in default
 
-The `SOURCE` column in `sbx settings list` identifies the selected source as
+The `SOURCE` column in `sbx settings ls` identifies the selected source as
 `envvar`, `override`, or `default`. If an environment variable takes precedence,
 `set` still updates the stored override and reports why the effective value
 hasn't changed. `unset` removes only the stored override, not the environment
@@ -130,9 +130,22 @@ export a variable in each shell.
 
 Each entry lists its built-in default, before overrides. An environment
 variable appears only when the setting has a direct equivalent. Use
-`sbx settings list` to inspect the values supported by your installed version.
+`sbx settings ls` to inspect the values supported by your installed version.
 
 ### Agents and host access
+
+#### browser.enabled {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Set this to `false` to prevent sandboxed processes from opening URLs in your
+host browser:
+
+```console
+$ sbx settings set browser.enabled false
+```
+
+This also prevents in-sandbox OAuth logins that redirect to localhost.
 
 #### clipboard.imagePaste {.wrap-anywhere}
 
@@ -182,7 +195,7 @@ $ sbx settings set env.rememberHostCommands true
 
 The first approval is still required. Commands run on your host with your
 permissions, outside the sandbox. Leave the setting at `false` to require
-approval on every invocation, or use `--auto-approve` to approve only one
+approval on every invocation, or use `--force` to approve only one
 invocation. See [environment lifecycle commands](environment-files.md#lifecycle).
 
 #### ssh.agentForwardingEnabled {.wrap-anywhere}
@@ -214,10 +227,17 @@ $ sbx daemon restart
 ```
 
 Run this from a shell whose `SSH_AUTH_SOCK` points to the intended agent. The
-command stores that path, not a reference to the variable. With an empty value,
-Docker Sandboxes uses the socket supplied by each client instead. Remove the
-fixed path with `sbx settings unset ssh.agentSocketPath` and restart the daemon
-to update existing forwarders.
+command stores that path, not a reference to the variable.
+
+When this setting is empty, Docker Sandboxes uses the `SSH_AUTH_SOCK` value
+supplied by each client. On Windows, if `SSH_AUTH_SOCK` is also unset, it uses
+the `\\.\pipe\openssh-ssh-agent` named pipe. This works with Windows OpenSSH
+and with 1Password's SSH agent when it provides that pipe. The host agent must
+be running. Set `SSH_AUTH_SOCK` or configure `ssh.agentSocketPath` to use a
+different agent.
+
+Remove the fixed path with `sbx settings unset ssh.agentSocketPath` and restart
+the daemon to update existing forwarders.
 
 ### Images and storage
 
@@ -433,6 +453,49 @@ this setting. It doesn't override a gateway selected by organization governance.
 Set it back to `false` and restart to return to automatic selection. See
 [MCP gateway](../mcp-gateway.md) for server registration and agent setup.
 
+### Daemon logging
+
+These settings control rotation of `daemon.log`, not logs written by the CLI
+or processes inside a sandbox. Changes take effect after `sbx daemon restart`.
+The backup count and age limits apply together: a rotated log is removed when
+it exceeds either limit.
+
+#### daemon.log.maxSizeMB {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="50" >}}
+
+Set the size in MB at which the daemon log rotates. The minimum is `1`:
+
+```console
+$ sbx settings set daemon.log.maxSizeMB 100
+$ sbx daemon restart
+```
+
+#### daemon.log.maxBackups {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="3" >}}
+
+Set the maximum number of rotated daemon logs to keep. The value must be zero
+or greater. A value of `0` removes the count limit, but the age limit still
+applies:
+
+```console
+$ sbx settings set daemon.log.maxBackups 5
+$ sbx daemon restart
+```
+
+#### daemon.log.maxAgeDays {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="0" >}}
+
+Set how many days to keep rotated daemon logs, from `0` to `3650`. A value of
+`0` removes the age limit, but the backup count limit still applies:
+
+```console
+$ sbx settings set daemon.log.maxAgeDays 30
+$ sbx daemon restart
+```
+
 ### Diagnostics
 
 #### diagnostics.autoUpload {.wrap-anywhere}
@@ -527,8 +590,8 @@ updated value; existing sandbox proxies require a daemon restart.
 {{< setting-metadata type="string" default="Empty string" >}}
 
 Use this to route the daemon's requests, such as image pulls, separately from
-sandbox traffic. Supported host CLI requests, including `sbx login` and
-`sbx diagnose --upload`, also use this scope.
+sandbox traffic. Host CLI connections, including connections to cloud sandboxes,
+also use this scope. See [traffic scopes](upstream-proxy.md).
 
 For example, keep a shared proxy for sandbox traffic while letting the daemon
 connect directly:
@@ -540,6 +603,15 @@ $ sbx daemon restart
 
 Unset this setting to inherit `proxy`. Supported CLI requests use changes on
 the next invocation; the daemon's own requests require a restart.
+
+#### proxy.sshDirect {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Set this to `true` to bypass the upstream proxy for cloud SSH connections.
+Other host CLI requests keep using the configured proxy. Changes apply on the
+next SSH connection without a daemon restart. For setup, see
+[Cloud SSH](upstream-proxy.md#cloud-ssh).
 
 #### no_proxy {.wrap-anywhere}
 
@@ -657,9 +729,9 @@ and the consequences of sharing a writable store.
 
 ## Command reference
 
-### sbx settings list
+### sbx settings ls
 
-List settings. Alias: `sbx settings ls`.
+List settings. Alias: `sbx settings list`.
 
 Use `--json` for complete records as JSON, or `--no-trunc` for full text. These
 options are mutually exclusive.

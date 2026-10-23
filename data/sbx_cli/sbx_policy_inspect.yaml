@@ -1,5 +1,5 @@
 name: sbx policy inspect
-synopsis: Inspect policy or rule details
+synopsis: Show policy or rule details
 description: |-
     Inspect full detail for a selected policy or rule.
 
@@ -11,8 +11,10 @@ description: |-
     identifier accepted by "sbx policy rm network --id" (local rules only). Use
     "sbx policy ls" to find policy names and "sbx policy ls --wide" to find rule
     IDs and resource values.
-usage: sbx policy inspect <policy-or-rule> [flags]
+usage: sbx policy inspect POLICY|RULE [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"

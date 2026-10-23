@@ -1,5 +1,5 @@
 name: sbx kit inspect
-synopsis: Display details about a kit artifact
+synopsis: Show kit artifact details
 experimental: true
 description: |-
     Load and display details about a kit artifact.
@@ -8,8 +8,15 @@ description: |-
 
     Pass --kit-arg to preview how the kit resolves with a given set of
     arguments; the output shows the substituted content.
+
+    --offline skips the daemon-backed kit policy (kit.allowedSources,
+    kit.allowLocalKits, kit.requireSignature) so the command needs neither
+    sandboxd nor a signed-in session; it only accepts a local directory or
+    ZIP reference, since those are the only ones this check applies to.
 usage: sbx kit inspect REFERENCE [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
@@ -27,6 +34,10 @@ options:
       experimental: true
       usage: |
         File of name=value kit arguments, one per line (can be repeated); --kit-arg overrides
+    - name: offline
+      default_value: "false"
+      usage: |
+        Skip the daemon-backed kit policy check; local directory or ZIP references only
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -36,5 +47,14 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+example: |4-
+      sbx kit inspect ./my-kit
+      sbx kit inspect ghcr.io/myorg/my-kit:1.0
+
+      # Machine-readable output
+      sbx kit inspect ghcr.io/myorg/my-kit:1.0 --format json
+
+      # Inspect without sandboxd running or a Docker sign-in
+      sbx kit inspect ./my-kit --offline
 see_also:
     - sbx kit - (Experimental) Manage kit artifacts

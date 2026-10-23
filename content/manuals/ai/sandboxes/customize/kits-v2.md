@@ -11,13 +11,10 @@ aliases:
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-V2 kits remain supported. This page covers v2 usage, configuration, and the
-specification. For new kit development with the `sbx` CLI, use
-[v3 kits](/manuals/ai/sandboxes/customize/_index.md).
-
-Built-in shortcuts such as `claude` and `codex` select v2 kits and still work
-with v2 mixins. V3 workloads and mixins can't be combined with v1 or v2 kits.
-V1 also remains supported.
+V2 kits remain supported and are not deprecated. Built-in agent names such
+as `claude` and `codex` select v2 kits and work with v2 mixins. This page
+covers their usage and specification. For new kits, Docker recommends
+[v3](/manuals/ai/sandboxes/customize/_index.md). V1 also remains supported.
 
 ## Use existing kits
 
@@ -464,10 +461,11 @@ command can consume a bundled file from `files/home/`, but not one from
 
 `sbx kit add` recreates the sandbox rather than modifying it in place. It
 supports mixin kits limited to
-`environment.variables`, `setup.install`, and `permissions.network.allow`,
-which follow the same order as sandbox creation. It rejects a kit that declares
-static files, `setup.startup`, or `setup.files`. To use those fields, recreate
-the sandbox with the kit.
+`environment.variables`, `setup.install`, `setup.startup`, and
+`permissions.network.allow`, which follow the same order as sandbox creation.
+Startup commands run after the kit is added and on each subsequent sandbox
+start. The command rejects kits that declare static files or `setup.files`.
+To use those fields, create the sandbox with the kit included.
 
 ### install
 
@@ -664,20 +662,28 @@ and OpenCode reads `OPENCODE_CONFIG`. Don't use `setup.startup` for settings
 the agent must read during initialization; startup commands don't gate the
 entrypoint.
 
-## Packaging and distribution
+## Validate and inspect kits
 
-The `sbx kit` subcommands validate, inspect, and publish kits:
+Use these commands to check a kit before sharing it:
 
 - `sbx kit validate <path>` — check that a kit directory or ZIP is
   well-formed.
 - `sbx kit inspect <path>` — display kit details. Add `--json` for
   machine-readable output.
+
+Add `--offline` to validate or inspect a local directory or ZIP without starting
+the daemon or signing in. Offline checks skip kit source and signature policies;
+they don't establish whether the kit is permitted to load.
+
+## Packaging and distribution
+
 - `sbx kit pack <path> -o <file.zip>` — package a directory as a ZIP file
   for sharing.
 - `sbx kit push <path> <ref>` — publish to an OCI registry (for example,
   `ghcr.io/myorg/my-kit:1.0`).
-- `sbx kit pull <ref>` — download a kit from a registry as a ZIP file to
-  the working directory.
+- `sbx kit pull <ref>` — download a kit to the working directory as `.zip`
+  for schema v1 or `.tar.gz` for schema v2. Use `--output <FILE>` to choose
+  the output path.
 
 For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
 `sbx login`. For other registries, they prefer credentials stored with
@@ -709,14 +715,33 @@ $ sbx kit verify --key cosign.pub ./my-kit/
 
 For a local directory, `sbx kit sign` writes a `kit.sig.bundle` file next to
 `spec.yaml`. Commit this file so consumers can verify a kit loaded from the Git
-repository. For an OCI kit, the signature is stored as an OCI referrer. You can
-sign an OCI kit after pushing it, or push and sign it in one step:
+repository.
+
+Git line-ending conversion and clean filters can invalidate a source signature.
+If `sbx kit sign` warns about these transformations, ensure Git preserves the
+signed files unchanged before sharing the Git reference.
+
+For an OCI kit, the signature is stored as an OCI referrer. You can sign an OCI
+kit after pushing it, or push and sign it in one step:
 
 ```console
 $ sbx kit push ./my-kit/ ghcr.io/myorg/my-kit:1.0 --sign
 ```
 
 ZIP kits can't carry verifiable signatures.
+
+### Inspect provenance
+
+Pushing a kit also attaches a provenance attestation that records its content
+digests, declared sandbox image, and source Git commit when pushed from a
+working tree. Inspect it to check the source of a published kit:
+
+```console
+$ sbx kit provenance ghcr.io/myorg/my-kit:1.0
+```
+
+Provenance is unsigned by default. Use `sbx kit push --sign` to sign both the
+kit manifest and its provenance when publishing.
 
 ### Require signed kits
 
@@ -790,9 +815,13 @@ controlled by the user through
 
 ## Move an environment to v3
 
-Select a v3 workload, convert or replace its mixins, and create a separate
-sandbox with a different `--name`. Use the explicit workload reference in
-place of the built-in shortcut. Every selected kit must use v3.
+Select a [v3 workload](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads),
+convert or replace its mixins, and create a separate sandbox. Every selected
+kit must use v3. Running an existing sandbox keeps its recorded kit configuration.
+
+For an environment file, see [Add v3 kits](/manuals/ai/sandboxes/configuration/environment-files.md#add-v3-kits).
+Keep its `schemaVersion: "1"`: the environment file version is independent of
+kit descriptor versions.
 
 Changing `schemaVersion` alone doesn't convert a kit. Separate reusable image
 content from sandbox initialization, and declare runtime capabilities:
@@ -816,5 +845,3 @@ when converting runtime setup and capability declarations.
 Use a [kit set](/manuals/ai/sandboxes/customize/author/kit-sets.md) to combine
 published v3 components with your settings. To rebuild the agent environment
 from a base image, follow [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
-Running an existing sandbox keeps its recorded configuration. It doesn't
-migrate the kit composition.
