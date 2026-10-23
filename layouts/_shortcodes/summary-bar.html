@@ -127,7 +127,11 @@
 
     {{ with $feature.role }}
       <div class="flex flex-wrap gap-1">
-        <span class="font-bold">Core role:</span>
+        {{ with site.GetPage "/manuals/security/roles-and-permissions/core-roles" }}
+          <a class="link font-bold" href="{{ .RelPermalink }}">Core role:</a>
+        {{ else }}
+          <span class="font-bold">Core role:</span>
+        {{ end }}
         <span>{{ . }}</span>
         <span class="icon-svg icon-sm">
           {{ partialCached "icon" $roleIcon $roleIcon }}
@@ -137,7 +141,11 @@
 
     {{ with $permission }}
       <div class="flex flex-wrap gap-1">
-        <span class="font-bold">Custom role permission:</span>
+        {{ with site.GetPage "/manuals/security/roles-and-permissions/custom-roles" }}
+          <a class="link font-bold" href="{{ .RelPermalink }}">Custom role permission:</a>
+        {{ else }}
+          <span class="font-bold">Custom role permission:</span>
+        {{ end }}
         {{ if $permissionURL }}
           <a class="link" href="{{ $permissionURL }}">{{ . }}</a>
         {{ else }}
