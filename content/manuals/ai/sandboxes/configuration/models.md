@@ -23,7 +23,7 @@ Docker Sandboxes includes `llmman`, a model management tool installed alongside
 `sbx`. It serves local models and forwards requests to hosted providers or
 custom endpoints. You don't need to install it separately.
 
-The Docker Sandboxes daemon starts `llmman` on your host and stops it when
+By default, the Docker Sandboxes daemon starts `llmman` on your host and stops it when
 the daemon stops. At startup, `llmman` downloads its llama.cpp runtime if
 needed, so the first startup requires network access for that download. The service starts even if you haven't used `--model`.
 
@@ -33,6 +33,33 @@ model store and loaded models.
 On Linux, `llmman` first tries Docker or Podman to run the inference server
 in a container. If neither is usable, it tries a downloaded binary, then
 `llama-server` on the host's `PATH`.
+
+### Disable the bundled service
+
+To prevent the daemon from starting the bundled server and downloading its
+inference runtime, disable `model.server.enabled` and restart the daemon:
+
+```console
+$ sbx settings set model.server.enabled false
+$ sbx daemon restart
+```
+
+If the daemon isn't running, the settings command starts it before saving the
+override, so the bundled service can start once before the restart applies
+the change.
+
+You can still [use Ollama](#use-ollama). Other provider selections, including
+hosted providers and custom endpoints, need a running `llmman` server.
+If no server is ready while the bundled service is disabled, `sbx run --model`
+fails immediately with a hint to re-enable it. An already-ready server remains
+usable.
+
+To re-enable the bundled service:
+
+```console
+$ sbx settings set model.server.enabled true
+$ sbx daemon restart
+```
 
 ## Enable model selection
 

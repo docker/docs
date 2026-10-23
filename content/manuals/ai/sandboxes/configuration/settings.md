@@ -434,6 +434,25 @@ timestamp from a timestamp authority instead of a transparency log timestamp.
 Leave this at `false` when your signing workflow uses the public transparency
 log. It has no effect on signatures verified with a public key.
 
+### Model server
+
+#### model.server.enabled {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Set this to `false` to prevent the daemon from starting the bundled `llmman`
+model server and downloading its inference runtime:
+
+```console
+$ sbx settings set model.server.enabled false
+$ sbx daemon restart
+```
+
+Changes require a daemon restart. This setting has no environment variable
+override. See [Disable the bundled service](models.md#disable-the-bundled-service)
+for initial daemon startup behavior, provider requirements, and how to re-enable
+the service.
+
 ### MCP gateway
 
 #### mcp.forceLocalGateway {.wrap-anywhere}
