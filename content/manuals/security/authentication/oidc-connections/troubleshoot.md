@@ -148,7 +148,7 @@ exchange fails before Docker evaluates your rulesets.
 
 ### Causes
 
-- The `username` input to `docker/login-action` is a personal Docker Hub
+- The `username` input to `docker/login-action` is an individual Docker Hub
   account instead of an organization name.
 - Only organization accounts can sign in with OIDC connections.
 

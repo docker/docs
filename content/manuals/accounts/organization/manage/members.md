@@ -1,7 +1,7 @@
 ---
 title: Invite and manage organization members
 linkTitle: Members
-weight: 10
+weight: 20
 description: >-
   Invite organization members in Docker Home, assign roles and licenses,
   manage teams, remove members with or without SCIM, and export a CSV member

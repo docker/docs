@@ -109,11 +109,11 @@ use Claude Code's auto mode or pass the flag explicitly:
 $ sbx run --clone claude . -- --dangerously-skip-permissions agents
 ```
 
-Claude Code may use branches or worktrees to keep changes from its background
-sessions separate. This depends on the task, Claude Code configuration, and
-project instructions. The `--clone` flag doesn't control this behavior. Claude
-Code creates any branches and worktrees inside the sandbox, not in your host
-checkout.
+For simultaneous tasks, each background session needs a separate worktree or
+clone. Branches alone don't isolate edits in one working directory. How Claude
+Code manages working directories depends on the task, configuration, and
+project instructions. The `--clone` flag doesn't control this behavior. Ask
+Claude Code to create a separate worktree for each task inside the sandbox.
 
 To review a branch created by a session, fetch the
 `sandbox-<sandbox-name>` remote from the host:

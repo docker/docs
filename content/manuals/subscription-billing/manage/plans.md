@@ -27,12 +27,12 @@ self-serve Docker products, while the Overview page shows your active plans with
 
 You can purchase Docker Team, Docker Business, and other products through the product catalog:
 
-1. Sign in to [Docker Home](https://app.docker.com/), then choose your personal
+1. Sign in to [Docker Home](https://app.docker.com/), then choose your individual
    account or your organization account.
 1. Go to **Billing**.
 1. Select **Browse products**.
    - The **Products** page contains products and upgrades available for self-serve.
-   - Some products in the catalog may apply to personal accounts, organization accounts, or both.
+   - Some products in the catalog may apply to individual accounts, organization accounts, or both.
    - Each product tile uses an account-type flag so you know the difference.
 1. Select **View plans**, then choose the plan you want to add to your Docker subscription.
 1. Verify your billing details, continue to payment, and complete checkout.
@@ -45,38 +45,18 @@ To upgrade to Docker Pro, go to the
 <a href="https://www.docker.com/pricing/" id="dkr_docs_pricing_manage_pro" class="link" rel="noopener">Docker pricing page</a>
 and select **Buy now**.
 
-## Upgrade plans
+## Change an active plan {#upgrade-plans}
 
-You can upgrade active plans from the billing Overview page.
+To change a plan you already have, sign in to
+[Docker Home](https://app.docker.com/), go to **Billing**, then go to
+**Active subscriptions**. Each plan tile has a control, such as an action
+menu or a **Manage** button, that opens the options for that plan.
 
-1. Sign in to [Docker Home](https://app.docker.com/), then choose your personal
-   account or your organization account.
-1. Go to **Billing** to view the Overview page.
-   - The Overview page contains your active plans and payment details.
-   - **Active plans** contains information about plan type, renewal cadence, and usage.
-1. Top up or upgrade from the **Active plans** section.
-   - **Active plans** is where you complete all management actions.
-   - Depending on the plan type, you can select the action menu button or the **Manage** button to choose from available actions.
-1. Verify your billing details, continue to payment, and complete checkout.
-
-> [!TIP]
-> Billing cycle details vary from plan to plan. Learn more about usage, downgrading, or canceling plans
-> from the relevant
-> [product page](/manuals/subscription-billing/plans/_index.md).
-
-## View your credits
-
-Docker displays available account credits in the billing portal. Credits
-offset eligible usage automatically before Docker charges your payment
-method. To review credit balance and applied credits, see
-[Credits](/manuals/subscription-billing/manage/_index.md#credits).
-
-Credits apply to
-[Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md).
-When you sign up for Docker Agentic Platform, Docker adds a one-time
-promotional credit to your account. This credit is non-recurring,
-doesn't expire, and applies to cloud compute usage only. It doesn't
-apply to inference, which you pay for through your own API keys.
+The available options depend on the plan. For example, Docker plans let you
+add seats or switch to annual billing, while product plans let you upgrade
+or downgrade tiers, add units, or turn auto-renewal on or off. For the
+steps for each plan and when the change takes effect, see the
+[plans catalog](/manuals/subscription-billing/plans/_index.md).
 
 ## Sales-led products
 

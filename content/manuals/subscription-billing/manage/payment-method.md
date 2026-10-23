@@ -13,7 +13,7 @@ aliases:
   - /billing/core-billing/payment-method/
 ---
 
-Docker supports several payment methods for paid personal accounts and
+Docker supports several payment methods for paid individual accounts and
 organizations. This page describes supported payment types, how to manage
 payments from [Docker Home](https://app.docker.com/), and how to set up pay
 by invoice.
@@ -40,7 +40,7 @@ example:
 
 ## Manage payment method
 
-Paid personal accounts and organizations follow the same procedures to add,
+Paid individual accounts and organizations follow the same procedures to add,
 update, or remove payment methods.
 
 ### Add payment method
@@ -49,7 +49,7 @@ You can add multiple payment methods in the billing portal. When you add a
 new payment method, you set it as the default.
 
 1. Sign in to [Docker Home](https://app.docker.com/).
-1. Select your username for a personal account, or select your organization
+1. Select your username for an individual account, or select your organization
    name for an organization.
 1. Select **Billing** to go to the billing portal, then **Change** in the
    **Payment method** tile.

@@ -42,7 +42,7 @@ following local features don't apply in cloud mode:
 
 The CLI rejects local-only flags used with `--cloud` instead of ignoring them.
 
-You can use [environment files](../configuration/environment-files.md#use-a-cloud-environment)
+You can use [environment files](environment-files.md)
 with `sbx --cloud env`. Cloud environments support a subset of the local
 configuration fields, including agents, environment variables, resource limits,
 and credentials. Remove host workspace and port mappings before using a local
