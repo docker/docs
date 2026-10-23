@@ -42,5 +42,10 @@ To connect a server that is not predefined:
 On the **MCP** page, use **MCP Gateway endpoint URL** to connect your external
 MCP client to the gateway. Select **Add to your client**, choose your
 client, and follow the connection and authorization instructions. Supported
-options include VS Code and Codex CLI. The VS Code instructions include an
-install link and a manual configuration example.
+options are Docker Sandboxes (SBX), Claude Code, Codex CLI, Cursor, VS Code,
+and MCP Inspector. The first connection opens browser sign-in. There is no
+token to copy.
+
+Sign-in is confirmed only for the listed clients. Follow the instructions for
+your client, including any exact flag or setting shown. Other clients may
+fail sign-in with an error page that looks like a password problem.
