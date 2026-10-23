@@ -479,9 +479,8 @@ an existing sandbox. To attach another server from the host, use
 
 ### Start without MCP servers
 
-For versions of `sbx` that support `--static-mcp none`, pass `none` to
-`sbx create` or `sbx run` to start a local sandbox with no MCP servers and no
-dynamic discovery tools:
+Pass `--static-mcp none` to `sbx create` or `sbx run` to start a local sandbox
+with no MCP servers and no dynamic discovery tools:
 
 ```console
 $ sbx run claude --name mcp-empty --static-mcp none
