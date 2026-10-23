@@ -17,10 +17,11 @@ info:
 
     An AI Governance subscription and Docker Cloud audit delivery are required.
 
-    All clients and tokens in an organization share its request quota, and
-    each pagination request counts. Additional organization and source IP
-    limits apply at the API gateway. Application rate-limit responses report
-    the configured quota and window.
+    The API and gateway each enforce a limit of 5 requests per second per
+    organization. All clients and tokens in an organization share these limits,
+    and each pagination request counts. The gateway also limits requests to
+    600 per minute per source IP address. Gateway platform limits also apply.
+    Application rate-limit responses report the configured quota and window.
   contact:
     name: Docker
     url: https://www.docker.com/products/ai-governance/
@@ -429,15 +430,15 @@ components:
               - $ref: "#/components/schemas/Error"
           examples:
             application:
-              summary: Example organization quota; actual values reflect the configured limit.
+              summary: Application organization limit of 5 requests per second.
               value:
-                error: "Your organization has reached the audit API request limit. This quota is shared across all clients and tokens in your organization; each pagination request counts. Request limit: 1000 per 3600 seconds. Retry after 60 seconds."
+                error: "Your organization has reached the audit API request limit. This quota is shared across all clients and tokens in your organization; each pagination request counts. Request limit: 5 per 1 seconds. Retry after 1 seconds."
                 code: rate_limit_exceeded
                 policy: audit_governance
                 scope: organization
-                limit: 1000
-                window_seconds: 3600
-                retry_after_seconds: 60
+                limit: 5
+                window_seconds: 1
+                retry_after_seconds: 1
 
     InternalError:
       description: Unexpected server error.
