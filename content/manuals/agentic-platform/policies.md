@@ -76,9 +76,13 @@ as source control services, package registries, and model providers.
 ## Create a policy
 
 1. Open **Policies** and select **New policy**.
-2. Give the policy a name that describes what it's for.
-3. Add allow and deny rules for the required destinations.
-4. Review the rules and save the policy.
+2. Enter a **Name** that describes what the policy is for.
+3. For each rule, enter a **Rule name**, choose **allow** or **deny**, and
+   select **TCP**, **UDP**, or both. TCP is selected by default. To create a
+   UDP-only rule, select **UDP** and deselect **TCP**.
+4. Enter the destination patterns under **Targets**. Select **Add rule** to
+   configure another rule.
+5. Review the rules and save the policy.
 
 To apply the policy, select it under **Egress policy for this sandbox** when you
 create a sandbox.
