@@ -55,8 +55,10 @@ After you select **Run**, the Console shows provisioning progress. When the
 sandbox is ready, its detail page opens. Use the terminal to work with your
 agent or shell. Reloading the launch page resumes tracking the launch.
 
-Open **Sandboxes** to review each sandbox's name, type, status, hourly rate,
-expiration, and age. Select a sandbox to reopen its detail page and terminal.
+Open **Sandboxes** to find a sandbox by name using search, or filter by
+**Running**, **Creating**, **Paused**, **Error**, or **Expired** status. Review
+its **Kit**, **Cost**, **Time left**, and **On Timeout** action. Select a
+sandbox to reopen its detail page and terminal.
 
 The **New** page also lists **Recent sandboxes**. Select a sandbox to reopen it,
 or select **See all sandboxes** to open the full list.
@@ -108,8 +110,8 @@ action next to its port.
 A sandbox can be running or paused:
 
 - Pause a running sandbox to stop it without deleting its files.
-- Resume a paused sandbox to continue working with it. Resuming starts a fresh
-  timer with the original duration.
+- To resume a paused sandbox, select **Restore to connect** in the list or
+  on its detail page. Resuming starts a fresh timer with the original duration.
 - Delete a sandbox when you no longer need it.
 
 When you create a sandbox, set a timer from 1 to 24 hours and choose
