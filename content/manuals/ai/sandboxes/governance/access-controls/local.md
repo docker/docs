@@ -37,23 +37,20 @@ with a hostname rule (for example, `sbx policy allow network "myhost:22"`) or an
 address-based rule. UDP requires the experimental feature and policy rules
 described in [Allow outbound UDP](#allow-outbound-udp). ICMP is blocked.
 
-If you haven't chosen a default preset, the CLI prompts you before it runs a
-sandbox. Running `sbx policy reset` clears the preset and prompts you to choose
-again:
+If the global network policy hasn't been initialized, the CLI prompts you to
+choose a preset when you run a sandbox in an interactive terminal. If a policy
+is already configured, including one carried over from an earlier installation,
+the CLI uses it without prompting.
 
-```plaintext
-Initialize the global network policy for your sandboxes:
+To initialize the policy without an interactive prompt, run:
 
-  Applies to all sandboxes, current and future — change it later with
-  "sbx policy allow/deny/rm". Kits, including built-in agent kits, may
-  also add per-sandbox rules.
-
-     1. Open         — All network traffic allowed, no restrictions.
-  ❯  2. Balanced     — Default deny, with common dev sites allowed.
-     3. Locked Down  — All network traffic blocked unless you allow it.
-
-  Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
+```console
+$ sbx policy init balanced
 ```
+
+Available values are `allow-all`, `balanced`, and `deny-all`. Initialization is
+a one-time setup. To change an existing preset, use
+[`sbx policy reset`](#resetting).
 
 | Preset      | Description                                                                                                                                       |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -95,9 +92,9 @@ workflows. Run `sbx policy ls` to see exactly which rules it includes.
 
 ### Non-interactive environments
 
-In non-interactive environments such as CI pipelines or headless servers, the
-interactive prompt can't be displayed. Use `sbx policy init` to set the
-preset before running any other `sbx` commands:
+In non-interactive environments such as CI pipelines or headless servers, an
+uninitialized policy causes `sbx run` to return an error. Use `sbx policy init`
+to set the preset before running a sandbox:
 
 ```console
 $ sbx policy init balanced
