@@ -55,8 +55,10 @@ After you select **Run**, the Console shows provisioning progress. When the
 sandbox is ready, its detail page opens. Use the terminal to work with your
 agent or shell. Reloading the launch page resumes tracking the launch.
 
-Open **Sandboxes** to review each sandbox's name, type, status, hourly rate,
-expiration, and age. Select a sandbox to reopen its detail page and terminal.
+Open **Sandboxes** to find a sandbox by name using search, or filter by
+**Running**, **Creating**, **Paused**, **Error**, or **Expired** status. Review
+its **Kit**, **Cost**, **Time left**, and **On Timeout** action. Select a
+sandbox to reopen its detail page and terminal.
 
 The **New** page also lists **Recent sandboxes**. Select a sandbox to reopen it,
 or select **See all sandboxes** to open the full list.
@@ -75,8 +77,20 @@ own tab while you run commands in another.
 
 If the sandbox detail page shows **Connect**, open it to find SSH connection
 options. The panel includes a Docker Sandboxes CLI option and a connect script.
-For the script, manage your public SSH key under **Settings**. Follow the
-instructions in the panel for your chosen connection method.
+For the script, register your public SSH key first. Follow the instructions
+in the panel for your chosen connection method.
+
+### Register an SSH key
+
+1. Open the user menu and select **Settings**.
+2. Under **Sandbox SSH key**, optionally enter a **Name** for the key.
+3. Paste your public key into **Public key**, then select **Add key**. Use the
+   contents of your public key file, such as `~/.ssh/id_ed25519.pub`. Never
+   paste your private key.
+
+Only the public key is stored. It takes effect immediately, without restarting
+a sandbox. Check **Registered key** to review it. Adding another key replaces
+the registered key. To remove it, select **Delete key** and confirm deletion.
 
 ### Access a service by port
 
@@ -96,8 +110,8 @@ action next to its port.
 A sandbox can be running or paused:
 
 - Pause a running sandbox to stop it without deleting its files.
-- Resume a paused sandbox to continue working with it. Resuming starts a fresh
-  timer with the original duration.
+- To resume a paused sandbox, select **Restore to connect** in the list or
+  on its detail page. Resuming starts a fresh timer with the original duration.
 - Delete a sandbox when you no longer need it.
 
 When you create a sandbox, set a timer from 1 to 24 hours and choose
