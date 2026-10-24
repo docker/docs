@@ -499,6 +499,39 @@ Connected agent sessions receive a tool-list update, so the added tools become
 visible without reconnecting. The loaded server remains attached across sandbox
 restarts.
 
+### Load registered servers when creating an environment
+
+To reuse host MCP registrations in an [environment file](configuration/environment-files.md),
+add a `postCreate` lifecycle command. This attaches the servers whenever you
+create a sandbox, without repeating their registration details in the file.
+
+Register and authorize the servers on your host first. Use `sbx mcp ls` to
+check their names, then add this block to your environment file, replacing the
+example names with your registrations:
+
+```yaml
+lifecycle:
+  postCreate:
+    - name: Connect host MCP registrations
+      command: |
+        set -eu
+        for server in grafana notion slack-keychain; do
+          sbx mcp load "$server" --sandbox "$SBX_SANDBOX_NAME"
+        done
+      timeout: 3m
+```
+
+The command runs on the host after sandbox creation and before `sbx env run`
+attaches to the agent. `SBX_SANDBOX_NAME` contains the sandbox name, including
+any `--name` override. Reconnecting to an existing sandbox skips `postCreate`;
+the loaded servers remain attached across restarts.
+
+Use this pattern when contributors manage their own host registrations under
+shared names. To define server registrations in the environment file instead,
+use [`mcp.servers`](configuration/environment-files.md#mcp). For host command
+approval and other lifecycle options, see
+[Lifecycle commands](configuration/environment-files.md#lifecycle).
+
 ## Remove a server from a running sandbox
 
 In Docker Sandboxes v0.48.0 and later, use `sbx mcp unload` to detach a server
