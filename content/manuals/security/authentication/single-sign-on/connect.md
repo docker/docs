@@ -43,6 +43,11 @@ begin, make sure the following conditions are met:
 
 ## Set up an SSO connection
 
+> [!NOTE]
+>
+> If you need multiple identity providers (IdPs), complete steps 3-6
+> for each IdP before proceeding to enforcement.
+
 > [!TIP]
 >
 > These procedures have you copy and paste values between Docker and your IdP.
