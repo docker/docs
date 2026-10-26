@@ -289,6 +289,11 @@ $ docker buildx build 'https://github.com/user/myrepo.git?tag=v0.1.0&commit=dead
 > Short commit hash is supported with `checksum` (alias `commit`) query but for
 > `ref`, only the full hash of the commit is supported.
 
+If your BuildKit daemon or Dockerfile frontend doesn't support URL queries,
+set `BUILDX_SEND_GIT_QUERY_AS_INPUT=1` to let Buildx resolve them. This changes
+the context's provenance representation; see the
+[compatibility setting](../building/variables.md#buildx_send_git_query_as_input).
+
 #### Keep `.git` directory
 
 By default, BuildKit doesn't keep the `.git` directory when using Git contexts.
