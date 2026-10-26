@@ -288,9 +288,7 @@
 
       {{/* Content pane. The outer `main` is the positioning context for the
            copy button and stays fixed; the inner div is the scroll container
-           so content scrolls independently of the button. The chroma
-           `.highlight` wrapper's own overflow-x is disabled so the scroll
-           container owns both axes and scrollbars sit at the window edges. */}}
+           so content scrolls independently of the button. */}}
       <main class="group relative min-w-0 flex-1 overflow-hidden">
         {{/* Per-file copy button. Matches the codeblock copy style: icon-only,
              hover-revealed, swaps to a check icon for two seconds on copy. */}}
@@ -308,18 +306,18 @@
           >
         </button>
 
-        <div class="h-full overflow-auto [&_.highlight]:overflow-visible">
+        <div class="h-full overflow-auto">
           {{ range $i, $f := $files }}
-            {{ $opts := "" }}
+            {{ $opts := dict }}
             {{ with $f.hl_lines }}
-              {{ $opts = printf "hl_lines=%s" . }}
+              {{ $opts = dict "hl_lines" . }}
             {{ end }}
             <div
               role="tabpanel"
               x-show="selected === {{ $i }}"
-              class="syntax-light dark:syntax-dark"
+              class="not-prose"
             >
-              {{ (transform.Highlight $f.content $f.lang $opts) | safeHTML }}
+              {{ partial "components/code-source.html" (dict "content" $f.content "lang" $f.lang "options" $opts) }}
             </div>
           {{ end }}
         </div>
@@ -376,12 +374,12 @@
             >{{ partialCached "icon" "check-circle" "check-circle" }}</span
           >
         </button>
-        <div class="h-full overflow-auto [&_.highlight]:overflow-visible">
-          <div x-show="shell === 'bash'" class="syntax-light dark:syntax-dark">
-            {{ (transform.Highlight $bashScript "bash" "") | safeHTML }}
+        <div class="h-full overflow-auto">
+          <div x-show="shell === 'bash'" class="not-prose">
+            {{ partial "components/code-source.html" (dict "content" $bashScript "lang" "bash") }}
           </div>
-          <div x-show="shell === 'powershell'" x-cloak class="syntax-light dark:syntax-dark">
-            {{ (transform.Highlight $psScript "powershell" "") | safeHTML }}
+          <div x-show="shell === 'powershell'" x-cloak class="not-prose">
+            {{ partial "components/code-source.html" (dict "content" $psScript "lang" "powershell") }}
           </div>
         </div>
       </div>
