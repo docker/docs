@@ -201,6 +201,19 @@ $ sbx policy allow network api.github.com --method GET --path '/repos/**'
 $ sbx policy allow network api.github.com --method GET --path '/users/**'
 ```
 
+In `sbx` v0.50.0 and later, add `--query` to match URL query parameters
+separately from the path:
+
+```console
+$ sbx policy allow network api.example.com --method GET --path '/search' \
+    --query 'team=platform' --query 'label=release*'
+```
+
+Repeat the flag to require multiple parameters. Keep `--method` in the command,
+or use `--method ANY` to match all methods. Query restrictions use the same
+flags on deny rules. For value patterns and matching behavior, see
+[Query parameters](../concepts.md#query-parameters).
+
 Hosts follow the same patterns as network rules and can include a port. Write
 the host on its own, without a scheme, so an HTTP rule takes `api.example.com`
 rather than `https://api.example.com`.
@@ -219,11 +232,12 @@ $ sbx policy deny network api.example.com --method POST --path '/admin/**'
 For how the two layers combine, see
 [HTTP rules](../concepts.md#http-method-and-path).
 
-Remove an HTTP rule by naming the same qualifiers you added it with, or by
-rule ID:
+Remove an HTTP rule by naming the same qualifiers you added it with, including
+any `--query` flags, or by rule ID:
 
 ```console
-$ sbx policy rm network --resource api.github.com --method GET --path '/repos/org/project/**'
+$ sbx policy rm network --resource api.example.com --method GET --path '/search' \
+    --query 'team=platform' --query 'label=release*'
 $ sbx policy rm network --id 7f3a1c2e-4a73-4e05-bc9d-f2f9a4b50d67
 ```
 

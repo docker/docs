@@ -119,8 +119,8 @@ Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
 #### HTTP method and path
 
 A network rule matches a destination host on its own. An HTTP rule is a network
-rule that also names an HTTP method and URL path, so a policy can allow reads
-from an API without allowing writes to it.
+rule that also names an HTTP method and URL path, with optional query-parameter
+restrictions, so a policy can allow selected API requests.
 
 An HTTP rule names one or more methods, a destination, and path patterns. What
 each part accepts depends on where you configure the rule:
@@ -154,21 +154,43 @@ can't contain percent-encoding, control characters, repeated or trailing
 slashes, or a `.` segment. For the full list, see
 [HTTP method and path rules](access-controls/local.md#http-method-and-path-rules).
 
+##### Query parameters
+
+An HTTP rule can also restrict query parameters independently of the path.
+The local CLI supports these restrictions in `sbx` v0.50.0 and later.
+
+Use exact parameter names and values, or a single `*` at the start or end of a
+value to match a suffix or prefix. A value of `*` matches any value, including
+an empty one. Names cannot contain wildcards. Names and values are
+case-sensitive.
+
+For rules created with `--query`, every specified parameter must match.
+Parameter order doesn't matter, and requests may include additional parameters. Repeating a parameter
+name in the rule requires separate matching occurrences in the request. A rule
+without query restrictions matches regardless of query parameters.
+
+Write names and value patterns using URL query encoding: `+` or `%20` for a
+space, `%2B` for a literal plus, and `%2A` for a literal asterisk. Keep query
+parameters out of `--path`. For CLI examples, see
+[Local HTTP rules](access-controls/local.md#http-method-and-path-rules).
+
+##### Combine HTTP and network rules
+
 HTTP requests are evaluated against both layers. A network rule sets the
-baseline for a host, and HTTP rules adjust individual methods and paths within
-it:
+baseline for a host, and HTTP rules narrow access by method, path, and query
+parameters:
 
 | Rules that cover the host   | Result for an HTTP request                                              |
 | --------------------------- | ----------------------------------------------------------------------- |
 | Network allow only          | Allowed at any method and path                                          |
-| HTTP allow only             | Allowed only where a rule matches the method and path. Anything else is denied |
-| Network allow and HTTP deny | The denied methods and paths are blocked. The rest stay allowed          |
+| HTTP allow only             | Allowed only where a rule matches the method, path, and any query restrictions. Anything else is denied |
+| Network allow and HTTP deny | Requests matching the HTTP deny are blocked. The rest stay allowed          |
 | Network deny                | Blocked. An HTTP allow can't reopen a denied host                        |
 
 A network deny is therefore a floor that HTTP rules can't raise, while a
 network allow is a ceiling that HTTP rules can carve into.
 
-When a rule requires a method and path decision, the sandbox HTTP proxy
+When a rule requires an HTTP decision, the sandbox HTTP proxy
 evaluates each request separately instead of deciding once per connection.
 
 Those requests have to go through the proxy. A connection it can't inspect,
