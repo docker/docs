@@ -554,6 +554,9 @@ Usage:
 $ export BUILDX_CONFIG=/usr/local/etc
 ```
 
+For repository- and scope-specific credentials stored under this directory,
+see [Registry authentication](./registry-auth.md).
+
 ### BUILDX_CPU_PROFILE
 
 {{< summary-bar feature_name="Buildx CPU profile" >}}
