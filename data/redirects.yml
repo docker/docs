@@ -125,6 +125,7 @@
 # Docker Agent Community is published on GitHub Pages.
 "https://docker.github.io/docker-agent/community/contributing/":
   - /ai/docker-agent/community/contributing/
+  - /ai/docker-agent/community/
 "https://docker.github.io/docker-agent/community/resources/":
   - /ai/docker-agent/community/resources/
 
