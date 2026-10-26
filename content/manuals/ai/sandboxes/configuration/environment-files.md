@@ -482,9 +482,9 @@ the environment changes or a resource is missing. An approval provided with
 ## Update an environment
 
 For an existing sandbox, `sbx env run` applies updated `env` values to the new
-agent session and reconciles declared MCP servers. Changes to workspaces, kits,
-ports, secrets, bindings, and `sandboxOptions` take effect only when the
-sandbox is next created. Remove the environment with `sbx env rm`, then create
+agent session and reconciles declared MCP servers. Changes to workspaces, kit
+host mounts, kits, ports, secrets, bindings, and `sandboxOptions` take effect
+only when the sandbox is next created. Remove the environment with `sbx env rm`, then create
 it again to apply those changes.
 
 ## Remove an environment
@@ -523,6 +523,7 @@ remain after cleanup.
 | `kits`                 | list             | No       | None                           | Kits to install at creation. See [`kits`](#kits)                                 |
 | `workspace`            | string or object | No       | No host mount                  | Primary workspace. See [`workspace`](#workspace)                                |
 | `additionalWorkspaces` | list             | No       | None                           | Extra directories to mount. See [`additionalWorkspaces`](#additionalworkspaces) |
+| `mounts` | map of strings | No | None | Host directories for kit-declared mounts. See [`mounts`](#mounts) |
 | `env`                  | map of strings   | No       | None                           | Environment variables for the sandbox                                           |
 | `sandboxOptions`       | object           | No       | None                           | Creation options. See [`sandboxOptions`](#sandboxoptions)                        |
 | `secrets`              | map              | No       | None                           | Service credentials. See [`secrets`](#secrets)                                  |
@@ -616,6 +617,22 @@ paths resolve from the directory of the environment file that declares them.
 | ---------- | ------- | -------- | ------- | ----------------------------- |
 | `path`     | string  | Yes      | None    | Directory to mount            |
 | `readOnly` | boolean | No       | `false` | Mount the directory read-only |
+
+### `mounts`
+
+In `sbx` v0.50.0 and later, `mounts` selects host directories for
+[kit-declared host mounts](../customize/use-kits.md#choose-directories-for-kit-host-mounts)
+in local sandboxes. Map each kit-declared sandbox path to an existing host
+directory. Relative host paths resolve from the environment file that declares
+them:
+
+```yaml
+mounts:
+  /home/agent/history: ./history
+```
+
+The target must match a `host-mount@1` path declared by one of the selected
+kits. Bindings take effect when the sandbox is created.
 
 ### `sandboxOptions`
 

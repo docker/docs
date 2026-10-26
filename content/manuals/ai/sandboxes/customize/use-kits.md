@@ -275,6 +275,34 @@ Other component arguments are fixed when the set is published.
 Settings chosen during the image build, such as a tool's version, require
 rebuilding the image.
 
+## Choose directories for kit host mounts
+
+In `sbx` v0.50.0 and later, a v3 kit can request a shared host directory
+through the
+[`host-mount@1` capability](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/host-mount@1.md).
+The kit declares where the directory appears inside the sandbox. By default,
+Docker Sandboxes manages the host directory and shares it across sandboxes
+using the same kit source and mount path. Its contents survive sandbox removal.
+
+To use your own host directory, pass `--mount HOST:SANDBOX_PATH` when creating
+a local sandbox with `sbx create` or `sbx run`. For example, if `./my-agent`
+declares a host mount at `/home/agent/history`:
+
+```console
+$ mkdir -p ./history
+$ sbx run ./my-agent --name my-agent --mount ./history:/home/agent/history
+```
+
+The host directory must exist. The sandbox target must exactly match a
+`host-mount@1` path declared by one of the sandbox's kits. Repeat `--mount`
+for additional declared paths. Bindings are fixed when the sandbox is created.
+Use `sbx inspect <SANDBOX>` to see the resolved host directories.
+
+For an environment file, use
+[`mounts`](../configuration/environment-files.md#mounts).
+Explicit host-directory bindings are local-only. Cloud sandboxes reject
+required host mounts and skip optional declarations.
+
 ## Restrict kit sources
 
 [`kit.allowedSources`](../configuration/settings.md#kitallowedsources) controls
