@@ -278,6 +278,29 @@ must exist in the resulting list. The value describes the complete source
 using `env=...` or `src=...`; it doesn't address an object field such as
 `secret.aws.env`.
 
+### Override resource limits
+
+Use `--set <target>.resource.<name>=<value>` to change a resource limit for
+the containers that run build steps. For example, override memory and CPU
+limits for an `app` target:
+
+```console
+$ docker buildx bake --set app.resource.memory=2g \
+    --set app.resource.cpu-quota=50000 app
+```
+
+Supported names are `memory`, `memory-swap`, `cpu-shares`, `cpu-period`,
+`cpu-quota`, `cpuset-cpus`, and `cpuset-mems`. Each override changes only the
+named limit, preserving other limits from the Bake definition. Resource
+overrides don't support `+=`.
+
+These limits require a BuildKit daemon with per-step resource limit support
+and take effect on Linux. They control resources within a build step, rather
+than how many Bake targets run concurrently. See the
+[`--resource` reference](/reference/cli/docker/buildx/build/#resource) for
+units and supported values, and the
+[`resources` attribute](./reference.md#targetresources) for file configuration.
+
 ## Variables
 
 Use `--var NAME=value` to override a declared Bake variable for a single
