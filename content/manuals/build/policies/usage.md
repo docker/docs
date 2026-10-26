@@ -512,14 +512,14 @@ fetch specific metadata (see [above](#testing-policies-with-policy-eval)).
 
 #### Test with specific policy files
 
-The `--filename` flag specifies which policy file to load by providing the base
+The `--file` flag (`-f`) specifies which policy file to load by providing the base
 Dockerfile name (without the `.rego` extension). This is useful for testing
 sources against policies associated with different Dockerfiles.
 
 For example, to test a source against the policy for `app.Dockerfile`:
 
 ```console
-$ docker buildx policy eval --filename app.Dockerfile .
+$ docker buildx policy eval --file app.Dockerfile .
 ```
 
 This loads `app.Dockerfile.rego` and tests whether it allows the source `.`
@@ -528,8 +528,30 @@ This loads `app.Dockerfile.rego` and tests whether it allows the source `.`
 Test different sources against your policy:
 
 ```console
-$ docker buildx policy eval --filename app.Dockerfile https://github.com/org/repo.git
-$ docker buildx policy eval --filename app.Dockerfile docker-image://alpine:3.19
+$ docker buildx policy eval --file app.Dockerfile \
+    https://github.com/org/repo.git
+$ docker buildx policy eval --file app.Dockerfile docker-image://alpine:3.19
+```
+
+To read the policy from standard input instead, use `--file -`. Buildx reads
+the policy directly, without appending `.rego` to the filename:
+
+```console
+$ cat app.Dockerfile.rego | docker buildx policy eval --file - \
+    docker-image://alpine:3.19
+```
+
+#### Evaluate a specific platform
+
+Use `--platform` to choose the platform whose image metadata the policy
+evaluates. Without it, Buildx uses the first platform of the builder's first
+worker.
+
+```console
+$ docker buildx policy eval --platform linux/arm64 \
+    docker-image://alpine:3.19
+$ docker buildx policy eval --platform linux/arm64 --print \
+    --fields image.labels docker-image://alpine:3.19
 ```
 
 ### Reset automatic loading
