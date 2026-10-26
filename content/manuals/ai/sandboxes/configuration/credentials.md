@@ -465,7 +465,7 @@ $ sbx secret set-custom \
 ```
 
 A `--host` value can also use wildcards, with the same syntax as
-[network rule hostname patterns](../governance/reference/network-rules.md#hostname-patterns):
+[network rule hostname patterns](../../governance/reference/network-rules.md#hostname-patterns):
 `*` matches a single label (`*.example.com` covers `api.example.com`) and `**`
 matches any number (`**.example.com` covers `api.example.com` and
 `v2.api.example.com`).

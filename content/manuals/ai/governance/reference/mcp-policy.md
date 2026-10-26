@@ -4,12 +4,14 @@ linkTitle: MCP policy
 weight: 30
 description: Reference for Docker MCP policy actions, resources, attributes, context fields, and approval behavior.
 keywords: docker sandboxes, MCP policy, Cedar policy, MCP actions, MCP resources, requireApproval, AI Governance
+aliases:
+  - /ai/sandboxes/governance/reference/mcp-policy/
 ---
 
 MCP policies are organization policies written in Cedar using Docker's `MCP`
 namespace. This reference defines the Docker-specific policy surface for Model
 Context Protocol (MCP) activity made available to sandboxes through Docker's
-[MCP gateway](../../mcp-gateway.md). MCP policy applies when a developer
+[MCP gateway](../../sandboxes/mcp-gateway.md). MCP policy applies when a developer
 registers a server and when an agent uses the MCP gateway. Registration rules
 control future `sbx mcp add` operations. Use-time rules control tool calls,
 gateway meta-tools, resource reads, and prompt retrieval from servers that are

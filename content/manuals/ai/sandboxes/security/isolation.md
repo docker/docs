@@ -51,11 +51,11 @@ All outbound TCP traffic passes through a proxy on your host that enforces
 network policy. The sandbox routes traffic through either a forward proxy or a
 transparent proxy depending on the client's configuration. Both enforce the
 network policy. For how network policy is set, see
-[Governance](../governance/_index.md). Only the
+[Sandbox governance](../../governance/_index.md). Only the
 forward proxy [injects credentials](../configuration/credentials.md) for AI services.
 
 Outbound UDP is disabled by default. When you turn on
-[experimental UDP egress](../governance/local/network-rules.md#allow-outbound-udp),
+[experimental UDP egress](../../governance/local/network-rules.md#allow-outbound-udp),
 network policy controls its destinations. ICMP is blocked. DNS queries use the
 sandbox's internal resolver, which enforces network policy. TCP connections
 are allowed only when a policy rule matches the destination.

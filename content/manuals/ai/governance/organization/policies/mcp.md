@@ -15,7 +15,7 @@ Context Protocol (MCP) servers developers can register and what agents can do
 through Docker's MCP gateway. Use these policies to approve trusted servers,
 withdraw access to a server, require approval for tool calls, and restrict
 host-run servers. To register MCP servers and connect them to sandboxes, see
-[MCP gateway](../../../mcp-gateway.md).
+[MCP gateway](../../../sandboxes/mcp-gateway.md).
 
 MCP access policies apply only to server registration and requests handled by
 Docker's MCP gateway. They don't govern an MCP server that an agent or MCP
@@ -67,7 +67,7 @@ existing server must match every name under which it was registered.
 Built-in gateway tools, such as `mcp-add`, `code-mode`, and OAuth authorization
 helpers, are also governed at use time. They are `MCP::Primordial` resources
 rather than tools associated with a registered server. For details, see
-[Built-in gateway tools](../../../mcp-gateway.md#built-in-gateway-tools).
+[Built-in gateway tools](../../../sandboxes/mcp-gateway.md#built-in-gateway-tools).
 
 Use-time policy doesn't hide or remove existing registrations. Tool and
 resource listings can also include entries that policy denies when an agent
@@ -240,7 +240,7 @@ when { resource in MCP::Primordial::"example-authorize" };
 Local stdio servers run on the host, outside the sandbox VM. This includes
 explicit host commands and OCI-packaged stdio servers started with host Docker.
 For details about this boundary, see
-[Docker Engine isolation](../../../security/isolation.md#docker-engine-isolation).
+[Docker Engine isolation](../../../sandboxes/security/isolation.md#docker-engine-isolation).
 
 In a blocklist policy that otherwise permits registration, deny the host-run
 server type:

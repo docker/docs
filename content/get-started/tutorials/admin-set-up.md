@@ -84,5 +84,5 @@ Continue with these guides when you're ready to expand the deployment:
   for additional policies and deployment controls
 - [Set up SSO and provisioning](/manuals/security/authentication/single-sign-on/_index.md)
   for centralized identity management
-- [Govern Docker Sandboxes](/manuals/ai/sandboxes/governance/organization/_index.md)
+- [Govern Docker Sandboxes](/manuals/ai/governance/organization/_index.md)
   for organization-wide agent policies

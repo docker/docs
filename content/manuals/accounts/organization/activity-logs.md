@@ -27,7 +27,7 @@ Organization owners and members with a custom role that includes the
 > Use activity logs for an admin audit trail of your organization and
 > repositories, including AI Governance policy and settings changes. For
 > enforcement events, such as policy decisions and sandbox sessions, see
-> [AI Governance Audit Logs](/manuals/ai/sandboxes/governance/organization/audit/_index.md).
+> [AI Governance Audit Logs](/manuals/ai/governance/organization/audit/_index.md).
 
 ## Access activity logs
 
@@ -234,7 +234,7 @@ The following table lists Offload events that cover lease start and end.
 The following table lists governance events that cover the AI Governance
 admin audit trail, such as policy and settings changes. For enforcement
 events, such as policy decisions and sandbox sessions, see
-[AI Governance Audit Logs](/manuals/ai/sandboxes/governance/organization/audit/_index.md).
+[AI Governance Audit Logs](/manuals/ai/governance/organization/audit/_index.md).
 
 | Event | Description |
 |:------|:------------|
@@ -249,7 +249,7 @@ events, such as policy decisions and sandbox sessions, see
 
 - [Roles and permissions](/manuals/security/roles-and-permissions/_index.md) for
   the **View activity logs** permission and custom roles
-- [AI Governance Audit Logs](/manuals/ai/sandboxes/governance/organization/audit/_index.md) for
+- [AI Governance Audit Logs](/manuals/ai/governance/organization/audit/_index.md) for
   enforcement events such as policy decisions and sandbox sessions
 - [Audit logs API](/reference/api/hub/latest/#tag-audit-logs) to query events
   programmatically

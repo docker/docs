@@ -99,7 +99,7 @@ The first time you run a sandbox, `sbx` asks you to choose a default network
 policy. This policy controls which external services your sandboxes can reach.
 Select **Balanced** to permit common development services and block other
 destinations by default. You can change these rules later with
-[`sbx policy`](/manuals/ai/sandboxes/governance/local/network-rules.md).
+[`sbx policy`](/manuals/ai/governance/local/network-rules.md).
 
 The built-in integrations start coding agents in their full-autonomy mode. For
 example, Codex bypasses approvals, Claude Code skips permission prompts, and

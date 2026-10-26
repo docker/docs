@@ -44,7 +44,7 @@ of policy:
 - [Organization network access policies](policies/network.md): the
   destinations sandboxes can reach, down to HTTP methods and paths.
 - [Organization filesystem access policies](policies/filesystem.md): the host
-  paths sandboxes can mount.
+  paths developers can mount into sandboxes.
 - [Organization MCP access policies](policies/mcp.md): the MCP servers
   developers can register and what agents can do with them.
 

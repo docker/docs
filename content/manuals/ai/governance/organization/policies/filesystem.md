@@ -44,7 +44,7 @@ every platform, so a single `~/**` rule matches every developer's home tree.
 For the path formats on each operating system and how wildcards match, see
 [Filesystem mount rule syntax](../../reference/filesystem-rules.md).
 
-## How organization rules change what developers can mount
+## Built-in filesystem rules
 
 Without an organization policy, a sandbox can mount any host path the developer
 chooses. Developers can't add filesystem rules with local policy, which manages

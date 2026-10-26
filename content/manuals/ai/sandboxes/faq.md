@@ -18,9 +18,9 @@ Model-provider charges are separate from sandbox compute.
 
 Organization governance for local sandboxes includes centrally managed network,
 filesystem, and MCP policies,
-[sign-in enforcement](governance/organization/sign-in-enforcement.md),
-and [audit logs](governance/organization/audit/_index.md). These
-[organization governance features](governance/organization/_index.md) require a separate paid
+[sign-in enforcement](../governance/organization/sign-in-enforcement.md),
+and [audit logs](../governance/organization/audit/_index.md). These
+[organization governance features](../governance/organization/_index.md) require a separate paid
 subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
@@ -34,7 +34,7 @@ Signing in gives each sandbox a verified identity, which lets Docker:
   containers, install packages, and push code. Your Docker identity is the
   anchor.
 - **Enable team features.** Team-scale features like
-  [organization governance](governance/organization/_index.md), shared environments, and audit logs
+  [organization governance](../governance/organization/_index.md), shared environments, and audit logs
   need a concept of "who," and adding that later would be worse for everyone.
 - **Authenticate against Docker infrastructure.** Sandboxes pull images, run
   daemons, and talk to Docker services. A Docker account authenticates those
@@ -51,7 +51,7 @@ rules set with `sbx policy` are no longer evaluated, while local deny rules
 still apply on top.
 
 See
-[How organization policy relates to local and kit rules](governance/organization/policies/_index.md#how-organization-policy-relates-to-local-and-kit-rules).
+[How organization policy relates to local and kit rules](../governance/organization/policies/_index.md#how-organization-policy-relates-to-local-and-kit-rules).
 This feature requires a separate paid subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.

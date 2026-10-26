@@ -248,4 +248,4 @@ $ sbx policy reset --force
 > destinations you approved. Those destinations are requested again the next
 > time a sandbox reaches them. To pick up organization policy changes without
 > deleting local rules, use `sbx policy refresh` instead. For more details, see
-> [Organization policy changes aren't taking effect](../../troubleshooting.md#organization-policy-changes-arent-taking-effect).
+> [Organization policy changes aren't taking effect](../troubleshooting.md#organization-policy-changes-arent-taking-effect).

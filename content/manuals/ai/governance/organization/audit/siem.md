@@ -23,7 +23,7 @@ delivered:
   [Collect local audit files with a log shipper](#collect-local-audit-files-with-a-log-shipper).
 
 For how the two delivery modes differ, see
-[Where records go](_index.md#where-records-go).
+[Delivery modes](_index.md#delivery-modes).
 
 ## Forward events from Docker Cloud
 

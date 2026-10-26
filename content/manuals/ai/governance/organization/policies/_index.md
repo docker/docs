@@ -27,11 +27,12 @@ the actions it controls, the resources it matches, and a decision of `allow` or
 - [Organization network access policies](network.md) control the destinations
   sandboxes can reach.
 - [Organization filesystem access policies](filesystem.md) control the host
-  paths sandboxes can mount.
-- [Organization MCP access policies](mcp.md) control MCP activity. They use
-  Cedar statements in the `MCP` namespace instead of rules.
+  paths developers can mount into sandboxes.
+- [Organization MCP access policies](mcp.md) control the MCP servers developers
+  can register and what agents can do with them. They use Cedar statements in
+  the `MCP` namespace instead of rules.
 
-## Which policies apply to a developer
+## Policy scope
 
 Organization policies apply only to members who hold an AI Governance license.
 Each policy applies to those members either across the whole organization or
@@ -126,4 +127,4 @@ takes effect also depends on the policy type. For more details, see
 
 To apply changes right away on a developer machine, or if a change doesn't seem
 to apply, see
-[Organization policy changes aren't taking effect](../../../troubleshooting.md#organization-policy-changes-arent-taking-effect).
+[Organization policy changes aren't taking effect](../../troubleshooting.md#organization-policy-changes-arent-taking-effect).

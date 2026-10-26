@@ -24,7 +24,7 @@ An upstream proxy is the corporate or network proxy that Docker Sandboxes
 forwards outbound traffic through on its way to the internet. This is separate
 from network policy, which decides _which_ destinations are allowed. The
 upstream proxy decides _how_ allowed traffic reaches them. For how network
-policy is set, see [Governance](../governance/_index.md).
+policy is set, see [Sandbox governance](../../governance/_index.md).
 
 Docker Sandboxes sends two kinds of outbound traffic, and you can proxy them
 independently:

@@ -6,6 +6,7 @@ keywords: docker sandboxes, local policy, network access, allow rules, deny rule
 aliases:
   - /ai/sandboxes/security/policy/
   - /ai/sandboxes/governance/access-controls/local/
+  - /ai/sandboxes/governance/local/
 ---
 
 Local policy decides which network destinations the sandboxes on your machine
@@ -71,7 +72,7 @@ sandboxes that use them, such as the API endpoints an agent needs. Kit rules
 work like the rules you add yourself, and they apply under any preset,
 including **Locked Down** (`deny-all`). A preset isn't an explicit deny rule,
 so it doesn't override the allow rules a kit adds. For more details on kits,
-see [Use kits](../../customize/use-kits.md).
+see [Use kits](../../sandboxes/customize/use-kits.md).
 
 To list the rules a kit added to a sandbox, see
 [Filter the listing](inspect.md#filter-the-listing). To block a destination
@@ -93,9 +94,6 @@ For more details, see [Respond to approval requests](approvals.md).
 When an organization policy is enforced for you, it changes which of your
 local rules apply. For more details, see
 [How organization policy relates to local and kit rules](../organization/policies/_index.md#how-organization-policy-relates-to-local-and-kit-rules).
-To list the rules that stopped applying, run `sbx policy ls --wide
---include-inactive`. For more details, see
-[Show inactive rules](inspect.md#show-inactive-rules).
 
 [Approvals](approvals.md), [inspection](inspect.md), and
 [testing](test-monitor.md) work the same way whether a rule comes from you, a

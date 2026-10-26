@@ -24,7 +24,7 @@ where records go, and what you can do with them.
 > Audit logs cover local sandboxes, the sandboxes that run on developers'
 > machines. Docker Cloud delivery stores their audit records in the cloud. It
 > doesn't add cloud sandbox coverage. For cloud network decisions, see
-> [Cloud policy logs](../../../cloud/network-policy.md#inspect-network-policy).
+> [Cloud policy logs](../../../sandboxes/cloud/network-policy.md#inspect-network-policy).
 
 ## What audit logs record
 
@@ -38,7 +38,7 @@ Other Docker AI sources can emit records through the same schema as they
 become available. For every field a record can contain, see the
 [Audit record reference](../../reference/audit-records.md).
 
-## What you need
+## Requirements
 
 Audit logs are exposed when AI Governance is enabled for your organization.
 To use them, your organization needs:
@@ -56,7 +56,7 @@ Governance license and are governed by an enforced centralized
 [organization policy](../_index.md). Users without both don't generate audit
 data, and they don't appear in audit events or SIEM forwarding output.
 
-## Where records go
+## Delivery modes
 
 Docker supports two delivery modes for audit records:
 
@@ -64,8 +64,8 @@ Docker supports two delivery modes for audit records:
   files on each host. Use this mode for host-local retention, air-gapped
   collection, or collection through your own log shipper.
 - **Docker Cloud**: Docker stores audit records in Docker Cloud. Cloud
-  delivery powers the hosted audit log view, CSV export, and SIEM streaming from
-  app.docker.com.
+  delivery powers the hosted audit log view, CSV export, SIEM streaming, and
+  the Audit Logs API.
 
 To choose which delivery modes your organization uses, see
 [Configure audit delivery](configure.md).
@@ -110,9 +110,10 @@ responsibility of your log shipper or your own housekeeping.
 How you use audit records depends on where they go:
 
 - With Docker Cloud delivery, [view and export events](view-export.md) in
-  Docker Home, and [forward them to your SIEM](siem.md). The hosted view, CSV
-  export, and SIEM forwarding all require Docker Cloud delivery. Local delivery
-  alone doesn't power them.
+  Docker Home, [forward them to your SIEM](siem.md), and
+  [retrieve them with the Audit Logs API](api.md). The hosted view, CSV export,
+  SIEM forwarding, and the API all require Docker Cloud delivery. Local
+  delivery alone doesn't power them.
 - With local delivery, collect the `.jsonl` files from each machine with your
   own log shipper. For more details, see
   [Collect local audit files with a log shipper](siem.md#collect-local-audit-files-with-a-log-shipper).

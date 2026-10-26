@@ -559,7 +559,7 @@ to the sandbox's gateway and disappears when the gateway is replaced or stops.
 In MCP access policies, built-in gateway tools are `MCP::Primordial` resources
 and use the `invokePrimordial` action. Tools from registered MCP servers are
 `MCP::Tool` resources and use the `invokeTool` action. For details, see the
-[MCP policy reference](governance/reference/mcp-policy.md).
+[MCP policy reference](../governance/reference/mcp-policy.md).
 
 ## Manage registrations
 
@@ -596,7 +596,7 @@ token, use `sbx mcp auth rm`.
 ## Governance
 
 Organizations with AI Governance can use
-[Organization MCP access policies](governance/organization/policies/mcp.md) to
+[Organization MCP access policies](../governance/organization/policies/mcp.md) to
 control MCP server registration, tool calls, gateway meta-tools, resources,
 prompts, and approval requirements. MCP access policies are organization
 policies written in Cedar.

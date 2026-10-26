@@ -11,8 +11,8 @@ aliases:
 
 {{< summary-bar feature_name="AI Governance" >}}
 
-Your organization's [governance policies](_index.md) apply only when a
-developer signs in to Docker Sandboxes as a member of your organization.
+Organization policies apply only when a developer signs in to Docker Sandboxes
+as a member of your organization.
 Without sign-in enforcement, a developer can sign in with a personal account
 and bypass those policies. Sign-in enforcement closes that gap on the machine
 itself, where users can't override it.

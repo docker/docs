@@ -13,7 +13,7 @@ aliases:
 Configure where Docker delivers your organization's audit records, and review
 who changed those settings. You can deliver records to local disk on each host,
 to Docker Cloud, or to both. For how the two delivery modes differ, see
-[Where records go](_index.md#where-records-go).
+[Delivery modes](_index.md#delivery-modes).
 
 ## Before you begin
 

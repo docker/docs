@@ -56,7 +56,7 @@ A policy's **Scope** controls who it applies to. Set it to **Organization** to
 apply the policy to every licensed member, or to **Teams** to apply it only to
 licensed members of the teams you select. For more details on how org-wide and
 team-scoped policies combine, see
-[Which policies apply to a developer](_index.md#which-policies-apply-to-a-developer).
+[Policy scope](_index.md#policy-scope).
 
 Team scoping targets your organization's existing
 [teams](/manuals/accounts/organization/manage/manage-a-team.md), so a team must

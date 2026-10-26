@@ -32,7 +32,7 @@ The columns are:
 - `POLICY`: the policy name.
 - `SOURCE`: where the policy came from. `local` means your local policy, which
   holds your preset and the rules you added with `sbx policy`. `kit` means a
-  [kit](../../customize/use-kits.md). `org` means your organization.
+  [kit](../../sandboxes/customize/use-kits.md). `org` means your organization.
 - `APPLIES TO`: which sandboxes the policy applies to. `all` means the policy
   is global, and `sandbox:<name>` scopes it to one sandbox.
 - `SUMMARY`: a count of rule entries by type and decision, for example
@@ -177,7 +177,7 @@ table.
   details, see [Show inactive rules](#show-inactive-rules).
 
 If the status shows `Governance: Unresolved`, see
-[`sbx policy ls` shows Governance: Unresolved](../../troubleshooting.md#sbx-policy-ls-shows-governance-unresolved).
+[`sbx policy ls` shows Governance: Unresolved](../troubleshooting.md#sbx-policy-ls-shows-governance-unresolved).
 
 ## Show inactive rules
 

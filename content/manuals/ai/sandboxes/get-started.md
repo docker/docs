@@ -60,7 +60,7 @@ is already configured, the CLI uses it without prompting.
 
 To initialize the policy without an interactive prompt, run
 `sbx policy init balanced` before `sbx run`. See
-[Start from a preset](governance/local/_index.md#start-from-a-preset) for the
+[Start from a preset](../governance/local/_index.md#start-from-a-preset) for the
 available presets and how to change an existing policy.
 
 Replace `claude` with the agent you want to use — see [Agents](agents/) for the
@@ -128,7 +128,7 @@ $ sbx policy allow network registry.npmjs.org
 With Balanced, common development services are permitted by default. With
 Locked Down, destinations need an allow rule from you or a kit. Built-in agent
 kits can add rules for their model providers. See
-[local policy](governance/local/_index.md) for the full rule set
+[local policy](../governance/local/_index.md) for the full rule set
 and how to customize it.
 
 ## Clean up
@@ -175,5 +175,5 @@ Then explore:
   network rules into a reusable definition you launch with a single flag.
 - [Agents](agents/) — the full list of supported agents and how to configure
   each one.
-- [Governance](governance/) — centrally manage network, filesystem, and MCP
+- [Sandbox governance](../governance/) — centrally manage network, filesystem, and MCP
   policies across a team.

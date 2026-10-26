@@ -79,7 +79,7 @@ All outbound TCP traffic from the sandbox routes through a proxy on your host.
 Agents use a forward proxy for HTTP and HTTPS; other TCP traffic is forwarded
 transparently. Both paths enforce network policy, the rules that decide which
 destinations a sandbox can reach. For how those rules are set, see
-[Governance](governance/_index.md). The forward
+[Sandbox governance](../governance/_index.md). The forward
 proxy also handles [credential injection](configuration/credentials.md). See
 [Network isolation](security/isolation.md#network-isolation) for how this
 works and [Default security posture](security/defaults.md) for what is
