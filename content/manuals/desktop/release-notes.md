@@ -28,7 +28,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-10-26" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.97.0" build_path="/XXXXXX/" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.97.0" build_path="/244584/" >}}
 
 
 ### Bug fixes and enhancements
@@ -97,6 +97,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Hardened Images CLI (`dhictl`) v0.0.9](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.9)
 - Docker Desktop Build `v0.39.1`
 - [Docker Scout CLI v1.27.0](https://github.com/docker/scout-cli/releases/tag/v1.27.0)
+- Docker pass `v0.3.2`
 
 ### Security
 
