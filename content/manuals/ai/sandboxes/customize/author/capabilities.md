@@ -42,7 +42,7 @@ All capability names in the table have the `com.docker.sandbox/` prefix.
 | [`sbx@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/sbx@1.md) | v0.45.0 | v0.45.0 | Docker Sandboxes launches the agent using the workload command. |
 | [`ssh-agent@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/ssh-agent@1.md) | v0.48.0 | Unsupported | Requires SSH-agent forwarding to be enabled and a host SSH agent to be available. |
 | [`usb-device@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/usb-device@1.md) | Unsupported | Unsupported | Kit requests for USB device access are not supported. |
-| [`volume@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/volume@1.md) | v0.45.0 | Limited: v0.45.0 | Local sandboxes provide block storage or tmpfs. Cloud sandboxes use ordinary sandbox disk at the declared paths, including for tmpfs requests. |
+| [`volume@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/volume@1.md) | v0.45.0 | Limited: v0.45.0 | Local sandboxes provide block storage or tmpfs. From v0.50.0, newly created local sandboxes [retain block volumes across removal and recreation](../use-kits.md#keep-kit-data-when-recreating-a-sandbox). Cloud sandboxes use ordinary sandbox disk at the declared paths, including for tmpfs requests. |
 
 ## Capability groups
 
