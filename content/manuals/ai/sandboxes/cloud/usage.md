@@ -111,6 +111,20 @@ $ sbx --cloud ls
 Most cloud commands accept either the sandbox name or the `sbx_`-prefixed ID
 shown in the output.
 
+Inspect a sandbox's state, template, resources, timeout settings, and
+published port URLs:
+
+```console
+$ sbx --cloud inspect cloud-project
+```
+
+Use `--format json` or `--format yaml` for structured output. For example,
+retrieve the published port URLs in a script:
+
+```console
+$ sbx --cloud inspect cloud-project --format json | jq -r '.ports[]? | .url // empty'
+```
+
 ## Run commands
 
 Run a command inside a cloud sandbox:

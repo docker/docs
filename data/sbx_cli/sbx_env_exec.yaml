@@ -19,6 +19,10 @@ description: |-
     lists such as ports and mcp.servers are concatenated.
 
     Flags match the behavior of "sbx exec".
+
+    Exit status is that of the command. sbx exits 125 if it could not run the command,
+    for example because the sandbox does not exist. A missing command exits 127,
+    unless a cloud backend reports it as an error rather than a status, which exits 125.
 usage: sbx env exec [flags] [PATH...] -- COMMAND [ARG...]
 options:
     - name: detach

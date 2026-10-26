@@ -57,7 +57,7 @@ options:
     - name: skip-host-commands
       default_value: "false"
       usage: |
-        Plan without the host lifecycle commands the environment declares
+        Plan without the host lifecycle commands and command-backed MCP servers the environment declares
 inherited_options:
     - name: cloud
       default_value: "false"

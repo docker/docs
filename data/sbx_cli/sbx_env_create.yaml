@@ -59,7 +59,8 @@ options:
         What happens when --ttl lapses: 'stop' stops the sandbox in place so it can be started again later, 'restart' keeps it running by stopping and immediately starting it, or 'delete' removes it. Omit the flag and the server stops the sandbox when it can be started again later, and deletes it otherwise. With 'restart' a supplied --ttl must be at least 1h (cloud only). Only applies when the sandbox is created; 'sbx --cloud env run' refuses it when attaching to an existing one.
     - name: skip-host-commands
       default_value: "false"
-      usage: Skip the host lifecycle commands the environment declares
+      usage: |
+        Skip host lifecycle commands and disable environment MCP commands until a later env run without this flag
     - name: ttl
       usage: |
         Cloud sandbox time-to-live before it times out (e.g. 30m, 2h, 1h30m; units are case-insensitive; cloud only; default: server-side). Only applies when the sandbox is created; 'sbx --cloud env run' refuses it when attaching to an existing one

@@ -92,8 +92,8 @@ existing sandbox.
 
 ### Protect the environment file
 
-Environment files can declare lifecycle and secret commands that run on your
-host. Keep them outside writable sandbox mounts so the agent cannot change
+Environment files can declare lifecycle, secret, and MCP commands that run on
+your host. Keep them outside writable sandbox mounts so the agent cannot change
 what a later invocation runs. This applies to both the primary workspace and
 `additionalWorkspaces`.
 
@@ -479,27 +479,53 @@ directory. Plans without host commands apply silently on later invocations until
 the environment changes or a resource is missing. An approval provided with
 `--force` applies only to that invocation.
 
+### Approve or skip host commands
+
+Plans containing lifecycle commands, credential `command` sources, or local MCP
+commands require approval for every invocation by default, even when the command
+text hasn't changed. Approve one invocation with `--force`, skip lifecycle and
+MCP commands with `--skip-host-commands`, or turn on
+[`env.rememberHostCommands`](settings.md#envrememberhostcommands) to remember
+approval until the commands change:
+
+```console
+$ sbx settings set env.rememberHostCommands true
+```
+
+To run an environment without lifecycle or local MCP commands, use:
+
+```console
+$ sbx env run --skip-host-commands
+```
+
+The flag also disables previously approved MCP commands before asking you to
+approve the plan. They remain disabled even if you cancel the plan or restart
+the daemon. To enable them again, run `sbx env run` without the flag and approve
+the plan. Credential `command` sources still run when their secrets are needed.
+
 ## Update an environment
 
 For an existing sandbox, `sbx env run` applies updated `env` values to the new
-agent session and reconciles declared MCP servers. Changes to workspaces, kits,
-ports, secrets, bindings, and `sandboxOptions` take effect only when the
-sandbox is next created. Remove the environment with `sbx env rm`, then create
+agent session and reconciles declared MCP servers. Changes to workspaces, kit
+host mounts, kits, ports, secrets, bindings, and `sandboxOptions` take effect
+only when the sandbox is next created. Remove the environment with `sbx env rm`, then create
 it again to apply those changes.
 
 ## Remove an environment
 
 Secrets and registry credentials are sandbox-scoped. Credential bindings and
-MCP server registrations are host-global and can be shared by multiple
-sandboxes.
+remote MCP server registrations are host-global and can be shared by multiple
+sandboxes. Local MCP commands declared by the environment belong to that
+environment and sandbox.
 
 `sbx env rm` builds a destroy plan from the resources on the host. The plan
 includes all credentials stored at the sandbox's scope, including credentials
 that the environment file no longer declares. After approval, `sbx` removes
 only the resources named in the plan.
 
-Global credential bindings remain unless you pass `--prune-bindings`. MCP
-registrations remain available to other sandboxes.
+Global credential bindings remain unless you pass `--prune-bindings`. Remote
+MCP registrations remain available to other sandboxes. Removing a local
+environment revokes and removes the MCP commands it registered.
 
 ### Clean up after a failed create
 
@@ -507,8 +533,9 @@ Secret provisioning, binding updates, and MCP server registration occur before
 the sandbox is created. If sandbox creation fails, scoped secrets remain, and
 bindings and MCP registrations may also remain. Run `sbx env rm` with the same
 paths to remove the scoped secrets. Pass `--prune-bindings` if you also want to
-remove the declared global bindings. MCP registrations are host-global and
-remain after cleanup.
+remove the declared global bindings. Remote MCP registrations remain after
+cleanup. If an environment MCP command registration cannot be removed, follow
+[Recover a conflicting MCP registration](#recover-a-conflicting-mcp-registration).
 
 ## File reference
 
@@ -523,6 +550,7 @@ remain after cleanup.
 | `kits`                 | list             | No       | None                           | Kits to install at creation. See [`kits`](#kits)                                 |
 | `workspace`            | string or object | No       | No host mount                  | Primary workspace. See [`workspace`](#workspace)                                |
 | `additionalWorkspaces` | list             | No       | None                           | Extra directories to mount. See [`additionalWorkspaces`](#additionalworkspaces) |
+| `mounts` | map of strings | No | None | Host directories for kit-declared mounts. See [`mounts`](#mounts) |
 | `env`                  | map of strings   | No       | None                           | Environment variables for the sandbox                                           |
 | `sandboxOptions`       | object           | No       | None                           | Creation options. See [`sandboxOptions`](#sandboxoptions)                        |
 | `secrets`              | map              | No       | None                           | Service credentials. See [`secrets`](#secrets)                                  |
@@ -617,6 +645,22 @@ paths resolve from the directory of the environment file that declares them.
 | `path`     | string  | Yes      | None    | Directory to mount            |
 | `readOnly` | boolean | No       | `false` | Mount the directory read-only |
 
+### `mounts`
+
+`mounts` selects host directories for
+[kit-declared host mounts](../customize/use-kits.md#choose-directories-for-kit-host-mounts)
+in local sandboxes. Map each kit-declared sandbox path to an existing host
+directory. Relative host paths resolve from the environment file that declares
+them:
+
+```yaml
+mounts:
+  /home/agent/history: ./history
+```
+
+The target must match a `host-mount@1` path declared by one of the selected
+kits. Bindings take effect when the sandbox is created.
+
 ### `sandboxOptions`
 
 | Field         | Type            | Default  | Description                                           |
@@ -699,17 +743,6 @@ variables:
 
 The environment file's `env` values and resolved secrets aren't passed to host
 commands.
-
-Plans containing lifecycle commands or credential `command` sources require
-approval for every invocation by default, even when the command text hasn't
-changed. Approve one invocation with `--force`, skip lifecycle commands
-with `--skip-host-commands`, or turn on
-[`env.rememberHostCommands`](settings.md#envrememberhostcommands) to remember
-approval until the commands change:
-
-```console
-$ sbx settings set env.rememberHostCommands true
-```
 
 ### `secrets`
 
@@ -803,8 +836,10 @@ registries:
 ### `mcp`
 
 The `mcp.servers` list registers servers with the built-in
-[MCP gateway](../mcp-gateway.md) and adds them to the sandbox. MCP registrations
-are host-global and remain after `sbx env rm`.
+[MCP gateway](../mcp-gateway.md) and adds them to the sandbox. Remote servers
+registered with `url` remain host-global and survive `sbx env rm`. In local
+environments, servers registered with `command` belong to the environment
+and can run only for its sandbox.
 
 | Field     | Type            | Required | Default | Description                                                     |
 | --------- | --------------- | -------- | ------- | --------------------------------------------------------------- |
@@ -814,6 +849,41 @@ are host-global and remain after `sbx env rm`.
 | `args`    | list of strings | No       | None    | Arguments passed to `command`                                   |
 
 Each server must set exactly one of `url` or `command`.
+
+#### Approve local MCP commands
+
+A `command` server runs on your host with your privileges whenever the
+sandbox's MCP gateway starts, including after restarts. The environment plan
+shows the resolved executable and arguments before registration. Approval
+pins the executable path, not the contents of executables, scripts, or
+packages they load. Keep these files outside writable sandbox mounts.
+
+If an `initialize` command creates the executable or changes its resolved
+path, `sbx` asks you to approve the resolved MCP command after initialization.
+Declining that approval leaves the completed initialization work in place
+but does not register the command. `--force` approves both stages for that
+invocation.
+
+Removing a command from the file and applying the environment revokes its
+registration. `sbx env rm` removes the environment's command registrations.
+
+#### Recover a conflicting MCP registration
+
+An environment cannot take over a command registered manually or by another
+environment, even when its executable and arguments match. Choose a different
+server name, or remove the conflicting registration before applying the file.
+
+For a legacy or damaged registration, stop the daemon before removing only
+its saved registration:
+
+```console
+$ sbx daemon stop
+$ sbx mcp rm --registration-only -- <SERVER_NAME>
+```
+
+Stopping the daemon interrupts its sandbox gateways. Registration-only removal
+does not delete saved credentials. Apply the environment again to register and
+approve the command for its sandbox.
 
 ### `ports`
 

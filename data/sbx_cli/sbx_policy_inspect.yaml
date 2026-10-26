@@ -7,7 +7,7 @@ description: |-
     Selecting a policy lists every resource with its decision, rule, and status,
     plus a rule table showing each rule's RULE_ID, whether it is editable, and
     either the exact removal command or the reason it is read-only. Selecting a
-    rule shows just that rule with the same editability detail. RULE_ID is the
+    rule shows only that rule with the same editability detail. RULE_ID is the
     identifier accepted by "sbx policy rm network --id" (local rules only). Use
     "sbx policy ls" to find policy names and "sbx policy ls --wide" to find rule
     IDs and resource values.
