@@ -110,18 +110,15 @@ or recreate the existing one. To add a mixin to an existing sandbox, see
 
 ### Keep kit data when recreating a sandbox
 
-For local sandboxes created with `sbx` v0.50.0 or later, persistent kit
-volumes (`volume@1` with `tmpfs: false`) survive kit updates and sandbox
-removal. To reattach the data, recreate the sandbox with the same name, kit
+In local sandboxes, persistent kit volumes (`volume@1` with `tmpfs: false`)
+survive kit updates and sandbox removal. To reattach the data, recreate the sandbox with the same name, kit
 source, and volume path. A different sandbox name, kit source, or volume path
 gets separate storage. Changing a published kit's tag or digest reuses its
 volumes. For Git sources, keep the same repository and kit subdirectory; for
 local sources, keep the same directory.
 
 Save any work you need from the container filesystem before removing the
-sandbox. Tmpfs contents are discarded when the
-sandbox stops. Kit volumes in sandboxes created before v0.50.0 are
-removed with the sandbox.
+sandbox. Tmpfs contents are discarded when the sandbox stops.
 
 ## Runtime access and instructions
 
@@ -292,7 +289,7 @@ rebuilding the image.
 
 ## Choose directories for kit host mounts
 
-In `sbx` v0.50.0 and later, a v3 kit can request a shared host directory
+A v3 kit can request a shared host directory
 through the
 [`host-mount@1` capability](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/host-mount@1.md).
 The kit declares where the directory appears inside the sandbox. By default,

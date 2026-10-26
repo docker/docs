@@ -442,8 +442,7 @@ changes, command history, and mountless workspace files all persist across
 stops and restarts. Removing a sandbox deletes its container filesystem.
 Host workspace files, including repositories used as clone sources, and the
 [shared agent skills store](workflows/agent-skills.md) remain on your host.
-For local sandboxes created with `sbx` v0.50.0 or later, persistent kit volumes
-also survive removal. See
+Persistent kit volumes in local sandboxes also survive removal. See
 [Keep kit data when recreating a sandbox](customize/use-kits.md#keep-kit-data-when-recreating-a-sandbox)
 for how to reattach them.
 

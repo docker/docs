@@ -157,7 +157,6 @@ slashes, or a `.` segment. For the full list, see
 ##### Query parameters
 
 An HTTP rule can also restrict query parameters independently of the path.
-The local CLI supports these restrictions in `sbx` v0.50.0 and later.
 
 Use exact parameter names and values, or a single `*` at the start or end of a
 value to match a suffix or prefix. A value of `*` matches any value, including

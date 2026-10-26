@@ -201,7 +201,7 @@ $ sbx policy allow network api.github.com --method GET --path '/repos/**'
 $ sbx policy allow network api.github.com --method GET --path '/users/**'
 ```
 
-In `sbx` v0.50.0 and later, add `--query` to match URL query parameters
+Add `--query` to match URL query parameters
 separately from the path:
 
 ```console

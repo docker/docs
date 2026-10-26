@@ -54,8 +54,8 @@ CI provider's secret store, use `-t`. For example, in a GitHub Actions step:
 
 ## Cleanup and exit codes
 
-`sbx exec` returns the exit status of the command it runs. In `sbx` v0.50.0
-and later, a failure to run the command, such as a missing sandbox, returns
+`sbx exec` returns the exit status of the command it runs. A failure to run
+the command, such as a missing sandbox, returns
 125. A missing executable inside a local sandbox returns 127. Check stderr
 for the cause before deciding whether to retry.
 

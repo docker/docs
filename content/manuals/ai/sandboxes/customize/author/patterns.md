@@ -123,7 +123,7 @@ volume already has a configuration file, the hook leaves its contents intact.
 ### Configure the volume
 
 The volume keeps the tool's data across sandbox restarts. For retention across
-kit updates and sandbox removal in `sbx` v0.50.0 and later, see
+kit updates and sandbox removal, see
 [Keep kit data when recreating a sandbox](../use-kits.md#keep-kit-data-when-recreating-a-sandbox)
 for the requirements.
 

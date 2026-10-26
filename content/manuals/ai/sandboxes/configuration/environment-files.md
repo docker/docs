@@ -623,7 +623,7 @@ paths resolve from the directory of the environment file that declares them.
 
 ### `mounts`
 
-In `sbx` v0.50.0 and later, `mounts` selects host directories for
+`mounts` selects host directories for
 [kit-declared host mounts](../customize/use-kits.md#choose-directories-for-kit-host-mounts)
 in local sandboxes. Map each kit-declared sandbox path to an existing host
 directory. Relative host paths resolve from the environment file that declares
