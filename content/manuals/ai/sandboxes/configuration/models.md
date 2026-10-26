@@ -36,23 +36,22 @@ in a container. If neither is usable, it tries a downloaded binary, then
 
 ### Disable the bundled service
 
-To prevent the daemon from starting the bundled server and downloading its
-inference runtime, disable `model.server.enabled` and restart the daemon:
+If you don't use the bundled model service, you can turn it off to skip its
+runtime download:
 
 ```console
 $ sbx settings set model.server.enabled false
 $ sbx daemon restart
 ```
 
-If the daemon isn't running, the settings command starts it before saving the
-override, so the bundled service can start once before the restart applies
-the change.
+Restart the daemon to apply the change. If the daemon wasn't running, the
+settings command starts it first, so the service might start and begin its
+download before you restart.
 
-You can still [use Ollama](#use-ollama). Other provider selections, including
-hosted providers and custom endpoints, need a running `llmman` server.
-If no server is ready while the bundled service is disabled, `sbx run --model`
-fails immediately with a hint to re-enable it. An already-ready server remains
-usable.
+You can still [use Ollama](#use-ollama) with the bundled service turned off.
+For local models managed by `llmman`, hosted providers, and custom endpoints,
+turn the service back on or run your own `llmman` server. If no server is running,
+`sbx run --model` reports an error with instructions to turn the service back on.
 
 To re-enable the bundled service:
 
