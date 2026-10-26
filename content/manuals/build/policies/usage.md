@@ -353,8 +353,26 @@ $ docker buildx bake production   # Uses strict policies
 
 ### Bake with policy options
 
-Currently, bake doesn't support policy options (reset, strict, disabled) in the
-HCL file. Use command-line flags instead:
+Use objects in the `policy` list to configure policy loading and evaluation
+for a target. Each object supports `filename`, `reset`, `disabled`, `strict`,
+and `log-level`, with the same meanings as the
+[`docker buildx build --policy` options](#manual-policy-configuration).
+
+For example, load only the specified policy and require policy support from
+the builder:
+
+```hcl {title="docker-bake.hcl"}
+target "production" {
+  policy = [{
+    filename = "policies/production.rego"
+    reset    = true
+    strict   = true
+  }]
+}
+```
+
+Use `disabled = true` to disable policy evaluation for a target. For a
+per-invocation override across the selected targets, use the `--policy` flag:
 
 ```console
 $ docker buildx bake --policy disabled=true production
