@@ -36,6 +36,7 @@ To override these attributes, you can use the following methods:
 
 - [File overrides](#file-overrides)
 - [CLI overrides](#command-line)
+- [Variable overrides](#variables)
 - [Environment variable overrides](#environment-variables)
 
 ## File overrides
@@ -246,6 +247,21 @@ Complete list of attributes that can be overridden with `--set` are:
 - `ssh`
 - `tags`
 - `target`
+
+## Variables
+
+Use `--var NAME=value` to override a declared Bake variable for a single
+invocation. For example, set `TAG` without exporting it in your shell:
+
+```console
+$ docker buildx bake --var TAG=dev webapp
+```
+
+The value takes precedence over an environment variable with the same name.
+Unlike `--set webapp.tags=...`, this changes the variable wherever the Bake
+definition uses it. See
+[Override variable values](./variables.md#override-variable-values) for
+precedence, types, and repeated flags.
 
 ## Environment variables
 
