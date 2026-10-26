@@ -108,18 +108,6 @@ mixin combination, or argument value, create a sandbox with a different name
 or recreate the existing one. To add a mixin to an existing sandbox, see
 [Add mixins](#add-mixins).
 
-### Keep kit data when recreating a sandbox
-
-In local sandboxes, persistent kit volumes (`volume@1` with `tmpfs: false`)
-survive kit updates and sandbox removal. To reattach the data, recreate the sandbox with the same name, kit
-source, and volume path. A different sandbox name, kit source, or volume path
-gets separate storage. Changing a published kit's tag or digest reuses its
-volumes. For Git sources, keep the same repository and kit subdirectory; for
-local sources, keep the same directory.
-
-Save any work you need from the container filesystem before removing the
-sandbox. Tmpfs contents are discarded when the sandbox stops.
-
 ## Runtime access and instructions
 
 A kit can request access to the services it needs. For example, the Codex
@@ -287,33 +275,54 @@ Other component arguments are fixed when the set is published.
 Settings chosen during the image build, such as a tool's version, require
 rebuilding the image.
 
-## Choose directories for kit host mounts
+## Kit data and host directories
 
-A v3 kit can request a shared host directory
-through the
-[`host-mount@1` capability](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/host-mount@1.md).
-The kit declares where the directory appears inside the sandbox. By default,
-Docker Sandboxes manages the host directory and shares it across sandboxes
-using the same kit source and mount path. Its contents survive sandbox removal.
+Kits can provide storage for tool settings, history, and other data. The kit
+chooses which directories to use and whether their contents are persistent,
+temporary, or shared with other sandboxes. Check the kit's documentation before
+relying on it to preserve your work.
 
-To use your own host directory, pass `--mount HOST:SANDBOX_PATH` when creating
-a local sandbox with `sbx create` or `sbx run`. For example, if `./my-agent`
-declares a host mount at `/home/agent/history`:
+### Choose directories for kit host mounts
+
+Some kits share a directory with your host. In local sandboxes, Docker
+Sandboxes manages this directory by default. Its contents survive sandbox
+removal and are shared across sandboxes using the same kit source and mount
+path.
+
+You can choose your own host directory instead. Check the kit's documentation
+for the sandbox path, then pass `--mount HOST:SANDBOX_PATH` when creating the
+sandbox with `sbx create` or `sbx run`. For example, if a published kit uses
+`/home/agent/history`:
 
 ```console
 $ mkdir -p ./history
-$ sbx run ./my-agent --name my-agent --mount ./history:/home/agent/history
+$ sbx run docker.io/<NAMESPACE>/my-agent:1.0.0 --name my-agent \
+    --mount ./history:/home/agent/history
 ```
 
-The host directory must exist. The sandbox target must exactly match a
-`host-mount@1` path declared by one of the sandbox's kits. Repeat `--mount`
-for additional declared paths. Bindings are fixed when the sandbox is created.
-Use `sbx inspect <SANDBOX>` to see the resolved host directories.
+The host directory must exist, and the sandbox path must exactly match a host
+mount declared by the kit. You can't add other mount paths this way. Repeat
+`--mount` for additional declared paths. These choices are fixed when the
+sandbox is created. Use `sbx inspect <SANDBOX>` to see the host directories.
 
 For an environment file, use
 [`mounts`](../configuration/environment-files.md#mounts).
-Explicit host-directory bindings are local-only. Cloud sandboxes reject
-required host mounts and skip optional declarations.
+Host-directory bindings are available only for local sandboxes.
+
+### Keep kit data when recreating a sandbox
+
+Persistent kit volumes in local sandboxes survive kit updates and sandbox
+removal. To reuse their data, recreate the sandbox with the same name and kit
+source. You can change a published kit's tag or digest, provided the kit still
+uses the same storage paths. A different sandbox name or kit source gets
+separate storage.
+
+This applies only to persistent kit volumes. Save any work you need from the
+container filesystem before removing the sandbox. Temporary kit storage is
+discarded when the sandbox stops.
+
+For how to preserve storage when changing a kit, see
+[Configure the volume](author/patterns.md#configure-the-volume).
 
 ## Restrict kit sources
 

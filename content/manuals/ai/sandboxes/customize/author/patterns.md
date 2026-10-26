@@ -122,10 +122,16 @@ volume already has a configuration file, the hook leaves its contents intact.
 
 ### Configure the volume
 
-The volume keeps the tool's data across sandbox restarts. For retention across
-kit updates and sandbox removal, see
-[Keep kit data when recreating a sandbox](../use-kits.md#keep-kit-data-when-recreating-a-sandbox)
-for the requirements.
+In local sandboxes, persistent volumes (`volume@1` with `tmpfs: false`)
+keep data across restarts, kit updates, and sandbox removal. Docker Sandboxes
+reattaches a volume when the sandbox name, kit source, and volume path match.
+Changing a volume path gives it separate storage, so keep paths stable across
+kit releases when you want users to retain their data.
+
+For published kits, changing a tag or digest retains the same kit source.
+For Git sources, the repository and kit subdirectory must stay the same;
+for local sources, the source directory must stay the same. Tmpfs contents
+are discarded when the sandbox stops.
 
 This example allocates `1g` of space. If you omit `size`, `sbx` allocates `512m`.
 
