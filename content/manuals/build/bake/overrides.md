@@ -11,29 +11,7 @@ more flexibility to configure these definitions. For example, you might want to
 override an attribute when building in a particular environment or for a
 specific target.
 
-The following list of attributes can be overridden:
-
-- `args`
-- `attest`
-- `cache-from`
-- `cache-to`
-- `context`
-- `contexts`
-- `dockerfile`
-- `entitlements`
-- `labels`
-- `network`
-- `no-cache`
-- `output`
-- `platform`
-- `pull`
-- `secret.<id>`
-- `secrets`
-- `ssh`
-- `tags`
-- `target`
-
-To override these attributes, you can use the following methods:
+To override target attributes or the variables used to configure them, use:
 
 - [File overrides](#file-overrides)
 - [CLI overrides](#command-line)
@@ -190,7 +168,8 @@ target "app" {
 ```
 
 ```console
-$ docker buildx bake --set app.args.mybuildarg=bar --set app.platform=linux/arm64 app --print
+$ docker buildx bake --set app.arg.mybuildarg=bar \
+    --set app.platform=linux/arm64 app --print
 ```
 
 ```json
@@ -215,39 +194,54 @@ $ docker buildx bake --set app.args.mybuildarg=bar --set app.platform=linux/arm6
 
 > [!NOTE]
 >
-> `--set` is a repeatable flag. For array fields such as `tags`, repeat `--set` to provide multiple values or use the `+=` operator to append without replacing.
-> Array literal syntax like `--set target.tags=[a,b]` is not supported.
+> `--set` is a repeatable flag. For array fields such as `tag`, repeat `--set`
+> to provide multiple values or use `+=` to append without replacing.
+> An empty assignment, such as `--set app.tag=`, clears the array. Subsequent
+> assignments add values to the cleared array. Array literal syntax such as
+> `--set app.tag=[a,b]` is not supported.
 
-Pattern matching syntax defined in [https://golang.org/pkg/path/#Match](https://golang.org/pkg/path/#Match)
-is also supported:
+Override keys use singular names such as `arg`, `secret`, and `tag`. These
+names apply to `--set` selectors; Bake file attributes keep their existing
+names, such as `args` and `tags`. Older plural override spellings remain
+supported as aliases.
+
+`context` and `contexts` aren't aliases: `context` sets the main build
+context, while `contexts.<name>` sets one named context. The alias `secrets`
+applies to the secret list override only; `secrets.<id>` is invalid.
+
+You can match multiple targets with a pattern. Quote the override so your
+shell doesn't expand the pattern before Bake reads it:
 
 ```console
-$ docker buildx bake --set foo*.args.mybuildarg=value  # overrides build arg for all targets starting with "foo"
-$ docker buildx bake --set *.platform=linux/arm64      # overrides platform for all targets
-$ docker buildx bake --set foo*.no-cache               # bypass caching only for targets starting with "foo"
+$ docker buildx bake --set 'foo*.arg.mybuildarg=value'
+$ docker buildx bake --set '*.platform=linux/arm64'
+$ docker buildx bake --set 'foo*.no-cache'
 ```
 
-Complete list of attributes that can be overridden with `--set` are:
+The first and third commands affect targets whose names start with `foo`.
+The second sets the platform for all targets. For the full list of override
+keys, aliases, pattern syntax, and fields supporting `+=`, see the
+[`--set` reference](/reference/cli/docker/buildx/bake/#set).
 
-- `args`
-- `attest`
-- `cache-from`
-- `cache-to`
-- `context`
-- `contexts`
-- `dockerfile`
-- `entitlements`
-- `labels`
-- `network`
-- `no-cache`
-- `output`
-- `platform`
-- `pull`
-- `secret.<id>`
-- `secrets`
-- `ssh`
-- `tags`
-- `target`
+### Override list attributes
+
+Attributes such as `secret`, `ssh`, and `output` can use lists of objects in a
+Bake file. In a `--set` value, use the inline syntax of the corresponding
+build flag, rather than an HCL object or array. For example, `secret` uses the
+same `id=...,src=...` syntax as
+[`build --secret`](/reference/cli/docker/buildx/build/#secret).
+
+Use `=` to replace the secret list, `+=` to add a secret, or an empty value
+to clear the list:
+
+```console
+$ docker buildx bake --set app.secret=id=aws,src=./credentials app
+$ docker buildx bake --set app.secret+=id=gcp,env=GCP_CREDENTIALS app
+$ docker buildx bake --set app.secret= app
+```
+
+These operations affect the list as a whole. To change only the source of one
+declared secret while preserving the others, use `secret.<id>`.
 
 ### Override a secret source
 
@@ -278,8 +272,10 @@ their sources. The override fails if the target doesn't declare `aws`, or if
 an `id=` in the override value names a different secret. This form doesn't
 support `+=`.
 
-To add or replace secrets instead, use the `secrets` list override described
-in the [`--set` reference](/reference/cli/docker/buildx/bake/#set).
+Named source overrides are applied after secret list overrides, so the ID
+must exist in the resulting list. The value describes the complete source
+using `env=...` or `src=...`; it doesn't address an object field such as
+`secret.aws.env`.
 
 ## Environment variables
 
