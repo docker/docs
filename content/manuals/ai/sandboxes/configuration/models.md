@@ -50,7 +50,7 @@ download before you restart.
 
 You can still [use Ollama](#use-ollama) with the bundled service turned off.
 For local models managed by `llmman`, hosted providers, and custom endpoints,
-turn the service back on or run your own `llmman` server. If no server is running,
+turn the service back on. If no server is running,
 `sbx run --model` reports an error with instructions to turn the service back on.
 
 To re-enable the bundled service:
