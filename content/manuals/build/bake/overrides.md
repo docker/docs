@@ -27,6 +27,7 @@ The following list of attributes can be overridden:
 - `output`
 - `platform`
 - `pull`
+- `secret.<id>`
 - `secrets`
 - `ssh`
 - `tags`
@@ -242,10 +243,43 @@ Complete list of attributes that can be overridden with `--set` are:
 - `output`
 - `platform`
 - `pull`
+- `secret.<id>`
 - `secrets`
 - `ssh`
 - `tags`
 - `target`
+
+### Override a secret source
+
+Use `--set <target>.secret.<id>=<source>` to change the source of an existing
+secret without replacing the target's secret list. The secret ID must already
+be declared by the target.
+
+For example, declare an `aws` secret in the Bake file:
+
+```hcl {title=docker-bake.hcl}
+target "app" {
+  secret = [{
+    id  = "aws"
+    src = "./credentials"
+  }]
+}
+```
+
+Supply its value from an environment variable or a different file:
+
+```console
+$ docker buildx bake --set app.secret.aws=env=AWS_CREDENTIALS app
+$ docker buildx bake --set app.secret.aws=src=/path/to/credentials app
+```
+
+The build still receives the secret as `aws`. Other declared secrets keep
+their sources. The override fails if the target doesn't declare `aws`, or if
+an `id=` in the override value names a different secret. This form doesn't
+support `+=`.
+
+To add or replace secrets instead, use the `secrets` list override described
+in the [`--set` reference](/reference/cli/docker/buildx/bake/#set).
 
 ## Environment variables
 
