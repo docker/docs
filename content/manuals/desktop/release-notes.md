@@ -24,6 +24,46 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.97.0
+
+{{< release-date date="2026-10-26" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.97.0" build_path="/244584/" >}}
+
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a spurious Resource Saver error when signing out while sign-in enforcement is enabled.
+- Fixed diagnostics collection being slow when the backend is unresponsive, reducing worst-case wait time from several minutes to approximately 3 seconds.
+- Fixed reliability issues with the container exec terminal: closing a container no longer triggers spurious error reports, and terminal resize now works correctly on startup.
+- Fixed an issue where the Date header in Docker API responses was incorrect after Docker Desktop entered Resource Saver mode.
+- Added the `-e`/`--env` flag to `docker pass run` for setting environment variables, including `se://` secret references.
+- Fixed `docker pass set` printing "context canceled" on Ctrl-C at the value prompt.
+- Improved responsiveness when searching the **Images**, **Containers** and **Volumes** lists.
+- Fixed an unhandled error when viewing the files of a Compose project whose config file no longer exists.
+
+#### For Mac
+
+- Fixed adding Docker Desktop commands to the PATH failing for fish users without a `~/.config/fish` directory.
+- Added a setting to allow privileged ports (1-1024) to be exposed to other machines on the LAN.
+
+#### For Windows
+
+- Added a Docker VMM (Beta) backend option to the Windows installer.
+- Fixed an issue on Windows where a slow WSL version check asked to update WSL.
+- Fixed Docker VMM requiring a Docker Desktop restart to share a new bind-mount directory from the host.
+- Fixed WSL installer errors (e.g. `Wsl/CallMsi/`) being misidentified as disk-related failures, preventing misleading 'disk file has been deleted' recovery messages.
+- Fixed Docker Desktop becoming unresponsive, with `docker` commands hanging and Quit not working, after the disk filled up or, on Windows, after the backend's console host process exited. Fixes [docker/desktop-feedback#429](https://github.com/docker/desktop-feedback/issues/429) and [docker/desktop-feedback#699](https://github.com/docker/desktop-feedback/issues/699).
+- Fixed an issue where the installer rejected `--backend=docker-vmm` when combined with `--user` flag or Microsoft Store installs.
+- Fixed factory reset to stop Docker engines before deleting data, surface cleanup failures as an error dialog, and clean up custom data-root directories.
+- Fixed Windows containers failing to start with a "Path contains symlink" error on `callback.sock`.
+- Fixed a bug where the installer could leave a file under `C:\ProgramData\DockerDesktop` with no permissions at all, making it unreadable to diagnostics and to later installs.
+- Fixed a bug where the disk image location could not be moved back to a folder it had previously been moved out of. Fixes [docker/desktop-feedback#565](https://github.com/docker/desktop-feedback/issues/565).
+- Fixed a bug where a failed update could put back Start Menu and desktop shortcuts that had been deleted on purpose.
+- `--user` mode is now the default for new Docker Desktop `.EXE` installations.
+
 ## 4.96.3
 
 {{< release-date date="2026-10-22" >}}
@@ -57,6 +97,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Hardened Images CLI (`dhictl`) v0.0.9](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.9)
 - Docker Desktop Build `v0.39.1`
 - [Docker Scout CLI v1.27.0](https://github.com/docker/scout-cli/releases/tag/v1.27.0)
+- Docker pass `v0.3.2`
 
 ### Security
 
