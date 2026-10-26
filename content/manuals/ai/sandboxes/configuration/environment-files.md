@@ -479,6 +479,30 @@ directory. Plans without host commands apply silently on later invocations until
 the environment changes or a resource is missing. An approval provided with
 `--force` applies only to that invocation.
 
+### Approve or skip host commands
+
+Plans containing lifecycle commands, credential `command` sources, or local MCP
+commands require approval for every invocation by default, even when the command
+text hasn't changed. Approve one invocation with `--force`, skip lifecycle and
+MCP commands with `--skip-host-commands`, or turn on
+[`env.rememberHostCommands`](settings.md#envrememberhostcommands) to remember
+approval until the commands change:
+
+```console
+$ sbx settings set env.rememberHostCommands true
+```
+
+To run an environment without lifecycle or local MCP commands, use:
+
+```console
+$ sbx env run --skip-host-commands
+```
+
+The flag also disables previously approved MCP commands before asking you to
+approve the plan. They remain disabled even if you cancel the plan or restart
+the daemon. To enable them again, run `sbx env run` without the flag and approve
+the plan. Credential `command` sources still run when their secrets are needed.
+
 ## Update an environment
 
 For an existing sandbox, `sbx env run` applies updated `env` values to the new
@@ -720,17 +744,6 @@ variables:
 The environment file's `env` values and resolved secrets aren't passed to host
 commands.
 
-Plans containing lifecycle commands, credential `command` sources, or local MCP
-commands require approval for every invocation by default, even when the command
-text hasn't changed. Approve one invocation with `--force`, skip lifecycle and
-MCP commands with `--skip-host-commands`, or turn on
-[`env.rememberHostCommands`](settings.md#envrememberhostcommands) to remember
-approval until the commands change:
-
-```console
-$ sbx settings set env.rememberHostCommands true
-```
-
 ### `secrets`
 
 `secrets` maps service names to secret sources. Each entry must set exactly one
@@ -851,18 +864,8 @@ Declining that approval leaves the completed initialization work in place
 but does not register the command. `--force` approves both stages for that
 invocation.
 
-To disable the environment's MCP host commands, run:
-
-```console
-$ sbx env run --skip-host-commands
-```
-
-This also disables previously approved commands before asking you to approve
-the plan. They remain disabled even if you cancel the plan or restart the
-daemon. To enable them again, run `sbx env run` without the flag and approve
-the plan. Removing a command from the file and applying the environment
-revokes its registration. `sbx env rm` removes the environment's command
-registrations.
+Removing a command from the file and applying the environment revokes its
+registration. `sbx env rm` removes the environment's command registrations.
 
 #### Recover a conflicting MCP registration
 
