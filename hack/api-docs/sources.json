@@ -41,6 +41,16 @@
       "guides": []
     },
     {
+      "id": "ai-governance-audit-logs",
+      "product": "ai-governance",
+      "title": "AI Governance Audit Logs",
+      "source": "content/reference/api/ai-governance-audit-logs/api.yaml",
+      "owner": "docker/docs",
+      "manual": "/manuals/ai/sandboxes/governance/audit/",
+      "connection": "hosted",
+      "guides": ["/manuals/ai/sandboxes/governance/audit/api.md"]
+    },
+    {
       "id": "sandboxes",
       "product": "sandboxes",
       "title": "Docker Sandboxes",

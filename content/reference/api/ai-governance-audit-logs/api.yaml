@@ -1,4 +1,5 @@
-openapi: "3.0.3"
+openapi: 3.2.0
+jsonSchemaDialect: https://spec.openapis.org/oas/3.1/dialect/base
 
 info:
   title: Docker AI Governance Audit Logs API
@@ -34,6 +35,8 @@ security:
 
 tags:
   - name: audit-events
+    summary: Audit events
+    kind: nav
     description: Retrieve Docker AI Governance audit events.
 
 paths:

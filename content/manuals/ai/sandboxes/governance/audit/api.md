@@ -183,5 +183,5 @@ reports a search timeout, use a narrower time range or a simpler query. A
 
 ## API reference
 
-See the [Audit Logs API reference](/reference/api/ai-governance-audit-logs/)
+See the [Audit Logs API reference](/reference/api/ai-governance-audit-logs/latest/)
 for the complete request and response schema.
