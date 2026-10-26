@@ -335,6 +335,33 @@ decision := {"allow": allow}
 The `hasProvenance` field is `true` when the image has provenance or SBOM
 [attestations](../metadata/attestations/_index.md).
 
+### Check provenance metadata
+
+Use `input.image.provenance` to check how an image was built. For example,
+require provenance that declares a hermetic build with all dependencies
+recorded:
+
+```rego
+package docker
+
+default allow := false
+
+allow if input.local
+
+allow if {
+  input.image.provenance.hermetic == true
+  input.image.provenance.completeness.materials == true
+}
+
+decision := {"allow": allow}
+```
+
+An image with missing fields fails these conditions. Other provenance fields
+include the builder identity, build arguments, and build definition source;
+see the [provenance input reference](./inputs.md#inputimageprovenance).
+Pair these checks with signature verification when you need to trust the
+attestation's origin.
+
 ## Verify GitHub Actions signatures
 
 For images built with GitHub Actions, verify they came from trusted workflows by
