@@ -20,8 +20,9 @@ Don't have a config file? Docker Agent can automatically detect your available A
 # Automatically uses the best available provider
 $ docker agent run
 
-# Provider priority: Anthropic → OpenAI → Google → Mistral → Amazon Bedrock → DMR
 ```
+
+Use `docker agent doctor` to see which provider `auto` selects from your available credentials and local models.
 
 The special `auto` model value also works in configs:
 
@@ -430,6 +431,28 @@ If a sound is enough, set `settings: { sound: true }` instead — Docker Agent p
 
 See the [Hooks documentation](../../configuration/hooks/index.md) for the full list of events, their payloads, and per-hook options (`env`, `working_dir`, `timeout`).
 
+### Inject the Current Session ID with Hooks
+
+Use the `add_context` [builtin hook](../../configuration/hooks/index.md#template-context-with-add_context) on `session_start` to make the current session ID available to the model. It renders a Go template against the hook input and adds the result to the model's context, without a shell, `jq`, or other external dependencies:
+
+```yaml
+agents:
+  root:
+    model: openai/gpt-4o
+    description: Session-aware assistant
+    instruction: You are a helpful assistant.
+    hooks:
+      session_start:
+        - type: builtin
+          command: add_context
+          args:
+            - "Current session ID: {{ .SessionID }}"
+```
+
+Templates use Go field names such as `.SessionID`, `.AgentName`, and `.Cwd`, rather than the JSON names used by command hooks.
+
+The model receives context such as `Current session ID: 550e8400-e29b-41d4-a716-446655440000`; this is not a visible chat message. Use `turn_start` instead of `session_start` to refresh the context before every model call.
+
 ### GitHub PR Reviewer Example
 
 Use Docker Agent as a GitHub Actions PR reviewer:
@@ -452,7 +475,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Install docker-agent
-          curl -fsSL https://get.docker-agent.dev | sh
+          curl -fL "https://github.com/docker/docker-agent/releases/latest/download/docker-agent-linux-amd64" -o docker-agent
+          chmod +x docker-agent
+          mkdir -p ~/.docker/cli-plugins
+          mv docker-agent ~/.docker/cli-plugins/
 
           # Run the review
           docker agent run --exec reviewer.yaml --yolo \

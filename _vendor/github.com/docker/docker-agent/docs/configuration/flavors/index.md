@@ -25,13 +25,13 @@ agents:
 models:
   claude:
     provider: anthropic
-    model: claude-sonnet-4-5
+    model: claude-sonnet-5
 
 flavors:
   cheap:
     models:
       claude:
-        model: claude-3-5-haiku-latest
+        model: claude-haiku-4-5
 ```
 
 Enable flavors with the repeatable `--flavor` flag:
@@ -63,7 +63,7 @@ semantics, with two extensions for arrays:
 | Object | Merged recursively into the existing object. |
 | Scalar or array | Replaces the existing value. |
 | `null` | Deletes the key. |
-| Key ending in `+` | Appends the items to the existing array. |
+| Key ending in `+` | Appends the items to the existing array (a scalar is promoted to a one-element array first). |
 | Key ending in `-` | Removes matching entries from an array or object. |
 
 ### Merging and replacing
@@ -111,6 +111,33 @@ flavors:
 
 With `--flavor with-shell` the root agent gets both `think` and `shell`.
 
+### Appending to an instruction
+
+An agent `instruction` may be a list of strings, joined by blank lines. Since
+`+` promotes a scalar to a one-element array, a flavor can extend the system
+prompt without repeating it:
+
+```yaml
+agents:
+  root:
+    instruction: You are a helpful assistant.
+
+flavors:
+  terse:
+    agents:
+      root:
+        instruction+:
+          - Answer in one sentence.
+```
+
+With `--flavor terse` the instruction becomes:
+
+```text
+You are a helpful assistant.
+
+Answer in one sentence.
+```
+
 ### Removing entries
 
 Suffix the key with `-`. Each item in the patch value selects what to remove:
@@ -139,12 +166,16 @@ flavors:
 
 ## Inspecting the Result
 
-`docker agent debug config` prints the config exactly as the runtime sees it,
-flavors applied:
+`docker agent debug config` prints the config exactly as the runtime sees it.
+Pass flavors after the config to print the resolved config, with the patches
+applied and the `flavors` section dropped:
 
 ```bash
-$ docker agent debug config agent.yaml --flavor cheap --flavor with-shell
+$ docker agent debug config agent.yaml cheap with-shell
 ```
+
+The repeatable `--flavor` flag works too, and combines with positional
+flavors (flag values are applied first).
 
 ## HCL
 
@@ -166,7 +197,8 @@ flavors "with-shell" {
 
 - Flavors require config schema version 13 or later; older versions reject
   the `flavors` key with a hint to bump the top-level `version` field.
+  Appending to a string with `+` (e.g. `instruction+`) requires version 15.
 - Patches apply before validation, so a flavored config is validated exactly
   like a hand-written one.
-- `docker agent push` publishes the raw document, `flavors` section included,
+- `docker agent share push` publishes the raw document, `flavors` section included,
   so consumers of a pushed agent can enable its flavors too.

@@ -30,7 +30,7 @@ The simplest way to use xAI:
 ```yaml
 agents:
   root:
-    model: xai/grok-3
+    model: xai/grok-4.5
     description: Assistant using Grok
     instruction: You are a helpful assistant.
 ```
@@ -43,7 +43,7 @@ For more control over parameters:
 models:
   grok:
     provider: xai
-    model: grok-3
+    model: grok-4.5
     temperature: 0.7
     max_tokens: 8192
 
@@ -56,14 +56,11 @@ agents:
 
 ## Available Models
 
-| Model              | Description                        | Context |
-| ------------------ | ---------------------------------- | ------- |
-| `grok-3`           | Latest and most capable Grok model | 131K    |
-| `grok-3-fast`      | Faster variant with lower latency  | 131K    |
-| `grok-3-mini`      | Compact model for simpler tasks    | 131K    |
-| `grok-3-mini-fast` | Fast variant of the mini model     | 131K    |
-| `grok-2`           | Previous generation model          | 128K    |
-| `grok-vision`      | Vision-capable model               | 32K     |
+| Model       | Description                              | Context |
+| ----------- | ----------------------------------------- | ------- |
+| `grok-4.5`  | Default Grok model; strong reasoning and tool calling | 500K    |
+| `grok-4.6`  | Newest Grok release                        | 500K    |
+| `grok-4.3`  | Previous generation Grok model             | 1M      |
 
 Check the [xAI documentation](https://docs.x.ai/docs) for the latest available models.
 
@@ -71,7 +68,7 @@ Check the [xAI documentation](https://docs.x.ai/docs) for the latest available m
 
 Docker Agent's `thinking_budget` field is **not applied** to xAI models: the underlying OpenAI-compatible client only sends `reasoning_effort` for OpenAI reasoning model names (o-series, gpt-5). Setting `thinking_budget` on a Grok model passes config validation but has no effect on the request.
 
-Grok reasoning models (e.g. `grok-3-mini`) reason on their own without configuration. For non-reasoning models, use the [think tool](../../tools/think/index.md) instead.
+Grok reasoning models (e.g. `grok-4.5`) reason on their own without configuration. For non-reasoning models, use the [think tool](../../tools/think/index.md) instead.
 
 ## How It Works
 
@@ -86,7 +83,7 @@ xAI is implemented as a built-in alias in Docker Agent:
 ```yaml
 agents:
   researcher:
-    model: xai/grok-3
+    model: xai/grok-4.5
     description: Research assistant with real-time knowledge
     instruction: |
       You are a research assistant using Grok.

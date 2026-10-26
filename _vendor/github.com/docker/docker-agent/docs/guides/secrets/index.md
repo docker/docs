@@ -10,15 +10,16 @@ _How to securely provide API keys and credentials to Docker Agent._
 
 ## Overview
 
-Docker Agent needs API keys to talk to model providers (OpenAI, Anthropic, etc.) and MCP tool servers (GitHub, Slack, etc.). These keys are **never stored in config files**. Instead, Docker Agent resolves them at runtime through a chain of secret providers, checked in order (see `pkg/environment/default.go`):
+Docker Agent needs API keys to talk to model providers (OpenAI, Anthropic, etc.) and MCP tool servers (GitHub, Slack, etc.). Avoid putting literal secrets in agent configuration fields such as `env`, headers, or URLs. Docker Agent can resolve them at runtime through a chain of secret providers, checked in order (see `pkg/environment/default.go`):
 
 | Priority | Provider | Description |
 | --- | --- | --- |
 | 1 | [Environment variables](#environment-variables) | `export OPENAI_API_KEY=sk-...` |
 | 2 | [Docker Compose secrets](#docker-compose-secrets) | Files in `/run/secrets/` |
 | 3 | [Docker Agent env file](#docker-agent-env-file) | `~/.config/cagent/.env`, written by `docker agent setup` |
-| 4 | [Credential helper](#credential-helper) | Custom command declared in `~/.config/cagent/config.yaml` under `credential_helper:` |
-| 5 | [Docker Desktop](#docker-desktop) | Secrets stored by the Docker Desktop backend (no setup on a Desktop install) |
+| 4 | [ChatGPT login](../../providers/chatgpt/index.md) | `CHATGPT_OAUTH_TOKEN` from the account login created by `docker agent setup` |
+| 5 | [Credential helper](#credential-helper) | Custom command declared in `~/.config/cagent/config.yaml` under `credential_helper:` |
+| 6 | [Docker Desktop](#docker-desktop) | Secrets stored by the Docker Desktop backend (no setup on a Desktop install) |
 
 The first provider that has a value wins. You can mix and match — for example, use environment variables for one key and the Docker Agent env file for another.
 
@@ -39,17 +40,7 @@ export ANTHROPIC_API_KEY=sk-ant-...
 docker agent run agent.yaml
 ```
 
-Common variables:
-
-| Variable | Provider |
-| --- | --- |
-| `OPENAI_API_KEY` | OpenAI |
-| `ANTHROPIC_API_KEY` | Anthropic |
-| `GOOGLE_API_KEY` | Google Gemini |
-| `MISTRAL_API_KEY` | Mistral |
-| `OPENROUTER_API_KEY` | OpenRouter |
-| `XAI_API_KEY` | xAI |
-| `NEBIUS_API_KEY` | Nebius |
+See [Provider Credentials](../../providers/overview/index.md#provider-credentials) for the full list of provider-specific environment variables and authentication methods.
 
 MCP tools may require additional variables. For example, the GitHub MCP server needs `GITHUB_PERSONAL_ACCESS_TOKEN`. These are passed to tools via the `env` field in your config:
 
@@ -227,7 +218,7 @@ You can combine methods. For example, store long-lived provider keys in the Dock
 
 Provider keys live in the secret store and are passed to Docker Agent through the chain above — the agent itself never receives them as input. But the **content of a conversation** can still leak credentials: a user pasting a token, a tool returning a config file with embedded keys, a transcript dumped into a prompt.
 
-For that defense-in-depth case, set `redact_secrets: true` on an agent. It scrubs detected secrets out of:
+Secret redaction is enabled by default as a defense in depth. Set `redact_secrets: false` on an agent to opt out; the explicit `true` below is equivalent to omitting the field. It scrubs detected secrets out of:
 
 - the arguments of every outgoing tool call (before the tool sees them),
 - every outgoing chat message (before the model provider sees them), and

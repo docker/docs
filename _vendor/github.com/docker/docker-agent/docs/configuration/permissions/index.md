@@ -19,7 +19,7 @@ Permissions provide fine-grained control over tool execution. You can configure 
 
 ## Safety Modes
 
-Every session runs in a **safety mode** that decides what happens when no permission rule matched a tool call. The runtime labels each call `safe` (safe-listed shell command such as `ls` or `git status`, or a read-only-annotated tool), `destructive` (destructive shell command such as `rm -rf`, or a destructive-annotated tool), or `unknown` — and the mode gates on that label:
+Every session runs in a **safety mode** that decides what happens when no permission rule matched a tool call. The runtime labels each call `safe` (safe-listed shell command such as `ls` or `git status`, or a read-only-annotated tool), `destructive` (destructive shell command such as `rm -rf`, or a destructive-annotated tool), or `unknown` — and the mode gates on that label. Command classification applies to both `shell` and `run_background_job`:
 
 | Mode | safe | destructive | unknown |
 | ---- | ---- | ----------- | ------- |
@@ -31,7 +31,7 @@ Every session runs in a **safety mode** that decides what happens when no permis
 - **`strict`** prompts for every tool call, read-only ones included. Only an `allow:` rule silences a prompt.
 - **`balanced`** runs safe calls silently and asks about everything else.
 - **`restricted`** is the fail-closed profile for unattended/headless runs: safe calls run silently and everything else is **denied without asking** — the mode's fallback never prompts. Custom rules still win: an `allow:` rule can approve a destructive/unknown call, a `deny:` rule always blocks, and session-scoped `ask:` rules still prompt (as can a `preempt_yolo` hook). Restricted is defense in depth against unwanted tool calls, not a security boundary — for real isolation use [sandbox mode](../sandbox/index.md).
-- **`autonomous`** is the legacy `--yolo` behavior: everything runs. Only `deny:` rules, session-scoped `ask:` rules, and `preempt_yolo` hooks still gate.
+- **`autonomous`** is the legacy `--yolo` behavior: everything runs. Only `deny:` rules, session-scoped `ask:` rules, `tool_guard`, and `preempt_yolo` hooks still gate.
 
 Pick a mode with the `--safety` flag (`docker-agent run --safety balanced ...`), the `safety_policy` field on session create (`POST /api/sessions`) or mid-session (`PATCH /api/sessions/:id/safety-policy`), or escalate directly from a confirmation prompt (`B` switches to balanced, `A` to autonomous; the `restricted` fallback never prompts, so the mode is only selected via flag/config/API). Sessions that never choose a mode keep the historical default: read-only tools auto-approve, everything else asks.
 
@@ -106,7 +106,7 @@ permissions:
     - "read_*" # Glob patterns
     - "shell:cmd=ls*" # With argument matching
 
-  # Always ask before running these tools, even if an allow pattern would match
+  # Ask when no deny or allow pattern matches (subject to the safety mode)
   ask:
     - "shell:cmd=git push*"
     - "write_file:path=/home/user/important/*"
@@ -118,7 +118,7 @@ permissions:
     - "dangerous_tool"
 ```
 
-The three lists are evaluated in order `deny` → `allow` → `ask`, so an `ask:` entry lets you add a confirmation layer on top of an otherwise-allowed tool.
+The three lists are evaluated in order `deny` → `allow` → `ask`. An `ask:` entry does not override a matching allow rule; narrow or remove the allow rule where confirmation is required. Team-level asks also yield to the active safety mode as described above.
 
 ## Global Permissions
 
@@ -145,9 +145,9 @@ When both global and agent-level permissions are present, they are merged into a
 
 - **Deny patterns from either source block the tool.** A global deny cannot be overridden by an agent-level allow, and vice versa.
 - **Allow patterns from either source auto-approve the tool** (as long as no deny pattern matches).
-- **Ask patterns from either source force confirmation** (as long as no deny or allow pattern matches).
+- **Ask patterns from either source are considered only when no deny or allow pattern matches.** They prompt in strict or legacy mode, but yield when the active mode is `balanced`, `restricted`, or `autonomous`.
 
-The evaluation order remains the same after merging: **Deny > Allow > Ask > default Ask**.
+The evaluation order remains the same after merging: **Deny > Allow > Ask > safety-mode fallback**.
 
 > [!TIP]
 > **Example: Global deny + agent allow**
@@ -298,15 +298,17 @@ permissions:
 
 Permissions work alongside [hooks](../hooks/index.md). The evaluation order is:
 
-1. Run **`preempt_yolo` pre_tool_use hooks** — security-critical checks that no mode or allow rule can bypass
-2. Check **deny** patterns — if matched, tool is blocked
-3. Check **allow** patterns — if matched, tool is auto-approved
-4. Check **ask** patterns — if matched, the user is prompted directly, skipping the default `pre_tool_use` lane
-5. If no rule matched, apply the **[safety mode](#safety-modes)** to the call's safety label — may auto-approve (or, under `restricted`, deny)
-6. On a mode "ask", run **pre_tool_use hooks** — hooks can allow, deny, or ask
-7. If no decision, **ask user** for confirmation
+1. Run **`tool_input_transform` hooks** — patch arguments before classification, guards, or permission checks
+2. Run **`tool_guard` hooks** — mandatory checks; deny is terminal and ask requires fresh confirmation (unless policy denies the call)
+3. Run **`preempt_yolo` pre_tool_use hooks** — legacy mandatory checks, with their existing session-grant exception
+4. Check **deny** patterns — if matched, tool is blocked
+5. Check **allow** patterns — if matched, tool is auto-approved
+6. Check **ask** patterns — if matched, the user is prompted directly, skipping the default `pre_tool_use` lane
+7. If no rule matched, apply the **[safety mode](#safety-modes)** to the call's safety label — may auto-approve (or, under `restricted`, deny)
+8. On a mode "ask", run **pre_tool_use hooks** — hooks can allow, deny, or ask
+9. If no decision, **ask user** for confirmation
 
-Default-lane hooks only see calls the mode routed to "ask"; they cannot override deny decisions or explicit `ask:` rules.
+Default-lane hooks only see calls the mode routed to "ask"; they cannot override deny decisions or explicit `ask:` rules. If they rewrite arguments, mandatory checks and permission rules are evaluated again before execution. A new ask during this recheck requires fresh confirmation; earlier grants cannot bypass it. See [tool phases](../hooks/index.md#tool-phases-transform-guard-approve).
 
 > [!WARNING]
 > **Security Note**

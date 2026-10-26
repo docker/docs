@@ -147,11 +147,13 @@ first).
 
 ### Failure-safe caching
 
-When a request fails — for example because the model returns an error or the `--request-timeout` expires — the conversation cache is **not updated**. The server clones the cached session before processing each request and only commits the updated session when the turn completes successfully. This means:
+When agent execution fails — for example because the model returns an error or the `--request-timeout` interrupts the run — the conversation cache is **not updated**. The server clones the cached session before processing each request and only commits the updated session when the agent run completes successfully.
 
-- A failed turn leaves the conversation in the same state it was before the request.
-- Clients can safely retry with the same `X-Conversation-Id` after a failure.
-- Transient errors do not corrupt the conversation history.
+The server commits or rolls back the turn and releases the conversation before sending the final JSON response or terminal SSE events (error, finish reason, usage, and `[DONE]`). A follow-up request with the same `X-Conversation-Id` can then proceed. Requests that overlap an active run receive `409 Conflict`.
+
+A reported execution failure leaves the cached history unchanged, so a retry with the same `X-Conversation-Id` starts from the last successful turn. This does not undo tool side effects.
+
+A successful run is committed even if writing its response fails or the client disconnects. If the response is lost, times out in transit, or is incomplete, the client may not know whether the turn succeeded. Retrying can execute the turn and its tools again; the conversation ID is not an idempotency key, and the server does not guarantee exactly-once execution.
 
 ## Authentication
 
@@ -194,29 +196,12 @@ $ docker agent serve chat agent.yaml --cors-origin https://my-ui.example.com
 docker agent serve chat <agent-file>|<registry-ref> [flags]
 ```
 
-| Flag                          | Default            | Description                                                                                                       |
-| ----------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| `-a, --agent <name>`          | (all agents)       | Name of the agent to expose. If omitted, every agent in the config is exposed as a separate model.                |
-| `-l, --listen <addr>`         | `127.0.0.1:8083`   | Address to listen on.                                                                                             |
-| `--cors-origin <origin>`      | (none)             | Allowed CORS origin (e.g. `https://example.com`). Empty disables CORS.                                            |
-| `--api-key <token>`           | (none)             | Required Bearer token clients must present (`Authorization: Bearer <token>`). Empty disables auth.                |
-| `--api-key-env <name>`        | (none)             | Read the required API key from this non-empty environment variable.                                               |
-| `--insecure-no-auth`          | `false`            | Permit unauthenticated non-loopback binding. Use only behind a trusted authentication boundary.                  |
-| `--safety <policy>`           | `restricted`       | Tool safety policy. CLI value overrides agent/runtime configuration.                                               |
-| `--max-request-size <bytes>`  | `1048576` (1 MiB)  | Maximum request body size in bytes. Requests whose body exceeds this limit are rejected with HTTP 413 (Request Entity Too Large) — see [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large) if you hit this. |
-| `--request-timeout <dur>`     | `5m`               | Per-request timeout (covers model + tool calls + streaming).                                                      |
-| `--conversations-max <n>`     | `0`                | Cache up to N conversations server-side, keyed by `X-Conversation-Id`. `0` disables — clients must resend history. |
-| `--conversation-ttl <dur>`    | `30m`              | Idle TTL after which a cached conversation is evicted.                                                            |
-| `--max-idle-runtimes <n>`     | `4`                | Maximum number of idle runtimes pooled per agent. `0` disables pooling.                                           |
-
-All [runtime configuration flags](../cli/index.md#runtime-configuration-flags)
-(`--working-dir`, `--env-from-file`, `--models-gateway`, `--hook-*`, …) are
-also accepted.
+See the [CLI reference](../cli/index.md#docker-agent-serve-chat) for all flags, defaults, and shared runtime options.
 
 > [!NOTE]
 > **What `--max-request-size` does and doesn't cover**
 >
-> This is a finite, process-wide cap on one serialized inbound HTTP request body — it isn't a model context-window limit, and raising it doesn't increase what a provider/model accepts or how large a local attachment/prompt file can be. A larger cap also means the server buffers more memory per request from an unauthenticated or malicious client, so weigh that against your deployment's exposure. If a reverse proxy or gateway sits in front of this server, it may enforce its own, lower cap regardless of this flag. See [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large) for full diagnosis.
+> This is a finite, process-wide cap on one serialized inbound HTTP request body — it isn't a model context-window limit, and raising it doesn't increase what a provider/model accepts or how large a local attachment/prompt file can be. A larger cap also means the server buffers more memory per request from an unauthenticated or malicious client, so weigh that against your deployment's exposure. If a reverse proxy or gateway sits in front of this server, it may enforce its own, lower cap regardless of this flag. See [Troubleshooting: HTTP 413](../../guides/troubleshooting/index.md#http-413-request-body-too-large) for full diagnosis.
 
 ## Image Inputs
 
