@@ -27,7 +27,10 @@ When available, Docker Hub details include the publisher, pull and star counts,
 last update, architectures, and a security attestations indicator.
 
 1. Open **Kits** in the Console.
-2. Search by name or description.
+2. Search by name or description. If your account has custom kits enabled,
+   use **v2 kits** and **v3 kits** to choose which formats to show, and select
+   **Community kits** to include community results. Use pagination to browse
+   additional results.
 3. Select **Run** on a kit to open the sandbox launcher with that kit selected.
 4. Review its credentials, network policies, tools, compute size, and
    timer, then select **Run** in the launcher to create the sandbox.

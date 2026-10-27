@@ -221,11 +221,12 @@ or compute size. Configure these options before selecting **Run**:
 
 | Option | What to choose |
 | --- | --- |
+| Sandbox name | Select **randomly** to enter a name, or keep the generated name. |
 | Agent credentials | Add the API keys or tokens your kit needs. Saved credentials are reused by default; deselect optional credentials you don't want to include. See [Secrets](secrets.md). |
 | GitHub token | Provide a token for Copilot or for cloning private repositories and pushing changes. Copilot uses the same token for both. Repository access is optional for other agents. See [GitHub credential](secrets.md#github-credential). |
 | Network policies | Review the hosts and services the sandbox can reach. See [Network policies](policies.md). |
 | MCP tools | Choose the servers your agent can use and authorize them if prompted. See [MCP](mcp.md). |
-| Compute and platform | Choose CPU and memory resources. Under **Platform**, use **auto** or a platform supported by the kit's image. See [Sandbox platforms](sandboxes.md#choose-a-platform). |
+| Compute and platform | Choose a size based on the CPU and memory your task needs, from Micro for light tasks to XL for larger workloads. The picker shows each size's resources and hourly price. Under **Platform**, use **auto** or a platform supported by the kit's image. See [Sandbox platforms](sandboxes.md#choose-a-platform). |
 | Timer | Under **Run for**, choose 1 to 24 hours. Under **When the time is up**, choose **Stop**, **Delete**, or **Restart** if offered. See [Lifecycle actions](sandboxes.md#manage-the-lifecycle). |
 
 The launcher remembers your policy selections from the previous launch in the
