@@ -17,6 +17,38 @@ aliases:
 
 [Subscribe to security RSS feed](/security/security-announcements/index.xml)
 
+## Docker Desktop 4.97.0 security update: CVE-2026-114409
+
+A vulnerability in Docker Desktop was fixed on October 26 in the
+[4.97.0](/manuals/desktop/release-notes.md#4970) release:
+
+- Addressed [CVE-2026-114409](https://www.cve.org/cverecord?id=CVE-2026-114409),
+  where Docker Desktop could write third-party API keys and OAuth access tokens
+  in cleartext to local application logs and diagnostics bundles. This affected
+  Docker Desktop versions before 4.97.0 and was caused by insufficient IPC
+  payload redaction. An attacker with read access to these files could obtain
+  the credentials. These OAuth tokens are not Docker account tokens.
+
+  Docker Desktop 4.94.0 and 4.95.0 addressed the known logging paths, but logs
+  containing credentials can remain after upgrading. Docker Desktop 4.97.0 fixes
+  the issue and includes cleanup of existing host logs and crash dumps.
+
+  If you've generated or shared diagnostics bundles with Docker Desktop 4.96.x
+  or earlier, or kept copies of Docker Desktop logs elsewhere, delete or
+  sanitize them.
+
+Update to Docker Desktop
+[4.97.0](/manuals/desktop/release-notes.md#4970).
+
+## Docker Desktop 4.97.0 security update: CVE-2026-99999
+
+A vulnerability in Docker Desktop was fixed on October 26 in the
+[4.97.0](/manuals/desktop/release-notes.md#4970) release:
+
+- Addressed [CVE-2026-99999](https://www.cve.org/cverecord?id=CVE-2026-99999),
+  a kernel vulnerability where a container could exploit bad IPv4 checksum
+  metadata via TUN or `AF_PACKET` to corrupt the VM's network stack.
+
 ## Docker Sandboxes response to eMudhra CA compromise
 
 _Last updated October 21, 2026_
