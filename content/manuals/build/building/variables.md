@@ -304,31 +304,32 @@ Note that these variables aren't used to configure the build container;
 they aren't available inside the build and they have no relation to the `ENV` instruction.
 They're used to configure the Buildx client, or the BuildKit daemon.
 
-| Variable                                                                    | Type              | Description                                                      |
-|-----------------------------------------------------------------------------|-------------------|------------------------------------------------------------------|
-| [BUILDKIT_COLORS](#buildkit_colors)                                         | String            | Configure text color for the terminal output.                    |
-| [BUILDKIT_HOST](#buildkit_host)                                             | String            | Specify host to use for remote builders.                         |
-| [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                               |
-| [BUILDKIT_TTY_LOG_LINES](#buildkit_tty_log_lines)                           | String            | Number of log lines (for active steps in TTY mode).              |
-| [BUILDX_BAKE_FILE](#buildx_bake_file)                                       | String            | Specify the build definition file(s) for `docker buildx bake`.   |
-| [BUILDX_BAKE_FILE_SEPARATOR](#buildx_bake_file_separator)                   | String            | Specify the file-path separator for `BUILDX_BAKE_FILE`.          |
-| [BUILDX_BAKE_GIT_AUTH_HEADER](#buildx_bake_git_auth_header)                 | String            | HTTP authentication scheme for remote Bake files.                |
-| [BUILDX_BAKE_GIT_AUTH_TOKEN](#buildx_bake_git_auth_token)                   | String            | HTTP authentication token for remote Bake files.                 |
-| [BUILDX_BAKE_GIT_SSH](#buildx_bake_git_ssh)                                 | String            | SSH authentication for remote Bake files.                        |
-| [BUILDX_BUILDER](#buildx_builder)                                           | String            | Specify the builder instance to use.                             |
-| [BUILDX_CONFIG](#buildx_config)                                             | String            | Specify location for configuration, state, and logs.             |
-| [BUILDX_CPU_PROFILE](#buildx_cpu_profile)                                   | String            | Generate a `pprof` CPU profile at the specified location.        |
-| [BUILDX_EXPERIMENTAL](#buildx_experimental)                                 | Boolean           | Turn on experimental features.                                   |
-| [BUILDX_GIT_CHECK_DIRTY](#buildx_git_check_dirty)                           | Boolean           | Enable dirty Git checkout detection.                             |
-| [BUILDX_GIT_INFO](#buildx_git_info)                                         | Boolean           | Remove Git information in provenance attestations.               |
-| [BUILDX_GIT_LABELS](#buildx_git_labels)                                     | String \| Boolean | Add Git provenance labels to images.                             |
-| [BUILDX_MEM_PROFILE](#buildx_mem_profile)                                   | String            | Generate a `pprof` memory profile at the specified location.     |
-| [BUILDX_METADATA_PROVENANCE](#buildx_metadata_provenance)                   | String \| Boolean | Customize provenance information included in the metadata file.  |
-| [BUILDX_METADATA_WARNINGS](#buildx_metadata_warnings)                       | String            | Include build warnings in the metadata file.                     |
-| [BUILDX_NO_DEFAULT_ATTESTATIONS](#buildx_no_default_attestations)           | Boolean           | Turn off default provenance attestations.                        |
-| [BUILDX_NO_DEFAULT_OCI_ARTIFACT](#buildx_no_default_oci_artifact)           | Boolean           | Turn off OCI artifact storage for attestations by default.       |
-| [BUILDX_NO_DEFAULT_LOAD](#buildx_no_default_load)                           | Boolean           | Turn off loading images to image store by default.               |
-| [EXPERIMENTAL_BUILDKIT_SOURCE_POLICY](#experimental_buildkit_source_policy) | String            | Specify a BuildKit source policy file.                           |
+| Variable                                                                    | Type              | Description                                                     |
+|-----------------------------------------------------------------------------|-------------------|-----------------------------------------------------------------|
+| [BUILDKIT_COLORS](#buildkit_colors)                                         | String            | Configure text color for the terminal output.                   |
+| [BUILDKIT_HOST](#buildkit_host)                                             | String            | Specify host to use for remote builders.                        |
+| [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                              |
+| [BUILDKIT_TTY_LOG_LINES](#buildkit_tty_log_lines)                           | String            | Number of log lines (for active steps in TTY mode).             |
+| [BUILDX_BAKE_FILE](#buildx_bake_file)                                       | String            | Specify the build definition file(s) for `docker buildx bake`.  |
+| [BUILDX_BAKE_FILE_SEPARATOR](#buildx_bake_file_separator)                   | String            | Specify the file-path separator for `BUILDX_BAKE_FILE`.         |
+| [BUILDX_BAKE_GIT_ADVICE](#buildx_bake_git_advice)                           | Boolean           | Show Git advice when fetching remote Bake definitions.          |
+| [BUILDX_BAKE_GIT_AUTH_HEADER](#buildx_bake_git_auth_header)                 | String            | HTTP authentication scheme for remote Bake files.               |
+| [BUILDX_BAKE_GIT_AUTH_TOKEN](#buildx_bake_git_auth_token)                   | String            | HTTP authentication token for remote Bake files.                |
+| [BUILDX_BAKE_GIT_SSH](#buildx_bake_git_ssh)                                 | String            | SSH authentication for remote Bake files.                       |
+| [BUILDX_BUILDER](#buildx_builder)                                           | String            | Specify the builder instance to use.                            |
+| [BUILDX_CONFIG](#buildx_config)                                             | String            | Specify location for configuration, state, and logs.            |
+| [BUILDX_CPU_PROFILE](#buildx_cpu_profile)                                   | String            | Generate a `pprof` CPU profile at the specified location.       |
+| [BUILDX_EXPERIMENTAL](#buildx_experimental)                                 | Boolean           | Turn on experimental features.                                  |
+| [BUILDX_GIT_CHECK_DIRTY](#buildx_git_check_dirty)                           | Boolean           | Enable dirty Git checkout detection.                            |
+| [BUILDX_GIT_INFO](#buildx_git_info)                                         | Boolean           | Remove Git information in provenance attestations.              |
+| [BUILDX_GIT_LABELS](#buildx_git_labels)                                     | String \| Boolean | Add Git provenance labels to images.                            |
+| [BUILDX_MEM_PROFILE](#buildx_mem_profile)                                   | String            | Generate a `pprof` memory profile at the specified location.    |
+| [BUILDX_METADATA_PROVENANCE](#buildx_metadata_provenance)                   | String \| Boolean | Customize provenance information included in the metadata file. |
+| [BUILDX_METADATA_WARNINGS](#buildx_metadata_warnings)                       | String            | Include build warnings in the metadata file.                    |
+| [BUILDX_NO_DEFAULT_ATTESTATIONS](#buildx_no_default_attestations)           | Boolean           | Turn off default provenance attestations.                       |
+| [BUILDX_NO_DEFAULT_OCI_ARTIFACT](#buildx_no_default_oci_artifact)           | Boolean           | Turn off OCI artifact storage for attestations by default.      |
+| [BUILDX_NO_DEFAULT_LOAD](#buildx_no_default_load)                           | Boolean           | Turn off loading images to image store by default.              |
+| [EXPERIMENTAL_BUILDKIT_SOURCE_POLICY](#experimental_buildkit_source_policy) | String            | Specify a BuildKit source policy file.                          |
 
 BuildKit also supports a few additional configuration parameters. Refer to
 [BuildKit built-in build args](/reference/dockerfile.md#buildkit-built-in-build-args).
@@ -479,6 +480,28 @@ This is useful if your file paths contain the default separator character or if 
 export BUILDX_BAKE_PATH_SEPARATOR=@
 export BUILDX_BAKE_FILE=file1.hcl@file2.hcl
 ```
+
+### BUILDX_BAKE_GIT_ADVICE
+
+Set `BUILDX_BAKE_GIT_ADVICE=1` to show Git advice messages while fetching a
+remote Bake definition. Advice includes messages such as Git's detached HEAD
+notice. Advice is disabled by default.
+
+```console
+$ BUILDX_BAKE_GIT_ADVICE=1 docker buildx bake --progress=plain \
+    https://github.com/user/myrepo.git
+```
+
+This variable controls fetching the Bake definition. To show advice for Git
+build contexts, pass the `BUILDKIT_GIT_ADVICE` build argument instead:
+
+```console
+$ docker buildx build --progress=plain --build-arg BUILDKIT_GIT_ADVICE=1 \
+    https://github.com/user/myrepo.git
+```
+
+See the
+[built-in arguments](/reference/dockerfile.md#buildkit-built-in-build-args).
 
 ### BUILDX_BAKE_GIT_AUTH_HEADER
 
