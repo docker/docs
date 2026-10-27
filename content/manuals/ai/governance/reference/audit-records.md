@@ -26,8 +26,8 @@ action.
 | `decision`           | Governance decision for evaluation records.                                                                                  |
 | `username`           | The signed-in Docker user's Docker Hub username.                                                                             |
 | `user_email`         | The signed-in Docker user's email address.                                                                                   |
-| `org_id`             | ID of the organization whose governance policy is in effect.                                                                 |
-| `org_name`           | Display name of the organization whose governance policy is in effect.                                                       |
+| `org_id`             | ID of the organization whose policy is in effect.                                                                           |
+| `org_name`           | Display name of the organization whose policy is in effect.                                                                 |
 | `audit_session_id`   | Identifies the daemon session that produced the record.                                                                      |
 | `resource_id`        | Target of the evaluation, such as a host and port, file path, or tool.                                                       |
 | `os`                 | Operating system that produced the record.                                                                                   |
@@ -61,11 +61,11 @@ action.
 
 ## Categories
 
-| Category                    | Description                                                   |
-| --------------------------- | ------------------------------------------------------------- |
-| `AUDIT_CATEGORY_MANAGEMENT` | Session lifecycle, policy sync, and configuration events.     |
-| `AUDIT_CATEGORY_EVALUATION` | Governance policy decisions, such as allow, deny, or consent. |
-| `AUDIT_CATEGORY_EXECUTION`  | Outcomes after an evaluated action runs.                      |
+| Category                    | Description                                                                |
+| --------------------------- | -------------------------------------------------------------------------- |
+| `AUDIT_CATEGORY_MANAGEMENT` | Session lifecycle, policy sync, and configuration events.                  |
+| `AUDIT_CATEGORY_EVALUATION` | Policy decisions for individual requests, such as allow, deny, or consent. |
+| `AUDIT_CATEGORY_EXECUTION`  | Outcomes after an evaluated action runs.                                   |
 
 Session lifecycle records mark the start and end of each daemon run. Evaluation
 records share the run's `audit_session_id`, so you can correlate every decision
@@ -88,7 +88,7 @@ Docker evaluated it.
 
 | Mode      | Description                                                                     |
 | --------- | ------------------------------------------------------------------------------- |
-| `enforce` | Your organization's governance policy is enforced.                              |
+| `enforce` | Your organization policy is enforced.                                           |
 | `audit`   | Docker records the decision for observability but doesn't enforce policy.       |
 | `off`     | Governance isn't active. Docker still writes the record to the local audit log. |
 

@@ -2,7 +2,7 @@
 title: Configure audit delivery
 linkTitle: Configure delivery
 weight: 10
-description: Configure local and cloud delivery for Docker AI Governance Audit Logs, and review who changed the delivery settings.
+description: Configure local and cloud delivery for Docker AI Governance audit logs, and review who changed the delivery settings.
 keywords: docker sandboxes, audit delivery, AI Governance, audit logs, retention, cloud delivery, AI Platform
 aliases:
   - /ai/sandboxes/governance/audit/configure/
@@ -20,7 +20,7 @@ to Docker Cloud, or to both. For how the two delivery modes differ, see
 Your organization needs:
 
 - A Docker [AI Governance plan](/manuals/subscription-billing/plans/ai-governance.md)
-- An enforced organization governance policy
+- An enforced organization policy
 - Organization owner access, or a
   [custom role](/manuals/security/roles-and-permissions/custom-roles/_index.md)
   with AI Governance audit permissions

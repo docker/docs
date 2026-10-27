@@ -26,23 +26,20 @@ sandbox can reach the server. To prevent access through both paths, block the
 server in MCP access policy and block its network destination in network access
 policy.
 
-Unlike [organization network access policies](network.md) and
-[organization filesystem access policies](filesystem.md), MCP policies are
-organization policies written in Cedar. In the
-[AI Governance API](/reference/api/ai-governance/), an MCP policy is a
-`cedar_v1` policy whose rules are the Cedar statements in the policy text,
-rather than separate rules managed through the rules endpoints. Docker defines
-the `MCP` namespace, including the actions, resource types, attributes, and
-approval behavior that policies can match. This page focuses on representative access patterns. For Docker's exact
-policy surface, see the [MCP policy reference](../../reference/mcp-policy.md). For
-Cedar syntax and language semantics, see the
-[Cedar documentation](https://docs.cedarpolicy.com/).
+MCP policies are written in Cedar. Docker defines the `MCP` namespace your
+statements use, including the actions, resource types, attributes, and approval
+annotation you can match. The examples on this page cover common access
+patterns. For every action and attribute, see the
+[MCP policy reference](../../reference/mcp-policy.md), and for Cedar syntax,
+see the [Cedar documentation](https://docs.cedarpolicy.com/). If you manage
+policies through the [AI Governance API](/reference/api/ai-governance/), an MCP
+policy is a `cedar_v1` policy whose statements are part of the policy text
+rather than separate rules.
 
 This page explains where MCP policy applies, how to choose between an allowlist
 and a blocklist, example policies for common tasks, and when your changes reach
 developers. To create an MCP access policy and set its scope, see
-[Create and manage organization policies](create-manage.md). MCP policy
-decisions are recorded in [audit logs](../audit/_index.md).
+[Create and manage organization policies](create-manage.md).
 
 ## Where MCP policy applies
 
@@ -54,30 +51,33 @@ doesn't automatically govern the other.
 | Whether a server can be registered         | When a developer runs `sbx mcp add`         | The registered name and resolved server attributes, such as `identityURL`  |
 | What agents can do through the MCP gateway | When the gateway handles a governed request | The registered server name, tool annotations, resource URI, or prompt name |
 
-Registration rules affect future registrations. They don't remove a saved
-registration or prevent an existing registration from being loaded with
-`sbx mcp load`. Use-time rules govern tool calls, resource reads, and prompt
-retrieval from servers that are already registered or loaded.
+Registration rules apply when a developer registers a server. They affect only
+future registrations, so they don't remove a saved registration or stop an
+existing one from being loaded with `sbx mcp load`.
 
-Server names are chosen during registration. Registration rules can match the
-chosen name and resolved server identity together. At use time, tools,
-resources, and prompts are associated with the registered name, so rules for an
-existing server must match every name under which it was registered.
+Use-time rules apply to tool calls, resource reads, and prompt retrieval from
+servers that are already registered or loaded. They don't hide anything:
+registrations stay saved, and tool and resource listings can still show
+entries that policy denies when an agent tries to use them.
+
+Developers choose a server's name when they register it. Registration rules can
+match that name together with the resolved server identity. At use time, tools,
+resources, and prompts are tied to the registered name, so rules for an
+existing server must match every name it was registered under.
 
 Built-in gateway tools, such as `mcp-add`, `code-mode`, and OAuth authorization
-helpers, are also governed at use time. They are `MCP::Primordial` resources
-rather than tools associated with a registered server. For details, see
+helpers, are governed at use time too. They're `MCP::Primordial` resources
+rather than tools of a registered server. For details, see
 [Built-in gateway tools](../../../sandboxes/mcp-gateway.md#built-in-gateway-tools).
-
-Use-time policy doesn't hide or remove existing registrations. Tool and
-resource listings can also include entries that policy denies when an agent
-tries to use them.
 
 ## Allowlist and blocklist policies
 
 When MCP policy enforcement is active for a user, registration and governed MCP
 requests are denied unless a matching `permit` allows them. A matching `forbid`
-overrides any `permit`, including a permit with `@requireApproval`.
+overrides any `permit`, including a permit with `@requireApproval`. When
+enforcement isn't active, the gateway doesn't evaluate Cedar policy and permits
+all MCP activity. Unlike network access, MCP has no local preset that restricts
+it.
 
 Use permits for an allowlist policy. For a blocklist policy that grants MCP
 activity except for explicit restrictions, start with an actionless permit:
@@ -89,10 +89,9 @@ permit (principal, action, resource);
 This statement permits every MCP action that reaches Cedar evaluation. Add
 `forbid` statements for the restrictions the policy must enforce.
 
-Policy scope supplies the principal. Use organization or team scope instead of
-matching users, teams, tenants, or roles in Cedar. If MCP policy enforcement
-isn't active for a user, the gateway doesn't evaluate Cedar policy and permits
-MCP activity. MCP doesn't have a local preset equivalent to network policy.
+You don't need to match users, teams, tenants, or roles in Cedar. The policy's
+organization or team scope decides who it applies to and supplies the
+principal.
 
 ## Example policies
 

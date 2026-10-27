@@ -9,12 +9,10 @@ keywords: docker sandboxes, organization policy, create policy, Docker Home, tea
 {{< summary-bar feature_name="AI Governance" >}}
 
 Create and manage organization policies in Docker Home. The steps are the same
-for network, filesystem, and MCP policies. Only the rules you add differ. For
-how scope, rule evaluation, and precedence work, see
-[Organization policies](_index.md).
-
+for network, filesystem, and MCP policies, and only the rules you add differ.
 To manage policies programmatically instead, use the
-[AI Governance API](/reference/api/ai-governance/).
+[AI Governance API](/reference/api/ai-governance/). For how scope, rule
+evaluation, and precedence work, see [Organization policies](_index.md).
 
 ## Before you begin
 
@@ -52,26 +50,22 @@ For the number of policies and rules you can create, see
 
 ## Scope policies to teams
 
-A policy's **Scope** controls who it applies to. Set it to **Organization** to
-apply the policy to every licensed member, or to **Teams** to apply it only to
-licensed members of the teams you select. For more details on how org-wide and
-team-scoped policies combine, see
-[Policy scope](_index.md#policy-scope).
+To scope a policy to teams, the teams must already exist in your organization.
+Create teams and manage their members in one of two ways:
 
-Team scoping targets your organization's existing
-[teams](/manuals/accounts/organization/manage/manage-a-team.md), so a team must
-exist before you can scope a policy to it. Create teams and manage their members
-in one of two ways:
-
-- Manually, in Docker Home.
+- Manually, by
+  [creating teams](/manuals/accounts/organization/manage/manage-a-team.md) in
+  Docker Home.
 - Automatically, by using
   [group mapping](/manuals/security/provisioning/scim/group-mapping.md)
   to synchronize your identity provider's groups with the teams in your
   organization. Group mapping creates teams that don't already exist and keeps
   their membership in step with your IdP groups.
 
-Because policies apply by team, a user's policies update automatically as their
-team membership changes, including changes synced from your IdP.
+A team-scoped policy follows team membership, so when someone joins or leaves a
+team, including through IdP sync, the policies that apply to them update
+automatically. For how org-wide and team-scoped policies combine, see
+[Policy scope](_index.md#policy-scope).
 
 ## Edit or delete a policy
 
@@ -93,7 +87,7 @@ details, see
 
 ## Configure a support message
 
-Admins can add an optional support message that appears after the policy denial
+Administrators can add an optional support message that appears after the policy denial
 details when a sandbox action is blocked by organization governance. Use it to
 point members to an internal support channel, ticket queue, or security contact.
 

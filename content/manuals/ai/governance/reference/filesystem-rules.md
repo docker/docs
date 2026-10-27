@@ -1,11 +1,11 @@
 ---
 title: Filesystem mount rule syntax
 weight: 20
-description: Syntax for sandbox filesystem rules, including path patterns across macOS, Linux, Windows, and WSL.
+description: Syntax for sandbox filesystem mount rules, including path patterns across macOS, Linux, Windows, and WSL.
 keywords: docker sandboxes, filesystem rules, path patterns, workspace mount, rule syntax
 ---
 
-Filesystem mount rules are written in organization
+Filesystem mount rules are written in
 [organization filesystem access policies](../organization/policies/filesystem.md).
 Developers can't add them with local policy. Filesystem mount rules use the
 actions `read` and `write`. Resources are host paths that sandboxes can mount
@@ -46,6 +46,3 @@ Wildcards behave the same way in every path format:
 Use `**` to match a directory tree recursively. A single `*` matches within one
 path segment and won't cross a path separator. For example, `~/**` matches all
 paths under the home directory, while `~/*` matches only its direct children.
-
-For organization policy configuration and enforcement details, see
-[Organization filesystem access policies](../organization/policies/filesystem.md).

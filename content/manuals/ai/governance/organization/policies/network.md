@@ -22,14 +22,12 @@ For destinations you want a person to confirm, a policy can require approval
 instead of granting access outright. This page explains what a rule can match,
 how approval works, and when your changes reach developers.
 
-To create a network access policy, see
-[Create and manage organization policies](create-manage.md). For hostname
-patterns, CIDR ranges, and how HTTP rules combine with network rules, see
-[Network and HTTP rule syntax](../../reference/network-rules.md). Developers can
-also add network rules on their own machines with
-[local policy](../../local/network-rules.md). For how local and organization
-rules combine, see
+Developers can also add network rules on their own machines with
+[local policy](../../local/network-rules.md), but under an enforced
+organization policy, only your allow rules grant access. For more details, see
 [How organization policy relates to local and kit rules](_index.md#how-organization-policy-relates-to-local-and-kit-rules).
+To create a network access policy, see
+[Create and manage organization policies](create-manage.md).
 
 ## What a network rule can match
 
@@ -84,8 +82,24 @@ that policy. A destination stays directly reachable only when no policy that
 allows it requires approval. If a policy that requires approval also matches,
 the request needs approval regardless of what the other policies allow.
 
+A request is handled as follows:
+
+```mermaid
+flowchart TD
+  request["Sandbox sends an outbound request"] --> denied{"Does any deny rule match?"}
+  denied -->|"Yes, from any source"| block["Block request"]
+  denied -->|"No"| orgallow{"Does an organization policy allow it?"}
+  orgallow -->|"No"| block
+  orgallow -->|"Yes"| needs{"Does any allowing policy require approval?"}
+  needs -->|"No"| allow["Allow request"]
+  needs -->|"Yes"| approved{"Did the developer already approve this destination?"}
+  approved -->|"Yes"| allow
+  approved -->|"No"| ask["Block request and ask the developer to approve"]
+  ask -.->|"Later requests after approval"| allow
+```
+
 Only a destination the developer has already approved satisfies the requirement.
-Preset rules, kit-defined rules, and rules the developer added with `sbx policy
+Preset rules, kit rules, and rules the developer added with `sbx policy
 allow network` don't answer it. An approval also can't reach a destination the
 organization doesn't allow at all, and it can't override a deny rule. To
 withdraw a destination, add a deny rule, which takes precedence over any
@@ -95,19 +109,12 @@ Developers respond to approval requests from the command line. For what they
 see and how they respond, see
 [Respond to approval requests](../../local/approvals.md).
 
-Network approval is separate from the MCP `@requireApproval` annotation. An MCP
-approval confirms a single call within the session and creates no rule, while an
-approved network destination stays allowed until you remove the rule. For more
-details, see [Organization MCP access policies](mcp.md).
-
 ## When changes take effect
 
 Network policy is evaluated on every outbound request. Once a policy change has
 [synced to the developer's machine](_index.md#when-policy-changes-reach-developers),
-it applies immediately to subsequent requests. HTTP rules are evaluated per
-request in the same way.
+it applies immediately to subsequent requests.
 
 An approval requirement applies from the point the policy change syncs.
 Destinations a developer already approved stay reachable, because the approval
-is recorded on the developer's machine. To withdraw one, add a deny rule. A
-deny takes precedence over a recorded approval.
+is recorded on the developer's machine.

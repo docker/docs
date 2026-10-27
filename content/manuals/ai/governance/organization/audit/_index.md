@@ -1,5 +1,5 @@
 ---
-title: AI Governance Audit Logs
+title: Audit logs
 linkTitle: Audit logs
 weight: 40
 description: Capture, view, export, and collect structured audit records for Docker AI Governance policy decisions.
@@ -11,10 +11,10 @@ aliases:
 
 {{< summary-bar feature_name="AI Governance" >}}
 
-Your organization's policies decide what sandboxes can do. AI Governance Audit
-Logs show you what happened: each time a policy decides a request from a
-governed developer's sandbox, a record captures who made the request, what it
-was, and what the policy decided. You can review the records in Docker Home,
+Your organization's policies decide what sandboxes can do. Audit logs show you
+what happened: each time a policy decides a request from a governed
+developer's sandbox, a record captures who made the request, what it was, and
+what the policy decided. You can review the records in Docker Home,
 export them, forward them to your SIEM, or collect them from each machine.
 
 This page explains what audit logs record, what you need to generate them,
@@ -28,14 +28,12 @@ where records go, and what you can do with them.
 
 ## What audit logs record
 
-AI Governance Audit Logs record Docker AI Governance activity for your
-organization. Each record captures the principal, action, target, decision, and
-time for a governance event. Records contain metadata only. They don't contain
-prompt content, agent output, or parameter values.
+Audit logs cover two kinds of events from Docker Sandboxes: the policy decision
+made for each request, and sandbox session lifecycle events.
 
-Audit logs cover Docker Sandboxes policy decisions and sandbox session events.
-Other Docker AI sources can emit records through the same schema as they
-become available. For every field a record can contain, see the
+Records contain metadata only, such as who made a request, what it targeted,
+and what the policy decided. They never contain prompt content, agent output,
+or parameter values. For every field a record can contain, see the
 [Audit record reference](../../reference/audit-records.md).
 
 ## Requirements
@@ -44,7 +42,7 @@ Audit logs are exposed when AI Governance is enabled for your organization.
 To use them, your organization needs:
 
 - A Docker [AI Governance plan](/manuals/subscription-billing/plans/ai-governance.md)
-- An enforced organization governance policy
+- An enforced organization policy
 - An organization owner, or a user with a
   [custom role](/manuals/security/roles-and-permissions/custom-roles/_index.md)
   that includes AI Governance audit permissions, to configure delivery and view
@@ -52,9 +50,8 @@ To use them, your organization needs:
 
 Records come only from developers whose activity your organization governs.
 Docker Sandboxes send audit records only for signed-in users who have an AI
-Governance license and are governed by an enforced centralized
-[organization policy](../_index.md). Users without both don't generate audit
-data, and they don't appear in audit events or SIEM forwarding output.
+Governance license and are governed by an enforced organization policy. Users
+without both don't generate audit data, and they don't appear in audit events or SIEM forwarding output.
 
 ## Delivery modes
 
@@ -72,17 +69,11 @@ To choose which delivery modes your organization uses, see
 
 ### Where records are stored
 
-Local audit files stay on the host that produced them. Local delivery is
-independent of [cloud delivery](configure.md), so you can use local files with
-cloud delivery on or off. To confirm that a machine is governed and writes
-records, run `sbx policy ls`. The output includes a `Governance: Managed by
-<org>` line when an organization policy is in effect.
+With local delivery, the sandbox daemon on each machine writes audit records to
+its audit directory. Local files stay on the host that produced them, whether
+cloud delivery is on or off.
 
-The daemon writes audit records, not the CLI. Running a command such as
-`sbx create` sends a request to the daemon, and the daemon emits the resulting
-record to its own audit directory.
-
-The default location depends on your operating system:
+The directory follows each operating system's convention for application logs:
 
 | OS      | Default path                                                      |
 | ------- | ----------------------------------------------------------------- |
@@ -90,20 +81,15 @@ The default location depends on your operating system:
 | Linux   | `${XDG_STATE_HOME:-~/.local/state}/sandboxes/sandboxes/auditkit/` |
 | Windows | `%LOCALAPPDATA%\DockerSandboxes\sandboxes\logs\auditkit\`         |
 
-The directory layout differs by platform because each operating system places
-application logs in its own conventional location.
+Each file is named `audit-<utc-timestamp>-<process-uuid>-<seq>.jsonl`. The
+daemon writes records to a temporary `.tmp` file first, then renames it to
+`.jsonl` when it reaches a rotation threshold or shuts down cleanly. By
+default, the threshold is 5 minutes, 1000 events, or 50 MiB, whichever comes
+first. Collect only `.jsonl` files, because `.tmp` files are still being
+written.
 
-Files are named `audit-<utc-timestamp>-<process-uuid>-<seq>.jsonl`.
-
-The daemon writes in-progress records to a temporary `.tmp` file and
-finalizes it into a `.jsonl` file by atomic rename. Finalization happens at a
-rotation threshold: by default, 5 minutes, 1000 events, or 50 MiB, whichever
-comes first. Finalization also happens when the daemon shuts down cleanly. Only
-`.jsonl` files are complete. Treat `.tmp` files as incomplete and don't collect
-them.
-
-Sandboxes never delete `.jsonl` files. Retention and cleanup are the
-responsibility of your log shipper or your own housekeeping.
+Sandboxes never delete `.jsonl` files, so retention and cleanup are up to your
+log shipper or your own housekeeping.
 
 ## What you can do with records
 
@@ -117,8 +103,6 @@ How you use audit records depends on where they go:
 - With local delivery, collect the `.jsonl` files from each machine with your
   own log shipper. For more details, see
   [Collect local audit files with a log shipper](siem.md#collect-local-audit-files-with-a-log-shipper).
-
-To set up delivery, see [Configure audit delivery](configure.md).
 
 ## Data handling
 

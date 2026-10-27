@@ -113,7 +113,3 @@ need to match the root domain and its subdomains.
 
 Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
 `2001:db8::/32`.
-
-For local and organization policy configuration, see
-[Manage local network rules](../local/network-rules.md) and
-[Organization network access policies](../organization/policies/network.md).

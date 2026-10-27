@@ -133,9 +133,9 @@ filtered listing with no HTTP rules shows an unlabeled count, such as
 For more details, see
 [HTTP method and path](../reference/network-rules.md#http-method-and-path).
 
-## List filesystem rules
+## List filesystem mount rules
 
-Filesystem rules control which host paths a sandbox can mount as a workspace.
+Filesystem mount rules control which host paths a sandbox can mount as a workspace.
 To list only those rules, pass `--type filesystem`:
 
 ```console

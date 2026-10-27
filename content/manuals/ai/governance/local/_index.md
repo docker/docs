@@ -9,22 +9,29 @@ aliases:
   - /ai/sandboxes/governance/local/
 ---
 
-Local policy decides which network destinations the sandboxes on your machine
-can reach. You manage it with the `sbx policy` command, and it holds the network
-access rules for your machine. You start from a preset, add rules of your own,
-and kits add the rules their agents need.
+Local policy lets you, the developer, decide which network destinations the
+sandboxes on your machine can reach. You manage it with the `sbx policy`
+command: you start from a preset and add rules of your own, and the kits your
+sandboxes use add the rules their agents need. Local policy covers network
+access only, so unless an organization policy applies to you, sandboxes can
+mount any host path and use any MCP server you register.
 
 ## How local policy works
 
-Local policy covers network access. Rules usually match a hostname, and HTTP
-traffic can also be matched by method, path, and query parameters. Non-HTTP
-TCP traffic, including SSH, can be allowed with a hostname rule, for example
-`sbx policy allow network "myhost:22"`, or with an address-based rule. UDP requires the experimental
-feature and policy rules described in [Allow outbound
-UDP](network-rules.md#allow-outbound-udp). ICMP is blocked.
+Every outbound TCP request from a sandbox, including HTTP and SSH, passes
+through a proxy on your host, which checks the request against your rules
+before it leaves your machine. A rule names a destination and says whether to
+allow or deny it. Other protocols are blocked by default. UDP needs the
+experimental feature described in
+[Allow outbound UDP](network-rules.md#allow-outbound-udp), and ICMP is always
+blocked.
 
-For domain patterns, wildcards, and CIDR ranges, see
-[Network and HTTP rule syntax](../reference/network-rules.md).
+Most rules match a hostname, such as `api.github.com`, or an IP address or CIDR
+range. For HTTP traffic, a rule can also match the request's method, path, and
+query parameters, so you can allow part of an API without allowing all of it. A
+rule for other TCP traffic, such as SSH, can name a port, for example
+`sbx policy allow network "myhost:22"`. For the full pattern syntax, including
+wildcards, see [Network and HTTP rule syntax](../reference/network-rules.md).
 
 ## Start from a preset
 
@@ -34,14 +41,15 @@ the CLI prompts you to choose one when you run a sandbox in an interactive
 terminal. If a preset is already set, including one carried over from an
 earlier installation, the CLI uses it without prompting.
 
-| Preset      | Description                                                                                                                                       |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Open        | All outbound TCP traffic is allowed. Equivalent to adding a wildcard allow rule with `sbx policy allow network "**"`. |
-| Balanced    | Default deny, with a baseline allowlist covering AI provider APIs, package managers, code hosts, container registries, and common cloud services. |
-| Locked Down | No baseline allow rules. Destinations need an allow rule from you or a kit. |
+| Preset      | CLI value   | Description                                                                                                                                                                                 |
+| ----------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Open        | `allow-all` | All outbound TCP traffic is allowed. Equivalent to adding a wildcard allow rule with `sbx policy allow network "**"`.                                                                       |
+| Balanced    | `balanced`  | Default deny, with a baseline allowlist covering AI provider APIs, package managers, OS package repositories, code hosts, container registries, cloud services, and certificate validation. |
+| Locked Down | `deny-all`  | No baseline allow rules. Destinations need an allow rule from you or a kit.                                                                                                                 |
 
 The **Balanced** preset's baseline allowlist is a good starting point for most
-workflows. Run `sbx policy ls` to see exactly which rules it includes.
+workflows. After you choose it, run `sbx policy ls` to see exactly which rules
+it includes.
 
 To set the preset without the prompt, or to choose again later, see
 [Set or reset the preset](network-rules.md#set-or-reset-the-preset).
@@ -53,25 +61,18 @@ machine. On top of the preset, you can add your own allow and deny rules,
 either globally or scoped to one sandbox by name. For more details, see
 [Manage local network rules](network-rules.md).
 
-## Add rules from kits
+## Use kits that add rules
 
-Kits, including the built-in agent kits, can add network rules to the
-sandboxes that use them, such as the API endpoints an agent needs. Kit rules
-work like the rules you add yourself, and they apply under any preset,
-including **Locked Down** (`deny-all`). A preset isn't an explicit deny rule,
-so it doesn't override the allow rules a kit adds. For more details on kits,
-see [Use kits](../../sandboxes/customize/use-kits.md).
-
-To list the rules a kit added to a sandbox, see
-[Filter the listing](inspect.md#filter-the-listing). To block a destination
-that a kit allows, see
-[Allow or block a destination for one sandbox](network-rules.md#allow-or-block-a-destination-for-one-sandbox).
+Kits, including the built-in agent kits, can add network rules to the sandboxes
+that use them, such as the API endpoints an agent needs. For more details, see
+[Use kits](../../sandboxes/customize/use-kits.md).
 
 ## How rules combine
 
 Without organization governance, your rules and your kits' rules combine: a
 destination is allowed if any rule allows it, and a deny rule from any source
-takes precedence over an allow rule.
+takes precedence over an allow rule. Kit rules apply under any preset,
+including **Locked Down**, because a preset isn't an explicit deny rule.
 
 How a request that no rule matches is handled depends on your preset. Under
 **Open**, every destination is allowed. Under **Balanced** and **Locked Down**,
@@ -82,10 +83,6 @@ For more details, see [Respond to approval requests](approvals.md).
 When an organization policy is enforced for you, it changes which of your
 local rules apply. For more details, see
 [How organization policy relates to local and kit rules](../organization/policies/_index.md#how-organization-policy-relates-to-local-and-kit-rules).
-
-[Approvals](approvals.md), [inspection](inspect.md), and
-[testing](test-monitor.md) work the same way whether a rule comes from you, a
-kit, or your organization.
 
 ## Try it out
 

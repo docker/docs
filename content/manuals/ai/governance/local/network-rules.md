@@ -66,73 +66,71 @@ specific HTTP methods and paths on a host instead, so you can allow or block
 specific API requests. For example, you can let an agent read from an API
 without letting it write to it.
 
-Add `--method` to an allow or deny rule to match specific HTTP methods on a
-host, and `--path` to restrict it to part of the host's URL space:
+Add `--method` to an allow or deny rule to match specific HTTP methods, and
+`--path` to narrow it to part of the host's URL space. Quote the path so your
+shell doesn't expand the wildcard:
 
 ```console
 $ sbx policy allow network api.github.com --method GET --path '/repos/org/project/**'
 ```
 
-Quote the path so your shell doesn't expand the wildcard. Pass several methods
-as a comma-separated list:
+Write the host without a scheme, such as `api.github.com` rather than
+`https://api.github.com`. It follows the same patterns as network rules and can
+include a port, but it must be a hostname. To match an IP address or a CIDR
+range, use a network rule without `--method` or `--path`.
+
+### Choose methods
+
+Pass several methods as a comma-separated list, or `ANY` to match every
+method. Method names are case-insensitive, and `ANY` can't be combined with
+specific methods:
 
 ```console
 $ sbx policy allow network api.github.com --method GET,HEAD
 ```
 
-`--method ANY` matches every HTTP method, and `--path` defaults to `/**` when
-you omit it:
+The accepted methods are `GET`, `HEAD`, `POST`, `PUT`, `PATCH`, `DELETE`,
+`OPTIONS`, `CONNECT`, and `TRACE`.
 
-```console
-$ sbx policy allow network api.github.com --method ANY
-```
+### Choose paths
 
-`ANY` can't be combined with specific methods, and a path without a method is
-rejected. Pass a method, or use `ANY` when you mean every method.
-
-Method names are case-insensitive. The accepted values are `GET`, `HEAD`,
-`POST`, `PUT`, `PATCH`, `DELETE`, `OPTIONS`, `CONNECT`, and `TRACE`.
-
-A path must start with `/` and be canonical. It can't contain a query string, a
-fragment, percent-encoding, control characters, surrounding whitespace,
-repeated or trailing slashes, or dot segments such as `.` and `..`. Each rule
-takes one path. Repeating `--path` keeps only the last value, and a comma is
-read as part of the path, so add a separate rule for each path:
+A rule without `--path` matches every path on the host. A rule takes one path,
+and a path needs a method. Repeating `--path` keeps only the last value, and a
+comma is read as part of the path, so add a separate rule for each path:
 
 ```console
 $ sbx policy allow network api.github.com --method GET --path '/repos/**'
 $ sbx policy allow network api.github.com --method GET --path '/users/**'
 ```
 
-Add `--query` to match URL query parameters separately from the path:
+A path must start with `/` and be canonical. For the full path rules, see
+[HTTP method and path](../reference/network-rules.md#http-method-and-path).
+
+### Match query parameters
+
+Add `--query` to require URL query parameters, separately from the path. Repeat
+the flag to require more than one. Like a path, a query restriction needs a
+method, so keep `--method` or use `--method ANY`:
 
 ```console
 $ sbx policy allow network api.example.com --method GET --path '/search' \
     --query 'team=platform' --query 'label=release*'
 ```
 
-Repeat the flag to require multiple parameters. Keep `--method` in the command,
-or use `--method ANY` to match all methods. Query restrictions use the same
-flags on deny rules. For value patterns and matching behavior, see
+For value patterns and matching behavior, see
 [Query parameters](../reference/network-rules.md#query-parameters).
 
-Hosts follow the same patterns as network rules and can include a port. Write
-the host on its own, without a scheme, so an HTTP rule takes `api.example.com`
-rather than `https://api.example.com`.
+### Block part of an allowed host
 
-A local HTTP rule takes a hostname. To match an IP address or a CIDR range,
-use a network rule without `--method` or `--path`.
-
-Deny rules take the same flags, which is the usual way to carve a method or
-path out of a broader allow:
+To restrict part of a host, add a deny rule with the same flags on top of a
+broader allow:
 
 ```console
 $ sbx policy allow network api.example.com
 $ sbx policy deny network api.example.com --method POST --path '/admin/**'
 ```
 
-For more details on how the two layers combine, see
-[HTTP method and path](../reference/network-rules.md#http-method-and-path).
+### List HTTP rules
 
 To list only HTTP rules, run `sbx policy ls --type http`. In
 `sbx policy ls --wide`, the `METHOD` and `PATH` columns show `-` for rules that
@@ -172,7 +170,8 @@ To find a rule's ID, run `sbx policy ls --wide`. For more details, see
 ## Allow outbound UDP
 
 Outbound UDP is experimental and disabled by default. Turn on experimental
-features and UDP egress before adding UDP allow rules:
+features and UDP egress before you add UDP allow rules. The CLI warns you if
+you save a UDP rule while UDP egress is off:
 
 ```console
 $ sbx settings set platform.allowExperimentalFeatures true
@@ -181,29 +180,28 @@ $ sbx policy allow network --protocol udp api.example.com:443
 ```
 
 Local allow rules apply to TCP by default. Use `--protocol udp` for UDP or
-`--protocol tcp,udp` for both. Deny rules apply to both protocols by default.
-Use `--protocol` to restrict a deny rule to one protocol.
+`--protocol tcp,udp` for both. Deny rules apply to both protocols by default,
+and `--protocol` restricts a deny rule to one. UDP rules follow the same
+organization and local precedence as TCP rules.
 
-UDP follows the same organization and local policy precedence as TCP. It is
-refused when the destination requires an HTTP, SOCKS5, system, or PAC-selected
-proxy, because those proxies can't carry UDP. ICMP remains blocked.
+Some UDP traffic is blocked whatever your rules allow:
 
-UDP to local-network destinations is blocked before any policy is evaluated,
-so no allow rule can permit it, including one that allows all hosts. This
-covers multicast, link-local, and unspecified addresses, `255.255.255.255`,
-and the broadcast addresses of the host's networks. As a result, discovery
-protocols that use multicast, such as mDNS and SSDP, don't work from a
-sandbox. UDP to `host.docker.internal` isn't affected. The network log records
-these connections under the rule `<udp local network boundary>`.
+- Traffic to a destination that needs an HTTP, SOCKS5, system, or PAC-selected
+  proxy, because those proxies can't carry UDP.
+- Traffic to local-network destinations, including multicast, link-local, and
+  unspecified addresses, `255.255.255.255`, and the broadcast addresses of the
+  host's networks. This block applies before any policy is evaluated, so even a
+  rule that allows all hosts doesn't permit it, and discovery protocols such as
+  mDNS and SSDP don't work from a sandbox. UDP to `host.docker.internal` isn't
+  affected. The network log records these connections under the rule
+  `<udp local network boundary>`.
 
-Inspect UDP rules or check a destination:
+To list UDP rules or check a destination:
 
 ```console
 $ sbx policy ls --protocol udp
 $ sbx policy check network --protocol udp api.example.com:443
 ```
-
-The CLI warns if you save a UDP rule while UDP egress is disabled.
 
 ## Set or reset the preset
 
@@ -224,9 +222,9 @@ sandbox:
 $ sbx policy init balanced
 ```
 
-Available values are `allow-all`, `balanced`, and `deny-all`. `sbx policy init`
-only works before a preset is set. To change the preset after that, reset local
-policy.
+Available values are `allow-all` (Open), `balanced` (Balanced), and `deny-all`
+(Locked Down). `sbx policy init` only works before a preset is set. To change
+the preset after that, reset local policy.
 
 ### Reset local policy
 
