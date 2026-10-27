@@ -554,7 +554,7 @@ host and can connect to the second node using SSH.
 On the Docker host, install the `rclone/docker-volume-rclone` plugin:
 
 ```console
-$ docker plugin install --grant-all-permissions rclone/docker-volume-rclone --aliases rclone
+$ docker plugin install --grant-all-permissions rclone/docker-volume-rclone --alias rclone
 ```
 
 ### Create a volume using a volume driver
