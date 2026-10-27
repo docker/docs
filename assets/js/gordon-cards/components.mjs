@@ -1,7 +1,8 @@
 // The components Gordon may draw in a ```openui-lang card in a docs chat answer (OpenUI Lang, see
 // https://www.openui.com/docs/openui-lang): each one's name, what the model is told it's for, and
-// its props. render.js draws each of them, and scripts/generate-gordon-card-prompt.mjs generates
-// the Gordon backend's prompt from this list, so the model is only told about what the chat draws.
+// its props. render.js draws each of them. Gordon's backend tells the model about these same
+// components, so when adding or changing one here, the backend's card prompt must change with it:
+// a component the model writes but the chat can't draw is dropped, content and all.
 //
 // OpenUI Lang passes props positionally, in each schema's key order. Reordering or removing a key
 // changes the meaning of cards already in a conversation: only ever append optional keys.
