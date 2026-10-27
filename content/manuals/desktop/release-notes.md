@@ -65,7 +65,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Security
 
-- Addressed [CVE-2026-114409](https://www.cve.org/cverecord?id=CVE-2026-114409), where Docker Desktop could write third-party API keys and OAuth access tokens in cleartext to local application logs and diagnostics bundles. This release also cleans up existing host logs and crash dumps. These OAuth tokens are not Docker account tokens.
+- Addressed [CVE-2026-114409](https://www.cve.org/cverecord?id=CVE-2026-114409), where Docker Desktop could write third-party API keys and OAuth access tokens in cleartext to local application logs and diagnostics bundles. This release also cleans up existing host logs and crash dumps. These OAuth tokens are not Docker account tokens. If you've generated or shared diagnostics bundles with Docker Desktop 4.96.x or earlier, or kept copies of Docker Desktop logs elsewhere, delete or sanitize them.
 - Addressed [CVE-2026-99999](https://www.cve.org/cverecord?id=CVE-2026-99999), a kernel vulnerability where a container could exploit bad IPv4 checksum metadata via TUN or `AF_PACKET` to corrupt the VM's network stack.
 
 ## 4.96.3
