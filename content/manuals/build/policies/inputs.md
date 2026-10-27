@@ -240,6 +240,53 @@ allow if {
 }
 ```
 
+#### `input.image.provenance`
+
+Metadata parsed from an image's SLSA provenance attestation. Buildx supports
+SLSA v0.2 and v1 predicates. Fields depend on what the attestation records;
+an absent field isn't equivalent to a Boolean value of `false`.
+
+| Field | Description |
+| ----- | ----------- |
+| `predicateType` | SLSA provenance predicate URI. |
+| `buildType` | Identifier for the build process. |
+| `builderID` | Builder identifier recorded in the attestation. |
+| `invocationID` | Identifier for the build invocation. |
+| `startedOn`, `finishedOn` | Build timestamps in RFC 3339 format. |
+| `configSource.uri` | URI of the source containing the build definition. |
+| `configSource.digest` | Map of source digest algorithms to values. |
+| `configSource.path` | Path to the build definition within the source. |
+| `frontend` | BuildKit frontend used for the build. |
+| `buildArgs` | Map of build argument names to values. |
+| `rawArgs` | Map of frontend arguments, including `build-arg:` prefixes. |
+| `reproducible` | Whether the attestation declares the build reproducible. |
+| `hermetic` | Whether the attestation declares the build hermetic. |
+| `completeness.parameters` | Whether build parameters are fully recorded. |
+| `completeness.environment` | Whether the environment is fully recorded (v0.2). |
+| `completeness.materials` | Whether build dependencies are fully recorded. |
+
+For example, require an attestation that declares the build hermetic and
+records all dependencies:
+
+```rego
+allow if {
+    input.image.provenance.hermetic == true
+    input.image.provenance.completeness.materials == true
+}
+```
+
+Accessing these fields during policy evaluation resolves the provenance
+metadata as needed. To inspect it without evaluating a policy, request the
+fields explicitly:
+
+```console
+$ docker buildx policy eval --print --fields image.provenance \
+    docker-image://registry.example.com/team/app:latest
+```
+
+These fields describe claims in the attestation. To verify who produced it,
+also check the image's [attestation signatures](#inputimagesignatures).
+
 #### `input.image.labels`
 
 A map of image labels from the image configuration.
