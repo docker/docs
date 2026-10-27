@@ -2,7 +2,7 @@
 title: Configure audit delivery
 linkTitle: Configure delivery
 weight: 10
-description: Configure local and cloud delivery for Docker AI Governance Audit Logs, and review who changed the delivery settings.
+description: Configure local and cloud delivery for Docker AI Governance audit logs, and review who changed the delivery settings.
 keywords: docker sandboxes, audit delivery, AI Governance, audit logs, retention, cloud delivery, AI Platform
 aliases:
   - /ai/sandboxes/governance/audit/configure/
@@ -20,13 +20,9 @@ to Docker Cloud, or to both. For how the two delivery modes differ, see
 Your organization needs:
 
 - A Docker [AI Governance plan](/manuals/subscription-billing/plans/ai-governance.md)
-- An enforced organization governance policy
 - Organization owner access, or a
   [custom role](/manuals/security/roles-and-permissions/custom-roles/_index.md)
   with AI Governance audit permissions
-
-Only users who have an AI Governance license and are governed by the enforced
-organization policy send Docker Sandboxes audit data.
 
 ## Configure delivery
 
@@ -42,9 +38,8 @@ To configure audit delivery:
      CSV export, and SIEM forwarding.
 1. Save your changes.
 
-Cloud delivery is on by default when AI Governance is enabled, except for
-organizations that used local audit logging before hosted audit logs were
-available. Those organizations start with cloud delivery off until an owner
+Cloud delivery is on by default, except for organizations that used local
+audit logging before hosted audit logs were available. Those organizations start with cloud delivery off until an owner
 turns it on. To keep records local to your hosts, turn off **Docker Cloud** and
 keep **Local disk** on.
 

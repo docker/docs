@@ -1,15 +1,19 @@
 ---
 title: Network and HTTP rule syntax
+linkTitle: Network rules
 weight: 10
-description: Syntax for sandbox network rules, including domain patterns, CIDR ranges, ports, and HTTP method and path rules.
+description: Syntax for sandbox network rules, including hostname patterns, CIDR ranges, ports, and HTTP method and path rules.
 keywords: docker sandboxes, network rules, rule syntax, wildcards, CIDR, HTTP rules, method and path
 ---
 
-A network rule matches a destination host on its own. An HTTP rule is a network
-rule that also names an HTTP method and URL path, with optional query-parameter
-restrictions, so a policy can allow selected API requests. For how to write
-destinations, see
-[Destinations](#destinations).
+A network rule matches a destination. There are two kinds:
+
+- A host rule names no method or path, so it matches all traffic to the
+  destination. The Docker Home composer calls it an **All traffic** rule.
+- An HTTP rule also names an HTTP method and URL path, with optional
+  query-parameter restrictions, so a policy can allow selected API requests.
+
+For how to write destinations, see [Destinations](#destinations).
 
 ## HTTP method and path
 
@@ -66,21 +70,21 @@ space, `%2B` for a literal plus, and `%2A` for a literal asterisk. Keep query
 parameters out of `--path`. For CLI examples, see
 [Allow or block HTTP methods and paths](../local/network-rules.md#allow-or-block-http-methods-and-paths).
 
-### Combine HTTP and network rules
+### Combine HTTP and host rules
 
-HTTP requests are evaluated against both layers. A network rule sets the
+HTTP requests are evaluated against both kinds of rule. A host rule sets the
 baseline for a host, and HTTP rules narrow access by method, path, and query
 parameters:
 
-| Rules that cover the host   | Result for an HTTP request                                              |
-| --------------------------- | ----------------------------------------------------------------------- |
-| Network allow only          | Allowed at any method and path                                          |
-| HTTP allow only             | Allowed only where a rule matches the method, path, and any query restrictions. Anything else is denied |
-| Network allow and HTTP deny | Requests matching the HTTP deny are blocked. The rest stay allowed          |
-| Network deny                | Blocked. An HTTP allow can't reopen a denied host                        |
+| Rules that cover the host | Result for an HTTP request                                                                              |
+| ------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Host allow only           | Allowed at any method and path                                                                          |
+| HTTP allow only           | Allowed only where a rule matches the method, path, and any query restrictions. Anything else is denied |
+| Host allow and HTTP deny  | Requests matching the HTTP deny are blocked. The rest stay allowed                                      |
+| Host deny                 | Blocked. An HTTP allow can't reopen a denied host                                                       |
 
-A network deny is therefore a floor that HTTP rules can't raise, while a
-network allow is a ceiling that HTTP rules can carve into.
+A host deny is therefore a floor that HTTP rules can't raise, while a host
+allow is a ceiling that HTTP rules can carve into.
 
 When a rule requires an HTTP decision, the sandbox HTTP proxy
 evaluates each request separately instead of deciding once per connection.
@@ -88,7 +92,7 @@ evaluates each request separately instead of deciding once per connection.
 Those requests have to go through the proxy. A connection it can't inspect,
 such as one it handles transparently, is blocked rather than evaluated.
 Traffic that isn't HTTP, such as SSH, carries no method or path, so HTTP rules
-never match it. Control those destinations with network rules.
+never match it. Control those destinations with host rules.
 
 ## Destinations
 
@@ -113,7 +117,3 @@ need to match the root domain and its subdomains.
 
 Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
 `2001:db8::/32`.
-
-For local and organization policy configuration, see
-[Manage local network rules](../local/network-rules.md) and
-[Organization network access policies](../organization/policies/network.md).

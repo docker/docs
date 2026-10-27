@@ -15,15 +15,10 @@ event management (SIEM) system to centralize Docker governance data alongside
 other security signals. How you do it depends on where your audit records are
 delivered:
 
-- With Docker Cloud delivery, Docker forwards events directly to a supported
-  SIEM destination. For more details, see
-  [Forward events from Docker Cloud](#forward-events-from-docker-cloud).
-- With local disk delivery, your own log shipper collects the audit files from
-  each machine. For more details, see
-  [Collect local audit files with a log shipper](#collect-local-audit-files-with-a-log-shipper).
-
-For how the two delivery modes differ, see
-[Delivery modes](_index.md#delivery-modes).
+- With cloud delivery, Docker forwards events directly to a supported
+  SIEM destination.
+- With local delivery, your own log shipper collects the audit files from
+  each machine.
 
 ## Forward events from Docker Cloud
 
@@ -46,13 +41,13 @@ You need organization owner access, or a
 [custom role](/manuals/security/roles-and-permissions/custom-roles/_index.md)
 with AI Governance audit permissions.
 
-SIEM forwarding requires Docker Cloud delivery to be enabled for your
+SIEM forwarding requires cloud delivery to be enabled for your
 organization. If you haven't already, enable it under **AI Platform** > **Audit
 logs** > **Audit delivery** before configuring a SIEM destination. For more
 details, see [Configure audit delivery](configure.md).
 
 Gather the endpoint URL and credential your destination needs, listed in
-[Supported destinations](#supported-destinations). Some destinations require you
+Supported destinations. Some destinations require you
 to create a connector or source first.
 
 ### Add a SIEM destination
@@ -78,11 +73,10 @@ removes the endpoint and its stored credential and can't be undone.
 
 ## Collect local audit files with a log shipper
 
-With local disk delivery, each machine writes its audit records to `.jsonl`
+With local delivery, each machine writes its audit records to `.jsonl`
 files in its own audit directory. For the directory on each operating system
 and how files are named, see
-[Where records are stored](_index.md#where-records-are-stored). For how to
-turn on local disk delivery, see [Configure audit delivery](configure.md).
+[Where records are stored](_index.md#where-records-are-stored).
 
 Point your log shipper at the audit directory and configure it to collect
 `.jsonl` files only. Tools such as the Splunk Universal Forwarder,

@@ -29,7 +29,7 @@ machines with your endpoint management tooling.
 2. When a user runs `sbx login`, they authenticate with Docker. Credentials
    are saved temporarily, then Docker Sandboxes calls the Docker API to
    verify organization membership.
-3. If the user belongs to at least one allowed organization, login succeeds and
+3. If the user belongs to at least one allowed organization, sign-in succeeds and
    the credentials are kept.
 4. If not, Docker Sandboxes immediately revokes the saved credentials and the
    user receives a [denial message](#check-what-denied-developers-see) listing
@@ -37,7 +37,7 @@ machines with your endpoint management tooling.
 
 `sbx login` and `sbx logout` always run regardless of organization membership.
 Other commands require a valid signed-in session, so they fail after a denied
-login until the user signs in with an allowed account.
+sign-in until the user signs in with an allowed account.
 
 ## Write the enforcement configuration
 

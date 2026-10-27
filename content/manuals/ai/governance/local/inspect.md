@@ -133,9 +133,9 @@ filtered listing with no HTTP rules shows an unlabeled count, such as
 For more details, see
 [HTTP method and path](../reference/network-rules.md#http-method-and-path).
 
-## List filesystem rules
+## List filesystem mount rules
 
-Filesystem rules control which host paths a sandbox can mount as a workspace.
+Filesystem mount rules control which host paths a sandbox can mount as a workspace.
 To list only those rules, pass `--type filesystem`:
 
 ```console
@@ -144,10 +144,8 @@ POLICY         SOURCE   APPLIES TO   SUMMARY
 local-policy   local    all          filesystem read: 1 allow; filesystem write: 1 allow
 ```
 
-A writable workspace mount must be allowed by both a `filesystem:read` and a
-`filesystem:write` rule. A read-only mount needs only `filesystem:read`. Your
-local policy allows read and write access to all paths by default, shown as the
-two allow entries above. For more details, see
+Your local policy allows read and write access to all paths by default, shown
+as the two allow entries above. For how read and write rules combine, see
 [Filesystem mount rule syntax](../reference/filesystem-rules.md).
 
 ## Check organization governance status
@@ -170,9 +168,8 @@ table.
 - `Governance` shows which organization manages the policy.
 - `Sync` shows when the daemon last pulled the organization policy. If it shows
   an error or an old timestamp, run `sbx policy refresh` to fetch and apply the
-  latest organization policy right away, without restarting the daemon or
-  stopping sandboxes. The refreshed policy applies to new connections. To close
-  existing connections that the updated policy denies, restart the sandbox.
+  latest organization policy right away. For more details, see
+  [Organization policy changes aren't taking effect](../troubleshooting.md#organization-policy-changes-arent-taking-effect).
 - `Hidden` shows how many inactive rules the listing leaves out. For more
   details, see [Show inactive rules](#show-inactive-rules).
 

@@ -22,12 +22,13 @@ script. Commands that work with sandboxes, such as `sbx run`, `sbx create`, and
 $ sbx policy init balanced
 ```
 
-Available values are `allow-all`, `balanced`, and `deny-all`. For more details,
-see [Set the preset without the prompt](local/network-rules.md#set-the-preset-without-the-prompt).
+Available values are `allow-all` (Open), `balanced` (Balanced), and `deny-all`
+(Locked Down). For more details, see
+[Set the preset without the prompt](local/network-rules.md#set-the-preset-without-the-prompt).
 
 ## Agent can't install packages or reach an API
 
-Sandboxes use [network rules](local/network-rules.md) to control
+Docker Sandboxes uses [network rules](local/network-rules.md) to control
 outbound traffic. If the agent fails to install packages or call an external
 API, the destination probably isn't allowed. Check which requests are being
 blocked:
@@ -36,7 +37,7 @@ blocked:
 $ sbx policy log
 ```
 
-Then allow the domains your workflow needs:
+Then allow the destinations your workflow needs:
 
 ```console
 $ sbx policy allow network "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
@@ -92,8 +93,8 @@ organizations to resolve the conflicting governance configuration.
 ## A request is blocked with "Approval required"
 
 The destination needs your confirmation. Either no allow or deny rule matches
-it and your machine isn't under organization governance, or an organization
-policy allows it but requires approval first.
+it and no organization policy is enforced for you, or an organization policy
+allows it but requires approval first.
 
 Run `sbx policy approval ls` to see the pending request and respond to it with
 `sbx policy approval respond`. Approving applies to later requests, not the one
@@ -102,8 +103,8 @@ that was blocked, so run the operation again afterward. For more details, see
 
 ## An HTTP method or path is blocked on an allowed host
 
-A host that a network rule allows can still have individual methods or paths
-denied by an HTTP rule. Run `sbx policy ls --type http` to see which HTTP rules
+A destination that a host rule allows can still have individual methods or
+paths denied by an HTTP rule. Run `sbx policy ls --type http` to see which HTTP rules
 apply. `sbx policy check network` reports the decision for the host only, so it
 shows a host as allowed even when the specific request is denied. For more
 details, see
@@ -131,10 +132,7 @@ policy denies it. Restart the sandbox to close those connections.
 
 When a synced change takes effect also depends on the policy type. For more
 details, see
-[Organization network access policies](organization/policies/network.md#when-changes-take-effect),
-[Organization filesystem access policies](organization/policies/filesystem.md#when-changes-take-effect),
-and
-[Organization MCP access policies](organization/policies/mcp.md#when-changes-take-effect).
+[When policy changes reach developers](organization/policies/_index.md#when-policy-changes-reach-developers).
 
 ## Audit records are missing
 

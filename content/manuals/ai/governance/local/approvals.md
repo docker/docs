@@ -19,7 +19,7 @@ A request needs approval in these cases:
   no rule allows or denies. A request never asks for approval under the Open
   preset, because Open allows every destination. This applies only when no
   organization policy is enforced for you.
-- Organization policy: an organization network policy allows the destination
+- Organization policy: a network access policy allows the destination
   but requires approval first. For more details, see
   [Approval-required access](../organization/policies/network.md#approval-required-access).
 
@@ -47,8 +47,8 @@ network:cWtN-4xUrNjxh4ouezcstgjrky6Rg57QfeRe3WEkyyY   my-sandbox   api.example.c
 ```
 
 Each entry names the destination, the sandbox that asked for it, and why it
-needs approval. Under organization governance that reason names the policy, as
-shown. Under local policy, the reason is that no matching allow rule covers the
+needs approval. When an organization policy is enforced for you, that reason
+names the policy, as shown. Under local policy, the reason is that no matching allow rule covers the
 destination. A request that an HTTP rule matches also shows the method and
 path, such as `GET api.example.com:443/v1/data`.
 

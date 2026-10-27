@@ -19,8 +19,8 @@ shown in the hosted audit log view.
 Before you use the API, you need:
 
 - A Docker [AI Governance plan](/manuals/subscription-billing/plans/ai-governance.md)
-- Docker Cloud delivery turned on in [audit delivery settings](configure.md)
-- An Organization Access Token (OAT) with the **View audit logs** permission
+- Cloud delivery turned on in [audit delivery settings](configure.md)
+- An organization access token (OAT) with the **View audit logs** permission
 
 Personal Access Tokens and Docker account session tokens aren't supported.
 

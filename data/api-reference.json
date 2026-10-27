@@ -25041,7 +25041,7 @@
       "experimental": false,
       "guides": [],
       "id": "ai-governance",
-      "manual": "/manuals/ai/governance/",
+      "manual": "/manuals/ai/governance/organization/policies/",
       "operations": [
         {
           "acceptMedia": "application/json",

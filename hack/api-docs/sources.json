@@ -36,7 +36,7 @@
       "title": "AI Governance",
       "source": "content/reference/api/ai-governance/api.yaml",
       "owner": "docker/governor-services",
-      "manual": "/manuals/ai/governance/",
+      "manual": "/manuals/ai/governance/organization/policies/",
       "connection": "hosted",
       "guides": []
     },

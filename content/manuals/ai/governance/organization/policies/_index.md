@@ -13,9 +13,9 @@ aliases:
 Organization policies control what sandboxes can access for organization
 members. When a developer's sandbox makes a request, three questions decide
 the outcome: which of your policies apply to that developer, what their rules
-say about the request, and how your policy relates to the developer's own local
-and kit rules. This page answers each in turn, then explains when your changes
-reach developers. To create a policy, see
+say about the request, and how your policy relates to the local and kit
+rules on the developer's machine. This page answers each in turn, then explains
+when your changes reach developers. To create a policy, see
 [Create and manage organization policies](create-manage.md).
 
 ## What a policy contains
@@ -45,9 +45,9 @@ only on specific teams:
 
 Teams are the same [teams](/manuals/accounts/organization/manage/manage-a-team.md)
 you manage for your organization. Docker matches a policy's teams against each
-user's team membership. Because an organization can mix org-wide and
-team-scoped policies, a single user is often subject to several at once. The
-policies that apply to a given user are their effective policies: every
+member's team membership. Because an organization can mix org-wide and
+team-scoped policies, a single member is often subject to several at once. The
+policies that apply to a given member are their effective policies: every
 org-wide policy, plus every team-scoped policy for a team they belong to.
 
 Use org-wide policies for guardrails that must apply everywhere, and
@@ -63,9 +63,9 @@ following two principles:
 - Deny wins: if any rule matches with `decision: deny`, the request is denied,
   regardless of any matching allow rules.
 - Default deny: anything an allow rule doesn't match is blocked. Outbound
-  network traffic is blocked unless a network rule allows the destination, and a
-  host path can't be mounted unless a filesystem rule allows it. MCP activity is
-  blocked unless an MCP `permit` allows it.
+  network traffic is blocked unless a network rule allows the destination, a
+  host path can't be mounted unless a filesystem mount rule allows it, and MCP
+  activity is blocked unless an MCP `permit` allows it.
 
 Because every effective policy feeds the same evaluation, allows are additive (a
 request is allowed if any effective policy allows it) and denies are absolute (a
@@ -73,9 +73,22 @@ request is blocked if any effective policy denies it). A deny rule in an
 org-wide policy therefore applies to everyone and can't be overridden by a
 team-scoped policy, which makes org-wide deny rules useful as guardrails.
 
-A request that an approval-required policy allows produces a third outcome: it's
-blocked, and the developer is asked to approve the destination. After they
-approve it, later requests to that destination succeed. For more details, see
+For example, an org-wide policy allows `git.example.com` and denies
+`paste.example.com`, and a team-scoped policy for the Data team allows
+`packages.example.com` and `paste.example.com`:
+
+| Destination            | Data team member                        | Everyone else                  |
+| ---------------------- | --------------------------------------- | ------------------------------ |
+| `git.example.com`      | Allowed by the org-wide policy          | Allowed by the org-wide policy |
+| `packages.example.com` | Allowed by the team-scoped policy       | Blocked by default deny        |
+| `paste.example.com`    | Blocked, because the org-wide deny wins | Blocked by the org-wide deny   |
+| Anything else          | Blocked by default deny                 | Blocked by default deny        |
+
+An approval requirement adds a step before access is allowed. If the Data
+team's policy required approval, a Data team member's first request to
+`packages.example.com` would be blocked and they'd be asked to approve it, and
+later requests would succeed. `paste.example.com` would still be blocked
+without asking, because a deny never asks for approval. For more details, see
 [Approval-required access](network.md#approval-required-access).
 
 ### How organization policy relates to local and kit rules
@@ -85,37 +98,35 @@ Developers also have their own local rules, and kits can add rules to the
 sandboxes that use them. What applies depends on whether an organization
 policy is enforced for the developer:
 
-- No organization policy: local rules and any kit-defined network rules
-  determine what sandboxes can access.
+- No organization policy: local rules and any kit rules determine what
+  sandboxes can access.
 - Organization policy enforced: organization policy determines what access can
-  be granted. Only organization allow rules grant access, so local and
-  kit-defined allow rules are inactive and can't expand what the organization
-  permits. Deny rules apply from every source, so a local or kit-defined deny
-  can still restrict access further.
+  be granted. Only organization allow rules grant access, so local and kit
+  allow rules are inactive and can't expand what the organization permits.
+  Deny rules apply from every source, so a local or kit deny rule can still
+  restrict access further.
 
-The following table summarizes which rules are evaluated under organization
-governance:
+The following table summarizes which rules are evaluated when an organization
+policy is enforced:
 
-| Rule                | Evaluated under organization governance |
-| ------------------- | --------------------------------------- |
-| Organization allow  | Yes                                     |
-| Organization deny   | Yes                                     |
-| Local allow         | No                                      |
-| Local deny          | Yes                                     |
-| Kit-defined allow   | No                                      |
-| Kit-defined deny    | Yes                                     |
+| Rule               | Evaluated |
+| ------------------ | --------- |
+| Organization allow | Yes       |
+| Organization deny  | Yes       |
+| Local allow        | No        |
+| Local deny         | Yes       |
+| Kit allow          | No        |
+| Kit deny           | Yes       |
 
-Local and kit-defined rules cover network access only, so a deny that layers on
-top of organization policy is always a network deny. `sbx policy ls` hides
-inactive rules by default. For more details on how to list them, see
-[Show inactive rules](../../local/inspect.md#show-inactive-rules).
+Local and kit rules cover network access only, so a local or kit deny can
+narrow your network rules but never your filesystem or MCP rules. A local deny
+also takes precedence over an organization approval requirement, so the request
+is blocked without asking for approval.
 
-A local deny takes precedence over an organization approval requirement as
-well, so the request is blocked and no approval is requested. Rules that a
-developer gains by approving a request are the one exception to local allow
-rules being inactive, because they record an answer to the organization's own
-approval requirement rather than granting new access. For more details, see
-[Approval-required access](network.md#approval-required-access).
+Approved destinations are the one exception to local allow rules being
+inactive. When a developer approves a destination, the resulting rule records
+their answer to your policy's approval requirement rather than granting new
+access, so it stays active.
 
 ## When policy changes reach developers
 

@@ -2,7 +2,7 @@
 title: View and export audit events
 linkTitle: View and export
 weight: 20
-description: Search, filter, and export Docker AI Governance audit events from the hosted audit log UI.
+description: Search, filter, and export Docker AI Governance audit events from the hosted audit log view.
 keywords: docker sandboxes, audit events, audit logs, AI Governance, CSV export
 aliases:
   - /ai/sandboxes/governance/audit/view-export/
@@ -11,7 +11,7 @@ aliases:
 {{< summary-bar feature_name="AI Governance" >}}
 
 Cloud delivery stores AI Governance audit records in Docker Cloud and makes
-them available in the hosted audit log UI. Use the hosted view to investigate
+them available in the hosted audit log view. Use it to investigate
 policy decisions, such as why a developer's request was blocked or what
 sandboxes reached over the past week. Open the view to see recent events,
 narrow it to the ones you care about, then export them to CSV if you need an
@@ -19,7 +19,7 @@ offline copy.
 
 ## Before you begin
 
-- [Docker Cloud delivery](configure.md) must be turned on for your
+- [Cloud delivery](configure.md) must be turned on for your
   organization. The hosted view shows only records delivered to Docker Cloud,
   not records written to local disk.
 - You need organization owner access, or a
@@ -33,8 +33,9 @@ offline copy.
 1. Go to **AI Platform** > **Audit logs**.
 1. Open **Audit events**.
 
-The **Audit events** view includes summary tiles for total events, allowed
-events, denied events, and consent-required events. The event table includes:
+The **Audit events** view includes summary tiles for **Events**, **Allowed**,
+**Denied**, and **Consent required**. **Consent required** counts the events
+with an Approval required decision. The event table includes:
 
 | Column    | Description                                                         |
 | --------- | ------------------------------------------------------------------- |

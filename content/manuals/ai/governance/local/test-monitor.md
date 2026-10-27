@@ -37,8 +37,8 @@ $ sbx policy check network --sandbox my-sandbox api.example.com
 
 A check never creates an approval request. A destination that a sandbox would
 ask you to approve shows as `Denied`, with a `Reason` line of
-`no matching allow rule (default deny)`, or `approval required by policy` under
-organization governance.
+`no matching allow rule (default deny)`, or `approval required by policy` when
+an organization policy is enforced for you.
 
 A check reports the decision for the host, not for an HTTP method or path. To
 test an HTTP rule, send a request from inside the sandbox. For more details,
@@ -67,19 +67,19 @@ The `RULE` column identifies the policy rule that matched the request. The
 `REASON` column includes extra context when the daemon records one. The `PROXY`
 column shows how the request left the sandbox:
 
-| Value            | Description                                                                                                    |
-| ---------------- | -------------------------------------------------------------------------------------------------------------- |
-| `forward`        | Routed through the forward proxy. Supports [credential injection](../../sandboxes/configuration/credentials.md).              |
-| `forward-bypass` | Routed through the forward proxy without credential injection.                                                 |
-| `transparent`    | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.            |
-| `network`        | Non-HTTP traffic. TCP and experimental UDP egress follow network policy. ICMP is blocked. |
-| `browser-open`   | A sandbox process requested opening a URL in the host browser. Policy is enforced before opening the URL.      |
+| Value            | Description                                                                                               |
+| ---------------- | --------------------------------------------------------------------------------------------------------- |
+| `forward`        | Routed through the forward proxy. Supports credential injection.                                          |
+| `forward-bypass` | Routed through the forward proxy without credential injection.                                            |
+| `transparent`    | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.       |
+| `network`        | Non-HTTP traffic. TCP and experimental UDP egress follow network policy. ICMP is blocked.                 |
+| `browser-open`   | A sandbox process requested opening a URL in the host browser. Policy is enforced before opening the URL. |
 
 For how the forward and transparent proxies handle sandbox traffic, see
 [Networking](../../sandboxes/architecture.md#networking).
 
-The log records network requests only. Filesystem mount decisions aren't in
-the log.
+The log records network requests by host, without their HTTP methods and
+paths. Filesystem mount decisions aren't in the log.
 
 ## Filter the log
 
