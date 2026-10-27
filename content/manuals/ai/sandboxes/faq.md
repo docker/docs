@@ -90,7 +90,8 @@ CLI usage telemetry does not include your prompts or code. Cloud sandboxes
 execute on Docker-managed infrastructure, so files you transfer to them are
 stored in the cloud.
 
-To persistently disable telemetry for the local CLI and daemon:
+To persistently disable telemetry for the local CLI and daemon, set
+[`telemetry.disabled`](configuration/settings.md#telemetrydisabled) to `true`:
 
 ```console
 $ sbx settings set telemetry.disabled true

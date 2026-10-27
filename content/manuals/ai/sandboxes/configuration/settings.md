@@ -496,6 +496,29 @@ $ sbx settings set daemon.log.maxAgeDays 30
 $ sbx daemon restart
 ```
 
+### Telemetry
+
+#### telemetry.disabled {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Set this to `true` to persistently disable telemetry for the local CLI and
+daemon:
+
+```console
+$ sbx settings set telemetry.disabled true
+$ sbx daemon restart
+```
+
+The next CLI invocation uses the saved preference. A running daemon keeps its
+previous telemetry setting until you restart it.
+
+`SBX_NO_TELEMETRY` is a separate opt-out, rather than an environment variable
+equivalent for this setting. A value of `1` disables telemetry regardless of
+the saved preference. Other values, including `0`, don't override a saved
+opt-out. See [telemetry collection](../faq.md#does-the-cli-collect-telemetry)
+for what the CLI collects.
+
 ### Diagnostics
 
 #### diagnostics.autoUpload {.wrap-anywhere}
