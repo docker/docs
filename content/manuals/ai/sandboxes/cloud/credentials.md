@@ -119,6 +119,18 @@ placeholder in `PROJECT_API_TOKEN`. The cloud proxy sets
 custom secrets, cloud injection sets the header based on the destination host
 without requiring a matching placeholder in the request.
 
+To read the value from standard input instead of prompting, set
+`PROJECT_API_TOKEN` in your host environment and pipe it with `--value-stdin`:
+
+```console
+$ printf '%s' "$PROJECT_API_TOKEN" | sbx --cloud secret set-custom \
+    --name project-api --host api.example.com --env PROJECT_API_TOKEN \
+    --value-stdin
+```
+
+This keeps the value out of the `sbx` command arguments. `--value-stdin` can't
+be combined with `--value` or `--token`.
+
 Use `--header` to select another header. When you specify a header, the default
 value is the raw secret. Use `--format` with one `%s` placeholder to add a
 prefix, for example `--header Authorization --format 'Bearer %s'`.
