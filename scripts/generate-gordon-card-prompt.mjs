@@ -1,6 +1,11 @@
-// Prints the prompt that teaches Gordon to write ```openui-lang cards in docs chat answers, from
-// the components the chat can draw (assets/js/gordon-cards/components.mjs). After changing them,
-// copy the output into the Gordon backend's ui_cards_docs.jinja2, between its {% raw %} tags.
+// Maintainer tool, not part of the site: Hugo doesn't bundle scripts/, and the chat never sends
+// this prompt. The chat only sends `ui: "openui-v1"`, and Gordon's backend then adds the card
+// instructions from its own copy of this output (ui_cards_docs.jinja2).
+//
+// It lives here because those instructions must describe exactly the components the chat can
+// draw (assets/js/gordon-cards/components.mjs): a component the model is told about but the chat
+// can't draw is dropped, content and all. After changing the components, run this and copy the
+// output into the backend's ui_cards_docs.jinja2, between its {% raw %} tags.
 //
 // Usage: node scripts/generate-gordon-card-prompt.mjs > prompt.txt
 
