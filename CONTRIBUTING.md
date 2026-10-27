@@ -9,6 +9,8 @@ Before contributing, review our documentation standards:
   guidelines
 - [COMPONENTS.md](COMPONENTS.md) - How to use Hugo shortcodes, front matter,
   and components
+- [AI policy](https://github.com/moby/.github/blob/main/AI_POLICY.md): Rules
+  for using AI tools when you contribute
 
 The following guidelines describe how to contribute to the
 Docker documentation at <https://docs.docker.com/>, and how to get started.
