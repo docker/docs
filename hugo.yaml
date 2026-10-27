@@ -166,6 +166,12 @@ params:
   # Docs repository URL
   repo: https://github.com/docker/docs
 
+  # Gordon chat
+  gordon:
+    # Lets Gordon answer with cards (steps, tables, notes, snippets, follow-up
+    # questions) in production builds. Always on in other environments.
+    cards: false
+
   # === Example versions ===
   # The following parameters are used in various ways in content and templates.
   # Mostly as examples in code snippets, but also in other exotic ways.
