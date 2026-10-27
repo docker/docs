@@ -18,6 +18,11 @@ daemon. Your project remains available on your host, while tools the agent
 installs and system changes it makes stay inside an environment you can
 discard.
 
+> [!NOTE]
+> Familiar with containers? See [how Docker Sandboxes differ from containers][sandboxes-vs-containers].
+
+[sandboxes-vs-containers]: https://www.docker.com/products/docker-sandboxes/vs-containers/
+
 In this tutorial, you'll move an existing coding-agent workflow into a local
 sandbox. For a cloud workflow, see
 [Get started with cloud sandboxes](/manuals/ai/sandboxes/cloud/_index.md#get-started).
