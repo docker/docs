@@ -62,10 +62,8 @@ IDs, context limits, and free-tier availability.
 | Model | Description |
 | --- | --- |
 | `Qwen3.5-397B-A17B` | Large Qwen3.5 MoE — strong general, coding, and reasoning |
-| `Qwen3-32B` | Mid-size Qwen3 — fast, tool-calling, reasoning |
 | `Qwen3.6-27B` | Compact Qwen3.6 — fast and efficient |
 | `Qwen3.5-9B` | Small Qwen3.5 — lightweight, free-tier friendly |
-| `Qwen3-Coder-30B-A3B-Instruct` | Qwen3 Coder MoE — optimised for code generation |
 | `Meta-Llama-3_3-70B-Instruct` | Llama 3.3 70B — reliable general-purpose chat |
 | `Mistral-Small-3.2-24B-Instruct-2506` | Compact, fast, tool-calling |
 

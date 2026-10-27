@@ -1,9 +1,11 @@
 ---
 title: "OpenTelemetry Tracing"
 description: "Export Docker Agent traces to any OTLP backend, including Langfuse and LangSmith, for debugging agentic workflows."
-keywords: docker agent, ai agents, community, opentelemetry tracing
-weight: 40
-canonical: https://docs.docker.com/ai/docker-agent/community/opentelemetry/
+keywords: docker agent, ai agents, configuration, opentelemetry tracing
+weight: 130
+canonical: https://docs.docker.com/ai/docker-agent/configuration/opentelemetry/
+aliases:
+  - /ai/docker-agent/community/opentelemetry/
 ---
 
 _Docker Agent can export OpenTelemetry traces of an agent run to any OTLP/HTTP backend. This is separate from [product-analytics telemetry](../telemetry/index.md) and is opt-in via the `--otel` flag._
@@ -89,6 +91,23 @@ docker agent run agent.yaml --otel
 > **Langfuse and LangSmith ingest traces only**
 >
 > Both backends accept the traces signal only. Docker Agent also wires metric and log exporters at the same endpoint, so their periodic exports return `404` against trace-only backends. This is harmless to traces but appears in the debug log. Point a full OTLP collector at the endpoint if you also want metrics and logs.
+
+## Schema URL
+
+Every OTLP export — traces, metrics, and logs — carries a resource `schema_url` that declares which version of the [semantic conventions](https://opentelemetry.io/docs/specs/semconv/) the resource attributes follow. Docker Agent emits:
+
+```text
+https://opentelemetry.io/schemas/1.43.0
+```
+
+The URL resolves to the published [1.43.0 schema](https://opentelemetry.io/schemas/1.43.0) and identifies the conventions the data was produced under. Docker Agent sets no schema URL on its own tracer, meter, or logger scopes, so their instrumentation-scope `schema_url` fields are empty. Bundled instrumentation can set one — the ADK tracer (`gcp.vertex.agent`, active when serving A2A) declares `1.36.0` on its scope. A non-empty scope `schema_url` applies only to that scope's data and is independent of the resource `schema_url`.
+
+For most consumers this is pass-through metadata: collectors and backends that ingest or forward OTLP need no changes when the version advances. Schema-aware consumers can use the URL to translate telemetry between convention versions.
+
+> [!NOTE]
+> **Pipelines that validate or translate schemas**
+>
+> If your pipeline checks schema URLs against an allowlist or translates telemetry from bundled schema definitions (for example the Collector's schema processor), add `1.43.0` to its supported versions when upgrading Docker Agent — before the OTel SDK 1.45 migration, Docker Agent emitted `https://opentelemetry.io/schemas/1.41.0`. No published schema transformation applies to Docker Agent telemetry in the move from `1.41.0` to `1.43.0`: the `1.42.0` schema's only transform renames a `v8js` metric Docker Agent does not emit, and `1.43.0` lists no transforms.
 
 ## Inspecting traces locally
 

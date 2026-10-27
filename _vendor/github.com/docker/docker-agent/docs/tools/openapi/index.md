@@ -47,7 +47,7 @@ toolsets:
 
 ### Reaching internal services
 
-By default the OpenAPI tool refuses connections to non-public IP addresses, blocking SSRF attempts even when DNS resolves an otherwise-public host to an internal range. Opt in with `allow_private_ips` when the spec or its `servers` entries legitimately target localhost or your internal network:
+By default, the OpenAPI tool's **direct path** refuses connections to non-public IP addresses, including a public hostname that resolves to an internal address. Docker Agent does not evaluate PAC, so the dial-time guard applies when Docker Desktop is unavailable or bypassed; egress selected by Docker Desktop — through a proxy or with PAC `DIRECT` — is outside local dial-time enforcement. Opt in with `allow_private_ips` when the spec or its `servers` entries legitimately target localhost or your internal network:
 
 ```yaml
 toolsets:
@@ -56,13 +56,16 @@ toolsets:
     allow_private_ips: true
 ```
 
+When Docker Desktop is running, eligible public destinations use its PAC proxy before standard environment-proxy routing. A PAC `DIRECT` response selects Docker Desktop's direct egress. `NO_PROXY` does not bypass Desktop PAC selection; set `DOCKER_AGENT_DISABLE_DESKTOP_PROXY=1` (or `true`, `yes`, or `on`) to bypass only the Desktop adapter per request and restore standard `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` routing. Loopback always stays direct. For guarded requests, Docker Desktop PAC routing is restricted to Docker-owned hostnames (docker.com and docker.io families); all other hosts use the direct SSRF-guarded path. Within the allowed set, local DNS preflight requires public addresses before Docker Desktop is selected; the lookup is bounded (2 seconds) and, if it times out while the request's own context is still live, resolution falls through to Docker Desktop routing rather than blocking indefinitely. NXDOMAIN, empty results, other resolver errors, and private or mixed answers still stay on the SSRF-protected direct path. This preflight does not validate Docker Desktop-selected egress, whether PAC selects a proxy or `DIRECT`. `allow_private_ips: true` removes that direct-path guard for trusted internal services, but Desktop PAC still takes precedence for eligible non-loopback destinations. See [Docker Desktop proxy](../fetch/index.md#docker-desktop-proxy).
+
 ## Properties
 
 | Property            | Type              | Required | Description                                                                                                                                                                                                                                                       |
 | ------------------- | ----------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `url`               | string            | ✓        | URL of the OpenAPI specification (JSON format). Supports `${env.VAR}` interpolation.                                                                                                                                                                              |
+| `url`               | string            | ✓        | URL of the OpenAPI specification (JSON or YAML format). Supports `${env.VAR}` interpolation.                                                                                                                                                                              |
 | `headers`           | map[string]string | ✗        | Custom HTTP headers sent with every request — both the spec fetch and every generated tool call. Values support `${env.VAR}` and `${headers.NAME}` placeholders (the latter forwards a header from the caller's incoming request when docker agent is exposed as a server). |
 | `timeout`           | int               | ✗        | HTTP client timeout in seconds (default: `30`). Applies to both the spec fetch and the generated tools' requests.                                                                                                                                                 |
+| `max_output_bytes` | integer | ✗ | Maximum returned response text in bytes. Omit for 30,000; `0` disables this cutoff while retaining the 1 MiB HTTP read cap. |
 | `allow_private_ips` | boolean           | ✗        | Opt in to dialling **non-public** IP addresses (loopback, RFC1918, link-local — including the cloud-metadata endpoint at `169.254.169.254` — multicast and the unspecified address). Set to `true` only when the spec or its servers legitimately target internal services. By default such addresses are refused at dial time, after DNS resolution, so DNS rebinding cannot bypass the check. |
 
 ## How it works
@@ -72,6 +75,24 @@ toolsets:
 3. Path and query parameters are exposed as tool parameters. Request body properties are prefixed with `body_`.
 4. Read-only operations (GET, HEAD, OPTIONS) are annotated accordingly.
 5. Responses are returned as text; errors include the HTTP status code.
+
+## Returned text size
+
+Generated tools return at most 30,000 bytes of response text by default. Set
+`max_output_bytes` to a larger positive limit, or `0` to disable this text cutoff:
+
+```yaml
+toolsets:
+  - type: openapi
+    url: https://raw.githubusercontent.com/PokeAPI/pokeapi/master/openapi.yml
+    tools: [pokemon_retrieve]
+    max_output_bytes: 0
+```
+
+The separate **1 MiB HTTP response read cap** still applies. Larger outputs also
+remain subject to agent-level `max_tool_result_tokens`, context limits and provider
+limits. Fetching more text can increase latency and token cost; a field-filtering
+adapter may be preferable when most of a response is irrelevant.
 
 ## Limits
 

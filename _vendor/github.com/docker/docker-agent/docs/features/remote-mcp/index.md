@@ -62,6 +62,8 @@ For full configuration details, see the [Tool Config](../../configuration/tools/
 
 Set `allow_private_ips: true` on a remote MCP toolset only when the MCP server or its OAuth registration/token endpoints intentionally resolve to private, loopback, or link-local addresses. The default blocks those OAuth helper requests to reduce SSRF risk.
 
+When Docker Desktop is running, eligible OAuth discovery, registration, token exchange, refresh, and helper requests use its PAC adapter before environment proxy settings. It does not apply to remote MCP Streamable HTTP/SSE transport. Set `DOCKER_AGENT_DISABLE_DESKTOP_PROXY=1` (or `true`, `yes`, or `on`) to restore standard `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` routing; `NO_PROXY` does not bypass Desktop PAC selection. Docker Agent does not evaluate PAC files or URLs directly—see [Docker Desktop proxy](../../tools/fetch/index.md#docker-desktop-proxy).
+
 > [!NOTE]
 > **Headers forwarded during OAuth discovery**
 >
@@ -192,7 +194,7 @@ A per-toolset `callbackRedirectURL` (in the YAML) overrides the runtime-wide `--
 > [!WARNING]
 > **Security note**
 >
-> The `POST /api/mcp-oauth/callback` route is open by default (no auth required) when `--auth-token` is unset. State values are 128-bit opaque tokens, so brute-force is infeasible, but a state value that leaks (e.g. via debug logs or a compromised host) could be exploited by an attacker to inject a code. Set `--auth-token` when `docker agent serve api` listens on a network-reachable interface. When set, `--auth-token` enforces Bearer-token authentication on all API routes including this callback endpoint.
+> The `POST /api/mcp-oauth/callback` route is open by default (no auth required) when `--auth-token` is unset. State values are 128-bit opaque tokens, so brute-force is infeasible, but a state value that leaks (e.g. via debug logs or a compromised host) could be exploited by an attacker to inject a code. `--auth-token` is required for non-loopback TCP listeners. Browser cross-origin posts are rejected even when bearer authentication is unset. When set, `--auth-token` enforces Bearer-token authentication on all API routes including this callback endpoint.
 
 ## Project Management &amp; Collaboration
 

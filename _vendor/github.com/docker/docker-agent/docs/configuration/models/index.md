@@ -18,7 +18,7 @@ models:
     first_available: [list] # Optional: candidate model refs, tried in order by available credentials.
                             # Mutually exclusive with other model settings.
     provider: string # Required unless using first_available. One of: openai, anthropic, google, amazon-bedrock,
-                     # dmr, mistral, xai, nebius, nvidia, minimax, baseten, ovhcloud, groq, fireworks, deepseek, cerebras, together, huggingface, moonshot, vercel, cloudflare-workers-ai, cloudflare-ai-gateway, requesty, openrouter,
+                     # dmr, mistral, xai, nebius, nvidia, minimax, baseten, daoxe, ovhcloud, groq, fireworks-ai, deepseek, cerebras, togetherai, huggingface, moonshotai, vercel, cloudflare-workers-ai, cloudflare-ai-gateway, requesty, openrouter, api-route, atlascloud,
                      # azure, ollama, github-copilot, or a named provider defined
                      # under the top-level `providers:` section.
     model: string # Required: model identifier
@@ -32,12 +32,16 @@ models:
     token_key: string # Optional: env var for API token
     thinking_budget: string|int # Optional: reasoning effort
     task_budget: int|object # Optional: total task token budget (Anthropic)
-    parallel_tool_calls: boolean # Optional: allow parallel tool calls
+    parallel_tool_calls: boolean # Optional: allow parallel tool calls. Omit to use the provider/API default.
     track_usage: boolean # Optional: track token usage
     routing: [list] # Optional: rule-based model routing
-    capabilities: # Optional: override attachment capabilities
+    capabilities: # Optional: override attachment (input) capabilities
       image: boolean # Optional: whether the model accepts image attachments
       pdf: boolean # Optional: whether the model accepts PDF attachments
+      audio: boolean # Optional: whether the model accepts audio attachments
+      video: boolean # Optional: whether the model accepts video attachments
+    output_capabilities: # Optional: override generative output capabilities (otherwise detected from models.dev)
+      image: boolean # Optional: whether the model can generate image output
     cost: # Optional: explicit token pricing (USD per 1M tokens)
       input: float # Optional: price per 1M input tokens
       output: float # Optional: price per 1M output tokens
@@ -56,7 +60,7 @@ models:
 | Property              | Type       | Required | Description                                                                           |
 | --------------------- | ---------- | -------- | ------------------------------------------------------------------------------------- |
 | `first_available`     | array      | ✗        | Candidate model references tried in order; selects the first whose credentials are configured. Mutually exclusive with other model settings. |
-| `provider`            | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Provider: `openai`, `anthropic`, `google`, `amazon-bedrock`, `dmr`, `mistral`, `xai`, `nebius`, `nvidia`, `minimax`, `baseten`, `ovhcloud`, `groq`, `fireworks`, `deepseek`, `cerebras`, `together`, `huggingface`, `moonshot`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `azure`, `ollama`, `github-copilot`, `chatgpt`, or any [named provider](../../providers/custom/index.md). |
+| `provider`            | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Provider: `openai`, `anthropic`, `google`, `amazon-bedrock`, `dmr`, `mistral`, `xai`, `nebius`, `nvidia`, `minimax`, `baseten`, `daoxe`, `ovhcloud`, `groq`, `fireworks-ai`, `deepseek`, `cerebras`, `togetherai`, `huggingface`, `moonshotai`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `api-route`, `atlascloud`, `azure`, `ollama`, `github-copilot`, `chatgpt`, `opencode`, `opencode-go`, or any [named provider](../../providers/custom/index.md). |
 | `model`               | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Model name (e.g., `gpt-4o`, `claude-sonnet-4-5`, `gemini-3.5-flash`) |
 | `description`         | string     | ✗        | Informational, human-readable summary of the model's purpose or strengths (e.g., "fast and cheap, good for summaries"). Not sent to the model. Can be combined with `first_available` (a selector's description is kept when it resolves). |
 | `temperature`         | float      | ✗        | Sampling randomness. Range is provider-dependent — typically `0.0–2.0` (Anthropic caps at `1.0`). `0.0` is deterministic. |
@@ -66,12 +70,13 @@ models:
 | `presence_penalty`    | float      | ✗        | Encourage topic diversity (`-2.0–2.0`)                                                |
 | `base_url`            | string     | ✗        | Custom API endpoint URL (for self-hosted or proxied endpoints)                        |
 | `token_key`           | string     | ✗        | Environment variable name containing the API token (overrides provider default)       |
-| `thinking_budget`     | string/int | ✗        | Reasoning effort control                                                              |
-| `task_budget`         | int/object | ✗        | Total token budget for an agentic task (forwarded to Anthropic; see [Task Budget](#task-budget)). |
-| `parallel_tool_calls` | boolean    | ✗        | Allow model to call multiple tools at once                                            |
+| `thinking_budget`     | string/int | ✗        | Reasoning effort control. See [Thinking Budget](#thinking-budget).                    |
+| `task_budget`         | int/object | ✗        | Total token budget for an agentic task (Anthropic only). See [Task Budget](#task-budget). |
+| `parallel_tool_calls` | boolean    | ✗        | Allow model to call multiple tools at once. When omitted, Docker Agent leaves the setting unset so the selected provider or API can apply its own default. |
 | `track_usage`         | boolean    | ✗        | Track and report token usage for this model                                           |
 | `routing`             | array      | ✗        | Rule-based routing to different models. See [Model Routing](../routing/index.md). |
-| `capabilities`        | object     | ✗        | Override attachment capabilities for this model. See [Attachment Capability Overrides](#attachment-capability-overrides). |
+| `capabilities`        | object     | ✗        | Override attachment (input) capabilities for this model. See [Attachment Capability Overrides](#attachment-capability-overrides). |
+| `output_capabilities` | object     | ✗        | Override generative output capabilities for this model, e.g. image generation. Omitted flags are detected from models.dev; explicit values take precedence. Cannot be combined with `first_available`. See [Output Capabilities](#output-capabilities). |
 | `cost`                | object     | ✗        | Explicit token pricing in USD per 1M tokens, overriding the built-in catalogue. See [Custom Token Pricing](#custom-token-pricing). |
 | `provider_opts`       | object     | ✗        | Provider-specific options (see provider pages)                                        |
 | `title_model`         | string     | ✗        | Model used for session-title generation. Can be a named model from the `models:` section or an inline `provider/model` string. When omitted, the agent's primary model generates titles. Cannot be combined with `first_available`. |
@@ -79,13 +84,21 @@ models:
 | `compaction_threshold` | float     | ✗        | Fraction of the context window at which proactive auto-compaction triggers for agents running this model. Must be greater than `0` and at most `1`. Takes precedence over the agent-level `compaction_threshold`. Cannot be combined with `first_available`. Default: `0.9`. See the [Context & Compaction guide](../../guides/compaction/index.md). |
 | `bypass_models_gateway` | boolean  | ✗        | When `true`, this model connects directly to its provider even when a models gateway (`--models-gateway` / `DOCKER_AGENT_MODELS_GATEWAY`) is configured. Implied by a custom `base_url`. See [Gateway Bypass](#gateway-bypass). |
 
+Built-in provider IDs use models.dev names: `fireworks-ai`, `togetherai`,
+`moonshotai`, and `opencode`. Existing configurations using `fireworks`,
+`together`, `moonshot`, or `opencode-zen` continue to work without warnings.
+New configurations using canonical IDs require a version that supports them.
+Explicitly named custom providers still take precedence.
+
 ## Attachment Capability Overrides
 
 For custom OpenAI-compatible providers, local models (Ollama, DMR), and any
 model the built-in catalogue does not describe, Docker Agent cannot
-auto-detect whether the endpoint accepts image or PDF attachments. When the
-model is absent from the catalogue, Docker Agent logs a diagnostic and falls
-back to text-only, silently dropping attachments.
+auto-detect whether the endpoint accepts image, PDF, audio, or video
+attachments. When the model is absent from the catalogue, Docker Agent logs a
+diagnostic and falls back to text-only, silently dropping attachments. For the
+`chatgpt` provider, a missing entry first falls back to the matching `openai`
+entry for **image input only**; PDF, audio, and video are not inferred.
 
 Declare `capabilities` to make the model's attachment support authoritative
 and skip the catalogue lookup entirely:
@@ -105,25 +118,100 @@ models:
     capabilities:
       image: true
       pdf: true
+
+  proxy-multimodal:
+    provider: vision-proxy
+    model: gemini-2.5-pro
+    capabilities:
+      image: true
+      pdf: true
+      audio: true
+      video: true
 ```
 
 | Field                  | Type    | Description                                       |
-| ---------------------- | ------- | ------------------------------------------------- |
+| ---------------------- | ------- | -------------------------------------------------- |
 | `capabilities.image`   | boolean | Whether the model accepts image attachments       |
 | `capabilities.pdf`     | boolean | Whether the model accepts PDF attachments         |
+| `capabilities.audio`   | boolean | Whether the model accepts audio attachments       |
+| `capabilities.video`   | boolean | Whether the model accepts video attachments       |
 
 The flags must match what the endpoint actually accepts. Claiming a modality
 that the endpoint does not support leads to a provider-side API error. When
-`capabilities` is omitted the behaviour is unchanged (catalogue lookup then
-conservative text-only fallback).
+`capabilities` is omitted, input support comes from the catalogue, the scoped
+ChatGPT image fallback above, or conservative text-only fallback.
 
-See [`examples/capability-overrides.yaml`](https://github.com/docker/docker-agent/blob/main/examples/capability-overrides.yaml) for a complete example.
+### Unsupported media is stripped before the call
+
+Before each model call, Docker Agent removes image, audio, and video message
+parts that the resolved capabilities of the active model do not cover, instead
+of letting the provider fail the whole request. Adjacent text (and PDF) parts
+are preserved in their original order, and each stripped part is reported in
+the debug log (`--debug`) with its media kind and reason.
+
+The stripping decision uses the same capability resolution as attachment
+routing: an explicit `capabilities` declaration is authoritative, so a model
+declared with `audio: true` keeps its audio parts even when the catalogue says
+otherwise. Models absent from the catalogue (without an override) resolve to
+the conservative text-only default and have their media parts stripped.
+
+See [`examples/capability-overrides.yaml`](https://github.com/docker/docker-agent/blob/main/examples/capability-overrides.yaml) for a complete example, and
+[`examples/strip-unsupported-media.yaml`](https://github.com/docker/docker-agent/blob/main/examples/strip-unsupported-media.yaml) for a fixture demonstrating the
+stripping behaviour with and without an override.
+
+### Output capabilities
+
+`output_capabilities` overrides what a model can generate, as opposed to
+`capabilities`, which overrides what it accepts as input. Resolution follows
+one precedence chain: explicit `false`, explicit `true`, then an exact
+models.dev record whose `Modalities.Output` contains `image`. An omitted image
+flag (including `output_capabilities: {}`) therefore uses catalogue metadata;
+an unknown model or unavailable catalogue leaves image output disabled. Docker
+Agent never infers this capability from the model name.
+
+```yaml
+models:
+  gemini-image:
+    provider: google
+    model: gemini-2.5-flash-image
+    output_capabilities:
+      image: true # this model is declared able to generate image output
+```
+
+| Field                       | Type    | Description                                                  |
+| --------------------------- | ------- | -------------------------------------------------------------|
+| `output_capabilities.image` | boolean | Whether the model is declared able to generate image output  |
+
+Omitting `output_capabilities`, using an empty block, or omitting `image` uses
+models.dev metadata for that exact model when available. Setting `image`
+explicitly overrides the catalogue; an explicit `false` has highest precedence
+and disables image response modalities even when the catalogue lists image
+output. Enabling image output only opts the model into behavior that keys off
+that capability (for example, a provider-specific image-output request
+contract); it does not guarantee that a provider will return an image.
+
+Which requests ask for image output, and which request shapes are rejected
+when it is enabled, is provider-specific — see
+[Google Gemini: Generated Images](../../providers/google/index.md#generated-images).
+Where the returned images land and how they are rendered is covered under
+[Generated Media Files](../../features/sessions/index.md#generated-media-files)
+and the TUI's [Generated Media](../../features/tui/index.md#generated-media).
+
+> [!WARNING]
+> **Constraint**
+>
+> `output_capabilities` cannot be combined with `first_available` model selection — the combination is rejected at validation time. Declare it on the concrete candidate models instead.
+
+See [`examples/gemini_image_output.yaml`](https://github.com/docker/docker-agent/blob/main/examples/gemini_image_output.yaml) for a complete example.
 
 ## Custom Token Pricing
 
 Docker Agent prices each model call from the [models.dev](https://models.dev/)
-catalogue. Models the catalogue does not know — custom OpenAI-compatible
-providers, local models, private deployments — are "unpriced": every call is
+catalogue, including long-context tiers. When the total prompt (fresh, cached,
+and cache-written input) exceeds a tier's threshold, its rates apply to the
+whole call. Thresholds are model-specific: for example, GPT-5.4 uses 272k tokens
+and Gemini 2.5 Pro uses 200k. Models the catalogue does not know — custom
+OpenAI-compatible providers, local models, private deployments — are "unpriced": every call is
 recorded at $0 despite consuming tokens, with only a log warning.
 
 Declare `cost` to price a model explicitly, in **USD per one million tokens**.
@@ -341,60 +429,32 @@ See [`examples/first_available.yaml`](https://github.com/docker/docker-agent/blo
 
 ## Thinking Budget
 
-Control how much reasoning the model does before responding. This varies by provider:
-
-### OpenAI
-
-Uses effort levels as strings:
-
-```yaml
-models:
-  gpt:
-    provider: openai
-    model: gpt-5.6
-    thinking_budget: low # none | minimal | low | medium | high | xhigh | max (xhigh needs gpt-5.2+; none/max need gpt-5.6+; minimal dropped on gpt-5.6+)
-```
-
-### Anthropic
-
-Uses an integer token budget (1024–32768), or — on adaptive-capable models (Opus 4.6+) — `adaptive`, `adaptive/<effort>`, or a bare effort level:
+Control how much reasoning the model does before responding with `thinking_budget` (string or integer). The accepted values and defaults depend on the provider and model. See the [Thinking / Reasoning guide](../../guides/thinking/index.md#quick-reference) for the comparison and how to choose an effort level.
 
 ```yaml
 models:
   claude:
     provider: anthropic
     model: claude-sonnet-4-5
-    thinking_budget: 16384 # must be < max_tokens
-
-  opus:
-    provider: anthropic
-    model: claude-opus-4-6
-    thinking_budget: adaptive # or adaptive/<effort>, or low | medium | high | xhigh | max
+    max_tokens: 32768
+    thinking_budget: 16384
 ```
+
+### OpenAI
+
+Use a string effort level. See [OpenAI thinking budgets](../../providers/openai/index.md#thinking-budget) for supported levels and model restrictions.
+
+### Anthropic
+
+Use an integer token budget or an adaptive effort setting, depending on the model. See [Anthropic thinking budgets](../../providers/anthropic/index.md#thinking-budget) for accepted values, the `max_tokens` constraint, and model restrictions.
 
 ### Google Gemini 2.5
 
-Uses an integer token budget. `0` disables, `-1` lets the model decide:
-
-```yaml
-models:
-  gemini:
-    provider: google
-    model: gemini-2.5-flash
-    thinking_budget: -1 # dynamic (default)
-```
+Use an integer token budget. See [Gemini thinking budgets](../../providers/google/index.md#thinking-budget) for defaults, limits, and dynamic thinking.
 
 ### Google Gemini 3
 
-Uses effort levels like OpenAI:
-
-```yaml
-models:
-  gemini3:
-    provider: google
-    model: gemini-3-flash
-    thinking_budget: medium # minimal | low | medium | high
-```
+Use a string effort level. See [Gemini thinking budgets](../../providers/google/index.md#thinking-budget) for supported values and examples.
 
 ### Disabling Thinking
 
@@ -402,41 +462,17 @@ models:
 thinking_budget: none # or 0
 ```
 
-`none` and `0` both clear Docker Agent's local thinking configuration (omitting `thinking_budget` has the same effect); neither is guaranteed to reach the API as a real "off" switch:
-
-- **OpenAI gpt-5.6+** (Sol/Terra/Luna) is the only case with a genuine API-level `none` reasoning effort: Docker Agent sends it as-is and the model does not reason.
-- **Older OpenAI reasoning models** (o-series, gpt-5 through gpt-5.5) have no such switch: `none`/`0` just clear the local config, and the model falls back to the API's own default effort and still reasons internally. Same for other always-reasoning models (Gemini 3).
-- Providers with a true optional-thinking switch (Gemini 2.5, Claude, local models) are fully disabled by `none`/`0`.
-
-```yaml
-models:
-  fast-responder:
-    provider: openai
-    model: gpt-5.6
-    thinking_budget: none # real API-level disable on gpt-5.6+
-```
-
-See the [Thinking / Reasoning guide](../../guides/thinking/index.md) for per-provider details, including AWS Bedrock and Docker Model Runner.
+`none` and `0` both clear Docker Agent's local thinking configuration (omitting `thinking_budget` has the same effect). Whether that reaches the API as a real "off" switch depends on the model — see [Disabling Thinking](../../guides/thinking/index.md#disabling-thinking) in the guide.
 
 ## Task Budget
 
 **Anthropic-only.**
 
 `task_budget` caps the **total** number of tokens the model may spend across a
-multi-step agentic task — combining thinking, tool calls, and final output
-tokens. It lets long-running agents self-regulate effort without having to
-choose a tight per-call `max_tokens`.
-
-It is forwarded to Anthropic's
-[`output_config.task_budget`](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7)
-request field. Docker Agent automatically attaches the required
-`task-budgets-2026-03-13` beta header whenever this field is set.
-
-You can configure `task_budget` on **any** Claude model — Docker Agent never
-gates it by model name. At the time of writing only **Claude Opus 4.7**
-actually honors the field; other Claude models will reject requests that
-include it. Check the Anthropic release notes linked above for the current
-list of supported models.
+multi-step agentic task — thinking, tool calls, and final output combined.
+Docker Agent never gates it by model name; which Claude models honor or
+reject the field, and how it is forwarded to the API, is covered on the
+[Anthropic provider page](../../providers/anthropic/index.md#task-budget).
 
 ### Integer shorthand
 
@@ -474,41 +510,55 @@ See [`examples/task_budget.yaml`](https://github.com/docker/docker-agent/blob/ma
 
 ## Interleaved Thinking
 
-For Anthropic and Bedrock Claude models, interleaved thinking allows tool calls during model reasoning. It is auto-enabled whenever a thinking budget is configured:
-
-```yaml
-models:
-  claude:
-    provider: anthropic
-    model: claude-sonnet-4-5
-    thinking_budget: 8192
-    # interleaved_thinking is auto-enabled when thinking_budget is set
-    provider_opts:
-      interleaved_thinking: false # disable if needed
-```
+`provider_opts.interleaved_thinking` controls reasoning between tool calls on Claude models. See [Anthropic](../../providers/anthropic/index.md#interleaved-thinking) or [Bedrock](../../providers/bedrock/index.md#interleaved-thinking-claude-on-bedrock) for automatic enablement, opt-out syntax, and beta-header handling.
 
 ## Thinking Display (Anthropic)
 
-For Anthropic Claude models, `thinking_display` controls whether thinking blocks are returned in responses when thinking is enabled. Newer Claude models (Opus 4.7+, Fable 5) hide thinking content by default (`omitted`); Docker Agent requests `summarized` thinking by default for adaptive/effort-based budgets so reasoning stays visible. Set this provider option to override:
+`provider_opts.thinking_display` controls the thinking content returned in responses. See [Anthropic: Thinking Display](../../providers/anthropic/index.md#thinking-display) for accepted values, defaults, an override example, and startup validation.
+
+## Extra Request Body
+
+For OpenAI-compatible providers and Docker Model Runner, `provider_opts.extra_body`
+adds arbitrary top-level fields to **Chat Completions** request bodies. Use it for
+backend-specific options that Docker Agent does not expose directly:
 
 ```yaml
 models:
-  opus-4-7:
-    provider: anthropic
-    model: claude-opus-4-7
-    thinking_budget: adaptive
+  local:
+    provider: openai
+    model: mlx-community/Qwen3.6-35B-A3B-8bit
+    base_url: http://localhost:8080/v1
     provider_opts:
-      thinking_display: omitted # "summarized" or "omitted" ("display" on pre-4.6 models only)
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
 ```
 
-`display` (full thinking blocks) is only accepted by pre-4.6 token-thinking models (e.g. Sonnet 4.5, Haiku 4.5); newer models (Opus/Sonnet 4.6+, Sonnet 5, Fable 5) only accept `summarized` and `omitted`, and Docker Agent rejects the configuration at startup.
+Choose the switch your server supports. Other backends may accept
+`extra_body: {reasoning_effort: none}` or
+`extra_body: {thinking: {type: disabled}}` instead. Docker Agent does not translate
+these options or infer them from `thinking_budget: none`.
 
-See the [Anthropic provider page](../../providers/anthropic/index.md#thinking-display) for details.
+`extra_body` must be an object; other values cause a request error. Its contents
+are merged at the top level, without an `extra_body` wrapper. Nested objects are
+replaced, not deep-merged. Explicit values override generated fields, including
+sampling parameters, token limits, and internal no-thinking settings. These
+overrides also apply to title generation, compaction, and OpenAI-client reranking
+when they use the configured model's Chat Completions endpoint. Streaming calls
+always force `stream: true`, regardless of `extra_body`. Only set fields your
+server accepts, and avoid overriding request structure such as `messages`.
+
+This option does not apply to the Responses API, embeddings, or DMR's model-wide
+`_configure` endpoint. Other `provider_opts` keys remain client-side unless
+explicitly supported.
+
+See [`examples/extra_body.yaml`](https://github.com/docker/docker-agent/blob/main/examples/extra_body.yaml)
+for a complete local-server configuration.
 
 ## Custom HTTP Headers
 
 For OpenAI-compatible providers (`openai`, `github-copilot`, `mistral`, `xai`,
-`nebius`, `nvidia`, `minimax`, `baseten`, `ovhcloud`, `groq`, `fireworks`, `deepseek`, `cerebras`, `together`, `huggingface`, `moonshot`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `ollama`, and any custom provider using the OpenAI API),
+`nebius`, `nvidia`, `minimax`, `baseten`, `daoxe`, `ovhcloud`, `groq`, `fireworks-ai`, `deepseek`, `cerebras`, `togetherai`, `huggingface`, `moonshotai`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `atlascloud`, `ollama`, and any custom provider using the OpenAI API),
 `provider_opts.http_headers` adds arbitrary HTTP headers to every outgoing
 request:
 
@@ -613,27 +663,4 @@ See [Local Models](../../providers/local/index.md) for more examples of custom e
 
 ## Inheriting from Provider Definitions
 
-Models can reference a named provider to inherit shared defaults. Model-level settings always take precedence:
-
-```yaml
-providers:
-  my_anthropic:
-    provider: anthropic
-    token_key: MY_ANTHROPIC_KEY
-    max_tokens: 16384
-    thinking_budget: 8192
-    temperature: 0.5
-
-models:
-  claude:
-    provider: my_anthropic
-    model: claude-sonnet-4-5
-    # Inherits max_tokens, thinking_budget, temperature from provider
-
-  claude_fast:
-    provider: my_anthropic
-    model: claude-haiku-4-5
-    thinking_budget: 1024  # Overrides provider default
-```
-
-See [Provider Definitions](../../providers/custom/index.md) for the full list of inheritable properties.
+Models can reference a named provider to inherit shared defaults. Model-level settings take precedence. See [Default Inheritance](../../providers/custom/index.md#default-inheritance) for a complete example and the special precedence rules for `compaction_model`, and [Provider Properties](../../providers/custom/index.md#provider-properties) for the inheritable fields.

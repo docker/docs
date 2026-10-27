@@ -1,9 +1,11 @@
 ---
 title: "Troubleshooting"
 description: "Common issues and how to resolve them when working with Docker Agent."
-keywords: docker agent, ai agents, community, troubleshooting
-weight: 20
-canonical: https://docs.docker.com/ai/docker-agent/community/troubleshooting/
+keywords: docker agent, ai agents, guides, troubleshooting
+weight: 60
+canonical: https://docs.docker.com/ai/docker-agent/guides/troubleshooting/
+aliases:
+  - /ai/docker-agent/community/troubleshooting/
 ---
 
 _Common issues and how to resolve them when working with Docker Agent._
@@ -128,22 +130,7 @@ $ docker agent run config.yaml --otel
 
 ### API keys not set
 
-Each model provider requires its own API key as an environment variable:
-
-| Provider      | Environment Variable                                |
-| ------------- | --------------------------------------------------- |
-| OpenAI        | `OPENAI_API_KEY`                                    |
-| Anthropic     | `ANTHROPIC_API_KEY`                                 |
-| Google Gemini | `GOOGLE_API_KEY` or `GEMINI_API_KEY`                |
-| Mistral       | `MISTRAL_API_KEY`                                   |
-| xAI           | `XAI_API_KEY`                                       |
-| Nebius        | `NEBIUS_API_KEY`                                    |
-| MiniMax       | `MINIMAX_API_KEY`                                   |
-| Requesty      | `REQUESTY_API_KEY`                                  |
-| OpenRouter    | `OPENROUTER_API_KEY`                                |
-| GitHub Copilot | `GITHUB_TOKEN` (PAT with `copilot` scope)          |
-| Azure OpenAI  | `AZURE_API_KEY` (override with `token_key`)         |
-| AWS Bedrock   | `AWS_BEARER_TOKEN_BEDROCK` or AWS credentials chain |
+Check that your provider's credentials are available to the process running Docker Agent. For example, OpenAI uses `OPENAI_API_KEY` and Anthropic uses `ANTHROPIC_API_KEY`. Other providers use different variables, account login, or a credentials chain; local models may need no key. See [Provider Credentials](../../providers/overview/index.md#provider-credentials) for the complete mapping.
 
 ```bash
 # Verify your keys are set
@@ -159,7 +146,7 @@ Model names must match the provider's naming exactly. Common mistakes:
 
 ### Network connectivity
 
-If the agent hangs or times out, check that you can reach the provider's API endpoint. Firewalls, VPNs, or proxy settings may block requests.
+If the agent hangs or times out, check that you can reach the provider's API endpoint. Firewalls, VPNs, or proxy settings may block requests. Docker Agent does not evaluate PAC files or URLs directly. When Docker Desktop is running, eligible requests use its PAC adapter before environment proxy settings; `NO_PROXY` does not bypass that selection. Set `DOCKER_AGENT_DISABLE_DESKTOP_PROXY=1` (or `true`, `yes`, or `on`) to restore `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` routing per request; see [Docker Desktop proxy](../../tools/fetch/index.md#docker-desktop-proxy) for scope and SSRF behavior.
 
 ## Tool Execution Failures
 
@@ -198,6 +185,8 @@ MCP tools using stdio transport must complete the initialization handshake befor
 > At startup, Docker Agent queries each toolset for its tool list. If a toolset does not respond within 10 seconds (e.g. a wedged MCP stdio server that never answers `tools/list`), that toolset is skipped with a warning and the remaining toolsets load normally. The sidebar resolves showing whichever tools did load — no infinite spinner. Enable `--debug` to see the warning message, and use `/toolset-restart <name>` once the server becomes responsive.
 
 If a toolset keeps crashing in a tight loop, tune the [`lifecycle`](../../configuration/tools/index.md#toolset-lifecycle) block on the toolset (e.g. raise `backoff.initial`, lower `max_restarts`, or switch to the `best-effort` profile) so a flaky dependency does not amplify into a restart storm.
+
+If a **RAG knowledge base** is failing to index because the embedding provider is rate-limiting requests (HTTP 429), Docker Agent automatically backs off and retries — see [Indexing failures, retries and backoff](../../tools/rag/index.md#indexing-failures-retries-and-backoff) for the retry schedule and the `max_indexing_concurrency` / `max_embedding_concurrency` knobs that control how much concurrent load is generated.
 
 ## Configuration Errors
 
@@ -244,7 +233,7 @@ When running Docker Agent as an API server or MCP server, ensure the port is not
 $ lsof -i :8080
 
 # Use a different port
-$ docker agent serve api config.yaml --listen :9090
+$ docker agent serve api config.yaml --listen :9090 --auth-token "$AGENT_TOKEN"
 ```
 
 ### MCP endpoint accessibility
@@ -283,7 +272,13 @@ A few things that catch people out:
 - Piping stdin into a **local** run (`docker agent run agent.yaml -`) never crosses Docker Agent's own inbound HTTP boundary — Docker Agent may still send that content onward to a model/provider over HTTP, but no request reaches Docker Agent's own server to be measured against a `--max-request-size` cap. Piping stdin into `docker agent run --remote ... -`, however, does cross that boundary: the CLI serializes that stdin text into a native API run request and sends it to whichever Docker Agent server the `--remote` address points at — a `serve api` process or another run's `--listen` control plane, never `serve chat`, which speaks a different protocol — so it's measured against that server's own limit like any other request (a configurable `--max-request-size` for `serve api`, or the fixed 1 MiB cap for a `--listen` control plane). That initial request carries only message text — conversion currently drops any attachment resolved locally (`@path`, `/attach`, `--attach`) for the first message, so it alone can't be the cause of a 413. But a `--remote` run doesn't stay text-only for its whole lifetime: a locally resolved attachment added to a *later* message while the agent is still busy — via the default steer behavior or an explicit follow-up (Alt+Enter) — is forwarded as part of that native API request, counts toward the same limit, and can trigger 413 just like any other oversized request.
 
 > [!WARNING]
-> Raising `--max-request-size` increases how much memory an unauthenticated or malicious client can force the server to buffer per request. Pick a value with your deployment's exposure in mind, and pair any non-loopback listener with `--auth-token` (API server) or `--api-key`/`--api-key-env` (chat server). A `--listen` control plane has neither flag — keep it on loopback, a unix socket, or behind an authenticating reverse proxy if it must be reachable from elsewhere.
+> Raising `--max-request-size` increases how much memory an unauthenticated or malicious client can force the server to buffer per request. Pick a value with your deployment's exposure in mind, and pair any non-loopback listener with `--auth-token` (API server) or `--api-key`/`--api-key-env` (chat server). A `--listen` control plane has neither flag — keep its listener on loopback or a local socket (non-loopback TCP is rejected); an authenticating reverse proxy can connect to that local listener.
+
+### Delegated task appears stalled before its first response
+
+A direct `transfer_task` delegation automatically retries once when the child model stream is silent before sending any response payload. It emits the existing warning event, and the retry is immediate and applies once to the complete child run, including later turns and fallback models. Each nested native `transfer_task` starts a new child run with its own fresh retry allowance. The retry does not apply after partial output, to `background_agents`, or when cancellation or a run budget blocks it.
+
+Run with `--debug` and look for `Delegated model stream idle before response; retrying immediately`. If the child still fails, check provider connectivity, fallback configuration, cancellation, and run-budget events; Docker Agent does not retry when the context is canceled or the run budget is exhausted.
 
 ## Performance Issues
 

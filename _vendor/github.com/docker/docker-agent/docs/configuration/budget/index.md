@@ -39,7 +39,7 @@ budget:
 | Field | Type | Description |
 | --- | --- | --- |
 | `max_cost` | number | Maximum spend, in USD. |
-| `max_tokens` | integer | Maximum cumulative input+output tokens. |
+| `max_tokens` | integer | Maximum cumulative tokens: fresh input, cache read, cache write, and output. |
 | `max_time` | string | Maximum time the agents spend working, in Go duration format (`10m`, `30s`, `1h30m`). |
 
 ### Named budgets
@@ -81,11 +81,23 @@ Give agents **distinct budget names** when you want independent pots.
 
 The same applies to the run-wide `budget`: every sub-session inside a run (transferred tasks, sub-agents, skills) spends from that one wallet.
 
+Compaction model calls also count towards the run-wide budget and the compacted agent's named budgets, including when a dedicated compaction model is configured. An exhausted budget skips LLM-based compaction; a hook-supplied summary can still be applied without spending tokens.
+
 ## Scope: a budget spans the session
 
 Spend accumulates for the life of the **session**, across every message you send — it does not reset each time you hit enter. A `max_cost: 0.50` you could re-spend on every message would not be a ceiling at all.
 
 Starting a new session starts a fresh budget. It is a per-session ceiling, not a lifetime quota across sessions.
+
+The native runtime in `docker agent serve api` enforces both run-wide and named
+budgets across requests while that session's runtime remains loaded. Agent
+switches and delegated sub-sessions share the configured wallets; unrelated
+sessions have independent allowances.
+
+Budget counters are in-memory, not persistent quotas. Restarting the API server
+or otherwise reconstructing a runtime starts fresh counters, even when resuming
+stored conversation history and cost totals. External `harness:` execution does
+not use the native budget-enforcement loop.
 
 > [!NOTE]
 > `max_time` measures the time the agents actually spend **working** — the sum of their turn durations — not wall-clock since the session opened. Because a budget spans a session, and a session sits idle while you read and type, wall-clock would let a budget expire during a coffee break: leave the TUI open for ten minutes and your next message would instantly trip a `max_time` of `2m` without the agent having done anything.
@@ -180,7 +192,7 @@ This is the same granularity [`max_iterations`](../agents/index.md) has, and it 
 
 ### `max_tokens` here is not the model's `max_tokens`
 
-The `max_tokens` in a budget is a **cumulative** count of input+output tokens across the whole run. It is unrelated to the provider- or model-level [`max_tokens`](../models/index.md), which caps the output of a single response.
+The `max_tokens` in a budget is a **cumulative** count of tokens across the whole run: fresh input, cache-read input, cache-write input, and output all count towards it. It is unrelated to the provider- or model-level [`max_tokens`](../models/index.md), which caps the output of a single response.
 
 It is also not the session's context length: compaction resets that, while the budget keeps counting.
 

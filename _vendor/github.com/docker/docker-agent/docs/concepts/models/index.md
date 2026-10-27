@@ -70,38 +70,7 @@ for details.
 
 ## Supported Providers
 
-| Provider            | Key              | Example Models                       | API Key Env Var                     |
-| ------------------- | ---------------- | ------------------------------------ | ----------------------------------- |
-| OpenAI              | `openai`         | gpt-5, gpt-5-mini, gpt-4o            | `OPENAI_API_KEY`                    |
-| Anthropic           | `anthropic`      | claude-sonnet-4-5, claude-opus-5     | `ANTHROPIC_API_KEY`                 |
-| Google              | `google`         | gemini-3.5-flash, gemini-3-pro       | `GOOGLE_API_KEY` / `GEMINI_API_KEY` |
-| AWS Bedrock         | `amazon-bedrock` | Claude, Nova, Llama models           | AWS credentials                     |
-| Docker Model Runner | `dmr`            | ai/qwen3, ai/llama3.2                | None (local)                        |
-| Mistral             | `mistral`        | Mistral models                       | `MISTRAL_API_KEY`                   |
-| xAI                 | `xai`            | Grok models                          | `XAI_API_KEY`                       |
-| Nebius              | `nebius`         | Open-source and specialised models   | `NEBIUS_API_KEY`                    |
-| NVIDIA NIM          | `nvidia`         | Nemotron, Llama, Qwen, DeepSeek (open models) | `NVIDIA_API_KEY`               |
-| MiniMax             | `minimax`        | MiniMax models                       | `MINIMAX_API_KEY`                   |
-| Baseten             | `baseten`        | DeepSeek, Kimi, GLM, Llama models    | `BASETEN_API_KEY`                   |
-| OVHcloud            | `ovhcloud`       | Qwen, Llama, Mistral, DeepSeek (EU-hosted) | `OVH_AI_ENDPOINTS_ACCESS_TOKEN` |
-| Groq                | `groq`           | Llama, Qwen, GPT-OSS (fast inference) | `GROQ_API_KEY`                     |
-| Fireworks AI        | `fireworks`      | Kimi, Llama, Qwen, DeepSeek, GLM (open models) | `FIREWORKS_API_KEY`         |
-| DeepSeek            | `deepseek`       | DeepSeek-V3 chat and R1 reasoner     | `DEEPSEEK_API_KEY`                  |
-| Cerebras            | `cerebras`       | GPT-OSS, GLM (fast inference)         | `CEREBRAS_API_KEY`                  |
-| Together AI         | `together`       | Llama, Qwen, DeepSeek, Kimi (open models) | `TOGETHER_API_KEY`             |
-| Hugging Face        | `huggingface`    | Llama, Qwen, DeepSeek, GLM (open models) | `HF_TOKEN`                      |
-| Cloudflare Workers AI | `cloudflare-workers-ai` | Llama, Mistral, Qwen, Gemma (edge-hosted open models) | `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` |
-| Moonshot AI         | `moonshot`       | Kimi K2 chat, reasoning, and coding models | `MOONSHOT_API_KEY`             |
-| Vercel AI Gateway   | `vercel`         | Multi-provider gateway               | `AI_GATEWAY_API_KEY`                |
-| Cloudflare AI Gateway | `cloudflare-ai-gateway` | Multi-provider gateway         | `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` + `CLOUDFLARE_GATEWAY_ID` |
-| Requesty            | `requesty`       | Multi-provider gateway               | `REQUESTY_API_KEY`                  |
-| OpenRouter          | `openrouter`     | Multi-provider gateway               | `OPENROUTER_API_KEY`                |
-| Azure OpenAI        | `azure`          | gpt-4o, gpt-5 on Azure               | `AZURE_API_KEY` + `base_url`        |
-| [Ollama](../../providers/local/index.md) | `ollama` | Any local Ollama model | None (local; optional `base_url`) |
-| GitHub Copilot      | `github-copilot` | Copilot-hosted OpenAI/Anthropic      | `GITHUB_TOKEN` (PAT with `copilot`) |
-| ChatGPT (OpenAI account) | `chatgpt`   | gpt-5 family via ChatGPT subscription | None (sign in via `docker agent setup`) |
-
-See the [Model Providers](../../providers/overview/index.md) section for detailed configuration guides.
+See [Model Providers](../../providers/overview/index.md) for provider comparisons and the complete [provider keys and credentials table](../../providers/overview/index.md#provider-credentials). Each provider's page covers its models and setup.
 
 ## Model Properties
 
@@ -133,9 +102,9 @@ Control how much the model "thinks" before responding:
 | All        | string/int | `none` or `0` clears Docker Agent's local config                    | —                                |
 
 `none` and `0` are not universal API-level disable switches. On genuine OpenAI
-gpt-5.6+ endpoints (Sol/Terra/Luna), `none` is a real `reasoning_effort` value
-that Docker Agent sends as-is and the model does not reason. On older OpenAI
-models, `none`/`0` only clear the local `thinking_budget` — omitting the field
+endpoints running GPT-5.x from 5.6 onward or GPT-6 Sol/Luna, `none` is a real
+`reasoning_effort` value that Docker Agent sends as-is and the model does not
+reason. On GPT-6 Astra and older OpenAI models, `none`/`0` only clear the local `thinking_budget` — omitting the field
 has the same effect — and the model falls back to the API's own default effort
 (still reasoning internally for always-reasoning models like the o-series).
 Providers with a true optional-thinking switch (Gemini 2.5, Claude, local
@@ -153,7 +122,7 @@ models:
   fast-responder:
     provider: openai
     model: gpt-5.6
-    thinking_budget: none # real API-level disable on gpt-5.6+
+    thinking_budget: none # real API-level disable on gpt-5.6
 ```
 
 > [!NOTE]

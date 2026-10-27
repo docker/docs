@@ -87,3 +87,9 @@ The background jobs toolset exposes five tools:
 > **Safety**
 >
 > Background jobs run shell commands with the same access as the agent process. Stop servers and watchers when they are no longer needed, and use [Sandbox Mode](../../configuration/sandbox/index.md) for additional isolation.
+
+### Command classification
+
+The `cmd` passed to `run_background_job` goes through the same [command classification](../shell/index.md#command-classification) as the `shell` tool: it is labelled `safe`, `destructive` (with a `blast_radius`) or `unknown`, and the session's [safety mode](../../configuration/permissions/index.md#safety-modes) decides whether to run, ask or deny. A destructive command cannot bypass its confirmation badge by being started in the background. Most long-running commands (`npm run dev`, `go run .`, `docker compose up`) are `unknown` and prompt under `strict` / `balanced`.
+
+The interactive "always allow" decision grants the first word of the command (e.g. `run_background_job:cmd=npm*`), scoped to this tool — it does not cover the same command run through `shell`, and vice versa.

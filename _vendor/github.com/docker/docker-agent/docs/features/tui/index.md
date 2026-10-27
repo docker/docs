@@ -13,7 +13,7 @@ _Docker Agent's default interface is a rich, interactive terminal UI with file a
 
 ## Launching the TUI
 
-Both the full TUI and the lean TUI display a centered ASCII art Docker Agent banner on startup when the chat is empty. The banner is automatically hidden once the agent starts responding or when a custom welcome message is configured.
+Both the full TUI and the lean TUI display a centered ASCII art Docker Agent banner on startup when the chat is empty. The banner is automatically hidden once the agent starts responding or when a custom welcome message is configured. You can disable the banner entirely from the **Appearance** tab of `/settings`, or by setting `show_banner: false` in your [user settings](../../configuration/user-settings/index.md).
 
 ```bash
 # Launch with a config
@@ -49,6 +49,8 @@ $ docker agent run agent.yaml --lean
 
 ### Lean TUI
 
+File writes use the tool's display title (for example, **Write**) and preview file contents as tool arguments stream in, with theme-aware syntax highlighting based on the filename. Unknown file types remain plain text. By default, the preview follows the last 10 file lines. Press <kbd>Ctrl</kbd>+<kbd>O</kbd> to toggle compact (last 10 lines) and complete (full contents) previews for the current session, including already displayed file writes. In `/settings`, change **Written file preview** to **Full** to show the entire incoming file, or persist `settings.lean_full_file_preview: true` in your user config.
+
 The lean TUI uses a simplified terminal interface with minimal chrome. To make it the default for interactive runs, set `lean` in your user config:
 
 ```yaml
@@ -59,9 +61,19 @@ settings:
 
 Omit `lean` or set it to `false` to keep the full TUI as the default. You can still use `--lean` for a single run, or `--lean=false` to use the full TUI when `settings.lean` is enabled. See [User Settings](../../configuration/user-settings/index.md) for the full precedence rules between flags and user config.
 
-The lean TUI supports **steering** and **follow-ups** while the agent is running. Press <kbd>Enter</kbd> to steer the active turn, or <kbd>Alt</kbd>+<kbd>Enter</kbd> to queue the message as a separate turn after the current one finishes. Pending messages appear with muted styling at the end of the live stream.
+The lean TUI supports **steering** and **follow-ups** while the agent is running. Press <kbd>Enter</kbd> to steer the active turn, or <kbd>Alt</kbd>+<kbd>Enter</kbd> to queue the message as a separate turn after the current one finishes. Pending messages appear with muted styling at the end of the live stream, labeled `Steering:` or `Follow-up:` so it's clear which turn each one will land on. Press <kbd>Alt</kbd>+<kbd>Up</kbd> to withdraw every still-pending steer/follow-up (and any locally queued message) back into the editor, concatenated in the order they were sent, so you can edit and resend them; messages the agent has already picked up are left alone.
 
-The lean TUI supports a focused set of slash commands: `/new`, `/compact`, `/model`, `/effort`, `/clear`, `/help`, `/exit` (alias: `/quit`), plus any agent-defined commands. Type `/model` (or `/model <provider/model>`) to switch the active model inline — the command opens a fuzzy-searchable list of available models.
+The lean TUI supports a focused set of slash commands: `/new`, `/sessions`, `/compact`, `/model`, `/effort`, `/copy`, `/clear`, `/settings`, `/help`, `/exit` (alias: `/quit`), plus any agent-defined commands. Type `/model` (or `/model <provider/model>`) to switch the active model inline — the command opens a fuzzy-searchable list of available models. If what you type after `/` doesn't match any command, the autocomplete menu automatically falls back to fuzzy-matching it against available models (by name, provider, or ID) instead of dismissing — selecting a match switches the model just like `/model` would, without needing to type `/model` first; this fallback is unavailable when `/model` itself is disabled via `--disable-commands`. Type `/sessions` (or `/sessions <session-id>`) to browse and resume past sessions from the current working directory. Type `/copy` to copy the last assistant response to the clipboard. Type `/settings` to open the lean TUI's inline settings panel — see [User Settings](../../configuration/user-settings/index.md) for the fields it exposes.
+
+Prefix a message with `!` to run it as a shell command directly, without going through the agent — for example `!git status`. The command runs in your default shell and its output is shown inline in the transcript. Bang commands are disabled in read-only sessions.
+
+Type `@` to open a fuzzy-searchable file completion menu (respects `.gitignore`); press <kbd>Tab</kbd> or <kbd>Enter</kbd> to insert the selected file's path into the message text.
+
+## Terminal status indicators
+
+In terminals supporting the [OSC 7501 Program Status protocol](https://www.superlogical.com/rex/docs/build/program-status), Docker Agent automatically reports when it is working, waiting for approval or input, finished, or failed. The terminal decides how to display these indicators, for example in an unfocused tab or session picker.
+
+Both the full TUI and lean mode support status reporting. In the full TUI, the status covers every open session: an unanswered prompt takes precedence over ongoing work, including prompts in background tabs. Cancellation is not reported as successful completion. Unsupported terminals retain the existing UI and bell behavior; redirected output and server modes do not emit status reports.
 
 ## Slash Commands
 
@@ -69,7 +81,7 @@ Type `/` during a session to see available commands, or press <kbd>Ctrl</kbd>+<k
 
 | Command            | Description                                                                          |
 | ------------------ | ------------------------------------------------------------------------------------ |
-| `/new`             | Start a new conversation                                                             |
+| `/new`             | Start a new conversation (usage: `/new [dir]`). With a directory — `~` and environment variables expand, relative paths resolve from the current session's working dir — the new session starts there; without one it reuses an explicit `--working-dir` default or opens the directory picker |
 | `/clear`           | Clear the current conversation (keep session, drop messages)                         |
 | `/compact`         | Summarize and compact the conversation history                                       |
 | `/fork`            | Fork the current session into a new branch                                           |
@@ -79,7 +91,7 @@ Type `/` during a session to see available commands, or press <kbd>Ctrl</kbd>+<k
 | `/snapshots`       | List captured snapshots (only when snapshots are enabled)                            |
 | `/export`          | Export the session as HTML                                                           |
 | `/sessions`        | Browse and load past sessions                                                        |
-| `/plans`           | Browse and manage plans: every [shared plan](../../tools/plan/index.md) plus the current session's [session plan](../../tools/session_plan/index.md). Filter, open a detail view, refresh, export to a file, and — for shared plans — set status, edit/create in `$VISUAL`/`$EDITOR`, and delete, all guarded against concurrent edits. Not available in the lean TUI |
+| `/plans`           | Browse and manage every [shared plan](../../tools/plan/index.md). Filter, open a detail view, refresh, export to a file, set status, edit/create in `$VISUAL`/`$EDITOR`, and delete, all guarded against concurrent edits. Not available in the lean TUI |
 | `/model`           | Change the model for the current agent                                               |
 | `/effort`          | Set the current model's reasoning-effort level (`/effort <none\|minimal\|low\|medium\|high\|xhigh\|max>`, or `/effort` alone to pick from the supported levels; reasoning models only). Press <kbd>Tab</kbd> after `/effort` and a space to complete a level the current model supports |
 | `/settings`        | Manage appearance, behavior, and notification preferences                           |
@@ -97,12 +109,47 @@ Type `/` during a session to see available commands, or press <kbd>Ctrl</kbd>+<k
 | `/skills`          | List skills available to the current agent                                           |
 | `/toolset-restart` | Force a supervisor-driven reconnect of the named toolset (`/toolset-restart <name>`). Press <kbd>Tab</kbd> after `/toolset-restart` and a space to complete a toolset name; non-restartable toolsets are shown dimmed and cannot be selected. |
 | `/permissions`     | Inspect and edit tool permission rules                                               |
-| `/speak`           | Voice input via system speech-to-text (macOS only)                                   |
+| `/speak`           | Voice input via OpenAI's Realtime API (macOS only; requires `OPENAI_API_KEY`)           |
 | `/exit`            | Exit the application (aliases: `/quit`, `/q`)                                        |
 
 Slash commands (both built-in and named) execute immediately when entered. Regular chat messages sent while the agent is working are steered into the ongoing stream by default: the agent picks them up mid-turn (they appear in the transcript at the point the agent sees them) without breaking the stream. Prefer the previous end-of-turn behavior? Switch **While agent is working** to `Queue` on the **Behavior** tab of `/settings`; queued messages are processed in order once the stream stops.
 
 Agent-defined commands (prompts, URL links, agent-switching shortcuts) are configured under `commands:` in the agent YAML — see [Custom Commands](../../configuration/commands/index.md) for the full reference, including how to hide commands with `--disable-commands`.
+
+### Voice Input (`/speak`)
+
+In the full TUI on macOS, `/speak` captures microphone audio and sends it directly to OpenAI's Realtime API for transcription. It is not local or system-provided speech recognition. Its provider, endpoint, and API key are not selected from your chat model's configuration.
+
+Docker's models gateway currently does **not** support `/speak`. Even when your chat uses the gateway, voice input requires a separate OpenAI API key set in the `OPENAI_API_KEY` environment variable **before starting Docker Agent**:
+
+```bash
+export OPENAI_API_KEY=your_openai_api_key
+docker agent run agent.yaml
+```
+
+Run `/speak` to start voice input. Press <kbd>Enter</kbd> to finish transcription and send the message once the final text arrives. Press <kbd>Escape</kbd> to cancel without sending; text already received stays in the draft. Errors or a finalization timeout keep the draft instead of sending a partial message.
+
+Dictation stays with the tab where it started. Switching tabs while transcription finishes keeps the text in the original draft without sending it.
+
+### Plans Sidebar
+
+The optional **Plans** section is off by default. Enable it under `/settings` → **Appearance** → **Sidebar sections**, or in your global [user settings](../../configuration/user-settings/index.md):
+
+```yaml
+# ~/.config/cagent/config.yaml
+settings:
+  layout:
+    show_plans: true
+```
+
+Plans are shared documents from the same store used by `/plans`, the [plan tools](../../tools/plan/index.md), and `docker agent plans` — not plans attached to the current session. A full left/right sidebar shows up to **five** plans, ordered by last update (newest first, unknown timestamps last, with name as the tie-breaker). Status is shown as free-form text; there is no active/completed classification or status filter.
+
+- **Single left-click a plan row** to open its content directly in `$VISUAL`/`$EDITOR`, guarded by the displayed revision. A stale revision is rejected rather than overwriting newer content.
+- **All plans** opens the shared plan browser. `/plans` and the <kbd>Ctrl</kbd>+<kbd>K</kbd> command palette remain the keyboard routes.
+- Top/bottom layouts and narrow or collapsed sidebar bands show only a compact `Plans (N) - open /plans` count and browser shortcut, not individual plan rows. Lean mode and `--sidebar=false` never show the section.
+- Changes from plan events in the current process and local edits refresh the shared metadata. To pick up changes from another process, use the sidebar's **Refresh plans** action or press <kbd>r</kbd> in the plan browser or detail view. There is no automatic polling or file watcher.
+
+Editing changes only the plan document. It does not approve a plan, execute its steps, or authorize tool writes.
 
 ### Agents Panel
 
@@ -127,6 +174,7 @@ The title is rendered in the agent's accent color. Sections appear in this order
 
 - **Description** — the agent's wrapped description.
 - **Live state** — a `● current agent` line when the inspected agent is the one currently running.
+- **Execution capabilities** — native versus harness execution, tool execution/approval ownership, and support for budgets, native compaction, mid-turn steering and prompt-hook context. Support is not an enabled setting; budget support requires runtime configuration. Harness actions are reported, not approved by Docker Agent. Omitted when the server has not supplied a profile.
 - **Model / Fallback / Thinking** — the `provider/model`, any fallback models, and the gauge + value thinking line (omitted for models with no selectable thinking, e.g. harness-backed agents).
 - **Context** — the agent's latest known context usage, e.g. `Context: 12.8K of 128.0K tokens (10%)` (a bare token count when the context limit is unknown; omitted until the agent has run). Sub-agent and background-agent runs are accounted for. When a dedicated `compaction_model` caps the effective limit below the primary model's own window, the token-usage line also shows a short "⚠ capped" marker (see `/context` for the model and figure).
 - **Cost** — the agent's cumulative cost across all runs in the session tree. Repeated session snapshots are not double-counted. Omitted until the agent has run.
@@ -251,7 +299,7 @@ Unsupported or syntactically invalid LaTeX expressions fall back to displaying t
 
 The TUI fetches and renders images referenced in agent responses using the Kitty graphics protocol. When an assistant message contains a standard Markdown image reference, the TUI downloads the image in the background and displays it inline at the point of the reference. While the image is loading a placeholder is shown; once loaded, the message re-renders with the image in place.
 
-Only `http://`, `https://`, and `data:image/…;base64,…` URIs are resolved. `file://`, `sandbox://`, and any other URI scheme are rejected as a security measure against prompt-injection attacks that could otherwise read local files. Bare relative paths (e.g. `./output.png`, used for agent-generated images) are read via the local filesystem. Images that fail to load are silently dropped — the surrounding message text is unaffected. Image rendering requires a terminal that supports the Kitty graphics protocol; it is automatically disabled when the terminal does not support it. You can also disable it explicitly via `render_images: false` in `~/.config/cagent/config.yaml` or the **Render images** toggle in `/settings`.
+Only `http://`, `https://`, and `data:image/…;base64,…` URIs are resolved. `file://`, `sandbox://`, and any other URI scheme are rejected as a security measure against prompt-injection attacks that could otherwise read local files. Bare relative paths (e.g. `./output.png`, used for agent-generated images) are read via the local filesystem. Images that fail to load are silently dropped — the surrounding message text is unaffected. Image rendering requires a terminal that supports the Kitty graphics protocol; it is automatically disabled when the terminal does not support it. Support is checked before the TUI starts; an unanswered probe waits up to 300 ms. You can disable rendering and skip this check via `render_images: false` in `~/.config/cagent/config.yaml` or the **Render images** toggle in `/settings`. Disabling and re-enabling images applies immediately when startup confirmed support. If the startup check was skipped, enabling images takes effect on the next launch.
 
 ### Snapshots, `/undo`, and `/snapshots`
 
@@ -289,6 +337,97 @@ The agent receives the full file contents in a structured `<attachments>` block,
 For large or frequently-reused documents, or for getting content to an agent over the API or chat server instead of the TUI, see [Choosing a Large-Input Strategy](../../guides/headless/index.md#choosing-a-large-input-strategy).
 
 Attached files are also recorded on the session so sub-agents spawned by task transfer can read them. To review what is attached, open `/context`: the dialog lists every attached file (and resolved prompt file) with a per-file token estimate and, when a compaction has occurred, displays the verbatim text of the most recent compaction summary. Use <kbd>↑</kbd>/<kbd>↓</kbd> to select an attached file and press <kbd>d</kbd> (or <kbd>x</kbd>/<kbd>Del</kbd>) to drop it, or run `/drop <path>` directly — press <kbd>Tab</kbd> after `/drop` and a space to complete the path from the currently attached files. Dropping stops sharing the file with sub-agents and skills; content already inlined in earlier messages stays in the conversation until compaction, and the file can always be re-attached with `@` or `/attach`.
+
+## Generated Media
+
+Some models (e.g. Gemini image-output models like `gemini-2.5-flash-image`)
+are designed to generate an image directly as part of their reply, not just
+describe one. Whether Docker Agent asks a model for image output is decided by
+[`output_capabilities.image`](../../configuration/models/index.md#output-capabilities)
+and models.dev metadata; which requests carry it, and which request shapes
+(custom tools, structured output) are rejected locally, is described under
+[Google Gemini: Generated Images](../../providers/google/index.md#generated-images).
+This section covers what happens to the images that come back.
+
+At a text-only stop, Docker Agent checks the last user prompt for phrases
+such as "generate an image" or "draw a picture". A match preserves the reply
+and adds this nonfatal warning: `The model returned text but no image for this
+image-generation request. Try rephrasing the request.` Prompts without a
+matching phrase do not trigger it. This is phrase matching, not semantic
+intent detection: negated or quoted phrases can match, other wording can be
+missed, and the check does not require an image-output-capable model. It does
+not track a whole submission across tool calls, steering, stop hooks, or
+handoffs. A terminal provider error skips this check, as does structured
+output on the current agent model; the check does not inspect every override
+or parse the reply to determine whether it is structured.
+
+**Where images land.** Docker Agent attempts to save each generated image
+as an ordinary workspace file and record it in the session manifest. After
+both steps succeed, it stores a complete portable copy in the session database.
+A failed portable-copy write does not remove the saved workspace file and
+produces a per-item warning. Persistence, portability, database upgrades, and
+legacy-file authorization rules are covered under
+[Generated Media Files](../sessions/index.md#generated-media-files).
+Generated files are untracked workspace files, yours to edit, commit, move,
+or delete. A remote runtime writes to its own workspace; the local TUI does
+not receive a remote binary-rendering path from this feature.
+
+**Naming.** The model is instructed to honor an explicit prompt filename
+such as `assets/red-panda.jpg` in a private naming marker. This is a request,
+not a guarantee: emitted markers take precedence. When exactly one image is
+returned without a marker, a single explicit filename found by a conservative
+prompt parser is used. An unmarked item among several returned images does
+not qualify. Otherwise names come from the provider, then `generated-1`,
+`generated-2`, and so on. Parent directories are created when the validated
+save succeeds. Two rules always apply:
+
+- **The extension matches the data.** The image format is decided by the
+  provider (typically PNG) — asking for `sunshine.gif` or `diagram.svg`
+  does not transcode anything. If the model returns PNG data, the file is
+  saved as `sunshine.png` and a notice tells you so.
+- **Existing files are never overwritten.** A name collision gets a dash
+  suffix instead: a second `red-panda.jpg` is saved as `red-panda-1.jpg`.
+  Publication requires hard-link support; filesystems without it fail safely
+  with a save warning instead of using a replacing rename.
+
+**Paths stay in the workspace.** A prompt-directed target that is absolute,
+`~`-rooted, or climbs above the workspace with `..` is not written outside the
+owning session's workspace. Docker Agent discards the directory portion,
+sanitizes the basename, saves it at the workspace root, and adds a bounded
+warning to the turn. This does not prompt or wait for confirmation, including
+over ACP and other interfaces without an elicitation consumer. General MCP and
+tool elicitation is unaffected. If the owning session has no workspace root,
+the save fails instead of falling back to the data directory. Relative
+subdirectories remain supported after containment and symlink checks. An unusable
+basename falls back to `generated-N`; a redirected save can still fail and warn
+without discarding successful siblings or assistant text.
+
+**Rendering.** Successfully resolved images can appear inline in the same
+assistant turn, using Kitty-graphics support and `render_images` as described
+under [Markdown Images](#markdown-images). Graphics-disabled or unsupported
+terminals show a filename/path fallback. Resolution checks the owning session's
+manifest before preferring its portable database copy; saved bytes can survive
+workspace edits, deletion, or missing provenance. Without workspace provenance,
+the label uses the recorded relative path rather than a verified absolute file. It falls back to the manifest-gated workspace file only when the
+session store has no blob interface or the blob is not found. Other blob errors
+fail closed. Stores without blob support and sessions created before portable
+blobs were introduced continue to use legacy workspace files, subject to the
+manifest, containment, and symlink checks described under
+[Generated Media Files](../sessions/index.md#generated-media-files). Failed
+resolution shows an unavailable label rather than reading an unauthorized
+fallback. Generated-media resolution has no byte cap, and this behavior is
+separate from the existing input bound for ordinary Markdown images rendered
+from assistant text.
+
+If a save fails (unwritable directory, full disk, …), only that image is
+dropped, with a concise warning — the reply text and any sibling images in
+the same turn are kept. If all saves in a media-only reply fail, an empty
+assistant record may remain alongside the warnings. Disk-full, quota, and
+unclassified failures currently use generic retry/debug advice.
+
+Inline image rendering in the TUI also covers a tool/MCP result that
+returns an image, or a Markdown image reference to a file a tool actually
+writes to disk — see [Markdown Images](#markdown-images) above.
 
 ### Team Context Budgets and Targeted Compaction
 
@@ -379,6 +518,7 @@ Customize session titles to make them more meaningful and easier to find. By def
 | Escape     | Cancel current operation                        |
 | Enter      | Send message (or steer while the agent is running) |
 | Alt+Enter  | Queue a follow-up turn while the agent is running |
+| Alt+Up     | Recall all pending (steered/follow-up/queued) messages back into the editor for editing |
 | Shift+Enter | Insert a newline |
 | Up/Down    | Navigate message history                        |
 
@@ -434,21 +574,21 @@ Press <kbd>Ctrl</kbd>+<kbd>R</kbd> to enter incremental history search mode. Sta
 
 ## Settings
 
-Run `/settings` to open the settings dialog. Use <kbd>Tab</kbd> to switch between **Appearance**, **Behavior**, and **Notifications**.
+Run `/settings` to open the settings dialog. Click a category tab, or use <kbd>Tab</kbd> (or <kbd>Shift</kbd>+<kbd>Tab</kbd>), to switch between **Appearance**, **Behavior**, and **Notifications**. Settings are grouped by purpose. Use <kbd>↑</kbd>/<kbd>↓</kbd> to navigate and <kbd>←</kbd>/<kbd>→</kbd> or <kbd>Space</kbd> to change a value. The dialog keeps the same compact size when switching categories and separates settings into sections. The list scrolls only when needed to keep the selected setting visible; the help below it describes the current action.
 
 > [!TIP]
 > **Full settings reference**
 >
 > This section covers the `/settings` dialog. For the complete list of `settings:` fields (including ones with no dialog UI, like `permissions`, `hooks`, and `keybindings`) and how they interact with CLI flags and aliases, see [User Settings](../../configuration/user-settings/index.md).
 
-The **Appearance** tab selects the theme and customizes the layout. Layout changes show a live schematic preview and apply immediately to the UI behind the dialog:
+The **Appearance** tab selects the theme and customizes the layout. Layout changes apply immediately to the UI behind the dialog. On wide terminals, a schematic preview appears beside the controls without reducing the space available to the settings list:
 
 - **Sidebar position**: `Right` (default), `Left`, `Top`, or `Bottom`. Left/right keep the full vertical sidebar next to the chat; top/bottom render it as a compact horizontal band above or below the chat (session title, working directory, token usage, plus a one-line summary of the current agent and its model; in multi-agent configurations all team agents are listed by name after the current agent).
 - **Sidebar info mode**: `Compact` (default) or `Detailed`. Controls how the Agents panel renders agent rows — see [Agents Panel](#agents-panel) for details. Persisted as `settings.layout.sidebar_info_mode: detailed`; compact is the default and omitted from the config.
 - **Section spacing**: `Compact`, `Normal` (default), or `Relaxed`, the number of blank lines between the sidebar sections (1, 2, or 3).
-- **Sidebar sections**: toggle the visibility of the **Session path** (the working directory line, including its git branch) and the **Token usage**, **Agents**, **Tools**, and **Todos** sections. The session title is always shown.
+- **Sidebar sections**: toggle the visibility of the **Session path** (the working directory line, including its git branch) and the **Token usage**, **Agents**, **Tools**, **Plans**, and **Todos** sections. All are visible by default except [Plans](#plans-sidebar), which is opt-in. The session title is always shown.
 
-Appearance also controls split-diff rendering, expanded thinking, and whether tool results are hidden by default. Select **Theme** to open the theme picker.
+Appearance also controls split-diff rendering, expanded thinking, whether tool results are hidden by default, and **Show startup banner** — the ASCII-art banner drawn on an empty conversation (persisted as `settings.show_banner: false` when turned off, and honored by the lean TUI too). Select **Theme** to open the theme picker.
 
 The **Behavior** tab controls busy-message handling, the auto-approve default, tab restoration, automatic snapshots, lean UI, and the maximum tab-title length. Restore-tabs and lean-UI changes take effect on the next launch. Enabling auto-approve requires confirmation.
 
