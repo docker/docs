@@ -30,7 +30,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.97.0" build_path="/244584/" >}}
 
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -63,6 +62,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug where the disk image location could not be moved back to a folder it had previously been moved out of. Fixes [docker/desktop-feedback#565](https://github.com/docker/desktop-feedback/issues/565).
 - Fixed a bug where a failed update could put back Start Menu and desktop shortcuts that had been deleted on purpose.
 - `--user` mode is now the default for new Docker Desktop `.EXE` installations.
+
+### Security
+
+- Addressed [CVE-2026-114409](https://www.cve.org/cverecord?id=CVE-2026-114409), where Docker Desktop could write third-party API keys and OAuth access tokens in cleartext to local application logs and diagnostics bundles. This release also cleans up existing host logs and crash dumps. These OAuth tokens are not Docker account tokens.
+- Addressed [CVE-2026-99999](https://www.cve.org/cverecord?id=CVE-2026-99999), a kernel vulnerability where a container could exploit bad IPv4 checksum metadata via TUN or `AF_PACKET` to corrupt the VM's network stack.
 
 ## 4.96.3
 
