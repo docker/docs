@@ -1,5 +1,5 @@
 ---
-title: Sandbox governance
+title: AI governance
 weight: 20
 description: Control what sandboxes can access, from local developer rules to org-wide enforcement.
 keywords: docker sandboxes, governance, policy, network access, filesystem access, mcp policy, organization policy

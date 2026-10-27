@@ -30,21 +30,9 @@ For domain patterns, wildcards, and CIDR ranges, see
 
 Local policy starts from a network preset, which sets how much network access
 sandboxes have before you add rules of your own. If you haven't chosen a preset,
-the CLI prompts you before it runs a sandbox:
-
-```plaintext
-Initialize the global network policy for your sandboxes:
-
-  Applies to all sandboxes, current and future — change it later with
-  "sbx policy allow/deny/rm". Kits, including built-in agent kits, may
-  also add per-sandbox rules.
-
-     1. Open         — All network traffic allowed, no restrictions.
-  ❯  2. Balanced     — Default deny, with common dev sites allowed.
-     3. Locked Down  — All network traffic blocked unless you allow it.
-
-  Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
-```
+the CLI prompts you to choose one when you run a sandbox in an interactive
+terminal. If a preset is already set, including one carried over from an
+earlier installation, the CLI uses it without prompting.
 
 | Preset      | Description                                                                                                                                       |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |

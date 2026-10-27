@@ -207,7 +207,8 @@ The CLI warns if you save a UDP rule while UDP egress is disabled.
 
 ## Set or reset the preset
 
-You choose a preset the first time you run a sandbox. For more details, see
+If no preset is set, the CLI prompts you to choose one when you run a sandbox
+in an interactive terminal. For more details, see
 [Start from a preset](_index.md#start-from-a-preset). To set the preset without
 the prompt, or to start over with a new one, use `sbx policy init` or `sbx
 policy reset`.
@@ -215,8 +216,9 @@ policy reset`.
 ### Set the preset without the prompt
 
 In non-interactive environments such as CI pipelines or headless servers, the
-interactive prompt can't be displayed. Use `sbx policy init` to set the
-preset before running any other `sbx` commands:
+CLI can't prompt you, so commands such as `sbx run` return an error until a
+preset is set. Use `sbx policy init` to set the preset before you run a
+sandbox:
 
 ```console
 $ sbx policy init balanced

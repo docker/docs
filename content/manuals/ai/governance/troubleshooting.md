@@ -11,6 +11,20 @@ reach and mount, and from the audit logs that record those decisions. For other
 Docker Sandboxes problems, see
 [Troubleshooting](../sandboxes/troubleshooting.md).
 
+## A command fails with "global network policy has not been initialized"
+
+No network preset is set, and the CLI can't prompt you to choose one because
+it isn't running in an interactive terminal, for example in a CI pipeline or a
+script. Commands that work with sandboxes, such as `sbx run`, `sbx create`, and
+`sbx exec`, return this error until a preset is set. Set the preset first:
+
+```console
+$ sbx policy init balanced
+```
+
+Available values are `allow-all`, `balanced`, and `deny-all`. For more details,
+see [Set the preset without the prompt](local/network-rules.md#set-the-preset-without-the-prompt).
+
 ## Agent can't install packages or reach an API
 
 Sandboxes use [network rules](local/network-rules.md) to control
