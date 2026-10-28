@@ -125,9 +125,10 @@ client. An interactive SSH shell starts in the sandbox workspace, matching
 home directory, `/home/agent`. Select the intended folder explicitly in the
 editor instead of relying on its initial location.
 
-For a sandbox with a primary workspace, each workspace path appears inside the
-sandbox at the same absolute path as on the host. For example, if you pass
+For directly mounted workspaces, the default sandbox path is the same absolute
+path as on the host. For example, if you pass
 `/Users/bob/src/my-project`, select that path in the remote folder picker. For
+an additional workspace with a custom target, select that target instead. For
 a mountless sandbox that uses a Docker-provided agent template, select
 `/home/agent/workspace`.
 
