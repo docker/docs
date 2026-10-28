@@ -22,7 +22,8 @@ To save and reuse an environment you've configured interactively, see
 
 ## Docker-provided images
 
-Docker's sandbox templates are published as
+To customize an existing agent, start from one of Docker's sandbox templates,
+published as
 `docker/sandbox-templates:<variant>`. They are based on Ubuntu and run as a
 non-root `agent` user with sudo access. Most variants include Git, Docker
 CLI, and common development tools like Node.js, Python, Go, and Java. Full
@@ -46,13 +47,17 @@ Docker rebuilds the `claude-code`, `claude-code-minimal`, `gemini`,
 `claude-code-docker`, and `gemini-docker` variants. The other variants in the
 table remain available as previously published images.
 
-For a base image without a pre-installed agent, use
-`docker.io/sbx/shell-image:latest`, or
-`docker.io/sbx/shell-docker-image:latest` for Docker Engine inside the sandbox.
-These are base images for custom workloads. To launch an interactive shell,
-use `sbx run shell`. By default, the built-in `shell` shorthand resolves to
-the published `docker.io/sbx/shell:latest` kit, like `claude` resolves to its
-published kit.
+### Build a custom agent on a shell image
+
+To package an agent that Docker doesn't provide, start from
+`docker.io/sbx/shell-image:latest`. This base image provides a development
+environment without a pre-installed agent, so you can add your agent's tooling
+on top. Use `docker.io/sbx/shell-docker-image:latest` if your workload needs
+Docker Engine inside the sandbox.
+
+If you need a different operating system or want to choose every package,
+[use your own Linux image](#use-your-own-linux-image). You'll need to prepare
+the tools and user account that Docker Sandboxes expects yourself.
 
 ## Use an image in a v3 workload
 
