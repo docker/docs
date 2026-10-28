@@ -45,7 +45,10 @@ templates also include a C/C++ compiler toolchain for building native code.
 For a base image without a pre-installed agent, use
 `docker.io/sbx/shell-image:latest`, or
 `docker.io/sbx/shell-docker-image:latest` for Docker Engine inside the sandbox.
-These are base images, separate from the `sbx/shell` kit.
+These are base images for custom workloads. To launch an interactive shell,
+use `sbx run shell`. By default, the built-in `shell` shorthand resolves to
+the published `docker.io/sbx/shell:latest` kit, like `claude` resolves to its
+published kit.
 
 ## Use an image in a v3 workload
 
