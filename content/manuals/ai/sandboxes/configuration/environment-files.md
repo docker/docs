@@ -857,6 +857,10 @@ and can run only for its sandbox.
 
 Each server must set exactly one of `url` or `command`.
 
+To reuse servers already registered on the host, see
+[Load registered servers when creating an environment](../mcp-gateway.md#load-registered-servers-when-creating-an-environment)
+for a `postCreate` lifecycle example.
+
 #### Approve local MCP commands
 
 A `command` server runs on your host with your privileges whenever the
