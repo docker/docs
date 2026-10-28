@@ -28,32 +28,8 @@ The following table describes the available parameters:
 | Parameter        | Type    | Default | Description                                                                       |
 | ---------------- | ------- | ------- | --------------------------------------------------------------------------------- |
 | `dest`           | String  |         | Path to copy files to                                                             |
-| `src`            | String  |         | Directory in the build result to export. Omit to export the entire filesystem.    |
+| `src`            | String  |         | Directory in the build result to export. Requires BuildKit v0.34.0 or later.      |
 | `platform-split` | Boolean | `true`  | `local` exporter only. Split multi-platform outputs into platform subdirectories. |
-
-## Export a subdirectory
-
-The `src` parameter exports only part of the build result, without needing a
-dedicated `scratch` stage:
-
-```console
-$ docker buildx build \
-  --output type=local,dest=./output,src=/usr/src/app/reports \
-  .
-```
-
-The contents of `src` are written to the root of the destination, so
-`src=/usr/src/app/reports` exports `reports/index.html` as `index.html`.
-
-`src` must point to a directory, and is always resolved from the root of the
-build result, so `src=app/build` and `src=/app/build` are equivalent. Symlinks
-are resolved within the build result: a link pointing at `/etc` refers to
-`/etc` inside the result, never on the host running BuildKit. With a
-multi-platform build, `src` is applied to each platform.
-
-The `src` parameter requires BuildKit v0.34.0 or later. Older BuildKit daemons
-ignore unknown exporter options and may export the entire build result
-instead.
 
 ## Multi-platform builds with local exporter
 
