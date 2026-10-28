@@ -63,7 +63,7 @@ to add worker nodes.
     dxn1zf6l61qsb1josjja83ngz *  manager1  Ready   Active        Leader
     ```
 
-    The `MANAGER` column identifies the manager nodes in the swarm. The empty
+    The `MANAGER STATUS` column identifies the manager nodes in the swarm. The empty
     status in this column for `worker1` and `worker2` identifies them as worker nodes.
 
     Swarm management commands like `docker node ls` only work on manager nodes.
