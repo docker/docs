@@ -40,6 +40,10 @@ The columns are:
   match an HTTP method and path, the network count labels each part `(L4)` or
   `(L7)`. See [HTTP rules](#http-rules).
 
+The implicit `default-deny-all` fallback shows
+`network: deny when no rule decides` instead of a deny count. It denies requests
+when no applicable policy decides them and never overrides an allow rule.
+
 To see full rule-level detail including rule IDs and resources, pass `--wide`.
 To inspect a single policy or rule, use `sbx policy inspect`:
 
@@ -132,6 +136,10 @@ and those scoped to that sandbox:
 ```console
 $ sbx policy ls my-sandbox
 ```
+
+The sandbox summary lists the fallback separately as
+`fallback: deny when no rule decides from default-deny-all`. Explicit denies
+keep their own host counts, excluding the fallback.
 
 ### Filesystem rules
 
