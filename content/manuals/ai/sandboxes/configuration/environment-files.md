@@ -734,12 +734,19 @@ Each command requires `command` and accepts the following fields:
 Commands inherit the environment of the `sbx` process and receive the following
 variables:
 
-- `SBX_LIFECYCLE_PHASE`
-- `SBX_ENV_FILE` and `SBX_ENV_FILES`
-- `SBX_ENV_DIR`
-- `SBX_SANDBOX_NAME`
-- `SBX_AGENT`
-- `SBX_WORKSPACE`
+| Variable | Value |
+| -------- | ----- |
+| `SBX_LIFECYCLE_PHASE` | Phase running the command: `initialize`, `postCreate`, or `preRemove` |
+| `SBX_ENV_FILE` | Absolute path to the last environment file in merge order |
+| `SBX_ENV_FILES` | Absolute paths to all environment files in merge order, separated by `:` on macOS and Linux or `;` on Windows |
+| `SBX_ENV_DIR` | [Project directory](#project-directory), used as the default host working directory |
+| `SBX_SANDBOX_NAME` | Resolved sandbox name, including any `--name` override |
+| `SBX_AGENT` | Resolved agent name |
+| `SBX_WORKSPACE` | Primary workspace path on the host. Empty when no workspace is declared, including cloud environments |
+
+For cloud environments, `sbx` commands run by lifecycle commands inherit cloud
+mode and the selected endpoint. For example, `sbx cp` in a lifecycle command
+targets the cloud even without `--cloud`.
 
 The environment file's `env` values and resolved secrets aren't passed to host
 commands.
