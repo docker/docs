@@ -170,7 +170,7 @@ params:
   gordon:
     # Lets Gordon answer with cards (steps, tables, notes, snippets, follow-up
     # questions) in production builds. Always on in other environments.
-    cards: false
+    cards: true
 
   # === Example versions ===
   # The following parameters are used in various ways in content and templates.
