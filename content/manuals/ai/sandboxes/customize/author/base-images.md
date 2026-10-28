@@ -42,6 +42,10 @@ templates also include a C/C++ compiler toolchain for building native code.
 | `kiro`                | [Kiro](https://kiro.dev)                                             |
 | `opencode`            | [OpenCode](https://opencode.ai)                                      |
 
+Docker rebuilds the `claude-code`, `claude-code-minimal`, `gemini`,
+`claude-code-docker`, and `gemini-docker` variants. The other variants in the
+table remain available as previously published images.
+
 For a base image without a pre-installed agent, use
 `docker.io/sbx/shell-image:latest`, or
 `docker.io/sbx/shell-docker-image:latest` for Docker Engine inside the sandbox.
