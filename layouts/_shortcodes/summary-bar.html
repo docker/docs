@@ -3,6 +3,18 @@
 {{ if not $feature }}
   {{ errorf "[summary-bar] invalid feature: %s %v" $featureName .Position }}
 {{ end }}
+{{ if .Get "subscription" }}
+  {{ errorf "[summary-bar] subscription can't be overridden on the page; set it on the %q record in data/summary.yaml %v" $featureName .Position }}
+{{ end }}
+{{ if .Get "role" }}
+  {{ errorf "[summary-bar] role can't be overridden on the page; set it on the %q record in data/summary.yaml %v" $featureName .Position }}
+{{ end }}
+{{ if .Get "account" }}
+  {{ errorf "[summary-bar] account can't be overridden on the page; set it on the %q record in data/summary.yaml %v" $featureName .Position }}
+{{ end }}
+{{ if .Get "purchase" }}
+  {{ errorf "[summary-bar] purchase can't be overridden on the page; set it on the %q record in data/summary.yaml %v" $featureName .Position }}
+{{ end }}
 {{ if $feature }}
   {{ $subscriptionIcons := dict
     "Business" "building-office"
@@ -10,10 +22,18 @@
     "Pro" "user-plus"
     "Personal" "user"
     "Available to all" "globe-alt"
+    "Available to all organization accounts" "globe-alt"
     "Docker Hardened Images Enterprise" "/icons/dhi.svg"
     "Docker Hardened Images Select or Enterprise" "/icons/dhi.svg"
     "Docker Offload" "cloud"
     "AI Governance" "shield-check"
+  }}
+  {{/* Short YAML keys map to pricing-page names for display. */}}
+  {{ $subscriptionLabels := dict
+    "Personal" "Docker Personal"
+    "Pro" "Docker Pro"
+    "Team" "Docker Team"
+    "Business" "Docker Business"
   }}
   {{ $availabilityIcons := dict
     "Experimental" "beaker"
@@ -22,19 +42,62 @@
     "GA" "check-circle"
     "Retired" "archive-box"
   }}
+  {{ $accountIcons := dict
+    "Individual" "user"
+    "Organization" "building-office"
+  }}
+  {{ $purchaseIcons := dict
+    "Self-serve" "shopping-cart"
+    "Sales-led" "phone"
+  }}
   {{ $requiresIcon := "arrow-down-circle" }}
+  {{ $roleIcon := "shield-check" }}
+  {{ $permissionIcon := "key" }}
   {{ $forIcons := dict
     "Administrators" "shield-check"
     "Individuals" "user-circle"
   }}
 
+  {{/* The page value wins over the record value. */}}
+  {{ $permission := .Get "permission" | default $feature.permission }}
+  {{ if $permission }}
+    {{/* Only exact names from the custom role permissions reference are allowed. */}}
+    {{ $permissionsReference := "content/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md" }}
+    {{ $permissionNames := slice }}
+    {{ range split (os.ReadFile $permissionsReference) "\n" }}
+      {{ with findRESubmatch `^\| ([^|:][^|]*?) +\|` . 1 }}
+        {{ $name := index (index . 0) 1 }}
+        {{ if ne $name "Permission" }}
+          {{ $permissionNames = $permissionNames | append $name }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ if not (in $permissionNames $permission) }}
+      {{ errorf "[summary-bar] invalid permission: %q is not a permission in %s %v" $permission $permissionsReference .Position }}
+    {{ end }}
+  {{ end }}
 
   <div class="not-prose summary-bar">
+    {{ with $feature.account }}
+      {{ $accountIcon := index $accountIcons . }}
+      {{ if not $accountIcon }}
+        {{ errorf "[summary-bar] invalid account: %q %v" . $.Position }}
+      {{ end }}
+      <div class="flex flex-wrap gap-1">
+        <span class="font-bold">Account:</span>
+        <span>{{ . }}</span>
+        <span class="icon-svg icon-sm">
+          {{ partialCached "icon" $accountIcon $accountIcon }}
+        </span>
+      </div>
+    {{ end }}
+
     {{ with $feature.subscription }}
       <div class="flex flex-wrap gap-1">
         <span class="font-bold">Subscription:</span>
         {{ range . }}
-          <span>{{ . }}</span>
+          {{ $label := index $subscriptionLabels . | default . }}
+          <span>{{ $label }}</span>
           <span class="icon-svg icon-sm">
             {{ $icon := index $subscriptionIcons . }}
             {{ if $icon }}
@@ -44,6 +107,52 @@
             {{ end }}
           </span>
         {{ end }}
+      </div>
+    {{ end }}
+
+    {{ with $feature.purchase }}
+      {{ $purchaseIcon := index $purchaseIcons . }}
+      {{ if not $purchaseIcon }}
+        {{ errorf "[summary-bar] invalid purchase: %q %v" . $.Position }}
+      {{ end }}
+      <div class="flex flex-wrap gap-1">
+        <span class="font-bold">Purchase:</span>
+        <span>{{ . }}</span>
+        <span class="icon-svg icon-sm">
+          {{ partialCached "icon" $purchaseIcon $purchaseIcon }}
+        </span>
+      </div>
+    {{ end }}
+
+    {{ with $feature.role }}
+      <div class="flex flex-wrap gap-1">
+        <span class="font-bold">
+          {{- with site.GetPage "/manuals/security/roles-and-permissions/core-roles" -}}
+            <a class="link" href="{{ .RelPermalink }}">Core role</a>:
+          {{- else -}}
+            Core role:
+          {{- end -}}
+        </span>
+        <span>{{ . }}</span>
+        <span class="icon-svg icon-sm">
+          {{ partialCached "icon" $roleIcon $roleIcon }}
+        </span>
+      </div>
+    {{ end }}
+
+    {{ with $permission }}
+      <div class="flex flex-wrap gap-1">
+        <span class="font-bold">
+          {{- with site.GetPage "/manuals/security/roles-and-permissions/custom-roles" -}}
+            <a class="link" href="{{ .RelPermalink }}">Custom role permission</a>:
+          {{- else -}}
+            Custom role permission:
+          {{- end -}}
+        </span>
+        <span>{{ . }}</span>
+        <span class="icon-svg icon-sm">
+          {{ partialCached "icon" $permissionIcon $permissionIcon }}
+        </span>
       </div>
     {{ end }}
 

@@ -14,6 +14,8 @@ aliases:
   - /subscription/gordon/
 ---
 
+{{< summary-bar feature_name="Gordon plans" >}}
+
 [Gordon](/manuals/ai/gordon/_index.md) is an AI assistant for Docker workflows. For pricing details, see the [Gordon product page](https://www.docker.com/products/gordon/).
 
 - Gordon Base is included at no cost with Docker plans. It covers everyday Docker workflow questions with a baseline monthly usage allowance.

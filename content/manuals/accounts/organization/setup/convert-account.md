@@ -20,7 +20,7 @@ aliases:
 toc_max: 3
 ---
 
-{{< summary-bar feature_name="Admin orgs" >}}
+{{< summary-bar feature_name="Create organization" >}}
 
 When you convert, your
 [Docker ID](/manuals/accounts/_index.md) becomes an organization instead of

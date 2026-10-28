@@ -9,6 +9,8 @@ aliases:
   - /billing/core-billing/history/
 ---
 
+{{< summary-bar feature_name="Billing" permission="View billing" >}}
+
 Docker issues an invoice each time a subscription to a Docker plan renews or changes. You can track invoices issued to your account so you can review the plans you've
 subscribed to over time, check payment status, and download records as
 needed.
