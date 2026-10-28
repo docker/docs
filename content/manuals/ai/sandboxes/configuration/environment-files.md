@@ -137,25 +137,27 @@ name for every command that manages the sandbox.
 
 ### Create an environment sandbox
 
-Use `sbx env create` to create the sandbox without attaching, or `sbx env run`
-to create it and attach to the agent. Creation follows the
-[plan approval process](#review-an-environment-plan).
-
-`sbx env exec` runs a command in the environment:
+Create the sandbox without attaching:
 
 ```console
-$ sbx env exec -- npm test
+$ sbx env create
 ```
 
-If the sandbox doesn't exist, `exec` offers to create it when stdin is an
-interactive terminal. If you accept, it follows the same plan approval and
-creation process, including the `initialize` and `postCreate`
-[lifecycle commands](#lifecycle), before running your command. A failure in
-either phase stops execution of your command. For an existing sandbox, `exec`
-skips these lifecycle commands.
+To create the sandbox and attach to the agent, use `sbx env run` instead:
 
-With noninteractive stdin or `--no-input`, `exec` requires an existing sandbox.
-Create it first with `sbx env create`. For unattended commands, see
+```console
+$ sbx env run
+```
+
+Both commands follow the [plan approval process](#review-an-environment-plan)
+and run `initialize` [lifecycle commands](#lifecycle). After creating a sandbox,
+they run `postCreate` commands before returning or attaching.
+
+To run a command in the sandbox, use `sbx env exec`. With interactive stdin,
+`exec` offers to create a missing sandbox through the same approval and lifecycle
+process before running your command. For an existing sandbox, it skips lifecycle
+commands. With noninteractive stdin or `--no-input`, create the sandbox first
+with `sbx env create`. See
 [Reuse an environment in automation](#reuse-an-environment-in-automation).
 
 ### Set user defaults
