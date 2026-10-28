@@ -213,8 +213,8 @@ $ sbx settings set sandbox.fuse false
 Changes apply only to newly created sandboxes. Existing sandboxes retain their
 FUSE configuration, including after restarts. To disable access for one sandbox,
 set [`sandboxOptions.fuse`](environment-files.md#sandboxoptions) to `false`
-in its environment file. FUSE is unsupported by the experimental Runtime
-backend and cloud sandboxes.
+in its environment file. When this setting is `false`, environment files cannot
+enable FUSE access. Cloud sandboxes do not support FUSE.
 
 #### ssh.agentForwardingEnabled {.wrap-anywhere}
 

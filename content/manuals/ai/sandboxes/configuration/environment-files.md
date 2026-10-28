@@ -688,11 +688,9 @@ store. Set it to `off` to omit the mount, `readonly` to mount the store read-onl
 or `readwrite` to let the sandbox modify shared skills. If omitted, it uses the
 daemon's default, which is `readonly` unless your organization overrides it.
 
-`fuse` inherits the [`sandbox.fuse`](settings.md#sandboxfuse) setting when
-omitted. Set it to `false` to disable FUSE access for this sandbox. Setting it
-to `true` cannot override `sandbox.fuse: false`. The option applies when the
-sandbox is created; existing sandboxes retain their configuration. The
-experimental Runtime backend and cloud sandboxes reject `fuse: true`.
+Set `fuse` to `false` to disable FUSE access for this sandbox. See the
+[`sandbox.fuse` setting](settings.md#sandboxfuse) for defaults and when changes
+take effect.
 
 ### `lifecycle`
 
