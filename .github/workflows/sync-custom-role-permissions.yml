@@ -2,9 +2,9 @@ name: Sync custom role permissions
 
 # Vendors the IAM source of truth (custom-role-metadata.yaml in
 # docker/iam-services) into data/custom_role_permissions.yaml and opens a PR for
-# review. The permissions reference page renders that file with the
-# custom-role-permissions shortcode, so the site build never needs access to the
-# private upstream repository.
+# review. The permissions reference page renders that file with an inline
+# shortcode, so the site build never needs access to the private upstream
+# repository.
 # Triggered by the "Sync docs permissions" workflow in docker/iam-services when
 # that file changes on main; can also be run manually.
 
@@ -60,10 +60,9 @@ jobs:
             workflow, triggered by a change to that file.
 
             Only `data/custom_role_permissions.yaml` is updated. The
-            permissions reference page renders it with the
-            `custom-role-permissions` shortcode. If this change is unexpected
-            or shouldn't ship yet, close this PR — the workflow will re-open it
-            the next time the source changes.
+            permissions reference page renders it with an inline shortcode. If
+            this change is unexpected or shouldn't ship yet, close this PR —
+            the workflow will re-open it the next time the source changes.
           commit-message: "Sync custom role permissions data"
           sign-commits: true
           add-paths: |

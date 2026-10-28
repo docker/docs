@@ -21,7 +21,30 @@ billing, licensing, AI Governance, Docker Hardened Images, Docker
 Offload, and Docker Cloud Sandboxes. Use the following tables to [create
 or edit a custom role](manage.md).
 
-{{% custom-role-permissions %}}
+{{% custom_role_permissions.inline %}}
+{{- $data := hugo.Data.custom_role_permissions -}}
+{{- if not $data.groups -}}
+  {{- errorf "custom-role-permissions: no groups found in data/custom_role_permissions.yaml: %s" .Position -}}
+{{- end -}}
+{{- range $group := $data.groups -}}
+  {{- if not $group.name -}}
+    {{- errorf "custom-role-permissions: group without a name: %s" $.Position -}}
+  {{- end -}}
+  {{- if $group.relations }}
+
+## {{ $group.name }}
+
+| Permission | Description |
+| :--------- | :---------- |
+{{ range $group.relations -}}
+  {{- if or (not .name) (not .description) -}}
+    {{- errorf "custom-role-permissions: relation %q in group %q needs a name and description: %s" .name $group.name $.Position -}}
+  {{- end -}}
+| {{ replace .name "|" "\\|" }} | {{ replace .description "|" "\\|" }} |
+{{ end -}}
+  {{- end -}}
+{{- end }}
+{{% /custom_role_permissions.inline %}}
 
 ## Next steps
 

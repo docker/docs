@@ -1,4 +1,2 @@
 **/*.md
 /data/api-reference.json
-# Emits Markdown (called with {{% %}}); Prettier would reflow the table.
-/layouts/_shortcodes/custom-role-permissions.html
