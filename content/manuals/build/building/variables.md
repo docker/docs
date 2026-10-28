@@ -512,6 +512,10 @@ This is equivalent to the [`GIT_AUTH_HEADER` secret](./secrets#http-authenticati
 but facilitates the pre-flight authentication in Bake when loading the remote Bake file.
 Supported values are `bearer` (default) and `basic`.
 
+Bake also uses this scheme when authenticating Git build contexts on the
+same host as the remote definition. See
+[`BUILDX_BAKE_GIT_AUTH_TOKEN`](#buildx_bake_git_auth_token) for details.
+
 Usage:
 
 ```console
@@ -531,6 +535,21 @@ Usage:
 ```console
 $ export BUILDX_BAKE_GIT_AUTH_TOKEN=$(cat git-token.txt)
 ```
+
+When you build from a remote Bake definition, Bake also uses this token to
+authenticate Git build contexts on the same host. For example, a definition
+fetched from `https://git.example.com/team/app.git` can use the token for a
+Git context on `git.example.com`. Private Git contexts on other hosts need
+separate credentials.
+
+Bake determines which host can use these credentials from the remote
+definition URL.
+
+When you use only local Bake definition files, `BUILDX_BAKE_GIT_AUTH_TOKEN`
+and `BUILDX_BAKE_GIT_AUTH_HEADER` don't provide credentials for Git build
+contexts. Configure
+[Git authentication secrets](./secrets.md#git-authentication-for-remote-contexts)
+for those contexts instead.
 
 ### BUILDX_BAKE_GIT_SSH
 
