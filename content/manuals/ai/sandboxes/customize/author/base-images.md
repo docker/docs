@@ -41,7 +41,11 @@ templates also include a C/C++ compiler toolchain for building native code.
 | `gemini`              | [Gemini CLI](https://github.com/google-gemini/gemini-cli)            |
 | `kiro`                | [Kiro](https://kiro.dev)                                             |
 | `opencode`            | [OpenCode](https://opencode.ai)                                      |
-| `shell`               | No agent pre-installed. Use for manual agent setup.                  |
+
+For a base image without a pre-installed agent, use
+`docker.io/sbx/shell-image:latest`, or
+`docker.io/sbx/shell-docker-image:latest` for Docker Engine inside the sandbox.
+These are base images, separate from the `sbx/shell` kit.
 
 ## Use an image in a v3 workload
 
