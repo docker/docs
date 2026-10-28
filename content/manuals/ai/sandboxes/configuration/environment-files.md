@@ -114,8 +114,13 @@ that future invocations run on your host.
 | `sbx env plan [PATH...]`                                                       | Shows what applying the environment would change without changing or approving it    |
 | [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...]`                      | Applies the approved plan, creates the environment if needed, and attaches            |
 | [`sbx env create`](/reference/cli/sbx/env/create/) `[PATH...]`                | Applies the approved plan and creates the environment without attaching              |
-| [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]` | Runs a command in an existing environment without running lifecycle commands         |
+| [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]` | Runs a command in the environment, offering to create a missing sandbox interactively |
 | [`sbx env rm`](/reference/cli/sbx/env/rm/) `[PATH...]`                        | Shows a destroy plan, then removes the sandbox and resources named in the plan        |
+
+If the sandbox doesn't exist, `sbx env exec` offers to create it when stdin is
+an interactive terminal. If you accept, it follows the normal plan approval and
+creation process before running your command. With noninteractive stdin or
+`--no-input`, create the sandbox first with `sbx env create`.
 
 To use an environment file, pass its path to `sbx env`. If you pass a
 directory, `sbx` looks for `sbxenv.yaml` inside it. If you don't pass a path,
@@ -439,8 +444,9 @@ For a walkthrough, supported settings, and lifecycle differences, see
 
 `sbx env create`, `sbx env run`, and `sbx env rm` show the changes an
 environment makes outside its sandbox and ask for approval before applying
-them. The plan includes host commands, credentials, bindings, MCP
-registrations, directories, kits, published ports, sandbox options, and
+them. `sbx env exec` follows the same plan approval process when you accept its
+offer to create a missing sandbox. The plan includes host commands, credentials, bindings,
+MCP registrations, directories, kits, published ports, sandbox options, and
 environment variables.
 
 Run `sbx env plan` to inspect the apply plan without changing, approving, or
@@ -714,9 +720,13 @@ Lifecycle phases run at the following points:
 | `postCreate` | After a new sandbox is created. For `run`, before attachment. Does not run when attaching to an existing sandbox   |
 | `preRemove`  | After you approve removal and before `sbx` deletes resources. A failure produces a warning and removal continues  |
 
-`sbx env exec` doesn't run lifecycle commands. Commands within a phase run in
-order and stop at the first failure. Make `initialize` commands safe to run
-more than once.
+`sbx env exec` doesn't run lifecycle commands for an existing sandbox. If you
+accept its offer to create a missing sandbox, it runs `initialize` and
+`postCreate` before your command. A failure in either phase stops execution of
+your command.
+
+Commands within a phase run in order and stop at the first failure. Make
+`initialize` commands safe to run more than once.
 
 After `preRemove` commands finish, `sbx` generates the destroy plan again.
 Removal stops if the commands introduced changes that weren't included in the
