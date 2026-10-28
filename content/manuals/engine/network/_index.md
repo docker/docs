@@ -266,6 +266,9 @@ The embedded DNS server forwards external DNS lookups to the DNS servers configu
 The embedded DNS server address is `127.0.0.11`.
 There is no IPv6 equivalent; the IPv4 address works even in IPv6-only containers.
 If an application requires an explicit DNS server address, use `127.0.0.11`.
+For details of what the embedded DNS server resolves itself, and how it
+forwards other queries to upstream servers, see
+[DNS resolution in containers](dns.md).
 
 > [!NOTE]
 >
