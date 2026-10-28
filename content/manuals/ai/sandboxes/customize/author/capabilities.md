@@ -24,6 +24,7 @@ All capability names in the table have the `com.docker.sandbox/` prefix.
 | Capability | Local sandboxes | Cloud sandboxes | Restrictions |
 | --- | --- | --- | --- |
 | [`agent-context@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-context@1.md) | v0.45.0 | v0.45.0 | Agent instructions are applied when creating the sandbox. |
+| [`agent-context@2`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-context@2.md) | Unreleased | Limited: unreleased | Cloud sandboxes write one workload profile in `/home/agent`. Mixins use the workload's profile and cannot specify a `directory`. Unsupported required profiles prevent creation; optional ones are skipped. |
 | [`agent-interactive-sessions@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-interactive-sessions@1.md) | Unsupported | Unsupported | Docker Sandboxes does not use these session commands. |
 | [`agent-sessions@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-sessions@1.md) | Declaration only | Declaration only | Accepted since v0.45.0, but Docker Sandboxes does not execute the declared session commands. |
 | [`agent-skill@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-skill@1.md) | v0.48.0 | Unsupported | Requires a selected `agent-skills@1` destination. Bundled skills remain available with `--skills=off`. |
