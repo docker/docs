@@ -503,6 +503,23 @@ approve the plan. They remain disabled even if you cancel the plan or restart
 the daemon. To enable them again, run `sbx env run` without the flag and approve
 the plan. Credential `command` sources still run when their secrets are needed.
 
+## Recover an existing local sandbox
+
+If an upgrade or state reset loses the environment's records, `sbx env run`
+can refuse to attach to an existing sandbox with the environment's name.
+Run `sbx env run` at an interactive terminal. If the sandbox matches everything
+the environment declares but has no ownership records or environment-file bind
+showing that `sbx env` created it, the command asks whether to adopt it.
+
+Confirm only if you want the environment to manage that sandbox. After adoption
+and plan approval, later runs recognize the same sandbox, and `sbx env rm`
+can remove it. A replacement sandbox needs its own confirmation.
+
+`--force` approves the plan, not adoption. Non-interactive runs still refuse a
+sandbox that needs adoption. A sandbox that conflicts with the environment's
+declarations isn't offered adoption. `sbx env create` doesn't offer adoption
+either: use `sbx env run` for this recovery.
+
 ## Update an environment
 
 For an existing sandbox, `sbx env run` applies updated `env` values to the new
