@@ -4,6 +4,7 @@ description: Build your compose services with Bake
 keywords: build, buildx, bake, buildkit, compose, yaml
 aliases:
   - /build/customize/bake/compose-file/
+  - /guides/compose-bake/
 ---
 
 Bake supports the [Compose file format](/reference/compose-file/_index.md)
@@ -97,6 +98,70 @@ The compose format has some limitations compared to the HCL format:
 - Specifying variables or global scope attributes is not supported
 - `inherits` service field is not supported, but you can use [YAML anchors](/reference/compose-file/fragments.md)
   to reference other services, as demonstrated in the previous example with `&build-dev`.
+
+## Extend Compose builds with HCL
+
+You can keep development settings in Compose and layer release build settings in
+`docker-bake.hcl`. This is useful when release builds need different stages or
+platforms from local development builds. Compose can also build release images;
+separating the settings is a workflow choice.
+
+For example, this Compose file builds an application and a utility service that
+seeds development data:
+
+```yaml {title=compose.yaml}
+services:
+  app:
+    image: docker.io/username/app:latest
+    build:
+      context: ./app
+      target: dev
+  seed:
+    build:
+      context: ./seed
+```
+
+Create `docker-bake.hcl` alongside `compose.yaml`:
+
+```hcl {title=docker-bake.hcl}
+group "default" {
+  targets = ["app"]
+}
+
+target "_release" {
+  platforms = ["linux/amd64", "linux/arm64"]
+  attest = ["type=provenance,mode=max", "type=sbom"]
+  annotations = ["org.opencontainers.image.authors=username"]
+}
+
+target "app" {
+  inherits = ["_release"]
+  target = "release"
+}
+```
+
+Bake automatically loads and merges both files. The HCL file replaces the
+`default` group's target list, so `docker buildx bake` builds only `app`.
+The `seed` target remains available with `docker buildx bake seed`.
+See [Default file lookup](overrides.md#default-file-lookup) for file precedence.
+
+The `app` target keeps its context and image tag from Compose, overrides the
+Dockerfile stage from `dev` to `release`, and inherits the shared platforms,
+attestations, and annotations. The application's Dockerfile must define both
+stages. Other release targets can inherit the same settings; see
+[Common reusable targets](inheritance.md#common-reusable-targets).
+
+Inspect the merged configuration or select a target to inspect:
+
+```console
+$ docker buildx bake --print
+$ docker buildx bake --print app
+```
+
+Check the `group.default.targets` list to see what runs by default. Omitting
+`seed` from that group doesn't delete its definition from the merged
+configuration. Selecting `app` limits the printed targets to that selection
+and its dependencies.
 
 ## `.env` file
 
