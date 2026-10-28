@@ -325,6 +325,10 @@ block. Only `variable` blocks can be overridden with environment variables.
 This means you need to define the variables in the bake file and then set the
 environment variable with the same name to override it.
 
+To disable these lookups, set `BUILDX_BAKE_DISABLE_VARS_ENV_LOOKUP=1`; see the
+[variable reference](../building/variables.md#buildx_bake_disable_vars_env_lookup).
+You can still provide variable values explicitly with `--var NAME=value`.
+
 The following example shows how you can define a `TAG` variable with a default
 value in the Bake file, and override it with an environment variable.
 

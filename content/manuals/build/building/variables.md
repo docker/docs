@@ -310,6 +310,7 @@ They're used to configure the Buildx client, or the BuildKit daemon.
 | [BUILDKIT_HOST](#buildkit_host)                                             | String            | Specify host to use for remote builders.                        |
 | [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                              |
 | [BUILDKIT_TTY_LOG_LINES](#buildkit_tty_log_lines)                           | String            | Number of log lines (for active steps in TTY mode).             |
+| [BUILDX_BAKE_DISABLE_VARS_ENV_LOOKUP](#buildx_bake_disable_vars_env_lookup) | Boolean           | Disable environment lookups in Bake definitions.                |
 | [BUILDX_BAKE_FILE](#buildx_bake_file)                                       | String            | Specify the build definition file(s) for `docker buildx bake`.  |
 | [BUILDX_BAKE_FILE_RELATIVE_PATHS](#buildx_bake_file_relative_paths)         | Boolean           | Resolve local build contexts from their definition file.        |
 | [BUILDX_BAKE_FILE_SEPARATOR](#buildx_bake_file_separator)                   | String            | Specify the file-path separator for `BUILDX_BAKE_FILE`.         |
@@ -443,6 +444,28 @@ Example:
   ]
 }
 ```
+
+### BUILDX_BAKE_DISABLE_VARS_ENV_LOOKUP
+
+Set `BUILDX_BAKE_DISABLE_VARS_ENV_LOOKUP=1` to prevent Bake definitions from
+reading variable values from the process environment. For HCL input, this
+disables environment overrides of declared variables. It also disables the
+implicit environment lookup for `--set app.arg.NAME` when no value is given.
+
+For example, keep the Bake file's default `TAG` even when the shell defines
+a `TAG` environment variable:
+
+```console
+$ BUILDX_BAKE_DISABLE_VARS_ENV_LOOKUP=1 TAG=dev docker buildx bake --print
+```
+
+You can still pass values explicitly with `--var TAG=dev` or
+`--set app.arg.NAME=value`.
+
+For Compose input, this setting excludes the process environment from variable
+interpolation. Bake still loads `.env` from the working directory and accepts
+explicit `--var` values. The setting doesn't disable environment variables
+used to configure Buildx itself, such as `BUILDX_BUILDER`.
 
 ### BUILDX_BAKE_FILE
 
