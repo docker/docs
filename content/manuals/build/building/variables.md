@@ -311,6 +311,7 @@ They're used to configure the Buildx client, or the BuildKit daemon.
 | [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                              |
 | [BUILDKIT_TTY_LOG_LINES](#buildkit_tty_log_lines)                           | String            | Number of log lines (for active steps in TTY mode).             |
 | [BUILDX_BAKE_FILE](#buildx_bake_file)                                       | String            | Specify the build definition file(s) for `docker buildx bake`.  |
+| [BUILDX_BAKE_FILE_RELATIVE_PATHS](#buildx_bake_file_relative_paths)         | Boolean           | Resolve local build contexts from their definition file.        |
 | [BUILDX_BAKE_FILE_SEPARATOR](#buildx_bake_file_separator)                   | String            | Specify the file-path separator for `BUILDX_BAKE_FILE`.         |
 | [BUILDX_BAKE_GIT_ADVICE](#buildx_bake_git_advice)                           | Boolean           | Show Git advice when fetching remote Bake definitions.          |
 | [BUILDX_BAKE_GIT_AUTH_HEADER](#buildx_bake_git_auth_header)                 | String            | HTTP authentication scheme for remote Bake files.               |
@@ -467,6 +468,30 @@ export BUILDX_BAKE_FILE=file1.hcl@file2.hcl
 If both `BUILDX_BAKE_FILE` and the `-f` flag are set, only the files provided via `-f` are used. 
 
 If a listed file does not exist or is invalid, bake returns an error.
+
+### BUILDX_BAKE_FILE_RELATIVE_PATHS
+
+By default, Bake resolves local directory paths in `target.context` and
+`target.contexts` from the directory where you run the command. Set
+`BUILDX_BAKE_FILE_RELATIVE_PATHS=1` to resolve these paths from the definition
+file instead.
+
+For HCL files, each path is relative to the Bake file that defines it. An
+omitted `context` uses `.` relative to the file that defines the target.
+For Compose input, paths are relative to the first Compose file's directory,
+including paths added by override files.
+
+For example, if `build/docker-bake.hcl` contains `context = "./src"`, the
+following command uses `build/src` as its context:
+
+```console
+$ BUILDX_BAKE_FILE_RELATIVE_PATHS=1 \
+    docker buildx bake -f build/docker-bake.hcl
+```
+
+Use the `cwd://` prefix, such as `context = "cwd://src"`, to keep a path
+relative to the invocation directory. Absolute paths, remote URLs, and
+special contexts such as `target:app` keep their existing meaning.
 
 ### BUILDX_BAKE_FILE_SEPARATOR
 
