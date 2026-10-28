@@ -672,6 +672,7 @@ kits. Bindings take effect when the sandbox is created.
 | `profile`     | string          | None     | Governance profile name                               |
 | `skills`      | string          | Daemon default | Shared agent skills store access: `off`, `readonly`, or `readwrite` |
 | `display`     | boolean         | `false`  | Provision a display socket for graphical applications |
+| `fuse`        | boolean         | `sandbox.fuse` setting | Mount FUSE filesystems; local only |
 | `gpu`         | boolean         | `false`  | Pass the host GPU through to the sandbox               |
 | `usb`         | list of strings | None     | USB device selectors to pass through to the sandbox   |
 | `writableEnvFiles` | boolean     | `false`  | Let the sandbox write to shared environment files; local only |
@@ -686,6 +687,12 @@ limits must match a [cloud size](../cloud/usage.md#choose-resources-and-platform
 store. Set it to `off` to omit the mount, `readonly` to mount the store read-only,
 or `readwrite` to let the sandbox modify shared skills. If omitted, it uses the
 daemon's default, which is `readonly` unless your organization overrides it.
+
+`fuse` inherits the [`sandbox.fuse`](settings.md#sandboxfuse) setting when
+omitted. Set it to `false` to disable FUSE access for this sandbox. Setting it
+to `true` cannot override `sandbox.fuse: false`. The option applies when the
+sandbox is created; existing sandboxes retain their configuration. The
+experimental Runtime backend and cloud sandboxes reject `fuse: true`.
 
 ### `lifecycle`
 
