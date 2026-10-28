@@ -153,11 +153,11 @@ Both commands follow the [plan approval process](#review-an-environment-plan)
 and run `initialize` [lifecycle commands](#lifecycle). After creating a sandbox,
 they run `postCreate` commands before returning or attaching.
 
-To run a command in the sandbox, use `sbx env exec`. With interactive stdin,
-`exec` offers to create a missing sandbox through the same approval and lifecycle
-process before running your command. For an existing sandbox, it skips lifecycle
-commands. With noninteractive stdin or `--no-input`, create the sandbox first
-with `sbx env create`. See
+To run a command in the sandbox, use `sbx env exec`. If the sandbox is missing,
+`exec` offers to create it when stdin is interactive. Creation follows the same
+approval and lifecycle process before running your command. For an existing
+sandbox, `exec` skips lifecycle commands. With noninteractive stdin or
+`--no-input`, create the sandbox first with `sbx env create`. See
 [Reuse an environment in automation](#reuse-an-environment-in-automation).
 
 ### Set user defaults
