@@ -78,6 +78,11 @@ Download the image from Docker Hub:
 $ docker pull docker/welcome-to-docker
 ```
 
+> [!NOTE]
+> The `docker/welcome-to-docker` image is available for `linux/amd64` and
+> `linux/arm64`. It isn't available for 32-bit ARM systems, such as a
+> Raspberry Pi running a 32-bit OS.
+
 Start a container from the image:
 
 ```console
