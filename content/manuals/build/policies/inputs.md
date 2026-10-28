@@ -343,6 +343,40 @@ allow if {
 }
 ```
 
+### Provenance materials
+
+`input.image.provenance.materials` contains the build dependencies recorded in
+an image's provenance. Each entry is an input object with the same `image`,
+`git`, or `http` fields used for direct build inputs.
+
+For example, inspect the Git repository used to build a base image:
+
+```rego
+allow if {
+    some material in input.image.provenance.materials
+    material.git.host == "github.com"
+    material.git.remote == "https://github.com/myorg/base.git"
+}
+```
+
+An image material can have its own `image.provenance.materials` array. Access
+nested fields to resolve metadata for those dependencies as needed. Buildx
+supports image, Git, and HTTP material sources; unsupported material URIs
+are skipped with a warning. Checking a parent image doesn't automatically
+apply your rules to every material. Write explicit conditions for the
+dependencies you need to validate.
+
+To inspect a nested field without evaluating a policy, use `--fields`:
+
+```console
+$ docker buildx policy eval --print \
+    --fields 'image.provenance.materials[0].git.commitChecksum' \
+    docker-image://registry.example.com/team/base:latest
+```
+
+The example requests Git metadata for the first material. Choose the index
+and field for the material you want to inspect.
+
 ## Git inputs
 
 Git inputs represent Git repositories referenced in `ADD` instructions or used
@@ -566,6 +600,13 @@ allow if {
     verify_git_signature(input.git.tag, "maintainer.asc")
 }
 ```
+
+#### `input.env.depth`
+
+The input's depth in the provenance material tree. A direct build input has
+depth `0`, its materials have depth `1`, and each nested material increases
+the depth by one. For example, access `material.env.depth` when iterating
+over `input.image.provenance.materials`.
 
 #### `input.env.args`
 
