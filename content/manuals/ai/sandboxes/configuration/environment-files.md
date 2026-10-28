@@ -503,22 +503,24 @@ approve the plan. They remain disabled even if you cancel the plan or restart
 the daemon. To enable them again, run `sbx env run` without the flag and approve
 the plan. Credential `command` sources still run when their secrets are needed.
 
-## Recover an existing local sandbox
+## Recover after losing environment state
 
-If an upgrade or state reset loses the environment's records, `sbx env run`
-can refuse to attach to an existing sandbox with the environment's name.
-Run `sbx env run` at an interactive terminal. If the sandbox matches everything
-the environment declares but has no ownership records or environment-file bind
-showing that `sbx env` created it, the command asks whether to adopt it.
+If `sbx env run` reports that a local sandbox "agrees with everything this
+environment declares" but "nothing was done", the sandbox still exists, but
+`sbx` cannot verify that it belongs to this environment. This can happen after
+an upgrade or state reset loses the environment's records.
 
-Confirm only if you want the environment to manage that sandbox. After adoption
-and plan approval, later runs recognize the same sandbox, and `sbx env rm`
-can remove it. A replacement sandbox needs its own confirmation.
+To keep using that sandbox without deleting and recreating it, run
+`sbx env run` in an interactive terminal with the same environment file paths
+and sandbox name. The command asks whether to adopt the sandbox. Confirm only
+if this is the sandbox you want the environment to manage, then review and
+approve the environment plan. Later runs recognize that sandbox, and
+`sbx env rm` can remove it.
 
-`--force` approves the plan, not adoption. Non-interactive runs still refuse a
-sandbox that needs adoption. A sandbox that conflicts with the environment's
-declarations isn't offered adoption. `sbx env create` doesn't offer adoption
-either: use `sbx env run` for this recovery.
+For an automated run that fails with this error, complete this recovery
+interactively before retrying the automation. `--force` approves the plan but
+doesn't confirm adoption. Only `sbx env run` offers adoption, and only when the
+sandbox matches the environment's declarations.
 
 ## Update an environment
 
