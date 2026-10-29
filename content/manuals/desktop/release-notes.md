@@ -36,7 +36,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Updates
 
-- Docker Offload `v0.7.22`
+- Docker Offload `v0.7.35`
 - The following Kubernetes images have been updated to bring in latest security fixes. New tags listed below:
    - `docker/desktop-storage-provisioner:v5.0`
    - `docker/desktop-vpnkit-controller:v5.0`
