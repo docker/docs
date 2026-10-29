@@ -53,9 +53,11 @@ first connection. To restrict an API key to an existing sandbox, use
 [Manage credentials](../configuration/credentials.md#stored-secrets).
 
 Signing in to Claude Desktop doesn't authenticate Claude Code inside the
-sandbox. The SSH bridge replaces the credential from Claude Desktop with a
-placeholder to keep the real token out of the sandbox. The sandbox proxy uses
-the credential you configured in Docker Sandboxes to authenticate requests.
+sandbox. On initial connection, the SSH bridge replaces the credential from
+Claude Desktop with a placeholder. The sandbox proxy uses the credential you
+configured in Docker Sandboxes to authenticate requests. Claude Desktop can
+write credentials directly into the sandbox during OAuth refresh. See the
+[Claude Desktop warning](claude-desktop.md#prerequisites).
 
 ## Enable SSH access
 

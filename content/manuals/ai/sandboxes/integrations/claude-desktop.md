@@ -31,6 +31,12 @@ Use a sandbox created with the Claude agent type. The Claude sandbox template
 configures credential injection and network access for the remote Claude Code
 session. You must supply the credential before connecting.
 
+> [!WARNING]
+> Claude Desktop can write Anthropic credentials directly into the sandbox
+> during OAuth refresh. When this happens, requests use those credentials
+> instead of proxy credential injection. The credentials are exposed inside
+> the sandbox, reducing isolation guarantees.
+
 ## Connect
 
 For a dedicated sandbox created on first connection, see
