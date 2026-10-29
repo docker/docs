@@ -627,7 +627,7 @@ To run your containers with Docker Compose:
             - my-db-volume:/var/lib/mysql
 
         phpmyadmin:
-          image: phpmyadmin/phpmyadmin:latest
+          image: phpmyadmin:latest
           environment:
             PMA_HOST: db
             PMA_PORT: 3306
