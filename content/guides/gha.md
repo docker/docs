@@ -1,5 +1,6 @@
 ---
 title: Introduction to GitHub Actions with Docker
+description: Automate Docker image builds and publishing with GitHub Actions.
 linkTitle: GitHub Actions and Docker
 summary: |
   Learn how to automate image build and push with GitHub Actions.
@@ -252,6 +253,6 @@ additional features based on your project's needs, such as
 ### Further reading
 
 - Learn more about advanced configurations and examples in the [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md) section.
-- For more complex build setups, you may want to consider [Bake](/manuals/build/bake/_index.md). (See also the [Mastering Buildx Bake guide](/guides/bake/).)
+- Use [Bake targets](/manuals/build/bake/targets.md) to group builds, run checks, and export artifacts.
 
 - Learn about Docker's managed build service, designed for faster, multi-platform builds, see [Docker Build Cloud](/manuals/build-cloud/_index.md).
