@@ -38,27 +38,6 @@ Store an API key with [stored secrets](../configuration/credentials.md#stored-se
 or complete the agent's supported OAuth sign-in flow. See the
 [agent pages](../agents/_index.md) for authentication instructions.
 
-### Configure Claude credentials
-
-Before connecting Claude Desktop, configure an Anthropic credential in Docker
-Sandboxes using one of these methods:
-
-- API key: run `sbx secret set anthropic` on your host to store the key.
-- Claude subscription: run `sbx run claude` from a terminal, then use `/login`
-  inside Claude Code to complete OAuth sign-in.
-
-These credentials are available globally, including to sandboxes created on
-first connection. To restrict an API key to an existing sandbox, use
-`sbx secret set anthropic --sandbox <sandbox-name>`. See
-[Manage credentials](../configuration/credentials.md#stored-secrets).
-
-Signing in to Claude Desktop doesn't authenticate Claude Code inside the
-sandbox. On initial connection, the SSH bridge replaces the credential from
-Claude Desktop with a placeholder. The sandbox proxy uses the credential you
-configured in Docker Sandboxes to authenticate requests. Claude Desktop can
-write credentials directly into the sandbox during OAuth refresh. See the
-[Claude Desktop warning](claude-desktop.md#prerequisites).
-
 ## Enable SSH access
 
 Run the SSH setup command once:
