@@ -21,77 +21,30 @@ billing, licensing, AI Governance, Docker Hardened Images, Docker
 Offload, and Docker Cloud Sandboxes. Use the following tables to [create
 or edit a custom role](manage.md).
 
-## Organization management
+{{% custom_role_permissions.inline %}}
+{{- $data := hugo.Data.custom_role_permissions -}}
+{{- if not $data.groups -}}
+  {{- errorf "custom-role-permissions: no groups found in data/custom_role_permissions.yaml: %s" .Position -}}
+{{- end -}}
+{{- range $group := $data.groups -}}
+  {{- if not $group.name -}}
+    {{- errorf "custom-role-permissions: group without a name: %s" $.Position -}}
+  {{- end -}}
+  {{- if $group.relations }}
 
-| Permission                        | Description                                                                                     |
-| :-------------------------------- | :---------------------------------------------------------------------------------------------- |
-| View teams                        | View teams and team members                                                                     |
-| Manage teams                      | Create, update, and delete teams and team members                                               |
-| Manage registry access            | Control which registries members can access                                                     |
-| Manage image access               | Set policies for which images members can pull and use                                          |
-| Update organization information   | Update organization information such as name and location                                       |
-| Member management                 | Manage organization members, invites, and roles                                                 |
-| View custom roles                 | View existing custom roles and their permissions                                                |
-| Manage custom roles               | Full access to custom role management and assignment                                            |
-| Manage organization access tokens | Create, update, and delete repositories in this org. Push/pull or registry actions not included |
-| View activity logs                | Access organization audit logs and activity history                                             |
-| View usage reports                | Download organization usage reports (pulls, storage)                                            |
-| View domains                      | View domains and domain audit settings                                                          |
-| Manage domains                    | Manage verified domains and domain audit settings                                               |
-| View SSO and SCIM                 | View single sign-on and user provisioning configurations                                        |
-| Manage SSO and SCIM               | Full access to SSO and SCIM management                                                          |
-| Manage Desktop settings           | Configure Docker Desktop settings policies and view usage reports                               |
-| View OIDC connections             | View OIDC connections and their configuration                                                   |
-| Manage OIDC connections           | View, create, edit, and delete OIDC connections                                                 |
+## {{ $group.name }}
 
-## Docker Hub
-
-| Permission                         | Description                                                                                  |
-| :--------------------------------- | :------------------------------------------------------------------------------------------- |
-| View repositories                  | View repository details and contents                                                         |
-| Manage repositories                | Full repository management including settings, webhooks, privacy, Dockerfile, immutable tags |
-| Manage repository team permissions | Add and remove teams from a repository, and manage team access level                         |
-
-## Billing
-
-| Permission     | Description                                      |
-| :------------- | :----------------------------------------------- |
-| View billing   | View organization billing information            |
-| Manage billing | Complete access to managing organization billing |
-
-## Licensing
-
-| Permission      | Description                                                                                                                         |
-| :-------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
-| Manage licenses | Assign and revoke licenses for members and manage auto-assign rules. Does not include purchasing or changing the number of licenses |
-
-## AI Governance
-
-| Permission            | Description                                          |
-| :-------------------- | :--------------------------------------------------- |
-| View policies         | View existing AI Governance policies and their rules |
-| Manage policies       | Full access to AI Governance policy management       |
-| View audit logs       | View audit events for the organization               |
-| Manage audit settings | Update audit configuration for the organization      |
-
-## DHI (Docker Hardened Images)
-
-| Permission            | Description                                                     |
-| :-------------------- | :-------------------------------------------------------------- |
-| Create DHI mirrors    | Create Docker Hardened Image mirror repositories                |
-| Manage customizations | Create, update, and delete Docker Hardened Image customizations |
-
-## Docker Offload
-
-| Permission        | Description                                    |
-| :---------------- | :--------------------------------------------- |
-| Offload Read-Only | View Offload account status, leases, and zones |
-
-## Cloud Sandboxes
-
-| Permission          | Description                           |
-| :------------------ | :------------------------------------ |
-| Use Cloud Sandboxes | Create and use Docker Cloud Sandboxes |
+| Permission | Description |
+| :--------- | :---------- |
+{{ range $group.relations -}}
+  {{- if or (not .name) (not .description) -}}
+    {{- errorf "custom-role-permissions: relation %q in group %q needs a name and description: %s" .name $group.name $.Position -}}
+  {{- end -}}
+| {{ replace .name "|" "\\|" }} | {{ replace .description "|" "\\|" }} |
+{{ end -}}
+  {{- end -}}
+{{- end }}
+{{% /custom_role_permissions.inline %}}
 
 ## Next steps
 
