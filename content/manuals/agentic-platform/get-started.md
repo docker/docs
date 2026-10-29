@@ -154,23 +154,9 @@ and push changes to a repository. Include a
 [GitHub credential](secrets.md#github-credential) when launching a sandbox that
 needs to push changes.
 
-## Open the project in your editor (optional)
-
-To continue with the same project in VS Code or Cursor, follow
-[Develop remotely](guides/remote-development.md#2-configure-and-test-ssh).
-Check the guide's [prerequisites](guides/remote-development.md#before-you-begin)
-first. Skip its project creation step and connect to the sandbox you created
-here. Open `/home/agent/workspace/project`; the coding agent also saves
-`review.md` in `/home/agent/workspace`.
-
-The guide covers SSH setup, both editors, reconnecting, and copying files back
-to your computer. You can also use the
-[CLI file transfer commands](/manuals/ai/sandboxes/cloud/usage.md#transfer-files)
-to download `review.md` without an editor.
-
 ## Pause, keep running, or delete the sandbox
 
-Closing the browser or disconnecting your editor leaves the sandbox running.
+Closing the browser leaves the sandbox running.
 Commands and background processes can continue until you pause or delete the
 sandbox, or its timer expires. Compute is billed while the sandbox runs, even
 when no commands are running.
@@ -187,6 +173,17 @@ Return to **Sandboxes** in the Console and choose what to do next:
   you want to keep first. Deletion removes files stored only in the sandbox.
 
 For more detail, see [Lifecycle actions](sandboxes.md#manage-the-lifecycle).
+
+## Sandbox options
+
+For launch settings, see [Kits](kits.md), [Secrets](secrets.md),
+[Network policies](policies.md), and [MCP tools](mcp.md). For compute platforms
+and timer actions, see [Sandboxes](sandboxes.md). Choose these settings before
+launching: credentials, tools, network policies, and compute size can't be
+changed afterward.
+
+## Next steps
+
 To run a task from your own terminal, follow the
 [cloud CLI walkthrough](/manuals/ai/sandboxes/cloud/_index.md#get-started).
 For programmatic workflows, see the
@@ -197,11 +194,3 @@ Continue with a targeted workflow:
 - [Share an application](guides/share-app.md) through a public URL.
 - [Develop remotely](guides/remote-development.md) with VS Code or Cursor.
 - [Continue local work in the cloud](guides/local-handoff.md) and retrieve the results.
-
-## Sandbox options
-
-For launch settings, see [Kits](kits.md), [Secrets](secrets.md),
-[Network policies](policies.md), and [MCP tools](mcp.md). For compute platforms
-and timer actions, see [Sandboxes](sandboxes.md). Choose these settings before
-launching: credentials, tools, network policies, and compute size can't be
-changed afterward.
