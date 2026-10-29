@@ -11,8 +11,10 @@ aliases:
 Use a cloud sandbox to review a project with a coding agent or build and run
 an application from a shell, without setting up the project on your computer.
 
-You can complete either workflow in the browser. An optional step shows how
-to open the same project in VS Code or Cursor over SSH.
+Both paths introduce the same cloud sandbox lifecycle: launch an environment,
+run a task, save work, and pause or delete it. Complete either path in your
+browser, then use the [guides](guides/_index.md) for sharing, remote development,
+or moving local work to the cloud.
 
 ## Before you begin
 
@@ -20,6 +22,9 @@ You need a personal Docker account with an active
 [Docker Agentic Platform subscription](signup.md#activate-cloud-access).
 
 Both workflows use a public sample project, so you don't need a GitHub token.
+Review the compute price and timer before launching. Choose **Stop** as the
+timeout action to keep files. Compute is billed while the sandbox runs;
+closing the browser doesn't stop it.
 
 ## Choose a workflow
 
@@ -73,8 +78,7 @@ Claude Code summarizes the project in the conversation and saves the review
 at `/home/agent/workspace/review.md`. You can ask follow-up questions or give
 it another task in the same session.
 
-Continue to [keep your work](#keep-your-work), or
-[open the project in your editor](#open-the-project-in-your-editor-optional).
+Continue to [keep your work](#keep-your-work).
 
 ## Use a shell
 
@@ -88,8 +92,9 @@ The Shell kit starts a Bash shell without an agent.
 3. If saved secrets or a GitHub token are selected, deselect them for this
    walkthrough. You don't need MCP tools either.
 4. In the network policy picker, select **Balanced** to permit access to
-   GitHub, Docker Hub, and npm. Keep the compute and timer defaults and select
-   **Run**.
+   GitHub, Docker Hub, and npm. Deselect **Open** if selected: combining it
+   with Balanced doesn't restrict Open's access. Review the compute price and
+   timer, choose **Stop** as the timeout action, and select **Run**.
 
 If you use a custom network policy, make sure it permits GitHub, Docker Hub,
 and npm. See [Network policies](policies.md).
@@ -129,11 +134,13 @@ You should see the Welcome to Docker application. The application runs in the
 cloud sandbox, so you can try it without installing Docker or Node.js on your
 computer.
 
-The generated URL is public. Close the port in **Connect** when you've finished
-previewing the application.
+The generated URL is public, and Docker account authentication doesn't protect
+it. Use only non-sensitive data. Close the port in **Connect** when you've
+finished previewing, then reload the URL to confirm access is withdrawn.
+For a complete sharing workflow, including checking access from a separate
+browser session, follow [Share an application](guides/share-app.md).
 
-Continue to [keep your work](#keep-your-work), or
-[open the project in your editor](#open-the-project-in-your-editor-optional).
+Continue to [keep your work](#keep-your-work).
 
 ## Keep your work
 
@@ -149,46 +156,17 @@ needs to push changes.
 
 ## Open the project in your editor (optional)
 
-Open the project in VS Code or Cursor over SSH to edit the application. Your
-editor runs on your computer, while the files and terminal commands stay in
-the cloud sandbox.
+To continue with the same project in VS Code or Cursor, follow
+[Develop remotely](guides/remote-development.md#2-configure-and-test-ssh).
+Check the guide's [prerequisites](guides/remote-development.md#before-you-begin)
+first. Skip its project creation step and connect to the sandbox you created
+here. Open `/home/agent/workspace/project`; the coding agent also saves
+`review.md` in `/home/agent/workspace`.
 
-1. Install the [Docker Sandboxes CLI](/manuals/ai/sandboxes/install.md),
-   version 0.45.0 or later.
-2. In a terminal on your computer, sign in with the same Docker account you
-   used in the Console and configure cloud SSH access:
-
-   ```console
-   $ sbx login
-   $ sbx --cloud setup ssh
-   $ sbx --cloud ls
-   ```
-
-3. Find your sandbox in the list and copy its `sbx_`-prefixed ID. Test the
-   connection, replacing `<SANDBOX_ID>` with that ID:
-
-   ```console
-   $ ssh <SANDBOX_ID>@sbx_cloud
-   ```
-
-   A successful connection opens a shell inside the cloud sandbox. Run `exit`
-   to return to your computer's terminal.
-4. In VS Code, install the
-   [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh).
-   In Cursor, install its Remote - SSH support.
-5. Open your editor's Command Palette and run **Remote-SSH: Connect to Host**.
-   Enter `<SANDBOX_ID>@sbx_cloud`, using the same ID as in the SSH command.
-6. Open `/home/agent/workspace` in the remote window. Both workflows clone
-   the application into `project`. The coding agent also saves `review.md`
-   in the workspace.
-
-The first connection installs the editor's server inside the sandbox.
-
-If you followed the coding agent workflow, download the review run this command in a terminal on your computer:
-
-```console
-$ sbx --cloud cp <SANDBOX_ID>:/home/agent/workspace/review.md ./review.md
-```
+The guide covers SSH setup, both editors, reconnecting, and copying files back
+to your computer. You can also use the
+[CLI file transfer commands](/manuals/ai/sandboxes/cloud/usage.md#transfer-files)
+to download `review.md` without an editor.
 
 ## Pause, keep running, or delete the sandbox
 
@@ -222,20 +200,8 @@ Continue with a targeted workflow:
 
 ## Sandbox options
 
-After launch, you can't change the selected credentials, tools, network policies,
-or compute size. Configure these options before selecting **Run**:
-
-| Option | What to choose |
-| --- | --- |
-| Sandbox name | Select **randomly** to enter a name, or keep the generated name. |
-| Agent credentials | Add the API keys or tokens your kit needs. Saved credentials are reused by default; deselect optional credentials you don't want to include. See [Secrets](secrets.md). |
-| GitHub token | Provide a token for Copilot or for cloning private repositories and pushing changes. Copilot uses the same token for both. Repository access is optional for other agents. See [GitHub credential](secrets.md#github-credential). |
-| Network policies | Review the hosts and services the sandbox can reach. See [Network policies](policies.md). |
-| MCP tools | Choose the servers your agent can use and authorize them if prompted. See [MCP](mcp.md). |
-| Compute and platform | Choose a size based on the CPU and memory your task needs, from Micro for light tasks to XL for larger workloads. The picker shows each size's resources and hourly price. Under **Platform**, use **auto** or a platform supported by the kit's image. See [Sandbox platforms](sandboxes.md#choose-a-platform). |
-| Timer | Under **Run for**, choose 1 to 24 hours. Under **When the time is up**, choose **Stop**, **Delete**, or **Restart** if offered. See [Lifecycle actions](sandboxes.md#manage-the-lifecycle). |
-
-The launcher remembers your policy selections from the previous launch in the
-same browser. Policies marked **Always applied** are selected automatically.
-Review the selected policies before launching. Selecting **Balanced** alongside
-**Open** doesn't restrict Open's access; see [How policies combine](policies.md#how-policies-combine).
+For launch settings, see [Kits](kits.md), [Secrets](secrets.md),
+[Network policies](policies.md), and [MCP tools](mcp.md). For compute platforms
+and timer actions, see [Sandboxes](sandboxes.md). Choose these settings before
+launching: credentials, tools, network policies, and compute size can't be
+changed afterward.
