@@ -40,6 +40,12 @@ The following GitHub Actions are available:
 Using Docker's actions provides an easy-to-use interface, while still allowing
 flexibility for customizing build parameters.
 
+> [!NOTE]
+> For an alternative to configuring individual actions, see
+> [Docker GitHub Builder](/manuals/build/ci/github-actions/github-builder/_index.md).
+> It provides Docker-maintained reusable workflows for building images and artifacts
+> with BuildKit.
+
 ## Get started
 
 Build an image from your GitHub repository and push it to Docker Hub with the
