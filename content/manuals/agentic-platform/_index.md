@@ -26,6 +26,10 @@ grid:
     description: Access, pause, resume, and delete your sandboxes.
     icon: command-line
     link: /agentic-platform/sandboxes/
+  - title: Guides
+    description: Share an app, develop remotely, or continue local work in the cloud.
+    icon: command-line
+    link: /agentic-platform/guides/
   - title: MCP
     description: Connect predefined or custom MCP servers.
     icon: cpu-chip

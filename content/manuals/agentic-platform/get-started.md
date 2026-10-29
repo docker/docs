@@ -214,6 +214,12 @@ To run a task from your own terminal, follow the
 For programmatic workflows, see the
 [Sandboxes API quickstart](/manuals/ai/sandboxes-api/get-started.md).
 
+Continue with a targeted workflow:
+
+- [Share an application](guides/share-app.md) through a public URL.
+- [Develop remotely](guides/remote-development.md) with VS Code or Cursor.
+- [Continue local work in the cloud](guides/local-handoff.md) and retrieve the results.
+
 ## Sandbox options
 
 After launch, you can't change the selected credentials, tools, network policies,
