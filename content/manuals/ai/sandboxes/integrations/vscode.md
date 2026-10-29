@@ -21,6 +21,9 @@ run in the isolated sandbox.
 - The [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
   extension (`ms-vscode-remote.remote-ssh`) installed in VS Code.
 
+If you plan to run an AI agent in VS Code, [configure its model provider
+credential](_index.md#configure-agent-credentials) before connecting.
+
 ## Connect
 
 Confirm that you can connect to the sandbox from a terminal:
