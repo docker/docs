@@ -52,7 +52,7 @@ For more information, see [Understand permission requirements for Windows](./win
 >
 > **Which backend should I use?**
 >
-> Docker Desktop for Windows supports three backends: WSL 2, Hyper-V, and Docker VMM (Beta). WSL 2 is the default and works for most users without administrator privileges. Hyper-V is only available with all-users installation. Docker VMM is a container-optimized hypervisor that reclaims idle memory and improves file I/O. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
+> Docker Desktop for Windows supports three backends: WSL 2, Hyper-V, and Docker VMM. WSL 2 is the default and works for most users without administrator privileges. Hyper-V is only available with all-users installation. Docker VMM is a container-optimized hypervisor that reclaims idle memory and improves file I/O. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
 
 {{< tabs >}}
 {{< tab name="WSL 2 backend, x86_64" >}}
@@ -152,7 +152,7 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](/m
 
 1. When prompted, select your backend on the **Configuration page**: **Use WSL 2 instead of Hyper-V** for WSL 2, or leave it unselected for Hyper-V. You can switch to Docker VMM after installation from **Settings** > **General**.
 
-    With version 4.97 and later, the **Configuration** page lists the backends as options. Per-user installation offers WSL 2 and Docker VMM (Beta). All-users installation offers WSL 2 and Hyper-V.
+    With version 4.97 and later, the **Configuration** page lists the backends as options. Per-user installation offers WSL 2 and Docker VMM. All-users installation offers WSL 2 and Hyper-V.
 
     On systems that support only one backend, Docker Desktop automatically selects the available option.
 

@@ -50,4 +50,4 @@ If using Intune to manage Docker Desktop for Windows:
 
 Available with Docker Desktop version 4.85 and later, fresh installations from the Microsoft Store use per-user install mode by default, which removes the need for admin privileges.
 
-With version 4.97 and later, per-user installations from the Microsoft Store can use the Docker VMM (Beta) backend in addition to WSL 2. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
+With version 4.97 and later, per-user installations from the Microsoft Store can use the Docker VMM backend in addition to WSL 2. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
