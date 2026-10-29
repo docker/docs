@@ -153,6 +153,8 @@ Compose sbom:
   requires: Docker Compose [2.39.0](https://github.com/docker/compose/releases/tag/v2.39.0) and later
 Compose SDK:
   requires: Docker Compose [5.0.0](https://github.com/docker/compose/releases/tag/v5.0.0) and later
+Compose use service name alias:
+  requires: Docker Compose [5.6.2](https://github.com/docker/compose/releases/tag/v5.0.0) and later
 Custom roles:
   subscription: [Business]
   for: Administrators
