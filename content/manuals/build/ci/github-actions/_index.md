@@ -85,9 +85,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@{{% param "checkout_action_version" %}}
-
       - name: Extract Docker image metadata
         id: meta
         uses: docker/metadata-action@{{% param "metadata_action_version" %}}
@@ -107,7 +104,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
-          context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -119,8 +115,12 @@ workflow also runs on pull requests. Pull-request builds skip signing in to
 Docker Hub and pushing the image, so they don't require registry secrets,
 including for pull requests from forks.
 
-The checkout step retrieves your repository, and `context: .` uses those files
-as the build context. The metadata action generates tags, labels, and
+The build action uses Git context by default: BuildKit fetches your repository
+directly at the Git reference for the event that triggered the workflow, so no
+checkout step is needed. Changes to files made by earlier workflow steps are
+ignored because the build uses files from Git.
+
+The metadata action generates tags, labels, and
 annotations from the GitHub event and passes them to the build step. For
 example, a push to `main` publishes `DOCKERHUB_USERNAME/my-image:main`.
 See [Manage tags and labels](/manuals/build/ci/github-actions/manage-tags-labels.md)
