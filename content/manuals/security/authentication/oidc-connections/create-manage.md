@@ -73,7 +73,7 @@ The automatic OIDC exchange in `docker/login-action` applies to Docker Hub.
 Setting `registry: dhi.io` or `registry: registry.scout.docker.com` doesn't
 perform that exchange. Exchange the GitHub identity token first, then use the
 Docker-issued access token as the registry password with your organization name
-as the username. See the [DHI attestation workflow](/manuals/dhi/how-to/verify.md#authenticate-with-oidc-in-github-actions).
+as the username. See the [DHI attestation workflow](/manuals/dhi/how-to/use.md#authenticate-with-oidc-in-github-actions).
 
 ## Manage OIDC connections
 
