@@ -4,6 +4,12 @@ keywords: trust, security, docker, documentation, automation
 title: Automation with content trust
 ---
 
+> [!WARNING]
+>
+> Docker Content Trust (DCT) is being retired. The Notary v1 service at
+> `notary.docker.io` will shut down on December 8, 2026. For more information, see
+> [Docker Content Trust (DCT)](/manuals/retired.md#docker-content-trust-dct).
+
 It is very common for Docker Content Trust to be built into existing automation
 systems. To allow tools to wrap Docker and push trusted content, there are 
 environment variables that can be passed through to the client. 
