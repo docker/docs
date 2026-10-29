@@ -366,6 +366,17 @@ binary itself.
 You need a check that passes on a GPU-less laptop or CI runner and still fails
 when the image is genuinely broken. Three checks do that.
 
+> [!WARNING]
+>
+> Don't assume a standard hosted CI runner can build a GPU image at all. On a
+> 4-vCPU GitHub-hosted runner this build ran for 2h43m and then died with
+> `no space left on device`. The CUDA devel stage, the Cargo target directory,
+> and a `mode=max` cache export don't fit together in the available space, even
+> after freeing the preinstalled toolchains. The same build took 26 minutes on a
+> remote builder with a native amd64 machine behind it. Build somewhere with
+> room; run the checks below wherever you like, since they only need the
+> finished image.
+
 ### Check that the link closure resolves
 
 Hardened images don't ship `ldd`, and on a
@@ -404,17 +415,6 @@ $ docker run --rm your-image:dhi
 
 That exact error is a pass. Any *other* library in that message is a packaging
 bug.
-
-> [!WARNING]
->
-> Don't assume a standard hosted CI runner can build a GPU image at all. On a
-> 4-vCPU GitHub-hosted runner this build ran for 2h43m and then died with
-> `no space left on device`. The CUDA devel stage, the Cargo target directory,
-> and a `mode=max` cache export don't fit together in the available space, even
-> after freeing the preinstalled toolchains. The same build took 26 minutes on a
-> remote builder with a native amd64 machine behind it. Build somewhere with
-> room; run the checks below wherever you like, since they only need the
-> finished image.
 
 In CI, assert the difference rather than eyeballing it:
 
