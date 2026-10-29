@@ -22,31 +22,14 @@ host.
 
 ## Prerequisites
 
+- Claude credentials configured in Docker Sandboxes. See
+  [Configure agent credentials](_index.md#configure-agent-credentials).
 - SSH access set up. See [Editor and app integrations](_index.md#enable-ssh-access).
 - Claude Desktop installed.
 
 Use a sandbox created with the Claude agent type. The Claude sandbox template
 configures credential injection and network access for the remote Claude Code
 session. You must supply the credential before connecting.
-
-## Configure Claude credentials
-
-Before connecting Claude Desktop, configure an Anthropic credential in Docker
-Sandboxes using one of these methods:
-
-- API key: run `sbx secret set anthropic` on your host to store the key.
-- Claude subscription: run `sbx run claude` from a terminal, then use `/login`
-  inside Claude Code to complete OAuth sign-in.
-
-These credentials are available globally, including to sandboxes created on
-first connection. To restrict an API key to an existing sandbox, use
-`sbx secret set anthropic --sandbox <sandbox-name>`. See
-[Manage credentials](../configuration/credentials.md#stored-secrets).
-
-Signing in to Claude Desktop doesn't authenticate Claude Code inside the
-sandbox. The SSH bridge replaces the credential from Claude Desktop with a
-placeholder to keep the real token out of the sandbox. The sandbox proxy uses
-the credential you configured in Docker Sandboxes to authenticate requests.
 
 ## Connect
 
