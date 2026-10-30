@@ -15,7 +15,7 @@ Docker Sandboxes runs the following agents in local sandboxes:
 - [Devin](devin/)
 - [Docker Agent](docker-agent/)
 - [Droid](droid/)
-- [Gemini](gemini/)
+- [Gemini](gemini/) (retired; run it from the published kit)
 - [Kiro](kiro/)
 - [OpenCode](opencode/)
 - [Shell](shell/) — agent-less sandbox for manual setup or testing
