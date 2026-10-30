@@ -40,9 +40,7 @@ Add your Docker Hub credentials to your GitHub repository:
 4. Under **Variables**, create a repository variable named `DOCKERHUB_USERNAME`
    containing your Docker Hub username.
 
-<a id="call-a-reusable-workflow"></a>
-
-### Set up your GitHub Actions workflow
+### Set up your GitHub Actions workflow {#call-a-reusable-workflow}
 
 Create `.github/workflows/docker-ci.yml` in your repository with the following
 contents. Replace `my-image` with the name of your Docker Hub repository, and
@@ -109,9 +107,7 @@ Use the [Build workflow](build-workflow.md) for Dockerfile inputs, or the
 image and local file output. For details on platform distribution and outputs,
 see [GitHub Builder architecture](github-builder-architecture/index.md).
 
-<a id="compose-individual-actions"></a>
-
-## Build with individual actions
+## Build with individual actions {#compose-individual-actions}
 
 Use individual actions to load images into a job's Docker image store, run
 steps before or after a build on the same runner, or configure the builder
