@@ -91,6 +91,12 @@ export PATH=/usr/bin:$PATH
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 
+Run the installer from a real login session (`ssh` as yourself, or
+`machinectl shell $USER@`). `$XDG_RUNTIME_DIR` must be `/run/user/$(id -u)`.
+If it is empty or something like `~/.docker/run`, the script cannot see
+systemd and tells you to start `dockerd-rootless.sh` by hand. See
+[Troubleshooting](./troubleshoot.md#unable-to-install-with-systemd-when-systemd-is-present-on-the-system).
+
 If `dockerd-rootless-setuptool.sh` is not present, you may need to install the `docker-ce-rootless-extras` package manually, e.g.,
 
 ```console
