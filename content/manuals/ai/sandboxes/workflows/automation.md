@@ -99,6 +99,9 @@ For lists of identifiers without table headings, use `--quiet` or `-q`:
 | `sbx settings ls -q` | Setting keys. |
 | `sbx policy approval ls -q` | Approval IDs. |
 
+To suppress sandbox creation progress, use `sbx run --no-progress`. Command
+results are still printed, including the sandbox ID when you use `--detach`.
+
 ### Update scripts for v0.48.0
 
 {{< copy-as-prompt instruction="Update this repository's Docker Sandboxes CLI usage for v0.48.0 using the migration reference below. Inspect scripts and documentation, update affected commands and output parsers, and verify the changes. Preserve unrelated behavior." >}}
