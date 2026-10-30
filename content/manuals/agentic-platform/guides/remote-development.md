@@ -21,7 +21,7 @@ Your editor window runs locally. Project files, terminal commands, and the
 editor's remote server run inside the sandbox. Files don't sync to your computer.
 Docker bills compute while the sandbox runs, even with the editor disconnected.
 
-## 1. Create the remote project
+## Create the remote project {#1-create-the-remote-project}
 
 1. Open the [Console](https://agentic-platform.docker.com/) and select **+ New sandbox**.
 2. Choose **shell**, deselect saved credentials and MCP tools, and select
@@ -39,7 +39,7 @@ Docker bills compute while the sandbox runs, even with the editor disconnected.
 Expect `/home/agent/workspace/project` to contain the sample source and Dockerfile.
 Local workspaces aren't mounted in the cloud sandbox.
 
-## 2. Configure and test SSH
+## Configure and test SSH {#2-configure-and-test-ssh}
 
 In a terminal on your computer, run:
 
@@ -62,7 +62,7 @@ your computer. Use the ID, rather than the sandbox's display name, for SSH.
 See [Connect with SSH](/manuals/ai/sandboxes/cloud/usage.md#connect-with-ssh)
 for proxy troubleshooting.
 
-## 3. Connect your editor
+## Connect your editor {#3-connect-your-editor}
 
 Choose the instructions for your editor:
 
@@ -81,7 +81,7 @@ For local sandbox integration, see the separate
 [VS Code](/manuals/ai/sandboxes/integrations/vscode.md) and
 [Cursor](/manuals/ai/sandboxes/integrations/cursor.md) pages.
 
-## 4. Edit and preview remotely
+## Edit and preview remotely {#4-edit-and-preview-remotely}
 
 In the remote editor, find a visible heading in the application's source,
 change its text, and save the file. In the editor's remote terminal, build and run:
@@ -99,7 +99,7 @@ protect it. Use non-sensitive data and application authentication for private
 content. Close the port in **Connect** after checking the preview and reload
 the URL to verify the application is no longer reachable.
 
-## 5. Reconnect and keep your work
+## Reconnect and keep your work {#5-reconnect-and-keep-your-work}
 
 Close the remote editor window, then connect again using the same host entry
 and open the same directory. Expect your saved change to remain. Disconnecting
@@ -117,7 +117,7 @@ commit and push to a repository you control. Configure a
 [GitHub credential](/manuals/agentic-platform/secrets.md#github-credential)
 with the required repository permissions before launching a sandbox for that workflow.
 
-## 6. Clean up
+## Clean up {#6-clean-up}
 
 In **Sandboxes**, pause the sandbox and confirm its paused status to stop compute
 charges and retain files. A resumed sandbox gets a fresh timer with the original

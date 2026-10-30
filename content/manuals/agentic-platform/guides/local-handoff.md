@@ -34,7 +34,7 @@ $ sbx --cloud secret set anthropic
 Local and cloud secret stores are separate. See
 [Cloud credentials](/manuals/ai/sandboxes/cloud/credentials.md).
 
-## 1. Prepare files inside the local sandbox
+## Prepare files inside the local sandbox {#1-prepare-files-inside-the-local-sandbox}
 
 On your computer, create a mountless sandbox by omitting the workspace argument.
 Clone the project inside it so the files transfer to the cloud. Directories
@@ -67,7 +67,7 @@ Exit the local agent when preparation is complete. Before snapshotting, remove
 any credentials saved in filesystem files, including interactive sign-in files.
 Managed secrets aren't copied, but ordinary credential files are.
 
-## 2. Move the filesystem
+## Move the filesystem {#2-move-the-filesystem}
 
 From your computer, run:
 
@@ -94,7 +94,7 @@ Local network rules don't transfer either. Published TCP sandbox ports can be
 republished with cloud URLs; rejected ports produce warnings. See
 [Move a sandbox](/manuals/ai/sandboxes/cloud/move.md) for transfer details.
 
-## 3. Continue in the Console
+## Continue in the Console {#3-continue-in-the-console}
 
 Open the [Console](https://agentic-platform.docker.com) and sign in with the
 same Docker account you used for the CLI. Open **Sandboxes** and select the
@@ -125,7 +125,7 @@ working tree before doing the remaining review. Stop and report a mismatch.
 Complete only the recorded task and save /home/agent/workspace/review.md.
 ```
 
-## 4. Disconnect and retrieve the result
+## Disconnect and retrieve the result {#4-disconnect-and-retrieve-the-result}
 
 Once the agent starts, close the browser tab to disconnect. The cloud agent
 can continue while your computer is disconnected. The timer still applies;
@@ -153,7 +153,7 @@ application wasn't run. Compare it with the source rather than treating the
 agent's claims as verified. Files don't synchronize after a move: copying these
 results is what brings them back to your computer.
 
-## 5. Clean up both sandboxes
+## Clean up both sandboxes {#5-clean-up-both-sandboxes}
 
 After verifying your saved files, remove the destination, its template, and the
 local source. First inspect the destination to identify its backing template,
