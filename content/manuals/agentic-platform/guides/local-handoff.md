@@ -16,8 +16,9 @@ during review.
 You need the [CLI and a supported local runtime](/manuals/ai/sandboxes/install.md),
 version 0.45.0 or later, an active
 [Docker Agentic Platform subscription](/manuals/agentic-platform/signup.md#activate-cloud-access),
-and an Anthropic API key for Claude Code. Your cloud account must support the
-local sandbox's architecture: a move doesn't convert Arm to Intel/AMD or the reverse.
+and an Anthropic API key for Claude Code in the cloud. You can use a Claude
+subscription locally, but cloud sandboxes require an API key. This guide uses
+an API key in both environments.
 
 Docker bills cloud compute while the destination runs, even when disconnected.
 Anthropic bills inference separately. The public sample needs no GitHub token.
@@ -35,7 +36,10 @@ Local and cloud secret stores are separate. See
 
 ## 1. Prepare files inside the local sandbox
 
-On your computer, create a sandbox without a workspace argument:
+On your computer, create a mountless sandbox by omitting the workspace argument.
+Clone the project inside it so the files transfer to the cloud. Directories
+mounted from your computer and clone-mode volumes are outside the sandbox
+filesystem and aren't included in a move:
 
 ```console
 $ sbx create --name handoff-local --cpus 2 --memory 4g claude
@@ -43,9 +47,6 @@ $ sbx policy allow network github.com:443 --sandbox handoff-local
 $ sbx exec handoff-local git clone https://github.com/docker/welcome-to-docker.git /home/agent/workspace/project
 $ sbx run --name handoff-local
 ```
-
-The project belongs to the sandbox filesystem. Host workspace mounts and
-clone-mode volumes aren't included in a move.
 
 Ask the local agent to prepare the task without carrying it out:
 
@@ -62,15 +63,6 @@ files read, and limitations. Don't claim to have run the application.
 Don't start this review yet.
 ```
 
-Read the handoff file from another terminal on your computer:
-
-```console
-$ sbx exec handoff-local cat /home/agent/workspace/HANDOFF.md
-$ sbx exec handoff-local git -C /home/agent/workspace/project rev-parse HEAD
-$ sbx exec handoff-local git -C /home/agent/workspace/project status --short
-```
-
-Expect the recorded revision to match and the project working tree to be clean.
 Exit the local agent when preparation is complete. Before snapshotting, remove
 any credentials saved in filesystem files, including interactive sign-in files.
 Managed secrets aren't copied, but ordinary credential files are.
@@ -84,8 +76,16 @@ $ sbx move handoff-local --to cloud --ttl 2h --on-timeout stop
 ```
 
 The move stops the local source for capture and creates a separate destination.
-Use its printed name or ID in place of `<CLOUD_ID>`. The explicit timeout requests
-that the destination stop after two hours and retain its files; the command
+Use its printed `sbx_`-prefixed ID in place of `<CLOUD_ID>`. Also save the
+printed template ID as `<TEMPLATE_ID>` for cleanup. The template is the
+filesystem image used to create the destination, including `HANDOFF.md`. It
+remains after you remove the sandbox.
+
+Cloud sandboxes support both `linux/amd64` and `linux/arm64`. The destination
+matches your local sandbox's architecture; a move doesn't convert between them.
+
+The explicit timeout requests that the destination stop after two hours and
+retain its files; the command
 fails if stopping isn't supported. Don't substitute deletion without first
 arranging to save your work.
 
@@ -97,31 +97,23 @@ republished with cloud URLs; rejected ports produce warnings. See
 
 ## 3. Verify the destination and restart the agent
 
-Inspect both states and the destination before doing more work:
+Use the destination ID printed by the move to read the transferred handoff:
 
 ```console
-$ sbx ls
-$ sbx --cloud ls
-$ sbx --cloud inspect <CLOUD_ID>
-$ sbx --cloud ttl <CLOUD_ID>
-$ sbx --cloud secret ls
-$ sbx --cloud ports <CLOUD_ID>
 $ sbx --cloud exec <CLOUD_ID> cat /home/agent/workspace/HANDOFF.md
-$ sbx --cloud exec <CLOUD_ID> git -C /home/agent/workspace/project rev-parse HEAD
-$ sbx --cloud exec <CLOUD_ID> git -C /home/agent/workspace/project status --short
 ```
 
-Expect the source to be stopped, a distinct destination ID, the same baseline,
-a clean project tree, and the handoff file. Confirm the platform, compute size,
-expiration action, and cloud Anthropic credential. This task needs no published
-ports; remove any unintended exposure before continuing. Verify destination
-[network policy](/manuals/ai/sandboxes/cloud/network-policy.md) permits the model
-provider. The cloud uses its own policy and agent rules, rather than local rules.
+Expect the recorded baseline, project path, and remaining task. Before starting
+work, confirm the move's reported architecture, compute size, and expiration
+match your expectations. Check that your cloud Anthropic credential is set.
+This task needs no published ports; remove any unintended exposure. Verify the
+[cloud network policy](/manuals/ai/sandboxes/cloud/network-policy.md) permits
+the model provider; local network rules don't transfer.
 
 Restart the agent explicitly; its local process wasn't transferred:
 
 ```console
-$ sbx --cloud attach <CLOUD_ID>
+$ sbx --cloud run <CLOUD_ID>
 ```
 
 Give it this prompt:
@@ -141,10 +133,10 @@ runs after the sandbox stops until you resume it.
 Return from your computer's terminal:
 
 ```console
-$ sbx --cloud attach <CLOUD_ID>
+$ sbx --cloud run <CLOUD_ID>
 ```
 
-Review the agent's response. Attaching resumes a stopped sandbox and starts a
+Review the agent's response. Running resumes a stopped sandbox and starts a
 fresh timer. When the report is ready, detach with `Ctrl+\` and copy both files:
 
 ```console
@@ -161,16 +153,21 @@ results is what brings them back to your computer.
 
 ## 5. Clean up both sandboxes
 
-After verifying your saved files, remove the destination and source separately:
+After verifying your saved files, remove the destination, its template, and the
+local source. Delete the cloud sandbox before removing its backing template:
 
 ```console
 $ sbx --cloud rm <CLOUD_ID>
+$ sbx --cloud template rm <TEMPLATE_ID>
 $ sbx rm handoff-local
 $ sbx --cloud ls
+$ sbx --cloud template ls
 $ sbx ls
 ```
 
-Confirm both are absent. Removal deletes files stored only in those sandboxes.
+Confirm both sandboxes and the template are absent. The template contains the
+captured filesystem, so removing only the sandbox leaves that snapshot stored.
+Removal deletes files stored only in those resources.
 If retaining the cloud destination instead, stop it and confirm its state with
 `sbx --cloud ls` to stop compute charges. Check the expiration again after any
 resume. See [Stop or remove a sandbox](/manuals/ai/sandboxes/cloud/usage.md#stop-or-remove-a-sandbox).

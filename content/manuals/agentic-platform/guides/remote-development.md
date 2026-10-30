@@ -25,13 +25,14 @@ Docker bills compute while the sandbox runs, even with the editor disconnected.
 
 1. Open the [Console](https://agentic-platform.docker.com/) and select **+ New sandbox**.
 2. Choose **shell**, deselect saved credentials and MCP tools, and select
-   **Balanced** for GitHub, Docker Hub, and npm access. Deselect **Open** if selected.
+   **Open** so the editor can download its remote server and dependencies.
+   Open permits unrestricted outbound network access; use it here with the
+   public sample and no saved credentials.
 3. Review the compute price and timer. Select **Stop** under **When the time is up**
    to retain files, then select **Run**.
 4. In the sandbox's browser terminal, clone the sample:
 
    ```console
-   $ cd /home/agent/workspace
    $ git clone https://github.com/docker/welcome-to-docker.git project
    ```
 

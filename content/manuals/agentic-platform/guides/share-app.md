@@ -42,7 +42,6 @@ if your account applies additional restrictions.
 In the sandbox terminal, clone the public project into the sandbox filesystem:
 
 ```console
-$ cd /home/agent/workspace
 $ git clone https://github.com/docker/welcome-to-docker.git project
 $ cd project
 $ docker build -t welcome-to-docker .
