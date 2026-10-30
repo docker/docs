@@ -1,18 +1,25 @@
 ---
 title: MCP policy reference
 linkTitle: MCP policy
-weight: 20
+weight: 30
 description: Reference for Docker MCP policy actions, resources, attributes, context fields, and approval behavior.
 keywords: docker sandboxes, MCP policy, Cedar policy, MCP actions, MCP resources, requireApproval, AI Governance
+aliases:
+  - /ai/sandboxes/governance/reference/mcp-policy/
 ---
 
 MCP policies are organization policies written in Cedar using Docker's `MCP`
 namespace. This reference defines the Docker-specific policy surface for Model
 Context Protocol (MCP) activity made available to sandboxes through Docker's
-[MCP gateway](../../mcp-gateway.md).
+[MCP gateway](../../sandboxes/mcp-gateway.md). MCP policy applies when a developer
+registers a server and when an agent uses the MCP gateway. Registration rules
+control future `sbx mcp add` operations. Use-time rules control tool calls,
+gateway meta-tools, resource reads, and prompt retrieval from servers that are
+already registered or loaded.
 
-Use this reference with [MCP access policies](../access-controls/mcp.md) for
-common policy patterns. For the Cedar language, see the
+Use this reference with
+[Organization MCP access policies](../organization/policies/mcp.md) for common
+policy patterns. For the Cedar language, see the
 [Cedar documentation](https://docs.cedarpolicy.com/).
 
 ## Evaluation model
@@ -28,7 +35,7 @@ Governed MCP activity is default deny. A request is blocked unless a matching
 permit annotated with `@requireApproval`.
 
 For details about when Docker Sandboxes evaluates MCP policies for a user, see
-[Govern the server lifecycle](../access-controls/mcp.md#govern-the-server-lifecycle).
+[Where MCP policy applies](../organization/policies/mcp.md#where-mcp-policy-applies).
 
 An actionless `permit` matches every MCP action that reaches Cedar evaluation:
 
@@ -83,8 +90,8 @@ and are advisory.
 | `resource.destructive`     | Tools             | Defaults to `true` when a tool doesn't declare it.                                                                                                    |
 | `resource.idempotent`      | Tools             | Defaults to `false` when a tool doesn't declare it.                                                                                                   |
 | `resource.openWorld`       | Tools             | Defaults to `true` when a tool doesn't declare it.                                                                                                    |
-| `resource.type`            | Servers           | Use for server registration rules. See [Server type values](#server-type-values).                                                                     |
-| `resource.identityURL`     | Servers           | Canonical server identity. The value depends on the registration type. See [Server identity values](#server-identity-values).                         |
+| `resource.type`            | Servers           | Use for server registration rules. For more details, see [Server type values](#server-type-values).                                                                     |
+| `resource.identityURL`     | Servers           | Canonical server identity. The value depends on the registration type. For more details, see [Server identity values](#server-identity-values).                         |
 | `resource.requiresOAuth`   | Servers           | Use for server registration rules.                                                                                                                    |
 | `resource.requiresNetwork` | Servers           | Use for server registration rules.                                                                                                                    |
 | `resource.command`         | Servers           | Local stdio server command, such as `npx` or `docker`, when available. Empty for remote servers and registrations that don't include command details. |
@@ -165,7 +172,7 @@ over a normal `permit`. A matching `forbid` denies the request without an
 elicitation.
 
 For the request flow and trust model, see
-[Require confirmation with MCP elicitation](../access-controls/mcp.md#require-confirmation-with-mcp-elicitation).
+[Require confirmation with MCP elicitation](../organization/policies/mcp.md#require-confirmation-with-mcp-elicitation).
 
 Approval requires a client session that can present an MCP elicitation request
 to the user. If the request can't be presented for approval, the request is

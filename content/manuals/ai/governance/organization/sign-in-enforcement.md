@@ -1,30 +1,27 @@
 ---
-title: Sign-in enforcement
-linkTitle: Sign-in enforcement
+title: Enforce sign-in for Docker Sandboxes
+linkTitle: Enforce sign-in
 weight: 20
 description: Require Docker Sandboxes users to sign in as members of your organization, enforced through endpoint management.
 keywords: docker sandboxes, sign-in enforcement, organization enforcement, sbx login, MDM, configuration profile, registry key, allowedOrgs
 aliases:
   - /ai/sandboxes/governance/sign-in-enforcement/
+  - /ai/sandboxes/governance/monitor-and-enforce/sign-in-enforcement/
 ---
 
-Sign-in enforcement restricts Docker Sandboxes to users who are members of
-specific Docker organizations. An administrator deploys an enforcement
-configuration to managed endpoints, and `sbx login` verifies organization
-membership after the user authenticates. If the check fails, credentials are
-immediately revoked and the user can't run sandboxes.
+{{< summary-bar feature_name="AI Governance" >}}
 
-Without this enforcement, a developer can sign in with a personal account and
-bypass organization [governance policies](../access-controls/organization.md).
-Sign-in enforcement closes that gap at the endpoint, where users can't override
-it.
+Organization policies apply only when a developer signs in to Docker Sandboxes
+as a member of your organization.
+Without sign-in enforcement, a developer can sign in with a personal account
+and bypass those policies. Sign-in enforcement closes that gap on the machine
+itself, where users can't override it.
 
-> [!NOTE]
-> Sign-in enforcement is part of Docker's AI Governance offering.
-> [Contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
-> to learn more.
+To set it up, you write an enforcement configuration that lists your
+organizations, test it on one machine, then deploy it to your developers'
+machines with your endpoint management tooling.
 
-## How it works
+## How sign-in enforcement works
 
 1. An administrator deploys an enforcement configuration to managed endpoints
    through MDM, Group Policy, or configuration management, specifying one or
@@ -35,17 +32,18 @@ it.
 3. If the user belongs to at least one allowed organization, login succeeds and
    the credentials are kept.
 4. If not, Docker Sandboxes immediately revokes the saved credentials and the
-   user receives an [error message](#error-messages) listing the required
-   organizations.
+   user receives a [denial message](#check-what-denied-developers-see) listing
+   the required organizations.
 
 `sbx login` and `sbx logout` always run regardless of organization membership.
 Other commands require a valid signed-in session, so they fail after a denied
 login until the user signs in with an allowed account.
 
-## Enforcement configuration
+## Write the enforcement configuration
 
-All platforms express the same logical schema. The canonical JSON
-representation:
+The configuration lists the organizations developers must belong to, and
+optionally who to contact for access. Every platform uses the same fields. The
+canonical JSON representation:
 
 ```json
 {
@@ -70,7 +68,82 @@ The optional `adminName`, `adminEmail`, and `adminURL` fields give denied users
 a path to resolution. Include the contact details your organization uses for
 access requests.
 
-## Deploy the configuration
+## Test the configuration on one machine
+
+Before you deploy to every machine, write the configuration on one machine and
+confirm that `sbx login` behaves as you expect.
+
+{{< tabs >}}
+{{< tab name="macOS" >}}
+
+Write the configuration to the user preferences domain:
+
+```console
+$ defaults write com.docker.sbx allowedOrgs -array "acme-corp"
+$ defaults write com.docker.sbx adminEmail "it@acme.com"
+```
+
+To remove the test configuration:
+
+```console
+$ defaults delete com.docker.sbx
+```
+
+`defaults write` uses the user preferences domain, not the managed-preferences
+domain. On a managed device, the MDM profile is authoritative and user-level
+settings in the same domain are ignored.
+
+{{< /tab >}}
+{{< tab name="Windows" >}}
+
+Run the following in an elevated PowerShell session. Use `New-ItemProperty` to
+create values with an explicit type. `Set-ItemProperty` doesn't create new
+values.
+
+```powershell
+New-Item -Path "HKLM:\SOFTWARE\Policies\Docker\SBX" -Force
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Docker\SBX" `
+  -Name "allowedOrgs" -Value @("acme-corp") -PropertyType MultiString -Force
+New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Docker\SBX" `
+  -Name "adminEmail" -Value "it@acme.com" -PropertyType String -Force
+```
+
+To remove the test configuration:
+
+```powershell
+Remove-Item -Path "HKLM:\SOFTWARE\Policies\Docker\SBX" -Recurse -Force
+```
+
+{{< /tab >}}
+{{< tab name="Linux" >}}
+
+Write the configuration file and set its ownership:
+
+```console
+$ sudo mkdir -p /etc/docker-sbx
+$ sudo tee /etc/docker-sbx/config.json <<'EOF'
+{"allowedOrgs": ["acme-corp"], "adminEmail": "it@acme.com"}
+EOF
+$ sudo chown root:root /etc/docker-sbx/config.json
+$ sudo chmod 644 /etc/docker-sbx/config.json
+```
+
+To remove the test configuration:
+
+```console
+$ sudo rm -f /etc/docker-sbx/config.json
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+Then run `sbx login` with an account that belongs to an allowed organization,
+and again with one that doesn't. The second sign-in is denied with the message
+described in
+[Check what denied developers see](#check-what-denied-developers-see).
+
+## Deploy the configuration to your managed machines
 
 Use your existing endpoint management tooling to deploy the configuration. Each
 platform reads it from a native location that ordinary users can't modify.
@@ -139,29 +212,12 @@ contact details:
 </plist>
 ```
 
-To test the configuration locally without MDM, write to the user preferences
-domain:
-
-```console
-$ defaults write com.docker.sbx allowedOrgs -array "acme-corp"
-$ defaults write com.docker.sbx adminEmail "it@acme.com"
-```
-
-To remove the test configuration:
-
-```console
-$ defaults delete com.docker.sbx
-```
-
-`defaults write` uses the user preferences domain, not the managed-preferences
-domain. On a managed device, the MDM profile is authoritative and user-level
-settings in the same domain are ignored.
-
 {{< /tab >}}
 {{< tab name="Windows" >}}
 
-Deploy it through Group Policy, Intune, or any endpoint management tool that can
-write registry values.
+On Windows, the configuration is a set of registry values under
+`HKLM\SOFTWARE\Policies\Docker\SBX`. Deploy them through Group Policy, Intune,
+or any endpoint management tool that can write registry values.
 
 | Value name    | Type           | Description                                         |
 | ------------- | -------------- | --------------------------------------------------- |
@@ -169,25 +225,6 @@ write registry values.
 | `adminName`   | `REG_SZ`       | Administrator or team name (optional)               |
 | `adminEmail`  | `REG_SZ`       | Contact email (optional)                            |
 | `adminURL`    | `REG_SZ`       | Help desk URL (optional)                            |
-
-To test the configuration locally, run the following in an elevated PowerShell
-session. Use `New-ItemProperty` to create values with an explicit type;
-`Set-ItemProperty` doesn't create new values.
-
-```powershell
-New-Item -Path "HKLM:\SOFTWARE\Policies\Docker\SBX" -Force
-
-New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Docker\SBX" `
-  -Name "allowedOrgs" -Value @("acme-corp") -PropertyType MultiString -Force
-New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Docker\SBX" `
-  -Name "adminEmail" -Value "it@acme.com" -PropertyType String -Force
-```
-
-To remove the configuration:
-
-```powershell
-Remove-Item -Path "HKLM:\SOFTWARE\Policies\Docker\SBX" -Recurse -Force
-```
 
 {{< /tab >}}
 {{< tab name="Linux" >}}
@@ -207,37 +244,22 @@ Salt. The file must be owned by root with `644` permissions.
 }
 ```
 
-To deploy and set ownership:
-
-```console
-$ sudo mkdir -p /etc/docker-sbx
-$ sudo tee /etc/docker-sbx/config.json <<'EOF'
-{"allowedOrgs": ["acme-corp"], "adminEmail": "it@acme.com"}
-EOF
-$ sudo chown root:root /etc/docker-sbx/config.json
-$ sudo chmod 644 /etc/docker-sbx/config.json
-```
-
-To remove the configuration:
-
-```console
-$ sudo rm -f /etc/docker-sbx/config.json
-```
-
 The Linux loader fails closed if the file is a symlink, isn't a regular file,
 isn't owned by root, or is writable by group or other. Any deviation is treated
 as a configuration error and `sbx login` is denied with a descriptive message.
-Deploying with the commands above passes these checks.
+Deploying with the commands in
+[Test the configuration on one machine](#test-the-configuration-on-one-machine)
+passes these checks.
 
 {{< /tab >}}
 {{< /tabs >}}
 
-## Error messages
+## Check what denied developers see
 
 When a user signs in with an account that isn't a member of an allowed
 organization, they're signed out and shown a denial message. Only the contact
-fields you configure appear: if only `adminEmail` is set, the URL line is
-omitted.
+fields you configure appear. For example, if only `adminEmail` is set, the URL
+line is omitted.
 
 When no admin contact details are configured:
 
@@ -262,12 +284,9 @@ For access, contact ACME IT Security:
   URL:   https://acme-corp.atlassian.net/servicedesk/it
 ```
 
-## Related pages
+## Turn off enforcement
 
-- [Organization policies](../access-controls/organization.md): centrally manage
-  sandbox network, filesystem, and MCP access controls from the Docker Admin
-  Console
-- [Governance overview](../_index.md): how local and organization governance fit
-  together
-- [Enforce sign-in for Docker Desktop](/manuals/desktop/enterprise/enforce-sign-in/_index.md):
-  the equivalent control for Docker Desktop
+To turn off sign-in enforcement on a machine, remove the configuration with
+the same tooling you used to deploy it. You can also leave `allowedOrgs` empty,
+which makes enforcement inactive so any authenticated user can use Docker
+Sandboxes.

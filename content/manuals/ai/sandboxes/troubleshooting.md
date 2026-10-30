@@ -108,32 +108,11 @@ $ sbx run docker.io/sbx/copilot-kit:latest
 $ sbx run docker.io/sbx/droid-kit:latest
 ```
 
-## Agent can't install packages or reach an API
+## Network access and policy
 
-Sandboxes use [network access rules](governance/access-controls/network.md) to
-control outbound traffic.
-If the agent fails to install packages or call an external API, the target
-domain is likely not in the allow list. Check which requests are being blocked:
-
-```console
-$ sbx policy log
-```
-
-Then allow the domains your workflow needs:
-
-```console
-$ sbx policy allow network "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
-```
-
-To allow all outbound traffic instead:
-
-```console
-$ sbx policy allow network "**"
-```
-
-If `sbx policy allow` doesn't unblock the request, your organization may
-manage sandbox policies centrally and take precedence over local rules. See
-[Organization policies](governance/access-controls/organization.md).
+For problems caused by network rules, approvals, or organization governance,
+such as blocked requests, inactive allow rules, or missing audit records, see
+[Troubleshoot governance](../governance/troubleshooting.md).
 
 ## Kit fails to install: source not in allowlist
 
@@ -191,7 +170,7 @@ can't be recovered. Use an address-based rule in that case:
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-UDP requires [experimental UDP egress](governance/access-controls/local.md#allow-outbound-udp)
+UDP requires [experimental UDP egress](../governance/local/network-rules.md#allow-outbound-udp)
 and UDP allow rules. ICMP is blocked and can't be unblocked with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
@@ -229,7 +208,7 @@ If credentials are configured correctly but API calls still fail, check
 the `transparent` proxy don't get credential injection. This can happen when a
 client inside the sandbox (such as a process in a Docker container) isn't
 configured to use the forward proxy. See
-[Monitoring network activity](governance/monitor-and-enforce/monitoring.md)
+[View network activity](../governance/local/test-monitor.md#view-network-activity)
 for details.
 
 ## MCP server streams stall

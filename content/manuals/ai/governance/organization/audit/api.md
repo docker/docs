@@ -1,12 +1,14 @@
 ---
 title: Retrieve audit events with the API
-linkTitle: Audit Logs API
+linkTitle: Retrieve with the API
 weight: 45
 description: Retrieve and filter Docker AI Governance audit events with the Audit Logs API.
 keywords: docker sandboxes, AI Governance, audit logs API, audit events, organization access token, OAT
+aliases:
+  - /ai/sandboxes/governance/audit/api/
 ---
 
-{{< summary-bar feature_name="AI Governance Audit Logs" >}}
+{{< summary-bar feature_name="AI Governance" >}}
 
 The Audit Logs API retrieves cloud-delivered Docker AI Governance events for
 automation, investigation, and reporting. The API returns the same event data
@@ -85,7 +87,7 @@ array of events and an opaque cursor for the next page:
 }
 ```
 
-See the [audit record reference](record-reference.md) for category, decision,
+See the [audit record reference](../../reference/audit-records.md) for category, decision,
 action, and payload fields.
 
 ## Filter events
