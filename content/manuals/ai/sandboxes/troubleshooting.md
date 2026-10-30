@@ -28,6 +28,14 @@ with suggested fixes. Use `--json` or `--format yaml` for machine-readable
 output, or `--format github-issue` to generate a Markdown snippet suitable for pasting
 into a GitHub issue.
 
+## Image pulls fail on eCryptfs
+
+On Linux, image pulls can fail with an I/O error when the sandbox state
+directory is on eCryptfs.
+
+If [`sbx diagnose`](#run-diagnostics) reports `state directory is on eCryptfs`,
+use a filesystem other than eCryptfs for sandbox state.
+
 ## Sandbox is not responding
 
 If `sbx ls` shows `running (not responding)`, Docker Sandboxes has detected
