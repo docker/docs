@@ -434,6 +434,19 @@ timestamp from a timestamp authority instead of a transparency log timestamp.
 Leave this at `false` when your signing workflow uses the public transparency
 log. It has no effect on signatures verified with a public key.
 
+### Model server
+
+#### model.server.enabled {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Set this to `false` to turn off the bundled model service and skip its runtime
+download. Changes require a daemon restart. This setting has no environment
+variable override.
+
+See [Disable the bundled service](models.md#disable-the-bundled-service) for
+commands and how this affects your model choices.
+
 ### MCP gateway
 
 #### mcp.forceLocalGateway {.wrap-anywhere}
