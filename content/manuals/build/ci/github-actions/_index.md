@@ -186,10 +186,3 @@ The following GitHub Actions are available:
   multi-platform builds.
 - [Docker Scout](https://github.com/docker/scout-action):
   analyze Docker images for security vulnerabilities.
-
-## Examples
-
-If you're looking for examples on how to use the Docker GitHub Actions,
-refer to the following sections:
-
-{{% sectionlinks %}}
