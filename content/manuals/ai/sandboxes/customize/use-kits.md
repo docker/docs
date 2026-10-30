@@ -18,9 +18,13 @@ for built-in agent references such as `claude` and `codex`.
 
 ## Run a kit
 
-The built-in agent names are shortcuts for kit references. To run another kit,
-replace the agent name with that kit's reference. For example, run Docker's
-published v3 Codex workload:
+Built-in names such as `claude` and `codex` resolve to kits published on
+Docker Hub under `docker.io/sbx/<NAME>:latest`. For example, `codex` resolves
+to `docker.io/sbx/codex:latest`. These references differ from the versioned
+v3 workloads listed below.
+
+To run another kit, replace the agent name with that kit's reference. For
+example, run Docker's published v3 Codex workload:
 
 ```console
 $ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-v3-kit
