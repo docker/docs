@@ -112,7 +112,7 @@ that future invocations run on your host.
 | Command                                                                       | Description                                                                          |
 | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | `sbx env plan [PATH...]`                                                       | Shows what applying the environment would change without changing or approving it    |
-| [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...]`                      | Applies the approved plan, creates the environment if needed, and attaches            |
+| [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...] [-- ARG...]`          | Applies the approved plan, creates the environment if needed, and attaches            |
 | [`sbx env create`](/reference/cli/sbx/env/create/) `[PATH...]`                | Applies the approved plan and creates the environment without attaching              |
 | [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]` | Runs a command in an existing environment without running lifecycle commands         |
 | [`sbx env rm`](/reference/cli/sbx/env/rm/) `[PATH...]`                        | Shows a destroy plan, then removes the sandbox and resources named in the plan        |
@@ -327,6 +327,46 @@ workload's repository name. The `web-app-v3` name creates a separate sandbox.
 For other agents, see the
 [published v3 workloads](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads).
 
+### Set the launch command
+
+Set `entrypoint` and `cmd` to choose what `sbx env run` executes inside the
+sandbox. For example, add these fields to your environment file to print two
+arguments:
+
+```yaml
+entrypoint: [/usr/bin/printf, '%s\n']
+cmd: [default, 'two words']
+```
+
+```console
+$ sbx env run
+default
+two words
+```
+
+Each field is a list of strings. `sbx` appends `cmd` to `entrypoint`, preserving
+each item as one argument, including spaces and empty strings. Arguments aren't
+interpreted as shell expressions. To run a shell expression, explicitly use a
+shell such as `entrypoint: [/bin/sh, -c]`.
+
+Arguments after `--` replace `cmd` for that run and preserve `entrypoint`:
+
+```console
+$ sbx env run -- 'replacement argument'
+replacement argument
+```
+
+Omit a field or set it to `null` to inherit its value from an earlier environment
+file, or from the agent's defaults if no file sets it. Set a field to `[]` to
+clear it. The combined command must still start with a non-empty executable.
+When you combine files, later `entrypoint` and `cmd` lists replace earlier lists
+instead of adding to them.
+
+These settings apply only to `sbx env run`. They don't change the published kit,
+its saved launcher, `sbx env exec`, or the sandbox's PID 1. With `--detach`, `run`
+starts only the sandbox and doesn't execute the launch command. You can't combine
+`--detach` with arguments after `--`.
+
 ### Combine team defaults and personal settings
 
 Keep the shared configuration in a version-controlled environment directory
@@ -364,8 +404,9 @@ Pass both files in merge order:
 $ sbx env run base.sbxenv.yaml local.sbxenv.yaml
 ```
 
-Nested mappings merge by key, lists concatenate, and values from later files
-replace earlier scalar values. In this example, the sandbox has four CPUs,
+Nested mappings merge by key, lists concatenate except for `entrypoint` and
+`cmd`, and values from later files replace earlier scalar values. In this
+example, the sandbox has four CPUs,
 12 GB of memory, and both environment variables. Each relative workspace path
 resolves from the directory of the file that declares it.
 
@@ -511,6 +552,11 @@ host mounts, kits, ports, secrets, bindings, and `sandboxOptions` take effect
 only when the sandbox is next created. Remove the environment with `sbx env rm`, then create
 it again to apply those changes.
 
+Changes to `entrypoint` and `cmd` take effect on each `sbx env run` without
+recreating the sandbox. If you also change `agent`, recreate the environment
+before using a partial launch override that inherits defaults from that agent.
+Equivalent agent names and aliases don't require recreation.
+
 ## Remove an environment
 
 Secrets and registry credentials are sandbox-scoped. Credential bindings and
@@ -546,6 +592,8 @@ cleanup. If an environment MCP command registration cannot be removed, follow
 | `schemaVersion`        | string           | Yes      | None                           | Schema version. The supported value is `"1"`                                   |
 | `name`                 | string           | No       | `<agent>-<workspace-basename>` | Sandbox name, overridden by `--name`                                                                    |
 | `agent`                | string           | Yes      | None                           | Built-in agent or the name of an agent kit                                      |
+| `entrypoint` | list of strings | No | Agent default | Launch executable and fixed arguments for `run`. See [Set the launch command](#set-the-launch-command) |
+| `cmd` | list of strings | No | Agent default | Default arguments appended to `entrypoint`; arguments after `--` replace this list |
 | `args`                 | map              | No       | None                           | Environment arguments. See [`args`](#args)                                      |
 | `kits`                 | list             | No       | None                           | Kits to install at creation. See [`kits`](#kits)                                 |
 | `workspace`            | string or object | No       | No host mount                  | Primary workspace. See [`workspace`](#workspace)                                |
