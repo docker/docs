@@ -76,10 +76,9 @@ $ sbx move handoff-local --to cloud --ttl 2h --on-timeout stop
 ```
 
 The move stops the local source for capture and creates a separate destination.
-Use its printed `sbx_`-prefixed ID in place of `<CLOUD_ID>`. Also save the
-printed template ID as `<TEMPLATE_ID>` for cleanup. The template is the
-filesystem image used to create the destination, including `HANDOFF.md`. It
-remains after you remove the sandbox.
+Use its printed `sbx_`-prefixed ID in place of `<CLOUD_ID>`. The move also creates
+a template: the filesystem image used to create the destination, including
+`HANDOFF.md`. It remains after you remove the sandbox.
 
 Cloud sandboxes support both `linux/amd64` and `linux/arm64`. The destination
 matches your local sandbox's architecture; a move doesn't convert between them.
@@ -95,26 +94,28 @@ Local network rules don't transfer either. Published TCP sandbox ports can be
 republished with cloud URLs; rejected ports produce warnings. See
 [Move a sandbox](/manuals/ai/sandboxes/cloud/move.md) for transfer details.
 
-## 3. Verify the destination and restart the agent
+## 3. Continue in the Console
 
-Use the destination ID printed by the move to read the transferred handoff:
+Open the [Console](https://agentic-platform.docker.com) and sign in with the
+same Docker account you used for the CLI. Open **Sandboxes** and select the
+destination using the ID printed by the move. Use its browser terminal to
+continue the task; the local agent process wasn't transferred.
 
-```console
-$ sbx --cloud exec <CLOUD_ID> cat /home/agent/workspace/HANDOFF.md
-```
-
-Expect the recorded baseline, project path, and remaining task. Before starting
-work, confirm the move's reported architecture, compute size, and expiration
-match your expectations. Check that your cloud Anthropic credential is set.
-This task needs no published ports; remove any unintended exposure. Verify the
+Before starting work, confirm the destination's architecture, compute size,
+and expiration match your expectations. Check that your cloud Anthropic
+credential is set. This task needs no published ports; remove any unintended
+exposure. Verify the
 [cloud network policy](/manuals/ai/sandboxes/cloud/network-policy.md) permits
 the model provider; local network rules don't transfer.
 
-Restart the agent explicitly; its local process wasn't transferred:
+In an additional shell, check the transferred handoff:
 
 ```console
-$ sbx --cloud run <CLOUD_ID>
+$ cat /home/agent/workspace/HANDOFF.md
 ```
+
+Expect the recorded baseline, project path, and remaining task. Return to the
+agent's terminal to restart the work.
 
 Give it this prompt:
 
@@ -126,18 +127,19 @@ Complete only the recorded task and save /home/agent/workspace/review.md.
 
 ## 4. Disconnect and retrieve the result
 
-Once the agent starts, press `Ctrl+\` to detach. The cloud agent can continue
-while your computer is disconnected. The timer still applies; no further work
-runs after the sandbox stops until you resume it.
+Once the agent starts, close the browser tab to disconnect. The cloud agent
+can continue while your computer is disconnected. The timer still applies;
+no further work runs after the sandbox stops until you resume it.
 
-Return from your computer's terminal:
+Return to **Sandboxes** in the Console and reopen the destination. If it is
+paused, select **Restore to connect**. Resuming starts a fresh timer. Review
+the agent's response in the browser terminal.
 
-```console
-$ sbx --cloud run <CLOUD_ID>
-```
+> [!TIP]
+> If the terminal appears stuck after reconnecting, try resizing it by resizing
+> your browser window. This can make the agent interface redraw.
 
-Review the agent's response. Running resumes a stopped sandbox and starts a
-fresh timer. When the report is ready, detach with `Ctrl+\` and copy both files:
+When the report is ready, return to your computer's terminal and copy both files:
 
 ```console
 $ sbx --cloud ttl <CLOUD_ID>
@@ -154,7 +156,17 @@ results is what brings them back to your computer.
 ## 5. Clean up both sandboxes
 
 After verifying your saved files, remove the destination, its template, and the
-local source. Delete the cloud sandbox before removing its backing template:
+local source. First inspect the destination to identify its backing template,
+then list the templates. Find the matching entry, typically named
+`moved-handoff-local-<SUFFIX>`, and use its ID as `<TEMPLATE_ID>`. Check the ID
+against the inspected sandbox so you remove only this move's snapshot:
+
+```console
+$ sbx --cloud inspect <CLOUD_ID>
+$ sbx --cloud template ls
+```
+
+Delete the cloud sandbox before removing its backing template:
 
 ```console
 $ sbx --cloud rm <CLOUD_ID>
