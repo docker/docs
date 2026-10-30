@@ -94,11 +94,11 @@ mistral-vibe/
 └── vibe.dockerfile
 ```
 
-Create `mistral-vibe/vibe.dockerfile`. The `shell-docker` template supplies
+Create `mistral-vibe/vibe.dockerfile`. The `shell-docker-image` base image supplies
 the agent account, Python, `uv`, and the sandbox's Docker tooling:
 
 ```dockerfile {title="mistral-vibe/vibe.dockerfile"}
-FROM docker/sandbox-templates:shell-docker
+FROM docker.io/sbx/shell-docker-image:latest
 
 ARG VIBE_VERSION
 
