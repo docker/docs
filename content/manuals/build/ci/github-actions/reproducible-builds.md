@@ -21,7 +21,7 @@ The following example sets the `SOURCE_DATE_EPOCH` variable to 0, Unix epoch.
 
 ### Set the epoch with Builder
 
-Pass the fixed epoch through the [Build workflow](github-builder/build.md):
+Pass the fixed epoch through the [Build workflow](build-workflow.md):
 
 ```yaml
 name: ci
@@ -42,7 +42,7 @@ jobs:
       meta-images: user/app
 ```
 
-For the [Bake workflow](github-builder/bake.md), set
+For the [Bake workflow](bake-workflow.md), set
 `*.args.SOURCE_DATE_EPOCH=0` using the `set` input.
 
 ### Set the epoch with individual actions

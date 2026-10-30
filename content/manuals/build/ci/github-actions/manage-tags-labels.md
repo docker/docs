@@ -5,7 +5,7 @@ description: Assign tags and labels to images automatically with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, tags, labels
 ---
 
-Use [Docker GitHub Builder](github-builder/build.md) to generate tags and OCI
+Use [Docker GitHub Builder](build-workflow.md) to generate tags and OCI
 labels from GitHub events. Set `meta-images` and `meta-tags` to configure the
 metadata action, and `set-meta-labels: true` to apply the generated labels.
 This workflow publishes to Docker Hub and GitHub Container Registry on push

@@ -5,7 +5,7 @@ description: Build multi-platform images with Docker GitHub Builder or individua
 keywords: ci, github actions, gha, buildkit, buildx, multi-platform
 ---
 
-Use [Docker GitHub Builder](github-builder/_index.md) to build multi-platform
+Use [Docker GitHub Builder](_index.md) to build multi-platform
 images across native runners and publish a combined image manifest.
 
 ## Distribute build across multiple runners
@@ -14,11 +14,11 @@ Building multiple platforms on the same runner can significantly extend build
 times, particularly when dealing with complex Dockerfiles or a high number of
 target platforms. If you want to split platform builds across multiple runners
 without maintaining a custom matrix and merge job, use the
-[Docker GitHub Builder](github-builder/_index.md). The reusable workflows
+[Docker GitHub Builder](_index.md). The reusable workflows
 compute the per-platform matrix, run each platform on its own runner, and
 create the final manifest for you.
 
-The following workflow uses the [`build.yml` reusable workflow](github-builder/build.md)
+The following workflow uses the [`build.yml` reusable workflow](build-workflow.md)
 to distribute a multi-platform Dockerfile build:
 
 ```yaml
@@ -56,14 +56,14 @@ jobs:
 With `distribute: true`, which is the default, the workflow splits the build
 into one platform per runner and assembles the final multi-platform image in
 its finalize phase. The default `runner` mapping selects native GitHub-hosted
-Linux runners for Arm and other platforms. To customize the mapping, see [runner selection](github-builder/architecture.md#runner-selection).
+Linux runners for Arm and other platforms. To customize the mapping, see [runner selection](github-builder-architecture/index.md#runner-selection).
 If you need to control the Docker build inputs directly, see
-[Build with Docker GitHub Builder build.yml](github-builder/build.md).
+[Build with Docker GitHub Builder build.yml](build-workflow.md).
 
 ### With Bake
 
 For builds defined in a Bake file, use the
-[Bake reusable workflow](github-builder/bake.md#build-and-push-a-bake-target).
+[Bake reusable workflow](bake-workflow.md#build-and-push-a-bake-target).
 It distributes the target's platforms and publishes the combined manifest.
 
 ## Build with individual actions and QEMU

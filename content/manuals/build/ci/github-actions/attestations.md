@@ -11,7 +11,7 @@ your image, and how it was built.
 
 ## Add attestations with Builder
 
-[Docker GitHub Builder](github-builder/build.md) manages provenance and signing
+[Docker GitHub Builder](build-workflow.md) manages provenance and signing
 in the reusable workflow. It uses max-level provenance for public repositories
 and min-level provenance for private repositories. These levels aren't caller
 inputs. Use individual actions below if you need to override the provenance

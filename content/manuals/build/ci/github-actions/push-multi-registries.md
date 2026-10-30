@@ -5,7 +5,7 @@ description: Push to multiple registries with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, registry
 ---
 
-Use [Docker GitHub Builder](github-builder/build.md) to publish to multiple
+Use [Docker GitHub Builder](build-workflow.md) to publish to multiple
 registries. List the image names in `meta-images` and credentials in the
 `registry-auths` secret. This example publishes `latest` and `1.0.0` tags to
 Docker Hub and GitHub Container Registry:

@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=github_token,env=GITHUB_TOKEN ...
 
 ### Pass secret values with Builder
 
-Pass secret values to [Docker GitHub Builder](github-builder/build.md) using
+Pass secret values to [Docker GitHub Builder](build-workflow.md) using
 the `build-secrets` workflow secret. Its value is a YAML mapping from secret
 IDs to values, rather than the action's `id=value` list:
 

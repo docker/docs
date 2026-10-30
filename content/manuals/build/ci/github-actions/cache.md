@@ -18,7 +18,7 @@ and cache mounts.
 
 ### Enable cache with Builder
 
-[Docker GitHub Builder](github-builder/build.md) disables caching by default.
+[Docker GitHub Builder](build-workflow.md) disables caching by default.
 Set `cache: true` to import and export GitHub Actions cache. Set
 `cache-mode: max` to export intermediate layers, and use `cache-scope` to
 separate builds for different images. Builder adds the platform to the scope
@@ -50,7 +50,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 ```
 
-The same cache inputs are available with the [Bake workflow](github-builder/bake.md).
+The same cache inputs are available with the [Bake workflow](bake-workflow.md).
 See [cache write restrictions](#cache-write-restrictions) for event restrictions.
 Builder's `cache-mode` input selects the layers to export (`min` or `max`);
 it doesn't grant cache write access.

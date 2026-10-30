@@ -1,9 +1,11 @@
 ---
 title: Docker GitHub Builder architecture
-linkTitle: Architecture
+linkTitle: Builder architecture
 description: Learn about the architecture of Docker GitHub Builder, a set of reusable workflows for building images and artifacts with BuildKit in GitHub Actions.
 keywords: ci, github actions, gha, buildkit, buildx, bake, reusable workflows
-weight: 10
+aliases:
+  - /build/ci/github-actions/github-builder/architecture/
+weight: 30
 ---
 
 Docker GitHub Builder separates repository orchestration from build
@@ -18,9 +20,9 @@ signing, and multi-platform assembly in one Docker-maintained path.
 
 ## Core architecture
 
-A caller workflow invokes either [`build.yml`](build.md) or [`bake.yml`](bake.md).
-[`build.yml`](build.md) is the entrypoint for Dockerfile-oriented builds.
-[`bake.yml`](bake.md) is the entrypoint for Bake-oriented builds, where the
+A caller workflow invokes either [`build.yml`](../build-workflow.md) or [`bake.yml`](../bake-workflow.md).
+[`build.yml`](../build-workflow.md) is the entrypoint for Dockerfile-oriented builds.
+[`bake.yml`](../bake-workflow.md) is the entrypoint for Bake-oriented builds, where the
 Bake definition remains the source of truth for targets and overrides. In both
 cases the caller still owns repository policy, including triggers, branch
 conditions, permissions, secrets, target selection, metadata inputs, and the
@@ -96,13 +98,13 @@ BuildKit, caching, or manifest assembly were wired together.
 
 ## The two reusable entrypoints
 
-[`build.yml`](build.md) is the better fit when the build is already expressed as
+[`build.yml`](../build-workflow.md) is the better fit when the build is already expressed as
 a Dockerfile-oriented workflow. It lines up naturally with concepts such as
 `context`, `file`, `target`, `build-args`, `labels`, `annotations`, and
 `platforms`. This is the entrypoint that feels closest to
 `docker/build-push-action`, except the workflow implementation is centralized.
 
-[`bake.yml`](bake.md) is the better fit when the repository already uses Bake
+[`bake.yml`](../bake-workflow.md) is the better fit when the repository already uses Bake
 as the build definition. It preserves the Bake model, including target
 resolution, `files`, `set`, and `vars`, while still routing execution through
 the same Docker-maintained build path. One important architectural detail is
@@ -124,7 +126,7 @@ selection and per-platform assembly.
 ### Dockerfile-oriented image build
 
 The following example shows the shape of a multi-platform image build driven
-by [`build.yml`](build.md).
+by [`build.yml`](../build-workflow.md).
 
 ```yaml
 name: ci
