@@ -24,7 +24,7 @@ Review the compute price and timer before launching. Choose **Stop** as the
 timeout action to retain files; **Delete** removes them. A stopped application
 can't serve visitors. See [Sandbox lifecycle](/manuals/agentic-platform/sandboxes.md#manage-the-lifecycle).
 
-## Launch a shell {#1-launch-a-shell}
+## Launch a shell
 
 1. Open the [Console](https://agentic-platform.docker.com/) and select **+ New sandbox**.
 2. Choose the **shell** kit. Deselect saved credentials and MCP tools.
@@ -37,7 +37,7 @@ The browser terminal opens a Bash shell inside the sandbox. Local files aren't
 mounted there. See [Network policies](/manuals/agentic-platform/policies.md)
 if your account applies additional restrictions.
 
-## Build and run the sample {#2-build-and-run-the-sample}
+## Build and run the sample
 
 In the sandbox terminal, clone the public project into the sandbox filesystem:
 
@@ -58,7 +58,7 @@ $ docker ps --filter name=welcome-to-docker
 Expect the container to be running with port `3000` published in the sandbox.
 This container port mapping alone doesn't create the public cloud URL.
 
-## Open and share the preview {#3-open-and-share-the-preview}
+## Open and share the preview
 
 1. On the sandbox detail page, select **Connect**.
 2. Under **Connect via a Port**, enter `3000` and select **Open Port**.
@@ -70,7 +70,7 @@ This container port mapping alone doesn't create the public cloud URL.
 The service runs inside the sandbox. Closing your browser leaves it running
 until you stop it or the timer action takes effect.
 
-## Withdraw access and save work {#4-withdraw-access-and-save-work}
+## Withdraw access and save work
 
 Use the close action next to port `3000` in **Connect**. In the separate browser
 session, reload the URL and confirm that the application is no longer reachable.
@@ -89,7 +89,7 @@ or push them to a repository you control using an appropriately scoped
 [GitHub credential](/manuals/agentic-platform/secrets.md#github-credential).
 Verify your saved copy before deleting the sandbox; files don't sync automatically.
 
-## Clean up {#5-clean-up}
+## Clean up
 
 In **Sandboxes**, pause the sandbox and confirm its paused status to stop compute
 charges while retaining files. Resuming starts a fresh timer with the original
