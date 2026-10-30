@@ -20,6 +20,7 @@ Use `sbx policy ls` to see all active policies and their current status:
 ```console
 $ sbx policy ls
 POLICY                                 SOURCE   APPLIES TO          SUMMARY
+default-deny-all                       local    all                 network: deny when no rule decides
 local-policy                           local    all                 network: 42 allow, 1 deny; filesystem read: 1 allow; filesystem write: 1 allow
 1b2633ea-e604-48bb-a5e6-3ac86ba383fe   kit      sandbox:my-sandbox  network: 3 allow
 ```
@@ -39,6 +40,12 @@ The columns are:
   contributes one entry per destination. When the listing includes rules that
   match an HTTP method and path, the network count labels each part `(L4)` or
   `(L7)`. See [HTTP rules](#http-rules).
+
+The `default-deny-all` row represents the built-in fallback: access is blocked
+when no applicable policy decides a request. It never overrides an allow rule.
+Its summary describes this condition instead of counting it as an explicit
+deny. For how unmatched requests are handled under each preset, see
+[Default preset](../access-controls/local.md#default-preset).
 
 To see full rule-level detail including rule IDs and resources, pass `--wide`.
 To inspect a single policy or rule, use `sbx policy inspect`:
@@ -124,6 +131,8 @@ while organization governance is active. Local and kit-defined deny rules stay
 active and aren't hidden, because a deny still applies on top of the
 organization policy. See [Precedence](../concepts.md#precedence).
 
+### Listing rules for a sandbox
+
 Use `--type network`, `--type filesystem`, or `--type http` to show only
 policies of that type. Without a sandbox argument, `sbx policy ls` shows every
 policy across all sandboxes. Pass a sandbox name to filter to global policies
@@ -132,6 +141,20 @@ and those scoped to that sandbox:
 ```console
 $ sbx policy ls my-sandbox
 ```
+
+The output groups rules by type. For example, the network section for a sandbox
+with 42 allowed hosts and one explicitly denied host in its local policy shows:
+
+```text
+NETWORK
+  • allow 42 hosts from local-policy
+  • deny 1 host from local-policy
+  • fallback: deny when no rule decides from default-deny-all
+```
+
+The fallback appears on its own line, so `deny 1 host` counts only the explicit
+deny. Other policies, such as those provided by kits, also contribute to the
+sandbox's summary.
 
 ### Filesystem rules
 
