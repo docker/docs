@@ -25,6 +25,10 @@ params:
       description: Learn how to migrate Java applications to Docker Hardened Images with practical examples and best practices.
       icon: code-bracket
       link: /dhi/migration/examples/java/
+    - title: GPU inference (CUDA)
+      description: Learn how to migrate a CUDA inference container to Docker Hardened Images, from choosing a base to validating without a GPU.
+      icon: code-bracket
+      link: /guides/dhi-gpu-inference/
 ---
 
 This section provides detailed migration examples for common programming languages and frameworks.
