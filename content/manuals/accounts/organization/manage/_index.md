@@ -5,6 +5,10 @@ weight: 20
 description: Learn how to manage your Docker organization, including members, teams, licenses, seats, product access, and settings.
 keywords: manage organization, members, teams, licenses, seats, product access, organization management, docker home, organization settings, deactivate organization
 grid:
+  - title: User access workflow
+    description: Plan roles, provisioning, and ongoing access reviews.
+    icon: user-group
+    link: /accounts/organization/manage/user-access/
   - title: Information
     description: Update your organization's general information and settings.
     icon: pencil-square
