@@ -40,7 +40,7 @@ add to a company.
 1. Select **Add organization**, then select an organization from the
    drop-down list.
 
-A nested organization must keep its Docker Business subscription to stay
+Organizations must keep their Docker Business subscription to stay
 managed by the company. If an organization downgrades from Docker
 Business, you can no longer manage it through the company, and its owner
 must manage it separately.
