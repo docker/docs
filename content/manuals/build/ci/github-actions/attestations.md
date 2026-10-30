@@ -9,7 +9,7 @@ Software Bill of Material (SBOM) and provenance
 [attestations](../../metadata/attestations/_index.md) add metadata about the contents of
 your image, and how it was built.
 
-## Add attestations with Builder
+## Add attestations with GitHub Builder {#add-attestations-with-builder}
 
 [Docker GitHub Builder](build-workflow.md) manages provenance and signing
 in the reusable workflow. It uses max-level provenance for public repositories
@@ -17,7 +17,7 @@ and min-level provenance for private repositories. These levels aren't caller
 inputs. Use individual actions below if you need to override the provenance
 level for a private repository.
 
-Set `sbom: true` to add an SBOM. With the default `sign: auto`, Builder signs
+Set `sbom: true` to add an SBOM. With the default `sign: auto`, GitHub Builder signs
 attestation manifests when pushing an image, using the job's `id-token: write`
 permission:
 

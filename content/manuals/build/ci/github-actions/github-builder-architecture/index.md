@@ -1,6 +1,6 @@
 ---
 title: Docker GitHub Builder architecture
-linkTitle: Builder architecture
+linkTitle: GitHub Builder architecture
 description: Learn about the architecture of Docker GitHub Builder, a set of reusable workflows for building images and artifacts with BuildKit in GitHub Actions.
 keywords: ci, github actions, gha, buildkit, buildx, bake, reusable workflows
 aliases:

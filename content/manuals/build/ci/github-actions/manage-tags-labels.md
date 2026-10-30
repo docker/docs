@@ -58,7 +58,7 @@ jobs:
 
 Replace the image names with repositories you can push to. The
 `packages: write` permission authorizes publishing to GitHub Container Registry.
-Builder skips registry login and signing when `push` is false, so fork pull
+GitHub Builder skips registry login and signing when `push` is false, so fork pull
 requests don't need registry secrets.
 
 ## Generate metadata with individual actions

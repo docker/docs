@@ -12,8 +12,8 @@ aliases:
 
 GitHub Actions automates your build, test, and deployment pipeline. Use
 Docker GitHub Builder to build and publish images
-with Docker-maintained reusable workflows. Builder manages Buildx setup,
-platform distribution, metadata, and signing. Start with Builder for supported
+with Docker-maintained reusable workflows. GitHub Builder manages Buildx setup,
+platform distribution, metadata, and signing. Start with GitHub Builder for supported
 build tasks, and compose individual actions when you need custom job steps or
 controls outside the reusable workflow interface.
 
@@ -79,7 +79,7 @@ jobs:
 Call the reusable workflow with `uses` at the job level, rather than inside
 `steps`. Grant `contents: read` to fetch the repository and `id-token: write`
 for signing with GitHub's OpenID Connect token. With the default `sign: auto`,
-Builder signs attestation manifests when pushing an image. See the
+GitHub Builder signs attestation manifests when pushing an image. See the
 [Build workflow](build-workflow.md) for inputs and outputs.
 
 Commit the workflow file and push it to your default branch to run it. The
@@ -89,10 +89,10 @@ Pull requests from forks can build without Docker Hub secrets or a writable
 OpenID Connect token. Builds that need private dependencies still need access
 to those dependencies.
 
-Builder checks out the repository for the triggering event in its own jobs.
+GitHub Builder checks out the repository for the triggering event in its own jobs.
 Files changed in a caller job aren't automatically available to the build.
 
-Builder uses the metadata action to generate tags from the GitHub event.
+GitHub Builder uses the metadata action to generate tags from the GitHub event.
 For example, a push to `main` publishes `DOCKERHUB_USERNAME/my-image:main`.
 The `set-meta-labels` and `set-meta-annotations` switches also apply generated
 labels and annotations; both are disabled by default. See
@@ -107,7 +107,7 @@ see [Test before push](test-before-push.md). For additional build options, see
 Use the [Build workflow](build-workflow.md) for Dockerfile inputs, or the
 [Bake workflow](bake-workflow.md) for a build defined in Bake. Both support
 image and local file output. For details on platform distribution and outputs,
-see [Builder architecture](github-builder-architecture/index.md).
+see [GitHub Builder architecture](github-builder-architecture/index.md).
 
 <a id="compose-individual-actions"></a>
 
@@ -115,10 +115,10 @@ see [Builder architecture](github-builder-architecture/index.md).
 
 Use individual actions to load images into a job's Docker image store, run
 steps before or after a build on the same runner, or configure the builder
-directly. Builder's `image` output publishes to a registry; its `local` output
+directly. GitHub Builder's `image` output publishes to a registry; its `local` output
 exports files. Neither loads an image into the caller's Docker image store or
 exports a Docker image archive. The following alternative uses the same
-credentials, triggers, and metadata as the Builder example:
+credentials, triggers, and metadata as the GitHub Builder example:
 
 ```yaml
 name: Build and push Docker image

@@ -19,7 +19,7 @@ With individual actions, use the built-in `env` property on the build step.
 
 The following example sets the `SOURCE_DATE_EPOCH` variable to 0, Unix epoch.
 
-### Set the epoch with Builder
+### Set the epoch with GitHub Builder {#set-the-epoch-with-builder}
 
 Pass the fixed epoch through the [Build workflow](build-workflow.md):
 

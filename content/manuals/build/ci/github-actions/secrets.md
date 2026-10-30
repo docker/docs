@@ -29,7 +29,7 @@ FROM alpine
 RUN --mount=type=secret,id=github_token,env=GITHUB_TOKEN ...
 ```
 
-### Pass secret values with Builder
+### Pass secret values with GitHub Builder {#pass-secret-values-with-builder}
 
 Pass secret values to [Docker GitHub Builder](build-workflow.md) using
 the `build-secrets` workflow secret. Its value is a YAML mapping from secret

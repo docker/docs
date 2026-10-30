@@ -16,12 +16,12 @@ and cache mounts.
 
 ## GitHub cache
 
-### Enable cache with Builder
+### Enable cache with GitHub Builder {#enable-cache-with-builder}
 
 [Docker GitHub Builder](build-workflow.md) disables caching by default.
 Set `cache: true` to import and export GitHub Actions cache. Set
 `cache-mode: max` to export intermediate layers, and use `cache-scope` to
-separate builds for different images. Builder adds the platform to the scope
+separate builds for different images. GitHub Builder adds the platform to the scope
 for distributed builds and makes cache export failures non-fatal.
 
 ```yaml
@@ -52,7 +52,7 @@ jobs:
 
 The same cache inputs are available with the [Bake workflow](bake-workflow.md).
 See [cache write restrictions](#cache-write-restrictions) for event restrictions.
-Builder's `cache-mode` input selects the layers to export (`min` or `max`);
+GitHub Builder's `cache-mode` input selects the layers to export (`min` or `max`);
 it doesn't grant cache write access.
 
 ### Cache backend API
