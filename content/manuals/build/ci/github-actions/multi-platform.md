@@ -1,9 +1,76 @@
 ---
 title: Multi-platform image with GitHub Actions
 linkTitle: Multi-platform image
-description: Build for multiple architectures with GitHub Actions using QEMU emulation or multiple native builders
+description: Build multi-platform images with Docker GitHub Builder or individual actions using QEMU.
 keywords: ci, github actions, gha, buildkit, buildx, multi-platform
 ---
+
+Use [Docker GitHub Builder](github-builder/_index.md) to build multi-platform
+images across native runners and publish a combined image manifest.
+
+## Distribute build across multiple runners
+
+Building multiple platforms on the same runner can significantly extend build
+times, particularly when dealing with complex Dockerfiles or a high number of
+target platforms. If you want to split platform builds across multiple runners
+without maintaining a custom matrix and merge job, use the
+[Docker GitHub Builder](github-builder/_index.md). The reusable workflows
+compute the per-platform matrix, run each platform on its own runner, and
+create the final manifest for you.
+
+The following workflow uses the [`build.yml` reusable workflow](github-builder/build.md)
+to distribute a multi-platform Dockerfile build:
+
+```yaml
+name: ci
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    uses: docker/github-builder/.github/workflows/build.yml@{{% param "github_builder_version" %}}
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      output: image
+      push: true
+      platforms: linux/amd64,linux/arm64
+      meta-images: user/app
+      meta-tags: |
+        type=ref,event=branch
+        type=ref,event=pr
+        type=semver,pattern={{version}}
+        type=semver,pattern={{major}}.{{minor}}
+    secrets:
+      registry-auths: |
+        - registry: docker.io
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+```
+
+With `distribute: true`, which is the default, the workflow splits the build
+into one platform per runner and assembles the final multi-platform image in
+its finalize phase. The default `runner` mapping selects native GitHub-hosted
+Linux runners for Arm and other platforms. To customize the mapping, see [runner selection](github-builder/architecture.md#runner-selection).
+If you need to control the Docker build inputs directly, see
+[Build with Docker GitHub Builder build.yml](github-builder/build.md).
+
+### With Bake
+
+For builds defined in a Bake file, use the
+[Bake reusable workflow](github-builder/bake.md#build-and-push-a-bake-target).
+It distributes the target's platforms and publishes the combined manifest.
+
+## Build with individual actions and QEMU
+
+Use individual actions when you need to configure the job's Docker Engine or
+run other steps alongside the build. The following example uses QEMU to build
+both platforms on one runner.
 
 You can build [multi-platform images](../../building/multi-platform.md) using
 the `platforms` option, as shown in the following example:
@@ -93,129 +160,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           load: true
           tags: user/app:latest
-```
-
-## Distribute build across multiple runners
-
-Building multiple platforms on the same runner can significantly extend build
-times, particularly when dealing with complex Dockerfiles or a high number of
-target platforms. If you want to split platform builds across multiple runners
-without maintaining a custom matrix and merge job, use the
-[Docker GitHub Builder](github-builder/_index.md). The reusable workflows
-compute the per-platform matrix, run each platform on its own runner, and
-create the final manifest for you.
-
-The following workflow uses the [`build.yml` reusable workflow](github-builder/build.md)
-to distribute a multi-platform Dockerfile build:
-
-```yaml
-name: ci
-
-on:
-  push:
-
-permissions:
-  contents: read
-
-jobs:
-  build:
-    uses: docker/github-builder/.github/workflows/build.yml@{{% param "github_builder_version" %}}
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      output: image
-      push: true
-      platforms: linux/amd64,linux/arm64
-      meta-images: user/app
-      meta-tags: |
-        type=ref,event=branch
-        type=ref,event=pr
-        type=semver,pattern={{version}}
-        type=semver,pattern={{major}}.{{minor}}
-    secrets:
-      registry-auths: |
-        - registry: docker.io
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-```
-
-With `distribute: true`, which is the default, the workflow splits the build
-into one platform per runner and assembles the final multi-platform image in
-its finalize phase. The default `runner` mapping sends Linux Arm platforms to
-`ubuntu-24.04-arm` and uses `ubuntu-24.04` for other platforms. To customize
-the mapping, see [runner selection](github-builder/architecture.md#runner-selection).
-If you need to control the Docker build inputs directly, see
-[Build with Docker GitHub Builder build.yml](github-builder/build.md).
-
-### With Bake
-
-You can use the [`bake.yml` reusable workflow](github-builder/bake.md) for the
-same pattern when your build is defined in a Bake file. The workflow reads the
-target platforms from the Bake definition, distributes the per-platform builds,
-and publishes the final manifest without a separate prepare or merge job.
-
-```hcl
-variable "DEFAULT_TAG" {
-  default = "app:local"
-}
-
-// Special target: https://github.com/docker/metadata-action#bake-definition
-target "docker-metadata-action" {
-  tags = ["${DEFAULT_TAG}"]
-}
-
-// Default target if none specified
-group "default" {
-  targets = ["image-local"]
-}
-
-target "image" {
-  inherits = ["docker-metadata-action"]
-}
-
-target "image-local" {
-  inherits = ["image"]
-  output = ["type=docker"]
-}
-
-target "image-all" {
-  inherits = ["image"]
-  platforms = [
-    "linux/amd64",
-    "linux/arm/v6",
-    "linux/arm/v7",
-    "linux/arm64"
-  ]
-}
-```
-
-```yaml
-name: ci
-
-on:
-  push:
-
-permissions:
-  contents: read
-
-jobs:
-  bake:
-    uses: docker/github-builder/.github/workflows/bake.yml@{{% param "github_builder_version" %}}
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      output: image
-      push: true
-      target: image-all
-      meta-images: user/app
-      meta-tags: |
-        type=ref,event=branch
-        type=sha
-    secrets:
-      registry-auths: |
-        - registry: docker.io
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
 ```

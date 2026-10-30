@@ -29,6 +29,41 @@ FROM alpine
 RUN --mount=type=secret,id=github_token,env=GITHUB_TOKEN ...
 ```
 
+### Pass secret values with Builder
+
+Pass secret values to [Docker GitHub Builder](github-builder/build.md) using
+the `build-secrets` workflow secret. Its value is a YAML mapping from secret
+IDs to values, rather than the action's `id=value` list:
+
+```yaml
+name: ci
+
+on:
+  push:
+
+jobs:
+  build:
+    uses: docker/github-builder/.github/workflows/build.yml@{{% param "github_builder_version" %}}
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      output: image
+      platforms: linux/amd64,linux/arm64
+      meta-images: user/app
+    secrets:
+      build-secrets: |
+        github_token: ${{ toJSON(secrets.GITHUB_TOKEN) }}
+```
+
+The Dockerfile consumes the `github_token` secret in the same way with either
+workflow. `toJSON` quotes the value for the YAML mapping.
+For files, environment variables, or SSH agents prepared by earlier steps,
+use the individual-action examples below. The reusable build runs in separate
+jobs and doesn't share the caller's filesystem or SSH agent.
+
+### Pass secret values with individual actions
+
 In this example, the secret name is `github_token`. The following workflow
 exposes this secret using the `secrets` input:
 
@@ -257,8 +292,7 @@ RUN --mount=type=secret,id=aws,target=/root/.aws/credentials \
 ### Multi-line secrets
 
 If you're using [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
-and need to handle multi-line value, you will need to place the key-value pair
-between quotes:
+with individual actions, place multi-line key-value pairs between quotes:
 
 ```yaml
 secrets: |

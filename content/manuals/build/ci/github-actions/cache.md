@@ -5,85 +5,59 @@ linkTitle: Cache management
 keywords: ci, github actions, gha, buildkit, buildx, cache
 ---
 
-This page contains examples on using the cache storage backends with GitHub
-Actions.
+Use Docker GitHub Builder with the GitHub Actions cache backend for reusable
+build workflows. The individual-action examples cover other cache backends
+and cache mounts.
 
 > [!NOTE]
 >
 > See [Cache storage backends](../../cache/backends/_index.md) for more
 > details about cache storage backends.
 
-## Inline cache
-
-In most cases you want to use the [inline cache exporter](../../cache/backends/inline.md).
-However, note that the `inline` cache exporter only supports `min` cache mode.
-To use `max` cache mode, push the image and the cache separately using the
-registry cache exporter with the `cache-to` option, as shown in the [registry cache example](#registry-cache).
-
-```yaml
-name: ci
-
-on:
-  push:
-
-jobs:
-  docker:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@{{% param "login_action_version" %}}
-        with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
-
-      - name: Build and push
-        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
-        with:
-          push: true
-          tags: user/app:latest
-          cache-from: type=registry,ref=user/app:latest
-          cache-to: type=inline
-```
-
-## Registry cache
-
-You can import/export cache from a cache manifest or (special) image
-configuration on the registry with the [registry cache exporter](../../cache/backends/registry.md).
-
-```yaml
-name: ci
-
-on:
-  push:
-
-jobs:
-  docker:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@{{% param "login_action_version" %}}
-        with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
-
-      - name: Build and push
-        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
-        with:
-          push: true
-          tags: user/app:latest
-          cache-from: type=registry,ref=user/app:buildcache
-          cache-to: type=registry,ref=user/app:buildcache,mode=max
-```
-
 ## GitHub cache
 
+### Enable cache with Builder
+
+[Docker GitHub Builder](github-builder/build.md) disables caching by default.
+Set `cache: true` to import and export GitHub Actions cache. Set
+`cache-mode: max` to export intermediate layers, and use `cache-scope` to
+separate builds for different images. Builder adds the platform to the scope
+for distributed builds and makes cache export failures non-fatal.
+
+```yaml
+name: ci
+
+on:
+  push:
+
+jobs:
+  build:
+    uses: docker/github-builder/.github/workflows/build.yml@{{% param "github_builder_version" %}}
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      output: image
+      push: true
+      cache: true
+      cache-mode: max
+      cache-scope: app
+      meta-images: user/app
+    secrets:
+      registry-auths: |
+        - registry: docker.io
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+```
+
+The same cache inputs are available with the [Bake workflow](github-builder/bake.md).
+See [cache write restrictions](#cache-write-restrictions) for event restrictions.
+Builder's `cache-mode` input selects the layers to export (`min` or `max`);
+it doesn't grant cache write access.
+
 ### Cache backend API
+
+The following examples configure the backend with individual actions.
 
 {{< summary-bar feature_name="Cache backend API" >}}
 
@@ -354,4 +328,72 @@ jobs:
           tags: user/app:latest
           cache-from: type=local,src=${{ runner.temp }}/.buildx-cache
           cache-to: type=local,dest=${{ runner.temp }}/.buildx-cache,mode=max,reset=true
+```
+
+## Inline cache
+
+Use individual actions for the [inline cache exporter](../../cache/backends/inline.md).
+However, note that the `inline` cache exporter only supports `min` cache mode.
+To use `max` cache mode, push the image and the cache separately using the
+registry cache exporter with the `cache-to` option, as shown in the [registry cache example](#registry-cache).
+
+```yaml
+name: ci
+
+on:
+  push:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@{{% param "login_action_version" %}}
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
+
+      - name: Build and push
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
+        with:
+          push: true
+          tags: user/app:latest
+          cache-from: type=registry,ref=user/app:latest
+          cache-to: type=inline
+```
+
+## Registry cache
+
+You can import/export cache from a cache manifest or (special) image
+configuration on the registry with the [registry cache exporter](../../cache/backends/registry.md).
+
+```yaml
+name: ci
+
+on:
+  push:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@{{% param "login_action_version" %}}
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
+
+      - name: Build and push
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
+        with:
+          push: true
+          tags: user/app:latest
+          cache-from: type=registry,ref=user/app:buildcache
+          cache-to: type=registry,ref=user/app:buildcache,mode=max
 ```

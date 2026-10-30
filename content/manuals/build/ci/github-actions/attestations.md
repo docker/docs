@@ -9,6 +9,47 @@ Software Bill of Material (SBOM) and provenance
 [attestations](../../metadata/attestations/_index.md) add metadata about the contents of
 your image, and how it was built.
 
+## Add attestations with Builder
+
+[Docker GitHub Builder](github-builder/build.md) manages provenance and signing
+in the reusable workflow. It uses max-level provenance for public repositories
+and min-level provenance for private repositories. These levels aren't caller
+inputs. Use individual actions below if you need to override the provenance
+level for a private repository.
+
+Set `sbom: true` to add an SBOM. With the default `sign: auto`, Builder signs
+attestation manifests when pushing an image, using the job's `id-token: write`
+permission:
+
+```yaml
+name: ci
+
+on:
+  push:
+
+jobs:
+  build:
+    uses: docker/github-builder/.github/workflows/build.yml@{{% param "github_builder_version" %}}
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      output: image
+      push: true
+      sbom: true
+      meta-images: user/app
+    secrets:
+      registry-auths: |
+        - registry: docker.io
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+```
+
+Use [build secrets](secrets.md) for credentials. Build argument values can
+appear in provenance, so don't pass secrets as build arguments.
+
+## Use individual actions
+
 Attestations are supported with version 4 and later of the
 `docker/build-push-action`.
 
@@ -67,7 +108,7 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 

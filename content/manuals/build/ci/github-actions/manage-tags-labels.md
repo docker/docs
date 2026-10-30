@@ -5,6 +5,64 @@ description: Assign tags and labels to images automatically with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, tags, labels
 ---
 
+Use [Docker GitHub Builder](github-builder/build.md) to generate tags and OCI
+labels from GitHub events. Set `meta-images` and `meta-tags` to configure the
+metadata action, and `set-meta-labels: true` to apply the generated labels.
+This workflow publishes to Docker Hub and GitHub Container Registry on push
+and scheduled events, and builds without publishing on pull requests:
+
+```yaml
+name: ci
+
+on:
+  schedule:
+    - cron: "0 10 * * *"
+  push:
+    branches:
+      - "**"
+    tags:
+      - "v*.*.*"
+  pull_request:
+
+jobs:
+  build:
+    uses: docker/github-builder/.github/workflows/build.yml@{{% param "github_builder_version" %}}
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+    with:
+      output: image
+      push: ${{ github.event_name != 'pull_request' }}
+      set-meta-labels: true
+      meta-tags: |
+        type=schedule
+        type=ref,event=branch
+        type=ref,event=pr
+        type=semver,pattern={{version}}
+        type=semver,pattern={{major}}.{{minor}}
+        type=semver,pattern={{major}}
+        type=sha
+      meta-images: |
+        name/app
+        ghcr.io/username/app
+    secrets:
+      registry-auths: |
+        - registry: docker.io
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        - registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+```
+
+Replace the image names with repositories you can push to. The
+`packages: write` permission authorizes publishing to GitHub Container Registry.
+Builder skips registry login and signing when `push` is false, so fork pull
+requests don't need registry secrets.
+
+## Generate metadata with individual actions
+
 If you want an "automatic" tag management and [OCI Image Format Specification](https://github.com/opencontainers/image-spec/blob/master/annotations.md)
 for labels, you can do it in a dedicated setup step. The following workflow
 will use the [Docker Metadata Action](https://github.com/docker/metadata-action)
