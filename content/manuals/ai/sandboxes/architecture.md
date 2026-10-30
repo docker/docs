@@ -27,11 +27,12 @@ current directory when you don't pass a path. The sandbox sees your actual
 host files, so changes in either direction are instant with no sync process
 involved.
 
-A directly mounted workspace appears at the same absolute path as on your
-host. Preserving absolute paths means error messages, configuration files, and
-build outputs all reference paths you can find on your host. The agent sees the
-same directory structure, which reduces confusion when debugging or reviewing
-changes.
+By default, a directly mounted workspace appears at the same absolute path as
+on your host. Preserving absolute paths means error messages, configuration
+files, and build outputs all reference paths you can find on your host. The
+agent sees the same directory structure, which reduces confusion when debugging
+or reviewing changes. You can choose a different sandbox path for
+[additional workspaces](usage.md#multiple-workspaces).
 
 Clone mode uses a third storage layout. The host repository is mounted
 read-only at `/run/sandbox/source`, and the agent works in a private clone

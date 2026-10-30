@@ -640,10 +640,25 @@ You can override `workspace.clone` for one `create` or `run` invocation with
 Each additional workspace is mounted after the primary workspace. Relative
 paths resolve from the directory of the environment file that declares them.
 
-| Field      | Type    | Required | Default | Description                   |
-| ---------- | ------- | -------- | ------- | ----------------------------- |
-| `path`     | string  | Yes      | None    | Directory to mount            |
-| `readOnly` | boolean | No       | `false` | Mount the directory read-only |
+| Field      | Type    | Required | Default                      | Description                            |
+| ---------- | ------- | -------- | ---------------------------- | -------------------------------------- |
+| `path`     | string  | Yes      | None                         | Directory to mount                     |
+| `target`   | string  | No       | Host path inside the sandbox | Absolute POSIX path inside the sandbox |
+| `readOnly` | boolean | No       | `false`                      | Mount the directory read-only          |
+
+For example, mount a shared library directory read-only at a chosen path:
+
+```yaml
+workspace: .
+additionalWorkspaces:
+  - path: ../shared-libs
+    target: /workspace/libs
+    readOnly: true
+```
+
+Omit `target` to use the host path inside the sandbox. The same
+[target restrictions](../usage.md#multiple-workspaces) apply as with
+`sbx create` and `sbx run`.
 
 ### `mounts`
 
