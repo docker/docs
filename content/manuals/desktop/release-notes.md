@@ -30,10 +30,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.98.0" build_path="/XXXXXX/" >}}
 
-### New
-
-- Docker VMM is now generally available.
-
 ### Updates
 
 - Docker Offload `v0.7.35`
@@ -47,7 +43,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Added support for running `docker` and `docker compose` from WSL 2 distros when Docker VMM is the engine, including bind mounts of files on Windows drives such as `/mnt/c`.
 - Fixed Docker Hub model pulls failing on proxy-only networks where local DNS could not resolve the authentication endpoint.
 - Fixed Docker Desktop staying on "Starting" after the Docker engine had started. Fixes [docker/desktop-feedback#685](https://github.com/docker/desktop-feedback/issues/685)
 - Fixed `diagnose gather` on slow or stopped VMs by capping the VM start wait to 120 seconds.
@@ -67,6 +62,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an intermittent "being used by another process" error on the `desktop-linux` Docker context file when the engine started.
 - Fixed file sharing treating a directory as shared, or as allowed by Settings Management, when its name only started with that of a shared or allowed directory (e.g. `C:\foobar` for `C:\foo`). Allowed file share entries now match whole directory names only.
 - Fixed an issue where processes started in the Docker Desktop terminal could be left running after closing the terminal.
+- Added support for running `docker` and `docker compose` from WSL 2 distros when Docker VMM is the engine, including bind mounts of files on Windows drives such as `/mnt/c`.
 
 ## 4.97.0
 
