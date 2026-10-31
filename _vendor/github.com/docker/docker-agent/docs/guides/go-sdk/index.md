@@ -135,12 +135,30 @@ The CLI uses this helper for both its initial runtime and TUI-spawned runtimes.
 The HTTP API wires the same manifest budgets into its native runtimes; other
 serving adapters retain their existing wiring and budget behavior.
 
+## Remote execution
+
+Remote HTTP/SSE execution lives in `pkg/runtime/remote`:
+
+```go
+client, err := remote.NewClient(serverURL)
+if err != nil {
+    return err
+}
+rt, err := remote.NewRuntime(client)
+```
+
+Import `github.com/docker/docker-agent/pkg/runtime/remote` for these constructors.
+Shared interfaces and events remain in `pkg/runtime` (`runtime.Runtime`,
+`runtime.Event`, and the concrete event types). The remote implementation imports
+those types; local execution does not import remote transport. There are no
+compatibility re-exports of remote clients or constructors in `pkg/runtime`.
+
 ## Execution Capability Inspection
 
 `(*runtime.LocalRuntime).AgentExecutionCapabilities(name)` returns a static
 native/harness profile without starting tools, constructing drivers or
 initializing budget counters. Unknown agents return nil. The same optional
-profile is available on `runtime.AgentConfigInfo`, `runtime.AgentDetails` in
+profile is available on `inspection.AgentConfigInfo`, `runtime.AgentDetails` in
 `team_info`, and local startup/refresh `runtime.AgentInfoEvent` values.
 See [Execution capabilities](../../features/api-server/index.md#execution-capabilities)
 for field meanings and unknown/remote behavior.
@@ -275,7 +293,7 @@ For anything beyond that, call `chat.Runtime()` to access the underlying `runtim
 > still works and falls back to resolving the sole pending request.
 >
 > If you implement your own `runtime.Runtime` (rather than embedding
-> `runtime.LocalRuntime`/`runtime.RemoteRuntime`), you do need to update your
+> `runtime.LocalRuntime`/`remote.Runtime`), you do need to update your
 > method's signature to match, and also add an `OnElicitationRequest(handler
 > func(runtime.Event))` method (a no-op is fine if your runtime never raises
 > elicitations) — both are required interface methods, matching the existing
@@ -325,7 +343,7 @@ if err != nil {
 ts := ragtool.New(mgr, mgr.ToolName(), ragtool.WithIndexingTimeout(ragCfg.GetIndexingTimeout()))
 ```
 
-`cmd/wasm/toolsets.go` registers exactly this as the browser's `type: rag` creator, fed by `createSession`'s `documents` option.
+With `-tags docker_agent_wasm_rag`, `cmd/wasm/rag.go` registers this as the browser's `type: rag` creator, fed by `createSession`'s `documents` option. RAG is excluded from the default WASM build.
 
 ## Loading YAML with Hand-Picked Registries (lean embedding)
 
@@ -904,7 +922,6 @@ embedding, context-discovery or compaction capabilities.
 | Caller | Clone failure behavior |
 | --- | --- |
 | Session title | Tries the next configured candidate; exhaustion does not interrupt chat. |
-| MCP sampling, with or without tools | Returns the actionable clone error before inference. |
 | LLM compaction | Reports failure and leaves the session history intact. |
 | Compaction window resolution | The checked resolver returns zero plus the error; the LLM compaction path reports it. UI gauges remain best-effort. |
 

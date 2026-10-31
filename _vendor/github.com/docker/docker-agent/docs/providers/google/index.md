@@ -313,7 +313,7 @@ announcements but no dedicated Google card in the 2026-10-13 audit; this proves
 neither unavailability nor account entitlement. See [Claude access paths](../anthropic/index.md#claude-access-paths)
 for model IDs, evidence and policy prerequisites.
 
-Title, sampling and compaction clones keep the selected Model Garden transport.
+Title and compaction clones keep the selected Model Garden transport.
 Claude requests remain on the Anthropic-native Vertex endpoints, with the model
 in the URL and `anthropic_version: vertex-2023-10-16` in the body. Project,
 location, regional/global host selection and Google OAuth authentication survive

@@ -98,7 +98,7 @@ weakening a kit's restrictions or silently copying local credentials. Any
 provider, registry, or tool endpoint the agent needs must be reachable under the
 cloud policy. CLI-specified model, safety, flavor, and prompt options still apply.
 
-Docker Agent uses `sbx --cloud run --detached`, then `exec`: this supports sbx's
+Docker Agent uses `sbx --cloud run --detach`, then `exec`: this supports sbx's
 v3 source builds and multi-kit assembly without launching a second agent TUI.
 Provisioning messages go to stderr, leaving stdout for the agent (including
 `--json` output). Piped/headless execution does not allocate a TTY.

@@ -67,8 +67,12 @@ Use this table to find a built-in provider's config key and authentication metho
 | Cloudflare AI Gateway | `cloudflare-ai-gateway` | `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` + `CLOUDFLARE_GATEWAY_ID` |
 | Requesty       | `requesty`       | `REQUESTY_API_KEY`                  |
 | OpenRouter     | `openrouter`     | `OPENROUTER_API_KEY`                |
+| Opper          | `opper`          | `OPPER_API_KEY`                     |
 | API Route      | `api-route`      | `API_ROUTE_API_KEY`                 |
+| Lunaroute      | [`lunaroute`](../lunaroute/index.md) | `LUNAROUTE_API_KEY`                |
+| OrcaRouter     | `orcarouter`     | `ORCAROUTER_API_KEY`                |
 | Atlas Cloud    | [`atlascloud`](../atlascloud/index.md) | `ATLASCLOUD_API_KEY`                |
+| Runcrate       | [`runcrate`](../runcrate/index.md) | `RUNCRATE_API_KEY`                  |
 | Azure OpenAI   | `azure`          | `AZURE_API_KEY` + `base_url` (override the key with `token_key`) |
 | [Ollama](../local/index.md) | `ollama` | None (local; optional `base_url`) |
 | GitHub Copilot | `github-copilot` | `GITHUB_TOKEN` or `GH_TOKEN` (PAT with `copilot` scope) |

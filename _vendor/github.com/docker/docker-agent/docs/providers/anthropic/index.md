@@ -125,11 +125,10 @@ make two endpoints interchangeable.
 | Bedrock runtime | `amazon-bedrock`; **`ConverseStream`** | Regional Bedrock runtime endpoint | AWS SigV4 credentials or Bedrock bearer token | Exact AWS model or inference-profile ID |
 | OpenAI-compatible aggregators | OpenAI client, Chat Completions for Claude | Alias/custom endpoint (e.g. OpenRouter, Vercel, Azure, OpenCode) | Host-specific key | Host's catalogue ID, not necessarily a Claude API ID |
 
-These are existing adapter paths, not a guarantee of complete Claude 5.x
-compatibility. Model-specific request rules, signed history, thinking and fallback
-compatibility remain the subject of the planned [core work (#4583)](https://github.com/docker/docker-agent/issues/4583)
-and [fallback work (#4584)](https://github.com/docker/docker-agent/issues/4584).
-This guide does not mark those changes as implemented.
+These are the adapter paths Docker Agent uses. Claude 5.x request rules, signed
+history and thinking ([#4583](https://github.com/docker/docker-agent/issues/4583))
+and server-side fallback ([#4584](https://github.com/docker/docker-agent/issues/4584))
+are described in the sections below.
 
 - The built-in `opencode` alias is OpenAI-compatible; the
   [custom OpenCode Messages provider](../opencode-zen/index.md#anthropic-compatible-messages-api)
@@ -262,7 +261,7 @@ Docker Agent recognizes nine Claude 5.x models by ID: `claude-haiku-5-5`, `claud
 - An integer token budget becomes adaptive thinking with the model's default effort; `max_tokens` is not raised.
 - `temperature`, `top_p` and `top_k` are never sent.
 - `thinking_budget: none` (or `0`) sends `thinking: disabled` on Haiku 5.5, Opus 5 and Sonnet 5. The other six cannot disable thinking: they get adaptive thinking with `low` effort, and Docker Agent logs a warning at startup.
-- Server-side `fallbacks` involving any of these models are rejected at startup until [#4584](https://github.com/docker/docker-agent/issues/4584).
+- Server-side `fallbacks` work with these models on the Claude API, except Haiku 5.5, which has none (see [Server-Side Fallbacks](#server-side-fallbacks)).
 - A request that ends on an assistant message (a response prefill) is rejected before it is sent. Tool-mode structured output therefore fails after the first plain-text answer instead of retrying with a reminder.
 
 Other Claude IDs keep the existing name-based rules.
@@ -347,9 +346,10 @@ See the full schema on the [Model Configuration](../../configuration/models/inde
 
 ## Server-Side Fallbacks
 
-When the primary model refuses a request (stop reason `refusal`), Anthropic
-can retry the request with backup models in a single round trip. Set
-`fallbacks` in `provider_opts` to a list of model IDs, in priority order:
+When the primary model refuses a request (stop reason `refusal`), the Claude
+API can retry it on a fallback model in a single round trip. Set `fallbacks`
+in `provider_opts` to `default`, to use the fallback Anthropic recommends for
+the refusal's category:
 
 ```yaml
 models:
@@ -357,25 +357,72 @@ models:
     provider: anthropic
     model: claude-opus-4-8
     provider_opts:
+      fallbacks: default
+```
+
+Or list up to three distinct models, tried in order:
+
+```yaml
       fallbacks:
         - claude-opus-4-7
         - claude-sonnet-4-6
 ```
 
-> [!WARNING]
-> **Not yet available with Claude 5.x**
->
-> A fallback can change the serving model mid-response, which Docker Agent does not handle yet. A `fallbacks` list is rejected at startup when the primary model or any fallback is a Claude 5.x model (Haiku 5.5, Opus 5/5.5, Sonnet 5/5.5, Fable 5/5.1, Mythos 5/5.1). Support is tracked in [#4584](https://github.com/docker/docker-agent/issues/4584).
+When a model declines mid-response, the turn continues on the fallback model.
+Docker Agent never runs a tool call the declining model made, stores the turn
+under the model that served it, and replays it on the next request as the API
+requires. The turn's cost adds up each model hop at its own rates, combining
+all of that hop's server-tool iterations. The dispatched hop retains its
+configured price override when the first marker echoes the requested model,
+including an alias; fallback hops use their own catalogue prices. Sticky hops
+never inherit the primary's override, including across server-tool iterations.
+A declined hop that produced output is billed. Before-output refusals are billed
+for `bio`, `frontier_llm`, and `reasoning_extraction`; other named categories and
+an explicit JSON-null category are unbilled. This also applies to the final
+refusal if the fallback chain is exhausted. Missing or invalid categories, or
+markers that cannot be matched to the usage hops in model order, remain billed
+conservatively. The top-level usage is not added again.
 
-Docker Agent automatically attaches the required
-`server-side-fallback-2026-06-01` beta header and forwards the option as
-`fallbacks: [{"model": "..."}]`. The response's `model` field reports which
-model actually served the request.
+Docker Agent sends the `server-side-fallback-2026-07-01` beta header, which
+accepts both forms, through the beta Messages API. The response's `model`
+field reports which model actually served the request.
+
+For sticky routing without a handoff marker, Docker Agent uses a different
+`message_start.model` provisionally when it matches an explicit fallback target
+or a replayed handoff target. This preserves attribution on clean EOF before
+final usage. A completed usage event clears the candidate unless a
+`fallback_message` confirms fallback routing; an explicit handoff marker takes
+precedence over both. Ordinary responses keep the configured model ID, display
+name and cost override. A truncated alias that collides with a historical target
+can still be attributed to that target; explicit fallback aliases without a
+matching history marker have no early attribution.
+
+Rules checked at startup:
+
+- A list holds at most three models, each distinct and different from the
+  primary model. Any other value is a configuration error.
+- Server-side fallback is a Claude API feature: `fallbacks` is rejected on
+  Vertex AI, Bedrock, a gateway, or a base URL (`base_url` or
+  `ANTHROPIC_BASE_URL`) whose host isn't `api.anthropic.com`. It isn't
+  available on the Message Batches API either.
+- Claude Haiku 5.5 has no server-side fallback: a list is rejected, and
+  `default` only logs that it has no effect.
+- The request must be valid for every listed model, or the API rejects it up
+  front. A configuration is rejected when a listed fallback (such as a Claude
+  5.x model) refuses what the request sends: `temperature` or `top_p` (sent
+  only with thinking off), `top_k`, or token-budget thinking, including an
+  effort level that an older model without adaptive thinking turns into a
+  token budget.
 
 Fallback models receive the exact same request as the primary model
 (thinking configuration, task budget, beta features, ...), so list only
-models that accept the same request shape. Not available on Bedrock, Vertex
-AI, or the Message Batches API.
+models that accept the same request shape. With `default` the server picks
+the fallback, so per-model options such as `thinking_display` are checked
+against the primary model only. The API makes one exception itself: when a Claude
+Sonnet 5.5 request with `between_tools` thinking falls back to Claude Sonnet 5,
+that attempt runs with thinking disabled ([fallback list rules](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#naming-your-own-fallback-models)).
+
+See [Refusals and fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback).
 
 ## Native Compaction
 
@@ -396,9 +443,10 @@ and replaces the whole history with a signed compaction block. This first
 implementation is synchronous and compacts the whole history: it does not run
 in the background or preserve a recent tail. Legacy per-call hook extras are
 not included in the compaction snapshot; they are applied again on the next
-normal turn. The block is persisted alongside a readable summary; the
-Anthropic provider replays the block on later requests (including after a model
-switch), while other providers receive the readable text.
+normal turn. The block is persisted alongside a readable summary; Anthropic
+models with `native_compaction` set replay the block on later requests
+(including after a model switch), while other models, Vertex AI included,
+receive the readable text.
 
 - The compaction request goes through the same `before_llm_call` hooks and
   message transforms as a regular model call, so builtins such as
@@ -512,9 +560,15 @@ multiple thinking blocks, omitted thinking, redacted thinking and their signatur
 A hook or user edit invalidates raw replay so stale content cannot override it.
 When only the rest of the turn changed (for example a sanitized tool name or a
 redacted tool argument), its recorded thinking is still replayed in its original
-place, with the current text and tool calls substituted. When the thinking itself changed, the turn loses it,
-with a warning in the logs. If that turn belongs to the tool loop the next
-request continues, and thinking is on, the API needs its original signed
+place, with the current tool calls substituted. Unchanged text blocks retain their
+contents and positions, including around fallback markers. Edited text can replace
+a single original text block only when no thinking block follows it. New text can
+be inserted before the first tool call (or at the end without tools) only when no
+thinking block is at or after that position. Other text edits, including edits
+spanning multiple blocks, cannot preserve the recorded thinking safely. When
+thinking itself changed or text edits cannot be placed safely, the turn is sent
+without thinking, with a warning in the logs. If that turn belongs to the tool
+loop the next request continues, and thinking is on, the API needs its original signed
 thinking: Docker Agent refuses the request with an error instead, and a new user
 turn starts a fresh loop.
 

@@ -211,13 +211,17 @@ Event types include:
 - `stream_started` / `stream_stopped` — Agent execution lifecycle
 - `agent_choice` — Streamed text content (partial responses)
 - `agent_choice_reasoning` — Streamed reasoning content
+- `agent_choice_reasoning_reset` — Discard all reasoning accumulated for the identified `session_id` and `message_id` (for example, after a server fallback). Keep text, other messages, and tool calls; later reasoning deltas append to the now-empty buffer. This is an ordering barrier, never coalesced with deltas
 - `partial_tool_call` — Streamed tool-call arguments, keyed by `tool_call.id`. The first one also carries `tool_definition`
+- `tool_calls_retracted` — Tool calls announced by `partial_tool_call` that will never run, listed in `tool_call_ids`: the model refused, or a server fallback handed the turn to another model
 - `tool_call` — Agent requesting tool execution
 - `tool_call_output` — Streamed output of a running tool, keyed by `tool_call_id`
 - `tool_call_confirmation` — Tool call waiting for user approval
 - `tool_call_response` — Tool execution result
 - `plan_changed` — A shared plan was created, updated, or deleted through the plan toolset. The payload carries the plan's `scope`, `name`, `action`, and `version` — never its content. Shared plans are deliberately process-global: every active stream served by the same process subscribes to the same shared plan notifier and receives the event regardless of which session performed the mutation, and the payload does not identify the mutating session (read the plan's `author` metadata for collaborative attribution).
 - `error` — Error during execution
+
+Append-only outputs such as CLI `--exec` and ACP thought chunks cannot retract bytes already delivered; their consumers may still show declined reasoning. The mutable TUI, lean TUI, WASM demo and persisted transcript apply the reset.
 
 ## Typical Workflow
 
