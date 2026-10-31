@@ -218,9 +218,9 @@ generated values. This option does not apply to the Responses API.
 
 ## Reasoning State Preservation
 
-Reasoning replay is opt-in, so existing configurations keep their request and
-session-storage behavior. Enable it for first-party OpenAI Responses sessions,
-including the `chatgpt` provider:
+Responses reasoning replay is opt-in, so existing configurations keep their
+request and session-storage behavior. Enable it for first-party OpenAI
+Responses sessions, including the `chatgpt` provider:
 
 ```yaml
 provider_opts:
@@ -247,3 +247,9 @@ WebSocket requests replay the full history without also chaining it through `pre
 
 See [OpenAI's reasoning guide](https://developers.openai.com/api/docs/guides/reasoning)
 and [cache diagnostics guide](https://developers.openai.com/api/docs/guides/prompt-caching/diagnostics).
+
+`preserve_reasoning` is unrelated to `provider_opts.replay_reasoning`, which
+replays plain reasoning text as a `reasoning_content` field on Chat
+Completions requests to OpenAI-compatible servers. It does not apply to the
+Responses API, and `preserve_reasoning` does not apply to Chat Completions.
+See [Replaying reasoning on later turns](../custom/index.md#replaying-reasoning-on-later-turns).

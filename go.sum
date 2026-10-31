@@ -137,6 +137,8 @@ github.com/docker/cli v29.8.2+incompatible h1:2zgdFuoFst2T80oS42vhKGxkd0JRo305eI
 github.com/docker/cli v29.8.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v29.9.1+incompatible h1:E4YGy7TMkPk7mFsXTVUyjHxVeJdjTDfIS0X4Q0+ioQ0=
 github.com/docker/cli v29.9.1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v29.9.2+incompatible h1:trup/vUxx5uUo2t+87Cd9AmITR+DvKUe4H2tTtZN8FY=
+github.com/docker/cli v29.9.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose/v5 v5.0.0 h1:J2uMCzJ/5xLcoIVVXvMmPe6HBzVQpmJThKa7Qk7Xldc=
 github.com/docker/compose/v5 v5.0.0/go.mod h1:BurapGv8zmYnsbSmlpCz5EU2Pi3YFV/PjeUnoFpcw64=
 github.com/docker/compose/v5 v5.0.1 h1:5yCjDJbwUqcuI+6WNFHNWz2/3vyBDsNnfe8LlFjyxEc=
@@ -183,6 +185,8 @@ github.com/docker/docker-agent v1.126.0 h1:GjX84SHcvS4Txo7dGjatWhKGFLNpDqKcGAoIs
 github.com/docker/docker-agent v1.126.0/go.mod h1:K38q6CsnSTHDOrLP46HLGhKwv3i+vjmu33cjmjpkAvg=
 github.com/docker/docker-agent v1.152.0 h1:inDwSlc963dTjThWXydrbxu4ehz/Yqmh3vd1+8hBhts=
 github.com/docker/docker-agent v1.152.0/go.mod h1:ZGCPdL/EinADY1IMcLoWXEsAjsDhciRw59ba96xI2FQ=
+github.com/docker/docker-agent v1.154.0 h1:XmvuT28IVZAvbQ+uqJ7mjPGTtU5cKxr4BUpFiQhIRq4=
+github.com/docker/docker-agent v1.154.0/go.mod h1:M2aHmIG5eiWJVn1y8I0ifwUX9iscnIv9jLMmeV5Qgqk=
 github.com/docker/docker-credential-helpers v0.9.3 h1:gAm/VtF9wgqJMoxzT3Gj5p4AqIjCBS4wrsOh9yRqcz8=
 github.com/docker/docker-credential-helpers v0.9.3/go.mod h1:x+4Gbw9aGmChi3qTLZj8Dfn0TD20M/fuWy0E5+WDeCo=
 github.com/docker/docker-credential-helpers v0.9.5 h1:EFNN8DHvaiK8zVqFA2DT6BjXE0GzfLOZ38ggPTKePkY=

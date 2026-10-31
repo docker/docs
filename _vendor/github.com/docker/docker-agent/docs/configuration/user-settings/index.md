@@ -53,6 +53,8 @@ You rarely need to hand-edit this file. Most fields are managed from the TUI's `
 | `sound` | boolean | `false` | Play a notification sound on task success or failure. |
 | `sound_threshold` | int | `10` | Minimum duration in seconds a task must run before a success sound plays (failures always play). |
 | `snapshot` | boolean | `false` | Enable automatic shadow-git snapshots at turn boundaries globally. See [Snapshots](../../features/snapshots/index.md). |
+| `background_compaction` | boolean | `false` | Generate automatic compaction summaries while the agent continues working. Apply completed summaries between turns, preserving messages added during generation. Unfinished work is cancelled when the stream ends. |
+| `background_compaction_threshold` | integer | `70` | Context-window percentage (1–99) at which background compaction starts. Invalid values fall back to 70. Set below the agent's blocking `compaction_threshold` (90% by default) to allow time for generation. |
 | `cache_stable_prompts` | boolean | `false` | Keep changing trusted context (date, environment info, dynamic prompt files) out of the frozen system prefix and append chronological updates instead, improving prompt-cache hit rates on long sessions. |
 | `warn_on_cache_miss` | boolean | `false` | Warn when a model call after the first one in a session reports no cached input tokens (a prompt-cache miss). Managed from the **Notifications** tab of `/settings`. |
 | `busy_send_mode` | string | `steer` | What happens to a message sent while the agent is working: `steer` injects it into the ongoing stream; `queue` holds it until the current turn ends. |
@@ -107,6 +109,8 @@ settings:
   sound_threshold: 10
   snapshot: true
   cache_stable_prompts: true
+  background_compaction: true
+  background_compaction_threshold: 70
   warn_on_cache_miss: true
   busy_send_mode: queue
   interrupt_confirmation: double-tap
