@@ -91,5 +91,7 @@ refuses to start and exits with the following error:
 failed to start cluster component: --live-restore daemon configuration is incompatible with swarm mode
 ```
 
-To start the daemon again, either disable live restore in the daemon
-configuration, or remove the node from the Swarm.
+To start the daemon again, disable live restore in the daemon configuration.
+Removing the node from the Swarm isn't enough: the node keeps its local Swarm
+state, so the daemon still fails this check. To take the node out of the Swarm,
+disable live restore first, start the daemon, and then run `docker swarm leave`.
