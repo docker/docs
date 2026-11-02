@@ -82,9 +82,9 @@ services:
        dockerfile: b.Dockerfile
 ```
 
-Legacy Docker Compose v1 used to build images sequentially, which made this pattern usable
-out of the box. Compose v2 uses BuildKit to optimise builds and build images in parallel 
-and requires an explicit declaration.
+Compose uses BuildKit to optimize builds and build images in parallel. When one service's
+Dockerfile uses another service's image as a base, you need to declare this dependency
+explicitly using `additional_contexts`.
 
 The recommended approach is to declare the dependent base image as an additional build context:
 
