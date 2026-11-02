@@ -62,7 +62,7 @@ Yes. Docker supports multiple IdP configurations, and a domain can be associated
 
 ### Which identity providers does Docker SSO support?
 
-Docker supports any SAML 2.0 identity provider, and Microsoft Entra ID (formerly Azure AD) for OpenID Connect (OIDC). In Docker Home, choose the **SAML 2.0** or **Azure AD (OIDC)** connection type.
+Docker supports any SAML 2.0 identity provider, and Microsoft Entra ID (formerly Azure AD) for OpenID Connect (OIDC). In Docker Home, choose the **SAML 2.0** or **Azure AD (OIDC)** connection type. OAuth 2.0 is not a separate SSO connection type.
 
 SCIM provisions users and is separate from sign-in. See [Provision users](/manuals/security/provisioning/_index.md).
 
@@ -72,10 +72,16 @@ Yes. Delete your existing IdP configuration in your Docker SSO connection, then 
 
 ### What information do I need from my identity provider to configure SSO?
 
-To turn on SSO in Docker, you need the following from your IdP:
+Paste these values from your IdP into Docker:
 
-- SAML: Entity ID, ACS URL, Single Logout URL, and the public X.509 certificate
-- Entra ID (formerly Azure AD): Client ID, Client Secret, AD Domain
+- SAML 2.0, including Microsoft Entra ID SAML: the SAML sign-in URL and the
+  public X.509 certificate. Entra ID calls the sign-in URL **Login URL**.
+- Microsoft Entra ID for OpenID Connect (OIDC): **Client ID**, **Client
+  Secret**, and **Azure AD Domain**.
+
+Copy the SAML **Entity ID** and **ACS URL**, or the OIDC **Redirect URI**, from
+Docker and paste them into your IdP. See
+[Set up single sign-on](/manuals/security/authentication/single-sign-on/connect.md).
 
 ### What happens if my existing certificate expires?
 

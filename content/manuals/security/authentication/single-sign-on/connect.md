@@ -39,7 +39,7 @@ Before you begin, make sure the following conditions are met:
 
 - Notify your company about the upcoming SSO sign-in process.
 - Confirm that each Docker user has a valid IdP account using the same email
-  address as their Unique Primary Identifier (UPN).
+  address as their User Principal Name (UPN).
 - Ensure CI/CD pipelines use PATs or OATs instead of passwords.
 
 ## Set up an SSO connection
@@ -250,7 +250,8 @@ Complete the integration by pasting your IdP values into Docker.
 > [!IMPORTANT]
 >
 > When prompted to copy a certificate, copy the entire certificate starting with
-> `----BEGIN CERTIFICATE----` and including the `----END CERTIFICATE----` lines.
+> `-----BEGIN CERTIFICATE-----` and including the
+> `-----END CERTIFICATE-----` lines.
 
 {{< tabs >}}
 {{< tab name="Okta SAML" >}}
