@@ -175,4 +175,3 @@ example: |4-
       sbx --cloud create -t TEMPLATE
 see_also:
     - sbx - Manage AI coding agent sandboxes.
-    - sbx create gemini - Create a sandbox for gemini

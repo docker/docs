@@ -1459,3 +1459,13 @@
   - /engine/reference/commandline/volume_rm/
 "/reference/cli/docker/volume/update/":
   - /engine/reference/commandline/volume_update/
+
+"/reference/cli/sbx/create/":
+  - /reference/cli/sbx/create/claude/
+  - /reference/cli/sbx/create/codex/
+  - /reference/cli/sbx/create/cursor/
+  - /reference/cli/sbx/create/devin/
+  - /reference/cli/sbx/create/docker-agent/
+  - /reference/cli/sbx/create/gemini/
+  - /reference/cli/sbx/create/opencode/
+  - /reference/cli/sbx/create/shell/
