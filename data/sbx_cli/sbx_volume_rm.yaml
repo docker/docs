@@ -29,6 +29,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: '  sbx --cloud volume rm my-cache'
 see_also:
     - sbx volume - Manage persistent volumes (cloud-only)

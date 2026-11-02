@@ -18,6 +18,13 @@ options:
       shorthand: h
       default_value: "false"
       usage: help for sbx
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+    - name: version
+      default_value: "false"
+      usage: Show version information
 see_also:
     - sbx attach - Attach to a cloud sandbox, starting it first if it is stopped
     - sbx completion - Generate the autocompletion script for the specified shell

@@ -3,8 +3,9 @@ synopsis: Execute a command inside a sandbox environment
 experimental: true
 description: |-
     Run COMMAND in the sandbox declared in sbxenv.yaml. The sandbox
-    must already exist (see "sbx env create" and "sbx env run"); a stopped sandbox is
-    started first.
+    is started first if stopped. If it does not exist, an interactive terminal prompts
+    to create it and approve the environment plan before running COMMAND. Without an
+    interactive terminal, or with --no-input, create it first with "sbx env create".
 
     Arguments before `--` are environment-file paths, following the same rules as
     the other "sbx env" subcommands: each PATH may be a directory (the file is
@@ -81,6 +82,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # Run a command in the environment declared in the current directory
       sbx env exec go test ./...

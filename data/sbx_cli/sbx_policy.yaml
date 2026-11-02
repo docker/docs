@@ -21,6 +21,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 see_also:
     - sbx - Manage AI coding agent sandboxes.
     - sbx policy allow - Add an allow rule for sandboxes
