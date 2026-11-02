@@ -1156,10 +1156,12 @@ The init binary that is used is platform specific.
   possibility to share it with other containers.
 - `service:{name}`: Makes the container join another container's
   (`shareable`) IPC namespace.
+- `host`: Make the container use the host system's IPC namespace (by mounting `/dev/shm`)
 
 ```yml
     ipc: "shareable"
     ipc: "service:[service name]"
+    ipc: "host"
 ```
 
 ### `isolation`
