@@ -91,7 +91,9 @@ user to your organization and team on first sign-in.
 > [!IMPORTANT]
 >
 > When SSO is enforced, the Docker CLI rejects password sign-in. Use a
-> personal access token (PAT) to sign in to the CLI.
+> personal access token (PAT) or an organization access token (OAT) to
+> sign in to the CLI. For CI/CD and other automation, an OAT may be a
+> more appropriate option.
 
 ## Next steps
 
