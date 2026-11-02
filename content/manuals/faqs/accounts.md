@@ -163,6 +163,10 @@ assign them to a team during the invite process.
 
 Yes. You can
 [enforce sign-in](/manuals/desktop/enterprise/enforce-sign-in/_index.md).
+When you configure enforcement, use your
+[organization namespace](/manuals/accounts/organization/setup/_index.md#names-versus-namespaces),
+not the organization display name. See
+[Configure sign-in enforcement](/manuals/desktop/enterprise/enforce-sign-in/methods.md).
 
 Some benefits of enforcing sign-in are:
 

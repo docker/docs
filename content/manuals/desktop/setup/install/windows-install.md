@@ -294,10 +294,10 @@ If Microsoft Store access is blocked due to security policies:
 
 #### Security and access control
 
-- `--allowed-org=<org name>`: Requires the user to sign in and be part of the specified Docker Hub organization when running the application
+- `--allowed-org=<org namespace>`: Requires the user to sign in and be a member of the specified Docker Hub [organization namespace](/manuals/accounts/organization/setup/_index.md#names-versus-namespaces) when running the application. Use the namespace, not the organization display name. For configuration details, see [Configure sign-in enforcement](/manuals/desktop/enterprise/enforce-sign-in/methods.md).
 - `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md).
-  - It must be used together with the `--allowed-org=<org name>` flag. 
-  - For example:`--allowed-org=<org name> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"`
+  - It must be used together with the `--allowed-org=<org namespace>` flag.
+  - For example: `--allowed-org=<org namespace> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"`
 - `--no-windows-containers`: Disables the Windows containers integration. This can improve security.  Can't be combined with `--backend=windows`. For more information, see [Windows containers](/manuals/desktop/setup/install/windows-permission-requirements.md#windows-containers).
 
 #### Proxy configuration
