@@ -1,6 +1,6 @@
 ---
 description: Frequently asked questions about Docker single sign-on, identity providers, user management, SSO enforcement, and domain verification
-keywords: Docker, Docker Hub, SSO FAQs, single sign-on, identity providers, IdP, SAML, Entra ID, user management, SCIM, JIT, administration, security, SSO enforcement, SSO domains, domain verification, DNS, TXT records
+keywords: Docker, Docker Hub, SSO FAQs, single sign-on, identity providers, IdP, SAML, OIDC, Entra ID, user management, SCIM, JIT, administration, security, SSO enforcement, SSO domains, domain verification, DNS, TXT records
 title: Security FAQs
 linkTitle: Security
 weight: 20
@@ -58,7 +58,13 @@ Yes, Docker supports your IdP's session timeout using a custom `dockerSessionMin
 
 ### Can I use multiple identity providers with Docker SSO?
 
-Yes, Docker supports multiple IdP configurations. A domain can be associated with multiple IdPs. Docker supports Entra ID (formerly Azure AD) and identity providers that support SAML 2.0.
+Yes. Docker supports multiple IdP configurations, and a domain can be associated with multiple IdPs.
+
+### Which identity providers does Docker SSO support?
+
+Docker supports any SAML 2.0 identity provider, and Microsoft Entra ID (formerly Azure AD) for OpenID Connect (OIDC). In Docker Home, choose the **SAML 2.0** or **Azure AD (OIDC)** connection type.
+
+SCIM provisions users and is separate from sign-in. See [Provision users](/manuals/security/provisioning/_index.md).
 
 ### Can I change my identity provider after configuring SSO?
 

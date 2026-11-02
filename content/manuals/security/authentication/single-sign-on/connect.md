@@ -23,9 +23,11 @@ aliases:
 {{< summary-bar feature_name="SSO" >}}
 
 To set up a single sign-on (SSO), you need to establish a connection between
-Docker and your identity provider (IdP). While this guide uses Okta and
-Microsoft Entra ID as a working example, the general process remains the same
-for other IdPs.
+Docker and your identity provider (IdP). Docker supports any SAML 2.0 identity
+provider, and Microsoft Entra ID (formerly Azure AD) for OpenID Connect (OIDC).
+This guide uses Okta for SAML 2.0 and Microsoft Entra ID for SAML 2.0 and OIDC.
+For another SAML 2.0 provider, follow the SAML steps with that provider's
+values.
 
 If you're unfamiliar with the SSO process, first review
 [SSO overview](/manuals/security/authentication/single-sign-on/_index.md) to
@@ -33,8 +35,7 @@ learn about how SSO works.
 
 ## Prerequisites
 
-Docker supports any SAML 2.0 or OIDC-compatible identity provider. Before you
-begin, make sure the following conditions are met:
+Before you begin, make sure the following conditions are met:
 
 - Notify your company about the upcoming SSO sign-in process.
 - Confirm that each Docker user has a valid IdP account using the same email
