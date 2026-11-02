@@ -18,7 +18,7 @@ Dashboard header, see [Docker Offload v1](/manuals/offload/v1/_index.md).
 
 ## Prerequisites
 
-- [Docker Desktop](/desktop/) 4.96 or later. Docker recommends using the latest
+- [Docker Desktop](/desktop/) 4.97 or later. Docker recommends using the latest
   version to access the newest features and improvements in Docker Offload.
 - A Docker Agentic Platform subscription. To subscribe, see [Signup and
   billing](/manuals/agentic-platform/signup.md).

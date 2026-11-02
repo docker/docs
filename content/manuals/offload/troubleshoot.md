@@ -11,7 +11,7 @@ tags: [Troubleshooting]
 
 Docker Offload requires:
 
-- Docker Desktop 4.96 or later
+- Docker Desktop 4.97 or later
 - Authentication
 - An active internet connection
 - No restrictive proxy or firewall blocking traffic to Docker Cloud
