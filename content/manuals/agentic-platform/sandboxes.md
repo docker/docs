@@ -49,6 +49,19 @@ Make sure your token has the required repository permissions. You can clone
 public repositories without a token, but pushing to them still requires
 authentication.
 
+### Sign Git commits with an SSH key
+
+To sign Git commits in Docker Agentic Platform, register your SSH public key
+in the Console and add the same public key to your GitHub account as a signing
+key:
+
+1. In the Console, open the user menu and select **Settings**.
+2. Under **Sandbox SSH key**, [register your public key](#register-an-ssh-key).
+3. In your GitHub account settings, open **SSH and GPG keys** and select
+   **New SSH key**.
+4. Choose **Signing Key** as the key type, paste the same public key, and
+   select **Add SSH key**.
+
 ## Open a sandbox
 
 After you select **Run**, the Console shows provisioning progress. When the
