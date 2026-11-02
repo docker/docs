@@ -44,11 +44,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms
 
 - Fixed Docker Hub model pulls failing on proxy-only networks where local DNS could not resolve the authentication endpoint.
-- Fixed Docker Desktop staying on "Starting" after the Docker engine had started. Fixes [docker/desktop-feedback#685](https://github.com/docker/desktop-feedback/issues/685)
+- Fixed Docker Desktop staying on the **Starting** page after Docker Engine had started. Fixes [docker/desktop-feedback#685](https://github.com/docker/desktop-feedback/issues/685)
 - Fixed `diagnose gather` on slow or stopped VMs by capping the VM start wait to 120 seconds.
 - Improved responsiveness of error dialogs.
 - Fixed moving the disk image to another volume failing when the copy took more than 5 minutes.
-- Fixed uncaught "Request aborted" errors in the Docker Desktop app each time the engine stopped.
+- Fixed uncaught **Request aborted** errors each time the engine stopped.
 
 #### For Mac
 
@@ -56,10 +56,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Windows
 
-- Added Docker VMM to the "Clean up data" dialog.
+- Added Docker VMM to the **Clean up data** dialog.
 - Fixed WSL error code parsing so that users running newer WSL versions (3.0.x) receive accurate, actionable recovery instructions instead of a generic error message.
 - Fixed the Docker VMM backend option on Windows ARM64 to appear correctly disabled with an explanation in settings, and automatically fall back to WSL 2 during install or upgrade.
-- Fixed an intermittent "being used by another process" error on the `desktop-linux` Docker context file when the engine started.
+- Fixed an intermittent **Being used by another process** error on the `desktop-linux` Docker context file when the engine started.
 - Fixed file sharing treating a directory as shared, or as allowed by Settings Management, when its name only started with that of a shared or allowed directory (e.g. `C:\foobar` for `C:\foo`). Allowed file share entries now match whole directory names only.
 - Fixed an issue where processes started in the Docker Desktop terminal could be left running after closing the terminal.
 - Added support for running `docker` and `docker compose` from WSL 2 distros when Docker VMM is the engine, including bind mounts of files on Windows drives such as `/mnt/c`.
