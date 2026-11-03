@@ -64,6 +64,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an issue where processes started in the Docker Desktop terminal could be left running after closing the terminal.
 - Added support for running `docker` and `docker compose` from WSL 2 distros when Docker VMM is the engine, including bind mounts of files on Windows drives such as `/mnt/c`.
 
+### Security
+
+- Fixed [CVE-2026-98432](https://www.cve.org/cverecord?id=CVE-2026-98432), a use-after-free in the Linux kernel's IPv4 TCP handling.
+- Fixed [CVE-2026-112917](https://www.cve.org/cverecord?id=CVE-2026-112917) where a container on the WSL 2 backend could bypass the AF_VSOCK restriction. Requires WSL 3.0.3 or later.
+
 ## 4.97.0
 
 {{< release-date date="2026-10-26" >}}
