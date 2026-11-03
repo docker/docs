@@ -32,7 +32,6 @@ and subscriptions.
 
 ### Bug fixes and enhancements
 
-- Sign-up rejects a password that matches the username.
 - [Converting a user account into an organization](/manuals/accounts/organization/setup/convert-account.md)
   emails the new owner.
 
