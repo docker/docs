@@ -4,6 +4,8 @@ linktitle: Configure
 weight: 20
 description: Learn how to configure build settings for Docker Offload v1.
 keywords: cloud, configuration, settings, offload
+aliases:
+ - /offload/configuration/
 ---
 
 {{< summary-bar feature_name="Docker Offload v1" >}}
