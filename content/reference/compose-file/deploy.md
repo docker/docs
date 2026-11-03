@@ -4,7 +4,7 @@ description: Learn about the Compose Deploy Specification
 keywords: compose, compose specification, compose file reference, compose deploy specification
 aliases: 
  - /compose/compose-file/deploy/
-weight: 140
+weight: 150
 ---
 
 {{% include "compose/deploy.md" %}}
