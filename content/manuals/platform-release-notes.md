@@ -51,7 +51,7 @@ and subscriptions.
 
 - You can
   [assign a license to a team](/manuals/accounts/organization/manage/manage-licenses.md#teams)
-  even when the team is larger than the number of available licenses. Docker only assigns a license to
+ as long as you have sufficient licenses remaining for all team members who do not already hold a license. Docker only assigns a license to
   members who don't already have one.
 - If you add seats without a street address on file, Docker opens the
   address form and asks you to add it, instead of failing with a generic
