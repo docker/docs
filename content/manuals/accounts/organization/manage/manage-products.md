@@ -234,7 +234,7 @@ sessions, including how long they ran and which images they used.
 
 For setup and configuration, see
 [Docker Sandboxes](../../../ai/sandboxes/_index.md) and
-[AI Governance](../../../ai/sandboxes/governance/_index.md).
+[AI Governance](../../../ai/governance/_index.md).
 
 AI Governance is the separate paid subscription that adds the
 organization-level controls to
@@ -249,10 +249,10 @@ Organization policies govern only members who hold an AI Governance license.
 - [Manage licenses](./manage-licenses.md): assign AI Governance licenses to
   teams or members, or turn on **Automatic license assignment** so members
   receive a license when they run `sbx login`.
-- [Organization policies](../../../ai/sandboxes/governance/access-controls/organization.md):
+- [Organization policies](../../../ai/governance/organization/policies/create-manage.md):
   create network, filesystem, and MCP policies under **AI Platform** in Docker
   Home, and scope them to the whole organization or to specific teams.
-- [Sign-in enforcement](../../../ai/sandboxes/governance/monitor-and-enforce/sign-in-enforcement.md):
+- [Sign-in enforcement](../../../ai/governance/organization/sign-in-enforcement.md):
   deploy a configuration through your endpoint management tooling so
   `sbx login` succeeds only for members of your organization.
 
@@ -261,7 +261,7 @@ Organization policies govern only members who hold an AI Governance license.
 - [View licenses](./manage-licenses.md#view-licenses): the **Licenses** page
   shows how many AI Governance licenses you have, how many are assigned, and
   whether the assignments go to teams or to individual members.
-- [View and export audit events](../../../ai/sandboxes/governance/audit/view-export.md):
+- [View and export audit events](../../../ai/governance/organization/audit/view-export.md):
   **AI Platform** > **Audit logs** shows the policy decisions Docker recorded
   for members' sandboxes, including who made the request, which resource it
   targeted, and whether Docker allowed or denied it.
