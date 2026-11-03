@@ -15,10 +15,6 @@ Each run creates a fresh sandbox with the kit, compute size, credentials, and
 tools saved in the schedule. When the task finishes, the sandbox is deleted.
 The time limit also deletes the sandbox if the task hasn't finished.
 
-Schedules are available for accounts included in the feature rollout. If
-**Schedules** isn't visible in your Console, the feature isn't available for
-your selected account.
-
 ## Prepare tools and credentials
 
 Choose a [kit](kits.md) that can run your task without interactive input. Save
@@ -33,8 +29,8 @@ and [add its remote endpoint](mcp.md#add-a-server-by-url). The endpoint must
 support streamable HTTP.
 
 If you need credentials for a custom CLI or API integration, use the schedule
-API to select [custom secrets](secrets.md#add-a-custom-secret), if your account
-supports them. The Console schedule form doesn't offer custom-secret selection.
+API to select [custom secrets](secrets.md#add-a-custom-secret). The Console
+schedule form doesn't offer custom-secret selection.
 Use an MCP server for integrations you configure through this form. When you
 configure a schedule through the API, include the required CLI in your kit and use the
 secret's placeholder where the client expects a credential. Check that your
