@@ -5,7 +5,7 @@ weight: 60
 description: >-
   Control which Docker products organization members can use, and find
   where to check usage
-keywords: organization, product access, product usage, access control, seats, licenses, docker desktop, docker hub, docker scout, docker build cloud, docker offload, testcontainers cloud, docker sandboxes, ai governance
+keywords: organization, product access, product usage, access control, seats, licenses, docker desktop, docker hub, docker scout, docker build cloud, docker offload, docker offload v1, testcontainers cloud, docker sandboxes, ai governance
 toc_max: 2
 aliases:
   - /admin/organization/manage/manage-products/
@@ -30,8 +30,8 @@ you configure:
   you assign to teams or members.
 - After a member has a seat or license, the controls on this page set what
   they can do in each product, such as which Hub images they can pull,
-  which repositories Scout analyzes, or whether Docker Offload is available
-  in Docker Desktop.
+  which repositories Scout analyzes, or whether Docker Offload v1 is
+  available in Docker Desktop.
 
 Where a product has a usage allowance, the Usage section shows where to
 check how much of it the organization has used. Products measure that
@@ -43,6 +43,8 @@ For organization access tokens,
 see [Access tokens](/manuals/security/access-tokens/_index.md).
 
 ## Docker Desktop
+
+For setup and configuration, see the [Docker Desktop manual](../../../desktop/_index.md).
 
 ### Access
 
@@ -78,6 +80,8 @@ users, builds, containers, images, and extensions.
 
 ## Docker Hub
 
+For setup and configuration, see the [Docker Hub manual](../../../docker-hub/_index.md).
+
 ### Usage
 
 Hub usage counts how many times members pull images and how much space
@@ -90,6 +94,8 @@ your organization's repositories take up.
    `https://hub.docker.com/orgs/{namespace}/usage`.
 
 ## Docker Build Cloud
+
+For setup and configuration, see the [Docker Build Cloud manual](../../../build-cloud/_index.md).
 
 ### Access
 
@@ -119,6 +125,8 @@ Build minutes are the time your organization spends on cloud builds.
 
 ## Docker Scout
 
+For setup and configuration, see the [Docker Scout manual](../../../scout/_index.md).
+
 ### Access
 
 To set up Docker Scout, sign in to [Docker Scout](https://scout.docker.com/)
@@ -140,15 +148,14 @@ To manage Docker Scout access:
 
 ### Usage
 
-Repository settings shows which repositories Docker Scout analyzes.
-
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
-1. Select **Go to Scout**.
-1. Select **Settings**, then
-   [**Repository settings**](../../../scout/explore/dashboard.md#repository-settings).
+[Repository settings](../../../scout/explore/dashboard.md#repository-settings)
+lists the repositories Docker Scout analyzes. Follow the access steps above
+and select **Repository settings**.
 
 ## Testcontainers Cloud
+
+For setup and configuration, see
+[Get started with Testcontainers Cloud](https://testcontainers.com/cloud/docs/#getting-started).
 
 ### Access
 
@@ -174,15 +181,17 @@ subscription.
 1. Select the menu icon, then
    [**Billing**](https://app.testcontainers.cloud/dashboard/billing).
 
-## Docker Offload
+## Docker Offload v1
 
-Docker Offload uses its own [license](./manage-licenses.md). Assign it to
+For setup and configuration, see the [Docker Offload v1 manual](../../../offload/v1/_index.md).
+
+Docker Offload v1 uses its own [license](./manage-licenses.md). Assign it to
 teams or members, or turn on automatic assignment so members receive a
-license the first time they use Docker Offload.
+license the first time they use Docker Offload v1.
 
 ### Access
 
-**Offload access** turns Docker Offload on or off for the organization.
+**Offload access** turns Docker Offload v1 on or off for the organization.
 **Disabled** removes the ability for anybody in the organization, including
 CI/CD, to use Offload resources or consume Offload minutes.
 
@@ -193,7 +202,7 @@ CI/CD, to use Offload resources or consume Offload minutes.
 1. When Offload is enabled, select **Allow GPU access** to let members run
    GPU workloads in cloud mode.
 
-To set the Docker Offload default inside Docker Desktop, use [Settings
+To set the Docker Offload v1 default inside Docker Desktop, use [Settings
 Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md):
 
 1. Select **Docker Desktop**, then **Settings Management**.
@@ -211,15 +220,18 @@ reference](/manuals/desktop/enterprise/hardened-desktop/settings-management/sett
 
 ### Usage
 
-Offload activity shows Docker Offload sessions, including how long they
-ran and which images they used.
+[Offload activity](../../../offload/v1/usage.md) shows Docker Offload v1
+sessions, including how long they ran and which images they used.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
-1. Select **Docker Offload**, then
-   [**Offload activity**](../../../offload/usage.md).
+1. Select **Docker Offload**, then **Offload activity**.
 
 ## AI Governance
+
+For setup and configuration, see
+[Docker Sandboxes](../../../ai/sandboxes/_index.md) and
+[AI Governance](../../../ai/sandboxes/governance/_index.md).
 
 AI Governance is the separate paid subscription that adds the
 organization-level controls to
@@ -253,18 +265,9 @@ Organization policies govern only members who hold an AI Governance license.
 
 ## Next steps
 
-If your usage or seat count exceeds your subscription amount, you can
-[add seats](./manage-seats.md) or
-[view available Docker plans](../../../subscription-billing/plans/_index.md).
-
-For more detailed information about each product, including how to set up
-and configure them, see the following manuals:
-
-- [Docker Desktop](../../../desktop/_index.md)
-- [Docker Hub](../../../docker-hub/_index.md)
-- [Docker Build Cloud](../../../build-cloud/_index.md)
-- [Docker Scout](../../../scout/_index.md)
-- [Testcontainers Cloud](https://testcontainers.com/cloud/docs/#getting-started)
-- [Docker Offload](../../../offload/_index.md)
-- [Docker Sandboxes](../../../ai/sandboxes/_index.md)
-- [AI Governance](../../../ai/sandboxes/governance/_index.md)
+- [Manage subscription seats](./manage-seats.md) to add seats, and
+  [Manage licenses](./manage-licenses.md) to assign product licenses.
+- [Invite and manage organization members](./members.md) to invite people
+  and assign roles.
+- [Plan and maintain user access](./user-access.md) to choose roles,
+  provisioning, and how you review access.
