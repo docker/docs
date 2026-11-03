@@ -22,20 +22,21 @@ your selected account.
 ## Prepare tools and credentials
 
 Choose a [kit](kits.md) that can run your task without interactive input. Save
-the kit's required model provider credentials in [Secrets](secrets.md).
+the credentials you need in [Secrets](secrets.md), including model provider
+API keys, service tokens, or custom secrets.
 
-For tasks that use external services, connect and authorize the relevant
+If you need to connect to external services, connect and authorize the relevant
 [MCP servers](mcp.md) before creating the schedule. You can select these tools
 for scheduled runs, including custom servers connected through the MCP gateway.
 If the predefined servers don't cover your service, create your own MCP server
 and [add its remote endpoint](mcp.md#add-a-server-by-url). The endpoint must
 support streamable HTTP.
 
-For a custom CLI or API integration, the schedule API supports selecting
-[custom secrets](secrets.md#add-a-custom-secret) if your account supports them.
-The Console schedule form doesn't offer custom-secret selection. Use an MCP
-server for integrations you configure through this form. For a schedule
-configured through the API, include the required CLI in your kit and use the
+If you need credentials for a custom CLI or API integration, use the schedule
+API to select [custom secrets](secrets.md#add-a-custom-secret), if your account
+supports them. The Console schedule form doesn't offer custom-secret selection.
+Use an MCP server for integrations you configure through this form. When you
+configure a schedule through the API, include the required CLI in your kit and use the
 secret's placeholder where the client expects a credential. Check that your
 [network policy](policies.md) permits access to the service. Don't put secret
 values in the task's prompt.
@@ -62,6 +63,14 @@ values in the task's prompt.
 Custom cron expressions have five fields: minute, hour, day of month, month,
 and day of week. For example, `0 9 * * 1-5` runs at 09:00 every weekday in the
 selected time zone.
+
+## Use a custom kit
+
+If you use a custom agent kit, configure its prompt template to run the agent
+without interactive input. Docker Agentic Platform uses this template to build
+the command for each scheduled run, substituting the prompt you entered into
+the template's arguments. The image's `ENTRYPOINT` or `CMD` alone doesn't define
+how a scheduled prompt is passed to the agent.
 
 ## Example: Daily Jira digest
 
