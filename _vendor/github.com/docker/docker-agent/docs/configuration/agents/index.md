@@ -17,9 +17,9 @@ A configuration must define at least one agent under `agents`.
 ```yaml
 agents:
   agent_name:
-    model: string # Required: model reference
-    description: string # Required: what this agent does
-    instruction: string # Required (unless instruction_file): system prompt
+    model: string # Required unless harness is set: model reference
+    description: string # Optional: what this agent does
+    instruction: string | [list] # Optional: system prompt, mutually exclusive with instruction_file; a list is joined by blank lines
     instruction_file: string | [list] # Optional: load the system prompt from one or more files relative to this config (mutually exclusive with instruction)
     sub_agents: [list] # Optional: local or external sub-agent references
     toolsets: [list] # Optional: tool configurations (use `type: rag` for RAG sources)
@@ -30,8 +30,9 @@ agents:
     add_date: boolean # Optional: add date to context
     add_environment_info: boolean # Optional: add env info to context
     add_prompt_files: [list] # Optional: include additional prompt files
+    add_prompt_files_depth: int # Optional: also list (not load) the same files found N levels below the working dir
     add_description_parameter: bool # Optional: add description to tool schema
-    redact_secrets: boolean # Optional: scrub detected secrets out of tool args, outgoing chat messages, and tool output
+    redact_secrets: boolean # Optional: enabled by default; set false to disable secret scrubbing
     code_mode_tools: boolean # Optional: let the agent write JavaScript to orchestrate tool calls (see Code Mode)
     max_iterations: int # Optional: max tool-calling loops
     max_consecutive_tool_calls: int # Optional: max identical consecutive tool calls
@@ -51,7 +52,13 @@ agents:
     welcome_message: string # Optional: message shown at session start
     handoffs: [list] # Optional: agent names this agent can hand off to
     force_handoff: string # Optional: agent that always receives the conversation when this agent stops
+    routing: # Optional: agents this agent's before_agent_run/after_agent_complete hooks may route to
+      allowed_agents: [list]
+      default_agent: string
     hooks: # Optional: lifecycle hooks
+      tool_input_transform: [list]
+      tool_guard: [list]
+      permission_request: [list]
       pre_tool_use: [list]
       tool_response_transform: [list]
       post_tool_use: [list]
@@ -68,10 +75,10 @@ agents:
       case_sensitive: boolean
       trim_spaces: boolean
       path: string
-    harness: # Optional: delegate to an external coding CLI (Claude Code, Codex, opencode, pi)
-      type: string # Required: claude-code | codex | opencode | pi
+    harness: # Optional: delegate to an external coding CLI (Claude Code, Codex, opencode, pi, Command Code)
+      type: string # Required: claude-code | codex | opencode | pi | command-code
       model: string # Optional: model override forwarded to the CLI (omit for the CLI's own default)
-      effort: string # claude-code only: low | medium | high | xhigh | max (omit for the Claude Code default)
+      effort: string # claude-code and command-code only: low | medium | high | xhigh | max (omit for the CLI default)
       agent: string # opencode only: agent profile name
       thinking: boolean # opencode only: enable extended thinking
 ```
@@ -85,18 +92,19 @@ agents:
 
 | Property                    | Type    | Required | Description                                                                                                                                                                   |
 | --------------------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `model`                     | string  | ✓        | Model reference. Either inline (`openai/gpt-5`) or a named model from the `models` section.                                                                              |
-| `description`               | string  | ✓        | Brief description of the agent's purpose. Used by coordinators to decide delegation.                                                                                          |
-| `instruction`               | string  | ✓        | System prompt that defines the agent's behavior, personality, and constraints. Required unless `instruction_file` is set.                                                      |
+| `model`                     | string  | unless `harness` is set        | Model reference. Either inline (`openai/gpt-5`) or a named model from the `models` section.                                                                              |
+| `description`               | string  | ✗        | Brief description of the agent's purpose. Used by coordinators to decide delegation.                                                                                          |
+| `instruction`               | string \| array  | ✗        | System prompt that defines the agent's behavior, personality, and constraints. Accepts a single string or a list of strings; list items are concatenated in order, separated by a blank line (handy for a shared preamble, or for flavors to append to with `instruction+`).                                                      |
 | `instruction_file`          | string \| array  | ✗        | Path(s) to a file or files (relative to the config file's directory) whose contents become the agent's instruction, loaded at startup. Accepts a single path or a list; multiple files are concatenated in order, separated by a blank line. Mutually exclusive with `instruction`. Each path must be a local relative path inside the config directory (absolute paths and `..` traversal are rejected). Only supported for local file-based configs, not OCI/URL sources. See [External Instruction Files](#external-instruction-files) below. |
 | `sub_agents`                | array   | ✗        | List of agent names or external OCI references this agent can delegate to. Supports local agents, registry references (e.g., `myorg/agent:tag`), and named references (`name:reference`). Automatically enables the `transfer_task` tool. Pin external OCI references to a digest (`name@sha256:…`) to skip the per-run registry lookup that tag references incur. See [External Sub-Agents](../../concepts/multi-agent/index.md#external-sub-agents-from-registries). |
 | `toolsets`                  | array   | ✗        | List of tool configurations. See [Tool Config](../tools/index.md).                                                                                                        |
 | `fallback`                  | object  | ✗        | Automatic model failover configuration.                                                                                                                                       |
 | `add_date`                  | boolean | ✗        | When `true`, injects the current date into the agent's context.                                                                                                               |
-| `add_environment_info`      | boolean | ✗        | When `true`, injects working directory, OS, CPU architecture, and git info into context.                                                                                      |
+| `add_environment_info`      | boolean | ✗        | When `true`, injects working directory, OS, CPU architecture, git info, and the resolved shell into context.                                                                  |
 | `add_prompt_files`          | array   | ✗        | List of file paths whose contents are appended to the system prompt. Useful for including coding standards, guidelines, or additional context.                                |
+| `add_prompt_files_depth`    | int     | ✗        | Also list, by path only, the `add_prompt_files` names found up to this many directory levels below the working directory (`1` = direct subdirectories). Contents are not loaded — the agent reads the ones it needs. Useful in monorepos. Default: `0` (no scan). See [Prompt Files](#prompt-files) below. |
 | `add_description_parameter` | boolean | ✗        | When `true`, adds agent descriptions as a parameter in tool schemas. Helps with tool selection in multi-agent scenarios.                                                      |
-| `redact_secrets`            | boolean | ✗        | When `true`, scrubs detected secrets (API keys, tokens, private keys, etc.) out of tool-call arguments, outgoing chat messages, and tool output before they reach a tool, the model, or downstream consumers. See [Redacting Secrets](#redacting-secrets) below.   |
+| `redact_secrets`            | boolean | ✗        | Enabled by default; set `false` to opt out. Scrubs detected secrets (API keys, tokens, private keys, etc.) out of tool-call arguments, outgoing chat messages, and tool output before they reach a tool, the model, or downstream consumers. See [Redacting Secrets](#redacting-secrets) below.   |
 | `code_mode_tools`           | boolean | ✗        | When `true`, replaces the agent's individual tools with a single tool that runs a JavaScript script calling as many of them as needed in one turn. See [Code Mode](../../features/code-mode/index.md). |
 | `max_iterations`            | int     | ✗        | Maximum number of tool-calling loops. Default: unlimited (0). Set this to prevent infinite loops.                                                                             |
 | `max_consecutive_tool_calls` | int     | ✗        | Maximum consecutive identical tool calls before the agent is terminated, preventing degenerate loops. Default: `5`.                                                          |
@@ -115,6 +123,7 @@ agents:
 | `welcome_message`           | string  | ✗        | Message displayed to the user when a session starts. Rendered as Markdown in the TUI. **Not sent to the model** — it exists purely for the user's benefit. Useful for telling users what the agent can do and what commands are available. |
 | `handoffs`                  | array   | ✗        | List of agent names this agent can hand off the conversation to. Enables the `handoff` tool. See [Handoffs Routing](../../concepts/multi-agent/index.md#handoffs-routing).                  |
 | `force_handoff`             | string  | ✗        | Name of an agent that unconditionally receives the conversation whenever this agent produces a final response. The runtime performs the switch itself, bypassing the LLM's tool-calling, guaranteeing deterministic pipelines. Must not reference the agent itself, and chains must not form a cycle. See [Forced Handoffs](../../concepts/multi-agent/index.md#forced-handoffs). |
+| `routing`                   | object  | ✗        | Local agents that this agent's `before_agent_run` and `after_agent_complete` hooks may select: `allowed_agents` (required list of agent names) and `default_agent` (fallback for uncertain or failed evaluator assessments). Requires at least one of those hooks; the agent cannot route to itself or to harness agents. See [Agent Routing Hooks](../hooks/index.md#agent-routing-hooks). |
 | `hooks`                     | object  | ✗        | Lifecycle hooks for running commands at various points. See [Hooks](../hooks/index.md).                                                                                   |
 | `structured_output`         | object  | ✗        | Constrain agent output to match a JSON schema. See [Structured Output](../structured-output/index.md).                                                                    |
 | `cache`                     | object  | ✗        | Response cache. When the same user question is asked again, the previous answer is replayed verbatim and the model is not called. See [Response Cache](#response-cache) below.                  |
@@ -203,6 +212,57 @@ can layer on top of a repo-local one. Missing files are skipped rather than
 erroring. Because resolution and the read happen on every turn, edits to the
 file are picked up without restarting the agent.
 
+### Nested Prompt Files (Monorepos)
+
+The lookup above only ever walks *up*, so in a monorepo the `AGENTS.md` of the
+sub-project being worked on is invisible — and loading every one of them would
+be wasteful. `add_prompt_files_depth` scans *down* instead and injects a
+listing of what it finds, paths only:
+
+```yaml
+agents:
+  root:
+    model: anthropic/claude-sonnet-4-5
+    description: A coding assistant for a monorepo
+    instruction: You are an expert software developer.
+    add_prompt_files:
+      - AGENTS.md
+    add_prompt_files_depth: 2
+```
+
+The agent then sees, alongside the fully loaded root `AGENTS.md`:
+
+```text
+Prompt files found in subdirectories of /repo. Their contents are NOT loaded:
+
+- services/api/AGENTS.md
+- services/web/AGENTS.md
+
+Read the ones covering the files you are about to work on. For anything under
+its own directory, a nested file's instructions take precedence over the
+instructions loaded above.
+```
+
+The per-turn *context* cost is therefore proportional to the number of
+sub-projects, not to the size of their instructions, and the agent pulls the
+full text of a nested file only when it starts working in that directory. The
+*scan* cost is proportional to the number of directory entries visited, which
+is why the depth is opt-in and the traversal is bounded (see below).
+
+- Depth counts directory levels below the working directory: `1` lists
+  `<child>/AGENTS.md`, `2` also lists `<child>/<grandchild>/AGENTS.md`.
+- Hidden directories and, when the working directory is a git worktree root,
+  git-ignored paths are skipped — `node_modules/**/AGENTS.md` won't show up.
+- Symlinks pointing outside the working directory are never listed, so a
+  checked-out tree can't have the agent read `~/.ssh/id_rsa` as instructions.
+- The listing is capped at 100 entries and the traversal at 20,000 directory
+  entries; a truncated listing says so.
+- Files already loaded in full are never listed twice.
+- The scan runs at the start of every turn, so files added or removed
+  mid-session are reflected. Keep the depth small on very large trees.
+
+A runnable example lives in [`examples/monorepo_prompt_files.yaml`](https://github.com/docker/docker-agent/blob/main/examples/monorepo_prompt_files.yaml).
+
 Use `--prompt-file` to add files for a single run without editing the
 config. It's merged with any `add_prompt_files` already set on the agent,
 with duplicates dropped:
@@ -258,9 +318,9 @@ Multiple processes can share the same `path:` cache file safely. Every `Store` t
 
 ## Redacting Secrets
 
-The `redact_secrets` flag is a single agent-level switch that scrubs accidentally leaked credentials, tokens, and private keys out of an agent's I/O. It wires up three complementary defenses:
+Secret redaction is enabled by default. The `redact_secrets` field controls scrubbing of detected credentials, tokens, and private keys from an agent's I/O; set it to `false` to opt out. It wires up three complementary defenses:
 
-1. A `pre_tool_use` built-in hook that scrubs detected secrets from the **arguments of every tool call**, before the tool sees them.
+1. A `tool_input_transform` built-in hook that scrubs detected secrets from the **arguments of every tool call**, before the tool sees them.
 2. A `before_llm_call` built-in hook that scrubs the same patterns from **outgoing chat messages** — message content, multi-part text content, prior reasoning content, and the JSON-encoded arguments of any tool call still in the conversation — before they reach the model provider.
 3. A `tool_response_transform` built-in hook that scrubs **tool output at the source**, so the secret never reaches event consumers, the persisted session file, the `post_tool_use` hook input, or the next LLM call.
 
@@ -296,7 +356,7 @@ Each detected span is replaced with the literal string `[REDACTED]`; the surroun
 > [!NOTE]
 > **Equivalent hook entry**
 >
-> Setting `redact_secrets: true` on the agent is shorthand for auto-registering all three legs of the feature as hook entries. They share the _same_ built-in name (`type: builtin`, `command: redact_secrets`) on `pre_tool_use`, `before_llm_call`, and `tool_response_transform` respectively — the implementation dispatches on the hook event. You can spell them out by hand to scope a leg to a subset of tools (set `matcher:` to a regex), stack them with other rewriters in a specific order, or enable just one or two legs. See [`examples/redact_secrets_hooks.yaml`](https://github.com/docker/docker-agent/blob/main/examples/redact_secrets_hooks.yaml) for a complete manual wiring and the [Hooks reference](../hooks/index.md#available-built-ins) for the builtin's event coverage.
+> The default redaction behavior (or an explicit `redact_secrets: true`) auto-registers all three legs of the feature as hook entries. They share the _same_ built-in name (`type: builtin`, `command: redact_secrets`) on `tool_input_transform`, `before_llm_call`, and `tool_response_transform` respectively — the implementation dispatches on the hook event. Set `redact_secrets: false` before wiring hooks manually to avoid also registering the default hooks. You can spell them out by hand to scope a leg to a subset of tools (set `matcher:` to a regex), stack them with other rewriters in a specific order, or enable just one or two legs. See [`examples/redact_secrets_hooks.yaml`](https://github.com/docker/docker-agent/blob/main/examples/redact_secrets_hooks.yaml) for a complete manual wiring and the [Hooks reference](../hooks/index.md#available-built-ins) for the builtin's event coverage.
 
 ## Welcome Message
 
@@ -365,14 +425,7 @@ agents:
 
 ## Named Commands
 
-> [!TIP]
-> **Full reference**
->
-> This section covers the basics. For URL commands, agent-switching commands, reusable top-level `commands:` groups, and hiding commands with `--disable-commands`, see [Custom Commands](../commands/index.md).
-
-Define reusable prompt shortcuts that can send prompts to the current agent, switch to a different sub-agent, or open a URL in the browser:
-
-> **Note:** Named slash commands execute immediately, even while the agent is processing another message. Unlike regular chat messages (which are queued), slash commands interrupt or direct the agent even while it is mid-response.
+Define prompt shortcuts under an agent's `commands:` field:
 
 ```yaml
 agents:
@@ -381,151 +434,22 @@ agents:
     instruction: You are a system administrator.
     commands:
       df: "Check how much free space I have on my disk"
-      logs: "Show me the last 50 lines of system logs"
       greet: "Say hello to ${env.USER}"
-      deploy: "Deploy ${env.PROJECT_NAME || 'app'} to ${env.ENV || 'staging'}"
-      
-      # Advanced format with agent switching
-      plan:
-        agent: planner  # Switch to the 'planner' agent
-        instruction: "Create a detailed plan for: ${args.join(\" \")}"  # Optional: send this prompt after switching
-      
-      # Agent switching without instruction - forwards remaining text as prompt
-      review:
-        agent: reviewer  # Any text after /review is sent to the reviewer agent
-
-      # URL command - opens a link in the browser instead of messaging the agent
-      docs:
-        description: "Open the documentation"
-        url: https://docs.docker.com/
 ```
+
+Invoke them in the TUI with `/df` or from the CLI with `docker agent run agent.yaml /df`. Named commands execute immediately, even while the agent is processing another message.
 
 ### Command Formats
 
-Commands support three formats:
-
-1. **Simple string format**: The string becomes the instruction sent to the current agent
-
-   ```yaml
-   df: "Check disk space"
-   ```
-
-2. **Advanced object format**: Supports agent switching and optional instructions
-
-   ```yaml
-   plan:
-     agent: planner  # Required: name of any agent defined in the team
-     instruction: "Plan: ${args.join(\" \")}"  # Optional: prompt to send after switching
-     description: "Switch to planning mode"  # Optional: shown in help text
-   ```
-
-3. **URL format**: Opens a link in the browser instead of messaging the agent
-
-   ```yaml
-   docs:
-     url: https://docs.docker.com/          # Required: URL to open
-     description: "Open the documentation"  # Optional: shown in help text
-   ```
-
-When `agent` is set without `instruction`, any text typed after the slash command (e.g., `/plan build a web app`) is forwarded as a prompt to the target agent. The target agent can be **any agent defined in the team configuration** — it does not need to be listed in the current agent's `sub_agents` array.
-
-**Argument and expansion syntax**
-
-An `instruction` string can reference the command's arguments and expand tool calls:
-
-- `${args[0]}`, `${args[1]}`, … — individual positional arguments, in the order the user typed them after the command
-- `${args.join(" ")}` — all arguments joined into a single string
-- `${tool_name({...})}` — calls a tool and inlines its return value (any tool available to the agent)
-- `!tool_name(key=value)` — legacy tool-call form: calls a tool with plain `key=value` arguments and inlines its output
+Commands can send prompts, switch agents, or open URLs. See [Custom Commands](../commands/index.md) for the field reference, argument and tool-call expansion, reusable groups, and frontend-specific behavior. Environment interpolation in other config fields is covered by [Variable Expansion](../overview/index.md#variable-expansion-in-config-fields).
 
 ### Agent-Switching Commands
 
-Commands with an `agent` field switch the active agent for that command's scope. This is useful for building workflow shortcuts where `/plan`, `/review`, `/deploy` each route the user to the appropriate specialist.
-
-```yaml
-agents:
-  root:
-    model: openai/gpt-5
-    description: Main assistant
-    instruction: You are a project coordinator.
-    sub_agents: [planner, reviewer]
-    commands:
-      # Switch to planner with a pre-filled prompt
-      plan:
-        agent: planner
-        instruction: "Create a detailed plan for: ${args.join(\" \")}"
-      # Switch to reviewer; any text after /review is forwarded
-      review:
-        agent: reviewer
-      # Simple prompt command (no switching)
-      status: "Summarize what we have accomplished so far"
-
-  planner:
-    model: openai/gpt-5
-    description: Planning specialist
-    instruction: You create detailed project plans.
-
-  reviewer:
-    model: anthropic/claude-sonnet-4-5
-    description: Code review specialist
-    instruction: You review code and suggest improvements.
-```
-
-**Agent-switching vs. `handoff`**
-
-| | Agent-switching command | `handoff` tool |
-| --- | --- | --- |
-| **Trigger** | User runs `/command` | Model calls `handoff()` |
-| **Session** | Stays in the same session | Stays in the same session |
-| **History** | Target agent sees full conversation | Target agent sees full conversation |
-| **Return** | User must explicitly switch back | Target agent can chain to another agent |
-
-**Agent-switching vs. `transfer_task`**
-
-`transfer_task` launches a **sub-session**: the root agent sends a task, the child runs in isolation, and the result is returned to the root. The root agent stays in control and the child's work is never in the main conversation. Use `transfer_task` (via `sub_agents`) when you want delegation with a clean result; use agent-switching commands when you want to *become* a different agent for the rest of the conversation.
-
-See [`examples/agent_switching_commands.yaml`](https://github.com/docker/docker-agent/blob/main/examples/agent_switching_commands.yaml) for a complete example.
-
-```bash
-# Run commands from the CLI
-$ docker agent run agent.yaml /df
-$ docker agent run agent.yaml /greet
-$ PROJECT_NAME=myapp ENV=production docker agent run agent.yaml /deploy
-```
-
-Commands use JavaScript template literal syntax (`${env.VAR}`) for environment variable interpolation. Undefined variables expand to empty strings.
-
-The same syntax is also expanded in agent and toolset instructions: `agents.<name>.instruction` and `toolsets[*].instruction` support `${env.X}` placeholders (with optional `||` defaults and ternary expressions). `agents.<name>.description` and `agents.<name>.welcome_message` also support it.
-
-Note that path-like fields (`working_dir`, `path`) primarily use a shell-style syntax (`$VAR`, `${VAR}`, `~`), and also accept `${env.X}` as an alias (though not richer JS expressions). See [Variable Expansion in Config Fields](../overview/index.md#variable-expansion-in-config-fields) for the full table.
+An `agent:` command switches to any agent in the team, in the same session. See [Agent-Switching Commands](../commands/index.md#agent-switching-commands) for examples and the comparison with `handoff` and `transfer_task`.
 
 ### URL Commands
 
-A command with a `url` field opens that URL in the user's default browser instead of sending a prompt to the agent. Any URI scheme the OS knows how to dispatch works — both standard web URLs and custom schemes such as `docker-desktop://` for deep links. URL commands are TUI-only — they have no effect when run from the CLI.
-
-```yaml
-agents:
-  root:
-    model: openai/gpt-5
-    description: An agent with handy URL shortcuts.
-    instruction: You are a helpful assistant.
-    commands:
-      feedback:
-        description: "Open the feedback site for this session"
-        url: https://example.com/feedback?session={{session_id}}
-      docs:
-        description: "Open the documentation"
-        url: https://docs.docker.com/
-      desktop:
-        description: "Open this session in Docker Desktop"
-        url: docker-desktop://dashboard/session/{{session_id}}
-```
-
-The `{{session_id}}` token is replaced at invocation time with the current session ID (URL-query-escaped so it can't break the URL or inject extra query parameters), letting a command deep-link to something scoped to the conversation. This token deliberately uses `{{...}}` rather than the `${...}` JS-expansion syntax, since the session ID is only known at dispatch time.
-
-URLs are validated before being handed to the OS opener: a parseable URL with a non-empty scheme is required, and flag-like inputs (those starting with `-`) are rejected to prevent argument injection.
-
-See [`examples/url_commands.yaml`](https://github.com/docker/docker-agent/blob/main/examples/url_commands.yaml) for a complete example.
+A `url:` command opens a browser in the full TUI. See [URL Commands](../commands/index.md#url-commands) for session-ID substitution, validation, and CLI/lean-TUI behavior.
 
 ## Read-Only Agents
 

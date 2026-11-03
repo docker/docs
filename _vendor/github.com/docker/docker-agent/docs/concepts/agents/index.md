@@ -45,9 +45,9 @@ Every Docker Agent configuration has a **root agent** — the entry point that r
 
 | Property               | Type    | Required | Description                                                    |
 | ---------------------- | ------- | -------- | -------------------------------------------------------------- |
-| `model`                | string  | ✓        | Model reference (inline like `openai/gpt-5` or a named model) |
-| `description`          | string  | ✓        | What the agent does — used by other agents for delegation      |
-| `instruction`          | string  | ✓        | System prompt defining behavior                                |
+| `model`                | string  | unless `harness` is set        | Model reference (inline like `openai/gpt-5` or a named model) |
+| `description`          | string  | ✗        | What the agent does — used by other agents for delegation      |
+| `instruction`          | string  | ✗        | System prompt defining behavior                                |
 | `toolsets`             | array   | ✗        | List of tool configurations                                    |
 | `sub_agents`           | array   | ✗        | Names of agents this agent can delegate to                     |
 | `fallback`             | object  | ✗        | Fallback model configuration for resilience                    |

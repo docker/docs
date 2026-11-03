@@ -5,7 +5,7 @@ description: |-
     Inspect kit build history in the builder sandbox.
 
     Each subcommand runs the matching docker buildx history command inside
-    the builder sandbox, against the buildx instance kit builds use. Flags
+    the builder sandbox, against the Buildx instance kit builds use. Flags
     and arguments pass through verbatim.
 usage: sbx kit builder history COMMAND
 options:

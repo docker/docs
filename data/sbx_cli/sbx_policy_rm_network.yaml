@@ -15,6 +15,10 @@ description: |-
     "sbx policy ls --json" for the filtered rules; network values are printed in
     the form the CLI accepts back.
 
+    Use --method to add an HTTP rule. --method accepts comma-separated HTTP
+    methods or ANY; --path defaults to /**. Repeat --query name=value to require
+    query parameters.
+
     With --cloud:
     Remove a cloud network rule by pattern.
 
@@ -34,6 +38,17 @@ options:
       usage: help for network
     - name: id
       usage: Remove by rule ID
+    - name: method
+      default_value: '[]'
+      usage: |
+        Restrict the rule to these HTTP methods (comma-separated); use ANY to match all methods
+    - name: path
+      usage: |
+        Restrict the rule to this HTTP path glob (e.g. /repos/**); defaults to /**
+    - name: query
+      default_value: '[]'
+      usage: |
+        Require an HTTP query parameter (name=value pattern); repeatable
     - name: resource
       usage: Remove by resource value(s), comma-separated
     - name: sandbox
@@ -60,6 +75,9 @@ example: |4-
 
       # Remove a sandbox-scoped rule by resource
       sbx policy rm network --sandbox my-sandbox --resource api.example.com
+
+      # Remove an HTTP rule by resource, method, and path
+      sbx policy rm network --resource api.example.com --method GET --path '/v1/**'
 
       # Remove a cloud rule by pattern, from the allow or deny list it is in
       sbx --cloud policy rm network --resource api.example.com

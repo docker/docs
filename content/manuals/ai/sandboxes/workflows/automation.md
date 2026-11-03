@@ -54,6 +54,11 @@ CI provider's secret store, use `-t`. For example, in a GitHub Actions step:
 
 ## Cleanup and exit codes
 
+`sbx exec` returns the exit status of the command it runs. A failure to run
+the command, such as a missing sandbox, returns
+125. A missing executable inside a local sandbox returns 127. Check stderr
+for the cause before deciding whether to retry.
+
 Confirmations require terminal input. Piping an answer, such as `echo y`, does
 not confirm an operation. Use `--force` on commands that provide it to skip
 confirmation in scripts. `sbx kit builder history rm` uses `--yes` or `-y`

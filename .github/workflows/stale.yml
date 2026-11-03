@@ -198,7 +198,7 @@ jobs:
           # days-before-pr-close, also update the hardcoded values in the
           # stale-issue-message and stale-pr-message above to match.
           days-before-issue-stale: 180  # 6 months
-          days-before-pr-stale: 180     # 6 months
+          days-before-pr-stale: 90      # 3 months
           days-before-issue-close: 14   # 2 weeks after stale
           days-before-pr-close: 30      # 1 month after stale
           

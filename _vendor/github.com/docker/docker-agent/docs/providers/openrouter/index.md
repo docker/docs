@@ -30,12 +30,12 @@ The simplest way to use OpenRouter:
 ```yaml
 agents:
   root:
-    model: openrouter/meta-llama/llama-3.3-70b-instruct
+    model: openrouter/meta-llama/llama-4-maverick
     description: Assistant using OpenRouter
     instruction: You are a helpful assistant.
 ```
 
-OpenRouter model IDs usually include the upstream provider name, such as `anthropic/claude-sonnet-4-5` or `meta-llama/llama-3.3-70b-instruct`. Docker Agent splits only the first slash, so the full upstream model ID is preserved.
+OpenRouter model IDs usually include the upstream provider name, such as `anthropic/claude-sonnet-5` or `meta-llama/llama-4-maverick`. Docker Agent splits only the first slash, so the full upstream model ID is preserved.
 
 ### Named Model
 
@@ -45,7 +45,7 @@ For more control over parameters:
 models:
   openrouter_llama:
     provider: openrouter
-    model: meta-llama/llama-3.3-70b-instruct
+    model: meta-llama/llama-4-maverick
     temperature: 0.7
     max_tokens: 8192
 
@@ -75,7 +75,7 @@ OpenRouter is implemented as a built-in alias in Docker Agent:
 ```yaml
 agents:
   coder:
-    model: openrouter/meta-llama/llama-3.3-70b-instruct
+    model: openrouter/meta-llama/llama-4-maverick
     description: Code assistant using OpenRouter
     instruction: |
       You are an expert programmer.

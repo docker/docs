@@ -15,7 +15,7 @@ Model routing lets you define a "router" model that automatically selects the be
 > [!NOTE]
 > **How It Works**
 >
-> Docker Agent uses NLP-based text similarity (via Bleve full-text search) to match user messages against example phrases you define. The route with the best-matching examples wins, and that model handles the request.
+> Docker Agent tokenizes user messages and example phrases, removes common English stop words, and ranks lexical term overlap with an in-memory BM25 matcher. The route with the best-matching examples wins, and that model handles the request.
 
 ## Configuration
 
@@ -58,6 +58,13 @@ agents:
     instruction: You are a helpful assistant.
 ```
 
+## Cost and Attribution
+
+Routed turns are priced and attributed to the model that served them, using its
+catalogue rates or `cost:` table and the response's service tier when applicable.
+The router's `cost:` table does not override a matched target's pricing. When no
+rule matches, the router's base model and accounting overrides apply.
+
 ## Routing Rules
 
 Each routing rule has:
@@ -83,7 +90,7 @@ The router:
 > - Use diverse phrasing that captures the intent
 > - Include keywords users actually use
 > - Add 5-10 examples per route for best results
-> - Examples don't need to be exact matches — the router uses semantic similarity
+> - Examples don't need to be identical sentences, but must share meaningful terms with the request — routing does not use embeddings or semantic similarity
 
 ## Use Cases
 
@@ -159,7 +166,7 @@ Look for log entries like:
 
 ```text
 "Rule-based router selected model" router=smart_router selected_model=anthropic/claude-sonnet-4-5
-"Route matched" model=anthropic/claude-sonnet-4-5 score=2.45
+"Route matched" model=anthropic/claude-sonnet-4-5
 ```
 
 > [!WARNING]

@@ -46,7 +46,7 @@ options:
     - name: type
       default_value: all
       usage: |
-        Filter policies by type: "all", "network", "filesystem" (default "all")
+        Filter policies by type: "all", "network", "http", "filesystem" (default "all")
     - name: wide
       default_value: "false"
       usage: Show detailed rule-level output with rule IDs and resources

@@ -46,6 +46,33 @@ agents:
         ref: my_docs
 ```
 
+### Sharing a knowledge base between agents
+
+When several agents reference the same knowledge base, they share one index.
+Docker Agent indexes each document once, runs a single file watcher, and
+re-embeds a changed file once, no matter how many agents use it. Embedding
+calls are bounded by the knowledge base's own `max_embedding_concurrency`, not
+multiplied by the number of agents.
+
+References share an index only when they resolve to the same configuration
+and the same credentials. A reference that overrides `name:`, or a session
+loaded with different credentials, gets its own index. Background indexing
+for a shared knowledge base is not attributed to any session.
+
+```yaml
+agents:
+  researcher:
+    model: anthropic/claude-sonnet-4-5
+    toolsets:
+      - type: rag
+        ref: my_docs   # shares one index...
+  writer:
+    model: anthropic/claude-sonnet-4-5
+    toolsets:
+      - type: rag
+        ref: my_docs   # ...with this reference
+```
+
 ## Retrieval Strategies
 
 ### Chunked Embeddings (Semantic Search)
@@ -66,6 +93,8 @@ strategies:
       size: 1000
       overlap: 100
 ```
+
+Supported embedding providers: **OpenAI** (and OpenAI-compatible custom providers), **DMR**, **Google Gemini** (see [Embeddings](../../providers/google/index.md#embeddings)). `vector_dimensions` must match the model's output size, e.g. 1536 for `openai/text-embedding-3-small` or 3072 for `google/gemini-embedding-2`.
 
 ### Semantic Embeddings (LLM-Enhanced)
 
@@ -174,6 +203,163 @@ chunking:
 >
 > Currently supports Go (`.go`) files. More languages will be added. Falls back to plain text chunking for unsupported file types.
 
+## Indexing failures, retries and backoff
+
+When a knowledge-base fails to start — because the embedding provider is rate-limiting
+your requests or returning a transient server error — Docker Agent spaces out retry
+attempts with bounded exponential backoff instead of hammering the provider on
+every agent turn.
+
+### What triggers backoff
+
+For **RAG indexing**, the toolset gate arms on two different signals depending
+on the failure:
+
+- **HTTP 429 (rate limit)** aborts the whole indexing run at the *first*
+  failure — continuing would just keep hammering a provider that asked for
+  backoff — and that abort error reaches the gate immediately.
+- **HTTP 408 (request timeout) and a fixed 5xx set** (`500, 502, 503, 504,
+  529`) are otherwise handled per-file: a single file's transient
+  failure is skipped so the run can keep indexing the rest. But if **no
+  file in the run is successfully indexed** — every attempted file hit one
+  of these retryable statuses — the run treats that as a sustained backend
+  failure rather than a one-off hiccup, and surfaces the error so the gate
+  arms on the next turn (fixed in
+  [#4097](https://github.com/docker/docker-agent/issues/4097); previously
+  only 429 reached the gate).
+
+| Failure kind | Behaviour |
+|---|---|
+| HTTP 429 (rate limit) | Aborts the run on the first failure; backoff: next attempt delayed |
+| HTTP 408 or 5xx, isolated to some files | Per-file skip; run succeeds, no backoff (indexed files persist, failures retried next run) |
+| HTTP 408 or 5xx, affecting every file | Run fails; backoff: next attempt delayed |
+| Other failures (config errors, auth, unrecognized 4xx) | Fail fast: retried every turn with no added delay |
+| Context cancellation or agent shutdown | Immediate: no delay |
+
+> [!NOTE]
+> This trigger set (429 always, 408/5xx when sustained across every file) is
+> specific to the RAG/embedding path. Other toolset types have their own
+> trigger sets against the same gate — for example, remote MCP toolsets pace
+> every connection attempt (not just a sustained run) on 408 and the same
+> fixed 5xx set (see
+> [MCP startup failure behaviour](../mcp/index.md#lifecycle-auto-restart-profiles)),
+> and the A2A toolset paces its agent-card fetch the same way (see
+> [A2A startup failure behaviour](../a2a/index.md#startup-failure-behaviour)).
+
+### Retry policy and parameters
+
+The backoff is **bounded exponential with additive jitter**:
+
+- **Base delay**: 15 seconds
+- **Maximum delay**: up to ~6 minutes (5-minute cap plus up to 20% additive jitter)
+- **Growth**: doubles after each consecutive retryable failure (15s → 30s → 1m → 2m → 4m → 5m)
+- **Jitter**: each wait is a random value in `[nominal, 1.2×nominal]` (additive 0–20%)
+  so concurrent knowledge-base sources spread their retries and avoid
+  hammering the provider together
+- **Retry-After override**: if the embedding provider responds with a `Retry-After`
+  header, that hint overrides the computed delay (capped at the 5-minute maximum,
+  with the same additive jitter applied to spread concurrent retries)
+
+The gate is a lightweight wall-clock check — it creates no background threads or
+timers. A Stop command or agent shutdown takes effect immediately regardless of
+how much of the backoff window remains.
+
+### Long indexing runs
+
+Starting any toolset — RAG included — is bounded by a 30-second *wait* budget
+(`tools.DefaultStartTimeout`): if a toolset's `Start` has not returned within
+30s, the caller stops waiting and the turn proceeds without that toolset's
+tools, exactly as it would for a wedged MCP server. This budget exists to
+detect toolsets that never come up; it is not a deadline on indexing itself.
+
+A large knowledge base can legitimately take much longer than 30s to index.
+Rather than abort in-flight indexing at the 30s mark — which used to discard
+any embeddings not yet committed for the file being processed — the RAG
+toolset detaches indexing from the caller's wait budget the same way it
+already detaches its file watcher. When the 30s budget expires:
+
+- The current turn proceeds without the RAG tool (the existing "taking too
+  long to start" warning and TUI progress events still apply).
+- Indexing keeps running in the background.
+- Files that finish indexing are persisted atomically per file (a file is
+  always either fully indexed or untouched — see #4073/#4158), so progress
+  is never lost to this budget.
+- A later turn's `Start` call picks the toolset up: if indexing has finished,
+  the tool is available immediately; if it is still running, that turn also
+  proceeds without the tool.
+
+This is a **visible behavior change**: knowledge bases that used to finish
+indexing (and thus offer the tool) on the very first turn, within the old
+30-second window, now do so on whichever turn happens to land after indexing
+completes. If indexing takes under 30s, nothing changes.
+
+`indexing_timeout` bounds indexing itself, independent of the 30s wait
+budget — it exists only so a hung provider connection cannot pin a knowledge
+base's indexing lock forever:
+
+```yaml
+rag:
+  codebase:
+    indexing_timeout: 2h # Go duration; "0s" = unbounded; default 30m
+    docs: [./knowledge-base]
+    strategies:
+      - type: chunked-embeddings
+        embedding_model: openai/text-embedding-3-small
+```
+
+- Default: `30m` when omitted.
+- `0s` means no bound. A negative value is rejected at config validation time.
+- Expiry is a plain timeout, not a provider error: it does **not** arm the
+  backoff gate described above, and the next turn's `Start` resumes indexing
+  immediately rather than waiting out a cooldown. Files already persisted are
+  kept; unfinished files are re-indexed on resume.
+- A 429/408/5xx from the provider *during* a detached indexing run is
+  unaffected by any of this — it still aborts the run and arms the backoff
+  gate exactly as described above.
+
+### Operational impact
+
+**Before**: a rate-limited knowledge base was re-indexed on every agent turn —
+`max_indexing_concurrency × max_embedding_concurrency` concurrent provider calls
+could relaunch within milliseconds, easily tripping rate limits for both the
+knowledge base and the agent's own model calls.
+
+**After**: retries are spaced out and jittered so the provider has room to recover
+before the next attempt. The agent continues working with any other toolsets that
+are not affected.
+
+### What you will see
+
+- Docker Agent logs a single warning when a knowledge base first fails to start.
+  Repeated failures in between are logged at debug level only, so you are not
+  flooded with alerts on every turn. Recovery is intentionally silent — the
+  tool appearing in the agent's tool list is the signal that indexing succeeded.
+- The knowledge-base tool does not appear in the agent's tool list until indexing
+  succeeds. A successful start is silent — the tool is listed and the agent uses it.
+
+### Troubleshooting repeated 429/5xx/408 errors
+
+If you see persistent `429`, `5xx`, or `408` errors in the logs:
+
+1. **Check provider rate limits.** Your embedding API key may have a low requests-per-minute
+   quota. Upgrading the plan or using a different API key can help.
+2. **Reduce concurrency.** The chunked-embeddings and semantic-embeddings strategies
+   accept `max_indexing_concurrency` (default `3`) and `max_embedding_concurrency`
+   (default `3`) parameters. Lowering these reduces simultaneous requests:
+
+   ```yaml
+   rag:
+     docs:
+       docs: [./knowledge-base]
+       strategies:
+         - type: chunked-embeddings
+           max_indexing_concurrency: 1
+           max_embedding_concurrency: 1
+   ```
+
+3. **Use a model with a higher quota.** Some providers offer higher rate limits on
+   specific embedding model tiers.
+
 ## Debugging RAG
 
 Enable debug logging to see retrieval details:
@@ -198,13 +384,14 @@ Look for log tags: `[RAG Manager]`, `[Chunked-Embeddings Strategy]`, `[BM25 Stra
 
 ### Top-Level RAG Fields
 
-| Field         | Type     | Default | Description                                                    |
-| ------------- | -------- | ------- | -------------------------------------------------------------- |
-| `docs`        | []string | —       | Document paths/directories (shared across strategies)          |
-| `description` | string   | —       | Human-readable description of this RAG source                  |
-| `respect_vcs` | boolean  | `true`  | Respect `.gitignore` files when indexing documents             |
-| `strategies`  | []object | —       | Array of retrieval strategy configurations                     |
-| `results`     | object   | —       | Post-processing: fusion, reranking, deduplication, final limit |
+| Field              | Type     | Default | Description                                                                                                                                    |
+| ------------------ | -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `docs`             | []string | —       | Document paths/directories (shared across strategies)                                                                                          |
+| `description`      | string   | —       | Human-readable description of this RAG source                                                                                                  |
+| `respect_vcs`      | boolean  | `true`  | Respect `.gitignore` files when indexing documents                                                                                             |
+| `indexing_timeout` | string   | `30m`   | Cap on a single indexing run, detached from the 30s toolset-start wait budget; `0s` = unbounded. See [Long indexing runs](#long-indexing-runs) |
+| `strategies`       | []object | —       | Array of retrieval strategy configurations                                                                                                     |
+| `results`          | object   | —       | Post-processing: fusion, reranking, deduplication, final limit                                                                                 |
 
 ### Chunked-Embeddings Strategy
 
@@ -218,6 +405,7 @@ Look for log tags: `[RAG Manager]`, `[Chunked-Embeddings Strategy]`, `[BM25 Stra
 | `limit`                     | int    | `5`                 | Max results from this strategy                               |
 | `embedding_batch_size`      | int    | `50`                | Chunks per embedding request                                 |
 | `max_embedding_concurrency` | int    | `3`                 | Max concurrent embedding requests                            |
+| `max_indexing_concurrency`  | int    | `3`                 | Max concurrent file-indexing tasks                           |
 | `chunking.size`             | int    | `1500`              | Chunk size in characters (`4000` when `code_aware` is set)   |
 | `chunking.overlap`          | int    | `75`                | Overlap between chunks in characters                         |
 | `chunking.code_aware`       | bool   | `false`             | AST-based chunking (Go files only)                           |

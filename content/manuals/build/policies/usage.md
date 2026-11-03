@@ -353,8 +353,26 @@ $ docker buildx bake production   # Uses strict policies
 
 ### Bake with policy options
 
-Currently, bake doesn't support policy options (reset, strict, disabled) in the
-HCL file. Use command-line flags instead:
+Use objects in the `policy` list to configure policy loading and evaluation
+for a target. Each object supports `filename`, `reset`, `disabled`, `strict`,
+and `log-level`, with the same meanings as the
+[`docker buildx build --policy` options](#manual-policy-configuration).
+
+For example, load only the specified policy and require policy support from
+the builder:
+
+```hcl {title="docker-bake.hcl"}
+target "production" {
+  policy = [{
+    filename = "policies/production.rego"
+    reset    = true
+    strict   = true
+  }]
+}
+```
+
+Use `disabled = true` to disable policy evaluation for a target. For a
+per-invocation override across the selected targets, use the `--policy` flag:
 
 ```console
 $ docker buildx bake --policy disabled=true production
@@ -512,14 +530,14 @@ fetch specific metadata (see [above](#testing-policies-with-policy-eval)).
 
 #### Test with specific policy files
 
-The `--filename` flag specifies which policy file to load by providing the base
+The `--file` flag (`-f`) specifies which policy file to load by providing the base
 Dockerfile name (without the `.rego` extension). This is useful for testing
 sources against policies associated with different Dockerfiles.
 
 For example, to test a source against the policy for `app.Dockerfile`:
 
 ```console
-$ docker buildx policy eval --filename app.Dockerfile .
+$ docker buildx policy eval --file app.Dockerfile .
 ```
 
 This loads `app.Dockerfile.rego` and tests whether it allows the source `.`
@@ -528,8 +546,30 @@ This loads `app.Dockerfile.rego` and tests whether it allows the source `.`
 Test different sources against your policy:
 
 ```console
-$ docker buildx policy eval --filename app.Dockerfile https://github.com/org/repo.git
-$ docker buildx policy eval --filename app.Dockerfile docker-image://alpine:3.19
+$ docker buildx policy eval --file app.Dockerfile \
+    https://github.com/org/repo.git
+$ docker buildx policy eval --file app.Dockerfile docker-image://alpine:3.19
+```
+
+To read the policy from standard input instead, use `--file -`. Buildx reads
+the policy directly, without appending `.rego` to the filename:
+
+```console
+$ cat app.Dockerfile.rego | docker buildx policy eval --file - \
+    docker-image://alpine:3.19
+```
+
+#### Evaluate a specific platform
+
+Use `--platform` to choose the platform whose image metadata the policy
+evaluates. Without it, Buildx uses the first platform of the builder's first
+worker.
+
+```console
+$ docker buildx policy eval --platform linux/arm64 \
+    docker-image://alpine:3.19
+$ docker buildx policy eval --platform linux/arm64 --print \
+    --fields image.labels docker-image://alpine:3.19
 ```
 
 ### Reset automatic loading

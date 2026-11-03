@@ -9,6 +9,10 @@ description: |-
     When copying a directory, the directory itself is placed at the destination.
     If the destination path does not exist it is created; if it already exists
     as a directory, the source is placed inside it.
+
+    When a local path is inside a sandbox workspace, sbx cp refuses symbolic
+    links that lead out of the workspace, even with --follow-link, including
+    when the workspace is reached through a symbolic link or junction to it.
 usage: sbx cp SRC DST [flags]
 options:
     - name: follow-link

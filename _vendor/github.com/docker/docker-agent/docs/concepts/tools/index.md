@@ -24,37 +24,22 @@ When an agent needs to perform an action, it makes a **tool call**. The Docker A
 
 ## Built-in Tools
 
-Docker Agent ships with several built-in tools that require no external dependencies. Each is enabled by adding its `type` to the agent's `toolsets` list:
+Enable a built-in toolset by adding its `type` to the agent's `toolsets` list. For example:
 
-| Tool | Description |
-| --- | --- |
-| [Filesystem](../../tools/filesystem/index.md) | Read, write, list, search, and navigate files and directories |
-| [Shell](../../tools/shell/index.md) | Execute shell commands synchronously |
-| [Background Jobs](../../tools/background-jobs/index.md) | Run and manage long-running shell commands |
-| [Think](../../tools/think/index.md) | Step-by-step reasoning scratchpad for planning and decision-making |
-| [Todo](../../tools/todo/index.md) | Task list management for complex multi-step workflows |
-| [Tasks](../../tools/tasks/index.md) | Persistent task database shared across sessions |
-| [Memory](../../tools/memory/index.md) | Persistent key-value storage backed by SQLite |
-| [Fetch](../../tools/fetch/index.md) | Read content from HTTP/HTTPS URLs (GET only) |
-| [Script](../../tools/script/index.md) | Define custom shell scripts as named tools |
-| [LSP](../../tools/lsp/index.md) | Connect to Language Server Protocol servers for code intelligence |
-| [API](../../tools/api/index.md) | Create custom tools that call HTTP APIs without writing code |
-| [OpenAPI](../../tools/openapi/index.md) | Generate tools from an OpenAPI 3.x document |
-| [RAG](../../tools/rag/index.md) | Retrieval-augmented generation over indexed sources |
-| [Model Picker](../../tools/model-picker/index.md) | Let the agent pick between several models per turn |
-| [User Prompt](../../tools/user-prompt/index.md) | Ask users questions and collect interactive input |
-| [Open URL](../../tools/open-url/index.md) | Open a fixed URL in the user's default browser |
-| [Transfer Task](../../tools/transfer-task/index.md) | Delegate tasks to sub-agents (auto-enabled with `sub_agents`) |
-| [Background Agents](../../tools/background-agents/index.md) | Dispatch work to sub-agents concurrently |
-| [Handoff](../../tools/handoff/index.md) | Hand the conversation off to another local agent in the same config (auto-enabled with `handoffs:`) |
-| [A2A](../../tools/a2a/index.md) | Connect to remote agents via the Agent-to-Agent protocol |
-| [MCP Catalog](../../tools/mcp-catalog/index.md) | Discover and activate remote MCP servers from the Docker MCP Catalog on demand |
-| [Git](../../tools/git/index.md) | Read-only git repository inspection |
-| [Scheduler](../../tools/scheduler/index.md) | Schedule instructions to run at a time or on a recurring interval |
-| [Webhook](../../tools/webhook/index.md) | Outbound notifications to Slack, Discord, Telegram, IFTTT, and more |
-| [Plan](../../tools/plan/index.md) | Shared persistent scratchpad for multi-agent collaboration |
-| [Session Plan](../../tools/session_plan/index.md) | Per-session plan tracker for the draft/review/execute workflow |
-| [Session Context](../../tools/session_context/index.md) | Reference a previous session as context |
+```yaml
+toolsets:
+  - type: filesystem
+  - type: shell
+  - type: todo
+```
+
+Choose tools for the capabilities your agent needs:
+
+- **Work with files and processes:** [Filesystem](../../tools/filesystem/index.md) and [Shell](../../tools/shell/index.md).
+- **Plan and remember:** [Todo](../../tools/todo/index.md), [Memory](../../tools/memory/index.md), and [RAG](../../tools/rag/index.md).
+- **Coordinate agents:** [Transfer Task](../../tools/transfer-task/index.md) and [Background Agents](../../tools/background-agents/index.md).
+
+See [Built-in Tools](../../configuration/tools/index.md#built-in-tools) for the complete catalog, including each toolset's type and configuration reference.
 
 ## MCP Tools
 

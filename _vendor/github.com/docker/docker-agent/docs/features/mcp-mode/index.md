@@ -58,9 +58,11 @@ $ docker agent serve mcp ./agent.yaml --http --listen 0.0.0.0:9090 --auth-token 
 | `--auth-token`          | (none)             | Require this Bearer token for HTTP requests. Required for non-loopback HTTP unless explicitly overridden.       |
 | `--insecure-no-auth`    | `false`            | Permit unauthenticated non-loopback HTTP. Use only behind a trusted authentication boundary.                    |
 | `--safety`              | `restricted`       | Tool safety policy for HTTP requests. CLI value overrides agent/runtime configuration.                           |
-| `--mcp-keepalive`      | `0`                | Interval between MCP keep-alive pings (e.g. `30s`); `0` disables keep-alive.                                 |
+| `--mcp-keepalive`      | `0`                | Interval between MCP keep-alive pings (e.g. `30s`); `0` disables keep-alive. Only when serving an agent over stdio — rejected with `--http` and `--attach`.  |
 
 Runtime configuration flags such as `--working-dir`, `--env-from-file`, `--models-gateway`, and hook flags are also available — see the [CLI reference](../cli/index.md).
+
+The HTTP transport is **stateless**, per MCP spec revision `2026-07-28`: modern clients negotiate via `server/discover`, no `Mcp-Session-Id` is issued, and only POST requests are served (GET and DELETE answer `405 Method Not Allowed`). Clients speaking older protocol revisions keep working — the legacy `initialize` handshake is accepted with per-request state. However, older stateful clients that depend on a standalone GET stream or session `DELETE` teardown must upgrade to (or switch to) a client compatible with stateless streaming HTTP. Because the stateless transport has no server-initiated ping, `--mcp-keepalive` is rejected together with `--http`; keep-alive remains available on the stdio transport.
 
 ## HTTP security
 

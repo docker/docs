@@ -11,31 +11,11 @@ more flexibility to configure these definitions. For example, you might want to
 override an attribute when building in a particular environment or for a
 specific target.
 
-The following list of attributes can be overridden:
-
-- `args`
-- `attest`
-- `cache-from`
-- `cache-to`
-- `context`
-- `contexts`
-- `dockerfile`
-- `entitlements`
-- `labels`
-- `network`
-- `no-cache`
-- `output`
-- `platform`
-- `pull`
-- `secrets`
-- `ssh`
-- `tags`
-- `target`
-
-To override these attributes, you can use the following methods:
+To override target attributes or the variables used to configure them, use:
 
 - [File overrides](#file-overrides)
 - [CLI overrides](#command-line)
+- [Variable overrides](#variables)
 - [Environment variable overrides](#environment-variables)
 
 ## File overrides
@@ -189,7 +169,8 @@ target "app" {
 ```
 
 ```console
-$ docker buildx bake --set app.args.mybuildarg=bar --set app.platform=linux/arm64 app --print
+$ docker buildx bake --set app.arg.mybuildarg=bar \
+    --set app.platform=linux/arm64 app --print
 ```
 
 ```json
@@ -214,38 +195,126 @@ $ docker buildx bake --set app.args.mybuildarg=bar --set app.platform=linux/arm6
 
 > [!NOTE]
 >
-> `--set` is a repeatable flag. For array fields such as `tags`, repeat `--set` to provide multiple values or use the `+=` operator to append without replacing.
-> Array literal syntax like `--set target.tags=[a,b]` is not supported.
+> `--set` is a repeatable flag. For array fields such as `tag`, repeat `--set`
+> to provide multiple values or use `+=` to append without replacing.
+> An empty assignment, such as `--set app.tag=`, clears the array. Subsequent
+> assignments add values to the cleared array. Array literal syntax such as
+> `--set app.tag=[a,b]` is not supported.
 
-Pattern matching syntax defined in [https://golang.org/pkg/path/#Match](https://golang.org/pkg/path/#Match)
-is also supported:
+Override keys use singular names such as `arg`, `secret`, and `tag`. These
+names apply to `--set` selectors; Bake file attributes keep their existing
+names, such as `args` and `tags`. Older plural override spellings remain
+supported as aliases.
+
+`context` and `contexts` aren't aliases: `context` sets the main build
+context, while `contexts.<name>` sets one named context. The alias `secrets`
+applies to the secret list override only; `secrets.<id>` is invalid.
+
+You can match multiple targets with a pattern. Quote the override so your
+shell doesn't expand the pattern before Bake reads it:
 
 ```console
-$ docker buildx bake --set foo*.args.mybuildarg=value  # overrides build arg for all targets starting with "foo"
-$ docker buildx bake --set *.platform=linux/arm64      # overrides platform for all targets
-$ docker buildx bake --set foo*.no-cache               # bypass caching only for targets starting with "foo"
+$ docker buildx bake --set 'foo*.arg.mybuildarg=value'
+$ docker buildx bake --set '*.platform=linux/arm64'
+$ docker buildx bake --set 'foo*.no-cache'
 ```
 
-Complete list of attributes that can be overridden with `--set` are:
+The first and third commands affect targets whose names start with `foo`.
+The second sets the platform for all targets. For the full list of override
+keys, aliases, pattern syntax, and fields supporting `+=`, see the
+[`--set` reference](/reference/cli/docker/buildx/bake/#set).
 
-- `args`
-- `attest`
-- `cache-from`
-- `cache-to`
-- `context`
-- `contexts`
-- `dockerfile`
-- `entitlements`
-- `labels`
-- `network`
-- `no-cache`
-- `output`
-- `platform`
-- `pull`
-- `secrets`
-- `ssh`
-- `tags`
-- `target`
+### Override list attributes
+
+Attributes such as `secret`, `ssh`, and `output` can use lists of objects in a
+Bake file. In a `--set` value, use the inline syntax of the corresponding
+build flag, rather than an HCL object or array. For example, `secret` uses the
+same `id=...,src=...` syntax as
+[`build --secret`](/reference/cli/docker/buildx/build/#secret).
+
+Use `=` to replace the secret list, `+=` to add a secret, or an empty value
+to clear the list:
+
+```console
+$ docker buildx bake --set app.secret=id=aws,src=./credentials app
+$ docker buildx bake --set app.secret+=id=gcp,env=GCP_CREDENTIALS app
+$ docker buildx bake --set app.secret= app
+```
+
+These operations affect the list as a whole. To change only the source of one
+declared secret while preserving the others, use `secret.<id>`.
+
+### Override a secret source
+
+Use `--set <target>.secret.<id>=<source>` to change the source of an existing
+secret without replacing the target's secret list. The secret ID must already
+be declared by the target.
+
+For example, declare an `aws` secret in the Bake file:
+
+```hcl {title=docker-bake.hcl}
+target "app" {
+  secret = [{
+    id  = "aws"
+    src = "./credentials"
+  }]
+}
+```
+
+Supply its value from an environment variable or a different file:
+
+```console
+$ docker buildx bake --set app.secret.aws=env=AWS_CREDENTIALS app
+$ docker buildx bake --set app.secret.aws=src=/path/to/credentials app
+```
+
+The build still receives the secret as `aws`. Other declared secrets keep
+their sources. The override fails if the target doesn't declare `aws`, or if
+an `id=` in the override value names a different secret. This form doesn't
+support `+=`.
+
+Named source overrides are applied after secret list overrides, so the ID
+must exist in the resulting list. The value describes the complete source
+using `env=...` or `src=...`; it doesn't address an object field such as
+`secret.aws.env`.
+
+### Override resource limits
+
+Use `--set <target>.resource.<name>=<value>` to change a resource limit for
+the containers that run build steps. For example, override memory and CPU
+limits for an `app` target:
+
+```console
+$ docker buildx bake --set app.resource.memory=2g \
+    --set app.resource.cpu-quota=50000 app
+```
+
+Supported names are `memory`, `memory-swap`, `cpu-shares`, `cpu-period`,
+`cpu-quota`, `cpuset-cpus`, and `cpuset-mems`. Each override changes only the
+named limit, preserving other limits from the Bake definition. Resource
+overrides don't support `+=`.
+
+These limits require a BuildKit daemon with per-step resource limit support
+and take effect on Linux. They control resources within a build step, rather
+than how many Bake targets run concurrently. See the
+[`--resource` reference](/reference/cli/docker/buildx/build/#resource) for
+units and supported values, and the
+[`resources` attribute](./reference.md#targetresources) for file configuration.
+
+## Variables
+
+Use `--var NAME=value` to override a declared Bake variable for a single
+invocation. For example, set `TAG` without exporting it in your shell:
+
+```console
+$ docker buildx bake --var TAG=dev webapp
+```
+
+The value takes precedence over an environment variable with the same name.
+Unlike `--set webapp.tags=...`, this changes the variable wherever the Bake
+definition uses it. See
+[Override variable values](./variables.md#override-variable-values) for
+precedence, types, and repeated flags.
 
 ## Environment variables
 
@@ -255,6 +324,10 @@ Bake lets you use environment variables to override the value of a `variable`
 block. Only `variable` blocks can be overridden with environment variables.
 This means you need to define the variables in the bake file and then set the
 environment variable with the same name to override it.
+
+To disable these lookups, set `BUILDX_BAKE_DISABLE_VARS_ENV_LOOKUP=1`; see the
+[variable reference](../building/variables.md#buildx_bake_disable_vars_env_lookup).
+You can still provide variable values explicitly with `--var NAME=value`.
 
 The following example shows how you can define a `TAG` variable with a default
 value in the Bake file, and override it with an environment variable.

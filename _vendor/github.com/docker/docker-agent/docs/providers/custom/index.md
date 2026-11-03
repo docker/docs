@@ -35,7 +35,7 @@ providers:
 models:
   my_model:
     provider: my_gateway
-    model: gpt-4o
+    model: gpt-5.6-sol
 
 agents:
   root:
@@ -45,30 +45,14 @@ agents:
 
 ### Anthropic with shared defaults
 
-```yaml
-providers:
-  my_anthropic:
-    provider: anthropic
-    token_key: MY_ANTHROPIC_KEY
-    max_tokens: 16384
-    thinking_budget: 8192
+Use a named Anthropic provider to share settings across models while allowing model-level overrides. See [Default Inheritance](#default-inheritance) for the example and precedence rules.
 
-models:
-  claude_smart:
-    provider: my_anthropic
-    model: claude-sonnet-4-5
-    # Inherits max_tokens: 16384, thinking_budget: 8192
-
-  claude_fast:
-    provider: my_anthropic
-    model: claude-haiku-4-5
-    thinking_budget: 1024  # Overrides provider default
-
-agents:
-  root:
-    model: claude_smart
-    instruction: You are a helpful assistant.
-```
+A custom Anthropic `base_url` reuses the Messages client but selects a different
+host. It does not inherit Claude API capability, beta, price or signature-portability
+guarantees. Intermediary prefix rewrites can invalidate signed history. The `azure`
+alias uses the OpenAI-compatible client, not native Azure AI Foundry Claude.
+These custom configurations are not live-tested by this guide; see
+[Claude access paths](../anthropic/index.md#claude-access-paths).
 
 ### Google with shared temperature
 
@@ -81,7 +65,7 @@ providers:
 models:
   gemini:
     provider: my_google
-    model: gemini-2.5-flash
+    model: gemini-3.8-flash
     # Inherits temperature: 0.3
 
 agents:
@@ -104,10 +88,10 @@ agents:
 | `top_p`               | float      | Default nucleus sampling threshold (0.0–1.0).                                         | —                        |
 | `frequency_penalty`   | float      | Default frequency penalty (-2.0–2.0).                                                 | —                        |
 | `presence_penalty`    | float      | Default presence penalty (-2.0–2.0).                                                  | —                        |
-| `parallel_tool_calls` | boolean    | Whether to enable parallel tool calls by default.                                     | —                        |
+| `parallel_tool_calls` | boolean    | Whether to enable parallel tool calls by default. When omitted, the provider/API default is used.         | —                        |
 | `track_usage`         | boolean    | Whether to track token usage by default.                                              | —                        |
 | `thinking_budget`     | string/int | Default reasoning effort/budget.                                                      | —                        |
-| `task_budget`         | int/object | Default total token budget for an agentic task (forwarded to Anthropic; honored by Claude Opus 4.7 today). Integer shorthand or `{type: tokens, total: N}`. | —                        |
+| `task_budget`         | int/object | Default total token budget for an agentic task. See [Task Budget](../../configuration/models/index.md#task-budget) for syntax and [Anthropic](../anthropic/index.md#task-budget) for model support. | —                        |
 | `compaction_model`    | string     | Default model used for session compaction (summary generation) by agents whose model uses this provider. Named model or inline `provider/model` string. Agent-level and model-level `compaction_model` take precedence. | —                        |
 | `provider_opts`       | object     | Provider-specific options passed through to the client.                               | —                        |
 
@@ -128,12 +112,12 @@ models:
   # Inherits everything from provider
   claude_default:
     provider: my_anthropic
-    model: claude-sonnet-4-5
+    model: claude-sonnet-5
 
   # Overrides temperature and thinking_budget, inherits the rest
   claude_custom:
     provider: my_anthropic
-    model: claude-sonnet-4-5
+    model: claude-sonnet-5
     temperature: 0.2
     thinking_budget: low
 ```
@@ -149,9 +133,9 @@ Once a provider is defined, you can use the shorthand `provider_name/model` synt
 ```yaml
 agents:
   root:
-    model: my_gateway/gpt-4o-mini  # uses the provider's defaults
+    model: my_gateway/gpt-5.6-terra  # uses the provider's defaults
   researcher:
-    model: my_anthropic/claude-sonnet-4-5  # uses anthropic provider defaults
+    model: my_anthropic/claude-sonnet-5  # uses anthropic provider defaults
 ```
 
 ## API Types
@@ -192,7 +176,7 @@ providers:
 
 agents:
   root:
-    model: router/anthropic/claude-sonnet-4-5
+    model: router/anthropic/claude-sonnet-5
 ```
 
 ### Azure OpenAI
@@ -201,7 +185,7 @@ agents:
 models:
   azure_model:
     provider: azure
-    model: gpt-4o
+    model: gpt-5.6-sol
     base_url: https://your-llm.openai.azure.com
     provider_opts:
       api_version: 2024-12-01-preview
@@ -209,32 +193,20 @@ models:
 
 ### Anthropic Team Setup
 
+Agents can use different models backed by the same named provider. Starting from the [Default Inheritance](#default-inheritance) example:
+
 ```yaml
-providers:
-  team_anthropic:
-    provider: anthropic
-    token_key: TEAM_ANTHROPIC_KEY
-    max_tokens: 32768
-    thinking_budget: high
-    temperature: 0.5
-
-models:
-  architect:
-    provider: team_anthropic
-    model: claude-sonnet-4-5
-
-  reviewer:
-    provider: team_anthropic
-    model: claude-haiku-4-5
-    thinking_budget: low  # faster reviews
-
 agents:
   root:
-    model: architect
+    model: claude_default
+    instruction: You coordinate the development team.
     sub_agents: [code_reviewer]
   code_reviewer:
-    model: reviewer
+    model: claude_custom
+    instruction: You review code.
 ```
+
+Each model inherits provider defaults independently; its overrides do not affect the other model.
 
 ### Multi-Provider with Shared Defaults
 
@@ -254,10 +226,10 @@ providers:
 
 agents:
   root:
-    model: smart_anthropic/claude-sonnet-4-5
+    model: smart_anthropic/claude-sonnet-5
     sub_agents: [helper]
   helper:
-    model: fast_openai/gpt-4o-mini
+    model: fast_openai/gpt-4.1-mini
 ```
 
 ## Global Providers (User Configuration)

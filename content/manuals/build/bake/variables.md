@@ -2,14 +2,14 @@
 title: Variables in Bake
 linkTitle: Variables
 weight: 40
-description:
+description: Define, override, and validate variables in Docker Bake files
 keywords: build, buildx, bake, buildkit, hcl, variables
 ---
 
 You can define and use variables in a Bake file to set attribute values,
 interpolate them into other values, and perform arithmetic operations.
 Variables can be defined with default values, and can be overridden with
-environment variables.
+the `--var` flag or environment variables.
 
 ## Using variables as attribute values
 
@@ -30,6 +30,25 @@ target "webapp" {
   tags = [ TAG ]
 }
 ```
+
+## Override variable values
+
+Use `--var NAME=value` to override a declared variable for one Bake invocation
+without changing your shell's environment:
+
+```console
+$ docker buildx bake --var TAG=docker.io/username/webapp:dev webapp
+```
+
+Repeat the flag to set multiple variables. If you repeat a name, the last
+value wins. Explicit `--var` values take precedence over environment variables
+with the same name and over defaults in the Bake file. Values are converted
+to the declared variable type.
+
+This flag also works when environment-based variable lookups are disabled
+with `BUILDX_BAKE_DISABLE_VARS_ENV_LOOKUP=1`. Use `--var` to set a variable
+used in expressions throughout the definition; use `--set` to override a
+specific target attribute. See [Overriding configurations](./overrides.md).
 
 ## Interpolate variables into values
 

@@ -170,6 +170,17 @@ Rules enforced at config load time:
 
 See [`examples/force_handoff.yaml`](https://github.com/docker/docker-agent/blob/main/examples/force_handoff.yaml) for a runnable example.
 
+### Hook-Driven Routing
+
+When the next agent depends on the request or on the previous agent's answer,
+`before_agent_run` and `after_agent_complete` [hooks](../../configuration/hooks/index.md#agent-routing-hooks)
+can choose it — with a command or a choice [evaluator](../../configuration/evaluators/index.md) — instead
+of a coordinator's LLM call. The runtime validates each choice against the agent's
+`routing.allowed_agents`, switches agents in the same conversation (earlier transcripts
+stay visible), and starts every new user request at the entry agent again. Combine it with
+`force_handoff` for fixed continuations such as `researcher -> reviewer`. See
+[`examples/hook_routing.yaml`](https://github.com/docker/docker-agent/blob/main/examples/hook_routing.yaml).
+
 ## Parallel Delegation with Background Agents
 
 `transfer_task` is **sequential** — the coordinator waits for the sub-agent to finish before continuing. When you need to fan out work to multiple agents at the same time, use the `background_agents` toolset instead.
@@ -191,7 +202,7 @@ The coordinator can then:
 
 1. **Dispatch** several tasks at once with `run_background_agent` — each returns a task ID immediately
 2. **Monitor** progress with `list_background_agents` or `view_background_agent`
-3. **Collect** results once tasks complete
+3. **Join** tasks and collect results with `wait_background_agents` — check each task's status before continuing
 4. **Cancel** tasks that are no longer needed with `stop_background_agent`
 
 ```bash
@@ -202,7 +213,10 @@ run_background_agent(agent="analyst", task="Analyze our current architecture")
 # Check on all tasks
 list_background_agents()
 
-# Read results when ready
+# Join both tasks using the IDs returned at dispatch
+wait_background_agents(task_ids=["agent_task_abc123", "agent_task_def456"])
+
+# Read an individual result if its join output was truncated
 view_background_agent(task_id="agent_task_abc123")
 ```
 
@@ -257,7 +271,7 @@ External references in `handoffs` and `force_handoff` carry the same per-run cos
 
 ## Harness-Backed Sub-Agents
 
-Sub-agents can be backed by external coding CLIs — Claude Code, Codex, opencode, or pi — instead of a model API. Add a `harness:` block in place of a `model:` field to create a harness sub-agent:
+Sub-agents can be backed by external coding CLIs — Claude Code, Codex, opencode, pi, or Command Code — instead of a model API. Add a `harness:` block in place of a `model:` field to create a harness sub-agent:
 
 ```yaml
 agents:

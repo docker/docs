@@ -108,8 +108,8 @@ capabilities:
       install:
         - command: |
             set -eu
-            chown 1000:1000 /home/agent/.company-cli
             if [ ! -e /home/agent/.company-cli/config.json ]; then
+              chown 1000:1000 /home/agent/.company-cli
               install -o 1000 -g 1000 -m 0644 /usr/share/company-cli/defaults.json /home/agent/.company-cli/config.json
             fi
           user: "0"
@@ -122,13 +122,22 @@ volume already has a configuration file, the hook leaves its contents intact.
 
 ### Configure the volume
 
-The volume keeps the tool's data across sandbox restarts. A replacement
-sandbox gets its own volume. This example allocates `1g` of space. If you
-omit `size`, `sbx` allocates `512m`.
+In local sandboxes, persistent volumes (`volume@1` with `tmpfs: false`)
+keep data across restarts, kit updates, and sandbox removal. Docker Sandboxes
+reattaches a volume when the sandbox name, kit source, and volume path match.
+Changing a volume path gives it separate storage, so keep paths stable across
+kit releases when you want users to retain their data.
 
-Use an install hook to set ownership and permissions for persistent volumes,
-as this example does. The volume capability's `mode` setting applies only
-to tmpfs mounts. See the upstream
+For published kits, changing a tag or digest retains the same kit source.
+For Git sources, the repository and kit subdirectory must stay the same;
+for local sources, the source directory must stay the same. Tmpfs contents
+are discarded when the sandbox stops.
+
+This example allocates `1g` of space. If you omit `size`, `sbx` allocates `512m`.
+
+Use an install hook when your tool needs specific ownership or permissions,
+as this example does. Make initialization preserve existing files and permissions
+when the volume is reused. See the upstream
 [volume definition](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/volume@1.md)
 for storage options.
 

@@ -47,7 +47,8 @@ options:
         Also remove this environment's bindings from the global credentials.yaml
     - name: skip-host-commands
       default_value: "false"
-      usage: Skip the host lifecycle commands the environment declares
+      usage: |
+        Skip host preRemove commands and disable owned host MCP commands; successful environment removal deletes their registrations
 inherited_options:
     - name: cloud
       default_value: "false"

@@ -17,7 +17,7 @@ The `docker agent serve api` command starts an HTTP server that exposes your age
 $ docker agent serve api agent.yaml
 
 # Custom listen address
-$ docker agent serve api agent.yaml --listen 0.0.0.0:8080
+$ docker agent serve api agent.yaml --listen 0.0.0.0:8080 --auth-token "$AGENT_TOKEN"
 
 # With session persistence
 $ docker agent serve api agent.yaml --session-db ./sessions.db
@@ -51,16 +51,20 @@ Each agent entry in the `GET /api/agents` response contains:
 | `multi`      | boolean         | `true` when the config defines more than one agent.                                           |
 | `commands`   | array of string | Sorted list of named command keys defined on the root agent. Omitted when no commands exist.  |
 
+### Remote agent sources
+
+For an agent loaded from a remote HTTP(S) configuration source, endpoints that need to load that source return `502 Bad Gateway` when fetching it fails. A missing configured agent returns `404 Not Found`; invalid source URLs or configuration return `500 Internal Server Error`.
+
 ### Sessions
 
 | Method   | Path                                | Description                                             |
 | -------- | ----------------------------------- | ------------------------------------------------------- |
-| `GET`    | `/api/sessions`                     | List all sessions                                       |
+| `GET`    | `/api/sessions`                     | List all sessions. Pass `?active=true` to return only runtimes attached to this server, with lightweight `working_dir` and `streaming` status and no session-history read. |
 | `POST`   | `/api/sessions`                     | Create a new session. Accepts an optional `title` field — when set, it is stored and LLM title generation is skipped. |
 | `GET`    | `/api/sessions/:id`                 | Get a session by ID (messages, tokens, permissions)     |
 | `GET`    | `/api/sessions/:id/status`          | Lightweight runtime state (streaming, title, agent, tokens). Requires an attached runtime. |
 | `GET`    | `/api/sessions/:id/snapshot`        | Full state in one call (stored fields + runtime state + `last_event_seq`) for gapless resync — see [Reconnecting without gaps](#reconnecting-without-gaps). |
-| `GET`    | `/api/sessions/:id/events`          | Live session event stream (SSE) with sequence numbers and replay. Available for a run attached via [`--listen`](#listen), or once a session has raised at least one out-of-band event (e.g. a background job's elicitation, answered via `POST .../elicitation`), which creates a session-scoped event log on demand carrying such out-of-band events — see [Session event stream](#session-event-stream-and-reconnection) for what each kind of log contains. |
+| `GET`    | `/api/sessions/:id/events`          | Live session event stream (SSE) with sequence numbers and replay. Available for a run attached via [`--listen`](#listen), or once a session has raised at least one out-of-band event (e.g. a background job's elicitation or an idle-session recall), which creates a session-scoped event log on demand carrying such out-of-band events — see [Session event stream](#session-event-stream-and-reconnection) for what each kind of log contains. |
 | `DELETE` | `/api/sessions/:id`                 | Delete a session                                        |
 | `PATCH`  | `/api/sessions/:id/title`           | Update session title                                    |
 | `PATCH`  | `/api/sessions/:id/permissions`     | Update session permissions                              |
@@ -110,6 +114,58 @@ curl -N -X POST http://localhost:8080/api/sessions/$SID/agent/team/reviewer \
   -d '{"messages":[{"role": "user", "content": "Review this PR"}]}'
 ```
 
+### Execution budgets
+
+API-created native runtimes honor the manifest's `budget` and agent-selected
+`budgets`. Consumption accumulates across requests and delegated work in the
+same live runtime. Streams report `budget_usage` and `budget_exceeded`; once a
+wallet is exhausted, further model calls charged to it stop without a
+continuation prompt. Configurations without budgets remain unlimited.
+
+Counters reset when the runtime is reconstructed, including after a server
+restart. Stored transcript usage and cost totals are retained but do not seed
+the new wallet. This is an execution limit, not a persistent quota, and does not
+apply to external `harness:` execution. See [Budget](../../configuration/budget/index.md).
+
+### Execution capabilities
+
+`team_info.available_agents` entries carry optional `execution_capabilities`.
+Local startup/refresh `agent_info` events include the same profile. The
+Agent Inspector displays it without starting tools or harness drivers.
+
+```json
+{
+  "mode": "native",
+  "tool_execution": "docker-agent",
+  "tool_approval": "docker-agent-policy",
+  "budget_supported": true,
+  "compaction_supported": true,
+  "mid_turn_steering_supported": true,
+  "prompt_hook_context_supported": true
+}
+```
+
+These are integration capabilities, **not enabled settings or security
+attestations**. Native approval can allow a call without prompting. Budget
+support requires the caller to install budget configuration; CLI and HTTP API
+currently do so, while ACP, MCP and A2A do not forward manifest wallets.
+Compaction support does not mean automatic compaction is enabled. Profiles
+refer to each agent's own execution: a native orchestrator's controls do not
+cover delegated external harness actions.
+
+Harness profiles use `mode: harness`, `tool_execution: harness-reported` and
+`tool_approval: external`, with the four support flags false. Reported harness
+tools have already run outside docker-agent's approval pipeline; `external`
+does not guarantee the harness prompts or enforces approvals. Harness lifecycle
+and before-LLM hooks still run, but native transient prompt-hook context is not
+forwarded into the harness's conversation.
+
+An absent profile means **unknown**, including on older servers and
+manifest-only remote inspection. Use `team_info` as the roster authority;
+model-only `agent_info` updates may omit the profile and must not clear a
+previously received one. Remote clients forward server metadata without
+inferring capabilities from model names or manifests.
+
 ### Health
 
 | Method | Path        | Description                               |
@@ -139,18 +195,25 @@ $ curl -N -X POST http://localhost:8080/api/sessions/$SID/agent/my-agent \
   -d '{"messages":[{"role":"user","content":"Hello!"}],"model":"openai/gpt-4o"}'
 
 # Response (SSE stream):
-data: {"type":"stream_started","session_id":"...","agent":"root"}
-data: {"type":"agent_choice","content":"Hello! How","agent":"root"}
-data: {"type":"agent_choice","content":" can I help","agent":"root"}
-data: {"type":"agent_choice","content":" you today?","agent":"root"}
-data: {"type":"stream_stopped","session_id":"...","agent":"root"}
+data: {"type":"stream_started","session_id":"...","agent_name":"root"}
+data: {"type":"agent_choice","content":"Hello! How","agent_name":"root"}
+data: {"type":"agent_choice","content":" can I help","agent_name":"root"}
+data: {"type":"agent_choice","content":" you today?","agent_name":"root"}
+data: {"type":"stream_stopped","session_id":"...","agent_name":"root"}
 ```
+
+Streaming deltas (`agent_choice`, `agent_choice_reasoning`, `partial_tool_call` and `tool_call_output`) carry only the new bytes, so clients must concatenate them. The server merges consecutive deltas for the same message or tool call that arrive within `--stream-coalesce-window` (50 ms by default) into a single event. This applies to this endpoint and to `GET /api/sessions/:id/events`. Merged events carry the same content in the same order. Only the chunk boundaries change, so don't rely on one event per model token. The first delta after a quiet spell is sent at once, and any other event is sent only after the deltas that preceded it.
+
+The `stream_stopped` event may include `finish_reason` with the terminal model result (such as `stop`, `length`, or `refusal`), even when that response has no content or usage. Its stream-level `reason` is `max_iterations` when execution stops at the iteration cap. These describe the root or sub-session identified by `session_id`; consumers should not combine child outcomes with the root result. Stream-stop delivery precedes session-end hooks, so draining the stream to closure remains the completion barrier.
 
 Event types include:
 
 - `stream_started` / `stream_stopped` — Agent execution lifecycle
 - `agent_choice` — Streamed text content (partial responses)
+- `agent_choice_reasoning` — Streamed reasoning content
+- `partial_tool_call` — Streamed tool-call arguments, keyed by `tool_call.id`. The first one also carries `tool_definition`
 - `tool_call` — Agent requesting tool execution
+- `tool_call_output` — Streamed output of a running tool, keyed by `tool_call_id`
 - `tool_call_confirmation` — Tool call waiting for user approval
 - `tool_call_response` — Tool execution result
 - `plan_changed` — A shared plan was created, updated, or deleted through the plan toolset. The payload carries the plan's `scope`, `name`, `action`, and `version` — never its content. Shared plans are deliberately process-global: every active stream served by the same process subscribes to the same shared plan notifier and receives the event regardless of which session performed the mutation, and the payload does not identify the mutating session (read the plan's `author` metadata for collaborative attribution).
@@ -187,33 +250,55 @@ $ curl -N -X POST http://localhost:8080/api/sessions/abc-123/agent/my-agent \
   -d '{"messages":[{"role":"user","content":"What files are in the current directory?"}]}'
 ```
 
+## HTTP security
+
+The REST API rejects cross-origin browser requests using Fetch Metadata and
+Origin checks, including bodyless approval toggles and OAuth callback posts.
+Reads are protected too: fetching an agent's tool count can start tool processes.
+JSON endpoints require `Content-Type: application/json` (optional media-type
+parameters are accepted); form and `text/plain` bodies are rejected with HTTP
+415. Native clients without browser headers remain supported.
+
+Unauthenticated TCP listeners accept only loopback IP addresses and `localhost`
+in the Host header to prevent DNS rebinding. Unix sockets and named pipes retain
+support for synthetic hostnames and rely on local access permissions. All
+non-loopback TCP listeners require `--auth-token`; clients must send it as
+`Authorization: Bearer <token>`. The `/health` and `/ready` probes remain exempt
+from bearer authentication. Reverse proxies must preserve these protections;
+forwarded headers do not authorize browser requests. For network deployments,
+use TLS or a trusted TLS-terminating proxy to protect the bearer token in transit.
+
+### Connecting with the CLI
+
+Use `--remote-auth-token` with `run --remote`, or set
+`DOCKER_AGENT_REMOTE_AUTH_TOKEN` to avoid putting the token in command-line
+arguments. The flag takes precedence over the environment variable.
+
+```bash
+$ export DOCKER_AGENT_REMOTE_AUTH_TOKEN='<server-token>'
+$ docker agent run --remote https://agent.example.com agent.yaml
+```
+
 ## CLI Flags
 
 ```bash
 docker agent serve api <agent-file>|<agents-dir> [flags]
 ```
 
-| Flag               | Default          | Description                                      |
-| ------------------ | ---------------- | ------------------------------------------------ |
-| `-l, --listen`     | `127.0.0.1:8080` | Address to listen on                             |
-| `--auth-token`     | (none)           | Bearer token required for all API requests. Leave empty to disable authentication (safe when listening on loopback interfaces only). Recommended when `--listen` binds to a network-reachable interface. |
-| `--max-request-size <bytes>` | `1048576` (1 MiB) | Maximum request body size in bytes. Requests whose body exceeds this limit are rejected with HTTP 413 (Request Entity Too Large) — see [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large) if you hit this. |
-| `--session-workingdir-root` | (none — unrestricted) | Confine the `working_dir` accepted by `POST /api/sessions` to this directory: after resolving symlinks, the requested directory must be the root or one of its descendants. By default any clean host directory is accepted — the intended behaviour for local single-user daemons that open arbitrary workspaces — but raw values containing `..` are always rejected. Set a root whenever the API serves callers that must not reach arbitrary host paths (multi-user or network-exposed deployments). |
-| `-s, --session-db` | `session.db`     | Path to the SQLite session database              |
-| `--pull-interval`  | `0` (disabled)   | Auto-pull OCI reference every N minutes          |
-| `--fake`           | (none)           | Replay AI responses from cassette file (testing) |
-| `--record`         | (none)           | Record AI API interactions to cassette file. Routes through `--models-gateway` when one is configured. |
-| `--mcp-oauth-redirect-uri` | (none)   | Public HTTPS URL advertised as the OAuth `redirect_uri` for unmanaged MCP OAuth flows. When set, Docker Agent drives PKCE and code exchange in-process and sends the full authorize URL to the client via elicitation. See [Remote MCP](../remote-mcp/index.md) for details. |
+See the [CLI reference](../cli/index.md#docker-agent-serve-api) for all flags, defaults, and shared runtime options.
+
+> [!WARNING]
+> `--auth-token` is required for non-loopback TCP listeners, including inherited TCP listeners. For multi-user or network-exposed deployments, also set `--session-workingdir-root` to confine the host directories callers can use for sessions.
 
 > [!NOTE]
 > **What `--max-request-size` does and doesn't cover**
 >
-> This is a finite, process-wide cap on one serialized inbound HTTP request body — it isn't a model context-window limit, and raising it doesn't increase what a provider/model accepts or how large a local attachment/prompt file can be. A larger cap also means the server buffers more memory per request from an unauthenticated or malicious client, so weigh that against your deployment's exposure. If a reverse proxy or gateway sits in front of this server, it may enforce its own, lower cap regardless of this flag. See [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large) for full diagnosis.
+> This is a finite, process-wide cap on one serialized inbound HTTP request body — it isn't a model context-window limit, and raising it doesn't increase what a provider/model accepts or how large a local attachment/prompt file can be. A larger cap also means the server buffers more memory per request from an unauthenticated or malicious client, so weigh that against your deployment's exposure. If a reverse proxy or gateway sits in front of this server, it may enforce its own, lower cap regardless of this flag. See [Troubleshooting: HTTP 413](../../guides/troubleshooting/index.md#http-413-request-body-too-large) for full diagnosis.
 
 > [!TIP]
 > **Live profiling (advanced)**
 >
-> For production diagnostics, set the `CAGENT_PPROF_ADDR` environment variable (or the hidden `--pprof-addr` flag) to a TCP address such as `127.0.0.1:6060`. Docker Agent will start a Go pprof HTTP server at `/debug/pprof/`, which you can query with `go tool pprof`. Use a loopback address — a non-loopback binding logs a security warning. This flag is intentionally hidden from `--help`.
+> For production diagnostics, set the `DOCKER_AGENT_PPROF_ADDR` environment variable (legacy `CAGENT_PPROF_ADDR` is also supported), or use the hidden `--pprof-addr` flag, with a TCP address such as `127.0.0.1:6060`. Docker Agent will start a Go pprof HTTP server at `/debug/pprof/`, which you can query with `go tool pprof`. Use a loopback address — a non-loopback binding logs a security warning. This flag is intentionally hidden from `--help`.
 
 > [!TIP]
 > **Multi-agent configs**
@@ -269,14 +354,25 @@ $ curl -X POST http://127.0.0.1:8080/api/sessions/$SID/followup \
 > [!NOTE]
 > **Discovering a run**
 >
-> Each run started with `--listen` writes a discovery record to `<data-dir>/runs/<pid>.json` containing its address and session id, so a supervising process can find a live run by session id, pid, or address.
+> Each run started with `--listen` writes a discovery record to `<data-dir>/runs/<pid>.json` containing its address and initial session id, so a supervising process can find a live run by session id, pid, or address. TUI tabs opened later are separate sessions attached to the same control plane; use `GET /api/sessions?active=true` on that address to enumerate them and read their `streaming` state without loading session history.
 
 > [!WARNING]
 > **This control plane has a fixed 1 MiB request-body cap and no built-in authentication**
 >
-> Unlike the standalone `docker agent serve api` process above, an attached run's `--listen` control plane exposes neither `--max-request-size` nor `--auth-token`: every request is capped at a fixed, non-configurable 1 MiB body (returning HTTP 413 above it — see [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large)), and there is no bearer token to require. If you need a configurable cap, built-in bearer auth, or a network-reachable listener, run a standalone `docker agent serve api` deployment instead. Otherwise, keep `--listen` on loopback, a unix socket, or behind an authenticating reverse proxy.
+> Unlike the standalone `docker agent serve api` process above, an attached run's `--listen` control plane exposes neither `--max-request-size` nor `--auth-token`: every request is capped at a fixed, non-configurable 1 MiB body (returning HTTP 413 above it — see [Troubleshooting: HTTP 413](../../guides/troubleshooting/index.md#http-413-request-body-too-large)), and there is no bearer token to require. If you need a configurable cap, built-in bearer auth, or a network-reachable listener, run a standalone `docker agent serve api` deployment instead. `--listen` only supports loopback TCP addresses or local sockets; non-loopback TCP listeners are rejected. An authenticating proxy can connect to a local listener.
 
 ## Session event stream and reconnection
+
+The Go remote client reconnects sequenced `/events` streams from the last received
+ID. After a replay gap, the remote TUI waits for an idle snapshot and recovers
+missing plain assistant text by message ID. Tool results, reasoning, and transient
+interaction events are not reconstructed; a warning reports this limitation.
+Ambiguous histories fail visibly instead of replaying answers twice.
+
+Foreground POST run streams are not automatically resubmitted after interruption:
+retrying a run could repeat tool side effects. A stream ending without a root
+`stream_stopped` event reports an incomplete-response error. Streaming requests
+are not subject to the metadata client's 30-second total timeout.
 
 `GET /api/sessions/:id/events` is a **Server-Sent Events** stream of the
 session's runtime events — `stream_started`, `agent_choice`, `tool_call`,
@@ -285,7 +381,7 @@ per-request stream returned by the agent-execution endpoint, it is
 session-scoped and survives across turns, so a client can watch a session for
 its whole lifetime. It is available for a run attached via
 [`--listen`](#listen), and — since a session-scoped event log is created on
-demand the first time a session raises an out-of-band event, such as an
+demand the first time a session runs an idle recall or raises an out-of-band event, such as an
 `elicitation_request` from a background job — for any API-created session
 that has produced at least one (see the
 [Sessions endpoint table](#sessions) above). The two kinds of log differ in

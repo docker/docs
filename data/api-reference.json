@@ -28959,6 +28959,843 @@
     },
     {
       "connection": "hosted",
+      "description": "Retrieve Docker AI Governance audit events for an organization.\n\nThe API returns cloud-delivered governance records in reverse chronological\norder. Use filters to investigate policy decisions, principals, resources,\nsessions, and agents. Results use cursor-based pagination.\n\nSend an Organization Access Token (OAT) with the **View audit logs**\npermission as the bearer token. Personal Access Tokens (PATs) and Docker\naccount session tokens aren't supported. The organization in the request\npath must match the organization associated with the OAT.\n\nAn AI Governance subscription and Docker Cloud audit delivery are required.\n\nThe API and gateway each enforce a limit of 5 requests per second per\norganization. All clients and tokens in an organization share these limits,\nand each pagination request counts. The gateway also limits requests to\n600 per minute per source IP address. Gateway platform limits also apply.\nApplication rate-limit responses report the configured quota and window.\n",
+      "diagnostics": [],
+      "digest": "3202142af3feb8c0350e826109c168c50e1d9d41b51025ab4d08cfeb62bb9122",
+      "exampleCount": 25,
+      "experimental": false,
+      "guides": [
+        "/manuals/ai/sandboxes/governance/audit/api.md"
+      ],
+      "id": "ai-governance-audit-logs",
+      "manual": "/manuals/ai/sandboxes/governance/audit/",
+      "operations": [
+        {
+          "acceptMedia": "application/json",
+          "curl": "curl \\\n  --request GET \\\n  --header \"Authorization: Bearer ${TOKEN}\" \\\n  --header 'Accept: application/json' \\\n  'https://api.docker.com/v2/auditlogs/governance/my-org?from=2026-08-01T00%3A00%3A00Z\u0026to=2026-08-25T23%3A59%3A59Z\u0026audit_session_id=8a3bc076-79d0-4502-baf3-cc6ad35fb578\u0026username=jordandoe\u0026decision=AUDIT_DECISION_DENY\u0026enforcement_mode=enforce\u0026action_type=network_egress\u0026query=network\u0026resource_id=example.com\u0026agent=claude\u0026page_size=25'",
+          "curlNotes": [],
+          "deprecated": null,
+          "description": "Returns audit events for the organization in reverse chronological\norder. Pass `next_page_token` from one response as `page_token` in the\nnext request to continue listing events.\n\nEvery request covers a time range of 30 days or less. If `to` is\nomitted, it defaults to the request time. If `from` is omitted, it\ndefaults to 30 days before `to`. `from` must be earlier than `to`.\nText search uses the same defaults and requires at least three\nbytes after trimming whitespace.\n\nThe page token preserves the resolved time range. Keep other filters\nunchanged on later pages. Omit `from` and `to` or supply timestamps that\nmatch the token's range.\n",
+          "id": "listAuditEvents",
+          "line": 45,
+          "method": "GET",
+          "parameters": [
+            {
+              "description": "Organization name. The value must match the organization associated with the OAT.",
+              "example": "my-org",
+              "in": "path",
+              "name": "org_name",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/0",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "description": "Include events created at or after this RFC 3339 timestamp. Defaults to\n30 days before the effective `to` on the first page. Must be earlier\nthan `to`, with a range of no more than 30 days. On later pages, omit\nthis parameter or use the timestamp preserved in the page token.\n",
+              "example": "2026-08-01T00:00:00Z",
+              "in": "query",
+              "name": "from",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/1",
+              "required": false,
+              "schema": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            {
+              "description": "Include events created at or before this RFC 3339 timestamp. Defaults\nto the request time on the first page. On later pages, omit this\nparameter or use the timestamp preserved in the page token.\n",
+              "example": "2026-08-25T23:59:59Z",
+              "in": "query",
+              "name": "to",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/2",
+              "required": false,
+              "schema": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            {
+              "description": "Return events from this audit session.",
+              "example": "8a3bc076-79d0-4502-baf3-cc6ad35fb578",
+              "in": "query",
+              "name": "audit_session_id",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/3",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "description": "Return events associated with this Docker username.",
+              "example": "jordandoe",
+              "in": "query",
+              "name": "username",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/4",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "description": "Return events with this exact audit decision value.",
+              "example": "AUDIT_DECISION_DENY",
+              "in": "query",
+              "name": "decision",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/5",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "description": "Return events with this exact enforcement mode, such as `audit`, `warn`, or `enforce`.",
+              "example": "enforce",
+              "in": "query",
+              "name": "enforcement_mode",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/6",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "description": "Return events with this exact action type.",
+              "example": "network_egress",
+              "in": "query",
+              "name": "action_type",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/7",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "description": "Case-insensitive text search across username, action type, decision, and\nevent type. Uses the same default time range as other list requests.\nThe trimmed value must be between 3 and 256 bytes.\n",
+              "example": "network",
+              "in": "query",
+              "name": "query",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/8",
+              "required": false,
+              "schema": {
+                "maxLength": 256,
+                "type": "string"
+              }
+            },
+            {
+              "description": "Case-insensitive prefix match against the resource ID in the event payload. The trimmed value must not exceed 256 bytes.",
+              "example": "example.com",
+              "in": "query",
+              "name": "resource_id",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/9",
+              "required": false,
+              "schema": {
+                "maxLength": 256,
+                "type": "string"
+              }
+            },
+            {
+              "description": "Exact match against the agent in the event payload. The trimmed value must not exceed 256 bytes.",
+              "example": "claude",
+              "in": "query",
+              "name": "agent",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/10",
+              "required": false,
+              "schema": {
+                "maxLength": 256,
+                "type": "string"
+              }
+            },
+            {
+              "description": "Number of events to return. Defaults to 25; 0 also uses the default.\nValues above 100 are capped at 100. Negative values are rejected.\n",
+              "example": 25,
+              "in": "query",
+              "name": "page_size",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/11",
+              "required": false,
+              "schema": {
+                "default": 25,
+                "format": "int32",
+                "maximum": 2147483647,
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            {
+              "description": "Opaque cursor from `next_page_token` in the previous response. Preserves the resolved time range; pass it unchanged.",
+              "in": "query",
+              "name": "page_token",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/parameters/12",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "path": "/v2/auditlogs/governance/{org_name}",
+          "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get",
+          "raw": {
+            "description": "Returns audit events for the organization in reverse chronological\norder. Pass `next_page_token` from one response as `page_token` in the\nnext request to continue listing events.\n\nEvery request covers a time range of 30 days or less. If `to` is\nomitted, it defaults to the request time. If `from` is omitted, it\ndefaults to 30 days before `to`. `from` must be earlier than `to`.\nText search uses the same defaults and requires at least three\nbytes after trimming whitespace.\n\nThe page token preserves the resolved time range. Keep other filters\nunchanged on later pages. Omit `from` and `to` or supply timestamps that\nmatch the token's range.\n",
+            "operationId": "listAuditEvents",
+            "parameters": [
+              {
+                "$ref": "#/components/parameters/OrgName"
+              },
+              {
+                "$ref": "#/components/parameters/From"
+              },
+              {
+                "$ref": "#/components/parameters/To"
+              },
+              {
+                "$ref": "#/components/parameters/AuditSessionID"
+              },
+              {
+                "$ref": "#/components/parameters/Username"
+              },
+              {
+                "$ref": "#/components/parameters/Decision"
+              },
+              {
+                "$ref": "#/components/parameters/EnforcementMode"
+              },
+              {
+                "$ref": "#/components/parameters/ActionType"
+              },
+              {
+                "$ref": "#/components/parameters/Query"
+              },
+              {
+                "$ref": "#/components/parameters/ResourceID"
+              },
+              {
+                "$ref": "#/components/parameters/Agent"
+              },
+              {
+                "$ref": "#/components/parameters/PageSize"
+              },
+              {
+                "$ref": "#/components/parameters/PageToken"
+              }
+            ],
+            "responses": {
+              "200": {
+                "content": {
+                  "application/json": {
+                    "examples": {
+                      "default": {
+                        "value": {
+                          "events": [
+                            {
+                              "action_type": "network_egress",
+                              "audit_event_id": "95e7257f-93c9-4f29-bde7-88830e2dae80",
+                              "audit_session_id": "8a3bc076-79d0-4502-baf3-cc6ad35fb578",
+                              "category": "AUDIT_CATEGORY_EVALUATION",
+                              "created_at": "2026-08-25T18:42:31.123Z",
+                              "decision": "AUDIT_DECISION_DENY",
+                              "enforcement_mode": "enforce",
+                              "event_type": "docker.marlin.audit.event.v1.AuditRecord",
+                              "ingested_at": "2026-08-25T18:42:31.456Z",
+                              "org_id": "9f8e7d6c-5b4a-3210-fedc-ba9876543210",
+                              "payload": {
+                                "agent": "claude",
+                                "network_egress": {
+                                  "protocol": "tcp"
+                                },
+                                "resource_id": "example.com:443"
+                              },
+                              "username": "jordandoe"
+                            }
+                          ],
+                          "next_page_token": "eyJ0cyI6IjIwMjYtMDgtMjVUMTg6NDI6MzEuMTIzWiIsImVpZCI6Ijk1ZTcyNTdmLTkzYzktNGYyOS1iZGU3LTg4ODMwZTJkYWU4MCIsImZyb20iOiIyMDI2LTA4LTAxVDAwOjAwOjAwWiIsInRvIjoiMjAyNi0wOC0yNVQyMzo1OTo1OVoifQ"
+                        }
+                      }
+                    },
+                    "schema": {
+                      "$ref": "#/components/schemas/ListAuditEventsResponse"
+                    }
+                  }
+                },
+                "description": "Paginated audit events."
+              },
+              "400": {
+                "$ref": "#/components/responses/BadRequest"
+              },
+              "401": {
+                "$ref": "#/components/responses/Unauthenticated"
+              },
+              "403": {
+                "$ref": "#/components/responses/Forbidden"
+              },
+              "408": {
+                "$ref": "#/components/responses/RequestTimeout"
+              },
+              "429": {
+                "$ref": "#/components/responses/RateLimited"
+              },
+              "500": {
+                "$ref": "#/components/responses/InternalError"
+              },
+              "503": {
+                "$ref": "#/components/responses/ServiceUnavailable"
+              }
+            },
+            "summary": "List audit events",
+            "tags": [
+              "audit-events"
+            ]
+          },
+          "references": [
+            {
+              "ref": "#/components/parameters/ActionType",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/Agent",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/AuditSessionID",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/Decision",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/EnforcementMode",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/From",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/OrgName",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/PageSize",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/PageToken",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/Query",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/ResourceID",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/To",
+              "url": null
+            },
+            {
+              "ref": "#/components/parameters/Username",
+              "url": null
+            },
+            {
+              "ref": "#/components/responses/BadRequest",
+              "url": null
+            },
+            {
+              "ref": "#/components/responses/Forbidden",
+              "url": null
+            },
+            {
+              "ref": "#/components/responses/InternalError",
+              "url": null
+            },
+            {
+              "ref": "#/components/responses/RateLimited",
+              "url": null
+            },
+            {
+              "ref": "#/components/responses/RequestTimeout",
+              "url": null
+            },
+            {
+              "ref": "#/components/responses/ServiceUnavailable",
+              "url": null
+            },
+            {
+              "ref": "#/components/responses/Unauthenticated",
+              "url": null
+            },
+            {
+              "ref": "#/components/schemas/ListAuditEventsResponse",
+              "url": "/reference/api/ai-governance-audit-logs/latest/schemas/ListAuditEventsResponse/"
+            }
+          ],
+          "requestSchema": null,
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "securitySchemes": {
+            "bearerAuth": {
+              "description": "A raw Organization Access Token with the **View audit logs** permission.\nPass the OAT in the `Authorization: Bearer \u003cOAT\u003e` header. Don't exchange\nthe OAT for a Docker account session token. PATs aren't supported.\n",
+              "scheme": "bearer",
+              "type": "http"
+            }
+          },
+          "servers": [
+            {
+              "url": "https://api.docker.com"
+            }
+          ],
+          "summary": "List audit events",
+          "tags": [
+            "audit-events"
+          ],
+          "url": "/reference/api/ai-governance-audit-logs/latest/operations/listAuditEvents/",
+          "variants": [
+            {
+              "description": "Paginated audit events.",
+              "direction": "Response",
+              "examples": [
+                {
+                  "language": "json",
+                  "name": "default",
+                  "text": "{\n  \"events\": [\n    {\n      \"action_type\": \"network_egress\",\n      \"audit_event_id\": \"95e7257f-93c9-4f29-bde7-88830e2dae80\",\n      \"audit_session_id\": \"8a3bc076-79d0-4502-baf3-cc6ad35fb578\",\n      \"category\": \"AUDIT_CATEGORY_EVALUATION\",\n      \"created_at\": \"2026-08-25T18:42:31.123Z\",\n      \"decision\": \"AUDIT_DECISION_DENY\",\n      \"enforcement_mode\": \"enforce\",\n      \"event_type\": \"docker.marlin.audit.event.v1.AuditRecord\",\n      \"ingested_at\": \"2026-08-25T18:42:31.456Z\",\n      \"org_id\": \"9f8e7d6c-5b4a-3210-fedc-ba9876543210\",\n      \"payload\": {\n        \"agent\": \"claude\",\n        \"network_egress\": {\n          \"protocol\": \"tcp\"\n        },\n        \"resource_id\": \"example.com:443\"\n      },\n      \"username\": \"jordandoe\"\n    }\n  ],\n  \"next_page_token\": \"eyJ0cyI6IjIwMjYtMDgtMjVUMTg6NDI6MzEuMTIzWiIsImVpZCI6Ijk1ZTcyNTdmLTkzYzktNGYyOS1iZGU3LTg4ODMwZTJkYWU4MCIsImZyb20iOiIyMDI2LTA4LTAxVDAwOjAwOjAwWiIsInRvIjoiMjAyNi0wOC0yNVQyMzo1OTo1OVoifQ\"\n}",
+                  "value": {
+                    "events": [
+                      {
+                        "action_type": "network_egress",
+                        "audit_event_id": "95e7257f-93c9-4f29-bde7-88830e2dae80",
+                        "audit_session_id": "8a3bc076-79d0-4502-baf3-cc6ad35fb578",
+                        "category": "AUDIT_CATEGORY_EVALUATION",
+                        "created_at": "2026-08-25T18:42:31.123Z",
+                        "decision": "AUDIT_DECISION_DENY",
+                        "enforcement_mode": "enforce",
+                        "event_type": "docker.marlin.audit.event.v1.AuditRecord",
+                        "ingested_at": "2026-08-25T18:42:31.456Z",
+                        "org_id": "9f8e7d6c-5b4a-3210-fedc-ba9876543210",
+                        "payload": {
+                          "agent": "claude",
+                          "network_egress": {
+                            "protocol": "tcp"
+                          },
+                          "resource_id": "example.com:443"
+                        },
+                        "username": "jordandoe"
+                      }
+                    ],
+                    "next_page_token": "eyJ0cyI6IjIwMjYtMDgtMjVUMTg6NDI6MzEuMTIzWiIsImVpZCI6Ijk1ZTcyNTdmLTkzYzktNGYyOS1iZGU3LTg4ODMwZTJkYWU4MCIsImZyb20iOiIyMDI2LTA4LTAxVDAwOjAwOjAwWiIsInRvIjoiMjAyNi0wOC0yNVQyMzo1OTo1OVoifQ"
+                  }
+                }
+              ],
+              "headers": null,
+              "media": "application/json",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/responses/200/content/application~1json",
+              "required": null,
+              "schema": {
+                "$ref": "#/components/schemas/ListAuditEventsResponse"
+              },
+              "status": "200"
+            },
+            {
+              "description": "Invalid timestamp, page size, page token, filter, or search window.",
+              "direction": "Response",
+              "examples": [
+                {
+                  "language": "json",
+                  "name": "default",
+                  "text": "{\n  \"error\": \"invalid argument: from must be RFC3339\"\n}",
+                  "value": {
+                    "error": "invalid argument: from must be RFC3339"
+                  }
+                }
+              ],
+              "headers": null,
+              "media": "application/json",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/responses/400/content/application~1json",
+              "required": null,
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              },
+              "status": "400"
+            },
+            {
+              "description": "Missing, malformed, invalid, or expired OAT.",
+              "direction": "Response",
+              "examples": [
+                {
+                  "language": "json",
+                  "name": "default",
+                  "text": "{\n  \"error\": \"invalid or expired token\"\n}",
+                  "value": {
+                    "error": "invalid or expired token"
+                  }
+                }
+              ],
+              "headers": null,
+              "media": "application/json",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/responses/401/content/application~1json",
+              "required": null,
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              },
+              "status": "401"
+            },
+            {
+              "description": "The OAT lacks permission, lacks organization identity, or belongs to another organization.",
+              "direction": "Response",
+              "examples": [
+                {
+                  "language": "json",
+                  "name": "default",
+                  "text": "{\n  \"error\": \"insufficient permissions\"\n}",
+                  "value": {
+                    "error": "insufficient permissions"
+                  }
+                }
+              ],
+              "headers": null,
+              "media": "application/json",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/responses/403/content/application~1json",
+              "required": null,
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              },
+              "status": "403"
+            },
+            {
+              "description": "Request deadline exceeded.",
+              "direction": "Response",
+              "examples": [
+                {
+                  "language": "json",
+                  "name": "Example",
+                  "text": "{\n  \"error\": \"request deadline exceeded\"\n}",
+                  "value": {
+                    "error": "request deadline exceeded"
+                  }
+                }
+              ],
+              "headers": null,
+              "media": "application/json",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/responses/408/content/application~1json",
+              "required": null,
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              },
+              "status": "408"
+            },
+            {
+              "description": "The organization or source IP address exceeded a request limit.\nApplication responses include the configured quota, window, and stable\nerror code. Gateway responses can use a different body and omit these\nfields. Honor `Retry-After` when present; otherwise use exponential\nbackoff.\n",
+              "direction": "Response",
+              "examples": [
+                {
+                  "language": "json",
+                  "name": "application",
+                  "text": "{\n  \"code\": \"rate_limit_exceeded\",\n  \"error\": \"Your organization has reached the audit API request limit. This quota is shared across all clients and tokens in your organization; each pagination request counts. Request limit: 5 per 1 seconds. Retry after 1 seconds.\",\n  \"limit\": 5,\n  \"policy\": \"audit_governance\",\n  \"retry_after_seconds\": 1,\n  \"scope\": \"organization\",\n  \"window_seconds\": 1\n}",
+                  "value": {
+                    "code": "rate_limit_exceeded",
+                    "error": "Your organization has reached the audit API request limit. This quota is shared across all clients and tokens in your organization; each pagination request counts. Request limit: 5 per 1 seconds. Retry after 1 seconds.",
+                    "limit": 5,
+                    "policy": "audit_governance",
+                    "retry_after_seconds": 1,
+                    "scope": "organization",
+                    "window_seconds": 1
+                  }
+                }
+              ],
+              "headers": {
+                "Retry-After": {
+                  "description": "Seconds to wait before retrying. Application responses include\nthis header when the reset time is known, rounded up to whole\nseconds. It matches `retry_after_seconds`. Gateway responses can\nomit this header.\n",
+                  "schema": {
+                    "minimum": 1,
+                    "type": "integer"
+                  }
+                }
+              },
+              "media": "application/json",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/responses/429/content/application~1json",
+              "required": null,
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ApplicationRateLimitError"
+                  },
+                  {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                ]
+              },
+              "status": "429"
+            },
+            {
+              "description": "Unexpected server error.",
+              "direction": "Response",
+              "examples": [
+                {
+                  "language": "json",
+                  "name": "default",
+                  "text": "{\n  \"error\": \"internal error\"\n}",
+                  "value": {
+                    "error": "internal error"
+                  }
+                }
+              ],
+              "headers": null,
+              "media": "application/json",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/responses/500/content/application~1json",
+              "required": null,
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              },
+              "status": "500"
+            },
+            {
+              "description": "The audit store or an authentication dependency is unavailable, or the\nsearch timed out. Retry with exponential backoff. For a search timeout,\nuse a narrower time range or a simpler query.\n",
+              "direction": "Response",
+              "examples": [
+                {
+                  "language": "json",
+                  "name": "searchTimeout",
+                  "text": "{\n  \"error\": \"search timed out; try a narrower time range or simpler query\"\n}",
+                  "value": {
+                    "error": "search timed out; try a narrower time range or simpler query"
+                  }
+                },
+                {
+                  "language": "json",
+                  "name": "storeUnavailable",
+                  "text": "{\n  \"error\": \"service temporarily unavailable\"\n}",
+                  "value": {
+                    "error": "service temporarily unavailable"
+                  }
+                }
+              ],
+              "headers": null,
+              "media": "application/json",
+              "pointer": "/paths/~1v2~1auditlogs~1governance~1{org_name}/get/responses/503/content/application~1json",
+              "required": null,
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              },
+              "status": "503"
+            }
+          ]
+        }
+      ],
+      "owner": "docker/docs",
+      "product": "ai-governance",
+      "schemaCount": 26,
+      "schemaURLs": {
+        "#/components/schemas/ApplicationRateLimitError": "/reference/api/ai-governance-audit-logs/latest/schemas/ApplicationRateLimitError/",
+        "#/components/schemas/AuditEvent": "/reference/api/ai-governance-audit-logs/latest/schemas/AuditEvent/",
+        "#/components/schemas/Error": "/reference/api/ai-governance-audit-logs/latest/schemas/Error/",
+        "#/components/schemas/ListAuditEventsResponse": "/reference/api/ai-governance-audit-logs/latest/schemas/ListAuditEventsResponse/"
+      },
+      "schemas": [
+        {
+          "name": "ApplicationRateLimitError",
+          "pointer": "/components/schemas/ApplicationRateLimitError",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Error"
+              },
+              {
+                "properties": {
+                  "code": {
+                    "description": "Stable application rate-limit error code.",
+                    "enum": [
+                      "rate_limit_exceeded"
+                    ],
+                    "type": "string"
+                  },
+                  "limit": {
+                    "description": "Configured request quota.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "policy": {
+                    "enum": [
+                      "audit_governance"
+                    ],
+                    "type": "string"
+                  },
+                  "retry_after_seconds": {
+                    "description": "Seconds until the quota resets, rounded up. Omitted when the reset time is unknown.",
+                    "format": "int64",
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "scope": {
+                    "description": "All clients and tokens in the organization share this quota.",
+                    "enum": [
+                      "organization"
+                    ],
+                    "type": "string"
+                  },
+                  "window_seconds": {
+                    "description": "Duration of the quota window in seconds.",
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "code",
+                  "policy",
+                  "scope",
+                  "limit",
+                  "window_seconds"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "url": "/reference/api/ai-governance-audit-logs/latest/schemas/ApplicationRateLimitError/"
+        },
+        {
+          "name": "AuditEvent",
+          "pointer": "/components/schemas/AuditEvent",
+          "schema": {
+            "properties": {
+              "action_type": {
+                "description": "Action-specific payload discriminator.",
+                "example": "network_egress",
+                "type": "string"
+              },
+              "audit_event_id": {
+                "description": "Unique audit event ID.",
+                "format": "uuid",
+                "type": "string"
+              },
+              "audit_session_id": {
+                "description": "Session that produced the event.",
+                "type": "string"
+              },
+              "category": {
+                "description": "Audit event category.",
+                "example": "AUDIT_CATEGORY_EVALUATION",
+                "type": "string"
+              },
+              "created_at": {
+                "description": "Time Docker recorded the event.",
+                "format": "date-time",
+                "type": "string"
+              },
+              "decision": {
+                "description": "Governance decision for evaluation records.",
+                "example": "AUDIT_DECISION_DENY",
+                "type": "string"
+              },
+              "enforcement_mode": {
+                "description": "Enforcement mode in effect for the decision.",
+                "example": "enforce",
+                "type": "string"
+              },
+              "event_type": {
+                "description": "Fully qualified event schema name.",
+                "type": "string"
+              },
+              "ingested_at": {
+                "description": "Time Docker ingested the event into cloud storage.",
+                "format": "date-time",
+                "type": "string"
+              },
+              "org_id": {
+                "description": "ID of the organization that owns the event.",
+                "format": "uuid",
+                "type": "string"
+              },
+              "payload": {
+                "additionalProperties": true,
+                "description": "Event-specific audit record fields.",
+                "type": "object"
+              },
+              "username": {
+                "description": "Docker username associated with the event.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "audit_event_id",
+              "org_id",
+              "event_type"
+            ],
+            "type": "object"
+          },
+          "url": "/reference/api/ai-governance-audit-logs/latest/schemas/AuditEvent/"
+        },
+        {
+          "name": "Error",
+          "pointer": "/components/schemas/Error",
+          "schema": {
+            "properties": {
+              "error": {
+                "description": "Human-readable error message.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "error"
+            ],
+            "type": "object"
+          },
+          "url": "/reference/api/ai-governance-audit-logs/latest/schemas/Error/"
+        },
+        {
+          "name": "ListAuditEventsResponse",
+          "pointer": "/components/schemas/ListAuditEventsResponse",
+          "schema": {
+            "properties": {
+              "events": {
+                "items": {
+                  "$ref": "#/components/schemas/AuditEvent"
+                },
+                "type": "array"
+              },
+              "next_page_token": {
+                "description": "Opaque cursor for the next page. Empty when no more events remain.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "events",
+              "next_page_token"
+            ],
+            "type": "object"
+          },
+          "url": "/reference/api/ai-governance-audit-logs/latest/schemas/ListAuditEventsResponse/"
+        }
+      ],
+      "securitySchemes": {
+        "bearerAuth": {
+          "description": "A raw Organization Access Token with the **View audit logs** permission.\nPass the OAT in the `Authorization: Bearer \u003cOAT\u003e` header. Don't exchange\nthe OAT for a Docker account session token. PATs aren't supported.\n",
+          "scheme": "bearer",
+          "type": "http"
+        }
+      },
+      "servers": [
+        {
+          "url": "https://api.docker.com"
+        }
+      ],
+      "source": "content/reference/api/ai-governance-audit-logs/api.yaml",
+      "sourceURL": "/reference/api/ai-governance-audit-logs/api.yaml",
+      "tags": [
+        {
+          "description": "Retrieve Docker AI Governance audit events.",
+          "kind": "nav",
+          "name": "audit-events",
+          "summary": "Audit events"
+        }
+      ],
+      "title": "AI Governance Audit Logs",
+      "url": "/reference/api/ai-governance-audit-logs/latest/",
+      "version": "1"
+    },
+    {
+      "connection": "hosted",
       "description": "Use this API to create sandboxes, run processes, work with files, and manage sandbox resources. Start with a kit through the SDK, or use the HTTP operations here directly.\n\nManagement requests use an Authorization bearer token. File and process requests go to the sandbox endpoint in core.endpoint.uri and require a short-lived scoped endpoint credential, not the management token. The SDK obtains that credential for you. Each operation also checks its declared permissions. Direct Unix socket access uses the operating system's socket access controls instead of HTTP authentication. Interactive WebSocket operations describe their supported credential transports separately.\n\nThe Docker Cloud API base URL is https://connect.docker.com/sandboxes. Append each /v1 path without removing the base URL's path prefix. For sandbox endpoint operations, use the sandbox endpoint as the base URL instead.\n\nOperations list their success and error responses. A 202 response means work is still in progress; read the resource until it reaches the expected state. Errors contain a stable code, a message, and optional details. Inspect the code as well as the HTTP status.\n\nSend the current ETag in If-Match when an operation requires it. Operations that accept Idempotency-Key use that HTTP header to identify retries: the same key and payload return the first result; a different payload fails. Keys are retained for at least 24 hours.\n\nLists use pageSize and pageToken. Continue with nextPageToken until it is empty. Supported filters and ordering are listed on each operation. Resource names contain immutable identifiers; displayName is a label. A 64-bit integer is returned as a JSON string; inputs accept a number or a string.",
       "diagnostics": [],
       "digest": "e57c2e2d328a3fde9d906ba051cf310ab484b2bdaf98d29501d038f5aeae29ce",

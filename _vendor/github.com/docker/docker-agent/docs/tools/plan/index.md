@@ -132,7 +132,7 @@ See [`examples/shared_plan.yaml`](https://github.com/docker/docker-agent/blob/ma
 
 ## Managing plans from the host
 
-Shared plans can also be inspected and managed outside a session with the [`docker agent plans`](../../features/cli/index.md#docker-agent-plans) command group: list, get, create, update, set status, export, and delete — with the same optimistic-locking semantics as the tools (`--expected-version` guards a write and a stale version fails with exit code 3; `--force` writes unconditionally). Session plans (the per-session "draft, review, execute" plan) can be listed, read, and exported through the same commands but stay owned by their session and cannot be mutated from the host.
+Shared plans can also be inspected and managed outside a session with the [`docker agent plans`](../../features/cli/index.md#docker-agent-plans) command group: list, get, create, update, set status, export, and delete — with the same optimistic-locking semantics as the tools (`--expected-version` guards a write and a stale version fails with exit code 3; `--force` writes unconditionally).
 
 ```bash
 $ docker agent plans list
@@ -142,7 +142,7 @@ $ docker agent plans update release --file ./plan.md --expected-version 1
 
 ### The `/plans` browser in the TUI
 
-Inside the full-screen TUI, the `/plans` slash command (also in the <kbd>Ctrl</kbd>+<kbd>K</kbd> command palette) opens a plan browser over the same store the agents use, so changes made by agents mid-session appear immediately. The list shows every shared plan plus the current session's [session plan](../session_plan/index.md), with each plan's scope, identity (name, or session ID for the session plan), status, version (`-` for the unversioned session plan), last update time, and title.
+Inside the full-screen TUI, the `/plans` slash command (also in the <kbd>Ctrl</kbd>+<kbd>K</kbd> command palette) opens a plan browser over the same store the agents use, so changes made by agents in the same process appear immediately. The list shows every shared plan with its scope, name, status, version, last update time, and title.
 
 Keybindings:
 
@@ -150,15 +150,30 @@ Keybindings:
 | --- | ------ |
 | <kbd>↑</kbd>/<kbd>↓</kbd>, mouse | Navigate; <kbd>Enter</kbd> or double-click opens a detail view with the full metadata and scrollable markdown content |
 | <kbd>/</kbd> | Filter by name, title, status, or scope (<kbd>Esc</kbd> leaves filter mode) |
-| <kbd>r</kbd> | Refresh from storage |
-| <kbd>x</kbd> | Export the selected plan to `<name>.md` (shared) or `session-plan-<short-id>.md` (session) in the session's working directory. An existing file is never overwritten — the export fails with a notification instead |
-| <kbd>s</kbd> | Set a shared plan's free-form status via a small input dialog |
-| <kbd>e</kbd> | Edit a shared plan's content in `$VISUAL`/`$EDITOR` |
-| <kbd>n</kbd> | Create a new shared plan: pick a name, then draft the content in `$VISUAL`/`$EDITOR` (an empty draft aborts) |
-| <kbd>d</kbd> | Delete a shared plan after a confirmation that names the plan and its version |
+| <kbd>r</kbd> | Refresh from storage in the browser or detail view, including changes from other processes |
+| <kbd>x</kbd> | Export the selected plan to `<name>.md` in the session's working directory. An existing file is never overwritten — the export fails with a notification instead |
+| <kbd>s</kbd> | Set a plan's free-form status via a small input dialog |
+| <kbd>e</kbd> | Edit a plan's content in `$VISUAL`/`$EDITOR` |
+| <kbd>n</kbd> | Create a new plan: pick a name, then draft the content in `$VISUAL`/`$EDITOR` (an empty draft aborts) |
+| <kbd>d</kbd> | Delete a plan after a confirmation that names the plan and its version |
 | <kbd>Esc</kbd> | Close the detail view / the browser |
 
-Every mutation is guarded by the version shown on screen (the same optimistic locking as `last_known_revision`): if an agent changed the plan in the meantime, the write is rejected, a notification reports the current version, the newer content is left intact and re-read into the browser, and an edit draft is kept in a temp file so nothing is lost. Session plans are read-only here — status, edit, and delete report why instead of attempting the write. The browser also refreshes live when agents in the same process write, re-status, or delete plans (and when this session's agent updates its session plan); in the lean TUI, which has no overlays, `/plans` is unavailable.
+Every mutation is guarded by the version shown on screen (the same optimistic locking as `last_known_revision`): if an agent changed the plan in the meantime, the write is rejected, a notification reports the current version, the newer content is left intact and re-read into the browser, and an edit draft is kept in a temp file so nothing is lost. The browser also refreshes live when agents in the same process write, re-status, or delete plans. Changes from other processes require an explicit refresh; there is no automatic polling or file watcher. In the lean TUI, which has no overlays, `/plans` is unavailable.
+
+### Optional Plans sidebar
+
+Enable **Plans** under `/settings` → **Appearance** → **Sidebar sections** to keep shared plans visible alongside the chat. It is off by default and saved as a global user preference, separate from agent YAML:
+
+```yaml
+# ~/.config/cagent/config.yaml
+settings:
+  layout:
+    show_plans: true
+```
+
+The full left/right sidebar lists up to five shared plans by last update, newest first (unknown timestamps last, ties by name), plus **All plans** to open the browser. The free-form status is displayed without an active/completed classification. Single left-click a plan row to open it directly in `$VISUAL`/`$EDITOR` at the displayed revision; stale revisions are rejected and newer content is preserved. Editing changes only the document — it never approves the plan, executes its steps, or authorizes tool writes.
+
+Top/bottom layouts and narrow or collapsed sidebar bands show a compact `Plans (N) - open /plans` count and browser shortcut instead of individual rows. Plan events in the current process and local edits refresh the shared metadata; use the sidebar's **Refresh plans** action or <kbd>r</kbd> in the browser/detail view for cross-process changes. The section is hidden in lean mode and with `--sidebar=false`; `/plans` and the command palette remain available in the full TUI even when the section is off. See [Plans Sidebar](../../features/tui/index.md#plans-sidebar) for details.
 
 > [!TIP]
 > **Plan vs. Todo vs. Tasks**

@@ -18,7 +18,6 @@ Version numbers identify the first `sbx` release that supports the
 capability, subject to the restrictions in the table. Limited support means
 that Docker Sandboxes applies only part of the capability. Declaration only
 means that Docker Sandboxes accepts the entry without using its commands.
-The table covers behavior through v0.48.0.
 
 All capability names in the table have the `com.docker.sandbox/` prefix.
 
@@ -31,7 +30,7 @@ All capability names in the table have the `com.docker.sandbox/` prefix.
 | [`agent-skills@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-skills@1.md) | v0.45.0 | Unsupported | Local sandboxes mount the shared skills store. From v0.48.0, discovery paths also receive bundled skills. |
 | [`credential@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/credential@1.md) | v0.45.0 | Limited: v0.45.0 | In cloud sandboxes, credentials scoped to installation remain available after setup. |
 | [`git-identity@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/git-identity@1.md) | v0.48.0 | Unsupported | Requires `user.name` and `user.email` in the host Git config. |
-| [`host-mount@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/host-mount@1.md) | Unsupported | Unsupported | Kit requests for shared host directories are not supported. |
+| [`host-mount@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/host-mount@1.md) | v0.50.0 | Unsupported | Users can [select host directories](../use-kits.md#choose-directories-for-kit-host-mounts) at creation time. Cloud sandboxes reject required entries and skip optional ones. |
 | [`kit-registry@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/kit-registry@1.md) | v0.45.0 | Unsupported | Restricted to approved OCI builder kits. Local and Git kit sources do not receive registry access. |
 | [`lifecycle@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/lifecycle@1.md) | v0.45.0 | v0.45.0 | Local startup hooks run alongside the agent, rather than blocking its launch. |
 | [`long-running@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/long-running@1.md) | v0.47.0 | Unsupported | Keeps a local sandbox running after its last session disconnects. |
@@ -43,7 +42,7 @@ All capability names in the table have the `com.docker.sandbox/` prefix.
 | [`sbx@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/sbx@1.md) | v0.45.0 | v0.45.0 | Docker Sandboxes launches the agent using the workload command. |
 | [`ssh-agent@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/ssh-agent@1.md) | v0.48.0 | Unsupported | Requires SSH-agent forwarding to be enabled and a host SSH agent to be available. |
 | [`usb-device@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/usb-device@1.md) | Unsupported | Unsupported | Kit requests for USB device access are not supported. |
-| [`volume@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/volume@1.md) | v0.45.0 | Limited: v0.45.0 | Local sandboxes provide block storage or tmpfs. Cloud sandboxes use ordinary sandbox disk at the declared paths, including for tmpfs requests. |
+| [`volume@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/volume@1.md) | v0.45.0 | Limited: v0.45.0 | Local sandboxes provide block storage or tmpfs and [retain block volumes across removal and recreation](../use-kits.md#keep-kit-data-when-recreating-a-sandbox). Cloud sandboxes use ordinary sandbox disk at the declared paths, including for tmpfs requests. |
 
 ## Capability groups
 

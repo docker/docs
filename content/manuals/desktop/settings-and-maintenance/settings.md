@@ -354,13 +354,14 @@ Reconfigure CLI tool installation paths and privileged system permissions. With 
 | CLI tools installation — **User** | Install Docker CLI tools to `$HOME/.docker/bin`. This is the default with version 4.89.0 and later. | Automatically added to your PATH in version 4.89.0 and later. |
 | **Allow the default Docker socket to be used** | Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#installing-symlinks). | Requires password |
 | **Allow privileged port mapping** | Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports). | Available with version 4.88.0 and earlier. Requires password |
+| **Allow privileged port forwarding to external machines** | Allows privileged ports (1 to 1024) to be exposed to other machines on your local network. When turned off, privileged ports are only reachable through loopback addresses. For more information, see [permission requirements for Mac](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports). | Available with version 4.97 and later. Doesn't require a password |
 
 ## Docker Offload
 
-Enable Docker Offload and configure idle timeout and GPU support for cloud-based workloads.
+Enable [Docker Offload v1](/manuals/offload/v1/_index.md) and configure idle timeout and GPU support for cloud-based workloads.
 
 | Setting             | Description                               | Notes                                 |
 | ------------------- | ----------------------------------------- | ------------------------------------- |
-| **Enable Docker Offload** | Run your containers in the cloud.  | Requires sign-in and an Offload subscription |
-| **Idle timeout** | Set the duration of time between no activity and Docker Offload entering idle mode. For details about idle timeout, see [Session management and idle state](/manuals/offload/about.md#session-management-and-idle-state). | |
+| **Enable Docker Offload** | Run your containers in the cloud using [Docker Offload v1](/manuals/offload/v1/_index.md).  | Requires sign-in and an Offload subscription |
+| **Idle timeout** | Set the duration of time between no activity and Docker Offload entering idle mode. For details about idle timeout, see [Session management and idle state](/manuals/offload/v1/about.md#session-management-and-idle-state). | |
 | **Enable GPU support** | Let your workloads use cloud GPU if available. | |

@@ -1,16 +1,40 @@
 command: docker offload
 short: Control Docker Offload from the CLI
+long: |-
+  Control Docker Offload from the CLI.
+
+  There are two versions of Docker Offload, and some commands belong to only
+  one of them.
+
+  | Command | Docker Offload | Docker Offload v1 |
+  | --- | --- | --- |
+  | `docker offload create` | Yes | No |
+  | `docker offload rm` | Yes | No |
+  | `docker offload start` | No | Yes |
+  | `docker offload stop` | Yes | Yes |
+  | `docker offload status` | Yes | Yes |
+  | `docker offload diagnose` | No | Yes |
+  | `docker offload version` | Yes | Yes |
+
+  Running a command that belongs to the other version reports an error telling
+  you which setting to change. For more information, see [Docker
+  Offload](/manuals/offload/_index.md) and [Docker Offload
+  v1](/manuals/offload/v1/_index.md).
 usage: docker offload
 pname: docker
 plink: docker.yaml
 cname:
+  - docker offload create
   - docker offload diagnose
+  - docker offload rm
   - docker offload start
   - docker offload status
   - docker offload stop
   - docker offload version
 clink:
+  - docker_offload_create.yaml
   - docker_offload_diagnose.yaml
+  - docker_offload_rm.yaml
   - docker_offload_start.yaml
   - docker_offload_status.yaml
   - docker_offload_stop.yaml

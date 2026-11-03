@@ -12,15 +12,30 @@ description: |-
 
     The rule applies globally to all sandboxes by default. Use --sandbox to add
     the rule to policy "local" scoped to a single sandbox instead.
+
+    Use --method to add an HTTP rule. --method accepts comma-separated HTTP
+    methods or ANY; --path defaults to /**. Repeat --query name=value to require
+    query parameters.
 usage: sbx policy deny network [--sandbox SANDBOX] RESOURCES [flags]
 options:
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for network
+    - name: method
+      default_value: '[]'
+      usage: |
+        Restrict the rule to these HTTP methods (comma-separated); use ANY to match all methods
+    - name: path
+      usage: |
+        Restrict the rule to this HTTP path glob (e.g. /repos/**); defaults to /**
     - name: protocol
       usage: |
         Restrict the rule to one protocol: tcp or udp (default tcp,udp)
+    - name: query
+      default_value: '[]'
+      usage: |
+        Require an HTTP query parameter (name=value pattern); repeatable
     - name: sandbox
       usage: |
         Scope the rule to a specific sandbox (default: all sandboxes)
@@ -45,5 +60,8 @@ example: |4-
 
       # Block only UDP to a host
       sbx policy deny network --protocol udp media.example.com
+
+      # Block POST requests to a path
+      sbx policy deny network api.example.com --method POST --path '/admin/**'
 see_also:
     - sbx policy deny - Add a deny rule for sandboxes

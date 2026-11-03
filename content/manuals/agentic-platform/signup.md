@@ -52,9 +52,14 @@ Cloud sandboxes use pay-as-you-go compute with no recurring subscription fee.
 Docker meters compute in seconds, based on sandbox runtime and the CPU and
 memory configuration. Your model provider bills inference separately.
 
-Open [Usage & billing](https://agentic-platform.docker.com/usage) in the Console
-to review pricing, usage, and available credits. Compute credits offset
-eligible cloud compute usage; they don't cover model-provider charges.
+From the Console user menu, open
+[Usage & billing](https://agentic-platform.docker.com/usage) to review runtime
+quantities, estimated totals, and available credits. Usage can take up to
+48 hours to update. Under **Payment & account**, select **Manage in Docker
+Billing** to manage your account and payment details.
+
+Compute credits offset eligible cloud compute usage; they don't cover
+model-provider charges.
 
 Billing is monthly, on the day you subscribed. Your invoice reflects usage
 accrued during the previous billing period. Stop or delete sandboxes you no

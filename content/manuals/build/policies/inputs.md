@@ -240,6 +240,53 @@ allow if {
 }
 ```
 
+#### `input.image.provenance`
+
+Metadata parsed from an image's SLSA provenance attestation. Buildx supports
+SLSA v0.2 and v1 predicates. Fields depend on what the attestation records;
+an absent field isn't equivalent to a Boolean value of `false`.
+
+| Field | Description |
+| ----- | ----------- |
+| `predicateType` | SLSA provenance predicate URI. |
+| `buildType` | Identifier for the build process. |
+| `builderID` | Builder identifier recorded in the attestation. |
+| `invocationID` | Identifier for the build invocation. |
+| `startedOn`, `finishedOn` | Build timestamps in RFC 3339 format. |
+| `configSource.uri` | URI of the source containing the build definition. |
+| `configSource.digest` | Map of source digest algorithms to values. |
+| `configSource.path` | Path to the build definition within the source. |
+| `frontend` | BuildKit frontend used for the build. |
+| `buildArgs` | Map of build argument names to values. |
+| `rawArgs` | Map of frontend arguments, including `build-arg:` prefixes. |
+| `reproducible` | Whether the attestation declares the build reproducible. |
+| `hermetic` | Whether the attestation declares the build hermetic. |
+| `completeness.parameters` | Whether build parameters are fully recorded. |
+| `completeness.environment` | Whether the environment is fully recorded (v0.2). |
+| `completeness.materials` | Whether build dependencies are fully recorded. |
+
+For example, require an attestation that declares the build hermetic and
+records all dependencies:
+
+```rego
+allow if {
+    input.image.provenance.hermetic == true
+    input.image.provenance.completeness.materials == true
+}
+```
+
+Accessing these fields during policy evaluation resolves the provenance
+metadata as needed. To inspect it without evaluating a policy, request the
+fields explicitly:
+
+```console
+$ docker buildx policy eval --print --fields image.provenance \
+    docker-image://registry.example.com/team/app:latest
+```
+
+These fields describe claims in the attestation. To verify who produced it,
+also check the image's [attestation signatures](#inputimagesignatures).
+
 #### `input.image.labels`
 
 A map of image labels from the image configuration.
@@ -295,6 +342,40 @@ allow if {
     startswith(sig.signer.sourceRepositoryURI, "https://github.com/myorg/")
 }
 ```
+
+### Provenance materials
+
+`input.image.provenance.materials` contains the build dependencies recorded in
+an image's provenance. Each entry is an input object with the same `image`,
+`git`, or `http` fields used for direct build inputs.
+
+For example, inspect the Git repository used to build a base image:
+
+```rego
+allow if {
+    some material in input.image.provenance.materials
+    material.git.host == "github.com"
+    material.git.remote == "https://github.com/myorg/base.git"
+}
+```
+
+An image material can have its own `image.provenance.materials` array. Access
+nested fields to resolve metadata for those dependencies as needed. Buildx
+supports image, Git, and HTTP material sources; unsupported material URIs
+are skipped with a warning. Checking a parent image doesn't automatically
+apply your rules to every material. Write explicit conditions for the
+dependencies you need to validate.
+
+To inspect a nested field without evaluating a policy, use `--fields`:
+
+```console
+$ docker buildx policy eval --print \
+    --fields 'image.provenance.materials[0].git.commitChecksum' \
+    docker-image://registry.example.com/team/base:latest
+```
+
+The example requests Git metadata for the first material. Choose the index
+and field for the material you want to inspect.
 
 ## Git inputs
 
@@ -519,6 +600,13 @@ allow if {
     verify_git_signature(input.git.tag, "maintainer.asc")
 }
 ```
+
+#### `input.env.depth`
+
+The input's depth in the provenance material tree. A direct build input has
+depth `0`, its materials have depth `1`, and each nested material increases
+the depth by one. For example, access `material.env.depth` when iterating
+over `input.image.provenance.materials`.
 
 #### `input.env.args`
 

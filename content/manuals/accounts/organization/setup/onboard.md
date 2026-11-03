@@ -170,6 +170,9 @@ Use these features to manage your organization's security posture:
 
 ## Next steps
 
+- [Plan your rollout](/manuals/accounts/organization/setup/rollout.md) to
+  coordinate pilot testing and deployment with your IT teams.
+
 - [Manage Docker products](../manage/manage-products.md) to configure
   access and view usage.
 - Configure

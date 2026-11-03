@@ -11,9 +11,11 @@ _Use Fireworks AI models with Docker Agent._
 ## Overview
 
 [Fireworks AI](https://fireworks.ai/) is a fast inference host for open-weight
-models, serving Kimi K2, Llama, Qwen, DeepSeek, GLM and others through an
+models, serving Kimi, Qwen, DeepSeek, GLM and others through an
 OpenAI-compatible API. Docker Agent includes built-in support for Fireworks AI
 as an alias provider.
+
+Use the provider ID `fireworks-ai`. The legacy ID `fireworks` is also accepted.
 
 ## Setup
 
@@ -33,7 +35,7 @@ The simplest way to use Fireworks AI:
 ```yaml
 agents:
   root:
-    model: fireworks/accounts/fireworks/models/kimi-k2-instruct
+    model: fireworks-ai/accounts/fireworks/models/kimi-k3
     description: Assistant using Fireworks AI
     instruction: You are a helpful assistant.
 ```
@@ -45,8 +47,8 @@ For more control over parameters:
 ```yaml
 models:
   fireworks_model:
-    provider: fireworks
-    model: accounts/fireworks/models/kimi-k2-instruct
+    provider: fireworks-ai
+    model: accounts/fireworks/models/kimi-k3
     temperature: 0.7
     max_tokens: 8192
 
@@ -66,9 +68,12 @@ limits, and pricing.
 
 | Model | Description |
 | --- | --- |
-| `accounts/fireworks/models/kimi-k2-instruct` | Kimi K2, large open MoE chat and tool-calling model |
-| `accounts/fireworks/models/llama-v3p3-70b-instruct` | Llama 3.3 70B instruct |
-| `accounts/fireworks/models/qwen3-235b-a22b` | Qwen 3 235B MoE |
+| `accounts/fireworks/models/kimi-k3` | Kimi K3, large open MoE chat and tool-calling model |
+| `accounts/fireworks/models/kimi-k2p7-code` | Kimi K2.7 Code, coding-focused variant |
+| `accounts/fireworks/models/glm-5p3` | GLM 5.3 |
+| `accounts/fireworks/models/qwen3p8-max` | Qwen 3.8 Max |
+| `accounts/fireworks/models/deepseek-v4-pro-0813` | DeepSeek V4 Pro |
+| `accounts/fireworks/models/gpt-oss-120b` | GPT OSS 120B |
 
 > Model IDs are case-sensitive and must be passed exactly as the catalogue lists
 > them.
@@ -90,8 +95,8 @@ messages into a single one for this provider.
 ```yaml
 agents:
   coder:
-    model: fireworks/accounts/fireworks/models/kimi-k2-instruct
-    description: Code assistant using Kimi K2 on Fireworks AI
+    model: fireworks-ai/accounts/fireworks/models/kimi-k2p7-code
+    description: Code assistant using Kimi K2.7 Code on Fireworks AI
     instruction: |
       You are an expert programmer.
       Write clean, well-documented code and follow language best practices.

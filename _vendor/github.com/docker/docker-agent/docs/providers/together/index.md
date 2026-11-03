@@ -15,6 +15,8 @@ models, serving Llama, Qwen, DeepSeek, Kimi, GLM and others through an
 OpenAI-compatible API. Docker Agent includes built-in support for Together AI as
 an alias provider.
 
+Use the provider ID `togetherai`. The legacy ID `together` is also accepted.
+
 ## Setup
 
 1. Create an API key from the [Together AI settings](https://api.together.ai/settings/api-keys).
@@ -33,7 +35,7 @@ The simplest way to use Together AI:
 ```yaml
 agents:
   root:
-    model: together/meta-llama/Llama-3.3-70B-Instruct-Turbo
+    model: togetherai/meta-llama/Llama-3.3-70B-Instruct-Turbo
     description: Assistant using Together AI
     instruction: You are a helpful assistant.
 ```
@@ -45,7 +47,7 @@ For more control over parameters:
 ```yaml
 models:
   together_model:
-    provider: together
+    provider: togetherai
     model: meta-llama/Llama-3.3-70B-Instruct-Turbo
     temperature: 0.7
     max_tokens: 8192
@@ -89,7 +91,7 @@ system messages into a single one for this provider.
 ```yaml
 agents:
   coder:
-    model: together/Qwen/Qwen3-235B-A22B-Instruct-2507-tput
+    model: togetherai/Qwen/Qwen3-235B-A22B-Instruct-2507-tput
     description: Code assistant using Qwen3 on Together AI
     instruction: |
       You are an expert programmer.

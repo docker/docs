@@ -24,6 +24,115 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.98.0
+
+{{< release-date date="2026-11-03" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.98.0" build_path="/245422/" >}}
+
+### Updates
+
+- Docker Offload `v0.7.35`
+- The following Kubernetes images have been updated to bring in latest security fixes. New tags listed below:
+   - `docker/desktop-storage-provisioner:v5.0`
+   - `docker/desktop-vpnkit-controller:v5.0`
+   - `docker/desktop-containerd-registry-mirror:v0.0.5`
+   - `docker/desktop-cloud-provider-kind:v0.8.0`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed Docker Hub model pulls failing on proxy-only networks where local DNS could not resolve the authentication endpoint.
+- Fixed Docker Desktop staying on the **Starting** page after Docker Engine had started. Fixes [docker/desktop-feedback#685](https://github.com/docker/desktop-feedback/issues/685)
+- Fixed `diagnose gather` on slow or stopped VMs by capping the VM start wait to 120 seconds.
+- Improved responsiveness of error dialogs.
+- Fixed moving the disk image to another volume failing when the copy took more than 5 minutes.
+- Fixed uncaught **Request aborted** errors each time the engine stopped.
+
+#### For Mac
+
+- Removed the `com.docker.vmnetd` privileged helper. A helper installed by a previous version is uninstalled automatically, and the `install vmnetd` option of the command line installer is gone.
+
+#### For Windows
+
+- Added Docker VMM to the **Clean up data** dialog.
+- Fixed WSL error code parsing so that users running newer WSL versions (3.0.x) receive accurate, actionable recovery instructions instead of a generic error message.
+- Fixed the Docker VMM backend option on Windows ARM64 to appear correctly disabled with an explanation in settings, and automatically fall back to WSL 2 during install or upgrade.
+- Fixed an intermittent **Being used by another process** error on the `desktop-linux` Docker context file when the engine started.
+- Fixed file sharing treating a directory as shared, or as allowed by Settings Management, when its name only started with that of a shared or allowed directory (e.g. `C:\foobar` for `C:\foo`). Allowed file share entries now match whole directory names only.
+- Fixed an issue where processes started in the Docker Desktop terminal could be left running after closing the terminal.
+- Added support for running `docker` and `docker compose` from WSL 2 distros when Docker VMM is the engine, including bind mounts of files on Windows drives such as `/mnt/c`.
+- Fixed Docker VMM re-enabling the WSL feature on update and showing a **Press any key to install WSL** prompt when WSL is uninstalled. Fixes [docker/desktop-feedback#775](https://github.com/docker/desktop-feedback/issues/775).
+
+### Security
+
+- Fixed [CVE-2026-98432](https://www.cve.org/cverecord?id=CVE-2026-98432), a use-after-free in the Linux kernel's IPv4 TCP handling.
+- Fixed [CVE-2026-112917](https://www.cve.org/cverecord?id=CVE-2026-112917) where a container on the WSL 2 backend could bypass the AF_VSOCK restriction. Requires WSL 3.0.3 or later.
+
+## 4.97.0
+
+{{< release-date date="2026-10-26" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.97.0" build_path="/244584/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a spurious Resource Saver error when signing out while sign-in enforcement is enabled.
+- Fixed diagnostics collection being slow when the backend is unresponsive, reducing worst-case wait time from several minutes to approximately 3 seconds.
+- Fixed reliability issues with the container exec terminal: closing a container no longer triggers spurious error reports, and terminal resize now works correctly on startup.
+- Fixed an issue where the Date header in Docker API responses was incorrect after Docker Desktop entered Resource Saver mode.
+- Added the `-e`/`--env` flag to `docker pass run` for setting environment variables, including `se://` secret references.
+- Fixed `docker pass set` printing "context canceled" on Ctrl-C at the value prompt.
+- Improved responsiveness when searching the **Images**, **Containers** and **Volumes** lists.
+- Fixed an unhandled error when viewing the files of a Compose project whose config file no longer exists.
+
+#### For Mac
+
+- Fixed adding Docker Desktop commands to the PATH failing for fish users without a `~/.config/fish` directory.
+- Added a setting to allow privileged ports (1-1024) to be exposed to other machines on the LAN.
+
+#### For Windows
+
+- Added a Docker VMM (Beta) backend option to the Windows installer.
+- Fixed an issue on Windows where a slow WSL version check asked to update WSL.
+- Fixed Docker VMM requiring a Docker Desktop restart to share a new bind-mount directory from the host.
+- Fixed WSL installer errors (e.g. `Wsl/CallMsi/`) being misidentified as disk-related failures, preventing misleading 'disk file has been deleted' recovery messages.
+- Fixed Docker Desktop becoming unresponsive, with `docker` commands hanging and Quit not working, after the disk filled up or, on Windows, after the backend's console host process exited. Fixes [docker/desktop-feedback#429](https://github.com/docker/desktop-feedback/issues/429) and [docker/desktop-feedback#699](https://github.com/docker/desktop-feedback/issues/699).
+- Fixed an issue where the installer rejected `--backend=docker-vmm` when combined with `--user` flag or Microsoft Store installs.
+- Fixed factory reset to stop Docker engines before deleting data, surface cleanup failures as an error dialog, and clean up custom data-root directories.
+- Fixed Windows containers failing to start with a "Path contains symlink" error on `callback.sock`.
+- Fixed a bug where the installer could leave a file under `C:\ProgramData\DockerDesktop` with no permissions at all, making it unreadable to diagnostics and to later installs.
+- Fixed a bug where the disk image location could not be moved back to a folder it had previously been moved out of. Fixes [docker/desktop-feedback#565](https://github.com/docker/desktop-feedback/issues/565).
+- Fixed a bug where a failed update could put back Start Menu and desktop shortcuts that had been deleted on purpose.
+- `--user` mode is now the default for new Docker Desktop `.EXE` installations.
+
+### Security
+
+- Addressed [CVE-2026-114409](https://www.cve.org/cverecord?id=CVE-2026-114409), where Docker Desktop could write third-party API keys and OAuth access tokens in cleartext to local application logs and diagnostics bundles. This release also cleans up existing host logs and crash dumps. These OAuth tokens are not Docker account tokens. If you've generated or shared diagnostics bundles with Docker Desktop 4.96.x or earlier, or kept copies of Docker Desktop logs elsewhere, delete or sanitize them.
+- Addressed [CVE-2026-99999](https://www.cve.org/cverecord?id=CVE-2026-99999), a kernel vulnerability where a container could exploit bad IPv4 checksum metadata via TUN or `AF_PACKET` to corrupt the VM's network stack.
+
+## 4.96.3
+
+{{< release-date date="2026-10-22" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.96.3" build_path="/244472/" >}}
+
+### Updates
+
+- Docker Init `v1.4.1`
+- Docker Offload `v0.7.19`
+- Docker Model Runner `v1.2.9`
+- Docker Debug `v0.49.0`
+- Docker MCP `v0.44.2`
+- `kubectl` `v1.36.1`
+
+### Security
+
+- Removed trust for certificates issued by the compromised [eMudhra intermediate CA compromise](https://emudhra.we-have-a-problem.com/). An attacker with network access could have used these certificates to intercept TLS connections made by non-browser clients, such as the Docker CLI and daemon.
+
 ## 4.96.2
 
 {{< release-date date="2026-10-22" >}}
@@ -37,6 +146,8 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Agent v1.152.0](https://github.com/docker/docker-agent/releases/tag/v1.152.0)
 - [Docker Hardened Images CLI (`dhictl`) v0.0.9](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.9)
 - Docker Desktop Build `v0.39.1`
+- [Docker Scout CLI v1.27.0](https://github.com/docker/scout-cli/releases/tag/v1.27.0)
+- Docker pass `v0.3.2`
 
 ### Security
 

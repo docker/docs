@@ -1,0 +1,41 @@
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: workload
+displayName: Docker Agent
+version: "1.0.0"
+capabilities:
+  - type: com.docker.sandbox/sbx@1
+  - type: com.docker.sandbox/network-policy@1
+    config:
+      runtime:
+        allow:
+          - models.dev
+          - api.openai.com
+          - registry-1.docker.io
+          - auth.docker.io
+          - production.cloudflare.docker.com
+  - type: com.docker.sandbox/credential@1
+    optional: true
+    config:
+      service: openai
+      phase: runtime
+      apiKey:
+        name: OPENAI_API_KEY
+        proxyManaged: true
+        inject:
+          - domain: api.openai.com
+            header: Authorization
+            format: "Bearer %s"
+  - type: com.docker.sandbox/agent-skills@1
+    optional: true
+    config:
+      path: /home/agent/.agents/skills
+      mode: readonly
+  - type: com.docker.sandbox/agent-context@1
+    config:
+      filename: AGENTS.md
+  - type: com.docker.sandbox/agent-sessions@1
+    config:
+      prompt: [--exec, "{{.Prompt}}"]
+      resume: [--session, "{{.SessionID}}"]
+      continue: [--session, "-1"]

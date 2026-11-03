@@ -51,15 +51,80 @@ marked.use({
   }
 })
 
+// Gordon's answers can contain ```openui-lang cards. The code that draws them is a separate
+// bundle (assets/js/gordon-cards), loaded the first time a card shows up.
+Alpine.store('gordonCards', { ready: false, failed: false })
+
+let gordonCardsLoading
+
+function loadGordonCards() {
+  gordonCardsLoading ??= new Promise((resolve, reject) => {
+    const script = document.createElement('script')
+    script.src = window.GORDON_CARDS_SRC
+    script.onload = () => {
+      Alpine.store('gordonCards').ready = true
+      resolve(window.GordonCards)
+    }
+    script.onerror = () => {
+      // Cards then stay plain code blocks, but a later call (such as Copy) can try again.
+      gordonCardsLoading = undefined
+      script.remove()
+      Alpine.store('gordonCards').failed = true
+      reject(new Error('Failed to load gordon-cards.js'))
+    }
+    document.head.append(script)
+  })
+  return gordonCardsLoading
+}
+
+Alpine.magic('gordonCards', () => loadGordonCards)
+
+// Swaps each ```openui-lang block for the card it describes. Until the card code has loaded, or
+// while a block is still streaming in and doesn't parse yet, it shows a placeholder. If the card
+// code can't load, or a finished block isn't a card, the block stays a plain code block.
+function replaceGordonCards(div, { streaming }) {
+  const blocks = div.querySelectorAll('pre > code.language-openui-lang')
+  if (blocks.length === 0) return
+
+  const cards = Alpine.store('gordonCards')
+  if (!cards.ready && !cards.failed) {
+    loadGordonCards().catch((err) => console.error('Gordon cards:', err))
+  }
+  blocks.forEach((code) => {
+    const pre = code.parentElement
+    if (cards.ready) {
+      const card = window.GordonCards.renderGordonCard(code.textContent)
+      if (card) {
+        pre.replaceWith(card)
+      } else if (streaming) {
+        pre.replaceWith(gordonCardPlaceholder())
+      }
+    } else if (!cards.failed) {
+      pre.replaceWith(gordonCardPlaceholder())
+    }
+  })
+}
+
+function gordonCardPlaceholder() {
+  const placeholder = document.createElement('div')
+  placeholder.className = 'gordon-card-loading not-prose'
+  placeholder.setAttribute('role', 'status')
+  placeholder.setAttribute('aria-label', 'Drawing card')
+  placeholder.append(document.createElement('span'), document.createElement('span'))
+  return placeholder
+}
+
 // Add $markdown magic for rendering markdown with syntax highlighting
 Alpine.magic('markdown', () => {
-  return (content) => {
+  return (content, { streaming = false } = {}) => {
     if (!content) return ''
     const html = marked(content)
 
     // Parse and highlight code blocks
     const div = document.createElement('div')
     div.innerHTML = html
+
+    replaceGordonCards(div, { streaming })
 
     // Handle code blocks (pre > code)
     div.querySelectorAll('pre').forEach((pre) => {

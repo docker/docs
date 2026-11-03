@@ -17,7 +17,7 @@ You can update your billing details for Docker individual accounts and Docker or
 
 To update your billing information from **Settings** in Docker Home:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your personal or organization
+1. Sign in to [Docker Home](https://app.docker.com/) and select your individual or organization
    account.
 1. Select **Billing**, then go to **Settings**.
 1. Select **Edit** to make your changes.

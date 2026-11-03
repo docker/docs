@@ -1,5 +1,15 @@
 name: sbx mcp rm
 synopsis: Remove a registered MCP server
+description: |-
+    Remove a registered MCP server and its OAuth credential.
+
+    Use --registration-only to remove the local registration without starting the
+    daemon or accessing credentials. This also removes the registration's saved
+    environment ownership and approval, including damaged or orphaned registrations. Stored credentials are
+    kept, and MCP processes already running in sandbox gateways are not stopped.
+    For an untrusted registration, first stop the selected daemon; this interrupts
+    all of its sandbox gateways. A later approved env run can register a declared
+    server again.
 usage: sbx mcp rm NAME [flags]
 options:
     - name: force
@@ -10,6 +20,10 @@ options:
       shorthand: h
       default_value: "false"
       usage: help for rm
+    - name: registration-only
+      default_value: "false"
+      usage: |
+        Remove only the local registration without starting the daemon; keep credentials and running MCP processes
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -19,6 +33,8 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
-example: '  sbx mcp rm notion'
+example: |4-
+      sbx mcp rm notion
+      sbx mcp rm --registration-only notion
 see_also:
     - sbx mcp - Manage MCP servers

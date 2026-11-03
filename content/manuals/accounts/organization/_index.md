@@ -84,6 +84,11 @@ access to many people at once. Use a team when several members need the
 same repositories. Members can belong to the organization without joining
 a team.
 
+For a deployment across your organization, start with
+[Plan and roll out Docker](/manuals/accounts/organization/setup/rollout.md).
+For ongoing membership and permissions decisions, use
+[Plan and maintain user access](/manuals/accounts/organization/manage/user-access.md).
+
 ## Next steps
 
 Learn how to manage organizations in the following sections.

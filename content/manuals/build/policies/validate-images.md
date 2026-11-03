@@ -335,6 +335,33 @@ decision := {"allow": allow}
 The `hasProvenance` field is `true` when the image has provenance or SBOM
 [attestations](../metadata/attestations/_index.md).
 
+### Check provenance metadata
+
+Use `input.image.provenance` to check how an image was built. For example,
+require provenance that declares a hermetic build with all dependencies
+recorded:
+
+```rego
+package docker
+
+default allow := false
+
+allow if input.local
+
+allow if {
+  input.image.provenance.hermetic == true
+  input.image.provenance.completeness.materials == true
+}
+
+decision := {"allow": allow}
+```
+
+An image with missing fields fails these conditions. Other provenance fields
+include the builder identity, build arguments, and build definition source;
+see the [provenance input reference](./inputs.md#inputimageprovenance).
+Pair these checks with signature verification when you need to trust the
+attestation's origin.
+
 ## Verify GitHub Actions signatures
 
 For images built with GitHub Actions, verify they came from trusted workflows by
@@ -363,6 +390,37 @@ This pattern works with any GitHub Actions workflow using Sigstore keyless
 signing. The signature metadata provides cryptographic proof of the build's
 origin. For complete signature verification examples, see [Example
 policies](./examples.md).
+
+## Validate provenance materials
+
+An image's provenance can expose metadata about its own build dependencies
+through `input.image.provenance.materials`. Use this to check the source of a
+base image, rather than only checking the base image's registry and tag.
+
+The following policy requires the base image's provenance to include a Git
+material with an approved repository and commit:
+
+```rego
+package docker
+
+default allow := false
+
+allow if input.local
+
+allow if {
+  some material in input.image.provenance.materials
+  material.git.remote == "https://github.com/myorg/base.git"
+  material.git.commitChecksum == "0123456789abcdef0123456789abcdef01234567"
+}
+
+decision := {"allow": allow}
+```
+
+Replace the repository and commit with your approved source. This checks for
+at least one matching material; it doesn't restrict other dependencies.
+For image materials, you can also inspect their provenance and nested
+materials. See the [material input reference](./inputs.md#provenance-materials)
+for supported sources and metadata resolution.
 
 ## Combine multiple checks
 

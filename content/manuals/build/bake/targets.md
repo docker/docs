@@ -4,6 +4,8 @@ linkTitle: Targets
 weight: 20
 description: Learn how to define and use targets in Bake
 keywords: bake, target, targets, buildx, docker, buildkit, default
+aliases:
+  - /guides/bake/
 ---
 
 A target in a Bake file represents a build invocation. It holds all the
@@ -107,6 +109,100 @@ command.
 ```console
 $ docker buildx bake all
 ```
+
+### Run tests and lint checks
+
+Bake targets can run checks without producing an image. For a Go project with a
+`go.mod` file, source code, and tests, define matching Dockerfile stages:
+
+```dockerfile {title=Dockerfile}
+FROM --platform=$BUILDPLATFORM golang:{{% param "example_go_version" %}} AS base
+WORKDIR /src
+COPY . .
+
+FROM base AS test
+RUN go test ./...
+
+FROM base AS lint
+RUN go vet ./...
+```
+
+Map each Bake target to its Dockerfile stage and group the checks:
+
+```hcl {title=docker-bake.hcl}
+group "validate" {
+  targets = ["test", "lint"]
+}
+
+target "test" {
+  target = "test"
+  output = ["type=cacheonly"]
+}
+
+target "lint" {
+  target = "lint"
+  output = ["type=cacheonly"]
+}
+```
+
+```console
+$ docker buildx bake validate
+```
+
+Both checks run concurrently. A failing check causes the command to fail.
+The `cacheonly` output keeps the build cache without exporting an image.
+
+## Export build artifacts
+
+A target can export files, such as compiled binaries, to your local filesystem.
+For the Go project in the previous example, append these stages to the Dockerfile:
+
+```dockerfile {title=Dockerfile}
+FROM base AS build
+ARG TARGETOS
+ARG TARGETARCH
+ARG BUILD_MODE=release
+RUN if [ "$BUILD_MODE" = "debug" ]; then \
+      CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -gcflags="all=-N -l" -o /out/app .; \
+    else \
+      CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o /out/app .; \
+    fi
+
+FROM scratch AS export
+COPY --from=build /out/ /
+```
+
+The `scratch` stage contains only the files to export. Add these Bake targets
+to save the binary locally or build it for multiple platforms:
+
+```hcl {title=docker-bake.hcl}
+target "bin" {
+  target = "export"
+  platforms = ["local"]
+  output = ["type=local,dest=build/bin"]
+}
+
+target "bin-cross" {
+  inherits = ["bin"]
+  platforms = ["linux/amd64", "linux/arm64"]
+}
+```
+
+```console
+$ docker buildx bake bin
+$ docker buildx bake bin-cross
+```
+
+The `bin` target builds for the client's platform and writes `build/bin/app`.
+The `bin-cross` target writes separate `build/bin/linux_amd64/app` and
+`build/bin/linux_arm64/app` files. See [Inheritance](inheritance.md) and
+[Local and tar exporters](/manuals/build/exporters/local-tar.md) for reuse and
+output options.
+
+The base stage uses `BUILDPLATFORM` to run the Go compiler on the builder's
+native platform. `TARGETOS` and `TARGETARCH` select the output platform, so this
+example cross-compiles without emulation. For other toolchains, see
+[Multi-platform build strategies](/manuals/build/building/multi-platform.md#strategies).
 
 ## Pattern matching for targets and groups
 

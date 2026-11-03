@@ -166,6 +166,12 @@ params:
   # Docs repository URL
   repo: https://github.com/docker/docs
 
+  # Gordon chat
+  gordon:
+    # Lets Gordon answer with cards (steps, tables, notes, snippets, follow-up
+    # questions) in production builds. Always on in other environments.
+    cards: true
+
   # === Example versions ===
   # The following parameters are used in various ways in content and templates.
   # Mostly as examples in code snippets, but also in other exotic ways.
@@ -410,6 +416,7 @@ module:
     # bumped on each docker-agent release by sync-docker-agent-docs.yml.
     # Sections are mounted individually so hugo mod vendor does not
     # vendor the upstream Jekyll site files that also live in docs/.
+    # Community is published only at https://docker.github.io/docker-agent/.
     - path: github.com/docker/docker-agent
       mounts:
         - source: docs/getting-started
@@ -426,7 +433,5 @@ module:
           target: content/manuals/ai/docker-agent/features
         - source: docs/guides
           target: content/manuals/ai/docker-agent/guides
-        - source: docs/community
-          target: content/manuals/ai/docker-agent/community
         - source: docs/demo.gif
           target: content/manuals/ai/docker-agent/demo.gif

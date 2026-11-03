@@ -89,6 +89,44 @@ The following shows a few examples of what you can expect to see:
    CONNECT desktop.docker.com:443: host connecting via static system HTTPS proxy http://172.211.16.3:3128
    ```
 
+### Why is Kubernetes stuck on "Starting" behind a corporate proxy?
+
+If your machine sets the `HTTP_PROXY` or `HTTPS_PROXY` environment variables,
+and `NO_PROXY` doesn't include `kubernetes.docker.internal`, requests to the
+Kubernetes API server go to the proxy instead of the local cluster. The
+Docker Desktop `kubeconfig` uses `kubernetes.docker.internal` as the server
+address. The proxy can't reach it and returns an error such as `502 Bad Gateway`
+or `Forbidden`. The IP address `127.0.0.1` is never proxied, which is why
+connecting to the cluster directly works.
+
+You might see the following symptoms:
+
+- Docker Desktop shows **Starting - waiting for node to be ready** and never
+  finishes.
+- `kubectl get nodes` fails with an error such as
+  `Get "https://kubernetes.docker.internal:6443/...": Bad Gateway` or
+  `Forbidden`.
+- The cluster is running. `docker ps` shows the control plane containers as up.
+
+To confirm the proxy is the cause, run the following commands in PowerShell:
+
+```powershell
+Get-ChildItem Env: | Where-Object Name -match 'proxy'
+curl.exe -vk https://kubernetes.docker.internal:6443/version
+curl.exe -vk --noproxy "*" https://kubernetes.docker.internal:6443/version
+```
+
+If the proxy is the cause, the second command returns a `502` status, and the
+third returns `200` and the Kubernetes version as JSON.
+
+To fix the issue, add `kubernetes.docker.internal` to `NO_PROXY`. The following
+command sets `NO_PROXY` for the current user. It replaces the existing value, so
+include your existing entries in the list:
+
+```powershell
+[Environment]::SetEnvironmentVariable('NO_PROXY','localhost,127.0.0.1,.example.com,kubernetes.docker.internal,.docker.internal','User')
+```
+
 ### How do I run Docker Desktop without administrator privileges?
 
 Docker Desktop requires administrator privileges only for installation. Once installed, administrator privileges are not needed to run it. However, for non-admin users to run Docker Desktop, it must be installed using a specific installer flag and meet certain prerequisites, which vary by platform.

@@ -21,10 +21,10 @@ aliases:
 
 [Docker Agentic Platform](https://agentic-platform.docker.com/) is a
 pay-as-you-go plan for running agent and tool workloads in isolated
-sandboxes with Docker-managed cloud infrastructure. You pay for the usage you accrue without a recurring
+sandboxes with Docker-managed cloud infrastructure. It also includes access to [Docker Offload](/manuals/offload/_index.md). You pay for the usage you accrue without a recurring
 subscription fee.
 
-To activate access for the Console, cloud sandbox CLI, or API and SDKs, follow
+To activate access for the Console, cloud sandbox CLI, Offload, or API and SDKs, follow
 [Signup and billing](/manuals/agentic-platform/signup.md#activate-cloud-access).
 
 ## Usage
@@ -65,6 +65,8 @@ For example:
 - Your invoice can take up to 24 hours after your billing date to
   appear.
 
+Credits are applied to your costs at the end of the billing period.
+
 ## Cancel a plan
 
 Canceling Docker Agentic Platform disables subscription renewal at the
@@ -78,9 +80,21 @@ the plan period.
 1. Select **Cancel subscription**.
 1. Review your usage, then select **Cancel subscription** to confirm.
 
+## Re-enable renewal
+
+After you cancel, you can re-enable renewal at any time before the
+current period ends. Your subscription then continues past the renewal
+date.
+
+1. Sign in to [Docker Home](https://app.docker.com/) and go to
+   **Billing**.
+1. From **Active subscriptions**, select **Manage** next to
+   **Docker Agentic Platform**.
+1. Select **Re-enable renewal**.
+
 ## Next steps
 
-- To add or cancel a plan, see
+- To add a plan, see
   [Manage plans](/manuals/subscription-billing/manage/plans.md)
 - To track usage across plans, see
   [Usage](/manuals/subscription-billing/manage/_index.md#usage)

@@ -199,3 +199,9 @@ use the following environment variables to configure Bake's authentication strat
 - [`BUILDX_BAKE_GIT_AUTH_TOKEN`](../building/variables.md#buildx_bake_git_auth_token)
 - [`BUILDX_BAKE_GIT_AUTH_HEADER`](../building/variables.md#buildx_bake_git_auth_header)
 - [`BUILDX_BAKE_GIT_SSH`](../building/variables.md#buildx_bake_git_ssh)
+
+For HTTP authentication, Bake also uses these credentials for Git build
+contexts on the same host as the remote definition. Private Git contexts on
+other hosts need separate credentials. See the
+[token reference](../building/variables.md#buildx_bake_git_auth_token)
+for details.

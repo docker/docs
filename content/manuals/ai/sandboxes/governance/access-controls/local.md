@@ -37,23 +37,20 @@ with a hostname rule (for example, `sbx policy allow network "myhost:22"`) or an
 address-based rule. UDP requires the experimental feature and policy rules
 described in [Allow outbound UDP](#allow-outbound-udp). ICMP is blocked.
 
-If you haven't chosen a default preset, the CLI prompts you before it runs a
-sandbox. Running `sbx policy reset` clears the preset and prompts you to choose
-again:
+If the global network policy hasn't been initialized, the CLI prompts you to
+choose a preset when you run a sandbox in an interactive terminal. If a policy
+is already configured, including one carried over from an earlier installation,
+the CLI uses it without prompting.
 
-```plaintext
-Initialize the global network policy for your sandboxes:
+To initialize the policy without an interactive prompt, run:
 
-  Applies to all sandboxes, current and future — change it later with
-  "sbx policy allow/deny/rm". Kits, including built-in agent kits, may
-  also add per-sandbox rules.
-
-     1. Open         — All network traffic allowed, no restrictions.
-  ❯  2. Balanced     — Default deny, with common dev sites allowed.
-     3. Locked Down  — All network traffic blocked unless you allow it.
-
-  Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
+```console
+$ sbx policy init balanced
 ```
+
+Available values are `allow-all`, `balanced`, and `deny-all`. Initialization is
+a one-time setup. To change an existing preset, use
+[`sbx policy reset`](#resetting).
 
 | Preset      | Description                                                                                                                                       |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -95,9 +92,9 @@ workflows. Run `sbx policy ls` to see exactly which rules it includes.
 
 ### Non-interactive environments
 
-In non-interactive environments such as CI pipelines or headless servers, the
-interactive prompt can't be displayed. Use `sbx policy init` to set the
-preset before running any other `sbx` commands:
+In non-interactive environments such as CI pipelines or headless servers, an
+uninitialized policy causes `sbx run` to return an error. Use `sbx policy init`
+to set the preset before running a sandbox:
 
 ```console
 $ sbx policy init balanced
@@ -201,6 +198,19 @@ $ sbx policy allow network api.github.com --method GET --path '/repos/**'
 $ sbx policy allow network api.github.com --method GET --path '/users/**'
 ```
 
+Add `--query` to match URL query parameters
+separately from the path:
+
+```console
+$ sbx policy allow network api.example.com --method GET --path '/search' \
+    --query 'team=platform' --query 'label=release*'
+```
+
+Repeat the flag to require multiple parameters. Keep `--method` in the command,
+or use `--method ANY` to match all methods. Query restrictions use the same
+flags on deny rules. For value patterns and matching behavior, see
+[Query parameters](../concepts.md#query-parameters).
+
 Hosts follow the same patterns as network rules and can include a port. Write
 the host on its own, without a scheme, so an HTTP rule takes `api.example.com`
 rather than `https://api.example.com`.
@@ -219,11 +229,12 @@ $ sbx policy deny network api.example.com --method POST --path '/admin/**'
 For how the two layers combine, see
 [HTTP rules](../concepts.md#http-method-and-path).
 
-Remove an HTTP rule by naming the same qualifiers you added it with, or by
-rule ID:
+Remove an HTTP rule by naming the same qualifiers you added it with, including
+any `--query` flags, or by rule ID:
 
 ```console
-$ sbx policy rm network --resource api.github.com --method GET --path '/repos/org/project/**'
+$ sbx policy rm network --resource api.example.com --method GET --path '/search' \
+    --query 'team=platform' --query 'label=release*'
 $ sbx policy rm network --id 7f3a1c2e-4a73-4e05-bc9d-f2f9a4b50d67
 ```
 

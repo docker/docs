@@ -99,6 +99,7 @@ Use team permissions for that.
 | View billing history                                              | ❌     | ❌     | ✅    |
 | Manage subscriptions                                              | ❌     | ❌     | ✅    |
 | Manage seats                                                      | ❌     | ❌     | ✅    |
+| Manage licenses                                                   | ❌     | ❌     | ✅    |
 | Upgrade and downgrade plans                                       | ❌     | ❌     | ✅    |
 
 > [!TIP]

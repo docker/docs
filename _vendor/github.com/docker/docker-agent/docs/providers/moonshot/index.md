@@ -15,6 +15,8 @@ OpenAI-compatible API. The Kimi K2 models have strong momentum for coding and
 agentic tasks. Docker Agent includes built-in support for Moonshot AI as an
 alias provider.
 
+Use the provider ID `moonshotai`. The legacy ID `moonshot` is also accepted.
+
 ## Setup
 
 1. Create an API key from the [Moonshot AI console](https://platform.moonshot.ai/console/api-keys).
@@ -33,7 +35,7 @@ The simplest way to use Moonshot AI:
 ```yaml
 agents:
   root:
-    model: moonshot/kimi-k2-0905-preview
+    model: moonshotai/kimi-k3
     description: Assistant using Moonshot AI
     instruction: You are a helpful assistant.
 ```
@@ -45,8 +47,8 @@ For more control over parameters:
 ```yaml
 models:
   moonshot_model:
-    provider: moonshot
-    model: kimi-k2-0905-preview
+    provider: moonshotai
+    model: kimi-k3
     temperature: 0.7
     max_tokens: 8192
 
@@ -65,7 +67,7 @@ model IDs, context limits, and pricing.
 
 | Model | Description |
 | --- | --- |
-| `kimi-k2-0905-preview` | Kimi K2, general-purpose chat, coding, and tool calling |
+| `kimi-k3` | Kimi K3, general-purpose chat, coding, and tool calling |
 | `kimi-k2-turbo-preview` | Kimi K2 optimized for higher throughput |
 | `kimi-k2-thinking` | Kimi K2 extended-reasoning model |
 
@@ -85,7 +87,7 @@ Moonshot AI is implemented as a built-in alias in Docker Agent:
 ```yaml
 agents:
   coder:
-    model: moonshot/kimi-k2-0905-preview
+    model: moonshotai/kimi-k3
     description: Code assistant using Kimi K2
     instruction: |
       You are an expert programmer.

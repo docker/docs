@@ -119,11 +119,17 @@ The supported top-level labeled blocks are:
 - `provider`
 - `mcp`
 - `rag`
+- `command`
+- `toolsets`
+- `budgets`
+- `flavors`
 
 The supported top-level singleton blocks are:
 
 - `metadata`
 - `permissions`
+- `runtime`
+- `budget`
 
 ### Toolsets use the block label as `type`
 

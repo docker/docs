@@ -10,7 +10,7 @@ _Get Docker Agent running on your system in minutes._
 
 ## Prerequisites
 
-- An API key for at least one AI provider (OpenAI, Anthropic, Google, etc.)
+- Access to a model through a provider API key, an account login, [Docker Model Runner](../../providers/dmr/index.md), or a [coding harness](../../features/harnesses/index.md)
 - **Optional:** [Docker Desktop](https://www.docker.com/products/docker-desktop/) — for running containerized MCP tools and Docker Model Runner
 
 ## Docker Desktop (Pre-installed)
@@ -91,7 +91,7 @@ For the latest features, or to contribute, build from source:
 
 ### Prerequisites
 
-- [Go 1.26](https://go.dev/dl/) or higher
+- [Go 1.27](https://go.dev/dl/) or higher
 - [Task](https://taskfile.dev/installation/) (build tool)
 - [golangci-lint](https://golangci-lint.run/docs/welcome/install/local/) (for linting)
 
@@ -114,7 +114,7 @@ task build
 
 ## Set Up API Keys
 
-Docker Agent needs API keys for the model providers you want to use. Set them as environment variables:
+For providers that use API keys, set the keys as environment variables. Account-login and local-model options are covered in [Set Up a Model](../set-up-a-model/index.md):
 
 ```bash
 # Pick one (or more) depending on your provider
@@ -126,7 +126,7 @@ export MISTRAL_API_KEY="..."             # Mistral
 export OPENROUTER_API_KEY="..."          # OpenRouter
 ```
 
-See [Configuration Overview](../../configuration/overview/index.md#environment-variables) for the full list of supported providers and environment variables.
+See [Provider Credentials](../../providers/overview/index.md#provider-credentials) for the full list of supported providers and authentication methods.
 
 > [!NOTE]
 > You only need the key(s) for the provider(s) you configure in your agent YAML. If you use Docker Model Runner (DMR), no API key is needed — models run locally.
@@ -147,4 +147,4 @@ $ docker agent run myorg/agent:tag
 ## What's Next?
 
 - [**Quick Start**](../quickstart/index.md) — create and run your first agent in under 5 minutes.
-- [**Troubleshooting**](../../community/troubleshooting/index.md) — something not working? Debug mode, common issues, and solutions.
+- [**Troubleshooting**](../../guides/troubleshooting/index.md) — something not working? Debug mode, common issues, and solutions.
