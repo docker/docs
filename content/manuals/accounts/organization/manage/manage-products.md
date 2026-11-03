@@ -5,7 +5,10 @@ weight: 60
 description: >-
   Control which Docker products organization members can use, and find
   where to check usage
-keywords: organization, product access, product usage, access control, seats, licenses, docker desktop, docker hub, docker scout, docker build cloud, docker offload, docker offload v1, testcontainers cloud, docker sandboxes, ai governance
+keywords: organization, product access, product usage, access control, seats,
+  licenses, docker desktop, docker hub, docker scout, docker build cloud,
+  docker offload, docker offload v1, testcontainers cloud, docker sandboxes,
+  ai governance
 toc_max: 2
 aliases:
   - /admin/organization/manage/manage-products/
