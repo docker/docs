@@ -36,7 +36,7 @@ you configure:
   which repositories Scout analyzes, or whether Docker Offload v1 is
   available in Docker Desktop.
 
-Where a product has a usage allowance, the Usage section shows where to
+Where a product has a usage allowance, the **Usage** section shows where to
 check how much of it the organization has used. Products measure that
 allowance in different units, such as build minutes, Hub pulls, or runtime
 minutes.
