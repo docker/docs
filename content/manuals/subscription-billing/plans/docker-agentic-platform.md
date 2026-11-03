@@ -21,10 +21,10 @@ aliases:
 
 [Docker Agentic Platform](https://agentic-platform.docker.com/) is a
 pay-as-you-go plan for running agent and tool workloads in isolated
-sandboxes with Docker-managed cloud infrastructure. You pay for the usage you accrue without a recurring
+sandboxes with Docker-managed cloud infrastructure. It also includes access to [Docker Offload](/manuals/offload/_index.md). You pay for the usage you accrue without a recurring
 subscription fee.
 
-To activate access for the Console, cloud sandbox CLI, or API and SDKs, follow
+To activate access for the Console, cloud sandbox CLI, Offload, or API and SDKs, follow
 [Signup and billing](/manuals/agentic-platform/signup.md#activate-cloud-access).
 
 ## Usage
