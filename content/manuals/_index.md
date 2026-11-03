@@ -93,7 +93,7 @@ params:
     description: Image analysis and policy evaluation.
     icon: /icons/Scout.svg
     link: /scout/
-  platform:
+  accounts-and-admin:
   - title: Accounts
     description: Manage Docker individual and organization accounts.
     icon: user-circle
@@ -145,4 +145,4 @@ Security guardrails and image analysis for your software supply chain.
 
 Manage Docker accounts, administration, subscriptions, billing, and security.
 
-{{< grid items=platform >}}
+{{< grid items=accounts-and-admin >}}
