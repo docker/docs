@@ -33,10 +33,10 @@ you configure:
   which repositories Scout analyzes, or whether Docker Offload is available
   in Docker Desktop.
 
-Each product measures usage in its own units, such as seats, Hub pulls,
-build minutes, or runtime minutes, and your subscription sets how much is
-included. The Usage section for each product shows where to check that
-amount, so you can top up your plan before you run out.
+Where a product has a usage allowance, the Usage section shows where to
+check how much of it the organization has used. Products measure that
+allowance in different units, such as build minutes, Hub pulls, or runtime
+minutes.
 
 This page covers product access, but does not cover access tokens.
 For organization access tokens,
@@ -55,6 +55,17 @@ To manage Docker Desktop access:
 With sign-in enforced, only members of your organization can use Docker
 Desktop after they sign in.
 
+Image Access and Registry Access are Docker Desktop controls. Image Access
+limits which images members can pull from Docker Hub. Registry Access
+limits which registries Docker Desktop can reach.
+
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+   organization, then select **Docker Desktop**.
+1. Select **Registry Access** to configure
+   [Registry Access Management](/manuals/desktop/enterprise/hardened-desktop/registry-access-management.md).
+1. Select **Image Access** to control
+   [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md).
+
 ### Usage
 
 Desktop insights shows how members use Docker Desktop, including active
@@ -66,18 +77,6 @@ users, builds, containers, images, and extensions.
    [**Desktop insights**](/manuals/accounts/organization/insights.md).
 
 ## Docker Hub
-
-Image Access and Registry Access are Docker Desktop controls. They limit
-what members can pull and which registries Docker Desktop can reach.
-
-### Access
-
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization, then select **Docker Desktop**.
-1. Select **Registry Access** to configure
-   [Registry Access Management](/manuals/desktop/enterprise/hardened-desktop/registry-access-management.md).
-1. Select **Image Access** to control
-   [Image Access Management](/manuals/desktop/enterprise/hardened-desktop/image-access-management.md).
 
 ### Usage
 
@@ -100,9 +99,9 @@ instructions.
 
 To manage Docker Build Cloud access:
 
-1. Sign in to [Docker Home](https://app.docker.com/), then select
-   [Docker Build Cloud](https://app.docker.com/build).
-1. Select **Account settings**.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+   organization.
+1. Select **Build Cloud**, then **Account settings**.
 1. Select **Lock access to Docker Build Account**.
 
 > [!WARNING]
@@ -135,8 +134,9 @@ To manage Docker Scout access:
    [Repository settings](../../../scout/explore/dashboard.md#repository-settings).
 1. To manage Docker Scout for local images in Docker Desktop, use
    [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md)
-   and set `sbomIndexing` to `false` to turn it off, or to `true` to turn
-   it on.
+   and set **SBOM indexing** (`sbomIndexing`) to **Enabled**, **Disabled**,
+   or **User defined**. **Enabled** indexes images when they are inspected
+   in Docker Desktop or with Docker Scout CLI commands.
 
 ### Usage
 
@@ -176,31 +176,34 @@ subscription.
 
 ## Docker Offload
 
+Docker Offload uses its own [license](./manage-licenses.md). Assign it to
+teams or members, or turn on automatic assignment so members receive a
+license the first time they use Docker Offload.
+
 ### Access
 
-To manage Docker Offload access for your organization, use [Settings
+**Offload access** turns Docker Offload on or off for the organization.
+**Disabled** removes the ability for anybody in the organization, including
+CI/CD, to use Offload resources or consume Offload minutes.
+
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+   organization.
+1. Select **Docker Offload**, then **Offload access**.
+1. Set **Enable Docker Offload** to **Enabled** or **Disabled**.
+1. When Offload is enabled, select **Allow GPU access** to let members run
+   GPU workloads in cloud mode.
+
+To set the Docker Offload default inside Docker Desktop, use [Settings
 Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md):
 
-1. Sign in to [Docker Home](https://app.docker.com/), then select **Docker
-   Desktop**.
-1. Select **Settings Management**.
-1. Configure the **Enable Docker Offload** setting to control whether
-   Docker Offload features are available in Docker Desktop. You can
-   configure this setting in five states:
-   - **Always enabled**: Docker Offload is always enabled and users cannot
-     disable it. The Offload toggle is always visible in the Docker Desktop
-     header. Recommended for VDI environments where local Docker execution
-     is not possible.
-   - **Enabled**: Docker Offload is enabled by default but users can
-     disable it in Docker Desktop settings. Suitable for hybrid
-     environments.
-   - **Disabled**: Docker Offload is disabled by default but users can
-     enable it in Docker Desktop settings.
-   - **Always disabled**: Docker Offload is disabled and users cannot
-     enable it. The option is visible but locked. Use when Docker Offload
-     is not approved for organizational use.
-   - **User defined**: No enforced default. Users choose whether to enable
-     or disable Docker Offload in their Docker Desktop settings.
+1. Select **Docker Desktop**, then **Settings Management**.
+1. Set **Enable Docker Offload** to one of these configurations:
+   - **Always enabled**: Offload stays on, and members cannot turn it off.
+   - **Enabled**: Offload is on by default, and members can turn it off.
+   - **Disabled**: Offload is off by default, and members can turn it on.
+   - **Always disabled**: Offload stays off, and members cannot turn it on.
+   - **User defined**: Docker Desktop does not enforce a default. Members
+     choose whether to turn Offload on.
 1. Select **Save**.
 
 For more details on Settings Management, see the [Settings
@@ -213,7 +216,7 @@ ran and which images they used.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
-1. Select **Docker Offload** or **Offload**, then
+1. Select **Docker Offload**, then
    [**Offload activity**](../../../offload/usage.md).
 
 ## AI Governance
