@@ -10,6 +10,7 @@ params:
   prerequisites:
     - Docker Desktop or Docker Engine with BuildKit enabled
     - A Docker Hub account authenticated with `docker login dhi.io`
+    - The DHI CLI (`docker dhi`), included in Docker Desktop 4.65 and later
     - A CUDA application you can rebuild from source
     - Familiarity with multi-stage Dockerfiles and dynamic linking
 ---
@@ -127,7 +128,8 @@ That list informs the whole migration:
 
 ## Step 2: Choose a base from the closure, not from the name
 
-Browse the catalog with the DHI CLI rather than guessing repository names:
+Browse the catalog with the [DHI CLI](/manuals/dhi/tools/cli.md) rather than
+guessing repository names:
 
 ```console
 $ docker dhi catalog list
@@ -339,9 +341,9 @@ Some platforms replace `CMD` (Step 8), and TEI reads every flag from the
 environment.
 
 There is one job the old entrypoint may still be doing that you can't see from
-inside the image: absorbing arguments the *platform* appends to the container
-command. If you deploy somewhere that does this (Amazon SageMaker appends
-`serve`), keep a shim that does nothing else:
+inside the image: absorbing arguments the *platform* passes to the container.
+If you deploy somewhere that does this (Amazon SageMaker passes `serve`), keep a
+shim that does nothing else:
 
 ```bash
 #!/bin/bash
@@ -461,7 +463,7 @@ Two failures show up only here, which is why this step isn't optional:
 Four things can bite you here. Two reject the image at `CreateModel`, before it reaches
 a GPU. The other two deploy and then fail: the AMI pin lands the image on a host
 that cannot run it, with errors that look nothing like a configuration problem,
-and the appended `serve` argument crash-loops the container.
+and the `serve` argument SageMaker passes crash-loops the container.
 
 #### SageMaker does not accept OCI image indexes
 
@@ -544,13 +546,15 @@ field:
 
 Nothing else changed between those two rows.
 
-#### SageMaker appends `serve` to the container's command
+#### SageMaker passes `serve` as the container's argument
 
 Step 6 is what
 exposes you to this one.
 
-SageMaker starts an inference container as `docker run <image> serve`. Upstream's
-shell entrypoint ended in `exec text-embeddings-router "$@"`, so that extra
+SageMaker starts an inference container as `docker run <image> serve`. As with
+any argument after the image name, `serve` replaces the image's `CMD` and is
+passed to the `ENTRYPOINT`. Upstream's shell entrypoint ended in
+`exec text-embeddings-router "$@"`, so that
 argument was always being passed to the binary, but a shell script is a place
 where an unwanted argument *can* be dropped. Replacing it with a direct exec of
 the binary (Step 6) removes that option, and the container crash-loops:
@@ -578,10 +582,10 @@ ENTRYPOINT ["/usr/local/bin/sagemaker-entrypoint.sh"]
 ENV JSON_OUTPUT=true
 ```
 
-AWS documents that `serve` *replaces* the image's `CMD` rather than being
-appended to it, so on SageMaker the binary starts with no arguments at all. A
-flag set in `CMD` silently never applies: with `CMD ["--json-output"]` the logs
-come out as plain text. That's why Step 6 sets it with `ENV`.
+Because `serve` takes the place of `CMD`, and the shim drops `serve`, the binary
+on SageMaker starts with no arguments at all. A flag set in `CMD` silently never
+applies: with `CMD ["--json-output"]` the logs come out as plain text. That's why
+Step 6 sets it with `ENV`.
 
 Verify it locally before deploying. The argument reaches the binary either way,
 so both invocations should fail identically on `libcuda.so.1` and neither should
@@ -592,8 +596,8 @@ $ docker run --rm your-image:dhi serve
 $ docker run --rm your-image:dhi
 ```
 
-The lesson generalizes past SageMaker: check what your platform appends to the
-container command before you delete the shell that was absorbing it.
+The lesson generalizes past SageMaker: check what arguments your platform passes
+to the container before you delete the shell that was absorbing them.
 
 > [!TIP]
 >
@@ -617,8 +621,8 @@ ownership there first.
 
 ## Results
 
-Measured on `linux/amd64`, with the same compiled binary in every image so the
-base is the only variable:
+Measured on `linux/amd64`. Both images carry the same compiled binary, so every
+difference comes from the final stage:
 
 | Final stage | Size | OS packages | Runs as |
 |---|---|---|---|
@@ -660,10 +664,10 @@ you measured, and record the date beside the number.
 > $ docker scout cves local://your-image:dhi --vex-location base-vex.json
 > ```
 
-Most of the size reduction comes from not shipping the CUDA development
-toolchain into the runtime image, which is a multi-stage-build win rather than a
-DHI one. The package count and the non-root default are what the hardened base
-buys.
+Not all of that difference is DHI's doing. Most of the size reduction comes
+from leaving the CUDA development toolchain out of the final stage, which any
+multi-stage build onto a slim base would get you. The package count and the
+non-root default are what the hardened base buys.
 
 ## Apply this to other GPU images
 
