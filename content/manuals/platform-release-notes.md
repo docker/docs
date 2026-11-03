@@ -104,13 +104,6 @@ and subscriptions.
   with one repository permission. Select **No repository access** when
   the token should not access repositories.
 
-### Bug fixes and enhancements
-
-- Deactivating or deleting a member no longer clears the role assigned to
-  that member's [teams](/manuals/accounts/organization/manage/manage-a-team.md).
-  Remaining members keep the team's role. This includes deactivation
-  through SCIM.
-
 ## 2026-09-30
 
 ### Bug fixes and enhancements
