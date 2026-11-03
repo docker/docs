@@ -50,6 +50,8 @@
           <button
             x-data
             @click="$store.gordon.toggle()"
+            @mouseenter="$store.gordon.prefetch()"
+            @focus="$store.gordon.prefetch()"
             aria-label="Ask Gordon, AI assistant"
             aria-describedby="gordon-tooltip"
             class="group shimmer flex cursor-pointer items-center gap-2 rounded-lg border border-blue-500 bg-blue-700 p-2 text-white transition-colors focus:ring focus:ring-blue-400 focus:outline-none"

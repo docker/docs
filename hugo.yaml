@@ -171,6 +171,10 @@ params:
     # Lets Gordon answer with cards (steps, tables, notes, snippets, follow-up
     # questions) in production builds. Always on in other environments.
     cards: true
+    # Where Gordon gets its answers: "legacy" (the docs AI service) or
+    # "browser" (an assistant that runs in the reader's browser). Override
+    # with the HUGO_GORDON_BACKEND environment variable.
+    backend: legacy
 
   # === Example versions ===
   # The following parameters are used in various ways in content and templates.
