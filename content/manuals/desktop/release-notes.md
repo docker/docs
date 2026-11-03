@@ -63,6 +63,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed file sharing treating a directory as shared, or as allowed by Settings Management, when its name only started with that of a shared or allowed directory (e.g. `C:\foobar` for `C:\foo`). Allowed file share entries now match whole directory names only.
 - Fixed an issue where processes started in the Docker Desktop terminal could be left running after closing the terminal.
 - Added support for running `docker` and `docker compose` from WSL 2 distros when Docker VMM is the engine, including bind mounts of files on Windows drives such as `/mnt/c`.
+- Fixed Docker VMM re-enabling the WSL feature on update and showing a **Press any key to install WSL** prompt when WSL is uninstalled. Fixes [docker/desktop-feedback#775](https://github.com/docker/desktop-feedback/issues/775).
 
 ### Security
 
