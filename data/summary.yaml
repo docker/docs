@@ -1,9 +1,9 @@
 2FA:
   subscription: [Personal, Pro]
   for: Individuals
-AI Governance Audit Logs:
+AI Governance:
   subscription: [AI Governance]
-  requires: Docker Sandboxes [0.39.0](/manuals/ai/sandboxes/release-notes.md) or later
+  for: Administrators
 Activity logs:
   subscription: [Team, Business]
   for: Administrators

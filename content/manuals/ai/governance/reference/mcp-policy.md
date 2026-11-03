@@ -1,18 +1,25 @@
 ---
 title: MCP policy reference
 linkTitle: MCP policy
-weight: 20
+weight: 30
 description: Reference for Docker MCP policy actions, resources, attributes, context fields, and approval behavior.
 keywords: docker sandboxes, MCP policy, Cedar policy, MCP actions, MCP resources, requireApproval, AI Governance
+aliases:
+  - /ai/sandboxes/governance/reference/mcp-policy/
 ---
 
 MCP policies are organization policies written in Cedar using Docker's `MCP`
 namespace. This reference defines the Docker-specific policy surface for Model
 Context Protocol (MCP) activity made available to sandboxes through Docker's
-[MCP gateway](../../mcp-gateway.md).
+[MCP gateway](../../sandboxes/mcp-gateway.md). MCP policy applies when a developer
+registers a server and when an agent uses the MCP gateway. Registration rules
+control future `sbx mcp add` operations. Use-time rules control tool calls,
+built-in gateway tools, resource reads, and prompt retrieval from servers that are
+already registered or loaded.
 
-Use this reference with [MCP access policies](../access-controls/mcp.md) for
-common policy patterns. For the Cedar language, see the
+Use this reference with
+[Organization MCP access policies](../organization/policies/mcp.md) for common
+policy patterns. For the Cedar language, see the
 [Cedar documentation](https://docs.cedarpolicy.com/).
 
 ## Evaluation model
@@ -28,7 +35,7 @@ Governed MCP activity is default deny. A request is blocked unless a matching
 permit annotated with `@requireApproval`.
 
 For details about when Docker Sandboxes evaluates MCP policies for a user, see
-[Govern the server lifecycle](../access-controls/mcp.md#govern-the-server-lifecycle).
+[Where MCP policy applies](../organization/policies/mcp.md#where-mcp-policy-applies).
 
 An actionless `permit` matches every MCP action that reaches Cedar evaluation:
 
@@ -38,28 +45,28 @@ permit (principal, action, resource);
 
 ## Actions
 
-| Action              | Governs                   | Notes                                                                                                          |
-| ------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `register`          | MCP server registration   | Server registration needs an explicit `permit`. Use server attributes to scope registration.                   |
-| `invokeTool`        | MCP tool calls            | Most tool access policies target this action.                                                                  |
-| `invokePrimordial`  | Gateway meta-tool calls   | Applies to built-in gateway tools such as `mcp-exec`, `mcp-add`, `code-mode`, and OAuth authorization helpers. |
-| `readResource`      | MCP resource reads        | Rules match `MCP::Resource` and `resource.uri`.                                                                |
-| `getPrompt`         | MCP prompt retrieval      | Rules match `MCP::Prompt` and `resource.name`.                                                                 |
-| `listTools`         | MCP tool listing          | Defined in the schema but not Cedar-gated. Tool listings can include tools denied at invocation.               |
-| `listResources`     | MCP resource listing      | Defined in the schema but not Cedar-gated. Resource listings can include resources denied by policy.           |
-| `subscribeResource` | MCP resource subscription | Defined in the schema but not Cedar-gated.                                                                     |
+| Action              | Governs                     | Notes                                                                                                          |
+| ------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `register`          | MCP server registration     | Server registration needs an explicit `permit`. Use server attributes to scope registration.                   |
+| `invokeTool`        | MCP tool calls              | Most tool access policies target this action.                                                                  |
+| `invokePrimordial`  | Built-in gateway tool calls | Applies to built-in gateway tools such as `mcp-exec`, `mcp-add`, `code-mode`, and OAuth authorization helpers. |
+| `readResource`      | MCP resource reads          | Rules match `MCP::Resource` and `resource.uri`.                                                                |
+| `getPrompt`         | MCP prompt retrieval        | Rules match `MCP::Prompt` and `resource.name`.                                                                 |
+| `listTools`         | MCP tool listing            | Defined in the schema but not Cedar-gated. Tool listings can include tools denied at invocation.               |
+| `listResources`     | MCP resource listing        | Defined in the schema but not Cedar-gated. Resource listings can include resources denied by policy.           |
+| `subscribeResource` | MCP resource subscription   | Defined in the schema but not Cedar-gated.                                                                     |
 
 ## Resources
 
 Match resources with the MCP entity type and attributes for the request.
 
-| Entity            | Match with             | Notes                                                                                                                            |
-| ----------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `MCP::Server`     | Registered server name | The canonical server identity is the `resource.identityURL` attribute, not the entity ID.                                        |
-| `MCP::Tool`       | Bare tool name         | Use `resource.name`. Display prefixes aren't included. A bare-name match applies to every server exposing a tool with that name. |
-| `MCP::Resource`   | Resource URI           | Use `resource.uri`.                                                                                                              |
-| `MCP::Prompt`     | Prompt name            | Use `resource.name`.                                                                                                             |
-| `MCP::Primordial` | Gateway meta-tool name | Match a specific primordial with an entity reference.                                                                            |
+| Entity            | Match with                 | Notes                                                                                                                            |
+| ----------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `MCP::Server`     | Registered server name     | The canonical server identity is the `resource.identityURL` attribute, not the entity ID.                                        |
+| `MCP::Tool`       | Bare tool name             | Use `resource.name`. Display prefixes aren't included. A bare-name match applies to every server exposing a tool with that name. |
+| `MCP::Resource`   | Resource URI               | Use `resource.uri`.                                                                                                              |
+| `MCP::Prompt`     | Prompt name                | Use `resource.name`.                                                                                                             |
+| `MCP::Primordial` | Built-in gateway tool name | Match a specific built-in gateway tool with an entity reference.                                                                 |
 
 Examples:
 
@@ -83,8 +90,8 @@ and are advisory.
 | `resource.destructive`     | Tools             | Defaults to `true` when a tool doesn't declare it.                                                                                                    |
 | `resource.idempotent`      | Tools             | Defaults to `false` when a tool doesn't declare it.                                                                                                   |
 | `resource.openWorld`       | Tools             | Defaults to `true` when a tool doesn't declare it.                                                                                                    |
-| `resource.type`            | Servers           | Use for server registration rules. See [Server type values](#server-type-values).                                                                     |
-| `resource.identityURL`     | Servers           | Canonical server identity. The value depends on the registration type. See [Server identity values](#server-identity-values).                         |
+| `resource.type`            | Servers           | Use for server registration rules. For more details, see [Server type values](#server-type-values).                                                                     |
+| `resource.identityURL`     | Servers           | Canonical server identity. The value depends on the registration type. For more details, see [Server identity values](#server-identity-values).                         |
 | `resource.requiresOAuth`   | Servers           | Use for server registration rules.                                                                                                                    |
 | `resource.requiresNetwork` | Servers           | Use for server registration rules.                                                                                                                    |
 | `resource.command`         | Servers           | Local stdio server command, such as `npx` or `docker`, when available. Empty for remote servers and registrations that don't include command details. |
@@ -99,12 +106,12 @@ attributes, use `like`.
 
 ### Server type values
 
-Local gateway registrations use these values:
+Registrations through the MCP gateway use these values:
 
 - `local-stdio`: a host-run stdio server. This includes explicit commands and
   OCI-packaged stdio servers resolved from metadata with `--local`.
 - `container-stdio`: an OCI-packaged server resolved from metadata without
-  `--local`. This value can appear in `register` decisions, but the local
+  `--local`. This value can appear in `register` decisions, but the MCP
   gateway can't attach or run this server type.
 - `remote-dcr`: a remote endpoint that doesn't require OAuth or supports OAuth
   Dynamic Client Registration.
@@ -165,7 +172,7 @@ over a normal `permit`. A matching `forbid` denies the request without an
 elicitation.
 
 For the request flow and trust model, see
-[Require confirmation with MCP elicitation](../access-controls/mcp.md#require-confirmation-with-mcp-elicitation).
+[Require confirmation with MCP elicitation](../organization/policies/mcp.md#require-confirmation-with-mcp-elicitation).
 
 Approval requires a client session that can present an MCP elicitation request
 to the user. If the request can't be presented for approval, the request is
@@ -187,7 +194,7 @@ don't require approval.
 - Approval-gated requests are denied when the execution context can't relay an
   MCP elicitation to the originating client. This includes tool calls made from
   inside `code-mode`.
-- Registration policy is evaluated when a server is registered. It doesn't
+- Registration rules are evaluated when a server is registered. They don't
   remove existing registrations or stop an already-loaded server by itself.
   Govern existing registrations with use-time rules such as `invokeTool`,
   `readResource`, and `getPrompt`.
