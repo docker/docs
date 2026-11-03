@@ -10,7 +10,7 @@ keywords: cloud, quickstart, Docker Desktop, offload
 
 [Docker Offload v1](./about.md) lets you build and run containers in the cloud
 while using your local Docker Desktop tools and workflow. This means faster
-builds, access to powerful cloud resources, and a seamless development
+builds, access to cloud resources, and a seamless development
 experience.
 
 This quickstart covers the steps developers need to get started with Docker Offload v1.

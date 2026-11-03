@@ -83,7 +83,7 @@ This machine:
 | Session started | How long this machine has been connected |
 | Idle detection | Whether idle detection is on, and the idle timeout in effect. The default is 5m |
 | Time until idle | When this machine pauses the sandbox if no activity happens before then |
-| Kept awake by | What's keeping the sandbox awake, such as a running container or a docker command from this machine |
+| Kept awake by | What's keeping the sandbox awake, such as a running container or a Docker command from this machine |
 
 `Time until idle` and `Kept awake by` are alternatives. The countdown appears
 while the sandbox is heading for a pause, and `Kept awake by` appears in its
