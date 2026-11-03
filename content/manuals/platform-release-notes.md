@@ -59,13 +59,6 @@ and subscriptions.
 - [Billing details](/manuals/subscription-billing/manage/details.md)
   show addresses that have no city.
 
-## 2026-10-27
-
-### Bug fixes and enhancements
-
-- The [support request form](https://app.docker.com/support/contact)
-  includes a **Cancel** button.
-
 ## 2026-10-26
 
 ### Bug fixes and enhancements
@@ -84,9 +77,11 @@ and subscriptions.
 
 ### Bug fixes and enhancements
 
-- Users with a custom role that includes repository write can
+- Users with a custom role that includes the **Manage repositories** and
+  **Manage organization access tokens** permissions can
   [create an organization access token](/manuals/security/access-tokens/organization-access-tokens.md#create-an-organization-access-token)
-  scoped to all repositories in the organization.
+  scoped to all repositories in the organization. A role with only **View
+  repositories** can't.
 
 ## 2026-10-15
 
