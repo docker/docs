@@ -286,7 +286,7 @@ and subscriptions.
 - [Organization access tokens](/manuals/security/access-tokens/organization-access-tokens.md)
   are now generally available.
 - Single sign-on now supports the
-  [`dockerSessionMinutes` attribute](/manuals/security/provisioning/_index.md#sso-attributes),
+  [`dockerSessionMinutes` attribute](/manuals/security/authentication/single-sign-on/connect.md#sso-attributes),
   so a session can follow the identity provider timeout.
 - Administrators can now
   [track whether users comply with Docker Desktop settings policies](/manuals/desktop/enterprise/hardened-desktop/settings-management/compliance-reporting.md)
