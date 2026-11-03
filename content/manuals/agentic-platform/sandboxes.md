@@ -82,6 +82,10 @@ in the panel for your chosen connection method.
 
 ### Register an SSH key
 
+To sign Git commits in Docker Agentic Platform, register your public SSH key
+in the Console and add the same key to GitHub as a signing key. You can also
+use the registered key to connect to your sandbox over SSH.
+
 1. Open the user menu and select **Settings**.
 2. Under **Sandbox SSH key**, optionally enter a **Name** for the key.
 3. Paste your public key into **Public key**, then select **Add key**. Use the
@@ -92,8 +96,8 @@ Only the public key is stored. It takes effect immediately, without restarting
 a sandbox. Check **Registered key** to review it. Adding another key replaces
 the registered key. To remove it, select **Delete key** and confirm deletion.
 
-To use the registered key to sign Git commits in Docker Agentic Platform,
-add the same public key to your GitHub account as a signing key:
+After registering the key, add the same public key to your GitHub account
+as a signing key:
 
 1. In your GitHub account settings, open **SSH and GPG keys** and select
    **New SSH key**.
