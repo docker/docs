@@ -177,7 +177,7 @@ A paused sandbox keeps its containers, images, and volumes. Billing stops when
 the sandbox starts pausing. For more information, see [Docker Offload
 usage](usage.md).
 
-Stopping pauses the sandbox for every machine on the account, not just the one
+Stopping pauses the sandbox for every machine on the account, not only the one
 you run the command on.
 
 ## While your sandbox is paused
@@ -287,7 +287,7 @@ $ docker run --cloud --rm hello-world
 unknown flag: --cloud
 ```
 
-This applies to every subcommand, not just `run`.
+This applies to every subcommand, not only `run`.
 
 `--cloud` applies to that one command. Unlike `docker offload create`, it
 doesn't change the context your other commands use, so the rest of your
