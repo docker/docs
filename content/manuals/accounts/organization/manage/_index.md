@@ -61,20 +61,12 @@ aliases:
   - /admin/organization/manage/
 ---
 
-As an organization owner, you manage your organization's membership, access,
-product usage, and settings. You can invite members, group them into teams,
-assign roles, assign or revoke licenses and seats, change access to Docker
-products, review activity, update organization information, and deactivate
-the organization. Docker Home also includes Docker Desktop administration
-and identity settings such as SSO and SCIM, domains, access tokens, and
-OIDC connections.
+You manage the organization from [Docker Home](https://app.docker.com).
 
 ## Managing your organization
 
-You manage your organization from [Docker Home](https://app.docker.com).
-Organization owners can manage the areas below. Access to a specific area
-depends on your role. For example, members can open **Members** and
-**Teams**.
+Organization owners can manage the areas below. Which areas you can open
+depends on your role. Members can open **Members** and **Teams**.
 
 ## Seats and licenses
 

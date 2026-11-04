@@ -24,18 +24,9 @@ add new company owners.
 
 ## Add more organizations
 
-Company owners can add Docker organizations with a Docker Business plan
-to their company, so long as they're also the organization owners for
-that organization. There's no limit to the number of organizations you
-add to a company.
-
-> [!IMPORTANT]
->
-> Docker Home does not include a way to remove an organization from the
-> company. An organization owner can remove it with
-> `DELETE /v2/companies/{company_name}/orgs/{orgname}` when that
-> organization is not the company's only organization and is not connected
-> to the company's SSO connection.
+Company owners can add a Docker Business organization when they are also
+an owner of that organization. There's no limit to the number of
+organizations you add to a company.
 
 1. Sign in to [Docker Home](https://app.docker.com) and select
    your company.
@@ -47,6 +38,14 @@ A nested organization must keep its Docker Business subscription to stay
 managed by the company. If an organization downgrades from Docker
 Business, you can no longer manage it through the company, and its owner
 must manage it separately.
+
+## Remove an organization
+
+Docker Home does not include a way to remove an organization from the
+company. An organization owner can remove it with
+`DELETE /v2/companies/{company_name}/orgs/{orgname}` when that
+organization is not the company's only organization and is not connected
+to the company's SSO connection.
 
 ## Company owners
 
@@ -160,8 +159,9 @@ select **Remove**.
 1. Sign in to [Docker Home](https://app.docker.com) and select your company.
 1. Select **Users**.
 1. Find the user and select the **Actions** menu, then select **Remove**.
-1. Select **Remove**. If the user belongs to more than one organization,
-   select the organizations, then select **Remove**.
+1. If the user belongs to one organization, select **Remove**. If they
+   belong to more than one, select the organizations, then select
+   **Remove**.
 
 If the user is the only owner of an organization, assign another owner
 before you can remove them from that organization.
@@ -173,8 +173,8 @@ before you can remove them from that organization.
 1. Find the user and select the **Actions** menu, then select
    **Change role**. If the user belongs to more than one organization, the
    menu label is **Change roles**.
-1. Select the **Organization** when the user belongs to more than one, select
-   a role, then select **Save**.
+1. If the user belongs to more than one organization, select the
+   **Organization**. Select a role, then select **Save**.
 
 If the user is the only owner of the organization, assign another owner
 before you can change that role.
