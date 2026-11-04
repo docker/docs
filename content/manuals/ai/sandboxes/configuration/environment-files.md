@@ -955,5 +955,10 @@ by a kit but omitted from this list receive an ephemeral host port.
 Set `protocol: tcp` to bind both IPv4 and IPv6. Leave `hostIP` unset for a
 dual-stack binding because an explicit address binds only its own IP family.
 
+The experimental Runtime backend publishes ports on IPv4 loopback only.
+Use `protocol: tcp4` or `protocol: udp4` and omit `host` to let it assign a
+host port. It rejects `tcp6` and `udp6`. Bare `tcp` and `udp` require
+`hostIP: 127.0.0.1`.
+
 If a port can't be published, sandbox creation fails and removes the new
 sandbox.
