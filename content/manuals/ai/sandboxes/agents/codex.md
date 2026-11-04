@@ -35,7 +35,7 @@ To create a [mountless sandbox](../usage.md#choose-a-workspace), use
 ## Preserve conversations after sandbox removal
 
 To keep Codex conversations when you remove and recreate a local sandbox,
-use a v3 workload with its session mixin. See
+add its session mixin when creating the sandbox. See
 [Preserve Claude Code and Codex conversations](../customize/use-kits.md#preserve-claude-code-and-codex-conversations)
 for commands and steps to resume a conversation.
 
