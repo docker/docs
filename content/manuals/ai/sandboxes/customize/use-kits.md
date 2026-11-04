@@ -328,6 +328,41 @@ discarded when the sandbox stops.
 For how to preserve storage when changing a kit, see
 [Configure the volume](author/patterns.md#configure-the-volume).
 
+### Preserve Claude Code and Codex conversations
+
+For local sandboxes, add a session mixin to keep conversations after removing
+and recreating the sandbox, including when you use `--rm`. Choose the mixin
+that matches your v3 workload:
+
+{{< tabs >}}
+{{< tab name="Claude Code" >}}
+
+```console
+$ sbx run --rm docker.io/docker/sbx-kit-claude:2.1.267 --kit sbx/claude-sessions:1.0.0
+```
+
+{{< /tab >}}
+{{< tab name="Codex" >}}
+
+```console
+$ sbx run --rm docker.io/docker/sbx-kit-codex:0.155.1 --kit sbx/codex-sessions:1.0.0
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+Start a conversation, then enter `/exit`. Run the same command again from the
+same project directory and enter `/resume` inside the agent to select the saved
+conversation.
+
+The mixins use host directories managed by Docker Sandboxes to store session
+state. They don't share conversations with Claude Code or Codex running directly
+on your host. Include the session mixin each time you recreate the sandbox.
+
+To choose a host directory, see [Choose directories for kit host mounts](#choose-directories-for-kit-host-mounts).
+The sandbox mount paths are `/home/agent/claude-history` for Claude Code and
+`/home/agent/codex-history` for Codex.
+
 ## Restrict kit sources
 
 [`kit.allowedSources`](../configuration/settings.md#kitallowedsources) controls

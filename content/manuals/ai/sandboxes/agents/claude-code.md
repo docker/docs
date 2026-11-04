@@ -33,6 +33,13 @@ prompt from a file with `-- "$(cat prompt.txt)"`.
 To create a [mountless sandbox](../usage.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
+## Preserve conversations after sandbox removal
+
+To keep Claude Code conversations when you remove and recreate a local sandbox,
+use a v3 workload with its session mixin. See
+[Preserve Claude Code and Codex conversations](../customize/use-kits.md#preserve-claude-code-and-codex-conversations)
+for commands and steps to resume a conversation.
+
 ## Authentication
 
 For the default Anthropic models, Claude Code requires either an Anthropic
