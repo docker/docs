@@ -158,6 +158,15 @@ $ sbx --cloud cp ./src cloud-project:/home/agent/workspace/src
 $ sbx --cloud cp cloud-project:/home/agent/workspace/result.json ./result.json
 ```
 
+Cloud copies don't preserve empty directories or symbolic links themselves.
+Symbolic links are handled differently depending on the transfer:
+
+- Uploading a symbolic link as the source copies its target automatically.
+- Uploading a directory skips symbolic links inside it unless you pass
+  `-L` (`--follow-link`) to copy their targets.
+- Downloading a symbolic link to a file requires `-L` to copy its target.
+- Downloading a directory skips symbolic links, even with `-L`.
+
 Copying creates a point-in-time transfer. It doesn't mount or synchronize the
 local path. For source control workflows, you can also clone a remote
 repository from inside the sandbox and push changes to the remote. Configure
