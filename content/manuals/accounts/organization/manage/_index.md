@@ -2,8 +2,8 @@
 title: Manage your organization
 linkTitle: Manage
 weight: 20
-description: Learn how to manage your Docker organization, including members, teams, licenses, seats, product access, and settings.
-keywords: manage organization, members, teams, licenses, seats, product access, organization management, docker home, organization settings, deactivate organization
+description: Learn how to manage your Docker organization, including members, teams, roles, licenses, seats, product access, activity, and settings.
+keywords: manage organization, members, teams, roles, licenses, seats, product access, organization management, docker home, organization settings, activity logs, deactivate organization
 grid:
   - title: User access workflow
     description: Plan roles, provisioning, and ongoing access reviews.
@@ -17,6 +17,10 @@ grid:
     description: Invite, manage, and assign roles to your organization members.
     icon: user-plus
     link: /accounts/organization/manage/members/
+  - title: Roles
+    description: Create custom roles and review the permissions each role grants.
+    icon: lock-closed
+    link: /security/roles-and-permissions/
   - title: Teams
     description: Create teams and manage repository access for groups of members.
     icon: user-group
@@ -33,12 +37,20 @@ grid:
     description: Manage access and view usage for Docker products across your organization.
     icon: squares-2x2
     link: /accounts/organization/manage/manage-products/
+  - title: Activity
+    description: Review organization and repository changes in Docker Home.
+    icon: clipboard-document-list
+    link: /accounts/organization/activity-logs/
+  - title: Docker Desktop
+    description: Configure and enforce Docker Desktop settings for your organization.
+    icon: cog
+    link: /desktop/enterprise/hardened-desktop/settings-management/
   - title: Deactivation
     description: Deactivate an organization after completing the required steps.
     icon: minus-circle
     link: /accounts/organization/manage/deactivate-account/
   - title: Security
-    description: Configure single sign-on, provisioning, and access management.
+    description: Configure SSO and SCIM, domains, access tokens, and OIDC connections.
     icon: shield-check
     link: /security/
   - title: Billing
@@ -51,8 +63,11 @@ aliases:
 
 As an organization owner, you manage your organization's membership, access,
 product usage, and settings. You can invite members, group them into teams,
-assign or revoke licenses and seats, change access to Docker products, update
-organization information, and deactivate the organization.
+assign roles, assign or revoke licenses and seats, change access to Docker
+products, review activity, update organization information, and deactivate
+the organization. Docker Home also includes Docker Desktop administration
+and identity settings such as SSO and SCIM, domains, access tokens, and
+OIDC connections.
 
 ## Managing your organization
 

@@ -3,7 +3,7 @@ title: Manage company organizations, owners, and members
 linkTitle: Manage
 weight: 20
 description: Manage your Docker company in Docker Home. Add organizations, invite members, manage owners, resend invitations, export a member CSV, and add subscription seats.
-keywords: company, manage company, Docker Home, company owners, add organization, invite members, resend invitations, export members CSV, company members, manage seats
+keywords: company, manage company, Docker Home, company owners, add organization, invite members, resend invitations, export members CSV, company members, manage seats, leave company, remove user, change role
 aliases:
   - /admin/company/manage/
   - /admin/company/manage/organizations/
@@ -48,8 +48,9 @@ must manage it separately.
 ## Company owners
 
 A company can have multiple owners who manage the company and all of its
-organizations. For details about the company owner role and how it affects
-seats, see
+organizations. A company can have up to 100 owners. **Add owner** is
+unavailable when the company already has 100 owners. For details about the
+company owner role and how it affects seats, see
 [Company structure](/manuals/accounts/company/_index.md#company-structure).
 
 ### Add a company owner
@@ -64,6 +65,16 @@ seats, see
 1. Select **Company owners**.
 1. Find the company owner you want to remove and select the **Actions**
    menu, then select **Remove as company owner**.
+
+### Leave a company
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your company.
+1. Select **Company owners**.
+1. Find your account and select the **Actions** menu, then select
+   **Leave company**.
+1. Select **Leave**.
+
+If you are the only company owner, add another owner before you can leave.
 
 ## Company invitations
 
@@ -129,6 +140,52 @@ page.
 
 {{< /tab >}}
 {{< /tabs >}}
+
+### Cancel an invitation
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your company.
+1. Select **Users**.
+1. Find the invitee and select the **Actions** menu, then select **Remove**.
+1. Select **Remove**.
+
+Removing an invitee cancels the pending invitation. If the invitee has
+invitations to more than one organization, select the organizations, then
+select **Remove**.
+
+### Remove a user
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your company.
+1. Select **Users**.
+1. Find the user and select the **Actions** menu, then select **Remove**.
+1. Select the organizations to remove the user from, then select **Remove**.
+
+If the user is the only owner of an organization, assign another owner
+before you can remove them from that organization.
+
+### Change a user's role
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your company.
+1. Select **Users**.
+1. Find the user and select the **Actions** menu, then select
+   **Change role**. If the user belongs to more than one organization, the
+   menu label is **Change roles**.
+1. Select the **Organization** when the user belongs to more than one, select
+   a role, then select **Save**.
+
+If the user is the only owner of the organization, assign another owner
+before you can change that role.
+
+### Leave an organization
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your company.
+1. Select **Users**.
+1. Find your account and select the **Actions** menu, then select
+   **Leave organization**. If you belong to more than one organization, the
+   menu label is **Leave organizations**.
+1. Select **Leave**.
+
+If you are the only owner of an organization, assign another owner before
+you can leave it.
 
 ## Export a member list CSV
 
