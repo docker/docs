@@ -198,6 +198,24 @@ permissions, outside the sandbox. Leave the setting at `false` to require
 approval on every invocation, or use `--force` to approve only one
 invocation. See [environment lifecycle commands](environment-files.md#lifecycle).
 
+#### sandbox.fuse {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Expose `/dev/fuse` and grant the `SYS_ADMIN` capability so processes can mount
+FUSE filesystems in local sandboxes. Set this to `false` to disable FUSE access
+for sandboxes you create:
+
+```console
+$ sbx settings set sandbox.fuse false
+```
+
+Changes apply only to newly created sandboxes. Existing sandboxes retain their
+FUSE configuration, including after restarts. To disable access for one sandbox,
+set [`sandboxOptions.fuse`](environment-files.md#sandboxoptions) to `false`
+in its environment file. When this setting is `false`, environment files cannot
+enable FUSE access. Cloud sandboxes do not support FUSE.
+
 #### ssh.agentForwardingEnabled {.wrap-anywhere}
 
 {{< setting-metadata type="boolean" default="true" >}}
