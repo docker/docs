@@ -430,19 +430,25 @@ the kit handles the wiring; you only provide the value.
 Custom secrets are global by default. Pass `--sandbox` to scope one to a
 specific sandbox.
 
+To read the value from standard input, set `API_KEY` in your host environment
+and pipe it with `--value-stdin`:
+
 ```console
-$ sbx secret set-custom \
+$ printf '%s' "$API_KEY" | sbx secret set-custom \
     --host api.example.com \
     --env API_KEY \
-    --value <secret>
+    --value-stdin
 ```
 
+This keeps the value out of the `sbx` command arguments. Omit `--value-stdin`
+to enter the value at a prompt instead. `--value-stdin` can't be combined with
+`--value`, `--token`, `--ref`, or `--command`.
+
 > [!WARNING]
-> Passing the secret as `--value <secret>` records it in your shell history
-> and exposes it to other processes running as your user. Avoid pasting
-> real credentials inline — read the value from a variable that's already
-> in your environment, and clear shell history if a real secret was passed
-> on the command line.
+> Passing a literal secret with `--value` or `--token` records it in shell
+> history and exposes it in process arguments. Expanding an environment
+> variable with `--value "$API_KEY"` still exposes the value in process
+> arguments. Use the prompt or standard input instead.
 
 Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
 `sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
