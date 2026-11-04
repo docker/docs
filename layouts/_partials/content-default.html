@@ -1,8 +1,8 @@
 {{ partial "breadcrumbs.html" . }}
 <h1 data-pagefind-weight="10">{{ .Title | safeHTML }}</h1>
-{{- if and (eq .Type "guides") .Params.summary }}
+{{- if and (eq .Type "guides") .RawSummary }}
   <p class="mt-0 text-lg text-gray-500 dark:text-gray-400">
-    {{ .Params.summary }}
+    {{ .RawSummary }}
   </p>
 {{- end }}
 <div class="hidden lg:block">

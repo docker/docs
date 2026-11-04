@@ -27,6 +27,10 @@ params:
     description: Create and manage cloud sandboxes from your applications.
     icon: code-bracket
     link: /ai/sandboxes-api/
+  - title: Sandbox governance
+    description: Control what agents in sandboxes can reach, and audit what they did.
+    icon: lock-closed
+    link: /ai/governance/
   - title: MCP Catalog and Toolkit
     description: Augment your AI workflow with MCP servers.
     icon: /icons/toolkit.svg

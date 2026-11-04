@@ -1,0 +1,52 @@
+command: docker offload rm
+short: Remove the Docker Offload cloud sandbox
+long: |-
+  The cloud sandbox is deleted with everything in it, running or paused. Every
+  machine on the account uses the same sandbox, so `rm` deletes it for all of
+  them. To keep the sandbox for later, use `docker offload stop` instead.
+usage: docker offload rm [OPTIONS]
+pname: docker offload
+plink: docker_offload.yaml
+options:
+  - option: account
+    shorthand: a
+    value_type: string
+    default_value: ""
+    description: The Docker account the sandbox is under
+    deprecated: false
+    hidden: true
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+  - option: force
+    shorthand: f
+    value_type: bool
+    default_value: "false"
+    description: Remove without asking for confirmation
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+examples: |-
+  ### Remove the sandbox
+
+  Asks for confirmation first:
+
+  ```console
+  $ docker offload rm
+  ```
+
+  ### Remove the sandbox without confirmation
+
+  ```console
+  $ docker offload rm --force
+  ```
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

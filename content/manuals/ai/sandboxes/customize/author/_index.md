@@ -29,6 +29,9 @@ each approach.
 - [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md)
   to control the base environment, agent installation, and launch command.
   You can also [use an existing agent image](/manuals/ai/sandboxes/customize/author/base-images.md#use-an-image-in-a-v3-workload).
+- [Debug a kit](/manuals/ai/sandboxes/customize/author/debug.md) when one of its
+  install or startup commands fails. Read the progress output and the logs
+  inside the sandbox.
 
 For complete kits you can study and adapt, see
 [Kit examples](https://github.com/docker/sandbox-kit-spec/tree/main/examples)

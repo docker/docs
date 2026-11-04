@@ -331,6 +331,7 @@ They're used to configure the Buildx client, or the BuildKit daemon.
 | [BUILDX_NO_DEFAULT_ATTESTATIONS](#buildx_no_default_attestations)           | Boolean           | Turn off default provenance attestations.                       |
 | [BUILDX_NO_DEFAULT_OCI_ARTIFACT](#buildx_no_default_oci_artifact)           | Boolean           | Turn off OCI artifact storage for attestations by default.      |
 | [BUILDX_NO_DEFAULT_LOAD](#buildx_no_default_load)                           | Boolean           | Turn off loading images to image store by default.              |
+| [BUILDX_SEND_GIT_QUERY_AS_INPUT](#buildx_send_git_query_as_input)           | Boolean           | Resolve Git URL queries in Buildx for frontend compatibility.   |
 | [EXPERIMENTAL_BUILDKIT_SOURCE_POLICY](#experimental_buildkit_source_policy) | String            | Specify a BuildKit source policy file.                          |
 
 BuildKit also supports a few additional configuration parameters. Refer to
@@ -807,5 +808,27 @@ Usage:
 ```console
 $ export BUILDX_NO_DEFAULT_LOAD=1
 ```
+
+### BUILDX_SEND_GIT_QUERY_AS_INPUT
+
+Set `BUILDX_SEND_GIT_QUERY_AS_INPUT=1` to use Git URL queries with a BuildKit
+daemon or Dockerfile frontend that doesn't support the Git query-string
+format. Buildx resolves the Git URL into a source input instead of requiring
+the frontend to interpret the query. The default is `false`.
+
+For example, select a tag and verify its commit while using an older builder:
+
+```console
+$ BUILDX_SEND_GIT_QUERY_AS_INPUT=1 docker buildx build \
+    'https://github.com/moby/buildkit.git?tag=v0.21.1&checksum=66735c67'
+```
+
+This applies to the main Git context and additional Git contexts that use
+URL queries. It changes how the context is represented in provenance:
+the context is supplied as a source input instead of the usual context
+string. If you consume provenance, account for that difference before
+enabling the setting in your workflow.
+
+See [Git URL queries](../concepts/context.md#url-queries) for query syntax.
 
 <!-- vale Docker.HeadingSentenceCase = YES -->

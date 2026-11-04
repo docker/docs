@@ -13,6 +13,10 @@ keywords:
   - organization namespace
   - Docker Home
 grid:
+  - title: Plan your rollout
+    description: Coordinate settings, pilot testing, and deployment.
+    icon: magnifying-glass-plus
+    link: /accounts/organization/setup/rollout/
   - title: Create your organization
     description: Choose a new namespace and subscription.
     icon: building-storefront
