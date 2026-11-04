@@ -68,33 +68,33 @@ the command for each scheduled run, substituting the prompt you entered into
 the template's arguments. The image's `ENTRYPOINT` or `CMD` alone doesn't define
 how a scheduled prompt is passed to the agent.
 
-## Example: Daily repository activity digest
+## Example: Weekly issue triage
 
-To prepare a daily summary of development activity, connect an MCP server
-that can read GitHub pull requests and issues and create issues. Authorize
+To reduce time spent asking for missing details in bug reports, schedule an
+agent to review issues and request reproduction steps. Connect an MCP server
+that can read GitHub issues and comments and add comments to issues. Authorize
 access to the repository, then select the server under **Tools**. If the
 predefined servers don't provide these tools, add a custom remote server.
 
-Choose an agent kit, set the cadence to `0 9 * * 1-5`, and select your team's
-time zone. Use a prompt such as:
+Choose an agent kit, set the cadence to `0 9 * * 1`, and select your team's
+time zone to run every Monday at 09:00. Use a prompt such as:
 
 ```text
-Use the connected GitHub tools to review pull requests and issues in
-OWNER/REPOSITORY updated in the past 24 hours. Summarize merged changes,
-open pull requests awaiting review, and reported blockers. Include links
-to the original pull requests and issues.
-Save the summary as a GitHub issue in OWNER/REPOSITORY with the title
-"Development digest: YYYY-MM-DD", using today's date. Check for an existing
-issue with that title before creating one, and update it if it exists.
-Exclude previous digest issues from the summary.
-If a tool fails, report the error instead of inventing a summary.
+Use the connected GitHub tools to review open issues labeled "bug" in
+OWNER/REPOSITORY. For each issue, read its description and comments and
+check whether it includes reproduction steps, expected behavior, actual
+behavior, and version information.
+If details are missing and no comment has already requested them, add one
+comment asking for the specific missing details. Skip issues awaiting a
+response to an earlier request. Don't close issues or change their labels.
+If a tool fails, stop and report the error instead of guessing.
 ```
 
-Replace `OWNER/REPOSITORY` with your repository. The GitHub issue preserves
-the digest after the sandbox is deleted and gives your team a place to discuss
-follow-up work. The connected server must provide the tools needed to read
-repository activity and find, create, and update issues. Test the task with
-**Run now** before relying on its cadence.
+Replace `OWNER/REPOSITORY` with your repository and `bug` with the label your
+team uses for bug reports. The comments stay with the issues after the sandbox
+is deleted, so reporters can respond and maintainers can follow up. The
+connected server must provide tools to read issues and their comments and
+add comments. Test the task with **Run now** before relying on its cadence.
 
 ## Manage schedules and review runs
 
