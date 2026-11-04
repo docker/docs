@@ -13,8 +13,8 @@ settings. You run kits you build yourself or get from another publisher in the
 same way: give `sbx` a reference, and Docker Sandboxes prepares the environment
 and applies the kit's settings.
 
-Docker recommends v3 kits. With sbx v0.51.0 and later, built-in agent names
-such as `claude` and `codex` resolve to published kits.
+Docker recommends v3 kits. V2 remains supported and is the default format
+for built-in agent references such as `claude` and `codex`.
 
 ## Run a kit
 
@@ -32,12 +32,13 @@ $ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-v3-kit
 
 ### Published v3 workloads
 
-To select a specific workload version when adding v3 mixins with `sbx run`
-or `sbx create`, use a versioned reference:
+Use these published v3 workloads in place of built-in shortcuts when adding
+v3 mixins with `sbx run` or `sbx create`.
 
 A workload's agent name comes from the last component of its repository name.
-For example, `docker/sbx-kit-claude` registers `sbx-kit-claude`. Changing the
-sandbox's `--name` doesn't change the agent name.
+It must differ from built-in agent names: `docker/sbx-kit-claude` registers
+`sbx-kit-claude`, while `sbx/claude` conflicts with built-in `claude` and
+fails to register. Changing the sandbox's `--name` doesn't change the agent name.
 
 | Built-in agent | V3 workload OCI reference |
 | --- | --- |
@@ -331,21 +332,22 @@ For how to preserve storage when changing a kit, see
 
 For local sandboxes, add a session mixin to keep conversations after removing
 and recreating the sandbox, including when you use `--rm`. Choose the mixin
-that matches your agent. These examples use the built-in names with sbx
-v0.51.0 or later:
+that matches your agent:
 
 {{< tabs >}}
 {{< tab name="Claude Code" >}}
 
 ```console
-$ sbx run --rm claude --kit sbx/claude-sessions:1.0.0
+$ sbx run --rm docker.io/docker/sbx-kit-claude:2.1.267 \
+    --kit sbx/claude-sessions:1.0.0
 ```
 
 {{< /tab >}}
 {{< tab name="Codex" >}}
 
 ```console
-$ sbx run --rm codex --kit sbx/codex-sessions:1.0.0
+$ sbx run --rm docker.io/docker/sbx-kit-codex:0.155.1 \
+    --kit sbx/codex-sessions:1.0.0
 ```
 
 {{< /tab >}}
