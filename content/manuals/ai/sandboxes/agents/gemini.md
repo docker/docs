@@ -1,87 +1,60 @@
 ---
-title: Gemini
+title: Gemini (retired)
+linkTitle: Gemini
 weight: 70
 description: |
-  Use Google Gemini in Docker Sandboxes with proxy-managed authentication and
-  API key configuration.
-keywords: docker sandboxes, gemini, google, ai agent, sbx
+  Gemini is no longer a built-in agent in Docker Sandboxes. Run it from the
+  published Gemini kit, or move to Antigravity.
+keywords: docker sandboxes, gemini, google, antigravity, ai agent, sbx, kit
 ---
 
 {{% include "sandboxes-local-scope.md" %}}
 
-This guide covers authentication, configuration, and usage of Google Gemini in
-a sandboxed environment.
+Google deprecated Gemini CLI in favor of Antigravity, so Docker Sandboxes no
+longer ships Gemini as a built-in agent. Starting with `sbx` v0.52.0,
+`sbx run gemini` and `sbx create gemini` don't create a sandbox. They print a
+notice that points to the two options below.
 
-Official documentation: [Gemini CLI](https://geminicli.com/docs/)
+## Run Gemini from the published kit
 
-## Quick start
-
-Create a sandbox and run Gemini for a project directory:
-
-```console
-$ sbx run gemini ~/my-project
-```
-
-`sbx run` defaults the workspace to the current directory:
+Gemini CLI is still available as a published kit. Pass the kit reference
+instead of the agent name:
 
 ```console
-$ cd ~/my-project
-$ sbx run gemini
+$ sbx run docker.io/sbx/gemini-kit:latest ~/my-project
 ```
 
-To create a [mountless sandbox](../usage.md#choose-a-workspace), use
-`sbx create` without a workspace path, then attach by name.
+The kit sets up Gemini CLI the same way the built-in agent did, including the
+`google` credential and the MCP gateway configuration in
+`~/.gemini/settings.json`. Store your Google API key with
+`sbx secret set google` before you start the sandbox.
 
-## Authentication
+To use the kit in an environment file, keep `agent: gemini` and add the kit
+reference to `kits:`:
 
-Gemini requires either a Google API key or a Google account with Gemini access.
+```yaml
+agent: gemini
+kits:
+  - docker.io/sbx/gemini-kit:latest
+```
 
-**API key**: Store your key using
-[stored secrets](../configuration/credentials.md#stored-secrets):
+## Move to Antigravity
+
+Antigravity replaces Gemini CLI. Run it from its published kit:
 
 ```console
-$ sbx secret set google
+$ sbx run docker.io/sbx/antigravity:latest ~/my-project
 ```
 
-**Google account**: If no API key is set, Gemini prompts you to sign in
-interactively when it starts. Interactive authentication is scoped to the
-sandbox and doesn't persist if you remove and recreate it.
+## Existing Gemini sandboxes
 
-## Configuration
+Sandboxes you created with the built-in Gemini agent keep working:
 
-Sandboxes don't pick up user-level configuration from your host, such as
-`~/.gemini`. Only project-level configuration in the working directory is
-available inside the sandbox. See
-[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
-for workarounds.
+- `sbx run gemini` in the sandbox's workspace re-attaches to it and starts
+  `gemini --yolo`, with a retirement warning.
+- `sbx run --name <sandbox-name>` re-attaches to a Gemini sandbox by name.
+- The sandbox keeps the credentials it already has.
 
-The sandbox disables Gemini's built-in sandbox tool (since the sandbox itself
-provides isolation).
-
-### Default startup command
-
-Without extra args, the sandbox runs:
-
-```text
-gemini --yolo
-```
-
-Arguments after `--` are added after the default flags when the first one is
-itself a flag (begins with `-`), so `--yolo` is preserved:
-
-```console
-$ sbx run --name <sandbox-name> -- -p "explain this"   # runs gemini --yolo -p "explain this"
-```
-
-When the first argument is a bare word — a subcommand or prompt — it replaces
-the defaults instead.
-
-## Base image
-
-Template: `docker/sandbox-templates:gemini`
-
-Gemini is configured to disable its built-in OAuth flow. Authentication is
-managed through the proxy with API keys.
-
-See [Customize](../customize/) to pre-install tools or customize this
-environment.
+You can't move a Gemini sandbox between local and cloud with `sbx move`, and
+`sbx run --new gemini` doesn't create a new one. To start fresh, use the
+Gemini kit or Antigravity.
