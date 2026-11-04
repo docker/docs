@@ -22,9 +22,9 @@ Before you begin, make sure you have:
   your organization
 - A Docker Business subscription
 
-The presence of the `admin-settings.json` file enforces sign-in on Docker Desktop. This is intended for business features that require authentication.
+Docker Desktop only applies the `admin-settings.json` file when the user is signed in to an account with a Docker Business subscription. To make sure the settings take effect, the presence of the file requires sign-in. 
 
-Users must be signed in and part of a Docker Business organization. If either condition isn't met, the settings file is ignored.
+Until a user signs in with a Business account, Docker Desktop prompts them to sign in and doesn’t apply the settings. To require sign-in to a specific organization, use a [sign-in enforcement]((/manuals/desktop/enterprise/enforce-sign-in/_index.md)) method.
 
 ## Step one: Create the settings file
 
