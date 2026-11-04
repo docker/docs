@@ -340,8 +340,7 @@ $ sbx settings set kit.allowedSources '["docker.io/","github.com/myorg/"]'
 Prefixes match on a path-segment boundary: `github.com/myorg/` permits that
 organization's repositories, but not `github.com/myorg-other/`. The value
 `["*"]` permits any remote source. Local directories and ZIP files are controlled
-by [kit.allowLocalKits](#kitallowlocalkits), and pinned agent kits have the
-[kit.allowExtractedAgents](#kitallowextractedagents) exception.
+by [kit.allowLocalKits](#kitallowlocalkits).
 
 See [restrict kit sources](../customize/use-kits.md#restrict-kit-sources) for source
 formats and examples.
@@ -363,27 +362,6 @@ Keep this enabled while developing kits locally. Allowing local kits doesn't
 exempt them from signature requirements when
 [kit.requireSignature](#kitrequiresignature) is enabled.
 
-#### kit.allowExtractedAgents {.wrap-anywhere}
-
-{{< setting-metadata type="boolean" default="true"
-  env="DOCKER_SANDBOXES_KIT_ALLOW_EXTRACTED_AGENTS" >}}
-
-Some agents that previously shipped inside Docker Sandboxes are distributed
-as kits. By default, Docker Sandboxes permits the exact pinned references it
-uses for those agents even if their sources aren't in `kit.allowedSources`,
-and exempts them from `kit.requireSignature`.
-
-To apply your source and signature requirements to those kits too:
-
-```console
-$ sbx settings set kit.allowExtractedAgents false
-```
-
-After this change, launching one of those agents can fail unless you allow its
-source and, when signatures are required, it has a signature from a trusted
-signer. The default exception applies only to the pinned references, not to
-other kits from the same publisher.
-
 #### kit.requireSignature {.wrap-anywhere}
 
 {{< setting-metadata type="boolean" default="false"
@@ -399,8 +377,6 @@ $ sbx settings set kit.requireSignature true
 
 The check applies when installing kits from local directories, Git, or OCI
 registries. ZIP kits can't carry verifiable signatures and are rejected.
-Pinned agent kits remain exempt while
-[kit.allowExtractedAgents](#kitallowextractedagents) is `true`.
 
 A signature covers the kit's `spec.yaml` and `files/` content. It doesn't pin
 image tags or verify downloads performed by the kit's commands. See
