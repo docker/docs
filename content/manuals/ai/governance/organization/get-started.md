@@ -94,7 +94,7 @@ turn on **AI governance**. If you haven't created a filesystem policy, Docker
 Home warns you first, because governed developers can't use Docker Sandboxes
 without one.
 
-Turning on AI governance doesn't govern anyone yet. Organization policies apply
+Turning on AI Governance doesn't govern anyone yet. Organization policies apply
 only to members who hold an AI Governance license, which you assign in
 [Step 5](#step-5-assign-licenses).
 
