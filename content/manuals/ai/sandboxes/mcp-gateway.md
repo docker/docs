@@ -73,6 +73,8 @@ sandbox, or use [`sbx mcp load`](#add-a-server-to-a-running-sandbox) for a
 sandbox that's already running.
 
 Server names can contain letters, numbers, dots, hyphens, and underscores.
+The name `none` is reserved for
+[starting a sandbox without MCP servers](#start-without-mcp-servers).
 
 The `--url` flag can point to different kinds of input. The execution location
 depends on what you register:
@@ -442,13 +444,14 @@ integrations read the gateway URL and register it with the agent.
 Whether you pass `--static-mcp` when you create the sandbox determines its MCP
 mode:
 
-- Static mode pre-loads the specified servers and doesn't expose dynamic
-  discovery tools to the agent.
+- Static mode loads only the servers you specify, or starts without servers
+  if you specify `none`. It doesn't expose dynamic discovery tools to the agent.
 - Dynamic mode pre-loads no servers and lets the agent find and attach
   registered servers.
 
 This choice persists across sandbox restarts unless you
-[unload every server in the static set](#remove-a-server-from-a-running-sandbox).
+[unload every server in a named static set](#remove-a-server-from-a-running-sandbox).
+Sandboxes created with `--static-mcp none` remain static.
 
 ### Use static mode
 
@@ -473,6 +476,20 @@ gateway doesn't expose `mcp-find`, `mcp-add`, or `mcp-config-set` to the agent.
 You can't replace the initial set by passing `--static-mcp` when reconnecting to
 an existing sandbox. To attach another server from the host, use
 [`sbx mcp load`](#add-a-server-to-a-running-sandbox).
+
+### Start without MCP servers
+
+Pass `--static-mcp none` to `sbx create` or `sbx run` to start a local sandbox
+with no MCP servers and no dynamic discovery tools:
+
+```console
+$ sbx run claude --name mcp-empty --static-mcp none
+```
+
+`none` is case-insensitive and can't be combined with server names. Cloud
+sandboxes don't support this value. You can load registered servers later with
+[`sbx mcp load`](#add-a-server-to-a-running-sandbox). The sandbox remains in
+static mode after loading or unloading servers and across restarts.
 
 ### Use dynamic mode
 
@@ -525,9 +542,11 @@ $ sbx mcp load linear --sandbox my-session
 In dynamic mode, the agent can also find and attach the registered server
 again. Unloading a server doesn't prevent the agent from reloading it.
 
-If you unload all servers from a static sandbox, it stays in static mode for
-the current session. After restarting the Docker Sandboxes daemon and
-reconnecting, the agent can find and attach registered servers.
+If you unload all servers from a sandbox created with a named static set, it
+stays in static mode for the current session. After restarting the Docker
+Sandboxes daemon and reconnecting, the agent can find and attach registered servers. A sandbox
+created with `--static-mcp none` keeps dynamic discovery disabled after unloading
+its last server and restarting.
 
 ## Built-in gateway tools
 
