@@ -17,6 +17,8 @@ run in the isolated sandbox.
 
 ## Prerequisites
 
+- Model provider credentials configured in Docker Sandboxes for any AI agent
+  you plan to run. See [Configure agent credentials](_index.md#configure-agent-credentials).
 - SSH access set up. See [Editor and app integrations](_index.md#enable-ssh-access).
 - The [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
   extension (`ms-vscode-remote.remote-ssh`) installed in VS Code.
