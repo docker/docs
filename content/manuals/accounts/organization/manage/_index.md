@@ -4,69 +4,31 @@ linkTitle: Manage
 weight: 20
 description: Learn how to manage your Docker organization, including members, teams, roles, licenses, seats, product access, activity, and settings.
 keywords: manage organization, members, teams, roles, licenses, seats, product access, organization management, docker home, organization settings, activity logs, deactivate organization
-grid:
-  - title: User access workflow
-    description: Plan roles, provisioning, and ongoing access reviews.
-    icon: user-group
-    link: /accounts/organization/manage/user-access/
-  - title: Information
-    description: Update your organization's general information and settings.
-    icon: pencil-square
-    link: /accounts/organization/manage/general-settings/
-  - title: Members
-    description: Invite, manage, and assign roles to your organization members.
-    icon: user-plus
-    link: /accounts/organization/manage/members/
-  - title: Roles
-    description: Create custom roles and review the permissions each role grants.
-    icon: lock-closed
-    link: /security/roles-and-permissions/
-  - title: Teams
-    description: Create teams and manage repository access for groups of members.
-    icon: user-group
-    link: /accounts/organization/manage/manage-a-team/
-  - title: Licenses
-    description: View your license inventory and assign licenses to teams or individual members.
-    icon: key
-    link: /accounts/organization/manage/manage-licenses/
-  - title: Seats
-    description: Add or remove seats for Docker Team and Business subscriptions.
-    icon: user-circle
-    link: /accounts/organization/manage/manage-seats/
-  - title: Products
-    description: Manage access and view usage for Docker products across your organization.
-    icon: squares-2x2
-    link: /accounts/organization/manage/manage-products/
-  - title: Activity
-    description: Review organization and repository changes in Docker Home.
-    icon: clipboard-document-list
-    link: /accounts/organization/activity-logs/
-  - title: Docker Desktop
-    description: Configure and enforce Docker Desktop settings for your organization.
-    icon: cog
-    link: /desktop/enterprise/hardened-desktop/settings-management/
-  - title: Deactivation
-    description: Deactivate an organization after completing the required steps.
-    icon: minus-circle
-    link: /accounts/organization/manage/deactivate-account/
-  - title: Security
-    description: Configure SSO and SCIM, domains, access tokens, and OIDC connections.
-    icon: shield-check
-    link: /security/
-  - title: Billing
-    description: Manage payment methods and view billing history.
-    icon: credit-card
-    link: /subscription-billing/
 aliases:
   - /admin/organization/manage/
 ---
 
-You manage the organization from [Docker Home](https://app.docker.com).
+Organization owners manage membership, access, and the subscription in
+[Docker Home](https://app.docker.com). What you can open depends on your
+role. 
 
 ## Managing your organization
 
-Organization owners can manage the areas below. Which areas you can open
-depends on your role. Members can open **Members** and **Teams**.
+Members can open **Members** and **Teams**.
+
+- Invite people and set what they can do. Assign each member a role, change
+  it when their work changes, and remove them when they leave. The role
+  applies across the organization. When several members need the same
+  repositories, add them to a team and grant repository access to the team.
+  Owners can invite people directly, or use provisioning so membership
+  follows your identity provider.
+- Change how many people the subscription covers, and who can use each
+  product. Add or remove seats on a Team or Business subscription. Assign a
+  license when a member or team needs an add-on. After someone has a seat or
+  a license, set what they can do in each product.
+- Update the organization itself. Change the name and profile shown on the
+  organization page, or deactivate the organization when you no longer use
+  it.
 
 ## Seats and licenses
 
@@ -83,6 +45,11 @@ and [Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md).
 
 ## Next steps
 
-Explore the following sections to manage your organization.
-
-{{< grid >}}
+- [Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md)
+  to view your license inventory and assign licenses to teams or members.
+- [Invite and manage members](/manuals/accounts/organization/manage/members.md)
+  to add members and assign roles.
+- [Manage seats](/manuals/accounts/organization/manage/manage-seats.md) to
+  add or remove seats for your subscription.
+- [Create and manage a team](/manuals/accounts/organization/manage/manage-a-team.md)
+  to group members and manage repository access.
