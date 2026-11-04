@@ -1,8 +1,10 @@
 ---
-title: Change general organization information
+title: Update organization information
 linkTitle: Information
 weight: 10
-description: Learn how to manage settings for organizations.
+description: >-
+  Update your organization's name, company, location, website, and
+  avatar in Docker Home.
 keywords: organization, settings, Docker Home, manage, Docker organization, Gravatar, SCIM, SSO setup, domain management, organization settings
 aliases:
   - /admin/organization/setup/general-settings/
@@ -10,11 +12,9 @@ aliases:
   - /accounts/organization/setup/general-settings/
 ---
 
-Learn how to update your organization information.
+Update the details that appear on your organization landing page.
 
 ## Update organization information
-
-General organization information appears on your organization landing page.
 
 This information includes:
 
@@ -29,7 +29,7 @@ To edit this information:
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization from the top-left account drop-down.
 1. Select **Organization settings**.
-1. Enter or update your organization’s details, then select **Save**.
+1. Enter or update your organization's details, then select **Save**.
 
 ## Next steps
 

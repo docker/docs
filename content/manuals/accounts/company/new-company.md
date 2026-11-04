@@ -1,5 +1,5 @@
 ---
-title: Set up new company
+title: Set up a company
 linkTitle: Setup
 weight: 10
 description: >-
@@ -16,8 +16,10 @@ aliases:
 
 {{< summary-bar feature_name="Company" >}}
 
-When you set up a company in Docker Home, you create the company, then can add owners, invite members, and
-add more organizations as needed. You must be the owner of the organization you want to add to your company. 
+When you set up a company in Docker Home, you create the company, then add
+owners, invite members, and add more organizations as needed. You must be the
+owner of the organization you want to add to your company.
+
 
 ## Create a company
 
@@ -39,7 +41,7 @@ see [Add more organizations](#add-more-organizations).
 ## Company owners
 
 A company can have multiple owners who manage the company and all of its
-organizations. A company can have up to 100 owners. For details about the
+organizations. A company can have up to 10 owners. For details about the
 company owner role and how it affects seats, see
 [Company structure](/manuals/accounts/company/_index.md#company-structure).
 
@@ -50,7 +52,7 @@ company owner role and how it affects seats, see
 1. Specify the member's Docker ID, then select **Add company owner**.
 
 **Add owner** is
-unavailable when the company already has 100 owners.
+unavailable when the company already has 10 owners.
 
 ### Remove a company owner
 
