@@ -115,7 +115,8 @@ details, see
 If a sandbox fails to mount with a `mount policy denied` error, an organization
 filesystem policy doesn't allow the path. Check that the filesystem allow rule
 uses `**` rather than `*`. A single `*` doesn't match across directory
-separators. For more details, see
+separators. For macOS and Linux paths, also check that the rule matches the
+directory names' capitalization on disk. For more details, see
 [Organization filesystem access policies](organization/policies/filesystem.md).
 
 ## Organization policy changes aren't taking effect
