@@ -37,6 +37,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Aagent v1.153.0](https://github.com/docker/docker-agent/releases/tag/v1.153.0)
 - Docker Scout CLI `v1.28.0`
 - Docker MCP CLI `v0.44.3`
+- [Docker Compose v5.7.0](https://github.com/docker/compose/releases/tag/v5.7.0)
 
 ### Bug fixes and enhancements
 
@@ -49,7 +50,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Mac
 
-- Fixed an issue where an update on could fail with **Unable to install** because Docker Desktop killed the installer while quitting.
+- Fixed an issue where an update could fail with **Unable to install** because Docker Desktop killed the installer while quitting.
 
 #### For Windows
 
@@ -58,7 +59,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Added BuildKit support for Windows containers when using the containerd image store.
 - Fixed WSL 2 engine start failing on slow machines when the data disk took more than a fraction of a second to appear.
 - Fixed per-user installs and updates on Windows failing with a "Virtual Machine Platform" error on machines where WSL 2 already works.
-- Fixed Docker Desktop hanging after closing an error dialog with its close button on Windows, for example getting stuck on **Applying settings** after closing the privileged helper service prompt. Closing an error dialog that offers **Continue now** continues instead of quitting Docker Desktop. 
+- Fixed Docker Desktop hanging after closing an error dialog with its **Close** button. Closing an error dialog that offers **Continue now** continues instead of quitting Docker Desktop. 
 - Fixed Windows containers failing to start at login with **Starting windows containers: An error has occurred.** when a container took longer than 30 seconds to stop.
 - Fixed WSL 2 distributions flushing their systemd-resolved DNS cache every 30 seconds while Docker Desktop was running. Fixes [docker/desktop-feedback#794](https://github.com/docker/desktop-feedback/issues/794).
 - Fixed Windows installer launcher to report descriptive error reasons (e.g. **Disk full**) on update failure instead of a bare exit code.
