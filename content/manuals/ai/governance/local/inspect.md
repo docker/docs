@@ -23,6 +23,7 @@ Run `sbx policy ls` to see every active policy:
 ```console
 $ sbx policy ls
 POLICY                                 SOURCE   APPLIES TO          SUMMARY
+default-deny-all                       local    all                 network: deny when no rule decides
 local-policy                           local    all                 network: 42 allow, 1 deny; filesystem read: 1 allow; filesystem write: 1 allow
 1b2633ea-e604-48bb-a5e6-3ac86ba383fe   kit      sandbox:my-sandbox  network: 3 allow
 ```
@@ -39,6 +40,12 @@ The columns are:
   `network: 5 allow, 1 deny`. A rule that names several destinations
   contributes one entry per destination.
 
+The `default-deny-all` row represents the built-in fallback: access is blocked
+when no applicable policy decides a request. It never overrides an allow rule.
+Its summary describes this condition instead of counting it as an explicit
+deny. For how unmatched requests are handled under each preset, see
+[How rules combine](_index.md#how-rules-combine).
+
 ## List the policies for one sandbox
 
 Pass a sandbox name to see only the global policies and the policies scoped to
@@ -48,8 +55,19 @@ that sandbox:
 $ sbx policy ls my-sandbox
 ```
 
-The output summarizes the rules by type, for example
-`allow 46 hosts from local-policy`. To see each rule, add `--wide`.
+The output groups rules by type. For example, the network section for a sandbox
+with 42 allowed hosts and one explicitly denied host in its local policy shows:
+
+```text
+NETWORK
+  • allow 42 hosts from local-policy
+  • deny 1 host from local-policy
+  • fallback: deny when no rule decides from default-deny-all
+```
+
+The fallback appears on its own line, so `deny 1 host` counts only the explicit
+deny. Other policies, such as those provided by kits, also contribute to the
+sandbox's summary. To see each rule, add `--wide`.
 
 ## Show rule details
 
