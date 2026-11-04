@@ -31,8 +31,11 @@ add to a company.
 
 > [!IMPORTANT]
 >
-> Once you add an organization to a company, you can't remove it from the
-> company.
+> Docker Home does not include a way to remove an organization from the
+> company. An organization owner can remove it with
+> `DELETE /v2/companies/{company_name}/orgs/{orgname}` when that
+> organization is not the company's only organization and is not connected
+> to the company's SSO connection.
 
 1. Sign in to [Docker Home](https://app.docker.com) and select
    your company.
@@ -157,7 +160,8 @@ select **Remove**.
 1. Sign in to [Docker Home](https://app.docker.com) and select your company.
 1. Select **Users**.
 1. Find the user and select the **Actions** menu, then select **Remove**.
-1. Select the organizations to remove the user from, then select **Remove**.
+1. Select **Remove**. If the user belongs to more than one organization,
+   select the organizations, then select **Remove**.
 
 If the user is the only owner of an organization, assign another owner
 before you can remove them from that organization.

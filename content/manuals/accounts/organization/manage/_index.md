@@ -71,9 +71,10 @@ OIDC connections.
 
 ## Managing your organization
 
-You manage your organization from [Docker Home](https://app.docker.com) and
-must be assigned the
-[organization owner role](/manuals/security/roles-and-permissions/_index.md).
+You manage your organization from [Docker Home](https://app.docker.com).
+Organization owners can manage the areas below. Access to a specific area
+depends on your role. For example, members can open **Members** and
+**Teams**.
 
 ## Seats and licenses
 
