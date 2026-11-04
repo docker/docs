@@ -50,7 +50,7 @@ different requirements, <a href="https://www.docker.com/pricing/contact-sales/" 
 
 ## Session management and idle state
 
-Docker Offload v1 uses session management and idle state policies to ensure fair use of cloud resources across all users, see [Fair use](#fair-use).
+Docker Offload v1 uses session management and idle state policies to ensure [fair use](/manuals/offload/v1/_index.md#fair-use) of cloud resources across all users.
 
 Each user can run one Docker Offload v1 session at a time. When Docker Desktop is in an **Offload idle** state, it waits for activity on the Docker API and only connects to a cloud environment when needed. Once connected, the session moves to an **Offload running** state and stays connected as long as Docker detects activity. Activity includes any Docker API call, a running container, or an active build.
 
