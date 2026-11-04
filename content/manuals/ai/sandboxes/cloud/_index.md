@@ -118,6 +118,9 @@ Removal deletes files stored only in the sandbox. For your own projects, see
 [Transfer files](usage.md#transfer-files) and
 [Authenticate cloud agents](credentials.md) before cloning private repositories.
 
+For step-by-step sharing, remote development, and local handoff workflows, see
+[Docker Agentic Platform guides](/manuals/agentic-platform/guides/_index.md).
+
 ## Learn more
 
 - [Signup and billing](/manuals/agentic-platform/signup.md) covers activation
