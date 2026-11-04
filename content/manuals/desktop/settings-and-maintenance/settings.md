@@ -363,5 +363,5 @@ Enable [Docker Offload v1](/manuals/offload/v1/_index.md) and configure idle tim
 | Setting             | Description                               | Notes                                 |
 | ------------------- | ----------------------------------------- | ------------------------------------- |
 | **Enable Docker Offload** | Run your containers in the cloud using [Docker Offload v1](/manuals/offload/v1/_index.md).  | Requires sign-in and an Offload subscription |
-| **Idle timeout** | Set the duration of time between no activity and Docker Offload entering idle mode. For details about idle timeout, see [Session management and idle state](/manuals/offload/v1/about.md#session-management-and-idle-state). | |
+| **Idle timeout** | Set the duration of time between no activity and Docker Offload entering idle mode. For details about idle timeout, see [Session management and idle state](/manuals/offload/v1/core-concepts.md#session-management-and-idle-state). | |
 | **Enable GPU support** | Let your workloads use cloud GPU if available. | |
