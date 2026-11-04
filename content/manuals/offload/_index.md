@@ -11,7 +11,7 @@ grid:
   description: Get up and running with Docker Offload in just a few steps.
   icon: rocket-launch
   link: /offload/quickstart/
-- title: About
+- title: How Offload works
   description: Learn about Docker Offload and how it works.
   icon: information-circle
   link: /offload/about/
@@ -47,6 +47,24 @@ runs your containers in a cloud sandbox instead of on your local machine, so
 you can work on hardware that can't run your workload, in virtual desktop
 infrastructure (VDI) environments, or on systems that don't support nested
 virtualization.
+
+## Key features
+
+- Cloud sandboxes that persist: Your containers, images, and volumes survive
+  pausing and resuming, so you can pick up a long-running workload where you
+  left off.
+- Familiar commands: Run the Docker CLI and Docker Compose commands you already
+  use. Your context determines where they run.
+- Port forwarding and file sync: Reach ports published in the sandbox from your
+  machine, and work with bind-mounted files, as you would with local
+  containers.
+- Secure communication: Use encrypted tunnels between Docker Desktop and the
+  cloud sandbox, with support for secure secrets and image pulling.
+- Usage-based billing: Pay for the time your sandbox runs, not for the time it
+  spends paused.
+- VDI-friendly: [Use Docker Desktop](/manuals/desktop/setup/vm-vdi.md) in
+  virtual desktop environments or systems that don't support nested
+  virtualization.
 
 Docker Offload is for individual developers, and it's included with a [Docker
 Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md) subscription. You pay for the time your cloud sandbox runs.
