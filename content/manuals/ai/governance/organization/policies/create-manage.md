@@ -97,6 +97,10 @@ To set the message:
    organization.
 1. In the left-hand navigation, expand **AI Platform** and select **Manage**.
 1. In **Support message**, enter up to 500 characters.
+
+   The **Support message** field appears only when **AI governance** is turned
+   on. For more details, see
+   [Turn on AI governance](../get-started.md#step-4-turn-on-ai-governance).
 1. Select **Save changes**.
 
 Docker shows the message only for denials caused by an organization policy and
