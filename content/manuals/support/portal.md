@@ -11,16 +11,19 @@ weight: 10
 
 The Docker Support portal lets you create and manage support cases, follow
 their progress, and collaborate with Docker Support and your teammates in
-one place. This page covers how to open the portal, work with cases, and
-how permissions control who can see and do what.
+one place. This page covers how to open the portal, how to work with
+cases, and who can see or update a case.
 
 ## Who gets access
 
-The Support portal is being rolled out in phases, so it may not yet be
-available to every organization. Organizations with a Premium Support
-subscription are enrolled automatically. After your organization is
-enrolled, open the portal from the **Help** menu by following the steps
-below.
+> [!NOTE]
+>
+> The Support portal is being rolled out in phases, so it may not yet be
+> available to every organization. Organizations with a Premium Support
+> subscription are enrolled automatically.
+
+After your organization is enrolled, open the portal from the **Help**
+menu.
 
 ## Access the Support portal
 
@@ -79,11 +82,9 @@ open past cases.
      your issue, using the [severity levels](#severity-levels) below. The
      field does not appear for the Account, Billing, Legal, Sales, and
      Security topics, because a severity is set automatically for them.
-   - Complete any additional fields shown for your topic, such as the
-     Docker Desktop version, browser, or operating system. Topics can also
-     ask for **Version number**, **Diagnostics ID**, or **Affected users**.
-     For Docker Desktop, the form asks for version, operating system,
-     diagnostics ID, and affected users.
+   - Complete any additional fields the topic shows. These can include
+     **Version number**, browser, **Operating system**, **Diagnostics ID**,
+     and **Affected users**. Docker Desktop asks for all of these.
 1. Optionally, attach files to the case. Select **Select files to attach**
    or drag and drop files into the upload area. See
    [Attach files](#attach-files) for file rules.
@@ -105,15 +106,13 @@ Support assigns one.
 ### View cases
 
 The **Case history** page lists every case associated with your
-organization. You can:
+organization. Each row shows the status, case number, subject, topic,
+subtopic, who created it, and when it was last modified. A company
+account also shows the organization.
 
-- See each case's status, case number, subject, topic, subtopic, who
-  created it, and when it was last modified. A company account also shows
-  the organization.
-- Select a case to open its details
-- Select **Create case** to open a new case
-- Open the **⋮** menu on a case and select **Details** or **Resolve case**
-- Page through cases, 10, 25, or 50 at a time
+Select a case to open it. You can show 10, 25, or 50 cases on a page.
+**Create case** and the **⋮** menu work the same way as on the landing
+page.
 
 #### Case statuses
 
@@ -128,28 +127,22 @@ organization. You can:
 
 ### Case details
 
-Each case shows its full progress and history. You can:
-
-- Review the case summary and description. The case also shows its case
-  number, subject, and topic.
-- Follow the activity timeline of comments and responses in **Activity**
-- Add comments
-- Add or remove watchers
-- Attach and download files
-- Resolve the case
+Each case shows its full progress and history: the case number, subject,
+topic, summary, description, and the comments and responses in
+**Activity**.
 
 What you can do depends on your access. See
-[Who can interact with a case](#who-can-interact-with-a-case).
+[Who can interact with a case](#who-can-interact-with-a-case). The steps
+below cover comments, watchers, files, and resolving the case.
 
 #### Comment on a case
 
 1. Open the case.
 1. Enter your message in the **Activity** editor.
-1. Optionally, attach files.
+1. Optionally, attach files. Select **Select files to attach** or drag
+   and drop files into the upload area. See
+   [Attach files](#attach-files) for file rules.
 1. Select **Send**.
-
-To attach files, select **Select files to attach** or drag and drop files
-into the upload area. See [Attach files](#attach-files) for file rules.
 
 You can comment on a case only if you created it or were added as a
 watcher. If you can see a case but are not allowed to comment, the comment
@@ -197,19 +190,12 @@ case, upload files, or download attachments.
 
 ### Attach files
 
-You can attach files to a case when you create it or when you comment on
-an open case.
-
-1. Open an open case.
-1. Select **Select files to attach** or drag and drop files into the
-   upload area.
-1. Optionally, add a comment.
-1. Select **Send**.
+You can attach files when you create a case or when you
+[comment on a case](#comment-on-a-case).
 
 Uploaded files appear in the **Attachments** section at the top of the
-case. A file shows as **pending** while it is checked for security, then
-becomes a download link once it passes. The download link is available
-when you can comment on the case.
+case. A file becomes a download link after it passes the security check.
+You can download the file if you can comment on the case.
 
 #### File requirements
 
@@ -310,12 +296,11 @@ creator or a watcher, you can read the case but cannot comment on it. The
 comment box is unavailable and explains why. Ask the case creator to add
 you as a watcher.
 
-### Do teams affect access
+### Teams and case access
 
-No. [Teams](/manuals/accounts/organization/manage/manage-a-team/) are
-groups of Docker users within an organization, used to manage repository
-access. Case visibility and permissions are controlled at the organization
-level.
+[Teams](/manuals/accounts/organization/manage/manage-a-team/) are groups
+of Docker users within an organization, used to manage repository access.
+Case visibility and permissions are controlled at the organization level.
 
 ### Summary of case permissions
 

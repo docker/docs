@@ -3,9 +3,10 @@ title: Get support for Docker products
 linkTitle: Support
 description: >-
   Find Docker support options, including paid subscription response times,
-  severity levels, Docker Desktop support scope, and community resources.
-keywords: docker support, subscription support, premium support, support
-  response times, severity levels, community forums, docker desktop support
+  the Support portal, Docker Desktop support scope, and community resources.
+keywords: docker support, support portal, subscription support, premium
+  support, support response times, severity levels, community forums,
+  docker desktop support
 weight: 50
 params:
   sidebar:
@@ -36,9 +37,9 @@ Docker products.
 Paid subscribers create and track cases in the
 [Docker Support portal](/manuals/support/portal.md).
 [Who gets access](/manuals/support/portal.md#who-gets-access) covers
-enrollment. Organizations with a Premium Support subscription have
-automatic portal access. Other paid organizations gain access as the
-rollout progresses.
+enrollment, including automatic access for Premium Support. See
+[Severity levels](/manuals/support/portal.md#severity-levels) and
+[Case statuses](/manuals/support/portal.md#case-statuses) on that page.
 
 ### Support response times
 
@@ -59,33 +60,54 @@ subscriptions, the following response times apply:
 > available as an add-on for
 > [Docker Business and Docker Hardened Images subscribers](https://www.docker.com/pricing?ref=Docs&refAction=DocsSupport).
 
-Severity levels and case statuses are part of creating and viewing a case.
-See [Severity levels](/manuals/support/portal.md#severity-levels) and
-[Case statuses](/manuals/support/portal.md#case-statuses).
-
 ## Docker Desktop support
 
 Docker Desktop support is available with a paid subscription.
 
 ### Scope of support
 
-| Covered | Not covered |
-| :--- | :--- |
-| Configuration and installation issues | Unsupported operating systems, including beta and preview versions |
-| Desktop updates | Versions older than the latest release (except Docker Business) |
-| Account management and billing | Training, customization, and integration |
-| Sign-in issues | Altered or modified Docker software |
-| Push or pull issues, including rate limiting | Docker Engine, Docker CLI, or other bundled Linux components |
-| Automated builds | Third-party applications not provided by Docker |
-| Basic product how-to questions | Features labeled as experimental |
-| Application crashes or unexpected behavior | Hardware malfunction, abuse, or improper use |
-| On Windows: turning on virtualization in BIOS | System and server administration activities |
-| On Windows: turning on Windows features | Routine product maintenance (data backup, disk space, log rotation) |
-| On Windows: running inside certain [VM or VDI environments](/manuals/desktop/setup/vm-vdi.md) (Docker Business only) | Desktop as a production runtime |
-|  | Running containers of a different architecture using emulation |
-|  | Kubernetes |
-|  | Scale deployment and multi-machine installation |
-|  | Running multiple instances on a single machine |
+{{< tabs >}}
+{{< tab name="Covered" >}}
+
+Docker Desktop support includes:
+
+- Configuration and installation issues
+- Desktop updates
+- Account management and billing
+- Sign-in issues
+- Push or pull issues, including rate limiting
+- Automated builds
+- Basic product how-to questions
+- Application crashes or unexpected behavior
+- On Windows: turning on virtualization in BIOS
+- On Windows: turning on Windows features
+- On Windows: running inside certain
+  [VM or VDI environments](/manuals/desktop/setup/vm-vdi.md)
+  (Docker Business only)
+
+{{< /tab >}}
+{{< tab name="Not covered" >}}
+
+Docker Desktop support excludes:
+
+- Unsupported operating systems, including beta and preview versions
+- Versions older than the latest release (except Docker Business)
+- Training, customization, and integration
+- Altered or modified Docker software
+- Docker Engine, Docker CLI, or other bundled Linux components
+- Third-party applications not provided by Docker
+- Features labeled as experimental
+- Hardware malfunction, abuse, or improper use
+- System and server administration activities
+- Routine product maintenance (data backup, disk space, log rotation)
+- Desktop as a production runtime
+- Running containers of a different architecture using emulation
+- Kubernetes
+- Scale deployment and multi-machine installation
+- Running multiple instances on a single machine
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ### Supported versions
 
@@ -114,6 +136,8 @@ For more information, see the
 
 ## Next steps
 
+- Create and track a case in the
+  [Docker Support portal](/manuals/support/portal.md)
 - Review system requirements:
   [Mac](/manuals/desktop/setup/install/mac-install.md#system-requirements),
   [Windows](/manuals/desktop/setup/install/windows-install.md#system-requirements),
