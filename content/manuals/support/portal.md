@@ -236,7 +236,7 @@ UTC. The per-case limit applies to all attachments on the case combined.
 If you reach a limit, wait until it resets and try again.
 
 Files cannot be added to closed or resolved cases. Files already attached
-to a resolved or closed case stay available to download.
+to a case stay available to download for 90 days after the case is closed.
 
 ### Resolve a case
 
