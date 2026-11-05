@@ -131,9 +131,6 @@ services:
 
 volumes:
   db-data:
-    driver: flocker
-    driver_opts:
-      size: "10GiB"
 
 configs:
   httpd-config:
