@@ -218,7 +218,7 @@ a **security risk detected** message and cannot be downloaded. The message
 does not say which check failed. If you believe a file was flagged by
 mistake, add a comment to your case.
 
-**expired** means the upload did not finish in time and the file is not
+**Expired** means the upload did not finish in time and the file is not
 available. Attach the file again.
 
 #### Upload limits
