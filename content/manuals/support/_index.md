@@ -34,9 +34,11 @@ Docker products.
 > for your product.
 
 Paid subscribers create and track cases in the
-[Docker Support portal](/manuals/support/portal.md). Organizations with a
-Premium Support subscription have automatic portal access. Other paid
-organizations gain access as the rollout progresses.
+[Docker Support portal](/manuals/support/portal.md).
+[Who gets access](/manuals/support/portal.md#who-gets-access) covers
+enrollment. Organizations with a Premium Support subscription have
+automatic portal access. Other paid organizations gain access as the
+rollout progresses.
 
 ### Support response times
 
@@ -57,33 +59,9 @@ subscriptions, the following response times apply:
 > available as an add-on for
 > [Docker Business and Docker Hardened Images subscribers](https://www.docker.com/pricing?ref=Docs&refAction=DocsSupport).
 
-### Support severity levels
-
-Choose a **Severity** when you create a case. Use the option that matches
-the issue:
-
-| Level | Description |
-| :--- | :--- |
-| S1 (Critical) | Complete loss of core functionality; broad/systemic impact; no workaround |
-| S2 (High) | Significant subset of users loses key functionality; severe business impact; no workaround |
-| S3 (Medium) | Partial/non-critical loss for an individual or small group; workaround typically available |
-| S4 (Low) | Inquiry, minor issue, or enhancement request |
-
-For Account, Billing, Legal, Sales, and Security topics, Docker sets the
-severity automatically, and the form hides **Severity**.
-
-### Case statuses
-
-A case moves through the following statuses:
-
-| Status | Meaning |
-| :--- | :--- |
-| NEW | Docker Support has received the case and hasn't replied yet |
-| PENDING SUPPORT | Docker Support is working on the case |
-| PENDING CUSTOMER | Docker Support is waiting for a reply from you |
-| ON HOLD | Docker Support has replied, and the resolution depends on another team at Docker |
-| RESOLVED | You or Docker Support marked the case resolved. Docker Support then closes it |
-| CLOSED | The case is complete |
+Severity levels and case statuses are part of creating and viewing a case.
+See [Severity levels](/manuals/support/portal.md#severity-levels) and
+[Case statuses](/manuals/support/portal.md#case-statuses).
 
 ## Docker Desktop support
 
