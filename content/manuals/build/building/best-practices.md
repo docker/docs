@@ -518,6 +518,16 @@ conjunction with [`ENTRYPOINT`](/reference/dockerfile.md#entrypoint), unless
 you and your expected users are already quite familiar with how `ENTRYPOINT`
 works.
 
+If you only start a shell to expand variables, `exec` the real process so it
+becomes PID 1 and gets `SIGTERM` from `docker stop`. Without `exec`, `sh -c`
+swallows the signal and the app is just killed:
+
+```dockerfile
+CMD ["sh", "-c", "exec java $JAVA_OPTS -jar app.jar"]
+```
+
+Same idea as the [`ENTRYPOINT`](#entrypoint) helper-script note below.
+
 For more information about `CMD`, see [Dockerfile reference for the CMD instruction](/reference/dockerfile.md#cmd).
 
 ### EXPOSE
