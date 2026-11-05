@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 616 178" width="616" height="178" role="img" aria-labelledby="t d" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+<title id="t">Image size and OS package count: upstream versus hardened base</title>
+<desc id="d">Same compiled binary on two bases. Upstream Ubuntu 24.04: 8.17 GB, 211 packages. DHI debian-base: 2.30 GB, 41 packages.</desc>
+<style>
+svg{--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#87857d;--bar:#2a78d6;--rule:#e4e3de}
+@media (prefers-color-scheme:dark){svg{--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#96948b;--bar:#3987e5;--rule:#33322e}}
+.ttl{font-size:13px;font-weight:650;fill:var(--ink)}.unit{font-size:10.5px;fill:var(--muted)}
+.cat{font-size:11.5px;fill:var(--ink2)}.val{font-size:12px;font-weight:650;fill:var(--ink)}
+.bar{fill:var(--bar)}.rule{stroke:var(--rule);stroke-width:1}.note{font-size:10.5px;fill:var(--muted)}
+</style>
+<rect width="616" height="178" fill="var(--surface)"/>
+<text class="cat" x="162" y="79.0" text-anchor="end">Upstream (Ubuntu 24.04)</text>
+<text class="cat" x="162" y="123.0" text-anchor="end">DHI debian-base</text>
+<text class="ttl" x="176" y="34">Image size</text>
+<text class="unit" x="176" y="48">GB</text>
+<line class="rule" x1="175.5" y1="62" x2="175.5" y2="132"/>
+<path class="bar" d="M176,62 h146.00 a4,4 0 0 1 4,4 v18 a4,4 0 0 1 -4,4 h-146.00 Z"/>
+<text class="val" x="334.00" y="79.0">8.17</text>
+<path class="bar" d="M176,106 h38.23 a4,4 0 0 1 4,4 v18 a4,4 0 0 1 -4,4 h-38.23 Z"/>
+<text class="val" x="226.23" y="123.0">2.30</text>
+<text class="ttl" x="384" y="34">OS packages</text>
+<text class="unit" x="384" y="48">count</text>
+<line class="rule" x1="383.5" y1="62" x2="383.5" y2="132"/>
+<path class="bar" d="M384,62 h146.00 a4,4 0 0 1 4,4 v18 a4,4 0 0 1 -4,4 h-146.00 Z"/>
+<text class="val" x="542.00" y="79.0">211</text>
+<path class="bar" d="M384,106 h25.24 a4,4 0 0 1 4,4 v18 a4,4 0 0 1 -4,4 h-25.24 Z"/>
+<text class="val" x="421.24" y="123.0">41</text>
+<text class="note" x="24" y="162">Same compiled binary in both images. linux/amd64, TEI 1.9.4, 2026-10-28. Bars scaled per panel.</text>
+</svg>
