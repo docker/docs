@@ -298,7 +298,7 @@ you as a watcher.
 
 ### Teams and case access
 
-[Teams](/manuals/accounts/organization/manage/manage-a-team/) are groups
+[Teams](/manuals/accounts/organization/manage/manage-a-team.md) are groups
 of Docker users within an organization, used to manage repository access.
 Case visibility and permissions are controlled at the organization level.
 
