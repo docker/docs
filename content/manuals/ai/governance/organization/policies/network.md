@@ -61,7 +61,7 @@ parameters you specify.
 - Under **Path patterns**, add one or more paths the rule covers, such as
   `/repos/*` and `/v1/**`. Leave it empty to match any path.
 - Under **Query parameters**, add a `name=value` entry for each parameter a
-  request must include, such as `ref=release*`. Press Enter after each entry,
+  request must include, such as `ref=Release*`. Press Enter after each entry,
   or separate entries with `&`. A request matches only if it includes every
   entry. Leave it empty to match any query string. The entries apply to every
   path pattern in the rule.
