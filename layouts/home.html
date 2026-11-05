@@ -40,6 +40,7 @@
                 x-model="query"
                 type="text"
                 placeholder="Ask anything about Docker and get instant answers…"
+                @focus="$store.gordon.prefetch()"
                 @keydown.enter="if (query.trim()) { $store.gordon.open(query.trim(), true); query = ''; }"
                 class="flex-1 bg-transparent text-lg text-gray-900 placeholder-gray-500 focus:outline-none dark:text-white dark:placeholder-gray-400"
               />
@@ -66,6 +67,8 @@
             }}
               <button
                 @click="$store.gordon.open($el.textContent.trim(), true);"
+                @mouseenter="$store.gordon.prefetch()"
+                @focus="$store.gordon.prefetch()"
                 class="ai-suggestion cursor-pointer rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 transition hover:border-blue-400 hover:bg-blue-50 hover:text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-blue-500 dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 {{ . }}
