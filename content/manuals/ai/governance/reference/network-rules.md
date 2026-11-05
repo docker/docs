@@ -59,7 +59,7 @@ value to match a suffix or prefix. A value of `*` matches any value, including
 an empty one. Names cannot contain wildcards. Names and values are
 case-sensitive.
 
-For rules created with `--query`, every specified parameter must match.
+Every specified parameter must match.
 Parameter order doesn't matter, and requests may include additional
 parameters. Repeating a parameter name in the rule requires separate matching
 occurrences in the request. A rule without query restrictions matches
@@ -69,6 +69,8 @@ Write names and value patterns using URL query encoding: `+` or `%20` for a
 space, `%2B` for a literal plus, and `%2A` for a literal asterisk. Keep query
 parameters out of `--path`. For CLI examples, see
 [Allow or block HTTP methods and paths](../local/network-rules.md#allow-or-block-http-methods-and-paths).
+For the **Query parameters** field in an organization policy, see
+[HTTP rules](../organization/policies/network.md#http-rules).
 
 ### Combine HTTP and host rules
 
