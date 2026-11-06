@@ -1,0 +1,91 @@
+{{- /*
+  Content adapter for the RHEL-family install pages.
+
+  RHEL and its rebuilds share one repository layout and install procedure,
+  so every page renders includes/engine-install-rhel.md, which reads the
+  distro, distro-versions, distro-arches, and download-url-base parameters
+  set here. CentOS and Fedora keep hand-written pages because their
+  supported versions, conflicting packages, and repository setup differ.
+*/ -}}
+
+{{- $body := readFile "includes/engine-install-rhel.md" -}}
+
+{{- $distros := slice
+  (dict
+    "path" "rhel"
+    "repo" "rhel"
+    "name" "RHEL"
+    "weight" 30
+    "versions" (slice 8 9 10)
+    "arches" (slice "x86_64" "aarch64" "s390x")
+    "aliases" (slice
+      "/ee/docker-ee/rhel/"
+      "/engine/installation/linux/docker-ce/rhel/"
+      "/engine/installation/linux/docker-ee/rhel/"
+      "/engine/installation/linux/rhel/"
+      "/engine/installation/rhel/"
+      "/install/linux/docker-ee/rhel/"
+      "/installation/rhel/"
+    )
+  )
+  (dict
+    "path" "almalinux"
+    "repo" "alma"
+    "name" "AlmaLinux"
+    "weight" 32
+    "versions" (slice 8 9 10)
+    "arches" (slice "x86_64" "aarch64")
+  )
+  (dict
+    "path" "oraclelinux"
+    "repo" "oracle"
+    "name" "Oracle Linux"
+    "weight" 34
+    "versions" (slice 8 9 10)
+    "arches" (slice "x86_64" "aarch64")
+  )
+  (dict
+    "path" "rockylinux"
+    "repo" "rocky"
+    "name" "Rocky Linux"
+    "weight" 36
+    "versions" (slice 8 9 10)
+    "arches" (slice "x86_64" "aarch64")
+  )
+-}}
+
+{{- range $distros -}}
+  {{- $name := .name -}}
+
+  {{- $versions := slice -}}
+  {{- range .versions -}}
+    {{- $versions = $versions | append (printf "- %s %d" $name .) -}}
+  {{- end -}}
+
+  {{- $arches := slice -}}
+  {{- range .arches -}}
+    {{- $arches = $arches | append (printf "`%s`" .) -}}
+  {{- end -}}
+  {{- $archList := delimit $arches " or " -}}
+  {{- if gt (len $arches) 2 -}}
+    {{- $archList = delimit $arches ", " ", or " -}}
+  {{- end -}}
+
+  {{- $.AddPage (dict
+    "path" .path
+    "title" (printf "Install Docker Engine on %s" $name)
+    "linkTitle" $name
+    "description" (printf "Learn how to install Docker Engine on %s. These instructions cover the different installation methods, how to uninstall, and next steps." $name)
+    "keywords" (slice "requirements" "dnf" "installation" (lower $name) "rpm" "install" "install docker engine" "uninstall" "upgrade" "update")
+    "weight" .weight
+    "aliases" (.aliases | default slice)
+    "params" (dict
+      "toc_max" 4
+      "download-url-base" (printf "https://download.docker.com/linux/%s" .repo)
+      "distro" $name
+      "distro-versions" (delimit $versions "\n")
+      "distro-arches" $archList
+    )
+    "content" (dict "mediaType" "text/markdown" "value" $body)
+  ) -}}
+{{- end -}}

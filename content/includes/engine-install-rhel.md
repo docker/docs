@@ -1,24 +1,4 @@
----
-description: Learn how to install Docker Engine on RHEL. These instructions cover
-  the different installation methods, how to uninstall, and next steps.
-keywords: requirements, dnf, installation, rhel, rpm, install, install docker engine, uninstall, upgrade,
-  update
-title: Install Docker Engine on RHEL
-linkTitle: RHEL
-weight: 30
-toc_max: 4
-aliases:
-- /ee/docker-ee/rhel/
-- /engine/installation/linux/docker-ce/rhel/
-- /engine/installation/linux/docker-ee/rhel/
-- /engine/installation/linux/rhel/
-- /engine/installation/rhel/
-- /install/linux/docker-ee/rhel/
-- /installation/rhel/
-download-url-base: https://download.docker.com/linux/rhel
----
-
-To get started with Docker Engine on RHEL, make sure you
+To get started with Docker Engine on {{% param "distro" %}}, make sure you
 [meet the prerequisites](#prerequisites), and then follow the
 [installation steps](#installation-methods).
 
@@ -27,11 +7,9 @@ To get started with Docker Engine on RHEL, make sure you
 ### OS requirements
 
 To install Docker Engine, you need a maintained version of one of the following
-RHEL versions:
+{{% param "distro" %}} versions:
 
-- RHEL 8
-- RHEL 9
-- RHEL 10
+{{% param "distro-versions" %}}
 
 ### Uninstall old versions
 
@@ -128,7 +106,7 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    ```
 
    The list returned depends on which repositories are enabled, and is specific
-   to your version of RHEL (indicated by the `.el9` suffix in this example).
+   to your version of {{% param "distro" %}} (indicated by the `.el9` suffix in this example).
 
    Install a specific version by its fully qualified package name, which is
    the package name (`docker-ce`) plus the version string (2nd column),
@@ -184,9 +162,9 @@ download a new file each time you want to upgrade Docker Engine.
 <!-- markdownlint-disable-next-line -->
 1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/).
 
-2. Select your RHEL version in the list.
+2. Select your {{% param "distro" %}} version in the list.
 
-3. Select the applicable architecture (`x86_64`, `aarch64`, or `s390x`), and
+3. Select the applicable architecture ({{% param "distro-arches" %}}), and
    then go to `stable/Packages/`.
 
 4. Download the following `rpm` files for the Docker Engine, CLI, containerd,
