@@ -426,7 +426,7 @@ models:
 
 Every deferred tool is then declared to the API with `defer_loading: true` next to a server-executed `tool_search` tool, so the model discovers and calls deferred tools directly, without a `search_tool`/`add_tool` round trip. `search_tool` and `add_tool` stay available. Toolset `tools`, `read_only`, and skill allow-lists apply to the catalog exactly as they do to regular tools, and so do permissions.
 
-The option is ignored, and the legacy behaviour kept, for models without support (only `openai` models that support deferred tools qualify; the `chatgpt` provider and OpenAI-compatible endpoints, including `openai` with a custom `base_url`, do not), on Chat Completions requests, and on fallback models without the option. Agents using `code_mode_tools` keep the legacy behaviour: wrapped tools are reachable through `run_tools_with_javascript`, while todo and repeatable tools remain directly callable.
+The option is ignored, and the legacy behaviour kept, for models without support (only `openai` models that support deferred tools qualify; the `chatgpt` provider and OpenAI-compatible endpoints, including `openai` with a custom `base_url` or `OPENAI_BASE_URL`, do not), on Chat Completions requests, and on fallback models without the option. Agents using `code_mode_tools` keep the legacy behaviour: wrapped tools are reachable through `run_tools_with_javascript`, while todo and repeatable tools remain directly callable.
 
 Native search also enables ordered response replay, including encrypted reasoning. For native-only workflows, tell the agent to prefer native tool search over `search_tool`/`add_tool`; those tools remain available for fallback models.
 

@@ -68,7 +68,7 @@ toolsets:
 | `command`     | string | Command to execute the MCP server. |
 | `args`        | array  | Command arguments. |
 | `tools`       | array  | Optional whitelist — only expose these tools. |
-| `env`         | object | Environment variables (key-value pairs). |
+| `env`         | object | Environment variables (key-value pairs) for the server process. The process also inherits the host environment; when a key is set in both, the value from `env` wins. |
 | `working_dir` | string | Working directory for the MCP server process. Relative paths are resolved against the agent's working directory. Defaults to the agent's working directory when omitted. Supports `${env.VAR}` (canonical), plus `~` and shell-style `$VAR`/`${VAR}` expansion ([details](../../configuration/overview/index.md#variable-expansion-in-config-fields)). |
 | `instruction` | string | Custom instructions injected into the agent's context. |
 | `version`     | string | Package reference for [auto-installing](../../configuration/tools/index.md#auto-installing-tools) the command binary. |
@@ -101,6 +101,7 @@ toolsets:
 | `remote.transport_type` | string  | `streamable` or `sse`. |
 | `remote.headers`        | object  | HTTP headers sent on every request. Values support `${env.VAR}` and `${headers.NAME}` placeholders, resolved per request. See [Remote MCP Servers](../../features/remote-mcp/index.md#configuration) for details. |
 | `remote.oauth`          | object  | Explicit OAuth client credentials for servers that don't support DCR. See [Remote MCP Servers](../../features/remote-mcp/index.md#oauth-for-servers-without-dynamic-client-registration). |
+| `remote.standalone_sse` | boolean | Open the streamable-HTTP standalone SSE `GET` stream (default `false`). Enable for gateways that send keepalive pings or `notifications/tools/list_changed` and close sessions they cannot reach, such as the sbx MCP gateway. Ignored for `sse`. |
 | `allow_private_ips`     | boolean | Permit remote MCP OAuth helper requests to dial non-public IP addresses. Use only for trusted internal servers. |
 
 For a curated list of public remote MCP endpoints (Linear, GitHub, Vercel, Notion, …) and full OAuth configuration details, see [Remote MCP Servers](../../features/remote-mcp/index.md).

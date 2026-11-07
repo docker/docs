@@ -63,7 +63,7 @@ agents:
 | ------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `command`     | string | ✓        | LSP server executable command                                                                                                |
 | `args`        | array  | ✗        | Command-line arguments for the LSP server                                                                                    |
-| `env`         | object | ✗        | Environment variables for the LSP process                                                                                    |
+| `env`         | object | ✗        | Environment variables for the LSP process. When a key is also set in the host environment, the value from `env` wins.        |
 | `file_types`  | array  | ✗        | File extensions this LSP handles (e.g., `[".go", ".mod"]`)                                                                   |
 | `working_dir` | string | ✗        | Working directory for the LSP server process. Relative paths are resolved against the agent's working directory. Defaults to the agent's working directory when omitted. |
 | `version`     | string | ✗        | Package reference for [auto-installing](../../configuration/tools/index.md#auto-installing-tools) the command binary |

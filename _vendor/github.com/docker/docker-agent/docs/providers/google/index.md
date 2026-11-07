@@ -20,6 +20,8 @@ Docker Agent reads the first credential it finds from these environment variable
 | `GOOGLE_CLOUD_PROJECT`      | GCP project used when `GOOGLE_GENAI_USE_VERTEXAI` is enabled or for Vertex AI Model Garden. |
 | `GOOGLE_CLOUD_LOCATION`     | GCP region for Vertex AI (defaults to the SDK default).                             |
 
+When the model sets no `base_url`, the Google SDK's endpoint override applies: `GOOGLE_GEMINI_BASE_URL` for the Gemini Developer API or `GOOGLE_VERTEX_BASE_URL` for Vertex AI. An explicit `base_url` takes precedence, even when it equals the default endpoint.
+
 Explicit `provider_opts.project` or `provider_opts.location` selects Vertex AI regardless of the flag.
 
 On the Gemini Developer API, a model or [custom provider](../custom/index.md) that sets `token_key` reads its key from that variable instead of `GOOGLE_API_KEY` / `GEMINI_API_KEY`. The Vertex AI backends use Application Default Credentials and ignore `token_key`.
@@ -313,7 +315,7 @@ announcements but no dedicated Google card in the 2026-10-13 audit; this proves
 neither unavailability nor account entitlement. See [Claude access paths](../anthropic/index.md#claude-access-paths)
 for model IDs, evidence and policy prerequisites.
 
-Title, sampling and compaction clones keep the selected Model Garden transport.
+Title and compaction clones keep the selected Model Garden transport.
 Claude requests remain on the Anthropic-native Vertex endpoints, with the model
 in the URL and `anthropic_version: vertex-2023-10-16` in the body. Project,
 location, regional/global host selection and Google OAuth authentication survive
