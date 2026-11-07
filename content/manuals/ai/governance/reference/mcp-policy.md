@@ -166,10 +166,9 @@ when { resource.readOnly == false };
 ```
 
 When a request matches the annotated `permit` and no `forbid` overrides it, the
-policy engine returns an approval-required outcome. The annotation string is
-shown as the elicitation reason. An approval-required outcome takes precedence
-over a normal `permit`. A matching `forbid` denies the request without an
-elicitation.
+policy engine returns an approval-required outcome instead of immediately allowing 
+the request. The annotation string is shown as the elicitation reason. 
+A matching `forbid` denies the request without an elicitation.
 
 For the request flow and trust model, see
 [Require confirmation with MCP elicitation](../organization/policies/mcp.md#require-confirmation-with-mcp-elicitation).

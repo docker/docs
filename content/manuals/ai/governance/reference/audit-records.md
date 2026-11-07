@@ -116,8 +116,8 @@ For MCP approvals, an approved request is evaluated again and recorded with
 | Field                          | Description                                                                                                                                                                              |
 | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `approval.reason_codes`        | Policy reasons for requiring approval. Present on `AUDIT_DECISION_APPROVAL_REQUIRED` records when the policy supplies reasons, and on declined MCP approvals when reasons are available. |
-| `approval.approval_request_id` | ID that links an approval required record to the record that resolves it.                                                                                                                |
-| `approval.grant_scope`         | Scope the user accepted. Present only on `AUDIT_DECISION_APPROVAL_ALLOW` records.                                                                                                        |
+| `approval.approval_request_id` | ID that links a network approval required record to the record that resolves it. Present for network approvals only.                                                                                                                |
+| `approval.grant_scope`         | Scope the user accepted. Present only on network approval `AUDIT_DECISION_APPROVAL_ALLOW` records.                                                                                                        |
 | `approval.context_digest`      | SHA-256 digest of the request that was resolved, which shows it matches the request that was held. Present only on declined MCP approvals.                                               |
 
 For network approvals, Docker Sandboxes records `approval.grant_scope` as
