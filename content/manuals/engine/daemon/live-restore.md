@@ -82,3 +82,16 @@ The live restore option only pertains to standalone containers, and not to Swarm
 services. Swarm services are managed by Swarm managers. If Swarm managers are
 not available, Swarm services continue to run on worker nodes but can't be
 managed until enough Swarm managers are available to maintain a quorum.
+
+Live restore and Swarm mode are mutually exclusive. You can't enable live
+restore on a node that's part of a Swarm: when both are enabled, the daemon
+refuses to start and exits with the following error:
+
+```console
+failed to start cluster component: --live-restore daemon configuration is incompatible with swarm mode
+```
+
+To start the daemon again, disable live restore in the daemon configuration.
+Removing the node from the Swarm isn't enough: the node keeps its local Swarm
+state, so the daemon still fails this check. To take the node out of the Swarm,
+disable live restore first, start the daemon, and then run `docker swarm leave`.
