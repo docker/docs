@@ -166,6 +166,51 @@ agents:
 >
 > Models that stream reasoning under `delta.reasoning` (e.g. Qwen3 served via OVHcloud AI Endpoints, OpenRouter, or a self-hosted vLLM / SGLang deployment) are fully supported. Docker Agent reads both the `delta.reasoning_content` and `delta.reasoning` fields from the stream, so thinking blocks are captured and shown in the TUI regardless of which field the server uses.
 
+### Replaying reasoning on later turns
+
+Captured reasoning is sent back to the model on subsequent requests as a `reasoning_content` field on the assistant message. Servers that understand the field read it back, so the model sees its own earlier reasoning instead of re-deriving it after every tool call. Reasoning that is only useful to the model is not free: replaying it can multiply the size of a long request, so it is limited to turns the session keeps anyway (those with content or a tool call).
+
+Chat Completions reasoning replay defaults on. Because `reasoning_content` is a
+non-standard extension, set `provider_opts.replay_reasoning: false` for a model
+or provider whose endpoint rejects or must not receive it. An invalid,
+non-boolean value also fails closed and disables replay.
+
+Set the opt-out on a model, or once on a provider and let its models inherit it.
+A model that sets the option itself wins over the provider:
+
+```yaml
+providers:
+  local_llm:
+    base_url: http://localhost:8000/v1
+    provider_opts:
+      replay_reasoning: false # opt out every local_llm model
+
+models:
+  qwen_default:
+    provider: local_llm
+    model: qwen3 # inherits the opt-out
+
+  qwen_replay:
+    provider: local_llm
+    model: qwen3
+    provider_opts:
+      replay_reasoning: true # opts this model back in
+
+agents:
+  root:
+    model: qwen_default
+```
+
+This option is specific to the Chat Completions API and its `reasoning_content`
+field. It is not the same as `preserve_reasoning`, which replays the encrypted
+reasoning items of first-party OpenAI Responses sessions; neither option
+applies to the other API. See [Reasoning state preservation](../openai/index.md#reasoning-state-preservation).
+
+The field is worth a look if you switch models mid-session or use fallbacks:
+Docker Agent stores reasoning from every provider in one place, so a later Chat
+Completions model may otherwise receive reasoning captured from another vendor.
+Set `replay_reasoning: false` on that destination when this is undesirable.
+
 ### API Router (Requesty, LiteLLM)
 
 ```yaml

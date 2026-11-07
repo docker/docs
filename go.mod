@@ -11,7 +11,7 @@ require (
 	github.com/docker/buildx v0.38.2
 	github.com/docker/cli v29.9.2+incompatible
 	github.com/docker/compose/v5 v5.7.0
-	github.com/docker/docker-agent v1.152.0
+	github.com/docker/docker-agent v1.157.2
 	github.com/docker/model-runner v1.1.36
 	github.com/moby/buildkit v0.34.2
 	github.com/moby/moby/api v1.56.1

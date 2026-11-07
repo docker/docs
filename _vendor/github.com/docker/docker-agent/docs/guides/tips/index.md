@@ -429,6 +429,19 @@ settings:
 
 If a sound is enough, set `settings: { sound: true }` instead — Docker Agent plays a failure sound when a task errors, and a success sound when a task that ran longer than `sound_threshold` seconds (default 10) completes.
 
+### Keep the machine awake
+
+Enable **Keep machine awake** in `/settings` in either TUI to prevent idle system sleep while an agent is running. It is disabled by default, and changes apply to the next agent run. The display can still turn off; the inhibitor is released when the run finishes, errors, or is canceled.
+
+You can also enable it in your user configuration:
+
+```yaml
+settings:
+  keep_awake: true
+```
+
+This uses native macOS and Windows power APIs, or systemd-logind over D-Bus on Linux, with no helper executables required. Linux requires a running system bus and logind with permission to inhibit sleep. If acquisition fails, the hook reports the error without stopping the agent. It does not guarantee protection against deliberate sleep, lid closure, or administrator policy.
+
 See the [Hooks documentation](../../configuration/hooks/index.md) for the full list of events, their payloads, and per-hook options (`env`, `working_dir`, `timeout`).
 
 ### Inject the Current Session ID with Hooks

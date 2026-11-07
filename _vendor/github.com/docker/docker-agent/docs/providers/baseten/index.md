@@ -30,7 +30,7 @@ The simplest way to use Baseten:
 ```yaml
 agents:
   root:
-    model: baseten/deepseek-ai/DeepSeek-V4-Pro
+    model: baseten/deepseek-ai/DeepSeek-V4-Pro-0813
     description: Assistant using Baseten
     instruction: You are a helpful assistant.
 ```
@@ -43,7 +43,7 @@ For more control over parameters:
 models:
   baseten_model:
     provider: baseten
-    model: deepseek-ai/DeepSeek-V4-Pro
+    model: deepseek-ai/DeepSeek-V4-Pro-0813
     temperature: 0.7
     max_tokens: 8192
 
@@ -58,12 +58,12 @@ agents:
 
 Baseten hosts various open models through its Model APIs. Check the [Baseten documentation](https://docs.baseten.co/) for the current model catalog.
 
-| Model                          | Description                    |
-| ------------------------------ | ------------------------------ |
-| `deepseek-ai/DeepSeek-V4-Pro`  | DeepSeek V4 Pro model           |
-| `moonshotai/Kimi-K2.5`         | Moonshot Kimi K2.5 model       |
-| `openai/gpt-oss-120b`          | GPT-OSS 120B model             |
-| `zai-org/GLM-5`                | GLM-5 model                    |
+| Model                           | Description               |
+| ------------------------------- | ------------------------- |
+| `deepseek-ai/DeepSeek-V4-Pro-0813` | DeepSeek V4 Pro 0813 model |
+| `moonshotai/Kimi-K3`              | Moonshot Kimi K3 model     |
+| `openai/gpt-oss-120b`             | GPT-OSS 120B model         |
+| `zai-org/GLM-5.3`                 | GLM-5.3 model              |
 
 ## How It Works
 
@@ -78,10 +78,10 @@ Baseten is implemented as a built-in alias in Docker Agent:
 ```yaml
 agents:
   coder:
-    model: baseten/deepseek-ai/DeepSeek-V4-Pro
+    model: baseten/deepseek-ai/DeepSeek-V4-Pro-0813
     description: Code assistant using DeepSeek
     instruction: |
-      You are an expert programmer using DeepSeek V4 Pro.
+      You are an expert programmer using DeepSeek V4 Pro 0813.
       Write clean, well-documented code.
       Follow best practices for the language being used.
     toolsets:

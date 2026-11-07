@@ -30,6 +30,7 @@ The background agents tool lets an orchestrator dispatch work to sub-agents conc
 | `agent`           | string | ✓        | Name of the sub-agent to run. Must be listed under the caller's `sub_agents`. |
 | `task`            | string | ✓        | Clear, concise description of the task the sub-agent should achieve.        |
 | `expected_output` | string | ✗        | Optional description of the result format the caller expects.               |
+| `worktree`        | bool   | ✗        | Create an isolated Git checkout and branch for this task. Default `false`. |
 
 `run_background_agent` returns a **task ID** string. Tools run by the sub-agent inherit the parent session's permissions. Because background tasks run non-interactively, any tool call that would normally prompt the user for approval will be automatically denied. To allow background agents to run mutating tools, you must explicitly approve them in the parent session (e.g. via YOLO mode or explicit allow rules).
 
@@ -66,7 +67,43 @@ A timeout returns available results and live output without stopping unfinished 
 
 A stopped task can have `done: false` while its execution is still shutting down. The join waits for execution to exit, not just for the stop request to be acknowledged. Unknown or pruned IDs are reported individually as `status: "not_found"`, leave `all_done` false, and make the result a tool error; other requested tasks are still joined. Completed tasks may be pruned when the task-history limit is reached, so collect their results before dispatching many more tasks.
 
-This is a synchronization tool, not workspace isolation: concurrent coding agents still need separate workspaces to avoid conflicting edits.
+## Isolated coding tasks
+
+Set `worktree: true` to run concurrent coding tasks without sharing a checkout:
+
+```json
+{"agent": "coder", "task": "Implement the backend change and commit it", "worktree": true}
+```
+
+This works when the calling session is in a Git repository **or an existing Git worktree**. Each task gets a fresh branch from that checkout's current `HEAD`, not the repository's default branch. Uncommitted and untracked files are **not copied**; commit shared starting changes before dispatching tasks. A missing repository or a failed setup is reported as a failed task.
+
+The child gets fresh toolsets and hooks rooted in its checkout; the parent's tools and process working directory are unchanged. Blocking delegations (`transfer_task` and forked skills) inherit the isolated workspace. Nested background dispatch is rejected: start parallel worktree tasks from the top-level orchestrator. Model clients are reused, and tasks share the parent's run budget and inherit its safety policy and permissions. Configured `worktree_create` hooks run before tools and skills are loaded, so setup-created ignore files and directories take effect.
+
+`list_background_agents` and `view_background_agent` report the checkout path, branch, and base commit once creation finishes. `wait_background_agents` includes them as `worktree`, `branch`, and `base_commit`, independently of truncated output and whether the task succeeded.
+
+### Review and merge at the top level
+
+1. Start all independent tasks with `worktree: true`. Describe files relative to the repository. The child is instructed to translate source-checkout paths to its own checkout; the child is instructed to treat attached files as read-only inputs at their original paths.
+2. Have each child commit its changes on its own branch, following the project's signing policy. No commits are made automatically.
+3. Wait for all tasks, check each status, and review each branch's diff.
+4. Merge branches **one at a time** from the parent checkout, resolve conflicts, and run the combined tests. For example:
+
+   ```sh
+   git diff HEAD...worktree-agent-<id>
+   git merge --no-edit worktree-agent-<id>
+   ```
+
+5. After integrating the work, remove the now-unneeded checkout and branch:
+
+   ```sh
+   git worktree remove /path/reported/by/the/task
+   git branch -d worktree-agent-<id>
+   ```
+
+Worktrees and branches are **retained**, including after failure, cancellation, and runtime shutdown. Uncommitted changes cannot be merged with `git merge`; inspect and commit them first. Never remove a task's checkout while it or its descendants are still running. Save the reported paths before task history is pruned.
+
+> [!NOTE]
+> Worktrees isolate checkouts, not permissions or arbitrary external side effects. Explicit absolute tool/hook directories, external services, and shared Git configuration remain shared. External harness agents do not yet support `worktree: true`; their drivers currently inherit the process directory. Programmatic agents need a working-directory factory; configuration-loaded native agents supply one automatically. Adding tools after loading invalidates that factory unless the host supplies a replacement. Shared plans, shared todos, and default persistent memory remain shared intentionally. RAG indexes are scoped to the workspace unless an explicit database path selects shared storage.
 
 ## Configuration
 

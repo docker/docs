@@ -11,6 +11,12 @@ aliases:
 
 _Give your agents access to document knowledge bases with background indexing, multiple retrieval strategies, and hybrid search._
 
+> Relative document and database paths resolve from the agent's working directory
+> (or the configuration directory when no working directory is set). Default
+> database files are stored under the data directory, scoped by workspace, so
+> isolated worktrees do not mix indexed documents. Explicit absolute database
+> paths retain their sharing semantics.
+
 ## Overview
 
 The `rag` toolset lets agents search through your documents to find relevant information before responding. Knowledge bases are declared once at the top of the config under `rag:` and then referenced from any agent via `type: rag, ref: <name>`. Docker Agent supports:
