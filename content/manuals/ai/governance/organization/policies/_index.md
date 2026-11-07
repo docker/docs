@@ -130,8 +130,10 @@ access, so it stays active.
 
 ## When policy changes reach developers
 
-Policy changes reach developer machines within 5 minutes. When a synced change
-takes effect also depends on the policy type. For more details, see
+Policy changes reach developer machines within 5 minutes. Once synced, when the
+change applies depends on the policy type: network and MCP policies apply to
+subsequent requests, while filesystem policies apply when a sandbox starts. For
+more details, see
 [Organization network access policies](network.md#when-changes-take-effect),
 [Organization filesystem access policies](filesystem.md#when-changes-take-effect), and
 [Organization MCP access policies](mcp.md#when-changes-take-effect).
