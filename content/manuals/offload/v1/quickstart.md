@@ -113,8 +113,8 @@ $ docker offload stop
 ```
 
 When you stop Docker Offload v1, the cloud environment is terminated and all
-running containers and images are removed. When Docker Offload v1 has been idle for
-5 minutes, the environment is also terminated and all running containers and
-images are removed.
+containers, images and volumes are removed. When Docker Offload v1 has been idle for
+5 minutes, the environment is also terminated and all containers, images and
+volumes are removed.
 
 To start Docker Offload v1 again, run the `docker offload start` command.
