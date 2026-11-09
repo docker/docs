@@ -18,50 +18,30 @@ For interactive sessions configured from a file, see
 [Cloud environment files](environment-files.md). To manage schedules in the
 web interface, see [Schedules in Docker Agentic Platform](/manuals/agentic-platform/schedules.md).
 
-## Prepare the task
+## Create a schedule
 
-Follow the [cloud setup instructions](_index.md) to activate cloud access. You
-also need scheduling access for your account and an `sbx` CLI that provides
-`sbx --cloud schedule --help`.
+Schedules require [cloud access](_index.md), scheduling access for your account,
+and a CLI that provides `sbx --cloud schedule --help`. Sign in with `sbx login`
+to authorize unattended runs. See [Renew schedule credentials](#renew-schedule-credentials)
+for credential lifetime and login requirements.
 
-Sign in interactively with the Docker account that will own the schedule:
+Choose a published kit such as `claude` or an `oci://` reference. Local kit
+paths and `git+` references aren't supported. The kit must include the tools
+the task needs and accept a prompt or command without interactive input.
 
-```console
-$ sbx login
-```
-
-When scheduling is enabled for your account, login enrolls a credential that
-lets the schedule service run tasks while you're offline. This credential
-expires after 90 days; signing in interactively again renews it. PAT login with
-`--password-stdin` doesn't enroll this credential. A successful login can still
-report `schedule credential exchange failed`. Resolve that warning and test a
-run before relying on the schedule.
-
-Choose a published kit, such as `claude`, or an `oci://` kit reference. Local
-kit paths and `git+` references aren't supported. A custom agent kit needs a
-prompt template that runs without interactive input.
-
-Configure [account-scoped cloud credentials](credentials.md) before creating
-the schedule. For the example in this guide, store an Anthropic API key and a
-GitHub token that can read issues and add comments in your target repository:
+Configure [cloud credentials](credentials.md) for the agent and services it
+uses. For example, an issue-summary task needs an Anthropic API key and a
+GitHub token with permission to read issues and post comments:
 
 ```console
 $ sbx --cloud secret set anthropic
 $ sbx --cloud secret set github
 ```
 
-Each run starts without your host workspace. Prepare any required tools in
-the kit, and have the task fetch its input from an external service. Keep
-credentials in the secret store, outside prompts and environment variables.
-
-## Create a paused schedule
-
-This example asks Claude to summarize up to ten open issues and add one
-comment to a tracking issue in GitHub. That comment persists after the sandbox
-is deleted. Replace `<OWNER>/<REPOSITORY>` and `<ISSUE_NUMBER>` with a repository
-and tracking issue you control.
-
-Create the schedule paused so you can test it before enabling recurring runs:
+The following schedule posts a weekly summary to a GitHub tracking issue, so
+its output survives sandbox deletion. Replace the repository and issue
+placeholders with a destination you control. `--enabled=false` keeps recurring
+runs paused until you [test the task](#test-a-schedule).
 
 ```console
 $ sbx --cloud schedule create claude \
@@ -74,60 +54,52 @@ $ sbx --cloud schedule create claude \
     --env REPOSITORY=<OWNER>/<REPOSITORY> \
     --env TRACKING_ISSUE=<ISSUE_NUMBER> \
     --allow-network api.github.com:443 \
-    --prompt 'Read the REPOSITORY and TRACKING_ISSUE environment variables. Use the GitHub REST API to read up to ten open issues in REPOSITORY, excluding pull requests and TRACKING_ISSUE. Summarize their titles, links, and missing reproduction details. Add one summary comment to TRACKING_ISSUE in that repository. Do not modify other issues or code. If the same summary is already present, skip posting it. If an API call fails, stop and report the error. Do not ask for interactive input.'
+    --prompt 'Use the GitHub REST API to summarize up to ten open issues in REPOSITORY, excluding pull requests and TRACKING_ISSUE. Post their titles and links as one comment on TRACKING_ISSUE. Skip duplicate summaries. Stop on API errors. Do not modify code or other issues, or ask for input.'
 ```
 
-The cron expression has five fields: minute, hour, day of month, month, and
-day of week. Here, `0 9 * * 1` means every Monday at 09:00 in the specified
-IANA time zone. Set `--timezone` explicitly and inspect the cadence before
-enabling the schedule.
+Keep the returned schedule ID. Commands take IDs, rather than schedule names.
+Pass exactly one of `--prompt` for an agent task or `--command` for a shell
+command.
 
-Pass exactly one of `--prompt` or `--command`. Use `--prompt` for an agent task
-or `--command` for a shell command that the kit can execute without interaction.
+### Set the cadence
 
-The example sets a one-hour time limit with `--max-run-duration`. The CLI
-requires at least one hour and defaults to one hour when omitted. Use this flag
-instead of `--ttl`; scheduled sandboxes are deleted at timeout. CPU and memory
-settings default to the kit's values. Override them with `--cpus` and `--memory`
-when the workload needs different resources.
+`--cron` takes a quoted five-field expression: minute, hour, day of month,
+month, and day of week. For example, `'0 9 * * 1'` runs every Monday at 09:00.
+Set `--timezone` explicitly to an IANA time zone such as `Etc/UTC`.
 
-`--workdir` (`-w`, also available as `--working-dir`) selects the directory
-where the prompt or command runs. The directory must exist in the sandbox;
-this flag doesn't upload a host project. Use explicit `--env KEY=VALUE` pairs
-for task parameters. A bare `--env KEY` is rejected.
+### Configure each run
 
-Declare the destinations your task needs with `--allow-network`. Review
-[cloud network policy](network-policy.md) and verify the task can reach its
-services during the test run. Don't assume local policy transfers to scheduled
-sandboxes or rely on a configured rule alone as proof of enforcement.
+| Setting | Behavior |
+| --- | --- |
+| `--max-run-duration` | Run time limit, at least `1h`. Defaults to `1h`. Use this instead of `--ttl`. |
+| `--cpus`, `--memory` | Override the kit's resource defaults. |
+| `--workdir`, `-w` | Directory in the sandbox where the task runs. `--working-dir` is an alias. The directory must exist. This doesn't upload a host project. |
+| `--env KEY=VALUE` | Set task parameters. A bare `--env KEY` is rejected. Store credentials in the secret store. |
+| `--allow-network` | Declare destinations the task needs. See [cloud network policy](network-policy.md) and test service access. |
 
-## Test and enable the schedule
+Each run starts without your host workspace. Have the task fetch its input
+from an external service. Don't assume local network policy transfers to
+scheduled sandboxes or that a configured rule alone proves enforcement.
 
-Keep the schedule ID returned by `create`. Schedule commands take IDs, rather
-than schedule names. Inspect the configuration and queue a manual run while
-the schedule is paused:
+## Test a schedule
+
+Queue a manual run, including while recurring runs are paused:
 
 ```console
-$ sbx --cloud schedule inspect <SCHEDULE_ID>
 $ sbx --cloud schedule run <SCHEDULE_ID>
 $ sbx --cloud schedule runs <SCHEDULE_ID>
 $ sbx --cloud schedule runs inspect <SCHEDULE_ID> <RUN_ID>
 ```
 
-Use the run ID from `run` or `runs`. Run details include the state, failure
-reason, exit code when available, and timing. Queuing a run doesn't establish
-that the task succeeded. Wait for completion, inspect the result, and verify
-the comment appeared on the tracking issue before enabling the schedule:
+Use the run ID from `run` or `runs`. Inspection shows the state, failure reason,
+exit code when available, and timing. Queuing a run doesn't establish success:
+wait for completion and check the external result, such as the comment on the
+tracking issue.
 
-```console
-$ sbx --cloud schedule update <SCHEDULE_ID> --enabled=true
-```
+If another run is active, the service cancels the additional run as overlapping.
+Wait for the active run to finish before retrying.
 
-If a run is still active when another run is requested, the service cancels
-the additional run as overlapping. Wait for the active run to finish before
-retrying a manual test.
-
-## Manage and update schedules
+## List and inspect schedules
 
 List schedules and inspect their cadence, status, kit, and next run:
 
@@ -136,58 +108,90 @@ $ sbx --cloud schedule ls
 $ sbx --cloud schedule inspect <SCHEDULE_ID>
 ```
 
-Updates to `--name`, `--description`, `--cron`, `--timezone`, or `--enabled`
-change only those settings. For example, pause recurring runs, change the
-cadence, and resume:
+## Enable or pause recurring runs
+
+Enable a schedule after verifying a test run:
 
 ```console
-$ sbx --cloud schedule update <SCHEDULE_ID> --enabled=false
-$ sbx --cloud schedule update <SCHEDULE_ID> --cron '0 10 * * 1' --timezone Etc/UTC
 $ sbx --cloud schedule update <SCHEDULE_ID> --enabled=true
 ```
 
-### Change what each run executes
+Pause recurring runs with `--enabled=false`:
 
-Passing a kit or any run flag rebuilds the saved run configuration. Repeat
-`--prompt` or `--command` and every run setting you want to keep. Omitted run
-settings reset, including network rules, duration, resources, platform,
-environment variables, working directory, and `--static-mcp` server selections.
-The CLI warns about settings that reset; the warning doesn't preserve them.
+```console
+$ sbx --cloud schedule update <SCHEDULE_ID> --enabled=false
+```
 
-For the walkthrough, start from the full `create` command, replace
-`create claude` with `update <SCHEDULE_ID> claude`, and keep all run flags when
-changing the prompt or another run setting. Test the rebuilt schedule while
-paused before enabling it again.
+## Change schedule settings
 
-A schedule saves the resolved kit and selected account secret names. Rebuild
-the run configuration after publishing kit changes or adding credentials that
-the task needs. Without an explicit kit argument, a rebuild resolves the
-schedule's existing kit reference again. Changing only the cadence or enabled
-state doesn't refresh the saved run configuration.
+Updates to `--name`, `--description`, `--cron`, `--timezone`, or `--enabled`
+preserve the saved run configuration. For example, move the weekly run to
+10:00 UTC:
 
-The CLI refuses to rebuild schedules that store multiple kits, policy IDs,
-or a sandbox environment, because CLI flags can't preserve those settings.
-Use the schedule API to preserve and update that configuration. You can still
-change the five schedule settings listed earlier through the CLI.
+```console
+$ sbx --cloud schedule update <SCHEDULE_ID> --cron '0 10 * * 1' --timezone Etc/UTC
+```
 
-### Recover from a failed run
+## Replace the task or run configuration
+
+Passing a kit or any run flag replaces the saved run configuration. Supply
+`--prompt` or `--command` and all run settings you want to retain, even when
+changing only one value. Omitted settings reset, including network rules,
+duration, resources, platform, environment variables, working directory, and
+`--static-mcp` server selections.
+
+For example, this replaces the task and sets a two-hour limit. It also resets
+any previously configured environment variables, network rules, and other
+omitted run settings:
+
+```console
+$ sbx --cloud schedule update <SCHEDULE_ID> claude \
+    --max-run-duration 2h \
+    --prompt 'Check the installed tool versions and report them. Do not ask for input.'
+```
+
+To retain the issue-summary task while changing its duration, copy its full
+`create` command, replace `create claude` with `update <SCHEDULE_ID> claude`,
+and change `--max-run-duration` to `2h`. Keep the prompt and every other run
+flag. The CLI warns about resets but doesn't preserve omitted settings.
+Pause recurring runs before replacing the configuration, then test before
+resuming.
+
+A schedule saves the resolved kit and selected account secret names. Replace
+the run configuration to pick up published kit changes or added credentials.
+Without a kit argument, replacement resolves the existing kit reference again.
+Changing only schedule settings doesn't refresh the kit or secrets.
+
+The CLI refuses to replace run configurations that store multiple kits,
+policy IDs, or a sandbox environment, because its flags can't preserve those
+settings. Use the schedule API to update those configurations. You can still
+change their name, description, cadence, time zone, and enabled state with
+the CLI.
+
+## Renew schedule credentials
+
+Interactive `sbx login` enrolls a schedule credential when scheduling is enabled
+for your account. The credential expires after 90 days. Sign in interactively
+again to renew it. PAT login with `--password-stdin` doesn't enroll this
+credential.
+
+A successful login can still report `schedule credential exchange failed`.
+Resolve that warning and test a run before relying on the schedule.
+
+## Recover from a failed run
 
 Inspect the run's failure reason and exit code, and check the external result.
-If the stored Docker credential expired, run `sbx login` again. Check agent
-credentials and service access for authentication or connection failures.
-If you add a missing secret or change the kit, rebuild the saved run
-configuration with all required settings. Then queue another manual run and
-verify its result before resuming recurring runs.
+For an expired Docker credential, run `sbx login` again. For authentication or
+connection failures, check agent credentials and service access. If you add a
+secret or change the kit, [replace the run configuration](#replace-the-task-or-run-configuration)
+with all required settings. Test again before resuming recurring runs.
 
-### Remove a schedule
-
-Remove a schedule when you no longer need future runs:
+## Remove a schedule
 
 ```console
 $ sbx --cloud schedule rm <SCHEDULE_ID>
 ```
 
-Removal asks for confirmation; `--force` skips the prompt. Removing a schedule
+Removal asks for confirmation. `--force` skips the prompt. Removing a schedule
 prevents further runs but doesn't immediately delete an active run's sandbox.
-The active sandbox can remain until its timeout. Save results externally as
-part of the task rather than relying on copying files after a run finishes.
+The active sandbox can remain until its timeout.
