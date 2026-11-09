@@ -158,6 +158,9 @@ $ sbx --cloud cp ./src cloud-project:/home/agent/workspace/src
 $ sbx --cloud cp cloud-project:/home/agent/workspace/result.json ./result.json
 ```
 
+Cloud copies don't preserve permissions or timestamps. Set executable
+permissions after downloading a program.
+
 Cloud copies don't preserve empty directories or symbolic links themselves.
 Symbolic links are handled differently depending on the transfer:
 
