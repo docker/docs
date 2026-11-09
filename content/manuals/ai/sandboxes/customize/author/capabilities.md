@@ -45,9 +45,6 @@ All capability names in the table have the `com.docker.sandbox/` prefix.
 | [`usb-device@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/usb-device@1.md) | Unsupported | Unsupported | Kit requests for USB device access are not supported. |
 | [`volume@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/volume@1.md) | v0.45.0 | Limited: v0.45.0 | Local sandboxes provide block storage or tmpfs and [retain block volumes across removal and recreation](../use-kits.md#keep-kit-data-when-recreating-a-sandbox). Cloud sandboxes use ordinary sandbox disk at the declared paths, including for tmpfs requests. |
 
-For a runtime port-publishing example, see
-[Publish a development service](patterns.md#publish-a-development-service).
-
 ## Capability groups
 
 Docker Sandboxes supports capability groups in `sbx` v0.48.0 and later.
