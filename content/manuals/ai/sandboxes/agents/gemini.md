@@ -75,7 +75,9 @@ $ sbx run --name <sandbox-name> -- -p "explain this"   # runs gemini --yolo -p "
 
 When the first argument is a bare word, such as a subcommand or prompt,
 it replaces the image's `CMD` defaults. Arguments stored in the agent image's
-`ENTRYPOINT` are preserved.
+`ENTRYPOINT` are preserved. See
+[Forward arguments to an agent](_index.md#forward-arguments-to-an-agent)
+to check the split for your image.
 
 ## Base image
 
