@@ -81,6 +81,13 @@ For how the forward and transparent proxies handle sandbox traffic, see
 The log records network requests by host, without their HTTP methods and
 paths. Filesystem mount decisions aren't in the log.
 
+When UDP egress is disabled, each sandbox network records the first 20 distinct
+refused external UDP destinations in individual log entries. Further destinations
+share the `<further blocked attempts>` entry. Repeated attempts to one of the
+first 20 destinations still update that destination's count. The limit applies
+for the network's lifetime, and each network has its own limit. All these UDP
+attempts remain blocked.
+
 ## Filter the log
 
 To see only one sandbox's requests, pass its name:
