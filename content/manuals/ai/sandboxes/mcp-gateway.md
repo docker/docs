@@ -453,6 +453,17 @@ This choice persists across sandbox restarts unless you
 [unload every server in a named static set](#remove-a-server-from-a-running-sandbox).
 Sandboxes created with `--static-mcp none` remain static.
 
+To check a local sandbox's MCP mode and connected servers, run:
+
+```console
+$ sbx inspect <SANDBOX>
+```
+
+The `MCP mode` field reports `static` or `dynamic`. The `MCP servers` field
+lists connected servers, or `none` when no servers are connected. A dash (`-`)
+means the information is unavailable. These fields describe the sandbox's
+gateway; use [`sbx mcp ls`](#manage-registrations) to list host registrations.
+
 ### Use static mode
 
 Pass `--static-mcp` to pre-load registered MCP servers:
