@@ -534,8 +534,9 @@ $ sbx template rm <IMAGE_ID>
 $ sbx template rm <REPOSITORY>@sha256:<DIGEST>
 ```
 
-Image ID prefixes must uniquely identify an image. The `--all` and `--digests`
-flags apply only to local templates. For all listing options, see the
+You can use a prefix of an image ID as long as it uniquely identifies a template.
+The `--all` and `--digests` flags apply only to local templates. For all listing
+options, see the
 [`sbx template ls` reference](/reference/cli/sbx/template/ls/).
 
 ### Export and import
