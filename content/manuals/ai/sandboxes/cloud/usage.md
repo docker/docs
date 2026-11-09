@@ -407,6 +407,16 @@ The account listing shows servers reported by gateways, with the sandboxes
 that use them. It omits unused server configurations and servers skipped by
 a gateway. The sandbox view includes skipped servers.
 
+## Sign out
+
+Run `sbx --cloud logout` to sign out of Docker. The command warns that
+sign-out applies to the whole Docker account, then asks for confirmation,
+as with `sbx logout`. Signing out stops running local sandboxes. Cloud
+sandboxes keep running until you stop them or they expire.
+
+For scripts, use `sbx --cloud logout --yes` (or `-y`) to skip confirmation.
+The account-wide warning still appears.
+
 ## Diagnose cloud access
 
 Check the CLI, Docker sign-in, cloud API connectivity, and account access:
