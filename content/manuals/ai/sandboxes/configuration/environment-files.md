@@ -435,30 +435,64 @@ In this example, the sandbox has four CPUs, 12 GB of memory, and both
 environment variables. Each relative workspace path resolves from the directory
 of the file that declares it.
 
-Files merge in the order you pass them:
+#### Merge rules
 
-- Nested mappings merge by key, and later scalar values replace earlier ones.
-- Lists concatenate, with the following exceptions:
-  - `entrypoint` and `cmd` replace the earlier list. See
-    [Set the launch command](#set-the-launch-command) for inheritance and clearing.
-  - `ports` entries match by sandbox port and effective protocol. Protocol names
-    are case-insensitive; an omitted protocol uses `tcp4`, or `tcp6` for an IPv6
-    `hostIP`. Different protocols, such as `tcp` and `tcp4`, remain separate.
-  - `mcp.servers` entries match by exact server name.
-  - `additionalWorkspaces` entries match by effective container target: the
-    explicit `target`, or the resolved host path when `target` is omitted. On
-    macOS, an implicit target uses the stored host-path casing when available;
-    explicit targets remain case-sensitive.
-  - `kits` entries with the same source merge their arguments by key, with later
-    argument values taking precedence.
+Files merge in the order you pass them. Later scalar values override earlier
+values, while nested mappings combine by key. Most lists append entries from each file.
+The exceptions are:
 
-For matching ports, MCP servers, and additional workspaces, the last complete
-entry replaces the earlier entry but keeps its first position in the list.
-This also applies to repeated entries within one file. Omitted fields in the
-winning entry use their defaults rather than inheriting earlier values. For
-example, replacing `{sandbox: 8080, host: 3000}` with `{sandbox: 8080}` selects
-an ephemeral host port; omitting `readOnly` from a replacement workspace makes
-the mount writable.
+- `ports`, `mcp.servers`, and `additionalWorkspaces`: matching entries use the
+  last entry, as described in [Override a list entry](#override-a-list-entry).
+- `kits`: entries with the same source merge their arguments by key. Later
+  argument values take precedence; other arguments are preserved.
+- `entrypoint` and `cmd`: later lists replace earlier lists. See
+  [Set the launch command](#set-the-launch-command) for inheritance and clearing.
+
+#### Override a list entry
+
+To override a port, MCP server, or additional workspace, declare a matching
+entry later in the file or in a later file. The last entry replaces the whole
+earlier entry and keeps its first position in the list. Entries that don't
+match are kept as separate entries.
+
+For example, change the host port for sandbox port `8080` in your personal
+settings:
+
+```yaml
+# base.sbxenv.yaml
+ports:
+  - sandbox: 8080
+    host: 3000
+```
+
+```yaml
+# local.sbxenv.yaml
+ports:
+  - sandbox: 8080
+    host: 4000
+```
+
+With `base.sbxenv.yaml` loaded first, the result is one port entry that publishes
+sandbox port `8080` on host port `4000`.
+
+Include every field you want to keep in the replacement. Omitted fields use
+their defaults: omitting `host` in this example selects an ephemeral host port.
+Similarly, omitting `readOnly` from a replacement workspace makes it writable.
+
+`sbx` uses these fields to decide whether entries match:
+
+| List | Matching fields |
+| --- | --- |
+| `ports` | Sandbox port and effective protocol |
+| `mcp.servers` | Exact server name |
+| `additionalWorkspaces` | Container target: the explicit `target`, or the resolved host path when `target` is omitted |
+
+Port protocol names are case-insensitive. An omitted protocol uses `tcp4`, or
+`tcp6` for an IPv6 `hostIP`. Different protocols, such as `tcp` and `tcp4`,
+remain separate.
+
+On macOS, an implicit workspace target uses the stored host-path casing when
+available. Explicit targets remain case-sensitive.
 
 Each source file must contain valid fields and values before merging. A later
 override can't repair an invalid value in an earlier file. This also applies
