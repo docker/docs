@@ -338,7 +338,7 @@ that matches your agent:
 {{< tab name="Claude Code" >}}
 
 ```console
-$ sbx run --rm docker.io/docker/sbx-kit-claude:2.1.267 \
+$ sbx run --rm claude \
     --kit sbx/claude-sessions:1.0.0
 ```
 
