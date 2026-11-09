@@ -83,7 +83,7 @@ $ sbx run --name <sandbox-name> -- -c   # runs claude --dangerously-skip-permiss
 ```
 
 When the first argument is a bare word, such as a subcommand or prompt,
-it replaces the image's `CMD` defaults. Arguments stored in a v3 agent image's
+it replaces the image's `CMD` defaults. Arguments stored in the agent image's
 `ENTRYPOINT` are preserved.
 
 See the [Claude Code CLI reference](https://code.claude.com/docs/en/cli-reference)

@@ -65,7 +65,7 @@ $ sbx run copilot -- -p "review this PR"   # runs copilot --yolo -p "review this
 ```
 
 When the first argument is a bare word, such as a subcommand or prompt,
-it replaces the image's `CMD` defaults. Arguments stored in a v3 agent image's
+it replaces the image's `CMD` defaults. Arguments stored in the agent image's
 `ENTRYPOINT` are preserved.
 
 ## Base image

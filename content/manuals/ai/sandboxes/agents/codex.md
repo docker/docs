@@ -82,7 +82,7 @@ codex --dangerously-bypass-approvals-and-sandbox
 
 Arguments after `--` are added after the default flags when the first one is
 itself a flag (begins with `-`). A bare word, such as a prompt, replaces the
-image's `CMD` defaults. Arguments stored in a v3 agent image's `ENTRYPOINT`
+image's `CMD` defaults. Arguments stored in the agent image's `ENTRYPOINT`
 are preserved. To keep bypass mode regardless of where the image stores the
 flag, lead with it:
 

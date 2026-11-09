@@ -88,7 +88,7 @@ Without extra args, the sandbox runs:
 kiro chat --trust-all-tools
 ```
 
-The v3 Kiro image stores `chat --trust-all-tools` in its `ENTRYPOINT`, so
+The Kiro image stores `chat --trust-all-tools` in its `ENTRYPOINT`, so
 forwarded arguments keep that prefix. Pass a prompt directly without repeating
 `chat`:
 
