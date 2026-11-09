@@ -134,9 +134,15 @@ $ sbx --cloud schedule update <SCHEDULE_ID> --cron '0 10 * * 1' --timezone Etc/U
 
 ## Replace the task or run configuration
 
-Passing a kit or any run flag replaces the saved run configuration. Supply
-`--prompt` or `--command` and all run settings you want to retain, even when
-changing only one value. Omitted settings reset, including network rules,
+If you supply a kit argument or change a run setting, such as the prompt,
+duration, environment variables, or working directory, `schedule update`
+replaces the saved configuration used by future runs. It doesn't merge those
+changes with the saved run settings. Repeat `--prompt` or `--command` and
+every run setting you want to retain, even when changing only one value.
+Updates that contain only `--name`, `--description`, `--cron`, `--timezone`,
+or `--enabled` preserve the saved run configuration.
+
+Omitted run settings reset, including network rules,
 duration, resources, platform, environment variables, working directory, and
 `--static-mcp` server selections.
 
