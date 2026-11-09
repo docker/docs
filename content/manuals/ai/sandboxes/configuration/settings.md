@@ -164,6 +164,23 @@ applies to running sandboxes without recreating them. Set it to `false` to
 withdraw that access. See [image paste](../faq.md#can-i-paste-images-into-an-agent)
 for supported behavior.
 
+#### claude.chrome {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Turn this on to let sandboxed Claude Code access host browser tabs through
+Claude in Chrome:
+
+```console
+$ sbx settings set claude.chrome true
+```
+
+Changes apply to new browser connections from running sandboxes. Set it to
+`false` to block further connections; established connections stay active until
+you end the Claude browser sessions. See
+[Claude in Chrome](../agents/claude-code.md#claude-in-chrome) for authentication
+requirements and setup.
+
 #### claude.remoteControl {.wrap-anywhere}
 
 {{< setting-metadata type="boolean" default="false"

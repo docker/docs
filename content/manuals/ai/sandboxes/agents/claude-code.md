@@ -66,6 +66,42 @@ To use Claude Code's `/remote-control` command inside a sandbox, turn on
 $ sbx settings set claude.remoteControl true
 ```
 
+### Claude in Chrome
+
+Claude in Chrome lets sandboxed Claude Code work with tabs in your host browser.
+Access is off by default. To use it:
+
+1. Install the Claude in Chrome extension in your host browser and sign in.
+   Use the same account for the extension and Claude Code's subscription OAuth
+   login. Your organization must permit the extension. An API key alone isn't
+   sufficient.
+2. On your host, enable
+   [`claude.chrome`](../configuration/settings.md#claudechrome):
+
+   ```console
+   $ sbx settings set claude.chrome true
+   ```
+
+3. Start Claude Code with `--chrome` in a Claude sandbox:
+
+   ```console
+   $ sbx run --name <sandbox-name> -- --chrome
+   ```
+
+Ask Claude to open a tab, navigate to a page, or read its contents. Docker
+Sandboxes authenticates the browser connection with your stored Claude OAuth
+login without exposing the token inside the sandbox.
+
+To block further browser connections, run on your host:
+
+```console
+$ sbx settings set claude.chrome false
+```
+
+This blocks new connections from running sandboxes without recreating them.
+It doesn't end an established browser connection. End existing Claude browser
+sessions to revoke active access.
+
 ### Default startup command
 
 Without extra args, the sandbox runs:
