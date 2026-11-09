@@ -28,6 +28,33 @@ with suggested fixes. Use `--json` or `--format yaml` for machine-readable
 output, or `--format github-issue` to generate a Markdown snippet suitable for pasting
 into a GitHub issue.
 
+## Check sandbox disk usage
+
+If you're running low on disk space, check how much storage your local
+sandbox images, containers, and managed volumes use:
+
+```console
+$ sbx df
+```
+
+The summary shows the size and estimated reclaimable space for each resource
+type. To identify individual images, containers, or volumes taking up space,
+run:
+
+```console
+$ sbx df --verbose
+```
+
+Image totals count shared layers once and include image data retained by
+containers after you remove the image's tags. Host bind mounts, logs, and caches
+are excluded, so the report doesn't account for all disk space used on your host.
+A measurement shown as `unknown` couldn't be determined.
+
+Before cleaning up, [preview which stopped sandboxes would be removed](usage.md#start-stop-and-remove)
+with `sbx prune --dry-run`. The reclaimable estimate covers unused resources of
+each type, so it isn't the amount that `sbx prune` alone removes. Shared storage
+and resources still in use can reduce or delay the space recovered.
+
 ## Image pulls fail on eCryptfs
 
 On Linux, image pulls can fail with an I/O error when the sandbox state
