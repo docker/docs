@@ -524,24 +524,14 @@ it may have no tag. Include images without tags and show their digests:
 $ sbx template ls --all --digests
 ```
 
-For example, the following illustrative output shows a cached image with a
-repository digest but no tag:
-
-```text
-REPOSITORY                      TAG  DIGEST                                                                   IMAGE ID      FLAVOR  CREATED
-docker.io/my-org/my-template     -    sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789  0123456789ab  claude  2d
-```
-
-To remove this image, join its `REPOSITORY` and `DIGEST` values with `@`:
-
-```console
-$ sbx template rm docker.io/my-org/my-template@sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789
-```
-
-If the row has no repository digest, use its `IMAGE ID` instead:
+Remove the image using its image ID or repository digest from the listing:
 
 ```console
 $ sbx template rm <IMAGE_ID>
+```
+
+```console
+$ sbx template rm <REPOSITORY>@sha256:<DIGEST>
 ```
 
 Image ID prefixes must uniquely identify an image. The `--all` and `--digests`
