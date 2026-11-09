@@ -264,7 +264,9 @@ Without `--workdir`, the command starts in the sandbox's primary workspace. In
 a mountless sandbox, it starts in the container image's working directory.
 
 `sbx exec` runs commands in the foreground. Detached execution (`-d` or
-`--detach`) isn't supported.
+`--detach`) isn't supported. Local `sbx exec` and `sbx env exec` also reject
+`--detach-keys`. Omit this flag for local commands; it applies only to
+interactive cloud exec sessions.
 
 ## Interactive mode
 
