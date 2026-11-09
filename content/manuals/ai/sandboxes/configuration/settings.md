@@ -566,6 +566,34 @@ The cooldown applies across all eligible errors, not separately to each error
 type. Values below one are treated as one day. This setting doesn't grant
 upload consent: [diagnostics.autoUpload](#diagnosticsautoupload) must be `yes`.
 
+### Outbound connections
+
+#### egress.stalledConnectionTimeoutSeconds {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="30" >}}
+
+Set how many seconds an outbound TCP connection from a local sandbox can go
+without the remote end acknowledging data before the connection closes. This
+bounds how long a connection stranded by a host network change, such as a VPN
+connecting, can hang.
+
+Use a value from `0` to `3600`. Set `0` to disable the timeout. For example,
+increase the timeout to tolerate longer network interruptions:
+
+```console
+$ sbx settings set egress.stalledConnectionTimeoutSeconds 90
+$ sbx daemon restart
+```
+
+Changes apply to sandboxes created after the change. For existing sandboxes,
+restart the daemon to rebuild their network proxies with the updated value.
+The experimental Runtime backend doesn't support this setting.
+
+A network outage longer than the timeout can close long-lived connections,
+including streams and uploads. On Linux, the timeout also closes a connection
+if the remote end stops reading data for longer than the timeout. Increase the
+value or disable the timeout if you need connections to survive these pauses.
+
 ### Upstream proxies and TLS
 
 Upstream proxy support is experimental. Use these settings to control how
