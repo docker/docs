@@ -29,6 +29,15 @@ that supports remote development over SSH can connect to it.
 - The editor or app you want to connect, with its remote-over-SSH support
   installed.
 
+## Configure agent credentials
+
+Before setting up an integration that runs an AI agent, configure a model
+provider credential for that agent in Docker Sandboxes. Connecting an editor
+or desktop app over SSH doesn't supply the sandbox with the credential.
+Store an API key with [stored secrets](../configuration/credentials.md#stored-secrets)
+or complete the agent's supported OAuth sign-in flow. See the
+[agent pages](../agents/_index.md) for authentication instructions.
+
 ## Enable SSH access
 
 Run the SSH setup command once:
