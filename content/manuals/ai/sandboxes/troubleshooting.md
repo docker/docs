@@ -100,6 +100,22 @@ $ sbx run --name <sandbox-name> <agent>
 See [Choose a workspace](usage.md#choose-a-workspace) for mountless, direct,
 and clone-mode behavior.
 
+## Sandbox reports a mount state error
+
+If a sandbox reports `saved mount metadata does not match the container`,
+remove and recreate the affected sandbox. Before removing it,
+[copy out any files you want to keep](usage.md#copy-files-between-host-and-sandbox)
+if the sandbox is still accessible. Removing a sandbox deletes its sandbox data.
+
+If the error says `a recorded mount source now resolves to a different path`,
+restore the original host source path, or remove and recreate the sandbox.
+This can happen if you replace the source directory or one of its parent
+directories with a symlink to a different location.
+
+Changing a host symlink to point elsewhere doesn't move an existing static
+mount. The sandbox retains the original source, and filesystem policy checks
+when you reuse the sandbox include that source.
+
 ## Kiro, Copilot, or Droid shorthand fails
 
 In Docker Sandboxes v0.42, `sbx run kiro`, `sbx run copilot`, and
