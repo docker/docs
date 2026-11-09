@@ -99,9 +99,6 @@ install hook, and opens a shell in the sandbox.
 For more on combining kits, see
 [Use kits](/manuals/ai/sandboxes/customize/use-kits.md#add-mixins).
 
-You can also use a built-in coding agent, for example
-`sbx run claude --kit docker.io/firecrawl/sbx-kit-firecrawl:1.0.0`.
-
 ## Step 3: Check the kit
 
 Run these checks from the shell in the `firecrawl-shell` sandbox. Each one
