@@ -86,6 +86,34 @@ with `--rm`, that sandbox is removed only after its agent session finishes.
 `--rm` needs an attached agent session to know when to remove the sandbox, so
 you can't combine it with `--detach` or `--detach-keys`.
 
+## Inspect disk usage
+
+Use `sbx df` to check disk usage for local images, containers, and managed
+volumes before cleaning up:
+
+```console
+$ sbx df
+```
+
+The summary shows total and active resource counts, size, and estimated
+reclaimable space. Use `--verbose` to inspect individual resources, or
+`--format json` or `--format yaml` for structured output:
+
+```console
+$ sbx df --verbose
+$ sbx df --format json
+$ sbx df --format yaml
+```
+
+Image totals count shared layers once and include retained data without tags.
+Host bind mounts, logs, and caches are excluded. Unavailable measurements appear
+as `unknown` in table output.
+
+Reclaimable space estimates what removing unused resources of each type could
+free; it isn't the amount that `sbx prune` alone removes. Shared filesystem
+blocks, leases, and concurrent activity can reduce or delay the space recovered.
+Cloud disk usage isn't supported.
+
 ## Choose a workspace
 
 `sbx run` mounts the current directory when you don't pass a workspace path.
