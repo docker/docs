@@ -45,6 +45,48 @@ All capability names in the table have the `com.docker.sandbox/` prefix.
 | [`usb-device@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/usb-device@1.md) | Unsupported | Unsupported | Kit requests for USB device access are not supported. |
 | [`volume@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/volume@1.md) | v0.45.0 | Limited: v0.45.0 | Local sandboxes provide block storage or tmpfs and [retain block volumes across removal and recreation](../use-kits.md#keep-kit-data-when-recreating-a-sandbox). Cloud sandboxes use ordinary sandbox disk at the declared paths, including for tmpfs requests. |
 
+## Publish a port from inside a sandbox
+
+To let a kit publish a host port at runtime without a prompt, add this grant
+to the v3 kit descriptor and include the kit when creating the sandbox:
+
+```yaml
+capabilities:
+  - type: com.docker.sandbox/api@1
+    config:
+      operation: ports.publish
+      approval: none
+```
+
+From inside the sandbox, send a request directly to its HTTP proxy address.
+For example, publish a service listening on port 8080:
+
+```console
+$ curl --noproxy '*' --max-time 60 --fail-with-body \
+    -H 'Content-Type: application/json' \
+    --data '[{"sandbox_port":8080}]' \
+    "${HTTP_PROXY%/}/_sbx/api/ports"
+```
+
+The request accepts exactly one port in a JSON array. Omit `host_port` or set
+it to `0` to allocate an ephemeral host port. The response is an array of
+bindings with the allocated `host_ip` and `host_port`. Host bindings are
+loopback-only; sandbox port 9418 is reserved for Git.
+
+The automatic endpoint requires `approval: none`. A grant with required
+approval cannot use it. Grants are additive: another kit's required-approval
+grant doesn't override an automatic grant.
+
+To choose a fixed host port, send the request to `/_sbx/api/ports/request`
+with `host_port` set to the desired port. That endpoint always asks for
+per-call approval, including when the grant specifies `approval: none`.
+
+These bindings are transient: they disappear when the sandbox stops and
+aren't restored on its next start. Recreate the sandbox to change its API
+grants; `sbx kit add` cannot grant this permission. If a response is lost,
+inspect the published ports with `sbx ports <SANDBOX_NAME>` on the host
+before retrying: the request might already have published a binding.
+
 ## Capability groups
 
 Docker Sandboxes supports capability groups in `sbx` v0.48.0 and later.
