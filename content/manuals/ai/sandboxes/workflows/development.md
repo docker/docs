@@ -97,10 +97,6 @@ those require the sandboxed service to listen on IPv6 as well — bind it to
 `[::]` — or a client arriving over `::1` has its connection accepted and then
 reset.
 
-The experimental Runtime backend publishes ports on IPv4 loopback only.
-Use a sandbox port without a host port, such as `--publish 3000` for TCP or
-`--publish 3000/udp4` for UDP. It rejects dual-stack and IPv6 publication.
-
 Published ports survive restarts: `sbx` re-publishes them when the sandbox or
 the daemon restarts. Explicit host ports are reused, while a port published with
 an OS-assigned host port, such as `--publish 3000`, gets a different host port
