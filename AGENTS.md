@@ -191,7 +191,7 @@ branch so unrelated hidden pages stay hidden.
 
 ## Hugo shortcodes
 
-Shortcodes are defined in `layouts/shortcodes/`. Syntax reference is in
+Shortcodes are defined in `layouts/_shortcodes/`. Syntax reference is in
 COMPONENTS.md. Wrong shortcode syntax fails silently during build but
 produces broken HTML — always check COMPONENTS.md for correct syntax.
 
