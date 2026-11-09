@@ -32,7 +32,8 @@ Launches that bake a kit template also create a fresh sandbox.
 
 Reusing a sandbox keeps its creation settings. Flags such as `--cpus`,
 `--memory`, `--platform`, `--ttl`, `--env`, and `--allow-network` are rejected
-when resuming. Use `--new` to create a sandbox with different settings.
+when resuming. Use `--new` to create a sandbox with different settings. If you
+also pass `--name`, choose an unused name to avoid a name conflict.
 
 To create the sandbox without opening an agent session, use `create`:
 
