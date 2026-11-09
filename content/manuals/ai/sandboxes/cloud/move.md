@@ -60,12 +60,17 @@ $ sbx move local-project --to cloud
 ```
 
 The `move` command spans both backends, so don't add the global `--cloud` flag.
-Use `--name` to set the destination name prefix. The cloud destination appends
-a short unique suffix:
+Without `--name`, the cloud destination gets an automatically generated name
+with a short unique suffix. Use `--name` to set the exact destination name:
 
 ```console
 $ sbx move local-project --to cloud --name cloud-project
 ```
+
+For either move direction, an explicit name must be available at the destination.
+If the name is already taken, the command reports an error before confirmation,
+source capture, or transfer. Local names are compared case-insensitively. Cloud
+names must be available within the source agent's namespace.
 
 Local workspace files are mounted outside the sandbox filesystem and don't
 appear in the cloud destination. When the source has a workspace, the CLI
