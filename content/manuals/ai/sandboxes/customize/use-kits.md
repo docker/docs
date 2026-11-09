@@ -338,16 +338,14 @@ that matches your agent:
 {{< tab name="Claude Code" >}}
 
 ```console
-$ sbx run --rm claude \
-    --kit sbx/claude-sessions:1.0.0
+$ sbx run --rm claude --kit sbx/claude-sessions:1.0.0
 ```
 
 {{< /tab >}}
 {{< tab name="Codex" >}}
 
 ```console
-$ sbx run --rm docker.io/docker/sbx-kit-codex:0.155.1 \
-    --kit sbx/codex-sessions:1.0.0
+$ sbx run --rm codex --kit sbx/codex-sessions:1.0.0
 ```
 
 {{< /tab >}}
