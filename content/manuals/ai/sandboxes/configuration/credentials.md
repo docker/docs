@@ -143,7 +143,15 @@ $ sbx secret set openai \
 ```
 
 The corresponding `op` or `aws` CLI must be installed and authenticated on the
-host.
+host, with its installation directory listed as an absolute path in the host's
+`PATH`. Built-in reference providers ignore empty and relative `PATH` entries.
+
+Each reference resolution runs the provider CLI in a fresh temporary directory
+on the host, outside the project directory. Use absolute paths for any provider
+configuration files you specify. If you use a version manager such as asdf or
+mise, configure the provider version globally rather than relying on a
+project-only selection. Keep provider tools, their dependencies, and the host's
+temporary directory outside writable sandbox mounts.
 
 > [!NOTE]
 > To resolve a reference with a specific 1Password account or AWS profile, set

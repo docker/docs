@@ -900,6 +900,11 @@ outside writable sandbox mounts. Use an absolute path, an absolute host
 `PATH` entry, or an explicit change to the helper's private directory. See
 [dynamic secret sources](credentials.md#use-a-dynamic-secret-source).
 
+Built-in 1Password and AWS Secrets Manager references also run from a temporary
+directory and require provider tools in absolute host `PATH` directories. See
+[dynamic secret sources](credentials.md#use-a-dynamic-secret-source) for provider
+configuration requirements.
+
 For a cloud environment, set `snapshot: true` on a `ref` or `command` source:
 
 ```yaml
