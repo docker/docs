@@ -40,20 +40,30 @@ values in the task's prompt.
 ## Create a schedule
 
 1. Open **Schedules** in the Console and select **New schedule**.
-2. Enter a **Name** and, optionally, a **Description**.
-3. Under **Agent**, choose a kit and check its credential status. Add any
-   missing credentials through **Secrets**.
-4. Under **Sandbox**, choose the network **Policy**, **Tools**, and **Compute**
-   size for each run. Connect or reconnect selected tools if prompted.
-5. Choose a **Time limit** for each sandbox. This time to live (TTL) limits
-   how long a task can run. The available choices are 1, 4, 8, and 24 hours.
-   A task still running at expiry is stopped, its sandbox is deleted, and the
-   run counts as failed.
-6. Under **Schedule**, select a **Runs** preset and **Timezone**. For a cron
-   expression, choose **Custom**. Review **Next runs** to check the timing.
-7. In **Prompt**, enter the prompt for an agent kit, or the command for a
-   command kit such as Shell. Specify where the task should save or send its
-   results, because files left in the sandbox are deleted with it.
+2. Give the schedule a name that identifies its task, and optionally add a
+   description.
+3. Choose a kit with the agent or command-line tools your task needs. Make
+   sure its required credentials are available so each run can start without
+   interactive setup.
+4. Configure the sandbox for the task:
+   - Choose a compute size with enough resources to run your agent and workload.
+   - Select the MCP tools the task needs to access external services. Connect
+     or reconnect them if prompted so scheduled runs have authorized access.
+   - Review the network policy. Scheduled sandboxes default to **Open**, which
+     permits outbound access to any host. For tighter access, select a more
+     restrictive [network policy](policies.md) that permits the services your
+     task needs.
+5. Set a time limit long enough for the task to finish. This time to live
+   (TTL) limits how long each sandbox can run. The available choices are 1, 4,
+   8, and 24 hours. A task still running at expiry is stopped, its sandbox is
+   deleted, and the run counts as failed.
+6. Set how often the task should run and choose the time zone for that
+   schedule. Use a preset or a custom cron expression, then review the next
+   run times to confirm the timing matches your intent.
+7. Write the instructions for each run: a prompt for an agent kit, or a
+   command for a command kit such as Shell. Specify where the task should
+   save or send its results, because files left in the sandbox are deleted
+   with it.
 8. Select **Save schedule**.
 
 Custom cron expressions have five fields: minute, hour, day of month, month,
