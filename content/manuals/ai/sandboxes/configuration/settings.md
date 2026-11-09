@@ -282,8 +282,7 @@ requirements, and how to apply changes to existing sandboxes.
 
 #### platform.images.useDHI {.wrap-anywhere}
 
-{{< setting-metadata type="boolean" default="false"
-  env="DOCKER_SANDBOXES_USE_DHI" >}}
+{{< setting-metadata type="boolean" default="false" >}}
 
 Turn this on to use Docker Hardened Image variants when creating sandboxes
 with default agent templates:
@@ -291,6 +290,10 @@ with default agent templates:
 ```console
 $ sbx settings set platform.images.useDHI true
 ```
+
+This setting uses persistent configuration only. The
+`DOCKER_SANDBOXES_USE_DHI` environment variable is ignored; use `sbx settings set`
+instead.
 
 For example, the default template `docker/sandbox-templates:claude-code-docker`
 becomes `dhi/sbx-templates:claude-code-docker`. The image tag stays the same.
