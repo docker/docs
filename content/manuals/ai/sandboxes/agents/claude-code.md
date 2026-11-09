@@ -82,11 +82,8 @@ preserved:
 $ sbx run --name <sandbox-name> -- -c   # runs claude --dangerously-skip-permissions -c
 ```
 
-When the first argument is a bare word, such as a subcommand or prompt,
-it replaces the image's `CMD` defaults. Arguments stored in the agent image's
-`ENTRYPOINT` are preserved. See
-[Forward arguments to an agent](_index.md#forward-arguments-to-an-agent)
-to check the split for your image.
+For prompts and subcommands, see
+[Pass arguments to an agent](../usage.md#pass-arguments-to-an-agent).
 
 See the [Claude Code CLI reference](https://code.claude.com/docs/en/cli-reference)
 for available options.
@@ -102,9 +99,8 @@ sandbox:
 $ sbx run --clone claude . -- agents
 ```
 
-If the image stores `--dangerously-skip-permissions` in `CMD`, this invocation
-omits it. To use bypass-permissions mode regardless of where the image stores
-the flag, pass it explicitly:
+To use bypass-permissions mode with the `agents` subcommand, pass the flag
+explicitly:
 
 ```console
 $ sbx run --clone claude . -- --dangerously-skip-permissions agents

@@ -86,6 +86,41 @@ with `--rm`, that sandbox is removed only after its agent session finishes.
 `--rm` needs an attached agent session to know when to remove the sandbox, so
 you can't combine it with `--detach` or `--detach-keys`.
 
+## Pass arguments to an agent
+
+Put agent flags, prompts, and subcommands after `--`. Options before `--`
+configure the sandbox; arguments after it go to the agent:
+
+```console
+$ sbx run kiro -- "explain this project"
+$ sbx run claude -- --model sonnet
+$ sbx run --name my-project -- --model sonnet
+```
+
+With no forwarded arguments, the agent uses its default startup command.
+If the first forwarded argument is a flag (begins with `-`), the launcher
+keeps the defaults and adds your arguments. To keep a default permission
+flag when passing a prompt, put the flag first:
+
+```console
+$ sbx run codex -- --dangerously-bypass-approvals-and-sandbox "fix the build"
+```
+
+If you start with a prompt or subcommand, it replaces the default command
+arguments (`CMD`), but keeps the image's entrypoint arguments (`ENTRYPOINT`).
+For Kiro, this means you pass the prompt without repeating `chat`:
+`sbx run kiro -- "explain this project"` runs
+`kiro chat --trust-all-tools "explain this project"`.
+
+To run a different subcommand without the agent's startup defaults, run the
+agent directly in a running sandbox with `sbx exec`. For example:
+
+```console
+$ sbx exec -it <sandbox-name> kiro login --use-device-flow
+```
+
+See the [agent pages](agents/) for startup commands and agent-specific options.
+
 ## Choose a workspace
 
 `sbx run` mounts the current directory when you don't pass a workspace path.

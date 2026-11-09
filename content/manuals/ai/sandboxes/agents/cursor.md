@@ -73,11 +73,8 @@ itself a flag (begins with `-`), so `--yolo` is preserved:
 $ sbx run --name <sandbox-name> -- -p "refactor this"   # runs cursor-agent --yolo -p "refactor this"
 ```
 
-When the first argument is a bare word, such as a subcommand or prompt,
-it replaces the image's `CMD` defaults. Arguments stored in the agent image's
-`ENTRYPOINT` are preserved. See
-[Forward arguments to an agent](_index.md#forward-arguments-to-an-agent)
-to check the split for your image.
+For prompts and subcommands, see
+[Pass arguments to an agent](../usage.md#pass-arguments-to-an-agent).
 
 ## Base image
 

@@ -80,16 +80,14 @@ Without extra args, the sandbox runs:
 codex --dangerously-bypass-approvals-and-sandbox
 ```
 
-Arguments after `--` are added after the default flags when the first one is
-itself a flag (begins with `-`). A bare word, such as a prompt, replaces the
-image's `CMD` defaults. Arguments stored in the agent image's `ENTRYPOINT`
-are preserved. See [Forward arguments to an agent](_index.md#forward-arguments-to-an-agent)
-to check the split for your image. To keep bypass mode regardless of where the
-image stores the flag, lead with it:
+To keep bypass mode when passing a prompt, lead with the flag:
 
 ```console
 $ sbx run --name <sandbox-name> -- --dangerously-bypass-approvals-and-sandbox "fix the build"
 ```
+
+For argument forwarding rules, see
+[Pass arguments to an agent](../usage.md#pass-arguments-to-an-agent).
 
 ## Base image
 
