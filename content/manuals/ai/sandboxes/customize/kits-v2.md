@@ -12,8 +12,8 @@ aliases:
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 V2 kits remain supported and are not deprecated. Built-in agent names such
-as `claude` and `codex` select v2 kits and work with v2 mixins. This page
-covers their usage and specification. For new kits, Docker recommends
+as `claude` and `codex` select v3 kits and cannot use v2 mixins. This page
+covers v2 kit usage and specification. For new kits, Docker recommends
 [v3](/manuals/ai/sandboxes/customize/_index.md). V1 also remains supported.
 
 ## Use existing kits
@@ -25,7 +25,6 @@ mixins with `--kit`:
 
 ```console
 $ sbx run ./my-agent --name my-project --kit ./team-config
-$ sbx run claude --name claude-project --kit ./team-config
 ```
 
 `sbx run` uses your current directory as the workspace. Append a project path
@@ -589,6 +588,10 @@ Volumes are applied only when a sandbox is created. `sbx kit add` cannot attach
 volumes to a running container.
 
 ## Fork an existing agent
+
+This example requires an older `sbx` version with built-in v2 agents.
+Built-in names select v3 kits for sandbox creation with the latest `sbx`.
+For v3 customization, see [Compose a kit set](author/kit-sets.md).
 
 Sandbox kits (`kind: sandbox`) define a full agent from scratch. The most
 common variant is a fork of a built-in agent. Use `extends:` to inherit the

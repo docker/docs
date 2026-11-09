@@ -22,6 +22,13 @@ To save and reuse an environment you've configured interactively, see
 
 ## Docker-provided images
 
+Built-in agent names resolve to Debian-based kits at
+`docker.io/sbx/<NAME>:latest`. To add tools to these agents, use
+[mixins](tool-mixins.md).
+
+The `docker/sandbox-templates` images described here are older Ubuntu-based
+images, separate from the built-in kits.
+
 To customize an existing agent, start from one of Docker's sandbox templates,
 published as
 `docker/sandbox-templates:<variant>`. They are based on Ubuntu and run as a
