@@ -43,8 +43,7 @@ audit logging before hosted audit logs were available. Those organizations start
 turns it on. To keep records local to your hosts, turn off **Docker Cloud** and
 keep **Local disk** on.
 
-Docker Cloud keeps audit records searchable in the hosted audit log view for 90
-days, and in archive storage for 90 days.
+The **Audit delivery** page shows how long Docker Cloud retains audit records.
 
 ## Review delivery change history
 
