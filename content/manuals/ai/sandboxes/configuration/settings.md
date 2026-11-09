@@ -291,10 +291,6 @@ with default agent templates:
 $ sbx settings set platform.images.useDHI true
 ```
 
-This setting uses persistent configuration only. The
-`DOCKER_SANDBOXES_USE_DHI` environment variable is ignored; use `sbx settings set`
-instead.
-
 For example, the default template `docker/sandbox-templates:claude-code-docker`
 becomes `dhi/sbx-templates:claude-code-docker`. The image tag stays the same.
 An explicit `--template` or a custom kit image takes precedence.
