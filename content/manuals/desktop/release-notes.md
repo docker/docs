@@ -28,16 +28,17 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-11-09" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.99.0" build_path="/XXXXXX/" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.99.0" build_path="/245822/" >}}
 
 ### Updates
 
 - Docker Offload `v0.7.36`
 - Docker Hardened Images (`dhictl`) `v0.0.10`
-- [Docker Aagent v1.153.0](https://github.com/docker/docker-agent/releases/tag/v1.153.0)
+- [Docker Agent v1.153.0](https://github.com/docker/docker-agent/releases/tag/v1.153.0)
 - Docker Scout CLI `v1.28.0`
 - Docker MCP CLI `v0.44.3`
 - [Docker Compose v5.7.0](https://github.com/docker/compose/releases/tag/v5.7.0)
+- [Docker Engine v29.9.3](https://docs.docker.com/engine/release-notes/29/#2993)
 
 ### Bug fixes and enhancements
 
@@ -47,6 +48,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed constant network traffic and CPU usage caused by Docker Desktop computing the size of NFS- or SMB-backed volumes. Fixes [docker/desktop-feedback#800](https://github.com/docker/desktop-feedback/issues/800). 
 - Fixed an issue where Docker Desktop could shut down ungracefully, causing resource leaks or a corrupted state by not allowing cleanup handlers to run.
 - Fixed the Containers list cutting off the ports when clicking **Show all ports**, which now lists all of them in a popover. Fixes [docker/desktop-feedback#794](https://github.com/docker/desktop-feedback/issues/794).
+- Fixed connection resets on published ports under bursts of new connections with Docker VMM.
 
 #### For Mac
 
@@ -61,7 +63,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed per-user installs and updates on Windows failing with a "Virtual Machine Platform" error on machines where WSL 2 already works.
 - Fixed Docker Desktop hanging after closing an error dialog with its **Close** button. Closing an error dialog that offers **Continue now** continues instead of quitting Docker Desktop. 
 - Fixed Windows containers failing to start at login with **Starting windows containers: An error has occurred.** when a container took longer than 30 seconds to stop.
-- Fixed WSL 2 distributions flushing their systemd-resolved DNS cache every 30 seconds while Docker Desktop was running. Fixes [docker/desktop-feedback#794](https://github.com/docker/desktop-feedback/issues/794).
+- Fixed WSL 2 distributions flushing their systemd-resolved DNS cache every 30 seconds while Docker Desktop was running. Fixes [docker/desktop-feedback#761](https://github.com/docker/desktop-feedback/issues/761).
 - Fixed Windows installer launcher to report descriptive error reasons (e.g. **Disk full**) on update failure instead of a bare exit code.
 
 ## 4.98.0
