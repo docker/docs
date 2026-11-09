@@ -184,9 +184,11 @@ from `/projects/api`, and it mounts `/projects/api` instead. You don't need a
 separate `sbxenv.yaml` in either project.
 
 If the project has a `sbxenv.yaml`, `sbx` combines it with your user defaults.
-Project settings override individual default values. Lists such as `ports`
-and `mcp.servers` combine entries from both files. If you pass a file or
-directory path to the command, `sbx` skips `~/.sbxenv.yaml`.
+Project settings override individual default values. Lists combine entries
+from both files, with matching ports, MCP server names, and additional workspace
+targets using the project entry. See the
+[merge rules](#combine-team-defaults-and-personal-settings) for details. If you
+pass a file or directory path to the command, `sbx` skips `~/.sbxenv.yaml`.
 
 In `~/.sbxenv.yaml`, you can set `workspace` to `${{ env.projectDir }}` or a
 subdirectory such as `${{ env.projectDir }}/src`. Other workspace paths
@@ -429,11 +431,34 @@ Pass both files in merge order:
 $ sbx env run base.sbxenv.yaml local.sbxenv.yaml
 ```
 
-Nested mappings merge by key, lists concatenate except for `entrypoint` and
-`cmd`, and values from later files replace earlier scalar values. In this
-example, the sandbox has four CPUs,
-12 GB of memory, and both environment variables. Each relative workspace path
-resolves from the directory of the file that declares it.
+In this example, the sandbox has four CPUs, 12 GB of memory, and both
+environment variables. Each relative workspace path resolves from the directory
+of the file that declares it.
+
+Files merge in the order you pass them:
+
+- Nested mappings merge by key, and later scalar values replace earlier ones.
+- Lists concatenate, with the following exceptions:
+  - `entrypoint` and `cmd` replace the earlier list. See
+    [Set the launch command](#set-the-launch-command) for inheritance and clearing.
+  - `ports` entries match by sandbox port and effective protocol. Protocol names
+    are case-insensitive; an omitted protocol uses `tcp4`, or `tcp6` for an IPv6
+    `hostIP`. Different protocols, such as `tcp` and `tcp4`, remain separate.
+  - `mcp.servers` entries match by exact server name.
+  - `additionalWorkspaces` entries match by effective container target: the
+    explicit `target`, or the resolved host path when `target` is omitted. On
+    macOS, an implicit target uses the stored host-path casing when available;
+    explicit targets remain case-sensitive.
+  - `kits` entries with the same source merge their arguments by key, with later
+    argument values taking precedence.
+
+For matching ports, MCP servers, and additional workspaces, the last complete
+entry replaces the earlier entry but keeps its first position in the list.
+This also applies to repeated entries within one file. Omitted fields in the
+winning entry use their defaults rather than inheriting earlier values. For
+example, replacing `{sandbox: 8080, host: 3000}` with `{sandbox: 8080}` selects
+an ephemeral host port; omitting `readOnly` from a replacement workspace makes
+the mount writable.
 
 Each source file must contain valid fields and values before merging. A later
 override can't repair an invalid value in an earlier file. This also applies
