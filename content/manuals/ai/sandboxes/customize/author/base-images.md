@@ -22,12 +22,12 @@ To save and reuse an environment you've configured interactively, see
 
 ## Docker-provided images
 
-Built-in agent names resolve to Debian-based v3 kits at
+Built-in agent names resolve to Debian-based kits at
 `docker.io/sbx/<NAME>:latest`. To add tools to these agents, use
-[v3 mixins](tool-mixins.md).
+[mixins](tool-mixins.md).
 
 The `docker/sandbox-templates` images described here are older Ubuntu-based
-images, separate from the built-in v3 kits.
+images, separate from the built-in kits.
 
 To customize an existing agent, start from one of Docker's sandbox templates,
 published as

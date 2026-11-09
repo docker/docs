@@ -3,7 +3,7 @@ title: Give sandboxed agents live web access with Firecrawl
 linkTitle: Web access with Firecrawl
 description: Add the Firecrawl kit to a Docker Sandbox so the agent can search the web, scrape pages to Markdown, and crawl sites through the sandbox proxy, with your API key kept on the host.
 summary: |
-  Compose the Firecrawl v3 mixin onto a sandbox workload. The agent gets the
+  Compose the Firecrawl mixin onto a sandbox workload. The agent gets the
   Firecrawl Python SDK and a network rule for the Firecrawl API, and the
   sandbox proxy adds your API key to requests, so the key never enters the
   sandbox.
@@ -24,14 +24,14 @@ without opening the rest of the web.
 In this guide, you'll learn how to:
 
 - Store your Firecrawl API key on the host as a sandbox secret
-- Add the Firecrawl mixin to a v3 workload
+- Add the Firecrawl mixin to a workload
 - Check that the SDK, the proxy-managed credential, and the network rule work
 - Call Firecrawl from inside the sandbox
 - Understand the limits the sandbox network policy places on the kit
 
 ## What the kit adds
 
-The Firecrawl kit is a v3 [mixin](/manuals/ai/sandboxes/customize/author/tool-mixins.md)
+The Firecrawl kit is a [mixin](/manuals/ai/sandboxes/customize/author/tool-mixins.md)
 published as `docker.io/firecrawl/sbx-kit-firecrawl`. When you add it to a
 workload, it contributes four things:
 
@@ -83,7 +83,7 @@ unattended runs, see
 ## Step 2: Run a workload with the Firecrawl mixin
 
 This example uses a shell workload without a coding agent so you can try the
-SDK directly. You can also add the Firecrawl mixin to another compatible v3
+SDK directly. You can also add the Firecrawl mixin to another compatible
 workload, including one that runs a coding agent.
 
 From your project directory, run:

@@ -293,7 +293,7 @@ you turned off forwarding or use a fixed SSH agent socket, see
    ```
 
 To apply this configuration automatically to built-in agents, package it as
-a v3 mixin. See [Build a tool mixin](../customize/author/tool-mixins.md)
+a mixin. See [Build a tool mixin](../customize/author/tool-mixins.md)
 and [Add mixins](../customize/use-kits.md#add-mixins).
 
 For troubleshooting, see

@@ -139,7 +139,7 @@ interactively.
 To make approval prompts the default for every session, set the launch command
 in an [environment file](configuration/environment-files.md#set-the-launch-command)
 or in your workload's Dockerfile. See
-[Build a v3 agent kit](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
+[Build an agent kit](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
 
 ## How do I know if my agent is running in a sandbox?
 

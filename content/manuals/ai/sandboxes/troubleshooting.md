@@ -243,7 +243,7 @@ SDKs trust certificates signed by the proxy. Certificate errors can stop a
 request before the credential proxy can inject credentials.
 
 For repeatable setup with a built-in agent, create a
-[v3 mixin kit](customize/author/patterns.md#run-setup-after-combining-kits)
+[mixin kit](customize/author/patterns.md#run-setup-after-combining-kits)
 that installs the CA when the sandbox is created. Save the example descriptor
 as `internal-ca/internal-ca.yaml` and place your certificate beside it.
 

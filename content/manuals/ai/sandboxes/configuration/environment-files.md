@@ -320,11 +320,11 @@ can adapt for a project.
 
 ### Add v3 kits
 
-To add v3 mixins to a built-in agent, list the mixins in `kits` and use the
+To add mixins to a built-in agent, list the mixins in `kits` and use the
 built-in name in `agent`.
 
-For example, save this as `web-app-env/v3.sbxenv.yaml` to use a v3 Claude Code
-workload with the v3 Playwright mixin:
+For example, save this as `web-app-env/v3.sbxenv.yaml` to use a Claude Code
+workload with the Playwright mixin:
 
 ```yaml
 schemaVersion: "1"
@@ -669,7 +669,7 @@ true`.
 `kits` accepts local directories, ZIP archives, OCI registry references, and
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
 configure the sandbox, and give the agent project-specific instructions.
-Built-in agents use v3 mixins. For examples, see
+To add mixins to built-in agents, see
 [Add v3 kits](#add-v3-kits).
 
 An environment file selects kits and configures a sandbox's host resources.
