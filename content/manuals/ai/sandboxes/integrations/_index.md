@@ -40,14 +40,15 @@ or complete the agent's supported OAuth sign-in flow. See the
 
 ## Enable SSH access
 
-Run the SSH setup command once:
+Run the SSH setup command:
 
 ```console
 $ sbx setup ssh
 ```
 
 The command starts the Docker Sandboxes daemon if needed and configures your
-SSH client. You can re-run it at any time.
+SSH client. After upgrading the CLI, rerun this command to refresh the generated
+SSH configuration.
 
 ## Set up desktop app connections
 
@@ -155,15 +156,16 @@ folder for mountless sandboxes.
 
 ### Managed SSH configuration
 
-`sbx setup ssh` writes a managed block to your SSH config: `~/.ssh/config` on
-macOS and Linux, or `%USERPROFILE%\.ssh\config` on Windows. The block is similar
-to the following:
+`sbx setup ssh` writes managed SSH configuration and adds an `Include` to
+your SSH config: `~/.ssh/config` on macOS and Linux, or
+`%USERPROFILE%\.ssh\config` on Windows. On macOS and Linux, the generated block
+is similar to the following (paths depend on your installation):
 
 ```text
 # >>> docker sandboxes (managed) >>>
-Host *.sbx
+Match originalhost "*.sbx,!*'*"
     User _default_user_
-    ProxyCommand "sbx" ssh proxy %n
+    ProxyCommand "sbx" ssh proxy '%n'
     IdentityAgent none
     IdentityFile /dev/null
     IdentitiesOnly yes
@@ -177,9 +179,13 @@ Host *.sbx
 
 You don't edit this block by hand. Its key entries work as follows:
 
-- `Host *.sbx` maps sandbox hostnames to the sandbox daemon. Application host
-  pickers don't discover individual sandbox names from this wildcard, so enter
-  the hostname, such as `demo.sbx`, manually when you configure an integration.
+- `Match originalhost "*.sbx,!*'*"` selects sandbox hostnames as entered on
+  the SSH command line and excludes names containing a single quote. On macOS
+  and Linux, `ProxyCommand` also single-quotes `%n`, the original hostname, to
+  pass it as a literal shell argument. Windows leaves `%n` unquoted.
+- Enter the hostname, such as `demo.sbx`, manually when you configure an
+  integration. Host pickers that list `Host` entries don't list these `Match`
+  blocks.
 - `User _default_user_` tells the daemon to use the sandbox image's default
   user, so your host username is never sent.
 
