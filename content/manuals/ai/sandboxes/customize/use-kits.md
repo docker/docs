@@ -13,8 +13,8 @@ settings. You run kits you build yourself or get from another publisher in the
 same way: give `sbx` a reference, and Docker Sandboxes prepares the environment
 and applies the kit's settings.
 
-Docker recommends v3 kits. V2 remains supported and is the default format
-for built-in agent references such as `claude` and `codex`.
+Built-in agent references such as `claude` and `codex` use v3 kits.
+V2 remains supported for existing kits.
 
 ## Run a kit
 
@@ -32,13 +32,12 @@ $ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-v3-kit
 
 ### Published v3 workloads
 
-Use these published v3 workloads in place of built-in shortcuts when adding
-v3 mixins with `sbx run` or `sbx create`.
+Built-in shortcuts accept v3 mixins with `sbx run` or `sbx create`. You can
+also select one of these versioned workloads to pin an agent version.
 
 A workload's agent name comes from the last component of its repository name.
-It must differ from built-in agent names: `docker/sbx-kit-claude` registers
-`sbx-kit-claude`, while `sbx/claude` conflicts with built-in `claude` and
-fails to register. Changing the sandbox's `--name` doesn't change the agent name.
+For example, `docker/sbx-kit-claude` registers `sbx-kit-claude`.
+Changing the sandbox's `--name` doesn't change the agent name.
 
 | Built-in agent | V3 workload OCI reference |
 | --- | --- |
@@ -150,7 +149,7 @@ For example, an internal CLI mixin can package your company's executable
 along with network rules and a credential request for its API:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-tools \
+$ sbx run codex --name codex-tools \
     --kit docker.io/<NAMESPACE>/company-cli:1.0.0
 ```
 

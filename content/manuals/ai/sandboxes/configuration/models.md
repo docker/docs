@@ -12,7 +12,7 @@ host, at a hosted provider, or at an inference endpoint you configure.
 
 This page covers the built-in `claude`, `codex`, and `opencode` agents. Choose
 a model that supports the tool calls and context length your agent needs.
-`--model` isn't supported with cloud sandboxes or v3 kits.
+`--model` isn't supported with cloud sandboxes.
 
 > [!NOTE]
 > Model selection is experimental. Enable it before following these examples.

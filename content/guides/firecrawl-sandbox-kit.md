@@ -89,7 +89,7 @@ workload, including one that runs a coding agent.
 From your project directory, run:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name firecrawl-shell \
+$ sbx run shell --name firecrawl-shell \
     --kit docker.io/firecrawl/sbx-kit-firecrawl:1.0.0
 ```
 
@@ -99,12 +99,8 @@ install hook, and opens a shell in the sandbox.
 For more on combining kits, see
 [Use kits](/manuals/ai/sandboxes/customize/use-kits.md#add-mixins).
 
-> [!NOTE]
-> Built-in shortcuts such as `sbx run claude` use v2 kits, and v2 agents only
-> accept v2 mixins. Firecrawl also publishes a v2 form of the kit for those
-> agents. See the
-> [kit repository](https://github.com/firecrawl/firecrawl-docker-sandbox#2-launch-the-sandbox-with-the-kit)
-> for v2 usage.
+You can also use a built-in coding agent, for example
+`sbx run claude --kit docker.io/firecrawl/sbx-kit-firecrawl:1.0.0`.
 
 ## Step 3: Check the kit
 

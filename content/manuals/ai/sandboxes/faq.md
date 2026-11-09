@@ -136,13 +136,10 @@ inside the session. Most agents let you switch permission modes after
 startup. In Claude Code, use the `/permissions` command to change the mode
 interactively.
 
-To make approval prompts the default for every session, create a v2 sandbox
-kit that extends the built-in agent and changes its launch options. See
-[Fork an existing agent](customize/kits-v2.md#fork-an-existing-agent)
-for a complete example.
-
-For an environment built entirely with v3 kits, set the launch command in
-the workload's Dockerfile. See [Build a v3 agent kit](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
+To make approval prompts the default for every session, set the launch command
+in an [environment file](configuration/environment-files.md#set-the-launch-command)
+or in your workload's Dockerfile. See
+[Build a v3 agent kit](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
 
 ## How do I know if my agent is running in a sandbox?
 
