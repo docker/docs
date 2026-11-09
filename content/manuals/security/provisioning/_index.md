@@ -80,8 +80,9 @@ IdP to set the user's identity and permissions:
 > [!NOTE]
 >
 > Default session timeouts apply when Docker session minutes is not
-> specified. Docker Desktop sessions expire after 90 days or 30 days of
-> inactivity. Docker Hub and Docker Home sessions expire after 24 hours.
+> specified. Docker Desktop sessions last a maximum of 90 days, but expire sooner
+> if the session is inactive for 30 consecutive days. Docker Hub and 
+> Docker Home sessions expire after 24 hours.
 
 ## SAML attribute mapping
 

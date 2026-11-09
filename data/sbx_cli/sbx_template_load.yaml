@@ -20,7 +20,7 @@ description: |-
 
     Use --capture-mode disk for a filesystem snapshot, or all to capture memory,
     disk, and the microVM checkpoint for faster resume.
-usage: sbx template load FILE [NAME] [flags]
+usage: sbx template load FILE [flags]
 options:
     - name: capture-mode
       default_value: disk
@@ -49,6 +49,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # Load an image from a tar file
       sbx template load /tmp/myimage.tar              # Linux/macOS

@@ -347,13 +347,29 @@ The first path is the primary workspace — the agent starts here, and the
 sandbox's in-container Git clone is populated from this directory if you
 use `--clone`. Extra workspaces are always mounted directly.
 
-Each workspace path appears inside the sandbox at the same absolute path as on
-the host. Append `:ro` to mount an extra workspace read-only — useful for
+By default, each directly mounted workspace appears at the same absolute path
+as on the host. Append `:ro` to mount an extra workspace read-only — useful for
 reference material or shared libraries the agent shouldn't modify:
 
 ```console
 $ sbx run claude ~/project-a ~/shared-libs:ro ~/docs:ro
 ```
+
+To choose a sandbox path for an additional workspace, use
+`PATH:TARGET[:ro]` with `sbx run` or `sbx create`:
+
+```console
+$ sbx run claude ~/project-a ~/shared-libs:/workspace/libs:ro
+```
+
+This mounts `~/shared-libs` read-only at `/workspace/libs` inside the sandbox.
+The primary workspace doesn't accept a target.
+
+The target must be an absolute POSIX path other than `/`, without colons or
+NUL bytes. Choose a distinct target for each additional workspace. Targets
+must not match the primary workspace path or a reserved skills path. In clone
+mode, they must also stay outside the clone directory and must not match
+`/run/sandbox/source`.
 
 You can also run separate projects side-by-side. Remove unused sandboxes when
 you're done to reclaim disk space:

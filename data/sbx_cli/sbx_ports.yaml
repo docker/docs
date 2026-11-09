@@ -45,6 +45,7 @@ options:
       default_value: "false"
       usage: Output in JSON format
     - name: publish
+      shorthand: p
       default_value: '[]'
       usage: |
         Publish a port (can be repeated): [[HOST_IP:]HOST_PORT:]SANDBOX_PORT[/PROTOCOL] (local) or SANDBOX_PORT[/tcp] (cloud)
@@ -61,6 +62,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # List published ports
       sbx ports my-sandbox

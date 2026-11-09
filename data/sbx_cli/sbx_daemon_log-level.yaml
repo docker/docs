@@ -15,6 +15,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 see_also:
     - sbx daemon - Manage sandboxd daemon
     - 'sbx daemon log-level set - Set a category''s log level (target: proxy, general, or all)'

@@ -198,6 +198,24 @@ permissions, outside the sandbox. Leave the setting at `false` to require
 approval on every invocation, or use `--force` to approve only one
 invocation. See [environment lifecycle commands](environment-files.md#lifecycle).
 
+#### sandbox.fuse {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Expose `/dev/fuse` and grant the `SYS_ADMIN` capability so processes can mount
+FUSE filesystems in local sandboxes. Set this to `false` to disable FUSE access
+for sandboxes you create:
+
+```console
+$ sbx settings set sandbox.fuse false
+```
+
+Changes apply only to newly created sandboxes. Existing sandboxes retain their
+FUSE configuration, including after restarts. To disable access for one sandbox,
+set [`sandboxOptions.fuse`](environment-files.md#sandboxoptions) to `false`
+in its environment file. When this setting is `false`, environment files cannot
+enable FUSE access. Cloud sandboxes do not support FUSE.
+
 #### ssh.agentForwardingEnabled {.wrap-anywhere}
 
 {{< setting-metadata type="boolean" default="true" >}}
@@ -322,8 +340,7 @@ $ sbx settings set kit.allowedSources '["docker.io/","github.com/myorg/"]'
 Prefixes match on a path-segment boundary: `github.com/myorg/` permits that
 organization's repositories, but not `github.com/myorg-other/`. The value
 `["*"]` permits any remote source. Local directories and ZIP files are controlled
-by [kit.allowLocalKits](#kitallowlocalkits), and pinned agent kits have the
-[kit.allowExtractedAgents](#kitallowextractedagents) exception.
+by [kit.allowLocalKits](#kitallowlocalkits).
 
 See [restrict kit sources](../customize/use-kits.md#restrict-kit-sources) for source
 formats and examples.
@@ -345,27 +362,6 @@ Keep this enabled while developing kits locally. Allowing local kits doesn't
 exempt them from signature requirements when
 [kit.requireSignature](#kitrequiresignature) is enabled.
 
-#### kit.allowExtractedAgents {.wrap-anywhere}
-
-{{< setting-metadata type="boolean" default="true"
-  env="DOCKER_SANDBOXES_KIT_ALLOW_EXTRACTED_AGENTS" >}}
-
-Some agents that previously shipped inside Docker Sandboxes are distributed
-as kits. By default, Docker Sandboxes permits the exact pinned references it
-uses for those agents even if their sources aren't in `kit.allowedSources`,
-and exempts them from `kit.requireSignature`.
-
-To apply your source and signature requirements to those kits too:
-
-```console
-$ sbx settings set kit.allowExtractedAgents false
-```
-
-After this change, launching one of those agents can fail unless you allow its
-source and, when signatures are required, it has a signature from a trusted
-signer. The default exception applies only to the pinned references, not to
-other kits from the same publisher.
-
 #### kit.requireSignature {.wrap-anywhere}
 
 {{< setting-metadata type="boolean" default="false"
@@ -381,8 +377,6 @@ $ sbx settings set kit.requireSignature true
 
 The check applies when installing kits from local directories, Git, or OCI
 registries. ZIP kits can't carry verifiable signatures and are rejected.
-Pinned agent kits remain exempt while
-[kit.allowExtractedAgents](#kitallowextractedagents) is `true`.
 
 A signature covers the kit's `spec.yaml` and `files/` content. It doesn't pin
 image tags or verify downloads performed by the kit's commands. See
@@ -433,6 +427,19 @@ Signature and signer verification still apply. These signatures must provide a
 timestamp from a timestamp authority instead of a transparency log timestamp.
 Leave this at `false` when your signing workflow uses the public transparency
 log. It has no effect on signatures verified with a public key.
+
+### Model server
+
+#### model.server.enabled {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Set this to `false` to turn off the bundled model service and skip its runtime
+download. Changes require a daemon restart. This setting has no environment
+variable override.
+
+See [Disable the bundled service](models.md#disable-the-bundled-service) for
+commands and how this affects your model choices.
 
 ### MCP gateway
 
@@ -495,6 +502,29 @@ Set how many days to keep rotated daemon logs, from `0` to `3650`. A value of
 $ sbx settings set daemon.log.maxAgeDays 30
 $ sbx daemon restart
 ```
+
+### Telemetry
+
+#### telemetry.disabled {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Set this to `true` to persistently disable telemetry for the local CLI and
+daemon:
+
+```console
+$ sbx settings set telemetry.disabled true
+$ sbx daemon restart
+```
+
+The next CLI invocation uses the saved preference. A running daemon keeps its
+previous telemetry setting until you restart it.
+
+`SBX_NO_TELEMETRY` is a separate opt-out, rather than an environment variable
+equivalent for this setting. A value of `1` disables telemetry regardless of
+the saved preference. Other values, including `0`, don't override a saved
+opt-out. See [telemetry collection](../faq.md#does-the-cli-collect-telemetry)
+for what the CLI collects.
 
 ### Diagnostics
 
@@ -628,7 +658,8 @@ $ sbx daemon restart
 This shared list applies to sandbox and daemon traffic unless a scope-specific
 list replaces it. A value of `*` bypasses the upstream proxy for all destinations.
 Proxy exclusions don't grant network access: sandbox requests must still pass
-[network policy](../governance/access-controls/network.md).
+network policy. For how network policy is set, see
+[Sandbox governance](../../governance/_index.md).
 
 #### no_proxy.sandbox {.wrap-anywhere}
 

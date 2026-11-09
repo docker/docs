@@ -70,10 +70,10 @@ OpenCode Zen API keys aren't part of the built-in OpenCode credentials that
 Set the `OPENCODE_API_KEY` environment variable on the host, then store it:
 
 ```console
-$ sbx secret set-custom \
+$ printf '%s' "$OPENCODE_API_KEY" | sbx secret set-custom \
     --host opencode.ai \
     --env OPENCODE_API_KEY \
-    --value "$OPENCODE_API_KEY"
+    --value-stdin
 ```
 
 Custom secrets keep the real key in the host secret store. The sandbox receives

@@ -303,7 +303,7 @@ The agent's container image must provide:
 - HTTP proxy environment variables (`HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY`) preserved across sudo.
 - The agent binary, either baked in or installed with [`setup.install`](#setup).
 
-Build on top of `docker/sandbox-templates:shell-docker` to get these base
+Build on top of `docker.io/sbx/shell-docker-image:latest` to get these base
 requirements.
 
 ## Agent instructions

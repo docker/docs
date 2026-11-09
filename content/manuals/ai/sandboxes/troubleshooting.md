@@ -28,6 +28,14 @@ with suggested fixes. Use `--json` or `--format yaml` for machine-readable
 output, or `--format github-issue` to generate a Markdown snippet suitable for pasting
 into a GitHub issue.
 
+## Image pulls fail on eCryptfs
+
+On Linux, image pulls can fail with an I/O error when the sandbox state
+directory is on eCryptfs.
+
+If [`sbx diagnose`](#run-diagnostics) reports `state directory is on eCryptfs`,
+use a filesystem other than eCryptfs for sandbox state.
+
 ## Sandbox is not responding
 
 If `sbx ls` shows `running (not responding)`, Docker Sandboxes has detected
@@ -108,32 +116,11 @@ $ sbx run docker.io/sbx/copilot-kit:latest
 $ sbx run docker.io/sbx/droid-kit:latest
 ```
 
-## Agent can't install packages or reach an API
+## Network access and policy
 
-Sandboxes use [network access rules](governance/access-controls/network.md) to
-control outbound traffic.
-If the agent fails to install packages or call an external API, the target
-domain is likely not in the allow list. Check which requests are being blocked:
-
-```console
-$ sbx policy log
-```
-
-Then allow the domains your workflow needs:
-
-```console
-$ sbx policy allow network "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
-```
-
-To allow all outbound traffic instead:
-
-```console
-$ sbx policy allow network "**"
-```
-
-If `sbx policy allow` doesn't unblock the request, your organization may
-manage sandbox policies centrally and take precedence over local rules. See
-[Organization policies](governance/access-controls/organization.md).
+For problems caused by network rules, approvals, or organization governance,
+such as blocked requests, inactive allow rules, or missing audit records, see
+[Troubleshoot governance](../governance/troubleshooting.md).
 
 ## Kit fails to install: source not in allowlist
 
@@ -156,6 +143,23 @@ $ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
 Then run the command again. For details, including how to allow local kits or
 any remote source, see [Restrict kit sources](/manuals/ai/sandboxes/customize/use-kits.md#restrict-kit-sources).
 
+## Kit install or startup command fails
+
+If `sbx create` or `sbx run` shows ✗ on a kit's install command, or warns that a
+startup command failed, the full output is inside the sandbox. Read it with
+`sbx exec`:
+
+```console
+$ sbx exec <sandbox-name> cat /var/log/sbx-kits/<kit>/install-<n>.log
+$ sbx exec <sandbox-name> cat /var/log/sbx-kit-startup.log
+```
+
+`<n>` is the install command's position in the kit's `install` list, starting
+at 0. To stream every install command's output and the startup log while the
+sandbox is created, run `sbx -D create` or `sbx -D run`. See
+[Debug a kit](/manuals/ai/sandboxes/customize/author/debug.md) for how to read
+the output and fix the common causes.
+
 ## SSH and other non-HTTP connections fail
 
 Non-HTTP TCP connections such as SSH can be allowed by adding a policy rule for
@@ -174,7 +178,7 @@ can't be recovered. Use an address-based rule in that case:
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-UDP requires [experimental UDP egress](governance/access-controls/local.md#allow-outbound-udp)
+UDP requires [experimental UDP egress](../governance/local/network-rules.md#allow-outbound-udp)
 and UDP allow rules. ICMP is blocked and can't be unblocked with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
@@ -212,7 +216,7 @@ If credentials are configured correctly but API calls still fail, check
 the `transparent` proxy don't get credential injection. This can happen when a
 client inside the sandbox (such as a process in a Docker container) isn't
 configured to use the forward proxy. See
-[Monitoring network activity](governance/monitor-and-enforce/monitoring.md)
+[View network activity](../governance/local/test-monitor.md#view-network-activity)
 for details.
 
 ## MCP server streams stall

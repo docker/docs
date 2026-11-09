@@ -112,9 +112,9 @@ that future invocations run on your host.
 | Command                                                                       | Description                                                                          |
 | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | `sbx env plan [PATH...]`                                                       | Shows what applying the environment would change without changing or approving it    |
-| [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...]`                      | Applies the approved plan, creates the environment if needed, and attaches            |
+| [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...] [-- ARG...]`          | Applies the approved plan, creates the environment if needed, and attaches            |
 | [`sbx env create`](/reference/cli/sbx/env/create/) `[PATH...]`                | Applies the approved plan and creates the environment without attaching              |
-| [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]` | Runs a command in an existing environment without running lifecycle commands         |
+| [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]` | Runs a command in the environment, offering to create a missing sandbox interactively |
 | [`sbx env rm`](/reference/cli/sbx/env/rm/) `[PATH...]`                        | Shows a destroy plan, then removes the sandbox and resources named in the plan        |
 
 To use an environment file, pass its path to `sbx env`. If you pass a
@@ -134,6 +134,31 @@ $ sbx env rm --name web-app-test
 
 Use the same file paths for each command. If you set `--name`, use that same
 name for every command that manages the sandbox.
+
+### Create an environment sandbox
+
+Create the sandbox without attaching:
+
+```console
+$ sbx env create
+```
+
+To create the sandbox and attach to the agent, use `sbx env run` instead:
+
+```console
+$ sbx env run
+```
+
+Both commands follow the [plan approval process](#review-an-environment-plan)
+and run `initialize` [lifecycle commands](#lifecycle). After creating a sandbox,
+they run `postCreate` commands before returning or attaching.
+
+To run a command in the sandbox, use `sbx env exec`. If the sandbox is missing,
+`exec` offers to create it when stdin is interactive. Creation follows the same
+approval and lifecycle process before running your command. For an existing
+sandbox, `exec` skips lifecycle commands. With noninteractive stdin or
+`--no-input`, create the sandbox first with `sbx env create`. See
+[Reuse an environment in automation](#reuse-an-environment-in-automation).
 
 ### Set user defaults
 
@@ -327,6 +352,46 @@ workload's repository name. The `web-app-v3` name creates a separate sandbox.
 For other agents, see the
 [published v3 workloads](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads).
 
+### Set the launch command
+
+Set `entrypoint` and `cmd` to choose what `sbx env run` executes inside the
+sandbox. For example, add these fields to your environment file to print two
+arguments:
+
+```yaml
+entrypoint: [/usr/bin/printf, '%s\n']
+cmd: [default, 'two words']
+```
+
+```console
+$ sbx env run
+default
+two words
+```
+
+Each field is a list of strings. `sbx` appends `cmd` to `entrypoint`, preserving
+each item as one argument, including spaces and empty strings. Arguments aren't
+interpreted as shell expressions. To run a shell expression, explicitly use a
+shell such as `entrypoint: [/bin/sh, -c]`.
+
+Arguments after `--` replace `cmd` for that run and preserve `entrypoint`:
+
+```console
+$ sbx env run -- 'replacement argument'
+replacement argument
+```
+
+Omit a field or set it to `null` to inherit its value from an earlier environment
+file, or from the agent's defaults if no file sets it. Set a field to `[]` to
+clear it. The combined command must still start with a non-empty executable.
+When you combine files, later `entrypoint` and `cmd` lists replace earlier lists
+instead of adding to them.
+
+These settings apply only to `sbx env run`. They don't change the published kit,
+its saved launcher, `sbx env exec`, or the sandbox's PID 1. With `--detach`, `run`
+starts only the sandbox and doesn't execute the launch command. You can't combine
+`--detach` with arguments after `--`.
+
 ### Combine team defaults and personal settings
 
 Keep the shared configuration in a version-controlled environment directory
@@ -364,8 +429,9 @@ Pass both files in merge order:
 $ sbx env run base.sbxenv.yaml local.sbxenv.yaml
 ```
 
-Nested mappings merge by key, lists concatenate, and values from later files
-replace earlier scalar values. In this example, the sandbox has four CPUs,
+Nested mappings merge by key, lists concatenate except for `entrypoint` and
+`cmd`, and values from later files replace earlier scalar values. In this
+example, the sandbox has four CPUs,
 12 GB of memory, and both environment variables. Each relative workspace path
 resolves from the directory of the file that declares it.
 
@@ -439,8 +505,8 @@ For a walkthrough, supported settings, and lifecycle differences, see
 
 `sbx env create`, `sbx env run`, and `sbx env rm` show the changes an
 environment makes outside its sandbox and ask for approval before applying
-them. The plan includes host commands, credentials, bindings, MCP
-registrations, directories, kits, published ports, sandbox options, and
+them. The plan includes host commands, credentials, bindings,
+MCP registrations, directories, kits, published ports, sandbox options, and
 environment variables.
 
 Run `sbx env plan` to inspect the apply plan without changing, approving, or
@@ -503,6 +569,25 @@ approve the plan. They remain disabled even if you cancel the plan or restart
 the daemon. To enable them again, run `sbx env run` without the flag and approve
 the plan. Credential `command` sources still run when their secrets are needed.
 
+## Recover after losing environment state
+
+If `sbx env run` reports that a local sandbox "agrees with everything this
+environment declares" but "nothing was done", the sandbox still exists, but
+`sbx` cannot verify that it belongs to this environment. This can happen after
+an upgrade or state reset loses the environment's records.
+
+To keep using that sandbox without deleting and recreating it, run
+`sbx env run` in an interactive terminal with the same environment file paths
+and sandbox name. The command asks whether to adopt the sandbox. Confirm only
+if this is the sandbox you want the environment to manage, then review and
+approve the environment plan. Later runs recognize that sandbox, and
+`sbx env rm` can remove it.
+
+For an automated run that fails with this error, complete this recovery
+interactively before retrying the automation. `--force` approves the plan but
+doesn't confirm adoption. Only `sbx env run` offers adoption, and only when the
+sandbox matches the environment's declarations.
+
 ## Update an environment
 
 For an existing sandbox, `sbx env run` applies updated `env` values to the new
@@ -510,6 +595,11 @@ agent session and reconciles declared MCP servers. Changes to workspaces, kit
 host mounts, kits, ports, secrets, bindings, and `sandboxOptions` take effect
 only when the sandbox is next created. Remove the environment with `sbx env rm`, then create
 it again to apply those changes.
+
+Changes to `entrypoint` and `cmd` take effect on each `sbx env run` without
+recreating the sandbox. If you also change `agent`, recreate the environment
+before using a partial launch override that inherits defaults from that agent.
+Equivalent agent names and aliases don't require recreation.
 
 ## Remove an environment
 
@@ -546,6 +636,8 @@ cleanup. If an environment MCP command registration cannot be removed, follow
 | `schemaVersion`        | string           | Yes      | None                           | Schema version. The supported value is `"1"`                                   |
 | `name`                 | string           | No       | `<agent>-<workspace-basename>` | Sandbox name, overridden by `--name`                                                                    |
 | `agent`                | string           | Yes      | None                           | Built-in agent or the name of an agent kit                                      |
+| `entrypoint` | list of strings | No | Agent default | Launch executable and fixed arguments for `run`. See [Set the launch command](#set-the-launch-command) |
+| `cmd` | list of strings | No | Agent default | Default arguments appended to `entrypoint`; arguments after `--` replace this list |
 | `args`                 | map              | No       | None                           | Environment arguments. See [`args`](#args)                                      |
 | `kits`                 | list             | No       | None                           | Kits to install at creation. See [`kits`](#kits)                                 |
 | `workspace`            | string or object | No       | No host mount                  | Primary workspace. See [`workspace`](#workspace)                                |
@@ -640,10 +732,25 @@ You can override `workspace.clone` for one `create` or `run` invocation with
 Each additional workspace is mounted after the primary workspace. Relative
 paths resolve from the directory of the environment file that declares them.
 
-| Field      | Type    | Required | Default | Description                   |
-| ---------- | ------- | -------- | ------- | ----------------------------- |
-| `path`     | string  | Yes      | None    | Directory to mount            |
-| `readOnly` | boolean | No       | `false` | Mount the directory read-only |
+| Field      | Type    | Required | Default                      | Description                            |
+| ---------- | ------- | -------- | ---------------------------- | -------------------------------------- |
+| `path`     | string  | Yes      | None                         | Directory to mount                     |
+| `target`   | string  | No       | Host path inside the sandbox | Absolute POSIX path inside the sandbox |
+| `readOnly` | boolean | No       | `false`                      | Mount the directory read-only          |
+
+For example, mount a shared library directory read-only at a chosen path:
+
+```yaml
+workspace: .
+additionalWorkspaces:
+  - path: ../shared-libs
+    target: /workspace/libs
+    readOnly: true
+```
+
+Omit `target` to use the host path inside the sandbox. The same
+[target restrictions](../usage.md#multiple-workspaces) apply as with
+`sbx create` and `sbx run`.
 
 ### `mounts`
 
@@ -672,6 +779,7 @@ kits. Bindings take effect when the sandbox is created.
 | `profile`     | string          | None     | Governance profile name                               |
 | `skills`      | string          | Daemon default | Shared agent skills store access: `off`, `readonly`, or `readwrite` |
 | `display`     | boolean         | `false`  | Provision a display socket for graphical applications |
+| `fuse`        | boolean         | `sandbox.fuse` setting | Mount FUSE filesystems; local only |
 | `gpu`         | boolean         | `false`  | Pass the host GPU through to the sandbox               |
 | `usb`         | list of strings | None     | USB device selectors to pass through to the sandbox   |
 | `writableEnvFiles` | boolean     | `false`  | Let the sandbox write to shared environment files; local only |
@@ -686,6 +794,10 @@ limits must match a [cloud size](../cloud/usage.md#choose-resources-and-platform
 store. Set it to `off` to omit the mount, `readonly` to mount the store read-only,
 or `readwrite` to let the sandbox modify shared skills. If omitted, it uses the
 daemon's default, which is `readonly` unless your organization overrides it.
+
+Set `fuse` to `false` to disable FUSE access for this sandbox. See the
+[`sandbox.fuse` setting](settings.md#sandboxfuse) for defaults and when changes
+take effect.
 
 ### `lifecycle`
 
@@ -714,9 +826,11 @@ Lifecycle phases run at the following points:
 | `postCreate` | After a new sandbox is created. For `run`, before attachment. Does not run when attaching to an existing sandbox   |
 | `preRemove`  | After you approve removal and before `sbx` deletes resources. A failure produces a warning and removal continues  |
 
-`sbx env exec` doesn't run lifecycle commands. Commands within a phase run in
-order and stop at the first failure. Make `initialize` commands safe to run
-more than once.
+For lifecycle behavior with `sbx env exec`, see
+[Create an environment sandbox](#create-an-environment-sandbox).
+
+Commands within a phase run in order and stop at the first failure. Make
+`initialize` commands safe to run more than once.
 
 After `preRemove` commands finish, `sbx` generates the destroy plan again.
 Removal stops if the commands introduced changes that weren't included in the

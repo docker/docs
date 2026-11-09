@@ -76,7 +76,7 @@ pilot's feedback to refine the policy and its deployment communication.
 
 Continue with these guides when you're ready to expand the deployment:
 
-- [Set up your company for success with Docker](/guides/admin-set-up/) for the
+- [Plan and roll out Docker](/manuals/accounts/organization/setup/rollout.md) for the
   full deployment handbook
 - [Manage organization members](/manuals/accounts/organization/manage/members.md)
   for roles, teams, and bulk invitations
@@ -84,5 +84,5 @@ Continue with these guides when you're ready to expand the deployment:
   for additional policies and deployment controls
 - [Set up SSO and provisioning](/manuals/security/authentication/single-sign-on/_index.md)
   for centralized identity management
-- [Govern Docker Sandboxes](/manuals/ai/sandboxes/governance/_index.md) for
-  organization-wide agent policies
+- [Govern Docker Sandboxes](/manuals/ai/governance/organization/_index.md)
+  for organization-wide agent policies
