@@ -12,8 +12,8 @@ or summarizing pull requests, without starting an agent manually or keeping a
 sandbox running between tasks.
 
 Each run creates a fresh sandbox with the kit, compute size, credentials, and
-tools saved in the schedule. When the task finishes, the sandbox is deleted.
-The time limit also deletes the sandbox if the task hasn't finished.
+tools saved in the schedule. The sandbox is deleted when the task finishes or
+its time to live (TTL) expires, whichever happens first.
 
 ## Prepare tools and credentials
 
@@ -58,8 +58,9 @@ values in the task's prompt.
    8, and 24 hours. A task still running at expiry is stopped, its sandbox is
    deleted, and the run counts as failed.
 6. Set how often the task should run and choose the time zone for that
-   schedule. Use a preset or a custom cron expression, then review the next
-   run times to confirm the timing matches your intent.
+   schedule. Use a preset, or scroll to the bottom of the schedule menu and
+   select **Custom** to enter a cron expression. Review the next run times to
+   confirm the timing matches your intent.
 7. Write the instructions for each run: a prompt for an agent kit, or a
    command for a command kit such as Shell. Specify where the task should
    save or send its results, because files left in the sandbox are deleted
