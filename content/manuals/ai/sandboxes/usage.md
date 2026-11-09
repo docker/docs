@@ -511,32 +511,42 @@ List tagged template images in the sandbox runtime's local image store:
 $ sbx template ls
 ```
 
-To include cached digest-only and untagged images, show digests, and display
-full image IDs:
-
-```console
-$ sbx template ls --all --digests --no-trunc
-```
-
-`--all` (`-a`) includes images without tags, `--digests` adds the digest
-column, and `--no-trunc` shows full image IDs. These flags apply only to local
-templates.
-
 Remove a template you no longer need:
 
 ```console
 $ sbx template rm my-template:v1
 ```
 
-For an image without a tag, use its repository digest or image ID from the
-listing:
+If a local image you want to remove doesn't appear in the default listing,
+it may have no tag. Include images without tags and show their digests:
 
 ```console
-$ sbx template rm <REPOSITORY>@sha256:<DIGEST>
+$ sbx template ls --all --digests
+```
+
+For example, the following illustrative output shows a cached image with a
+repository digest but no tag:
+
+```text
+REPOSITORY                      TAG  DIGEST                                                                   IMAGE ID      FLAVOR  CREATED
+docker.io/my-org/my-template     -    sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789  0123456789ab  claude  2d
+```
+
+To remove this image, join its `REPOSITORY` and `DIGEST` values with `@`:
+
+```console
+$ sbx template rm docker.io/my-org/my-template@sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789
+```
+
+If the row has no repository digest, use its `IMAGE ID` instead:
+
+```console
 $ sbx template rm <IMAGE_ID>
 ```
 
-Image IDs can be full IDs or unique prefixes.
+Image ID prefixes must uniquely identify an image. The `--all` and `--digests`
+flags apply only to local templates. For all listing options, see the
+[`sbx template ls` reference](/reference/cli/sbx/template/ls/).
 
 ### Export and import
 
