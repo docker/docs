@@ -89,7 +89,8 @@ To see only one sandbox's requests, pass its name:
 $ sbx policy log my-sandbox
 ```
 
-To show only the most recent entries, pass `--limit`:
+Use `--limit N` to show up to N allowed and N blocked entries. Use `0` to show
+all entries:
 
 ```console
 $ sbx policy log --limit 20
