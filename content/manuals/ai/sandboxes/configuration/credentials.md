@@ -71,8 +71,8 @@ The store backing `sbx secret set` depends on your operating system:
 - Linux: the Secret Service exposed by your desktop keyring, such as GNOME
   Keyring or KDE Wallet.
 
-The Ubuntu package depends on GNOME Keyring, so a standard desktop install
-needs no extra setup.
+The Ubuntu package recommends GNOME Keyring and installs it by default. You can
+omit GNOME Keyring when installing the package on hosts without a desktop keyring.
 
 On Linux hosts without a running Secret Service — headless servers and some WSL
 setups — `sbx` falls back to a file under your user config directory
