@@ -62,9 +62,8 @@ for the cause before deciding whether to retry.
 Confirmations require terminal input. Piping an answer, such as `echo y`, does
 not confirm an operation. Use `--force` on commands that provide it to skip
 confirmation in scripts. For `sbx logout`, use `--yes` or `-y`, even when
-no local daemon is running. The `--force` and `-f` aliases for logout are
-deprecated. `sbx kit builder history rm` also uses `--yes` or `-y`, because
-its `--force` flag is passed to Buildx.
+no local daemon is running. `sbx kit builder history rm` also uses `--yes`
+or `-y`, because its `--force` flag is passed to Buildx.
 
 A command that requires confirmation fails with exit status 1 when stdin is
 not a terminal. Declining a confirmation also returns a non-zero exit code.
@@ -109,8 +108,7 @@ results are still printed, including the sandbox ID when you use `--detach`.
 {{< copy-as-prompt instruction="Update this repository's Docker Sandboxes CLI usage for v0.48.0 using the migration reference below. Inspect scripts and documentation, update affected commands and output parsers, and verify the changes. Preserve unrelated behavior." >}}
 
 Docker Sandboxes v0.48.0 changes flags and structured output. Update scripts
-that use the following flags. For logout confirmation flags, see
-[Cleanup and exit codes](#cleanup-and-exit-codes).
+that use the following flags:
 
 | Command | Previous flag | Replacement |
 | --- | --- | --- |
