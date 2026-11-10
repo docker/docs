@@ -92,9 +92,9 @@ Docker Hardened Images work just like any other image in your CI/CD pipelines.
 You can reference them in Dockerfiles, pull them as part of a pipeline step, or
 run containers based on them during builds and tests.
 
-In GitHub Actions, you can use an OIDC connection to authenticate with
-short-lived Docker access tokens instead of storing a PAT or OAT. For a
-mirrored image on Docker Hub, grant pull access to
+In GitHub Actions, your Docker organization can use an OIDC connection to
+authenticate with short-lived Docker access tokens instead of storing an
+organization access token (OAT). For a mirrored image on Docker Hub, grant pull access to
 `<your-organization>/<repository>`. Your organization's DHI subscription still
 determines access to paid image variants.
 
