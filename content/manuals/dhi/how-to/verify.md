@@ -67,8 +67,9 @@ pull access to the DHI repositories you want to verify. Only repositories in
 the token's scope are accessible. Alternatively, you can authenticate as a
 Docker Hub user with a [personal access token
 (PAT)](../../security/access-tokens/personal-access-tokens.md) that has `read only` access.
-For GitHub Actions, use the [OIDC workflow](./use.md#authenticate-with-oidc-in-github-actions)
-to authenticate with a Docker-issued token instead of an OAT or PAT.
+For organization-owned workflows in GitHub Actions, use the
+[OIDC workflow](./use.md#authenticate-with-oidc-in-github-actions) to authenticate
+with a short-lived Docker access token instead of storing an OAT.
 
 > [!WARNING]
 >
