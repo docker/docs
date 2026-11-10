@@ -112,12 +112,49 @@ details, see
 
 ## A sandbox can't mount its workspace
 
-If a sandbox fails to mount with a `mount policy denied` error, an organization
-filesystem policy doesn't allow the path. Check that the filesystem allow rule
-uses `**` rather than `*`. A single `*` doesn't match across directory
-separators. For macOS and Linux paths, also check that the rule matches the
-directory names' capitalization on disk. For more details, see
-[Organization filesystem access policies](organization/policies/filesystem.md).
+If a sandbox fails to mount with a `mount policy denied` error, either an
+organization filesystem policy doesn't allow the path, or Docker Sandboxes
+couldn't resolve the path.
+
+If a sandbox's workspace was denied when the daemon last loaded the sandbox or
+when the sandbox last tried to start, `sbx ls` shows `(blocked by policy)`
+after its workspace. The label doesn't update when a policy change syncs. A
+blocked sandbox can't start until the policy allows the path, but you can
+remove it with `sbx rm`.
+
+When the policy denies the path, the `sbx` command on the developer's machine
+returns an error that lists each denied path, the access that was denied, and
+the reason. For example, if a deny rule named `block-ssh` denies a read-only
+mount of `~/.ssh`, the error is:
+
+```text
+mount policy denied: /Users/dev/.ssh: fs:mount:read denied: denied: rule "block-ssh" matched op(action=fs:mount:read, resource=fs:path:/Users/dev/.ssh)
+```
+
+| Part   | In the example                         | Description                                                                                                                                                             |
+| ------ | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Path   | `/Users/dev/.ssh`                      | The resolved path the rules were checked against                                                                                                                        |
+| Access | `fs:mount:read denied`                 | Which access was denied. A writable mount that lacks both lists `fs:mount:read` and `fs:mount:write` separately                                                         |
+| Reason | `denied: rule "block-ssh" matched ...` | The deny rule that matched. A deny rule without a name appears as `rule ""`. When no allow rule covers the path, the reason starts with `no allow rule matched` instead |
+
+Administrators can find the same decision in audit logs, in a record with the
+`filesystem_mount` action type. For more details, see
+[Action types](reference/audit-records.md#action-types).
+
+Check for these common causes:
+
+| Cause                                                                              | Why the mount is denied                                                                                                                                                  | Fix                                                             |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| The allow rule uses `*` rather than `**`                                           | A single `*` matches one path segment, so `~/*` matches `~/project` but not `~/project/src`                                                                              | Use `**` to match the whole directory tree, for example `~/**`  |
+| The workspace is writable, but the policy allows only `read`                       | A writable workspace needs both `read` and `write`                                                                                                                       | Add `write` to the rule                                         |
+| The rule uses an environment variable such as `%USERPROFILE%` or `$HOME`           | The policy engine expands only `~`, so the variable is matched as literal text                                                                                           | Replace the variable with `~`, for example `~/**`               |
+| The rule uses a different operating system's path format                           | A macOS or Linux path such as `/data/**` doesn't match a Windows path such as `C:\data`, or a WSL path, which starts with `\\wsl.localhost\<distro>\`                    | Add a rule in the format of the developer's operating system    |
+| The rule's capitalization doesn't match a macOS or Linux path                      | macOS and Linux paths are case sensitive, so `~/Projects/**` doesn't match `~/projects/app`                                                                              | Match the directory names' capitalization on disk               |
+| The workspace is a symbolic link to a directory that no rule allows                | The policy checks the directory the link points to, not the link                                                                                                         | Allow the link's target directory, or mount the target directly |
+| The path can't be resolved, for example a symbolic link whose target doesn't exist | A path that can't be resolved is denied without checking the rules. The error shows `path resolution error` instead of `fs:mount:read denied` or `fs:mount:write denied` | Fix the link, or mount the target directory directly            |
+
+For how paths are written and matched, see
+[Filesystem mount rule syntax](reference/filesystem-rules.md).
 
 ## Organization policy changes aren't taking effect
 

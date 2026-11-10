@@ -11,36 +11,86 @@ aliases:
 {{< summary-bar feature_name="AI Governance" >}}
 
 Filesystem access policies control which host paths a sandbox can mount as a
-workspace. When an organization policy is enforced for a developer, a sandbox
-can mount a path only if one of your filesystem mount rules allows it, so a
-developer can't create a sandbox for a directory you haven't approved. The
-rules work at the level of the mount. Once a path is mounted, they don't
-control which files inside it an agent can read or change.
+workspace. The rules decide only whether a path can be mounted. They don't
+mount anything themselves, and once a path is mounted, they don't control which
+files in it an agent can read or change.
 
-Without an organization policy, a sandbox can mount any host path the developer
-chooses. Developers can't add filesystem mount rules with local policy, but it
-includes two built-in rules that allow read and write access to every path,
-which developers see as `default-fs-*` rules in `sbx policy ls --wide`. Under
-an enforced organization policy, those built-in rules stop applying, and only
-your filesystem mount rules decide which paths a sandbox can mount. For more
-details, see
+When a developer is governed, they can mount a path into a sandbox only if your
+filesystem mount rules allow the access the mount needs and none of them deny
+it. Developers can't add filesystem mount
+rules with local policy, and the built-in local rules described in the next
+paragraph stop applying. For more details, see
 [How organization policy relates to local and kit rules](_index.md#how-organization-policy-relates-to-local-and-kit-rules).
 
-This page explains what a filesystem mount rule can match and when your changes
-reach developers. To create a filesystem access policy, see
+When a developer isn't governed, for example because they don't hold an AI
+Governance license, filesystem policy doesn't restrict which host paths they
+can mount. Local policy
+includes two built-in rules that allow read and write access to every path,
+which developers see as `default-fs-*` rules in `sbx policy ls --wide`.
+
+This page explains what a filesystem mount rule can match, example policies for
+common tasks, and when your changes reach developers. To create a filesystem
+access policy, see
 [Create and manage organization policies](create-manage.md).
 
 ## What a filesystem mount rule can match
 
 Each filesystem mount rule allows or denies `read`, `write`, or both on the
-host paths it lists. A read-only workspace needs only `read`, and a writable
-workspace needs both. Paths can use wildcards, and `~` expands to each user's
-home directory, so a single `~/**` rule matches every developer's home tree.
-
-POSIX path matching is case-sensitive, including on macOS. Windows drive paths
-and UNC paths, including WSL UNC paths, match without regard to case. For path
-formats and matching details, see
+host paths it lists. Paths can use wildcards and `~`, and are written in the
+format of the developer's operating system. For how to write paths on each
+operating system and how they're matched, see
 [Filesystem mount rule syntax](../../reference/filesystem-rules.md).
+
+## Example policies
+
+The following policies show common ways to allow host paths. Adapt the paths
+to the directories your developers use.
+
+### Allow home directories and a shared projects directory
+
+To let developers mount anything under their home directory or a shared
+`projects` directory on any operating system, create one allow rule with the
+`read` and `write` actions and the following paths:
+
+| Path                            | Covers                               |
+| ------------------------------- | ------------------------------------ |
+| `~/**`                          | The home directory on every platform |
+| `/projects/**`                  | macOS and Linux                      |
+| `*:\projects\**`                | Windows, on any drive                |
+| `\\wsl.localhost\*\projects\**` | WSL, in any distribution             |
+
+Because this rule allows `~/**`, a developer can mount their whole home
+directory, and the agent can access every file in it, including `.ssh`
+directories and `.env` files. For what an agent can access in a mounted
+workspace, see [Isolation layers](../../../sandboxes/security/isolation.md).
+
+A deny rule for `~/.ssh/**` stops a developer from mounting `~/.ssh` directly,
+but not from mounting the home directory that contains it. To keep files like
+these out of sandboxes, allow narrower paths, such as `~/src/**`, instead of
+`~/**`.
+
+### Allow clone mode while blocking writable mounts
+
+To let agents work on repositories without applying their edits to the host
+working tree, create an allow rule with only the `read` action for the
+directories where developers keep repositories, such as `~/src/**`.
+
+In clone mode, the sandbox mounts the repository read-only and the agent works
+on a private clone inside the sandbox, so `read` access is enough:
+
+```console
+$ sbx run --clone claude ~/src/app
+```
+
+Using the repository as the primary workspace without `--clone` needs `write`
+access as well. Default deny blocks it, because no rule allows `write`.
+Read-only mounts of these directories, such as an additional workspace mounted
+with `:ro`, are still allowed.
+
+If another policy allows `write` on these directories, for example a `~/**`
+rule like the one in the previous example, also add a deny rule with the
+`write` action. A deny takes precedence over any allow. For more details, see
+[Clone mode](../../../sandboxes/usage.md#clone-mode).
 
 ## When changes take effect
 
