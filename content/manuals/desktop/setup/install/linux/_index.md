@@ -152,6 +152,14 @@ Docker Desktop for Linux runs a Virtual Machine (VM). For more information on wh
 >
 > Docker does not provide support for running Docker Desktop for Linux in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on supported distributions.
 
+> [!NOTE]
+>
+> With Docker Desktop 4.98 and later, you can use Docker VMM (Beta) instead of
+> QEMU. Turn on **Beta features** in **Settings**, then select **Docker VMM**
+> under **Settings** > **General** > **Virtual Machine Manager**. It has the
+> same KVM requirements. For more information, see
+> [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
+
 ### KVM virtualization support
 
 Docker Desktop runs a VM that requires [KVM support](https://www.linux-kvm.org).
