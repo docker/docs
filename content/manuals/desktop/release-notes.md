@@ -372,6 +372,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Fixed a bug on Linux where quitting Docker Desktop could close unrelated applications, including all open terminal windows. Fixes [docker/desktop-linux#109](https://github.com/docker/desktop-linux/issues/109).
 
+### Security
+
+- Addressed [CVE-2026-123082](https://www.cve.org/cverecord?id=CVE-2026-123082), where Docker Desktop 4.43.0 through 4.93.x could write the signed-in user's Docker Hub access token in cleartext to local application logs and diagnostics bundles. If you've generated or shared diagnostics bundles with an affected version, or kept copies of Docker Desktop logs elsewhere, delete or sanitize them.
+
 ## 4.93.0
 
 {{< release-date date="2026-09-28" >}}
