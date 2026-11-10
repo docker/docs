@@ -112,10 +112,13 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 
 - The same Windows versions as the WSL 2 backend.
 - The **Windows Hypervisor Platform** and **Virtual Machine Platform** Windows
-  features turned on. A per-user installation can't turn on Windows Hypervisor
-  Platform, so an administrator must turn it on first.
-- Hardware virtualization enabled in BIOS/UEFI.
-- Docker VMM isn't supported on Arm. On Arm, the installer uses WSL 2 instead.
+  features turned on. The all-users installer turns them on for you, and might
+  ask you to restart Windows. A per-user installation can't turn on Windows
+  Hypervisor Platform, so an administrator must turn it on first.
+- Hardware virtualization enabled in BIOS/UEFI. Inside a virtual machine, the
+  host must expose nested virtualization.
+- Docker VMM doesn't require the Hyper-V feature, and isn't supported on Arm. On
+  Arm, the installer uses WSL 2 instead.
 
 For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
 

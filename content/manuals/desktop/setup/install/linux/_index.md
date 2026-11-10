@@ -155,9 +155,10 @@ Docker Desktop for Linux runs a Virtual Machine (VM). For more information on wh
 > [!NOTE]
 >
 > With Docker Desktop 4.98 and later, you can use Docker VMM (Beta) instead of
-> QEMU. Turn on **Beta features** in **Settings**, then select **Docker VMM**
-> under **Settings** > **General** > **Virtual Machine Manager**. It has the
-> same KVM requirements. For more information, see
+> QEMU. To switch, select **Docker VMM** under **Settings** > **General** >
+> **Virtual Machine Manager**. If the option is unavailable, turn on **Beta
+> features** in **Settings**. Docker VMM has the same KVM requirements as QEMU.
+> For more information, see
 > [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
 
 ### KVM virtualization support
