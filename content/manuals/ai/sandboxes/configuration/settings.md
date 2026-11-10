@@ -199,8 +199,7 @@ setting is enabled. Remotely supplied environment variables and MCP
 configuration aren't passed into the sandbox.
 
 Set this to `false` to stop the proxy from supplying Remote Control credentials.
-Changes apply to requests from running sandboxes. Configure this setting with
-`sbx settings set`; it has no environment variable override. See
+Changes apply to requests from running sandboxes. See
 [Claude Code remote control](../agents/claude-code.md#remote-control).
 
 #### env.rememberHostCommands {.wrap-anywhere}
