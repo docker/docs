@@ -29,10 +29,10 @@ package manager, and may run as a non-root user by default.
 >   (PAT)](../../security/access-tokens/personal-access-tokens.md) for personal accounts, or an
 >   [organization access token
 >   (OAT)](../../security/access-tokens/organization-access-tokens.md) with your organization
->   name as the username.
+>   namespace as the username.
 > - OIDC: In GitHub Actions, use a Docker-issued access token from an
 >   [OIDC connection](/manuals/security/authentication/oidc-connections/create-manage.md)
->   with your organization name as the username.
+>   with your organization namespace as the username.
 >
 > Run `docker login dhi.io` to authenticate.
 
@@ -95,7 +95,7 @@ run containers based on them during builds and tests.
 In GitHub Actions, your Docker organization can use an OIDC connection to
 authenticate with short-lived Docker access tokens instead of storing an
 organization access token (OAT). For a mirrored image on Docker Hub, grant pull access to
-`<your-organization>/<repository>`. Your organization's DHI subscription still
+`<your-organization-namespace>/<repository>`. Your organization's DHI subscription still
 determines access to paid image variants.
 
 See [Authenticate with OIDC in GitHub Actions](#authenticate-with-oidc-in-github-actions)
@@ -118,19 +118,20 @@ Attestations](/manuals/build/metadata/attestations.md).
 
 Use an [OIDC connection](/manuals/security/authentication/oidc-connections/create-manage.md)
 to read DHI images and attestations with short-lived Docker access tokens.
-Use your Docker organization name as the username and the Docker-issued access
-token as the password. The GitHub identity token is exchanged for this access
+Use your Docker [organization namespace](/manuals/accounts/organization/setup/_index.md#names-versus-namespaces)
+as the username and the Docker-issued access token as the password.
+The GitHub identity token is exchanged for this access
 token. Don't use the GitHub identity token as a registry password.
 
 Configure the connection's [rulesets and subject claims](/manuals/security/authentication/oidc-connections/rulesets-claims.md)
 to match your workflow. Repository access depends on the registry you use:
 
 - For free images and their attestations served through `dhi.io`, authenticate
-  with your organization name and Docker-issued access token.
+  with your organization namespace and Docker-issued access token.
 - For a mirrored or customized image on Docker Hub, grant pull access to
-  `<your-organization>/<repository>`.
+  `<your-organization-namespace>/<repository>`.
 - Direct reads from `registry.scout.docker.com` require access to the referenced
-  repository and use your organization as the Scout registry namespace.
+  repository and use your Docker organization namespace in Scout registry paths.
 
 For permission boundaries, see
 [DHI and Scout compatibility exceptions](/manuals/security/authentication/oidc-connections/rulesets-claims.md#dhi-and-scout-compatibility-exceptions).
@@ -157,7 +158,7 @@ described in [Customize a DHI](./customize.md).
 The following workflow uses `regctl` to read a mirrored image manifest and list
 its attestations. Set these GitHub Actions repository variables:
 
-- `DOCKER_ORG`: Your Docker organization name
+- `DOCKER_ORG`: Your Docker organization namespace
 - `DOCKER_OIDC_CONNECTION_ID`: Your OIDC connection ID
 - `DHI_REPOSITORY`: The mirrored repository name, such as `dhi-node`
 - `DHI_TAG`: The image tag, such as `22`
@@ -259,7 +260,7 @@ To discover attestations with ORAS:
    your organization, generate an OAT scoped to read from your mirrored repository
    instead of **Read public repositories**.
 
-2. Sign in to `dhi.io` using your organization name as the username and the OAT
+2. Sign in to `dhi.io` using your organization namespace as the username and the OAT
    as the password.
 
    > [!WARNING]
@@ -271,13 +272,13 @@ To discover attestations with ORAS:
    > at runtime, or secret management tools.
 
     ```console
-    $ oras login dhi.io -u <YOUR_ORGANIZATION_NAME>
+    $ oras login dhi.io -u <YOUR_ORGANIZATION_NAMESPACE>
     ```
 
-   Or non-interactively in a CI/CD pipeline, set your organization name and token:
+   Or non-interactively in a CI/CD pipeline, set your organization namespace and token:
 
    ```console
-   $ export DOCKER_ORG="YOUR_ORGANIZATION_NAME"
+   $ export DOCKER_ORG="YOUR_ORGANIZATION_NAMESPACE"
    $ export OAT="YOUR_ORGANIZATION_ACCESS_TOKEN"
    $ echo $OAT | oras login dhi.io -u "$DOCKER_ORG" --password-stdin
    ```
