@@ -183,8 +183,7 @@ requirements and setup.
 
 #### claude.remoteControl {.wrap-anywhere}
 
-{{< setting-metadata type="boolean" default="false"
-  env="DOCKER_SANDBOXES_CLAUDE_REMOTE_CONTROL" >}}
+{{< setting-metadata type="boolean" default="false" >}}
 
 Turn this on before using Claude Code's `/remote-control` command inside a
 sandbox:
@@ -193,11 +192,16 @@ sandbox:
 $ sbx settings set claude.remoteControl true
 ```
 
-The remote-control connection must authenticate with its own session token.
-This setting lets it do so instead of having the sandbox proxy replace that
-token with the host credential. Set it to `false` to restore credential
-replacement on that connection. Changes apply to requests from running
-sandboxes. See [Claude Code remote control](../agents/claude-code.md#remote-control).
+Docker Sandboxes keeps Remote Control environment and session credentials on
+the host. The sandbox receives placeholders, and the proxy supplies the real
+credentials only for the environment or session they belong to while this
+setting is enabled. Remotely supplied environment variables and MCP
+configuration aren't passed into the sandbox.
+
+Set this to `false` to stop the proxy from supplying Remote Control credentials.
+Changes apply to requests from running sandboxes. Configure this setting with
+`sbx settings set`; it has no environment variable override. See
+[Claude Code remote control](../agents/claude-code.md#remote-control).
 
 #### env.rememberHostCommands {.wrap-anywhere}
 

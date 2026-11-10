@@ -66,6 +66,11 @@ To use Claude Code's `/remote-control` command inside a sandbox, turn on
 $ sbx settings set claude.remoteControl true
 ```
 
+Remote Control environment and session credentials stay on the host. Docker
+Sandboxes doesn't pass remotely supplied environment variables or MCP
+configuration into the sandbox. Set `claude.remoteControl` to `false` to stop
+the proxy from supplying Remote Control credentials to running sandboxes.
+
 ### Claude in Chrome
 
 Claude in Chrome lets sandboxed Claude Code work with tabs in your host browser.
