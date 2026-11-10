@@ -149,6 +149,9 @@ pull-only access, remove every matching push grant. The `dhi.io` endpoint accept
 read operations with OIDC credentials. Push grants also authorize supported
 uploads to `registry.scout.docker.com`, but don't authorize deletion.
 
+For example ruleset configurations and grant combinations, see
+[Ruleset examples](/manuals/security/authentication/oidc-connections/rulesets-claims.md#ruleset-examples).
+
 The repository grant also controls direct reads of the image's private
 attestations from `registry.scout.docker.com`. Your organization's DHI
 subscription also determines access to paid image variants.
