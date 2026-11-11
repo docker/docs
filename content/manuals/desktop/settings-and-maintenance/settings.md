@@ -34,10 +34,10 @@ Configure startup behavior, UI appearance, terminal preferences, and feature def
 | ----------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------ | ------------ | ------------------------------------- |
 | **Start Docker Desktop when you sign in to your computer**        | Automatically start Docker Desktop when you sign in to your machine.        | Disabled           | All          | Recommended for frequent users.        |
 | **Open Docker Dashboard when Docker Desktop starts**              | Automatically open the dashboard when starting Docker Desktop.              | Disabled           | All          |                                       |
-| **Choose theme for Docker Desktop**                               | Apply a **Light** or **Dark** theme to Docker Desktop. | **Use system settings**. | All |                                   |
+| **Dashboard theme**                               | Apply a **Light** or **Dark** theme to Docker Desktop. | **Use system settings**. | All |                                   |
 | **Configure shell completions**                                  | Edits your shell configuration to enable word completion for commands, flags, and Docker objects when you press `<Tab>` in your terminal. For more information, see [Completion](/manuals/engine/cli/completion.md). | Disabled | All | |
 | **Choose container terminal** | Sets which terminal opens when you select a container terminal. Use the integrated terminal to run commands in a running container from the Dashboard. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md). | Integrated | All | |
-| **Enable Docker terminal**.                                       | Interact with your host machine and execute commands directly from Docker Desktop.  | Disabled | All | |
+| **Enable integrated terminal**.                                       | Interact with your host machine and execute commands directly from Docker Desktop.  | Disabled | All | |
 | **Enable Docker Debug by default**                                | Use Docker Debug by default opening the integrated terminal. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md#integrated-terminal).   | Disabled | All | |
 | **Include VM in Time Machine backups**                            | Back up the Docker Desktop virtual machine. | Disabled | Mac | |
 | **Use containerd for pulling and storing images**     | Uses containerd image store instead of classic image store. For more information, see [containerd image store](/manuals/desktop/features/containerd.md).| Enabled  | All   |           |
@@ -54,7 +54,7 @@ Configure startup behavior, UI appearance, terminal preferences, and feature def
 | **Enable background SBOM indexing** | Automatically analyze images that you build or pull. | Disabled | All | |
 | **Automatically check configuration** | Regularly check your configuration to ensure no unexpected changes have been made by another application. Notifies you if changes are found with the option to restore the configuration directly from the notification. For more information, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/macfaqs.md#why-do-i-keep-getting-a-notification-telling-me-an-application-has-changed-my-desktop-configurations). | Enabled | Mac | Docker Desktop checks if your setup, configured during installation, has been altered by external apps like Orbstack. Docker Desktop checks the symlinks of Docker binaries to `/usr/local/bin` and the symlink of the default Docker socket. Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup. |
 
-## Resources
+## VM resources
 
 Control the CPU, memory, disk, file sharing, proxy, and network resources available to Docker Desktop.
 
@@ -66,8 +66,8 @@ Control the CPU, memory, disk, file sharing, proxy, and network resources availa
 | **Memory limit** | RAM allocated to the Docker VM | Mac, Linux, Windows Hyper-V | Defaults to 50% of your host's memory. |
 | **Swap** | Configure swap file size as needed. | Mac, Linux, Windows Hyper-V | 1 GB default. |
 | **Disk usage limit** | Specify the maximum amount of disk space the engine can use. | Mac, Linux, Windows Hyper-V | |
-|  **Disk image location** | Specify the location of the Linux volume where containers and images are stored. On the **Advanced** tab, you can limit resources available to the Docker Linux VM. | Mac, Linux, Windows Hyper-V | You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it. |
-| **Resource Saver** | Enable or disable [Resource Saver mode](/manuals/desktop/use-desktop/resource-saver.md), which significantly reduces CPU and memory utilization on the host by automatically turning off the Linux VM when Docker Desktop is idle. | Mac, Linux, Windows Hyper-V | Restarts automatically when containers run. Restart may take 3–10 seconds. |
+|  **Disk image location** | Specify the location of the Linux volume where containers and images are stored. In the **Advanced** section, you can limit resources available to the Docker Linux VM. | Mac, Linux, Windows Hyper-V | You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it. |
+| **Resource saver** | Enable or disable [Resource saver mode](/manuals/desktop/use-desktop/resource-saver.md), which significantly reduces CPU and memory utilization on the host by automatically turning off the Linux VM when Docker Desktop is idle. | Mac, Linux, Windows Hyper-V | Restarts automatically when containers run. Restart may take 3–10 seconds. |
 
 In WSL 2 mode, configure memory, CPU, and swap limits on the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
 
@@ -197,18 +197,28 @@ On Windows and Mac, you can also set the default networking mode and DNS resolut
 For more details on configuring Docker Desktop to use WSL 2, see
 [Docker Desktop WSL 2 backend](/manuals/desktop/features/wsl/_index.md).
 
-## Docker Engine
+## AI features
 
-Configure the Docker daemon using a JSON configuration file.
+From the AI features section, you can configure settings for:
 
-The file is located at `$HOME/.docker/daemon.json`. Edit it directly in the Docker Desktop Dashboard or in a text editor.
+- [Gordon](/manuals/ai/gordon/_index.md), the AI-powered assistant that takes action on your Docker workflows.
+- [Docker Model Runner](/manuals/ai/model-runner/_index.md), which makes it easy to manage, run, and deploy AI models using Docker.
 
-To see the full list of possible configuration options, see the
-[dockerd command reference](/reference/cli/dockerd/).
+## Beta features
+
+Beta features provide access to future product functionality.
+These features are intended for testing and feedback only as they may change
+between releases without warning or remove them entirely from a future
+release. Beta features must not be used in production environments.
+Docker doesn't offer support for beta features.
+
+You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/) from the **Beta features** section.
+
+For a list of current experimental features in the Docker CLI, see [Docker CLI Experimental features](https://github.com/docker/cli/blob/master/experimental/README.md).
 
 ## Builders
 
-Use the **Builders** tab to inspect and manage builders in the Docker Desktop settings.
+Use the **Builders** section to inspect and manage builders in the Docker Desktop settings.
 
 ### Inspect
 
@@ -270,40 +280,14 @@ Running a build automatically starts the container if it's stopped.
 
 You can only start and stop builders using the `docker-container` driver.
 
-## AI
+## Docker Engine
 
-From the AI tab, you can configure settings for:
+Configure the Docker daemon using a JSON configuration file.
 
-- [Gordon](/manuals/ai/gordon/_index.md), the AI-powered assistant that takes action on your Docker workflows.
-- [Docker Model Runner](/manuals/ai/model-runner/_index.md), which makes it easy to manage, run, and deploy AI models using Docker.
+The file is located at `$HOME/.docker/daemon.json`. Edit it directly in the Docker Desktop Dashboard or in a text editor.
 
-## Kubernetes
-
-> [!NOTE]
->
-> On Windows the **Kubernetes** tab is not available in Windows container mode.
-
-Enable and configure the built-in standalone Kubernetes cluster for testing container deployments.
-
-| Setting             | Description                               |
-| ------------------- | ----------------------------------------- |
-| **Enable Kubernetes** | Install and run a standalone Kubernetes server as a Docker container for testing deployments. |
-| **Cluster provisioning method** | Choose either **Kubeadm**, a single-node cluster with the version set by Docker Desktop, or **Kind**, a multi-node cluster where you can set the version and number of nodes. |
-| **Show system containers (advanced)** | Show internal containers when using Docker commands. |
-| **Reset Kubernetes cluster** | Delete all stacks and Kubernetes resources. |
-
-For more information about using the Kubernetes integration with Docker Desktop,
-see [Explore the Kubernetes view](/manuals/desktop/use-desktop/kubernetes.md).
-
-## Software updates
-
-Manage how and when Docker Desktop checks for and downloads updates.
-
-| Setting             | Description                               | Default                             |
-| ------------------- | ----------------------------------------- | ------------------------------------- |
-| **Automatically check for updates** | Notifies you of available updates in the Docker menu and Dashboard footer. | Enabled |
-| **Always download updates** | Automatically download new versions of Docker Desktop in the background. | Disabled |
-| **Automatically update components** | Update Docker Desktop components (such as Docker Compose, Docker Scout, and the Docker CLI) independently, without a full restart. Available with Docker Desktop version 4.92 and earlier. | Enabled |
+To see the full list of possible configuration options, see the
+[dockerd command reference](/reference/cli/dockerd/).
 
 ## Extensions
 
@@ -317,17 +301,45 @@ Enable Docker Extensions and control which extensions are available to install a
 
 For more information about Docker extensions, see [Docker Extensions](/manuals/extensions/_index.md).
 
-## Beta features
+## Docker Offload
 
-Beta features provide access to future product functionality.
-These features are intended for testing and feedback only as they may change
-between releases without warning or remove them entirely from a future
-release. Beta features must not be used in production environments.
-Docker doesn't offer support for beta features.
+Enable [Docker Offload v1](/manuals/offload/v1/_index.md) and configure idle timeout and GPU support for cloud-based workloads.
 
-You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/) from the **Beta features** tab.
+| Setting             | Description                               | Notes                                 |
+| ------------------- | ----------------------------------------- | ------------------------------------- |
+| **Enable Docker Offload** | Run your containers in the cloud using [Docker Offload v1](/manuals/offload/v1/_index.md).  | Requires sign-in and an Offload subscription |
+| **Idle timeout** | Set the duration of time between no activity and Docker Offload entering idle mode. For details about idle timeout, see [Session management and idle state](/manuals/offload/v1/core-concepts.md#session-management-and-idle-state). | |
+| **Enable GPU support** | Let your workloads use cloud GPU if available. | |
 
-For a list of current experimental features in the Docker CLI, see [Docker CLI Experimental features](https://github.com/docker/cli/blob/master/experimental/README.md).
+## Kubernetes
+
+> [!NOTE]
+>
+> On Windows the **Kubernetes** section is not available in Windows container mode.
+
+Enable and configure the built-in standalone Kubernetes cluster for testing container deployments.
+
+| Setting             | Description                               |
+| ------------------- | ----------------------------------------- |
+| **Enable Kubernetes** | Install and run a standalone Kubernetes server as a Docker container for testing deployments. |
+| **Cluster provisioning method** | Choose either **Kubeadm**, a single-node cluster with the version set by Docker Desktop, or **Kind**, a multi-node cluster where you can set the version and number of nodes. |
+| **Show system containers (advanced)** | Show internal containers when using Docker commands. |
+| **Reset Kubernetes cluster** | Delete all stacks and Kubernetes resources. |
+
+For more information about using the Kubernetes integration with Docker Desktop,
+see [Explore the Kubernetes view](/manuals/desktop/use-desktop/kubernetes.md).
+
+## Advanced (Mac only)
+
+Reconfigure CLI tool installation paths and privileged system permissions. With Docker Desktop version 4.88.0 and earlier, these can be set during installation.
+
+| Setting             | Description                               | Notes                               |
+| ------------------- | ----------------------------------------- | ------------------------------------- |
+| CLI tools installation — **System** | Install Docker CLI tools to `/usr/local/bin`. | Requires password with version 4.89.0 and later. |
+| CLI tools installation — **User** | Install Docker CLI tools to `$HOME/.docker/bin`. This is the default with version 4.89.0 and later. | Automatically added to your PATH in version 4.89.0 and later. |
+| **Allow the default Docker socket to be used** | Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#installing-symlinks). | Requires password |
+| **Allow privileged port mapping** | Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports). | Available with version 4.88.0 and earlier. Requires password |
+| **Allow privileged port forwarding to external machines** | Allows privileged ports (1 to 1024) to be exposed to other machines on your local network. When turned off, privileged ports are only reachable through loopback addresses. For more information, see [permission requirements for Mac](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports). | Available with version 4.97 and later. Doesn't require a password |
 
 ## Notifications
 
@@ -344,24 +356,12 @@ Choose which types of Docker Desktop notifications you want to receive.
 
 Notifications appear briefly in the lower-right of the Docker Desktop Dashboard, then move to the **Notifications** drawer, accessible from the top-right of the Dashboard.
 
-## Advanced (Mac only)
+## Updates
 
-Reconfigure CLI tool installation paths and privileged system permissions. With Docker Desktop version 4.88.0 and earlier, these can be set during installation.
+Manage how and when Docker Desktop checks for and downloads updates.
 
-| Setting             | Description                               | Notes                               |
+| Setting             | Description                               | Default                             |
 | ------------------- | ----------------------------------------- | ------------------------------------- |
-| CLI tools installation — **System** | Install Docker CLI tools to `/usr/local/bin`. | Requires password with version 4.89.0 and later. |
-| CLI tools installation — **User** | Install Docker CLI tools to `$HOME/.docker/bin`. This is the default with version 4.89.0 and later. | Automatically added to your PATH in version 4.89.0 and later. |
-| **Allow the default Docker socket to be used** | Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#installing-symlinks). | Requires password |
-| **Allow privileged port mapping** | Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports). | Available with version 4.88.0 and earlier. Requires password |
-| **Allow privileged port forwarding to external machines** | Allows privileged ports (1 to 1024) to be exposed to other machines on your local network. When turned off, privileged ports are only reachable through loopback addresses. For more information, see [permission requirements for Mac](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports). | Available with version 4.97 and later. Doesn't require a password |
+| **Automatically check for updates** | Notifies you of available updates in the Docker menu and Dashboard footer. | Enabled |
+| **Always download updates** | Automatically download new versions of Docker Desktop in the background. | Disabled |
 
-## Docker Offload
-
-Enable [Docker Offload v1](/manuals/offload/v1/_index.md) and configure idle timeout and GPU support for cloud-based workloads.
-
-| Setting             | Description                               | Notes                                 |
-| ------------------- | ----------------------------------------- | ------------------------------------- |
-| **Enable Docker Offload** | Run your containers in the cloud using [Docker Offload v1](/manuals/offload/v1/_index.md).  | Requires sign-in and an Offload subscription |
-| **Idle timeout** | Set the duration of time between no activity and Docker Offload entering idle mode. For details about idle timeout, see [Session management and idle state](/manuals/offload/v1/core-concepts.md#session-management-and-idle-state). | |
-| **Enable GPU support** | Let your workloads use cloud GPU if available. | |
