@@ -18,6 +18,87 @@ This page lists new features, enhancements, known issues, and bug fixes for
 Docker accounts and admin features, including Docker Home, billing, security,
 and subscriptions.
 
+## 2026-11-03
+
+### New
+
+- [Docker Offload](/manuals/offload/_index.md) is now included with a
+  [Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md)
+  subscription for individual accounts. You pay for the time the cloud
+  sandbox runs. Organizations can still subscribe to
+  [Docker Offload v1](/manuals/offload/v1/_index.md).
+
+## 2026-11-02
+
+### Bug fixes and enhancements
+
+- [Converting a user account into an organization](/manuals/accounts/organization/setup/convert-account.md)
+  emails the new owner.
+
+## 2026-10-29
+
+### Bug fixes and enhancements
+
+- Severity choices on the
+  [support request form](https://app.docker.com/support/contact) use longer
+  labels that describe the impact of each level.
+- The support request form **Legal** topic includes **DMCA takedown
+  requests**.
+
+## 2026-10-28
+
+### Bug fixes and enhancements
+
+- You can
+  [assign a license to a team](/manuals/accounts/organization/manage/manage-licenses.md#teams)
+ as long as you have sufficient licenses remaining for all team members who do not already hold a license. Docker only assigns a license to
+  members who don't already have one.
+- If you add seats without a street address on file, Docker opens the
+  address form and asks you to add it, instead of failing with a generic
+  error.
+- [Billing details](/manuals/subscription-billing/manage/details.md)
+  show addresses that have no city.
+
+## 2026-10-26
+
+### Bug fixes and enhancements
+
+- Support cases show **PENDING SUPPORT** and **PENDING CUSTOMER** instead
+  of **OPEN** and **ACTION REQUIRED**.
+
+## 2026-10-22
+
+### Bug fixes and enhancements
+
+- Access token revocation emails include the revocation date.
+  Organization access token emails also include the organization name.
+
+## 2026-10-16
+
+### Bug fixes and enhancements
+
+- Users with a custom role that includes the **Manage repositories** and
+  **Manage organization access tokens** permissions can
+  [create an organization access token](/manuals/security/access-tokens/organization-access-tokens.md#create-an-organization-access-token)
+  scoped to all repositories in the organization. A role with only **View
+  repositories** can't.
+
+## 2026-10-15
+
+### New
+
+- Custom roles now include the
+  [Manage licenses](/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md#licensing)
+  permission, so owners can delegate assigning and revoking member
+  licenses and managing automatic assignment. The permission doesn't
+  include changing the organization's license count by buying more,
+  dropping some, or otherwise resizing the pool.
+- You can now create a
+  [personal access token](/manuals/security/access-tokens/personal-access-tokens.md#create)
+  with **Allow Cloud Sandboxes access** (`sandbox:use`) on its own, or
+  with one repository permission. Select **No repository access** when
+  the token should not access repositories.
+
 ## 2026-09-30
 
 ### Bug fixes and enhancements
