@@ -151,7 +151,6 @@ Check for these common causes:
 | The rule uses a different operating system's path format                           | A macOS or Linux path such as `/data/**` doesn't match a Windows path such as `C:\data`, or a WSL path, which starts with `\\wsl.localhost\<distro>\`                    | Add a rule in the format of the developer's operating system    |
 | The rule's capitalization doesn't match a macOS or Linux path                      | macOS and Linux paths are case sensitive, so `~/Projects/**` doesn't match `~/projects/app`                                                                              | Match the directory names' capitalization on disk               |
 | The workspace is a symbolic link to a directory that no rule allows                | The policy checks the directory the link points to, not the link                                                                                                         | Allow the link's target directory, or mount the target directly |
-| The path can't be resolved, for example a symbolic link whose target doesn't exist | A path that can't be resolved is denied without checking the rules. The error shows `path resolution error` instead of `fs:mount:read denied` or `fs:mount:write denied` | Fix the link, or mount the target directory directly            |
 
 For how paths are written and matched, see
 [Filesystem mount rule syntax](reference/filesystem-rules.md).

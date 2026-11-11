@@ -24,8 +24,9 @@ allowed for both actions.
 
 `~` expands to the user's home directory on every platform, including Windows,
 where it resolves to `%USERPROFILE%`. A single `~/**` rule therefore matches
-each user's home tree on macOS, Linux, and Windows. The policy engine expands
-only `~`: it does not expand environment variables, so a pattern such as
+each user's home tree on macOS, Linux, and Windows. Write `~` with a forward
+slash, such as `~/**`, on every platform, including Windows. The policy engine
+expands only `~`: it does not expand environment variables, so a pattern such as
 `%USERPROFILE%\**` or `$HOME/**` matches nothing.
 
 ### Operating system formats
@@ -60,12 +61,12 @@ matches only its direct children.
 
 Matching ignores some differences in how a path is written:
 
-| Difference                                         | Ignored | Example                                       |
-| -------------------------------------------------- | ------- | --------------------------------------------- |
-| Slash direction                                    | Yes     | `C:/data/**` and `C:\data\**` are the same    |
-| Case in Windows drive and UNC paths, including WSL | Yes     | `C:\Data\**` matches `c:\data\project`        |
-| Case in macOS and Linux paths                      | No      | `/Data/**` doesn't match `/data/project`      |
-| WSL prefix                                         | Yes     | `\\wsl$\` and `\\wsl.localhost\` are the same |
+| Difference                                         | Ignored               | Example                                       |
+| -------------------------------------------------- | --------------------- | --------------------------------------------- |
+| Slash direction                                    | Yes, except after `~` | `C:/data/**` and `C:\data\**` are the same    |
+| Case in Windows drive and UNC paths, including WSL | Yes                   | `C:\Data\**` matches `c:\data\project`        |
+| Case in macOS and Linux paths                      | No                    | `/Data/**` doesn't match `/data/project`      |
+| WSL prefix                                         | Yes                   | `\\wsl$\` and `\\wsl.localhost\` are the same |
 
 macOS paths are case sensitive even on a case-insensitive volume, so write rules
 with the directory names' capitalization on disk.
