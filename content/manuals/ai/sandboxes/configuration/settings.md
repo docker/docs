@@ -282,8 +282,7 @@ requirements, and how to apply changes to existing sandboxes.
 
 #### platform.images.useDHI {.wrap-anywhere}
 
-{{< setting-metadata type="boolean" default="false"
-  env="DOCKER_SANDBOXES_USE_DHI" >}}
+{{< setting-metadata type="boolean" default="false" >}}
 
 Turn this on to use Docker Hardened Image variants when creating sandboxes
 with default agent templates:
