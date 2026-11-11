@@ -539,7 +539,7 @@ $ sbx run -t my-template:v1 claude
 
 ### List and remove templates
 
-List all saved templates:
+List tagged template images in the sandbox runtime's local image store:
 
 ```console
 $ sbx template ls
@@ -550,6 +550,28 @@ Remove a template you no longer need:
 ```console
 $ sbx template rm my-template:v1
 ```
+
+If a local image you want to remove doesn't appear in the default listing,
+it may have no tag. Include images without tags and show their digests:
+
+```console
+$ sbx template ls --all --digests
+```
+
+Remove the image using its image ID or repository digest from the listing:
+
+```console
+$ sbx template rm <IMAGE_ID>
+```
+
+```console
+$ sbx template rm <REPOSITORY>@sha256:<DIGEST>
+```
+
+You can use a prefix of an image ID as long as it uniquely identifies a template.
+The `--all` and `--digests` flags apply only to local templates. For all listing
+options, see the
+[`sbx template ls` reference](/reference/cli/sbx/template/ls/).
 
 ### Export and import
 
