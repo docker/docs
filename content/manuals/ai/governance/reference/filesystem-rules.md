@@ -6,10 +6,12 @@ description: Syntax for sandbox filesystem mount rules, including path patterns 
 keywords: docker sandboxes, filesystem rules, path patterns, workspace mount, rule syntax
 ---
 
-You write filesystem mount rules in
+Filesystem mount rules make up
 [organization filesystem access policies](../organization/policies/filesystem.md).
 Each rule lists host paths that sandboxes can mount as workspaces, and the
-access it allows or denies on them: `read`, `write`, or both.
+access it allows or denies on them: `read`, `write`, or both. To add rules to a
+policy, see
+[Create and manage organization policies](../organization/policies/create-manage.md).
 
 When a sandbox mounts a workspace, Docker Sandboxes checks the path against
 these rules for the access the mount needs. A read-only workspace needs only
