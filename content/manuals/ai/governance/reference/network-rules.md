@@ -42,7 +42,11 @@ for an organization policy and
 [Allow or block HTTP methods and paths](../local/network-rules.md#allow-or-block-http-methods-and-paths)
 for a local one.
 
-Path patterns follow the same wildcard rules as filesystem paths, where `*`
+HTTP path matching ignores ASCII letter case: `/API/**` matches `/api/items`.
+Non-ASCII characters remain case-sensitive. This applies to both allow and deny
+rules.
+
+Path patterns use the same wildcards as filesystem paths, where `*`
 matches within one path segment and `**` matches any depth. A pattern without a
 wildcard matches that path exactly, so `/repos` matches `/repos` and nothing
 below it. Every pattern must start with `/` and can't contain a query string, a
@@ -56,7 +60,8 @@ An HTTP rule can also restrict query parameters independently of the path.
 
 Use exact parameter names and values, or a single `*` at the start or end of a
 value to match a suffix or prefix. A value of `*` matches any value, including
-an empty one. Names cannot contain wildcards. Names and values are
+an empty one. Names cannot contain wildcards. Names and values ignore ASCII
+letter case, so `Tag=PROD` matches `tag=prod`. Non-ASCII characters remain
 case-sensitive.
 
 Every specified parameter must match.
@@ -104,6 +109,8 @@ hostnames, CIDR ranges, or ports. UDP requires
 ICMP is blocked.
 
 ### Hostname patterns
+
+Hostname matching is case-insensitive: `EXAMPLE.com` matches `example.com`.
 
 | Pattern               | Example           | Matches                                                      |
 | --------------------- | ----------------- | ------------------------------------------------------------- |

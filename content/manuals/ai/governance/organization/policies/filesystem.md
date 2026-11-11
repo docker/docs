@@ -36,7 +36,10 @@ Each filesystem mount rule allows or denies `read`, `write`, or both on the
 host paths it lists. A read-only workspace needs only `read`, and a writable
 workspace needs both. Paths can use wildcards, and `~` expands to each user's
 home directory, so a single `~/**` rule matches every developer's home tree.
-For the path formats on each operating system and how wildcards match, see
+
+POSIX path matching is case-sensitive, including on macOS. Windows drive paths
+and UNC paths, including WSL UNC paths, match without regard to case. For path
+formats and matching details, see
 [Filesystem mount rule syntax](../../reference/filesystem-rules.md).
 
 ## When changes take effect

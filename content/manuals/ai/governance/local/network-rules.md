@@ -79,6 +79,10 @@ Write the host without a scheme, such as `api.github.com` rather than
 include a port, but it must be a hostname. To match an IP address or a CIDR
 range, use a network rule without `--method` or `--path`.
 
+Paths and query parameter names and values ignore ASCII letter case. For
+examples and wildcard behavior, see
+[HTTP rules](../reference/network-rules.md#http-method-and-path).
+
 ### Choose methods
 
 Pass several methods as a comma-separated list, or `ANY` to match every

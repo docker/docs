@@ -36,6 +36,14 @@ location that several platforms share needs a rule for each:
 On Windows, `*:` matches any drive letter, so `*:\data\**` matches the path on
 any drive.
 
+Case sensitivity depends on the path format:
+
+- POSIX paths on macOS and Linux are case-sensitive: `/data/Project/**` doesn't
+  match `/data/project/file`. Use the directory names' capitalization on disk,
+  even on a case-insensitive macOS volume.
+- Windows drive paths and UNC paths, including WSL UNC paths, are
+  case-insensitive: `C:\Data\Project\**` matches `c:\data\project\file`.
+
 Wildcards behave the same way in every path format:
 
 | Pattern            | Example    | Matches                                                    |
