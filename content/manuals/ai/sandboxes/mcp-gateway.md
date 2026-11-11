@@ -594,6 +594,17 @@ Inspect a registered server:
 $ sbx mcp inspect notion
 ```
 
+When multiple registrations share a name, inspection requires `--sandbox` to
+select the owning sandbox:
+
+```console
+$ sbx mcp inspect filesystem --sandbox my-sandbox
+```
+
+For environment-owned registrations, inspection shows the owning sandbox and
+environment in text, JSON, and YAML output. If only one registration has the
+name, you can inspect it without `--sandbox`.
+
 Remove a registered server:
 
 ```console

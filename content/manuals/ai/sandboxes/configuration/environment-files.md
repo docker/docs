@@ -1061,9 +1061,23 @@ $ sbx daemon stop
 $ sbx mcp rm --registration-only -- <SERVER_NAME>
 ```
 
+When the name is shared by multiple sandbox-owned registrations, select the
+owning sandbox with `--sandbox`:
+
+```console
+$ sbx daemon stop
+$ sbx mcp rm --registration-only --sandbox <SANDBOX_NAME> -- <SERVER_NAME>
+```
+
+This removes only the selected sandbox's registration, including a damaged
+sandbox-scoped record, and preserves other owners' registrations. Sandbox
+selection requires valid, readable ownership metadata for an unscoped record;
+`--sandbox` cannot recover a damaged unscoped record.
+
 Stopping the daemon interrupts its sandbox gateways. Registration-only removal
-does not delete saved credentials. Apply the environment again to register and
-approve the command for its sandbox.
+does not delete saved credentials or stop MCP processes that are already
+running. Apply the environment again to register and approve the command for
+its sandbox.
 
 ### `ports`
 
