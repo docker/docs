@@ -186,6 +186,9 @@ $ sbx settings set clipboard.imagePaste true
 Claude Code and Codex. The setting takes effect within a few seconds, even for
 running sandboxes.
 
+Clipboard images larger than 64 MiB are ignored. The agent receives an empty
+clipboard instead.
+
 This is opt-in because it relaxes the sandbox's isolation: when enabled, a process
 inside the sandbox can read your host clipboard through the host-side proxy. The
 exposure is narrow — reads happen only on a paste, return image data only
