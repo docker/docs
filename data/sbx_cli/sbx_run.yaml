@@ -28,7 +28,7 @@ description: |-
     pass --detach (-d) to print the sandbox ID and exit without opening an
     interactive session.
 
-    Available agents: claude, codex, copilot, cursor, devin, docker-agent, droid, gemini, kiro, opencode, shell
+    Available agents: claude, codex, copilot, cursor, devin, docker-agent, droid, kiro, opencode, shell
 
     With --cloud:
     Run an agent in a cloud sandbox, creating the sandbox if it does not already exist.
@@ -48,6 +48,8 @@ description: |-
     exists, otherwise it creates a new one. A non-interactive run without
     --detach is refused, so scripts pass --detach (e.g.
     sbx --cloud run -d claude && sbx --cloud exec ...).
+
+    When the positional argument identifies an existing sandbox, omit --name.
 
     With --cloud, --env and --env-file only apply when creating a sandbox.
     Existing sandboxes keep their original environment; drop these flags to
@@ -121,7 +123,8 @@ options:
       usage: |
         Bind a host directory to a kit host-mount@1 path (can be repeated): HOST:SANDBOX_PATH. Can only be used when creating a new sandbox.
     - name: name
-      usage: 'Name for the sandbox (default: <agent>-<workdir>)'
+      usage: |
+        Name for the sandbox (default: <agent>-<workdir>; 2–63 ASCII letters, numbers, hyphens or periods; each dot-separated part must start and end with a letter or number; periods are rejected with --cloud; 'default' is reserved)
     - name: new
       default_value: "false"
       usage: |
@@ -193,8 +196,18 @@ example: |4-
       # Create and run from an OCI sandbox kit
       sbx run ghcr.io/foo/my-agent:latest
 
-      # Add a mixin to a built-in agent
+      # Add a mixin from a local directory or ZIP file
       sbx run claude --kit ./my-mixin/
+      sbx run claude --kit ./my-mixin.zip
+
+      # Add a mixin from Docker Hub
+      sbx run claude --kit org/my-mixin:latest
+
+      # Add a mixin from an OCI reference
+      sbx run claude --kit ghcr.io/org/my-mixin:latest
+
+      # Add a mixin from a git repository (git+https:// or git+ssh://, optionally pinned to a ref and/or subdirectory)
+      sbx run claude --kit "git+https://github.com/org/repo.git#ref=v1.0&dir=mixins/foo"
 
       # Create and run with additional workspaces (read-only)
       sbx run claude . /path/to/docs:ro

@@ -12,6 +12,12 @@ description: |-
     follows SRC only when it names a symbolic link to a file. Downloads of directories
     skip symbolic links even with --follow-link.
 
+    Cloud copies do not preserve permissions or timestamps. Set executable
+    permissions after downloading a program.
+
+    The sandbox path must be absolute, for example SANDBOX:/workspace/config.json.
+    It is not relative to the sandbox's working directory.
+
     When copying a directory, the directory itself is placed at the destination.
     If the destination path does not exist it is created; if it already exists
     as a directory, the source is placed inside it.
@@ -20,6 +26,10 @@ description: |-
     into the sandbox, sbx cp refuses symbolic links that escape those directories,
     even with --follow-link, including when a directory is reached through a
     symbolic link, junction or substituted drive.
+
+    For local sandboxes, files copied into the sandbox from Linux or macOS retain
+    their source numeric UID, GID, and permissions. Files copied from Windows are
+    owned by root and marked executable.
 usage: sbx cp SRC DST [flags]
 options:
     - name: follow-link

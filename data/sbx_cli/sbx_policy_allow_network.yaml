@@ -31,6 +31,10 @@ description: |-
     methods or ANY; --path defaults to /**. Repeat --query name=value to require
     query parameters.
 
+    HTTP paths, query parameter names, and query values match without regard to
+    ASCII letter case. For example, /API/** matches /api/items, and Tag=PROD
+    matches tag=prod.
+
     With --cloud:
     Allow cloud sandbox network access to the specified hosts.
 

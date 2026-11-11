@@ -2,11 +2,7 @@ name: sbx exec
 synopsis: Execute a command inside a sandbox
 description: |-
     Execute a command in a sandbox. If the sandbox is stopped, it is started first. Or — with --cloud — the cloud sandbox
-    ID (sbx_*) or name from "sbx --cloud ls".
-
-    Flags match the behavior of "docker exec", except detached exec (-d/--detach)
-    is not supported. Some flags (-d, --user, --privileged)
-    are not supported with --cloud and are rejected rather than silently ignored.
+    ID (sbx_*) or name from "sbx --cloud ls". --user is not supported with --cloud.
     --detach-keys applies only to an interactive (-i/-t) cloud exec.
 
     Exit status is that of the command. sbx exits 125 if it could not run the command,
@@ -14,12 +10,9 @@ description: |-
     unless a cloud backend reports it as an error rather than a status, which exits 125.
 usage: sbx exec [flags] SANDBOX COMMAND [ARG...]
 options:
-    - name: detach
-      shorthand: d
-      default_value: "false"
-      usage: Detached mode (not supported)
     - name: detach-keys
-      usage: Override the key sequence for detaching a container
+      usage: |
+        Override the key sequence for detaching an interactive cloud exec session (not supported for local exec)
     - name: env
       shorthand: e
       default_value: '[]'
@@ -35,9 +28,6 @@ options:
       shorthand: i
       default_value: "false"
       usage: Keep STDIN open even if not attached
-    - name: privileged
-      default_value: "false"
-      usage: Give extended privileges to the command
     - name: tty
       shorthand: t
       default_value: "false"

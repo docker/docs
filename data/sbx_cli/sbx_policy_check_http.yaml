@@ -28,6 +28,7 @@ options:
     - name: sandbox
       usage: Evaluate in a specific sandbox policy context
     - name: verbose
+      shorthand: v
       default_value: "false"
       usage: Show the policy action and resource
 inherited_options:

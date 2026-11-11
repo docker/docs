@@ -1,0 +1,40 @@
+name: sbx schedule runs
+synopsis: List the runs of a schedule
+description: List the runs of a schedule, newest first.
+usage: sbx schedule runs SCHEDULE_ID [flags]
+options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for runs
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+    - name: limit
+      default_value: "20"
+      usage: Maximum number of runs to show; 0 shows all
+    - name: quiet
+      shorthand: q
+      default_value: "false"
+      usage: Only display run IDs
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+example: |4-
+      sbx --cloud schedule runs SCHEDULE_ID
+      sbx --cloud schedule runs SCHEDULE_ID --limit 0 --json
+see_also:
+    - sbx schedule - Manage scheduled cloud sandbox runs (cloud-only)
+    - sbx schedule runs inspect - Show the details of a schedule run

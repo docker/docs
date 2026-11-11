@@ -31,9 +31,11 @@ see_also:
     - sbx cp - Copy files or directories between a sandbox and the host
     - sbx create - Create a sandbox for an agent
     - sbx daemon - Manage sandboxd daemon
+    - sbx df - Show runtime disk usage
     - sbx diagnose - Diagnose common issues with your sbx installation
     - sbx env - (Experimental) Manage sandboxes declaratively from an sbxenv.yaml file
     - sbx exec - Execute a command inside a sandbox
+    - sbx inspect - Show details for a sandbox
     - sbx kit - (Experimental) Manage kit artifacts
     - sbx login - Sign in to Docker
     - sbx logout - Stop running local sandboxes and sign out of Docker
@@ -46,6 +48,7 @@ see_also:
     - sbx reset - Reset all sandboxes and clean up state
     - sbx rm - Remove one or more sandboxes
     - sbx run - Run an agent in a sandbox
+    - sbx schedule - Manage scheduled cloud sandbox runs (cloud-only)
     - sbx secret - Manage stored secrets
     - sbx settings - Manage Docker Sandboxes settings
     - sbx setup - (Experimental) Detect host configuration and prepare Docker Sandboxes
