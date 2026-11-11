@@ -90,7 +90,12 @@ $ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-age
 
 `sbx` pulls published images and builds local or Git sources when creating
 the sandbox. Builds with unchanged source content and supplied kit arguments
-reuse cached results.
+reuse cached results while they remain available.
+
+Unused source-kit build images are eligible for automatic cleanup after seven
+days without references. Images referenced by existing sandboxes or saved
+templates are kept. On later use, a collected build may need to be restored
+or rebuilt, even if its sources and arguments are unchanged.
 
 By default, remote kit sources are limited to Docker Hub. To use a Git
 source or another registry, see [Restrict kit sources](#restrict-kit-sources).
