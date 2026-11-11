@@ -46,9 +46,10 @@ The command prints the cloud sandbox ID. Attach by ID or name:
 $ sbx --cloud attach cloud-project
 ```
 
-Cloud sandbox names must have at least two characters, start with a letter or
-number, and contain only letters, numbers, and hyphens. The name `default` is
-reserved. Periods accepted in local sandbox names aren't accepted in the cloud.
+Cloud sandbox names must be 2–63 characters long, contain only ASCII letters,
+numbers, and hyphens, and start and end with a letter or number. The name
+`default` is reserved. Periods accepted in local sandbox names aren't accepted
+in the cloud.
 
 Cloud creation doesn't accept workspace paths. For example,
 `sbx --cloud run claude .` returns an error because `.` refers to the local
