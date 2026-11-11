@@ -73,8 +73,8 @@ itself a flag (begins with `-`), so `--yolo` is preserved:
 $ sbx run --name <sandbox-name> -- -p "explain this"   # runs gemini --yolo -p "explain this"
 ```
 
-When the first argument is a bare word — a subcommand or prompt — it replaces
-the defaults instead.
+For prompts and subcommands, see
+[Pass arguments to an agent](../usage.md#pass-arguments-to-an-agent).
 
 ## Base image
 

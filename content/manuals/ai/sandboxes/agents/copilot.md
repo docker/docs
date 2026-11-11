@@ -64,8 +64,8 @@ itself a flag (begins with `-`), so `--yolo` is preserved:
 $ sbx run copilot -- -p "review this PR"   # runs copilot --yolo -p "review this PR"
 ```
 
-When the first argument is a bare word — a subcommand or prompt — it replaces
-the defaults instead.
+For prompts and subcommands, see
+[Pass arguments to an agent](../usage.md#pass-arguments-to-an-agent).
 
 ## Base image
 
