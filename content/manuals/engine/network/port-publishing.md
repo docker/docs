@@ -146,10 +146,12 @@ Hosts outside the local network can only use direct routing to the
 container if the network's routers are configured to enable it.
 
 In a `nat` mode network, publishing a port to an address on the loopback
-interface means remote hosts cannot access it. Other published container
-ports in `routed` and `nat` networks are always accessible from remote
-hosts using direct routing, unless the Docker host's firewall has additional
-restrictions.
+interface means remote hosts cannot access it. Remote hosts can't use direct
+routing to reach published ports in a `nat` mode network, unless you allow it
+as described in [Direct routing to containers in bridge networks](#direct-routing-to-containers-in-bridge-networks).
+Published container ports in `routed` networks are always accessible from
+remote hosts using direct routing, unless the Docker host's firewall has
+additional restrictions.
 
 > [!NOTE]
 >
