@@ -104,11 +104,10 @@ that was blocked, so run the operation again afterward. For more details, see
 ## An HTTP method or path is blocked on an allowed host
 
 A destination that a host rule allows can still have individual methods or
-paths denied by an HTTP rule. Run `sbx policy ls --type http` to see which HTTP rules
-apply. `sbx policy check network` reports the decision for the host only, so it
-shows a host as allowed even when the specific request is denied. For more
+paths denied by an HTTP rule. Run `sbx policy ls --type http` to see which HTTP
+rules apply, and `sbx policy check http` to check a specific request. For more
 details, see
-[Allow or block HTTP methods and paths](local/network-rules.md#allow-or-block-http-methods-and-paths).
+[Block one endpoint on an allowed host](local/network-rules.md#block-one-endpoint-on-an-allowed-host).
 
 ## A sandbox can't mount its workspace
 

@@ -149,7 +149,7 @@ filtered listing with no HTTP rules shows an unlabeled count, such as
 `network: 42 allow`.
 
 For more details, see
-[HTTP method and path](../reference/network-rules.md#http-method-and-path).
+[HTTP rules](../reference/network-rules.md#http-rules).
 
 ## List filesystem mount rules
 
