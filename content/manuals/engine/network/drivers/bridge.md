@@ -556,10 +556,6 @@ and automatic DNS resolution between containers.
 5. On user-defined networks, containers can resolve each other by name. Connect
    to `alpine1` and test:
 
-   > [!NOTE]
-   > Automatic service discovery only resolves custom container names, not
-   > default automatically generated names.
-
    ```console
    $ docker container attach alpine1
 
