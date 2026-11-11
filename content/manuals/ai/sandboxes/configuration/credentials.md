@@ -464,6 +464,26 @@ configured hosts and the placeholder appears in an HTTP request header, the
 proxy replaces it with the real value. Replacement applies only to HTTP request
 headers, not request bodies. The agent never sees the real secret.
 
+### List custom secrets
+
+To find stored custom secrets by host, use `--host`:
+
+```console
+$ sbx secret ls --host api.example.com
+```
+
+To filter by environment variable name, use `--env-name`:
+
+```console
+$ sbx secret ls --env-name API_KEY
+```
+
+Add `--sandbox` to list only matching secrets stored for a specific sandbox:
+
+```console
+$ sbx secret ls --host api.example.com --sandbox my-sandbox
+```
+
 ### Target multiple hosts
 
 Repeat `--host` to cover multiple domains with the same secret — useful when
