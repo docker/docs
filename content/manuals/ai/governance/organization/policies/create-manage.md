@@ -88,10 +88,11 @@ details, see
 ## Configure a support message
 
 Administrators can add an optional support message that appears after the policy denial
-details when an organization policy blocks a sandbox action. Members who are
-[blocked because they don't have an AI Governance license](#block-members-without-a-license)
-also see it. Use it to point members to an internal support channel, ticket
-queue, or security contact.
+details when an organization policy blocks a sandbox action. If you
+[block members without an AI Governance license](#block-members-without-a-license),
+Docker also shows the support message to those members when it blocks them
+from using Docker Sandboxes. Use it to point members to an internal support
+channel, ticket queue, or security contact.
 
 To set the message:
 
@@ -135,5 +136,6 @@ Blocked members can't use Docker Sandboxes until they hold an AI Governance
 license. If
 [automatic license assignment](/manuals/accounts/organization/manage/manage-licenses.md#automatic-assignment)
 is on, Docker assigns a license to a member when they use Docker Sandboxes,
-and blocks them only when no licenses are left. Blocked members see your
+and blocks them only when there are no additional licenses to assign. Blocked
+members see your
 [support message](#configure-a-support-message), if you configured one.
