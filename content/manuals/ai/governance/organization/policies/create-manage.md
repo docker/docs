@@ -88,8 +88,10 @@ details, see
 ## Configure a support message
 
 Administrators can add an optional support message that appears after the policy denial
-details when an organization policy blocks a sandbox action. Use it to
-point members to an internal support channel, ticket queue, or security contact.
+details when an organization policy blocks a sandbox action. Members who are
+[blocked because they don't have an AI Governance license](#block-members-without-a-license)
+also see it. Use it to point members to an internal support channel, ticket
+queue, or security contact.
 
 To set the message:
 
@@ -98,12 +100,40 @@ To set the message:
 1. In the left-hand navigation, expand **AI Platform** and select **Manage**.
 1. In **Support message**, enter up to 500 characters.
 
-   The **Support message** field appears only when **AI governance** is turned
-   on. For more details, see
+   You can edit **Support message** only when **Enable AI governance** is
+   selected. For more details, see
    [Turn on AI governance](../get-started.md#step-4-turn-on-ai-governance).
-1. Select **Save changes**.
+1. Select **Save**.
 
-Docker shows the message only for denials caused by an organization policy and
+Docker shows the message only for denials caused by an organization policy,
 for requests an
-[approval-required policy](network.md#approval-required-access) blocks. If you
+[approval-required policy](network.md#approval-required-access) blocks, and
+for members blocked because they don't have a license. If you
 leave it blank, Docker shows the policy denial without additional contact text.
+
+## Block members without a license
+
+By default, members without an AI Governance license can keep using Docker
+Sandboxes, and your organization policies don't apply to them. You can block
+Docker Sandboxes for these members instead.
+
+To block members without a license:
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your
+   organization.
+1. In the left-hand navigation, expand **AI Platform** and select **Manage**.
+1. Select **Block Docker Sandboxes for members without an AI governance
+   license**.
+
+   You can select this option only when **Enable AI governance** is selected,
+   and it has no effect while AI governance is off. For more details, see
+   [Turn on AI governance](../get-started.md#step-4-turn-on-ai-governance).
+1. Select **Block users** to confirm.
+1. Select **Save**.
+
+Blocked members can't use Docker Sandboxes until they hold an AI Governance
+license. If
+[automatic license assignment](/manuals/accounts/organization/manage/manage-licenses.md#automatic-assignment)
+is on, Docker assigns a license to a member when they use Docker Sandboxes,
+and blocks them only when no licenses are left. Blocked members see your
+[support message](#configure-a-support-message), if you configured one.
