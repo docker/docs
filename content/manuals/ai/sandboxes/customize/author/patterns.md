@@ -24,6 +24,34 @@ The user still needs to supply the credential and approve access. See
 [Build a tool mixin](/manuals/ai/sandboxes/customize/author/tool-mixins.md)
 for a complete example.
 
+## Publish a development service
+
+For a kit that starts a development server in a local sandbox, request an
+automatically assigned host port so users can reach the service without
+approving each publication. Add this grant to the kit descriptor and include
+the kit when creating the sandbox:
+
+```yaml
+capabilities:
+  - type: com.docker.sandbox/api@1
+    config:
+      operation: ports.publish
+      approval: none
+```
+
+With the service listening on port 8080, run this request inside the sandbox:
+
+```console
+$ curl --noproxy '*' --max-time 60 --fail-with-body \
+    -H 'Content-Type: application/json' \
+    --data '[{"sandbox_port":8080}]' \
+    "${HTTP_PROXY%/}/_sbx/api/ports"
+```
+
+The response gives the assigned `host_ip` and `host_port`. The host binding
+is loopback-only and uses an ephemeral port because `host_port` is omitted.
+It disappears when the sandbox stops and isn't restored on the next start.
+
 ## Leave build tools out of the mixin
 
 Build a tool in one Dockerfile stage, then copy the executable into an empty
