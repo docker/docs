@@ -52,11 +52,14 @@ To get started with Docker Engine on Raspberry Pi OS, make sure you
   when you expose container ports using Docker, these ports bypass your
   firewall rules. For more information, refer to
   [Docker and ufw](/manuals/engine/network/packet-filtering-firewalls.md#docker-and-ufw).
-- Docker is only compatible with `iptables-nft` and `iptables-legacy`.
-  Firewall rules created with `nft` are not supported on a system with Docker installed.
+- With its default iptables firewall backend, Docker is only compatible with
+  `iptables-nft` and `iptables-legacy`.
   Make sure that any firewall rulesets you use are created with `iptables` or `ip6tables`,
   and that you add them to the `DOCKER-USER` chain,
   see [Packet filtering and firewalls](/manuals/engine/network/packet-filtering-firewalls.md).
+  If you use the experimental nftables firewall backend, create your rules in
+  your own nftables tables instead, see
+  [Docker with nftables](/manuals/engine/network/firewall-nftables.md).
 
 ### OS requirements
 
