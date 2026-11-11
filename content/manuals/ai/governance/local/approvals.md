@@ -89,7 +89,7 @@ for, scoped to the sandbox that asked:
   `api.example.com:8443` are approved separately.
 - Another sandbox reaching the same destination asks again.
 
-When an [HTTP rule](../reference/network-rules.md#http-method-and-path) in the
+When an [HTTP rule](../reference/network-rules.md#http-rules) in the
 policy matches the request, approving covers the method and exact path the
 sandbox requested rather than the whole destination. `GET /v1/data` and
 `POST /v1/data` on the same host are approved separately. A request whose
