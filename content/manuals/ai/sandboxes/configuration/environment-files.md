@@ -180,9 +180,11 @@ from `/projects/api`, and it mounts `/projects/api` instead. You don't need a
 separate `sbxenv.yaml` in either project.
 
 If the project has a `sbxenv.yaml`, `sbx` combines it with your user defaults.
-Project settings override individual default values. Lists such as `ports`
-and `mcp.servers` combine entries from both files. If you pass a file or
-directory path to the command, `sbx` skips `~/.sbxenv.yaml`.
+Project settings override individual default values. Lists combine entries
+from both files, with matching ports, MCP server names, and additional workspace
+targets using the project entry. See the
+[merge rules](#combine-team-defaults-and-personal-settings) for details. If you
+pass a file or directory path to the command, `sbx` skips `~/.sbxenv.yaml`.
 
 In `~/.sbxenv.yaml`, you can set `workspace` to `${{ env.projectDir }}` or a
 subdirectory such as `${{ env.projectDir }}/src`. Other workspace paths
@@ -424,11 +426,68 @@ Pass both files in merge order:
 $ sbx env run base.sbxenv.yaml local.sbxenv.yaml
 ```
 
-Nested mappings merge by key, lists concatenate except for `entrypoint` and
-`cmd`, and values from later files replace earlier scalar values. In this
-example, the sandbox has four CPUs,
-12 GB of memory, and both environment variables. Each relative workspace path
-resolves from the directory of the file that declares it.
+In this example, the sandbox has four CPUs, 12 GB of memory, and both
+environment variables. Each relative workspace path resolves from the directory
+of the file that declares it.
+
+#### Merge rules
+
+Files merge in the order you pass them. Later scalar values override earlier
+values, while nested mappings combine by key. Most lists append entries from each file.
+The exceptions are:
+
+- `ports`, `mcp.servers`, and `additionalWorkspaces`: matching entries use the
+  last entry, as described in [Override a list entry](#override-a-list-entry).
+- `kits`: entries with the same source merge their arguments by key. Later
+  argument values take precedence; other arguments are preserved.
+- `entrypoint` and `cmd`: later lists replace earlier lists. See
+  [Set the launch command](#set-the-launch-command) for inheritance and clearing.
+
+#### Override a list entry
+
+To override a port, MCP server, or additional workspace, declare a matching
+entry later in the file or in a later file. The last entry replaces the whole
+earlier entry and keeps its first position in the list. Entries that don't
+match are kept as separate entries.
+
+For example, change the host port for sandbox port `8080` in your personal
+settings:
+
+```yaml
+# base.sbxenv.yaml
+ports:
+  - sandbox: 8080
+    host: 3000
+```
+
+```yaml
+# local.sbxenv.yaml
+ports:
+  - sandbox: 8080
+    host: 4000
+```
+
+With `base.sbxenv.yaml` loaded first, the result is one port entry that publishes
+sandbox port `8080` on host port `4000`.
+
+Include every field you want to keep in the replacement. Omitted fields use
+their defaults: omitting `host` in this example selects an ephemeral host port.
+Similarly, omitting `readOnly` from a replacement workspace makes it writable.
+
+`sbx` uses these fields to decide whether entries match:
+
+| List | Matching fields |
+| --- | --- |
+| `ports` | Sandbox port and effective protocol |
+| `mcp.servers` | Exact server name |
+| `additionalWorkspaces` | Container target: the explicit `target`, or the resolved host path when `target` is omitted |
+
+Port protocol names are case-insensitive. An omitted protocol uses `tcp4`, or
+`tcp6` for an IPv6 `hostIP`. Different protocols, such as `tcp` and `tcp4`,
+remain separate.
+
+On macOS, an implicit workspace target uses the stored host-path casing when
+available. Explicit targets remain case-sensitive.
 
 Each source file must contain valid fields and values before merging. A later
 override can't repair an invalid value in an earlier file. This also applies
