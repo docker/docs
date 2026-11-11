@@ -53,7 +53,7 @@ The following table describes the driver-specific options that you can pass to
   `docker network create` all together and the driver will create a `dummy`
   interface that will enable local host connectivity to perform the examples.
 - Kernel requirements:
-  - IPvlan Linux kernel v4.2+ (support for earlier kernels exists but is buggy). To check your current kernel version, use `uname -r`
+  - IPvlan Linux kernel v4.2+. Docker refuses to create an IPvlan network on earlier kernels. To check your current kernel version, use `uname -r`
 
 ### IPvlan L2 mode example usage
 
