@@ -89,19 +89,28 @@ the first governed request. In Docker Home, go to **AI Platform** >
 ## Step 4: Turn on AI governance
 
 Your policies take effect only when AI governance is turned on for your
-organization. In Docker Home, expand **AI Platform**, select **Manage**, and
-turn on **AI governance**. If you haven't created a filesystem policy, Docker
-Home warns you first, because governed developers can't use Docker Sandboxes
-without one.
+organization. In Docker Home, expand **AI Platform**, select **Manage**, select
+**Enable AI governance**, and then select **Save**. If you haven't created a
+filesystem policy, Docker Home warns you first, because governed developers
+can't use Docker Sandboxes without one.
 
 Turning on AI Governance doesn't govern anyone yet. Organization policies apply
 only to members who hold an AI Governance license, which you assign in
 [Step 5](#step-5-assign-licenses).
 
+By default, members without an AI Governance license can keep using Docker
+Sandboxes, and your organization policies don't apply to them. Decide whether
+to
+[block Docker Sandboxes for members without a license](policies/create-manage.md#block-members-without-a-license)
+instead. Blocking applies to every member without a license, including members
+outside your pilot team, so you might turn it on only after you roll out
+licenses in [Step 9](#step-9-roll-out-to-more-teams).
+
 After you turn it on, consider also
 [configuring a support message](policies/create-manage.md#configure-a-support-message)
-on the same page. Developers see it when your policy blocks a request, so you
-can tell them how to ask for access.
+on the same page. Developers see it when your policy blocks a request, or when
+they're blocked because they don't have a license, so you can tell them how to
+ask for access.
 
 ## Step 5: Assign licenses
 
@@ -164,5 +173,7 @@ Docker Sandboxes to their machines, and widen the scope of your policies, or
 add team-scoped policies for teams that need different access. As more
 developers are governed, keep reviewing your audit logs for requests your
 policies block, and add allow rules where developers need them. Each change you make reaches developer machines within 5 minutes.
+To stop members without a license from using Docker Sandboxes,
+[block members without a license](policies/create-manage.md#block-members-without-a-license).
 For more details, see
 [When policy changes reach developers](policies/_index.md#when-policy-changes-reach-developers).
