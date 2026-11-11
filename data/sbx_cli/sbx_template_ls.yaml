@@ -1,9 +1,19 @@
 name: sbx template ls
 synopsis: List template images
-description: |
-    List all template images stored in the sandbox runtime's image store.
+description: |-
+    List tagged template images stored in the sandbox runtime's image store.
+
+    With --cloud:
+    List cloud sandbox templates.
 usage: sbx template ls [flags]
 options:
+    - name: all
+      shorthand: a
+      default_value: "false"
+      usage: Include digest-only and untagged images
+    - name: digests
+      default_value: "false"
+      usage: Show image digests
     - name: format
       usage: 'Output format: table, json or yaml'
     - name: help
@@ -13,6 +23,9 @@ options:
     - name: json
       default_value: "false"
       usage: Output in JSON format
+    - name: no-trunc
+      default_value: "false"
+      usage: Show full image IDs
     - name: quiet
       shorthand: q
       default_value: "false"
@@ -31,10 +44,19 @@ inherited_options:
       usage: |
         Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
-      # List all template images
+      # List tagged template images
       sbx template ls
+
+      # Include digest-only and untagged images with their digests and full IDs
+      sbx template ls --all --digests --no-trunc
 
       # Output in JSON format
       sbx template ls --json
+
+      # Cloud: list templates
+      sbx --cloud template ls
+
+      # Cloud: output in JSON format
+      sbx --cloud template ls --json
 see_also:
     - sbx template - Manage sandbox templates

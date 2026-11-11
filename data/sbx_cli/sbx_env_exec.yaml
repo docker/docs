@@ -16,8 +16,12 @@ description: |-
 
     A directory PATH selects sbxenv.yaml; a file PATH selects that file.
     With no PATH, ~/.sbxenv.yaml supplies shared defaults when present.
-    Explicit PATHs skip those defaults. Later files override earlier values;
-    lists such as ports and mcp.servers are concatenated.
+    Explicit PATHs skip those defaults. Later files override earlier values.
+    Ports with the same sandbox port and effective protocol, MCP servers with the
+    same name, and additional workspaces with the same container target use the
+    later entry, including repeated entries in one file.
+    Kit arguments merge by source. The entrypoint and cmd arrays replace earlier
+    values; other lists concatenate.
 
     Flags match the behavior of "sbx exec".
 
@@ -26,12 +30,9 @@ description: |-
     unless a cloud backend reports it as an error rather than a status, which exits 125.
 usage: sbx env exec [flags] [PATH...] -- COMMAND [ARG...]
 options:
-    - name: detach
-      shorthand: d
-      default_value: "false"
-      usage: Detached mode (not supported)
     - name: detach-keys
-      usage: Override the key sequence for detaching a container
+      usage: |
+        Override the key sequence for detaching an interactive cloud exec session (not supported for local exec)
     - name: env
       shorthand: e
       default_value: '[]'
@@ -60,9 +61,6 @@ options:
     - name: name
       usage: |
         Name for the sandbox, overriding 'name:' in sbxenv.yaml and the derived <agent>-<directory> (every 'sbx env' command addressing this environment needs the same value)
-    - name: privileged
-      default_value: "false"
-      usage: Give extended privileges to the command
     - name: tty
       shorthand: t
       default_value: "false"

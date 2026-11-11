@@ -1,0 +1,40 @@
+name: sbx inspect
+synopsis: Show details for a sandbox
+description: |-
+    Show a human-readable summary of a sandbox: its agent, kits, state, auth mode, workspace and mounts, network policy, secrets, published ports, and active sessions.
+
+    With --cloud, SANDBOX is the cloud sandbox ID (sbx_*) or name from
+    "sbx --cloud ls", and the summary reports what the cloud records: template,
+    sizing, timeout behavior, and the URL each published port is reached at.
+usage: sbx inspect SANDBOX [flags]
+options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for inspect
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+example: |4-
+      sbx inspect my-sandbox
+      sbx inspect my-sandbox --format json
+
+      sbx --cloud inspect my-sandbox
+      sbx --cloud inspect my-sandbox --format json
+see_also:
+    - sbx - Manage AI coding agent sandboxes.

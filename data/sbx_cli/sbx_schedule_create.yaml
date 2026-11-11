@@ -1,0 +1,83 @@
+name: sbx schedule create
+synopsis: Create a schedule that runs a kit on a cron cadence
+description: |-
+    Create a schedule that starts a cloud sandbox from KIT on every cron tick and runs
+    exactly one of --prompt or --command in it.
+
+    KIT is an agent name such as claude, or an oci:// kit reference. Each run's sandbox
+    denies all egress except the kit's own and --allow-network.
+usage: sbx schedule create KIT [flags]
+options:
+    - name: allow-network
+      usage: |
+        Network pattern each run's sandbox may reach (can be repeated); other egress is denied
+    - name: command
+      usage: Shell command each run executes
+    - name: cpus
+      default_value: "0"
+      usage: 'CPUs for each run''s sandbox (default: the kit''s)'
+    - name: cron
+      usage: |
+        Five-field cron expression for when runs start, e.g. "0 9 * * 1-5"
+    - name: deny-network
+      usage: |
+        Network pattern to deny within --allow-network (can be repeated)
+    - name: description
+      usage: Description of the schedule
+    - name: enabled
+      default_value: "true"
+      usage: |
+        Start runs on the cron cadence; --enabled=false pauses the schedule
+    - name: env
+      shorthand: e
+      default_value: '[]'
+      usage: |
+        Set an environment variable for each run (can be repeated): KEY=VALUE
+    - name: env-file
+      default_value: '[]'
+      usage: |
+        Read environment variables from a file (can be repeated). --env wins over any file; a later file wins over an earlier one
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for create
+    - name: max-run-duration
+      default_value: 0s
+      usage: |
+        Longest a run may take, at least 1h, e.g. 2h30m (default: 1h)
+    - name: memory
+      shorthand: m
+      usage: 'Memory for each run''s sandbox, e.g. 8g (default: the kit''s)'
+    - name: name
+      usage: Name of the schedule
+    - name: platform
+      usage: 'Platform for each run''s sandbox: linux/amd64 or linux/arm64'
+    - name: prompt
+      usage: Prompt each run passes to the kit's agent
+    - name: static-mcp
+      default_value: '[]'
+      usage: |
+        Cloud MCP gateway servers each run's sandbox gets, comma-separated or repeated
+    - name: timezone
+      usage: |
+        IANA time zone the cron expression is evaluated in, e.g. Europe/Berlin
+    - name: working-dir
+      usage: Directory the prompt or command runs in
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+example: |4-
+      sbx --cloud schedule create claude --name nightly-tests --cron "0 2 * * *" --prompt "Run the tests and fix failures"
+      sbx --cloud schedule create shell --name cleanup --cron "*/30 * * * *" --timezone Europe/Berlin --command "make clean"
+see_also:
+    - sbx schedule - Manage scheduled cloud sandbox runs (cloud-only)

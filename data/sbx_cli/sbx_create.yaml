@@ -16,7 +16,7 @@ description: |-
 
     Use "sbx run --name SANDBOX" to attach to the agent after creation.
 
-    Available agents: claude, codex, copilot, cursor, devin, docker-agent, droid, gemini, kiro, opencode, shell
+    Available agents: claude, codex, copilot, cursor, devin, docker-agent, droid, kiro, opencode, shell
 
     With --cloud:
     Create a cloud sandbox for an agent.
@@ -89,7 +89,7 @@ options:
         Bind a host directory to a kit host-mount@1 path (can be repeated): HOST:SANDBOX_PATH. Can only be used when creating a new sandbox.
     - name: name
       usage: |
-        Name for the sandbox (defaults to <agent>-<workdir>; at least two characters, starting with a letter or number, containing only letters, numbers, hyphens and periods (periods are rejected with --cloud); 'default' is reserved)
+        Name for the sandbox (default: <agent>-<workdir>; 2–63 ASCII letters, numbers, hyphens or periods; each dot-separated part must start and end with a letter or number; periods are rejected with --cloud; 'default' is reserved)
     - name: no-progress
       default_value: "false"
       usage: Suppress progress output
@@ -159,8 +159,18 @@ example: |4-
       # Create from a local sandbox kit
       sbx create ../path/to/my-agent/
 
-      # Add a mixin to a built-in agent
+      # Add a mixin from a local directory or ZIP file
       sbx create claude --kit ./my-mixin/
+      sbx create claude --kit ./my-mixin.zip
+
+      # Add a mixin from Docker Hub
+      sbx create claude --kit org/my-mixin:latest
+
+      # Add a mixin from an OCI reference
+      sbx create claude --kit ghcr.io/org/my-mixin:latest
+
+      # Add a mixin from a git repository (git+https:// or git+ssh://, optionally pinned to a ref and/or subdirectory)
+      sbx create claude --kit "git+https://github.com/org/repo.git#ref=v1.0&dir=mixins/foo"
 
       # Run the agent on an in-container clone of the host repo, wired back via a git-daemon
       sbx create --clone claude .
