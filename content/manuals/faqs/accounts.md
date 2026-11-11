@@ -117,10 +117,10 @@ Check the following:
 1. The username is the Docker ID of the account that owns the token.
    Use an organization name only with an
    [organization access token](/manuals/security/access-tokens/organization-access-tokens.md).
-2. You pasted the full token, with no spaces or line breaks. Docker
+1. You pasted the full token, with no spaces or line breaks. Docker
    shows a token only once. If you no longer have it,
    [create a new personal access token](/manuals/security/access-tokens/personal-access-tokens.md#create).
-3. On the **Personal access tokens** page, find the token and use its
+1. On the **Personal access tokens** page, find the token and use its
    status:
    - **Expired:** Create a new token. You can't change the expiration
      date.
@@ -204,7 +204,7 @@ for the full explanation.
 ### Do organization invitees take up seats?
 
 Yes. A user invited to an organization will take up one of the provisioned
-seats, even if that user hasn’t accepted their invitation yet.
+seats, even if that user hasn't accepted their invitation yet.
 
 To manage invites, see [Manage organization members](/manuals/accounts/organization/manage/members.md).
 
@@ -263,17 +263,17 @@ domain](/manuals/security/provisioning/domain-management.md).
 
 ### Companies
 
-#### Can I use a parent company if some of my organizations don’t have a Docker Business subscription?
+#### Can I use a parent company if some of my organizations don't have a Docker Business subscription?
 
 Yes, but you can only add organizations with a Docker Business subscription
-to a company. For more details, see [Add more organizations](/manuals/accounts/company/manage.md#add-more-organizations).
+to a company. For more details, see [Add more organizations](/manuals/accounts/company/new-company.md#add-more-organizations).
 
 #### What happens if one of my organizations downgrades from Docker Business, but I still need access as a company owner?
 
 To access and manage a nested organization, it must have a Docker Business
 subscription. If an organization downgrades from Docker Business, its owner must
 manage it outside of the company. For more details, see
-[Add more organizations](/manuals/accounts/company/manage.md#add-more-organizations).
+[Add more organizations](/manuals/accounts/company/new-company.md#add-more-organizations).
 
 #### Do company owners occupy a subscription seat?
 
