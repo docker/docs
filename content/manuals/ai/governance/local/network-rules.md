@@ -192,6 +192,13 @@ $ sbx policy ls --protocol udp
 $ sbx policy check network --protocol udp api.example.com:443
 ```
 
+When UDP egress is disabled, each sandbox network records the first 20 distinct
+refused external UDP destinations in individual log entries. Further destinations
+share the `<further blocked attempts>` entry. Repeated attempts to one of the
+first 20 destinations still update that destination's count. The limit applies
+for the network's lifetime, and each network has its own limit. All these UDP
+attempts remain blocked.
+
 ## Set or reset the preset
 
 If no preset is set, the CLI prompts you to choose one when you run a sandbox

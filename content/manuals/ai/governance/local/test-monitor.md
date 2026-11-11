@@ -81,6 +81,10 @@ For how the forward and transparent proxies handle sandbox traffic, see
 The log records network requests by host, without their HTTP methods and
 paths. Filesystem mount decisions aren't in the log.
 
+With UDP egress disabled, some blocked destinations share the
+`<further blocked attempts>` log entry. For details, see
+[Allow outbound UDP](network-rules.md#allow-outbound-udp).
+
 ## Filter the log
 
 To see only one sandbox's requests, pass its name:
