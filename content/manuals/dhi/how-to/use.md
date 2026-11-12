@@ -29,7 +29,10 @@ package manager, and may run as a non-root user by default.
 >   (PAT)](../../security/access-tokens/personal-access-tokens.md) for personal accounts, or an
 >   [organization access token
 >   (OAT)](../../security/access-tokens/organization-access-tokens.md) with your organization
->   name as the username.
+>   namespace as the username.
+> - OIDC: In GitHub Actions, use a Docker-issued access token from an
+>   [OIDC connection](/manuals/security/authentication/oidc-connections/create-manage.md)
+>   with your organization namespace as the username.
 >
 > Run `docker login dhi.io` to authenticate.
 
@@ -89,6 +92,15 @@ Docker Hardened Images work just like any other image in your CI/CD pipelines.
 You can reference them in Dockerfiles, pull them as part of a pipeline step, or
 run containers based on them during builds and tests.
 
+In GitHub Actions, your Docker organization can use an OIDC connection to
+authenticate with short-lived Docker access tokens instead of storing an
+organization access token (OAT). For a mirrored image on Docker Hub, grant pull access to
+`<your-organization-namespace>/<repository>`. Your organization's DHI subscription still
+determines access to paid image variants.
+
+See [Authenticate with OIDC in GitHub Actions](#authenticate-with-oidc-in-github-actions)
+for an example that reads an image manifest and its private attestations.
+
 Unlike typical container images, DHIs also include signed
 [attestations](../explore/security-concepts/attestations.md) such as SBOMs and provenance
 metadata. You can incorporate these into your pipeline to support supply chain
@@ -101,6 +113,133 @@ using tools like Docker Scout.
 
 To learn how to attach attestations during the build process, see [Docker Build
 Attestations](/manuals/build/metadata/attestations.md).
+
+### Authenticate with OIDC in GitHub Actions
+
+Use an [OIDC connection](/manuals/security/authentication/oidc-connections/create-manage.md)
+to read DHI images and attestations with short-lived Docker access tokens.
+Use your Docker [organization namespace](/manuals/accounts/organization/setup/_index.md#names-versus-namespaces)
+as the username and the Docker-issued access token as the password.
+The GitHub identity token is exchanged for this access
+token. Don't use the GitHub identity token as a registry password.
+
+Configure the connection's [rulesets and subject claims](/manuals/security/authentication/oidc-connections/rulesets-claims.md)
+to match your workflow. Repository access depends on the registry you use:
+
+- For free images and their attestations served through `dhi.io`, authenticate
+  with your organization namespace and Docker-issued access token.
+- For a mirrored or customized image on Docker Hub, grant pull access to
+  `<your-organization-namespace>/<repository>`.
+- Direct reads from `registry.scout.docker.com` require access to the referenced
+  repository and use your Docker organization namespace in Scout registry paths.
+
+For permission boundaries, see
+[DHI and Scout compatibility exceptions](/manuals/security/authentication/oidc-connections/rulesets-claims.md#dhi-and-scout-compatibility-exceptions).
+
+Repository grants can cover an exact repository, all repositories in a namespace
+(`namespace/*`), or public Docker Hub repositories (`*/*/public`, with pull access
+only). Public access applies across namespaces. It requires the repository to be
+public when each read is authorized. It doesn't grant access to private
+repositories or remove DHI subscription, FIPS, or Extended Lifecycle Support
+requirements.
+
+Grants are additive. Push access includes pull access. An exact pull grant cannot
+restrict a matching namespace-wide push grant. To restrict a repository to
+pull-only access, remove every matching push grant. The `dhi.io` endpoint accepts
+read operations with OIDC credentials. Push grants also authorize supported
+uploads to `registry.scout.docker.com`, but don't authorize deletion.
+
+For example ruleset configurations and grant combinations, see
+[Ruleset examples](/manuals/security/authentication/oidc-connections/rulesets-claims.md#ruleset-examples).
+
+The repository grant also controls direct reads of the image's private
+attestations from `registry.scout.docker.com`. Your organization's DHI
+subscription also determines access to paid image variants.
+Managing customization definitions requires the destination-repository permissions
+described in [Customize a DHI](./customize.md).
+
+The following workflow uses `regctl` to read a mirrored image manifest and list
+its attestations. Set these GitHub Actions repository variables:
+
+- `DOCKER_ORG`: Your Docker organization namespace
+- `DOCKER_OIDC_CONNECTION_ID`: Your OIDC connection ID
+- `DHI_REPOSITORY`: The mirrored repository name, such as `dhi-node`
+- `DHI_TAG`: The image tag, such as `22`
+
+Grant the connection pull access to `DOCKER_ORG/DHI_REPOSITORY`, and ensure its
+subject claims match this workflow's `workflow_dispatch` run on your selected
+branch. The exchange requests a token with a five-minute lifetime. Run the
+registry operations before the token expires. Longer jobs must obtain a fresh
+token before further registry operations.
+
+```yaml
+name: Read DHI attestations
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_ORG: ${{ vars.DOCKER_ORG }}
+      DOCKER_OIDC_CONNECTION_ID: ${{ vars.DOCKER_OIDC_CONNECTION_ID }}
+      DHI_REPOSITORY: ${{ vars.DHI_REPOSITORY }}
+      DHI_TAG: ${{ vars.DHI_TAG }}
+    steps:
+      - name: Install regctl
+        uses: regclient/actions/regctl-installer@v0.1.0
+        with:
+          release: v0.8.2
+      - name: Exchange the GitHub identity token and sign in
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const identityToken = await core.getIDToken('https://identity.docker.com');
+            const response = await fetch('https://identity.docker.com/oauth/token', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              body: new URLSearchParams({
+                grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
+                subject_token_type: 'urn:ietf:params:oauth:token-type:id_token',
+                subject_token: identityToken,
+                connection_id: process.env.DOCKER_OIDC_CONNECTION_ID,
+                expires_in: '300'
+              })
+            });
+            if (!response.ok) {
+              throw new Error(`Docker token exchange failed: HTTP ${response.status}`);
+            }
+            const {access_token: token} = await response.json();
+            if (typeof token !== 'string' || !token) {
+              throw new Error('Docker token exchange returned no access token');
+            }
+            core.setSecret(token);
+            for (const registry of ['docker.io', 'registry.scout.docker.com']) {
+              await exec.getExecOutput('regctl', [
+                'registry', 'login', registry,
+                '--user', process.env.DOCKER_ORG, '--pass-stdin'
+              ], {input: token, silent: true});
+            }
+      - name: Read the manifest and list attestations
+        run: |
+          regctl manifest get "docker.io/${DOCKER_ORG}/${DHI_REPOSITORY}:${DHI_TAG}"
+          regctl artifact list "docker.io/${DOCKER_ORG}/${DHI_REPOSITORY}:${DHI_TAG}" \
+            --external "registry.scout.docker.com/${DOCKER_ORG}/${DHI_REPOSITORY}" \
+            --platform linux/amd64
+      - name: Sign out
+        if: always()
+        run: |
+          regctl registry logout docker.io
+          regctl registry logout registry.scout.docker.com
+```
+
+For a free image served through `dhi.io`, sign in to `dhi.io` and use
+`dhi.io/<image>:<tag>` for both commands. Omit `--external` so that image and
+attestation reads both use `dhi.io`. Sign out of `dhi.io` when finished.
 
 ### Discover attestations with ORAS
 
@@ -124,7 +263,7 @@ To discover attestations with ORAS:
    your organization, generate an OAT scoped to read from your mirrored repository
    instead of **Read public repositories**.
 
-2. Sign in to `dhi.io` using your organization name as the username and the OAT
+2. Sign in to `dhi.io` using your organization namespace as the username and the OAT
    as the password.
 
    > [!WARNING]
@@ -136,13 +275,13 @@ To discover attestations with ORAS:
    > at runtime, or secret management tools.
 
     ```console
-    $ oras login dhi.io -u <YOUR_ORGANIZATION_NAME>
+    $ oras login dhi.io -u <YOUR_ORGANIZATION_NAMESPACE>
     ```
 
-   Or non-interactively in a CI/CD pipeline, set your organization name and token:
+   Or non-interactively in a CI/CD pipeline, set your organization namespace and token:
 
    ```console
-   $ export DOCKER_ORG="YOUR_ORGANIZATION_NAME"
+   $ export DOCKER_ORG="YOUR_ORGANIZATION_NAMESPACE"
    $ export OAT="YOUR_ORGANIZATION_ACCESS_TOKEN"
    $ echo $OAT | oras login dhi.io -u "$DOCKER_ORG" --password-stdin
    ```
