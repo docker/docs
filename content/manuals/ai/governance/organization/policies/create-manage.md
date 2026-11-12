@@ -129,7 +129,7 @@ To block members without a license:
    You can select this option only when **Enable AI governance** is selected,
    and it has no effect while AI governance is off. For more details, see
    [Turn on AI governance](../get-started.md#step-4-turn-on-ai-governance).
-1. Select **Block users** to confirm.
+1. Select **Block members** to confirm.
 1. Select **Save**.
 
 Blocked members can't use Docker Sandboxes until they hold an AI Governance
