@@ -13,7 +13,7 @@ When you have a DHI Select or DHI Enterprise subscription, you can customize Doc
 Hardened Images (DHI) and charts to suit your specific needs using the Docker
 Hub web interface. For images, this lets you select a base image, add packages,
 add OCI artifacts (such as custom certificates or additional tools), and
-configure settings. For charts, this lets you customize the image references.
+configure settings. For charts, this lets you customize the image and chart references.
 
 Your customizations stay secure automatically. When the base Docker Hardened
 Image or chart receives a security patch, your OCI artifacts are updated, or a
@@ -48,17 +48,13 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
    customization process. You can continue with the following steps for more
    details.
 
-1. Select one or more images or Helm charts and versions you want to customize.
+1. Select one or more images and versions you want to customize.
 
    When selecting multiple images and versions, all selections must share the
    same distribution and distribution version. For example, you can select
    `dhi-node:22_alpine3.23` and `dhi-python:3.13_alpine3.23` together (both
    Alpine 3.23), but you cannot mix `dhi-node:22_debian` with Alpine images, or
    mix different Alpine versions like `alpine3.23` and `alpine3.22`.
-
-   Alternatively, you can select multiple Helm chart versions to apply the same
-   customization to all of them. You cannot mix images and Helm charts in the
-   same customization.
 
 1. Select **Next**.
 1. Optional. Add packages.
@@ -628,14 +624,18 @@ Follow these best practices when creating OCI artifacts for DHI customizations:
 ## Customize a DHI Helm chart
 
 You can customize DHI Helm charts to meet your organization's specific needs.
-Via the Docker Hub web interface, you can modify the image references to
-reference mirrored images or customized images you've created. This lets you
-create a custom, securely-built chart with references to images stored in Docker
-Hub or other private registries. DHI securely packages customized Helm charts
-that reference your repositories, wherever they are stored, by default.
+Using the Docker Hub web interface or the DHI CLI, you can modify the image and
+chart references to point to the default images and charts on `dhi.io`, mirrored
+images, or customized images and charts you've created. This lets you create a
+custom, securely-built chart with references to images and charts stored in
+Docker Hub. DHI securely packages customized Helm charts that reference your
+repositories by default.
 
-To customize image references, an organization owner must [mirror](./mirror.md)
-the DHI chart repository to your organization on Docker Hub.
+To customize references, an organization owner must [mirror](./mirror.md) the
+DHI chart repository to your organization on Docker Hub. References that point
+to `dhi.io` don't need a mirror. To point a reference to a mirrored image, a
+customized image, or a customized chart, your organization also needs a mirror
+of that repository.
 
 You can create one chart customization per Helm chart repository. This is
 different from image customizations, where you can create multiple
@@ -647,8 +647,8 @@ repository again and add a new customization to the new mirror.
 >
 > You can customize Docker Hardened Image charts like any other Helm chart using
 > standard Helm tools and practices, such as a `values.yaml` file, outside of
-> Docker Hub. The following instructions describe how to customize image
-> references for the chart using the Docker Hub web interface.
+> Docker Hub. The following instructions describe how to customize the
+> references for the chart using Docker Hub or the DHI CLI.
 
 To customize a Docker Hardened Image Helm chart after it has been mirrored:
 
@@ -662,33 +662,92 @@ To customize a Docker Hardened Image Helm chart after it has been mirrored:
 1. Select **Create customization**.
 
    At this point, the on-screen instructions will guide you through the
-   customization process.
+   customization process. You can continue with the following steps for more
+   details.
+
+1. Select the Helm chart version you want to customize, then select **Next**.
+
+   You can customize one Helm chart version at a time.
+
+1. In the **Helm chart references** step, set the **Source** for each
+   dependency of the chart:
+
+   - **DHI registry (dhi.io)**: The chart pulls the default version of the
+     dependency from `dhi.io`.
+   - **Mirrored / customized**: The chart pulls the dependency from a
+     repository in your organization. Select the **Repository**, then select a
+     **Version** from **Customized versions** or **Mirrored versions**. This
+     option is available when your organization has a mirror of the
+     dependency's repository. Subcharts can only use customized versions.
+
+   If you select a version with a different distribution than the dependency's
+   default, Docker Hub shows a warning because the mismatch might cause issues
+   when you use the chart.
+
+1. Enter a customization name.
+
+   Docker Hub uses the name as a suffix for the customized tags. For example,
+   the name `Testing` adds the suffix `-testing`.
+
+1. Select **Next**, review the customization, and create it.
 
 ### Helm chart customization YAML file
 
 When using the CLI, Helm chart customizations use the same `prepare` / `create`
 workflow as image customizations, but the configuration section uses
-`reference_mappings` instead of image fields.
+`variable_mappings` instead of image fields.
 
-Use `reference_mappings` to substitute image references within the chart, for
-example to point a chart's image references at your mirrored DHIs.
+Run `prepare` with the chart repository and tag definition to generate a
+scaffold. The scaffold lists every variable of the chart pointing at `dhi.io`,
+with the other options commented out.
+
+```console
+$ docker dhi customization prepare redis-chart redis/helm/23 \
+    --destination my-org/dhi-redis-chart \
+    --name "my redis" \
+    --org my-org \
+    > customization.yaml
+```
+
+Use `variable_mappings` to set where each reference in the chart points.
+The following example for the Redis chart keeps two references on `dhi.io`,
+points one at a customized image, and points one at a mirrored image:
 
 ```yaml
-name: use mirrored images
+name: my redis
 
 targets:
-  - destination: my-org/dhi-haproxy-chart
-    tag_definition_id: haproxy/helm/1
+  - destination: my-org/dhi-redis-chart
+    tag_definition_id: redis/helm/23
 
-reference_mappings:
-  - from: dhi/haproxy
-    to: my-org/dhi-haproxy
+variable_mappings:
+  # Keep the chart's default image from dhi.io.
+  - variable_name: BASH_REFERENCE
+  - variable_name: KUBECTL_REFERENCE
+
+  # Point at a customized image.
+  - variable_name: REDIS_EXPORTER_REFERENCE
+    repository: my-org/dhi-redis-exporter
+    customization_id: "<redis-exporter-customization-id>"
+
+  # Point at a mirrored image.
+  - variable_name: REDIS_REFERENCE
+    repository: my-org/dhi-redis
+    tag_definition_id: redis/debian-13/8.10-compat
 ```
 
 | Field | Description |
 |:---|:---|
-| `reference_mappings[].from` | The image reference in the chart to replace. |
-| `reference_mappings[].to` | The replacement image reference, typically a mirrored DHI in your organization. |
+| `variable_mappings[].variable_name` | The chart variable to set. List every variable of the chart once, and don't change the names. A variable with only a name points at `dhi.io`. |
+| `variable_mappings[].repository` | The repository in your organization to pull from. The namespace defaults to your organization if you leave it out. Required with `tag_definition_id` or `customization_id`. |
+| `variable_mappings[].tag_definition_id` | The tag definition of the mirrored image to use. Set either this or `customization_id`, not both. Subcharts can't use a tag definition. |
+| `variable_mappings[].customization_id` | The ID of the customization to use. Set either this or `tag_definition_id`, not both. |
+
+Helm chart customizations support a single target.
+
+Customizations created with `reference_mappings` can still be edited using
+`reference_mappings`, but you can't convert them to `variable_mappings`. To use
+`variable_mappings`, create a customization.
 
 ## Monitor customization builds
 

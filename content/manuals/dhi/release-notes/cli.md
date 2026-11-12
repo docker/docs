@@ -15,6 +15,75 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.0.13
+
+{{< release-date date="2026-11-05" >}}
+
+[GitHub release](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.13)
+
+Maintenance release with dependency updates.
+
+## 0.0.12
+
+{{< release-date date="2026-11-05" >}}
+
+[GitHub release](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.12)
+
+Maintenance release with dependency updates.
+
+## 0.0.11
+
+{{< release-date date="2026-11-04" >}}
+
+[GitHub release](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.11)
+
+This release adds platform validation for image customizations in `dhictl customization create`.
+
+### What's New
+
+- Adds platforms validation to `dhictl customization create`, requiring platforms to be specified for image customizations and checking that every target's tag definition supports them — missing or unsupported platforms now fail with an error
+
+## 0.0.10
+
+{{< release-date date="2026-10-29" >}}
+
+[GitHub release](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.10)
+
+This release adds support for Helm chart customization variable mappings in dhictl.
+
+### What's New
+
+- Adds `variable_mappings` support for Helm chart customizations, allowing each chart variable to point at a DHI image, a mirrored image tag definition, or a customization
+
+## 0.0.9
+
+{{< release-date date="2026-10-21" >}}
+
+[GitHub release](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.9)
+
+This release adds working directory support for image customizations, improves customization inheritance behavior, and enhances the helm chart `get` command output.
+
+### What's New
+
+- Adds `working-directory` field support for image customizations (single customizations only; bulk customizations display a "cannot be customized" comment and `create`/`edit` reject it with an error)
+- Displays tag definition ID in the output of the `catalog get` command for helm charts
+
+### Bug Fixes
+
+- Fixes `customization prepare` to write base image values as commented-out fields instead of live settings, allowing proper inheritance from tag definitions rather than freezing values at scaffold time
+
+## 0.0.8
+
+{{< release-date date="2026-10-14" >}}
+
+[GitHub release](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.8)
+
+This release adds symlink support to customization files in dhictl.
+
+### What's New
+
+- Adds a `symlinks` section to customization YAML files, enabling `create`, `edit`, and `get` commands to manage symlinks with `path`, `source`, and optional `uid`/`gid` fields
+
 ## 0.0.7
 
 {{< release-date date="2026-07-21" >}}
