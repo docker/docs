@@ -277,6 +277,28 @@ different agent.
 Remove the fixed path with `sbx settings unset ssh.agentSocketPath` and restart
 the daemon to update existing forwarders.
 
+### Clone-mode Git remote
+
+#### clone.legacyTcpRemote {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Set this to `true` only for Git clients that ignore the remote's `uploadpack`
+setting and cannot use the default daemon socket transport:
+
+```console
+$ sbx settings set clone.legacyTcpRemote true
+```
+
+Changes take effect the next time the sandbox starts. This setting has no
+environment variable override and is excluded from `sbx settings ls`. Use
+`sbx settings get clone.legacyTcpRemote` to inspect its value.
+
+The TCP compatibility mode exposes the repository and its history through an
+unauthenticated localhost Git port that other local accounts on the host can
+access. Leave this at `false` to use the daemon socket. See
+[Sandbox remote behavior](../workflows/git.md#sandbox-remote-behavior).
+
 ### Images and storage
 
 #### platform.images.registryMirror {.wrap-anywhere}
