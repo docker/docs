@@ -35,6 +35,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Docker Offload `v0.7.47`
 - Docker Hardened Images (`dhictl`) `v0.0.12`
 - Docker Agent `v1.156.2`
+- [Docker Compose v5.7.1](https://github.com/docker/compose/releases/tag/v5.7.1)
 
 ### Bug fixes and enhancements
 
