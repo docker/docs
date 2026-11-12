@@ -84,6 +84,10 @@ path restrictions, the CLI warns and asks for confirmation because those
 restrictions won't apply in the cloud. `--force` skips the prompt but retains
 the warning.
 
+If you decline a move confirmation, the move is canceled and the command returns
+a nonzero exit status. In a shell command chain using `&&`, commands after
+`sbx move` won't run when you decline.
+
 Published TCP sandbox ports are published on the cloud destination with cloud
 URLs. Ports that the cloud refuses are skipped with a warning. Host port
 numbers and non-TCP mappings don't transfer.
