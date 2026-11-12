@@ -606,7 +606,6 @@ $ sbx daemon restart
 
 Changes apply to sandboxes created after the change. For existing sandboxes,
 restart the daemon to rebuild their network proxies with the updated value.
-The experimental Runtime backend doesn't support this setting.
 
 A network outage longer than the timeout can close long-lived connections,
 including streams and uploads. On Linux, the timeout also closes a connection

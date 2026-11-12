@@ -291,11 +291,6 @@ Docker Sandboxes v0.50.0 adds configurable kit host mounts, preserves persistent
 - `sbx exec` returns exit status 125 when it cannot run the command, such as when the sandbox doesn't exist.
 - On macOS and Windows, `sbx diagnose` and daemon logs warn when `SSL_CERT_FILE` or `SSL_CERT_DIR` replaces the system trust store and can cause HTTPS certificate verification failures.
 
-#### Experimental Runtime backend
-
-- Workloads have network access.
-- Startup stops waiting and cleans up when a workload exits or fails before becoming ready.
-
 <!-- END GENERATED RELEASES -->
 
 ## Earlier releases
