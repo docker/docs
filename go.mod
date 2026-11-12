@@ -15,6 +15,7 @@ require (
 	github.com/docker/model-runner v1.1.36
 	github.com/moby/buildkit v0.35.1
 	github.com/moby/moby/api v1.57.0
+	github.com/moby/moby/v2 v2.0.0-beta.31
 )
 
 tool (
@@ -26,6 +27,7 @@ tool (
 	github.com/docker/scout-cli
 	github.com/moby/buildkit
 	github.com/moby/moby/api
+	github.com/moby/moby/v2
 )
 
 // Use the upstream glossary-link fix until a tagged release includes it.
