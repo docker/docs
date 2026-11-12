@@ -710,8 +710,8 @@ $ docker dhi customization prepare redis-chart redis/helm/23 \
 ```
 
 Use `variable_mappings` to set where each image reference in the chart points.
-For example, to point the Redis reference at a mirrored DHI in your
-organization and leave the others pointing at `dhi.io`:
+The following example for the Redis chart keeps two references on `dhi.io`,
+points one at a customized image, and points one at a mirrored image:
 
 ```yaml
 name: my redis
@@ -721,9 +721,16 @@ targets:
     tag_definition_id: redis/helm/23
 
 variable_mappings:
+  # Keep the chart's default image from dhi.io.
   - variable_name: BASH_REFERENCE
   - variable_name: KUBECTL_REFERENCE
+
+  # Point at a customized image.
   - variable_name: REDIS_EXPORTER_REFERENCE
+    repository: my-org/dhi-redis-exporter
+    customization_id: "<redis-exporter-customization-id>"
+
+  # Point at a mirrored image.
   - variable_name: REDIS_REFERENCE
     repository: my-org/dhi-redis
     tag_definition_id: redis/debian-13/8.10-compat
