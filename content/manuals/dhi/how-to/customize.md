@@ -13,7 +13,7 @@ When you have a DHI Select or DHI Enterprise subscription, you can customize Doc
 Hardened Images (DHI) and charts to suit your specific needs using the Docker
 Hub web interface. For images, this lets you select a base image, add packages,
 add OCI artifacts (such as custom certificates or additional tools), and
-configure settings. For charts, this lets you customize the image references.
+configure settings. For charts, this lets you customize the image and chart references.
 
 Your customizations stay secure automatically. When the base Docker Hardened
 Image or chart receives a security patch, your OCI artifacts are updated, or a
@@ -624,18 +624,18 @@ Follow these best practices when creating OCI artifacts for DHI customizations:
 ## Customize a DHI Helm chart
 
 You can customize DHI Helm charts to meet your organization's specific needs.
-Using the Docker Hub web interface or the DHI CLI, you can change what each
-image reference in the chart points to. A reference can point to the default
-image on `dhi.io`, a mirrored image, or a customized image you've created. This
-lets you create a custom, securely-built chart with references to images stored
-in Docker Hub or other private registries. DHI securely packages customized Helm
-charts that reference your repositories, wherever they are stored, by default.
+Using the Docker Hub web interface or the DHI CLI, you can modify the image and
+chart references to point to the default images and charts on `dhi.io`, mirrored
+images, or customized images and charts you've created. This lets you create a
+custom, securely-built chart with references to images and charts stored in
+Docker Hub. DHI securely packages customized Helm charts that reference your
+repositories by default.
 
-To customize image references, an organization owner must [mirror](./mirror.md)
-the DHI chart repository to your organization on Docker Hub. You don't need to
-mirror the images the chart uses. References that point at `dhi.io` use the free
-images from `dhi.io`. To point a reference at a mirrored image or a customized
-image instead, your organization needs a mirror of that image's repository.
+To customize references, an organization owner must [mirror](./mirror.md) the
+DHI chart repository to your organization on Docker Hub. References that point
+to `dhi.io` don't need a mirror. To point a reference to a mirrored image, a
+customized image, or a customized chart, your organization also needs a mirror
+of that repository.
 
 You can create one chart customization per Helm chart repository. This is
 different from image customizations, where you can create multiple
@@ -647,7 +647,7 @@ repository again and add a new customization to the new mirror.
 >
 > You can customize Docker Hardened Image charts like any other Helm chart using
 > standard Helm tools and practices, such as a `values.yaml` file, outside of
-> Docker Hub. The following instructions describe how to customize image
+> Docker Hub. The following instructions describe how to customize the
 > references for the chart using Docker Hub or the DHI CLI.
 
 To customize a Docker Hardened Image Helm chart after it has been mirrored:
@@ -687,7 +687,7 @@ To customize a Docker Hardened Image Helm chart after it has been mirrored:
 1. Enter a customization name.
 
    Docker Hub uses the name as a suffix for the customized tags. For example,
-   the name `Testing` adds the suffix `_testing`.
+   the name `Testing` adds the suffix `-testing`.
 
 1. Select **Next**, review the customization, and create it.
 
@@ -709,7 +709,7 @@ $ docker dhi customization prepare redis-chart redis/helm/23 \
     > customization.yaml
 ```
 
-Use `variable_mappings` to set where each image reference in the chart points.
+Use `variable_mappings` to set where each reference in the chart points.
 The following example for the Redis chart keeps two references on `dhi.io`,
 points one at a customized image, and points one at a mirrored image:
 
