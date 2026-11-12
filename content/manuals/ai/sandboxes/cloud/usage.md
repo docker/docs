@@ -183,7 +183,7 @@ public repository example.
 Expose a TCP service by specifying its sandbox port:
 
 ```console
-$ sbx --cloud ports cloud-project --publish 8080
+$ sbx --cloud port publish cloud-project 8080
 ```
 
 The command returns a public HTTPS URL assigned by the cloud control plane.
@@ -194,8 +194,8 @@ rejected.
 List or remove exposed ports:
 
 ```console
-$ sbx --cloud ports cloud-project
-$ sbx --cloud ports cloud-project --unpublish 8080
+$ sbx --cloud port ls cloud-project
+$ sbx --cloud port unpublish cloud-project 8080
 ```
 
 Treat an exposed URL as a public endpoint. Apply authentication in the service

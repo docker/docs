@@ -140,7 +140,7 @@ network rules aren't copied back to the local runtime.
 
 Published TCP ports are saved on the local sandbox and bound to loopback while
 it runs. Host port numbers can change after a restart. Run
-`sbx ports local-copy` to see the bindings.
+`sbx port ls local-copy` to see the bindings.
 
 The move doesn't create a host workspace. Use `sbx cp` to copy files from the
 local sandbox to your host. Attached cloud volumes and environment variables
