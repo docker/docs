@@ -72,10 +72,18 @@ For each setting, the first available value wins:
 
 1. The setting's environment variable, if it has one
 2. A user override written with `sbx settings set`
-3. The built-in default
+3. A default from your organization's
+   [settings policy](/manuals/ai/governance/organization/settings/_index.md), if it
+   sets one
+4. The built-in default
+
+If your organization locks a setting, only the values its policy allows can
+apply, whatever their source, and `sbx settings set` rejects any others.
 
 The `SOURCE` column in `sbx settings ls` identifies the selected source as
-`envvar`, `override`, or `default`. If an environment variable takes precedence,
+`envvar`, `override`, `remote`, or `default`. A setting your organization
+manages also shows `(managed)`, or `(locked)` if your organization locks it.
+If an environment variable takes precedence,
 `set` still updates the stored override and reports why the effective value
 hasn't changed. `unset` removes only the stored override, not the environment
 variable.

@@ -38,7 +38,7 @@ Organization policy is default deny. Once an organization policy is enforced
 for a developer, their sandboxes can reach only the network destinations your
 policies allow, mount only the host paths your policies allow, and use MCP
 servers only as your policies permit. For more details, see
-[Organization policies](policies/_index.md).
+[Organization access policies](policies/_index.md).
 
 Before you govern anyone, work out what their sandboxes need:
 
@@ -77,6 +77,12 @@ policies to the pilot team.
 
 For the steps, see
 [Create and manage organization policies](policies/create-manage.md).
+
+You can also create settings policies under **Sandboxes Settings**, for
+example to limit which sources developers can install kits from or to turn off
+experimental features. They're optional, because developers keep their own
+settings for anything a settings policy doesn't manage. For more details, see
+[Sandboxes settings management](settings/_index.md).
 
 ## Step 3: Configure audit delivery
 
@@ -156,6 +162,9 @@ sandbox and use `sbx policy log` to see which requests it made and which
 rules matched. For more details, see
 [Inspect policy status and rules](../local/inspect.md) and
 [Test and monitor network policy](../local/test-monitor.md).
+
+If you created a settings policy, run `sbx settings ls` and confirm that the
+settings you locked show `remote (locked)` in the `SOURCE` column.
 
 ## Step 9: Roll out to more teams
 
