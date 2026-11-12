@@ -46,9 +46,10 @@ The command prints the cloud sandbox ID. Attach by ID or name:
 $ sbx --cloud attach cloud-project
 ```
 
-Cloud sandbox names must have at least two characters, start with a letter or
-number, and contain only letters, numbers, and hyphens. The name `default` is
-reserved. Periods accepted in local sandbox names aren't accepted in the cloud.
+Cloud sandbox names must be 2–63 characters long, contain only ASCII letters,
+numbers, and hyphens, and start and end with a letter or number. The name
+`default` is reserved. Periods accepted in local sandbox names aren't accepted
+in the cloud.
 
 Cloud creation doesn't accept workspace paths. For example,
 `sbx --cloud run claude .` returns an error because `.` refers to the local
@@ -157,6 +158,18 @@ and a cloud sandbox. Use absolute sandbox paths:
 $ sbx --cloud cp ./src cloud-project:/home/agent/workspace/src
 $ sbx --cloud cp cloud-project:/home/agent/workspace/result.json ./result.json
 ```
+
+Cloud copies don't preserve permissions or timestamps. Set executable
+permissions after downloading a program.
+
+Cloud copies don't preserve empty directories or symbolic links themselves.
+Symbolic links are handled differently depending on the transfer:
+
+- Uploading a symbolic link as the source copies its target automatically.
+- Uploading a directory skips symbolic links inside it unless you pass
+  `-L` (`--follow-link`) to copy their targets.
+- Downloading a symbolic link to a file requires `-L` to copy its target.
+- Downloading a directory skips symbolic links, even with `-L`.
 
 Copying creates a point-in-time transfer. It doesn't mount or synchronize the
 local path. For source control workflows, you can also clone a remote
@@ -350,7 +363,7 @@ Configure [cloud credentials](credentials.md) before adapting a local kit.
 
 Use `--kit-arg` or `--kit-args-file` with `sbx --cloud create` to pass
 arguments to kits supplied with `--kit`.
-For example, configure a v2 mixin that declares a `version` argument:
+For example, configure a mixin that declares a `version` argument:
 
 ```console
 $ sbx --cloud create --name cloud-tools claude \
@@ -360,7 +373,7 @@ $ sbx --cloud create --name cloud-tools claude \
 
 Replace the kit reference and argument with those from your kit's
 documentation. The `company-cli` prefix targets the kit by its repository
-name. Built-in agents such as `claude` require v2 mixins.
+name.
 
 To load arguments from a file, pass `--kit-args-file <FILE>` with one
 `name=value` entry per line, such as `company-cli.version=1.2`. Values passed

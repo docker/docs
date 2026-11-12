@@ -19,6 +19,10 @@ description: |-
     methods or ANY; --path defaults to /**. Repeat --query name=value to require
     query parameters.
 
+    HTTP paths, query parameter names, and query values match without regard to
+    ASCII letter case. For example, /API/** matches /api/items, and Tag=PROD
+    matches tag=prod.
+
     With --cloud:
     Remove a cloud network rule by pattern.
 
@@ -63,6 +67,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # List rules to find the ID or resource to remove
       sbx policy ls --wide

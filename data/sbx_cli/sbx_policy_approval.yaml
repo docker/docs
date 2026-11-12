@@ -1,0 +1,35 @@
+name: sbx policy approval
+synopsis: Review and respond to pending approvals
+description: |-
+    Review and respond to pending approvals from the local daemon.
+
+    Use "sbx policy approval ls" to find an approval ID, then inspect it to see
+    the available options. Respond with an option ID shown by that approval.
+
+    A persistent grant applies to matching requests in the approval's sandbox.
+    Retry the blocked operation after granting access. Dismissing an approval
+    does not grant access; a later request can prompt again.
+usage: sbx policy approval COMMAND
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for approval
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+see_also:
+    - sbx policy - Manage sandbox policies
+    - sbx policy approval inspect - Inspect a pending approval
+    - sbx policy approval ls - List pending approvals
+    - sbx policy approval respond - Respond to a pending approval

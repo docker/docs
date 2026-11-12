@@ -1,5 +1,7 @@
 name: sbx mcp inspect
 synopsis: Show MCP server details
+description: |
+    Show a unique MCP registration. Shared names require selecting the owning sandbox.
 usage: sbx mcp inspect NAME [flags]
 options:
     - name: format
@@ -11,6 +13,8 @@ options:
     - name: json
       default_value: "false"
       usage: Output in JSON format
+    - name: sandbox
+      usage: Owning sandbox
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -20,8 +24,13 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       sbx mcp inspect notion
+      sbx mcp inspect notion --sandbox my-sbx
 
       # Machine-readable output for scripting
       sbx mcp inspect notion --json

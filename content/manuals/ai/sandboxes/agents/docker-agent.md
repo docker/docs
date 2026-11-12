@@ -59,14 +59,8 @@ Without extra args, the sandbox runs:
 docker-agent run --yolo
 ```
 
-Arguments after `--` are added after the default flags when the first one is
-itself a flag (begins with `-`). When the first argument is a bare word — such
-as the `run` subcommand or a config file — it replaces the defaults, so include
-`run --yolo` yourself:
-
-```console
-$ sbx run --name <sandbox-name> -- run --yolo agent.yml
-```
+To pass flags, prompts, or configuration files, see
+[Pass arguments to an agent](../usage.md#pass-arguments-to-an-agent).
 
 ## Base image
 

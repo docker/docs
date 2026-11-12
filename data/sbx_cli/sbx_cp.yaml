@@ -6,19 +6,37 @@ description: |-
     ID (sbx_*) or name from "sbx --cloud ls". Cloud transfers go through the Docker
     Sandboxes Cloud file API instead of the local sandboxd.
 
+    Cloud copies transfer files, not symbolic links or empty directories. A symbolic
+    link passed as SRC is always followed on upload. Links inside an uploaded
+    directory are skipped unless --follow-link is set. On download, --follow-link
+    follows SRC only when it names a symbolic link to a file. Downloads of directories
+    skip symbolic links even with --follow-link.
+
+    Cloud copies do not preserve permissions or timestamps. Set executable
+    permissions after downloading a program.
+
+    The sandbox path must be absolute, for example SANDBOX:/workspace/config.json.
+    It is not relative to the sandbox's working directory.
+
     When copying a directory, the directory itself is placed at the destination.
     If the destination path does not exist it is created; if it already exists
     as a directory, the source is placed inside it.
 
-    When a local path is inside a sandbox workspace, sbx cp refuses symbolic
-    links that lead out of the workspace, even with --follow-link, including
-    when the workspace is reached through a symbolic link or junction to it.
+    For local paths inside workspace directories or other host directories mounted
+    into the sandbox, sbx cp refuses symbolic links that escape those directories,
+    even with --follow-link, including when a directory is reached through a
+    symbolic link, junction or substituted drive.
+
+    For local sandboxes, files copied into the sandbox from Linux or macOS retain
+    their source numeric UID, GID, and permissions. Files copied from Windows are
+    owned by root and marked executable.
 usage: sbx cp SRC DST [flags]
 options:
     - name: follow-link
       shorthand: L
       default_value: "false"
-      usage: Follow symbolic links in the source path
+      usage: |
+        Follow symbolic links in the source path (cloud: does not follow links inside downloaded directories)
     - name: help
       shorthand: h
       default_value: "false"
@@ -32,6 +50,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # Copy a file from host to sandbox
       sbx cp ./config.json my-sandbox:/home/user/

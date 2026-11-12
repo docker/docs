@@ -27,6 +27,10 @@ params:
     description: Create and manage cloud sandboxes from your applications.
     icon: code-bracket
     link: /ai/sandboxes-api/
+  - title: Sandbox governance
+    description: Control what agents in sandboxes can reach, and audit what they did.
+    icon: lock-closed
+    link: /ai/governance/
   - title: MCP Catalog and Toolkit
     description: Augment your AI workflow with MCP servers.
     icon: /icons/toolkit.svg
@@ -89,7 +93,7 @@ params:
     description: Image analysis and policy evaluation.
     icon: /icons/Scout.svg
     link: /scout/
-  platform:
+  accounts-and-admin:
   - title: Accounts
     description: Manage Docker individual and organization accounts.
     icon: user-circle
@@ -141,4 +145,4 @@ Security guardrails and image analysis for your software supply chain.
 
 Manage Docker accounts, administration, subscriptions, billing, and security.
 
-{{< grid items=platform >}}
+{{< grid items=accounts-and-admin >}}

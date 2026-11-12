@@ -22,9 +22,9 @@ originating inside a cloud sandbox. For cloud sandbox egress controls, see
 
 An upstream proxy is the corporate or network proxy that Docker Sandboxes
 forwards outbound traffic through on its way to the internet. This is separate
-from the [network policy](../governance/access-controls/network.md), which decides
-_which_ destinations are allowed. The upstream proxy decides _how_ allowed
-traffic reaches them.
+from network policy, which decides _which_ destinations are allowed. The
+upstream proxy decides _how_ allowed traffic reaches them. For how network
+policy is set, see [Sandbox governance](../../governance/_index.md).
 
 Docker Sandboxes sends two kinds of outbound traffic, and you can proxy them
 independently:
@@ -139,6 +139,10 @@ the variable and restart the daemon for the stored setting to take effect.
 
 When a `system` or PAC proxy is in use, `sbx` still tracks OS-level proxy changes
 (such as switching networks, connecting a VPN, or updated PAC contents) live.
+
+A host network change can also leave established sandbox connections stalled.
+To tune or disable the timeout that closes these connections, see
+[`egress.stalledConnectionTimeoutSeconds`](settings.md#egressstalledconnectiontimeoutseconds).
 
 ## Cloud SSH
 

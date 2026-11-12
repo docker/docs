@@ -11,7 +11,7 @@ keywords: offload, cloud sandbox, context, idle timeout, keep alive, resume
 A cloud sandbox is an isolated environment on Docker-managed hardware, running
 its own Docker daemon. Docker Offload runs your builds and containers there
 instead of on your machine, using the Docker commands you already know. For why
-you'd run workloads this way, see [About Docker Offload](about.md).
+you'd run workloads this way, see [Core concepts](core-concepts.md).
 
 A cloud sandbox persists between sessions. Stopping it
 pauses it rather than discarding it, so its containers, images, and volumes are

@@ -139,7 +139,7 @@ This example shows how to add the `curl` system package to your mirrored Python 
 5. Search for `3-alpine3.23` and select any one of the images.
 6. In **Add packages**, select **curl**.
 7. Select **Next: Configure**.
-8. In **Customization name**, enter a name for your customization (for example, `curl`).
+8. In **Customization name**, enter `python with curl`.
 9. Select **Next: Review customization**.
 10. Select **Create customization** to start the build.
 

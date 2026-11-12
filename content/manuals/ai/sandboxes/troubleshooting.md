@@ -28,6 +28,41 @@ with suggested fixes. Use `--json` or `--format yaml` for machine-readable
 output, or `--format github-issue` to generate a Markdown snippet suitable for pasting
 into a GitHub issue.
 
+## Check sandbox disk usage
+
+If you're running low on disk space, check how much storage your local
+sandbox images, containers, and managed volumes use:
+
+```console
+$ sbx df
+```
+
+The summary shows the size and estimated reclaimable space for each resource
+type. To identify individual images, containers, or volumes taking up space,
+run:
+
+```console
+$ sbx df --verbose
+```
+
+Image totals count shared layers once and include image data retained by
+containers after you remove the image's tags. Host bind mounts, logs, and caches
+are excluded, so the report doesn't account for all disk space used on your host.
+A measurement shown as `unknown` couldn't be determined.
+
+Before cleaning up, [preview which stopped sandboxes would be removed](usage.md#start-stop-and-remove)
+with `sbx prune --dry-run`. The reclaimable estimate covers unused resources of
+each type, so it isn't the amount that `sbx prune` alone removes. Shared storage
+and resources still in use can reduce or delay the space recovered.
+
+## Image pulls fail on eCryptfs
+
+On Linux, image pulls can fail with an I/O error when the sandbox state
+directory is on eCryptfs.
+
+If [`sbx diagnose`](#run-diagnostics) reports `state directory is on eCryptfs`,
+use a filesystem other than eCryptfs for sandbox state.
+
 ## Sandbox is not responding
 
 If `sbx ls` shows `running (not responding)`, Docker Sandboxes has detected
@@ -92,6 +127,22 @@ $ sbx run --name <sandbox-name> <agent>
 See [Choose a workspace](usage.md#choose-a-workspace) for mountless, direct,
 and clone-mode behavior.
 
+## Sandbox reports a mount state error
+
+If a sandbox reports `saved mount metadata does not match the container`,
+remove and recreate the affected sandbox. Before removing it,
+[copy out any files you want to keep](usage.md#copy-files-between-host-and-sandbox)
+if the sandbox is still accessible. Removing a sandbox deletes its sandbox data.
+
+If the error says `a recorded mount source now resolves to a different path`,
+restore the original host source path, or remove and recreate the sandbox.
+This can happen if you replace the source directory or one of its parent
+directories with a symlink to a different location.
+
+Changing a host symlink to point elsewhere doesn't move an existing static
+mount. The sandbox retains the original source, and filesystem policy checks
+when you reuse the sandbox include that source.
+
 ## Kiro, Copilot, or Droid shorthand fails
 
 In Docker Sandboxes v0.42, `sbx run kiro`, `sbx run copilot`, and
@@ -108,32 +159,11 @@ $ sbx run docker.io/sbx/copilot-kit:latest
 $ sbx run docker.io/sbx/droid-kit:latest
 ```
 
-## Agent can't install packages or reach an API
+## Network access and policy
 
-Sandboxes use [network access rules](governance/access-controls/network.md) to
-control outbound traffic.
-If the agent fails to install packages or call an external API, the target
-domain is likely not in the allow list. Check which requests are being blocked:
-
-```console
-$ sbx policy log
-```
-
-Then allow the domains your workflow needs:
-
-```console
-$ sbx policy allow network "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
-```
-
-To allow all outbound traffic instead:
-
-```console
-$ sbx policy allow network "**"
-```
-
-If `sbx policy allow` doesn't unblock the request, your organization may
-manage sandbox policies centrally and take precedence over local rules. See
-[Organization policies](governance/access-controls/organization.md).
+For problems caused by network rules, approvals, or organization governance,
+such as blocked requests, inactive allow rules, or missing audit records, see
+[Troubleshoot governance](../governance/troubleshooting.md).
 
 ## Kit fails to install: source not in allowlist
 
@@ -191,7 +221,7 @@ can't be recovered. Use an address-based rule in that case:
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-UDP requires [experimental UDP egress](governance/access-controls/local.md#allow-outbound-udp)
+UDP requires [experimental UDP egress](../governance/local/network-rules.md#allow-outbound-udp)
 and UDP allow rules. ICMP is blocked and can't be unblocked with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
@@ -229,7 +259,7 @@ If credentials are configured correctly but API calls still fail, check
 the `transparent` proxy don't get credential injection. This can happen when a
 client inside the sandbox (such as a process in a Docker container) isn't
 configured to use the forward proxy. See
-[Monitoring network activity](governance/monitor-and-enforce/monitoring.md)
+[View network activity](../governance/local/test-monitor.md#view-network-activity)
 for details.
 
 ## MCP server streams stall
@@ -256,10 +286,9 @@ SDKs trust certificates signed by the proxy. Certificate errors can stop a
 request before the credential proxy can inject credentials.
 
 For repeatable setup with a built-in agent, create a
-[v2 mixin kit](customize/kits-v2.md) that installs the CA when the
-sandbox is created. See
-[Install an internal CA certificate](customize/kits-v2.md#install-an-internal-ca-certificate)
-for an example kit.
+[mixin kit](customize/author/patterns.md#run-setup-after-combining-kits)
+that installs the CA when the sandbox is created. Save the example descriptor
+as `internal-ca/internal-ca.yaml` and place your certificate beside it.
 
 Use a PEM-encoded certificate with a `.crt` extension. If traffic can be signed
 by more than one internal proxy, install each proxy's root CA before running

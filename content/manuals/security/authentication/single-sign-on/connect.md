@@ -7,7 +7,8 @@ description: >-
   enforcement.
 keywords: configure sso, set up sso, docker sso setup,
   docker identity provider, sso enforcement, docker hub, security,
-  domain verification, SAML, OIDC
+  domain verification, SAML, OIDC, SSO attributes, SAML attribute mapping,
+  dockerOrg, dockerRole, dockerTeam, dockerSessionMinutes
 aliases:
   - /security/for-admins/single-sign-on/connect/
   - /docker-hub/domains/
@@ -23,9 +24,11 @@ aliases:
 {{< summary-bar feature_name="SSO" >}}
 
 To set up a single sign-on (SSO), you need to establish a connection between
-Docker and your identity provider (IdP). While this guide uses Okta and
-Microsoft Entra ID as a working example, the general process remains the same
-for other IdPs.
+Docker and your identity provider (IdP). Docker supports any SAML 2.0 identity
+provider, and Microsoft Entra ID (formerly Azure AD) for OpenID Connect (OIDC).
+This guide uses Okta for SAML 2.0 and Microsoft Entra ID for SAML 2.0 and OIDC.
+For another SAML 2.0 provider, follow the SAML steps with that provider's
+values.
 
 If you're unfamiliar with the SSO process, first review
 [SSO overview](/manuals/security/authentication/single-sign-on/_index.md) to
@@ -33,12 +36,11 @@ learn about how SSO works.
 
 ## Prerequisites
 
-Docker supports any SAML 2.0 or OIDC-compatible identity provider. Before you
-begin, make sure the following conditions are met:
+Before you begin, make sure the following conditions are met:
 
 - Notify your company about the upcoming SSO sign-in process.
 - Confirm that each Docker user has a valid IdP account using the same email
-  address as their Unique Primary Identifier (UPN).
+  address as their User Principal Name (UPN).
 - Ensure CI/CD pipelines use PATs or OATs instead of passwords.
 
 ## Set up an SSO connection
@@ -170,9 +172,8 @@ for the Okta org.
    - For **Name ID format**, choose `EmailAddress`
    - For **Application username**, choose `Email`
    - For **Update application username on**, choose `Create and update`
-   - Optional. Add
-     [SAML attributes](/manuals/security/provisioning/_index.md#sso-attributes),
-     if required by your org.
+   - Optional. Add [SAML attributes](#sso-attributes), if required by your
+     org.
 1. For **Feedback**, choose **This is an internal app that we have created**
    checkbox before finishing.
 
@@ -195,9 +196,8 @@ permissions.
    creating an SSO connection in Docker:
    - For the **Identifier** value, paste the Docker Entity ID.
    - For the **Reply URL** value, paste Docker ACS URL.
-1. Optional. Add
-   [SAML attributes](/manuals/security/provisioning/_index.md#sso-attributes),
-   if required by your org.
+1. Optional. Add [SAML attributes](#sso-attributes), if required by your
+   org.
 1. From the **SAML Signing Certificate** section, download your **Certificate
    (Base64)**.
 
@@ -249,7 +249,8 @@ Complete the integration by pasting your IdP values into Docker.
 > [!IMPORTANT]
 >
 > When prompted to copy a certificate, copy the entire certificate starting with
-> `----BEGIN CERTIFICATE----` and including the `----END CERTIFICATE----` lines.
+> `-----BEGIN CERTIFICATE-----` and including the
+> `-----END CERTIFICATE-----` lines.
 
 {{< tabs >}}
 {{< tab name="Okta SAML" >}}
@@ -261,6 +262,9 @@ Complete the integration by pasting your IdP values into Docker.
 1. Return to your opened Docker window for the **Create single sign-on
    connection** step. Paste in the **SAML Sign-in URL** and **x509 Certificate**
    values.
+1. Select the verified domains for this connection. For a company, select the
+   organizations to include, then select the default organization to
+   provision users to.
 1. Optional. Select a default team, if required by your org.
 1. Review and select **Create connection**.
 
@@ -273,7 +277,9 @@ Complete the integration by pasting your IdP values into Docker.
    - **Certificate (Base64)** contents
 1. Return to Docker Home, then paste the **Login URL** and **Certificate
    (Base64)** values.
-1. Choose your domain from the drop-down.
+1. Choose your domain from the drop-down. For a company, select the
+   organizations to include, then select the default organization to
+   provision users to.
 1. Optional. Select a default team, if required by your org.
 1. Review and select **Create connection**.
 
@@ -285,6 +291,9 @@ Complete the integration by pasting your IdP values into Docker.
    - **Client ID**: the **Application (client) ID** you copied
    - **Client Secret**: the secret **Value** you copied
    - **Azure AD Domain**
+1. Select the verified domains for this connection. For a company, select the
+   organizations to include, then select the default organization to
+   provision users to.
 1. Optional. Select a default team, if required by your org.
 1. Review and select **Create connection**.
 
@@ -309,6 +318,46 @@ After assigning yourself to an app:
 
 If you have multiple IdPs, choose the sign-in option **Continue with SSO**. If
 you're using the CLI, you must authenticate using a personal access token.
+
+## SSO and SAML attributes
+
+Each time a user signs in through SSO, Docker reads attributes from your
+IdP to set the user's identity and permissions. Docker SSO connections use
+SAML 2.0 or Azure AD (OIDC).
+
+### SSO attributes
+
+| Attribute | Required | Description |
+| :--- | :--- | :--- |
+| Email address | Yes | Unique identifier for the user |
+| Full name | Yes | User's complete name |
+| Groups | No | Group-based access control |
+| Docker Org | No | Organization the user belongs to |
+| Docker Team | No | Team within the organization |
+| Docker Role | No | Permissions in Docker |
+| Docker session minutes | No | Session length, in minutes, before users sign in with the IdP again. Must be a positive integer greater than 0 |
+
+> [!NOTE]
+>
+> Docker Desktop sessions last a maximum of 90 days, and expire sooner if
+> the session is inactive for 30 consecutive days. Docker Hub and Docker
+> Home sessions expire after 24 hours.
+
+### SAML attribute mapping
+
+If your organization uses SAML for SSO, Docker reads these attributes
+from the SAML assertion. Identity providers may use different names for
+the same attributes.
+
+| SSO attribute | SAML assertion attributes |
+| :--- | :--- |
+| Email address | `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"`<br>`"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn"`<br>`"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"`<br>`email` |
+| Full name | `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"`<br>`name`<br>`"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"`<br>`"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"` |
+| Groups (optional) | `"http://schemas.xmlsoap.org/claims/Group"`<br>`"http://schemas.microsoft.com/ws/2008/06/identity/claims/groups"`<br>`Groups`<br>`groups` |
+| Docker Org (optional) | `dockerOrg` |
+| Docker Team (optional) | `dockerTeam` |
+| Docker Role (optional) | `dockerRole` |
+| Docker session minutes (optional) | `dockerSessionMinutes`<br>Must be a positive integer greater than 0 |
 
 ## Configure multiple IdPs
 

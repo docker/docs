@@ -3,7 +3,7 @@ synopsis: Create (if needed) and attach to a sandbox environment
 experimental: true
 description: |-
     Read the environment file from PATH (default: current directory)
-    and drop into the sandbox shell. If the sandbox already exists it is started
+    and launch its agent. If the sandbox already exists it is started
     and re-attached without re-provisioning; otherwise it is created first
     (provisioning secrets and bindings) and then attached.
 
@@ -14,11 +14,25 @@ description: |-
     supplied by --env-arg, plus ${{ env.projectDir }} and ${{ env.fileDir }}.
     Nothing else is expanded, so a "$" is literal text.
 
+    Optional entrypoint and cmd arrays override the agent launch for this environment
+    only. Omitted or null fields inherit defaults; empty arrays clear
+    them. Later files replace these arrays rather than concatenate them. Arguments
+    after -- replace cmd when an override is configured; otherwise they are forwarded
+    to the agent's saved launcher. No shell expansion is performed on array elements.
+    Overrides bypass the saved launcher, apply on each env run, and leave env exec,
+    plain sbx run, the published kit, and the sandbox's PID 1 unchanged. A detached
+    run starts only the sandbox, not the configured command. Inheriting launch
+    defaults may require resolving the environment's workload kit again.
+
     A directory PATH selects sbxenv.yaml; a file PATH selects that file.
     With no PATH, ~/.sbxenv.yaml supplies shared defaults when present.
-    Explicit PATHs skip those defaults. Later files override earlier values;
-    lists such as ports and mcp.servers are concatenated.
-usage: sbx env run [PATH...] [flags]
+    Explicit PATHs skip those defaults. Later files override earlier values.
+    Ports with the same sandbox port and effective protocol, MCP servers with the
+    same name, and additional workspaces with the same container target use the
+    later entry, including repeated entries in one file.
+    Kit arguments merge by source. The entrypoint and cmd arrays replace earlier
+    values; other lists concatenate.
+usage: sbx env run [PATH...] [-- ARG...] [flags]
 options:
     - name: clone
       default_value: "false"
@@ -78,10 +92,17 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       sbx env run
 
       # Start without attaching
       sbx env run --detach ./project
+
+      # Replace cmd while keeping the configured entrypoint
+      sbx env run . -- --base HEAD
 see_also:
     - sbx env - (Experimental) Manage sandboxes declaratively from an sbxenv.yaml file

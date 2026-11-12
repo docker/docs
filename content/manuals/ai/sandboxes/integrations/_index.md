@@ -29,6 +29,15 @@ that supports remote development over SSH can connect to it.
 - The editor or app you want to connect, with its remote-over-SSH support
   installed.
 
+## Configure agent credentials
+
+Before setting up an integration that runs an AI agent, configure a model
+provider credential for that agent in Docker Sandboxes. Connecting an editor
+or desktop app over SSH doesn't supply the sandbox with the credential.
+Store an API key with [stored secrets](../configuration/credentials.md#stored-secrets)
+or complete the agent's supported OAuth sign-in flow. See the
+[agent pages](../agents/_index.md) for authentication instructions.
+
 ## Enable SSH access
 
 Run the SSH setup command once:
@@ -125,11 +134,13 @@ client. An interactive SSH shell starts in the sandbox workspace, matching
 home directory, `/home/agent`. Select the intended folder explicitly in the
 editor instead of relying on its initial location.
 
-For a sandbox with a primary workspace, each workspace path appears inside the
-sandbox at the same absolute path as on the host. For example, if you pass
-`/Users/bob/src/my-project`, select that path in the remote folder picker. For
-a mountless sandbox that uses a Docker-provided agent template, select
-`/home/agent/workspace`.
+In the remote folder picker, select the workspace's path inside the sandbox.
+A workspace mounted from `/Users/bob/src/my-project` uses that same path by
+default. A custom mount target such as `/workspace/data` is the path to open
+in the editor.
+
+Docker-provided agent templates use `/home/agent/workspace` as the workspace
+folder for mountless sandboxes.
 
 ## Connect a specific tool
 

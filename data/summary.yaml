@@ -1,9 +1,9 @@
 2FA:
   subscription: [Personal, Pro]
   for: Individuals
-AI Governance Audit Logs:
+AI Governance:
   subscription: [AI Governance]
-  requires: Docker Sandboxes [0.39.0](/manuals/ai/sandboxes/release-notes.md) or later
+  for: Administrators
 Activity logs:
   subscription: [Team, Business]
   for: Administrators
@@ -153,6 +153,8 @@ Compose sbom:
   requires: Docker Compose [2.39.0](https://github.com/docker/compose/releases/tag/v2.39.0) and later
 Compose SDK:
   requires: Docker Compose [5.0.0](https://github.com/docker/compose/releases/tag/v5.0.0) and later
+Compose use service name alias:
+  requires: Docker Compose [5.7.0](https://github.com/docker/compose/releases/tag/v5.7.0) and later
 Custom roles:
   subscription: [Business]
   for: Administrators

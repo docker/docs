@@ -3,7 +3,7 @@ title: Give sandboxed agents live web access with Firecrawl
 linkTitle: Web access with Firecrawl
 description: Add the Firecrawl kit to a Docker Sandbox so the agent can search the web, scrape pages to Markdown, and crawl sites through the sandbox proxy, with your API key kept on the host.
 summary: |
-  Compose the Firecrawl v3 mixin onto a sandbox workload. The agent gets the
+  Compose the Firecrawl mixin onto a sandbox workload. The agent gets the
   Firecrawl Python SDK and a network rule for the Firecrawl API, and the
   sandbox proxy adds your API key to requests, so the key never enters the
   sandbox.
@@ -24,14 +24,14 @@ without opening the rest of the web.
 In this guide, you'll learn how to:
 
 - Store your Firecrawl API key on the host as a sandbox secret
-- Add the Firecrawl mixin to a v3 workload
+- Add the Firecrawl mixin to a workload
 - Check that the SDK, the proxy-managed credential, and the network rule work
 - Call Firecrawl from inside the sandbox
 - Understand the limits the sandbox network policy places on the kit
 
 ## What the kit adds
 
-The Firecrawl kit is a v3 [mixin](/manuals/ai/sandboxes/customize/author/tool-mixins.md)
+The Firecrawl kit is a [mixin](/manuals/ai/sandboxes/customize/author/tool-mixins.md)
 published as `docker.io/firecrawl/sbx-kit-firecrawl`. When you add it to a
 workload, it contributes four things:
 
@@ -83,13 +83,13 @@ unattended runs, see
 ## Step 2: Run a workload with the Firecrawl mixin
 
 This example uses a shell workload without a coding agent so you can try the
-SDK directly. You can also add the Firecrawl mixin to another compatible v3
+SDK directly. You can also add the Firecrawl mixin to another compatible
 workload, including one that runs a coding agent.
 
 From your project directory, run:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name firecrawl-shell \
+$ sbx run shell --name firecrawl-shell \
     --kit docker.io/firecrawl/sbx-kit-firecrawl:1.0.0
 ```
 
@@ -98,13 +98,6 @@ install hook, and opens a shell in the sandbox.
 
 For more on combining kits, see
 [Use kits](/manuals/ai/sandboxes/customize/use-kits.md#add-mixins).
-
-> [!NOTE]
-> Built-in shortcuts such as `sbx run claude` use v2 kits, and v2 agents only
-> accept v2 mixins. Firecrawl also publishes a v2 form of the kit for those
-> agents. See the
-> [kit repository](https://github.com/firecrawl/firecrawl-docker-sandbox#2-launch-the-sandbox-with-the-kit)
-> for v2 usage.
 
 ## Step 3: Check the kit
 
@@ -170,10 +163,10 @@ API, including structured extraction with a schema, see the
 
 Without organization governance, your default network policy and kit-defined
 rules determine which domains the sandbox can access. Under organization
-governance, organization policy controls which domains can be allowed; local
-and kit-defined allow rules are inactive, while deny rules can still restrict
+governance, organization policy controls which domains can be allowed; local and
+kit-defined allow rules are inactive, while deny rules can still restrict
 access. See
-[Network policy precedence](/manuals/ai/sandboxes/governance/concepts.md#precedence).
+[How organization policy relates to local and kit rules](/manuals/ai/governance/organization/policies/_index.md#how-organization-policy-relates-to-local-and-kit-rules).
 
 The Firecrawl kit requests access to PyPI during installation and
 `api.firecrawl.dev` at runtime. Its credential declaration tells the proxy to

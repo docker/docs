@@ -25041,7 +25041,7 @@
       "experimental": false,
       "guides": [],
       "id": "ai-governance",
-      "manual": "/manuals/ai/sandboxes/governance/",
+      "manual": "/manuals/ai/governance/organization/policies/",
       "operations": [
         {
           "acceptMedia": "application/json",
@@ -28965,10 +28965,10 @@
       "exampleCount": 25,
       "experimental": false,
       "guides": [
-        "/manuals/ai/sandboxes/governance/audit/api.md"
+        "/manuals/ai/governance/organization/audit/api.md"
       ],
       "id": "ai-governance-audit-logs",
-      "manual": "/manuals/ai/sandboxes/governance/audit/",
+      "manual": "/manuals/ai/governance/organization/audit/",
       "operations": [
         {
           "acceptMedia": "application/json",
@@ -29586,7 +29586,7 @@
         }
       ],
       "owner": "docker/docs",
-      "product": "ai-governance",
+      "product": "ai-governance-audit-logs",
       "schemaCount": 26,
       "schemaURLs": {
         "#/components/schemas/ApplicationRateLimitError": "/reference/api/ai-governance-audit-logs/latest/schemas/ApplicationRateLimitError/",

@@ -71,8 +71,8 @@ The store backing `sbx secret set` depends on your operating system:
 - Linux: the Secret Service exposed by your desktop keyring, such as GNOME
   Keyring or KDE Wallet.
 
-The Ubuntu package depends on GNOME Keyring, so a standard desktop install
-needs no extra setup.
+The Ubuntu package recommends GNOME Keyring and installs it by default. You can
+omit GNOME Keyring when installing the package on hosts without a desktop keyring.
 
 On Linux hosts without a running Secret Service — headless servers and some WSL
 setups — `sbx` falls back to a file under your user config directory
@@ -143,7 +143,15 @@ $ sbx secret set openai \
 ```
 
 The corresponding `op` or `aws` CLI must be installed and authenticated on the
-host.
+host, with its installation directory listed as an absolute path in the host's
+`PATH`. Built-in reference providers ignore empty and relative `PATH` entries.
+
+Each reference resolution runs the provider CLI in a fresh temporary directory
+on the host, outside the project directory. Use absolute paths for any provider
+configuration files you specify. If you use a version manager such as asdf or
+mise, configure the provider version globally rather than relying on a
+project-only selection. Keep provider tools, their dependencies, and the host's
+temporary directory outside writable sandbox mounts.
 
 > [!NOTE]
 > To resolve a reference with a specific 1Password account or AWS profile, set
@@ -232,7 +240,7 @@ reads and the API domains the proxy injects credentials into:
 | `cursor`     | `CURSOR_API_KEY`                   | `api2.cursor.sh`, `api3.cursor.sh`, `repo42.cursor.sh`, `cursor.com`                                                          |
 | `droid`      | `FACTORY_API_KEY`                  | `api.factory.ai`, `app.factory.ai`, `relay.factory.ai`                                                                        |
 | `github`     | `GH_TOKEN`, `GITHUB_TOKEN`         | `api.github.com`, `github.com`, `raw.githubusercontent.com`, `gist.github.com`, `copilot.github.com`, `api.githubcopilot.com` |
-| `google`     | `GEMINI_API_KEY`, `GOOGLE_API_KEY` | `generativelanguage.googleapis.com`, `oauth2.googleapis.com`, `aiplatform.googleapis.com`, `vertexai.googleapis.com`          |
+| `google`     | `GOOGLE_API_KEY`                   | `generativelanguage.googleapis.com`, `oauth2.googleapis.com`, `aiplatform.googleapis.com`, `vertexai.googleapis.com`          |
 | `groq`       | `GROQ_API_KEY`                     | `api.groq.com`                                                                                                                |
 | `mistral`    | `MISTRAL_API_KEY`                  | `api.mistral.ai`                                                                                                              |
 | `nebius`     | `NEBIUS_API_KEY`                   | `api.studio.nebius.com`, `api.tokenfactory.nebius.com`                                                                        |
@@ -430,25 +438,51 @@ the kit handles the wiring; you only provide the value.
 Custom secrets are global by default. Pass `--sandbox` to scope one to a
 specific sandbox.
 
+To read the value from standard input, set `API_KEY` in your host environment
+and pipe it with `--value-stdin`:
+
 ```console
-$ sbx secret set-custom \
+$ printf '%s' "$API_KEY" | sbx secret set-custom \
     --host api.example.com \
     --env API_KEY \
-    --value <secret>
+    --value-stdin
 ```
 
+This keeps the value out of the `sbx` command arguments. Omit `--value-stdin`
+to enter the value at a prompt instead. `--value-stdin` can't be combined with
+`--value`, `--token`, `--ref`, or `--command`.
+
 > [!WARNING]
-> Passing the secret as `--value <secret>` records it in your shell history
-> and exposes it to other processes running as your user. Avoid pasting
-> real credentials inline — read the value from a variable that's already
-> in your environment, and clear shell history if a real secret was passed
-> on the command line.
+> Passing a literal secret with `--value` or `--token` records it in shell
+> history and exposes it in process arguments. Expanding an environment
+> variable with `--value "$API_KEY"` still exposes the value in process
+> arguments. Use the prompt or standard input instead.
 
 Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
 `sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
 configured hosts and the placeholder appears in an HTTP request header, the
 proxy replaces it with the real value. Replacement applies only to HTTP request
 headers, not request bodies. The agent never sees the real secret.
+
+### List custom secrets
+
+To find stored custom secrets by host, use `--host`:
+
+```console
+$ sbx secret ls --host api.example.com
+```
+
+To filter by environment variable name, use `--env-name`:
+
+```console
+$ sbx secret ls --env-name API_KEY
+```
+
+Add `--sandbox` to list only matching secrets stored for a specific sandbox:
+
+```console
+$ sbx secret ls --host api.example.com --sandbox my-sandbox
+```
 
 ### Target multiple hosts
 
@@ -465,9 +499,10 @@ $ sbx secret set-custom \
 ```
 
 A `--host` value can also use wildcards, with the same syntax as
-[network rules](../governance/concepts.md#network-rules): `*` matches a
-single label (`*.example.com` covers `api.example.com`) and `**` matches any
-number (`**.example.com` covers `api.example.com` and `v2.api.example.com`).
+[network rule hostname patterns](../../governance/reference/network-rules.md#hostname-patterns):
+`*` matches a single label (`*.example.com` covers `api.example.com`) and `**`
+matches any number (`**.example.com` covers `api.example.com` and
+`v2.api.example.com`).
 
 ### Resolve custom secrets dynamically
 

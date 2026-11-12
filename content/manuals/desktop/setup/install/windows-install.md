@@ -40,7 +40,7 @@ Docker Desktop supports two installation modes. Per-user installation is recomme
 | Registry keys | Current User (HKCU) | Local Machine (HKLM) |
 | Admin rights to install | Not required | Required |
 | Admin rights to update | Not required | Required |
-| Linux containers backend | WSL 2 or Docker VMM | WSL 2, Hyper-V, or Docker VMM |
+| Linux containers backend | WSL 2 or Docker VMM (Beta) | WSL 2, Hyper-V, or Docker VMM (Beta) |
 | Windows containers | Not supported | Supported |
 | Security | Smaller attack surface; no privileged system service installed | Requires privileged system service; broader access to host resources |
 
@@ -108,6 +108,21 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 > Windows Home or Education editions only allow you to run Linux containers.
 
 {{< /tab >}}
+{{< tab name="Docker VMM backend, x86_64 (Beta)" >}}
+
+- The same Windows versions as the WSL 2 backend.
+- The **Windows Hypervisor Platform** and **Virtual Machine Platform** Windows
+  features turned on. The all-users installer turns them on for you, and might
+  ask you to restart Windows. A per-user installation can't turn on Windows
+  Hypervisor Platform, so an administrator must turn it on first.
+- Hardware virtualization enabled in BIOS/UEFI. Inside a virtual machine, the
+  host must expose nested virtualization.
+- Docker VMM doesn't require the Hyper-V feature, and isn't supported on Arm. On
+  Arm, the installer uses WSL 2 instead.
+
+For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
+
+{{< /tab >}}
 {{< tab name="WSL 2 backend, Arm (Early Access)" >}}
 
 - WSL version 2.1.5 or later. To check your version, see [WSL: Verification and setup](#wsl-verification-and-setup)
@@ -152,7 +167,7 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](/m
 
 1. When prompted, select your backend on the **Configuration page**: **Use WSL 2 instead of Hyper-V** for WSL 2, or leave it unselected for Hyper-V. You can switch to Docker VMM after installation from **Settings** > **General**.
 
-    With version 4.97 and later, the **Configuration** page lists the backends as options. Per-user installation offers WSL 2 and Docker VMM (Beta). All-users installation offers WSL 2 and Hyper-V.
+    With version 4.97 and later, the **Configuration** page lists the backends as options. Per-user installation offers WSL 2 and Docker VMM (Beta). All-users installation offers WSL 2, Hyper-V, and Docker VMM (Beta).
 
     On systems that support only one backend, Docker Desktop automatically selects the available option.
 
@@ -289,15 +304,15 @@ If Microsoft Store access is blocked due to security policies:
 - `--quiet`: Suppresses information output when running the installer 
 - `--accept-license`: Accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) now, rather than requiring it to be accepted when the application is first run
 - `--installation-dir=<path>`: Changes the default installation location (`C:\Program Files\Docker\Docker`)
-- `--backend=<backend name>`: Selects the default backend to use for Docker Desktop: `wsl-2` (default), `hyper-v`, `windows`, or `docker-vmm`. With version 4.97 and later, `docker-vmm` can be combined with the `--user` flag. `hyper-v` and `windows` can't be combined with `--user`.
+- `--backend=<backend name>`: Selects the default backend to use for Docker Desktop: `wsl-2` (default), `hyper-v`, `windows`, or `docker-vmm` (Beta, x86_64 only). With version 4.97 and later, `docker-vmm` can be combined with the `--user` flag. `hyper-v` and `windows` can't be combined with `--user`.
 - `--always-run-service`: After installation completes, starts `com.docker.service` and sets the service startup type to Automatic. This circumvents the need for administrator privileges, which are otherwise necessary to start `com.docker.service`. `com.docker.service` is required by Windows containers and Hyper-V backend.
 
 #### Security and access control
 
-- `--allowed-org=<org name>`: Requires the user to sign in and be part of the specified Docker Hub organization when running the application
+- `--allowed-org=<org namespace>`: Requires the user to sign in and be a member of the specified Docker Hub [organization namespace](/manuals/accounts/organization/setup/_index.md#names-versus-namespaces) when running the application. Use the namespace, not the organization display name. For configuration details, see [Configure sign-in enforcement](/manuals/desktop/enterprise/enforce-sign-in/methods.md).
 - `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](/manuals/desktop/enterprise/hardened-desktop/settings-management/_index.md).
-  - It must be used together with the `--allowed-org=<org name>` flag. 
-  - For example:`--allowed-org=<org name> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"`
+  - It must be used together with the `--allowed-org=<org namespace>` flag.
+  - For example: `--allowed-org=<org namespace> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"`
 - `--no-windows-containers`: Disables the Windows containers integration. This can improve security.  Can't be combined with `--backend=windows`. For more information, see [Windows containers](/manuals/desktop/setup/install/windows-permission-requirements.md#windows-containers).
 
 #### Proxy configuration

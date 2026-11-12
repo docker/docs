@@ -9,6 +9,9 @@ description: |-
     Pass --kit-arg to preview how the kit resolves with a given set of
     arguments; the output shows the substituted content.
 
+    --resolved merges the kit's extends: parent into it, so the output is what
+    sbx applies rather than only what the kit declares.
+
     --offline skips the daemon-backed kit policy (kit.allowedSources,
     kit.allowLocalKits, kit.requireSignature) so the command needs neither
     sandboxd nor a signed-in session; it only accepts a local directory or
@@ -38,6 +41,9 @@ options:
       default_value: "false"
       usage: |
         Skip the daemon-backed kit policy check; local directory or ZIP references only
+    - name: resolved
+      default_value: "false"
+      usage: 'Merge the kit''s extends: parent into the output'
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -47,12 +53,19 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       sbx kit inspect ./my-kit
       sbx kit inspect ghcr.io/myorg/my-kit:1.0
 
       # Machine-readable output
       sbx kit inspect ghcr.io/myorg/my-kit:1.0 --format json
+
+      # Show the kit with its extends: parent merged in
+      sbx kit inspect ./my-kit --resolved --format yaml
 
       # Inspect without sandboxd running or a Docker sign-in
       sbx kit inspect ./my-kit --offline

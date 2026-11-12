@@ -7,7 +7,7 @@ description: |-
     reference. Sandbox kit references may be local directories, ZIP files, git
     repositories, or OCI references. Relative local references must be explicit
     paths such as ./my-kit or ../my-kit.zip. A kit.shortcuts.<agent> setting
-    (sbx settings set kit.shortcuts.claude sbx/claude:latest) makes that agent name
+    (sbx settings set kit.shortcuts.claude myorg/claude:latest) makes that agent name
     resolve to the configured kit reference instead for local sandboxes; cloud
     sandboxes ignore it.
 
@@ -16,7 +16,7 @@ description: |-
 
     Use "sbx run --name SANDBOX" to attach to the agent after creation.
 
-    Available agents: claude, codex, copilot, cursor, devin, docker-agent, droid, gemini, kiro, opencode, shell
+    Available agents: claude, codex, copilot, cursor, devin, docker-agent, droid, kiro, opencode, shell
 
     With --cloud:
     Create a cloud sandbox for an agent.
@@ -82,14 +82,14 @@ options:
     - name: memory
       shorthand: m
       usage: |
-        Memory limit in binary units (e.g., 512m, 8g). Minimum: 512 MiB. Default: 50% of host memory, clamped to 512 MiB–32 GiB. Maximum: max(75% of host memory, 512 MiB)
+        Memory limit in binary units (e.g., 512m, 8g). Minimum: 512 MiB. Default: 50% of host memory, clamped to 512 MiB–32 GiB. Maximum: host memory. Warns above 75% of host memory
     - name: mount
       default_value: '[]'
       usage: |
         Bind a host directory to a kit host-mount@1 path (can be repeated): HOST:SANDBOX_PATH. Can only be used when creating a new sandbox.
     - name: name
       usage: |
-        Name for the sandbox (defaults to <agent>-<workdir>; at least two characters, starting with a letter or number, containing only letters, numbers, hyphens and periods (periods are rejected with --cloud); 'default' is reserved)
+        Name for the sandbox (default: <agent>-<workdir>; 2–63 ASCII letters, numbers, hyphens or periods; each dot-separated part must start and end with a letter or number; periods are rejected with --cloud; 'default' is reserved)
     - name: no-progress
       default_value: "false"
       usage: Suppress progress output
@@ -113,7 +113,7 @@ options:
     - name: static-mcp
       default_value: '[]'
       usage: |
-        MCP server names that form the sandbox's fixed (static) MCP set. Accepts a comma-separated list (--static-mcp notion,atlassian), repeated flags (--static-mcp notion --static-mcp atlassian), or a mix; all forms accumulate into the same set. The set is chosen once at creation time. Local sandboxes take names registered with 'sbx mcp add'. Cloud sandboxes resolve names on the cloud MCP gateway.
+        MCP server names that form the sandbox's fixed (static) MCP set. Accepts a comma-separated list (--static-mcp notion,atlassian), repeated flags (--static-mcp notion --static-mcp atlassian), or a mix; all forms accumulate into the same set. Use none for a static set with no servers, local sandboxes only. The set is chosen once at creation time. Local sandboxes take names registered with 'sbx mcp add'. Cloud sandboxes resolve names on the cloud MCP gateway.
     - name: template
       shorthand: t
       usage: |
@@ -136,6 +136,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # Create a sandbox for Claude in the current directory
       sbx create claude .
@@ -146,14 +150,27 @@ example: |4-
       # Create with additional read-only workspaces
       sbx create claude . /path/to/docs:ro
 
+      # Mount an additional workspace at a chosen path inside the sandbox
+      sbx create claude . /path/to/data:/workspace/data
+
       # Create without a workspace bind mount
       sbx create claude
 
       # Create from a local sandbox kit
       sbx create ../path/to/my-agent/
 
-      # Add a mixin to a built-in agent
+      # Add a mixin from a local directory or ZIP file
       sbx create claude --kit ./my-mixin/
+      sbx create claude --kit ./my-mixin.zip
+
+      # Add a mixin from Docker Hub
+      sbx create claude --kit org/my-mixin:latest
+
+      # Add a mixin from an OCI reference
+      sbx create claude --kit ghcr.io/org/my-mixin:latest
+
+      # Add a mixin from a git repository (git+https:// or git+ssh://, optionally pinned to a ref and/or subdirectory)
+      sbx create claude --kit "git+https://github.com/org/repo.git#ref=v1.0&dir=mixins/foo"
 
       # Run the agent on an in-container clone of the host repo, wired back via a git-daemon
       sbx create --clone claude .
@@ -168,11 +185,3 @@ example: |4-
       sbx --cloud create -t TEMPLATE
 see_also:
     - sbx - Manage AI coding agent sandboxes.
-    - sbx create claude - Create a sandbox for claude
-    - sbx create codex - Create a sandbox for codex
-    - sbx create cursor - Create a sandbox for cursor
-    - sbx create devin - Create a sandbox for devin
-    - sbx create docker-agent - Create a sandbox for docker-agent
-    - sbx create gemini - Create a sandbox for gemini
-    - sbx create opencode - Create a sandbox for opencode
-    - sbx create shell - Create a sandbox for shell

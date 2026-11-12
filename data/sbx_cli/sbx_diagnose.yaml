@@ -13,7 +13,7 @@ options:
       usage: Output in JSON format
     - name: upload
       default_value: "false"
-      usage: Upload diagnostics to Docker support
+      usage: Upload diagnostics to Docker support (table format only)
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -23,6 +23,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       sbx diagnose
 

@@ -72,7 +72,7 @@ options:
       usage: help for move
     - name: name
       usage: |
-        Name for the destination sandbox (default: 'moved-' + the source name; a cloud destination always adds a short unique suffix, a local one only when that name is already taken)
+        Name for the destination sandbox (default: 'moved-' + the source name, with a short unique suffix for cloud destinations or when the local name is taken; an explicit name is used unchanged)
     - name: on-timeout
       usage: |
         What happens to the destination cloud sandbox when its TTL lapses: 'stop' stops it in place so it can be started again later, 'restart' keeps it running by stopping and immediately starting it, or 'delete' removes it. Not every sandbox supports 'stop', and an explicit request the server refuses fails the move after the source has been stopped and uploaded, so the sandbox is restored but the transfer is spent. With 'restart' a supplied --ttl must be at least 1h. Default: stop when the sandbox supports it, else the server default (delete). Only with --to cloud
@@ -80,9 +80,8 @@ options:
       usage: |
         Destination of the move: 'local' (cloud to local) or 'cloud' (local to cloud)
     - name: ttl
-      default_value: 0s
       usage: |
-        Time-to-live for the destination cloud sandbox (15s to 24h, e.g. 30m, 2h; only with --to cloud; default: server-side)
+        Time-to-live for the destination cloud sandbox (15s to 24h, e.g. 30m, 2h; units are case-insensitive; only with --to cloud; default: server-side)
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -92,6 +91,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # Move a cloud sandbox down to the local host
       sbx move sbx_abc123 --to local

@@ -17,9 +17,35 @@ description: |-
     The rule applies globally to all sandboxes by default. Use --sandbox to add
     the rule to policy "local" scoped to a single sandbox instead.
 
+    Without --cloud, a rule is refused, and nothing is added, when the same scope
+    already holds the opposite decision for the same resource on any of the same
+    protocols (for HTTP rules, the same methods, path, and query constraints).
+    Remove the existing rule with "sbx policy rm network --id RULE_ID" first, adding
+    --sandbox SANDBOX if the rule is sandbox-scoped. Rules in different scopes, such
+    as a global allow and a sandbox-scoped deny, can coexist, and the deny rule
+    takes precedence. Rules from your organization's policy never cause this
+    refusal. With --cloud, the new rule replaces the opposite rule in the same scope
+    instead.
+
     Use --method to add an HTTP rule. --method accepts comma-separated HTTP
     methods or ANY; --path defaults to /**. Repeat --query name=value to require
     query parameters.
+
+    HTTP paths, query parameter names, and query values match without regard to
+    ASCII letter case. For example, /API/** matches /api/items, and Tag=PROD
+    matches tag=prod.
+
+    With --cloud:
+    Allow cloud sandbox network access to the specified hosts.
+
+    A matching deny entry in the same scope is replaced by the allow entry.
+
+    RESOURCES is a comma-separated list of network patterns, such as api.example.com,
+    *.example.com, 10.0.0.0/8, or api.example.com:443. HTTP method, path, query, and
+    transport protocol selectors are not supported.
+
+    Rules apply to the account by default. Use --sandbox with a sandbox name or ID
+    to change one sandbox's policy. Use "sbx --cloud policy ls" to list the rules.
 usage: sbx policy allow network [--sandbox SANDBOX] RESOURCES [flags]
 options:
     - name: help
@@ -52,6 +78,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # Allow access to a single host (all sandboxes)
       sbx policy allow network api.example.com
@@ -70,5 +100,11 @@ example: |4-
 
       # Allow GET and HEAD requests to a path
       sbx policy allow network api.example.com --method GET,HEAD --path '/v1/**'
+
+      # Allow a host in the account policy
+      sbx --cloud policy allow network api.example.com
+
+      # Allow a host for one sandbox
+      sbx --cloud policy allow network --sandbox my-sandbox api.example.com
 see_also:
     - sbx policy allow - Add an allow rule for sandboxes

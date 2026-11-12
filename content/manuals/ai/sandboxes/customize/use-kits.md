@@ -13,14 +13,18 @@ settings. You run kits you build yourself or get from another publisher in the
 same way: give `sbx` a reference, and Docker Sandboxes prepares the environment
 and applies the kit's settings.
 
-Docker recommends v3 kits. V2 remains supported and is the default format
-for built-in agent references such as `claude` and `codex`.
+Built-in agent references such as `claude` and `codex` use v3 kits.
+V2 remains supported for existing kits.
 
 ## Run a kit
 
-The built-in agent names are shortcuts for kit references. To run another kit,
-replace the agent name with that kit's reference. For example, run Docker's
-published v3 Codex workload:
+Built-in names such as `claude` and `codex` resolve to kits published on
+Docker Hub under `docker.io/sbx/<NAME>:latest`. For example, `codex` resolves
+to `docker.io/sbx/codex:latest`. These references differ from the versioned
+v3 workloads listed below.
+
+To run another kit, replace the agent name with that kit's reference. For
+example, run Docker's published v3 Codex workload:
 
 ```console
 $ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-v3-kit
@@ -28,13 +32,12 @@ $ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-v3-kit
 
 ### Published v3 workloads
 
-Use these published v3 workloads in place of built-in shortcuts when adding
-v3 mixins with `sbx run` or `sbx create`.
+Built-in shortcuts accept v3 mixins with `sbx run` or `sbx create`. You can
+also select one of these versioned workloads to pin an agent version.
 
 A workload's agent name comes from the last component of its repository name.
-It must differ from built-in agent names: `docker/sbx-kit-claude` registers
-`sbx-kit-claude`, while `sbx/claude` conflicts with built-in `claude` and
-fails to register. Changing the sandbox's `--name` doesn't change the agent name.
+For example, `docker/sbx-kit-claude` registers `sbx-kit-claude`.
+Changing the sandbox's `--name` doesn't change the agent name.
 
 | Built-in agent | V3 workload OCI reference |
 | --- | --- |
@@ -87,7 +90,12 @@ $ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-age
 
 `sbx` pulls published images and builds local or Git sources when creating
 the sandbox. Builds with unchanged source content and supplied kit arguments
-reuse cached results.
+reuse cached results while they remain available.
+
+Unused source-kit build images are eligible for automatic cleanup after seven
+days without references. Images referenced by existing sandboxes or saved
+templates are kept. On later use, a collected build may need to be restored
+or rebuilt, even if its sources and arguments are unchanged.
 
 By default, remote kit sources are limited to Docker Hub. To use a Git
 source or another registry, see [Restrict kit sources](#restrict-kit-sources).
@@ -146,7 +154,7 @@ For example, an internal CLI mixin can package your company's executable
 along with network rules and a credential request for its API:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-tools \
+$ sbx run codex --name codex-tools \
     --kit docker.io/<NAMESPACE>/company-cli:1.0.0
 ```
 

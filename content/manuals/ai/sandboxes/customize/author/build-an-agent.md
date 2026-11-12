@@ -49,9 +49,8 @@ run, such as network access and credentials. The Markdown file contains
 instructions for the agent. Give the YAML file and Dockerfile the same name
 before the extension so the build can find both files.
 
-This kit uses v3 and is independent of the built-in `claude` kit, which uses
-v2. Any mixins you add must also use v3. To customize the built-in kit, see
-[Kits v2](/manuals/ai/sandboxes/customize/kits-v2.md).
+This kit uses v3 and is independent of the built-in `claude` kit.
+Any mixins you add must also use v3.
 
 ## Use your own base image
 
@@ -375,10 +374,13 @@ Restarting an existing sandbox won't pick up your edits. To try another
 agent version locally, update `args.version.default` in the descriptor and
 create another sandbox.
 
-`sbx` reuses the local build when the source files and kit arguments are
-unchanged. Changing either can trigger a build, even for arguments such as
-`model` that only affect sandbox setup. BuildKit can still reuse unchanged
-image layers.
+`sbx` reuses the local build when it remains available and the source files
+and kit arguments are unchanged. Unused builds can be
+[cleaned up after seven days](/manuals/ai/sandboxes/customize/use-kits.md#choose-a-kit-source)
+and may need to be restored or rebuilt on later use.
+Changing the source files or kit arguments can trigger a build, even for
+arguments such as `model` that only affect sandbox setup. BuildKit can still
+reuse unchanged image layers.
 
 ### Publish the workload
 

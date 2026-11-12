@@ -3,8 +3,9 @@ synopsis: Execute a command inside a sandbox environment
 experimental: true
 description: |-
     Run COMMAND in the sandbox declared in sbxenv.yaml. The sandbox
-    must already exist (see "sbx env create" and "sbx env run"); a stopped sandbox is
-    started first.
+    is started first if stopped. If it does not exist, an interactive terminal prompts
+    to create it and approve the environment plan before running COMMAND. Without an
+    interactive terminal, or with --no-input, create it first with "sbx env create".
 
     Arguments before `--` are environment-file paths, following the same rules as
     the other "sbx env" subcommands: each PATH may be a directory (the file is
@@ -15,8 +16,12 @@ description: |-
 
     A directory PATH selects sbxenv.yaml; a file PATH selects that file.
     With no PATH, ~/.sbxenv.yaml supplies shared defaults when present.
-    Explicit PATHs skip those defaults. Later files override earlier values;
-    lists such as ports and mcp.servers are concatenated.
+    Explicit PATHs skip those defaults. Later files override earlier values.
+    Ports with the same sandbox port and effective protocol, MCP servers with the
+    same name, and additional workspaces with the same container target use the
+    later entry, including repeated entries in one file.
+    Kit arguments merge by source. The entrypoint and cmd arrays replace earlier
+    values; other lists concatenate.
 
     Flags match the behavior of "sbx exec".
 
@@ -25,12 +30,9 @@ description: |-
     unless a cloud backend reports it as an error rather than a status, which exits 125.
 usage: sbx env exec [flags] [PATH...] -- COMMAND [ARG...]
 options:
-    - name: detach
-      shorthand: d
-      default_value: "false"
-      usage: Detached mode (not supported)
     - name: detach-keys
-      usage: Override the key sequence for detaching a container
+      usage: |
+        Override the key sequence for detaching an interactive cloud exec session (not supported for local exec)
     - name: env
       shorthand: e
       default_value: '[]'
@@ -59,9 +61,6 @@ options:
     - name: name
       usage: |
         Name for the sandbox, overriding 'name:' in sbxenv.yaml and the derived <agent>-<directory> (every 'sbx env' command addressing this environment needs the same value)
-    - name: privileged
-      default_value: "false"
-      usage: Give extended privileges to the command
     - name: tty
       shorthand: t
       default_value: "false"
@@ -81,6 +80,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # Run a command in the environment declared in the current directory
       sbx env exec go test ./...

@@ -12,8 +12,8 @@ aliases:
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 V2 kits remain supported and are not deprecated. Built-in agent names such
-as `claude` and `codex` select v2 kits and work with v2 mixins. This page
-covers their usage and specification. For new kits, Docker recommends
+as `claude` and `codex` select v3 kits and cannot use v2 mixins. This page
+covers v2 kit usage and specification. For new kits, Docker recommends
 [v3](/manuals/ai/sandboxes/customize/_index.md). V1 also remains supported.
 
 ## Use existing kits
@@ -25,7 +25,6 @@ mixins with `--kit`:
 
 ```console
 $ sbx run ./my-agent --name my-project --kit ./team-config
-$ sbx run claude --name claude-project --kit ./team-config
 ```
 
 `sbx run` uses your current directory as the workspace. Append a project path
@@ -303,7 +302,7 @@ The agent's container image must provide:
 - HTTP proxy environment variables (`HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY`) preserved across sudo.
 - The agent binary, either baked in or installed with [`setup.install`](#setup).
 
-Build on top of `docker/sandbox-templates:shell-docker` to get these base
+Build on top of `docker.io/sbx/shell-docker-image:latest` to get these base
 requirements.
 
 ## Agent instructions
@@ -590,6 +589,10 @@ volumes to a running container.
 
 ## Fork an existing agent
 
+This example requires an older `sbx` version with built-in v2 agents.
+Built-in names select v3 kits for sandbox creation with the latest `sbx`.
+For v3 customization, see [Compose a kit set](author/kit-sets.md).
+
 Sandbox kits (`kind: sandbox`) define a full agent from scratch. The most
 common variant is a fork of a built-in agent. Use `extends:` to inherit the
 parent's complete configuration and declare only the fields you want to change.
@@ -653,7 +656,6 @@ file removes. In this table, `~` is `/home/agent`.
 | `copilot` | `~/.copilot/config.json` |
 | `cursor` | `~/.cursor/cli-config.json` |
 | `devin` | `~/.config/devin/config.json`, `~/.config/devin/mcp_config.json` |
-| `gemini` | `~/.gemini/settings.json` |
 | `kiro` | `~/.kiro/settings/mcp.json` |
 | `opencode` | `~/.config/opencode/opencode.json` |
 

@@ -164,10 +164,26 @@ applies to running sandboxes without recreating them. Set it to `false` to
 withdraw that access. See [image paste](../faq.md#can-i-paste-images-into-an-agent)
 for supported behavior.
 
+#### claude.chrome {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Turn this on to let sandboxed Claude Code access host browser tabs through
+Claude in Chrome:
+
+```console
+$ sbx settings set claude.chrome true
+```
+
+Changes apply to new browser connections from running sandboxes. Set it to
+`false` to block further connections; established connections stay active until
+you end the Claude browser sessions. See
+[Claude in Chrome](../agents/claude-code.md#claude-in-chrome) for authentication
+requirements and setup.
+
 #### claude.remoteControl {.wrap-anywhere}
 
-{{< setting-metadata type="boolean" default="false"
-  env="DOCKER_SANDBOXES_CLAUDE_REMOTE_CONTROL" >}}
+{{< setting-metadata type="boolean" default="false" >}}
 
 Turn this on before using Claude Code's `/remote-control` command inside a
 sandbox:
@@ -176,11 +192,15 @@ sandbox:
 $ sbx settings set claude.remoteControl true
 ```
 
-The remote-control connection must authenticate with its own session token.
-This setting lets it do so instead of having the sandbox proxy replace that
-token with the host credential. Set it to `false` to restore credential
-replacement on that connection. Changes apply to requests from running
-sandboxes. See [Claude Code remote control](../agents/claude-code.md#remote-control).
+Docker Sandboxes keeps Remote Control environment and session credentials on
+the host. The sandbox receives placeholders, and the proxy supplies the real
+credentials only for the environment or session they belong to while this
+setting is enabled. Remotely supplied environment variables and MCP
+configuration aren't passed into the sandbox.
+
+Set this to `false` to stop the proxy from supplying Remote Control credentials.
+Changes apply to requests from running sandboxes. See
+[Claude Code remote control](../agents/claude-code.md#remote-control).
 
 #### env.rememberHostCommands {.wrap-anywhere}
 
@@ -197,6 +217,24 @@ The first approval is still required. Commands run on your host with your
 permissions, outside the sandbox. Leave the setting at `false` to require
 approval on every invocation, or use `--force` to approve only one
 invocation. See [environment lifecycle commands](environment-files.md#lifecycle).
+
+#### sandbox.fuse {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Expose `/dev/fuse` and grant the `SYS_ADMIN` capability so processes can mount
+FUSE filesystems in local sandboxes. Set this to `false` to disable FUSE access
+for sandboxes you create:
+
+```console
+$ sbx settings set sandbox.fuse false
+```
+
+Changes apply only to newly created sandboxes. Existing sandboxes retain their
+FUSE configuration, including after restarts. To disable access for one sandbox,
+set [`sandboxOptions.fuse`](environment-files.md#sandboxoptions) to `false`
+in its environment file. When this setting is `false`, environment files cannot
+enable FUSE access. Cloud sandboxes do not support FUSE.
 
 #### ssh.agentForwardingEnabled {.wrap-anywhere}
 
@@ -264,8 +302,7 @@ requirements, and how to apply changes to existing sandboxes.
 
 #### platform.images.useDHI {.wrap-anywhere}
 
-{{< setting-metadata type="boolean" default="false"
-  env="DOCKER_SANDBOXES_USE_DHI" >}}
+{{< setting-metadata type="boolean" default="false" >}}
 
 Turn this on to use Docker Hardened Image variants when creating sandboxes
 with default agent templates:
@@ -322,8 +359,7 @@ $ sbx settings set kit.allowedSources '["docker.io/","github.com/myorg/"]'
 Prefixes match on a path-segment boundary: `github.com/myorg/` permits that
 organization's repositories, but not `github.com/myorg-other/`. The value
 `["*"]` permits any remote source. Local directories and ZIP files are controlled
-by [kit.allowLocalKits](#kitallowlocalkits), and pinned agent kits have the
-[kit.allowExtractedAgents](#kitallowextractedagents) exception.
+by [kit.allowLocalKits](#kitallowlocalkits).
 
 See [restrict kit sources](../customize/use-kits.md#restrict-kit-sources) for source
 formats and examples.
@@ -345,27 +381,6 @@ Keep this enabled while developing kits locally. Allowing local kits doesn't
 exempt them from signature requirements when
 [kit.requireSignature](#kitrequiresignature) is enabled.
 
-#### kit.allowExtractedAgents {.wrap-anywhere}
-
-{{< setting-metadata type="boolean" default="true"
-  env="DOCKER_SANDBOXES_KIT_ALLOW_EXTRACTED_AGENTS" >}}
-
-Some agents that previously shipped inside Docker Sandboxes are distributed
-as kits. By default, Docker Sandboxes permits the exact pinned references it
-uses for those agents even if their sources aren't in `kit.allowedSources`,
-and exempts them from `kit.requireSignature`.
-
-To apply your source and signature requirements to those kits too:
-
-```console
-$ sbx settings set kit.allowExtractedAgents false
-```
-
-After this change, launching one of those agents can fail unless you allow its
-source and, when signatures are required, it has a signature from a trusted
-signer. The default exception applies only to the pinned references, not to
-other kits from the same publisher.
-
 #### kit.requireSignature {.wrap-anywhere}
 
 {{< setting-metadata type="boolean" default="false"
@@ -381,8 +396,6 @@ $ sbx settings set kit.requireSignature true
 
 The check applies when installing kits from local directories, Git, or OCI
 registries. ZIP kits can't carry verifiable signatures and are rejected.
-Pinned agent kits remain exempt while
-[kit.allowExtractedAgents](#kitallowextractedagents) is `true`.
 
 A signature covers the kit's `spec.yaml` and `files/` content. It doesn't pin
 image tags or verify downloads performed by the kit's commands. See
@@ -433,6 +446,19 @@ Signature and signer verification still apply. These signatures must provide a
 timestamp from a timestamp authority instead of a transparency log timestamp.
 Leave this at `false` when your signing workflow uses the public transparency
 log. It has no effect on signatures verified with a public key.
+
+### Model server
+
+#### model.server.enabled {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Set this to `false` to turn off the bundled model service and skip its runtime
+download. Changes require a daemon restart. This setting has no environment
+variable override.
+
+See [Disable the bundled service](models.md#disable-the-bundled-service) for
+commands and how this affects your model choices.
 
 ### MCP gateway
 
@@ -496,6 +522,29 @@ $ sbx settings set daemon.log.maxAgeDays 30
 $ sbx daemon restart
 ```
 
+### Telemetry
+
+#### telemetry.disabled {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Set this to `true` to persistently disable telemetry for the local CLI and
+daemon:
+
+```console
+$ sbx settings set telemetry.disabled true
+$ sbx daemon restart
+```
+
+The next CLI invocation uses the saved preference. A running daemon keeps its
+previous telemetry setting until you restart it.
+
+`SBX_NO_TELEMETRY` is a separate opt-out, rather than an environment variable
+equivalent for this setting. A value of `1` disables telemetry regardless of
+the saved preference. Other values, including `0`, don't override a saved
+opt-out. See [telemetry collection](../faq.md#does-the-cli-collect-telemetry)
+for what the CLI collects.
+
 ### Diagnostics
 
 #### diagnostics.autoUpload {.wrap-anywhere}
@@ -535,6 +584,34 @@ $ sbx settings set diagnostics.autoUploadErrorCooldownInDays 7
 The cooldown applies across all eligible errors, not separately to each error
 type. Values below one are treated as one day. This setting doesn't grant
 upload consent: [diagnostics.autoUpload](#diagnosticsautoupload) must be `yes`.
+
+### Outbound connections
+
+#### egress.stalledConnectionTimeoutSeconds {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="30" >}}
+
+Set how many seconds an outbound TCP connection from a local sandbox can go
+without the remote end acknowledging data before the connection closes. This
+bounds how long a connection stranded by a host network change, such as a VPN
+connecting, can hang.
+
+Use a value from `0` to `3600`. Set `0` to disable the timeout. For example,
+increase the timeout to tolerate longer network interruptions:
+
+```console
+$ sbx settings set egress.stalledConnectionTimeoutSeconds 90
+$ sbx daemon restart
+```
+
+Changes apply to sandboxes created after the change. For existing sandboxes,
+restart the daemon to rebuild their network proxies with the updated value.
+The experimental Runtime backend doesn't support this setting.
+
+A network outage longer than the timeout can close long-lived connections,
+including streams and uploads. On Linux, the timeout also closes a connection
+if the remote end stops reading data for longer than the timeout. Increase the
+value or disable the timeout if you need connections to survive these pauses.
 
 ### Upstream proxies and TLS
 
@@ -628,7 +705,8 @@ $ sbx daemon restart
 This shared list applies to sandbox and daemon traffic unless a scope-specific
 list replaces it. A value of `*` bypasses the upstream proxy for all destinations.
 Proxy exclusions don't grant network access: sandbox requests must still pass
-[network policy](../governance/access-controls/network.md).
+network policy. For how network policy is set, see
+[Sandbox governance](../../governance/_index.md).
 
 #### no_proxy.sandbox {.wrap-anywhere}
 

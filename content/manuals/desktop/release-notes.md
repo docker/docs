@@ -24,6 +24,48 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.99.0
+
+{{< release-date date="2026-11-09" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.99.0" build_path="/245822/" >}}
+
+### Updates
+
+- Docker Offload `v0.7.36`
+- Docker Hardened Images (`dhictl`) `v0.0.10`
+- [Docker Agent v1.153.0](https://github.com/docker/docker-agent/releases/tag/v1.153.0)
+- Docker Scout CLI `v1.28.0`
+- Docker MCP CLI `v0.44.3`
+- [Docker Compose v5.7.0](https://github.com/docker/compose/releases/tag/v5.7.0)
+- [Docker Engine v29.9.3](https://docs.docker.com/engine/release-notes/29/#2993)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a socket leak in the system proxy where plain HTTP requests from containers routed through an upstream proxy left one socket open per request until restart.
+- Fixed constant network traffic and CPU usage caused by Docker Desktop computing the size of NFS- or SMB-backed volumes. Fixes [docker/desktop-feedback#800](https://github.com/docker/desktop-feedback/issues/800). 
+- Fixed an issue where Docker Desktop could shut down ungracefully, causing resource leaks or a corrupted state by not allowing cleanup handlers to run.
+- Fixed the Containers list cutting off the ports when clicking **Show all ports**, which now lists all of them in a popover. Fixes [docker/desktop-feedback#794](https://github.com/docker/desktop-feedback/issues/794).
+- Fixed connection resets on published ports under bursts of new connections with Docker VMM.
+
+#### For Mac
+
+- Fixed an issue where an update could fail with **Unable to install** because Docker Desktop killed the installer while quitting.
+
+#### For Windows
+
+- Fixed Windows updates stopping Docker Desktop abruptly, which could corrupt the engine databases. 
+- Fixed an error that could occur when attempting to run `docker desktop` commands from inside a WSL distro while using the WSL integration.
+- Added BuildKit support for Windows containers when using the containerd image store.
+- Fixed WSL 2 engine start failing on slow machines when the data disk took more than a fraction of a second to appear.
+- Fixed per-user installs and updates on Windows failing with a "Virtual Machine Platform" error on machines where WSL 2 already works.
+- Fixed Docker Desktop hanging after closing an error dialog with its **Close** button. Closing an error dialog that offers **Continue now** continues instead of quitting Docker Desktop. 
+- Fixed Windows containers failing to start at login with **Starting windows containers: An error has occurred.** when a container took longer than 30 seconds to stop.
+- Fixed WSL 2 distributions flushing their systemd-resolved DNS cache every 30 seconds while Docker Desktop was running. Fixes [docker/desktop-feedback#761](https://github.com/docker/desktop-feedback/issues/761).
+- Fixed Windows installer launcher to report descriptive error reasons (e.g. **Disk full**) on update failure instead of a bare exit code.
+
 ## 4.98.0
 
 {{< release-date date="2026-11-03" >}}
@@ -63,6 +105,16 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed file sharing treating a directory as shared, or as allowed by Settings Management, when its name only started with that of a shared or allowed directory (e.g. `C:\foobar` for `C:\foo`). Allowed file share entries now match whole directory names only.
 - Fixed an issue where processes started in the Docker Desktop terminal could be left running after closing the terminal.
 - Added support for running `docker` and `docker compose` from WSL 2 distros when Docker VMM is the engine, including bind mounts of files on Windows drives such as `/mnt/c`.
+- Fixed Docker VMM re-enabling the WSL feature on update and showing a **Press any key to install WSL** prompt when WSL is uninstalled. Fixes [docker/desktop-feedback#775](https://github.com/docker/desktop-feedback/issues/775).
+
+#### For Linux
+
+- Added Docker VMM as a virtual machine manager option in Settings on Linux.
+
+### Security
+
+- Fixed [CVE-2026-98432](https://www.cve.org/cverecord?id=CVE-2026-98432), a use-after-free in the Linux kernel's IPv4 TCP handling.
+- Fixed [CVE-2026-112917](https://www.cve.org/cverecord?id=CVE-2026-112917) where a container on the WSL 2 backend could bypass the AF_VSOCK restriction. Requires WSL 3.0.3 or later.
 
 ## 4.97.0
 
@@ -303,6 +355,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Mac
 
+- Docker Desktop now trusts only the certificates in `SSL_CERT_FILE` or `SSL_CERT_DIR` when either is set, instead of the system certificate store. If that bundle lacks a root certificate Docker Desktop needs, such as the ISRG roots used by `login.docker.com`, sign-in fails with `x509: certificate signed by unknown authority`. To fix it, add the missing root certificates to the bundle or unset the variable.
 - Fixed the update tooltip suggesting to move Docker Desktop to `/Applications` when that is the folder the current user cannot modify. Fixes [docker/desktop-feedback#598](https://github.com/docker/desktop-feedback/issues/598).
 - Fixed repeated privileged-access prompts when Docker Desktop starts automatically after a reboot. Fixes [docker/desktop-feedback#651](https://github.com/docker/desktop-feedback/issues/651).
 - Fixed the "CLI tools installation" setting on macOS reverting to System when Docker Desktop could not update the login shell profile.
@@ -310,6 +363,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Windows
 
+- Docker Desktop now trusts only the certificates in `SSL_CERT_FILE` or `SSL_CERT_DIR` when either is set, instead of the system certificate store. If that bundle lacks a root certificate Docker Desktop needs, such as the ISRG roots used by `login.docker.com`, sign-in fails with `x509: certificate signed by unknown authority`. To fix it, add the missing root certificates to the bundle or unset the variable.
 - Improved WSL startup errors to explain when virtualization is disabled in firmware, nested virtualization is unavailable, or the Windows hypervisor is disabled at startup, with guidance for resolving each condition.
 - Fixed the Docker Desktop service losing its automatic start mode after an update run by WinGet or another external installer when the service had been installed with `--always-run-service`.
 - Fixed a bug introduced in 4.92.0 where WSL integration could fail to start with "timed out waiting for ... to be automounted". Fixes [docker/desktop-feedback#695](https://github.com/docker/desktop-feedback/issues/695).
@@ -317,6 +371,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For Linux
 
 - Fixed a bug on Linux where quitting Docker Desktop could close unrelated applications, including all open terminal windows. Fixes [docker/desktop-linux#109](https://github.com/docker/desktop-linux/issues/109).
+
+### Security
+
+- Addressed [CVE-2026-123082](https://www.cve.org/cverecord?id=CVE-2026-123082), where Docker Desktop 4.43.0 through 4.93.x could write the signed-in user's Docker Hub access token in cleartext to local application logs and diagnostics bundles. If you've generated or shared diagnostics bundles with an affected version, or kept copies of Docker Desktop logs elsewhere, delete or sanitize them.
 
 ## 4.93.0
 

@@ -16,6 +16,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: '  sbx kit builder history export 3b6l9x --output build.dockerbuild'
 see_also:
     - sbx kit builder history - Show kit build history in the builder sandbox
