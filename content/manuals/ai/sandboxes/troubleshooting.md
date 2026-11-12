@@ -588,6 +588,11 @@ To opt in to automatic diagnostics uploads after certain daemon errors, set
 $ sbx settings set diagnostics.autoUpload yes
 ```
 
+When `GITHUB_ACTIONS=true` or `DOCKER_CI=true`, automatic uploads are suppressed
+by default even after you opt in. See
+[telemetry collection](faq.md#does-the-cli-collect-telemetry) for the
+integration test exception.
+
 Automatic bundles include basic system information and client, daemon, crash,
 and MCP logs. Docker Sandboxes redacts recognized identity values and
 credential patterns, but collected logs can still contain user content. Failed

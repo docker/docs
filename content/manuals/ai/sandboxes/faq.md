@@ -91,6 +91,16 @@ CLI usage telemetry does not include your prompts or code. Cloud sandboxes
 execute on Docker-managed infrastructure, so files you transfer to them are
 stored in the cloud.
 
+The local CLI and daemon disable product telemetry by default when
+`GITHUB_ACTIONS=true` or `DOCKER_CI=true`. Automatic diagnostics uploads are
+also suppressed, even if `diagnostics.autoUpload` is `yes`. Compliance audit
+delivery remains active.
+
+For integration tests, setting `DOCKER_SANDBOXES_E2E_TESTS` to a nonempty value
+bypasses this CI default. Explicit opt-outs (`SBX_NO_TELEMETRY=1` or
+`telemetry.disabled=true`) still take precedence. Automatic diagnostics uploads
+still require consent and the diagnostics feature to be enabled.
+
 To persistently disable telemetry for the local CLI and daemon, set
 [`telemetry.disabled`](configuration/settings.md#telemetrydisabled) to `true`:
 

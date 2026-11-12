@@ -545,6 +545,11 @@ the saved preference. Other values, including `0`, don't override a saved
 opt-out. See [telemetry collection](../faq.md#does-the-cli-collect-telemetry)
 for what the CLI collects.
 
+When `GITHUB_ACTIONS=true` or `DOCKER_CI=true`, product telemetry is disabled
+by default even if this setting is `false`. See
+[telemetry collection](../faq.md#does-the-cli-collect-telemetry) for the
+integration test exception.
+
 ### Diagnostics
 
 #### diagnostics.autoUpload {.wrap-anywhere}
@@ -558,6 +563,11 @@ after eligible daemon errors:
 - `no`: Decline automatic uploads and suppress further consent prompts.
 - Empty string: No recorded decision. Docker Sandboxes may prompt for consent,
   but doesn't automatically upload without it.
+
+Automatic uploads are suppressed by default when `GITHUB_ACTIONS=true` or
+`DOCKER_CI=true`, even with consent set to `yes`. See
+[telemetry collection](../faq.md#does-the-cli-collect-telemetry) for the
+integration test exception.
 
 For example, decline automatic uploads:
 
