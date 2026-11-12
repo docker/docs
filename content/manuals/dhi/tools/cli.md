@@ -197,6 +197,8 @@ $ docker dhi customization delete <id> --org my-org --force
 
 For a complete reference of all YAML fields, see
 [Image customization YAML file](/dhi/how-to/customize/#image-customization-yaml-file).
+For Helm charts, see
+[Helm chart customization YAML file](/dhi/how-to/customize/#helm-chart-customization-yaml-file).
 
 ### Enterprise package authentication
 
