@@ -92,6 +92,10 @@ $ sbx prune --dry-run --format yaml
 are rejected. `sbx events --json` emits newline-delimited JSON, and
 `sbx mcp auth --format text|json` uses command-specific formats.
 
+For `sbx diagnose --format json` and `--format yaml`, each entry in `checks`
+has a stable `id`. Match checks by `id` in scripts. The `name` field is
+display text and can change between releases.
+
 For lists of identifiers without table headings, use `--quiet` or `-q`:
 
 | Command | Output |
