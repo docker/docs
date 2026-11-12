@@ -104,16 +104,27 @@ The CLI copies Git remotes from your host repository, such as `origin` and
 URLs and filesystem paths, aren't copied because they aren't reachable from
 inside the sandbox.
 
-The Git daemon that exposes the in-sandbox clone runs as part of the sandbox.
-It's only reachable while the sandbox is running:
+The CLI adds a `sandbox-<name>` remote to your host repository. By default,
+`git fetch sandbox-<name>` and `git pull` transfer commits through the daemon
+socket, whose access is restricted to your host user. No Git TCP port is
+published and no Git daemon runs inside the sandbox.
 
-- `sbx stop` shuts down the daemon. `git fetch sandbox-<name>` fails until the
-  sandbox starts again.
-- Restarting the sandbox assigns another ephemeral port to the daemon. The CLI
-  updates the `sandbox-<name>` remote URL in your host repository's Git config,
-  so fetching continues without manual reconfiguration.
-- `sbx rm` removes the sandbox, the daemon, the published port, and the
-  `sandbox-<name>` remote entry from your host repository.
+- `sbx stop` makes the remote unavailable. Fetching fails until you start the
+  sandbox again; fetching doesn't start it automatically.
+- Starting the sandbox refreshes the remote configuration in your host
+  repository, so you can keep using the same fetch commands.
+- `sbx rm` removes the sandbox and its `sandbox-<name>` remote entry from your
+  host repository.
+
+For Git clients that ignore the remote's `uploadpack` setting, use
+`sbx settings set clone.legacyTcpRemote true` to restore the TCP transport.
+The setting takes effect the next time the sandbox starts. This compatibility
+mode exposes the repository and its history through an unauthenticated
+localhost Git port, which other local accounts on the host can access.
+
+Clone-mode sandboxes using the default transport reject publishing sandbox
+TCP port 9418 through `sbx ports --publish` or `sbx create -p`. That port is
+reserved for the compatibility mode's Git daemon.
 
 ### Single task
 
