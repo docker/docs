@@ -64,21 +64,8 @@ For details, see
 VS Code can leave duplicate or malformed managed blocks in your SSH config
 after you add an SSH host. If a VS Code connection reports a
 `KnownHostsCommand` error or `Host key verification failed`, remove every SSH
-config block marked `docker sandboxes (managed)`, including the marker
-comments. Older configurations use `Host *.sbx`, as shown here; generated
-configurations can also use `Match originalhost`:
-
-```diff
--# >>> docker sandboxes (managed) >>>
--Host *.sbx
--    User _default_user_
--    ProxyCommand "sbx" ssh proxy %n
--    ...
--    UserKnownHostsFile "~/.ssh/sbx_known_hosts"
--    KnownHostsCommand "sbx" ssh known-hosts %H
--    StrictHostKeyChecking yes
--# <<< docker sandboxes (managed) <<<
-```
+config block between `# >>> docker sandboxes (managed) >>>` and
+`# <<< docker sandboxes (managed) <<<`, including both separator comments.
 
 Then regenerate the managed block:
 
