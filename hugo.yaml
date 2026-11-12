@@ -358,6 +358,22 @@ module:
           target: content/reference/api/engine/version
           files: ["*.yaml"]
 
+    # Docker Engine
+    # Pinned to the version resolved from the docker-<docker_ce_version> tag;
+    # bumped by sync-cli-docs.yml.
+    - path: github.com/moby/moby/v2
+      mounts:
+        - source: docs/extend
+          target: content/manuals/engine/extend
+          files:
+            - "! EBS_volume.md"
+            - "! plugins_metrics.md"
+            - "! plugins_services.md"
+        - source: docs/deprecated.md
+          target: content/manuals/engine/deprecated.md
+        - source: docs/reference/dockerd.md
+          target: content/reference/cli/dockerd.md
+
     # BuildKit
     - path: github.com/moby/buildkit
       mounts:
@@ -384,18 +400,8 @@ module:
     # Docker CLI
     - path: github.com/docker/cli
       mounts:
-        - source: docs/extend
-          target: content/manuals/engine/extend
-          files:
-            - "! EBS_volume.md"
-            - "! plugins_metrics.md"
-            - "! plugins_services.md"
-        - source: docs/deprecated.md
-          target: content/manuals/engine/deprecated.md
         - source: docs/reference/run.md
           target: content/manuals/engine/containers/run.md
-        - source: docs/reference/dockerd.md
-          target: content/reference/cli/dockerd.md
 
     # Compose
     - path: github.com/docker/compose/v5
