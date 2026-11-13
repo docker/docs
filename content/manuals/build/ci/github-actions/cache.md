@@ -96,9 +96,9 @@ jobs:
           cache-to: type=gha,mode=max
 ```
 
-> [!IMPORTANT]
+> [!NOTE]
 >
-> As of April 15th, 2025, [only GitHub Cache service API v2 is supported.](https://gh.io/gha-cache-sunset). The legacy v1 API has been shut down.
+> Only [GitHub Cache service API v2](https://gh.io/gha-cache-sunset) is supported; the legacy v1 API was shut down on April 15, 2025.
 >
 > If you encounter the following error during your build:
 >
