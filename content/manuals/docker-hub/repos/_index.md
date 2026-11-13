@@ -36,8 +36,8 @@ In this section, learn how to:
      for flexibility.
 
    - [Image security insights](./manage/vulnerability-scanning.md): Utilize
-     continuous Docker Scout analysis and static vulnerability scanning to
-     detect, understand, and address security issues within container images.
+     continuous Docker Scout analysis to detect, understand, and address
+     security issues within container images.
 
    - [Webhooks](./manage/webhooks.md): Automate responses to repository events
      like image pushes or updates by setting up webhooks, which can trigger
