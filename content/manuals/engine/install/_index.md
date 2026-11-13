@@ -59,11 +59,14 @@ Click on a platform's link to view the relevant installation procedure.
 
 | Platform                                       | x86_64 / amd64 | arm64 / aarch64 | arm (32-bit) | ppc64le | s390x |
 | :--------------------------------------------- | :------------: | :-------------: | :----------: | :-----: | :---: |
+| [AlmaLinux](almalinux.md)                      |       ✅       |       ✅        |              |         |       |
 | [CentOS](centos.md)                            |       ✅       |       ✅        |              |   ✅    |       |
 | [Debian](debian.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |       |
 | [Fedora](fedora.md)                            |       ✅       |       ✅        |              |   ✅    |       |
+| [Oracle Linux](oraclelinux.md)                 |       ✅       |       ✅        |              |         |       |
 | [Raspberry Pi OS (32-bit)](raspberry-pi-os.md) |                |                 |      ⚠️      |         |       |
 | [RHEL](rhel.md)                                |       ✅       |       ✅        |              |         |  ✅   |
+| [Rocky Linux](rockylinux.md)                   |       ✅       |       ✅        |              |         |       |
 | [Ubuntu](ubuntu.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |  ✅   |
 | [Binaries](binaries.md)                        |       ✅       |       ✅        |      ✅      |         |       |
 
