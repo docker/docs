@@ -487,9 +487,6 @@ When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
 recipes, see
 [Local services](workflows/development.md#local-services).
 
-`sbx ports` remains supported but is deprecated. Use `sbx port ls`,
-`sbx port publish`, and `sbx port unpublish` instead.
-
 ## What persists
 
 While a sandbox exists, installed packages, Docker images, configuration
