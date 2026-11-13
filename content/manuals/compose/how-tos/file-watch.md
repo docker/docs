@@ -65,7 +65,7 @@ USER app
 
 # Install dependencies
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY --chown=app:app package.json package-lock.json ./
 RUN npm install
 
 # Copy source files into application directory
