@@ -21,7 +21,7 @@ Each tool serves a different purpose.
 | Run agents in cloud sandboxes through a web Console | [Docker Agentic Platform](./agentic-platform/_index.md) (experimental) | Web Console |
 | Get AI help with Docker tasks (containers, images, Dockerfiles) | [Gordon](./ai/gordon/)                                   | `docker ai`      |
 | Run AI models locally with an OpenAI-compatible API             | [Model Runner](./ai/model-runner/)                       | `docker model`   |
-| Connect AI tools to external services via MCP                   | [MCP Catalog and Toolkit](/manuals/desktop/features/mcp-catalog-and-toolkit/_index.md) | `docker mcp`     |
+| Connect AI clients to shared sets of MCP servers                | [MCP Gateway](./ai/mcp-gateway/_index.md)                 | Web console      |
 | Build and orchestrate custom multi-agent teams                  | [Docker Agent](./ai/docker-agent/)                       | `docker agent`   |
 | Give my coding agent Docker best-practice guidance              | [Docker Skills](./ai/skills/)                            | None             |
 
@@ -57,6 +57,6 @@ billed on a pay-as-you-go basis.
 **Model Runner** lets you run LLMs locally. Other tools like Docker Agent can
 use Model Runner as a model provider.
 
-**MCP Catalog and Toolkit** manages connections between AI tools and external
-services using the Model Context Protocol. Gordon, Docker Agent, and
-third-party tools can all use MCP servers configured through the Toolkit.
+MCP Gateway connects AI clients to a selection of MCP servers through one
+endpoint. Use its web console to publish servers, create gateways, and manage
+team access.
