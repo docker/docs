@@ -166,7 +166,7 @@ Docker Hardened Images (DHIs) are available for Node.js in the [Docker Hardened 
    WORKDIR /app
 
    # Copy package-related files first to leverage Docker's caching mechanism
-   COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
+   COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* pnpm-workspace.yaml* .npmrc* ./
 
    # Install project dependencies with frozen lockfile for reproducible builds
    RUN --mount=type=cache,target=/root/.npm \
@@ -283,7 +283,7 @@ Create a file named `Dockerfile` with the following contents (uses `node`):
   WORKDIR /app
 
   # Copy package-related files first to leverage Docker's caching mechanism
-  COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
+  COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* pnpm-workspace.yaml* .npmrc* ./
 
   # Install project dependencies with frozen lockfile for reproducible builds
   RUN --mount=type=cache,target=/root/.npm \
@@ -451,7 +451,7 @@ Docker Hardened Images (DHIs) are available for Node.js and Nginx in the [Docker
    WORKDIR /app
 
    # Copy package-related files first to leverage Docker's caching mechanism
-   COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
+   COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* pnpm-workspace.yaml* .npmrc* ./
 
    # Install project dependencies with frozen lockfile for reproducible builds
    RUN --mount=type=cache,target=/root/.npm \
@@ -551,7 +551,7 @@ FROM node:${NODE_VERSION} AS dependencies
 WORKDIR /app
 
 # Copy package-related files first to leverage Docker's caching mechanism
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* pnpm-workspace.yaml* .npmrc* ./
 
 # Install project dependencies with frozen lockfile for reproducible builds
 RUN --mount=type=cache,target=/root/.npm \
@@ -1014,7 +1014,7 @@ FROM node:${NODE_VERSION} AS dev
 
 WORKDIR /app
 
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* pnpm-workspace.yaml* .npmrc* ./
 
 RUN --mount=type=cache,target=/root/.npm \
     --mount=type=cache,target=/usr/local/share/.cache/yarn \
