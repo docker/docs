@@ -46,6 +46,10 @@ grid:
 
 {{< summary-bar feature_name="Docker MCP Catalog and Toolkit" >}}
 
+> [!NOTE]
+> For a Docker-hosted or self-hosted gateway with a web console for publishing
+> servers and managing team access, see [MCP Gateway](/manuals/ai/mcp-gateway/_index.md).
+
 [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) is
 an open protocol that standardizes how AI applications access external tools
 and data sources. By connecting LLMs to local development tools, databases,
@@ -85,9 +89,6 @@ once, then share it across clients or with your team.
 Clients are the AI applications that connect to your profiles. Claude Code,
 Cursor, Zed, and others connect through the MCP Gateway, which routes requests
 to the right server and handles authentication and lifecycle management.
-
-> [!NOTE]
-> MCP Gateway as part of Docker AI Governance is an invite-only feature. [Contact Docker Sales](https://www.docker.com/pricing/contact-sales/) to learn more.
 
 ## Learn more
 
