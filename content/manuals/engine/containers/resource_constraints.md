@@ -174,6 +174,34 @@ Which is the equivalent to manually specifying `--cpu-period` and `--cpu-quota`;
 $ docker run -it --cpu-period=100000 --cpu-quota=50000 ubuntu /bin/bash
 ```
 
+The `--cpus`, `--cpu-period`, and `--cpu-quota` flags limit how much CPU time
+the container gets. They don't change the number of CPUs that the operating
+system reports inside the container. On a host with 20 CPUs, a container
+started with `--cpus=2` still reports 20 online CPUs:
+
+```console
+$ docker run --rm --cpus=2 ubuntu getconf _NPROCESSORS_ONLN
+20
+```
+
+Programs that size a thread pool from this count, for example with Python's
+`os.cpu_count()`, start more busy threads than the quota can run at the same
+time, and the kernel throttles the container for most of each period. Some
+tools also read the quota, so their output depends on the image. GNU coreutils
+9.8 and later make `nproc` follow a cgroup v2 CPU quota, and the `nproc` in
+the `ubuntu:26.04` image reports 2 in the same container. The `nproc` in
+`ubuntu:24.04` (GNU coreutils 9.4) reports 20.
+
+To keep the thread count in line with the limit, set the program's thread
+count explicitly, for example with `OMP_NUM_THREADS` or a command-line option.
+For programs that read their CPU affinity, such as `nproc`, you can instead
+restrict the container to specific CPUs with `--cpuset-cpus`:
+
+```console
+$ docker run --rm --cpuset-cpus=0,1 ubuntu nproc
+2
+```
+
 ### Configure the real-time scheduler
 
 You can configure your container to use the real-time scheduler, for tasks which
