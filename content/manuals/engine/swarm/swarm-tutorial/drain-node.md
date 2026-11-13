@@ -21,6 +21,11 @@ node and launches replica tasks on a node with `Active` availability.
 > such as those created with `docker run`, `docker compose up`, or the Docker Engine
 > API. A node's status, including `Drain`, only affects the node's ability to schedule
 > swarm service workloads.
+>
+> Drain also does not wait for replacement tasks to be running on another node
+> before it stops the tasks on the drained node. The service can drop below its
+> replica count while the new tasks start. If you drain the last worker that
+> still has replicas, those tasks stop together.
 
 1.  If you haven't already, open a terminal and ssh into the machine where you
     run your manager node. For example, the tutorial uses a machine named
