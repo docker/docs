@@ -180,9 +180,7 @@ Match originalhost "*.sbx,!*'*"
 You don't edit this block by hand. Its key entries work as follows:
 
 - `Match originalhost "*.sbx,!*'*"` selects sandbox hostnames as entered on
-  the SSH command line and excludes names containing a single quote. On macOS
-  and Linux, `ProxyCommand` also single-quotes `%n`, the original hostname, to
-  pass it as a literal shell argument. Windows leaves `%n` unquoted.
+  the SSH command line and excludes names containing a single quote.
 - Enter the hostname, such as `demo.sbx`, manually when you configure an
   integration. Host pickers that list `Host` entries don't list these `Match`
   blocks.
