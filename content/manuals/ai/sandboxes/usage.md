@@ -183,6 +183,12 @@ $ sbx run claude --name feature ~/my-project
 $ sbx run claude --name spike ~/my-project
 ```
 
+When `sbx run` finds several matching sandboxes for the same agent and working
+directory, an interactive terminal prompts you to choose one by number. There
+is no default selection: pressing Enter cancels the command. In a
+non-interactive session or with `--no-input`, the command returns an error
+listing the matches. Use `sbx run --name <sandbox-name>` to select one explicitly.
+
 ## Create without attaching
 
 [`sbx run`](/reference/cli/sbx/run/) creates the sandbox and attaches you to the
