@@ -85,7 +85,7 @@ $ sbx --cloud run claude --name cloud-project
 ```
 
 Without `--name`, an interactive run offers existing sandboxes for that agent
-and an option to create another. Pass `--new` to create a fresh sandbox.
+and an option to create another.
 
 Reusing a sandbox keeps its creation settings. Flags such as `--cpus`,
 `--memory`, `--platform`, `--ttl`, `--env`, and `--allow-network` are rejected
