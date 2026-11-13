@@ -115,6 +115,50 @@ unix:///run/user/1001/docker.sock
 $ docker -H ssh://<REMOTEUSER>@<REMOTEHOST> run ...
 ```
 
+### Connecting to the host from a container
+
+By default, RootlessKit blocks traffic from containers to the host loopback
+interface. That means `host.docker.internal` and other host addresses are not
+reachable unless you opt in.
+
+To allow containers to reach the host (Docker Engine v26.0 and later):
+
+1. Enable host loopback in the RootlessKit environment and restart the daemon:
+
+   ```console
+   $ mkdir -p ~/.config/systemd/user/docker.service.d
+   $ cat > ~/.config/systemd/user/docker.service.d/override.conf <<EOF
+   [Service]
+   Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_DISABLE_HOST_LOOPBACK=false"
+   EOF
+   $ systemctl --user daemon-reload
+   $ systemctl --user restart docker
+   ```
+
+2. Point `host-gateway` at the host address RootlessKit exposes (`10.0.2.2`
+   with the default `slirp4netns` driver). Add this to
+   `~/.config/docker/daemon.json`:
+
+   ```json
+   {
+     "host-gateway-ip": "10.0.2.2"
+   }
+   ```
+
+   Then restart the daemon again (`systemctl --user restart docker`).
+
+3. Start the container with the special host entry (or set the same mapping in
+   Compose/`extra_hosts`):
+
+   ```console
+   $ docker run --rm --add-host=host.docker.internal:host-gateway curlimages/curl \
+     curl -sS http://host.docker.internal:8111/
+   ```
+
+Without step 1, connections to the host fail even if you set
+`host.docker.internal`. Without step 2, `host-gateway` may resolve to an
+address that is not reachable from inside RootlessKit's network namespace.
+
 ### Routing ping packets
 
 On some distributions, `ping` does not work by default.
