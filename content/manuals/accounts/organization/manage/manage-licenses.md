@@ -123,8 +123,14 @@ When the toggle is on:
 - Licenses are assigned until exhausted.
   - Once the available licenses are exhausted, automatic license assignment
     stops until more licenses are available.
-  - Members can still use Docker Sandboxes or Docker Desktop, but
-    organization policies for those products won't affect their usage.
+  - Members can still use Docker Desktop, but organization policies for
+    Docker Desktop won't affect their usage.
+  - Unless you
+    [block Docker Sandboxes for members without an AI Governance license](/manuals/ai/governance/organization/policies/create-manage.md#block-members-without-a-license),
+    members can still use Docker Sandboxes. Organization policies for
+    Docker Sandboxes won't affect their usage. Only the
+    [local policies](/manuals/ai/governance/local/_index.md) on their own
+    machines apply.
 
 AI Governance licenses include single sign-on (SSO) and provisioning with
 System for Cross-domain Identity Management (SCIM) or Just-in-Time (JIT),

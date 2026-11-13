@@ -35,6 +35,9 @@ the actions it controls, the resources it matches, and a decision of `allow` or
 ## Policy scope
 
 Organization policies apply only to members who hold an AI Governance license.
+Members without a license can use Docker Sandboxes without organization
+policies, unless you
+[block Docker Sandboxes for them](create-manage.md#block-members-without-a-license).
 Each policy applies to those members either across the whole organization or
 only on specific teams:
 
