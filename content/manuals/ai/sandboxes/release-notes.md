@@ -105,6 +105,7 @@ HTTP policy matching treats ASCII letters in URL paths and query parameter names
 
 #### Cloud sandboxes
 
+- Create and manage recurring cloud sandbox tasks with `sbx --cloud schedule`. Test tasks with manual runs, inspect run history, and pause or resume recurring runs.
 - Sandbox moves reject occupied explicit destination names before capturing or transferring the source. `--name` sets the exact destination name. Cloud-to-local moves derive the default destination name from the source sandbox name even when selected by ID.
 - Moving an already-cloud sandbox with `--to cloud` exits cleanly with an explanatory message. Resume recognizes running lifecycle states consistently, and sandboxes whose container creation fails can be deleted instead of remaining stuck.
 - Cloud sign-in failures produce warnings and suggest signing in again when appropriate. Invalid SSH certificate lifetimes are rejected even when a cached certificate is available.
