@@ -24,6 +24,47 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.100.0
+
+{{< release-date date="2026-11-19" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.100.0" build_path="/XXXXXX/" >}}
+
+### Updates
+
+- Docker Offload `v0.7.47`
+- Docker Hardened Images (`dhictl`) `v0.0.12`
+- Docker Agent `v1.156.2`
+- [Docker Compose v5.7.1](https://github.com/docker/compose/releases/tag/v5.7.1)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where restarting Docker Desktop could cause ECI users running kind clusters to lose Kubernetes state.
+- Fixed Docker Desktop downloading an update again after a restart when it had already been downloaded.
+- Fixed Docker Desktop hanging and growing to several GB of memory when publishing host port `65535`. Fixes [docker/desktop-feedback#164](https://github.com/docker/desktop-feedback/issues/164).
+- Fixed an issue where installs with sign-in enforcement (`allowedOrgs`) could stop reporting usage analytics after a restart while the user stayed signed in.
+- Fixed the MCP Toolkit **Profiles** tab failing to load with "stdout maxBuffer length exceeded" when a profile contains many servers. Fixes [docker/desktop-feedback#681](https://github.com/docker/desktop-feedback/issues/681).
+- Fixed `docker build` API requests with a chunked request body hanging over keep-alive connections. Fixes [docker/desktop-feedback#805](https://github.com/docker/desktop-feedback/issues/805).
+- Fixed Docker Desktop getting stuck in the stopping state when the Docker VMM process did not exit after the VM powered off.
+- Fixed file locks, ownership changes and file-change notifications being ignored on the descriptor that created a file in a bind mount. [Fixes desktop-feedback/issues/765](https://github.com/docker/desktop-feedback/issues/765).
+
+#### For Mac
+
+- Fixed **Allow privileged port forwarding to external machines** being ignored with the Apple Virtualization engine. Privileged ports (below `1024`) published on all interfaces are now only reachable from the local machine unless the setting is enabled.
+
+#### For Windows
+
+- Fixed an issue where updating a Hyper-V installation enabled the WSL feature.
+- Updated the WSL2 engine to use single-distro (monodistro) mode by default, automatically migrating legacy dual-distro setups on next start for improved performance.
+- Added sparse raw disk format (`DockerDesktop.raw`) for new Docker VMM installations, replacing VHDX to prevent meta.db corruption; existing installations are unaffected.
+- Added a **Restart** option to the "WSL not installed" error so Docker Desktop can start once WSL has been installed, without quitting first.
+
+#### For Linux
+
+- Fixed an issue where `.deb` package installation failed on systems with AppArmor userspace tools installed but the kernel LSM not active (e.g., CI containers or systems booted with `apparmor=0`).
+
 ## 4.99.0
 
 {{< release-date date="2026-11-09" >}}
