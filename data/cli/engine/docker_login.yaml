@@ -50,6 +50,13 @@ long: |-
     - Microsoft Windows Credential Manager
     - [pass](https://www.passwordstore.org/)
 
+    On headless Linux hosts, D-Bus Secret Service often fails with errors like
+    `The name org.freedesktop.secrets was not provided by any .service files`
+    when no secret service is running. Install and start a secret service, or
+    switch `credsStore` to `pass` (after setting up
+    [pass](https://www.passwordstore.org/)), or remove `credsStore` so
+    credentials fall back to `config.json` (less secure, but works offline).
+
     With Docker Desktop, the credential store is already installed and configured
     for you. Unless you want to change the credential store used by Docker Desktop,
     you can skip the following steps.
