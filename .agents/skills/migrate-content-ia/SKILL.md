@@ -195,7 +195,7 @@ mapping only when needed.
   the same file-level rules as for Markdown) that emits links: e.g. `ref` /
   `relref`, `link` fields in shortcode args, or hardcoded
   `docs.docker.com` / path strings. Grep for old paths, slugs, and fragments
-  under `layouts/shortcodes/` (and `layouts/_default/` if partials build nav).
+  under `layouts/_shortcodes/` (and `layouts/_partials/` if partials build nav).
 - Match each file’s existing pattern; do not rewrite working shortcode style
   just to “clean up.”
 
