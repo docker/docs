@@ -78,11 +78,9 @@ destination is allowed if any rule allows it, and a deny rule from any source
 takes precedence over an allow rule. Kit rules apply under any preset,
 including **Locked Down**, because a preset isn't an explicit deny rule.
 
-How a request that no rule matches is handled depends on your preset. Under
-**Open**, every destination is allowed. Under **Balanced** and **Locked Down**,
-the request is blocked and asks for your approval instead of being denied
-outright, so you can open access to each destination as a sandbox needs it.
-For more details, see [Respond to approval requests](approvals.md).
+Under **Balanced** and **Locked Down**, a request that no rule matches asks for
+your approval instead of being denied outright. For more details, see
+[Respond to approval requests](approvals.md).
 
 When an organization policy is enforced for you, it changes which of your
 local rules apply. For more details, see
