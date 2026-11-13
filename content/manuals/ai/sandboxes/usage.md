@@ -448,25 +448,25 @@ If you know which ports you need, publish them when you create the sandbox:
 $ sbx run --publish 8080:3000 --name my-sandbox claude
 ```
 
-For an existing sandbox, use [`sbx ports`](/reference/cli/sbx/ports/) to
+For an existing sandbox, use `sbx port publish` to
 forward traffic from your host. Publishing a port on a stopped local sandbox
 starts it first:
 
 ```console
-$ sbx ports my-sandbox --publish 8080:3000
+$ sbx port publish my-sandbox 8080:3000
 $ open http://localhost:8080
 ```
 
 To let the OS pick a free host port instead of choosing one yourself, specify
-only the sandbox port. Then use `sbx ports` to check which host port was
+only the sandbox port. Then use `sbx port ls` to check which host port was
 assigned:
 
 ```console
-$ sbx ports my-sandbox --publish 3000
-$ sbx ports my-sandbox
+$ sbx port publish my-sandbox 3000
+$ sbx port ls my-sandbox
 ```
 
-`sbx ls` shows active port mappings alongside each sandbox. `sbx ports` lists
+`sbx ls` shows active port mappings alongside each sandbox. `sbx port ls` lists
 them in detail. The `CREATED` column shows the sandbox age, and the `STATUS`
 column identifies sandboxes kept running in detached mode with `(detached)`.
 
@@ -479,11 +479,11 @@ my-sandbox   claude   ● running   127.0.0.1:8080->3000/tcp4    /home/user/proj
 To stop forwarding a port:
 
 ```console
-$ sbx ports my-sandbox --unpublish 8080:3000
+$ sbx port unpublish my-sandbox 8080:3000
 ```
 
 When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
-`sbx ports` to publish ports on that sandbox. For dev server and host-service
+`sbx port publish` to publish ports on that sandbox. For dev server and host-service
 recipes, see
 [Local services](workflows/development.md#local-services).
 
