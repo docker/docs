@@ -201,6 +201,18 @@ To turn it back off:
 $ sbx settings set clipboard.imagePaste false
 ```
 
+## Which storage paths are used when running as root?
+
+On Unix, running `sbx` as root uses the home directory registered for root in
+the operating system and the default storage, credential, and daemon endpoint
+locations under that home. Inherited overrides for these locations, including
+`HOME`, `XDG_CONFIG_HOME`, `XDG_STATE_HOME`, `XDG_CACHE_HOME`,
+`SANDBOXES_STORAGE_ROOT`, and `DOCKER_SANDBOXES_API`, are ignored. Commands run
+as an ordinary user keep their existing paths and environment overrides.
+
+Before upgrading, stop any older root daemon that uses custom storage. The
+custom storage data is left untouched.
+
 ## Can I use Docker Sandboxes on headless Linux?
 
 Yes. For local sandboxes on Linux, `sbx` stores secrets in the Secret Service
@@ -208,7 +220,11 @@ exposed by your desktop keyring, such as GNOME Keyring or KDE Wallet. Headless s
 WSL setups have no running Secret Service, so `sbx` falls back to a file under
 `$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
 `~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. No setup is
-required. When you store a secret on such a host, `sbx` prints a notice:
+required. When running as root, `sbx` ignores `XDG_CONFIG_HOME` and uses
+`~/.config/com.docker.sandboxes` under root's registered home directory. See
+[Storage paths when running as root](#which-storage-paths-are-used-when-running-as-root).
+
+When you store a secret on such a host, `sbx` prints a notice:
 
 ```text
 No keychain detected - this secret will be stored on disk, protected by file permissions rather than a password

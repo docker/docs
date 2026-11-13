@@ -112,7 +112,9 @@ The final output reports the shared store path. The default locations are:
 | Windows  | `%LOCALAPPDATA%\DockerSandboxes\sandboxes\state\agent-skills`               |
 
 On Linux, `sbx` uses `$XDG_STATE_HOME/sandboxes/sandboxes/agent-skills` when
-`XDG_STATE_HOME` is set.
+`XDG_STATE_HOME` is set and you run it as an ordinary user. When running as
+root on Unix, `sbx` uses the default path under root's registered home directory.
+See [Storage paths when running as root](../faq.md#which-storage-paths-are-used-when-running-as-root).
 
 When a skill already exists in the store, `sbx` prompts before replacing it.
 Use `--force` to replace existing skills without prompts. Importing replaces

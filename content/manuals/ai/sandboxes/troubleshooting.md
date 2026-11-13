@@ -571,9 +571,12 @@ $ rm -rf ~/.cache/sandboxes/
 $ rm -rf ~/.config/sandboxes/
 ```
 
-If you have set custom `XDG_STATE_HOME`, `XDG_CACHE_HOME`, or
-`XDG_CONFIG_HOME` environment variables, replace `~/.local/state`,
-`~/.cache`, and `~/.config` with the corresponding values.
+If you run `sbx` as an ordinary user and have set custom `XDG_STATE_HOME`,
+`XDG_CACHE_HOME`, or `XDG_CONFIG_HOME` environment variables, replace
+`~/.local/state`, `~/.cache`, and `~/.config` with the corresponding values.
+When running as root, `sbx` ignores these overrides and uses the default paths
+under root's registered home directory. See
+[Storage paths when running as root](faq.md#which-storage-paths-are-used-when-running-as-root).
 
 {{< /tab >}}
 {{< /tabs >}}
