@@ -13,6 +13,28 @@
   window.GORDON_CARDS_SRC = '{{ $gordonCards.RelPermalink }}';
   // Lets Gordon answer with cards. Always on outside production builds.
   window.GORDON_CARDS_ENABLED = {{ or (ne hugo.Environment "production") site.Params.gordon.cards }};
+  {{- /* "legacy" streams answers from GORDON_BASE_URL. "browser" runs the assistant in the
+    reader's browser: the page loads its script from the loader URL, and the assistant sends
+    model requests to the proxy URL. */}}
+  {{- $backend := or (getenv "HUGO_GORDON_BACKEND") site.Params.gordon.backend "legacy" }}
+  {{- if not (in (slice "legacy" "browser") $backend) }}
+    {{- errorf "Unknown Gordon backend %q: use \"legacy\" or \"browser\"" $backend }}
+  {{- end }}
+  window.GORDON_BACKEND = {{ $backend }};
+  {{- if eq $backend "browser" }}
+    {{- $proxyURL := "https://ai-backend-service-stage.docker.com/proxy" }}
+    {{- $loaderURL := "" }}
+    {{- if eq hugo.Environment "production" }}
+      {{- $proxyURL = "https://ai-backend-service.docker.com/proxy" }}
+    {{- else }}
+      {{- with getenv "HUGO_GORDON_PROXY_URL" }}
+        {{- $proxyURL = . }}
+      {{- end }}
+      {{- $loaderURL = getenv "HUGO_GORDON_LOADER_URL" }}
+    {{- end }}
+    window.GORDON_PROXY_URL = {{ $proxyURL }};
+    window.GORDON_LOADER_URL = {{ or $loaderURL (printf "%s/docs-assistant/loader.js" $proxyURL) }};
+  {{- end }}
 </script>
 <div
   x-data="{
@@ -21,8 +43,14 @@
     messages: $persist([]).using(sessionStorage).as('gordon-messages'),
     currentQuestion: '',
     threadId: $persist(null).using(sessionStorage).as('gordon-threadId'),
+    // Thread of the in-browser assistant. Kept apart from threadId, which only the legacy
+    // backend knows.
+    assistantThreadId: $persist(null).using(sessionStorage).as('gordon-assistant-threadId'),
     includePageContext: $persist(true).using(sessionStorage).as('gordon-includePageContext'),
     maxTurnsPerThread: 10,
+    isBrowserAssistant: window.GORDON_BACKEND === 'browser',
+    assistantStatus: '',
+    abortController: null,
 
     init() {
       // Clean up any streaming messages that might be persisted
@@ -31,6 +59,9 @@
       // Watch for store changes to focus input
       this.$watch('$store.gordon.isOpen', (isOpen) => {
         if (isOpen) {
+          if (this.isBrowserAssistant) {
+            this.startAssistant().catch((err) => console.error('Gordon:', err))
+          }
           this.$nextTick(() => {
             this.$refs.input?.focus()
           })
@@ -115,12 +146,27 @@
       })
 
       try {
-        await this.streamGordonResponse(responseIndex)
+        if (this.isBrowserAssistant) {
+          await this.streamAssistantResponse(responseIndex)
+        } else {
+          await this.streamGordonResponse(responseIndex)
+        }
       } catch (err) {
+        if (err.name === 'AbortError') {
+          // Stopped by the reader, or cleared: keep whatever arrived.
+          const message = this.messages[responseIndex]
+          if (message?.isStreaming) {
+            message.isStreaming = false
+            message.stopped = true
+          }
+          return
+        }
         // Only set error if messages weren't cleared
         if (this.messages.length > 0) {
           if (err.message === 'RATE_LIMIT_EXCEEDED') {
             this.error = 'You\'ve exceeded your question quota for the day. Please come back tomorrow.'
+          } else if (err.code === 'rate_limited') {
+            this.error = err.message || 'You\'ve reached the question limit. Try again later.'
           } else {
             this.error = 'Failed to get response. Please try again.'
           }
@@ -132,6 +178,7 @@
         }
       } finally {
         this.isLoading = false
+        this.assistantStatus = ''
       }
     },
 
@@ -253,10 +300,82 @@
       this.messages[responseIndex].isStreaming = false
     },
 
+    // Adds the in-browser assistant's script and starts it. Safe to call more than once.
+    async startAssistant() {
+      const assistant = await this.$gordonAssistant()
+      // send() retries a failed load with these options and reports the failure.
+      assistant.load({ proxyUrl: window.GORDON_PROXY_URL }).catch(() => {})
+      return assistant
+    },
+
+    async streamAssistantResponse(responseIndex) {
+      const message = this.messages[responseIndex]
+      this.abortController = new AbortController()
+      try {
+        const assistant = await this.startAssistant()
+        const result = await assistant.send(
+          {
+            messages: this.messages.slice(0, responseIndex).map((msg) => ({
+              role: msg.role,
+              content: msg.content
+            })),
+            // An empty URL tells the assistant there's no current page to read.
+            pageUrl: this.includePageContext ? window.location.href : '',
+            pageTitle: this.includePageContext ? {{ .Title | jsonify }} : '',
+            ...(this.assistantThreadId && { threadId: this.assistantThreadId })
+          },
+          {
+            signal: this.abortController.signal,
+            onText: (text) => {
+              this.assistantStatus = ''
+              message.content += text
+              this.followAnswer()
+            },
+            onThinking: () => {
+              this.assistantStatus = 'Thinking…'
+            },
+            onToolCall: (name) => {
+              this.assistantStatus = name === 'get_current_page' ? 'Reading this page…'
+                : name === 'knowledge_base' ? 'Searching the docs…'
+                : 'Thinking…'
+            }
+          }
+        )
+        // The chat may have been cleared while the answer finished.
+        if (this.messages[responseIndex] === message) {
+          if (!this.assistantThreadId && result.threadId) {
+            this.assistantThreadId = result.threadId
+          }
+          message.answerId = result.answerId
+        }
+      } finally {
+        this.abortController = null
+      }
+      message.isStreaming = false
+    },
+
+    stopAnswer() {
+      this.abortController?.abort()
+    },
+
+    followAnswer() {
+      this.$nextTick(() => {
+        const container = this.$refs.messagesContainer
+        if (container) {
+          const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100
+          if (isNearBottom) {
+            container.scrollTop = container.scrollHeight
+          }
+        }
+      })
+    },
+
     clearChat() {
       if (confirm('Clear all messages?')) {
+        this.abortController?.abort()
         this.messages = []      // $persist auto-saves empty array
         this.threadId = null    // $persist auto-removes from sessionStorage
+        this.assistantThreadId = null
         this.error = null
       }
     },
@@ -297,6 +416,11 @@
       // Clear any previous error
       message.feedbackError = null
 
+      if (this.isBrowserAssistant) {
+        await this.rateAnswer(message, feedbackType)
+        return
+      }
+
       if (!message.questionAnswerId) {
         message.feedbackError = 'Unable to submit feedback'
         console.error('No question_answer_id available for feedback')
@@ -319,6 +443,17 @@
           message.feedbackError = 'Unable to submit feedback'
           console.error('Failed to submit feedback:', response.status, response.statusText)
         }
+      } catch (err) {
+        message.feedbackError = 'Unable to submit feedback'
+        console.error('Error submitting feedback:', err)
+      }
+    },
+
+    async rateAnswer(message, feedbackType) {
+      try {
+        const assistant = await this.$gordonAssistant()
+        await assistant.rate({ answerId: message.answerId, feedback: feedbackType })
+        message.feedback = feedbackType  // $persist auto-saves
       } catch (err) {
         message.feedbackError = 'Unable to submit feedback'
         console.error('Error submitting feedback:', err)
@@ -499,18 +634,26 @@
                 class="prose prose-sm dark:prose-invert"
               >
                 <template x-if="!message.content && message.isStreaming">
-                  <div class="flex gap-1 py-3">
+                  <div class="flex items-center gap-3">
+                    <div class="flex gap-1 py-3">
+                      <span
+                        class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
+                        style="animation-delay: 0ms"
+                      ></span>
+                      <span
+                        class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
+                        style="animation-delay: 150ms"
+                      ></span>
+                      <span
+                        class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
+                        style="animation-delay: 300ms"
+                      ></span>
+                    </div>
                     <span
-                      class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
-                      style="animation-delay: 0ms"
-                    ></span>
-                    <span
-                      class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
-                      style="animation-delay: 150ms"
-                    ></span>
-                    <span
-                      class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
-                      style="animation-delay: 300ms"
+                      x-show="assistantStatus"
+                      x-text="assistantStatus"
+                      aria-hidden="true"
+                      class="text-sm text-gray-600 dark:text-gray-400"
                     ></span>
                   </div>
                 </template>
@@ -518,14 +661,20 @@
                   <div x-html="formatMessageContent(message)"></div>
                 </template>
               </div>
+              <template x-if="message.stopped === true">
+                <p class="text-xs text-gray-600 dark:text-gray-400">
+                  You stopped this answer.
+                </p>
+              </template>
               <!-- Feedback buttons for assistant messages -->
               <template
-                x-if="message.role === 'assistant' && !message.isStreaming"
+                x-if="message.role === 'assistant' && !message.isStreaming && (message.content || !message.stopped)"
               >
                 <div class="flex flex-col gap-2">
                   <div class="flex items-center gap-3 text-xs">
                     <!-- "Was this helpful?" prompt with gordon icon -->
                     <div
+                      x-show="!isBrowserAssistant || message.answerId"
                       class="flex items-center gap-1.5 text-gray-600 dark:text-gray-400"
                     >
                       <span class="icon-svg icon-sm">
@@ -535,7 +684,10 @@
                     </div>
 
                     <!-- Feedback buttons group -->
-                    <div class="flex items-center gap-2">
+                    <div
+                      x-show="!isBrowserAssistant || message.answerId"
+                      class="flex items-center gap-2"
+                    >
                       <!-- Thumbs up - Helpful -->
                       <button
                         @click="submitFeedback(index, 'positive')"
@@ -572,7 +724,10 @@
                     </div>
 
                     <!-- Separator -->
-                    <div class="h-4 w-px bg-gray-300 dark:bg-gray-600"></div>
+                    <div
+                      x-show="!isBrowserAssistant || message.answerId"
+                      class="h-4 w-px bg-gray-300 dark:bg-gray-600"
+                    ></div>
 
                     <!-- Copy button -->
                     <button
@@ -658,6 +813,8 @@
       </template>
     </div>
 
+    <p class="sr-only" role="status" x-text="assistantStatus"></p>
+
     <!-- Input area -->
     <form @submit.prevent="askQuestion()" class="space-y-2 p-4 pt-0">
       <div class="relative w-full">
@@ -675,7 +832,20 @@
           ></textarea>
         </div>
         <button
+          type="button"
+          x-show="isBrowserAssistant && isLoading"
+          @click="stopAnswer()"
+          title="Stop answer"
+          aria-label="Stop answer"
+          class="absolute top-2 right-2 cursor-pointer rounded p-2 text-blue-500 transition-colors hover:bg-blue-500/15"
+        >
+          <span class="icon-svg">
+            {{ partialCached "icon" "stop" "stop" }}
+          </span>
+        </button>
+        <button
           type="submit"
+          x-show="!(isBrowserAssistant && isLoading)"
           :disabled="!currentQuestion.trim() || isLoading || isThreadLimitReached()"
           :title="isLoading ? 'Sending...' : (isThreadLimitReached() ? 'Thread limit reached. Start a new thread.' : 'Send question')"
           class="absolute top-2 right-2 cursor-pointer rounded p-2 text-blue-500 transition-colors enabled:hover:bg-blue-500/15 disabled:cursor-not-allowed disabled:text-gray-500"
