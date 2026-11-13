@@ -24,6 +24,15 @@ and is useful for working manually or installing your own agent.
 Your sandbox keeps running when you leave the Console. It runs until you pause
 or delete it. When its timer expires, it performs the action you selected.
 
+## Name a sandbox
+
+You can choose a name when you create a sandbox or keep the randomly generated
+name. See [Sandbox options](get-started.md#sandbox-options) for how to set a name
+before launch.
+
+To rename an existing sandbox, open it in the Console and edit its name on the
+sandbox's detail page.
+
 ## Choose a platform
 
 In the compute picker, under **Platform**, choose **auto**, **linux/amd64**
