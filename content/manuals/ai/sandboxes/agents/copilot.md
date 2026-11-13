@@ -36,6 +36,8 @@ Copilot requires a GitHub token with Copilot access. Store your token using
 
 ```console
 $ sbx secret set github --command 'gh auth token'
+$ sbx secret set copilot --command 'gh auth token'
+\\ Copilot requires both the GitHub credential for GitHub API access and the Copilot-specific credential for Copilot itself.
 ```
 
 ## Configuration
