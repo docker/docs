@@ -87,8 +87,8 @@ Pull requests from forks can build without Docker Hub secrets or a writable
 OpenID Connect token. Builds that need private dependencies still need access
 to those dependencies.
 
-GitHub Builder checks out the repository for the triggering event in its own jobs.
-Files changed in a caller job aren't automatically available to the build.
+GitHub Builder builds from the repository at the triggering Git reference.
+Files changed in a caller job aren't included in the build.
 
 GitHub Builder uses the metadata action to generate tags from the GitHub event.
 For example, a push to `main` publishes `DOCKERHUB_USERNAME/my-image:main`.

@@ -49,14 +49,8 @@ conceptual platform jobs:
 The `runner` input accepts either a single GitHub-hosted Linux runner label or a
 newline-delimited platform mapping.
 
-The default value is a platform mapping that uses GitHub-hosted Ubuntu runners:
-
-```yaml
-runner: |
-  default=ubuntu-24.04
-  linux/arm=ubuntu-24.04-arm
-  linux/arm64=ubuntu-24.04-arm
-```
+For the default mapping, see
+[Runner mapping](https://github.com/docker/github-builder#runner-mapping).
 
 In the platform job, the runner label resolves to a single value:
 

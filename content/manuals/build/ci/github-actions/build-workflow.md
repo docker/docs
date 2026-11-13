@@ -59,9 +59,9 @@ When you set `output: image`, `meta-images` is required because the workflow
 creates image names and [manifest tags](manage-tags-labels.md) from that
 input. `distribute: true` is the default, so a multi-platform build can fan out
 across native GitHub-hosted runners instead of forcing the whole build onto one
-machine. The default `runner` mapping sends Linux Arm platforms to
-`ubuntu-24.04-arm` and uses `ubuntu-24.04` for other platforms. To change that
-mapping, see [runner selection](github-builder-architecture/index.md#runner-selection). `sign: auto`
+machine. For the default `runner` mapping, see
+[Runner mapping](https://github.com/docker/github-builder#runner-mapping). To change
+that mapping, see [runner selection](github-builder-architecture/index.md#runner-selection). `sign: auto`
 is also the default, which means the workflow signs
 [attestation manifests](attestations.md) when the image is pushed.
 
