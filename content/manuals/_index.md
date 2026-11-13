@@ -23,6 +23,10 @@ params:
     description: Run AI coding agents in isolated environments.
     icon: command-line
     link: /ai/sandboxes/
+  - title: MCP Gateway
+    description: Connect AI clients to MCP servers and manage team access.
+    icon: cpu-chip
+    link: /ai/mcp-gateway/
   - title: Sandboxes API and SDK
     description: Create and manage cloud sandboxes from your applications.
     icon: code-bracket
@@ -31,10 +35,6 @@ params:
     description: Control what agents in sandboxes can reach, and audit what they did.
     icon: lock-closed
     link: /ai/governance/
-  - title: MCP Catalog and Toolkit
-    description: Augment your AI workflow with MCP servers.
-    icon: /icons/toolkit.svg
-    link: /ai/mcp-catalog-and-toolkit/
   - title: Gordon
     description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
     icon: document-plus
