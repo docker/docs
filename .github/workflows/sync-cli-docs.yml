@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "(optional) Docker CLI version - defaults to docker_ce_version in hugo.yaml"
+        description: "(optional) Docker version - defaults to docker_ce_version in hugo.yaml"
         required: false
         default: ""
   pull_request:
@@ -21,6 +21,7 @@ permissions:
 
 env:
   BRANCH_NAME: "bot/sync-cli-docs"
+  MOBY_MODULE: "github.com/moby/moby/v2"
 
 jobs:
   sync-cli-docs:
@@ -60,6 +61,7 @@ jobs:
           git checkout -b "$BRANCH_NAME"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          echo "base=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       -
         name: Run sync script
         id: sync
@@ -79,15 +81,37 @@ jobs:
             echo "::error::Script failed with exit code $EXIT_CODE"
             exit $EXIT_CODE
           fi
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4
+      -
+        name: Sync moby/moby docs
+        id: moby
+        env:
+          VERSION: ${{ steps.get-version.outputs.version }}
+        run: |
+          TARGET=$(go list -m -f '{{ .Version }}' "${MOBY_MODULE}@docker-${VERSION}")
+          go mod edit -require "${MOBY_MODULE}@${TARGET}"
+          make vendor
 
+          if [ -z "$(git status --porcelain -- go.mod go.sum _vendor)" ]; then
+            echo "changes=false" >> "$GITHUB_OUTPUT"
+            echo "No changes to sync - moby/moby docs are up to date" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          git add go.mod go.sum _vendor
+          git commit -m "vendor: ${MOBY_MODULE} ${TARGET} (docker-${VERSION})"
+          echo "changes=true" >> "$GITHUB_OUTPUT"
+          echo "Changes detected - syncing moby/moby docs" >> "$GITHUB_STEP_SUMMARY"
       -
         name: Show PR
-        if: steps.sync.outputs.changes == 'true'
+        if: steps.sync.outputs.changes == 'true' || steps.moby.outputs.changes == 'true'
         run: |
-          git show "${{ env.BRANCH_NAME }}"
+          git log -p "${{ steps.create-branch.outputs.base }}..${{ env.BRANCH_NAME }}"
       -
         name: Create or update Pull Request
-        if: steps.sync.outputs.changes == 'true' && github.event_name != 'pull_request'
+        if: (steps.sync.outputs.changes == 'true' || steps.moby.outputs.changes == 'true') && github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
           BRANCH_NAME: ${{ env.BRANCH_NAME }}
@@ -95,9 +119,9 @@ jobs:
           PR_BODY: |
             ## Summary
 
-            Automated sync of CLI documentation from docker/cli repository.
+            Automated sync of CLI documentation from the docker/cli repository and Engine documentation from the moby/moby repository.
 
-            **CLI Version:** ${{ steps.get-version.outputs.version }}
+            **Docker Version:** ${{ steps.get-version.outputs.version }}
 
             ---
 
