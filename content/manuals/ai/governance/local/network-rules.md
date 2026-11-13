@@ -30,6 +30,23 @@ Specify multiple hosts in one command with a comma-separated list:
 $ sbx policy allow network "api.anthropic.com,*.npmjs.org,*.pypi.org"
 ```
 
+### Hostname blocking limitations
+
+In local sandboxes, a denied host that shares an IP address with an allowed
+host can still be reached. Network rules match the hostname attributed to the
+connection, such as its TLS Server Name Indication (SNI) or HTTP `Host`, with
+these limitations:
+
+- On connections the proxy doesn't decrypt, the HTTP `Host` or `:authority`
+  inside the encrypted stream isn't checked.
+- On cleartext HTTP connections sent through a `CONNECT` tunnel or without
+  `HTTP_PROXY`, only the first request's `Host` is checked. Later requests on
+  the same connection aren't checked. This limitation doesn't apply to plain
+  HTTP sent to `HTTP_PROXY`.
+- When a connection names no host, an allowed hostname the sandbox resolved
+  to that address is used, even if another hostname resolved to the same
+  address is denied.
+
 ## Allow or block a destination for one sandbox
 
 Pass `--sandbox <name>` to scope a rule to one sandbox:
