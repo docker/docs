@@ -244,12 +244,13 @@ How the boundary is enforced:
 - The agent works on a private clone that lives inside the sandbox. The
   clone has its own index, its own refs, and its own working tree. Writes
   to the clone never reach your host.
-- The CLI adds a `sandbox-<sandbox-name>` Git remote to your host repository.
-  By default, fetching uses the daemon socket, restricted to your host user,
-  without publishing a Git TCP port. For compatibility mode and remote
-  lifecycle details, see [Sandbox remote behavior](../workflows/git.md#sandbox-remote-behavior).
-  Nothing is integrated until you explicitly merge or check out the fetched
-  refs.
+- Your host repository gets a `sandbox-<sandbox-name>` Git remote for
+  fetching commits from the sandbox. By default, fetching uses the daemon
+  socket, restricted to your host user. Fetching downloads commits into your
+  host repository; you choose which changes to bring into your working tree
+  by checking out or merging a fetched branch. For compatibility mode and
+  remote lifecycle details, see
+  [Sandbox remote behavior](../workflows/git.md#sandbox-remote-behavior).
 
 The practical guarantees:
 

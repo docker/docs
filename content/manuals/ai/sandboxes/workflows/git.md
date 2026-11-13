@@ -99,15 +99,14 @@ to create a separate worktree or clone for each task.
 
 ### Sandbox remote behavior
 
-The CLI copies Git remotes from your host repository, such as `origin` and
-`upstream`, into the in-sandbox clone. Local-path remotes, such as `file://`
+The in-sandbox clone receives Git remotes from your host repository, such as
+`origin` and `upstream`. Local-path remotes, such as `file://`
 URLs and filesystem paths, aren't copied because they aren't reachable from
 inside the sandbox.
 
-The CLI adds a `sandbox-<name>` remote to your host repository. By default,
-`git fetch sandbox-<name>` and `git pull` transfer commits through the daemon
-socket, whose access is restricted to your host user. No Git TCP port is
-published and no Git daemon runs inside the sandbox.
+Your host repository gets a `sandbox-<name>` remote for fetching commits from
+the sandbox. By default, fetching from this remote transfers commits through
+the daemon socket, whose access is restricted to your host user.
 
 - `sbx stop` makes the remote unavailable. Fetching fails until you start the
   sandbox again; fetching doesn't start it automatically.
@@ -117,7 +116,7 @@ published and no Git daemon runs inside the sandbox.
   host repository.
 
 For Git clients that ignore the remote's `uploadpack` setting, use
-`sbx settings set clone.legacyTcpRemote true` to restore the TCP transport.
+`sbx settings set clone.legacyTcpRemote true` to use the TCP transport.
 The setting takes effect the next time the sandbox starts. This compatibility
 mode exposes the repository and its history through an unauthenticated
 localhost Git port, which other local accounts on the host can access.
