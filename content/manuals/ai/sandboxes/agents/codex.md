@@ -32,6 +32,13 @@ $ sbx run codex
 To create a [mountless sandbox](../usage.md#choose-a-workspace), use
 `sbx create` without a workspace path, then attach by name.
 
+## Preserve conversations after sandbox removal
+
+To keep Codex conversations when you remove and recreate a local sandbox,
+add its session mixin when creating the sandbox. See
+[Preserve Claude Code and Codex conversations](../customize/use-kits.md#preserve-claude-code-and-codex-conversations)
+for commands and steps to resume a conversation.
+
 ## Authentication
 
 For the default OpenAI models, `sbx run codex` prompts you to authenticate on
