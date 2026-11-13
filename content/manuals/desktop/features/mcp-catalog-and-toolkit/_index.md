@@ -2,9 +2,6 @@
 url: /ai/mcp-catalog-and-toolkit/
 title: Docker MCP Catalog and Toolkit
 linkTitle: MCP Catalog and Toolkit
-sitemap: false
-cascade:
-  sitemap: false
 params:
   sidebar:
     badge:
