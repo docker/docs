@@ -126,6 +126,39 @@ instructions for enabling and configuring AppArmor or SELinux.
     command accordingly or create and edit the file `/etc/docker/daemon.json`
     to add the custom configuration options.
 
+    For a service managed by systemd (optional), create
+    `/etc/systemd/system/docker.service` with a unit similar to:
+
+    ```unit
+    [Unit]
+    Description=Docker Application Container Engine
+    After=network-online.target
+    Wants=network-online.target
+
+    [Service]
+    Type=notify
+    ExecStart=/usr/bin/dockerd
+    ExecReload=/bin/kill -s HUP $MAINPID
+    LimitNOFILE=infinity
+    LimitNPROC=infinity
+    TimeoutStartSec=0
+    Restart=on-failure
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+
+    Then enable and start the service:
+
+    ```console
+    $ sudo systemctl daemon-reload
+    $ sudo systemctl enable --now docker
+    ```
+
+    Adjust `ExecStart` if you installed the binary somewhere other than
+    `/usr/bin/dockerd`. Prefer a distribution package when you need a
+    fully maintained unit and dependencies.
+
 5.  Verify that Docker is installed correctly by running the `hello-world`
     image.
 
