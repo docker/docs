@@ -85,9 +85,16 @@ The key dependencies in `pom.xml` are:
     <dependency>
         <groupId>io.rest-assured</groupId>
         <artifactId>rest-assured</artifactId>
+        <version>6.3.0</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
+```
+
+If you use Gradle, add the `rest-assured` dependency to `build.gradle`:
+
+```groovy
+testImplementation 'io.rest-assured:rest-assured:6.3.0'
 ```
 
 Using the Testcontainers BOM (Bill of Materials) is recommended so that you
