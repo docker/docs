@@ -125,7 +125,7 @@ FROM package as extract
 
 WORKDIR /build
 
-RUN java -Djarmode=layertools -jar target/app.jar extract --destination target/extracted
+RUN java -Djarmode=tools -jar target/app.jar extract --layers --destination target/extracted
 
 ################################################################################
 
@@ -153,6 +153,7 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 USER appuser
+WORKDIR /application
 
 # Copy the executable from the "package" stage.
 COPY --from=extract build/target/extracted/dependencies/ ./
@@ -162,7 +163,7 @@ COPY --from=extract build/target/extracted/application/ ./
 
 EXPOSE 8080
 
-ENTRYPOINT [ "java", "org.springframework.boot.loader.launch.JarLauncher" ]
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
 ```
 
 > [!NOTE]
@@ -382,8 +383,8 @@ update the instruction to pass in the system property as specified in the
 file.
 
 ```diff
-- ENTRYPOINT [ "java", "org.springframework.boot.loader.launch.JarLauncher" ]
-+ ENTRYPOINT [ "java", "-Dspring.profiles.active=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
+- ENTRYPOINT [ "java", "-jar", "app.jar" ]
++ ENTRYPOINT [ "java", "-Dspring.profiles.active=postgres", "-jar", "app.jar" ]
 ```
 
 Save and close all the files.
@@ -433,7 +434,7 @@ RUN --mount=type=bind,source=pom.xml,target=pom.xml \
 
 FROM package as extract
 WORKDIR /build
-RUN java -Djarmode=layertools -jar target/app.jar extract --destination target/extracted
+RUN java -Djarmode=tools -jar target/app.jar extract --layers --destination target/extracted
 
 FROM extract as development
 WORKDIR /build
@@ -442,7 +443,7 @@ RUN cp -r /build/target/extracted/spring-boot-loader/. ./
 RUN cp -r /build/target/extracted/snapshot-dependencies/. ./
 RUN cp -r /build/target/extracted/application/. ./
 ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000
-CMD [ "java", "-Dspring.profiles.active=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
+CMD [ "java", "-Dspring.profiles.active=postgres", "-jar", "app.jar" ]
 
 FROM eclipse-temurin:21-jre-jammy AS final
 ARG UID=10001
@@ -455,12 +456,13 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 USER appuser
+WORKDIR /application
 COPY --from=extract build/target/extracted/dependencies/ ./
 COPY --from=extract build/target/extracted/spring-boot-loader/ ./
 COPY --from=extract build/target/extracted/snapshot-dependencies/ ./
 COPY --from=extract build/target/extracted/application/ ./
 EXPOSE 8080
-ENTRYPOINT [ "java", "-Dspring.profiles.active=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
+ENTRYPOINT [ "java", "-Dspring.profiles.active=postgres", "-jar", "app.jar" ]
 ```
 
 Save and close the `Dockerfile`.
@@ -729,7 +731,7 @@ RUN --mount=type=bind,source=pom.xml,target=pom.xml \
 
 FROM package as extract
 WORKDIR /build
-RUN java -Djarmode=layertools -jar target/app.jar extract --destination target/extracted
+RUN java -Djarmode=tools -jar target/app.jar extract --layers --destination target/extracted
 
 FROM extract as development
 WORKDIR /build
@@ -738,7 +740,7 @@ RUN cp -r /build/target/extracted/spring-boot-loader/. ./
 RUN cp -r /build/target/extracted/snapshot-dependencies/. ./
 RUN cp -r /build/target/extracted/application/. ./
 ENV JAVA_TOOL_OPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
-CMD [ "java", "-Dspring.profiles.active=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
+CMD [ "java", "-Dspring.profiles.active=postgres", "-jar", "app.jar" ]
 
 FROM eclipse-temurin:21-jre-jammy AS final
 ARG UID=10001
@@ -751,12 +753,13 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 USER appuser
+WORKDIR /application
 COPY --from=extract build/target/extracted/dependencies/ ./
 COPY --from=extract build/target/extracted/spring-boot-loader/ ./
 COPY --from=extract build/target/extracted/snapshot-dependencies/ ./
 COPY --from=extract build/target/extracted/application/ ./
 EXPOSE 8080
-ENTRYPOINT [ "java", "-Dspring.profiles.active=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
+ENTRYPOINT [ "java", "-Dspring.profiles.active=postgres", "-jar", "app.jar" ]
 ```
 
 First, you added a new base stage. In the base stage, you added common instructions that both the test and deps stage will need.
