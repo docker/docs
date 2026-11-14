@@ -135,12 +135,30 @@ The CLI uses this helper for both its initial runtime and TUI-spawned runtimes.
 The HTTP API wires the same manifest budgets into its native runtimes; other
 serving adapters retain their existing wiring and budget behavior.
 
+## Remote execution
+
+Remote HTTP/SSE execution lives in `pkg/runtime/remote`:
+
+```go
+client, err := remote.NewClient(serverURL)
+if err != nil {
+    return err
+}
+rt, err := remote.NewRuntime(client)
+```
+
+Import `github.com/docker/docker-agent/pkg/runtime/remote` for these constructors.
+Shared interfaces and events remain in `pkg/runtime` (`runtime.Runtime`,
+`runtime.Event`, and the concrete event types). The remote implementation imports
+those types; local execution does not import remote transport. There are no
+compatibility re-exports of remote clients or constructors in `pkg/runtime`.
+
 ## Execution Capability Inspection
 
 `(*runtime.LocalRuntime).AgentExecutionCapabilities(name)` returns a static
 native/harness profile without starting tools, constructing drivers or
 initializing budget counters. Unknown agents return nil. The same optional
-profile is available on `runtime.AgentConfigInfo`, `runtime.AgentDetails` in
+profile is available on `inspection.AgentConfigInfo`, `runtime.AgentDetails` in
 `team_info`, and local startup/refresh `runtime.AgentInfoEvent` values.
 See [Execution capabilities](../../features/api-server/index.md#execution-capabilities)
 for field meanings and unknown/remote behavior.
@@ -275,7 +293,7 @@ For anything beyond that, call `chat.Runtime()` to access the underlying `runtim
 > still works and falls back to resolving the sole pending request.
 >
 > If you implement your own `runtime.Runtime` (rather than embedding
-> `runtime.LocalRuntime`/`runtime.RemoteRuntime`), you do need to update your
+> `runtime.LocalRuntime`/`remote.Runtime`), you do need to update your
 > method's signature to match, and also add an `OnElicitationRequest(handler
 > func(runtime.Event))` method (a no-op is fine if your runtime never raises
 > elicitations) — both are required interface methods, matching the existing
@@ -325,7 +343,7 @@ if err != nil {
 ts := ragtool.New(mgr, mgr.ToolName(), ragtool.WithIndexingTimeout(ragCfg.GetIndexingTimeout()))
 ```
 
-`cmd/wasm/toolsets.go` registers exactly this as the browser's `type: rag` creator, fed by `createSession`'s `documents` option.
+With `-tags docker_agent_wasm_rag`, `cmd/wasm/rag.go` registers this as the browser's `type: rag` creator, fed by `createSession`'s `documents` option. RAG is excluded from the default WASM build.
 
 ## Loading YAML with Hand-Picked Registries (lean embedding)
 
@@ -360,6 +378,7 @@ team, err := teamloader.Load(ctx, ocisource.New("myorg/agent:v1"), runConfig,
 - **Agent sources**: `config.NewFileSource` / `config.NewBytesSource` / `config.NewURLSource` live in `pkg/config`; the OCI source lives in `pkg/config/ocisource`; HCL support is a source decorator, `hcl.NewSource(inner)`, in `pkg/config/hcl`. `pkg/config/sources` resolves any reference (files, directories, URLs, OCI, user aliases, built-in agents) at the cost of linking all of them. Sub-agents referencing external agents (`sub_agents: [myorg/reviewer]`) need a `teamloader.WithSourceResolver` that wraps `sources.Resolve` (as `loaderdefaults.Opts()` does) — or your own resolver.
 - **Optional loader features**: everything the loader used to link unconditionally is now an option, so `pkg/teamloader` adds no module over `pkg/runtime`. Enable what your configs use: `teamloader.WithExpander(js.NewJsExpander)` for `${...}` JavaScript in instructions/commands (the default only resolves `${env.NAME}`; also call `jscommands.Register()` for slash commands), `teamloader.WithCodeMode(codemode.Wrap)` for `code_mode_tools`, `teamloader.WithToon(toon.Wrap)` for the `toon` field, `teamloader.WithDeferredTools(deferred.New)` for `defer`, and `runtime.RegisterHarness(codingharness.Factory)` for `harness:` agents. A config that uses a feature you did not enable fails to load with an error naming the option.
 - **Strict mode**: `teamloader.WithStrict(features...)` fails the load with a `*config.UnsupportedError` listing **every** provider type, toolset type and optional feature the config relies on that you did not enable, with the config locations that need them. Optional features are `config.FeatureHooks`, `config.FeatureHarness`, `config.FeatureAgentRouting`, `config.FeatureSkills`, `config.FeatureExternalAgents`, `config.FeatureCodeMode`, `config.FeatureToon` and `config.FeatureDeferredTools`; none is enabled unless listed. Agents on the `auto` model are resolved eagerly so the provider they land on is checked too. Without `WithStrict`, unknown toolset types stay load-time warnings and unknown providers fail when their model is built.
+- **Template-based hooks**: the `add_context` builtin and `type: model` hooks render Go templates. `text/template` looks methods up by name at run time, so linking it makes the Go linker keep every exported method of every reachable type, which roughly doubles a WASM binary. Build with `-tags docker_agent_no_hook_templates` to drop it; those two hooks then fail with `hooks.ErrHookTemplatesDisabled`. Hosts that load with `WithStrict()` and don't enable `config.FeatureHooks` lose nothing.
 
 `config.Requires(cfg)` exposes the same audit for your own checks. `pkg/embeddedchat` accepts all of this through `Config.LoadOpts`. A complete example lives in [examples/golibrary/yamlstrict](https://github.com/docker/docker-agent/tree/main/examples/golibrary/yamlstrict).
 
@@ -369,6 +388,63 @@ team, err := teamloader.Load(ctx, ocisource.New("myorg/agent:v1"), runConfig,
 > `config.Resolve`, `config.ResolveSources`, `config.ResolveAlias` and `config.BuiltinAgentNames` are now in `pkg/config/sources`; `config.NewOCISource` is `ocisource.New` in `pkg/config/ocisource`; and `config.Load` no longer auto-detects HCL — wrap the source with `hcl.NewSource` (which `sources.Resolve` does for you). `teamloader.ToolsetRegistry` gained a `Has(toolsetType string) bool` method.
 >
 > If you call `teamloader.Load` without `loaderdefaults.Opts()`, JavaScript expansion, code mode, TOON, deferred tools and harness agents are now off until you enable them (see *Optional loader features* above). Code-built teams that use `harness:` agents must call `runtime.RegisterHarness(codingharness.Factory)`; `codingharness.Label` moved into the runtime.
+
+### Optional YAML history and embedded model catalog
+
+The core packages do not link historical YAML schemas or a model catalog snapshot.
+Both capabilities are independent opt-ins; the CLI and the shipped WASM demo enable
+both to preserve their existing behavior.
+
+`config.Load` and `teamloader.Load` accept only the current schema by default
+(version omitted or `latest.Version`). To accept historical YAML, import
+`pkg/config/legacy` and pass its registrar:
+
+```go
+cfg, err := config.Load(ctx, source, config.WithVersions(legacy.Register))
+
+team, err := teamloader.Load(ctx, source, runConfig,
+    teamloader.WithConfigVersions(legacy.Register),
+    // ...provider and toolset registries...
+)
+```
+
+This retains the usual strict parsing, validation, flavor patches and migrations.
+The selection is per load and inherited by external sub-agents. `loaderdefaults`
+already includes it. Without it, old versions fail with an unsupported-version
+error; historical syntax hints are only available when history is selected.
+
+`modelsdev.NewStore` still uses its disk cache and the live models.dev API, but a
+cache/network miss returns an empty catalog unless a fallback is supplied. To
+include the optional embedded data, import `pkg/modelsdev/embedded`:
+
+```go
+store, err := modelsdev.NewStore(modelsdev.WithFallback(embedded.Snapshot))
+
+// Or configure the shared store used by a team and its runtime:
+runConfig := &config.RuntimeConfig{
+    ModelsDevFallback: embedded.Snapshot,
+}
+
+// Entirely in-memory; no cache or network discovery:
+store = modelsdev.NewDatabaseStore(embedded.Snapshot())
+```
+
+`runtime.WithModelsDevFallback(embedded.Snapshot)` configures a standalone
+runtime's lazy default store. An explicit `runtime.WithModelStore` or the store
+carried by its model-switcher configuration takes precedence. A fallback callback
+runs only when needed and is not cached as authoritative, so live discovery can
+recover after a failed request. Callback results are shared; treat them as read-only
+and make callbacks safe for concurrent use across stores.
+
+For a small offline host, use an empty in-memory store instead and omit the
+`embedded` import. No metadata means no reliable catalog pricing or capability
+inference; specify model limits and capabilities when required. Removing the
+snapshot alone does not disable network discovery in a normal `NewStore`.
+
+**Go API migration:** `modelsdev.EmbeddedSnapshot()` is now `embedded.Snapshot()`;
+`modelsdev.SnapshotDate()` is now `embedded.SnapshotDate()`. Existing applications
+loading old YAML must opt in with `legacy.Register`. No build tags or process-wide
+registration are needed for either capability.
 
 ### Per-runtime feature configuration
 
@@ -904,7 +980,6 @@ embedding, context-discovery or compaction capabilities.
 | Caller | Clone failure behavior |
 | --- | --- |
 | Session title | Tries the next configured candidate; exhaustion does not interrupt chat. |
-| MCP sampling, with or without tools | Returns the actionable clone error before inference. |
 | LLM compaction | Reports failure and leaves the session history intact. |
 | Compaction window resolution | The checked resolver returns zero plus the error; the LLM compaction path reports it. UI gauges remain best-effort. |
 

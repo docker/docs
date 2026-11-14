@@ -96,7 +96,7 @@ Control how much the model "thinks" before responding:
 | Provider   | Format     | Values                                                              | Default                          |
 | ---------- | ---------- | ------------------------------------------------------------------- | -------------------------------- |
 | OpenAI     | string     | `minimal`, `low`, `medium`, `high`, `xhigh`, `max`                  | `medium` (always-reasoning models only) |
-| Anthropic  | int or str | 1024–32768 tokens, or `adaptive`, `adaptive/<effort>`, effort level | off                              |
+| Anthropic  | int or str | Fixed budgets: ≥1024 and less than `max_tokens`; or `adaptive`, `adaptive/<effort>`, effort level | Model-dependent; Claude 5.x defaults to adaptive |
 | Gemini 2.5 | int        | 0 (off), -1 (dynamic), or token count                               | -1 (dynamic)                     |
 | Gemini 3   | string     | `minimal`, `low`, `medium`, `high`                                  | varies                           |
 | All        | string/int | `none` or `0` clears Docker Agent's local config                    | —                                |
@@ -107,8 +107,9 @@ endpoints running GPT-5.x from 5.6 onward or GPT-6 Sol/Luna, `none` is a real
 reason. On GPT-6 Astra and older OpenAI models, `none`/`0` only clear the local `thinking_budget` — omitting the field
 has the same effect — and the model falls back to the API's own default effort
 (still reasoning internally for always-reasoning models like the o-series).
-Providers with a true optional-thinking switch (Gemini 2.5, Claude, local
-models) are fully disabled by `none`/`0`. See the
+Models that support disabling thinking (including applicable Gemini 2.5, Claude,
+and local models) can honor `none`/`0`. Claude models that require thinking
+instead use adaptive thinking with low effort. See the
 [Thinking / Reasoning guide](../../guides/thinking/index.md#disabling-thinking)
 for the full per-provider breakdown.
 

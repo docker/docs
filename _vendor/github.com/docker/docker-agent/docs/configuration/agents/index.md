@@ -381,7 +381,7 @@ agents:
 
 ## Deferred Tool Loading
 
-Toolsets support `defer` to load tools on-demand and speed up agent startup. See [Deferred Tool Loading](../tools/index.md#deferred-tool-loading) for details.
+Toolsets support `defer` to expose tool definitions to the model on demand and reduce prompt size. The underlying toolsets still start normally. See [Deferred Tool Loading](../tools/index.md#deferred-tool-loading) for details.
 
 ```yaml
 agents:

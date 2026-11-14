@@ -119,7 +119,7 @@ restriction visible to the model so it can adjust its plan.
 
 ### Post-Edit Hooks
 
-Automatically run formatting, linting, or other commands after the agent edits a file. The command fires once per file after each edit operation (`write_file` and `edit_file`). Use `${file}` as a placeholder for the absolute path of the edited file.
+Automatically run formatting, linting, or other commands after the agent edits a file. The command fires once per file after each edit operation (`write_file` and `edit_file`). The command receives the absolute path in the `file` environment variable. With a POSIX shell, use `"${file}"` to preserve spaces and shell metacharacters in the path; use the corresponding environment-variable syntax for other shells.
 
 ```yaml
 toolsets:
@@ -127,17 +127,17 @@ toolsets:
     ignore_vcs: false
     post_edit:
       - path: "*.go"
-        cmd: "gofmt -w ${file}"
+        cmd: 'gofmt -w "${file}"'
       - path: "*.ts"
-        cmd: "prettier --write ${file}"
+        cmd: 'prettier --write "${file}"'
       - path: "src/*/*.py"
-        cmd: "black ${file}"
+        cmd: 'black "${file}"'
 ```
 
 | Property | Type | Description |
 | --- | --- | --- |
 | `path` | string | Glob pattern matched against the file path. `*.go` matches any `.go` file; `src/*/*.ts` matches `.ts` files inside `src/`. |
-| `cmd` | string | Shell command to run. `${file}` expands to the absolute path of the just-edited file. |
+| `cmd` | string | Shell command to run. The `file` environment variable contains the absolute path of the just-edited file; quote its expansion using your shell's syntax. |
 
 Post-edit commands run with the same working directory as the agent. If a command exits non-zero, the tool reports that the write or edit succeeded but the post-edit command failed. The edit is not rolled back.
 

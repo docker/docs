@@ -252,4 +252,4 @@ agents:
 > [!WARNING]
 > **Tool Limitations**
 >
-> When using native structured output, the agent typically cannot use tools since its response format is constrained to the schema. Design your agent workflow accordingly — native structured output agents work best for single-turn analysis or extraction tasks. Use `mode: tool` when the agent needs to call tools before producing its schema-constrained final answer.
+> Native structured output can coexist with tool calls when the provider and model support both; Docker Agent sends the tools alongside the output schema. Check your provider's restrictions rather than assuming tools are disabled. Use `mode: tool` when native schemas are unsupported or you want the final response submitted through an explicit output tool.

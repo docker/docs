@@ -146,4 +146,4 @@ Compaction summarizes history, but it never resets what a session has actually c
 
 ## Related: deferred tool loading
 
-Compaction and result trimming manage context that's already in the session. If large toolsets are inflating your **starting** context instead — many MCP servers, hundreds of tools — look at [deferred tool loading](../../configuration/tools/index.md#deferred-tool-loading), which registers a toolset's tools lazily instead of eagerly at startup.
+Compaction and result trimming manage context that's already in the session. If large toolsets are inflating your **starting** context instead — many MCP servers, hundreds of tools — look at [deferred tool loading](../../configuration/tools/index.md#deferred-tool-loading), which exposes tool definitions to the model only when needed. The underlying toolsets still start normally.

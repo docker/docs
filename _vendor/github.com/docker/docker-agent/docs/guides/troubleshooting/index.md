@@ -144,6 +144,19 @@ Model names must match the provider's naming exactly. Common mistakes:
 - Using a deprecated model name (e.g. `gpt-4` instead of `gpt-5-mini` or `gpt-4o`)
 - Model references are case-sensitive: `openai/gpt-5-mini` ≠ `openai/GPT-5-mini`
 
+### Conversation ends without a final reply
+
+A model can end a turn after using tools without returning an answer, or return
+only reasoning. This can happen with thinking models such as Claude Fable 5.2.
+Docker Agent emits a warning with the model and stop reason; `--exec --json`
+includes it as a `warning` event. An empty `stop` does not prove that the task
+finished or that the request was rate-limited.
+
+Check the preceding tool results before sending a follow-up: tools may already
+have changed files or created commits. Docker Agent does not automatically retry
+these turns. Use `--session <session-id>` to continue the session. When reporting
+an unexplained stop, include the warning and sanitized `--debug` logs.
+
 ### Network connectivity
 
 If the agent hangs or times out, check that you can reach the provider's API endpoint. Firewalls, VPNs, or proxy settings may block requests. Docker Agent does not evaluate PAC files or URLs directly. When Docker Desktop is running, eligible requests use its PAC adapter before environment proxy settings; `NO_PROXY` does not bypass that selection. Set `DOCKER_AGENT_DISABLE_DESKTOP_PROXY=1` (or `true`, `yes`, or `on`) to restore `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` routing per request; see [Docker Desktop proxy](../../tools/fetch/index.md#docker-desktop-proxy) for scope and SSRF behavior.
@@ -276,7 +289,7 @@ A few things that catch people out:
 
 ### Delegated task appears stalled before its first response
 
-A direct `transfer_task` delegation automatically retries once when the child model stream is silent before sending any response payload. It emits the existing warning event, and the retry is immediate and applies once to the complete child run, including later turns and fallback models. Each nested native `transfer_task` starts a new child run with its own fresh retry allowance. The retry does not apply after partial output, to `background_agents`, or when cancellation or a run budget blocks it.
+When a configured [stream idle timeout](../../configuration/models/index.md#stream-idle-timeout) expires before the child model sends any response payload, a direct `transfer_task` delegation automatically retries once. The idle timeout is disabled by default. It emits the existing warning event, and the retry is immediate and applies once to the complete child run, including later turns and fallback models. Each nested native `transfer_task` starts a new child run with its own fresh retry allowance. The retry does not apply after partial output, to `background_agents`, or when cancellation or a run budget blocks it.
 
 Run with `--debug` and look for `Delegated model stream idle before response; retrying immediately`. If the child still fails, check provider connectivity, fallback configuration, cancellation, and run-budget events; Docker Agent does not retry when the context is canceled or the run budget is exhausted.
 

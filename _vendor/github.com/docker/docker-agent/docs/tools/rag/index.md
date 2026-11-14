@@ -11,6 +11,12 @@ aliases:
 
 _Give your agents access to document knowledge bases with background indexing, multiple retrieval strategies, and hybrid search._
 
+> Relative document and database paths resolve from the agent's working directory
+> (or the configuration directory when no working directory is set). Default
+> database files are stored under the data directory, scoped by workspace, so
+> isolated worktrees do not mix indexed documents. Explicit absolute database
+> paths retain their sharing semantics.
+
 ## Overview
 
 The `rag` toolset lets agents search through your documents to find relevant information before responding. Knowledge bases are declared once at the top of the config under `rag:` and then referenced from any agent via `type: rag, ref: <name>`. Docker Agent supports:
@@ -60,6 +66,12 @@ loaded with different credentials, gets its own index. Background indexing
 for a shared knowledge base is not attributed to any session.
 
 ```yaml
+rag:
+  my_docs:
+    docs: [./documents]
+    strategies:
+      - type: bm25
+
 agents:
   researcher:
     model: anthropic/claude-sonnet-4-5
@@ -288,10 +300,9 @@ already detaches its file watcher. When the 30s budget expires:
   the tool is available immediately; if it is still running, that turn also
   proceeds without the tool.
 
-This is a **visible behavior change**: knowledge bases that used to finish
-indexing (and thus offer the tool) on the very first turn, within the old
-30-second window, now do so on whichever turn happens to land after indexing
-completes. If indexing takes under 30s, nothing changes.
+Indexing that finishes within the 30-second wait budget can expose the tool on
+the current turn. If indexing outlives that budget, the tool becomes available
+on a later turn after indexing completes.
 
 `indexing_timeout` bounds indexing itself, independent of the 30s wait
 budget — it exists only so a hung provider connection cannot pin a knowledge
@@ -305,6 +316,7 @@ rag:
     strategies:
       - type: chunked-embeddings
         embedding_model: openai/text-embedding-3-small
+        vector_dimensions: 1536
 ```
 
 - Default: `30m` when omitted.
@@ -353,6 +365,8 @@ If you see persistent `429`, `5xx`, or `408` errors in the logs:
        docs: [./knowledge-base]
        strategies:
          - type: chunked-embeddings
+           embedding_model: openai/text-embedding-3-small
+           vector_dimensions: 1536
            max_indexing_concurrency: 1
            max_embedding_concurrency: 1
    ```
@@ -387,7 +401,7 @@ Look for log tags: `[RAG Manager]`, `[Chunked-Embeddings Strategy]`, `[BM25 Stra
 | Field              | Type     | Default | Description                                                                                                                                    |
 | ------------------ | -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `docs`             | []string | —       | Document paths/directories (shared across strategies)                                                                                          |
-| `description`      | string   | —       | Human-readable description of this RAG source                                                                                                  |
+| `tool.description` | string   | —       | Description of the search tool shown to the model                                                                                                  |
 | `respect_vcs`      | boolean  | `true`  | Respect `.gitignore` files when indexing documents                                                                                             |
 | `indexing_timeout` | string   | `30m`   | Cap on a single indexing run, detached from the 30s toolset-start wait budget; `0s` = unbounded. See [Long indexing runs](#long-indexing-runs) |
 | `strategies`       | []object | —       | Array of retrieval strategy configurations                                                                                                     |
@@ -399,7 +413,7 @@ Look for log tags: `[RAG Manager]`, `[Chunked-Embeddings Strategy]`, `[BM25 Stra
 | --------------------------- | ------ | ------------------- | ------------------------------------------------------------ |
 | `embedding_model`           | string | —                   | **Required.** Embedding model reference                      |
 | `database`                  | string | —                   | Path to local SQLite database                                |
-| `vector_dimensions`         | int    | —                   | Embedding dimensions (e.g., 1536 for text-embedding-3-small) |
+| `vector_dimensions`         | int    | —                   | **Required.** Embedding dimensions (e.g., 1536 for text-embedding-3-small) |
 | `similarity_metric`         | string | `cosine_similarity` | Similarity metric                                            |
 | `threshold`                 | float  | `0.5`               | Minimum similarity score (0–1)                               |
 | `limit`                     | int    | `5`                 | Max results from this strategy                               |

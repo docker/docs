@@ -95,13 +95,26 @@ $ docker agent run agent.yaml /greet
 
 Commands support environment variable interpolation using JavaScript template literal syntax. Undefined variables expand to empty strings.
 
-## Default Agent
+## Built-in Agents
 
-Running `docker agent run` without a config argument uses `docker-agent.yaml`, `docker-agent.yml`, or `docker-agent.hcl` from the current directory when present. Otherwise, it uses a capable built-in default agent for quick tasks without needing any configuration.
+Docker Agent includes two built-in agents:
+
+- **`default`**: A capable coding agent with a development workflow, file and shell tools, skills, environment information, and project instructions from `AGENTS.md`.
+- **`minimal`**: A small general-purpose configuration with a concise instruction and file, shell, and fetch tools. It uses automatic model selection.
+
+The former `coder` built-in is now `default`; use `docker agent run default` for coding tasks.
+
+### Default Agent
+
+Running `docker agent run` without a config argument uses `docker-agent.yaml`, `docker-agent.yml`, or `docker-agent.hcl` from the current directory when present. Otherwise, it uses `default`.
 
 ```bash
 # Use the project config or built-in default agent
 $ docker agent run
+
+# Explicitly choose a built-in agent
+$ docker agent run default
+$ docker agent run minimal
 
 # Override the default with an alias
 $ docker agent alias add default /path/to/my-agent.yaml

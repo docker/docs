@@ -20,6 +20,8 @@ Docker Agent reads the first credential it finds from these environment variable
 | `GOOGLE_CLOUD_PROJECT`      | GCP project used when `GOOGLE_GENAI_USE_VERTEXAI` is enabled or for Vertex AI Model Garden. |
 | `GOOGLE_CLOUD_LOCATION`     | GCP region for Vertex AI (defaults to the SDK default).                             |
 
+When the model sets no `base_url`, the Google SDK's endpoint override applies: `GOOGLE_GEMINI_BASE_URL` for the Gemini Developer API or `GOOGLE_VERTEX_BASE_URL` for Vertex AI. An explicit `base_url` takes precedence, even when it equals the default endpoint.
+
 Explicit `provider_opts.project` or `provider_opts.location` selects Vertex AI regardless of the flag.
 
 On the Gemini Developer API, a model or [custom provider](../custom/index.md) that sets `token_key` reads its key from that variable instead of `GOOGLE_API_KEY` / `GEMINI_API_KEY`. The Vertex AI backends use Application Default Credentials and ignore `token_key`.
@@ -280,7 +282,7 @@ models:
 
 The value is forwarded unchanged as the top-level `serviceTier` of every `generateContent` request on the Gemini Developer API, Vertex AI, and the Docker models gateway; the endpoint must support it. It applies to all requests using the configured model, including reranking, title generation, and compaction. Other values are passed through for the API to validate. When omitted or empty, no `serviceTier` is sent, leaving the API's default behavior unchanged. Non-string values are ignored. [Vertex AI Model Garden](#vertex-ai-model-garden) models do not use this option.
 
-Flex requests can sit in Google's queue for up to 15 minutes before the first byte arrives. Docker Agent normally treats a stream that stays silent for 5 minutes as stalled; for `google` models with `service_tier: flex` it waits 15 minutes instead. Other tiers and providers keep the 5 minute limit. Rate-limit (`429`) and overloaded (`503`) responses are retried like any other Gemini request; Docker Agent never upgrades a request to a different tier on your behalf.
+Flex requests can sit in Google's queue for up to 15 minutes before the first byte arrives. Docker Agent has no stream idle timeout by default. A short [configured stream idle timeout](../../configuration/models/index.md#stream-idle-timeout) can time out a queued Flex request. Rate-limit (`429`) and overloaded (`503`) responses are retried like any other Gemini request; Docker Agent never upgrades a request to a different tier on your behalf.
 
 > [!WARNING]
 > Docker Agent's cost estimates do not adjust for `service_tier`. They use the catalogue's standard pricing, which overestimates `flex` and underestimates `priority` charges. Set the model's [`cost` override](../../configuration/models/index.md#custom-token-pricing) to the applicable input, output, and cache token rates for your tier.
@@ -313,7 +315,7 @@ announcements but no dedicated Google card in the 2026-10-13 audit; this proves
 neither unavailability nor account entitlement. See [Claude access paths](../anthropic/index.md#claude-access-paths)
 for model IDs, evidence and policy prerequisites.
 
-Title, sampling and compaction clones keep the selected Model Garden transport.
+Title and compaction clones keep the selected Model Garden transport.
 Claude requests remain on the Anthropic-native Vertex endpoints, with the model
 in the URL and `anthropic_version: vertex-2023-10-16` in the body. Project,
 location, regional/global host selection and Google OAuth authentication survive
