@@ -23,7 +23,7 @@ Built-in tools are included with Docker Agent and require no external dependenci
 | `shell` | Execute shell commands synchronously | [Shell](../../tools/shell/index.md) |
 | `background_jobs` | Run and manage long-running shell commands | [Background Jobs](../../tools/background-jobs/index.md) |
 | `scheduler` | Schedule instructions to run at a time or on a recurring interval | [Scheduler](../../tools/scheduler/index.md) |
-| `environment` | Report the OS and resolved shell (read-only, no arguments, auto-approved) | [Environment](../../tools/environment/index.md) |
+| `environment` | Report the OS and resolved shell (read-only, no arguments; subject to approval policy) | [Environment](../../tools/environment/index.md) |
 | `datetime` | Current date and time in a model-chosen format and timezone (read-only) | [Date and Time](../../tools/datetime/index.md) |
 | `calculator` | Exact arithmetic without code execution | [Calculator](../../tools/calculator/index.md) |
 | `think` | Reasoning scratchpad | [Think](../../tools/think/index.md) |
@@ -374,7 +374,7 @@ See [`examples/toolset_instructions.yaml`](https://github.com/docker/docker-agen
 
 ## Deferred Tool Loading
 
-Load tools on-demand to speed up agent startup. When a toolset is deferred, its tools are registered lazily — the tool server process is not started until the agent first calls one of its tools. This is useful for large toolsets (e.g., an MCP server with hundreds of tools) where startup time matters.
+Expose tool definitions to the model on demand to reduce prompt size. Deferred toolsets still start normally, including their MCP server processes, but their tool definitions stay hidden until activated. This is useful for large toolsets, such as an MCP server with hundreds of tools; it does not delay server startup.
 
 ```yaml
 toolsets:
@@ -426,7 +426,7 @@ models:
 
 Every deferred tool is then declared to the API with `defer_loading: true` next to a server-executed `tool_search` tool, so the model discovers and calls deferred tools directly, without a `search_tool`/`add_tool` round trip. `search_tool` and `add_tool` stay available. Toolset `tools`, `read_only`, and skill allow-lists apply to the catalog exactly as they do to regular tools, and so do permissions.
 
-The option is ignored, and the legacy behaviour kept, for models without support (only `openai` models that support deferred tools qualify; the `chatgpt` provider and OpenAI-compatible endpoints, including `openai` with a custom `base_url`, do not), on Chat Completions requests, and on fallback models without the option. Agents using `code_mode_tools` keep the legacy behaviour: wrapped tools are reachable through `run_tools_with_javascript`, while todo and repeatable tools remain directly callable.
+The option is ignored, and the legacy behaviour kept, for models without support (only `openai` models that support deferred tools qualify; the `chatgpt` provider and OpenAI-compatible endpoints, including `openai` with a custom `base_url` or `OPENAI_BASE_URL`, do not), on Chat Completions requests, and on fallback models without the option. Agents using `code_mode_tools` keep the legacy behaviour: wrapped tools are reachable through `run_tools_with_javascript`, while todo and repeatable tools remain directly callable.
 
 Native search also enables ordered response replay, including encrypted reasoning. For native-only workflows, tell the agent to prefer native tool search over `search_tool`/`add_tool`; those tools remain available for fallback models.
 

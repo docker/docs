@@ -98,7 +98,7 @@ weakening a kit's restrictions or silently copying local credentials. Any
 provider, registry, or tool endpoint the agent needs must be reachable under the
 cloud policy. CLI-specified model, safety, flavor, and prompt options still apply.
 
-Docker Agent uses `sbx --cloud run --detached`, then `exec`: this supports sbx's
+Docker Agent uses `sbx --cloud run --detach`, then `exec`: this supports sbx's
 v3 source builds and multi-kit assembly without launching a second agent TUI.
 Provisioning messages go to stderr, leaving stdout for the agent (including
 `--json` output). Piped/headless execution does not allocate a TTY.
@@ -367,10 +367,10 @@ This host auto-kit is distinct from an sbx workload/mixin kit. It is built for l
 For the agent referenced on the command line, the kit collects:
 
 - **Local [skills](../../features/skills/index.md)** — every `SKILL.md` discovered on the host (global `~/.codex/skills/`, `~/.claude/skills/`, `~/.agents/skills/`, plus project `.claude/skills/`, `.github/skills/` and `.agents/skills/`) is copied under `<kit>/skills/<skill-name>/`. The in-sandbox skills loader reads from the kit instead of the (non-existent) host `$HOME`.
-- **Prompt files** — every file referenced via the agent's `add_prompt_files` (`AGENTS.md`, `CLAUDE.md`, …) is collected. Files that already live under the working directory are left alone (the live workspace mount surfaces them); files outside it (e.g. an `AGENTS.md` in `$HOME`) are copied under `<kit>/prompt_files/`.
+- **Prompt files** — every file referenced via the agent's `add_prompt_files` (`AGENTS.md`, `CLAUDE.md`, …) is collected. Paths under the working directory are left to the live workspace mount, even when a file or intermediate directory is a symlink pointing outside it. Such links do not cause their host targets to be copied into the kit and may be unreadable inside the sandbox. Files discovered outside the workspace (e.g. an `AGENTS.md` in `$HOME` or a parent directory) are still copied under `<kit>/prompt_files/`, unless they resolve into the workspace.
 - **A manifest** — `<kit>/manifest.json` records what was staged. The on-disk copy is sanitised so it cannot be used to map the host filesystem from inside the sandbox.
 
-Before launch, Docker Agent prints a summary of what was staged so you can see exactly which skills and prompt files the agent will have access to inside the sandbox.
+Before launch, Docker Agent prints a summary of staged skills and prompt files, plus prompt-file paths left to the workspace mount. A workspace entry does not guarantee that its symlink target is accessible inside the sandbox.
 
 When building a kit, `add_prompt_files` entries must be local relative paths
 (e.g. `AGENTS.md` or `instructions/AGENTS.md`), not absolute paths or paths

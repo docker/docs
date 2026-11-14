@@ -62,7 +62,7 @@ Docker Agent dispatches the following hook events:
 | `on_agent_switch`           | When the runtime moves the active agent (transfer_task, handoff, return)          | No         |
 | `on_session_resume`         | When the user explicitly approves continuation past `max_iterations`              | No         |
 | `on_tool_approval_decision` | After the runtime's approval chain (permissions / yolo / readonly / ask) resolves | No         |
-| `worktree_create`           | After `docker agent run --worktree` creates a git worktree, before the session     | Yes        |
+| `worktree_create`           | After a git worktree is created — by `docker agent run --worktree` (before the session) or for a [background agent task](../../tools/background-agents/index.md#isolated-coding-tasks) with `worktree: true` (before the child's tools load) | Yes        |
 | `before_agent_run`          | Once per agent activation, before its model runs — can [route](#agent-routing-hooks) to another agent | Yes |
 | `after_agent_complete`      | Once after an agent completes successfully — can [route](#agent-routing-hooks) onward | Yes |
 
@@ -80,7 +80,7 @@ The shared catalog in `pkg/hooks/events` drives configuration validation,
 dispatch strategy, output aggregation, and strict output validation. Tests keep
 this table, the configuration fields, and the JSON schema synchronized.
 “Context” means additional context is consumed by the runtime; `worktree_create`
-shows it to the CLI user. The internal preempting `pre_tool_use` lane is parallel,
+shows it to the CLI user, or adds it to the instructions of an isolated background task. The internal preempting `pre_tool_use` lane is parallel,
 collects metadata, and does not rewrite input.
 
 | Event | Execution | Can block | Failure default | Context | Rewrite |
@@ -293,6 +293,7 @@ Built-ins are typically zero-config and faster than equivalent shell hooks becau
 | `redact_secrets`        | `tool_input_transform`, `before_llm_call`, `tool_response_transform`                              | _none_                | Scrubs detected secrets (API keys, tokens, private keys, …) out of tool call arguments, outgoing chat content, and tool output. The same builtin handles all three events and dispatches on the event name. Auto-registered on all three events by `redact_secrets: true` on the agent — see [`examples/redact_secrets_hooks.yaml`](https://github.com/docker/docker-agent/blob/main/examples/redact_secrets_hooks.yaml) for the manual wiring.                                                                                                                                                                                     |
 | `transform_json` | `tool_response_transform` | JSON field names | Keeps only the named top-level fields of a JSON object. Nested values are preserved; missing fields are omitted. No expression language or domain validation. |
 | `limit_large_tool_results` | `tool_response_transform`, `session_end`                                               | _none_                | **Always-on safety hook** — automatically injected by the runtime, no configuration required. When a tool result from the `filesystem`, `shell`, `background_jobs`, `mcp`, or `a2a` categories exceeds 2,000 lines or 50 KiB, the full payload is written to a per-session temp file and replaced in the conversation with a notice plus a bounded excerpt (up to 2,000 excerpt lines; 50 KiB including the notice): the tail for most tools, but the head for the built-in filesystem `read_file`, whose notice suggests a follow-up call with `line`/`limit` to continue reading. If saving the payload fails, a bounded inline excerpt is returned without a file reference. Background-job excerpts retain status metadata before the log tail. The `session_end` leg deletes the temp directory. Internal toolsets (`memory`, `plan`, `tasks`, `think`, …) are not affected. |
+| `keep_awake`            | `session_start`, `session_end` | _none_ | CLI-owned sleep inhibitor, controlled by the disabled-by-default `settings.keep_awake` preference. |
 | `http_post`             | Any event                                                                                 | `[URL, body]`          | Sends an HTTP POST request with the optional body in `args[1]` to the URL in `args[0]`. Missing or empty URLs are ignored; only HTTP(S) destinations are accepted, using an SSRF-safe transport. |
 | `safer_shell`           | `pre_tool_use`                                                                            | _none_                | **Deprecated compatibility shim.** The runtime now classifies every shell command natively (`safe` / `destructive` / `unknown`) and gates it through the session's [safety mode](../permissions/index.md#safety-modes), so this builtin no longer emits verdicts. Pinned entries keep working as pure labellers that attach classification metadata (`safety_label`, `blast_radius`, `category`, `reason`) to the call. Filters by tool name internally (no-op for calls other than `shell` and `run_background_job`). |
 | `unload`                | `on_agent_switch`                                                                         | _none_                | POSTs `{"model": "<id>"}` to each of the previous agent's DMR model endpoints (`/_unload` by default, overridable per-model via `unload_api`) to free the GPU/RAM the just-departing model was holding. Pure HTTP — reads the model snapshot the runtime ships on `on_agent_switch` and depends on no provider-specific runtime state. Non-DMR providers (OpenAI, Anthropic, …) are silently skipped, so cross-provider chains are safe. Errors are logged and swallowed; agent switching never blocks on a slow or unreachable engine (each call has a 10 s timeout). See [`examples/unload_on_switch.yaml`](https://github.com/docker/docker-agent/blob/main/examples/unload_on_switch.yaml). |
@@ -310,6 +311,8 @@ Built-ins are typically zero-config and faster than equivalent shell hooks becau
 Historical tool results are also bounded on outgoing chat and compaction requests when the matching call includes a saved definition in one of these categories. Saved history is not rewritten. Results without category metadata and older background notifications stored as ordinary user messages are left unchanged; start a new conversation if such a message prevents recovery. These limits bound individual text results, not aggregate context or media attachment sizes.
 
 > `limit_large_tool_results` is injected unconditionally by the runtime — it is always active and cannot be removed from config.
+
+The CLI also installs `keep_awake` on `session_start` and `session_end`. It uses [`github.com/rumpl/keepawake`](https://github.com/rumpl/keepawake) to hold a native sleep inhibitor for each run when `settings.keep_awake` is enabled. The setting is disabled by default and available in both TUIs. Cleanup runs even after cancellation or errors; acquisition failures warn without blocking the agent. This builtin is registered by the CLI, not the base runtime.
 
 A minimal snapshot wiring looks like this:
 
@@ -1042,7 +1045,9 @@ hooks:
         fi
 ```
 
-Unlike most events, `worktree_create` is dispatched from the CLI rather than the run loop, because the worktree (and the working directory the runtime, session, tools, and snapshot machinery all capture) must be settled before the runtime and session exist. See [`examples/worktree_create_hook.yaml`](https://github.com/docker/docker-agent/blob/main/examples/worktree_create_hook.yaml) for the full file.
+`worktree_create` also fires when `run_background_agent` is called with `worktree: true`. Hooks run inside the task's new checkout with `agent_name` and `parent_session_id` set, before the child's toolsets and skills are loaded. Their additional context is added to the child's instructions, and a blocking decision (or error) fails the task; the checkout and branch are retained.
+
+For `docker agent run --worktree`, `worktree_create` is dispatched from the CLI rather than the run loop, because the worktree (and the working directory the runtime, session, tools, and snapshot machinery all capture) must be settled before the runtime and session exist. See [`examples/worktree_create_hook.yaml`](https://github.com/docker/docker-agent/blob/main/examples/worktree_create_hook.yaml) for the full file.
 
 ### Pre-Compact: steer the summary
 
@@ -1260,6 +1265,18 @@ request -> evaluator +-- specialist --------------+-> final answer
 ```
 
 ```yaml
+evaluators:
+  task_route:
+    provider: typesafe
+    model: jev-latest
+    type: choice
+    instructions: Classify the work required by the request in input.
+    choices:
+      simple: A narrow question or routine explanation.
+      complex: A problem requiring detailed analysis.
+      research: A request requiring investigation and evidence.
+      unclear: A request missing essential information.
+
 agents:
   root:
     model: openai/gpt-5-mini
@@ -1273,6 +1290,18 @@ agents:
           routing_policy:
             routes: {simple: quick, complex: specialist, research: researcher, unclear: clarifier}
             min_probability: 0.85
+  quick:
+    model: openai/gpt-5-mini
+    instruction: Answer the question directly.
+  specialist:
+    model: openai/gpt-5-mini
+    instruction: Analyze the problem and explain your conclusions.
+  researcher:
+    model: openai/gpt-5-mini
+    instruction: Investigate the request and report evidence and limitations.
+  clarifier:
+    model: openai/gpt-5-mini
+    instruction: Ask for the missing information needed to answer the request.
 ```
 
 See [`examples/hook_routing.yaml`](https://github.com/docker/docker-agent/blob/main/examples/hook_routing.yaml)

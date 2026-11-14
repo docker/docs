@@ -57,23 +57,28 @@ agents:
 
 ### Model Aliases Are Auto-Pinned
 
-Docker Agent automatically resolves model aliases to their latest pinned versions. This ensures reproducible behavior:
+Docker Agent resolves named-model aliases to dated IDs when a matching pinned model exists in its model catalog. Inline `provider/model` references and models with a custom `base_url` are left unchanged:
 
 ```yaml
-# You write:
-model: anthropic/claude-sonnet-4-5
+models:
+  claude:
+    provider: anthropic
+    model: claude-sonnet-4-5 # resolves to a matching dated ID from the catalog
 
-# docker-agent resolves to:
-# anthropic/claude-sonnet-4-5-20250929 (or latest available)
+agents:
+  root:
+    model: claude
 ```
 
-To use a specific version, specify it explicitly in your config.
+To guarantee the same version across catalog updates, specify a dated model ID explicitly in your config.
 
 ## Performance Tips
 
-### Defer Tools for Faster Startup
+<a id="defer-tools-for-faster-startup"></a>
 
-Large MCP toolsets can slow down agent startup. Use `defer` to load tools on-demand:
+### Defer Tools to Reduce Prompt Size
+
+Large MCP toolsets add tool definitions to the model's context. Use `defer` to expose those definitions on demand and reduce prompt size. The MCP servers still start normally:
 
 ```yaml
 agents:
@@ -428,6 +433,19 @@ settings:
 ```
 
 If a sound is enough, set `settings: { sound: true }` instead — Docker Agent plays a failure sound when a task errors, and a success sound when a task that ran longer than `sound_threshold` seconds (default 10) completes.
+
+### Keep the machine awake
+
+Enable **Keep machine awake** in `/settings` in either TUI to prevent idle system sleep while an agent is running. It is disabled by default, and changes apply to the next agent run. The display can still turn off; the inhibitor is released when the run finishes, errors, or is canceled.
+
+You can also enable it in your user configuration:
+
+```yaml
+settings:
+  keep_awake: true
+```
+
+This uses native macOS and Windows power APIs, or systemd-logind over D-Bus on Linux, with no helper executables required. Linux requires a running system bus and logind with permission to inhibit sleep. If acquisition fails, the hook reports the error without stopping the agent. It does not guarantee protection against deliberate sleep, lid closure, or administrator policy.
 
 See the [Hooks documentation](../../configuration/hooks/index.md) for the full list of events, their payloads, and per-hook options (`env`, `working_dir`, `timeout`).
 

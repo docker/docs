@@ -62,6 +62,10 @@ When `.agentsignore` contains at least one active pattern, the filesystem toolse
 > [!NOTE]
 > `.agentsignore` is independent of the filesystem toolset's [`ignore_vcs`](../tools/index.md) option. Setting `ignore_vcs: false` turns off `.gitignore` filtering but does **not** un-hide `.agentsignore` entries.
 
+## Worktrees
+
+When a source checkout has a [`.worktreeinclude`](../../features/cli/index.md#copy-ignored-files-into-worktrees), files blocked by its `.agentsignore` are skipped even if they match the include patterns. The `.agentsignore` file itself is not copied by that mechanism. A worktree loads its own `.agentsignore` independently; commit or otherwise arrange its rules when needed, including for files already tracked in the worktree.
+
 ## Relationship to `.gitignore`
 
 They are separate, and they do different amounts of work.

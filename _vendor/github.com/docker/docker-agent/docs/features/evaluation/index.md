@@ -388,31 +388,26 @@ passing: a gate that cannot fail is worse than no gate.
 
 ### Provider Credentials
 
-Eval containers are isolated from your host environment. Dedicated model
-provider API keys (for example `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`) are
-forwarded into eval containers automatically, so most provider setups work
-without extra flags.
+Eval containers do not automatically receive host environment variables, including
+provider API keys, gateway settings, Docker tokens, or credentials referenced by
+evaluators and hooks. Pass each required variable explicitly with `-e`:
 
-> [!WARNING]
-> **`GITHUB_TOKEN` and `GH_TOKEN` are not forwarded automatically**
->
-> GitHub tokens are broad credentials (git, `gh`, CI, packages), not dedicated
-> model API keys, so for security reasons Docker Agent does not forward them
-> into eval containers — even when they are set in your shell or in
-> `~/.config/cagent/.env`. If your agent uses the `github-copilot` provider,
-> pass the token explicitly by name:
->
-> ```bash
-> docker agent eval agent.yaml ./evals -e GITHUB_TOKEN
-> ```
->
-> When using a custom env file, both flags are required:
->
-> ```bash
-> docker agent eval agent.yaml ./evals \
->   --env-from-file /path/to/secrets.env \
->   -e GITHUB_TOKEN
-> ```
+```bash
+docker agent eval agent.yaml ./evals -e OPENAI_API_KEY
+```
+
+`-e NAME` resolves the value from the configured environment sources;
+`-e NAME=VALUE` supplies a literal value. Loading a custom env file does not
+implicitly forward its contents:
+
+```bash
+docker agent eval agent.yaml ./evals \
+  --env-from-file /path/to/secrets.env \
+  -e GITHUB_TOKEN
+```
+
+To use a models gateway inside the container, explicitly pass
+`DOCKER_AGENT_MODELS_GATEWAY` and any authentication variables it requires.
 
 Note that the judge runs on the host, not inside the eval container. If
 the token is not forwarded, judge validation can succeed while every

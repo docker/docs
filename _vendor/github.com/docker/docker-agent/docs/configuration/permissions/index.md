@@ -255,27 +255,38 @@ permissions:
     - "shell"
 ```
 
-### Safe Shell Agent
+### Shell Agent with Safety Classification
 
-Allow specific safe commands, block dangerous ones:
+Use balanced safety without broad command-prefix allows:
 
 ```yaml
-permissions:
-  allow:
-    - "shell:cmd=ls*"
-    - "shell:cmd=cat*"
-    - "shell:cmd=grep*"
-    - "shell:cmd=find*"
-    - "shell:cmd=head*"
-    - "shell:cmd=tail*"
-    - "shell:cmd=wc*"
-  deny:
-    - "shell:cmd=sudo*"
-    - "shell:cmd=rm*"
-    - "shell:cmd=mv*"
-    - "shell:cmd=chmod*"
-    - "shell:cmd=chown*"
+runtime:
+  safety: balanced
 ```
+
+Balanced runs positively classified safe calls automatically and asks for approval
+for unknown or destructive calls; it does not automatically deny them. This applies
+to both `shell` and `run_background_job`.
+
+Explicit allow grants authorize matching arguments and override the safety mode's
+fallback, including strict and restricted. For example, `shell:cmd=find*` also
+authorizes `find / -exec rm -rf {} +` and
+`find . -maxdepth 1 -name seed -exec sh -c 'touch marker' {} +`. A command name
+alone does not establish that its arguments are safe. Avoid these broad grants
+when you want classification to decide whether approval is needed.
+
+For these two builtin command tools, allow rules whose `cmd` value is a literal
+followed by a single `*` reject shell chaining, redirection, and substitutions.
+Command-name prefixes such as `cmd=ls*` additionally require a token boundary,
+so they do not authorize `lsanything`. Argument and path prefixes such as
+`cmd=ls *`, `cmd=git commit *`, and `cmd=ls /tmp/*` retain prefix matching.
+Ordinary colons in values (quoted filenames or URLs) remain literal; only
+`:key=` introduces another condition.
+
+This hardening does not inspect execution or write options such as `find -exec`.
+Other glob shapes (`cmd=ls**`, `cmd=[l]s*`) and the `command=ls*` condition
+retain generic matching and can authorize compound commands. Bare-tool grants,
+`cmd=*`, and exact compound-command grants also remain broad explicit opt-ins.
 
 ### MCP Tool Permissions
 

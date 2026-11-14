@@ -18,11 +18,12 @@ models:
     first_available: [list] # Optional: candidate model refs, tried in order by available credentials.
                             # Mutually exclusive with other model settings.
     provider: string # Required unless using first_available. One of: openai, anthropic, google, amazon-bedrock,
-                     # dmr, mistral, xai, nebius, nvidia, minimax, baseten, daoxe, ovhcloud, groq, fireworks-ai, deepseek, cerebras, togetherai, huggingface, moonshotai, vercel, cloudflare-workers-ai, cloudflare-ai-gateway, requesty, openrouter, api-route, atlascloud,
+                     # dmr, mistral, xai, nebius, nvidia, minimax, baseten, daoxe, ovhcloud, groq, fireworks-ai, deepseek, cerebras, togetherai, huggingface, moonshotai, vercel, cloudflare-workers-ai, cloudflare-ai-gateway, requesty, openrouter, opper, runcrate, api-route, lunaroute, orcarouter, atlascloud, cloudgpu, obscurify, hopbase,
                      # azure, ollama, github-copilot, or a named provider defined
                      # under the top-level `providers:` section.
     model: string # Required: model identifier
     description: string # Optional: human-readable summary of the model's purpose or strengths
+    stream_idle_timeout: duration|-1 # Optional: per-model stream idle limit
     temperature: float # Optional: 0.0–2.0 (provider-dependent; e.g. Anthropic caps at 1.0)
     max_tokens: integer # Optional: response length limit
     top_p: float # Optional: 0.0–1.0
@@ -55,14 +56,58 @@ models:
     bypass_models_gateway: boolean # Optional: skip the models gateway for this model (implied by a custom base_url)
 ```
 
+## Stream idle timeout
+
+`runtime.stream_idle_timeout` sets the default for agent conversation streams,
+including subagents, inline models, model switches, fallbacks, routed models,
+and LLM compaction summaries. Imported agent files use their own runtime
+defaults. For each attempt, an explicit routed target setting takes precedence
+over the router or fallback entry setting, which takes precedence over the
+agent file's runtime setting.
+
+Use a positive Go duration such as `90s` or `2m30s`, or the integer `-1` to
+disable the idle timer, overriding any lower-priority setting. Zero and other
+negative values are invalid. An omitted or null value inherits the next setting;
+when no setting applies, the idle timer is disabled for all models, including
+Gemini Flex and routed requests. A short configured timeout can expire while a
+Flex request is still queued.
+
+The timer measures silence while waiting for the first chunk and between chunks,
+not total request duration. Each chunk resets it. If it expires, Docker Agent
+cancels the model request and handles the stalled stream as a failure. Disabling
+the timer leaves stalled streams waiting until the caller cancels or the
+connection closes; normal cancellation still works. Title generation and model
+hooks do not use this idle timer: they retain their separate total deadlines
+(30 seconds for titles and the configured per-hook timeout). Setting `-1` does
+not remove those deadlines.
+
+```yaml
+runtime:
+  stream_idle_timeout: 10m
+models:
+  slow:
+    provider: google
+    model: gemini-2.5-flash
+    stream_idle_timeout: 20m
+  local:
+    provider: ollama
+    model: llama3
+    stream_idle_timeout: -1
+agents:
+  root:
+    model: slow
+    instruction: You are a helpful assistant.
+```
+
 ## Properties Reference
 
 | Property              | Type       | Required | Description                                                                           |
 | --------------------- | ---------- | -------- | ------------------------------------------------------------------------------------- |
 | `first_available`     | array      | ✗        | Candidate model references tried in order; selects the first whose credentials are configured. Mutually exclusive with other model settings. |
-| `provider`            | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Provider: `openai`, `anthropic`, `google`, `amazon-bedrock`, `dmr`, `mistral`, `xai`, `nebius`, `nvidia`, `minimax`, `baseten`, `daoxe`, `ovhcloud`, `groq`, `fireworks-ai`, `deepseek`, `cerebras`, `togetherai`, `huggingface`, `moonshotai`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `api-route`, `atlascloud`, `azure`, `ollama`, `github-copilot`, `chatgpt`, `opencode`, `opencode-go`, or any [named provider](../../providers/custom/index.md). |
+| `provider`            | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Provider: `openai`, `anthropic`, `google`, `amazon-bedrock`, `dmr`, `mistral`, `xai`, `nebius`, `nvidia`, `minimax`, `baseten`, `daoxe`, `ovhcloud`, `groq`, `fireworks-ai`, `deepseek`, `cerebras`, `togetherai`, `huggingface`, `moonshotai`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `opper`, `runcrate`, `api-route`, `lunaroute`, `orcarouter`, `atlascloud`, `cloudgpu`, `obscurify`, `hopbase`, `azure`, `ollama`, `github-copilot`, `chatgpt`, `opencode`, `opencode-go`, or any [named provider](../../providers/custom/index.md). |
 | `model`               | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Model name (e.g., `gpt-4o`, `claude-sonnet-4-5`, `gemini-3.5-flash`) |
 | `description`         | string     | ✗        | Informational, human-readable summary of the model's purpose or strengths (e.g., "fast and cheap, good for summaries"). Not sent to the model. Can be combined with `first_available` (a selector's description is kept when it resolves). |
+| `stream_idle_timeout` | duration/int | ✗ | Maximum silence between stream chunks; overrides `runtime.stream_idle_timeout`. See [Stream idle timeout](#stream-idle-timeout). |
 | `temperature`         | float      | ✗        | Sampling randomness. Range is provider-dependent — typically `0.0–2.0` (Anthropic caps at `1.0`). `0.0` is deterministic. |
 | `max_tokens`          | int        | ✗        | Maximum response length in tokens                                                     |
 | `top_p`               | float      | ✗        | Nucleus sampling threshold (`0.0–1.0`)                                                |
@@ -462,7 +507,7 @@ Use a string effort level. See [Gemini thinking budgets](../../providers/google/
 thinking_budget: none # or 0
 ```
 
-`none` and `0` both clear Docker Agent's local thinking configuration (omitting `thinking_budget` has the same effect). Whether that reaches the API as a real "off" switch depends on the model — see [Disabling Thinking](../../guides/thinking/index.md#disabling-thinking) in the guide.
+`none` and `0` request disabled thinking, but their effect depends on the model. Omitting `thinking_budget` leaves model defaults in place and is not necessarily equivalent: some Claude models disable thinking explicitly, while those that require it use adaptive thinking with low effort. See [Disabling Thinking](../../guides/thinking/index.md#disabling-thinking) in the guide.
 
 ## Task Budget
 
@@ -558,7 +603,7 @@ for a complete local-server configuration.
 ## Custom HTTP Headers
 
 For OpenAI-compatible providers (`openai`, `github-copilot`, `mistral`, `xai`,
-`nebius`, `nvidia`, `minimax`, `baseten`, `daoxe`, `ovhcloud`, `groq`, `fireworks-ai`, `deepseek`, `cerebras`, `togetherai`, `huggingface`, `moonshotai`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `atlascloud`, `ollama`, and any custom provider using the OpenAI API),
+`nebius`, `nvidia`, `minimax`, `baseten`, `daoxe`, `ovhcloud`, `groq`, `fireworks-ai`, `deepseek`, `cerebras`, `togetherai`, `huggingface`, `moonshotai`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `opper`, `runcrate`, `lunaroute`, `orcarouter`, `atlascloud`, `cloudgpu`, `obscurify`, `hopbase`, `ollama`, and any custom provider using the OpenAI API),
 `provider_opts.http_headers` adds arbitrary HTTP headers to every outgoing
 request:
 

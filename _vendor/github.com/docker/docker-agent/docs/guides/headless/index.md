@@ -97,7 +97,7 @@ Hooks run asynchronously and are never waited on: each is spawned detached from 
 
 ## Running Unattended in CI
 
-Interactively, the TUI prompts for confirmation before a tool call runs unless it's covered by an `allow` permission pattern. There's no one to answer that prompt in CI, so an unattended `--exec` run needs an explicit policy for what may run without asking — otherwise every tool call the model attempts is rejected outright (there's no stdin to prompt, so `--exec` without one just answers "no" on your behalf; see [`--json`'s auto-reject behavior](#structured-output-for-machines) above).
+Under the default policy, read-only tools run without confirmation and other calls prompt for approval unless a permission rule overrides that decision. An interactive `--exec` run can still prompt for tool approval; it does not inherently mean unattended execution. In CI, configure an explicit safety mode and permission rules for the calls that must run without asking. With `--json` or `--last`, pending confirmations are always declined; plain-text exec output redirected to a pipe or file also declines them. See [structured output behavior](#structured-output-for-machines) above.
 
 Two different questions come up here, and it's worth keeping them separate:
 
@@ -106,7 +106,7 @@ Two different questions come up here, and it's worth keeping them separate:
 
 ### `--sandbox`: the isolation boundary
 
-For an untrusted or autonomous agent — anything acting without a human watching approvals — **`--sandbox` is the isolation boundary to reach for**, not a cleverer allow-list. It runs the entire agent, shell calls included, inside a VM managed by [`sbx`](https://docs.docker.com/ai/sandboxes/): a misbehaving or successfully-prompt-injected agent can't touch anything outside the mounted working directory or reach other host/CI state, regardless of which command it runs. That VM isn't disposable or ephemeral — a sandbox matching the current workspace and mount set is retained and reused across subsequent runs rather than torn down when the session ends (see [How It Works](../../configuration/sandbox/index.md#how-it-works)). See [Sandbox Mode](../../configuration/sandbox/index.md) for the full flag reference, `sbx` requirement, network allowlist, and kit staging behavior.
+For an untrusted or autonomous agent — anything acting without a human watching approvals — **`--sandbox` is the isolation boundary to reach for**, not a cleverer allow-list. It runs the entire agent, shell calls included, inside a VM managed by [Docker Sandboxes](https://docs.docker.com/ai/sandboxes/), using standalone `sbx` or the `docker sandbox` plugin. The working directory is mounted read-write; configuration directories and staged kits may also be exposed read-only. Treat every mounted file and configured network destination as accessible to the agent, and mount only what the task needs. That VM isn't disposable or ephemeral — a sandbox matching the current workspace and mount set is retained and reused across subsequent runs rather than torn down when the session ends (see [How local sandbox mode works](../../configuration/sandbox/index.md#how-local-sandbox-mode-works)). See [Sandbox Mode](../../configuration/sandbox/index.md) for the full flag reference, `sbx` requirement, network allowlist, and kit staging behavior.
 
 ```bash
 $ docker agent run --sandbox --exec agent.yaml --json "Fix the failing test"

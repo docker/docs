@@ -47,5 +47,5 @@ toolsets:
       - ".env"
     post_edit:
       - path: "*.go"
-        cmd: "gofmt -w ${file}"
+        cmd: 'gofmt -w "${file}"'
 ```

@@ -120,7 +120,7 @@ Use `docker agent run --exec` for one-shot tasks:
 $ docker agent run --exec agent.yaml "Create a Dockerfile for a Node.js app"
 
 # Pipe input
-$ cat error.log | docker agent run --exec agent.yaml "What's wrong in this log?"
+$ { printf "What's wrong in this log?\n\n"; cat error.log; } | docker agent run --exec agent.yaml -
 ```
 
 ## Add More Power

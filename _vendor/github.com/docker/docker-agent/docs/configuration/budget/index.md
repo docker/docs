@@ -194,6 +194,8 @@ This is the same granularity [`max_iterations`](../agents/index.md) has, and it 
 
 The `max_tokens` in a budget is a **cumulative** count of tokens across the whole run: fresh input, cache-read input, cache-write input, and output all count towards it. It is unrelated to the provider- or model-level [`max_tokens`](../models/index.md), which caps the output of a single response.
 
+When a server-side fallback (for example [Anthropic server-side fallbacks](../../providers/anthropic/index.md#server-side-fallbacks)) serves a turn, the token budgets count the tokens of every attempt, including declined ones, not just the final model's usage.
+
 It is also not the session's context length: compaction resets that, while the budget keeps counting.
 
 ## Examples

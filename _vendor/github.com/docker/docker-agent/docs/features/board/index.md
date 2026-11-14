@@ -76,7 +76,7 @@ board:
   projects:
     - name: my-app
       path: /Users/me/src/my-app
-      agent: coder # any agent ref; defaults to the built-in agent
+      agent: default # any agent ref; defaults to the built-in agent
   columns:
     - id: dev
       name: Dev

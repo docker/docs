@@ -13,7 +13,7 @@ _Complete reference for all Docker Agent command-line commands and flags._
 > [!TIP]
 > **No config needed**
 >
-> Running `docker agent run` without a config argument uses `docker-agent.yaml`, `docker-agent.yml`, or `docker-agent.hcl` from the current directory when present. Otherwise, it uses a built-in default agent that is perfect for quick experimentation.
+> Running `docker agent run` without a config argument uses `docker-agent.yaml`, `docker-agent.yml`, or `docker-agent.hcl` from the current directory when present. Otherwise, it uses the built-in `default` coding agent. Use `docker agent run minimal` for a small general-purpose configuration.
 
 ## Commands
 
@@ -51,13 +51,14 @@ $ docker agent run [config] [message...] [flags]
 | `--last`                                | Print only the final agent answer after all turns finish (requires `--exec`); omit thinking, tool calls/results, and intermediate responses |
 | `--hide-tool-calls`                     | Hide tool calls in the output                                                                                                             |
 | `--hide-tool-results`                   | Hide tool call results in the output                                                                                                      |
-| `--sandbox`                             | Run the agent in sandbox mode using `sbx` (see [Sandbox](../../configuration/sandbox/index.md))                                 |
+| `--sandbox`                             | Run the agent in sandbox mode using standalone `sbx` or the `docker sandbox` plugin (see [Sandbox](../../configuration/sandbox/index.md))                                 |
+| `--sbx` | Prefer standalone `sbx` when available (default: `true`); set `--sbx=false` to force the `docker sandbox` plugin. |
 | `--cloud` | Run in a fresh cloud sandbox without uploading host files/config/credentials; implies `--sandbox`. See [cloud sandbox mode](../../configuration/sandbox/index.md#cloud-sandboxes). |
 | `--sandbox-kit`, `--kit`, `--kit-arg` | Select an sbx workload and mixins, and pass kit arguments. Supports kits v3 through sbx. |
 | `--sandbox-ttl` | Cloud sandbox lifetime, default `1h`; stopped on expiry and when the agent exits. |
 | `--template <image>`                    | Template image for the sandbox (default: `docker/docker-agent-sbx-templates:latest`)                                                      |
 | `--no-kit`                              | Disable the [auto-kit](../../configuration/sandbox/index.md#auto-kit): do not stage skills or prompt files into the sandbox    |
-| `--agent-picker [refs]`                 | Show a full-screen interactive picker before launching, letting you browse and select an agent. Accepts an optional comma-separated list of agent references to show (defaults to the built-in `default` and `coder` agents plus any agent configs found in `~/.agents`). Arrow keys navigate; `?` toggles the YAML preview panel; `l` (or mouse-click) toggles the **Lean Mode** checkbox to launch in the lean TUI; `b` (or clicking **[ Open Board ]**) opens the Kanban board (`docker agent board`) instead of running an agent; Enter confirms. Not available in `--exec` or non-TTY modes. |
+| `--agent-picker [refs]`                 | Show a full-screen interactive picker before launching, letting you browse and select an agent. Accepts an optional comma-separated list of agent references to show (defaults to the built-in `default` and `minimal` agents plus any agent configs found in `~/.agents`). Arrow keys navigate; `?` toggles the YAML preview panel; `l` (or mouse-click) toggles the **Lean Mode** checkbox to launch in the lean TUI; `b` (or clicking **[ Open Board ]**) opens the Kanban board (`docker agent board`) instead of running an agent; Enter confirms. Not available in `--exec` or non-TTY modes. |
 | `-w, --worktree [name]`                 | Run the agent in a fresh git worktree of the working directory, isolating its changes from your checkout. Optionally name it (`--worktree=my-feature`); otherwise a name is generated. Requires the working directory to be inside a git repository. Every tool (the shell included) runs inside the worktree. Combine with `--working-dir` to branch from another repository, and with `--session` to resume into the same worktree later. Cannot be combined with `--remote` or `--sandbox`. When the session ends, a clean worktree is removed automatically; one with work prompts to keep or remove (never in `--exec`). |
 | `--worktree-base <ref>`                  | Branch the `--worktree` from `<ref>` (a branch, tag, commit, or remote-tracking ref like `origin/main`) instead of the current `HEAD`. A remote-tracking ref is fetched first so the worktree starts from the latest remote state. Requires `--worktree`; cannot be combined with `--worktree-pr`, `--remote`, or `--sandbox`. |
 | `--worktree-pr <number\|url>`            | Run the agent in a git worktree checked out on an existing GitHub pull request (PR number, `#123`, or PR URL). Continues the PR's branch so commits push back to it. Requires the [GitHub CLI](https://cli.github.com/) (`gh`). Cannot be combined with `--worktree`, `--remote`, or `--sandbox`. |
@@ -146,6 +147,22 @@ $ docker agent run agent.yaml --worktree-pr https://github.com/owner/repo/pull/1
 ```
 
 With `--worktree-pr`, the PR's head branch is checked out tracking its remote (via the [GitHub CLI](https://cli.github.com/)), so commits made during the run push straight back to the pull request. The worktree is stored under `<data-dir>/worktrees/pr-<number>`.
+
+#### Copy ignored files into worktrees
+
+Add a `.worktreeinclude` at the source repository root to copy selected **gitignored** files into new `--worktree`, `--worktree-pr`, and [background agent](../../tools/background-agents/index.md) worktrees before setup hooks run:
+
+```gitignore
+.env.local
+config/*.local.yaml
+!config/private.local.yaml
+```
+
+Patterns use Git's `.gitignore` syntax, including comments, negations and directory patterns. Git's normal rules for ignored parent directories apply: to exclude a child, include the parent with a pattern such as `cache/*` rather than `cache/`. Only files ignored by Git in both the source and destination checkouts are copied. A file not ignored in the destination is skipped with a warning; add appropriate ignore rules to the destination base or PR if it is needed there. Destination checks retry failed batches up to a fixed limit; if the limit is reached, unverified files are skipped with a warning, even if some would otherwise be eligible. This differs from tools that treat `.worktreeinclude` as a list of paths or also copy non-ignored files. Tracked changes and other untracked files are not copied. Missing `.worktreeinclude` leaves worktree creation unchanged.
+
+File permissions are preserved except that group or other permissions are removed when source ancestor directories prevent traversal for that class. New parent directories are private (`0700`). Existing destination files are never overwritten; symlinks, special files, `.gitignore`, and `.gitattributes` files are skipped. This prevents copies from changing the destination's ignore rules or staging attributes. Failures and skipped protected files produce bounded warnings without undoing the worktree; repeated protected-file skips are aggregated, and omitted warnings are counted. Cancellation stops copying and removes an incomplete file, leaving the worktree in place. Background-task warnings appear in the task metadata and logs. Files blocked by the source checkout's nearest [`.agentsignore`](../../configuration/agentsignore/index.md) are not copied, even if included here. `.agentsignore` itself is not copied by this mechanism. As always, `.agentsignore` only governs the filesystem toolset, not shell or other independent tools.
+
+Copied files are independent copies. **Ignored files do not make a worktree dirty**, so an interactive run can remove a clean worktree and its copied files automatically. Changing the destination's ignore rules later can make copied files visible to ordinary `git add`; `git add -f` can stage ignored files even without such a change. Changes to those copies do not propagate back to the source checkout; save anything needed before cleanup.
 
 When the interactive session ends, the worktree is cleaned up based on its state:
 
@@ -389,10 +406,10 @@ $ docker agent serve a2a myorg/agent:tag
 
 ### `docker agent serve acp`
 
-Start an ACP (Agent Client Protocol) server over stdio. This allows external clients to interact with your agents using the ACP protocol.
+Start an ACP (Agent Client Protocol) server over stdio. This allows external clients to interact with your agents using the ACP protocol. If no config is specified, uses the `default` built-in agent (or your `default` alias, if configured).
 
 ```bash
-$ docker agent serve acp <config> [flags]
+$ docker agent serve acp [config] [flags]
 ```
 
 | Flag                      | Default                     | Description                                       |
@@ -403,6 +420,7 @@ All [runtime configuration flags](#runtime-configuration-flags) are also accepte
 
 ```bash
 # Examples
+$ docker agent serve acp
 $ docker agent serve acp agent.yaml
 $ docker agent serve acp ./team.yaml
 $ docker agent serve acp myorg/agent:tag
@@ -801,7 +819,11 @@ $ docker agent debug oauth login agent.yaml github
 >
 > The text output of `debug auth` truncates the token to a short preview, but `--json` includes the complete, unredacted JWT in its `token` field. Never paste `debug auth --json` output into logs, issue trackers, or bug reports — anyone with that token can act as you against Docker. Use the plain-text output (or redact the `token` field yourself) when sharing diagnostic output.
 
-The `Source` field says where the token came from: `docker desktop`, or `minted from the stored access token` when it was obtained by exchanging the access token `docker login` stored. See [Docker authentication](../../guides/secrets/index.md#docker-authentication).
+The `Source` field says where the token came from: `docker desktop secrets engine` when it was read from the secrets engine Docker Desktop serves, `docker desktop` when Docker Desktop's backend served it, or `minted from the stored access token` when it was obtained by exchanging the access token `docker login` stored. See [Docker authentication](../../guides/secrets/index.md#docker-authentication).
+
+`Username` and `Email` come from the secrets engine's session when the engine supplied the token, otherwise from Docker Desktop, and otherwise from the token itself.
+
+When the secrets engine couldn't be read, `Secrets engine` says why, `Socket` which socket was tried, and `Hint` how to fix it. The JSON output has them under `secrets_engine` as `reason`, `socket` and `hint`, along with the full `error`. A secrets engine that isn't running is only reported when no token was found, since machines without Docker Desktop don't have one.
 
 The `config`, `toolsets`, `tool`, `skills`, and `title` subcommands also accept [runtime configuration flags](#runtime-configuration-flags) (`--working-dir`, `--models-gateway`, …); `title` additionally accepts `--model` to override the model used to resolve the config before generating the title.
 

@@ -1,20 +1,20 @@
 ---
-title: "Nebius"
-description: "Use Nebius AI models with Docker Agent."
-keywords: docker agent, ai agents, model providers, llm, nebius
+title: "Nebius Token Factory"
+description: "Use Nebius Token Factory models with Docker Agent."
+keywords: docker agent, ai agents, model providers, llm, nebius, token factory
 weight: 190
 canonical: https://docs.docker.com/ai/docker-agent/providers/nebius/
 ---
 
-_Use Nebius AI models with Docker Agent._
+_Use Nebius Token Factory models with Docker Agent._
 
 ## Overview
 
-Nebius provides AI models through an OpenAI-compatible API. Docker Agent includes built-in support for Nebius as an alias provider.
+[Nebius Token Factory](https://tokenfactory.nebius.com/) (formerly Nebius AI Studio) provides hosted AI models through an OpenAI-compatible API. Docker Agent includes built-in support for Token Factory as the `nebius` alias provider.
 
 ## Setup
 
-1. Get an API key from [Nebius AI](https://nebius.ai/)
+1. Create an API key in the [Nebius Token Factory console](https://tokenfactory.nebius.com/project/api-keys)
 2. Set the environment variable:
 
    ```bash
@@ -30,8 +30,8 @@ The simplest way to use Nebius:
 ```yaml
 agents:
   root:
-    model: nebius/deepseek-ai/DeepSeek-V3
-    description: Assistant using Nebius
+    model: nebius/MiniMaxAI/MiniMax-M3.1-Flash
+    description: Assistant using Nebius Token Factory
     instruction: You are a helpful assistant.
 ```
 
@@ -43,33 +43,35 @@ For more control over parameters:
 models:
   nebius_model:
     provider: nebius
-    model: deepseek-ai/DeepSeek-V3
+    model: openai/gpt-oss-120b
     temperature: 0.7
     max_tokens: 8192
 
 agents:
   root:
     model: nebius_model
-    description: Assistant using Nebius
+    description: Assistant using Nebius Token Factory
     instruction: You are a helpful assistant.
 ```
 
 ## Available Models
 
-Nebius hosts various open models. Check the [Nebius documentation](https://nebius.ai/docs) for the current model catalog.
+Token Factory's catalog changes as models launch and retire, so this page does not keep a static model table. With `NEBIUS_API_KEY` set, list the Nebius models Docker Agent knows about:
 
-| Model                               | Description                     |
-| ----------------------------------- | ------------------------------- |
-| `deepseek-ai/DeepSeek-V3`           | DeepSeek V3 model               |
-| `Qwen/Qwen2.5-72B-Instruct`         | Qwen 2.5 72B instruction-tuned  |
-| `meta-llama/Llama-3.3-70B-Instruct` | Llama 3.3 70B instruction-tuned |
+```bash
+docker agent models --provider nebius
+```
+
+Add `--all` to list them without a key. Recent additions include `MiniMaxAI/MiniMax-M3.1-Flash`, `deepseek-ai/DeepSeek-V4.1-Flash-1017`, `zai-org/GLM-5.3` and `moonshotai/Kimi-K3`.
+
+The listing comes from the [models.dev](https://models.dev/providers/nebius/) catalog, which can lag behind Token Factory. The [Token Factory console](https://tokenfactory.nebius.com/) is the authoritative list of models available to your project. Model IDs are case-sensitive; copy the full ID, including the vendor prefix.
 
 ## How It Works
 
 Nebius is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
-- **Base URL:** `https://api.studio.nebius.com/v1`
+- **Base URL:** `https://api.tokenfactory.nebius.com/v1`
 - **Token Variable:** `NEBIUS_API_KEY`
 
 ## Example: Code Assistant
@@ -77,10 +79,10 @@ Nebius is implemented as a built-in alias in Docker Agent:
 ```yaml
 agents:
   coder:
-    model: nebius/deepseek-ai/DeepSeek-V3
-    description: Code assistant using DeepSeek
+    model: nebius/moonshotai/Kimi-K3
+    description: Code assistant using Nebius Token Factory
     instruction: |
-      You are an expert programmer using DeepSeek V3.
+      You are an expert programmer.
       Write clean, well-documented code.
       Follow best practices for the language being used.
     toolsets:

@@ -196,6 +196,14 @@ Accepted values: any Go duration string (`"30s"`, `"5m"`, `"1h"`, `"2h30m"`), `"
 In multi-agent setups where two DMR models can't fit in GPU memory simultaneously, wire the [`unload`](../../configuration/hooks/index.md#available-built-ins) built-in hook into each agent's `on_agent_switch` chain. Every time the active agent transfers control, the runtime POSTs to the engine's `_unload` endpoint to free the previous model's resources before the next one is loaded:
 
 ```yaml
+models:
+  qwen3-large:
+    provider: dmr
+    model: ai/qwen3
+  qwen3-coder:
+    provider: dmr
+    model: ai/smollm2
+
 agents:
   coder:
     model: qwen3-large
