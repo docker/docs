@@ -74,6 +74,12 @@ Create a Java project with Maven and add the required dependencies:
         <version>2.0.4</version>
         <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-kafka</artifactId>
+        <version>2.0.4</version>
+        <scope>test</scope>
+    </dependency>
 </dependencies>
 ```
 
@@ -432,8 +438,7 @@ and `@Container` annotations:
 public abstract class AbstractIntegrationTest {
 
    @Container
-   static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
-           DockerImageName.parse("postgres:16-alpine"));
+   static PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:16-alpine");
 
    @DynamicPropertySource
    static void configureProperties(DynamicPropertyRegistry registry) {

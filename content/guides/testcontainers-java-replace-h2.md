@@ -101,7 +101,7 @@ Replacing H2 with a real PostgreSQL database requires two test properties:
 @DataJpaTest
 @TestPropertySource(properties = {
   "spring.test.database.replace=none",
-  "spring.datasource.url=jdbc:tc:postgresql:16-alpine:///db"
+  "spring.datasource.url=jdbc:tc:postgresql:16-alpine:///db?TC_INITSCRIPT=sql/init-db.sql"
 })
 class ProductRepositoryWithJdbcUrlTest {
 
@@ -116,6 +116,9 @@ class ProductRepositoryWithJdbcUrlTest {
   }
 }
 ```
+
+The `TC_INITSCRIPT` parameter runs `sql/init-db.sql` to create the schema
+when the container starts.
 
 That's it — two properties and your tests run against a real PostgreSQL
 database.
