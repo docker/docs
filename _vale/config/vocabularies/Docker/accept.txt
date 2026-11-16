@@ -8,6 +8,7 @@ exfiltration
 sandboxing
 Adreno
 Aleksandrov
+AlmaLinux
 Awaitility
 Amazon
 Anchore
