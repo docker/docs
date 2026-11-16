@@ -9,6 +9,7 @@ How you uninstall Docker Compose depends on how it was installed. This guide cov
 
 - Docker Compose installed via Docker Desktop
 - Docker Compose installed as a CLI plugin
+- Docker Compose standalone (Legacy)
 
 ## Uninstalling Docker Compose with Docker Desktop
 
@@ -62,3 +63,26 @@ To check where Compose is installed, use:
 ```console
 $ docker info --format '{{range .ClientInfo.Plugins}}{{if eq .Name "compose"}}{{.Path}}{{end}}{{end}}'
 ```
+
+## Uninstalling Docker Compose standalone
+
+If you installed the [Docker Compose standalone (Legacy)](/manuals/compose/install/standalone.md),
+remove the binary from the path you installed it to.
+
+On Linux, the standalone install steps place the binary in `/usr/local/bin`, so remove that file:
+
+```console
+$ sudo rm /usr/local/bin/docker-compose
+```
+
+On Windows Server, the install steps place the binary in `$Env:ProgramFiles\Docker`:
+
+```powershell
+Remove-Item "$Env:ProgramFiles\Docker\docker-compose.exe"
+```
+
+> [!NOTE]
+>
+> If you installed the binary somewhere else, remove it from that directory instead.
+> To check where `docker-compose` resolves, run `which docker-compose` on Linux or
+> `Get-Command docker-compose` in PowerShell.
