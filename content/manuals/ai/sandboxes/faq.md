@@ -215,30 +215,12 @@ custom storage data is left untouched.
 
 ## Can I use Docker Sandboxes on headless Linux?
 
-Yes. For local sandboxes on Linux, `sbx` stores secrets in the Secret Service
-exposed by your desktop keyring, such as GNOME Keyring or KDE Wallet. Headless servers and some
-WSL setups have no running Secret Service, so `sbx` falls back to a file under
-`$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
-`~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. No setup is
-required. When running as root, `sbx` ignores `XDG_CONFIG_HOME` and uses
-`~/.config/com.docker.sandboxes` under root's registered home directory. See
-[Storage paths when running as root](#which-storage-paths-are-used-when-running-as-root).
-
-When you store a secret on such a host, `sbx` prints a notice:
-
-```text
-No keychain detected - this secret will be stored on disk, protected by file permissions rather than a password
-```
-
-`sbx` stores the file in a directory with `0700` permissions, the same
-file-permission model used for `~/.docker/config.json`. Any user or process that
-can read the file can retrieve the stored credentials, so treat the directory as
-sensitive. Where available, prefer a keychain, which mediates access per
-application.
+Yes. On headless Linux hosts and WSL setups without a running Secret Service,
+`sbx` stores secrets in a file protected by file permissions. No setup is
+required. For storage paths, root-user behavior, and security considerations,
+see [Where secrets are stored](configuration/credentials.md#where-secrets-are-stored).
 
 To keep secrets in a keyring instead, run a Secret Service on the host before
 storing them: install `gnome-keyring` and start `dbus-run-session`, or run the
 keyring daemon under a login session that unlocks it. Once a working Secret
-Service is available, `sbx` stores new
-secrets in the keychain again. For where each platform keeps secrets, see
-[Where secrets are stored](configuration/credentials.md#where-secrets-are-stored).
+Service is available, `sbx` stores new secrets in the keychain again.

@@ -545,6 +545,11 @@ As a last resort, if `sbx reset` doesn't resolve your issue, you can remove the
 `sbx` state directory entirely. This deletes all sandbox data, configuration, and
 cached images. Stop all running sandboxes first with `sbx reset`.
 
+For root cleanup on macOS or Linux, replace `~` in these commands with root's
+registered home directory. Using `sudo` does not change how your shell expands
+`~`. See [Storage paths when running as root](faq.md#which-storage-paths-are-used-when-running-as-root)
+for the environment overrides that `sbx` ignores.
+
 {{< tabs >}}
 {{< tab name="macOS" >}}
 
@@ -574,9 +579,6 @@ $ rm -rf ~/.config/sandboxes/
 If you run `sbx` as an ordinary user and have set custom `XDG_STATE_HOME`,
 `XDG_CACHE_HOME`, or `XDG_CONFIG_HOME` environment variables, replace
 `~/.local/state`, `~/.cache`, and `~/.config` with the corresponding values.
-When running as root, `sbx` ignores these overrides and uses the default paths
-under root's registered home directory. See
-[Storage paths when running as root](faq.md#which-storage-paths-are-used-when-running-as-root).
 
 {{< /tab >}}
 {{< /tabs >}}
