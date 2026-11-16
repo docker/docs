@@ -43,7 +43,7 @@ see_also:
     - sbx mcp - Manage MCP servers
     - sbx move - Move a sandbox between local and cloud
     - sbx policy - Manage sandbox policies
-    - sbx ports - Manage sandbox port publishing
+    - sbx port - Manage sandbox port publishing
     - sbx prune - Remove all stopped sandboxes
     - sbx reset - Reset all sandboxes and clean up state
     - sbx rm - Remove one or more sandboxes

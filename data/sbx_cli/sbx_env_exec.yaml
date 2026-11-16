@@ -30,9 +30,6 @@ description: |-
     unless a cloud backend reports it as an error rather than a status, which exits 125.
 usage: sbx env exec [flags] [PATH...] -- COMMAND [ARG...]
 options:
-    - name: detach-keys
-      usage: |
-        Override the key sequence for detaching an interactive cloud exec session (not supported for local exec)
     - name: env
       shorthand: e
       default_value: '[]'
