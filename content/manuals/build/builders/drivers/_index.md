@@ -30,12 +30,16 @@ The following table outlines some differences between drivers.
 | :--------------------------- | :---------: | :----------------: | :--------------: | :----------: | :----------------: |
 | **Automatically load image** |     ✅      |                    |   Conditional    |              |                    |
 | **Cache export**             |     ✅\*     |         ✅         |        ✅        |      ✅      |         ✅         |
-| **Tarball output**           |             |         ✅         |        ✅        |      ✅      |         ✅         |
-| **Multi-arch images**        |             |         ✅         |        ✅        |      ✅      |         ✅         |
+| **Tarball output**           |     ✅†     |         ✅         |        ✅        |      ✅      |         ✅         |
+| **Multi-arch images**        |     ✅†     |         ✅         |        ✅        |      ✅      |         ✅         |
 | **BuildKit configuration**   |             |         ✅         | Managed by Docker |      ✅      | Managed externally |
 
 \* _The `docker` driver doesn't support all cache export options.
 See [Cache storage backends](/manuals/build/cache/backends/_index.md) for more information._
+
+† _Tarball output and multi-platform images with the `docker` driver require the
+[containerd image store](/manuals/engine/storage/containerd.md). These features
+aren't supported with classic storage drivers._
 
 ## Loading to local image store
 
