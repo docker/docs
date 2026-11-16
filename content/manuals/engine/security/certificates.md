@@ -72,12 +72,12 @@ repository.
 The following illustrates a configuration with custom certificates:
 
 ```text
-    /etc/docker/certs.d/        <-- Certificate directory
+    /etc/docker/certs.d/           <-- Certificate directory
     └── registry.example.com:5000  <-- Hostname:port
-       ├── client.cert          <-- Client certificate
-       ├── client.key           <-- Client key
-       └── ca.crt               <-- Root CA that signed
-                                    the registry certificate, in PEM
+        ├── client.cert            <-- Client certificate
+        ├── client.key             <-- Client key
+        └── ca.crt                 <-- Root CA that signed
+                                      the registry certificate, in PEM
 ```
 
 The preceding example is operating-system specific and is for illustrative
