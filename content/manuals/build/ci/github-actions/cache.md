@@ -156,12 +156,14 @@ jobs:
 
 ### Cache write restrictions
 
-Cache export requires write access to the GitHub Actions cache. GitHub gives
-events such as `issue_comment` and `pull_request_target` read-only cache access
-by default when they run in the default-branch context. These workflows can
-restore existing cache entries, but exporting with `cache-to: type=gha` can fail
-with `error writing layer blob: failed to reserve cache`, even after the image
-has been built and pushed.
+Cache export requires write access to the GitHub Actions cache. Since June 26,
+2026, GitHub has issued read-only cache tokens to workflows triggered by
+untrusted events such as `issue_comment` and `pull_request_target` when both
+the workflow context and cache scope come from the shared default-branch SHA.
+These workflows can restore existing cache entries, but exporting with
+`cache-to: type=gha` can fail with
+`error writing layer blob: failed to reserve cache`, even after the image has
+been built and pushed.
 
 This also affects `pull_request` workflows with `types: [closed]` when a pull
 request is merged into the default branch: the run uses the target branch ref
