@@ -150,11 +150,47 @@ function renderFollowUps(props) {
   return list
 }
 
-// A markdown link, or a bare URL. A bare URL's trailing punctuation is the sentence's, not the
-// URL's: "Go to https://example.com/." links https://example.com/.
+// A markdown link, whose URL may hold balanced (...) pairs one level deep, or a bare URL. A bare
+// URL's trailing punctuation is the sentence's, not the URL's: "Go to https://example.com/."
+// links https://example.com/, but a ")" closing a "(" in the URL stays in it.
 const LINK_PATTERN =
-  /\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s<>"'`]+)/g
-const TRAILING_PUNCTUATION = /[.,;:!?)\]}'"]+$/
+  /\[([^\]\n]+)\]\((https?:\/\/[^\s()]*(?:\([^\s()]*\)[^\s()]*)*)\)|(https?:\/\/[^\s<>"'`]+)/g
+const TRAILING_PUNCTUATION = new Set([
+  '.',
+  ',',
+  ';',
+  ':',
+  '!',
+  '?',
+  ')',
+  ']',
+  '}',
+  "'",
+  '"',
+])
+
+function trimTrailingPunctuation(url) {
+  let end = url.length
+  while (end > 0 && TRAILING_PUNCTUATION.has(url[end - 1])) {
+    if (url[end - 1] === ')' && hasUnclosedParenthesis(url.slice(0, end - 1))) {
+      break
+    }
+    end -= 1
+  }
+  return url.slice(0, end)
+}
+
+function hasUnclosedParenthesis(text) {
+  let depth = 0
+  for (const char of text) {
+    if (char === '(') {
+      depth += 1
+    } else if (char === ')' && depth > 0) {
+      depth -= 1
+    }
+  }
+  return depth > 0
+}
 
 function proseElement(tag, className, text) {
   const node = element(tag, className)
@@ -164,7 +200,7 @@ function proseElement(tag, className, text) {
     let url = labelledUrl
     let end = match.index + whole.length
     if (bareUrl !== undefined) {
-      url = bareUrl.replace(TRAILING_PUNCTUATION, '')
+      url = trimTrailingPunctuation(bareUrl)
       end = match.index + url.length
     }
     const href = safeHref(url)
