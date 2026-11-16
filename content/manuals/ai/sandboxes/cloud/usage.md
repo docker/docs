@@ -146,6 +146,9 @@ $ ssh sbx_01abc123@sbx_cloud
 Replace the example with `ssh <sandbox-id>@sbx_cloud`, using the
 `sbx_`-prefixed ID from `sbx --cloud ls`.
 
+After upgrading the CLI, rerun `sbx --cloud setup ssh` to refresh the
+generated cloud SSH configuration.
+
 Cloud SSH honors your host's configured upstream proxy. If the proxy refuses
 SSH connections, see [Cloud SSH proxy configuration](../configuration/upstream-proxy.md#cloud-ssh).
 
