@@ -19,20 +19,13 @@ before creating it.
 Credentials saved for local sandboxes aren't available in cloud sandboxes.
 [Configure a cloud credential](credentials.md) before launching an agent.
 
-Create a sandbox and attach to its agent, or reuse the named sandbox if it
-already exists:
+Create a sandbox and attach to its agent:
 
 ```console
-$ sbx --cloud run claude --name cloud-project
+$ sbx --cloud run --new claude --name cloud-project
 ```
 
-Without `--name`, an interactive run offers existing sandboxes for that agent
-and an option to create another. Pass `--new` to create a fresh sandbox.
 Launches that bake a kit template also create a fresh sandbox.
-
-Reusing a sandbox keeps its creation settings. Flags such as `--cpus`,
-`--memory`, `--platform`, `--ttl`, `--env`, and `--allow-network` are rejected
-when resuming. Use `--new` to create a sandbox with different settings.
 
 To create the sandbox without opening an agent session, use `create`:
 
@@ -40,11 +33,7 @@ To create the sandbox without opening an agent session, use `create`:
 $ sbx --cloud create --name cloud-project claude
 ```
 
-The command prints the cloud sandbox ID. Attach by ID or name:
-
-```console
-$ sbx --cloud attach cloud-project
-```
+The command prints the cloud sandbox ID.
 
 Cloud sandbox names must be 2–63 characters long, contain only ASCII letters,
 numbers, and hyphens, and start and end with a letter or number. The name
@@ -80,6 +69,29 @@ other resource. Unsupported combinations are rejected.
 Use `--platform linux/amd64` or `--platform linux/arm64` to select an
 architecture supported by your account. This matters when you plan to
 [move the sandbox to your machine](move.md): the architectures must match.
+
+## Reuse a sandbox
+
+Attach to an existing sandbox by ID or name:
+
+```console
+$ sbx --cloud attach cloud-project
+```
+
+Run the agent with `--name` to reuse an existing sandbox. If the sandbox
+doesn't exist, the command creates it:
+
+```console
+$ sbx --cloud run claude --name cloud-project
+```
+
+Without `--name`, an interactive run offers existing sandboxes for that agent
+and an option to create another.
+
+Reusing a sandbox keeps its creation settings. Flags such as `--cpus`,
+`--memory`, `--platform`, `--ttl`, `--env`, and `--allow-network` are rejected
+when resuming. Use `--new` to create a sandbox with different settings. If you
+also pass `--name`, choose an unused name to avoid a name conflict.
 
 ## Run without attaching
 
