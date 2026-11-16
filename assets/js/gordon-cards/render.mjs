@@ -9,9 +9,10 @@ import {
 
 // Draws a ```openui-lang block from Gordon's answer as a card element, or returns null if nothing
 // in it parses into a card (yet). Text from the model only ever goes in through textContent and
-// setAttribute, never as HTML. Code blocks come out as <pre><code> for the chat's usual syntax
-// highlighting, and follow-up chips as buttons carrying data-gordon-follow-up, which the chat
-// turns into the user's next question.
+// setAttribute, never as HTML. In prose (descriptions, step details, callout text, table cells),
+// http(s) URLs and [label](url) markdown links become <a> elements. Code blocks come out as
+// <pre><code> for the chat's usual syntax highlighting, and follow-up chips as buttons carrying
+// data-gordon-follow-up, which the chat turns into the user's next question.
 export function renderGordonCard(code) {
   const root = parseGordonCard(code)
   return root === null ? null : renderCard(root.props)
@@ -25,7 +26,7 @@ function renderCard(props) {
     card.append(element('h4', 'gordon-card-title', title))
   }
   if (description !== undefined) {
-    card.append(element('p', 'gordon-card-description', description))
+    card.append(proseElement('p', 'gordon-card-description', description))
   }
   for (const child of readArray(props.children)) {
     const rendered = renderChild(child)
@@ -75,7 +76,7 @@ function renderSteps(props) {
       entry.append(element('p', 'gordon-card-step-title', title))
     }
     if (detail !== undefined) {
-      entry.append(element('p', 'gordon-card-step-detail', detail))
+      entry.append(proseElement('p', 'gordon-card-step-detail', detail))
     }
     if (command !== undefined) {
       entry.append(renderCode(command, 'bash'))
@@ -97,7 +98,7 @@ function renderCallout(props) {
     callout.append(element('p', 'gordon-card-callout-title', title))
   }
   if (text !== undefined) {
-    callout.append(element('p', 'gordon-card-callout-text', text))
+    callout.append(proseElement('p', 'gordon-card-callout-text', text))
   }
   return callout
 }
@@ -115,7 +116,7 @@ function renderTable(props) {
   for (const row of readArray(props.rows)) {
     const bodyRow = element('tr')
     for (const cell of readArray(row)) {
-      bodyRow.append(element('td', undefined, readCell(cell)))
+      bodyRow.append(proseElement('td', undefined, readCell(cell)))
     }
     body.append(bodyRow)
   }
@@ -147,6 +148,48 @@ function renderFollowUps(props) {
     list.append(chip)
   }
   return list
+}
+
+// A markdown link, or a bare URL. A bare URL's trailing punctuation is the sentence's, not the
+// URL's: "Go to https://example.com/." links https://example.com/.
+const LINK_PATTERN =
+  /\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s<>"'`]+)/g
+const TRAILING_PUNCTUATION = /[.,;:!?)\]}'"]+$/
+
+function proseElement(tag, className, text) {
+  const node = element(tag, className)
+  let last = 0
+  for (const match of text.matchAll(LINK_PATTERN)) {
+    const [whole, label, labelledUrl, bareUrl] = match
+    let url = labelledUrl
+    let end = match.index + whole.length
+    if (bareUrl !== undefined) {
+      url = bareUrl.replace(TRAILING_PUNCTUATION, '')
+      end = match.index + url.length
+    }
+    const href = safeHref(url)
+    if (href === undefined) {
+      continue
+    }
+    node.append(text.slice(last, match.index))
+    const link = element('a', 'gordon-card-link', label ?? url)
+    link.href = href
+    node.append(link)
+    last = end
+  }
+  node.append(text.slice(last))
+  return node
+}
+
+function safeHref(url) {
+  try {
+    const parsed = new URL(url)
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:'
+      ? parsed.href
+      : undefined
+  } catch {
+    return undefined
+  }
 }
 
 function element(tag, className, text) {
