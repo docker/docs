@@ -778,6 +778,23 @@ make an untrusted certificate authority trusted or resolve other certificate
 errors. For an untrusted internal CA, see
 [certificate troubleshooting](../troubleshooting.md#api-calls-fail-with-a-certificate-error).
 
+#### tls.postQuantumKeyExchange {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Set this to `false` if a firewall or TLS-inspecting proxy drops or stalls
+Docker Sandboxes HTTPS connections because it can't handle post-quantum key
+exchange:
+
+```console
+$ sbx settings set tls.postQuantumKeyExchange false
+$ sbx daemon restart
+```
+
+This disables post-quantum key exchange for TLS connections made by the host
+CLI and daemon. Changes apply on the next CLI invocation and require a daemon
+restart. Set it back to `true` and restart the daemon to restore the default.
+
 ### Shared agent skills
 
 Shared agent skills are experimental.
