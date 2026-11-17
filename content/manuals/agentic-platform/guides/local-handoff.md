@@ -8,8 +8,7 @@ weight: 30
 
 Prepare a sample review locally, then let an agent finish it in the cloud while
 your computer is disconnected. Retrieve the report before removing either
-sandbox. Provisional duration: 25 minutes; this estimate needs measurement
-during review.
+sandbox.
 
 ## Before you begin
 

@@ -7,8 +7,7 @@ weight: 20
 ---
 
 Keep project files and development tools in a cloud sandbox while using VS Code
-or Cursor on your computer. Provisional duration: 25 minutes; this estimate needs
-measurement during review.
+or Cursor on your computer.
 
 ## Before you begin
 

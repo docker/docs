@@ -7,8 +7,7 @@ weight: 10
 ---
 
 Run the Welcome to Docker application in a cloud sandbox and share a preview
-without setting up the project on your computer. Provisional duration: 20 minutes;
-this estimate needs measurement during review.
+without setting up the project on your computer.
 
 ## Before you begin
 
