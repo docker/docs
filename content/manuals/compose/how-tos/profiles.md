@@ -46,7 +46,7 @@ Valid profiles names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 > [!TIP]
 >
 > The core services of your application shouldn't be assigned `profiles` so
-> they are always enabled and automatically started.
+> they are always enabled and automatically started. Jobs also support the [`profiles` attribute](/reference/compose-file/jobs.md#profiles) and follow the same rules as services: a job with `profiles` is only active when one of its profiles is active, unless you target it with `docker compose run`.
 
 ## Start specific profiles
 
@@ -123,10 +123,14 @@ $ docker compose run db-migrations
 
 In this example, `db-migrations` runs even though it is assigned to the tools profile, because it was explicitly targeted. The `db` service is also started automatically because it is listed in `depends_on`.
 
-If the targeted service has dependencies that are also gated behind a profile, you must ensure those dependencies are either: 
+If the targeted service has dependencies that are also gated behind a profile, you must ensure those dependencies are either:
  - In the same profile
  - Started separately
  - Not assigned to any profile so are always enabled
+
+> [!TIP]
+>
+> A profiled service that you only ever start with `docker compose run`, such as `db-migrations` above, is often better expressed as a [job](jobs.md). Compose doesn't record whether that work succeeded once its container is removed, and nothing runs it on a schedule. A job keeps a run record with its exit code, and Docker Engine can fire it on a cron schedule. Jobs are experimental.
 
 ## Stop application and services with specific profiles
 

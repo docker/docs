@@ -28,6 +28,8 @@ A [secret](/reference/compose-file/secrets.md) is a specific flavor of configura
 >
 > With volumes, configs and secrets you can have a simple declaration at the top-level and then add more platform-specific information at the service level.
 
+One-shot work that runs to completion, rather than staying up like a service, is defined as a [job](/reference/compose-file/jobs.md). The Specification defines a dedicated jobs concept for workloads such as database migrations and backups, which run on demand or on a cron schedule. Compose records the state and exit code of each run, so the result survives the removal of the container. Jobs are experimental and require the [jobs extension](/manuals/engine/daemon/jobs.md#turn-on-the-jobs-extension) to be turned on in Docker Engine.
+
 A project is an individual deployment of an application specification on a platform. A project's name, set with the top-level [`name`](/reference/compose-file/version-and-name.md) attribute, is used to group
 resources together and isolate them from other applications or other installation of the same Compose-specified application with distinct parameters. If you are creating resources on a platform, you must prefix resource names by project and
 set the label `com.docker.compose.project`.
