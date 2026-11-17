@@ -62,10 +62,11 @@ Jobs don't fit every use case:
 
 ## Prerequisites
 
-Jobs need Docker Compose 5.8.0 or later and Docker Engine 29.10.0 or later
-(API version 1.57).
+- Docker Compose 5.8.0 or later
+- Docker Engine 29.10.0 or later
+- [Jobs extensions in Docker Engine](/manuals/engine/daemon/jobs.md#turn-on-the-jobs-extension)
 
-Turn on the jobs extension in Docker Engine. Add the following to the
+To turn on the jobs extension in Docker Engine, add the following to the
 `daemon.json` file, then restart the daemon:
 
 ```json
@@ -79,10 +80,6 @@ Turn on the jobs extension in Docker Engine. Add the following to the
 To check that the extension is on, run `docker compose up` in a project that
 declares a scheduled job. With the extension off, the command fails with an
 error that tells you to start `dockerd` with `--extension-enable`.
-
-For the other ways to turn on the extension, and for how it interacts with
-authorization plugins, see
-[Manage jobs in Docker Engine](/manuals/engine/daemon/jobs.md#turn-on-the-jobs-extension).
 
 ## Quickstart
 
