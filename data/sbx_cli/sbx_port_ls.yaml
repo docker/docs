@@ -1,0 +1,39 @@
+name: sbx port ls
+synopsis: List published ports
+description: |-
+    List the published ports of a sandbox.
+
+    With --cloud:
+    List the exposed ports of a cloud sandbox given by ID (sbx_*) or name, each
+    with its publicly reachable URL.
+usage: sbx port ls SANDBOX [flags]
+options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for ls
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+example: |4-
+      sbx port ls my-sandbox
+
+      # Machine-readable output
+      sbx port ls my-sandbox --format json
+see_also:
+    - sbx port - Manage sandbox port publishing
