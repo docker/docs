@@ -30,16 +30,16 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.100.0" build_path="/XXXXXX/" >}}
 
-### Updates
+### Updates {#41000-updates}
 
 - Docker Offload `v0.7.47`
 - Docker Hardened Images (`dhictl`) `v0.0.12`
 - Docker Agent `v1.156.2`
 - [Docker Compose v5.7.1](https://github.com/docker/compose/releases/tag/v5.7.1)
 
-### Bug fixes and enhancements
+### Bug fixes and enhancements {#41000-bug-fixes-and-enhancements}
 
-#### For all platforms
+#### For all platforms {#41000-for-all-platforms}
 
 - Fixed an issue where restarting Docker Desktop could cause ECI users running kind clusters to lose Kubernetes state.
 - Fixed Docker Desktop downloading an update again after a restart when it had already been downloaded.
@@ -49,19 +49,21 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed `docker build` API requests with a chunked request body hanging over keep-alive connections. Fixes [docker/desktop-feedback#805](https://github.com/docker/desktop-feedback/issues/805).
 - Fixed Docker Desktop getting stuck in the stopping state when the Docker VMM process did not exit after the VM powered off.
 - Fixed file locks, ownership changes and file-change notifications being ignored on the descriptor that created a file in a bind mount. [Fixes desktop-feedback/issues/765](https://github.com/docker/desktop-feedback/issues/765).
+- Fixed a bug in Enhanced Container Isolation (ECI) that was causing a pre-existing `kind` cluster to fail to come up after a Docker Desktop restart.
 
-#### For Mac
+#### For Mac {#41000-for-mac}
 
 - Fixed **Allow privileged port forwarding to external machines** being ignored with the Apple Virtualization engine. Privileged ports (below `1024`) published on all interfaces are now only reachable from the local machine unless the setting is enabled.
 
-#### For Windows
+#### For Windows {#41000-for-windows}
 
 - Fixed an issue where updating a Hyper-V installation enabled the WSL feature.
 - Updated the WSL2 engine to use single-distro (monodistro) mode by default, automatically migrating legacy dual-distro setups on next start for improved performance.
 - Added sparse raw disk format (`DockerDesktop.raw`) for new Docker VMM installations, replacing VHDX to prevent meta.db corruption; existing installations are unaffected.
 - Added a **Restart** option to the "WSL not installed" error so Docker Desktop can start once WSL has been installed, without quitting first.
+- Fixed [desktop-feedback/issues/820](https://github.com/docker/desktop-feedback/issues/820).
 
-#### For Linux
+#### For Linux {#41000-for-linux}
 
 - Fixed an issue where `.deb` package installation failed on systems with AppArmor userspace tools installed but the kernel LSM not active (e.g., CI containers or systems booted with `apparmor=0`).
 
