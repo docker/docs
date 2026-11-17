@@ -1,0 +1,59 @@
+name: sbx port unpublish
+synopsis: Unpublish ports
+description: |-
+    Unpublish sandbox ports from the host.
+
+    A SPEC is [[HOST_IP:]HOST_PORT:]SANDBOX_PORT[/PROTOCOL].
+    If HOST_IP is omitted, the port is bound on loopback, expanded based on
+    PROTOCOL and the sandbox's address families: tcp/udp binds both 127.0.0.1
+    and ::1 (or only 127.0.0.1 if the sandbox is IPv4-only); tcp4/udp4 binds
+    only 127.0.0.1; tcp6/udp6 binds only ::1.
+    Supported protocols: tcp, tcp4, tcp6, udp, udp4, udp6.
+
+    When unpublishing without a HOST_PORT, mappings matching HOST_IP and PROTOCOL
+    are removed from every host port.
+
+    When unpublishing without a PROTOCOL, the mapping is removed whether it was
+    published with that same default or as dual-stack tcp. Name the protocol to
+    remove a tcp6 or udp mapping; anything left behind is reported.
+
+    With --cloud:
+    Remove exposed ports from a cloud sandbox given by ID (sbx_*) or name.
+
+    A SPEC is the sandbox port number alone or with a /tcp suffix; UDP and host
+    bindings are refused.
+usage: sbx port unpublish SANDBOX SPEC... [flags]
+options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for unpublish
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+example: |4-
+      # Unpublish a port
+      sbx port unpublish my-sandbox 3000:8080
+
+      # Unpublish a sandbox port from every host port
+      sbx port unpublish my-sandbox 8080
+
+      # Remove an exposed port from a cloud sandbox
+      sbx --cloud port unpublish sbx_abc123 8080
+see_also:
+    - sbx port - Manage sandbox port publishing

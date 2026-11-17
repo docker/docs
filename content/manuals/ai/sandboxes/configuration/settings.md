@@ -277,6 +277,28 @@ different agent.
 Remove the fixed path with `sbx settings unset ssh.agentSocketPath` and restart
 the daemon to update existing forwarders.
 
+### Clone-mode Git remote
+
+#### clone.legacyTcpRemote {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Set this to `true` only for Git clients that ignore the remote's `uploadpack`
+setting and cannot use the default daemon socket transport:
+
+```console
+$ sbx settings set clone.legacyTcpRemote true
+```
+
+Changes take effect the next time the sandbox starts. This setting has no
+environment variable override and is excluded from `sbx settings ls`. Use
+`sbx settings get clone.legacyTcpRemote` to inspect its value.
+
+The TCP compatibility mode exposes the repository and its history through an
+unauthenticated localhost Git port that other local accounts on the host can
+access. Leave this at `false` to use the daemon socket. See
+[Sandbox remote behavior](../workflows/git.md#sandbox-remote-behavior).
+
 ### Images and storage
 
 #### platform.images.registryMirror {.wrap-anywhere}
@@ -606,7 +628,6 @@ $ sbx daemon restart
 
 Changes apply to sandboxes created after the change. For existing sandboxes,
 restart the daemon to rebuild their network proxies with the updated value.
-The experimental Runtime backend doesn't support this setting.
 
 A network outage longer than the timeout can close long-lived connections,
 including streams and uploads. On Linux, the timeout also closes a connection
@@ -778,6 +799,23 @@ It relaxes certificate validation to accept those serial numbers. It doesn't
 make an untrusted certificate authority trusted or resolve other certificate
 errors. For an untrusted internal CA, see
 [certificate troubleshooting](../troubleshooting.md#api-calls-fail-with-a-certificate-error).
+
+#### tls.postQuantumKeyExchange {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Set this to `false` if a firewall or TLS-inspecting proxy drops or stalls
+Docker Sandboxes HTTPS connections because it can't handle post-quantum key
+exchange:
+
+```console
+$ sbx settings set tls.postQuantumKeyExchange false
+$ sbx daemon restart
+```
+
+This disables post-quantum key exchange for TLS connections made by the host
+CLI and daemon. Changes apply on the next CLI invocation and require a daemon
+restart. Set it back to `true` and restart the daemon to restore the default.
 
 ### Shared agent skills
 

@@ -3,16 +3,13 @@ synopsis: Execute a command inside a sandbox
 description: |-
     Execute a command in a sandbox. If the sandbox is stopped, it is started first. Or — with --cloud — the cloud sandbox
     ID (sbx_*) or name from "sbx --cloud ls". --user is not supported with --cloud.
-    --detach-keys applies only to an interactive (-i/-t) cloud exec.
+    Exec sessions cannot detach; --detach-keys is not supported.
 
     Exit status is that of the command. sbx exits 125 if it could not run the command,
     for example because the sandbox does not exist. A missing command exits 127,
     unless a cloud backend reports it as an error rather than a status, which exits 125.
 usage: sbx exec [flags] SANDBOX COMMAND [ARG...]
 options:
-    - name: detach-keys
-      usage: |
-        Override the key sequence for detaching an interactive cloud exec session (not supported for local exec)
     - name: env
       shorthand: e
       default_value: '[]'

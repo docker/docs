@@ -60,5 +60,12 @@ example: |4-
 
       # Remove every sandbox without asking
       sbx rm --all --force
+
+      # Remove a cloud sandbox by name or ID
+      sbx --cloud rm my-sandbox
+      sbx --cloud rm sbx_abc123
+
+      # Remove specific cloud sandboxes without confirmation
+      sbx --cloud rm sbx_abc123 sbx_def456 --force
 see_also:
     - sbx - Manage AI coding agent sandboxes.

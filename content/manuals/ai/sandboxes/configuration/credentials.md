@@ -78,8 +78,12 @@ On Linux hosts without a running Secret Service — headless servers and some WS
 setups — `sbx` falls back to a file under your user config directory
 `$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
 `~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. The fallback
-is automatic and needs no configuration. When you store a secret this way,
-`sbx` prints a notice:
+is automatic and needs no configuration. When running as root, `sbx` ignores
+`XDG_CONFIG_HOME` and uses `~/.config/com.docker.sandboxes` under root's
+registered home directory. See
+[Storage paths when running as root](../faq.md#which-storage-paths-are-used-when-running-as-root).
+
+When you store a secret this way, `sbx` prints a notice:
 
 ```text
 No keychain detected - this secret will be stored on disk, protected by file permissions rather than a password
