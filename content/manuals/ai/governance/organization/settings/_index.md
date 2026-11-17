@@ -42,8 +42,7 @@ Each settings policy applies to one of the following:
 - **All organization members**. Only one settings policy can apply to the
   whole organization at a time. To assign a different one, first unassign the
   current one.
-- **Teams**. For how to create teams or sync them from your identity provider,
-  see [Scope policies to teams](../policies/create-manage.md#scope-policies-to-teams).
+- **Teams**. Teams you select.
 - **Members**. Individual members you select.
 
 When more than one policy applies to a developer, each setting is resolved
