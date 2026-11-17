@@ -32,7 +32,7 @@ A pull is defined as the following:
   occurs as a result of the pull. Depending on the client, a `docker pull` can
   verify the existence of an image or tag without downloading it by performing
   a version check.
-- Version checks do not count towards usage pricing.
+- Version checks do not count towards pull rate limits.
 - A pull for a normal image makes one pull for a [single
   manifest](https://github.com/opencontainers/image-spec/blob/main/manifest.md).
 - A pull for a multi-arch image will count as one pull for each
