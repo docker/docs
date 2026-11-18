@@ -20,30 +20,10 @@ that Docker Sandboxes applies only part of the capability. Declaration only
 means that Docker Sandboxes accepts the entry without using its commands.
 
 All capability names in the table have the `com.docker.sandbox/` prefix.
+Not verified means Docker Sandboxes support has not been confirmed for that
+capability.
 
-| Capability | Local sandboxes | Cloud sandboxes | Restrictions |
-| --- | --- | --- | --- |
-| [`agent-context@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-context@1.md) | v0.45.0 | v0.45.0 | Agent instructions are applied when creating the sandbox. |
-| [`agent-context@2`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-context@2.md) | v0.51.0 | Limited: v0.51.0 | Cloud sandboxes write one workload profile in `/home/agent`. Mixins use the workload's profile and cannot specify a `directory`. Unsupported required profiles prevent creation; optional ones are skipped. |
-| [`agent-interactive-sessions@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-interactive-sessions@1.md) | Unsupported | Unsupported | Docker Sandboxes does not use these session commands. |
-| [`agent-sessions@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-sessions@1.md) | Declaration only | Declaration only | Accepted since v0.45.0, but Docker Sandboxes does not execute the declared session commands. |
-| [`agent-skill@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-skill@1.md) | v0.48.0 | Unsupported | Requires a selected `agent-skills@1` destination. Bundled skills remain available with `--skills=off`. |
-| [`agent-skills@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/agent-skills@1.md) | v0.45.0 | Unsupported | Local sandboxes mount the shared skills store. From v0.48.0, discovery paths also receive bundled skills. |
-| [`credential@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/credential@1.md) | v0.45.0 | Limited: v0.45.0 | In cloud sandboxes, credentials scoped to installation remain available after setup. |
-| [`git-identity@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/git-identity@1.md) | v0.48.0 | Unsupported | Requires `user.name` and `user.email` in the host Git config. |
-| [`host-mount@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/host-mount@1.md) | v0.50.0 | Unsupported | Users can [select host directories](../use-kits.md#choose-directories-for-kit-host-mounts) at creation time. Cloud sandboxes reject required entries and skip optional ones. |
-| [`kit-registry@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/kit-registry@1.md) | v0.45.0 | Unsupported | Restricted to approved OCI builder kits. Local and Git kit sources do not receive registry access. |
-| [`lifecycle@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/lifecycle@1.md) | v0.45.0 | v0.45.0 | Local startup hooks run alongside the agent, rather than blocking its launch. |
-| [`long-running@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/long-running@1.md) | v0.47.0 | Unsupported | Keeps a local sandbox running after its last session disconnects. |
-| [`network-policy@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/network-policy@1.md) | v0.45.0 | Limited: v0.45.0 | Cloud sandboxes keep installation-phase network access after setup. |
-| [`network-policy@2`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/network-policy@2.md) | v0.45.0 | Limited: v0.45.0 | Cloud sandboxes enforce host rules, but not HTTP method or path restrictions. Installation-phase access remains after setup. |
-| [`port@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/port@1.md) | v0.45.0 | Limited: v0.45.0 | Cloud sandboxes expose IPv4 TCP ports only. See [Port address families](#port-address-families). |
-| [`privileged@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/privileged@1.md) | v0.48.0 | Unsupported | Accepted by the local runtime, which runs Docker-in-Docker containers in privileged mode inside the sandbox VM. |
-| [`resources@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/resources@1.md) | Limited: v0.45.0 | Limited: v0.45.0 | Workload CPU and memory defaults are applied. The `gpu` field does not select GPUs; cloud creation rejects a required GPU request. |
-| [`sbx@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/sbx@1.md) | v0.45.0 | v0.45.0 | Docker Sandboxes launches the agent using the workload command. |
-| [`ssh-agent@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/ssh-agent@1.md) | v0.48.0 | Unsupported | Requires SSH-agent forwarding to be enabled and a host SSH agent to be available. |
-| [`usb-device@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/usb-device@1.md) | Unsupported | Unsupported | Kit requests for USB device access are not supported. |
-| [`volume@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/volume@1.md) | v0.45.0 | Limited: v0.45.0 | Local sandboxes provide block storage or tmpfs and [retain block volumes across removal and recreation](../use-kits.md#keep-kit-data-when-recreating-a-sandbox). Cloud sandboxes use ordinary sandbox disk at the declared paths, including for tmpfs requests. |
+{{< kit-capabilities >}}
 
 ## Port address families
 

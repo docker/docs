@@ -1,0 +1,30 @@
+{{- $data := hugo.Data.kit_capabilities -}}
+{{- if not $data.capabilities -}}
+  {{- errorf "kit capability data is missing or empty; run python3 hack/kit-capabilities/sync.py generate" -}}
+{{- end -}}
+{{- $rows := slice "| Capability | Local sandboxes | Cloud sandboxes | Restrictions |" "| --- | --- | --- | --- |" -}}
+{{- range $data.capabilities -}}
+  {{- $local := "Not verified" -}}
+  {{- if eq .local.status "supported" -}}
+    {{- $local = .local.since -}}
+  {{- else if eq .local.status "limited" -}}
+    {{- $local = printf "Limited: %s" .local.since -}}
+  {{- else if eq .local.status "declaration-only" -}}
+    {{- $local = "Declaration only" -}}
+  {{- else if eq .local.status "unsupported" -}}
+    {{- $local = "Unsupported" -}}
+  {{- end -}}
+  {{- $cloud := "Not verified" -}}
+  {{- if eq .cloud.status "supported" -}}
+    {{- $cloud = .cloud.since -}}
+  {{- else if eq .cloud.status "limited" -}}
+    {{- $cloud = printf "Limited: %s" .cloud.since -}}
+  {{- else if eq .cloud.status "declaration-only" -}}
+    {{- $cloud = "Declaration only" -}}
+  {{- else if eq .cloud.status "unsupported" -}}
+    {{- $cloud = "Unsupported" -}}
+  {{- end -}}
+  {{- $name := strings.TrimPrefix "com.docker.sandbox/" .id -}}
+  {{- $rows = $rows | append (printf "| [`%s`](%s) | %s | %s | %s |" $name .url $local $cloud .restrictions) -}}
+{{- end -}}
+{{- return (delimit $rows "\n") -}}

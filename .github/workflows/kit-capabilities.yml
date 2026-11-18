@@ -1,0 +1,39 @@
+name: Kit capabilities
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/kit-capabilities.yml"
+      - ".github/workflows/sync-kit-capabilities.yml"
+      - "hack/kit-capabilities/**"
+      - "data/kit_capabilities.json"
+      - "layouts/_shortcodes/kit-capabilities*"
+      - "layouts/_partials/kit-capabilities*"
+      - "content/manuals/ai/sandboxes/customize/author/capabilities.md"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/kit-capabilities.yml"
+      - ".github/workflows/sync-kit-capabilities.yml"
+      - "hack/kit-capabilities/**"
+      - "data/kit_capabilities.json"
+      - "layouts/_shortcodes/kit-capabilities*"
+      - "layouts/_partials/kit-capabilities*"
+      - "content/manuals/ai/sandboxes/customize/author/capabilities.md"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout docs
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+
+      - name: Run kit capability tests and drift check
+        run: |
+          python3 --version
+          python3 -m unittest discover -s hack/kit-capabilities -p 'test_*.py'
+          python3 hack/kit-capabilities/sync.py check

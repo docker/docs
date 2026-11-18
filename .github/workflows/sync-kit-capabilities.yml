@@ -1,0 +1,89 @@
+name: Sync kit capabilities
+
+on:
+  schedule:
+    # Check upstream weekly; the sync job opens a PR only when the pinned catalog changes.
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref in docker/sandbox-kit-spec to sync (defaults to main)."
+        type: string
+        required: false
+        default: main
+
+concurrency:
+  group: sync-kit-capabilities
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  BRANCH_NAME: chore/sync-kit-capabilities
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - id: setup
+        uses: docker/actions/setup@707e5d98a430d92e8e6c2d34faa5bfb2a9149e9b
+        with:
+          app_id: ${{ secrets.HUB_PLATFORM_APP_ID }}
+          app_private_key: ${{ secrets.HUB_PLATFORM_APP_PRIVATE_KEY }}
+
+      - name: Checkout docs
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          token: ${{ steps.setup.outputs.token }}
+          show-progress: false
+
+      - name: Resolve upstream ref to commit SHA
+        id: resolve
+        env:
+          GH_TOKEN: ${{ steps.setup.outputs.token }}
+          REF: ${{ inputs.ref }}
+        run: |
+          set -euo pipefail
+          ref="${REF:-main}"
+          sha=$(gh api "repos/docker/sandbox-kit-spec/commits/${ref}" --jq .sha)
+          if [[ ! "$sha" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "error: upstream ref did not resolve to a 40-character commit SHA" >&2
+            exit 1
+          fi
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "Syncing docker/sandbox-kit-spec at $sha"
+
+      - name: Sync pinned capability catalog
+        env:
+          GH_TOKEN: ${{ steps.setup.outputs.token }}
+          REF: ${{ steps.resolve.outputs.sha }}
+        run: |
+          set -euo pipefail
+          python3 hack/kit-capabilities/sync.py sync --ref "$REF"
+
+      - name: Test and check generated catalog
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s hack/kit-capabilities -p 'test_*.py'
+          python3 hack/kit-capabilities/sync.py check
+
+      - name: Create or update pull request
+        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0
+        with:
+          token: ${{ steps.setup.outputs.token }}
+          title: "docs: sync kit capability catalog"
+          body: |
+            Refreshes the pinned capability catalog from `docker/sandbox-kit-spec`.
+
+            The runtime support classifications remain manually maintained and are not changed by this sync.
+          commit-message: "Sync kit capability catalog"
+          sign-commits: true
+          add-paths: |
+            hack/kit-capabilities/source.json
+            hack/kit-capabilities/kit.schema.json
+            data/kit_capabilities.json
+          branch: ${{ env.BRANCH_NAME }}
+          delete-branch: true
