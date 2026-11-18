@@ -80,7 +80,7 @@ function loadGordonCards() {
 Alpine.magic('gordonCards', () => loadGordonCards)
 
 // With the "browser" Gordon backend, the assistant runs in the reader's browser. Its loader
-// script defines window.gordonDocs and is only added once a reader shows interest in Gordon,
+// script defines window.gordonAssistant and is only added once a reader shows interest in Gordon,
 // never on a plain page view.
 let gordonAssistantLoading
 
@@ -89,11 +89,11 @@ function loadGordonAssistant() {
     const script = document.createElement('script')
     script.src = window.GORDON_LOADER_URL
     script.onload = () => {
-      if (window.gordonDocs) {
-        resolve(window.gordonDocs)
+      if (window.gordonAssistant) {
+        resolve(window.gordonAssistant)
       } else {
         gordonAssistantLoading = undefined
-        reject(new Error('The Gordon loader did not define gordonDocs'))
+        reject(new Error('The Gordon loader did not define gordonAssistant'))
       }
     }
     script.onerror = () => {
