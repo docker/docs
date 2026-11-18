@@ -37,13 +37,28 @@ All capability names in the table have the `com.docker.sandbox/` prefix.
 | [`long-running@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/long-running@1.md) | v0.47.0 | Unsupported | Keeps a local sandbox running after its last session disconnects. |
 | [`network-policy@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/network-policy@1.md) | v0.45.0 | Limited: v0.45.0 | Cloud sandboxes keep installation-phase network access after setup. |
 | [`network-policy@2`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/network-policy@2.md) | v0.45.0 | Limited: v0.45.0 | Cloud sandboxes enforce host rules, but not HTTP method or path restrictions. Installation-phase access remains after setup. |
-| [`port@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/port@1.md) | v0.45.0 | Limited: v0.45.0 | Cloud sandboxes expose TCP ports only. |
+| [`port@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/port@1.md) | v0.45.0 | Limited: v0.45.0 | Cloud sandboxes expose IPv4 TCP ports only. See [Port address families](#port-address-families). |
 | [`privileged@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/privileged@1.md) | v0.48.0 | Unsupported | Accepted by the local runtime, which runs Docker-in-Docker containers in privileged mode inside the sandbox VM. |
 | [`resources@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/resources@1.md) | Limited: v0.45.0 | Limited: v0.45.0 | Workload CPU and memory defaults are applied. The `gpu` field does not select GPUs; cloud creation rejects a required GPU request. |
 | [`sbx@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/sbx@1.md) | v0.45.0 | v0.45.0 | Docker Sandboxes launches the agent using the workload command. |
 | [`ssh-agent@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/ssh-agent@1.md) | v0.48.0 | Unsupported | Requires SSH-agent forwarding to be enabled and a host SSH agent to be available. |
 | [`usb-device@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/usb-device@1.md) | Unsupported | Unsupported | Kit requests for USB device access are not supported. |
 | [`volume@1`](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/volume@1.md) | v0.45.0 | Limited: v0.45.0 | Local sandboxes provide block storage or tmpfs and [retain block volumes across removal and recreation](../use-kits.md#keep-kit-data-when-recreating-a-sandbox). Cloud sandboxes use ordinary sandbox disk at the declared paths, including for tmpfs requests. |
+
+## Port address families
+
+For v3 `port@1` entries, `family` selects the address families used to publish
+the port: `ipv4`, `ipv6`, or `dual` for both. If no kit specifies a family,
+the port defaults to IPv4, even with an explicit `transport: tcp`. Use
+`family: dual` when the service needs both IPv4 and IPv6 clients.
+
+When kits declare the same port and transport, an entry without `family`
+uses the family specified by another kit in the set. Kits that specify
+conflicting families for that port cannot be used together.
+
+Cloud sandboxes support IPv4 TCP ports only. They reject required `ipv6` and
+`dual` entries and skip optional ones. For capability syntax and
+examples, follow the `port@1` specification link in the table.
 
 ## Capability groups
 

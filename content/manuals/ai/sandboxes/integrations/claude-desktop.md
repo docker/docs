@@ -22,19 +22,22 @@ host.
 
 ## Prerequisites
 
+- Claude credentials configured in Docker Sandboxes. See
+  [Claude Code authentication](../agents/claude-code.md#authentication).
 - SSH access set up. See [Editor and app integrations](_index.md#enable-ssh-access).
 - Claude Desktop installed.
 
 Use a sandbox created with the Claude agent type. The Claude sandbox template
-configures Anthropic credentials and network access for the remote Claude Code
-session.
-
-## Connect
+configures credential injection and network access for the remote Claude Code
+session. You must supply the credential before connecting.
 
 > [!WARNING]
-> Connecting Claude Desktop to a sandbox over SSH transmits Anthropic
-> credentials into the Claude Code process within the sandbox, reducing
-> isolation guarantees.
+> Claude Desktop can write Anthropic credentials directly into the sandbox
+> during OAuth refresh. When this happens, requests use those credentials
+> instead of proxy credential injection. The credentials are exposed inside
+> the sandbox, reducing isolation guarantees.
+
+## Connect
 
 For a dedicated sandbox created on first connection, see
 [Set up desktop app connections](_index.md#set-up-desktop-app-connections).

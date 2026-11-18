@@ -41,7 +41,7 @@ description: |-
         ports under new cloud URLs; a port the cloud refuses is skipped with a
         warning. Moving to local saves the published TCP ports and binds them
         on loopback while the sandbox runs. Host ports can change on restart;
-        'sbx ports SANDBOX' shows them. A cloud port published with an
+        'sbx port ls SANDBOX' shows them. A cloud port published with an
         explicit host binding stops a move to local.
 
     Sizing and disk:
@@ -72,7 +72,7 @@ options:
       usage: help for move
     - name: name
       usage: |
-        Name for the destination sandbox (default: 'moved-' + the source name; a cloud destination always adds a short unique suffix, a local one only when that name is already taken)
+        Name for the destination sandbox (default: 'moved-' + the source name, with a short unique suffix for cloud destinations or when the local name is taken; an explicit name is used unchanged)
     - name: on-timeout
       usage: |
         What happens to the destination cloud sandbox when its TTL lapses: 'stop' stops it in place so it can be started again later, 'restart' keeps it running by stopping and immediately starting it, or 'delete' removes it. Not every sandbox supports 'stop', and an explicit request the server refuses fails the move after the source has been stopped and uploaded, so the sandbox is restored but the transfer is spent. With 'restart' a supplied --ttl must be at least 1h. Default: stop when the sandbox supports it, else the server default (delete). Only with --to cloud

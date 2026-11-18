@@ -61,8 +61,9 @@ for the cause before deciding whether to retry.
 
 Confirmations require terminal input. Piping an answer, such as `echo y`, does
 not confirm an operation. Use `--force` on commands that provide it to skip
-confirmation in scripts. `sbx kit builder history rm` uses `--yes` or `-y`
-instead, because its `--force` flag is passed to Buildx.
+confirmation in scripts. For `sbx logout`, use `--yes` or `-y`, even when
+no local daemon is running. `sbx kit builder history rm` also uses `--yes`
+or `-y`, because its `--force` flag is passed to Buildx.
 
 A command that requires confirmation fails with exit status 1 when stdin is
 not a terminal. Declining a confirmation also returns a non-zero exit code.
@@ -91,6 +92,10 @@ $ sbx prune --dry-run --format yaml
 are rejected. `sbx events --json` emits newline-delimited JSON, and
 `sbx mcp auth --format text|json` uses command-specific formats.
 
+For `sbx diagnose --format json` and `--format yaml`, each entry in `checks`
+has a stable `id`. Match checks by `id` in scripts. The `name` field is
+display text and can change between releases.
+
 For lists of identifiers without table headings, use `--quiet` or `-q`:
 
 | Command | Output |
@@ -112,7 +117,6 @@ that use the following flags:
 | Command | Previous flag | Replacement |
 | --- | --- | --- |
 | `sbx run`, `sbx env run` | `--detached` | `--detach` or `-d` |
-| `sbx logout` | `--yes`, `-y` | `--force` or `-f` |
 | `sbx env create`, `sbx env run` | `--auto-approve`, `-y` | `--force` or `-f` |
 | `sbx create` | `--quiet`, `-q` | `--no-progress` suppresses progress but still prints the creation summary |
 | `sbx template save` | `-d` for a description | `--description` |

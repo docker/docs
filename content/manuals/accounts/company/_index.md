@@ -7,12 +7,12 @@ description: Why a Docker company groups organizations, and what company
 keywords: company, multiple organizations, Docker Home, Docker Business,
   company owners, SSO, SCIM
 grid:
-  - title: Create a company
-    description: Get started by learning how to create a company.
+  - title: Set up a company
+    description: Create a company, invite members, add organizations, and manage owners.
     icon: building-office-2
     link: /accounts/company/new-company/
   - title: Manage your company
-    description: Add organizations, manage company owners, and invite members.
+    description: Change roles, remove users, and export a member list.
     icon: building-storefront
     link: /accounts/company/manage/
   - title: Configure SSO and SCIM
@@ -89,6 +89,6 @@ who is not an organization member does not occupy a seat.
 
 ## Next steps
 
-Learn how to create and manage a company in the following sections.
+Set up the company, then manage members and access from the pages below.
 
 {{< grid >}}

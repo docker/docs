@@ -29,6 +29,10 @@ options:
       shorthand: h
       default_value: "false"
       usage: help for import
+    - name: verbose
+      shorthand: v
+      default_value: "false"
+      usage: Also list the checked directories that do not exist
 inherited_options:
     - name: cloud
       default_value: "false"

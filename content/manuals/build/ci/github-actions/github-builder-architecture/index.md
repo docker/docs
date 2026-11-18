@@ -1,9 +1,11 @@
 ---
 title: Docker GitHub Builder architecture
-linkTitle: Architecture
+linkTitle: GitHub Builder architecture
 description: Learn about the architecture of Docker GitHub Builder, a set of reusable workflows for building images and artifacts with BuildKit in GitHub Actions.
 keywords: ci, github actions, gha, buildkit, buildx, bake, reusable workflows
-weight: 10
+aliases:
+  - /build/ci/github-actions/github-builder/architecture/
+weight: 30
 ---
 
 Docker GitHub Builder separates repository orchestration from build
@@ -14,17 +16,24 @@ owns the build implementation itself. That split keeps repository workflows
 short while centralizing BuildKit, caching, provenance, SBOM generation,
 signing, and multi-platform assembly in one Docker-maintained path.
 
-![GitHub Builder overview](./images/architecture-overview.png)
+![Caller controls, Builder responsibilities, and outputs](./images/architecture-overview.png)
 
 ## Core architecture
 
-A caller workflow invokes either [`build.yml`](build.md) or [`bake.yml`](bake.md).
-[`build.yml`](build.md) is the entrypoint for Dockerfile-oriented builds.
-[`bake.yml`](bake.md) is the entrypoint for Bake-oriented builds, where the
+A caller workflow invokes either [`build.yml`](../build-workflow.md) or [`bake.yml`](../bake-workflow.md).
+[`build.yml`](../build-workflow.md) is the entrypoint for Dockerfile-oriented builds.
+[`bake.yml`](../bake-workflow.md) is the entrypoint for Bake-oriented builds, where the
 Bake definition remains the source of truth for targets and overrides. In both
 cases the caller still owns repository policy, including triggers, branch
 conditions, permissions, secrets, target selection, metadata inputs, and the
 choice between image output and local output.
+
+The `registry-identities` input supplies non-secret configuration for keyless
+registry authentication. A separate job validates this configuration. Jobs that
+need registry access authenticate with the configured provider. You can combine
+identities with credentials passed through the `registry-auths` secret. See
+[Registry identities](https://github.com/docker/github-builder#registry-identities)
+for supported providers and configuration.
 
 Inside the reusable workflow, the first phase prepares the build. It validates
 the incoming inputs, resolves the runner config, and expands a multi-platform
@@ -47,14 +56,8 @@ conceptual platform jobs:
 The `runner` input accepts either a single GitHub-hosted Linux runner label or a
 newline-delimited platform mapping.
 
-The default value is a platform mapping that uses GitHub-hosted Ubuntu runners:
-
-```yaml
-runner: |
-  default=ubuntu-24.04
-  linux/arm=ubuntu-24.04-arm
-  linux/arm64=ubuntu-24.04-arm
-```
+For the default mapping, see
+[Runner mapping](https://github.com/docker/github-builder#runner-mapping).
 
 In the platform job, the runner label resolves to a single value:
 
@@ -84,7 +87,7 @@ deprecation warnings. Use an explicit runner label or platform mapping instead.
 
 ## Execution path
 
-![GitHub Builder execution flow](./images/execution-flow.png)
+![Preparation, parallel platform builds, and finalization](./images/execution-flow.png)
 
 The execution path stays short on purpose. The consuming repository calls the
 reusable workflow. The reusable workflow prepares the build, runs the
@@ -96,13 +99,13 @@ BuildKit, caching, or manifest assembly were wired together.
 
 ## The two reusable entrypoints
 
-[`build.yml`](build.md) is the better fit when the build is already expressed as
+[`build.yml`](../build-workflow.md) is the better fit when the build is already expressed as
 a Dockerfile-oriented workflow. It lines up naturally with concepts such as
 `context`, `file`, `target`, `build-args`, `labels`, `annotations`, and
 `platforms`. This is the entrypoint that feels closest to
 `docker/build-push-action`, except the workflow implementation is centralized.
 
-[`bake.yml`](bake.md) is the better fit when the repository already uses Bake
+[`bake.yml`](../bake-workflow.md) is the better fit when the repository already uses Bake
 as the build definition. It preserves the Bake model, including target
 resolution, `files`, `set`, and `vars`, while still routing execution through
 the same Docker-maintained build path. One important architectural detail is
@@ -124,7 +127,7 @@ selection and per-platform assembly.
 ### Dockerfile-oriented image build
 
 The following example shows the shape of a multi-platform image build driven
-by [`build.yml`](build.md).
+by [`build.yml`](../build-workflow.md).
 
 ```yaml
 name: ci
@@ -220,6 +223,18 @@ the build logic itself is centrally reviewed and versioned. The project also
 treats provenance, SBOM generation, and signing as first-class concerns,
 which strengthens the trust boundary between repository orchestration and
 artifact production.
+
+When caching is enabled and GitHub OIDC is available through `id-token: write`,
+BuildKit signs exported cache entries with Cosign. Before importing cache, it
+checks signatures against the expected workflow identity and source repository
+policy. Cache signing is separate from the `sign` input that controls output
+signing. See [Signed GitHub Actions cache](https://github.com/docker/github-builder#signed-github-actions-cache).
+
+The optional `buildkit-proxy-network` input routes network access from
+Dockerfile `RUN` instructions through BuildKit's HTTP(S) proxy. Successful GET
+responses can become build materials in provenance. This mode restricts
+network protocols and changes proxy configuration; see [BuildKit proxy network](https://github.com/docker/github-builder#buildkit-proxy-network)
+before enabling it.
 
 ### Isolation and reliability
 

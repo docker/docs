@@ -31,6 +31,10 @@ description: |-
     methods or ANY; --path defaults to /**. Repeat --query name=value to require
     query parameters.
 
+    HTTP paths, query parameter names, and query values match without regard to
+    ASCII letter case. For example, /API/** matches /api/items, and Tag=PROD
+    matches tag=prod.
+
     With --cloud:
     Block cloud sandbox network access to the specified hosts.
 
@@ -57,7 +61,7 @@ options:
         Restrict the rule to this HTTP path glob (e.g. /repos/**); defaults to /**
     - name: protocol
       usage: |
-        Restrict the rule to one protocol: tcp or udp (default tcp,udp)
+        Network protocol: tcp or udp; repeat or comma-separate for both (default tcp,udp)
     - name: query
       default_value: '[]'
       usage: |

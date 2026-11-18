@@ -73,6 +73,7 @@ options:
       usage: |
         OAuth scope to authorize for this run (repeatable; overrides the recorded default; unrecognized scopes warn but are still requested). With no --scope and no recorded default, the scope set the resource itself requires is requested; with none of those, whichever of openid, email, profile, and offline_access are advertised are requested; other advertised scopes are excluded from this fallback
     - name: verbose
+      shorthand: v
       default_value: "false"
       usage: Print authorization polling progress
 inherited_options:

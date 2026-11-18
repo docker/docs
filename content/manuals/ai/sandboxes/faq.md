@@ -136,13 +136,10 @@ inside the session. Most agents let you switch permission modes after
 startup. In Claude Code, use the `/permissions` command to change the mode
 interactively.
 
-To make approval prompts the default for every session, create a v2 sandbox
-kit that extends the built-in agent and changes its launch options. See
-[Fork an existing agent](customize/kits-v2.md#fork-an-existing-agent)
-for a complete example.
-
-For an environment built entirely with v3 kits, set the launch command in
-the workload's Dockerfile. See [Build a v3 agent kit](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
+To make approval prompts the default for every session, set the launch command
+in an [environment file](configuration/environment-files.md#set-the-launch-command)
+or in your workload's Dockerfile. See
+[Build an agent kit](/manuals/ai/sandboxes/customize/author/build-an-agent.md).
 
 ## How do I know if my agent is running in a sandbox?
 
@@ -189,6 +186,9 @@ $ sbx settings set clipboard.imagePaste true
 Claude Code and Codex. The setting takes effect within a few seconds, even for
 running sandboxes.
 
+Clipboard images larger than 64 MiB are ignored. The agent receives an empty
+clipboard instead.
+
 This is opt-in because it relaxes the sandbox's isolation: when enabled, a process
 inside the sandbox can read your host clipboard through the host-side proxy. The
 exposure is narrow — reads happen only on a paste, return image data only
@@ -201,28 +201,26 @@ To turn it back off:
 $ sbx settings set clipboard.imagePaste false
 ```
 
+## Which storage paths are used when running as root?
+
+On Unix, running `sbx` as root uses the home directory registered for root in
+the operating system and the default storage, credential, and daemon endpoint
+locations under that home. Inherited overrides for these locations, including
+`HOME`, `XDG_CONFIG_HOME`, `XDG_STATE_HOME`, `XDG_CACHE_HOME`,
+`SANDBOXES_STORAGE_ROOT`, and `DOCKER_SANDBOXES_API`, are ignored. Commands run
+as an ordinary user keep their existing paths and environment overrides.
+
+Before upgrading, stop any older root daemon that uses custom storage. The
+custom storage data is left untouched.
+
 ## Can I use Docker Sandboxes on headless Linux?
 
-Yes. For local sandboxes on Linux, `sbx` stores secrets in the Secret Service
-exposed by your desktop keyring, such as GNOME Keyring or KDE Wallet. Headless servers and some
-WSL setups have no running Secret Service, so `sbx` falls back to a file under
-`$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
-`~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. No setup is
-required. When you store a secret on such a host, `sbx` prints a notice:
-
-```text
-No keychain detected - this secret will be stored on disk, protected by file permissions rather than a password
-```
-
-`sbx` stores the file in a directory with `0700` permissions, the same
-file-permission model used for `~/.docker/config.json`. Any user or process that
-can read the file can retrieve the stored credentials, so treat the directory as
-sensitive. Where available, prefer a keychain, which mediates access per
-application.
+Yes. On headless Linux hosts and WSL setups without a running Secret Service,
+`sbx` stores secrets in a file protected by file permissions. No setup is
+required. For storage paths, root-user behavior, and security considerations,
+see [Where secrets are stored](configuration/credentials.md#where-secrets-are-stored).
 
 To keep secrets in a keyring instead, run a Secret Service on the host before
 storing them: install `gnome-keyring` and start `dbus-run-session`, or run the
 keyring daemon under a login session that unlocks it. Once a working Secret
-Service is available, `sbx` stores new
-secrets in the keychain again. For where each platform keeps secrets, see
-[Where secrets are stored](configuration/credentials.md#where-secrets-are-stored).
+Service is available, `sbx` stores new secrets in the keychain again.

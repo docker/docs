@@ -25036,8 +25036,8 @@
       "connection": "hosted",
       "description": "HTTP+JSON API for managing Docker governance policies and rules.\n\n**Resource model.** An organization owns one or more policies. Each policy\ncontains a list of rules grouped into a single domain: either `network` or\n`filesystem`. A policy's domain is derived from its rule actions; mixing\ndomains within a single policy is not permitted.\n\n**Lifecycle.** Create a policy with CreatePolicy, then add rules with\nCreateRule. Rules can be updated in place with UpdateRule or removed with\nDeleteRule. Deleting all rules does not delete the policy itself.\n\n**Rule evaluation.** All rules in a policy are tested against every request.\n`deny` always wins: if any rule matches with `decision: deny`, the request\nis denied regardless of any `allow` rules.\n\n**Enforcement.** Organization policies take precedence over local sandbox\npolicies and cannot be overridden by individual users.\n\n**Propagation.** Policy changes take up to five minutes to reach developer\nmachines after being written.\n\nSee the [AI Governance documentation](https://docs.docker.com/ai/sandboxes/governance/)\nfor product documentation.\n",
       "diagnostics": [],
-      "digest": "4f9f7d5cadd50f50ba01c30333846338283e1a95d2bf7dacada0ccabc84ad19c",
-      "exampleCount": 59,
+      "digest": "4ad4e46ff8cc9badf15b261190a8dddc5119e0cd82e117e54e562f9b30b91841",
+      "exampleCount": 62,
       "experimental": false,
       "guides": [],
       "id": "ai-governance",
@@ -25301,7 +25301,7 @@
               "status": "200"
             },
             {
-              "description": "Bad request",
+              "description": "Bad request, including a policy that exceeds the maximum allowed size.",
               "direction": "Response",
               "examples": [
                 {
@@ -25312,6 +25312,17 @@
                     "error": {
                       "code": "invalid_argument",
                       "message": "name is required"
+                    }
+                  }
+                },
+                {
+                  "language": "json",
+                  "name": "policy_too_large",
+                  "text": "{\n  \"error\": {\n    \"code\": \"limit_exceeded\",\n    \"message\": \"policy definition is 358401 bytes; maximum allowed size is 358400 bytes\"\n  }\n}",
+                  "value": {
+                    "error": {
+                      "code": "limit_exceeded",
+                      "message": "policy definition is 358401 bytes; maximum allowed size is 358400 bytes"
                     }
                   }
                 }
@@ -25652,7 +25663,7 @@
               "status": "201"
             },
             {
-              "description": "Bad request",
+              "description": "Bad request, including a policy that exceeds the maximum allowed size.",
               "direction": "Response",
               "examples": [
                 {
@@ -25663,6 +25674,17 @@
                     "error": {
                       "code": "invalid_argument",
                       "message": "name is required"
+                    }
+                  }
+                },
+                {
+                  "language": "json",
+                  "name": "policy_too_large",
+                  "text": "{\n  \"error\": {\n    \"code\": \"limit_exceeded\",\n    \"message\": \"policy definition is 358401 bytes; maximum allowed size is 358400 bytes\"\n  }\n}",
+                  "value": {
+                    "error": {
+                      "code": "limit_exceeded",
+                      "message": "policy definition is 358401 bytes; maximum allowed size is 358400 bytes"
                     }
                   }
                 }
@@ -25702,7 +25724,7 @@
               "status": "401"
             },
             {
-              "description": "Caller lacks the required permission for this org, the org is not entitled to use governance (`permission_denied`), or a creation limit has been reached (`limit_exceeded`): the org already has the maximum number of policies, or the policy already has the maximum number of rules.\n",
+              "description": "Caller lacks the required permission for this org, the org is not entitled to use governance (`permission_denied`), or a policy limit has been exceeded (`limit_exceeded`): the org already has the maximum number of policies, or the policy already has the maximum number of rules.\n",
               "direction": "Response",
               "examples": [
                 {
@@ -26785,7 +26807,7 @@
               "status": "200"
             },
             {
-              "description": "Bad request",
+              "description": "Bad request, including a policy that exceeds the maximum allowed size.",
               "direction": "Response",
               "examples": [
                 {
@@ -26796,6 +26818,17 @@
                     "error": {
                       "code": "invalid_argument",
                       "message": "name is required"
+                    }
+                  }
+                },
+                {
+                  "language": "json",
+                  "name": "policy_too_large",
+                  "text": "{\n  \"error\": {\n    \"code\": \"limit_exceeded\",\n    \"message\": \"policy definition is 358401 bytes; maximum allowed size is 358400 bytes\"\n  }\n}",
+                  "value": {
+                    "error": {
+                      "code": "limit_exceeded",
+                      "message": "policy definition is 358401 bytes; maximum allowed size is 358400 bytes"
                     }
                   }
                 }
@@ -26835,7 +26868,7 @@
               "status": "401"
             },
             {
-              "description": "Caller lacks the required permission for this org, the org is not entitled to use governance (`permission_denied`), or a creation limit has been reached (`limit_exceeded`): the org already has the maximum number of policies, or the policy already has the maximum number of rules.\n",
+              "description": "Caller lacks the required permission for this org, the org is not entitled to use governance (`permission_denied`), or a policy limit has been exceeded (`limit_exceeded`): the org already has the maximum number of policies, or the policy already has the maximum number of rules.\n",
               "direction": "Response",
               "examples": [
                 {
@@ -27339,7 +27372,7 @@
               "status": "201"
             },
             {
-              "description": "Bad request",
+              "description": "Bad request, including a policy that exceeds the maximum allowed size.",
               "direction": "Response",
               "examples": [
                 {
@@ -27350,6 +27383,17 @@
                     "error": {
                       "code": "invalid_argument",
                       "message": "name is required"
+                    }
+                  }
+                },
+                {
+                  "language": "json",
+                  "name": "policy_too_large",
+                  "text": "{\n  \"error\": {\n    \"code\": \"limit_exceeded\",\n    \"message\": \"policy definition is 358401 bytes; maximum allowed size is 358400 bytes\"\n  }\n}",
+                  "value": {
+                    "error": {
+                      "code": "limit_exceeded",
+                      "message": "policy definition is 358401 bytes; maximum allowed size is 358400 bytes"
                     }
                   }
                 }
@@ -27389,7 +27433,7 @@
               "status": "401"
             },
             {
-              "description": "Caller lacks the required permission for this org, the org is not entitled to use governance (`permission_denied`), or a creation limit has been reached (`limit_exceeded`): the org already has the maximum number of policies, or the policy already has the maximum number of rules.\n",
+              "description": "Caller lacks the required permission for this org, the org is not entitled to use governance (`permission_denied`), or a policy limit has been exceeded (`limit_exceeded`): the org already has the maximum number of policies, or the policy already has the maximum number of rules.\n",
               "direction": "Response",
               "examples": [
                 {
@@ -28072,7 +28116,7 @@
               "status": "200"
             },
             {
-              "description": "Bad request",
+              "description": "Bad request, including a policy that exceeds the maximum allowed size.",
               "direction": "Response",
               "examples": [
                 {
@@ -28083,6 +28127,17 @@
                     "error": {
                       "code": "invalid_argument",
                       "message": "name is required"
+                    }
+                  }
+                },
+                {
+                  "language": "json",
+                  "name": "policy_too_large",
+                  "text": "{\n  \"error\": {\n    \"code\": \"limit_exceeded\",\n    \"message\": \"policy definition is 358401 bytes; maximum allowed size is 358400 bytes\"\n  }\n}",
+                  "value": {
+                    "error": {
+                      "code": "limit_exceeded",
+                      "message": "policy definition is 358401 bytes; maximum allowed size is 358400 bytes"
                     }
                   }
                 }
@@ -28226,7 +28281,7 @@
       ],
       "owner": "docker/governor-services",
       "product": "ai-governance",
-      "schemaCount": 45,
+      "schemaCount": 47,
       "schemaURLs": {
         "#/components/schemas/AllowlistV0": "/reference/api/ai-governance/latest/schemas/AllowlistV0/",
         "#/components/schemas/CedarV1Policy": "/reference/api/ai-governance/latest/schemas/CedarV1Policy/",
@@ -28235,6 +28290,8 @@
         "#/components/schemas/DeletePolicyResponse": "/reference/api/ai-governance/latest/schemas/DeletePolicyResponse/",
         "#/components/schemas/DeleteRuleResponse": "/reference/api/ai-governance/latest/schemas/DeleteRuleResponse/",
         "#/components/schemas/Error": "/reference/api/ai-governance/latest/schemas/Error/",
+        "#/components/schemas/HTTPQuery": "/reference/api/ai-governance/latest/schemas/HTTPQuery/",
+        "#/components/schemas/HTTPQueryParameter": "/reference/api/ai-governance/latest/schemas/HTTPQueryParameter/",
         "#/components/schemas/HTTPResource": "/reference/api/ai-governance/latest/schemas/HTTPResource/",
         "#/components/schemas/HTTPResources": "/reference/api/ai-governance/latest/schemas/HTTPResources/",
         "#/components/schemas/Policy": "/reference/api/ai-governance/latest/schemas/Policy/",
@@ -28437,7 +28494,7 @@
                 ],
                 "properties": {
                   "code": {
-                    "description": "Machine-readable error code. `not_found`: the requested resource does not exist, the org does not exist, or the caller is not a member of the organization (the organization's existence is not revealed to callers who cannot access it). `conflict`: a resource with the same name already exists. `invalid_argument`: the request body is malformed or fails validation. `unauthenticated`: missing or invalid credentials. `permission_denied`: the org is not entitled to use governance. `limit_exceeded`: the org has reached its maximum number of policies, or the policy has reached its maximum number of rules. `unimplemented`: the endpoint or feature is not yet available. `internal`: unexpected server error.\n",
+                    "description": "Machine-readable error code. `not_found`: the requested resource does not exist, the org does not exist, or the caller is not a member of the organization (the organization's existence is not revealed to callers who cannot access it). `conflict`: a resource with the same name already exists. `invalid_argument`: the request body is malformed or fails validation. `unauthenticated`: missing or invalid credentials. `permission_denied`: the org is not entitled to use governance. `limit_exceeded`: the org has reached its maximum number of policies, the policy has reached its maximum number of rules, or the policy exceeds the maximum allowed size. `unimplemented`: the endpoint or feature is not yet available. `internal`: unexpected server error.\n",
                     "enum": [
                       "not_found",
                       "conflict",
@@ -28469,6 +28526,56 @@
           "url": "/reference/api/ai-governance/latest/schemas/Error/"
         },
         {
+          "name": "HTTPQuery",
+          "pointer": "/components/schemas/HTTPQuery",
+          "schema": {
+            "description": "Query parameters the request must contain. Each listed parameter must match a different parameter in the request; the request may also contain other parameters.\n",
+            "properties": {
+              "parameters": {
+                "items": {
+                  "$ref": "#/components/schemas/HTTPQueryParameter"
+                },
+                "minItems": 1,
+                "type": "array"
+              }
+            },
+            "required": [
+              "parameters"
+            ],
+            "type": "object"
+          },
+          "url": "/reference/api/ai-governance/latest/schemas/HTTPQuery/"
+        },
+        {
+          "name": "HTTPQueryParameter",
+          "pointer": "/components/schemas/HTTPQueryParameter",
+          "schema": {
+            "properties": {
+              "name": {
+                "description": "Decoded query-parameter name, matched exactly. Must not contain `=`.",
+                "examples": [
+                  "tag"
+                ],
+                "minLength": 1,
+                "type": "string"
+              },
+              "value_pattern": {
+                "description": "URL-query-encoded value pattern. A raw leading or trailing `*` is a wildcard. Encode a literal `*` as `%2A` and a literal `\\` as `%5C`.\n",
+                "examples": [
+                  "prod*"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "value_pattern"
+            ],
+            "type": "object"
+          },
+          "url": "/reference/api/ai-governance/latest/schemas/HTTPQueryParameter/"
+        },
+        {
           "name": "HTTPResource",
           "pointer": "/components/schemas/HTTPResource",
           "schema": {
@@ -28498,6 +28605,9 @@
                 "maximum": 65535,
                 "minimum": 1,
                 "type": "integer"
+              },
+              "query": {
+                "$ref": "#/components/schemas/HTTPQuery"
               }
             },
             "required": [
@@ -28525,7 +28635,7 @@
           "name": "Policy",
           "pointer": "/components/schemas/Policy",
           "schema": {
-            "description": "Full policy representation. Exactly one of `allowlist_v0` or `cedar_v1` is present, depending on the policy type.\n",
+            "description": "Full policy representation. Exactly one of `allowlist_v0` or `cedar_v1` is present, depending on the policy type. The normalized policy definition must not exceed 350 KiB (358,400 UTF-8 bytes), including service-generated rule identifiers. Oversized definitions return HTTP 400 with `limit_exceeded`.\n",
             "properties": {
               "allowlist_v0": {
                 "$ref": "#/components/schemas/AllowlistV0"

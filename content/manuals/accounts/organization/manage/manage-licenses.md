@@ -62,8 +62,6 @@ Docker grants the license only to team members who don't already have it.
 
 - If a member already holds that license, they keep access and the extra
   assignment does not consume another license.
-- A product can be selected for the team only when enough licenses are
-  available for every member of the team.
 
 ### Members
 

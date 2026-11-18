@@ -12,12 +12,40 @@ image index, config, and file metadata reflect the specified Unix time.
 
 [source_date_epoch]: https://reproducible-builds.org/docs/source-date-epoch/
 
-To set the environment variable in GitHub Actions,
-use the built-in `env` property on the build step.
+With Docker GitHub Builder, pass `SOURCE_DATE_EPOCH` as a build argument.
+With individual actions, use the built-in `env` property on the build step.
 
 ## Unix epoch timestamps
 
 The following example sets the `SOURCE_DATE_EPOCH` variable to 0, Unix epoch.
+
+### Set the epoch with GitHub Builder {#set-the-epoch-with-builder}
+
+Pass the fixed epoch through the [Build workflow](build-workflow.md):
+
+```yaml
+name: ci
+
+on:
+  push:
+
+jobs:
+  build:
+    uses: docker/github-builder/.github/workflows/build.yml@{{% param "github_builder_version" %}}
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      output: image
+      build-args: |
+        SOURCE_DATE_EPOCH=0
+      meta-images: user/app
+```
+
+For the [Bake workflow](bake-workflow.md), set
+`*.args.SOURCE_DATE_EPOCH=0` using the `set` input.
+
+### Set the epoch with individual actions
 
 {{< tabs group="action" >}}
 {{< tab name="`docker/build-push-action`" >}}
@@ -70,7 +98,10 @@ jobs:
 
 ## Git commit timestamps
 
-The following example sets `SOURCE_DATE_EPOCH` to the Git commit timestamp.
+The following individual-action examples set `SOURCE_DATE_EPOCH` to the Git
+commit timestamp. Keep timestamp generation in the caller when it depends on
+a workflow step. A reusable workflow call cannot reference earlier steps in
+the same job.
 
 {{< tabs group="action" >}}
 {{< tab name="`docker/build-push-action`" >}}

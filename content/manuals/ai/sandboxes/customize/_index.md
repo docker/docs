@@ -101,10 +101,9 @@ and add mixins. To customize and publish your own combination, see
 V3 requires `sbx` v0.45 or later. Every kit in a v3 sandbox must use v3:
 select a v3 workload and add only v3 mixins.
 
-Built-in agent names such as `claude` and `codex` select v2 kits, so
-`sbx run claude --kit ./some-v3-mixin` fails. To use that mixin, choose a
-[v3 workload](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads)
-by its image, local path, or Git reference.
+Built-in agent names such as `claude` and `codex` select v3 kits. Add v3
+mixins directly, for example with `sbx run claude --kit ./some-v3-mixin`.
+V1 and v2 kits cannot be combined with v3 kits.
 
 A kit's capabilities can require a later release or a local sandbox. See
 [Kit capability support](/manuals/ai/sandboxes/customize/author/capabilities.md)

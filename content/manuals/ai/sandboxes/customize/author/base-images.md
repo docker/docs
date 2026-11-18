@@ -22,6 +22,13 @@ To save and reuse an environment you've configured interactively, see
 
 ## Docker-provided images
 
+Built-in agent names resolve to Debian-based kits at
+`docker.io/sbx/<NAME>:latest`. To add tools to these agents, use
+[mixins](tool-mixins.md).
+
+The `docker/sandbox-templates` images described here are older Ubuntu-based
+images, separate from the built-in kits.
+
 To customize an existing agent, start from one of Docker's sandbox templates,
 published as
 `docker/sandbox-templates:<variant>`. They are based on Ubuntu and run as a
@@ -39,7 +46,6 @@ templates also include a C/C++ compiler toolchain for building native code.
 | `devin`               | [Devin CLI](https://docs.devin.ai/work-with-devin/devin-cli)         |
 | `docker-agent`        | [Docker Agent](https://github.com/docker/docker-agent)               |
 | `droid`               | [Droid](https://www.factory.ai)                                      |
-| `gemini`              | [Gemini CLI](https://github.com/google-gemini/gemini-cli)            |
 | `kiro`                | [Kiro](https://kiro.dev)                                             |
 | `opencode`            | [OpenCode](https://opencode.ai)                                      |
 

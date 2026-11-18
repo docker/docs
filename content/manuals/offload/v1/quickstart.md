@@ -8,7 +8,7 @@ keywords: cloud, quickstart, Docker Desktop, offload
 
 {{< summary-bar feature_name="Docker Offload v1" >}}
 
-[Docker Offload v1](./about.md) lets you build and run containers in the cloud
+[Docker Offload v1](./core-concepts.md) lets you build and run containers in the cloud
 while using your local Docker Desktop tools and workflow. This means faster
 builds, access to cloud resources, and a seamless development
 experience.
@@ -104,7 +104,7 @@ Docker Desktop Dashboard.
 ## Step 5: Stop Docker Offload v1
 
 Docker Offload v1 automatically
-[idles](about.md#session-management-and-idle-state) if you do not respond to
+[idles](core-concepts.md#session-management-and-idle-state) if you do not respond to
 periodic prompts that appear in the Docker Desktop Dashboard. You can stop your
 Docker Offload v1 session at any time. To stop Docker Offload v1:
 

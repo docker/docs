@@ -86,6 +86,40 @@ with `--rm`, that sandbox is removed only after its agent session finishes.
 `--rm` needs an attached agent session to know when to remove the sandbox, so
 you can't combine it with `--detach` or `--detach-keys`.
 
+## Pass arguments to an agent
+
+Put agent flags, prompts, and subcommands after `--`. Options before `--`
+configure the sandbox; arguments after it go to the agent:
+
+```console
+$ sbx run claude -- "explain this project"
+$ sbx run claude -- --model sonnet
+$ sbx run --name my-project -- --model sonnet
+```
+
+With no forwarded arguments, the agent uses its default startup command.
+If the first forwarded argument is a flag (begins with `-`), the launcher
+keeps the defaults and adds your arguments. To keep a default permission
+flag when passing a prompt, put the flag first:
+
+```console
+$ sbx run codex -- --dangerously-bypass-approvals-and-sandbox "fix the build"
+```
+
+If you start with a prompt or subcommand, it replaces the default command
+arguments (`CMD`), but keeps the image's entrypoint arguments (`ENTRYPOINT`).
+If the entrypoint includes a subcommand, pass your prompt without repeating
+that subcommand.
+
+To run a different subcommand without the agent's startup defaults, run the
+agent directly in a running sandbox with `sbx exec`. For example:
+
+```console
+$ sbx exec -it <sandbox-name> <agent> <subcommand>
+```
+
+See the [agent pages](agents/) for startup commands and agent-specific options.
+
 ## Choose a workspace
 
 `sbx run` mounts the current directory when you don't pass a workspace path.
@@ -264,7 +298,8 @@ Without `--workdir`, the command starts in the sandbox's primary workspace. In
 a mountless sandbox, it starts in the container image's working directory.
 
 `sbx exec` runs commands in the foreground. Detached execution (`-d` or
-`--detach`) isn't supported.
+`--detach`) isn't supported. Both local and cloud `sbx exec` and
+`sbx env exec` reject `--detach-keys`. Omit this flag for exec sessions.
 
 ## Interactive mode
 
@@ -412,25 +447,25 @@ If you know which ports you need, publish them when you create the sandbox:
 $ sbx run --publish 8080:3000 --name my-sandbox claude
 ```
 
-For an existing sandbox, use [`sbx ports`](/reference/cli/sbx/ports/) to
+For an existing sandbox, use `sbx port publish` to
 forward traffic from your host. Publishing a port on a stopped local sandbox
 starts it first:
 
 ```console
-$ sbx ports my-sandbox --publish 8080:3000
+$ sbx port publish my-sandbox 8080:3000
 $ open http://localhost:8080
 ```
 
 To let the OS pick a free host port instead of choosing one yourself, specify
-only the sandbox port. Then use `sbx ports` to check which host port was
+only the sandbox port. Then use `sbx port ls` to check which host port was
 assigned:
 
 ```console
-$ sbx ports my-sandbox --publish 3000
-$ sbx ports my-sandbox
+$ sbx port publish my-sandbox 3000
+$ sbx port ls my-sandbox
 ```
 
-`sbx ls` shows active port mappings alongside each sandbox. `sbx ports` lists
+`sbx ls` shows active port mappings alongside each sandbox. `sbx port ls` lists
 them in detail. The `CREATED` column shows the sandbox age, and the `STATUS`
 column identifies sandboxes kept running in detached mode with `(detached)`.
 
@@ -443,11 +478,11 @@ my-sandbox   claude   ● running   127.0.0.1:8080->3000/tcp4    /home/user/proj
 To stop forwarding a port:
 
 ```console
-$ sbx ports my-sandbox --unpublish 8080:3000
+$ sbx port unpublish my-sandbox 8080:3000
 ```
 
 When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
-`sbx ports` to publish ports on that sandbox. For dev server and host-service
+`sbx port publish` to publish ports on that sandbox. For dev server and host-service
 recipes, see
 [Local services](workflows/development.md#local-services).
 
@@ -505,7 +540,7 @@ $ sbx run -t my-template:v1 claude
 
 ### List and remove templates
 
-List all saved templates:
+List tagged template images in the sandbox runtime's local image store:
 
 ```console
 $ sbx template ls
@@ -516,6 +551,28 @@ Remove a template you no longer need:
 ```console
 $ sbx template rm my-template:v1
 ```
+
+If a local image you want to remove doesn't appear in the default listing,
+it may have no tag. Include images without tags and show their digests:
+
+```console
+$ sbx template ls --all --digests
+```
+
+Remove the image using its image ID or repository digest from the listing:
+
+```console
+$ sbx template rm <IMAGE_ID>
+```
+
+```console
+$ sbx template rm <REPOSITORY>@sha256:<DIGEST>
+```
+
+You can use a prefix of an image ID as long as it uniquely identifies a template.
+The `--all` and `--digests` flags apply only to local templates. For all listing
+options, see the
+[`sbx template ls` reference](/reference/cli/sbx/template/ls/).
 
 ### Export and import
 

@@ -3,14 +3,14 @@ synopsis: Remove a template image
 description: |-
     Remove a template image from the sandbox runtime's image store.
 
-    The image can be identified by tag (e.g. "myimage:v1.0") or by image ID
-    (full or prefix, e.g. "abc123"). Use "sbx template ls" to see available
-    images and their IDs.
+    Identify the image by tag, repository digest (REPOSITORY@sha256:DIGEST),
+    or image ID (full or prefix). Use "sbx template ls --all --digests" to see
+    available images and their digests.
 
     With --cloud:
-    The template can be identified by its tmpl_* ID or by its human name
-    (resolved via the server-side ?name= filter). Use "sbx --cloud template ls".
-usage: sbx template rm TAG|ID|NAME [flags]
+    Remove a cloud sandbox template by name or tmpl_* ID.
+    Use "sbx --cloud template ls" to list templates.
+usage: sbx template rm TAG|DIGEST|ID|NAME [flags]
 options:
     - name: force
       shorthand: f
@@ -44,6 +44,9 @@ example: |4-
 
       # Remove by image ID (prefix)
       sbx template rm abc123
+
+      # Remove by repository digest
+      sbx template rm myimage@sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
 
       # Cloud: remove by name
       sbx --cloud template rm my-template

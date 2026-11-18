@@ -3,7 +3,7 @@ title: Organization network access policies
 linkTitle: Network
 weight: 10
 description: Control outbound network access from Docker Sandboxes with organization network access policies.
-keywords: docker sandboxes, network access, network rules, HTTP rules, approval, governance, organization policy
+keywords: docker sandboxes, network access, network rules, HTTP rules, query parameters, approval, governance, organization policy
 aliases:
   - /ai/sandboxes/governance/access-controls/network/
 ---
@@ -15,8 +15,8 @@ connections from sandboxes. When an organization policy is enforced for a
 developer, their sandboxes can reach only the destinations your network rules
 allow. Each policy contains one or more rules that allow the hosts, IP
 ranges, and ports a workflow needs, or block destinations that should stay
-unavailable. Rules can also match the HTTP method and path of a request, so a
-policy can allow part of an API without allowing all of it.
+unavailable. Rules can also match the HTTP method, path, and query parameters of
+a request, so a policy can allow part of an API without allowing all of it.
 
 Developers can also add network rules on their own machines with
 [local policy](../../local/network-rules.md), but under an enforced
@@ -47,8 +47,8 @@ any port, method, and path.
 
 ### HTTP rules
 
-An **HTTP** rule matches only HTTP requests with the methods and paths you
-specify.
+An **HTTP** rule matches only HTTP requests with the methods, paths, and query
+parameters you specify.
 
 - In **Destination**, enter the host or IP address the rule covers. It matches
   any port unless you add one. Enter the destination with no scheme and no
@@ -60,10 +60,15 @@ specify.
   which differs from the CLI, where `--method ANY` matches every HTTP method.
 - Under **Path patterns**, add one or more paths the rule covers, such as
   `/repos/*` and `/v1/**`. Leave it empty to match any path.
+- Under **Query parameters**, add a `name=value` entry for each parameter a
+  request must include, such as `ref=Release*`. Press Enter after each entry,
+  or separate entries with `&`. A request matches only if it includes every
+  entry. Leave it empty to match any query string. The entries apply to every
+  path pattern in the rule.
 
 An HTTP rule's paths all belong to its one destination, so to cover paths on a
-second host, add a second rule. For the pattern syntax and how HTTP rules
-combine with **All traffic** rules, see
+second host, add a second rule. For the pattern and query parameter syntax and
+how HTTP rules combine with **All traffic** rules, see
 [HTTP rules](../../reference/network-rules.md#http-method-and-path).
 
 ## Approval-required access

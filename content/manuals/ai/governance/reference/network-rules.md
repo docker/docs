@@ -42,7 +42,11 @@ for an organization policy and
 [Allow or block HTTP methods and paths](../local/network-rules.md#allow-or-block-http-methods-and-paths)
 for a local one.
 
-Path patterns follow the same wildcard rules as filesystem paths, where `*`
+HTTP path matching ignores ASCII letter case: `/API/**` matches `/api/items`.
+Non-ASCII characters remain case-sensitive. This applies to both allow and deny
+rules.
+
+Path patterns use the same wildcards as filesystem paths, where `*`
 matches within one path segment and `**` matches any depth. A pattern without a
 wildcard matches that path exactly, so `/repos` matches `/repos` and nothing
 below it. Every pattern must start with `/` and can't contain a query string, a
@@ -56,10 +60,11 @@ An HTTP rule can also restrict query parameters independently of the path.
 
 Use exact parameter names and values, or a single `*` at the start or end of a
 value to match a suffix or prefix. A value of `*` matches any value, including
-an empty one. Names cannot contain wildcards. Names and values are
+an empty one. Names cannot contain wildcards. Names and values ignore ASCII
+letter case, so `Tag=PROD` matches `tag=prod`. Non-ASCII characters remain
 case-sensitive.
 
-For rules created with `--query`, every specified parameter must match.
+Every specified parameter must match.
 Parameter order doesn't matter, and requests may include additional
 parameters. Repeating a parameter name in the rule requires separate matching
 occurrences in the request. A rule without query restrictions matches
@@ -69,6 +74,8 @@ Write names and value patterns using URL query encoding: `+` or `%20` for a
 space, `%2B` for a literal plus, and `%2A` for a literal asterisk. Keep query
 parameters out of `--path`. For CLI examples, see
 [Allow or block HTTP methods and paths](../local/network-rules.md#allow-or-block-http-methods-and-paths).
+For the **Query parameters** field in an organization policy, see
+[HTTP rules](../organization/policies/network.md#http-rules).
 
 ### Combine HTTP and host rules
 
@@ -86,6 +93,11 @@ parameters:
 A host deny is therefore a floor that HTTP rules can't raise, while a host
 allow is a ceiling that HTTP rules can carve into.
 
+These decisions apply to the hostname attributed to the connection. In local
+sandboxes, a denied host can still be reachable when it shares an IP address
+with an allowed host. See
+[Hostname blocking limitations](../local/network-rules.md#hostname-blocking-limitations).
+
 When a rule requires an HTTP decision, the sandbox HTTP proxy
 evaluates each request separately instead of deciding once per connection.
 
@@ -102,6 +114,8 @@ hostnames, CIDR ranges, or ports. UDP requires
 ICMP is blocked.
 
 ### Hostname patterns
+
+Hostname matching is case-insensitive: `EXAMPLE.com` matches `example.com`.
 
 | Pattern               | Example           | Matches                                                      |
 | --------------------- | ----------------- | ------------------------------------------------------------- |

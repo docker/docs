@@ -71,15 +71,19 @@ The store backing `sbx secret set` depends on your operating system:
 - Linux: the Secret Service exposed by your desktop keyring, such as GNOME
   Keyring or KDE Wallet.
 
-The Ubuntu package depends on GNOME Keyring, so a standard desktop install
-needs no extra setup.
+The Ubuntu package recommends GNOME Keyring and installs it by default. You can
+omit GNOME Keyring when installing the package on hosts without a desktop keyring.
 
 On Linux hosts without a running Secret Service — headless servers and some WSL
 setups — `sbx` falls back to a file under your user config directory
 `$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
 `~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. The fallback
-is automatic and needs no configuration. When you store a secret this way,
-`sbx` prints a notice:
+is automatic and needs no configuration. When running as root, `sbx` ignores
+`XDG_CONFIG_HOME` and uses `~/.config/com.docker.sandboxes` under root's
+registered home directory. See
+[Storage paths when running as root](../faq.md#which-storage-paths-are-used-when-running-as-root).
+
+When you store a secret this way, `sbx` prints a notice:
 
 ```text
 No keychain detected - this secret will be stored on disk, protected by file permissions rather than a password
@@ -143,7 +147,15 @@ $ sbx secret set openai \
 ```
 
 The corresponding `op` or `aws` CLI must be installed and authenticated on the
-host.
+host, with its installation directory listed as an absolute path in the host's
+`PATH`. Built-in reference providers ignore empty and relative `PATH` entries.
+
+Each reference resolution runs the provider CLI in a fresh temporary directory
+on the host, outside the project directory. Use absolute paths for any provider
+configuration files you specify. If you use a version manager such as asdf or
+mise, configure the provider version globally rather than relying on a
+project-only selection. Keep provider tools, their dependencies, and the host's
+temporary directory outside writable sandbox mounts.
 
 > [!NOTE]
 > To resolve a reference with a specific 1Password account or AWS profile, set
@@ -232,7 +244,7 @@ reads and the API domains the proxy injects credentials into:
 | `cursor`     | `CURSOR_API_KEY`                   | `api2.cursor.sh`, `api3.cursor.sh`, `repo42.cursor.sh`, `cursor.com`                                                          |
 | `droid`      | `FACTORY_API_KEY`                  | `api.factory.ai`, `app.factory.ai`, `relay.factory.ai`                                                                        |
 | `github`     | `GH_TOKEN`, `GITHUB_TOKEN`         | `api.github.com`, `github.com`, `raw.githubusercontent.com`, `gist.github.com`, `copilot.github.com`, `api.githubcopilot.com` |
-| `google`     | `GEMINI_API_KEY`, `GOOGLE_API_KEY` | `generativelanguage.googleapis.com`, `oauth2.googleapis.com`, `aiplatform.googleapis.com`, `vertexai.googleapis.com`          |
+| `google`     | `GOOGLE_API_KEY`                   | `generativelanguage.googleapis.com`, `oauth2.googleapis.com`, `aiplatform.googleapis.com`, `vertexai.googleapis.com`          |
 | `groq`       | `GROQ_API_KEY`                     | `api.groq.com`                                                                                                                |
 | `mistral`    | `MISTRAL_API_KEY`                  | `api.mistral.ai`                                                                                                              |
 | `nebius`     | `NEBIUS_API_KEY`                   | `api.studio.nebius.com`, `api.tokenfactory.nebius.com`                                                                        |
@@ -455,6 +467,26 @@ Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
 configured hosts and the placeholder appears in an HTTP request header, the
 proxy replaces it with the real value. Replacement applies only to HTTP request
 headers, not request bodies. The agent never sees the real secret.
+
+### List custom secrets
+
+To find stored custom secrets by host, use `--host`:
+
+```console
+$ sbx secret ls --host api.example.com
+```
+
+To filter by environment variable name, use `--env-name`:
+
+```console
+$ sbx secret ls --env-name API_KEY
+```
+
+Add `--sandbox` to list only matching secrets stored for a specific sandbox:
+
+```console
+$ sbx secret ls --host api.example.com --sandbox my-sandbox
+```
 
 ### Target multiple hosts
 

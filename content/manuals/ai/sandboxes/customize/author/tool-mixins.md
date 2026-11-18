@@ -21,7 +21,7 @@ session storage, and MCP configuration.
 
 You need `sbx`, Docker with Buildx, and an Anthropic API key. To publish the
 mixin, you also need a registry namespace you can push to. Use a v3 workload
-with this mixin. Built-in shortcuts such as `shell` and `claude` use v2. See
+with this mixin. Built-in shortcuts such as `shell` and `claude` use v3. See
 [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility).
 
 ## Package the executable
@@ -139,7 +139,7 @@ From the directory containing `claude-mixin`, add the mixin to Docker's
 published shell workload:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name claude-mixin-test \
+$ sbx run shell --name claude-mixin-test \
     --kit ./claude-mixin
 ```
 

@@ -13,7 +13,7 @@ options:
       usage: Output in JSON format
     - name: upload
       default_value: "false"
-      usage: Upload diagnostics to Docker support
+      usage: Upload diagnostics to Docker support (table format only)
 inherited_options:
     - name: cloud
       default_value: "false"

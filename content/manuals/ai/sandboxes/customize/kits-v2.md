@@ -12,8 +12,8 @@ aliases:
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 V2 kits remain supported and are not deprecated. Built-in agent names such
-as `claude` and `codex` select v2 kits and work with v2 mixins. This page
-covers their usage and specification. For new kits, Docker recommends
+as `claude` and `codex` select v3 kits and cannot use v2 mixins. This page
+covers v2 kit usage and specification. For new kits, Docker recommends
 [v3](/manuals/ai/sandboxes/customize/_index.md). V1 also remains supported.
 
 ## Use existing kits
@@ -25,7 +25,6 @@ mixins with `--kit`:
 
 ```console
 $ sbx run ./my-agent --name my-project --kit ./team-config
-$ sbx run claude --name claude-project --kit ./team-config
 ```
 
 `sbx run` uses your current directory as the workspace. Append a project path
@@ -426,7 +425,7 @@ listens on IPv6: an empty value publishes IPv4 only (`127.0.0.1`), which is what
 a service bound to `0.0.0.0` needs, while `tcp` publishes both `127.0.0.1` and
 `::1` — and a client arriving over `::1` is accepted and then reset if nothing
 in the sandbox is listening there. Users can pin host ports with
-`sbx ports --publish <host>:<container>`.
+`sbx port publish <SANDBOX> <HOST_PORT>:<SANDBOX_PORT>`.
 
 ## Environment
 
@@ -590,6 +589,10 @@ volumes to a running container.
 
 ## Fork an existing agent
 
+This example requires an older `sbx` version with built-in v2 agents.
+Built-in names select v3 kits for sandbox creation with the latest `sbx`.
+For v3 customization, see [Compose a kit set](author/kit-sets.md).
+
 Sandbox kits (`kind: sandbox`) define a full agent from scratch. The most
 common variant is a fork of a built-in agent. Use `extends:` to inherit the
 parent's complete configuration and declare only the fields you want to change.
@@ -653,7 +656,6 @@ file removes. In this table, `~` is `/home/agent`.
 | `copilot` | `~/.copilot/config.json` |
 | `cursor` | `~/.cursor/cli-config.json` |
 | `devin` | `~/.config/devin/config.json`, `~/.config/devin/mcp_config.json` |
-| `gemini` | `~/.gemini/settings.json` |
 | `kiro` | `~/.kiro/settings/mcp.json` |
 | `opencode` | `~/.config/opencode/opencode.json` |
 

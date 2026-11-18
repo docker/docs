@@ -39,10 +39,14 @@
 
 /content/manuals/ai/ @dvdksn
 
-/content/manuals/ai/sandboxes/governance/ @craig-osterhout
+/content/manuals/ai/governance/ @craig-osterhout
+
+/content/reference/api/ai-governance/ @craig-osterhout
+
+/content/reference/api/ai-governance-audit-logs/ @craig-osterhout
 
 /_vendor @dvdksn
 
-/content/manuals/offload/ @craig-osterhout
+/content/manuals/offload/ @aevesdocker
 
 /content/manuals/dhi/ @craig-osterhout

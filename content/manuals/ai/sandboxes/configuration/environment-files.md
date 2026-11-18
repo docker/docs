@@ -61,7 +61,7 @@ agent: claude
 workspace: ./web-app
 
 kits:
-  - docker.io/sbx/playwright-kit:latest
+  - docker.io/sbx/playwright:1.61.1
 
 env:
   NODE_ENV: test
@@ -70,10 +70,6 @@ ports:
   - sandbox: 3000
     host: 3000
 ```
-
-> [!NOTE]
-> This example uses kits v2, the format used by built-in agents. For v3, see
-> [Add v3 kits](#add-v3-kits).
 
 From `web-app-env`, run the environment:
 
@@ -184,9 +180,11 @@ from `/projects/api`, and it mounts `/projects/api` instead. You don't need a
 separate `sbxenv.yaml` in either project.
 
 If the project has a `sbxenv.yaml`, `sbx` combines it with your user defaults.
-Project settings override individual default values. Lists such as `ports`
-and `mcp.servers` combine entries from both files. If you pass a file or
-directory path to the command, `sbx` skips `~/.sbxenv.yaml`.
+Project settings override individual default values. Lists combine entries
+from both files, with matching ports, MCP server names, and additional workspace
+targets using the project entry. See the
+[merge rules](#combine-team-defaults-and-personal-settings) for details. If you
+pass a file or directory path to the command, `sbx` skips `~/.sbxenv.yaml`.
 
 In `~/.sbxenv.yaml`, you can set `workspace` to `${{ env.projectDir }}` or a
 subdirectory such as `${{ env.projectDir }}/src`. Other workspace paths
@@ -324,20 +322,19 @@ can adapt for a project.
 
 ### Add v3 kits
 
-To add v3 mixins, include a v3 workload in `kits` and set `agent` to the
-workload's name.
+To add mixins to a built-in agent, list the mixins in `kits` and use the
+built-in name in `agent`.
 
-For example, save this as `web-app-env/v3.sbxenv.yaml` to use a v3 Claude Code
-workload with the v3 Playwright mixin:
+For example, save this as `web-app-env/v3.sbxenv.yaml` to use a Claude Code
+workload with the Playwright mixin:
 
 ```yaml
 schemaVersion: "1"
 name: web-app-v3
-agent: sbx-kit-claude
+agent: claude
 workspace: ./web-app
 
 kits:
-  - docker.io/docker/sbx-kit-claude:2.1.267
   - docker.io/sbx/playwright:1.61.1
 ```
 
@@ -347,8 +344,8 @@ From `web-app-env`, run:
 $ sbx env run v3.sbxenv.yaml
 ```
 
-The `agent` value, `sbx-kit-claude`, matches the last component of the
-workload's repository name. The `web-app-v3` name creates a separate sandbox.
+The `agent` value selects the built-in Claude Code workload.
+The `web-app-v3` name creates a separate sandbox.
 For other agents, see the
 [published v3 workloads](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads).
 
@@ -429,11 +426,68 @@ Pass both files in merge order:
 $ sbx env run base.sbxenv.yaml local.sbxenv.yaml
 ```
 
-Nested mappings merge by key, lists concatenate except for `entrypoint` and
-`cmd`, and values from later files replace earlier scalar values. In this
-example, the sandbox has four CPUs,
-12 GB of memory, and both environment variables. Each relative workspace path
-resolves from the directory of the file that declares it.
+In this example, the sandbox has four CPUs, 12 GB of memory, and both
+environment variables. Each relative workspace path resolves from the directory
+of the file that declares it.
+
+#### Merge rules
+
+Files merge in the order you pass them. Later scalar values override earlier
+values, while nested mappings combine by key. Most lists append entries from each file.
+The exceptions are:
+
+- `ports`, `mcp.servers`, and `additionalWorkspaces`: matching entries use the
+  last entry, as described in [Override a list entry](#override-a-list-entry).
+- `kits`: entries with the same source merge their arguments by key. Later
+  argument values take precedence; other arguments are preserved.
+- `entrypoint` and `cmd`: later lists replace earlier lists. See
+  [Set the launch command](#set-the-launch-command) for inheritance and clearing.
+
+#### Override a list entry
+
+To override a port, MCP server, or additional workspace, declare a matching
+entry later in the file or in a later file. The last entry replaces the whole
+earlier entry and keeps its first position in the list. Entries that don't
+match are kept as separate entries.
+
+For example, change the host port for sandbox port `8080` in your personal
+settings:
+
+```yaml
+# base.sbxenv.yaml
+ports:
+  - sandbox: 8080
+    host: 3000
+```
+
+```yaml
+# local.sbxenv.yaml
+ports:
+  - sandbox: 8080
+    host: 4000
+```
+
+With `base.sbxenv.yaml` loaded first, the result is one port entry that publishes
+sandbox port `8080` on host port `4000`.
+
+Include every field you want to keep in the replacement. Omitted fields use
+their defaults: omitting `host` in this example selects an ephemeral host port.
+Similarly, omitting `readOnly` from a replacement workspace makes it writable.
+
+`sbx` uses these fields to decide whether entries match:
+
+| List | Matching fields |
+| --- | --- |
+| `ports` | Sandbox port and effective protocol |
+| `mcp.servers` | Exact server name |
+| `additionalWorkspaces` | Container target: the explicit `target`, or the resolved host path when `target` is omitted |
+
+Port protocol names are case-insensitive. An omitted protocol uses `tcp4`, or
+`tcp6` for an IPv6 `hostIP`. Different protocols, such as `tcp` and `tcp4`,
+remain separate.
+
+On macOS, an implicit workspace target uses the stored host-path casing when
+available. Explicit targets remain case-sensitive.
 
 Each source file must contain valid fields and values before merging. A later
 override can't repair an invalid value in an earlier file. This also applies
@@ -674,7 +728,7 @@ true`.
 `kits` accepts local directories, ZIP archives, OCI registry references, and
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
 configure the sandbox, and give the agent project-specific instructions.
-Built-in agents use v2 mixins. For v3 workloads and mixins, see
+To add mixins to built-in agents, see
 [Add v3 kits](#add-v3-kits).
 
 An environment file selects kits and configures a sandbox's host resources.
@@ -900,6 +954,11 @@ outside writable sandbox mounts. Use an absolute path, an absolute host
 `PATH` entry, or an explicit change to the helper's private directory. See
 [dynamic secret sources](credentials.md#use-a-dynamic-secret-source).
 
+Built-in 1Password and AWS Secrets Manager references also run from a temporary
+directory and require provider tools in absolute host `PATH` directories. See
+[dynamic secret sources](credentials.md#use-a-dynamic-secret-source) for provider
+configuration requirements.
+
 For a cloud environment, set `snapshot: true` on a `ref` or `command` source:
 
 ```yaml
@@ -971,6 +1030,10 @@ and can run only for its sandbox.
 
 Each server must set exactly one of `url` or `command`.
 
+To reuse servers already registered on the host, see
+[Load registered servers when creating an environment](../mcp-gateway.md#load-registered-servers-when-creating-an-environment)
+for a `postCreate` lifecycle example.
+
 #### Approve local MCP commands
 
 A `command` server runs on your host with your privileges whenever the
@@ -1002,9 +1065,23 @@ $ sbx daemon stop
 $ sbx mcp rm --registration-only -- <SERVER_NAME>
 ```
 
+When the name is shared by multiple sandbox-owned registrations, select the
+owning sandbox with `--sandbox`:
+
+```console
+$ sbx daemon stop
+$ sbx mcp rm --registration-only --sandbox <SANDBOX_NAME> -- <SERVER_NAME>
+```
+
+This removes only the selected sandbox's registration, including a damaged
+sandbox-scoped record, and preserves other owners' registrations. Sandbox
+selection requires valid, readable ownership metadata for an unscoped record;
+`--sandbox` cannot recover a damaged unscoped record.
+
 Stopping the daemon interrupts its sandbox gateways. Registration-only removal
-does not delete saved credentials. Apply the environment again to register and
-approve the command for its sandbox.
+does not delete saved credentials or stop MCP processes that are already
+running. Apply the environment again to register and approve the command for
+its sandbox.
 
 ### `ports`
 

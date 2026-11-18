@@ -164,6 +164,6 @@ The sandbox is removed from the Docker Agentic Platform console as well.
 ## What's next
 
 - [Explore the Docker Offload CLI reference](/reference/cli/docker/offload/).
-- [Learn how Docker Offload works](about.md)
+- [Learn how Docker Offload works](core-concepts.md)
 - [Manage your sandbox](sandboxes.md), including resuming and deleting it
 - [Optimize your Docker Offload usage](optimize.md)

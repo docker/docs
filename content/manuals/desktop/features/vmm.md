@@ -1,8 +1,8 @@
 ---
 title: Virtual Machine Manager
 linkTitle: Virtual Machine Manager
-keywords: virtualization software, resource allocation, mac, windows, docker desktop, vm performance, apple silicon, wsl, hyper-v
-description: Learn about Docker Desktop's Virtual Machine Manager options, including Docker VMM for Mac and Windows
+keywords: virtualization software, resource allocation, mac, windows, linux, docker desktop, vm performance, apple silicon, wsl, hyper-v, qemu
+description: Learn about Docker Desktop's Virtual Machine Manager options, including Docker VMM for Mac, Windows, and Linux
 weight: 110
 params:
   sidebar:
@@ -27,6 +27,16 @@ Docker Desktop 4.86, it uses Docker's own VMM implementation instead of
 
 Because Docker controls the virtualization layer, it can be monitored and governed in ways that aren't possible with third-party backends. On Windows, Docker VMM provides a stable alternative to WSL 2 with a real VM boundary between the container environment and the host.
 
+### Requirements
+
+- Mac: Apple silicon. For more information, see
+  [Install Docker Desktop on Mac](/manuals/desktop/setup/install/mac-install.md).
+- Windows: x86_64 (Arm isn't supported), with the Windows Hypervisor Platform
+  and Virtual Machine Platform features turned on. For more information, see
+  [Install Docker Desktop on Windows](/manuals/desktop/setup/install/windows-install.md).
+- Linux: Docker Desktop 4.98 or later, and KVM access. For more information, see
+  [Install Docker Desktop on Linux](/manuals/desktop/setup/install/linux/_index.md).
+
 ### Switch to Docker VMM
 
 Docker VMM requires at least 4 GB of memory allocated to the Docker Linux VM. If you
@@ -42,7 +52,7 @@ allocation to 4 GB for you.
 
 If you previously had Docker VMM selected, which engine runs depends on your version:
 
-- Docker Desktop 4.35 and earlier is backed by `libkrun`
+- Docker Desktop 4.35 through 4.85 is backed by `libkrun`
 - Docker Desktop 4.86 and later uses Docker's own VMM implementation
 
 If you're upgrading from version 4.35 onwards, your setting is preserved and Docker Desktop switches to the new Docker VMM automatically on restart.
@@ -54,18 +64,44 @@ If you're upgrading from version 4.35 onwards, your setting is preserved and Doc
 2. Select **Docker VMM**.
 3. Select **Apply & restart**.
 
+With Docker VMM, the Docker CLI works from PowerShell. It also works from within
+your WSL distributions, with some limitations. For more information, see
+[Use Docker from WSL distributions with Docker VMM](/manuals/desktop/features/wsl/_index.md#use-docker-from-wsl-distributions-with-docker-vmm).
+
+{{< /tab >}}
+{{< tab name="Linux" >}}
+
+Docker VMM is available on Linux with Docker Desktop 4.98 and later.
+
+1. Go to **Settings** > **General** > **Virtual Machine Manager**.
+2. Select **Docker VMM**.
+3. Select **Apply & restart**.
+
+If the option is unavailable, turn on **Beta features** in **Settings**.
+
 {{< /tab >}}
 {{< /tabs >}}
 
 ### Known issues
 
 - A restart of Docker Desktop may be required after switching to Docker VMM.
-- Docker VMM does not support bind mount auto-shares. If you see a `file is not shared from the host` error, go to **Settings** > **Resources** > **File sharing** and add the directory you want to share.
+- On Windows, when a container bind mounts a directory that isn't shared, Docker
+  Desktop asks you to share it. If you decline, you see a `not shared from the
+  host` error. To share the directory, go to **Settings** > **Resources** >
+  **File sharing** and add it.
+- On Mac and Linux, to use a directory outside the default shared directories in
+  a container, add it under **Settings** > **Resources** > **File sharing**.
 
 #### Mac only
 
 - Docker VMM does not currently support Rosetta, so emulation of amd64 architectures is slow. Docker is exploring potential solutions.
 - Certain databases, such as MongoDB and Cassandra, may fail when using virtiofs with Docker VMM. This issue is expected to be resolved in a future release.
+
+## Alternative VMM for Linux
+
+### QEMU
+
+QEMU is the default VMM on Linux. It runs the Docker Desktop VM using KVM.
 
 ## Alternative VMMs for Mac
 

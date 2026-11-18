@@ -1,41 +1,13 @@
 ---
-title: About Docker Offload
-linktitle: About
+title: Core concepts
 weight: 20
 description: Learn about Docker Offload, its features, and how it works.
 keywords: cloud, offload, vdi, cloud sandbox
+aliases:
+- /offload/about/
 ---
 
 {{< summary-bar feature_name="Docker Offload" >}}
-
-This page explains how Docker Offload works: what happens when you create a
-sandbox, how a sandbox moves between running and paused, and how the current
-version differs from Docker Offload v1. To get set up, follow the
-[quickstart](quickstart.md). For the commands you use day to day, see [Manage
-sandboxes](sandboxes.md).
-
-## Key features
-
-- Cloud sandboxes that persist: Your containers, images, and volumes survive
-  pausing and resuming, so you can pick up a long-running workload where you
-  left off.
-- Familiar commands: Run the Docker CLI and Docker Compose commands you already
-  use. Your context determines where they run.
-- Port forwarding and file sync: Reach ports published in the sandbox from your
-  machine, and work with bind-mounted files, as you would with local
-  containers.
-- Secure communication: Use encrypted tunnels between Docker Desktop and the
-  cloud sandbox, with support for secure secrets and image pulling.
-- Usage-based billing: Pay for the time your sandbox runs, not for the time it
-  spends paused.
-- VDI-friendly: [Use Docker Desktop](/manuals/desktop/setup/vm-vdi.md) in
-  virtual desktop environments or systems that don't support nested
-  virtualization.
-
-For more information, see the [Docker Offload product
-page](https://www.docker.com/products/docker-offload/).
-
-## How Docker Offload works
 
 Docker Offload replaces the need to build or run containers locally by
 connecting Docker Desktop to a cloud sandbox running its own Docker daemon.
@@ -54,7 +26,7 @@ Docker commands no longer reach your local daemon while your context is
 `--context`. For more information, see [Manage
 sandboxes](sandboxes.md#work-with-local-and-cloud-containers).
 
-### Relationship to Docker Sandboxes
+## Relationship to Docker Sandboxes
 
 Docker Offload runs on the same cloud infrastructure as [cloud
 sandboxes](/manuals/ai/sandboxes/cloud/_index.md) in Docker Agentic Platform.
@@ -62,7 +34,7 @@ sandboxes](/manuals/ai/sandboxes/cloud/_index.md) in Docker Agentic Platform.
 A sandbox that Docker Offload creates belongs to your account and appears in
 the Docker Agentic Platform Console with a name that starts with `offload-`.
 
-### Cloud resources
+## Cloud resources
 
 You can choose the size of a sandbox when Docker Offload creates it, using
 `--cpus` and `--memory`. For the available sizes, see [Choose the size of a new
@@ -70,7 +42,7 @@ cloud sandbox](sandboxes.md#choose-the-size-of-a-new-cloud-sandbox).
 
 The default is 4 vCPUs and 8 GiB of memory.
 
-### Session lifecycle
+## Session lifecycle
 
 A Docker Offload sandbox moves between a running state and a paused state.
 
@@ -106,7 +78,7 @@ machine that's connected to it:
 For how to set both, see [Control when your sandbox
 pauses](sandboxes.md#control-when-your-cloud-sandbox-pauses).
 
-### Working from more than one machine
+## Working from more than one machine
 
 You can connect to the same sandbox from more than one machine. A second
 `docker offload create` connects to your existing sandbox rather than creating
@@ -117,7 +89,7 @@ two machines can report different times until idle. For more information, see
 [Connect from more than one
 machine](sandboxes.md#connect-from-more-than-one-machine).
 
-### Comparison with Docker Offload v1
+## Comparison with Docker Offload v1
 
 | | Docker Offload | [Docker Offload v1](v1/_index.md) |
 | --- | --- | --- |
@@ -134,3 +106,6 @@ that reference it by name keep working.
 
 Get hands-on with Docker Offload by following the [Docker Offload
 quickstart](quickstart.md).
+
+For the commands you use day to day, see [Manage
+sandboxes](sandboxes.md).

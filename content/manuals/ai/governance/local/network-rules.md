@@ -30,6 +30,23 @@ Specify multiple hosts in one command with a comma-separated list:
 $ sbx policy allow network "api.anthropic.com,*.npmjs.org,*.pypi.org"
 ```
 
+### Hostname blocking limitations
+
+In local sandboxes, a denied host that shares an IP address with an allowed
+host can still be reached. Network rules match the hostname attributed to the
+connection, such as its TLS Server Name Indication (SNI) or HTTP `Host`, with
+these limitations:
+
+- On connections the proxy doesn't decrypt, the HTTP `Host` or `:authority`
+  inside the encrypted stream isn't checked.
+- On cleartext HTTP connections sent through a `CONNECT` tunnel or without
+  `HTTP_PROXY`, only the first request's `Host` is checked. Later requests on
+  the same connection aren't checked. This limitation doesn't apply to plain
+  HTTP sent to `HTTP_PROXY`.
+- When a connection names no host, an allowed hostname the sandbox resolved
+  to that address is used, even if another hostname resolved to the same
+  address is denied.
+
 ## Allow or block a destination for one sandbox
 
 Pass `--sandbox <name>` to scope a rule to one sandbox:
@@ -78,6 +95,10 @@ Write the host without a scheme, such as `api.github.com` rather than
 `https://api.github.com`. It follows the same patterns as network rules and can
 include a port, but it must be a hostname. To match an IP address or a CIDR
 range, use a network rule without `--method` or `--path`.
+
+Paths and query parameter names and values ignore ASCII letter case. For
+examples and wildcard behavior, see
+[HTTP rules](../reference/network-rules.md#http-method-and-path).
 
 ### Choose methods
 
@@ -191,6 +212,13 @@ To list UDP rules or check a destination:
 $ sbx policy ls --protocol udp
 $ sbx policy check network --protocol udp api.example.com:443
 ```
+
+When UDP egress is disabled, each sandbox network records the first 20 distinct
+refused external UDP destinations in individual log entries. Further destinations
+share the `<further blocked attempts>` entry. Repeated attempts to one of the
+first 20 destinations still update that destination's count. The limit applies
+for the network's lifetime, and each network has its own limit. All these UDP
+attempts remain blocked.
 
 ## Set or reset the preset
 

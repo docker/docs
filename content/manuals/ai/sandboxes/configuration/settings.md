@@ -164,10 +164,26 @@ applies to running sandboxes without recreating them. Set it to `false` to
 withdraw that access. See [image paste](../faq.md#can-i-paste-images-into-an-agent)
 for supported behavior.
 
+#### claude.chrome {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Turn this on to let sandboxed Claude Code access host browser tabs through
+Claude in Chrome:
+
+```console
+$ sbx settings set claude.chrome true
+```
+
+Changes apply to new browser connections from running sandboxes. Set it to
+`false` to block further connections; established connections stay active until
+you end the Claude browser sessions. See
+[Claude in Chrome](../agents/claude-code.md#claude-in-chrome) for authentication
+requirements and setup.
+
 #### claude.remoteControl {.wrap-anywhere}
 
-{{< setting-metadata type="boolean" default="false"
-  env="DOCKER_SANDBOXES_CLAUDE_REMOTE_CONTROL" >}}
+{{< setting-metadata type="boolean" default="false" >}}
 
 Turn this on before using Claude Code's `/remote-control` command inside a
 sandbox:
@@ -176,11 +192,15 @@ sandbox:
 $ sbx settings set claude.remoteControl true
 ```
 
-The remote-control connection must authenticate with its own session token.
-This setting lets it do so instead of having the sandbox proxy replace that
-token with the host credential. Set it to `false` to restore credential
-replacement on that connection. Changes apply to requests from running
-sandboxes. See [Claude Code remote control](../agents/claude-code.md#remote-control).
+Docker Sandboxes keeps Remote Control environment and session credentials on
+the host. The sandbox receives placeholders, and the proxy supplies the real
+credentials only for the environment or session they belong to while this
+setting is enabled. Remotely supplied environment variables and MCP
+configuration aren't passed into the sandbox.
+
+Set this to `false` to stop the proxy from supplying Remote Control credentials.
+Changes apply to requests from running sandboxes. See
+[Claude Code remote control](../agents/claude-code.md#remote-control).
 
 #### env.rememberHostCommands {.wrap-anywhere}
 
@@ -257,6 +277,28 @@ different agent.
 Remove the fixed path with `sbx settings unset ssh.agentSocketPath` and restart
 the daemon to update existing forwarders.
 
+### Clone-mode Git remote
+
+#### clone.legacyTcpRemote {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Set this to `true` only for Git clients that ignore the remote's `uploadpack`
+setting and cannot use the default daemon socket transport:
+
+```console
+$ sbx settings set clone.legacyTcpRemote true
+```
+
+Changes take effect the next time the sandbox starts. This setting has no
+environment variable override and is excluded from `sbx settings ls`. Use
+`sbx settings get clone.legacyTcpRemote` to inspect its value.
+
+The TCP compatibility mode exposes the repository and its history through an
+unauthenticated localhost Git port that other local accounts on the host can
+access. Leave this at `false` to use the daemon socket. See
+[Sandbox remote behavior](../workflows/git.md#sandbox-remote-behavior).
+
 ### Images and storage
 
 #### platform.images.registryMirror {.wrap-anywhere}
@@ -282,8 +324,7 @@ requirements, and how to apply changes to existing sandboxes.
 
 #### platform.images.useDHI {.wrap-anywhere}
 
-{{< setting-metadata type="boolean" default="false"
-  env="DOCKER_SANDBOXES_USE_DHI" >}}
+{{< setting-metadata type="boolean" default="false" >}}
 
 Turn this on to use Docker Hardened Image variants when creating sandboxes
 with default agent templates:
@@ -566,6 +607,33 @@ The cooldown applies across all eligible errors, not separately to each error
 type. Values below one are treated as one day. This setting doesn't grant
 upload consent: [diagnostics.autoUpload](#diagnosticsautoupload) must be `yes`.
 
+### Outbound connections
+
+#### egress.stalledConnectionTimeoutSeconds {.wrap-anywhere}
+
+{{< setting-metadata type="integer" default="30" >}}
+
+Set how many seconds an outbound TCP connection from a local sandbox can go
+without the remote end acknowledging data before the connection closes. This
+bounds how long a connection stranded by a host network change, such as a VPN
+connecting, can hang.
+
+Use a value from `0` to `3600`. Set `0` to disable the timeout. For example,
+increase the timeout to tolerate longer network interruptions:
+
+```console
+$ sbx settings set egress.stalledConnectionTimeoutSeconds 90
+$ sbx daemon restart
+```
+
+Changes apply to sandboxes created after the change. For existing sandboxes,
+restart the daemon to rebuild their network proxies with the updated value.
+
+A network outage longer than the timeout can close long-lived connections,
+including streams and uploads. On Linux, the timeout also closes a connection
+if the remote end stops reading data for longer than the timeout. Increase the
+value or disable the timeout if you need connections to survive these pauses.
+
 ### Upstream proxies and TLS
 
 Upstream proxy support is experimental. Use these settings to control how
@@ -731,6 +799,23 @@ It relaxes certificate validation to accept those serial numbers. It doesn't
 make an untrusted certificate authority trusted or resolve other certificate
 errors. For an untrusted internal CA, see
 [certificate troubleshooting](../troubleshooting.md#api-calls-fail-with-a-certificate-error).
+
+#### tls.postQuantumKeyExchange {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="true" >}}
+
+Set this to `false` if a firewall or TLS-inspecting proxy drops or stalls
+Docker Sandboxes HTTPS connections because it can't handle post-quantum key
+exchange:
+
+```console
+$ sbx settings set tls.postQuantumKeyExchange false
+$ sbx daemon restart
+```
+
+This disables post-quantum key exchange for TLS connections made by the host
+CLI and daemon. Changes apply on the next CLI invocation and require a daemon
+restart. Set it back to `true` and restart the daemon to restore the default.
 
 ### Shared agent skills
 

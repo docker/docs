@@ -1,0 +1,64 @@
+name: sbx port publish
+synopsis: Publish ports
+description: |-
+    Publish sandbox ports to the host.
+
+    Publishing a local port starts a stopped sandbox before creating the host
+    binding. A SPEC is [[HOST_IP:]HOST_PORT:]SANDBOX_PORT[/PROTOCOL].
+    If HOST_IP is omitted, the port is bound on loopback, expanded based on
+    PROTOCOL and the sandbox's address families: tcp/udp binds both 127.0.0.1
+    and ::1 (or only 127.0.0.1 if the sandbox is IPv4-only); tcp4/udp4 binds
+    only 127.0.0.1; tcp6/udp6 binds only ::1.
+    Supported protocols: tcp, tcp4, tcp6, udp, udp4, udp6.
+
+    When publishing without a HOST_PORT, an ephemeral port is allocated automatically.
+
+    When publishing without a PROTOCOL, tcp4 is used — so a sandbox service
+    listening only on IPv4 is reachable without a host client having to avoid
+    ::1 — or tcp6 when HOST_IP is an IPv6 address. Publish tcp explicitly to
+    bind both families.
+
+    With --cloud:
+    Expose ports of a cloud sandbox given by ID (sbx_*) or name.
+
+    A SPEC is the sandbox port number alone or with a /tcp suffix; UDP and host
+    bindings are refused.
+    The cloud control plane assigns a publicly reachable URL for each exposed port.
+usage: sbx port publish SANDBOX SPEC... [flags]
+options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for publish
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+example: |4-
+      # Publish sandbox port 8080 to an ephemeral host port
+      sbx port publish my-sandbox 8080
+
+      # Publish with a specific host port
+      sbx port publish my-sandbox 3000:8080
+
+      # Publish several ports at once
+      sbx port publish my-sandbox 8080 9090/udp
+
+      # Expose port 8080 on a cloud sandbox
+      sbx --cloud port publish sbx_abc123 8080
+see_also:
+    - sbx port - Manage sandbox port publishing

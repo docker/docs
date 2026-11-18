@@ -15,8 +15,12 @@ description: |-
 
     A directory PATH selects sbxenv.yaml; a file PATH selects that file.
     With no PATH, ~/.sbxenv.yaml supplies shared defaults when present.
-    Explicit PATHs skip those defaults. Later files override earlier values;
-    lists such as ports and mcp.servers are concatenated.
+    Explicit PATHs skip those defaults. Later files override earlier values.
+    Ports with the same sandbox port and effective protocol, MCP servers with the
+    same name, and additional workspaces with the same container target use the
+    later entry, including repeated entries in one file.
+    Kit arguments merge by source. The entrypoint and cmd arrays replace earlier
+    values; other lists concatenate.
 usage: sbx env rm [PATH...] [flags]
 options:
     - name: env-arg

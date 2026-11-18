@@ -1,9 +1,10 @@
 ---
-title: About Docker Offload v1
-linktitle: About
+title: Core concepts
 weight: 15
 description: Learn about Docker Offload v1, its features, and how it works.
 keywords: cloud, offload, vdi
+aliases:
+- /offload/v1/about/
 ---
 
 {{< summary-bar feature_name="Docker Offload v1" >}}
@@ -15,26 +16,10 @@ scalable, cloud-powered environment, enabling developers to work efficiently eve
 in virtual desktop infrastructure (VDI) environments or systems that don't support
 nested virtualization.
 
-## Key features
-
-Docker Offload v1 includes the following capabilities to support modern container
-workflows:
-
-- Ephemeral cloud runners: Automatically provision and tear down cloud
-  environments for each container session.
-- Secure communication: Use encrypted tunnels between Docker Desktop and cloud
-  environments with support for secure secrets and image pulling.
-- Port forwarding and bind mounts: Retain a local development experience even
-  when running containers in the cloud.
-- VDI-friendly: [Use Docker Desktop](/manuals/desktop/setup/vm-vdi.md) in virtual
-  desktop environments or systems that don't support nested virtualization.
-
-## How Docker Offload v1 works
-
 Docker Offload v1 replaces the need to build or run containers locally by connecting
 Docker Desktop to secure, dedicated cloud resources.
 
-### Running containers with Docker Offload v1
+## Running containers with Docker Offload v1
 
 When you use Docker Offload v1 to build or run containers, Docker Desktop creates a secure
 SSH tunnel to a Docker daemon running in the cloud. Your containers are started
@@ -58,18 +43,18 @@ Despite running remotely, features like bind mounts and port forwarding continue
 to work, providing a local-like experience from within Docker Desktop
 and the CLI.
 
-### Cloud resources
+## Cloud resources
 
 Docker Offload v1 uses cloud hosts with 4 vCPUs and 8 GiB of memory. If you have
 different requirements, <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_offload_about" class="link" rel="noopener">contact Docker</a> to explore options.
 
-### Session management and idle state
+## Session management and idle state
 
-Docker Offload v1 uses session management and idle state policies to ensure fair use of cloud resources across all users, see [Fair use](#fair-use).
+Docker Offload v1 uses session management and idle state policies to ensure [fair use](/manuals/offload/v1/_index.md#fair-use) of cloud resources across all users.
 
 Each user can run one Docker Offload v1 session at a time. When Docker Desktop is in an **Offload idle** state, it waits for activity on the Docker API and only connects to a cloud environment when needed. Once connected, the session moves to an **Offload running** state and stays connected as long as Docker detects activity. Activity includes any Docker API call, a running container, or an active build.
 
-#### When you'll see a prompt
+### When you'll see a prompt
 
 While Docker Offload v1 is running, Docker Desktop shows prompts in the Dashboard to check if you're still active. Prompts appear in two cases:
 
@@ -81,23 +66,16 @@ When a prompt appears, you can:
    - Select **Idle now** to return to an idle state immediately.
    - Do nothing, and the session returns to an idle state automatically.
 
-#### What happens when your session goes idle
+### What happens when your session goes idle
 
 After your session returns to an idle state, there is a 5-minute grace period. You can resume the session during this time by running any Docker command.
 
 > [!IMPORTANT]
 > If the idle period exceeds 5 minutes without activity, the session is terminated. Docker Offload v1 environments are ephemeral, so the remote environment and any containers, images, or volumes in it are deleted. To keep work between sessions, push images to a registry such as [Docker Hub](/manuals/docker-hub/_index.md) before your session ends.
 
-#### Long session prompts
+### Long session prompts
 
 Long session prompts appear every 3 hours during a session. After 8 hours of cumulative usage in a day, prompts appear every hour. The 8-hour counter resets at the start of each day.
-
-## Fair use
-
-Docker Offload v1 enforces a fair use policy to prevent resource abuse. Fair use is
-defined as up to 8 compute hours per named user per day, totaled across all user
-sessions. Usage in excess of this threshold may be subject to session management
-at Docker's discretion.
 
 ## What's next
 

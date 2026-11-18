@@ -43,4 +43,25 @@ These pages are for you if any of the following apply:
 For the version that individual developers subscribe to and start with
 `docker offload create`, see [Docker Offload](/manuals/offload/_index.md).
 
+## Key features
+
+Docker Offload v1 includes the following capabilities to support modern container
+workflows:
+
+- Ephemeral cloud runners: Automatically provision and tear down cloud
+  environments for each container session.
+- Secure communication: Use encrypted tunnels between Docker Desktop and cloud
+  environments with support for secure secrets and image pulling.
+- Port forwarding and bind mounts: Retain a local development experience even
+  when running containers in the cloud.
+- VDI-friendly: [Use Docker Desktop](/manuals/desktop/setup/vm-vdi.md) in virtual
+  desktop environments or systems that don't support nested virtualization.
+
+## Fair use
+
+Docker Offload v1 enforces a fair use policy to prevent resource abuse. Fair use is
+defined as up to 8 compute hours per named user per day, totaled across all user
+sessions. Usage in excess of this threshold may be subject to session management
+at Docker's discretion.
+
 {{< grid >}}

@@ -3,9 +3,9 @@ synopsis: Reset policies to defaults
 description: |-
     Remove all custom policies and restart the daemon to restore defaults.
 
-    This deletes the local policy store and stops the daemon. The daemon restarts
-    automatically on the next command, then prompts you to initialize the global
-    network policy again.
+    This deletes the local policy store and restarts the daemon immediately. You
+    are then prompted to choose the global network policy; without an interactive
+    terminal, initialize it after the reset by choosing a preset as shown below.
 
     If sandboxes are currently running, they will be stopped when the daemon
     shuts down. You will be prompted for confirmation unless --force is used.
@@ -42,5 +42,8 @@ example: |4-
 
       # Reset policies without confirmation
       sbx policy reset --force
+
+      # Reset and initialize in a script; use balanced, allow-all, or deny-all
+      sbx --no-input policy reset --force && sbx policy init balanced
 see_also:
     - sbx policy - Manage sandbox policies

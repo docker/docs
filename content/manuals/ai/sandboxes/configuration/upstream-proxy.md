@@ -140,6 +140,10 @@ the variable and restart the daemon for the stored setting to take effect.
 When a `system` or PAC proxy is in use, `sbx` still tracks OS-level proxy changes
 (such as switching networks, connecting a VPN, or updated PAC contents) live.
 
+A host network change can also leave established sandbox connections stalled.
+To tune or disable the timeout that closes these connections, see
+[`egress.stalledConnectionTimeoutSeconds`](settings.md#egressstalledconnectiontimeoutseconds).
+
 ## Cloud SSH
 
 Cloud SSH uses the configured host proxy to connect to the SSH gateway. Some
