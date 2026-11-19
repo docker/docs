@@ -1,10 +1,11 @@
 {{ $cols := .Get "cols" | default 3 }}
 <div
-  class="not-prose md:grid-cols-{{ math.Max 2 (sub $cols 1) }} xl:grid-cols-{{ $cols }} grid grid-cols-1 gap-4 mb-6"
+  class="not-prose md:grid-cols-{{ math.Max 2 (sub $cols 1) }} xl:grid-cols-{{ $cols }} mb-6 grid grid-cols-1 gap-4"
 >
+  {{ $level := .Get "level" | default 3 }}
   {{ $items := index .Page.Params (.Get "items" | default "grid") }}
   {{ range $items }}
-    {{ $opts := dict "title" .title "link" .link "description" .description "icon" .icon "image" .image }}
+    {{ $opts := dict "title" .title "link" .link "description" .description "icon" .icon "image" .image "level" $level }}
     {{ partial "components/card.html" $opts }}
   {{ end }}
 </div>

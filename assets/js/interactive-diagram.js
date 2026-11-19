@@ -109,7 +109,10 @@ function initializeTopology(root, stage, state, config) {
     const { element } = item;
     element.setAttribute("role", "button");
     element.setAttribute("tabindex", "0");
-    element.setAttribute("aria-label", `${item.label}. ${item.details}`);
+    element.setAttribute(
+      "aria-label",
+      [item.label, item.description].filter(Boolean).join(" "),
+    );
     element.setAttribute("aria-pressed", "false");
 
     element.addEventListener("pointerenter", () => {
@@ -173,7 +176,6 @@ function initializeTopology(root, stage, state, config) {
       activeNodes.add(item.to);
     }
 
-    root.classList.add("has-topology-focus");
     state.nodes.forEach((element, id) => {
       element.classList.toggle("is-active", activeNodes.has(id));
       element.classList.toggle("is-related", relatedNodes.has(id));
@@ -185,7 +187,6 @@ function initializeTopology(root, stage, state, config) {
   }
 
   function showOverview() {
-    root.classList.remove("has-topology-focus");
     state.nodes.forEach((element) => {
       element.classList.remove("is-active", "is-related");
     });
@@ -352,6 +353,7 @@ function buildDiagram(stage, config) {
         node.y + 29,
         "interactive-diagram__node-label",
       ),
+      document.createTextNode(" "),
       createSvgText(
         node.description,
         node.x + 14,

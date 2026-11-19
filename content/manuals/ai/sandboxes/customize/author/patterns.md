@@ -107,7 +107,7 @@ shell kit. The hook updates the workload's trust store as root, after all kit
 files are present and before the agent launches.
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --kit ./internal-ca
+$ sbx run docker.io/sbx/shell:1.0.0 --kit ./internal-ca
 ```
 
 ## Seed storage after it is mounted

@@ -1,0 +1,15 @@
+{{- $html := partial "api-reference/description.html" . | markdownify -}}
+{{- $html = replace $html "<pre>" `<pre tabindex="0">` -}}
+{{- $minimum := 6 -}}
+{{- range findRE `<h[1-6][ >]` $html -}}
+  {{- $minimum = math.Min $minimum (int (substr . 2 1)) -}}
+{{- end -}}
+{{- $offset := sub (.level | default 3) $minimum -}}
+{{- $levels := seq 6 -1 1 -}}
+{{- if lt $offset 0 -}}{{- $levels = seq 1 6 -}}{{- end -}}
+{{- range $levels -}}
+  {{- $level := math.Min 6 (add . $offset) -}}
+  {{- $html = replaceRE (printf `<h%d([ >])` .) (printf `<h%d${1}` $level) $html -}}
+  {{- $html = replace $html (printf `</h%d>` .) (printf `</h%d>` $level) -}}
+{{- end -}}
+{{- return ($html | safeHTML) -}}

@@ -1,7 +1,7 @@
 ---
 title: Docker Extensions
 weight: 60
-description: Extensions
+description: Add debugging, testing, security, and networking tools to Docker Desktop.
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows
 params:
   sidebar:

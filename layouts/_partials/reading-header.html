@@ -1,0 +1,10 @@
+<header class="reading-header">
+  {{ if ne .Kind "404" }}{{ partial "breadcrumbs.html" . }}{{ end }}
+  <h1 data-pagefind-weight="10">{{ .Title }}</h1>
+  {{ with partial "utils/description.html" . }}
+    <p class="reading-description">{{ . | plainify }}</p>
+  {{ end }}
+  {{ if not (partialCached "navigation/context.html" . .Path).discovery }}
+    {{ partial "page-actions.html" . }}
+  {{ end }}
+</header>

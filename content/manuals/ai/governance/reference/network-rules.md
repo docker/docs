@@ -93,6 +93,11 @@ parameters:
 A host deny is therefore a floor that HTTP rules can't raise, while a host
 allow is a ceiling that HTTP rules can carve into.
 
+These decisions apply to the hostname attributed to the connection. In local
+sandboxes, a denied host can still be reachable when it shares an IP address
+with an allowed host. See
+[Hostname blocking limitations](../local/network-rules.md#hostname-blocking-limitations).
+
 When a rule requires an HTTP decision, the sandbox HTTP proxy
 evaluates each request separately instead of deciding once per connection.
 

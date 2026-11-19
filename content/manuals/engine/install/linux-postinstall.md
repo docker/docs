@@ -276,4 +276,4 @@ options:
 
 ## Next steps
 
-- Take a look at [Get started with Docker](/get-started/tutorials/run-an-app.md) to learn how to build an image and run it as a containerized application.
+- Take a look at [Get started with Docker](https://docs.docker.com/learn/paths/get-started-with-docker-containers/) to learn how to build an image and run it as a containerized application.

@@ -7,15 +7,15 @@ params:
   grid_about:
     - title: What are hardened images and why use them?
       description: Learn what a hardened image is, how Docker Hardened Images are built, what sets them apart from typical base and application images, and why you should use them.
-      icon: information-circle
+      icon: info
       link: /dhi/explore/what/
     - title: Build process
       description: Learn how Docker builds, tests, and maintains Docker Hardened Images through an automated, security-focused pipeline.
-      icon: wrench-screwdriver
+      icon: wrench
       link: /dhi/explore/build-process/
     - title: Image types
       description: Learn about the different image types, distributions, and variants offered in the Docker Hardened Images catalog.
-      icon: squares-2x2
+      icon: layout-grid
       link: /dhi/explore/available/
     - title: Scanner integrations
       description: Discover which vulnerability scanners integrate with Docker Hardened Images and support open standards like OpenVEX.
@@ -23,23 +23,23 @@ params:
       link: /dhi/explore/scanner-integrations/
     - title: Image testing
       description: See how Docker Hardened Images are automatically tested for standards compliance, functionality, and security.
-      icon: beaker
+      icon: flask-conical
       link: /dhi/explore/test/
     - title: Malware scanning
       description: Learn how Docker scans Docker Hardened Images for viruses and malware, and how to view and verify the scan attestation.
-      icon: bug-ant
+      icon: bug
       link: /dhi/explore/malware-scanning/
     - title: Responsibility overview
       description: Understand Docker's role and your responsibilities when using Docker Hardened Images as part of your secure software supply chain.
-      icon: user-group
+      icon: users
       link: /dhi/explore/responsibility/
     - title: EU data residency
       description: Learn how Docker stores your mirrored and customized images in the EU when your subscription is in the EU region.
-      icon: globe-alt
+      icon: globe
       link: /dhi/explore/eu-region/
     - title: Security concepts
       description: Learn the core concepts behind Docker Hardened Images — signed attestations, immutable digests, SLSA, VEX, and more.
-      icon: clipboard-document-check
+      icon: clipboard-check
       link: /dhi/explore/security-concepts/
 
 aliases:

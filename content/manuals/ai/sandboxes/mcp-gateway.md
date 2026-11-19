@@ -453,6 +453,17 @@ This choice persists across sandbox restarts unless you
 [unload every server in a named static set](#remove-a-server-from-a-running-sandbox).
 Sandboxes created with `--static-mcp none` remain static.
 
+To check a local sandbox's MCP mode and connected servers, run:
+
+```console
+$ sbx inspect <SANDBOX>
+```
+
+The `MCP mode` field reports `static` or `dynamic`. The `MCP servers` field
+lists connected servers, or `none` when no servers are connected. A dash (`-`)
+means the information is unavailable. These fields describe the sandbox's
+gateway; use [`sbx mcp ls`](#manage-registrations) to list host registrations.
+
 ### Use static mode
 
 Pass `--static-mcp` to pre-load registered MCP servers:
@@ -515,6 +526,39 @@ $ sbx mcp load linear --sandbox my-session
 Connected agent sessions receive a tool-list update, so the added tools become
 visible without reconnecting. The loaded server remains attached across sandbox
 restarts.
+
+### Load registered servers when creating an environment
+
+To reuse host MCP registrations in an [environment file](configuration/environment-files.md),
+add a `postCreate` lifecycle command. This attaches the servers whenever you
+create a sandbox, without repeating their registration details in the file.
+
+Register and authorize the servers on your host first. Use `sbx mcp ls` to
+check their names, then add this block to your environment file, replacing the
+example names with your registrations:
+
+```yaml
+lifecycle:
+  postCreate:
+    - name: Connect host MCP registrations
+      command: |
+        set -eu
+        for server in grafana notion slack-keychain; do
+          sbx mcp load "$server" --sandbox "$SBX_SANDBOX_NAME"
+        done
+      timeout: 3m
+```
+
+The command runs on the host after sandbox creation and before `sbx env run`
+attaches to the agent. `SBX_SANDBOX_NAME` contains the sandbox name, including
+any `--name` override. Reconnecting to an existing sandbox skips `postCreate`;
+the loaded servers remain attached across restarts.
+
+Use this pattern when contributors manage their own host registrations under
+shared names. To define server registrations in the environment file instead,
+use [`mcp.servers`](configuration/environment-files.md#mcp). For host command
+approval and other lifecycle options, see
+[Lifecycle commands](configuration/environment-files.md#lifecycle).
 
 ## Remove a server from a running sandbox
 

@@ -23,11 +23,6 @@ security:
 # Cascade layout and type settings to content subtrees.
 # See https://gohugo.io/configuration/cascade/#target
 cascade:
-  # Sample pages use the samples type (routes to layouts/samples/)
-  - target:
-      path: /reference/samples/**
-      kind: page
-    type: samples
   # CLI reference pages use the cli layout (data-driven from YAML)
   - target:
       path: /reference/cli/docker
@@ -168,6 +163,8 @@ params:
 
   # Gordon chat
   gordon:
+    # Show the floating question field on reading pages (chat button on mobile).
+    ask_dock: true
     # Lets Gordon answer with cards (steps, tables, notes, snippets, follow-up
     # questions) in production builds. Always on in other environments.
     cards: true
@@ -207,122 +204,6 @@ params:
   example_alpine_version: "3.23"
   example_node_version: "24"
 
-menus:
-  # Site header menu
-  main:
-    - name: Get started
-      pageRef: /get-started/
-      weight: 1
-    - name: Guides
-      pageRef: /guides/
-      weight: 2
-    - name: Manuals
-      pageRef: /manuals/
-      weight: 3
-    - name: Reference
-      pageRef: /reference/
-      weight: 4
-
-  # Footer links
-  footer:
-    - url: https://www.docker.com/products
-      name: Product offerings
-    - url: https://www.docker.com/products/personal
-      name: Docker Personal
-      parent: Product offerings
-    - url: https://www.docker.com/products/pro
-      name: Docker Pro
-      parent: Product offerings
-    - url: https://www.docker.com/products/team
-      name: Docker Team
-      parent: Product offerings
-    - url: https://www.docker.com/products/business
-      name: Docker Business
-      parent: Product offerings
-    - url: https://www.docker.com/pricing?ref=Docs&refAction=DocsFooter
-      name: Pricing FAQs
-      parent: Product offerings
-    - url: https://www.docker.com/partners/programs
-      name: Docker Verified Publisher
-      parent: Product offerings
-    - url: https://www.docker.com/partners
-      name: Partners
-      parent: Product offerings
-
-    - url: https://www.docker.com/
-      name: Features
-    - url: https://www.docker.com/products/docker-desktop
-      name: Docker Desktop
-      parent: Features
-    - url: https://www.docker.com/products/docker-hub
-      name: Docker Hub
-      parent: Features
-    - url: https://www.docker.com/products/secure-software-supply-chain
-      name: Secure Software Supply Chain
-      parent: Features
-    - url: https://www.docker.com/products/container-runtime
-      name: Container Runtime
-      parent: Features
-    - url: https://www.docker.com/products/developer-tools
-      name: Developer Tools
-      parent: Features
-    - url: https://www.docker.com/partners
-      name: Trusted Content
-      parent: Features
-    - url: https://www.docker.com/roadmap
-      name: Docker Product Roadmap
-      parent: Features
-
-    - name: Developers
-    - url: https://www.docker.com/use-cases
-      name: Use cases
-      parent: Developers
-    - url: /get-started/
-      name: Get started
-      parent: Developers
-    - url: https://www.docker.com/blog/
-      name: Blog
-      parent: Developers
-    - url: https://www.docker.com/docker-community
-      name: Community
-      parent: Developers
-    - url: https://www.docker.com/open-source
-      name: Open Source
-      parent: Developers
-    - url: https://www.docker.com/community/get-involved/developer-preview
-      name: Preview Program
-      parent: Developers
-
-    - url: https://www.docker.com/company
-      name: About us
-    - url: https://www.docker.com/what-container
-      name: What is a container?
-      parent: About us
-    - url: https://www.docker.com/why-docker
-      name: Why Docker?
-      parent: About us
-    - url: https://www.docker.com/events
-      name: Virtual events
-      parent: About us
-    - url: https://www.docker.com/swag
-      name: Swag store
-      parent: About us
-    - url: https://www.docker.com/company/newsroom
-      name: Newsroom
-      parent: About us
-    - url: https://www.docker.com/careers
-      name: Careers
-      parent: About us
-    - url: https://www.docker.com/company/contact
-      name: Contact us
-      parent: About us
-    - url: https://www.docker.com/customers
-      name: Customers
-      parent: About us
-    - url: https://www.docker.com/newsletter-subscription
-      name: Newsletter
-      parent: About us
-
 # Hugo modules - for fetching docs from upstream repos
 # NOTE: we always vendor upstream docs in _vendor/
 # Versions are declared in go.mod
@@ -341,10 +222,9 @@ module:
     - disableWatch: true
       source: hugo_stats.json
       target: assets/notwatching/hugo_stats.json
-    # Mount the icon files to assets so we can access them with resources.Get
-    - source: node_modules/heroicons/24/solid
-      target: assets/icons
-    # Mount highlight.js theme for Gordon chat syntax highlighting
+    # Mount both highlight.js themes for Gordon chat syntax highlighting
+    - source: node_modules/highlight.js/styles/github.css
+      target: assets/css/highlight-github-light.css
     - source: node_modules/highlight.js/styles/github-dark.css
       target: assets/css/highlight-github-dark.css
 

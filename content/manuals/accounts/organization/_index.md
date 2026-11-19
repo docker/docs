@@ -10,7 +10,7 @@ weight: 15
 grid:
   - title: Set up your organization
     description: Create, onboard, and configure your organization.
-    icon: magnifying-glass-plus
+    icon: zoom-in
     link: /accounts/organization/setup/
   - title: Manage your organization
     description: Manage members, teams, seats, and product access.
@@ -19,11 +19,11 @@ grid:
   - title: Activity logs
     description: Review member activity across your organization and
       repositories.
-    icon: clipboard-document-list
+    icon: clipboard-list
     link: /accounts/organization/activity-logs/
   - title: Insights
     description: See how people in your organization use Docker.
-    icon: chart-bar
+    icon: chart-column
     link: /accounts/organization/insights/
   - title: Security
     description: Explore security features for administrators.

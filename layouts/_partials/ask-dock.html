@@ -1,0 +1,59 @@
+<div
+  class="ask-dock"
+  x-data="{
+    query: '',
+    returnFocus: null,
+    init() {
+      this.$watch('$store.gordon.isOpen', open => {
+        if (!open && this.returnFocus) {
+          const target = this.returnFocus;
+          this.returnFocus = null;
+          this.$nextTick(() => {
+            if (!this.$store.gordon.isOpen && !document.querySelector('dialog[open]')) target.focus({ preventScroll: true });
+          });
+        }
+      });
+    }
+  }"
+  :class="{ 'ask-dock--hidden': $store.gordon.isOpen }"
+  data-pagefind-ignore
+  x-cloak
+>
+  <form
+    class="ask-dock-form"
+    @submit.prevent="if (query.trim()) { returnFocus = $refs.dockInput; $store.gordon.open(query.trim(), true); query = ''; }"
+    aria-label="Ask a question about Docker"
+  >
+    {{ partial "ui-icon.html" (dict "name" "bot") }}
+    <label class="sr-only" for="ask-dock-query"
+      >Ask a question about Docker</label
+    >
+    <input
+      id="ask-dock-query"
+      x-ref="dockInput"
+      type="text"
+      placeholder="Ask a question about Docker…"
+      autocomplete="off"
+      x-model="query"
+    />
+    <button
+      type="submit"
+      aria-label="Ask Docker"
+      aria-controls="gordon-chat"
+      aria-haspopup="dialog"
+      :disabled="!query.trim()"
+      disabled
+    >
+      {{ partial "ui-icon.html" (dict "name" "arrow-right") }}
+    </button>
+  </form>
+  <button
+    type="button"
+    class="ask-dock-mobile"
+    @click="returnFocus = $el; $store.gordon.open()"
+    aria-controls="gordon-chat"
+    aria-haspopup="dialog"
+  >
+    {{ partial "ui-icon.html" (dict "name" "bot") }} Ask Docker
+  </button>
+</div>

@@ -1,0 +1,14 @@
+{{- $name := .name -}}
+<span
+  class="ui-icon"
+  {{ with .label }}
+    role="img" aria-label="{{ . }}"
+  {{ else }}
+    aria-hidden="true"
+  {{ end }}
+  >{{ with resources.Get (printf "icons/trident/%s.svg" $name) }}
+    {{ .Content | safeHTML }}
+  {{ else }}
+    {{ errorf "Missing Trident icon %s" $name }}
+  {{ end }}</span
+>

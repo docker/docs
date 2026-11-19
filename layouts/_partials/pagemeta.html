@@ -15,7 +15,7 @@
     <div class="pb-0 text-lg lg:pb-2">
       {{ T "tableOfContents" }}
     </div>
-    <nav class="toc">
+    <nav class="toc" aria-label="On this page">
       {{ $root := (index page.Fragments.Headings 0).Headings }}
       {{- template "walkHeadingFragments" $root }}
     </nav>
@@ -23,20 +23,26 @@
 {{- end }}
 
 {{- define "walkHeadingFragments" }}
+  <ul class="pl-2">
+    {{ template "tocItems" . }}
+  </ul>
+{{- end }}
+
+{{- define "tocItems" }}
   {{- $min := default 2 page.Params.toc_min }}
   {{- $max := default 3 page.Params.toc_max }}
-  <ul class="pl-2">
-    {{- range . }}
-      {{- if and (ge .Level $min) (le .Level $max) }}
-        <li>
-          <a class="link lg:no-underline" href="#{{ .ID }}"
-            >{{ markdownify .Title }}</a
-          >
-        </li>
-      {{- end }}
-      {{- with .Headings }}
-        {{ template "walkHeadingFragments" . }}
-      {{- end }}
+  {{- range . }}
+    {{- if and (ge .Level $min) (le .Level $max) }}
+      <li>
+        <a class="link lg:no-underline" href="#{{ .ID }}"
+          >{{ markdownify .Title }}</a
+        >
+        {{- if lt .Level $max }}
+          {{- with .Headings }}{{ template "walkHeadingFragments" . }}{{ end }}
+        {{- end }}
+      </li>
+    {{- else if lt .Level $min }}
+      {{ template "tocItems" .Headings }}
     {{- end }}
-  </ul>
+  {{- end }}
 {{- end }}

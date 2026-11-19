@@ -9,15 +9,15 @@ params:
 grid:
 - title: Quickstart
   description: Get up and running with Docker Offload in just a few steps.
-  icon: rocket-launch
+  icon: rocket
   link: /offload/quickstart/
 - title: How Offload works
   description: Learn about Docker Offload and how it works.
-  icon: information-circle
+  icon: info
   link: /offload/about/
 - title: Manage cloud sandboxes
   description: Start, stop, inspect, and resume the cloud sandbox that runs your containers.
-  icon: command-line
+  icon: terminal
   link: /offload/sandboxes/
 - title: Usage
   description: Learn how Docker Offload is billed and how to monitor your spend.
@@ -25,15 +25,15 @@ grid:
   link: /offload/usage/
 - title: Optimize
   description: Improve performance and cost efficiency in Docker Offload.
-  icon: bolt
+  icon: zap
   link: /offload/optimize/
 - title: Troubleshoot
   description: Learn how to troubleshoot issues with Docker Offload.
-  icon: bug-ant
+  icon: bug
   link: /offload/troubleshoot/
 - title: Feedback
   description: Provide feedback on Docker Offload.
-  icon: chat-bubble-left
+  icon: message-square
   link: /offload/feedback/
 aliases:
 - /harmonia/

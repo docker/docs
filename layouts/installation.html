@@ -1,0 +1,10 @@
+{{ define "main" }}
+  {{ with .Content }}
+    <div class="prose dark:prose-invert">{{ . }}</div>
+  {{ end }}
+  <ul class="discovery-list">
+    {{ range .Pages }}
+      {{ partial "discovery-entry.html" (dict "page" .Path) }}
+    {{ end }}
+  </ul>
+{{ end }}

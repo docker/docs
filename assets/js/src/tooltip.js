@@ -6,10 +6,12 @@ const tooltipWrappers = Array.from(
   document.querySelectorAll("[data-tooltip-wrapper]"),
 );
 
-for (const tooltipWrapper of tooltipWrappers) {
+for (const [index, tooltipWrapper] of tooltipWrappers.entries()) {
   const button = tooltipWrapper.firstElementChild;
   const tooltip = button.nextElementSibling;
   const arrowElement = tooltip.firstElementChild;
+  tooltip.id ||= `docs-tooltip-${index}`;
+  button.setAttribute("aria-describedby", tooltip.id);
 
   function update() {
     computePosition(button, tooltip, {
@@ -21,6 +23,7 @@ for (const tooltipWrapper of tooltipWrappers) {
         arrow({ element: arrowElement }),
       ],
     }).then(({ x, y, placement, middlewareData }) => {
+      tooltip.dataset.placement = placement.split("-")[0];
       Object.assign(tooltip.style, {
         left: `${x}px`,
         top: `${y}px`,
@@ -47,20 +50,30 @@ for (const tooltipWrapper of tooltipWrappers) {
   }
 
   function showTooltip() {
-    tooltip.classList.toggle("hidden");
+    if (button.disabled) return;
+    tooltip.classList.remove("hidden");
+    document.addEventListener("keydown", dismissOnEscape);
     update();
   }
 
   function hideTooltip() {
-    tooltip.classList.toggle("hidden");
+    tooltip.classList.add("hidden");
+    document.removeEventListener("keydown", dismissOnEscape);
   }
 
-  [
-    ["mouseenter", showTooltip],
-    ["mouseleave", hideTooltip],
-    ["focus", showTooltip],
-    ["blur", hideTooltip],
-  ].forEach(([event, listener]) => {
-    button.addEventListener(event, listener);
+  function dismissOnEscape(event) {
+    if (event.key === "Escape") {
+      if (tooltipWrapper.contains(event.target)) event.stopPropagation();
+      hideTooltip();
+    }
+  }
+
+  tooltipWrapper.addEventListener("mouseenter", showTooltip);
+  tooltipWrapper.addEventListener("mouseleave", () => {
+    if (!tooltipWrapper.contains(document.activeElement)) hideTooltip();
+  });
+  button.addEventListener("focus", showTooltip);
+  button.addEventListener("blur", () => {
+    if (!tooltipWrapper.matches(":hover")) hideTooltip();
   });
 }

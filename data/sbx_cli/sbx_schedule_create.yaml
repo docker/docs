@@ -42,9 +42,8 @@ options:
       default_value: "false"
       usage: help for create
     - name: max-run-duration
-      default_value: 0s
       usage: |
-        Longest a run may take, at least 1h, e.g. 2h30m (default: 1h)
+        Longest a run may take, at least 1h, e.g. 2h30m; units are case-insensitive (default: 1h)
     - name: memory
       shorthand: m
       usage: 'Memory for each run''s sandbox, e.g. 8g (default: the kit''s)'
@@ -61,8 +60,11 @@ options:
     - name: timezone
       usage: |
         IANA time zone the cron expression is evaluated in, e.g. Europe/Berlin
-    - name: working-dir
+    - name: workdir
+      shorthand: w
       usage: Directory the prompt or command runs in
+    - name: working-dir
+      usage: Alias for --workdir
 inherited_options:
     - name: cloud
       default_value: "false"

@@ -1,4 +1,4 @@
-<div class="overflow-x-auto">
+<div class="overflow-x-auto" tabindex="0">
   <table
     {{- range $k, $v := .Attributes }}
       {{- if $v }}
@@ -10,14 +10,19 @@
       {{- range .THead }}
         <tr>
           {{- range . }}
-            <th
-              class="p-2"
-              {{- with .Alignment }}
-                {{- printf " style=%q" (printf "text-align: %s" .) | safeHTMLAttr }}
-              {{- end -}}
-            >
-              {{- .Text -}}
-            </th>
+            {{- if strings.TrimSpace (.Text | plainify) }}
+              <th
+                scope="col"
+                class="p-2"
+                {{- with .Alignment }}
+                  {{- printf " style=%q" (printf "text-align: %s" .) | safeHTMLAttr }}
+                {{- end -}}
+              >
+                {{- .Text -}}
+              </th>
+            {{- else }}
+              <td class="p-2"></td>
+            {{- end }}
           {{- end }}
         </tr>
       {{- end }}

@@ -10,6 +10,9 @@ description: |-
     socket or named pipe (OS user boundary) combined with an active Docker login. Sign in first
     (sbx login). On macOS and Windows, use --auto-create to install the fixed codex.sbx and
     claude.sbx desktop profiles. Sandboxes are created with the standard resource defaults.
+
+    With --cloud:
+    Write the sbx_cloud SSH alias to connect to cloud sandboxes. Sign in first with sbx login. The alias uses the selected cloud API endpoint; credentials are obtained when connecting.
 usage: sbx setup ssh [flags]
 options:
     - name: alias
@@ -39,6 +42,9 @@ inherited_options:
 example: |4-
       sbx setup ssh
       ssh my-sandbox.sbx -- echo hello
+
+      sbx --cloud setup ssh
+      ssh sbx_ID@sbx_cloud
 see_also:
     - sbx setup - (Experimental) Detect host configuration and prepare Docker Sandboxes
     - sbx setup ssh remove - Remove SSH config and desktop targets; keep sandboxes

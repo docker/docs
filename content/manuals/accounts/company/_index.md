@@ -9,11 +9,11 @@ keywords: company, multiple organizations, Docker Home, Docker Business,
 grid:
   - title: Set up a company
     description: Create a company, invite members, add organizations, and manage owners.
-    icon: building-office-2
+    icon: building-2
     link: /accounts/company/new-company/
   - title: Manage your company
     description: Change roles, remove users, and export a member list.
-    icon: building-storefront
+    icon: store
     link: /accounts/company/manage/
   - title: Configure SSO and SCIM
     description: Set up single sign-on and SCIM provisioning for your company.
@@ -21,12 +21,12 @@ grid:
     link: /security/authentication/single-sign-on/
   - title: Domain management
     description: Add and verify your company's domains.
-    icon: check-badge
+    icon: check-verified
     link: /security/provisioning/domain-management/
   - title: FAQs
     description: Explore frequently asked questions about companies.
     link: /faqs/accounts/
-    icon: question-mark-circle
+    icon: circle-help
 aliases:
   - /admin/company/
   - /docker-hub/creating-companies/

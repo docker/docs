@@ -1,0 +1,19 @@
+{{/* Non-rendered API sections have no permalink; their generated overview owns the URL. */}}
+{{- $page := . -}}
+{{- $url := .Params.sidebar.goto | default .RelPermalink -}}
+{{- if not $url -}}
+  {{- range (index hugo.Data "api-reference").apis -}}
+    {{- with site.GetPage .url -}}
+      {{- if .IsDescendant $page -}}
+        {{- if $url -}}
+          {{- errorf "Multiple API entrypoints for %s" $page.Path -}}
+        {{- end -}}
+        {{- $url = .RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $url -}}
+  {{- errorf "Navigation page has no published URL: %s" .Path -}}
+{{- end -}}
+{{- return $url -}}

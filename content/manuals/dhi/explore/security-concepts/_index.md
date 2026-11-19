@@ -9,25 +9,25 @@ params:
   grid_concepts_metadata:
     - title: Attestations
       description: Review the full set of signed attestations included with each Docker Hardened Image, such as SBOMs, VEX, build provenance, and scan results.
-      icon: clipboard-document-list
+      icon: clipboard-list
       link: /dhi/explore/security-concepts/attestations/
     - title: Software Bill of Materials (SBOMs)
       description: Learn what SBOMs are, why they matter, and how Docker Hardened Images include signed SBOMs to support transparency and compliance.
-      icon: list-bullet
+      icon: list
       link: /dhi/explore/security-concepts/sbom/
     - title: Supply-chain Levels for Software Artifacts (SLSA)
       description: Learn how Docker Hardened Images comply with SLSA Build Level 3 and how to verify provenance for secure, tamper-resistant builds.
-      icon: clipboard-document-check
+      icon: clipboard-check
       link: /dhi/explore/security-concepts/slsa/
     - title: Image provenance
       description: Learn how build provenance metadata helps trace the origin of Docker Hardened Images and support compliance with SLSA.
-      icon: pencil-square
+      icon: square-pen
       link: /dhi/explore/security-concepts/provenance/
 
   grid_concepts_compliance:
     - title: FIPS
       description: Learn how Docker Hardened Images support FIPS 140 by using validated cryptographic modules and providing signed attestations for compliance audits.
-      icon: check-badge
+      icon: check-verified
       link: /dhi/explore/security-concepts/fips/
     - title: STIG
       description: Learn how Docker Hardened Images provide STIG-ready container images with verifiable security scan attestations for government and enterprise compliance requirements.
@@ -35,17 +35,17 @@ params:
       link: /dhi/explore/security-concepts/stig/
     - title: CIS Benchmarks
       description: Learn how Docker Hardened Images help you meet Center for Internet Security (CIS) Docker Benchmark requirements for secure container configuration and deployment.
-      icon: check-circle
+      icon: check
       link: /dhi/explore/security-concepts/cis/
 
   grid_concepts_risk:
     - title: Common Vulnerabilities and Exposures (CVEs)
       description: Understand what CVEs are, how Docker Hardened Images reduce exposure, and how to scan images for vulnerabilities using popular tools.
-      icon: exclamation-circle
+      icon: circle-alert
       link: /dhi/explore/security-concepts/cves/
     - title: Vulnerability Exploitability eXchange (VEX)
       description: Learn how VEX helps you prioritize real risks by identifying which vulnerabilities in Docker Hardened Images are actually exploitable.
-      icon: exclamation-triangle
+      icon: triangle-alert
       link: /dhi/explore/security-concepts/vex/
     - title: Software Supply Chain Security
       description: Learn how Docker Hardened Images help secure every stage of your software supply chain with signed metadata, provenance, and minimal attack surface.
@@ -53,21 +53,21 @@ params:
       link: /dhi/explore/security-concepts/sscs/
     - title: Secure Software Development Lifecycle (SSDLC)
       description: See how Docker Hardened Images support a secure SDLC by integrating with scanning, signing, and debugging tools.
-      icon: wrench-screwdriver
+      icon: wrench
       link: /dhi/explore/security-concepts/ssdlc/
 
   grid_concepts_structure:
     - title: Distroless images
       description: Learn how Docker Hardened Images use distroless variants to minimize attack surface and remove unnecessary components.
-      icon: squares-2x2
+      icon: layout-grid
       link: /dhi/explore/security-concepts/distroless/
     - title: glibc and musl support in Docker Hardened Images
       description: Compare glibc and musl variants of DHIs to choose the right base image for your application’s compatibility, size, and performance needs.
-      icon: arrows-up-down
+      icon: arrow-up-down
       link: /dhi/explore/security-concepts/glibc-musl/
     - title: Image immutability
       description: Understand how image digests, read-only containers, and signed metadata ensure Docker Hardened Images are tamper-resistant and immutable.
-      icon: minus-circle
+      icon: circle-minus
       link: /dhi/explore/security-concepts/immutability/
     - title: Image hardening
       description: Learn how Docker Hardened Images are designed for security, with minimal components, nonroot execution, and secure-by-default configurations.
@@ -77,7 +77,7 @@ params:
   grid_concepts_verification:
     - title: Digests
       description: Learn how to use immutable image digests to guarantee consistency and verify the exact Docker Hardened Image you're running.
-      icon: finger-print
+      icon: fingerprint
       link: /dhi/explore/security-concepts/digests/
     - title: Code signing
       description: Understand how Docker Hardened Images are cryptographically signed using Cosign to verify authenticity, integrity, and secure provenance.

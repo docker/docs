@@ -1,0 +1,15 @@
+{{ define "main" }}
+  <ul class="discovery-list">
+    {{ range hugo.Data.navigation.categories }}
+      <li>
+        <a href="{{ .landing }}"
+          ><div>
+            <strong>{{ .label }}</strong>
+            <p>{{ .description }}</p>
+          </div>
+          →</a
+        >
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

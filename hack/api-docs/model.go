@@ -1,36 +1,99 @@
 package main
 
 import (
+	"maps"
 	"net/url"
 	"sort"
 	"strings"
+
+	js "github.com/santhosh-tekuri/jsonschema/v6"
 )
 
-func route(id string) string {
-	return "/reference/api/" + id + "/latest/"
+func route(src Source) string {
+	if src.URL != "" {
+		return strings.TrimRight(src.URL, "/") + "/"
+	}
+	return "/reference/api/" + src.ID + "/latest/"
 }
 func slug(s string) string { return url.PathEscape(s) }
+
+// Presentation pointers describe operation views. Reference Objects can place
+// their schemas elsewhere in the source, so follow references before compiling.
+func (d *Document) presentationSchema(p string) *js.Schema {
+	if c := d.Compiled[p]; c != nil {
+		return c
+	}
+	location, _ := url.Parse(d.URI)
+	var value any = d.Root
+	for _, part := range strings.Split(strings.TrimPrefix(p, "/"), "/") {
+		seen := map[string]bool{}
+		for str(obj(value)["$ref"]) != "" {
+			ref, err := url.Parse(str(obj(value)["$ref"]))
+			if err != nil {
+				return nil
+			}
+			location = location.ResolveReference(ref)
+			if seen[location.String()] {
+				return nil
+			}
+			seen[location.String()] = true
+			resource := *location
+			resource.Fragment = ""
+			value, err = pointer(d.Registry.resources[resource.String()], location.Fragment)
+			if err != nil {
+				return nil
+			}
+		}
+		var err error
+		value, err = pointer(value, "/"+part)
+		if err != nil {
+			return nil
+		}
+		location.Fragment += "/" + part
+	}
+	c, _ := d.Compiler.Compile(location.String())
+	return c
+}
+
 func (d *Document) model() Object {
 	ops := d.operations()
 	schemas := []any{}
 	schemaURLs := Object{}
 	for _, name := range keys(obj(obj(d.Root["components"])["schemas"])) {
 		p := "/components/schemas/" + esc(name)
-		u := route(d.Source.ID) + "schemas/" + slug(name) + "/"
+		u := route(d.Source) + "schemas/" + slug(name) + "/"
 		schemaURLs["#"+p] = u
 		schemas = append(schemas, Object{"name": name, "pointer": p, "url": u, "schema": obj(obj(d.Root["components"])["schemas"])[name]})
 	}
 	for _, op := range ops {
 		for _, raw := range arr(op["variants"]) {
 			v := obj(raw)
+			examples := []any{}
+			schemaKey := "schema"
+			if _, ok := v["itemSchema"]; ok {
+				schemaKey = "itemSchema"
+			}
+			schema := d.presentationSchema(str(v["pointer"]) + "/" + schemaKey)
 			for _, rawEx := range arr(v["examples"]) {
 				ex := obj(rawEx)
+				if schema != nil && schema.Validate(ex["value"]) != nil {
+					continue
+				}
 				ex["text"], ex["language"] = exampleText(str(v["media"]), ex["value"])
+				examples = append(examples, ex)
 			}
+			v["examples"] = examples
 		}
 	}
 	for _, op := range ops {
-		op["url"] = route(d.Source.ID) + "operations/" + slug(str(op["id"])) + "/"
+		for _, raw := range arr(op["parameters"]) {
+			parameter := obj(raw)
+			value, hasExample := parameterValue(parameter)
+			if schema := d.presentationSchema(str(parameter["pointer"]) + "/schema"); hasExample && schema != nil && schema.Validate(value) != nil {
+				parameter["exampleUsable"] = false
+			}
+		}
+		op["url"] = route(d.Source) + "operations/" + slug(str(op["id"])) + "/"
 		op["securitySchemes"] = obj(d.Root["components"])["securitySchemes"]
 		op["acceptMedia"] = responseMedia(op)
 		// HEAD negotiates the GET representation but has no response body.
@@ -46,7 +109,39 @@ func (d *Document) model() Object {
 		op["references"] = refs(op["raw"], schemaURLs)
 		op["requestSchema"] = firstRequestSchema(op)
 	}
-	return Object{"experimental": d.Source.Experimental, "id": d.Source.ID, "product": d.Source.Product, "title": d.Source.Title, "version": obj(d.Root["info"])["version"], "description": obj(d.Root["info"])["description"], "url": route(d.Source.ID), "manual": d.Source.Manual, "guides": d.Source.Guides, "connection": d.Source.Connection, "servers": d.Root["servers"], "securitySchemes": obj(d.Root["components"])["securitySchemes"], "tags": d.Root["tags"], "operations": ops, "schemas": schemas, "schemaURLs": schemaURLs, "digest": d.Digest, "owner": d.Source.Owner, "source": d.Source.Source, "sourceURL": "/" + strings.TrimPrefix(d.Source.Source, "content/"), "diagnostics": d.Diagnostics, "schemaCount": d.SchemaCount, "exampleCount": d.ExampleCount}
+	sourceURL := d.Source.SourceURL
+	if sourceURL == "" {
+		sourceURL = "/" + strings.TrimPrefix(d.Source.Source, "content/")
+	}
+	tags := []any{}
+	seenTags := map[string]bool{}
+	addTag := func(raw any) {
+		tag := maps.Clone(obj(raw))
+		name := str(tag["name"])
+		if seenTags[name] {
+			return
+		}
+		seenTags[name] = true
+		if str(tag["kind"]) == "" {
+			tag["kind"] = "nav"
+		}
+		if str(tag["summary"]) == "" {
+			tag["summary"] = tag["x-displayName"]
+			if str(tag["summary"]) == "" {
+				tag["summary"] = tag["name"]
+			}
+		}
+		tags = append(tags, tag)
+	}
+	for _, raw := range arr(d.Root["tags"]) {
+		addTag(raw)
+	}
+	for _, op := range ops {
+		for _, name := range arr(op["tags"]) {
+			addTag(Object{"name": name})
+		}
+	}
+	return Object{"experimental": d.Source.Experimental, "id": d.Source.ID, "product": d.Source.Product, "title": d.Source.Title, "version": obj(d.Root["info"])["version"], "description": obj(d.Root["info"])["description"], "url": route(d.Source), "manual": d.Source.Manual, "guides": d.Source.Guides, "connection": d.Source.Connection, "servers": d.Root["servers"], "securitySchemes": obj(d.Root["components"])["securitySchemes"], "tags": tags, "operations": ops, "schemas": schemas, "schemaURLs": schemaURLs, "digest": d.Digest, "owner": d.Source.Owner, "source": d.Source.Source, "sourceURL": sourceURL, "authoredOverview": d.Source.AuthoredOverview, "schemaCount": d.SchemaCount, "exampleCount": d.ExampleCount}
 }
 func refs(v any, urls Object) []any {
 	found := map[string]bool{}
@@ -83,6 +178,9 @@ func scalar(v any) string {
 	return strings.TrimSpace(string(encoded(v)))
 }
 func parameterValue(p Object) (any, bool) {
+	if usable, ok := p["exampleUsable"].(bool); ok && !usable {
+		return nil, false
+	}
 	if v, ok := p["example"]; ok {
 		return v, true
 	}
@@ -116,6 +214,9 @@ func responseMedia(op Object) string {
 func curlExample(src Source, op Object) (string, []string) {
 	if len(obj(obj(op["raw"])["x-websocket"])) > 0 {
 		return "", []string{"Use a WebSocket client with the subprotocol, credential transport, and frame schemas documented for this operation."}
+	}
+	if _, ok := obj(obj(op["raw"])["responses"])["101"]; ok {
+		return "", []string{"This operation upgrades the HTTP connection. Use a client that supports the protocol described for this operation."}
 	}
 	notes := []string{}
 	args := []string{"curl"}

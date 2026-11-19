@@ -1,0 +1,74 @@
+/* Broad, low-contrast washes shared by each category and its reading pages. */
+.docs-site {
+  --docs-wash-x: 20%;
+  --docs-wash-secondary-x: 85%;
+  --docs-wash-spread: 85%;
+  --docs-wash-depth: 110%;
+  --docs-wash-color: color-mix(
+    in oklch,
+    var(--color-brand-300) 45%,
+    transparent
+  );
+  --docs-wash-secondary-color: color-mix(
+    in oklch,
+    var(--color-docker-air) 85%,
+    transparent
+  );
+  --docs-footer-color: color-mix(
+    in oklch,
+    var(--color-brand-200) 18%,
+    transparent
+  );
+  --docs-wash-height: 440px;
+  --docs-wash:
+    radial-gradient(
+      ellipse var(--docs-wash-spread) var(--docs-wash-depth) at
+        var(--docs-wash-x) -20%,
+      var(--docs-wash-color),
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse 90% var(--docs-wash-depth) at var(--docs-wash-secondary-x) 0%,
+      var(--docs-wash-secondary-color),
+      transparent 85%
+    );
+  --docs-footer-wash: radial-gradient(
+    ellipse 95% 150% at var(--docs-wash-secondary-x) 125%,
+    var(--docs-footer-color),
+    transparent 85%
+  );
+}
+.docs-site:has(.home-hero) {
+  --docs-wash-height: 720px;
+}
+.docs-site[data-category="ai"] {
+  --docs-wash-x: 0%;
+  --docs-wash-secondary-x: 15%;
+}
+.docs-site[data-category="dev"] {
+  --docs-wash-x: 100%;
+  --docs-wash-secondary-x: 85%;
+}
+.docs-site[data-category="admin"] {
+  --docs-wash-x: 50%;
+  --docs-wash-secondary-x: 50%;
+  --docs-wash-spread: 120%;
+  --docs-wash-depth: 65%;
+}
+.dark .docs-site {
+  --docs-wash-color: color-mix(
+    in oklch,
+    var(--color-neutral-700) 32%,
+    transparent
+  );
+  --docs-wash-secondary-color: color-mix(
+    in oklch,
+    var(--color-neutral-800) 20%,
+    transparent
+  );
+  --docs-footer-color: color-mix(
+    in oklch,
+    var(--color-neutral-700) 18%,
+    transparent
+  );
+}

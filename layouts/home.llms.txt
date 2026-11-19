@@ -1,7 +1,4 @@
 {{- $home := site.Home -}}
-{{- $manuals := site.GetPage "/manuals" -}}
-{{- $getStarted := site.GetPage "/get-started" -}}
-{{- $reference := site.GetPage "/reference" -}}
 
 # Docker Documentation
 
@@ -23,54 +20,31 @@ page index, use [llms-full.txt](https://docs.docker.com/llms-full.txt).
 ## Primary sections
 
 {{- range sort (where site.Sections "Title" "!=" "") "Weight" }}
-{{- if not (in (slice "includes" "tags") .Section) }}
+{{- if and (ne .Params.sitemap false) (not (in (slice "includes" "tags") .Section)) }}
 - [{{ .LinkTitle | default .Title }}]({{ .Permalink }}): {{ with .Description }}{{ chomp (replace . "\n" " ") }}{{ else }}{{ .Title }} documentation.{{ end }}
   Markdown: {{ partial "utils/markdown-url.html" . }}
 {{- end }}
 {{- end }}
 
-{{ with $getStarted }}
-## Starter paths
 
-{{- range .Params.tutorials }}
-- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
-{{- end }}
-{{- end }}
+## Learn Docker
 
-{{ with $manuals }}
+- [Docker Learn](https://docs.docker.com/learn/): Tutorials and learning paths.
+
 ## Product documentation
 
-{{- range .Params.sidebar.groups }}
-{{- $group := . }}
-{{- $items := index $manuals.Params ($group | anchorize) }}
-{{- with $items }}
+{{ range hugo.Data.navigation.categories }}
+### {{ .label }}
 
-### {{ $group }}
-{{- range . }}
-- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
-{{- end }}
-{{- end }}
-{{- end }}
-{{- end }}
+{{ range .groups }}{{ range .entries }}{{ $path := .page | default "" }}{{ $label := .label | default "" }}
+{{ with .collection }}{{ $product := index hugo.Data.navigation.products . }}{{ $path = $product.root }}{{ $label = $product.label }}{{ end }}
+{{ with site.GetPage $path }}{{ if ne .Params.sitemap false }}- [{{ $label | default .LinkTitle }}]({{ .Permalink }}): {{ .Description }}
+{{ end }}{{ end }}{{ end }}{{ end }}{{ end }}
 
-{{ with $reference }}
 ## Reference entry points
 
-### File formats
-{{- range .Params.grid_files }}
-- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
-{{- end }}
-
-### Command-line interfaces
-{{- range .Params.grid_clis }}
-- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
-{{- end }}
-
-### APIs
-{{- range .Params.grid_apis }}
-- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
-{{- end }}
-{{- end }}
+{{ range hugo.Data.navigation.references }}{{ $label := .label }}{{ with site.GetPage .root }}{{ if ne .Params.sitemap false }}- [{{ $label }}]({{ partial "navigation/url.html" . | absURL }}): {{ .Description }}
+{{ end }}{{ end }}{{ end }}
 
 ## Retrieval guidance
 

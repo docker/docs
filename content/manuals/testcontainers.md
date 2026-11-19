@@ -11,11 +11,11 @@ params:
 intro:
   - title: What is Testcontainers?
     description: Learn about what Testcontainers does and its key benefits
-    icon: magnifying-glass
+    icon: search
     link: https://testcontainers.com/getting-started/#what-is-testcontainers
   - title: The Testcontainers workflow
     description: Understand the Testcontainers workflow
-    icon: magnifying-glass-plus
+    icon: zoom-in
     link: https://testcontainers.com/getting-started/#testcontainers-workflow
 quickstart:
   - title: Testcontainers for Go
@@ -31,7 +31,7 @@ quickstart:
 Testcontainers is a set of open source libraries that provides easy and lightweight APIs for bootstrapping local development and test dependencies with real services wrapped in Docker containers.
 Using Testcontainers, you can write tests that depend on the same services you use in production without mocks or in-memory services.
 
-{{< grid items=intro >}}
+{{< grid level="2" items=intro >}}
 
 ## Quickstart
 
@@ -58,19 +58,3 @@ If you have further questions about configuration details for your setup or whet
 contact the Testcontainers team and other users from the Testcontainers community on [Slack](https://slack.testcontainers.org/).
 
 {{< grid items=quickstart >}}
-
-## Guides
-
-Explore hands-on Testcontainers guides to learn how to use Testcontainers
-with different languages and popular frameworks:
-
-- [Getting started with Testcontainers for .NET](/guides/testcontainers-dotnet-getting-started/)
-- [Getting started with Testcontainers for Go](/guides/testcontainers-go-getting-started/)
-- [Getting started with Testcontainers for Java](/guides/testcontainers-java-getting-started/)
-- [Getting started with Testcontainers for Node.js](/guides/testcontainers-nodejs-getting-started/)
-- [Getting started with Testcontainers for Python](/guides/testcontainers-python-getting-started/)
-- [Testing a Spring Boot REST API with Testcontainers](/guides/testcontainers-java-spring-boot-rest-api/)
-- [Testcontainers container lifecycle management](/guides/testcontainers-java-lifecycle/)
-- [Replace H2 with a real database for testing](/guides/testcontainers-java-replace-h2/)
-- [Configuration of services running in a container](/guides/testcontainers-java-service-configuration/)
-- [Testing an ASP.NET Core web app](/guides/testcontainers-dotnet-aspnet-core/)

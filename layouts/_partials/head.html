@@ -1,3 +1,4 @@
+{{ partialCached "navigation/validate.html" "navigation" }}
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 {{ partial "meta.html" . }}
@@ -17,7 +18,7 @@
   {{- end -}}
 {{ end -}}
 {{ partial "utils/css.html" . }}
-<link href="/pagefind/pagefind-component-ui.css" rel="stylesheet" />
+
 {{- if hugo.IsProduction -}}
   <script
     src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
@@ -73,9 +74,9 @@
     </script>
   {{- end -}}
 {{- end -}}
-{{/* preload Roboto Flex as it's a critical font: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload */}}
+{{/* Preload Onest as the primary text font: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload */}}
 <link
-  href="/assets/fonts/RobotoFlex.woff2"
+  href="/assets/fonts/onest-latin.woff2"
   rel="preload"
   as="font"
   type="font/woff2"
@@ -83,8 +84,7 @@
 />
 {{ $theme := resources.Get "js/theme.js" | js.Build (dict "minify" true) }}
 <script>{{ $theme.Content | safeJS }}</script>
-{{ $js := resources.Match "js/src/**.js"
-  | resources.Concat "scripts.js"
+{{ $js := resources.Get "js/main.js"
   | js.Build (dict "minify" true "targetPath" "scripts.js")
 }}
-<script defer src="{{ $js.Permalink }}"></script>
+<script defer src="{{ $js.RelPermalink }}"></script>
