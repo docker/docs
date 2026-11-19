@@ -1,20 +1,20 @@
 ---
 url: /ai/mcp-catalog-and-toolkit/mcp-gateway/
-title: MCP Gateway
+title: MCP Gateway for MCP Toolkit
 linkTitle: Gateway
-description: "Docker's MCP Gateway provides secure, centralized, and scalable orchestration of AI tools through containerized MCP servers, empowering developers, operators, and security teams."
+description: Run the MCP Gateway used by Docker MCP Toolkit to connect AI clients to servers in your profiles.
 keywords: MCP Gateway
 weight: 40
-aliases:
-  - /ai/mcp-gateway/
 ---
 
 > [!NOTE]
-> MCP Gateway as part of Docker AI Governance is an invite-only feature. [Contact Docker Sales](https://www.docker.com/pricing/contact-sales/) to learn more.
+> For a Docker-hosted or self-hosted gateway with a web console for publishing
+> servers and managing team access, see [MCP Gateway](/manuals/ai/mcp-gateway/_index.md).
 
-The MCP Gateway is Docker's open source solution for orchestrating Model
-Context Protocol (MCP) servers. It acts as a centralized proxy between clients
-and servers, managing configuration, credentials, and access control.
+The MCP Gateway used by MCP Toolkit is Docker's open source solution for
+orchestrating Model Context Protocol (MCP) servers. It acts as a centralized
+proxy between clients and servers, managing configuration, credentials, and
+access control.
 
 When using MCP servers without the MCP Gateway, you need to configure
 applications individually for each AI application. With the MCP Gateway, you

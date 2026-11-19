@@ -22,9 +22,9 @@ host-managed gateway provides a single path for credentials, explicit server
 loading, live updates, and organization governance.
 
 > [!NOTE]
-> The Docker Sandboxes MCP gateway is separate from the Docker Desktop MCP
-> Toolkit. You don't need the Docker Desktop MCP Toolkit to use `sbx mcp`, and
-> MCP Toolkit server settings aren't shared with Docker Sandboxes.
+> To publish servers, create shared gateways, and manage team access through a
+> web console, see [MCP Gateway](/manuals/ai/mcp-gateway/_index.md).
+> This page covers configuring MCP for Docker Sandboxes with `sbx`.
 
 ## Prerequisites
 
