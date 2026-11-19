@@ -129,6 +129,53 @@
     line-height: 1.65;
   }
 
+  .accordion {
+    margin-block: 1.5rem;
+    border: 1px solid var(--color-control-edge);
+    border-radius: 0.75rem;
+    background: var(--color-surface-raised);
+    color: var(--color-surface-foreground);
+  }
+  .accordion > summary {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    padding: 0.75rem 1rem;
+    list-style: none;
+    border-radius: calc(0.75rem - 1px);
+  }
+  .accordion > summary::-webkit-details-marker {
+    display: none;
+  }
+  .accordion > summary:hover {
+    background: var(--color-accent);
+  }
+  .accordion > summary:focus-visible {
+    outline-offset: -4px;
+  }
+  .accordion-title {
+    flex: 1;
+    min-width: 0;
+    font-weight: 550;
+  }
+  .accordion[open] > summary {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .accordion[open] > summary > .ui-icon:last-child {
+    transform: rotate(180deg);
+  }
+  .accordion-content {
+    padding: 0 1rem 1rem;
+  }
+  .accordion-content > :first-child {
+    margin-top: 0;
+  }
+  .accordion-content > :last-child {
+    margin-bottom: 0;
+  }
+
   .admonition {
     --admonition-background: var(--color-surface-raised);
     --admonition-foreground: var(--color-surface-foreground);
