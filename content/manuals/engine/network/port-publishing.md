@@ -171,11 +171,17 @@ This mode is included for compatibility with legacy default behaviour.
 
 The gateway mode also affects communication between containers that
 are connected to different Docker networks on the same host.
-- In `nat` and `nat-unprotected` modes, containers in other bridge
-  networks can only access published ports via the host addresses they
-  are published to. Direct routing from other networks is not allowed.
-- In `routed` mode containers in other networks can use direct
-  routing to access ports, without going via a host address.
+- In `nat` mode, containers in other bridge networks can only access
+  published ports via the host addresses they are published to. To let
+  them use direct routing to reach published ports, set the daemon option
+  `allow-direct-routing`, or name the other network's bridge interface in
+  this network's `com.docker.network.bridge.trusted_host_interfaces`
+  option. See [Direct routing to containers in bridge networks](#direct-routing-to-containers-in-bridge-networks).
+- In `nat-unprotected` mode, containers in other networks can use direct
+  routing to access any port on a container's address, including ports
+  that are not published.
+- In `routed` mode, containers in other networks can use direct routing
+  to access published ports, without going via a host address.
 
 In `routed` mode, a host port in a `-p` or `--publish` port mapping is
 not used, and the host address is only used to decide whether to apply
