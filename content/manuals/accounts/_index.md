@@ -1,4 +1,4 @@
----
+o---
 title: Accounts
 description: >
   Manage Docker individual accounts and organization administration, including
