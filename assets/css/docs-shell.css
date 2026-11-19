@@ -383,6 +383,12 @@
 .not-found-search {
   margin-bottom: 2rem;
 }
+.not-found-guides {
+  display: none;
+}
+[data-guides-not-found] .not-found-guides {
+  display: flex;
+}
 @media (scripting: none) {
   .not-found-search {
     display: none;
