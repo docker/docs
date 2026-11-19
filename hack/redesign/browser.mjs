@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import verifyInteractions from "./interactions.mjs";
 import verifyWashes from "./washes.mjs";
 import verifyAskDock from "./ask-dock.mjs";
+import verifyChatLayout from "./chat-layout.mjs";
 import verifyLayout from "./layout.mjs";
 import verifyClipboardFocus from "./clipboard.mjs";
 import verifyDiscovery from "./discovery.mjs";
@@ -391,6 +392,7 @@ try {
   await verifyInteractions(page, base);
   await verifyWashes(page, base);
   await verifyAskDock(page, base);
+  await verifyChatLayout(page, base);
   await verifyLayout(page, base);
   await verifyClipboardFocus(page, base);
   await verifyDiscovery(page, base);
