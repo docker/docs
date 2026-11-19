@@ -224,6 +224,15 @@
   overflow-x: auto;
   white-space: pre;
 }
+.gordon-code {
+  position: relative;
+}
+.gordon-code pre {
+  padding-right: 2.5rem;
+}
+.gordon-code .code-copy-button {
+  opacity: 1;
+}
 .gordon-drawer pre code {
   font-family: var(--font-mono);
   font-size: 0.8125rem;
