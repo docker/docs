@@ -74,6 +74,60 @@ export default async function verifySearchChatRegressions(parentPage, base) {
     `,
       }),
     );
+    // Editing must not collapse the homepage while replacement results load.
+    await page.goto(base + "/");
+    const homeQuery = page.locator("#home-query");
+    const homeResults = page.locator(".home-hero .search-results li");
+    await homeQuery.fill("docker");
+    await page.waitForFunction(
+      () =>
+        document.querySelectorAll(".home-hero .search-results li").length ===
+        12,
+    );
+    const installTop = await page
+      .locator(".home-install")
+      .evaluate((element) => element.getBoundingClientRect().top);
+    await homeQuery.fill("slow");
+    assert.equal(await homeResults.count(), 12);
+    await page.waitForFunction(() => Boolean(window.releaseSearch));
+    assert.equal(await homeResults.count(), 12);
+    assert.equal(
+      await page
+        .locator(".home-install")
+        .evaluate((element) => element.getBoundingClientRect().top),
+      installTop,
+    );
+    assert.equal(
+      await page
+        .locator(".home-hero .search-results")
+        .getAttribute("aria-busy"),
+      "true",
+    );
+    await homeQuery.fill("");
+    await page.evaluate(() => window.releaseSearch());
+    assert.equal(await homeResults.count(), 0);
+
+    // Homepage Enter keeps its Ask behavior after the search debounce changes.
+    await mockAnswer(page, "Answer from the homepage");
+    await homeQuery.fill("Explain build caching");
+    await homeQuery.evaluate((input) =>
+      input.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          key: "Enter",
+          bubbles: true,
+          isComposing: true,
+        }),
+      ),
+    );
+    assert.equal(await page.locator("#gordon-chat").isVisible(), false);
+    await homeQuery.press("Enter");
+    await page.waitForFunction(() =>
+      document
+        .querySelector("#gordon-chat > [role=status]")
+        .textContent.includes("Answer from the homepage"),
+    );
+    assert.equal(await page.evaluate(() => window.chatRequests.length), 1);
+
     await page.goto(base + "/build/");
     await page.locator("[data-open-search]").click();
     const query = page.locator("#search-query");

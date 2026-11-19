@@ -7,32 +7,43 @@ export default () => ({
   loading: false,
   status: "",
   sequence: 0,
-  queueSearch(query) {
+  queueSearch(query, composing = false) {
     this.query = query;
     ++this.sequence;
     clearTimeout(this.timer);
-    this.results = [];
-    this.matches = [];
-    this.loading = false;
-    this.status = "";
-    if (query.trim()) this.timer = setTimeout(() => this.search(), 180);
+    this.loading = Boolean(query.trim());
+    if (!query.trim()) {
+      this.results = [];
+      this.matches = [];
+      this.status = "";
+    }
+    if (query.trim() && !composing)
+      this.timer = setTimeout(() => this.search(), 400);
+  },
+  onEnter(event) {
+    if (event.isComposing || event.keyCode === 229) return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.metaKey || event.ctrlKey) this.ask();
+    else this.search();
   },
   destroy() {
     clearTimeout(this.timer);
     ++this.sequence;
   },
   async search() {
+    clearTimeout(this.timer);
     const sequence = ++this.sequence;
     const query = this.query.trim();
-    this.results = [];
-    this.matches = [];
     if (!query) {
+      this.results = [];
+      this.matches = [];
       this.status = "";
       this.loading = false;
       return;
     }
     this.loading = true;
-    this.status = "Searching…";
+    if (!this.results.length) this.status = "Searching…";
     try {
       pagefind ??= import("/pagefind/pagefind.js")
         .then(async (api) => {
@@ -52,10 +63,18 @@ export default () => ({
           throw error;
         });
       const api = await pagefind;
+      if (sequence !== this.sequence) return;
       const response = await api.search(query);
       if (sequence !== this.sequence) return;
+      const results = await Promise.all(
+        response.results.slice(0, 12).map((result) => result.data()),
+      );
+      if (sequence !== this.sequence) return;
       this.matches = response.results;
-      await this.loadMore();
+      this.results = results;
+      this.status = this.matches.length
+        ? `Showing ${this.results.length} of ${this.matches.length} results`
+        : "No results. Try another search or ask Docker.";
     } catch {
       if (sequence === this.sequence)
         this.status = "Search is unavailable. You can still ask Docker.";
