@@ -1,50 +1,62 @@
-{{ with .Inner }}{{/* don't do anything, just call it */}}{{ end }}
-{{ $first := urlize (index (.Store.Get "tabs") 0).name }}
+{{ with .Inner }}{{ end }}
+{{ $tabs := .Store.Get "tabs" }}
+{{ $first := urlize (index $tabs 0).name }}
 {{ $group := .Get "group" }}
-{{ $groupID := fmt.Printf "tabgroup-%s" (urlize $group) }}
-{{ $persist := .Get "persist" }}
-
-
+{{ $id := printf "tabs-%d" .Ordinal }}
+{{ $names := slice }}
+{{ range $tabs }}{{ $names = $names | append (urlize .name) }}{{ end }}
 <div
   class="tabs"
-  {{ with $group }}
-    {{ if $persist }}
-      x-data="{ selected: $persist('{{ $first }}').as('{{ $groupID }}') }"
-    {{ else }}
-      x-data="{ selected: '{{ $first }}' }"
-    {{ end }}
-    @tab-select.window="$event.detail.group === '{{ . }}' ? selected =
-    $event.detail.name : null"
+  x-data="{ options: {{ $names | jsonify }}, init() { if (!this.options.includes(this.selected)) this.selected = this.options[0] }, selected: {{ if and $group (.Get "persist") }}
+    $persist('{{ $first }}').as('tabgroup-{{ $group | urlize }}')
   {{ else }}
-    x-data="{ selected: '{{ $first }}' }"
+    '{{ $first }}'
+  {{ end }} }"
+  {{ with $group }}
+    @tab-select.window="if ($event.detail.group === '{{ . }}' &&
+    options.includes($event.detail.name)) selected = $event.detail.name"
   {{ end }}
-  aria-role="tabpanel"
 >
-  <div aria-role="tablist" class="tablist">
-    {{ range (.Store.Get "tabs") }}
+  <div
+    role="tablist"
+    aria-label="{{ $group | default "Options" }}"
+    class="tablist"
+    @keydown.right.prevent="const tabs = Array.from($el.querySelectorAll('[role=tab]')); const next = tabs[(tabs.indexOf(document.activeElement) + 1) % tabs.length]; next.focus(); next.click()"
+    @keydown.left.prevent="const tabs = Array.from($el.querySelectorAll('[role=tab]')); const next = tabs[(tabs.indexOf(document.activeElement) + tabs.length - 1) % tabs.length]; next.focus(); next.click()"
+    @keydown.home.prevent="$el.firstElementChild.focus(); $el.firstElementChild.click()"
+    @keydown.end.prevent="$el.lastElementChild.focus(); $el.lastElementChild.click()"
+  >
+    {{ range $tabs }}
+      {{ $name := .name | urlize }}
       <button
+        type="button"
+        role="tab"
+        id="{{ $id }}-{{ $name }}"
+        aria-controls="{{ $id }}-{{ $name }}-panel"
         class="tab-item"
-        :class="selected === '{{ .name | urlize }}' &&
-          'border-blue border-b-4 dark:border-b-blue-600'"
+        :aria-selected="selected === '{{ $name }}'"
+        :tabindex="selected === '{{ $name }}' ? 0 : -1"
         {{ if $group }}
           @click="$dispatch('tab-select', { group: '{{ $group }}', name:
-          '{{ .name | urlize }}'})"
+          '{{ $name }}' })"
         {{ else }}
-          @click="selected = '{{ .name | urlize }}'"
+          @click="selected = '{{ $name }}'"
         {{ end }}
       >
         {{ .name | page.RenderString }}
       </button>
     {{ end }}
   </div>
-  <div>
-    {{ range (.Store.Get "tabs") }}
-      <div
-        aria-role="tab"
-        :class="selected !== '{{ .name | urlize }}' && 'hidden'"
-      >
-        {{ .content | page.RenderString (dict "display" "block") }}
-      </div>
-    {{ end }}
-  </div>
+  {{ range $tabs }}
+    {{ $name := .name | urlize }}
+    <div
+      role="tabpanel"
+      id="{{ $id }}-{{ $name }}-panel"
+      aria-labelledby="{{ $id }}-{{ $name }}"
+      tabindex="0"
+      x-show="selected === '{{ $name }}'"
+    >
+      {{ .content | page.RenderString (dict "display" "block") }}
+    </div>
+  {{ end }}
 </div>

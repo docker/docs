@@ -12,27 +12,27 @@ toc_min: 1
 grid:
   - title: Version and name top-level element
     description: Understand version and name attributes for Compose.
-    icon: document-text
+    icon: file-text
     link: /reference/compose-file/version-and-name/
   - title: Services top-level element
     description: Explore all services attributes for Compose.
-    icon: wrench-screwdriver
+    icon: wrench
     link: /reference/compose-file/services/
   - title: Networks top-level element
     description: Find all networks attributes for Compose.
-    icon: server-stack
+    icon: server
     link: /reference/compose-file/networks/
   - title: Volumes top-level element
     description: Explore all volumes attributes for Compose.
-    icon: circle-stack
+    icon: database
     link: /reference/compose-file/volumes/
   - title: Configs top-level element
     description: Find out about configs in Compose.
-    icon: cog-6-tooth
+    icon: settings
     link: /reference/compose-file/configs/
   - title: Secrets top-level element
     description: Learn about secrets in Compose.
-    icon: lock-closed
+    icon: lock
     link: /reference/compose-file/secrets/
 aliases:
   - /compose/compose-file/
@@ -56,4 +56,4 @@ Use the following links to navigate key sections of the Compose Specification.
 > Want a better editing experience for Compose files in VS Code?
 > Check out the [Docker DX](https://marketplace.visualstudio.com/items?itemName=docker.docker) extension for linting, code navigation, and vulnerability scanning.
 
-{{< grid >}}
+{{< grid level="2" >}}

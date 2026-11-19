@@ -1,0 +1,31 @@
+<div class="search-results">
+  <p role="status" aria-atomic="true" x-text="status"></p>
+  <ul>
+    <template x-for="result in results" :key="result.url"
+      ><li>
+        <a :href="result.url">
+          <span
+            class="search-result-context"
+            x-show="result.meta.breadcrumbs"
+            x-text="result.meta.breadcrumbs"
+          ></span>
+          <span class="search-result-title" x-text="result.meta.title"></span>
+          <span
+            class="search-result-description"
+            x-text="result.meta.description"
+          ></span>
+        </a></li
+    ></template>
+  </ul>
+  <button
+    type="button"
+    class="search-load-more"
+    x-show="results.length < matches.length"
+    x-cloak
+    :aria-disabled="loading"
+    :aria-busy="loading"
+    @click="if (!loading) loadMore(true)"
+  >
+    Load more results
+  </button>
+</div>

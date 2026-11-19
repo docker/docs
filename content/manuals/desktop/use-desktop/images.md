@@ -108,4 +108,4 @@ Hovering over an image tag reveals two options:
 
 ## Additional resources
 
-- [What is an image?](/get-started/docker-concepts/the-basics/what-is-an-image.md)
+- [What is a container image?](https://docs.docker.com/learn/content/what-is-a-container/)

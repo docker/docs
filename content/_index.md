@@ -11,18 +11,14 @@ reference material for everyday development and operations tasks.
 
 ## Browse docs by area
 
-- [Get started](/get-started/): Run an application, sandbox an AI agent, or
-  roll out Docker.
-- [Guides](/guides/): Follow task-focused walkthroughs for common workflows.
-- [Manuals](/manuals/): Install, configure, and use Docker products.
+- [Learn](https://docs.docker.com/learn/): Follow tutorials and learning paths for Docker.
+- [Products](/c/_index.md): Install, configure, and use Docker products.
 - [Reference](/reference/): Browse CLI, API, and file format documentation.
-
-{{< whats-new >}}
 
 ## Common questions
 
-- [How do I get started with Docker?](/get-started/)
-- [How do I containerize an application?](/get-started/tutorials/run-an-app/)
-- [Can I run my AI agent in a sandbox?](/get-started/tutorials/run-an-agent/)
+- [How do I get started with Docker?](https://docs.docker.com/learn/)
+- [How do I containerize an application?](https://docs.docker.com/learn/paths/get-started-with-docker-containers/)
+- [Can I run my AI agent in a sandbox?](https://docs.docker.com/learn/content/run-your-first-sandbox/)
 - [What are Docker Hardened Images?](/dhi/)
 - [Why should I use Docker Compose?](/compose/)

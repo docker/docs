@@ -1,0 +1,19 @@
+{{- $entry := . -}}{{- $path := .page | default "" -}}{{- $label := .label | default "" -}}
+{{- with .collection -}}
+  {{- $product := index hugo.Data.navigation.products . -}}{{- $path = $product.root -}}{{- $label = $product.label -}}
+{{- end -}}
+{{- with site.GetPage $path -}}
+  {{- if ne .Params.sitemap false -}}
+    <li>
+      <a href="{{ partial "navigation/url.html" . }}"
+        ><div>
+          <strong>{{ $label | default .LinkTitle }}</strong>
+          <p>{{ partial "utils/description.html" . | plainify }}</p>
+        </div>
+        {{ partial "ui-icon.html" (dict "name" "arrow-right") }}</a
+      >
+    </li>
+  {{- end -}}
+{{- else -}}
+  {{- errorf "Discovery page not found: %s" $path -}}
+{{- end -}}

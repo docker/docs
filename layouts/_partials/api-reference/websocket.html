@@ -14,6 +14,8 @@
   {{ end }}
   <details>
     <summary>Handshake, resume fields, and close codes</summary>
-    <pre><code>{{ $socket | jsonify (dict "indent" "  ") }}</code></pre>
+    <pre
+      tabindex="0"
+    ><code>{{ $socket | jsonify (dict "indent" "  ") }}</code></pre>
   </details>
 </section>

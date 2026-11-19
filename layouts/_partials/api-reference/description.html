@@ -1,8 +1,14 @@
 {{- $text := .text | default "" -}}
 {{- $api := .api -}}
+{{- range findRE `\(#section/[^)]+\)` $text -}}
+  {{- $section := strings.TrimPrefix "(#section/" . | strings.TrimSuffix ")" -}}
+  {{- $text = replace $text . (printf "(%s#%s)" $api.url ($section | urls.PathUnescape | anchorize)) -}}
+{{- end -}}
 {{- range $api.operations -}}
   {{- $text = replace $text (printf "(#operation/%s)" .id) (printf "(%s)" .url) -}}
   {{- $text = replaceRE (printf "\\(#tag/[^)]+/operation/%s\\)" .id) (printf "(%s)" .url) $text -}}
+  {{- $endpoint := printf "`%s %s`" .method .path -}}
+  {{- $text = replaceRE (printf `(\[[^\]]*\Q%s\E[^\]]*\])\(#operation/[^)]+\)` $endpoint) (printf `${1}(%s)` .url) $text -}}
 {{- end -}}
 {{- range $api.schemas -}}
   {{- $text = replace $text (printf "(#schema-%s)" .name) (printf "(%s)" .url) -}}

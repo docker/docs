@@ -13,7 +13,7 @@ grid:
   - title: Quickstart
     link: /scout/quickstart/
     description: Learn what Docker Scout can do, and how to get started.
-    icon: magnifying-glass-plus
+    icon: zoom-in
   - title: Image analysis
     link: /scout/image-analysis/
     description: Reveal and dig into the composition of your images.
@@ -21,17 +21,17 @@ grid:
   - title: Advisory database
     link: /scout/advisory-db-sources/
     description: Learn about the information sources that Docker Scout uses.
-    icon: circle-stack
+    icon: database
   - title: Integrations
     description: |
       Connect Docker Scout with your CI, registries, and other third-party services.
     link: /scout/integrations/
-    icon: arrows-right-left
+    icon: arrow-right-left
   - title: Dashboard
     link: /scout/dashboard/
     description: |
       The web interface for Docker Scout.
-    icon: squares-2x2
+    icon: layout-grid
   - title: Policy
     link: /scout/policy/
     description: |
@@ -41,7 +41,7 @@ grid:
     link: /subscription-billing/manage/plans/
     description: |
       A Personal subscription includes up to 1 repository. Upgrade for more.
-    icon: arrow-up-circle
+    icon: circle-arrow-up
 ---
 
 Container images consist of layers and software packages, which are susceptible to vulnerabilities.
@@ -54,4 +54,4 @@ The SBOM is matched against a continuously updated vulnerability database to pin
 Docker Scout is a standalone service and platform that you can interact with
 using Docker Hub, the Docker CLI, and the Docker Scout Dashboard.
 
-{{< grid >}}
+{{< grid level="2" >}}

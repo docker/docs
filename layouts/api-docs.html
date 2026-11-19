@@ -5,10 +5,7 @@
   <script src="{{ $script.RelPermalink }}" defer></script>
 {{ end }}
 {{ define "left" }}
-  {{ partial "sidebar/mainnav.html" . }}
-  {{ if eq .Params.view "catalog" }}
-    {{ partial "sidebar/sections.html" . }}
-  {{ else }}
+  {{ if ne .Params.view "catalog" }}
     {{ partial "api-reference/navigation.html" . }}
   {{ end }}
 {{ end }}
@@ -18,15 +15,8 @@
     {{ $api := dict }}{{ range $data.apis }}
       {{ if eq .id $.Params.apiID }}{{ $api = . }}{{ end }}
     {{ end }}
+    {{ $connectionID := partial "api-reference/connection-id.html" $api }}
     {{ if eq .Params.view "catalog" }}
-      <p class="api-eyebrow">Developer reference</p>
-      <h1>Docker APIs</h1>
-      <p class="api-lead">
-        Build with Docker, from your local daemon to hosted services.
-      </p>
-      <p>
-        Choose an API to find connection guidance, operations, and data models.
-      </p>
       <div class="api-cards">
         {{ range $data.apis }}
           <a class="api-card" href="{{ .url }}"
@@ -58,11 +48,6 @@
         {{ end }}
       </div>
     {{ else }}
-      <nav class="api-crumbs" aria-label="API breadcrumb">
-        <a href="/reference/api/">APIs</a> /
-        <a href="{{ $api.url }}">{{ $api.title }}</a> /
-        <span>API {{ $api.version }}</span>
-      </nav>
       {{ if $api.experimental }}
         <p class="api-label">Experimental</p>
         {{ if eq .Params.view "overview" }}
@@ -102,7 +87,6 @@
             Hosted API
           {{ end }}
         </p>
-        <h1>{{ $api.title }} API</h1>
         <p class="api-lead">
           API {{ $api.version }} · {{ len $api.operations }} operations ·
           {{ len $api.schemas }} named schemas
@@ -110,10 +94,10 @@
         <section class="api-overview" aria-labelledby="api-overview-title">
           <h2 id="api-overview-title">Overview</h2>
           <div class="prose dark:prose-invert">
-            {{ partial "api-reference/description.html" (dict "text" $api.description "api" $api) | markdownify }}
+            {{ partial "api-reference/prose.html" (dict "text" $api.description "api" $api) }}
           </div>
         </section>
-        <section class="api-connection" id="authentication">
+        <section class="api-connection" id="{{ $connectionID }}">
           <h2>
             {{ if eq $api.connection "unix" }}
               Connecting to
@@ -129,7 +113,9 @@
             {{ end }}
           {{ end }}
           {{ if eq $api.connection "unix" }}
-            <pre><code>curl --unix-socket /var/run/docker.sock http://localhost/v{{ $api.version }}/version</code></pre>
+            <pre
+              tabindex="0"
+            ><code>curl --unix-socket /var/run/docker.sock http://localhost/v{{ $api.version }}/version</code></pre>
           {{ else }}
             {{ range $api.servers }}<code>{{ .url }}</code>{{ end }}
           {{ end }}{{ range $api.guides }}
@@ -148,7 +134,7 @@
             <section id="tag-{{ .name | urlize }}">
               <h2>{{ .summary }}</h2>
               <div class="prose dark:prose-invert">
-                {{ partial "api-reference/description.html" (dict "text" .description "api" $api) | markdownify }}
+                {{ partial "api-reference/prose.html" (dict "text" .description "api" $api) }}
               </div>
             </section>
           {{ end }}
@@ -160,8 +146,10 @@
             type="search"
             placeholder="Method, path, or operation name"
             data-api-filter
+            aria-controls="api-operations"
         /></label>
-        <div class="api-operation-list">
+        <p class="sr-only" role="status" data-api-filter-status></p>
+        <div id="api-operations" class="api-operation-list">
           {{ range $api.operations }}
             <a class="api-operation-row" href="{{ .url }}" data-api-filter-item
               ><span class="api-method" data-method="{{ .method }}"
@@ -182,7 +170,6 @@
       {{ else if eq .Params.view "operation" }}
         {{ range $api.operations }}
           {{ if eq .id $.Params.operationID }}
-            <h1>{{ .summary }}</h1>
             <div class="api-signature">
               <span class="api-method" data-method="{{ .method }}"
                 >{{ .method }}</span
@@ -194,11 +181,11 @@
             <div class="api-operation-grid">
               <div class="api-reading">
                 <div class="api-description prose dark:prose-invert">
-                  {{ partial "api-reference/description.html" (dict "text" .description "api" $api) | markdownify }}
+                  {{ partial "api-reference/prose.html" (dict "text" .description "api" $api "level" 2) }}
                 </div>
                 <h2>Connection and access</h2>
                 <p>
-                  <a href="{{ $api.url }}#authentication"
+                  <a href="{{ $api.url }}#{{ $connectionID }}"
                     >API connection and authentication guidance</a
                   >
                 </p>
@@ -262,12 +249,14 @@
                       {{ end }}
                     </h3>
                     <div class="prose dark:prose-invert">
-                      {{ partial "api-reference/description.html" (dict "text" .description "api" $api) | markdownify }}
+                      {{ partial "api-reference/prose.html" (dict "text" .description "api" $api) }}
                     </div>
                     {{ if isset . "schema" }}
                       {{ partial "api-reference/schema.html" (dict "schema" .schema "api" $api "depth" 0) }}
                     {{ end }}{{ with .content }}
-                      <pre><code>{{ . | jsonify (dict "indent" "  ") }}</code></pre>
+                      <pre
+                        tabindex="0"
+                      ><code>{{ . | jsonify (dict "indent" "  ") }}</code></pre>
                     {{ end }}{{ with .style }}
                       <p>Serialization: <code>{{ . }}</code></p>
                     {{ end }}
@@ -300,7 +289,7 @@
                       {{ end }}
                     </h3>
                     <div class="prose dark:prose-invert">
-                      {{ partial "api-reference/description.html" (dict "text" $v.description "api" $api) | markdownify }}
+                      {{ partial "api-reference/prose.html" (dict "text" $v.description "api" $api) }}
                     </div>
                     {{ if $v.media }}
                       <p class="api-media"><code>{{ $v.media }}</code></p>
@@ -313,7 +302,9 @@
                         <div class="api-field">
                           <code>{{ $name }}</code>
                           <p>{{ $header.description }}</p>
-                          <pre><code>{{ $header | jsonify (dict "indent" "  ") }}</code></pre>
+                          <pre
+                            tabindex="0"
+                          ><code>{{ $header | jsonify (dict "indent" "  ") }}</code></pre>
                         </div>
                       {{ end }}
                     {{ end }}
@@ -330,7 +321,9 @@
                           <summary>
                             {{ $key }}: content types and part headers
                           </summary>
-                          <pre><code>{{ . | jsonify (dict "indent" "  ") }}</code></pre>
+                          <pre
+                            tabindex="0"
+                          ><code>{{ . | jsonify (dict "indent" "  ") }}</code></pre>
                         </details>
                       {{ end }}
                     {{ end }}
@@ -348,7 +341,7 @@
                         {{ end }}{{ range $j,$ex := $v.examples }}
                           <div data-api-example="{{ $j }}">
                             <h4>{{ $ex.name }}</h4>
-                            <pre><code>{{ $ex.text }}</code></pre>
+                            <pre tabindex="0"><code>{{ $ex.text }}</code></pre>
                           </div>
                         {{ end }}
                       </div>
@@ -363,7 +356,9 @@
                 {{ end }}
                 <details>
                   <summary>Complete operation contract</summary>
-                  <pre><code>{{ .raw | jsonify (dict "indent" "  ") }}</code></pre>
+                  <pre
+                    tabindex="0"
+                  ><code>{{ .raw | jsonify (dict "indent" "  ") }}</code></pre>
                 </details>
               </div>
               <aside class="api-request">
@@ -371,8 +366,10 @@
                   <h2>
                     {{ if .curl }}
                       Example request
-                    {{ else }}
+                    {{ else if index .raw "x-websocket" }}
                       WebSocket client
+                    {{ else }}
+                      Client guidance
                     {{ end }}
                   </h2>
                   {{ if .curl }}<span>Shell</span>{{ end }}
@@ -382,8 +379,15 @@
                     Replace placeholders and supply the required credentials or
                     request body.
                   </p>
-                  <pre><code data-api-copy-source>{{ .curl }}</code></pre>
+                  <pre
+                    tabindex="0"
+                  ><code data-api-copy-source>{{ .curl }}</code></pre>
                   <button type="button" data-api-copy>Copy request</button>
+                  <span
+                    class="sr-only"
+                    role="status"
+                    data-api-copy-status
+                  ></span>
                 {{ end }}{{ range .curlNotes }}<p>{{ . }}</p>{{ end }}
               </aside>
             </div>
@@ -393,7 +397,6 @@
         {{ range $api.schemas }}
           {{ if eq .name $.Params.schemaName }}
             <p class="api-eyebrow">Schema</p>
-            <h1>{{ .name }}</h1>
             {{ partial "api-reference/schema.html" (dict "schema" .schema "api" $api "depth" 0) }}
           {{ end }}
         {{ end }}

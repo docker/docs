@@ -2,7 +2,8 @@
 
 This guide explains how to use components, shortcodes, and special features
 when writing Docker documentation. For writing style and grammar, see
-[STYLE.md](STYLE.md).
+[STYLE.md](STYLE.md). For site layouts and navigation ownership, see
+[ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Front matter
 
@@ -59,32 +60,6 @@ params:
       text: Beta
 ---
 ```
-
-### Series (guide) pages
-
-Section pages under `content/guides/` automatically use the `series` layout
-(via a Hugo cascade in `hugo.yaml`). Series pages support additional front
-matter parameters for the metadata card:
-
-```yaml
----
-title: Getting started
-description: Learn the basics of Docker
-summary: |
-  A longer summary shown on the series landing page.
-params:
-  proficiencyLevel: Beginner
-  time: 15 minutes
-  prerequisites: None
----
-```
-
-| Field            | Description                              |
-| ---------------- | ---------------------------------------- |
-| summary          | Extended description for the series page |
-| proficiencyLevel | Skill level (Beginner, Intermediate)     |
-| time             | Estimated time to complete               |
-| prerequisites    | Prerequisites or "None"                  |
 
 ### Catalog navigation
 
@@ -358,9 +333,13 @@ Create card layouts for organizing content.
 {{</* card
   title="Get started"
   description="Learn Docker basics"
-  link="/get-started/"
+  link="https://docs.docker.com/learn/"
 */>}}
 ```
+
+Card headings default to level three. Set `level="2"` for a card directly under
+the page title, or another level that fits the surrounding outline. The `grid`
+shortcode also defaults to level three and accepts the same `level` option.
 
 ### Recipe lists
 
@@ -376,16 +355,23 @@ screens. The Markdown output includes the same links and descriptions.
 
 ### Icons
 
-Use Material Symbols icons in your content.
+Cards and accordions accept an `icon` field. Use a canonical name from the
+vendored Trident/Lucide set in `assets/icons/trident/`, without the `.svg`
+extension:
 
-**Syntax:**
-
-```markdown
-{{</* icon name="check_circle" */>}}
+```yaml
+icon: settings
 ```
 
-Browse available icons at
-[Material Symbols](https://fonts.google.com/icons).
+For product logos or other local artwork, use an explicit SVG asset path:
+
+```yaml
+icon: /icons/dhi.svg
+```
+
+Templates render interface icons with `ui-icon.html`. The `icon.html` partial
+supports both canonical interface names and explicit SVG paths. To add an
+interface icon, follow the [vendoring instructions](hack/redesign/README.md#theme-and-assets).
 
 ## Callouts
 
@@ -578,7 +564,7 @@ with source filenames.
 **Internal link (different section):**
 
 ```markdown
-[Get started](/get-started/overview.md)
+[Docker Engine](/manuals/engine/_index.md)
 ```
 
 **Link to heading:**
@@ -627,7 +613,9 @@ with source filenames.
 
 ## Tables
 
-Use standard Markdown table syntax with sentence case for headings.
+Use standard Markdown table syntax with sentence case for headings. Give each
+table an accessible name that describes its purpose. Add an `aria-label` block
+attribute after the table, or use HTML with a caption for a complex table.
 
 **Example:**
 
@@ -637,6 +625,7 @@ Use standard Markdown table syntax with sentence case for headings.
 | Docker Compose | Multi-container orchestration   | All          |
 | Docker Scout   | Security vulnerability scanning | Business     |
 | Build Cloud    | Remote build service            | Pro, Team    |
+{aria-label="Docker product availability by subscription"}
 ```
 
 **Best practices:**
@@ -656,7 +645,6 @@ content/
 │   ├── docker-desktop/
 │   ├── docker-hub/
 │   └── ...
-├── guides/               # Learning guides
 ├── reference/            # API and CLI reference
 └── includes/             # Reusable content snippets
 ```

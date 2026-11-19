@@ -1,0 +1,17 @@
+<div class="code-copy {{ if .title }}code-copy--title{{ end }}">
+  <button
+    type="button"
+    class="code-copy-button"
+    data-copy-text="{{ .text }}"
+    aria-label="{{ .label | default "Copy code" }}"
+    title="Copy code"
+  >
+    <span data-copy-icon
+      >{{ partial "ui-icon.html" (dict "name" "copy") }}</span
+    >
+    <span data-copied-icon hidden
+      >{{ partial "ui-icon.html" (dict "name" "check") }}</span
+    >
+  </button>
+  <span class="code-copy-status sr-only" role="status"></span>
+</div>

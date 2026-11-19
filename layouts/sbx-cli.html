@@ -3,24 +3,22 @@
 
   {{ .Store.Set "headings" slice }}
   <article class="prose min-w-0 max-w-4xl dark:prose-invert">
-    {{ partial "breadcrumbs.html" . }}
     <div class="flex items-start justify-between gap-4">
-      <h1>{{ .Title }}</h1>
     </div>
 
     {{- /* Summary table */ -}}
     <div class="overflow-x-auto">
-      <table>
+      <table aria-label="{{ $.Title }}: command summary">
         <tbody>
           {{ with $data.synopsis }}
           <tr>
-            <th class="text-left w-32">Description</th>
+            <th scope="row" class="text-left w-32">Description</th>
             <td>{{ . }}</td>
           </tr>
           {{ end }}
           {{ with $data.usage }}
           <tr>
-            <th class="text-left w-32">Usage</th>
+            <th scope="row" class="text-left w-32">Usage</th>
             <td><code>{{ . }}</code></td>
           </tr>
           {{ end }}
@@ -32,7 +30,7 @@
     {{ if $data.experimental }}
       <div class="px-4 border-l-2 border-l-magenta-light dark:border-l-magenta-dark">
         <p class="not-prose flex gap-2 items-center text-magenta-light dark:text-magenta-dark">
-          <span class="icon-svg pb-1">{{ partialCached "icon" "beaker" "beaker" }}</span>
+          <span class="icon-svg pb-1">{{ partialCached "icon" "flask-conical" "flask-conical" }}</span>
           <strong>{{ i18n "experimental" }}</strong>
         </p>
         <p><strong>This command is experimental.</strong></p>
@@ -57,11 +55,11 @@
       {{ $heading := dict "level" 2 "text" "Commands" }}
       {{ partialCached "heading.html" $heading "sbx-cli-commands" }}
       {{ $.Store.Add "headings" $heading }}
-      <table>
+      <table aria-label="{{ $.Title }}: subcommands">
         <thead>
           <tr>
-            <th class="text-left">Command</th>
-            <th class="text-left">Description</th>
+            <th scope="col" class="text-left">Command</th>
+            <th scope="col" class="text-left">Description</th>
           </tr>
         </thead>
         <tbody>
@@ -73,7 +71,7 @@
                 <td class="text-left">
                   <span class="inline-flex items-center gap-2">
                     {{ if $child.experimental }}
-                      {{ partialCached "components/badge.html" (dict "color" "violet" "content" "experimental") "sbx-exp" }}
+                      {{ partialCached "components/badge.html" (dict "color" "gray" "content" "experimental") "sbx-exp" }}
                     {{ end }}
                     {{ $child.synopsis }}
                   </span>
@@ -92,13 +90,13 @@
         {{ $heading := dict "level" 2 "text" "Options" }}
         {{ partialCached "heading.html" $heading "sbx-cli-options" }}
         {{ $.Store.Add "headings" $heading }}
-        <div class="overflow-x-auto">
-          <table>
+        <div class="overflow-x-auto" tabindex="0">
+          <table class="cli-options" aria-label="{{ $.Title }}: options">
             <thead class="bg-gray-100 dark:bg-gray-800">
               <tr>
-                <th class="p-2">Option</th>
-                <th class="p-2">Default</th>
-                <th class="p-2">Description</th>
+                <th scope="col" class="p-2">Option</th>
+                <th scope="col" class="p-2">Default</th>
+                <th scope="col" class="p-2">Description</th>
               </tr>
             </thead>
             <tbody>
@@ -116,7 +114,7 @@
                   <td>
                     <span class="inline-flex items-center gap-2">
                       {{ with .experimental }}
-                        {{ partialCached "components/badge.html" (dict "color" "violet" "content" "experimental") "sbx-exp" }}
+                        {{ partialCached "components/badge.html" (dict "color" "gray" "content" "experimental") "sbx-exp" }}
                       {{ end }}
                       {{ with .usage }}
                         {{ strings.TrimSpace . }}
@@ -138,13 +136,13 @@
         {{ $heading := dict "level" 2 "text" "Global options" }}
         {{ partialCached "heading.html" $heading "sbx-cli-global-options" }}
         {{ $.Store.Add "headings" $heading }}
-        <div class="overflow-x-auto">
-          <table>
+        <div class="overflow-x-auto" tabindex="0">
+          <table class="cli-options" aria-label="{{ $.Title }}: inherited options">
             <thead class="bg-gray-100 dark:bg-gray-800">
               <tr>
-                <th class="p-2">Option</th>
-                <th class="p-2">Default</th>
-                <th class="p-2">Description</th>
+                <th scope="col" class="p-2">Option</th>
+                <th scope="col" class="p-2">Default</th>
+                <th scope="col" class="p-2">Description</th>
               </tr>
             </thead>
             <tbody>
@@ -162,7 +160,7 @@
                   <td>
                     <span class="inline-flex items-center gap-2">
                       {{ with .experimental }}
-                        {{ partialCached "components/badge.html" (dict "color" "violet" "content" "experimental") "sbx-exp" }}
+                        {{ partialCached "components/badge.html" (dict "color" "gray" "content" "experimental") "sbx-exp" }}
                       {{ end }}
                       {{ with .usage }}
                         {{ strings.TrimSpace . }}
@@ -192,11 +190,11 @@
 {{ end }}
 
 {{ define "right" }}
-  <div class="hidden min-w-52 flex-1 lg:block">
-    <aside class="sticky top-16 h-[calc(100vh-64px)] min-w-52 space-y-4 overflow-y-auto py-4 w-full">
+  <div class="reading-toc" data-pagefind-ignore>
+    <aside class="sticky w-full space-y-4 overflow-y-auto py-4">
       <div id="TableOfContents">
         <div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
-        <nav class="toc">
+        <nav class="toc" aria-label="On this page">
           <ul>
             {{ range (.Store.Get "headings") }}
               {{ $text := .text }}

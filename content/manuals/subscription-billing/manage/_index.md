@@ -23,11 +23,11 @@ grid:
     description: >-
       Update billing information for your individual account or
       organization.
-    icon: pencil-square
+    icon: square-pen
     link: /subscription-billing/manage/details/
   - title: Invoices
     description: View billing history and download past invoices.
-    icon: receipt-percent
+    icon: receipt-text
     link: /subscription-billing/manage/history/
   - title: 3D Secure authentication
     description: >-
@@ -36,7 +36,7 @@ grid:
     link: /subscription-billing/manage/3d-secure/
   - title: Taxes
     description: Submit a US tax exemption certificate or add a VAT number.
-    icon: document-text
+    icon: file-text
     link: /subscription-billing/manage/tax-certificate/
 ---
 

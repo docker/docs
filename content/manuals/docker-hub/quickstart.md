@@ -16,7 +16,7 @@ through creating a custom image and sharing it through Docker Hub.
 
 ## Prerequisites
 
-- [Download and install Docker](../../get-started/get-docker.md)
+- [Download and install Docker](/get-docker/_index.md)
 - A verified [Docker](https://app.docker.com/signup) account
 
 ## Step 1: Find an image in Docker Hub's library

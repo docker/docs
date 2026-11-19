@@ -12,11 +12,11 @@ aliases:
 grid:
   - title: Account FAQs
     description: FAQs about Docker IDs, account creation, organizations, and companies.
-    icon: question-mark-circle
+    icon: circle-help
     link: /faqs/accounts/
   - title: Security FAQs
     description: FAQs about single sign-on, identity providers, enforcement, and domains.
-    icon: lock-closed
+    icon: lock
     link: /faqs/security/
   - title: Subscription and billing FAQs
     description: FAQs about Docker plans, payments, taxes, and invoices.
@@ -24,7 +24,7 @@ grid:
     link: /faqs/subscription-billing/
   - title: Platform FAQs
     description: FAQs about Docker Desktop containers, networking, VMs, and general platform security.
-    icon: cpu-chip
+    icon: cpu
     link: /faqs/platform/
 ---
 

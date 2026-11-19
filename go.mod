@@ -14,7 +14,7 @@ require (
 	github.com/docker/docker-agent v1.152.0
 	github.com/docker/model-runner v1.1.36
 	github.com/moby/buildkit v0.35.0
-	github.com/moby/moby/api v1.56.1
+	github.com/moby/moby/api v1.57.0
 )
 
 tool (
@@ -27,3 +27,6 @@ tool (
 	github.com/moby/buildkit
 	github.com/moby/moby/api
 )
+
+// Use the upstream glossary-link fix until a tagged release includes it.
+replace github.com/moby/buildkit => github.com/moby/buildkit v0.35.0-rc1.0.20261118113413-bfe7dac5cde4

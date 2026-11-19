@@ -1,27 +1,21 @@
 import fs from "node:fs";
 import path from "node:path";
 import { isDeepStrictEqual } from "node:util";
+import {
+  decode,
+  attributes,
+  localLinkProblems,
+  markdownLinks,
+  engineOutputProblems,
+} from "./output-checks.mjs";
 const root = path.resolve(import.meta.dirname, "../..");
 const base = path.resolve(process.argv[2] || "public");
 const data = JSON.parse(
   fs.readFileSync(path.join(root, "data/api-reference.json")),
 );
-const decode = (s) =>
-  s
-    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
-    .replaceAll("&amp;", "&")
-    .replaceAll("&#34;", '"')
-    .replaceAll("&#39;", "'")
-    .replaceAll("&lt;", "<")
-    .replaceAll("&gt;", ">");
-// Hugo's production minifier removes optional attribute quotes.
-function attributes(html, name) {
-  const pattern = new RegExp(
-    `\\s${name}=(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`,
-    "g",
-  );
-  return [...html.matchAll(pattern)].map((m) => decode(m[1] ?? m[2] ?? m[3]));
-}
+const redirects = JSON.parse(
+  fs.readFileSync(path.join(base, "redirects.json")),
+);
 let count = 0;
 const problems = [];
 function check(url) {
@@ -108,47 +102,32 @@ for (const file of [...files(path.join(base, "reference/api"))].filter((p) =>
     problems.push(`Missing API article: ${path.relative(base, file)}`);
     continue;
   }
-  for (const href of attributes(article, "href")) {
-    let url;
-    try {
-      url = new URL(href, "http://localhost:1314/" + path.relative(base, file));
-    } catch {
-      continue;
-    }
-    if (
-      !["localhost", "docs.docker.com"].includes(url.hostname) ||
-      !["http:", "https:"].includes(url.protocol)
-    )
-      continue;
-    const target = path.join(
-      base,
-      decodeURIComponent(url.pathname),
-      url.pathname.endsWith("/") ? "index.html" : "",
+  problems.push(
+    ...localLinkProblems(base, file, attributes(article, "href"), redirects),
+  );
+  const mdFile = path.dirname(file) + ".md";
+  if (fs.existsSync(mdFile)) {
+    problems.push(
+      ...localLinkProblems(
+        base,
+        file,
+        markdownLinks(fs.readFileSync(mdFile, "utf8")),
+        redirects,
+      ).map((problem) => `Markdown: ${problem}`),
     );
-    if (!fs.existsSync(target)) {
-      problems.push(`Broken API link: ${path.relative(base, file)} -> ${href}`);
-    } else if (url.hash && target.endsWith(".html")) {
-      const targetHTML = fs.readFileSync(target, "utf8");
-      const anchors = [
-        ...attributes(targetHTML, "id"),
-        ...attributes(targetHTML, "name"),
-      ];
-      if (!anchors.includes(decodeURIComponent(url.hash.slice(1))))
-        problems.push(
-          `Broken API anchor: ${path.relative(base, file)} -> ${href}`,
-        );
-    }
   }
 }
+
 if (fs.existsSync(path.join(base, "api-prototype")))
   problems.push("Unexpected prototype routes");
-// Historical Engine pages must keep the original renderer at their existing URLs.
-for (let minor = 40; minor <= 56; minor++) {
-  const url = `/reference/api/engine/version/v1.${minor}/`;
-  const html = fs.readFileSync(path.join(base, url, "index.html"), "utf8");
-  if (!html.includes("<redoc") || html.includes("data-api-view="))
-    problems.push(`Legacy Engine renderer changed: ${url}`);
-}
+problems.push(
+  ...engineOutputProblems(
+    base,
+    path.join(root, "content/reference/api/engine/version"),
+    data.apis,
+  ),
+);
+
 if (problems.length)
   throw Error(
     problems.slice(0, 25).join("\n") + `\n${problems.length} output failures`,

@@ -4,32 +4,29 @@
   {{ .Store.Set "headings" slice }}
   {{ .Store.Set "subheadings" slice }}
   <article class="prose min-w-0 max-w-4xl dark:prose-invert">
-    {{ partial "breadcrumbs.html" . }}
-    <h1>{{ .Title }}</h1>
-    <div class="hidden lg:block">
-      {{ partialCached "md-dropdown.html" "-" "-" }}
-    </div>
     <div class="overflow-x-auto">
-      <table>
+      <table aria-label="{{ $.Title }}: command summary">
         <tbody>
           {{ with $data.short }}
           <tr>
-            <th class="text-left w-32">Description</th>
+            <th scope="row" class="text-left w-32">Description</th>
             <td>{{ . }}</td>
           </tr>
           {{ end }}
           {{ with $data.usage }}
           <tr>
-            <th class="text-left w-32">Usage</th>
+            <th scope="row" class="text-left w-32">Usage</th>
             <td><code>{{ . }}</code></td>
           </tr>
           {{ end }}
           {{ with $data.aliases }}
           {{ $aliases := strings.Replace . (fmt.Printf "%s, " page.Title) "" }}
           <tr>
-            <th class="text-left w-32 flex items-center gap-2">
-              <span>Aliases</span>
-              {{ partialCached "tooltip.html" "An alias is a short or memorable alternative for a longer command." "cli-alias" }}
+            <th scope="row" class="text-left w-32">
+              <div class="flex items-center gap-2">
+                <span>Aliases</span>
+                {{ partialCached "tooltip.html" "An alias is a short or memorable alternative for a longer command." "cli-alias" }}
+              </div>
             </th>
             <td>
               <div class="flex gap-3">
@@ -55,7 +52,7 @@
     {{ if or $data.experimental $data.experimentalcli }}
       <div class="px-4 border-l-2 border-l-magenta-light dark:border-l-magenta-dark">
         <p class="not-prose flex gap-2 items-center text-magenta-light dark:text-magenta-dark">
-          <span class="icon-svg pb-1">{{ partialCached "icon" "beaker" "beaker" }}</span>
+          <span class="icon-svg pb-1">{{ partialCached "icon" "flask-conical" "flask-conical" }}</span>
           <strong>{{ i18n "experimental" }}</strong>
         </p>
         <p><strong>This command is experimental.</strong></p>
@@ -96,13 +93,13 @@
         {{ $heading := dict "level" 2 "text" "Options" }}
         {{ partialCached "heading.html" $heading "cli-options" }}
         {{ $.Store.Add "headings" $heading }}
-        <div class="overflow-x-auto">
-          <table>
+        <div class="overflow-x-auto" tabindex="0">
+          <table class="cli-options" aria-label="{{ $.Title }}: options">
             <thead class="bg-gray-100 dark:bg-gray-800">
               <tr>
-                <th class="p-2">Option</th>
-                <th class="p-2">Default</th>
-                <th class="p-2">Description</th>
+                <th scope="col" class="p-2">Option</th>
+                <th scope="col" class="p-2">Default</th>
+                <th scope="col" class="p-2">Description</th>
               </tr>
             </thead>
             <tbody>
@@ -133,10 +130,10 @@
                       {{ partialCached "components/badge.html" (dict "color" "red" "content" "Deprecated") "deprecated" }}
                     {{ end }}
                     {{ with .experimental }}
-                      {{ partialCached "components/badge.html" (dict "color" "violet" "content" "experimental (daemon)") "exp" }}
+                      {{ partialCached "components/badge.html" (dict "color" "gray" "content" "experimental (daemon)") "exp" }}
                     {{ end }}
                     {{ with .experimentalcli }}
-                      {{ partialCached "components/badge.html" (dict "color" "violet" "content" "experimental (CLI)") "exp-cli" }}
+                      {{ partialCached "components/badge.html" (dict "color" "gray" "content" "experimental (CLI)") "exp-cli" }}
                     {{ end }}
                     {{ with .kubernetes }}
                       {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Kubernetes") "k8s" }}
@@ -172,20 +169,20 @@
       {{ $heading := dict "level" 2 "text" "Subcommands" }}
       {{ partialCached "heading.html" $heading "cli-subcommands" }}
       {{ $.Store.Add "headings" $heading }}
-      <table>
+      <table aria-label="{{ $.Title }}: subcommands">
         <thead>
           <tr>
-            <th class="text-left">Command</th>
-            <th class="text-left">Description</th>
+            <th scope="col" class="text-left">Command</th>
+            <th scope="col" class="text-left">Description</th>
           </tr>
         </thead>
         <tbody>
           {{ range .Pages }}
             {{- if and .Params.datafolder .Params.datafile }}
               <tr>
-                <td class="text-left"><a class="link" href="{{ .Permalink }}"><code>{{ .Title }}</code></a></th>
+                <td class="text-left"><a class="link" href="{{ .Permalink }}"><code>{{ .Title }}</code></a></td>
                 {{ $data := index hugo.Data.cli .Params.datafolder .Params.datafile }}
-                <td class="text-left">{{ $data.short }}</th>
+                <td class="text-left">{{ $data.short }}</td>
               </tr>
             {{- end }}
           {{ end }}
@@ -197,11 +194,11 @@
 {{ end }}
 
 {{ define "right" }}
-  <div class="hidden min-w-52 flex-1 lg:block">
-    <aside class="sticky top-16 h-[calc(100vh-64px)] min-w-52 space-y-4 overflow-y-auto py-4 w-full">
+  <div class="reading-toc" data-pagefind-ignore>
+    <aside class="sticky w-full space-y-4 overflow-y-auto py-4">
       <div id="TableOfContents">
         <div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
-        <nav class="toc">
+        <nav class="toc" aria-label="On this page">
           <ul>
             {{ range (.Store.Get "headings") }}
               {{/* add left padding depending on level (pl-2, pl-3, pl-4) */}}

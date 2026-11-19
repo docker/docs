@@ -1,0 +1,52 @@
+{{/* Resolve ownership once per page. The longest declared ancestor owns a page. */}}
+{{- $page := . -}}
+{{- $product := dict -}}{{- $root := false -}}{{- $category := dict -}}{{- $length := 0 -}}
+{{- range hugo.Data.navigation.products -}}
+  {{- with site.GetPage .root -}}
+    {{- if and (or (eq . $page) ($page.IsDescendant .)) (gt (len .Path) $length) -}}
+      {{- $root = . -}}{{- $length = len .Path -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $root -}}
+  {{- range hugo.Data.navigation.products -}}
+    {{- if eq (site.GetPage .root) $root -}}{{- $product = . -}}{{- end -}}
+  {{- end -}}
+  {{- range hugo.Data.navigation.categories -}}
+    {{- if eq .id ($product.category | default "") -}}
+      {{- $category = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $reference := eq $page.Section "reference" -}}
+{{- if $reference -}}
+  {{- $referenceRoot := "" -}}
+  {{- range hugo.Data.navigation.references -}}
+    {{- $sourceRoot := .root -}}
+    {{- with site.GetPage .root -}}
+      {{- if and (or (eq . $page) ($page.IsDescendant .)) (gt (len .Path) $length) -}}
+        {{- $root = . -}}{{- $length = len .Path -}}
+        {{- $referenceRoot = $sourceRoot -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with $referenceRoot -}}
+    {{- $category = partialCached "navigation/reference-category.html" . . -}}
+  {{- end -}}
+{{- end -}}
+{{- $sidebar := $root -}}
+{{- with site.GetPage "/reference/cli/docker" -}}
+  {{- if or (eq . $page) ($page.IsDescendant .) -}}
+    {{- $sidebar = . -}}
+  {{- end -}}
+{{- end -}}
+{{- $apiCatalog := and (eq $page.Layout "api-docs") (eq $page.Params.view "catalog") -}}
+{{- $discovery := or $page.IsHome (eq $page.Kind "404") (in (slice "category" "category-directory" "reference-directory") $page.Layout) (eq $page.RelPermalink "/reference/") $apiCatalog -}}
+{{- $hasSidebar := false -}}
+{{- with $sidebar -}}
+  {{- $hasSidebar = and .IsSection (gt (len .Pages) 0) -}}
+{{- end -}}
+{{- if or $discovery (eq $page.Layout "api") -}}
+  {{- $hasSidebar = false -}}
+{{- end -}}
+{{- return (dict "product" $product "root" $root "category" $category "reference" $reference "sidebar" $sidebar "hasSidebar" $hasSidebar "discovery" $discovery) -}}

@@ -140,4 +140,4 @@ Security reports are greatly appreciated, and Docker will publicly thank you for
 ## Get started
 
 After setting up Docker, you can learn the basics with
-[Build and share a containerized application](/get-started/tutorials/run-an-app.md).
+[Build and share a containerized application](https://docs.docker.com/learn/paths/get-started-with-docker-containers/).

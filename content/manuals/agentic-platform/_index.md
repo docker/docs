@@ -16,19 +16,19 @@ grid:
     link: /agentic-platform/signup/
   - title: Get started
     description: Start your first sandbox.
-    icon: rocket-launch
+    icon: rocket
     link: /agentic-platform/get-started/
   - title: Kits
     description: Find a kit or run your own public kit.
-    icon: cube
+    icon: box
     link: /agentic-platform/kits/
   - title: Sandboxes
     description: Access, pause, resume, and delete your sandboxes.
-    icon: command-line
+    icon: terminal
     link: /agentic-platform/sandboxes/
   - title: Guides
     description: Share an app, develop remotely, or continue local work in the cloud.
-    icon: command-line
+    icon: terminal
     link: /agentic-platform/guides/
   - title: Schedules
     description: Run recurring tasks in a fresh sandbox.
@@ -36,7 +36,7 @@ grid:
     link: /agentic-platform/schedules/
   - title: MCP
     description: Connect predefined or custom MCP servers.
-    icon: cpu-chip
+    icon: cpu
     link: /agentic-platform/mcp/
   - title: Secrets
     description: Manage model provider and service credentials.
@@ -48,7 +48,7 @@ grid:
     link: /agentic-platform/policies/
   - title: FAQ
     description: Find answers about access, billing, and supported features.
-    icon: question-mark-circle
+    icon: circle-help
     link: /agentic-platform/faq/
 ---
 
@@ -83,4 +83,4 @@ To begin, [activate your subscription](signup.md#activate-cloud-access), then
 sandbox runs. See [Signup and billing](signup.md) for account and payment
 information.
 
-{{< grid >}}
+{{< grid level="2" >}}

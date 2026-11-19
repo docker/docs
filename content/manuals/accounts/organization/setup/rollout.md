@@ -119,9 +119,7 @@ restrictions before testing them.
 Apply the baseline settings and sign-in requirements to the pilot group.
 Have developers run their normal projects on Docker Desktop and Docker Hub.
 Confirm that required settings apply and that developers can still build,
-pull, and run the containers they need. Use the
-[pilot rollout tutorial](/get-started/tutorials/admin-set-up.md) for a focused
-settings policy test.
+pull, and run the containers they need.
 
 For each additional product in your rollout, have a pilot developer complete
 a representative task: build with a cloud builder, review Scout results, or
