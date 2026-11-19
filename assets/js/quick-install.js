@@ -18,9 +18,18 @@ export const quickInstalls = {
     },
     {
       product: "Docker Desktop",
-      label: "macOS · Homebrew",
+      label: "macOS · Installer",
       url: "/get-docker/desktop/",
-      command: "brew install --cask docker-desktop",
+      downloads: [
+        {
+          label: "Apple silicon",
+          url: "https://desktop.docker.com/mac/main/arm64/Docker.dmg",
+        },
+        {
+          label: "Intel",
+          url: "https://desktop.docker.com/mac/main/amd64/Docker.dmg",
+        },
+      ],
     },
   ],
   windows: [
@@ -32,9 +41,18 @@ export const quickInstalls = {
     },
     {
       product: "Docker Desktop",
-      label: "Windows · WinGet",
+      label: "Windows · Installer",
       url: "/get-docker/desktop/",
-      command: "winget install -e --id Docker.DockerDesktop",
+      downloads: [
+        {
+          label: "x86_64",
+          url: "https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe",
+        },
+        {
+          label: "Arm (Early Access)",
+          url: "https://desktop.docker.com/win/main/arm64/Docker%20Desktop%20Installer.exe",
+        },
+      ],
     },
   ],
   linux: [
@@ -67,6 +85,28 @@ if (typeof document !== "undefined") {
     row.querySelector("a").href = install.url;
     row.querySelector(".home-install-product").textContent = install.product;
     row.querySelector(".home-install-platform").textContent = install.label;
+    if (install.downloads) {
+      const downloads = row.querySelector(".home-install-downloads");
+      for (const download of install.downloads) {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.className = "button";
+        link.href = download.url;
+        link.textContent = `Download for ${download.label}`;
+        link.setAttribute(
+          "aria-label",
+          `Download ${install.product} for ${download.label}`,
+        );
+        link.setAttribute(
+          "marlin-label",
+          platform === "macos" ? "download_dmg_click" : "download_exe_click",
+        );
+        item.append(link);
+        downloads.append(item);
+      }
+      downloads.hidden = false;
+      return;
+    }
     row.querySelector("code").textContent = install.command;
     row.querySelector(".home-install-command").hidden = false;
     const button = row.querySelector("[data-copy-text]");

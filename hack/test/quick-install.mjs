@@ -20,8 +20,12 @@ test("desktop platforms select the corresponding Docker product and sbx installe
     assert.equal(quickInstalls[os][1].product, product);
     assert.equal(quickInstalls[os][0].product, "Docker Sandboxes");
   }
-  assert.match(quickInstalls.macos[1].command, /brew install --cask/);
-  assert.match(quickInstalls.windows[1].command, /winget/);
+  for (const os of ["macos", "windows"]) {
+    assert.equal(quickInstalls[os][1].command, undefined);
+    assert.equal(quickInstalls[os][1].downloads.length, 2);
+    for (const download of quickInstalls[os][1].downloads)
+      assert.equal(new URL(download.url).hostname, "desktop.docker.com");
+  }
   assert.match(quickInstalls.linux[1].command, /curl.*sudo sh/);
   assert.match(quickInstalls.linux[0].label, /Ubuntu/);
 });

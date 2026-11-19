@@ -460,6 +460,19 @@
   border: 1px solid var(--color-edge);
   border-radius: 0.65rem;
 }
+.home-install-downloads:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.home-install-downloads a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  margin: 0;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
 .home-install > a {
   display: inline-block;
   font-size: 0.875rem;
