@@ -3,7 +3,7 @@
   class="search-dialog"
   aria-labelledby="search-heading"
   x-data="docsSearch"
-  @keydown.enter="if ($event.metaKey || $event.ctrlKey) { $event.preventDefault(); ask(); }"
+  @keydown.enter="if ($event.metaKey || $event.ctrlKey) onEnter($event)"
 >
   <div class="search-dialog-header">
     <h2 id="search-heading">Search or ask Docker</h2>
@@ -18,7 +18,9 @@
       id="search-query"
       type="search"
       x-model="query"
-      @input="queueSearch($event.target.value)"
+      @input="queueSearch($event.target.value, $event.isComposing)"
+      @compositionend="queueSearch($event.target.value)"
+      @keydown.enter="onEnter($event)"
       placeholder="Search Docker documentation…"
       autocomplete="off"
     />

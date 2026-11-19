@@ -1,4 +1,4 @@
-<div class="search-results">
+<div class="search-results" :aria-busy="loading">
   <p role="status" aria-atomic="true" x-text="status"></p>
   <ul>
     <template x-for="result in results" :key="result.url"

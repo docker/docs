@@ -29,20 +29,30 @@
   flex-wrap: wrap;
   gap: 1rem;
   padding: 1.25rem;
-  border: 1px solid var(--color-control-edge);
+  border: 1px solid var(--color-edge);
   border-radius: 1rem;
+  background: var(--color-surface-raised);
+  color: var(--color-surface-raised-foreground);
+  box-shadow: var(--elevation-raised);
 }
 .composer-label {
   width: 100%;
   font-size: 0.875rem;
-  color: var(--color-muted-foreground);
+  color: var(--color-surface-raised-foreground);
+  font-weight: 550;
 }
 .search-composer input {
   width: 100%;
   min-width: 0;
   background: transparent;
+  color: var(--color-surface-raised-foreground);
   padding: 0.35rem 0;
   font-size: 1.1rem;
+}
+.search-composer input::placeholder,
+.search-dialog-input input::placeholder {
+  color: var(--color-muted-foreground);
+  opacity: 1;
 }
 .search-composer:has(input:focus-visible) {
   border-color: var(--docs-focus-ring);
