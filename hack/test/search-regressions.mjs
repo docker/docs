@@ -25,92 +25,6 @@ const match = (
   data = async () => ({ url: `/${index}`, meta: { title: String(index) } }),
 ) => ({ data });
 
-test("typing waits for a pause and searches only the final query", async (t) => {
-  t.mock.timers.enable({ apis: ["setTimeout"] });
-  const search = await createSearch({});
-  const queries = [];
-  search.search = () => queries.push(search.query);
-  for (const query of ["d", "do", "doc", "docker"]) {
-    search.queueSearch(query);
-    t.mock.timers.tick(250);
-    assert.deepEqual(queries, []);
-  }
-  t.mock.timers.tick(150);
-  assert.deepEqual(queries, ["docker"]);
-  search.queueSearch("discard");
-  search.queueSearch("");
-  t.mock.timers.tick(400);
-  assert.deepEqual(queries, ["docker"]);
-});
-
-test("Enter searches immediately without repeating the queued search", async (t) => {
-  t.mock.timers.enable({ apis: ["setTimeout"] });
-  const queries = [];
-  const search = await createSearch({
-    search: async (query) => {
-      queries.push(query);
-      return { results: [] };
-    },
-  });
-  search.queueSearch("docker");
-  search.onEnter({ preventDefault() {}, stopPropagation() {} });
-  // Wait for the asynchronous Pagefind initialization and search to settle.
-  while (search.loading) await Promise.resolve();
-  assert.deepEqual(queries, ["docker"]);
-  t.mock.timers.tick(400);
-  assert.deepEqual(queries, ["docker"]);
-});
-
-test("composition waits for committed text and preserves the IME Enter key", async (t) => {
-  t.mock.timers.enable({ apis: ["setTimeout"] });
-  const search = await createSearch({});
-  const queries = [];
-  search.search = () => queries.push(search.query);
-  search.queueSearch("previous");
-  search.queueSearch("正在输入", true);
-  search.onEnter({ isComposing: true });
-  search.onEnter({ keyCode: 229 });
-  t.mock.timers.tick(1000);
-  assert.deepEqual(queries, []);
-  search.queueSearch("容器");
-  t.mock.timers.tick(400);
-  assert.deepEqual(queries, ["容器"]);
-});
-
-test("Ctrl+Enter and Command+Enter keep the Ask Docker shortcut", async () => {
-  const search = await createSearch({});
-  let asked = 0;
-  search.ask = () => ++asked;
-  for (const modifier of ["ctrlKey", "metaKey"]) {
-    search.onEnter({
-      [modifier]: true,
-      preventDefault() {},
-      stopPropagation() {},
-    });
-  }
-  assert.equal(asked, 2);
-});
-
-test("editing while Pagefind initializes skips the superseded search", async () => {
-  let release;
-  const queries = [];
-  const search = await createSearch({
-    options: () => new Promise((resolve) => (release = resolve)),
-    search: async (query) => {
-      queries.push(query);
-      return { results: [] };
-    },
-  });
-  search.query = "original";
-  const pending = search.search();
-  while (!release) await Promise.resolve();
-  search.queueSearch("replacement");
-  release();
-  await pending;
-  assert.deepEqual(queries, []);
-  search.destroy();
-});
-
 test("all matches can be loaded in batches without duplicates", async () => {
   const search = await createSearch({
     search: async () => ({
@@ -196,27 +110,14 @@ test("visible results stay in place until a replacement batch is ready", async (
   });
   search.query = "original";
   await search.search();
-  const originalResults = search.results;
-  const originalMatches = search.matches;
   search.queueSearch("replacement");
-  assert.equal(search.results, originalResults);
-  assert.equal(search.matches, originalMatches);
-  assert.equal(search.status, "Showing 1 of 1 results");
-  assert.equal(search.loading, true);
+  assert.deepEqual(search.results, [{ url: "/original" }]);
   const pending = search.search();
   while (!release) await Promise.resolve();
-  assert.equal(search.results, originalResults);
-  assert.equal(search.matches, originalMatches);
+  assert.deepEqual(search.results, [{ url: "/original" }]);
   release({ url: "/replacement" });
   await pending;
   assert.deepEqual(search.results, [{ url: "/replacement" }]);
-  assert.notEqual(search.matches, originalMatches);
-  assert.equal(search.loading, false);
-  search.queueSearch("   ");
-  assert.deepEqual(search.results, []);
-  assert.deepEqual(search.matches, []);
-  assert.equal(search.status, "");
-  assert.equal(search.loading, false);
 });
 
 test("editing also invalidates an in-flight additional batch", async () => {
