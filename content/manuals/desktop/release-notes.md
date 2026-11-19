@@ -28,7 +28,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-11-19" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.100.0" build_path="/XXXXXX/" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.100.0" build_path="/246961/" >}}
+
+### New {#41000-new}
+
+- Docker Desktop has a new look. The updated Moby logo is part of Docker’s new brand, which reflects where Docker is going: the same containers you rely on today, plus the isolation and governance you need to trust AI agents with real work.
 
 ### Updates {#41000-updates}
 
