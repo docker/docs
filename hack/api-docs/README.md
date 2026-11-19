@@ -2,7 +2,8 @@
 
 This tool validates the Hub, DVP, Registry, AI Governance, and Sandboxes OpenAPI sources
 in `content/reference/api/` and generates presentation data for Hugo. Engine
-retains its existing sources and renderer.
+v1.57 uses the same presentation pipeline with its upstream specification;
+older Engine versions retain their existing sources and ReDoc renderer.
 
 ## Commands
 
@@ -44,10 +45,45 @@ relationships. Both generation and the validation wrapper use this manifest.
 Hugo reads the generated presentation data, rather than this file. Authentication
 descriptions come from the specifications and linked guides.
 
+Optional source metadata controls routing and overview ownership:
+
+| Field | Purpose |
+| --- | --- |
+| `url` | Override the overview URL and the base route for operations and schemas. |
+| `sourceURL` | Override the published specification link without changing the input `source`. |
+| `authoredOverview` | Set to `true` to render an authored overview instead of creating one in the adapter. |
+
 `validation/` contains the Vacuum rules and locked official
 schema resources. `testdata/` contains validation fixtures. The presentation model
 version and supported dialect are defined by the processor, not configurable
 manifest fields.
+
+### Authored overviews
+
+Set `authoredOverview: true` in a source manifest entry when an authored page
+owns the overview at that entry's `url`. The generator carries the flag into
+the presentation model. Hugo skips overview creation for that entry and still
+generates all operations and schemas. Without the flag, Hugo creates the
+overview too.
+
+On the authored page, select `api-docs`, set `view` to `overview`, and set
+`apiID` to the manifest entry's ID:
+
+```yaml
+layout: api-docs
+params:
+  view: overview
+  apiID: engine-1.57
+```
+
+Keep the page's title, URL, and aliases in its front matter. Engine v1.57 uses
+`content/reference/api/engine/version/v1.57.md` to preserve its published path
+and latest aliases. Hugo does not merge authored front matter into an overview
+created by the adapter at the same content path.
+
+The manifest's optional `url` and `sourceURL` overrides control the overview
+route and published specification link, respectively. They do not transfer
+ownership of the overview or its aliases to the adapter.
 
 ## Pipeline
 
@@ -70,15 +106,22 @@ The published YAML URLs still serve the source files directly.
 
 ## Validation
 
-`check` is strict and reports every documentation profile failure:
+`check` reports contract errors and example warnings:
 
 ```console
 $ ./hack/api-docs/run.sh check
 ```
 
-Generation runs the same strict validation. Any diagnostic fails generation;
-there is no exception baseline. Reports are written to
+Generation runs the same validation. Schema, reference, dialect, and documentation
+profile errors block generation; there is no exception baseline for these errors.
+Invalid example values produce diagnostics with severity `warning` and do not
+block generation. Reports include both errors and warnings and are written to
 `tmp/api-reference/validation.json`.
+
+The presentation model omits failed media and schema samples from the examples
+used for rendering and cURL generation. Raw upstream annotations and published
+specification downloads remain unchanged. Example warnings do not relax the
+supported contract or dialect limits.
 
 The build workflow's validation matrix runs API reference checks alongside the
 other validation targets. It runs tests, validates the sources, regenerates the
@@ -110,6 +153,8 @@ screens.
 Callbacks and webhook navigation are unsupported and fail validation. Request
 examples are POSIX shell templates; they do not make service calls.
 
-Examples are optional. Supplied examples must validate against their schemas.
-When a request body has no example, the generated cURL command reads from
-`request-body` and directs the reader to prepare that file from the schema.
+Examples are optional. Supplied examples are checked against their schemas;
+values that fail validation produce warnings and are omitted from rendered
+samples. When a request body has no valid example, the generated cURL command
+reads from `request-body` and directs the reader to prepare that file from the
+schema.

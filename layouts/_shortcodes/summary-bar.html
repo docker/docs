@@ -5,27 +5,27 @@
 {{ end }}
 {{ if $feature }}
   {{ $subscriptionIcons := dict
-    "Business" "building-office"
-    "Team" "user-group"
+    "Business" "building"
+    "Team" "users"
     "Pro" "user-plus"
     "Personal" "user"
-    "Available to all" "globe-alt"
+    "Available to all" "globe"
     "Docker Hardened Images Enterprise" "/icons/dhi.svg"
     "Docker Hardened Images Select or Enterprise" "/icons/dhi.svg"
     "Docker Offload" "cloud"
-    "AI Governance" "lock-closed"
+    "AI Governance" "lock"
   }}
   {{ $availabilityIcons := dict
-    "Experimental" "beaker"
-    "Beta" "bolt"
-    "Early Access" "rocket-launch"
-    "GA" "check-circle"
-    "Retired" "archive-box"
+    "Experimental" "flask-conical"
+    "Beta" "zap"
+    "Early Access" "rocket"
+    "GA" "check"
+    "Retired" "archive"
   }}
-  {{ $requiresIcon := "arrow-down-circle" }}
+  {{ $requiresIcon := "circle-arrow-down" }}
   {{ $forIcons := dict
     "Administrators" "shield-check"
-    "Individuals" "user-circle"
+    "Individuals" "circle-user"
   }}
 
 
@@ -40,7 +40,7 @@
             {{ if $icon }}
               {{ partialCached "icon" $icon $icon }}
             {{ else }}
-              {{ partialCached "icon" "question-mark-circle" "question-mark-circle" }}
+              {{ partialCached "icon" "circle-help" "circle-help" }}
             {{ end }}
           </span>
         {{ end }}
@@ -55,7 +55,9 @@
           {{ $availabilityText }}
           {{ range $key, $icon := $availabilityIcons }}
             {{ if in $availabilityText $key }}
-              <span class="icon-svg icon-sm">{{ partialCached "icon" $icon $icon }}</span>
+              <span class="icon-svg icon-sm"
+                >{{ partialCached "icon" $icon $icon }}</span
+              >
             {{ end }}
           {{ end }}
         </span>

@@ -1,96 +1,93 @@
-<div
-  class="ml-auto hidden grid-cols-3 gap-6 border-t border-gray-200 bg-gray-100 px-4 pt-6 pb-2 text-gray-600 md:grid dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400 [&_a:hover]:underline [&_a:hover]:underline-offset-4"
->
-  <div class="flex min-w-20 flex-wrap items-center gap-1">
-    <a href="https://www.linkedin.com/company/docker" aria-label="LinkedIn">
-      <span class="icon-svg">
-        {{ partialCached "icon" "linkedin" "linkedin" }}
-      </span>
-    </a>
-    <a href="https://x.com/docker/" aria-label="Twitter">
-      <span class="icon-svg">
-        {{ partialCached "icon" "twitter" "twitter" }}
-      </span>
-    </a>
-    <a href="https://www.facebook.com/docker.run" aria-label="Facebook">
-      <span class="icon-svg">
-        {{ partialCached "icon" "facebook" "facebook" }}
-      </span>
-    </a>
-    <a href="http://www.youtube.com/user/dockerrun" aria-label="YouTube">
-      <span class="icon-svg">
-        {{ partialCached "icon" "youtube" "youtube" }}
-      </span>
-    </a>
-    <a href="https://www.instagram.com/dockerinc/" aria-label="Instagram">
-      <span class="icon-svg">
-        {{ partialCached "icon" "instagram" "instagram" }}
-      </span>
-    </a>
-  </div>
-  <div class="flex items-center justify-center gap-3">
-    <a
-      href="https://www.docker.com/"
-      class="inline-flex truncate whitespace-normal"
-      >Product offerings</a
-    >
-    <a
-      href="https://www.docker.com/pricing?ref=Docs&refAction=DocsFooter"
-      class="inline-flex truncate whitespace-normal"
-      >Pricing</a
-    >
-    <a
-      href="https://www.docker.com/company/"
-      class="inline-flex truncate whitespace-normal"
-      >About us</a
-    >
-    <a
-      href="{{ "llms.txt" | relURL }}"
-      class="inline-flex truncate whitespace-normal"
-      >llms.txt</a
-    >
-    <a
-      href="{{ "llms-full.txt" | relURL }}"
-      class="inline-flex truncate whitespace-normal"
-      >llms-full.txt</a
-    >
-  </div>
-  <div class="flex items-center justify-end">
-    <button
-      type="button"
-      id="ot-sdk-btn"
-      class="ot-sdk-show-settings whitespace-normal md:truncate"
-    >
+<div class="footer-main">
+  <nav class="footer-column" aria-labelledby="footer-get-started">
+    <h2 id="footer-get-started">Get started</h2>
+    <ul>
+      <li>
+        <a href="{{ relref . "/get-docker/_index.md" }}">Install Docker</a>
+      </li>
+      <li><a href="https://docs.docker.com/learn/">Learn</a></li>
+    </ul>
+  </nav>
+  <nav class="footer-column" aria-labelledby="footer-products">
+    <h2 id="footer-products">Products</h2>
+    <ul>
+      <li>
+        <a href="{{ relref . "/manuals/ai/sandboxes/_index.md" }}">Sandboxes</a>
+      </li>
+      <li>
+        <a href="{{ relref . "/manuals/ai/governance/_index.md" }}"
+          >AI Governance</a
+        >
+      </li>
+      <li>
+        <a href="{{ relref . "/manuals/dhi/_index.md" }}">Hardened Images</a>
+      </li>
+      <li>
+        <a href="{{ relref . "/manuals/docker-hub/_index.md" }}">Hub</a>
+      </li>
+      <li>
+        <a href="{{ relref . "/manuals/desktop/_index.md" }}">Desktop</a>
+      </li>
+      <li>
+        <a href="{{ relref . "/manuals/offload/_index.md" }}">Offload</a>
+      </li>
+    </ul>
+  </nav>
+  <nav class="footer-column" aria-labelledby="footer-reference">
+    <h2 id="footer-reference">Reference</h2>
+    <ul>
+      <li>
+        <a href="{{ relref . "/reference/cli/docker/_index.md" }}"
+          >CLI reference</a
+        >
+      </li>
+      <li>
+        <a href="{{ relref . "/reference/compose-file/_index.md" }}"
+          >Compose file</a
+        >
+      </li>
+      <li>
+        <a href="{{ relref . "/reference/api/engine/_index.md" }}"
+          >Engine API</a
+        >
+      </li>
+      <li>
+        <a href="{{ relref . "/reference/dockerfile/_index.md" }}"
+          >Dockerfile</a
+        >
+      </li>
+      <li><a href="{{ relref . "/reference/_index.md" }}">All reference</a></li>
+    </ul>
+  </nav>
+  <nav class="footer-column" aria-labelledby="footer-company">
+    <h2 id="footer-company">Company</h2>
+    <ul>
+      <li><a href="https://www.docker.com/">Docker.com</a></li>
+      <li>
+        <a href="https://www.docker.com/pricing?ref=Docs&refAction=DocsFooter"
+          >Pricing</a
+        >
+      </li>
+      <li><a href="https://www.docker.com/company/">About us</a></li>
+      <li><a href="{{ relref . "/manuals/support/_index.md" }}">Support</a></li>
+    </ul>
+  </nav>
+</div>
+<div class="footer-bottom">
+  <nav class="footer-resources" aria-label="Documentation resources">
+    <a href="/llms.txt">llms.txt</a>
+    <a href="/llms-full.txt">llms-full.txt</a>
+  </nav>
+  <nav class="footer-legal" aria-label="Legal and site information">
+    <button type="button" id="ot-sdk-btn" class="ot-sdk-show-settings">
       Cookies Settings
     </button>
-    <span class="mx-1 text-gray-400">|</span>
-    <a
-      title="Docker Terms of Use"
-      href="https://www.docker.com/legal/docker-terms-use/"
-      class="whitespace-normal md:truncate"
-      >Terms of Use</a
-    >
-    <span class="mx-1 text-gray-400">|</span>
-    <a
-      title="Docker Systems Status Page"
-      href="https://www.dockerstatus.com/"
-      class="whitespace-normal md:truncate"
-      >Status</a
-    >
-    <span class="mx-1 text-gray-400">|</span>
-    <a
-      title="Docker Legal Terms"
-      href="https://www.docker.com/legal"
-      class="whitespace-normal md:truncate"
-      >Legal</a
-    >
-  </div>
+    <a href="https://www.docker.com/legal/docker-terms-use/">Terms of Use</a>
+    <a href="https://www.dockerstatus.com/">Status</a>
+    <a href="https://www.docker.com/legal">Legal</a>
+  </nav>
+  <p class="footer-copyright">
+    Copyright © 2013-{{ time.Now.Year }} Docker Inc. All rights reserved.
+  </p>
 </div>
-<div
-  class="border-t border-gray-200 bg-gray-100 px-4 py-4 text-sm text-gray-400 md:border-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-600"
->
-  <span
-    >Copyright © 2013-{{ time.Now.Year }} Docker Inc. All rights reserved.</span
-  >
-</div>
-<a href="{{ "bot-detection/" | relURL }}" hidden>Automated traffic detection</a>
+<a href="/bot-detection/" hidden>Automated traffic detection</a>

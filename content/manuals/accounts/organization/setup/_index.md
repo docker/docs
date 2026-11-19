@@ -15,23 +15,23 @@ keywords:
 grid:
   - title: Plan your rollout
     description: Coordinate settings, pilot testing, and deployment.
-    icon: magnifying-glass-plus
+    icon: zoom-in
     link: /accounts/organization/setup/rollout/
   - title: Create your organization
     description: Choose a new namespace and subscription.
-    icon: building-storefront
+    icon: store
     link: /accounts/organization/setup/orgs/
   - title: Convert your account
     description: Keep an existing Docker ID as the organization namespace.
-    icon: arrows-right-left
+    icon: arrow-right-left
     link: /accounts/organization/setup/convert-account/
   - title: Onboard your organization
     description: Invite members and configure sign-in.
-    icon: magnifying-glass-plus
+    icon: zoom-in
     link: /accounts/organization/setup/onboard/
   - title: Manage your organization
     description: Add members, teams, licenses, and seats after setup.
-    icon: user-group
+    icon: users
     link: /accounts/organization/manage/
   - title: Security
     description: Configure single sign-on, provisioning, and access management.

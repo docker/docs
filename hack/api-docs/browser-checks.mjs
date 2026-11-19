@@ -1,3 +1,10 @@
+import { readFileSync } from "node:fs";
+const catalog = JSON.parse(
+  readFileSync(
+    new URL("../../data/api-reference.json", import.meta.url),
+    "utf8",
+  ),
+);
 // Run with a Playwright Page against a built site; no product API calls.
 export default async function verify(page, base = "http://localhost:1314") {
   const results = [];
@@ -8,17 +15,18 @@ export default async function verify(page, base = "http://localhost:1314") {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(base + "/reference/api/");
   assert(
-    (await page.locator(".api-card").count()) === 6,
-    "Six API catalog entries",
+    (await page.locator(".api-card").count()) ===
+      catalog.apis.length + catalog.legacyAPIs.length,
+    "All API catalog entries",
   );
   assert(
-    (await page.locator("nav.navbar-font").count()) === 1,
-    "Catalog retains Reference sidebar",
+    (await page.locator(".sidebar-panel").count()) === 0,
+    "API catalog omits the section sidebar",
   );
   await page.goto(base + "/reference/api/dvp/latest/");
   assert(
     (await page.locator(".api-nav").count()) === 1 &&
-      (await page.locator("nav.navbar-font").count()) === 0,
+      (await page.locator("nav[data-sidebar-key]:not(.api-nav)").count()) === 0,
     "Reference uses local navigation",
   );
   const first = page.locator("[data-api-filter-item]").first();
@@ -47,7 +55,8 @@ export default async function verify(page, base = "http://localhost:1314") {
   await page.keyboard.press("Enter");
   await page.waitForURL("**/reference/api/");
   assert(
-    (await page.locator("nav.navbar-font").count()) === 1,
+    (await page.locator(".sidebar-panel").count()) === 0 &&
+      (await page.locator(".api-card").count()) > 0,
     "Keyboard back link restores catalog",
   );
   await page.goto(base + "/reference/api/hub/latest/");
@@ -77,10 +86,39 @@ export default async function verify(page, base = "http://localhost:1314") {
     ),
     "No narrow-screen document overflow",
   );
-  await page.goto(base + "/reference/api/engine/version/v1.56/");
+  await page.goto(base + "/engine/");
   assert(
-    (await page.locator("redoc").count()) === 1,
-    "Latest Engine retains ReDoc",
+    (await page
+      .locator('.related-reference a[href="/reference/api/engine/"]')
+      .count()) === 1 &&
+      (await page
+        .locator('.related-reference a[href="/reference/api/"]')
+        .count()) === 0,
+    "Engine related references link to the Engine API rather than the API catalog",
+  );
+  await page.goto(base + "/reference/api/engine/latest/");
+  await page.waitForURL(/\/reference\/api\/engine\/version\/v\d+\.\d+\/$/);
+  assert(
+    (await page.locator('[data-api-view="overview"]').count()) === 1,
+    "Latest Engine uses the generated renderer",
+  );
+  const engineSpec = await page
+    .getByRole("link", { name: "Download OpenAPI specification", exact: true })
+    .getAttribute("href");
+  assert(
+    (await page.request.get(new URL(engineSpec, base).href)).ok(),
+    "Latest Engine specification is published",
+  );
+  assert(
+    (await page.locator("[data-api-copy-source]").count()) === 0 &&
+      (await page.locator(".api-operation-row").count()) > 0,
+    "Latest Engine overview lists operations",
+  );
+  await page.goto(base + "/reference/api/engine/version/v1.56/");
+  await page.locator("redoc .api-info h1").waitFor({ state: "visible" });
+  assert(
+    (await page.locator(".site-header, .reading-header").count()) === 0,
+    "Engine ReDoc retains its standalone layout",
   );
   await page.goto(base + "/reference/api/ai-governance/");
   await page.waitForURL("**/reference/api/ai-governance/latest/");
@@ -91,7 +129,9 @@ export default async function verify(page, base = "http://localhost:1314") {
   await page.goto(base + "/ai/sandboxes-api/");
   assert(
     (await page
-      .locator('nav.navbar-font a[href="/reference/api/sandboxes/latest/"]')
+      .locator(
+        'nav[data-sidebar-key] a[href="/reference/api/sandboxes/latest/"]',
+      )
       .count()) === 1,
     "Sandboxes manual links to the API reference in the sidebar",
   );

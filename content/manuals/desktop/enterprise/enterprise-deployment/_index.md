@@ -37,4 +37,4 @@ Docker Desktop supports scalable deployment options tailored for enterprise IT e
 
 Learn how to use MSI and PKG installers, configure default settings, control updates, and ensure compliance with your organization's policies—across Windows, Mac, and Linux systems.
 
-{{< grid >}}
+{{< grid level="2" >}}

@@ -101,9 +101,6 @@ $ sbx run --model gemma4 --provider ollama claude
 Docker Sandboxes connects to Ollama at `localhost:11434`. It doesn't install,
 start, or manage the Ollama process.
 
-For Docker Model Runner, see
-[Run Claude Code in a Docker Sandbox with Docker Model Runner](/guides/claude-code-sandbox-model-runner/).
-
 ## Use a hosted provider
 
 Select a provider supported by `llmman` and a model available from that

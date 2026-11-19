@@ -1,0 +1,18 @@
+{{/* Related products supply a category only when they agree. Cached per reference root. */}}
+{{- $root := . -}}
+{{- $categories := slice -}}
+{{- range hugo.Data.navigation.products -}}
+  {{- if in .references $root -}}
+    {{- $categories = $categories | append (.category | default "") -}}
+  {{- end -}}
+{{- end -}}
+{{- $categories = $categories | uniq -}}
+{{- $category := dict -}}
+{{- if eq (len $categories) 1 -}}
+  {{- range hugo.Data.navigation.categories -}}
+    {{- if eq .id (index $categories 0) -}}
+      {{- $category = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $category -}}

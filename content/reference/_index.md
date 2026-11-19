@@ -1,69 +1,10 @@
 ---
 title: Reference documentation
 linkTitle: Reference
-layout: wide
+layout: reference-directory
 description: Find reference documentation for the Docker platform’s various APIs, CLIs, and file formats
 keywords: Docker reference, API, CLI, file formats
 params:
-  icon: command-line
+  icon: terminal
   notoc: true
-  grid_files:
-  - title: Dockerfile
-    description: Defines the contents and startup behavior of a single container.
-    icon: pencil-square
-    link: /reference/dockerfile/
-  - title: Compose file
-    description: Defines a multi-container application.
-    icon: rectangle-stack
-    link: /reference/compose-file/
-  grid_clis:
-  - title: Docker CLI
-    description: The main Docker CLI, includes all `docker` commands.
-    icon: command-line
-    link: /reference/cli/docker/
-  - title: Compose CLI
-    description: The CLI for Docker Compose, for building and running multi-container
-      applications.
-    icon: server-stack
-    link: /reference/cli/docker/compose/
-  - title: Daemon CLI (dockerd)
-    description: Persistent process that manages containers.
-    icon: cpu-chip
-    link: /reference/cli/dockerd/
-  grid_apis:
-  - title: Sandboxes API
-    description: Create cloud sandboxes, run processes, and manage sandbox resources.
-    icon: code-bracket
-    link: /reference/api/sandboxes/latest/
-  - title: Engine API
-    description: The main API for Docker, provides programmatic access to a daemon.
-    icon: code-bracket
-    link: /reference/api/engine/
-  - title: Docker Hub API
-    description: API to interact with Docker Hub.
-    icon: cloud
-    link: /reference/api/hub/latest/
-  - title: DVP Data API
-    description: API for Docker Verified Publishers to fetch analytics data.
-    icon: chart-bar
-    link: /reference/api/dvp/latest/
-  - title: Registry API
-    description: API for Docker Registry.
-    icon: circle-stack
-    link: /reference/api/registry/latest/
 ---
-
-This section includes the reference documentation for the Docker platform's
-various APIs, CLIs, drivers and specifications, and file formats.
-
-## File formats
-
-{{< grid items="grid_files" >}}
-
-## Command-line interfaces (CLIs)
-
-{{< grid items="grid_clis" >}}
-
-## Application programming interfaces (APIs)
-
-{{< grid items="grid_apis" >}}

@@ -25,7 +25,13 @@
       <p class="interactive-diagram__description">{{ $diagram.description }}</p>
     </div>
   </figcaption>
-  <div class="interactive-diagram__stage" data-diagram-stage></div>
+  <div
+    class="interactive-diagram__stage"
+    data-diagram-stage
+    tabindex="0"
+    role="group"
+    aria-labelledby="{{ $id }}-title"
+  ></div>
   {{- if eq $type "topology" }}
     <div
       class="interactive-diagram__topology-detail"
@@ -71,6 +77,7 @@
       <div
         class="interactive-diagram__progress"
         data-step-progress
+        role="group"
         aria-label="Diagram steps"
       ></div>
       <button type="button" class="interactive-diagram__button" data-step-next>

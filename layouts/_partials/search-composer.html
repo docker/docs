@@ -1,0 +1,31 @@
+<div class="search-composer">
+  <label
+    class="{{ if .dialog }}
+      sr-only
+    {{ else }}
+      composer-label
+    {{ end }}"
+    for="{{ .id }}"
+    >Search documentation or ask Docker</label
+  >
+  <input
+    id="{{ .id }}"
+    type="search"
+    x-model="query"
+    @input="queueSearch($event.target.value)"
+    @keydown.enter.prevent="if ($event.metaKey || $event.ctrlKey) ask()"
+    placeholder="What do you want to build?"
+    autocomplete="off"
+  />
+  <button
+    type="button"
+    class="ask-button"
+    @click="ask()"
+    :disabled="!query.trim()"
+    disabled
+  >
+    Ask Docker
+    {{ partial "ui-icon.html" (dict "name" "arrow-right") }}
+  </button>
+</div>
+{{ partial "search-results.html" . }}

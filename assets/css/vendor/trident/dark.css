@@ -1,0 +1,75 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+.dark {
+  color-scheme: dark;
+  --color-secondary-subtle-hover: oklch(1.0000 0.0000 0.00 / 0.14); /** Hover fill for secondary-subtle. Translucent like accent, so it reads on every surface. */
+  --color-accent: oklch(1.0000 0.0000 0.00 / 0.08); /** Hover and highlighted-item fill for menu items, ghost buttons and list rows. A neutral overlay, translucent so it reads on every surface. */
+  --color-edge: oklch(1.0000 0.0000 0.00 / 0.1); /** Dividers and the outlines of cards, panels and menus. Translucent, so it reads on every surface. Too faint for a control's edge: use control-edge. */
+  --color-overlay: oklch(0.0000 0.0000 0.00 / 0.7); /** Backdrop behind modal dialogs and drawers. */
+  --elevation-raised: 0px 1px 3px 0px rgb(0% 0% 0% / 0.4), 0px 1px 2px -1px rgb(0% 0% 0% / 0.4); /** Cards and panels. */
+  --elevation-floating: 0px 4px 6px -1px rgb(0% 0% 0% / 0.4), 0px 2px 4px -2px rgb(0% 0% 0% / 0.4); /** Menus, popovers and tooltips. */
+  --elevation-overlay: 0px 10px 15px -3px rgb(0% 0% 0% / 0.4), 0px 4px 6px -4px rgb(0% 0% 0% / 0.4); /** Dialogs and drawers. */
+  --color-surface: var(--color-black); /** Page surface. */
+  --color-surface-foreground: var(--color-gray-50);
+  --color-surface-raised: var(--color-gray-950); /** Surface above the page: cards, panels, menus, popovers and dialogs. Told apart by border and elevation shadow. */
+  --color-surface-raised-foreground: var(--color-gray-50);
+  --color-muted: var(--color-gray-800); /** Subdued surface: table headers, skeletons, code. */
+  --color-muted-foreground: var(--color-gray-400); /** Secondary text. Readable on surface, surface-raised and muted. */
+  --color-secondary: var(--color-gray-700); /** Secondary button fill. Slate, so it sits beside primary's blue. */
+  --color-secondary-foreground: var(--color-gray-50);
+  --color-secondary-hover: var(--color-gray-600);
+  --color-secondary-subtle: var(--color-accent); /** Quiet secondary fill, such as a ghost button's hover. An alias of accent. */
+  --color-accent-foreground: var(--color-gray-50);
+  --color-selected: var(--color-brand-900); /** Selected or pressed fill for list rows, toggles and nav items: a faint primary tint, so a selected item reads apart from the neutral accent hover. */
+  --color-selected-foreground: var(--color-gray-50);
+  --color-primary: var(--color-brand-600); /** Primary action fill: Docker's Ocean Blue in both modes. */
+  --color-primary-foreground: var(--color-white);
+  --color-primary-hover: var(--color-brand-700);
+  --color-primary-subtle: var(--color-brand-950);
+  --color-primary-subtle-foreground: var(--color-brand-200);
+  --color-primary-subtle-hover: var(--color-brand-800); /** Hover fill for primary-subtle, under primary-subtle-foreground. Two steps past primary-subtle, since the step between is selected. */
+  --color-primary-ink: var(--color-brand-400); /** Primary text and icons on surface and surface-raised, such as links. Not for text on a fill: use the fill's -foreground. */
+  --color-destructive: var(--color-red-600);
+  --color-destructive-foreground: var(--color-white);
+  --color-destructive-hover: var(--color-red-700);
+  --color-destructive-subtle: var(--color-red-950);
+  --color-destructive-subtle-foreground: var(--color-red-200);
+  --color-destructive-subtle-hover: var(--color-red-900);
+  --color-destructive-ink: var(--color-red-400); /** Destructive text and icons on surface and surface-raised, such as error messages. Not for text on a fill: use the fill's -foreground. */
+  --color-success: var(--color-green-400);
+  --color-success-foreground: var(--color-gray-950);
+  --color-success-hover: var(--color-green-300);
+  --color-success-subtle: var(--color-green-950);
+  --color-success-subtle-foreground: var(--color-green-200);
+  --color-success-subtle-hover: var(--color-green-900);
+  --color-success-ink: var(--color-green-400); /** Success text and icons on surface and surface-raised, such as confirmation text. Not for text on a fill: use the fill's -foreground. */
+  --color-warning: var(--color-amber-400);
+  --color-warning-foreground: var(--color-gray-950);
+  --color-warning-hover: var(--color-amber-300);
+  --color-warning-subtle: var(--color-amber-950);
+  --color-warning-subtle-foreground: var(--color-amber-200);
+  --color-warning-subtle-hover: var(--color-amber-900);
+  --color-warning-ink: var(--color-amber-400); /** Warning text and icons on surface and surface-raised, such as warning text. Not for text on a fill: use the fill's -foreground. */
+  --color-info: var(--color-sky-400);
+  --color-info-foreground: var(--color-gray-950);
+  --color-info-hover: var(--color-sky-300);
+  --color-info-subtle: var(--color-sky-950);
+  --color-info-subtle-foreground: var(--color-sky-200);
+  --color-info-subtle-hover: var(--color-sky-900);
+  --color-info-ink: var(--color-sky-400); /** Info text and icons on surface and surface-raised, such as informational text. Not for text on a fill: use the fill's -foreground. */
+  --color-premium: var(--color-violet-600); /** Paid-tier features: badges, tags and upsell alerts. */
+  --color-premium-foreground: var(--color-white);
+  --color-premium-hover: var(--color-violet-700);
+  --color-premium-subtle: var(--color-violet-950);
+  --color-premium-subtle-foreground: var(--color-violet-200);
+  --color-premium-subtle-hover: var(--color-violet-900);
+  --color-premium-ink: var(--color-violet-400); /** Premium text and icons on surface and surface-raised, such as paid-tier labels. Not for text on a fill: use the fill's -foreground. */
+  --color-control-edge: var(--color-gray-500); /** A control's edge: input, select and checkbox borders, and the unchecked switch track. At least 3:1 against the surface (WCAG 1.4.11). */
+  --color-secondary-subtle-foreground: var(--color-accent-foreground);
+  --color-secondary-ink: var(--color-muted-foreground); /** Secondary text and icons on surface and surface-raised, such as a ghost button's label. An alias of muted-foreground. */
+  --color-control: var(--color-surface-raised); /** Control fill (inputs, selects, textareas). */
+  --color-control-focus: var(--color-primary); /** Focus ring and focused border on anything focusable: controls, buttons, links, tabs. */
+  --color-control-invalid: var(--color-destructive); /** Focus ring and border on an invalid control. */
+}

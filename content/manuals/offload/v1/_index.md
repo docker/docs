@@ -7,15 +7,15 @@ keywords: offload, offload v1, cloud, docker offload start
 grid:
 - title: Quickstart
   description: Get up and running with Docker Offload v1.
-  icon: rocket-launch
+  icon: rocket
   link: /offload/v1/quickstart/
 - title: About
   description: Learn about Docker Offload v1 and how it works.
-  icon: information-circle
+  icon: info
   link: /offload/v1/about/
 - title: Configure
   description: Manage Docker Offload v1 for your organization and in Docker Desktop.
-  icon: adjustments-horizontal
+  icon: sliders-horizontal
   link: /offload/v1/configuration/
 - title: Usage
   description: Monitor Docker Offload v1 sessions for your organization.
@@ -23,7 +23,7 @@ grid:
   link: /offload/v1/usage/
 - title: Troubleshoot
   description: Troubleshoot issues with Docker Offload v1.
-  icon: bug-ant
+  icon: bug
   link: /offload/v1/troubleshoot/
 ---
 

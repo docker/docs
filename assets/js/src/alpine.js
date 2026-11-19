@@ -1,176 +1,261 @@
-import Alpine from 'alpinejs'
-import collapse from '@alpinejs/collapse'
-import persist from '@alpinejs/persist'
-import focus from '@alpinejs/focus'
-import { marked } from 'marked'
-import hljs from 'highlight.js/lib/core'
+import docsSearch from "../docs-search.js";
+import pageActions from "../page-actions.js";
+import Alpine from "alpinejs";
+import collapse from "@alpinejs/collapse";
+import persist from "@alpinejs/persist";
+import focus from "@alpinejs/focus";
+import { marked } from "marked";
+import hljs from "highlight.js/lib/core";
 // Import languages relevant to Docker docs
-import bash from 'highlight.js/lib/languages/bash'
-import dockerfile from 'highlight.js/lib/languages/dockerfile'
-import yaml from 'highlight.js/lib/languages/yaml'
-import json from 'highlight.js/lib/languages/json'
-import javascript from 'highlight.js/lib/languages/javascript'
-import python from 'highlight.js/lib/languages/python'
-import go from 'highlight.js/lib/languages/go'
+import bash from "highlight.js/lib/languages/bash";
+import dockerfile from "highlight.js/lib/languages/dockerfile";
+import yaml from "highlight.js/lib/languages/yaml";
+import json from "highlight.js/lib/languages/json";
+import javascript from "highlight.js/lib/languages/javascript";
+import python from "highlight.js/lib/languages/python";
+import go from "highlight.js/lib/languages/go";
 
-window.Alpine = Alpine
+window.Alpine = Alpine;
 
-Alpine.plugin(collapse)
-Alpine.plugin(persist)
-Alpine.plugin(focus)
+Alpine.plugin(collapse);
+Alpine.plugin(persist);
+Alpine.plugin(focus);
+
+// Keep chat usable when session storage is blocked or full.
+const gordonMemory = new Map();
+const gordonStorage = {
+  getItem(key) {
+    if (gordonMemory.has(key)) return gordonMemory.get(key);
+    try {
+      return sessionStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  },
+  setItem(key, value) {
+    gordonMemory.set(key, value);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch {}
+  },
+};
+Alpine.magic("gordonStorage", () => gordonStorage);
 
 // Register highlight.js languages
-hljs.registerLanguage('bash', bash)
-hljs.registerLanguage('sh', bash)
-hljs.registerLanguage('shell', bash)
-hljs.registerLanguage('console', bash)
-hljs.registerLanguage('dockerfile', dockerfile)
-hljs.registerLanguage('yaml', yaml)
-hljs.registerLanguage('yml', yaml)
-hljs.registerLanguage('json', json)
-hljs.registerLanguage('javascript', javascript)
-hljs.registerLanguage('js', javascript)
-hljs.registerLanguage('python', python)
-hljs.registerLanguage('py', python)
-hljs.registerLanguage('go', go)
-hljs.registerLanguage('golang', go)
+hljs.registerLanguage("bash", bash);
+hljs.registerLanguage("sh", bash);
+hljs.registerLanguage("shell", bash);
+hljs.registerLanguage("console", bash);
+hljs.registerLanguage("dockerfile", dockerfile);
+hljs.registerLanguage("yaml", yaml);
+hljs.registerLanguage("yml", yaml);
+hljs.registerLanguage("json", json);
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("js", javascript);
+hljs.registerLanguage("python", python);
+hljs.registerLanguage("py", python);
+hljs.registerLanguage("go", go);
+hljs.registerLanguage("golang", go);
 
 // Configure marked to escape HTML in text tokens only (not code blocks)
 marked.use({
   walkTokens(token) {
     // Escape HTML in text and HTML tokens, preserve code blocks
-    if (token.type === 'text' || token.type === 'html') {
-      const text = token.text || token.raw
+    if (token.type === "text" || token.type === "html") {
+      const text = token.text || token.raw;
       const escaped = text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-      if (token.text) token.text = escaped
-      if (token.raw) token.raw = escaped
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+      if (token.text) token.text = escaped;
+      if (token.raw) token.raw = escaped;
     }
-  }
-})
+  },
+});
 
 // Gordon's answers can contain ```openui-lang cards. The code that draws them is a separate
 // bundle (assets/js/gordon-cards), loaded the first time a card shows up.
-Alpine.store('gordonCards', { ready: false, failed: false })
+Alpine.store("gordonCards", { ready: false, failed: false });
 
-let gordonCardsLoading
+let gordonCardsLoading;
 
 function loadGordonCards() {
   gordonCardsLoading ??= new Promise((resolve, reject) => {
-    const script = document.createElement('script')
-    script.src = window.GORDON_CARDS_SRC
+    const script = document.createElement("script");
+    script.src = window.GORDON_CARDS_SRC;
+    const timeout = setTimeout(() => script.onerror?.(), 10000);
     script.onload = () => {
-      Alpine.store('gordonCards').ready = true
-      resolve(window.GordonCards)
-    }
+      clearTimeout(timeout);
+      Alpine.store("gordonCards").failed = false;
+      Alpine.store("gordonCards").ready = true;
+      resolve(window.GordonCards);
+    };
     script.onerror = () => {
+      clearTimeout(timeout);
+      script.onload = script.onerror = null;
       // Cards then stay plain code blocks, but a later call (such as Copy) can try again.
-      gordonCardsLoading = undefined
-      script.remove()
-      Alpine.store('gordonCards').failed = true
-      reject(new Error('Failed to load gordon-cards.js'))
-    }
-    document.head.append(script)
-  })
-  return gordonCardsLoading
+      gordonCardsLoading = undefined;
+      script.remove();
+      Alpine.store("gordonCards").failed = true;
+      reject(new Error("Failed to load gordon-cards.js"));
+    };
+    document.head.append(script);
+  });
+  return gordonCardsLoading;
 }
 
-Alpine.magic('gordonCards', () => loadGordonCards)
+Alpine.magic("gordonCards", () => loadGordonCards);
 
 // Swaps each ```openui-lang block for the card it describes. Until the card code has loaded, or
 // while a block is still streaming in and doesn't parse yet, it shows a placeholder. If the card
 // code can't load, or a finished block isn't a card, the block stays a plain code block.
 function replaceGordonCards(div, { streaming }) {
-  const blocks = div.querySelectorAll('pre > code.language-openui-lang')
-  if (blocks.length === 0) return
+  const blocks = div.querySelectorAll("pre > code.language-openui-lang");
+  if (blocks.length === 0) return;
 
-  const cards = Alpine.store('gordonCards')
+  const cards = Alpine.store("gordonCards");
   if (!cards.ready && !cards.failed) {
-    loadGordonCards().catch((err) => console.error('Gordon cards:', err))
+    loadGordonCards().catch((err) => console.error("Gordon cards:", err));
   }
   blocks.forEach((code) => {
-    const pre = code.parentElement
+    const pre = code.parentElement;
     if (cards.ready) {
-      const card = window.GordonCards.renderGordonCard(code.textContent)
+      const card = window.GordonCards.renderGordonCard(code.textContent);
       if (card) {
-        pre.replaceWith(card)
+        pre.replaceWith(card);
       } else if (streaming) {
-        pre.replaceWith(gordonCardPlaceholder())
+        pre.replaceWith(gordonCardPlaceholder());
       }
     } else if (!cards.failed) {
-      pre.replaceWith(gordonCardPlaceholder())
+      pre.replaceWith(gordonCardPlaceholder());
     }
-  })
+  });
 }
 
 function gordonCardPlaceholder() {
-  const placeholder = document.createElement('div')
-  placeholder.className = 'gordon-card-loading not-prose'
-  placeholder.setAttribute('role', 'status')
-  placeholder.setAttribute('aria-label', 'Drawing card')
-  placeholder.append(document.createElement('span'), document.createElement('span'))
-  return placeholder
+  const placeholder = document.createElement("div");
+  placeholder.className = "gordon-card-loading not-prose";
+  placeholder.setAttribute("role", "status");
+  placeholder.setAttribute("aria-label", "Drawing card");
+  placeholder.append(
+    document.createElement("span"),
+    document.createElement("span"),
+  );
+  return placeholder;
 }
 
+Alpine.magic("markdownText", () => (content) => {
+  const div = document.createElement("div");
+  div.innerHTML = marked(content);
+  if (Alpine.store("gordonCards").ready) {
+    replaceGordonCards(div, { streaming: false });
+  } else {
+    div.querySelectorAll("pre > code.language-openui-lang").forEach((code) => {
+      code.parentElement.replaceWith(
+        "An answer card is available in the conversation.",
+      );
+    });
+  }
+  div
+    .querySelectorAll(
+      "h1, h2, h3, h4, h5, h6, p, div, section, li, pre, blockquote, table, tr, th, td, br, button",
+    )
+    .forEach((element) => element.after("\n"));
+  return div.textContent.trim();
+});
+
 // Add $markdown magic for rendering markdown with syntax highlighting
-Alpine.magic('markdown', () => {
-  return (content, { streaming = false } = {}) => {
-    if (!content) return ''
-    const html = marked(content)
+Alpine.magic("markdown", () => {
+  return (content, { streaming = false, tableLabel } = {}) => {
+    if (!content) return "";
+    const html = marked(content);
 
     // Parse and highlight code blocks
-    const div = document.createElement('div')
-    div.innerHTML = html
+    const div = document.createElement("div");
+    div.innerHTML = html;
 
-    replaceGordonCards(div, { streaming })
+    // Answers are sections of the chat, whose title is an h2.
+    const headings = [...div.querySelectorAll("h1, h2, h3, h4, h5, h6")];
+    const firstLevel = Number(headings[0]?.tagName.slice(1) || 1);
+    let previousLevel = 2;
+    for (const heading of headings) {
+      const level = Math.min(
+        6,
+        previousLevel + 1,
+        Math.max(3, Number(heading.tagName.slice(1)) - firstLevel + 3),
+      );
+      const replacement = document.createElement(`h${level}`);
+      replacement.append(...heading.childNodes);
+      heading.replaceWith(replacement);
+      previousLevel = level;
+    }
+    div.querySelectorAll("thead th").forEach((header) => {
+      header.scope = "col";
+    });
+    div.querySelectorAll("table").forEach((table) => {
+      if (tableLabel) table.setAttribute("aria-label", tableLabel);
+      const scroll = document.createElement("div");
+      scroll.className = "gordon-card-table";
+      scroll.tabIndex = 0;
+      table.replaceWith(scroll);
+      scroll.append(table);
+    });
+    replaceGordonCards(div, { streaming });
 
     // Handle code blocks (pre > code)
-    div.querySelectorAll('pre').forEach((pre) => {
+    div.querySelectorAll("pre").forEach((pre) => {
+      pre.tabIndex = 0;
       // Add not-prose to prevent Tailwind Typography styling
-      pre.classList.add('not-prose')
-      const code = pre.querySelector('code')
+      pre.classList.add("not-prose");
+      const code = pre.querySelector("code");
       if (code) {
         // Preserve the original text with newlines
-        const codeText = code.textContent
+        const codeText = code.textContent;
 
         // Clear and set as plain text first to preserve structure
-        code.textContent = codeText
+        code.textContent = codeText;
 
         // Now apply highlight.js which will work with the text nodes
-        hljs.highlightElement(code)
+        hljs.highlightElement(code);
       }
-    })
+    });
 
     // Handle inline code elements (not in pre blocks)
-    div.querySelectorAll('code:not(pre code)').forEach((code) => {
-      code.classList.add('not-prose')
-    })
+    div.querySelectorAll("code:not(pre code)").forEach((code) => {
+      code.classList.add("not-prose");
+    });
 
-    return div.innerHTML
-  }
-})
+    return div.innerHTML;
+  };
+});
 
 // Stores
-Alpine.store("showSidebar", false)
-Alpine.store('gordon', {
+Alpine.store("gordon", {
   isOpen: false,
-  query: '',
+  query: "",
   autoSubmit: false,
   toggle() {
-    this.isOpen = !this.isOpen
+    if (this.isOpen) this.close();
+    else this.open();
   },
   open(query, autoSubmit = false) {
-    this.isOpen = true
+    document
+      .querySelectorAll("dialog[open]")
+      .forEach((dialog) => dialog.close());
+    document.querySelectorAll("[data-mobile-nav]").forEach((menu) => {
+      menu.open = false;
+    });
+    this.isOpen = true;
     if (query) {
-      this.query = query
-      this.autoSubmit = autoSubmit
+      this.query = query;
+      this.autoSubmit = autoSubmit;
     }
   },
   close() {
-    this.isOpen = false
-  }
-})
+    this.isOpen = false;
+  },
+});
 
-Alpine.start()
+Alpine.data("docsSearch", docsSearch);
+Alpine.data("pageActions", pageActions);
+Alpine.start();

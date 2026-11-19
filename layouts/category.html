@@ -1,0 +1,14 @@
+{{ define "main" }}
+  {{ range hugo.Data.navigation.categories }}
+    {{ if eq .id $.Params.category }}
+      {{ range .groups }}
+        <section class="discovery-group">
+          <h2>{{ .label }}</h2>
+          <ul class="discovery-list">
+            {{ range .entries }}{{ partial "discovery-entry.html" . }}{{ end }}
+          </ul>
+        </section>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

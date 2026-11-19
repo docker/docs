@@ -10,29 +10,29 @@ params:
 grid:
 - title: Why use Compose?
   description: Understand Docker Compose's key benefits
-  icon: magnifying-glass
+  icon: search
   link: /compose/intro/features-uses/
 - title: How Compose works 
   description: Understand how Compose works
-  icon: squares-2x2
+  icon: layout-grid
   link: /compose/intro/compose-application-model/
 - title: Install Compose
   description: Follow the instructions on how to install Docker Compose.
-  icon: arrow-down-tray
+  icon: download
   link: /compose/install
 - title: Quickstart
   description: Learn the key concepts of Docker Compose whilst building a simple Python
     web application.
-  icon: magnifying-glass-plus
+  icon: zoom-in
   link: /compose/gettingstarted
 - title: View the release notes
   description: Find out about the latest enhancements and bug fixes.
-  icon: document-plus
+  icon: file-plus
   link: "https://github.com/docker/compose/releases"
 - title: Explore the Compose file reference
   description: Find information on defining services, networks, and volumes for a
     Docker application.
-  icon: arrows-right-left
+  icon: arrow-right-left
   link: /reference/compose-file
 - title: Use Compose Bridge
   description: Transform your Compose configuration file into configuration files for different platforms, such as Kubernetes.
@@ -40,7 +40,7 @@ grid:
   link: /compose/bridge
 - title: Browse common FAQs
   description: Explore general FAQs and find out how to give feedback.
-  icon: question-mark-circle
+  icon: circle-help
   link: /compose/faq
 aliases:
 - /compose/overview/
@@ -62,4 +62,4 @@ well as CI workflows. It also has commands for managing the whole lifecycle of y
  - Stream the log output of running services
  - Run a one-off command on a service
 
-{{< grid >}}
+{{< grid level="2" >}}

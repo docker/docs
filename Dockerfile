@@ -59,7 +59,7 @@ RUN --mount=type=cache,target=/tmp/hugo_cache \
       --printUnusedTemplates \
       -b $DOCS_URL \
       -e $HUGO_ENV
-RUN node --test hack/test/flatten-and-resolve.mjs
+RUN node --test hack/test/*.mjs hack/api-docs/output-checks.test.mjs
 RUN node hack/flatten-and-resolve.js public
 RUN node hack/api-docs/verify-output.mjs public
 
@@ -85,6 +85,7 @@ WORKDIR /project
 COPY --from=vacuum /out/vacuum /usr/local/bin/vacuum
 COPY hack/api-docs ./hack/api-docs
 COPY content/reference/api ./content/reference/api
+COPY _vendor/github.com/moby/moby/api/docs ./_vendor/github.com/moby/moby/api/docs
 COPY data/api-reference.json ./data/api-reference.json
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build <<"EOT"

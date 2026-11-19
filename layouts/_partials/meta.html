@@ -6,7 +6,7 @@
     {{ printf "%s | %s" .Title site.Title }}
   </title>
 {{ end }}
-{{ if or (eq .Params.sitemap false) (not hugo.IsProduction) }}
+{{ if or (eq .Kind "404") (eq .Params.sitemap false) (not hugo.IsProduction) }}
   <meta name="robots" content="noindex" />
 {{ end }}
 <meta name="description" content="{{ $description }}" />
@@ -18,10 +18,9 @@
 
 <!-- favicon -->
 <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" />
-<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" />
+<link rel="icon" href="/assets/images/favicon-48x48.png" sizes="48x48" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<meta name="theme-color" content="#2496ed" />
+<link rel="icon" href="/assets/images/favicon-16x16.png" sizes="16x16" />
 
 <!-- SEO -->
 <meta name="twitter:title" itemprop="title name" content="{{ .Title }}" />

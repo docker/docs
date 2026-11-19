@@ -12,19 +12,19 @@ params:
 grid:
   - title: Docker individual accounts
     description: Create and manage your Docker ID, email, and sign-in methods.
-    icon: user-circle
+    icon: circle-user
     link: /accounts/individual/
   - title: Organization accounts
     description: Manage members, teams, and organization settings.
-    icon: building-storefront
+    icon: store
     link: /accounts/organization/
   - title: Company accounts
     description: Group multiple organizations for centralized administration.
-    icon: building-office-2
+    icon: building-2
     link: /accounts/company/
   - title: Security
     description: Authentication, tokens, and roles for accounts and organizations.
-    icon: lock-closed
+    icon: lock
     link: /security/
   - title: Subscription and billing
     description: Plans, payments, and invoices for your account or organization.
@@ -32,7 +32,7 @@ grid:
     link: /subscription-billing/
   - title: FAQs
     description: Common questions about accounts, billing, and security.
-    icon: question-mark-circle
+    icon: circle-help
     link: /faqs/
 ---
 

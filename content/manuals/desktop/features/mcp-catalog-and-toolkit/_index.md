@@ -13,11 +13,11 @@ keywords: Docker, ai, mcp servers, ai agents, extension, docker desktop, llm, do
 grid:
   - title: Get started with MCP Toolkit
     description: Learn how to quickly install and use the MCP Toolkit to set up servers and clients.
-    icon: magnifying-glass-plus
+    icon: zoom-in
     link: /ai/mcp-catalog-and-toolkit/get-started/
   - title: MCP Catalog
     description: Browse Docker's curated collection of verified MCP servers
-    icon: globe-alt
+    icon: globe
     link: /ai/mcp-catalog-and-toolkit/catalog/
   - title: MCP Profiles
     description: Organize servers into profiles for different projects and share configurations
@@ -29,11 +29,11 @@ grid:
     link: /ai/mcp-catalog-and-toolkit/toolkit/
   - title: MCP Gateway
     description: Use the CLI and Gateway to run MCP servers with custom configurations
-    icon: cpu-chip
+    icon: cpu
     link: /ai/mcp-catalog-and-toolkit/mcp-gateway/
   - title: Dynamic MCP
     description: Discover and add MCP servers on-demand using natural language. This feature is experimental.
-    icon: magnifying-glass
+    icon: search
     link: /ai/mcp-catalog-and-toolkit/dynamic-mcp/
   - title: Security FAQs
     description: Common questions about MCP security, credentials, and server verification

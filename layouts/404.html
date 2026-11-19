@@ -1,47 +1,48 @@
-{{ define "left" }}
-{{ end }}
-
 {{ define "main" }}
-  <article class="prose max-w-none dark:prose-invert">
-    <h1>404</h1>
-    <p>
-      There might be a mistake in the URL or you might've clicked a link to
-      content that no longer exists. If you think it's the latter, please file
-      an issue in our issue tracker on GitHub.
+  <div class="not-found">
+    <p class="not-found-description">
+      The page may have moved, or the address may be incorrect. Search the docs
+      or start with one of the links below.
     </p>
-
+    <button
+      class="search-trigger not-found-search"
+      type="button"
+      data-open-search
+    >
+      {{ partial "ui-icon.html" (dict "name" "search") }}
+      Search documentation
+    </button>
+    <nav aria-label="Find your way">
+      <ul class="discovery-list not-found-links">
+        {{ $destinations := slice (dict "url" "/" "title" "Docs home" "description" "Explore Docker documentation.") }}
+        {{ range hugo.Data.navigation.categories }}
+          {{ $destinations = $destinations | append (dict "url" .landing "title" .label "description" .description) }}
+        {{ end }}
+        {{ range $destinations }}
+          <li>
+            <a href="{{ .url }}">
+              <div>
+                <strong>{{ .title }}</strong>
+                <p>{{ .description }}</p>
+              </div>
+              {{ partial "ui-icon.html" (dict "name" "arrow-right") }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
     <a
-      id="newissue"
-      class="link"
-      href="{{ site.Params.repo }}/issues/new"
+      class="not-found-report"
+      href="{{ site.Params.repo }}/issues/new?template=broken_link.yml"
+      x-data
+      x-init="
+        const url = new URL($el.href);
+        url.searchParams.set('title', '[404]: ' + window.location.pathname);
+        url.searchParams.set('target', window.location.href);
+        url.searchParams.set('location', document.referrer);
+        $el.href = url.toString();
+      "
+      >Report a broken link</a
     >
-      <strong>Create a new issue</strong></a
-    >
-
-    <a href="{{ site.BaseURL }}">
-      <figure>
-        <img src="/assets/images/404-docs.png" alt="404 page not found" />
-        <figcaption class="link">Go to the homepage</figcaption>
-      </figure>
-    </a>
-
-    <script>
-    let el = document.querySelector("#newissue");
-    if (el) {
-        let url = new URL("{{ site.Params.repo }}/issues/new");
-        url.searchParams.set("title", "404 at " + window.location.pathname);
-        let body = "I found a broken link : " + window.location.href;
-        if (document.referrer !== "") {
-            body += "\nI arrived on this page through: " + document.referrer
-        }
-        url.searchParams.set("body", body);
-        url.searchParams.set("template", "broken_link.yml")
-        url.searchParams.set("title", "[404]: " + window.location.pathname);
-        url.searchParams.set("target", window.location.href);
-        url.searchParams.set("location", document.referrer);
-        url.searchParams.set("labels", "status/triage");
-        el.setAttribute("href", url.toString());
-    }
-    </script>
-  </article>
+  </div>
 {{ end }}

@@ -1,0 +1,11 @@
+/* Highlight.js renders chat answers; Hugo's Chroma styles handle documentation. */
+.gordon-drawer {
+  @import "highlight-github-light.css";
+}
+.dark .gordon-drawer {
+  @import "highlight-github-dark.css";
+}
+.gordon-drawer .hljs {
+  background: transparent;
+  color: var(--color-surface-foreground);
+}

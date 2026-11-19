@@ -9,19 +9,19 @@ params:
 grid:
 - title: Install Docker Engine
   description: Learn how to install the open source Docker Engine for your distribution.
-  icon: arrow-down-tray
+  icon: download
   link: /engine/install
 - title: Storage
   description: Use persistent data with Docker containers.
-  icon: circle-stack
+  icon: database
   link: /storage
 - title: Networking
   description: Manage network connections between containers.
-  icon: server-stack
+  icon: server
   link: /network
 - title: Container logs
   description: Learn how to view and read container logs.
-  icon: document-text
+  icon: file-text
   link: /config/containers/logging/
 - title: Prune
   description: Tidy up unused resources.
@@ -29,7 +29,7 @@ grid:
   link: /config/pruning
 - title: Configure the daemon
   description: Delve into the configuration options of the Docker daemon.
-  icon: adjustments-horizontal
+  icon: sliders-horizontal
   link: /config/daemon
 - title: Rootless mode
   description: Run Docker without root privileges.
@@ -41,7 +41,7 @@ grid:
   link: /engine/deprecated/
 - title: Release notes
   description: Read the release notes for the latest version.
-  icon: document-plus
+  icon: file-plus
   link: /engine/release-notes
 aliases:
 - /edge/
@@ -67,10 +67,7 @@ daemon through scripting or direct CLI commands. Many other Docker applications
 use the underlying API and CLI. The daemon creates and manages Docker objects,
 such as images, containers, networks, and volumes.
 
-For more details, see
-[Docker Architecture](/get-started/docker-overview.md#docker-architecture).
-
-{{< grid >}}
+{{< grid level="2" >}}
 
 ## Licensing
 

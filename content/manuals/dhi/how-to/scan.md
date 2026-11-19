@@ -380,8 +380,5 @@ $ docker scout vex get dhi.io/<image>:<tag> --output vex.json
 ## Explore the VEX file
 
 After exporting the VEX attestation, you can inspect its contents to
-understand what each statement means and filter by status. For a guided
-walkthrough of the VEX document structure, status values, and `jq` filtering
-commands, see [Explore VEX statements in Docker Hardened
-Images](/guides/dhi-vex-walkthrough/).
+understand what each statement means and filter by status.
 
