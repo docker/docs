@@ -185,7 +185,7 @@
   grid-template-columns: minmax(0, 1fr) 180px;
   gap: 3rem;
 }
-.article-layout > article {
+.article-content {
   min-width: 0;
   width: 100%;
 }
