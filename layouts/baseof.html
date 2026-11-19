@@ -44,11 +44,14 @@
         <div class="reading-body">
           {{ block "main" . }}
             <div class="article-layout">
-              {{ block "article" . }}
-                <article class="prose dark:prose-invert">
-                  {{ partial "content-default.html" . }}
-                </article>
-              {{ end }}
+              <div class="article-content">
+                {{ block "article" . }}
+                  <article class="prose dark:prose-invert">
+                    {{ partial "content-default.html" . }}
+                  </article>
+                {{ end }}
+                {{ partial "github-links.html" . }}
+              </div>
               {{ block "right" . }}
                 <div class="reading-toc" data-pagefind-ignore>
                   {{ partial "aside.html" . }}

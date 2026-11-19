@@ -1,9 +1,32 @@
+{{ define "head-extra" }}
+  <script>
+    if (/^\/guides(?:\/|$)/.test(window.location.pathname)) {
+      document.documentElement.setAttribute("data-guides-not-found", "");
+    }
+  </script>
+{{ end }}
+
 {{ define "main" }}
   <div class="not-found">
     <p class="not-found-description">
       The page may have moved, or the address may be incorrect. Search the docs
       or start with one of the links below.
     </p>
+    <aside
+      class="not-found-guides admonition admonition-note"
+      aria-labelledby="not-found-guides-title"
+    >
+      <div class="admonition-header">
+        {{ partial "ui-icon.html" (dict "name" "info") }}
+        <h2 id="not-found-guides-title" class="admonition-title">
+          Looking for a guide?
+        </h2>
+      </div>
+      <p>
+        Explore guides and learning paths on
+        <a href="https://docs.docker.com/learn/">Docker Learn</a>.
+      </p>
+    </aside>
     <button
       class="search-trigger not-found-search"
       type="button"

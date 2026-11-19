@@ -7,6 +7,7 @@ import verifyLayout from "./layout.mjs";
 import verifyClipboardFocus from "./clipboard.mjs";
 import verifyDiscovery from "./discovery.mjs";
 import verifySearchChatRegressions from "./search-chat-regressions.mjs";
+import verifyNotFound from "./not-found.mjs";
 import { mkdir } from "node:fs/promises";
 import { chromium } from "playwright";
 const base = process.env.DOCS_TEST_URL || "http://localhost:1313";
@@ -394,6 +395,7 @@ try {
   await verifyClipboardFocus(page, base);
   await verifyDiscovery(page, base);
   await verifySearchChatRegressions(page, base);
+  await verifyNotFound(page, base);
   await mkdir("/tmp/docs-redesign-captures", { recursive: true });
   for (const route of [
     "/",

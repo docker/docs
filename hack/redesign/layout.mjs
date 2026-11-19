@@ -63,7 +63,7 @@ export default async function verifyLayout(page, base) {
       );
       const layout = await page.locator(".article-layout").boundingBox();
       const article = await page
-        .locator(".article-layout > article")
+        .locator(".article-content > article")
         .boundingBox();
       if (width >= 1200) {
         const box = await toc.boundingBox();
