@@ -206,7 +206,6 @@
   padding-right: 0.5rem;
 }
 .collection-overview,
-.nav-branch-label,
 .collection-tree a,
 .related-reference a {
   display: block;
@@ -234,8 +233,7 @@
 .nav-branch {
   position: relative;
 }
-.nav-branch > a,
-.nav-branch > .nav-branch-label {
+.nav-branch > a {
   padding-right: 2.5rem;
 }
 .collection-tree summary {
@@ -255,6 +253,15 @@
 }
 .collection-tree summary::-webkit-details-marker {
   display: none;
+}
+.collection-tree .nav-branch-summary {
+  position: static;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: auto;
+  height: auto;
+  min-height: 2.25rem;
+  padding: 0.5rem 0.65rem;
 }
 .collection-tree details[open] > summary > .ui-icon {
   transform: rotate(90deg);
@@ -778,7 +785,4 @@
 :root[data-theme-preference="light"] .theme-icon-sun,
 :root[data-theme-preference="dark"] .theme-icon-moon {
   display: inline-flex;
-}
-.collection-tree summary > span:not(.ui-icon) {
-  padding: 0.5rem 0.65rem;
 }

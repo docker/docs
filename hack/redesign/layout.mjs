@@ -38,6 +38,25 @@ export default async function verifyLayout(page, base) {
     "Widening the viewport restores a manually collapsed sidebar",
   );
 
+  // Sections without landing pages must be toggleable through their labels.
+  await page.goto(base + "/build/policies/");
+  const policies = page.locator(
+    'summary[aria-label="Toggle Validating builds navigation"]',
+  );
+  const metadata = page.locator(
+    'summary[aria-label="Toggle Metadata navigation"]',
+  );
+  const metadataDetails = metadata.locator("..");
+  for (const expanded of [true, false]) {
+    if ((await policies.locator("..").evaluate((el) => el.open)) !== expanded)
+      await policies.click();
+    await metadata.getByText("Metadata", { exact: true }).click();
+    assert.equal(await metadataDetails.evaluate((el) => el.open), true);
+    await metadata.focus();
+    await metadata.press("Enter");
+    assert.equal(await metadataDetails.evaluate((el) => el.open), false);
+  }
+
   for (const route of [
     "/reference/cli/docker/buildx/build/",
     "/reference/cli/sbx/",
