@@ -128,37 +128,9 @@ runc replacements, you configure the path to the runtime executable, and
 optionally a set of runtime arguments. For more information, see
 [Configure runc drop-in replacements](/reference/cli/dockerd.md#configure-runc-drop-in-replacements).
 
-To add youki as a container runtime:
+To add youki as a container runtime, follow the [Getting started](https://youki-dev.github.io/youki/user/basic_setup.html#getting-started) section of the official setup guide.
 
-1. Install youki and its dependencies.
-
-   For instructions, refer to the
-   [official setup guide](https://youki-dev.github.io/youki/user/basic_setup.html).
-
-2. Register youki as a runtime for Docker by editing the Docker daemon
-   configuration file, located at `/etc/docker/daemon.json` by default.
-
-   The `path` key should specify the path to wherever you installed youki.
-
-   ```console
-   # cat > /etc/docker/daemon.json <<EOF
-   {
-     "runtimes": {
-       "youki": {
-         "path": "/usr/local/bin/youki"
-       }
-     }
-   }
-   EOF
-   ```
-
-3. Reload the daemon's configuration.
-
-   ```console
-   # systemctl reload docker
-   ```
-
-Now you can run containers that use youki as a runtime.
+Once you've completed the setup, run containers with youki using the `--runtime` flag:
 
 ```console
 $ docker run --rm --runtime youki hello-world
