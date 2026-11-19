@@ -22,11 +22,12 @@
         {{- if $children -}}
           {{ if .RelPermalink }}
             <a href="{{ .Params.sidebar.goto | default .RelPermalink }}" {{ if eq . $.current }}aria-current="page"{{ end }} title="{{ .Title }}">{{ $label }}{{ partial "navigation/badge.html" . }}</a>
-          {{ else }}
-            <span class="nav-branch-label">{{ $label }}</span>
           {{ end }}
           <details {{ if $active }}open{{ end }}>
-            <summary aria-label="Toggle {{ $label }} navigation">{{ partial "ui-icon.html" (dict "name" "chevron-right") }}</summary>
+            <summary {{ if not .RelPermalink }}class="nav-branch-summary"{{ end }} aria-label="Toggle {{ $label }} navigation">
+              {{ if not .RelPermalink }}<span>{{ $label }}</span>{{ partial "navigation/badge.html" . }}{{ end }}
+              {{ partial "ui-icon.html" (dict "name" "chevron-right") }}
+            </summary>
             {{ partial "navigation/tree.html" $args }}
           </details>
         {{- else -}}
