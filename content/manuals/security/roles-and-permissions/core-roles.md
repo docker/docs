@@ -6,7 +6,7 @@ description: >-
 keywords: >-
   Docker roles, core roles, Member role, Editor role, Owner role, organization
   permissions, company owner, Docker Hub, Docker Scout, Docker Build Cloud,
-  OIDC, teams, access control, Docker Business, custom roles
+  OIDC, teams, access control, Docker Business, custom roles, Cloud Sandboxes
 weight: 10
 aliases:
   - /enterprise/security/roles-and-permissions/core-roles/
@@ -129,6 +129,22 @@ _\* If not part of a company_
 | Configure builder settings | ✅     | ✅     | ✅    |
 | Buy minutes                | ❌     | ❌     | ✅    |
 | Manage subscription        | ❌     | ❌     | ✅    |
+
+### Docker Cloud Sandboxes
+
+| Permission          | Member | Editor | Owner |
+| :------------------ | :----- | :----- | :---- |
+| Use Cloud Sandboxes | ❌     | ❌     | ✅    |
+
+By default, only Owners can use Docker Cloud Sandboxes. To let Members or
+Editors use them, create a
+[custom role](/manuals/security/roles-and-permissions/custom-roles/_index.md)
+that includes the
+[Use Cloud Sandboxes permission](/manuals/security/roles-and-permissions/custom-roles/permissions-reference.md)
+and assign it to those users or to their team.
+
+This permission applies to Cloud Sandboxes only. It doesn't apply to local
+sandboxes that you run with `sbx`.
 
 ## Next steps
 
