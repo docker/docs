@@ -28,6 +28,7 @@ This page contains the domain URLs that you need to add to a firewall allowlist 
 | https://hub.docker.com                                                               | Docker Hub                                   |
 | https://registry-1.docker.io                                                         | Docker Pull/Push                             |
 | https://production.cloudfront.docker.com                                             | Docker Pull/Push                             |
+| https://docker-images-prod.s3.dualstack.us-east-1.amazonaws.com                      | Docker Pull/Push (layer redirects)           |
 | https://docker-pinata-support.s3.amazonaws.com                                       | Troubleshooting                              |
 | https://api.dso.docker.com                                                           | Docker Scout service                         |
 | https://api.docker.com                                                               | New API                                      |
@@ -36,3 +37,14 @@ This page contains the domain URLs that you need to add to a firewall allowlist 
 | https://dhi.io                                                                       | Docker Hardened Images                       |
 | https://registry.scout.docker.com                                                    | Docker Scout registry for DHI attestations   |
 | https://ai-backend-service.docker.com                                                | [Gordon](/manuals/ai/gordon/_index.md)       |
+
+> [!NOTE]
+>
+> Docker Hub can redirect layer downloads to regional object storage. Clients on
+> some networks fetch layers from
+> `https://docker-images-prod.s3.dualstack.us-east-1.amazonaws.com` rather than
+> `production.cloudfront.docker.com`, so allow both hosts if pulls time out
+> behind an egress allowlist.
+>
+> This table lists the hosts Docker knows about today; Docker updates it when the
+> pull hosts change.
