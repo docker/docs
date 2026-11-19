@@ -396,15 +396,18 @@ Steps:
    platforms.
 
 3. To add cross-compilation support, update the Dockerfile to use the
-   pre-defined `BUILDPLATFORM`, `TARGETOS` and `TARGETARCH` build arguments.
+   pre-defined `BUILDPLATFORM`, `TARGETOS`, `TARGETARCH` and `TARGETVARIANT`
+   build arguments.
    - Pin the `golang` image to the platform of the builder using the
      `--platform=$BUILDPLATFORM` option.
    - Add `ARG` instructions for the Go compilation stages to make the
-     `TARGETOS` and `TARGETARCH` build arguments available to the commands in
-     this stage.
+     `TARGETOS`, `TARGETARCH` and `TARGETVARIANT` build arguments available to
+     the commands in this stage.
    - Set the `GOOS` and `GOARCH` environment variables to the values of
-     `TARGETOS` and `TARGETARCH`. The Go compiler uses these variables to do
-     cross-compilation.
+     `TARGETOS` and `TARGETARCH`, and `GOARM` to the value of `TARGETVARIANT`
+     without the leading `v`. The Go compiler uses these variables to do
+     cross-compilation. `GOARM` only takes effect when `GOARCH` is `arm`,
+     where Go would otherwise default to ARMv7 even for an `arm/v6` target.
 
    {{< tabs >}}
    {{< tab name="Updated Dockerfile" >}}
@@ -414,9 +417,10 @@ Steps:
    FROM --platform=$BUILDPLATFORM golang:alpine AS build
    ARG TARGETOS
    ARG TARGETARCH
+   ARG TARGETVARIANT
    WORKDIR /app
    ADD https://github.com/dvdksn/buildme.git#eb6279e0ad8a10003718656c6867539bd9426ad8 .
-   RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o server .
+   RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} GOARM=${TARGETVARIANT#v} go build -o server .
 
    FROM alpine
    COPY --from=build /app/server /server
@@ -447,10 +451,11 @@ Steps:
    +FROM --platform=$BUILDPLATFORM golang:alpine AS build
    +ARG TARGETOS
    +ARG TARGETARCH
+   +ARG TARGETVARIANT
    WORKDIR /app
    ADD https://github.com/dvdksn/buildme.git#eb6279e0ad8a10003718656c6867539bd9426ad8 .
    -RUN go build -o server .
-   +RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o server .
+   +RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} GOARM=${TARGETVARIANT#v} go build -o server .
 
    FROM alpine
    COPY --from=build /app/server /server
