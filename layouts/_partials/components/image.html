@@ -1,0 +1,39 @@
+<figure x-data>
+  <a
+    href="{{ .src }}"
+    class="image-zoom-trigger"
+    :aria-haspopup="'dialog'"
+    aria-label="Enlarge image: {{ .alt | default "documentation illustration" }}"
+    @click.prevent="$refs.zoom.showModal()"
+  >
+    <img
+      loading="lazy"
+      src="{{ .src }}"
+      alt="{{ .alt }}"
+      {{ with .width }}width="{{ . }}"{{ end }}
+      {{ with .height }}height="{{ . }}"{{ end }}
+      class="mx-auto{{ with .border }}
+        border border-divider-light dark:border-divider-dark
+      {{ end }} rounded-sm"
+    />
+  </a>
+  <dialog
+    x-ref="zoom"
+    class="image-zoom-dialog"
+    aria-label="Enlarged image"
+    @click="if ($event.target === $el) $el.close()"
+  >
+    <button
+      type="button"
+      autofocus
+      aria-label="Close enlarged image"
+      @click="$refs.zoom.close()"
+    >
+      {{ partial "ui-icon.html" (dict "name" "x") }}
+    </button>
+    <img src="{{ .src }}" alt="{{ .alt }}" loading="lazy" />
+  </dialog>
+  {{ with .caption }}
+    <figcaption>{{ . }}</figcaption>
+  {{ end }}
+</figure>

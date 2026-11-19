@@ -1,0 +1,13 @@
+{{/* Use the same filtered children for rendering and deciding whether to expand. */}}
+{{- $pages := .section.Pages -}}
+{{- if .section.Params.sidebar.reverse -}}
+  {{- $pages = $pages.Reverse -}}
+{{- end -}}
+{{- $result := slice -}}
+{{- range $pages -}}
+  {{- $active := or (eq . $.current) ($.current.IsDescendant .) -}}
+  {{- if and (or (not $.section.Params.sidebar.activeChildrenOnly) $active) (or (ne .Params.sitemap false) $active $.reveal) -}}
+    {{- $result = $result | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $result -}}

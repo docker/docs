@@ -1,4 +1,0 @@
-/* center the closing button for the cookie consent modal */
-.ot-floating-button__close {
-  @apply flex justify-center items-center;
-}

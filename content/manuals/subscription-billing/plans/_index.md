@@ -43,7 +43,7 @@ grid:
     description: >-
       Publisher analytics and reporting plans for organization accounts.
     link: /subscription-billing/plans/docker-verified-publisher/
-    icon: check-badge
+    icon: check-verified
 ---
 
 

@@ -1,10 +1,14 @@
 {{- $name := . -}}
-{{- $path := strings.TrimLeft "/" $name -}}
-{{- if not (strings.Contains $path "/") -}}
-  {{- $path = printf "icons/%s.svg" $path -}}
-{{- end -}}
-{{- with resources.Get $path -}}
-  {{- .Content | safeHTML -}}
+{{- if strings.HasSuffix $name ".svg" -}}
+  {{- $path := strings.TrimLeft "/" $name -}}
+  {{- if not (strings.Contains $path "/") -}}
+    {{- $path = printf "icons/%s" $path -}}
+  {{- end -}}
+  {{- with resources.Get $path -}}
+    {{- .Content | safeHTML -}}
+  {{- else -}}
+    {{- errorf "Icon not found: %q (resolved to %q)" $name $path -}}
+  {{- end -}}
 {{- else -}}
-  {{- errorf "Icon not found: %q (resolved to %q)" $name $path -}}
+  {{- partialCached "ui-icon.html" (dict "name" $name) $name -}}
 {{- end -}}

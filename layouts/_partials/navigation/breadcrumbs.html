@@ -1,0 +1,27 @@
+{{/* Resolve the published breadcrumb trail once for navigation and metadata. */}}
+{{- $items := slice -}}
+{{- if and (not .IsHome) (ne .Kind "404") -}}
+  {{- $items = $items | append (dict "label" "Docs" "url" site.Home.RelPermalink) -}}
+  {{- $page := . -}}
+  {{- $context := partialCached "navigation/context.html" . .Path -}}
+  {{- with $context.category -}}
+    {{- if ne .landing $page.RelPermalink -}}
+      {{- $items = $items | append (dict "label" .label "url" .landing) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- range .Ancestors.Reverse -}}
+    {{- if and (not .IsHome) (ne .Path "/manuals") (ne .Path "/c") -}}
+      {{- if or (not $context.root) (eq . $context.root) (.IsDescendant $context.root) $context.reference -}}
+        {{- if .RelPermalink -}}
+          {{- $items = $items | append (dict "label" .LinkTitle "url" .RelPermalink) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $items = $items | append (dict "label" .LinkTitle "url" .RelPermalink) -}}
+{{- end -}}
+{{- $result := slice -}}
+{{- range $items -}}
+  {{- $result = $result | append (dict "label" (.label | plainify | htmlUnescape) "url" .url) -}}
+{{- end -}}
+{{- return $result -}}

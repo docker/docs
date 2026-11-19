@@ -10,6 +10,11 @@
 # in its help output, which can be redirected to elsewhere in the documentation.
 "/learn/":
   - /learn
+  - /get-started/
+  - /guides/
+  - /guides/language/
+  - /language/
+  - /learning-paths/
 "/security/access-tokens/personal-access-tokens/":
   - /go/access-tokens/
 "/agentic-platform/":
@@ -171,8 +176,6 @@
   - /guides/testcontainers-cloud/demo-ci/
   - /guides/testcontainers-cloud/demo-local/
   - /guides/testcontainers-cloud/why/
-"/guides/lab-container-supported-development/":
-  - /guides/container-supported-development/
 
 # Docker Scout
 "/scout/":
@@ -344,8 +347,53 @@
   - /go/dockerfile-reference/
   - /engine/reference/builder/
   - /reference/builder/
-"/get-started/tutorials/run-an-app/":
+"/learn/paths/get-started-with-docker-containers/":
   - /go/get-started-sharing/
+  - /get-started/02_our_app/
+  - /get-started/03_updating_app/
+  - /get-started/04_sharing_app/
+  - /get-started/05_persisting_data/
+  - /get-started/06_bind_mounts/
+  - /get-started/07_multi_container/
+  - /get-started/08_using_compose/
+  - /get-started/09_image_best/
+  - /get-started/11_what_next/
+  - /get-started/hands-on-overview/
+  - /get-started/introduction/
+  - /get-started/introduction/build-and-push-first-image/
+  - /get-started/introduction/develop-with-containers/
+  - /get-started/introduction/whats-next/
+  - /get-started/part2/
+  - /get-started/part3/
+  - /get-started/run-an-app/
+  - /get-started/tutorials/run-an-app/
+  - /get-started/workshop/
+  - /get-started/workshop/02_our_app/
+  - /get-started/workshop/03_updating_app/
+  - /get-started/workshop/04_sharing_app/
+  - /get-started/workshop/05_persisting_data/
+  - /get-started/workshop/06_bind_mounts/
+  - /get-started/workshop/07_multi_container/
+  - /get-started/workshop/08_using_compose/
+  - /get-started/workshop/09_image_best/
+  - /get-started/workshop/10_what_next/
+  - /guides/get-started/
+  - /guides/getting-started/
+  - /guides/getting-started/build-and-push-first-image/
+  - /guides/getting-started/develop-with-containers/
+  - /guides/getting-started/whats-next/
+  - /guides/walkthroughs/access-local-folder/
+  - /guides/walkthroughs/containerize-your-app/
+  - /guides/workshop/
+  - /guides/workshop/02_our_app/
+  - /guides/workshop/03_updating_app/
+  - /guides/workshop/04_sharing_app/
+  - /guides/workshop/05_persisting_data/
+  - /guides/workshop/06_bind_mounts/
+  - /guides/workshop/07_multi_container/
+  - /guides/workshop/08_using_compose/
+  - /guides/workshop/09_image_best/
+  - /guides/workshop/10_what_next/
 
 # Docker Debug
 "/reference/cli/docker/debug/":
@@ -379,7 +427,6 @@
 "/docker-hub/usage/pulls/":
   - /go/hub-pull-limits/
 
-
 # Links in Desktop
 
 # Docker Sandboxes
@@ -410,7 +457,7 @@
 "/ai/mcp-catalog-and-toolkit/catalog/#custom-catalogs":
   - /go/mcp-custom-catalogs/
 
- # Desktop DMR
+  # Desktop DMR
 "/ai/model-runner/":
   - /go/model-runner/
   - /guides/genai-pdf-bot/
@@ -582,20 +629,6 @@
 "/engine/storage/volumes/":
   - /go/engine-volumes/
 
-"/guides/nodejs/":
-  - /go/nodejs-guide/
-"/guides/python/":
-  - /go/python-guide/
-"/guides/golang/":
-  - /go/golang-guide/
-"/guides/java/":
-  - /go/java-guide/
-"/guides/dotnet/":
-  - /go/dotnet-guide/
-"/guides/rust/":
-  - /go/rust-guide/
-
-# Docker Hardened Images (DHI)
 "/dhi/how-to/customize/":
   - /go/dhi-customization/
 "/dhi/how-to/scan/#scan-a-dhi-using-grype":
@@ -1469,3 +1502,62 @@
   - /reference/cli/sbx/create/gemini/
   - /reference/cli/sbx/create/opencode/
   - /reference/cli/sbx/create/shell/
+
+# Learning content is served by github.com/docker/learn.
+# Verified against commit 6ae7522d1affcec49e6aea13a892f5130e78ad5c.
+"/learn/content/dhi-backstage/":
+  - /guides/dhi-backstage/
+"/learn/content/dhi-openshift/":
+  - /guides/dhi-openshift/
+"/learn/content/firecrawl-sandbox-kit/":
+  - /guides/firecrawl-sandbox-kit/
+"/learn/content/how-image-layers-and-the-build-cache-work/":
+  - /get-started/docker-concepts/building-images/understanding-image-layers/
+  - /get-started/docker-concepts/building-images/using-the-build-cache/
+  - /guides/docker-concepts/building-images/understanding-image-layers/
+  - /guides/docker-concepts/building-images/using-the-build-cache/
+"/learn/content/keep-data-with-volumes-and-bind-mounts/":
+  - /get-started/docker-concepts/running-containers/persisting-container-data/
+  - /get-started/docker-concepts/running-containers/sharing-local-files/
+  - /guides/docker-concepts/running-containers/persisting-container-data/
+  - /guides/docker-concepts/running-containers/sharing-local-files/
+  - /guides/walkthroughs/persist-data/
+"/learn/content/mistral-vibe-sandbox/":
+  - /guides/mistral-vibe-sandbox/
+"/learn/content/run-a-multi-container-app-with-compose/":
+  - /get-started/docker-concepts/running-containers/multi-container-applications/
+  - /get-started/docker-concepts/the-basics/what-is-docker-compose/
+  - /guides/docker-concepts/running-containers/multi-container-applications/
+  - /guides/docker-concepts/the-basics/what-is-docker-compose/
+  - /guides/walkthroughs/multi-container-apps/
+"/learn/content/run-your-first-sandbox/":
+  - /get-started/run-an-agent/
+  - /get-started/tutorials/run-an-agent/
+"/learn/content/share-your-image-on-docker-hub/":
+  - /get-started/docker-concepts/building-images/build-tag-and-publish-an-image/
+  - /guides/docker-concepts/building-images/build-tag-and-publish-an-image/
+"/learn/content/shrink-your-image-with-multi-stage-builds/":
+  - /get-started/docker-concepts/building-images/multi-stage-builds/
+  - /guides/docker-concepts/building-images/multi-stage-builds/
+"/learn/content/what-is-a-container/":
+  - /get-started/docker-concepts/the-basics/what-is-a-container/
+  - /get-started/docker-concepts/the-basics/what-is-a-registry/
+  - /get-started/docker-concepts/the-basics/what-is-an-image/
+  - /get-started/run-docker-hub-images/
+  - /get-started/run-your-own-container/
+  - /get-started/what-is-a-container/
+  - /guides/docker-concepts/the-basics/what-is-a-container/
+  - /guides/docker-concepts/the-basics/what-is-a-registry/
+  - /guides/docker-concepts/the-basics/what-is-an-image/
+  - /guides/walkthroughs/
+  - /guides/walkthroughs/publish-your-image/
+  - /guides/walkthroughs/run-a-container/
+  - /guides/walkthroughs/run-hub-images/
+  - /guides/walkthroughs/what-is-a-container/
+"/learn/content/write-your-first-dockerfile/":
+  - /get-started/docker-concepts/building-images/writing-a-dockerfile/
+  - /guides/docker-concepts/building-images/writing-a-dockerfile/
+"/learn/content/zscaler/":
+  - /guides/zscaler/
+"/learn/paths/build-and-share-your-own-images/":
+  - /get-started/docker-concepts/building-images/

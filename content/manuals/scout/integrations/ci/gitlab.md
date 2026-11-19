@@ -90,4 +90,4 @@ Dockerfile and if the commit was to the CI branch.
 
 The following is a video walkthrough of the process of setting up the workflow with GitLab.
 
-<iframe class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/451336c4508c42189532108fc37b2560?sid=f912524b-276d-417d-b44a-c2d39719aa1a"></iframe>
+<iframe title="Configure Docker Scout in GitLab CI/CD" class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/451336c4508c42189532108fc37b2560?sid=f912524b-276d-417d-b44a-c2d39719aa1a"></iframe>

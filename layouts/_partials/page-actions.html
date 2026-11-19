@@ -1,0 +1,25 @@
+<div class="page-actions" data-pagefind-ignore x-data="pageActions">
+  <button
+    type="button"
+    marlin-action="ask-gordon-button"
+    @click="$store.gordon.open()"
+    @mouseenter="$store.gordon.prefetch()"
+    @focus="$store.gordon.prefetch()"
+  >
+    {{ partial "ui-icon.html" (dict "name" "bot") }} Ask Docker
+  </button>
+  {{ with .OutputFormats.Get "markdown" }}
+    <button
+      type="button"
+      data-markdown-url="{{ partial "utils/markdown-url.html" $ }}"
+      @click="copy($el.dataset.markdownUrl)"
+    >
+      {{ partial "ui-icon.html" (dict "name" "copy") }} Copy Markdown
+    </button>
+    <a href="{{ partial "utils/markdown-url.html" $ }}"
+      >{{ partial "ui-icon.html" (dict "name" "external-link") }} View
+      Markdown</a
+    >
+    <span role="status" x-text="status"></span>
+  {{ end }}
+</div>

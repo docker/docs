@@ -1,0 +1,3 @@
+{{- $id := "connection" -}}
+{{- if .securitySchemes -}}{{- $id = "authentication" -}}{{- end -}}
+{{- return $id -}}

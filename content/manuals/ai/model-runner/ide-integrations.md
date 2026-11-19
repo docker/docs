@@ -240,10 +240,6 @@ print(response.text)
 
 [OpenCode](https://opencode.ai/) is an open-source coding assistant designed to integrate directly into developer workflows. It supports multiple model providers and exposes a flexible configuration system that makes it easy to switch between them.
 
-See [Use OpenCode with Docker Model Runner](../../../guides/opencode-model-runner.md)
-for a task-focused guide that walks through model setup, configuration, and
-troubleshooting.
-
 ### Configuration
 
 1. Install OpenCode (see [docs](https://opencode.ai/docs/#install))
@@ -277,12 +273,6 @@ You can find more details in [this Docker Blog post](https://www.docker.com/blog
 ## Claude Code
 
 [Claude Code](https://claude.com/product/claude-code) is [Anthropic's](https://www.anthropic.com/) command-line tool for agentic coding. It lives in your terminal, understands your codebase, and executes routine tasks, explains complex code, and handles Git workflows through natural language commands.
-
-See [Use Claude Code with Docker Model Runner](../../../guides/claude-code-model-runner.md)
-for a task-focused guide that walks through model setup, configuration, and
-inspecting requests. To run Claude Code in an isolated Docker Sandbox against
-a local model, see
-[Run Claude Code in a Docker Sandbox with Docker Model Runner](../../../guides/claude-code-sandbox-model-runner.md).
 
 ### Configuration
 

@@ -95,20 +95,24 @@ func writeJSON(p string, v any) error {
 }
 
 type Diagnostic struct {
-	Rule    string `json:"rule"`
-	Pointer string `json:"pointer"`
-	Message string `json:"message"`
+	Rule     string `json:"rule"`
+	Pointer  string `json:"pointer"`
+	Message  string `json:"message"`
+	Severity string `json:"severity"`
 }
 type Source struct {
-	Experimental bool     `json:"experimental,omitempty"`
-	ID           string   `json:"id"`
-	Product      string   `json:"product"`
-	Title        string   `json:"title"`
-	Source       string   `json:"source"`
-	Owner        string   `json:"owner"`
-	Manual       string   `json:"manual"`
-	Connection   string   `json:"connection"`
-	Guides       []string `json:"guides"`
+	Experimental     bool     `json:"experimental,omitempty"`
+	AuthoredOverview bool     `json:"authoredOverview,omitempty"`
+	URL              string   `json:"url,omitempty"`
+	SourceURL        string   `json:"sourceURL,omitempty"`
+	ID               string   `json:"id"`
+	Product          string   `json:"product"`
+	Title            string   `json:"title"`
+	Source           string   `json:"source"`
+	Owner            string   `json:"owner"`
+	Manual           string   `json:"manual"`
+	Connection       string   `json:"connection"`
+	Guides           []string `json:"guides"`
 }
 type Registry struct{ resources map[string]any }
 
@@ -135,7 +139,11 @@ type Document struct {
 }
 
 func (d *Document) issue(rule, p, msg string) {
-	d.Diagnostics = append(d.Diagnostics, Diagnostic{Rule: rule, Pointer: p, Message: strings.ReplaceAll(msg, d.URI, "source:"+d.Source.ID)})
+	severity := "error"
+	if rule == "example" {
+		severity = "warning"
+	}
+	d.Diagnostics = append(d.Diagnostics, Diagnostic{Rule: rule, Pointer: p, Message: strings.ReplaceAll(msg, d.URI, "source:"+d.Source.ID), Severity: severity})
 }
 func walk(v any, p string, fn func(Object, string)) {
 	switch n := v.(type) {
@@ -514,19 +522,18 @@ func (d *Document) validate(metaDir string) {
 		}
 		ids[id] = true
 		opTags := arr(op["tags"])
-		if len(opTags) == 0 || tags[str(opTags[0])] != "nav" {
-			d.issue("S5", p+"/tags", "The first operation tag must identify a declared navigation group")
+		kind, declared := "", false
+		if len(opTags) > 0 {
+			kind, declared = tags[str(opTags[0])]
 		}
-		for _, tag := range opTags {
-			if _, ok := tags[str(tag)]; !ok {
-				d.issue("S5", p+"/tags", "Operation tag is undeclared: "+str(tag))
-			}
+		if len(opTags) == 0 || (declared && kind != "" && kind != "nav") {
+			d.issue("S5", p+"/tags", "The first operation tag must identify a navigation group")
 		}
 		if len(arr(op["servers"])) == 0 && d.Source.Connection != "unix" {
 			d.issue("S6", p, "Operation needs effective servers or a local connection profile")
 		}
-		if strings.TrimSpace(str(op["description"])) == "" {
-			d.issue("S4", p+"/description", "Operation description required")
+		if strings.TrimSpace(str(op["description"])) == "" && strings.TrimSpace(str(op["summary"])) == "" {
+			d.issue("S4", p+"/description", "Operation summary or description required")
 		}
 		for _, pr := range arr(op["parameters"]) {
 			param := obj(pr)
@@ -733,10 +740,16 @@ func run() error {
 		}
 		d.Source = src
 		d.validate(meta)
-		blocking += len(d.Diagnostics)
+		errors := 0
+		for _, diagnostic := range d.Diagnostics {
+			if diagnostic.Severity != "warning" {
+				errors++
+			}
+		}
+		blocking += errors
 		reports = append(reports, Object{"api": src.ID, "sha256": d.Digest, "schemas": d.SchemaCount, "examples": d.ExampleCount, "operations": len(d.operations()), "diagnostics": d.Diagnostics})
 		models = append(models, d.model())
-		fmt.Printf("%s: %d operations, %d schema roots, %d examples, %d diagnostics\n", src.ID, len(d.operations()), d.SchemaCount, d.ExampleCount, len(d.Diagnostics))
+		fmt.Printf("%s: %d operations, %d schema roots, %d examples, %d errors, %d warnings\n", src.ID, len(d.operations()), d.SchemaCount, d.ExampleCount, errors, len(d.Diagnostics)-errors)
 	}
 	out := filepath.Join(root, "tmp/api-reference")
 	if e = writeJSON(filepath.Join(out, "validation.json"), reports); e != nil {

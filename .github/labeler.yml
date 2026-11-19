@@ -95,17 +95,6 @@ area/security:
           - content/manuals/security/**
           - content/manuals/engine/security/**
 
-area/get-started:
-  - changed-files:
-      - any-glob-to-any-file:
-          - content/get-started/**
-
-area/guides:
-  - changed-files:
-      - any-glob-to-any-file:
-          - content/guides/**
-          - content/learning-paths/**
-
 area/networking:
   - changed-files:
       - any-glob-to-any-file:
@@ -160,11 +149,6 @@ area/extensions:
       - any-glob-to-any-file:
           - content/manuals/extensions/**
           - content/reference/api/extensions-sdk/**
-
-area/samples:
-  - changed-files:
-      - any-glob-to-any-file:
-          - content/samples/**
 
 area/storage:
   - changed-files:

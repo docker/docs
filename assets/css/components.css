@@ -1,91 +1,217 @@
 @layer components {
-  .card {
-    @apply mt-2 mb-2 flex flex-col gap-2 rounded-sm border border-gray-200 p-3;
-    @apply dark:border-gray-700 dark:bg-gray-900;
-    @apply transition-shadow duration-200;
-    &:hover,
-    &:focus {
-      @apply border-gray-300 dark:border-gray-600;
-    }
-  }
-  .card-link:hover {
-    @apply !no-underline;
-  }
-  .card-header {
-    @apply mb-2 flex items-center gap-2;
-    @apply text-gray-700 dark:text-gray-100;
-  }
-  .card-icon {
-    @apply text-gray-700 dark:text-gray-100;
-  }
-  .card-img,
-  .card-img svg {
-    @apply m-0 flex max-h-5 min-h-5 max-w-5 min-w-5 items-center justify-center fill-current;
-  }
-  .card-title {
-    @apply font-semibold;
-  }
-  .card-link {
-    @apply block text-inherit no-underline hover:underline;
-  }
-  .card-description {
-    @apply text-gray-600;
-    @apply dark:text-gray-300;
+  .docs-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.1rem 0.375rem;
+    border-radius: 0.25rem;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.4;
+    vertical-align: middle;
+    white-space: nowrap;
   }
 
-  .admonition {
-    @apply relative mb-4 flex w-full flex-col items-start gap-3 rounded-sm px-6 py-4;
-    @apply bg-gray-50 dark:bg-gray-900;
+  .copy-container {
+    background: var(--color-surface-raised);
+    outline-color: var(--color-edge);
   }
-  .admonition-header {
-    @apply flex flex-wrap items-center gap-2;
+  .code-block-title {
+    color: var(--color-muted-foreground);
   }
-  .admonition-title {
-    @apply font-semibold;
+  .code-copy {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
   }
-  .admonition-content {
-    @apply w-full min-w-0 flex-1 flex-wrap overflow-x-auto break-words;
-    color: var(--tw-prose-body);
+  .code-copy--title {
+    top: -2.5rem;
   }
-  .admonition-note {
-    @apply border-blue-400 bg-blue-50 text-blue-900;
-    @apply dark:border-blue-600 dark:bg-blue-950 dark:text-blue-100;
+  .code-copy-button {
+    display: flex;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    color: var(--color-muted-foreground);
   }
-  .admonition-tip {
-    @apply border-green-400 bg-green-100 text-green-900;
-    @apply dark:border-green-600 dark:bg-green-950 dark:text-green-100;
+  .code-copy-button:hover {
+    color: var(--color-surface-foreground);
   }
-  .admonition-warning {
-    @apply border-yellow-400 bg-yellow-50 text-yellow-900;
-    @apply dark:border-yellow-600 dark:bg-yellow-950 dark:text-yellow-100;
+  .code-copy-button svg {
+    width: 1rem;
+    height: 1rem;
   }
-  .admonition-danger {
-    @apply border-red-400 bg-red-50 text-red-900;
-    @apply dark:border-red-600 dark:bg-red-950 dark:text-red-100;
+  .code-copy-status:not(.sr-only) {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: min(16rem, 70vw);
+    padding: 0.5rem;
+    border: 1px solid var(--color-edge);
+    border-radius: 0.5rem;
+    background: var(--color-surface-raised);
+    color: var(--color-surface-foreground);
+    font: 0.75rem/1.5 var(--font-sans);
   }
-  .admonition-important {
-    @apply border-purple-400 bg-purple-50 text-purple-900;
-    @apply dark:border-purple-600 dark:bg-purple-950 dark:text-purple-100;
+  @media (hover: hover) {
+    .code-copy-button {
+      opacity: 0;
+    }
+    .copy-container:hover .code-copy-button,
+    .copy-container:focus-within .code-copy-button {
+      opacity: 1;
+    }
   }
-  .admonition-icon {
-    @apply flex-shrink-0;
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    min-height: 24px;
+
+  /* Fenced code opts out of prose styles, so set its reading size explicitly. */
+  .code-block pre {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    margin-block: 0.5rem;
+    padding: 1rem;
+    border: 1px solid var(--color-edge);
+    border-radius: 0.75rem;
+    background: var(--color-surface-raised);
+    color: var(--color-surface-foreground);
+  }
+  .card:has(.card-link):hover {
+    border-color: var(--color-control-edge);
+  }
+  .card-link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+  .card-link:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    margin-bottom: 0.625rem;
+  }
+  .card-icon {
+    display: flex;
+    align-items: center;
+    flex: none;
+    height: 1.5rem;
+  }
+  .card-img {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .admonition p{
-    margin-bottom: 1em;
+  .card-img,
+  .card-img svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: currentColor;
   }
-  .admonition ul{
-    @apply list-disc pl-5 mb-1;
+  .card-title {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 600;
+  }
+  .card-description {
+    margin: 0;
+    color: var(--color-muted-foreground);
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  .admonition {
+    --admonition-background: var(--color-surface-raised);
+    --admonition-foreground: var(--color-surface-foreground);
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-block: 1.5rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-edge);
+    border-radius: 0.75rem;
+    background: var(--admonition-background);
+    color: var(--admonition-foreground);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.65;
+  }
+  .admonition-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .admonition-title {
+    font-weight: 600;
+  }
+  .admonition-content {
+    width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .admonition-note {
+    --admonition-background: var(--color-info-subtle);
+    --admonition-foreground: var(--color-info-subtle-foreground);
+  }
+  .admonition-important {
+    --admonition-background: var(--color-primary-subtle);
+    --admonition-foreground: var(--color-primary-subtle-foreground);
+  }
+  .admonition-tip {
+    --admonition-background: var(--color-success-subtle);
+    --admonition-foreground: var(--color-success-subtle-foreground);
+  }
+  .admonition-warning {
+    --admonition-background: var(--color-warning-subtle);
+    --admonition-foreground: var(--color-warning-subtle-foreground);
+  }
+  .admonition-danger {
+    --admonition-background: var(--color-destructive-subtle);
+    --admonition-foreground: var(--color-destructive-subtle-foreground);
+  }
+  .admonition-icon,
+  .admonition-icon svg {
+    display: block;
+    flex: none;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  .admonition-content > * + * {
+    margin-top: 0.75rem;
+  }
+  .admonition ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .admonition ol {
+    list-style: decimal;
+    padding-left: 1.25rem;
+  }
+  .admonition a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .admonition code {
+    font-size: 0.875em;
+  }
+  .admonition a > code {
+    padding: 0;
+    background: transparent;
   }
 
   .download-links {
-    @apply my-0  text-gray-600 dark:text-gray-400 rounded-sm border-1 border-gray-100 bg-gray-100/10 px-2 py-1;
+    @apply my-0 rounded-sm border-1 border-gray-100 bg-gray-100/10 px-2 py-1 text-gray-600 dark:text-gray-400;
     @apply dark:border-gray-800 dark:bg-gray-900;
     font-size: 86%;
   }
@@ -95,37 +221,75 @@
   }
 
   .download-links-subcontainer {
-    @apply flex flex-row gap-2 justify-between;
-    ul{
-      @apply m-0 p-0 list-none;
-      li{
-        @apply p-0 m-0;
+    @apply flex flex-row justify-between gap-2;
+    ul {
+      @apply m-0 list-none p-0;
+      li {
+        @apply m-0 p-0;
       }
     }
   }
 
   .card-image {
-    @apply h-12 w-12 overflow-hidden;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: none;
+    object-fit: contain;
   }
 
   .button {
-     @apply my-2 mr-2 inline-block rounded-sm bg-blue-500 p-1 px-3 text-white hover:bg-blue-600 dark:bg-blue-500 hover:dark:bg-blue-400;
+    @apply my-2 mr-2 inline-block rounded-sm p-1 px-3;
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+    &:hover {
+      background: var(--color-primary-hover);
+    }
   }
 
   .summary-bar {
-    @apply my-1 mt-4 flex flex-col rounded-sm border-1 border-gray-100 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    margin-block: 1.5rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-edge);
+    border-radius: 0.75rem;
+    background: var(--color-surface-raised);
+    color: var(--color-muted-foreground);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  .summary-bar > div {
+    align-items: baseline;
+  }
+  .summary-bar .font-bold {
+    color: var(--color-surface-foreground);
+    font-weight: 600;
   }
 
   .tabs {
-    @apply bg-blue/2 rounded-sm p-2;
+    border: 1px solid var(--color-edge);
+    border-radius: 0.75rem;
+    padding: 1rem;
   }
   .tablist {
-    @apply mb-1 border-b border-gray-100 dark:border-gray-800;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--color-edge);
+    margin-bottom: 1rem;
   }
-
   .tab-item {
-    @apply inline-block rounded-t-sm px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-900;
-    @apply dark:text-gray-200;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 2px solid transparent;
+    color: var(--color-muted-foreground);
+  }
+  .tab-item[aria-selected="true"] {
+    border-color: var(--color-primary-ink);
+    color: var(--color-surface-foreground);
+  }
+  .tab-item:hover {
+    background: var(--color-accent);
   }
 }
 
@@ -137,4 +301,123 @@
    regardless of selector specificity. An unlayered rule wins over both. */
 pre.mermaid:not(:has(svg)):not([data-error]) {
   display: none;
+}
+
+.image-zoom-trigger {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  cursor: zoom-in;
+}
+.image-zoom-dialog {
+  margin: auto;
+  padding: 3.5rem 1rem 1rem;
+  max-width: 95vw;
+  max-height: 95vh;
+  background: var(--color-surface-raised);
+  color: var(--color-surface-foreground);
+  border: 1px solid var(--color-edge);
+  border-radius: 0.75rem;
+}
+.image-zoom-dialog::backdrop {
+  background: #000c;
+}
+.image-zoom-dialog > button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+}
+.image-zoom-dialog > button:hover {
+  background: var(--color-accent);
+}
+.image-zoom-dialog img {
+  max-height: calc(95vh - 5rem);
+  object-fit: contain;
+  margin: 0;
+}
+.prose figcaption {
+  color: var(--color-muted-foreground);
+}
+
+/* Keep disabled labels readable rather than fading their entire control. */
+button:disabled {
+  cursor: not-allowed;
+  color: var(--color-muted-foreground);
+  background: var(--color-muted);
+}
+
+[data-tooltip-button] {
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  justify-content: center;
+}
+
+.animated-image {
+  margin-block: 1.5rem;
+  border: 1px solid var(--color-edge);
+  border-radius: 0.75rem;
+  background: var(--color-surface-raised);
+  color: var(--color-surface-foreground);
+}
+.animated-image > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  list-style: none;
+  font-size: 0.875rem;
+  font-weight: 550;
+  user-select: none;
+}
+.animated-image > summary::-webkit-details-marker {
+  display: none;
+}
+.animated-image > summary:hover {
+  background: var(--color-accent);
+}
+.animated-image > summary:focus-visible {
+  outline-offset: -4px;
+}
+.animated-image[open] > summary {
+  border-bottom: 1px solid var(--color-edge);
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+.animated-image[open] > summary > .ui-icon {
+  transform: rotate(90deg);
+}
+.animated-image .animation-hide-label,
+.animated-image[open] .animation-show-label {
+  display: none;
+}
+.animated-image[open] .animation-hide-label {
+  display: inline;
+}
+.animated-image > figure {
+  margin: 0;
+  padding: 0.75rem;
+}
+.animated-image > figure > .image-zoom-trigger > img {
+  margin: 0;
+}
+
+/* Bridge the tooltip's offset so it stays open when the pointer enters it. */
+[data-tooltip-body]::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 8px;
+}
+[data-tooltip-body][data-placement="top"]::before {
+  top: 100%;
+}
+[data-tooltip-body][data-placement="bottom"]::before {
+  bottom: 100%;
 }

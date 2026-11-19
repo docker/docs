@@ -26,7 +26,7 @@ Docker MCP Toolkit.
 
 Before you begin, make sure you meet the following requirements to get started with Docker MCP Toolkit.
 
-1. Download and install the latest version of [Docker Desktop](/get-started/get-docker/).
+1. Download and install the latest version of [Docker Desktop](/get-docker/).
 2. Open the Docker Desktop settings and select **Beta features**.
 3. Select **Enable Docker MCP Toolkit**.
 4. Select **Apply**.

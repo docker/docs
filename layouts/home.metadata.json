@@ -1,5 +1,5 @@
-[
-{{- range where site.Pages "Params.sitemap" "!=" false -}}
+{{- $metadata := slice -}}
+{{- range where (where site.Pages "Params.sitemap" "!=" false) "RelPermalink" "!=" "" -}}
   {{- $title := .LinkTitle -}}
   {{- $desc := partialCached "utils/description.html" . . -}}
   {{- $kwd := partialCached "utils/keywords.html" . . -}}
@@ -10,6 +10,6 @@
       {{ $tags = $tags | append .title }}
     {{- end -}}
   {{- end -}}
-  {{- jsonify (dict "url" .Permalink "title" $title "description" $desc "keywords" $kwd "tags" $tags) -}},
+  {{- $metadata = $metadata | append (dict "url" .Permalink "title" $title "description" $desc "keywords" $kwd "tags" $tags) -}}
 {{- end -}}
-{}]
+{{- $metadata | jsonify -}}

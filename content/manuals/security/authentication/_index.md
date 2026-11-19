@@ -11,11 +11,11 @@ grid:
     link: /security/authentication/single-sign-on/
   - title: Two-factor authentication
     description: Add a TOTP security code to an individual Docker account.
-    icon: device-phone-mobile
+    icon: smartphone
     link: /security/authentication/2fa/
   - title: OIDC connections
     description: Authenticate GitHub Actions with short-lived tokens.
-    icon: lock-closed
+    icon: lock
     link: /security/authentication/oidc-connections/
 ---
 

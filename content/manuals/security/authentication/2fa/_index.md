@@ -16,7 +16,7 @@ grid:
   - title: Turn 2FA on or off
     description: >-
       Set up an authenticator app, save the recovery code, or turn 2FA off.
-    icon: device-phone-mobile
+    icon: smartphone
     link: /security/authentication/2fa/manage/
   - title: Recover your account
     description: >-

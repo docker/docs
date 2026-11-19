@@ -1,0 +1,38 @@
+{{- $context := partialCached "navigation/context.html" . .Path -}}
+{{- with $context.sidebar -}}
+  <nav
+    aria-label="{{ .LinkTitle }} navigation"
+    data-sidebar-key="{{ .Path }}"
+    class="{{ if eq .Layout "cli" }}
+      command-tree
+    {{ else if eq .Layout "sbx-cli" }}
+      command-tree
+    {{ end }}"
+  >
+    {{ with .RelPermalink }}
+      <a
+        class="collection-overview"
+        href="{{ . }}"
+        {{ if eq $context.sidebar $ }}aria-current="page"{{ end }}
+        >Overview</a
+      >
+    {{ end }}
+    {{ partial "navigation/tree.html" (dict "section" . "current" $ "reveal" (eq .Params.sitemap false) "cli" (in (slice "cli" "sbx-cli") .Layout)) }}
+    {{ with $context.product.references }}
+      <div class="related-reference">
+        <p>Related reference</p>
+        <ul>
+          {{ range . }}
+            {{ with site.GetPage . }}
+              <li>
+                <a href="{{ partial "navigation/url.html" . }}"
+                  >{{ .LinkTitle }}</a
+                >
+              </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+  </nav>
+{{- end -}}

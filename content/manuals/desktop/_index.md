@@ -14,26 +14,26 @@ grid:
     [Mac](/desktop/setup/install/mac-install/),
     [Windows](/desktop/setup/install/windows-install/), or
     [Linux](/desktop/setup/install/linux/).
-  icon: arrow-down-tray
+  icon: download
 - title: Learn about Docker Desktop
   description: Navigate Docker Desktop.
-  icon: magnifying-glass
+  icon: search
   link: /desktop/use-desktop/
 - title: Explore its key features
   description: |
     Find information about [Networking](/desktop/features/networking/), [Docker VMM](/desktop/features/vmm/), [WSL](/desktop/features/wsl/), and more.
-  icon: squares-2x2
+  icon: layout-grid
 - title: View the release notes
   description: Find out about new features, improvements, and bug fixes.
-  icon: document-plus
+  icon: file-plus
   link: /desktop/release-notes/
 - title: Browse common FAQs
   description: Explore general FAQs or FAQs for specific platforms.
-  icon: question-mark-circle
+  icon: circle-help
   link: /desktop/troubleshoot-and-support/faqs/general/
 - title: Give feedback
   description: Provide feedback on Docker Desktop or Docker Desktop features.
-  icon: chat-bubble-left
+  icon: message-square
   link: /desktop/troubleshoot-and-support/feedback/
 aliases:
   - /desktop/mac/

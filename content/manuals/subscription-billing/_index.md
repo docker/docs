@@ -25,7 +25,7 @@ grid:
       Compare billing models and tiers for Docker, Docker Hardened Images,
       Gordon, Docker Agentic Platform, AI Governance, and DVP.
     link: /subscription-billing/plans/
-    icon: chart-bar
+    icon: chart-column
   - title: Manage plans
     description: >-
       Subscribe to a new plan, upgrade an active plan, or cancel auto-renewal.
@@ -42,11 +42,11 @@ grid:
       Add or update a card, US bank account, or Stripe Link, or set up pay by
       invoice for annual organization plans.
     link: /subscription-billing/manage/payment-method/
-    icon: banknotes
+    icon: banknote
   - title: Invoices
     description: View billing history and download past invoices.
     link: /subscription-billing/manage/history/
-    icon: receipt-percent
+    icon: receipt-text
   - title: 3D Secure authentication
     description: Learn how 3DS works and how to troubleshoot card verification.
     link: /subscription-billing/manage/3d-secure/

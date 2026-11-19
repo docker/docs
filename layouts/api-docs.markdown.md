@@ -69,7 +69,7 @@ Deprecated operation.
 {{ end }}
 ## Connection and access
 
-[API connection and authentication guidance]({{ $api.url }}#authentication)
+[API connection and authentication guidance]({{ $api.url }}#{{ partial "api-reference/connection-id.html" $api }})
 {{ if and (eq $api.product "engine") (where .parameters "name" "X-Registry-Auth") }}
 `X-Registry-Auth` delegates registry credentials and does not authenticate the daemon caller.
 {{ end }}

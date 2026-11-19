@@ -6,16 +6,14 @@
 {{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 {{ printf "<?xml-stylesheet type=\"text/xsl\" href=\"%s\"?>" (urls.AbsURL "sitemap.xsl") | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {{- range where site.Pages "Params.sitemap" "!=" false }}
-    {{- if ne .Params.sitemap false }}
-      <url>
-        <loc>{{ .Permalink}}</loc>
-        {{- if not .Lastmod.IsZero }}
-        <lastmod>{{ .Lastmod | time.Format "2006-01-02" }}</lastmod>
-        {{- end }}
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-      </url>
-    {{- end }}
+  {{- range where (where site.Pages "Params.sitemap" "!=" false) "RelPermalink" "!=" "" }}
+    <url>
+      <loc>{{ .Permalink }}</loc>
+      {{- if not .Lastmod.IsZero }}
+      <lastmod>{{ .Lastmod | time.Format "2006-01-02" }}</lastmod>
+      {{- end }}
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
   {{- end }}
-</urlset> 
+</urlset>

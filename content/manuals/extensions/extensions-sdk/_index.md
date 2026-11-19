@@ -9,27 +9,27 @@ aliases:
 grid:
   - title: "The build and publish process"
     description: Understand the process for building and publishing an extension.
-    icon: clipboard-document-check
+    icon: clipboard-check
     link: "/extensions/extensions-sdk/process/"
   - title: "Quickstart guide"
     description: Follow the quickstart guide to create a basic Docker extension quickly.
-    icon: magnifying-glass-plus
+    icon: zoom-in
     link: "/extensions/extensions-sdk/quickstart/"
   - title: "View the design guidelines"
     description: Ensure your extension aligns to Docker's design guidelines and principles.
-    icon: paint-brush
+    icon: paintbrush
     link: "/extensions/extensions-sdk/design/design-guidelines/"
   - title: "Publish your extension"
     description: Understand how to publish your extension to the Marketplace.
-    icon: arrow-up-tray
+    icon: upload
     link: "/extensions/extensions-sdk/extensions/"
   - title: "Interacting with Kubernetes"
     description: Find information on how to interact indirectly with a Kubernetes cluster from your Docker extension.
-    icon: arrows-right-left
+    icon: arrow-right-left
     link: "/extensions/extensions-sdk/guides/kubernetes/"
   - title: "Multi-arch extensions"
     description: Build your extension for multiple architectures.
-    icon: document-duplicate
+    icon: copy
     link: "/extensions/extensions-sdk/extensions/multi-arch/"
 ---
 
@@ -53,4 +53,4 @@ the extension to Docker Hub. See [Extensions distribution](extensions/DISTRIBUTI
 
 {{% include "extensions-form.md" %}}
 
-{{< grid >}}
+{{< grid level="2" >}}

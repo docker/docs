@@ -1,0 +1,203 @@
+{
+  "agentic-platform": {
+    "label": "Docker Agentic Platform",
+    "root": "/manuals/agentic-platform",
+    "category": "ai",
+    "references": []
+  },
+  "sandboxes": {
+    "label": "Docker Sandboxes",
+    "root": "/manuals/ai/sandboxes",
+    "category": "ai",
+    "references": [
+      "/reference/cli/sbx",
+      "/reference/api/ai-governance-audit-logs",
+      "/reference/api/ai-governance"
+    ]
+  },
+  "sandboxes-api": {
+    "label": "Sandboxes API and SDK",
+    "root": "/manuals/ai/sandboxes-api",
+    "category": "ai",
+    "references": ["/reference/api/sandboxes"]
+  },
+  "mcp-catalog-and-toolkit": {
+    "label": "MCP Catalog and Toolkit",
+    "root": "/manuals/desktop/features/mcp-catalog-and-toolkit",
+    "category": "ai",
+    "references": ["/reference/cli/docker/mcp"]
+  },
+  "docker-agent": {
+    "label": "Docker Agent",
+    "root": "/manuals/ai/docker-agent",
+    "category": "ai",
+    "references": []
+  },
+  "model-runner": {
+    "label": "Model Runner",
+    "root": "/manuals/ai/model-runner",
+    "category": "ai",
+    "references": ["/reference/cli/docker/model"]
+  },
+  "gordon": {
+    "label": "Gordon",
+    "root": "/manuals/ai/gordon",
+    "category": "ai",
+    "references": []
+  },
+  "skills": {
+    "label": "Docker Skills",
+    "root": "/manuals/ai/skills",
+    "category": "ai",
+    "references": []
+  },
+  "ai-overview": {
+    "label": "Docker AI overview",
+    "root": "/manuals/ai-overview",
+    "category": "ai",
+    "references": []
+  },
+  "desktop": {
+    "label": "Docker Desktop",
+    "root": "/manuals/desktop",
+    "category": "dev",
+    "references": ["/reference/cli/docker/desktop"]
+  },
+  "engine": {
+    "label": "Docker Engine",
+    "root": "/manuals/engine",
+    "category": "dev",
+    "references": [
+      "/reference/cli/docker",
+      "/reference/cli/dockerd",
+      "/reference/api/engine",
+      "/reference/api/registry"
+    ]
+  },
+  "build": {
+    "label": "Docker Build",
+    "root": "/manuals/build",
+    "category": "dev",
+    "references": [
+      "/reference/cli/docker/buildx",
+      "/reference/dockerfile",
+      "/reference/build-checks"
+    ]
+  },
+  "compose": {
+    "label": "Docker Compose",
+    "root": "/manuals/compose",
+    "category": "dev",
+    "references": ["/reference/cli/docker/compose", "/reference/compose-file"]
+  },
+  "docker-hub": {
+    "label": "Docker Hub",
+    "root": "/manuals/docker-hub",
+    "category": "dev",
+    "references": ["/reference/api/hub", "/reference/api/dvp"]
+  },
+  "dhi": {
+    "label": "Docker Hardened Images",
+    "root": "/manuals/dhi",
+    "category": "dev",
+    "references": []
+  },
+  "scout": {
+    "label": "Docker Scout",
+    "root": "/manuals/scout",
+    "category": "dev",
+    "references": ["/reference/cli/docker/scout"]
+  },
+  "extensions": {
+    "label": "Docker Extensions",
+    "root": "/manuals/extensions",
+    "category": "dev",
+    "references": ["/reference/api/extensions-sdk"]
+  },
+  "offload": {
+    "label": "Docker Offload",
+    "root": "/manuals/offload",
+    "category": "dev",
+    "references": ["/reference/cli/docker/offload"]
+  },
+  "build-cloud": {
+    "label": "Docker Build Cloud",
+    "root": "/manuals/build-cloud",
+    "category": "dev",
+    "references": []
+  },
+  "testcontainers": {
+    "label": "Testcontainers",
+    "root": "/manuals/testcontainers",
+    "category": "dev",
+    "references": []
+  },
+  "tcc": {
+    "label": "Testcontainers Cloud",
+    "root": "/manuals/tcc",
+    "category": "dev",
+    "references": []
+  },
+  "accounts": {
+    "label": "Accounts",
+    "root": "/manuals/accounts",
+    "category": "admin",
+    "references": []
+  },
+  "subscription-billing": {
+    "label": "Subscriptions & billing",
+    "root": "/manuals/subscription-billing",
+    "category": "admin",
+    "references": []
+  },
+  "security": {
+    "label": "Security",
+    "root": "/manuals/security",
+    "category": "admin",
+    "references": []
+  },
+  "faqs": {
+    "label": "FAQs",
+    "root": "/manuals/faqs",
+    "category": "admin",
+    "references": []
+  },
+  "support": {
+    "label": "Support",
+    "root": "/manuals/support",
+    "category": "admin",
+    "references": []
+  },
+  "platform-release-notes": {
+    "label": "Release notes",
+    "root": "/manuals/platform-release-notes",
+    "category": "admin",
+    "references": []
+  },
+  "release-lifecycle": {
+    "label": "Release lifecycle",
+    "root": "/manuals/release-lifecycle",
+    "category": "admin",
+    "references": []
+  },
+  "retired": {
+    "label": "Deprecated products and features",
+    "root": "/manuals/retired",
+    "category": "admin",
+    "references": []
+  },
+  "governance": {
+    "label": "AI governance",
+    "root": "/manuals/ai/governance",
+    "category": "ai",
+    "references": [
+      "/reference/api/ai-governance",
+      "/reference/api/ai-governance-audit-logs"
+    ]
+  },
+  "get-docker": {
+    "label": "Get Docker",
+    "root": "/get-docker",
+    "references": []
+  }
+}

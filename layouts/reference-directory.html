@@ -1,0 +1,7 @@
+{{ define "main" }}
+  <ul class="discovery-list">
+    {{ range hugo.Data.navigation.references }}
+      {{ partial "discovery-entry.html" (dict "page" .root "label" .label) }}
+    {{ end }}
+  </ul>
+{{ end }}

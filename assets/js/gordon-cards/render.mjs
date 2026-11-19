@@ -22,7 +22,7 @@ function renderCard(props) {
   const title = readString(props.title)
   const description = readString(props.description)
   if (title !== undefined) {
-    card.append(element('h4', 'gordon-card-title', title))
+    card.append(element('h3', 'gordon-card-title', title))
   }
   if (description !== undefined) {
     card.append(element('p', 'gordon-card-description', description))
@@ -31,6 +31,11 @@ function renderCard(props) {
     const rendered = renderChild(child)
     if (rendered !== undefined) {
       card.append(rendered)
+    }
+  }
+  if (title !== undefined) {
+    for (const table of card.querySelectorAll('table')) {
+      table.setAttribute('aria-label', title)
     }
   }
   return card
@@ -104,11 +109,14 @@ function renderCallout(props) {
 
 function renderTable(props) {
   const wrapper = element('div', 'gordon-card-table')
+  wrapper.tabIndex = 0
   const table = element('table')
   const head = element('thead')
   const headRow = element('tr')
   for (const column of readArray(props.columns)) {
-    headRow.append(element('th', undefined, readCell(column)))
+    const header = element('th', undefined, readCell(column))
+    header.setAttribute('scope', 'col')
+    headRow.append(header)
   }
   head.append(headRow)
   const body = element('tbody')

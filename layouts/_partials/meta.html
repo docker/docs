@@ -6,7 +6,7 @@
     {{ printf "%s | %s" .Title site.Title }}
   </title>
 {{ end }}
-{{ if or (eq .Params.sitemap false) (not hugo.IsProduction) }}
+{{ if or (eq .Kind "404") (eq .Params.sitemap false) (not hugo.IsProduction) }}
   <meta name="robots" content="noindex" />
 {{ end }}
 <meta name="description" content="{{ $description }}" />
@@ -18,10 +18,9 @@
 
 <!-- favicon -->
 <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" />
-<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" />
+<link rel="icon" href="/assets/images/favicon-48x48.png" sizes="48x48" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<meta name="theme-color" content="#2496ed" />
+<link rel="icon" href="/assets/images/favicon-16x16.png" sizes="16x16" />
 
 <!-- SEO -->
 <meta name="twitter:title" itemprop="title name" content="{{ .Title }}" />
@@ -37,7 +36,7 @@
 <meta name="twitter:url" content="https://twitter.com/docker_docs" />
 <meta
   name="twitter:image:src"
-  content="{{ (resources.Get "images/thumbnail.webp").Permalink }}"
+  content="{{ (resources.Get "images/thumbnail.png").Permalink }}"
 />
 <meta name="twitter:image:alt" content="Docker Documentation" />
 <meta property="og:title" content="{{ .Title }}" />
@@ -51,7 +50,7 @@
 <meta
   property="og:image"
   itemprop="image primaryImageOfPage"
-  content="{{ (resources.Get "images/thumbnail.webp").Permalink }}"
+  content="{{ (resources.Get "images/thumbnail.png").Permalink }}"
 />
 <meta property="og:locale" content="en_US" />
 <meta property="og:url" content="{{ .Permalink }}" />

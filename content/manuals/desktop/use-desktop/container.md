@@ -116,5 +116,5 @@ can also:
 
 ## Additional resources
 
-- [What is a container](/get-started/docker-concepts/the-basics/what-is-a-container.md)
-- [Run multi-container applications](/get-started/docker-concepts/running-containers/multi-container-applications.md)
+- [What is a container](https://docs.docker.com/learn/content/what-is-a-container/)
+- [Run multi-container applications](https://docs.docker.com/learn/content/run-a-multi-container-app-with-compose/)
