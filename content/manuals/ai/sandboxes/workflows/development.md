@@ -97,8 +97,8 @@ those require the sandboxed service to listen on IPv6 as well — bind it to
 reset.
 
 Stopped sandboxes keep their port mappings, listed as `inactive` by
-`sbx port ls`, but forward no traffic. `sbx` re-publishes them when the sandbox
-or the daemon restarts. Explicit host ports are reused, while a port published
+`sbx port ls`, but forward no traffic. `sbx` re-publishes them when you start
+the sandbox again. Explicit host ports are reused, while a port published
 with an OS-assigned host port, such as `--publish 3000`, gets a different host port
 on each start. Check `sbx port ls my-sandbox` to find it. If an explicit host port
 is already in use at restart, the CLI or the dashboard prompts you to choose
