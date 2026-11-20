@@ -1,7 +1,7 @@
 # Docs @ Docker
 
 <div align="center">
-<img src="static/assets/images/docker-docs.svg" alt="Welcome to Docker Documentation">
+<img src="static/assets/images/docker-docs.png" alt="Welcome to Docker Documentation">
 </div>
 <br/>
 <br/>
