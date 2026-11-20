@@ -481,6 +481,18 @@ Without `--header`, a local custom secret uses the headers listed in
 Cloud custom secrets use `Authorization` by default instead; see
 [cloud credentials](../cloud/credentials.md).
 
+Default headers require daemon API 0.53.0 or later. If an older daemon is
+still running after you upgrade Docker Sandboxes, restart it:
+
+```console
+$ sbx daemon restart
+```
+
+Until you restart, credential synchronization omits custom secrets without
+explicit headers, including previously stored secrets. This can stop those
+secrets from working in running sandboxes. Changing
+`secret.custom.defaultHeaders` doesn't restore them on the older daemon.
+
 To change a secret's header bindings, find its placeholder with
 `sbx secret ls`, then update only its headers:
 
