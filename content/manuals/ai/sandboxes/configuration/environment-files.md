@@ -771,9 +771,11 @@ clone mode. Omit `workspace` to create a sandbox without a host bind mount. Set
 that declares it.
 
 For local sandboxes, workspace paths must satisfy the
-[host mount restrictions](settings.md#mountsallowsensitivestate). These
-restrictions also apply to `additionalWorkspaces`, including read-only mounts,
-and explicit kit `mounts` bindings.
+[host mount restrictions](settings.md#mountsallowsensitivestate) and any
+[organization filesystem policy](../../governance/organization/policies/filesystem.md).
+A policy can block a mount based on its host path and whether it needs read or
+write access. These checks also apply to `additionalWorkspaces`, including
+read-only mounts, and explicit kit `mounts` bindings.
 
 For environment file placement and write protection, see
 [Protect the environment file](#protect-the-environment-file).

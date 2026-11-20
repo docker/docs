@@ -37,6 +37,13 @@ these directories. Choose a narrower project directory, or explicitly grant
 access with
 [`mounts.allowSensitiveState`](../configuration/settings.md#mountsallowsensitivestate).
 
+[Organization filesystem policies](../../governance/organization/policies/filesystem.md)
+can also block workspace and extra host mounts. If you're governed, the policy
+must allow the host path for the access the mount needs: `read` for a read-only
+mount, or both `read` and `write` for a writable mount. A deny rule takes
+precedence over an allow. Enabling `mounts.allowSensitiveState` doesn't bypass
+these policies.
+
 When you omit the workspace path from `sbx create`, the sandbox doesn't mount a
 host workspace. The agent uses the sandbox template's default working
 directory. Docker-provided agent templates use `/home/agent/workspace`. If the

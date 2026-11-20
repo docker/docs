@@ -234,7 +234,8 @@ sandbox, adding the mount, or introducing a protected mount through a kit change
 $ sbx settings set mounts.allowSensitiveState true
 ```
 
-Organization mount policy still applies.
+[Organization filesystem policy](../../governance/organization/policies/filesystem.md)
+still applies and can block a mount even when this setting is enabled.
 Enabling this setting can expose sensitive host data to sandboxed processes.
 
 Set it to `false` to block further mounts that overlap protected directories:
