@@ -997,6 +997,13 @@ remove every service binding declared by the environment file.
 > service declared in the environment file. This can affect other sandboxes
 > that share those service bindings.
 
+For local GitHub access, a kit selected by `kits` must also declare the
+`github` credential service. A `secrets.github` entry provides the value, and
+`bindings.github` approves its use; neither entry declares the service for the
+sandbox. See [GitHub token](credentials.md#github-token). Changes to kits,
+secrets, and bindings in an environment file require
+[recreating the environment](#update-an-environment).
+
 ### `registries`
 
 `registries` maps registry hostnames to pull credentials. Each entry requires

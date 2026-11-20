@@ -21,9 +21,11 @@ For secret scope and how changes apply to existing sandboxes, see
 
 ## GitHub CLI
 
-Store your GitHub token as a sandbox secret. The proxy injects it into
-outbound requests, so `gh` works inside the sandbox without any additional
-configuration:
+First, include a kit that declares the `github` credential service and approve
+its credential binding. See
+[GitHub token](../configuration/credentials.md#github-token) for setup and
+recreation requirements for existing sandboxes. Then store your GitHub token
+as a sandbox secret:
 
 ```console
 $ sbx secret set github --command 'gh auth token'

@@ -106,16 +106,18 @@ $ sbx secret set anthropic
 ```
 
 This prompts you for the secret value interactively. Service secrets are
-global by default, so the secret is available to all sandboxes. To scope a
-secret to a specific sandbox instead:
+global by default, so sandboxes that declare and are authorized to use the
+service can share the secret. Storing a secret does not grant access to it. To
+scope a secret to a specific sandbox instead:
 
 ```console
 $ sbx secret set openai --sandbox my-sandbox
 ```
 
 Adding, updating, or removing a service secret takes effect in existing local
-sandboxes without a restart, including secrets configured with `--command` or
-`--ref`. Sandbox-scoped secrets take precedence over global secrets.
+sandboxes that already declare and are authorized to use that service, without
+a restart. This includes secrets configured with `--command` or `--ref`.
+Sandbox-scoped secrets take precedence over global secrets.
 
 ### MCP secrets
 
@@ -252,8 +254,9 @@ reads and the API domains the proxy injects credentials into:
 | `openrouter` | `OPENROUTER_API_KEY`               | `openrouter.ai`                                                                                                               |
 | `xai`        | `XAI_API_KEY`                      | `api.x.ai`                                                                                                                    |
 
-When you store a secret with `sbx secret set <service>`, the proxy injects
-it into requests to the listed API domains.
+Storing a secret with `sbx secret set <service>` provides its value. The
+sandbox must also declare the service and be authorized to use it before the
+proxy can inject the credential into matching requests.
 
 ### Services declared by kits
 
@@ -371,8 +374,14 @@ if one is available.
 
 ### GitHub token
 
-The `github` service gives the agent access to the `gh` CLI inside the
-sandbox. Resolve your existing GitHub CLI token on the host:
+To authenticate `gh` inside a local sandbox, include a kit that declares the
+`github` credential service and approve its
+[credential binding](#credential-bindings). See
+[Services declared by kits](#services-declared-by-kits) for declaration syntax.
+Storing or importing a global `github` secret alone does not grant GitHub
+access.
+
+Resolve your existing GitHub CLI token on the host:
 
 ```console
 $ sbx secret set github --command 'gh auth token'
@@ -381,6 +390,18 @@ $ sbx secret set github --command 'gh auth token'
 The daemon refreshes the token from the host command after the default cache
 period. This is useful for agents that create pull requests, open issues, or
 interact with GitHub APIs on your behalf.
+
+When GitHub access is declared and authorized at creation, the sandbox gets a
+`GH_TOKEN` placeholder even if you haven't stored a token yet. You can add or
+rotate the secret later without recreating that sandbox. A sandbox that does
+not declare GitHub gets neither the placeholder nor the credential; secret
+updates and daemon restarts don't grant it access.
+
+If an existing sandbox relied on automatic access to a global GitHub secret,
+recreate it with a kit that declares `github` and approve the binding. Older
+sandboxes created with the Runtime backend also need recreation, even if their
+kits declared GitHub, because their saved recovery metadata lacks the credential
+declarations. Restarting the daemon does not migrate these sandboxes.
 
 ### SSH agent
 
