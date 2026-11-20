@@ -68,13 +68,6 @@ $ sbx port publish my-sandbox 3000
 $ sbx port ls my-sandbox
 ```
 
-`sbx port ls` also lists the port mappings a stopped sandbox keeps. When any
-mapping is inactive, the output includes a `STATUS` column. An `inactive`
-mapping forwards no traffic until the sandbox starts and binds the port again.
-For an inactive mapping with an OS-assigned host port, the host port appears as
-a placeholder until the port is bound. Start the sandbox, then list its ports
-again to find the assigned host port.
-
 `sbx ls` shows active port mappings alongside each sandbox:
 
 ```console
@@ -103,9 +96,10 @@ those require the sandboxed service to listen on IPv6 as well — bind it to
 `[::]` — or a client arriving over `::1` has its connection accepted and then
 reset.
 
-Published ports survive restarts: `sbx` re-publishes them when the sandbox or
-the daemon restarts. Explicit host ports are reused, while a port published with
-an OS-assigned host port, such as `--publish 3000`, gets a different host port
+Stopped sandboxes keep their port mappings, listed as `inactive` by
+`sbx port ls`, but forward no traffic. `sbx` re-publishes them when the sandbox
+or the daemon restarts. Explicit host ports are reused, while a port published
+with an OS-assigned host port, such as `--publish 3000`, gets a different host port
 on each start. Check `sbx port ls my-sandbox` to find it. If an explicit host port
 is already in use at restart, the CLI or the dashboard prompts you to choose
 another. Removing the sandbox releases its ports.
