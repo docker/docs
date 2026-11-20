@@ -581,25 +581,25 @@
   - /go/compose-file/
 "/reference/compose-file/services/":
   - /go/compose-file-services/
-"/reference/compose-file/services/#build":
+"/reference/compose-file/workload-spec/#build":
   - /go/compose-file-services-build/
-"/reference/compose-file/services/#depends_on":
+"/reference/compose-file/workload-spec/#depends_on":
   - /go/compose-file-services-depends_on/
 "/reference/compose-file/services/#develop":
   - /go/compose-file-services-develop/
-"/reference/compose-file/services/#env_file":
+"/reference/compose-file/container-spec/#env_file":
   - /go/compose-file-services-env-file/
-"/reference/compose-file/services/#environment":
+"/reference/compose-file/container-spec/#environment":
   - /go/compose-file-services-environment/
-"/reference/compose-file/services/#healthcheck":
+"/reference/compose-file/workload-spec/#healthcheck":
   - /go/compose-file-services-healthcheck/
-"/reference/compose-file/services/#networks":
+"/reference/compose-file/container-spec/#networks":
   - /go/compose-file-services-networks/
-"/reference/compose-file/services/#ports":
+"/reference/compose-file/workload-spec/#ports":
   - /go/compose-file-services-ports/
-"/reference/compose-file/services/#secrets":
+"/reference/compose-file/container-spec/#secrets":
   - /go/compose-file-services-secrets/
-"/reference/compose-file/services/#volumes":
+"/reference/compose-file/container-spec/#volumes":
   - /go/compose-file-services-volumes/
 "/reference/compose-file/networks/":
   - /go/compose-file-networks/
