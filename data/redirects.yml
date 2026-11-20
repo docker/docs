@@ -348,6 +348,12 @@
   - /engine/reference/builder/
   - /reference/builder/
 "/learn/paths/get-started-with-docker-containers/":
+  - /go/dotnet-guide/
+  - /go/golang-guide/
+  - /go/java-guide/
+  - /go/nodejs-guide/
+  - /go/python-guide/
+  - /go/rust-guide/
   - /go/get-started-sharing/
   - /get-started/02_our_app/
   - /get-started/03_updating_app/
