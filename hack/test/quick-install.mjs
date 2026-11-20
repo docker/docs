@@ -26,7 +26,11 @@ test("desktop platforms select the corresponding Docker product and sbx installe
     for (const download of quickInstalls[os][1].downloads)
       assert.equal(new URL(download.url).hostname, "desktop.docker.com");
   }
-  assert.match(quickInstalls.linux[1].command, /curl.*sudo sh/);
+  for (const installs of Object.values(quickInstalls)) {
+    const engine = installs.at(-1);
+    assert.equal(engine.product, "Docker Engine");
+    assert.match(engine.command, /curl.*sudo sh/);
+  }
   assert.match(quickInstalls.linux[0].label, /Ubuntu/);
 });
 

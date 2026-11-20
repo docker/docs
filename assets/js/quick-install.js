@@ -8,6 +8,13 @@ export function detectPlatform(platform = "", userAgent = "", touchPoints = 0) {
   return null;
 }
 
+const engine = {
+  product: "Docker Engine",
+  label: "Linux · dev/test",
+  url: "/get-docker/engine/",
+  command: "curl -fsSL https://get.docker.com | sudo sh",
+};
+
 export const quickInstalls = {
   macos: [
     {
@@ -31,6 +38,7 @@ export const quickInstalls = {
         },
       ],
     },
+    engine,
   ],
   windows: [
     {
@@ -54,6 +62,7 @@ export const quickInstalls = {
         },
       ],
     },
+    engine,
   ],
   linux: [
     {
@@ -63,12 +72,7 @@ export const quickInstalls = {
       command:
         "curl -fsSL https://get.docker.com | sudo REPO_ONLY=1 sh && sudo apt install docker-sbx",
     },
-    {
-      product: "Docker Engine",
-      label: "Linux · dev/test",
-      url: "/get-docker/engine/",
-      command: "curl -fsSL https://get.docker.com | sudo sh",
-    },
+    engine,
   ],
 };
 
@@ -78,10 +82,15 @@ if (typeof document !== "undefined") {
     navigator.userAgent,
     navigator.maxTouchPoints,
   );
-  const rows = document.querySelectorAll(".home-install-row");
-  quickInstalls[platform]?.forEach((install, index) => {
-    const row = rows[index];
-    if (!row) return;
+  const installs = quickInstalls[platform];
+  document.querySelectorAll(".home-install-row").forEach((row, index) => {
+    if (!installs) return;
+    const install = installs[index];
+    // Linux has no Docker Desktop quick install, so it fills fewer rows.
+    if (!install) {
+      row.remove();
+      return;
+    }
     row.querySelector("a").href = install.url;
     row.querySelector(".home-install-product").textContent = install.product;
     row.querySelector(".home-install-platform").textContent = install.label;
