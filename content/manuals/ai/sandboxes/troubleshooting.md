@@ -76,6 +76,27 @@ $ sbx start <SANDBOX_NAME>
 
 Files saved in the sandbox are kept when you stop and start it.
 
+## View daemon logs
+
+To investigate local daemon errors, show the last 100 lines of the daemon log:
+
+```console
+$ sbx daemon logs
+```
+
+Use `--tail` to change the number of recent lines shown:
+
+```console
+$ sbx daemon logs --tail 200
+```
+
+To keep printing log lines while you reproduce an issue, use `--follow`.
+Press Ctrl+C to stop following:
+
+```console
+$ sbx daemon logs --follow
+```
+
 ## Restart the sandbox daemon
 
 If sandbox commands hang, fail to connect to the daemon, or keep returning
