@@ -123,7 +123,7 @@ The following table describes the driver-specific options that you can pass to
 | `com.docker.network.bridge.gateway_mode_ipv4`<br/>`com.docker.network.bridge.gateway_mode_ipv6` | `nat`                       | Control external connectivity. See [Port publishing](../port-publishing.md#gateway-modes).                           |
 | `com.docker.network.bridge.enable_icc`                                                          | `true`                      | Enable or Disable inter-container connectivity.                                                                      |
 | `com.docker.network.bridge.host_binding_ipv4`                                                   | all IPv4 and IPv6 addresses | Default IP when binding container ports.                                                                             |
-| `com.docker.network.driver.mtu`                                                                 | `0` (no limit)              | Set the containers network Maximum Transmission Unit (MTU).                                                          |
+| `com.docker.network.driver.mtu`                                                                 | `0` (kernel default)        | Set the containers network Maximum Transmission Unit (MTU).                                                          |
 | `com.docker.network.container_iface_prefix`                                                     | `eth`                       | Set a custom prefix for container interfaces.                                                                        |
 | `com.docker.network.bridge.inhibit_ipv4`                                                        | `false`                     | Prevent Docker from [assigning an IP address](#skip-bridge-ip-address-configuration) to the bridge.                  |
 
@@ -555,10 +555,6 @@ and automatic DNS resolution between containers.
 
 5. On user-defined networks, containers can resolve each other by name. Connect
    to `alpine1` and test:
-
-   > [!NOTE]
-   > Automatic service discovery only resolves custom container names, not
-   > default automatically generated names.
 
    ```console
    $ docker container attach alpine1

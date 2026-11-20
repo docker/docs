@@ -32,11 +32,12 @@ To support bridge and overlay networks, Docker creates the following custom
       of running containers.
 * `DOCKER-CT`
     * Per-bridge connection tracking rules.
-* `DOCKER-INGRESS`
-    * Rules related to Swarm networking.
 
 In the `FORWARD` chain, Docker adds rules that unconditionally jump to the
-`DOCKER-USER`, `DOCKER-FORWARD` and `DOCKER-INGRESS` chains.
+`DOCKER-USER` and `DOCKER-FORWARD` chains.
+
+Releases before 29.8.0 also create a `DOCKER-INGRESS` chain for Swarm
+networking. Docker 29.8.0 and later delete that chain when the daemon starts.
 
 In the `nat` table, Docker creates chain `DOCKER` and adds rules to implement
 masquerading and port-mapping.
