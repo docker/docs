@@ -30,6 +30,13 @@ rules. See [Sandbox governance](../../governance/_index.md).
 The agent can read, write, and delete any file within that directory, including
 hidden files, configuration files, build scripts, and Git hooks.
 
+Workspaces and extra host mounts are rejected by default if their resolved
+paths overlap Docker Sandboxes configuration, state, or filesystem credential
+directories, even for read-only access. A home-directory workspace can include
+these directories. Choose a narrower project directory, or explicitly grant
+access with
+[`mounts.allowSensitiveState`](../configuration/settings.md#mountsallowsensitivestate).
+
 When you omit the workspace path from `sbx create`, the sandbox doesn't mount a
 host workspace. The agent uses the sandbox template's default working
 directory. Docker-provided agent templates use `/home/agent/workspace`. If the
