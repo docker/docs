@@ -14,9 +14,9 @@ Cloud credentials require separate setup: see
 
 Most agents need an API key for their model provider. An HTTP/HTTPS proxy on
 your host intercepts outbound requests from the sandbox, looks up the matching
-credential on the host, and overwrites the auth header before forwarding. The
-real credential stays on the host when proxy management is active; the sandbox
-sees only a sentinel value. See
+credential on the host, and overwrites the auth header on HTTPS requests before
+forwarding. The real credential stays on the host when proxy management is
+active; the sandbox sees only a sentinel value. See
 [Trust boundaries](../security/_index.md#trust-boundaries) for how credential isolation
 fits into the broader sandbox security model.
 
@@ -28,6 +28,20 @@ declares, what **header** to write, and what **value** to inject. The kit
 declares the match and the header; you provide the value on the host. For
 proxy-managed credentials, the real value never enters the sandbox — the agent
 sees only a sentinel like `proxy-managed`.
+
+Use HTTPS for external endpoints that rely on host-credential injection,
+including API keys, OAuth tokens, registry credentials, and custom secrets.
+Ordinary HTTP requests still follow network policy, but the proxy forwards them
+without substituting host credentials. Credentials supplied directly by the
+client aren't stripped from these requests.
+
+Managed OAuth token exchanges also require HTTPS. The proxy rejects plaintext
+token exchanges with HTTP 403 before forwarding them, for both initial sign-in
+and token refresh. If your endpoint uses HTTP, switch its URL to HTTPS.
+
+Authentication to daemon-managed internal services, such as the MCP gateway,
+and custom-secret substitution to the fixed local model server endpoint are
+preserved. You don't need to change those internal endpoints.
 
 A kit can set OAuth `passthrough: true` to opt out of sentinel masking. This
 sends the real token response into the sandbox and reduces credential isolation.
@@ -464,9 +478,9 @@ to enter the value at a prompt instead. `--value-stdin` can't be combined with
 
 Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
 `sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
-configured hosts and the placeholder appears in an HTTP request header, the
-proxy replaces it with the real value. Replacement applies only to HTTP request
-headers, not request bodies. The agent never sees the real secret.
+configured hosts over HTTPS and the placeholder appears in an HTTP request
+header, the proxy replaces it with the real value. Replacement applies only to
+HTTP request headers, not request bodies. The agent never sees the real secret.
 
 ### List custom secrets
 
