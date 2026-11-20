@@ -150,11 +150,10 @@ source is still reachable. Restore a disconnected drive mapping before
 retrying. Remapping the drive doesn't redirect the saved mount to another
 share.
 
-To change the mapped path for a dynamically added mount, unmount it with
-`sbx umount` and add it again with `sbx mount`. You can remove a saved dynamic
-mount using its recorded mapped path and sandbox target even if the drive is
-disconnected. For a workspace fixed at creation, restore the mapping or remove
-and recreate the sandbox.
+To use a different mapped path, remove and recreate the sandbox with the
+updated workspace path. Before removing the sandbox,
+[copy out any files you want to keep](usage.md#copy-files-between-host-and-sandbox)
+if it's still accessible. Removing a sandbox deletes its sandbox data.
 
 ## Kiro, Copilot, or Droid shorthand fails
 
