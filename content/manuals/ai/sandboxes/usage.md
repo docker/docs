@@ -456,6 +456,11 @@ $ sbx port publish my-sandbox 8080:3000
 $ open http://localhost:8080
 ```
 
+Unless the sandbox is detached or another session keeps it running, it stops
+shortly after `sbx port publish` exits. Published ports stop forwarding while
+the sandbox is stopped and are restored when it starts again. For persistent
+access to a service, [keep the sandbox running in the background](#keep-a-sandbox-running-in-the-background).
+
 To let the OS pick a free host port instead of choosing one yourself, specify
 only the sandbox port. Then use `sbx port ls` to check which host port was
 assigned:
