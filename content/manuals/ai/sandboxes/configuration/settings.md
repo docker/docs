@@ -218,6 +218,37 @@ permissions, outside the sandbox. Leave the setting at `false` to require
 approval on every invocation, or use `--force` to approve only one
 invocation. See [environment lifecycle commands](environment-files.md#lifecycle).
 
+#### mounts.allowSensitiveState {.wrap-anywhere}
+
+{{< setting-metadata type="boolean" default="false" >}}
+
+Local sandboxes reject host mounts whose resolved paths overlap Docker Sandboxes
+configuration, state, or filesystem credential directories. This includes
+read-only mounts and broad workspaces, such as a home directory that contains
+protected directories. Choose a narrower host source to avoid exposing this data.
+
+If you intend to grant that access, enable the setting before creating the
+sandbox, adding the mount, or introducing a protected mount through a kit change:
+
+```console
+$ sbx settings set mounts.allowSensitiveState true
+```
+
+[Organization filesystem policy](../../governance/organization/policies/filesystem.md)
+still applies and can block a mount even when this setting is enabled.
+Enabling this setting can expose sensitive host data to sandboxed processes.
+
+Set it to `false` to block further mounts that overlap protected directories:
+
+```console
+$ sbx settings set mounts.allowSensitiveState false
+```
+
+Disabling the setting doesn't revoke access through mounts already admitted.
+Remove those mounts or remove the sandbox to withdraw that access. Creating or
+recreating a sandbox with protected mounts requires the setting to be enabled
+again.
+
 #### sandbox.fuse {.wrap-anywhere}
 
 {{< setting-metadata type="boolean" default="true" >}}
