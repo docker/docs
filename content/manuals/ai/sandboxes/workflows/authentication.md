@@ -24,9 +24,8 @@ For secret scope and how changes apply to existing sandboxes, see
 Use a sandbox configured for GitHub access. If you use a third-party or custom
 kit, [approve its access](../configuration/credentials.md#credential-bindings)
 when prompted. See
-[GitHub token](../configuration/credentials.md#github-token) for setup and
-recreation requirements for existing sandboxes. Then store your GitHub token
-as a sandbox secret:
+[GitHub token](../configuration/credentials.md#github-token) for setup details.
+Then store your GitHub token as a sandbox secret:
 
 ```console
 $ sbx secret set github --command 'gh auth token'

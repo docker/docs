@@ -401,13 +401,6 @@ rotate the secret later without recreating that sandbox. A sandbox that does
 not declare GitHub gets neither the placeholder nor the credential; secret
 updates and daemon restarts don't grant it access.
 
-If an existing sandbox relied on automatic access to a global GitHub secret,
-recreate it with GitHub access configured, and approve access if you use a
-third-party or custom kit. Older sandboxes created with the Runtime backend
-also need recreation, even if their
-kits declared GitHub, because their saved recovery metadata lacks the credential
-declarations. Restarting the daemon does not migrate these sandboxes.
-
 ### SSH agent
 
 SSH agent forwarding is enabled by default. V3 kits must also request
