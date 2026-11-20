@@ -97,12 +97,25 @@ those require the sandboxed service to listen on IPv6 as well — bind it to
 `[::]` — or a client arriving over `::1` has its connection accepted and then
 reset.
 
+A sandbox rejects port mappings that overlap an existing mapping on the same
+host port, transport (TCP or UDP), and address family (IPv4 or IPv6). Addresses
+overlap when they are identical or either is a wildcard: `0.0.0.0` for IPv4,
+`::` for IPv6. For example, `0.0.0.0:8080:3001` conflicts with an existing
+`8080:3000` mapping. The error identifies the existing mapping. Choose another
+host port, or unpublish the existing mapping before trying again.
+
 Published ports survive restarts: `sbx` re-publishes them when the sandbox or
 the daemon restarts. Explicit host ports are reused, while a port published with
 an OS-assigned host port, such as `--publish 3000`, gets a different host port
 on each start. Check `sbx port ls my-sandbox` to find it. If an explicit host port
 is already in use at restart, the CLI or the dashboard prompts you to choose
 another. Removing the sandbox releases its ports.
+
+On macOS, older versions permitted overlapping wildcard and specific-address
+TCP mappings. If a sandbox has saved such a pair, starting it fails with a port
+replay conflict. An interactive `sbx run` prompts for a replacement host port;
+a non-interactive start returns the error. Use distinct host ports for the
+mappings.
 
 When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
 `sbx port publish` to publish ports on that sandbox. To stop forwarding,
