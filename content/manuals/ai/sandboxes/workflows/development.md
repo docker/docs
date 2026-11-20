@@ -51,6 +51,9 @@ For an existing sandbox, use `sbx port publish` to
 forward traffic from your host. Publishing a port on a stopped local sandbox
 starts it first.
 
+Unless the sandbox is detached or another session keeps it running, it stops
+shortly after the command exits. See [port publishing and sandbox lifecycle](../usage.md#publish-ports).
+
 The common case: an agent has started a dev server or API, and you want to open
 it in your browser or run tests against it.
 
