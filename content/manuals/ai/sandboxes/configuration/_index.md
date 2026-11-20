@@ -25,3 +25,32 @@ sandbox, see [Customize](../customize/).
   in-sandbox Docker image pulls through an organization's registry mirror.
 - [Upstream proxy](upstream-proxy.md) routes sandbox and daemon traffic through
   an operating system or corporate proxy.
+
+## Guest page size
+
+For local sandboxes, use `--page-size` with `sbx create` or `sbx run` to choose
+the guest kernel's memory page size. For example, select `4k` for workloads
+that require 4 KB pages:
+
+```console
+$ sbx create --page-size 4k claude .
+```
+
+Without the flag, the guest uses the host's page size when the matching kernel
+is installed, and falls back to `4k` otherwise.
+
+Supported values depend on the host platform:
+
+| Host platform | Page sizes |
+| :------------ | :--------- |
+| Linux arm64 | `4k`, `16k`, `64k` |
+| macOS on Apple silicon | `4k`, `16k` |
+| Other platforms | `4k` |
+
+The CPU must support the selected page size, and the corresponding guest kernel
+must be installed. The experimental `--4k` flag is equivalent to `--page-size 4k`;
+combining `--4k` with another page size is rejected.
+
+Page size is set when you create a sandbox and persists across restarts.
+When `sbx run` reconnects to an existing sandbox, `--page-size` has no effect.
+To choose a different page size, create another sandbox.
