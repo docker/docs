@@ -441,7 +441,8 @@ the kit handles the wiring; you only provide the value.
 
 Custom secrets are global by default. Pass `--sandbox` to scope one to a
 specific sandbox. Values must be at least eight characters long, including
-values returned by dynamic sources.
+values returned by dynamic sources. Existing shorter values aren't substituted
+and must be replaced with longer values.
 
 To read the value from standard input, set `API_KEY` in your host environment
 and pipe it with `--value-stdin`:
@@ -466,9 +467,9 @@ to enter the value at a prompt instead. `--value-stdin` can't be combined with
 
 Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
 `sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
-configured hosts and the placeholder appears in a request header configured
-for that secret, the proxy replaces it with the real value. Replacement applies
-only to those request headers, not request bodies.
+configured hosts over HTTPS and the placeholder appears in a request header
+configured for that secret, the proxy replaces it with the real value.
+Replacement applies only to those request headers, not request bodies.
 
 ### Choose request headers
 
@@ -476,8 +477,11 @@ Use `--header` to name the header your service reads. Repeat the flag to bind
 the secret to more than one header. In other headers, the placeholder is sent
 unchanged.
 
-Without `--header`, a local custom secret uses the headers listed in
+Without `--header`, local custom secrets, including existing secrets without
+header bindings, use the headers listed in
 [`secret.custom.defaultHeaders`](settings.md#secretcustomdefaultheaders).
+If your service uses another header, bind it explicitly.
+
 Cloud custom secrets use `Authorization` by default instead; see
 [cloud credentials](../cloud/credentials.md).
 
@@ -493,21 +497,8 @@ the value, hosts, environment variable, and dynamic source unchanged. Setting
 the secret again without `--header` preserves its existing header bindings.
 Alternatively, change the default-header setting for all secrets that follow it.
 
-Header names are case-insensitive. The CLI rejects invalid HTTP header names
-and the following headers, which the proxy handles itself:
-
-- `Host`
-- `Content-Length`
-- `Transfer-Encoding`
-- `Trailer`
-- `Accept-Encoding`
-- `Proxy-Authorization`
-- `Proxy-Authenticate`
-- `Proxy-Connection`
-- `Connection`
-- `Keep-Alive`
-- `Upgrade`
-- `Te`
+Header names are case-insensitive. The CLI rejects invalid names and headers
+controlled by the proxy, such as `Host` and `Content-Length`.
 
 ### When a service returns a secret
 
