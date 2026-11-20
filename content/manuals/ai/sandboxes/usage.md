@@ -459,9 +459,7 @@ $ open http://localhost:8080
 For OS-assigned host ports and port mappings across restarts, see
 [Local services](workflows/development.md#accessing-services-in-the-sandbox).
 
-`sbx ls` shows active port mappings alongside each sandbox. Its `CREATED`
-column shows the sandbox age, and its `STATUS` column identifies sandboxes
-kept running in detached mode with `(detached)`.
+`sbx ls` shows active port mappings alongside each sandbox:
 
 ```console
 $ sbx ls
