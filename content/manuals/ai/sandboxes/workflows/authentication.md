@@ -21,8 +21,9 @@ For secret scope and how changes apply to existing sandboxes, see
 
 ## GitHub CLI
 
-First, include a kit that declares the `github` credential service and approve
-its credential binding. See
+Use a sandbox configured for GitHub access. If you use a third-party or custom
+kit, [approve its access](../configuration/credentials.md#credential-bindings)
+when prompted. See
 [GitHub token](../configuration/credentials.md#github-token) for setup and
 recreation requirements for existing sandboxes. Then store your GitHub token
 as a sandbox secret:

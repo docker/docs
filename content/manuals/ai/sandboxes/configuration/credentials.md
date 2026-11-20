@@ -106,18 +106,21 @@ $ sbx secret set anthropic
 ```
 
 This prompts you for the secret value interactively. Service secrets are
-global by default, so sandboxes that declare and are authorized to use the
-service can share the secret. Storing a secret does not grant access to it. To
-scope a secret to a specific sandbox instead:
+global by default. To store a secret for a specific sandbox instead:
 
 ```console
 $ sbx secret set openai --sandbox my-sandbox
 ```
 
+Sandbox-scoped secrets take precedence over global secrets.
+
+Storing a secret does not grant a sandbox access to it. The sandbox must be
+configured to use the service. For third-party or custom kits, you must also
+[approve access](#credential-bindings); built-in kits need no separate approval.
+
 Adding, updating, or removing a service secret takes effect in existing local
 sandboxes that already declare and are authorized to use that service, without
 a restart. This includes secrets configured with `--command` or `--ref`.
-Sandbox-scoped secrets take precedence over global secrets.
 
 ### MCP secrets
 
@@ -255,8 +258,10 @@ reads and the API domains the proxy injects credentials into:
 | `xai`        | `XAI_API_KEY`                      | `api.x.ai`                                                                                                                    |
 
 Storing a secret with `sbx secret set <service>` provides its value. The
-sandbox must also declare the service and be authorized to use it before the
-proxy can inject the credential into matching requests.
+sandbox must be configured to use the service. If you use a third-party or
+custom kit, [approve its access](#credential-bindings) before the proxy can
+inject the credential into matching requests. Built-in kits need no separate
+approval.
 
 ### Services declared by kits
 
@@ -374,10 +379,9 @@ if one is available.
 
 ### GitHub token
 
-To authenticate `gh` inside a local sandbox, include a kit that declares the
-`github` credential service and approve its
-[credential binding](#credential-bindings). See
-[Services declared by kits](#services-declared-by-kits) for declaration syntax.
+To authenticate `gh` inside a local sandbox, use a sandbox configured for
+GitHub access. If you use a third-party or custom kit,
+[approve its access](#credential-bindings) when prompted.
 Storing or importing a global `github` secret alone does not grant GitHub
 access.
 
@@ -398,8 +402,9 @@ not declare GitHub gets neither the placeholder nor the credential; secret
 updates and daemon restarts don't grant it access.
 
 If an existing sandbox relied on automatic access to a global GitHub secret,
-recreate it with a kit that declares `github` and approve the binding. Older
-sandboxes created with the Runtime backend also need recreation, even if their
+recreate it with GitHub access configured, and approve access if you use a
+third-party or custom kit. Older sandboxes created with the Runtime backend
+also need recreation, even if their
 kits declared GitHub, because their saved recovery metadata lacks the credential
 declarations. Restarting the daemon does not migrate these sandboxes.
 
