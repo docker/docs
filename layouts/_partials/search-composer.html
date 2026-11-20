@@ -12,8 +12,9 @@
     id="{{ .id }}"
     type="search"
     x-model="query"
-    @input="queueSearch($event.target.value)"
-    @keydown.enter.prevent="if ($event.metaKey || $event.ctrlKey) ask()"
+    @input="queueSearch($event.target.value, $event.isComposing)"
+    @compositionend="queueSearch($event.target.value)"
+    @keydown.enter="if (!$event.isComposing) { $event.preventDefault(); ask(); }"
     placeholder="What do you want to build?"
     autocomplete="off"
   />

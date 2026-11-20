@@ -76,6 +76,12 @@
 .gordon-card-step-detail {
   color: var(--color-muted-foreground);
 }
+.gordon-card-link {
+  color: var(--color-primary-ink);
+  font-weight: 500;
+  text-decoration-line: underline;
+  overflow-wrap: anywhere;
+}
 .gordon-card-steps {
   list-style: decimal;
   padding-left: 1.25rem;
@@ -220,6 +226,15 @@
   padding: 0.85rem;
   overflow-x: auto;
   white-space: pre;
+}
+.gordon-code {
+  position: relative;
+}
+.gordon-code pre {
+  padding-right: 2.5rem;
+}
+.gordon-code .code-copy-button {
+  opacity: 1;
 }
 .gordon-drawer pre code {
   font-family: var(--font-mono);

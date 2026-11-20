@@ -203,6 +203,49 @@ export default async function verifySearchChatRegressions(parentPage, base) {
       }
     }
 
+    // Code blocks in answers, plain and inside cards, copy their code without prompts.
+    const code = await context.newPage();
+    try {
+      await code
+        .context()
+        .grantPermissions(["clipboard-read", "clipboard-write"]);
+      await code.goto(base + "/build/");
+      await mockAnswer(
+        code,
+        "```console\n$ docker build .\n```\n\n" +
+          '```openui-lang\nroot = Card("Install", [Steps([Step("Run", "On macOS.", "brew install docker/tap/sbx")])])\n```',
+      );
+      await ask(code);
+      await code.waitForSelector("#gordon-chat .gordon-card");
+      const buttons = code.locator(
+        "#gordon-chat .gordon-code [data-copy-text]",
+      );
+      assert.deepEqual(
+        await buttons.evaluateAll((es) => es.map((e) => e.dataset.copyText)),
+        ["docker build .\n", "brew install docker/tap/sbx"],
+      );
+      for (const button of await buttons.all()) {
+        assert.equal(
+          await button.evaluate((e) => getComputedStyle(e).opacity),
+          "1",
+        );
+        await button.focus();
+        await code.keyboard.press("Enter");
+        await code.waitForFunction(
+          () =>
+            document.activeElement
+              .closest(".code-copy")
+              .querySelector('[role="status"]').textContent === "Code copied.",
+        );
+        assert.equal(
+          await code.evaluate(() => navigator.clipboard.readText()),
+          await button.getAttribute("data-copy-text"),
+        );
+      }
+    } finally {
+      await code.close();
+    }
+
     // A pending optional script must not hold the composer or completed announcement.
     const cards = await context.newPage();
     let pendingCardRoute;

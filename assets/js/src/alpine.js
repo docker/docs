@@ -232,6 +232,11 @@ Alpine.magic("markdown", () => {
     });
     replaceGordonCards(div, { streaming });
 
+    // Skipped while streaming: each delta re-renders the answer, and the code may be incomplete.
+    const copyControl =
+      !streaming &&
+      document.getElementById("gordon-code-copy")?.content.firstElementChild;
+
     // Handle code blocks (pre > code)
     div.querySelectorAll("pre").forEach((pre) => {
       pre.tabIndex = 0;
@@ -247,6 +252,17 @@ Alpine.magic("markdown", () => {
 
         // Now apply highlight.js which will work with the text nodes
         hljs.highlightElement(code);
+
+        if (copyControl) {
+          const block = document.createElement("div");
+          block.className = "gordon-code";
+          const control = copyControl.cloneNode(true);
+          // Same prompt stripping as layouts/_markup/render-codeblock.html.
+          control.querySelector("[data-copy-text]").dataset.copyText =
+            codeText.replace(/^[$>]\s+/gm, "");
+          pre.replaceWith(block);
+          block.append(control, pre);
+        }
       }
     });
 

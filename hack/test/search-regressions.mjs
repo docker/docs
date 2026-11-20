@@ -89,10 +89,35 @@ test("editing or clearing invalidates results before the debounce expires", asyn
     release({ url: "/old" });
     await pending;
     assert.deepEqual(search.results, []);
-    assert.equal(search.status, "");
-    assert.equal(search.loading, false);
+    assert.equal(search.status, query.trim() ? "Searching…" : "");
+    assert.equal(search.loading, Boolean(query.trim()));
     search.destroy();
   }
+});
+
+test("visible results stay in place until a replacement batch is ready", async () => {
+  let release;
+  const search = await createSearch({
+    search: async (query) => ({
+      results: [
+        match(0, () =>
+          query === "original"
+            ? Promise.resolve({ url: "/original" })
+            : new Promise((resolve) => (release = resolve)),
+        ),
+      ],
+    }),
+  });
+  search.query = "original";
+  await search.search();
+  search.queueSearch("replacement");
+  assert.deepEqual(search.results, [{ url: "/original" }]);
+  const pending = search.search();
+  while (!release) await Promise.resolve();
+  assert.deepEqual(search.results, [{ url: "/original" }]);
+  release({ url: "/replacement" });
+  await pending;
+  assert.deepEqual(search.results, [{ url: "/replacement" }]);
 });
 
 test("editing also invalidates an in-flight additional batch", async () => {

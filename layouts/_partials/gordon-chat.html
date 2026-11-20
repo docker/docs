@@ -36,6 +36,9 @@
     window.GORDON_LOADER_URL = {{ or $loaderURL (printf "%s/web-assistant/loader.js" $proxyURL) }};
   {{- end }}
 </script>
+<template id="gordon-code-copy">
+  {{- partial "code-copy.html" (dict "text" "") -}}
+</template>
 <div
   x-data="{
     isLoading: false,
