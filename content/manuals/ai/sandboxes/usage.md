@@ -38,13 +38,20 @@ $ sbx stop my-sandbox               # pause it
 $ sbx rm my-sandbox                 # delete it entirely
 ```
 
-`sbx rm` asks for confirmation before deleting a sandbox. Use `--force` to
-skip the prompt. This flag also permits removal when the sandbox has an active
-session — an open attach, SSH connection, or in-flight SFTP transfer:
+`sbx rm` refuses to remove a running sandbox, even when no session is
+connected. Stop it with `sbx stop` before removing it. To delete a running
+sandbox, use `--force`. This flag also skips confirmation and permits removal
+when the sandbox has an active session — an open attach, SSH connection, or
+in-flight SFTP transfer:
 
 ```console
 $ sbx rm --force my-sandbox
 ```
+
+When you specify multiple names or use `sbx rm --all` without `--force`,
+`sbx rm` asks for confirmation once. After confirmation, running sandboxes are
+left in place with an error, and the command continues removing the other
+sandboxes. If any removal fails, the command exits with status 1.
 
 If you need a clean slate, remove the sandbox and run it again:
 
