@@ -48,10 +48,7 @@ in-flight SFTP transfer:
 $ sbx rm --force my-sandbox
 ```
 
-When you specify multiple names or use `sbx rm --all` without `--force`,
-`sbx rm` asks for confirmation once. After confirmation, running sandboxes are
-left in place with an error, and the command continues removing the other
-sandboxes. If any removal fails, the command exits with status 1.
+### Recreate a sandbox
 
 If you need a clean slate, remove the sandbox and run it again:
 
@@ -60,6 +57,13 @@ $ sbx stop my-sandbox
 $ sbx rm my-sandbox
 $ sbx run claude
 ```
+
+### Remove multiple sandboxes
+
+When you specify multiple names or use `sbx rm --all` without `--force`,
+`sbx rm` asks for confirmation once. After confirmation, running sandboxes are
+left in place with an error, and the command continues removing the other
+sandboxes. If any removal fails, the command exits with status 1.
 
 To remove all stopped local sandboxes, use `sbx prune`. Running sandboxes are
 never removed. Preview the sandboxes that would be removed, or filter out
