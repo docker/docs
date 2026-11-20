@@ -56,7 +56,7 @@ To trigger the login flow manually in a running sandbox, use `sbx exec` to
 run Kiro directly:
 
 ```console
-$ sbx exec -it <sandbox-name> kiro login --use-device-flow
+$ sbx exec -it <sandbox-name> kiro-cli login --use-device-flow
 ```
 
 This command initiates device flow authentication without starting a coding
@@ -85,7 +85,7 @@ by default, which lets it execute commands without repeated approval prompts.
 Without extra args, the sandbox runs:
 
 ```text
-kiro chat --trust-all-tools
+kiro-cli chat --trust-all-tools
 ```
 
 The Kiro image stores `chat --trust-all-tools` in its `ENTRYPOINT`, so
@@ -96,7 +96,7 @@ forwarded arguments keep that prefix. Pass a prompt directly without repeating
 $ sbx run kiro -- "explain this project"
 ```
 
-This runs `kiro chat --trust-all-tools "explain this project"`. You can also
+This runs `kiro-cli chat --trust-all-tools "explain this project"`. You can also
 pass flags, such as `sbx run kiro -- --resume`.
 
 To run a different Kiro subcommand, use `sbx exec` in a running sandbox, as
