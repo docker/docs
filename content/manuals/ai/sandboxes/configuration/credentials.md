@@ -632,7 +632,7 @@ which requests can carry the credential.
 
 ### Kits that require a binding
 
-Approval is required regardless of schema version. If a v2 kit extends a
+Approval is required regardless of schema version. If a kit extends a
 built-in agent, you must approve its use of the inherited credentials. You must
 also approve a kit that requests the same service itself.
 
