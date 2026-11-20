@@ -276,23 +276,6 @@ connections to this server. The flag requires `--url` and can't be used with
 `--command` or `--local`. For registration options, see
 [Register an MCP server](mcp-gateway.md#register-an-mcp-server).
 
-## Custom secrets are not sent to the daemon
-
-If a command reports `custom secrets with no headers were not sent to the daemon`
-after you upgrade Docker Sandboxes, an older daemon is still running. Custom
-secrets that use default headers are withheld from that daemon, so they can
-stop working in running sandboxes. The secrets remain stored on the host.
-
-Restart the daemon, then retry the command that reported the error:
-
-```console
-$ sbx daemon restart
-```
-
-Changing `secret.custom.defaultHeaders` doesn't resolve this error. For normal
-header configuration, see
-[Choose request headers](configuration/credentials.md#choose-request-headers).
-
 ## API calls fail with a certificate error
 
 If your organization uses a proxy that inspects HTTPS traffic, agent requests
