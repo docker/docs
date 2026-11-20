@@ -32,7 +32,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New {#41000-new}
 
-- Docker Desktop has a new look. The updated Moby logo is part of Docker’s new brand, which reflects where Docker is going: the same containers you rely on today, plus the isolation and governance you need to trust AI agents with real work.
+- Docker Desktop has a new look. The updated Moby logo is part of Docker’s new brand, which reflects where Docker is going: the same containers you rely on today, plus the isolation and governance you need to trust AI agents with real work. Read the full story in [Meet the New Docker: Built to Run on Trust](http://docker.com/blog/docker-new-brand-moby-run-on-trust).
 
 ### Updates {#41000-updates}
 
