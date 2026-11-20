@@ -41,6 +41,8 @@ Sandboxes are [network-isolated](../security/isolation.md) — your browser or l
 tools can't reach a server running inside one by default. A port mapping of
 `8080:3000` publishes sandbox port 3000 on host port 8080.
 
+#### Publish a port
+
 If you know which ports you need, publish them when you create the sandbox:
 
 ```console
@@ -50,6 +52,9 @@ $ sbx run --publish 8080:3000 --name my-sandbox claude
 For an existing sandbox, use `sbx port publish` to
 forward traffic from your host. Publishing a port on a stopped local sandbox
 starts it first.
+
+When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
+`sbx port publish` to publish ports on that sandbox.
 
 The common case: an agent has started a dev server or API, and you want to open
 it in your browser or run tests against it.
@@ -77,11 +82,7 @@ SANDBOX      AGENT    STATUS      PORTS                       WORKSPACE         
 my-sandbox   claude   ● running   127.0.0.1:8080->3000/tcp4    /home/user/proj    2m
 ```
 
-To stop forwarding a port:
-
-```console
-$ sbx port unpublish my-sandbox 8080:3000
-```
+#### Choose addresses and protocols
 
 For a service to be reachable, it must listen on all interfaces inside the
 sandbox, not only `127.0.0.1`. Bind it to `0.0.0.0` for IPv4 or `[::]` for both
@@ -97,12 +98,16 @@ those require the sandboxed service to listen on IPv6 as well — bind it to
 `[::]` — or a client arriving over `::1` has its connection accepted and then
 reset.
 
+#### Resolve overlapping mappings
+
 A sandbox rejects port mappings that overlap an existing mapping on the same
 host port, transport (TCP or UDP), and address family (IPv4 or IPv6). Addresses
 overlap when they are identical or either is a wildcard: `0.0.0.0` for IPv4,
 `::` for IPv6. For example, `0.0.0.0:8080:3001` conflicts with an existing
 `8080:3000` mapping. The error identifies the existing mapping. Choose another
 host port, or unpublish the existing mapping before trying again.
+
+#### Port mappings after a restart
 
 Published ports survive restarts: `sbx` re-publishes them when the sandbox or
 the daemon restarts. Explicit host ports are reused, while a port published with
@@ -111,17 +116,19 @@ on each start. Check `sbx port ls my-sandbox` to find it. If an explicit host po
 is already in use at restart, the CLI or the dashboard prompts you to choose
 another. Removing the sandbox releases its ports.
 
-On macOS, older versions permitted overlapping wildcard and specific-address
-TCP mappings. If a sandbox has saved such a pair, starting it fails with a port
-replay conflict. An interactive `sbx run` prompts for a replacement host port;
-a non-interactive start returns the error. Use distinct host ports for the
-mappings.
+#### Remove a port mapping
 
-When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
-`sbx port publish` to publish ports on that sandbox. To stop forwarding,
-`sbx port unpublish my-sandbox 8080:3000` removes a single mapping, and
-`sbx port unpublish my-sandbox 3000`
-removes every host port mapped to sandbox port 3000.
+To stop forwarding a single mapping:
+
+```console
+$ sbx port unpublish my-sandbox 8080:3000
+```
+
+To remove every host port mapped to sandbox port 3000:
+
+```console
+$ sbx port unpublish my-sandbox 3000
+```
 
 ### Accessing host services from a sandbox
 
