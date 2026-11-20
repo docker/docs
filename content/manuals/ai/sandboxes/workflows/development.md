@@ -60,16 +60,15 @@ $ open http://localhost:8080
 ```
 
 To let the OS pick a free host port instead of choosing one yourself, specify
-only the sandbox port. Then use `sbx port ls` to check which host port was
-assigned:
+only the sandbox port. While the sandbox is running, use `sbx port ls` to
+check which host port was assigned:
 
 ```console
 $ sbx port publish my-sandbox 3000
 $ sbx port ls my-sandbox
 ```
 
-`sbx ls` shows active port mappings alongside each sandbox, and `sbx port ls`
-lists them in detail:
+`sbx ls` shows active port mappings alongside each sandbox:
 
 ```console
 $ sbx ls
@@ -97,9 +96,10 @@ those require the sandboxed service to listen on IPv6 as well — bind it to
 `[::]` — or a client arriving over `::1` has its connection accepted and then
 reset.
 
-Published ports survive restarts: `sbx` re-publishes them when the sandbox or
-the daemon restarts. Explicit host ports are reused, while a port published with
-an OS-assigned host port, such as `--publish 3000`, gets a different host port
+Stopped sandboxes keep their port mappings, listed as `inactive` by
+`sbx port ls`, but forward no traffic. `sbx` re-publishes them when you start
+the sandbox again. Explicit host ports are reused, while a port published
+with an OS-assigned host port, such as `--publish 3000`, gets a different host port
 on each start. Check `sbx port ls my-sandbox` to find it. If an explicit host port
 is already in use at restart, the CLI or the dashboard prompts you to choose
 another. Removing the sandbox releases its ports.
