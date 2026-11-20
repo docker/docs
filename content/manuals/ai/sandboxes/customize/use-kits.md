@@ -71,6 +71,9 @@ and the publisher's requirements before choosing a kit.
 
 ### Choose a kit source
 
+Browse [sandbox kits from verified publishers](https://hub.docker.com/search?type=sbx_kit&badges=verified_publisher)
+on Docker Hub for published workloads and mixins.
+
 The previous example uses a published image from Docker Hub. You can also
 run a kit from a local directory or a Git repository. The same source types
 work for mixins added with `--kit`:
