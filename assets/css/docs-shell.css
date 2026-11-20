@@ -4,6 +4,12 @@
   flex-direction: column;
   isolation: isolate;
 }
+.docs-shell {
+  container: docs-shell / inline-size;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
 .docs-site::before {
   content: "";
   position: fixed;
@@ -316,7 +322,7 @@
   border-top: 1px solid var(--color-edge);
   background-color: var(--color-surface);
   background-image: var(--docs-footer-wash);
-  padding: 3rem max(1.5rem, calc((100vw - var(--docs-shell-width)) / 2)) 1.5rem;
+  padding: 3rem max(1.5rem, calc((100cqw - var(--docs-shell-width)) / 2)) 1.5rem;
   color: var(--color-muted-foreground);
   font-size: 0.875rem;
   line-height: 1.6;
@@ -363,7 +369,7 @@
 .footer-copyright {
   width: 100%;
 }
-@media (width < 700px) {
+@container docs-shell (width < 700px) {
   .site-footer {
     padding-inline: 1rem;
   }
@@ -652,7 +658,7 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
-@media (width < 1200px) {
+@container docs-shell (width < 1200px) {
   .site-header {
     gap: 1rem;
   }
@@ -670,7 +676,7 @@
     display: none;
   }
 }
-@media (width < 960px) {
+@container docs-shell (width < 960px) {
   .desktop-nav,
   .header-actions > .learn-link {
     display: none;
@@ -701,7 +707,7 @@
     gap: 2rem;
   }
 }
-@media (width < 700px) {
+@container docs-shell (width < 700px) {
   .site-header,
   .docs-main {
     width: calc(100% - 2rem);

@@ -365,23 +365,25 @@
     }
   }"
   x-cloak
-  @keydown.escape.window="$store.gordon.close()"
+  @keydown.escape.window="if (!$store.gordon.isDocked || $el.contains($event.target)) $store.gordon.close()"
 >
   <!-- Overlay backdrop -->
   <div
-    x-show="$store.gordon.isOpen"
+    x-show="$store.gordon.isOpen && !$store.gordon.isDocked"
     x-transition.opacity.duration.300ms
     @click="$store.gordon.close()"
-    class="fixed inset-0 z-40 bg-black/50"
+    class="gordon-backdrop fixed inset-0 z-40 bg-black/50"
   ></div>
 
   <!-- Chat panel sliding in from right -->
   <div
     id="gordon-chat"
     role="dialog"
-    aria-modal="true"
+    :aria-modal="$store.gordon.isDocked ? null : 'true'"
     aria-labelledby="gordon-title"
-    x-trap.inert.noscroll="$store.gordon.isOpen"
+    x-trap.inert.noscroll="$store.gordon.isOpen && !$store.gordon.isDocked"
+    :data-docked="$store.gordon.isDocked"
+    :data-open="$store.gordon.isOpen"
     x-show="$store.gordon.isOpen"
     x-transition:enter="transition ease-out duration-200"
     x-transition:enter-start="translate-x-full"
