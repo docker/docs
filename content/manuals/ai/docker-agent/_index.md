@@ -137,7 +137,7 @@ agents:
 
 You can also configure model settings (like context limits), tools (including
 MCP servers), and more. See the [configuration
-reference](./configuration/overview/index.md)
+reference](https://github.com/docker/docker-agent/blob/main/docs/configuration/overview/index.md)
 for complete details.
 
 ## Share agent teams
@@ -155,12 +155,12 @@ it doesn't exist yet.
 
 ## What's next
 
-- Follow the [quickstart](./getting-started/quickstart/index.md) to build your first agent
-- Learn [best practices](./guides/tips/index.md) for building effective agents
-- Integrate Docker Agent with your [editor](./features/acp/index.md) or use agents as
-  [tools in MCP clients](./tools/mcp/index.md)
+- Follow the [quickstart](https://github.com/docker/docker-agent/blob/main/docs/getting-started/quickstart/index.md) to build your first agent
+- Learn [best practices](https://github.com/docker/docker-agent/blob/main/docs/guides/tips/index.md) for building effective agents
+- Integrate Docker Agent with your [editor](https://github.com/docker/docker-agent/blob/main/docs/features/acp/index.md) or use agents as
+  [tools in MCP clients](https://github.com/docker/docker-agent/blob/main/docs/tools/mcp/index.md)
 - Browse example agent configurations in the [Docker Agent
   repository](https://github.com/docker/docker-agent/tree/main/examples)
 - Connect agents to external tools via the [Docker MCP
   Gateway](/manuals/desktop/features/mcp-catalog-and-toolkit/mcp-gateway.md)
-- Read the full [configuration reference](./configuration/overview/index.md)
+- Read the full [configuration reference](https://github.com/docker/docker-agent/blob/main/docs/configuration/overview/index.md)
