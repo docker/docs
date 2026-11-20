@@ -102,7 +102,10 @@ the daemon restarts. Explicit host ports are reused, while a port published with
 an OS-assigned host port, such as `--publish 3000`, gets a different host port
 on each start. Check `sbx port ls my-sandbox` to find it. If an explicit host port
 is already in use at restart, the CLI or the dashboard prompts you to choose
-another. Removing the sandbox releases its ports.
+another. During recreation by `sbx kit add`, a host-port conflict instead leaves
+the sandbox stopped. The command reports that the kit was added but startup
+failed, without prompting for another port. Removing the sandbox releases its
+ports.
 
 When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
 `sbx port publish` to publish ports on that sandbox. To stop forwarding,
