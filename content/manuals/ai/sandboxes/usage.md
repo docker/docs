@@ -38,9 +38,9 @@ $ sbx stop my-sandbox               # pause it
 $ sbx rm my-sandbox                 # delete it entirely
 ```
 
-`sbx rm` refuses to remove a running sandbox, even when no session is
-connected. Stop it with `sbx stop` before removing it, or use `--force` to
-delete it while it is running.
+`sbx rm` asks for confirmation and requires the sandbox to be stopped. Use
+`sbx stop` first, or use `--force` to skip confirmation and remove a running
+sandbox.
 
 ### Recreate a sandbox
 
@@ -69,10 +69,7 @@ such as `168h`, an RFC 3339 timestamp, or a Unix timestamp. The older
 
 Run `sbx prune` without flags to confirm and remove all stopped sandboxes.
 
-To remove all local sandboxes, including running ones, use `sbx rm --all
---force`. The `--force` flag skips confirmation and permits removal even when
-a sandbox has an active session — an open attach, SSH connection, or in-flight
-SFTP transfer:
+To remove all local sandboxes, including running ones, and skip confirmation:
 
 ```console
 $ sbx rm --all --force
