@@ -474,9 +474,9 @@ to enter the value at a prompt instead. `--value-stdin` can't be combined with
 
 Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
 `sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
-configured hosts over HTTPS and the placeholder appears in an HTTP request
-header, the proxy replaces it with the real value. Replacement applies only to
-HTTP request headers, not request bodies. The agent never sees the real secret.
+configured hosts and the placeholder appears in an HTTP request header, the
+proxy replaces it with the real value. Replacement applies only to HTTP request
+headers, not request bodies. The agent never sees the real secret.
 
 ### List custom secrets
 
