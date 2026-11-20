@@ -447,14 +447,25 @@ If you know which ports you need, publish them when you create the sandbox:
 $ sbx run --publish 8080:3000 --name my-sandbox claude
 ```
 
-For an existing sandbox, use `sbx port publish` to
-forward traffic from your host. Publishing a port on a stopped local sandbox
-starts it first:
+For an existing sandbox, keep the agent or `sbx exec` session running your
+service open, then use `sbx port publish` from another terminal to forward
+traffic from your host:
 
 ```console
 $ sbx port publish my-sandbox 8080:3000
 $ open http://localhost:8080
 ```
+
+Publishing a port saves the mapping but doesn't keep the sandbox running.
+If you publish on a stopped local sandbox, the command starts it and applies
+the mapping. Unless the sandbox is detached or another session attaches, it
+stops again shortly after the command exits.
+
+Port mappings persist across stops and restarts. Forwarding stops while the
+sandbox is stopped and resumes when it starts again, without publishing again.
+Your server must also be running inside the sandbox. To keep a service
+accessible after agent and exec sessions end,
+[keep the sandbox running in the background](#keep-a-sandbox-running-in-the-background).
 
 To let the OS pick a free host port instead of choosing one yourself, specify
 only the sandbox port. Then use `sbx port ls` to check which host port was
