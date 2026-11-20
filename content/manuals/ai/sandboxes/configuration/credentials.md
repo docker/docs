@@ -441,8 +441,7 @@ the kit handles the wiring; you only provide the value.
 
 Custom secrets are global by default. Pass `--sandbox` to scope one to a
 specific sandbox. Values must be at least eight characters long, including
-values returned by dynamic sources. Older stored secrets with shorter values
-aren't substituted; set them again with a longer value.
+values returned by dynamic sources.
 
 To read the value from standard input, set `API_KEY` in your host environment
 and pipe it with `--value-stdin`:
@@ -477,15 +476,13 @@ Use `--header` to name the header your service reads. Repeat the flag to bind
 the secret to more than one header. In other headers, the placeholder is sent
 unchanged.
 
-Without `--header`, a local custom secret follows
+Without `--header`, a local custom secret uses the headers listed in
 [`secret.custom.defaultHeaders`](settings.md#secretcustomdefaultheaders).
-The default list is `Authorization`, `X-Api-Key`, `Api-Key`, `X-Auth-Token`,
-`Private-Token`, `X-Goog-Api-Key`, and `DD-API-KEY`. Secrets stored without
-headers by an older CLI also follow this setting. Cloud custom secrets use
-`Authorization` by default instead; see [cloud credentials](../cloud/credentials.md).
+Cloud custom secrets use `Authorization` by default instead; see
+[cloud credentials](../cloud/credentials.md).
 
-If an existing secret uses another header, bind it explicitly. Find its
-placeholder with `sbx secret ls`, then update only its headers:
+To change a secret's header bindings, find its placeholder with
+`sbx secret ls`, then update only its headers:
 
 ```console
 $ sbx secret set-custom --placeholder <PLACEHOLDER> --header X-Custom-Key
@@ -497,21 +494,20 @@ the secret again without `--header` preserves its existing header bindings.
 Alternatively, change the default-header setting for all secrets that follow it.
 
 Header names are case-insensitive. The CLI rejects invalid HTTP header names
-and headers the proxy handles itself: `Host`, `Content-Length`,
-`Transfer-Encoding`, `Trailer`, `Accept-Encoding`, `Proxy-Authorization`,
-`Proxy-Authenticate`, `Proxy-Connection`, `Connection`, `Keep-Alive`, `Upgrade`,
-and `Te`.
+and the following headers, which the proxy handles itself:
 
-If the CLI reports that secrets without headers weren't sent to the daemon,
-restart the daemon after upgrading Docker Sandboxes:
-
-```console
-$ sbx daemon restart
-```
-
-Default headers require daemon API `0.53.0` or later. When syncing to an older
-daemon, the CLI leaves out secrets without explicit headers, so those secrets
-stop working in running sandboxes until the daemon is upgraded and restarted.
+- `Host`
+- `Content-Length`
+- `Transfer-Encoding`
+- `Trailer`
+- `Accept-Encoding`
+- `Proxy-Authorization`
+- `Proxy-Authenticate`
+- `Proxy-Connection`
+- `Connection`
+- `Keep-Alive`
+- `Upgrade`
+- `Te`
 
 ### Responses that echo secrets
 
@@ -546,8 +542,7 @@ $ sbx secret ls --host api.example.com --sandbox my-sandbox
 ```
 
 The header column shows explicit bindings or `(default)` for secrets that
-follow the default-header setting. Older secrets without explicit bindings
-also produce a warning with a command to bind their headers.
+follow the default-header setting.
 
 ### Target multiple hosts
 
