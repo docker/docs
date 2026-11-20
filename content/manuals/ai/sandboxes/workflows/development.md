@@ -60,16 +60,22 @@ $ open http://localhost:8080
 ```
 
 To let the OS pick a free host port instead of choosing one yourself, specify
-only the sandbox port. Then use `sbx port ls` to check which host port was
-assigned:
+only the sandbox port. While the sandbox is running, use `sbx port ls` to
+check which host port was assigned:
 
 ```console
 $ sbx port publish my-sandbox 3000
 $ sbx port ls my-sandbox
 ```
 
-`sbx ls` shows active port mappings alongside each sandbox, and `sbx port ls`
-lists them in detail:
+`sbx port ls` also lists the port mappings a stopped sandbox keeps. When any
+mapping is inactive, the output includes a `STATUS` column. An `inactive`
+mapping forwards no traffic until the sandbox starts and binds the port again.
+For an inactive mapping with an OS-assigned host port, the host port appears as
+a placeholder until the port is bound. Start the sandbox, then list its ports
+again to find the assigned host port.
+
+`sbx ls` shows active port mappings alongside each sandbox:
 
 ```console
 $ sbx ls
