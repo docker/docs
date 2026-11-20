@@ -1,26 +1,29 @@
 ---
-title: Organization policies
-linkTitle: Policies
+title: Organization access policies
+linkTitle: Access policies
 weight: 30
-description: How organization policy scope, rule evaluation, and precedence work for Docker Sandboxes.
-keywords: docker sandboxes, organization policy, policy scope, rule evaluation, precedence, governance
+description: How organization access policy scope, rule evaluation, and precedence work for Docker Sandboxes.
+keywords: docker sandboxes, organization policy, access policy, policy scope, rule evaluation, precedence, governance
 aliases:
   - /ai/sandboxes/governance/concepts/
 ---
 
 {{< summary-bar feature_name="AI Governance" >}}
 
-Organization policies control what sandboxes can access for organization
-members. When a developer's sandbox makes a request, three questions decide
+Organization access policies control what sandboxes can access for
+organization members. When a developer's sandbox makes a request, three questions decide
 the outcome: which of your policies apply to that developer, what their rules
 say about the request, and how your policy relates to the local and kit
 rules on the developer's machine. This page answers each in turn, then explains
 when your changes reach developers. To create a policy, see
 [Create and manage organization policies](create-manage.md).
 
+To manage how Docker Sandboxes is configured on developer machines instead,
+use [settings policies](../settings/_index.md).
+
 ## What a policy contains
 
-An organization policy is a named collection of rules. Each rule has a name,
+An organization access policy is a named collection of rules. Each rule has a name,
 the actions it controls, the resources it matches, and a decision of `allow` or
 `deny`. Each policy covers one kind of access:
 

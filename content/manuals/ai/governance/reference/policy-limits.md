@@ -9,20 +9,22 @@ keywords: docker sandboxes, organization policy, policy limits, rules per policy
 Organization policies have the following limits, which help ensure fair usage
 and resource availability across organizations:
 
-| Limit                     | Value  | Applies to                                                                    |
-|---------------------------|--------|-------------------------------------------------------------------------------|
-| Policies per organization | 100    | All organization policies combined, whatever their type                       |
-| Rules per policy          | 250    | Each network or filesystem policy. MCP policies don't have a rule limit.      |
-| Policy size               | 350 KB | Each policy, whatever its type                                                |
+| Limit                     | Value  | Applies to                                                                                                                   |
+|---------------------------|--------|------------------------------------------------------------------------------------------------------------------------------|
+| Policies per organization | 100    | All organization policies combined, whatever their type: network, filesystem, and MCP access policies, and settings policies |
+| Rules per policy          | 250    | Each network or filesystem policy. MCP and settings policies don't have a rule limit.                                        |
+| Policy size               | 350 KB | Each policy, whatever its type                                                                                               |
 
 The policies per organization limit is one shared total, not a separate
-allowance for each policy type. For example, an organization with 60 network
-policies, 30 filesystem policies, and 10 MCP policies has reached the limit.
+allowance for each policy type. For example, an organization with 50 network
+policies, 30 filesystem policies, 10 MCP policies, and 10 settings policies has
+reached the limit.
 
-The policy size limit applies to each policy's definition, which is its rules
-or Cedar statements, including the rule IDs that Docker generates. If a change
-makes a policy larger than the limit, Docker rejects the change and returns an
-error. Typical policies use only a small fraction of this limit.
+The policy size limit applies to each policy's definition, which is its rules,
+Cedar statements, or settings, including the rule IDs that Docker generates for
+rules. If a change makes a policy larger than the limit, Docker rejects the
+change and returns an error. Typical policies use only a small fraction of this
+limit.
 Domain and file path values have no separate length limit beyond valid format.
 Because MCP policies have no rule limit, the policy size limit is what caps how
 many Cedar statements an MCP policy can hold.
