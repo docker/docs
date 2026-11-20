@@ -63,6 +63,31 @@ directory is on eCryptfs.
 If [`sbx diagnose`](#run-diagnostics) reports `state directory is on eCryptfs`,
 use a filesystem other than eCryptfs for sandbox state.
 
+## Builds fail because of unsupported memory page sizes
+
+If a build tool fails because it requires 4 KB memory pages, create a local
+sandbox with `--page-size 4k`. Some tools are incompatible with the larger
+pages used by default on arm64 hosts. Without an explicit page size, the guest
+matches the host's page size when the corresponding kernel is installed,
+and falls back to `4k` otherwise.
+
+Check the page size in bytes inside the affected sandbox:
+
+```console
+$ sbx exec <SANDBOX_NAME> getconf PAGESIZE
+```
+
+If the tool requires 4 KB pages and the sandbox reports a larger value,
+create another sandbox with 4 KB pages and retry the build there:
+
+```console
+$ sbx create --name <NEW_SANDBOX_NAME> --page-size 4k claude .
+```
+
+You can also pass `--page-size 4k` to `sbx run` when creating a sandbox.
+The page size persists across restarts. Passing the flag when reconnecting to
+an existing sandbox doesn't change its page size.
+
 ## Sandbox is not responding
 
 If `sbx ls` shows `running (not responding)`, Docker Sandboxes has detected
