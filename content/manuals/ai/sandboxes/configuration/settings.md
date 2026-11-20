@@ -469,6 +469,31 @@ timestamp from a timestamp authority instead of a transparency log timestamp.
 Leave this at `false` when your signing workflow uses the public transparency
 log. It has no effect on signatures verified with a public key.
 
+### Custom secrets
+
+#### secret.custom.defaultHeaders {.wrap-anywhere}
+
+{{< setting-metadata type="JSON"
+  default="[\"Authorization\",\"X-Api-Key\",\"Api-Key\",\"X-Auth-Token\",\"Private-Token\",\"X-Goog-Api-Key\",\"DD-API-KEY\"]" >}}
+
+Choose the request headers into which the proxy substitutes local custom
+secrets stored without explicit header bindings. The value is a JSON array of
+HTTP header names. For example, restrict these secrets to `Authorization`:
+
+```console
+$ sbx settings set secret.custom.defaultHeaders '["Authorization"]'
+```
+
+The array replaces the whole list. Set it to `[]` to require explicit
+`sbx secret set-custom --header` bindings: secrets that follow the defaults
+aren't substituted into any header. Explicit bindings and cloud custom secrets
+aren't affected. See [choose request headers](credentials.md#choose-request-headers)
+for binding commands and headers the proxy rejects.
+
+Changes apply to existing local sandboxes without a restart. If the setting
+can't be read or contains an invalid list, secrets that depend on it aren't
+substituted until a valid setting can be read again.
+
 ### Model server
 
 #### model.server.enabled {.wrap-anywhere}

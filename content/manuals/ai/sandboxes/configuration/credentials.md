@@ -440,7 +440,9 @@ the kit handles the wiring; you only provide the value.
 ### Set a custom secret
 
 Custom secrets are global by default. Pass `--sandbox` to scope one to a
-specific sandbox.
+specific sandbox. Values must be at least eight characters long, including
+values returned by dynamic sources. Older stored secrets with shorter values
+aren't substituted; set them again with a longer value.
 
 To read the value from standard input, set `API_KEY` in your host environment
 and pipe it with `--value-stdin`:
@@ -449,6 +451,7 @@ and pipe it with `--value-stdin`:
 $ printf '%s' "$API_KEY" | sbx secret set-custom \
     --host api.example.com \
     --env API_KEY \
+    --header X-Api-Key \
     --value-stdin
 ```
 
@@ -464,9 +467,63 @@ to enter the value at a prompt instead. `--value-stdin` can't be combined with
 
 Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
 `sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
-configured hosts and the placeholder appears in an HTTP request header, the
-proxy replaces it with the real value. Replacement applies only to HTTP request
-headers, not request bodies. The agent never sees the real secret.
+configured hosts and the placeholder appears in a bound HTTP request header,
+the proxy replaces it with the real value. Replacement applies only to bound
+request headers, not request bodies.
+
+### Choose request headers
+
+Use `--header` to name the header your service reads. Repeat the flag to bind
+the secret to more than one header. In other headers, the placeholder is sent
+unchanged.
+
+Without `--header`, a local custom secret follows
+[`secret.custom.defaultHeaders`](settings.md#secretcustomdefaultheaders).
+The default list is `Authorization`, `X-Api-Key`, `Api-Key`, `X-Auth-Token`,
+`Private-Token`, `X-Goog-Api-Key`, and `DD-API-KEY`. Secrets stored without
+headers by an older CLI also follow this setting. Cloud custom secrets use
+`Authorization` by default instead; see [cloud credentials](../cloud/credentials.md).
+
+If an existing secret uses another header, bind it explicitly. Find its
+placeholder with `sbx secret ls`, then update only its headers:
+
+```console
+$ sbx secret set-custom --placeholder <PLACEHOLDER> --header X-Custom-Key
+```
+
+For a sandbox-scoped secret, include `--sandbox <SANDBOX_NAME>`. This keeps
+the value, hosts, environment variable, and dynamic source unchanged. Setting
+the secret again without `--header` preserves its existing header bindings.
+Alternatively, change the default-header setting for all secrets that follow it.
+
+Header names are case-insensitive. The CLI rejects invalid HTTP header names
+and headers the proxy handles itself: `Host`, `Content-Length`,
+`Transfer-Encoding`, `Trailer`, `Accept-Encoding`, `Proxy-Authorization`,
+`Proxy-Authenticate`, `Proxy-Connection`, `Connection`, `Keep-Alive`, `Upgrade`,
+and `Te`.
+
+If the CLI reports that secrets without headers weren't sent to the daemon,
+restart the daemon after upgrading Docker Sandboxes:
+
+```console
+$ sbx daemon restart
+```
+
+Default headers require daemon API `0.53.0` or later. When syncing to an older
+daemon, the CLI leaves out secrets without explicit headers, so those secrets
+stop working in running sandboxes until the daemon is upgraded and restarted.
+
+### Responses that echo secrets
+
+When a request substitutes a custom secret, the proxy replaces matching secrets
+in response headers and bodies with placeholders. Matching covers literal,
+JSON-escaped, percent-encoded, and base64 forms.
+
+This redaction is best effort. It doesn't cover other transformations, such as
+hashing or splitting a value across fields, WebSocket frames after an upgrade,
+or responses to requests that substituted no secret. Rewriting a match can
+leave a response body invalid. Partial responses (`206`) and responses with
+unsupported content encodings are withheld with a `502` response.
 
 ### List custom secrets
 
@@ -487,6 +544,10 @@ Add `--sandbox` to list only matching secrets stored for a specific sandbox:
 ```console
 $ sbx secret ls --host api.example.com --sandbox my-sandbox
 ```
+
+The header column shows explicit bindings or `(default)` for secrets that
+follow the default-header setting. Older secrets without explicit bindings
+also produce a warning with a command to bind their headers.
 
 ### Target multiple hosts
 
