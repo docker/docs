@@ -468,6 +468,11 @@ configured hosts and the placeholder appears in an HTTP request header, the
 proxy replaces it with the real value. Replacement applies only to HTTP request
 headers, not request bodies. The agent never sees the real secret.
 
+On a kit route where credential bindings approve no usable service credential,
+the proxy strips recognized authentication headers, such as `Authorization`
+and `x-api-key`, even if they contain a custom secret. Other headers aren't
+subject to this restriction. See [Credential bindings](#credential-bindings).
+
 ### List custom secrets
 
 To find stored custom secrets by host, use `--host`:
@@ -608,9 +613,10 @@ bindings:
       domains: [api.github.com, github.com]
 ```
 
-A binding is only an approval record: the presence of `apiKey` or `oauth`
-authorizes that mechanism. Declining a credential writes no entry at all.
-The real credential isn't stored in this file.
+A binding is only an approval record: each mechanism must list approved
+domains to authorize its use. A binding with no domains for either mechanism
+is treated as missing. Declining a credential writes no entry at all. The real
+credential isn't stored in this file.
 
 ### First-run approval
 
@@ -622,7 +628,8 @@ to `credentials.yaml`.
 
 In non-interactive contexts (CI or `--detach`), there's no one to answer the
 prompt. In `sbx`, the sandbox starts with the credential withheld when no
-binding exists. For a required credential, `sbx` prints a warning rather than
+binding exists or the binding lists no domains for either mechanism. For a
+required credential, `sbx` prints a warning rather than
 failing sandbox creation. This is a limitation of `sbx` enforcement: kit authors
 shouldn't rely on a required credential being available merely because the
 sandbox started.
@@ -630,9 +637,13 @@ sandbox started.
 Pre-create the binding by running the kit interactively once or by writing
 `credentials.yaml` directly before running unattended.
 
-The bindings file gates whether a third-party kit can use a service
-credential. The kit's credential injection rules and network permissions still
-constrain which requests can carry the credential.
+For kit-declared routes handled by the local proxy, API keys are sent only to
+destinations approved under `apiKey.domains`. OAuth tokens and keys obtained
+through OAuth require approval under `oauth.domains`. Approval for one
+mechanism doesn't authorize the other. Built-in routes and aliases managed by
+the daemon retain service-level authorization. The kit's credential injection
+rules and network permissions still constrain which requests can carry the
+credential.
 
 ### Kits that require a binding
 
