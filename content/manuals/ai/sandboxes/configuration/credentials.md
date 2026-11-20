@@ -466,9 +466,9 @@ to enter the value at a prompt instead. `--value-stdin` can't be combined with
 
 Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
 `sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
-configured hosts and the placeholder appears in a bound HTTP request header,
-the proxy replaces it with the real value. Replacement applies only to bound
-request headers, not request bodies.
+configured hosts and the placeholder appears in a request header configured
+for that secret, the proxy replaces it with the real value. Replacement applies
+only to those request headers, not request bodies.
 
 ### Choose request headers
 
@@ -509,17 +509,25 @@ and the following headers, which the proxy handles itself:
 - `Upgrade`
 - `Te`
 
-### Responses that echo secrets
+### When a service returns a secret
 
-When a request substitutes a custom secret, the proxy replaces matching secrets
-in response headers and bodies with placeholders. Matching covers literal,
-JSON-escaped, percent-encoded, and base64 forms.
+A service might include a secret in its response, for example in an error
+message that repeats the request headers. When the proxy inserts a custom
+secret into a request, it checks the response headers and body and masks
+matching secret values before returning the response to the sandbox. It
+recognizes the original value and JSON-escaped, percent-encoded, and base64
+forms.
 
-This redaction is best effort. It doesn't cover other transformations, such as
-hashing or splitting a value across fields, WebSocket frames after an upgrade,
-or responses to requests that substituted no secret. Rewriting a match can
-leave a response body invalid. Partial responses (`206`) and responses with
-unsupported content encodings are withheld with a `502` response.
+This filtering cannot guarantee that a secret stays hidden. It doesn't inspect
+WebSocket messages or recognize every way a service could transform a secret,
+such as splitting it across separate fields. Filtering applies only when the
+proxy inserted a custom secret into the request.
+
+Masking a secret can change the response format and make it unreadable by the
+client.
+
+For these requests, the proxy returns `502 Bad Gateway` instead of forwarding
+partial responses (`206`) or responses with unsupported content encodings.
 
 ### List custom secrets
 
