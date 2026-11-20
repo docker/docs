@@ -406,15 +406,6 @@ must not match the primary workspace path or a reserved skills path. In clone
 mode, they must also stay outside the clone directory and must not match
 `/run/sandbox/source`.
 
-On Windows with the `docker-next` backend, additional workspaces can use
-mapped SMB drives, such as `Z:\shared`, or UNC paths, such as
-`\\server\share\shared`. The mount uses the UNC source while keeping the
-requested sandbox target and read-only setting. Filesystem policy checks
-include both the mapped path and the UNC source. This support is limited to
-additional workspaces and doesn't cover the experimental Runtime backend.
-Keep the saved drive mapping available when restarting the sandbox; see
-[mapped-drive recovery](troubleshooting.md#sandbox-reports-a-mount-state-error).
-
 You can also run separate projects side-by-side. Remove unused sandboxes when
 you're done to reclaim disk space:
 

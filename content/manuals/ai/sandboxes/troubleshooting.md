@@ -143,12 +143,13 @@ Changing a host symlink to point elsewhere doesn't move an existing static
 mount. The sandbox retains the original source, and filesystem policy checks
 when you reuse the sandbox include that source.
 
-On Windows, an additional workspace on a mapped SMB drive retains its
-original UNC source and mapped path for filesystem policy checks. The saved
-mapped path must remain available when the sandbox restarts, even if the UNC
-source is still reachable. Restore a disconnected drive mapping before
-retrying. Remapping the drive doesn't redirect the saved mount to another
-share.
+## Sandbox won't restart after a drive disconnects
+
+If an additional workspace uses a mapped SMB drive on Windows, restore the
+original drive mapping before restarting the sandbox. The saved mapped path
+must remain available for filesystem policy checks, even if the network share
+is still reachable. Remapping the drive doesn't change the saved workspace
+source.
 
 To use a different mapped path, remove and recreate the sandbox with the
 updated workspace path. Before removing the sandbox,
