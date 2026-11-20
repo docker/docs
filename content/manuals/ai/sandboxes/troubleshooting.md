@@ -143,6 +143,19 @@ Changing a host symlink to point elsewhere doesn't move an existing static
 mount. The sandbox retains the original source, and filesystem policy checks
 when you reuse the sandbox include that source.
 
+On Windows, an additional workspace on a mapped SMB drive retains its
+original UNC source and mapped path for filesystem policy checks. The saved
+mapped path must remain available when the sandbox restarts, even if the UNC
+source is still reachable. Restore a disconnected drive mapping before
+retrying. Remapping the drive doesn't redirect the saved mount to another
+share.
+
+To change the mapped path for a dynamically added mount, unmount it with
+`sbx umount` and add it again with `sbx mount`. You can remove a saved dynamic
+mount using its recorded mapped path and sandbox target even if the drive is
+disconnected. For a workspace fixed at creation, restore the mapping or remove
+and recreate the sandbox.
+
 ## Kiro, Copilot, or Droid shorthand fails
 
 In Docker Sandboxes v0.42, `sbx run kiro`, `sbx run copilot`, and
