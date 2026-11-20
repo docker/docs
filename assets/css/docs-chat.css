@@ -209,6 +209,9 @@
 .gordon-send:hover:not(:disabled) {
   background: var(--color-primary-hover);
 }
+.gordon-stop .ui-icon svg {
+  fill: currentColor;
+}
 .gordon-send:disabled {
   background: var(--color-muted);
   color: var(--color-muted-foreground);

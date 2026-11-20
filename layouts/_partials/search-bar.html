@@ -29,6 +29,8 @@
     type="button"
     class="search-ask"
     @click="ask()"
+    @mouseenter="$store.gordon.prefetch()"
+    @focus="$store.gordon.prefetch()"
     :disabled="!query.trim()"
     disabled
   >

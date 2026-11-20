@@ -35,6 +35,7 @@
       placeholder="Ask a question about Docker…"
       autocomplete="off"
       x-model="query"
+      @focus="$store.gordon.prefetch()"
     />
     <button
       type="submit"
@@ -51,6 +52,8 @@
     type="button"
     class="ask-dock-mobile"
     @click="returnFocus = $el; $store.gordon.open()"
+    @mouseenter="$store.gordon.prefetch()"
+    @focus="$store.gordon.prefetch()"
     aria-controls="gordon-chat"
     aria-haspopup="dialog"
   >

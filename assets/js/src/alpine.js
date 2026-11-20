@@ -106,6 +106,36 @@ function loadGordonCards() {
 
 Alpine.magic("gordonCards", () => loadGordonCards);
 
+// With the "browser" Gordon backend, the assistant runs in the reader's browser. Its loader
+// script defines window.gordonAssistant and is only added once a reader shows interest in Gordon,
+// never on a plain page view.
+let gordonAssistantLoading;
+
+function loadGordonAssistant() {
+  gordonAssistantLoading ??= new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = window.GORDON_LOADER_URL;
+    script.onload = () => {
+      if (window.gordonAssistant) {
+        resolve(window.gordonAssistant);
+      } else {
+        gordonAssistantLoading = undefined;
+        reject(new Error("The Gordon loader did not define gordonAssistant"));
+      }
+    };
+    script.onerror = () => {
+      // A later call (such as opening the panel again) can try again.
+      gordonAssistantLoading = undefined;
+      script.remove();
+      reject(new Error("Failed to load the Gordon loader"));
+    };
+    document.head.append(script);
+  });
+  return gordonAssistantLoading;
+}
+
+Alpine.magic("gordonAssistant", () => loadGordonAssistant);
+
 // Swaps each ```openui-lang block for the card it describes. Until the card code has loaded, or
 // while a block is still streaming in and doesn't parse yet, it shows a placeholder. If the card
 // code can't load, or a finished block isn't a card, the block stays a plain code block.
@@ -269,6 +299,14 @@ Alpine.store("gordon", {
   },
   close() {
     this.isOpen = false;
+  },
+  // Downloads the in-browser assistant ahead of time, when a reader hovers over or focuses an
+  // "Ask Docker" control.
+  prefetch() {
+    if (window.GORDON_BACKEND !== "browser") return;
+    loadGordonAssistant()
+      .then((assistant) => assistant.prefetch())
+      .catch((err) => console.error("Gordon:", err));
   },
 });
 
