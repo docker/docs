@@ -259,6 +259,14 @@ override this with `--dns`.
 By default, containers inherit the DNS settings as defined in the
 `/etc/resolv.conf` configuration file.
 Containers that attach to the default `bridge` network receive a copy of this file.
+
+If the host's `resolv.conf` has no usable non-localhost nameservers (for example,
+only `127.0.0.1` or empty), the daemon falls back to Google Public DNS
+(`8.8.8.8` and `8.8.4.4`) for containers on the default bridge network and logs
+a message similar to `Using default external servers`. On air-gapped hosts this
+can make DNS lookups hang until those public resolvers time out. Override the
+fallback with `docker run --dns`, or set `"dns": [...]` in the daemon JSON
+configuration, when you need different or local resolvers.
 Containers that attach to a
 [custom network](drivers/bridge.md#use-user-defined-bridge-networks)
 use Docker's embedded DNS server.
