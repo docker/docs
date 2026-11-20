@@ -39,10 +39,6 @@ Managed OAuth token exchanges also require HTTPS. The proxy rejects plaintext
 token exchanges with HTTP 403 before forwarding them, for both initial sign-in
 and token refresh. If your endpoint uses HTTP, switch its URL to HTTPS.
 
-Authentication to daemon-managed internal services, such as the MCP gateway,
-and custom-secret substitution to the fixed local model server endpoint are
-preserved. You don't need to change those internal endpoints.
-
 A kit can set OAuth `passthrough: true` to opt out of sentinel masking. This
 sends the real token response into the sandbox and reduces credential isolation.
 See the [`oauth` kit fields](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/credential@1.md).
