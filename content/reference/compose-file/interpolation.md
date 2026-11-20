@@ -52,7 +52,7 @@ As any values in a Compose file can be interpolated with variable substitution, 
 for complex elements, interpolation is applied before a merge on a per-file basis.
 
 Interpolation applies only to YAML values, not to keys. For the few places where keys are actually arbitrary
-user-defined strings, such as [labels](services.md#labels) or [environment](services.md#environment), an alternate equal sign syntax
+user-defined strings, such as [labels](container-spec.md#labels) or [environment](container-spec.md#environment), an alternate equal sign syntax
 must be used for interpolation to apply. For example:
 
 ```yml

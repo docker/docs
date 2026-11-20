@@ -10,7 +10,7 @@ weight: 50
 
 {{% include "compose/configs.md" %}}
 
-Services can only access configs when explicitly granted by a [`configs`](services.md#configs) attribute within the `services` top-level element.
+Services can only access configs when explicitly granted by a [`configs`](container-spec.md#configs) attribute within the `services` top-level element.
 
 By default, the config:
 - Is owned by the user running the container command but can be overridden by service configuration.

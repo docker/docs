@@ -10,7 +10,7 @@ weight: 40
 
 {{% include "compose/volumes.md" %}}
 
-To use a volume across multiple services, you must explicitly grant each service access by using the [volumes](services.md#volumes) attribute within the `services` top-level element. The `volumes` attribute has additional syntax that provides more granular control.
+To use a volume across multiple services, you must explicitly grant each service access by using the [volumes](container-spec.md#volumes) attribute within the `services` top-level element. The `volumes` attribute has additional syntax that provides more granular control.
 
 > [!TIP]
 >
