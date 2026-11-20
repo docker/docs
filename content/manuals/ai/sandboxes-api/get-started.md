@@ -108,7 +108,17 @@ For CI jobs and other unattended applications, use
 
 If the program stops after printing the sandbox name, retrieve the sandbox
 with `client.get(name)` and delete it when you're finished. Closing the client
-doesn't delete the sandbox.
+doesn't delete the sandbox. For example, create a `client` as in `index.ts`,
+set `name` to the `sandboxes/<uid>` value the program printed, and run:
+
+```typescript
+const current = await client.get(name);
+const deleting = await current.delete({ force: true });
+await deleting?.waitUntilDeleted();
+```
+
+To handle refused deletions and wait timeouts, see
+[Delete a cloud sandbox](cookbook/delete-a-cloud-sandbox.md).
 
 ## Next steps
 
