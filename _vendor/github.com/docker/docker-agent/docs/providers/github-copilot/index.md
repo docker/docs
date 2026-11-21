@@ -6,8 +6,6 @@ weight: 110
 canonical: https://docs.docker.com/ai/docker-agent/providers/github-copilot/
 ---
 
-_Use GitHub Copilot's hosted models with Docker Agent through your existing GitHub subscription._
-
 ## Overview
 
 GitHub Copilot exposes an OpenAI-compatible Chat Completions API at

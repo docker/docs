@@ -6,8 +6,6 @@ weight: 140
 canonical: https://docs.docker.com/ai/docker-agent/providers/huggingface/
 ---
 
-_Use Hugging Face Inference Providers with Docker Agent._
-
 ## Overview
 
 [Hugging Face Inference Providers](https://huggingface.co/docs/inference-providers/index)
@@ -28,8 +26,6 @@ includes built-in support for Hugging Face as an alias provider.
 
 ### Inline Syntax
 
-The simplest way to use Hugging Face:
-
 ```yaml
 agents:
   root:
@@ -39,8 +35,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

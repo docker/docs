@@ -6,8 +6,6 @@ weight: 250
 canonical: https://docs.docker.com/ai/docker-agent/providers/together/
 ---
 
-_Use Together AI models with Docker Agent._
-
 ## Overview
 
 [Together AI](https://www.together.ai/) is one of the largest hosts of open
@@ -30,8 +28,6 @@ Use the provider ID `togetherai`. The legacy ID `together` is also accepted.
 
 ### Inline Syntax
 
-The simplest way to use Together AI:
-
 ```yaml
 agents:
   root:
@@ -41,8 +37,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

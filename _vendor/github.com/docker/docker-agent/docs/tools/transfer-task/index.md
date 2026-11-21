@@ -7,8 +7,6 @@ weight: 80
 canonical: https://docs.docker.com/ai/docker-agent/tools/transfer-task/
 ---
 
-_Delegate tasks to sub-agents in multi-agent setups._
-
 ## Overview
 
 The `transfer_task` tool allows an agent to delegate tasks to specialized sub-agents and receive their results. This is the core mechanism for multi-agent orchestration.

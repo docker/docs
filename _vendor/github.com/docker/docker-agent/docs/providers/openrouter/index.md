@@ -6,8 +6,6 @@ weight: 230
 canonical: https://docs.docker.com/ai/docker-agent/providers/openrouter/
 ---
 
-_Use OpenRouter models with Docker Agent._
-
 ## Overview
 
 OpenRouter provides access to models from many providers through an OpenAI-compatible API. Docker Agent includes built-in support for OpenRouter as an alias provider.
@@ -25,8 +23,6 @@ OpenRouter provides access to models from many providers through an OpenAI-compa
 
 ### Inline Syntax
 
-The simplest way to use OpenRouter:
-
 ```yaml
 agents:
   root:
@@ -38,8 +34,6 @@ agents:
 OpenRouter model IDs usually include the upstream provider name, such as `anthropic/claude-sonnet-5` or `meta-llama/llama-4-maverick`. Docker Agent splits only the first slash, so the full upstream model ID is preserved.
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

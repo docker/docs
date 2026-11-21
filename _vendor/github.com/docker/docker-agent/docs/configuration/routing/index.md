@@ -6,8 +6,6 @@ weight: 100
 canonical: https://docs.docker.com/ai/docker-agent/configuration/routing/
 ---
 
-_Route requests to different models based on the content of user messages._
-
 ## Overview
 
 Model routing lets you define a "router" model that automatically selects the best underlying model based on the user's message. This is useful for cost optimization, specialized handling, or load balancing across models.

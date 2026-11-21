@@ -6,8 +6,6 @@ weight: 95
 canonical: https://docs.docker.com/ai/docker-agent/configuration/flavors/
 ---
 
-_Ship one agent file with named variants, enabled at run time as YAML patches._
-
 ## Overview
 
 A flavor is a named YAML patch declared in the agent file itself, under the

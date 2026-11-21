@@ -7,8 +7,6 @@ weight: 40
 canonical: https://docs.docker.com/ai/docker-agent/tools/open-url/
 ---
 
-_Open a fixed URL in the user's default browser._
-
 ## Overview
 
 The `open_url` toolset exposes a single, argument-less tool that opens a URL

@@ -6,8 +6,6 @@ weight: 70
 canonical: https://docs.docker.com/ai/docker-agent/providers/cloudflare-workers-ai/
 ---
 
-_Use Cloudflare Workers AI models with Docker Agent._
-
 ## Overview
 
 [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) runs
@@ -46,8 +44,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

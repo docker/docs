@@ -6,8 +6,6 @@ weight: 245
 canonical: https://docs.docker.com/ai/docker-agent/providers/daoxe/
 ---
 
-_Use DaoXE models with Docker Agent._
-
 ## Overview
 
 [DaoXE](https://daoxe.com) is a multi-model LLM gateway that serves models from

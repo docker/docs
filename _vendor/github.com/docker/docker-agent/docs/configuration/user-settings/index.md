@@ -7,8 +7,6 @@ weight: 110
 canonical: https://docs.docker.com/ai/docker-agent/configuration/user-settings/
 ---
 
-_Full reference for the global settings block in your user config file._
-
 ## Where Settings Live
 
 Docker Agent reads a single user-level config file, independent of any agent YAML:
@@ -40,7 +38,7 @@ You rarely need to hand-edit this file. Most fields are managed from the TUI's `
 | `expand_thinking` | boolean | `false` | Start new sessions with thinking/tool blocks expanded instead of collapsed. |
 | `split_diff_view` | boolean | `true` | Render file-edit diffs side-by-side instead of unified. |
 | `render_images` | boolean | `true` | Render images in the TUI using the Kitty graphics protocol. Applies to both tool-result images and Markdown images in agent responses. Automatically disabled when the terminal does not support Kitty. |
-| `show_banner` | boolean | `true` | Show the ASCII-art startup banner on an empty conversation. Applies to both the full TUI and the [lean TUI](../../features/tui/index.md#lean-tui). Managed from the **Appearance** tab of `/settings`. |
+| `show_banner` | boolean | `true` | Show the braille wordmark startup banner. In the full TUI it appears on an empty conversation; in the [lean TUI](../../features/tui/index.md#lean-tui) it is printed at the start of the transcript, before any resumed session. Managed from the **Appearance** tab of `/settings` in the full TUI; the lean TUI's `/settings` panel has a *Show startup banner* toggle (labeled "next launch") that is saved for future launches. Unlike other settings marked **next launch**, saving it also adds or removes the banner in the current session, but only while the session's welcome block is still in the transcript: it cannot erase a banner already printed to your terminal scrollback, and after resuming another session with `/sessions` there is no welcome block to update. |
 | `theme` | string | `default` | Theme name, loaded from a built-in theme or `~/.cagent/themes/<name>.yaml`. The special value `auto` follows the terminal's light/dark background. See [Theming](../../features/tui/index.md#theming). |
 | `theme_dark` | string | `default` | Theme applied when `theme: auto` and the terminal background is dark. |
 | `theme_light` | string | `default-light` | Theme applied when `theme: auto` and the terminal background is light. |
@@ -53,6 +51,8 @@ You rarely need to hand-edit this file. Most fields are managed from the TUI's `
 | `sound` | boolean | `false` | Play a notification sound on task success or failure. |
 | `sound_threshold` | int | `10` | Minimum duration in seconds a task must run before a success sound plays (failures always play). |
 | `snapshot` | boolean | `false` | Enable automatic shadow-git snapshots at turn boundaries globally. See [Snapshots](../../features/snapshots/index.md). |
+| `background_compaction` | boolean | `false` | Generate automatic compaction summaries while the agent continues working. Apply completed summaries between turns, preserving messages added during generation. Unfinished work is cancelled when the stream ends. |
+| `background_compaction_threshold` | integer | `70` | Context-window percentage (1–99) at which background compaction starts. Invalid values fall back to 70. Set below the agent's blocking `compaction_threshold` (90% by default) to allow time for generation. |
 | `cache_stable_prompts` | boolean | `false` | Keep changing trusted context (date, environment info, dynamic prompt files) out of the frozen system prefix and append chronological updates instead, improving prompt-cache hit rates on long sessions. |
 | `warn_on_cache_miss` | boolean | `false` | Warn when a model call after the first one in a session reports no cached input tokens (a prompt-cache miss). Managed from the **Notifications** tab of `/settings`. |
 | `busy_send_mode` | string | `steer` | What happens to a message sent while the agent is working: `steer` injects it into the ongoing stream; `queue` holds it until the current turn ends. |
@@ -107,6 +107,8 @@ settings:
   sound_threshold: 10
   snapshot: true
   cache_stable_prompts: true
+  background_compaction: true
+  background_compaction_threshold: 70
   warn_on_cache_miss: true
   busy_send_mode: queue
   interrupt_confirmation: double-tap

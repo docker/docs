@@ -6,8 +6,6 @@ weight: 185
 canonical: https://docs.docker.com/ai/docker-agent/providers/nativ/
 ---
 
-_Run Docker Agent with local MLX models served by Nativ on Apple Silicon._
-
 ## Overview
 
 [Nativ](https://github.com/Blaizzy/nativ) is a macOS app for downloading and

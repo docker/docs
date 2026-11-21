@@ -6,8 +6,6 @@ weight: 55
 canonical: https://docs.docker.com/ai/docker-agent/providers/chatgpt/
 ---
 
-_Use your ChatGPT subscription with Docker Agent by signing in with your OpenAI account. No API key needed._
-
 ## Overview
 
 The `chatgpt` provider authenticates with a ChatGPT account (the same

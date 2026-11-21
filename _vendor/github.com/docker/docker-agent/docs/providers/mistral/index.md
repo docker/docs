@@ -6,8 +6,6 @@ weight: 170
 canonical: https://docs.docker.com/ai/docker-agent/providers/mistral/
 ---
 
-_Use Mistral AI models with Docker Agent._
-
 ## Overview
 
 Mistral AI provides powerful language models through an OpenAI-compatible API. Docker Agent includes built-in support for Mistral as an alias provider.
@@ -25,8 +23,6 @@ Mistral AI provides powerful language models through an OpenAI-compatible API. D
 
 ### Inline Syntax
 
-The simplest way to use Mistral:
-
 ```yaml
 agents:
   root:
@@ -36,8 +32,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

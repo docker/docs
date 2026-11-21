@@ -7,13 +7,9 @@ weight: 125
 canonical: https://docs.docker.com/ai/docker-agent/tools/git/
 ---
 
-_Read-only inspection of the working git repository._
-
 ## Overview
 
 The git toolset gives an agent structured, **read-only** access to the working repository — status, history, branches, a commit's changes, and line-level authorship. It is implemented with go-git, so it needs **no `git` binary**.
-
-Compared with running `git` through the `shell` tool, the git toolset returns clean, structured output the model can read reliably, is **safe by construction** (no command can modify the repository), and works even when `shell` is disabled or no `git` binary is installed.
 
 > [!NOTE]
 > The git toolset is read-only. To stage, commit, or check out, use the [`shell`](../shell/index.md) tool.
@@ -93,8 +89,3 @@ On branch master
 1 changed file(s) [XY = staged/worktree; M=modified A=added D=deleted R=renamed ?=untracked]:
    M main.go
 ```
-
-> [!TIP]
-> **When to use**
->
-> Use the git toolset whenever the agent needs repository context — before editing, to review recent history, or to find who last touched a line — without exposing the writable `shell` surface.

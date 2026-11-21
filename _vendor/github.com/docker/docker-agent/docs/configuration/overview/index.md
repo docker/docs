@@ -17,7 +17,7 @@ A Docker Agent config can be written in YAML or HCL. The examples on this page u
 
 A Docker Agent config has these main sections:
 
-```bash
+```yaml
 # 1. Version — configuration schema version (optional but recommended)
 version: 16
 
@@ -50,6 +50,7 @@ rag:
     strategies:
       - type: chunked-embeddings
         embedding_model: openai/text-embedding-3-small
+        vector_dimensions: 1536
 
 # 6. MCPs — reusable MCP server definitions (optional)
 mcps:
@@ -155,7 +156,7 @@ See [Provider Credentials](../../providers/overview/index.md#provider-credential
 | `DOCKER_AGENT_HIDE_TELEMETRY_BANNER`| Set to `1` to suppress the first-run telemetry notice.                                               |
 | `DOCKER_AGENT_AUTO_UPDATE`          | Set to a truthy value (`1`, `true`, `yes`, `on`) to let standalone release binaries self-update before running. See [Optional Self-Updates](../../getting-started/installation/index.md#optional-self-updates). |
 | `DOCKER_AGENT_NO_TOKEN_EXCHANGE`    | Set to `1` to stop Docker Agent from exchanging the access token stored by `docker login` for a Docker token. See [Docker authentication](../../guides/secrets/index.md#docker-authentication). |
-| `DOCKER_AGENT_HUB_LOGIN_URL`        | Point the token exchange at a Docker staging environment. Ignored unless it is an HTTPS `docker.com` URL. |
+| `DOCKER_AGENT_HUB_LOGIN_URL`        | Point the token exchange at a Docker staging environment. Ignored unless it is an HTTPS `docker.com` URL. A staging host, such as `hub-stage.docker.com`, also makes Docker Agent read staging sessions from the Docker secrets engine. |
 | `DOCKER_AGENT_DISABLE_DESKTOP_PROXY` | Set to a truthy value (`1`, `true`, `yes`, `on`) to bypass Docker Desktop's PAC adapter per request and restore standard `HTTP_PROXY`/`HTTPS_PROXY`/`ALL_PROXY`/`NO_PROXY` routing. |
 
 > [!NOTE]
@@ -278,13 +279,13 @@ Docker Agent validates your configuration at startup:
 - Named model references must exist in the `models` section
 - Provider names must be valid (`openai`, `anthropic`, `google`, `dmr`, etc.)
 - Required environment variables (API keys) must be set
-- Tool-specific fields are validated (e.g., `path` is only valid for `memory`)
+- Tool-specific fields are validated (e.g., `path` is only valid for `memory` and `tasks`)
 
 ## JSON Schema
 
 For YAML editor autocompletion and validation, use the [Docker Agent JSON Schema](https://github.com/docker/docker-agent/blob/main/agent-schema.json). Add this to the top of your YAML file:
 
-```bash
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/docker/docker-agent/main/agent-schema.json
 ```
 
@@ -467,7 +468,7 @@ agents:
 | Field                 | Description                                                                              |
 | --------------------- | ---------------------------------------------------------------------------------------- |
 | `provider`            | Underlying provider type: `openai` (default), `anthropic`, `google`, `amazon-bedrock`, etc. |
-| `api_type`            | API schema: `openai_chatcompletions` (default) or `openai_responses`. OpenAI-only.        |
+| `api_type`            | API schema: `openai_chatcompletions` or `openai_responses`. If omitted, selected from the model: Responses for supported newer OpenAI models, Chat Completions otherwise. Applies to OpenAI-compatible providers.        |
 | `base_url`            | Base URL for the API endpoint. Required for OpenAI-compatible providers.                  |
 | `token_key`           | Environment variable name for the API token.                                              |
 | `temperature`         | Default sampling temperature.                                                             |

@@ -6,8 +6,6 @@ weight: 120
 canonical: https://docs.docker.com/ai/docker-agent/features/remote-mcp/
 ---
 
-_Connect Docker Agent to cloud services via remote MCP servers with built-in OAuth authentication._
-
 ## Overview
 
 Docker Agent supports connecting to remote MCP servers over **Streamable HTTP**, **SSE** (Server-Sent Events), and **Unix domain sockets**. Streamable HTTP is the current recommended transport for most hosted MCP servers. Many popular services offer MCP endpoints with OAuth — Docker Agent handles the authentication flow automatically.
@@ -42,7 +40,7 @@ The path after `unix://` is the absolute path to the socket file. Configured `he
 > [!TIP]
 > **Cancelling the authorization dialog**
 >
-> If you dismiss the OAuth authorization dialog, the request is cancelled cleanly — no repeated prompts appear. The agent will report that authorization was declined. To try again, simply re-enable the server or repeat the request that triggered the flow.
+> Dismissing the OAuth authorization dialog cancels the request. To try again, re-enable the server or repeat the request that triggered the flow.
 
 ## Configuration
 
@@ -61,6 +59,8 @@ toolsets:
 For full configuration details, see the [Tool Config](../../configuration/tools/index.md) page.
 
 Set `allow_private_ips: true` on a remote MCP toolset only when the MCP server or its OAuth registration/token endpoints intentionally resolve to private, loopback, or link-local addresses. The default blocks those OAuth helper requests to reduce SSRF risk.
+
+Set `standalone_sse: true` on a `streamable` remote toolset to open the optional standalone SSE `GET` stream on the MCP endpoint. Some gateways (for example the sbx MCP gateway) send keepalive pings and `notifications/tools/list_changed` over that stream and drop sessions they cannot reach, so without it the session expires silently and the tool list goes stale. It defaults to `false` because a few servers hang when the stream is opened. It has no effect with `transport_type: "sse"`.
 
 When Docker Desktop is running, eligible OAuth discovery, registration, token exchange, refresh, and helper requests use its PAC adapter before environment proxy settings. It does not apply to remote MCP Streamable HTTP/SSE transport. Set `DOCKER_AGENT_DISABLE_DESKTOP_PROXY=1` (or `true`, `yes`, or `on`) to restore standard `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` routing; `NO_PROXY` does not bypass Desktop PAC selection. Docker Agent does not evaluate PAC files or URLs directly—see [Docker Desktop proxy](../../tools/fetch/index.md#docker-desktop-proxy).
 
@@ -90,7 +90,7 @@ When Docker Desktop is running, eligible OAuth discovery, registration, token ex
 > - **Silent refresh:** when a refresh token is available, Docker Agent silently exchanges it for a new access token and replays the request — no user interaction required.
 > - **Re-authentication prompt:** when the refresh token is absent or has also expired, the toolset transitions to a "needs re-auth" state and surfaces an OAuth prompt on your next message (exactly like the first-time flow).
 >
-> Either way, the agent never burns 5 reconnect attempts on an auth failure — it fails fast and either refreshes silently or defers to interactive re-auth. If you want to trigger re-auth immediately without waiting for the next message, run `/toolset-restart <name>` from the TUI.
+> To trigger re-auth immediately without waiting for the next message, run `/toolset-restart <name>` from the TUI.
 
 ### OAuth for servers without Dynamic Client Registration
 
@@ -307,4 +307,4 @@ agents:
 > [!NOTE]
 > **Growing list**
 >
-> This list is updated as more services add MCP support. If a service you use isn't listed, check their documentation — many providers are adding MCP endpoints regularly.
+> For services not listed here, check their documentation for an MCP endpoint.

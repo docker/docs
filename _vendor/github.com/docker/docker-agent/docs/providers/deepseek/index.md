@@ -6,8 +6,6 @@ weight: 80
 canonical: https://docs.docker.com/ai/docker-agent/providers/deepseek/
 ---
 
-_Use DeepSeek models with Docker Agent._
-
 ## Overview
 
 [DeepSeek](https://www.deepseek.com/) serves its frontier chat and reasoning
@@ -28,8 +26,6 @@ alias provider.
 
 ### Inline Syntax
 
-The simplest way to use DeepSeek:
-
 ```yaml
 agents:
   root:
@@ -39,8 +35,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

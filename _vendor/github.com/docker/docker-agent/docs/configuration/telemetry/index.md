@@ -10,9 +10,11 @@ aliases:
 
 _Docker Agent collects usage data to help improve the tool. Telemetry can be disabled at any time._
 
-On first startup, Docker Agent displays a notice about telemetry collection so you're always informed. Ordinary telemetry events are sent asynchronously; selected error events are sent synchronously before exit.
+On first startup, Docker Agent displays a notice about telemetry collection. Ordinary telemetry events are sent asynchronously; selected error events are sent synchronously before exit.
 
 ## Disabling Telemetry
+
+Telemetry is **enabled by default**. Set `TELEMETRY_ENABLED=false` to opt out:
 
 ```bash
 # Disable via environment variable
@@ -21,11 +23,6 @@ $ TELEMETRY_ENABLED=false docker agent run agent.yaml
 # Or export it in your shell profile
 $ export TELEMETRY_ENABLED=false
 ```
-
-> [!NOTE]
-> **Default**
->
-> Telemetry is **enabled by default**. Set `TELEMETRY_ENABLED=false` to opt out.
 
 ## What's Collected ✅
 
