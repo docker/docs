@@ -7,11 +7,9 @@ weight: 20
 canonical: https://docs.docker.com/ai/docker-agent/tools/shell/
 ---
 
-_Execute arbitrary shell commands in the user's environment._
-
 ## Overview
 
-The shell tool allows agents to execute arbitrary shell commands synchronously. This is one of the most powerful tools — it lets agents run builds, install dependencies, query APIs, and interact with the system. Each call runs in a fresh, isolated shell session — no state persists between calls.
+The shell tool allows agents to execute arbitrary shell commands synchronously. Each call runs in a fresh, isolated shell session — no state persists between calls.
 
 Commands have a default 30-second timeout and require user confirmation unless `--yolo` is used. For servers, watchers, and other long-running commands, add the [`background_jobs`](../background-jobs/index.md) toolset alongside `shell`.
 
@@ -126,8 +124,3 @@ The shell toolset exposes one tool:
 > **Safety**
 >
 > The shell tool gives agents full access to the system shell. Always set `max_iterations` on agents that use the shell tool to prevent infinite loops. A value of 20–50 is typical for development agents. Use [Sandbox Mode](../../configuration/sandbox/index.md) for additional isolation.
-
-> [!NOTE]
-> **Tool Confirmation**
->
-> By default, Docker Agent asks for user confirmation before executing shell commands. Use `--yolo` to auto-approve all tool calls.

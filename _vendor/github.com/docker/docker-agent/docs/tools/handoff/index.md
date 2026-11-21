@@ -7,8 +7,6 @@ weight: 70
 canonical: https://docs.docker.com/ai/docker-agent/tools/handoff/
 ---
 
-_Hand off the active conversation to another local agent defined in the same config._
-
 ## Overview
 
 The `handoff` tool lets an agent transfer control of the **current conversation** to another agent in the **same config file**. Unlike [`transfer_task`](../transfer-task/index.md), which delegates a sub-task and collects the result, `handoff` rewires the session so the receiving agent continues the conversation directly with the user.

@@ -6,18 +6,11 @@ weight: 90
 canonical: https://docs.docker.com/ai/docker-agent/providers/dmr/
 ---
 
-_Run AI models locally with Docker — no API keys, no costs, full data privacy._
-
 ## Overview
 
 Docker Model Runner (DMR) lets you run open-source AI models directly on your machine. Models run in Docker, so there's no API key needed; with a local runner, prompts stay on your computer.
 
-Docker Agent automatically discovers models you have already pulled from DMR. When no model is explicitly configured, auto-selection prefers a locally-installed model (choosing the model specified via the `model:` key in the agent YAML if it is already pulled locally, or otherwise the first available non-embedding model) rather than always defaulting to `ai/qwen3:latest` and triggering a pull prompt.
-
-> [!TIP]
-> **No API key needed**
->
-> With a local DMR endpoint, your data stays on your machine. Great for development, sensitive data, or offline use.
+Docker Agent automatically discovers models you have already pulled from DMR. When no model is explicitly configured, auto-selection prefers a locally-installed model (choosing the model specified via the `model:` key in the agent YAML if it is already pulled locally, or otherwise the first available non-embedding model).
 
 ## Prerequisites
 
@@ -106,7 +99,7 @@ Use only flags your Model Runner backend allows (see `docker model configure --h
 
 ## Context size
 
-`max_tokens` controls the **maximum output tokens** per chat completion request. To set the engine's **total context window**, use `provider_opts.context_size`:
+`max_tokens` controls the **maximum output tokens** per chat completion request. To set the engine's **total context window**, use `provider_opts.context_size`. This is the only setting that reconfigures the engine; the model-level [`context_window`](../../configuration/models/index.md#context-window) is metadata for docker-agent's accounting and never changes the engine:
 
 ```yaml
 models:
@@ -115,25 +108,30 @@ models:
     model: ai/qwen3
     max_tokens: 4096            # max output tokens (per-request)
     provider_opts:
-      context_size: 32768       # total context window (sent via _configure)
+      context_size: 32768        # total context window (sent via _configure)
 ```
 
-If `context_size` is omitted, Docker Agent queries the runner's completion
+If `provider_opts.context_size` is omitted, Docker Agent queries the runner's completion
 configuration, then falls back to the packaged model's context window. This
 read-only discovery is cached briefly and drives context usage and automatic
-compaction. An explicit `context_size` always takes precedence; `max_tokens` is
+compaction. An explicit `provider_opts.context_size` always takes precedence over discovery, and a model-level `context_window` takes precedence over both; `max_tokens` is
 **not** used as the context window.
 
 Discovery is best-effort. Older or unreachable runners, gateways, and runtime
 flags that override context allocation may leave the window unknown. In those
-cases, set `context_size` explicitly. Arbitrary `raw_runtime_flags` also disable
+cases, set `provider_opts.context_size` explicitly. Arbitrary `raw_runtime_flags` also disable
 automatic context discovery.
+
+A model-level `context_window` also works for DMR models. docker-agent then plans
+compaction and context usage against that window and leaves the engine's
+allocation untouched. Set `provider_opts.context_size` too, to the same value,
+when the engine should be sized to match; the two must agree.
 
 The model picker displays DMR's reported architecture, parameter count,
 quantization, size, and packaged context window when available. The packaged
 window can differ from a running model's configured context size.
 
-Docker Agent's auto-compaction scales its summary and keep-tail token budgets proportionally to `context_size`. This ensures compaction works correctly even for small context windows — for example, an 8k-token local model will not have its session history wiped during compaction.
+Docker Agent's auto-compaction scales its summary and keep-tail token budgets proportionally to the context window.
 
 ## Thinking / reasoning budget
 
@@ -196,6 +194,14 @@ Accepted values: any Go duration string (`"30s"`, `"5m"`, `"1h"`, `"2h30m"`), `"
 In multi-agent setups where two DMR models can't fit in GPU memory simultaneously, wire the [`unload`](../../configuration/hooks/index.md#available-built-ins) built-in hook into each agent's `on_agent_switch` chain. Every time the active agent transfers control, the runtime POSTs to the engine's `_unload` endpoint to free the previous model's resources before the next one is loaded:
 
 ```yaml
+models:
+  qwen3-large:
+    provider: dmr
+    model: ai/qwen3
+  qwen3-coder:
+    provider: dmr
+    model: ai/smollm2
+
 agents:
   coder:
     model: qwen3-large

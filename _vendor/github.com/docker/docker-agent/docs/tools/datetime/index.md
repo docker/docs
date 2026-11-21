@@ -7,8 +7,6 @@ weight: 146
 canonical: https://docs.docker.com/ai/docker-agent/tools/datetime/
 ---
 
-_Obtain the current date, time, or datetime in a model-chosen format._
-
 ## Overview
 
 The `datetime` toolset exposes one read-only tool, `get_datetime`. It reads the

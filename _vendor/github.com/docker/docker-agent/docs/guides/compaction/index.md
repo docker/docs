@@ -58,12 +58,22 @@ models:
     model: claude-haiku-4-5
 ```
 
+> [!NOTE]
+> **Unknown context window**
+>
+> Compaction needs the summary model's context window. Models outside the models.dev catalogue (custom endpoints, local models) have none unless you declare one. If compaction reports that a model "has no known context window", add `context_window` to that model's entry in the `models` section (for example `context_window: 200000`). See [Context Window](../../configuration/models/index.md#context-window).
+
+> [!NOTE]
+> **Declared windows and thresholds**
+>
+> A model's `context_window` (see [Context Window](../../configuration/models/index.md#context-window)) is the capacity the threshold is a fraction of. Setting it does not add a fixed-token trigger: with `context_window: 128000` and the default `0.9`, compaction fires above 115,200 tokens, and the `compaction_threshold` on the model or agent scales that fraction.
+
 > [!IMPORTANT]
 > **Context window mismatch**
 >
 > If `compaction_model` has a **smaller** context window than the primary model, Docker Agent triggers compaction against the smaller window so the summary call can always ingest the full conversation. Pair the primary model with a compaction model whose window is at least as large to keep the proactive trigger aligned with the primary model's window.
 >
-> The `/context` header and the sidebar's context gauge surface this cap when it applies: the `/context` header shows a second line reading "compaction cap: `<model>` • `<N>` tokens", and the sidebar shows a short "⚠ capped" marker. Live-sessions rows do not carry cap wording; the sidebar marker deliberately doesn't repeat the model name or figure — the `/context` header is the sole authority on why the reported limit is smaller than the primary model's own window.
+> The `/context` header and the sidebar's context gauge surface this cap when it applies: the `/context` header shows a second line reading "compaction cap: `<model>` • `<N>` tokens", and the sidebar shows a short "⚠ capped" marker.
 
 Disable compaction only when you specifically want a session to keep full, unabridged history and are willing to risk hitting the context limit:
 
@@ -85,7 +95,7 @@ You don't have to wait for the automatic threshold. Two TUI commands give you di
 - **`/compact`** — summarize and compact the current session's history right now, regardless of how full the context window is. Useful before starting a new phase of work that doesn't need the earlier detail.
 - **`/context`** — open a context-window breakdown: estimated tokens per category (system prompt, tool definitions, prompt files, messages, tool results, compaction summary), a **Live sessions** view listing the current session plus every running sub-agent session with its own context budget, and a per-file inventory of attachments and prompt files. When a compaction has occurred, the dialog also displays the verbatim text of the most recent compaction summary, preserving hard newlines and soft-wrapping long lines to the dialog width.
 
-From `/context`, select any live session with the arrow keys and press <kbd>Enter</kbd> to explicitly compact it — including a sub-agent's session, not just the main one. This is the only way cross-agent compaction happens: there's no idle-triggered automatic compaction of sub-agent sessions, so a long-running background agent stays under your control. The request is queued onto the target session's own run loop and applied at the next safe point between model turns, so it never corrupts an in-flight turn.
+From `/context`, select any live session with the arrow keys and press <kbd>Enter</kbd> to explicitly compact it — including a sub-agent's session, not just the main one. The request runs at the next safe point between model turns.
 
 ```bash
 $ docker agent run agent.yaml
@@ -146,4 +156,4 @@ Compaction summarizes history, but it never resets what a session has actually c
 
 ## Related: deferred tool loading
 
-Compaction and result trimming manage context that's already in the session. If large toolsets are inflating your **starting** context instead — many MCP servers, hundreds of tools — look at [deferred tool loading](../../configuration/tools/index.md#deferred-tool-loading), which registers a toolset's tools lazily instead of eagerly at startup.
+Compaction and result trimming manage context that's already in the session. If large toolsets are inflating your **starting** context instead — many MCP servers, hundreds of tools — look at [deferred tool loading](../../configuration/tools/index.md#deferred-tool-loading), which exposes tool definitions to the model only when needed. The underlying toolsets still start normally.

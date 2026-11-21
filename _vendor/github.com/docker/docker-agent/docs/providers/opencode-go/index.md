@@ -6,8 +6,6 @@ weight: 210
 canonical: https://docs.docker.com/ai/docker-agent/providers/opencode-go/
 ---
 
-_Use OpenCode Go models with Docker Agent._
-
 ## Overview
 
 [OpenCode Go](https://opencode.ai/docs/go) is a low-cost subscription service ($5 first month, then $10/month) that provides reliable access to popular open-source coding models. It serves models through both OpenAI-compatible and Anthropic-compatible APIs from globally distributed endpoints.
@@ -28,8 +26,6 @@ Docker Agent includes built-in support for OpenCode Go as an alias provider.
 
 ### Inline Syntax
 
-The simplest way to use OpenCode Go:
-
 ```yaml
 agents:
   root:
@@ -39,8 +35,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

@@ -6,8 +6,6 @@ weight: 60
 canonical: https://docs.docker.com/ai/docker-agent/providers/cloudflare-ai-gateway/
 ---
 
-_Use Cloudflare AI Gateway models with Docker Agent._
-
 ## Overview
 
 [Cloudflare AI Gateway](https://developers.cloudflare.com/ai-gateway/) is a
@@ -53,8 +51,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

@@ -7,8 +7,6 @@ weight: 120
 canonical: https://docs.docker.com/ai/docker-agent/tools/mcp-catalog/
 ---
 
-_Let the agent discover and activate remote MCP servers from the Docker MCP Catalog on demand._
-
 ## Overview
 
 The `mcp_catalog` toolset gives an agent access to a curated subset of the [Docker MCP Catalog](https://hub.docker.com/search?q=&type=mcp) — every server in this subset is reachable over the **streamable-http** transport, so Docker Agent can talk to it directly without the MCP gateway or a local subprocess.

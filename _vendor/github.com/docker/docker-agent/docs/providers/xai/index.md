@@ -6,8 +6,6 @@ weight: 270
 canonical: https://docs.docker.com/ai/docker-agent/providers/xai/
 ---
 
-_Use xAI's Grok models with Docker Agent._
-
 ## Overview
 
 xAI provides the Grok family of models through an OpenAI-compatible API. Docker Agent includes built-in support for xAI as an alias provider.
@@ -25,8 +23,6 @@ xAI provides the Grok family of models through an OpenAI-compatible API. Docker 
 
 ### Inline Syntax
 
-The simplest way to use xAI:
-
 ```yaml
 agents:
   root:
@@ -36,8 +32,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

@@ -7,8 +7,6 @@ weight: 145
 canonical: https://docs.docker.com/ai/docker-agent/tools/webhook/
 ---
 
-_Reliable outbound notifications to Slack, Discord, Telegram, IFTTT, and more._
-
 ## Overview
 
 The webhook toolset delivers a notification to a destination **you configure**. The

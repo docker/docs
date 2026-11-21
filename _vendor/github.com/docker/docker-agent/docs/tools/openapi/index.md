@@ -7,8 +7,6 @@ weight: 230
 canonical: https://docs.docker.com/ai/docker-agent/tools/openapi/
 ---
 
-_Automatically generate tools from an OpenAPI specification._
-
 ## Overview
 
 The OpenAPI tool fetches an OpenAPI 3.x specification from a URL and creates one tool per API operation. Each endpoint's parameters, request body, and description are translated into a callable tool that the agent can invoke directly.

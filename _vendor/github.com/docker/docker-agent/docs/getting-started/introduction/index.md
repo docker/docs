@@ -6,8 +6,6 @@ weight: 10
 canonical: https://docs.docker.com/ai/docker-agent/getting-started/introduction/
 ---
 
-_Docker Agent is a multi-agent runtime that lets you build, run, and share AI agents with a YAML or HCL config — no glue code required._
-
 ## What is Docker Agent?
 
 Docker Agent is an open-source tool from Docker that orchestrates AI
@@ -64,9 +62,6 @@ agents:
 # Run it
 $ docker agent run agent.yaml
 ```
-
-> [!TIP]
-> Jump straight to the [Quick Start](../quickstart/index.md) if you want to build your first agent right away.
 
 ## What's next?
 

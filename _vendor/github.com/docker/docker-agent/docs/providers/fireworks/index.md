@@ -6,8 +6,6 @@ weight: 100
 canonical: https://docs.docker.com/ai/docker-agent/providers/fireworks/
 ---
 
-_Use Fireworks AI models with Docker Agent._
-
 ## Overview
 
 [Fireworks AI](https://fireworks.ai/) is a fast inference host for open-weight
@@ -30,8 +28,6 @@ Use the provider ID `fireworks-ai`. The legacy ID `fireworks` is also accepted.
 
 ### Inline Syntax
 
-The simplest way to use Fireworks AI:
-
 ```yaml
 agents:
   root:
@@ -41,8 +37,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

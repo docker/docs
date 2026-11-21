@@ -7,8 +7,6 @@ weight: 21
 canonical: https://docs.docker.com/ai/docker-agent/tools/background-jobs/
 ---
 
-_Run and manage long-running shell commands._
-
 ## Overview
 
 The `background_jobs` toolset starts shell commands that should keep running while the agent continues with other work, such as local servers, file watchers, long builds, or test suites. It returns a job ID immediately, captures combined stdout/stderr up to 10 MB per job, and terminates all running jobs when the agent session ends.

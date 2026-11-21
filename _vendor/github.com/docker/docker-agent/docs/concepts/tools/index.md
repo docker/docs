@@ -56,8 +56,3 @@ toolsets:
 ```
 
 See [Tool Config](../../configuration/tools/index.md#mcp-tools) for full MCP configuration reference.
-
-> [!TIP]
-> **See also**
->
-> For full configuration reference, see [Tool Config](../../configuration/tools/index.md).
