@@ -56,7 +56,7 @@ If any containers have connections open to the old container, they are closed. I
 
 ## Change the network mode
 
-By default, each service joins the project's bridge network. It is the most secure networking mode. If you don't specify [`network_mode`](/reference/compose-file/services.md#network_mode), this is the type of network you are creating.
+By default, each service joins the project's bridge network. It is the most secure networking mode. If you don't specify [`network_mode`](/reference/compose-file/container-spec.md#network_mode), this is the type of network you are creating.
 
 You can override the networking mode on a per-service basis. The `network_mode` option accepts the following values:
 
@@ -118,7 +118,7 @@ networks:
     driver: custom-driver  # Use a custom driver
 ```
 
-Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](/reference/compose-file/services.md#ipv4_address-ipv6_address) for each attached network.
+Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](/reference/compose-file/container-spec.md#ipv4_address-ipv6_address) for each attached network.
 
 Networks can also be given a [custom name](/reference/compose-file/networks.md#name):
 
@@ -262,7 +262,7 @@ networks:
 
 ## Custom DNS with `extra_hosts`
 
-You can add custom hostname-to-IP mappings to a container's `/etc/hosts` file using [`extra_hosts`](/reference/compose-file/services.md#extra_hosts). This is useful when a service needs to resolve a hostname that isn't registered in Docker's internal DNS. For example, a fixed-IP dependency or a staging endpoint:
+You can add custom hostname-to-IP mappings to a container's `/etc/hosts` file using [`extra_hosts`](/reference/compose-file/container-spec.md#extra_hosts). This is useful when a service needs to resolve a hostname that isn't registered in Docker's internal DNS. For example, a fixed-IP dependency or a staging endpoint:
 
 ```yaml
 services:
@@ -388,4 +388,4 @@ If the network membership looks correct but services still can't reach each othe
 For full details of the network configuration options available, see the following references:
 
 - [Top-level `networks` element](/reference/compose-file/networks.md)
-- [Service-level `networks` attribute](/reference/compose-file/services.md#networks)
+- [Service-level `networks` attribute](/reference/compose-file/container-spec.md#networks)

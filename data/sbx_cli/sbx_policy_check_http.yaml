@@ -1,0 +1,57 @@
+name: sbx policy check http
+synopsis: Check HTTP access to a URL
+description: |-
+    Evaluate current policy for an HTTP request to URL.
+
+    URL must be an absolute HTTP or HTTPS URL. The check evaluates network access
+    first, then evaluates HTTP method, path, and query policy when it applies. It
+    does not resolve hostnames, make a network request, or account for runtime
+    transport behavior. Transparent connections that require HTTP authorization are
+    blocked at runtime, while daemon-managed aliases can be reachable regardless of
+    the policy result. Results for hostnames do not include policy applied to their
+    resolved IP addresses. The displayed URL retains the target's host spelling;
+    with --verbose, Resource shows the normalized host and port evaluated by policy.
+usage: sbx policy check http [--sandbox SANDBOX] [--method METHOD] URL [flags]
+options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for http
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+    - name: method
+      default_value: GET
+      usage: HTTP method to evaluate
+    - name: sandbox
+      usage: Evaluate in a specific sandbox policy context
+    - name: verbose
+      shorthand: v
+      default_value: "false"
+      usage: Show the policy action and resource
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+example: |4-
+      # Check a GET request
+      sbx policy check http https://api.example.com/v1/items
+
+      # Check a POST request in a sandbox context
+      sbx policy check http --sandbox my-sandbox --method POST https://api.example.com/v1/items
+
+      # Check a query-qualified request and output JSON
+      sbx policy check http --json 'https://api.example.com/search?team=platform'
+see_also:
+    - sbx policy check - Check whether policy allows an access request

@@ -1,0 +1,12 @@
+{
+  "package": "@docker/trident-tokens",
+  "version": "2.0.0-beta.11",
+  "revision": "c7a3a882e34a2f1383571ba12ede3b5a3e0e885d",
+  "repository": "https://github.com/docker/trident",
+  "files": {
+    "tokens.css": "a399512b62363aff7a272487b1bbd8e3b0cd5c10c7b439319bc733c98357581b",
+    "dark.css": "7ebc622080a58ce970137f305d2654036a63ee261dc90e45d643bf3c52c4d3f1",
+    "next.css": "c24726334be31cb01c0f0425dbc1300144a3c4a42702cb17a386227eafe05430",
+    "next-dark.css": "0c4a70eec767cc1983bdef6e6a843975ce87767512b73691b92d6b5dff75776d"
+  }
+}

@@ -9,7 +9,7 @@ params:
 grid:
 - title: Quickstart
   description: Step-by-step instructions on getting started on Docker Hub.
-  icon: magnifying-glass-plus
+  icon: zoom-in
   link: /docker-hub/quickstart
 - title: Library
   description: Explore the content library, featuring millions of images for operating systems, frameworks, databases, and more.
@@ -22,23 +22,23 @@ grid:
   link: /docker-hub/repos
 - title: Settings
   description: Learn about settings in Docker Hub.
-  icon: cog-6-tooth
+  icon: settings
   link: /docker-hub/settings
 - title: Organizations
   description: Learn about organization administration.
-  icon: building-storefront
+  icon: store
   link: /accounts/organization/
 - title: Usage and limits
   description: Explore usage limits and how to better utilize Docker Hub.
-  icon: chart-bar
+  icon: chart-column
   link: /docker-hub/usage/
 - title: MCP server
   description: Use the Docker Hub MCP server to access image metadata and manage repositories with AI agents.
-  icon: server-stack
+  icon: server
   link: /docker-hub/mcp-server/
 - title: Release notes
   description: Find out about new features, improvements, and bug fixes.
-  icon: document-plus
+  icon: file-plus
   link: /docker-hub/release-notes
 aliases:
   - /docker-hub/overview/
@@ -64,4 +64,4 @@ the [Docker Hub API](../../reference/api/hub/latest.md), the experimental [Docke
 Hub CLI tool](https://github.com/docker/hub-tool#readme), or the [Docker Hub
 MCP server](/docker-hub/mcp-server/) for AI agent integrations.
 
-{{< grid >}}
+{{< grid level="2" >}}

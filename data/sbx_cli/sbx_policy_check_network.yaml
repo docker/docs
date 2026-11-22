@@ -23,8 +23,9 @@ options:
     - name: sandbox
       usage: Evaluate in a specific sandbox policy context
     - name: verbose
+      shorthand: v
       default_value: "false"
-      usage: Show the exact policy request fields
+      usage: Show the policy action and resource
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -34,6 +35,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # Check global network policy
       sbx policy check network api.example.com

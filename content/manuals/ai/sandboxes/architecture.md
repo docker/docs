@@ -27,11 +27,12 @@ current directory when you don't pass a path. The sandbox sees your actual
 host files, so changes in either direction are instant with no sync process
 involved.
 
-A directly mounted workspace appears at the same absolute path as on your
-host. Preserving absolute paths means error messages, configuration files, and
-build outputs all reference paths you can find on your host. The agent sees the
-same directory structure, which reduces confusion when debugging or reviewing
-changes.
+By default, a directly mounted workspace appears at the same absolute path as
+on your host. Preserving absolute paths means error messages, configuration
+files, and build outputs all reference paths you can find on your host. The
+agent sees the same directory structure, which reduces confusion when debugging
+or reviewing changes. You can choose a different sandbox path for
+[additional workspaces](usage.md#multiple-workspaces).
 
 Clone mode uses a third storage layout. The host repository is mounted
 read-only at `/run/sandbox/source`, and the agent works in a private clone
@@ -77,8 +78,9 @@ $ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <agent>
 
 All outbound TCP traffic from the sandbox routes through a proxy on your host.
 Agents use a forward proxy for HTTP and HTTPS; other TCP traffic is forwarded
-transparently. Both paths enforce
-[network access policies](governance/access-controls/network.md). The forward
+transparently. Both paths enforce network policy, the rules that decide which
+destinations a sandbox can reach. For how those rules are set, see
+[Sandbox governance](../governance/_index.md). The forward
 proxy also handles [credential injection](configuration/credentials.md). See
 [Network isolation](security/isolation.md#network-isolation) for how this
 works and [Default security posture](security/defaults.md) for what is

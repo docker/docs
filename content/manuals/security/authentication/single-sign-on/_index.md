@@ -7,8 +7,8 @@ description: >-
   enforcement.
 keywords: single sign-on, SSO, sign-in, admin, Docker Hub, Docker Home,
   security, identity provider, IdP, SSO configuration, SSO setup, Docker
-  Business, AI Governance, SAML, domain verification, enforce SSO, JIT
-  provisioning, personal access token
+  Business, AI Governance, SAML, OIDC, Microsoft Entra ID, domain verification,
+  enforce SSO, JIT provisioning, personal access token
 aliases:
   - /single-sign-on/
   - /admin/company/settings/sso/
@@ -21,9 +21,11 @@ weight: 10
 {{< summary-bar feature_name="SSO" >}}
 
 Single sign-on (SSO) lets users access Docker by authenticating through your
-identity provider (IdP). You can configure SSO for an entire company,
-including all associated organizations, or for a single organization. SSO
-requires a Docker Business subscription or an
+identity provider (IdP). Docker supports any SAML 2.0 identity provider, and
+Microsoft Entra ID (formerly Azure AD) for OpenID Connect (OIDC). You can
+configure SSO for an entire company, including all associated organizations,
+or for a single organization. SSO requires a Docker Business subscription or
+an
 [AI Governance](/manuals/accounts/organization/manage/manage-licenses.md)
 license.
 

@@ -37,7 +37,7 @@ credentials, setup commands, or instructions for the agent. You publish the
 kit as a container image containing its files and descriptor.
 
 You identify a published kit by its container image reference, such as
-`docker.io/docker/sbx-kit-claude:2.1.267`. When you use the kit, `sbx`
+`docker.io/sbx/claude:2.1.267`. When you use the kit, `sbx`
 prepares its files and applies its settings. You can use one kit for a
 complete environment or combine kits that contribute different parts.
 
@@ -69,7 +69,7 @@ and launch command, and mixins add tools or behavior to it.
 For example, this command runs a workload with a mixin:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-claude:2.1.267 --kit docker.io/sbx/playwright:1.61.1
+$ sbx run docker.io/sbx/claude:2.1.267 --kit docker.io/sbx/playwright:1.61.1
 ```
 
 The Claude Code workload starts the agent, and the Playwright mixin adds
@@ -101,10 +101,9 @@ and add mixins. To customize and publish your own combination, see
 V3 requires `sbx` v0.45 or later. Every kit in a v3 sandbox must use v3:
 select a v3 workload and add only v3 mixins.
 
-Built-in agent names such as `claude` and `codex` select v2 kits, so
-`sbx run claude --kit ./some-v3-mixin` fails. To use that mixin, choose a
-[v3 workload](/manuals/ai/sandboxes/customize/use-kits.md#published-v3-workloads)
-by its image, local path, or Git reference.
+Built-in agent names such as `claude` and `codex` select v3 kits. Add v3
+mixins directly, for example with `sbx run claude --kit ./some-v3-mixin`.
+V1 and v2 kits cannot be combined with v3 kits.
 
 A kit's capabilities can require a later release or a local sandbox. See
 [Kit capability support](/manuals/ai/sandboxes/customize/author/capabilities.md)

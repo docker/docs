@@ -19,20 +19,13 @@ before creating it.
 Credentials saved for local sandboxes aren't available in cloud sandboxes.
 [Configure a cloud credential](credentials.md) before launching an agent.
 
-Create a sandbox and attach to its agent, or reuse the named sandbox if it
-already exists:
+Create a sandbox and attach to its agent:
 
 ```console
-$ sbx --cloud run claude --name cloud-project
+$ sbx --cloud run --new claude --name cloud-project
 ```
 
-Without `--name`, an interactive run offers existing sandboxes for that agent
-and an option to create another. Pass `--new` to create a fresh sandbox.
 Launches that bake a kit template also create a fresh sandbox.
-
-Reusing a sandbox keeps its creation settings. Flags such as `--cpus`,
-`--memory`, `--platform`, `--ttl`, `--env`, and `--allow-network` are rejected
-when resuming. Use `--new` to create a sandbox with different settings.
 
 To create the sandbox without opening an agent session, use `create`:
 
@@ -40,15 +33,12 @@ To create the sandbox without opening an agent session, use `create`:
 $ sbx --cloud create --name cloud-project claude
 ```
 
-The command prints the cloud sandbox ID. Attach by ID or name:
+The command prints the cloud sandbox ID.
 
-```console
-$ sbx --cloud attach cloud-project
-```
-
-Cloud sandbox names must have at least two characters, start with a letter or
-number, and contain only letters, numbers, and hyphens. The name `default` is
-reserved. Periods accepted in local sandbox names aren't accepted in the cloud.
+Cloud sandbox names must be 2–63 characters long, contain only ASCII letters,
+numbers, and hyphens, and start and end with a letter or number. The name
+`default` is reserved. Periods accepted in local sandbox names aren't accepted
+in the cloud.
 
 Cloud creation doesn't accept workspace paths. For example,
 `sbx --cloud run claude .` returns an error because `.` refers to the local
@@ -79,6 +69,29 @@ other resource. Unsupported combinations are rejected.
 Use `--platform linux/amd64` or `--platform linux/arm64` to select an
 architecture supported by your account. This matters when you plan to
 [move the sandbox to your machine](move.md): the architectures must match.
+
+## Reuse a sandbox
+
+Attach to an existing sandbox by ID or name:
+
+```console
+$ sbx --cloud attach cloud-project
+```
+
+Run the agent with `--name` to reuse an existing sandbox. If the sandbox
+doesn't exist, the command creates it:
+
+```console
+$ sbx --cloud run claude --name cloud-project
+```
+
+Without `--name`, an interactive run offers existing sandboxes for that agent
+and an option to create another.
+
+Reusing a sandbox keeps its creation settings. Flags such as `--cpus`,
+`--memory`, `--platform`, `--ttl`, `--env`, and `--allow-network` are rejected
+when resuming. Use `--new` to create a sandbox with different settings. If you
+also pass `--name`, choose an unused name to avoid a name conflict.
 
 ## Run without attaching
 
@@ -145,6 +158,9 @@ $ ssh sbx_01abc123@sbx_cloud
 Replace the example with `ssh <sandbox-id>@sbx_cloud`, using the
 `sbx_`-prefixed ID from `sbx --cloud ls`.
 
+After upgrading the CLI, rerun `sbx --cloud setup ssh` to refresh the
+generated cloud SSH configuration.
+
 Cloud SSH honors your host's configured upstream proxy. If the proxy refuses
 SSH connections, see [Cloud SSH proxy configuration](../configuration/upstream-proxy.md#cloud-ssh).
 
@@ -158,6 +174,18 @@ $ sbx --cloud cp ./src cloud-project:/home/agent/workspace/src
 $ sbx --cloud cp cloud-project:/home/agent/workspace/result.json ./result.json
 ```
 
+Cloud copies don't preserve permissions or timestamps. Set executable
+permissions after downloading a program.
+
+Cloud copies don't preserve empty directories or symbolic links themselves.
+Symbolic links are handled differently depending on the transfer:
+
+- Uploading a symbolic link as the source copies its target automatically.
+- Uploading a directory skips symbolic links inside it unless you pass
+  `-L` (`--follow-link`) to copy their targets.
+- Downloading a symbolic link to a file requires `-L` to copy its target.
+- Downloading a directory skips symbolic links, even with `-L`.
+
 Copying creates a point-in-time transfer. It doesn't mount or synchronize the
 local path. For source control workflows, you can also clone a remote
 repository from inside the sandbox and push changes to the remote. Configure
@@ -170,7 +198,7 @@ public repository example.
 Expose a TCP service by specifying its sandbox port:
 
 ```console
-$ sbx --cloud ports cloud-project --publish 8080
+$ sbx --cloud port publish cloud-project 8080
 ```
 
 The command returns a public HTTPS URL assigned by the cloud control plane.
@@ -181,8 +209,8 @@ rejected.
 List or remove exposed ports:
 
 ```console
-$ sbx --cloud ports cloud-project
-$ sbx --cloud ports cloud-project --unpublish 8080
+$ sbx --cloud port ls cloud-project
+$ sbx --cloud port unpublish cloud-project 8080
 ```
 
 Treat an exposed URL as a public endpoint. Apply authentication in the service
@@ -350,7 +378,7 @@ Configure [cloud credentials](credentials.md) before adapting a local kit.
 
 Use `--kit-arg` or `--kit-args-file` with `sbx --cloud create` to pass
 arguments to kits supplied with `--kit`.
-For example, configure a v2 mixin that declares a `version` argument:
+For example, configure a mixin that declares a `version` argument:
 
 ```console
 $ sbx --cloud create --name cloud-tools claude \
@@ -360,7 +388,7 @@ $ sbx --cloud create --name cloud-tools claude \
 
 Replace the kit reference and argument with those from your kit's
 documentation. The `company-cli` prefix targets the kit by its repository
-name. Built-in agents such as `claude` require v2 mixins.
+name.
 
 To load arguments from a file, pass `--kit-args-file <FILE>` with one
 `name=value` entry per line, such as `company-cli.version=1.2`. Values passed

@@ -47,14 +47,15 @@ directly with each other or share a network with your host. To reach a service
 running on the host through a policy-controlled connection, see
 [Accessing host services from a sandbox](../workflows/development.md#accessing-host-services-from-a-sandbox).
 
-All outbound TCP traffic passes through a proxy on your host that enforces the
-[network access policy](../governance/access-controls/network.md). The sandbox
-routes traffic through either a forward proxy or a transparent proxy depending
-on the client's configuration. Both enforce the network policy. Only the
+All outbound TCP traffic passes through a proxy on your host that enforces
+network policy. The sandbox routes traffic through either a forward proxy or a
+transparent proxy depending on the client's configuration. Both enforce the
+network policy. For how network policy is set, see
+[Sandbox governance](../../governance/_index.md). Only the
 forward proxy [injects credentials](../configuration/credentials.md) for AI services.
 
 Outbound UDP is disabled by default. When you turn on
-[experimental UDP egress](../governance/access-controls/local.md#allow-outbound-udp),
+[experimental UDP egress](../../governance/local/network-rules.md#allow-outbound-udp),
 network policy controls its destinations. ICMP is blocked. DNS queries use the
 sandbox's internal resolver, which enforces network policy. TCP connections
 are allowed only when a policy rule matches the destination.
@@ -164,7 +165,7 @@ can create, modify, or delete workspace files, including:
 - Git hooks (`.git/hooks/`)
 - CI configuration (`.github/workflows/`, `.gitlab-ci.yml`)
 - IDE configuration (`.vscode/tasks.json`, `.idea/` run configurations)
-- AI project configuration and settings (`.claude/`, `.codex/`, `.gemini/`)
+- AI project configuration and settings (`.claude/`, `.codex/`)
 - Hidden files, shell scripts, and executables
 
 Some of these files execute code when you trigger normal development
@@ -180,8 +181,8 @@ Review them after any agent session before performing those actions:
   during build or install steps.
 - IDE configuration (`.vscode/tasks.json`, `.idea/`) can run tasks
   when you open the project.
-- AI project configuration and settings (`.claude/settings.json`, `.codex/config.toml`,
-  `.gemini/settings.json`) can define hooks and startup commands that
+- AI project configuration and settings (`.claude/settings.json`,
+  `.codex/config.toml`) can define hooks and startup commands that
   execute automatically.
 
 #### Sandbox environment files
@@ -224,12 +225,12 @@ flowchart LR
     direction TB
     mount["/run/sandbox/source<br/>(read-only bind mount)"]
     clone["private clone (RW)<br/>agent edits here"]
-    daemon["git-daemon"]
+    upload["git upload-pack"]
   end
   repo -->|"read-only bind mount"| mount
   mount -->|"git clone"| clone
-  clone --> daemon
-  daemon -->|"git fetch"| remote
+  clone --> upload
+  upload -->|"git fetch via daemon socket"| remote
 ```
 
 How the boundary is enforced:
@@ -243,11 +244,13 @@ How the boundary is enforced:
 - The agent works on a private clone that lives inside the sandbox. The
   clone has its own index, its own refs, and its own working tree. Writes
   to the clone never reach your host.
-- The sandbox publishes the clone over a Git daemon bound to localhost on
-  the host. The CLI wires it up as a `sandbox-<sandbox-name>` Git remote on
-  your host repository. Fetching from that remote uses the same trust
-  model as fetching from any third-party remote — nothing is integrated
-  until you explicitly merge or check out the fetched refs.
+- Your host repository gets a `sandbox-<sandbox-name>` Git remote for
+  fetching commits from the sandbox. By default, fetching uses the daemon
+  socket, restricted to your host user. Fetching downloads commits into your
+  host repository; you choose which changes to bring into your working tree
+  by checking out or merging a fetched branch. For compatibility mode and
+  remote lifecycle details, see
+  [Sandbox remote behavior](../workflows/git.md#sandbox-remote-behavior).
 
 The practical guarantees:
 

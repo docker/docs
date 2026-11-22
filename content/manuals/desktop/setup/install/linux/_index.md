@@ -29,8 +29,8 @@ This page contains information about general system requirements, supported plat
 > Docker Desktop on Linux runs a Virtual Machine (VM) which creates and uses a custom docker context, `desktop-linux`, on startup.
 >
 > This means images and containers deployed on the Linux Docker Engine (before installation) are not available in Docker Desktop for Linux.
->
-> {{< accordion title=" Docker Desktop vs Docker Engine: What's the difference?" >}}
+
+{{< accordion title="Docker Desktop vs Docker Engine: What's the difference?" >}}
 
 > [!IMPORTANT]
 >
@@ -151,6 +151,15 @@ Docker Desktop for Linux runs a Virtual Machine (VM). For more information on wh
 > [!NOTE]
 >
 > Docker does not provide support for running Docker Desktop for Linux in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on supported distributions.
+
+> [!NOTE]
+>
+> With Docker Desktop 4.98 and later, you can use Docker VMM (Beta) instead of
+> QEMU. To switch, select **Docker VMM** under **Settings** > **General** >
+> **Virtual Machine Manager**. If the option is unavailable, turn on **Beta
+> features** in **Settings**. Docker VMM has the same KVM requirements as QEMU.
+> For more information, see
+> [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
 
 ### KVM virtualization support
 

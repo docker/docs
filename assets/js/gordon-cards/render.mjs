@@ -1,3 +1,5 @@
+import { Lexer } from 'marked'
+
 import {
   parseGordonCard,
   readArray,
@@ -9,9 +11,10 @@ import {
 
 // Draws a ```openui-lang block from Gordon's answer as a card element, or returns null if nothing
 // in it parses into a card (yet). Text from the model only ever goes in through textContent and
-// setAttribute, never as HTML. Code blocks come out as <pre><code> for the chat's usual syntax
-// highlighting, and follow-up chips as buttons carrying data-gordon-follow-up, which the chat
-// turns into the user's next question.
+// setAttribute, never as HTML. In prose (descriptions, step details, callout text, table cells),
+// http(s) URLs and [label](url) markdown links become <a> elements. Code blocks come out as
+// <pre><code> for the chat's usual syntax highlighting, and follow-up chips as buttons carrying
+// data-gordon-follow-up, which the chat turns into the user's next question.
 export function renderGordonCard(code) {
   const root = parseGordonCard(code)
   return root === null ? null : renderCard(root.props)
@@ -22,15 +25,20 @@ function renderCard(props) {
   const title = readString(props.title)
   const description = readString(props.description)
   if (title !== undefined) {
-    card.append(element('h4', 'gordon-card-title', title))
+    card.append(element('h3', 'gordon-card-title', title))
   }
   if (description !== undefined) {
-    card.append(element('p', 'gordon-card-description', description))
+    card.append(proseElement('p', 'gordon-card-description', description))
   }
   for (const child of readArray(props.children)) {
     const rendered = renderChild(child)
     if (rendered !== undefined) {
       card.append(rendered)
+    }
+  }
+  if (title !== undefined) {
+    for (const table of card.querySelectorAll('table')) {
+      table.setAttribute('aria-label', title)
     }
   }
   return card
@@ -75,7 +83,7 @@ function renderSteps(props) {
       entry.append(element('p', 'gordon-card-step-title', title))
     }
     if (detail !== undefined) {
-      entry.append(element('p', 'gordon-card-step-detail', detail))
+      entry.append(proseElement('p', 'gordon-card-step-detail', detail))
     }
     if (command !== undefined) {
       entry.append(renderCode(command, 'bash'))
@@ -97,25 +105,28 @@ function renderCallout(props) {
     callout.append(element('p', 'gordon-card-callout-title', title))
   }
   if (text !== undefined) {
-    callout.append(element('p', 'gordon-card-callout-text', text))
+    callout.append(proseElement('p', 'gordon-card-callout-text', text))
   }
   return callout
 }
 
 function renderTable(props) {
   const wrapper = element('div', 'gordon-card-table')
+  wrapper.tabIndex = 0
   const table = element('table')
   const head = element('thead')
   const headRow = element('tr')
   for (const column of readArray(props.columns)) {
-    headRow.append(element('th', undefined, readCell(column)))
+    const header = element('th', undefined, readCell(column))
+    header.setAttribute('scope', 'col')
+    headRow.append(header)
   }
   head.append(headRow)
   const body = element('tbody')
   for (const row of readArray(props.rows)) {
     const bodyRow = element('tr')
     for (const cell of readArray(row)) {
-      bodyRow.append(element('td', undefined, readCell(cell)))
+      bodyRow.append(proseElement('td', undefined, readCell(cell)))
     }
     body.append(bodyRow)
   }
@@ -147,6 +158,46 @@ function renderFollowUps(props) {
     list.append(chip)
   }
   return list
+}
+
+function proseElement(tag, className, text) {
+  const node = element(tag, className)
+  appendProseTokens(node, Lexer.lexInline(text))
+  return node
+}
+
+function appendProseTokens(node, tokens) {
+  for (const token of tokens) {
+    if (token.type === 'link') {
+      const href = safeHref(token.href)
+      if (href === undefined) {
+        node.append(token.raw)
+        continue
+      }
+      const link = element('a', 'gordon-card-link', token.text)
+      link.href = href
+      node.append(link)
+    } else if (['em', 'strong', 'del'].includes(token.type)) {
+      // Keep the surrounding Markdown literal while finding links inside it.
+      const delimiterLength = (token.raw.length - token.text.length) / 2
+      node.append(token.raw.slice(0, delimiterLength))
+      appendProseTokens(node, token.tokens)
+      node.append(token.raw.slice(-delimiterLength))
+    } else {
+      node.append(token.raw)
+    }
+  }
+}
+
+function safeHref(url) {
+  try {
+    const parsed = new URL(url)
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:'
+      ? parsed.href
+      : undefined
+  } catch {
+    return undefined
+  }
 }
 
 function element(tag, className, text) {

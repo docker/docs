@@ -22,6 +22,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 see_also:
     - sbx kit builder - Manage the kit builder sandbox
     - sbx kit builder history export - Export a kit build record into a bundle

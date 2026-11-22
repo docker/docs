@@ -13,45 +13,48 @@ settings. You run kits you build yourself or get from another publisher in the
 same way: give `sbx` a reference, and Docker Sandboxes prepares the environment
 and applies the kit's settings.
 
-Docker recommends v3 kits. V2 remains supported and is the default format
-for built-in agent references such as `claude` and `codex`.
+Built-in agent references such as `claude` and `codex` use v3 kits.
+V2 remains supported for existing kits.
 
 ## Run a kit
 
-The built-in agent names are shortcuts for kit references. To run another kit,
-replace the agent name with that kit's reference. For example, run Docker's
-published v3 Codex workload:
+Built-in names such as `claude` and `codex` resolve to kits published on
+Docker Hub under `docker.io/sbx/<NAME>:latest`. For example, `codex` resolves
+to `docker.io/sbx/codex:latest`. These references differ from the versioned
+v3 workloads listed below.
+
+To run another kit, replace the agent name with that kit's reference. For
+example, run Docker's published v3 Codex workload:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-v3-kit
+$ sbx run docker.io/sbx/codex:0.155.1 --name codex-v3-kit
 ```
 
 ### Published v3 workloads
 
-Use these published v3 workloads in place of built-in shortcuts when adding
-v3 mixins with `sbx run` or `sbx create`.
+Built-in shortcuts accept v3 mixins with `sbx run` or `sbx create`. You can
+also select one of these versioned workloads to pin an agent version.
 
 A workload's agent name comes from the last component of its repository name.
-It must differ from built-in agent names: `docker/sbx-kit-claude` registers
-`sbx-kit-claude`, while `sbx/claude` conflicts with built-in `claude` and
-fails to register. Changing the sandbox's `--name` doesn't change the agent name.
+For example, `sbx/claude` registers `claude`.
+Changing the sandbox's `--name` doesn't change the agent name.
 
 | Built-in agent | V3 workload OCI reference |
 | --- | --- |
-| `claude` | `docker.io/docker/sbx-kit-claude:2.1.267` |
-| `codex` | `docker.io/docker/sbx-kit-codex:0.155.1` |
-| `copilot` | `docker.io/docker/sbx-kit-copilot:1.0.86` |
-| `cursor` | `docker.io/docker/sbx-kit-cursor:2026.09.18-9a7762b` |
-| `devin` | `docker.io/docker/sbx-kit-devin:3000.10.31` |
-| `docker-agent` | `docker.io/docker/sbx-kit-docker-agent:1.141.0` |
-| `droid` | `docker.io/docker/sbx-kit-droid:0.223.0` |
-| `kiro` | `docker.io/docker/sbx-kit-kiro:1.0.0` |
-| `opencode` | `docker.io/docker/sbx-kit-opencode:1.18.31` |
-| `shell` | `docker.io/docker/sbx-kit-shell:1.0.0` |
+| `claude` | `docker.io/sbx/claude:2.1.267` |
+| `codex` | `docker.io/sbx/codex:0.155.1` |
+| `copilot` | `docker.io/sbx/copilot:1.0.86` |
+| `cursor` | `docker.io/sbx/cursor:2026.09.18-9a7762b` |
+| `devin` | `docker.io/sbx/devin:3000.10.31` |
+| `docker-agent` | `docker.io/sbx/docker-agent:1.141.0` |
+| `droid` | `docker.io/sbx/droid:0.223.0` |
+| `kiro` | `docker.io/sbx/kiro:1.0.0` |
+| `opencode` | `docker.io/sbx/opencode:1.18.31` |
+| `shell` | `docker.io/sbx/shell:1.0.0` |
 
 For a [sandbox environment file](/manuals/ai/sandboxes/configuration/environment-files.md),
 list the workload reference under `kits` and set `agent` to its repository
-name, such as `sbx-kit-claude`.
+name, such as `claude`.
 
 Published `sbx/*` mixins, such as `sbx/playwright` and `sbx/codex-mixin`, can
 be combined with these workloads. Their sources are on the
@@ -87,7 +90,12 @@ $ sbx run "git+https://github.com/<ORG>/<REPOSITORY>.git#ref=<COMMIT>&dir=my-age
 
 `sbx` pulls published images and builds local or Git sources when creating
 the sandbox. Builds with unchanged source content and supplied kit arguments
-reuse cached results.
+reuse cached results while they remain available.
+
+Unused source-kit build images are eligible for automatic cleanup after seven
+days without references. Images referenced by existing sandboxes or saved
+templates are kept. On later use, a collected build may need to be restored
+or rebuilt, even if its sources and arguments are unchanged.
 
 By default, remote kit sources are limited to Docker Hub. To use a Git
 source or another registry, see [Restrict kit sources](#restrict-kit-sources).
@@ -146,7 +154,7 @@ For example, an internal CLI mixin can package your company's executable
 along with network rules and a credential request for its API:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-codex:0.155.1 --name codex-tools \
+$ sbx run codex --name codex-tools \
     --kit docker.io/<NAMESPACE>/company-cli:1.0.0
 ```
 
@@ -323,6 +331,41 @@ discarded when the sandbox stops.
 
 For how to preserve storage when changing a kit, see
 [Configure the volume](author/patterns.md#configure-the-volume).
+
+### Preserve Claude Code and Codex conversations
+
+For local sandboxes, add a session mixin to keep conversations after removing
+and recreating the sandbox, including when you use `--rm`. Choose the mixin
+that matches your agent:
+
+{{< tabs >}}
+{{< tab name="Claude Code" >}}
+
+```console
+$ sbx run --rm claude --kit sbx/claude-sessions:1.0.0
+```
+
+{{< /tab >}}
+{{< tab name="Codex" >}}
+
+```console
+$ sbx run --rm codex --kit sbx/codex-sessions:1.0.0
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+Start a conversation, then enter `/exit`. Run the same command again from the
+same project directory and enter `/resume` inside the agent to select the saved
+conversation.
+
+The mixins use host directories managed by Docker Sandboxes to store session
+state. They don't share conversations with Claude Code or Codex running directly
+on your host. Include the session mixin each time you recreate the sandbox.
+
+To choose a host directory, see [Choose directories for kit host mounts](#choose-directories-for-kit-host-mounts).
+The sandbox mount paths are `/home/agent/claude-history` for Claude Code and
+`/home/agent/codex-history` for Codex.
 
 ## Restrict kit sources
 

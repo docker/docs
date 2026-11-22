@@ -13,6 +13,10 @@ long: |-
     The source namespace defaults to "dhi" when not specified.
     The destination namespace defaults to the configured organization (--org or config).
 
+    Note: mirroring a repository does not automatically grant every organization member
+    access to it. Members without access to the destination repository need appropriate
+    team repository permissions, which can be set in Docker Hub.
+
     Examples:
       docker dhi mirror start --org myorg dhi/golang,myorg/dhi-golang dhi/node,myorg/dhi-node
       docker dhi mirror start --org myorg golang,dhi-golang node,dhi-node

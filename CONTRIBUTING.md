@@ -9,6 +9,8 @@ Before contributing, review our documentation standards:
   guidelines
 - [COMPONENTS.md](COMPONENTS.md) - How to use Hugo shortcodes, front matter,
   and components
+- [ARCHITECTURE.md](ARCHITECTURE.md) - Site layouts, navigation, styles, and
+  browser behavior
 - [AI policy](https://github.com/moby/.github/blob/main/AI_POLICY.md): Rules
   for using AI tools when you contribute
 
@@ -29,10 +31,12 @@ The website is built using [Hugo](https://gohugo.io/). The content is primarily
 Markdown files in the `/content` directory of this repository (with a few
 exceptions, see [Content not edited here](#content-not-edited-here)).
 
-The structure of the sidebar navigation on the site is defined by the site's
-section hierarchy in the `contents` directory. The titles of the pages are
-defined in the front matter of the Markdown files. You can use `title` and
-`linkTitle` to define the title of the page. `title` is used for the page
+Sidebar collection boundaries are declared in `data/navigation/`. Within each
+collection, Hugo's content hierarchy defines the navigation tree. See
+[Navigation](ARCHITECTURE.md#navigation) for root selection and exceptions.
+
+Page titles are defined in the front matter of the Markdown files. Use `title`
+and `linkTitle` to define the title of the page. `title` is used for the page
 title, and `linkTitle` is used for the sidebar title. If `linkTitle` is not
 defined, the `title` is used for both.
 

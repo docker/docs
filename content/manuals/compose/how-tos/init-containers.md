@@ -23,7 +23,7 @@ Compose models init containers as [`pre_start`](/reference/compose-file/services
 
 For static files and secrets, use the native [`configs`](/reference/compose-file/configs.md) and [`secrets`](/reference/compose-file/secrets.md) top-level elements instead. Compose mounts them directly into containers with a configurable target path, mode, UID, and GID. No init container required.
 
-For background tasks with their own lifecycle - scheduled backups, post-exit cleanup, periodic maintenance — init containers are the wrong tool. Those tasks run independently of service startup, not before it.
+For background tasks with their own lifecycle - scheduled backups, post-exit cleanup, periodic maintenance — init containers are the wrong tool. Those tasks run independently of service startup, not before it. To run them, use [jobs](jobs.md).
 
 ## How `pre_start` containers run
 
@@ -31,7 +31,7 @@ Each step in a service's `pre_start` list:
 
 - Runs in its own ephemeral container, created after the service container is created but before it starts.
 - Inherits the service's image by default. Set `image` to override. The hook image follows the parent service's `pull_policy`, including refresh interval (`daily`, `weekly`, `every_<duration>`). This applies when starting services and when running `docker compose pull`.
-- Joins the same networks as the service, so it can reach services declared in [`depends_on`](/reference/compose-file/services.md#depends_on).
+- Joins the same networks as the service, so it can reach services declared in [`depends_on`](/reference/compose-file/workload-spec.md#depends_on).
 - Shares the service's volume mounts, so files written to a shared volume are immediately visible to the service.
 - Must exit `0` for the next step, and the service itself, to start. A non-zero exit aborts startup for the service and anything that depends on it.
 
@@ -168,6 +168,6 @@ The one-shot service pattern still has its place when the setup work is a shared
 - [`pre_start`](/reference/compose-file/services.md#pre_start)
 - [`post_start`](/reference/compose-file/services.md#post_start)
 - [`pre_stop`](/reference/compose-file/services.md#pre_stop)
-- [`depends_on`](/reference/compose-file/services.md#depends_on)
+- [`depends_on`](/reference/compose-file/workload-spec.md#depends_on)
 - [Use lifecycle hooks](/manuals/compose/how-tos/lifecycle.md)
 - [Control startup order](/manuals/compose/how-tos/startup-order.md)

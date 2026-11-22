@@ -23,7 +23,6 @@
     "@tailwindcss/cli": "4.2.1",
     "@tailwindcss/typography": "0.5.19",
     "alpinejs": "3.15.8",
-    "heroicons": "2.2.0",
     "highlight.js": "11.11.1",
     "marked": "17.0.4",
     "mermaid": "11.15.0",
@@ -32,9 +31,15 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
+    "axe-core": "4.14.1",
+    "playwright": "1.65.1",
     "prettier": "3.8.1",
     "prettier-plugin-go-template": "0.0.15",
     "prettier-plugin-tailwindcss": "0.7.2",
     "rumdl": "0.2.49"
+  },
+  "scripts": {
+    "test:redesign": "node --test hack/test/*.mjs hack/api-docs/output-checks.test.mjs && node hack/redesign/browser.mjs",
+    "test:a11y": "node hack/redesign/accessibility.mjs"
   }
 }

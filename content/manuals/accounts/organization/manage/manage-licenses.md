@@ -62,8 +62,6 @@ Docker grants the license only to team members who don't already have it.
 
 - If a member already holds that license, they keep access and the extra
   assignment does not consume another license.
-- A product can be selected for the team only when enough licenses are
-  available for every member of the team.
 
 ### Members
 
@@ -117,11 +115,11 @@ card.
 
 When the toggle is on:
 
-- Docker Team or Business: members receive a license when they sign in to
+- Docker Team or Business: members receive a license when they use
   Docker Desktop.
-- AI Governance: members receive a license when they sign in to
-  [Docker Sandboxes](/manuals/ai/sandboxes/_index.md). The `sbx login`
-  command provisions licenses on a first-come, first-served basis.
+- AI Governance: members receive a license when they use
+  [Docker Sandboxes](/manuals/ai/sandboxes/_index.md).
+- Licenses are provisioned on a first-come, first-served basis.
 - Licenses are assigned until exhausted.
   - Once the available licenses are exhausted, automatic license assignment
     stops until more licenses are available.

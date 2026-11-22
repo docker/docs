@@ -16,6 +16,13 @@ description: |-
     Use --include-inactive to show inactive rules for troubleshooting.
     Use "sbx policy inspect <policy-or-rule>" for full detail on a selected policy or
     rule.
+
+    With --cloud:
+    List the cloud network policy's default mode and allow and deny patterns.
+
+    Without SANDBOX, show the account policy. Specify a sandbox name or ID to show
+    its policy. Cloud rules have no rule IDs; use "sbx --cloud policy rm network"
+    with --resource to remove a pattern.
 usage: sbx policy ls [SANDBOX] [flags]
 options:
     - name: created-via
@@ -59,6 +66,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # List all policies
       sbx policy ls
@@ -86,5 +97,17 @@ example: |4-
 
       # Include inactive rules hidden by remote governance
       sbx policy ls --include-inactive
+
+      # Show the account policy
+      sbx --cloud policy ls
+
+      # Show one sandbox's policy
+      sbx --cloud policy ls my-sandbox
+
+      # Output the policy as JSON
+      sbx --cloud policy ls --format json
+
+      # List only network patterns
+      sbx --cloud policy ls -q
 see_also:
     - sbx policy - Manage sandbox policies

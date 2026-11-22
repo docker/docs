@@ -23,11 +23,11 @@ grid:
     link: /desktop/enterprise/hardened-desktop/registry-access-management/
   - title: "Image Access Management"
     description: Control the images developers can pull from Docker Hub.
-    icon: photo
+    icon: image
     link: /desktop/enterprise/hardened-desktop/image-access-management/
   - title: "Air-Gapped Containers"
     description: Restrict containers from accessing unwanted network resources.
-    icon: lock-closed
+    icon: lock
     link: /desktop/enterprise/hardened-desktop/air-gapped-containers/
   - title: "Namespace access"
     description: Control whether organization members can push content to their personal namespaces.

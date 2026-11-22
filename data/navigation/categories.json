@@ -1,0 +1,142 @@
+[
+  {
+    "id": "ai",
+    "label": "AI & agents",
+    "landing": "/c/ai/",
+    "groups": [
+      {
+        "label": "Docker Sandboxes",
+        "entries": [
+          {
+            "collection": "sandboxes"
+          },
+          {
+            "collection": "sandboxes-api"
+          },
+          {
+            "collection": "agentic-platform"
+          },
+          {
+            "collection": "governance"
+          }
+        ]
+      },
+      {
+        "label": "Models & assistants",
+        "entries": [
+          {
+            "collection": "model-runner"
+          },
+          {
+            "collection": "docker-agent"
+          },
+          {
+            "collection": "gordon"
+          },
+          {
+            "collection": "skills"
+          }
+        ]
+      }
+    ],
+    "description": "Run AI agents in isolated sandboxes with security policies and centralized governance."
+  },
+  {
+    "id": "dev",
+    "label": "Application development",
+    "landing": "/c/dev/",
+    "groups": [
+      {
+        "label": "Build & Run",
+        "entries": [
+          {
+            "collection": "desktop"
+          },
+          {
+            "collection": "engine"
+          },
+          {
+            "collection": "build"
+          },
+          {
+            "collection": "compose"
+          },
+          {
+            "collection": "extensions"
+          },
+          {
+            "collection": "offload"
+          },
+          {
+            "collection": "build-cloud"
+          },
+          {
+            "collection": "testcontainers"
+          }
+        ]
+      },
+      {
+        "label": "Secure",
+        "entries": [
+          {
+            "collection": "scout"
+          },
+          {
+            "collection": "dhi"
+          }
+        ]
+      },
+      {
+        "label": "Ship",
+        "entries": [
+          {
+            "collection": "docker-hub"
+          }
+        ]
+      }
+    ],
+    "description": "Build, secure, and ship containerized applications."
+  },
+  {
+    "id": "admin",
+    "label": "Accounts & admin",
+    "landing": "/c/admin/",
+    "groups": [
+      {
+        "label": "Accounts & billing",
+        "entries": [
+          {
+            "collection": "accounts"
+          },
+          {
+            "collection": "subscription-billing"
+          },
+          {
+            "collection": "security"
+          },
+          {
+            "collection": "faqs"
+          },
+          {
+            "collection": "platform-release-notes"
+          }
+        ]
+      },
+      {
+        "label": "Support",
+        "entries": [
+          {
+            "collection": "support"
+          },
+          {
+            "collection": "release-lifecycle"
+          },
+          {
+            "collection": "retired"
+          }
+        ]
+      }
+    ],
+    "description": "Manage accounts, subscriptions, and access across your organization."
+  }
+]

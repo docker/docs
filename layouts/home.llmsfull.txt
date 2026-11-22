@@ -1,5 +1,5 @@
 {{- $pages := where site.RegularPages "Params.sitemap" "!=" false -}}
-{{- $sorted := sort $pages "RelPermalink" -}}
+{{- $sorted := sort (where $pages "RelPermalink" "!=" "") "RelPermalink" -}}
 
 # Docker Documentation full text
 

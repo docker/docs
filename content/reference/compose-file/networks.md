@@ -65,7 +65,7 @@ This example shows a Compose file which defines two custom networks. The `proxy`
 
 ## The default network
 
-When a Compose file doesn't declare explicit networks, Compose uses an implicit `default` network. Services without an explicit [`networks`](services.md#networks) declaration are connected by Compose to this `default` network:
+When a Compose file doesn't declare explicit networks, Compose uses an implicit `default` network. Services without an explicit [`networks`](container-spec.md#networks) declaration are connected by Compose to this `default` network:
 
 
 ```yml

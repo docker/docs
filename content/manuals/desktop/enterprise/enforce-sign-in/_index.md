@@ -56,6 +56,12 @@ Sign in to continue using Docker Desktop. Membership in the [myorg] organization
 is required. Sign in enforced by your administrators (via registry.json).
 ```
 
+The value in brackets is whatever you configured in
+`allowedOrgs`, `ALLOWEDORG`, or `--allowed-org`. That value must be the
+[organization namespace](/manuals/accounts/organization/setup/_index.md#names-versus-namespaces),
+not the organization display name. See
+[Configure sign-in enforcement](methods.md).
+
 - `docker run`, `docker pull`, `docker build`, `docker ps`, and other commands
   that reach the engine fail until the user signs in.
 - `docker version`, `docker info`, and `docker login` continue to work, so users

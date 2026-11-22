@@ -47,11 +47,11 @@ Buildx supports the following cache storage backends:
   [GitHub Actions cache](https://docs.github.com/en/rest/actions/cache) (beta).
 
 - `s3`: uploads the build cache to an
-  [AWS S3 bucket](https://aws.amazon.com/s3/) (unreleased).
+  [AWS S3 bucket](https://aws.amazon.com/s3/) (experimental).
 
 - `azblob`: uploads the build cache to
   [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
-  (unreleased).
+  (experimental).
 
 ## Command syntax
 

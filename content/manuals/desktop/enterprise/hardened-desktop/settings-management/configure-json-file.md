@@ -22,9 +22,9 @@ Before you begin, make sure you have:
   your organization
 - A Docker Business subscription
 
-The presence of the `admin-settings.json` file enforces sign-in on Docker Desktop. This is intended for business features that require authentication.
+Docker Desktop only applies the `admin-settings.json` file when the user is signed in to an account with a Docker Business subscription. To make sure the settings take effect, the presence of the file requires sign-in. 
 
-Users must be signed in and part of a Docker Business organization. If either condition isn't met, the settings file is ignored.
+Until a user signs in with a Business account, Docker Desktop prompts them to sign in and doesn’t apply the settings. To require sign-in to a specific organization, use a [sign-in enforcement](/manuals/desktop/enterprise/enforce-sign-in/_index.md) method.
 
 ## Step one: Create the settings file
 
@@ -339,8 +339,34 @@ Docker Desktop has two distinct proxy settings with different scopes:
 | Parameter         | OS  | Description                                                                                                                                                                                                                                         | Version                                |
 | :---------------- | --- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
 | `containersProxy` |     | Configures the proxy for `docker image pull` (always enforced) and running container outbound traffic (enforced when `transparentPorts` is set). For more information see [Air-Gapped Containers](../air-gapped-containers.md). |  |
-| `pac`             |     | Specifies a PAC file URL. For example, `"pac": "http://containerproxy/proxy.pac"`.                                                                                                                                                                  |                                        |
-| `embeddedPac`     |     | Specifies an embedded PAC (Proxy Auto-config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"PROXY 192.168.92.1:2003\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL. |  |
+
+The `containersProxy` setting accepts the following nested properties:
+
+| Property          | Description |
+| :---------------- | :-----------|
+| `locked`          | When set to `true`, users cannot modify this setting. |
+| `mode`            | Proxy mode: `manual` or `system`. |
+| `http`            | HTTP proxy URL. For example, `"http": "http://proxy.example.com:8080"`. |
+| `https`           | HTTPS proxy URL. For example, `"https": "https://proxy.example.com:8443"`. |
+| `exclude`         | List of addresses to bypass the proxy. For example, `"exclude": ["localhost", "127.0.0.1"]`. |
+| `pac`             | Specifies a PAC file URL. For example, `"pac": "http://containerproxy/proxy.pac"`. |
+| `embeddedPac`     | Specifies an embedded PAC (Proxy Auto-config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"PROXY 192.168.92.1:2003\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL. |
+| `transparentPorts` | Specifies which ports should use transparent proxy. |
+
+Example configuration:
+
+```json
+"containersProxy": {
+  "locked": true,
+  "mode": "manual",
+  "http": "",
+  "https": "",
+  "exclude": [],
+  "pac": "",
+  "embeddedPac": "",
+  "transparentPorts": ""
+}
+```
 
 ### Linux VM settings
 
@@ -348,7 +374,7 @@ Docker Desktop has two distinct proxy settings with different scopes:
 | :----------------------------------------------- | ------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | `linuxVM`                                        |              | Parameters and settings related to Linux VM options - grouped together here for convenience.                                                                                                                                                                                                               |         |
 | &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`    | Windows only | If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag.                                                                                                                           |         |
-| &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |              | If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](/reference/cli/dockerd.md#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |         |
+| &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |              | Overrides the options in the Docker Engine config file with a JSON string in `value`. See the [Docker Engine reference](/reference/cli/dockerd.md#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |         |
 | &nbsp; &nbsp; &nbsp; &nbsp;`vpnkitCIDR`          |              | Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal`                                                                                                                                                                                                                               |         |
 
 ### Windows containers

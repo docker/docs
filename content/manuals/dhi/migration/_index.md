@@ -13,21 +13,21 @@ params:
       link: /dhi/migration/migrate-with-ai/
     - title: Migrate from Alpine or Debian images
       description: Manual migration guide for moving from Docker Official Images (Alpine or Debian-based) to Docker Hardened Images.
-      icon: code-bracket
+      icon: code
       link: /dhi/migration/migrate-from-doi/
     - title: Migrate from Ubuntu
       description: Manual migration guide for transitioning from Ubuntu-based images to Docker Hardened Images.
-      icon: arrow-up-circle
+      icon: circle-arrow-up
       link: /dhi/migration/migrate-from-ubuntu/
     - title: Migrate from Wolfi
       description: Manual migration guide for transitioning from Wolfi-based images to Docker Hardened Images.
-      icon: arrow-path
+      icon: refresh-cw
       link: /dhi/migration/migrate-from-wolfi/
   
   grid_migration_resources:
     - title: Migration checklist
       description: A comprehensive checklist of migration considerations to ensure successful transition to Docker Hardened Images.
-      icon: clipboard-document-check
+      icon: clipboard-check
       link: /dhi/migration/checklist/
     - title: Examples
       description: Example Dockerfile migrations for different programming languages and frameworks to guide your migration process.

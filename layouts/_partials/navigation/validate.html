@@ -1,0 +1,30 @@
+{{/* Validate against Hugo's effective tree, including mounted and generated pages. */}}
+{{- $roots := slice -}}{{- $referenceLinks := slice -}}
+{{- range $id, $product := hugo.Data.navigation.products -}}
+  {{- if not (site.GetPage .root) -}}
+    {{- errorf "Product %s has missing root %s" $id .root -}}
+  {{- end -}}
+  {{- if in $roots .root -}}
+    {{- errorf "Duplicate product owner for %s" .root -}}
+  {{- end -}}
+  {{- $roots = $roots | append .root -}}
+  {{- with .category -}}
+    {{- if not (where hugo.Data.navigation.categories "id" .) -}}
+      {{- errorf "Unknown category %s" . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- range .references -}}
+    {{- if not (site.GetPage .) -}}
+      {{- errorf "Missing related reference %s in %s" . $id -}}
+    {{- end -}}
+    {{- $referenceLinks = $referenceLinks | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- range hugo.Data.navigation.references -}}
+  {{- if not (site.GetPage .root) -}}
+    {{- errorf "Missing reference root %s" .root -}}
+  {{- end -}}
+  {{- if not (in $referenceLinks .root) -}}
+    {{- errorf "Reference has no product entrypoint: %s" .root -}}
+  {{- end -}}
+{{- end -}}

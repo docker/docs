@@ -1,5 +1,9 @@
 {{ $data := index hugo.Data "api-reference" }}
-<nav class="api-nav" aria-label="API navigation">
+<nav
+  class="api-nav"
+  aria-label="API navigation"
+  data-sidebar-key="api-{{ .Params.apiID }}"
+>
   <a class="api-nav-back" href="/reference/api/">← API catalog</a>
   {{ range $data.apis }}
     {{ if eq .id $.Params.apiID }}

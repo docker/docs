@@ -56,7 +56,7 @@ Once your Dev Box is provisioned with the Docker Desktop image:
 
 For issues related to:
 
-- Docker Desktop configuration, usage, or licensing: Create a support ticket through [Docker Support](https://hub.docker.com/support).
+- Docker Desktop configuration, usage, or licensing: Create a support case through [Docker Support](https://hub.docker.com/support).
 - Dev Box creation, Azure portal configuration, or networking: Contact Azure Support.
 
 ## Limitations

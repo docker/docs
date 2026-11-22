@@ -1,9 +1,9 @@
 2FA:
   subscription: [Personal, Pro]
   for: Individuals
-AI Governance Audit Logs:
+AI Governance:
   subscription: [AI Governance]
-  requires: Docker Sandboxes [0.39.0](/manuals/ai/sandboxes/release-notes.md) or later
+  for: Administrators
 Activity logs:
   subscription: [Team, Business]
   for: Administrators
@@ -115,6 +115,9 @@ Compose include:
   requires: Docker Compose [2.20.3](https://github.com/docker/compose/releases/tag/v2.20.3) and later
 Compose interface-name:
   requires: Docker Compose [2.36.0](https://github.com/docker/compose/releases/tag/v2.36.0) and later
+Compose jobs:
+  availability: Experimental
+  requires: Docker Compose 5.8.0 and later, and Docker Engine [29.10.0](/manuals/engine/release-notes/29.md#29100) and later with the [jobs extension](/manuals/engine/daemon/jobs.md#turn-on-the-jobs-extension) turned on
 Compose label file:
   requires: Docker Compose [2.32.2](https://github.com/docker/compose/releases/tag/v2.32.2) and later
 Compose lifecycle hooks:
@@ -153,6 +156,8 @@ Compose sbom:
   requires: Docker Compose [2.39.0](https://github.com/docker/compose/releases/tag/v2.39.0) and later
 Compose SDK:
   requires: Docker Compose [5.0.0](https://github.com/docker/compose/releases/tag/v5.0.0) and later
+Compose use service name alias:
+  requires: Docker Compose [5.7.0](https://github.com/docker/compose/releases/tag/v5.7.0) and later
 Custom roles:
   subscription: [Business]
   for: Administrators
@@ -162,9 +167,15 @@ Docker Build Cloud:
   subscription: [Pro, Team, Business]
 Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
+Docker Engine jobs:
+  availability: Experimental
+  requires: Docker Engine 29.10.0 and later
 Docker Offload:
-  subscription: [Docker Offload]
-  requires: Docker Desktop 4.68 or later
+  subscription: [Docker Agentic Platform]
+  requires: Docker Desktop 4.97 or later
+Docker Offload v1:
+  subscription: [Docker Offload and Docker Teams or Business subscription]
+  requires: Docker Desktop
 docker compose alpha:
   availability: Experimental
 Docker Debug:

@@ -6,27 +6,27 @@ params:
   grid_tools:
     - title: Use Docker Hub
       description: Browse the DHI catalog on Docker Hub to search repositories, inspect image metadata, and view SBOMs, CVEs, and attestations.
-      icon: squares-2x2
+      icon: layout-grid
       link: /dhi/tools/hub/
     - title: CLI
       description: Install and use the `docker dhi` command-line interface to browse the catalog, inspect images, and manage mirrors from your terminal.
-      icon: command-line
+      icon: terminal
       link: /dhi/tools/cli/
     - title: MCP server
       description: Connect an AI assistant to the DHI catalog to search repositories, inspect images, retrieve SBOMs, and check CVEs using plain language.
-      icon: cpu-chip
+      icon: cpu
       link: /dhi/tools/mcp/
     - title: Use the DHI Terraform provider
       description: Use the DHI Terraform provider to manage mirrors and automate DHI configuration as infrastructure as code.
-      icon: wrench-screwdriver
+      icon: wrench
       link: /dhi/tools/terraform/
     - title: Use the DHI API
       description: Query Docker Hardened Images data programmatically using the DHI GraphQL API.
-      icon: code-bracket
+      icon: code
       link: /dhi/tools/api/
 ---
 
 Docker Hardened Images can be accessed and managed through several interfaces.
 Choose the tool that fits your workflow.
 
-{{< grid items="grid_tools" >}}
+{{< grid level="2" items="grid_tools" >}}

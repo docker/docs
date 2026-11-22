@@ -2,9 +2,18 @@
 {{- $description := partial "utils/description.html" . -}}
 {{- $keywords := partialCached "utils/keywords.html" . . -}}
 {{- $breadcrumbs := slice -}}
-{{- range after 1 .Ancestors.Reverse -}}
-  {{- $breadcrumbs = $breadcrumbs | append .LinkTitle -}}
+{{- $items := partialCached "navigation/breadcrumbs.html" . .Path -}}
+{{- range $index, $item := $items -}}
+  {{- if and (gt $index 0) (lt $index (sub (len $items) 1)) -}}
+    {{- $breadcrumbs = $breadcrumbs | append .label -}}
+  {{- end -}}
 {{- end -}}
-{{- with $description }}<meta data-pagefind-meta="description:{{ . }}">{{ end }}
-{{- with $keywords }}<meta data-pagefind-meta="keywords:{{ delimit . ", " }}">{{ end }}
-{{- with $breadcrumbs }}<meta data-pagefind-meta="breadcrumbs:{{ delimit . " / " }}">{{ end }}
+{{- with $description }}
+  <meta data-pagefind-meta="description:{{ . }}" />
+{{ end }}
+{{- with $keywords }}
+  <meta data-pagefind-meta="keywords:{{ delimit . ", " }}" />
+{{ end }}
+{{- with $breadcrumbs }}
+  <meta data-pagefind-meta="breadcrumbs:{{ delimit . " / " }}" />
+{{ end }}

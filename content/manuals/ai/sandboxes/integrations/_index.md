@@ -29,16 +29,26 @@ that supports remote development over SSH can connect to it.
 - The editor or app you want to connect, with its remote-over-SSH support
   installed.
 
+## Configure agent credentials
+
+Before setting up an integration that runs an AI agent, configure a model
+provider credential for that agent in Docker Sandboxes. Connecting an editor
+or desktop app over SSH doesn't supply the sandbox with the credential.
+Store an API key with [stored secrets](../configuration/credentials.md#stored-secrets)
+or complete the agent's supported OAuth sign-in flow. See the
+[agent pages](../agents/_index.md) for authentication instructions.
+
 ## Enable SSH access
 
-Run the SSH setup command once:
+Run the SSH setup command:
 
 ```console
 $ sbx setup ssh
 ```
 
 The command starts the Docker Sandboxes daemon if needed and configures your
-SSH client. You can re-run it at any time.
+SSH client. After upgrading the CLI, rerun this command to refresh the generated
+SSH configuration.
 
 ## Set up desktop app connections
 
@@ -125,11 +135,13 @@ client. An interactive SSH shell starts in the sandbox workspace, matching
 home directory, `/home/agent`. Select the intended folder explicitly in the
 editor instead of relying on its initial location.
 
-For a sandbox with a primary workspace, each workspace path appears inside the
-sandbox at the same absolute path as on the host. For example, if you pass
-`/Users/bob/src/my-project`, select that path in the remote folder picker. For
-a mountless sandbox that uses a Docker-provided agent template, select
-`/home/agent/workspace`.
+In the remote folder picker, select the workspace's path inside the sandbox.
+A workspace mounted from `/Users/bob/src/my-project` uses that same path by
+default. A custom mount target such as `/workspace/data` is the path to open
+in the editor.
+
+Docker-provided agent templates use `/home/agent/workspace` as the workspace
+folder for mountless sandboxes.
 
 ## Connect a specific tool
 
@@ -144,15 +156,16 @@ a mountless sandbox that uses a Docker-provided agent template, select
 
 ### Managed SSH configuration
 
-`sbx setup ssh` writes a managed block to your SSH config: `~/.ssh/config` on
-macOS and Linux, or `%USERPROFILE%\.ssh\config` on Windows. The block is similar
-to the following:
+`sbx setup ssh` writes managed SSH configuration and adds an `Include` to
+your SSH config: `~/.ssh/config` on macOS and Linux, or
+`%USERPROFILE%\.ssh\config` on Windows. On macOS and Linux, the generated block
+is similar to the following (paths depend on your installation):
 
 ```text
 # >>> docker sandboxes (managed) >>>
-Host *.sbx
+Match originalhost "*.sbx,!*'*"
     User _default_user_
-    ProxyCommand "sbx" ssh proxy %n
+    ProxyCommand "sbx" ssh proxy '%n'
     IdentityAgent none
     IdentityFile /dev/null
     IdentitiesOnly yes
@@ -166,9 +179,11 @@ Host *.sbx
 
 You don't edit this block by hand. Its key entries work as follows:
 
-- `Host *.sbx` maps sandbox hostnames to the sandbox daemon. Application host
-  pickers don't discover individual sandbox names from this wildcard, so enter
-  the hostname, such as `demo.sbx`, manually when you configure an integration.
+- `Match originalhost "*.sbx,!*'*"` selects sandbox hostnames as entered on
+  the SSH command line and excludes names containing a single quote.
+- Enter the hostname, such as `demo.sbx`, manually when you configure an
+  integration. Host pickers that list `Host` entries don't list these `Match`
+  blocks.
 - `User _default_user_` tells the daemon to use the sandbox image's default
   user, so your host username is never sent.
 

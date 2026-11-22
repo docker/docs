@@ -1,0 +1,55 @@
+name: sbx df
+synopsis: Show runtime disk usage
+description: |-
+    Show disk usage for local images, containers, and managed volumes.
+
+    Image totals include stored blobs and snapshots, count shared layers once,
+    and include retained data without tags. Active images and volumes are referenced
+    by a container, including stopped containers. Active containers are running or
+    paused.
+
+    Reclaimable space is an estimate for removing unused resources of each type,
+    not the space that "sbx prune" alone removes. Detached writable layers are
+    included in the container total. Shared filesystem blocks, leases,
+    and concurrent activity can reduce or delay space recovered. Host bind mounts,
+    logs, and caches are excluded. Unavailable measurements show as unknown.
+    Cloud disk usage is not supported.
+usage: sbx df [flags]
+options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for df
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+    - name: verbose
+      shorthand: v
+      default_value: "false"
+      usage: Show individual images, containers, and volumes
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+example: |4-
+      # Show a disk usage summary
+      sbx df
+
+      # Show individual images, containers, and volumes
+      sbx df --verbose
+
+      # Output in JSON format
+      sbx df --format json
+see_also:
+    - sbx - Manage AI coding agent sandboxes.

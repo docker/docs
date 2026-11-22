@@ -19,7 +19,8 @@ options:
       usage: Output in JSON format
     - name: limit
       default_value: "0"
-      usage: Maximum number of log entries to show
+      usage: |
+        Maximum number of entries to show in each category (allowed and blocked); 0 shows all
     - name: type
       default_value: all
       usage: |
@@ -33,6 +34,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # Show all policy logs
       sbx policy log
@@ -43,7 +48,7 @@ example: |4-
       # Output in JSON format
       sbx policy log --json
 
-      # Show the last 20 entries
+      # Show up to 20 allowed and 20 blocked entries
       sbx policy log --limit 20
 see_also:
     - sbx policy - Manage sandbox policies

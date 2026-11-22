@@ -6,6 +6,16 @@ description: |-
     Allowed resources are accessible within the selected policy scope. If a
     resource matches both an allow and a deny rule, the deny rule takes
     precedence.
+
+    Without --cloud, a rule is refused, and nothing is added, when the same scope
+    already holds the opposite decision for the same resource on any of the same
+    protocols (for HTTP rules, the same methods, path, and query constraints).
+    Remove the existing rule with "sbx policy rm network --id RULE_ID" first, adding
+    --sandbox SANDBOX if the rule is sandbox-scoped. Rules in different scopes, such
+    as a global allow and a sandbox-scoped deny, can coexist, and the deny rule
+    takes precedence. Rules from your organization's policy never cause this
+    refusal. With --cloud, the new rule replaces the opposite rule in the same scope
+    instead.
 usage: sbx policy allow COMMAND
 options:
     - name: help
@@ -21,6 +31,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 see_also:
     - sbx policy - Manage sandbox policies
     - sbx policy allow network - Allow network access to specified hosts

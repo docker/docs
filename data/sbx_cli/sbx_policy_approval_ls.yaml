@@ -1,0 +1,40 @@
+name: sbx policy approval ls
+synopsis: List pending approvals
+description: |
+    List pending approvals from the local daemon, including their IDs, sandboxes, and available options.
+usage: sbx policy approval ls [flags]
+options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for ls
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+    - name: quiet
+      shorthand: q
+      default_value: "false"
+      usage: Only display approval IDs
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+example: |4-
+      # List pending approvals
+      sbx policy approval ls
+
+      # List only approval IDs
+      sbx policy approval ls -q
+see_also:
+    - sbx policy approval - Review and respond to pending approvals

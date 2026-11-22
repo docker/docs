@@ -6,6 +6,16 @@ description: |-
     Policies contain rules that control what sandboxes can access. Local rules
     can apply globally across all sandboxes or be scoped to one sandbox. Use
     subcommands to allow, deny, list, or remove rules.
+
+    Network rules match the hostname a connection names, such as its TLS SNI or
+    HTTP Host. A denied host that shares an address with an allowed host can
+    still be reached in three cases. First, on connections the proxy does not
+    decrypt, the HTTP Host or :authority inside the encrypted stream is not
+    checked. Second, on cleartext HTTP sent through a CONNECT tunnel or without
+    HTTP_PROXY, only the first request on each connection has its Host checked.
+    Third, a connection that names no host is allowed when any hostname the
+    sandbox resolved to that address is allowed, even if another of those
+    hostnames is denied.
 usage: sbx policy COMMAND
 options:
     - name: help
@@ -21,9 +31,14 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 see_also:
     - sbx - Manage AI coding agent sandboxes.
     - sbx policy allow - Add an allow rule for sandboxes
+    - sbx policy approval - Review and respond to pending approvals
     - sbx policy check - Check whether policy allows an access request
     - sbx policy deny - Add a deny rule for sandboxes
     - sbx policy init - Initialize the global network policy

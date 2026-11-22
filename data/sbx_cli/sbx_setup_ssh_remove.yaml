@@ -16,6 +16,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: '  sbx setup ssh remove'
 see_also:
     - sbx setup ssh - Set up SSH client config for the sandbox endpoint

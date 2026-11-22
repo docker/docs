@@ -1,5 +1,6 @@
 {{- $description := partial "utils/description.html" . -}}
 {{- $keywords := partialCached "utils/keywords.html" . . -}}
+{{- $trail := partialCached "navigation/breadcrumbs.html" . .Path -}}
 
 {{- /* Build TechArticle schema for content pages */ -}}
 {{- $schema := dict
@@ -72,12 +73,12 @@
 {{- end -}}
 
 {{- /* Add isPartOf relationship to parent section */ -}}
-{{- with .Parent -}}
-  {{- if and (not .IsHome) .Permalink -}}
+{{- if gt (len $trail) 2 -}}
+  {{- with index $trail (sub (len $trail) 2) -}}
     {{- $isPartOf := dict
       "@type" "WebPage"
-      "@id" .Permalink
-      "name" (truncate 110 .LinkTitle)
+      "@id" (.url | absURL)
+      "name" (truncate 110 .label)
     -}}
     {{- $schema = merge $schema (dict "isPartOf" $isPartOf) -}}
   {{- end -}}
@@ -87,32 +88,14 @@
 <script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
 {{- /* Add BreadcrumbList schema */ -}}
 {{- $breadcrumbs := slice -}}
-{{- $position := 1 -}}
-{{- range .Ancestors.Reverse -}}
-  {{- if and (not .IsHome) .Permalink -}}
-    {{- $item := dict
-      "@type" "ListItem"
-      "position" $position
-      "item" (dict
-      "@id" .Permalink
-      "name" (truncate 110 .LinkTitle)
-      )
-    -}}
-    {{- $breadcrumbs = $breadcrumbs | append $item -}}
-    {{- $position = add $position 1 -}}
-  {{- end -}}
+{{- range $index, $item := $trail -}}
+  {{- $breadcrumbs = $breadcrumbs | append (dict
+    "@type" "ListItem"
+    "position" (add $index 1)
+    "item" (dict "@id" (.url | absURL) "name" .label)
+    )
+  -}}
 {{- end -}}
-
-{{- /* Add current page to breadcrumbs */ -}}
-{{- $currentItem := dict
-  "@type" "ListItem"
-  "position" $position
-  "item" (dict
-  "@id" .Permalink
-  "name" (truncate 110 .Title)
-  )
--}}
-{{- $breadcrumbs = $breadcrumbs | append $currentItem -}}
 
 {{- /* Only output breadcrumbs if there's more than just the current page */ -}}
 {{- if gt (len $breadcrumbs) 1 -}}

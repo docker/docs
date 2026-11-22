@@ -49,6 +49,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       # Show provenance (unsigned attestations are printed as-is)
       sbx kit provenance ghcr.io/org/my-kit:1.0

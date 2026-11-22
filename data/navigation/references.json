@@ -1,0 +1,86 @@
+[
+  {
+    "label": "Dockerfile reference",
+    "root": "/reference/dockerfile"
+  },
+  {
+    "label": "Registry API",
+    "root": "/reference/api/registry"
+  },
+  {
+    "label": "DVP Data API",
+    "root": "/reference/api/dvp"
+  },
+  {
+    "label": "Docker Engine API",
+    "root": "/reference/api/engine"
+  },
+  {
+    "label": "docker compose",
+    "root": "/reference/cli/docker/compose"
+  },
+  {
+    "label": "docker",
+    "root": "/reference/cli/docker"
+  },
+  {
+    "label": "docker desktop",
+    "root": "/reference/cli/docker/desktop"
+  },
+  {
+    "label": "docker scout",
+    "root": "/reference/cli/docker/scout"
+  },
+  {
+    "label": "docker offload",
+    "root": "/reference/cli/docker/offload"
+  },
+  {
+    "label": "Docker Hub API",
+    "root": "/reference/api/hub"
+  },
+  {
+    "label": "docker buildx",
+    "root": "/reference/cli/docker/buildx"
+  },
+  {
+    "label": "Extensions API Reference",
+    "root": "/reference/api/extensions-sdk"
+  },
+  {
+    "label": "Docker Sandboxes API",
+    "root": "/reference/api/sandboxes"
+  },
+  {
+    "label": "Docker AI Governance API",
+    "root": "/reference/api/ai-governance"
+  },
+  {
+    "label": "sbx",
+    "root": "/reference/cli/sbx"
+  },
+  {
+    "label": "dockerd",
+    "root": "/reference/cli/dockerd"
+  },
+  {
+    "label": "docker mcp",
+    "root": "/reference/cli/docker/mcp"
+  },
+  {
+    "label": "Build checks",
+    "root": "/reference/build-checks"
+  },
+  {
+    "label": "Docker AI Governance Audit Logs API",
+    "root": "/reference/api/ai-governance-audit-logs"
+  },
+  {
+    "label": "Compose file reference",
+    "root": "/reference/compose-file"
+  },
+  {
+    "label": "docker model",
+    "root": "/reference/cli/docker/model"
+  }
+]

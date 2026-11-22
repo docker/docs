@@ -8,7 +8,6 @@ This site builds https://docs.docker.com/ using Hugo.
 ```text
 content/          # Documentation source (Markdown + Hugo front matter)
 ├── manuals/      # Product docs (Engine, Desktop, Hub, etc.)
-├── guides/       # Task-oriented guides
 ├── reference/    # API and CLI reference
 └── includes/     # Reusable snippets
 layouts/          # Hugo templates and shortcodes
@@ -17,6 +16,14 @@ assets/           # CSS (Tailwind v4) and JS (Alpine.js)
 static/           # Images, fonts
 _vendor/          # Vendored Hugo modules (read-only)
 ```
+
+## Learning content
+
+Tutorials and learning paths live in [docker/learn](https://github.com/docker/learn)
+and publish at `https://docs.docker.com/learn/`. Do not add pages under
+`content/guides/` or `content/get-started/`. Redirects for retired pages with
+Learn equivalents are listed in `data/redirects.yml`. Pages without equivalents
+have no replacement redirect.
 
 ## URL prefix stripping
 
@@ -143,18 +150,16 @@ Additional common fields:
 
 ## Sidebar navigation
 
-The section sidebar is rendered by
-`layouts/_partials/sidebar/sections.html`. It starts at `.FirstSection` and
-recursively walks each section's `.Pages`. Page weight controls the default
-order. Section front matter can group entries with `sidebar.groups`, reverse
-their order with `sidebar.reverse`, override a link with `sidebar.goto`, and
-add a badge with `sidebar.badge`.
+See [ARCHITECTURE.md](ARCHITECTURE.md#navigation) for navigation registries,
+sidebar root resolution, reference categories, and explicit exceptions.
+[COMPONENTS.md](COMPONENTS.md#front-matter) documents content front matter.
 
-The sidebar expands the current page's ancestor sections and marks the current
-page with `aria-current`. When changing the recursive templates, pass all
-navigation state through both `renderChildren` and `renderList`. Keep the page
-filter and the `$hasChildren` calculation aligned so an expand control never
-points to an empty list or disappears for a rendered list.
+`layouts/_partials/navigation/context.html` resolves the collection root.
+`sidebar.html` and `tree.html` render its Hugo content tree. Use
+`children.html` for both rendered children and expand-control decisions. Pass
+navigation state through every recursive call, including hidden-branch state.
+Keep collection boundaries in `data/navigation/`; ordinary child pages come
+from Hugo's `.Pages` and don't need registry entries.
 
 ## Hidden pages
 
@@ -184,7 +189,7 @@ absent from the sidebar outside its active navigation path. The current page
 and its ancestors remain visible so direct links to hidden pages do not produce
 an empty navigation path.
 
-When the active path enters a hidden section, `revealHidden` propagates down
+When the active path enters a hidden section, `reveal` propagates down
 that branch and renders the whole hidden subtree. This keeps the section's
 navigation available while you are in it. The state must remain scoped to that
 branch so unrelated hidden pages stay hidden.
@@ -319,11 +324,12 @@ Never leave both version files carrying `/latest/` aliases simultaneously.
 
 ## Hugo icon references
 
-Before changing an icon reference in response to a "file not found" error,
-verify the file actually exists via Hugo's virtual filesystem. Files may
-exist in `node_modules/@material-symbols/svg-400/rounded/` but not directly
-in `assets/icons/`. Check both locations before concluding an icon is
-missing.
+Interface icons use canonical filenames from `assets/icons/trident/`, without
+`.svg` (for example, `settings`). Product logos use explicit SVG asset paths
+such as `/icons/dhi.svg`, resolved through Hugo's asset filesystem. Icon
+libraries are vendored locally; there is no icon-library module mount under
+`node_modules/`. To add an interface icon, follow the pinned refresh procedure in
+[hack/redesign/README.md](hack/redesign/README.md#theme-and-assets).
 
 ## Self-improvement
 

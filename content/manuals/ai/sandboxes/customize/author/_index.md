@@ -14,9 +14,8 @@ each approach.
 
 > [!NOTE]
 > Select a v3 workload and v3 mixins together.
-> Built-in shortcuts such as `claude` and `codex` use v2 and can't be combined
-> with v3 mixins. See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility)
-> or the [v2 reference](/manuals/ai/sandboxes/customize/kits-v2.md).
+> Built-in shortcuts such as `claude` and `codex` use v3 and accept v3 mixins.
+> See [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility).
 
 ## Choose what to author
 
@@ -29,6 +28,9 @@ each approach.
 - [Build an agent workload](/manuals/ai/sandboxes/customize/author/build-an-agent.md)
   to control the base environment, agent installation, and launch command.
   You can also [use an existing agent image](/manuals/ai/sandboxes/customize/author/base-images.md#use-an-image-in-a-v3-workload).
+- [Debug a kit](/manuals/ai/sandboxes/customize/author/debug.md) when one of its
+  install or startup commands fails. Read the progress output and the logs
+  inside the sandbox.
 
 For complete kits you can study and adapt, see
 [Kit examples](https://github.com/docker/sandbox-kit-spec/tree/main/examples)

@@ -4,15 +4,17 @@
   */
 -}}
 <div data-tooltip-wrapper>
-  <div
+  <button
+    type="button"
+    aria-label="More information"
     data-tooltip-button
-    class="icon-svg text-blue-light flex items-center dark:text-blue-700"
+    class="icon-svg flex items-center text-(--color-muted-foreground)"
   >
-    {{ partialCached "icon" "question-mark-circle" "question-mark-circle" }}
-  </div>
+    {{ partialCached "icon" "circle-help" "circle-help" }}
+  </button>
   <div
     data-tooltip-body
-    class="absolute top-0 left-0 hidden max-w-56 rounded-sm bg-gray-700 p-2 text-white dark:text-gray-800 dark:bg-gray-300"
+    class="absolute top-0 left-0 hidden max-w-56 rounded-sm bg-gray-700 p-2 text-white dark:bg-gray-300 dark:text-gray-800"
     role="tooltip"
   >
     {{ . }}

@@ -21,7 +21,7 @@ session storage, and MCP configuration.
 
 You need `sbx`, Docker with Buildx, and an Anthropic API key. To publish the
 mixin, you also need a registry namespace you can push to. Use a v3 workload
-with this mixin. Built-in shortcuts such as `shell` and `claude` use v2. See
+with this mixin. Built-in shortcuts such as `shell` and `claude` use v3. See
 [Version compatibility](/manuals/ai/sandboxes/customize/_index.md#version-compatibility).
 
 ## Package the executable
@@ -139,7 +139,7 @@ From the directory containing `claude-mixin`, add the mixin to Docker's
 published shell workload:
 
 ```console
-$ sbx run docker.io/docker/sbx-kit-shell:1.0.0 --name claude-mixin-test \
+$ sbx run shell --name claude-mixin-test \
     --kit ./claude-mixin
 ```
 
@@ -164,8 +164,9 @@ A response confirms that Claude Code can reach the API and authenticate with
 your stored key. If authentication fails, check that you stored the key and
 approved the kit's request to use it. See
 [Credential bindings](/manuals/ai/sandboxes/configuration/credentials.md#credential-bindings).
-Network requests must also meet the sandbox's
-[network policy](/manuals/ai/sandboxes/governance/concepts.md#precedence).
+Network requests must also meet the sandbox's network policy, which combines
+the mixin's network rules with the developer's own. For more details, see
+[How rules combine](/manuals/ai/governance/local/_index.md#how-rules-combine).
 
 Run `claude` without arguments to start an interactive session. Follow its
 first-run prompts. Exit Claude Code and the shell to return to your host.

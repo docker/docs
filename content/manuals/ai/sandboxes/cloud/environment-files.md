@@ -166,8 +166,20 @@ Use `run` again to reconnect to the existing sandbox. It creates a sandbox if
 one doesn't exist. Pass `--ttl` and `--on-timeout` only when creating a sandbox:
 `run` rejects those flags when attaching to an existing one.
 
-Press `Ctrl+\` to detach while leaving the agent running. You can also run a
-command without an agent session, for example to inspect the working tree of
+If you set [`entrypoint` or `cmd`](../configuration/environment-files.md#set-the-launch-command),
+or pass arguments after `--`, `run` starts a fresh session instead of rejoining
+an existing agent process. Arguments after `--` replace `cmd` and preserve
+`entrypoint`. For example:
+
+```console
+$ sbx --cloud env run ./cloud.sbxenv.yaml -- 'Explain this project'
+```
+
+These sessions don't support detaching and reconnecting.
+
+For a run without launch overrides or explicit arguments, press `Ctrl+\` to
+detach while leaving the agent running. You can also run a command without an
+agent session, for example to inspect the working tree of
 a copied Git project:
 
 ```console

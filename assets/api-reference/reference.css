@@ -1,26 +1,15 @@
-/* Scoped reference tokens inherit Docker's palette and installed typefaces. */
+/* Specialized API rendering uses the site's semantic roles. */
 .api-reference,
 .api-nav {
-  --api-text: var(--color-gray-800, #2c333f);
-  --api-muted: var(--color-gray-600, #566581);
-  --api-line: var(--color-gray-100, #e7eaef);
-  --api-surface: var(--color-background-light, #f9f9fa);
-  --api-paper: #fff;
-  --api-link: var(--color-blue-600, #0d4df2);
-  --api-selected: var(--color-blue-50, #f6f8fe);
-  --api-mono: "Roboto Mono", ui-monospace, monospace;
+  --api-text: var(--color-surface-foreground);
+  --api-muted: var(--color-muted-foreground);
+  --api-line: var(--color-edge);
+  --api-surface: var(--color-surface-raised);
+  --api-paper: var(--color-surface);
+  --api-link: var(--color-primary-ink);
+  --api-selected: var(--color-accent);
+  --api-mono: var(--font-mono);
   color: var(--api-text);
-}
-.dark .api-reference,
-.dark .api-nav {
-  --api-text: var(--color-gray-100, #e7eaef);
-  --api-muted: var(--color-gray-300, #a9b4c6);
-  --api-line: var(--color-gray-800, #2c333f);
-  --api-surface: var(--color-gray-900, #1e2129);
-  --api-paper: var(--color-background-dark, #10151b);
-  --api-link: var(--color-blue-300, #7ba4f4);
-  --api-selected: #17243b;
-  color-scheme: dark;
 }
 .api-reference {
   max-width: 1440px;
@@ -92,12 +81,15 @@
   color: var(--api-link);
   text-underline-offset: 3px;
 }
+.api-reference a:not(:where(.api-card, .api-operation-row)) {
+  text-decoration-line: underline;
+}
 .api-reference a:hover {
   text-decoration: underline;
 }
 .api-reference :is(a, button, input, select, summary):focus-visible,
 .api-nav a:focus-visible {
-  outline: 2px solid var(--api-link);
+  outline: 2px solid var(--color-control-focus);
   outline-offset: 4px;
   border-radius: 3px;
 }

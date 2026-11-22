@@ -13,11 +13,11 @@ weight: 20
 grid:
   - title: Manage custom roles
     description: Create, edit, assign, and delete custom roles for users and teams.
-    icon: adjustments-horizontal
+    icon: sliders-horizontal
     link: /security/roles-and-permissions/custom-roles/manage/
   - title: Permissions reference
     description: Review every permission you can assign when building a custom role.
-    icon: list-bullet
+    icon: list
     link: /security/roles-and-permissions/custom-roles/permissions-reference/
 aliases:
   - /enterprise/security/roles-and-permissions/custom-roles/

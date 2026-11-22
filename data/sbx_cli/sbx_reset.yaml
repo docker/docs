@@ -8,7 +8,7 @@ description: |-
     - Clear image cache
     - Clear all internal registries
     - Delete all sandbox state
-    - Remove all policies
+    - Remove all local policy rules
     - Remove the managed SSH configuration
     - Clear the Gordon assistant's sessions and history
     - Delete all stored secrets
@@ -46,6 +46,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       sbx reset
 

@@ -1,0 +1,79 @@
+/* Chroma tokens share one structure; palette shades follow the page theme.
+   Text colors are checked on both raised and highlighted code surfaces. */
+.code-block {
+  --syntax-keyword: var(--color-amber-800);
+  --syntax-name: var(--color-violet-700);
+  --syntax-literal: var(--color-brand-700);
+  --syntax-string: var(--color-green-800);
+  --syntax-error: var(--color-red-700);
+  color: var(--color-surface-foreground);
+}
+.dark .code-block {
+  --syntax-keyword: var(--color-amber-300);
+  --syntax-name: var(--color-violet-300);
+  --syntax-literal: var(--color-brand-300);
+  --syntax-string: var(--color-green-300);
+  --syntax-error: var(--color-red-300);
+}
+.code-block .line {
+  display: flex;
+}
+.code-block .hl {
+  min-width: fit-content;
+  background: var(--color-muted);
+}
+.code-block :is(.ln, .lnt) {
+  white-space: pre;
+  user-select: none;
+  margin-right: 0.4em;
+  padding: 0 0.4em;
+}
+.code-block :is(.c, .ch, .cm, .c1, .cs, .cp, .cpf, .p, .ln, .lnt) {
+  color: var(--color-muted-foreground);
+}
+.code-block :is(.k, .kd, .kn, .kp, .kr, .kt, .na, .nb, .ni, .nl, .ow) {
+  color: var(--syntax-keyword);
+}
+.code-block :is(.kc, .n, .bp, .nd, .py, .vc, .vg, .vi, .vm) {
+  color: var(--syntax-name);
+}
+.code-block :is(.nf, .fm, .nt, .m, .mb, .mf, .mh, .mi, .il, .mo, .o) {
+  color: var(--syntax-literal);
+}
+.code-block
+  :is(
+    .s,
+    .sa,
+    .sb,
+    .sc,
+    .dl,
+    .sd,
+    .s2,
+    .se,
+    .sh,
+    .si,
+    .sx,
+    .sr,
+    .s1,
+    .ss,
+    .ld,
+    .gi,
+    .gp
+  ) {
+  color: var(--syntax-string);
+}
+.code-block :is(.err, .ne, .gd, .gr, .gt) {
+  color: var(--syntax-error);
+}
+.code-block :is(.gh, .gu, .gs) {
+  font-weight: 600;
+}
+.code-block .ge {
+  font-style: italic;
+}
+.code-block .gl {
+  text-decoration: underline;
+}
+.code-block .gp {
+  user-select: none;
+}

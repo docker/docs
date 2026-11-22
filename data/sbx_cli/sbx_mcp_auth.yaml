@@ -1,19 +1,20 @@
 name: sbx mcp auth
 synopsis: Authorize MCP servers
 description: |-
-    Authorize registered remote MCP servers through the hosted MCP control plane.
+    Authorize registered MCP servers with OAuth.
 
-    Commands use the Docker Hub account from 'sbx login' as the request principal.
-    User and tenant identity are derived by the control plane; they are not sent in
-    the request body.
+    With a local gateway or an OAuth override in the server registration, credentials
+    are stored locally. Otherwise, the hosted MCP control plane manages them.
 
-    Running 'sbx mcp auth <server>' authorizes or reauthorizes one server. If the
-    stored credential is expired, sbx asks the control plane to refresh it first and
-    only falls back to interactive OAuth when refresh needs user consent.
+    Hosted operations use the Docker Hub account from 'sbx login'. The control plane
+    derives user and tenant identity; they are not sent in the request body.
 
-    Use 'sbx mcp auth status' to inspect hosted credential status without starting
-    OAuth, and 'sbx mcp auth rm' to remove hosted credentials without removing
-    local MCP server registrations.
+    Running 'sbx mcp auth <server>' authorizes or reauthorizes one server, even if it
+    already has stored credentials.
+
+    Use 'sbx mcp auth status' to inspect credential status without starting OAuth,
+    and 'sbx mcp auth rm' to remove credentials without removing local MCP server
+    registrations.
 
     Pass --scope (repeatable) to authorize a specific set of scopes for this run,
     overriding the default recorded at 'sbx mcp add' time. Precedence is --no-scope >
@@ -72,6 +73,7 @@ options:
       usage: |
         OAuth scope to authorize for this run (repeatable; overrides the recorded default; unrecognized scopes warn but are still requested). With no --scope and no recorded default, the scope set the resource itself requires is requested; with none of those, whichever of openid, email, profile, and offline_access are advertised are requested; other advertised scopes are excluded from this fallback
     - name: verbose
+      shorthand: v
       default_value: "false"
       usage: Print authorization polling progress
 inherited_options:
@@ -83,6 +85,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
 example: |4-
       sbx mcp auth status --all
       sbx mcp auth status notion

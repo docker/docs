@@ -14,15 +14,15 @@ grid:
     description: >-
       Authenticate the Docker CLI and tools with a token tied to your
       account.
-    icon: lock-closed
+    icon: lock
     link: /security/access-tokens/personal-access-tokens/
   - title: Organization access tokens
     description: Grant org-owned Hub access to CI/CD and other automation.
-    icon: building-office-2
+    icon: building-2
     link: /security/access-tokens/organization-access-tokens/
   - title: Reference
     description: Look up PAT permissions, OAT scopes, and Hub API support.
-    icon: list-bullet
+    icon: list
     link: /security/access-tokens/reference/
 ---
 

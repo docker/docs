@@ -36,19 +36,19 @@
       "title": "AI Governance",
       "source": "content/reference/api/ai-governance/api.yaml",
       "owner": "docker/governor-services",
-      "manual": "/manuals/ai/sandboxes/governance/",
+      "manual": "/manuals/ai/governance/organization/policies/",
       "connection": "hosted",
       "guides": []
     },
     {
       "id": "ai-governance-audit-logs",
-      "product": "ai-governance",
+      "product": "ai-governance-audit-logs",
       "title": "AI Governance Audit Logs",
       "source": "content/reference/api/ai-governance-audit-logs/api.yaml",
       "owner": "docker/docs",
-      "manual": "/manuals/ai/sandboxes/governance/audit/",
+      "manual": "/manuals/ai/governance/organization/audit/",
       "connection": "hosted",
-      "guides": ["/manuals/ai/sandboxes/governance/audit/api.md"]
+      "guides": ["/manuals/ai/governance/organization/audit/api.md"]
     },
     {
       "id": "sandboxes",
@@ -63,14 +63,20 @@
         "/manuals/ai/sandboxes-api/authentication.md",
         "/manuals/ai/sandboxes-api/get-started.md"
       ]
+    },
+    {
+      "id": "engine-1.57",
+      "product": "engine",
+      "title": "Docker Engine",
+      "source": "_vendor/github.com/moby/moby/api/docs/v1.57.yaml",
+      "sourceURL": "/reference/api/engine/version/v1.57.yaml",
+      "url": "/reference/api/engine/version/v1.57/",
+      "authoredOverview": true,
+      "owner": "moby/moby",
+      "manual": "/manuals/engine/",
+      "connection": "unix",
+      "guides": ["/reference/api/engine/sdk/_index.md"]
     }
   ],
-  "legacyAPIs": [
-    {
-      "title": "Docker Engine",
-      "url": "/reference/api/engine/",
-      "connection": "unix",
-      "description": "Manage containers, images, networks, and volumes."
-    }
-  ]
+  "legacyAPIs": []
 }

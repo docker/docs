@@ -4,7 +4,7 @@ description: Learn about the Compose Develop Specification
 keywords: compose, compose specification, compose file reference, compose develop specification
 aliases:
  - /compose/compose-file/develop/
-weight: 150
+weight: 160
 ---
 
 > [!NOTE] 
@@ -97,7 +97,7 @@ The syntax is the same as `.dockerignore` file:
 - `*/*` matches two nested folders with arbitrary names
 - `**` matches an arbitrary number of nested folders
 
-If the build context includes a `.dockerignore` file, the patterns in this file is loaded as implicit content
+If the build context includes a `.dockerignore` file, the patterns in this file are loaded as implicit content
 for the `ignores` file, and values set in the Compose model are appended.
 
 #### `include`

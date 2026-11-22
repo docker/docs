@@ -18,7 +18,7 @@ A container's environment is not set until there's an explicit entry in the serv
 ## Use the `environment` attribute
 
 You can set environment variables directly in your container's environment with the
-[`environment` attribute](/reference/compose-file/services.md#environment) in your `compose.yaml`.
+[`environment` attribute](/reference/compose-file/container-spec.md#environment) in your `compose.yaml`.
 
 It supports both list and mapping syntax:
 
@@ -36,7 +36,7 @@ services:
       - DEBUG=true
 ```
 
-See [`environment` attribute](/reference/compose-file/services.md#environment) for more examples on how to use it. 
+See [`environment` attribute](/reference/compose-file/container-spec.md#environment) for more examples on how to use it. 
 
 ### Additional information 
 
@@ -58,7 +58,7 @@ The value of the `DEBUG` variable in the container is taken from the value for t
 
 ## Use the `env_file` attribute
 
-A container's environment can also be set using [`.env` files](variable-interpolation.md#env-file) along with the [`env_file` attribute](/reference/compose-file/services.md#env_file).
+A container's environment can also be set using [`.env` files](variable-interpolation.md#env-file) along with the [`env_file` attribute](/reference/compose-file/container-spec.md#env_file).
 
 ```yaml
 services:
@@ -70,7 +70,7 @@ Using an `.env` file lets you use the same file for use by a plain `docker run -
 
 It can also help you keep your environment variables separate from your main configuration file, providing a more organized and secure way to manage sensitive information, as you do not need to place your `.env` file in the root of your project's directory.
 
-The [`env_file` attribute](/reference/compose-file/services.md#env_file) also lets you use multiple `.env` files in your Compose application.  
+The [`env_file` attribute](/reference/compose-file/container-spec.md#env_file) also lets you use multiple `.env` files in your Compose application.  
 
 The paths to your `.env` file, specified in the `env_file` attribute, are relative to the location of your `compose.yaml` file.
 
@@ -91,7 +91,7 @@ The paths to your `.env` file, specified in the `env_file` attribute, are relati
     - path: ./override.env
       required: false
   ``` 
-- As of Docker Compose version 2.30.0, you can use an alternative file format for the `env_file` with the `format` attribute. For more information, see [`format`](/reference/compose-file/services.md#format).
+- As of Docker Compose version 2.30.0, you can use an alternative file format for the `env_file` with the `format` attribute. For more information, see [`format`](/reference/compose-file/container-spec.md#format).
 - Values in your `.env` file can be overridden from the command line by using [`docker compose run -e`](#set-environment-variables-with-docker-compose-run---env). 
 
 ## Set environment variables with `docker compose run --env`

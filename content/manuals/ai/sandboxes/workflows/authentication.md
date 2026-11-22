@@ -94,6 +94,9 @@ $ sbx secret set anthropic \
     --refresh on-demand
 ```
 
+For provider installation and configuration requirements, see
+[Use a dynamic secret source](../configuration/credentials.md#use-a-dynamic-secret-source).
+
 ## Source credentials from AWS Secrets Manager
 
 Install and authenticate the AWS CLI on the host, then register the secret's
@@ -105,5 +108,5 @@ $ sbx secret set anthropic \
 ```
 
 See [Use a dynamic secret source](../configuration/credentials.md#use-a-dynamic-secret-source)
-for refresh policies, verification options, custom secrets, and provider
-account or profile selection.
+for provider installation and configuration requirements, refresh policies,
+verification options, custom secrets, and account or profile selection.

@@ -16,11 +16,11 @@ params:
   grid_sections:
     - title: Quickstart
       description: Follow a step-by-step guide to explore and run a Docker Hardened Image.
-      icon: rocket-launch
+      icon: rocket
       link: /dhi/get-started/
     - title: Explore
       description: Learn what Docker Hardened Images are, how they're built, and what sets them apart from typical base images.
-      icon: information-circle
+      icon: info
       link: /dhi/explore/
     - title: How-tos
       description: Step-by-step guides for using, verifying, scanning, and migrating to Docker Hardened Images.
@@ -28,11 +28,11 @@ params:
       link: /dhi/how-to/
     - title: Security concepts
       description: Understand the secure supply chain principles that make Docker Hardened Images production-ready.
-      icon: clipboard-document-check
+      icon: clipboard-check
       link: /dhi/explore/security-concepts/
     - title: Tools
       description: Browse and manage Docker Hardened Images using Docker Hub, the CLI, MCP server, or Terraform.
-      icon: wrench-screwdriver
+      icon: wrench
       link: /dhi/tools/
     - title: Resources and feedback
       description: Guides, GitHub repositories, community channels, and how to give feedback.

@@ -1,0 +1,167 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+.tri-next.dark, .tri-next .dark, .dark .tri-next {
+  color-scheme: dark;
+  --color-brand-50: oklch(0.9700 0.0140 257.13);
+  --color-brand-200: oklch(0.8660 0.0650 261.21);
+  --color-brand-300: oklch(0.7950 0.1020 265.29);
+  --color-brand-400: oklch(0.6970 0.1570 269.37);
+  --color-brand-600: oklch(0.5510 0.2400 271.65);
+  --color-brand-800: oklch(0.4180 0.1860 269.85);
+  --color-brand-900: oklch(0.3760 0.1410 269.85);
+  --color-brand-950: oklch(0.2820 0.0910 269.85);
+  --color-red-50: oklch(0.9710 0.0130 17.38);
+  --color-red-100: oklch(0.9400 0.0300 17.76);
+  --color-red-200: oklch(0.8930 0.0560 18.42);
+  --color-red-300: oklch(0.8200 0.1010 19.70);
+  --color-red-400: oklch(0.7200 0.1740 22.39);
+  --color-red-600: oklch(0.5930 0.2380 25.55);
+  --color-red-700: oklch(0.5170 0.2090 25.55);
+  --color-red-800: oklch(0.4520 0.1750 25.55);
+  --color-red-900: oklch(0.4000 0.1400 25.55);
+  --color-red-950: oklch(0.2580 0.0920 25.55);
+  --color-orange-50: oklch(0.9800 0.0160 73.68);
+  --color-orange-100: oklch(0.9460 0.0380 70.56);
+  --color-orange-300: oklch(0.8260 0.1150 56.66);
+  --color-orange-400: oklch(0.7440 0.1660 45.88);
+  --color-orange-600: oklch(0.6450 0.2040 37.13);
+  --color-orange-700: oklch(0.5520 0.1830 37.13);
+  --color-orange-800: oklch(0.4700 0.1510 37.13);
+  --color-orange-900: oklch(0.4080 0.1210 37.13);
+  --color-orange-950: oklch(0.2660 0.0790 37.13);
+  --color-green-50: oklch(0.9820 0.0180 151.97);
+  --color-green-100: oklch(0.9650 0.0440 151.97);
+  --color-green-200: oklch(0.9310 0.0850 151.97);
+  --color-green-300: oklch(0.8810 0.1520 151.97);
+  --color-green-500: oklch(0.7340 0.1930 151.97);
+  --color-green-600: oklch(0.6350 0.1670 151.97);
+  --color-green-700: oklch(0.5330 0.1400 151.97);
+  --color-green-800: oklch(0.4520 0.1190 151.97);
+  --color-green-900: oklch(0.3950 0.0950 151.97);
+  --color-green-950: oklch(0.2660 0.0650 151.97);
+  --color-fuchsia-50: oklch(0.9770 0.0170 320.25);
+  --color-fuchsia-200: oklch(0.8910 0.0580 320.25);
+  --color-fuchsia-300: oklch(0.8220 0.1150 320.25);
+  --color-fuchsia-400: oklch(0.7310 0.1960 320.25);
+  --color-fuchsia-500: oklch(0.6590 0.2510 320.25);
+  --color-fuchsia-600: oklch(0.5850 0.2580 320.25);
+  --color-fuchsia-700: oklch(0.5130 0.2300 320.25);
+  --color-fuchsia-800: oklch(0.4490 0.1980 320.25);
+  --color-fuchsia-900: oklch(0.3990 0.1650 320.25);
+  --color-fuchsia-950: oklch(0.2930 0.1360 320.25);
+  --color-neutral-200: oklch(0.9200 0.0120 74.25);
+  --color-neutral-400: oklch(0.7160 0.0150 73.10);
+  --color-neutral-500: oklch(0.5670 0.0120 73.10);
+  --color-neutral-600: oklch(0.4540 0.0090 73.10);
+  --color-neutral-700: oklch(0.3900 0.0060 73.10);
+  --color-neutral-800: oklch(0.2910 0.0030 73.10);
+  --color-edge: oklch(1.0000 0.0000 0.00 / 0.1); /** Dividers and the outlines of cards, panels and menus. Translucent, so it reads on every surface. Too faint for a control's edge: use control-edge. */
+  --color-overlay: oklch(0.0000 0.0000 0.00 / 0.7); /** Backdrop behind modal dialogs and drawers. */
+  --color-docker-base: oklch(0.6157 0.2080 273.45); /** Base. The primary brand blue. */
+  --color-docker-canvas: oklch(0.9623 0.0062 75.35); /** Canvas. Warm off-white. */
+  --color-docker-zero: oklch(0.9948 0.0045 78.50); /** Zero. The lightest warm white. */
+  --color-docker-ether: oklch(0.1730 0.0000 0.00); /** Ether. Near-black. */
+  --color-docker-ink: oklch(0.2307 0.0000 0.00); /** Ink. Near-black, a step lighter than Ether. */
+  --color-docker-launch: oklch(0.7039 0.1915 37.13); /** Launch. Orange accent. */
+  --color-docker-sand: oklch(0.8843 0.0773 61.46); /** Sand. Light orange accent. */
+  --color-docker-neutral: oklch(0.8741 0.0180 73.09); /** Neutral. Warm gray. */
+  --color-docker-air: oklch(0.9132 0.0423 257.14); /** Air. Light blue. */
+  --color-docker-bloom: oklch(0.9379 0.0271 320.23); /** Bloom. Light fuchsia. */
+  --color-docker-flux: oklch(0.8047 0.2118 151.97); /** Flux. Green accent. */
+  --color-docker-trigger: oklch(0.6574 0.2289 25.55); /** Trigger. Red accent. */
+  --color-docker-console: oklch(0.4788 0.2196 269.84); /** Console. Deep blue, two steps darker than Base on the brand ramp. */
+  --color-docker-root: oklch(0.3059 0.1146 27.42); /** Root. Deep red. Not on a ramp: it falls between red-900 and red-950. */
+  --font-sans: 'Onest Variable', Onest, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; /** Onest, in place of Manrope. `mono` stays JetBrains Mono. */
+  --elevation-raised: 0px 1px 3px 0px rgb(0% 0% 0% / 0.4), 0px 1px 2px -1px rgb(0% 0% 0% / 0.4); /** Cards and panels. */
+  --elevation-floating: 0px 4px 6px -1px rgb(0% 0% 0% / 0.4), 0px 2px 4px -2px rgb(0% 0% 0% / 0.4); /** Menus, popovers and tooltips. */
+  --elevation-overlay: 0px 10px 15px -3px rgb(0% 0% 0% / 0.4), 0px 4px 6px -4px rgb(0% 0% 0% / 0.4); /** Dialogs and drawers. */
+  --color-brand-100: var(--color-docker-air);
+  --color-brand-500: var(--color-docker-base);
+  --color-brand-700: var(--color-docker-console);
+  --color-red-500: var(--color-docker-trigger);
+  --color-orange-200: var(--color-docker-sand);
+  --color-orange-500: var(--color-docker-launch);
+  --color-green-400: var(--color-docker-flux);
+  --color-blue-50: var(--color-brand-50);
+  --color-blue-200: var(--color-brand-200);
+  --color-blue-300: var(--color-brand-300);
+  --color-blue-400: var(--color-brand-400);
+  --color-blue-600: var(--color-brand-600);
+  --color-blue-800: var(--color-brand-800);
+  --color-blue-900: var(--color-brand-900);
+  --color-blue-950: var(--color-brand-950);
+  --color-fuchsia-100: var(--color-docker-bloom);
+  --color-neutral-50: var(--color-docker-zero);
+  --color-neutral-100: var(--color-docker-canvas);
+  --color-neutral-300: var(--color-docker-neutral);
+  --color-neutral-900: var(--color-docker-ink);
+  --color-neutral-950: var(--color-docker-ether);
+  --color-muted: var(--color-neutral-800);
+  --color-muted-foreground: var(--color-neutral-400);
+  --color-secondary: var(--color-neutral-800);
+  --color-secondary-hover: var(--color-neutral-700);
+  --color-secondary-subtle-hover: var(--color-neutral-700); /** Hover fill for secondary-subtle, a step past accent. */
+  --color-accent: var(--color-neutral-800); /** Hover and highlighted-item fill for menu items, ghost buttons and list rows. In light mode a neutral step rather than an overlay, which reads on Canvas and Zero alike. */
+  --color-selected: var(--color-neutral-700);
+  --color-primary-subtle-hover: var(--color-neutral-400);
+  --color-destructive: var(--color-red-600);
+  --color-destructive-foreground: var(--color-white);
+  --color-destructive-hover: var(--color-red-700);
+  --color-destructive-subtle: var(--color-docker-root); /** Destructive tint. In dark mode Root, the brand's deep red. */
+  --color-destructive-subtle-foreground: var(--color-red-200);
+  --color-destructive-subtle-hover: var(--color-red-900);
+  --color-success-hover: var(--color-green-300);
+  --color-success-subtle: var(--color-green-950);
+  --color-success-subtle-foreground: var(--color-green-200);
+  --color-success-subtle-hover: var(--color-green-900);
+  --color-warning: var(--color-amber-400);
+  --color-warning-hover: var(--color-amber-300);
+  --color-warning-subtle: var(--color-amber-950);
+  --color-warning-subtle-foreground: var(--color-amber-200);
+  --color-warning-subtle-hover: var(--color-amber-900);
+  --color-warning-ink: var(--color-amber-400);
+  --color-info-hover: var(--color-brand-400); /** Hover for info. A step lighter, which keeps Ether text readable (Console would not). */
+  --color-info-subtle: var(--color-brand-950);
+  --color-info-subtle-hover: var(--color-brand-900);
+  --color-info-ink: var(--color-brand-400); /** Info text and icons on surface and surface-raised. Not Air, which reads as white beside Zero text. */
+  --color-premium: var(--color-violet-600);
+  --color-premium-foreground: var(--color-white);
+  --color-premium-hover: var(--color-violet-700);
+  --color-premium-subtle: var(--color-violet-950);
+  --color-premium-subtle-foreground: var(--color-violet-200);
+  --color-premium-subtle-hover: var(--color-violet-900);
+  --color-premium-ink: var(--color-violet-400);
+  --color-control-edge: var(--color-neutral-500);
+  --color-blue-100: var(--color-brand-100);
+  --color-blue-500: var(--color-brand-500);
+  --color-blue-700: var(--color-brand-700);
+  --color-surface: var(--color-neutral-950); /** Page surface: Ether. */
+  --color-surface-foreground: var(--color-neutral-50);
+  --color-surface-raised: var(--color-neutral-900); /** Surface above the page: cards, panels, menus, popovers and dialogs. Ink, a step lighter than the page. */
+  --color-surface-raised-foreground: var(--color-neutral-50);
+  --color-secondary-foreground: var(--color-neutral-50);
+  --color-secondary-subtle: var(--color-accent);
+  --color-secondary-ink: var(--color-muted-foreground);
+  --color-accent-foreground: var(--color-neutral-50);
+  --color-selected-foreground: var(--color-neutral-50);
+  --color-primary: var(--color-neutral-50); /** Primary action fill. In dark mode Zero, the inverse of light mode's Ink. */
+  --color-primary-foreground: var(--color-neutral-900);
+  --color-primary-hover: var(--color-neutral-100);
+  --color-primary-subtle: var(--color-neutral-300); /** Quieter primary fill. In dark mode Neutral, a softer white than primary's Zero, with dark text. */
+  --color-primary-subtle-foreground: var(--color-neutral-900);
+  --color-primary-ink: var(--color-neutral-50);
+  --color-destructive-ink: var(--color-red-500); /** Destructive text and icons on surface and surface-raised. In dark mode Trigger. */
+  --color-success: var(--color-green-400);
+  --color-success-foreground: var(--color-neutral-950);
+  --color-success-ink: var(--color-green-400);
+  --color-warning-foreground: var(--color-neutral-950);
+  --color-info: var(--color-brand-500);
+  --color-info-foreground: var(--color-neutral-950); /** Text on info. Ether, not white: white on Base is 3.9:1. */
+  --color-info-subtle-foreground: var(--color-brand-100);
+  --color-control-focus: var(--color-brand-500);
+  --color-control-invalid: var(--color-destructive);
+  --color-secondary-subtle-foreground: var(--color-accent-foreground);
+  --color-control: var(--color-surface-raised);
+}
