@@ -24,11 +24,12 @@ The Kubernetes server runs as a single or multi-node cluster, within Docker cont
 4. Optional: Select **Show system containers (advanced)** to view internal containers when using Docker commands.
 5. Select **Create**. 
 
-This sets up the images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\resources\bin\kubectl.exe`(all-user installations) or `%LOCALAPPDATA%\Programs\DockerDesktop\resources\bin\kubectl.exe` (per-user installations) (Windows). If you installed `kubectl` using Homebrew, or by some other method, and experience conflicts, remove `/usr/local/bin/kubectl`.
+Docker Desktop sets up the images required to run the Kubernetes server as containers.
+The `kubectl` command-line tool is available as follows:
 
-   > [!NOTE]
-   >
-   > Docker Desktop for Linux does not include `kubectl` by default. You can install it separately by following the [Kubernetes installation guide](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/). Ensure the `kubectl` binary is installed at `/usr/local/bin/kubectl`.
+- **Mac:** Docker Desktop installs `kubectl` at `/usr/local/bin/kubectl`. If you installed `kubectl` using Homebrew or another method and experience conflicts, remove `/usr/local/bin/kubectl`.
+- **Windows:** Docker Desktop installs `kubectl.exe` in `C:\Program Files\Docker\Docker\resources\bin` for all-user installations or `%LOCALAPPDATA%\Programs\DockerDesktop\resources\bin` for per-user installations.
+- **Linux:** Install `kubectl` separately using the [Kubernetes installation guide](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/). Ensure the binary is installed at `/usr/local/bin/kubectl`.
 
 The following actions are also triggered in the Docker Desktop backend and VM:
 
