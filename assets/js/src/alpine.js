@@ -301,7 +301,7 @@ Alpine.store("gordon", {
     this.isOpen = false;
   },
   // Downloads the in-browser assistant ahead of time, when a reader hovers over or focuses an
-  // "Ask Docker" control.
+  // "Ask Docker" control, or types in the home page composer (where Enter asks Docker).
   prefetch() {
     if (window.GORDON_BACKEND !== "browser") return;
     loadGordonAssistant()
