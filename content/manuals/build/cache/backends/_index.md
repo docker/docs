@@ -140,7 +140,9 @@ with both parameters to find the results that work best for you.
 
 The cache compression options are the same as the
 [exporter compression options](../../exporters/_index.md#compression). This is
-supported by the `local` and `registry` cache backends.
+supported by the `local`, `registry`, and `s3` cache backends.
+Set these options on `--cache-to`; they do not apply to `--cache-from`.
+The `inline` cache uses the image exporter's compression settings.
 
 For example, to compress the `registry` cache with `zstd` compression:
 
