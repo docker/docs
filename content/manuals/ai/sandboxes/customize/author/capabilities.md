@@ -14,9 +14,9 @@ for its settings and examples in the Docker Sandbox Kit Specification.
 
 ## Support by capability
 
-This reference describes capabilities in version `v3.0.0-m.13` of the
-Docker Sandbox Kit Specification. The table identifies Docker Sandboxes
-runtime support for each capability separately.
+Capability descriptions link to the versioned Docker Sandbox Kit
+Specification. The table identifies Docker Sandboxes runtime support for
+each capability separately.
 
 Version numbers identify the first `sbx` release that supports the
 capability, subject to the restrictions in the table. Limited support means
