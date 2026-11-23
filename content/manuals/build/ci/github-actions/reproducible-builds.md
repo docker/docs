@@ -158,6 +158,26 @@ jobs:
 {{< /tab >}}
 {{< /tabs >}}
 
+## Derive the timestamp from a Git context
+
+Set `SOURCE_DATE_EPOCH=context` to use the Git context's commit timestamp
+without a separate shell step:
+
+```yaml
+- name: Build
+  uses: docker/build-push-action@{{% param "build_push_action_version" %}}
+  with:
+    tags: user/app:latest
+    build-args: |
+      SOURCE_DATE_EPOCH=context
+```
+
+This example uses the action's default Git context. For a checked-out repository
+passed as `context: .`, use an explicit timestamp instead. See
+[Derive the timestamp from the build context](../../building/reproducible-builds.md#derive-the-timestamp-from-the-build-context)
+for other context types, or define a
+[default in the Dockerfile](../../building/reproducible-builds.md#define-a-default-in-the-dockerfile).
+
 ## Additional information
 
 For more information about the `SOURCE_DATE_EPOCH` support in BuildKit,

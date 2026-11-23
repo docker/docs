@@ -80,5 +80,20 @@ FROM alpine
 
 An explicit caller-provided value takes precedence over the Dockerfile default.
 
+### Derive the timestamp from the build context
+
+Set `SOURCE_DATE_EPOCH=context` to derive a timestamp from the main build
+context:
+
+- Git contexts use the commit timestamp.
+- HTTP contexts use the `Last-Modified` header. For an archive without that
+  header, BuildKit uses the newest archive entry's modification time.
+- Local contexts leave `SOURCE_DATE_EPOCH` unset, including checked-out Git
+  repositories passed as local directories.
+
+Pass `--build-arg SOURCE_DATE_EPOCH=context` or define
+`ARG SOURCE_DATE_EPOCH=context` before the first `FROM` instruction. For local
+contexts, pass a numeric timestamp instead.
+
 For CI examples, see
 [Reproducible builds with GitHub Actions](../ci/github-actions/reproducible-builds.md).
