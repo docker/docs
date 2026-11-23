@@ -16,8 +16,6 @@ setting states Docker Home offers for each type.
 | ---------------------------------- | ------------------------------------ | ------- |
 | Clipboard image paste              | `clipboard.imagePaste`               | Boolean |
 | Fail-closed credentials            | `credentials.failClosed`             | Boolean |
-| Allow local kits                   | `kit.allowLocalKits`                 | Boolean |
-| Allowed kit sources                | `kit.allowedSources`                 | List    |
 | Allow experimental features        | `platform.allowExperimentalFeatures` | Boolean |
 | SSH accepted environment variables | `ssh.acceptEnv`                      | List    |
 | SSH authorized keys                | `ssh.authorizedKeys`                 | List    |
@@ -57,5 +55,6 @@ values:
 | String  | The values developers can choose from. If you allow one, that value applies. | A value                 |
 | List    | The entries developers can include in their list                             | The entries in the list |
 
-For example, locking **Allowed kit sources** to `docker.io/myorg/` stops
-developers from adding other kit sources.
+For example, locking **SSH accepted environment variables** to `LANG` and
+`TERM` stops developers from forwarding other environment variables into
+sandboxes over SSH.

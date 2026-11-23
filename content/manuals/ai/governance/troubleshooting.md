@@ -190,8 +190,10 @@ your override so the policy's value applies:
 $ sbx settings unset <KEY>
 ```
 
-If you set the value with an environment variable, unset the variable and run
-`sbx daemon restart`.
+If you set the value with an environment variable, such as
+`DOCKER_SANDBOXES_ALLOW_EXPERIMENTAL_FEATURES`, unset the variable and run
+`sbx daemon restart`. `sbx settings unset` doesn't clear an environment
+variable.
 
 ## Commands fail with "administrator settings are unavailable"
 

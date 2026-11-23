@@ -79,8 +79,8 @@ For the steps, see
 [Create and manage organization policies](policies/create-manage.md).
 
 You can also create settings policies under **Sandboxes Settings**, for
-example to limit which sources developers can install kits from or to turn off
-experimental features. They're optional, because developers keep their own
+example to turn off experimental features or clipboard image paste. They're
+optional, because developers keep their own
 settings for anything a settings policy doesn't manage. For more details, see
 [Sandboxes settings management](settings/_index.md).
 

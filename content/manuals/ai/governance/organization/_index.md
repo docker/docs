@@ -50,8 +50,8 @@ and use. You create them in Docker Home, or programmatically through the
 
 Settings policies manage some of the `sbx settings` on developer machines. You
 can set a default that developers can change, or lock a setting so they can't,
-for example to limit which sources developers can install kits from. You create
-them in Docker Home. For more details, see
+for example to turn off experimental features or clipboard image paste. You
+create them in Docker Home. For more details, see
 [Sandboxes settings management](settings/_index.md).
 
 ### Audit logs

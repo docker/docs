@@ -13,8 +13,9 @@ Developers configure Docker Sandboxes on their machines with
 policies let you, the administrator, manage some of those settings centrally
 from Docker Home. You can give a setting a default value that developers can
 still change, or lock it so developers can't change it. For example, you can
-block kits from local directories, limit kits to your own registry, or turn off
-experimental features. For the settings you can manage, see the
+turn off experimental features, stop agents from reading images from the host
+clipboard, or control how developers connect to sandboxes over SSH. For the
+settings you can manage, see the
 [Settings policy reference](../../reference/settings-policy.md). To create a
 policy, see [Create and manage settings policies](create-manage.md).
 
@@ -58,7 +59,8 @@ they can still supply that setting. To set the order, see
 
 On a developer's machine, a value set by your policy as **Default** replaces
 the built-in default. A value the developer sets with `sbx settings set`, or
-through the setting's environment variable, still takes precedence over it.
+through the setting's environment variable if it has one, still takes
+precedence over it.
 
 A **Locked** setting applies on top of everything else. Developers can't use
 `sbx settings set` or an environment variable to get around it.
@@ -71,8 +73,8 @@ a setting your policy manages shows `remote` in the `SOURCE` column, marked
 
 ```console
 $ sbx settings ls
-KEY                   VALUE   TYPE   SOURCE           RESTART   DESCRIPTION
-kit.allowLocalKits    false   bool   remote (locked)  no        Allow installing kits from local directories or ZIP files...
+KEY                                VALUE   TYPE   SOURCE           RESTART   DESCRIPTION
+platform.allowExperimentalFeatures false   bool   remote (locked)  no        Allow experimental features.
 ```
 
 `sbx settings get <KEY> --json` includes a `management` object with the
@@ -82,6 +84,6 @@ If a developer tries to set a value that a locked setting doesn't allow, the
 command fails:
 
 ```console
-$ sbx settings set kit.allowLocalKits true
+$ sbx settings set platform.allowExperimentalFeatures true
 error: request failed: 403 Forbidden: value is restricted by administrator settings
 ```
