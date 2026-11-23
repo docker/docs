@@ -171,6 +171,26 @@ For more information about SLSA Provenance v1, see the
 difference between SLSA v0.2 and v1 provenance attestations, refer to
 [SLSA definitions](./slsa-definitions.md)
 
+## Capture resource usage
+
+To include resource usage samples when investigating build performance, set
+`capture-usage=true` with `mode=max`:
+
+```console
+$ docker buildx build --tag <namespace>/<image>:<version> \
+    --attest type=provenance,mode=max,capture-usage=true --push .
+```
+
+BuildKit records samples for CPU, memory, I/O, and supported network usage.
+Step samples require Linux with cgroup v2. Pressure metrics require a kernel
+with `CONFIG_PSI` enabled, and individual fields can be absent when the kernel
+or cgroup controllers don't provide them.
+
+Step samples appear in `resourceUsage` within the build definition. System
+samples appear in `runDetails.metadata.buildkit_metadata.sysUsage` for SLSA v1.
+Build history records capture usage automatically; the option controls its
+inclusion in exported provenance.
+
 ## Inspecting Provenance
 
 To explore created Provenance exported through the `image` exporter, you can
