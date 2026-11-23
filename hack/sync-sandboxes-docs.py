@@ -10,8 +10,23 @@ import tarfile
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "hack/sandboxes/source.json"
-GUIDES = ROOT / "content/manuals/ai/sandboxes-api/cookbook"
+GUIDES = ROOT / "content/manuals/ai/sandboxes-api/v1/cookbook"
 REFERENCE = ROOT / "content/reference/api/sandboxes"
+
+
+def prepare_guide(content, name):
+    """Preserve published recipe URLs and point installation links at v1."""
+    text = content.decode()
+    alias = f"/ai/sandboxes-api/cookbook/{Path(name).stem}/"
+    if "\naliases:\n" in text:
+        text = text.replace("\naliases:\n", f"\naliases:\n  - {alias}\n", 1)
+    else:
+        text = text.replace("\n---\n", f"\naliases:\n  - {alias}\n---\n", 1)
+    text = text.replace(
+        "https://docs.docker.com/ai/sandboxes-api/install/",
+        "/manuals/ai/sandboxes-api/v1/install.md",
+    )
+    return text.encode()
 
 
 def main():
@@ -36,7 +51,9 @@ def main():
     for name in source["guides"]:
         if Path(name).name != name or not name.endswith(".md"):
             raise SystemExit(f"Invalid guide filename: {name}")
-        outputs[GUIDES / name] = files[f"cookbook/outputs/guides/{name}"]
+        outputs[GUIDES / name] = prepare_guide(
+            files[f"cookbook/outputs/guides/{name}"], name
+        )
 
     outputs[REFERENCE / "api.yaml"] = files["cookbook/outputs/api-reference/api.yaml"]
 

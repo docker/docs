@@ -187,7 +187,7 @@ changed afterward.
 To run a task from your own terminal, follow the
 [cloud CLI walkthrough](/manuals/ai/sandboxes/cloud/_index.md#get-started).
 For programmatic workflows, see the
-[Sandboxes API quickstart](/manuals/ai/sandboxes-api/get-started.md).
+[Sandboxes API quickstart](/manuals/ai/sandboxes-api/v1/get-started.md).
 
 Continue with a targeted workflow:
 

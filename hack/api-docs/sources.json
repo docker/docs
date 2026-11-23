@@ -56,12 +56,12 @@
       "title": "Docker Sandboxes",
       "source": "content/reference/api/sandboxes/api.yaml",
       "owner": "docker/sbx-api",
-      "manual": "/manuals/ai/sandboxes-api/",
+      "manual": "/manuals/ai/sandboxes-api/v1/",
       "connection": "hosted",
       "experimental": true,
       "guides": [
-        "/manuals/ai/sandboxes-api/authentication.md",
-        "/manuals/ai/sandboxes-api/get-started.md"
+        "/manuals/ai/sandboxes-api/v1/authentication.md",
+        "/manuals/ai/sandboxes-api/v1/get-started.md"
       ]
     },
     {

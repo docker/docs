@@ -148,6 +148,6 @@ Best practices for fair use include:
 
 - [Choose a PAT or OAT](/manuals/security/access-tokens/_index.md)
 - [Look up PAT permissions](/manuals/security/access-tokens/reference.md#personal-access-token-permissions)
-- [Authenticate to Cloud Sandboxes](/manuals/ai/sandboxes-api/authentication.md)
+- [Authenticate to Cloud Sandboxes](/manuals/ai/sandboxes-api/v1/authentication.md)
 - [Create an OAT](/manuals/security/access-tokens/organization-access-tokens.md)
 - [Turn on two-factor authentication](/manuals/security/authentication/2fa/_index.md)
