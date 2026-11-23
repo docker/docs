@@ -19,6 +19,9 @@ A kit can define the whole environment or add something to an existing one,
 such as a toolchain or your team's shared configuration. Package those choices
 once, then reuse them across projects and share them with your team.
 
+Browse [sandbox kits from verified publishers](https://hub.docker.com/search?type=sbx_kit&badges=verified_publisher)
+on Docker Hub to find kits to use in your sandbox.
+
 To keep the configuration for a sandbox in an editable, shareable file, use a
 [sandbox environment file](/manuals/ai/sandboxes/configuration/environment-files.md).
 It selects kits alongside workspace paths, resources, credentials, and lifecycle
