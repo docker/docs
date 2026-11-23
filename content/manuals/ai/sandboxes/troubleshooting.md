@@ -237,6 +237,11 @@ If a request to `127.0.0.1` or a local network IP returns "connection refused"
 from inside a sandbox, the address is not reachable from within the sandbox VM.
 See [Accessing host services from a sandbox](workflows/development.md#accessing-host-services-from-a-sandbox).
 
+## Model service problems
+
+For problems with `sbx run --model`, see
+[Troubleshoot the model service](configuration/models.md#troubleshoot-the-model-service).
+
 ## Docker authentication failure
 
 If you see a message like `You are not authenticated to Docker`, your login
