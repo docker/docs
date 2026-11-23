@@ -48,3 +48,37 @@ Apply the policy to your build:
 ```console
 $ EXPERIMENTAL_BUILDKIT_SOURCE_POLICY=./policy.json docker buildx build .
 ```
+
+## Set build timestamps
+
+The `SOURCE_DATE_EPOCH` build argument sets timestamps in image metadata and
+in files exported with the `local` and `tar` exporters. Pass a Unix timestamp
+in seconds:
+
+```console
+$ docker buildx build --build-arg SOURCE_DATE_EPOCH=1704067200 .
+```
+
+To also normalize file timestamps inside image layers, set the
+[`rewrite-timestamp` exporter option](../exporters/image-registry.md):
+
+```console
+$ docker buildx build --build-arg SOURCE_DATE_EPOCH=1704067200 \
+    --output type=image,name=<registry>/<image>,push=true,rewrite-timestamp=true .
+```
+
+### Define a default in the Dockerfile
+
+You can define `SOURCE_DATE_EPOCH` as a global argument, before the first
+`FROM` instruction:
+
+```dockerfile
+# syntax=docker/dockerfile:1
+ARG SOURCE_DATE_EPOCH=1704067200
+FROM alpine
+```
+
+An explicit caller-provided value takes precedence over the Dockerfile default.
+
+For CI examples, see
+[Reproducible builds with GitHub Actions](../ci/github-actions/reproducible-builds.md).
