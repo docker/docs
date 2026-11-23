@@ -442,6 +442,12 @@ the kit handles the wiring; you only provide the value.
 Custom secrets are global by default. Pass `--sandbox` to scope one to a
 specific sandbox.
 
+Custom secret values must be at least eight bytes long. `set-custom` rejects
+shorter literal values. If you already stored a shorter value, set the secret
+again with a value that meets this minimum; the proxy leaves its placeholder
+unchanged until you do. If you choose a placeholder with `--placeholder`, avoid
+the reserved `sbx-provider-key-` prefix.
+
 To read the value from standard input, set `API_KEY` in your host environment
 and pipe it with `--value-stdin`:
 
@@ -466,7 +472,26 @@ Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
 `sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
 configured hosts and the placeholder appears in an HTTP request header, the
 proxy replaces it with the real value. Replacement applies only to HTTP request
-headers, not request bodies. The agent never sees the real secret.
+headers, not request bodies.
+
+### Response redaction
+
+For a request in which the proxy substitutes a custom secret, the proxy also
+scans the response headers and body for secrets associated with the target host
+and redacts matches before returning the response to the sandbox. This is a
+best-effort safeguard against services that echo credentials.
+
+Redaction doesn't cover every transformation of a secret, such as hashing it or
+splitting it across fields. It also doesn't cover WebSocket frames after a
+connection upgrade, or responses to requests in which no secret was substituted.
+Only send secrets to services you trust to handle them.
+
+Redaction can change response payloads, including making JSON invalid. The proxy
+returns a `502` error for responses it can't safely inspect, such as partial
+responses or responses with an unsupported content encoding. Requests that
+substitute a secret generally fetch the full response: the proxy removes range
+headers and, for GET and HEAD requests, cache validators, unless those headers
+carry a substituted secret.
 
 ### List custom secrets
 
@@ -524,6 +549,10 @@ Dynamic custom secrets resolve on demand by default. Pass `--refresh` with a
 duration to cache the resolved value. The verification and error-output flags
 work the same as they do for service secrets. `--ref` and `--command` can't be
 combined with `--value` or `--token`.
+
+The eight-byte minimum also applies to resolved values. If a dynamic source
+returns a shorter value, the proxy leaves the placeholder unchanged. Update the
+source to return a value that meets the minimum.
 
 ### Install npm packages from GitHub Packages
 
