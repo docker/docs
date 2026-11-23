@@ -39,6 +39,11 @@ To connect a server that is not predefined:
 
 ## Use tools from another client
 
+In Docker Agentic Platform,
+[Docker MCP Enterprise Gateway](/manuals/ai/mcp-gateway/_index.md) provides an
+endpoint for your user in the selected account. Connect a client to its endpoint
+to use the servers you've connected in that account.
+
 On the **MCP** page, use **MCP Gateway endpoint URL** to connect your external
 MCP client to the gateway. Select **Add to your client**, choose your
 client, and follow the connection and authorization instructions. Supported

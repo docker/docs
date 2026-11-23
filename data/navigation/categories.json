@@ -22,6 +22,14 @@
         ]
       },
       {
+        "label": "MCP tools",
+        "entries": [
+          {
+            "collection": "mcp-gateway"
+          }
+        ]
+      },
+      {
         "label": "Models & assistants",
         "entries": [
           {
