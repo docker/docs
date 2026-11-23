@@ -15,8 +15,7 @@ Redis 7.4.1 container image using rolling updates.
     run your manager node. For example, the tutorial uses a machine named
     `manager1`.
 
-2.  Deploy your Redis tag to the swarm and configure the swarm with a 10 second
-    update delay. Note that the following example shows an older Redis tag:
+2.  Deploy Redis to the swarm and configure the swarm with a 10 second update delay:
 
     ```console
     $ docker service create \
