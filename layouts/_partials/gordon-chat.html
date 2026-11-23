@@ -15,7 +15,8 @@
   window.GORDON_CARDS_ENABLED = {{ or (ne hugo.Environment "production") site.Params.gordon.cards }};
   {{- /* "legacy" streams answers from GORDON_BASE_URL. "browser" runs the assistant in the
     reader's browser: the page loads its script from the loader URL, and the assistant sends
-    model requests to the proxy URL. */}}
+    model requests to the proxy URL. The backend URL can still send a "browser" page view back
+    to "legacy". */}}
   {{- $backend := or (getenv "HUGO_GORDON_BACKEND") site.Params.gordon.backend "legacy" }}
   {{- if not (in (slice "legacy" "browser") $backend) }}
     {{- errorf "Unknown Gordon backend %q: use \"legacy\" or \"browser\"" $backend }}
@@ -33,6 +34,7 @@
       {{- $loaderURL = getenv "HUGO_GORDON_LOADER_URL" }}
     {{- end }}
     window.GORDON_PROXY_URL = {{ $proxyURL }};
+    window.GORDON_BACKEND_URL = {{ printf "%s/gordon-docs/backend" $proxyURL }};
     window.GORDON_LOADER_URL = {{ or $loaderURL (printf "%s/web-assistant/loader.js" $proxyURL) }};
   {{- end }}
 </script>
@@ -65,8 +67,10 @@
         else message.question = question
       }
 
-      this.$watch('$store.gordon.isOpen', (isOpen) => {
-        if (isOpen && this.isBrowserAssistant) {
+      this.$watch('$store.gordon.isOpen', async (isOpen) => {
+        if (!isOpen || !this.isBrowserAssistant) return
+        this.isBrowserAssistant = await this.$store.gordon.backend() === 'browser'
+        if (this.isBrowserAssistant) {
           this.startAssistant().catch((err) => console.error('Gordon:', err))
         }
       })
@@ -154,11 +158,7 @@
       })
 
       try {
-        if (this.isBrowserAssistant) {
-          await this.streamAssistantResponse(responseIndex, answer)
-        } else {
-          await this.streamGordonResponse(responseIndex, answer)
-        }
+        await this.streamAnswer(responseIndex, answer)
         if (this.messages[responseIndex] !== answer) return
         const answerText = this.$markdownText(answer.content)
         announcement = 'Ask Docker: ' + (answerText || 'No answer received.')
@@ -202,6 +202,32 @@
         this.$gordonStorage.setItem('gordon-session-id', sessionId)
       }
       return sessionId
+    },
+
+    // Each answer records its backend, so its vote goes to the backend that wrote it.
+    async streamAnswer(responseIndex, answer) {
+      this.isBrowserAssistant = await this.$store.gordon.backend() === 'browser'
+      if (this.messages[responseIndex] !== answer) return
+      if (!this.isBrowserAssistant) {
+        answer.backend = 'legacy'
+        await this.streamGordonResponse(responseIndex, answer)
+        return
+      }
+      answer.backend = 'browser'
+      try {
+        await this.streamAssistantResponse(responseIndex, answer)
+      } catch (err) {
+        // The assistant couldn't run, or its route was closed (403): ask the docs AI service
+        // instead, for the rest of this page view. A partial answer isn't asked again.
+        const fallBack = err.code === 'unavailable' || err.status === 403
+        if (!fallBack || answer.content || this.messages[responseIndex] !== answer) throw err
+        console.error('Gordon: using the legacy chat:', err)
+        this.$store.gordon.useLegacyBackend()
+        this.isBrowserAssistant = false
+        this.assistantStatus = ''
+        answer.backend = 'legacy'
+        await this.streamGordonResponse(responseIndex, answer)
+      }
     },
 
     async streamGordonResponse(responseIndex, answer) {
@@ -447,7 +473,7 @@
       // Clear any previous error
       message.feedbackError = null
 
-      if (this.isBrowserAssistant) {
+      if (message.backend === 'browser') {
         await this.rateAnswer(message, feedbackType)
         return
       }
@@ -689,7 +715,7 @@
               >
                 <div class="flex flex-col gap-2">
                   <p
-                    x-show="!isBrowserAssistant || message.answerId"
+                    x-show="message.backend !== 'browser' || message.answerId"
                     class="gordon-feedback-label"
                   >
                     Was this helpful?
@@ -697,7 +723,7 @@
                   <div class="gordon-feedback-actions">
                     <!-- Feedback buttons group -->
                     <div
-                      x-show="!isBrowserAssistant || message.answerId"
+                      x-show="message.backend !== 'browser' || message.answerId"
                       class="gordon-feedback-votes"
                     >
                       <!-- Thumbs up - Helpful -->
