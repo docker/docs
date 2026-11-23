@@ -446,6 +446,9 @@ Example:
 }
 ```
 
+For a workflow that replaces an HTTP download with an immutable registry blob,
+see [Pin an HTTP download to a registry blob](reproducible-builds.md#pin-an-http-download-to-a-registry-blob).
+
 ### BUILDX_BAKE_DISABLE_VARS_ENV_LOOKUP
 
 Set `BUILDX_BAKE_DISABLE_VARS_ENV_LOOKUP=1` to prevent Bake definitions from
