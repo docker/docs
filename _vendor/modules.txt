@@ -1,6 +1,7 @@
 # github.com/moby/moby/api v1.57.0
-# github.com/moby/buildkit v0.35.0
-# github.com/docker/buildx v0.39.0
+# github.com/moby/moby/v2 v2.0.0-beta.31
+# github.com/moby/buildkit v0.35.1
+# github.com/docker/buildx v0.39.1
 # github.com/docker/cli v29.9.3+incompatible
 # github.com/docker/compose/v5 v5.7.1
 # github.com/docker/model-runner v1.1.36
