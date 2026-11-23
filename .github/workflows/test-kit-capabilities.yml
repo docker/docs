@@ -1,0 +1,70 @@
+name: Test kit capability reference
+
+on:
+  pull_request:
+    paths:
+      - content/manuals/ai/sandboxes/customize/author/capabilities.md
+      - data/sandbox_kit_capabilities.json
+      - data/sandbox_kit_support.json
+      - hack/test_kit_capabilities_render.py
+      - layouts/single.markdown.md
+      - layouts/_markup/render-link.html
+      - Dockerfile
+      - .github/workflows/test-kit-capabilities.yml
+  push:
+    branches: [main]
+    paths:
+      - content/manuals/ai/sandboxes/customize/author/capabilities.md
+      - data/sandbox_kit_capabilities.json
+      - data/sandbox_kit_support.json
+      - hack/test_kit_capabilities_render.py
+      - layouts/single.markdown.md
+      - layouts/_markup/render-link.html
+      - Dockerfile
+      - .github/workflows/test-kit-capabilities.yml
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout docs
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+
+      - name: Install the repository's pinned Hugo
+        shell: bash
+        run: |
+          set -euo pipefail
+          version=$(sed -n 's/^ARG HUGO_VERSION=//p' Dockerfile)
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          asset="hugo_extended_${version}_linux-amd64.tar.gz"
+          checksums="hugo_${version}_checksums.txt"
+          install_dir=$(mktemp -d "$RUNNER_TEMP/kit-reference-hugo.XXXXXX")
+          release="https://github.com/gohugoio/hugo/releases/download/v${version}"
+          curl --fail --silent --show-error --location "$release/$asset" --output "$install_dir/$asset"
+          curl --fail --silent --show-error --location "$release/$checksums" --output "$install_dir/$checksums"
+          python3 - "$install_dir" "$asset" "$checksums" <<'PY'
+          import hashlib
+          from pathlib import Path
+          import re
+          import sys
+
+          directory, asset, checksums = Path(sys.argv[1]), *sys.argv[2:]
+          rows = [line.split() for line in (directory / checksums).read_text().splitlines()]
+          matches = [row[0] for row in rows if len(row) == 2 and row[1] == asset]
+          if len(matches) != 1 or not re.fullmatch(r"[0-9a-f]{64}", matches[0]):
+              raise SystemExit("Expected exactly one Hugo asset checksum")
+          if hashlib.sha256((directory / asset).read_bytes()).hexdigest() != matches[0]:
+              raise SystemExit("Hugo asset checksum mismatch")
+          PY
+          tar -xzf "$install_dir/$asset" --directory "$install_dir" hugo
+          echo "$install_dir" >> "$GITHUB_PATH"
+
+      - name: Render HTML and Markdown fixtures
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python3 -m unittest discover -s hack -p test_kit_capabilities_render.py -v

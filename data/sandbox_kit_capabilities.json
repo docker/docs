@@ -1,0 +1,235 @@
+{
+  "format_version": 1,
+  "version": "v3.0.0-m.12",
+  "revision": "6b0bc2504942eb9335447d5035425536d9c495d6",
+  "schema_version": "3",
+  "shared_spec_sha256": "83d5b97ca0c4aae50d1e3080a000f55d1b7a5c8cb152be3195e1f110b5ff6554",
+  "conformance_sha256": "2cf75dc655abf63784f3c47c3623c25f5729c31e6d59b113f306d94aec00b668",
+  "capabilities": [
+    {
+      "id": "com.docker.sandbox/acp@1",
+      "description": "How to run an [Agent Client Protocol](https://agentclientprotocol.com/) (ACP) agent inside the sandbox. This capability describes the launch command, its environment, and the protocol major version.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/acp@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/acp@1.md",
+      "schema_sha256": "61e9ddfd683c40006232bbb9a00b670d52d400603b4e9bb029564a905e178e8f",
+      "schema_contract_sha256": "5bbcd46c7bad783a8056d7f00e219e9c49c592bdafcd89c762f21066a5287db1",
+      "spec_sha256": "351e99227e153c18f758203b23a58d73ae6b02b4073f15eaaf6e145298f6e00f"
+    },
+    {
+      "id": "com.docker.sandbox/agent-context@1",
+      "description": "Written instruction content the agent reads — the AGENTS.md family. A host with no such concept skips an optional declaration or refuses a required one.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/agent-context@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/agent-context@1.md",
+      "schema_sha256": "222f60d943ddee7e748826db653ce3b5fa978147e48048c11ef38144fb8f6b41",
+      "schema_contract_sha256": "020591028bdcd6b5d035487d2a198a3beee2eddf124b7b864c01dc4622a34341",
+      "spec_sha256": "ae68521036e16a116aa08366e9d4bdb5a1e5262a5ac32193469e61bcbb3ac3d5"
+    },
+    {
+      "id": "com.docker.sandbox/agent-context@2",
+      "description": "Inline instruction content the agent reads. This version materializes combined guidance directly in each discovery profile; it does not use `@1`'s progressive per-Kit index. No content reader or image filesystem is needed to recover the guidance from an effective configuration.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/agent-context@2.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/agent-context@2.md",
+      "schema_sha256": "a5453d145fbc9c81f1e4b9a03203ebbe5335eb066f486b2b47a3da42b3bac246",
+      "schema_contract_sha256": "d3e2c9ffe14067e19e57eba3c022da5886f41d70f065c125a51762557e8d6b0c",
+      "spec_sha256": "0fadea32738b9da705393a7aae449baeaeccde322f098e2c5a8e9e9de4b394c8"
+    },
+    {
+      "id": "com.docker.sandbox/agent-interactive-sessions@1",
+      "description": "The workload's interactive session control surface: the argv shapes a human-facing host uses to put the agent's terminal UI in front of a person — start a session, seed it with a prompt, reopen or pick a past one. Not a grant: the host consumes it to operate the agent, the way it consumes the image config's entrypoint.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/agent-interactive-sessions@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/agent-interactive-sessions@1.md",
+      "schema_sha256": "d5640c363386977ce6c82311969d3713fd8e4e92afbd70b7231c2339e3ea962e",
+      "schema_contract_sha256": "2fab4e8d2dcfaad7186cc4ef6a813893208eb70b90ef9cba927179cc98afe2dc",
+      "spec_sha256": "fd92b07b46396cec500536acb166271da0a2b5232438df02728484fd66a2b4ab"
+    },
+    {
+      "id": "com.docker.sandbox/agent-sessions@1",
+      "description": "How to run the workload's agent headlessly inside the sandbox. This capability describes commands to run a prompt, resume or continue a session, and list past sessions.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/agent-sessions@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/agent-sessions@1.md",
+      "schema_sha256": "8223514d36f15bd200a9938a15f020148054eb31a8acc05c1a208c509d15ecac",
+      "schema_contract_sha256": "eeb8685f2f1a03d283a236981409df5cc0e6a5e0610dedbbbf790bdec3808ce0",
+      "spec_sha256": "2425c58c1d96b99ab4aa6df893a7991127ca9f21dcf30a7e9bca0636487faf40"
+    },
+    {
+      "id": "com.docker.sandbox/agent-skill@1",
+      "description": "One bundled agent skill, supplied by the Kit's image and exposed in the composed agent's skill directories. A workload or a mixin can supply it.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/agent-skill@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/agent-skill@1.md",
+      "schema_sha256": "91dd731450f0d0f1a3494106fc336f478e606b0ff0201bc669aa1d771c662298",
+      "schema_contract_sha256": "6602de984059cc7b65e92ef0434aa8527d01179e9808204b7c2be219c2ffdbc7",
+      "spec_sha256": "378c6e21ecd806be3d7ba743011b692a0b6acd2dc72a9e682d20e2fb5aa52aa1"
+    },
+    {
+      "id": "com.docker.sandbox/agent-skills@1",
+      "description": "A directory this Kit's agent scans for skills. It receives selected Kit-bundled skills and, when available and enabled, the host's shared skills store. Declare it on the Kit that supplies the agent, whether it is a workload or a mixin.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/agent-skills@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/agent-skills@1.md",
+      "schema_sha256": "fb3021c7ab6efc0d1c06915d5e1257ec4fb6791434acac84586c8bebf1477179",
+      "schema_contract_sha256": "8e862fbe00b09e200cbf0b4818dfe0c1d5c0f7c5507bfefc96dda43360f1f3f2",
+      "spec_sha256": "a36260d42519a37982821aeb1a660a6a2e110c5e26f5a8608d89a3cdc1001a96"
+    },
+    {
+      "id": "com.docker.sandbox/credential@1",
+      "description": "One service the workload authenticates to, and how the runtime presents proof — never where the secret lives. The host's credential store is the sole source; a Kit declares the need, the user's bindings answer it.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/credential@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/credential@1.md",
+      "schema_sha256": "8fcb59a22ee96e3d77fff6da1dc409b530a7e917cfeacd0e86918a8876f2e217",
+      "schema_contract_sha256": "2409b7d594714efcbb5ca88a3371a9ed97d8e36ffcb66350ff0adc3bab7de503",
+      "spec_sha256": "870644a5cc301702bf8be6bbe75188174c9ead368590f87a1aaf4900422d236d"
+    },
+    {
+      "id": "com.docker.sandbox/docker-auth@1",
+      "description": "Registry authentication through opaque, run-scoped placeholders. Real login credentials and issued tokens remain outside the sandbox.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/docker-auth@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/docker-auth@1.md",
+      "schema_sha256": "8a4609570a1f34914e6c628b787a77ea00f5f9278a488269b373716ca4b16789",
+      "schema_contract_sha256": "787fd5c0257853266f3a7d96cb2b3a4d5d013acedf0cf1edcdbbb44681fd68ac",
+      "spec_sha256": "cbd220e5bb60c607b4ea3be3c586c274b62a39feb827d776d78b51a1c4789d35"
+    },
+    {
+      "id": "com.docker.sandbox/dockerd@1",
+      "description": "A request for a Docker Engine inside the sandbox: elevation, a private persistent store for the engine, and by default the engine started for the Kit. The host may refuse.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/dockerd@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/dockerd@1.md",
+      "schema_sha256": "7485a7dda66fa923906a3f4644ccac5ae5ac1de3439d5a8f455381789d96ccf8",
+      "schema_contract_sha256": "cd8227b61c3d7992b42473efe313c360a02aaf96a1b9b15443d81ce1ccd267c4",
+      "spec_sha256": "848197140eebaa3d56850b75d44857015fe01f071a5965d2a835749921ec0ffd"
+    },
+    {
+      "id": "com.docker.sandbox/git-identity@1",
+      "description": "The user's runtime-provided Git author identity, supplied as `user.name` and `user.email` defaults inside the sandbox. This requests attribution, not authentication, signing authority or evidence of user review. Authentication uses separate grants such as `credential@1`.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/git-identity@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/git-identity@1.md",
+      "schema_sha256": "df8997e0c26722c7a8fd29c2dbb5124e26cd9080c686e7039eb6b2d667200d6d",
+      "schema_contract_sha256": "dc8bf319480f0d02113664bd25e00ee3542f19d84cec67ba98ac5a03281ddf53",
+      "spec_sha256": "4eb5c5e5ead90fb3dcb8d087a2663e71ee057b8ccdce8d90f94b0621ff399706"
+    },
+    {
+      "id": "com.docker.sandbox/host-mount@1",
+      "description": "One host directory shared with the host and across sandboxes composing the same Kit. The runtime chooses its location and mount mechanism; Linux bind mounts and VM filesystem sharing can satisfy the same grant. Use [volume@1](https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/volume@1.md) for sandbox storage without this sharing contract.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/host-mount@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/host-mount@1.md",
+      "schema_sha256": "130b62338ac3d4ae947fa808094304330090f853422f10f95e245a2ac1417657",
+      "schema_contract_sha256": "c5e5a9158b9ae6a7ab2e6c0f3e02f7623d405f8177aac624211aea047b07d7b9",
+      "spec_sha256": "ab9e3fcb659b7c1da94f35ac4188c9f3452edcce4fdbf3c296d6879f19eec2e9"
+    },
+    {
+      "id": "com.docker.sandbox/host-port@1",
+      "description": "One host loopback TCP or UDP service made available at an IPv4 loopback endpoint inside the sandbox. This reverses [port@1](https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/port@1.md), which publishes a sandbox service to the host. It grants access to a specific host service, not general network egress.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/host-port@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/host-port@1.md",
+      "schema_sha256": "15c303872663677d79b198efb4ddaa78337dbe329ac04087e00096490b5736d7",
+      "schema_contract_sha256": "97087b7b551f1ba5fd4ec4f3953ad221568f11fc9bf6d21728f4458f48b5404c",
+      "spec_sha256": "bad5db342db450519135832e0f55dfb30f57c12d5b2b5b0ebfef4cbd3a07e8a0"
+    },
+    {
+      "id": "com.docker.sandbox/kit-registry@1",
+      "description": "Access to the runtime's Kit registry — the runtime-hosted registry endpoint over its own image store, where Kit builds push results and pull the Kit frontend. Declaring this capability is the only thing that makes the registry reachable: the typed request literally is the enforcement.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/kit-registry@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/kit-registry@1.md",
+      "schema_sha256": "416244181629a7a59e404d02e7e913962bc12ba17c8042d127fb6671d3c2e377",
+      "schema_contract_sha256": "40686c8f30549f8515b250392ad3b1d2db7a28ab3bec3931614bf0a19ab61810",
+      "spec_sha256": "e59d806318456364ba6059210193dc55d1bf99faeb70452c55754a0b56b7e26b"
+    },
+    {
+      "id": "com.docker.sandbox/lifecycle@1",
+      "description": "The Kit's setup and launch behavior, executed by the engine across the sandbox's life: install hooks once at create, startup hooks every boot, files written at start, and the interactive argv tail for TTY sessions. A capability rather than grammar fields so a host that cannot execute them refuses the Kit by name at preflight instead of silently never running its setup.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/lifecycle@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/lifecycle@1.md",
+      "schema_sha256": "77157604b65c6e9162d9d649405a863cbaa715586f470f273edce09a3581cc34",
+      "schema_contract_sha256": "10bbac89dc48b556d122ee345810f5439cad87b327ec441be296b1847211e1f6",
+      "spec_sha256": "b80d235ea9ca2079ad8f6248ac6ba8de61e4caf9936d2da859dd30a75a74ac31"
+    },
+    {
+      "id": "com.docker.sandbox/long-running@1",
+      "description": "The workload runs independently of client sessions. A background startup hook or a published port alone does not request this behavior: on a runtime with session-based auto-stop, the sandbox can otherwise stop when its last client disconnects.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/long-running@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/long-running@1.md",
+      "schema_sha256": "9579d79f36fa7014115d4d4134e9dd88b53534e54c847fa87139aa0ac2e9e6b7",
+      "schema_contract_sha256": "5841c8d36990651708d687a8e89f9e4e9374cba6864e0034bb4cab3f50ea636e",
+      "spec_sha256": "236699669aeb66d7dc33fa08b6cfbabb3a8b841d854ef1414d1a1d32433b97a0"
+    },
+    {
+      "id": "com.docker.sandbox/network-policy@1",
+      "description": "Phase-scoped egress policy: what the sandbox may reach while the Kit's install hooks run, and what the agent may reach in steady state.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/network-policy@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/network-policy@1.md",
+      "schema_sha256": "dc08ce9e6506dcf89744f8d003ebb727cc26b56749c37390988c028872272a39",
+      "schema_contract_sha256": "f15c383ada3e750e85fb8fbcb165e9629853772622c9289f8b34410e9f6cab5c",
+      "spec_sha256": "d1573fcb98efdb489e0fa27b5c56503299ad1f38a8f34257d748339b48e85901"
+    },
+    {
+      "id": "com.docker.sandbox/network-policy@2",
+      "description": "Phase-scoped egress policy whose entries may bound a host to particular HTTP requests: what the sandbox may reach while the Kit's install hooks run, what the agent may reach in steady state, and what it may do there.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/network-policy@2.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/network-policy@2.md",
+      "schema_sha256": "119f3ed7e56d1c14be7891a890d3c88184fbad994019fc9e01ed0d1b41b44476",
+      "schema_contract_sha256": "e20c65a11d4e732229001e5abbd18711d03f7e410f7a1409c95f040b5ba898cf",
+      "spec_sha256": "d21fde1defdd67237dfc1326ebf3fe7d55c64fe7e1118320a78fa8996cc4dbb5"
+    },
+    {
+      "id": "com.docker.sandbox/port@1",
+      "description": "One in-container port the runtime should publish to the host. Inbound service exposure — distinct from the outbound [network policy](https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/network-policy@1.md).",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/port@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/port@1.md",
+      "schema_sha256": "4a43bc70d187f675f8fad8119a229ae2e197bb0378c317bb7f01c2e071959ff7",
+      "schema_contract_sha256": "a5a88481234ad5fb8c2b209edff07ea256d19dbd8684130c2f81551febe284b2",
+      "spec_sha256": "e7c7a0ba638b86e5f7a9934321ab486450bf1c3f46487a8226e1ccc973c9e222"
+    },
+    {
+      "id": "com.docker.sandbox/privileged@1",
+      "description": "A request for elevated privilege. Present or absent — there is nothing to configure, and the host may refuse.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/privileged@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/privileged@1.md",
+      "schema_sha256": "21fdd9ee9e45f77d4f1bb390b31563aa904c1f2865e62d99ccfa25adf74f4fe8",
+      "schema_contract_sha256": "2a9ca3fc15fda60119a94cd725ee08a2bb7d1b380727d23c650e0e4695bc1f3c",
+      "spec_sha256": "ed03e4fad08be5ad4b5f0c0136a38ad0694327a5fb663b3257f7ad0523511277"
+    },
+    {
+      "id": "com.docker.sandbox/resources@1",
+      "description": "The workload's compute: CPU, memory, GPU. A constraint on the Kit, not a grant to it.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/resources@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/resources@1.md",
+      "schema_sha256": "a123af6a3bb0c53cd4f0a10b1d37df2f823ec06b5f18a2c70c25b1ef9cc2a0b6",
+      "schema_contract_sha256": "6ce5fb7bfb81f0d32fba6fa5bf1f1c911bbc1b7d4e4d17760a03cfef4225bd5b",
+      "spec_sha256": "4a6855219e53efd2b5e344130f11d3f867ee0a3340c85966980f9149e9659065"
+    },
+    {
+      "id": "com.docker.sandbox/sbx@1",
+      "description": "A declaration that the workload targets the sandbox agent platform: the host launches the agent rather than letting the image entrypoint be PID 1, and it honors the identity the image config states instead of assuming one.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/sbx@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/sbx@1.md",
+      "schema_sha256": "569a591f4645cebaedc7db540c19431dafdfb07f9a8b07e8be925d74ffa5421d",
+      "schema_contract_sha256": "ed29ec099609d278628b0bdf7f29f0b720cceb277788a0baf410031e0d391abb",
+      "spec_sha256": "1d03f1f470606398daef5b4263cce2a823f3340914107c38d4e0b9376e51da5c"
+    },
+    {
+      "id": "com.docker.sandbox/ssh-agent@1",
+      "description": "An SSH agent the workload can use on the user's behalf. The workload can list the agent's public keys and use them to authenticate to remote machines or sign data, while private keys stay outside the sandbox.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/ssh-agent@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/ssh-agent@1.md",
+      "schema_sha256": "a28cc35c732a1ca5a34e040cf3968b5439ac94333738c6c893fefba1eabbce9f",
+      "schema_contract_sha256": "b9c4b6865611fd71aa8051cac08ca1eecd0d4c492eac8b4e800aff9e7ae1be16",
+      "spec_sha256": "cc859a9492f8b6713cb37d4dca00b492bd66f2f949e5841de315969a3c337fda"
+    },
+    {
+      "id": "com.docker.sandbox/usb-device@1",
+      "description": "One USB passthrough request, matched by vendor/product identity or by device class. Hardware access is host-answerable and permission-gated like any other grant.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/usb-device@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/usb-device@1.md",
+      "schema_sha256": "b4398c03cac4e9de33d6deb711c8c1b3c8bc35a8325aaf3af1fafe0a984eadf7",
+      "schema_contract_sha256": "c91616a8261e07ff5439407c81c6d366a3a4f43cb73f76eba1bd55a366867ff0",
+      "spec_sha256": "68a8ab83d4308c1cde318725738b7f1d8adb00e4f59218993dd031272ea97449"
+    },
+    {
+      "id": "com.docker.sandbox/volume@1",
+      "description": "One sandbox-private storage destination. Block storage belongs to the sandbox instance and outlives its container; tmpfs is scratch storage.",
+      "schema_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/schema/capabilities/com.docker.sandbox/volume@1.schema.json",
+      "spec_url": "https://github.com/docker/sandbox-kit-spec/blob/v3.0.0-m.12/docs/spec/capabilities/com.docker.sandbox/volume@1.md",
+      "schema_sha256": "027eeb47a2078c85f2411cc86d1dfc7c405d8653326ee41acd35db0f7c542a16",
+      "schema_contract_sha256": "775a523316adbeb9e6af8cc6e5a7b246dfccf66e86414595ee6036c3caee9f60",
+      "spec_sha256": "b47dbb13d3c392a4f7d7cb0016b0de4726ac6d7cf05de968a7b30020bb391d49"
+    }
+  ]
+}
