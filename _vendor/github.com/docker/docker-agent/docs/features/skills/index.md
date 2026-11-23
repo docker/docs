@@ -25,9 +25,6 @@ agents:
     skills: true
 ```
 
-> [!TIP]
-> Skills are perfect for encoding team-specific workflows (PR review, deployment, coding standards) that apply across projects.
-
 ## Filtering Skills
 
 The `skills` field also accepts a list, letting you restrict the agent to a specific subset of skills instead of exposing every discovered one. List items are classified automatically:

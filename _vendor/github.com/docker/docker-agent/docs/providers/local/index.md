@@ -10,8 +10,6 @@ aliases:
   - /ai/docker-agent/providers/ollama/
 ---
 
-_Run Docker Agent with locally hosted models for privacy, offline use, or cost savings._
-
 ## Overview
 
 Docker Agent can connect to any OpenAI-compatible local model server. This guide covers the most popular options:

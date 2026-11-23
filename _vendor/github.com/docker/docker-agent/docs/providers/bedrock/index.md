@@ -126,7 +126,7 @@ Claude 5.x profile in this audit; do not generate IDs by copying prefixes.
 
 ## Thinking Budget (Claude on Bedrock)
 
-Bedrock Claude models support extended thinking — an internal reasoning phase before the model produces its response. Set `thinking_budget` to a token count (1024–32768) or an effort level string that maps automatically:
+Bedrock Claude models support extended thinking — an internal reasoning phase before the model produces its response. On models that accept fixed token budgets, set `thinking_budget` to at least 1024 and less than `max_tokens`, or use an effort level string that maps automatically:
 
 | Effort level | Token budget |
 | ------------ | ------------ |
@@ -140,7 +140,7 @@ Bedrock Claude models support extended thinking — an internal reasoning phase 
 models:
   bedrock-claude-thinking:
     provider: amazon-bedrock
-    model: global.anthropic.claude-sonnet-5
+    model: global.anthropic.claude-sonnet-4-5-20250929-v1:0
     thinking_budget: 8192   # tokens, or use an effort string like "medium"
     max_tokens: 16384       # must be > thinking_budget
     provider_opts:
@@ -172,18 +172,30 @@ Docker Agent recognizes these models (including Bedrock-style IDs) and transpare
 
 ### Claude 5.x models
 
-The nine Claude 5.x models listed in the [Anthropic provider guide](../anthropic/index.md#claude-5x-models) follow the same rules on Bedrock, including Bedrock-style IDs such as `us.anthropic.claude-sonnet-5-5-v1:0`:
+The eleven Claude 5.x models listed in the [Anthropic provider guide](../anthropic/index.md#claude-5x-models) follow the same rules on Bedrock, including Bedrock-style IDs such as `us.anthropic.claude-sonnet-5-5-v1:0`:
 
 - Effort levels and `adaptive` are sent as adaptive thinking. An integer token budget becomes adaptive thinking with the model's default effort.
 - `temperature`, `top_p` and `top_k` are never sent.
-- `thinking_budget: none` sends `thinking: {"type": "disabled"}` on Haiku 5.5, Opus 5 and Sonnet 5. The other six get adaptive thinking with `low` effort and a startup warning.
+- `thinking_budget: none` sends `thinking: {"type": "disabled"}` on Haiku 5.5, Opus 5 and Sonnet 5. The other eight get adaptive thinking with `low` effort and a startup warning.
 - Reasoning blocks are stored and replayed exactly as Bedrock returned them, in order: signed thinking (including signature-only thinking, the default display on these models), redacted thinking and the text and tool calls around them. If a message changed after it was received but its reasoning did not (for example a sanitized tool name or a redacted tool argument), its recorded reasoning is still replayed in its original place, with the current text and tool calls substituted. If the reasoning itself changed, it is sent without it, with a warning in the logs; inside the tool loop the next request continues, with thinking on, the request is refused instead, and a new user turn starts a fresh loop. Sessions saved by older versions keep that flattened replay; older versions ignore the stored blocks.
 - Mythos 5 is refused at startup: AWS serves it only through Bedrock Mantle, which Docker Agent does not support. Use Mythos 5.1, which is available on Converse, or the Claude API.
+
+For Haiku 5.5, Opus 5.5, Sonnet 5.5, Fable 5.1/5.2 and Mythos 5.2,
+Converse uses adaptive thinking with the `thinking-binding-controls-2026-08-01`
+beta and `thinking.block_binding.prefix_mismatch_behavior: drop_block` by default.
+This lets AWS drop invalidated thinking blocks when compaction, handoffs or other
+history edits change their prefix. Set `provider_opts.thinking_prefix_mismatch`
+to `error` to reject such requests instead, or `drop_block` to select the default
+explicitly. This option is only applied to the listed models while thinking is on;
+invalid option values are rejected. Neither behavior repairs corrupted signatures.
+Unlike the Claude API integration, the Bedrock client does not report dropped
+blocks: Converse stream transformation reporting has not been verified.
+See [AWS preserved thinking documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/claude-messages-thinking-block-binding.html).
 
 > [!NOTE]
 > **Not yet verified live**
 >
-> The `disabled` value follows the Claude Messages contract; it has not yet been verified against live Bedrock Converse.
+> The `disabled` value and prefix-binding controls follow the documented Claude Messages contract; they have not yet been verified against live Bedrock Converse.
 
 ## Interleaved Thinking (Claude on Bedrock)
 

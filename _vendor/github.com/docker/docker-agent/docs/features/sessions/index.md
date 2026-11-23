@@ -160,11 +160,6 @@ models:
 
 An all-zero `cost:` table means "priced, free" — distinct from a model with no `cost:` at all, which falls back to the catalogue (and bills $0 for models the catalogue doesn't know).
 
-> [!NOTE]
-> **Cost never decreases**
->
-> A session's cumulative cost is a running total updated after every *tracked* model call — the same main conversation turns and compaction calls described above. Compacting the conversation (manually with `/compact`, or automatically — see the agent's `session_compaction`/`compaction_threshold` fields in the [Agent Config reference](../../configuration/agents/index.md)) reshapes the message history sent back to the model, but never touches this running total. Auxiliary one-shot calls such as automatic session-title generation are not tracked and are not reflected in this total: `/cost` covers everything the session's tracked calls have spent, not literally every model call the runtime makes on your behalf.
-
 ## Resuming Into a Worktree
 
 A session created during a `--worktree` run remembers which worktree it used. Resuming it with `--session` reattaches to the same worktree directory and branch automatically — you don't need to pass `--worktree` again. See [`--worktree`](../cli/index.md#docker-agent-run) in the CLI reference for the full worktree lifecycle.

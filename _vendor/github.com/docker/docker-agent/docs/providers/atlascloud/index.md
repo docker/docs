@@ -6,8 +6,6 @@ weight: 25
 canonical: https://docs.docker.com/ai/docker-agent/providers/atlascloud/
 ---
 
-_Use Atlas Cloud models with Docker Agent._
-
 ## Overview
 
 Atlas Cloud provides access to multiple model families through an OpenAI-compatible API. Docker Agent includes built-in support for Atlas Cloud as an alias provider.
@@ -38,8 +36,6 @@ agents:
 Docker Agent splits only the first slash, so model IDs that include a model family prefix are preserved.
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

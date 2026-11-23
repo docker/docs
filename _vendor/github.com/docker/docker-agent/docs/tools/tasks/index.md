@@ -7,8 +7,6 @@ weight: 180
 canonical: https://docs.docker.com/ai/docker-agent/tools/tasks/
 ---
 
-_Persistent task database with priorities and dependencies, shared across sessions._
-
 ## Overview
 
 The tasks tool provides a persistent task database that survives across agent sessions. Unlike the [Todo tool](../todo/index.md), which maintains an in-memory task list for the current session only, the tasks tool stores tasks in a JSON file on disk so they can be accessed and updated across multiple sessions. Tasks support priorities and dependencies — a task is _blocked_ until every task it depends on is `done`.

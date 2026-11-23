@@ -6,8 +6,6 @@ weight: 220
 canonical: https://docs.docker.com/ai/docker-agent/providers/opencode-zen/
 ---
 
-_Use OpenCode Zen models with Docker Agent._
-
 ## Overview
 
 [OpenCode Zen](https://opencode.ai/docs/zen) is a curated gateway of tested and verified AI models provided by the OpenCode team. It offers pay-per-use access to a wide range of models — from GPT and Claude to open-source models — all through a single API key. Several free models are also available.
@@ -39,8 +37,6 @@ See [Claude access paths](../anthropic/index.md#claude-access-paths).
 
 ### Inline Syntax
 
-The simplest way to use OpenCode Zen with a free model:
-
 ```yaml
 agents:
   root:
@@ -50,8 +46,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

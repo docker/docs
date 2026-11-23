@@ -6,8 +6,6 @@ weight: 160
 canonical: https://docs.docker.com/ai/docker-agent/providers/minimax/
 ---
 
-_Use MiniMax AI models with Docker Agent._
-
 ## Overview
 
 MiniMax provides AI models through an OpenAI-compatible API. Docker Agent includes built-in support for MiniMax as an alias provider.
@@ -25,8 +23,6 @@ MiniMax provides AI models through an OpenAI-compatible API. Docker Agent includ
 
 ### Inline Syntax
 
-The simplest way to use MiniMax:
-
 ```yaml
 agents:
   root:
@@ -36,8 +32,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:
