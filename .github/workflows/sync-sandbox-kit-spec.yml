@@ -31,12 +31,6 @@ jobs:
           persist-credentials: false
           show-progress: false
 
-      - name: Set up Go
-        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
-        with:
-          go-version: stable
-          cache: false
-
       - name: Verify and sync the released catalog
         id: catalog
         env:
@@ -52,7 +46,7 @@ jobs:
           token: ${{ github.token }}
           branch: chore/sync-kit-capabilities
           base: main
-          add-paths: content/manuals/ai/sandboxes/customize/author/capabilities.md
+          add-paths: data/sandbox_kit_capabilities.json
           sign-commits: true
           # This action converts updated PRs to draft only when the branch changes;
           # unchanged reruns preserve a reviewer's decision to mark the PR ready.
@@ -60,9 +54,9 @@ jobs:
           title: "docs: sync kit capabilities from ${{ steps.catalog.outputs.version }}"
           commit-message: "docs: sync kit capabilities from ${{ steps.catalog.outputs.version }}"
           body: |
-            Update the capability reference from the verified catalog in
-            [sandbox-kit-spec ${{ steps.catalog.outputs.version }}](https://github.com/docker/sandbox-kit-spec/releases/tag/${{ steps.catalog.outputs.version }}),
-            using the updater from that same release.
+            Vendor the verified capability catalog from
+            [sandbox-kit-spec ${{ steps.catalog.outputs.version }}](https://github.com/docker/sandbox-kit-spec/releases/tag/${{ steps.catalog.outputs.version }}).
+            Rendering and runtime support are maintained in this repository.
 
             The catalog describes specification contracts. Docker Sandboxes support
             claims remain owned by this repository. Verify adoption in the matching

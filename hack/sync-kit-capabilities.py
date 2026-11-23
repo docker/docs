@@ -1,23 +1,22 @@
 #!/usr/bin/env python3
-"""Sync a verified published sandbox-kit-spec catalog using its released updater.
+"""Sync a verified published sandbox-kit-spec catalog.
 
-Run with GH_TOKEN and optional KIT_SPEC_VERSION. Requires gh, Go, and permission
+Run with GH_TOKEN and optional KIT_SPEC_VERSION. Requires gh and permission
 for GITHUB_TOKEN to create pull requests in the docs repository.
 """
 
 import hashlib
 import json
 import os
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 import re
 import subprocess
-import tarfile
 import tempfile
 
 
 REPOSITORY = "docker/sandbox-kit-spec"
-MODULE = f"github.com/{REPOSITORY}/v3"
-PAGE = "content/manuals/ai/sandboxes/customize/author/capabilities.md"
+CATALOG = "data/sandbox_kit_capabilities.json"
+SUPPORT = "data/sandbox_kit_support.json"
 ROOT = Path(__file__).resolve().parent.parent
 NUMBER = r"(?:0|[1-9][0-9]*)"
 TAG = re.compile(rf"v3\.{NUMBER}\.{NUMBER}(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?")
@@ -96,37 +95,69 @@ def verify_catalog(directory, version, revision):
     return catalog_path
 
 
-def extract_source(archive_path, destination):
-    """Accept one GitHub archive root containing only directories and files."""
-    with tarfile.open(archive_path, "r:gz") as archive:
-        members = archive.getmembers()
-        paths = set()
-        roots = set()
-        for member in members:
-            path = PurePosixPath(member.name)
-            if (
-                not path.parts or path.is_absolute() or ".." in path.parts
-                or "\\" in member.name or path in paths
-                or not (member.isdir() or member.isfile())
-            ):
-                raise ValueError(f"Unsafe source archive member: {member.name!r}")
-            paths.add(path)
-            roots.add(path.parts[0])
-        if len(roots) != 1:
-            raise ValueError("Expected one source archive root")
-        root = PurePosixPath(roots.pop())
-        for required in ("go.mod", "cmd/capability-catalog/main.go"):
-            if root / required not in paths:
-                raise ValueError(f"Source archive is missing {required}")
-        destination.mkdir()
-        archive.extractall(destination, filter="data")
-    source = destination / root
-    if not re.search(
-        rf"^module[ \t]+{re.escape(MODULE)}[ \t]*$",
-        (source / "go.mod").read_text(), re.MULTILINE,
-    ):
-        raise ValueError("Source archive has an unexpected Go module")
-    return source
+def validate_data(catalog, support, version):
+    digest = re.compile(r"[0-9a-f]{64}")
+    ident = re.compile(r"com\.docker\.sandbox/[a-z0-9][a-z0-9-]*@[1-9][0-9]*")
+    if type(catalog.get("format_version")) is not int or catalog["format_version"] != 1 or catalog.get("schema_version") != "3":
+        raise ValueError("Unsupported catalog format or schema")
+    for key in ("shared_spec_sha256", "conformance_sha256"):
+        if not isinstance(catalog.get(key), str) or not digest.fullmatch(catalog[key]):
+            raise ValueError(f"Invalid {key}")
+    entries = catalog.get("capabilities")
+    if not isinstance(entries, list) or not entries:
+        raise ValueError("Empty capability catalog")
+    ids = []
+    base = f"https://github.com/{REPOSITORY}/blob/{version}/"
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ValueError("Invalid capability entry")
+        name = entry.get("id")
+        if not isinstance(name, str) or not ident.fullmatch(name) or (ids and name <= ids[-1]):
+            raise ValueError("Invalid, duplicate or unsorted capability ID")
+        ids.append(name)
+        if not isinstance(entry.get("description"), str) or not entry["description"].strip():
+            raise ValueError("Missing capability description")
+        if entry.get("spec_url") != base + "docs/spec/capabilities/" + name + ".md" or entry.get("schema_url") != base + "schema/capabilities/" + name + ".schema.json":
+            raise ValueError("Noncanonical capability URL")
+        for key in ("schema_sha256", "schema_contract_sha256", "spec_sha256"):
+            if not isinstance(entry.get(key), str) or not digest.fullmatch(entry[key]):
+                raise ValueError(f"Invalid {key}")
+    if not isinstance(support, dict) or type(support.get("format_version")) is not int or support["format_version"] != 1 or not isinstance(support.get("capabilities"), list):
+        raise ValueError("Invalid support data")
+    seen = set()
+    for entry in support["capabilities"]:
+        if not isinstance(entry, dict) or not isinstance(entry.get("id"), str) or not ident.fullmatch(entry["id"]) or entry["id"] in seen:
+            raise ValueError("Invalid or duplicate support ID")
+        seen.add(entry["id"])
+        if set(entry) != {"id", "local", "cloud", "restrictions"}:
+            raise ValueError("Invalid support fields")
+        status = r"(?:Not verified|Unsupported|Declaration only|(?:Limited: )?v[0-9]+\.[0-9]+\.[0-9]+)"
+        for key in ("local", "cloud"):
+            if not isinstance(entry[key], str) or not re.fullmatch(status, entry[key]):
+                raise ValueError("Invalid support status")
+        if not isinstance(entry["restrictions"], str) or not entry["restrictions"].strip() or "\n" in entry["restrictions"] or "\r" in entry["restrictions"]:
+            raise ValueError("Invalid support restrictions")
+    if seen - set(ids):
+        raise ValueError("Catalog omits known support entries")
+
+
+def write_catalog(path, data):
+    if path.exists() and path.read_bytes() == data:
+        return
+    with tempfile.NamedTemporaryFile(dir=path.parent, prefix=".kit-catalog-", delete=False) as output:
+        name = output.name
+        try:
+            output.write(data)
+            output.flush()
+            os.fsync(output.fileno())
+        except BaseException:
+            os.unlink(name)
+            raise
+    try:
+        os.replace(name, path)
+    finally:
+        if os.path.exists(name):
+            os.unlink(name)
 
 
 def report(message, **outputs):
@@ -160,23 +191,11 @@ def main():
             "--dir", str(directory),
         )
         catalog = verify_catalog(directory, version, revision)
-        # Version-suffixed go run rejects the released module's replace directives.
-        # Fetch the exact verified commit and run it as the main module instead.
-        archive = directory / "source.tar.gz"
-        with archive.open("wb") as output:
-            run("gh", "api", f"repos/{REPOSITORY}/tarball/{revision}", stdout=output)
-        source = extract_source(archive, directory / "source")
-        env = dict(os.environ)
-        for name in ("GH_TOKEN", "GITHUB_TOKEN"):
-            env.pop(name, None)
-        env["GOWORK"] = "off"
-        # Preserve the released module, including its dependency replacements.
-        # Source, assets, and Go module caches stay outside the docs tree.
-        run(
-            "go", "run", "./cmd/capability-catalog", "docs",
-            "--catalog", str(catalog), "--page", str(ROOT / PAGE),
-            cwd=source, env=env,
-        )
+        data = catalog.read_bytes()
+        parsed = json.loads(data, object_pairs_hook=unique_keys, parse_constant=invalid_constant)
+        support = json.loads((ROOT / SUPPORT).read_bytes(), object_pairs_hook=unique_keys, parse_constant=invalid_constant)
+        validate_data(parsed, support, version)
+        write_catalog(ROOT / CATALOG, data)
     report(
         f"Synced specification contracts from [{version}](https://github.com/{REPOSITORY}/releases/tag/{version}). "
         "Review the matching Docker Sandboxes release before marking the PR ready.",

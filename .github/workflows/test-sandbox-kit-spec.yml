@@ -7,6 +7,8 @@ on:
       - .github/workflows/test-sandbox-kit-spec.yml
       - hack/sync-kit-capabilities.py
       - hack/test_sync_kit_capabilities.py
+      - data/sandbox_kit_support.json
+      - data/sandbox_kit_capabilities.json
   push:
     branches:
       - main
@@ -15,6 +17,8 @@ on:
       - .github/workflows/test-sandbox-kit-spec.yml
       - hack/sync-kit-capabilities.py
       - hack/test_sync_kit_capabilities.py
+      - data/sandbox_kit_support.json
+      - data/sandbox_kit_capabilities.json
 
 permissions:
   contents: read
