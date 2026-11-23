@@ -1,7 +1,7 @@
 ---
 title: Publish an MCP server
 linkTitle: Publish a server
-description: Register a hosted container or remote MCP endpoint, configure authentication, and share the server through MCP Gateway.
+description: Register a hosted container or remote MCP endpoint, configure authentication, and share the server through Docker MCP Enterprise Gateway.
 keywords: mcp gateway, publish mcp server, hosted container, remote endpoint, secrets
 weight: 30
 ---

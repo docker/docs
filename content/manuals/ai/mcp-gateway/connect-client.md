@@ -1,7 +1,7 @@
 ---
 title: Connect and use MCP tools
 linkTitle: Connect a client
-description: Connect your service accounts and add an MCP Gateway endpoint to your AI client.
+description: Connect your service accounts and add a Docker MCP Enterprise Gateway endpoint to your AI client.
 keywords: mcp gateway, mcp client, oauth, authentication, connect tools
 weight: 10
 ---

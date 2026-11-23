@@ -8,8 +8,8 @@ weight: 40
 ---
 
 > [!NOTE]
-> For a Docker-hosted or self-hosted gateway with a web console for publishing
-> servers and managing team access, see [MCP Gateway](/manuals/ai/mcp-gateway/_index.md).
+> For an enterprise gateway with a web console for publishing
+> servers and managing team access, see [Docker MCP Enterprise Gateway](/manuals/ai/mcp-gateway/_index.md).
 
 The MCP Gateway used by MCP Toolkit is Docker's open source solution for
 orchestrating Model Context Protocol (MCP) servers. It acts as a centralized

@@ -44,8 +44,8 @@ grid:
 {{< summary-bar feature_name="Docker MCP Catalog and Toolkit" >}}
 
 > [!NOTE]
-> For a Docker-hosted or self-hosted gateway with a web console for publishing
-> servers and managing team access, see [MCP Gateway](/manuals/ai/mcp-gateway/_index.md).
+> For an enterprise gateway with a web console for publishing
+> servers and managing team access, see [Docker MCP Enterprise Gateway](/manuals/ai/mcp-gateway/_index.md).
 
 [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) is
 an open protocol that standardizes how AI applications access external tools

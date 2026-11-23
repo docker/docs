@@ -1,7 +1,7 @@
 ---
 title: Manage access and security
 linkTitle: Access and security
-description: Manage MCP Gateway roles and resource permissions, block servers, and understand authentication and security boundaries.
+description: Manage Docker MCP Enterprise Gateway roles and resource permissions, block servers, and understand authentication and security boundaries.
 keywords: mcp gateway, permissions, roles, secrets, security, governance
 weight: 40
 ---

@@ -23,7 +23,7 @@ loading, live updates, and organization governance.
 
 > [!NOTE]
 > To publish servers, create shared gateways, and manage team access through a
-> web console, see [MCP Gateway](/manuals/ai/mcp-gateway/_index.md).
+> web console, see [Docker MCP Enterprise Gateway](/manuals/ai/mcp-gateway/_index.md).
 > This page covers configuring MCP for Docker Sandboxes with `sbx`.
 
 ## Prerequisites

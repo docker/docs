@@ -15,6 +15,12 @@
       "/reference/api/ai-governance"
     ]
   },
+  "mcp-gateway": {
+    "label": "Docker MCP Enterprise Gateway",
+    "root": "/manuals/ai/mcp-gateway",
+    "category": "ai",
+    "references": []
+  },
   "sandboxes-api": {
     "label": "Sandboxes API and SDK",
     "root": "/manuals/ai/sandboxes-api",
