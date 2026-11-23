@@ -108,6 +108,27 @@ A few scenarios where this might be useful are:
 - Using a `testing` stage in which your app gets populated with test data, but
   building for production using a different stage which uses real data
 
+### Use the target stage in a shared base
+
+The built-in `TARGETSTAGE` argument contains the name of the requested target
+stage. Declare `ARG TARGETSTAGE` in a stage to use it in `RUN` instructions:
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine AS base
+ARG TARGETSTAGE
+RUN echo "Building target: $TARGETSTAGE"
+
+FROM base AS development
+
+FROM base AS production
+```
+
+Building with `--target development` prints `Building target: development`
+when the base stage runs. The value identifies the final target, even inside
+the shared base stage. Without `--target`, it uses the last stage's name, or
+`default` if that stage is unnamed.
+
 ## Use an external image as a stage
 
 When using multi-stage builds, you aren't limited to copying from stages you

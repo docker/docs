@@ -197,6 +197,16 @@ $ docker buildx create --use --bootstrap \
   --buildkitd-flags "--oci-worker-net=cni"
 ```
 
+## Proxy networking
+
+You can route Linux build steps through a BuildKit-managed HTTP(S) proxy. The
+proxy can check requests against source policies and record downloaded
+dependencies in provenance attestations.
+`RUN --network=none` remains offline.
+
+For setup instructions, application requirements, and an example policy, see
+[Block URLs in build steps](../policies/usage.md#block-urls-in-build-steps).
+
 ## Resource limiting
 
 ### Max parallelism

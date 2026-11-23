@@ -25,10 +25,35 @@ $ docker buildx build --output type=tar[,parameters] .
 
 The following table describes the available parameters:
 
-| Parameter        | Type    | Default | Description                                                                       |
-| ---------------- | ------- | ------- | --------------------------------------------------------------------------------- |
-| `dest`           | String  |         | Path to copy files to                                                             |
-| `platform-split` | Boolean | `true`  | `local` exporter only. Split multi-platform outputs into platform subdirectories. |
+| Parameter        | Type            | Default | Description                                                                                                     |
+| ---------------- | --------------- | ------- | --------------------------------------------------------------------------------------------------------------- |
+| `dest`           | String          |         | Path to copy files to                                                                                           |
+| `platform-split` | Boolean         | `true`  | `local` exporter only. Split multi-platform outputs into platform subdirectories.                               |
+| `mode`           | `copy`,`delete` | `copy`  | `local` exporter only. See [replacing the output directory](#replace-the-contents-of-a-local-output-directory). |
+
+## Replace the contents of a local output directory
+
+The `local` exporter supports `mode=copy` (default) and `mode=delete`.
+Copy mode preserves destination files that aren't in the build result. Delete
+mode removes those files and directories, so the destination matches the
+exported result. The `mode` option doesn't apply to the `tar` exporter.
+
+```console
+$ docker buildx build --output type=local,dest=./output,mode=delete .
+```
+
+> [!WARNING]
+> Delete mode removes existing files under the destination directory. Use a
+> dedicated output directory and check the destination before building.
+
+Buildx permits delete mode without extra permission when the destination
+resolves to a subdirectory of the working directory. For the working directory
+itself or a path outside it, explicitly allow deletion with
+`--allow=buildx.local.delete`. This permission is checked by Buildx, so it
+doesn't require a BuildKit daemon entitlement.
+
+For multi-platform builds with `platform-split=true`, deletion applies to the
+combined output, including all platform subdirectories.
 
 ## Multi-platform builds with local exporter
 

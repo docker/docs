@@ -104,7 +104,7 @@ GC Policy rule#3:
 Now let's create a Dockerfile to use this device:
 
 ```dockerfile
-# syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1
 FROM busybox
 RUN --device=vendor1.com/device \
   env | grep ^FOO=
@@ -116,10 +116,8 @@ specification. In this case it uses `foo`, which is the first device in
 `/etc/cdi/foo.yaml`.
 
 > [!NOTE]
-> [`RUN --device` command](/reference/dockerfile.md#run---device) is only
-> featured in [`labs` channel](../buildkit/frontend.md#labs-channel) since
-> [Dockerfile frontend v1.14.0-labs](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.14.0-labs)
-> and not yet available in stable syntax.
+> The build logs below show output from the `labs` channel. The examples use
+> the stable Dockerfile syntax, which supports `RUN --device`.
 
 Now let's build this Dockerfile:
 
@@ -294,7 +292,7 @@ GPU 0: Tesla T4 (UUID: GPU-6cf00fa7-59ac-16f2-3e83-d24ccdc56f84)
 Let's create a simple Dockerfile that will use the GPU device:
 
 ```dockerfile
-# syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1
 FROM ubuntu
 RUN --device=nvidia.com/gpu nvidia-smi -L
 ```
