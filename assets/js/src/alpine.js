@@ -248,13 +248,33 @@ Alpine.magic("markdown", () => {
 // Stores
 Alpine.store("gordon", {
   isOpen: false,
+  isDocked: false,
+  returnFocus: null,
   query: "",
   autoSubmit: false,
+  init() {
+    // Trident's 2xl breakpoint; keep the docking media query in sync.
+    const wideScreen = window.matchMedia("(min-width: 96rem)");
+    this.isDocked = wideScreen.matches;
+    wideScreen.addEventListener("change", ({ matches }) => {
+      const focused = document.activeElement;
+      this.isDocked = matches;
+      if (matches && this.isOpen)
+        requestAnimationFrame(() => {
+          // Release the modal trap before restoring focus in the docked panel.
+          setTimeout(() => {
+            if (this.isOpen && this.isDocked)
+              focused?.focus({ preventScroll: true });
+          }, 0);
+        });
+    });
+  },
   toggle() {
     if (this.isOpen) this.close();
     else this.open();
   },
   open(query, autoSubmit = false) {
+    if (!this.isOpen) this.returnFocus = document.activeElement;
     document
       .querySelectorAll("dialog[open]")
       .forEach((dialog) => dialog.close());
@@ -262,13 +282,24 @@ Alpine.store("gordon", {
       menu.open = false;
     });
     this.isOpen = true;
+    Alpine.nextTick(() => {
+      if (this.isOpen && this.isDocked)
+        document.getElementById("question")?.focus({ preventScroll: true });
+    });
     if (query) {
       this.query = query;
       this.autoSubmit = autoSubmit;
     }
   },
   close() {
+    const restoreFocus =
+      this.isDocked &&
+      document.getElementById("gordon-chat")?.contains(document.activeElement);
     this.isOpen = false;
+    if (restoreFocus)
+      Alpine.nextTick(() => {
+        if (!this.isOpen) this.returnFocus?.focus({ preventScroll: true });
+      });
   },
 });
 

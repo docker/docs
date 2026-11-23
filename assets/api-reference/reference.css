@@ -540,7 +540,7 @@
 .api-reference[data-api-view="schema"] > .api-field {
   max-width: 80ch;
 }
-@media (max-width: 1199px) {
+@container docs-shell (width < 1200px) {
   .api-operation-grid {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -552,7 +552,7 @@
     grid-row: 1;
   }
 }
-@media (max-width: 767px) {
+@container docs-shell (width < 768px) {
   main > div:has(> .api-reference) {
     padding: 24px 20px;
   }

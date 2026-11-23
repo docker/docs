@@ -349,6 +349,14 @@ try {
         .textContent.includes("Use Docker"),
     );
     await scan(page, `${theme} completed chat`);
+    for (const width of [1536, 1920]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.waitForFunction(
+        () =>
+          !document.querySelector("#gordon-chat").hasAttribute("aria-modal"),
+      );
+      await scan(page, `${theme} docked chat at ${width}px`);
+    }
     await page.setViewportSize({ width: 320, height: 900 });
     await scan(page, `${theme} completed mobile chat`);
     assert.ok(

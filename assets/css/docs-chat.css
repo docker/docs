@@ -1,8 +1,11 @@
+.docs-site {
+  --docs-chat-width: 440px;
+}
 .gordon-drawer {
   position: fixed;
   inset: 8px 8px 8px auto;
   z-index: 50;
-  width: min(440px, calc(100% - 16px));
+  width: min(var(--docs-chat-width), calc(100% - 16px));
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -13,6 +16,27 @@
   color: var(--color-surface-foreground);
   box-shadow: 0 20px 60px #0004;
   font-size: 0.875rem;
+}
+/* Trident xl and 2xl breakpoints. */
+@media (width >= 80rem) {
+  .docs-site {
+    --docs-chat-width: 30rem;
+  }
+}
+@media (width >= 96rem) {
+  .docs-site {
+    --docs-chat-width: clamp(30rem, 30vw, 38rem);
+  }
+  .docs-site:has(#gordon-chat[data-docked="true"][data-open="true"])
+    .docs-shell {
+    margin-inline-end: var(--docs-chat-width);
+  }
+  .gordon-drawer {
+    inset: 0 0 0 auto;
+    border-width: 0 0 0 1px;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 .gordon-header {
   display: flex;
