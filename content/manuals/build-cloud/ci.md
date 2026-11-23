@@ -68,6 +68,14 @@ If you are not an organization administrator:
 
 ## CI platform examples
 
+> [!NOTE]
+>
+> These examples use the standard Buildx client with the `cloud` driver. If
+> your build needs to access private resources on an internal network, use the
+> private Buildx client instead. The standard Buildx cloud driver doesn't
+> support private resource access. See
+> [Private resource access](builder-settings.md#private-resource-access).
+
 > [!IMPORTANT]
 >
 > These examples require Buildx version 0.37.0 or later, which includes the
