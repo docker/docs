@@ -299,9 +299,17 @@ the same compression output, since both map to the "Default" internal level.
 ### OCI media types
 
 The `image`, `registry`, `oci` and `docker` exporters create container images.
-These exporters support both Docker media types (default) and OCI media types
+The `image`, `registry`, and `oci` exporters default to OCI media types, while
+the `docker` exporter defaults to Docker media types.
 
-To export images with OCI media types set, use the `oci-mediatypes` property.
+Use `oci-mediatypes=false` to request Docker media types for an image export:
+
+```console
+$ docker buildx build \
+  --output type=image,name=<registry>/<image>,push=true,oci-mediatypes=false .
+```
+
+To explicitly request OCI media types, set `oci-mediatypes=true`.
 
 ```console
 $ docker buildx build \
