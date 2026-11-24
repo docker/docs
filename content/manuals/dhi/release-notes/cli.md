@@ -15,6 +15,21 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.0.14
+
+{{< release-date date="2026-11-23" >}}
+
+[GitHub release](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.14)
+
+This release requires `uid` and `gid` when creating or editing image customizations.
+
+### Breaking Changes
+
+- `dhictl customization create` and `edit` now fail when an ID is missing. Previously, the CLI silently filled in a default. Update existing YAML files as follows:
+  - Each entry under `paths` needs both `uid` and `gid` (previously defaulted to `1000`)
+  - Each user under `accounts` needs `uid`, and each group needs `gid` (previously read as `0`, root)
+- An explicit `0` is still accepted. `uid` and `gid` on symlinks, and a user's `gid`, stay optional.
+
 ## 0.0.13
 
 {{< release-date date="2026-11-05" >}}

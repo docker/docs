@@ -248,23 +248,23 @@ Define a `dhi_customization` resource for each customization:
 
 ```hcl
 resource "dhi_customization" "golang_with_git" {
-  repository = "dhi-golang"
-  name       = "golang with git"
+  name              = "golang with git"
+  source            = "dhi/golang"
+  destination       = "my-org/dhi-golang"
+  tag_definition_id = "golang/alpine-3.23/1.25"
+  platforms         = ["linux/amd64"]
 
   contents {
     packages = ["git", "curl"]
   }
-
-  platform {
-    os           = "linux"
-    architecture = "amd64"
-  }
 }
 ```
 
-The `dhi_customization` resource also supports optional configuration blocks
-for `accounts`, `files`, `labels`, `annotations`, `environment`, `entrypoint`,
-`cmd`, `user`, `workdir`, and `stop_signal`.
+The `dhi_customization` resource also supports optional settings for
+`accounts`, `file`, `symlink`, `labels`, `annotations`, `environment`,
+`entrypoint`, `cmd`, `working_directory`, and `compression`. To apply one
+customization to several tag definitions, use `target` blocks instead of
+`source`, `destination`, and `tag_definition_id`.
 
 Run `terraform apply` to create the customization.
 
@@ -328,15 +328,15 @@ targets:
 
 | Field | Description |
 |:---|:---|
-| `name` | Human-readable name. Converted to lowercase and hyphenated, it becomes the image tag suffix. For example, `golang with git` produces tags ending in `_golang-with-git`. |
+| `name` | Human-readable name. Use only letters, numbers, and spaces. Converted to lowercase and hyphenated, it becomes the image tag suffix. For example, `golang with git` produces tags ending in `_golang-with-git`. You can't change the name after the customization is created. `docker dhi customization edit` ignores a `name` that differs from the existing one. |
 | `targets[].destination` | Destination repository in Docker Hub, such as `my-org/dhi-golang`. |
 | `targets[].tag_definition_id` | Tag definition to customize, such as `golang/alpine-3.23/1.25`. Use `docker dhi customization prepare` with tab completion to find valid values. |
 
 > [!NOTE]
 >
 > When `targets` has more than one entry, the fields `accounts`, `entrypoint`,
-> and `cmd` are not supported. Including them causes `docker dhi customization
-> create` to return an error.
+> `cmd`, and `working-directory` are not supported. Including them causes
+> `docker dhi customization create` to return an error.
 
 #### Add packages
 
@@ -397,8 +397,8 @@ paths:
 | `path` | Absolute path where the file will be placed in the image. |
 | `contents` | File content. Use a YAML block scalar (`\|`) for multi-line content. |
 | `mode` | Octal file permissions, such as `"0644"`. Quote the value to prevent YAML from treating the leading zero as octal notation. |
-| `uid` | User ID of the file owner. |
-| `gid` | Group ID of the file owner. |
+| `uid` | User ID of the file owner. Required. |
+| `gid` | Group ID of the file owner. Required. |
 
 > [!NOTE]
 >
@@ -436,10 +436,10 @@ accounts:
 | `root` | Whether to enable the root user. Default is `false`. Required if `runs-as` is set to `root`. |
 | `runs-as` | The default user the container runs as. |
 | `users[].name` | Username. |
-| `users[].uid` | User ID. |
+| `users[].uid` | User ID. Required. |
 | `users[].gid` | Primary group ID. Optional. |
 | `groups[].name` | Group name. |
-| `groups[].gid` | Group ID. |
+| `groups[].gid` | Group ID. Required. |
 | `groups[].members` | Usernames to add to this group. Optional. |
 
 #### Set environment variables
@@ -476,8 +476,10 @@ annotations:
 
 #### Override entrypoint and command
 
-To change how the container starts, use `entrypoint` and `cmd`. These arguments
-are appended to the base image's existing entrypoint and command.
+To change how the container starts, use `entrypoint` and `cmd`. Setting either
+field replaces the base image's existing value, so include any inherited
+arguments you still want. To change the working directory, use
+`working-directory`.
 
 > [!NOTE]
 >
@@ -489,6 +491,8 @@ entrypoint:
 
 cmd:
   - /bin/bash
+
+working-directory: /app
 ```
 
 #### Set platforms and compression
