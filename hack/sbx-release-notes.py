@@ -10,7 +10,6 @@ a docs markdown file between the BEGIN/END markers.
 Usage (from repo root):
 
     ./hack/sbx-release-notes.py
-    ./hack/sbx-release-notes.py --preset dhi
     GITHUB_TOKEN=$(gh auth token) ./hack/sbx-release-notes.py
     ./hack/sbx-release-notes.py --minor-releases 3
 """
@@ -34,10 +33,6 @@ PRESETS: dict[str, dict] = {
     "sbx": {
         "repo": "docker/sbx-releases",
         "file": Path("content/manuals/ai/sandboxes/release-notes.md"),
-    },
-    "dhi": {
-        "repo": "docker-hardened-images/dhictl",
-        "file": Path("content/manuals/dhi/release-notes/cli.md"),
     },
 }
 
