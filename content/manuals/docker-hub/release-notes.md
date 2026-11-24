@@ -50,7 +50,7 @@ known issues for each Docker Hub release.
   requirements. If you see TLS errors, ensure your trust store includes the
   [Amazon Trust Services Root CAs](https://www.amazontrust.com/repository/). If
   you're a paid subscriber, you can [contact Docker
-  Support](https://hub.docker.com/support/contact/) if you need updated TLS
+  Support](https://app.docker.com/support/contact/) if you need updated TLS
   certificate details or the issue persists.
 
 ## 2026-05-06
