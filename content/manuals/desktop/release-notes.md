@@ -212,7 +212,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug where the installer could leave a file under `C:\ProgramData\DockerDesktop` with no permissions at all, making it unreadable to diagnostics and to later installs.
 - Fixed a bug where the disk image location could not be moved back to a folder it had previously been moved out of. Fixes [docker/desktop-feedback#565](https://github.com/docker/desktop-feedback/issues/565).
 - Fixed a bug where a failed update could put back Start Menu and desktop shortcuts that had been deleted on purpose.
-- `--user` mode is now the default for new Docker Desktop `.EXE` installations.
+- Interactive installation using the `.EXE` installer now selects per-user install mode by default.
 
 ### Security
 

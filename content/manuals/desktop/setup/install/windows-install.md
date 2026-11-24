@@ -34,6 +34,9 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
  
 Docker Desktop supports two installation modes. Per-user installation is recommended for most users and is selected by default in the installer. It does not require administrator privileges to install or update, and the WSL 2 backend it uses covers the needs of the vast majority of Docker Desktop users.
  
+> [!NOTE]
+Per-user installation allows end users to install Docker Desktop without administrator privileges. It should not be used by IT administrators deploying Docker Desktop, because it installs the application under the account running the installer, in %LOCALAPPDATA%\Programs\DockerDesktop.
+
 | | Per-user (recommended) | All users |
 |---|---|---|
 | Install location | `%LOCALAPPDATA%\Programs\DockerDesktop` | `C:\Program Files\Docker\Docker` |
