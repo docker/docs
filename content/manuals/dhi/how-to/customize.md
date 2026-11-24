@@ -435,10 +435,10 @@ accounts:
 |:---|:---|
 | `root` | Whether to enable the root user. Default is `false`. Required if `runs-as` is set to `root`. |
 | `runs-as` | The default user the container runs as. |
-| `users[].name` | Username. |
+| `users[].name` | Username. Required. |
 | `users[].uid` | User ID. Required. |
 | `users[].gid` | Primary group ID. Optional. |
-| `groups[].name` | Group name. |
+| `groups[].name` | Group name. Required. |
 | `groups[].gid` | Group ID. Required. |
 | `groups[].members` | Usernames to add to this group. Optional. |
 
@@ -455,7 +455,8 @@ environment:
 ```
 
 Quote values that a YAML parser would interpret as non-string types, for
-example `"false"`, `"0"`, and `"null"`.
+example `"false"`, `"0"`, and `"null"`. A variable can't have an empty value.
+To keep a variable from the base image, leave it out.
 
 #### Set labels and annotations
 
@@ -495,6 +496,10 @@ cmd:
 working-directory: /app
 ```
 
+The `entrypoint` and `cmd` lists can't be empty or contain an empty argument,
+and `working-directory` can't be empty. To keep the base image's value, leave
+the field out.
+
 #### Set platforms and compression
 
 To build for multiple architectures, list them under `platforms`. At least one
@@ -513,6 +518,9 @@ tooling.
 ```yaml
 compression: ZSTD
 ```
+
+Scaffolds from `docker dhi customization prepare` set `compression: ZSTD`. To
+leave compression unset, remove the line.
 
 ## OCI artifacts
 
