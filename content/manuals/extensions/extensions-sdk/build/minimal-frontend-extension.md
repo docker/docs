@@ -99,8 +99,6 @@ To preview the extension in Docker Desktop, close and open the Docker Desktop Da
 
 The left-hand menu displays a new tab with the name of your extension.
 
-![Minimal frontend extension](images/ui-minimal-extension.png)
-
 ## What's next?
 
 - Build a more [advanced frontend](frontend-extension-tutorial.md) extension.
