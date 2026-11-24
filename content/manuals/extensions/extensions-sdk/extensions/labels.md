@@ -12,8 +12,6 @@ Extensions use image labels to provide additional information such as a title, d
 
 This information is then displayed as an overview of the extension, so users can choose to install it.
 
-![An extension overview, generated from labels](images/marketplace-details.png)
-
 You can define [image labels](/reference/dockerfile.md#label) in the extension's `Dockerfile`.
 
 > [!IMPORTANT]
