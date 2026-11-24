@@ -88,8 +88,6 @@ Alternatively `build` can be an object with fields defined as follows:
 
 ### `additional_contexts`
 
-{{< summary-bar feature_name="Build additional contexts" >}}
-
 `additional_contexts` defines a list of named contexts the image builder should use during image build.
 
 `additional_contexts` can be a mapping or a list:
@@ -255,8 +253,6 @@ build:
 
 ### `dockerfile_inline`
 
-{{< summary-bar feature_name="Build dockerfile inline" >}}
-
 `dockerfile_inline` defines the Dockerfile content as an inlined string in a Compose file. When set, the `dockerfile`
 attribute is not allowed and Compose rejects any Compose file having both set.
 
@@ -271,8 +267,6 @@ build:
 ```
 
 ### `entitlements`
-
-{{< summary-bar feature_name="Build entitlements" >}}
 
 `entitlements` defines extra privileged entitlements to be allowed during the build.
 
@@ -419,8 +413,6 @@ Composes reports an error in the following cases:
 
 ### `privileged`
 
-{{< summary-bar feature_name="Build privileged" >}}
-
 `privileged` configures the service image to build with elevated privileges. Support and actual impacts are platform specific.
 
 ```yml
@@ -430,8 +422,6 @@ build:
 ```
 
 ### `provenance`
-
-{{< summary-bar feature_name="Compose provenance" >}}
 
 `provenance` configures the builder to add a [provenance attestation](https://slsa.dev/provenance/v0.2#schema) to the published image.
 
@@ -456,8 +446,6 @@ build:
 available in the local image store.
 
 ### `sbom`
-
-{{< summary-bar feature_name="Compose sbom" >}}
 
 `sbom` configures the builder to add a [provenance attestation](https://slsa.dev/provenance/v0.2#schema) to the published image.
 The value can be either a boolean to enable/disable sbom attestation, or a key=value string to set SBOM generator configuration. This let you
@@ -631,8 +619,6 @@ build:
 ```
 
 ### `ulimits`
-
-{{< summary-bar feature_name="Build ulimits" >}}
 
 `ulimits` overrides the default `ulimits` for a container. It's specified either as an integer for a single limit
 or as mapping for soft/hard limits.
