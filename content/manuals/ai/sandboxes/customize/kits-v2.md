@@ -44,10 +44,9 @@ For private registries, see
 [Registry credentials](../configuration/credentials.md#registry-credentials).
 
 Kit selection with `--kit` applies at creation. Recreate the sandbox to change
-its kit set, except for the limited updates supported by
-[`sbx kit add`](#execution-order). That command restarts the sandbox while
-preserving packages, images, volumes, and agent history. Kits can't be
-removed from a running sandbox.
+its kit set, except for mixins that [`sbx kit add`](#execution-order) accepts.
+That command restarts the sandbox while preserving packages, images, volumes,
+and agent history. Kits can't be removed from a running sandbox.
 
 ### Restrict kit sources
 
@@ -459,12 +458,22 @@ command can consume a bundled file from `files/home/`, but not one from
 `files/workspace/` or `setup.files`, because those files land later.
 
 `sbx kit add` recreates the sandbox rather than modifying it in place. It
-supports mixin kits limited to
-`environment.variables`, `setup.install`, `setup.startup`, and
-`permissions.network.allow`, which follow the same order as sandbox creation.
-Startup commands run after the kit is added and on each subsequent sandbox
-start. The command rejects kits that declare static files or `setup.files`.
-To use those fields, create the sandbox with the kit included.
+accepts a mixin kit unless the kit declares one of these fields:
+
+- `setup.files`
+- Static files under `files/`
+- `volumes`
+- Resource limits
+- `security.privileged`
+- `ports`
+- `permissions.network.deny`
+- `credentials`
+
+Other mixin fields apply in the same order as sandbox creation, including
+`environment.variables`, `setup.install`, `setup.startup`,
+`permissions.network.allow`, and `agentInstructions`. Startup commands run after
+the kit is added and on each subsequent sandbox start. To use a field the
+command rejects, remove the sandbox and create it again with the kit included.
 
 ### install
 
