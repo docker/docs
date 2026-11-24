@@ -15,6 +15,29 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 1.0.0
+
+{{< release-date date="2026-11-24" >}}
+
+[GitHub release](https://github.com/docker-hardened-images/dhictl/releases/tag/v1.0.0)
+
+This release adds validation improvements to the customizations workflow, including stricter path requirements, empty value rejection, and a new default compression setting.
+
+### Breaking Changes
+
+- `dhictl customization create` and `edit` now fail on empty values, where before the CLI sent them or ignored them. To inherit a value from the tag definition, remove the field instead. Existing YAML files must be updated:
+  - An empty or blank `working-directory` (previously treated as unset)
+  - An empty `entrypoint` or `cmd` list, or an empty argument in either
+  - An `environment` variable with an empty value, including `FOO:` with nothing after it
+  - A user or group under `accounts` without a `name`
+- This includes bulk files with an empty `working-directory` or `entrypoint`, which were tolerated before. A customization that already has an empty value stored needs it removed from the `get` output before it can be edited.
+- File and symlink paths must be absolute. A file `path`, a symlink `path` and a symlink `source` that don't start with `/` are now rejected on `create` and `edit`.
+
+### What's Changed
+
+- `dhictl customization prepare` now writes `compression: ZSTD` in the scaffold of an image customization, instead of a commented-out placeholder. It stays optional: remove the line to leave compression unset, or change it to `GZIP`. Existing files and customizations are unaffected.
+- The `edit` and `prepare` help text now says that a `name` that differs from the existing customization is ignored on `edit`. There is no change in behaviour.
+
 ## 0.0.14
 
 {{< release-date date="2026-11-23" >}}
@@ -25,7 +48,7 @@ This release requires `uid` and `gid` when creating or editing image customizati
 
 ### Breaking Changes
 
-- `dhictl customization create` and `edit` now fail when an ID is missing. Previously, the CLI silently filled in a default. Update existing YAML files as follows:
+- `dhictl customization create` and `edit` now fail when an ID is missing, where before the CLI silently filled in a default. Existing YAML files must be updated:
   - Each entry under `paths` needs both `uid` and `gid` (previously defaulted to `1000`)
   - Each user under `accounts` needs `uid`, and each group needs `gid` (previously read as `0`, root)
 - An explicit `0` is still accepted. `uid` and `gid` on symlinks, and a user's `gid`, stay optional.

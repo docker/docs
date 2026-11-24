@@ -11,6 +11,7 @@ Usage (from repo root):
 
     ./hack/sbx-release-notes.py
     ./hack/sbx-release-notes.py --preset dhi
+    ./hack/sbx-release-notes.py --preset dhi-terraform
     GITHUB_TOKEN=$(gh auth token) ./hack/sbx-release-notes.py
     ./hack/sbx-release-notes.py --minor-releases 3
 """
@@ -38,6 +39,10 @@ PRESETS: dict[str, dict] = {
     "dhi": {
         "repo": "docker-hardened-images/dhictl",
         "file": Path("content/manuals/dhi/release-notes/cli.md"),
+    },
+    "dhi-terraform": {
+        "repo": "docker-hardened-images/terraform-provider-dhi",
+        "file": Path("content/manuals/dhi/release-notes/terraform.md"),
     },
 }
 

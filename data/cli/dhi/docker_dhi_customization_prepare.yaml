@@ -19,10 +19,17 @@ long: |-
       - accounts override per sub-key; a users or groups list replaces the whole inherited list.
     A bulk customization inherits the same way, with each target merged with its own tag definition.
 
+    An image scaffold sets compression to ZSTD, the recommended default. It is optional: remove the line to
+    leave compression unset, or change it to GZIP.
+
+    File and symlink paths must be absolute.
+
     For a Helm chart, every reference of the chart is listed under variable_mappings, pointing at dhi.io.
     To point a reference elsewhere, uncomment its repository and either tag_definition_id (another tag
     definition of a mirrored image) or customization_id (a customization). Sub-charts can only point at a
     customization or dhi.io. Do not change the variable names.
+
+    The name of a customization can't be changed after it is created: edit ignores a name that differs from the existing one.
 
     The scaffold is written to stdout; redirect to a file if needed:
       docker dhi customization prepare golang 1.24-dev > customization.yaml
