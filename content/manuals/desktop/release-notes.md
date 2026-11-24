@@ -24,6 +24,63 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.101.0
+
+{{< release-date date="2026-11-30" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.101.0" build_path="/TBC/" >}}
+
+### New {#41010-new}
+
+- [Docker VMM](/manuals/desktop/features/vmm.md) is now generally available.
+- Added Kubernetes `kind` support for v1.37+ clusters using the v1beta4 config format.
+
+### Updates {#41010-updates}
+
+- Docker Offload `v0.7.76`
+- Docker Agent `v1.162.0`
+- [Docker Compose v5.8.0](https://github.com/docker/compose/releases/tag/v5.8.0)
+- [Docker Engine v29.10.0](https://docs.docker.com/engine/release-notes/29/#29100)
+- [Docker Buildx v0.39.0](https://github.com/docker/buildx/releases/tag/v0.39.0)
+- [runc v1.5.3](https://github.com/opencontainers/runc/releases/tag/v1.5.3)
+- [Credential helpers v0.9.13](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.13) 
+
+### Bug fixes and enhancements {#41010-bug-fixes-and-enhancements}
+
+#### For all platforms {#41010-for-all-platforms}
+
+- Fixed Gordon continuing to use the Deep model after switching back to Fast. Fixes [docker/desktop-feedback#812](https://github.com/docker/desktop-feedback/issues/812).
+- Removed the misleading "0" badge from the My extensions tab when no extension updates are available. Fixes [docker/desktop-feedback#818](https://github.com/docker/desktop-feedback/issues/818). 
+- Fixed a dashboard crash with a "too far apart with stepSize of 1 second" error after Docker Desktop had been running for more than a day. Fixes [docker/desktop-feedback#386](https://github.com/docker/desktop-feedback/issues/386).
+- Fixed a crash on the **Images** view when an image pull finished or failed.
+- Fixed an issue where Docker Desktop could consume excessive background network connections and eventually crash when Docker Offload was enabled while signed out.
+- Fixed an issue where Docker Desktop could sign users out when a token refresh failed behind a WAF or proxy.
+- Fixed `/initd services` using a full CPU core when the VM's kernel log reader stopped. Fixes [docker/desktop-feedback#502](https://github.com/docker/desktop-feedback/issues/502).
+- Fixed a bug in Enhanced Container Isolation (ECI) that was causing a pre-existing `kind` cluster to fail to come up after a Docker Desktop restart.
+- Fixed Gordon AI chat to display clear, user-friendly error messages instead of exposing AI provider names or generic errors when conversations are too large or requests fail.
+
+#### For Mac {#41010-for-mac}
+
+- Fixed edge case where Docker Desktop could report stale errors despite analytics being disabled. Fixes [docker/for-mac#7768](https://github.com/docker/for-mac/issues/7768). 
+- Fixed AppleScript quit commands being delivered to the Docker VMM helper instead of Docker Desktop. 
+- Fixed moving the disk image location off an HFS+ volume failing with an "inappropriate ioctl for device" error. Fixes [docker/desktop-feedback#195](https://github.com/docker/desktop-feedback/issues/195).
+
+#### For Windows {#41010-for-windows}
+
+- Fixed dashboard crash when `ELECTRON_DISABLE_SANDBOX` is set on a Windows system. Fixes [docker/desktop-feedback#851](https://github.com/docker/desktop-feedback/issues/851).
+- Fixed Microsoft Store installs failing when the Virtual Machine Platform Windows feature is not enabled.
+- Fixed Docker Desktop reporting that the user is not in the `docker-users` group, instead of asking them to sign out and back in, after the group was added during install. 
+- Docker Desktop no longer disables proactive memory compaction and watermark boosting in the WSL 2 kernel that all WSL distros share. Before this, host-to-guest connections and Windows interop could fail in other distros. Fixes [docker/desktop-feedback#809](https://github.com/docker/desktop-feedback/issues/809).
+- Added an `nvidia.com/gpu` CDI device on Windows with the WSL 2 backend and an NVIDIA GPU, so `docker run --device nvidia.com/gpu=all` and CDI-based tools can use the GPU.
+
+#### For Linux {#41010-for-linux}
+
+- Fixed a crash on Linux where the Docker Desktop UI failed to start on systems with unprivileged user namespaces disabled.
+
+### Security {#41010-security}
+
+- Fixed [CVE-2026-133304](https://www.cve.org/cverecord?id=CVE-2026-133304). Docker Desktop now rejects new networks whose subnet overlaps its internal network, such as `192.168.0.0/16`, and new containers given a fixed address inside it.
+
 ## 4.100.1
 
 {{< release-date date="2026-11-23" >}}
