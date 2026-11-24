@@ -826,8 +826,6 @@ There is a performance penalty for applications that swap memory to disk often.
 
 ### `models`
 
-{{< summary-bar feature_name="Compose models" >}}
-
 `models` defines which AI models the service should use at runtime. Each referenced model must be defined under the [`models` top-level element](models.md).
 
 ```yaml
