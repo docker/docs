@@ -25,7 +25,7 @@ This release requires `uid` and `gid` when creating or editing image customizati
 
 ### Breaking Changes
 
-- `dhictl customization create` and `edit` now fail when an ID is missing, where before the CLI silently filled in a default. Existing YAML files must be updated:
+- `dhictl customization create` and `edit` now fail when an ID is missing. Previously, the CLI silently filled in a default. Update existing YAML files as follows:
   - Each entry under `paths` needs both `uid` and `gid` (previously defaulted to `1000`)
   - Each user under `accounts` needs `uid`, and each group needs `gid` (previously read as `0`, root)
 - An explicit `0` is still accepted. `uid` and `gid` on symlinks, and a user's `gid`, stay optional.
