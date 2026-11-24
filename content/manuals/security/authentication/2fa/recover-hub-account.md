@@ -60,7 +60,7 @@ You're signed in and 2FA is off. To protect your account again, follow
 ## Contact Docker Support
 
 If you lost both your authenticator app and your recovery code, open the
-[Contact Support form](https://hub.docker.com/support/contact/?category=2fa-lockout).
+[Contact Support form](https://app.docker.com/support/contact/?category=2fa-lockout).
 The subject and description already describe a 2FA lockout. Enter the
 email address on your Docker account, then follow the instructions from
 Docker Support.
