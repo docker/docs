@@ -455,6 +455,10 @@ button:disabled {
   margin: 0;
 }
 
+[data-tooltip-body] {
+  z-index: var(--z-index-tooltip);
+}
+
 /* Bridge the tooltip's offset so it stays open when the pointer enters it. */
 [data-tooltip-body]::before {
   content: "";
