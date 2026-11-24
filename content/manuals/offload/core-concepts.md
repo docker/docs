@@ -93,7 +93,7 @@ machine](sandboxes.md#connect-from-more-than-one-machine).
 
 | | Docker Offload | [Docker Offload v1](v1/_index.md) |
 | --- | --- | --- |
-| Subscription | Docker Agentic Platform, purchased by individual developers | Docker Offload, purchased by an organization and a Teams or Business subscription. |
+| Subscription | Docker Agentic Platform, purchased by individual developers | Docker Offload v1, purchased by an organization with a Teams or Business subscription. |
 | Start with | `docker --cloud <command>` or `docker offload create` | `docker offload start`, or the Dashboard toggle |
 | On stop | Sandbox pauses and keeps its state | Environment is terminated and its contents are deleted |
 | Multiple machines | Connect to the same sandbox from more than one machine | One session per user at a time |
