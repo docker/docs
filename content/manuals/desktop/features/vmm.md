@@ -77,8 +77,6 @@ Docker VMM is available on Linux with Docker Desktop 4.98 and later.
 2. Select **Docker VMM**.
 3. Select **Apply & restart**.
 
-If the option is unavailable, turn on **Beta features** in **Settings**.
-
 {{< /tab >}}
 {{< /tabs >}}
 

@@ -96,7 +96,7 @@ Virtual Machine Manager (VMM)** to see which one applies to you.
    %ProgramData%\DockerDesktop\vm-data\DockerDesktop.vhdx
    ```
 
-   For Docker VMM (Beta), back up the following file:
+   For Docker VMM, back up the following file:
 
    ```console
    %LOCALAPPDATA%\Docker\vm-data\DockerDesktop.vhdx

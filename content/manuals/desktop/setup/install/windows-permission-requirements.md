@@ -26,7 +26,7 @@ In per-user mode, Docker Desktop installs to `%LOCALAPPDATA%\Programs\DockerDesk
 - After installation, Docker Desktop can be run without administrator privileges.
 - Some settings marked **Requires password** in **Settings** still require elevation. When you change one of these settings and select **Apply**, Docker Desktop opens a UAC prompt for administrator access.
  
-Per-user installation does not install the privileged helper service `com.docker.service` automatically. As a result, features that depend on it, such as the Hyper-V backend and Windows containers, are not available. Docker VMM (Beta) is available in per-user mode and does not require the privileged helper. For most users, the WSL 2 or Docker VMM backend covers the majority of use cases.
+Per-user installation does not install the privileged helper service `com.docker.service` automatically. As a result, features that depend on it, such as the Hyper-V backend and Windows containers, are not available. Docker VMM is available in per-user mode and does not require the privileged helper. For most users, the WSL 2 or Docker VMM backend covers the majority of use cases.
  
 ### All-users installation
  
