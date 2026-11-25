@@ -23,7 +23,8 @@ download-url-base: https://download.docker.com/linux/raspbian
 > **Migration options**
 > - **64-bit ARM:** Install the Debian `arm64` packages (fully supported). See the
 >   [Debian installation instructions](debian.md).
-> - **32-bit ARM (v7):** Install the Debian `armhf` packages (targets ARMv7 CPUs).
+> - **32-bit ARM (v7):** Install the Debian `armhf` packages (targets ARMv7 CPUs). See the
+>   [Debian installation instructions](debian.md).
 >
 > **Note:** Older devices based on the ARMv6 architecture are no longer supported by official packages, including:
 > - Raspberry Pi 1 (Model A/B/A+/B+)
@@ -72,7 +73,8 @@ To install Docker Engine, you need one of the following OS versions:
 >
 > Migration options:
 > - 64-bit ARM: use Debian `arm64` packages; see the [Debian installation instructions](debian.md).
-> - 32-bit ARM (v7): use Debian `armhf` packages (targets ARMv7 CPUs).
+> - 32-bit ARM (v7): use Debian `armhf` packages (targets ARMv7 CPUs); see the
+>   [Debian installation instructions](debian.md).
 >
 > Note: ARMv6-based devices (Raspberry Pi 1 models and Raspberry Pi Zero/Zero W) are not supported by
 > official packages.
@@ -113,10 +115,6 @@ clean installation, and prefer to clean up any existing data, read the
 ## Installation methods
 
 You can install Docker Engine in different ways, depending on your needs:
-
-- Docker Engine comes bundled with
-  [Docker Desktop for Linux](/manuals/desktop/setup/install/linux/_index.md). This is
-  the easiest and quickest way to get started.
 
 - Set up and install Docker Engine from
   [Docker's `apt` repository](#install-using-the-repository).
