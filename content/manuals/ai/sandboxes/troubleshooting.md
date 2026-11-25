@@ -143,6 +143,19 @@ Changing a host symlink to point elsewhere doesn't move an existing static
 mount. The sandbox retains the original source, and filesystem policy checks
 when you reuse the sandbox include that source.
 
+## Sandbox won't restart after a drive disconnects
+
+If an additional workspace uses a mapped SMB drive on Windows, restore the
+original drive mapping before restarting the sandbox. The saved mapped path
+must remain available for filesystem policy checks, even if the network share
+is still reachable. Remapping the drive doesn't change the saved workspace
+source.
+
+To use a different mapped path, remove and recreate the sandbox with the
+updated workspace path. Before removing the sandbox,
+[copy out any files you want to keep](usage.md#copy-files-between-host-and-sandbox)
+if it's still accessible. Removing a sandbox deletes its sandbox data.
+
 ## Kiro, Copilot, or Droid shorthand fails
 
 In Docker Sandboxes v0.42, `sbx run kiro`, `sbx run copilot`, and
