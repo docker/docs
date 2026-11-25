@@ -381,6 +381,7 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="gordon-title"
+    :data-chat-status="isLoading ? 'answering' : (error ? 'error' : 'idle')"
     x-trap.inert.noscroll="$store.gordon.isOpen"
     x-show="$store.gordon.isOpen"
     x-transition:enter="transition ease-out duration-200"
@@ -495,6 +496,7 @@
       <div x-show="messages.length > 0" class="relative flex flex-col gap-4">
         <template x-for="(message, index) in messages" :key="index">
           <div
+            :data-message-role="message.role"
             :class="message.role === 'user' ? 'flex justify-end' : 'flex justify-start'"
           >
             <div
