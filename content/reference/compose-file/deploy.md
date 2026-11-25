@@ -7,6 +7,10 @@ aliases:
 weight: 150
 ---
 
+> [!NOTE] 
+>
+> This is an optional part of the Compose Specification.
+
 {{% include "compose/deploy.md" %}}
 
 ## Attributes

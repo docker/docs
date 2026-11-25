@@ -7,13 +7,10 @@ keywords: compose, docker compose, models, ai, machine learning, cloud providers
 weight: 25
 ---
 
-{{< summary-bar feature_name="Compose models" >}}
-
 Compose lets you define AI models as core components of your application, so you can declare model dependencies alongside services and run the application on any platform that supports the Compose Specification.
 
 ## Prerequisites
 
-- Docker Compose v2.38 or later
 - A platform that supports Compose models such as [Docker Model Runner (DMR)](/manuals/ai/model-runner/_index.md#requirements).
 
 ## What are Compose models?

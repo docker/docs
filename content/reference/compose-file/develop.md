@@ -9,7 +9,7 @@ weight: 160
 
 > [!NOTE] 
 >
-> Develop is an optional part of the Compose Specification. It is available with Docker Compose version 2.22.0 and later.
+> This is an optional part of the Compose Specification.
 
 {{% include "compose/services-develop.md" %}}
 
@@ -55,14 +55,12 @@ Compose to monitor source code for changes. For more information, see [Use Compo
 `action` defines the action to take when changes are detected. If `action` is set to:
 
 - `rebuild`: Compose rebuilds the service image based on the `build` section and recreates the service with the updated image.
-- `restart`: Compose restarts the service container. Available with Docker Compose version 2.32.0 and later.
+- `restart`: Compose restarts the service container.
 - `sync`: Compose keeps the existing service container(s) running, but synchronizes source files with container content according to the `target` attribute.
-- `sync+restart`: Compose synchronizes source files with container content according to the `target` attribute, and then restarts the container. Available with Docker Compose version 2.23.0 and later.
-- `sync+exec`: Compose synchronizes source files with container content according to the `target` attribute, and then executes a command inside the container. Available with Docker Compose version 2.32.0 and later.
+- `sync+restart`: Compose synchronizes source files with container content according to the `target` attribute, and then restarts the container. 
+- `sync+exec`: Compose synchronizes source files with container content according to the `target` attribute, and then executes a command inside the container. 
 
 #### `exec`
-
-{{< summary-bar feature_name="Compose exec" >}}
 
 `exec` is only relevant when `action` is set to `sync+exec`. Like [service hooks](services.md#post_start), `exec` is used to define the command to be run inside the container once it has started.
 
