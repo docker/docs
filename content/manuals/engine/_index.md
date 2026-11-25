@@ -43,6 +43,14 @@ grid:
   description: Read the release notes for the latest version.
   icon: file-plus
   link: /engine/release-notes
+- title: CLI reference
+  description: Find commands and options for managing images, containers, networks, and volumes.
+  icon: terminal
+  link: /reference/cli/docker/
+- title: Daemon reference
+  description: Find startup options and configuration settings for `dockerd`.
+  icon: terminal
+  link: /reference/cli/dockerd/
 aliases:
 - /edge/
 - /engine/ce-ee-node-activate/

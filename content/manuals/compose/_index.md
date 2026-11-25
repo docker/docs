@@ -42,6 +42,10 @@ grid:
   description: Explore general FAQs and find out how to give feedback.
   icon: circle-help
   link: /compose/faq
+- title: CLI reference
+  description: Find Compose commands and options for managing multi-container applications.
+  icon: terminal
+  link: /reference/cli/docker/compose/
 aliases:
 - /compose/overview/
 - /compose/swarm/

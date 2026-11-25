@@ -35,6 +35,10 @@ grid:
   description: Provide feedback on Docker Desktop or Docker Desktop features.
   icon: message-square
   link: /desktop/troubleshoot-and-support/feedback/
+- title: CLI reference
+  description: Find commands and options for managing Docker Desktop from your terminal.
+  icon: terminal
+  link: /reference/cli/docker/desktop/
 aliases:
   - /desktop/mac/
   - /desktop/windows/

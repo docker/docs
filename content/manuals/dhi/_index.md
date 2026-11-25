@@ -1,6 +1,7 @@
 ---
 title: Docker Hardened Images
 description: Secure, minimal, and production-ready base images
+keywords: docker hardened images, dhi, secure images, containers
 weight: 8
 aliases:
   - /dhi/features/
@@ -42,6 +43,10 @@ params:
       description: New features, improvements, and changes in Docker Hardened Images.
       icon: newspaper
       link: /dhi/release-notes/platform/
+    - title: CLI reference
+      description: Find commands and options for browsing, mirroring, and customizing Docker Hardened Images.
+      icon: terminal
+      link: /reference/cli/docker/dhi/
 ---
 
 Docker Hardened Images (DHI) provide minimal, secure, and production-ready

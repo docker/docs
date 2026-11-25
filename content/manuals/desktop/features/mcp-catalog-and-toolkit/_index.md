@@ -39,6 +39,10 @@ grid:
     description: Common questions about MCP security, credentials, and server verification
     icon: shield-check
     link: /ai/mcp-catalog-and-toolkit/faqs/
+  - title: CLI reference
+    description: Find MCP commands and options for managing servers, clients, profiles, and catalogs.
+    icon: terminal
+    link: /reference/cli/docker/mcp/
 ---
 
 {{< summary-bar feature_name="Docker MCP Catalog and Toolkit" >}}

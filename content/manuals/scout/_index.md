@@ -42,6 +42,10 @@ grid:
     description: |
       A Personal subscription includes up to 1 repository. Upgrade for more.
     icon: circle-arrow-up
+  - title: CLI reference
+    description: Find Scout commands and options for analyzing images and evaluating policies.
+    icon: terminal
+    link: /reference/cli/docker/scout/
 ---
 
 Container images consist of layers and software packages, which are susceptible to vulnerabilities.

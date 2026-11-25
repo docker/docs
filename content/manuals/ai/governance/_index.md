@@ -24,6 +24,10 @@ grid:
     description: "Diagnose governance and policy issues."
     link: /ai/governance/troubleshooting/
     icon: search
+  - title: CLI reference
+    description: Find `sbx policy` commands and options for managing local sandbox network rules.
+    icon: terminal
+    link: /reference/cli/sbx/policy/
 ---
 
 Agents in [Docker Sandboxes](../sandboxes/_index.md) work on their own. They

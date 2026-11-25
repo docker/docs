@@ -46,6 +46,10 @@ grid:
   description: Orchestrate your builds with Bake.
   icon: cake
   link: /build/bake/
+- title: CLI reference
+  description: Find Buildx commands and options for building images and managing builders.
+  icon: terminal
+  link: /reference/cli/docker/buildx/
 aliases:
 - /buildx/working-with-buildx/
 - /develop/develop-images/build_enhancements/

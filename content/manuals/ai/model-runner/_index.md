@@ -35,6 +35,10 @@ grid:
     description: "Set up a web chat interface for your models."
     link: /ai/model-runner/openwebui-integration/
     icon: terminal
+  - title: CLI reference
+    description: Find Model Runner commands and options for managing and running AI models.
+    icon: terminal
+    link: /reference/cli/docker/model/
 ---
 
 {{< summary-bar feature_name="Docker Model Runner" >}}

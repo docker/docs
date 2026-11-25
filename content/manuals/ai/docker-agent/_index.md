@@ -37,6 +37,10 @@ grid:
     description: "Configure agents, model settings, and tools."
     link: /ai/docker-agent/configuration/overview/
     icon: settings
+  - title: CLI reference
+    description: Find Docker Agent commands and flags for running and sharing agent teams.
+    icon: terminal
+    link: /ai/docker-agent/features/cli/
 ---
 
 [Docker Agent](https://github.com/docker/docker-agent) is an open-source framework

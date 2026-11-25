@@ -35,6 +35,10 @@ grid:
   description: Provide feedback on Docker Offload.
   icon: message-square
   link: /offload/feedback/
+- title: CLI reference
+  description: Find Offload commands and options for managing cloud sandboxes.
+  icon: terminal
+  link: /reference/cli/docker/offload/
 aliases:
 - /harmonia/
 ---
