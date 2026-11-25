@@ -58,7 +58,7 @@ jobs:
           driver-opts: image=${{ env.SETUP_BUILDKIT_IMAGE }}
       -
         name: Build website
-        uses: docker/bake-action@82490499d2e5613fcead7e128237ef0b0ea210f7 # v7
+        uses: docker/bake-action@59cb1203cd42bcefd40a1b6d73b589e48c86040e # v7
         with:
           source: .
           files: |
@@ -115,7 +115,7 @@ jobs:
       -
         name: Update Cloudfront config
         if: ${{ env.DOCS_CLOUDFRONT_ID != '' }}
-        uses: docker/bake-action@82490499d2e5613fcead7e128237ef0b0ea210f7 # v7
+        uses: docker/bake-action@59cb1203cd42bcefd40a1b6d73b589e48c86040e # v7
         with:
           source: .
           files: |
