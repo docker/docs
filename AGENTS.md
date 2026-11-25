@@ -231,6 +231,15 @@ resolve the worktree path. Use `lint` and `vale` targets separately instead.
 Never modify `hugo.yaml` to work around this. The `test`, `path-warnings`,
 and `validate-vendor` targets run correctly in CI.
 
+## Test scope
+
+Extend an existing suite only when a change introduces a meaningful failure
+risk or fixes a consequential bug. Use Node tests for logic and build utilities,
+and `hack/test/browser.spec.mjs` for browser behavior. Test observable behavior;
+avoid assertions that repeat configuration or pin incidental styling.
+Adding a runner, dependency, or test category requires explicit agreement.
+Test setup and commands are in [CONTRIBUTING.md](CONTRIBUTING.md#testing).
+
 ## Verification loop
 
 1. Make changes

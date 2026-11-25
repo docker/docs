@@ -40,7 +40,13 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "validate-vendor", "validate-api-reference"]
+  targets = ["lint", "test", "test-site", "unused-media", "test-go-redirects", "dockerfile-lint", "validate-vendor", "validate-api-reference"]
+}
+
+target "test-site" {
+  target = "test-site"
+  output = ["type=cacheonly"]
+  provenance = false
 }
 
 target "test" {

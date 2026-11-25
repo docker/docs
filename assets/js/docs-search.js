@@ -1,5 +1,24 @@
 let pagefind;
-export default () => ({
+const loadPagefind = () =>
+  (pagefind ??= import("/pagefind/pagefind.js")
+    .then(async (api) => {
+      await api.options({
+        ranking: {
+          termFrequency: 0,
+          termSimilarity: 2,
+          pageLength: 0,
+          termSaturation: 1,
+          metaWeights: { title: 10, description: 4, keywords: 6 },
+        },
+      });
+      return api;
+    })
+    .catch((error) => {
+      pagefind = undefined;
+      throw error;
+    }));
+
+export default (getPagefind = loadPagefind) => ({
   query: "",
   results: [],
   matches: [],
@@ -45,24 +64,7 @@ export default () => ({
     this.loading = true;
     if (!this.results.length) this.status = "Searching…";
     try {
-      pagefind ??= import("/pagefind/pagefind.js")
-        .then(async (api) => {
-          await api.options({
-            ranking: {
-              termFrequency: 0,
-              termSimilarity: 2,
-              pageLength: 0,
-              termSaturation: 1,
-              metaWeights: { title: 10, description: 4, keywords: 6 },
-            },
-          });
-          return api;
-        })
-        .catch((error) => {
-          pagefind = undefined;
-          throw error;
-        });
-      const api = await pagefind;
+      const api = await getPagefind();
       if (sequence !== this.sequence) return;
       const response = await api.search(query);
       if (sequence !== this.sequence) return;

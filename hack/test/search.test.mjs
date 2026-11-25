@@ -1,24 +1,10 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const source = await readFile(
-  new URL("../../assets/js/docs-search.js", import.meta.url),
-  "utf8",
-);
-let moduleId = 0;
+import createSearchState from "../../assets/js/docs-search.js";
 
-// Supply Pagefind at the module boundary; exercise the production search state.
-async function createSearch(api) {
-  const injected = source.replace(
-    'import("/pagefind/pagefind.js")',
-    "Promise.resolve(globalThis.searchRegressionApi)",
-  );
-  globalThis.searchRegressionApi = { options: async () => {}, ...api };
-  const { default: create } = await import(
-    `data:text/javascript;base64,${Buffer.from(injected + `\n// ${++moduleId}`).toString("base64")}`
-  );
-  return create();
+function createSearch(api) {
+  return createSearchState(async () => api);
 }
 const match = (
   index,
@@ -26,7 +12,7 @@ const match = (
 ) => ({ data });
 
 test("all matches can be loaded in batches without duplicates", async () => {
-  const search = await createSearch({
+  const search = createSearch({
     search: async () => ({
       results: Array.from({ length: 25 }, (_, i) => match(i)),
     }),
@@ -45,7 +31,7 @@ test("all matches can be loaded in batches without duplicates", async () => {
 
 test("a failed additional batch preserves loaded results and can be retried", async () => {
   let fail = true;
-  const search = await createSearch({
+  const search = createSearch({
     search: async () => ({
       results: Array.from({ length: 13 }, (_, i) =>
         match(i, async () => {
@@ -68,8 +54,10 @@ test("a failed additional batch preserves loaded results and can be retried", as
 
 test("editing or clearing invalidates results before the debounce expires", async () => {
   for (const query of ["", "replacement"]) {
+    const { promise: started, resolve: signalStarted } =
+      Promise.withResolvers();
     let release;
-    const search = await createSearch({
+    const search = createSearch({
       search: async () => ({
         results: [
           match(
@@ -77,6 +65,7 @@ test("editing or clearing invalidates results before the debounce expires", asyn
             () =>
               new Promise((resolve) => {
                 release = resolve;
+                signalStarted();
               }),
           ),
         ],
@@ -84,7 +73,7 @@ test("editing or clearing invalidates results before the debounce expires", asyn
     });
     search.query = "original";
     const pending = search.search();
-    while (!release) await Promise.resolve();
+    await started;
     search.queueSearch(query);
     release({ url: "/old" });
     await pending;
@@ -96,14 +85,18 @@ test("editing or clearing invalidates results before the debounce expires", asyn
 });
 
 test("visible results stay in place until a replacement batch is ready", async () => {
+  const { promise: started, resolve: signalStarted } = Promise.withResolvers();
   let release;
-  const search = await createSearch({
+  const search = createSearch({
     search: async (query) => ({
       results: [
         match(0, () =>
           query === "original"
             ? Promise.resolve({ url: "/original" })
-            : new Promise((resolve) => (release = resolve)),
+            : new Promise((resolve) => {
+                release = resolve;
+                signalStarted();
+              }),
         ),
       ],
     }),
@@ -113,7 +106,7 @@ test("visible results stay in place until a replacement batch is ready", async (
   search.queueSearch("replacement");
   assert.deepEqual(search.results, [{ url: "/original" }]);
   const pending = search.search();
-  while (!release) await Promise.resolve();
+  await started;
   assert.deepEqual(search.results, [{ url: "/original" }]);
   release({ url: "/replacement" });
   await pending;
@@ -122,7 +115,7 @@ test("visible results stay in place until a replacement batch is ready", async (
 
 test("editing also invalidates an in-flight additional batch", async () => {
   let release;
-  const search = await createSearch({
+  const search = createSearch({
     search: async () => ({
       results: Array.from({ length: 13 }, (_, i) =>
         match(i, () =>

@@ -146,9 +146,9 @@ security overrides, server and parameter precedence, and request generation.
 Engine v1.40–v1.56 in ReDoc, and byte-identical published specifications. It
 also checks local links and fragments from API pages, including links to
 `docs.docker.com`. The site `htmltest` checks include migrated Hub, DVP,
-Registry, and AI Governance references. `browser-checks.mjs` exports a
-Playwright check for navigation, page aliases, filtering, requests, and narrow
-screens.
+Registry, and AI Governance references. The shared browser suite checks API
+operation filtering and request copying. Run it with `docker buildx bake test-site`;
+see [Testing](../../CONTRIBUTING.md#testing) for local setup.
 
 Callbacks and webhook navigation are unsupported and fail validation. Request
 examples are POSIX shell templates; they do not make service calls.

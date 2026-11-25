@@ -113,7 +113,39 @@ formatted markup, and other things. To run the tests:
 $ docker buildx bake validate
 ```
 
-If this command doesn't result in any errors, you're good to go!
+This includes Markdown lint, HTML and link checks, build utility tests, and
+browser tests. For site code changes, run only the utility and browser tests with
+`docker buildx bake test-site`. The build workflow runs the same target.
+
+To run those tests outside Docker, install Node.js 24, Python 3, and the Hugo
+version pinned in `Dockerfile`, then prepare the site:
+
+```console
+$ npm ci
+$ npx --no-install playwright install --with-deps chromium
+$ hugo --environment development --baseURL http://127.0.0.1:1313 --panicOnWarning
+$ node hack/flatten-and-resolve.js public
+$ npx pagefind@1.5.2 --site public
+$ npm test
+```
+
+`npm test` runs Node tests, then starts a local server for Playwright Test.
+The browser tests cover navigation, search, keyboard and clipboard behavior,
+API requests, card rendering, and accessibility on representative pages.
+They run in desktop light mode and mobile dark mode, block external requests,
+and mock chat responses. HTML and link validation remains a separate Bake check.
+
+Set `DOCS_TEST_URL` to test an already served build with Pagefind instead of
+starting the local server. Set `CHROMIUM_PATH` to use an installed Chromium
+binary. Local failure screenshots, traces, and accessibility findings go under
+`tmp/test-results`.
+
+On ARM hosts with 64 KiB memory pages, the packaged Pagefind binary can fail
+in jemalloc. Build the pinned release with a supported Rust toolchain using
+`cargo install pagefind --version 1.5.2 --locked`, then run `pagefind --site public`.
+
+Keep tests focused on consequential failures. Extend the existing suites rather
+than adding separate runners or checks for incidental design choices.
 
 ## Content not edited here
 
