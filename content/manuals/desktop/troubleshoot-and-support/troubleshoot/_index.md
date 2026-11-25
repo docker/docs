@@ -65,10 +65,10 @@ If you are a Mac user, you also have the option to **Uninstall** Docker Desktop 
 
 In some cases, it's useful to run the diagnostics yourself, for instance, if the Docker Desktop Dashboard cannot start.
 
-Run the [`docker desktop diagnose`](/manuals/desktop/features/desktop-cli.md) command:
+Run the [`docker desktop diagnose`](/manuals/desktop/features/desktop-cli.md) command to create and upload diagnostics:
 
 ```console
-$ docker desktop diagnose
+$ docker desktop diagnose --upload
 ```
 
 Gathering diagnostics may take several minutes. Wait for the process to complete before closing the terminal.
