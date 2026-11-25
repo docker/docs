@@ -34,7 +34,7 @@
       {{- $loaderURL = getenv "HUGO_GORDON_LOADER_URL" }}
     {{- end }}
     window.GORDON_PROXY_URL = {{ $proxyURL }};
-    window.GORDON_BACKEND_URL = {{ printf "%s/gordon-docs/backend" $proxyURL }};
+    window.GORDON_BACKEND_URL = {{ printf "%s/gordon-web/backend" $proxyURL }};
     window.GORDON_LOADER_URL = {{ or $loaderURL (printf "%s/web-assistant/loader.js" $proxyURL) }};
   {{- end }}
 </script>
