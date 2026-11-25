@@ -456,18 +456,10 @@ $ sbx port publish my-sandbox 8080:3000
 $ open http://localhost:8080
 ```
 
-To let the OS pick a free host port instead of choosing one yourself, specify
-only the sandbox port. Then use `sbx port ls` to check which host port was
-assigned:
+For OS-assigned host ports and port mappings across restarts, see
+[Local services](workflows/development.md#accessing-services-in-the-sandbox).
 
-```console
-$ sbx port publish my-sandbox 3000
-$ sbx port ls my-sandbox
-```
-
-`sbx ls` shows active port mappings alongside each sandbox. `sbx port ls` lists
-them in detail. The `CREATED` column shows the sandbox age, and the `STATUS`
-column identifies sandboxes kept running in detached mode with `(detached)`.
+`sbx ls` shows active port mappings alongside each sandbox:
 
 ```console
 $ sbx ls
@@ -482,9 +474,7 @@ $ sbx port unpublish my-sandbox 8080:3000
 ```
 
 When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
-`sbx port publish` to publish ports on that sandbox. For dev server and host-service
-recipes, see
-[Local services](workflows/development.md#local-services).
+`sbx port publish` to publish ports on that sandbox.
 
 ## What persists
 
