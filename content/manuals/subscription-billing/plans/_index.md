@@ -6,7 +6,7 @@ description:
   organizations.
 keywords:
   docker products, docker subscriptions, docker team, docker business,
-  ai governance, dhi select, docker build cloud, gordon plans,
+  ai governance, dhi select, docker build cloud,
   docker agentic platform, product catalog
 weight: 10
 aliases:
@@ -23,10 +23,6 @@ grid:
       Personal and organization plans, including build and runtime minutes.
     link: /subscription-billing/plans/docker/
     icon: credit-card
-  - title: Gordon plans
-    description: Usage plans that increase your Gordon allowance.
-    link: /subscription-billing/plans/gordon/
-    icon: /icons/gordon.svg
   - title: Docker Agentic Platform
     description: Pay-as-you-go cloud compute for individual accounts.
     link: /subscription-billing/plans/docker-agentic-platform/
@@ -67,7 +63,6 @@ Compare billing models and tiers before you subscribe.
 | --- | --- | --- |
 | [Docker](/manuals/subscription-billing/plans/docker.md) | Flat-rate plans for individual and organization accounts | Docker Personal, Docker Pro, Docker Team, Docker Business |
 | [Docker Hardened Images (DHI)](/manuals/subscription-billing/plans/dhi.md) | Annual plans billed per repository. DHI Community is free. | DHI Community, DHI Select, DHI Enterprise |
-| [Gordon](/manuals/subscription-billing/plans/gordon.md) | Monthly plans that raise your Gordon usage allowance | Gordon Plus, Gordon Max, Gordon Ultra |
 | [Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md) | Pay-as-you-go cloud compute, billed monthly | Pay-as-you-go |
 | [AI Governance](/manuals/subscription-billing/plans/ai-governance.md) | Licenses purchased through Docker sales. | AI Governance |
 | [Docker Verified Publisher (DVP)](/manuals/subscription-billing/plans/docker-verified-publisher.md) | Flat-rate annual plans. DVP Growth lets you add consuming domains in blocks of 25. | DVP Starter, DVP Growth |

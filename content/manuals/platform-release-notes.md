@@ -205,7 +205,7 @@ and subscriptions.
 ### New
 
 - You can now purchase
-  [Gordon Plus, Max, and Ultra plans](/manuals/subscription-billing/plans/gordon.md)
+  [Gordon Plus, Max, and Ultra plans](/manuals/ai/gordon/usage-limits.md)
   for individual accounts from the billing portal in Docker Home.
 - Organizations can now purchase
   [DHI Select](/manuals/subscription-billing/plans/dhi.md) repositories via

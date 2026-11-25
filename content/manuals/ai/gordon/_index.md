@@ -3,6 +3,7 @@ title: Gordon
 description:
   AI assistant for Docker workflows - execute tasks, debug issues, and
   manage containers with intelligent assistance
+keywords: [gordon, ai assistant, docker desktop, cli]
 weight: 40
 params:
   sidebar:
@@ -44,11 +45,11 @@ Gordon is available on four surfaces:
 - Select the Gordon icon on any page at
   [docs.docker.com](https://docs.docker.com) to ask Docker questions.
 
-Docker Desktop and the CLI count against your Gordon plan's [usage
-limits](./usage-limits.md). Gordon on Docker Hub and docs.docker.com is free
-and does not require a Docker account or a Docker Desktop install. It has
-its own shared public usage limit and does not access your Docker
-environment.
+Gordon is free to use with a usage quota. Docker Desktop and the CLI count
+against your Docker account's [usage limits](./usage-limits.md). Gordon on
+Docker Hub and docs.docker.com does not require a Docker account or a Docker
+Desktop install. It has its own shared public usage limit and does not access
+your Docker environment.
 
 ## Get started
 

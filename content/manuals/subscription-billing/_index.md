@@ -23,7 +23,7 @@ grid:
   - title: Plans
     description: >-
       Compare billing models and tiers for Docker, Docker Hardened Images,
-      Gordon, Docker Agentic Platform, AI Governance, and DVP.
+      Docker Agentic Platform, AI Governance, and DVP.
     link: /subscription-billing/plans/
     icon: chart-column
   - title: Manage plans
