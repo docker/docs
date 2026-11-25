@@ -36,6 +36,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Additional rebranding updates.
 
+### Known issues
+
+- Containers and images are hidden after you update to Docker Desktop 4.100.0 or 4.100.1. On update, installs that never set the containerd image store switch to it, and existing containers and images are hidden, not deleted. As a workaround, go to **Settings** > **General**, clear **Use containerd for pulling and storing images**, and select **Apply**. Your images are then restored. Images pulled or built while the containerd image store was enabled are hidden until you turn the setting back on.
+
 ## 4.100.0
 
 {{< release-date date="2026-11-19" >}}
