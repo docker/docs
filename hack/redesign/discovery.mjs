@@ -82,14 +82,36 @@ export default async function verifyDiscovery(page, base) {
   }
 
   await page.goto(base + "/reference/");
-  const references = await page
-    .locator(".discovery-list a")
-    .evaluateAll((links) =>
-      links.map((link) => ({
-        label: link.querySelector("strong").textContent.trim(),
-        path: new URL(link.href).pathname,
-      })),
+  assert.deepEqual(
+    await page.locator(".reading-body section > h2").allTextContents(),
+    ["CLI references", "APIs", "File formats and build checks"],
+    "reference cards are grouped by reference type",
+  );
+  for (const [id, prefix] of [
+    ["cli", "/reference/cli/"],
+    ["api", "/reference/api/"],
+  ]) {
+    const paths = await page
+      .locator(`section[aria-labelledby="reference-${id}"] .card-link`)
+      .evaluateAll((links) => links.map((link) => new URL(link.href).pathname));
+    assert.ok(paths.length > 0, `${id}: nonempty reference group`);
+    assert.ok(
+      paths.every((path) => path.startsWith(prefix)),
+      id,
     );
+  }
+  assert.ok(
+    (await page.locator(".card-description").allTextContents()).every((text) =>
+      text.trim(),
+    ),
+    "reference cards have descriptions, including generated CLI and API pages",
+  );
+  const references = await page.locator(".card-link").evaluateAll((links) =>
+    links.map((link) => ({
+      label: link.querySelector(".card-title").textContent.trim(),
+      path: new URL(link.href).pathname,
+    })),
+  );
   assert.ok(references.length > 0);
   for (const path of ["/reference.md", "/llms.txt"]) {
     const response = await page.request.get(base + path);
