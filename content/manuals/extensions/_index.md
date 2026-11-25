@@ -8,6 +8,19 @@ params:
     group: Application development
 aliases:
  - /desktop/extensions/
+grid:
+  - title: "Extensions Marketplace"
+    description: "Find and install extensions in Docker Desktop."
+    link: /extensions/marketplace/
+    icon: search
+  - title: "Extensions SDK"
+    description: "Build and distribute a Docker Desktop extension."
+    link: /extensions/extensions-sdk/
+    icon: code
+  - title: "Private marketplace"
+    description: "Control which extensions your organization can install."
+    link: /extensions/private-marketplace/
+    icon: settings
 ---
 
 Docker Extensions let you use third-party tools within Docker Desktop to extend its functionality.
@@ -15,6 +28,10 @@ Docker Extensions let you use third-party tools within Docker Desktop to extend 
 You can seamlessly connect your favorite development tools to your application development and deployment workflows. Augment Docker Desktop with debugging, testing, security, and networking functionalities, and create custom add-ons using the Extensions [SDK](extensions-sdk/_index.md).
 
 Anyone can use Docker Extensions and there is no limit to the number of extensions you can install.
+
+## Explore the documentation
+
+{{< grid >}}
 
 ## What extensions are available?
 

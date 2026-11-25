@@ -10,6 +10,31 @@ keywords: Docker, ai, model runner, docker desktop, docker engine, llm, openai, 
 aliases:
   - /desktop/features/model-runner/
   - /model-runner/
+grid:
+  - title: "Get started"
+    description: "Turn on Docker Model Runner and run your first model."
+    link: /ai/model-runner/get-started/
+    icon: rocket
+  - title: "API reference"
+    description: "Use the OpenAI and Ollama-compatible APIs."
+    link: /ai/model-runner/api-reference/
+    icon: code
+  - title: "Configuration"
+    description: "Set context size and runtime parameters."
+    link: /ai/model-runner/configuration/
+    icon: settings
+  - title: "Inference engines"
+    description: "Compare llama.cpp, vLLM, and Diffusers."
+    link: /ai/model-runner/inference-engines/
+    icon: box
+  - title: "IDE integrations"
+    description: "Connect coding tools such as Cline, Continue, and Cursor."
+    link: /ai/model-runner/ide-integrations/
+    icon: code
+  - title: "Open WebUI integration"
+    description: "Set up a web chat interface for your models."
+    link: /ai/model-runner/openwebui-integration/
+    icon: terminal
 ---
 
 {{< summary-bar feature_name="Docker Model Runner" >}}
@@ -177,9 +202,4 @@ Thanks for trying out Docker Model Runner. To report bugs or request features, [
 
 ## Next steps
 
-- [Get started with DMR](get-started.md) - Enable DMR and run your first model
-- [API reference](api-reference.md) - OpenAI and Ollama-compatible API documentation
-- [Configuration options](configuration.md) - Context size and runtime parameters
-- [Inference engines](inference-engines.md) - llama.cpp, vLLM, and Diffusers details
-- [IDE integrations](ide-integrations.md) - Connect Cline, Continue, Cursor, and more
-- [Open WebUI integration](openwebui-integration.md) - Set up a web chat interface
+{{< grid >}}

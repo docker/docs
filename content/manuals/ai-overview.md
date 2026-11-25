@@ -7,6 +7,43 @@ keywords: docker, ai, gordon, docker agent, sandboxes, governance, agentic platf
 params:
   sidebar:
     group: AI and agents
+grid:
+  - title: "Docker Sandboxes"
+    description: "Run coding agents in isolated environments with the `sbx` CLI."
+    link: /ai/sandboxes/
+    icon: terminal
+  - title: "Sandboxes API and SDK"
+    description: "Create and manage cloud sandboxes from your applications."
+    link: /ai/sandboxes-api/
+    icon: code
+  - title: "AI governance"
+    description: "Control sandbox access and audit actions with `sbx policy` and Docker Home."
+    link: /ai/governance/
+    icon: settings
+  - title: "Docker Agentic Platform"
+    description: "Run agents in cloud sandboxes through an experimental web Console."
+    link: /agentic-platform/
+    icon: cloud
+  - title: "Gordon"
+    description: "Get AI help with Docker tasks in Docker Desktop or with `docker ai`."
+    link: /ai/gordon/
+    icon: terminal
+  - title: "Model Runner"
+    description: "Run AI models locally with an OpenAI-compatible API and `docker model`."
+    link: /ai/model-runner/
+    icon: box
+  - title: "MCP Catalog and Toolkit"
+    description: "Connect AI tools to external services through MCP and `docker mcp`."
+    link: /ai/mcp-catalog-and-toolkit/
+    icon: box
+  - title: "Docker Agent"
+    description: "Build and orchestrate custom agent teams with `docker agent`."
+    link: /ai/docker-agent/
+    icon: code
+  - title: "Docker Skills"
+    description: "Give compatible coding agents guidance for Docker tasks."
+    link: /ai/skills/
+    icon: book-open
 ---
 
 Docker provides tools for working with AI across your development workflow.
@@ -14,16 +51,7 @@ Each tool serves a different purpose.
 
 ## Which tool do I need?
 
-| I want to...                                                    | Use                                                      | Interface        |
-| --------------------------------------------------------------- | -------------------------------------------------------- | ---------------- |
-| Run coding agents in isolated environments                      | [Docker Sandboxes](./ai/sandboxes/)                      | `sbx`            |
-| Control what sandbox agents can reach, and audit what they did  | [Sandbox governance](./ai/governance/)                   | `sbx policy`, Docker Home |
-| Run agents in cloud sandboxes through a web Console | [Docker Agentic Platform](./agentic-platform/_index.md) (experimental) | Web Console |
-| Get AI help with Docker tasks (containers, images, Dockerfiles) | [Gordon](./ai/gordon/)                                   | `docker ai`      |
-| Run AI models locally with an OpenAI-compatible API             | [Model Runner](./ai/model-runner/)                       | `docker model`   |
-| Connect AI tools to external services via MCP                   | [MCP Catalog and Toolkit](/manuals/desktop/features/mcp-catalog-and-toolkit/_index.md) | `docker mcp`     |
-| Build and orchestrate custom multi-agent teams                  | [Docker Agent](./ai/docker-agent/)                       | `docker agent`   |
-| Give my coding agent Docker best-practice guidance              | [Docker Skills](./ai/skills/)                            | None             |
+{{< grid >}}
 
 ## How these tools relate
 

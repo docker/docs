@@ -11,6 +11,19 @@ aliases:
   - /ai/sandboxes/governance/access-controls/
   - /ai/sandboxes/governance/monitor-and-enforce/
   - /ai/sandboxes/governance/reference/
+grid:
+  - title: "Local policy"
+    description: "Control which network destinations sandboxes on your machine can reach."
+    link: /ai/governance/local/
+    icon: settings
+  - title: "Organization governance"
+    description: "Manage sandbox policies, audit logs, and licenses for your organization."
+    link: /ai/governance/organization/
+    icon: settings
+  - title: "Troubleshooting"
+    description: "Diagnose governance and policy issues."
+    link: /ai/governance/troubleshooting/
+    icon: search
 ---
 
 Agents in [Docker Sandboxes](../sandboxes/_index.md) work on their own. They
@@ -27,6 +40,10 @@ sandboxes use, and your organization.
 > [cloud network policy](../sandboxes/cloud/network-policy.md), which is stored in your
 > Docker account and managed with `sbx --cloud policy` or in the Docker Agentic
 > Platform [Console](/manuals/agentic-platform/policies.md).
+
+## Explore the documentation
+
+{{< grid >}}
 
 ## Where the rules come from
 

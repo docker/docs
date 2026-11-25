@@ -6,6 +6,15 @@ weight: 70
 params:
   sidebar:
     group: AI and agents
+grid:
+  - title: "Install Docker Skills"
+    description: "Choose an installation method supported by your coding agent."
+    link: /ai/skills/install/
+    icon: download
+  - title: "Skill catalog"
+    description: "Browse available skills and their descriptions in the Docker Skills repository."
+    link: https://github.com/docker/skills#readme
+    icon: book-open
 ---
 
 Docker Skills are Docker's official, open-source guidance for compatible AI
@@ -14,6 +23,10 @@ setting up a Compose application, or answering questions using official Docker
 documentation. The collection evolves and doesn't cover every Docker product.
 Browse the [repository catalog](https://github.com/docker/skills#readme) for
 available skills and their descriptions.
+
+## Explore the documentation
+
+{{< grid >}}
 
 ## Get started
 

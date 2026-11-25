@@ -10,6 +10,27 @@ params:
     group: AI and agents
 aliases:
   - /ai/sandboxes/api/
+grid:
+  - title: "SDK cookbook"
+    description: "Follow examples for processes, files, storage, networking, and other sandbox operations."
+    link: /ai/sandboxes-api/cookbook/
+    icon: code
+  - title: "API concepts"
+    description: "Choose a kit or image, identify resources, and wait for actions to finish."
+    link: /ai/sandboxes-api/concepts/
+    icon: book-open
+  - title: "Authentication and authorization"
+    description: "Authenticate requests and understand which permissions your application needs."
+    link: /ai/sandboxes-api/authentication/
+    icon: settings
+  - title: "Errors and retries"
+    description: "Handle failures and retry requests without duplicating work."
+    link: /ai/sandboxes-api/errors/
+    icon: search
+  - title: "Compute sizes and limits"
+    description: "Choose resources and handle account quotas and request rate limits."
+    link: /ai/sandboxes-api/limits/
+    icon: cloud
 ---
 
 Use the Docker Sandboxes API to create cloud sandboxes, run commands, and
@@ -43,13 +64,4 @@ To run agents from your terminal, see [Docker Sandboxes](../sandboxes/_index.md)
 
 ## Develop your application
 
-- [SDK cookbook](cookbook/_index.md): follow examples for processes, files,
-  storage, networking, and other sandbox operations.
-- [API concepts](concepts.md): choose a kit or image, identify resources, and
-  wait for actions to finish.
-- [Authentication and authorization](authentication.md): authenticate requests
-  and understand which permissions your application needs.
-- [Errors and retries](errors.md): handle failures and retry requests without
-  duplicating work.
-- [Compute sizes and limits](limits.md): choose resources and handle account
-  quotas and request rate limits.
+{{< grid >}}

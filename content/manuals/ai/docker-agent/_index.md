@@ -12,6 +12,31 @@ params:
   sidebar:
     group: AI and agents
 keywords: [ai, agent, docker agent, cagent]
+grid:
+  - title: "Quickstart"
+    description: "Build and run your first agent team."
+    link: /ai/docker-agent/getting-started/quickstart/
+    icon: rocket
+  - title: "Best practices"
+    description: "Build effective agent teams."
+    link: /ai/docker-agent/guides/tips/
+    icon: book-open
+  - title: "Editor integration"
+    description: "Use Docker Agent from your editor through ACP."
+    link: /ai/docker-agent/features/acp/
+    icon: code
+  - title: "MCP clients"
+    description: "Use agents as tools in MCP clients."
+    link: /ai/docker-agent/tools/mcp/
+    icon: box
+  - title: "MCP Gateway"
+    description: "Connect agents to external tools through the Docker MCP Gateway."
+    link: /ai/mcp-catalog-and-toolkit/mcp-gateway/
+    icon: box
+  - title: "Configuration reference"
+    description: "Configure agents, model settings, and tools."
+    link: /ai/docker-agent/configuration/overview/
+    icon: settings
 ---
 
 [Docker Agent](https://github.com/docker/docker-agent) is an open-source framework
@@ -155,12 +180,7 @@ it doesn't exist yet.
 
 ## What's next
 
-- Follow the [quickstart](./getting-started/quickstart/index.md) to build your first agent
-- Learn [best practices](./guides/tips/index.md) for building effective agents
-- Integrate Docker Agent with your [editor](./features/acp/index.md) or use agents as
-  [tools in MCP clients](./tools/mcp/index.md)
-- Browse example agent configurations in the [Docker Agent
-  repository](https://github.com/docker/docker-agent/tree/main/examples)
-- Connect agents to external tools via the [Docker MCP
-  Gateway](/manuals/desktop/features/mcp-catalog-and-toolkit/mcp-gateway.md)
-- Read the full [configuration reference](./configuration/overview/index.md)
+{{< grid >}}
+
+Browse example agent configurations in the [Docker Agent
+repository](https://github.com/docker/docker-agent/tree/main/examples).

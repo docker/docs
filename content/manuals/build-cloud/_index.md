@@ -9,6 +9,31 @@ params:
 aliases:
   - /build/cloud/faq/
   - /build/cloud/
+grid:
+  - title: "Set up a builder"
+    description: "Connect your local environment to a cloud builder."
+    link: /build-cloud/setup/
+    icon: rocket
+  - title: "Build with Docker Build Cloud"
+    description: "Run builds using your cloud builder."
+    link: /build-cloud/usage/
+    icon: terminal
+  - title: "Continuous integration"
+    description: "Use Docker Build Cloud in your CI pipeline."
+    link: /build-cloud/ci/
+    icon: code
+  - title: "Builder settings"
+    description: "Manage settings for your cloud builder."
+    link: /build-cloud/builder-settings/
+    icon: settings
+  - title: "Optimize builds"
+    description: "Improve performance when building in the cloud."
+    link: /build-cloud/optimization/
+    icon: cloud
+  - title: "Release notes"
+    description: "Review Docker Build Cloud releases."
+    link: /build-cloud/release-notes/
+    icon: book-open
 ---
 
 {{< summary-bar feature_name="Docker Build Cloud" >}}
@@ -17,6 +42,10 @@ Docker Build Cloud is a service that lets you build your container images
 faster, both locally and in CI. Builds run on cloud infrastructure optimally
 dimensioned for your workloads, no configuration required. The service uses a
 remote build cache, ensuring fast builds anywhere and for all team members.
+
+## Explore the documentation
+
+{{< grid >}}
 
 ## How Docker Build Cloud works
 

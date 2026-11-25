@@ -11,10 +11,23 @@ weight: 50
 params:
   sidebar:
     group: Accounts and admin
+grid:
+  - title: "Support portal"
+    description: "Create and track support cases for your paid subscription."
+    link: /support/portal/
+    icon: book-open
+  - title: "Troubleshoot Docker Desktop"
+    description: "Collect diagnostics and investigate Docker Desktop issues."
+    link: /desktop/troubleshoot-and-support/troubleshoot/
+    icon: search
 ---
 
 Docker offers multiple support channels depending on your subscription
 level and needs.
+
+## Explore the documentation
+
+{{< grid >}}
 
 ## Community support
 

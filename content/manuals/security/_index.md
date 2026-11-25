@@ -12,11 +12,32 @@ aliases:
 params:
   sidebar:
     group: Accounts and admin
+grid:
+  - title: "Authentication"
+    description: "Protect sign-in with two-factor authentication, SSO, and OIDC connections."
+    link: /security/authentication/
+    icon: settings
+  - title: "Access tokens"
+    description: "Choose personal or organization access tokens for CLI and automation access."
+    link: /security/access-tokens/
+    icon: terminal
+  - title: "Provisioning"
+    description: "Choose how to add users to your organization."
+    link: /security/provisioning/
+    icon: settings
+  - title: "Roles and permissions"
+    description: "Control what members can do after they join."
+    link: /security/roles-and-permissions/
+    icon: book-open
 ---
 
 Use these settings to protect your own sign-in, and to control who can join
 an organization and what they can do. You configure them in
 [Docker Home](https://app.docker.com/).
+
+## Explore the documentation
+
+{{< grid >}}
 
 ## Secure your account
 
