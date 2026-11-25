@@ -23,11 +23,11 @@ If you've discovered a security vulnerability in Docker, report it responsibly t
 
 ### Does Docker lockout users after failed sign-ins?
 
-Docker Hub locks out users after 10 failed sign-in attempts within 5 minutes. The lockout lasts 5 minutes. It applies to Docker Hub, Docker Desktop, and Docker Scout sign-ins for [USER TYPES]. Docker counts attempts [per user, per IP address, or both].
+Docker Hub locks out users after 10 failed sign-in attempts within 5 minutes. The lockout lasts 5 minutes. It applies to Docker Hub, Docker Desktop, and Docker Scout sign-ins.
 
 ### What are the password requirements for a Docker account?
 
-Passwords must be 9 to 128 characters long and can't be the same as your username. Docker doesn't require specific character types or restrict reusing a previous password. For details, see [Password requirements](/manuals/accounts/individual/create-account.md#password-requirements).
+Passwords must be 9 to 128 characters long and can't be the same as your username. Docker doesn't require specific character types or restrict reusing a previous password, but as a security best practice, don't reuse passwords. For details, see [Password requirements](/manuals/accounts/individual/create-account.md#password-requirements).
 
 ### Do password requirements apply to SSO users?
 

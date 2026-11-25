@@ -70,12 +70,10 @@ If you sign in with an email address and password, your password must:
 
 - Be 9 to 128 characters long
 - Not be the same as your username
-
-When you reset your password, it also can't contain personal information, such
-as your name or email address.
+- Not contain personal information such as your name or email address
 
 Docker doesn't require specific character types and doesn't restrict reusing a
-previous password.
+previous password, but as a security best practice, don't reuse passwords.
 
 If you sign in with Google, GitHub, or single sign-on (SSO), your identity
 provider controls your credentials.
