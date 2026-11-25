@@ -38,13 +38,11 @@ $ sbx stop my-sandbox               # pause it
 $ sbx rm my-sandbox                 # delete it entirely
 ```
 
-`sbx rm` asks for confirmation before deleting a sandbox. Use `--force` to
-skip the prompt. This flag also permits removal when the sandbox has an active
-session — an open attach, SSH connection, or in-flight SFTP transfer:
+`sbx rm` asks for confirmation and requires the sandbox to be stopped. Use
+`sbx stop` first, or use `--force` to skip confirmation and remove a running
+sandbox.
 
-```console
-$ sbx rm --force my-sandbox
-```
+### Recreate a sandbox
 
 If you need a clean slate, remove the sandbox and run it again:
 
@@ -53,6 +51,8 @@ $ sbx stop my-sandbox
 $ sbx rm my-sandbox
 $ sbx run claude
 ```
+
+### Remove multiple sandboxes
 
 To remove all stopped local sandboxes, use `sbx prune`. Running sandboxes are
 never removed. Preview the sandboxes that would be removed, or filter out
@@ -68,6 +68,12 @@ such as `168h`, an RFC 3339 timestamp, or a Unix timestamp. The older
 `since=<duration>` filter remains supported.
 
 Run `sbx prune` without flags to confirm and remove all stopped sandboxes.
+
+To remove all local sandboxes, including running ones, and skip confirmation:
+
+```console
+$ sbx rm --all --force
+```
 
 ### Remove a sandbox when the agent exits
 

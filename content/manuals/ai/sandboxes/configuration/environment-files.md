@@ -662,6 +662,11 @@ remote MCP server registrations are host-global and can be shared by multiple
 sandboxes. Local MCP commands declared by the environment belong to that
 environment and sandbox.
 
+For a local environment, stop its sandbox with `sbx stop <SANDBOX_NAME>` before
+running `sbx env rm`. If the sandbox is running, removal is refused before
+plan approval or cleanup. To remove it while running and skip approval, use
+`sbx env rm --force`.
+
 `sbx env rm` builds a destroy plan from the resources on the host. The plan
 includes all credentials stored at the sandbox's scope, including credentials
 that the environment file no longer declares. After approval, `sbx` removes

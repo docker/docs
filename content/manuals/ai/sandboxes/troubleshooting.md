@@ -120,6 +120,7 @@ reuse the name of an existing mountless sandbox, first
 then remove and recreate it with a workspace path:
 
 ```console
+$ sbx stop <sandbox-name>
 $ sbx rm <sandbox-name>
 $ sbx run --name <sandbox-name> <agent>
 ```
