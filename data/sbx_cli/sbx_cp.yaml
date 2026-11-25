@@ -2,9 +2,8 @@ name: sbx cp
 synopsis: Copy files or directories between a sandbox and the host
 description: |-
     Either SRC or DST must be a sandbox path, written as SANDBOX:PATH.
-    The other must be a local path. Copying between two sandboxes is not supported. Or — with --cloud — the cloud sandbox
-    ID (sbx_*) or name from "sbx --cloud ls". Cloud transfers go through the Docker
-    Sandboxes Cloud file API instead of the local sandboxd.
+    The other must be a local path. Copying between two sandboxes is not supported. With --cloud, SANDBOX is an ID (sbx_*) or name from "sbx --cloud ls".
+    Cloud transfers use the Docker Sandboxes Cloud file API instead of sandboxd.
 
     Cloud copies transfer files, not symbolic links or empty directories. A symbolic
     link passed as SRC is always followed on upload. Links inside an uploaded

@@ -1,8 +1,7 @@
 name: sbx rm
 synopsis: Remove one or more sandboxes
 description: |-
-    Remove one or more sandboxes. Or — with --cloud — the cloud sandbox
-    ID (sbx_*) or name from "sbx --cloud ls".
+    Remove one or more sandboxes. With --cloud, pass sandbox IDs (sbx_*) or names from "sbx --cloud ls".
 
     For local sandboxes, stops them, removes their containers, removes any Git
     remote added to the host repository for them, deletes sandbox state, and
@@ -29,7 +28,7 @@ options:
       shorthand: f
       default_value: "false"
       usage: |
-        Skip confirmation prompts and delete even if in use (e.g. an open SSH connection)
+        Skip confirmation prompts and delete a running sandbox or one in use (e.g. an open SSH connection)
     - name: format
       usage: 'Output format: table, json or yaml'
     - name: help

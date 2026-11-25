@@ -30,6 +30,6 @@ inherited_options:
         Never prompt; commands that need an answer fail with the command to run instead
 see_also:
     - sbx policy - Manage sandbox policies
-    - sbx policy approval inspect - Inspect a pending approval
+    - sbx policy approval inspect - Show a pending approval
     - sbx policy approval ls - List pending approvals
     - sbx policy approval respond - Respond to a pending approval

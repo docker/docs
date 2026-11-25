@@ -23,8 +23,7 @@ options:
         Maximum number of entries to show in each category (allowed and blocked); 0 shows all
     - name: type
       default_value: all
-      usage: |
-        Filter logs by type: "all", "network", or "filesystem" (filesystem logs are not supported yet; default "all")
+      usage: 'Filter logs by type: "all" or "network" (default: "all")'
 inherited_options:
     - name: cloud
       default_value: "false"

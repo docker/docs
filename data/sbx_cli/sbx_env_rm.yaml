@@ -37,7 +37,7 @@ options:
       shorthand: f
       default_value: "false"
       usage: |
-        Skip confirmation prompts and delete even if in use (e.g. an open SSH connection)
+        Skip confirmation prompts and delete a running sandbox or one in use (e.g. an open SSH connection)
     - name: help
       shorthand: h
       default_value: "false"

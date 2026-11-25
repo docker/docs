@@ -15,7 +15,7 @@ description: |-
     "sbx policy ls --json" for the filtered rules; network values are printed in
     the form the CLI accepts back.
 
-    Use --method to add an HTTP rule. --method accepts comma-separated HTTP
+    Use --method to specify HTTP methods for a rule. It accepts comma-separated HTTP
     methods or ANY; --path defaults to /**. Repeat --query name=value to require
     query parameters.
 
@@ -29,7 +29,8 @@ description: |-
     Cloud rules have no IDs: --resource removes the pattern from both the allow
     and deny lists, and the output names each list it was removed from. The rule
     leaves the account policy by default; use --sandbox to scope the removal to one
-    sandbox. Use "sbx --cloud policy ls" to see the current rules.
+    sandbox. Add --method with the rule's --path and --query to remove an HTTP rule
+    from one sandbox instead. Use "sbx --cloud policy ls" to see the current rules.
 usage: sbx policy rm network [--sandbox SANDBOX] [flags]
 options:
     - name: force
@@ -92,5 +93,8 @@ example: |4-
 
       # Remove a pattern from one cloud sandbox's rules
       sbx --cloud policy rm network --sandbox my-sandbox --resource api.example.com
+
+      # Remove an HTTP rule from one cloud sandbox
+      sbx --cloud policy rm network --sandbox my-sandbox --resource api.example.com --method GET --path '/v1/**'
 see_also:
     - sbx policy rm - Remove a policy rule

@@ -22,6 +22,7 @@ inherited_options:
 see_also:
     - sbx - Manage AI coding agent sandboxes.
     - sbx daemon log-level - Show or change sandboxd's per-category log levels
+    - sbx daemon logs - Show the sandboxd daemon log
     - sbx daemon restart - Restart the sandboxd daemon
     - sbx daemon start - Start the sandboxd daemon
     - sbx daemon status - Show sandboxd daemon status

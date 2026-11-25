@@ -6,7 +6,8 @@ options:
     - name: force
       shorthand: f
       default_value: "false"
-      usage: Skip confirmation prompts and delete even if in use
+      usage: |
+        Skip confirmation prompts and delete a running sandbox or one in use
     - name: help
       shorthand: h
       default_value: "false"

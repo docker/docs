@@ -7,7 +7,7 @@ description: |-
     Any other flag, or KIT, rebuilds what each run executes from the flags given, so
     restate --prompt or --command and every run flag to keep: --static-mcp, the
     network flags, --max-run-duration, --cpus, --memory, --platform, --env and
-    --working-dir not given again are reset, with a warning. Without KIT, the schedule's current kit is resolved again.
+    --workdir not given again are reset, with a warning. Without KIT, the schedule's current kit is resolved again.
 usage: sbx schedule update SCHEDULE_ID [KIT] [flags]
 options:
     - name: allow-network

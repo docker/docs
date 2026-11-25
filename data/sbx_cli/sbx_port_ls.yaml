@@ -3,6 +3,11 @@ synopsis: List published ports
 description: |-
     List the published ports of a sandbox.
 
+    A sandbox keeps its published ports while it is stopped and binds them again
+    when it next starts. Ports that are kept but not bound, such as every port of
+    a stopped sandbox, are listed as inactive. An inactive port whose host
+    address or host port is chosen when it is bound shows none until then.
+
     With --cloud:
     List the exposed ports of a cloud sandbox given by ID (sbx_*) or name, each
     with its publicly reachable URL.

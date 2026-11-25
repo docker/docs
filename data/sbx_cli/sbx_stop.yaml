@@ -1,8 +1,7 @@
 name: sbx stop
 synopsis: Stop one or more sandboxes without removing them
 description: |-
-    Stop one or more running sandboxes without removing them. Or — with --cloud — the cloud sandbox
-    ID (sbx_*) or name from "sbx --cloud ls".
+    Stop one or more running sandboxes without removing them. With --cloud, pass sandbox IDs (sbx_*) or names from "sbx --cloud ls".
 
     Stopped sandboxes retain their state and can be restarted with "sbx run".
 

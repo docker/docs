@@ -2,7 +2,7 @@ name: sbx exec
 synopsis: Execute a command inside a sandbox
 description: |-
     Execute a command in a sandbox. If the sandbox is stopped, it is started first. Or — with --cloud — the cloud sandbox
-    ID (sbx_*) or name from "sbx --cloud ls". --user is not supported with --cloud.
+    ID (sbx_*) or name from "sbx --cloud ls". --user and --no-progress are not supported with --cloud.
     Exec sessions cannot detach; --detach-keys is not supported.
 
     Exit status is that of the command. sbx exits 125 if it could not run the command,
@@ -25,6 +25,9 @@ options:
       shorthand: i
       default_value: "false"
       usage: Keep STDIN open even if not attached
+    - name: no-progress
+      default_value: "false"
+      usage: Suppress progress output
     - name: tty
       shorthand: t
       default_value: "false"

@@ -3,6 +3,7 @@ synopsis: Update skills added from repositories
 experimental: true
 description: |-
     Download the latest versions of skills installed with 'sbx skills add'.
+    An updated skill is replaced completely, including any local changes to it.
 
     With no names, every skill added from a repository is updated. Specify one or
     more names to update only those skills. Skills installed with 'sbx skills

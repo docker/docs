@@ -25,18 +25,20 @@ description: |-
       - The workspace bind mount and other host mounts. Files moved to local
         stay inside the sandbox at the image's working directory; copy them out
         with 'sbx cp'.
-      - Secrets managed by sbx. The destination picks its own secrets, so
-        you may need to sign in again. Credentials saved in copied files
-        still travel.
+      - Secrets managed by sbx. The destination uses its own secrets. If a kit
+        requires Docker login for inference, the Cloud sandbox uses its owner's
+        Docker login for that host. If the kit lock records an inference login,
+        even an optional one, move must verify the original kit. If it can't,
+        it fails before stopping the local sandbox. Credentials saved in copied
+        files still travel.
       - Volumes and environment variables attached to a cloud sandbox, when
         moving to local. A local sandbox's environment is part of its image
         and travels to the cloud.
-      - Network rules you added locally. The sandbox's kit network rules do
-        travel: moving to cloud applies them, as 'sbx create --cloud' does. If
-        the kit can't be resolved, move warns and the account's cloud policy
-        applies. Moving to local starts with the host's default policy. Active
-        local L7 (HTTP) rules prompt before a move to cloud; --force skips the
-        prompt but keeps the warning.
+      - Network rules you added locally. Moving to cloud applies the kit's
+        network rules when possible. If move can't apply them, it warns and
+        uses the account's cloud network policy. Moving to local starts with
+        the host's default policy. Active local L7 (HTTP) rules prompt before
+        a move to cloud; --force skips the prompt but keeps the warning.
       - Cloud URLs and host port bindings. Moving to cloud republishes TCP
         ports under new cloud URLs; a port the cloud refuses is skipped with a
         warning. Moving to local saves the published TCP ports and binds them

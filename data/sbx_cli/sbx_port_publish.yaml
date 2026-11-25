@@ -4,7 +4,10 @@ description: |-
     Publish sandbox ports to the host.
 
     Publishing a local port starts a stopped sandbox before creating the host
-    binding. A SPEC is [[HOST_IP:]HOST_PORT:]SANDBOX_PORT[/PROTOCOL].
+    binding. Unless the sandbox is detached (for example, started with sbx run -d)
+    or another command such as sbx exec is still attached, it stops shortly after
+    the command exits, and its published ports stop forwarding until it next
+    starts. A SPEC is [[HOST_IP:]HOST_PORT:]SANDBOX_PORT[/PROTOCOL].
     If HOST_IP is omitted, the port is bound on loopback, expanded based on
     PROTOCOL and the sandbox's address families: tcp/udp binds both 127.0.0.1
     and ::1 (or only 127.0.0.1 if the sandbox is IPv4-only); tcp4/udp4 binds

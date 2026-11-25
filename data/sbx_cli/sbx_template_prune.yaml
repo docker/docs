@@ -1,0 +1,68 @@
+name: sbx template prune
+synopsis: Remove unused template images
+description: |-
+    Remove unused digest-only and untagged images from the local image store.
+
+    Images referenced by running or stopped sandboxes, in-flight operations,
+    or retained image dependencies are protected. This does not remove sandboxes.
+    Use --all to also remove unused tagged images, including saved templates.
+
+    Use --filter until=TIMESTAMP to remove only image references created before
+    a timestamp or duration before now. Use --dry-run to preview the selection.
+    Images that change or become referenced after confirmation are skipped.
+    Space recovery may be delayed by shared layers or runtime leases.
+
+    Local-only: cloud template pruning is not supported.
+usage: sbx template prune [flags]
+options:
+    - name: all
+      shorthand: a
+      default_value: "false"
+      usage: Also remove unused tagged images, including saved templates
+    - name: dry-run
+      default_value: "false"
+      usage: List the images that would be removed without removing them
+    - name: filter
+      default_value: '[]'
+      usage: |
+        Filter candidates (supported: until=TIMESTAMP — created before TIMESTAMP)
+    - name: force
+      shorthand: f
+      default_value: "false"
+      usage: Skip confirmation prompts
+    - name: format
+      usage: 'Output format: table, json or yaml'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for prune
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+    - name: no-input
+      default_value: "false"
+      usage: |
+        Never prompt; commands that need an answer fail with the command to run instead
+example: |4-
+      # Preview unused digest-only and untagged images
+      sbx template prune --dry-run
+
+      # Remove all unused images older than a week
+      sbx template prune --all --filter until=168h
+
+      # Remove unused images without confirmation
+      sbx template prune --all --force
+
+      # Output the preview as JSON
+      sbx template prune --all --dry-run --format json
+see_also:
+    - sbx template - Manage sandbox templates

@@ -27,7 +27,7 @@ description: |-
     refusal. With --cloud, the new rule replaces the opposite rule in the same scope
     instead.
 
-    Use --method to add an HTTP rule. --method accepts comma-separated HTTP
+    Use --method to specify HTTP methods for a rule. It accepts comma-separated HTTP
     methods or ANY; --path defaults to /**. Repeat --query name=value to require
     query parameters.
 
@@ -41,11 +41,15 @@ description: |-
     A matching allow entry in the same scope is replaced by the deny entry.
 
     RESOURCES is a comma-separated list of network patterns, such as api.example.com,
-    *.example.com, 10.0.0.0/8, or api.example.com:443. HTTP method, path, query, and
-    transport protocol selectors are not supported.
+    *.example.com, 10.0.0.0/8, or api.example.com:443. Transport protocol selectors
+    are not supported.
 
     Rules apply to the account by default. Use --sandbox with a sandbox name or ID
     to change one sandbox's policy. Use "sbx --cloud policy ls" to list the rules.
+
+    Use --method to add an HTTP rule; --path defaults to /**, and --query name=value
+    requires a query parameter. HTTP rules apply to one sandbox, so they need
+    --sandbox, and a cloud deployment that has not enabled them refuses them.
 usage: sbx policy deny network [--sandbox SANDBOX] RESOURCES [flags]
 options:
     - name: help
@@ -103,5 +107,8 @@ example: |4-
 
       # Block a host for one sandbox
       sbx --cloud policy deny network --sandbox my-sandbox ads.example.com
+
+      # Block POST requests to a path for one sandbox
+      sbx --cloud policy deny network --sandbox my-sandbox --method POST --path '/admin/**' api.example.com
 see_also:
     - sbx policy deny - Add a deny rule for sandboxes

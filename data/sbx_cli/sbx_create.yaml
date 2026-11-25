@@ -89,13 +89,16 @@ options:
         Bind a host directory to a kit host-mount@1 path (can be repeated): HOST:SANDBOX_PATH. Can only be used when creating a new sandbox.
     - name: name
       usage: |
-        Name for the sandbox (default: <agent>-<workdir>; 2–63 ASCII letters, numbers, hyphens or periods; each dot-separated part must start and end with a letter or number; periods are rejected with --cloud; 'default' is reserved)
+        Name for the sandbox (default: <agent>-<workdir>; 2–63 ASCII letters, numbers, hyphens or periods; each dot-separated part must start and end with a letter or number; periods are rejected with --cloud; 'default' is reserved; on Windows, device names such as 'con' are also reserved)
     - name: no-progress
       default_value: "false"
       usage: Suppress progress output
     - name: on-timeout
       usage: |
         What happens when --ttl lapses: 'stop' stops the sandbox in place so it can be started again later, 'restart' keeps it running by stopping and immediately starting it, or 'delete' removes it. Omit the flag and the server stops the sandbox when it can be started again later, and deletes it otherwise. With 'restart' a supplied --ttl must be at least 1h (cloud only).
+    - name: page-size
+      usage: |
+        Guest kernel page size: 4k, 16k or 64k. Default: the host page size when that kernel is installed, else 4k
     - name: platform
       usage: |
         Target platform: linux/amd64 or linux/arm64 (cloud only). With --image-ref, omitting it lets the server resolve the platform from the image and the CLI sends the local CPU as a hint for multi-platform images. With --template, omitting it inherits the template platform. With a sandbox kit, the kit's template is built for this platform and cached apart from other platforms; omitting it keeps the server's choice.
@@ -120,7 +123,7 @@ options:
         Container image to use for the sandbox (default: agent-specific image)
     - name: ttl
       usage: |
-        Cloud sandbox time-to-live before it times out (e.g. 30m, 2h, 1h30m; units are case-insensitive; cloud only; default: server-side)
+        Cloud sandbox time-to-live before it times out (e.g. 30m, 2h, 1h30m; units are case-insensitive), up to your account's maximum, or 'none' for a sandbox with no deadline. 'none' needs an account that allows it and --on-timeout stop, which it selects when the flag is omitted (cloud only; default: server-side)
     - name: volume
       shorthand: v
       default_value: '[]'
