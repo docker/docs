@@ -55,7 +55,7 @@ Cloud Sandboxes access is separate from the repository permission.
 - `sandbox:use`: The scope a PAT needs to authenticate to Cloud
   Sandboxes. Selecting **Allow Cloud Sandboxes access** adds this
   scope to the token. See
-  [Cloud Sandboxes authentication](/manuals/ai/sandboxes-api/authentication.md).
+  [Cloud Sandboxes authentication](/manuals/ai/sandboxes-api/v1/authentication.md).
 
 ## Organization access token scopes
 

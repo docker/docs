@@ -17,7 +17,7 @@ $ python3 hack/sync-sandboxes-docs.py
 
 The import writes:
 
-- Cookbook recipes to `content/manuals/ai/sandboxes-api/cookbook/`
+- Cookbook recipes to `content/manuals/ai/sandboxes-api/v1/cookbook/`
 - The public OpenAPI specification to
   `content/reference/api/sandboxes/api.yaml`
 
@@ -26,10 +26,11 @@ Treat these files as generated. Make prose, example, and API corrections in
 is maintained in docker/docs, along with the overview, installation,
 authentication, concepts, errors, and limits pages.
 
-The import copies the selected recipes and OpenAPI specification byte for byte.
+The import copies the OpenAPI specification byte for byte. For each recipe,
+it adds a redirect from the published unversioned URL and points installation
+links at the v1 installation page. All other recipe content comes from upstream.
 It excludes the upstream overview, installation page, and generated Markdown
-API reference. Recipe installation links point to the canonical Docker Docs
-installation page.
+API reference. The v2 documentation is maintained separately in docker/docs.
 
 The specification is registered in `hack/api-docs/sources.json`. The shared API
 renderer generates an overview and separate operation and schema pages under

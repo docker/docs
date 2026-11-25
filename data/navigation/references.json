@@ -48,7 +48,7 @@
     "root": "/reference/api/extensions-sdk"
   },
   {
-    "label": "Docker Sandboxes API",
+    "label": "Docker Sandboxes API v1",
     "root": "/reference/api/sandboxes"
   },
   {

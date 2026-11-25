@@ -16,7 +16,7 @@
     ]
   },
   "sandboxes-api": {
-    "label": "Sandboxes API and SDK",
+    "label": "Sandboxes API and SDKs",
     "root": "/manuals/ai/sandboxes-api",
     "category": "ai",
     "references": ["/reference/api/sandboxes"]

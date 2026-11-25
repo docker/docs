@@ -29912,11 +29912,11 @@
       "exampleCount": 81,
       "experimental": true,
       "guides": [
-        "/manuals/ai/sandboxes-api/authentication.md",
-        "/manuals/ai/sandboxes-api/get-started.md"
+        "/manuals/ai/sandboxes-api/v1/authentication.md",
+        "/manuals/ai/sandboxes-api/v1/get-started.md"
       ],
       "id": "sandboxes",
-      "manual": "/manuals/ai/sandboxes-api/",
+      "manual": "/manuals/ai/sandboxes-api/v1/",
       "operations": [
         {
           "acceptMedia": "application/json",
