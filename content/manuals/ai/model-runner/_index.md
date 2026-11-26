@@ -204,6 +204,6 @@ No prompt content, responses, or personally identifiable information is ever col
 
 Thanks for trying out Docker Model Runner. To report bugs or request features, [open an issue on GitHub](https://github.com/docker/model-runner/issues). You can also give feedback through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}

@@ -75,7 +75,7 @@ daemon through scripting or direct CLI commands. Many other Docker applications
 use the underlying API and CLI. The daemon creates and manages Docker objects,
 such as images, containers, networks, and volumes.
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}
 

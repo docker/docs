@@ -43,7 +43,7 @@ faster, both locally and in CI. Builds run on cloud infrastructure optimally
 dimensioned for your workloads, no configuration required. The service uses a
 remote build cache, ensuring fast builds anywhere and for all team members.
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}
 

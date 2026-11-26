@@ -25,7 +25,7 @@ grid:
 Docker offers multiple support channels depending on your subscription
 level and needs.
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}
 

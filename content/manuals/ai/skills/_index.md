@@ -24,7 +24,7 @@ documentation. The collection evolves and doesn't cover every Docker product.
 Browse the [repository catalog](https://github.com/docker/skills#readme) for
 available skills and their descriptions.
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}
 

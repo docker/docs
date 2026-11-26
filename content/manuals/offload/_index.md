@@ -81,7 +81,7 @@ Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md
 > see [Move to the current version of Docker
 > Offload](v1/configuration.md#move-to-the-current-version-of-docker-offload).
 
-## Explore the documentation
+## Explore the docs
 
 In the following topics, learn about Docker Offload, how to set it up, use it
 for your workflows, and troubleshoot common issues.

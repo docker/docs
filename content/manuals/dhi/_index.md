@@ -116,7 +116,7 @@ For organizations with strict security or compliance requirements:
 - Extended Lifecycle Support: post-EOL security patches, updated SBOMs,
   provenance, and signing (Enterprise add-on)
 
-## Explore the documentation
+## Explore the docs
 
 Explore the sections below to get started with Docker Hardened Images, integrate
 them into your workflow, and learn what makes them secure and enterprise-ready.

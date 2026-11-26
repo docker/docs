@@ -35,7 +35,7 @@ Use these settings to protect your own sign-in, and to control who can join
 an organization and what they can do. You configure them in
 [Docker Home](https://app.docker.com/).
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}
 

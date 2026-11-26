@@ -43,7 +43,7 @@ Gordon is an AI-powered assistant that takes action on your Docker workflows.
 It analyzes your environment, proposes solutions, and executes commands with
 your permission.
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}
 

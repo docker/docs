@@ -45,7 +45,7 @@ sandboxes use, and your organization.
 > Docker account and managed with `sbx --cloud policy` or in the Docker Agentic
 > Platform [Console](/manuals/agentic-platform/policies.md).
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}
 

@@ -66,6 +66,6 @@ well as CI workflows. It also has commands for managing the whole lifecycle of y
  - Stream the log output of running services
  - Run a one-off command on a service
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}

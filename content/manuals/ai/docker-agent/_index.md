@@ -182,7 +182,7 @@ $ docker agent share pull myusername/debugger
 Use Docker Hub or any OCI-compatible registry. Pushing creates the repository if
 it doesn't exist yet.
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}
 

@@ -64,6 +64,6 @@ the [Docker Hub API](../../reference/api/hub/latest.md), the experimental [Docke
 Hub CLI tool](https://github.com/docker/hub-tool#readme), or the [Docker Hub
 MCP server](/docker-hub/mcp-server/) for AI agent integrations.
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}

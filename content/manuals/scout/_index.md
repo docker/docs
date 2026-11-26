@@ -58,6 +58,6 @@ The SBOM is matched against a continuously updated vulnerability database to pin
 Docker Scout is a standalone service and platform that you can interact with
 using Docker Hub, the Docker CLI, and the Docker Scout Dashboard.
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}

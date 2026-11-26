@@ -83,6 +83,6 @@ To begin, [activate your subscription](signup.md#activate-cloud-access), then
 sandbox runs. See [Signup and billing](signup.md) for account and payment
 information.
 
-## Explore the documentation
+## Explore the docs
 
 {{< grid >}}
