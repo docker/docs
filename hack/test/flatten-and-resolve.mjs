@@ -65,7 +65,12 @@ unsafe = true
     write(`layouts/${name}.html`, "<title>{{ .Title }}</title>");
     write(
       `layouts/${name}.markdown.md`,
-      '{{ partial "markdown/render.html" (dict "page" . "content" (printf "# %s\\n\\n%s" .Title (partial "markdown/content.html" .))) }}',
+      `{{- partial "markdown/render.md" (dict "page" . "content" (partial "markdown/body/${name}.md" .)) -}}
+{{ define "_partials/markdown/body/${name}.md" -}}
+# {{ .Title }}
+
+{{ partial "markdown/content.html" . }}
+{{ end -}}`,
     );
   }
   write(

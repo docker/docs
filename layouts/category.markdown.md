@@ -1,1 +1,14 @@
-{{- partial "markdown/render.html" (dict "page" . "content" (partial "markdown/pages/category.md" .)) -}}
+{{- partial "markdown/render.md" (dict "page" . "content" (partial "markdown/body/category.md" .)) -}}
+{{ define "_partials/markdown/body/category.md" -}}
+# {{ .Title }}
+
+{{ .Description }}
+
+{{ range hugo.Data.navigation.categories }}{{ if eq .id $.Params.category }}{{ range .groups }}
+## {{ .label }}
+
+{{ range .entries }}{{ $path := .page | default "" }}{{ $label := .label | default "" }}
+{{ with .collection }}{{ $product := index hugo.Data.navigation.products . }}{{ $path = $product.root }}{{ $label = $product.label }}{{ end }}
+{{ with site.GetPage $path }}{{ if ne .Params.sitemap false }}- [{{ $label | default .LinkTitle }}]({{ .Permalink }}): {{ .Description }}
+{{ end }}{{ end }}{{ end }}{{ end }}{{ end }}{{ end }}
+{{ end -}}
