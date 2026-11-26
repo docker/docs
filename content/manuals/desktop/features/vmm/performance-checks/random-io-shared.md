@@ -64,4 +64,4 @@ For how to repeat a check, see [Performance checks](/manuals/desktop/features/vm
 ## Results that aren't valid
 
 - Any `stress-ng` other than 0.21.02.
-- Docker Desktop with gRPC-FUSE file sharing. This check fails there, because that file sharing does not let a program look at a file it has just deleted. Use VirtioFS.
+- Docker Desktop with gRPC-FUSE file sharing. This check fails there, because that file sharing does not let a program look at a file it has deleted. Use VirtioFS.
