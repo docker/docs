@@ -31,15 +31,14 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
+    "@playwright/test": "1.65.1",
     "axe-core": "4.14.1",
-    "playwright": "1.65.1",
     "prettier": "3.8.1",
     "prettier-plugin-go-template": "0.0.15",
     "prettier-plugin-tailwindcss": "0.7.2",
     "rumdl": "0.2.49"
   },
   "scripts": {
-    "test:redesign": "node --test hack/test/*.mjs hack/api-docs/output-checks.test.mjs && node hack/redesign/browser.mjs",
-    "test:a11y": "node hack/redesign/accessibility.mjs"
+    "test": "node --test --test-timeout=10000 hack/test/*.test.mjs hack/api-docs/output-checks.test.mjs && playwright test --config hack/test/playwright.config.mjs"
   }
 }

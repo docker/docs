@@ -230,11 +230,9 @@ For template and navigation changes, build with `--panicOnWarning` and check the
 rendered pages, including mounted and generated content. Navigation registry
 validation runs through the shared head partial during the build.
 
-Use `hack/redesign/browser.mjs` for responsive layouts, themes, navigation,
-search, and clipboard behavior. It also runs the focused interaction and wash
-checks. `npm run test:a11y` adds axe scans and keyboard checks for interactive
-components. See [ACCESSIBILITY.md](ACCESSIBILITY.md) for coverage and outstanding
-content and screen-reader reviews. `hack/redesign/verify.py` compares routes,
-redirects, and article anchors against a baseline. API browser and output checks live under `hack/api-docs/`.
-See [the migration verification instructions](hack/redesign/README.md#verification)
-for build preparation, Pagefind, and browser commands.
+Run `docker buildx bake test-site` for Node and browser tests. The browser
+suite in `hack/test/browser.spec.mjs` covers representative pages and shared
+interactions. Build preparation and local commands are in
+[CONTRIBUTING.md](CONTRIBUTING.md#testing). See [ACCESSIBILITY.md](ACCESSIBILITY.md)
+for accessibility coverage and outstanding manual reviews. API generator and
+output checks live under `hack/api-docs/`.

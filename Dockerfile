@@ -59,7 +59,6 @@ RUN --mount=type=cache,target=/tmp/hugo_cache \
       --printUnusedTemplates \
       -b $DOCS_URL \
       -e $HUGO_ENV
-RUN node --test hack/test/*.mjs hack/api-docs/output-checks.test.mjs
 RUN node hack/flatten-and-resolve.js public
 RUN node hack/api-docs/verify-output.mjs public
 
@@ -189,6 +188,22 @@ ARG PAGEFIND_VERSION
 COPY --from=build /project/public ./public
 RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
     npx pagefind@v${PAGEFIND_VERSION} --output-path "/pagefind"
+
+# test-site runs logic and browser tests against the indexed build
+FROM node:${NODE_VERSION}-bookworm-slim AS test-site
+WORKDIR /project
+COPY package.json package-lock.json ./
+RUN npm ci && npx playwright install --with-deps chromium \
+    && apt-get install -y --no-install-recommends python3 \
+    && rm -rf /var/lib/apt/lists/*
+COPY assets/js ./assets/js
+COPY hack/test ./hack/test
+COPY hack/api-docs ./hack/api-docs
+COPY hack/flatten-and-resolve.js ./hack/
+COPY --from=build /project/public ./public
+COPY --from=pagefind /pagefind ./public/pagefind
+ENV CI=true
+RUN npm test
 
 # index generates a Pagefind index
 FROM scratch AS index

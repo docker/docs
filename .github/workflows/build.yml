@@ -80,6 +80,7 @@ jobs:
           - lint
           - vale
           - test
+          - test-site
           - unused-media
           - test-go-redirects
           - dockerfile-lint
