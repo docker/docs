@@ -22,6 +22,10 @@ differs:
 - Customers in VAT countries enter a tax ID or VAT number themselves when they
   purchase a Docker plan.
 
+> [!NOTE]
+>
+> For customers based in Switzerland, Docker began collecting VAT from December 1st 2026.
+
 ## United States tax exemption
 
 US customers submit a support case with a valid tax exemption certificate
