@@ -7,6 +7,9 @@
   {{- $group := . -}}
   {{- $items := slice -}}
   {{- range hugo.Data.navigation.references -}}
+    {{- if strings.HasPrefix .root "/reference/cli/docker/" -}}
+      {{- continue -}}
+    {{- end -}}
     {{- $kind := "formats" -}}
     {{- if strings.HasPrefix .root "/reference/cli/" -}}
       {{- $kind = "cli" -}}
@@ -14,6 +17,7 @@
       {{- $kind = "api" -}}
     {{- end -}}
     {{- if eq $kind $group.id -}}
+      {{- $root := .root -}}
       {{- $label := .label -}}
       {{- with site.GetPage .root -}}
         {{- if ne .Params.sitemap false -}}
@@ -22,6 +26,13 @@
           {{- if not $description -}}
             {{- with site.GetPage $url -}}
               {{- $description = partial "utils/description.html" . -}}
+            {{- end -}}
+          {{- end -}}
+          {{- if not $description -}}
+            {{- if eq $root "/reference/cli/docker" -}}
+              {{- $description = (index hugo.Data.cli .Params.datafolder .Params.datafile).short -}}
+            {{- else if eq $root "/reference/cli/sbx" -}}
+              {{- $description = (index hugo.Data.sbx_cli .Params.datafile).synopsis -}}
             {{- end -}}
           {{- end -}}
           {{- $items = $items | append (dict

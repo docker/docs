@@ -106,16 +106,27 @@ export default async function verifyDiscovery(page, base) {
     ),
     "reference cards omit empty descriptions",
   );
-  for (const path of [
-    "/reference/cli/docker/desktop/",
-    "/reference/cli/sbx/",
+  assert.deepEqual(
+    await page
+      .locator('section[aria-labelledby="reference-cli"] .card-link')
+      .evaluateAll((links) => links.map((link) => new URL(link.href).pathname)),
+    [
+      "/reference/cli/docker/",
+      "/reference/cli/sbx/",
+      "/reference/cli/dockerd/",
+    ],
+    "CLI cards link to base commands rather than Docker subcommands",
+  );
+  for (const [path, description] of [
+    ["/reference/cli/docker/", "The base command for the Docker CLI."],
+    ["/reference/cli/sbx/", "Manage AI coding agent sandboxes."],
   ]) {
     assert.equal(
       await page
         .locator(`.card-link[href="${path}"] .card-description`)
-        .count(),
-      0,
-      `${path}: CLI summaries are not used as card descriptions`,
+        .textContent(),
+      description,
+      `${path}: base command summary is available as a description`,
     );
   }
   assert.ok(
