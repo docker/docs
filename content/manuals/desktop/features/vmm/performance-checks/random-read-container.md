@@ -16,7 +16,7 @@ number. The result is the wall-clock time of the single `docker run` command on
 your machine.
 
 For how durations are taken and how to repeat a check, see
-[Performance checks](/manuals/desktop/features/vmm/performance-checks/).
+[Performance checks](/manuals/desktop/features/vmm/performance-checks/_index.md).
 
 ## Set up
 

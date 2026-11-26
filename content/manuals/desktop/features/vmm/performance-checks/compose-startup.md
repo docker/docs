@@ -21,7 +21,7 @@ The result is wall-clock time on your machine. Repeat the full preparation befor
 every run. A second start of the same stack measures warm caches.
 
 For how durations are taken and how to repeat a check, see
-[Performance checks](/manuals/desktop/features/vmm/performance-checks/).
+[Performance checks](/manuals/desktop/features/vmm/performance-checks/_index.md).
 
 ## Additional prerequisites
 

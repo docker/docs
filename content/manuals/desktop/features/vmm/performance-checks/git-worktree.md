@@ -16,7 +16,7 @@ The result is the duration of the single `git worktree add` command in
 milliseconds, measured inside the container.
 
 For how durations are taken and how to repeat a check, see
-[Performance checks](/manuals/desktop/features/vmm/performance-checks/).
+[Performance checks](/manuals/desktop/features/vmm/performance-checks/_index.md).
 
 ## Get the source
 

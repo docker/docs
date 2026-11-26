@@ -20,7 +20,7 @@ ready doesn't end the timer. The checkout does.
 The result is wall-clock time on your machine.
 
 For how durations are taken and how to repeat a check, see
-[Performance checks](/manuals/desktop/features/vmm/performance-checks/).
+[Performance checks](/manuals/desktop/features/vmm/performance-checks/_index.md).
 
 ## Additional prerequisites
 

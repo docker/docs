@@ -13,7 +13,7 @@ command in milliseconds, measured inside the container. Nothing reads the files
 through the container before the timed command.
 
 For how durations are taken and how to repeat a check, see
-[Performance checks](/manuals/desktop/features/vmm/performance-checks/).
+[Performance checks](/manuals/desktop/features/vmm/performance-checks/_index.md).
 
 ## Get the source
 

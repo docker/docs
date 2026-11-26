@@ -24,7 +24,7 @@ of a `docker build` command on your machine. Each pair of builds gives one
 result.
 
 For how durations are taken and how to repeat a check, see
-[Performance checks](/manuals/desktop/features/vmm/performance-checks/).
+[Performance checks](/manuals/desktop/features/vmm/performance-checks/_index.md).
 
 > [!WARNING]
 >

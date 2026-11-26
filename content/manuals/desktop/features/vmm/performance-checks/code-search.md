@@ -16,7 +16,7 @@ measured inside the container. `ripgrep` chooses its own thread count. The
 parallelism your engine gives a container is part of what you measure.
 
 For how durations are taken and how to repeat a check, see
-[Performance checks](/manuals/desktop/features/vmm/performance-checks/).
+[Performance checks](/manuals/desktop/features/vmm/performance-checks/_index.md).
 
 ## Get the source
 

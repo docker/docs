@@ -20,7 +20,7 @@ the same work differently, so their numbers aren't comparable. Installing the
 tool inside the container doesn't affect the result, because `stress-ng`
 measures only its own 5 seconds.
 
-For how to repeat a check, see [Performance checks](/manuals/desktop/features/vmm/performance-checks/).
+For how to repeat a check, see [Performance checks](/manuals/desktop/features/vmm/performance-checks/_index.md).
 
 > [!NOTE]
 > This check fails on Docker Desktop with gRPC-FUSE file sharing, because that

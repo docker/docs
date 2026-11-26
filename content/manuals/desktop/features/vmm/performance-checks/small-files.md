@@ -21,7 +21,7 @@ Each step runs in its own short-lived container with the folder shared in as
 commands together on your machine, including container startup.
 
 For how durations are taken and how to repeat a check, see
-[Performance checks](/manuals/desktop/features/vmm/performance-checks/).
+[Performance checks](/manuals/desktop/features/vmm/performance-checks/_index.md).
 
 ## Set up
 

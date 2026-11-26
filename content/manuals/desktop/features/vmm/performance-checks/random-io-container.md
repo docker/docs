@@ -18,7 +18,7 @@ The result is a rate reported by `stress-ng`. Higher is better. Read the
 Use `stress-ng` 0.21.02, the version Alpine 3.24 installs. Other versions count
 the same work differently, so their numbers aren't comparable.
 
-For how to repeat a check, see [Performance checks](/manuals/desktop/features/vmm/performance-checks/).
+For how to repeat a check, see [Performance checks](/manuals/desktop/features/vmm/performance-checks/_index.md).
 
 ## Run the check
 
