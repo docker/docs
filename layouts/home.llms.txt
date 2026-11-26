@@ -46,7 +46,7 @@ page index, use [llms-full.txt](https://docs.docker.com/llms-full.txt).
 {{ range partialCached "reference-directory/groups.html" . "reference-directory" }}
 ### {{ .title }}
 
-{{ range .items }}- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
+{{ range .items }}- [{{ .title }}]({{ .link | absURL }}){{ with .description }}: {{ . }}{{ end }}
 {{ end }}{{ end }}
 
 ## Retrieval guidance

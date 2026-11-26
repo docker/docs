@@ -104,7 +104,27 @@ export default async function verifyDiscovery(page, base) {
     (await page.locator(".card-description").allTextContents()).every((text) =>
       text.trim(),
     ),
-    "reference cards have descriptions, including generated CLI and API pages",
+    "reference cards omit empty descriptions",
+  );
+  for (const path of [
+    "/reference/cli/docker/desktop/",
+    "/reference/cli/sbx/",
+  ]) {
+    assert.equal(
+      await page
+        .locator(`.card-link[href="${path}"] .card-description`)
+        .count(),
+      0,
+      `${path}: CLI summaries are not used as card descriptions`,
+    );
+  }
+  assert.ok(
+    await page
+      .locator(
+        '.card-link[href="/reference/api/registry/latest/"] .card-description',
+      )
+      .textContent(),
+    "API descriptions are preserved",
   );
   const references = await page.locator(".card-link").evaluateAll((links) =>
     links.map((link) => ({

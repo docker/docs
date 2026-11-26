@@ -8,6 +8,6 @@
 
 ## {{ .title }}
 
-{{ range .items }}- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
+{{ range .items }}- [{{ .title }}]({{ .link | absURL }}){{ with .description }}: {{ . }}{{ end }}
 {{ end }}{{ end }}
 {{ end -}}

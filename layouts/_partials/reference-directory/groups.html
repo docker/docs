@@ -24,13 +24,6 @@
               {{- $description = partial "utils/description.html" . -}}
             {{- end -}}
           {{- end -}}
-          {{- if and (not $description) .Params.datafile -}}
-            {{- if .Params.datafolder -}}
-              {{- $description = (index hugo.Data.cli .Params.datafolder .Params.datafile).short -}}
-            {{- else if eq .Layout "sbx-cli" -}}
-              {{- $description = (index hugo.Data.sbx_cli .Params.datafile).synopsis -}}
-            {{- end -}}
-          {{- end -}}
           {{- $items = $items | append (dict
             "title" $label
             "link" $url

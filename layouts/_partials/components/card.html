@@ -15,9 +15,11 @@
       {{ end }}
       <h{{ .level | default 3 }} class="card-title">{{ markdownify .title }}</h{{ .level | default 3 }}>
     </div>
-    <div class="card-content">
-      <p class="card-description">{{ .description | markdownify }}</p>
-    </div>
+    {{ with .description }}
+      <div class="card-content">
+        <p class="card-description">{{ . | markdownify }}</p>
+      </div>
+    {{ end }}
   {{ if .link }}
     </a>
   {{ end }}
