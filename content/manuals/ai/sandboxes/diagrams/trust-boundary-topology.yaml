@@ -3,25 +3,25 @@ title: Explore the microVM isolation boundary
 description: Select a component or labeled connection to inspect what is private, mounted, or unreachable.
 canvas:
   width: 720
-  height: 520
+  height: 620
 overview:
   category: Isolation overview
   label: The agent is contained inside the microVM
-  body: The agent controls the private VM filesystem and Docker Engine. The workspace, optional skills store, and forwarded SSH agent socket are explicit host connections; other host resources have no direct access path.
+  body: The agent controls the private VM filesystem and Docker Engine. The workspace, optional read-only skills store, forwarded SSH agent socket, and host-side MCP gateway are explicit connections. MCP tools can access resources exposed by their servers, but the agent has no general direct path to other host resources.
 boundaries:
   - id: host
     label: Host machine
     x: 12
     y: 18
     width: 696
-    height: 484
+    height: 584
     kind: host
   - id: sandbox
     label: Sandbox microVM
     x: 34
     y: 56
     width: 350
-    height: 426
+    height: 526
     kind: sandbox
 nodes:
   - id: agent
@@ -67,7 +67,7 @@ nodes:
   - id: skills
     label: Shared skills store
     description: Optional shared mount
-    details: Supported agents mount the host-side skills store read-write unless you opt out. Changes can become visible to agents in other participating sandboxes.
+    details: Supported agents mount the shared host-side skills store read-only by default. Use --skills or skills.defaultMode when creating a sandbox to choose readwrite or off. A sandbox with readwrite access can modify skills that other sandboxes load, even when those other sandboxes mount the store read-only.
     category: Explicitly shared
     x: 445
     y: 170
@@ -84,13 +84,23 @@ nodes:
     width: 205
     height: 72
     kind: shared
+  - id: mcp-gateway
+    label: MCP gateway
+    description: Explicit tool-mediated access
+    details: Supported agents call registered MCP tools through the host-side gateway. Local MCP servers run on the host and can access resources with their host permissions, subject to MCP policies when enabled. This does not grant the agent direct access to the host filesystem or Docker daemon.
+    category: Explicitly shared
+    x: 445
+    y: 368
+    width: 205
+    height: 72
+    kind: shared
   - id: host-resources
     label: Other host resources
     description: No direct access
-    details: The agent has no direct path to the rest of the host filesystem, host processes, or the host Docker daemon.
+    details: The agent cannot directly browse the rest of the host filesystem, access host processes, or control the host Docker daemon. Registered MCP tools may provide specific host-side operations under the server's host permissions; these are mediated through the gateway.
     category: Outside the microVM
     x: 445
-    y: 390
+    y: 468
     width: 205
     height: 72
     kind: restricted
@@ -108,7 +118,15 @@ edges:
     from: agent
     to: skills
     label: Skills mount
-    details: This optional read-write mount connects supported agents to a persistent skills store shared through the host.
+    details: Supported agents mount the persistent host-side skills store read-only by default. Read-write access is optional and must be selected when creating the sandbox.
+    category: Shared relationship
+    kind: shared
+    bidirectional: true
+  - id: mcp-gateway-access
+    from: agent
+    to: mcp-gateway
+    label: MCP tool calls
+    details: The agent invokes registered tools over the host-side MCP gateway. Local MCP servers may act on host resources with their own permissions and applicable MCP policy; the agent is not granted direct host access.
     category: Shared relationship
     kind: shared
     bidirectional: true
