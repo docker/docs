@@ -58,6 +58,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed `/initd services` using a full CPU core when the VM's kernel log reader stopped. Fixes [docker/desktop-feedback#502](https://github.com/docker/desktop-feedback/issues/502).
 - Fixed a bug in Enhanced Container Isolation (ECI) that was causing a pre-existing `kind` cluster to fail to come up after a Docker Desktop restart.
 - Fixed Gordon AI chat to display clear, user-friendly error messages instead of exposing AI provider names or generic errors when conversations are too large or requests fail.
+- Fixed a logging issue where oversized subprocess log lines could stop forwarding and block subprocess output. Fixes [docker/desktop-feedback#869](https://github.com/docker/desktop-feedback/issues/869).
 
 #### For Mac {#41010-for-mac}
 
