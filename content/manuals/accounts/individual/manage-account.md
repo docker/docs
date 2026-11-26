@@ -50,7 +50,10 @@ single sign-on (SSO) or System for Cross-domain Identity Management
 ## Change your password
 
 If your account uses single sign-on (SSO), contact your administrator to
-change your password.
+change your password. Your identity provider controls SSO passwords.
+
+Your new password must meet the
+[password requirements](create-account.md#password-requirements).
 
 1. Sign in to [Docker Home](https://app.docker.com/login).
 1. Select your avatar in the top-right corner and select

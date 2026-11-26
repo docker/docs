@@ -29,6 +29,12 @@ an
 [AI Governance](/manuals/accounts/organization/manage/manage-licenses.md)
 license.
 
+> [!NOTE]
+>
+> With SSO, your identity provider manages passwords. Docker's
+> [password requirements](/manuals/accounts/individual/create-account.md#password-requirements)
+> apply only to Docker accounts that use an email address and password.
+
 ## How SSO works
 
 When a user signs in to Docker Desktop or Docker Hub, Docker sends them to
