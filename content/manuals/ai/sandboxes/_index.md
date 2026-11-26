@@ -84,7 +84,7 @@ before adapting a workflow.
 To create and manage cloud sandboxes from your application, see
 [Sandboxes API and SDK](../sandboxes-api/_index.md).
 
-## Learn more
+## Explore the documentation
 
 The following guides describe local sandbox workflows. For cloud workflows,
 see [Cloud sandboxes](cloud/).

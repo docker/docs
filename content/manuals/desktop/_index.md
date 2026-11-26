@@ -79,6 +79,6 @@ Docker Desktop integrates with your preferred development tools and languages, a
 - [Docker Scout](../scout/_index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
 
-## Next steps
+## Explore the documentation
 
 {{< grid >}}

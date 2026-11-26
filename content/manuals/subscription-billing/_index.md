@@ -72,6 +72,6 @@ Use these docs to:
 - Manage payment methods and billing details, review invoices and taxes, and
   track usage, costs, and credits for an account in Docker Home.
 
-## Next steps
+## Explore the documentation
 
 {{< grid >}}

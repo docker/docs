@@ -90,6 +90,6 @@ to the right server and handles authentication and lifecycle management.
 > [!NOTE]
 > MCP Gateway as part of Docker AI Governance is an invite-only feature. [Contact Docker Sales](https://www.docker.com/pricing/contact-sales/) to learn more.
 
-## Learn more
+## Explore the documentation
 
 {{< grid >}}

@@ -62,6 +62,6 @@ request fields, responses, and the downloadable OpenAPI specification.
 
 To run agents from your terminal, see [Docker Sandboxes](../sandboxes/_index.md).
 
-## Develop your application
+## Explore the documentation
 
 {{< grid >}}
