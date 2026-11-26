@@ -24,6 +24,22 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.100.1
+
+{{< release-date date="2026-11-23" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.100.1" build_path="/247138/" >}}
+
+### Bug fixes and enhancements {#41001-bug-fixes-and-enhancements}
+
+#### For all platforms {#41001-for-all-platforms}
+
+- Additional rebranding updates.
+
+### Known issues
+
+- Containers and images are hidden after you update to Docker Desktop 4.100.0 or 4.100.1. On update, installs that never set the containerd image store switch to it, and existing containers and images are hidden, not deleted. As a workaround, go to **Settings** > **General**, clear **Use containerd for pulling and storing images**, and select **Apply**. Your images are then restored. Images pulled or built while the containerd image store was enabled are hidden until you turn the setting back on.
+
 ## 4.100.0
 
 {{< release-date date="2026-11-19" >}}
@@ -200,7 +216,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug where the installer could leave a file under `C:\ProgramData\DockerDesktop` with no permissions at all, making it unreadable to diagnostics and to later installs.
 - Fixed a bug where the disk image location could not be moved back to a folder it had previously been moved out of. Fixes [docker/desktop-feedback#565](https://github.com/docker/desktop-feedback/issues/565).
 - Fixed a bug where a failed update could put back Start Menu and desktop shortcuts that had been deleted on purpose.
-- `--user` mode is now the default for new Docker Desktop `.EXE` installations.
+- Interactive installation using the `.EXE` installer now selects per-user install mode by default.
 
 ### Security
 

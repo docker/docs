@@ -8,8 +8,6 @@ aliases:
 weight: 110
 ---
 
-{{< summary-bar feature_name="Composefile include" >}}
-
 You can reuse and modularize Docker Compose configurations by including other Compose files. This is useful if:
 - You want to reuse other Compose files.
 - You need to factor out parts of your application model into separate Compose files so they can be managed separately or shared with others.

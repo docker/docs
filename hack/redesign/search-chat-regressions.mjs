@@ -285,6 +285,66 @@ export default async function verifySearchChatRegressions(parentPage, base) {
       await cards.close();
     }
 
+    // External checks read the chat state from these attributes, not from Alpine.
+    const state = await context.newPage();
+    try {
+      await state.goto(base + "/build/");
+      await state.evaluate((stream) => {
+        const original = window.fetch;
+        window.fetch = async (url, options) => {
+          if (!String(url).endsWith("/public/ask"))
+            return original(url, options);
+          if (window.failAnswer) return new Response(null, { status: 500 });
+          const bytes = new TextEncoder().encode(stream);
+          return new Response(
+            new ReadableStream({
+              async start(controller) {
+                await new Promise(
+                  (resolve) => (window.releaseAnswer = resolve),
+                );
+                controller.enqueue(bytes);
+                controller.close();
+              },
+            }),
+            { headers: { "Content-Type": "text/event-stream" } },
+          );
+        };
+      }, answerStream("Use Docker to run containers."));
+      await state.evaluate(() => Alpine.store("gordon").open());
+      const chat = state.locator("#gordon-chat");
+      const input = state.locator("#question");
+      assert.equal(await chat.getAttribute("data-chat-status"), "idle");
+      await input.fill("Explain Docker");
+      await input.press("Enter");
+      await state.waitForFunction(() => Boolean(window.releaseAnswer));
+      assert.equal(await chat.getAttribute("data-chat-status"), "answering");
+      assert.deepEqual(
+        await chat
+          .locator("[data-message-role]")
+          .evaluateAll((es) => es.map((e) => e.dataset.messageRole)),
+        ["user", "assistant"],
+      );
+      await state.evaluate(() => window.releaseAnswer());
+      await state.locator('#gordon-chat[data-chat-status="idle"]').waitFor();
+      assert.match(
+        await chat
+          .locator('[data-message-role="assistant"]')
+          .last()
+          .innerText(),
+        /Use Docker to run containers\./,
+      );
+      await state.evaluate(() => (window.failAnswer = true));
+      await input.fill("Try again");
+      await input.press("Enter");
+      await state.locator('#gordon-chat[data-chat-status="error"]').waitFor();
+      assert.equal(
+        await chat.locator('[data-message-role="assistant"]').count(),
+        1,
+      );
+    } finally {
+      await state.close();
+    }
+
     // Restoring focus matters for dock input submission and its mobile button.
     for (const [width, pointer] of [
       [1440, false],

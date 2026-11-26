@@ -85,7 +85,7 @@ All Docker IDs are first-come, first-served except for companies that have a
 U.S. Trademark on a username.
 
 If you have a trademark for your Docker ID,
-[Docker Support](https://hub.docker.com/support/contact/) can retrieve the
+[Docker Support](https://app.docker.com/support/contact/) can retrieve the
 Docker ID for you.
 
 ### Why did one of my personal access tokens disappear?

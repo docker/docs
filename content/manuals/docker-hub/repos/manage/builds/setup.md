@@ -217,14 +217,6 @@ tag that's applied to the built image.
 You can use up to nine regular expression capture groups, or expressions enclosed in parentheses, to select a source to build, and reference
 these in the **Docker Tag** field using `{\1}` through `{\9}`.
 
-<!-- Capture groups Not a priority
-#### Regex example: build from version number branch and tag with version number
-
-You could also use capture groups to build and label images that come from various
-sources. For example, you might have
-
-`/(alice|bob)-v([0-9.]+)/` -->
-
 ### Build images with BuildKit
 
 Autobuilds use the BuildKit build system by default. If you want to use the legacy
