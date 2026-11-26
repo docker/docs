@@ -1,3 +1,3 @@
 {{ range index .Page.Params (.Get "items" | default "grid") }}
-- [{{ .title }}]({{ .link }}): {{ .description }}
+- {{ if .link }}[{{ .title }}]({{ .link }}){{ else }}{{ .title }}{{ end }}: {{ .description }}
 {{ end }}
