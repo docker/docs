@@ -1,6 +1,1 @@
-# {{ .Title }}
-
-{{ .Description }}
-
-{{ range hugo.Data.navigation.references }}{{ $label := .label }}{{ with site.GetPage .root }}{{ if ne .Params.sitemap false }}- [{{ $label }}]({{ partial "navigation/url.html" . | absURL }}): {{ .Description }}
-{{ end }}{{ end }}{{ end }}
+{{- partial "markdown/render.html" (dict "page" . "content" (partial "markdown/pages/reference-directory.md" .)) -}}

@@ -1,7 +1,1 @@
-# {{ .Title }}
-
-{{ .Description }}
-
-{{ range hugo.Data.navigation.categories }}
-- [{{ .label }}]({{ .landing | absURL }}): {{ .description }}
-{{ end }}
+{{- partial "markdown/render.html" (dict "page" . "content" (partial "markdown/pages/category-directory.md" .)) -}}

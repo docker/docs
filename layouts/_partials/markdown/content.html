@@ -1,0 +1,5 @@
+{{- $content := .RenderShortcodes -}}
+{{- if and (not (strings.TrimSpace $content)) .Params.sidebar.goto -}}
+  {{- $content = printf "See [%s](%s).\n" .Title .Params.sidebar.goto -}}
+{{- end -}}
+{{- return $content -}}

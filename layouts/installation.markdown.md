@@ -1,6 +1,1 @@
-# {{ .Title }}
-
-{{ .Description }}
-
-{{ range .Pages }}- [{{ .LinkTitle }}]({{ .Permalink }}): {{ .Description }}
-{{ end }}
+{{- partial "markdown/render.html" (dict "page" . "content" (partial "markdown/pages/installation.md" .)) -}}

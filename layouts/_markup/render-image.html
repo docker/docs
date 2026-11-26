@@ -1,13 +1,5 @@
 {{- $u := urls.Parse .Destination -}}
-{{- $src := $u.String -}}
-{{ if not (or $u.IsAbs (strings.HasPrefix $u.String "/")) }}
-  {{ $base := urls.Parse .Page.Permalink }}
-  {{ if strings.HasSuffix .Page.File.BaseFileName "index" }}
-    {{ $src = $base.JoinPath $u.Path -}}
-  {{ else }}
-    {{ $src = $base.JoinPath "../" $u.Path -}}
-  {{ end }}
-{{ end }}
+{{- $src := partial "markdown/resolve-image.html" . -}}
 
 {{ $params := $u.Query }}
 {{ $width := $params.Get "w" }}
