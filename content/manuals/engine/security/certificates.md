@@ -22,8 +22,9 @@ for the registry and how to set the client TLS certificate for verification.
 ## Understand the configuration
 
 A custom certificate is configured by creating a directory under the daemon's
-certificate root using the same name as the registry's hostname, such as
-`localhost`. All `*.crt` files are added to this directory as CA roots.
+certificate root using the same name as the registry's hostname and optional
+port, such as `registry.example.com:5000`. All `*.crt` files are added to this
+directory as CA roots.
 
 Where that certificate root lives depends on the platform:
 
@@ -58,15 +59,25 @@ repository.
 > order. If there is a 4xx-level or 5xx-level authentication error, Docker
 > continues to try with the next certificate.
 
+> [!NOTE]
+>
+> By default, Docker Engine treats loopback addresses (`localhost`,
+> `127.0.0.0/8`, and `::1/128`) as insecure registries. Docker Engine does not
+> load client certificates from `certs.d` for insecure registries, so using
+> `localhost` to test a registry that requires mutual TLS (mTLS) client
+> authentication won't exercise the client certificate configuration.
+> For mTLS testing, use a registry hostname that resolves to a non-loopback
+> address and is not configured as an insecure registry.
+
 The following illustrates a configuration with custom certificates:
 
 ```text
-    /etc/docker/certs.d/        <-- Certificate directory
-    └── localhost:5000          <-- Hostname:port
-       ├── client.cert          <-- Client certificate
-       ├── client.key           <-- Client key
-       └── ca.crt               <-- Root CA that signed
-                                    the registry certificate, in PEM
+    /etc/docker/certs.d/           <-- Certificate directory
+    └── registry.example.com:5000  <-- Hostname:port
+        ├── client.cert            <-- Client certificate
+        ├── client.key             <-- Client key
+        └── ca.crt                 <-- Root CA that signed
+                                      the registry certificate, in PEM
 ```
 
 The preceding example is operating-system specific and is for illustrative
