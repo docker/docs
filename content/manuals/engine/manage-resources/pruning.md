@@ -123,7 +123,8 @@ for more examples.
 Docker networks don't take up much disk space, but they do create `iptables`
 rules, bridge network devices, and routing table entries. To clean these things
 up, you can use `docker network prune` to clean up networks which aren't used
-by any containers.
+by any running containers. Networks that only stopped containers are connected
+to are also removed.
 
 ```console
 $ docker network prune
