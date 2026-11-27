@@ -106,6 +106,63 @@ function loadGordonCards() {
 
 Alpine.magic("gordonCards", () => loadGordonCards);
 
+// With the "browser" Gordon backend, the assistant runs in the reader's browser. Its loader
+// script defines window.gordonAssistant and is only added once a reader shows interest in Gordon,
+// never on a plain page view.
+let gordonAssistantLoading;
+
+function loadGordonAssistant() {
+  gordonAssistantLoading ??= new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = window.GORDON_LOADER_URL;
+    script.onload = () => {
+      if (window.gordonAssistant) {
+        resolve(window.gordonAssistant);
+      } else {
+        gordonAssistantLoading = undefined;
+        reject(
+          gordonUnavailable("The Gordon loader did not define gordonAssistant"),
+        );
+      }
+    };
+    script.onerror = () => {
+      // A later call (such as opening the panel again) can try again.
+      gordonAssistantLoading = undefined;
+      script.remove();
+      reject(gordonUnavailable("Failed to load the Gordon loader"));
+    };
+    document.head.append(script);
+  });
+  return gordonAssistantLoading;
+}
+
+// Same code as the assistant's own load failures, so the chat panel falls back to the docs AI
+// service for both.
+function gordonUnavailable(message) {
+  return Object.assign(new Error(message), { code: "unavailable" });
+}
+
+Alpine.magic("gordonAssistant", () => loadGordonAssistant);
+
+// Even with the "browser" backend, the docs AI service can send readers back to the legacy chat.
+// The page asks once per page view, before it loads the assistant. If the request fails, the page
+// uses the legacy chat: the assistant needs the same service.
+let gordonBackend;
+
+function resolveGordonBackend() {
+  if (window.GORDON_BACKEND !== "browser") return Promise.resolve("legacy");
+  gordonBackend ??= fetch(window.GORDON_BACKEND_URL, {
+    signal: AbortSignal.timeout(5000),
+  })
+    .then((response) => (response.ok ? response.json() : null))
+    .then((body) => (body?.backend === "browser" ? "browser" : "legacy"))
+    .catch((err) => {
+      console.error("Gordon: using the legacy chat:", err);
+      return "legacy";
+    });
+  return gordonBackend;
+}
+
 // Swaps each ```openui-lang block for the card it describes. Until the card code has loaded, or
 // while a block is still streaming in and doesn't parse yet, it shows a placeholder. If the card
 // code can't load, or a finished block isn't a card, the block stays a plain code block.
@@ -269,6 +326,26 @@ Alpine.store("gordon", {
   },
   close() {
     this.isOpen = false;
+  },
+  // Downloads the in-browser assistant ahead of time, when a reader hovers over or focuses an
+  // "Ask Docker" control, or types in the home page composer (where Enter asks Docker).
+  prefetch() {
+    if (window.GORDON_BACKEND !== "browser") return;
+    resolveGordonBackend()
+      .then(async (backend) => {
+        if (backend !== "browser") return;
+        const assistant = await loadGordonAssistant();
+        assistant.prefetch();
+      })
+      .catch((err) => console.error("Gordon:", err));
+  },
+  // Resolves to "browser" or "legacy": where this page view gets its answers.
+  backend() {
+    return resolveGordonBackend();
+  },
+  // For the rest of this page view, after the assistant failed to run.
+  useLegacyBackend() {
+    gordonBackend = Promise.resolve("legacy");
   },
 });
 

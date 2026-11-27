@@ -13,6 +13,30 @@
   window.GORDON_CARDS_SRC = '{{ $gordonCards.RelPermalink }}';
   // Lets Gordon answer with cards. Always on outside production builds.
   window.GORDON_CARDS_ENABLED = {{ or (ne hugo.Environment "production") site.Params.gordon.cards }};
+  {{- /* "legacy" streams answers from GORDON_BASE_URL. "browser" runs the assistant in the
+    reader's browser: the page loads its script from the loader URL, and the assistant sends
+    model requests to the proxy URL. The backend URL can still send a "browser" page view back
+    to "legacy". */}}
+  {{- $backend := or (getenv "HUGO_GORDON_BACKEND") site.Params.gordon.backend "legacy" }}
+  {{- if not (in (slice "legacy" "browser") $backend) }}
+    {{- errorf "Unknown Gordon backend %q: use \"legacy\" or \"browser\"" $backend }}
+  {{- end }}
+  window.GORDON_BACKEND = {{ $backend }};
+  {{- if eq $backend "browser" }}
+    {{- $proxyURL := "https://ai-backend-service-stage.docker.com/proxy" }}
+    {{- $loaderURL := "" }}
+    {{- if eq hugo.Environment "production" }}
+      {{- $proxyURL = "https://ai-backend-service.docker.com/proxy" }}
+    {{- else }}
+      {{- with getenv "HUGO_GORDON_PROXY_URL" }}
+        {{- $proxyURL = . }}
+      {{- end }}
+      {{- $loaderURL = getenv "HUGO_GORDON_LOADER_URL" }}
+    {{- end }}
+    window.GORDON_PROXY_URL = {{ $proxyURL }};
+    window.GORDON_BACKEND_URL = {{ printf "%s/gordon-web/backend" $proxyURL }};
+    window.GORDON_LOADER_URL = {{ or $loaderURL (printf "%s/web-assistant/loader.js" $proxyURL) }};
+  {{- end }}
 </script>
 <template id="gordon-code-copy">
   {{- partial "code-copy.html" (dict "text" "") -}}
@@ -25,8 +49,14 @@
     messages: $persist([]).using($gordonStorage).as('gordon-messages'),
     currentQuestion: '',
     threadId: $persist(null).using($gordonStorage).as('gordon-threadId'),
+    // Thread of the in-browser assistant. Kept apart from threadId, which only the legacy
+    // backend knows.
+    assistantThreadId: $persist(null).using($gordonStorage).as('gordon-assistant-threadId'),
     includePageContext: $persist(true).using($gordonStorage).as('gordon-includePageContext'),
     maxTurnsPerThread: 10,
+    isBrowserAssistant: window.GORDON_BACKEND === 'browser',
+    assistantStatus: '',
+    abortController: null,
 
     init() {
       // Clean up any streaming messages that might be persisted
@@ -36,6 +66,14 @@
         if (message.role === 'user') question = message.content
         else message.question = question
       }
+
+      this.$watch('$store.gordon.isOpen', async (isOpen) => {
+        if (!isOpen || !this.isBrowserAssistant) return
+        this.isBrowserAssistant = await this.$store.gordon.backend() === 'browser'
+        if (this.isBrowserAssistant) {
+          this.startAssistant().catch((err) => console.error('Gordon:', err))
+        }
+      })
 
       // Watch for query from store and populate input
       this.$watch('$store.gordon.query', (query) => {
@@ -120,20 +158,32 @@
       })
 
       try {
-        await this.streamGordonResponse(responseIndex, answer)
+        await this.streamAnswer(responseIndex, answer)
         if (this.messages[responseIndex] !== answer) return
         const answerText = this.$markdownText(answer.content)
         announcement = 'Ask Docker: ' + (answerText || 'No answer received.')
       } catch (err) {
+        if (err.name === 'AbortError') {
+          // Stopped by the reader, or cleared: keep whatever arrived.
+          if (answer.isStreaming) {
+            answer.isStreaming = false
+            answer.stopped = true
+          }
+          announcement = 'You stopped this answer.'
+          return
+        }
         if (this.messages[responseIndex] === answer) {
           if (err.message === 'RATE_LIMIT_EXCEEDED') {
             this.error = 'You\'ve exceeded your question quota for the day. Please come back tomorrow.'
+          } else if (err.code === 'rate_limited') {
+            this.error = err.message || 'You\'ve reached the question limit. Try again later.'
           } else {
             this.error = 'Failed to get response. Please try again.'
           }
         }
         console.error('Gordon API error:', err)
       } finally {
+        this.assistantStatus = ''
         if (this.messages[responseIndex] === answer) {
           this.isLoading = false
           this.announcement = this.error || announcement
@@ -152,6 +202,32 @@
         this.$gordonStorage.setItem('gordon-session-id', sessionId)
       }
       return sessionId
+    },
+
+    // Each answer records its backend, so its vote goes to the backend that wrote it.
+    async streamAnswer(responseIndex, answer) {
+      this.isBrowserAssistant = await this.$store.gordon.backend() === 'browser'
+      if (this.messages[responseIndex] !== answer) return
+      if (!this.isBrowserAssistant) {
+        answer.backend = 'legacy'
+        await this.streamGordonResponse(responseIndex, answer)
+        return
+      }
+      answer.backend = 'browser'
+      try {
+        await this.streamAssistantResponse(responseIndex, answer)
+      } catch (err) {
+        // The assistant couldn't run, or its route was closed (403): ask the docs AI service
+        // instead, for the rest of this page view. A partial answer isn't asked again.
+        const fallBack = err.code === 'unavailable' || err.status === 403
+        if (!fallBack || answer.content || this.messages[responseIndex] !== answer) throw err
+        console.error('Gordon: using the legacy chat:', err)
+        this.$store.gordon.useLegacyBackend()
+        this.isBrowserAssistant = false
+        this.assistantStatus = ''
+        answer.backend = 'legacy'
+        await this.streamGordonResponse(responseIndex, answer)
+      }
     },
 
     async streamGordonResponse(responseIndex, answer) {
@@ -269,10 +345,90 @@
       answer.isStreaming = false
     },
 
+    // Adds the in-browser assistant's script and starts it. Safe to call more than once.
+    async startAssistant() {
+      const assistant = await this.$gordonAssistant()
+      // send() retries a failed load with these options and reports the failure.
+      assistant.load({ proxyUrl: window.GORDON_PROXY_URL }).catch(() => {})
+      return assistant
+    },
+
+    async streamAssistantResponse(responseIndex, answer) {
+      this.abortController = new AbortController()
+      try {
+        const assistant = await this.startAssistant()
+        const result = await assistant.send(
+          {
+            messages: this.messages.slice(0, responseIndex).map((msg) => ({
+              role: msg.role,
+              content: msg.content
+            })),
+            // An empty URL tells the assistant there's no current page to read.
+            pageUrl: this.includePageContext ? window.location.href : '',
+            pageTitle: this.includePageContext ? {{ .Title | jsonify }} : '',
+            ...(this.assistantThreadId && { threadId: this.assistantThreadId })
+          },
+          {
+            signal: this.abortController.signal,
+            onText: (text) => {
+              this.assistantStatus = ''
+              answer.content += text
+              this.followAnswer(responseIndex, answer)
+            },
+            onThinking: () => {
+              this.showAssistantStatus(responseIndex, answer, 'Thinking…')
+            },
+            onToolCall: (name) => {
+              this.showAssistantStatus(responseIndex, answer,
+                name === 'get_current_page' ? 'Reading this page…'
+                : name === 'knowledge_base' ? 'Searching the docs…'
+                : 'Thinking…')
+            }
+          }
+        )
+        // The chat may have been cleared while the answer finished.
+        if (this.messages[responseIndex] === answer) {
+          if (!this.assistantThreadId && result.threadId) {
+            this.assistantThreadId = result.threadId
+          }
+          answer.answerId = result.answerId
+        }
+      } finally {
+        this.abortController = null
+      }
+      answer.isStreaming = false
+    },
+
+    // Shown next to the loading dots until text arrives, and announced to screen readers.
+    showAssistantStatus(responseIndex, answer, status) {
+      if (this.messages[responseIndex] !== answer || answer.content) return
+      if (status !== this.assistantStatus) this.announcement = status
+      this.assistantStatus = status
+    },
+
+    stopAnswer() {
+      this.abortController?.abort()
+    },
+
+    followAnswer(responseIndex, answer) {
+      this.$nextTick(() => {
+        if (this.messages[responseIndex] !== answer) return
+        const container = this.$refs.messagesContainer
+        if (container) {
+          const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100
+          if (isNearBottom) {
+            container.scrollTop = container.scrollHeight
+          }
+        }
+      })
+    },
+
     clearChat() {
       if (confirm('Clear all messages?')) {
+        this.abortController?.abort()
         this.messages = []      // $persist auto-saves empty array
         this.threadId = null    // $persist auto-removes from sessionStorage
+        this.assistantThreadId = null
         this.isLoading = false
         this.announcement = 'Chat cleared.'
         this.$nextTick(() => this.$refs.input?.focus())
@@ -317,6 +473,11 @@
       // Clear any previous error
       message.feedbackError = null
 
+      if (message.backend === 'browser') {
+        await this.rateAnswer(message, feedbackType)
+        return
+      }
+
       if (!message.questionAnswerId) {
         message.feedbackError = 'Unable to submit feedback'
         console.error('No question_answer_id available for feedback')
@@ -339,6 +500,17 @@
           message.feedbackError = 'Unable to submit feedback'
           console.error('Failed to submit feedback:', response.status, response.statusText)
         }
+      } catch (err) {
+        message.feedbackError = 'Unable to submit feedback'
+        console.error('Error submitting feedback:', err)
+      }
+    },
+
+    async rateAnswer(message, feedbackType) {
+      try {
+        const assistant = await this.$gordonAssistant()
+        await assistant.rate({ answerId: message.answerId, feedback: feedbackType })
+        message.feedback = feedbackType  // $persist auto-saves
       } catch (err) {
         message.feedbackError = 'Unable to submit feedback'
         console.error('Error submitting feedback:', err)
@@ -508,18 +680,25 @@
                 class="prose prose-sm dark:prose-invert"
               >
                 <template x-if="!message.content && message.isStreaming">
-                  <div class="flex gap-1 py-3" aria-hidden="true">
+                  <div class="flex items-center gap-3" aria-hidden="true">
+                    <div class="flex gap-1 py-3">
+                      <span
+                        class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
+                        style="animation-delay: 0ms"
+                      ></span>
+                      <span
+                        class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
+                        style="animation-delay: 150ms"
+                      ></span>
+                      <span
+                        class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
+                        style="animation-delay: 300ms"
+                      ></span>
+                    </div>
                     <span
-                      class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
-                      style="animation-delay: 0ms"
-                    ></span>
-                    <span
-                      class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
-                      style="animation-delay: 150ms"
-                    ></span>
-                    <span
-                      class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
-                      style="animation-delay: 300ms"
+                      x-show="assistantStatus"
+                      x-text="assistantStatus"
+                      class="text-sm text-(--color-muted-foreground)"
                     ></span>
                   </div>
                 </template>
@@ -527,15 +706,28 @@
                   <div x-html="formatMessageContent(message)"></div>
                 </template>
               </div>
+              <template x-if="message.stopped === true">
+                <p class="text-xs text-(--color-muted-foreground)">
+                  You stopped this answer.
+                </p>
+              </template>
               <!-- Feedback buttons for assistant messages -->
               <template
-                x-if="message.role === 'assistant' && !message.isStreaming"
+                x-if="message.role === 'assistant' && !message.isStreaming && (message.content || !message.stopped)"
               >
                 <div class="flex flex-col gap-2">
-                  <p class="gordon-feedback-label">Was this helpful?</p>
+                  <p
+                    x-show="message.backend !== 'browser' || message.answerId"
+                    class="gordon-feedback-label"
+                  >
+                    Was this helpful?
+                  </p>
                   <div class="gordon-feedback-actions">
                     <!-- Feedback buttons group -->
-                    <div class="gordon-feedback-votes">
+                    <div
+                      x-show="message.backend !== 'browser' || message.answerId"
+                      class="gordon-feedback-votes"
+                    >
                       <!-- Thumbs up - Helpful -->
                       <button
                         @click="submitFeedback(index, 'positive')"
@@ -672,7 +864,18 @@
           ></textarea>
         </div>
         <button
+          type="button"
+          x-show="isBrowserAssistant && isLoading"
+          @click="stopAnswer()"
+          title="Stop answer"
+          aria-label="Stop answer"
+          class="gordon-send gordon-stop"
+        >
+          {{ partial "ui-icon.html" (dict "name" "square") }}
+        </button>
+        <button
           type="submit"
+          x-show="!(isBrowserAssistant && isLoading)"
           :disabled="!currentQuestion.trim() || isLoading || isThreadLimitReached()"
           :title="isLoading ? 'Sending...' : (isThreadLimitReached() ? 'Thread limit reached. Start a new thread.' : 'Send question')"
           class="gordon-send"

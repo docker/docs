@@ -3,6 +3,8 @@
     type="button"
     marlin-action="ask-gordon-button"
     @click="$store.gordon.open()"
+    @mouseenter="$store.gordon.prefetch()"
+    @focus="$store.gordon.prefetch()"
   >
     {{ partial "ui-icon.html" (dict "name" "bot") }} Ask Docker
   </button>

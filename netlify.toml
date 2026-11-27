@@ -7,6 +7,7 @@ NODE_ENV = "production"
 HUGO_VERSION = "0.169.0"
 HUGO_ENABLEGITINFO = "true"
 HUGO_ENVIRONMENT = "preview"
+HUGO_GORDON_BACKEND = "browser"
 SECRETS_SCAN_OMIT_PATHS = "public/contribute/file-conventions/index.html"
 
 [context.deploy-preview]
