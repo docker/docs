@@ -276,7 +276,7 @@ deploy:
 
 `rollback_config` configures how the service should be rolled back in case of a failing update.
 
-- `parallelism`: The number of containers to rollback at a time. If set to 0, all containers rollback simultaneously.
+- `parallelism`: The number of containers to rollback at a time. If set to 0, all containers rollback simultaneously. (default 1)
 - `delay`: The time to wait between each container group's rollback (default 0s).
 - `failure_action`: What to do if a rollback fails. One of `continue` or `pause` (default `pause`)
 - `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
@@ -288,11 +288,11 @@ deploy:
 
 `update_config` configures how the service should be updated. Useful for configuring rolling updates.
 
-- `parallelism`: The number of containers to update at a time.
-- `delay`: The time to wait between updating a group of containers.
-- `failure_action`: What to do if an update fails. One of `continue`, `rollback`, or `pause` (default: `pause`).
+- `parallelism`: The number of containers to update at a time. (default 1)
+- `delay`: The time to wait between updating a group of containers. (default 0s)
+- `failure_action`: What to do if an update fails. One of `continue`, `rollback`, or `pause` (default `pause`).
 - `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
-- `max_failure_ratio`: Failure rate to tolerate during an update.
+- `max_failure_ratio`: Failure rate to tolerate during an update. (default 0)
 - `order`: Order of operations during updates. One of `stop-first` (old task is stopped before starting new one),
    or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`).
 
