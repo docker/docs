@@ -31,6 +31,6 @@ grid:
 Answers to common questions about Docker accounts, organizations, companies,
 subscriptions, billing, and security.
 
-## Next steps
+## Explore the docs
 
 {{< grid >}}

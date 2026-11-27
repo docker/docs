@@ -1,7 +1,16 @@
 {{ define "main" }}
-  <ul class="discovery-list">
-    {{ range hugo.Data.navigation.references }}
-      {{ partial "discovery-entry.html" (dict "page" .root "label" .label) }}
+  <div class="prose dark:prose-invert max-w-none">
+    {{ range partialCached "reference-directory/groups.html" . "reference-directory" }}
+      <section aria-labelledby="reference-{{ .id }}">
+        <h2 id="reference-{{ .id }}">{{ .title }}</h2>
+        <div
+          class="not-prose mb-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3"
+        >
+          {{ range .items }}
+            {{ partial "components/card.html" . }}
+          {{ end }}
+        </div>
+      </section>
     {{ end }}
-  </ul>
+  </div>
 {{ end }}

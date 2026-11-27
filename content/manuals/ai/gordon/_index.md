@@ -9,6 +9,32 @@ params:
     group: AI and agents
 aliases:
   - /desktop/features/gordon/
+keywords: gordon, ai assistant, docker ai, docker desktop
+grid:
+  - title: "Docker Desktop"
+    description: "Use Gordon to work with containers from Docker Desktop."
+    link: /ai/gordon/how-to/docker-desktop/
+    icon: box
+  - title: "CLI"
+    description: "Use Gordon from your terminal with `docker ai`."
+    link: /ai/gordon/how-to/cli/
+    icon: terminal
+  - title: "Permissions"
+    description: "Configure approvals for the actions Gordon takes."
+    link: /ai/gordon/how-to/permissions/
+    icon: settings
+  - title: "Configure tools"
+    description: "Configure the tools Gordon can use."
+    link: /ai/gordon/how-to/configure-tools/
+    icon: settings
+  - title: "Use cases"
+    description: "Explore Docker tasks you can work on with Gordon."
+    link: /ai/gordon/use-cases/
+    icon: book-open
+  - title: "Usage limits"
+    description: "Understand plan limits for Gordon."
+    link: /ai/gordon/usage-limits/
+    icon: search
 ---
 
 {{< summary-bar feature_name="Gordon" >}}
@@ -16,6 +42,10 @@ aliases:
 Gordon is an AI-powered assistant that takes action on your Docker workflows.
 It analyzes your environment, proposes solutions, and executes commands with
 your permission.
+
+## Explore the docs
+
+{{< grid >}}
 
 ## What Gordon does
 

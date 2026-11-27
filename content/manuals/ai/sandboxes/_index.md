@@ -6,6 +6,51 @@ weight: 10
 params:
   sidebar:
     group: AI and agents
+grid:
+  - title: "Agents"
+    description: "Choose an agent and configure it for local sandboxes."
+    link: /ai/sandboxes/agents/
+    icon: terminal
+  - title: "Workflows"
+    description: "Use Git, local development tools, authentication, and automation in sandboxes."
+    link: /ai/sandboxes/workflows/
+    icon: code
+  - title: "Configuration"
+    description: "Manage credentials, project environments, GPU passthrough, and upstream proxies."
+    link: /ai/sandboxes/configuration/
+    icon: settings
+  - title: "Integrations"
+    description: "Connect editors and applications to a sandbox over SSH."
+    link: /ai/sandboxes/integrations/
+    icon: code
+  - title: "MCP gateway"
+    description: "Register MCP servers and connect them to sandboxed agents."
+    link: /ai/sandboxes/mcp-gateway/
+    icon: box
+  - title: "Kits"
+    description: "Package tools and configuration into reusable sandbox environments."
+    link: /ai/sandboxes/customize/
+    icon: box
+  - title: "Architecture"
+    description: "Understand microVM isolation, workspace mounting, and networking."
+    link: /ai/sandboxes/architecture/
+    icon: book-open
+  - title: "Security"
+    description: "Review isolation, credential handling, and network policies."
+    link: /ai/sandboxes/security/
+    icon: settings
+  - title: "CLI reference"
+    description: "Find commands and options for the `sbx` CLI."
+    link: /reference/cli/sbx/
+    icon: terminal
+  - title: "Troubleshooting"
+    description: "Diagnose common issues and find fixes."
+    link: /ai/sandboxes/troubleshooting/
+    icon: search
+  - title: "FAQ"
+    description: "Find answers about login requirements, telemetry, and other sandbox behavior."
+    link: /ai/sandboxes/faq/
+    icon: book-open
 ---
 
 Docker Sandboxes run AI coding agents in isolated environments on your machine
@@ -39,29 +84,12 @@ before adapting a workflow.
 To create and manage cloud sandboxes from your application, see
 [Sandboxes API and SDK](../sandboxes-api/_index.md).
 
-## Learn more
+## Explore the docs
 
 The following guides describe local sandbox workflows. For cloud workflows,
 see [Cloud sandboxes](cloud/).
 
-- [Agents](agents/) — supported agents and per-agent configuration
-- [Workflows](workflows/) — patterns for Git, local development,
-  authentication, agent skills, and automation
-- [Configuration](configuration/) — manage credentials, declare project
-  environments, turn on GPU passthrough, and configure an upstream proxy
-- [Integrations](integrations/) — connect editors and apps like VS Code and
-  Cursor to a sandbox over SSH
-- [MCP gateway](mcp-gateway.md) — register MCP servers and connect them to
-  sandboxed agents
-- [Kits](customize/) — package tools and configuration into reusable
-  sandbox environments
-- [Architecture](architecture.md) — microVM isolation, workspace mounting,
-  networking
-- [Security](security/) — isolation model, credential handling, and
-  network policies
-- [CLI reference](/reference/cli/sbx/) — full list of `sbx` commands and options
-- [Troubleshooting](troubleshooting.md) — common issues and fixes
-- [FAQ](faq.md) — login requirements, telemetry, etc
+{{< grid >}}
 
 ## Feedback
 

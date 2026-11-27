@@ -49,6 +49,6 @@ Docker offers individual, organization, and company account types.
 You always sign in with your individual account, then work in the
 organizations or companies you own or belong to.
 
-## Next steps
+## Explore the docs
 
 {{< grid >}}

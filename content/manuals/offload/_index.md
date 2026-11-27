@@ -35,6 +35,10 @@ grid:
   description: Provide feedback on Docker Offload.
   icon: message-square
   link: /offload/feedback/
+- title: CLI reference
+  description: Find Offload commands and options for managing cloud sandboxes.
+  icon: terminal
+  link: /reference/cli/docker/offload/
 aliases:
 - /harmonia/
 ---
@@ -76,6 +80,8 @@ Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md
 > [Docker Offload v1](v1/_index.md). To use the latest version of Docker Offload,
 > see [Move to the current version of Docker
 > Offload](v1/configuration.md#move-to-the-current-version-of-docker-offload).
+
+## Explore the docs
 
 In the following topics, learn about Docker Offload, how to set it up, use it
 for your workflows, and troubleshoot common issues.

@@ -42,6 +42,10 @@ grid:
   description: Explore general FAQs and find out how to give feedback.
   icon: circle-help
   link: /compose/faq
+- title: CLI reference
+  description: Find Compose commands and options for managing multi-container applications.
+  icon: terminal
+  link: /reference/cli/docker/compose/
 aliases:
 - /compose/overview/
 - /compose/swarm/
@@ -62,4 +66,6 @@ well as CI workflows. It also has commands for managing the whole lifecycle of y
  - Stream the log output of running services
  - Run a one-off command on a service
 
-{{< grid level="2" >}}
+## Explore the docs
+
+{{< grid >}}

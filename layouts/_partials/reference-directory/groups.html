@@ -1,0 +1,55 @@
+{{- $groups := slice -}}
+{{- range slice
+  (dict "id" "cli" "title" "CLI references" "icon" "terminal")
+  (dict "id" "api" "title" "APIs" "icon" "code")
+  (dict "id" "formats" "title" "File formats and build checks" "icon" "file-text")
+-}}
+  {{- $group := . -}}
+  {{- $items := slice -}}
+  {{- range hugo.Data.navigation.references -}}
+    {{- if strings.HasPrefix .root "/reference/cli/docker/" -}}
+      {{- continue -}}
+    {{- end -}}
+    {{- $kind := "formats" -}}
+    {{- if strings.HasPrefix .root "/reference/cli/" -}}
+      {{- $kind = "cli" -}}
+    {{- else if strings.HasPrefix .root "/reference/api/" -}}
+      {{- $kind = "api" -}}
+    {{- end -}}
+    {{- if eq $kind $group.id -}}
+      {{- $root := .root -}}
+      {{- $label := .label -}}
+      {{- with site.GetPage .root -}}
+        {{- if ne .Params.sitemap false -}}
+          {{- $url := partial "navigation/url.html" . -}}
+          {{- $description := partial "utils/description.html" . -}}
+          {{- if not $description -}}
+            {{- with site.GetPage $url -}}
+              {{- $description = partial "utils/description.html" . -}}
+            {{- end -}}
+          {{- end -}}
+          {{- if not $description -}}
+            {{- if eq $root "/reference/cli/docker" -}}
+              {{- $description = (index hugo.Data.cli .Params.datafolder .Params.datafile).short -}}
+            {{- else if eq $root "/reference/cli/sbx" -}}
+              {{- $description = (index hugo.Data.sbx_cli .Params.datafile).synopsis -}}
+            {{- end -}}
+          {{- end -}}
+          {{- $items = $items | append (dict
+            "title" $label
+            "link" $url
+            "description" ($description | plainify | strings.TrimSpace)
+            "icon" $group.icon
+            )
+          -}}
+        {{- end -}}
+      {{- else -}}
+        {{- errorf "Reference page not found: %s" .root -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with $items -}}
+    {{- $groups = $groups | append (dict "id" $group.id "title" $group.title "items" .) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $groups -}}
