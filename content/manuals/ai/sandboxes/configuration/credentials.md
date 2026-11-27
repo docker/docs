@@ -468,6 +468,11 @@ configured hosts and the placeholder appears in an HTTP request header, the
 proxy replaces it with the real value. Replacement applies only to HTTP request
 headers, not request bodies. The agent never sees the real secret.
 
+If credential approval blocks authentication on a kit-declared route, the proxy
+removes authentication headers such as `Authorization` and `x-api-key`. This
+also removes custom secrets placed in those headers. Custom secrets in other
+headers aren't affected. See [Credential bindings](#credential-bindings).
+
 ### List custom secrets
 
 To find stored custom secrets by host, use `--host`:
@@ -572,31 +577,22 @@ to `npm.pkg.github.com`, and the proxy replaces it with the token retrieved by
 
 ## Credential bindings
 
-A credential bindings file records which credential mechanisms and domains
-you've approved for each service. It lives at
+Kits shipped with `sbx` don't need separate credential approval. Other kits ask
+you to approve the credentials they request and the domains that can receive
+them. `sbx` saves these approvals in `credentials.yaml` at
 `~/.config/sbx/credentials.yaml`, or `%APPDATA%\sbx\credentials.yaml` on
-Windows.
-
-Third-party kits require an approved binding for each credential they use,
-regardless of schema version. `sbx` creates one interactively the first time you
-run such a kit (see [First-run approval](#first-run-approval)); you can also
-write entries by hand. Credentials requested only by the built-in kits shipped
-with `sbx` don't need a binding.
+Windows. You can also write entries by hand.
 
 Each entry under `bindings` is keyed by a
-[service identifier](#built-in-services) and approves one or both credential
-mechanisms:
+[service identifier](#built-in-services). Each service lists its approved
+domains separately for API keys and OAuth:
 
-- `apiKey` — approves injecting the service's stored API key. The value comes
-  from the [secret store](#stored-secrets) (`sbx secret set <service>`); the
-  binding records approval, it doesn't hold or locate the value.
-- `oauth` — approves the OAuth flow for the service. You sign in on the host,
-  and the proxy handles token refresh and routing. OAuth domains include the
-  token endpoint host and any resource hosts declared by the kit.
+- `apiKey.domains` controls where the proxy can send the stored API key.
+- `oauth.domains` controls where the proxy can send OAuth tokens, including API
+  keys obtained through OAuth.
 
-Each mechanism takes a `domains` list that records the domains you approved.
-`sbx` asks for approval when a kit requests domains that the existing binding
-doesn't cover.
+Approval under one list doesn't grant approval under the other. If a kit
+requests additional domains, `sbx` asks you to approve them.
 
 ```yaml
 bindings:
@@ -608,39 +604,37 @@ bindings:
       domains: [api.github.com, github.com]
 ```
 
-A binding is only an approval record: the presence of `apiKey` or `oauth`
-authorizes that mechanism. Declining a credential writes no entry at all.
-The real credential isn't stored in this file.
+The file stores your approvals, not your secrets. An entry with both domain
+lists empty grants no access and is treated as missing. Declining a credential
+writes no entry at all.
 
 ### First-run approval
 
-When a third-party kit needs a credential that has no binding, `sbx` walks you
-through approving one. For an API key, you can use a value already in the secret
+When a kit needs a credential that has no binding, `sbx` walks you through
+approving one. For an API key, you can use a value already in the secret
 store or enter one at the prompt. For OAuth, you approve the sign-in flow. In
 both cases, you approve the domains declared by the kit. `sbx` writes the entry
 to `credentials.yaml`.
 
 In non-interactive contexts (CI or `--detach`), there's no one to answer the
 prompt. In `sbx`, the sandbox starts with the credential withheld when no
-binding exists. For a required credential, `sbx` prints a warning rather than
-failing sandbox creation. This is a limitation of `sbx` enforcement: kit authors
+binding exists or the binding lists no domains for either mechanism. For a
+required credential, `sbx` prints a warning rather than failing sandbox creation.
+This is a limitation of `sbx` enforcement: kit authors
 shouldn't rely on a required credential being available merely because the
 sandbox started.
 
 Pre-create the binding by running the kit interactively once or by writing
 `credentials.yaml` directly before running unattended.
 
-The bindings file gates whether a third-party kit can use a service
-credential. The kit's credential injection rules and network permissions still
-constrain which requests can carry the credential.
+The kit's credential injection rules and network permissions still constrain
+which requests can carry the credential.
 
 ### Kits that require a binding
 
-Third-party kits require your approval to use credentials, regardless of
-schema version. The built-in kits shipped with `sbx` can use credentials they
-request without a binding. If a third-party v2 kit extends a built-in agent,
-you must approve its use of the inherited credentials. You must also approve
-a third-party kit that requests the same service itself.
+Approval is required regardless of schema version. If a kit extends a
+built-in agent, you must approve its use of the inherited credentials. You must
+also approve a kit that requests the same service itself.
 
 ## Registry credentials
 
