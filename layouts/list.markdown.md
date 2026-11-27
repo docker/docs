@@ -1,3 +1,6 @@
+{{- partial "markdown/render.md" (dict "page" . "content" (partial "markdown/body/list.md" .)) -}}
+{{ define "_partials/markdown/body/list.md" -}}
 # {{ .Title }}
 
-{{ .RenderShortcodes }}
+{{ partial "markdown/content.html" . }}
+{{ end -}}

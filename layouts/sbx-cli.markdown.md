@@ -1,3 +1,5 @@
+{{- partial "markdown/render.md" (dict "page" . "content" (partial "markdown/body/sbx-cli.md" .)) -}}
+{{ define "_partials/markdown/body/sbx-cli.md" -}}
 {{- $data := index hugo.Data.sbx_cli .Params.datafile -}}
 # {{ .Title }}
 
@@ -44,3 +46,4 @@
 
 {{ $dedented := replaceRE `(?m)^ {2,6}` "" . }}{{ printf "```console\n%s\n```" (strings.TrimSpace $dedented) }}
 {{ end }}
+{{ end -}}

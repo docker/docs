@@ -1,0 +1,7 @@
+{{- $url := .Destination -}}
+{{- if not (findRE `(?i)^([a-z][a-z0-9+.-]*:|//|#)` $url) -}}
+  {{- if or (not (strings.HasPrefix $url "/")) (strings.HasSuffix (urls.Parse $url).Path ".md") -}}
+    {{- $url = printf "%s%s" (ref .Page (urls.Parse $url).Path) (replaceRE `^[^?#]*` "" $url) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $url -}}

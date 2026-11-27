@@ -1,3 +1,5 @@
+{{- partial "markdown/render.md" (dict "page" . "content" (partial "markdown/body/api-docs.md" .)) -}}
+{{ define "_partials/markdown/body/api-docs.md" -}}
 {{- $data := index hugo.Data "api-reference" -}}
 {{- $api := dict -}}{{- range $data.apis -}}{{- if eq .id $.Params.apiID -}}{{- $api = . -}}{{- end -}}{{- end -}}
 # {{ .Title }}
@@ -190,3 +192,4 @@ Schema constraints and annotations:
 {{ end }}{{ end }}
 {{ end }}
 {{ end }}
+{{ end -}}

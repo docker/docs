@@ -1,3 +1,5 @@
+{{- partial "markdown/render.md" (dict "page" . "content" (partial "markdown/body/home.md" .)) -}}
+{{ define "_partials/markdown/body/home.md" -}}
 # Docker Documentation
 
 {{ range hugo.Data.navigation.categories }}
@@ -16,3 +18,4 @@
 ## Installation
 
 [Get Docker]({{ "/get-docker/" | absURL }})
+{{ end -}}

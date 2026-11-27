@@ -61,6 +61,7 @@ RUN --mount=type=cache,target=/tmp/hugo_cache \
       -e $HUGO_ENV
 RUN node --test hack/test/*.mjs hack/api-docs/output-checks.test.mjs
 RUN node hack/flatten-and-resolve.js public
+RUN node hack/verify-markdown.mjs public
 RUN node hack/api-docs/verify-output.mjs public
 
 # lint lints markdown files

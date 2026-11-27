@@ -1,0 +1,12 @@
+{{- $u := urls.Parse .Destination -}}
+{{- $src := .Destination -}}
+{{- if not (or $u.IsAbs (strings.HasPrefix $src "/")) -}}
+  {{- $base := urls.Parse .Page.Permalink -}}
+  {{- if in (slice "index" "_index") .Page.File.BaseFileName -}}
+    {{- $src = ($base.JoinPath $u.Path).String -}}
+  {{- else -}}
+    {{- $src = ($base.JoinPath "../" $u.Path).String -}}
+  {{- end -}}
+  {{- $src = printf "%s%s" $src (replaceRE `^[^?#]*` "" .Destination) -}}
+{{- end -}}
+{{- return $src -}}

@@ -1,3 +1,5 @@
+{{- partial "markdown/render.md" (dict "page" . "content" (partial "markdown/body/cli.md" .)) -}}
+{{ define "_partials/markdown/body/cli.md" -}}
 {{- $data := index hugo.Data.cli .Params.datafolder .Params.datafile -}}
 # {{ .Title }}
 
@@ -47,3 +49,4 @@
 {{ range .Pages }}{{ if and .Params.datafolder .Params.datafile }}{{ $subdata := index hugo.Data.cli .Params.datafolder .Params.datafile }}| [`{{ .Title }}`]({{ .Permalink }}) | {{ $subdata.short }} |
 {{ end }}{{ end }}
 {{ end }}
+{{ end -}}

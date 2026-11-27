@@ -1,3 +1,5 @@
+{{- partial "markdown/render.md" (dict "page" . "content" (partial "markdown/body/api.md" .)) -}}
+{{ define "_partials/markdown/body/api.md" -}}
 {{- $specURL := urls.Parse (printf "/%s%s.yaml" .File.Dir .File.ContentBaseName) -}}
 # {{ .Title }}
 
@@ -6,3 +8,4 @@
 **OpenAPI Specification:** [{{ .Title }} API Spec]({{ $specURL.String | absURL }})
 
 This page provides interactive API documentation. For the machine-readable OpenAPI specification, see the link above.
+{{ end -}}

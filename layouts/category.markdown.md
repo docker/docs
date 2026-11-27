@@ -1,3 +1,5 @@
+{{- partial "markdown/render.md" (dict "page" . "content" (partial "markdown/body/category.md" .)) -}}
+{{ define "_partials/markdown/body/category.md" -}}
 # {{ .Title }}
 
 {{ .Description }}
@@ -9,3 +11,4 @@
 {{ with .collection }}{{ $product := index hugo.Data.navigation.products . }}{{ $path = $product.root }}{{ $label = $product.label }}{{ end }}
 {{ with site.GetPage $path }}{{ if ne .Params.sitemap false }}- [{{ $label | default .LinkTitle }}]({{ .Permalink }}): {{ .Description }}
 {{ end }}{{ end }}{{ end }}{{ end }}{{ end }}{{ end }}
+{{ end -}}
