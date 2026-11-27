@@ -475,7 +475,7 @@ log. It has no effect on signatures verified with a public key.
 
 {{< setting-metadata type="boolean" default="true" >}}
 
-Set this to `false` to turn off the bundled model service and skip its runtime
+Set this to `false` to turn off the bundled model service and skip its llama.cpp
 download. Changes require a daemon restart. This setting has no environment
 variable override.
 

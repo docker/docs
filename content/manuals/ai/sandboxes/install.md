@@ -139,6 +139,25 @@ To install `sbx` from a package or archive, follow the
 The availability of a Linux release artifact does not indicate that Docker
 tests or supports the corresponding distribution.
 
+## Model service binary
+
+Every installation method puts `llmman`, the
+[bundled model service](configuration/models.md#bundled-model-service), in the
+same directory as `sbx`. The Homebrew cask doesn't link it onto your `PATH`. To
+run `llmman` yourself, use the path from this table or add its directory to
+your `PATH`:
+
+| Install method | Location |
+| --- | --- |
+| Homebrew on macOS | `$(brew --caskroom)/sbx/<VERSION>/Sbx.app/Contents/MacOS/llmman`, next to the app's `sbx`. Not linked into Homebrew's `bin` directory. |
+| Windows, current user | `%LOCALAPPDATA%\DockerSandboxes\bin\llmman.exe` |
+| Windows, all users | `%ProgramFiles%\DockerSandboxes\bin\llmman.exe` |
+| `.deb` and `.rpm` packages | `/usr/bin/llmman` |
+| Linux archive and install script | `<PREFIX>/bin/llmman`, by default `~/.docker/sbx/bin/llmman` |
+
+If you install `llmman` with its own Homebrew formula
+(`llmmanorg/tap/llmman`), that copy is separate from the one `sbx` runs.
+
 ## Sign in
 
 Sign in to Docker:
