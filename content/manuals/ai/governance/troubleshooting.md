@@ -2,12 +2,13 @@
 title: Troubleshoot governance
 linkTitle: Troubleshooting
 weight: 40
-description: Resolve blocked requests, inactive rules, approval prompts, policy sync, and missing audit records for Docker Sandboxes governance.
-keywords: docker sandboxes, governance, troubleshooting, network policy, sbx policy, approval, organization policy, audit logs
+description: Resolve blocked requests, inactive rules, approval prompts, policy sync, managed settings, and missing audit records for Docker Sandboxes governance.
+keywords: docker sandboxes, governance, troubleshooting, network policy, sbx policy, approval, organization policy, settings policy, sbx settings, audit logs
 ---
 
 These problems come from the governance rules that control what sandboxes can
-reach and mount, and from the audit logs that record those decisions. For other
+reach and mount, from the settings policies that manage Docker Sandboxes
+settings, and from the audit logs that record those decisions. For other
 Docker Sandboxes problems, see
 [Troubleshooting](../sandboxes/troubleshooting.md).
 
@@ -170,6 +171,35 @@ policy denies it. Restart the sandbox to close those connections.
 When a synced change takes effect also depends on the policy type. For more
 details, see
 [When policy changes reach developers](organization/policies/_index.md#when-policy-changes-reach-developers).
+
+## `sbx settings set` fails with "value is restricted by administrator settings"
+
+Your organization manages the setting with a
+[settings policy](organization/settings/_index.md), and the policy doesn't
+allow the value you set. `sbx settings ls` shows managed settings with
+`remote (managed)` or `remote (locked)` in the `SOURCE` column. To use a
+different value, ask your administrator to change the policy.
+
+## A setting reports "value is restricted by administrator settings"
+
+You set the value with `sbx settings set` or an environment variable before
+your organization locked the setting, and the policy doesn't allow it. Remove
+your override so the policy's value applies:
+
+```console
+$ sbx settings unset <KEY>
+```
+
+If you set the value with an environment variable, such as
+`DOCKER_SANDBOXES_ALLOW_EXPERIMENTAL_FEATURES`, unset the variable and run
+`sbx daemon restart`. `sbx settings unset` doesn't clear an environment
+variable.
+
+## Commands fail with "administrator settings are unavailable"
+
+Docker Sandboxes couldn't load your organization's settings policies, so it
+blocks settings your organization manages instead of using your local values.
+If you aren't signed in, run `sbx login`, then try again.
 
 ## Audit records are missing
 

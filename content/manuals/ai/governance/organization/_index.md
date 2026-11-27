@@ -19,9 +19,10 @@ those sandboxes can reach, mount, and use only what your policies allow.
 
 ## How organization governance works
 
-Organization governance has three parts. Licenses and sign-in enforcement
-decide who is governed, organization policies control what their sandboxes can
-do, and audit logs record the decisions those policies make.
+Organization governance has four parts. Licenses and sign-in enforcement
+decide who is governed, access policies control what their sandboxes can
+reach and use, settings policies control how Docker Sandboxes is configured on
+their machines, and audit logs record the decisions those policies make.
 
 ### Licenses and sign-in enforcement
 
@@ -37,13 +38,21 @@ personal account. [Sign-in enforcement](sign-in-enforcement.md) closes that
 gap by allowing only members of your organization to use sandboxes on your
 managed machines.
 
-### Organization policies
+### Access policies
 
-Organization policies control which destinations sandboxes can reach, which
+Access policies control which destinations sandboxes can reach, which
 host paths developers can mount, and which MCP servers developers can register
 and use. You create them in Docker Home, or programmatically through the
 [AI Governance API](/reference/api/ai-governance/). For more details, see
-[Organization policies](policies/_index.md).
+[Organization access policies](policies/_index.md).
+
+### Settings policies
+
+Settings policies manage some of the `sbx settings` on developer machines. You
+can set a default that developers can change, or lock a setting so they can't,
+for example to turn off experimental features or clipboard image paste. You
+create them in Docker Home. For more details, see
+[Sandboxes settings management](settings/_index.md).
 
 ### Audit logs
 
