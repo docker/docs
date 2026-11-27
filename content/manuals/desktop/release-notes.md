@@ -62,13 +62,13 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Mac {#41010-for-mac}
 
-- Fixed edge case where Docker Desktop could report stale errors despite analytics being disabled. Fixes [docker/for-mac#7768](https://github.com/docker/for-mac/issues/7768). 
+- Fixed an edge case where Docker Desktop could report stale errors despite analytics being disabled. Fixes [docker/for-mac#7768](https://github.com/docker/for-mac/issues/7768). 
 - Fixed AppleScript quit commands being delivered to the Docker VMM helper instead of Docker Desktop. 
 - Fixed moving the disk image location off an HFS+ volume failing with an "inappropriate ioctl for device" error. Fixes [docker/desktop-feedback#195](https://github.com/docker/desktop-feedback/issues/195).
 
 #### For Windows {#41010-for-windows}
 
-- Fixed dashboard crash when `ELECTRON_DISABLE_SANDBOX` is set on a Windows system. Fixes [docker/desktop-feedback#851](https://github.com/docker/desktop-feedback/issues/851).
+- Fixed a dashboard crash when `ELECTRON_DISABLE_SANDBOX` is set on a Windows system. Fixes [docker/desktop-feedback#851](https://github.com/docker/desktop-feedback/issues/851).
 - Fixed Microsoft Store installs failing when the Virtual Machine Platform Windows feature is not enabled.
 - Fixed Docker Desktop reporting that the user is not in the `docker-users` group, instead of asking them to sign out and back in, after the group was added during install. 
 - Docker Desktop no longer disables proactive memory compaction and watermark boosting in the WSL 2 kernel that all WSL distros share. Before this, host-to-guest connections and Windows interop could fail in other distros. Fixes [docker/desktop-feedback#809](https://github.com/docker/desktop-feedback/issues/809).
