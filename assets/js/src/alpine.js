@@ -5,6 +5,7 @@ import collapse from "@alpinejs/collapse";
 import persist from "@alpinejs/persist";
 import focus from "@alpinejs/focus";
 import { marked } from "marked";
+import { separateCardFences } from "../gordon-cards/fences.mjs";
 import hljs from "highlight.js/lib/core";
 // Import languages relevant to Docker docs
 import bash from "highlight.js/lib/languages/bash";
@@ -146,7 +147,7 @@ function gordonCardPlaceholder() {
 
 Alpine.magic("markdownText", () => (content) => {
   const div = document.createElement("div");
-  div.innerHTML = marked(content);
+  div.innerHTML = marked(separateCardFences(content));
   if (Alpine.store("gordonCards").ready) {
     replaceGordonCards(div, { streaming: false });
   } else {
@@ -168,7 +169,7 @@ Alpine.magic("markdownText", () => (content) => {
 Alpine.magic("markdown", () => {
   return (content, { streaming = false, tableLabel } = {}) => {
     if (!content) return "";
-    const html = marked(content);
+    const html = marked(separateCardFences(content));
 
     // Parse and highlight code blocks
     const div = document.createElement("div");

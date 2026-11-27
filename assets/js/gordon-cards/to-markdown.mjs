@@ -1,4 +1,5 @@
 import { GORDON_CARD_FENCE_LANGUAGE } from './components.mjs'
+import { separateCardFences } from './fences.mjs'
 import {
   parseGordonCard,
   readArray,
@@ -12,7 +13,7 @@ import {
 // answer is read as text rather than drawn: what the Copy button copies. Follow-up chips are left
 // out, as they only make sense in the chat. A block that doesn't parse into a card is kept as is.
 export function gordonAnswerToMarkdown(answer) {
-  return answer.replace(CARD_FENCE, (block, code) => {
+  return separateCardFences(answer).replace(CARD_FENCE, (block, code) => {
     const root = parseGordonCard(code)
     return root === null ? block : cardToMarkdown(root.props)
   })
