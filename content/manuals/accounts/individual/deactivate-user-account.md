@@ -15,6 +15,13 @@ When you deactivate an individual Docker account, Docker removes all of
 your public and private repositories. All Docker products and services
 that use your Docker account are inaccessible after deactivation.
 
+> [!NOTE]
+>
+> Docker doesn't offer a way to deactivate multiple accounts at once. Docker
+> Support also doesn't deactivate accounts in bulk, or remove multiple members
+> from an organization or company in bulk, on request. Each user deactivates
+> their own account.
+
 > [!WARNING]
 >
 > Back up any important data before you continue. Deactivating your account is
