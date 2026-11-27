@@ -34,6 +34,8 @@
 
   --font-sans: Onest, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Disable programming ligatures to preserve the literal appearance of code (e.g., >=). */
+  --font-mono--font-feature-settings: "liga" off, "calt" off;
   --default-font-family: var(--font-sans);
   --color-background-light: var(--color-surface);
   --color-background-dark: var(--color-surface);
