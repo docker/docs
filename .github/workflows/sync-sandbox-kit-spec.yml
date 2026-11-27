@@ -1,0 +1,66 @@
+name: Sync sandbox kit capability reference
+
+on:
+  schedule:
+    - cron: "45 2 * * *"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Published v3 release tag (defaults to newest release, including prereleases)"
+        type: string
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-sandbox-kit-spec
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'docker/docs'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout docs
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: main
+          persist-credentials: false
+          show-progress: false
+
+      - name: Verify and sync the released catalog
+        id: catalog
+        env:
+          GH_TOKEN: ${{ github.token }}
+          KIT_SPEC_VERSION: ${{ inputs.version }}
+        run: python3 hack/sync-kit-capabilities.py
+
+      # The repository must permit GitHub Actions to create pull requests.
+      - name: Create or refresh draft pull request
+        if: steps.catalog.outputs.available == 'true'
+        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v7.0.8
+        with:
+          token: ${{ github.token }}
+          branch: chore/sync-kit-capabilities
+          base: main
+          add-paths: data/sandbox_kit_capabilities.json
+          sign-commits: true
+          # This action converts updated PRs to draft only when the branch changes;
+          # unchanged reruns preserve a reviewer's decision to mark the PR ready.
+          draft: always-true
+          title: "docs: sync kit capabilities from ${{ steps.catalog.outputs.version }}"
+          commit-message: "docs: sync kit capabilities from ${{ steps.catalog.outputs.version }}"
+          body: |
+            Vendor the verified capability catalog from
+            [sandbox-kit-spec ${{ steps.catalog.outputs.version }}](https://github.com/docker/sandbox-kit-spec/releases/tag/${{ steps.catalog.outputs.version }}).
+            Rendering and runtime support are maintained in this repository.
+
+            The catalog describes specification contracts. Docker Sandboxes support
+            claims remain owned by this repository. Verify adoption in the matching
+            Docker Sandboxes release before marking this PR ready for review.
+
+            Close and reopen this PR to trigger CI: changes created with
+            `GITHUB_TOKEN` do not trigger pull request workflows.

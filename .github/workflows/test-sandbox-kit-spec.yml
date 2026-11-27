@@ -1,0 +1,52 @@
+name: Test sandbox kit capability sync
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/sync-sandbox-kit-spec.yml
+      - .github/workflows/test-sandbox-kit-spec.yml
+      - hack/sync-kit-capabilities.py
+      - hack/test_sync_kit_capabilities.py
+      - data/sandbox_kit_support.json
+      - data/sandbox_kit_capabilities.json
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/sync-sandbox-kit-spec.yml
+      - .github/workflows/test-sandbox-kit-spec.yml
+      - hack/sync-kit-capabilities.py
+      - hack/test_sync_kit_capabilities.py
+      - data/sandbox_kit_support.json
+      - data/sandbox_kit_capabilities.json
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+          show-progress: false
+
+      - name: Set up Go
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e
+        with:
+          go-version: stable
+          cache: false
+
+      - name: Run capability sync unit tests
+        run: python3 -m unittest discover -s hack -p 'test_sync_kit_capabilities.py'
+
+      - name: Install actionlint
+        run: go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.12
+
+      - name: Lint capability sync workflows
+        run: |
+          "$(go env GOPATH)/bin/actionlint" \
+            .github/workflows/sync-sandbox-kit-spec.yml \
+            .github/workflows/test-sandbox-kit-spec.yml
