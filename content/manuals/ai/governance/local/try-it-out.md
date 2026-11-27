@@ -101,10 +101,14 @@ $ sbx exec policy-demo -- curl -s https://example.com
 
 The response is the HTML of the `example.com` page.
 
-`sbx policy check network` reports the decision for the host, not for a method
-or path, so use a request like this one to test an HTTP rule. For more details,
-see
-[Allow or block HTTP methods and paths](network-rules.md#allow-or-block-http-methods-and-paths).
+You can also check an HTTP request without sending it:
+
+```console
+$ sbx policy check http --sandbox policy-demo --method POST https://example.com
+```
+
+The check reports `Denied`. For more details, see
+[Block one endpoint on an allowed host](network-rules.md#block-one-endpoint-on-an-allowed-host).
 
 ## Step 5: Review network activity
 
@@ -134,4 +138,4 @@ remove the rules you added in this example.
 - Approve destinations that no rule allows, under the Balanced and Locked Down
   presets, in [Respond to approval requests](approvals.md).
 - Reference the [Network and HTTP rule
-  syntax](../reference/network-rules.md#http-method-and-path).
+  syntax](../reference/network-rules.md#http-rules).
