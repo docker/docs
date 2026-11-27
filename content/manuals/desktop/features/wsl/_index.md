@@ -92,7 +92,7 @@ WSL 2 lets multiple Linux distributions run side-by-side on a single shared kern
 
 ## Use Docker from WSL distributions with Docker VMM
 
-When Docker Desktop uses [Docker VMM](/manuals/desktop/features/vmm.md), you can use the Docker CLI from your WSL 2 distributions, but not full WSL integration. `docker` and `docker compose` work without any setup, but there's no Docker socket in the distribution, and you can only bind-mount files that are stored on Windows drives.
+When Docker Desktop uses [Docker VMM](/manuals/desktop/features/vmm/_index.md), you can use the Docker CLI from your WSL 2 distributions, but not full WSL integration. `docker` and `docker compose` work without any setup, but there's no Docker socket in the distribution, and you can only bind-mount files that are stored on Windows drives.
 
 In a WSL 2 distribution, the `docker` and `docker compose` commands run the Windows `docker.exe` that comes with Docker Desktop, through WSL interop. Docker Desktop doesn't install anything into your distribution.
 
@@ -132,7 +132,7 @@ WSL is designed to aid interoperability between Windows and Linux environments. 
 
 For environments that require stricter isolation:
 
-- Run Docker Desktop with Hyper-V or [Docker VMM](/manuals/desktop/features/vmm.md) instead of WSL 2 to avoid the shared-kernel model entirely.
+- Run Docker Desktop with Hyper-V or [Docker VMM](/manuals/desktop/features/vmm/_index.md) instead of WSL 2 to avoid the shared-kernel model entirely.
 - Enable [Enhanced Container Isolation](/manuals/desktop/enterprise/hardened-desktop/enhanced-container-isolation/_index.md) to add an additional layer of protection around container workloads regardless of backend.
 
 ## Additional resources

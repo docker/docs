@@ -55,7 +55,7 @@ For more information, see [Understand permission requirements for Windows](./win
 >
 > **Which backend should I use?**
 >
-> Docker Desktop for Windows supports three backends: WSL 2, Hyper-V, and Docker VMM (Beta). WSL 2 is the default and works for most users without administrator privileges. Hyper-V is only available with all-users installation. Docker VMM is a container-optimized hypervisor that reclaims idle memory and improves file I/O. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
+> Docker Desktop for Windows supports three backends: WSL 2, Hyper-V, and Docker VMM (Beta). WSL 2 is the default and works for most users without administrator privileges. Hyper-V is only available with all-users installation. Docker VMM is a container-optimized hypervisor that reclaims idle memory and improves file I/O. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm/_index.md).
 
 {{< tabs >}}
 {{< tab name="WSL 2 backend, x86_64" >}}
@@ -123,7 +123,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 - Docker VMM doesn't require the Hyper-V feature, and isn't supported on Arm. On
   Arm, the installer uses WSL 2 instead.
 
-For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
+For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm/_index.md).
 
 {{< /tab >}}
 {{< tab name="WSL 2 backend, Arm (Early Access)" >}}
