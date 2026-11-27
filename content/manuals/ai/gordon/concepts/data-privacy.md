@@ -42,22 +42,22 @@ Gordon has access to your Docker daemon's state, including:
 
 ## Data retention policy
 
-Gordon's data retention differs based on your subscription tier:
+Gordon's data retention differs based on your Docker subscription:
 
-### Paid subscriptions
+### Docker Pro, Team, and Business
 
 Docker and its AI providers do not retain any inputs or outputs from your
 Gordon sessions. Your queries, Gordon's responses, and any code or files
-processed are not stored. This applies to all paid subscriptions: Docker
-Desktop plans (Pro, Team, Business) and Gordon plans (Plus, Max, Ultra).
+processed are not stored. This applies to Docker Pro, Team, and Business
+subscriptions.
 
-### Base tier (free)
+### Docker Personal
 
 Anonymized conversation threads are stored for 5 days to help guarantee
 quality of service and fight abuse. Individual queries and responses are
 retained as part of your conversation history.
 
-### All subscriptions
+### All Docker subscriptions
 
 Data is never used for training AI models or shared with third parties. All
 data transferred to Gordon's backend is encrypted in transit. Docker's
@@ -82,9 +82,9 @@ processed.
 
 ## Data security
 
-Your data is protected through encryption in transit. For paid subscriptions,
-no persistent storage occurs—Gordon processes your requests and discards the
-data immediately.
+Your data is protected through encryption in transit. For Docker Pro, Team,
+and Business subscriptions, no persistent storage occurs—Gordon processes your
+requests and discards the data immediately.
 
 ## Organizational data policies
 

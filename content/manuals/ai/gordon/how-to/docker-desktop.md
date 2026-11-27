@@ -2,6 +2,7 @@
 title: Using Gordon in Docker Desktop
 linkTitle: Docker Desktop
 description: Access and use Gordon through the Docker Desktop graphical interface
+keywords: [gordon, docker desktop, ai assistant, usage]
 weight: 10
 ---
 
@@ -39,7 +40,7 @@ logs or build output.
 ## Usage indicator
 
 Docker Desktop shows a usage indicator so you can see how close you are to
-your tier limit. See [Usage limits and tiers](../usage-limits.md) for details.
+your usage limit. See [Usage limits](../usage-limits.md) for details.
 
 ## Disabling Gordon
 
