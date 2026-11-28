@@ -36,7 +36,7 @@ driver, and the sandbox drives the hardware itself.
 
 - The NVIDIA driver bundle, an EROFS image at
   `/usr/libexec/nerdbox-nvidia-bundle.erofs`. On `arm64` hosts with 64k pages,
-  the file name is `nerdbox-nvidia-bundle_64k.erofs`. Docker Sandboxes doesn't
+  the filename is `nerdbox-nvidia-bundle_64k.erofs`. Docker Sandboxes doesn't
   include the bundle. See [Build the bundle](#build-the-bundle).
 
 ## Turn on the feature
@@ -168,7 +168,7 @@ GPU 0000:01:00.0 is in use by kwin_wayland (pid 52911); stop these processes (fo
 Docker Sandboxes detaches the GPU from the host driver. This fails while another
 process, such as a desktop session or nvtop, holds the GPU open. Stop the
 processes that the message lists, then start the sandbox again. For a desktop
-session, log out or stop the display manager. For example, on a host that uses
+session, sign out or stop the display manager. For example, on a host that uses
 SDDM:
 
 ```console
