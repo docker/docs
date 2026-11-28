@@ -208,12 +208,17 @@ instances:
         value: Bearer <TOKEN>
 ```
 
+The `reader` section tells the agent to read the token from the file at
+`path`. The `writer` section tells the agent to send that token in the
+`Authorization` header. The agent replaces the `<TOKEN>` placeholder in
+`value` with the token it reads from the file.
+
 > [!IMPORTANT]
 >
 > Do not replace the `<TOKEN>` placeholder in the previous configuration
-> example. It must stay as it is. Only make sure the Docker PAT is correctly
-> mounted into the Datadog agent in the specified filesystem path. Save the
-> file as `conf.yaml` and restart the agent.
+> example with your token. The agent fills it in for you. Only make sure the
+> Docker PAT is correctly mounted into the Datadog agent in the specified
+> filesystem path. Save the file as `conf.yaml` and restart the agent.
 
 When creating a Datadog agent configuration of your own, make sure to edit the
 `openmetrics_endpoint` property to target your organization, by replacing
