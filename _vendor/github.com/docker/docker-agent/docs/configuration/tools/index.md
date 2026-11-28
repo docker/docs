@@ -9,8 +9,6 @@ aliases:
   - /ai/docker-agent/reference/toolsets/
 ---
 
-_Complete reference for configuring built-in tools, MCP tools, and Docker-based tools._
-
 ## Built-in Tools
 
 Built-in tools are included with Docker Agent and require no external dependencies. Add them to your agent's `toolsets` list by `type`. Each tool's dedicated page covers its full configuration options, available operations, and examples.
@@ -23,7 +21,7 @@ Built-in tools are included with Docker Agent and require no external dependenci
 | `shell` | Execute shell commands synchronously | [Shell](../../tools/shell/index.md) |
 | `background_jobs` | Run and manage long-running shell commands | [Background Jobs](../../tools/background-jobs/index.md) |
 | `scheduler` | Schedule instructions to run at a time or on a recurring interval | [Scheduler](../../tools/scheduler/index.md) |
-| `environment` | Report the OS and resolved shell (read-only, no arguments, auto-approved) | [Environment](../../tools/environment/index.md) |
+| `environment` | Report the OS and resolved shell (read-only, no arguments; subject to approval policy) | [Environment](../../tools/environment/index.md) |
 | `datetime` | Current date and time in a model-chosen format and timezone (read-only) | [Date and Time](../../tools/datetime/index.md) |
 | `calculator` | Exact arithmetic without code execution | [Calculator](../../tools/calculator/index.md) |
 | `think` | Reasoning scratchpad | [Think](../../tools/think/index.md) |
@@ -134,10 +132,6 @@ Where the aqua registry includes a checksum manifest, downloaded binaries are ve
 - **Unsupported or weak checksum types (e.g. md5, sha1)** — skipped with a warning; installation proceeds without verification.
 - **No manifest** — if no checksum is advertised in the registry entry, the binary is installed without verification.
 
-### version_overrides Resolution
-
-The auto-installer correctly resolves **`version_overrides`** entries in the aqua registry. Many common tools (for example, `fzf`) keep their package configuration — including download URLs and checksums — under `version_overrides` rather than at the top level of their registry entry. These tools previously failed to install silently; they are now handled correctly.
-
 ### Disabling Auto-Install
 
 **Per toolset** — set `version` to `"false"` or `"off"`:
@@ -167,6 +161,63 @@ Installed binaries are placed in `~/.cagent/tools/bin/` and cached so they are o
 
 > [!TIP]
 > Auto-install supports both Go packages (via `go install`) and GitHub release binaries (via archive download). The aqua registry metadata determines which method is used.
+
+## Experimental MCP Events
+
+MCP Events push subscriptions (proposed SEP-3415) are disabled by default.
+Enable them globally in `~/.config/cagent/config.yaml`:
+
+```yaml
+settings:
+  experimental:
+    mcp_events: true
+```
+
+Compatible servers expose event discovery, subscription, and cancellation tools.
+Events enter the agent's recall/steering queue. Push delivery supports stdio and
+Streamable HTTP; polling, webhooks, and legacy SSE are not supported.
+See [`examples/mcp-events`](https://github.com/docker/docker-agent/tree/main/examples/mcp-events)
+for runnable demos.
+
+## Experimental MCP Skills
+
+MCP Skills (`io.modelcontextprotocol/skills`, SEP-2640) are disabled by default.
+Enable them globally in `~/.config/cagent/config.yaml`:
+
+```yaml
+settings:
+  experimental:
+    mcp_skills: true
+```
+
+When an MCP server declares `resources` and the `io.modelcontextprotocol/skills`
+extension under protocol `2026-07-28`, docker-agent integrates its skills into
+the built-in skills system (`read_skill`, `read_skill_file`, and
+`<available_skills>`) under origin-scoped `mcp:<server>/<uri>` identifiers.
+Skill files are verified against their manifest size, SHA-256 digest, and YAML
+frontmatter before entering model context, and are tagged as untrusted external
+data without granting `allowed-tools` or local command expansion.
+See [`examples/mcp-skills`](https://github.com/docker/docker-agent/tree/main/examples/mcp-skills)
+for a runnable demo.
+
+## Experimental MCP Tasks
+
+MCP Tasks (`io.modelcontextprotocol/tasks`, SEP-2663) are disabled by default.
+Enable them globally in `~/.config/cagent/config.yaml`:
+
+```yaml
+settings:
+  experimental:
+    mcp_tasks: true
+```
+
+When enabled over stdio or Streamable HTTP under protocol `2026-07-28`,
+docker-agent advertises the `io.modelcontextprotocol/tasks` extension capability
+on requests. If a compatible MCP server responds to `tools/call` with a
+`CreateTaskResult` (`resultType: "task"`), docker-agent transparently polls
+`tasks/get`, fulfills mid-flight `input_required` elicitation requests via
+`tasks/update`, sends cooperative `tasks/cancel` on cancellation, and returns
+the completed tool result to the model.
 
 ## Toolset Lifecycle
 
@@ -234,7 +285,7 @@ toolsets:
 > [!NOTE]
 > **`required` is not yet enforced**
 >
-> The schema validates this field and the supervisor stores it, but no code path acts on it yet. It is documented now so config files written today keep working when the planned eager-startup phase lands. Picking the `strict` profile is forward-compatible — it will start enforcing `required=true` automatically.
+> `required` is informational and does not prevent an agent from starting when a toolset is unavailable.
 
 ### Inspecting and restarting toolsets at runtime
 
@@ -374,7 +425,7 @@ See [`examples/toolset_instructions.yaml`](https://github.com/docker/docker-agen
 
 ## Deferred Tool Loading
 
-Load tools on-demand to speed up agent startup. When a toolset is deferred, its tools are registered lazily — the tool server process is not started until the agent first calls one of its tools. This is useful for large toolsets (e.g., an MCP server with hundreds of tools) where startup time matters.
+Expose tool definitions to the model on demand to reduce prompt size. Deferred toolsets still start normally, including their MCP server processes, but their tool definitions stay hidden until activated. This is useful for large toolsets, such as an MCP server with hundreds of tools; it does not delay server startup.
 
 ```yaml
 toolsets:
@@ -426,7 +477,7 @@ models:
 
 Every deferred tool is then declared to the API with `defer_loading: true` next to a server-executed `tool_search` tool, so the model discovers and calls deferred tools directly, without a `search_tool`/`add_tool` round trip. `search_tool` and `add_tool` stay available. Toolset `tools`, `read_only`, and skill allow-lists apply to the catalog exactly as they do to regular tools, and so do permissions.
 
-The option is ignored, and the legacy behaviour kept, for models without support (only `openai` models that support deferred tools qualify; the `chatgpt` provider and OpenAI-compatible endpoints, including `openai` with a custom `base_url`, do not), on Chat Completions requests, and on fallback models without the option. Agents using `code_mode_tools` keep the legacy behaviour: wrapped tools are reachable through `run_tools_with_javascript`, while todo and repeatable tools remain directly callable.
+The option is ignored, and the legacy behaviour kept, for models without support (only `openai` models that support deferred tools qualify; the `chatgpt` provider and OpenAI-compatible endpoints, including `openai` with a custom `base_url` or `OPENAI_BASE_URL`, do not), on Chat Completions requests, and on fallback models without the option. Agents using `code_mode_tools` keep the legacy behaviour: wrapped tools are reachable through `run_tools_with_javascript`, while todo and repeatable tools remain directly callable.
 
 Native search also enables ordered response replay, including encrypted reasoning. For native-only workflows, tell the agent to prefer native tool search over `search_tool`/`add_tool`; those tools remain available for fallback models.
 

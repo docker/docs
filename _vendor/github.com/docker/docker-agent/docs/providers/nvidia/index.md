@@ -6,8 +6,6 @@ weight: 290
 canonical: https://docs.docker.com/ai/docker-agent/providers/nvidia/
 ---
 
-_Use NVIDIA NIM models with Docker Agent._
-
 ## Overview
 
 NVIDIA provides access to Nemotron and many other open-weight models through
@@ -29,8 +27,6 @@ alias provider. The same alias also works against a self-hosted
 
 ### Inline Syntax
 
-The simplest way to use NVIDIA NIM:
-
 ```yaml
 agents:
   root:
@@ -40,8 +36,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

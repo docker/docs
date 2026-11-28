@@ -6,8 +6,6 @@ weight: 240
 canonical: https://docs.docker.com/ai/docker-agent/providers/ovhcloud/
 ---
 
-_Use OVHcloud AI Endpoints models with Docker Agent._
-
 ## Overview
 
 [OVHcloud AI Endpoints](https://endpoints.ai.cloud.ovh.net/) serves open-weight

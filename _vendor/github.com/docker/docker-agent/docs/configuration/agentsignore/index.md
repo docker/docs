@@ -6,8 +6,6 @@ weight: 75
 canonical: https://docs.docker.com/ai/docker-agent/configuration/agentsignore/
 ---
 
-_Hide files from the agent with a `.agentsignore` file, using the same syntax as `.gitignore`._
-
 ## Overview
 
 Put a `.agentsignore` file in your project and the agent stops seeing the paths it lists. Matched files are absent from directory listings and searches, and reads, writes and edits targeting them are refused.
@@ -61,6 +59,10 @@ When `.agentsignore` contains at least one active pattern, the filesystem toolse
 
 > [!NOTE]
 > `.agentsignore` is independent of the filesystem toolset's [`ignore_vcs`](../tools/index.md) option. Setting `ignore_vcs: false` turns off `.gitignore` filtering but does **not** un-hide `.agentsignore` entries.
+
+## Worktrees
+
+When a source checkout has a [`.worktreeinclude`](../../features/cli/index.md#copy-ignored-files-into-worktrees), files blocked by its `.agentsignore` are skipped even if they match the include patterns. The `.agentsignore` file itself is not copied by that mechanism. A worktree loads its own `.agentsignore` independently; commit or otherwise arrange its rules when needed, including for files already tracked in the worktree.
 
 ## Relationship to `.gitignore`
 

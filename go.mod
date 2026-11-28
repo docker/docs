@@ -1,6 +1,6 @@
 module github.com/docker/docs
 
-go 1.27
+go 1.27.4
 
 // This go.mod file is used by hugo to vendor documentation from upstream
 // repositories. Use the "require" section to specify the version of the
@@ -11,7 +11,7 @@ require (
 	github.com/docker/buildx v0.39.1
 	github.com/docker/cli v29.10.0+incompatible
 	github.com/docker/compose/v5 v5.8.0
-	github.com/docker/docker-agent v1.152.0
+	github.com/docker/docker-agent v1.167.0
 	github.com/docker/model-runner v1.1.36
 	github.com/moby/buildkit v0.35.1
 	github.com/moby/moby/api v1.57.0

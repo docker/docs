@@ -7,8 +7,6 @@ weight: 100
 canonical: https://docs.docker.com/ai/docker-agent/tools/memory/
 ---
 
-_Persistent key-value storage backed by SQLite for cross-session recall._
-
 ## Overview
 
 The memory tool provides persistent key-value storage backed by SQLite. Data survives across sessions, allowing agents to remember facts, user preferences, project context, and past decisions. Memories can be organized with categories and searched by keyword.
@@ -54,6 +52,3 @@ Memories support an optional `category` field for organization and filtering. Co
 - `fact` — Factual information about the project or user
 - `project` — Project-specific context
 - `decision` — Past decisions and their rationale
-
-> [!TIP]
-> Memory is especially useful for long-running assistants that need to recall information across conversations — like coding preferences, project conventions, or context discovered during previous sessions.

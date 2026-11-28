@@ -141,7 +141,7 @@ See [`docker agent debug title`](../cli/index.md#docker-agent-debug) for details
 
 ## Usage & Cost Tracking
 
-Every tracked model call — the main conversation turns and compaction calls — updates the session's cumulative input/output token counts and cost. Check them at any time with `/cost` in the TUI, or disable tracking per-model with `track_usage: false` if you don't want a model's calls counted (for example, a free local model). Auxiliary one-shot calls the runtime makes on your behalf, such as automatic session-title generation, call the model directly and are not folded into this total.
+Every tracked model call — the main conversation turns and compaction calls — updates the session's cumulative input/output token counts and cost. Check them at any time with `/cost` in the TUI, or disable tracking per-model with `track_usage: false` if you don't want a model's calls counted (for example, a free local model). Auxiliary one-shot calls the runtime makes on your behalf, such as automatic session-title generation, call the model directly and are not folded into this total. The exception is `/btw` side questions: their usage and cost are recorded (without storing the question or answer) and count toward the session total and `/cost`.
 
 Cost is computed from the [models.dev](https://models.dev/) pricing catalogue by default. For a custom endpoint, a private deployment, or a negotiated enterprise rate the catalogue doesn't know about, declare pricing explicitly with a model's `cost:` block:
 
@@ -159,11 +159,6 @@ models:
 ```
 
 An all-zero `cost:` table means "priced, free" — distinct from a model with no `cost:` at all, which falls back to the catalogue (and bills $0 for models the catalogue doesn't know).
-
-> [!NOTE]
-> **Cost never decreases**
->
-> A session's cumulative cost is a running total updated after every *tracked* model call — the same main conversation turns and compaction calls described above. Compacting the conversation (manually with `/compact`, or automatically — see the agent's `session_compaction`/`compaction_threshold` fields in the [Agent Config reference](../../configuration/agents/index.md)) reshapes the message history sent back to the model, but never touches this running total. Auxiliary one-shot calls such as automatic session-title generation are not tracked and are not reflected in this total: `/cost` covers everything the session's tracked calls have spent, not literally every model call the runtime makes on your behalf.
 
 ## Resuming Into a Worktree
 

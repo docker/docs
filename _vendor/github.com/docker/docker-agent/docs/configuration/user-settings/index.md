@@ -7,8 +7,6 @@ weight: 110
 canonical: https://docs.docker.com/ai/docker-agent/configuration/user-settings/
 ---
 
-_Full reference for the global settings block in your user config file._
-
 ## Where Settings Live
 
 Docker Agent reads a single user-level config file, independent of any agent YAML:
@@ -40,7 +38,9 @@ You rarely need to hand-edit this file. Most fields are managed from the TUI's `
 | `expand_thinking` | boolean | `false` | Start new sessions with thinking/tool blocks expanded instead of collapsed. |
 | `split_diff_view` | boolean | `true` | Render file-edit diffs side-by-side instead of unified. |
 | `render_images` | boolean | `true` | Render images in the TUI using the Kitty graphics protocol. Applies to both tool-result images and Markdown images in agent responses. Automatically disabled when the terminal does not support Kitty. |
-| `show_banner` | boolean | `true` | Show the ASCII-art startup banner on an empty conversation. Applies to both the full TUI and the [lean TUI](../../features/tui/index.md#lean-tui). Managed from the **Appearance** tab of `/settings`. |
+| `show_banner` | boolean | `true` | Show the braille wordmark startup banner. In the full TUI it appears on an empty conversation; in the [lean TUI](../../features/tui/index.md#lean-tui) it is printed at the start of the transcript, before any resumed session. Managed from the **Appearance** tab of `/settings` in the full TUI; the lean TUI's `/settings` panel has a *Show startup banner* toggle (labeled "next launch") that is saved for future launches. Unlike other settings marked **next launch**, saving it also adds or removes the banner in the current session, but only while the session's welcome block is still in the transcript: it cannot erase a banner already printed to your terminal scrollback, and after resuming another session with `/sessions` there is no welcome block to update. |
+| `fade_scroll_edges` | boolean | `true` | Fade the top and bottom edges of scrollable areas in the full TUI when more content lies beyond them. Managed from the **Fade scroll edges** toggle on the **Appearance** tab of `/settings`. |
+| `top_margin` | boolean | `false` | Add a one-row top margin above the full TUI when the terminal is taller than 24 rows. Managed from the **Show top margin** toggle on the **Appearance** tab of `/settings`. |
 | `theme` | string | `default` | Theme name, loaded from a built-in theme or `~/.cagent/themes/<name>.yaml`. The special value `auto` follows the terminal's light/dark background. See [Theming](../../features/tui/index.md#theming). |
 | `theme_dark` | string | `default` | Theme applied when `theme: auto` and the terminal background is dark. |
 | `theme_light` | string | `default-light` | Theme applied when `theme: auto` and the terminal background is light. |
@@ -53,6 +53,8 @@ You rarely need to hand-edit this file. Most fields are managed from the TUI's `
 | `sound` | boolean | `false` | Play a notification sound on task success or failure. |
 | `sound_threshold` | int | `10` | Minimum duration in seconds a task must run before a success sound plays (failures always play). |
 | `snapshot` | boolean | `false` | Enable automatic shadow-git snapshots at turn boundaries globally. See [Snapshots](../../features/snapshots/index.md). |
+| `background_compaction` | boolean | `false` | Generate automatic compaction summaries while the agent continues working. Apply completed summaries between turns, preserving messages added during generation. Unfinished work is cancelled when the stream ends. |
+| `background_compaction_threshold` | integer | `70` | Context-window percentage (1–99) at which background compaction starts. Invalid values fall back to 70. Set below the agent's blocking `compaction_threshold` (90% by default) to allow time for generation. |
 | `cache_stable_prompts` | boolean | `false` | Keep changing trusted context (date, environment info, dynamic prompt files) out of the frozen system prefix and append chronological updates instead, improving prompt-cache hit rates on long sessions. |
 | `warn_on_cache_miss` | boolean | `false` | Warn when a model call after the first one in a session reports no cached input tokens (a prompt-cache miss). Managed from the **Notifications** tab of `/settings`. |
 | `busy_send_mode` | string | `steer` | What happens to a message sent while the agent is working: `steer` injects it into the ongoing stream; `queue` holds it until the current turn ends. |
@@ -61,6 +63,9 @@ You rarely need to hand-edit this file. Most fields are managed from the TUI's `
 | `hooks` | object | _unset_ | Global lifecycle hooks applied to every agent, additive with agent-config and CLI hooks. See [Global (user-level) hooks](../hooks/index.md#global-user-level-hooks). |
 | `keybindings` | array | _unset_ | Remap TUI keyboard shortcuts. See [Custom Keybindings](../../features/tui/index.md#custom-keybindings) for the full list of actions and syntax. |
 | `layout` | object | _unset_ | Sidebar position and section visibility. See [Layout Settings](#layout-settings) below. |
+| `experimental.mcp_events` | boolean | `false` | Enable experimental MCP Events push subscriptions (proposed SEP-3415) over stdio and Streamable HTTP. |
+| `experimental.mcp_skills` | boolean | `false` | Enable experimental MCP Skills discovery and verified loading (`io.modelcontextprotocol/skills`, SEP-2640). |
+| `experimental.mcp_tasks` | boolean | `false` | Enable experimental MCP Tasks asynchronous tool execution (`io.modelcontextprotocol/tasks`, SEP-2663) over stdio and Streamable HTTP. |
 
 ## Layout Settings
 
@@ -102,11 +107,15 @@ settings:
   split_diff_view: true
   render_images: true
   show_banner: true
+  fade_scroll_edges: true
+  top_margin: false
   hide_tool_results: false
   sound: true
   sound_threshold: 10
   snapshot: true
   cache_stable_prompts: true
+  background_compaction: true
+  background_compaction_threshold: 70
   warn_on_cache_miss: true
   busy_send_mode: queue
   interrupt_confirmation: double-tap
@@ -138,4 +147,4 @@ User settings are a **low-priority** source: they establish defaults, and anythi
 - **Aliases sit between CLI flags and user settings.** An [alias](../../features/cli/index.md#docker-agent-alias) (`docker agent alias add ...`) can bundle its own `yolo`, `safety`, `model`, `hide_tool_results`, and `sandbox` defaults; those apply when the corresponding flag was not explicitly passed, the same way user settings do, but are resolved after user settings so an alias's own choices take priority over your global defaults.
 - **Permissions are merged, not overridden.** Global `settings.permissions` and an agent's own `permissions:` are combined into a single set of `deny` → `allow` → `ask` patterns before evaluation — a global deny always blocks, regardless of what the agent config allows. See [Merging Behavior](../permissions/index.md#merging-behavior).
 - **Hooks are additive, not overridden.** For a given lifecycle event, hooks from the agent config, `settings.hooks`, `hooks.d/` drop-ins, and `--hook-*` CLI flags **all** run, in that order. Global hooks cannot be suppressed by an individual agent.
-- **Everything else is a plain default.** Fields with no CLI or agent-config equivalent (`sound`, `sound_threshold`, `restore_tabs`, `tab_title_max_length`, `split_diff_view`, `render_images`, `show_banner`, `cache_stable_prompts`, `warn_on_cache_miss`, `busy_send_mode`, `keybindings`, `layout`) only ever come from `settings:` (or the `/settings` dialog that writes it) — there is nothing to override them per run.
+- **Everything else is a plain default.** Fields with no CLI or agent-config equivalent (`sound`, `sound_threshold`, `restore_tabs`, `tab_title_max_length`, `split_diff_view`, `render_images`, `show_banner`, `fade_scroll_edges`, `top_margin`, `cache_stable_prompts`, `warn_on_cache_miss`, `busy_send_mode`, `keybindings`, `layout`) only ever come from `settings:` (or the `/settings` dialog that writes it) — there is nothing to override them per run.

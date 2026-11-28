@@ -6,8 +6,6 @@ weight: 130
 canonical: https://docs.docker.com/ai/docker-agent/providers/groq/
 ---
 
-_Use Groq models with Docker Agent._
-
 ## Overview
 
 [Groq](https://groq.com/) serves open-weight models on its LPU inference engine
@@ -27,8 +25,6 @@ includes built-in support for Groq as an alias provider.
 
 ### Inline Syntax
 
-The simplest way to use Groq:
-
 ```yaml
 agents:
   root:
@@ -38,8 +34,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

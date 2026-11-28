@@ -6,8 +6,6 @@ weight: 180
 canonical: https://docs.docker.com/ai/docker-agent/providers/moonshot/
 ---
 
-_Use Moonshot AI (Kimi) models with Docker Agent._
-
 ## Overview
 
 [Moonshot AI](https://www.moonshot.ai/) serves its Kimi model family through an
@@ -30,8 +28,6 @@ Use the provider ID `moonshotai`. The legacy ID `moonshot` is also accepted.
 
 ### Inline Syntax
 
-The simplest way to use Moonshot AI:
-
 ```yaml
 agents:
   root:
@@ -41,8 +37,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

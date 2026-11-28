@@ -6,8 +6,6 @@ weight: 70
 canonical: https://docs.docker.com/ai/docker-agent/configuration/permissions/
 ---
 
-_Control which tools can execute automatically, require confirmation, or are blocked entirely._
-
 ## Overview
 
 Permissions provide fine-grained control over tool execution. You can configure which tools are auto-approved (run without asking), which require user confirmation, and which are completely blocked.
@@ -70,6 +68,8 @@ For a **new** root session the first source in this order wins:
 
 **Resuming a session never re-applies defaults**: the stored mode is kept unless you pass an explicit `--safety` or `--yolo` flag for that run. Agent switches, handoffs, and delegated sub-agent sessions inherit the active session's mode rather than resetting it.
 
+Delegation wrappers (`transfer_task`, `handoff`, `run_skill`) carry a read-only annotation: by default, launching a sub-session does not prompt by itself. Strict mode still evaluates the launch like any other call, a session-scoped `ask` rule or mandatory guard can still require confirmation, and balanced mode keeps the default `pre_tool_use` deny veto. Every tool call inside the sub-session is evaluated against that session's inherited safety mode and permissions. A fork skill whose toolsets start background work (for example a stdio MCP server) asks before starting them, except under strict (already approved at launch) and autonomous.
+
 Sessions created through the API (`POST /api/sessions`) without a `safety_policy` receive the author-declared defaults (5–6) when their first run starts — the earliest point the agent configuration is loaded. If the server restarts before that first run, the session keeps the historical unset default (7).
 
 > [!WARNING]
@@ -119,6 +119,8 @@ permissions:
 ```
 
 The three lists are evaluated in order `deny` → `allow` → `ask`. An `ask:` entry does not override a matching allow rule; narrow or remove the allow rule where confirmation is required. Team-level asks also yield to the active safety mode as described above.
+
+When an `ask:` pattern is provably shadowed by an `allow:` pattern — an unconditional `*` allow, or an argument-free allow whose tool name matches the ask's tool name — Docker Agent logs a warning at startup naming both patterns, since the ask rule can never prompt. Normal runs discard log output, so the warning is only recorded when you run with `--debug`; it is written to the debug log (`~/.cagent/cagent.debug.log` by default, or the path given with `--log-file`) rather than printed to the terminal. A silent startup therefore does not prove that no rule is shadowed. The check is conservative: it does not report glob ask patterns (other than against a `*` allow) or argument-scoped allow patterns.
 
 ## Global Permissions
 
@@ -255,27 +257,38 @@ permissions:
     - "shell"
 ```
 
-### Safe Shell Agent
+### Shell Agent with Safety Classification
 
-Allow specific safe commands, block dangerous ones:
+Use balanced safety without broad command-prefix allows:
 
 ```yaml
-permissions:
-  allow:
-    - "shell:cmd=ls*"
-    - "shell:cmd=cat*"
-    - "shell:cmd=grep*"
-    - "shell:cmd=find*"
-    - "shell:cmd=head*"
-    - "shell:cmd=tail*"
-    - "shell:cmd=wc*"
-  deny:
-    - "shell:cmd=sudo*"
-    - "shell:cmd=rm*"
-    - "shell:cmd=mv*"
-    - "shell:cmd=chmod*"
-    - "shell:cmd=chown*"
+runtime:
+  safety: balanced
 ```
+
+Balanced runs positively classified safe calls automatically and asks for approval
+for unknown or destructive calls; it does not automatically deny them. This applies
+to both `shell` and `run_background_job`.
+
+Explicit allow grants authorize matching arguments and override the safety mode's
+fallback, including strict and restricted. For example, `shell:cmd=find*` also
+authorizes `find / -exec rm -rf {} +` and
+`find . -maxdepth 1 -name seed -exec sh -c 'touch marker' {} +`. A command name
+alone does not establish that its arguments are safe. Avoid these broad grants
+when you want classification to decide whether approval is needed.
+
+For these two builtin command tools, allow rules whose `cmd` value is a literal
+followed by a single `*` reject shell chaining, redirection, and substitutions.
+Command-name prefixes such as `cmd=ls*` additionally require a token boundary,
+so they do not authorize `lsanything`. Argument and path prefixes such as
+`cmd=ls *`, `cmd=git commit *`, and `cmd=ls /tmp/*` retain prefix matching.
+Ordinary colons in values (quoted filenames or URLs) remain literal; only
+`:key=` introduces another condition.
+
+This hardening does not inspect execution or write options such as `find -exec`.
+Other glob shapes (`cmd=ls**`, `cmd=[l]s*`) and the `command=ls*` condition
+retain generic matching and can authorize compound commands. Bare-tool grants,
+`cmd=*`, and exact compound-command grants also remain broad explicit opt-ins.
 
 ### MCP Tool Permissions
 

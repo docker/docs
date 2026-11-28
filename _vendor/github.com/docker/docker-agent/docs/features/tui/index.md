@@ -13,7 +13,14 @@ _Docker Agent's default interface is a rich, interactive terminal UI with file a
 
 ## Launching the TUI
 
-Both the full TUI and the lean TUI display a centered ASCII art Docker Agent banner on startup when the chat is empty. The banner is automatically hidden once the agent starts responding or when a custom welcome message is configured. You can disable the banner entirely from the **Appearance** tab of `/settings`, or by setting `show_banner: false` in your [user settings](../../configuration/user-settings/index.md).
+Both the full TUI and the lean TUI display a braille “Docker Agent” title on startup. It uses a violet-to-pink-to-apricot gradient on dark backgrounds and dark grey on light backgrounds, adjusted for contrast against the selected theme’s background. On supported TrueColor terminals, the full TUI draws a twisting stream of dots from the left edge of the chat pane into a cloud that settles into the title from left to right once at launch. Set `DOCKER_AGENT_REDUCE_MOTION=1` to skip the animation; the banner remains static. Terminals without detected TrueColor support, redirected output, and the lean TUI also use the static banner. In lean mode, the terminal's actual background may differ from the selected theme.
+
+- **Full TUI:** the banner is centered in the empty chat pane. It is not drawn if the pane is narrower than 76 columns or shorter than 6 rows, and it disappears as soon as the conversation has content: when you send a message, when the agent starts responding, or when the agent's `welcome_message` is shown (which replaces the banner as soon as the agent info arrives).
+- **Lean TUI:** the banner is printed left-aligned at the start of the transcript, above the resumed session if any, and stays in the scrollback as messages arrive.
+
+The lean TUI does not change the terminal's background. Choose a theme that matches it: for example, use `--theme default` on a dark terminal or `--theme default-light` on a light terminal. `--theme auto` detects the background at startup when the terminal supports it, falling back to dark when it cannot. A mismatched theme may make text hard to read.
+
+You can disable the banner entirely from the **Appearance** tab of `/settings`, or by setting `show_banner: false` in your [user settings](../../configuration/user-settings/index.md).
 
 ```bash
 # Launch with a config
@@ -51,6 +58,8 @@ $ docker agent run agent.yaml --lean
 
 File writes use the tool's display title (for example, **Write**) and preview file contents as tool arguments stream in, with theme-aware syntax highlighting based on the filename. Unknown file types remain plain text. By default, the preview follows the last 10 file lines. Press <kbd>Ctrl</kbd>+<kbd>O</kbd> to toggle compact (last 10 lines) and complete (full contents) previews for the current session, including already displayed file writes. In `/settings`, change **Written file preview** to **Full** to show the entire incoming file, or persist `settings.lean_full_file_preview: true` in your user config.
 
+The lean TUI sets the terminal window title to `docker agent: <session title>` once the session has a title, and updates it when you resume a session with `/sessions`. Running `/new` resets it to `docker agent`. Control characters are stripped from the title, and the title is not rewritten when it has not changed.
+
 The lean TUI uses a simplified terminal interface with minimal chrome. To make it the default for interactive runs, set `lean` in your user config:
 
 ```yaml
@@ -63,7 +72,15 @@ Omit `lean` or set it to `false` to keep the full TUI as the default. You can st
 
 The lean TUI supports **steering** and **follow-ups** while the agent is running. Press <kbd>Enter</kbd> to steer the active turn, or <kbd>Alt</kbd>+<kbd>Enter</kbd> to queue the message as a separate turn after the current one finishes. Pending messages appear with muted styling at the end of the live stream, labeled `Steering:` or `Follow-up:` so it's clear which turn each one will land on. Press <kbd>Alt</kbd>+<kbd>Up</kbd> to withdraw every still-pending steer/follow-up (and any locally queued message) back into the editor, concatenated in the order they were sent, so you can edit and resend them; messages the agent has already picked up are left alone.
 
-The lean TUI supports a focused set of slash commands: `/new`, `/sessions`, `/compact`, `/model`, `/effort`, `/copy`, `/clear`, `/settings`, `/help`, `/exit` (alias: `/quit`), plus any agent-defined commands. Type `/model` (or `/model <provider/model>`) to switch the active model inline — the command opens a fuzzy-searchable list of available models. If what you type after `/` doesn't match any command, the autocomplete menu automatically falls back to fuzzy-matching it against available models (by name, provider, or ID) instead of dismissing — selecting a match switches the model just like `/model` would, without needing to type `/model` first; this fallback is unavailable when `/model` itself is disabled via `--disable-commands`. Type `/sessions` (or `/sessions <session-id>`) to browse and resume past sessions from the current working directory. Type `/copy` to copy the last assistant response to the clipboard. Type `/settings` to open the lean TUI's inline settings panel — see [User Settings](../../configuration/user-settings/index.md) for the fields it exposes.
+The lean TUI supports a focused set of slash commands: `/new`, `/sessions`, `/compact`, `/model`, `/effort`, `/btw`, `/copy`, `/clear`, `/settings`, `/help`, `/exit` (alias: `/quit`), plus any agent-defined commands. Type `/model` (or `/model <provider/model>`) to switch the active model inline — the command opens a fuzzy-searchable list of available models. If what you type after `/` doesn't match any command, the autocomplete menu automatically falls back to fuzzy-matching it against available models (by name, provider, or ID) instead of dismissing — selecting a match switches the model just like `/model` would, without needing to type `/model` first; this fallback is unavailable when `/model` itself is disabled via `--disable-commands`. Type `/sessions` (or `/sessions <session-id>`) to browse and resume past sessions from the current working directory. Type `/copy` to copy the last assistant response to the clipboard. Type `/settings` to open the lean TUI's inline settings panel — see [User Settings](../../configuration/user-settings/index.md) for the fields it exposes.
+
+MCP elicitations and OAuth prompts appear inline in the lean TUI, in place of the editor, so a tool that asks for input no longer blocks the run with nothing on screen:
+
+- **Forms** (from MCP servers or the [`user_prompt`](../../tools/user-prompt/index.md) tool) support text, number/integer, boolean, single- and multi-select fields, and masked password fields, plus free-form answers. Single-select fields start on the schema `default` when one is set, instead of always the first option. The full TUI dialog behaves the same way and shares the same validation. In the full TUI, click a code block's copy label to copy its unwrapped code, or press <kbd>Ctrl</kbd>+<kbd>O</kbd> to copy the whole message as Markdown without your answers. If hidden terminal controls or ambiguous formatting make copying code unsafe, the message's copy labels are hidden. Whole-message copying removes terminal controls.
+- **URL prompts:** press <kbd>y</kbd> when done, <kbd>n</kbd> to decline, <kbd>o</kbd> to open the browser, or <kbd>Esc</kbd> to cancel.
+- **OAuth consent:** press <kbd>y</kbd> to authorize, or <kbd>n</kbd>/<kbd>Esc</kbd> to decline. A notice is shown when authorization completes.
+
+Concurrent requests are queued and shown oldest first. <kbd>Ctrl</kbd>+<kbd>C</kbd> cancels the prompt and interrupts the run. Starting a new conversation (`/new`), switching sessions, or reloading a tab cancels any elicitation still waiting from the previous conversation, in both the lean and full TUI, so the tool that raised it is not left waiting.
 
 Prefix a message with `!` to run it as a shell command directly, without going through the agent — for example `!git status`. The command runs in your default shell and its output is shown inline in the transcript. Bang commands are disabled in read-only sessions.
 
@@ -85,6 +102,7 @@ Type `/` during a session to see available commands, or press <kbd>Ctrl</kbd>+<k
 | `/clear`           | Clear the current conversation (keep session, drop messages)                         |
 | `/compact`         | Summarize and compact the conversation history                                       |
 | `/fork`            | Fork the current session into a new branch                                           |
+| `/btw`             | Ask a side question about the current conversation without affecting it (`/btw <question>`, or `/btw` alone to type the question in the dialog). The answer streams into a dialog: no tools are used, nothing is saved to the conversation, and compaction, title generation, and the running agent are unaffected. Press <kbd>↑</kbd>/<kbd>↓</kbd> to scroll, <kbd>c</kbd> to copy the answer, <kbd>r</kbd> to retry after a failure, and <kbd>Esc</kbd> to cancel and close. Uses the agent's current model and is billed like any other call. Not available for remote sessions or external coding harnesses (such as Claude Code). In the lean TUI the question is required (`/btw <question>`) and the answer is printed into the transcript when it completes, instead of in a dialog |
 | `/copy`            | Copy the entire conversation to clipboard                                            |
 | `/copy-last`       | Copy only the last assistant message to clipboard                                    |
 | `/undo`            | Restore file changes from the latest snapshot (only when snapshots are enabled)      |
@@ -93,7 +111,7 @@ Type `/` during a session to see available commands, or press <kbd>Ctrl</kbd>+<k
 | `/sessions`        | Browse and load past sessions                                                        |
 | `/plans`           | Browse and manage every [shared plan](../../tools/plan/index.md). Filter, open a detail view, refresh, export to a file, set status, edit/create in `$VISUAL`/`$EDITOR`, and delete, all guarded against concurrent edits. Not available in the lean TUI |
 | `/model`           | Change the model for the current agent                                               |
-| `/effort`          | Set the current model's reasoning-effort level (`/effort <none\|minimal\|low\|medium\|high\|xhigh\|max>`, or `/effort` alone to pick from the supported levels; reasoning models only). Press <kbd>Tab</kbd> after `/effort` and a space to complete a level the current model supports |
+| `/effort`          | Set the current model's reasoning-effort level (`/effort <none\|minimal\|low\|medium\|high\|xhigh\|max>`, or `/effort` alone to pick from the supported levels; reasoning models and `claude-code` / `command-code` harnesses only). Press <kbd>Tab</kbd> after `/effort` and a space to complete a level the current model supports |
 | `/settings`        | Manage appearance, behavior, and notification preferences                           |
 | `/yolo`            | Toggle automatic tool call approval                                                  |
 | `/title`           | Set or regenerate session title                                                      |
@@ -102,7 +120,7 @@ Type `/` during a session to see available commands, or press <kbd>Ctrl</kbd>+<k
 | `/star`            | Star/unstar the current session                                                      |
 | `/context`         | Show a context-window breakdown: estimated tokens per category (system prompt, tool definitions, prompt files, messages, tool results, compaction summary), a team-level **Live sessions** view (the current session plus every running sub-agent session with its agent, short session ID, and context budget), plus a per-file inventory of attached files and prompt files. When a compaction has occurred, the dialog also displays the verbatim text of the most recent compaction summary. When a dedicated `compaction_model` caps the effective limit below the primary model's own window, a second line reads "compaction cap: `<model>` • `<N>` tokens" — Live-sessions rows are silent on the cap, and the sidebar shows a minimal ⚠ capped marker without repeating the model or the figure (the `/context` header is the authoritative source of the model + number). Use the arrow keys to select a row: press <kbd>Enter</kbd> on a live session to explicitly compact it, or <kbd>d</kbd> on an attached file to drop it |
 | `/drop`            | Remove an attached file from the session context (`/drop <path>`, or `/drop` alone to review and drop from the `/context` dialog). Press <kbd>Tab</kbd> after `/drop` and a space to complete an attached file's path |
-| `/cost`            | Show cost breakdown for this session. Includes a **By Agent** section (alongside **By Model**) showing cumulative cost per agent; unattributed usage and compaction spend appear in their own buckets. |
+| `/cost`            | Show cost breakdown for this session. Includes a **By Agent** section (alongside **By Model**) showing cumulative cost per agent; unattributed usage and compaction spend appear in their own buckets, and `/btw` side-question spend is itemized under its own group. |
 | `/eval`            | Create an evaluation report                                                          |
 | `/pause`           | Pause/resume the runtime loop. While the agent is mid-request, the resize handle shows "Pausing…" until the in-flight request completes; once the loop is blocked the indicator changes to "⏸ Paused". Run `/pause` again to resume. |
 | `/tools`           | Show every toolset (with lifecycle state) and the tools they expose                  |
@@ -177,7 +195,7 @@ The title is rendered in the agent's accent color. Sections appear in this order
 - **Execution capabilities** — native versus harness execution, tool execution/approval ownership, and support for budgets, native compaction, mid-turn steering and prompt-hook context. Support is not an enabled setting; budget support requires runtime configuration. Harness actions are reported, not approved by Docker Agent. Omitted when the server has not supplied a profile.
 - **Model / Fallback / Thinking** — the `provider/model`, any fallback models, and the gauge + value thinking line (omitted for models with no selectable thinking, e.g. harness-backed agents).
 - **Context** — the agent's latest known context usage, e.g. `Context: 12.8K of 128.0K tokens (10%)` (a bare token count when the context limit is unknown; omitted until the agent has run). Sub-agent and background-agent runs are accounted for. When a dedicated `compaction_model` caps the effective limit below the primary model's own window, the token-usage line also shows a short "⚠ capped" marker (see `/context` for the model and figure).
-- **Cost** — the agent's cumulative cost across all runs in the session tree. Repeated session snapshots are not double-counted. Omitted until the agent has run.
+- **Cost** — the agent's cumulative cost across all runs in the session tree. Omitted until the agent has run.
 - **Sub-agents (N) / Handoffs (N) / Skills (N)** — compact, inline, comma-separated lists wrapped to the dialog width.
 - **Limits** — the configured per-agent limits that are set, e.g. `Limits: max-iter 50 · history 40 · max-tool-calls 5`.
 - **Options** — the enabled option flags, e.g. `Options: add-date · add-environment-info · redact-secrets`.
@@ -200,9 +218,9 @@ The thinking state of each model is shown with a gauge + value on the card and a
 | Disabled (capable)     | `thinking ▱▱▱▱▱▱ off` (dimmed)  | `▱▱▱▱▱▱` (empty gauge)  |
 | Not reasoning-capable  | _(omitted)_                    | _(omitted)_            |
 
-The **effort gauge** is a fixed-width six-cell indicator (`▰` filled, `▱` empty) so the badge column stays aligned. It maps the six selectable levels one-to-one onto filled-cell counts — `minimal` → `▰▱▱▱▱▱`, `low` → `▰▰▱▱▱▱`, `medium` → `▰▰▰▱▱▱`, `high` → `▰▰▰▰▱▱`, `xhigh` → `▰▰▰▰▰▱`, `max` → `▰▰▰▰▰▰` — so the cell count alone is lossless, with a low→high color ramp as a secondary cue. A capable-but-disabled model shows a dim empty gauge (`▱▱▱▱▱▱` `off`), adaptive budgets show `auto`, and token budgets keep `◉ <count>`. The same gauge + value renders on the focus card, the Agent Inspector, and the row.
+The **effort gauge** is a fixed-width six-cell indicator (`▰` filled, `▱` empty) so the badge column stays aligned. It maps the six selectable levels one-to-one onto filled-cell counts — `minimal` → `▰▱▱▱▱▱`, `low` → `▰▰▱▱▱▱`, `medium` → `▰▰▰▱▱▱`, `high` → `▰▰▰▰▱▱`, `xhigh` → `▰▰▰▰▰▱`, `max` → `▰▰▰▰▰▰` — with a low→high color ramp as a secondary cue. A capable-but-disabled model shows a dim empty gauge (`▱▱▱▱▱▱` `off`), adaptive budgets show `auto`, and token budgets keep `◉ <count>`. The same gauge + value renders on the focus card, the Agent Inspector, and the row.
 
-Harness-backed agents (e.g. `claude-code`) show the harness type as their model and no thinking gauge. Press **Shift+Tab** to cycle the current model's thinking-effort level; a `✻ Thinking: <level>` toast confirms the change (useful when the sidebar is hidden).
+Harness-backed agents (e.g. `claude-code`) show the harness type as their model. `claude-code` and `command-code` harnesses show their `effort` on the gauge, or `auto` while the CLI picks it; other harnesses show no thinking gauge. Press **Shift+Tab** to cycle the current model's thinking-effort level; a `✻ Thinking: <level>` toast confirms the change (useful when the sidebar is hidden).
 
 ### Agent Delegation Feedback
 
@@ -299,7 +317,7 @@ Unsupported or syntactically invalid LaTeX expressions fall back to displaying t
 
 The TUI fetches and renders images referenced in agent responses using the Kitty graphics protocol. When an assistant message contains a standard Markdown image reference, the TUI downloads the image in the background and displays it inline at the point of the reference. While the image is loading a placeholder is shown; once loaded, the message re-renders with the image in place.
 
-Only `http://`, `https://`, and `data:image/…;base64,…` URIs are resolved. `file://`, `sandbox://`, and any other URI scheme are rejected as a security measure against prompt-injection attacks that could otherwise read local files. Bare relative paths (e.g. `./output.png`, used for agent-generated images) are read via the local filesystem. Images that fail to load are silently dropped — the surrounding message text is unaffected. Image rendering requires a terminal that supports the Kitty graphics protocol; it is automatically disabled when the terminal does not support it. Support is checked before the TUI starts; an unanswered probe waits up to 300 ms. You can disable rendering and skip this check via `render_images: false` in `~/.config/cagent/config.yaml` or the **Render images** toggle in `/settings`. Disabling and re-enabling images applies immediately when startup confirmed support. If the startup check was skipped, enabling images takes effect on the next launch.
+Only `http://`, `https://`, and `data:image/…;base64,…` URIs are resolved. `file://`, `sandbox://`, and any other URI scheme are rejected as a security measure against prompt-injection attacks that could otherwise read local files. Bare relative paths (e.g. `./output.png`, used for agent-generated images) are read via the local filesystem. Images that fail to load are silently dropped — the surrounding message text is unaffected. Image rendering requires a terminal that supports the Kitty graphics protocol; it is automatically disabled when the terminal does not support it. Support is checked before the TUI starts. Terminals without Kitty graphics answer right away; only a terminal that answers nothing at all waits out the 300 ms timeout. You can disable rendering and skip this check via `render_images: false` in `~/.config/cagent/config.yaml` or the **Render images** toggle in `/settings`. Disabling and re-enabling images applies immediately when startup confirmed support. If the startup check was skipped, enabling images takes effect on the next launch.
 
 ### Snapshots, `/undo`, and `/snapshots`
 
@@ -454,7 +472,7 @@ The picker's catalog entries come from [models.dev](https://models.dev) and are 
 
 ## Editable Messages
 
-Edit any previous user message to branch the conversation. Hover a past user message and click **✎ edit** (or select it with the keyboard and press <kbd>e</kbd>) to modify it — the agent will re-process from that point, while the original session history is preserved. This is great for exploring alternative approaches without losing your work.
+Edit any previous user message to branch the conversation. Hover a past user message and click **✎ edit** (or select it with the keyboard and press <kbd>e</kbd>) to modify it — the agent will re-process from that point, while the original session history is preserved.
 
 Hovering a user or assistant message also reveals a **⎘ copy** button that copies the message text to the clipboard (<kbd>c</kbd> when a message is selected).
 
@@ -462,7 +480,7 @@ Hovering a user or assistant message also reveals a **⎘ copy** button that cop
 
 When an agent turn fails (fatal model error, hook block, loop detection, tool-setup failure), the TUI displays the error in the message stream and persists it to the session store. Errors survive a reload and are shown exactly where they occurred, making them visible in shared or remote sessions.
 
-Each error message includes a clickable **↻ retry** button. Clicking it resumes the conversation from the point of failure — without retyping your last message. This lets you recover from transient failures (rate limits, network blips, model API errors) in one click.
+Each error message includes a clickable **↻ retry** button. Clicking it resumes the conversation from the point of failure — without retyping your last message.
 
 ## Session Management
 
@@ -522,7 +540,7 @@ Customize session titles to make them more meaningful and easier to find. By def
 | Shift+Enter | Insert a newline |
 | Up/Down    | Navigate message history                        |
 
-Press <kbd>Ctrl</kbd>+<kbd>H</kbd> to view the complete list of all available keyboard shortcuts.
+The status bar shows only the <kbd>Ctrl</kbd>+<kbd>H</kbd> help hint rather than a list of shortcuts. Press <kbd>Ctrl</kbd>+<kbd>H</kbd> (or <kbd>F1</kbd>) to open the **Help** dialog. While another dialog is open, use <kbd>F1</kbd> to open Help over it: <kbd>Ctrl</kbd>+<kbd>H</kbd> is passed to that dialog as a text-editing key (for example, it deletes a character in the command palette filter). Help groups shortcuts into sections with those for your current context (for example the focused dialog or the editor) listed first. Type in the search box to filter shortcuts by key or description; press <kbd>Esc</kbd> or <kbd>Enter</kbd> to close the dialog. The dialog reflects any [custom keybindings](#custom-keybindings) you have configured.
 
 ### Custom Keybindings
 
@@ -581,18 +599,9 @@ Run `/settings` to open the settings dialog. Click a category tab, or use <kbd>T
 >
 > This section covers the `/settings` dialog. For the complete list of `settings:` fields (including ones with no dialog UI, like `permissions`, `hooks`, and `keybindings`) and how they interact with CLI flags and aliases, see [User Settings](../../configuration/user-settings/index.md).
 
-The **Appearance** tab selects the theme and customizes the layout. Layout changes apply immediately to the UI behind the dialog. On wide terminals, a schematic preview appears beside the controls without reducing the space available to the settings list:
+The **Fade scroll edges** toggle on the Appearance tab controls whether scrollable areas (such as the chat) gently fade out their top and bottom edges when more content lies beyond them. It is on by default; turn it off to render scrollable content at full brightness right up to the edge.
 
-- **Sidebar position**: `Right` (default), `Left`, `Top`, or `Bottom`. Left/right keep the full vertical sidebar next to the chat; top/bottom render it as a compact horizontal band above or below the chat (session title, working directory, token usage, plus a one-line summary of the current agent and its model; in multi-agent configurations all team agents are listed by name after the current agent).
-- **Sidebar info mode**: `Compact` (default) or `Detailed`. Controls how the Agents panel renders agent rows — see [Agents Panel](#agents-panel) for details. Persisted as `settings.layout.sidebar_info_mode: detailed`; compact is the default and omitted from the config.
-- **Section spacing**: `Compact`, `Normal` (default), or `Relaxed`, the number of blank lines between the sidebar sections (1, 2, or 3).
-- **Sidebar sections**: toggle the visibility of the **Session path** (the working directory line, including its git branch) and the **Token usage**, **Agents**, **Tools**, **Plans**, and **Todos** sections. All are visible by default except [Plans](#plans-sidebar), which is opt-in. The session title is always shown.
-
-Appearance also controls split-diff rendering, expanded thinking, whether tool results are hidden by default, and **Show startup banner** — the ASCII-art banner drawn on an empty conversation (persisted as `settings.show_banner: false` when turned off, and honored by the lean TUI too). Select **Theme** to open the theme picker.
-
-The **Behavior** tab controls busy-message handling, the auto-approve default, tab restoration, automatic snapshots, lean UI, and the maximum tab-title length. Restore-tabs and lean-UI changes take effect on the next launch. Enabling auto-approve requires confirmation.
-
-The **Notifications** tab enables completion sounds and sets the minimum task duration before a sound plays.
+The **Show top margin** toggle on the Appearance tab adds one blank row above the full TUI when the terminal is taller than 24 rows, giving the content some breathing room. It is off by default and is saved as `top_margin` in your settings.
 
 Press <kbd>Enter</kbd> to apply and persist, or <kbd>Escape</kbd> to cancel and restore the previous layout. The settings are saved globally in `~/.config/cagent/config.yaml`:
 
@@ -600,6 +609,7 @@ Press <kbd>Enter</kbd> to apply and persist, or <kbd>Escape</kbd> to cancel and 
 # ~/.config/cagent/config.yaml
 settings:
   busy_send_mode: queue # steer (default), queue
+  fade_scroll_edges: true # false to turn off the fade at scrollable edges (default: true)
   layout:
     sidebar_position: left # right (default), left, top, bottom
     sidebar_info_mode: detailed # compact (default, omitted), detailed
@@ -636,7 +646,7 @@ settings:
   theme_light: default-light # optional, theme used on light backgrounds (default: default-light)
 ```
 
-At startup the terminal background is queried (OSC 11) to pick the dark or light theme of the pair; non-interactive runs (pipes, CI) fall back to the dark theme. In terminals that report appearance changes (DEC mode 2031 — Ghostty, kitty, contour, …), flipping the OS or terminal appearance while Docker Agent is running switches the theme live. Terminals without that mode re-sync when the window regains focus.
+At startup the terminal background is queried (OSC 11) to pick the dark or light theme of the pair; when detection is unavailable, the dark theme is used. In the full TUI, terminals that report appearance changes (DEC mode 2031 — Ghostty, kitty, contour, …) switch the theme live when the OS or terminal appearance changes. Terminals without that mode re-sync when the window regains focus. The lean TUI selects its auto theme at startup and does not update it live.
 
 ### Custom Themes
 
@@ -696,7 +706,7 @@ settings:
 > [!TIP]
 > **Hot Reload**
 >
-> Custom themes auto-reload when you save changes to the file — no restart needed. This makes it easy to tweak colors in real-time.
+> Custom themes reload when you save changes to the file.
 
 > [!WARNING]
 > **Partial overrides**
@@ -711,7 +721,7 @@ When an agent calls a tool, Docker Agent shows a confirmation dialog by default.
 - **Always allow** — Permanently approve this tool/command for the session
 - **Deny** — Reject the tool call
 
-**Granular permissions:** The permission system supports pattern-based matching. When you “Always allow” a specific tool command, only that exact pattern is auto-approved — other commands from the same tool still require confirmation. This lets you auto-approve safe, read-only operations while maintaining control over destructive ones.
+**Granular permissions:** The permission system supports pattern-based matching. When you “Always allow” a specific tool command, only that exact pattern is auto-approved — other commands from the same tool still require confirmation.
 
 > [!TIP]
 > **YOLO mode**
@@ -728,4 +738,4 @@ The TUI displays transient notification banners for agent warnings, errors, and 
 | Click       | Copies the notification text to the clipboard |
 | × (close)   | Dismisses immediately; the glyph turns red when hovered |
 
-Hint text in the top-left corner of the notification border shows the available actions at a glance.
+Notifications normally sit in the bottom-right corner. While you type, the stack moves up just far enough to avoid covering the text in the prompt editor, and returns to its usual position when the input is empty.

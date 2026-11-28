@@ -64,9 +64,9 @@ transfer_task(
 ```
 
 > [!NOTE]
-> **Auto-Approved**
+> **Approval rules still apply**
 >
-> Unlike other tools, `transfer_task` is always auto-approved — no user confirmation needed. This allows seamless delegation between agents.
+> `transfer_task` carries a read-only hint and normally runs without confirmation under the default policy. Strict mode, permission rules, and hooks can still require approval or block delegation. The delegated agent's own tool calls are checked separately.
 
 ## Handoffs Routing
 
@@ -196,6 +196,18 @@ agents:
     toolsets:
       - type: think
       - type: background_agents
+  researcher:
+    model: anthropic/claude-sonnet-4-5
+    description: Finds relevant research
+    instruction: Research the assigned topic and report your findings.
+  analyst:
+    model: anthropic/claude-sonnet-4-5
+    description: Analyzes the project architecture
+    instruction: Analyze the assigned problem and explain your conclusions.
+  writer:
+    model: anthropic/claude-sonnet-4-5
+    description: Drafts reports
+    instruction: Write a clear report from the provided findings.
 ```
 
 The coordinator can then:

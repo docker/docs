@@ -7,8 +7,6 @@ weight: 50
 canonical: https://docs.docker.com/ai/docker-agent/tools/fetch/
 ---
 
-_Read content from HTTP/HTTPS URLs._
-
 ## Overview
 
 The fetch tool lets agents retrieve content from one or more HTTP/HTTPS URLs. It is **read-only** — only `GET` requests are supported. The tool respects `robots.txt`, limits response size (1 MB per URL), and can return content as plain text, Markdown (converted from HTML), or raw HTML.

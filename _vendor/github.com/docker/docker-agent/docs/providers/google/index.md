@@ -1,12 +1,12 @@
 ---
 title: "Google Gemini"
-description: "Use Gemini 2.5 Flash, Gemini 3.1 Pro, and other Google models with Docker Agent."
+description: "Use Gemini 4 (Carbon, Neon, Hydrogen, Argon), Gemini 3, and Gemini 2.5 models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, google gemini
 weight: 120
 canonical: https://docs.docker.com/ai/docker-agent/providers/google/
 ---
 
-_Use Gemini 2.5 Flash, Gemini 3.1 Pro, and other Google models with Docker Agent._
+_Use Gemini 4 (Carbon, Neon, Hydrogen, Argon), Gemini 3, and Gemini 2.5 models with Docker Agent._
 
 ## Setup
 
@@ -19,6 +19,8 @@ Docker Agent reads the first credential it finds from these environment variable
 | `GOOGLE_GENAI_USE_VERTEXAI` | Boolean flag (`true` or `1` enables Vertex AI); unset, empty, `false`, `0`, or invalid values do not enable it. |
 | `GOOGLE_CLOUD_PROJECT`      | GCP project used when `GOOGLE_GENAI_USE_VERTEXAI` is enabled or for Vertex AI Model Garden. |
 | `GOOGLE_CLOUD_LOCATION`     | GCP region for Vertex AI (defaults to the SDK default).                             |
+
+When the model sets no `base_url`, the Google SDK's endpoint override applies: `GOOGLE_GEMINI_BASE_URL` for the Gemini Developer API or `GOOGLE_VERTEX_BASE_URL` for Vertex AI. An explicit `base_url` takes precedence, even when it equals the default endpoint.
 
 Explicit `provider_opts.project` or `provider_opts.location` selects Vertex AI regardless of the flag.
 
@@ -42,7 +44,7 @@ export GOOGLE_CLOUD_LOCATION="us-central1"
 ```yaml
 agents:
   root:
-    model: google/gemini-3.8-flash
+    model: google/gemini-4-hydrogen
 ```
 
 ### Named Model
@@ -51,18 +53,22 @@ agents:
 models:
   gemini:
     provider: google
-    model: gemini-3.8-flash
+    model: gemini-4-neon
     temperature: 0.5
 ```
 
 ## Available Models
 
-| Model                     | Best For                        |
-| -------------------------- | ------------------------------- |
-| `gemini-3.1-pro-preview`  | Most capable Gemini model       |
-| `gemini-3.8-flash`        | Fast, efficient, good balance   |
-| `gemini-2.5-flash`        | Fast inference, cost-effective  |
-| `gemini-2.5-pro`          | Strong reasoning, large context |
+| Model                     | Best For                                       |
+| ------------------------- | ---------------------------------------------- |
+| `gemini-4-carbon`         | Deep-thinking flagship (`low`–`high`)          |
+| `gemini-4-neon`           | Balanced high-speed workhorse (`low`–`xhigh`)  |
+| `gemini-4-hydrogen`       | Fast, cost-effective everyday (`low`–`xhigh`)  |
+| `gemini-4-argon`          | Legacy Gemini 4 frontier (`low`–`high`)        |
+| `gemini-3.8-flash`        | Gemini 3 fast, efficient balance               |
+| `gemini-3.1-pro-preview`  | Gemini 3 Pro preview                           |
+| `gemini-2.5-flash`        | Fast inference, cost-effective                 |
+| `gemini-2.5-pro`          | Strong reasoning, large context                |
 
 ## Generated Images
 
@@ -123,7 +129,7 @@ Gemini supports two approaches depending on the model version:
 > [!WARNING]
 > **Different thinking formats**
 >
-> Gemini 2.5 uses **token-based** budgets (integers). Gemini 3 uses **level-based** budgets (strings like `low`, `high`). Make sure you use the right format for your model version.
+> Gemini 2.5 uses **token-based** budgets (integers). Gemini 3+ uses **level-based** budgets (strings like `low`, `high`, `xhigh`). Make sure you use the right format for your model version.
 
 ### Gemini 2.5 (Token-based)
 
@@ -145,20 +151,34 @@ models:
     thinking_budget: 8192 # fixed token budget
 ```
 
-### Gemini 3 (Level-based)
+### Gemini 3+ (Level-based)
 
 ```yaml
 models:
-  gemini-pro:
+  gemini-neon:
     provider: google
-    model: gemini-3.1-pro-preview
-    thinking_budget: high # default for Pro: low | high
+    model: gemini-4-neon
+    thinking_budget: xhigh    # Hydrogen / Neon: low | medium | high | xhigh
+
+  gemini-carbon:
+    provider: google
+    model: gemini-4-carbon
+    thinking_budget: high     # Carbon / Argon: low | medium | high
+
+  gemini-adaptive:
+    provider: google
+    model: gemini-4-carbon
+    thinking_budget: adaptive # omits thinkingLevel (uses model default); adaptive/<effort> pins a tier
 
   gemini-flash:
     provider: google
     model: gemini-3.8-flash
-    thinking_budget: medium # default for Flash: minimal | low | medium | high
+    thinking_budget: medium   # Gemini 3: minimal | low | medium | high
 ```
+
+- **Disabling thinking (`none` / `0`):** Gemini 3+ models always think and cannot disable reasoning. Setting `thinking_budget: none` or `0` logs a warning and lowers effort to `low` with thoughts hidden.
+- **Token budgets on Gemini 4+:** Gemini 4 models reject integer `thinkingBudget` values; configured integer budgets log a warning and are omitted so the model uses its default `thinkingLevel`.
+- **Gemini 2.5 with effort strings / `adaptive`:** String effort levels and `adaptive` / `adaptive/<effort>` are mapped to Gemini 2.5 token budgets (`-1` for plain `adaptive`).
 
 ## Built-in Tools (Grounding)
 
@@ -280,7 +300,7 @@ models:
 
 The value is forwarded unchanged as the top-level `serviceTier` of every `generateContent` request on the Gemini Developer API, Vertex AI, and the Docker models gateway; the endpoint must support it. It applies to all requests using the configured model, including reranking, title generation, and compaction. Other values are passed through for the API to validate. When omitted or empty, no `serviceTier` is sent, leaving the API's default behavior unchanged. Non-string values are ignored. [Vertex AI Model Garden](#vertex-ai-model-garden) models do not use this option.
 
-Flex requests can sit in Google's queue for up to 15 minutes before the first byte arrives. Docker Agent normally treats a stream that stays silent for 5 minutes as stalled; for `google` models with `service_tier: flex` it waits 15 minutes instead. Other tiers and providers keep the 5 minute limit. Rate-limit (`429`) and overloaded (`503`) responses are retried like any other Gemini request; Docker Agent never upgrades a request to a different tier on your behalf.
+Flex requests can sit in Google's queue for up to 15 minutes before the first byte arrives. Docker Agent has no stream idle timeout by default. A short [configured stream idle timeout](../../configuration/models/index.md#stream-idle-timeout) can time out a queued Flex request. Rate-limit (`429`) and overloaded (`503`) responses are retried like any other Gemini request; Docker Agent never upgrades a request to a different tier on your behalf.
 
 > [!WARNING]
 > Docker Agent's cost estimates do not adjust for `service_tier`. They use the catalogue's standard pricing, which overestimates `flex` and underestimates `priority` charges. Set the model's [`cost` override](../../configuration/models/index.md#custom-token-pricing) to the applicable input, output, and cache token rates for your tier.
@@ -313,7 +333,7 @@ announcements but no dedicated Google card in the 2026-10-13 audit; this proves
 neither unavailability nor account entitlement. See [Claude access paths](../anthropic/index.md#claude-access-paths)
 for model IDs, evidence and policy prerequisites.
 
-Title, sampling and compaction clones keep the selected Model Garden transport.
+Title and compaction clones keep the selected Model Garden transport.
 Claude requests remain on the Anthropic-native Vertex endpoints, with the model
 in the URL and `anthropic_version: vertex-2023-10-16` in the body. Project,
 location, regional/global host selection and Google OAuth authentication survive

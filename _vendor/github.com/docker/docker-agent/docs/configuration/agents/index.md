@@ -7,8 +7,6 @@ weight: 30
 canonical: https://docs.docker.com/ai/docker-agent/configuration/agents/
 ---
 
-_Complete reference for defining agents in your YAML configuration._
-
 A configuration must define at least one agent under `agents`.
 
 ## Full Schema
@@ -381,7 +379,7 @@ agents:
 
 ## Deferred Tool Loading
 
-Toolsets support `defer` to load tools on-demand and speed up agent startup. See [Deferred Tool Loading](../tools/index.md#deferred-tool-loading) for details.
+Toolsets support `defer` to expose tool definitions to the model on demand and reduce prompt size. The underlying toolsets still start normally. See [Deferred Tool Loading](../tools/index.md#deferred-tool-loading) for details.
 
 ```yaml
 agents:
@@ -486,7 +484,7 @@ See [`examples/readonly.yaml`](https://github.com/docker/docker-agent/blob/main/
 > [!NOTE]
 > **Which tools are read-only?**
 >
-> Whether a tool is read-only is determined by its `ReadOnlyHint` annotation. For built-in tools, read-only operations (list/read/search) carry the hint; mutating operations (write/delete/execute) do not. Custom and MCP tools expose the hint via their own annotations.
+> Whether a tool is read-only is determined by its `ReadOnlyHint` annotation. For built-in tools, read-only operations (list/read/search) carry the hint. Delegation wrappers (`transfer_task`, `handoff`, `run_skill`) also carry it for runtime approval because the wrapper only changes control flow or starts a sub-session; the calls that follow are gated separately. They are not advertised as read-only over MCP: an agent containing one is exposed with `readOnlyHint: false`, because the sub-session can write. Mutating operations (write/delete/execute) do not. Custom and MCP tools expose the hint via their own annotations.
 
 ## Complete Example
 

@@ -6,8 +6,6 @@ weight: 75
 canonical: https://docs.docker.com/ai/docker-agent/configuration/budget/
 ---
 
-_Cap what a single run may spend in money, tokens, or working time._
-
 ## Overview
 
 A budget sets ceilings on a run. When a ceiling is crossed the run stops with a message naming the exact limit that tripped, and the TUI tracks consumption live while the run is still going.
@@ -75,8 +73,6 @@ Referencing a budget name that isn't defined is a config error, caught at parse 
 
 When several agents reference the same budget name they draw from the **same** ceiling — not a copy each. Above, `root` and `researcher` share `shell-work`: together they cannot spend more than `$0.03`.
 
-This is deliberate, and it is the whole reason budgets are worth having. If each agent received its own allowance, a run could spend `max_cost` × N simply by fanning out to N sub-agents, and the ceiling would mean nothing for exactly the workloads that most need one.
-
 Give agents **distinct budget names** when you want independent pots.
 
 The same applies to the run-wide `budget`: every sub-session inside a run (transferred tasks, sub-agents, skills) spends from that one wallet.
@@ -85,7 +81,7 @@ Compaction model calls also count towards the run-wide budget and the compacted 
 
 ## Scope: a budget spans the session
 
-Spend accumulates for the life of the **session**, across every message you send — it does not reset each time you hit enter. A `max_cost: 0.50` you could re-spend on every message would not be a ceiling at all.
+Spend accumulates for the life of the **session**, across every message you send — it does not reset each time you hit enter.
 
 Starting a new session starts a fresh budget. It is a per-session ceiling, not a lifetime quota across sessions.
 
@@ -100,7 +96,7 @@ stored conversation history and cost totals. External `harness:` execution does
 not use the native budget-enforcement loop.
 
 > [!NOTE]
-> `max_time` measures the time the agents actually spend **working** — the sum of their turn durations — not wall-clock since the session opened. Because a budget spans a session, and a session sits idle while you read and type, wall-clock would let a budget expire during a coffee break: leave the TUI open for ten minutes and your next message would instantly trip a `max_time` of `2m` without the agent having done anything.
+> `max_time` measures the time the agents spend **working** — the sum of their turn durations — not wall-clock time since the session opened.
 
 ## What stops a run
 
@@ -118,7 +114,7 @@ Execution stopped after reaching the configured budgets.shell-work.max_cost
 limit (used $0.0312 of $0.0300).
 ```
 
-Unlike [`max_iterations`](../agents/index.md), a budget stop is **terminal** — there is no prompt offering to continue. A budget is a ceiling you set deliberately, so raising it means editing the config rather than answering a dialog.
+Unlike [`max_iterations`](../agents/index.md), a budget stop is **terminal** — there is no prompt offering to continue. Edit the config to raise the limit.
 
 ## Budget stops in evaluation output
 
@@ -193,6 +189,8 @@ This is the same granularity [`max_iterations`](../agents/index.md) has, and it 
 ### `max_tokens` here is not the model's `max_tokens`
 
 The `max_tokens` in a budget is a **cumulative** count of tokens across the whole run: fresh input, cache-read input, cache-write input, and output all count towards it. It is unrelated to the provider- or model-level [`max_tokens`](../models/index.md), which caps the output of a single response.
+
+When a server-side fallback (for example [Anthropic server-side fallbacks](../../providers/anthropic/index.md#server-side-fallbacks)) serves a turn, the token budgets count the tokens of every attempt, including declined ones, not just the final model's usage.
 
 It is also not the session's context length: compaction resets that, while the budget keeps counting.
 
