@@ -161,11 +161,12 @@ For the Go project in the previous example, append these stages to the Dockerfil
 FROM base AS build
 ARG TARGETOS
 ARG TARGETARCH
+ARG TARGETVARIANT
 ARG BUILD_MODE=release
 RUN if [ "$BUILD_MODE" = "debug" ]; then \
-      CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -gcflags="all=-N -l" -o /out/app .; \
+      CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH GOARM=${TARGETVARIANT#v} go build -gcflags="all=-N -l" -o /out/app .; \
     else \
-      CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o /out/app .; \
+      CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH GOARM=${TARGETVARIANT#v} go build -o /out/app .; \
     fi
 
 FROM scratch AS export
@@ -200,7 +201,9 @@ The `bin-cross` target writes separate `build/bin/linux_amd64/app` and
 output options.
 
 The base stage uses `BUILDPLATFORM` to run the Go compiler on the builder's
-native platform. `TARGETOS` and `TARGETARCH` select the output platform, so this
+native platform. `TARGETOS` and `TARGETARCH` select the output platform, and
+`TARGETVARIANT` is passed to Go as `GOARM` (without the leading `v`) so that
+32-bit ARM variants such as `arm/v6` don't silently get an ARMv7 binary, so this
 example cross-compiles without emulation. For other toolchains, see
 [Multi-platform build strategies](/manuals/build/building/multi-platform.md#strategies).
 
