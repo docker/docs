@@ -1,5 +1,5 @@
 # github.com/moby/moby/api v1.57.0
-# github.com/moby/moby/v2 v2.0.0-beta.31
+# github.com/moby/moby/v2 v2.0.0-beta.31.0.20261124180305-54cd494d0b39
 # github.com/moby/buildkit v0.35.1
 # github.com/docker/buildx v0.39.1
 # github.com/docker/cli v29.10.0+incompatible

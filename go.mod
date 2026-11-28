@@ -15,7 +15,7 @@ require (
 	github.com/docker/model-runner v1.1.36
 	github.com/moby/buildkit v0.35.1
 	github.com/moby/moby/api v1.57.0
-	github.com/moby/moby/v2 v2.0.0-beta.31
+	github.com/moby/moby/v2 v2.0.0-beta.31.0.20261124180305-54cd494d0b39
 )
 
 tool (

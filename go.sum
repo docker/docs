@@ -386,6 +386,8 @@ github.com/moby/moby/client v0.2.2 h1:Pt4hRMCAIlyjL3cr8M5TrXCwKzguebPAc2do2ur7dE
 github.com/moby/moby/client v0.3.0 h1:UUGL5okry+Aomj3WhGt9Aigl3ZOxZGqR7XPo+RLPlKs=
 github.com/moby/moby/v2 v2.0.0-beta.31 h1:819ySkZM+qT5uEzbLu3twnEun/mkIxPeu5pv06sOxTY=
 github.com/moby/moby/v2 v2.0.0-beta.31/go.mod h1:+2XYF4QF4YnoZZrM8uM9v+O9v1AXpd95iLV/Lq2ur4Q=
+github.com/moby/moby/v2 v2.0.0-beta.31.0.20261124180305-54cd494d0b39 h1:wMtrehK5gdlDggaaSrAS908LmBGsacHOy5/ufjiqWN0=
+github.com/moby/moby/v2 v2.0.0-beta.31.0.20261124180305-54cd494d0b39/go.mod h1:uCE0d6Q7N0C/Itx8oEH0XodMRvJvHmhKPxlAXo5qkug=
 github.com/moby/sys/atomicwriter v0.1.0 h1:kw5D/EqkBwsBFi0ss9v1VG3wIkVhzGvLklJ+w3A14Sw=
 github.com/moby/sys/atomicwriter v0.1.0/go.mod h1:Ul8oqv2ZMNHOceF643P6FKPXeCmYtlQMvpizfsSoaWs=
 github.com/moby/sys/sequential v0.6.0 h1:qrx7XFUd/5DxtqcoH1h438hF5TmOvzC/lspjy7zgvCU=
