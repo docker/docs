@@ -7,8 +7,6 @@ weight: 9
 canonical: https://docs.docker.com/ai/docker-agent/tools/file/
 ---
 
-_Read, write, and edit individual files without exposing directory or search operations._
-
 ## Overview
 
 The file toolset is a focused subset of the [filesystem toolset](../filesystem/index.md). It reuses the filesystem implementations and exposes only these tools:
@@ -47,5 +45,5 @@ toolsets:
       - ".env"
     post_edit:
       - path: "*.go"
-        cmd: "gofmt -w ${file}"
+        cmd: 'gofmt -w "${file}"'
 ```

@@ -8,8 +8,6 @@ aliases:
   - /ai/docker-agent/integrations/a2a/
 ---
 
-_Expose Docker Agent agents via Google's Agent-to-Agent (A2A) protocol for interoperability with other agent frameworks._
-
 ## Overview
 
 The `docker agent serve a2a` command starts an A2A server that exposes your agents using the [A2A protocol](https://a2a-protocol.org/latest/). This enables communication between Docker Agent and other agent frameworks that support A2A.
@@ -49,6 +47,70 @@ credentials only for matching origins.
 $ docker agent serve a2a ./agent.yaml --auth-token "$A2A_TOKEN" \
     --cors-origin http://localhost:3000
 ```
+
+## Push notifications
+
+The agent card advertises `pushNotifications: true`, so clients can follow a
+task through a webhook instead of holding a stream open or polling. Register a
+webhook with the `CreateTaskPushNotificationConfig` JSON-RPC method, or inline
+in `SendMessage` through `configuration.taskPushNotificationConfig`. The
+server then POSTs each task status and artifact update to the webhook URL as an
+A2A `StreamResponse` JSON body. The config's `token` is sent in the `A2A-Notification-Token` header
+and its `authentication` as an `Authorization: Bearer` or `Basic` header.
+
+Delivery is asynchronous and best effort: a slow webhook never delays the task
+or its streaming clients, but a callback can be lost. Clients that must not
+miss the outcome should fall back to `GetTask`.
+
+- Updates reach each webhook in order. Each attempt times out after 10 seconds
+  and is not retried; a timeout or non-2xx response loses that update.
+- Once 64 updates are waiting for a task's webhook, new intermediate updates
+  are dropped. Final updates (completed, failed, canceled, rejected,
+  input-required, auth-required) are still queued and evict the oldest
+  intermediate one, so the queue may grow past 64 when final updates pile up.
+- Pending updates live in memory. On shutdown the server waits up to 5 seconds
+  for them, then drops the rest; they are not replayed after a restart.
+- Only `307` and `308` redirects within the registered origin (same scheme,
+  host and port) are followed, so the POST body is kept. Any other redirect
+  fails the delivery.
+- Failures are logged with the webhook's scheme and host and an error category
+  or status code only, never its path, query, credentials or response text.
+
+### Webhook destinations
+
+By default, a webhook may only reach public addresses. Connections to loopback,
+private (RFC 1918, IPv6 ULA), link-local (including cloud metadata endpoints
+such as `169.254.169.254`), shared (`100.64.0.0/10`), multicast and unspecified
+addresses are refused. The check runs on the resolved address of every
+connection, so DNS rebinding and redirects are covered too. For the same
+reason, `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY` are ignored for webhooks:
+through a proxy, only the proxy's address could be checked.
+
+`--push-allow-private` lifts both rules: webhooks may reach any address, and
+environment proxies apply. Use it only for trusted internal deployments or
+local testing.
+
+```bash
+$ docker agent serve a2a ./agent.yaml --push-allow-private
+```
+
+### Persistence and restarts
+
+Tasks and webhook registrations are stored in `<session-db>-a2a/a2a.db`, next
+to the session database, and survive a restart. Webhook tokens and credentials
+are stored in plaintext, so the directory is private to the user running the
+server (mode `0700` on Unix, an owner-only ACL on Windows). Each session
+database has its own directory, so servers using different `--session-db`
+files never share tasks. A server holds an exclusive lock on that directory
+while it runs: a second `serve a2a` with the same `--session-db` fails to
+start instead of failing the first server's running tasks.
+
+A task still submitted or working when the server stops cannot finish. On the
+next start it is marked failed, and its webhooks are sent that final status on
+the same best-effort terms as any other update. Updates lost before the stop,
+including the final one of a task that had already completed, are not
+re-sent: read the task with `GetTask`. Tasks waiting for input or
+authentication are left unchanged.
 
 ## Tool safety and migration
 

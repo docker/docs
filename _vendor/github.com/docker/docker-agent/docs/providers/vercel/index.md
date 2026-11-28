@@ -6,8 +6,6 @@ weight: 260
 canonical: https://docs.docker.com/ai/docker-agent/providers/vercel/
 ---
 
-_Use Vercel AI Gateway models with Docker Agent._
-
 ## Overview
 
 [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) is a single, unified
@@ -35,8 +33,6 @@ only (`openai/gpt-5.6-sol`, `-terra`, `-luna`) — there is no unsuffixed
 
 ### Inline Syntax
 
-The simplest way to use Vercel AI Gateway:
-
 ```yaml
 agents:
   root:
@@ -46,8 +42,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

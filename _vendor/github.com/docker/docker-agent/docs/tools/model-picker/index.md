@@ -7,8 +7,6 @@ weight: 200
 canonical: https://docs.docker.com/ai/docker-agent/tools/model-picker/
 ---
 
-_Let the agent pick between several models per turn._
-
 ## Overview
 
 The model picker tool gives an agent the ability to dynamically choose which model to use for each turn of the conversation. This is useful when you want the agent to route different types of requests to different models — for example, using a fast, inexpensive model for simple queries and a more capable model for complex reasoning tasks.
@@ -50,11 +48,6 @@ agents:
           - anthropic/claude-sonnet-4-5
           - openai/gpt-5
 ```
-
-> [!TIP]
-> **Cost optimization**
->
-> The model picker tool is particularly useful for cost optimization: let the agent use a cheap model by default and only escalate to expensive models when necessary.
 
 ## Tool Interface
 

@@ -8,8 +8,6 @@ aliases:
   - /ai/docker-agent/sharing-agents/
 ---
 
-_Package, share, and run agents via OCI-compatible registries — just like container images._
-
 ## Overview
 
 Docker Agent agents can be pushed to any OCI-compatible registry (Docker Hub, GitHub Container Registry, etc.) and pulled/run anywhere. This makes sharing agents as easy as sharing Docker images.

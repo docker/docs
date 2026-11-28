@@ -96,21 +96,15 @@ Control how much the model "thinks" before responding:
 | Provider   | Format     | Values                                                              | Default                          |
 | ---------- | ---------- | ------------------------------------------------------------------- | -------------------------------- |
 | OpenAI     | string     | `minimal`, `low`, `medium`, `high`, `xhigh`, `max`                  | `medium` (always-reasoning models only) |
-| Anthropic  | int or str | 1024–32768 tokens, or `adaptive`, `adaptive/<effort>`, effort level | off                              |
+| Anthropic  | int or str | Fixed budgets: ≥1024 and less than `max_tokens`; or `adaptive`, `adaptive/<effort>`, effort level | Model-dependent; Claude 5.x defaults to adaptive |
 | Gemini 2.5 | int        | 0 (off), -1 (dynamic), or token count                               | -1 (dynamic)                     |
-| Gemini 3   | string     | `minimal`, `low`, `medium`, `high`                                  | varies                           |
+| Gemini 3+  | string     | `minimal` (Gemini 3), `low`, `medium`, `high`, `xhigh` (Hydrogen/Neon) | varies                        |
 | All        | string/int | `none` or `0` clears Docker Agent's local config                    | —                                |
 
-`none` and `0` are not universal API-level disable switches. On genuine OpenAI
-endpoints running GPT-5.x from 5.6 onward or GPT-6 Sol/Luna, `none` is a real
-`reasoning_effort` value that Docker Agent sends as-is and the model does not
-reason. On GPT-6 Astra and older OpenAI models, `none`/`0` only clear the local `thinking_budget` — omitting the field
-has the same effect — and the model falls back to the API's own default effort
-(still reasoning internally for always-reasoning models like the o-series).
-Providers with a true optional-thinking switch (Gemini 2.5, Claude, local
-models) are fully disabled by `none`/`0`. See the
-[Thinking / Reasoning guide](../../guides/thinking/index.md#disabling-thinking)
-for the full per-provider breakdown.
+**Turning thinking off:** Set `thinking_budget` to `none` or `0`. Models that
+support disabling reasoning turn it off; others keep reasoning at their default
+or minimum effort. Check your model's behavior in the
+[Thinking / Reasoning guide](../../guides/thinking/index.md#disabling-thinking).
 
 ```yaml
 models:

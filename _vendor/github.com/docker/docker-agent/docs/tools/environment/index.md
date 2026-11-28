@@ -7,8 +7,6 @@ weight: 145
 canonical: https://docs.docker.com/ai/docker-agent/tools/environment/
 ---
 
-_Report the OS and resolved shell so the model can pick the right syntax._
-
 ## Overview
 
 The environment tool exposes a single read-only call — `get_environment_info` — that returns the operating system and the resolved shell that will run shell-tool commands, e.g. `{"os":"Windows","shell":"powershell"}`.

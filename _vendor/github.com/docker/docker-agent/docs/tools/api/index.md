@@ -7,8 +7,6 @@ weight: 240
 canonical: https://docs.docker.com/ai/docker-agent/tools/api/
 ---
 
-_Create custom tools that call HTTP APIs._
-
 ## Overview
 
 The API tool type lets you define custom tools that make HTTP requests to external APIs. This is useful for integrating agents with REST APIs, webhooks, or any HTTP-based service without writing code.
@@ -69,9 +67,13 @@ The `api` toolset accepts the following toolset-level fields in addition to the 
 
 ## HTTP Methods
 
+Only `method: GET` carries the read-only hint. Other methods are classified as `unknown`: absent overriding permissions or hooks, Restricted mode denies them, while Balanced and the legacy/default mode require confirmation. For trusted unattended POST calls, use a narrowly scoped [allow rule](../../configuration/permissions/index.md). Non-GET tools are excluded when the agent or toolset sets `readonly: true`.
+
+Read-only classification is not a confidentiality guarantee: GET parameters are sent to the endpoint in the URL. Use trusted endpoints and appropriate data-access and egress controls.
+
 ### GET Requests
 
-For GET requests, parameters are interpolated into the URL:
+For GET requests, parameters are interpolated into the URL. Declare GET arguments as strings, including numeric query parameters; the GET handler decodes arguments into a string map:
 
 ```yaml
 toolsets:
@@ -86,9 +88,9 @@ toolsets:
           type: string
           description: Search query
         limit:
-          type: integer
-          description: Maximum results (default 10)
-      required: ["query"]
+          type: string
+          description: Maximum number of results
+      required: ["query", "limit"]
 ```
 
 ### POST Requests

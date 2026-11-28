@@ -8,12 +8,10 @@ aliases:
   - /ai/docker-agent/reference/cli/
 ---
 
-_Complete reference for all Docker Agent command-line commands and flags._
-
 > [!TIP]
 > **No config needed**
 >
-> Running `docker agent run` without a config argument uses `docker-agent.yaml`, `docker-agent.yml`, or `docker-agent.hcl` from the current directory when present. Otherwise, it uses a built-in default agent that is perfect for quick experimentation.
+> Running `docker agent run` without a config argument uses `docker-agent.yaml`, `docker-agent.yml`, or `docker-agent.hcl` from the current directory when present. Otherwise, it uses the built-in `default` coding agent. Use `docker agent run minimal` for a small general-purpose configuration.
 
 ## Commands
 
@@ -30,7 +28,7 @@ $ docker agent run [config] [message...] [flags]
 | `-a, --agent <name>`                    | Run a specific agent from the config                                                                                                      |
 | `--yolo`                                | Auto-approve tool calls (unless explicitly denied). Legacy alias for `--safety autonomous`.                                              |
 | `--safety <mode>`                       | Safety mode for tool approval: `strict` (ask for everything), `balanced` (auto-approve safe calls), `restricted` (auto-approve safe calls, deny the rest — fail-closed for unattended runs), or `autonomous` (approve everything). Wins over `--yolo` when both are given. Without the flag, the mode falls back to alias/user-config defaults, then the agent YAML's `agents.<name>.safety` / `runtime.safety`; a resumed session keeps its stored mode unless `--safety`/`--yolo` is passed explicitly. See [Safety Modes](../../configuration/permissions/index.md#safety-modes). |
-| `--model <ref>`                         | Override model(s). Use `provider/model` for all agents, or `agent=provider/model` for specific agents. Comma-separate multiple overrides. Inline overrides inherit each agent's explicit `parallel_tool_calls` setting only from a concrete, provider-qualified configured model. Existing named targets are authoritative on every invocation, including an omitted setting; harness, router, alloy/comma-list, `first_available`, providerless, and unresolved source models do not inherit it. |
+| `--model <ref>`                         | Override model(s). Use `provider/model` for all agents, or `agent=provider/model` for specific agents. Repeat the flag or comma-separate multiple overrides — the comma form only works when every segment is agent-scoped (`root=a,other=b`); a mixed `global,agent=spec` list is not split (one spec may legitimately contain commas, e.g. an alloy/`first_available` list) and should use repeated `--model` flags instead. Inline overrides inherit each agent's explicit `parallel_tool_calls` setting only from a concrete, provider-qualified configured model. Existing named targets are authoritative on every invocation, including an omitted setting; harness, router, alloy/comma-list, `first_available`, providerless, and unresolved source models do not inherit it. |
 | `--session <id>`                        | Resume a previous session. Supports relative refs (`-1` = newest by creation time, `-2` = second-newest, … — creation order, not last-used). An explicit ID that does not exist yet is created with that ID, so a supervisor can own the session ID upfront and reuse it across runs. |
 | `-s, --session-db <path>`               | Path to the SQLite session database (default: `<data-dir>/session.db`, so `~/.cagent/session.db` unless `--data-dir` is set)              |
 | `--session-read-only`                   | Open the TUI in read-only mode: conversation history is displayed but no new messages can be sent to the LLM. Cannot be used with `--exec`. |
@@ -41,7 +39,7 @@ $ docker agent run [config] [message...] [flags]
 | `--remote-auth-token <token>`           | Bearer token for `--remote`. Defaults to `DOCKER_AGENT_REMOTE_AUTH_TOKEN`; the flag takes precedence. Prefer the environment variable to keep the token out of command-line arguments. |
 | `--listen <addr>`                       | Expose this run's control plane over HTTP so an external process can drive the running TUI (send follow-ups, stream events, read the title). Accepts `host:port` or `unix://`, `npipe://`, `fd://`. Hidden from `docker agent run --help` — it's a stable but advanced/automation-oriented flag rather than a day-to-day one. See the [API Server](../api-server/index.md#listen) guide for the full walkthrough. |
 | `--session-workingdir-root <path>`      | Confine the `working_dir` of sessions created through the `--listen` control plane to this directory and its descendants (default: no restriction — any clean host directory is accepted, though raw values containing `..` are rejected). Recommended when the control plane is reachable by other users. Hidden from `--help`, like `--listen`. |
-| `--lean`                                | Use a simplified, non-alternate-screen TUI. Unlike the default full-screen TUI, this renders inline in the normal terminal buffer — useful in environments where an alternate screen is unwanted (e.g. inside tmux panes, CI with a tty, or log-friendly pipelines). Like the full TUI, displays an ASCII art banner on startup when the chat is empty (configurable via `show_banner` in [user settings](../../configuration/user-settings/index.md)). |
+| `--lean`                                | Use a simplified, non-alternate-screen TUI. Unlike the default full-screen TUI, this renders inline in the normal terminal buffer — useful in environments where an alternate screen is unwanted (e.g. inside tmux panes, CI with a tty, or log-friendly pipelines). Like the full TUI, displays a braille wordmark banner at the start of the transcript (configurable via `show_banner` in [user settings](../../configuration/user-settings/index.md)). |
 | `--app-name <name>`                     | Override the application name label shown in the TUI (status bar, window title, "/exit" notifications).                                   |
 | `--sidebar`                             | Control sidebar visibility. Set to `--sidebar=false` to hide the sidebar and disable the Ctrl+B toggle (default: `true`).                 |
 | `--disable-commands <list>`             | Hide and disable specific slash commands in the TUI. Accepts a comma-separated list of command names (leading slash optional, case-insensitive). E.g. `--disable-commands="/cost,/eval,/model"`. |
@@ -51,13 +49,14 @@ $ docker agent run [config] [message...] [flags]
 | `--last`                                | Print only the final agent answer after all turns finish (requires `--exec`); omit thinking, tool calls/results, and intermediate responses |
 | `--hide-tool-calls`                     | Hide tool calls in the output                                                                                                             |
 | `--hide-tool-results`                   | Hide tool call results in the output                                                                                                      |
-| `--sandbox`                             | Run the agent in sandbox mode using `sbx` (see [Sandbox](../../configuration/sandbox/index.md))                                 |
+| `--sandbox`                             | Run the agent in sandbox mode using standalone `sbx` or the `docker sandbox` plugin (see [Sandbox](../../configuration/sandbox/index.md))                                 |
+| `--sbx` | Prefer standalone `sbx` when available (default: `true`); set `--sbx=false` to force the `docker sandbox` plugin. |
 | `--cloud` | Run in a fresh cloud sandbox without uploading host files/config/credentials; implies `--sandbox`. See [cloud sandbox mode](../../configuration/sandbox/index.md#cloud-sandboxes). |
 | `--sandbox-kit`, `--kit`, `--kit-arg` | Select an sbx workload and mixins, and pass kit arguments. Supports kits v3 through sbx. |
 | `--sandbox-ttl` | Cloud sandbox lifetime, default `1h`; stopped on expiry and when the agent exits. |
 | `--template <image>`                    | Template image for the sandbox (default: `docker/docker-agent-sbx-templates:latest`)                                                      |
 | `--no-kit`                              | Disable the [auto-kit](../../configuration/sandbox/index.md#auto-kit): do not stage skills or prompt files into the sandbox    |
-| `--agent-picker [refs]`                 | Show a full-screen interactive picker before launching, letting you browse and select an agent. Accepts an optional comma-separated list of agent references to show (defaults to the built-in `default` and `coder` agents plus any agent configs found in `~/.agents`). Arrow keys navigate; `?` toggles the YAML preview panel; `l` (or mouse-click) toggles the **Lean Mode** checkbox to launch in the lean TUI; `b` (or clicking **[ Open Board ]**) opens the Kanban board (`docker agent board`) instead of running an agent; Enter confirms. Not available in `--exec` or non-TTY modes. |
+| `--agent-picker [refs]`                 | Show a full-screen interactive picker before launching, letting you browse and select an agent. Accepts an optional comma-separated list of agent references to show (defaults to the built-in `default` and `minimal` agents plus any agent configs found in `~/.agents`). Arrow keys navigate; `?` toggles the YAML preview panel; `l` (or mouse-click) toggles the **Lean Mode** checkbox to launch in the lean TUI; `b` (or clicking **[ Open Board ]**) opens the Kanban board (`docker agent board`) instead of running an agent; Enter confirms. Not available in `--exec` or non-TTY modes. |
 | `-w, --worktree [name]`                 | Run the agent in a fresh git worktree of the working directory, isolating its changes from your checkout. Optionally name it (`--worktree=my-feature`); otherwise a name is generated. Requires the working directory to be inside a git repository. Every tool (the shell included) runs inside the worktree. Combine with `--working-dir` to branch from another repository, and with `--session` to resume into the same worktree later. Cannot be combined with `--remote` or `--sandbox`. When the session ends, a clean worktree is removed automatically; one with work prompts to keep or remove (never in `--exec`). |
 | `--worktree-base <ref>`                  | Branch the `--worktree` from `<ref>` (a branch, tag, commit, or remote-tracking ref like `origin/main`) instead of the current `HEAD`. A remote-tracking ref is fetched first so the worktree starts from the latest remote state. Requires `--worktree`; cannot be combined with `--worktree-pr`, `--remote`, or `--sandbox`. |
 | `--worktree-pr <number\|url>`            | Run the agent in a git worktree checked out on an existing GitHub pull request (PR number, `#123`, or PR URL). Continues the PR's branch so commits push back to it. Requires the [GitHub CLI](https://cli.github.com/) (`gh`). Cannot be combined with `--worktree`, `--remote`, or `--sandbox`. |
@@ -89,6 +88,9 @@ $ docker agent run agent.yaml --model "dev=openai/gpt-4o,reviewer=anthropic/clau
 $ docker agent run agent.yaml --session -1  # resume last session
 $ docker agent run agent.yaml --session -1 --session-read-only  # review last session without sending messages
 $ docker agent run agent.yaml --prompt-file ./context.md  # include file as context
+$ docker agent run agent.yaml --model "root=openai/gpt-4o,anthropic/claude-sonnet-4-5"  # agent-scoped alloy: commas stay inside the spec
+$ docker agent run agent.yaml --model "openai/gpt-4o,anthropic/claude-sonnet-4-5"  # global alloy applied to every agent
+$ docker agent run agent.yaml --model openai/gpt-4o --model "reviewer=anthropic/claude-sonnet-4-5"  # mix global + agent-scoped via repeated flags
 
 # Add hooks from the command line
 $ docker agent run agent.yaml --hook-session-start "./scripts/setup-env.sh"
@@ -110,7 +112,7 @@ $ docker agent run --agent-picker=myorg/coder,myorg/researcher
 > [!TIP]
 > **Lean, inline TUI**
 >
-> Pass `--lean` to get a lightweight TUI that renders inline in your terminal (no alternate screen). Like the full TUI, it displays an ASCII art banner on startup when the chat is empty (configurable via `show_banner` in [user settings](../../configuration/user-settings/index.md)), and supports the same slash commands and streaming output, making it handy inside tmux, scripts, or any context where a full-screen takeover is unwanted.
+> Pass `--lean` to get a lightweight TUI that renders inline in your terminal (no alternate screen). Like the full TUI, it displays a braille wordmark banner at the start of the transcript (configurable via `show_banner` in [user settings](../../configuration/user-settings/index.md)), and supports the same slash commands and streaming output, making it handy inside tmux, scripts, or any context where a full-screen takeover is unwanted.
 
 > [!TIP]
 > **Background animations in tmux**
@@ -146,6 +148,22 @@ $ docker agent run agent.yaml --worktree-pr https://github.com/owner/repo/pull/1
 ```
 
 With `--worktree-pr`, the PR's head branch is checked out tracking its remote (via the [GitHub CLI](https://cli.github.com/)), so commits made during the run push straight back to the pull request. The worktree is stored under `<data-dir>/worktrees/pr-<number>`.
+
+#### Copy ignored files into worktrees
+
+Add a `.worktreeinclude` at the source repository root to copy selected **gitignored** files into new `--worktree`, `--worktree-pr`, and [background agent](../../tools/background-agents/index.md) worktrees before setup hooks run:
+
+```gitignore
+.env.local
+config/*.local.yaml
+!config/private.local.yaml
+```
+
+Patterns use Git's `.gitignore` syntax, including comments, negations and directory patterns. Git's normal rules for ignored parent directories apply: to exclude a child, include the parent with a pattern such as `cache/*` rather than `cache/`. Only files ignored by Git in both the source and destination checkouts are copied. A file not ignored in the destination is skipped with a warning; add appropriate ignore rules to the destination base or PR if it is needed there. Destination checks retry failed batches up to a fixed limit; if the limit is reached, unverified files are skipped with a warning, even if some would otherwise be eligible. This differs from tools that treat `.worktreeinclude` as a list of paths or also copy non-ignored files. Tracked changes and other untracked files are not copied. Missing `.worktreeinclude` leaves worktree creation unchanged.
+
+File permissions are preserved except that group or other permissions are removed when source ancestor directories prevent traversal for that class. New parent directories are private (`0700`). Existing destination files are never overwritten; symlinks, special files, `.gitignore`, and `.gitattributes` files are skipped. This prevents copies from changing the destination's ignore rules or staging attributes. Failures and skipped protected files produce bounded warnings without undoing the worktree; repeated protected-file skips are aggregated, and omitted warnings are counted. Cancellation stops copying and removes an incomplete file, leaving the worktree in place. Background-task warnings appear in the task metadata and logs. Files blocked by the source checkout's nearest [`.agentsignore`](../../configuration/agentsignore/index.md) are not copied, even if included here. `.agentsignore` itself is not copied by this mechanism. As always, `.agentsignore` only governs the filesystem toolset, not shell or other independent tools.
+
+Copied files are independent copies. **Ignored files do not make a worktree dirty**, so an interactive run can remove a clean worktree and its copied files automatically. Changing the destination's ignore rules later can make copied files visible to ordinary `git add`; `git add -f` can stage ignored files even without such a change. Changes to those copies do not propagate back to the source checkout; save anything needed before cleanup.
 
 When the interactive session ends, the worktree is cleaned up based on its state:
 
@@ -198,6 +216,8 @@ $ docker agent new
 $ docker agent new --model openai/gpt-5
 $ docker agent new --model dmr/ai/gemma3-qat:12B --max-iterations 15
 ```
+
+When `--max-iterations` is omitted (or `0`) and the agent creator uses a DMR model, the session reaches its iteration limit after 20 iterations. In the interactive TUI that pauses for a decision to continue (approving grants 10 more iterations) rather than ending the session; non-interactive runs stop. With other providers no limit is applied. An explicit non-zero value always wins.
 
 ### `docker agent getting-started`
 
@@ -375,24 +395,26 @@ $ docker agent serve a2a <config> [flags]
 | `--auth-token <token>` | (none)             | Bearer token required for agent-card and invocation requests.                              |
 | `--cors-origin <origins>` | (none)          | Allowed browser origins, comma-separated; empty disables CORS.                             |
 | `--insecure-no-auth`   | `false`            | Allow an unauthenticated non-loopback listener (unsafe).                                   |
+| `--push-allow-private` | `false`            | Let push-notification webhooks reach loopback, private and link-local addresses, and route them through `HTTP(S)_PROXY`. See [push notifications](../a2a/index.md#push-notifications). |
 | `--safety <policy>`    | `restricted`       | Tool safety policy; `autonomous` is permitted only through this explicit CLI flag.         |
-| `-s, --session-db <path>` | `<data-dir>/session.db` | Path to the SQLite session database.                                                 |
+| `-s, --session-db <path>` | `<data-dir>/session.db` | Path to the SQLite session database. A2A tasks and webhook registrations are kept in a private `<path>-a2a/` directory next to it; only one A2A server may use a given path at a time. |
 
 All [runtime configuration flags](#runtime-configuration-flags) are also accepted.
 
 ```bash
 # Examples
 $ docker agent serve a2a agent.yaml
+$ docker agent serve a2a agent.yaml --push-allow-private   # webhooks on localhost
 $ docker agent serve a2a agent.yaml --listen 127.0.0.1:9000
 $ docker agent serve a2a myorg/agent:tag
 ```
 
 ### `docker agent serve acp`
 
-Start an ACP (Agent Client Protocol) server over stdio. This allows external clients to interact with your agents using the ACP protocol.
+Start an ACP (Agent Client Protocol) server over stdio. This allows external clients to interact with your agents using the ACP protocol. If no config is specified, uses the `default` built-in agent (or your `default` alias, if configured).
 
 ```bash
-$ docker agent serve acp <config> [flags]
+$ docker agent serve acp [config] [flags]
 ```
 
 | Flag                      | Default                     | Description                                       |
@@ -403,6 +425,7 @@ All [runtime configuration flags](#runtime-configuration-flags) are also accepte
 
 ```bash
 # Examples
+$ docker agent serve acp
 $ docker agent serve acp agent.yaml
 $ docker agent serve acp ./team.yaml
 $ docker agent serve acp myorg/agent:tag
@@ -801,7 +824,11 @@ $ docker agent debug oauth login agent.yaml github
 >
 > The text output of `debug auth` truncates the token to a short preview, but `--json` includes the complete, unredacted JWT in its `token` field. Never paste `debug auth --json` output into logs, issue trackers, or bug reports — anyone with that token can act as you against Docker. Use the plain-text output (or redact the `token` field yourself) when sharing diagnostic output.
 
-The `Source` field says where the token came from: `docker desktop`, or `minted from the stored access token` when it was obtained by exchanging the access token `docker login` stored. See [Docker authentication](../../guides/secrets/index.md#docker-authentication).
+The `Source` field says where the token came from: `docker desktop secrets engine` when it was read from the secrets engine Docker Desktop serves, `docker desktop` when Docker Desktop's backend served it, or `minted from the stored access token` when it was obtained by exchanging the access token `docker login` stored. See [Docker authentication](../../guides/secrets/index.md#docker-authentication).
+
+`Username` and `Email` come from the secrets engine's session when the engine supplied the token, otherwise from Docker Desktop, and otherwise from the token itself.
+
+When the secrets engine couldn't be read, `Secrets engine` says why, `Socket` which socket was tried, and `Hint` how to fix it. The JSON output has them under `secrets_engine` as `reason`, `socket` and `hint`, along with the full `error`. A secrets engine that isn't running is only reported when no token was found, since machines without Docker Desktop don't have one.
 
 The `config`, `toolsets`, `tool`, `skills`, and `title` subcommands also accept [runtime configuration flags](#runtime-configuration-flags) (`--working-dir`, `--models-gateway`, …); `title` additionally accepts `--model` to override the model used to resolve the config before generating the title.
 

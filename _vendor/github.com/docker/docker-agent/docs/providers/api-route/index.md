@@ -6,8 +6,6 @@ weight: 23
 canonical: https://docs.docker.com/ai/docker-agent/providers/api-route/
 ---
 
-_Use API Route models with Docker Agent._
-
 ## Overview
 
 [API Route](https://api-route.com) provides access to multiple model families

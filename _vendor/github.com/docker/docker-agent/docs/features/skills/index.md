@@ -25,9 +25,6 @@ agents:
     skills: true
 ```
 
-> [!TIP]
-> Skills are perfect for encoding team-specific workflows (PR review, deployment, coding standards) that apply across projects.
-
 ## Filtering Skills
 
 The `skills` field also accepts a list, letting you restrict the agent to a specific subset of skills instead of exposing every discovered one. List items are classified automatically:
@@ -289,6 +286,7 @@ When the agent encounters a task that matches a `context: fork` skill, it uses t
 - **Isolates the context window** — the sub-agent has its own conversation history, so lengthy tool-call chains don't eat into the parent's token budget
 - **Folds the result** — only the sub-agent's final answer is returned to the parent as the tool result
 - **Inherits the parent's model and tools** — the sub-agent can use all tools available to the parent agent (scope this with `allowed_tools` / `toolsets`, see [Scoping a fork skill's tools](#scoping-a-fork-skills-tools))
+- **Inherits the parent's safety policy and permissions** — tool calls inside the fork are gated like normal calls; `run_skill` only launches the sub-session, so it does not add an approval prompt of its own (strict mode still evaluates it like any other call). Skills that bring in toolsets which start background work keep a launch approval step before those toolsets start.
 
 > [!TIP]
 > **When to use context: fork**

@@ -6,8 +6,6 @@ weight: 90
 canonical: https://docs.docker.com/ai/docker-agent/features/chat-server/
 ---
 
-_Expose your agents through an OpenAI-compatible Chat Completions API so any tool that already speaks OpenAI can drive a Docker Agent agent._
-
 ## Overview
 
 The `docker agent serve chat` command starts an HTTP server that exposes one or

@@ -7,8 +7,6 @@ weight: 135
 canonical: https://docs.docker.com/ai/docker-agent/tools/scheduler/
 ---
 
-_Schedule instructions to run at a time or on a recurring interval._
-
 ## Overview
 
 The scheduler toolset lets an agent make something happen at a chosen time or on a repeating cadence during a session. You give it an instruction and a schedule; when the schedule is due, the instruction is delivered back to the agent, which then carries out the action with its normal tools (`shell`, `api`, `fetch`, and so on).

@@ -6,8 +6,6 @@ weight: 20
 canonical: https://docs.docker.com/ai/docker-agent/getting-started/installation/
 ---
 
-_Get Docker Agent running on your system in minutes._
-
 ## Prerequisites
 
 - Access to a model through a provider API key, an account login, [Docker Model Runner](../../providers/dmr/index.md), or a [coding harness](../../features/harnesses/index.md)
@@ -91,7 +89,7 @@ For the latest features, or to contribute, build from source:
 
 ### Prerequisites
 
-- [Go 1.27](https://go.dev/dl/) or higher
+- [Go 1.27.4](https://go.dev/dl/) or higher
 - [Task](https://taskfile.dev/installation/) (build tool)
 - [golangci-lint](https://golangci-lint.run/docs/welcome/install/local/) (for linting)
 

@@ -13,13 +13,14 @@ _Docker Agent supports multiple AI model providers. Choose the right one for you
 
 ## Supported Providers
 
-- [**OpenAI**](../openai/index.md) — GPT-5, GPT-5-mini, GPT-4o. The most widely used AI models.
+- [**OpenAI**](../openai/index.md) — GPT-5, GPT-5-mini, GPT-4o.
 - [**Anthropic**](../anthropic/index.md) — Claude models for coding and analysis. See [Claude access paths](../anthropic/index.md#claude-access-paths) for protocol, host and model-specific limits.
-- [**Google Gemini**](../google/index.md) — Gemini 2.5 Flash, Gemini 3 Pro. Fast and cost-effective.
+- [**Google Gemini**](../google/index.md) — Gemini 2.5 Flash, Gemini 3 Pro.
 - [**AWS Bedrock**](../bedrock/index.md) — access Claude, Nova, Llama, and more through AWS infrastructure.
 - [**Docker Model Runner**](../dmr/index.md) — run models locally with Docker. No API keys, no costs.
 - [**Local Models**](../local/index.md) — run Ollama, vLLM, or LocalAI locally. No API key required.
 - [**Nativ**](../nativ/index.md) — run MLX models locally on Apple Silicon through a custom provider.
+- [**Rapid-MLX**](../rapid-mlx/index.md) — serve MLX models locally on Apple Silicon through a custom provider.
 - [**Provider Definitions**](../custom/index.md) — define reusable provider configurations with shared defaults for any provider type.
 
 ## Quick Comparison
@@ -67,8 +68,17 @@ Use this table to find a built-in provider's config key and authentication metho
 | Cloudflare AI Gateway | `cloudflare-ai-gateway` | `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` + `CLOUDFLARE_GATEWAY_ID` |
 | Requesty       | `requesty`       | `REQUESTY_API_KEY`                  |
 | OpenRouter     | `openrouter`     | `OPENROUTER_API_KEY`                |
+| Opper          | `opper`          | `OPPER_API_KEY`                     |
 | API Route      | `api-route`      | `API_ROUTE_API_KEY`                 |
+| Lunaroute      | [`lunaroute`](../lunaroute/index.md) | `LUNAROUTE_API_KEY`                |
+| OrcaRouter     | `orcarouter`     | `ORCAROUTER_API_KEY`                |
 | Atlas Cloud    | [`atlascloud`](../atlascloud/index.md) | `ATLASCLOUD_API_KEY`                |
+| PopNow         | [`popnow`](../popnow/index.md) | `POPNOW_API_KEY`                    |
+| Runcrate       | [`runcrate`](../runcrate/index.md) | `RUNCRATE_API_KEY`                  |
+| CloudGPU       | [`cloudgpu`](../cloudgpu/index.md) | `CLOUDGPU_API_KEY`                  |
+| Obscurify.ai   | [`obscurify`](../obscurify/index.md) | `OBSCURIFY_API_KEY`                 |
+| HopBase        | [`hopbase`](../hopbase/index.md) | `HOPBASE_API_KEY`                   |
+| Straitly       | [`straitly`](../straitly/index.md) | `STRAITLY_API_KEY`                  |
 | Azure OpenAI   | `azure`          | `AZURE_API_KEY` + `base_url` (override the key with `token_key`) |
 | [Ollama](../local/index.md) | `ollama` | None (local; optional `base_url`) |
 | GitHub Copilot | `github-copilot` | `GITHUB_TOKEN` or `GH_TOKEN` (PAT with `copilot` scope) |
@@ -83,11 +93,6 @@ agents:
   root:
     model: mistral/mistral-large-latest
 ```
-
-> [!TIP]
-> **Multi-provider teams**
->
-> Use expensive models for complex reasoning and cheaper/local models for routine tasks. See the example below.
 
 ## Using Multiple Providers
 

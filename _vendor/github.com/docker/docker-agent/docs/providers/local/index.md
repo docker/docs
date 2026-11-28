@@ -1,7 +1,7 @@
 ---
-title: "Local Models (Ollama, vLLM, LocalAI, Nativ)"
+title: "Local Models (Ollama, vLLM, LocalAI, Nativ, Rapid-MLX)"
 description: "Run Docker Agent with locally hosted models for privacy, offline use, or cost savings."
-keywords: docker agent, ai agents, model providers, llm, local models, ollama, vllm, localai, nativ, offline models
+keywords: docker agent, ai agents, model providers, llm, local models, ollama, vllm, localai, nativ, rapid-mlx, offline models
 linkTitle: "Local Models"
 weight: 150
 canonical: https://docs.docker.com/ai/docker-agent/providers/local/
@@ -9,8 +9,6 @@ aliases:
   - /ai/docker-agent/local-models/
   - /ai/docker-agent/providers/ollama/
 ---
-
-_Run Docker Agent with locally hosted models for privacy, offline use, or cost savings._
 
 ## Overview
 
@@ -20,6 +18,7 @@ Docker Agent can connect to any OpenAI-compatible local model server. This guide
 - **vLLM** — High-performance inference server
 - **LocalAI** — OpenAI-compatible API for various backends
 - [**Nativ**](../nativ/index.md) — Local MLX models on Apple Silicon
+- [**Rapid-MLX**](../rapid-mlx/index.md) — Local MLX model server for Apple Silicon
 
 > [!TIP]
 > **Docker Model Runner**

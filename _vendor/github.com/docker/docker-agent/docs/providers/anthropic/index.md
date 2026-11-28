@@ -125,11 +125,10 @@ make two endpoints interchangeable.
 | Bedrock runtime | `amazon-bedrock`; **`ConverseStream`** | Regional Bedrock runtime endpoint | AWS SigV4 credentials or Bedrock bearer token | Exact AWS model or inference-profile ID |
 | OpenAI-compatible aggregators | OpenAI client, Chat Completions for Claude | Alias/custom endpoint (e.g. OpenRouter, Vercel, Azure, OpenCode) | Host-specific key | Host's catalogue ID, not necessarily a Claude API ID |
 
-These are existing adapter paths, not a guarantee of complete Claude 5.x
-compatibility. Model-specific request rules, signed history, thinking and fallback
-compatibility remain the subject of the planned [core work (#4583)](https://github.com/docker/docker-agent/issues/4583)
-and [fallback work (#4584)](https://github.com/docker/docker-agent/issues/4584).
-This guide does not mark those changes as implemented.
+These are the adapter paths Docker Agent uses. Claude 5.x request rules, signed
+history and thinking ([#4583](https://github.com/docker/docker-agent/issues/4583))
+and server-side fallback ([#4584](https://github.com/docker/docker-agent/issues/4584))
+are described in the sections below.
 
 - The built-in `opencode` alias is OpenAI-compatible; the
   [custom OpenCode Messages provider](../opencode-zen/index.md#anthropic-compatible-messages-api)
@@ -167,12 +166,14 @@ limited Google access, but the audited Google directory has no dedicated model c
 | Sonnet 5.5 | `claude-sonnet-5-5` | Documented | Documented | Documented |
 | Fable 5 | `claude-fable-5` | Documented | Documented | Documented |
 | Fable 5.1 | `claude-fable-5-1` | Documented | Documented | Documented |
+| Fable 5.2 | `claude-fable-5-2` | Documented | Documented | Documented |
 | Mythos 5 | `claude-mythos-5` | Documented, gated | Limited announcement | **Unsupported** (Mantle only) |
 | Mythos 5.1 | `claude-mythos-5-1` | Documented, gated | Limited announcement | Documented, gated (not Mantle) |
+| Mythos 5.2 | `claude-mythos-5-2` | Documented, gated | Limited announcement | Documented, gated |
 
-The audit found **24 corroborated native model/platform pairs** (9 Claude API +
-7 Vertex + 8 Bedrock runtime), **2 limited-access Mythos/Google announcements** and
-**1 explicitly unsupported Mythos 5/Converse pair**. This is not 26 implemented
+The audit found **29 corroborated native model/platform pairs** (11 Claude API +
+8 Vertex + 10 Bedrock runtime), **3 limited-access Mythos/Google announcements** and
+**1 explicitly unsupported Mythos 5/Converse pair**. These are not implemented
 or live-tested successes. All documented rows still require model access for your
 account and chosen endpoint. An absent Google card proves neither unavailability
 nor entitlement.
@@ -181,7 +182,10 @@ Sources: [Claude model overview](https://platform.claude.com/docs/en/models/over
 [Claude on Vertex](https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai),
 [Google's Claude directory](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude),
 [Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview),
-[Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) and
+[Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview),
+[Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview),
+[Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview),
+[Google Fable 5.2](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude/fable-5-2) and
 [AWS endpoint availability](https://docs.aws.amazon.com/bedrock/latest/userguide/models-endpoint-availability.html).
 
 According to [model IDs and versions](https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions),
@@ -205,8 +209,10 @@ For regional profiles, regions and access requirements, follow the linked card.
 | [Sonnet 5.5](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-sonnet-5-5.html) | `anthropic.claude-sonnet-5-5` | `global.anthropic.claude-sonnet-5-5` |
 | [Fable 5](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-fable-5.html) | `anthropic.claude-fable-5` | `global.anthropic.claude-fable-5` |
 | [Fable 5.1](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-fable-5-1.html) | `anthropic.claude-fable-5-1` | `global.anthropic.claude-fable-5-1` |
+| [Fable 5.2](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-fable-5-2.html) | `anthropic.claude-fable-5-2` | `global.anthropic.claude-fable-5-2` |
 | [Mythos 5](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-mythos-5.html) | `anthropic.claude-mythos-5` (Mantle only) | None; no runtime access |
 | [Mythos 5.1](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-mythos-5-1.html) | `anthropic.claude-mythos-5-1` | `global.anthropic.claude-mythos-5-1` |
+| [Mythos 5.2](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-mythos-5-2.html) | `anthropic.claude-mythos-5-2` | `global.anthropic.claude-mythos-5-2` |
 
 Do not copy one model's regional prefix set onto another. The bundled models.dev
 snapshot's prefix coverage differs from these cards in both directions; it is a
@@ -255,19 +261,19 @@ Anthropic accepts either an integer token budget or a string effort value. When 
 
 ### Claude 5.x models
 
-Docker Agent recognizes nine Claude 5.x models by ID: `claude-haiku-5-5`, `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `claude-fable-5`, `claude-fable-5-1`, `claude-mythos-5` and `claude-mythos-5-1`. Bedrock (`us.anthropic.…`) and Vertex (`…@date`) spellings are recognized too. For these models:
+Docker Agent recognizes eleven Claude 5.x models by ID: `claude-haiku-5-5`, `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `claude-fable-5`, `claude-fable-5-1`, `claude-fable-5-2`, `claude-mythos-5`, `claude-mythos-5-1` and `claude-mythos-5-2`. Bedrock (`us.anthropic.…`) and Vertex (`…@date`) spellings are recognized too. For these models:
 
 - Thinking is adaptive by default and accepts every effort level: `low`, `medium`, `high`, `xhigh` and `max`.
-- With `thinking_budget` unset, Haiku 5.5, Opus 5.5, Sonnet 5.5 and Fable 5.1 are sent explicit adaptive thinking (summarized display, no effort) so the server can check replayed thinking blocks; the other five keep their API default.
+- With `thinking_budget` unset, Haiku 5.5, Opus 5.5, Sonnet 5.5, Fable 5.1/5.2 and Mythos 5.2 are sent explicit adaptive thinking (summarized display, no effort) so the server can check replayed thinking blocks; the other five keep their API default.
 - An integer token budget becomes adaptive thinking with the model's default effort; `max_tokens` is not raised.
 - `temperature`, `top_p` and `top_k` are never sent.
-- `thinking_budget: none` (or `0`) sends `thinking: disabled` on Haiku 5.5, Opus 5 and Sonnet 5. The other six cannot disable thinking: they get adaptive thinking with `low` effort, and Docker Agent logs a warning at startup.
-- Server-side `fallbacks` involving any of these models are rejected at startup until [#4584](https://github.com/docker/docker-agent/issues/4584).
+- `thinking_budget: none` (or `0`) sends `thinking: disabled` on Haiku 5.5, Opus 5 and Sonnet 5. The other eight cannot disable thinking: they get adaptive thinking with `low` effort, and Docker Agent logs a warning at startup.
+- Server-side `fallbacks` work with these models on the Claude API, except Haiku 5.5, which has none (see [Server-Side Fallbacks](#server-side-fallbacks)).
 - A request that ends on an assistant message (a response prefill) is rejected before it is sent. Tool-mode structured output therefore fails after the first plain-text answer instead of retrying with a reminder.
 
 Other Claude IDs keep the existing name-based rules.
 
-**Token budget** (1024–32768 on models that accept manual extended thinking):
+**Token budget** (at least 1024 and less than `max_tokens`, within the supported range of a model that accepts manual extended thinking):
 
 ```yaml
 models:
@@ -345,11 +351,78 @@ Object form (forward-compatible with future budget types):
 
 See the full schema on the [Model Configuration](../../configuration/models/index.md#task-budget) page.
 
+## Fast Mode
+
+Set `provider_opts.speed` to `fast` to request Anthropic's [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode), which runs the same model at up to 2.5× higher output tokens per second:
+
+```yaml
+models:
+  fast-opus:
+    provider: anthropic
+    model: claude-opus-5-5
+    provider_opts:
+      speed: fast
+```
+
+Fast mode is available on supported models such as Claude Opus 5.5 and Claude Fable 5.2, and in research preview on Claude Opus 5 and Claude Opus 4.8. See Anthropic's documentation for the current list. Docker Agent does not maintain a model allowlist: on an unsupported model, or when the separate fast-mode rate limit is exceeded, the API error is returned as-is. It applies to all requests using the configured model, including internal calls such as title generation, compaction, and reranking.
+
+Setting `fast` routes requests through the Beta Messages API, sends `speed: "fast"`, and attaches the `fast-mode-2026-02-01` beta header. Per Anthropic's documentation, only Opus 5 and Opus 4.8 require the beta header; Docker Agent sends it on every fast-mode request. `standard` and an empty value send nothing, leaving the API's default behavior unchanged, which lets a model override a `fast` default inherited from the provider configuration. Any other value, including a non-string, is rejected when the model is loaded.
+
+> [!WARNING]
+> Fast mode is billed at premium pricing, has its own rate limit, and switching speed invalidates the prompt cache. It is a Claude API feature and is not supported on Amazon Bedrock; availability on Vertex AI and Microsoft Foundry differs, so check Anthropic's documentation before enabling it there. It cannot be combined with the Batch API or Priority Tier.
+
+Cost estimates use the **actual response speed** (`usage.speed`), not the requested one: a request for `fast` that the API serves as `standard` is priced at standard rates. Anthropic [publishes](https://platform.claude.com/docs/en/build-with-claude/fast-mode#pricing) fast input and output prices at exactly twice standard (for example Claude Fable 5.2 at $16/$80 and Claude Opus 5.5 at $8/$40 per million tokens). It publishes no separate cache prices for fast mode and states that prompt-caching multipliers apply on top, so cache reads and cache writes are doubled as well, matching the fast entries gateways list for Claude Opus. Each catalogue rate, including the rates of any long-context band, is therefore multiplied by 2 for a `fast` response, when the model is served by `provider: anthropic` at the default Anthropic endpoint. Cache writes use the catalogue's single cache-write rate. Any `base_url` or `ANTHROPIC_BASE_URL` override, including proxies, keeps catalogue pricing. The factor is derived from Anthropic's published fast-mode pricing at the time of writing and may drift if Anthropic changes it.
+
+> [!NOTE]
+> Server-side fallback attempts retain standard pricing, because attempts do not report a speed, so a fast response that used fallbacks may be under-estimated. A request routed by a rule-based router is priced by the model that served it, under the rules above. Estimates do not include negotiated discounts. A model's [`cost` override](../../configuration/models/index.md#custom-token-pricing) replaces the entire price table and is never adjusted for fast mode.
+
+### Global default
+
+To enable fast mode without editing each agent file, set it in your user configuration (`~/.config/cagent/config.yaml`). A `providers` entry with `provider: anthropic` is a native Anthropic provider, so it needs no `base_url`. Select it with its name:
+
+```yaml
+# ~/.config/cagent/config.yaml
+providers:
+  fast-claude:
+    provider: anthropic
+    provider_opts:
+      speed: fast
+```
+
+```bash
+docker agent run agent.yaml --model fast-claude/claude-opus-5-5
+```
+
+Naming the entry `anthropic` instead applies it to every model whose provider is `anthropic`, whether it comes from `--model anthropic/...`, an agent file, or `first_available`. It fills only the options a model leaves unset, so credentials and the endpoint still come from the built-in defaults:
+
+```yaml
+providers:
+  anthropic:
+    provider: anthropic # required; an entry without it is ignored with a warning
+    provider_opts:
+      speed: fast
+```
+
+Alternatively, `default_model` in its full form applies fast mode when a model resolves to `auto` (`--model auto` or `model: auto`). The `DOCKER_AGENT_DEFAULT_MODEL` environment variable only accepts `provider/model` and carries no options.
+
+```yaml
+default_model:
+  provider: anthropic
+  model: claude-opus-5-5
+  provider_opts:
+    speed: fast
+```
+
+A model-level `provider_opts.speed: standard` overrides the global value, and an agent file that defines its own `providers.anthropic` replaces the user-config entry entirely. A global entry named `anthropic` covers every Anthropic request, including sub-agents, title generation, and compaction, all at premium pricing. An invalid value fails when the first Anthropic model is created.
+
+See [`examples/anthropic-fast-mode.yaml`](https://github.com/docker/docker-agent/blob/main/examples/anthropic-fast-mode.yaml) for a complete example.
+
 ## Server-Side Fallbacks
 
-When the primary model refuses a request (stop reason `refusal`), Anthropic
-can retry the request with backup models in a single round trip. Set
-`fallbacks` in `provider_opts` to a list of model IDs, in priority order:
+When the primary model refuses a request (stop reason `refusal`), the Claude
+API can retry it on a fallback model in a single round trip. Set `fallbacks`
+in `provider_opts` to `default`, to use the fallback Anthropic recommends for
+the refusal's category:
 
 ```yaml
 models:
@@ -357,25 +430,72 @@ models:
     provider: anthropic
     model: claude-opus-4-8
     provider_opts:
+      fallbacks: default
+```
+
+Or list up to three distinct models, tried in order:
+
+```yaml
       fallbacks:
         - claude-opus-4-7
         - claude-sonnet-4-6
 ```
 
-> [!WARNING]
-> **Not yet available with Claude 5.x**
->
-> A fallback can change the serving model mid-response, which Docker Agent does not handle yet. A `fallbacks` list is rejected at startup when the primary model or any fallback is a Claude 5.x model (Haiku 5.5, Opus 5/5.5, Sonnet 5/5.5, Fable 5/5.1, Mythos 5/5.1). Support is tracked in [#4584](https://github.com/docker/docker-agent/issues/4584).
+When a model declines mid-response, the turn continues on the fallback model.
+Docker Agent never runs a tool call the declining model made, stores the turn
+under the model that served it, and replays it on the next request as the API
+requires. The turn's cost adds up each model hop at its own rates, combining
+all of that hop's server-tool iterations. The dispatched hop retains its
+configured price override when the first marker echoes the requested model,
+including an alias; fallback hops use their own catalogue prices. Sticky hops
+never inherit the primary's override, including across server-tool iterations.
+A declined hop that produced output is billed. Before-output refusals are billed
+for `bio`, `frontier_llm`, and `reasoning_extraction`; other named categories and
+an explicit JSON-null category are unbilled. This also applies to the final
+refusal if the fallback chain is exhausted. Missing or invalid categories, or
+markers that cannot be matched to the usage hops in model order, remain billed
+conservatively. The top-level usage is not added again.
 
-Docker Agent automatically attaches the required
-`server-side-fallback-2026-06-01` beta header and forwards the option as
-`fallbacks: [{"model": "..."}]`. The response's `model` field reports which
-model actually served the request.
+Docker Agent sends the `server-side-fallback-2026-07-01` beta header, which
+accepts both forms, through the beta Messages API. The response's `model`
+field reports which model actually served the request.
+
+For sticky routing without a handoff marker, Docker Agent uses a different
+`message_start.model` provisionally when it matches an explicit fallback target
+or a replayed handoff target. This preserves attribution on clean EOF before
+final usage. A completed usage event clears the candidate unless a
+`fallback_message` confirms fallback routing; an explicit handoff marker takes
+precedence over both. Ordinary responses keep the configured model ID, display
+name and cost override. A truncated alias that collides with a historical target
+can still be attributed to that target; explicit fallback aliases without a
+matching history marker have no early attribution.
+
+Rules checked at startup:
+
+- A list holds at most three models, each distinct and different from the
+  primary model. Any other value is a configuration error.
+- Server-side fallback is a Claude API feature: `fallbacks` is rejected on
+  Vertex AI, Bedrock, a gateway, or a base URL (`base_url` or
+  `ANTHROPIC_BASE_URL`) whose host isn't `api.anthropic.com`. It isn't
+  available on the Message Batches API either.
+- Claude Haiku 5.5 has no server-side fallback: a list is rejected, and
+  `default` only logs that it has no effect.
+- The request must be valid for every listed model, or the API rejects it up
+  front. A configuration is rejected when a listed fallback (such as a Claude
+  5.x model) refuses what the request sends: `temperature` or `top_p` (sent
+  only with thinking off), `top_k`, or token-budget thinking, including an
+  effort level that an older model without adaptive thinking turns into a
+  token budget.
 
 Fallback models receive the exact same request as the primary model
 (thinking configuration, task budget, beta features, ...), so list only
-models that accept the same request shape. Not available on Bedrock, Vertex
-AI, or the Message Batches API.
+models that accept the same request shape. With `default` the server picks
+the fallback, so per-model options such as `thinking_display` are checked
+against the primary model only. The API makes one exception itself: when a Claude
+Sonnet 5.5 request with `between_tools` thinking falls back to Claude Sonnet 5,
+that attempt runs with thinking disabled ([fallback list rules](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#naming-your-own-fallback-models)).
+
+See [Refusals and fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback).
 
 ## Native Compaction
 
@@ -396,9 +516,10 @@ and replaces the whole history with a signed compaction block. This first
 implementation is synchronous and compacts the whole history: it does not run
 in the background or preserve a recent tail. Legacy per-call hook extras are
 not included in the compaction snapshot; they are applied again on the next
-normal turn. The block is persisted alongside a readable summary; the
-Anthropic provider replays the block on later requests (including after a model
-switch), while other providers receive the readable text.
+normal turn. The block is persisted alongside a readable summary; Anthropic
+models with `native_compaction` set replay the block on later requests
+(including after a model switch), while other models, Vertex AI included,
+receive the readable text.
 
 - The compaction request goes through the same `before_llm_call` hooks and
   message transforms as a regular model call, so builtins such as
@@ -449,7 +570,7 @@ changed since:
   declared at the end of `tools` with `defer_loading: true` and surfaced by a
   `tool_addition`;
 - an effort change becomes a per-message `output_config.effort` on Claude
-  Opus 5, Fable 5.1 and Mythos 5.1;
+  Opus 5, Fable 5.1/5.2 and Mythos 5.1/5.2;
 - per-call system extras (environment information, prompt files and hook
   reminders) become text-only, turn-scoped system messages. They remain in
   history verbatim but stop applying at the next user turn. If the prompt ends
@@ -475,8 +596,8 @@ Docker Agent attaches the `mid-conversation-tool-changes-2026-07-01`,
 that actually carry a tool change, a per-message effort or a turn-scoped
 reminder.
 
-Supported on Claude Opus 4.8, Opus 5, Fable 5, Fable 5.1, Mythos 5 and
-Mythos 5.1 (and their server-side fallbacks); Sonnet 5 and older models are
+Supported on Claude Opus 4.8, Opus 5, Fable 5/5.1/5.2 and Mythos 5/5.1/5.2
+(and their server-side fallbacks); Sonnet 5 and older models are
 rejected at configuration time. Fallback models must also support the request's per-message effort features. The option requires the Beta Messages API.
 
 ## Thinking Display
@@ -497,7 +618,7 @@ Valid values:
 
 - `summarized`: thinking blocks are returned with summarized thinking text (Docker Agent's default for adaptive/effort-based budgets).
 - `display`: thinking blocks are returned for display. Only accepted by pre-4.6 token-thinking models (e.g. Sonnet 4.5, Haiku 4.5); models from the adaptive-thinking generation onward (Opus/Sonnet 4.6+, Sonnet 5, Fable 5) reject it, and Docker Agent fails fast with a configuration error instead of sending a request the API would refuse.
-- `updates`: short progress updates between tool calls, with reasoning text omitted. Available on Fable 5/5.1 and Mythos 5.1; automatically enables `thinking-display-updates-2026-08-18`. No explicit budget is required, and an unset effort keeps the model default. Other models (including configured fallbacks) are rejected locally.
+- `updates`: short progress updates between tool calls, with reasoning text omitted. Available on Fable 5/5.1/5.2 and Mythos 5.1/5.2; automatically enables `thinking-display-updates-2026-08-18`. No explicit budget is required, and an unset effort keeps the model default. Other models (including configured fallbacks) are rejected locally.
 - `omitted`: thinking blocks are returned with an empty thinking field; the signature is still returned for multi-turn continuity. Useful to reduce time-to-first-text-token when streaming.
 
 Note: `thinking_display` applies to both `thinking_budget` with token counts and adaptive/effort-based budgets. For token-count budgets no default is applied (the API already defaults to `summarized`). Full thinking tokens are billed regardless of the `thinking_display` value.
@@ -512,14 +633,20 @@ multiple thinking blocks, omitted thinking, redacted thinking and their signatur
 A hook or user edit invalidates raw replay so stale content cannot override it.
 When only the rest of the turn changed (for example a sanitized tool name or a
 redacted tool argument), its recorded thinking is still replayed in its original
-place, with the current text and tool calls substituted. When the thinking itself changed, the turn loses it,
-with a warning in the logs. If that turn belongs to the tool loop the next
-request continues, and thinking is on, the API needs its original signed
+place, with the current tool calls substituted. Unchanged text blocks retain their
+contents and positions, including around fallback markers. Edited text can replace
+a single original text block only when no thinking block follows it. New text can
+be inserted before the first tool call (or at the end without tools) only when no
+thinking block is at or after that position. Other text edits, including edits
+spanning multiple blocks, cannot preserve the recorded thinking safely. When
+thinking itself changed or text edits cannot be placed safely, the turn is sent
+without thinking, with a warning in the logs. If that turn belongs to the tool
+loop the next request continues, and thinking is on, the API needs its original signed
 thinking: Docker Agent refuses the request with an error instead, and a new user
 turn starts a fresh loop.
 
 On Claude models whose server checks thinking prefixes (Haiku 5.5, Opus 5.5,
-Sonnet 5.5 and Fable 5.1), Docker Agent defaults to
+Sonnet 5.5, Fable 5.1/5.2 and Mythos 5.2), Docker Agent defaults to
 `thinking.block_binding.prefix_mismatch_behavior: drop_block`: when earlier
 history changes, the API drops invalidated thinking instead of rejecting the
 request. Dropped blocks are reported in logs. Docker Agent does not default to
@@ -531,6 +658,8 @@ history strictly anyway, set `provider_opts.thinking_prefix_mismatch: error`, an
 avoid compaction, handoffs, `num_history_items` and toolsets that start late. You can explicitly
 select `drop_block` on other supported Claude models too. Both modes attach
 `thinking-binding-controls-2026-08-01`; neither repairs corrupted signatures.
+For the Bedrock Converse policy and observability limits, see the
+[Bedrock guide](../bedrock/index.md#claude-5x-models).
 
 ## Strict Tool Arguments
 

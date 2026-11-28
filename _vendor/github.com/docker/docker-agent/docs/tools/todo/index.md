@@ -7,11 +7,9 @@ weight: 170
 canonical: https://docs.docker.com/ai/docker-agent/tools/todo/
 ---
 
-_Task list management for complex multi-step workflows._
-
 ## Overview
 
-The todo tool provides task list management. Agents can create, update, list, and track progress on tasks with status tracking (pending, in-progress, completed). Useful for complex multi-step workflows where the agent needs to stay organized and ensure all steps are completed.
+The todo tool provides task list management. Agents can create, update, list, and track progress on tasks with status tracking (pending, in-progress, completed).
 
 ## Available Tools
 

@@ -7,8 +7,6 @@ weight: 60
 canonical: https://docs.docker.com/ai/docker-agent/tools/a2a/
 ---
 
-_Connect to remote agents via the Agent-to-Agent protocol._
-
 ## Overview
 
 The A2A tool connects to a remote agent exposed over the A2A (Agent-to-Agent) protocol. Unlike [`handoff`](../handoff/index.md), which only targets local agents declared in the same config, `a2a` reaches out to an agent running on the network.

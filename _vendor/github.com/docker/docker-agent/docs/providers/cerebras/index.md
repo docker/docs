@@ -6,8 +6,6 @@ weight: 50
 canonical: https://docs.docker.com/ai/docker-agent/providers/cerebras/
 ---
 
-_Use Cerebras models with Docker Agent._
-
 ## Overview
 
 [Cerebras](https://www.cerebras.ai/) serves open-weight models such as GPT-OSS
@@ -29,8 +27,6 @@ Cerebras as an alias provider.
 
 ### Inline Syntax
 
-The simplest way to use Cerebras:
-
 ```yaml
 agents:
   root:
@@ -40,8 +36,6 @@ agents:
 ```
 
 ### Named Model
-
-For more control over parameters:
 
 ```yaml
 models:

@@ -7,8 +7,6 @@ weight: 40
 canonical: https://docs.docker.com/ai/docker-agent/configuration/models/
 ---
 
-_Complete reference for defining models with providers, parameters, and reasoning settings._
-
 ## Full Schema
 
 <!-- yaml-lint:skip -->
@@ -18,11 +16,12 @@ models:
     first_available: [list] # Optional: candidate model refs, tried in order by available credentials.
                             # Mutually exclusive with other model settings.
     provider: string # Required unless using first_available. One of: openai, anthropic, google, amazon-bedrock,
-                     # dmr, mistral, xai, nebius, nvidia, minimax, baseten, daoxe, ovhcloud, groq, fireworks-ai, deepseek, cerebras, togetherai, huggingface, moonshotai, vercel, cloudflare-workers-ai, cloudflare-ai-gateway, requesty, openrouter, api-route, atlascloud,
+                     # dmr, mistral, xai, nebius, nvidia, minimax, baseten, daoxe, ovhcloud, groq, fireworks-ai, deepseek, cerebras, togetherai, huggingface, moonshotai, vercel, cloudflare-workers-ai, cloudflare-ai-gateway, requesty, openrouter, opper, runcrate, api-route, lunaroute, orcarouter, atlascloud, popnow, cloudgpu, obscurify, hopbase, straitly,
                      # azure, ollama, github-copilot, or a named provider defined
                      # under the top-level `providers:` section.
     model: string # Required: model identifier
     description: string # Optional: human-readable summary of the model's purpose or strengths
+    stream_idle_timeout: duration|-1 # Optional: per-model stream idle limit
     temperature: float # Optional: 0.0–2.0 (provider-dependent; e.g. Anthropic caps at 1.0)
     max_tokens: integer # Optional: response length limit
     top_p: float # Optional: 0.0–1.0
@@ -47,6 +46,7 @@ models:
       output: float # Optional: price per 1M output tokens
       cache_read: float # Optional: price per 1M cached input tokens
       cache_write: float # Optional: price per 1M cache-write tokens
+    context_window: integer # Optional: context window in tokens (metadata; never sent to the provider)
     provider_opts: # Optional: provider-specific options
       key: value
     title_model: string # Optional: model used for session-title generation
@@ -55,14 +55,58 @@ models:
     bypass_models_gateway: boolean # Optional: skip the models gateway for this model (implied by a custom base_url)
 ```
 
+## Stream idle timeout
+
+`runtime.stream_idle_timeout` sets the default for agent conversation streams,
+including subagents, inline models, model switches, fallbacks, routed models,
+and LLM compaction summaries. Imported agent files use their own runtime
+defaults. For each attempt, an explicit routed target setting takes precedence
+over the router or fallback entry setting, which takes precedence over the
+agent file's runtime setting.
+
+Use a positive Go duration such as `90s` or `2m30s`, or the integer `-1` to
+disable the idle timer, overriding any lower-priority setting. Zero and other
+negative values are invalid. An omitted or null value inherits the next setting;
+when no setting applies, the idle timer is disabled for all models, including
+Gemini Flex and routed requests. A short configured timeout can expire while a
+Flex request is still queued.
+
+The timer measures silence while waiting for the first chunk and between chunks,
+not total request duration. Each chunk resets it. If it expires, Docker Agent
+cancels the model request and handles the stalled stream as a failure. Disabling
+the timer leaves stalled streams waiting until the caller cancels or the
+connection closes; normal cancellation still works. Title generation and model
+hooks do not use this idle timer: they retain their separate total deadlines
+(30 seconds for titles and the configured per-hook timeout). Setting `-1` does
+not remove those deadlines.
+
+```yaml
+runtime:
+  stream_idle_timeout: 10m
+models:
+  slow:
+    provider: google
+    model: gemini-2.5-flash
+    stream_idle_timeout: 20m
+  local:
+    provider: ollama
+    model: llama3
+    stream_idle_timeout: -1
+agents:
+  root:
+    model: slow
+    instruction: You are a helpful assistant.
+```
+
 ## Properties Reference
 
 | Property              | Type       | Required | Description                                                                           |
 | --------------------- | ---------- | -------- | ------------------------------------------------------------------------------------- |
 | `first_available`     | array      | ✗        | Candidate model references tried in order; selects the first whose credentials are configured. Mutually exclusive with other model settings. |
-| `provider`            | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Provider: `openai`, `anthropic`, `google`, `amazon-bedrock`, `dmr`, `mistral`, `xai`, `nebius`, `nvidia`, `minimax`, `baseten`, `daoxe`, `ovhcloud`, `groq`, `fireworks-ai`, `deepseek`, `cerebras`, `togetherai`, `huggingface`, `moonshotai`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `api-route`, `atlascloud`, `azure`, `ollama`, `github-copilot`, `chatgpt`, `opencode`, `opencode-go`, or any [named provider](../../providers/custom/index.md). |
+| `provider`            | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Provider: `openai`, `anthropic`, `google`, `amazon-bedrock`, `dmr`, `mistral`, `xai`, `nebius`, `nvidia`, `minimax`, `baseten`, `daoxe`, `ovhcloud`, `groq`, `fireworks-ai`, `deepseek`, `cerebras`, `togetherai`, `huggingface`, `moonshotai`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `opper`, `runcrate`, `api-route`, `lunaroute`, `orcarouter`, `atlascloud`, `popnow`, `cloudgpu`, `obscurify`, `hopbase`, `straitly`, `azure`, `ollama`, `github-copilot`, `chatgpt`, `opencode`, `opencode-go`, or any [named provider](../../providers/custom/index.md). |
 | `model`               | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Model name (e.g., `gpt-4o`, `claude-sonnet-4-5`, `gemini-3.5-flash`) |
 | `description`         | string     | ✗        | Informational, human-readable summary of the model's purpose or strengths (e.g., "fast and cheap, good for summaries"). Not sent to the model. Can be combined with `first_available` (a selector's description is kept when it resolves). |
+| `stream_idle_timeout` | duration/int | ✗ | Maximum silence between stream chunks; overrides `runtime.stream_idle_timeout`. See [Stream idle timeout](#stream-idle-timeout). |
 | `temperature`         | float      | ✗        | Sampling randomness. Range is provider-dependent — typically `0.0–2.0` (Anthropic caps at `1.0`). `0.0` is deterministic. |
 | `max_tokens`          | int        | ✗        | Maximum response length in tokens                                                     |
 | `top_p`               | float      | ✗        | Nucleus sampling threshold (`0.0–1.0`)                                                |
@@ -78,6 +122,7 @@ models:
 | `capabilities`        | object     | ✗        | Override attachment (input) capabilities for this model. See [Attachment Capability Overrides](#attachment-capability-overrides). |
 | `output_capabilities` | object     | ✗        | Override generative output capabilities for this model, e.g. image generation. Omitted flags are detected from models.dev; explicit values take precedence. Cannot be combined with `first_available`. See [Output Capabilities](#output-capabilities). |
 | `cost`                | object     | ✗        | Explicit token pricing in USD per 1M tokens, overriding the built-in catalogue. See [Custom Token Pricing](#custom-token-pricing). |
+| `context_window`        | int        | ✗        | Context window of the model in tokens. Metadata for accounting, compaction and `max_tokens` clamping; never sent to the provider. Must not exceed the models.dev window for the model. Cannot be combined with `first_available`. See [Context Window](#context-window). |
 | `provider_opts`       | object     | ✗        | Provider-specific options (see provider pages)                                        |
 | `title_model`         | string     | ✗        | Model used for session-title generation. Can be a named model from the `models:` section or an inline `provider/model` string. When omitted, the agent's primary model generates titles. Cannot be combined with `first_available`. |
 | `compaction_model`    | string     | ✗        | Model used for session compaction (summary generation). Can be a named model or an inline `provider/model` string. The agent-level `compaction_model` takes precedence over this value, which in turn takes precedence over a provider-level default. When none is set, the primary model compacts. Cannot be combined with `first_available`. See the [Context & Compaction guide](../../guides/compaction/index.md). |
@@ -253,6 +298,106 @@ table means "priced, free" — distinct from omitting `cost` entirely
 models instead).
 
 See [`examples/custom-pricing.yaml`](https://github.com/docker/docker-agent/blob/main/examples/custom-pricing.yaml) for a complete example.
+
+## Context Window
+
+A model's context window drives context-usage accounting, the automatic
+compaction threshold, and `max_tokens` clamping. Hosted models get it from the
+[models.dev](https://models.dev/) catalogue. Custom endpoints (for example an
+`openai_responses` or `openai_chatcompletions` provider with a `base_url`) and
+local models often are not in the catalogue, so declare the window yourself:
+
+```yaml
+version: "16"
+
+providers:
+  gateway:
+    api_type: openai_responses
+    base_url: https://gateway.example.com/v1
+    token_key: GATEWAY_API_KEY
+
+models:
+  gateway_model:
+    provider: gateway
+    model: my-hosted-model
+    context_window: 200000      # context window in tokens
+```
+
+`context_window` is **metadata only**. It is never forwarded as a request
+parameter, and it never configures the Docker Model Runner engine.
+
+Precedence for the context window of a model, highest first:
+
+1. The model-level `context_window`. This is the window for every provider.
+2. For the `dmr` provider only, `provider_opts.context_size`. It also sizes the
+   DMR engine (see [Docker Model Runner](../../providers/dmr/index.md#context-size)),
+   so it must equal `context_window` when both are set.
+3. The window discovered at runtime (for example from the Docker Model Runner
+   API).
+4. The models.dev catalogue.
+
+`provider_opts.context_size` is **not** read for any other provider. Setting it
+on a model that runs on a non-DMR provider (including a `providers:` alias
+backed by `openai_responses`, `openai_chatcompletions` or `anthropic`) fails
+validation with a message pointing to `context_window`. Move the value to the
+model's `context_window` instead, and update the top-level `version` to `"16"`
+when migrating an older config: earlier versions reject `context_window` before
+migration. If the value is inherited from
+`providers.<name>.provider_opts.context_size`, remove it from that provider and
+set `context_window` on each model using it. Replace inline `provider/model`
+references with named entries in `models` when they need a declared window.
+
+If none applies, the window is unknown: context usage cannot be shown as a
+percentage and compaction cannot run. Compaction then reports a session warning
+naming the model and asking for `context_window`. Pair a dedicated
+`compaction_model` with its own `context_window` when its window is unknown.
+
+### Compaction thresholds
+
+`context_window` is capacity, not a fixed-token trigger. `compaction_threshold`
+on the model or agent (default `0.9`) and background compaction (user setting,
+default `70%`) apply their thresholds
+to the effective window. With `context_window: 200000`, the default foreground
+trigger fires above 180,000 tokens; the context gauge and `/context` use the same
+limit.
+
+A dedicated `compaction_model` caps that limit at the smaller window so the summary
+call can ingest the conversation. A 32,000-token compaction model paired with a
+200,000-token primary triggers above 28,800 tokens at `0.9`. A larger compaction
+window never raises the primary limit; if only one window is known, it is used.
+See the [Context & Compaction guide](../../guides/compaction/index.md).
+
+Validation rejects:
+
+- a `context_window` that is not a positive integer;
+- a DMR `provider_opts.context_size` that conflicts with the model-level value;
+- `provider_opts.context_size` on a non-DMR provider. Custom providers and
+  aliases are judged by the provider they run (an alias backed by
+  `openai_responses` is non-DMR). The error names the field to move;
+- a `context_window` above the context window the models.dev catalogue declares
+  for the model. The check applies provider defaults and environment expansion
+  and uses the runtime's catalogue identity, including the original display name
+  retained during alias resolution. Vertex Model Garden uses `anthropic` for
+  Anthropic publishers and `google-vertex` for other publishers, retaining their
+  publisher-prefixed model names; API dispatch remains separate. The check
+  compares the raw catalogue limit, so the declared value cannot hide a
+  conflict. The error identifies the model or construction reference,
+  `context_window`, and the catalogue maximum.
+
+A model the catalogue has no context limit for (custom endpoints, local models,
+uncatalogued names) accepts any positive `context_window`; no cap is guessed.
+Fallback, title, compaction, and routing models are checked when constructed,
+including inherited provider options on inline references. This does not traverse
+unused providers or recursively load auxiliary references on auxiliary models.
+
+Config loading requires an available models.dev catalogue when a model declares
+`context_window`; this is different from an available catalogue that has no limit
+for the model. Standalone provider construction (including RAG and SDK callers)
+without a catalogue still validates positive windows and DMR/provider-option
+constraints, and checks catalogue caps when a store is supplied.
+
+A `context_window` also cannot be set on a `first_available` selector; set it on
+the candidate models instead.
 
 ## Delegating Session-Title Generation
 
@@ -452,7 +597,7 @@ Use an integer token budget or an adaptive effort setting, depending on the mode
 
 Use an integer token budget. See [Gemini thinking budgets](../../providers/google/index.md#thinking-budget) for defaults, limits, and dynamic thinking.
 
-### Google Gemini 3
+### Google Gemini 3+
 
 Use a string effort level. See [Gemini thinking budgets](../../providers/google/index.md#thinking-budget) for supported values and examples.
 
@@ -462,7 +607,7 @@ Use a string effort level. See [Gemini thinking budgets](../../providers/google/
 thinking_budget: none # or 0
 ```
 
-`none` and `0` both clear Docker Agent's local thinking configuration (omitting `thinking_budget` has the same effect). Whether that reaches the API as a real "off" switch depends on the model — see [Disabling Thinking](../../guides/thinking/index.md#disabling-thinking) in the guide.
+`none` and `0` request disabled thinking, but their effect depends on the model. Omitting `thinking_budget` leaves model defaults in place and is not necessarily equivalent: some Claude models disable thinking explicitly, while those that require it use adaptive thinking with low effort. See [Disabling Thinking](../../guides/thinking/index.md#disabling-thinking) in the guide.
 
 ## Task Budget
 
@@ -558,7 +703,7 @@ for a complete local-server configuration.
 ## Custom HTTP Headers
 
 For OpenAI-compatible providers (`openai`, `github-copilot`, `mistral`, `xai`,
-`nebius`, `nvidia`, `minimax`, `baseten`, `daoxe`, `ovhcloud`, `groq`, `fireworks-ai`, `deepseek`, `cerebras`, `togetherai`, `huggingface`, `moonshotai`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `atlascloud`, `ollama`, and any custom provider using the OpenAI API),
+`nebius`, `nvidia`, `minimax`, `baseten`, `daoxe`, `ovhcloud`, `groq`, `fireworks-ai`, `deepseek`, `cerebras`, `togetherai`, `huggingface`, `moonshotai`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `opper`, `runcrate`, `lunaroute`, `orcarouter`, `atlascloud`, `popnow`, `cloudgpu`, `obscurify`, `hopbase`, `straitly`, `ollama`, and any custom provider using the OpenAI API),
 `provider_opts.http_headers` adds arbitrary HTTP headers to every outgoing
 request:
 

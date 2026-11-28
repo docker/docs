@@ -24,10 +24,10 @@ Docker Agent exposes this through a single `thinking_budget` field on any named 
 | Provider            | Format     | Values                                                                                  | Default            |
 | ------------------- | ---------- | --------------------------------------------------------------------------------------- | ------------------ |
 | OpenAI              | string     | `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, `max`; `xhigh` on gpt-5.2+, `max` on gpt-5.6+; API-level `none` on GPT-5.x from 5.6 onward and GPT-6 Sol/Luna, `minimal` dropped on gpt-5.6+ | `medium` (API default) |
-| Anthropic           | int or str | 1024–32768 tokens, or `minimal`–`max`, `adaptive`, `adaptive/<effort>`, `none`          | off                |
-| Gemini 2.5          | int        | `0` (off), `-1` (dynamic), or token count (max 24576 / 32768)                           | `-1` (dynamic)     |
-| Gemini 3            | string     | `minimal`, `low`, `medium`, `high`                                                      | API default (model-dependent) |
-| AWS Bedrock         | int or str | 1024–32768 tokens (`minimal`–`max` mapped to tokens); `adaptive`, `adaptive/<effort>` for Opus 4.6+ (rejected by older Claude models) | off                |
+| Anthropic           | int or str | Fixed budgets: ≥1024 and less than `max_tokens`; or `minimal`–`max`, `adaptive`, `adaptive/<effort>`, `none` | Model-dependent; Claude 5.x defaults to adaptive |
+| Gemini 2.5          | int or str | `0` (off), `-1` (dynamic), token count (max 24576 / 32768), or `minimal`–`max` / `adaptive` (mapped to tokens) | `-1` (dynamic)     |
+| Gemini 3+           | string     | `minimal` (Gemini 3), `low`, `medium`, `high`, `xhigh` (`gemini-4-hydrogen` / `gemini-4-neon`), `adaptive`, `adaptive/<effort>`, `none` (lowers to `low` with warning) | API default (model-dependent) |
+| AWS Bedrock         | int or str | Fixed budgets: ≥1024 and less than `max_tokens`; `minimal`–`max` mapped to tokens on older models; adaptive on supported newer Claude models | Model-dependent; Claude 5.x defaults to adaptive |
 | Docker Model Runner | int or str | token count, `minimal`–`max` (mapped to tokens), `adaptive` (unlimited), `none`         | engine default     |
 
 String values are case-insensitive. The full set of accepted strings is `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, `max`, `adaptive`, and `adaptive/<effort>` — but each provider only honors the subset listed above. Unsupported values either fail at request time (OpenAI) or are mapped/ignored as described per provider below.
@@ -71,7 +71,7 @@ Anthropic Claude supports two thinking modes: a **token budget** (older models) 
 
 ### Token budget (Claude 4 and earlier)
 
-Set an explicit number of thinking tokens (1024–32768). This must be less than `max_tokens`:
+Set an explicit number of thinking tokens (at least 1024). This must be less than `max_tokens` and within the model's supported range:
 
 ```yaml
 models:
@@ -85,7 +85,7 @@ Docker Agent auto-adjusts `max_tokens` when you set a thinking budget but leave 
 
 ### Adaptive thinking (Opus 4.6+ and Sonnet 4.6)
 
-Newer Claude models support adaptive thinking, where the model decides how much to think. **Claude Opus 4.6, 4.7, 4.8, and Sonnet 4.6 only support adaptive thinking** — they reject token-based budgets. Use `adaptive`, `adaptive/<effort>`, or a bare effort level — on Anthropic, a bare effort level like `high` is shorthand for adaptive thinking at that effort:
+Newer Claude models support adaptive thinking, where the model decides how much to think. **Claude Opus 4.6, 4.7, and 4.8 only support adaptive thinking** — they reject token-based budgets. Sonnet 4.6 supports both token budgets and adaptive thinking. Use `adaptive`, `adaptive/<effort>`, or a bare effort level — on Anthropic, a bare effort level like `high` is shorthand for adaptive thinking at that effort:
 
 ```yaml
 models:
@@ -118,15 +118,19 @@ models:
 `minimal` is treated as `low` (bare form only). `high` is the default when `adaptive` is used without an effort level.
 
 > [!WARNING]
-> **Effort strings require adaptive-capable models**
+> **Effort strings are adapted to the model**
 >
-> Every string effort value on Anthropic is sent as adaptive thinking (`output_config.effort`), which only newer Claude models (Opus 4.6+, Sonnet 4.6) accept. For older models like Sonnet 4.5, use an integer token budget instead. Conversely, models that _only_ support adaptive thinking (Opus 4.6, 4.7, 4.8, Sonnet 4.6) automatically have token budgets coerced to `adaptive` (a warning is logged).
+> On adaptive-capable Claude models, effort strings use adaptive thinking (`output_config.effort`). For older models such as Sonnet 4.5 and Haiku 4.5, Docker Agent converts effort strings, including `adaptive/<effort>`, into fixed token budgets and logs a warning. Models that only support adaptive thinking have positive token budgets converted to `adaptive` instead.
 
 ### Disabling thinking (Claude)
 
 ```yaml
 thinking_budget: none   # or 0
 ```
+
+Models that support disabling thinking honor this setting. Claude models that
+require thinking use adaptive thinking with low effort instead. Claude 5.x
+models think adaptively by default; see the [per-model rules](../../providers/anthropic/index.md#claude-5x-models).
 
 ### Interleaved thinking
 
@@ -181,7 +185,7 @@ See the [Anthropic provider page](../../providers/anthropic/index.md#task-budget
 
 ## Google Gemini
 
-Gemini 2.5 and Gemini 3 use different formats.
+Gemini 2.5 and Gemini 3+ use different formats.
 
 ### Gemini 2.5 (token budget)
 
@@ -203,20 +207,34 @@ models:
     thinking_budget: 8192   # fixed token budget (max 24576 for Flash, 32768 for Pro)
 ```
 
-### Gemini 3 (level-based)
+### Gemini 3+ (level-based)
 
 ```yaml
 models:
+  gemini4-neon:
+    provider: google
+    model: gemini-4-neon
+    thinking_budget: xhigh    # low | medium | high | xhigh (Hydrogen and Neon)
+
+  gemini4-carbon:
+    provider: google
+    model: gemini-4-carbon
+    thinking_budget: high     # low | medium | high (Carbon and Argon)
+
+  gemini4-adaptive:
+    provider: google
+    model: gemini-4-carbon
+    thinking_budget: adaptive # omits thinkingLevel (model default); adaptive/<effort> selects a tier
+
   gemini3-flash:
     provider: google
     model: gemini-3-flash
     thinking_budget: medium   # minimal | low | medium | high
-
-  gemini3-pro:
-    provider: google
-    model: gemini-3-pro
-    thinking_budget: high     # low | high (Pro supports fewer levels)
 ```
+
+- **Disabling thinking (`none` / `0`):** Gemini 3+ models always think; setting `thinking_budget: none` or `0` logs a warning and sends `low` effort with thoughts hidden.
+- **Integer budgets on Gemini 4+:** Gemini 4 models reject `thinkingBudget` tokens; Docker Agent logs a warning and omits the token budget so the model falls back to its default `thinkingLevel`.
+- **OpenAI-compatible gateways:** When routing `google/gemini-3*` or `google/gemini-4*` models through an OpenAI-compatible gateway (such as `openrouter` or `vercel`), `thinking_budget` is mapped and clamped to `reasoning_effort` automatically.
 
 ## AWS Bedrock (Claude)
 
@@ -308,7 +326,7 @@ models:
     thinking_budget: 0
 ```
 
-`none` and `0` clear Docker Agent's thinking configuration — no thinking parameter is sent. Models that always reason (OpenAI o-series, gpt-5 through gpt-5.5, GPT-6 Astra, Gemini 3) then fall back to the API's default behavior and still reason internally; GPT-5.x from 5.6 onward and GPT-6 Sol/Luna send `none` as a real API value that genuinely disables reasoning.
+On OpenAI o-series, gpt-5 through gpt-5.5, GPT-6 Astra, and Gemini 3+, `none` and `0` clear the local budget and leave the API's default reasoning behavior in effect. GPT-5.x from 5.6 onward and GPT-6 Sol/Luna instead send `none` as an API value that disables reasoning. Claude models follow the [model-specific rules above](#disabling-thinking-claude).
 
 Local models and other OpenAI-compatible backends may reason by default even when
 `thinking_budget` is cleared. Use
@@ -331,14 +349,24 @@ support that field.
 
 ## Changing Thinking Level at Runtime
 
-While running in the TUI, press **Shift+Tab** to cycle the thinking effort level for the current model without editing your YAML config, or type `/effort <level>` to jump straight to a specific level (e.g. `/effort high`). Running `/effort` without an argument opens a picker listing the levels the current model supports:
+Adjust reasoning effort in the TUI without editing your YAML:
 
-- The level steps through the model's supported range (model-specific), wrapping around — for example `none → minimal → low → medium → high → none` on OpenAI gpt-5/o-series, `none → minimal → low → medium → high → xhigh → none` on gpt-5.2+, `none → low → medium → high → xhigh → max → none` on gpt-5.6+ (no `minimal`), `none → low → medium → high → max → none` on Anthropic Opus 4.6 and Sonnet 4.6, and `none → low → medium → high → xhigh → max → none` on Anthropic Opus 4.7+, Fable 5, and Mythos 5. For older Anthropic models (e.g. Sonnet 4.5) that only accept token budgets, effort-string cycling has no effect — use an integer `thinking_budget` in your YAML config instead.
-- The current level is shown in the sidebar next to the model name (e.g. `openai/gpt-5 • high`).
-- This applies as a session override — it is **not** saved to the config file. The next session starts from the level defined in your YAML.
-- For models that don't support reasoning, and for remote runtimes, Shift+Tab is a no-op and an informational message is displayed.
-- `/effort` only accepts levels the current model supports; requesting an unsupported level shows the model's supported list. Like Shift+Tab, it is unavailable for non-reasoning models and remote runtimes.
-- Press <kbd>Tab</kbd> after `/effort` and a space to complete a level from the current model's supported range; it lists the same levels the picker shows (and, like the picker, offers no candidates for non-reasoning models or remote runtimes).
+| Control | Action |
+| --- | --- |
+| <kbd>Shift</kbd> + <kbd>Tab</kbd> | Cycle through supported levels, wrapping back to the first. |
+| `/effort` | Open a picker of supported levels. |
+| `/effort high` | Set a level directly. |
+| `/effort` + <kbd>Space</kbd> + <kbd>Tab</kbd> | Autocomplete a supported level. |
+
+The sidebar shows the current effort next to the model name. Available levels
+depend on the model; for older Claude models, Docker Agent maps levels to fixed
+token budgets.
+
+**Changes last for the current session only.** The next session uses the effort
+configured in your YAML.
+
+These controls require a reasoning-capable model and are unavailable with remote
+runtimes.
 
 ## Sharing Thinking Config Across Models
 

@@ -7,11 +7,9 @@ weight: 210
 canonical: https://docs.docker.com/ai/docker-agent/tools/session_context/
 ---
 
-_Reference a previous session as context, without manual export/import._
-
 ## Overview
 
-The `session_context` toolset lets an agent discover earlier sessions and pull one in as context for the current session. It removes the manual workaround of exporting a conversation to HTML and re-attaching it with an `@` mention.
+The `session_context` toolset lets an agent discover earlier sessions and pull one in as context for the current session.
 
 The tool surface is two read-only tools:
 
