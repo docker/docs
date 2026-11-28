@@ -158,7 +158,7 @@ options:
     - option: password
       shorthand: p
       value_type: string
-      description: Password or Personal Access Token (PAT), or `-` to read from stdin
+      description: Password or access token. Use `-` to read from stdin
       deprecated: false
       hidden: false
       experimental: false
@@ -168,7 +168,7 @@ options:
     - option: password-stdin
       value_type: bool
       default_value: "false"
-      description: Take the Password or Personal Access Token (PAT) from stdin
+      description: Read password or access token from stdin
       details_url: '#password-stdin'
       deprecated: false
       hidden: false
@@ -179,7 +179,7 @@ options:
     - option: username
       shorthand: u
       value_type: string
-      description: Username
+      description: Username or organization name (for OATs)
       details_url: '#username'
       deprecated: false
       hidden: false
@@ -209,13 +209,12 @@ examples: |-
     ```console
     $ docker login
 
-    USING WEB-BASED LOGIN
-    To sign in with credentials on the command line, use 'docker login -u <username>'
+    Using web-based login. To sign in with credentials on the command line, use 'docker login -u <username>'
 
     Your one-time device confirmation code is: LNFR-PGCJ
-    Press ENTER to open your browser or submit your device code here: https://login.docker.com/activate
+    Open this URL to authenticate: https://login.docker.com/activate?user_code=LNFR-PGCJ
 
-    Waiting for authentication in the browser…
+    Press ENTER to open the URL in your browser, or Ctrl+C to cancel.
     ```
 
     After entering the code in your browser, you are authenticated to Docker Hub
@@ -258,6 +257,26 @@ examples: |-
     ```console
     $ docker login -u moby
     ```
+
+    ### Authenticate with an access token {#access-token}
+
+    To authenticate to Docker Hub with a [personal access token (PAT)](/security/access-tokens/personal-access-tokens/)
+    or [organization access token (OAT)](/security/access-tokens/organization-access-tokens/),
+    use the token in place of a password.
+
+    For a PAT, use your Docker ID as the username. For an OAT, use your
+    organization name instead. The following example authenticates using
+    the organization `myorg`. The token is entered interactively.
+
+    ```console
+    $ docker login --username myorg
+    ```
+
+    To authenticate non-interactively, see [Provide a password using STDIN](#password-stdin).
+
+    > [!NOTE]
+    > OATs don't support Docker Desktop sign-in or Image Access Management.
+    > Use web-based sign-in or a PAT instead, where supported.
 
     ### Provide a password using STDIN (--password-stdin) {#password-stdin}
 
