@@ -1,5 +1,5 @@
 name: sbx policy approval inspect
-synopsis: Inspect a pending approval
+synopsis: Show a pending approval
 description: |-
     Show the request and available option IDs for a pending approval.
 
@@ -7,10 +7,15 @@ description: |-
     can be inspected.
 usage: sbx policy approval inspect APPROVAL-ID [flags]
 options:
+    - name: format
+      usage: 'Output format: table, json or yaml'
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for inspect
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
 inherited_options:
     - name: cloud
       default_value: "false"

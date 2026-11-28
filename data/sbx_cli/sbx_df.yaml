@@ -1,18 +1,20 @@
 name: sbx df
 synopsis: Show runtime disk usage
 description: |-
-    Show disk usage for local images, containers, and managed volumes.
+    Show disk usage for local images, containers, managed volumes, and the kit registry cache.
 
     Image totals include stored blobs and snapshots, count shared layers once,
     and include retained data without tags. Active images and volumes are referenced
     by a container, including stopped containers. Active containers are running or
-    paused.
+    paused. The kit registry cache total includes registry metadata. Its reclaimable
+    estimate counts unused blobs and expired uploads, but not registry metadata.
 
     Reclaimable space is an estimate for removing unused resources of each type,
     not the space that "sbx prune" alone removes. Detached writable layers are
     included in the container total. Shared filesystem blocks, leases,
     and concurrent activity can reduce or delay space recovered. Host bind mounts,
-    logs, and caches are excluded. Unavailable measurements show as unknown.
+    logs, and other caches (including Docker build caches) are excluded. Unavailable
+    measurements show as unknown.
     Cloud disk usage is not supported.
 usage: sbx df [flags]
 options:
@@ -28,7 +30,8 @@ options:
     - name: verbose
       shorthand: v
       default_value: "false"
-      usage: Show individual images, containers, and volumes
+      usage: |
+        Show individual images, containers, and volumes, plus the cache summary, in table output. JSON and YAML always include details.
 inherited_options:
     - name: cloud
       default_value: "false"
@@ -46,7 +49,7 @@ example: |4-
       # Show a disk usage summary
       sbx df
 
-      # Show individual images, containers, and volumes
+      # Show individual images, containers, and volumes, plus the cache summary
       sbx df --verbose
 
       # Output in JSON format

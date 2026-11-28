@@ -18,11 +18,13 @@ description: |-
     rule.
 
     With --cloud:
-    List the cloud network policy's default mode and allow and deny patterns.
+    List the cloud network policy's default mode, allow and deny patterns, and
+    HTTP rules.
 
     Without SANDBOX, show the account policy. Specify a sandbox name or ID to show
     its policy. Cloud rules have no rule IDs; use "sbx --cloud policy rm network"
-    with --resource to remove a pattern.
+    with --resource to remove a pattern, adding --method, --path, and --query for
+    an HTTP rule. -q prints only the allow and deny patterns, without HTTP rules.
 usage: sbx policy ls [SANDBOX] [flags]
 options:
     - name: created-via
@@ -107,7 +109,7 @@ example: |4-
       # Output the policy as JSON
       sbx --cloud policy ls --format json
 
-      # List only network patterns
+      # List only the allow and deny patterns
       sbx --cloud policy ls -q
 see_also:
     - sbx policy - Manage sandbox policies

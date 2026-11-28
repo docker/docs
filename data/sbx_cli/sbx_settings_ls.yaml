@@ -3,8 +3,8 @@ synopsis: List settings
 description: |-
     List known settings with their evaluated value, type, source, and description.
 
-    The SOURCE column shows where the value came from (default, envvar, or
-    override). RESTART identifies settings that require 'sbx daemon restart' for
+    The SOURCE column shows where the value came from.
+    RESTART identifies settings that require 'sbx daemon restart' for
     existing daemon-side consumers. Long values and descriptions are truncated to
     keep the table readable; use --no-trunc or --format json for complete output. Use
     'sbx settings get KEY' to print one value in full.

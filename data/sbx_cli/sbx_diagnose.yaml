@@ -13,7 +13,8 @@ options:
       usage: Output in JSON format
     - name: upload
       default_value: "false"
-      usage: Upload diagnostics to Docker support (table format only)
+      usage: |
+        Save a bundle that includes available local diagnostics, even with --cloud, then ask to upload it to Docker support (table format only)
 inherited_options:
     - name: cloud
       default_value: "false"

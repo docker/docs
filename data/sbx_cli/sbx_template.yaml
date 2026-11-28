@@ -37,5 +37,6 @@ see_also:
     - sbx template inspect - Show template details
     - sbx template load - Load an image from a tar file into the sandbox runtime
     - sbx template ls - List template images
+    - sbx template prune - Remove unused template images
     - sbx template rm - Remove a template image
     - sbx template save - Save a snapshot of the sandbox as a template

@@ -10,9 +10,10 @@ description: |-
     If sandboxes are currently running, they will be stopped when the daemon
     shuts down. You will be prompted for confirmation unless --force is used.
 
-    With --cloud, deletes the custom cloud network policy for your account and
-    leaves the local daemon alone. You will be prompted for confirmation unless
-    --force is used. Afterwards the default the server now stores is printed.
+    With --cloud:
+    Remove the custom cloud network policy for your account without restarting
+    the local daemon. Confirm the reset or pass --force. The command then shows
+    the cloud default policy.
 usage: sbx policy reset [flags]
 options:
     - name: force
@@ -45,5 +46,8 @@ example: |4-
 
       # Reset and initialize in a script; use balanced, allow-all, or deny-all
       sbx --no-input policy reset --force && sbx policy init balanced
+
+      sbx --cloud policy reset
+      sbx --cloud policy reset --force
 see_also:
     - sbx policy - Manage sandbox policies

@@ -1,7 +1,7 @@
 name: sbx template load
 synopsis: Load an image from a tar file into the sandbox runtime
 description: |-
-    Load an image from a tar file into the sandbox runtime's image store.
+    For local sandboxes, load FILE into the sandbox runtime's image store.
 
     The loaded image can be used as a template for new sandboxes.
     Tar files are typically created with: sbx template save SANDBOX TAG --output FILE
@@ -10,7 +10,7 @@ description: |-
     Upload a tar file as a cloud template. Takes FILE and NAME; NAME must be
     unique per account. Uploads can take several minutes.
 
-    --cpus and --memory-mib are required and must match a billable sandbox shape:
+    Cloud uploads require --cpus and --memory-mib to match a billable sandbox shape:
 
     - micro (1 vCPU / 2048 MiB)
     - small (2 vCPU / 4096 MiB)

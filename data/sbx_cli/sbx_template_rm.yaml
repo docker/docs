@@ -10,7 +10,7 @@ description: |-
     With --cloud:
     Remove a cloud sandbox template by name or tmpl_* ID.
     Use "sbx --cloud template ls" to list templates.
-usage: sbx template rm TAG|DIGEST|ID|NAME [flags]
+usage: sbx template rm TAG|DIGEST|ID [flags]
 options:
     - name: force
       shorthand: f

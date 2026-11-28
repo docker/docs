@@ -30,7 +30,7 @@ options:
     - name: clone
       default_value: "false"
       usage: |
-        Override workspace.clone in sbxenv.yaml (see 'sbx create --clone')
+        Override workspace.clone in sbxenv.yaml (--clone=true is local only)
     - name: env-arg
       default_value: '[]'
       experimental: true

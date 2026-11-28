@@ -14,14 +14,17 @@ description: |-
     A sandbox whose stop time the daemon cannot report is left alone, since how long
     it has been stopped cannot be established.
 
-    Use --dry-run to list what would be removed without removing anything, and
-    --format json or --format yaml with it for machine-readable output.
+    Use --dry-run to list the sandboxes that would be removed without deleting
+    anything. Add --format json or --format yaml for machine-readable output.
 
     Pruning requires confirmation; use --force to skip the confirmation prompt
     (for non-interactive scripts) and to remove a sandbox that is in use (e.g. an
     open SSH connection). This action cannot be undone.
 
-    Secrets scoped to each successfully pruned sandbox are also deleted.
+    When the Runtime backend is off, pruning also removes images from deleted
+    sandboxes if nothing else needs them. Run prune again to retry failed image
+    cleanup. Unrelated images are left alone. Secrets scoped to each deleted
+    sandbox are also removed.
 
     Local-only: cloud sandboxes expire via their TTL.
 usage: sbx prune [flags]
